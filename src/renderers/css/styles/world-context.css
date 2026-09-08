@@ -21,7 +21,9 @@
   margin-top: calc(var(--context-line-width, 1px) * -.5);
   transform-origin: 0 50%;
   background: var(--shell-text, #dfdfdf);
-  pointer-events: var(--context-orbit-pointer-events, none);
+  /* The retained stage picker owns the clipped hit corridor. These leaves
+     only paint; per-chord browser hit boxes duplicate that geometry. */
+  pointer-events: none;
 }
 
 .prepared-world-context [data-context-indicator] {
@@ -41,15 +43,6 @@
   inset: -5px;
   border-radius: 50%;
 }
-
-/* A wider hit corridor across the line, without extending its clipped ends. */
-.context-orbit s::before {
-  content: '';
-  position: absolute;
-  inset: -7px 0;
-}
-
-.context-orbit s { cursor: pointer; }
 
 [data-context-group] {
   --context-line-opacity: var(--context-base-line-opacity, .5);

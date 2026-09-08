@@ -57,7 +57,7 @@ export function hitsScreenShape(shape: ScreenPickShape, x: number, y: number): b
         y < Math.min(y0, y1) - shape.halfWidth || y > Math.max(y0, y1) + shape.halfWidth) continue;
     const dx = x1 - x0, dy = y1 - y0, lengthSquared = dx * dx + dy * dy;
     const along = ((x - x0) * dx + (y - y0) * dy) / lengthSquared;
-    // The CSS hit corridor widens the stroke, not its clipped endpoints.
+    // The hit corridor widens the stroke, not its clipped endpoints.
     if (along < 0 || along > 1 || lengthSquared === 0) continue;
     const cross = (x - x0) * dy - (y - y0) * dx;
     if (cross * cross <= shape.halfWidth ** 2 * lengthSquared) return true;

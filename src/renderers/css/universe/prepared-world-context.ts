@@ -344,7 +344,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     // must not allocate an otherwise empty viewport-sized surface.
     orbitRoot.style.cssText = 'position:absolute;left:50%;top:50%;width:1px;height:1px;margin:-.5px 0 0 -.5px;pointer-events:none';
     orbitRoot.style.setProperty('--context-line-width', `${CONTEXT_LINE_WIDTH}px`);
-    orbitRoot.style.setProperty('--context-orbit-pointer-events', 'none');
     if (orbit) group.appendChild(orbitRoot);
     const piecePool = createRetainedLeafPool(orbitRoot, orbit ? orbit.verticesM.length * 2 : 0, 'context-orbit-block');
     const pieces = piecePool.elements;
@@ -455,7 +454,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           entry.indicatorNavigation.update(null, entry.body.name);
           entry.orbitNavigation?.update(null, entry.body.name);
           entry.orbitNavigable = false;
-          entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', 'none');
         }
       } else {
         for (const [node, opacity] of suspendedOpacity) node.style.opacity = opacity;
@@ -722,10 +720,9 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           if (entry.orbitNavigable !== navigable) {
             entry.orbitNavigable = navigable;
             entry.orbitNavigation!.update(navigable ? body.id : null, body.name);
-            // Only the painted chords are hit targets, never the full-stage group.
+            // The stage picker owns the clipped corridor; paint nodes are inert.
             entry.orbitRoot.style.pointerEvents = 'none';
             entry.orbitRoot.tabIndex = -1;
-            entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', navigable ? 'auto' : 'none');
           }
           entry.orbitRoot.style.opacity = `calc(${orbitVisibility} * var(--context-line-opacity, 1))`;
           const update = writePieces(entry.pieces, segments, entry.previousCount, entry.piecePool.setVisible);

@@ -128,7 +128,7 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   layer.setHiddenOrbits(['mercury']);
   root.ownerDocument.defaultView.advance(200);
   expect(target.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
-  expect(target.style.getPropertyValue('--context-orbit-pointer-events')).toBe('none');
+  expect(target.style.pointerEvents).toBe('none');
   expect(target.dataset.objectNavigate).toBeUndefined();
   expect(other.style.opacity).toBe(visibleOther);
   expect(find(root, 'contextLabel', 'mercury').style.visibility).toBe('');
@@ -171,7 +171,7 @@ test('hidden labels keep circles pickable and hover reveals only that label and 
     piece.parentNode?.style.display === 'contents')).toBe(true);
   // A temporarily revealed orbit cannot keep itself hovered after leaving the circle.
   expect(orbit.dataset.objectNavigate).toBeUndefined();
-  expect(orbit.style.getPropertyValue('--context-orbit-pointer-events')).toBe('none');
+  expect(orbit.style.pointerEvents).toBe('none');
   expect(other.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
   delete circle.dataset.objectHovered;
   host.dispatchEvent(new Event('objecthoverchange'));
@@ -387,15 +387,15 @@ test('camera updates retain fixed stroke styles and only publish changed orbit p
   expect(orbitWrites).not.toHaveBeenCalled(); expect(indicatorWrites).not.toHaveBeenCalled();
   expect(orbit.dataset.objectNavigate).toBe('mercury');
   layer.setHiddenOrbits(['mercury']);
-  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'none']]);
+  expect(orbitWrites).not.toHaveBeenCalled();
   expect(orbit.dataset.objectNavigate).toBeUndefined(); orbitWrites.mockClear();
   publish(1250);
   expect(orbitWrites).not.toHaveBeenCalled();
   layer.setHiddenOrbits([]);
-  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'auto']]);
+  expect(orbitWrites).not.toHaveBeenCalled();
   orbitWrites.mockClear();
   layer.setNavigationIndicatorsVisible(false); layer.setNavigationIndicatorsVisible(true);
-  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'none'], ['--context-orbit-pointer-events', 'auto']]);
+  expect(orbitWrites).not.toHaveBeenCalled();
   expect(orbit.dataset.objectNavigate).toBe('mercury');
   layer.destroy();
 });
