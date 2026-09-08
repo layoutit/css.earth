@@ -1,0 +1,73 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf",
+  "diameterKm": 0.53,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 6.0289,
+  "poleEclipticJ2000Degrees": [
+    202,
+    -45
+  ],
+  "limitations": "The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj",
+    "vertices": 2048,
+    "faces": 4092,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.215195
+    ],
+    "firstFaceZeroBased": [
+      614,
+      469,
+      745
+    ],
+    "extentsKm": [
+      0.48876699999999995,
+      0.6851569999999999,
+      0.5720080000000001
+    ],
+    "volumeCubicKm": 0.07794652698335355,
+    "volumeEquivalentRadiusKm": 0.26499400769347736,
+    "radialRangeKm": [
+      0.15948657745716407,
+      0.39616984128779914
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 4092,
+    "ambiguous": 0,
+    "maxErrorMeters": 3.410605131648481e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 4092,
+    "sourceVertices": 2048,
+    "weldedVertices": 2048,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 10,
+    "estimatedErrorMeters": 6.66027307510376,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 77699943.60075857
+    }
+  },
+  "surfaceSampling": {
+    "method": "closest-source-point",
+    "maximumDistanceMeters": 10
+  }
+}

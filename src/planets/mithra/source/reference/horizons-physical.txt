@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274486%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                4486 Mithra (1987 SB)          2026-Sep-08 06:29:37
+Rec #:    4486 (+COV) Soln.date: 2026-Apr-10_06:55:00   # obs: 2070 (1987-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458504.5 ! 2019-Jan-21.00 (TDB)         Residual RMS= .19834
+   EC= .6629989546988798   QR= .7413470091092749   TP= 2458888.1443545576
+   OM= 82.23806441680273   W=  168.8905731109324   IN= 3.039776741219654
+   A= 2.199835933585487    MA= 244.1096037038524   ADIST= 3.6583248580617
+   PER= 3.26282            N= .302077679           ANGMOM= .019100213
+   DAN= 3.52825            DDN= .74693             L= 251.1438809
+   B= .58545               MOID= .0461631          TP= 2020-Feb-08.6443545576
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .9245              ROTPER= 67.5
+   H= 15.62                G= .150                 B-V= n.a.
+                           ALBEDO= .297            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#409, PHA  OCC=0       radar( 8 delay, 9 Dop.)
+2: source=ORB
+*******************************************************************************

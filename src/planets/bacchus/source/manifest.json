@@ -1,0 +1,210 @@
+{
+  "schema": "cssbacchus-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "bacchus-shape",
+      "path": "shape/bacchus.obj",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
+      "credit": "Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 315
+      },
+      "coverage": "This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied.",
+      "expectedBytes": 14163,
+      "expectedSha256": "c4e8dd389eb60a0dba628f6f369a1d04fbfa7ff31ca7502248ed91502ec7090b"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "bacchus-research-bacchus",
+      "path": "reference/bacchus.pdf",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf",
+      "credit": "Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 1097021,
+      "expectedSha256": "b515e3c66eafe8c15e44fb79b0ff517a3fd4b8709c3e319903460074c423d7e1"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
+      "credit": "Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 55256,
+      "expectedSha256": "7cccc99f06dc0302ecff3b5307a2f8228f8f600b9df28f16274e239e25bd3218",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "bacchus-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 11064,
+      "expectedSha256": "d6c6a017ee1b6a91bd77c0b2a4351b4dc4d08225ca30a512af1db75a5dcd522a"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 956,
+      "expectedSha256": "249bde27b22223ac2fd7bbb7c6e51712111d801cb3ae0c4585b4e914149cf74d"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1318,
+      "expectedSha256": "2dd4fdb62ff68a6c7dab53c72fb590386690954430e44626b62e5fd836c40cab"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 913,
+      "expectedSha256": "3c662a2c1d3fbd2c76c8d037a645ac2f4cb9bfed1d398615bf019acccad851a4"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3078,
+      "expectedSha256": "7d962c091483bbf3e8b0b8acca7f9ff6893989743bdaf8cd7c13fda9b75c273f"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 5030,
+      "expectedSha256": "865db63ba67d8f8ee4bfd143b3294d84730e456ecd9385db10e9c180fb837d4f"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7755,
+      "expectedSha256": "35b45ae44354341357cad2b0083fa3be3b59a14f8986f285ff440c978a038ff4"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1759,
+      "expectedSha256": "9ed29c45825fd4abe9f5e1b54444c776b123269dbf2f31e7dd3a2ddc612c2ced"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7045,
+      "expectedSha256": "d415d7c4fb2f5f01f3adb9179c3ef38529559e96d30bb87ce67b715dd6f8b43d"
+    },
+    {
+      "path": "reference/jpl-shape-index.html",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2608,
+      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2153,
+      "expectedSha256": "6d077aa8286f80ebce27a2a242440b97dd566aa99b71faf6cb4a9c73ee46132d"
+    },
+    {
+      "path": "reference/pds-model.xml",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 10862,
+      "expectedSha256": "104d0f055cd87a803b2221ac74c7bab54033dad3d48756b93f24ef7156392067"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 144976,
+      "expectedSha256": "f30caa59a37f7c73aaf2661897bc41b7ade1109608895ad02a5f94e908fbf26a"
+    },
+    {
+      "path": "reference/source-survey.json",
+      "purpose": "Bounded source alternatives and scientific limitations.",
+      "expectedBytes": 1754,
+      "expectedSha256": "2a785e5aec19294cda2df0da87a0da4911e95fef4e337ee5b706e95e17b75f61"
+    }
+  ]
+}
