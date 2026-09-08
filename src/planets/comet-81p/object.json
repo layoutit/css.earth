@@ -23,7 +23,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "960f87f340fb61595c4951a9e616810d30677629d85b5045a05482f0fa673ac6"
+          "sha256": "68a796a500eba9480b5b4c33a60563909499f69479fa8f3afe8542c226817821"
         },
         {
           "id": "content",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "67a2649d92c657cbb22c1f79342d0699254d2e3c2ea1b0d520abc9ab3baeaea7"
+          "sha256": "b7c1fed78f615d4cbfcfe6c95875f1abe81597f22550f1ec7e2f9bbe3c8cd191"
         },
         {
           "id": "acquisition",
@@ -108,6 +108,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "eb5dc5e5779f7172bb63f93ffa6c9f271f2ab86916b11b80ec91c64de95d5a87"
+    "sha256": "6b5dcc51675e66384fc07edf6143d4f2362509d28f6f249615b5ebf6a40bcd60"
   }
 }

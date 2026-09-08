@@ -85,8 +85,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 96920,
-      "expectedSha256": "634b21c65e9fbfd996932cb8e9450fa29e724a7a84d5f113c6fa4b5072e53367",
+      "expectedBytes": 105884,
+      "expectedSha256": "c66b7b2340498910698cc05deb7a0731f42cbfe719724d6c1860f83f38ad5459",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.tab",
       "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
       "license": "PDS public scientific archive",
@@ -129,8 +129,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1620,
-      "expectedSha256": "67a2649d92c657cbb22c1f79342d0699254d2e3c2ea1b0d520abc9ab3baeaea7",
+      "expectedBytes": 1621,
+      "expectedSha256": "b7c1fed78f615d4cbfcfe6c95875f1abe81597f22550f1ec7e2f9bbe3c8cd191",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -142,7 +142,7 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3554,
-      "expectedSha256": "960f87f340fb61595c4951a9e616810d30677629d85b5045a05482f0fa673ac6",
+      "expectedSha256": "68a796a500eba9480b5b4c33a60563909499f69479fa8f3afe8542c226817821",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -179,19 +179,19 @@
       "path": "shape/wild2_cart_vis.lbl",
       "expectedBytes": 9440,
       "expectedSha256": "5656202b19c6dc8fac6f4cac6451caa77ca48b89059e0684ec8d6ff616521b96",
-      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+      "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
       "path": "reference/dataset.cat",
       "expectedBytes": 16000,
       "expectedSha256": "a0613bef31d51ae2143cf4a56849d0719cd32f5b2ece1702833fc136a8b612d6",
-      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+      "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
       "path": "reference/wild2_plan_full.lbl",
       "expectedBytes": 14080,
       "expectedSha256": "ca00734e76f2feeb9d61fd91a88124536f43c26ea966de43211ac5893b963a5a",
-      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+      "purpose": "Wild 2 source evidence or authored preparation input."
     }
   ]
 }
