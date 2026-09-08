@@ -83,3 +83,32 @@ All 104 earlier production transport hashes and all 39 new source/transport/mani
 Native search navigation separately opened Desdemona under Moons and 666 Desdemona under Asteroids, preserving one mounted scene. The first attempt omitted opening the matching accordion category and timed out on a hidden link; the corrected native flow passed without a product-code change. Search intentionally preserves the currently open matching category.
 
 Local logs, source-fit reports, restoration and installation receipts, captures, response hashes and traces are retained under `output/asteroids-combined`, `output/asteroids-continuation` and the source-family output directories. Per-body provenance, pinned scientific inputs and reproducible preparation recipes are checked in beside each package.
+
+## Integration of the scientific corrections from main
+
+Main `ee6cfbd8` merged PR #40 after the previous integration. Its corrections are
+preserved alongside all 65 asteroid additions: comparison against both parents
+confirms all 541 upstream geometry/provenance entries and all 390 added-asteroid
+geometry entries. The 65 added body packages are unchanged. The two shared marker
+atlases and Sun preparation metadata were resolved through the existing
+preparers; all Sun source pins agree with the combined navigation source.
+
+The asset installer restored 27 changed upstream runtime files and verified
+1,277 reusable files. The preparation build, 207 universe-preparation tests,
+51 focused ephemeris, factsheet, source-credit, sync and source-surface checks,
+156-page static build and complete asset assembly pass. Earlier unrelated body
+qualification is reused; this is not a new complete aggregate-suite run.
+
+Headless Chrome checks pass at DPR 1 and 2 for the user's saved Solar System
+view on port 4278: 78 asteroid navigation entries, 155 context bodies, one active
+scene and no page or response errors. Four production mounts of Pallas and
+Itokawa pass native drag, supported lens and lighting transitions, retained
+raster triangles and response-buffer hash checks. Pallas retains 800 triangles;
+Itokawa retains main's 794. The reused helper initially assumed 800 for both,
+then incorrectly compared a count with the prepared leaf array; only Itokawa was
+rerun after correcting that diagnostic to use the array length. No product
+change was needed for either diagnostic failure.
+
+The integration receipts and captures are under
+`output/asteroids-continuation/faithfulness-integration`, with adjacent
+`faithfulness-*.log` files. The existing preview server remains on port 4278.

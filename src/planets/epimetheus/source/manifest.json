@@ -314,8 +314,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5097,
-      "expectedSha256": "858fff95bb7e512ff8c03ce6f5e01f12b13770a033eeaf532a9bf5fa86d33be2",
+      "expectedBytes": 5911,
+      "expectedSha256": "5cfce51ee82ceeca3a66746c72335c0182321f4d38bc9aaa4060676f057d7dd5",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
@@ -389,6 +389,13 @@
       "expectedBytes": 853,
       "expectedSha256": "a804231ac8d6488e82f1bf60d8e7a7cd4dc8747af7b1312625181783433f7f94",
       "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1090,
+      "expectedSha256": "a8bcf723bc79a0f2f96e7185a6b57222eb000bfa3adde5e0315ce4d3c1d21738"
     }
   ]
 }

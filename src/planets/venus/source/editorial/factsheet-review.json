@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "venus",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "0.723 AU"
+      }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "columns": [
+        "name",
+        "equatorialRadiusKm",
+        "meanRadiusKm",
+        "mass",
+        "densityGPerCm3",
+        "siderealRotationDays",
+        "siderealOrbitYears",
+        "magnitude",
+        "geometricAlbedo",
+        "equatorialGravityMPerSec2",
+        "escapeVelocityKmPerSec"
+      ],
+      "row": [
+        "Venus",
+        "6051.8 [D] ±1.0",
+        "6051.8 [D] ±1.0",
+        "4.86731 [G] ±0.00023",
+        "5.243 [*] ±0.003",
+        "-243.018 [C]",
+        "0.61519726 [B]",
+        "-4.47 [E] ±0.07",
+        "0.65 [B]",
+        "8.87 [*]",
+        "10.36 [*]"
+      ],
+      "massUnitKg": "1e24"
+    },
+    {
+      "url": "https://solarsystem.nasa.gov/internal_resources/1028/",
+      "obliquityDegrees": 177.3,
+      "definition": "Angle between angular momentum and orbit normal; includes retrograde sense."
+    }
+  ]
+}

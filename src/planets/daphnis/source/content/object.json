@@ -4,7 +4,7 @@
   "id": "daphnis",
   "displayName": "Daphnis",
   "panel": {
-    "introduction": "Daphnis travels inside the Keeler Gap in Saturn’s A ring. This tiny moon raises waves along the gap’s edges, while Cassini’s close views reveal ridges and a coating of fine material.",
+    "introduction": "Daphnis travels inside the Keeler Gap in Saturn’s A ring. This tiny moon raises waves along the gap’s edges, while Cassini’s close views reveal ridges and a coating of fine material. The displayed 2026 orbit extrapolates a 2005–2018 fit; Horizons has no ephemeris at this date. Its orientation uses an arbitrary display phase, not a measured attitude.",
     "facts": [
       {
         "id": "radius",
@@ -13,8 +13,14 @@
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "9.58 AU (system mean)"
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
@@ -23,12 +29,12 @@
       },
       {
         "id": "rotation-period",
-        "label": "Rotation",
+        "label": "Rotation period",
         "value": "Synchronous with its orbit"
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Saturn",
+        "label": "Mean distance from Saturn",
         "value": "About 136,505 km"
       },
       {

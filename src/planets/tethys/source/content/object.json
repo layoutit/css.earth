@@ -21,17 +21,29 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "An icy moon of Saturn marked by the enormous Odysseus crater and Ithaca Chasma, a vast canyon crossing its surface.",
+    "introduction": "An icy moon of Saturn marked by the enormous Odysseus crater and Ithaca Chasma, a vast canyon crossing its surface. The display uses the atlas’s 536.3 km reference sphere; its physical mean radius is 531.1 km, and the elevation datum is a separate 531 km sphere.",
     "facts": [
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "About 533 km"
+        "value": "531.1 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "9.58 AU (mean)"
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
@@ -45,7 +57,7 @@
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Saturn",
+        "label": "Mean distance from Saturn",
         "value": "About 295,000 km"
       },
       {
@@ -54,7 +66,19 @@
         "value": "Giovanni Cassini · 1684"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "0.984 ± 0.003 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -68,7 +92,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini ISS · 2012 mosaic",
+        "description": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
         "title": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
         "thumbnail": "/scenes/tethys/tethys-normal-thumbnail.webp",
         "surface": "tethys-normal-surface@2x.webp",
@@ -81,7 +105,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Cassini ISS · infrared–green–UV",
+        "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Spherical shape approximation.",
         "title": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Spherical shape approximation.",
         "thumbnail": "/scenes/tethys/tethys-enhanced-thumbnail.webp",
         "surface": "tethys-enhanced-surface@2x.webp",
@@ -94,7 +118,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Cassini terrain model · shaded relief",
+        "description": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
         "title": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
         "thumbnail": "/scenes/tethys/tethys-elevation-thumbnail.webp",
         "surface": "tethys-elevation-surface@2x.webp",

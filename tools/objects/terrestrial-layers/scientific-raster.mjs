@@ -70,7 +70,7 @@ export function scienceMapPoint(longitude, latitude, grid) {
   return [wrapped * radians * radius, latitude * radians * radius];
 }
 
-export async function loadScienceSurface(root, lens) {
+export async function loadScienceSurface(root, lens, sourceMesh) {
   if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {
     const loader = lens.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
     const raster = await loader(resolve(root, lens.path), lens.grid, lens.sampleGrid);
@@ -80,7 +80,7 @@ export async function loadScienceSurface(root, lens) {
       return value === null ? null : value * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0);
     } };
   }
-  if (['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format)) return loadShapeScalarGrid(root, lens);
+  if (['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format)) return loadShapeScalarGrid(root, lens, sourceMesh);
   if (lens.additionalGrids?.length) {
     const rasters = await Promise.all([lens, ...lens.additionalGrids].map(entry =>
       loadScienceSurface(root, {...lens, ...entry, additionalGrids: undefined})));
@@ -131,6 +131,30 @@ export async function loadScienceSurface(root, lens) {
       return sampleScienceGrid(data, grid, x, y, lens);
     } };
   } finally { await tiff.close(); }
+}
+
+/** Cartographic relief from the matched source facet, in local east/north/up.
+ * The normal and radius come from that same surface, including overhangs; no
+ * finite difference can accidentally cross to another radial branch. */
+export function sourceSurfaceBrightness({ point, normal }, relief) {
+  if (!relief) return 1;
+  const radius = Math.hypot(...point), horizontal = Math.hypot(point[0], point[1]);
+  const east = horizontal > 0 ? [-point[1] / horizontal, point[0] / horizontal, 0] : [0, 1, 0];
+  const up = point.map(n => n / radius);
+  const north = [up[1]*east[2]-up[2]*east[1], up[2]*east[0]-up[0]*east[2], up[0]*east[1]-up[1]*east[0]];
+  const light = up.map((_, i) => east[i] * relief.lightDirection[0] + north[i] * relief.lightDirection[1] + up[i] * relief.lightDirection[2]);
+  const illumination = Math.max(0, normal.reduce((sum, n, i) => sum + n * light[i], 0));
+  return (relief.ambient + (1 - relief.ambient) * illumination) /
+    (relief.ambient + (1 - relief.ambient) * relief.lightDirection[2]);
+}
+
+export function createSourceSurfacePainter(lens) {
+  const palette = Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
+  return sample => {
+    const color = palette[Math.round(Math.max(0, Math.min(1, (sample.value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
+    const brightness = sourceSurfaceBrightness(sample, lens.relief);
+    return color.map(c => Math.max(0, Math.min(255, Math.round(c * brightness))));
+  };
 }
 
 export function paintScienceSurface(source, lens, width, height) {

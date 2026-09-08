@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '../../tools/objects/giant-observations/index.mjs';
-import {completeScalarCoverage,finitePercentiles,falseColorMap} from '../../tools/objects/giant-observations/scalar-coverage.mjs';
+import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../../tools/objects/giant-observations/scalar-coverage.mjs';
 import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from '../../tools/objects/giant-observations/polar-continuation.mjs';
 const sourceDirectory=new URL('../../src/planets/jupiter/source/',import.meta.url).pathname;
 const recipe=JSON.parse(await readFile(sourceDirectory+'/preparation/observations.json','utf8'));
@@ -15,13 +15,14 @@ test('RGB coverage is measured and checked against authored row bounds',()=>{
  assert.throws(()=>measureRgbCoverage(source,{columnStride:2,minimumMean:3,firstMeasuredRow:0,lastMeasuredRow:4}),/changed/);
 });
 
-test('scalar polar coverage keeps Float32 arithmetic and circular longitude repair',()=>{
+test('scalar coverage retains observed values and leaves missing samples unavailable',()=>{
  const source={width:8,height:10,values:new Float32Array(80).fill(NaN)};
  for(let row=2;row<=7;row++)for(let col=0;col<8;col++)source.values[row*8+col]=col+1;
  source.values[4*8+3]=NaN;
- const complete=completeScalarCoverage(source,{lookbackDegrees:.5,convergenceExponent:2,edgeTransitionRows:2});
- assert.equal(complete.firstMeasuredRow,2);assert.equal(complete.lastMeasuredRow,7);assert.equal(complete.values[4*8+3],4);
- assert.ok(complete.values instanceof Float32Array);assert.ok([...complete.values].every(Number.isFinite));assert.ok(Number.isNaN(source.values[0]));
+ const measured=measureScalarCoverage(source,{noData:0,coverage:'polar-connected-zero'});
+ assert.equal(measured.firstMeasuredRow,2);assert.equal(measured.lastMeasuredRow,7);
+ assert.equal(measured.missing[4*8+3],1);assert.ok(Number.isNaN(measured.values[4*8+3]));
+ assert.equal(measured.values[4*8+2],3);assert.equal(measured.sourceMissingPixels,33);
  assert.deepEqual(finitePercentiles([1,2,3,4,NaN],0,1,.5),[1,4]);
  assert.throws(()=>finitePercentiles([1,2],1,0,.5),/bounds/);
 });

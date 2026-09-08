@@ -125,7 +125,7 @@
       ],
       "lensId": "elevation",
       "format": "geotiff",
-      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60\u00b0 latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
+      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
     },
     {
       "id": "ceres-surface-minimap-frame",
@@ -177,8 +177,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 8744,
-      "expectedSha256": "2c5d707840071255ec63d2d6fc140a201cac7d571a2439e413fc1b0985d6d9ed",
+      "expectedBytes": 9962,
+      "expectedSha256": "d3054a61b64756703cc216af4b5de3e011f1667f2f0136a9857eeed0f6029e89",
       "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
     },
     {
@@ -198,6 +198,13 @@
       "expectedBytes": 1387,
       "expectedSha256": "bbd89c12f8573468cdd8f6ccc3e010e88480841ab53f84189df01e59a20720d8",
       "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 825,
+      "expectedSha256": "97da5328e7dec76d7b926f8085f0e59f249a2b6cdee4032e4897b4532eb6e7a8"
     }
   ]
 }

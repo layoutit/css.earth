@@ -25,23 +25,47 @@
     "facts": [
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "150 million km"
+        "label": "Solar semimajor axis",
+        "value": "1.000 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
-        "id": "diameter",
-        "label": "Diameter",
-        "value": "12,756 km"
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "6,371 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "365.25 days"
+        "value": "365.26 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "23.9 hours"
+        "value": "23.93 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "axial-tilt",
@@ -69,6 +93,39 @@
         "id": "atmosphere-composition",
         "label": "Atmosphere",
         "value": "78% N₂, 21% O₂"
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "5.972 × 10²⁴ kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "5.513 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Equatorial gravity",
+        "value": "9.80 m/s²",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ]
   },
@@ -79,7 +136,7 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "Blue Marble + WorldCover 2021",
+        "description": "NASA Blue Marble, December 2004, with ESA WorldCover 2021 detail where available. These archival composites and the cloud layer are not live observations.",
         "title": "Visible color: NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
         "thumbnail": "/scenes/earth/earth-lens-normal.webp",
         "source": {
@@ -90,7 +147,7 @@
       {
         "id": "buenos-aires-noise",
         "label": "Buenos Aires noise",
-        "description": "2025 daytime estimates · dBA",
+        "description": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
         "title": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
         "legendNote": "APrA · 2025 daytime estimates. Uncolored areas have no estimate.",
         "thumbnail": "/scenes/earth/earth-lens-noise.webp",
@@ -173,7 +230,7 @@
       {
         "id": "topography",
         "label": "Elevation",
-        "description": "Land and seafloor relief",
+        "description": "NASA Blue Marble topography and bathymetry, December 2004. Color and relief show land and seafloor elevation, not a photograph.",
         "title": "Elevation: NASA Blue Marble topography and bathymetry",
         "thumbnail": "/scenes/earth/earth-lens-topography.webp",
         "source": {
@@ -184,7 +241,7 @@
       {
         "id": "night-lights",
         "label": "Night lights",
-        "description": "Black Marble night lights",
+        "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
         "title": "Night lights: NASA Black Marble 2016 global composite",
         "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
         "source": {
@@ -195,7 +252,7 @@
       {
         "id": "cross-section",
         "label": "Cross section",
-        "description": "Interior structure",
+        "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
         "title": "Cross section: Schematic NASA Science source-backed interior",
         "thumbnail": "/scenes/earth/earth-view-interior.webp",
         "legend": {

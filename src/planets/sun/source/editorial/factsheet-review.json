@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "sun",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://science.nasa.gov/sun/facts/",
+      "values": {
+        "rotation-period": "About 25 days"
+      }
+    },
+    {
+      "url": "https://science.nasa.gov/heliophysics/focus-areas/solar-science/",
+      "activityCycleYears": 11,
+      "magneticCycleYears": 22
+    }
+  ]
+}

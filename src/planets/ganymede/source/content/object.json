@@ -26,35 +26,59 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "2,631.2 km"
+        "value": "2,631.2 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "5.2 AU (mean)"
+        "label": "System solar semimajor axis",
+        "value": "5.203 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbit around Jupiter",
-        "value": "7.16 Earth days"
+        "value": "7.16 days"
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "7.16 Earth days"
+        "value": "7.16 days · synchronous"
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Jupiter",
+        "label": "Mean distance from Jupiter",
         "value": "About 1,070,000 km"
       },
       {
-        "id": "atmosphere",
+        "id": "atmosphere-composition",
         "label": "Atmosphere",
         "value": "Tenuous oxygen"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.942 ± 0.004 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -63,7 +87,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Voyager and Galileo visible-light mosaic",
+        "description": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
         "title": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
         "thumbnail": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
         "surface": "ganymede-normal-surface@2x.webp",
@@ -77,7 +101,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "USGS infrared color over monochrome",
+        "description": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
         "title": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
         "thumbnail": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
         "surface": "ganymede-enhanced-surface@2x.webp",

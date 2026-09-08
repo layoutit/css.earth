@@ -1,11 +1,17 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor } from './scientific-raster.mjs';
+import { colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from './scientific-raster.mjs';
 import { lambertAttenuationAtlas } from './solid-raster.mjs';
 import { parseTerrestrialProfile } from './index.mjs';
 
 const relief = { referenceRadiusMeters: 470000, lightDirection: [-0.5, 0.5, Math.SQRT1_2], ambient: 0.25 };
+test('source-surface relief uses the actual local facet normal without radial finite differences', () => {
+  assert.ok(Math.abs(sourceSurfaceBrightness({point:[20,0,0],normal:[1,0,0]},relief)-1)<1e-12);
+  assert.ok(sourceSurfaceBrightness({point:[20,0,0],normal:[0,-1,0]},relief)>
+    sourceSurfaceBrightness({point:[20,0,0],normal:[0,1,0]},relief));
+  assert.ok(Number.isFinite(sourceSurfaceBrightness({point:[0,0,20],normal:[0,0,1]},relief)));
+});
 test('polar stereographic grids preserve cardinal orientation in both hemispheres', () => {
   const radius = 531000;
   for (const sign of [1, -1]) {
@@ -127,4 +133,10 @@ test('a measured elevation lens can be the only surface capability', async () =>
   const config = JSON.parse(await readFile(new URL('../../../src/planets/itokawa/source/preparation/terrestrial.json', import.meta.url)));
   assert.equal(parseTerrestrialProfile(config).presentation.defaultLens, 'elevation');
   assert.throws(() => parseTerrestrialProfile({...config, raster: {...config.raster, scientific: []}}), /Invalid terrestrial/);
+  const excessive=structuredClone(config);excessive.raster.scientific[0].surfaceSampling.maximumDistanceMeters=1e6;
+  assert.throws(()=>parseTerrestrialProfile(excessive),/simplification-distance bound/);
+  const mismatched=structuredClone(config);mismatched.raster.scientific[0].path='shape/another-source.obj';
+  assert.throws(()=>parseTerrestrialProfile(mismatched),/simplification-distance bound/);
+  const otherFormat=structuredClone(config);otherFormat.raster.scientific[0].format='wavefront-obj';
+  assert.throws(()=>parseTerrestrialProfile(otherFormat),/simplification-distance bound/);
 });
