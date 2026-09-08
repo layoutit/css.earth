@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 40.82129047985137,
+  "declinationDegrees": 83.35802947655436,
+  "phase": "arbitrary-display-phase",
+  "displayMeridianDegrees": 0,
+  "source": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/pck/pallene_mst2013.bpc",
+  "coordinateSystem": "ICRF/J2000; mission-era Pallene attitude sampled 2010-10-16T18:20:52.721 UTC.",
+  "qualification": "Frozen historical BPC pole sampled 2010-10-16T18:20:52.721 UTC with an arbitrary display meridian. This is an illustrative orientation, without a current-epoch spin/phase prediction. Photographic registration uses its own archived 2005 camera geometry.",
+  "historicalPeriodHours": 27.69
+}

@@ -1,0 +1,23 @@
+{
+  "method": "source-meshoptimizer",
+  "version": "1.2.0",
+  "flags": [
+    "ErrorAbsolute"
+  ],
+  "sourceFaces": 5040,
+  "sourceVertices": 2522,
+  "weldedVertices": 2522,
+  "targetFaces": 480,
+  "outputFaces": 480,
+  "removedOppositeFaces": 0,
+  "maximumErrorMeters": 1000,
+  "estimatedErrorMeters": 705.0296020507812,
+  "topology": {
+    "vertices": 242,
+    "edges": 720,
+    "faces": 480,
+    "components": 1,
+    "eulerCharacteristic": 2,
+    "signedVolumeCubicMeters": 265546551158737
+  }
+}

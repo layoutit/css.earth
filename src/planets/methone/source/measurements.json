@@ -1,0 +1,29 @@
+{
+  "semiAxesKm": [
+    1.94,
+    1.29,
+    1.21
+  ],
+  "semiAxesUncertaintyKm": [
+    0.02,
+    0.04,
+    0.02
+  ],
+  "referenceRadiusKm": 1.45,
+  "referenceRadiusUncertaintyKm": 0.03,
+  "units": "km",
+  "source": "https://doi.org/10.1016/j.icarus.2013.07.022",
+  "pckSource": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "pckField": "BODY632_RADII",
+  "model": "Measured triaxial ellipsoid, not a detailed terrain mesh",
+  "samplingStepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "axesFrame": "x is long Saturn-facing axis; y intermediate equatorial axis; z shortest polar axis. Camera source longitudes are west-positive and inverted when sampled into the east-positive map.",
+  "radiusFormula": "1/sqrt((cos(lat)*cos(lon)/1.94)^2+(cos(lat)*sin(lon)/1.29)^2+(sin(lat)/1.21)^2)",
+  "shapeSurvey": {
+    "updatedStudy": "https://doi.org/10.1016/j.icarus.2019.06.016",
+    "status": "Updated Thomas and Helfenstein 2020 survey inspected; full text unavailable. Current PCK00011 agrees with published 2013 Methone axes.",
+    "meshDisposition": "Buratti et al. 2019 explicitly identify Methone as an ellipsoidal exception to the released detailed PDS shape models.",
+    "meshReference": "https://discovery.ucl.ac.uk/10075919/1/2019_buratti_aat2349_CombinedPDF_v6.pdf"
+  }
+}

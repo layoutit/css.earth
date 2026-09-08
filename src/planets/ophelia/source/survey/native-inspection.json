@@ -1,0 +1,20 @@
+{
+  "opusId": "vg-iss-2-u-c2687614",
+  "sourceUrl": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26876XX/C2687614_GEOMED.IMG",
+  "expectedBytes": 2002000,
+  "expectedSha256": "1d6a42b47e9a0b2ed0d1cbb3fe0ec0c5e6eea7da85b3ed239b473ec82bd73e0e",
+  "product": "Geometrically corrected calibrated reflectivity; signed integer16 little-endian, 1000×1000 samples, 2000-byte header, scale0.00001",
+  "nativeCenterResolutionKm": 11.70539,
+  "maximumLongDiameterNativePixels": 4.613259361712852,
+  "phaseDegrees": 150.593,
+  "exposureSeconds": 15.36,
+  "inspection": "Downloaded and inspected the native archived raster and label. Bright scattered-light background and sparse compact signals; no claimed source-center identification or controlled cartographic footprint. Extreme crescent and fewer than five source samples across the longest possible diameter do not support a useful surface map.",
+  "lowerPhaseAlternative": {
+    "opusId": "vg-iss-2-u-c2676439",
+    "nativeCenterResolutionKm": 33.48036,
+    "phaseDegrees": 15.799,
+    "maximumLongDiameterNativePixels": 1.6128858829474952,
+    "disposition": "Fewer than two native samples across the longest diameter; not usable as a surface map."
+  },
+  "disposition": "Shape model with standard no-coverage grid. No observed texels adopted."
+}

@@ -81,7 +81,7 @@ const DAPHNIS_FROM_JD = 2453371.5
 const DAPHNIS_TO_JD = 2458119.5
 const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan'])
+const RADIAL_FIT_IDS = new Set(['dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia'])
 
 // Metis and Adrastea need daily samples: Jupiter's strong J2 makes their
 // osculating mean-motion prediction ambiguous across a five-day sample gap.
@@ -97,6 +97,8 @@ const SATELLITES = [
   ['thebe', '514', '500@599', 'jupiter'],
   ['adrastea', '515', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['metis', '516', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['methone', '632', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 1],
+  ['pallene', '633', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 1],
   ['mimas', '601', '500@699', 'saturn'],
   ['enceladus', '602', '500@699', 'saturn'],
   ['tethys', '603', '500@699', 'saturn'],
@@ -116,6 +118,12 @@ const SATELLITES = [
   ['prometheus', '616', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
   ['pandora', '617', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
   ['pan', '618', '500@699', 'saturn', INNER_SATURN_FROM_JD, INNER_SATURN_TO_JD, 5],
+  ['puck', '715', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['portia', '712', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['juliet', '711', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['belinda', '714', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['cordelia', '706', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['ophelia', '707', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['miranda', '705', '500@799', 'uranus'],
   ['ariel', '701', '500@799', 'uranus'],
   ['umbriel', '702', '500@799', 'uranus'],
@@ -129,6 +137,12 @@ const SATELLITES = [
   ['despina', '805', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['galatea', '806', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['charon', '901', '500@999', 'pluto'],
+  // Circumbinary moons: fit about the system barycentre, then translate the
+  // result through the measured Charon mass ratio into Pluto-centred space.
+  ['nix', '902', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
+  ['hydra', '903', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
+  ['kerberos', '904', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
+  ['styx', '905', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
   // DART post-impact s547, a short window around the prepared epoch.
   ['dimorphos', '120065803', '500@920065803', 'didymos', 2461256.5, 2461316.5, 1],
 ]
@@ -254,7 +268,7 @@ function fitRotation(days, xs, ys) {
 }
 
 const results = []
-for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO_JD, fitStepDays = STEP_DAYS] of SATELLITES) {
+for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO_JD, fitStepDays = STEP_DAYS, barycentreCompanion] of SATELLITES) {
   const url = elementsUrl({ command, center, startJd: fitFromJdTdb, stopJd: fitToJdTdb, stepDays: fitStepDays })
   const rows = parseElements(await horizons(url, `elements-${command}`), id)
   const days = rows.map((r) => r.jd - J2000)
@@ -379,6 +393,7 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
     parent,
     command,
     center,
+    barycentreCompanion,
     url,
     fitFromJdTdb,
     fitToJdTdb,
@@ -400,7 +415,7 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
 
 const entry = (r) => `  ${r.id}: {
     parent: '${r.parent}',
-    horizonsCode: '${r.command}',
+    horizonsCode: '${r.command}',${r.barycentreCompanion ? `\n    barycentreCompanion: '${r.barycentreCompanion}',` : ''}
     fitFromJdTdb: ${r.fitFromJdTdb},
     fitToJdTdb: ${r.fitToJdTdb},
     fitStepDays: ${r.fitStepDays},
@@ -431,6 +446,8 @@ export interface SatelliteRecord {
   readonly parent: string
   /** Horizons target code, so a fixture can be re-fetched without guessing. */
   readonly horizonsCode: string
+  /** Companion defining a binary barycentre; output remains parent-centred. */
+  readonly barycentreCompanion?: string
   /** First and last JPL Horizons epochs sampled by the element fit. */
   readonly fitFromJdTdb: number
   readonly fitToJdTdb: number

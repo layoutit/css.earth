@@ -1,0 +1,29 @@
+{
+  "semiAxesKm": [
+    5.3,
+    3,
+    2.65
+  ],
+  "axesFrame": "Principal axes of an approximate ellipsoid. The historical 2016 spin pole is illustrative: the 2025 fit has four pole possibilities and no unique solution; absolute spin phase is not measured here.",
+  "model": "Triaxial ellipsoid approximation to the 2025 conference dimensions; no resolved terrain",
+  "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+  "radiusFormula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/5.3)^2+(cos(lat)*sin(lon)/3)^2+(sin(lat)/2.65)^2)",
+  "samplingStepDegrees": 10,
+  "units": "km",
+  "material": {
+    "path": "material/neutral.png",
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "size": [
+      64,
+      32
+    ],
+    "interpretation": "Every source pixel is an explicit no-coverage sentinel. The existing shared coverage grid supplies the displayed material; it is not measured terrain.",
+    "noData": 160
+  },
+  "referenceRadiusKm": 3.5,
+  "referenceRadiusSource": "Half the 7.0 km volume-equivalent diameter quoted by Porter et al. (2025); reference scale does not renormalize the ellipsoid."
+}
