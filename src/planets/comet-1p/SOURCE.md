@@ -43,6 +43,10 @@ one closed outward component with Euler characteristic two and about 0.32% less
 volume. Source-mesh normals and directional/flood lighting are baked into fixed
 native triangle atlases. Runtime derives no geometry or lighting assets.
 
+The existing per-object camera `framingScale` is 0.7 so the elongated nucleus
+fits on arrival. This changes viewport framing only; the source origin,
+physical scale, geometry, atlas bytes and targeting triangles are unchanged.
+
 ## Material, orientation and placement
 
 The single **Historical model** view uses uniform #b8b6b2 material with shared
