@@ -104,6 +104,7 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   despina: 63.347226539073226,
   galatea: 54.73951237290662,
   charon: 1.0206866493052924,
+  dimorphos: 0.054002378820475615,
 }
 
 const AU_KM = M_PER_AU / M_PER_KM

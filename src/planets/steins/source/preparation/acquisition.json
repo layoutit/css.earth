@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/steins_cart.wrl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/data/steins_cart.wrl",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "maps/steins_cylindrical_mosaic.jpg",
+      "url": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
+    }
+  ]
+}
