@@ -20,6 +20,8 @@ try {
       await page.evaluate(() => {
         window.__cameraMountReads = [];
         window.__mountedInput = document.querySelector('.planet-input-surface');
+        window.__mountedRegions = ['.planet-sidebar-frame', '.planet-viewport', '.planet-scene-overlays']
+          .map(selector => ({ selector, node: document.querySelector(selector) }));
         const read = Element.prototype.getBoundingClientRect, style = window.getComputedStyle;
         window.__restoreCameraReadProbes = () => { Element.prototype.getBoundingClientRect = read; window.getComputedStyle = style; };
         const record = (element, operation) => {
@@ -39,10 +41,12 @@ try {
         window.__restoreCameraReadProbes();
         const root = document.querySelector('.planet-stage');
         return { id, reads: window.__cameraMountReads, scenes: root.querySelectorAll('.polycss-camera').length,
-          inputRetained: window.__mountedInput === document.querySelector('.planet-input-surface') };
+          inputRetained: window.__mountedInput === document.querySelector('.planet-input-surface'),
+          regionsRetained: window.__mountedRegions.every(({selector, node}) => node && node === document.querySelector(selector)) };
       }, id);
       assert.deepEqual(mounted.reads, [], `${id}: incoming camera must consume shared measurements`);
       assert.equal(mounted.scenes, 1); assert.equal(mounted.inputRetained, true);
+      assert.equal(mounted.regionsRetained, true, `${id}: shell regions survive navigation`);
       for (const size of [{ width: 1440, height: 1000 }, { width: 700, height: 1000 }, { width: 1600, height: 900 }]) {
         await page.setViewportSize(size);
         await page.waitForTimeout(200);

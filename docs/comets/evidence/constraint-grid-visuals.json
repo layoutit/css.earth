@@ -1,0 +1,356 @@
+{
+  "reports": [
+    {
+      "id": "comet-103p",
+      "dpr": 1,
+      "browser": "152.0.7977.76",
+      "headless": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "runtimeSha256": "0cb57d5955a9b0072285eea83df0ee4efebccf53a1953238c41802115cff4b21",
+      "loaded": [
+        {
+          "filename": "comet-103p-constraints-surface@2x.webp",
+          "bytes": 153770,
+          "sha256": "07a558afc468e1da71fc04fb067debe70aad4f2ff5303543fe4a1394bab4d299"
+        },
+        {
+          "filename": "comet-103p-constraints-shadow@2x.webp",
+          "bytes": 157186,
+          "sha256": "1d076d0d3ed767e5de2ae7efb7bb2c472adb92874fff06703046bdef390cd29e"
+        },
+        {
+          "filename": "comet-103p-model-surface@2x.webp",
+          "bytes": 126788,
+          "sha256": "cefcf7a9d95f5fde97b0f93d56565e3abb911ec075963ed95128aef42f4c6131"
+        },
+        {
+          "filename": "comet-103p-model-shadow@2x.webp",
+          "bytes": 128088,
+          "sha256": "48973a81ccc44273b4b6d426ce7f562284d00364679e1e60603a3c436a66e0e2"
+        }
+      ],
+      "captures": [
+        {
+          "name": "constraints-shadows",
+          "path": "output/comet-grid/visuals/comet-103p-dpr-1-constraints-shadows.png",
+          "actions": "Default source-constraint view.",
+          "url": "http://127.0.0.1:4258/comet-103p/",
+          "lens": "constraints",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, -8e-06, -6e-06, 116.839, 1)",
+          "sha256": "d401c66fe5a8a6eebe8aa3e8ada44a597aa0cb86356117c68c5ba819fbf66996"
+        },
+        {
+          "name": "constraints-flood",
+          "path": "output/comet-grid/visuals/comet-103p-dpr-1-constraints-flood.png",
+          "actions": "Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-103p/?v=MMZABs0m6cQ300FCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "lens": "constraints",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, -8e-06, -6e-06, 116.839, 1)",
+          "sha256": "23cdf7700916a16a3ccde911235b8532c09dbe6683222d22670a437ba7c07cbc"
+        },
+        {
+          "name": "constraints-far",
+          "path": "output/comet-grid/visuals/comet-103p-dpr-1-constraints-far.png",
+          "actions": "Four native horizontal 250px drags; Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-103p/?v=MEZABs0m6cQ300FCxzNAAAAAv5GnZOqrdbm_xh39m_Bpi7-5B7CGQ2kVAAA",
+          "lens": "constraints",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -7e-06, -5e-06, 116.839, 1)",
+          "sha256": "e6ab72ed28e4b2684fc1d50acf091c83eaf63b26426f2f74af213fdb0d6a39cc"
+        },
+        {
+          "name": "model",
+          "path": "output/comet-grid/visuals/comet-103p-dpr-1-model.png",
+          "actions": "Switch to the Shape model view at the same camera and lighting.",
+          "url": "http://127.0.0.1:4258/comet-103p/?v=MEZABs0m6cQ300FCxzNAAAAAv5GnZOqrdbm_xh39m_Bpi7-5B7CGQ2kVAAA",
+          "lens": "model",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -7e-06, -5e-06, 116.839, 1)",
+          "sha256": "f815d5fbdf352d0b7876c0013272ed33d77d8e154dc9bc510034137d7bbb41ec"
+        },
+        {
+          "name": "model-close",
+          "path": "output/comet-grid/visuals/comet-103p-dpr-1-model-close.png",
+          "actions": "Native wheel deltaY -150 at 800,450; Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-103p/?v=MEY_8opq9YHVj0FCxzNAAAAAv5GnZOqrdbm_xh39m_Bpi7-5B7CGQ2kVAAA",
+          "lens": "model",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -8e-06, 0, 787.558, 1)",
+          "sha256": "b216d3fb90d683174b7b65c43ee7e544fc4ec0434a16aacd8d12f82701b28458"
+        },
+        {
+          "name": "model-close-shadows",
+          "path": "output/comet-grid/visuals/comet-103p-dpr-1-model-close-shadows.png",
+          "actions": "Same close camera, Shadows on.",
+          "url": "http://127.0.0.1:4258/comet-103p/?v=MEY_8opq9YHVj0FCxzNAAAAAv5GnZOqrdbm_xh39m_Bpi7-5B7CGQ2kVAAA",
+          "lens": "model",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -8e-06, 0, 787.558, 1)",
+          "sha256": "eff012920634a39b346ff381ddf22a4b8d4c88acd3f9ebc6c29793581fe16e8e"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "comet-103p",
+      "dpr": 2,
+      "browser": "152.0.7977.76",
+      "headless": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "runtimeSha256": "0cb57d5955a9b0072285eea83df0ee4efebccf53a1953238c41802115cff4b21",
+      "loaded": [
+        {
+          "filename": "comet-103p-constraints-surface@2x.webp",
+          "bytes": 153770,
+          "sha256": "07a558afc468e1da71fc04fb067debe70aad4f2ff5303543fe4a1394bab4d299"
+        },
+        {
+          "filename": "comet-103p-constraints-shadow@2x.webp",
+          "bytes": 157186,
+          "sha256": "1d076d0d3ed767e5de2ae7efb7bb2c472adb92874fff06703046bdef390cd29e"
+        },
+        {
+          "filename": "comet-103p-model-shadow@2x.webp",
+          "bytes": 128088,
+          "sha256": "48973a81ccc44273b4b6d426ce7f562284d00364679e1e60603a3c436a66e0e2"
+        },
+        {
+          "filename": "comet-103p-model-surface@2x.webp",
+          "bytes": 126788,
+          "sha256": "cefcf7a9d95f5fde97b0f93d56565e3abb911ec075963ed95128aef42f4c6131"
+        }
+      ],
+      "captures": [
+        {
+          "name": "constraints-shadows",
+          "path": "output/comet-grid/visuals/comet-103p-dpr-2-constraints-shadows.png",
+          "actions": "Default source-constraint view.",
+          "url": "http://127.0.0.1:4258/comet-103p/",
+          "lens": "constraints",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, -8e-06, -6e-06, 116.839, 1)",
+          "sha256": "c973c735afb72f8620789e8f8184ac6ac5931a43d92943c344a079e004ef7494"
+        },
+        {
+          "name": "model",
+          "path": "output/comet-grid/visuals/comet-103p-dpr-2-model.png",
+          "actions": "Switch to the Shape model view at the same camera and lighting.",
+          "url": "http://127.0.0.1:4258/comet-103p/?v=MMZABs0m6cQ300FCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "lens": "model",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, -8e-06, -6e-06, 116.839, 1)",
+          "sha256": "541e1bf2ba7907d26f3769cd9ff8f07bd05e1794eab354c347cf9e865974012e"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "comet-9p",
+      "dpr": 1,
+      "browser": "152.0.7977.76",
+      "headless": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "runtimeSha256": "50d0a8ce0b7268db41b61c931a934f3e1e377568e81a3f9a666e4a5ea7f537b2",
+      "loaded": [
+        {
+          "filename": "comet-9p-constraints-surface@2x.webp",
+          "bytes": 137110,
+          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb"
+        },
+        {
+          "filename": "comet-9p-constraints-shadow@2x.webp",
+          "bytes": 132610,
+          "sha256": "78803a5644ca1289b852e32a25ea7f2ccc9457139a3db039725171562df4f589"
+        },
+        {
+          "filename": "comet-9p-model-surface@2x.webp",
+          "bytes": 123566,
+          "sha256": "7a466f80ad638e5fd036afcd4ac728a40c484023bc7330a4ffd4e79cb7f59e1c"
+        },
+        {
+          "filename": "comet-9p-model-shadow@2x.webp",
+          "bytes": 123782,
+          "sha256": "41fbed14ee1a31790d9ae270206f93009e5352053a22d80f5c362fe957a071a7"
+        }
+      ],
+      "captures": [
+        {
+          "name": "constraints-shadows",
+          "path": "output/comet-grid/visuals/comet-9p-dpr-1-constraints-shadows.png",
+          "actions": "Default source-constraint view.",
+          "url": "http://127.0.0.1:4258/comet-9p/",
+          "lens": "constraints",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 1e-06, 0, 116.839, 1)",
+          "sha256": "6d54ac2f78e14e1576a23514e4e39685c4db12198f0f6605d43cf04a0835d7bd"
+        },
+        {
+          "name": "constraints-flood",
+          "path": "output/comet-grid/visuals/comet-9p-dpr-1-constraints-flood.png",
+          "actions": "Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-9p/?v=MMZAK9BRrJpi_0FCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "lens": "constraints",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 1e-06, 0, 116.839, 1)",
+          "sha256": "abd0789c5856ba87ce512fa12e9cb744583b10b6b64379a98d06aaf4d37cc75a"
+        },
+        {
+          "name": "constraints-far",
+          "path": "output/comet-grid/visuals/comet-9p-dpr-1-constraints-far.png",
+          "actions": "Four native horizontal 250px drags; Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-9p/?v=MEZAK9BRrJpi_0FCxzNAAAAAv5GnZOPnxU2_xh39nAYAh7-5B7B8rGNFAAA",
+          "lens": "constraints",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, 0, -2e-06, 116.839, 1)",
+          "sha256": "98de297b27af3b4e6e18b69d5704f0774aa36c857491fdec09041b11c412b2bc"
+        },
+        {
+          "name": "model",
+          "path": "output/comet-grid/visuals/comet-9p-dpr-1-model.png",
+          "actions": "Switch to the Shape model view at the same camera and lighting.",
+          "url": "http://127.0.0.1:4258/comet-9p/?v=MEZAK9BRrJpi_0FCxzNAAAAAv5GnZOPnxU2_xh39nAYAh7-5B7B8rGNFAAA",
+          "lens": "model",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, 0, -2e-06, 116.839, 1)",
+          "sha256": "4658dcab10a8b7ca9c8a3b7c202b095a2ab8dcb6c56064a6c94625ef7c28e283"
+        },
+        {
+          "name": "model-close",
+          "path": "output/comet-grid/visuals/comet-9p-dpr-1-model-close.png",
+          "actions": "Native wheel deltaY -150 at 800,450; Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-9p/?v=MEZAFp3PtoLKBkFCxzNAAAAAv5GnZOPnxU2_xh39nAYAh7-5B7B8rGNFAAA",
+          "lens": "model",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -1e-06, 1e-06, 787.558, 1)",
+          "sha256": "b0f231111c189a5461a15c07dd800b6bba0a081fb2689a18bcb47d007c4639d9"
+        },
+        {
+          "name": "model-close-shadows",
+          "path": "output/comet-grid/visuals/comet-9p-dpr-1-model-close-shadows.png",
+          "actions": "Same close camera, Shadows on.",
+          "url": "http://127.0.0.1:4258/comet-9p/?v=MEZAFp3PtoLKBkFCxzNAAAAAv5GnZOPnxU2_xh39nAYAh7-5B7B8rGNFAAA",
+          "lens": "model",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -1e-06, 1e-06, 787.558, 1)",
+          "sha256": "60a3d2a8f923050d8fd2f9338a44c06a1511b89f2ea5fa79099a2d354c777e81"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "comet-9p",
+      "dpr": 2,
+      "browser": "152.0.7977.76",
+      "headless": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "runtimeSha256": "50d0a8ce0b7268db41b61c931a934f3e1e377568e81a3f9a666e4a5ea7f537b2",
+      "loaded": [
+        {
+          "filename": "comet-9p-constraints-surface@2x.webp",
+          "bytes": 137110,
+          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb"
+        },
+        {
+          "filename": "comet-9p-constraints-shadow@2x.webp",
+          "bytes": 132610,
+          "sha256": "78803a5644ca1289b852e32a25ea7f2ccc9457139a3db039725171562df4f589"
+        },
+        {
+          "filename": "comet-9p-model-shadow@2x.webp",
+          "bytes": 123782,
+          "sha256": "41fbed14ee1a31790d9ae270206f93009e5352053a22d80f5c362fe957a071a7"
+        },
+        {
+          "filename": "comet-9p-model-surface@2x.webp",
+          "bytes": 123566,
+          "sha256": "7a466f80ad638e5fd036afcd4ac728a40c484023bc7330a4ffd4e79cb7f59e1c"
+        }
+      ],
+      "captures": [
+        {
+          "name": "constraints-shadows",
+          "path": "output/comet-grid/visuals/comet-9p-dpr-2-constraints-shadows.png",
+          "actions": "Default source-constraint view.",
+          "url": "http://127.0.0.1:4258/comet-9p/",
+          "lens": "constraints",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 1e-06, 0, 116.839, 1)",
+          "sha256": "061729df391f8db5c78c22376d035fe3c9e8df3f5efad750c9fc2741fc46bde7"
+        },
+        {
+          "name": "model",
+          "path": "output/comet-grid/visuals/comet-9p-dpr-2-model.png",
+          "actions": "Switch to the Shape model view at the same camera and lighting.",
+          "url": "http://127.0.0.1:4258/comet-9p/?v=MMZAK9BRrJpi_0FCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "lens": "model",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 1e-06, 0, 116.839, 1)",
+          "sha256": "dedfabb09fa99739a2c7acbbc3c909c94441eca023b07f2ffd41bf68c926a029"
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

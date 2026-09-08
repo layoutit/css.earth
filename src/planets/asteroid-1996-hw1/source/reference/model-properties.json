@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+  "diameterKm": 2.02,
+  "diameterInterpretation": "The 2.02 km volume-equivalent diameter in Magri et al. (2011), Table 3, with 8% uncertainty. Original vertices are not rescaled.",
+  "periodHours": 8.76243,
+  "poleEclipticJ2000Degrees": [
+    281,
+    -31
+  ],
+  "limitations": "The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj",
+    "vertices": 1392,
+    "faces": 2780,
+    "units": "km",
+    "firstVertexKm": [
+      0.604155,
+      0.025594,
+      0.74102
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      3.77735,
+      1.639145,
+      1.4922469999999999
+    ],
+    "volumeCubicKm": 4.336113147211365,
+    "volumeEquivalentRadiusKm": 1.0115887689052756,
+    "radialRangeKm": [
+      0.45037684541503686,
+      1.9546094624988388
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 2780,
+    "ambiguous": 499,
+    "maxErrorMeters": 1220.796783232171,
+    "sphereDirections": 8192,
+    "secondHits": 185
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2780,
+    "sourceVertices": 1392,
+    "weldedVertices": 1392,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 26,
+    "estimatedErrorMeters": 25.000890731811523,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 4316686561.466851
+    }
+  }
+}

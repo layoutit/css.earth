@@ -1,0 +1,396 @@
+{
+  "schema": "cssearth-comet-mesh-budget-decision@1",
+  "id": "comet-81p",
+  "selectedFaces": 996,
+  "reason": "The 1292- and 1494-face variants improve sampled geometry distances but show substantially slower draw cadence in this workload. Retain 996 faces for the PoC and disclose its finite-sample error measurements.",
+  "limitations": "Sequential development captures on a shared workstation, not a controlled hardware experiment or production guarantee. All candidates use the same initial camera, 64-pixel native triangles, Shadows enabled and drag workload. The shared navigation marker atlas still depicts the original 996-face reduction during all three trials.",
+  "geometryTrials": [
+    {
+      "targetFaces": 1000,
+      "maximumErrorMeters": 50,
+      "faces": 996,
+      "estimate": 49.45796585083008,
+      "mean": 11.735016428852187,
+      "p95": 31.165492774956803,
+      "worst": [
+        {
+          "distance": 83.27963547887273,
+          "index": 989,
+          "point": [
+            489.564,
+            -1832.58,
+            -655.722
+          ]
+        },
+        {
+          "distance": 92.40417857859954,
+          "index": 18890,
+          "point": [
+            611.2176666666668,
+            -1923.5532999999998,
+            -16.456633333333333
+          ]
+        },
+        {
+          "distance": 139.83592546395352,
+          "index": 2932,
+          "point": [
+            567.061,
+            -1771.5,
+            -31.176
+          ]
+        }
+      ]
+    },
+    {
+      "targetFaces": 1500,
+      "maximumErrorMeters": 50,
+      "faces": 1494,
+      "estimate": 35.43449401855469,
+      "mean": 8.375809994953435,
+      "p95": 22.654922650318507,
+      "worst": [
+        {
+          "distance": 62.361038777905854,
+          "index": 753,
+          "point": [
+            169.529,
+            -1438.37,
+            -595.428
+          ]
+        },
+        {
+          "distance": 66.92094258837378,
+          "index": 3669,
+          "point": [
+            373.432,
+            -1813.59,
+            185.683
+          ]
+        },
+        {
+          "distance": 75.85702073035523,
+          "index": 1382,
+          "point": [
+            11.9699,
+            1958.92,
+            581.586
+          ]
+        }
+      ]
+    },
+    {
+      "targetFaces": 2000,
+      "maximumErrorMeters": 50,
+      "faces": 1992,
+      "estimate": 28.587993621826172,
+      "mean": 6.624101558366062,
+      "p95": 18.37215714623725,
+      "worst": [
+        {
+          "distance": 62.361038777905854,
+          "index": 753,
+          "point": [
+            169.529,
+            -1438.37,
+            -595.428
+          ]
+        },
+        {
+          "distance": 66.92094258837378,
+          "index": 3669,
+          "point": [
+            373.432,
+            -1813.59,
+            185.683
+          ]
+        },
+        {
+          "distance": 75.85702073035523,
+          "index": 1382,
+          "point": [
+            11.9699,
+            1958.92,
+            581.586
+          ]
+        }
+      ]
+    }
+  ],
+  "additionalTrials": [
+    {
+      "targetFaces": 1100,
+      "regularize": false,
+      "faces": 1098,
+      "estimate": 49.45796585083008,
+      "mean": 10.840059986768056,
+      "p95": 29.23912337430156,
+      "max": 139.83592546395352
+    },
+    {
+      "targetFaces": 1200,
+      "regularize": false,
+      "faces": 1194,
+      "estimate": 44.65812683105469,
+      "mean": 10.062499478969032,
+      "p95": 27.5121396545453,
+      "max": 139.83592546395352
+    },
+    {
+      "targetFaces": 1300,
+      "regularize": false,
+      "faces": 1292,
+      "estimate": 41.44723129272461,
+      "mean": 9.495010279958256,
+      "p95": 25.80536479924686,
+      "max": 78.69562000115334
+    },
+    {
+      "targetFaces": 1000,
+      "regularize": true,
+      "error": "Source mesh reached 1052 faces at 49.689510345458984 m estimated error; requested 1000 within 50 m."
+    },
+    {
+      "targetFaces": 1200,
+      "regularize": true,
+      "faces": 1196,
+      "estimate": 45.69680404663086,
+      "mean": 9.983873538206431,
+      "p95": 27.178019112387595,
+      "max": 139.83592546395352
+    }
+  ],
+  "traces": [
+    {
+      "faces": 996,
+      "dpr": 1,
+      "revision": "9900bc96dcef00ed6b2f2b1f8bb2b17958175e02",
+      "report": "81p-budget-996-dpr-1.json",
+      "drawCadence": [
+        {
+          "thread": "76610:26952835",
+          "count": 366,
+          "intervals": {
+            "count": 365,
+            "totalMs": 6269.942,
+            "medianMs": 16.794,
+            "p95Ms": 19.597,
+            "maxMs": 69.438,
+            "over33ms": 1,
+            "over50ms": 1
+          }
+        }
+      ],
+      "nodes": 26826,
+      "retained": true,
+      "errors": [],
+      "interactionRequests": []
+    },
+    {
+      "faces": 996,
+      "dpr": 2,
+      "revision": "9900bc96dcef00ed6b2f2b1f8bb2b17958175e02",
+      "report": "81p-budget-996-dpr-2.json",
+      "drawCadence": [
+        {
+          "thread": "77350:26955442",
+          "count": 380,
+          "intervals": {
+            "count": 379,
+            "totalMs": 6536.349,
+            "medianMs": 16.737,
+            "p95Ms": 19.933,
+            "maxMs": 79.868,
+            "over33ms": 3,
+            "over50ms": 1
+          }
+        }
+      ],
+      "nodes": 26826,
+      "retained": true,
+      "errors": [],
+      "interactionRequests": []
+    },
+    {
+      "faces": 1292,
+      "dpr": 1,
+      "revision": "4712b50637a3bc9e237358bdac9294771e912171",
+      "report": "81p-budget-1292-dpr-1.json",
+      "drawCadence": [
+        {
+          "thread": "19731:27043525",
+          "count": 375,
+          "intervals": {
+            "count": 374,
+            "totalMs": 8852.528,
+            "medianMs": 23.634,
+            "p95Ms": 32.635,
+            "maxMs": 80.742,
+            "over33ms": 18,
+            "over50ms": 4
+          }
+        }
+      ],
+      "nodes": 27122,
+      "retained": true,
+      "errors": [],
+      "interactionRequests": []
+    },
+    {
+      "faces": 1292,
+      "dpr": 2,
+      "revision": "4712b50637a3bc9e237358bdac9294771e912171",
+      "report": "81p-budget-1292-dpr-2.json",
+      "drawCadence": [
+        {
+          "thread": "20449:27045839",
+          "count": 382,
+          "intervals": {
+            "count": 381,
+            "totalMs": 8885.301,
+            "medianMs": 22.83,
+            "p95Ms": 32.957,
+            "maxMs": 78.237,
+            "over33ms": 19,
+            "over50ms": 5
+          }
+        }
+      ],
+      "nodes": 27122,
+      "retained": true,
+      "errors": [],
+      "interactionRequests": []
+    },
+    {
+      "faces": 1494,
+      "dpr": 1,
+      "revision": "062fd5986eb6b7b4d8edfdda5de7895b2e0ee5be",
+      "report": "81p-budget-1494-dpr-1.json",
+      "drawCadence": [
+        {
+          "thread": "4235:27004063",
+          "count": 393,
+          "intervals": {
+            "count": 392,
+            "totalMs": 10936.156,
+            "medianMs": 27.924,
+            "p95Ms": 46.859,
+            "maxMs": 84.358,
+            "over33ms": 79,
+            "over50ms": 9
+          }
+        }
+      ],
+      "nodes": 27324,
+      "retained": true,
+      "errors": [],
+      "interactionRequests": []
+    },
+    {
+      "faces": 1494,
+      "dpr": 2,
+      "revision": "062fd5986eb6b7b4d8edfdda5de7895b2e0ee5be",
+      "report": "81p-budget-1494-dpr-2.json",
+      "drawCadence": [
+        {
+          "thread": "5598:27007852",
+          "count": 391,
+          "intervals": {
+            "count": 390,
+            "totalMs": 11151.128,
+            "medianMs": 28.393,
+            "p95Ms": 49.116,
+            "maxMs": 82.748,
+            "over33ms": 105,
+            "over50ms": 17
+          }
+        }
+      ],
+      "nodes": 27324,
+      "retained": true,
+      "errors": [],
+      "interactionRequests": []
+    }
+  ],
+  "control": {
+    "id": "comet-67p",
+    "report": "81p-budget-control-67p.json",
+    "drawCadence": [
+      {
+        "thread": "8652:27015134",
+        "count": 362,
+        "intervals": {
+          "count": 361,
+          "totalMs": 6099.356,
+          "medianMs": 16.715,
+          "p95Ms": 18.551,
+          "maxMs": 61.56,
+          "over33ms": 1,
+          "over50ms": 1
+        }
+      }
+    ]
+  },
+  "atlases": [
+    {
+      "faces": 996,
+      "files": [
+        {
+          "filename": "comet-81p-model-surface@2x.webp",
+          "width": 1024,
+          "height": 4032,
+          "installBytes": 163714,
+          "rgbaBytes": 16515072
+        },
+        {
+          "filename": "comet-81p-model-shadow@2x.webp",
+          "width": 1024,
+          "height": 4032,
+          "installBytes": 131344,
+          "rgbaBytes": 16515072
+        }
+      ],
+      "interpretation": "Calculated RGBA pixel storage, not measured GPU residency. Native u leaves are 64 by 64 CSS pixels before their prepared transforms."
+    },
+    {
+      "faces": 1292,
+      "files": [
+        {
+          "filename": "comet-81p-model-surface@2x.webp",
+          "width": 1024,
+          "height": 5184,
+          "installBytes": 197928,
+          "rgbaBytes": 21233664
+        },
+        {
+          "filename": "comet-81p-model-shadow@2x.webp",
+          "width": 1024,
+          "height": 5184,
+          "installBytes": 155872,
+          "rgbaBytes": 21233664
+        }
+      ],
+      "interpretation": "Calculated RGBA pixel storage, not measured GPU residency. Native u leaves are 64 by 64 CSS pixels before their prepared transforms."
+    },
+    {
+      "faces": 1494,
+      "files": [
+        {
+          "filename": "comet-81p-model-surface@2x.webp",
+          "width": 1024,
+          "height": 6016,
+          "installBytes": 220612,
+          "rgbaBytes": 24641536
+        },
+        {
+          "filename": "comet-81p-model-shadow@2x.webp",
+          "width": 1024,
+          "height": 6016,
+          "installBytes": 171400,
+          "rgbaBytes": 24641536
+        }
+      ],
+      "interpretation": "Calculated RGBA pixel storage, not measured GPU residency. Native u leaves are 64 by 64 CSS pixels before their prepared transforms."
+    }
+  ]
+}

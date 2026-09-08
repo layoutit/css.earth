@@ -61,6 +61,16 @@ test("accepts one bound factory and the real existing Moon plan; static proof ne
   assert.match(report.sourceHashes["site/objects.mjs"], /^[a-f0-9]{64}$/);
   assert.deepEqual(report.entries[0].entry, { file: client, exported: "mountMoonClient", registry: "site/objects.mjs" });
 });
+test("evicted source bytes must still match their first audit observation", async () => {
+  const registryFile = "site/objects.mjs";
+  const options = fixture({ [registryFile]: registrySource + "\n//" + " ".repeat(17 * 1024 * 1024) });
+  const readText = options.readText;
+  let observations = 0;
+  await assert.rejects(auditObjectRuntimeOwnership({ ...options, readText: async path => {
+    const text = await readText(path);
+    return path === resolve(root, registryFile) && ++observations > 1 ? text + "changed" : text;
+  } }), /Source changed during runtime ownership audit: site\/objects\.mjs/);
+});
 test("follows imported helpers instead of trusting a thin client", async () => {
   const options = fixture({ [prefix + "hidden.mjs"]: "export function hidden() { return new Image(); }" },
     "\nimport { hidden } from './hidden.mjs'; hidden();");

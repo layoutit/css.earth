@@ -1,0 +1,84 @@
+{
+  "retrievedOn": "2026-09-08",
+  "qualification": "Unqualified archive candidates; no mapped imagery selected.",
+  "query": "https://opus.pds-rings.seti.org/opus/api/data.json?planet=Jupiter&mission=Cassini&cols=opusid%2CSURFACEGEOhimalia_centerresolution1%2CSURFACEGEOhimalia_centerphaseangle1&order=SURFACEGEOhimalia_centerresolution1&limit=12&SURFACEGEOhimalia_centerresolution1=0",
+  "result": {
+    "start_obs": 1,
+    "limit": 12,
+    "count": 12,
+    "available": 93,
+    "order": "SURFACEGEOhimalia_centerresolution1,opusid",
+    "labels": [
+      "OPUS ID",
+      "Body Center Resolution (Min) [Himalia] (km/pixel)",
+      "Phase Angle at Body Center (Min) [Himalia] (degrees)"
+    ],
+    "columns": [
+      "OPUS ID",
+      "Body Center Resolution (Min) [Himalia] (km/pixel)",
+      "Phase Angle at Body Center (Min) [Himalia] (degrees)"
+    ],
+    "page": [
+      [
+        "co-iss-n1355869401",
+        "26.60356",
+        "69.122"
+      ],
+      [
+        "co-iss-n1355869319",
+        "26.60357",
+        "69.112"
+      ],
+      [
+        "co-iss-n1355869352",
+        "26.60357",
+        "69.116"
+      ],
+      [
+        "co-iss-n1355869279",
+        "26.60358",
+        "69.107"
+      ],
+      [
+        "co-iss-n1355869246",
+        "26.60359",
+        "69.102"
+      ],
+      [
+        "co-iss-n1355869213",
+        "26.6036",
+        "69.098"
+      ],
+      [
+        "co-iss-n1355869131",
+        "26.60361",
+        "69.087"
+      ],
+      [
+        "co-iss-n1355869164",
+        "26.60361",
+        "69.092"
+      ],
+      [
+        "co-iss-n1355869098",
+        "26.60362",
+        "69.083"
+      ],
+      [
+        "co-iss-n1355869058",
+        "26.60363",
+        "69.078"
+      ],
+      [
+        "co-iss-n1355869025",
+        "26.60364",
+        "69.074"
+      ],
+      [
+        "co-iss-n1355868992",
+        "26.60365",
+        "69.069"
+      ]
+    ]
+  }
+}

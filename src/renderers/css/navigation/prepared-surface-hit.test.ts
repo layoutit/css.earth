@@ -29,3 +29,13 @@ test('transparent cap corners cannot hide a painted plane behind them', () => {
   expect(() => validateSurfaceDiscs([{ ...discs[0], triangleCount: 4 }], 3)).toThrow();
   expect(() => validateSurfaceDiscs([{ ...discs[0], axisV: [1, 0, 0] }], 3)).toThrow();
 });
+
+test('an open surface targets its painted side and rejects the same triangle from behind', () => {
+  const mesh: readonly SurfaceTriangle[] = [[[0,0,0],[1,0,0],[0,1,0]]];
+  expect(rayHitsPreparedTriangles([.2,.2,2],[0,0,-1],mesh,'counter-clockwise')).toBe(true);
+  expect(rayHitsPreparedTriangles([.2,.2,-2],[0,0,1],mesh,'counter-clockwise')).toBe(false);
+  expect(rayHitsPreparedTriangles([.2,.2,-2],[0,0,1],mesh,'clockwise')).toBe(true);
+  expect(rayHitsPreparedTriangles([.2,.2,2],[0,0,-1],mesh,'clockwise')).toBe(false);
+  // Existing closed-surface plans keep their original double-sided behavior.
+  expect(rayHitsPreparedTriangles([.2,.2,-2],[0,0,1],mesh)).toBe(true);
+});

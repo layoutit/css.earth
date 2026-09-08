@@ -1,0 +1,39 @@
+{
+  "schema": "cssearth-halley-giotto-validation@1",
+  "scope": "Source intake only; no application or prepared runtime changes.",
+  "testsPassed": 1788,
+  "sourceObjectsVerified": 76,
+  "checks": [
+    {
+      "command": "node --test tools/inspect-halley-giotto.test.mjs",
+      "exitCode": 0,
+      "log": "output/comet-intake/halley-giotto/focused-tests.log",
+      "bytes": 501,
+      "sha256": "f097bcfbe3bb0f0c7f9d9beb9563808864c89dbf41bd0c4a282bb082d3337576"
+    },
+    {
+      "command": "node tools/objects/comet-1p/inspect-giotto.mjs",
+      "exitCode": 0,
+      "log": "output/comet-intake/halley-giotto/offline-run.log",
+      "bytes": 227,
+      "sha256": "34c93aac117be15634b6ff7a4171ac2fd98649d8003fdd8dbb28b4a69ccba3f2"
+    },
+    {
+      "command": "pnpm acquire:planets -- --verify-only",
+      "exitCode": 0,
+      "log": "output/comet-intake/halley-giotto/source-verification.log",
+      "bytes": 6682,
+      "sha256": "128bc89e4a02ee9b7d4489795df5aa43f1505262177b0094e1cccccd7b151c80"
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "log": "output/comet-intake/halley-giotto/unit-tests.log",
+      "bytes": 100609,
+      "sha256": "42d54c576d1928d632ceec7b6c21f26ec2f4151e02cb7e797ad7189fc77dcd97"
+    }
+  ],
+  "independentCheck": "Python/NumPy agrees on all seven headers, sample ranges, validity counts, display percentiles and padding sizes.",
+  "visualCheck": "Generated seven-frame contact sheet inspected at original output size.",
+  "readiness": "UNQUALIFIED_SURFACE_LENS; no build/browser/drag requalification claimed."
+}

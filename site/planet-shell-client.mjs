@@ -20,13 +20,15 @@ export function mountPlanetShell({
   onHeliosphereChange = () => {},
   asteroidOrbitsEnabled = false,
   onAsteroidOrbitsChange = () => {},
+  asteroidLabelsEnabled = false,
+  onAsteroidLabelsChange = () => {},
 }) {
   const drawer = documentTarget.querySelector(".planet-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
-  let settingsController, objectBrowser, contentLifetime, minimapController, viewReadout;
+  let settingsController, objectBrowser, contentLifetime, minimapController, viewReadout, sidebarCollapse;
   let selectionPreview = null;
   let overview = false, overviewScope = 'solar-system', camera = null, unsubscribeOverview = null;
   lifetime.onDispose(() => unsubscribeOverview?.());
@@ -44,10 +46,12 @@ export function mountPlanetShell({
   }
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
+    sidebarCollapse = own(createSidebarCollapseController(documentTarget));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
+      onShowPanel: () => sidebarCollapse.expand(),
     }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => selectionPreview?.restore());
@@ -97,6 +101,7 @@ export function mountPlanetShell({
       const contrast = documentTarget.querySelector('.planet-sky-contrast-setting').checked;
       disposeContent();
       content.apply({ preserveSidebar });
+      sidebarCollapse.updateControls();
       overview = false; overviewScope = 'solar-system';
       objectBrowser.setObject(content.name);
       mountContent(content.id, motion, contrast);
@@ -140,9 +145,10 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled,
+      { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
+        onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
       }, owner));
     const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
@@ -250,7 +256,7 @@ function createSettingsController(
   documentTarget,
   windowTarget,
   { motionEnabled, onMotionChange, highContrastSky = false, heliosphereEnabled, onHeliosphereChange,
-    asteroidOrbitsEnabled, onAsteroidOrbitsChange },
+    asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange },
   lifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -259,6 +265,7 @@ function createSettingsController(
   const motion = documentTarget.querySelector(".planet-motion-setting");
   const heliosphere = documentTarget.querySelector(".planet-heliosphere-setting");
   const asteroidOrbits = documentTarget.querySelector(".planet-asteroid-orbits-setting");
+  const asteroidLabels = documentTarget.querySelector(".planet-asteroid-labels-setting");
   const skyContrast = documentTarget.querySelector(
     ".planet-sky-contrast-setting",
   );
@@ -268,6 +275,7 @@ function createSettingsController(
   if (!(motion instanceof windowTarget.HTMLInputElement) ||
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
       !(asteroidOrbits instanceof windowTarget.HTMLInputElement) ||
+      !(asteroidLabels instanceof windowTarget.HTMLInputElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
       !(skyContrast instanceof windowTarget.HTMLInputElement)) {
     throw new Error("Planet shell settings controls are incomplete.");
@@ -307,6 +315,16 @@ function createSettingsController(
     onAsteroidOrbitsChange(asteroidOrbitsEnabled);
   }, { signal: events.signal });
   renderAsteroidOrbits();
+  const renderAsteroidLabels = () => {
+    asteroidLabels.checked = asteroidLabelsEnabled === true;
+    documentTarget.body.dataset.asteroidLabels = asteroidLabels.checked ? 'on' : 'off';
+  };
+  asteroidLabels.addEventListener("change", () => {
+    asteroidLabelsEnabled = asteroidLabels.checked;
+    renderAsteroidLabels();
+    onAsteroidLabelsChange(asteroidLabelsEnabled);
+  }, { signal: events.signal });
+  renderAsteroidLabels();
   renderMotion();
   renderSkyContrast();
 
@@ -337,6 +355,44 @@ function createSettingsController(
   });
 }
 
+function createSidebarCollapseController(documentTarget) {
+  const sidebar = documentTarget.querySelector('.planet-sidebar');
+  const toggle = documentTarget.querySelector('.planet-sidebar-collapse');
+  const search = documentTarget.querySelector('.planet-sidebar-search');
+  const trigger = documentTarget.querySelector('.planet-sidebar-view-all');
+  if (!sidebar || !toggle || !search || !trigger) {
+    throw new Error('Planet shell sidebar collapse controls are incomplete.');
+  }
+  const events = new AbortController();
+  let collapsed = false;
+  const updateControls = () => toggle.setAttribute('aria-controls', sidebar.id);
+  const setCollapsed = next => {
+    collapsed = next;
+    if (next) documentTarget.body.dataset.sidebarCollapsed = 'true';
+    else delete documentTarget.body.dataset.sidebarCollapsed;
+    sidebar.inert = next;
+    const label = next ? 'Expand sidebar' : 'Collapse sidebar';
+    toggle.setAttribute('aria-expanded', String(!next));
+    toggle.setAttribute('aria-label', label);
+    toggle.setAttribute('title', label);
+  };
+  toggle.addEventListener('click', () => setCollapsed(!collapsed), { signal: events.signal });
+  // Categories dispatch input through the same search field. Reveal results
+  // before the existing keyboard handler can focus a result inside the sidebar.
+  search.addEventListener('input', () => setCollapsed(false), { signal: events.signal });
+  search.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === 'ArrowDown') setCollapsed(false);
+  }, { signal: events.signal });
+  trigger.addEventListener('click', () => setCollapsed(false), { signal: events.signal });
+  updateControls();
+  setCollapsed(false);
+  return {
+    updateControls,
+    expand() { setCollapsed(false); },
+    destroy() { events.abort(); setCollapsed(false); },
+  };
+}
+
 function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   const search = documentTarget.querySelector(".planet-sidebar-search");
   const searchCard = documentTarget.querySelector(".planet-sidebar-search-card");
@@ -363,7 +419,6 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     details, items: [...details.querySelectorAll('.planet-object-item')], open: details.open,
   }));
   let filteringGroups = false;
-  const introduction = system?.querySelector('.planet-introduction');
 
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
@@ -388,8 +443,19 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   mountEntityContent();
   let open = false;
   let browsing = false;
+  const categoryButtons = [...documentTarget.querySelectorAll('.planet-search-category')];
+  const markCategory = (classification = null) => {
+    for (const button of categoryButtons) {
+      button.ariaPressed = String(button.dataset.searchClassification === classification);
+    }
+  };
   const filter = () => {
-    const query = search.value.trim().toLocaleLowerCase("en");
+    markCategory();
+    // Clearing the field restores the current card without refilling the input.
+    const query = search.value.trim().toLocaleLowerCase("en")
+      || (overview ? overviewName().toLocaleLowerCase("en") : "");
+    information.hidden = query.length > 0;
+    destinations?.setOpen(query.length > 0);
     const galactic = query === 'milky way';
     if (galaxy) galaxy.hidden = !galactic;
     if (system) system.hidden = galactic;
@@ -404,10 +470,10 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       const name = item.dataset.objectClassificationName;
       return name && (query === name || query === `${name}s` || query === item.dataset.objectClassification);
     })?.dataset.objectClassification;
+    markCategory(classification);
     const systemName = items.find(item =>
       query === item.dataset.objectSystemName)?.dataset.objectSystemName;
     const filtering = !systemName && !showAll;
-    if (introduction) introduction.hidden = filtering;
     if (filtering && !filteringGroups) for (const group of groups) group.open = group.details.open;
     visibleObjects = 0;
     void destinations?.search(classification || systemName || showAll ? "" : query);
@@ -421,7 +487,8 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     browser.hidden = false;
     let visible = 0;
     for (const item of items) {
-      const match = showAll || (classification ? item.dataset.objectClassification === classification
+      const match = showAll || (classification ? (item.dataset.objectClassification === classification
+        || (classification === "planet" && item.dataset.objectClassification === "dwarf-planet"))
         : systemName ? item.dataset.objectSystemName === systemName
         : (item.dataset.objectName ?? "").includes(query));
       item.hidden = !match;
@@ -450,40 +517,48 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     if (!next) search.value = currentSearchValue;
     information.hidden = next;
     browser.hidden = !next;
-    trigger.ariaPressed = String(next);
-    trigger.ariaLabel = overview ? `Show ${overviewName()}` : next
-      ? `Show ${selectedSearchValue} information`
-      : "View all objects";
-    trigger.textContent = "×";
     if (next) filter();
+    else markCategory();
   };
 
   trigger.addEventListener("click", () => {
-    browsing = !open;
-    if (open) render(false);
-    else render(true, { resetQuery: true });
+    browsing = true;
+    render(true);
+    search.focus();
   }, {
     signal: events.signal,
   });
+  for (const button of categoryButtons) {
+    button.addEventListener('click', () => {
+      search.value = button.dataset.searchQuery;
+      search.dispatchEvent(new windowTarget.Event('input', { bubbles: true }));
+      documentTarget.querySelector('.planet-sidebar').scrollTop = 0;
+    }, { signal: events.signal });
+    button.addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      render(false);
+      search.focus();
+    }, { signal: events.signal });
+  }
   galaxy?.querySelector('[data-browse-solar-system]')?.addEventListener('click', event => {
     event.preventDefault();
     browsing = true;
     search.value = 'Solar System'; render(true);
   }, { signal: events.signal });
-  information.addEventListener("click", (event) => {
-    const tag = event.target instanceof windowTarget.HTMLElement
+  for (const panel of [information, browser]) panel.addEventListener("click", (event) => {
+    const crumb = event.target instanceof windowTarget.HTMLElement
       ? event.target.closest("[data-object-query]") : null;
-    if (!tag || !information.contains(tag)) return;
-    search.value = tag.dataset.objectQuery;
-    browsing = true;
-    render(true);
+    if (!crumb || !panel.contains(crumb)) return;
+    search.value = crumb.dataset.objectQuery;
+    search.dispatchEvent(new windowTarget.Event('input', { bubbles: true }));
   }, { signal: events.signal });
   search.addEventListener("input", () => {
     browsing = true;
     if (!open) render(true);
     else if (open) filter();
   }, { signal: events.signal });
-  const visibleControl = element => !element.disabled && !element.closest('[hidden]') && element.getClientRects().length > 0;
+  const visibleControl = element => !element.disabled && !element.closest('[hidden], .planet-breadcrumbs') && element.getClientRects().length > 0;
   search.addEventListener("keydown", (event) => {
     if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
       const first = [...browser.querySelectorAll("a, button")].find(visibleControl);

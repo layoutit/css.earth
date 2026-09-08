@@ -3,6 +3,9 @@ export interface Sprite {url?:string;index:number;count:number;size:number;}
 export interface SpriteWithUrl extends Sprite {url:string;}
 export interface PhaseAtlas {url:string;columns:number;rowCount:number;frameCount:number;minimumLightViewZ:number;maximumLightViewZ:number;baseLightAzimuthDegrees:number;}
 export interface SystemMarkers {url:string;sun:Sprite;bodies:Readonly<Record<string,Sprite>>;phase:PhaseAtlas;}
+// This writer owns the line styles. Keep the last publication in JS so a
+// redundant-write check never asks CSSOM to serialize thousands of matrices.
+const pieceStyles = new WeakMap<HTMLElement, { transform: string; opacity: string }>();
 // Writes screen-space segments onto a piece pool: each piece is a unit-width
 // bar laid out at the overlay's centre, so the projection's centre-relative
 // offsets are the translation as they are and the segment is the bar's x
@@ -16,12 +19,15 @@ export function writePieces(pool:readonly HTMLElement[], segments:readonly Orbit
     const dy = y1 - y0;
     const length = Math.hypot(dx, dy);
     const piece = pool[index];
-    piece.style.transform = `matrix(${formatNumber(dx)},${formatNumber(dy)},${
-      formatNumber(-dy / length)},${formatNumber(dx / length)},${
-      formatNumber(x0)},${formatNumber(y0)})`;
+    let written = pieceStyles.get(piece);
+    if (!written) { written = { transform: '', opacity: '' }; pieceStyles.set(piece, written); }
+    const transform = `matrix(${formatNumber(dx)}, ${formatNumber(dy)}, ${
+      formatNumber(-dy / length)}, ${formatNumber(dx / length)}, ${
+      formatNumber(x0)}, ${formatNumber(y0)})`;
+    if (written.transform !== transform) { piece.style.transform = transform; written.transform = transform; }
     // The chord's trail weight: the line fades backwards from the body.
     const opacity = formatNumber(weight);
-    if (piece.style.opacity !== opacity) piece.style.opacity = opacity;
+    if (written.opacity !== opacity) { piece.style.opacity = opacity; written.opacity = opacity; }
     if (setVisible) setVisible(index, true);
     else if (piece.style.visibility !== "") piece.style.visibility = "";
   }

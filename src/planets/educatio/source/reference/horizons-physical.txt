@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272440%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              2440 Educatio (1978 VQ4)         2026-Sep-08 10:26:08
+Rec #:    2440 (+COV) Soln.date: 2026-Jun-05_06:31:26   # obs: 9058 (1928-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458441.5 ! 2018-Nov-19.00 (TDB)         Residual RMS= .22607
+   EC= .1627754322109971   QR= 1.855089382910696   TP= 2457942.0878036963
+   OM= 227.195987040297    W=  77.86887511176963   IN= 4.105980128458515
+   A= 2.215760805741447    MA= 149.2378226639951   ADIST= 2.576432228572199
+   PER= 3.29832            N= .298826948           ANGMOM= .025264563
+   DAN= 2.08571            DDN= 2.23345            L= 305.0345733
+   B= 4.0141384            MOID= .84546399         TP= 2017-Jul-07.5878036963
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 3.293              ROTPER= 1561.
+   H= 13.36                G= .150                 B-V= n.a.
+                           ALBEDO= .247            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#72, OCC=0
+2: source=ORB
+*******************************************************************************

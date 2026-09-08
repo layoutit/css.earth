@@ -220,6 +220,14 @@ The added inner Neptunian moons use daily Horizons element samples over
 (Naiad),105km(Thalassa),64km(Despina), and55km(Galatea). These are observed
 fit residuals of the shared precessing-ellipse model, not trajectory error bounds.
 
+Comet placement uses Horizons osculating elements at JD 2461286.5 with separate
+geometric vector fixtures. Halley (1P, JPL#75) differs by 1.862 mm at that epoch;
+the maximum measured discrepancy at ±30 days is 557.99 km, under a 642 km
+regression guard and the common 10,000 km nearby-placement budget. This conic
+does not model perturbations or outgassing and has no qualified long-term range.
+Halley's 4.579 km registry radius describes the volume of the historical Stooke
+grid mesh, not a precise observed mean radius. Its display attitude is object-owned.
+
 Nix, Hydra, Kerberos and Styx use daily 2020–2032 element fits about the
 Pluto-system barycentre. Their public position/state APIs still return vectors
 relative to Pluto's physical centre: the generic `barycentreCompanion` record
@@ -258,3 +266,57 @@ is not an N-body integration or a qualified extrapolation outside that interval.
 Position and velocity evaluate the same phase correction and its derivative.
 Worst residuals at the six independent fixture epochs are 940 km, 2030 km and
 307 km respectively. These are sampled fit errors, not universal error bounds.
+
+Nereid and Himalia use current-era Horizons fits (2020–2032, five-day sampling).
+Nereid’s six independent vector epochs have a maximum position residual of 10,417.20
+km (0.19% of the fitted semimajor axis; regression guard 11,980 km). Its zero
+modeled GM means its mass is omitted, not physically zero.
+
+Himalia retains the longitude correction and adds ten prepared periodic ICRF
+position-residual terms per axis. The common harmonic fitter derives them from
+the same Horizons osculating samples, with no trend term and a minimum frequency
+separation of one quarter of the fit window’s fundamental frequency. This prevents
+nearly identical frequencies from producing enormous cancelling coefficients.
+The runtime evaluates the displacement and its analytic derivative; the frame
+extent includes the conservative sum-of-amplitudes bound for that displacement.
+
+At the six committed independent epochs, Himalia’s maximum residual falls from
+645,823.51 km to **54,960.51 km** (0.48% of semimajor axis; guard 63,205 km), with
+maximum angular error 0.2625° and radial residual 0.4460%, inside the common 2%
+radial guard again. A separate 37-epoch Horizons check, including points near both
+ends of the fit interval and the prepared 2026-09-03 epoch, measures a maximum
+85,166.41 km (previously 698,845.15 km) and 0.4141°. These are sampled fit
+residuals, not universal bounds or measured orbit uncertainties; the series is
+not precision tracking or qualified extrapolation beyond 2020–2032.
+
+Siarnaq and Ymir use the same bounded ICRF correction, with ten terms per axis
+and five-day 2020–2032 source samples (Horizons `629`/`619`, centre `500@699`,
+`sat456_merged_DE440`, geometric ICRF, KM-D, TDB). Their six independent fixture
+maxima fall from 2,621,256.80 / 2,899,606.37 km to 280,355.57 / 161,334.73 km;
+regression guards are 322,409 / 185,535 km. A separate 37-epoch check measures
+321,402.18 / 231,068.85 km, maximum angular errors 1.6075° / 0.4930°, and radial
+errors 1.3217% / 0.8681%, inside the common 2% guard. At the prepared scene epoch
+JD 2461286.5 their errors are 65,156.31 / 63,686.55 km (0.1388° / 0.1609°).
+These remain approximate previews, with no precision or extrapolation claim.
+
+
+Kiviuq and Albiorix use source-fitted orbital previews at Horizons targets 624/626
+relative to Saturn (500@699), geometric ICRF, KM-D, TDB. Kiviuq uses five-day
+samples from 2020-01-01 through the last returned row on 2031-12-29, with ten
+bounded residual harmonics per axis. Albiorix uses daily samples through
+2032-01-01, a longitude correction and 512 cosine residual terms per axis.
+The latter is a truncated DCT-I with an even periodic extension, converted to
+the same midpoint-referenced bounded series evaluated by the existing runtime.
+Its endpoint velocity is not a measured dynamical solution; no velocity-accuracy
+or extrapolation claim accompanies the position checks.
+
+At the six independent committed epochs, maximum position residuals are
+28,145.69 / 18,473.58 km (Kiviuq / Albiorix), with regression guards of
+32,368 / 21,245 km. Independent additional vector checks, source URLs and
+limitations are retained in each body's source/validation/orbit-checks.json.
+The generator records actual returned sampling limits, which can precede a
+requested stop date when the cadence does not divide the interval exactly.
+
+Use `node tools/generate-satellites.mjs --object=kiviuq,albiorix` from this
+package to regenerate selected records while preserving the other checked
+records. Omitting the selection still runs the complete generator.

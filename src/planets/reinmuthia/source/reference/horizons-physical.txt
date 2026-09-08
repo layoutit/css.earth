@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271111%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              1111 Reinmuthia (1927 CO)        2026-Sep-08 10:25:55
+Rec #:    1111 (+COV) Soln.date: 2026-Jun-05_04:30:36   # obs: 6525 (1927-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458391.5 ! 2018-Sep-30.00 (TDB)         Residual RMS= .22045
+   EC= .1010885655564908   QR= 2.691070550662491   TP= 2458162.4193712454
+   OM= 132.4327392792804   W=  236.1054836938928   IN= 3.891464952326079
+   A= 2.993699320699438    MA= 43.58932784198367   ADIST= 3.296328090736385
+   PER= 5.17989            N= .190279414           ANGMOM= .029611139
+   DAN= 3.14013            DDN= 2.80498            L= 8.476976199999999
+   B= -3.2293982           MOID= 1.69169998        TP= 2018-Feb-12.9193712454
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= n.a.               ROTPER= 4.00668
+   H= 10.56                G= .150                 B-V= .639
+                           ALBEDO= n.a.            STYP= FXU:
+
+ASTEROID comments: 
+1: soln ref.= JPL#72, OCC=0
+2: source=ORB
+*******************************************************************************

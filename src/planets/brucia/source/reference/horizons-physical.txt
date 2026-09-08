@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27323%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                323 Brucia (A891 YB)           2026-Sep-08 10:25:21
+Rec #:     323 (+COV) Soln.date: 2026-Jun-05_03:27:31   # obs: 5872 (1891-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457774.5 ! 2017-Jan-21.00 (TDB)         Residual RMS= .21169
+   EC= .3006203722042158   QR= 1.665929296477936   TP= 2457602.7376130465
+   OM= 97.40165891252992   W=  291.2471048056424   IN= 24.23051935241368
+   A= 2.382010041854379    MA= 46.04863474077759   ADIST= 3.098090787230822
+   PER= 3.67641            N= .268094986           ANGMOM= .025321242
+   DAN= 1.95388            DDN= 2.43165            L= 30.4942986
+   B= -22.4893547          MOID= .80537701         TP= 2016-Aug-02.2376130465
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 13.857             ROTPER= 9.463
+   H= 9.49                 G= .150                 B-V= .893
+                           ALBEDO= .295            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#74, OCC=0
+2: source=ORB
+*******************************************************************************

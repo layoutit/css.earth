@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27933%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 933 Susi (1927 CH)            2026-Sep-08 10:25:45
+Rec #:     933 (+COV) Soln.date: 2026-Jun-05_04:14:49  # obs: 13013 (1927-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458359.5 ! 2018-Aug-29.00 (TDB)         Residual RMS= .21734
+   EC= .1653931238994753   QR= 1.976584152609301   TP= 2458234.0916961753
+   OM= 141.4720421768381   W=  13.22732694826861   IN= 5.538767685563936
+   A= 2.368281653566475    MA= 33.91410355302879   ADIST= 2.759979154523649
+   PER= 3.64467            N= .270429489           ANGMOM= .026108103
+   DAN= 1.98405            DDN= 2.74554            L= 154.6397688
+   B= 1.2654841            MOID= .98889399         TP= 2018-Apr-25.5916961753
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 10.91              ROTPER= 4.6222
+   H= 12.74                G= .150                 B-V= n.a.
+                           ALBEDO= .0707           STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#75, OCC=0
+2: source=ORB
+*******************************************************************************

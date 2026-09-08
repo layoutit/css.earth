@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-67p",
+  "displayName": "67P",
+  "panel": {
+    "introduction": "67P/Churyumov–Gerasimenko is the two-lobed comet explored by Rosetta. Rotate its measured nucleus to inspect the narrow neck, steep cliffs and recessed terrain.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Equivalent diameter",
+        "value": "About 3.3 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation before perihelion",
+        "value": "12.4041 hours"
+      },
+      {
+        "id": "mission",
+        "label": "Explored by",
+        "value": "Rosetta · 2014–2016"
+      },
+      {
+        "id": "shape",
+        "label": "Nucleus model",
+        "value": "ESA/RMOC MTP019"
+      },
+      {
+        "id": "source-epoch",
+        "label": "Shape observations",
+        "value": "6 August 2014 – 25 August 2015"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "rendering",
+        "label": "Presentation",
+        "value": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model",
+      "osiris": "OSIRIS mosaic"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch.",
+        "title": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch.",
+        "detail": "Rosetta nucleus",
+        "thumbnail": "/scenes/comet-67p/comet-67p-model-thumbnail.webp",
+        "surface": "comet-67p-model-surface@2x.webp",
+        "poles": "comet-67p-model-poles@2x.webp",
+        "source": {
+          "id": "mtp019",
+          "path": "../manifest.json",
+          "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ"
+        }
+      },
+      {
+        "id": "osiris",
+        "label": "OSIRIS mosaic",
+        "description": "Four OSIRIS orange-filter observations, 5–6 August 2014. Grayscale with approximate illumination correction and bounded brightness matching; photographed shadows and some seams remain. Gray grid marks missing or rejected imagery. Shadows off shows the mosaic uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map.",
+        "title": "Four OSIRIS orange-filter observations, 5–6 August 2014. Grayscale with approximate illumination correction and bounded brightness matching; photographed shadows and some seams remain. Gray grid marks missing or rejected imagery. Shadows off shows the mosaic uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map.",
+        "detail": "Rosetta · 5–6 Aug 2014",
+        "thumbnail": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
+        "surface": "comet-67p-osiris-surface@2x.webp",
+        "poles": "comet-67p-osiris-poles@2x.webp",
+        "source": {
+          "id": "osiris-20140805-geo",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": true
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "ESA/RMOC",
+      "role": "surface",
+      "description": "MTP019 measured shape and reference frame",
+      "href": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/"
+    },
+    {
+      "label": "ESA/Rosetta/MPS · OSIRIS",
+      "role": "observations",
+      "description": "Four calibrated orange-filter images, corrected geometry and matching detector-quality companions; CC BY-SA 4.0.",
+      "href": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/"
+    },
+    {
+      "label": "ESA/Rosetta/NAVCAM",
+      "role": "observations",
+      "description": "NAVCAM observation of the nucleus and its surroundings on 20 July 2015",
+      "href": "https://blogs.esa.int/rosetta/2015/07/28/cometwatch-20-july/"
+    },
+    {
+      "label": "ESA/Rosetta",
+      "role": "observations",
+      "description": "Rosetta comet mission",
+      "href": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/ESA_MODEL_INFO.ASC",
+      "credit": "ESA/RMOC"
+    },
+    "physical": {
+      "path": "../reference/esa-model-info.asc",
+      "credit": "ESA/RMOC; Rosetta"
+    }
+  }
+}

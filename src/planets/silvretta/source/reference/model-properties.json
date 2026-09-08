@@ -1,0 +1,168 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/513",
+  "modelId": 513,
+  "modelVersion": "2013-02-11",
+  "diameterKm": 26.393,
+  "diameterInterpretation": "Approximate scale from a thermal diameter of 26.393 ± 0.439 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. Another thermal fit gives 17.9 km.",
+  "calibration": {
+    "diameterKm": 26.393,
+    "uncertaintyKm": 0.439,
+    "reportedUncertaintyKm": 0.439,
+    "uncertaintyMeaning": "Published statistical/Monte Carlo fit error; excludes the additional systematic term below.",
+    "systematicUncertaintyFraction": 0.1,
+    "systematicUncertaintyKm": 2.6393000000000004,
+    "systematicMeaning": "Original publication reports approximately 10% additional systematic uncertainty in diameter. This is a population-level floor, not a shape-specific accuracy guarantee.",
+    "quantity": "NEATM effective spherical diameter at the observing geometry",
+    "sourceUrl": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1317",
+    "reference": "Masiero et al. (2014), ApJ 791, 121",
+    "referenceUrl": "https://doi.org/10.1088/0004-637X/791/2/121",
+    "selectedRow": {
+      "asteroid_number": "1317",
+      "prov_desig": "",
+      "comet_desig": "",
+      "mpc_packed_name": "01317",
+      "absolute_mag": "9.9100",
+      "slope_param": "0.1500",
+      "mean_jd": "2455234.5589575",
+      "n_w1": "12",
+      "n_w2": "12",
+      "n_w3": "16",
+      "n_w4": "16",
+      "fit_code": "DVBI",
+      "diameter": "26.3930",
+      "diameter_err": "0.4390",
+      "v_albedo": "0.2750",
+      "v_albedo_err": "0.0470",
+      "ir_albedo": "0.4100",
+      "ir_albedo_err": "0.0760",
+      "beaming_param": "0.9760",
+      "beaming_param_err": "0.0520",
+      "stacked_flag": "",
+      "reference": "Mas14",
+      "notes": "",
+      "reference2": "MASIEROETAL2014",
+      "type": "mainbelt",
+      "cntr": "4085"
+    },
+    "alternativeRows": [
+      {
+        "asteroid_number": "1317",
+        "prov_desig": "",
+        "comet_desig": "",
+        "mpc_packed_name": "01317",
+        "absolute_mag": "9.9100",
+        "slope_param": "0.1500",
+        "mean_jd": "2455536.4163760",
+        "n_w1": "14",
+        "n_w2": "14",
+        "n_w3": "0",
+        "n_w4": "0",
+        "fit_code": "DV-I",
+        "diameter": "17.9190",
+        "diameter_err": "0.4360",
+        "v_albedo": "0.6080",
+        "v_albedo_err": "0.0690",
+        "ir_albedo": "0.9860",
+        "ir_albedo_err": "0.0760",
+        "beaming_param": "1.0000",
+        "beaming_param_err": "0.2000",
+        "stacked_flag": "",
+        "reference": "Mas12",
+        "notes": "",
+        "reference2": "MASIEROETAL2012",
+        "type": "mainbelt",
+        "cntr": "143212"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1317",
+        "sha256": "b0520ab039066ba363b6d8f07353ea5fd694be20f005ced4ed2520df03b2b8ea",
+        "bytes": 577
+      },
+      {
+        "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+        "sha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac",
+        "bytes": 18419
+      },
+      {
+        "url": "https://arxiv.org/pdf/1406.6645",
+        "sha256": "6cec5824e942b6f3abea47934c4ab127445fd89a587308f36ddf167c94c5b500",
+        "bytes": 969599
+      }
+    ],
+    "selectionReason": "Selected fully cryogenic W3/W4 observations with fitted beaming over the shorter-wavelength Masiero2012 fit; those short-wave fits carry larger systematic errors and stronger dependence on assumed optical H.",
+    "scaleKmPerSourceUnit": 21.272650950557715,
+    "formula": "scaleKmPerSourceUnit = diameterKm / cbrt(6 * signedSourceVolume / pi); meterScale =1000*scaleKmPerSourceUnit. Original shape coordinates are preserved.",
+    "approximate": true,
+    "limitations": [
+      "The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.",
+      "Published thermal fits disagree: 17.919 km (Mas12), 26.393 km (Mas14). Selected the W3/W4 fit; this discrepancy is retained as a scale limitation.",
+      "Quoted ±0.439 km is the catalog fit error; approximately 10% additional systematic diameter uncertainty applies."
+    ],
+    "sourceLabel": "Masiero et al. (2014), ApJ 791, 121",
+    "visibleDescription": "Approximate scale from a thermal diameter of 26.393 ± 0.439 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. Another thermal fit gives 17.9 km."
+  },
+  "periodHours": 7.067967,
+  "poleEclipticJ2000Degrees": [
+    161,
+    -46
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/2020/shape.txt",
+    "vertices": 1021,
+    "faces": 2038,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 21272.650950557716,
+    "firstVertexKm": [
+      -1.5252916184568894,
+      2.15581299263142,
+      11.89041206676709
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      29.320945711191722,
+      28.140313583435766,
+      23.993678278945453
+    ],
+    "volumeCubicKm": 9626.421986069217,
+    "volumeEquivalentRadiusKm": 13.196499999999999,
+    "radialRangeKm": [
+      11.214872125511851,
+      17.217951894686177
+    ]
+  },
+  "elevation": [
+    -2,
+    5
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2038,
+    "sourceVertices": 1021,
+    "weldedVertices": 1021,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 263.93,
+    "estimatedErrorMeters": 94.65556335449219,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 9612409177738.193
+    }
+  }
+}

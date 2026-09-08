@@ -3,7 +3,7 @@ import { orderFacts } from "../fact-order.mjs";
 import { GEOGRAPHIC_LEGEND_CAPACITY } from "../../src/platform/geographic-lens-contract.mjs";
 import type { Props } from "../planet-shell-types";
 import { OBJECTS } from "../objects.mjs";
-import { objectClassificationLabel } from "../planet-search-objects.mjs";
+import PlanetBreadcrumbs from "./PlanetBreadcrumbs.astro";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
@@ -15,13 +15,12 @@ import PlanetCardHeader from "./PlanetCardHeader.astro";
 import PlanetFactsheet from "./PlanetFactsheet.astro";
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], resources = [], lenses, destinations } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
-const activeObject = OBJECTS.find((object) => object.id === objectId);
-const classificationLabel = activeObject && objectClassificationLabel(activeObject.classification);
 const sources = sceneSources(resources);
 const hasResources = sources.length > 0;
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
 const allFacts = orderFacts(facts, moreFacts);
+const activeObject = OBJECTS.find(object => object.id === objectId);
 const initialEntity = {
   id: objectId, name: title.label, kind: activeObject?.kind, parentId: null,
   title, introduction, facts: allFacts, resources: sources,
@@ -39,24 +38,7 @@ const serializedEntity = JSON.stringify(initialEntity).replaceAll("<", "\\u003c"
       <nav slot="before-title" class="entity-path" aria-label="Place hierarchy" hidden>
         {Array.from({ length: 8 }, () => <span hidden><button type="button" data-entity-parent></button><span class="entity-path-separator" aria-hidden="true">›</span></span>)}
       </nav>
-          {activeObject && classificationLabel && <div class="planet-title-tags" data-root-entity-tags>
-            <button
-              class="planet-system-tag planet-title-tag"
-              type="button"
-              data-object-query={activeObject.systemName}
-              aria-controls={`${objectId}-object-browser`}
-              aria-label={`Browse ${activeObject.systemName} objects`}
-              title={`Browse ${activeObject.systemName} objects`}
-            >{activeObject.systemName}</button>
-            <button
-              class="planet-classification-tag planet-title-tag"
-              type="button"
-              data-object-query={`${classificationLabel}s`}
-              aria-controls={`${objectId}-object-browser`}
-              aria-label={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
-              title={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
-            >{classificationLabel}</button>
-          </div>}
+          <PlanetBreadcrumbs {objectId} data-root-entity-tags />
           <span class="planet-title-tags" data-entity-tags hidden><span class="planet-title-tag" data-entity-kind-label></span></span>
         <p slot="after-introduction" class="planet-destination-status" role="status" hidden></p>
       </PlanetCardHeader>

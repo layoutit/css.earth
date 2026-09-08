@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2733%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               33 Polyhymnia (A854 UB)         2026-Sep-08 10:25:08
+Rec #:      33 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 6146 (1856-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457802.5 ! 2017-Feb-18.00 (TDB)         Residual RMS= .27892
+   EC= .334898157584429    QR= 1.909738821780592   TP= 2458686.7688064487
+   OM= 8.618546606700836   W=  338.2012604907619   IN= 1.866819314618077
+   A= 2.871347965064488    MA= 180.8735824443458   ADIST= 3.832957108348385
+   PER= 4.86561            N= .202570097           ANGMOM= .027465815
+   DAN= 1.94462            DDN= 3.69975            L= 346.830293
+   B= -.6931328            MOID= .90286899         TP= 2019-Jul-22.2688064487
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 26.4645            ROTPER= 18.608
+   H= 8.46                 G= .330                 B-V= .848
+                           ALBEDO= .240            STYP= Sq
+
+ASTEROID comments: 
+1: soln ref.= JPL#89, OCC=0
+2: source=ORB
+*******************************************************************************

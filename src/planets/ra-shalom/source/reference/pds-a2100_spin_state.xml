@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:gbo.ast.jpl.radar.shape_models:data:a2100_spin_state_csv</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>(2100) Ra-Shalom pole orientation and rotation period</title>
+    <information_model_version>1.10.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Shepard, M., Clark, B., Nolan, M., Benner, L., Ostro, S., Giorgini, J., Vilas, F.,
+Jarvis, K., Lederer, S., Lim, L., McConnochie, T., Bell, J., Margot, J., Rivkin, A.,
+Magri, C., Scheeres, D., and Pravec, P.</author_list>
+      <publication_year>2020</publication_year>
+      <description>Spin state for (2100) Ra-Shalom with zero-epoch time and rotational phase as stated
+by Shepard et al. (2008).</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2000-08-26Z</start_date_time>
+      <stop_date_time>2006-08-15Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Physical Properties</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>None</name>
+      <type>Other Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>305-m fixed spherical reflecting antenna</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Observatory</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo 2380 MHz Radar Receiver</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.recv_s</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>305-m fixed spherical reflecting antenna</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Observatory</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Planetary Radar Transmitter</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.trans_s</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(2100) Ra-Shalom</name>
+      <type>Asteroid</type>
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <reference_text>10.1016/j.icarus.2007.09.006</reference_text>
+      <reference_text>Shepard, M.K., B.E. Clark, M.C. Nolan, L.A.M Benner, S.J. Ostro, and 12 others,
+Multi-wavelength observations of asteroid 2100 Ra-Shalom, Icarus 193, 20-38, 2008,
+doi:10.1016/j.icarus.2007.09.006.</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>10.1006/icar.2000.6470</reference_text>
+      <reference_text>Shepard, M.K., L.A.M. Benner, S.J. Ostro, A.W. Harris, K.D. Rosema and 3 others,
+Radar observations of asteroid 2100 Ra-Shalom, Icarus, 147, 520-529, 2000,
+doi:10.1006/icar.2000.6470.</reference_text>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>a2100_spin_state.csv</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2020-02-19</creation_date_time>
+    </File>
+    <Table_Delimited>
+      <local_identifier>TABLE</local_identifier>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+      <records>1</records>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <field_delimiter>Comma</field_delimiter>
+      <Record_Delimited>
+        <fields>14</fields>
+        <groups>0</groups>
+        <Field_Delimited>
+          <name>Asteroid</name>
+          <data_type>UTF8_String</data_type>
+          <description>Asteroid number or designation</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Pole_latitude</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Ecliptic Latitude of the pole</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Latitude_error</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Uncertainty of the latitude</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Pole_longitude</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Ecliptic Longitude of the pole</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Longitude_error</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Uncertainty of the longitude</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Rotational_period</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>hours</unit>
+          <description>Rotational period of the asteroid</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Rotational_period_error</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>hours</unit>
+          <description>Uncertainty of the rotational period</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Rotational_phase_at_t0_year</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Rotational phase at the zero-epoch date and time</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>year</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>year</unit>
+          <description>Zero-epoch year</description>
+          <Special_Constants>
+            <missing_constant>-999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>month</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>month</unit>
+          <description>Zero-epoch month</description>
+          <Special_Constants>
+            <missing_constant>-999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>day</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>day</unit>
+          <description>Zero-epoch day</description>
+          <Special_Constants>
+            <missing_constant>-999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>hours</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>hours</unit>
+          <description>Zero-epoch hour</description>
+          <Special_Constants>
+            <missing_constant>-999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>minutes</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>minutes</unit>
+          <description>Zero-epoch minute</description>
+          <Special_Constants>
+            <missing_constant>-999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>seconds</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>seconds</unit>
+          <description>Zero-epoch second</description>
+          <Special_Constants>
+            <missing_constant>-999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+      </Record_Delimited>
+    </Table_Delimited>
+  </File_Area_Observational>
+</Product_Observational>
+

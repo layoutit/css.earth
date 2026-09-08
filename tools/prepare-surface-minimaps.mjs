@@ -27,11 +27,15 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   }
   const framing = await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
   const images = [];
+  const excluded = framing?.excludeLenses ?? [];
+  if (!Array.isArray(excluded) || excluded.some(id => typeof id !== 'string' ||
+      !surfaces.has(id) && !raster?.lenses?.some(lens => lens.id === id))) throw new Error('Invalid excluded minimap lenses');
   // These source recipes compile warped face atlases, not reusable flat maps.
   // Reuse their observation interpretation before projection, including DEM
   // colors, relief and missing coverage. Never show the raw TIFF or an atlas.
   if (raster?.kind === 'observation-lenses') {
     for (const plan of raster.lenses) {
+      if (excluded.includes(plan.id)) continue;
       const density = Math.max(...raster.densities);
       const { data, info } = await observationRaster({
         input: resolve(objectDirectory, 'source', plan.input), plan,
@@ -46,13 +50,14 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     }
   }
   for (const surface of surfaces.values()) {
+    if (excluded.includes(surface.id)) continue;
     const input = surface.map ? resolve(publicDirectory, surface.map.url.split('/').at(-1))
       : typeof surface.source === 'string' ? resolve(objectDirectory, 'source', surface.source) : null;
     if (!input) continue;
     const path = `minimaps/${surface.id}.webp`;
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
     let pipeline = sharp(input).resize({ width: 640, withoutEnlargement: true });
-    if (framing) {
+    if (framing?.centerLongitudeDegrees !== undefined) {
       if (!Number.isFinite(framing.centerLongitudeDegrees)) throw new Error('Invalid minimap framing');
       const { data, info } = await pipeline.raw().toBuffer({ resolveWithObject: true });
       const offset = Math.round(((framing.centerLongitudeDegrees - 180) % 360 + 360) % 360 / 360 * info.width);

@@ -4,7 +4,7 @@
   align-items: center;
   gap: var(--explorer-rail-item-gap);
   padding: 0;
-  border-radius: 12px;
+  border-radius: 0;
   background: transparent;
   color: var(--shell-text-secondary);
   font: 500 12px/16px var(--shell-ui-font);
@@ -23,7 +23,7 @@
   height: 48px;
   padding: 4px 0;
   border: 0;
-  border-radius: 12px;
+  border-radius: 0;
   background: transparent;
   color: inherit;
   font: inherit;
@@ -64,7 +64,7 @@
 }
 
 .explorer-rail-button:focus-visible {
-  outline: 2px solid #b5d8fa;
+  outline: 2px solid var(--shell-focus);
   outline-offset: 2px;
 }
 
@@ -82,7 +82,7 @@
   margin: 0;
   padding: 0 var(--explorer-card-padding-inline-end) 11px
     var(--explorer-card-padding-inline-start);
-  border-bottom: 2px solid rgb(0 0 0 / 50%);
+  border-bottom: 1px solid var(--explorer-divider);
   color: var(--shell-text);
   font: 500 22px/30.13px var(--shell-ui-font);
 }
@@ -100,7 +100,7 @@
   margin: 0;
   padding: 12px var(--explorer-card-padding-inline-end)
     16px var(--explorer-card-padding-inline-start);
-  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
+  border-bottom: 1px solid var(--explorer-divider);
   color: var(--shell-text-secondary);
   font: 400 16px/1.4 var(--shell-ui-font);
   text-wrap: balance;
@@ -135,7 +135,7 @@
   min-height: 45px;
   padding: 0 var(--explorer-card-padding-inline-end) 0
     var(--explorer-card-padding-inline-start);
-  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
+  border-bottom: 1px solid var(--explorer-divider);
   color: var(--shell-text-muted);
   font: 400 13px/18px var(--shell-ui-font);
   text-transform: uppercase;
@@ -166,7 +166,7 @@
 
 .explorer-about-link:focus-visible {
   color: var(--shell-text);
-  outline: 2px solid #b5d8fa;
+  outline: 2px solid var(--shell-focus);
   outline-offset: -2px;
 }
 
@@ -189,7 +189,7 @@
   min-height: 45px;
   padding: 0 var(--explorer-card-padding-inline-end) 0
     var(--explorer-card-padding-inline-start);
-  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
+  border-bottom: 1px solid var(--explorer-divider);
 }
 
 .explorer-settings-panel .planet-setting-control:last-child {
@@ -220,9 +220,9 @@
   width: 32px;
   height: 18px;
   box-sizing: border-box;
-  border: 1px solid rgb(255 255 255 / 28%);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 8%);
+  border: 1px solid var(--shell-border);
+  border-radius: 0;
+  background: var(--shell-background);
 }
 
 .explorer-settings-panel .planet-setting-switch::before {
@@ -231,18 +231,18 @@
   left: 2px;
   width: 12px;
   height: 12px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--shell-text-muted);
   content: "";
 }
 
 .explorer-settings-panel input[type="checkbox"]:checked ~ .planet-setting-switch {
-  border-color: #8dabc6;
-  background: #44586b;
+  border-color: var(--shell-focus);
+  background: var(--shell-selection);
 }
 
 .explorer-settings-panel input[type="checkbox"]:checked ~ .planet-setting-switch::before {
-  background: #d3e9ff;
+  background: var(--shell-text);
   transform: translateX(14px);
 }
 
@@ -251,7 +251,7 @@
 }
 
 .explorer-settings-panel input[type="checkbox"]:focus-visible ~ .planet-setting-switch {
-  outline: 2px solid #b5d8fa;
+  outline: 2px solid var(--shell-focus);
   outline-offset: 2px;
 }
 
@@ -268,12 +268,12 @@
   padding: 0;
   border: 0;
   background: transparent;
-  accent-color: #b5d8fa;
+  accent-color: var(--shell-focus);
   cursor: pointer;
 }
 
 .explorer-settings-panel .planet-speed-setting:focus-visible {
-  outline: 2px solid #b5d8fa;
+  outline: 2px solid var(--shell-focus);
   outline-offset: 2px;
 }
 
@@ -282,6 +282,6 @@
 }
 
 .explorer-settings-panel .planet-speed-setting-control:has(.planet-speed-setting:disabled) {
-  opacity: .35;
+  opacity: var(--shell-disabled-opacity);
   cursor: default;
 }

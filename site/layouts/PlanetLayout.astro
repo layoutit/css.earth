@@ -1,8 +1,9 @@
 ---
 import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mjs";
-import PreparedSidebarCards from "../components/PreparedSidebarCards.astro";
+import GitHubIcon from "../components/GitHubIcon.astro";
+import CodePenIcon from "../components/CodePenIcon.astro";
 import ExplorerRail from "../components/ExplorerRail.astro";
-import CssEarthWordmark from "../components/CssEarthWordmark.astro";
+import PreparedSidebarCards from "../components/PreparedSidebarCards.astro";
 import PlanetaryScale from "../components/PlanetaryScale.astro";
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mjs";
@@ -14,8 +15,11 @@ import "../../src/renderers/css/styles/volume.css";
 import "../../src/renderers/css/styles/world-context.css";
 import "../site.css";
 import "../maps-shell.css";
+import "../minimap/minimap.css";
 import "../explorer-rail.css";
 import "../shell-layout.css";
+
+declare const __CSSEARTH_VERSION__: string;
 
 interface Props {
   objectId: string;
@@ -79,21 +83,34 @@ const seo = objectSeo(objectRecord);
         <span data-view-scale-label></span>
       </span>
     </div>
-    <header class="explorer-shell-header">
-      <div class="explorer-shell-wordmark">
-        <CssEarthWordmark />
-      </div>
-      <ExplorerRail objectId={objectRecord.id} />
-    </header>
+    <div class="planet-ui-layer">
+      <slot name="planet-ui" />
+    </div>
     <PlanetaryScale activeObjectId={objectRecord.id} />
-    <slot name="planet-ui" />
-    <main
-      class="planet-stage example-stage"
-      data-object-id={objectRecord.id}
-      aria-label={`Interactive 3D CSS visualization of ${objectRecord.name}`}
-      aria-busy="true"
-    ></main>
-    <div class="planet-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
+    <div class="planet-viewport">
+      <main
+        class="planet-stage example-stage"
+        data-object-id={objectRecord.id}
+        aria-label={`Interactive 3D CSS visualization of ${objectRecord.name}`}
+        aria-busy="true"
+      ></main>
+      <div class="planet-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
+      <div class="planet-scene-overlays">
+        <div class="planet-project-links" role="group" aria-label="App and project actions">
+          <a class="planet-report-issue-link" href="https://github.com/layoutit/cssEarth/issues" target="_blank" rel="noopener noreferrer">
+            <span>Report issue</span>
+          </a>
+          <a class="planet-github-link" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">
+            <GitHubIcon />
+            <span>v{__CSSEARTH_VERSION__}</span>
+          </a>
+          <button class="planet-codepen-link" type="button" disabled title="Export scene to CodePen (coming soon)" aria-label="Export scene to CodePen (coming soon)">
+            <CodePenIcon />
+          </button>
+          <ExplorerRail objectId={objectRecord.id} />
+        </div>
+      </div>
+    </div>
     <script>
       import "../scene-router.mjs";
     </script>

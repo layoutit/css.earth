@@ -509,8 +509,32 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     requireObjectRuntimeDefinition({ ...definition, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
       id: object.id, controls: objectControls }, { objectId: object.id, controls: objectControls });
   });
-  const sources = new Map();
-  async function source(path) { if (!sources.has(path)) sources.set(path, await readText(path)); return sources.get(path); }
+  // Preserve the digest of every inspected byte without retaining the entire
+  // registry's multi-gigabyte prepared payloads. A reread must match the first
+  // observation, so eviction cannot hide a source change during the audit.
+  const sources = new Map(), sourceHashes = new Map();
+  const sourceCacheLimit = 32 * 1024 * 1024;
+  let sourceCacheBytes = 0;
+  async function source(path) {
+    if (sources.has(path)) return sources.get(path).text;
+    const text = await readText(path);
+    const hash = createHash("sha256").update(text).digest("hex");
+    if (sourceHashes.has(path) && sourceHashes.get(path) !== hash) {
+      throw new Error(`Source changed during runtime ownership audit: ${relative(root, path)}`);
+    }
+    sourceHashes.set(path, hash);
+    const bytes = text.length * 2;
+    if (bytes <= sourceCacheLimit) {
+      while (sourceCacheBytes + bytes > sourceCacheLimit) {
+        const oldest = sources.keys().next().value;
+        sourceCacheBytes -= sources.get(oldest).bytes;
+        sources.delete(oldest);
+      }
+      sources.set(path, { text, bytes });
+      sourceCacheBytes += bytes;
+    }
+    return text;
+  }
   async function inspect(path, shared, shellContent = false) {
     const key = `${shared}:${shellContent}:${path}`;
     if (!cache.has(key)) {
@@ -707,8 +731,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   }
   const report = { schema: "cssearth-runtime-ownership@1", complete: entries.every(e => e.migrated) && !sharedViolations.length,
     entries, sharedClosure: [...sharedClosure].map(path => relative(root, path)).sort(), sharedViolations, cameraFactorySites,
-    sourceHashes: Object.fromEntries([...sources].sort(([a], [b]) => a.localeCompare(b)).map(([path, content]) =>
-      [relative(root, path), createHash("sha256").update(content).digest("hex")])),
+    sourceHashes: Object.fromEntries([...sourceHashes].sort(([a], [b]) => a.localeCompare(b)).map(([path, hash]) =>
+      [relative(root, path), hash])),
     nativeOwnership: { status: "UNPROVEN", reason: "Static closure does not observe native cameras, writes, scheduling, or resource lifetime." } };
   if (strict && !report.complete) {
     const failures = [...entries.flatMap(entry => entry.violations), ...sharedViolations];

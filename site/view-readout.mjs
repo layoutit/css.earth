@@ -8,6 +8,7 @@ const referenceAxes = { prime: [1, 0, 0], east: [0, 1, 0], north: [0, 0, 1] };
 const dot = (a, b) => a.reduce((sum, value, i) => sum + value * b[i], 0);
 const units = [[9460730472580800, 'ly'], [149597870700, 'AU'], [1000, 'km'], [1, 'm']];
 const number = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
+const compactNumber = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 2 });
 const wholeNumber = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
 const calendarDate = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeZone: 'UTC' });
 const distanceUnit = meters => units.find(([size]) => meters >= size) ?? units.at(-1);
@@ -37,7 +38,8 @@ export function viewScale(metersPerPixel, maxWidth = 80) {
   const power = 10 ** Math.floor(Math.log10(maximum));
   const value = [5, 2, 1].find(step => step * power <= maximum) * power;
   const measurePixels = value * unitSize / metersPerPixel;
-  return { label: `${number.format(value)} ${unit}`, pixels: maxWidth, measurePixels };
+  const labelNumber = value >= 1e6 ? compactNumber : number;
+  return { label: `${labelNumber.format(value)} ${unit}`, pixels: maxWidth, measurePixels };
 }
 
 export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes, surface }) {

@@ -31,3 +31,15 @@ test('a shape display requires a source mesh and consumer for the shared no-imag
  profile.raster.shapeViews[0].consumer='';
  assert.throws(()=>parseTerrestrialProfile(profile),/source consumer/);
 });
+
+test('georeferenced photographs bind quality, physical distances and bounded disk normalization', async () => {
+ const profile = await read('comet-67p');
+ assert.equal(parseTerrestrialProfile(profile).raster.surfaceObservations[0].id, 'osiris');
+ for (const alter of [p => p.qualityPath = '../unbound.IMG', p => p.allowLossy = undefined,
+   p => p.transfer.maximumSourceDistanceMeters = 51, p => p.transfer.visibilityToleranceMeters = 2,
+   p => p.photometry.maximumGain = 4, p => p.photometry.maximumIncidenceDegrees = 90,
+   p => p.photometry.referenceIncidenceDegrees = 30, p => p.displayPercentiles = [99, 1]]) {
+  const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
+  assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
+ }
+});

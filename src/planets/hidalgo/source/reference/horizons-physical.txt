@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27944%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                944 Hidalgo (A920 UB)          2026-Sep-08 10:25:47
+Rec #:     944 (+COV) Soln.date: 2026-Mar-11_22:28:59   # obs: 2657 (1920-2024)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458068.5 ! 2017-Nov-11.00 (TDB)         Residual RMS= .23117
+   EC= .6609083603344837   QR= 1.947116203592788   TP= 2458418.0271953875
+   OM= 21.42221229518301   W=  56.67586027731016   IN= 42.52342871725593
+   A= 5.742153376336394    MA= 334.9635434071799   ADIST= 9.53719054908
+   PER= 13.76006           N= .071629495           ANGMOM= .030935007
+   DAN= 2.37254            DDN= 5.07758            L= 69.6859781
+   B= 34.3855441           MOID= 1.15023994        TP= 2018-Oct-26.5271953875
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 19.                ROTPER= 10.063
+   H= 10.55                G= .150                 B-V= .743
+                           ALBEDO= .060            STYP= D
+
+ASTEROID comments: 
+1: soln ref.= JPL#64, OCC=0
+2: source=ORB
+*******************************************************************************

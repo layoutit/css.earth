@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2720%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                20 Massalia (A852 SA)          2026-Sep-08 10:25:05
+Rec #:      20 (+COV) Soln.date: 2026-Jun-05_03:03:25  # obs: 10321 (1856-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458004.5 ! 2017-Sep-08.00 (TDB)         Residual RMS= .24784
+   EC= .1423631625952802   QR= 2.066193929360209   TP= 2458153.2724855794
+   OM= 206.1028411211835   W=  256.5737633970037   IN= .7086185165670544
+   A= 2.409171154089746    MA= 320.7874386666078   ADIST= 2.752148378819283
+   PER= 3.73947            N= .263574015           ANGMOM= .026428291
+   DAN= 2.44103            DDN= 2.28482            L= 102.6756148
+   B= -.6892508000000001   MOID= 1.08406997        TP= 2018-Feb-03.7724855794
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 67.84              ROTPER= 8.098
+   H= 6.54                 G= .250                 B-V= .854
+                           ALBEDO= .241            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#144, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -14,7 +14,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const lensInputs = [...(lensRoot?.querySelectorAll('button[name="lens"]') ?? [])].filter(input => !input.hasAttribute?.('data-geographic-lens'));
   const geographic = createGeographicLensBinding(lensRoot, controls.lenses?.geographicCapacity ?? 0);
   const settingsInputs = [...(settingsRoot?.querySelectorAll("input[name], button[name]") ?? [])]
-    .filter(input => !["motion", "skyContrast", "heliosphere", "asteroidOrbits"].includes(input.name));
+    .filter(input => !["motion", "skyContrast", "heliosphere", "asteroidOrbits", "asteroidLabels"].includes(input.name));
   const legends = [...(lensRoot?.querySelectorAll("[data-lens-legend]") ?? [])]
     .filter(legend => legend.dataset?.lensLegend !== undefined && !legend.closest?.("[data-geographic-option]"));
   const lenses = new Map(lensInputs.map(input => [input.value, input]));

@@ -112,7 +112,8 @@ export function requireFacing(value: unknown, tree: PreparedTree, partitionScene
 export function requireOptionalPresentation(plan: Record<string, unknown>, tree: PreparedTree, controls: ObjectControls): void {
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [];
   if (plan.surfaceHit !== undefined) {
-    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles', 'discs']);
+    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles', 'discs', 'frontFace']);
+    if (hit.frontFace !== undefined && !['clockwise','counter-clockwise'].includes(hit.frontFace as string)) fail('invalid surface front face');
     if (!ancestor(nodeReference(hit.target, tree), tree.scene, tree)) fail('surface hit target must belong to scene');
     const triangles = array(hit.triangles, 'surface hit triangles');
     if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');

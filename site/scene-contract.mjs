@@ -44,7 +44,7 @@ export function requireObjectControls(content, objectId = "unknown") {
   const settings = content.settings?.controls ?? [];
   const names = settings.map((setting) => setting?.name);
   if (names.some((name) => typeof name !== "string" || !name ||
-      ["motion", "skyContrast", "heliosphere", "asteroidOrbits"].includes(name)) || new Set(names).size !== names.length ||
+      ["motion", "skyContrast", "heliosphere", "asteroidOrbits", "asteroidLabels"].includes(name)) || new Set(names).size !== names.length ||
       settings.some((setting) => !["toggle", "cycle"].includes(setting.kind) ||
         typeof setting.label !== "string" || !setting.label ||
         (setting.kind === "toggle" ? typeof setting.checked !== "boolean"

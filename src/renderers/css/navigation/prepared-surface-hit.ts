@@ -1,5 +1,6 @@
 export type SurfacePoint = readonly [number, number, number];
 export type SurfaceTriangle = readonly [SurfacePoint, SurfacePoint, SurfacePoint];
+export type SurfaceFrontFace = 'clockwise' | 'counter-clockwise';
 /** Prepared dual axes map a hit into an opaque unit disc on a retained face. */
 export interface SurfaceDisc {
   readonly firstTriangle: number; readonly triangleCount: number;
@@ -7,6 +8,7 @@ export interface SurfaceDisc {
 }
 export interface PreparedSurfaceHit {
   readonly target: number; readonly triangles: readonly SurfaceTriangle[]; readonly discs?: readonly SurfaceDisc[];
+  readonly frontFace?: SurfaceFrontFace;
 }
 export interface PreparedSurfaceHitTest {
   (clientX: number, clientY: number): boolean;
@@ -41,18 +43,19 @@ export function validateSurfaceDiscs(discs: unknown, triangleCount: number): ass
 }
 
 /** Intersect source-prepared triangles. Runtime never creates or resamples a mesh. */
-export function rayHitsPreparedTriangles(origin: SurfacePoint, direction: SurfacePoint, triangles: readonly SurfaceTriangle[]): boolean {
-  return intersectPreparedSurface(origin, direction, { triangles }) !== null;
+export function rayHitsPreparedTriangles(origin: SurfacePoint, direction: SurfacePoint, triangles: readonly SurfaceTriangle[], frontFace?: SurfaceFrontFace): boolean {
+  return intersectPreparedSurface(origin, direction, { triangles, frontFace }) !== null;
 }
 
 /** Return the nearest painted hit, or the outer boundary along a body-centred ray. */
 export function intersectPreparedSurface(origin: SurfacePoint, direction: SurfacePoint,
-  plan: Pick<PreparedSurfaceHit, 'triangles' | 'discs'>, farthest = false) {
+  plan: Pick<PreparedSurfaceHit, 'triangles' | 'discs' | 'frontFace'>, farthest = false) {
   let hit: { point: SurfacePoint; distance: number; triangleIndex: number } | null = null;
   for (let triangleIndex = 0; triangleIndex < plan.triangles.length; triangleIndex++) {
     const [a, b, c] = plan.triangles[triangleIndex]!;
     const ab = sub(b, a), ac = sub(c, a), p = cross(direction, ac), determinant = dot(ab, p);
     if (Math.abs(determinant) < 1e-12) continue;
+    if (plan.frontFace === 'clockwise' && determinant > 0 || plan.frontFace === 'counter-clockwise' && determinant < 0) continue;
     const t = sub(origin, a), u = dot(t, p) / determinant;
     if (u < 0 || u > 1) continue;
     const q = cross(t, ab), v = dot(direction, q) / determinant;
@@ -73,6 +76,7 @@ export function intersectPreparedSurface(origin: SurfacePoint, direction: Surfac
 export function bindPreparedSurfaceHit(plan: PreparedSurfaceHit, target: HTMLElement, scene: HTMLElement,
   camera: HTMLElement): PreparedSurfaceHitTest {
   if (!target || !scene.contains(target) || !Number.isSafeInteger(plan.target) || !Array.isArray(plan.triangles) ||
+      (plan.frontFace !== undefined && !['clockwise','counter-clockwise'].includes(plan.frontFace)) ||
       plan.triangles.length === 0 || plan.triangles.length > 10000 || plan.triangles.some(triangle =>
         !Array.isArray(triangle) || triangle.length !== 3 || triangle.some(point =>
           !Array.isArray(point) || point.length !== 3 || point.some(n => !Number.isFinite(n))))) throw new TypeError('Invalid prepared surface hit mesh.');
