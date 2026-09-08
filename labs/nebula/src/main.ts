@@ -1,3 +1,4 @@
+import { readAppliedImage, writeAppliedImage, rememberAppliedLayer, verifyRestoredImage, type RestoredAppliedImage } from './applied-image-state';
 import { createNebulaLabViewer, subjects } from './viewer';
 import { defaultOverlayPlacement } from './overlay-placement';
 import { createOverlayPlacementControls } from './overlay-placement-controls';
@@ -6,6 +7,8 @@ import { createCloudControls } from './cloud-controls';
 import { createCloudDensityControls } from './cloud-density-controls';
 import { createCloudStarControls } from './cloud-star-controls';
 import type { ImageLayer } from './overlay-variants';
+import { createRemovalStrengthStore, validateRemovalStrength } from './removal-strength';
+import { createStarSamplingControls } from './star-sampling-controls';
 
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
@@ -29,8 +32,41 @@ const overlayControls = element<HTMLFieldSetElement>('overlay-controls');
 const overlayOptions = element('overlay-options');
 const overlayChoice = element<HTMLSelectElement>('overlay-choice');
 const overlayLayerControl = element('overlay-layer-control');
-const overlayLayer = element<HTMLSelectElement>('overlay-layer');
+const overlayLayer = element('overlay-layer');
+const layerButtons = [...overlayLayer.querySelectorAll<HTMLButtonElement>('[data-image-layer]')];
+function selectLayerButton(layer: ImageLayer) {
+  overlayLayer.dataset.value = layer;
+  layerButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.imageLayer === layer)));
+}
 const overlayLayerNote = element('overlay-layer-note');
+const removalControls = element('star-removal-controls');
+const removalRange = element<HTMLInputElement>('star-removal-range');
+const removalNumber = element<HTMLInputElement>('star-removal');
+const removalNote = element('star-removal-note');
+const removalStrengths = createRemovalStrengthStore();
+const sidebarTabs = [element<HTMLButtonElement>('image-sidebar-tab'), element<HTMLButtonElement>('star-removal-tab')];
+const imageAdjustments = element('image-adjustment-panel'), starRemovalPanel = element('star-removal-panel');
+const starSampling = createStarSamplingControls(element('star-sampling-controls'), {
+  async onApply(result, isCurrent) {
+    if (!viewer || selectedOverlayId !== result.imageId || !isCurrent()) return false;
+    if (!result.applied || !result.sourcePreviewSha256) throw new TypeError('Removal source proof is missing.');
+    restoringImages.get(result.imageId)?.abort(); restoringImages.delete(result.imageId);
+    const request = ++layerActivation;
+    const current = () => isCurrent() && request === layerActivation && selectedOverlayId === result.imageId && currentTab === 0 && currentMode === 'density';
+    imageTone.setContext(null);
+    await viewer.installSamplingLayers(result.imageId, result.sourcePreviewSha256, result.applied, current);
+    if (!current()) return false;
+    removalStrengths.set(result.imageId, 100);
+    await activateOverlay(result.imageId, false);
+    if (!current()) return false;
+    await viewer.setOverlayLayer(result.imageId, 'diffuse', current);
+    if (!current()) return false;
+    writeAppliedImage(result, 'diffuse'); restorationMessages.delete(result.imageId);
+    element('viewer').dataset.samplingResultId = result.applied.resultId; renderSelectedOverlay(); return true;
+  },
+});
+let sidebarTab: 'image' | 'stars' = 'image';
+try { if (localStorage.getItem('cssearth-image-inspection-tab') === 'stars') sidebarTab = 'stars'; } catch { /* Default tab remains available. */ }
 const overlayEnabled = element<HTMLInputElement>('overlay-enabled');
 const overlayEnabledLabel = element<HTMLLabelElement>('overlay-enabled-label');
 const overlayOpacity = element<HTMLInputElement>('overlay-opacity');
@@ -57,6 +93,8 @@ let currentOverlays: Overlay[] = [];
 let selectedOverlayId: string | null = null;
 let overlayActivation = 0;
 let layerActivation = 0;
+let pendingLayerActivation: number | null = null;
+const restoringImages = new Map<string, AbortController>(), restorationAttempts = new Set<string>(), restorationMessages = new Map<string, string>();
 const cloudStarControls = createCloudStarControls({ host: element('cloud-star-controls'), onChange(options) { viewer?.setStars(options); } });
 const cloudDensityControls = createCloudDensityControls({ host: element('cloud-density-controls'),
   async onApply(context, resources, isCurrent) {
@@ -88,7 +126,7 @@ const imageTone = createToneControls({ host: element('image-tone-controls'), tar
     if (!viewer) throw new Error('Viewer is unavailable.');
     await viewer.applyToneResources('image', context.imageId, resources, isCurrent);
   } });
-function invalidateToneContexts() { densityTone.setContext(null); imageTone.setContext(null); }
+function invalidateToneContexts() { layerActivation++; pendingLayerActivation = null; densityTone.setContext(null); imageTone.setContext(null); starSampling.setContext(null); }
 
 const visibleObjects = [
   { id: 'lmc-clouds', name: 'LMC' },
@@ -196,18 +234,84 @@ function toneReadyFor(subjectId: string) {
   const host = element('viewer');
   return !busy && !modePending && host.dataset.ready === 'true' && host.dataset.mode === 'density' && host.dataset.subject === subjectId;
 }
+function refreshImageTone() {
+  const overlay = currentOverlays.find(value => value.id === selectedOverlayId);
+  if (overlay && restoringImages.has(overlay.id)) { imageTone.setContext(null); return; }
+  imageTone.setContext(viewer && sourceSubject && overlay && toneReadyFor(sourceSubject) ? {
+    subjectId: sourceSubject, imageId: overlay.id, imageLayer: viewer.getOverlayLayer(overlay.id),
+    ...(overlay.samplingResultId ? { samplingResultId: overlay.samplingResultId } : {}),
+    ...(overlay.variants?.length ? { removalStrength: currentRemovalStrength(overlay) } : {}),
+  } : null);
+}
+function currentRemovalStrength(overlay: Overlay) {
+  return removalStrengths.get(overlay.id);
+}
+function refreshStarSampling() {
+  const overlay = currentOverlays.find(item => item.id === selectedOverlayId);
+  starSampling.setContext(sidebarTab === 'stars' && currentTab === 0 && currentMode === 'density' && !busy && overlay ? {
+    imageId: overlay.id, label: overlay.label, supported: Boolean(overlay.variants?.length),
+  } : null);
+}
+function selectSidebarTab(index: number) {
+  sidebarTab = index === 0 ? 'image' : 'stars';
+  try { localStorage.setItem('cssearth-image-inspection-tab', sidebarTab); } catch { /* Tab switching still works. */ }
+  sidebarTabs.forEach((tab, position) => { tab.setAttribute('aria-selected', String(position === index)); tab.tabIndex = position === index ? 0 : -1; });
+  imageAdjustments.hidden = index !== 0; starRemovalPanel.hidden = index !== 1;
+  overlayPanel.dataset.inspectionTab = sidebarTab; refreshStarSampling();
+}
+sidebarTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectSidebarTab(index));
+  tab.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault(); const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1 : 1 - index;
+    selectSidebarTab(next); sidebarTabs[next]!.focus();
+  });
+});
+async function restoreAppliedOverlay(overlay: Overlay) {
+  if (!viewer || overlay.samplingResultId || restoringImages.has(overlay.id)) return;
+  const saved = readAppliedImage(overlay.id, overlay.sha256); if (!saved) return;
+  const attempt = `${overlay.id}:${saved.resultId}`, expectedViewer = viewer, expectedOverlay = overlay;
+  if (restorationAttempts.has(attempt)) return;
+  restorationAttempts.add(attempt);
+  const controller = new AbortController(); restoringImages.set(overlay.id, controller); imageTone.setContext(null);
+  restorationMessages.set(overlay.id, 'Restoring prepared removal…');
+  const current = () => restoringImages.get(overlay.id) === controller && !controller.signal.aborted && viewer === expectedViewer && selectedOverlayId === overlay.id &&
+    currentOverlays.includes(expectedOverlay) && currentTab === 0 && currentMode === 'density';
+  try {
+    const response = await fetch('/__nebula/star-samples/restore', { method: 'POST', signal: controller.signal,
+      headers: { 'content-type': 'application/json' }, body: JSON.stringify({ imageId: saved.imageId, resultId: saved.resultId, sourcePreviewSha256: saved.sourcePreviewSha256 }) });
+    const result = await response.json() as RestoredAppliedImage & { error?: string };
+    if (!response.ok) throw new Error(result.error ?? `Saved removal unavailable (HTTP ${response.status}).`);
+    verifyRestoredImage(saved, result); if (!current()) return;
+    await viewer!.installSamplingLayers(overlay.id, result.sourcePreviewSha256, result.applied, current); if (!current()) return;
+    await activateOverlay(overlay.id, false); if (!current()) return;
+    await viewer!.setOverlayLayer(overlay.id, saved.layer, current); if (!current()) return;
+    element('viewer').dataset.samplingResultId = result.applied.resultId; restorationMessages.delete(overlay.id);
+  } catch (error) {
+    if (current()) { restorationMessages.set(overlay.id, 'Saved removal unavailable · references retained.'); overlayStatus.title = error instanceof Error ? error.message : String(error); }
+  } finally {
+    const active = current();
+    if (restoringImages.get(overlay.id) === controller) restoringImages.delete(overlay.id);
+    if (!active) restorationAttempts.delete(attempt);
+    else renderSelectedOverlay();
+  }
+}
 function renderSelectedOverlay() {
   if (!viewer || !selectedOverlayId) return;
   const item = subjects.find(value => value.id === sourceSubject), overlay = currentOverlays.find(value => value.id === selectedOverlayId);
   if (!item?.density?.overlays || !overlay) return;
+  void restoreAppliedOverlay(overlay);
   const prior = viewer.getOverlayState().find(value => value.id === overlay.id);
   overlayChoice.value = overlay.id;
   overlayLayerControl.hidden = !overlay.variants?.length;
-  overlayLayer.replaceChildren(new Option('Original', 'original'),
-    ...(overlay.variants ?? []).map(layer => new Option(layer.label, layer.id)));
-  overlayLayer.value = viewer.getOverlayLayer(overlay.id);
-  overlayLayerNote.textContent = overlayLayer.value === 'original' ? '' :
-    '2D separation trial. Compact residual can include bright nebula knots; this is not a measured star catalogue.';
+  layerButtons.forEach(button => { button.disabled = button.dataset.imageLayer !== 'original' && !overlay.variants?.some(layer => layer.id === button.dataset.imageLayer); });
+  selectLayerButton(viewer.getOverlayLayer(overlay.id));
+  removalControls.hidden = !overlay.variants?.some(layer => layer.id === 'diffuse');
+  removalRange.max = removalNumber.max = '100';
+  removalRange.value = removalNumber.value = String(currentRemovalStrength(overlay));
+  removalNote.textContent = '0% Original · 100% Prepared removal';
+  overlayLayerNote.textContent = '';
+  overlayLayer.title = 'Prepared 2D separation. Residuals may include bright nebula knots; they are not a measured star catalogue.';
   overlayEnabled.id = `overlay-${overlay.id}`; overlayEnabledLabel.htmlFor = overlayEnabled.id;
   overlayEnabled.checked = prior?.enabled ?? false;
   overlayOpacity.value = String(Math.round((prior?.opacity ?? overlay.initialOpacity ?? .55) * 100));
@@ -225,15 +329,17 @@ function renderSelectedOverlay() {
         positionKpc: { x: value.x, y: value.y, z: value.z },
         rotationDegrees: { x: value.rotationX, y: value.rotationY, z: value.rotationZ },
         scale: value.scale, opacity: saved?.opacity ?? overlay.initialOpacity ?? .55, tone: imageTone.getValue(),
+        ...(overlay.variants?.length ? { imageLayer: viewer!.getOverlayLayer(overlay.id), removalStrength: currentRemovalStrength(overlay) } : {}),
       }, null, 2));
     },
     onChange: partial => { try { viewer!.setOverlayPlacement(overlay.id, partial); } catch (error) { fail(error); } } });
   overlayOptions.replaceChildren(placement);
   overlayRegistration.textContent = overlay.registrationNote; overlayCredit.textContent = overlay.credit;
   overlaySource.href = overlay.sourcePageUrl;
-  overlayStatus.textContent = `${currentOverlays.indexOf(overlay) + 1} of ${currentOverlays.length} images`;
+  overlayStatus.textContent = restorationMessages.get(overlay.id) ?? `${currentOverlays.indexOf(overlay) + 1} of ${currentOverlays.length} images`;
   overlayPanel.dataset.selectedOverlay = overlay.id;
-  imageTone.setContext(toneReadyFor(item.id) ? { subjectId: item.id, imageId: overlay.id, imageLayer: viewer.getOverlayLayer(overlay.id) } : null);
+  refreshImageTone();
+  refreshStarSampling();
 }
 async function activateOverlay(id: string, refresh = true) {
   if (!viewer) return;
@@ -262,6 +368,7 @@ async function refreshOverlayControls() {
   densityViewControls.hidden = !densityVisible; densityAdjustmentPanel.hidden = !densityVisible; overlayPanel.hidden = !visible;
   densityTone.setContext(densityVisible && item && toneReadyFor(item.id) ? { subjectId: item.id } : null);
   if (!visible) imageTone.setContext(null);
+  starSampling.setContext(null);
   currentOverlays = []; selectedOverlayId = null; overlayOptions.replaceChildren();
   overlayStatus.textContent = ''; overlayRegistration.textContent = ''; overlayCredit.textContent = ''; overlaySource.removeAttribute('href');
   if (!visible || !viewer || !catalogue) return;
@@ -279,24 +386,47 @@ async function refreshOverlayControls() {
   setBusy(busy);
 }
 overlayChoice.addEventListener('change', () => {
-  layerActivation++;
+  layerActivation++; pendingLayerActivation = null;
+  for (const controller of restoringImages.values()) controller.abort();
   const item = subjects.find(value => value.id === sourceSubject);
   if (!item?.density?.overlays) return;
   selectedOverlayId = overlayChoice.value; rememberOverlayId(item.density.overlays, selectedOverlayId);
   renderSelectedOverlay(); overlayEnabled.checked = true; void run(() => activateOverlay(selectedOverlayId!));
 });
-overlayLayer.addEventListener('change', () => {
-  if (!viewer || !selectedOverlayId) return;
-  const id = selectedOverlayId, layer = overlayLayer.value as ImageLayer, request = ++layerActivation;
+function changeOverlayLayer(layer: ImageLayer) {
+  if (!viewer || !selectedOverlayId || busy) return;
+  const id = selectedOverlayId, request = ++layerActivation;
+  pendingLayerActivation = request;
+  const current = () => request === layerActivation && selectedOverlayId === id && currentTab === 0 && currentMode === 'density';
   imageTone.setContext(null); overlayLayerNote.textContent = 'Loading prepared image layer…';
   void run(async () => {
     try {
       await activateOverlay(id, false);
-      if (request !== layerActivation || selectedOverlayId !== id) return;
+      if (!current()) return;
       imageTone.setContext(null);
-      await viewer!.setOverlayLayer(id, layer);
-    } finally { if (request === layerActivation && selectedOverlayId === id) renderSelectedOverlay(); }
+      await viewer!.setOverlayLayer(id, layer, current);
+      if (current()) { const overlay = currentOverlays.find(value => value.id === id); if (overlay?.samplingResultId) rememberAppliedLayer(id, overlay.sha256, layer); }
+    } finally { if (current()) { pendingLayerActivation = null; renderSelectedOverlay(); } }
   });
+}
+layerButtons.forEach(button => button.addEventListener('click', () => changeOverlayLayer(button.dataset.imageLayer as ImageLayer)));
+function changeRemovalStrength(value: number) {
+  if (!viewer || !selectedOverlayId || busy || removalControls.hidden) return;
+  try {
+    const id = selectedOverlayId, strength = validateRemovalStrength(value);
+    removalStrengths.set(id, strength); removalRange.value = removalNumber.value = String(strength);
+    selectLayerButton('diffuse'); overlayEnabled.checked = true;
+    const active = viewer.getOverlayState().find(overlay => overlay.id === id)?.enabled;
+    if (active && viewer.getOverlayLayer(id) === 'diffuse' && pendingLayerActivation === null) refreshImageTone();
+    else changeOverlayLayer('diffuse');
+  } catch (error) {
+    removalRange.value = removalNumber.value = String(currentRemovalStrength(currentOverlays.find(item => item.id === selectedOverlayId)!));
+    overlayLayerNote.textContent = error instanceof Error ? error.message : String(error);
+  }
+}
+removalRange.addEventListener('input', () => changeRemovalStrength(Number(removalRange.value)));
+removalNumber.addEventListener('change', () => {
+  changeRemovalStrength(removalNumber.valueAsNumber);
 });
 overlayEnabled.addEventListener('change', () => {
   if (!selectedOverlayId) return;
@@ -362,6 +492,7 @@ async function switchMode(next: 'photo' | 'density') {
 }
 
 setBusy(true);
+selectSidebarTab(sidebarTab === 'stars' ? 1 : 0);
 const requestedTab = new URL(location.href).searchParams.get('tab');
 const initialTab = requestedTab === 'reconstruction' || requestedTab === 'render' ? 1 : 0;
 selectTab(initialTab);
@@ -394,6 +525,6 @@ try {
   }
 } catch (error) { fail(error); }
 
-function destroy() { if (!disposed) { disposed = true; densityTone.destroy(); imageTone.destroy(); cloudControls.destroy(); cloudDensityControls.destroy(); cloudStarControls.destroy(); viewer?.destroy(); } }
+function destroy() { if (!disposed) { disposed = true; for (const controller of restoringImages.values()) controller.abort(); densityTone.destroy(); imageTone.destroy(); starSampling.destroy(); cloudControls.destroy(); cloudDensityControls.destroy(); cloudStarControls.destroy(); viewer?.destroy(); } }
 window.addEventListener('pagehide', destroy, { once: true });
 if (import.meta.hot) import.meta.hot.dispose(destroy);

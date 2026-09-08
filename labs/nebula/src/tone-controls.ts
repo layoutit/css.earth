@@ -2,7 +2,7 @@ import { defaultOverlayTone, updateOverlayTone, type OverlayTone } from './overl
 
 export interface ToneResource { sourcePath: string; url: string; width: number; height: number; }
 type ToneTarget = 'image' | 'density';
-interface ToneContext { subjectId: string; imageId?: string; imageLayer?: 'original' | 'diffuse' | 'stars'; }
+interface ToneContext { subjectId: string; imageId?: string; imageLayer?: 'original' | 'diffuse' | 'stars'; removalStrength?: number; samplingResultId?: string; }
 interface ToneSpec { key: keyof OverlayTone; label: string; min: number; max: number; step: number; }
 
 const STORAGE_KEY = 'cssearth-nebula-tone-state-v1';
@@ -53,7 +53,7 @@ export function createToneControls({ host, target, onApply }: {
     }
   };
   const prepare = async (expected: number, expectedContext: ToneContext, expectedTone: OverlayTone) => {
-    pending = new AbortController(); status.textContent = 'Baking tone…';
+    pending = new AbortController(); status.textContent = target === 'image' ? 'Preparing image…' : 'Baking tone…';
     try {
       const response = await fetch('/__nebula/prepare-tone', { method: 'POST', signal: pending.signal,
         headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...expectedContext, target, tone: expectedTone }) });
@@ -114,7 +114,8 @@ export function createToneControls({ host, target, onApply }: {
   actions.append(reset, copy); group.append(actions, status); host.replaceChildren(group); render();
   return Object.freeze({
     setContext(next: ToneContext | null) {
-      if (context && next && contextKey(target, context) === contextKey(target, next) && context.imageLayer === next.imageLayer) return;
+      if (context && next && contextKey(target, context) === contextKey(target, next) &&
+        context.imageLayer === next.imageLayer && context.removalStrength === next.removalStrength && context.samplingResultId === next.samplingResultId) return;
       if (!context && !next) return;
       revision++; pending?.abort(); if (timer !== undefined) window.clearTimeout(timer); timer = undefined; context = next ? { ...next } : null;
       tone = context ? { ...(saved.get(contextKey(target, context)) ?? defaultOverlayTone()) } : defaultOverlayTone();

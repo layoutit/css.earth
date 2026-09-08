@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import sharp from 'sharp';
 import { defaultOverlayTone, overlayToneSample, updateOverlayTone } from './overlay-tone.js';
-import { createTonePreparer, parseTonePreparationRequest, toneRgba } from './tone-preparation.js';
+import { createTonePreparer, parseTonePreparationRequest, removalRgba, toneRgba } from './tone-preparation.js';
 const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 
 test('tone formula applies ordered levels, gamma, gain; photograph alpha and density RGB stay unchanged', () => {
@@ -28,12 +28,32 @@ test('tone formula applies ordered levels, gamma, gain; photograph alpha and den
 test('tone requests reject arbitrary paths, unrecognized/missing fields and non-finite or invalid levels', () => {
   const valid = { subjectId: 'lmc-particles', target: 'image', imageId: 'smash-original', tone: defaultOverlayTone() };
   assert.deepEqual(parseTonePreparationRequest(valid), valid);
+  const samplingResultId = `${'a'.repeat(64)}.${'b'.repeat(64)}`;
+  assert.equal(parseTonePreparationRequest({ ...valid, samplingResultId }).samplingResultId, samplingResultId);
+  for (const invalid of ['', '../result', 'a'.repeat(64), `${samplingResultId}/diffuse.png`])
+    assert.throws(() => parseTonePreparationRequest({ ...valid, samplingResultId: invalid }), TypeError);
+  assert.throws(() => parseTonePreparationRequest({ subjectId: 'test', target: 'density', tone: valid.tone, samplingResultId }), TypeError);
   for (const bad of [{ ...valid, path: '/etc/passwd' }, { ...valid, subjectId: '../x' }, { ...valid, imageId: '../x' },
     { ...valid, target: 'other' }, { ...valid, target: 'density' }, { ...valid, tone: {} },
     { ...valid, tone: { ...valid.tone, gamma: NaN } }, { ...valid, tone: { ...valid.tone, black: .8, white: .7 } },
     { ...valid, tone: { ...valid.tone, brightness: 0 } }, { ...valid, tone: { ...valid.tone, extra: 1 } }]) {
     assert.throws(() => parseTonePreparationRequest(bad), TypeError);
   }
+});
+
+test('removal requests are bounded and image-only; endpoint interpolation precedes tone and preserves alpha', () => {
+  const valid = { subjectId: 'test', target: 'image', imageId: 'photo', imageLayer: 'diffuse', tone: defaultOverlayTone() };
+  for (const strength of [0, 25.5, 100]) assert.equal(parseTonePreparationRequest({ ...valid, removalStrength: strength }).removalStrength, strength);
+  for (const strength of [-1, 101, NaN, Infinity, '50', null])
+    assert.throws(() => parseTonePreparationRequest({ ...valid, removalStrength: strength }), TypeError);
+  assert.throws(() => parseTonePreparationRequest({ subjectId: 'test', target: 'density', removalStrength: 50, tone: valid.tone }), TypeError);
+  const original = Uint8Array.of(200, 100, 80, 90, 120, 70, 20, 0), diffuse = Uint8Array.of(40, 60, 20, 90, 100, 50, 10, 0);
+  assert.deepEqual(removalRgba(diffuse, 'diffuse', 0, original), original);
+  assert.deepEqual(removalRgba(diffuse, 'diffuse', 100, original), diffuse);
+  assert.deepEqual([...removalRgba(diffuse, 'diffuse', 50, original)], [120, 80, 50, 90, 110, 60, 15, 0]);
+  assert.deepEqual([...removalRgba(diffuse, 'stars', 0)], [0, 0, 0, 90, 0, 0, 0, 0]);
+  assert.deepEqual([...removalRgba(diffuse, 'stars', 25)], [10, 15, 5, 90, 25, 13, 3, 0]);
+  assert.throws(() => removalRgba(diffuse, 'diffuse', 50), /matching RGBA/);
 });
 
 async function fixture() {
@@ -99,5 +119,55 @@ test('image tone targets the selected prepared layer and rejects a mismatched or
     await assert.rejects(prepare({ ...request, imageLayer: '../bad' }), TypeError);
     metadata.variants[0].originalTextureSha256 = '0'.repeat(64); await f.write(metadataPath, JSON.stringify(metadata));
     await assert.rejects(prepare(request), /source or pixel grid/);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
+test('strength uses the selected full-size grid, preserves endpoints, scales residual before tone and caches original pairing', async () => {
+  const f = await fixture();
+  try {
+    const originalPixels = Buffer.from([200, 140, 80, 255, 180, 100, 60, 255, 80, 60, 40, 255, 60, 40, 20, 255,
+      200, 140, 80, 255, 180, 100, 60, 255, 80, 60, 40, 255, 60, 40, 20, 255]);
+    const original = await sharp(originalPixels, { raw: { width: 4, height: 2, channels: 4 } }).png().toBuffer();
+    const diffusePixels = Buffer.from([30, 40, 50, 255, 20, 30, 40, 255]), starPixels = Buffer.from([70, 50, 30, 255, 40, 20, 10, 255]);
+    const diffuse = await sharp(diffusePixels, { raw: { width: 2, height: 1, channels: 4 } }).png().toBuffer();
+    const stars = await sharp(starPixels, { raw: { width: 2, height: 1, channels: 4 } }).png().toBuffer();
+    const diffusePath = 'labs/nebula/models/separation/diffuse.png', starsPath = 'labs/nebula/models/separation/stars.png';
+    await f.write(f.imagePath, original); await f.write(diffusePath, diffuse); await f.write(starsPath, stars);
+    const catalogue = { overlays: [{ id: 'test-photo', texturePath: 'prepared/image.png', widthPx: 4, heightPx: 2, sha256: hash(original) }] };
+    const variants = { schema: 'cssearth-nebula-overlay-variants@1', variants: [{ imageId: 'test-photo', originalTextureSha256: hash(original),
+      sourceSha256: hash(original), receiptPath: 'receipt.json', layers: [
+        { id: 'diffuse', label: 'Diffuse', texturePath: diffusePath, widthPx: 2, heightPx: 1, sha256: hash(diffuse) },
+        { id: 'stars', label: 'Stars', texturePath: starsPath, widthPx: 2, heightPx: 1, sha256: hash(stars) }] }] };
+    const saveMetadata = async () => { await f.write('labs/nebula/models/overlays/overlays.json', JSON.stringify(catalogue));
+      await f.write('labs/nebula/models/lmc-star-separation/variants.json', JSON.stringify(variants)); };
+    await saveMetadata();
+    const prepare = createTonePreparer(f.root, { maximumCacheFiles: 2, maximumDecodedCacheBytes: 64 });
+    const request = { subjectId: 'test', target: 'image', imageId: 'test-photo', imageLayer: 'diffuse', tone: defaultOverlayTone() };
+    const pixels = async (url: string) => sharp(await readFile(url.slice(4))).ensureAlpha().raw().toBuffer();
+    const resized = await sharp(original).ensureAlpha().resize(2, 1, { fit: 'fill', kernel: 'lanczos3' }).raw().toBuffer();
+    const zero = (await prepare({ ...request, removalStrength: 0 })).resources[0];
+    assert.equal(zero.sourcePath, diffusePath); assert.equal(zero.width, 2); assert.equal(zero.height, 1);
+    assert.deepEqual(await pixels(zero.url), resized, 'zero strength is original on the full endpoint pixel grid');
+    assert.equal((await prepare(request)).resources[0].url, `/@fs${join(f.root, diffusePath)}`, 'omitted strength preserves the endpoint');
+    assert.equal((await prepare({ ...request, removalStrength: 100 })).resources[0].url, `/@fs${join(f.root, diffusePath)}`);
+    assert.equal((await prepare({ ...request, imageLayer: 'original', removalStrength: 0 })).resources[0].url, `/@fs${join(f.root, f.imagePath)}`);
+    const tone = { ...defaultOverlayTone(), gamma: 2 }, halfway = (await prepare({ ...request, removalStrength: 50, tone })).resources[0];
+    const blend = Uint8Array.from(resized, (value, i) => Math.round((value + diffusePixels[i]) / 2));
+    assert.deepEqual([...await pixels(halfway.url)], [...toneRgba(blend, 'image', tone)]);
+    const cached = await stat(halfway.url.slice(4));
+    assert.equal((await prepare({ ...request, removalStrength: 50, tone })).resources[0].url, halfway.url);
+    assert.equal((await stat(halfway.url.slice(4))).ino, cached.ino);
+    const residual = (await prepare({ ...request, imageLayer: 'stars', removalStrength: 25, tone })).resources[0];
+    const reduced = Uint8Array.from(starPixels, (value, i) => i % 4 === 3 ? value : Math.round(value / 4));
+    assert.equal(residual.sourcePath, starsPath);
+    assert.deepEqual([...await pixels(residual.url)], [...toneRgba(reduced, 'image', tone)]);
+    const changed = await sharp({ create: { width: 4, height: 2, channels: 4, background: '#aa9988' } }).png().toBuffer();
+    await f.write(f.imagePath, changed); catalogue.overlays[0].sha256 = hash(changed); variants.variants[0].originalTextureSha256 = hash(changed);
+    await saveMetadata();
+    const newZero = (await prepare({ ...request, removalStrength: 0 })).resources[0];
+    assert.notEqual(newZero.url, zero.url, 'cache key binds the current original source hash');
+    assert.notDeepEqual(await pixels(newZero.url), resized);
+    assert.deepEqual(await readFile(join(f.root, diffusePath)), diffuse, 'prepared endpoints remain untouched');
+    assert.ok((await readdir(join(f.root, '.local/nebula-lab/tone-cache'))).length <= 2);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });

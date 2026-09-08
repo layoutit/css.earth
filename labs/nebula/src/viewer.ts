@@ -1,3 +1,4 @@
+import type { AppliedSamplingLayers } from './star-sampling-types';
 import records from './subjects.json';
 import { overlayVariantsPath, parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
 import sourceCatalog from '../sources/index.json';
@@ -176,7 +177,7 @@ export interface LabState {
 
 export interface DensityOverlay {
   id: string; label: string; sha256: string; texturePath: string; widthPx: number; heightPx: number;
-  variants?: OverlayVariant[];
+  variants?: OverlayVariant[]; samplingResultId?: string;
   pivotCssPx: [number, number, number];
   initialPlacement?: OverlayPlacement; initialOpacity?: number;
   legacyPlacementBasis?: string;
@@ -430,14 +431,35 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     applyOverlayPlacement(item);
     publish();
   }
+  async function installSamplingLayers(id: string, originalPreviewSha256: string, applied: AppliedSamplingLayers, isCurrent = () => true) {
+    const item = overlayCatalogue?.overlays.find(value => value.id === id), version = loadVersion;
+    if (!item || item.sha256 !== originalPreviewSha256 || !applied.resultId || applied.layers.length !== 2 ||
+      new Set(applied.layers.map(layer => layer.id)).size !== 2) throw new TypeError('Removal layers do not match the original aligned image.');
+    const variants: OverlayVariant[] = [];
+    for (const layer of applied.layers) {
+      if (!['diffuse', 'stars'].includes(layer.id) || !/^[a-f0-9]{64}$/.test(layer.sha256) ||
+        !layer.texturePath.startsWith('.local/nebula-lab/') || layer.texturePath.split('/').includes('..') || /[\\\u0000-\u0020?#]/.test(layer.texturePath) ||
+        !Number.isInteger(layer.widthPx) || layer.widthPx < 1 || !Number.isInteger(layer.heightPx) || layer.heightPx < 1 ||
+        Math.abs(layer.widthPx / layer.heightPx / (item.widthPx / item.heightPx) - 1) > .001)
+        throw new TypeError('Invalid prepared removal image.');
+      const image = new Image(); image.src = localFile(layer.texturePath); await image.decode();
+      if (image.naturalWidth !== layer.widthPx || image.naturalHeight !== layer.heightPx) throw new TypeError('Removal image decoded at the wrong size.');
+      const { url: _serverUrl, ...metadata } = layer;
+      variants.push({ ...metadata, label: layer.id === 'diffuse' ? 'Without stars' : 'Residual' });
+    }
+    if (disposed || version !== loadVersion || !isCurrent()) return;
+    overlayLayerRequests.set(id, (overlayLayerRequests.get(id) ?? 0) + 1);
+    item.variants = variants; item.samplingResultId = applied.resultId;
+    for (const layer of variants) toneResources.bind(layer.texturePath, layer.widthPx, layer.heightPx);
+  }
   function getOverlayLayer(id: string): ImageLayer { return overlayLayers.get(id) ?? 'original'; }
-  async function setOverlayLayer(id: string, layer: ImageLayer) {
+  async function setOverlayLayer(id: string, layer: ImageLayer, isCurrent = () => true) {
     const item = overlayCatalogue?.overlays.find(value => value.id === id);
     const variant = item?.variants?.find(value => value.id === layer);
     if (!item || (layer !== 'original' && !variant)) throw new TypeError('Unknown image layer.');
     const request = (overlayLayerRequests.get(id) ?? 0) + 1, version = loadVersion;
     overlayLayerRequests.set(id, request);
-    const current = () => !disposed && version === loadVersion && overlayLayerRequests.get(id) === request;
+    const current = () => !disposed && version === loadVersion && overlayLayerRequests.get(id) === request && isCurrent();
     const path = variant?.texturePath ?? `${overlayBasePath}${item.texturePath}`;
     const width = variant?.widthPx ?? item.widthPx, height = variant?.heightPx ?? item.heightPx;
     const url = toneResources.url(path, localFile(path)), image = new Image(); image.src = url; await image.decode();
@@ -650,7 +672,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     }
   }
   await setSubject(subject.id);
-  return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayLayer, getOverlayLayer, setOverlayPlacement, getOverlayState,
+  return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayLayer, getOverlayLayer, installSamplingLayers, setOverlayPlacement, getOverlayState,
     referenceView, fitCloud, applyToneResources, applyCloudDensityResources,
     getStars: () => starInfo,
     setStars(options: CloudStarOptions) {

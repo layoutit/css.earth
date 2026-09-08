@@ -52,11 +52,11 @@
               <legend>Image adjustments</legend>
               <label class="field-label" for="overlay-choice">Image</label>
               <select id="overlay-choice"></select>
-              <div id="overlay-layer-control" hidden>
-                <label class="field-label" for="overlay-layer">Image layer</label>
-                <select id="overlay-layer" aria-describedby="overlay-layer-note"></select>
-                <p id="overlay-layer-note" class="overlay-detail"></p>
+              <div class="sidebar-tabs" role="tablist" aria-label="Image inspection">
+                <button id="image-sidebar-tab" type="button" role="tab" aria-controls="image-adjustment-panel" aria-selected="true">Image</button>
+                <button id="star-removal-tab" type="button" role="tab" aria-controls="star-removal-panel" aria-selected="false" tabindex="-1">Star removal</button>
               </div>
+              <section id="image-adjustment-panel" role="tabpanel" aria-labelledby="image-sidebar-tab">
               <div class="overlay-visibility">
                 <label id="overlay-enabled-label" for="overlay-enabled"><input id="overlay-enabled" type="checkbox" /> Show image</label>
                 <label for="overlay-opacity">Opacity</label>
@@ -65,9 +65,33 @@
               <div id="image-tone-controls"></div>
               <div id="overlay-options"></div>
               <p id="overlay-status" class="overlay-status" role="status"></p>
-              <p id="overlay-registration" class="overlay-detail"></p>
-              <p id="overlay-credit" class="overlay-detail"></p>
-              <a id="overlay-source" class="overlay-detail" target="_blank" rel="noreferrer">Image source ↗</a>
+              <button class="text-button" type="button" popovertarget="image-source-info" aria-label="Image source and alignment information">ⓘ Source and alignment</button>
+              <div id="image-source-info" class="lab-info-popover" popover>
+                <button type="button" popovertarget="image-source-info" popovertargetaction="hide" aria-label="Close image information">×</button>
+                <p id="overlay-registration" class="overlay-detail"></p>
+                <p id="overlay-credit" class="overlay-detail"></p>
+                <a id="overlay-source" class="overlay-detail" target="_blank" rel="noreferrer">Image source ↗</a>
+              </div>
+              </section>
+              <section id="star-removal-panel" role="tabpanel" aria-labelledby="star-removal-tab" hidden>
+              <div id="overlay-layer-control" hidden>
+                <div id="overlay-layer" class="image-layer-buttons" role="group" aria-label="Image layer">
+                  <button type="button" data-image-layer="original" aria-label="Original" aria-pressed="true" title="Original"><span aria-hidden="true">▧</span><span>Original</span></button>
+                  <button type="button" data-image-layer="diffuse" aria-label="Without stars" aria-pressed="false" title="Without stars"><span aria-hidden="true">☁</span><span>Without stars</span></button>
+                  <button type="button" data-image-layer="stars" aria-label="Residual" aria-pressed="false" title="Residual"><span aria-hidden="true">✧</span><span>Residual</span></button>
+                </div>
+                <p id="overlay-layer-note" class="overlay-detail"></p>
+                <div id="star-removal-controls">
+                  <div class="tone-control">
+                    <label for="star-removal-range">Star removal</label>
+                    <input id="star-removal-range" title="0% shows the original image; 100% shows the prepared removal. Calibrate and confirm to prepare a new result." type="range" min="0" max="100" step="1" value="100" aria-describedby="star-removal-note" />
+                    <input id="star-removal" type="number" min="0" max="100" step="1" value="100" aria-label="Star removal percent" />
+                  </div>
+                  <p id="star-removal-note" class="visually-hidden">0% Original · 100% Prepared removal</p>
+                </div>
+              </div>
+                <div id="star-sampling-controls"></div>
+              </section>
             </fieldset>
           </aside>
           <aside id="cloud-adjustment-panel" class="floating-panel cloud-adjustment-panel" aria-label="Reconstruction adjustments" hidden>

@@ -2,13 +2,14 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import { tonePreparationPlugin } from './src/tone-preparation';
 import { cloudDensityPreparationPlugin } from './src/cloud-density-preparation';
+import { starSamplingPlugin } from './src/star-sampling-preparation';
 
 const repositoryRoot = fileURLToPath(new URL('../..', import.meta.url));
 
 export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
   publicDir: false,
-  plugins: [tonePreparationPlugin(repositoryRoot), cloudDensityPreparationPlugin(repositoryRoot)],
+  plugins: [tonePreparationPlugin(repositoryRoot), cloudDensityPreparationPlugin(repositoryRoot), starSamplingPlugin(repositoryRoot)],
   define: { __NEBULA_REPO_ROOT__: JSON.stringify(repositoryRoot) },
   server: { fs: { allow: [repositoryRoot] } },
 });

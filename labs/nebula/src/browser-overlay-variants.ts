@@ -16,8 +16,12 @@ async function waitLayer(id: string, layer: string) {
   await page.waitForFunction(([imageId, expected]) => {
     const nodes = [...document.querySelectorAll<HTMLElement>(`[data-overlay-leaf="${imageId}"]`)];
     return nodes.length === 3 && nodes.every(node => node.dataset.imageLayer === expected) &&
-      document.querySelector<HTMLSelectElement>('#overlay-layer')?.value === expected;
+      document.querySelector<HTMLElement>('#overlay-layer')?.dataset.value === expected;
   }, [id, layer], { timeout: 30000 });
+}
+async function chooseLayer(layer: string) {
+  await page.locator('#star-removal-tab').click();
+  await page.locator(`#overlay-layer [data-image-layer="${layer}"]`).click();
 }
 const geometry = () => page.evaluate(() => ({
   camera: document.querySelector<HTMLElement>('#viewer')?.dataset.cameraRevision,
@@ -32,28 +36,31 @@ try {
   assert.equal(await page.locator('#overlay-layer-control').isVisible(), false, 'Original-only source should not expose empty layer controls.');
   for (const row of rows) {
     await page.selectOption('#overlay-choice', row.imageId); await waitLayer(row.imageId, 'original');
+    await page.locator('#star-removal-tab').click();
     assert.equal(await page.locator('#overlay-layer-control').isVisible(), true);
     await page.evaluate(id => { window.__variantLeaves = [...document.querySelectorAll<HTMLElement>(`[data-overlay-leaf="${id}"]`)]; }, row.imageId);
     const before = await geometry();
     for (const layer of row.layers) {
-      await page.selectOption('#overlay-layer', layer.id); await waitLayer(row.imageId, layer.id);
+      await chooseLayer( layer.id); await waitLayer(row.imageId, layer.id);
       assert.deepEqual(await geometry(), before, 'Layer switching changed placement, opacity or camera.');
       assert.ok(await page.locator(`[data-overlay-leaf="${row.imageId}"]`).first().evaluate(node => (node as HTMLElement).style.backgroundImage.includes('lmc-star-separation/prepared/')));
     }
+    await page.locator('#image-sidebar-tab').click();
     await page.locator('#image-tone-brightness').fill('1.2'); await page.locator('#image-tone-brightness').dispatchEvent('change');
     await page.waitForFunction(() => document.querySelector('[data-tone-target="image"] .tone-status')?.textContent === 'Tone applied', { timeout: 30000 });
-    await page.selectOption('#overlay-layer', 'diffuse'); await waitLayer(row.imageId, 'diffuse');
+    await chooseLayer( 'diffuse'); await waitLayer(row.imageId, 'diffuse');
     assert.equal(await page.locator('#image-tone-brightness').inputValue(), '1.2', 'Tone should be shared across layers.');
     await page.waitForFunction(() => document.querySelector('[data-tone-target="image"] .tone-status')?.textContent === 'Tone applied', { timeout: 30000 });
     assert.deepEqual(await geometry(), before);
-    await page.selectOption('#overlay-layer', 'original'); await waitLayer(row.imageId, 'original');
+    await chooseLayer( 'original'); await waitLayer(row.imageId, 'original');
     assert.equal(await page.locator('#image-tone-brightness').inputValue(), '1.2');
     await page.waitForFunction(() => document.querySelector('[data-tone-target="image"] .tone-status')?.textContent === 'Tone applied', { timeout: 30000 });
     assert.deepEqual(await geometry(), before);
-    await page.selectOption('#overlay-layer', 'stars'); await waitLayer(row.imageId, 'stars');
+    await chooseLayer( 'stars'); await waitLayer(row.imageId, 'stars');
+    await page.locator('#image-sidebar-tab').click();
     await page.locator('#reset-image-tone').click();
     await page.waitForFunction(() => document.querySelector('[data-tone-target="image"] .tone-status')?.textContent === 'Tone applied');
-    await page.selectOption('#overlay-layer', 'original'); await waitLayer(row.imageId, 'original');
+    await chooseLayer( 'original'); await waitLayer(row.imageId, 'original');
     await page.waitForFunction(() => document.querySelector('[data-tone-target="image"] .tone-status')?.textContent === 'Tone applied');
     assert.equal(await page.locator('#image-tone-brightness').inputValue(), '1');
     assert.ok(await page.locator(`[data-overlay-leaf="${row.imageId}"]`).first().evaluate(node =>
