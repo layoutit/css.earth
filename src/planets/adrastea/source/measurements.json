@@ -21,6 +21,7 @@
       64,
       32
     ],
-    "interpretation": "Neutral display brightness, not measured surface color or albedo."
+    "interpretation": "Every input pixel is an explicit no-coverage sentinel. The shared prepare-missing-coverage.mjs grid supplies the displayed material; grid lines are not measured terrain.",
+    "noData": 160
   }
 }
