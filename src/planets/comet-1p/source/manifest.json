@@ -1,0 +1,203 @@
+{
+  "schema": "csscomet-1p-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "stooke-halley",
+      "path": "shape/1682q1halley.tab",
+      "expectedBytes": 70226,
+      "expectedSha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
+      "credit": "Philip Stooke; Alain Abergel (pointing); Giotto and Vega missions; NASA PDS",
+      "license": "PDS public scientific archive; credit Stooke and Abergel",
+      "licenseEvidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+      ],
+      "acquisition": "Original PDS4 radius table; restore exact bytes and SHA-256.",
+      "redistribution": "Preserve the PDS product identifier and the label request to credit both Abergel and Stooke.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 174,
+      "expectedSha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral model material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4579.06433330178
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Historical model",
+      "falseColor": false
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 65726,
+      "expectedSha256": "88e4da495091cecc72e66dbc6a9676ea2ab40ca48bceaa367f1d97a95faa90da",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
+      "credit": "Philip Stooke; Alain Abergel (pointing); Giotto and Vega missions; NASA PDS",
+      "license": "PDS public scientific archive; credit Stooke and Abergel",
+      "licenseEvidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+      ],
+      "acquisition": "Checked-in model context; reproduced and hash-verified by shared preparation.",
+      "redistribution": "Preserve the PDS product identifier and the label request to credit both Abergel and Stooke.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "stooke-halley",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 15,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4270,
+      "expectedSha256": "c777f6fccded057af25769749610f62b52a287f416bfddafbc15a213d640919d",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 726,
+      "expectedSha256": "02d3dab0ddb1c825547477af287fc0448afc7ba1a0bf64869dd24ba472f6432c",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1680,
+      "expectedSha256": "4389852fcdfed3e07beb1979b0aed397a854e27f93977d8a4d28d299a25f93fe",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 510,
+      "expectedSha256": "ad4337fd3508766b58ea05e6463979c6b065cff03b0bea015e53fbdca8afab25",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3524,
+      "expectedSha256": "7e076938b5917ca3d65aec16807630830c15786213ca080a73970a2fa3c5bc30",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 41,
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2905,
+      "expectedSha256": "3d4d26b465fa2c05130181729b11e9b10c7838883df409b5f16be702dd7cec6d",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/bundle_description.txt",
+      "expectedBytes": 5105,
+      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7684,
+      "expectedSha256": "30defa966ef82dc8323b6940a27ec03c629a995fe0d85e7a89d557a0ac05b348",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6974,
+      "expectedSha256": "c1a497618a2dced30ee92508e95ba0264426005c98a0529251aefdb84c861c49",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/1682q1halley.xml",
+      "expectedBytes": 9520,
+      "expectedSha256": "3f8d349a7328bb6683d94ddc6d0df80c798bae89b8d009797c1fb83c60bca9a7",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "cccea4cd70e7d73b7585417f652f4cabd0892df85174ab43a993993675faa1f2",
+      "purpose": "Halley source evidence or authored preparation input."
+    }
+  ]
+}

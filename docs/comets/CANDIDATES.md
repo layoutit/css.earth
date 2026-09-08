@@ -1,6 +1,6 @@
 # Further comet intake
 
-The PoC includes 67P, Hartley 2, Tempel 1 and the observed terrain of Wild 2. Additional names are not registered until their geometry and interpretation support a useful mounted scene. The following archive products were inspected on 8 September 2026; an unresolved candidate is not a claim that usable data does not exist.
+The PoC includes 67P, Hartley 2, Tempel 1, the completed PDS Wild 2 model and Halley's historical model. The following archive products were inspected on 8 September 2026; an unresolved candidate is not a claim that usable data does not exist.
 
 ## Wild 2: completed PDS model selected
 
@@ -12,8 +12,8 @@ The [DS1 PDS catalogue](https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borr
 
 A useful implementation would preserve that terrain footprint, datum and observed framing. Treating these heights as global nucleus radii would be incorrect. This partial terrain presentation remains unresolved and is not registered.
 
-## Halley: highly uncertain historical shape
+## Halley: historical model selected
 
 The [specific PDS4 Halley label](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml) describes Stooke's Giotto/Vega limb-and-terminator model: 2,701 longitude/latitude/radius samples, 5° spacing, kilometers, east-positive longitude. The coordinate reference axis follows the long axis, with north toward the larger end; it must not be substituted for a simple spin pole.
 
-The source estimates absolute errors around 500–1,000 m and warns that depressions may be exaggerated. Its [bundle description](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/document/bundle_description.txt) also warns that the model origin need not be the center of figure. A historical model view could be useful with these limits, but a detailed surface or confidently registered current orientation is not supported by this intake. The exact table, label and hashes are retained under `output/comet-intake/halley/`; no Halley scene is shipped.
+The source estimates absolute errors around 500–1,000 m and warns that depressions may be exaggerated. Its [bundle description](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/document/bundle_description.txt) also warns that the model origin need not be the center of figure. The selected view is explicitly labelled as a highly uncertain historical model, with neutral material, a preserved local frame and an illustrative fixed attitude. The exact table, label and hashes are checked in under `src/planets/comet-1p/source/`. See [Halley qualification](HALLEY.md).

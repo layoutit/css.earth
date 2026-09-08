@@ -6,7 +6,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { OBJECTS } from '../../../../site/objects.mjs';
-import { loadObjShape, loadPdsPlanetocentricShape, loadPdsPlateShape, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import { loadObjShape, loadPdsPlanetocentricShape, loadPdsPlateShape, loadPdsRadiusTable, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
 import { surfaceDistanceIndex } from './surface-distance.mjs';
 
 const output = resolve(process.argv[2] ?? 'output/comet-source-fit');
@@ -21,7 +21,7 @@ for (const { id } of selected) {
   const profile = config.geometry.radialTerrain;
   const sourcePath = resolve(root, 'source', profile.path);
   const loader = { 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
-    'pds-plate-model': loadPdsPlateShape }[profile.format];
+    'pds-plate-model': loadPdsPlateShape, 'pds-radius-table': loadPdsRadiusTable }[profile.format];
   assert.ok(loader, 'Source comparison requires a supported released mesh.');
   const source = await loader(sourcePath, profile.grid);
   const preparedBytes = await readFile(resolve(root, 'prepared/terrain.json'));

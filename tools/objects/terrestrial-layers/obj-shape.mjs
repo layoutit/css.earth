@@ -116,7 +116,11 @@ export function parsePdsRadiusTable(text, profile) {
     const key = Math.abs(lat) === 90 ? `pole,${lat}` : `${x % nx},${y}`;
     const radius = radii.get(`${lon},${lat}`), prior = ids.get(key);
     if (prior !== undefined) {
-      if (Math.abs(Math.hypot(...positions[prior]) / profile.metersPerUnit - radius) > 1e-6) throw new Error('Inconsistent radius table seam or pole.');
+      // Published decimal radii can differ by the last 1e-6 source unit.
+      // Allow floating-point roundoff at that boundary, without widening the
+      // source precision tolerance (1 mm for kilometre tables).
+      const roundoff = 8 * Number.EPSILON * Math.max(1, radius);
+      if (Math.abs(Math.hypot(...positions[prior]) / profile.metersPerUnit - radius) > 1e-6 + roundoff) throw new Error('Inconsistent radius table seam or pole.');
       return prior;
     }
     const l = lon * Math.PI / 180 * (longitudeDirection === 'west-positive' ? -1 : 1), p = lat * Math.PI / 180;
