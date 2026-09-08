@@ -214,3 +214,8 @@ over 2020–2032 because their osculating phase cannot be unwrapped at the older
 coarse cadence. Independent fixture maximum residuals are 1,267.43 km
 (Amalthea), 530.07 km (Thebe), 972.87 km (Adrastea), and 946.81 km (Metis).
 These are fit residuals, not measured orbital uncertainties.
+
+The added inner Neptunian moons use daily Horizons element samples over
+2020–2032. Maximum residuals at six independent fixture epochs are238km
+(Naiad),105km(Thalassa),64km(Despina), and55km(Galatea). These are observed
+fit residuals of the shared precessing-ellipse model, not trajectory error bounds.

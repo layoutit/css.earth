@@ -1,0 +1,7 @@
+# Naiad
+
+Measured reference ellipsoid from Karkoschka (2003), DOI: 10.1016/S0019-1035(03)00002-2. Standard missing-coverage grid; no invented surface imagery. Shared generic object adapter and native CSS triangle renderer.
+
+Voyager survey: NASA/JPL; PDS Ring-Moon Systems Node. Orientation: IAU/WGCCRE; NASA/NAIF. Starfield: ESO/S. Brunier, CC BY 4.0. Inter font: Rasmus Andersson, SIL OFL 1.1.
+
+`pnpm setup:assets --object=naiad` installs the published runtime assets.
