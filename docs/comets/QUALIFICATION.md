@@ -1,34 +1,44 @@
 # Qualification record
 
-The three-comet implementation is integrated with base **1398bd9025940b6fb0d0188dfa518cdfacba782e**. Full-suite evidence was captured at **6724acda**. The subsequent **5042c066** correction changes 67P's caption and associated provenance from 4 to **3 September 2026**, matching the existing numerical epoch JD 2461286.5; it changes no mesh, raster asset, orbital calculation or interaction behavior. Source verification, a full build, affected comet checks and all six production drag captures were refreshed after that correction. Later documentation commits package those results.
+The PoC contains 67P, Hartley 2, Tempel 1 and Wild 2's observed terrain, integrated with base **1398bd9025940b6fb0d0188dfa518cdfacba782e**. The final application build and aggregate checks use **67217245**; subsequent evidence commits do not change application code or prepared runtime bytes. The shared scene epoch is **3 September 2026**, JD 2461286.5. Arbitrary model phase is not a current rotational orientation.
 
 | Check | Result |
 | --- | --- |
-| `pnpm acquire:planets -- --verify-only` | PASS, all 74 registered objects; repeated after the caption correction |
-| `pnpm test` | PASS at the integrated implementation: packages, renderer, 735 platform tests and 220 shell tests |
-| `pnpm build` | PASS, including runtime assembly; repeated after the caption correction |
-| `pnpm test:browser http://127.0.0.1:4258` | PASS: 148 object/DPR cases and two six-hop navigation cases; zero problems. Affected 67P DPR 1/2 checks repeated after the caption correction |
-| Detailed comet conformance | PASS, development build with diagnostics: 9 cases for 67P, 13 each for Hartley 2 and Tempel 1, including DPR 1/2, mobile, pre-ready behavior and applicable lens races/failures. 67P repeated after the caption correction |
-| Registry-derived comet navigation | PASS, production build, DPR 1/2: Earth and every comet, including repeat visits; one scene throughout; shell/universe identity and node/style counts retained |
-| Source geometry and constraint tests | PASS: original source positions, winding, closed topology, volume retention, categorical source flags and reproducible map bytes. Six comet geometry/distance/trace tests passed again after the caption correction |
-| Source-fit measurements | Source/prepared nearest-surface distances and six-view ray comparisons recorded with limitations in [GEOMETRY.md](GEOMETRY.md) |
-| Fresh source restoration | PASS: ten real downloads across three empty source directories; exact source hashes verified; checked-in authored inputs copied explicitly. Repeated with corrected caption inputs |
-| Fresh runtime restoration | PASS: 99 downloads, zero reused files, 22,102,428 bytes verified against published inventories; all 99 current assets still match this receipt |
-| Production drag traces | PASS for retained DOM, asset identity, error and request checks at 5042c066; measured timing limits in [PERFORMANCE.md](PERFORMANCE.md) |
-| `pnpm test:preparation` | 494/501 pass; all seven failures reproduce on the unchanged isolated base (477/485 pass there, including one additional Sun manifest-pin failure corrected here) |
+| `pnpm acquire:planets -- --verify-only` | PASS, all 75 registered objects |
+| `pnpm test` | PASS: packages, 308 renderer tests, 738 platform tests and 220 shell tests |
+| `pnpm build` | PASS, including all static routes and runtime assembly |
+| `pnpm test:browser http://127.0.0.1:4258` | PASS: 150 object/DPR cases and two six-hop navigation cases; zero problems |
+| Detailed comet conformance | PASS: 9 cases each for 67P and Wild 2 on the final implementation, including DPR 1/2, mobile and pre-ready behavior. The 13-case Hartley 2 and Tempel 1 records remain valid for their unchanged lenses and controls |
+| Registry-derived comet navigation | PASS, production, DPR 1/2: nine visits per density through Earth and all four comets, including repeats; one scene throughout; shell/universe identity and node/style counts retained |
+| Focused comet geometry and trace tests | PASS, seven tests: original source positions, closed or preserved open topology as applicable, categorical source constraints, nearest-surface diagnostics and Chrome trace event interpretation |
+| Wild 2 open-surface targeting | PASS, six rotated views at each DPR: 654 native front-face interior hits, 4,135 clear misses including 417 hidden-backface-only misses, zero mismatches per density. Raster-boundary samples are recorded separately |
+| Source-fit and close-view measurements | Recorded with finite-sampling and rendering limits in [GEOMETRY.md](GEOMETRY.md) |
+| Fresh source restoration | PASS: thirteen real downloads across four empty source directories; exact hashes verified; checked-in authored inputs copied explicitly |
+| Fresh runtime restoration | PASS: 130 downloads, zero reused files, 29,322,242 bytes across the current four inventories. Wild 2's 31-file installation uses the normal `pnpm setup:assets --object=comet-81p` command; those downloaded bytes also serve the production browser checks |
+| Production drag traces | PASS: eight production captures at c94c7abe retain DOM and atlas identity, with zero errors or interaction-time requests; measured timing limits in [PERFORMANCE.md](PERFORMANCE.md) |
+| `pnpm test:preparation` | 500/507 pass; all seven failures reproduce on the unchanged isolated base (477/485 pass there, including one additional Sun manifest-pin failure corrected here) |
 
-The seven preparation failures concern Mercury/Venus celestial compatibility, Ceres refresh coverage expecting `presentation/surface-map.json`, Kleopatra's extra `.gitignore` file, Mercury physical-scene compatibility bytes, Mercury marker/phase/catalogue bytes, Mercury Sun-presentation compatibility bytes, and the missing-marker rejection expectation. The isolated baseline at `/tmp/cssEarth-comets-baseline-1398` uses the exact base source, restored matching inputs/assets, built packages and regenerated object payloads, and has no tracked diff. No tolerance or assertion was weakened to hide these failures. Log hashes are in [gate-log-hashes.json](evidence/gate-log-hashes.json).
+The seven preparation failures concern Mercury/Venus celestial compatibility, Ceres refresh coverage expecting `presentation/surface-map.json`, Kleopatra's extra `.gitignore` file, Mercury physical-scene compatibility bytes, Mercury marker/phase/catalogue bytes, Mercury Sun-presentation compatibility bytes, and the missing-marker rejection expectation. The exact-base worktree at `/tmp/cssEarth-comets-baseline-1398` uses restored matching inputs/assets, built packages and regenerated payloads, with no tracked diff. No tolerance or assertion was weakened to hide these failures. Log hashes are in [gate-log-hashes.json](evidence/gate-log-hashes.json).
 
-Integration also corrected two inherited contract issues: the Sun content manifest now pins its existing checked-in bytes, and major-body label styling selects registry classifications instead of a literal Sun id. The latter preserves the current styling and passes the 54 focused ownership/layout checks. Neither change adds a comet-specific shell path.
+The initial final-build attempt stopped with `ENOSPC` while copying assets. A subsequent full build passed after recovering space through independent copy-on-write copies of identical pinned source files; every source hash remained unchanged. The failed attempt is retained locally and is not a passing build record.
 
-The detailed harness requires development-only diagnostic APIs. Earlier production attempts with that harness timed out and are **invalid evidence**. An earlier development capture interrupted by hot reload and tests run during incomplete post-rebase asset restoration are also excluded. Accepted production checks use DOM and network observations without diagnostic APIs. Accepted conformance, production DOM/navigation and fresh-restore reports are under [evidence](evidence). The full 148-case report is `production-dom.json`; the caption follow-up is `67p-caption-dom.json`.
+Integration also corrected two inherited contract issues: the Sun content manifest pins its existing checked-in bytes, and major-body label styling selects registry classifications instead of a literal Sun id. The latter preserves current styling and passed 54 focused ownership/layout checks. Neither change adds a comet-specific shell path.
+
+Wild 2 adds one preparation capability for genuinely open observations and one optional prepared front-face rule for targeting. Existing plans retain their original two-sided hit behavior. The [native-targeting report](evidence/81p-open-surface.json) binds the exact runtime bytes restored after the face-budget trials; the tested picker and harness are unchanged. Points within half a CSS pixel of a source edge are raster-boundary evidence, not interior assertions. No missing hemisphere is filled.
+
+The [existing-payload audit](evidence/81p-existing-payloads.json) compares Wild 2's integration with the three-comet implementation: 65 existing scene/runtime files change only shared heliocentric marker indices/counts. Existing object-owned geometry and materials are unchanged. The application still mounts one object scene through its generic adapter and shared shell.
+
+## Visual evidence and limits
 
 ![67P production preview](evidence/67p.png)
 ![Hartley 2 source constraints](evidence/103p.png)
 ![Tempel 1 source constraints](evidence/9p.png)
+![Wild 2 observed surface with Shadows enabled](evidence/81p.png)
 
-The earlier claim of intermittently missing Hartley 2 graphics is **retracted**. The supposedly different headless screenshots are byte-identical; direct PNG decoding confirms the title, both badges and section labels. The title pixels also match headed Chrome exactly. The [capture verification](evidence/capture-anomalies.json) records the file and region hashes. These files demonstrate an error in the earlier visual interpretation, not an application paint defect. The [repeat capture](evidence/103p-repeat-capture.png) and [headed capture](evidence/103p-headed-capture.png) remain available for inspection.
+Wild 2's [flood-lit view](evidence/81p-front-flood.png), [close view](evidence/81p-close-flood.png) and [unobserved-side view](evidence/81p-open-side.png) expose both its measured coverage and the limitations of a 996-face, 64-pixel-per-triangle presentation. The [capture record](evidence/81p-visuals.json) includes actions, camera transforms, image hashes and hashes of the actually loaded body atlases. Close-view texture/facet artifacts are not observations; the source-lighting and encoded-edge measurements are in [GEOMETRY.md](GEOMETRY.md#wild-2-close-view-limits).
 
-These are unmodified browser screenshots. The original NAVCAM reference beside 67P has a different observer, epoch, pose and optical model; no photograph/browser pixel-parity claim is made. Hartley 2 and Tempel 1 colors identify source constraints, not observed albedo. All three retain the interpretation limits described in their source notes.
+These are unmodified Chrome screenshots. The original NAVCAM reference beside 67P has a different observer, epoch, pose and optical model; no photograph/browser pixel-parity claim is made. Hartley 2 and Tempel 1 colors identify source constraints, not observed albedo. Wild 2's neutral material also is not observed albedo. The models retain the coordinate, coverage, illumination and orbital-placement limits in their source notes.
 
-Existing-object payload changes rebind shared heliocentric marker indices/counts after adding entries to the common atlas. Existing object-owned geometry and materials are unchanged. The application still mounts one object scene through its generic adapter and shared shell. Wild 2, Borrelly and Halley remain explicitly unresolved candidates in [CANDIDATES.md](CANDIDATES.md), with no placeholder routes.
+The earlier missing-graphics interpretation of Hartley 2 screenshots was disproved by identical file hashes and direct pixel checks. The [capture verification](evidence/capture-anomalies.json) preserves that correction; no application paint fix was made. Production attempts with the development-only conformance harness, hot-reload-interrupted captures and response-body collection failures are excluded from accepted evidence.
+
+Borrelly and Halley remain unresolved candidates in [CANDIDATES.md](CANDIDATES.md), with no placeholder routes. No tail, coma, outgassing simulation or invented unseen terrain is added.

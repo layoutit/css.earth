@@ -1,16 +1,16 @@
 {
   "schema": "cssearth-comet-drag-trace@1",
-  "capturedAt": "2026-09-08T07:11:05.108Z",
+  "capturedAt": "2026-09-08T07:12:39.290Z",
   "codeRevision": "c94c7abe160a1d8756e23e537984374c57708920",
   "build": "production",
-  "route": "http://127.0.0.1:4258/comet-103p/?v=MMZABs0m6cQ300FCxzNAAAAAv9Ch9ed1ZjIAAAAAAAAAAAAAAAAAAAAAAAA",
+  "route": "http://127.0.0.1:4258/comet-81p/?v=MMZAItd3i1XW5UFCxzNAAAAAv9Ch9ecU4iQAAAAAAAAAAAAAAAAAAAAAAAA",
   "browser": "152.0.7977.76",
   "headless": true,
   "viewport": {
     "width": 1440,
     "height": 900
   },
-  "dpr": 1,
+  "dpr": 2,
   "hardware": [
     "Mac15,11",
     "38654705664",
@@ -42,7 +42,7 @@
       "glWsVendor": "",
       "glWsVersion": "",
       "inProcessGpu": false,
-      "initializationTime": 0.063288,
+      "initializationTime": 0.06261,
       "isAsan": false,
       "isClangCoverage": false,
       "jpegDecodeAcceleratorSupported": false,
@@ -94,40 +94,40 @@
     "wheels": 0
   },
   "initial": {
-    "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, -8e-06, -6e-06, 116.839, 1)",
-    "nodes": 26830,
-    "bodyLeaves": 1000,
+    "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 6e-06, 0, 116.839, 1)",
+    "nodes": 26826,
+    "bodyLeaves": 996,
     "atlasUrls": [
-      "url(\"http://127.0.0.1:4258/scenes/comet-103p/comet-103p-constraints-shadow@2x.webp\")"
+      "url(\"http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-shadow@2x.webp\")"
     ],
     "diagnosticsAvailable": false
   },
   "final": {
-    "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0172984, -0.0100382, 0, 0, 0.0100382, 0.0172984, 0, -7e-06, 4e-06, 116.839, 1)",
-    "nodes": 26830,
+    "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0172984, -0.0100382, 0, 0, 0.0100382, 0.0172984, 0, -6e-06, 0, 116.839, 1)",
+    "nodes": 26826,
     "retainedIdentity": true,
     "atlasUrls": [
-      "url(\"http://127.0.0.1:4258/scenes/comet-103p/comet-103p-constraints-shadow@2x.webp\")"
+      "url(\"http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-shadow@2x.webp\")"
     ]
   },
   "errors": [],
   "interactionRequests": [],
   "prepared": {
-    "src/planets/comet-103p/prepared/object.json": {
-      "bytes": 6787765,
-      "sha256": "85424f6277ca26065174ff13f77fd41f8144fa92484663b4b4841ff009cfa497"
+    "src/planets/comet-81p/prepared/object.json": {
+      "bytes": 6777153,
+      "sha256": "eb5dc5e5779f7172bb63f93ffa6c9f271f2ab86916b11b80ec91c64de95d5a87"
     },
-    "src/planets/comet-103p/prepared/runtime.json": {
-      "bytes": 6787646,
-      "sha256": "34efc6b06d472cb28e1f7a2ca6e3408a153260de8fb63cf6cf6a32246cbffb1b"
+    "src/planets/comet-81p/prepared/runtime.json": {
+      "bytes": 6777035,
+      "sha256": "0f4513deaa1958f089e6f3d139a10424c39cf21c72a45e34d0a5eea7e08c112f"
     },
-    "src/planets/comet-103p/runtime-assets.json": {
-      "bytes": 6040,
-      "sha256": "55a34ccbe41ebb9e19b0f4c09b5107cd0b6347ae86596ef21ccf9ef6934f4e88"
+    "src/planets/comet-81p/runtime-assets.json": {
+      "bytes": 5476,
+      "sha256": "18cd69e3536004be339baf26e05770c2bee05bdaf523c73b40aeaaef9308ed70"
     },
-    "src/planets/comet-103p/prepared/terrain.json": {
-      "bytes": 463738,
-      "sha256": "fa7e76848650f51f412be88f4dcb436b838129a2f2b6c2efeb608fdf57be9466"
+    "src/planets/comet-81p/prepared/terrain.json": {
+      "bytes": 463991,
+      "sha256": "6ed9864ee0f4c9bd8419737145dae148ebd14df41ee3d836af25b50fa27dffda"
     }
   },
   "loaded": [
@@ -152,29 +152,29 @@
       "sha256": "6ed8d55280a7af221ee26a8d0e6b50f4091b6b68e4b5c55a64fc04b31f4aca46"
     },
     {
-      "url": "http://127.0.0.1:4258/comet-103p/",
-      "bytes": 1316051,
-      "sha256": "aa21fbd579b2663044dd7348554cb75f2198fe40858be1dfdad9fa5f6d5e78d5"
+      "url": "http://127.0.0.1:4258/comet-81p/",
+      "bytes": 1313583,
+      "sha256": "77d0e42188225ac08b4051d7114c870feacddd6a36988d8f587608f65069870d"
     },
     {
-      "url": "http://127.0.0.1:4258/scenes/comet-103p/comet-103p-constraints-shadow@2x.webp",
-      "bytes": 158052,
-      "sha256": "57af9c4a8758793c6092889a497647f75d93c2cc261ee4fadfccaae29146b1a9"
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-shadow@2x.webp",
+      "bytes": 131344,
+      "sha256": "bb2a61b3b1ac755248269938829ac9dc600d8d66651fb58b3d5998789e6ac269"
     },
     {
-      "url": "http://127.0.0.1:4258/scenes/comet-103p/comet-103p-constraints-surface@2x.webp",
-      "bytes": 157252,
-      "sha256": "101248d7a409403bcdd3ad5aa674d33a6452f87089fcde8794780c6e04304e73"
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-surface@2x.webp",
+      "bytes": 163714,
+      "sha256": "1dd349acde47f6b257e1ba869bfcce54ab45280e7753645c906ebe40491f2c6f"
     }
   ],
-  "durationMs": 6291.441,
+  "durationMs": 6342.796,
   "rendererMain": {
-    "pid": 85428,
-    "tid": 27234690
+    "pid": 86079,
+    "tid": 27238918
   },
   "rafIntervals": {
     "count": 369,
-    "totalMs": 6283,
+    "totalMs": 6333.1,
     "medianMs": 16.7,
     "p95Ms": 16.8,
     "maxMs": 50,
@@ -183,237 +183,237 @@
   },
   "drawCadence": [
     {
-      "thread": "85428:27234729",
-      "count": 366,
+      "thread": "86079:27238967",
+      "count": 365,
       "intervals": {
-        "count": 365,
-        "totalMs": 6239.91,
-        "medianMs": 16.819,
-        "p95Ms": 18.771,
-        "maxMs": 67.033,
-        "over33ms": 2,
+        "count": 364,
+        "totalMs": 6287.732,
+        "medianMs": 16.75,
+        "p95Ms": 19.84,
+        "maxMs": 68.791,
+        "over33ms": 3,
         "over50ms": 1
       }
     }
   ],
   "drawDurations": {
     "ProxyImpl::OnCanDrawStateChanged": {
-      "count": 435,
-      "totalMs": 0.456,
+      "count": 438,
+      "totalMs": 0.489,
       "medianMs": 0.001,
-      "p95Ms": 0.001,
-      "maxMs": 0.002,
+      "p95Ms": 0.002,
+      "maxMs": 0.006,
       "over33ms": 0,
       "over50ms": 0
     },
     "LayerTreeImpl::UpdateDrawProperties": {
-      "count": 726,
-      "totalMs": 201.24,
-      "medianMs": 0.266,
-      "p95Ms": 0.387,
-      "maxMs": 0.537,
+      "count": 725,
+      "totalMs": 251.011,
+      "medianMs": 0.334,
+      "p95Ms": 0.488,
+      "maxMs": 0.639,
       "over33ms": 0,
       "over50ms": 0
     },
     "LayerTreeImpl::UpdateDrawProperties::CalculateDrawProperties": {
-      "count": 726,
-      "totalMs": 118.481,
-      "medianMs": 0.153,
-      "p95Ms": 0.216,
-      "maxMs": 0.266,
+      "count": 725,
+      "totalMs": 146.939,
+      "medianMs": 0.194,
+      "p95Ms": 0.276,
+      "maxMs": 0.354,
       "over33ms": 0,
       "over50ms": 0
     },
     "draw_property_utils::ComputeDrawPropertiesOfVisibleLayers": {
-      "count": 726,
-      "totalMs": 83.368,
-      "medianMs": 0.113,
-      "p95Ms": 0.136,
-      "maxMs": 0.171,
+      "count": 725,
+      "totalMs": 104.059,
+      "medianMs": 0.144,
+      "p95Ms": 0.172,
+      "maxMs": 0.23,
       "over33ms": 0,
       "over50ms": 0
     },
     "LayerTreeImpl::UpdateDrawProperties::Occlusion": {
-      "count": 726,
-      "totalMs": 82.07,
-      "medianMs": 0.114,
-      "p95Ms": 0.173,
-      "maxMs": 0.27,
+      "count": 725,
+      "totalMs": 103.358,
+      "medianMs": 0.14,
+      "p95Ms": 0.218,
+      "maxMs": 0.292,
+      "over33ms": 0,
+      "over50ms": 0
+    },
+    "RasterTask": {
+      "count": 2229,
+      "totalMs": 213.001,
+      "medianMs": 0.104,
+      "p95Ms": 0.236,
+      "maxMs": 0.392,
       "over33ms": 0,
       "over50ms": 0
     },
     "TileManager::DidFinishRunningTileTasksRequiredForDraw": {
-      "count": 369,
-      "totalMs": 0.829,
+      "count": 371,
+      "totalMs": 0.8,
       "medianMs": 0.002,
       "p95Ms": 0.005,
       "maxMs": 0.009,
       "over33ms": 0,
       "over50ms": 0
     },
-    "RasterTask": {
-      "count": 2768,
-      "totalMs": 196.389,
-      "medianMs": 0.029,
-      "p95Ms": 0.192,
-      "maxMs": 0.269,
-      "over33ms": 0,
-      "over50ms": 0
-    },
     "ProxyImpl::ScheduledActionDraw": {
-      "count": 366,
-      "totalMs": 383.875,
-      "medianMs": 1.061,
-      "p95Ms": 1.268,
-      "maxMs": 1.53,
+      "count": 365,
+      "totalMs": 474.041,
+      "medianMs": 1.306,
+      "p95Ms": 1.573,
+      "maxMs": 2.202,
       "over33ms": 0,
       "over50ms": 0
     },
     "MainFrame.Draw": {
-      "count": 366,
-      "totalMs": 383.619,
-      "medianMs": 1.06,
-      "p95Ms": 1.267,
-      "maxMs": 1.523,
+      "count": 365,
+      "totalMs": 473.767,
+      "medianMs": 1.305,
+      "p95Ms": 1.572,
+      "maxMs": 2.197,
       "over33ms": 0,
       "over50ms": 0
     },
     "LayerTreeHostImpl::PrepareToDraw": {
-      "count": 366,
-      "totalMs": 236.571,
-      "medianMs": 0.663,
-      "p95Ms": 0.832,
-      "maxMs": 1.015,
+      "count": 365,
+      "totalMs": 295.305,
+      "medianMs": 0.832,
+      "p95Ms": 1.025,
+      "maxMs": 1.323,
       "over33ms": 0,
       "over50ms": 0
     },
     "TileManager::PrepareToDraw": {
-      "count": 366,
-      "totalMs": 6.205,
-      "medianMs": 0.012,
-      "p95Ms": 0.04,
-      "maxMs": 0.05,
+      "count": 365,
+      "totalMs": 6.343,
+      "medianMs": 0.013,
+      "p95Ms": 0.048,
+      "maxMs": 0.058,
       "over33ms": 0,
       "over50ms": 0
     },
     "TileManager::IsReadyToDraw": {
-      "count": 366,
-      "totalMs": 4.595,
-      "medianMs": 0.008,
-      "p95Ms": 0.036,
-      "maxMs": 0.045,
+      "count": 365,
+      "totalMs": 4.679,
+      "medianMs": 0.009,
+      "p95Ms": 0.043,
+      "maxMs": 0.054,
       "over33ms": 0,
       "over50ms": 0
     },
     "DrawLayers.FrameViewerTracing": {
-      "count": 96,
-      "totalMs": 0.097,
+      "count": 117,
+      "totalMs": 0.123,
       "medianMs": 0.001,
       "p95Ms": 0.001,
-      "maxMs": 0.002,
+      "maxMs": 0.005,
       "over33ms": 0,
       "over50ms": 0
     },
     "DirectRenderer::DrawFrame": {
-      "count": 365,
-      "totalMs": 5513.783,
-      "medianMs": 14.953,
-      "p95Ms": 17.165,
-      "maxMs": 18.419,
+      "count": 364,
+      "totalMs": 5432.29,
+      "medianMs": 15.034,
+      "p95Ms": 18.012,
+      "maxMs": 20.256,
       "over33ms": 0,
       "over50ms": 0
     },
     "DirectRenderer::DrawFrame ProcessForOverlays": {
-      "count": 365,
-      "totalMs": 1.733,
-      "medianMs": 0.005,
-      "p95Ms": 0.006,
-      "maxMs": 0.022,
+      "count": 364,
+      "totalMs": 1.744,
+      "medianMs": 0.004,
+      "p95Ms": 0.008,
+      "maxMs": 0.027,
       "over33ms": 0,
       "over50ms": 0
     },
     "SkiaRenderer::SwapBuffers": {
       "count": 364,
-      "totalMs": 4.378,
-      "medianMs": 0.011,
-      "p95Ms": 0.019,
-      "maxMs": 0.022,
+      "totalMs": 4.565,
+      "medianMs": 0.012,
+      "p95Ms": 0.02,
+      "maxMs": 0.031,
       "over33ms": 0,
       "over50ms": 0
     }
   },
   "main": {
     "tasks": {
-      "count": 4875,
-      "totalMs": 3048.329,
-      "medianMs": 0.004,
-      "p95Ms": 7.332,
-      "maxMs": 49.722,
+      "count": 3505,
+      "totalMs": 3292.253,
+      "medianMs": 0.009,
+      "p95Ms": 8.28,
+      "maxMs": 49.443,
       "over33ms": 1,
       "over50ms": 0
     },
     "script": {
       "count": 3738,
-      "totalMs": 1123.432,
-      "medianMs": 0.015,
-      "p95Ms": 2.194,
-      "maxMs": 4.855,
+      "totalMs": 1200.263,
+      "medianMs": 0.016,
+      "p95Ms": 2.408,
+      "maxMs": 5.495,
       "over33ms": 0,
       "over50ms": 0
     },
     "style": {
-      "count": 1473,
-      "totalMs": 587.18,
-      "medianMs": 0.179,
-      "p95Ms": 1.228,
-      "maxMs": 2.601,
+      "count": 1475,
+      "totalMs": 625.795,
+      "medianMs": 0.168,
+      "p95Ms": 1.338,
+      "maxMs": 2.55,
       "over33ms": 0,
       "over50ms": 0
     },
     "layout": {
-      "count": 46,
-      "totalMs": 81.97,
-      "medianMs": 1.778,
-      "p95Ms": 1.965,
-      "maxMs": 2.275,
+      "count": 48,
+      "totalMs": 85.329,
+      "medianMs": 1.802,
+      "p95Ms": 1.915,
+      "maxMs": 1.985,
       "over33ms": 0,
       "over50ms": 0
     },
     "paint": {
-      "count": 7938,
-      "totalMs": 242.334,
+      "count": 9004,
+      "totalMs": 247,
       "medianMs": 0.002,
-      "p95Ms": 0.32,
-      "maxMs": 1.039,
+      "p95Ms": 0.296,
+      "maxMs": 1.15,
       "over33ms": 0,
       "over50ms": 0
     },
     "prePaint": {
-      "count": 398,
-      "totalMs": 203.701,
-      "medianMs": 0.552,
-      "p95Ms": 0.676,
-      "maxMs": 1.026,
+      "count": 397,
+      "totalMs": 196.452,
+      "medianMs": 0.52,
+      "p95Ms": 0.675,
+      "maxMs": 0.754,
       "over33ms": 0,
       "over50ms": 0
     },
     "layerize": {
-      "count": 370,
-      "totalMs": 440.591,
-      "medianMs": 1.193,
-      "p95Ms": 1.393,
-      "maxMs": 1.927,
+      "count": 368,
+      "totalMs": 509.626,
+      "medianMs": 1.383,
+      "p95Ms": 1.72,
+      "maxMs": 2.295,
       "over33ms": 0,
       "over50ms": 0
     }
   },
   "pipeline": {
-    "sequences": 377,
-    "droppedWithoutPresentation": 8
+    "sequences": 381,
+    "droppedWithoutPresentation": 12
   },
   "trace": {
     "filename": "chrome-trace.json.gz",
-    "bytes": 5711418,
-    "sha256": "c36e01a5f734bf2a5b9fcc311c15de39dad7da2a474210b49fe935f4cfe40a88"
+    "bytes": 5770263,
+    "sha256": "c2d0935540f48dc08c4a4d731c68c54cbab28316ccdce4a3b51f9f9e2a2892d1"
   }
 }

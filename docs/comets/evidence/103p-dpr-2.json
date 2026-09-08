@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-comet-drag-trace@1",
-  "capturedAt": "2026-09-08T05:26:27.544Z",
-  "codeRevision": "5042c066c412360d306920a44ca02e88081cbb18",
+  "capturedAt": "2026-09-08T07:11:24.048Z",
+  "codeRevision": "c94c7abe160a1d8756e23e537984374c57708920",
   "build": "production",
   "route": "http://127.0.0.1:4258/comet-103p/?v=MMZABs0m6cQ300FCxzNAAAAAv9Ch9ed1ZjIAAAAAAAAAAAAAAAAAAAAAAAA",
   "browser": "152.0.7977.76",
@@ -42,7 +42,7 @@
       "glWsVendor": "",
       "glWsVersion": "",
       "inProcessGpu": false,
-      "initializationTime": 0.059643,
+      "initializationTime": 0.06443,
       "isAsan": false,
       "isClangCoverage": false,
       "jpegDecodeAcceleratorSupported": false,
@@ -95,7 +95,7 @@
   },
   "initial": {
     "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, -8e-06, -6e-06, 116.839, 1)",
-    "nodes": 26585,
+    "nodes": 26830,
     "bodyLeaves": 1000,
     "atlasUrls": [
       "url(\"http://127.0.0.1:4258/scenes/comet-103p/comet-103p-constraints-shadow@2x.webp\")"
@@ -104,7 +104,7 @@
   },
   "final": {
     "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0172984, -0.0100382, 0, 0, 0.0100382, 0.0172984, 0, -7e-06, 4e-06, 116.839, 1)",
-    "nodes": 26585,
+    "nodes": 26830,
     "retainedIdentity": true,
     "atlasUrls": [
       "url(\"http://127.0.0.1:4258/scenes/comet-103p/comet-103p-constraints-shadow@2x.webp\")"
@@ -115,11 +115,11 @@
   "prepared": {
     "src/planets/comet-103p/prepared/object.json": {
       "bytes": 6787765,
-      "sha256": "42623149f3b5198a3b7f0abcc84187194993890f1810016689e54d4e525bd712"
+      "sha256": "85424f6277ca26065174ff13f77fd41f8144fa92484663b4b4841ff009cfa497"
     },
     "src/planets/comet-103p/prepared/runtime.json": {
       "bytes": 6787646,
-      "sha256": "25534b1454f256e29fa72550da28a89f09fff2c4d299083ea525f23b0df2efa0"
+      "sha256": "34efc6b06d472cb28e1f7a2ca6e3408a153260de8fb63cf6cf6a32246cbffb1b"
     },
     "src/planets/comet-103p/runtime-assets.json": {
       "bytes": 6040,
@@ -132,14 +132,14 @@
   },
   "loaded": [
     {
-      "url": "http://127.0.0.1:4258/_astro/packaged-object-runtime.B79tmqAi.js",
-      "bytes": 205255,
-      "sha256": "68b231143afdf0f3b37f5236b881deed9f8baf943c99ef92e1cea79779e38200"
+      "url": "http://127.0.0.1:4258/_astro/packaged-object-runtime.DWC8Ple3.js",
+      "bytes": 205610,
+      "sha256": "eadd03a225079c48ee2e506feb653e84dca1842e66eaffb711721f781d3a1cd7"
     },
     {
-      "url": "http://127.0.0.1:4258/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.DKxWDqb6.js",
-      "bytes": 1253446,
-      "sha256": "08db2f4b0c007a8872f43d66cd92f3035acd08efd4d9ef94883a112ba0ba90bd"
+      "url": "http://127.0.0.1:4258/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.BLBNqTio.js",
+      "bytes": 1263470,
+      "sha256": "e5b5e7b157baf5b8a6e7f2b7b68245aeda858f1ef2febbdd757ea36d7384b45b"
     },
     {
       "url": "http://127.0.0.1:4258/_astro/point-field-selection-worker-CMrTEVt-.js",
@@ -147,14 +147,14 @@
       "sha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
     },
     {
-      "url": "http://127.0.0.1:4258/_astro/prepared-object-worker-BouzFXuL.js",
-      "bytes": 81580,
-      "sha256": "82e1eefa8a7f6f48a9fca290206e9dc1e2a34d5563375e0a38537527816bee0d"
+      "url": "http://127.0.0.1:4258/_astro/prepared-object-worker-FE_ThDWA.js",
+      "bytes": 81704,
+      "sha256": "6ed8d55280a7af221ee26a8d0e6b50f4091b6b68e4b5c55a64fc04b31f4aca46"
     },
     {
       "url": "http://127.0.0.1:4258/comet-103p/",
-      "bytes": 1304077,
-      "sha256": "ed069a995e03b11d5e7a2a4eb0e2f35a32fc9c7d5f0e621c3cf84d3aefaa794e"
+      "bytes": 1316051,
+      "sha256": "aa21fbd579b2663044dd7348554cb75f2198fe40858be1dfdad9fa5f6d5e78d5"
     },
     {
       "url": "http://127.0.0.1:4258/scenes/comet-103p/comet-103p-constraints-shadow@2x.webp",
@@ -167,14 +167,14 @@
       "sha256": "101248d7a409403bcdd3ad5aa674d33a6452f87089fcde8794780c6e04304e73"
     }
   ],
-  "durationMs": 6161.198,
+  "durationMs": 6274.377,
   "rendererMain": {
-    "pid": 23277,
-    "tid": 26759243
+    "pid": 85703,
+    "tid": 27235874
   },
   "rafIntervals": {
-    "count": 367,
-    "totalMs": 6166.4,
+    "count": 370,
+    "totalMs": 6266.4,
     "medianMs": 16.7,
     "p95Ms": 16.8,
     "maxMs": 50,
@@ -183,14 +183,14 @@
   },
   "drawCadence": [
     {
-      "thread": "23277:26759296",
-      "count": 364,
+      "thread": "85703:27235924",
+      "count": 367,
       "intervals": {
-        "count": 363,
-        "totalMs": 6121.202,
-        "medianMs": 16.751,
-        "p95Ms": 17.855,
-        "maxMs": 65.044,
+        "count": 366,
+        "totalMs": 6229.873,
+        "medianMs": 16.788,
+        "p95Ms": 18.637,
+        "maxMs": 68.968,
         "over33ms": 1,
         "over50ms": 1
       }
@@ -198,222 +198,222 @@
   ],
   "drawDurations": {
     "ProxyImpl::OnCanDrawStateChanged": {
-      "count": 405,
-      "totalMs": 0.414,
+      "count": 434,
+      "totalMs": 0.445,
       "medianMs": 0.001,
       "p95Ms": 0.001,
-      "maxMs": 0.002,
+      "maxMs": 0.007,
       "over33ms": 0,
       "over50ms": 0
     },
     "LayerTreeImpl::UpdateDrawProperties": {
-      "count": 724,
-      "totalMs": 191.248,
-      "medianMs": 0.259,
-      "p95Ms": 0.331,
-      "maxMs": 0.383,
+      "count": 727,
+      "totalMs": 209.162,
+      "medianMs": 0.264,
+      "p95Ms": 0.397,
+      "maxMs": 0.479,
       "over33ms": 0,
       "over50ms": 0
     },
     "LayerTreeImpl::UpdateDrawProperties::CalculateDrawProperties": {
-      "count": 724,
-      "totalMs": 112.758,
-      "medianMs": 0.15,
-      "p95Ms": 0.19,
-      "maxMs": 0.213,
+      "count": 727,
+      "totalMs": 119.402,
+      "medianMs": 0.148,
+      "p95Ms": 0.218,
+      "maxMs": 0.261,
       "over33ms": 0,
       "over50ms": 0
     },
     "draw_property_utils::ComputeDrawPropertiesOfVisibleLayers": {
-      "count": 724,
-      "totalMs": 82.139,
-      "medianMs": 0.112,
-      "p95Ms": 0.13,
-      "maxMs": 0.14,
+      "count": 727,
+      "totalMs": 82.423,
+      "medianMs": 0.111,
+      "p95Ms": 0.133,
+      "maxMs": 0.173,
       "over33ms": 0,
       "over50ms": 0
     },
     "LayerTreeImpl::UpdateDrawProperties::Occlusion": {
-      "count": 724,
-      "totalMs": 77.842,
-      "medianMs": 0.108,
-      "p95Ms": 0.145,
-      "maxMs": 0.18,
+      "count": 727,
+      "totalMs": 89.074,
+      "medianMs": 0.117,
+      "p95Ms": 0.182,
+      "maxMs": 0.225,
       "over33ms": 0,
       "over50ms": 0
     },
     "TileManager::DidFinishRunningTileTasksRequiredForDraw": {
-      "count": 366,
-      "totalMs": 0.784,
+      "count": 370,
+      "totalMs": 0.768,
       "medianMs": 0.002,
-      "p95Ms": 0.004,
-      "maxMs": 0.011,
+      "p95Ms": 0.005,
+      "maxMs": 0.009,
       "over33ms": 0,
       "over50ms": 0
     },
     "RasterTask": {
-      "count": 2759,
-      "totalMs": 185.148,
-      "medianMs": 0.025,
-      "p95Ms": 0.181,
-      "maxMs": 0.417,
+      "count": 2764,
+      "totalMs": 190.945,
+      "medianMs": 0.029,
+      "p95Ms": 0.185,
+      "maxMs": 0.669,
       "over33ms": 0,
       "over50ms": 0
     },
     "ProxyImpl::ScheduledActionDraw": {
-      "count": 364,
-      "totalMs": 356.031,
-      "medianMs": 0.989,
-      "p95Ms": 1.107,
-      "maxMs": 1.283,
+      "count": 367,
+      "totalMs": 400.451,
+      "medianMs": 1.106,
+      "p95Ms": 1.287,
+      "maxMs": 1.569,
       "over33ms": 0,
       "over50ms": 0
     },
     "MainFrame.Draw": {
-      "count": 364,
-      "totalMs": 355.797,
-      "medianMs": 0.989,
-      "p95Ms": 1.106,
-      "maxMs": 1.282,
+      "count": 367,
+      "totalMs": 400.17,
+      "medianMs": 1.105,
+      "p95Ms": 1.286,
+      "maxMs": 1.568,
       "over33ms": 0,
       "over50ms": 0
     },
     "LayerTreeHostImpl::PrepareToDraw": {
-      "count": 364,
-      "totalMs": 223.442,
-      "medianMs": 0.625,
-      "p95Ms": 0.703,
-      "maxMs": 0.836,
+      "count": 367,
+      "totalMs": 252.005,
+      "medianMs": 0.71,
+      "p95Ms": 0.822,
+      "maxMs": 1.067,
       "over33ms": 0,
       "over50ms": 0
     },
     "TileManager::PrepareToDraw": {
-      "count": 364,
-      "totalMs": 4.493,
-      "medianMs": 0.011,
-      "p95Ms": 0.027,
-      "maxMs": 0.038,
+      "count": 367,
+      "totalMs": 5.876,
+      "medianMs": 0.013,
+      "p95Ms": 0.043,
+      "maxMs": 0.057,
       "over33ms": 0,
       "over50ms": 0
     },
     "TileManager::IsReadyToDraw": {
-      "count": 364,
-      "totalMs": 3.165,
-      "medianMs": 0.007,
-      "p95Ms": 0.023,
-      "maxMs": 0.034,
-      "over33ms": 0,
-      "over50ms": 0
-    },
-    "DirectRenderer::DrawFrame": {
-      "count": 363,
-      "totalMs": 5299.963,
-      "medianMs": 14.547,
-      "p95Ms": 16.175,
-      "maxMs": 17.911,
-      "over33ms": 0,
-      "over50ms": 0
-    },
-    "DirectRenderer::DrawFrame ProcessForOverlays": {
-      "count": 363,
-      "totalMs": 1.382,
-      "medianMs": 0.004,
-      "p95Ms": 0.005,
-      "maxMs": 0.02,
-      "over33ms": 0,
-      "over50ms": 0
-    },
-    "SkiaRenderer::SwapBuffers": {
-      "count": 362,
-      "totalMs": 3.276,
+      "count": 367,
+      "totalMs": 4.157,
       "medianMs": 0.008,
-      "p95Ms": 0.016,
-      "maxMs": 0.021,
+      "p95Ms": 0.037,
+      "maxMs": 0.051,
       "over33ms": 0,
       "over50ms": 0
     },
     "DrawLayers.FrameViewerTracing": {
-      "count": 103,
-      "totalMs": 0.103,
+      "count": 108,
+      "totalMs": 0.108,
       "medianMs": 0.001,
       "p95Ms": 0.001,
       "maxMs": 0.001,
+      "over33ms": 0,
+      "over50ms": 0
+    },
+    "DirectRenderer::DrawFrame": {
+      "count": 366,
+      "totalMs": 5451.327,
+      "medianMs": 14.822,
+      "p95Ms": 16.663,
+      "maxMs": 17.841,
+      "over33ms": 0,
+      "over50ms": 0
+    },
+    "DirectRenderer::DrawFrame ProcessForOverlays": {
+      "count": 366,
+      "totalMs": 1.672,
+      "medianMs": 0.004,
+      "p95Ms": 0.007,
+      "maxMs": 0.021,
+      "over33ms": 0,
+      "over50ms": 0
+    },
+    "SkiaRenderer::SwapBuffers": {
+      "count": 365,
+      "totalMs": 4.735,
+      "medianMs": 0.012,
+      "p95Ms": 0.02,
+      "maxMs": 0.023,
       "over33ms": 0,
       "over50ms": 0
     }
   },
   "main": {
     "tasks": {
-      "count": 3411,
-      "totalMs": 2800.253,
-      "medianMs": 0.008,
-      "p95Ms": 7.014,
-      "maxMs": 46.529,
+      "count": 4770,
+      "totalMs": 3014.266,
+      "medianMs": 0.005,
+      "p95Ms": 7.295,
+      "maxMs": 50.959,
       "over33ms": 1,
-      "over50ms": 0
+      "over50ms": 1
     },
     "script": {
-      "count": 3733,
-      "totalMs": 1006.354,
-      "medianMs": 0.012,
-      "p95Ms": 2.001,
-      "maxMs": 4.406,
+      "count": 3743,
+      "totalMs": 1105.791,
+      "medianMs": 0.016,
+      "p95Ms": 2.159,
+      "maxMs": 4.289,
       "over33ms": 0,
       "over50ms": 0
     },
     "style": {
-      "count": 1464,
-      "totalMs": 530.385,
-      "medianMs": 0.155,
-      "p95Ms": 1.113,
-      "maxMs": 2.579,
+      "count": 1477,
+      "totalMs": 580.887,
+      "medianMs": 0.174,
+      "p95Ms": 1.21,
+      "maxMs": 2.582,
       "over33ms": 0,
       "over50ms": 0
     },
     "layout": {
-      "count": 45,
-      "totalMs": 79.012,
-      "medianMs": 1.74,
-      "p95Ms": 1.859,
-      "maxMs": 2.357,
+      "count": 46,
+      "totalMs": 81.229,
+      "medianMs": 1.75,
+      "p95Ms": 1.944,
+      "maxMs": 2.072,
       "over33ms": 0,
       "over50ms": 0
     },
     "paint": {
-      "count": 7983,
-      "totalMs": 231.077,
+      "count": 8318,
+      "totalMs": 235.904,
       "medianMs": 0.002,
-      "p95Ms": 0.305,
-      "maxMs": 0.908,
+      "p95Ms": 0.307,
+      "maxMs": 1.072,
       "over33ms": 0,
       "over50ms": 0
     },
     "prePaint": {
-      "count": 395,
-      "totalMs": 187.035,
-      "medianMs": 0.502,
-      "p95Ms": 0.642,
-      "maxMs": 0.728,
+      "count": 399,
+      "totalMs": 202.35,
+      "medianMs": 0.554,
+      "p95Ms": 0.649,
+      "maxMs": 0.74,
       "over33ms": 0,
       "over50ms": 0
     },
     "layerize": {
-      "count": 366,
-      "totalMs": 428.321,
-      "medianMs": 1.164,
-      "p95Ms": 1.362,
-      "maxMs": 1.623,
+      "count": 370,
+      "totalMs": 433.069,
+      "medianMs": 1.17,
+      "p95Ms": 1.376,
+      "maxMs": 1.832,
       "over33ms": 0,
       "over50ms": 0
     }
   },
   "pipeline": {
-    "sequences": 370,
-    "droppedWithoutPresentation": 3
+    "sequences": 376,
+    "droppedWithoutPresentation": 6
   },
   "trace": {
     "filename": "chrome-trace.json.gz",
-    "bytes": 5644255,
-    "sha256": "1639e9d8a95888b9c074a1983f53cc7675ae36ea3a3f33bc3325e89227dc8a07"
+    "bytes": 5659715,
+    "sha256": "04e4ddb5d9b7e73429f5331f0303d6affd9289e32587e2bba02b104bbd85dc1e"
   }
 }

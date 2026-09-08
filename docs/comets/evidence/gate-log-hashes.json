@@ -133,5 +133,137 @@
     "path": "output/comet-caption-trace-9p-dpr-2.log",
     "bytes": 5290,
     "sha256": "e243449c2d69619a2fd3e4394e1589dc6896d533541abc0ec37e24fcd14376df"
+  },
+  {
+    "path": "output/comet-intake/wild2/integrated-source-verify.log",
+    "bytes": 6596,
+    "sha256": "5d13975d706e3ff16277878695e0931f522b8910f2044433386dfbdd6ecbbba5",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/integrated-build-final.log",
+    "bytes": 661234,
+    "sha256": "f1bf2d496f0c04cf9959f6eef4a67bf3c260d33479a1435343b1423497f328f2",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/integrated-test.log",
+    "bytes": 99688,
+    "sha256": "4418261cb9c4fb4e89e2d4e5fee1b54db9dca71ad946ae957625cd99afd1df99",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/comet-unit-final.log",
+    "bytes": 810,
+    "sha256": "04aae87a4838d6a3cdf9f65d06adfd4ecfc0a6c63599e312a3c78b6d2a5a9d5c",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/67p-conformance-final.log",
+    "bytes": 6253,
+    "sha256": "97223d84d5a4edc436eaf55b52373eea744dc114824e538a38e78c175dc7fc8e",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/81p-conformance-final.log",
+    "bytes": 6255,
+    "sha256": "f6210c936d6de0f258a7184fabbbd3037befd9b789fcdbb6d904d16f1c2e4139",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/integrated-browser.log",
+    "bytes": 8316,
+    "sha256": "9702499a6b301dfd84bd18c7fade7b0baf6e06f3e3d719270d4c926709c6e1ad",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/comet-navigation-final.log",
+    "bytes": 96,
+    "sha256": "60eeb323a146e8c4979552dee2b8700d65169d067b78cf7da447104a4ffe463e",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/fresh-source-final.log",
+    "bytes": 31,
+    "sha256": "d7a0ec9272e72a5317e3e0bd41b076bbd07040e12cd1aa8b2e0c8e9293e6ee9b",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/runtime-publication.log",
+    "bytes": 662,
+    "sha256": "87819f2ba1943fd51f3aa9e063ef4dd41b1e467e3a119000f287324081fa0f87",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/fresh-runtime-cli.log",
+    "bytes": 254,
+    "sha256": "e1ab8c2e81c0b6b8b7e16da8cc74fc3dab64d47f362c77faaa0b2807b11eb406",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/drag-final-67p-dpr-1.log",
+    "bytes": 5287,
+    "sha256": "a77ce6ee24fbd824fede7a372a83ceb1e67dbc50dc7269a5ed4cc085474d1e6e",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/drag-final-67p-dpr-2.log",
+    "bytes": 5288,
+    "sha256": "c094db96f4d2b9a2f7ccaecee0d26cf938e3fdba418d70cb322725a82ff22ad2",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/drag-final-103p-dpr-1.log",
+    "bytes": 5284,
+    "sha256": "7694df891e1f92b2241c6dcb860c063aa597034a891158d4d91e9c469282662a",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/drag-final-103p-dpr-2.log",
+    "bytes": 5290,
+    "sha256": "a9a50c380daed4fdada1d3b2494a0539c6ff34899c7cf09599eba83c42e22449",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/drag-final-9p-dpr-1.log",
+    "bytes": 5292,
+    "sha256": "883a5297252c3675552b3b4fd35945180b4a3529335899bf0ac557f4e4b823d5",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/drag-final-9p-dpr-2.log",
+    "bytes": 5289,
+    "sha256": "003d9e9a2f8e50a7bacde310cbdc8238e6064fb866d0376c3eb142a9c8033a65",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/drag-final-81p-dpr-1.log",
+    "bytes": 5286,
+    "sha256": "4c9fa3b51ee0d131206a721fadca2c971920054b8783ceea07bd0b245d0fe5de",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/drag-final-81p-dpr-2.log",
+    "bytes": 5283,
+    "sha256": "7a5fd3dadd16ce5bc2cebaf408c79afd9fde48e52fa9ded0e5f1752b1b2146ea",
+    "status": "PASS"
+  },
+  {
+    "path": "output/comet-intake/wild2/integrated-preparation.log",
+    "bytes": 149315,
+    "sha256": "945e0d53d146d815ee7932d9c631cf7d7784d52222708dafa57cf65dfe92316f",
+    "status": "SEVEN_REPRODUCED_BASELINE_FAILURES"
+  },
+  {
+    "path": "output/comet-intake/wild2/integrated-build.log",
+    "bytes": 25481,
+    "sha256": "473bb03b5e423946e997576598de6a9b5a2271c7ce3163b7076d1828b6366eea",
+    "status": "EXCLUDED_ENOSPC_FAILURE"
+  },
+  {
+    "path": "output/comet-intake/wild2/lighting-edge-audit.log",
+    "bytes": 1297,
+    "sha256": "8e86012b99cba95f4b931bc5bd8a4e203d3167be2389f4b03af4583e72eed9ad",
+    "status": "FINITE_SAMPLE_DIAGNOSTIC"
   }
 ]

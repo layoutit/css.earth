@@ -8,6 +8,8 @@ The [catalogue](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape
 
 Sampling every original vertex and face centroid gives a mean nearest-surface distance of 11.74 m, p95 31.17 m and maximum 139.84 m from source to prepared geometry. These finite samples are not an exhaustive error bound. Trials with 1,292 and 1,494 plates improve that maximum to about 79 m and 76 m, but show substantially slower draw cadence in the matched development workload. The PoC keeps 996 plates; [geometry and budget evidence](../../../docs/comets/GEOMETRY.md) records the tradeoff.
 
+Close zoom exposes reduced facets and differences at texture-cell boundaries. These rendering artifacts are not observed ridges or strata. A sampled shared-edge audit finds continuous analytical source lighting, but finite 64-pixel atlas cells differ by 0.82 red-channel levels on average, 2.96 at p95 and 23.40 at the largest sample, on a 0–255 scale. The [close-view and edge evidence](../../../docs/comets/GEOMETRY.md#wild-2-close-view-limits) makes this limitation visible.
+
 Only the observed plates are rendered. Unseen regions remain absent. Neutral gray is an authored model material; it is not albedo or spacecraft imagery. Fixed-epoch solar shadows use only the available surface, so unseen terrain cannot cast a modeled shadow. Flood lights are illustrative.
 
 Reference radius is the geometric mean of the catalogue's best-fitting ellipsoid semi-axes, cbrt(1.350 × 2.002 × 2.607) = 1.917106726261 km. This is an approximate navigation scale, not a measured global volume. No GM or uniform spin is invented.
