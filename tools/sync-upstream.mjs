@@ -236,6 +236,7 @@ export function locallyMaintainedFile(target, rel) {
     "src/index.ts", "src/asteroids.ts", "src/asteroids.test.ts", "src/data/asteroidElements.data.ts", "tools/generate-asteroids.mjs",
     "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs", "tools/lib/fit-libration.mjs",
     "tools/lib/fit-harmonics.mjs", "tools/lib/fit-harmonics.test.mjs", "tools/lib/fit-position-correction.mjs",
+    "tools/lib/fit-cosine-series.mjs", "tools/lib/fit-cosine-series.test.mjs",
     "src/periodicCorrection.ts", "src/periodicCorrection.test.ts",
     "tools/scene-ephemeris.mjs", "tools/acquire-scene-ephemeris.mjs",
     "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",

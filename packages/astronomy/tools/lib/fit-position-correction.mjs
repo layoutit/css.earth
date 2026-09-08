@@ -1,4 +1,5 @@
 import { fitHarmonics } from './fit-harmonics.mjs'
+import { fitCosineSeries } from './fit-cosine-series.mjs'
 
 const DEG = Math.PI / 180
 const J2000 = 2451545
@@ -27,7 +28,8 @@ function position(elements, days = 0, phase = 0) {
 }
 
 /** Bounded ICRF residual series; no interpolation table, drift term or runtime fit. */
-export function fitPositionCorrection(rows, meanElements, basis, count = 10) {
+export function fitPositionCorrection(rows, meanElements, basis, { count = 10, method = 'harmonic' } = {}) {
+  if (!['harmonic', 'cosine'].includes(method)) throw new TypeError('Unknown residual fit method')
   const days = rows.map(r => r.jd - J2000)
   const residual = rows.map((r, i) => {
     const source = position({ semiMajorAxisKm: r.semiMajorAxisKm, eccentricity: r.eccentricity,
@@ -44,7 +46,9 @@ export function fitPositionCorrection(rows, meanElements, basis, count = 10) {
   const epochJdTt = (rows[0].jd + rows.at(-1).jd) / 2
   const separation = 2 * Math.PI / (days.at(-1) - days[0]) / 4
   const axes = [0, 1, 2].map(axis => {
-    const fit = fitHarmonics(days, residual.map(r => r[axis]), { intercept: 0, slope: 0 }, count, { trend: false, separation })
+    const values = residual.map(r => r[axis])
+    const fit = method === 'cosine' ? fitCosineSeries(days, values, count)
+      : fitHarmonics(days, values, { intercept: 0, slope: 0 }, count, { trend: false, separation })
     return { constantKm: fit.intercept, harmonics: fit.harmonics.map(h => ({
       rateRadPerDay: h.rateRadPerDay, cosineKm: h.cosine, sineKm: h.sine,
     })) }

@@ -103,6 +103,18 @@ export const BODY_POSITION_PROVENANCE = Object.freeze({
 });
 
 export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
+  // subsolar latitude -1.066°, longitude 99.939°
+  albiorix: Object.freeze([
+    -0.17257194293511177,
+    0.9848212981547763,
+    -0.018599333653172824,
+  ]),
+  // subsolar latitude -1.785°, longitude 100.188°
+  kiviuq: Object.freeze([
+    -0.17679561149287787,
+    0.9837547235860334,
+    -0.031144109860876738,
+  ]),
   // subsolar latitude 1.492°, longitude -1.423°
   ymir: Object.freeze([
     0.9993524182920644,
@@ -1090,6 +1102,18 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.957°
+  albiorix: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.393°
+  kiviuq: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
   // pole tilt to the ecliptic 175.000°, Sun ecliptic latitude 2.353°
   ymir: Object.freeze([
     0.06560839643392923,
@@ -2079,6 +2103,18 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
 // The orbit lies in the plane perpendicular to this direction; every
 // direction from the body to another point of its orbit does too.
 export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
+  // orbital inclination to the ecliptic 33.192°, obliquity to the orbit 45.196°
+  albiorix: Object.freeze([
+    -0.4784324950314792,
+    -0.5239506242746788,
+    0.7046829719952995,
+  ]),
+  // orbital inclination to the ecliptic 49.281°, obliquity to the orbit 72.127°
+  kiviuq: Object.freeze([
+    -0.9321035619204231,
+    0.1923238748451561,
+    0.30691118751163937,
+  ]),
   // orbital inclination to the ecliptic 172.449°, obliquity to the orbit 8.093°
   ymir: Object.freeze([
     0.0407776328817772,
@@ -3069,6 +3105,18 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
 // the epoch, perpendicular to the orbit normal but not to the Sun direction
 // (the flight-path angle is the orbit's eccentricity showing).
 export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
+  // flight-path angle 1.513°
+  albiorix: Object.freeze([
+    0.8755676133977893,
+    -0.22344248583384532,
+    0.42831624985901595,
+  ]),
+  // flight-path angle 8.229°
+  kiviuq: Object.freeze([
+    -0.20794299399471855,
+    0.4096404646133319,
+    -0.8882310515850513,
+  ]),
   // flight-path angle 0.384°
   ymir: Object.freeze([
     -0.5709064022608417,
@@ -4059,6 +4107,18 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
 // (prime meridian), +Y and +Z (north pole) axes in ICRF, so an ICRF direction
 // is the matrix times a body-fixed direction and the transpose goes back.
 export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  albiorix: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  kiviuq: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
   // pole RA 99.494°, Dec -70.144°, prime meridian W 0.000°
   ymir: Object.freeze([
     -0.9863040093639219, -0.15513176936633125, -0.056022631551222175,
@@ -5051,6 +5111,40 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
 // frame; inclinationDegrees is the same value as
 // BODY_FIXED_ORBIT_NORMAL_DIRECTIONS' orbital inclination comment above.
 export const BODY_ORBITS = Object.freeze({
+  // a 0.11019 AU, e 0.60817, perihelion 0.043178 AU, aphelion 0.17721 AU
+  albiorix: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([-0.015955452726218303,0.14661526415783602,0.09817968487394525]),
+    semiMajorAxisAu: 0.11019490322065835,
+    eccentricity: 0.6081659137553885,
+    heliocentricDistanceAu: 9.587962800071667,
+    perihelionDirection: Object.freeze([
+      -0.10491203914908984,
+      0.8308442097255624,
+      0.5465266354049779,
+    ]),
+    trueAnomalyDegrees: 179.02465751701178,
+    inclinationDegrees: 33.19171282428921,
+    perihelionAu: 0.043178119212280056,
+    aphelionAu: 0.17721168722903663,
+  }),
+  // a 0.075464 AU, e 0.14481, perihelion 0.064536 AU, aphelion 0.086392 AU
+  kiviuq: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([-0.019460041297958895,-0.06944670274100394,-0.015582732194782083]),
+    semiMajorAxisAu: 0.07546393030495255,
+    eccentricity: 0.144806075293874,
+    heliocentricDistanceAu: 9.378728033848732,
+    perihelionDirection: Object.freeze([
+      0.2505965991120111,
+      -0.2693572850957678,
+      0.9298645049034464,
+    ]),
+    trueAnomalyDegrees: 89.48712557447818,
+    inclinationDegrees: 49.28060400684545,
+    perihelionAu: 0.06453629473124192,
+    aphelionAu: 0.08639156587866317,
+  }),
   // a 0.15453 AU, e 0.31081, perihelion 0.10650 AU, aphelion 0.20257 AU
   ymir: Object.freeze({
     centerBodyId: "saturn",

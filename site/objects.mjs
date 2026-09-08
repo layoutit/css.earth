@@ -1,3 +1,5 @@
+import albiorixDescriptor from "../src/planets/albiorix/object.json" with { type: "json" };
+import kiviuqDescriptor from "../src/planets/kiviuq/object.json" with { type: "json" };
 import ymirDescriptor from "../src/planets/ymir/object.json" with { type: "json" };
 import siarnaqDescriptor from "../src/planets/siarnaq/object.json" with { type: "json" };
 import himaliaDescriptor from "../src/planets/himalia/object.json" with { type: "json" };
@@ -167,6 +169,16 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("albiorix", "Albiorix", "satellite", "#a0a0a0", 9.58,
+    "Explore Albiorix, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(albiorixDescriptor);
+    }, albiorixDescriptor.properties.worldFrame),
+  object("kiviuq", "Kiviuq", "satellite", "#a0a0a0", 9.58,
+    "Explore Kiviuq, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(kiviuqDescriptor);
+    }, kiviuqDescriptor.properties.worldFrame),
   object("ymir", "Ymir", "satellite", "#a0a0a0", 9.58,
     "Explore Ymir, a moon of Saturn, through its source-constrained shape approximation.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

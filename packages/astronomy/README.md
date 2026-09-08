@@ -290,3 +290,25 @@ regression guards are 322,409 / 185,535 km. A separate 37-epoch check measures
 errors 1.3217% / 0.8681%, inside the common 2% guard. At the prepared scene epoch
 JD 2461286.5 their errors are 65,156.31 / 63,686.55 km (0.1388° / 0.1609°).
 These remain approximate previews, with no precision or extrapolation claim.
+
+
+Kiviuq and Albiorix use source-fitted orbital previews at Horizons targets 624/626
+relative to Saturn (500@699), geometric ICRF, KM-D, TDB. Kiviuq uses five-day
+samples from 2020-01-01 through the last returned row on 2031-12-29, with ten
+bounded residual harmonics per axis. Albiorix uses daily samples through
+2032-01-01, a longitude correction and 512 cosine residual terms per axis.
+The latter is a truncated DCT-I with an even periodic extension, converted to
+the same midpoint-referenced bounded series evaluated by the existing runtime.
+Its endpoint velocity is not a measured dynamical solution; no velocity-accuracy
+or extrapolation claim accompanies the position checks.
+
+At the six independent committed epochs, maximum position residuals are
+28,145.69 / 18,473.58 km (Kiviuq / Albiorix), with regression guards of
+32,368 / 21,245 km. Independent additional vector checks, source URLs and
+limitations are retained in each body's source/validation/orbit-checks.json.
+The generator records actual returned sampling limits, which can precede a
+requested stop date when the cadence does not divide the interval exactly.
+
+Use `node tools/generate-satellites.mjs --object=kiviuq,albiorix` from this
+package to regenerate selected records while preserving the other checked
+records. Omitting the selection still runs the complete generator.

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "kiviuq",
+  "targetNaif": "624",
+  "parentNaif": "699",
+  "source": {
+    "url": "https://tilmanndenk.de/outersaturnianmoons/kiviuq/",
+    "paper": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+    "table": "Denk et al. (2018), Table 3 and footnote on minimum axis ratios",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "minimumEquatorialAxisRatio": 2.32,
+    "condition": "Uniform-reflectivity reference ellipsoid inferred from low-phase lightcurve amplitude; lower limit, not exact dimensions.",
+    "adoptedReferenceRadiusKm": 8.4,
+    "diameterEstimate": "17 (+5/−3) km",
+    "sizeInterpretation": "Brightness-based size assuming geometric albedo 0.06.",
+    "observedRotationPeriod": "21.97 ± 0.16 h"
+  },
+  "approximation": {
+    "adoptedEquatorialAxisRatio": 2.32,
+    "semiAxesKm": [
+      14.721021353201925,
+      6.345267824656003,
+      6.345267824656003
+    ],
+    "formula": "b=c=R/cbrt(q); a=q*b; r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+    "assumptions": [
+      "Select the lower-limit elongation, without treating it as a fitted full shape.",
+      "Equal short axes (b=c).",
+      "Reference radius interpreted as equal-volume scale for display only.",
+      "Arbitrary pole, spin sense and meridian; not an observed attitude."
+    ],
+    "qualification": "Kiviuq may be a binary; its lightcurve does not establish a neck or separate components."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "photometryCheck": {
+    "minimumAmplitudeMagnitude": 0.913719962227249,
+    "interpretation": "Zero-phase, equator-on, uniform-reflectivity projected-area model. This is a consistency check of the selected lower-limit ellipsoid, not a fit to the Cassini lightcurves."
+  }
+}
