@@ -3,6 +3,23 @@
   "inputs": [
     {
       "id": "pds-shape",
+      "path": "shape/wild2_cart_full.tab",
+      "expectedBytes": 1392840,
+      "expectedSha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+      "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+      ],
+      "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "pds-observed-reference",
       "path": "shape/wild2_cart_vis.tab",
       "expectedBytes": 890509,
       "expectedSha256": "6937d2ae98e3a21594aa27fbff57567332e146dccfa0dcbef1fac4a1ec371820",
@@ -34,7 +51,7 @@
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Only terrain visible and illuminated during the 2004 Stardust encounter is included, about half the nucleus. The unseen side and gaps remain open. Neutral gray is a model material, not observed albedo. Source plate ordering is made consistent without moving vertices. The archived model axes are retained at an arbitrary fixed phase; no current rotational orientation or spin is claimed.",
+      "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus; the unseen side uses the archive’s fitted ellipsoid and joining faces. The smooth far side is estimated, not observed terrain. Neutral gray is a model material, not albedo. Orientation is fixed at an arbitrary phase.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -43,7 +60,7 @@
       "width": 64,
       "height": 32,
       "lensId": "model",
-      "label": "Observed terrain",
+      "label": "Completed shape model",
       "falseColor": false
     },
     {
@@ -85,9 +102,9 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 96920,
-      "expectedSha256": "634b21c65e9fbfd996932cb8e9450fa29e724a7a84d5f113c6fa4b5072e53367",
-      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.tab",
+      "expectedBytes": 101746,
+      "expectedSha256": "62204e270a2d7ec62f1903775a4197b8fc6aad0e859f0a5d9f3f7851323338e0",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
       "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
       "license": "PDS public scientific archive",
       "licenseEvidence": [
@@ -117,20 +134,20 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4333,
-      "expectedSha256": "05ee89d254d6578f4c04a57c3fcd6eaa26131686a139851107f739bed0d35614",
+      "expectedBytes": 4089,
+      "expectedSha256": "cbd1f1424de32a361cf9934ed85c512ed67c6e8ea7252a7cff9adb847819ebce",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 729,
-      "expectedSha256": "04fa065e930d453f71aff2b004feb3edaddf9e8300cd7ade221c74098fe9525c",
+      "expectedBytes": 972,
+      "expectedSha256": "152eef487effe0314da841df362766c332ad705dd019a6457486fc8ae36c4b49",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1620,
-      "expectedSha256": "67a2649d92c657cbb22c1f79342d0699254d2e3c2ea1b0d520abc9ab3baeaea7",
+      "expectedBytes": 1622,
+      "expectedSha256": "4436c47cf04e4783e3e268db6a5c77db0acc4cfa3257806907f103b96f4c5bee",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -141,8 +158,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3554,
-      "expectedSha256": "960f87f340fb61595c4951a9e616810d30677629d85b5045a05482f0fa673ac6",
+      "expectedBytes": 3389,
+      "expectedSha256": "555ff5608fcbea4b13b397ee44c9188c698c4c536fec6a7cb53e0fd96aa103b3",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -179,19 +196,25 @@
       "path": "shape/wild2_cart_vis.lbl",
       "expectedBytes": 9440,
       "expectedSha256": "5656202b19c6dc8fac6f4cac6451caa77ca48b89059e0684ec8d6ff616521b96",
-      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+      "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
       "path": "reference/dataset.cat",
       "expectedBytes": 16000,
       "expectedSha256": "a0613bef31d51ae2143cf4a56849d0719cd32f5b2ece1702833fc136a8b612d6",
-      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+      "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
       "path": "reference/wild2_plan_full.lbl",
       "expectedBytes": 14080,
       "expectedSha256": "ca00734e76f2feeb9d61fd91a88124536f43c26ea966de43211ac5893b963a5a",
-      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/wild2_cart_full.lbl",
+      "purpose": "Wild 2 source evidence or authored preparation input.",
+      "expectedBytes": 12800,
+      "expectedSha256": "37c79ed2a1d10276168b7de8b9ac38a337af7cb7f1ff217754da2831a3eeb0d2"
     }
   ]
 }

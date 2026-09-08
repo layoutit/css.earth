@@ -1,18 +1,57 @@
-import assert from 'node:assert/strict';import test from 'node:test';import {readFile} from 'node:fs/promises';import {resolve} from 'node:path';
-import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {inspectOpenSurface,orientObservedSurface,validateObservedReduction} from '../../../../tools/objects/terrestrial-layers/open-surface.mjs';
-const root=resolve(import.meta.dirname,'../../../../src/planets/comet-81p'),json=async p=>JSON.parse(await readFile(resolve(root,p)));
-test('Wild 2 retains original observed positions, open boundaries and all source patches',async()=>{
- const config=await json('source/preparation/terrestrial.json'),profile=config.geometry.radialTerrain;
- const source=await loadPdsPlateShape(resolve(root,'source',profile.path),profile.grid),terrain=await json('prepared/terrain.json');
- const meters=config.geometry.radiusKm*1000/config.geometry.radius,key=p=>p.map(n=>n.toFixed(4)).join(',');
- const lookup=new Map(source.positions.map((p,i)=>[key(p),i])),indices=[];
- for(const face of terrain.faces)for(const v of face.vertices){const index=lookup.get(key(v.map(n=>n*meters)));assert.notEqual(index,undefined,'every retained vertex belongs to the released surface');indices.push(index);}
- const before=inspectOpenSurface(Uint32Array.from(source.indices.flat()),source.positions).report;
- assert.equal(before.boundary.length,348);assert.equal(before.edgeComponents,8);assert.equal(before.windingConflicts.length,6);
- const corrected=orientObservedSurface(source);assert.deepEqual(corrected.sourceOrientation.reorientedFaces,[12386,12453]);
- const after=validateObservedReduction(Uint32Array.from(corrected.indices.flat()),Uint32Array.from(indices),source.positions);
- assert.equal(terrain.faces.length,996);assert.equal(after.boundaryEdges,348);assert.equal(after.edgeComponents,8);assert.equal(after.eulerCharacteristic,1);
- const runtime=await json('prepared/runtime.json');assert.equal(runtime.surfaceHit.frontFace,'clockwise');
- assert.equal(runtime.surfaceHit.triangles.length,996);assert.equal((await json('source/preparation/rotation.json')).schema,'cssearth-display-orientation@1');
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { loadPdsPlateShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+const root = resolve(import.meta.dirname, '../../../../src/planets/comet-81p');
+const json = async path => JSON.parse(await readFile(resolve(root, path)));
+
+test('Wild 2 closes the nucleus using published completion vertices and retains source provenance', async () => {
+  const config = await json('source/preparation/terrestrial.json'), profile = config.geometry.radialTerrain;
+  const source = await loadPdsPlateShape(resolve(root, 'source', profile.path), profile.grid);
+  const observed = await loadPdsPlateShape(resolve(root, 'source/shape/wild2_cart_vis.tab'), {
+    metersPerUnit: 1, indexBase: 0, expectedVertices: 6432, expectedFaces: 12514,
+  });
+  const terrain = await json('prepared/terrain.json');
+  const meters = config.geometry.radiusKm * 1000 / config.geometry.radius;
+  const key = point => point.map(n => n.toFixed(4)).join(',');
+  const lookup = new Map(source.positions.map((point, i) => [key(point), i]));
+  const fullObserved = source.positions.filter((_, i) => source.vertexProvenance[i] === 0);
+  const matches = new Set();
+  for (const point of observed.positions) {
+    let distance = Infinity, nearest = -1;
+    for (let i = 0; i < fullObserved.length; i++) {
+      const candidate = Math.hypot(...point.map((n, j) => n - fullObserved[i][j]));
+      if (candidate < distance) { distance = candidate; nearest = i; }
+    }
+    // The two published Cartesian products differ by up to 11.22 mm.
+    // This cross-release comparison detects frame/scale drift, not exact bytes.
+    assert.ok(distance < .02, 'full-model observed coordinates match the separate release within 2 cm');
+    matches.add(nearest);
+  }
+  assert.equal(matches.size, 6432, 'all observed vertices have distinct corresponding full-model vertices');
+  assert.deepEqual(source.coverage, {
+    model: 'pds-observed-ellipsoid-flags', sourceVertices: 8761, sourceFaces: 17518,
+    observedVertices: 6432, ellipsoidVertices: 2329, observedFaces: 12364, ellipsoidFaces: 4338, connectingFaces: 816,
+  });
+  const indices = terrain.faces.flatMap(face => face.vertices.map(vertex => {
+    const index = lookup.get(key(vertex.map(n => n * meters)));
+    assert.notEqual(index, undefined, 'every retained position belongs to the published full model');
+    return index;
+  }));
+  const before = validateClosedMesh(Uint32Array.from(source.indices.flat()), source.positions);
+  const after = validateClosedMesh(Uint32Array.from(indices), source.positions);
+  assert.equal(after.eulerCharacteristic, 2);
+  assert.equal(after.components, 1);
+  assert.ok(Math.abs(after.signedVolumeCubicMeters / before.signedVolumeCubicMeters - 1) < .03);
+  assert.equal(terrain.faces.length, 992);
+  for (const axis of [0, 1, 2]) for (const sign of [-1, 1]) {
+    const origin = [0, 0, 0], direction = [0, 0, 0]; origin[axis] = 10000 * sign; direction[axis] = -sign;
+    assert.ok(source.intersect(origin, direction), 'full model has a surface from every principal direction');
+  }
+  const runtime = await json('prepared/runtime.json');
+  assert.equal(runtime.surfaceHit.frontFace, undefined);
+  assert.equal(runtime.surfaceHit.triangles.length, 992);
+  assert.equal((await json('source/preparation/rotation.json')).schema, 'cssearth-display-orientation@1');
 });
