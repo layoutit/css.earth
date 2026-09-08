@@ -58,6 +58,10 @@ const BODIES = [
   ['triton', '801'],
   ['proteus', '808'],
   ['larissa', '807'],
+  ['naiad', '803'],
+  ['thalassa', '804'],
+  ['despina', '805'],
+  ['galatea', '806'],
   ['charon', '901'],
   ['pluto', '999'],
   // Ceres has no major-body number, but Horizons resolves '2000001' (the

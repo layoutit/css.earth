@@ -1,3 +1,4 @@
+import { NEPTUNE_ROTATION_MODELS } from './rotation-neptune.js'
 import { RAD_PER_DEG, normalizeAngleRad } from './angles.js'
 import { DAYS_PER_JULIAN_CENTURY, J2000_JD } from './time.js'
 import type { Vec3 } from './vec3.js'
@@ -444,52 +445,7 @@ const MODELS: Record<string, Model> = {
     }
   },
 
-  neptune: (d, T) => {
-    const n = 357.85 + 52.316 * T
-    return {
-      rightAscensionDeg: 299.36 + 0.7 * sinDeg(n),
-      declinationDeg: 43.46 - 0.51 * cosDeg(n),
-      primeMeridianDeg: 249.978 + 541.1397757 * d - 0.48 * sinDeg(n),
-      spinRateDegPerDay: 541.1397757,
-    }
-  },
-
-  triton: (d, T) => {
-    const n7 = 177.85 + 52.316 * T
-    let rightAscensionDeg = 299.36
-    let declinationDeg = 41.17
-    let primeMeridianDeg = 296.53 - 61.2572637 * d
-    const raCoefficients = [-32.35, -6.28, -2.08, -0.74, -0.28, -0.11, -0.07, -0.02, -0.01]
-    const decCoefficients = [22.55, -2.1, 0.55, 0.16, 0.05, 0.02, 0.01]
-    const wCoefficients = [22.25, 6.73, 2.05, 0.74, 0.28, 0.11, 0.05, 0.02, 0.01]
-    for (let k = 0; k < raCoefficients.length; k++) rightAscensionDeg += raCoefficients[k]! * sinDeg((k + 1) * n7)
-    for (let k = 0; k < decCoefficients.length; k++) declinationDeg += decCoefficients[k]! * cosDeg((k + 1) * n7)
-    for (let k = 0; k < wCoefficients.length; k++) primeMeridianDeg += wCoefficients[k]! * sinDeg((k + 1) * n7)
-    return { rightAscensionDeg, declinationDeg, primeMeridianDeg, spinRateDegPerDay: -61.2572637 }
-  },
-
-  // NAIF pck00011: BODY807; N5 = 35.36 + 14325.4 T.
-  larissa: (d, T) => {
-    const n = 357.85 + 52.316 * T
-    const n5 = 35.36 + 14325.4 * T
-    return {
-      rightAscensionDeg: 299.36 + 0.7 * sinDeg(n) - 0.27 * sinDeg(n5),
-      declinationDeg: 43.41 - 0.51 * cosDeg(n) - 0.2 * cosDeg(n5),
-      primeMeridianDeg: 179.41 + 649.053447 * d - 0.48 * sinDeg(n) + 0.19 * sinDeg(n5),
-      spinRateDegPerDay: 649.053447,
-    }
-  },
-
-  proteus: (d, T) => {
-    const n = 357.85 + 52.316 * T
-    const n6 = 142.63 + 2824.6 * T
-    return {
-      rightAscensionDeg: 299.27 + 0.7 * sinDeg(n) - 0.05 * sinDeg(n6),
-      declinationDeg: 42.91 - 0.51 * cosDeg(n) - 0.04 * cosDeg(n6),
-      primeMeridianDeg: 93.38 + 320.7654228 * d - 0.48 * sinDeg(n) + 0.04 * sinDeg(n6),
-      spinRateDegPerDay: 320.7654228,
-    }
-  },
+  ...NEPTUNE_ROTATION_MODELS,
 
   // Dwarf planets. Only Pluto and Ceres have a published pole here — Eris,
   // Haumea and Makemake genuinely have none (no resolved-disk imagery to

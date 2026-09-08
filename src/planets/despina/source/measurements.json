@@ -1,0 +1,29 @@
+{
+  "semiAxesKm": [
+    90,
+    74,
+    64
+  ],
+  "referenceRadiusKm": 74,
+  "axesFrame": "IAU_DESPINA: X towards Neptune under the synchronous ellipsoid approximation; Z north; east-positive longitude.",
+  "model": "Measured triaxial ellipsoid approximation; no resolved terrain.",
+  "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+  "citation": "Karkoschka (2003), Icarus 162, 400\u2013407. DOI10.1016/S0019-1035(03)00002-2; axes in abstract and Table1.",
+  "radiusFormula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/90)^2+(cos(lat)*sin(lon)/74)^2+(sin(lat)/64)^2)",
+  "samplingStepDegrees": 10,
+  "units": "km",
+  "material": {
+    "path": "material/neutral.png",
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "size": [
+      64,
+      32
+    ],
+    "noData": 160,
+    "interpretation": "Every input pixel explicitly lacks reliable registered surface coverage. The shared missing-coverage grid supplies the display; grid lines are not terrain."
+  }
+}
