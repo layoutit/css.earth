@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": -33.32913984192542,
+  "declinationDegrees": -34.66103827955445,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 3.2931,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL: ecliptic J2000 lambda 317 deg, beta -20 deg, period 3.2931 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. Only the published primary shape is displayed; no secondary is included. The north polar region was hidden or seen above 60 degrees radar incidence. The selected retrograde pole is approximate, and arbitrary display phase does not establish the present rotational attitude."
+}
