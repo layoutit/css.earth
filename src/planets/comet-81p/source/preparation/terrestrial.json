@@ -22,9 +22,9 @@
           "centerLongitude": 180
         },
         "metadata": {
-          "label": "Observed terrain",
+          "label": "Completed shape model",
           "modeled": true,
-          "coverage": "Only terrain visible and illuminated during the 2004 Stardust encounter is included, about half the nucleus. The unseen side and gaps remain open. Neutral gray is a model material, not observed albedo. Source plate ordering is made consistent without moving vertices. The archived model axes are retained at an arbitrary fixed phase; no current rotational orientation or spin is claimed."
+          "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus; the unseen side uses the archive’s fitted ellipsoid and joining faces. The smooth far side is estimated, not observed terrain. Neutral gray is a model material, not albedo. Orientation is fixed at an arbitrary phase."
         }
       }
     ],
@@ -53,20 +53,21 @@
     "mapUrl": "/scenes/comet-81p/comet-81p-model-surface@2x.webp",
     "polesUrl": "/scenes/comet-81p/comet-81p-model-poles@2x.webp",
     "radialTerrain": {
-      "path": "shape/wild2_cart_vis.tab",
+      "path": "shape/wild2_cart_full.tab",
       "format": "pds-plate-model",
       "grid": {
         "metersPerUnit": 1,
         "indexBase": 0,
-        "expectedVertices": 6432,
-        "expectedFaces": 12514
+        "expectedVertices": 8761,
+        "expectedFaces": 17518,
+        "provenanceFlags": "observed-ellipsoid"
       },
       "faceBudget": 2000,
       "tileSize": 64,
       "atlasColumns": 16,
       "simplification": {
         "targetFaces": 1000,
-        "maximumErrorMeters": 50,
+        "maximumErrorMeters": 55,
         "method": "source-meshoptimizer"
       },
       "primitive": "u",
@@ -101,13 +102,12 @@
             "weight": 0.24
           }
         ]
-      },
-      "sourceTopology": "open"
+      }
     }
   },
   "celestial": {
     "sunSource": "JPL Horizons osculating elements; PDS v2.1 Wild 2 model axes.",
-    "qualification": "Only terrain visible and illuminated during the 2004 Stardust encounter is included, about half the nucleus. The unseen side and gaps remain open. Neutral gray is a model material, not observed albedo. Source plate ordering is made consistent without moving vertices. The archived model axes are retained at an arbitrary fixed phase; no current rotational orientation or spin is claimed."
+    "qualification": "Completed PDS shape model: measured terrain covers about half the nucleus; the unseen side uses the archive’s fitted ellipsoid and joining faces. The smooth far side is estimated, not observed terrain. Neutral gray is a model material, not albedo. Orientation is fixed at an arbitrary phase."
   },
   "presentation": {
     "defaultLens": "model",

@@ -1,13 +1,16 @@
-// Compare native painted u triangles with source-prepared one-sided targeting.
+// Compare native painted u triangles with source-prepared targeting.
 // Uses each mounted leaf's actual CSS matrix and bevel footprint, independently
 // of the prepared mesh used by the picker. Boundary-overlap samples are excluded.
 import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
+import {stripTypeScriptTypes} from 'node:module';
+const pickerBytes=await readFile('src/renderers/css/navigation/prepared-surface-hit.ts');
+const pickerModule='data:text/javascript;base64,'+Buffer.from(stripTypeScriptTypes(pickerBytes.toString())).toString('base64');
 const origin=process.argv[2]??'http://127.0.0.1:4257', id=process.argv[3]??'comet-81p';
 const bytes=await readFile(`src/planets/${id}/prepared/runtime.json`),plan=JSON.parse(bytes).surfaceHit;
-assert.ok(plan?.frontFace,'Open-surface qualification requires a one-sided prepared mesh.');
+assert.ok(plan?.triangles?.length,'Surface qualification requires a prepared mesh.');
 const browser=await chromium.launch({channel:'chrome',headless:true}),reports=[],errors=[];
 try{
  for(const dpr of [1,2]){
@@ -18,8 +21,8 @@ try{
   const views=[];
   for(let view=0;view<6;view++){
    if(view){await page.mouse.move(950,450);await page.mouse.down();await page.mouse.move(1200,450,{steps:30});await page.mouse.up();await page.waitForTimeout(700);}
-   views.push(await page.evaluate(async({id,plan})=>{
-    const {bindPreparedSurfaceHit}=await import('/src/renderers/css/navigation/prepared-surface-hit.ts');
+   views.push(await page.evaluate(async({id,plan,pickerModule})=>{
+    const {bindPreparedSurfaceHit}=await import(pickerModule);
     const body=document.querySelector(`.${id}-body`),scene=document.querySelector('.polycss-scene'),camera=document.querySelector('.polycss-camera');
     const pick=bindPreparedSurfaceHit(plan,body,scene,camera),bounds=camera.getBoundingClientRect(),style=getComputedStyle(camera);
     const focal=parseFloat(style.perspective),principal=style.perspectiveOrigin.split(' ').map(parseFloat),offset=[principal[0]-bounds.width/2,principal[1]-bounds.height/2];
@@ -59,15 +62,15 @@ try{
      else boundarySkipped++;
     }
     return {nativeLeaves:leaves.length,nativeFrontHits,clearMisses,backfaceOnlyMisses,boundarySkipped,rasterEdgeSamples,mismatches,sceneTransform:getComputedStyle(scene).transform};
-   },{id,plan}));
+   },{id,plan,pickerModule}));
   }
   const totals=views.reduce((s,v)=>({hits:s.hits+v.nativeFrontHits,misses:s.misses+v.clearMisses,back:s.back+v.backfaceOnlyMisses,mismatches:s.mismatches+v.mismatches.length}),{hits:0,misses:0,back:0,mismatches:0});
   reports.push({dpr,views,totals});await page.close();
-  assert.ok(totals.hits>100&&totals.misses>100&&totals.back>100,'Must exercise visible terrain, empty space and hidden backfaces.');
+  assert.ok(totals.hits>100&&totals.misses>100&&(!plan.frontFace||totals.back>100),'Must exercise visible terrain and empty space, plus hidden backfaces for an open mesh.');
   assert.equal(totals.mismatches,0,'Prepared picking must match actual painted native triangles away from raster edges.');
  }
  assert.deepEqual(errors,[]);
 }finally{
- await mkdir('output/comet-open-surface',{recursive:true});await writeFile('output/comet-open-surface/report.json',JSON.stringify({id,browser:browser.version(),runtimeSha256:createHash('sha256').update(bytes).digest('hex'),reports,errors},null,2)+'\n');await browser.close();
+ await mkdir('output/comet-surface-hit',{recursive:true});await writeFile('output/comet-surface-hit/report.json',JSON.stringify({id,browser:browser.version(),pickerSha256:createHash('sha256').update(pickerBytes).digest('hex'),runtimeSha256:createHash('sha256').update(bytes).digest('hex'),reports,errors},null,2)+'\n');await browser.close();
 }
-console.log(`PASS ${id}: native front faces and open-side misses, DPR 1 and 2.`);
+console.log(`PASS ${id}: native front faces and background misses, DPR 1 and 2.`);
