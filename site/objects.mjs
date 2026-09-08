@@ -1,3 +1,5 @@
+import proteusDescriptor from "../src/planets/proteus/object.json" with { type: "json" };
+import larissaDescriptor from "../src/planets/larissa/object.json" with { type: "json" };
 import daphnisDescriptor from "../src/planets/daphnis/object.json" with { type: "json" };
 import calypsoDescriptor from "../src/planets/calypso/object.json" with { type: "json" };
 import telestoDescriptor from "../src/planets/telesto/object.json" with { type: "json" };
@@ -53,6 +55,19 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("proteus", "Proteus", "satellite", "#a39e96", 30.07,
+    "Explore Proteus with Voyager 2 imagery and its source-backed irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(proteusDescriptor);
+    }, proteusDescriptor.properties.worldFrame),
+
+  object("larissa", "Larissa", "satellite", "#a39e96", 30.07,
+    "Explore Larissa with Voyager 2 imagery and its source-backed irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(larissaDescriptor);
+    }, larissaDescriptor.properties.worldFrame),
+
+
   object("daphnis", "Daphnis", "satellite", "#c3bfb7", 9.58,
     "Explore Daphnis in 3D with Cassini imagery and its measured irregular shape.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

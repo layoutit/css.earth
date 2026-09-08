@@ -436,6 +436,18 @@ const MODELS: Record<string, Model> = {
     return { rightAscensionDeg, declinationDeg, primeMeridianDeg, spinRateDegPerDay: -61.2572637 }
   },
 
+  // NAIF pck00011: BODY807; N5 = 35.36 + 14325.4 T.
+  larissa: (d, T) => {
+    const n = 357.85 + 52.316 * T
+    const n5 = 35.36 + 14325.4 * T
+    return {
+      rightAscensionDeg: 299.36 + 0.7 * sinDeg(n) - 0.27 * sinDeg(n5),
+      declinationDeg: 43.41 - 0.51 * cosDeg(n) - 0.2 * cosDeg(n5),
+      primeMeridianDeg: 179.41 + 649.053447 * d - 0.48 * sinDeg(n) + 0.19 * sinDeg(n5),
+      spinRateDegPerDay: 649.053447,
+    }
+  },
+
   proteus: (d, T) => {
     const n = 357.85 + 52.316 * T
     const n6 = 142.63 + 2824.6 * T
