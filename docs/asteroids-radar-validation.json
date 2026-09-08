@@ -1,0 +1,750 @@
+{
+  "implementationCommit": "68b696d3",
+  "baseCommit": "1a5c996862115e1a2947052c3973ae279b59e2f1",
+  "date": "2026-09-08",
+  "registry": {
+    "objects": 161,
+    "asteroids": 84
+  },
+  "sourceRestoration": {
+    "completedBodies": 6,
+    "remoteInputs": 25,
+    "emptyDestinations": true
+  },
+  "checks": {
+    "pnpmTest": {
+      "passed": true,
+      "tests": 2145
+    },
+    "focusedSourceAndPackageTests": {
+      "passed": true,
+      "tests": 28,
+      "finalContentAndCoverageRerunsPassed": true
+    },
+    "primaryBuild": {
+      "command": "pnpm build",
+      "passed": true,
+      "pages": 162
+    },
+    "browser": {
+      "command": "pnpm test:browser with selected object; production responses supplied through a headless Playwright preload",
+      "bodies": 6,
+      "dprs": [
+        1,
+        2
+      ],
+      "passed": true
+    },
+    "aggregateSourceVerification": {
+      "command": "pnpm acquire:planets -- --verify-only",
+      "passed": false,
+      "blockingObject": "aegaeon",
+      "missingInputs": [
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf",
+        "shape/aegaeon_mst2013.bpc"
+      ],
+      "newBodiesSourceClosurePassed": true
+    }
+  },
+  "installation": {
+    "dependencyCommand": "pnpm install --frozen-lockfile",
+    "normalPostinstallPassed": true,
+    "assetCommand": "pnpm setup:assets --object=<id> for the six additions",
+    "downloaded": 210,
+    "reused": 0,
+    "bytes": 47072894,
+    "freshStaticBuild": {
+      "command": "pnpm exec astro build",
+      "pages": 162,
+      "passed": true
+    },
+    "assembly": "Existing operations.js assemble command for each of the six new bodies",
+    "freshMountsPassed": 12,
+    "sourcePreparationRequired": false,
+    "delivery": "Actual production file buffers fulfilled by Playwright local interception and hash-verified, including worker requests. No HTTP server was opened. Byte counts are uncompressed response bodies, not wire-transfer timing."
+  },
+  "navigation": [
+    {
+      "dpr": 1,
+      "asteroids": 84,
+      "worldBodyNodes": 161,
+      "asteroidOrbits": "off",
+      "visits": [
+        {
+          "id": "geographos",
+          "activeScenes": 1
+        },
+        {
+          "id": "bacchus",
+          "activeScenes": 1
+        },
+        {
+          "id": "yorp",
+          "activeScenes": 1
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "asteroids": 84,
+      "worldBodyNodes": 161,
+      "asteroidOrbits": "off",
+      "visits": [
+        {
+          "id": "geographos",
+          "activeScenes": 1
+        },
+        {
+          "id": "bacchus",
+          "activeScenes": 1
+        },
+        {
+          "id": "yorp",
+          "activeScenes": 1
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bodies": [
+    {
+      "id": "geographos",
+      "sourceTriangles": 4092,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "fea2d6afa17abbcf0f5db3f85223bf6bd9f295a177c98f62389feb7fdbcb28d5",
+      "preparedObjectSha256": "3e7cfe1869144784c9d49fc46ccdc71d0993dd678767899f80f95a49cd85cadf",
+      "freshOriginalGeometryAbsent": true,
+      "assetCount": 35,
+      "installBytes": 7912008,
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58832025,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58832025,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "geographos-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 285080
+        },
+        {
+          "filename": "geographos-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 347490
+        },
+        {
+          "filename": "geographos-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 142060
+        },
+        {
+          "filename": "geographos-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 206066
+        }
+      ]
+    },
+    {
+      "id": "bacchus",
+      "sourceTriangles": 508,
+      "preparedTriangles": 508,
+      "sourceGeometrySha256": "c4e8dd389eb60a0dba628f6f369a1d04fbfa7ff31ca7502248ed91502ec7090b",
+      "preparedObjectSha256": "ee4850aeedf220a7d9837e94171e3ebd335cef6f3e29cec2a979c4dcbedc63b8",
+      "freshOriginalGeometryAbsent": true,
+      "assetCount": 35,
+      "installBytes": 7548214,
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 508,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58506514,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 508,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58506514,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "bacchus-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 4096,
+          "decodedRgbaBytes": 33554432,
+          "installBytes": 136786
+        },
+        {
+          "filename": "bacchus-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 4096,
+          "decodedRgbaBytes": 33554432,
+          "installBytes": 193626
+        },
+        {
+          "filename": "bacchus-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 4096,
+          "decodedRgbaBytes": 33554432,
+          "installBytes": 122634
+        },
+        {
+          "filename": "bacchus-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 4096,
+          "decodedRgbaBytes": 33554432,
+          "installBytes": 163996
+        }
+      ]
+    },
+    {
+      "id": "mithra",
+      "sourceTriangles": 5996,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "b38955afe05b2e941d5d8306fc5b644e09f3b125fbb493c8d25326f5d5b81b7e",
+      "preparedObjectSha256": "cc26895c01cd3ff9ed69e5e24bfed27c900e61b950385ae71622806ddae7e73b",
+      "freshOriginalGeometryAbsent": true,
+      "assetCount": 35,
+      "installBytes": 8079772,
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58879864,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58879864,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "mithra-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 322414
+        },
+        {
+          "filename": "mithra-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 425398
+        },
+        {
+          "filename": "mithra-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 171802
+        },
+        {
+          "filename": "mithra-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 228108
+        }
+      ]
+    },
+    {
+      "id": "nereus",
+      "sourceTriangles": 2292,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19",
+      "preparedObjectSha256": "dcbed6e3ab715b08ecf816a185285c1d2b3d24eb87cb9aca94e1e3436b6899c1",
+      "freshOriginalGeometryAbsent": true,
+      "assetCount": 35,
+      "installBytes": 7758376,
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58835185,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58835185,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "nereus-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 184576
+        },
+        {
+          "filename": "nereus-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 285002
+        },
+        {
+          "filename": "nereus-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 155798
+        },
+        {
+          "filename": "nereus-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 202324
+        }
+      ]
+    },
+    {
+      "id": "golevka",
+      "sourceTriangles": 4092,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "294881d2e3988029b35a9cef93e38e6b53cb02574b2c59df938759cf286af79d",
+      "preparedObjectSha256": "5ddc68aa50b708b9bbc328ef8dd3a68a7d7e80717a2ab76a9583da70bb2ba0b8",
+      "freshOriginalGeometryAbsent": true,
+      "assetCount": 35,
+      "installBytes": 8145820,
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58899175,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58899175,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "golevka-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 354930
+        },
+        {
+          "filename": "golevka-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 441626
+        },
+        {
+          "filename": "golevka-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 183812
+        },
+        {
+          "filename": "golevka-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 232630
+        }
+      ]
+    },
+    {
+      "id": "yorp",
+      "sourceTriangles": 572,
+      "preparedTriangles": 572,
+      "sourceGeometrySha256": "f9047ccbf39831b20d4571f17158f6960313d1b51c9d4ea429162ddb614a51e7",
+      "preparedObjectSha256": "768437b46205c3fbbee6f0dff9db6275fb279e632093ff2731db6ca7d1639f5c",
+      "freshOriginalGeometryAbsent": true,
+      "assetCount": 35,
+      "installBytes": 7628704,
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 572,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58599421,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 572,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "coldResponseBodyBytes": 58599421,
+          "canonicalAssetPathsIdenticalAcrossDprs": true
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "yorp-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 4608,
+          "decodedRgbaBytes": 37748736,
+          "installBytes": 149064
+        },
+        {
+          "filename": "yorp-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 4608,
+          "decodedRgbaBytes": 37748736,
+          "installBytes": 227432
+        },
+        {
+          "filename": "yorp-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 4608,
+          "decodedRgbaBytes": 37748736,
+          "installBytes": 129354
+        },
+        {
+          "filename": "yorp-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 4608,
+          "decodedRgbaBytes": 37748736,
+          "installBytes": 190290
+        }
+      ]
+    }
+  ],
+  "dragTraces": [
+    {
+      "id": "geographos",
+      "dpr": 1,
+      "browser": "152.0.7977.76",
+      "viewport": {
+        "width": 1505,
+        "height": 1237
+      },
+      "nativeMouse": true,
+      "shadows": true,
+      "leaves": 800,
+      "moves": 141,
+      "wallMs": 2524.986,
+      "drawCadencePerSecond": 59.402634265939994,
+      "drawFrameDurationMs": {
+        "count": 149,
+        "median": 9.229,
+        "p95": 9.869,
+        "max": 10.475,
+        "sum": 1373.3229999999992
+      },
+      "traceSha256": "c8fc06fe7bd0042907c5a35796d6d517f18ef4d5bf5aa676d32f4d30f6af571a",
+      "preparedHashes": {
+        "prepared/object.json": "3e7cfe1869144784c9d49fc46ccdc71d0993dd678767899f80f95a49cd85cadf",
+        "prepared/scene.json": "6ca87ddc6f62fc417a7caa4eb48c0df5a5af704059d047a599eada0636f6313c",
+        "runtime-assets.json": "995c521082d8dacaeb60e7ae1946a24385172716212209e6bf4a3d2786cc595d"
+      },
+      "errors": []
+    },
+    {
+      "id": "geographos",
+      "dpr": 2,
+      "browser": "152.0.7977.76",
+      "viewport": {
+        "width": 1505,
+        "height": 1237
+      },
+      "nativeMouse": true,
+      "shadows": true,
+      "leaves": 800,
+      "moves": 131,
+      "wallMs": 2549.728,
+      "drawCadencePerSecond": 58.99669974842883,
+      "drawFrameDurationMs": {
+        "count": 150,
+        "median": 9.359,
+        "p95": 9.96,
+        "max": 10.299,
+        "sum": 1402.843000000001
+      },
+      "traceSha256": "c4bd487ff42874a38343f56b92d37bdf08cacf0bfc63a3aa3554f59f31938a27",
+      "preparedHashes": {
+        "prepared/object.json": "3e7cfe1869144784c9d49fc46ccdc71d0993dd678767899f80f95a49cd85cadf",
+        "prepared/scene.json": "6ca87ddc6f62fc417a7caa4eb48c0df5a5af704059d047a599eada0636f6313c",
+        "runtime-assets.json": "995c521082d8dacaeb60e7ae1946a24385172716212209e6bf4a3d2786cc595d"
+      },
+      "errors": []
+    },
+    {
+      "id": "yorp",
+      "dpr": 1,
+      "browser": "152.0.7977.76",
+      "viewport": {
+        "width": 1505,
+        "height": 1237
+      },
+      "nativeMouse": true,
+      "shadows": true,
+      "leaves": 572,
+      "moves": 141,
+      "wallMs": 2513.756,
+      "drawCadencePerSecond": 58.96656876430016,
+      "drawFrameDurationMs": {
+        "count": 147,
+        "median": 7.516,
+        "p95": 8.309,
+        "max": 8.639,
+        "sum": 1101.9259999999997
+      },
+      "traceSha256": "08411634c3fe20ec915123cd4487b0e09d46adb21b46816e60acfdbbf1997fba",
+      "preparedHashes": {
+        "prepared/object.json": "768437b46205c3fbbee6f0dff9db6275fb279e632093ff2731db6ca7d1639f5c",
+        "prepared/scene.json": "c9ba4697b0b84a9080826feed26c08d22e4035faa865122f9b2efbea0b1c5228",
+        "runtime-assets.json": "f7d54b9ac012a2e0c68ae11a11873e13c7fdb4e73143d9024d6e40eff58afd6e"
+      },
+      "errors": []
+    },
+    {
+      "id": "yorp",
+      "dpr": 2,
+      "browser": "152.0.7977.76",
+      "viewport": {
+        "width": 1505,
+        "height": 1237
+      },
+      "nativeMouse": true,
+      "shadows": true,
+      "leaves": 572,
+      "moves": 130,
+      "wallMs": 2542.004,
+      "drawCadencePerSecond": 58.60926201682051,
+      "drawFrameDurationMs": {
+        "count": 147,
+        "median": 7.818,
+        "p95": 8.337,
+        "max": 9.353,
+        "sum": 1139.0190000000007
+      },
+      "traceSha256": "528f2b4d38710f838b266ee587d6a8f3db1bf1f8dced9a601589480b96b4e3ed",
+      "preparedHashes": {
+        "prepared/object.json": "768437b46205c3fbbee6f0dff9db6275fb279e632093ff2731db6ca7d1639f5c",
+        "prepared/scene.json": "c9ba4697b0b84a9080826feed26c08d22e4035faa865122f9b2efbea0b1c5228",
+        "runtime-assets.json": "f7d54b9ac012a2e0c68ae11a11873e13c7fdb4e73143d9024d6e40eff58afd6e"
+      },
+      "errors": []
+    },
+    {
+      "id": "pallas",
+      "dpr": 1,
+      "browser": "152.0.7977.76",
+      "viewport": {
+        "width": 1505,
+        "height": 1237
+      },
+      "nativeMouse": true,
+      "shadows": true,
+      "leaves": 800,
+      "moves": 137,
+      "wallMs": 2540.967,
+      "drawCadencePerSecond": 58.5469134017864,
+      "drawFrameDurationMs": {
+        "count": 148,
+        "median": 9.289,
+        "p95": 9.871,
+        "max": 10.517,
+        "sum": 1376.5220000000002
+      },
+      "traceSha256": "2464d5b725d07283c5a461558fd6ebfc7408b219db32b8875fcaa4dfea575018",
+      "preparedHashes": {
+        "prepared/object.json": "b31a34699dff130678c3fa72d58f7777a677f540b410f7efd7185f9e979e4e10",
+        "prepared/scene.json": "784982687ae983afaef43071ed31422289cc998687223b2b8f609fea3f503475",
+        "runtime-assets.json": "e0329c21b0457be97d895719bada2e4c02405357d06cd30075bccdcfe505ef10"
+      },
+      "errors": []
+    },
+    {
+      "id": "pallas",
+      "dpr": 2,
+      "browser": "152.0.7977.76",
+      "viewport": {
+        "width": 1505,
+        "height": 1237
+      },
+      "nativeMouse": true,
+      "shadows": true,
+      "leaves": 800,
+      "moves": 143,
+      "wallMs": 2532.37,
+      "drawCadencePerSecond": 58.95075620154304,
+      "drawFrameDurationMs": {
+        "count": 149,
+        "median": 9.176,
+        "p95": 9.59,
+        "max": 10.017,
+        "sum": 1367.3889999999997
+      },
+      "traceSha256": "7aa1f1efd1bd62211c8c2184bae3f6b1d4c229f004cca81849000d48c84c7917",
+      "preparedHashes": {
+        "prepared/object.json": "b31a34699dff130678c3fa72d58f7777a677f540b410f7efd7185f9e979e4e10",
+        "prepared/scene.json": "784982687ae983afaef43071ed31422289cc998687223b2b8f609fea3f503475",
+        "runtime-assets.json": "e0329c21b0457be97d895719bada2e4c02405357d06cd30075bccdcfe505ef10"
+      },
+      "errors": []
+    }
+  ],
+  "limitations": [
+    "Original/reduced geometry fits are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties.",
+    "Scientific scalar transfer withholds ambiguous or out-of-allowance points. Exact boundary RGB remains unproven where incident source-facet normals are nonunique and WebP mixes cell-edge colors.",
+    "Draw traces are short headless observations on this host, not performance guarantees."
+  ]
+}

@@ -15,6 +15,10 @@ Original coordinates retain their kilometer scale. Reference radii supply displa
 
 The established meshoptimizer source-connectivity path reduces the four denser meshes. Bacchus and YORP retain their original triangles. Every body uses native PolyCSS `u` primitives in raster mode, 128 px cells, prepared lighting and the shared missing-imagery grid. Both device densities use the same highest-density asset bank. No new renderer or runtime geometry path is introduced.
 
+![The six radar asteroids in their Shape views](asteroids-radar.webp)
+
+These Chrome captures use lighting off to expose the complete grid and silhouette. Each body is independently framed; they are not shown at a common physical scale.
+
 ## Scientific views
 
 Each body has Shape and Elevation. No registered optical surface map was identified in the bounded source survey, so Shape retains the normal grid. Radar images, optical light curves and paper figures are not treated as geographic reflectance maps.
@@ -33,4 +37,26 @@ The shared Solar System context and asteroid accordion include all six. The main
 
 ## Validation
 
-Final browser and delivery results will be recorded after integration checks finish.
+The [machine-readable validation record](asteroids-radar-validation.json) binds the implementation at `68b696d3` to source hashes, prepared transport hashes, installation totals and browser observations.
+
+- All six packages passed empty-directory source restoration, source/runtime closure and 28 focused source and prepared-package tests. Final content corrections and coverage assertions received focused reruns. Original and reduced front, back and pole views were inspected; 92 interior atlas anchor locations were checked against independently projected source points. Maximum observed RGB error was 8/255. Boundary RGB remains unproven where source-facet normals are nonunique or lossy WebP mixes cell-edge colors; corresponding scalar and source-point checks are retained.
+- Full `pnpm test` passed 2,145 tests. Full `pnpm build` passed, producing 162 pages and assembling the complete primary checkout. Every one of the 931 prior solar-geometry entries remained unchanged.
+- A fresh checkout completed `pnpm install --frozen-lockfile` with normal postinstall. The normal asset installer downloaded all 210 files for these six bodies, with zero reuse, totaling 47,072,894 bytes. Original shape inputs remained absent. Static generation produced 162 pages; the existing assembler then assembled the six additions. No source geometry or texture preparation was needed. Every fresh prepared-object hash matches the primary checkout.
+- All six passed production mounts at DPR 1 and 2 in headless Chrome 152.0.7977.76, both from the primary and fresh builds. Checks covered both views, lighting transitions, native mouse drag, retained `u` raster leaves, one mounted scene and selected-body scene-asset isolation. Both DPRs requested identical canonical asset paths. The existing `pnpm test:browser` entry also passed for each addition at both DPRs.
+- Solar System checks found all 84 asteroid links, all six new routes and asteroid orbits off by default. Native link transitions to Geographos, Bacchus and YORP each retained one mounted scene at both DPRs.
+
+Browser checks served actual production buffers through local Playwright response interception, including worker requests, with fulfilled-buffer SHA-256 verification. No additional HTTP server or headed browser was opened. The existing port 4278 belongs to the concurrent UI-styles work and was left unchanged. Reported cold response bodies are approximately 58.5–58.9 MB including shared content; these are uncompressed body sizes, not wire-transfer sizes or loading-time measurements. Atlas decoded capacities do not establish GPU residency.
+
+The aggregate `pnpm acquire:planets -- --verify-only` check stops on pre-existing missing Aegaeon inputs: the ESO panorama, Inter font and `aegaeon_mst2013.bpc` kernel. All six additions verified their own sources. Full all-object browser conformance is not claimed; the new-body checks above are scoped to this addition.
+
+## Native drag observations
+
+The existing 2.5-second native mouse recipe ran with lighting enabled at a 1505 × 1237 CSS-pixel viewport. Pallas supplies a contemporaneous 800-face reference.
+
+| Body | Recorded draw cadence, DPR 1 / 2 (per second) | DrawFrame duration p95, DPR 1 / 2 (ms) |
+| --- | ---: | ---: |
+| Geographos, 800 faces | 59.40 / 59.00 | 9.87 / 9.96 |
+| YORP, 572 faces | 58.97 / 58.61 | 8.31 / 8.34 |
+| Pallas reference, 800 faces | 58.55 / 58.95 | 9.87 / 9.59 |
+
+These short headless observations retain trace and prepared-data hashes. They do not guarantee performance on other hardware or workloads.
