@@ -63,10 +63,12 @@ post-fix coverage. The focused browser replay qualifies the changed branch.
 
 ## Remaining limits
 
-Full-presentation gaps during sustained drags still exceed a 60 Hz frame budget.
-Examples in these recordings: Phoebe p95 29.15 ms, Haumea at DPR 2 p95 31.83 ms,
-Phobos p95 48.21 ms. These are individual drag intervals, not aggregate FPS.
-RequestAnimationFrame timing alone was not used as delivered-frame evidence.
+The wider stress recording contains dropped-only frame sequences during
+sustained drags. In seed `1555659821`, Deimos action 26 has 211 among 474 reported
+sequences, Haumea action 253 has 84 among 249, and Phobos action 193 has 52 among
+142. Here a sequence is grouped by `(frame_source, frame_sequence)` and counted
+only when all its reports say `STATE_DROPPED`. Complete-presentation endpoint
+gaps and requestAnimationFrame timing alone are not delivered-frame proof.
 A texture-paging experiment worsened Charon's full-presentation p95 from about
 17 ms to 28–29 ms and increased downloads; it was removed from the PR.
 
@@ -105,3 +107,8 @@ alone must not be reported as dropped frames: they omit unchanged frames and
 the distinction between partial and complete updates. The broader stress results
 above remain a separate qualification limit; this shorter journey does not prove
 that all navigation is smooth.
+
+The subsequent [architecture investigation](performance-architecture.md)
+separates compositor cost from loading and application publication, records a
+read-only native profile, and sets the proof required before a new prepared
+surface representation can enter this PR.

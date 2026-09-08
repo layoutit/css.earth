@@ -110,8 +110,10 @@ Sun arrival, zooming back to 5 AU, and subsequent body selections. It records
 trace marks, diagnostics, input dispatch times, resource hashes, and whether a
 selection needed the sidebar. An input probe rejects any DOM hit-test fallback.
 Run recordings separately from builds and other tests; an overloaded harness is
-functional evidence only. Compare matching drag phases and count complete
-presentation events, rather than treating RAF timing as delivered-frame proof.
+functional evidence only. Compare matching drag phases and correlate frame
+sequence outcomes, including partial presentations and unchanged frames.
+Complete-presentation endpoint gaps and RAF timing alone are not delivered-frame
+proof.
 
 The seeded stress matrix uses six different starting planets, alternating DPR 1
 and 2. Each document chains 30 selections, with long curved drags, fine wheel
