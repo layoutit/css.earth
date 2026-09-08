@@ -1,3 +1,4 @@
+import { readPreparedJson } from "./prepared-json-transport.mjs";
 import { isPreparedCityAssetUrl } from "./city-asset-url.mjs";
 import { isPreparedBlockReference, readPreparedWmtsBlock, preparedReferenceKey, PreparedBlockTransferError } from "./prepared-block-transport.mjs";
 import { requireGeographicDirectory, requireGeographicDirectoryReference } from "./geographic-index-contract.mjs";
@@ -90,14 +91,7 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
             ...(ref.offset===undefined?{}:{headers:{Range:`bytes=${ref.offset}-${ref.offset+ref.bytes-1}`}}) });
           if (!response.ok) throw new Error(`City directory: HTTP ${response.status}`);
           if (packed) data = await readPreparedWmtsBlock(response, ref, signal);
-          else {
-            const bytes = await response.arrayBuffer();
-            if (bytes.byteLength !== ref.bytes) throw new Error("City directory byte size mismatch.");
-            const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
-              .map(byte => byte.toString(16).padStart(2, "0")).join("");
-            if (hash !== ref.sha256) throw new Error("City directory hash mismatch.");
-            data = JSON.parse(new TextDecoder().decode(bytes));
-          }
+          else data = await readPreparedJson(response, ref);
           break;
         } catch (error) {
           signal.throwIfAborted();

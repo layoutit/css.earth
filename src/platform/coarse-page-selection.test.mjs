@@ -167,3 +167,21 @@ for(const bound of ['pieces','bytes'])test(`optional fine refinement leaves room
  assert.ok(result.keys.length<=cut.poolSize/2);
  assert.ok(result.keys.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0)<=cut.maximumDecodedBytes/2);
 });
+
+for (const outcome of ['valid', 'oversized', 'truncated', 'corrupt']) test(`directory transport bounds ${outcome} streamed data before publication`, async () => {
+ const bytes=Buffer.from(JSON.stringify({schema:'cssearth-city-index@1',dataset:'test',nodes:[backing],external:[]}));
+ const sha256=createHash('sha256').update(bytes).digest('hex');
+ const ref={url:`https://earth-assets.lowpoly.cc/scenes/earth/city-index-test-0-0-0-${sha256.slice(0,16)}.json`,bytes:bytes.length,sha256};
+ let pulls=0,canceled=false,offset=0;
+ const body=outcome==='oversized'?Buffer.alloc(bytes.length*100,32):outcome==='truncated'?bytes.subarray(0,bytes.length-1):outcome==='corrupt'?Buffer.alloc(bytes.length,32):bytes;
+ const stream=new ReadableStream({pull(controller){pulls++;if(offset>=body.length){controller.close();return;}controller.enqueue(body.subarray(offset,offset+=32));},cancel(){canceled=true;}});
+ let settled;const done=new Promise(resolve=>{settled=resolve;});
+ const index=createCityIndex({assetPath:'/scenes/earth/',assetOrigin:'https://earth-assets.lowpoly.cc',dataset:'test',roots:[],index:{maximumDirectories:2,maximumBytes:1024,maximumConcurrentLoads:1,maximumDirectoryBytes:1024}},settled,async()=>new Response(stream));
+ try {
+  index.update([ref]);await done;
+  assert.equal(index.stats().activeLoads,0);assert.equal(index.stats().requests,1);
+  if(outcome==='valid'){assert.deepEqual(index.stats().errors,[]);assert.equal(index.nodes().get(backing.key).url,backing.url);}
+  else{assert.equal(index.stats().errors.length,1);assert.equal(index.nodes().size,0);}
+  if(outcome==='oversized'){assert.equal(canceled,true);assert.ok(pulls<=Math.ceil(ref.bytes/32)+2,`read ${pulls} chunks for ${ref.bytes} bytes`);}
+ }finally{index.destroy();}
+});
