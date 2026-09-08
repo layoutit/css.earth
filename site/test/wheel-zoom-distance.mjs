@@ -68,10 +68,7 @@ export async function proveWheelZoomDistance(page, planet, profile) {
 
 async function proveWheelDollyDistance(page, planet, profile, dolly, original, bounds) {
   const results = [];
-  const distance = () => page.evaluate(({ id, origin }) => {
-    const state = window[`__${id}`].camera.state();
-    return origin === 'surface' ? state.distance * (1 - 1 / state.distanceRadii) : state.distance;
-  }, { id: planet.id, origin: dolly.distanceOrigin });
+  const distance = () => cameraDollyDistance(page, planet.id);
   try {
     for (const [name, deltas, kind] of [["wheel-notch", [-100], "wheel"],
       ["trackpad-stream", Array(20).fill(-5), "trackpad"],
@@ -116,6 +113,18 @@ async function proveWheelDollyDistance(page, planet, profile, dolly, original, b
   } finally {
     await profile.setCamera(page, original);
   }
+}
+
+export function cameraDollyDistance(page, objectId) {
+  return page.evaluate(id => {
+    const camera = globalThis[`__${id}`].camera;
+    // Surface dolly uses the prepared ground under the eye, not the enclosing
+    // sphere. Read the physical altitude used by the shared ruler.
+    const value = camera.stats().dolly?.distanceOrigin === 'surface'
+      ? camera.surfaceMetrics()?.altitudeM : camera.state().distanceKilometers * 1000;
+    if (!(Number.isFinite(value) && value > 0)) throw new Error(`${id}: wheel qualification needs a positive physical distance`);
+    return value;
+  }, objectId);
 }
 
 export async function wheelWithReceipt(page, deltaY) {

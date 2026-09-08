@@ -8,7 +8,7 @@ import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_S
   WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../runtime-policy.mjs";
 import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mjs";
 import { proveSkyboxPointerBoundary } from "./skybox-pointer-boundary.mjs";
-import { proveWheelZoomDistance, wheelWithReceipt } from "./wheel-zoom-distance.mjs";
+import { proveWheelZoomDistance, wheelWithReceipt, cameraDollyDistance as cameraDistance } from "./wheel-zoom-distance.mjs";
 import { GOOGLE_EARTH_SURFACE_FLY_TO } from
   "../../src/platform/google-earth-surface-fly-to.mjs";
 import { GOOGLE_EARTH_DRAG_INERTIA } from
@@ -650,19 +650,36 @@ async function surfaceFlyCoordinates(page) {
   const id = await page.locator('.planet-stage').getAttribute('data-object-id');
   if (!surfaceHitPlans.has(id)) {
     const prepared = JSON.parse(await readFile(resolve(`src/planets/${id}/prepared/runtime.json`), 'utf8'));
-    surfaceHitPlans.set(id, prepared.surfaceHit ?? null);
+    const targetPath = [];
+    if (prepared.surfaceHit) for (let index = prepared.surfaceHit.target; index !== prepared.tree.camera;) {
+      const node = prepared.tree.nodes[index];
+      assert.ok(node?.parent >= 0, `${id}: surface target must descend from its prepared camera`);
+      const siblings = prepared.tree.nodes.flatMap((entry, i) => entry.parent === node.parent ? [i] : []);
+      targetPath.unshift({ child: siblings.indexOf(index), tag: node.tag, classes: node.className.split(/\s+/).filter(Boolean) });
+      index = node.parent;
+    }
+    surfaceHitPlans.set(id, prepared.surfaceHit ? { hit: prepared.surfaceHit, targetPath } : null);
   }
-  const surfaceHit = surfaceHitPlans.get(id);
-  if (surfaceHit) {
+  const surfacePlan = surfaceHitPlans.get(id);
+  if (surfacePlan) {
     // An irregular silhouette can leave the old fixed disc sample in empty
     // space. Use the same prepared-triangle picker as native input.
-    coordinates.surface = await page.evaluate(async ({ id, hit, preferred }) => {
+    coordinates.surface = await page.evaluate(async ({ id, hit, targetPath, preferred }) => {
       const { bindPreparedSurfaceHit } = await import('/src/renderers/css/navigation/prepared-surface-hit.ts');
       const camera = document.querySelector('.polycss-camera');
-      if (document.querySelectorAll(`.${id}-body`).length !== 1 || document.querySelectorAll('.polycss-scene').length !== 1) {
-        throw new Error('Surface qualification requires one retained body and scene');
+      if (document.querySelectorAll('.polycss-camera').length !== 1 || document.querySelectorAll('.polycss-scene').length !== 1) {
+        throw new Error('Surface qualification requires one retained camera and scene');
       }
-      const pick = bindPreparedSurfaceHit(hit, document.querySelector(`.${id}-body`),
+      // The prepared target is authoritative. Earth has separate polar and
+      // regular meshes sharing a body class; class-name guessing picks the cap.
+      let target = camera;
+      for (const step of targetPath) {
+        target = target.children[step.child];
+        if (target?.localName !== step.tag || !step.classes.every(name => target.classList.contains(name))) {
+          throw new Error(`Prepared surface target path does not match ${id}`);
+        }
+      }
+      const pick = bindPreparedSurfaceHit(hit, target,
         document.querySelector('.polycss-scene'), camera);
       const box = camera.getBoundingClientRect(), size = Math.min(box.width, box.height);
       const candidates = [preferred];
@@ -674,7 +691,7 @@ async function surfaceFlyCoordinates(page) {
         [[0, 0], [-4, 0], [4, 0], [0, -4], [0, 4]].every(([x, y]) => pick(p.x + x, p.y + y)));
       if (!point) throw new Error(`No visible prepared surface point for ${id}`);
       return point;
-    }, { id, hit: surfaceHit, preferred: coordinates.surface });
+    }, { id, ...surfacePlan, preferred: coordinates.surface });
   }
   return Object.freeze(coordinates);
 }
@@ -1439,14 +1456,6 @@ function wheelDolly(page, objectId) {
     return stats.projection?.model === "css-perspective-shared-with-sky"
       ? stats.dolly
       : null;
-  }, objectId);
-}
-
-function cameraDistance(page, objectId) {
-  return page.evaluate((id) => {
-    const camera = globalThis[`__${id}`].camera, state = camera.state();
-    return camera.stats().dolly?.distanceOrigin === 'surface'
-      ? state.distance * (1 - 1 / state.distanceRadii) : state.distance;
   }, objectId);
 }
 
