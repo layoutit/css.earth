@@ -34,7 +34,7 @@
         "value": "Didymos"
       },
       {
-        "id": "diameter",
+        "id": "dimensions",
         "label": "Encounter shape",
         "value": "178 × 169 × 115 m"
       },
@@ -53,7 +53,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "DART encounter shape",
+        "description": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown.",
         "title": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown.",
         "thumbnail": "/scenes/dimorphos/dimorphos-shape-thumbnail.webp",
         "surface": "dimorphos-shape-surface@2x.webp",
@@ -68,7 +68,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
+        "description": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments.",
         "title": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments.",
         "thumbnail": "/scenes/dimorphos/dimorphos-elevation-thumbnail.webp",
         "surface": "dimorphos-elevation-surface@2x.webp",

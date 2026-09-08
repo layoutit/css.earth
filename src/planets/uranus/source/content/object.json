@@ -25,23 +25,47 @@
     "facts": [
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "2.9 billion km"
+        "label": "Solar semimajor axis",
+        "value": "19.189 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
-        "id": "diameter",
-        "label": "Diameter",
-        "value": "51,118 km"
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "25,362 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "84 Earth years"
+        "value": "84.02 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "17 hours"
+        "value": "17.24 hours · retrograde",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "axial-tilt",
@@ -50,8 +74,14 @@
       },
       {
         "id": "moon-count",
-        "label": "Moons",
-        "value": "28"
+        "label": "Known moons",
+        "value": "29 · Sep 2026",
+        "source": {
+          "url": "https://science.nasa.gov/uranus/moons/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "ring-system",
@@ -67,8 +97,41 @@
       },
       {
         "id": "wind-speed",
-        "label": "Wind",
-        "value": "900 km/h"
+        "label": "Cloud-top winds",
+        "value": "Up to 900 km/h"
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "8.681 × 10²⁵ kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.27 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Equatorial gravity",
+        "value": "8.87 m/s²",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ]
   },
@@ -79,7 +142,7 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "Hubble visible color",
+        "description": "Hubble OPAL F657N/F547M/F467M composite from October 2025. The northern region is observed; the unobserved southern region fades into a uniform Voyager-derived color baseline with no measured local detail.",
         "title": "Hubble OPAL F657N/F547M/F467M visible-color composite",
         "thumbnail": "/scenes/uranus/uranus-lens-normal.webp",
         "surface": "/scenes/uranus/uranus-surface-normal.webp",
@@ -95,7 +158,7 @@
       {
         "id": "methane",
         "label": "Methane",
-        "description": "Hubble at 727 nm",
+        "description": "Hubble OPAL 727 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail.",
         "title": "Methane: Hubble OPAL FQ727N single-band false color",
         "thumbnail": "/scenes/uranus/uranus-lens-methane.webp",
         "surface": "/scenes/uranus/uranus-surface-methane.webp",
@@ -140,7 +203,7 @@
       {
         "id": "near-infrared",
         "label": "Near infrared",
-        "description": "Hubble at 845 nm",
+        "description": "Hubble OPAL 845 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail.",
         "title": "Near infrared: Hubble OPAL F845M single-band false color",
         "thumbnail": "/scenes/uranus/uranus-lens-near-infrared.webp",
         "surface": "/scenes/uranus/uranus-surface-near-infrared.webp",

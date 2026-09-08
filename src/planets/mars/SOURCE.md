@@ -41,6 +41,16 @@ Mars uses three source-backed surface lenses:
   pinned OpenSpace TMS source and shown as a qualified visual representation
   of daytime thermal response, not a calibrated temperature retrieval.
 
+The THEMIS snapshot has opaque alpha, so alpha alone does not identify its
+large black exterior. Its exact-zero fill connected to the north/south map
+edges is conservatively marked unavailable. Isolated black terrain and every
+nonzero dark sample remain; no 64-DN brightness cutoff is used. This is a
+qualified source-fill interpretation, not an instrument validity mask.
+Validity is resolved before resampling. The thermal surface, polar tiles and
+thumbnail show the shared gray grid in gaps, with no Viking substitution,
+blurred coverage transition or polar inpainting. The mosaic combines multiple
+observations and does not depict the scene date or calibrated temperature.
+
 There is no Mars cross-section, methane lens, or fabricated interior view.
 
 ## Atmosphere and charts

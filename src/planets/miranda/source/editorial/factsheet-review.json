@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "miranda",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "planet",
+        "name",
+        "code",
+        "GMKm3PerSec2",
+        "GMSigma",
+        "GMReference",
+        "meanRadiusKm",
+        "radiusSigmaKm",
+        "radiusReference",
+        "densityGPerCm3",
+        "densitySigma",
+        "densityReference"
+      ],
+      "row": [
+        "Uranus",
+        "Miranda",
+        "705",
+        "4.3",
+        "0.2",
+        "URA111",
+        "235.8",
+        "0.7",
+        "1",
+        "1.178",
+        "0.053",
+        "*"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "19.189 AU"
+      }
+    }
+  ]
+}

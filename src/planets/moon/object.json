@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "734587e14a2fe68945dd0b184641436eb1df2383d4cc622c6b150573735458f7"
+    "sha256": "fa1ca8a19436351b2dcb3f16d278c4d072f10607b460eedf090a663f0aba123d"
   },
   "id": "moon",
   "properties": {
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "9cdbc48daf7af06cb2afe4639f000f6e25ed5dc72b013b7e840db1de5b01a0d8"
+          "sha256": "d3697fb7fcaf344834607712df3bed01558d2b4e85724599fd73f751671027e3"
         },
         {
           "id": "title",
@@ -104,9 +104,9 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        142187500595.13907,
-        -46738265180.70099,
-        -20223996617.1983
+        142184767415.5077,
+        -46741394550.3237,
+        -20225803698.804474
       ],
       "presentationToReference": [
         -0.5596821892231959,

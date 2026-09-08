@@ -4,17 +4,23 @@
   "id": "adrastea",
   "displayName": "Adrastea",
   "panel": {
-    "introduction": "Adrastea is a tiny moon near the outer edge of Jupiter\u2019s main ring. Galileo barely resolved its outline; this view shows a model based on its measured dimensions.",
+    "introduction": "Adrastea is a tiny moon near the outer edge of Jupiter’s main ring. Galileo barely resolved its outline; this view shows a model based on its measured dimensions.",
     "facts": [
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "8.2 \u00b1 2 km"
+        "value": "8.2 ± 4 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "dimensions",
         "label": "Dimensions",
-        "value": "About 20 \u00d7 16 \u00d7 14 km"
+        "value": "About 20 × 16 × 14 km"
       },
       {
         "id": "orbital-period",
@@ -23,18 +29,18 @@
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Jupiter",
+        "label": "Mean distance from Jupiter",
         "value": "About 129,000 km"
       },
       {
         "id": "rotation-period",
-        "label": "Rotation",
+        "label": "Rotation period",
         "value": "Assumed synchronous; poorly constrained"
       },
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "David Jewitt and G. Edward Danielson \u00b7 1979"
+        "value": "David Jewitt and G. Edward Danielson · 1979"
       }
     ],
     "moreFacts": []
@@ -49,8 +55,8 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "A triaxial ellipsoid based on the 10 \u00d7 8 \u00d7 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape.",
-        "title": "A triaxial ellipsoid based on the 10 \u00d7 8 \u00d7 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape.",
+        "description": "A triaxial ellipsoid based on the 10 × 8 × 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape.",
+        "title": "A triaxial ellipsoid based on the 10 × 8 × 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape.",
         "detail": "Measured axes",
         "thumbnail": "/scenes/adrastea/adrastea-model-thumbnail.webp",
         "surface": "adrastea-model-surface@2x.webp",

@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "ceres",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "columns": [
+        "name",
+        "equatorialRadiusKm",
+        "meanRadiusKm",
+        "mass",
+        "densityGPerCm3",
+        "siderealRotationDays",
+        "siderealOrbitYears",
+        "magnitude",
+        "geometricAlbedo",
+        "equatorialGravityMPerSec2",
+        "escapeVelocityKmPerSec"
+      ],
+      "row": [
+        "Ceres",
+        "482.1 [O]",
+        "469.7 [O]",
+        "938.416 [O] ±0.013",
+        "2.162 [O] ±0.008",
+        "0.37809042 [Q]",
+        "4.61 [Q]",
+        "3.34 [R]",
+        "0.090 [P] ±0.003",
+        "0.27 [*]",
+        "0.51 [*]"
+      ],
+      "massUnitKg": "1e18"
+    }
+  ]
+}

@@ -17,7 +17,7 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "About 15.8 Earth days"
+        "value": "About 15.8 days"
       },
       {
         "id": "moon-count",
@@ -27,7 +27,7 @@
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "About 557 Earth years"
+        "value": "About 557 years"
       }
     ],
     "moreFacts": [
@@ -52,7 +52,7 @@
         "value": "Arbitrary display pole and meridian"
       },
       {
-        "id": "rings",
+        "id": "ring-system",
         "label": "Rings",
         "value": "None known"
       }
@@ -65,7 +65,7 @@
       {
         "id": "illustration",
         "label": "Illustrative model",
-        "description": "NASA VTAD · model texture",
+        "description": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
         "title": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
         "qualification": "Illustration; not an observed surface map.",
         "thumbnail": "illustration-thumbnail.webp",

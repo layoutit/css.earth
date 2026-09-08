@@ -289,7 +289,10 @@ function createSettingsController(
       const blocked = motionOn && reason === "reduced-motion";
       row.dataset.motionBlocked = String(blocked);
       explanation.hidden = !blocked;
-      if (blocked) motion.setAttribute("aria-describedby", explanation.id);
+      const descriptions = new Set((motion.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/u).filter(id => id && id !== explanation.id));
+      if (blocked) descriptions.add(explanation.id);
+      if (descriptions.size) motion.setAttribute("aria-describedby", [...descriptions].join(" "));
       else motion.removeAttribute("aria-describedby");
     },
     destroy() {

@@ -59,12 +59,12 @@ test("declares MOLA false color and qualified THEMIS coverage", () => {
   assert.match(elevation.qualification, /MOLA elevation/u);
   assert.equal(thermal.falseColor, false);
   assert.match(thermal.qualification, /not a calibrated temperature retrieval/u);
-  assert.match(thermal.coveragePreparation, /Viking grayscale detail/u);
+  assert.match(thermal.coveragePreparation, /no Viking gap fill/u);
   for (const lens of [elevation, thermal]) {
     assert.equal(lens.polarPreparation.boundaryLatitudeDegrees, 87.1875);
     assert.equal(
       lens.polarPreparation.singularityStabilization.model,
-      "prepared-boundary-guided-polar-inpaint",
+      lens.id === "thermal" ? "measured-polar-projection-with-neutral-gaps" : "prepared-boundary-guided-polar-inpaint",
     );
     assert.equal(lens.polarPreparation.runtimeProjection, false);
   }

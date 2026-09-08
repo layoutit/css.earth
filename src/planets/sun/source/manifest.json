@@ -762,8 +762,8 @@
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 16320,
-      "expectedSha256": "ddedfb97fa34017778c261ab69e09f816840523ffbb0fbbf6307abaa5a329ca9",
+      "expectedBytes": 17884,
+      "expectedSha256": "10d97bafceacd0707aa10e7635e8eea43c6645eff95b3781164984fbfe2db9b7",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
@@ -777,6 +777,13 @@
       "expectedBytes": 480,
       "expectedSha256": "84fc8f676449f2090b33495ecf5d093ce3074704b67add334efc8e25f4ab54ce",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://science.nasa.gov/sun/facts/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 414,
+      "expectedSha256": "680258c3b06128ebe501d83a44fef7bc1ee179ee85b0d1e67c0053259680fe0b"
     }
   ]
 }
