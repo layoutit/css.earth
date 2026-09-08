@@ -111,6 +111,8 @@ const SATELLITES = [
   ['hydra', '903', '500@999', 'daily'],
   ['kerberos', '904', '500@999', 'daily'],
   ['styx', '905', '500@999', 'daily'],
+  ['kiviuq', '624', '500@699', 'daily'],
+  ['albiorix', '626', '500@699', 'daily'],
   ['dimorphos', '120065803', '500@920065803', 'dart'],
 ]
 
