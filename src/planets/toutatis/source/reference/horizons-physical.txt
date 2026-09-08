@@ -1,0 +1,32 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               4179 Toutatis (1989 AC)         2026-Sep-07 18:04:18
+Rec #:    4179 (+COV) Soln.date: 2026-Jun-16_11:32:22   # obs: 7141 (1934-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2456751.5 ! 2014-Apr-04.00 (TDB)         Residual RMS= .24877
+   EC= .6298135873306892   QR= .9379080248108678   TP= 2456247.1048165574
+   OM= 124.3530294904659   W=  278.7623432107634   IN= .4471122322650611
+   A= 2.533610075118303    MA= 123.2722544506895   ADIST= 4.129312125425738
+   PER= 4.0329             N= .244396177           ANGMOM= .02126819
+   DAN= 1.39479            DDN= 1.69084            L= 43.1156354
+   B= -.4418938            MOID= .00600375         TP= 2012-Nov-15.6048165574
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 2.7                ROTPER= 176.
+   H= 15.29                G= .100                 B-V= n.a.
+                           ALBEDO= .405            STYP= Sk
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= -3.148561518174E-13 A2= -7.654593332518E-15 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  .1112620426   NK=  4.6142   NM=  2.15     NN=  5.093    R0=  2.808
+
+ASTEROID comments: 
+1: soln ref.= JPL#726, PHA  OCC=0       radar(35 delay,27 Dop.)
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,207 @@
+{
+  "schema": "cssdidymos-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "didymos-shape",
+      "path": "shape/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
+      "credit": "NASA/JHUAPL/DART; ASI/LICIACube; Daly, Barnouin, Ernst, Nair, Espiritu and Waller",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 365
+      },
+      "coverage": "Released global SPC model; smooth regions have no resolved image coverage. Approximately 14 m uncertainty in x/y/z and 3.3 percent volume uncertainty; see pinned SIS and collection metadata.",
+      "expectedBytes": 3616200,
+      "expectedSha256": "b5349374186d254ca21b7b00ddd9f6dea7e2762ca6bbff13f43151ee448e3f20"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
+      "credit": "NASA/JHUAPL/DART; ASI/LICIACube; Daly, Barnouin, Ernst, Nair, Espiritu and Waller",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 41504,
+      "expectedSha256": "2f5ab0d8384d4e896731b05316a49a02976f3c7034095eb396ba7168e0ccf99e",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "didymos-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 9099,
+      "expectedSha256": "b0ba4bf58a3d31f8fac76162aa813b4ecc4a4a1e1e0e950dc8ed89fce13dd0a6"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 853,
+      "expectedSha256": "43e051efdd5d2cdc84ea2115c8509f50efbe0dc65c2e3a69f8f049690579d89e"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1368,
+      "expectedSha256": "7ae2783985ebc9b3ae1672445b18575ce1a5afc0e6e7c28a8e2793689029e33d"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 668,
+      "expectedSha256": "8977cdc0c88fdb6f5119838f0f80fed7a72617a9fa2e572bdcfc079a0aca6f14"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 3043,
+      "expectedSha256": "5fe917b6cd667b162341564874fe5afbf4dc31214419afbdcc79b525ddae5fa3"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 4231,
+      "expectedSha256": "e0d5dcf47be0d58535ff1e587ea79bf49126bd3027dbc24ea9a4269980b4f049"
+    },
+    {
+      "path": "reference/Sunshine_LPSC.pdf",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 299449,
+      "expectedSha256": "8682cd20f739939f16a6261a904665e6b5ab610cb1c9b1c8a769bf1ca033d7e8"
+    },
+    {
+      "path": "reference/albedo.xml",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 6724,
+      "expectedSha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5"
+    },
+    {
+      "path": "reference/collection.xml",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 6902,
+      "expectedSha256": "4a10a40cd590f8b5dd6c004bb8816f1a7db3a276c888915205e85a5192a0bf8c"
+    },
+    {
+      "path": "reference/dart_shapemodel_sis.pdf",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1197607,
+      "expectedSha256": "618cbcead6ec54925d2db3a44449b8357cc354d539a2712fe77efe4b79f97bd8"
+    },
+    {
+      "path": "reference/didymos_coordinate_system_description_v1.pdf",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 535720,
+      "expectedSha256": "7630b118eeab841e7fb16c6ac74fb0ba85e50cdf7d9fa2242103b07737224064"
+    },
+    {
+      "path": "reference/didymos_system_15.tpc",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 7968,
+      "expectedSha256": "c36bf56a5f93cb1f4ddc1eb09623a628b82ac225bb08e86c8a34c03cf7355600"
+    },
+    {
+      "path": "reference/horizons-primary-physical.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1783,
+      "expectedSha256": "0fa74403995309fc8f8c896eafd1a1104343fd004c506b815594dd6f55a6ccb4"
+    },
+    {
+      "path": "reference/shape-overview.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 4128,
+      "expectedSha256": "7b97a88f194c39024ff891c09f0ba29136e9dd38901b5621261060675252ea38"
+    },
+    {
+      "path": "reference/shape.xml",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 9121,
+      "expectedSha256": "f09a8a3364c6fc9e9c6df54206b03e550f0da16a896d3d65c6e5d74b0d525564"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 89773,
+      "expectedSha256": "38a2fcf37a4fd7a1cc568c05f264df12503fde572c293cd52be539e827e88a11"
+    }
+  ]
+}

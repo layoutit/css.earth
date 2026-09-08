@@ -1,0 +1,39 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {readFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
+import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+const root=resolve(import.meta.dirname,'../../../../src/planets/didymos/source');
+const read=async path=>JSON.parse(await readFile(resolve(root,path),'utf8'));
+
+test('Didymos source closure pins every input and declares restoration for required acquisition data',async()=>{
+ const source=await createSourceManifest({planetId:'didymos',planetName:'Didymos',sourceRoot:root});await source.verify();
+ const plan=await read('preparation/acquisition.json');
+ for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path),`Missing acquisition for ${input.path}`);
+});
+
+test('Didymos direct source frame retains the released axes, kilometer scale and closed volume',async()=>{
+ const config=await read('preparation/terrestrial.json'),p=config.geometry.radialTerrain,mesh=await loadObjShape(resolve(root,p.path),p.grid);
+ // Independent anchors printed in the released OBJ header.
+ const expected=[[-387.43001222610474,-361.11000180244446,-337.92999386787415],[430.81000447273254,440.3400123119354,266.5500044822693]];
+ for(let side=0;side<2;side++)for(let axis=0;axis<3;axis++)assert.ok(Math.abs(mesh.bounds[side][axis]-expected[side][axis])<1e-8);
+ const topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);
+ assert.deepEqual([topology.vertices,topology.edges,topology.faces,topology.components,topology.eulerCharacteristic],[24578,73728,49152,1,2]);
+ assert.ok(Math.abs(topology.signedVolumeCubicMeters/1e9-.2033564365122846)<1e-10);
+ const scalar=await loadScienceSurface(root,config.raster.scientific[0]);
+ for(const [lon,lat]of [[0,90],[0,-90],[0,0],[90,0],[180,0],[270,0]])assert.ok(Math.abs(scalar.sample(lon,lat)-(mesh.sample(lon,lat)-365))<1e-8);
+ assert.equal(scalar.sample(0,91),null);
+});
+
+test('Didymos native raster surface preserves closed source connectivity within its simplification budget',async()=>{
+ const config=await read('preparation/terrestrial.json'),source=await createSourceManifest({planetId:'didymos',planetName:'Didymos',sourceRoot:root});
+ const radial=await loadRadialTerrain({config,sourceDirectory:root,source});
+ assert.equal(radial.faces.length,800);assert.equal(radial.simplification.method,'source-meshoptimizer');
+ assert.equal(radial.simplification.sourceFaces,49152);assert.equal(radial.simplification.removedOppositeFaces,0);
+ assert.ok(radial.simplification.estimatedErrorMeters<=8);assert.equal(radial.simplification.topology.eulerCharacteristic,2);
+ assert.ok(radial.leaves.every(leaf=>leaf.tag==='u'&&leaf.attributes['data-polycss-texture-leaf-sizing']==='raster'));
+ assert.equal(radial.tileSize,128);assert.equal(radial.width,2048);assert.equal(radial.height,6400);
+});

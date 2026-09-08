@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 69.70029,
+  "declinationDegrees": -72.69527,
+  "displayMeridianDegrees": 0,
+  "periodHours": 11.92177,
+  "phase": "arbitrary-display-phase",
+  "source": "reference/horizons-physical.txt: pre-impact pole and period; arbitrary displayed prime meridian",
+  "qualification": "The released DART mesh represents the encounter shape. Fixed display phase is not a measured 2026 attitude; post-impact spin is not propagated."
+}

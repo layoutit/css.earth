@@ -11,3 +11,10 @@ src/planets/lutetia/source/reference/** -whitespace
 src/planets/steins/source/reference/** -whitespace
 src/planets/lutetia/source/shape/*.wrl -whitespace
 src/planets/steins/source/shape/*.wrl -whitespace
+
+# Retain original scientific archive text bytes.
+src/planets/didymos/source/reference/** -whitespace
+src/planets/dimorphos/source/reference/** -whitespace
+src/planets/kleopatra/source/reference/** -whitespace
+src/planets/toutatis/source/reference/** -whitespace
+src/planets/toutatis/source/shape/4179toutatis2.tab -whitespace
