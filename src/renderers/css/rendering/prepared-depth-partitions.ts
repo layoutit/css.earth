@@ -1,7 +1,7 @@
 import { sceneEye } from './prepared-facing.js';
 import type { PhysicalProjection } from './physical-projection.js';
 
-export type PreparedDepthOrder = { readonly group: number } | {
+export type PreparedDepthOrder = { readonly group: number } | { readonly sequence: readonly PreparedDepthOrder[] } | {
   readonly plane: readonly [number, number, number, number];
   readonly back: PreparedDepthOrder; readonly front: PreparedDepthOrder;
 };
@@ -11,12 +11,16 @@ export interface PreparedDepthPartitions {
 }
 
 /** Retained paint contexts share the camera's already-published transform.
- * Only prepared plane signs determine their painter order. No face sorting,
+ * Only prepared priorities and plane signs determine their painter order. No face sorting,
  * style discovery, mesh construction or node replacement enters a frame. */
 export function createPreparedDepthPartitions(plan: PreparedDepthPartitions | undefined,
   nodes: readonly HTMLElement[], scene: HTMLElement) {
   if (!plan) return (_projection: PhysicalProjection | undefined) => {};
   const groups = plan.groups.map(group => ({ root: nodes[group.root], scene: nodes[group.scene], rank: -1 }));
+  const dependsOnEye = (order: PreparedDepthOrder): boolean => 'plane' in order ||
+    'sequence' in order && order.sequence.some(dependsOnEye);
+  const changingOrder = dependsOnEye(plan.order);
+  let ordered = false;
   let transform: string | null = null, hidden: boolean | null = null;
   return (projection: PhysicalProjection | undefined) => {
     const nextTransform = scene.style.transform, nextHidden = scene.hidden;
@@ -27,6 +31,7 @@ export function createPreparedDepthPartitions(plan: PreparedDepthPartitions | un
       }
       transform = nextTransform; hidden = nextHidden;
     }
+    if (ordered && !changingOrder) return;
     const eye = projection ? sceneEye(projection) : null;
     if (!eye) return;
     let rank = 0;
@@ -35,6 +40,8 @@ export function createPreparedDepthPartitions(plan: PreparedDepthPartitions | un
         const group = groups[node.group];
         if (group.rank !== rank) { group.root.style.zIndex = String(rank); group.rank = rank; }
         rank++;
+      } else if ('sequence' in node) {
+        for (const entry of node.sequence) visit(entry);
       } else {
         const p = node.plane;
         const front = p[0] * eye![0] + p[1] * eye![1] + p[2] * eye![2] + p[3] >= 0;
@@ -43,5 +50,6 @@ export function createPreparedDepthPartitions(plan: PreparedDepthPartitions | un
       }
     }
     visit(plan.order);
+    ordered = true;
   };
 }

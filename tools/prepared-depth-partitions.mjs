@@ -1,4 +1,5 @@
 import { prepareActivationGroups } from './prepared-activation-groups.mjs';
+import { visibilityComponents } from './prepared-visibility-order.mjs';
 
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const MAXIMUM_DEPTH_LEAVES = 64;
@@ -52,13 +53,14 @@ export function restoreDepthSource(definition) {
   return restored;
 }
 
-/** Preparation only. Existing source edges supply separating planes. A face
- * crossing a plane disqualifies that split: geometry and texture bytes survive
- * unchanged. Unpartitionable meshes keep their original 3D presentation. */
-export function partitionSurface(triangles, maximumLeaves = MAXIMUM_DEPTH_LEAVES) {
+/** Preparation only. Source-edge separating planes and fixed visibility
+ * priorities compose one painter program. A crossing face rejects that plane;
+ * a visibility cycle stays native. Neither path cuts or changes a source face.
+ * Sixty-four is a packing target, not a claim about irreducible cycle sizes. */
+export function partitionSurface(triangles, maximumLeaves = MAXIMUM_DEPTH_LEAVES, frontSigns) {
   const normals = new Map();
-  for (const points of triangles) for (let edge = 0; edge < 3; edge++) {
-    const a = points[edge], b = points[(edge + 1) % 3];
+  for (const points of triangles) for (let edge = 0; edge < points.length; edge++) {
+    const a = points[edge], b = points[(edge + 1) % points.length];
     let normal = [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
     const length = Math.hypot(...normal);
     if (length < 1e-8) continue;
@@ -72,6 +74,7 @@ export function partitionSurface(triangles, maximumLeaves = MAXIMUM_DEPTH_LEAVES
     return low < -1e-5 && high > 1e-5 ? 2 : low + high >= 0 ? 1 : -1;
   }) }));
   const groups = [];
+  function leaf(ids) { const group = groups.length; groups.push(ids.sort((a, b) => a - b)); return { group }; }
   function visit(ids) {
     let best = null;
     if (ids.length > maximumLeaves) for (const candidate of candidates) {
@@ -85,7 +88,21 @@ export function partitionSurface(triangles, maximumLeaves = MAXIMUM_DEPTH_LEAVES
       const score = Math.max(front, back);
       if (!best || score < best.score) best = { candidate, score };
     }
-    if (!best) { const group = groups.length; groups.push(ids); return { group }; }
+    if (!best) {
+      if (!frontSigns || ids.length <= maximumLeaves) return leaf(ids);
+      const components = visibilityComponents(ids.map(id => triangles[id]), ids.map(id => frontSigns[id]));
+      if (components.length === 1) return leaf(ids);
+      const sequence = []; let pending = [];
+      const flush = () => { if (pending.length) sequence.push(leaf(pending)); pending = []; };
+      for (const component of components) {
+        const members = component.map(index => ids[index]);
+        if (pending.length + members.length > maximumLeaves) flush();
+        if (members.length > maximumLeaves) sequence.push(visit(members));
+        else pending.push(...members);
+      }
+      flush();
+      return sequence.length === 1 ? sequence[0] : { sequence };
+    }
     const { normal, sides } = best.candidate;
     return { plane: [...normal, 0], back: visit(ids.filter(id => sides[id] === -1)), front: visit(ids.filter(id => sides[id] === 1)) };
   }
@@ -97,10 +114,10 @@ export function partitionSurface(triangles, maximumLeaves = MAXIMUM_DEPTH_LEAVES
  * the existing camera; selection writes retain their atomic resource owner. */
 export function prepareDepthPartitions(definition, surface) {
   if (!surface) return definition;
-  const { groups, order } = partitionSurface(definition.surfaceHit.triangles);
-  // A partial split still leaves Chrome with an unbounded sorting context.
-  // Qualify the whole surface against the budget, never just its small pieces.
-  if (groups.length < 2 || groups.length > 128 || groups.some(group => group.length > MAXIMUM_DEPTH_LEAVES)) return definition;
+  const { groups, order } = partitionSurface(definition.surfaceHit.triangles, MAXIMUM_DEPTH_LEAVES, surface.frontSigns);
+  // Inseparable visibility cycles retain native depth. The preparation budget
+  // limits carriers, never deletes faces or pretends a cyclic core is bounded.
+  if (groups.length < 2 || groups.length > 128 || !surface.frontSigns && groups.some(group => group.length > MAXIMUM_DEPTH_LEAVES)) return definition;
   const { nodes: original, camera, scene } = definition.tree;
   const chain = [];
   for (let id = surface.target; id !== camera; id = original[id].parent) chain.unshift(id);
@@ -130,6 +147,7 @@ export function prepareDepthPartitions(definition, surface) {
   const inverse = surface.bodyFromScene;
   function transformOrder(node) {
     if ('group' in node) return node;
+    if ('sequence' in node) return { sequence: node.sequence.map(transformOrder) };
     const plane = [0, 1, 2, 3].map(column => node.plane.reduce((sum, value, row) => sum + value * inverse[column * 4 + row], 0));
     const length = Math.hypot(...plane.slice(0, 3));
     return { plane: plane.map(value => value / length), back: transformOrder(node.back), front: transformOrder(node.front) };

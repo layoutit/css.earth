@@ -11,17 +11,20 @@ texture generation, masks, filters, gradients or blend modes.
 A retained CSS mesh can still make Chrome perform expensive 3D ordering on every
 camera frame. Preparation now compiles eligible static surfaces into independent
 paint-contained projection groups. Runtime publishes the existing scene transform
-and visits a prepared plane tree to order those groups. Chrome handles depth
+and applies prepared fixed priorities and separating-plane branches to order those groups. Chrome handles depth
 inside each smaller group. No source-face sorting or style discovery runs in a
 frame; unchanged group ranks produce no style writes.
 
-The compiler uses planes through existing source edges. A triangle crossing a
-plane rejects that split. It does not cut triangles, rebake textures, approximate
-coverage, or reduce detail. Current eligible packages are Deimos, Phobos and
-Phoebe: each retains its 1,216 original leaves in 32 groups of 38. Eligibility
+The compiler combines source-edge separating planes with a preparation-time
+visibility priority graph. Potentially conflicting face orders remain together
+in a native 3D component. Acyclic components receive fixed paint priorities.
+It does not cut triangles, rebake textures, approximate coverage, or reduce
+detail. The original Deimos, Phobos and Phoebe partitioning is preserved.
+The expanded algorithm and measured coverage are documented in
+[general visibility qualification](general-depth-qualification.md). Eligibility
 comes from source geometry and binding ownership, with no object-id dispatch.
-Other packages retain their existing representation. This does not yet improve
-Haumea or the other surface families lacking this qualified source contract.
+Haumea and other unsupported layered or dynamic surface families still retain
+their original presentation.
 
 The original reference branch remains attached for the shared camera and surface
 hit-test owner. Static ancestor carriers receive the same selection writes and
@@ -36,10 +39,11 @@ render leaf. It compares the complete computed CSS cascade before and after
 compilation for every dataset and geometry/billboard/marker LOD. Unsupported
 cases keep native depth. The typed runtime validator bounds group count and tree
 depth and requires independent carriers and exact unique order coverage.
-Every emitted group must contain at most 64 source faces. A partially separable
-surface with any larger remainder keeps its entire original representation;
-preparation does not accept only the easy fragments. This bound also applies to
-new registry entries without an object allowlist.
+Sixty-four faces is the packing target. A visibility cycle that cannot be split
+safely remains one larger native group; all original faces still occur exactly
+once. The old rule rejecting an entire surface for one large remainder has been
+replaced by explicit prepared component ordering. The report distinguishes
+fully bounded surfaces from those retaining larger cores.
 
 The checked runtime JSON remains exactly equal to the final transported data.
 Before recompilation, preparation recovers the original branch by removing only
@@ -48,11 +52,11 @@ This is a preparation operation; no restoration machinery ships in the browser.
 Round-trip and repeated-preparation checks preserve source closure without a
 second stored source tree. Original texture and atlas bytes are unchanged. Exact restoration was
 also compared against the pre-change checked runtime for all three real packages.
-The tradeoff is 128 additional retained carrier/ancestor nodes per eligible body
+The original three-body tradeoff was 128 additional retained carrier/ancestor nodes per body
 and 34 activation groups versus 20 previously. Camera movement does not wait for
 those detail batches.
 
-## Matched browser result
+## Original three-body browser result
 
 Baseline: immutable production-shaped build from `4fa34b72`, cloned before the
 implementation. Both builds use the then-current 52-object registry. Candidate:

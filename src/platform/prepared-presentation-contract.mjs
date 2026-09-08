@@ -117,6 +117,11 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
         record(entry, 'depth leaf', ['group']); integer(entry.group, 'depth group index');
         if (entry.group >= groups.length || ordered.has(entry.group)) fail('depth order requires each group exactly once');
         ordered.add(entry.group);
+      } else if (Object.hasOwn(entry, 'sequence')) {
+        record(entry, 'depth sequence', ['sequence']);
+        const sequence = array(entry.sequence, 'depth sequence');
+        if (sequence.length < 2 || sequence.length > groups.length) fail('depth sequence requires 2 to group-count entries');
+        for (const child of sequence) order(child, depth + 1);
       } else {
         record(entry, 'depth split', ['plane', 'back', 'front']);
         if (array(entry.plane, 'depth plane').length !== 4 || !entry.plane.every(Number.isFinite) ||
