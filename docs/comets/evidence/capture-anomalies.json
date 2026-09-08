@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-comet-capture-observation@1",
+  "codeRevision": "5042c066",
+  "route": "http://127.0.0.1:4258/comet-103p/",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "dpr": 1,
+  "browser": "Chrome 152.0.7977.76",
+  "status": "unresolved; visual acceptance remains provisional",
+  "observations": [
+    "Initial headless screenshots sometimes omit part of the header badges while DOM bounds, visibility, text and hit targets are correct.",
+    "A second headless screenshot in one sequence captured only the sky background.",
+    "A later read-only bounds/style inspection and screenshot captured the full scene and badges.",
+    "A separate headed Chrome screenshot retained the scene and badges but omitted several SVG shell titles."
+  ],
+  "interpretation": "These captures do not establish whether the cause is screenshot/compositor behavior or an application paint defect. DOM and timing passes do not resolve it.",
+  "captures": [
+    {
+      "path": "output/comet-performance/badge-stage-1.png",
+      "bytes": 558212,
+      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa"
+    },
+    {
+      "path": "output/comet-performance/badge-stage-2.png",
+      "bytes": 558212,
+      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa"
+    },
+    {
+      "path": "output/comet-performance/badge-stage-3.png",
+      "bytes": 558212,
+      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa"
+    },
+    {
+      "path": "output/comet-performance/badge-headed.png",
+      "bytes": 560022,
+      "sha256": "98e9338ed2929d22fe6c11cff2f8f9a1813b14f9e6c4098bde7e5f2fa77839e3"
+    }
+  ]
+}

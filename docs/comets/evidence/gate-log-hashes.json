@@ -1,27 +1,137 @@
 [
   {
-    "path": "output/comet-test-final.log",
-    "bytes": 95865,
-    "sha256": "1a63df65a1d4de61658d1a5b226191c4ef7222afa4f752502c46481b41f97214"
+    "path": "output/comet-integration-acquire-final.log",
+    "bytes": 6510,
+    "sha256": "0f062d11f0d37384cbcb6f22036d56bfb4ee690e0888e05a7d15700a84167b9c"
   },
   {
-    "path": "output/comet-acquire-final.log",
-    "bytes": 5392,
-    "sha256": "a03be0156a6aba14ec073a523773fd7ad7ed67310c2c9eff867aae508e82582d"
+    "path": "output/comet-integration-test-final.log",
+    "bytes": 99544,
+    "sha256": "2229537277f31d911950402005244df5152d130897491e408d0e933a560e17c6"
   },
   {
-    "path": "output/comet-build-final.log",
-    "bytes": 593526,
-    "sha256": "f6f2bdd911757f8b3b0fd2ed75449eb1e711ec0b316de2e18ffa509c2ec50099"
+    "path": "output/comet-integration-build.log",
+    "bytes": 656602,
+    "sha256": "8e72d615dd1528a618d509c4385c7fa391c01ef70bb6fe337843479fcf22c023"
   },
   {
-    "path": "output/comet-preparation-final.log",
-    "bytes": 86946,
-    "sha256": "6e92889645f8524ba948ca65aaefd7e9bfba20f0232fb70179ea82858737c7ce"
+    "path": "output/comet-integration-static-final.log",
+    "bytes": 4513,
+    "sha256": "00f188e7d79580525a59b42dd4673828d704d5f2c0faafe77647ee4e42d43ce0"
   },
   {
-    "path": "/tmp/cssEarth-comets-baseline-preparation-final.log",
-    "bytes": 85448,
-    "sha256": "6fa0b7f5be82c709a1b870a47f3b3e5fa520f0a749e6fb7698246e6aab6d1d91"
+    "path": "output/comet-integration-assembly-final.log",
+    "bytes": 628211,
+    "sha256": "0d6b3f33801da2d259d6296bdec5cfa2c32d0f8d18fcd287bc5ea4cf2997e820"
+  },
+  {
+    "path": "output/comet-integration-browser-all.log",
+    "bytes": 8204,
+    "sha256": "ec76cd4bb3eda4f5622b901e7a7583c4385fde3156459974cec3e1186700768c"
+  },
+  {
+    "path": "output/comet-integration-comet-navigation.log",
+    "bytes": 96,
+    "sha256": "d4212c970c6c4b834bcd20d3abc8e2817cac840d08dcbfb55f90be4c19f1158c"
+  },
+  {
+    "path": "output/comet-integration-preparation-final.log",
+    "bytes": 148757,
+    "sha256": "917117fa58590086ebdf45864b5c1ab806293b4d7bca6bd45f15e00a37153f90"
+  },
+  {
+    "path": "/tmp/cssEarth-comets-baseline-1398-preparation.log",
+    "bytes": 147979,
+    "sha256": "82beac06f80d4a58f8aa479f61f4b8ffa5c2c2b32ada129b54757d6a9a0d048a"
+  },
+  {
+    "path": "output/comet-integration-ownership-recheck.log",
+    "bytes": 5504,
+    "sha256": "a7ad60a56ba0659546ebde68c03ccbf54d40a2b658c2f630bb959cd8ab20afb1"
+  },
+  {
+    "path": "output/comet-integration-unit-final.log",
+    "bytes": 704,
+    "sha256": "604d50eab6da4eba7f439489e43df2617d7e387a8b9b9a4dcf7f145602d786a3"
+  },
+  {
+    "path": "output/comet-caption-preparation.log",
+    "bytes": 82,
+    "sha256": "e54f485e595e00bf2a540c72e9d80debbd587cf1bc4449a1785b0b2b62c9f175"
+  },
+  {
+    "path": "output/comet-caption-acquire.log",
+    "bytes": 6510,
+    "sha256": "0f062d11f0d37384cbcb6f22036d56bfb4ee690e0888e05a7d15700a84167b9c"
+  },
+  {
+    "path": "output/comet-caption-unit.log",
+    "bytes": 708,
+    "sha256": "9b698d504fa4f84ed9e383b39ea6ca2d6669f61acfb415e860cac538d7bbb774"
+  },
+  {
+    "path": "output/comet-caption-build.log",
+    "bytes": 656677,
+    "sha256": "75f0705385a775ec57bfc40afcef931a1a8b3cd66eee343c36a054f2aad7745b"
+  },
+  {
+    "path": "output/comet-caption-fresh-sources.log",
+    "bytes": 93,
+    "sha256": "7f1a0401c6d4429935a09a2153564d3506500b261b4176e5de5448784dba8afb"
+  },
+  {
+    "path": "output/comet-67p-conformance-caption.log",
+    "bytes": 6104,
+    "sha256": "bb9368026449accb0f2d5c3b71622e0cd1e4782936f6d814ed96dc1035caf09e"
+  },
+  {
+    "path": "output/comet-caption-browser-67p.log",
+    "bytes": 254,
+    "sha256": "e5ce1a71c092b9bf52280e58eaa6b4fdf3675cd815bf2aca676f1cf39ca9c016"
+  },
+  {
+    "path": "output/comet-67p-conformance-integration.log",
+    "bytes": 6105,
+    "sha256": "ff91026a4ad8f592c6d4b875af4627a71c1a3aad2dd6b7435484b0a661a78d50"
+  },
+  {
+    "path": "output/comet-caption-trace-67p-dpr-1.log",
+    "bytes": 5291,
+    "sha256": "05edef7d272d92b58858969cd3d4685548333b8b5af13ef9c1f04d85f66df7ed"
+  },
+  {
+    "path": "output/comet-caption-trace-67p-dpr-2.log",
+    "bytes": 5291,
+    "sha256": "45ca82db905e3dafe84efec2b579fbd05a79e28cdc9922a424e58e7583c08eeb"
+  },
+  {
+    "path": "output/comet-103p-conformance-integration.log",
+    "bytes": 6935,
+    "sha256": "847f8398b3841e4b4d58317676491d9d21ba50e3b6b222e5cc2aa96145f105aa"
+  },
+  {
+    "path": "output/comet-caption-trace-103p-dpr-1.log",
+    "bytes": 5291,
+    "sha256": "1a1c20ff7c65dbce5e9eab7b1e48b95a9e78785e10967bc6365cc3b37f9fee93"
+  },
+  {
+    "path": "output/comet-caption-trace-103p-dpr-2.log",
+    "bytes": 5293,
+    "sha256": "fd385054f20abf76569142dd02753bc097c2c6f1a4ebd3b5c83b6f868313e843"
+  },
+  {
+    "path": "output/comet-9p-conformance-integration.log",
+    "bytes": 6840,
+    "sha256": "8824014766463260b87866e5e2c05814a0bd491e0f23ace8f5a8d70cd87696c9"
+  },
+  {
+    "path": "output/comet-caption-trace-9p-dpr-1.log",
+    "bytes": 5292,
+    "sha256": "195e45cbf8af7887caad65fb8cd80f035704868ed3efacd4cdcd13cfa2b349d4"
+  },
+  {
+    "path": "output/comet-caption-trace-9p-dpr-2.log",
+    "bytes": 5290,
+    "sha256": "e243449c2d69619a2fd3e4394e1589dc6896d533541abc0ec37e24fcd14376df"
   }
 ]

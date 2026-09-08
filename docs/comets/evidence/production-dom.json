@@ -5,7 +5,7 @@
       "object": "comet-103p",
       "density": 1,
       "initial": {
-        "nodes": 23400,
+        "nodes": 26585,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -22,7 +22,7 @@
       "object": "comet-9p",
       "density": 1,
       "initial": {
-        "nodes": 23400,
+        "nodes": 26585,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -39,7 +39,7 @@
       "object": "comet-67p",
       "density": 1,
       "initial": {
-        "nodes": 23400,
+        "nodes": 26585,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -56,7 +56,7 @@
       "object": "amalthea",
       "density": 1,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -73,7 +73,7 @@
       "object": "thebe",
       "density": 1,
       "initial": {
-        "nodes": 23100,
+        "nodes": 26285,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -90,7 +90,7 @@
       "object": "metis",
       "density": 1,
       "initial": {
-        "nodes": 22880,
+        "nodes": 26065,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -107,7 +107,75 @@
       "object": "adrastea",
       "density": 1,
       "initial": {
-        "nodes": 22880,
+        "nodes": 26065,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "naiad",
+      "density": 1,
+      "initial": {
+        "nodes": 26065,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "thalassa",
+      "density": 1,
+      "initial": {
+        "nodes": 26065,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "despina",
+      "density": 1,
+      "initial": {
+        "nodes": 26065,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "galatea",
+      "density": 1,
+      "initial": {
+        "nodes": 26065,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -124,7 +192,7 @@
       "object": "proteus",
       "density": 1,
       "initial": {
-        "nodes": 23500,
+        "nodes": 26685,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -141,7 +209,7 @@
       "object": "larissa",
       "density": 1,
       "initial": {
-        "nodes": 23000,
+        "nodes": 26185,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -158,7 +226,7 @@
       "object": "daphnis",
       "density": 1,
       "initial": {
-        "nodes": 22800,
+        "nodes": 25985,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -175,7 +243,7 @@
       "object": "calypso",
       "density": 1,
       "initial": {
-        "nodes": 23000,
+        "nodes": 26185,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -192,7 +260,7 @@
       "object": "telesto",
       "density": 1,
       "initial": {
-        "nodes": 23000,
+        "nodes": 26185,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -209,7 +277,7 @@
       "object": "helene",
       "density": 1,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -226,7 +294,7 @@
       "object": "sun",
       "density": 1,
       "initial": {
-        "nodes": 22913,
+        "nodes": 26098,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -243,7 +311,7 @@
       "object": "mercury",
       "density": 1,
       "initial": {
-        "nodes": 23302,
+        "nodes": 26487,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -260,7 +328,7 @@
       "object": "venus",
       "density": 1,
       "initial": {
-        "nodes": 22849,
+        "nodes": 26034,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -277,7 +345,7 @@
       "object": "earth",
       "density": 1,
       "initial": {
-        "nodes": 24465,
+        "nodes": 27650,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -294,7 +362,7 @@
       "object": "moon",
       "density": 1,
       "initial": {
-        "nodes": 22866,
+        "nodes": 26051,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -311,7 +379,7 @@
       "object": "mars",
       "density": 1,
       "initial": {
-        "nodes": 22918,
+        "nodes": 26103,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -328,7 +396,7 @@
       "object": "ryugu",
       "density": 1,
       "initial": {
-        "nodes": 23190,
+        "nodes": 26375,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -345,7 +413,7 @@
       "object": "bennu",
       "density": 1,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -362,7 +430,7 @@
       "object": "itokawa",
       "density": 1,
       "initial": {
-        "nodes": 23194,
+        "nodes": 26379,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -379,7 +447,7 @@
       "object": "eros",
       "density": 1,
       "initial": {
-        "nodes": 23196,
+        "nodes": 26381,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -393,10 +461,163 @@
       }
     },
     {
+      "object": "ida",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "gaspra",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "mathilde",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "lutetia",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "steins",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "didymos",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "dimorphos",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "kleopatra",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "toutatis",
+      "density": 1,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
       "object": "vesta",
       "density": 1,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -413,7 +634,7 @@
       "object": "phobos",
       "density": 1,
       "initial": {
-        "nodes": 23616,
+        "nodes": 26801,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -430,7 +651,7 @@
       "object": "deimos",
       "density": 1,
       "initial": {
-        "nodes": 23616,
+        "nodes": 26801,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -447,7 +668,7 @@
       "object": "ceres",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -464,7 +685,7 @@
       "object": "jupiter",
       "density": 1,
       "initial": {
-        "nodes": 23190,
+        "nodes": 26375,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -481,7 +702,7 @@
       "object": "io",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -498,7 +719,7 @@
       "object": "europa",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -515,7 +736,7 @@
       "object": "ganymede",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -532,7 +753,7 @@
       "object": "callisto",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -549,7 +770,7 @@
       "object": "saturn",
       "density": 1,
       "initial": {
-        "nodes": 23365,
+        "nodes": 26550,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -566,7 +787,7 @@
       "object": "pan",
       "density": 1,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -583,7 +804,7 @@
       "object": "atlas",
       "density": 1,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -600,7 +821,7 @@
       "object": "prometheus",
       "density": 1,
       "initial": {
-        "nodes": 23120,
+        "nodes": 26305,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -617,7 +838,7 @@
       "object": "pandora",
       "density": 1,
       "initial": {
-        "nodes": 23040,
+        "nodes": 26225,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -634,7 +855,7 @@
       "object": "janus",
       "density": 1,
       "initial": {
-        "nodes": 23120,
+        "nodes": 26305,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -651,7 +872,7 @@
       "object": "epimetheus",
       "density": 1,
       "initial": {
-        "nodes": 23120,
+        "nodes": 26305,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -668,7 +889,7 @@
       "object": "hyperion",
       "density": 1,
       "initial": {
-        "nodes": 23600,
+        "nodes": 26785,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -685,7 +906,7 @@
       "object": "mimas",
       "density": 1,
       "initial": {
-        "nodes": 23120,
+        "nodes": 26305,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -702,7 +923,7 @@
       "object": "enceladus",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -719,7 +940,7 @@
       "object": "tethys",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -736,7 +957,7 @@
       "object": "dione",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -753,7 +974,7 @@
       "object": "rhea",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -770,7 +991,7 @@
       "object": "titan",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -787,7 +1008,7 @@
       "object": "iapetus",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -804,7 +1025,7 @@
       "object": "phoebe",
       "density": 1,
       "initial": {
-        "nodes": 23616,
+        "nodes": 26801,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -821,7 +1042,7 @@
       "object": "uranus",
       "density": 1,
       "initial": {
-        "nodes": 23465,
+        "nodes": 26650,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -838,7 +1059,7 @@
       "object": "miranda",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -855,7 +1076,7 @@
       "object": "ariel",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -872,7 +1093,7 @@
       "object": "umbriel",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -889,7 +1110,7 @@
       "object": "titania",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -906,7 +1127,7 @@
       "object": "oberon",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -923,7 +1144,7 @@
       "object": "neptune",
       "density": 1,
       "initial": {
-        "nodes": 23127,
+        "nodes": 26312,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -940,7 +1161,7 @@
       "object": "triton",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -957,7 +1178,7 @@
       "object": "pluto",
       "density": 1,
       "initial": {
-        "nodes": 22866,
+        "nodes": 26051,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -974,7 +1195,7 @@
       "object": "charon",
       "density": 1,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -991,7 +1212,7 @@
       "object": "haumea",
       "density": 1,
       "initial": {
-        "nodes": 23972,
+        "nodes": 27157,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1008,7 +1229,7 @@
       "object": "makemake",
       "density": 1,
       "initial": {
-        "nodes": 22851,
+        "nodes": 26036,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1025,7 +1246,7 @@
       "object": "eris",
       "density": 1,
       "initial": {
-        "nodes": 22851,
+        "nodes": 26036,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1042,7 +1263,7 @@
       "object": "comet-103p",
       "density": 2,
       "initial": {
-        "nodes": 23400,
+        "nodes": 26585,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1059,7 +1280,7 @@
       "object": "comet-9p",
       "density": 2,
       "initial": {
-        "nodes": 23400,
+        "nodes": 26585,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1076,7 +1297,7 @@
       "object": "comet-67p",
       "density": 2,
       "initial": {
-        "nodes": 23400,
+        "nodes": 26585,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1093,7 +1314,7 @@
       "object": "amalthea",
       "density": 2,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1110,7 +1331,7 @@
       "object": "thebe",
       "density": 2,
       "initial": {
-        "nodes": 23100,
+        "nodes": 26285,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1127,7 +1348,7 @@
       "object": "metis",
       "density": 2,
       "initial": {
-        "nodes": 22880,
+        "nodes": 26065,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1144,7 +1365,75 @@
       "object": "adrastea",
       "density": 2,
       "initial": {
-        "nodes": 22880,
+        "nodes": 26065,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "naiad",
+      "density": 2,
+      "initial": {
+        "nodes": 26065,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "thalassa",
+      "density": 2,
+      "initial": {
+        "nodes": 26065,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "despina",
+      "density": 2,
+      "initial": {
+        "nodes": 26065,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "galatea",
+      "density": 2,
+      "initial": {
+        "nodes": 26065,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1161,7 +1450,7 @@
       "object": "proteus",
       "density": 2,
       "initial": {
-        "nodes": 23500,
+        "nodes": 26685,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1178,7 +1467,7 @@
       "object": "larissa",
       "density": 2,
       "initial": {
-        "nodes": 23000,
+        "nodes": 26185,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1195,7 +1484,7 @@
       "object": "daphnis",
       "density": 2,
       "initial": {
-        "nodes": 22800,
+        "nodes": 25985,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1212,7 +1501,7 @@
       "object": "calypso",
       "density": 2,
       "initial": {
-        "nodes": 23000,
+        "nodes": 26185,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1229,7 +1518,7 @@
       "object": "telesto",
       "density": 2,
       "initial": {
-        "nodes": 23000,
+        "nodes": 26185,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1246,7 +1535,7 @@
       "object": "helene",
       "density": 2,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1263,7 +1552,7 @@
       "object": "sun",
       "density": 2,
       "initial": {
-        "nodes": 22913,
+        "nodes": 26098,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1280,7 +1569,7 @@
       "object": "mercury",
       "density": 2,
       "initial": {
-        "nodes": 23302,
+        "nodes": 26487,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1297,7 +1586,7 @@
       "object": "venus",
       "density": 2,
       "initial": {
-        "nodes": 22849,
+        "nodes": 26034,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1314,7 +1603,7 @@
       "object": "earth",
       "density": 2,
       "initial": {
-        "nodes": 24465,
+        "nodes": 27650,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1331,7 +1620,7 @@
       "object": "moon",
       "density": 2,
       "initial": {
-        "nodes": 22866,
+        "nodes": 26051,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1348,7 +1637,7 @@
       "object": "mars",
       "density": 2,
       "initial": {
-        "nodes": 22918,
+        "nodes": 26103,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1365,7 +1654,7 @@
       "object": "ryugu",
       "density": 2,
       "initial": {
-        "nodes": 23190,
+        "nodes": 26375,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1382,7 +1671,7 @@
       "object": "bennu",
       "density": 2,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1399,7 +1688,7 @@
       "object": "itokawa",
       "density": 2,
       "initial": {
-        "nodes": 23194,
+        "nodes": 26379,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1416,7 +1705,7 @@
       "object": "eros",
       "density": 2,
       "initial": {
-        "nodes": 23196,
+        "nodes": 26381,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1430,10 +1719,163 @@
       }
     },
     {
+      "object": "ida",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "gaspra",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "mathilde",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "lutetia",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "steins",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "didymos",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "dimorphos",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "kleopatra",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "toutatis",
+      "density": 2,
+      "initial": {
+        "nodes": 26385,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
       "object": "vesta",
       "density": 2,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1450,7 +1892,7 @@
       "object": "phobos",
       "density": 2,
       "initial": {
-        "nodes": 23616,
+        "nodes": 26801,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1467,7 +1909,7 @@
       "object": "deimos",
       "density": 2,
       "initial": {
-        "nodes": 23616,
+        "nodes": 26801,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1484,7 +1926,7 @@
       "object": "ceres",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1501,7 +1943,7 @@
       "object": "jupiter",
       "density": 2,
       "initial": {
-        "nodes": 23190,
+        "nodes": 26375,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1518,7 +1960,7 @@
       "object": "io",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1535,7 +1977,7 @@
       "object": "europa",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1552,7 +1994,7 @@
       "object": "ganymede",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1569,7 +2011,7 @@
       "object": "callisto",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1586,7 +2028,7 @@
       "object": "saturn",
       "density": 2,
       "initial": {
-        "nodes": 23365,
+        "nodes": 26550,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1603,7 +2045,7 @@
       "object": "pan",
       "density": 2,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1620,7 +2062,7 @@
       "object": "atlas",
       "density": 2,
       "initial": {
-        "nodes": 23200,
+        "nodes": 26385,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1637,7 +2079,7 @@
       "object": "prometheus",
       "density": 2,
       "initial": {
-        "nodes": 23120,
+        "nodes": 26305,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1654,7 +2096,7 @@
       "object": "pandora",
       "density": 2,
       "initial": {
-        "nodes": 23040,
+        "nodes": 26225,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1671,7 +2113,7 @@
       "object": "janus",
       "density": 2,
       "initial": {
-        "nodes": 23120,
+        "nodes": 26305,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1688,7 +2130,7 @@
       "object": "epimetheus",
       "density": 2,
       "initial": {
-        "nodes": 23120,
+        "nodes": 26305,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1705,7 +2147,7 @@
       "object": "hyperion",
       "density": 2,
       "initial": {
-        "nodes": 23600,
+        "nodes": 26785,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1722,7 +2164,7 @@
       "object": "mimas",
       "density": 2,
       "initial": {
-        "nodes": 23120,
+        "nodes": 26305,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1739,7 +2181,7 @@
       "object": "enceladus",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1756,7 +2198,7 @@
       "object": "tethys",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1773,7 +2215,7 @@
       "object": "dione",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1790,7 +2232,7 @@
       "object": "rhea",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1807,7 +2249,7 @@
       "object": "titan",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1824,7 +2266,7 @@
       "object": "iapetus",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1841,7 +2283,7 @@
       "object": "phoebe",
       "density": 2,
       "initial": {
-        "nodes": 23616,
+        "nodes": 26801,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1858,7 +2300,7 @@
       "object": "uranus",
       "density": 2,
       "initial": {
-        "nodes": 23465,
+        "nodes": 26650,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1875,7 +2317,7 @@
       "object": "miranda",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1892,7 +2334,7 @@
       "object": "ariel",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1909,7 +2351,7 @@
       "object": "umbriel",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1926,7 +2368,7 @@
       "object": "titania",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1943,7 +2385,7 @@
       "object": "oberon",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1960,7 +2402,7 @@
       "object": "neptune",
       "density": 2,
       "initial": {
-        "nodes": 23127,
+        "nodes": 26312,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1977,7 +2419,7 @@
       "object": "triton",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -1994,7 +2436,7 @@
       "object": "pluto",
       "density": 2,
       "initial": {
-        "nodes": 22866,
+        "nodes": 26051,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -2011,7 +2453,7 @@
       "object": "charon",
       "density": 2,
       "initial": {
-        "nodes": 22852,
+        "nodes": 26037,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -2028,7 +2470,7 @@
       "object": "haumea",
       "density": 2,
       "initial": {
-        "nodes": 23972,
+        "nodes": 27157,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -2045,7 +2487,7 @@
       "object": "makemake",
       "density": 2,
       "initial": {
-        "nodes": 22851,
+        "nodes": 26036,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -2062,7 +2504,7 @@
       "object": "eris",
       "density": 2,
       "initial": {
-        "nodes": 22851,
+        "nodes": 26036,
         "sceneCount": 1,
         "cameraWidth": 1440,
         "cameraHeight": 900,
@@ -2082,7 +2524,7 @@
       "visits": [
         {
           "object": "saturn",
-          "nodes": 23365,
+          "nodes": 26550,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2094,7 +2536,7 @@
         },
         {
           "object": "mercury",
-          "nodes": 23302,
+          "nodes": 26487,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2106,7 +2548,7 @@
         },
         {
           "object": "earth",
-          "nodes": 24465,
+          "nodes": 27650,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2118,7 +2560,7 @@
         },
         {
           "object": "saturn",
-          "nodes": 23365,
+          "nodes": 26550,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2130,7 +2572,7 @@
         },
         {
           "object": "mercury",
-          "nodes": 23302,
+          "nodes": 26487,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2142,7 +2584,7 @@
         },
         {
           "object": "earth",
-          "nodes": 24465,
+          "nodes": 27650,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2160,7 +2602,7 @@
       "visits": [
         {
           "object": "saturn",
-          "nodes": 23365,
+          "nodes": 26550,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2172,7 +2614,7 @@
         },
         {
           "object": "mercury",
-          "nodes": 23302,
+          "nodes": 26487,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2184,7 +2626,7 @@
         },
         {
           "object": "earth",
-          "nodes": 24465,
+          "nodes": 27650,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2196,7 +2638,7 @@
         },
         {
           "object": "saturn",
-          "nodes": 23365,
+          "nodes": 26550,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2208,7 +2650,7 @@
         },
         {
           "object": "mercury",
-          "nodes": 23302,
+          "nodes": 26487,
           "scenes": 1,
           "width": 1440,
           "height": 900,
@@ -2220,7 +2662,7 @@
         },
         {
           "object": "earth",
-          "nodes": 24465,
+          "nodes": 27650,
           "scenes": 1,
           "width": 1440,
           "height": 900,
