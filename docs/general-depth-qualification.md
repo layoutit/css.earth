@@ -10,6 +10,23 @@ The [registry coverage report](prepared-depth-coverage.json) records each result
 
 Integration preserves main's asteroid orbit controls and epoch-correct physical frames. Epoch refresh first restores the canonical preparation branch, updates its original physical carrier, then allows the shared compiler to regenerate projection groups. It does not update duplicate carriers independently or add a runtime epoch repair.
 
+## Integrated build verification
+
+The immutable performance build of `51a95403` emits 156 routes (155 body pages and the entry route). Its loaded packaged runtime is `/_astro/packaged-object-runtime.Cj7e1Bo6.js`, SHA-256 `260af51185edc5ebb6b97244b4b319ae5c189797f658b46b6dabebd8660d2e67`. The HTTP response was compared byte-for-byte with the build. All 7,149 runtime assets match their pinned hashes and every production body directory has exact manifest closure.
+
+The package, renderer, platform and shell suites pass: 608, 334, 1,313 and 232 checks respectively. Renderer typechecking and preparation compilation pass. The renderer rerun used two workers after three existing 5-second tests timed out while multiple suites competed for CPU; no timeout or assertion was relaxed. Restoring hash-matching navigation source images and installing pinned runtime assets resolved the shell's initially missing files. The separate `acquire:planets -- --verify-only` source gate remains blocked by absent Aegaeon pins (the ESO panorama, Inter source font and shape kernel); this is not an all-object source-readiness claim.
+
+Final Chrome Canary 155.0.8043.0 evidence on those bytes:
+
+- Hygiea and Bennu pass native interaction and canonical-image checks at DPR 1 and 2. Other cases in these focused conformance invocations are explicitly recorded as skipped.
+- The requested wide system → Mars → Venus → overview → scene-click Makemake journey completes at DPR 2 with retained world/input/document identity and no application or HTTP errors.
+- Replacing Hygiea with Bennu during activation starts world movement while Bennu's exact bank is held. Both DPRs pass; first-motion publication is 19.2 and 19.7 ms, followed by one ready scene and retained world/input identity. These are application timings, not display latency.
+- Close Bennu and Hygiea drags preserve all face-node identities, one shared camera, identical group transforms and unchanged group counts. The final surface frames were inspected.
+
+The final close-drag traces record draw-pass p95 7.009 ms for Bennu and 3.571 ms for Hygiea. Both have zero dropped-only sequences among 183; Bennu still has 66 mixed reports. These captures overlap unrelated host preparation/browser work and are **integration diagnostics, not an isolated before/after benchmark**. The original matched 90-body measurements below retain their own provenance and are not relabeled as a 155-body speedup.
+
+Evidence: `output/playwright/general-depth-final-{hygiea,bennu,natural-2,replacement}/` and `output/depth-prototype/general-depth/final-{bennu,hygiea}-2/`. Build, aggregate checks, source-gate failure, host workload snapshot, response identity and trace summaries are under `output/depth-prototype/general-depth/`. These large local diagnostics are not bundled into the application.
+
 ## Architecture
 
 Preparation builds a fixed face-priority graph using source triangles oriented by their actual CSS facing planes. Potential occlusion requires both face-plane relations; robust orientation predicates preserve tiny separations without an arbitrary epsilon. Strongly connected components retain native 3D sorting. The acyclic component order is packed into groups of up to 64 faces; larger inseparable components remain intact. Existing source-edge plane splits compose with these priorities. No face, texture or source geometry is added, cut or removed. Runtime interprets the prepared order and shares the existing camera transform; fixed priorities are published once.
