@@ -1,4 +1,6 @@
 import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+import { gzipSync } from 'node:zlib';
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
@@ -253,6 +255,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
     const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
     const observation = radial.observationSurfaces?.get(surface.id);
+    const sampleSources = observation?.report.frames && Buffer.alloc(width * height);
     const observationTransfer = observation && { interiorTexels: 0, counts: {}, maximumSourceDistanceMeters: 0,
       maximumPixelSeparationMeters: 0, maximumPhotometricGain: 0,
       method: 'Closest full-source triangle point; all bilinear GEO contributors checked before disk-normalized interpolation; atlas bleed clamped to retained face.' };
@@ -282,12 +285,17 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const offset = ((rect.y + py) * width + rect.x + px) * 4;
         if (observation) {
           const sample = observation.samplePoint(closestTrianglePoint(point, a, ab, ac).point);
+          if (sampleSources) sampleSources[offset / 4] = sample.reason ? 0 : sample.frameIndex + 1;
           const interior = u >= 0 && v >= 0 && u + v <= 1;
           if (interior) {
             observationTransfer.interiorTexels++;
             const key = sample.reason ?? 'accepted';
             observationTransfer.counts[key] = (observationTransfer.counts[key] ?? 0) + 1;
             if (!sample.reason) {
+              if (sample.frameId) {
+                observationTransfer.sources ??= {};
+                observationTransfer.sources[sample.frameId] = (observationTransfer.sources[sample.frameId] ?? 0) + 1;
+              }
               observationTransfer.maximumSourceDistanceMeters = Math.max(observationTransfer.maximumSourceDistanceMeters, sample.distanceMeters);
               observationTransfer.maximumPixelSeparationMeters = Math.max(observationTransfer.maximumPixelSeparationMeters, sample.separationMeters);
               observationTransfer.maximumPhotometricGain = Math.max(observationTransfer.maximumPhotometricGain, sample.gain);
@@ -343,6 +351,16 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
     if (transfer) surface.surfaceSampling.transfer = transfer;
     if (observationTransfer) surface.observation.transfer = observationTransfer;
+    if (sampleSources) {
+      const codes = { 0: 'no-qualified-observation', ...Object.fromEntries(observation.report.frames.map((frame, i) => [i + 1, frame.id])) };
+      const bytes = Buffer.from(JSON.stringify({ schema: 'cssearth-atlas-observation-index@1', width, height, codes,
+        encoding: 'gzip-u8-base64', layout: 'row-major; one source code per atlas texel; includes triangle bleed',
+        data: gzipSync(sampleSources, { level: 9 }).toString('base64') }) + '\n');
+      const file = `${surface.id}-source-index.json`;
+      await writeFile(resolve(outputDirectory, file), bytes);
+      surface.observation.sampleSources = { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'),
+        width, height, includesAtlasBleed: true, codes };
+    }
   }
   if (lighting) await writeFile(resolve(outputDirectory, 'source-lighting.json'), JSON.stringify({ ...lighting.report, recipe: lightingRecipe }) + '\n');
   for (const entry of source.manifest.generatedIntermediates.filter(entry =>

@@ -45,7 +45,7 @@
     "defaultLens": "model",
     "labels": {
       "model": "Shape model",
-      "osiris": "OSIRIS observation"
+      "osiris": "OSIRIS mosaic"
     },
     "controls": [
       {
@@ -65,17 +65,17 @@
       },
       {
         "id": "osiris",
-        "label": "OSIRIS observation",
-        "description": "OSIRIS orange-filter observation, 5 August 2014. Grayscale with approximate illumination correction; residual photographed shadows remain. Gray grid marks missing or rejected imagery. Shadows off shows the corrected image uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map.",
-        "title": "OSIRIS orange-filter observation, 5 August 2014. Grayscale with approximate illumination correction; residual photographed shadows remain. Gray grid marks missing or rejected imagery. Shadows off shows the corrected image uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map.",
-        "detail": "Rosetta · 5 Aug 2014",
+        "label": "OSIRIS mosaic",
+        "description": "Four OSIRIS orange-filter observations, 5–6 August 2014. Grayscale with approximate illumination correction and bounded brightness matching; photographed shadows and some seams remain. Gray grid marks missing or rejected imagery. Shadows off shows the mosaic uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map.",
+        "title": "Four OSIRIS orange-filter observations, 5–6 August 2014. Grayscale with approximate illumination correction and bounded brightness matching; photographed shadows and some seams remain. Gray grid marks missing or rejected imagery. Shadows off shows the mosaic uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map.",
+        "detail": "Rosetta · 5–6 Aug 2014",
         "thumbnail": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
         "surface": "comet-67p-osiris-surface@2x.webp",
         "poles": "comet-67p-osiris-poles@2x.webp",
         "source": {
           "id": "osiris-20140805-geo",
           "path": "../manifest.json",
-          "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/data/img/n20140805t194314611id50f22.img"
+          "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/"
         }
       }
     ]
@@ -108,8 +108,8 @@
     {
       "label": "ESA/Rosetta/MPS · OSIRIS",
       "role": "observations",
-      "description": "Calibrated orange-filter image, corrected geometry and detector-quality companion; CC BY-SA 4.0.",
-      "href": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/data/img/n20140805t194314611id50f22.img"
+      "description": "Four calibrated orange-filter images, corrected geometry and matching detector-quality companions; CC BY-SA 4.0.",
+      "href": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/"
     },
     {
       "label": "ESA/Rosetta/NAVCAM",

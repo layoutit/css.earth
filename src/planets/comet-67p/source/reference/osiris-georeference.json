@@ -1,9 +1,14 @@
 {
   "schema": "cssearth-observation-provenance@1",
-  "observation": "2014-08-05T19:44:22.918",
   "sourceIds": [
     "osiris-20140805-geo",
-    "osiris-20140805-quality"
+    "osiris-20140805-quality",
+    "osiris-20140805-2344-geo",
+    "osiris-20140805-2344-quality",
+    "osiris-20140806-0244-geo",
+    "osiris-20140806-0244-quality",
+    "osiris-20140806-0520-geo",
+    "osiris-20140806-0520-quality"
   ],
   "frame": "Corrected GEO XYZ are in the 67P body frame used by the SHAP7 product; projective camera fitted from their pixel correspondences, checked against held-out pixels and the RMOC shape.",
   "quality": {
@@ -39,9 +44,37 @@
     }
   ],
   "limits": [
-    "One single-band observation; no color inference or backside fill.",
+    "Four single-band observations within 9 hours 36 minutes; no color inference, extrapolation or backside fill.",
     "RMOC and SHAP7 are distinct models; all sample correspondences are explicitly bounded.",
     "Residual photographed cast shadows and scattering effects remain after disk normalization.",
     "Positive, zero and negative finite radiance are retained when validity/geometry/photometry permit."
-  ]
+  ],
+  "observations": [
+    {
+      "id": "aug05-1944",
+      "startTime": "2014-08-05T19:44:22.918",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "aug05-2344",
+      "startTime": "2014-08-05T23:44:24.891",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "aug06-0244",
+      "startTime": "2014-08-06T02:44:24.890",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "aug06-0520",
+      "startTime": "2014-08-06T05:20:22.894",
+      "filter": "FFP-Vis_Orange"
+    }
+  ],
+  "mosaic": {
+    "selection": "Lowest maximum source emission angle among qualified observations; source order breaks exact ties. No brightness-based coverage rejection.",
+    "levels": "One bounded gain per observation, fitted from robust log-ratios of co-located valid surface samples; first observation anchors the display. This is empirical level matching, not a phase correction.",
+    "display": "The first observation owns the common grayscale stretch.",
+    "sourceIndex": "The prepared lossless source-index raster records the winning observation at every atlas texel; zero marks no qualified observation."
+  }
 }
