@@ -374,6 +374,32 @@ test('projects retained markers, culls focus-occluded bodies, and keeps physical
   expect(nearOrbit.length).toBe(mounted.get(far)!.inspect().find(body => body.id === 'mercury')!.orbit.filter(element => element.style.visibility === '').length);
 });
 
+test('camera updates retain fixed stroke styles and only publish changed orbit picking policy', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const orbit = find(root, 'contextOrbit', 'mercury');
+  const indicator = find(root, 'contextIndicator', 'mercury');
+  const orbitWrites = vi.spyOn(orbit.style, 'setProperty');
+  const indicatorWrites = vi.spyOn(indicator.style, 'setProperty');
+  const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  publish(1100); publish(1200);
+  expect(orbitWrites).not.toHaveBeenCalled(); expect(indicatorWrites).not.toHaveBeenCalled();
+  expect(orbit.dataset.objectNavigate).toBe('mercury');
+  layer.setHiddenOrbits(['mercury']);
+  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'none']]);
+  expect(orbit.dataset.objectNavigate).toBeUndefined(); orbitWrites.mockClear();
+  publish(1250);
+  expect(orbitWrites).not.toHaveBeenCalled();
+  layer.setHiddenOrbits([]);
+  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'auto']]);
+  orbitWrites.mockClear();
+  layer.setNavigationIndicatorsVisible(false); layer.setNavigationIndicatorsVisible(true);
+  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'none'], ['--context-orbit-pointer-events', 'auto']]);
+  expect(orbit.dataset.objectNavigate).toBe('mercury');
+  layer.destroy();
+});
+
 test('orbit chords stop at the circular indicator on both sides of the centered body', () => {
   const root = mount(1), layer = mounted.get(root)!;
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,

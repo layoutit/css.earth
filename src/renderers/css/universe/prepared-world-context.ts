@@ -17,6 +17,7 @@ import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
 
 const BODY_INDICATOR_DIAMETER = 16;
+const CONTEXT_LINE_WIDTH = 1;
 const ORBIT_FADE_START_PIXELS = 12;
 
 function orbitPresentation(segments: readonly OrbitSegment[], closed: boolean) {
@@ -29,7 +30,7 @@ function orbitPresentation(segments: readonly OrbitSegment[], closed: boolean) {
   const opacity = logarithmicFade(extent, ORBIT_FADE_START_PIXELS, 48);
   // Closed planetary rings and their circles share one zoom fade.
   // Fading trails retain their earlier marker-crowding threshold.
-  return { width: 1, opacity, markerOpacity: closed ? opacity : logarithmicFade(extent, 48, 128) };
+  return { width: CONTEXT_LINE_WIDTH, opacity, markerOpacity: closed ? opacity : logarithmicFade(extent, 48, 128) };
 }
 
 function orbitOverlapsLabel(orbits: readonly { segments: readonly OrbitSegment[]; orbitVisibility: number; lineWidth: number }[], x: number, y: number, width: number, height: number): boolean {
@@ -328,6 +329,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     indicator.dataset.contextIndicator = body.id;
     indicator.style.width = indicator.style.height = `${BODY_INDICATOR_DIAMETER}px`;
     indicator.style.visibility = 'hidden';
+    indicator.style.setProperty('--context-line-width', `${CONTEXT_LINE_WIDTH}px`);
     const label = host.ownerDocument.createElement('span');
     label.dataset.contextLabel = body.id;
     label.textContent = body.name;
@@ -339,6 +341,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     orbitRoot.className = 'context-orbit';
     orbitRoot.dataset.contextOrbit = body.id;
     orbitRoot.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+    orbitRoot.style.setProperty('--context-line-width', `${CONTEXT_LINE_WIDTH}px`);
+    orbitRoot.style.setProperty('--context-orbit-pointer-events', 'none');
     if (orbit) group.appendChild(orbitRoot);
     const piecePool = createRetainedLeafPool(orbitRoot, orbit ? orbit.verticesM.length * 2 : 0, 'context-orbit-block');
     const pieces = piecePool.elements;
@@ -352,7 +356,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       orbitPick: null as ScreenPickTarget | null,
       indicatorPick: null as ScreenPickTarget | null,
-      orbitAppearance: { width: 1, opacity: 1, markerOpacity: 1 },
+      orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1, markerOpacity: 1 },
+      orbitNavigable: false,
       orbitHidden: false, labelHidden: false,
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, previousCount: 0,
@@ -447,6 +452,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           entry.labelNavigation.update(null, entry.body.name);
           entry.indicatorNavigation.update(null, entry.body.name);
           entry.orbitNavigation?.update(null, entry.body.name);
+          entry.orbitNavigable = false;
           entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', 'none');
         }
       } else {
@@ -556,7 +562,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const orbitOpacity = orbitLineOpacity(plan.camera.presentation.orbitLineFade, focusDiameter / height);
       const near = navigationIndicatorsVisible && opacity > 0 && orbitOpacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...toEye(entry.body.positionM)))) * 0.01) : 1;
-      let anchorLineWidth = 1;
+      let anchorLineWidth = CONTEXT_LINE_WIDTH;
       // Project first, resolve shared body visibility, then place labels and publish once.
       // Marker decluttering suppresses body proxies, not independently resolved orbit paths.
       const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; depth: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; hovered: boolean; inFrame: boolean; parentDiameter: number; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
@@ -697,7 +703,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         entry.labelShown = labels.accepted(0, entry.body.id);
         const indicatorShown = entry.indicatorShown;
         indicator.style.visibility = indicatorShown ? '' : 'hidden';
-        indicator.style.setProperty('--context-line-width', `${lineWidth}px`);
         entry.indicatorNavigation.update(indicatorShown && indicatorOpacity > 0.1 ? body.id : null, body.name);
         entry.indicatorPick = indicatorShown && indicatorOpacity > .1 ? { element: indicator, rank: rank + 2,
           shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } } : null;
@@ -711,13 +716,16 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             orbitBounds.left = Math.min(orbitBounds.left, x0, x1); orbitBounds.right = Math.max(orbitBounds.right, x0, x1);
             orbitBounds.top = Math.min(orbitBounds.top, y0, y1); orbitBounds.bottom = Math.max(orbitBounds.bottom, y0, y1);
           }
-          entry.orbitNavigation!.update(orbitVisibility > 0.1 && !entry.orbitHidden ? body.id : null, body.name);
-          // Only the painted chords are hit targets, never the full-stage group.
-          entry.orbitRoot.style.pointerEvents = 'none';
-          entry.orbitRoot.tabIndex = -1;
-          entry.orbitRoot.style.setProperty('--context-line-width', `${lineWidth}px`);
+          const navigable = orbitVisibility > 0.1 && !entry.orbitHidden;
+          if (entry.orbitNavigable !== navigable) {
+            entry.orbitNavigable = navigable;
+            entry.orbitNavigation!.update(navigable ? body.id : null, body.name);
+            // Only the painted chords are hit targets, never the full-stage group.
+            entry.orbitRoot.style.pointerEvents = 'none';
+            entry.orbitRoot.tabIndex = -1;
+            entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', navigable ? 'auto' : 'none');
+          }
           entry.orbitRoot.style.opacity = `calc(${orbitVisibility} * var(--context-line-opacity, 1))`;
-          entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', orbitVisibility > 0.1 && !entry.orbitHidden ? 'auto' : 'none');
           const update = writePieces(entry.pieces, segments, entry.previousCount, entry.piecePool.setVisible);
           if (update.overflowed) throw new Error('Prepared context line pool overflowed.');
           entry.previousCount = update.count;
