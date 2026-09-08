@@ -1,5 +1,6 @@
 /** Offline display-volume reconstruction from an exactly partitioned photograph. */
 import type { FilledComponent, FilledComponentsResult } from './filled-components.js';
+import type { FilledVolumePart } from './filled-parts.js';
 
 type Vec3 = [number, number, number];
 type Bounds3 = { min: Vec3; max: Vec3 };
@@ -73,10 +74,12 @@ export interface FilledVolumeSampler {
   displayTargetAtPixel(pixel: number, out: Vec3): void;
   /** Conservative tangent-space bounds containing every nonzero sample. */
   supportBoundsKpc: Bounds3;
+  /** Frozen-geometry contribution samplers for offline independent banks. */
+  parts: readonly FilledVolumePart[];
   diagnostics: FilledVolumeDiagnostics;
 }
 
-interface Term { share: number; family: number; half: number }
+interface Term { share: number; family: number; half: number; part: number }
 interface Family { pixels: number[]; weight: number; x: number; y: number; mode?: number; offset: number }
 
 const DEFAULT_CHANNELS: FilledVolumeChannels = { compact: true, diffuse: true, extended: true };
@@ -363,7 +366,8 @@ export function createFilledVolumeSampler(options: FilledVolumeOptions): FilledV
       previous = pixel; reconstructed[pixel] += contribution;
       const half = Math.min(depth.maxHalfThicknessKpc, Math.sqrt(depth.extendedMinimumHalfThicknessKpc ** 2 +
         (depth.extendedDepthAspectRatio * distances[entry]! * Math.sqrt(dx * dy)) ** 2));
-      extendedAt[pixel]!.push({ share: contribution, family: familyData.componentFamily[componentIndex]!, half });
+      extendedAt[pixel]!.push({ share: contribution, family: familyData.componentFamily[componentIndex]!, half,
+        part: componentIndex });
     }
   });
   let maxAccountingError = 0;
@@ -514,10 +518,90 @@ export function createFilledVolumeSampler(options: FilledVolumeOptions): FilledV
     supportBoundsKpc = { min: [minX, minY, Math.max(bounds.min[2], minZ)],
       max: [maxX, maxY, Math.min(bounds.max[2], maxZ)] };
   }
+  const standaloneOptical = (intensity: NumericArray): Float32Array => {
+    const result = new Float32Array(3 * pixels);
+    for (let pixel = 0; pixel < pixels; pixel++) {
+      const fraction = target.intensity[pixel]! > 0 ? intensity[pixel]! / target.intensity[pixel]! : 0;
+      const rgb = [target.rgb[3 * pixel]! / 255 * fraction, target.rgb[3 * pixel + 1]! / 255 * fraction,
+        target.rgb[3 * pixel + 2]! / 255 * fraction];
+      const peak = Math.max(...rgb), clipped = Math.min(maxSignal, peak);
+      const strength = peak > 0 ? -Math.log(1 - clipped) / (exposure * peak) : 0;
+      for (let channel = 0; channel < 3; channel++) result[3 * pixel + channel] = rgb[channel]! * strength;
+    }
+    return result;
+  };
+  const compactOptical = standaloneOptical(decomposition.compact), diffuseOptical = standaloneOptical(decomposition.diffuse);
+  const entryAt = (component: FilledComponent, pixel: number): number => {
+    let lo = 0, hi = component.pixels.length;
+    while (lo < hi) { const mid = (lo + hi) >>> 1; if (component.pixels[mid]! < pixel) lo = mid + 1; else hi = mid; }
+    return lo < component.pixels.length && component.pixels[lo] === pixel ? lo : -1;
+  };
+  const partSample = (part: number, x: number, y: number, z: number, out: Vec3): void => {
+    out[0] = out[1] = out[2] = 0;
+    if (x < bounds.min[0] || x >= bounds.max[0] || y <= bounds.min[1] || y > bounds.max[1] ||
+        z < bounds.min[2] || z > bounds.max[2]) return;
+    const gx = (x - bounds.min[0]) / (bounds.max[0] - bounds.min[0]) * target.width - .5;
+    const gy = (bounds.max[1] - y) / (bounds.max[1] - bounds.min[1]) * target.height - .5;
+    const x0 = Math.floor(gx), y0 = Math.floor(gy), tx = gx - x0, ty = gy - y0;
+    for (let oy = 0; oy <= 1; oy++) for (let ox = 0; ox <= 1; ox++) {
+      const px = x0 + ox, py = y0 + oy; if (px < 0 || px >= target.width || py < 0 || py >= target.height) continue;
+      const weight = (ox ? tx : 1 - tx) * (oy ? ty : 1 - ty); if (!(weight > 0)) continue;
+      const pixel = py * target.width + px;
+      if (part < decomposition.components.length) {
+        const component = decomposition.components[part]!, entry = entryAt(component, pixel); if (entry < 0) continue;
+        const term = extendedAt[pixel]!.find(candidate => candidate.part === part)!;
+        const share = selected[pixel]! > 0 ? component.contributions[entry]! / selected[pixel]! : 0;
+        const profile = quartic(z, centerAt(term.family, x, y), term.half);
+        for (let channel = 0; channel < 3; channel++) out[channel] += weight * optical[3 * pixel + channel]! * share * profile;
+      } else {
+        const compact = part === decomposition.components.length, source = compact ? compactOptical : diffuseOptical;
+        const half = compact ? Math.min(depth.maxHalfThicknessKpc, Math.sqrt(depth.compactMinimumHalfThicknessKpc ** 2 +
+          (depth.compactDepthAspectRatio * Math.sqrt(dx * dy)) ** 2)) : depth.diffuseHalfThicknessKpc;
+        const profile = quartic(z, intercept + xSlope * x + ySlope * y, half);
+        for (let channel = 0; channel < 3; channel++) out[channel] += weight * source[3 * pixel + channel]! * profile;
+      }
+    }
+  };
+  const boundsFor = (part: number): Bounds3 => {
+    let minX = bounds.max[0], minY = bounds.max[1], minZ = bounds.max[2], maxX = bounds.min[0], maxY = bounds.min[1], maxZ = bounds.min[2];
+    const include = (pixel: number, offset: number, half: number): void => {
+      const [x, y] = pixelPoint(pixel, target.width, target.height, bounds), variation = Math.abs(xSlope) * dx + Math.abs(ySlope) * dy;
+      minX = Math.min(minX, Math.max(bounds.min[0], x - dx)); maxX = Math.max(maxX, Math.min(bounds.max[0], x + dx));
+      minY = Math.min(minY, Math.max(bounds.min[1], y - dy)); maxY = Math.max(maxY, Math.min(bounds.max[1], y + dy));
+      const center = intercept + xSlope * x + ySlope * y + offset;
+      minZ = Math.min(minZ, center - half - variation); maxZ = Math.max(maxZ, center + half + variation);
+    };
+    if (part < decomposition.components.length) {
+      const component = decomposition.components[part]!;
+      for (const pixel of component.pixels) { const term = extendedAt[pixel]!.find(candidate => candidate.part === part)!;
+        include(pixel, familyData.families[term.family]!.offset, term.half); }
+    } else {
+      const compact = part === decomposition.components.length, map = compact ? decomposition.compact : decomposition.diffuse;
+      const half = compact ? Math.min(depth.maxHalfThicknessKpc, Math.sqrt(depth.compactMinimumHalfThicknessKpc ** 2 +
+        (depth.compactDepthAspectRatio * Math.sqrt(dx * dy)) ** 2)) : depth.diffuseHalfThicknessKpc;
+      for (let pixel = 0; pixel < pixels; pixel++) if (map[pixel]! > 0) include(pixel, 0, half);
+    }
+    return { min: [minX, minY, Math.max(bounds.min[2], minZ)], max: [maxX, maxY, Math.min(bounds.max[2], maxZ)] };
+  };
+  const partRows = [...decomposition.components.map((component, part) => ({ id: `extended:${component.id}`, kind: 'extended' as const,
+    componentId: component.id, scale: component.scale, radius: component.radius, integratedIntensity: component.integratedIntensity,
+    supportBoundsKpc: boundsFor(part), sample: (x: number, y: number, z: number, out: Vec3) => partSample(part, x, y, z, out),
+    integratedTargetAtPixel(pixel: number, out: Vec3) { const entry = entryAt(component, pixel), share = entry >= 0 && selected[pixel]! > 0 ? component.contributions[entry]! / selected[pixel]! : 0;
+      for (let channel = 0; channel < 3; channel++) out[channel] = optical[3 * pixel + channel]! * share; },
+    interpretation: 'Morphological extended-image contribution using the frozen reference geometry; not a measured gas structure.' })),
+  ...(['compact', 'diffuse'] as const).map((kind, offset) => { const part = decomposition.components.length + offset;
+    const map = kind === 'compact' ? decomposition.compact : decomposition.diffuse, source = kind === 'compact' ? compactOptical : diffuseOptical;
+    let integratedIntensity = 0; for (const value of map) integratedIntensity += value;
+    return { id: `channel:${kind}`, kind, integratedIntensity, supportBoundsKpc: boundsFor(part),
+      sample: (x: number, y: number, z: number, out: Vec3) => partSample(part, x, y, z, out),
+      integratedTargetAtPixel(pixel: number, out: Vec3) { copyPixel(source, pixel, out); },
+      interpretation: kind === 'compact' ? 'Separately calibrated compact-source candidate image channel; no stellar membership is asserted.' :
+        'Separately calibrated diffuse image remainder on the frozen reference plane; not measured gas depth.' }; })] satisfies FilledVolumePart[];
   let positivePrior = 0; if (options.densityPrior) for (const value of options.densityPrior.density) if (value > 0) positivePrior++;
   return { sample, integratedTargetAtPixel: (pixel, out) => copyPixel(optical, pixel, out),
     displayTargetAtPixel: (pixel, out) => copyPixel(display, pixel, out),
     supportBoundsKpc,
+    parts: Object.freeze(partRows),
     diagnostics: { mode: options.mode, channels, photoDimensions: [target.width, target.height], positiveSelectedPixels: positiveSelected,
       clippedSelectedPixels: clippedSelected,
       maxInputAccountingError: maxAccountingError, compactFamilyCount: compactCount, extendedFamilyCount: familyData.families.length,

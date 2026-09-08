@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lmc-clouds",
+  "type": "density-volume",
+  "properties": {
+    "volume": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        105965308676973530000,
+        533209933280955330000,
+        -1.4303831216834226e+21
+      ],
+      "localToReferenceXyzw": [
+        0.09631989992847079,
+        0.9788280334299664,
+        0.17973685917567428,
+        0.01768669847817273
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -5.40808002015005,
+          -7.562898441844585,
+          -1.6324496333429872
+        ],
+        "max": [
+          5.4052480192503065,
+          3.086680817112844,
+          3.8256451820308706
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/cloud-parts.json",
+      "sha256": "75575b897c3ff034c45b532b94bf0229a13d35f0602b7dc7bf2121137885c723"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-density-volume@1",
+    "url": "prepared/inspection.json",
+    "sha256": "6f1caf09c54c98345379c3e5b6b651079a0c353e2cda01b47be193179314470a"
+  }
+}

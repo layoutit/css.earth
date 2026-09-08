@@ -364,6 +364,10 @@
     "id": "lmc-clouds",
     "name": "LMC clouds \u00b7 reconstructed",
     "directory": "labs/nebula/models/lmc-clouds",
+    "cloudParts": {
+      "descriptor": "inspection-object.json",
+      "catalogue": "source/cloud-parts.json"
+    },
     "imagePath": "labs/nebula/models/lmc-clouds-observation/source/target.png",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",

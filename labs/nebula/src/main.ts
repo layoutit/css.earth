@@ -2,6 +2,7 @@ import { createNebulaLabViewer, subjects } from './viewer';
 import { defaultOverlayPlacement } from './overlay-placement';
 import { createOverlayPlacementControls } from './overlay-placement-controls';
 import { createToneControls } from './tone-controls';
+import { createCloudControls } from './cloud-controls';
 
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
@@ -17,6 +18,7 @@ const densityViewControls = element<HTMLFieldSetElement>('density-view-controls'
 const densityAdjustmentPanel = element<HTMLElement>('density-adjustment-panel');
 const densityToneFieldset = element<HTMLFieldSetElement>('density-tone-fieldset');
 const overlayPanel = element<HTMLElement>('image-overlay-panel');
+const cloudPanel = element<HTMLElement>('cloud-adjustment-panel');
 const overlayControls = element<HTMLFieldSetElement>('overlay-controls');
 const overlayOptions = element('overlay-options');
 const overlayChoice = element<HTMLSelectElement>('overlay-choice');
@@ -42,6 +44,18 @@ type Overlay = Awaited<ReturnType<Viewer['loadOverlayCatalogue']>>[number];
 let currentOverlays: Overlay[] = [];
 let selectedOverlayId: string | null = null;
 let overlayActivation = 0;
+const cloudControls = createCloudControls({ host: element('cloud-controls'),
+  onChange(selection) {
+    if (!viewer || viewer.getCloudParts()?.id !== selection.contextId) return;
+    try { viewer.setCloudSelection(selection.enabledIds);
+      const parts = viewer.getCloudParts()!.parts, defaults = parts.filter(part => part.defaultEnabled).map(part => part.id);
+      const reference = defaults.length === selection.enabledIds.length && defaults.every(id => selection.enabledIds.includes(id));
+      cloudControls.setStatus(reference ? 'Original reconstruction.' :
+        'Contribution inspection: separate translucent pieces approximate the selected light.');
+    } catch (error) { cloudControls.setError(error); }
+  },
+  onBrightness(value) { try { viewer?.setCloudBrightness(value); } catch (error) { cloudControls.setError(error); } },
+});
 const densityTone = createToneControls({ host: element('density-tone-controls'), target: 'density',
   async onApply(_context, resources, isCurrent) {
     if (!viewer) throw new Error('Viewer is unavailable.');
@@ -84,11 +98,14 @@ tabs.forEach((tab, index) => {
 
 function setBusy(value: boolean) {
   busy = value; subject.disabled = value; controls.disabled = value;
+  cloudControls.setBusy(value);
   const density = currentMode === 'density';
   const currentSubject = subjects.find(item => item.id === sourceSubject);
+  const hasCloudParts = !density && Boolean(currentSubject?.cloudParts);
+  document.querySelector<HTMLElement>('.component-options')!.hidden = hasCloudParts;
   const densityMissing = density && !subjects.find(item => item.id === sourceSubject)?.density;
   document.querySelectorAll<HTMLInputElement>('input[name="component"]').forEach(input => {
-    input.disabled = value || density || (input.value === 'detail' && currentSubject?.hasDetail === false);
+    input.disabled = value || density || hasCloudParts || (input.value === 'detail' && currentSubject?.hasDetail === false);
   });
   cameraPose.disabled = value || densityMissing; axis.disabled = value || densityMissing;
   layer.disabled = value || densityMissing || layer.max === '-1';
@@ -188,6 +205,9 @@ async function refreshOverlayControls() {
   const item = subjects.find(value => value.id === sourceSubject), catalogue = item?.density?.overlays;
   const densityVisible = currentTab === 0 && currentMode === 'density' && Boolean(item?.density);
   const visible = densityVisible && Boolean(catalogue);
+  const cloud = currentTab === 1 && currentMode === 'photo' && !busy && !modePending ? viewer?.getCloudParts() : null;
+  cloudPanel.hidden = !cloud;
+  cloudControls.setContext(cloud ? { id: cloud.id, parts: cloud.parts } : null);
   densityViewControls.hidden = !densityVisible; densityAdjustmentPanel.hidden = !densityVisible; overlayPanel.hidden = !visible;
   densityTone.setContext(densityVisible && item && toneReadyFor(item.id) ? { subjectId: item.id } : null);
   if (!visible) imageTone.setContext(null);
@@ -296,6 +316,6 @@ try {
   }
 } catch (error) { fail(error); }
 
-function destroy() { if (!disposed) { disposed = true; densityTone.destroy(); imageTone.destroy(); viewer?.destroy(); } }
+function destroy() { if (!disposed) { disposed = true; densityTone.destroy(); imageTone.destroy(); cloudControls.destroy(); viewer?.destroy(); } }
 window.addEventListener('pagehide', destroy, { once: true });
 if (import.meta.hot) import.meta.hot.dispose(destroy);

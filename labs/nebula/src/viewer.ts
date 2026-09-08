@@ -3,6 +3,8 @@ import sourceCatalog from '../sources/index.json';
 import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from './overlay-placement';
 import { readOverlaySessions, writeOverlaySessions } from './overlay-store';
 import { createToneResourceController, type ToneResource } from './tone-runtime';
+import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, parseCloudCatalogue, validateCloudBrightness } from './cloud-inspection';
+import type { CloudBrightness } from './cloud-controls';
 import * as runtimePolicy from '../../../site/runtime-policy.mjs';
 import { createObjectInteractionControls } from '../../../src/renderers/css/navigation/object-interaction-controls';
 import { worldCameraFromCenteredPresentation } from '../../../src/renderers/css/navigation/world-camera';
@@ -38,6 +40,7 @@ interface LabSubjectRecord {
   /** Calibrated observer for prepared photographic-volume experiments. */
   referenceDistanceUnits?: number;
   referenceEastLeft?: boolean;
+  cloudParts?: { descriptor: string; catalogue: string };
   density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
@@ -170,7 +173,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   if (currentMode !== 'photo' && currentMode !== 'density') throw new TypeError('Unknown viewer mode.');
   let payload: PreparedCssVolume | PreparedCssImageLayers | null = null;
   let mounted: { publish(publication: Parameters<ReturnType<typeof mountPreparedCssImageLayers>['publish']>[0]): void; destroy(): void } | null = null;
-  let banks: { axis: Exclude<Axis, 'auto'>; root: HTMLElement; leaves: { nodes: HTMLElement[]; detail: boolean }[] }[] = [];
+  let banks: { axis: Exclude<Axis, 'auto'>; root: HTMLElement; leaves: { id: string; nodes: HTMLElement[]; detail: boolean }[] }[] = [];
+  let cloud: ReturnType<typeof createCloudInspection> | null = null, cloudBrightness = nativeCloudBrightness();
   let overlayCatalogue: DensityOverlayCatalogue | null = null, overlayBasePath = '';
   let overlayMeshes: HTMLElement[] = [];
   let overlayCataloguePending: Promise<DensityOverlay[]> | null = null;
@@ -237,7 +241,9 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   function inspectLayers() {
     if (!banks.length) return;
     const selected = axis === 'auto' ? dominantBank() : banks.find(bank => bank.axis === axis)!;
-    const eligible = selected.leaves.filter(leaf => component === 'all' || (component === 'detail' ? leaf.detail : !leaf.detail));
+    const includedLeaf = (leaf: typeof selected.leaves[number]) => cloud ? cloud.includes(leaf.id) :
+      component === 'all' || (component === 'detail' ? leaf.detail : !leaf.detail);
+    const eligible = selected.leaves.filter(includedLeaf);
     const countChanged = layerCount !== eligible.length; layerCount = eligible.length;
     if (layer !== null) layer = Math.max(0, Math.min(layerCount - 1, layer));
     for (const bank of banks) {
@@ -247,7 +253,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       }
       let index = 0;
       for (const leaf of bank.leaves) {
-        const included = component === 'all' || (component === 'detail' ? leaf.detail : !leaf.detail);
+        const included = includedLeaf(leaf);
         for (const node of leaf.nodes) node.style.visibility = included && (layer === null || index === layer) ? '' : 'hidden';
         if (included) index++;
       }
@@ -262,6 +268,9 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       { focalPixels: focal, principalOffsetPixels: [0, 0] });
     mounted.publish({ world, viewport: { widthPixels: width, heightPixels: height, focalPixels: focal, principalOffsetPixels: [0, 0] } });
     inspectLayers(); host.dataset.cameraRevision = String(revision); host.dataset.distance = String(values.distance);
+    const opacity = cloud ? cloudCompositeOpacity(banks.map(bank => ({ axis: bank.axis,
+      opacity: Number(bank.root.style.opacity), visible: bank.root.style.visibility !== 'hidden' })), cloudBrightness) : 1;
+    host.style.opacity = String(opacity); host.dataset.cloudOpacity = String(opacity);
   }
   function getOverlayState() {
     return [...new Set([...overlayEnabled.keys(), ...overlayPlacements.keys()])].map(id => ({ id,
@@ -450,6 +459,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     measure();
     axis = 'auto'; component = 'all'; layer = null;
     mounted?.destroy(); mounted = null; banks = []; payload = null; layerCount = 0; clearOverlays(); toneResources.clear();
+    cloud = null; cloudBrightness = nativeCloudBrightness(); host.style.opacity = '1';
+    delete host.dataset.cloudSelection; delete host.dataset.cloudBrightness; delete host.dataset.cloudOpacity;
     for (const saved of overlaySessions.get(next.density?.overlays ?? '') ?? []) {
       overlayEnabled.set(saved.id, saved.enabled); overlayOpacity.set(saved.id, saved.opacity); overlayPlacements.set(saved.id, { ...saved.placement });
       overlayBases.set(saved.id, saved.basis);
@@ -468,9 +479,15 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
         if (!response.ok) throw new Error(`Missing prepared resource: ${path} (${response.status})`);
         return response.arrayBuffer();
       };
-      const descriptor = JSON.parse(new TextDecoder().decode(await fetchBytes('object.json')));
+      const cloudFiles = currentMode === 'photo' ? next.cloudParts : undefined;
+      if (cloudFiles && (!relativePath(cloudFiles.descriptor) || !relativePath(cloudFiles.catalogue))) throw new TypeError('Invalid cloud inspection paths.');
+      const descriptor = JSON.parse(new TextDecoder().decode(await fetchBytes(cloudFiles?.descriptor ?? 'object.json')));
       const isImage = descriptor.type === 'image-layer-bank';
       const loaded = await (isImage ? loadPreparedCssImageLayers : loadPreparedCssVolume)(descriptor, { read: fetchBytes });
+      if (disposed || version !== loadVersion) return;
+      const loadedCloud = cloudFiles ? createCloudInspection(parseCloudCatalogue(
+        JSON.parse(new TextDecoder().decode(await fetchBytes(cloudFiles.catalogue))), next.id,
+        loaded.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.id)))) : null;
       if (disposed || version !== loadVersion) return;
       const resourceUrl = (path: string) => localFile(`${directory}/prepared/${path}`);
       // Decode the selected fixed bank before presenting it; no source processing happens in the lab renderer.
@@ -482,6 +499,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       }));
       if (disposed || version !== loadVersion) return;
       payload = loaded;
+      cloud = loadedCloud;
+      if (cloud) { host.dataset.cloudSelection = JSON.stringify(cloud.selection()); host.dataset.cloudBrightness = JSON.stringify(cloudBrightness); }
       const options = { host, before: end, payload: loaded, resolveResource: resourceUrl };
       const instance = isImage ? mountPreparedCssImageLayers({ ...options, payload: loaded as PreparedCssImageLayers }) : mountPreparedCssVolume(options);
       mounted = instance;
@@ -492,8 +511,11 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
           const leaf = stack.leaves[i]!;
           toneResources.bind(`${directory}/prepared/${leaf.texturePath}`, leaf.widthPx, leaf.heightPx, nodes.slice(i * copies, (i + 1) * copies));
         }
-        return { axis: stack.axis, root: roots[index], leaves: stack.leaves.map((leaf, leafIndex) => ({
-          nodes: nodes.slice(leafIndex * copies, (leafIndex + 1) * copies), detail: leaf.id.endsWith('detail') })) };
+        return { axis: stack.axis, root: roots[index], leaves: stack.leaves.map((leaf, leafIndex) => {
+          const leafNodes = nodes.slice(leafIndex * copies, (leafIndex + 1) * copies);
+          if (cloud) for (const node of leafNodes) node.dataset.cloudPart = cloud.partForLeaf(leaf.id);
+          return { id: leaf.id, nodes: leafNodes, detail: leaf.id.endsWith('detail') };
+        }) };
       });
       if (currentMode === 'density') overlayMeshes = roots.map(root => {
         const scene = root.querySelector<HTMLElement>('.css-volume-scene');
@@ -521,6 +543,16 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   await setSubject(subject.id);
   return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayPlacement, getOverlayState,
     referenceView, fitCloud, applyToneResources,
+    getCloudParts: () => cloud?.catalogue ?? null,
+    setCloudSelection(ids: readonly string[]) {
+      if (!cloud) throw new Error('This reconstruction has no prepared contribution bank.');
+      host.dataset.cloudSelection = JSON.stringify(cloud.setSelection(ids)); layer = null; publish(); report();
+    },
+    setCloudBrightness(value: CloudBrightness) {
+      if (!cloud) throw new Error('This reconstruction has no prepared contribution bank.');
+      cloudBrightness = validateCloudBrightness(value);
+      host.dataset.cloudBrightness = JSON.stringify(cloudBrightness); publish();
+    },
     async setMode(value: ViewerMode) {
       if (value !== 'photo' && value !== 'density') throw new TypeError('Unknown viewer mode.');
       if (value === currentMode) return;
