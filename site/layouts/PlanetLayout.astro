@@ -1,4 +1,5 @@
 ---
+import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mjs";
 import PreparedSidebarCards from "../components/PreparedSidebarCards.astro";
 import ExplorerRail from "../components/ExplorerRail.astro";
 import CssEarthWordmark from "../components/CssEarthWordmark.astro";
@@ -56,7 +57,7 @@ const seo = objectSeo(objectRecord);
   </head>
   <body class="loading" data-object-shell={objectRecord.id}>
     <div class="planet-view-readout" aria-label="View information">
-      {import.meta.env.DEV && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false">Record</button>}
+      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false">Record</button>}
       <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
         <span>Date: <span data-view-date></span></span>
         <span class="planet-view-separator" aria-hidden="true">·</span>
