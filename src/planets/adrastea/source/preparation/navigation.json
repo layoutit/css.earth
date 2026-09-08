@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "adrastea",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-ellipsoid-context",
+    "path": "presentation/context.png",
+    "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+    "credit": "IAU/WGCCRE dimensions; cssEarth neutral shape visualization",
+    "license": "Public PDS scientific data; retain mission and model attribution.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "pck-shape",
+        "model-surface"
+      ],
+      "size": 512,
+      "longitudeDegrees": 40,
+      "latitudeDegrees": 20,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "model"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 68244,
+    "expectedSha256": "5406542347b5d552dede364653221ddc57be8684ff982756221226ee05b004a2"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}
