@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.sch" 
+    schematypens="http://purl.oclc.org/dsdl/schematron" ?>
+
+<Product_Collection xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1     
+                        https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.xsd">
+
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:lro_diviner_derived1:data_derived_gdr_level3</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>LRO Diviner Level 3 Gridded Data Product (GDR) Collection</title>
+        <information_model_version>1.17.0.0</information_model_version>
+        <product_class>Product_Collection</product_class>
+        <Citation_Information>
+            <author_list>Paige, D.A.; Williams, J.P.; Bandfield, J.; GreenHagan, B.T.</author_list>
+            <publication_year>2023</publication_year>
+            <description>
+                Lunar Reconnaissance Orbiter Diviner GDR Collection
+            </description>
+        </Citation_Information>
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2023-07-24</modification_date>
+                <version_id>1.0</version_id>
+                <description>Initial version.</description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+    <Context_Area>
+        <Time_Coordinates>
+            <start_date_time>2009-07-05T16:00:00.000Z</start_date_time>
+            <stop_date_time>2016-10-23T21:00:00.000Z</stop_date_time>
+        </Time_Coordinates>
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Derived</processing_level>
+            <Science_Facets>
+                <wavelength_range>Infrared</wavelength_range>
+                <domain>Surface</domain>
+                <discipline_name>Geosciences</discipline_name>
+            </Science_Facets>
+        </Primary_Result_Summary>
+        <Investigation_Area>
+            <name>LUNAR RECONNAISSANCE ORBITER</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.lunar_reconnaissance_orbiter</lid_reference>
+                <reference_type>collection_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        <Observing_System>
+            <Observing_System_Component>
+                <name>LUNAR RECONNAISSANCE ORBITER</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.lro</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>DIVINER LUNAR RADIOMETER EXPERIMENT for LRO</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:lro.dlre</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+        <Target_Identification>
+            <name>Moon</name>
+            <type>Satellite</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:satellite.earth.moon</lid_reference>
+                <reference_type>collection_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+    </Context_Area>
+    <Reference_List>
+        <External_Reference>
+            <reference_text>Paige, D.A., J.P. Williams, M.T. Sullivan, and B.T. Greenhagan,
+                LRO Diviner Lunar Radiometer global mapping results and gridded data rroduct,
+                42nd Lunar Planet. Sci. Conf., abstract 2544, 2011.</reference_text>
+        </External_Reference>
+        <External_Reference>
+            <doi>10.1016/j.icarus.2016.08.012</doi>
+            <reference_text>Williams, J.P., D.A. Paige, B.T. Greenhagen, and E. Sefton-Nash,
+                The global temperatures of the Moon as measured by the Diviner Lunar
+                Radiometer Experiment, Icarus, v. 283, 300-325, 2017.</reference_text>
+        </External_Reference>
+        <External_Reference>
+            <doi>10.1126/science.1192196</doi>
+            <reference_text>Greenhagen, B.T., P.G. Lucey, M.B. Wyatt, T.D. Glotch, 
+                C.C. Allen, J.A. Arnold, J.L. Bandfield, N. Bowles, K.L. Donaldson Hanna, 
+                P.O. Hayne, E. Song, I.R. Thomas, and D.A. Paige, Global silicate 
+                mineralogy of the Moon from the Diviner Lunar Radiometer, Science v. 329,
+                1507, doi: 10.1126/science.1192196, 2010.</reference_text>
+        </External_Reference>
+        <External_Reference>
+            <doi>10.1029/2011JE003866</doi>
+            <reference_text>Bandfield, J.L., R.R. Ghent, A.R. Vasavada, D.A. Paige, 
+                S.J. Lawrence, and M.S. Robinson, Lunar surface rock abundance 
+                and regolith fines temperatures derived from LRO diviner radiometer 
+                data. JGR, v. 116, doi: 10.1029/2011JE003866, 2011.</reference_text>
+        </External_Reference>
+    </Reference_List>
+    <Collection>
+        <collection_type>Data</collection_type>
+    </Collection>
+    <File_Area_Inventory>
+        <File>
+            <file_name>collection_data_derived_gdr_level3_inventory.csv</file_name> 
+        </File>
+        <Inventory>
+            <local_identifier>inventory</local_identifier>
+            <offset unit="byte">0</offset>
+            <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+            <records>1827</records>
+            <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+            <field_delimiter>Comma</field_delimiter>
+            <Record_Delimited>
+                <fields>2</fields>
+                <groups>0</groups>
+                <maximum_record_length unit="byte">256</maximum_record_length>
+                <Field_Delimited>
+                    <name>Member Status</name>
+                    <field_number>1</field_number>
+                    <data_type>ASCII_String</data_type>
+                    <maximum_field_length unit="byte">1</maximum_field_length>
+                    <description>
+                        P indicates primary member of the collection
+                        S indicates secondary member of the collection
+                    </description>
+                </Field_Delimited>
+                <Field_Delimited>
+                    <name>LIDVID_LID</name>
+                    <field_number>2</field_number>
+                    <data_type>ASCII_LIDVID_LID</data_type>
+                    <maximum_field_length unit="byte">255</maximum_field_length>
+                    <description>This column specifies the LID of the files that comprise the collection.</description>
+                </Field_Delimited>
+            </Record_Delimited>
+            <reference_type>inventory_has_member_product</reference_type>
+        </Inventory>
+    </File_Area_Inventory>
+</Product_Collection>

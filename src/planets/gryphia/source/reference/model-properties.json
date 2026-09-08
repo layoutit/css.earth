@@ -1,0 +1,98 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6121",
+  "modelId": 6121,
+  "modelVersion": "2022-02-14",
+  "diameterKm": 14.403,
+  "diameterInterpretation": "Approximate scale from a thermal diameter of 14.403 ± 0.394 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects.",
+  "calibration": {
+    "diameterKm": 14.403,
+    "quotedUncertaintyKm": 0.394,
+    "quantity": "effective body diameter",
+    "reference": "Masiero et al. (2012), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas12",
+    "notes": "NEOWISE Mas12 original record. Fitted diameter; minimum ensemble systematic uncertainty about20%, additional to quoted formal uncertainty. Very slow rotation(~1049–1072h) is not fully sampled by the typicalshort WISE observingarc; size/shapeuncertainty may exceed the ensemble20% floor.",
+    "basis": "effective spherical radiometric diameter applied as approximate volume-equivalent size",
+    "assumption": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.",
+    "methodSystematicFraction": 0.2,
+    "referenceUrl": "https://doi.org/10.1088/2041-8205/759/1/L8",
+    "methodSystematicUncertaintyKm": 2.8806000000000003,
+    "formalErrorDefinition": "statistical1σ from fitted data; excludes stated survey systematic floor and shape/rotation sampling assumptions",
+    "observingEpochJD": 2455499.6495485,
+    "detectionsByBand": {
+      "W1": 33,
+      "W2": 32,
+      "W3": 0,
+      "W4": 0
+    },
+    "fitCode": "DV-I",
+    "beamingParameter": 1,
+    "uncertaintyKm": 0.394,
+    "scaleKmPerSourceUnit": 11.60875990080897,
+    "sourceUrl": "https://doi.org/10.1088/2041-8205/759/1/L8",
+    "sourceLabel": "Masiero et al. (2012), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas12",
+    "diameterSemantics": "effective body diameter",
+    "limitations": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty. NEOWISE Mas12 original record. Fitted diameter; minimum ensemble systematic uncertainty about20%, additional to quoted formal uncertainty. Very slow rotation(~1049–1072h) is not fully sampled by the typicalshort WISE observingarc; size/shapeuncertainty may exceed the ensemble20% floor.",
+    "visibleDescription": "Approximate scale from a thermal diameter of 14.403 ± 0.394 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects."
+  },
+  "periodHours": 1049,
+  "poleEclipticJ2000Degrees": [
+    141,
+    26
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/66066/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 11608.75990080897,
+    "firstVertexKm": [
+      4.069160564231064,
+      -0.7024344528380498,
+      7.38038519453831
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      22.112923079536166,
+      14.338165093647572,
+      14.79104603489793
+    ],
+    "volumeCubicKm": 1564.4349309244176,
+    "volumeEquivalentRadiusKm": 7.20149999999999,
+    "radialRangeKm": [
+      5.355911363755016,
+      11.813869526740962
+    ]
+  },
+  "elevation": [
+    -2,
+    5
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 144.03,
+    "estimatedErrorMeters": 70.11906433105469,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1561527074130.5757
+    }
+  }
+}

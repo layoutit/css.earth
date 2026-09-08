@@ -389,7 +389,7 @@ test("catalog is local and astronomy source sections survive sync", () => {
   for (const name of ["NOTICE.md", "upstream.json"]) assert.equal(existsSync(new URL(`../packages/catalog/${name}`, import.meta.url)), false);
   assert.ok(existsSync(new URL("../packages/catalog/LICENSE", import.meta.url)));
   const astronomy = targetFor("astronomy");
-  for (const file of ["AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs", "src/data/satelliteElements.data.saturn.ts", "src/__fixtures__/horizons.planetary.ts"]) {
+  for (const file of ["AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs", "src/data/satelliteElements.data.saturn.ts", "src/__fixtures__/horizons.planetary.ts", "src/__fixtures__/horizons.asteroids-1.ts", "src/__fixtures__/horizons.asteroids-2.ts"]) {
     assert.ok(locallyMaintainedFile(astronomy, file), file);
     assert.ok(isOwnedFile(astronomy, file), file);
   }

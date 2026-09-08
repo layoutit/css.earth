@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-b1-parent-inputs@1",
+  "reviewed": "2026-09-08",
+  "scope": [
+    "patroclus",
+    "moshup",
+    "sylvia"
+  ],
+  "purpose": "Small parent context radii and approximate reflected-flux inputs; no new parent scene package or surface map.",
+  "parents": [
+    {
+      "id": "patroclus",
+      "displayName": "Patroclus",
+      "primaryNaif": "920000617",
+      "systemBarycenterNaif": "20000617",
+      "fullAxesKm": [
+        127,
+        117,
+        98
+      ],
+      "semiAxesKm": [
+        63.5,
+        58.5,
+        49
+      ],
+      "referenceRadiusKm": 56.67287225388619,
+      "radiusConvention": "Cube root of product of semiaxes: volume-equivalent radius of the inferred mean ellipsoid. Published rounded spherical diameter is 113 km.",
+      "sizeUncertainty": "No independent formal axis errors attached to this numerical ellipsoid in the checked passage. Figures depend on occultation and light-curve model assumptions.",
+      "sizeSource": {
+        "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.pdf",
+        "doi": "10.1088/0004-6256/149/3/113",
+        "title": "Buie et al. (2015), Size and shape from stellar occultation observations of the double Jupiter Trojan Patroclus and Menoetius",
+        "selection": "Published mean-ellipsoidal full axes 127 × 117 × 98 km for Patroclus. Not the 124.6 × 98.2 km projected limb and not the unresolved system thermal diameter.",
+        "release": "Published numerical facts; no figure or texture copied."
+      },
+      "geometricAlbedo": 0.047,
+      "geometricAlbedoSigma": 0.003,
+      "albedoSourceId": "sbdb-617",
+      "photometryAssumption": "The NEOWISE record is for the unresolved Patroclus–Menoetius system. Apply its visible geometric albedo to the primary as an explicit common-albedo point-photometry approximation; this is not a resolved primary albedo measurement. The system equivalent thermal diameter 140.362 km is not used for the primary radius.",
+      "primaryGmKm3PerS2": 0.0740606,
+      "gmSource": "Menoetius source/validation/epoch-state.json and its retained Patroclus Horizons source response, prepared by Jupiter lane."
+    },
+    {
+      "id": "moshup",
+      "displayName": "Moshup",
+      "primaryNaif": null,
+      "systemBarycenterNaif": "20066391",
+      "referenceRadius": "Preserve existing Moshup BODIES value and original archived Alpha mesh scale.",
+      "geometricAlbedo": 0.162,
+      "geometricAlbedoSigma": 0.034,
+      "albedoSourceId": "scheirich-2021",
+      "photometryAssumption": "Whole-system optical visible geometric albedo, applied to the primary as a common-albedo point-photometry approximation. Paper value uses the original radar primary shape and observed mean aspect; not a surface albedo texture."
+    },
+    {
+      "id": "sylvia",
+      "displayName": "Sylvia",
+      "primaryNaif": null,
+      "systemBarycenterNaif": "20000087",
+      "referenceRadius": "Preserve existing Sylvia BODIES value and source-selected MPCD shape scale.",
+      "geometricAlbedo": 0.046,
+      "geometricAlbedoSigma": 0.004,
+      "albedoSourceId": "sbdb-87",
+      "photometryAssumption": "Adopt current JPL SBDB selection citing NEOWISE Mainzer et al. (2014). Unresolved radiometry is primary-dominated; use only approximate point photometry and retain shape-derived physical radius rather than replacing it with thermal diameter."
+    }
+  ],
+  "sources": {
+    "sbdb-617": {
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=617&phys-par=1",
+      "retrieved": "2026-09-08",
+      "bytes": 4133,
+      "sha256": "2b3674fb279c60a3db51c4ea04a375bca7acc6bdf6a2f64a422fe080e7009b95",
+      "rawResponseUtf8": "{\"signature\":{\"source\":\"NASA/JPL Small-Body Database (SBDB) API\",\"version\":\"1.3\"},\"orbit\":{\"soln_date\":\"2025-08-14 10:56:11\",\"first_obs\":\"1906-10-29\",\"model_pars\":[],\"two_body\":null,\"elements\":[{\"name\":\"e\",\"value\":\"0.139\",\"title\":\"eccentricity\",\"label\":\"e\",\"units\":null,\"sigma\":\"1.4e-08\"},{\"name\":\"a\",\"value\":\"5.21\",\"title\":\"semi-major axis\",\"label\":\"a\",\"units\":\"au\",\"sigma\":\"3.2e-08\"},{\"sigma\":\"9.7e-08\",\"units\":\"au\",\"title\":\"perihelion distance\",\"label\":\"q\",\"value\":\"4.48\",\"name\":\"q\"},{\"units\":\"deg\",\"title\":\"inclination; angle with respect to x-y ecliptic plane\",\"label\":\"i\",\"sigma\":\"9.1e-07\",\"name\":\"i\",\"value\":\"22.1\"},{\"value\":\"44.3\",\"name\":\"om\",\"title\":\"longitude of the ascending node\",\"label\":\"node\",\"units\":\"deg\",\"sigma\":\"2.5e-06\"},{\"title\":\"argument of perihelion\",\"units\":\"deg\",\"label\":\"peri\",\"sigma\":\"4.5e-06\",\"value\":\"309\",\"name\":\"w\"},{\"sigma\":\"4.7e-06\",\"units\":\"deg\",\"title\":\"mean anomaly\",\"label\":\"M\",\"value\":\"58.7\",\"name\":\"ma\"},{\"sigma\":\"5.4e-05\",\"units\":\"TDB\",\"title\":\"time of perihelion passage\",\"label\":\"tp\",\"name\":\"tp\",\"value\":\"2460493.360\"},{\"units\":\"d\",\"title\":\"sidereal orbital period\",\"label\":\"period\",\"sigma\":\"4e-05\",\"name\":\"per\",\"value\":\"4340\"},{\"title\":\"mean motion\",\"units\":\"deg/d\",\"label\":\"n\",\"sigma\":\"7.6e-10\",\"value\":\"0.083\",\"name\":\"n\"},{\"sigma\":\"3.6e-08\",\"units\":\"au\",\"title\":\"aphelion distance\",\"label\":\"Q\",\"value\":\"5.93\",\"name\":\"ad\"}],\"n_dop_obs_used\":null,\"moid\":\"3.53\",\"n_del_obs_used\":null,\"n_obs_used\":6339,\"comment\":null,\"rms\":\"0.25\",\"source\":\"JPL\",\"last_obs\":\"2025-07-29\",\"epoch\":\"2461200.5\",\"equinox\":\"J2000\",\"not_valid_after\":null,\"cov_epoch\":\"2459343.5\",\"sb_used\":\"SB441-N16\",\"producer\":\"Davide Farnocchia\",\"orbit_id\":\"86\",\"t_jup\":\"2.835\",\"not_valid_before\":null,\"pe_used\":\"DE441\",\"data_arc\":\"43373\",\"condition_code\":\"0\",\"moid_jup\":\"0.192\"},\"object\":{\"spkid\":\"20000617\",\"shortname\":\"617 Patroclus\",\"orbit_class\":{\"name\":\"Jupiter Trojan\",\"code\":\"TJN\"},\"fullname\":\"617 Patroclus (A906 UL)\",\"orbit_id\":\"86\",\"pha\":false,\"des\":\"617\",\"kind\":\"an\",\"prefix\":null,\"neo\":false},\"phys_par\":[{\"ref\":\"E2026E92\",\"name\":\"H\",\"sigma\":null,\"title\":\"absolute magnitude\",\"units\":null,\"value\":\"8.22\",\"desc\":\"absolute magnitude (magnitude at 1 au from Sun and observer)\",\"notes\":\"IRAS observations used: 8\"},{\"name\":\"diameter\",\"ref\":\"urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)\",\"value\":\"140.362\",\"desc\":\"effective body diameter\",\"notes\":null,\"sigma\":\"0.868\",\"title\":\"diameter\",\"units\":\"km\"},{\"name\":\"rot_per\",\"ref\":\"LCDB (Rev. 2023-October); Warner et al., 2009\",\"notes\":\"REFERENCE LIST:[Behrend, R. (2005) Observatoire de Geneve web site, http://obswww.unige.ch/~behrend/page_cou.html], [Marchis, F.; Hestroffer, D.; Descamps, P.; Berthier, J.; et al. (2006) Nature 439, 565-567.], [Mueller, M.; Marchis, F.; Emery, J.P.; Harris, A.W. (DLR); et al. (2010) Icarus 205, 505-515.], [Oey, J. (2012) Minor Planet Bull. 39, 106-107.], [Stephens, R.D.; Warner, B.D. (2018) Minor Planet Bull. 45, 343-347.], [Berthier, J.; Descampls, P.; Vachier, F.; Normand, J.; et al. (2020) Icarus 352, id. 113990.]\",\"desc\":\"body rotation period (synodic)\",\"value\":\"102.8\",\"units\":\"h\",\"title\":\"rotation period\",\"sigma\":null},{\"name\":\"albedo\",\"ref\":\"urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)\",\"value\":\"0.047\",\"notes\":null,\"desc\":\"geometric albedo\",\"sigma\":\"0.003\",\"title\":\"geometric albedo\",\"units\":null},{\"name\":\"BV\",\"ref\":\"EAR-A-5-DDR-UBV-MEAN-VALUES-V1.2\",\"desc\":\"color index B-V magnitude difference\",\"notes\":\"#obs=5; phase (min.=2.24, mean=6.14, max.=8.61) deg.\",\"value\":\"0.677\",\"units\":null,\"title\":\"B-V\",\"sigma\":\"0.013\"},{\"name\":\"UB\",\"ref\":\"EAR-A-5-DDR-UBV-MEAN-VALUES-V1.2\",\"value\":\"0.215\",\"notes\":\"#obs=7; phase (min.=2.24, mean=6.52, max.=8.61) deg.\",\"desc\":\"color index U-B magnitude difference\",\"sigma\":\"0.045\",\"title\":\"U-B\",\"units\":null},{\"units\":null,\"title\":\"Tholen spectral type\",\"sigma\":null,\"desc\":\"Tholen spectral taxonomic classification\",\"notes\":\"used 7 color indices; used ground-based radiometric albedo\",\"value\":\"P\",\"ref\":\"EAR-A-5-DDR-TAXONOMY-V4.0\",\"name\":\"spec_T\"}]}\n",
+      "selectedAlbedo": {
+        "name": "albedo",
+        "ref": "urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)",
+        "value": "0.047",
+        "notes": null,
+        "desc": "geometric albedo",
+        "sigma": "0.003",
+        "title": "geometric albedo",
+        "units": null
+      }
+    },
+    "sbdb-87": {
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=87&phys-par=1",
+      "retrieved": "2026-09-08",
+      "bytes": 5895,
+      "sha256": "725b0f794ba9ac5c261dcfd511a0a2eae7fe4e8e9cfbea8a6a90d6fe09a9729c",
+      "rawResponseUtf8": "{\"phys_par\":[{\"desc\":\"absolute magnitude (magnitude at 1 au from Sun and observer)\",\"units\":null,\"ref\":\"MPO950948\",\"value\":\"6.93\",\"notes\":\"IRAS observations used: 20\",\"name\":\"H\",\"title\":\"absolute magnitude\",\"sigma\":null},{\"sigma\":\"2.953\",\"name\":\"diameter\",\"title\":\"diameter\",\"notes\":null,\"desc\":\"effective body diameter\",\"units\":\"km\",\"ref\":\"urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)\",\"value\":\"253.051\"},{\"units\":\"h\",\"desc\":\"body rotation period (synodic)\",\"value\":\"5.184\",\"ref\":\"LCDB (Rev. 2023-October); Warner et al., 2009\",\"notes\":\"REFERENCE LIST:[Schober, H.J.; Surdej, J. (1979) Astron. Astrophys. Suppl. Ser. 38, 269-274.], [Harris, A.W.; Young, J.W. (1980) Icarus 43, 20-32.], [Weidenschilling, S.J.; Chapman, C.R.; Davis, D.R.; Greenberg, R.; et al. (1987) Icarus 70, 191-245.], [Drummond, J.D.; Weidenschilling, S.J.; Chapman, C.R.; Davis, D.R. (1988) Icarus 76, 19-77.], [Magnusson, P. (1990) Icarus 85, 229-240.], [Drummond, J.D.; Weidenschilling, S.J.; Chapman, C.R.; Davis, D.R. (1991) Icarus 89, 44-64.], [Michalowski, T. (1993) Icarus 106, 563-572.], [De Angelis, G. (1995) Planet. Space Sci. 43, 649-682.], [Foerster, I.; Potthoff, H. (2001) Minor Planet Bull. 28, 25-26.], [Kaasalainen, M.; Torppa, J.; Piironen, J. (2002) Icarus 159, 369-395.], [Marchis, F.; Kaasalainen, M.; Hom, E.F.Y.; Berthier, J.; et al. (2006) Icarus 185, 39-63.], [Behrend, R. (2007) Observatoire de Geneve web site, http://obswww.unige.ch/~behrend/page_cou.html], [Vereshchagina, I.A.; Gorshanov, D.L.; Devyatkin, A.V.; Papushev, P.G. (2009) Solar System Research 43, 291-300.], [Hamanowa, H.; Hamanowa, H. (2011) http://www2.ocn.ne.jp/~hamaten/astlcdata.htm], [Behrend, R. (2012) Observatoire de Geneve web site, http://obswww.unige.ch/~behrend/page_cou.html], [Hanus, J.; Marchis, F.; Durech, J. (2013) Icarus 226, 1045-1057.], [Behrend, R. (2015) Observatoire de Geneve web site, http://obswww.unige.ch/~behrend/page_cou.html], [Hanus, J.; Durech, J.; Oszkiewicz, D.A.; Behrend, R.; et al. (2016) Astron. Astrophys. 586, A108.], [Hanus, J.; Viikinkoski, M.; Marchis, F.; Durech, J.; et al (2017) Astron. Astrophys. 601, A114.], [Carry, B.; Vernazza, P.; Vachier, F.; Neveu, M.; et al. (2021) Astron. Astrophys 650, A129.], [Behrend, R. (2021) Observatoire de Geneve web site, http://obswww.unige.ch/~behrend/page_cou.html], [Vernazza, P.; Ferrais, M.; Jorda, L.; Hanus, J.; et al. (2021) Astron. Astrophys 654, id. A56.], [Benishek, V. (2022) Minor Planet Bull. 49, 333-341.], [Ferrais, M.; Vernazza, P.; Jorda, L.; Jehin, E.; et al. (2022) Minor Planet Bull. 49, 307-313.]\",\"name\":\"rot_per\",\"title\":\"rotation period\",\"sigma\":null},{\"name\":\"albedo\",\"title\":\"geometric albedo\",\"sigma\":\"0.004\",\"desc\":\"geometric albedo\",\"units\":null,\"ref\":\"urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)\",\"value\":\"0.046\",\"notes\":null},{\"sigma\":\"0.015\",\"name\":\"BV\",\"title\":\"B-V\",\"notes\":\"#obs=19; phase (min.=3.98, mean=10.21, max.=17.32) deg.\",\"units\":null,\"desc\":\"color index B-V magnitude difference\",\"ref\":\"EAR-A-5-DDR-UBV-MEAN-VALUES-V1.2\",\"value\":\"0.710\"},{\"notes\":\"#obs=9; phase (min.=5.07, mean=8.15, max.=15.60) deg.\",\"desc\":\"color index U-B magnitude difference\",\"units\":null,\"ref\":\"EAR-A-5-DDR-UBV-MEAN-VALUES-V1.2\",\"value\":\"0.251\",\"sigma\":\"0.026\",\"name\":\"UB\",\"title\":\"U-B\"},{\"sigma\":null,\"name\":\"spec_T\",\"title\":\"Tholen spectral type\",\"notes\":\"used 7 color indices; used ground-based radiometric albedo\",\"desc\":\"Tholen spectral taxonomic classification\",\"units\":null,\"ref\":\"EAR-A-5-DDR-TAXONOMY-V4.0\",\"value\":\"P\"},{\"desc\":\"SMASSII spectral taxonomic classification\",\"units\":null,\"value\":\"X\",\"ref\":\"EAR-A-5-DDR-TAXONOMY-V4.0\",\"notes\":\"based on a high-resolution spectrum by Xu et al. (1995) or Bus and Binzel (2002)\",\"name\":\"spec_B\",\"title\":\"SMASSII spectral type\",\"sigma\":null}],\"orbit\":{\"producer\":\"Otto Matic\",\"soln_date\":\"2026-06-05 03:08:26\",\"t_jup\":\"3.092\",\"not_valid_after\":null,\"not_valid_before\":null,\"comment\":null,\"equinox\":\"J2000\",\"first_obs\":\"1885-05-05\",\"pe_used\":\"DE441\",\"data_arc\":\"51469\",\"n_dop_obs_used\":null,\"model_pars\":[],\"cov_epoch\":\"2458183.5\",\"source\":\"JPL\",\"orbit_id\":\"130\",\"moid_jup\":\"1.57\",\"epoch\":\"2461200.5\",\"elements\":[{\"title\":\"eccentricity\",\"value\":\"0.0942\",\"label\":\"e\",\"name\":\"e\",\"units\":null,\"sigma\":\"2.2e-09\"},{\"name\":\"a\",\"units\":\"au\",\"value\":\"3.49\",\"title\":\"semi-major axis\",\"label\":\"a\",\"sigma\":\"5.6e-09\"},{\"units\":\"au\",\"name\":\"q\",\"label\":\"q\",\"title\":\"perihelion distance\",\"value\":\"3.16\",\"sigma\":\"4.9e-09\"},{\"units\":\"deg\",\"name\":\"i\",\"value\":\"10.8\",\"title\":\"inclination; angle with respect to x-y ecliptic plane\",\"label\":\"i\",\"sigma\":\"1.7e-07\"},{\"sigma\":\"6.1e-07\",\"name\":\"om\",\"units\":\"deg\",\"label\":\"node\",\"title\":\"longitude of the ascending node\",\"value\":\"72.9\"},{\"title\":\"argument of perihelion\",\"label\":\"peri\",\"value\":\"267\",\"units\":\"deg\",\"name\":\"w\",\"sigma\":\"1.4e-06\"},{\"sigma\":\"1.8e-06\",\"units\":\"deg\",\"name\":\"ma\",\"value\":\"124\",\"title\":\"mean anomaly\",\"label\":\"M\"},{\"units\":\"TDB\",\"name\":\"tp\",\"label\":\"tp\",\"title\":\"time of perihelion passage\",\"value\":\"2460380.434\",\"sigma\":\"1e-05\"},{\"name\":\"per\",\"units\":\"d\",\"value\":\"2380\",\"title\":\"sidereal orbital period\",\"label\":\"period\",\"sigma\":\"5.8e-06\"},{\"value\":\"0.151\",\"title\":\"mean motion\",\"label\":\"n\",\"name\":\"n\",\"units\":\"deg/d\",\"sigma\":\"3.7e-10\"},{\"sigma\":\"6.2e-09\",\"title\":\"aphelion distance\",\"label\":\"Q\",\"value\":\"3.82\",\"name\":\"ad\",\"units\":\"au\"}],\"condition_code\":\"0\",\"sb_used\":\"SB441-N16\",\"moid\":\"2.18\",\"last_obs\":\"2026-04-05\",\"n_obs_used\":7387,\"rms\":\"0.33\",\"two_body\":null,\"n_del_obs_used\":null},\"object\":{\"fullname\":\"87 Sylvia (A866 KA)\",\"prefix\":null,\"orbit_class\":{\"code\":\"OMB\",\"name\":\"Outer Main-belt Asteroid\"},\"kind\":\"an\",\"shortname\":\"87 Sylvia\",\"spkid\":\"20000087\",\"pha\":false,\"orbit_id\":\"130\",\"des\":\"87\",\"neo\":false},\"signature\":{\"source\":\"NASA/JPL Small-Body Database (SBDB) API\",\"version\":\"1.3\"}}\n",
+      "selectedAlbedo": {
+        "name": "albedo",
+        "title": "geometric albedo",
+        "sigma": "0.004",
+        "desc": "geometric albedo",
+        "units": null,
+        "ref": "urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+        "value": "0.046",
+        "notes": null
+      }
+    },
+    "scheirich-2021": {
+      "url": "https://arxiv.org/pdf/1912.06456v2",
+      "retrieved": "2026-09-08",
+      "bytes": 23170114,
+      "sha256": "ebdc8ffac56d7a1707b29ee9a1e9c363eb03edd58ac8fc399f24469db11cb3f3",
+      "locator": "Table 4, PDF page 13; interpretation on PDF pages 14–15",
+      "title": "Scheirich et al. (2021), accepted 4 January 2021",
+      "selection": "System visible geometric albedo 0.162 ± 0.034 (1 sigma). This is not radar albedo or Bond albedo."
+    }
+  },
+  "patroclusHeliocentricImplementation": {
+    "inspectedFile": "packages/astronomy/tools/generate-asteroids.mjs",
+    "initialState": "Hardcoded 90 objects, including Moshup/Sylvia and omitting Patroclus. No selected-body mode at the time of inspection; unmodified generator rewrites both aggregate data files.",
+    "sharedOwner": "Root lane; root subsequently reported bounded --object support is being added. This document makes no shared-file edits.",
+    "targetCommand": "920000617",
+    "center": "500@10",
+    "frame": "ICRF equatorial / REF_PLANE FRAME",
+    "epochJdTt": 2461286.5,
+    "timeScale": "Horizons TDB approximated as TT by existing generator, under 2 ms.",
+    "elementsRoute": "elementsUrl({command:\"920000617\",center:\"500@10\",startJd:2461286.5,stopJd:2461287.5,stepDays:1}); parseElements()[0]; convert angular values and daily mean motion from degrees to radians.",
+    "independentVectorRoute": "vectorsUrl({command:\"920000617\",center:\"500@10\",epochsJdTdb:[2461256.5,2461286.5,2461316.5],outUnits:\"KM-D\"}); VEC_CORR NONE; parseVectors().",
+    "centerCaution": "617; resolves system barycenter 20000617, inconsistent with the physical primary used as the Menoetius parent. Use exact primary 920000617 or an explicit documented center correction.",
+    "outputFiles": [
+      "packages/astronomy/src/data/asteroidElements.data.ts",
+      "packages/astronomy/src/__fixtures__/horizons.asteroids.ts"
+    ],
+    "preservation": "Add only Patroclus and preserve all existing records/fixtures; no unbounded re-download or shared output rewrite from this lane."
+  }
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271317%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              1317 Silvretta (1935 RC)         2026-Sep-08 10:26:04
+Rec #:    1317 (+COV) Soln.date: 2026-Mar-11_22:56:37  # obs: 11560 (1935-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458025.5 ! 2017-Sep-29.00 (TDB)         Residual RMS= .23809
+   EC= .2366892206016276   QR= 2.446444013094472   TP= 2457182.9959765128
+   OM= 6.70344548154765    W=  32.40548440711682   IN= 20.54647499317392
+   A= 3.205043187026278    MA= 144.7188919455065   ADIST= 3.963642360958084
+   PER= 5.73798            N= .171772345           ANGMOM= .029921225
+   DAN= 2.5216             DDN= 3.78107            L= 37.4296586
+   B= 10.841101            MOID= 1.47315001        TP= 2015-Jun-09.4959765128
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 8.9595             ROTPER= 7.048
+   H= 10.11                G= .150                 B-V= .724
+                           ALBEDO= .275            STYP= CX:
+
+ASTEROID comments: 
+1: soln ref.= JPL#71, OCC=0
+2: source=ORB
+*******************************************************************************

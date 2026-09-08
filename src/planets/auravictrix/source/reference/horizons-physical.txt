@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27700%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              700 Auravictrix (A910 LD)        2026-Sep-08 10:25:37
+Rec #:     700 (+COV) Soln.date: 2026-Jun-05_03:56:42  # obs: 10466 (1910-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458033.5 ! 2017-Oct-07.00 (TDB)         Residual RMS= .23594
+   EC= .1037327155150454   QR= 1.99823642440324    TP= 2457591.8741081883
+   OM= 96.82243789674796   W=  101.7437454376306   IN= 6.789426024022473
+   A= 2.229509499001225    MA= 130.7508770763488   ADIST= 2.460782573599211
+   PER= 3.32906            N= .296067055           ANGMOM= .025546819
+   DAN= 2.25309            DDN= 2.15992            L= 198.6467927
+   B= 6.6466598            MOID= 1.01041996        TP= 2016-Jul-22.3741081883
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 8.2105             ROTPER= 6.075
+   H= 11.16                G= .150                 B-V= n.a.
+                           ALBEDO= .228            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#75, OCC=0
+2: source=ORB
+*******************************************************************************

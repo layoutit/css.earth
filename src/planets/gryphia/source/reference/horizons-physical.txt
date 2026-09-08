@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27496%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                496 Gryphia (A902 UM)          2026-Sep-08 10:25:30
+Rec #:     496 (+COV) Soln.date: 2026-Mar-11_21:52:45   # obs: 6249 (1902-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458063.5 ! 2017-Nov-06.00 (TDB)         Residual RMS= .23132
+   EC= .0787684611222373   QR= 2.025569256775909   TP= 2457907.520753996
+   OM= 207.6066896300217   W=  258.6843742598075   IN= 3.791883195085015
+   A= 2.198762386319776    MA= 47.15236084515629   ADIST= 2.371955515863643
+   PER= 3.26044            N= .302298941           ANGMOM= .025428404
+   DAN= 2.21942            DDN= 2.15186            L= 106.2668805
+   B= -3.7180688           MOID= 1.04655004        TP= 2017-Jun-03.0207539960
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 7.2015             ROTPER= 1072.
+   H= 11.75                G= .150                 B-V= .861
+                           ALBEDO= .193            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#74, OCC=0
+2: source=ORB
+*******************************************************************************

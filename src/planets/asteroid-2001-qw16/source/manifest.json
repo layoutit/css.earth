@@ -1,0 +1,245 @@
+{
+  "schema": "cssasteroid-2001-qw16-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "asteroid-2001-qw16-shape",
+      "path": "shape/model-15015.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/119251/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; 2001 QW16 model 15015; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 8384.776486769842,
+        "referenceRadiusMeters": 5201.5
+      },
+      "coverage": "Published convex light-curve model 15015. Approximate scale from a thermal diameter of 10.403 ± 0.259 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "expectedBytes": 46419,
+      "expectedSha256": "e41e4dae7371422f0d9aa7c771b916832311f7b74ca5cc3995dc9f1317433f33"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/119251/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; 2001 QW16 model 15015; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 67353,
+      "expectedSha256": "0b279de9de79d1c0758d270dde6f22ddae37379a237edf4553649bd0a53bdb83",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "asteroid-2001-qw16-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 10214,
+      "expectedSha256": "5e70c29deb7767814f9f8d36d8c0d19392eca5ad65b1df7fd8bce1e8a1235cbe",
+      "sha256": "5e70c29deb7767814f9f8d36d8c0d19392eca5ad65b1df7fd8bce1e8a1235cbe"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 949,
+      "expectedSha256": "ba99583dbd32494bcccc57078db5d09cd10ffb34c9a167f5e5296e78a5df370a"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 1312,
+      "expectedSha256": "3b3a1c1c7f26ab090407f3e23c88fa987e34e1fa3a55ccf70ba14bebef5e8372"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 644,
+      "expectedSha256": "ab630e97c54bd8bf991cafa62f4237a3c7458ca740a9f84c76839ce2a5c336e8"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 3255,
+      "expectedSha256": "f22871ac6ec4dae804b6799811cdf36114659db22480fcde1a3871d5aa84ceea"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 4697,
+      "expectedSha256": "b6768e9005cea5568ba0e7bff8e938c983419c592eeca3465e68ac44c8fc5d87"
+    },
+    {
+      "path": "reference/665.html",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 762402,
+      "expectedSha256": "05dac500e28880be5b339bcebb4d9d72bc5e0e30a52ea5f8f68d39ad6a040bd7"
+    },
+    {
+      "path": "reference/calibration.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 3238,
+      "expectedSha256": "46285140f6e6f0387b17bcdbf8966129d626457059bc0c75cb695ba7d112026e"
+    },
+    {
+      "path": "reference/damit-model.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 1506,
+      "expectedSha256": "095575257169f2c7fa1cdb5a40e2811d13febe2db87f7b727730ec8145279586"
+    },
+    {
+      "path": "reference/documentation.html",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 40661,
+      "expectedSha256": "b057eb24b9cc831043904a10c596e9f28d554a79748baecd32ef76b245e873af"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 7355,
+      "expectedSha256": "8468625efdfbc36f892c86165a58eaca830af0c4cf6546dcf77df6524538abf6"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 1393,
+      "expectedSha256": "bbd63140c21d5f396452cbb28e6eda82efca5601d5dd9f9af5e4e6f3408c9df0"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 6645,
+      "expectedSha256": "00e2ff581b01c7691dd6ba3dc3010240d495da7f4128621ca5fa3ac226ab317b"
+    },
+    {
+      "path": "reference/masiero-2011.pdf",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 2276528,
+      "expectedSha256": "cdcbc1bf321e943d01cfe8b46dcf6729a2c100bf67104e85d6aec8d8efbb8f7f"
+    },
+    {
+      "path": "reference/model-15015.html",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 91275,
+      "expectedSha256": "af16d8a628701701c4a04322e27c90f1edb1d384e2387630686916654b10082d"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 5236,
+      "expectedSha256": "5b49f4c1deb8f658ea9008abf0b31ee3a69dac6e4482a4294df1c77a06813fce"
+    },
+    {
+      "path": "reference/neowise-definition.html",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 18419,
+      "expectedSha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac"
+    },
+    {
+      "path": "reference/neowise.csv",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 432,
+      "expectedSha256": "d0aa5471e48daaa175101ab6fb902363e5f3e51bdc07833351e02091371fcb45"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 2660,
+      "expectedSha256": "6cbf9ceb98e9c8802364df4259278fc7fd1c28ac9a3574a4c854f2c7e2846879"
+    },
+    {
+      "path": "reference/search.html",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 8992,
+      "expectedSha256": "b622450189d22e0fb3cb1e327dd0101d93d45a91a8795fe23b007b91fb1eddc1"
+    },
+    {
+      "path": "reference/spin.txt",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 43,
+      "expectedSha256": "bd6d6c190faedeacf2e743422b7ee175e3efeecf641fbb6b759c8ffe0169768e"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 144987,
+      "expectedSha256": "10578c68db5d25fb328413404235f8c225772e3f4f74dbdb420e629f4e65ebe6"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    }
+  ]
+}

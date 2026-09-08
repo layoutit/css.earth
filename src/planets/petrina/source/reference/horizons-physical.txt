@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27482%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                482 Petrina (A902 EH)          2026-Sep-08 10:25:27
+Rec #:     482 (+COV) Soln.date: 2026-Jun-05_03:39:40   # obs: 7107 (1902-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457858.5 ! 2017-Apr-15.00 (TDB)         Residual RMS= .21954
+   EC= .09760716926853528  QR= 2.706529076514215   TP= 2457985.7908420996
+   OM= 179.4048354816013   W=  86.9602822298551    IN= 14.47368512867321
+   A= 2.999280340381635    MA= 335.8467463473402   ADIST= 3.292031604249056
+   PER= 5.19438            N= .189748557           ANGMOM= .029649082
+   DAN= 2.95541            DDN= 2.98616            L= 266.2656787
+   B= 14.4528773           MOID= 1.74136996        TP= 2017-Aug-20.2908420996
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 22.8755            ROTPER= 11.7922
+   H= 8.9                  G= .150                 B-V= .871
+                           ALBEDO= .246            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#100, OCC=0
+2: source=ORB
+*******************************************************************************

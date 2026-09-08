@@ -1,0 +1,53 @@
+
+> cssearth@0.1.0 acquire:planets /Users/ekrof/fed/cssEarth-pluto-small-moons
+> node tools/run-implemented-planets.mjs acquire -- --verify-only
+
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":15,"verifiedCount":20}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":23,"verifiedCount":28}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":15,"verifiedCount":20}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":12,"verifiedCount":17}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":12,"verifiedCount":17}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":12,"verifiedCount":17}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":12,"verifiedCount":17}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":13,"verifiedCount":18}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":12,"verifiedCount":17}
+{"inputCount":4,"generatedIntermediateCount":1,"documentCount":12,"verifiedCount":17}
+file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/operations.js:549
+    if (undeclared.length || missing.length) throw new Error(`Source coverage failed. Undeclared: ${undeclared.join(", ") || "none"}. Missing: ${missing.join(", ") || "none"}.`);
+                                                   ^
+
+Error: Source coverage failed. Undeclared: none. Missing: stars/eso0932a.tif, presentation/InterVariable.ttf.
+    at verifySources (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/operations.js:549:52)
+    at async file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/operations.js:707:30
+
+Node.js v24.19.0
+file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/run-implemented-planets.mjs:253
+    if (exitCode !== 0 || signal !== null) throw new Error(
+                                                 ^
+
+Error: Implemented planet command failed with exit 1.
+    at file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/run-implemented-planets.mjs:253:50
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async main (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/run-implemented-planets.mjs:243:5)
+    at async file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/run-implemented-planets.mjs:260:3
+
+Node.js v24.19.0
+ ELIFECYCLE  Command failed with exit code 1.
