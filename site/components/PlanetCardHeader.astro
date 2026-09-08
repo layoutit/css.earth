@@ -2,6 +2,7 @@
 const { title, introduction = '', ...attributes } = Astro.props;
 ---
 <section class="planet-selected-panel" {...attributes}>
+  <slot />
   <div class="planet-title-row">
     <h1 class="planet-title" aria-label={title.label}>
       <span class="visually-hidden">{title.label}</span>
@@ -9,7 +10,6 @@ const { title, introduction = '', ...attributes } = Astro.props;
         <path d={title.path} transform={title.renderPathOffsetY === 0 ? undefined : `translate(0 ${title.renderPathOffsetY})`} />
       </svg>
     </h1>
-    <slot />
   </div>
   {introduction && <p class="planet-introduction">{introduction}</p>}
 </section>
