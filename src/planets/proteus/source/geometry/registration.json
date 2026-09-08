@@ -1,0 +1,77 @@
+{
+  "sources": {
+    "viewingGeometry": "OPUS PDS target-centered surface geometry",
+    "roll": "PDS Voyager ISS SEDR CK with NAIF pck00011, evaluated at exposure end",
+    "imageScale": "GEOMED detached PDS label pixel FOV; distortion-corrected 1000x1000 grid"
+  },
+  "method": "Body-frame vectors and camera roll are source-derived. Only image-center translation is refined against sunlit shape-limb gradients. No mesh vertices or source terrain are edited. Photometric background offset is the median of the recorded empty-sky region.",
+  "limitations": "SEDR pointing is uncorrected. The Stooke model is coarse and can exaggerate facets or depressions; image registration is approximate at that shape accuracy, not a modern photogrammetric solution.",
+  "frames": [
+    {
+      "id": "c1137317",
+      "path": "observations/C1137317_GEOMED.IMG",
+      "labelPath": "observations/C1137317_GEOMED.LBL",
+      "observerLatitude": -26.863,
+      "observerWestLongitude": 93.582,
+      "sunLatitude": -23.66,
+      "sunWestLongitude": 116.998,
+      "rangeKm": 868236.818,
+      "northAzimuthDegrees": 13.455091520022258,
+      "center": [
+        480.502,
+        804.866
+      ],
+      "pixelAngleMicroradians": 7.841764329210524,
+      "ckTick": 6317197615.0,
+      "requestedTick": 6317197575.411231,
+      "time": "1989-08-24T14:19:57.000",
+      "backgroundOffset": 0.0002,
+      "backgroundMaximum": 0.0017791,
+      "registration": {
+        "method": "SEDR roll and OPUS viewing geometry; pointing translation fitted to sunlit shape-limb gradients",
+        "skyRegion": [
+          50,
+          50,
+          850,
+          850
+        ],
+        "skyMedianIF": 0.0002,
+        "skyRobustSigmaIF": 0.0017791200000000001,
+        "limbContrastIF": 0.020043836424049388
+      }
+    },
+    {
+      "id": "c1138920",
+      "path": "observations/C1138920_GEOMED.IMG",
+      "labelPath": "observations/C1138920_GEOMED.LBL",
+      "observerLatitude": 3.482,
+      "observerWestLongitude": 333.923,
+      "sunLatitude": -23.659,
+      "sunWestLongitude": 288.621,
+      "rangeKm": 145964.65,
+      "northAzimuthDegrees": 137.38487394947322,
+      "center": [
+        411.728,
+        680.0
+      ],
+      "pixelAngleMicroradians": 7.841764329210524,
+      "ckTick": 6317968015.0,
+      "requestedTick": 6317967976.406169,
+      "time": "1989-08-25T03:10:21.000",
+      "backgroundOffset": 0.0532,
+      "backgroundMaximum": 0.0051891,
+      "registration": {
+        "method": "SEDR roll and OPUS viewing geometry; pointing translation fitted to sunlit shape-limb gradients",
+        "skyRegion": [
+          600,
+          500,
+          800,
+          800
+        ],
+        "skyMedianIF": 0.053200000000000004,
+        "skyRobustSigmaIF": 0.005189099999999994,
+        "limbContrastIF": 0.00467397549112519
+      }
+    }
+  ]
+}

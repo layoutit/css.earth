@@ -68,6 +68,7 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
   oberon: 1587,
   triton: 56642,
   proteus: 787,
+  larissa: 543,
   charon: 2,
 }
 

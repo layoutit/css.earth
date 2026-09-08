@@ -124,6 +124,7 @@ export const BODIES: Record<BodyId, BodyData> = {
 
   triton: body('triton', 'Triton', '801', 1352.6, 1428.495, 'neptune'),
   proteus: body('proteus', 'Proteus', '808', 208, 2.58, 'neptune'),
+  larissa: body('larissa', 'Larissa', '807', 96, 0.25484, 'neptune'),
   charon: body('charon', 'Charon', '901', 606, 106.10, 'pluto'),
 
   // Dwarf planets. `horizonsCode` is the exact string this package's Horizons

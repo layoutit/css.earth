@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd">
+  <Identification_Area>   
+  <logical_identifier>urn:nasa:pds:small_bodies.stooke.shape-models:data:n8proteus_tab</logical_identifier>  
+    <version_id>1.0</version_id>
+    <title>Stooke Shape Model of Proteus</title>
+    <information_model_version>1.23.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <publication_year>2025</publication_year>
+      <description>Numerical shape model of N8 Proteus based on data from the Voyager 2 mission</description>
+      <List_Author>
+        <Person>
+          <given_name>Philip</given_name>
+          <family_name>Stooke</family_name>
+        </Person>
+      </List_Author>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable"/>
+      <stop_date_time xsi:nil="true" nilReason="inapplicable"/>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>No Specific Investigation</name>
+      <type>Individual Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>Voyager</name>
+      <Observing_System_Component>
+        <name>VOYAGER 2</name>
+          <type>Host</type>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vg2</lid_reference>
+            <reference_type>is_instrument_host</reference_type>
+          </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>IMAGING SCIENCE SUBSYSTEM - NARROW ANGLE for VG2</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:vg2.issn</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Proteus</name>
+      <type>Satellite</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:satellite.neptune.proteus</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <doi>10.1007/BF00572198</doi>
+      <reference_text>Stooke, P.J. 1994. The Surfaces of Larissa and Proteus. EMP 65, 31-54.
+</reference_text>
+    </External_Reference>  
+  </Reference_List>   
+  <File_Area_Observational>
+    <File>
+      <file_name>n8proteus.tab</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2016-09-30</creation_date_time>
+      <file_size unit="byte">70226</file_size>
+      <records>2701</records>
+    </File>
+    <Table_Character>
+      <local_identifier>table</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>2701</records>
+      <description>Numerical shape model of N8 Proteus from data from the Voyager 2 mission. Coordinates are planetocentric, increasing to the west for planetary satellites, and to the east for (prograde) asteroids and comets, as recommended by the IAU Working Group on Cartographic Coordinates. See the data set description for details on the coordinate system. Described in Stooke (1994b). This shape model consists of a grid with points every 5 degrees in latitude and longitude, with a radius in km associated with each point. The model is planetocentric.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>3</fields>
+        <groups>0</groups>
+        <record_length unit="byte">26</record_length>
+        <Field_Character>
+          <name>Longitude</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">3</field_length>
+          <field_format>%3d</field_format>
+          <unit>deg</unit>
+          <description>Body-centered longitude, positive west for planetary satellites and positive east for asteroids and comets.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Latitude</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">8</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">3</field_length>
+          <field_format>%3d</field_format>          
+          <unit>deg</unit>
+          <description>Body-centered latitude.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Radius</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">14</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">11</field_length>
+          <field_format>%11.6f</field_format>
+          <unit>km</unit>
+          <description>Shape model radius for this latitude and longitude. Since the uncertainty in the radius varies across the model, the number of decimal places in the fixed format radius does not correspond to the uncertainty.</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
