@@ -1,4 +1,5 @@
 import { SATELLITE_ELEMENTS_SATURN } from './satelliteElements.data.saturn.js'
+import { SATELLITE_ELEMENTS_SATURN_2 } from './satelliteElements.data.saturn-2.js'
 import { SATELLITE_ELEMENTS_NEPTUNE } from './satelliteElements.data.neptune.js'
 import { SATELLITE_ELEMENTS_JUPITER } from './satelliteElements.data.jupiter.js'
 import { SATELLITE_ELEMENTS_MARS } from './satelliteElements.data.mars.js'
@@ -52,6 +53,7 @@ export interface SatelliteRecord {
  */
 export const SATELLITE_ELEMENTS = {
   ...SATELLITE_ELEMENTS_SATURN,
+  ...SATELLITE_ELEMENTS_SATURN_2,
   ...SATELLITE_ELEMENTS_NEPTUNE,
   ...SATELLITE_ELEMENTS_JUPITER,
   ...SATELLITE_ELEMENTS_MARS,
