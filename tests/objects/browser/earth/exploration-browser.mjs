@@ -295,6 +295,21 @@ const assertOwner=async id=>{
   const allowed=id==='earth'?['normal','night-lights']:id==='3435910'?['normal','buenos-aires-noise']:['normal'];
   assert.deepEqual(s.lenses.map(l=>l.id),allowed);
 };
+const arrive=async id=>{
+  // Follow the visible flight to its destination, then interact immediately.
+  // A selected card alone does not prove arrival: an interrupted flight may
+  // leave that card above an unrelated ocean. Do not await imagery or tiles.
+  const startedAt=relative();
+  await page.waitForFunction(id=>{
+    const card=document.querySelector('[data-entity-card]');
+    const status=card?.querySelector('.planet-destination-status');
+    return card?.dataset.entityId===id&&card.ariaBusy==='false'&&status?.hidden&&status.textContent==='';
+  },id,{timeout:12000});
+  const arrived=await state();
+  (report.arrivals??=[]).push({id,startedAt,at:relative(),state:arrived,
+    pendingRequests:[...contextRequests.values()].filter(r=>r.end===undefined).map(r=>r.url)});
+  await assertOwner(id);
+};
 try{
   if(trace&&traceFrom==='startup')await startTrace();
   await page.goto(`${fixture.url}/earth/`,{waitUntil:'domcontentloaded'});
@@ -314,27 +329,35 @@ try{
       await look(350);await search.press('ControlOrMeta+A');await search.pressSequentially('Buenos Aires',{delay:85});
       await page.locator('[data-destination-id="3435910"]:visible').click({delay:100});
     });
-    // Watch the accepted 4.5 second flight, then interact immediately. This
-    // observes travel time and never waits for imagery or a completed tile cut.
-    await look(4500);await action('zoom-during-arrival',()=>zoom(1.2));
+    await arrive('3435910');await action('zoom-during-arrival',()=>zoom(1.2));
     await action('drag-during-arrival',()=>drag(90,-20));
     await action('noise-during-arrival',()=>lens('buenos-aires-noise'));
     await look(400);await action('visible-during-arrival',()=>lens('normal'));
     await checkpoint('arrival-interrupted');
     for(let cycle=1;cycle<=cycles;cycle++){
-      await action(`${cycle}-tokyo`,()=>select('Tokyo','1850147'));await look(600);
-      await action(`${cycle}-interrupt-with-polar-destination`,async()=>{
-        const a=(await state()).transform;await look(150);const b=(await state()).transform;
-        assert.notEqual(a,b,'Destination replacement must interrupt a moving flight');
-        await select('Longyearbyen','2729907');
-      });
-      await look(450);await action(`${cycle}-polar-zoom`,()=>zoom(1.2));
+      await action(`${cycle}-tokyo`,()=>select('Tokyo','1850147'));
+      if(cycle===1){
+        await look(600);
+        await action(`${cycle}-interrupt-with-polar-destination`,async()=>{
+          const a=(await state()).transform;await look(150);const b=(await state()).transform;
+          assert.notEqual(a,b,'Destination replacement must interrupt a moving flight');
+          await select('Longyearbyen','2729907');
+        });
+        await look(450);await action('interrupt-flight-with-pan',()=>drag(60,0));
+        await action('resume-polar-flight',()=>select('Longyearbyen','2729907'));
+      }else{
+        await arrive('1850147');await action(`${cycle}-tokyo-pan`,()=>drag(70,-15));
+        await action(`${cycle}-polar-destination`,()=>select('Longyearbyen','2729907'));
+      }
+      await arrive('2729907');await action(`${cycle}-polar-zoom`,()=>zoom(1.2));
       await action(`${cycle}-polar-drag`,()=>drag(100,40));
       await action(`${cycle}-polar-reverse`,()=>zoom(1/1.2));await assertOwner('2729907');
-      await action(`${cycle}-suva`,()=>select('Suva','2198148'));await look(500);
+      await checkpoint(`${cycle}-polar`);
+      await action(`${cycle}-suva`,()=>select('Suva','2198148'));await arrive('2198148');
       await action(`${cycle}-dateline-zoom`,()=>zoom(1.15));
       await action(`${cycle}-dateline-drag`,()=>drag(-120,-15));await assertOwner('2198148');
-      await action(`${cycle}-apia`,()=>select('Apia','4035413'));await look(500);
+      await checkpoint(`${cycle}-dateline`);
+      await action(`${cycle}-apia`,()=>select('Apia','4035413'));await arrive('4035413');
       await action(`${cycle}-history-back`,()=>page.goBack({waitUntil:'domcontentloaded'}));await assertOwner('2198148');
       await action(`${cycle}-history-forward`,()=>page.goForward({waitUntil:'domcontentloaded'}));await assertOwner('4035413');
       await checkpoint(`${cycle}-revisit`);
@@ -346,17 +369,22 @@ try{
         report.offlineFeedback=await page.locator('.planet-destination-hint').textContent();
         await checkpoint('offline');
         await action('network-restored',()=>setOffline(false));
-        await action('retry-place',()=>select('Ushuaia','3833367'));await assertOwner('3833367');
+        await action('retry-place',()=>select('Ushuaia','3833367'));await arrive('3833367');
         report.recoveredEntity=(await state()).entity;
         await action('zoom-after-recovery',()=>zoom(1.1));
       }
-      await action(`${cycle}-return-city`,()=>select('Buenos Aires','3435910'));await look(4500);
+      await action(`${cycle}-return-city`,()=>select('Buenos Aires','3435910'));await arrive('3435910');
       await action(`${cycle}-city-revisit-zoom`,()=>zoom(1.1));
       await action(`${cycle}-city-revisit-pan`,()=>drag(80,-20));
       await action(`${cycle}-noise-revisit`,()=>lens('buenos-aires-noise'));await look(350);
       await action(`${cycle}-province`,()=>page.locator('[data-entity-parent="admin1:3433955"]').click());await assertOwner('admin1:3433955');
+      if(cycle>1)await arrive('admin1:3433955');
       await action(`${cycle}-country`,()=>page.locator('[data-entity-parent="country:AR"]').click());await assertOwner('country:AR');
+      if(cycle>1)await arrive('country:AR');
       await action(`${cycle}-earth`,()=>page.locator('[data-entity-parent="earth"]').click());await assertOwner('earth');
+      // Root reset currently has no visible flight status; its accepted
+      // duration is 4.5 seconds. The first cycle keeps the rapid-change case.
+      if(cycle>1)await look(4500);
       await action(`${cycle}-night-lights`,()=>lens('night-lights'));await look(600);
       await action(`${cycle}-visible-global`,()=>lens('normal'));await look(300);
     }
