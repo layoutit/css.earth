@@ -39,6 +39,7 @@ const browser = await chromium.launch({
   channel: process.env.PLAYWRIGHT_CHANNEL ?? "chrome",
 });
 const reports = [];
+const surfaceHitPlans = new Map();
 try {
   for (const planet of selected) {
     const profile = await loadPlanetBrowserProfile(planet);
@@ -617,7 +618,6 @@ async function proveDesktop(browser, planet, profile) {
   }
 }
 
-const surfaceHitPlans = new Map();
 async function surfaceFlyCoordinates(page) {
   const bounds = await page.locator(".polycss-camera").boundingBox();
   assert.ok(bounds, "retained camera bounds must be measurable");
