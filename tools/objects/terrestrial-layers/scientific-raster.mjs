@@ -1,3 +1,4 @@
+import { loadScalarMap } from './pds-scalar-map.mjs';
 import { resolve } from 'node:path';
 import { fromFile } from 'geotiff';
 import {loadIsis3Raster} from './isis3-raster.mjs';
@@ -71,6 +72,7 @@ export function scienceMapPoint(longitude, latitude, grid) {
 }
 
 export async function loadScienceSurface(root, lens, sourceMesh) {
+  if (lens.format === 'pds3-scalar-map') return loadScalarMap(root, lens, sourceMesh);
   if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {
     const loader = lens.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
     const raster = await loader(resolve(root, lens.path), lens.grid, lens.sampleGrid);

@@ -1571,7 +1571,8 @@ async function enableMotion(page, id) {
   await page.waitForFunction(() => window.__cssEarth?.lifecycle === "mounted");
   assert.equal(await motion.isChecked(), true,
     `${id}: motion setting must resume the scene`);
-  await page.locator(".explorer-rail-explore").click();
+  await page.keyboard.press("Escape");
+  assert.equal(await panel.isVisible(), false, `${id}: Escape must close settings`);
 }
 
 async function sceneState(page, profile) {
