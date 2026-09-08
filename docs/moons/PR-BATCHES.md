@@ -4,16 +4,16 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**Start with B1: the 26-moon expansion.** Work can proceed incrementally within its branch; the reviewable PR covers the complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. Counts below are planning targets until the selected sources and implementations qualify.
+**B1 is merged; B2 is the next planned batch.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B2–B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
-| [B1 — Expand the moon roster by 26](#b1) | 26 new standalone moons; total roster 69 → 95 if the full batch qualifies. | 26 bodies |
+| [B1 — Expand the moon roster by 26](#b1) | 26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461. | 26 bodies |
 | [B2 — Add scientific surfaces and terrain to 15 moons](#b2) | 15 existing worlds gain a substantive scientific layer or source-backed geometry improvement. | 15 bodies |
 | [B3 — Complete a spacecraft-imagery cohort](#b3) | Two prospective new imaged moons and eight existing observation/registration improvements. | 10 bodies |
 | [B4 — Add measured light curves and spectra across nine existing moons](#b4) | A complete prepared observation-chart capability used by nine existing moon packages. | 9 bodies |
 
-B1 includes **22 additional benchmark moons**: 18 Saturn and four Uranus. If all qualify, benchmark coverage becomes **90/461 (19.5%)**, while the four additional companions bring the total standalone moon count to **95**. B3 could subsequently add two further asteroid moons. The 461-body denominator is unchanged.
+B1 added **22 benchmark moons**: 18 Saturn and four Uranus. Merged benchmark coverage is **90/461 (19.5%)**; four additional companions bring the total standalone moon count to **95**. B3 could subsequently add two further asteroid moons. The 461-body denominator is unchanged.
 
 These four batches account for **all 32 identified existing-scene improvements**, all **26 physical-model candidates**, and **two spacecraft-imaged observation candidates**. The other 39 observation candidates retain their source-research queue; 348 orbit-context rows and 37 retain-existing rows remain accounted for without a new implementation commitment.
 
@@ -21,11 +21,11 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 ## B1 — Expand the moon roster by 26
 
-**State:** implementing · **Owner:** Moons
+**State:** [merged PR #55](https://github.com/layoutit/cssEarth/pull/55) · **Owner:** Moons
 
 **Bodies:** Paaliaq, Tarvos, Ijiraq, Suttungr, Mundilfari, Skathi, Erriapus, Thrymr, Bebhionn, Bergelmir, Bestla, Fornjot, Hati, Hyrrokkin, Loge, Skoll, Greip, Tarqeq, Caliban, Sycorax, Prospero, Setebos, Hiʻiaka, Squannit, Romulus, Menoetius.
 
-**User-visible outcome.** 26 new standalone moons; total roster 69 → 95 if the full batch qualifies.
+**User-visible outcome.** 26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461.
 
 **Complete delivery.** A complete source-backed body package for every selected target: physical-model interpretation, parent-relative orbit, orientation limits, preparation, retained rendering, navigation, content, thumbnails, source restoration and qualification evidence.
 
@@ -89,7 +89,7 @@ Use subagents when independent work reduces elapsed time. For B1, divide body-ow
 
 Each batch retains the generic object contract, one mounted scene and preparation-owned static work. Required source and runtime closure, package/router checks, `pnpm acquire:planets -- --verify-only`, `pnpm test`, `pnpm build`, `pnpm test:browser`, and real Chrome DPR 1/2 evidence apply at the exact PR head. Report existing aggregate failures separately from regressions and from unproven scientific interpretation.
 
-Source acquisition/preparation must follow workstation disk and process guardrails. Execution requires a suitable checkout that preserves unrelated work; the original planning pass changed only moon documents. B1 is now implementing in the existing Moons worktree; see [qualification status](B1-EXPANSION.md).
+Source acquisition/preparation must follow workstation disk and process guardrails. Execution requires a suitable checkout that preserves unrelated work; the original planning pass changed only moon documents. B1 merged through [PR #55](https://github.com/layoutit/cssEarth/pull/55), using the existing Moons worktree; see [qualification status](B1-EXPANSION.md).
 
 ## Planning validation
 

@@ -1,46 +1,35 @@
 # Moon coverage tracker
 
-**Owner: Moons · Inventory and source review checked 2026-09-08 · Merged main: [`554c9811`](https://github.com/layoutit/cssEarth/commit/554c9811314e363f1d68287586864d8540213145)**
+**Owner: Moons · Inventory and source review checked 2026-09-08 · Source-review baseline: [`554c9811`](https://github.com/layoutit/cssEarth/commit/554c9811314e363f1d68287586864d8540213145)**
 
 This is the working coverage document. Update its rows as work is selected, implemented, and qualified. The [JSON snapshot](moon-coverage-2026-09-08.json) preserves the initial machine-readable inventory and source receipt; it is historical evidence, not a second live tracker.
 
-## Merged baseline at source review
+## Merged coverage after B1
 
-**69 standalone moon scenes across 178 registered objects.** Of these, **68 / 461 (14.8%)** cover satellites of planets and Pluto in the JPL benchmark; **Dimorphos** is an additional asteroid moon. **393** benchmark moons have no standalone package.
+**95 standalone moon scenes across 253 registered objects**, following [PR #55](https://github.com/layoutit/cssEarth/pull/55), merged at [`55bda12f`](https://github.com/layoutit/cssEarth/commit/55bda12f012e77e2206d41661a886c84fb01362d). **90 / 461 (19.5%)** cover the fixed planet-and-Pluto benchmark; **371** benchmark moons remain without a scene. Five other companions are outside that benchmark.
 
-**42 scenes offer an imagery lens; 27 have shape information without mapped imagery.** That second group includes 26 single Shape model scenes and Dimorphos's shape/elevation views. A photographed moon can still lack qualified image-to-mesh registration in cssEarth.
+**42 scenes offer an imagery lens; 53 have shape information without mapped imagery.** B1 adds source-supported shape models and no mapped-imagery claims. Original source-review counts (69 scenes / 178 objects, 68 benchmark moons) remain in the frozen inventory and review receipts.
 
 | System | Scene present | Known in benchmark | Coverage | With imagery lens | Shape without mapped imagery | Missing scenes |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Earth | 1 | 1 | 100.0% | 1 | 0 | 0 |
 | Mars | 2 | 2 | 100.0% | 2 | 0 | 0 |
 | Jupiter | 9 | 115 | 7.8% | 7 | 2 | 106 |
-| Saturn | 28 | 293 | 9.6% | 22 | 6 | 265 |
-| Uranus | 15 | 29 | 51.7% | 6 | 9 | 14 |
+| Saturn | 46 | 293 | 15.7% | 22 | 24 | 247 |
+| Uranus | 19 | 29 | 65.5% | 6 | 13 | 10 |
 | Neptune | 8 | 16 | 50.0% | 3 | 5 | 8 |
 | Pluto | 5 | 5 | 100.0% | 1 | 4 | 0 |
-| **Benchmark total** | **68** | **461** | **14.8%** | **42** | **26** | **393** |
-| Didymos, outside benchmark | 1 | — | — | 0 | 1 | — |
+| **Benchmark total** | **90** | **461** | **19.5%** | **42** | **48** | **371** |
+| Other companions, outside benchmark | 5 | — | — | 0 | 5 | — |
 
-The four Galilean moons, Uranus's five major moons, Earth's Moon, both Martian moons, and all five Plutonian moons are present. Major remaining breadth gaps are the outer irregular moons and companions of other dwarf planets and asteroids. Existing bodies also have substantial depth opportunities.
+B1 adds 18 Saturn irregulars, four Uranus irregulars, Hiʻiaka, Squannit, Romulus and Menoetius. The five companions outside the benchmark include the previously present Dimorphos. The shared explorer, 49 incoming asteroids and PR54's 67P science remain present.
 
+See the [batch report](B1-EXPANSION.md) for source, numerical, visual and runtime evidence. GitHub's shared-universe check passed before merge. Final local checks against the identical merged file tree pass: 3,176 tests, production build and assembly, 506 browser cases and two navigation sequences. Aggregate source restoration retains the documented baseline gaps; all new B1 source pins verify. The frozen source review remains unchanged.
 
-## B1 implementation in progress
-
-The `feat/moons-26-expansion` branch adds all 26 selected body packages and routes:
-18 Saturn irregulars, four Uranus irregulars and four asteroid/dwarf-planet
-companions. The integrated branch also preserves main’s 49 new asteroids and updated explorer. Its registry contains **95 moon scenes / 253 objects**. The planned
-benchmark coverage becomes **90 / 461 (19.5%)**, leaving **371** benchmark moons;
-five asteroid/dwarf-planet companions are outside that benchmark. These are branch
-implementation counts, not a claim that qualification or merging is complete.
-
-See [B1 implementation and qualification](B1-EXPANSION.md) for preparation,
-independent orbit checks, browser evidence and delivery status. The frozen
-review and its original inventory remain unchanged.
 
 ## Source review completed
 
-**484 / 484 document rows reviewed; 0 remain unreviewed.** This includes all 69 existing scenes, all 393 missing benchmark moons, and the 22 selected extra companions. Each row links to its dated evidence, supported representation and concrete limits. The scene counts above record the merged baseline at review time.
+**484 / 484 document rows reviewed; 0 remain unreviewed.** This includes all 69 existing scenes, all 393 missing benchmark moons, and the 22 selected extra companions. Each row links to its dated evidence, supported representation and concrete limits. The frozen inventory records the merged baseline at review time; the coverage table above tracks subsequent merged delivery.
 
 The review used three parallel specialist lanes plus the Moons owner, followed by cross-checks of coverage, source membership and the strongest recommendations. See [all body reviews](review-2026-09-08/BODY-REVIEWS.md), [review validation](review-2026-09-08/VALIDATION.md), and [machine-readable summary](review-2026-09-08/review-summary.json).
 
@@ -70,16 +59,16 @@ The user’s delivery direction is **substantial PRs with complete outcomes acro
 
 | Batch | Planned outcome | Bodies |
 | --- | --- | ---: |
-| [B1 — Expand the moon roster by 26](PR-BATCHES.md#b1) | 26 new standalone moons; total roster 69 → 95 if the full batch qualifies. | 26 |
+| [B1 — Expand the moon roster by 26](PR-BATCHES.md#b1) | 26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461. | 26 |
 | [B2 — Add scientific surfaces and terrain to 15 moons](PR-BATCHES.md#b2) | 15 existing worlds gain a substantive scientific layer or source-backed geometry improvement. | 15 |
 | [B3 — Complete a spacecraft-imagery cohort](PR-BATCHES.md#b3) | Two prospective new imaged moons and eight existing observation/registration improvements. | 10 |
 | [B4 — Add measured light curves and spectra across nine existing moons](PR-BATCHES.md#b4) | A complete prepared observation-chart capability used by nine existing moon packages. | 9 |
 
-**First: B1, the 26-moon expansion.** The plan covers every physical-model candidate and all 32 existing improvements across the four batches. Each PR includes source closure, preparation, usable content/assets and full qualification for its cohort. Remaining source blockers and possible scope changes are explicit in the plan.
+**B1 is merged; the next planned batch is B2.** The plan covers every physical-model candidate and all 32 existing improvements across the four batches. Each PR includes source closure, preparation, usable content/assets and full qualification for its cohort. Remaining source blockers and possible scope changes are explicit in the plan.
 
 ## Complete planet-and-Pluto inventory
 
-Every benchmark body appears once below. Follow **review** for its full geometry, imagery, orbit, source links and search record. Current lens names describe the frozen merged implementation. Effort is a relative intake/implementation judgment, not a time estimate.
+Every benchmark body appears once below. Follow **review** for its full geometry, imagery, orbit, source links and search record. Lens names on Present rows describe the frozen merged baseline; merged B1 rows identify the new scene. Effort is a relative intake/implementation judgment, not a time estimate.
 
 <details>
 <summary><strong>Earth: 1 / 1 scenes; 1 / 1 source reviews</strong></summary>
@@ -247,39 +236,39 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 | Pandora · [review](review-2026-09-08/BODY-REVIEWS.md#body-135) | Present · Monochrome / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Prepare a disk-integrated spectrum chart with retained uncertainties and validated wavelength units. | medium | Moons · [planned B4](PR-BATCHES.md#b4) |
 | Pan · [review](review-2026-09-08/BODY-REVIEWS.md#body-136) | Present · Monochrome / Elevation | retain-existing | Maintain existing source-described lenses and geometry; preserve the documented observational/model limits. | none | — |
 | Ymir · [review](review-2026-09-08/BODY-REVIEWS.md#body-137) | Present · Shape model | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Prepare a measured lightcurve chart with phase/sequence labels; preserve source model assumptions. | medium | Moons · [planned B4](PR-BATCHES.md#b4) |
-| Paaliaq · [review](review-2026-09-08/BODY-REVIEWS.md#body-138) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Tarvos · [review](review-2026-09-08/BODY-REVIEWS.md#body-139) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Ijiraq · [review](review-2026-09-08/BODY-REVIEWS.md#body-140) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Suttungr · [review](review-2026-09-08/BODY-REVIEWS.md#body-141) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Paaliaq · [review](review-2026-09-08/BODY-REVIEWS.md#body-138) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Tarvos · [review](review-2026-09-08/BODY-REVIEWS.md#body-139) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Ijiraq · [review](review-2026-09-08/BODY-REVIEWS.md#body-140) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Suttungr · [review](review-2026-09-08/BODY-REVIEWS.md#body-141) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Kiviuq · [review](review-2026-09-08/BODY-REVIEWS.md#body-142) | Present · Shape model | retain-existing | Maintain existing source-described lenses and geometry; preserve the documented observational/model limits. | none | — |
-| Mundilfari · [review](review-2026-09-08/BODY-REVIEWS.md#body-143) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Mundilfari · [review](review-2026-09-08/BODY-REVIEWS.md#body-143) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Albiorix · [review](review-2026-09-08/BODY-REVIEWS.md#body-144) | Present · Shape model | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Resolve MAST program 3716 data and publish an uncertainty-aware spectrum chart after numeric closure. | research | Moons · [planned B4](PR-BATCHES.md#b4) |
-| Skathi · [review](review-2026-09-08/BODY-REVIEWS.md#body-145) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Erriapus · [review](review-2026-09-08/BODY-REVIEWS.md#body-146) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Skathi · [review](review-2026-09-08/BODY-REVIEWS.md#body-145) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Erriapus · [review](review-2026-09-08/BODY-REVIEWS.md#body-146) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Siarnaq · [review](review-2026-09-08/BODY-REVIEWS.md#body-147) | Present · Shape model | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Obtain program 3716 spectrum and prepare a measured chart; replace authored model only if a native release becomes accessible. | research | Moons · [planned B4](PR-BATCHES.md#b4) |
-| Thrymr · [review](review-2026-09-08/BODY-REVIEWS.md#body-148) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Thrymr · [review](review-2026-09-08/BODY-REVIEWS.md#body-148) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Narvi · [review](review-2026-09-08/BODY-REVIEWS.md#body-149) | Not started | observation-candidate | Measured rotation/lightcurve explanation or chart after numeric release closure; no body-shape scene justified by the checked table. | research | — |
 | Methone · [review](review-2026-09-08/BODY-REVIEWS.md#body-150) | Present · Monochrome | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Review the spectrum text columns and normalization in the author notebook, then prepare a Cassini spectrum chart. | medium | Moons · [planned B4](PR-BATCHES.md#b4) |
 | Pallene · [review](review-2026-09-08/BODY-REVIEWS.md#body-151) | Present · Monochrome | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Prepare a measured spectrum chart retaining error/noisy samples and exact dataset provenance. | medium | Moons · [planned B4](PR-BATCHES.md#b4) |
 | Polydeuces · [review](review-2026-09-08/BODY-REVIEWS.md#body-152) | Present · Monochrome | retain-existing | Maintain existing source-described lenses and geometry; preserve the documented observational/model limits. | none | — |
 | Daphnis · [review](review-2026-09-08/BODY-REVIEWS.md#body-153) | Present · Monochrome / Elevation | retain-existing | Maintain existing source-described lenses and geometry; preserve the documented observational/model limits. | none | — |
 | Aegir · [review](review-2026-09-08/BODY-REVIEWS.md#body-154) | Not started | orbit-context-only | Named catalog entry and source-qualified orbit context; an observation marker may be symbolic and must not imply physical size or invented surface. | small | — |
-| Bebhionn · [review](review-2026-09-08/BODY-REVIEWS.md#body-155) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Bergelmir · [review](review-2026-09-08/BODY-REVIEWS.md#body-156) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Bestla · [review](review-2026-09-08/BODY-REVIEWS.md#body-157) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Bebhionn · [review](review-2026-09-08/BODY-REVIEWS.md#body-155) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Bergelmir · [review](review-2026-09-08/BODY-REVIEWS.md#body-156) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Bestla · [review](review-2026-09-08/BODY-REVIEWS.md#body-157) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Farbauti · [review](review-2026-09-08/BODY-REVIEWS.md#body-158) | Not started | orbit-context-only | Named catalog entry and source-qualified orbit context; an observation marker may be symbolic and must not imply physical size or invented surface. | small | — |
 | Fenrir · [review](review-2026-09-08/BODY-REVIEWS.md#body-159) | Not started | orbit-context-only | Named catalog entry and source-qualified orbit context; an observation marker may be symbolic and must not imply physical size or invented surface. | small | — |
-| Fornjot · [review](review-2026-09-08/BODY-REVIEWS.md#body-160) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Hati · [review](review-2026-09-08/BODY-REVIEWS.md#body-161) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Hyrrokkin · [review](review-2026-09-08/BODY-REVIEWS.md#body-162) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Fornjot · [review](review-2026-09-08/BODY-REVIEWS.md#body-160) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Hati · [review](review-2026-09-08/BODY-REVIEWS.md#body-161) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Hyrrokkin · [review](review-2026-09-08/BODY-REVIEWS.md#body-162) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Kari · [review](review-2026-09-08/BODY-REVIEWS.md#body-163) | Not started | observation-candidate | Measured rotation/lightcurve explanation or chart after numeric release closure; no body-shape scene justified by the checked table. | research | — |
-| Loge · [review](review-2026-09-08/BODY-REVIEWS.md#body-164) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Skoll · [review](review-2026-09-08/BODY-REVIEWS.md#body-165) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Loge · [review](review-2026-09-08/BODY-REVIEWS.md#body-164) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Skoll · [review](review-2026-09-08/BODY-REVIEWS.md#body-165) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Surtur · [review](review-2026-09-08/BODY-REVIEWS.md#body-166) | Not started | orbit-context-only | Named catalog entry and source-qualified orbit context; an observation marker may be symbolic and must not imply physical size or invented surface. | small | — |
 | Anthe · [review](review-2026-09-08/BODY-REVIEWS.md#body-167) | Present · Shape model | retain-existing | Maintain existing source-described lenses and geometry; preserve the documented observational/model limits. | none | — |
 | Jarnsaxa · [review](review-2026-09-08/BODY-REVIEWS.md#body-168) | Not started | orbit-context-only | Named catalog entry and source-qualified orbit context; an observation marker may be symbolic and must not imply physical size or invented surface. | small | — |
-| Greip · [review](review-2026-09-08/BODY-REVIEWS.md#body-169) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Tarqeq · [review](review-2026-09-08/BODY-REVIEWS.md#body-170) | Implementing | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Greip · [review](review-2026-09-08/BODY-REVIEWS.md#body-169) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Tarqeq · [review](review-2026-09-08/BODY-REVIEWS.md#body-170) | Present · Shape model | model-candidate | Explicitly labeled minimum-elongation model with assumed polar dimension and uncertain photometric scale; measured lightcurve chart preferred where numeric data can be pinned. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Aegaeon · [review](review-2026-09-08/BODY-REVIEWS.md#body-171) | Present · Shape model | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Resolve published versus OPUS longitude conventions and native camera/disc registration for the best existing candidates. | research | Moons · [planned B3](PR-BATCHES.md#b3) |
 | Gridr · [review](review-2026-09-08/BODY-REVIEWS.md#body-172) | Not started | orbit-context-only | Named catalog entry and source-qualified orbit context; an observation marker may be symbolic and must not imply physical size or invented surface. | small | — |
 | Angrboda · [review](review-2026-09-08/BODY-REVIEWS.md#body-173) | Not started | orbit-context-only | Named catalog entry and source-qualified orbit context; an observation marker may be symbolic and must not imply physical size or invented surface. | small | — |
@@ -544,10 +533,10 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 | Rosalind · [review](review-2026-09-08/BODY-REVIEWS.md#body-424) | Present · Shape model | retain-existing | Retain current Shape model lens with source-specific limitations. | none | — |
 | Belinda · [review](review-2026-09-08/BODY-REVIEWS.md#body-425) | Present · Shape model | retain-existing | Retain current Shape model lens with source-specific limitations. | none | — |
 | Puck · [review](review-2026-09-08/BODY-REVIEWS.md#body-426) | Present · Monochrome | retain-existing | Retain current Monochrome lens with source-specific limitations. | none | — |
-| Caliban · [review](review-2026-09-08/BODY-REVIEWS.md#body-427) | Implementing | model-candidate | Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Sycorax · [review](review-2026-09-08/BODY-REVIEWS.md#body-428) | Implementing | model-candidate | Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Prospero · [review](review-2026-09-08/BODY-REVIEWS.md#body-429) | Implementing | model-candidate | Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
-| Setebos · [review](review-2026-09-08/BODY-REVIEWS.md#body-430) | Implementing | model-candidate | Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Caliban · [review](review-2026-09-08/BODY-REVIEWS.md#body-427) | Present · Shape model | model-candidate | Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Sycorax · [review](review-2026-09-08/BODY-REVIEWS.md#body-428) | Present · Shape model | model-candidate | Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Prospero · [review](review-2026-09-08/BODY-REVIEWS.md#body-429) | Present · Shape model | model-candidate | Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
+| Setebos · [review](review-2026-09-08/BODY-REVIEWS.md#body-430) | Present · Shape model | model-candidate | Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Stephano · [review](review-2026-09-08/BODY-REVIEWS.md#body-431) | Not started | observation-candidate | Source photometry/color context with limits, without a fabricated surface. | research | — |
 | Trinculo · [review](review-2026-09-08/BODY-REVIEWS.md#body-432) | Not started | observation-candidate | Source photometry/color context with limits, without a fabricated surface. | research | — |
 | Francisco · [review](review-2026-09-08/BODY-REVIEWS.md#body-433) | Not started | orbit-context-only | Orbit/discovery record with assumed-size caveat. | small | — |
@@ -610,7 +599,7 @@ The [Wikipedia template](https://en.wikipedia.org/wiki/Template:Solar_System_moo
 
 | Moon / parent | Scene / current lenses | Review result | Supported next work | Effort | Owner / task / PR |
 | --- | --- | --- | --- | --- | --- |
-| Hiʻiaka / Haumea · [review](review-2026-09-08/BODY-REVIEWS.md#body-463) | Implementing | model-candidate | Untextured explicitly inferred triaxial model with uncertainty bounds. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Hiʻiaka / Haumea · [review](review-2026-09-08/BODY-REVIEWS.md#body-463) | Present · Shape model | model-candidate | Untextured explicitly inferred triaxial model with uncertainty bounds. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Namaka / Haumea · [review](review-2026-09-08/BODY-REVIEWS.md#body-464) | Not started | orbit-context-only | Mutual-orbit and measurement-limit context. | small | — |
 | Dysnomia / Eris · [review](review-2026-09-08/BODY-REVIEWS.md#body-465) | Not started | observation-candidate | Thermal-size/mass-limit and orbital observations. | research | — |
 | S/2015 (136472) 1 (MK2) / Makemake · [review](review-2026-09-08/BODY-REVIEWS.md#body-466) | Not started | orbit-context-only | Discovery and preliminary-orbit context. | small | — |
@@ -621,17 +610,17 @@ The [Wikipedia template](https://en.wikipedia.org/wiki/Template:Solar_System_moo
 | Ilmarë / Varda · [review](review-2026-09-08/BODY-REVIEWS.md#body-471) | Not started | orbit-context-only | Orbit, color and size-assumption context. | small | — |
 | Dactyl / Ida · [review](review-2026-09-08/BODY-REVIEWS.md#body-472) | Not started | observation-candidate | Partial observation-backed surface on qualified geometry, or source image view with explicit pose limits. | research | Moons · [planned B3](PR-BATCHES.md#b3) |
 | Selam / Dinkinesh · [review](review-2026-09-08/BODY-REVIEWS.md#body-473) | Not started | observation-candidate | Observation-backed contact-binary study; partial surface only after geometry/registration qualification. | research | Moons · [planned B3](PR-BATCHES.md#b3) |
-| Squannit / Moshup · [review](review-2026-09-08/BODY-REVIEWS.md#body-474) | Implementing | model-candidate | Native source mesh with neutral missing-imagery treatment and qualified spin/orbit. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Squannit / Moshup · [review](review-2026-09-08/BODY-REVIEWS.md#body-474) | Present · Shape model | model-candidate | Native source mesh with neutral missing-imagery treatment and qualified spin/orbit. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Linus / Kalliope · [review](review-2026-09-08/BODY-REVIEWS.md#body-475) | Not started | observation-candidate | Projected-limb/photometric observations and size uncertainty. | research | — |
 | Peneius / Daphne · [review](review-2026-09-08/BODY-REVIEWS.md#body-476) | Not started | orbit-context-only | Mutual-orbit and discovery measurements. | small | — |
 | Petit-Prince / Eugenia · [review](review-2026-09-08/BODY-REVIEWS.md#body-477) | Not started | orbit-context-only | Outer-moon orbit context with brightness-based size caveat. | small | — |
-| Romulus / Sylvia · [review](review-2026-09-08/BODY-REVIEWS.md#body-478) | Implementing | model-candidate | Measured projected silhouette, or explicitly assumption-dependent ellipsoid family. | research | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Romulus / Sylvia · [review](review-2026-09-08/BODY-REVIEWS.md#body-478) | Present · Shape model | model-candidate | Measured projected silhouette, or explicitly assumption-dependent ellipsoid family. | research | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 | Remus / Sylvia · [review](review-2026-09-08/BODY-REVIEWS.md#body-479) | Not started | observation-candidate | Occultation and orbital measurement context pending original chord inspection. | research | — |
 | Alexhelios / Kleopatra · [review](review-2026-09-08/BODY-REVIEWS.md#body-480) | Not started | orbit-context-only | Moon-specific orbit and measurement context. | small | — |
 | Cleoselene / Kleopatra · [review](review-2026-09-08/BODY-REVIEWS.md#body-481) | Not started | orbit-context-only | Moon-specific orbit and measurement context. | small | — |
 | Queta / Eurybates · [review](review-2026-09-08/BODY-REVIEWS.md#body-482) | Not started | orbit-context-only | Discovery and mutual-orbit record. | small | — |
 | Skamandrios / Hektor · [review](review-2026-09-08/BODY-REVIEWS.md#body-483) | Not started | orbit-context-only | Mutual-orbit context and size-assumption record. | small | — |
-| Menoetius / Patroclus · [review](review-2026-09-08/BODY-REVIEWS.md#body-484) | Implementing | model-candidate | Explicit occultation/light-curve ellipsoid model with inference and uncertainty. | medium | Moons · [implementing B1](PR-BATCHES.md#b1) |
+| Menoetius / Patroclus · [review](review-2026-09-08/BODY-REVIEWS.md#body-484) | Present · Shape model | model-candidate | Explicit occultation/light-curve ellipsoid model with inference and uncertainty. | medium | Moons · [PR #55](https://github.com/layoutit/cssEarth/pull/55) |
 
 ## Depth and qualification work across existing scenes
 
@@ -662,3 +651,5 @@ The [Wikipedia template](https://en.wikipedia.org/wiki/Template:Solar_System_moo
 - Existing-body imagery and shape labels were read from the checked-in package content. **No new 69-body browser/readiness sweep was performed for this inventory.** Production deployment was not assessed.
 - **2026-09-08 source review:** all 484 frozen rows reconciled through four disjoint research lanes. Full body evidence links above contain checked sources, limits and next actions. The historical inventory JSON was preserved. No new PR, code changes, commit, push, bulk acquisition or release qualification was part of this review.
 - **2026-09-08 PR planning:** Recorded the user’s preference for substantial batches, planned B1–B4 and linked all 60 assigned body rows. The dated source-review evidence and its original validation receipts remain unchanged; their tracker hash describes the review-completion version, before this mutable planning update. No implementation or PR started.
+
+- **2026-09-08 B1 delivery:** Merged [PR #55](https://github.com/layoutit/cssEarth/pull/55) with all 26 packages, 95 merged moon scenes, six representative views and source/runtime evidence. Frozen source-review rows and original inventory remain unchanged; final aggregate gates are tracked in the batch report.

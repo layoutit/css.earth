@@ -35,7 +35,7 @@
         "Romulus",
         "Menoetius"
       ],
-      "outcome": "26 new standalone moons; total roster 69 → 95 if the full batch qualifies.",
+      "outcome": "26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461.",
       "scope": "18 Saturn irregulars, four Uranus irregulars, and four asteroid/dwarf-planet companions.",
       "delivery": "A complete source-backed body package for every selected target: physical-model interpretation, parent-relative orbit, orientation limits, preparation, retained rendering, navigation, content, thumbnails, source restoration and qualification evidence.",
       "closure": "Resolve actual source identities, scale, axes, frame, orbit window and any selected ancillary-file terms for all 26 before expensive preparation. Use the reviewed mesh or explicitly observation-constrained approximation. Published minimum elongation, assumed polar dimension and tentative spin must remain visible; this batch does not promise 26 measured terrain surfaces.",
@@ -68,8 +68,12 @@
         "Sylvia|Romulus",
         "Patroclus|Menoetius"
       ],
-      "state": "implementing",
-      "owner": "Moons"
+      "state": "merged",
+      "owner": "Moons",
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/55",
+      "draft": false,
+      "mergedAt": "2026-09-08T23:03:17Z",
+      "mergeCommit": "55bda12f012e77e2206d41661a886c84fb01362d"
     },
     {
       "id": "B2",
