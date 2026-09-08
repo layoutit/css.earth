@@ -388,6 +388,13 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let backgroundExclusions: readonly LabelScreenRect[] = [];
   let destroyed = false;
   let selectedId = plan.focus.id;
+  let selectedEntry = bodies[0]!;
+  const anchorOnly = [bodies[0]!];
+  let systemRetired = false;
+  let depthOrientation: readonly number[] | null = null;
+  let depthSelection: string | null = null;
+  let depthOrder = bodies;
+  let pickRanks = new Map<(typeof bodies)[number], number>();
   let overview = false;
   let navigationIndicatorsVisible = true;
   const suspendedOpacity = new Map<HTMLElement, string>();
@@ -409,6 +416,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     setNavigationIndicatorsVisible(visible: boolean) {
       if (destroyed || visible === navigationIndicatorsVisible) return;
       navigationIndicatorsVisible = visible;
+      systemRetired = false;
       if (!visible) {
         pickTargets = []; picking.publish(root, pickTargets);
         for (const entry of bodies) {
@@ -457,8 +465,10 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       })));
     },
     selectObject(id: string) {
-      if (!bodies.some(entry => entry.body.id === id)) throw new TypeError('Selected context body is unavailable.');
+      const entry = bodies.find(entry => entry.body.id === id);
+      if (!entry) throw new TypeError('Selected context body is unavailable.');
       selectedId = id;
+      selectedEntry = entry;
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport) {
       if (destroyed) return;
@@ -468,14 +478,39 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       latest = { world, viewport };
       const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
       const opacity = 1 - logarithmicFade(distanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+      // Publish the first zero-opacity frame normally to retire picking and
+      // start existing label fades. Later frames need only the anchor locator;
+      // its siblings keep their prepared DOM and finish their owned fades.
+      const publishingBodies = opacity === 0 && systemRetired ? anchorOnly : bodies;
+      systemRetired = opacity === 0;
       // Cache the retained UI text bounds before any projection writes.
-      for (const entry of bodies) if (navigationIndicatorsVisible && entry.labelSize.width === 0) {
+      for (const entry of publishingBodies) if (navigationIndicatorsVisible && entry.labelSize.width === 0) {
         const bounds = entry.label.getBoundingClientRect();
         entry.labelSize = { width: Math.ceil(bounds.width), height: Math.ceil(bounds.height) };
       }
       labels.reset();
       indicators.reset();
       const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+      // Camera translation adds the same depth offset to every prepared body.
+      // Only orientation changes their order; selection changes where the
+      // retained detail layers (0..3) sit within that order.
+      if (!depthOrientation || depthOrientation.some((value, axis) => value !== world.pose.orientationXyzw[axis])) {
+        depthOrientation = [...world.pose.orientationXyzw];
+        const depth = (entry: (typeof bodies)[number]) => -(
+          rotation[6]! * entry.body.positionM[0] + rotation[7]! * entry.body.positionM[1] + rotation[8]! * entry.body.positionM[2]);
+        depthOrder = [...bodies].sort((a, b) => depth(b) - depth(a));
+        pickRanks = new Map(depthOrder.map((entry, index) => [entry, index * 4]));
+        depthSelection = null;
+      }
+      if (depthSelection !== selectedId) {
+        depthSelection = selectedId;
+        const selectedIndex = depthOrder.indexOf(selectedEntry);
+        for (const [index, entry] of depthOrder.entries()) {
+          const relativeDepth = index - selectedIndex;
+          const zIndex = String(relativeDepth > 0 ? relativeDepth + 3 : relativeDepth);
+          if (entry.group.style.zIndex !== zIndex) entry.group.style.zIndex = zIndex;
+        }
+      }
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
       const [ox, oy] = viewport.principalOffsetPixels;
@@ -486,7 +521,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const height = viewport.heightPixels ?? host.clientHeight;
       const project = (eye: readonly number[]): readonly number[] => [ox + focal * eye[0] / -eye[2], oy + focal * eye[1] / -eye[2]];
       const focusEye = toEye(plan.focus.positionM);
-      const selected = bodies.find(entry => entry.body.id === selectedId)!.body;
+      const selected = selectedEntry.body;
       const selectedEye = toEye(selected.positionM);
       const focusMayOcclude = createSphereChordTest(focusEye, plan.focus.radiusM, project);
       const selectedMayOcclude = selected.id === plan.focus.id ? focusMayOcclude
@@ -494,16 +529,17 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const hidden = (eye: readonly number[], id?: string) =>
         (id !== plan.focus.id && rayHitsSphereBefore(eye, focusEye, plan.focus.radiusM)) ||
         (id !== selected.id && rayHitsSphereBefore(eye, selectedEye, selected.radiusM));
-      const near = Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...toEye(entry.body.positionM)))) * 0.01);
       const focusDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, focusDiameter);
       const orbitOpacity = orbitLineOpacity(plan.camera.presentation.orbitLineFade, focusDiameter / height);
+      const near = navigationIndicatorsVisible && opacity > 0 && orbitOpacity > 0
+        ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...toEye(entry.body.positionM)))) * 0.01) : 1;
       let anchorLineWidth = 1;
       // Project first, resolve shared body visibility, then place labels and publish once.
       // Marker decluttering suppresses body proxies, not independently resolved orbit paths.
       const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; depth: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; hovered: boolean; inFrame: boolean; parentDiameter: number; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
-      for (const entry of bodies) {
+      for (const entry of publishingBodies) {
         const { body, marker, indicator, label } = entry;
         const eye = toEye(body.positionM), depth = -eye[2];
         const parentEye = entry.parent ? toEye(entry.parent.positionM) : null;
@@ -548,15 +584,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             bottomOffsetPx: -radius - padding, topOffsetPx: radius + padding });
         }
         projectedBodies.push({ entry, x, y, depth, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, hovered, inFrame, parentDiameter, priority, lineWidth: appearance.width, orbitVisibility, segments });
-      }
-      // Reserve the existing detail layers (0..3). Far bodies stay behind them;
-      // near bodies paint above them, ordered by eye depth without moving DOM nodes.
-      const backToFront = [...projectedBodies].sort((a, b) => b.depth - a.depth);
-      const pickRanks = new Map(backToFront.map(({ entry }, index) => [entry, index * 4]));
-      const selectedIndex = backToFront.findIndex(({ entry }) => entry.body.id === selectedId);
-      for (const [index, { entry }] of backToFront.entries()) {
-        const relativeDepth = index - selectedIndex;
-        entry.group.style.zIndex = String(relativeDepth > 0 ? relativeDepth + 3 : relativeDepth);
       }
       // An orbitless anchor uses the same stroke as the visible system, then thins as it recedes.
       projectedBodies[0].lineWidth = anchorLineWidth;

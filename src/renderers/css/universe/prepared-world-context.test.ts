@@ -525,6 +525,65 @@ test('the Sun circle and label remain visible after all planetary context fades 
   layer.destroy();
 });
 
+test('retired bodies stop receiving zoom writes and resume with current picking after indicator toggles', () => {
+  const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
+  const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, viewport);
+  const mercury = layer.inspect().find(body => body.id === 'mercury')!;
+  publish(1e31); root.ownerDocument.defaultView.advance(200);
+  const writes: string[] = [];
+  const group = find(root, 'contextGroup', 'mercury');
+  for (const node of [group, ...all(group)]) for (const key of Object.keys(node.style)) {
+    let value = node.style[key];
+    if (typeof value !== 'string') continue;
+    Object.defineProperty(node.style, key, { get: () => value, set: next => { writes.push(key); value = next; }, configurable: true });
+  }
+  publish(2e31); publish(3e31);
+  expect(writes).toEqual([]);
+  expect(find(root, 'contextLabel', 'sun').dataset.objectNavigate).toBe('sun');
+  expect(mercury.indicator.dataset.objectNavigate).toBeUndefined();
+  expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
+  publish(1000);
+  expect(writes.length).toBeGreaterThan(0);
+  expect(mercury.indicator.dataset.objectNavigate).toBe('mercury');
+  expect(mercury.orbit.some(piece => piece.style.visibility === '')).toBe(true);
+  // Hiding overlays before retirement must not restore their old visible state
+  // when the controls are re-enabled at galaxy distance.
+  layer.setNavigationIndicatorsVisible(false); publish(1e31); publish(2e31);
+  layer.setNavigationIndicatorsVisible(true);
+  expect(mercury.indicator.style.visibility).toBe('hidden');
+  expect(mercury.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
+  expect(mercury.label.dataset.objectNavigate).toBeUndefined();
+  publish(1000);
+  expect(mercury.indicator.dataset.objectNavigate).toBe('mercury');
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
+test('dolly motion leaves depth styles untouched while selection and rotation still reorder retained groups', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  let writes = 0;
+  for (const id of ['sun', 'mercury', 'venus']) {
+    const style = find(root, 'contextGroup', id).style;
+    let zIndex = style.zIndex;
+    Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
+  }
+  const publish = (distance: number, orientationXyzw = [0, 0, 0, 1]) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  for (const distance of [200, 2000, 1e8, 2e8]) publish(distance);
+  expect(writes).toBe(0);
+  layer.selectObject('venus'); publish(2000);
+  expect(writes).toBeGreaterThan(0);
+  expect(find(root, 'contextGroup', 'venus').style.zIndex).toBe('0');
+  expect(Number(find(root, 'contextGroup', 'sun').style.zIndex)).toBeGreaterThan(3);
+  writes = 0; publish(3000); expect(writes).toBe(0);
+  publish(-3000, [0, 1, 0, 0]);
+  expect(writes).toBeGreaterThan(0);
+  expect(Number(find(root, 'contextGroup', 'sun').style.zIndex)).toBeLessThan(0);
+  layer.destroy();
+});
+
 test('selection transfers the detail handoff to the destination while retaining every orbit and marker', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
