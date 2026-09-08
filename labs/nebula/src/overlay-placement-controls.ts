@@ -22,7 +22,7 @@ const TILT: ControlSpec[] = [
   { key: 'rotationX', label: 'X tilt', min: -180, max: 180, step: .25, numberMin: -180, numberMax: 180 },
   { key: 'rotationY', label: 'Y tilt', min: -180, max: 180, step: .25, numberMin: -180, numberMax: 180 },
 ];
-const SIZE: ControlSpec = { key: 'scale', label: 'Size (%)', min: 10, max: 300, step: .5, numberMin: .01 };
+const SIZE: ControlSpec = { key: 'scale', label: 'Size (%)', min: 1, max: 2000, step: .5, numberMin: .01 };
 
 function addControl(host: HTMLElement, prefix: string, spec: ControlSpec, value: number,
   onChange: (partial: Partial<OverlayPlacement>) => void) {
@@ -62,7 +62,7 @@ export function createOverlayPlacementControls({ id, label, placement, defaults,
   const panel = document.createElement('section'); panel.className = 'overlay-placement';
   panel.dataset.placementFor = id;
   const hint = document.createElement('p'); hint.className = 'placement-hint';
-  hint.textContent = `Local +Y points up in Reference view. ${savedLocally ? 'Changes are saved locally.' : 'Changes last for this session.'}`;
+  hint.textContent = `100% is calibrated sky scale. Local +Y points up in Reference view. ${savedLocally ? 'Changes are saved locally.' : 'Changes last for this session.'}`;
   panel.append(hint);
   const controls = [...TRANSLATION.map(spec => addControl(panel, `placement-${id}`, spec, placement[spec.key], onChange)),
     addControl(panel, `placement-${id}`, ROTATION, placement.rotationZ, onChange),
@@ -83,7 +83,7 @@ export function createOverlayPlacementControls({ id, label, placement, defaults,
   if (original) {
     const originalButton = document.createElement('button'); originalButton.type = 'button';
     originalButton.className = 'text-button placement-original'; originalButton.id = `original-placement-${id}`;
-    originalButton.textContent = 'Original sky';
+    originalButton.textContent = 'Calibrated sky';
     originalButton.addEventListener('click', () => { onChange(original); setValues(original); });
     originalButton.setAttribute('aria-label', `Restore ${label} original sky placement`); actions.append(originalButton);
   }

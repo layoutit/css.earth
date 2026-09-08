@@ -55,7 +55,7 @@ The archive and imported particles stay in the ignored local cache. The shared e
 
 ## Independent density and image overlays
 
-The floating **Image overlay** panel on the right selects one reference at a time. Position, rotation, size, X/Y tilt, opacity, and visibility are directly visible. Each image keeps its own adjustments, saved in this browser across reloads and subject/tab switches. **Copy positioning** exports the selected fit as JSON. **Reset fit** restores the supplied starting alignment; **Original sky** restores the publisher/star-registered sky placement. Neither action moves the density or camera.
+The floating **Image overlay** panel on the right selects one reference at a time. Position, rotation, size, X/Y tilt, opacity, and visibility are directly visible. Each image keeps its own adjustments, saved in this browser across reloads and subject/tab switches. **Copy positioning** exports the selected fit as JSON. **Reset fit** restores the supplied starting alignment; **Calibrated sky** restores the publisher/star-registered sky placement. Neither action moves the density or camera.
 
 Shared subject, camera, axis, and layer controls live in the header. The floating **Density adjustments** panel is on the left, and **Image adjustments** is on the right. Both offer independent brightness, gamma, black/white levels, and Reset. Image tone changes RGB while preserving transparency; density tone changes display opacity while keeping empty pixels empty. These are inspection adjustments, not changes to simulated mass or calibrated photometry.
 

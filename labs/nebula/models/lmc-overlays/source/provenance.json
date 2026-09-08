@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
     "path": "labs/nebula/models/image-overlays.json",
-    "sha256": "a85fa93a0bfca82ae02280e43060e7990fdc376573a3b25f8c51be58b9960703"
+    "sha256": "8498acbbe46e1ab159f1299ea169fdf320821016ca69161cbfb24fc7617e9160"
   },
   "frame": {
     "path": "labs/nebula/models/lmc-particles/object.json",
@@ -44,7 +44,8 @@
           "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "ICRS TAN AVM fields extracted from the pinned publisher TIFF; original reference dimensions retained."
         },
-        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing."
+        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing.",
+        "legacyPlacementBasis": "matrix3d(0.057659,-0.189304,0,0.000001,-0.18915,-0.057712,0,-0.000003,0,0,1,0,26.231508,251.653384,0,1)"
       },
       "sourceDimensions": [
         6737,
@@ -116,7 +117,8 @@
           "sha256": "ffdd2aba1d3034f0d1be67bd45a6167e48ce49607aa343535b1c447fde7d1ee5",
           "description": "Publisher AVM from the uncropped publication JPEG; reference dimensions describe the original mosaic."
         },
-        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing. Infrared stars need not resemble optical nebulosity."
+        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing. Infrared stars need not resemble optical nebulosity.",
+        "legacyPlacementBasis": "matrix3d(0.015294,-0.181786,0,0.000001,-0.181651,-0.015325,0,-0.000001,0,0,1,0,133.007726,219.668251,0,1)"
       },
       "sourceDimensions": [
         3581,
@@ -187,7 +189,8 @@
           "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "ICRS TAN AVM fields extracted from the pinned publisher TIFF; original reference dimensions retained."
         },
-        "registrationNote": "Previous extraction, using the same full-image WCS footprint. Toggle against the original to inspect removed or truncated signal; this is not an independent observation."
+        "registrationNote": "Previous extraction, using the same full-image WCS footprint. Toggle against the original to inspect removed or truncated signal; this is not an independent observation.",
+        "legacyPlacementBasis": "matrix3d(0.057659,-0.189304,0,0.000001,-0.18915,-0.057712,0,-0.000003,0,0,1,0,26.231508,251.653384,0,1)"
       },
       "sourceDimensions": [
         2400,
@@ -275,7 +278,8 @@
           "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "Registered to discrete stars in the pinned full-size SMASH image, whose publisher ICRS TAN AVM supplies the sky anchor. Exact correspondences, held-out residuals and source hull recorded in registration receipt."
         },
-        "maxPixels": 4096
+        "maxPixels": 4096,
+        "legacyPlacementBasis": "matrix3d(0.005896,-0.168288,0,0,-0.16814,-0.005832,0,-0.000002,0,0,1,0,340.602291,419.559952,0,1)"
       },
       "sourceDimensions": [
         8000,
@@ -384,7 +388,8 @@
           ],
           "rotationDeg": -170.2376608393
         },
-        "maxPixels": 4096
+        "maxPixels": 4096,
+        "legacyPlacementBasis": "matrix3d(0.0158,0.105554,0,0.000001,0.10597,-0.016096,0,0.000001,0,0,1,0,-185.11426,-174.952711,0,1)"
       },
       "sourceDimensions": [
         6582,
@@ -458,7 +463,8 @@
           "description": "ICRS TAN AVM fields embedded in the downloaded publisher publication JPEG; original 16655 x 16719 reference dimensions retained."
         },
         "registrationNote": "Uncropped publisher full-frame proportional derivative at 3985 x 4000. Embedded AVM retains the original mosaic reference dimensions and is identical to the already pinned source registration. Publisher WCS placement is not independently star-fitted; verify matched-star residuals before composition.",
-        "maxPixels": 4096
+        "maxPixels": 4096,
+        "legacyPlacementBasis": "matrix3d(0.001076,-0.011006,0,0,-0.011013,-0.001078,0,0,0,0,1,0,4.528256,115.061125,0,1)"
       },
       "sourceDimensions": [
         3985,

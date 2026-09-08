@@ -5,7 +5,8 @@ import sharp from 'sharp';
 
 declare global { interface Window { __overlayLeaves?: Element[]; } }
 interface Placement { x: number; y: number; z: number; rotationX: number; rotationY: number; rotationZ: number; scale: number; }
-interface Overlay { id: string; label: string; texturePath: string; initialPlacement?: Placement; initialOpacity?: number; style: { width: string; height: string }; }
+interface Overlay { id: string; label: string; texturePath: string; initialPlacement?: Placement; initialOpacity?: number;
+  legacyPlacementBasis?: string; style: { width: string; height: string }; }
 interface Catalogue { referenceDistanceUnits?: number; overlays: Overlay[]; }
 interface Subject { id: string; density?: { directory: string; overlays?: string }; }
 interface ImageWcs { referenceDimension: [number, number]; referencePixel: [number, number]; scaleDeg: [number, number]; rotationDeg: number; }
@@ -83,6 +84,11 @@ async function assertControls(id: string, seeded: boolean) {
   assert.equal(await page.locator(`#reset-placement-${id}`).isVisible(), true);
   assert.equal(await page.locator(`#copy-placement-${id}`).isVisible(), true);
   assert.equal(await page.locator(`#original-placement-${id}`).count(), seeded ? 1 : 0);
+  const scaleRange = page.locator(`#placement-${id}-scale-range`), scaleNumber = page.locator(`#placement-${id}-scale`);
+  assert.deepEqual({ min: await scaleRange.getAttribute('min'), max: await scaleRange.getAttribute('max') }, { min: '1', max: '2000' });
+  assert.equal(await scaleNumber.getAttribute('max'), null, 'numeric scale is unexpectedly capped');
+  assert.match(await host.locator('.placement-hint').innerText(), /100% is calibrated sky scale/);
+  if (seeded) assert.equal(await page.locator(`#original-placement-${id}`).innerText(), 'Calibrated sky');
 }
 async function screenshot(name: string) { const path = `${output}/screenshots/${name}.png`; await page.locator('#viewer').screenshot({ path }); return path; }
 async function imageDifference(a: string, b: string) {
@@ -175,6 +181,16 @@ try {
     assert.equal(overlay.initialOpacity, .29, `${overlay.id}: common LMC opacity missing`);
   }
   await assertControls(first.id, true);
+  const beforeScaleLimit = await placementProbe(first.id);
+  await page.locator(`#placement-${first.id}-scale-range`).evaluate(node => {
+    (node as HTMLInputElement).value = '2000'; node.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  assert.equal((await values(first.id)).scale, 20, '2000% slider did not publish scale 20');
+  assert.notDeepEqual(await placementProbe(first.id), beforeScaleLimit, 'scale 20 did not reach retained planes');
+  await page.locator(`#placement-${first.id}-scale`).fill('2500');
+  assert.equal((await values(first.id)).scale, 25, 'uncapped numeric scale did not publish above the slider maximum');
+  await page.locator(`#reset-placement-${first.id}`).click();
+  assert.deepEqual(await values(first.id), first.initialPlacement, 'Reset fit did not recover from extreme scale');
 
   const firstRecipe = lmcRecipe.images.find(image => image.id === first.id); assert.ok(firstRecipe, 'selected image WCS is unavailable');
   await page.locator(`#original-placement-${first.id}`).click();
@@ -238,8 +254,8 @@ try {
 
   await page.locator(`#reset-placement-${first.id}`).click(); assert.deepEqual(await values(first.id), first.initialPlacement, 'Reset fit lost the seed');
   const fitted = await placementProbe(first.id); await page.locator(`#original-placement-${first.id}`).click();
-  assert.deepEqual(await values(first.id), identity, 'Original sky is not identity');
-  assert.notDeepEqual(await placementProbe(first.id), fitted, 'Original sky did not differ from fitted placement');
+  assert.deepEqual(await values(first.id), identity, 'Calibrated sky is not identity');
+  assert.notDeepEqual(await placementProbe(first.id), fitted, 'Calibrated sky did not differ from fitted placement');
   await edit(first.id, 'x', 2); const savedFirst = await placementProbe(first.id);
 
   await choose(pending.id); await assertControls(pending.id, Boolean(pending.initialPlacement));
@@ -278,6 +294,28 @@ try {
   await page.locator('[data-tone-target="image"] .tone-status').filter({ hasText: 'Tone applied' }).waitFor({ timeout: 30000 });
   const reloadedTone = await state(); assert.ok(reloadedTone.densityTextures.every(url => url.includes('/tone-cache/')));
   assert.ok(reloadedTone.planes.filter(plane => plane.id === pending.id).every(plane => plane.texture.includes('/tone-cache/')));
+
+  const legacy = lmc.overlays.find(overlay => overlay.legacyPlacementBasis); assert.ok(legacy, 'manifest has no legacy placement basis');
+  const legacyPlacement: Placement = { x: 8.35, y: -4.2, z: 1.15, rotationX: 12.5, rotationY: -7.25, rotationZ: 67.5, scale: 6.25 };
+  await page.evaluate(({ catalogue, id, basis, placement }) => {
+    localStorage.setItem('cssearth-nebula-overlay-state-v1', JSON.stringify({ schema: 'cssearth-nebula-overlay-state@1', catalogues: [[catalogue, [
+      { id, enabled: true, opacity: .37, placement, basis },
+    ]]] }));
+    localStorage.setItem(`cssearth-nebula-selected-overlay:${catalogue}`, id);
+    localStorage.setItem('cssearth-nebula-tone-state-v1', JSON.stringify({ schema: 'cssearth-nebula-tone-state@1', values: [[
+      `image:lmc-particles:${id}`, { brightness: 1.6, gamma: 1.35, black: .04, white: .92 },
+    ]] }));
+  }, { catalogue: subjectById('lmc-particles').density!.overlays!, id: legacy.id, basis: legacy.legacyPlacementBasis!, placement: legacyPlacement });
+  await page.reload({ waitUntil: 'domcontentloaded' }); await panelReady('lmc-particles', lmc); await selected(legacy.id);
+  assert.deepEqual(await values(legacy.id), legacyPlacement, 'new manifest discarded legacy-basis placement');
+  assert.equal(await page.locator('#overlay-opacity').inputValue(), '37', 'legacy-basis opacity was not restored');
+  assert.deepEqual({ brightness: await page.locator('#image-tone-brightness').inputValue(), gamma: await page.locator('#image-tone-gamma').inputValue(),
+    black: await page.locator('#image-tone-black').inputValue(), white: await page.locator('#image-tone-white').inputValue() },
+  { brightness: '1.6', gamma: '1.35', black: '0.04', white: '0.92' }, 'legacy placement migration disturbed image tone');
+  await page.locator('[data-tone-target="image"] .tone-status').filter({ hasText: 'Tone applied' }).waitFor({ timeout: 30000 });
+  await page.reload({ waitUntil: 'domcontentloaded' }); await panelReady('lmc-particles', lmc); await selected(legacy.id);
+  assert.deepEqual(await values(legacy.id), legacyPlacement, 'migrated placement did not survive a second reload');
+  assert.equal(await page.locator('#image-tone-gamma').inputValue(), '1.35', 'migrated image tone did not survive a second reload');
   await page.screenshot({ path: `${output}/screenshots/lmc-density-controls-final.png`, fullPage: true });
   assert.deepEqual(report.errors, []); assert.deepEqual(report.failedRequests, []);
   report.checks.push({ subject: 'lmc-particles', manifestImages: lmc.overlays.length, selected: pending.id, ...difference },

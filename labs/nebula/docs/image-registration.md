@@ -35,3 +35,17 @@ pnpm lab:nebula
 ```
 
 Missing originals download into the ignored cache and must match their recorded hashes. New previews retain up to 4096 pixels, with native originals retained for future high-resolution processing. Gaia's prepared derivative retains its CC BY-SA 4.0 licence; credits and source links remain in the image panel and provenance.
+
+## Shared angular scale
+
+At the LMC descriptor distance (49.5907 kpc), one arcsecond spans 0.24042 pc. Full SMASH is 9.3293° × 9.0521° between the central edge rays, with a tangent-plane width of 8.1001 kpc. Its native reference-plane scale is 4.99625 arcseconds per pixel; multiplying that plate scale by image width is a tangent-plane approximation, not the exact wide-field angle.
+
+The model's median heliocentric distance is 49.899 kpc. Its projected mass-enclosing diameters are 6.315° (50%), 19.248° (90%), and 28.944° (99%). The original SMASH footprint contains 54.75% of model particles at their reconstructed sky positions. The pinned density transform has unit singular values: no factor-three unit conversion is present. These values are reproducible in `models/lmc-overlays/source/angular-size-receipt.json`.
+
+A wider modeled stellar envelope does not justify stretching a photograph, and it does not explain a particular bright-bar mismatch by itself. Simulation particles are not individually identified observed stars, and displayed density opacity is not photographic surface brightness. Image-to-image star registration supplies angular calibration; image-to-simulation morphology remains a separate comparison.
+
+**Calibrated sky** restores the image's physical sky placement at 100%. The Size slider spans 1–2000%; larger numerical values remain possible. Manual fits remain available, but 300% or 390% changes the angular footprint and is not an astrometric calibration.
+
+Inspection planes use the PolyCSS projective coefficients with no seam dilation and retain floating-point coefficients. Ordinary mesh seam padding had enlarged narrow detail images by about 2.7%; rounded projective terms added smaller distortion. A calibration plane has no neighbouring polygon seam to hide. Known previous placement bases are carried in the recipe so this correction preserves existing saved manual controls.
+
+The separately preserved `source/horalek-manual-placement.json` candidate uses scale 2.165 and Z rotation −136.75°. It reverses photographic landmarks relative to the earlier common 39° fit: Tarantula moves to the opposite end of the central body. The smooth N-body density has no independently identified Tarantula feature to resolve that ambiguity. This candidate is retained for comparison and is not applied as the image-registration default.

@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
+import { prepareOverlayGeometry } from './overlay-geometry.js';
 import { sha256 } from '../../../src/preparation/volume/source.js';
 import { overlayCorners, type ImageWcs, type OverlayFrame } from './overlay-wcs.js';
 import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from './overlay-placement.js';
@@ -15,7 +15,7 @@ interface InputImage {
   sourcePageUrl: string; credit: string; license: string;
   wcs?: ImageWcs; wcsSource: { url: string; sha256: string; description: string };
   registration?: ImageRegistration;
-  registrationNote: string; maxPixels?: number;
+  registrationNote: string; maxPixels?: number; legacyPlacementBasis?: string;
 }
 interface Recipe {
   schema: 'cssearth-nebula-overlay-recipe@1'; maxPixels: number;
@@ -59,12 +59,7 @@ export async function prepareOverlays(path: string) {
       const texturePath = `prepared/${input.id}.webp`, width = texture.info.width, height = texture.info.height;
       await writeFile(resolve(target.directory, texturePath), texture.data);
       const vertices = input.registration ? registeredOverlayCorners(input.registration, original.width, original.height, frame) : overlayCorners(input.wcs!, frame);
-      const polygon: Polygon = { vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], texture: texturePath,
-        textureImageSource: { url: texturePath, width, height }, doubleSided: true,
-        texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' } };
-      const plan = computeTextureAtlasPlanPublic(polygon, overlays.length, { tileSize: 50, layerElevation: 50, seamBleed: 0 });
-      const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
-      if (!geometry) throw new TypeError(`Could not prepare photographic plane: ${input.id}`);
+      const geometry = prepareOverlayGeometry(vertices, width, height);
       // Decode the prepared projective image centre offline, including its homogeneous divisor.
       const matrix = geometry.matrix.split(',').map(Number), cx = geometry.leafWidth / 2, cy = geometry.leafHeight / 2;
       const w = matrix[3]! * cx + matrix[7]! * cy + matrix[15]!;
@@ -72,7 +67,7 @@ export async function prepareOverlays(path: string) {
       if (!pivotCssPx.every(Number.isFinite)) throw new TypeError(`Invalid image centre: ${input.id}`);
       overlays.push({ id: input.id, label: input.label, texturePath, widthPx: width, heightPx: height,
         initialPlacement: undefined as OverlayPlacement | undefined, initialOpacity: undefined as number | undefined,
-        sha256: sha256(texture.data), bytes: texture.data.length, pivotCssPx,
+        sha256: sha256(texture.data), bytes: texture.data.length, pivotCssPx, legacyPlacementBasis: input.legacyPlacementBasis,
         style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`, transform: `matrix3d(${geometry.matrix})`,
           backgroundSize: geometry.backgroundSize.map(n => `${n}px`).join(' '),
           backgroundPosition: geometry.backgroundPosition.map(n => `${n}px`).join(' ') },

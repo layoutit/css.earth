@@ -114,9 +114,10 @@ function parseOverlayCatalogue(value: unknown): DensityOverlayCatalogue {
     }
     ids.add(item.id);
     const initialPlacement = item.initialPlacement === undefined ? undefined : updateOverlayPlacement(defaultOverlayPlacement(), item.initialPlacement as Partial<OverlayPlacement>);
+    if (item.legacyPlacementBasis !== undefined && typeof item.legacyPlacementBasis !== 'string') throw new TypeError('Invalid legacy image placement basis.');
     if (item.initialOpacity !== undefined && (typeof item.initialOpacity !== 'number' || !Number.isFinite(item.initialOpacity) || item.initialOpacity < 0 || item.initialOpacity > 1)) throw new TypeError('Invalid initial image opacity.');
     return { id: item.id, label: item.label, texturePath: item.texturePath, widthPx: item.widthPx, heightPx: item.heightPx,
-      pivotCssPx: item.pivotCssPx, initialPlacement, initialOpacity: item.initialOpacity,
+      pivotCssPx: item.pivotCssPx, initialPlacement, initialOpacity: item.initialOpacity, legacyPlacementBasis: item.legacyPlacementBasis,
       style: Object.fromEntries(styleKeys.map(key => [key, style[key]])) as DensityOverlay['style'],
       sourcePageUrl: item.sourcePageUrl, credit: item.credit, registrationNote: item.registrationNote };
   });
@@ -144,6 +145,7 @@ export interface DensityOverlay {
   id: string; label: string; texturePath: string; widthPx: number; heightPx: number;
   pivotCssPx: [number, number, number];
   initialPlacement?: OverlayPlacement; initialOpacity?: number;
+  legacyPlacementBasis?: string;
   style: { width: string; height: string; transform: string; backgroundSize: string; backgroundPosition: string };
   sourcePageUrl: string; credit: string; registrationNote: string;
 }
@@ -287,7 +289,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
         overlayBases.delete(id); overlayPlacements.delete(id); overlayOpacity.delete(id); overlayEnabled.delete(id);
       }
       for (const item of parsed.overlays) {
-        if (overlayBases.get(item.id) !== item.style.transform) {
+        const savedBasis = overlayBases.get(item.id);
+        if (savedBasis !== item.style.transform && !(savedBasis && savedBasis === item.legacyPlacementBasis)) {
           overlayPlacements.set(item.id, item.initialPlacement ?? defaultOverlayPlacement());
           overlayOpacity.set(item.id, item.initialOpacity ?? .55); overlayEnabled.set(item.id, false);
         }

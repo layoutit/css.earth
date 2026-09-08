@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
     "path": "labs/nebula/models/image-overlays.json",
-    "sha256": "a85fa93a0bfca82ae02280e43060e7990fdc376573a3b25f8c51be58b9960703"
+    "sha256": "8498acbbe46e1ab159f1299ea169fdf320821016ca69161cbfb24fc7617e9160"
   },
   "frame": {
     "path": "labs/nebula/models/smc-particles/object.json",
@@ -44,7 +44,8 @@
           "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
           "description": "ICRS TAN AVM fields extracted from the pinned publisher TIFF; original reference dimensions retained."
         },
-        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing."
+        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing.",
+        "legacyPlacementBasis": "matrix3d(-0.076379,-0.119473,0,-0.000001,-0.119595,0.076455,0,0,0,0,1,0,154.963889,15.531389,0,1)"
       },
       "sourceDimensions": [
         3827,
@@ -116,7 +117,8 @@
           "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
           "description": "Publisher AVM from the uncropped publication JPEG; reference dimensions describe the original mosaic."
         },
-        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing. Infrared stars need not resemble optical nebulosity."
+        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing. Infrared stars need not resemble optical nebulosity.",
+        "legacyPlacementBasis": "matrix3d(-0.009813,-0.157254,0,-0.000001,-0.157311,0.009836,0,0,0,0,1,0,122.140292,112.464754,0,1)"
       },
       "sourceDimensions": [
         4000,

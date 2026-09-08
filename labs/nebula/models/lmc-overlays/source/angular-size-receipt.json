@@ -1,0 +1,194 @@
+[
+  {
+    "subject": "lmc",
+    "particleCount": 1620000,
+    "equalMassParticles": true,
+    "inputPositionUnits": "kpc",
+    "metersPerUnit": 30856775814913670000,
+    "affineSingularValues": [
+      1.0000000000004219,
+      1.000000000000139,
+      0.9999999999996284
+    ],
+    "adoptedObjectDistanceKpc": 49.590672750490434,
+    "reconstructedSimulationMedianDistanceKpc": 49.898943657123546,
+    "particleDistanceQuantilesKpc": [
+      47.12435779893955,
+      48.73460556468902,
+      50.020349036018445,
+      52.1305008008357,
+      54.00627256541947
+    ],
+    "centerIcrsDeg": [
+      87.86540967210067,
+      -69.12210972608021
+    ],
+    "quantiles": {
+      "0.5": {
+        "radialAngularRadiusDeg": 3.157683659665967,
+        "diameterDeg": 6.315367319331934,
+        "physical3dRadiusKpc": 2.9707813513856642,
+        "centralAxisAngularWidthsDeg": [
+          2.9148114175998456,
+          3.5286731075738853
+        ]
+      },
+      "0.9": {
+        "radialAngularRadiusDeg": 9.623981121042279,
+        "diameterDeg": 19.247962242084558,
+        "physical3dRadiusKpc": 8.615784083745117,
+        "centralAxisAngularWidthsDeg": [
+          12.774690023508033,
+          15.939847914839046
+        ]
+      },
+      "0.99": {
+        "radialAngularRadiusDeg": 14.471911889869332,
+        "diameterDeg": 28.943823779738665,
+        "physical3dRadiusKpc": 13.343290683981078,
+        "centralAxisAngularWidthsDeg": [
+          19.159795427911764,
+          28.104083603349686
+        ]
+      }
+    },
+    "fixedObserverAngularScaleArcsecPerTransverseKpcAtMedianDepth": 4133.097502712063,
+    "smashReferenceDimensions": [
+      6737,
+      6536
+    ],
+    "smashNominalWidthHeightDeg": [
+      9.34992361376612,
+      9.07096641525536
+    ],
+    "smashFractionOfParticlesInsideActualSkyFootprint": 0.5474598765432098,
+    "sameSizeFootprintRecenteredOnModelFraction": 0.6294771604938272,
+    "smashPointPixelQuantiles": [
+      [
+        -4413.862579749609,
+        -2291.6795630851493
+      ],
+      [
+        -2897.501257538499,
+        695.3870792809179
+      ],
+      [
+        585.4943390721921,
+        4360.68726336854
+      ],
+      [
+        1596.5767325967954,
+        5463.775918232641
+      ],
+      [
+        2843.595158072092,
+        6750.92951730829
+      ],
+      [
+        6749.930571982507,
+        11868.406500258161
+      ],
+      [
+        8980.48197149416,
+        15260.684139437433
+      ]
+    ],
+    "method": "Every released selected star; equal-mass quantiles. Radial angular distance from transformed source-centering vector, with exact atan2 and individual depths. Axis widths are central per-axis intervals, not a single rectangle enclosing stated total fraction. SMASH footprint uses exact TAN projection without manual fitting."
+  },
+  {
+    "subject": "smc",
+    "particleCount": 225000,
+    "equalMassParticles": true,
+    "inputPositionUnits": "kpc",
+    "metersPerUnit": 30856775814913670000,
+    "affineSingularValues": [
+      1.000000000000422,
+      1.0000000000001392,
+      0.9999999999996283
+    ],
+    "adoptedObjectDistanceKpc": 62.440000000000005,
+    "reconstructedSimulationMedianDistanceKpc": 53.69043915842384,
+    "particleDistanceQuantilesKpc": [
+      51.32678362574622,
+      52.36876488575515,
+      53.65088952239729,
+      55.103401816976486,
+      57.981042625669836
+    ],
+    "centerIcrsDeg": [
+      352.0912322449303,
+      -80.67045373907224
+    ],
+    "quantiles": {
+      "0.5": {
+        "radialAngularRadiusDeg": 4.425883491539242,
+        "diameterDeg": 8.851766983078484,
+        "physical3dRadiusKpc": 4.250358317954156,
+        "centralAxisAngularWidthsDeg": [
+          5.541913602893503,
+          4.345333788751223
+        ]
+      },
+      "0.9": {
+        "radialAngularRadiusDeg": 9.14629530437616,
+        "diameterDeg": 18.29259060875232,
+        "physical3dRadiusKpc": 8.948948611570733,
+        "centralAxisAngularWidthsDeg": [
+          12.894780427894197,
+          14.109302090342954
+        ]
+      },
+      "0.99": {
+        "radialAngularRadiusDeg": 13.641126092548904,
+        "diameterDeg": 27.282252185097807,
+        "physical3dRadiusKpc": 13.238532513345294,
+        "centralAxisAngularWidthsDeg": [
+          16.815125726084883,
+          21.09754447098406
+        ]
+      }
+    },
+    "fixedObserverAngularScaleArcsecPerTransverseKpcAtMedianDepth": 3841.297692061134,
+    "smashReferenceDimensions": [
+      3827,
+      3190
+    ],
+    "smashNominalWidthHeightDeg": [
+      5.31141927958199,
+      4.4273393002003
+    ],
+    "smashFractionOfParticlesInsideActualSkyFootprint": 0.011031111111111111,
+    "sameSizeFootprintRecenteredOnModelFraction": 0.28700888888888887,
+    "smashPointPixelQuantiles": [
+      [
+        706.914312667889,
+        -12454.706652610164
+      ],
+      [
+        2302.5986319281474,
+        -9834.711465670398
+      ],
+      [
+        5186.734104240262,
+        -4101.883208424428
+      ],
+      [
+        7191.072405110902,
+        -2379.7271525347323
+      ],
+      [
+        9098.842244963005,
+        -860.666601265166
+      ],
+      [
+        11511.792341720635,
+        934.1267210781975
+      ],
+      [
+        12272.702698527362,
+        1831.5412022702146
+      ]
+    ],
+    "method": "Every released selected star; equal-mass quantiles. Radial angular distance from transformed source-centering vector, with exact atan2 and individual depths. Axis widths are central per-axis intervals, not a single rectangle enclosing stated total fraction. SMASH footprint uses exact TAN projection without manual fitting."
+  }
+]
