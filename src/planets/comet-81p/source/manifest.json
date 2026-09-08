@@ -1,0 +1,197 @@
+{
+  "schema": "csscomet-81p-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "pds-shape",
+      "path": "shape/wild2_cart_vis.tab",
+      "expectedBytes": 890509,
+      "expectedSha256": "6937d2ae98e3a21594aa27fbff57567332e146dccfa0dcbef1fac4a1ec371820",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.tab",
+      "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+      ],
+      "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 174,
+      "expectedSha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral model material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Only terrain visible and illuminated during the 2004 Stardust encounter is included, about half the nucleus. The unseen side and gaps remain open. Neutral gray is a model material, not observed albedo. Source plate ordering is made consistent without moving vertices. The archived model axes are retained at an arbitrary fixed phase; no current rotational orientation or spin is claimed.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1917.1067262613963
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Observed terrain",
+      "falseColor": false
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 96920,
+      "expectedSha256": "634b21c65e9fbfd996932cb8e9450fa29e724a7a84d5f113c6fa4b5072e53367",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.tab",
+      "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+      ],
+      "acquisition": "Checked-in derived context image; regenerated and hash-verified by the radial snapshot recipe.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "pds-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 180,
+        "latitudeDegrees": 65,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4333,
+      "expectedSha256": "05ee89d254d6578f4c04a57c3fcd6eaa26131686a139851107f739bed0d35614",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 729,
+      "expectedSha256": "04fa065e930d453f71aff2b004feb3edaddf9e8300cd7ade221c74098fe9525c",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1620,
+      "expectedSha256": "67a2649d92c657cbb22c1f79342d0699254d2e3c2ea1b0d520abc9ab3baeaea7",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 469,
+      "expectedSha256": "cf53beb9dad865374af2ce5cb6c893c2da4774de17cacf2c52bd86c626357738",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3554,
+      "expectedSha256": "960f87f340fb61595c4951a9e616810d30677629d85b5045a05482f0fa673ac6",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 33,
+      "expectedSha256": "52d70435e15a859e8654ab7f16e7a0bd10bcae3a8a6dfadf67c714d3895bd831",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2553,
+      "expectedSha256": "dd2089177325a29b83f4f03e154956200305192b9423ba033ce4ae9cf328027b",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 852,
+      "expectedSha256": "1087e7de5e0bc3f74818a33d2c09b367fda90aa3d89913f38ebe4a5b26229650",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/wild2_cart_vis.lbl",
+      "expectedBytes": 9440,
+      "expectedSha256": "5656202b19c6dc8fac6f4cac6451caa77ca48b89059e0684ec8d6ff616521b96",
+      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+    },
+    {
+      "path": "reference/dataset.cat",
+      "expectedBytes": 16000,
+      "expectedSha256": "a0613bef31d51ae2143cf4a56849d0719cd32f5b2ece1702833fc136a8b612d6",
+      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+    },
+    {
+      "path": "reference/wild2_plan_full.lbl",
+      "expectedBytes": 14080,
+      "expectedSha256": "ca00734e76f2feeb9d61fd91a88124536f43c26ea966de43211ac5893b963a5a",
+      "purpose": "Archived Wild 2 coverage, coordinates and source interpretation."
+    }
+  ]
+}

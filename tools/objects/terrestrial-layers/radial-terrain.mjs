@@ -10,6 +10,7 @@ import { createRasterEmitter } from './solid-raster.mjs';
 import { renderRadialSnapshot } from './radial-snapshot.mjs';
 import { createSourceMeshLighting } from './source-mesh-lighting.mjs';
 import { preparePdsConstraintMap } from './pds-constraint-map.mjs';
+import { orientObservedSurface, validateObservedReduction } from './open-surface.mjs';
 
 const sub = (a, b) => a.map((v, i) => v - b[i]);
 const dot = (a, b) => a.reduce((sum, v, i) => sum + v * b[i], 0);
@@ -28,7 +29,12 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
     : profile.format === 'pds-plate-model' ? loadPdsPlateShape
     : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape
     : profile.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
-  const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
+  if (profile.sourceTopology !== undefined && profile.sourceTopology !== 'open') throw new TypeError('Unknown source mesh topology.');
+  let grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
+  if (profile.sourceTopology === 'open') {
+    if (profile.simplification?.method !== 'source-meshoptimizer') throw new TypeError('Open observations require source-preserving simplification.');
+    grid = orientObservedSurface(grid);
+  }
   for (const entry of source.manifest.inputs.filter(entry =>
     entry.generator === 'tools/objects/terrestrial-layers/pds-constraint-map.mjs')) {
     source.assertBytes(entry, await preparePdsConstraintMap(grid, entry.recipe));
@@ -78,8 +84,10 @@ export async function simplifyRadialShape(mesh, profile, scale) {
       ['regularize', 'prune'].some(key => profile.simplification[key] !== undefined && typeof profile.simplification[key] !== 'boolean')) throw new TypeError('Invalid source mesh simplification.');
   await MeshoptSimplifier.ready;
   const preserveSource = profile.simplification.method === 'source-meshoptimizer';
+  const open = profile.sourceTopology === 'open';
+  if (open && (!preserveSource || profile.simplification.prune)) throw new TypeError('Open observations must retain every source boundary.');
   let sourceIndices = Uint32Array.from(mesh.indices.flat()), positions = mesh.positions;
-  if (preserveSource) {
+  if (preserveSource && !open) {
     // ICQ releases duplicate cube-edge positions. Weld before assigning UVs,
     // using the same meshoptimizer remap and physical compaction as Vesta.
     const remap = MeshoptSimplifier.generatePositionRemap(Float32Array.from(positions.flat()), 3);
@@ -90,7 +98,7 @@ export async function simplifyRadialShape(mesh, profile, scale) {
     positions = unique;
   }
   const flags = ['ErrorAbsolute', ...(preserveSource && profile.simplification.regularize ? ['RegularizeLight'] : []),
-    ...(preserveSource && profile.simplification.prune ? ['Prune'] : [])];
+    ...(preserveSource && profile.simplification.prune ? ['Prune'] : []), ...(open ? ['LockBorder'] : [])];
   const [simplified, error] = MeshoptSimplifier.simplify(sourceIndices,
     Float32Array.from(positions.flat()), 3, targetFaces * 3, maximumErrorMeters, flags);
   // Edge collapses can leave exactly coincident, oppositely wound face pairs
@@ -98,7 +106,8 @@ export async function simplifyRadialShape(mesh, profile, scale) {
   // No positions are moved and no source feature is approximated in cleanup.
   const indices = preserveSource ? removeOppositeFacePairs(simplified) : simplified;
   if (!indices.length || indices.length / 3 > targetFaces) throw new Error(`Source mesh reached ${indices.length / 3} faces at ${error} m estimated error; requested ${targetFaces} within ${maximumErrorMeters} m.`);
-  const topology = preserveSource ? validateClosedMesh(indices, positions) : undefined;
+  const topology = open ? validateObservedReduction(sourceIndices, indices, positions)
+    : preserveSource ? validateClosedMesh(indices, positions) : undefined;
   const triangles = [];
   for (let i = 0; i < indices.length; i += 3) triangles.push(Array.from(indices.subarray(i, i + 3),
     index => positions[index].map(value => value * scale)));
@@ -106,7 +115,8 @@ export async function simplifyRadialShape(mesh, profile, scale) {
   if (preserveSource) faces.simplification = { method: 'source-meshoptimizer', version: '1.2.0', flags,
     sourceFaces: mesh.indices.length, sourceVertices: mesh.positions.length, weldedVertices: positions.length,
     targetFaces, outputFaces: faces.length, removedOppositeFaces: (simplified.length - indices.length) / 3,
-    maximumErrorMeters, estimatedErrorMeters: error, topology };
+    maximumErrorMeters, estimatedErrorMeters: error, topology,
+    ...(open ? { sourceTopology: 'open', sourceOrientation: mesh.sourceOrientation } : {}) };
   return faces;
 }
 

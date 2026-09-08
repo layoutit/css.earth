@@ -36,7 +36,7 @@ export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'sat
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
 export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId | CometId
-export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p'
+export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p'
 
 export const PLANET_IDS: readonly PlanetId[] = [
   'mercury',
@@ -51,7 +51,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
 export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis']
-export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p']
+export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p']
 
 const body = (
   id: BodyId,
@@ -71,6 +71,9 @@ export const BODIES: Record<BodyId, BodyData> = {
   // No measured GM is supplied by these source records; zero follows this registry's unknown-GM convention.
   'comet-103p': body('comet-103p', '103P/Hartley 2', 'DES=103P;CAP;', 0.58, 0, 'sun'),
   'comet-9p': body('comet-9p', '9P/Tempel 1', 'DES=9P;CAP;', 2.83, 0, 'sun'),
+  // Farnham, Duxbury & Li (2005), PDS v2.1: geometric mean of the fitted
+  // ellipsoid semi-axes. Approximate scale only; the unseen shape is not rendered.
+  'comet-81p': body('comet-81p', '81P/Wild 2', 'DES=81P;CAP;', Math.cbrt(1.350 * 2.002 * 2.607), 0, 'sun'),
   // JPL Horizons physical block, solution JPL#36 (2021-Apr-13), retrieved 2026-09-07.
   vesta: body('vesta', 'Vesta', '4;', 261.385, 17.28828, 'sun'),
   // Body-owned Horizons physical blocks, retrieved 2026-09-07.
