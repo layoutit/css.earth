@@ -1,0 +1,46 @@
+{
+  "modelId": 289,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/289",
+  "fields": {
+    "ID": "289",
+    "Asteroid ID": "(64) Angelina",
+    "Lambda": "138",
+    "Beta": "14",
+    "Period": "8.75033",
+    "YORP": "",
+    "JD0": "2444810",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0.33",
+    "LSM Parameter 3": "0.06",
+    "LSM Parameter 4": "-0.5",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "52",
+    "Equivalent Diameter Error": "10",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-02-11",
+    "Comment": "preferred",
+    "Created": "",
+    "Modified": "2011-04-11 11:21:49"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/970/3D.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/971/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/972/occ_2004-07-03.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/973/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/974/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/139"
+  ]
+}

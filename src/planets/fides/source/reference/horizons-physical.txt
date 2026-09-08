@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2737%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 37 Fides (A855 TB)            2026-Sep-07 22:24:40
+Rec #:      37 (+COV) Soln.date: 2026-Jun-05_03:03:41   # obs: 5418 (1855-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458191.5 ! 2018-Mar-14.00 (TDB)         Residual RMS= .27829
+   EC= .1754796976532601   QR= 2.178002501372379   TP= 2458681.2015699251
+   OM= 7.268263326123223   W=  62.92611466356139   IN= 3.071214587534153
+   A= 2.641538959287447    MA= 247.5783281030331   ADIST= 3.105075417202516
+   PER= 4.29332            N= .229571802           ANGMOM= .027524421
+   DAN= 2.37084            DDN= 2.78242            L= 70.16098940000001
+   B= 2.7344004            MOID= 1.19334996        TP= 2019-Jul-16.7015699251
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 54.175             ROTPER= 7.3335
+   H= 7.29                 G= .240                 B-V= .843
+                           ALBEDO= .1826           STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#164, OCC=0
+2: source=ORB
+*******************************************************************************
