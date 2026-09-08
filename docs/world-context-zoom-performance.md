@@ -32,7 +32,87 @@ Main's six-asteroid expansion (`ddee157b`) is integrated in this branch. The sam
 preparation step supplies metadata to the expanded catalog. It does not introduce
 an object allowlist, reduce orbit detail, or generate scene geometry at runtime.
 
-## Controlled performance comparison
+## Follow-up: fixed styles and direction-owned optics
+
+The follow-up commit `1b0c2e27` removes redundant publications without changing
+prepared assets, geometry, opacity, optical coefficients, or camera behavior:
+
+- Fixed orbit/indicator stroke widths are installed at mount. Orbit pointer
+  state changes only when navigability changes; retirement and indicator
+  suspension still retire and restore picking.
+- Volume camera transforms still follow translation and viewport changes.
+  Axis weights and optical-copy coefficients update only when camera orientation
+  changes, which is the input that owns them. No orientation quantization is used.
+
+A separate setter-count probe found 563,348 unchanged custom-property writes for
+stroke widths and orbit picking during the route. These are setter invocations,
+not a measured count of browser style invalidations. Probe timing is excluded
+from the performance comparison.
+
+A fresh pair uses the expanded 175-orbit catalog and the same camera input tape,
+viewport, DPR, paused animation, recorder and simultaneous trace/video setup.
+The baseline substitutes exact renderer sources from PR revision `06684c41`;
+`publication-candidate` contains the four-file publication change above.
+
+| Movement-window measurement | PR revision `06684c41` | Publication ownership |
+| --- | ---: | ---: |
+| Movement duration | 41.547 s | 39.882 s |
+| World-context publish sampled self CPU | 2,598 ms | 2,299 ms |
+| World-context publish sampled inclusive CPU | 5,786 ms | 5,191 ms |
+| Main-thread UpdateLayoutTree | 4,528 ms | 4,243 ms |
+| rAF intervals >25 ms, 5–5,000 AU | 132 / 562 (23.5%) | 99 / 566 (17.5%) |
+| rAF p95, 5–5,000 AU | 33.4 ms | 33.3 ms |
+| Maximum rAF interval, whole movement | 166.7 ms | 233.3 ms |
+
+This pair shows about 10% less sampled inclusive publication CPU. It does **not**
+show acceptable frame pacing: the galaxy-entry stall remains and the maximum
+interval is worse. Neither movement window has a main-thread task over 50 ms;
+the candidate's galaxy pause overlaps a 249 ms GPU SwapBuffers/ScheduleOverlays
+operation. That correlation does not establish the browser's underlying cause.
+
+Both recordings have no app errors, reloads or trace loss; recorder/trace clock
+alignment drifts by 51 and 25 microseconds, and video timestamp error stays below
+0.50 ms. They contain 2,188 and 2,059 video observations respectively. Document,
+world root, input surface and the 51,852-node/50,345-leaf scene remain retained.
+The Sun-start, galaxy and Sun-return screenshots are pixel-identical between the
+pair in the scene region used above. This is endpoint evidence, not visual proof
+for every orientation. The native recorder averages 4.36 and 4.37 ms per sample.
+
+| Run | Recording ID | Recorder SHA-256 | Trace SHA-256 | Video SHA-256 |
+| --- | --- | --- | --- | --- |
+| `publication-baseline` | `675ef5db-35a4-4d87-bb3e-92600f655207` | `443f3aaa04d19583b5a07749e98078cab3b2a97701c968a57fa92b1a6467a69c` | `7d561744c9c43593a7f45cf6b11541742f1bc8591e2defecd5904c321dd9079f` | `1a5b1be76623430a1d5172b66f5aefcfffb9cac8e8095985e0f4bddb9f5a652f` |
+| `publication-candidate` | `f411b1fc-65ae-47ea-a5e7-abd9ff1c4b78` | `cc423062482c5fd4a2fd8f43a29be17f56964254d526e82a8b6a9c3ae339c087` | `ddabc41b65d3031b5e1a766bdd5107ce640d7dfc798bd08bca59a995ae86ab31` | `923472a8dc7e28e8f6fc311ffaacdb5a980400e9508365d69d79a6185bd9e9c2` |
+
+### Experiments excluded from the PR
+
+The `publication-warm`, `publication-contained` and
+`publication-contained-repeat` recordings are diagnostic experiments, not the
+submitted renderer. Early layer activation did not remove the stall. Per-axis
+paint containment reduced the measured pause but failed rotated-view image
+checks. Completed-image containment and flat optical-copy prototypes also failed
+strict visual qualification. None of those CSS or topology changes is included.
+Their captures and unstable frame-sequence reports are retained outside Git.
+
+A follow-up optical check captures each axis separately and compares their
+weighted composition with stationary browser frames. Chrome 152.0.7977.76 at
+DPR 2 intermittently differs by up to 21 channel levels in the exact old renderer
+as well as the candidate. That reproduces the instability without the new
+publication caching; it does not prove a fix or justify widening the image gate.
+The current work has not resolved that volume-compositing problem.
+
+### Current integration and checks
+
+Main `3d76ff39` (the 67P observation lens) is integrated in merge `98d6679b`.
+It does not change the Sun route's prepared world bank or these renderer paths.
+After integration, renderer build/typecheck and all 136 focused tests pass.
+The native universe-label and outward/return galaxy-handoff checks pass.
+The retained-leaf-pool browser check fails its Ceres hover expectation identically
+on the candidate and the exact prior renderer: the first DOM hit-corridor chosen
+by the harness is not confirmed as the native hovered object. Its initial exact
+culled/unculled image comparison passes, but its later picking assertions remain
+unqualified. This work does not claim an aggregate green browser gate.
+
+## Earlier controlled performance comparison
 
 Recorded on 2026-09-08 against main `1588a643`. The comparison holds the catalog at
 169 contextual bodies, before the six-asteroid merge. All runs use the same
