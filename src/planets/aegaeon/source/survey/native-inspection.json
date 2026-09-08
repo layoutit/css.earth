@@ -1,0 +1,33 @@
+{
+  "entries": [
+    {
+      "image": "n1829223369",
+      "observationTime": "2015-12-19T12:32:14.836",
+      "centerSamplingKm": 0.06897,
+      "phaseDegrees": 24.508,
+      "products": [
+        "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1829042482_1829225208/N1829223369_1_CALIB.IMG",
+        "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1829042482_1829225208/N1829223369_1_CALIB.LBL"
+      ],
+      "inspectedRaster": {
+        "expectedBytes": 4202496,
+        "expectedSha256": "cb241e4ef97e3cd68a8c386ec2a39343ef9736c931774676429d9e8d94d66f9e"
+      }
+    },
+    {
+      "image": "n1643264167",
+      "observationTime": "2010-01-27T05:32:15.111",
+      "centerSamplingKm": 0.08716,
+      "phaseDegrees": 73.322,
+      "products": [
+        "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643264167_1_CALIB.IMG",
+        "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643264167_1_CALIB.LBL"
+      ],
+      "inspectedRaster": {
+        "expectedBytes": 4202496,
+        "expectedSha256": "974086fdd155de914976cd588dceed5e3c526fdee4dbc3fa8ab38ff747fd38fd"
+      }
+    }
+  ],
+  "decision": "Resolved imagery exists, but the inspected 2010 and 2015 source frames did not yield a reliable registered patch. OPUS sub-observer longitude differs by about 135 degrees from the published Table 27 convention for the 2010 image; camera/BPC reconstruction did not securely identify its disc. Photographic and color mapping remain unresolved candidates, not proven absent. Use measured axes with the standard grid."
+}

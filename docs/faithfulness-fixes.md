@@ -4,9 +4,9 @@ This pass addresses the 28 unique findings from the prerelease review at
 `1e0670a5869c2270d0824f5b7fb37a55d92f77ba`. It also includes the unpublished
 factsheet pass on which that review was based. The repair branch starts from
 main `3eaf498d0c64981b3b1e2224aacc3e48b2dd9dd2` and incorporates
-`a133fe30cf419f4bd2200872a18a29e46328483d`, preserving all 87 registered
-bodies. Four reviewed but unmerged asteroid snapshots remain in their own PR.
-The sixteen newly merged moons are preserved, not claimed to have received the
+`000b67d729dbc1f1f5ea75e183f8c06481da17f8` (PR #41), preserving all 90
+registered bodies. Four reviewed but unmerged asteroid snapshots remain in their own PR.
+The nineteen newly merged moons are preserved, not claimed to have received the
 previous 75-body scientific audit.
 
 ## Measurement and rendering corrections

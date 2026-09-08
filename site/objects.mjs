@@ -1,3 +1,6 @@
+import aegaeonDescriptor from "../src/planets/aegaeon/object.json" with { type: "json" };
+import antheDescriptor from "../src/planets/anthe/object.json" with { type: "json" };
+import polydeucesDescriptor from "../src/planets/polydeuces/object.json" with { type: "json" };
 import rosalindDescriptor from "../src/planets/rosalind/object.json" with { type: "json" };
 import desdemonaDescriptor from "../src/planets/desdemona/object.json" with { type: "json" };
 import cressidaDescriptor from "../src/planets/cressida/object.json" with { type: "json" };
@@ -89,6 +92,21 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("aegaeon", "Aegaeon", "satellite", "#a0a0a0", 9.58,
+    "Explore Aegaeon, a small moon of Saturn, through its measured shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(aegaeonDescriptor);
+    }, aegaeonDescriptor.properties.worldFrame),
+  object("anthe", "Anthe", "satellite", "#a0a0a0", 9.58,
+    "Explore Anthe, a small moon of Saturn, through its measured shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(antheDescriptor);
+    }, antheDescriptor.properties.worldFrame),
+  object("polydeuces", "Polydeuces", "satellite", "#a0a0a0", 9.58,
+    "Explore Polydeuces, a small moon of Saturn, through its measured shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(polydeucesDescriptor);
+    }, polydeucesDescriptor.properties.worldFrame),
   object("rosalind", "Rosalind", "satellite", "#a0a0a0", 19.2,
     "Explore Rosalind, an inner moon of Uranus, through its measured shape.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

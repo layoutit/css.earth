@@ -36,6 +36,9 @@ import {
  * deliberately compact model cannot carry.
  */
 const TOLERANCE_KM: Record<SatelliteId, number> = {
+  polydeuces: 1081,
+  anthe: 2334,
+  aegaeon: 353,
   bianca: 72,
   cressida: 36,
   desdemona: 115,
@@ -184,12 +187,12 @@ describe('satellite ephemerides against JPL Horizons', () => {
     // Phobos's 7.65-hour period. This is the test that caught `keplerStateKm`
     // ignoring the precession rates.
     const h = 1 / 1024
-    for (const id of SATELLITE_IDS) {
-      const at = (offset: number) => satellitePositionKm(id, 2451545 + offset)
+    for (const id of SATELLITE_IDS) for (const epoch of [2451545, 2461286.5]) {
+      const at = (offset: number) => satellitePositionKm(id, epoch + offset)
       const numeric = [0, 1, 2].map(
         (i) => (-at(2 * h)[i]! + 8 * at(h)[i]! - 8 * at(-h)[i]! + at(-2 * h)[i]!) / (12 * h),
       )
-      const analytic = satelliteStateKm(id, 2451545).velocityKmPerDay
+      const analytic = satelliteStateKm(id, epoch).velocityKmPerDay
       expect(distance(numeric, analytic) / magnitude(analytic)).toBeLessThan(1e-8)
     }
   })

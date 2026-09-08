@@ -1,9 +1,10 @@
 # Faithfulness repair validation
 
-Validation used Node 24.19.0 and real Chrome 152.0.7977.76 on macOS. The branch incorporates
-main `a133fe30cf419f4bd2200872a18a29e46328483d`. See
+Validation used Node 24.19.0 and real Chrome 152.0.7977.76 on macOS. The initial checks below include
+main `a133fe30cf419f4bd2200872a18a29e46328483d`; the later PR #41 merge is
+recorded separately at the end. See
 [the finding-by-finding corrections](faithfulness-fixes.md) for scientific scope
-and unresolved interpretation limits. The sixteen newer moons retain their
+and unresolved interpretation limits. The newer moons retain their
 upstream packages; this is not a new scientific audit of those bodies.
 
 ## Passing checks
@@ -77,3 +78,22 @@ that incomplete run.
 These records establish bounded source, numerical, installation and browser
 checks. They do not establish live ephemeris accuracy, unresolved texture lineage,
 or scientific accuracy for every pixel and newly registered body.
+
+## Merge of PR #41
+
+The conflict resolution incorporates main
+`000b67d729dbc1f1f5ea75e183f8c06481da17f8`, including Aegaeon, Anthe and
+Polydeuces, bringing the registry to 90 bodies. Shared marker atlases and the
+Sun's navigation receipt were regenerated from the combined sources. The upstream
+sync ownership list preserves both the new libration fitter and the fixed-epoch
+ephemeris inputs.
+
+All 523 existing generated geometry entries remain exactly unchanged; only the
+three new bodies are added. This preserves the earlier faithfulness corrections.
+Merge checks pass: 515 astronomy tests, 37 focused ephemeris/source/sync tests,
+142 universe preparation tests, both registry-wide frame checks, astronomy
+typechecking, source verification for 90 bodies / 2,233 files, and editorial
+consistency for 90 bodies / 607 facts. The production site was rebuilt, and
+Aegaeon, Anthe, Polydeuces, Sun and Itokawa pass real-Chrome retained-scene checks
+at both DPR 1 and DPR 2 (ten visits). This targeted integration check does not
+extend the earlier scientific audit to the three newly merged moons.
