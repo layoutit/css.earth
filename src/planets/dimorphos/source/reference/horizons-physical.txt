@@ -1,0 +1,50 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                     Dimorphos (Didymos I)                120065803
+Updated: 2026-Jun-24       Solution (s547) date: 2024-March 
+                 https://iopscience.iop.org/article/10.3847/PSJ/ad26e7/pdf
+ 
+This is the DART mission's post-impact reconstructed trajectory for Dimorphos, 
+-satellite- of the 65803 Didymos system & the IMPACTED TARGET.
+
+The trajectory data includes the pre- and post-impact ephemeris for Dimorphos.
+For surface cartographic locations, pre- and post-impact Dimorphos rotation 
+models are used automatically.
+
+To use Dimorphos as a coordinate origin, set center to "@ 120065803". 
+
+DART impact was on 26-Sep-2022 @ 23:14:24.183 UTC, equivalent to 2022-Sep-26
+23:15:33.365 TDB.
+
+Related objects:
+  DART spacecraft           :      -135 (mission navigation)
+  LICIACube spacecraft      :      -210 (mission navigation)
+  Didymos system barycenter :  20065803 (JPL s205 mission reconstruction)
+                                 65803; (latest JPL ground-based solution)
+  Didymos primary body      : 920065803 (JPL s547 reconstruction)
+
+ Dimorphos physical parameters:
+  Radii   ~ (0.09594 x 0.07390 x 0.05856) km
+  Volume  ~ 0.001616 km^8
+  GM_Dimo ~ 3.02680E-10 km^3/s^2
+            Possible Dimorphos mass-ejection (0.1-0.5%) is not reflected here,
+            perhaps measured later by follow-on ESA mission Hera.
+
+ Pre-impact Dimorphos spin pole (ICRF at J2000.0 epoch, east long. positive)
+  RA  =  69.70029 deg. 
+  DEC = -72.69527 deg.
+  PM  =  73.38929405 deg., 724.7244051 deg/day, 1.0256E-06 deg^2/day^2
+         (period is 11.92177 hrs)
+
+ Post-impact Dimorphos spin pole 
+  A dynamic frame where the X axis points from Dimorphos center to Didymos 
+  center. The Z axis is parallel to the pre-impact Z axis.
+  RA  =  69.70029 deg. 
+  DEC = -72.69527 deg.
+
+ Name                                     Start (TDB)        Stop (TDB)
+ ---------------------------------------  -----------------  -----------------
+ dimorphos_s547_long                      2000-Jan-01 00:14  2030-Dec-31 00:00
+*******************************************************************************

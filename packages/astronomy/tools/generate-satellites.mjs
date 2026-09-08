@@ -81,7 +81,7 @@ const DAPHNIS_FROM_JD = 2453371.5
 const DAPHNIS_TO_JD = 2458119.5
 const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan'])
+const RADIAL_FIT_IDS = new Set(['dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan'])
 
 // id, Horizons target code, Horizons centre, parent body id, optional fit window and cadence
 const SATELLITES = [
@@ -118,6 +118,8 @@ const SATELLITES = [
   ['triton', '801', '500@899', 'neptune'],
   ['proteus', '808', '500@899', 'neptune'],
   ['charon', '901', '500@999', 'pluto'],
+  // DART post-impact s547, a short window around the prepared epoch.
+  ['dimorphos', '120065803', '500@920065803', 'didymos', 2461256.5, 2461316.5, 1],
 ]
 
 const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length
