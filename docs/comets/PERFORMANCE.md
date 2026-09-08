@@ -13,7 +13,7 @@ Every run starts from the default view with Shadows enabled, waits for mounted a
 | Tempel 1 | 1 | 16.74 | 17.70 | 65.81 | 51.09 | 2 |
 | Tempel 1 | 2 | 16.72 | 18.03 | 64.54 | 49.78 | 2 |
 
-All six runs preserve the same 26,585 scene nodes, including 1,000 nucleus triangles, with zero console/page errors and zero interaction-time requests. The actual mounted body atlas URLs are the same canonical @2x files at both DPRs and remain unchanged throughout the drag. These node totals include the shared universe context for the 74-object registry. DOM retention and draw cadence do not establish pixel completeness; unresolved Chrome capture anomalies are recorded in [QUALIFICATION.md](QUALIFICATION.md).
+All six runs preserve the same 26,585 scene nodes, including 1,000 nucleus triangles, with zero console/page errors and zero interaction-time requests. The actual mounted body atlas URLs are the same canonical @2x files at both DPRs and remain unchanged throughout the drag. These node totals include the shared universe context for the 74-object registry. DOM retention and draw cadence do not establish every-frame pixel completeness. The earlier missing-graphics interpretation was disproved by saved-image pixel checks, recorded in [QUALIFICATION.md](QUALIFICATION.md).
 
 Typical draw spacing is near 16.7 ms. The largest individual gaps range from 60.5 to 68.5 ms; this does not establish uninterrupted 60 fps. The reports retain long tasks, draw gaps and Chrome pipeline sequences marked dropped without a recorded full or partial presentation in the interaction window. Those measures are distinct and must not be added together.
 

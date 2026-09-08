@@ -1,41 +1,268 @@
 {
-  "schema": "cssearth-comet-capture-observation@1",
+  "schema": "cssearth-comet-capture-verification@1",
   "codeRevision": "5042c066",
-  "route": "http://127.0.0.1:4258/comet-103p/",
-  "viewport": {
-    "width": 1440,
-    "height": 900
-  },
-  "dpr": 1,
-  "browser": "Chrome 152.0.7977.76",
-  "status": "unresolved; visual acceptance remains provisional",
-  "observations": [
-    "Initial headless screenshots sometimes omit part of the header badges while DOM bounds, visibility, text and hit targets are correct.",
-    "A second headless screenshot in one sequence captured only the sky background.",
-    "A later read-only bounds/style inspection and screenshot captured the full scene and badges.",
-    "A separate headed Chrome screenshot retained the scene and badges but omitted several SVG shell titles."
+  "status": "Previous missing-pixel interpretation retracted",
+  "findings": [
+    "The four supposedly different headless PNGs are byte-identical.",
+    "The title region is pixel-identical between headed and headless Chrome.",
+    "Decoded PNG pixels contain the title, both badges and SVG section labels; direct glyph inspection confirms the text.",
+    "The initial reports of absent badges, titles and a blank frame were incorrect visual interpretations, not differences in the saved captures. No application paint defect is demonstrated by these files."
   ],
-  "interpretation": "These captures do not establish whether the cause is screenshot/compositor behavior or an application paint defect. DOM and timing passes do not resolve it.",
   "captures": [
     {
       "path": "output/comet-performance/badge-stage-1.png",
       "bytes": 558212,
-      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa"
+      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa",
+      "regions": [
+        {
+          "name": "title",
+          "rect": {
+            "x": 32,
+            "y": 136,
+            "w": 100,
+            "h": 30
+          },
+          "rgbSha256": "c30cf441222419f4baedd428f7270684f4e0f33b537bd960f364540bba5cde7d",
+          "pixelsAbove80": 645
+        },
+        {
+          "name": "badges",
+          "rect": {
+            "x": 186,
+            "y": 141,
+            "w": 150,
+            "h": 24
+          },
+          "rgbSha256": "e00021c07dbb353d803efa96b932d7734a9aa48290e67682bfc87178d6a5a268",
+          "pixelsAbove80": 383
+        },
+        {
+          "name": "factsheet",
+          "rect": {
+            "x": 32,
+            "y": 339,
+            "w": 105,
+            "h": 15
+          },
+          "rgbSha256": "f3c1deb7ba5ca35f176d08eeb1024e258c57723fc67ff0851f95cd47aeacd32d",
+          "pixelsAbove80": 285
+        },
+        {
+          "name": "surface-lens",
+          "rect": {
+            "x": 32,
+            "y": 493,
+            "w": 140,
+            "h": 17
+          },
+          "rgbSha256": "a2aef203ebbe66050b4d718cb166b467773aaf1bea953203004ecd08a08b222d",
+          "pixelsAbove80": 474
+        }
+      ]
     },
     {
       "path": "output/comet-performance/badge-stage-2.png",
       "bytes": 558212,
-      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa"
+      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa",
+      "regions": [
+        {
+          "name": "title",
+          "rect": {
+            "x": 32,
+            "y": 136,
+            "w": 100,
+            "h": 30
+          },
+          "rgbSha256": "c30cf441222419f4baedd428f7270684f4e0f33b537bd960f364540bba5cde7d",
+          "pixelsAbove80": 645
+        },
+        {
+          "name": "badges",
+          "rect": {
+            "x": 186,
+            "y": 141,
+            "w": 150,
+            "h": 24
+          },
+          "rgbSha256": "e00021c07dbb353d803efa96b932d7734a9aa48290e67682bfc87178d6a5a268",
+          "pixelsAbove80": 383
+        },
+        {
+          "name": "factsheet",
+          "rect": {
+            "x": 32,
+            "y": 339,
+            "w": 105,
+            "h": 15
+          },
+          "rgbSha256": "f3c1deb7ba5ca35f176d08eeb1024e258c57723fc67ff0851f95cd47aeacd32d",
+          "pixelsAbove80": 285
+        },
+        {
+          "name": "surface-lens",
+          "rect": {
+            "x": 32,
+            "y": 493,
+            "w": 140,
+            "h": 17
+          },
+          "rgbSha256": "a2aef203ebbe66050b4d718cb166b467773aaf1bea953203004ecd08a08b222d",
+          "pixelsAbove80": 474
+        }
+      ]
     },
     {
       "path": "output/comet-performance/badge-stage-3.png",
       "bytes": 558212,
-      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa"
+      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa",
+      "regions": [
+        {
+          "name": "title",
+          "rect": {
+            "x": 32,
+            "y": 136,
+            "w": 100,
+            "h": 30
+          },
+          "rgbSha256": "c30cf441222419f4baedd428f7270684f4e0f33b537bd960f364540bba5cde7d",
+          "pixelsAbove80": 645
+        },
+        {
+          "name": "badges",
+          "rect": {
+            "x": 186,
+            "y": 141,
+            "w": 150,
+            "h": 24
+          },
+          "rgbSha256": "e00021c07dbb353d803efa96b932d7734a9aa48290e67682bfc87178d6a5a268",
+          "pixelsAbove80": 383
+        },
+        {
+          "name": "factsheet",
+          "rect": {
+            "x": 32,
+            "y": 339,
+            "w": 105,
+            "h": 15
+          },
+          "rgbSha256": "f3c1deb7ba5ca35f176d08eeb1024e258c57723fc67ff0851f95cd47aeacd32d",
+          "pixelsAbove80": 285
+        },
+        {
+          "name": "surface-lens",
+          "rect": {
+            "x": 32,
+            "y": 493,
+            "w": 140,
+            "h": 17
+          },
+          "rgbSha256": "a2aef203ebbe66050b4d718cb166b467773aaf1bea953203004ecd08a08b222d",
+          "pixelsAbove80": 474
+        }
+      ]
+    },
+    {
+      "path": "output/comet-performance/badge-recheck.png",
+      "bytes": 558212,
+      "sha256": "40a9aa308a746e61e3a67a3143ce694e341f5e2f0645aedd595039c6b7d815fa",
+      "regions": [
+        {
+          "name": "title",
+          "rect": {
+            "x": 32,
+            "y": 136,
+            "w": 100,
+            "h": 30
+          },
+          "rgbSha256": "c30cf441222419f4baedd428f7270684f4e0f33b537bd960f364540bba5cde7d",
+          "pixelsAbove80": 645
+        },
+        {
+          "name": "badges",
+          "rect": {
+            "x": 186,
+            "y": 141,
+            "w": 150,
+            "h": 24
+          },
+          "rgbSha256": "e00021c07dbb353d803efa96b932d7734a9aa48290e67682bfc87178d6a5a268",
+          "pixelsAbove80": 383
+        },
+        {
+          "name": "factsheet",
+          "rect": {
+            "x": 32,
+            "y": 339,
+            "w": 105,
+            "h": 15
+          },
+          "rgbSha256": "f3c1deb7ba5ca35f176d08eeb1024e258c57723fc67ff0851f95cd47aeacd32d",
+          "pixelsAbove80": 285
+        },
+        {
+          "name": "surface-lens",
+          "rect": {
+            "x": 32,
+            "y": 493,
+            "w": 140,
+            "h": 17
+          },
+          "rgbSha256": "a2aef203ebbe66050b4d718cb166b467773aaf1bea953203004ecd08a08b222d",
+          "pixelsAbove80": 474
+        }
+      ]
     },
     {
       "path": "output/comet-performance/badge-headed.png",
       "bytes": 560022,
-      "sha256": "98e9338ed2929d22fe6c11cff2f8f9a1813b14f9e6c4098bde7e5f2fa77839e3"
+      "sha256": "98e9338ed2929d22fe6c11cff2f8f9a1813b14f9e6c4098bde7e5f2fa77839e3",
+      "regions": [
+        {
+          "name": "title",
+          "rect": {
+            "x": 32,
+            "y": 136,
+            "w": 100,
+            "h": 30
+          },
+          "rgbSha256": "c30cf441222419f4baedd428f7270684f4e0f33b537bd960f364540bba5cde7d",
+          "pixelsAbove80": 645
+        },
+        {
+          "name": "badges",
+          "rect": {
+            "x": 186,
+            "y": 141,
+            "w": 150,
+            "h": 24
+          },
+          "rgbSha256": "232a154cafbc3ab2073b35884a65bf2d1a2aac5bfd1b4c9c49383bf1808894e2",
+          "pixelsAbove80": 381
+        },
+        {
+          "name": "factsheet",
+          "rect": {
+            "x": 32,
+            "y": 339,
+            "w": 105,
+            "h": 15
+          },
+          "rgbSha256": "d9d3a763e7e851bfd637fd55f83bcf56ea2fccd82c6f075ad8397eb52bb56496",
+          "pixelsAbove80": 285
+        },
+        {
+          "name": "surface-lens",
+          "rect": {
+            "x": 32,
+            "y": 493,
+            "w": 140,
+            "h": 17
+          },
+          "rgbSha256": "a2aef203ebbe66050b4d718cb166b467773aaf1bea953203004ecd08a08b222d",
+          "pixelsAbove80": 474
+        }
+      ]
     }
   ]
 }
