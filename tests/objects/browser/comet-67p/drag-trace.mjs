@@ -9,6 +9,7 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../../../../site/objects.mjs';
+import { traceDurationEvents } from '../comets/trace-events.mjs';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4257';
 const dpr = Number(process.argv[3] ?? 1);
 assert.ok([1, 2].includes(dpr));
@@ -84,13 +85,14 @@ try {
   const start = marks.get('comet-trace-interaction-start'), end = marks.get('comet-trace-interaction-end');
   assert.ok(start && end, 'trace must bind the exact interaction window');
   const events = trace.traceEvents.filter(e => e.ts >= start.ts && e.ts < end.ts);
-  const main = events.filter(e => e.pid === start.pid && e.tid === start.tid && e.ph === 'X');
+  const spans = traceDurationEvents(trace.traceEvents, start.ts, end.ts);
+  const main = spans.filter(e => e.pid === start.pid && e.tid === start.tid);
   const selected = pattern => stats(main.filter(e => pattern.test(e.name)).map(e => e.dur / 1000));
   const draws = events.filter(e => e.name === 'DrawFrame' && (e.ph === 'I' || e.ph === 'X'));
   const drawing = new Map();
   for (const e of draws) { const k = `${e.pid}:${e.tid}`; if (!drawing.has(k)) drawing.set(k, []); drawing.get(k).push(e); }
   const durations = {}, relevant = /Draw|Swap|SubmitCompositorFrame|RasterTask|PipelineReporter/;
-  for (const e of events) if (relevant.test(e.name) && e.ph === 'X') (durations[e.name] ??= []).push(e.dur / 1000);
+  for (const e of spans) if (relevant.test(e.name)) (durations[e.name] ??= []).push(e.dur / 1000);
   const pipeline = events.filter(e => e.pid === start.pid && e.name === 'PipelineReporter' && e.ph === 'b' && e.args?.frame_reporter);
   const sequences = new Map();
   for (const e of pipeline) { const r = e.args.frame_reporter, k = `${r.frame_source}:${r.frame_sequence}`; if (!sequences.has(k)) sequences.set(k, new Set()); sequences.get(k).add(r.state); }
