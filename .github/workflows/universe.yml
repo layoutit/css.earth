@@ -36,13 +36,19 @@ jobs:
           pnpm typecheck:renderer
           pnpm typecheck:preparation
       - name: Test prepared source, materials and world context
-        run: pnpm test:preparation --universe
+        run: |
+          pnpm test:preparation --universe
+          node --test tools/objects/material-composition/coplanar-raster.test.mjs
       - name: Test shared scientific source credits
         run: node --test site/test/scene-sources.test.mjs
+      - name: Test search ownership during flight
+        run: node --test site/test/shell-lifetime.test.mjs
+      - name: Enforce activation preparation for every registered object
+        run: node --test tools/prepared-activation-groups.test.mjs tools/prepared-activation-registry.test.mjs
       - name: Test shared environment rendering and camera
         run: >-
           pnpm test:renderer
           volume/ sky/ shell/ stars/ labels/ universe/
           solar-system/heliocentric-geometry
-          navigation/world-camera
+          navigation/world-camera navigation/screen-picking rendering/prepared-activation
           navigation/saved-world-camera

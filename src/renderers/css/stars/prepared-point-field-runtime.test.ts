@@ -64,7 +64,7 @@ function mount(payload=fixture(), showLabels = true) {
   return {document,host,before,layer,root:layer.root as unknown as FakeElement,resolveResource};
 }
 function leaves(root: FakeElement): FakeElement[] {
-  return root.children.flatMap(child => child.className === 'prepared-point-field-stars' ? child.children : [child]);
+  return root.children.flatMap(child => child.className === 'prepared-point-field-stars' ? child.children.flatMap(block => block.children) : [child]);
 }
 
 test('foreground label exclusion hides only star text and is released by the next publication',()=>{
@@ -103,9 +103,11 @@ test('an unchanged camera and surviving identities do not rewrite retained star 
   const { layer, root } = mount(fixture(), false);
   layer.publish(world(), viewport, 1);
   const slots = leaves(root);
+  const projected = layer.inspect().projectedPoints;
   slots.forEach(slot => { slot.writes = 0; });
   layer.publish(world(), viewport, 1);
   expect(slots.reduce((sum, slot) => sum + slot.writes, 0)).toBe(0);
+  expect(layer.inspect().projectedPoints).toBe(projected, 'Equivalent views do not re-project the retained point pools');
   layer.publish(world(1), viewport, 1);
   expect(center(find(layer, 'star:2'))[0]).toBeCloseTo(66, 12);
   expect(leaves(root)).toEqual(slots);

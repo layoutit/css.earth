@@ -8,6 +8,7 @@ export interface ObjectWorldNavigation {
   apply(pose: WorldCameraPose): void;
   setZoomOutCentering?(enabled: boolean): void;
   optics(): WorldCameraViewport & { framingRadiusPixels: number;
+    visibleRect: import('../solar-system/types.js').VisibleRect | null;
     detailHandoffDiameterPixels: number };
   subscribe(listener: ObjectWorldNavigationListener): () => void;
 }

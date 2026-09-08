@@ -9,6 +9,7 @@ import { initialObjectSelection } from './object-contract.js';
 import { resolvePreparedPresentation, selectedPreparedVariant } from '../rendering/prepared-presentation.js';
 import { prepareObjectResources } from './prepared-resource-lease.js';
 import { preparePresentationTree, type PreparedTreeLease } from '../rendering/prepared-tree.js';
+import type { CameraViewport } from '../navigation/camera-viewport.js';
 
 export interface ObjectPreparationView { world: WorldCameraPose; viewport: WorldCameraViewport; }
 
@@ -45,10 +46,13 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
 /** One readiness contract for both already-decoded and deferred object packages. */
 export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => Promise<ObjectRuntimeDefinition>, frame: PreparedWorldCameraFrame) {
   return Object.freeze({ frame,
-    async prepare({ signal, getView, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
-      signal: AbortSignal; getView: () => ObjectPreparationView; ownerDocument?: Document;
+    async prepare({ signal, getView, cameraViewport, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
+      signal: AbortSignal; getView: () => ObjectPreparationView; cameraViewport?: CameraViewport; ownerDocument?: Document;
     }) {
       const definition = await abortable(load(signal), signal);
+      // Resolve a new authored projection while the outgoing scene is intact.
+      // Attachment only consumes this application-owned snapshot.
+      if (definition.camera.projection) cameraViewport?.read(definition.camera.projection.cssPerspective);
       const resources = prepareObjectResources(definition.assets, { signal });
       let tree: PreparedTreeLease | undefined;
       const construction = ownerDocument ? preparePresentationTree(definition.tree, ownerDocument, signal).then(value => { tree = value; }) : Promise.resolve();

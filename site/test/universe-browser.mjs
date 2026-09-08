@@ -148,7 +148,7 @@ async function read(page) {
     slices: document.querySelectorAll('.css-volume-mesh > s').length,
     stable: window.__sun.assertStableDomIdentity(),
     starField: (({ points, ...stats }) => stats)(window.__cssEarthUniverse.inspect().stars),
-    starSlots: document.querySelectorAll('.prepared-point-field-stars > s').length,
+    starSlots: document.querySelectorAll('.prepared-point-field-block > s').length,
     volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
     skyVisible: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility === 'visible',
     volumeTransforms: [...document.querySelectorAll('.css-volume-scene')].map(node => getComputedStyle(node).transform),

@@ -23,6 +23,7 @@ import { requirePreparedPresentation } from '../../../src/platform/prepared-pres
 import { requirePreparedResourceCatalog } from '../../object-runtime-contract.mjs';
 import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mjs';
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mjs';
+import { restoreDepthSource } from '../../prepared-depth-partitions.mjs';
 
 async function prepareSolidEpochFrame({ config, celestial }) {
   const { namespace: id, geometry } = config;
@@ -71,6 +72,9 @@ export async function prepareSolidScene({ config, celestial, outputDirectory, ra
  * The same numeric owner as full preparation updates the actual retained carrier,
  * so the physical world frame never names a basis absent from the rendered scene. */
 export async function refreshSolidSceneEpoch({ config, scene, definition }) {
+  // Refresh the canonical preparation branch. Generated projection carriers
+  // are rebuilt by prepareObjectJson after its physical frame has changed.
+  definition = restoreDepthSource(definition);
   const id = config.namespace;
   if (config.kind !== 'solid-observation-body' || definition.id !== id || !Array.isArray(scene.bodyLeaves)) {
     throw new TypeError('Epoch refresh requires its prepared solid-observation scene.');

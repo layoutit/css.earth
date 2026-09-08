@@ -7,7 +7,8 @@ export interface SystemMarkers {url:string;sun:Sprite;bodies:Readonly<Record<str
 // bar laid out at the overlay's centre, so the projection's centre-relative
 // offsets are the translation as they are and the segment is the bar's x
 // axis. Pieces beyond the segment count are hidden.
-export function writePieces(pool:readonly HTMLElement[], segments:readonly OrbitSegment[], previousCount:number) {
+export function writePieces(pool:readonly HTMLElement[], segments:readonly OrbitSegment[], previousCount:number,
+  setVisible?: (index: number, visible: boolean) => void) {
   const count = Math.min(segments.length, pool.length);
   for (let index = 0; index < count; index += 1) {
     const [x0, y0, x1, y1, weight] = segments[index];
@@ -21,10 +22,12 @@ export function writePieces(pool:readonly HTMLElement[], segments:readonly Orbit
     // The chord's trail weight: the line fades backwards from the body.
     const opacity = formatNumber(weight);
     if (piece.style.opacity !== opacity) piece.style.opacity = opacity;
-    if (piece.style.visibility !== "") piece.style.visibility = "";
+    if (setVisible) setVisible(index, true);
+    else if (piece.style.visibility !== "") piece.style.visibility = "";
   }
   for (let index = count; index < previousCount; index += 1) {
-    pool[index].style.visibility = "hidden";
+    if (setVisible) setVisible(index, false);
+    else pool[index].style.visibility = "hidden";
   }
   return { count, overflowed: segments.length > pool.length };
 }
