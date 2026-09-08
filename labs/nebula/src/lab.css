@@ -66,9 +66,16 @@ input[type="range"] { width: 100%; margin: 12px 0 3px; accent-color: #c2ccd8; }
 .sampling-actions, .sampling-navigation { display: flex; align-items: center; gap: 6px; }
 .sampling-actions button, .sampling-navigation button { font-size: 11px; padding: 6px 8px; }
 .sampling-actions #star-cancel { margin-left: auto; }
+.sampling-coverage { display: flex; justify-content: flex-end; margin: 6px 0; }
+.sampling-coverage button { font-size: 11px; padding: 5px 8px; }
+.sampling-coverage button[aria-pressed="true"] { border-color: #a9acb5; background: #35373b; }
 .star-overview { position: relative; }
 .star-overview img { display: block; width: 100%; height: auto; cursor: crosshair; }
-#star-overview-marker { position: absolute; width: 14px; height: 14px; border: 1px solid #fff; box-shadow: 0 0 0 1px #222; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+#star-overview-references { position: absolute; inset: 0; pointer-events: none; }
+#star-overview-marker, .star-reference-marker { position: absolute; width: 14px; height: 14px; border: 1px solid #fff; box-shadow: 0 0 0 1px #222; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+.star-reference-marker { border-color: #8bd3db; }
+.star-reference-marker[data-included="false"] { border-color: #aaa; border-style: dashed; }
+.star-reference-marker[data-current="true"] { border-color: #fff; border-width: 2px; }
 .sampling-navigation { margin: 8px 0 12px; }
 .sampling-navigation output { min-width: 45px; text-align: center; font-size: 11px; color: var(--text-secondary); }
 .sampling-navigation #star-inspect { margin-left: auto; }

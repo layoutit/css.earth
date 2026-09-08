@@ -17,7 +17,8 @@ export function createStarSamplingControls(host: HTMLElement, options: { onApply
     <p id="star-sampling-status" class="sampling-status" role="status" aria-live="polite"></p>
     <progress id="star-sampling-progress" aria-label="Star sampling progress" hidden></progress>
     <div id="star-sampling-workspace" hidden>
-      <div class="star-overview"><img id="star-overview" alt="Full galaxy image. Pick a star, then choose Add sample." /><span id="star-overview-marker" hidden></span><div id="star-loupe" class="star-loupe" hidden></div></div>
+      <div class="sampling-coverage"><button id="star-show-references" type="button" aria-pressed="false" aria-controls="star-overview-references" title="Circle every reference on the galaxy. Solid rings are selected for calibration; dashed rings are excluded. The current reference is white.">All references</button></div>
+      <div class="star-overview"><img id="star-overview" alt="Full galaxy image. Pick a star, then choose Add sample." /><div id="star-overview-references" aria-hidden="true" hidden></div><span id="star-overview-marker" hidden></span><div id="star-loupe" class="star-loupe" hidden></div></div>
       <div class="sampling-navigation"><button id="star-previous" type="button" aria-label="Previous star">←</button><output id="star-position" aria-live="polite">0 / 0</output><button id="star-next" type="button" aria-label="Next star">→</button><button id="star-inspect" type="button" disabled>Add sample</button></div>
       <section id="star-selected" hidden>
         <div id="star-view" class="sampling-view" role="group" aria-label="Star sample view"><button id="star-reference-view" type="button" aria-pressed="true">References</button><button id="star-check-view" type="button" aria-pressed="false" disabled>Calibration checks</button></div>
@@ -31,11 +32,13 @@ export function createStarSamplingControls(host: HTMLElement, options: { onApply
   const element = <T extends HTMLElement>(id: string) => host.querySelector<T>(`#${id}`)!;
   const status = element('star-sampling-status'), workspace = element('star-sampling-workspace');
   const overview = element<HTMLImageElement>('star-overview'), marker = element('star-overview-marker');
+  const referenceOverlay = element('star-overview-references'), referenceToggle = element<HTMLButtonElement>('star-show-references');
+  const referenceMarkers = new Map<string, HTMLSpanElement>();
   const copy = element<HTMLButtonElement>('copy-star-recipe'), apply = element<HTMLButtonElement>('star-apply');
   const picker = createStarPositionPicker(element('star-loupe'), point => { pendingPoint = point; renderSelected(); status.textContent = 'Centre selected · Add sample to confirm.'; });
   let context: Context | null = null, result: SamplingResult | null = null, controls = defaults();
   let references: StarReference[] = [], selected: SamplePoint | null = null, pendingPoint: SamplePoint | null = null, calibrationCurrent = false;
-  let checks: ValidationSample[] = [], checkIndex = 0, showChecks = false, showMask = false;
+  let checks: ValidationSample[] = [], checkIndex = 0, showChecks = false, showMask = false, showReferences = false;
   let removalJob: RemovalJob | null = null;
   const missingPreviews = new Set<string>();
   let version = 0, requestVersion = 0, removalSequence = 0, pending: AbortController | null = null;
@@ -65,11 +68,32 @@ export function createStarSamplingControls(host: HTMLElement, options: { onApply
   }
   const selectedReference = () => references.find(row => selected && key(row.point) === key(selected));
   function visibleSample() { return showChecks ? checks[checkIndex] : selectedReference()?.sample; }
+  function renderReferenceMarkers() {
+    referenceOverlay.hidden = !showReferences;
+    referenceToggle.setAttribute('aria-pressed', String(showReferences));
+    if (!result) return;
+    const live = new Set(references.map(row => key(row.point)));
+    for (const [id, ring] of referenceMarkers) if (!live.has(id)) { ring.remove(); referenceMarkers.delete(id); }
+    for (const reference of references) {
+      const id = key(reference.point), position = reference.sample?.point ?? reference.point;
+      let ring = referenceMarkers.get(id);
+      if (!ring) {
+        ring = document.createElement('span'); ring.className = 'star-reference-marker'; ring.dataset.reference = id;
+        referenceMarkers.set(id, ring); referenceOverlay.append(ring);
+      }
+      ring.style.left = `${(position.x + .5) / result.nativeDimensions[0] * 100}%`;
+      ring.style.top = `${(position.y + .5) / result.nativeDimensions[1] * 100}%`;
+      ring.dataset.included = String(reference.included);
+      ring.dataset.current = String(!pendingPoint && !showChecks && selected !== null && key(selected) === id);
+    }
+  }
   function renderSelected() {
     const index = showChecks ? checkIndex : references.findIndex(value => selected && key(value.point) === key(selected));
     const sample = visibleSample(), reference = selectedReference(), count = showChecks ? checks.length : references.length;
     apply.disabled = !references.length || !options.onApply || Boolean(pending) || Boolean(pendingPoint) || removalJobActive(removalJob);
     element('star-selected').hidden = showChecks ? !sample : !reference; marker.hidden = !pendingPoint && !sample && !reference;
+    renderReferenceMarkers();
+    if (showReferences && !pendingPoint && !showChecks) marker.hidden = true;
     element('star-position').textContent = `${index >= 0 ? index + 1 : 0} / ${count}`;
     element<HTMLButtonElement>('star-previous').disabled = count < 2;
     element<HTMLButtonElement>('star-next').disabled = count < 2;
@@ -190,6 +214,7 @@ export function createStarSamplingControls(host: HTMLElement, options: { onApply
     }
     save(); renderSelected();
   }
+  referenceToggle.addEventListener('click', () => { showReferences = !showReferences; renderSelected(); });
   element('star-show-result').addEventListener('click', () => { showMask = false; renderSelected(); });
   element('star-show-mask').addEventListener('click', () => { showMask = true; renderSelected(); });
   element('star-reference-view').addEventListener('click', () => { showChecks = false; pendingPoint = null; renderSelected(); });

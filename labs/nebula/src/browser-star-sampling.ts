@@ -183,7 +183,29 @@ try {
   assert.equal(survey.imageId, 'wise-wide-infrared'); assert.ok(survey.samples.length >= 20 && survey.samples.length <= 50);
   assert.equal(await page.locator('#star-sampling-controls').getAttribute('data-sample-count'), String(survey.samples.length));
   assert.equal(await page.locator('#star-position').innerText(), `1 / ${survey.samples.length}`);
+  const coverageCalls = fits();
+  assert.equal(await page.locator('#star-overview-references').isVisible(), false);
+  await page.locator('#star-show-references').click();
+  assert.equal(await page.locator('#star-show-references').getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('.star-reference-marker:visible').count(), survey.samples.length);
+  assert.equal(await page.locator('#star-overview-marker').isVisible(), false);
+  const rings = await page.locator('.star-reference-marker').evaluateAll(nodes => nodes.map(node => {
+    const ring = node as HTMLElement, box = ring.getBoundingClientRect();
+    return { id: ring.dataset.reference, x: box.x + box.width / 2, y: box.y + box.height / 2, included: ring.dataset.included,
+      pointerEvents: getComputedStyle(ring).pointerEvents };
+  }));
+  const mapBox = await page.locator('#star-overview').boundingBox(); assert.ok(mapBox);
+  for (const sample of survey.samples) {
+    const ring = rings.find(value => value.id === `${sample.requestedPoint.x.toFixed(3)}:${sample.requestedPoint.y.toFixed(3)}`);
+    assert.ok(ring, 'Every reference, including rejected fits, must have a ring.');
+    assert.ok(Math.abs(ring.x - (mapBox.x + (sample.point.x + .5) / survey.nativeDimensions[0] * mapBox.width)) < 1);
+    assert.ok(Math.abs(ring.y - (mapBox.y + (sample.point.y + .5) / survey.nativeDimensions[1] * mapBox.height)) < 1);
+    assert.equal(ring.pointerEvents, 'none', 'Coverage rings must not block image picking.');
+  }
+  await page.screenshot({ path: `${output}/reference-coverage.png` });
   await page.locator('#star-next').click(); assert.equal(await page.locator('#star-position').innerText(), `2 / ${survey.samples.length}`);
+  assert.equal(await page.locator('.star-reference-marker[data-current="true"]').count(), 1);
+  assert.equal(await page.locator('.star-reference-marker[data-current="true"]').getAttribute('data-reference'), await page.locator('#star-sampling-controls').getAttribute('data-selected-reference'));
   await page.locator('#star-previous').click();
   await page.waitForFunction(() => ['source', 'model', 'residual'].every(id => {
     const image = document.querySelector<HTMLImageElement>(`#star-crop-${id}`); return image?.complete && image.naturalWidth > 0;
@@ -192,6 +214,11 @@ try {
   const marked = page.locator('#star-include'), priorIncluded = await marked.isChecked();
   const beforeChanges = fits();
   await marked.setChecked(!priorIncluded);
+  assert.equal(await page.locator('.star-reference-marker[data-current="true"]').getAttribute('data-included'), String(!priorIncluded));
+  await page.locator('#star-show-references').click();
+  assert.equal(await page.locator('#star-overview-references').isVisible(), false);
+  assert.equal(await page.locator('#star-overview-marker').isVisible(), true);
+  assert.equal(fits(), coverageCalls, 'Coverage and paging must not start processing.');
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   assert.equal(fits(), beforeChanges, 'Selection changes must not start automatic fitting.');
   assert.match(await page.locator('#star-sampling-status').innerText(), /References changed/);
