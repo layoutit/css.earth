@@ -5,6 +5,8 @@ export const browserProfile = createObjectBrowserProfile({ id: 'comet-67p', cont
   audit: {
     preparedAssetPairs: [{ one: '/scenes/comet-67p/comet-67p-directional-sun.webp', two: '/scenes/comet-67p/comet-67p-directional-sun@2x.webp' }],
     canonicalPreparedAssets: ['/scenes/comet-67p/comet-67p-model-surface@2x.webp', '/scenes/comet-67p/comet-67p-lighting.webp'],
-    retained: { lensIds: ['model'], speedClicks: 0, allowedMountSelectors: [] },
+    lensRace: { defaultId: 'model', slowId: 'osiris', winnerId: 'model',
+      slowAsset: '/scenes/comet-67p/comet-67p-osiris-surface@2x.webp', preReadyDisabled: false },
+    retained: { lensIds: objectControls.lenses.controls.map(lens => lens.id), speedClicks: 0, allowedMountSelectors: [] },
   },
 });
