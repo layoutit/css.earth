@@ -1,6 +1,10 @@
 # Qualification record
 
-The PoC contains 67P, Hartley 2, Tempel 1 and Wild 2's observed terrain, integrated with base **1398bd9025940b6fb0d0188dfa518cdfacba782e**. The final application build and aggregate checks use **67217245**; subsequent evidence commits do not change application code or prepared runtime bytes. The shared scene epoch is **3 September 2026**, JD 2461286.5. Arbitrary model phase is not a current rotational orientation.
+Wild 2 now uses the closed, completed PDS model at 992 leaves. [WILD2-COMPLETION.md](WILD2-COMPLETION.md) records its current source, geometry, browser, delivery and drag checks and supersedes the original Wild 2 evidence below. The other three comet models are unchanged.
+
+## Original four-comet qualification
+
+The original PoC contained 67P, Hartley 2, Tempel 1 and Wild 2's observed terrain, integrated with base **1398bd9025940b6fb0d0188dfa518cdfacba782e**. That application build and its aggregate checks use **67217245**; subsequent evidence commits do not change application code or prepared runtime bytes. The shared scene epoch is **3 September 2026**, JD 2461286.5. Arbitrary model phase is not a current rotational orientation.
 
 | Check | Result |
 | --- | --- |
@@ -24,7 +28,7 @@ The initial final-build attempt stopped with `ENOSPC` while copying assets. A su
 
 Integration also corrected two inherited contract issues: the Sun content manifest pins its existing checked-in bytes, and major-body label styling selects registry classifications instead of a literal Sun id. The latter preserves current styling and passed 54 focused ownership/layout checks. Neither change adds a comet-specific shell path.
 
-Wild 2 adds one preparation capability for genuinely open observations and one optional prepared front-face rule for targeting. Existing plans retain their original two-sided hit behavior. The [native-targeting report](evidence/81p-open-surface.json) binds the exact runtime bytes restored after the face-budget trials; the tested picker and harness are unchanged. Points within half a CSS pixel of a source edge are raster-boundary evidence, not interior assertions. No missing hemisphere is filled.
+Wild 2 adds one preparation capability for genuinely open observations and one optional prepared front-face rule for targeting. Existing plans retain their original two-sided hit behavior. The [native-targeting report](evidence/81p-open-surface.json) binds the exact runtime bytes restored after the face-budget trials; the tested picker and harness are unchanged. Points within half a CSS pixel of a source edge are raster-boundary evidence, not interior assertions. That original version left the unseen side open; the current version uses the explicitly labeled PDS completion.
 
 The [existing-payload audit](evidence/81p-existing-payloads.json) compares Wild 2's integration with the three-comet implementation: 65 existing scene/runtime files change only shared heliocentric marker indices/counts. Existing object-owned geometry and materials are unchanged. The application still mounts one object scene through its generic adapter and shared shell.
 
@@ -33,7 +37,7 @@ The [existing-payload audit](evidence/81p-existing-payloads.json) compares Wild 
 ![67P production preview](evidence/67p.png)
 ![Hartley 2 source constraints](evidence/103p.png)
 ![Tempel 1 source constraints](evidence/9p.png)
-![Wild 2 observed surface with Shadows enabled](evidence/81p.png)
+![Historical Wild 2 open surface with Shadows enabled](evidence/81p.png)
 
 Wild 2's [flood-lit view](evidence/81p-front-flood.png), [close view](evidence/81p-close-flood.png) and [unobserved-side view](evidence/81p-open-side.png) expose both its measured coverage and the limitations of a 996-face, 64-pixel-per-triangle presentation. The [capture record](evidence/81p-visuals.json) includes actions, camera transforms, image hashes and hashes of the actually loaded body atlases. Close-view texture/facet artifacts are not observations; the source-lighting and encoded-edge measurements are in [GEOMETRY.md](GEOMETRY.md#wild-2-close-view-limits).
 
@@ -41,4 +45,4 @@ These are unmodified Chrome screenshots. The original NAVCAM reference beside 67
 
 The earlier missing-graphics interpretation of Hartley 2 screenshots was disproved by identical file hashes and direct pixel checks. The [capture verification](evidence/capture-anomalies.json) preserves that correction; no application paint fix was made. Production attempts with the development-only conformance harness, hot-reload-interrupted captures and response-body collection failures are excluded from accepted evidence.
 
-Borrelly and Halley remain unresolved candidates in [CANDIDATES.md](CANDIDATES.md), with no placeholder routes. No tail, coma, outgassing simulation or invented unseen terrain is added.
+Borrelly and Halley remain unresolved candidates in [CANDIDATES.md](CANDIDATES.md), with no placeholder routes. No tail, coma or outgassing simulation is added. The completed Wild 2 shape uses published estimated geometry, explicitly labeled.

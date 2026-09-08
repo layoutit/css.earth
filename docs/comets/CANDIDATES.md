@@ -2,13 +2,9 @@
 
 The PoC includes 67P, Hartley 2, Tempel 1 and the observed terrain of Wild 2. Additional names are not registered until their geometry and interpretation support a useful mounted scene. The following archive products were inspected on 8 September 2026; an unresolved candidate is not a claim that usable data does not exist.
 
-## Wild 2: observed terrain selected; unseen completion excluded
+## Wild 2: completed PDS model selected
 
-[PDS v2.1](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml) provides two materially different products. The [full model label](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_plan_full.lbl) distinguishes observed vertices, an assumed ellipsoid for unseen terrain, and connecting plates without physical meaning. That completion is excluded from this PoC.
-
-The [observed-only Cartesian model](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.lbl) contains 6,432 vertices and 12,514 plates in meters. Its +Z direction is RA 112°, declination −17°; +X follows the long dimension. The [catalogue](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/catalog/dataset.cat) describes approximately half-surface coverage, about 50 m horizontal resolution and 6 m vertical precision.
-
-A preparation trial found six inconsistent shared-edge directions in the original plate ordering. Reorienting two faces without moving any vertices allows a 996-face reduction with a 49.46 m simplifier error estimate, no inconsistent edge winding, and all 348 original boundary edges preserved. Its eight edge-connected patches remain separate; the surface is never filled to create a closed nucleus. The generic adapter accepts an optional prepared front-face rule so hidden backfaces cannot become interaction targets. The [intake receipt](evidence/wild2-intake.json) is historical; [geometry and budget evidence](GEOMETRY.md) and the [qualification record](QUALIFICATION.md) describe the selected implementation. The observed-only route is `/comet-81p/`.
+[PDS v2.1](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml) provides observed-only and completed plate models. The full model uses the archive's fitted ellipsoid and joining faces for unseen terrain, with explicit provenance flags. It now supplies Wild 2's closed 992-leaf scene. The viewer describes the estimated far side; no photographic or observed-terrain claim is made for it. See [the completion record](WILD2-COMPLETION.md).
 
 ## Borrelly: image-frame terrain, not a closed nucleus
 

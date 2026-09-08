@@ -1,5 +1,7 @@
 # Source-mesh comparison
 
+The Wild 2 measurements below describe the original 996-leaf open surface. Its current 992-leaf completed model and replacement measurements are in [WILD2-COMPLETION.md](WILD2-COMPLETION.md). Measurements for the other three comets remain applicable.
+
 The 1,000-face nuclei of 67P, Hartley 2 and Tempel 1 preserve released vertex positions and closed, outward-wound topology. Unit tests also check source bounds, source constraint flags, a non-radial neck on 67P, and volume retention (within 1% for 67P and 2% for the two PDS models). Wild 2 is a 996-face open surface: all 348 boundary edges and eight edge-connected patches of the observed-only release remain. Two source faces are reversed to make shared-edge winding consistent. No vertex is moved and no unseen hemisphere is supplied.
 
 The following comparison measures Euclidean distance to the closest triangle on the other mesh. Source-to-prepared samples include every original vertex and face centroid. Prepared-to-source samples include every prepared face centroid and its three edge midpoints. The statistics are unweighted by face area, and finite sampling is **not an exhaustive Hausdorff bound** or the uncertainty of the source observations. Each report binds the source and prepared geometry hashes.
