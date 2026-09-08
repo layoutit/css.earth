@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27400%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                400 Ducrosa (A895 EC)          2026-Sep-08 10:25:24
+Rec #:     400 (+COV) Soln.date: 2026-Jun-05_03:33:10   # obs: 8889 (1895-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458706.5 ! 2019-Aug-11.00 (TDB)         Residual RMS= .19016
+   EC= .1165551502252239   QR= 2.761061089966694   TP= 2457965.0456258222
+   OM= 327.0373219219733   W=  237.5942439862618   IN= 10.52756358621881
+   A= 3.125334977809417    MA= 132.2646072970452   ADIST= 3.48960886565214
+   PER= 5.52526            N= .178385362           ANGMOM= .030203658
+   DAN= 3.28827            DDN= 2.90163            L= 204.1899026
+   B= -8.8736535           MOID= 1.77714002        TP= 2017-Jul-30.5456258222
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 18.0005            ROTPER= 6.8678
+   H= 10.74                G= .150                 B-V= n.a.
+                           ALBEDO= .112            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#85, OCC=0
+2: source=ORB
+*******************************************************************************

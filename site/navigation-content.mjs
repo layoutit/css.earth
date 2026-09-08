@@ -83,7 +83,10 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
                 footer.replaceChildren(...[...incomingFooter.childNodes].map(node => documentTarget.importNode(node, true)));
                 footer.setAttribute('aria-label', incomingFooter.getAttribute('aria-label'));
               }
-            } else if (incomingFooter) documentTarget.body.append(documentTarget.importNode(incomingFooter, true));
+            } else if (incomingFooter) {
+              const uiLayer = documentTarget.querySelector('.planet-ui-layer') ?? documentTarget.body;
+              uiLayer.append(documentTarget.importNode(incomingFooter, true));
+            }
             documentTarget.title = source.title;
             for (const incoming of source.head.querySelectorAll(
               'link[rel="canonical"], meta[name="description"], meta[property^="og:"], meta[name^="twitter:"]',

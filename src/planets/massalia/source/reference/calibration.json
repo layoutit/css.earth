@@ -1,0 +1,15 @@
+{
+  "method": "published-volume-equivalent-diameter-cross-model-transfer",
+  "diameterKm": 147,
+  "uncertaintyKm": 2,
+  "reportedUncertaintyKm": 2,
+  "uncertaintyKind": "Published uncertainty on SAGE-based thermophysical diameter; not the total uncertainty of transferring that size to a different convex mesh.",
+  "diameterSemantics": "Volume-equivalent diameter147±2km from Alí-Lagoa et al.2020Table2 (SAGE1, HerschelPACS). The selected DAMIT16321 is a different convex model, so using this physical scale is explicitly approximate.",
+  "sourceUrl": "https://arxiv.org/pdf/2005.01479",
+  "reference": "Alí-Lagoa et al.(2020), A&A638,A84, Table2, doi:10.1051/0004-6361/202037718; SAGE model reference Podlewska-Gaca et al.(2020), A&A638,A11",
+  "limitations": "Published147±2km uncertainty belongs to the SAGE1thermophysical solution, not a scale fit to DAMIT16321. Neither SAGE mirror pole was rejected by the thermaldata. The original SAGE archive was surveyed but not retrievable during intake; no morphology transfer or replacement method is invented. LatestDAMIT16321source period8.0975859h and pole304.1°,63.7°are preserved, but absolute phase remains illustrative.",
+  "scaleKmPerSourceUnit": 36.17504654412783,
+  "metersPerSourceUnit": 36175.04654412783,
+  "sourceLabel": "Alí-Lagoa et al.(2020), A&A638,A84, Table2, doi:10.1051/0004-6361/202037718; SAGE model reference Podlewska-Gaca et al.(2020), A&A638,A11",
+  "visibleDescription": "Updated convex DAMIT shape at an approximate147km scale transferred from a published thermophysical model (±2km for that source fit; additional uncertainty for this model). The old preliminary spin solution is not used. Grid marks unavailable imagery; rotational phase is illustrative."
+}

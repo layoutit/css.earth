@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2760%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  60 Echo (A860 RB)            2026-Sep-08 10:25:13
+Rec #:      60 (+COV) Soln.date: 2026-Jun-05_03:06:14   # obs: 8008 (1861-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457810.5 ! 2017-Feb-26.00 (TDB)         Residual RMS= .2939
+   EC= .1832272718550086   QR= 1.954383800689496   TP= 2457816.774916396
+   OM= 191.5962152064943   W=  270.9948328025865   IN= 3.601474199011659
+   A= 2.39281226385727     MA= 358.3291053099107   ADIST= 2.831240727025045
+   PER= 3.70144            N= .266281586           ANGMOM= .026158959
+   DAN= 2.30515            DDN= 2.31986            L= 102.5930162
+   B= -3.6009306           MOID= .97461098         TP= 2017-Mar-04.2749163960
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 21.609             ROTPER= 25.208
+   H= 8.63                 G= .270                 B-V= .854
+                           ALBEDO= .373            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#161, OCC=0
+2: source=ORB
+*******************************************************************************

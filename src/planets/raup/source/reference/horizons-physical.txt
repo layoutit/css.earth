@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%279165%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                9165 Raup (1987 SJ3)           2026-Sep-08 10:26:16
+Rec #:    9165 (+COV) Soln.date: 2026-Jun-05_11:58:05   # obs: 3910 (1987-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458489.5 ! 2019-Jan-06.00 (TDB)         Residual RMS= .22713
+   EC= .09730413181906258  QR= 1.792960488833008   TP= 2458271.4139859728
+   OM= 15.00038018992856   W=  332.234996056793    IN= 24.59601484645517
+   A= 1.986228753263358    MA= 76.78705154659302   ADIST= 2.179497017693708
+   PER= 2.79932            N= .352095259           ANGMOM= .024128499
+   DAN= 1.81145            DDN= 2.15278            L= 349.4203358
+   B= -11.1800856          MOID= .80361599         TP= 2018-Jun-01.9139859728
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 2.4195             ROTPER= 1320.
+   H= 13.72                G= .150                 B-V= n.a.
+                           ALBEDO= .329            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#61, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27333%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                333 Badenia (A892 QA)          2026-Sep-08 10:25:23
+Rec #:     333 (+COV) Soln.date: 2026-Jun-05_03:28:16   # obs: 9665 (1994-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458071.5 ! 2017-Nov-14.00 (TDB)         Residual RMS= .15927
+   EC= .1589256237254842   QR= 2.639362590229582   TP= 2458883.6509193857
+   OM= 353.4112958203071   W=  21.51531065347004   IN= 3.744662750944231
+   A= 3.138084650635139    MA= 216.006186950584    ADIST= 3.636806711040697
+   PER= 5.55911            N= .177299329           ANGMOM= .030085605
+   DAN= 2.66483            DDN= 3.58954            L= 14.8848576
+   B= 1.3725082            MOID= 1.64016998        TP= 2020-Feb-04.1509193857
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 36.0995            ROTPER= 9.862
+   H= 9.57                 G= .150                 B-V= .773
+                           ALBEDO= .047            STYP= C:
+
+ASTEROID comments: 
+1: soln ref.= JPL#83, OCC=0
+2: source=ORB
+*******************************************************************************

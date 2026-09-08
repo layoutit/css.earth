@@ -1,0 +1,98 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5480",
+  "modelId": 5480,
+  "modelVersion": "2019-10-23",
+  "diameterKm": 40.828,
+  "diameterInterpretation": "Approximate scale from a thermal diameter of 40.828 ± 0.247 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+  "calibration": {
+    "diameterKm": 40.828,
+    "quotedUncertaintyKm": 0.247,
+    "quantity": "effective body diameter",
+    "reference": "Masiero et al. (2014), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas14",
+    "notes": "NEOWISE Mas14 original record. Fitted diameter; minimum ensemble systematic uncertainty about10%, additional to quoted formal uncertainty.",
+    "basis": "effective spherical radiometric diameter applied as approximate volume-equivalent size",
+    "assumption": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.",
+    "methodSystematicFraction": 0.1,
+    "referenceUrl": "https://doi.org/10.1088/0004-637X/791/2/121",
+    "methodSystematicUncertaintyKm": 4.082800000000001,
+    "formalErrorDefinition": "statistical1σ from fitted data; excludes stated survey systematic floor and shape/rotation sampling assumptions",
+    "observingEpochJD": 2455235.913197,
+    "detectionsByBand": {
+      "W1": 9,
+      "W2": 9,
+      "W3": 8,
+      "W4": 9
+    },
+    "fitCode": "DVBI",
+    "beamingParameter": 0.894,
+    "uncertaintyKm": 0.247,
+    "scaleKmPerSourceUnit": 32.90720405038703,
+    "sourceUrl": "https://doi.org/10.1088/0004-637X/791/2/121",
+    "sourceLabel": "Masiero et al. (2014), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas14",
+    "diameterSemantics": "effective body diameter",
+    "limitations": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty. NEOWISE Mas14 original record. Fitted diameter; minimum ensemble systematic uncertainty about10%, additional to quoted formal uncertainty.",
+    "visibleDescription": "Approximate scale from a thermal diameter of 40.828 ± 0.247 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects."
+  },
+  "periodHours": 8.0117,
+  "poleEclipticJ2000Degrees": [
+    136,
+    -56
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/59539/shape.txt",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 32907.20405038703,
+    "firstVertexKm": [
+      10.985609371365006,
+      1.3279702194533687,
+      18.673785268065025
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      44.67949304178059,
+      46.61983342140761,
+      39.83117594742491
+    ],
+    "volumeCubicKm": 35634.686353126126,
+    "volumeEquivalentRadiusKm": 20.413999999999994,
+    "radialRangeKm": [
+      17.95827468077081,
+      24.586235399371635
+    ]
+  },
+  "elevation": [
+    -3,
+    5
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 408.28000000000003,
+    "estimatedErrorMeters": 97.29032897949219,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 35615933622952.24
+    }
+  }
+}

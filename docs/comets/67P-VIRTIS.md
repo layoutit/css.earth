@@ -65,12 +65,12 @@ Focused tests cover malformed PDS records, explicit latitude order, wrapping and
 
 Validation results and deliverable hashes are recorded in `67P-VIRTIS-VALIDATION.json` after the final build. This document does not qualify exact SHAP5 v1.1 registration, original VIRTIS measurement errors, composition retrieval accuracy, or unobserved terrain.
 
-## Production captures
+## Current integrated preview
 
-Chrome at DPR 1, with Shadows off so the legend colors remain readable. These are the final concise factsheets and corrected dotted leaders. DPR 2 captures and image-bank hashes are recorded in the validation JSON.
+Chrome at DPR 1 after integrating main’s 227-object registry and explorer update, with Shadows off so the legend colors remain readable. These captures use the development preview. Both DPRs, all 13 interaction cases and the exact image hashes pass after integration; the earlier production build and 178-object browser audit retain their original scope in the validation JSON.
 
-![67P VIRTIS albedo](evidence/67p-virtis-albedo.png)
+![67P VIRTIS albedo](evidence/67p-virtis-integrated-albedo.png)
 
-![67P modeled optical ice fraction](evidence/67p-virtis-ice.png)
+![67P modeled optical ice fraction](evidence/67p-virtis-integrated-ice.png)
 
-[Visible spectral slope](evidence/67p-virtis-slope.png) · [3.2 µm absorption](evidence/67p-virtis-absorption.png)
+[Visible spectral slope](evidence/67p-virtis-integrated-slope.png) · [3.2 µm absorption](evidence/67p-virtis-integrated-absorption.png)

@@ -27,10 +27,13 @@
   fill: currentColor;
 }
 
+.planet-wordmark-two-line-css { font-size: 28px; }
+.planet-wordmark-two-line-earth { font-size: 28px; }
+
 .planet-wordmark-svg {
   /* Tight bounds: 85.64 x 16.27; source font: 22px; baseline: y=23. */
   display: inline-block;
-  font-size: var(--explorer-wordmark-size, 36px);
+  font-size: var(--explorer-wordmark-size, 38px);
   width: calc(85.64em / 22);
   height: calc(16.27em / 22);
   vertical-align: calc(-0.26em / 22);
@@ -43,6 +46,6 @@
 }
 
 .maps-brand-button:focus-visible {
-  outline: 2px solid #b5d8fa;
+  outline: 2px solid var(--shell-focus);
   outline-offset: 4px;
 }

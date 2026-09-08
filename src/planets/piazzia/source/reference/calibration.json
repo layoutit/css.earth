@@ -1,0 +1,18 @@
+{
+  "diameterKm": 47.78,
+  "quotedUncertaintyKm": 2,
+  "quantity": "mean radiometric diameter from IRAS flux-based albedo and H",
+  "reference": "IRAS-A-FPA-3-RDR-IMPS-V6.0",
+  "notes": "Quoted 1σ uncertainty derives solely from IRAS flux precision (original label DIAM_UNC). It does not encompass shape/thermal-model/H systematic uncertainty.",
+  "basis": "effective spherical radiometric diameter applied as approximate volume-equivalent size",
+  "assumption": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.",
+  "methodSystematicFraction": null,
+  "referenceUrl": "https://doi.org/10.26033/pf3k-m168",
+  "uncertaintyKm": 2,
+  "scaleKmPerSourceUnit": 38.51048712201394,
+  "sourceUrl": "https://doi.org/10.26033/pf3k-m168",
+  "sourceLabel": "IRAS-A-FPA-3-RDR-IMPS-V6.0",
+  "diameterSemantics": "mean radiometric diameter from IRAS flux-based albedo and H",
+  "limitations": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty. Quoted 1σ uncertainty derives solely from IRAS flux precision (original label DIAM_UNC). It does not encompass shape/thermal-model/H systematic uncertainty.",
+  "visibleDescription": "Approximate scale from a thermal diameter of 47.78 ± 2 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects."
+}

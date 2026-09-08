@@ -1,7 +1,6 @@
 ---
 import type { Props } from "../planet-shell-types";
-import { OBJECTS } from "../objects.mjs";
-import { objectClassificationLabel } from "../planet-search-objects.mjs";
+import PlanetBreadcrumbs from "./PlanetBreadcrumbs.astro";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
@@ -13,8 +12,6 @@ import PlanetCardHeader from "./PlanetCardHeader.astro";
 import PlanetFactsheet from "./PlanetFactsheet.astro";
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], resources = [], lenses, destinations } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
-const activeObject = OBJECTS.find((object) => object.id === objectId);
-const classificationLabel = activeObject && objectClassificationLabel(activeObject.classification);
 const sources = sceneSources(resources);
 const hasResources = sources.length > 0;
 const orderedCharts = orderScientificCharts(charts);
@@ -27,24 +24,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         <p>{destinations.description}</p>
       </section>}
       <PlanetCardHeader {title} {introduction}>
-          {activeObject && classificationLabel && <div class="planet-title-tags">
-            <button
-              class="planet-system-tag planet-title-tag"
-              type="button"
-              data-object-query={activeObject.systemName}
-              aria-controls={`${objectId}-object-browser`}
-              aria-label={`Browse ${activeObject.systemName} objects`}
-              title={`Browse ${activeObject.systemName} objects`}
-            >{activeObject.systemName}</button>
-            <button
-              class="planet-classification-tag planet-title-tag"
-              type="button"
-              data-object-query={`${classificationLabel}s`}
-              aria-controls={`${objectId}-object-browser`}
-              aria-label={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
-              title={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
-            >{classificationLabel}</button>
-          </div>}
+          <PlanetBreadcrumbs {objectId} />
       </PlanetCardHeader>
       <PlanetFactsheet id={objectId} {facts} {moreFacts} />
       {defaultChart && <details

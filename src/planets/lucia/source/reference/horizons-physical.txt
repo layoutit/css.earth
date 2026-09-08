@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27222%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 222 Lucia (A882 CA)           2026-Sep-08 10:25:19
+Rec #:     222 (+COV) Soln.date: 2026-Jun-05_03:18:42   # obs: 6942 (1899-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457556.5 ! 2016-Jun-17.00 (TDB)         Residual RMS= .23725
+   EC= .1310600781566129   QR= 2.729604937388236   TP= 2457661.080946249
+   OM= 80.14142922958649   W=  180.9415470479155   IN= 2.149379496185168
+   A= 3.141304558314683    MA= 341.4863702491652   ADIST= 3.55300417924113
+   PER= 5.56767            N= .177026795           ANGMOM= .030225547
+   DAN= 3.55293            DDN= 2.72965            L= 261.082314
+   B= -.0353111            MOID= 1.71405995        TP= 2016-Sep-29.5809462490
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 27.675             ROTPER= 7.8371
+   H= 9.6                  G= .150                 B-V= .688
+                           ALBEDO= .128            STYP= BU
+
+ASTEROID comments: 
+1: soln ref.= JPL#89, OCC=0
+2: source=ORB
+*******************************************************************************

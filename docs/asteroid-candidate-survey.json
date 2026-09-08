@@ -63,7 +63,7 @@
     {
       "number": 20,
       "name": "Massalia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 118,
@@ -90,12 +90,22 @@
           "diameterKm": null,
           "references": []
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "massalia",
+      "selectedModelId": 16321,
+      "sizeCalibration": {
+        "source": "https://arxiv.org/pdf/2005.01479",
+        "diameterKm": 147.0,
+        "adoptedUncertaintyKm": 2.0,
+        "qualification": "Updated convex DAMIT shape at an approximate147km scale transferred from a published thermophysical model (±2km for that source fit; additional uncertainty for this model). The old preliminary spin solution is not used. Grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/massalia/SOURCE.md"
+      }
     },
     {
       "number": 26,
       "name": "Proserpina",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1189,
@@ -106,12 +116,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "proserpina",
+      "selectedModelId": 1189,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 87.45,
+        "adoptedUncertaintyKm": 0.95,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 87.45 km effective diameter (catalog ±0.95 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/proserpina/SOURCE.md"
+      }
     },
     {
       "number": 33,
       "name": "Polyhymnia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5163,
@@ -131,12 +151,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/670"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "polyhymnia",
+      "selectedModelId": 5163,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 53.98,
+        "adoptedUncertaintyKm": 0.91,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 53.98 km effective diameter (catalog ±0.91 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/polyhymnia/SOURCE.md"
+      }
     },
     {
       "number": 35,
       "name": "Leukothea",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 867,
@@ -156,7 +186,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "leukothea",
+      "selectedModelId": 867,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 111.48,
+        "adoptedUncertaintyKm": 1.85,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 111.48 km effective diameter (catalog ±1.85 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/leukothea/SOURCE.md"
+      }
     },
     {
       "number": 37,
@@ -259,7 +299,7 @@
     {
       "number": 50,
       "name": "Virginia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 12738,
@@ -279,12 +319,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/672"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "virginia",
+      "selectedModelId": 12738,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 84.37,
+        "adoptedUncertaintyKm": 0.82,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 84.37 km effective diameter (catalog ±0.82 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/virginia/SOURCE.md"
+      }
     },
     {
       "number": 60,
       "name": "Echo",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1695,
@@ -304,7 +354,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/162"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "echo",
+      "selectedModelId": 1695,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 58.95,
+        "adoptedUncertaintyKm": 1.24,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 58.95 km effective diameter (catalog ±1.24 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/echo/SOURCE.md"
+      }
     },
     {
       "number": 64,
@@ -361,7 +421,7 @@
     {
       "number": 66,
       "name": "Maja",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1233,
@@ -381,7 +441,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "maja",
+      "selectedModelId": 1233,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 71.79,
+        "adoptedUncertaintyKm": 0.92,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 71.79 km effective diameter (catalog ±0.92 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/maja/SOURCE.md"
+      }
     },
     {
       "number": 70,
@@ -533,7 +603,7 @@
     {
       "number": 99,
       "name": "Dike",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1144,
@@ -544,7 +614,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "dike",
+      "selectedModelId": 1144,
+      "sizeCalibration": {
+        "source": "https://arxiv.org/pdf/1803.06116",
+        "diameterKm": 66.5,
+        "adoptedUncertaintyKm": 0.9,
+        "qualification": "Convex light-curve shape with published thermophysical size calibration: 66.5 ± 0.9 km equivalent diameter. The nominal archived pole differs by 1° from the varied-model fit. Grid marks unavailable surface imagery; rotational phase is illustrative.",
+        "record": "../src/planets/dike/SOURCE.md"
+      }
     },
     {
       "number": 100,
@@ -637,7 +717,7 @@
     {
       "number": 139,
       "name": "Juewa",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5985,
@@ -657,7 +737,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/662"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "juewa",
+      "selectedModelId": 5985,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 166.69,
+        "adoptedUncertaintyKm": 2.77,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 166.69 km effective diameter (catalog ±2.77 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/juewa/SOURCE.md"
+      }
     },
     {
       "number": 141,
@@ -668,7 +758,7 @@
     {
       "number": 154,
       "name": "Bertha",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 939,
@@ -688,7 +778,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "bertha",
+      "selectedModelId": 939,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 185.83,
+        "adoptedUncertaintyKm": 2.72,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 185.83 km effective diameter (catalog ±2.72 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/bertha/SOURCE.md"
+      }
     },
     {
       "number": 192,
@@ -735,7 +835,7 @@
     {
       "number": 222,
       "name": "Lucia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 523,
@@ -755,7 +855,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/148"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "lucia",
+      "selectedModelId": 523,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 52.82,
+        "adoptedUncertaintyKm": 0.6,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 52.82 km effective diameter (catalog ±0.6 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/lucia/SOURCE.md"
+      }
     },
     {
       "number": 259,
@@ -804,7 +914,7 @@
     {
       "number": 323,
       "name": "Brucia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 10666,
@@ -815,7 +925,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/665"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "brucia",
+      "selectedModelId": 10666,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 37.29,
+        "adoptedUncertaintyKm": 0.76,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 37.29 km effective diameter (catalog ±0.76 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/brucia/SOURCE.md"
+      }
     },
     {
       "number": 330,
@@ -826,7 +946,7 @@
     {
       "number": 333,
       "name": "Badenia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 3298,
@@ -837,7 +957,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/182"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "badenia",
+      "selectedModelId": 3298,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 69.73,
+        "adoptedUncertaintyKm": 2.8,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 69.73 km effective diameter (catalog ±2.8 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/badenia/SOURCE.md"
+      }
     },
     {
       "number": 372,
@@ -876,7 +1006,7 @@
     {
       "number": 400,
       "name": "Ducrosa",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 352,
@@ -896,7 +1026,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/141"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "ducrosa",
+      "selectedModelId": 352,
+      "sizeCalibration": {
+        "source": "https://arxiv.org/pdf/1803.06116",
+        "diameterKm": 34.1,
+        "adoptedUncertaintyKm": 0.5,
+        "qualification": "Convex light-curve shape with published thermophysical size calibration: 34.1 ± 0.5 km volume-equivalent diameter. Alternative mirror-pole fit remains unresolved. Grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/ducrosa/SOURCE.md"
+      }
     },
     {
       "number": 423,
@@ -929,7 +1069,7 @@
     {
       "number": 444,
       "name": "Gyptis",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5394,
@@ -949,7 +1089,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/658"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "gyptis",
+      "selectedModelId": 5394,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 166.03,
+        "adoptedUncertaintyKm": 6.66,
+        "qualification": "Convex light-curve reconstruction with approximate thermal size: 166.03 km effective diameter (catalog ±6.66 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/gyptis/SOURCE.md"
+      }
     },
     {
       "number": 451,
@@ -960,7 +1110,7 @@
     {
       "number": 482,
       "name": "Petrina",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1152,
@@ -980,12 +1130,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "petrina",
+      "selectedModelId": 1152,
+      "sizeCalibration": {
+        "source": "https://arxiv.org/pdf/1803.06116",
+        "diameterKm": 44.2,
+        "adoptedUncertaintyKm": 1.0,
+        "qualification": "Convex light-curve shape with published thermophysical size calibration: 44.2 ± 1 km volume-equivalent diameter. The nominal archived pole differs by1°from the varied-model fit. Grid marks unavailable imagery; rotational phase is illustrative.",
+        "record": "../src/planets/petrina/SOURCE.md"
+      }
     },
     {
       "number": 490,
       "name": "Veritas",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 833,
@@ -1005,12 +1165,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "veritas",
+      "selectedModelId": 833,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/2041-8205/759/1/L8",
+        "diameterKm": 118.803,
+        "adoptedUncertaintyKm": 1.83,
+        "qualification": "Approximate scale from a thermal diameter of 118.8 ± 1.83 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/veritas/SOURCE.md"
+      }
     },
     {
       "number": 496,
       "name": "Gryphia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 6121,
@@ -1030,12 +1200,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/662"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "gryphia",
+      "selectedModelId": 6121,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/2041-8205/759/1/L8",
+        "diameterKm": 14.403,
+        "adoptedUncertaintyKm": 0.394,
+        "qualification": "Approximate scale from a thermal diameter of 14.403 ± 0.394 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/gryphia/SOURCE.md"
+      }
     },
     {
       "number": 500,
       "name": "Selinur",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5480,
@@ -1046,7 +1226,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/658"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "selinur",
+      "selectedModelId": 5480,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 40.828,
+        "adoptedUncertaintyKm": 0.247,
+        "qualification": "Approximate scale from a thermal diameter of 40.828 ± 0.247 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/selinur/SOURCE.md"
+      }
     },
     {
       "number": 525,
@@ -1089,7 +1279,7 @@
     {
       "number": 588,
       "name": "Achilles",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 3934,
@@ -1100,12 +1290,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/182"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "achilles",
+      "selectedModelId": 3934,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1051/0004-6361/202346022",
+        "diameterKm": 131.0,
+        "adoptedUncertaintyKm": 8.0,
+        "qualification": "Occultation-calibrated volume-equivalent diameter: 131 ± 8 km.",
+        "record": "../src/planets/achilles/SOURCE.md"
+      }
     },
     {
       "number": 600,
       "name": "Musa",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 504,
@@ -1125,7 +1325,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/148"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "musa",
+      "selectedModelId": 504,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 25.115,
+        "adoptedUncertaintyKm": 0.221,
+        "qualification": "Approximate scale from a thermal diameter of 25.115 ± 0.221 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/musa/SOURCE.md"
+      }
     },
     {
       "number": 624,
@@ -1174,7 +1384,7 @@
     {
       "number": 700,
       "name": "Auravictrix",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1654,
@@ -1194,7 +1404,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/162"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "auravictrix",
+      "selectedModelId": 1654,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 16.421,
+        "adoptedUncertaintyKm": 0.362,
+        "qualification": "Approximate scale from a thermal diameter of 16.421 ± 0.362 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/auravictrix/SOURCE.md"
+      }
     },
     {
       "number": 702,
@@ -1205,7 +1425,7 @@
     {
       "number": 715,
       "name": "Transvaalia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 3722,
@@ -1225,7 +1445,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/182"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "transvaalia",
+      "selectedModelId": 3722,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/2041-8205/759/1/L8",
+        "diameterKm": 25.458,
+        "adoptedUncertaintyKm": 0.591,
+        "qualification": "Approximate scale from a thermal diameter of 25.458 ± 0.591 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/transvaalia/SOURCE.md"
+      }
     },
     {
       "number": 719,
@@ -1242,7 +1472,7 @@
     {
       "number": 787,
       "name": "Moskva",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 515,
@@ -1262,12 +1492,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/148"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "moskva",
+      "selectedModelId": 515,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 31.962,
+        "adoptedUncertaintyKm": 0.789,
+        "qualification": "Approximate scale from a thermal diameter of 31.962 ± 0.789 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/moskva/SOURCE.md"
+      }
     },
     {
       "number": 800,
       "name": "Kressmannia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 382,
@@ -1287,7 +1527,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/141"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "kressmannia",
+      "selectedModelId": 382,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 15.429,
+        "adoptedUncertaintyKm": 0.325,
+        "qualification": "Approximate scale from a thermal diameter of 15.429 ± 0.325 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/kressmannia/SOURCE.md"
+      }
     },
     {
       "number": 846,
@@ -1304,7 +1554,7 @@
     {
       "number": 888,
       "name": "Parysatis",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5820,
@@ -1324,12 +1574,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/658"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "parysatis",
+      "selectedModelId": 5820,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 44.749,
+        "adoptedUncertaintyKm": 0.37,
+        "qualification": "Approximate scale from a thermal diameter of 44.749 ± 0.37 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/parysatis/SOURCE.md"
+      }
     },
     {
       "number": 900,
       "name": "Rosalinde",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 561,
@@ -1349,7 +1609,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/148"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "rosalinde",
+      "selectedModelId": 561,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 19.618,
+        "adoptedUncertaintyKm": 0.057,
+        "qualification": "Approximate scale from a thermal diameter of 19.618 ± 0.057 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/rosalinde/SOURCE.md"
+      }
     },
     {
       "number": 912,
@@ -1378,7 +1648,7 @@
     {
       "number": 933,
       "name": "Susi",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5856,
@@ -1398,7 +1668,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/658"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "susi",
+      "selectedModelId": 5856,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.26033/pf3k-m168",
+        "diameterKm": 21.82,
+        "adoptedUncertaintyKm": 1.4,
+        "qualification": "Approximate scale from a thermal diameter of 21.82 ± 1.4 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects.",
+        "record": "../src/planets/susi/SOURCE.md"
+      }
     },
     {
       "number": 935,
@@ -1409,7 +1689,7 @@
     {
       "number": 944,
       "name": "Hidalgo",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1057,
@@ -1420,12 +1700,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "hidalgo",
+      "selectedModelId": 1057,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1051/0004-6361/201526866",
+        "diameterKm": 61.4,
+        "adoptedUncertaintyKm": 12.7,
+        "qualification": "Approximate scale from a thermal diameter of 61.4 ± 12.7 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects.",
+        "record": "../src/planets/hidalgo/SOURCE.md"
+      }
     },
     {
       "number": 999,
       "name": "Zachia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5901,
@@ -1445,12 +1735,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/658"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "zachia",
+      "selectedModelId": 5901,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 16.848,
+        "adoptedUncertaintyKm": 0.182,
+        "qualification": "Approximate scale from a thermal diameter of 16.848 ± 0.182 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/zachia/SOURCE.md"
+      }
     },
     {
       "number": 1000,
       "name": "Piazzia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 3529,
@@ -1461,7 +1761,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/182"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "piazzia",
+      "selectedModelId": 3529,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.26033/pf3k-m168",
+        "diameterKm": 47.78,
+        "adoptedUncertaintyKm": 2.0,
+        "qualification": "Approximate scale from a thermal diameter of 47.78 ± 2 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects.",
+        "record": "../src/planets/piazzia/SOURCE.md"
+      }
     },
     {
       "number": 1036,
@@ -1505,7 +1815,7 @@
     {
       "number": 1095,
       "name": "Tulipa",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1779,
@@ -1525,12 +1835,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/168"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "tulipa",
+      "selectedModelId": 1779,
+      "sizeCalibration": {
+        "source": "https://doi.org/10.1088/0004-637X/791/2/121",
+        "diameterKm": 27.875,
+        "adoptedUncertaintyKm": 0.362,
+        "qualification": "Approximate scale from a thermal diameter of 27.875 ± 0.362 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/tulipa/SOURCE.md"
+      }
     },
     {
       "number": 1111,
       "name": "Reinmuthia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 678,
@@ -1550,12 +1870,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/148"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "reinmuthia",
+      "selectedModelId": 678,
+      "sizeCalibration": {
+        "source": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "diameterKm": 24.38,
+        "adoptedUncertaintyKm": 0.48,
+        "qualification": "Approximate scale from a thermal diameter of 24.38 ± 0.48 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects.",
+        "record": "../src/planets/reinmuthia/SOURCE.md"
+      }
     },
     {
       "number": 1125,
       "name": "China",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1119,
@@ -1575,12 +1905,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "china",
+      "selectedModelId": 1119,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1125",
+        "diameterKm": 26.084,
+        "adoptedUncertaintyKm": 0.199,
+        "qualification": "Approximate scale from a thermal diameter of 26.084 ± 0.199 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/china/SOURCE.md"
+      }
     },
     {
       "number": 1140,
       "name": "Crimea",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 403,
@@ -1600,12 +1940,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/141"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "crimea",
+      "selectedModelId": 403,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1140",
+        "diameterKm": 29.179,
+        "adoptedUncertaintyKm": 0.155,
+        "qualification": "Approximate scale from a thermal diameter of 29.179 ± 0.155 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/crimea/SOURCE.md"
+      }
     },
     {
       "number": 1171,
       "name": "Rusthawelia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 3188,
@@ -1625,12 +1975,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/182"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "rusthawelia",
+      "selectedModelId": 3188,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1171",
+        "diameterKm": 67.986,
+        "adoptedUncertaintyKm": 1.091,
+        "qualification": "Approximate scale from a thermal diameter of 67.986 ± 1.091 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. Another thermal fit gives 82.2 km.",
+        "record": "../src/planets/rusthawelia/SOURCE.md"
+      }
     },
     {
       "number": 1235,
       "name": "Schorria",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5955,
@@ -1650,12 +2010,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/662"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "schorria",
+      "selectedModelId": 5955,
+      "sizeCalibration": {
+        "source": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/603/A55/table1.dat",
+        "diameterKm": 5.55,
+        "adoptedUncertaintyKm": 1.11,
+        "qualification": "Approximate scale from a single-band thermal diameter of 5.55 km, with at least 20% uncertainty (1.11 km).",
+        "record": "../src/planets/schorria/SOURCE.md"
+      }
     },
     {
       "number": 1317,
       "name": "Silvretta",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 513,
@@ -1675,7 +2045,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/148"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "silvretta",
+      "selectedModelId": 513,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1317",
+        "diameterKm": 26.393,
+        "adoptedUncertaintyKm": 0.439,
+        "qualification": "Approximate scale from a thermal diameter of 26.393 ± 0.439 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. Another thermal fit gives 17.9 km.",
+        "record": "../src/planets/silvretta/SOURCE.md"
+      }
     },
     {
       "number": 1373,
@@ -1686,7 +2066,7 @@
     {
       "number": 1449,
       "name": "Virtanen",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1175,
@@ -1706,7 +2086,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "virtanen",
+      "selectedModelId": 1175,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1449",
+        "diameterKm": 9.263,
+        "adoptedUncertaintyKm": 0.098,
+        "qualification": "Approximate scale from a thermal diameter of 9.263 ± 0.098 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/virtanen/SOURCE.md"
+      }
     },
     {
       "number": 1566,
@@ -1735,7 +2125,7 @@
     {
       "number": 2309,
       "name": "Mr. Spock",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 4874,
@@ -1755,12 +2145,22 @@
             "https://damit.cuni.cz/projects/damit/references/view/658"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "mr-spock",
+      "selectedModelId": 4874,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2309",
+        "diameterKm": 19.707,
+        "adoptedUncertaintyKm": 0.177,
+        "qualification": "Approximate scale from a thermal diameter of 19.707 ± 0.177 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/mr-spock/SOURCE.md"
+      }
     },
     {
       "number": 2440,
       "name": "Educatio",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 9541,
@@ -1780,7 +2180,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/665"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "educatio",
+      "selectedModelId": 9541,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2440",
+        "diameterKm": 6.586,
+        "adoptedUncertaintyKm": 0.128,
+        "qualification": "Approximate scale from a thermal diameter of 6.586 ± 0.128 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/educatio/SOURCE.md"
+      }
     },
     {
       "number": 2675,
@@ -1791,7 +2201,7 @@
     {
       "number": 2938,
       "name": "Hopi",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 10234,
@@ -1802,7 +2212,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/665"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "hopi",
+      "selectedModelId": 10234,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2938",
+        "diameterKm": 19.267,
+        "adoptedUncertaintyKm": 0.147,
+        "qualification": "Approximate scale from a thermal diameter of 19.267 ± 0.147 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/hopi/SOURCE.md"
+      }
     },
     {
       "number": 3000,
@@ -1831,7 +2251,7 @@
     {
       "number": 3333,
       "name": "Schaber",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 10836,
@@ -1842,7 +2262,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/665"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "schaber",
+      "selectedModelId": 10836,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D3333",
+        "diameterKm": 26.538,
+        "adoptedUncertaintyKm": 0.262,
+        "qualification": "Approximate scale from a thermal diameter of 26.538 ± 0.262 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/schaber/SOURCE.md"
+      }
     },
     {
       "number": 3753,
@@ -1864,7 +2294,7 @@
     },
     {
       "number": 4015,
-      "name": "Wilson\u2013Harrington",
+      "name": "Wilson–Harrington",
       "status": "no model returned",
       "models": []
     },
@@ -1883,7 +2313,7 @@
     {
       "number": 5000,
       "name": "IAU",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 12740,
@@ -1894,7 +2324,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/665"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "iau",
+      "selectedModelId": 12740,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D5000",
+        "diameterKm": 4.242,
+        "adoptedUncertaintyKm": 0.917,
+        "qualification": "Approximate scale from a thermal diameter of 4.242 ± 0.917 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/iau/SOURCE.md"
+      }
     },
     {
       "number": 5261,
@@ -1917,7 +2357,7 @@
     {
       "number": 6000,
       "name": "United Nations",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 1154,
@@ -1928,7 +2368,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/161"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "united-nations",
+      "selectedModelId": 1154,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D6000",
+        "diameterKm": 11.0,
+        "adoptedUncertaintyKm": 0.295,
+        "qualification": "Approximate scale from a thermal diameter of 11 ± 0.295 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/united-nations/SOURCE.md"
+      }
     },
     {
       "number": 6478,
@@ -1938,7 +2388,7 @@
     },
     {
       "number": 6666,
-      "name": "Fr\u00f6",
+      "name": "Frö",
       "status": "no model returned",
       "models": []
     },
@@ -1956,7 +2406,7 @@
     },
     {
       "number": 7968,
-      "name": "Elst\u2013Pizarro",
+      "name": "Elst–Pizarro",
       "status": "no model returned",
       "models": []
     },
@@ -1969,7 +2419,7 @@
     {
       "number": 8888,
       "name": "Tartaglia",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 15683,
@@ -1980,7 +2430,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/665"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "tartaglia",
+      "selectedModelId": 15683,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D8888",
+        "diameterKm": 13.584,
+        "adoptedUncertaintyKm": 0.067,
+        "qualification": "Approximate scale from a thermal diameter of 13.584 ± 0.067 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/tartaglia/SOURCE.md"
+      }
     },
     {
       "number": 9000,
@@ -1991,7 +2451,7 @@
     {
       "number": 9165,
       "name": "Raup",
-      "status": "unscaled models only",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 5835,
@@ -2002,7 +2462,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/658"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "unscaled models only",
+      "package": "raup",
+      "selectedModelId": 5835,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D9165",
+        "diameterKm": 4.839,
+        "adoptedUncertaintyKm": 0.167,
+        "qualification": "Approximate scale from a thermal diameter of 4.839 ± 0.167 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/raup/SOURCE.md"
+      }
     },
     {
       "number": 9969,
@@ -2146,7 +2616,7 @@
     },
     {
       "number": 514107,
-      "name": "Ka\u02bbepaoka\u02bb\u0101wela",
+      "name": "Kaʻepaokaʻāwela",
       "status": "no model returned",
       "models": []
     }
@@ -2639,7 +3109,7 @@
       "number": 77777,
       "designation": "2001 QW16",
       "query": "https://damit.cuni.cz/?q=77777",
-      "status": "only uncalibrated models found in DAMIT",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 15015,
@@ -2650,13 +3120,23 @@
             "https://damit.cuni.cz/projects/damit/references/view/665"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "only uncalibrated models found in DAMIT",
+      "package": "asteroid-2001-qw16",
+      "selectedModelId": 15015,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D77777",
+        "diameterKm": 10.403,
+        "adoptedUncertaintyKm": 0.259,
+        "qualification": "Approximate scale from a thermal diameter of 10.403 ± 0.259 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/asteroid-2001-qw16/SOURCE.md"
+      }
     },
     {
       "number": 80000,
       "designation": "1999 FR33",
       "query": "https://damit.cuni.cz/?q=80000",
-      "status": "only uncalibrated models found in DAMIT",
+      "status": "included with documented physical size calibration",
       "models": [
         {
           "id": 15145,
@@ -2676,7 +3156,17 @@
             "https://damit.cuni.cz/projects/damit/references/view/665"
           ]
         }
-      ]
+      ],
+      "archiveStatus": "only uncalibrated models found in DAMIT",
+      "package": "asteroid-1999-fr33",
+      "selectedModelId": 15145,
+      "sizeCalibration": {
+        "source": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D80000",
+        "diameterKm": 5.754,
+        "adoptedUncertaintyKm": 0.174,
+        "qualification": "Approximate scale from a thermal diameter of 5.754 ± 0.174 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+        "record": "../src/planets/asteroid-1999-fr33/SOURCE.md"
+      }
     },
     {
       "number": 88888,
@@ -2797,5 +3287,12 @@
       "status": "no matching model found in DAMIT",
       "models": []
     }
-  ]
+  ],
+  "physicalSizeContinuation": {
+    "date": "2026-09-08",
+    "addedPackages": 49,
+    "asteroidCoverageBefore": 90,
+    "asteroidCoverageAfter": 139,
+    "description": "Same-body original DAMIT meshes scaled through the existing physical-units reader using separately published size measurements. Thermal effective diameter transfers remain approximate, with statistical and systematic limitations disclosed. The archive models themselves remain marked uncalibrated where appropriate; this is an application-level physical scale with provenance, not a DAMIT archive reclassification."
+  }
 }

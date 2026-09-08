@@ -1,3 +1,52 @@
+import massaliaDescriptor from "../src/planets/massalia/object.json" with { type: "json" };
+import proserpinaDescriptor from "../src/planets/proserpina/object.json" with { type: "json" };
+import polyhymniaDescriptor from "../src/planets/polyhymnia/object.json" with { type: "json" };
+import leukotheaDescriptor from "../src/planets/leukothea/object.json" with { type: "json" };
+import virginiaDescriptor from "../src/planets/virginia/object.json" with { type: "json" };
+import echoDescriptor from "../src/planets/echo/object.json" with { type: "json" };
+import majaDescriptor from "../src/planets/maja/object.json" with { type: "json" };
+import juewaDescriptor from "../src/planets/juewa/object.json" with { type: "json" };
+import berthaDescriptor from "../src/planets/bertha/object.json" with { type: "json" };
+import luciaDescriptor from "../src/planets/lucia/object.json" with { type: "json" };
+import bruciaDescriptor from "../src/planets/brucia/object.json" with { type: "json" };
+import badeniaDescriptor from "../src/planets/badenia/object.json" with { type: "json" };
+import ducrosaDescriptor from "../src/planets/ducrosa/object.json" with { type: "json" };
+import gyptisDescriptor from "../src/planets/gyptis/object.json" with { type: "json" };
+import petrinaDescriptor from "../src/planets/petrina/object.json" with { type: "json" };
+import veritasDescriptor from "../src/planets/veritas/object.json" with { type: "json" };
+import gryphiaDescriptor from "../src/planets/gryphia/object.json" with { type: "json" };
+import selinurDescriptor from "../src/planets/selinur/object.json" with { type: "json" };
+import achillesDescriptor from "../src/planets/achilles/object.json" with { type: "json" };
+import musaDescriptor from "../src/planets/musa/object.json" with { type: "json" };
+import auravictrixDescriptor from "../src/planets/auravictrix/object.json" with { type: "json" };
+import transvaaliaDescriptor from "../src/planets/transvaalia/object.json" with { type: "json" };
+import moskvaDescriptor from "../src/planets/moskva/object.json" with { type: "json" };
+import kressmanniaDescriptor from "../src/planets/kressmannia/object.json" with { type: "json" };
+import parysatisDescriptor from "../src/planets/parysatis/object.json" with { type: "json" };
+import rosalindeDescriptor from "../src/planets/rosalinde/object.json" with { type: "json" };
+import susiDescriptor from "../src/planets/susi/object.json" with { type: "json" };
+import hidalgoDescriptor from "../src/planets/hidalgo/object.json" with { type: "json" };
+import zachiaDescriptor from "../src/planets/zachia/object.json" with { type: "json" };
+import piazziaDescriptor from "../src/planets/piazzia/object.json" with { type: "json" };
+import tulipaDescriptor from "../src/planets/tulipa/object.json" with { type: "json" };
+import reinmuthiaDescriptor from "../src/planets/reinmuthia/object.json" with { type: "json" };
+import chinaDescriptor from "../src/planets/china/object.json" with { type: "json" };
+import crimeaDescriptor from "../src/planets/crimea/object.json" with { type: "json" };
+import rusthaweliaDescriptor from "../src/planets/rusthawelia/object.json" with { type: "json" };
+import schorriaDescriptor from "../src/planets/schorria/object.json" with { type: "json" };
+import silvrettaDescriptor from "../src/planets/silvretta/object.json" with { type: "json" };
+import virtanenDescriptor from "../src/planets/virtanen/object.json" with { type: "json" };
+import mrspockDescriptor from "../src/planets/mr-spock/object.json" with { type: "json" };
+import educatioDescriptor from "../src/planets/educatio/object.json" with { type: "json" };
+import hopiDescriptor from "../src/planets/hopi/object.json" with { type: "json" };
+import schaberDescriptor from "../src/planets/schaber/object.json" with { type: "json" };
+import iauDescriptor from "../src/planets/iau/object.json" with { type: "json" };
+import unitednationsDescriptor from "../src/planets/united-nations/object.json" with { type: "json" };
+import tartagliaDescriptor from "../src/planets/tartaglia/object.json" with { type: "json" };
+import raupDescriptor from "../src/planets/raup/object.json" with { type: "json" };
+import asteroid2001qw16Descriptor from "../src/planets/asteroid-2001-qw16/object.json" with { type: "json" };
+import asteroid1999fr33Descriptor from "../src/planets/asteroid-1999-fr33/object.json" with { type: "json" };
+import dikeDescriptor from "../src/planets/dike/object.json" with { type: "json" };
 import albiorixDescriptor from "../src/planets/albiorix/object.json" with { type: "json" };
 import kiviuqDescriptor from "../src/planets/kiviuq/object.json" with { type: "json" };
 import asteroid1996hw1Descriptor from "../src/planets/asteroid-1996-hw1/object.json" with { type: "json" };
@@ -949,6 +998,300 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(asteroid2002ce26Descriptor);
     }, asteroid2002ce26Descriptor.properties.worldFrame),
+
+  object("dike", "Dike", "asteroid", "#aaaaaa", 2.662672838262387,
+    "Explore Dike in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(dikeDescriptor);
+    }, dikeDescriptor.properties.worldFrame),
+
+  object("massalia", "Massalia", "asteroid", "#aaaaaa", 2.4079553806420346,
+    "Explore Massalia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(massaliaDescriptor);
+    }, massaliaDescriptor.properties.worldFrame),
+
+  object("proserpina", "Proserpina", "asteroid", "#aaaaaa", 2.6551885129968467,
+    "Explore Proserpina in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(proserpinaDescriptor);
+    }, proserpinaDescriptor.properties.worldFrame),
+
+  object("polyhymnia", "Polyhymnia", "asteroid", "#aaaaaa", 2.8701879510937207,
+    "Explore Polyhymnia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(polyhymniaDescriptor);
+    }, polyhymniaDescriptor.properties.worldFrame),
+
+  object("leukothea", "Leukothea", "asteroid", "#aaaaaa", 3.0042313558099742,
+    "Explore Leukothea in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(leukotheaDescriptor);
+    }, leukotheaDescriptor.properties.worldFrame),
+
+  object("virginia", "Virginia", "asteroid", "#aaaaaa", 2.651502448166739,
+    "Explore Virginia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(virginiaDescriptor);
+    }, virginiaDescriptor.properties.worldFrame),
+
+  object("echo", "Echo", "asteroid", "#aaaaaa", 2.3930398793911873,
+    "Explore Echo in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(echoDescriptor);
+    }, echoDescriptor.properties.worldFrame),
+
+  object("maja", "Maja", "asteroid", "#aaaaaa", 2.6470494923987746,
+    "Explore Maja in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(majaDescriptor);
+    }, majaDescriptor.properties.worldFrame),
+
+  object("juewa", "Juewa", "asteroid", "#aaaaaa", 2.7861445733475856,
+    "Explore Juewa in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(juewaDescriptor);
+    }, juewaDescriptor.properties.worldFrame),
+
+  object("bertha", "Bertha", "asteroid", "#aaaaaa", 3.1939101574420405,
+    "Explore Bertha in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(berthaDescriptor);
+    }, berthaDescriptor.properties.worldFrame),
+
+  object("lucia", "Lucia", "asteroid", "#aaaaaa", 3.1448952145576423,
+    "Explore Lucia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(luciaDescriptor);
+    }, luciaDescriptor.properties.worldFrame),
+
+  object("brucia", "Brucia", "asteroid", "#aaaaaa", 2.3823847582527136,
+    "Explore Brucia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bruciaDescriptor);
+    }, bruciaDescriptor.properties.worldFrame),
+
+  object("badenia", "Badenia", "asteroid", "#aaaaaa", 3.13175476216037,
+    "Explore Badenia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(badeniaDescriptor);
+    }, badeniaDescriptor.properties.worldFrame),
+
+  object("ducrosa", "Ducrosa", "asteroid", "#aaaaaa", 3.1255060299245687,
+    "Explore Ducrosa in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ducrosaDescriptor);
+    }, ducrosaDescriptor.properties.worldFrame),
+
+  object("gyptis", "Gyptis", "asteroid", "#aaaaaa", 2.7713762475315957,
+    "Explore Gyptis in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(gyptisDescriptor);
+    }, gyptisDescriptor.properties.worldFrame),
+
+  object("petrina", "Petrina", "asteroid", "#aaaaaa", 3.0015196284082286,
+    "Explore Petrina in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(petrinaDescriptor);
+    }, petrinaDescriptor.properties.worldFrame),
+
+  object("veritas", "Veritas", "asteroid", "#aaaaaa", 3.1755270453241122,
+    "Explore Veritas in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(veritasDescriptor);
+    }, veritasDescriptor.properties.worldFrame),
+
+  object("gryphia", "Gryphia", "asteroid", "#aaaaaa", 2.1987067011231507,
+    "Explore Gryphia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(gryphiaDescriptor);
+    }, gryphiaDescriptor.properties.worldFrame),
+
+  object("selinur", "Selinur", "asteroid", "#aaaaaa", 2.6116658234603194,
+    "Explore Selinur in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(selinurDescriptor);
+    }, selinurDescriptor.properties.worldFrame),
+
+  object("achilles", "Achilles", "asteroid", "#aaaaaa", 5.216209884720479,
+    "Explore Achilles in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(achillesDescriptor);
+    }, achillesDescriptor.properties.worldFrame),
+
+  object("musa", "Musa", "asteroid", "#aaaaaa", 2.6610456785966816,
+    "Explore Musa in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(musaDescriptor);
+    }, musaDescriptor.properties.worldFrame),
+
+  object("auravictrix", "Auravictrix", "asteroid", "#aaaaaa", 2.229298325153526,
+    "Explore Auravictrix in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(auravictrixDescriptor);
+    }, auravictrixDescriptor.properties.worldFrame),
+
+  object("transvaalia", "Transvaalia", "asteroid", "#aaaaaa", 2.766754099697322,
+    "Explore Transvaalia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(transvaaliaDescriptor);
+    }, transvaaliaDescriptor.properties.worldFrame),
+
+  object("moskva", "Moskva", "asteroid", "#aaaaaa", 2.5406685045126993,
+    "Explore Moskva in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(moskvaDescriptor);
+    }, moskvaDescriptor.properties.worldFrame),
+
+  object("kressmannia", "Kressmannia", "asteroid", "#aaaaaa", 2.192543456333038,
+    "Explore Kressmannia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(kressmanniaDescriptor);
+    }, kressmanniaDescriptor.properties.worldFrame),
+
+  object("parysatis", "Parysatis", "asteroid", "#aaaaaa", 2.707622170185717,
+    "Explore Parysatis in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(parysatisDescriptor);
+    }, parysatisDescriptor.properties.worldFrame),
+
+  object("rosalinde", "Rosalinde", "asteroid", "#aaaaaa", 2.4725643786568288,
+    "Explore Rosalinde in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(rosalindeDescriptor);
+    }, rosalindeDescriptor.properties.worldFrame),
+
+  object("susi", "Susi", "asteroid", "#aaaaaa", 2.3684607015715247,
+    "Explore Susi in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(susiDescriptor);
+    }, susiDescriptor.properties.worldFrame),
+
+  object("hidalgo", "Hidalgo", "asteroid", "#aaaaaa", 5.728989790748572,
+    "Explore Hidalgo in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hidalgoDescriptor);
+    }, hidalgoDescriptor.properties.worldFrame),
+
+  object("zachia", "Zachia", "asteroid", "#aaaaaa", 2.61497834334827,
+    "Explore Zachia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(zachiaDescriptor);
+    }, zachiaDescriptor.properties.worldFrame),
+
+  object("piazzia", "Piazzia", "asteroid", "#aaaaaa", 3.1710520001451843,
+    "Explore Piazzia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(piazziaDescriptor);
+    }, piazziaDescriptor.properties.worldFrame),
+
+  object("tulipa", "Tulipa", "asteroid", "#aaaaaa", 3.0255703303423154,
+    "Explore Tulipa in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tulipaDescriptor);
+    }, tulipaDescriptor.properties.worldFrame),
+
+  object("reinmuthia", "Reinmuthia", "asteroid", "#aaaaaa", 2.991273442215631,
+    "Explore Reinmuthia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(reinmuthiaDescriptor);
+    }, reinmuthiaDescriptor.properties.worldFrame),
+
+  object("china", "China", "asteroid", "#aaaaaa", 3.127373029094909,
+    "Explore China in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(chinaDescriptor);
+    }, chinaDescriptor.properties.worldFrame),
+
+  object("crimea", "Crimea", "asteroid", "#aaaaaa", 2.7724619385411438,
+    "Explore Crimea in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(crimeaDescriptor);
+    }, crimeaDescriptor.properties.worldFrame),
+
+  object("rusthawelia", "Rusthawelia", "asteroid", "#aaaaaa", 3.173103931458051,
+    "Explore Rusthawelia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(rusthaweliaDescriptor);
+    }, rusthaweliaDescriptor.properties.worldFrame),
+
+  object("schorria", "Schorria", "asteroid", "#aaaaaa", 1.9102898161034227,
+    "Explore Schorria in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(schorriaDescriptor);
+    }, schorriaDescriptor.properties.worldFrame),
+
+  object("silvretta", "Silvretta", "asteroid", "#aaaaaa", 3.204231585995867,
+    "Explore Silvretta in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(silvrettaDescriptor);
+    }, silvrettaDescriptor.properties.worldFrame),
+
+  object("virtanen", "Virtanen", "asteroid", "#aaaaaa", 2.221835773585211,
+    "Explore Virtanen in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(virtanenDescriptor);
+    }, virtanenDescriptor.properties.worldFrame),
+
+  object("mr-spock", "Mr. Spock", "asteroid", "#aaaaaa", 3.0107561956481725,
+    "Explore Mr. Spock in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mrspockDescriptor);
+    }, mrspockDescriptor.properties.worldFrame),
+
+  object("educatio", "Educatio", "asteroid", "#aaaaaa", 2.2152610738212455,
+    "Explore Educatio in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(educatioDescriptor);
+    }, educatioDescriptor.properties.worldFrame),
+
+  object("hopi", "Hopi", "asteroid", "#aaaaaa", 3.153358490702003,
+    "Explore Hopi in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hopiDescriptor);
+    }, hopiDescriptor.properties.worldFrame),
+
+  object("schaber", "Schaber", "asteroid", "#aaaaaa", 3.1389418599378245,
+    "Explore Schaber in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(schaberDescriptor);
+    }, schaberDescriptor.properties.worldFrame),
+
+  object("iau", "IAU", "asteroid", "#aaaaaa", 2.535679875280375,
+    "Explore IAU in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(iauDescriptor);
+    }, iauDescriptor.properties.worldFrame),
+
+  object("united-nations", "United Nations", "asteroid", "#aaaaaa", 2.603483726490706,
+    "Explore United Nations in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(unitednationsDescriptor);
+    }, unitednationsDescriptor.properties.worldFrame),
+
+  object("tartaglia", "Tartaglia", "asteroid", "#aaaaaa", 2.708012033150063,
+    "Explore Tartaglia in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tartagliaDescriptor);
+    }, tartagliaDescriptor.properties.worldFrame),
+
+  object("raup", "Raup", "asteroid", "#aaaaaa", 1.9862246368080674,
+    "Explore Raup in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(raupDescriptor);
+    }, raupDescriptor.properties.worldFrame),
+
+  object("asteroid-2001-qw16", "2001 QW16", "asteroid", "#aaaaaa", 3.177455279524888,
+    "Explore 2001 QW16 in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asteroid2001qw16Descriptor);
+    }, asteroid2001qw16Descriptor.properties.worldFrame),
+
+  object("asteroid-1999-fr33", "1999 FR33", "asteroid", "#aaaaaa", 2.9765894346509167,
+    "Explore 1999 FR33 in 3D with its published shape model and documented physical size scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asteroid1999fr33Descriptor);
+    }, asteroid1999fr33Descriptor.properties.worldFrame),
 
   object("vesta", "Vesta", "asteroid", "#a49c8d", 2.36,
     "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.", async () => {

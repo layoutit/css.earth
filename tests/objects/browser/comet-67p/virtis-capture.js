@@ -44,7 +44,7 @@ async page => {
         const legend = p.locator(`[data-lens-legend="${id}"]`);
         await legend.evaluate(node => node.scrollIntoView({ block: 'center', behavior: 'instant' }));
         const legendBounds = await legend.boundingBox();
-        const footerTop = await p.locator('footer').evaluate(node => node.getBoundingClientRect().top);
+        const footerTop = await p.locator('footer').evaluate(node => { const rect = node.getBoundingClientRect(); return rect.height ? Math.min(innerHeight, rect.top) : innerHeight; });
         if (!legendBounds || legendBounds.y < 0 || legendBounds.y + legendBounds.height > footerTop) throw new Error(`Clipped ${id} legend`);
         const atlases = await p.evaluate(async () => {
           const urls = [...new Set([...document.querySelectorAll('.comet-67p-body > u')].map(n => getComputedStyle(n).backgroundImage.match(/^url\("?([^"\)]+)"?\)$/)?.[1]))];

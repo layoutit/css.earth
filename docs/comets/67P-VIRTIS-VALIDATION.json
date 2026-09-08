@@ -877,5 +877,472 @@
     "The scientific tests compare selected rounded published control points, not complete paper parity; documented 2016-paper/2019-archive discrepancies remain.",
     "Gray grid indicates missing, rejected or ambiguous data. No coverage filling or runtime source reconstruction is performed.",
     "Natural-clock Chrome evidence is not a claim of original spacecraft image pixel parity or retrieval uncertainty validation."
-  ]
+  ],
+  "mainIntegration": {
+    "capturedAt": "2026-09-08T22:07:21.073799+00:00",
+    "mainCommit": "c61d1bf979fb76bd60959e95ed0f59e549a5ab03",
+    "featureCommit": "40c18c0da82332775d8f38f9f2949c3924f4d71f",
+    "resolution": "Rebuilt shared packages and regenerated 67P presentation bindings for the 227-object marker atlas. Marker bindings match main and the label-name table is refreshed from the current catalog. The feature scene tree and final controls remain identical.",
+    "preparedObject": {
+      "path": "src/planets/comet-67p/prepared/object.json",
+      "bytes": 6804406,
+      "sha256": "d98959b73dc7385db4f392691b57abd381b89ba56aaf28ef5b340680ae87dfef"
+    },
+    "descriptor": {
+      "path": "src/planets/comet-67p/object.json",
+      "bytes": 3717,
+      "sha256": "187b8e625df2990e130d8838f219611bf7fa181b45b5ccae329cd16a152556f8"
+    },
+    "marker": {
+      "url": "/navigation/planet-markers@2x.webp",
+      "index": 145,
+      "count": 227,
+      "size": 3
+    },
+    "labelNameCount": 227,
+    "unchangedRuntimeImages": 50,
+    "sceneTreeAndControlsIdentical": true,
+    "browser": {
+      "mode": "development with diagnostic hooks",
+      "captures": [
+        {
+          "browser": "152.0.7977.76",
+          "dpr": 1,
+          "route": "http://127.0.0.1:53135/comet-67p/",
+          "views": [
+            {
+              "id": "albedo",
+              "screenshot": "output/playwright/67p-virtis-integration-dpr1-albedo.png",
+              "atlases": [
+                {
+                  "url": "http://127.0.0.1:53135/scenes/comet-67p/comet-67p-albedo-surface@2x.webp",
+                  "bytes": 1091110,
+                  "sha256": "5b5a6210faab9ad3dc83cc4c763346731d358efd548e58950cfa20375664ef79"
+                }
+              ],
+              "legendBounds": {
+                "x": 36,
+                "y": 850.078125,
+                "width": 308,
+                "height": 68
+              },
+              "facts": [
+                "Observed Aug–Sep 2014",
+                "Wavelength 550 nm"
+              ],
+              "factLayout": [
+                {
+                  "text": "Aug–Sep 2014",
+                  "valueWidth": 94.34375,
+                  "textWidth": 94.34375,
+                  "height": 20,
+                  "leaderWidth": 134.812
+                },
+                {
+                  "text": "550 nm",
+                  "valueWidth": 49.515625,
+                  "textWidth": 49.515625,
+                  "height": 20,
+                  "leaderWidth": 166.797
+                }
+              ],
+              "dataset": "Albedo\nVIRTIS",
+              "screenshotEvidence": {
+                "path": "docs/comets/evidence/67p-virtis-integrated-albedo.png",
+                "bytes": 583842,
+                "sha256": "6e0fa34f75542f9399212cb32974d9f0dc1949037063e3a9d2653fe609d3d2c3"
+              }
+            },
+            {
+              "id": "slope",
+              "screenshot": "output/playwright/67p-virtis-integration-dpr1-slope.png",
+              "atlases": [
+                {
+                  "url": "http://127.0.0.1:53135/scenes/comet-67p/comet-67p-slope-surface@2x.webp",
+                  "bytes": 482840,
+                  "sha256": "d50d96248cdb0c39d41f10f26645a69839c248b0300164c236642facd1fb2b24"
+                }
+              ],
+              "legendBounds": {
+                "x": 36,
+                "y": 850.078125,
+                "width": 308,
+                "height": 68
+              },
+              "facts": [
+                "Observed Aug–Sep 2014",
+                "Wavelengths 500–800 nm"
+              ],
+              "factLayout": [
+                {
+                  "text": "Aug–Sep 2014",
+                  "valueWidth": 94.34375,
+                  "textWidth": 94.34375,
+                  "height": 20,
+                  "leaderWidth": 134.812
+                },
+                {
+                  "text": "500–800 nm",
+                  "valueWidth": 83.828125,
+                  "textWidth": 83.828125,
+                  "height": 20,
+                  "leaderWidth": 125.297
+                }
+              ],
+              "dataset": "Spectral slope\nVIRTIS",
+              "screenshotEvidence": {
+                "path": "docs/comets/evidence/67p-virtis-integrated-slope.png",
+                "bytes": 570337,
+                "sha256": "094f0afdf42aea95498944aae5054e4902411e3e174eebc9732b539db965f506"
+              }
+            },
+            {
+              "id": "absorption",
+              "screenshot": "output/playwright/67p-virtis-integration-dpr1-absorption.png",
+              "atlases": [
+                {
+                  "url": "http://127.0.0.1:53135/scenes/comet-67p/comet-67p-absorption-surface@2x.webp",
+                  "bytes": 1090616,
+                  "sha256": "24948ea8f2c2e281b87fa355b57ac352dc9badbb779829a586b9fa680b82fa29"
+                }
+              ],
+              "legendBounds": {
+                "x": 36,
+                "y": 870.078125,
+                "width": 308,
+                "height": 68
+              },
+              "facts": [
+                "Observed Aug–Sep 2014",
+                "Quantity Absorption depth"
+              ],
+              "factLayout": [
+                {
+                  "text": "Aug–Sep 2014",
+                  "valueWidth": 94.34375,
+                  "textWidth": 94.34375,
+                  "height": 20,
+                  "leaderWidth": 134.812
+                },
+                {
+                  "text": "Absorption depth",
+                  "valueWidth": 112.640625,
+                  "textWidth": 112.640625,
+                  "height": 20,
+                  "leaderWidth": 124.453
+                }
+              ],
+              "dataset": "3.2 µm absorption\nVIRTIS",
+              "screenshotEvidence": {
+                "path": "docs/comets/evidence/67p-virtis-integrated-absorption.png",
+                "bytes": 604310,
+                "sha256": "58d59d03de25ce9160886da4efa0b9f05ec6a7cf0be8fc3bec26bf3c55f74e08"
+              }
+            },
+            {
+              "id": "ice",
+              "screenshot": "output/playwright/67p-virtis-integration-dpr1-ice.png",
+              "atlases": [
+                {
+                  "url": "http://127.0.0.1:53135/scenes/comet-67p/comet-67p-ice-surface@2x.webp",
+                  "bytes": 437456,
+                  "sha256": "51a5bccd098bcc3130476ae1f5f812ee0dd5e3a4f2a9f375888e0ffa34efb443"
+                }
+              ],
+              "legendBounds": {
+                "x": 36,
+                "y": 881.078125,
+                "width": 308,
+                "height": 68
+              },
+              "facts": [
+                "Observed Aug–Sep 2014",
+                "Quantity Optical ice fraction",
+                "Model assumes Ice mixed with dark grains"
+              ],
+              "factLayout": [
+                {
+                  "text": "Aug–Sep 2014",
+                  "valueWidth": 94.34375,
+                  "textWidth": 94.34375,
+                  "height": 20,
+                  "leaderWidth": 134.812
+                },
+                {
+                  "text": "Optical ice fraction",
+                  "valueWidth": 122.234375,
+                  "textWidth": 122.234375,
+                  "height": 20,
+                  "leaderWidth": 114.859
+                },
+                {
+                  "text": "Ice mixed with dark grains",
+                  "valueWidth": 168.09375,
+                  "textWidth": 168.09375,
+                  "height": 20,
+                  "leaderWidth": 23.3438
+                }
+              ],
+              "dataset": "Modeled ice\nVIRTIS",
+              "screenshotEvidence": {
+                "path": "docs/comets/evidence/67p-virtis-integrated-ice.png",
+                "bytes": 427839,
+                "sha256": "454275deb4b39026384f7c65a68d57197a624f7c449aa1efbe7b8883b115e3e1"
+              }
+            }
+          ],
+          "errors": [],
+          "forbiddenRequests": [],
+          "devicePixelRatio": 1,
+          "leaves": 1000,
+          "retained": true,
+          "treeMutations": 0,
+          "sceneCount": 1,
+          "forbiddenElements": 0,
+          "forbiddenStyles": false
+        },
+        {
+          "browser": "152.0.7977.76",
+          "dpr": 2,
+          "route": "http://127.0.0.1:53135/comet-67p/",
+          "views": [
+            {
+              "id": "albedo",
+              "screenshot": "output/playwright/67p-virtis-integration-dpr2-albedo.png",
+              "atlases": [
+                {
+                  "url": "http://127.0.0.1:53135/scenes/comet-67p/comet-67p-albedo-surface@2x.webp",
+                  "bytes": 1091110,
+                  "sha256": "5b5a6210faab9ad3dc83cc4c763346731d358efd548e58950cfa20375664ef79"
+                }
+              ],
+              "legendBounds": {
+                "x": 36,
+                "y": 850.078125,
+                "width": 308,
+                "height": 68
+              },
+              "facts": [
+                "Observed Aug–Sep 2014",
+                "Wavelength 550 nm"
+              ],
+              "factLayout": [
+                {
+                  "text": "Aug–Sep 2014",
+                  "valueWidth": 94.34375,
+                  "textWidth": 94.34375,
+                  "height": 20,
+                  "leaderWidth": 134.812
+                },
+                {
+                  "text": "550 nm",
+                  "valueWidth": 49.515625,
+                  "textWidth": 49.515625,
+                  "height": 20,
+                  "leaderWidth": 166.797
+                }
+              ],
+              "dataset": "Albedo\nVIRTIS",
+              "screenshotEvidence": {
+                "path": "output/playwright/67p-virtis-integration-dpr2-albedo.png",
+                "bytes": 1649991,
+                "sha256": "36f47e6507c017b3f8d29e9b2ce7181aa969ea8276f1e8aadf3e1d342b857451"
+              }
+            },
+            {
+              "id": "slope",
+              "screenshot": "output/playwright/67p-virtis-integration-dpr2-slope.png",
+              "atlases": [
+                {
+                  "url": "http://127.0.0.1:53135/scenes/comet-67p/comet-67p-slope-surface@2x.webp",
+                  "bytes": 482840,
+                  "sha256": "d50d96248cdb0c39d41f10f26645a69839c248b0300164c236642facd1fb2b24"
+                }
+              ],
+              "legendBounds": {
+                "x": 36,
+                "y": 850.078125,
+                "width": 308,
+                "height": 68
+              },
+              "facts": [
+                "Observed Aug–Sep 2014",
+                "Wavelengths 500–800 nm"
+              ],
+              "factLayout": [
+                {
+                  "text": "Aug–Sep 2014",
+                  "valueWidth": 94.34375,
+                  "textWidth": 94.34375,
+                  "height": 20,
+                  "leaderWidth": 134.812
+                },
+                {
+                  "text": "500–800 nm",
+                  "valueWidth": 83.828125,
+                  "textWidth": 83.828125,
+                  "height": 20,
+                  "leaderWidth": 125.297
+                }
+              ],
+              "dataset": "Spectral slope\nVIRTIS",
+              "screenshotEvidence": {
+                "path": "output/playwright/67p-virtis-integration-dpr2-slope.png",
+                "bytes": 1601117,
+                "sha256": "b79418c74c457b4114b5121cdf95ecedf0388faabfb1d0c06aeac81eb40f6eb6"
+              }
+            },
+            {
+              "id": "absorption",
+              "screenshot": "output/playwright/67p-virtis-integration-dpr2-absorption.png",
+              "atlases": [
+                {
+                  "url": "http://127.0.0.1:53135/scenes/comet-67p/comet-67p-absorption-surface@2x.webp",
+                  "bytes": 1090616,
+                  "sha256": "24948ea8f2c2e281b87fa355b57ac352dc9badbb779829a586b9fa680b82fa29"
+                }
+              ],
+              "legendBounds": {
+                "x": 36,
+                "y": 870.078125,
+                "width": 308,
+                "height": 68
+              },
+              "facts": [
+                "Observed Aug–Sep 2014",
+                "Quantity Absorption depth"
+              ],
+              "factLayout": [
+                {
+                  "text": "Aug–Sep 2014",
+                  "valueWidth": 94.34375,
+                  "textWidth": 94.34375,
+                  "height": 20,
+                  "leaderWidth": 134.812
+                },
+                {
+                  "text": "Absorption depth",
+                  "valueWidth": 112.640625,
+                  "textWidth": 112.640625,
+                  "height": 20,
+                  "leaderWidth": 124.453
+                }
+              ],
+              "dataset": "3.2 µm absorption\nVIRTIS",
+              "screenshotEvidence": {
+                "path": "output/playwright/67p-virtis-integration-dpr2-absorption.png",
+                "bytes": 1721980,
+                "sha256": "b5b8275b7fd73a7c18fd97d8f1f9e3b656dc19f75ee1a8f3f61962428ff7e304"
+              }
+            },
+            {
+              "id": "ice",
+              "screenshot": "output/playwright/67p-virtis-integration-dpr2-ice.png",
+              "atlases": [
+                {
+                  "url": "http://127.0.0.1:53135/scenes/comet-67p/comet-67p-ice-surface@2x.webp",
+                  "bytes": 437456,
+                  "sha256": "51a5bccd098bcc3130476ae1f5f812ee0dd5e3a4f2a9f375888e0ffa34efb443"
+                }
+              ],
+              "legendBounds": {
+                "x": 36,
+                "y": 881.078125,
+                "width": 308,
+                "height": 68
+              },
+              "facts": [
+                "Observed Aug–Sep 2014",
+                "Quantity Optical ice fraction",
+                "Model assumes Ice mixed with dark grains"
+              ],
+              "factLayout": [
+                {
+                  "text": "Aug–Sep 2014",
+                  "valueWidth": 94.34375,
+                  "textWidth": 94.34375,
+                  "height": 20,
+                  "leaderWidth": 134.812
+                },
+                {
+                  "text": "Optical ice fraction",
+                  "valueWidth": 122.234375,
+                  "textWidth": 122.234375,
+                  "height": 20,
+                  "leaderWidth": 114.859
+                },
+                {
+                  "text": "Ice mixed with dark grains",
+                  "valueWidth": 168.09375,
+                  "textWidth": 168.09375,
+                  "height": 20,
+                  "leaderWidth": 23.3438
+                }
+              ],
+              "dataset": "Modeled ice\nVIRTIS",
+              "screenshotEvidence": {
+                "path": "output/playwright/67p-virtis-integration-dpr2-ice.png",
+                "bytes": 1152464,
+                "sha256": "22f6f7d9cb7ea6145458defec8e245e2569edde0b41e6c067ff6a610c474e06f"
+              }
+            }
+          ],
+          "errors": [],
+          "forbiddenRequests": [],
+          "devicePixelRatio": 2,
+          "leaves": 1000,
+          "retained": true,
+          "treeMutations": 0,
+          "sceneCount": 1,
+          "forbiddenElements": 0,
+          "forbiddenStyles": false
+        }
+      ],
+      "conformanceCases": 13,
+      "report": {
+        "path": "output/playwright/67p-virtis-main-conformance/report.json",
+        "bytes": 5846,
+        "sha256": "cf444eb859dd74be06222cc64af08e4fa4eb1216488034d5d1fcf1a7c126f876"
+      }
+    },
+    "checks": [
+      {
+        "path": "output/virtis-validation/main-integration-build.log",
+        "bytes": 10916,
+        "sha256": "325f0526bf61969a43476f5709daa0fb5602785d2361b42112dd34d36e31f8a9"
+      },
+      {
+        "path": "output/virtis-validation/main-integration-refresh.log",
+        "bytes": 227,
+        "sha256": "33e344b1016745fa1896102465732e788d28bc4e13e3d83fb34d8f86125a0cd1"
+      },
+      {
+        "path": "output/virtis-validation/main-integration-tests.log",
+        "bytes": 1107,
+        "sha256": "632c1398c0575ed3b0b7b9a33086d4f49d97fd8bd53c444297f192a12207be77"
+      },
+      {
+        "path": "output/virtis-validation/main-integration-typecheck.log",
+        "bytes": 153,
+        "sha256": "e361afc5fb0481f75fa4194bc01d938bb05d775558d44e19c5b13fad7aad3dcd"
+      },
+      {
+        "path": "output/virtis-validation/main-integration-conformance.log",
+        "bytes": 7359,
+        "sha256": "407c1787ad88603b4cd289f652f32e021dba8ddb3e1ef100c34e9490d3ad6354"
+      }
+    ],
+    "passed": [
+      "Shared package, renderer and preparation builds",
+      "Preparation typecheck",
+      "10 focused content and 67P scientific tests",
+      "All 13 67P browser conformance cases",
+      "Four datasets at DPR 1 and DPR 2; exact image hashes, retained scene, concise facts and leader widths"
+    ],
+    "harnessUpdates": [
+      "Close Settings with its supported Escape action; the old Explore button is hidden by main’s new explorer.",
+      "Treat main’s hidden attribution footer as absent when checking legend visibility."
+    ],
+    "scopeNote": "The complete production build and 178-object aggregate browser run above qualify the original feature commit. After merging main, focused qualification was repeated for 67P on the development preview; the expanded 227-object production build was not repeated."
+  }
 }
