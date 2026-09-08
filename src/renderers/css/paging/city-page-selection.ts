@@ -160,12 +160,10 @@ function selectWmtsTree(plan: PreparedPagePlan,pages: ReadonlyMap<string, Prepar
     const node=pages.get(key);if(!node)throw new Error(`Missing prepared WMTS tree node ${key}.`);
     if(!projected.has(key)){
       let projection=projectCityPage(node,matrix,scale,viewport);
-      if(node.pages?.length){
+      if(node.level>=10 && node.pages?.length){
         // A source tile can touch both the cap apron and a regular face. The
         // space between those prepared pieces is not coverage. Cull each real
         // piece instead of treating their combined bounding box as a surface.
-        // Coarse tiles need this too: their bounds can cross the eye plane and
-        // exhaust metadata on empty space before useful children can load.
         const pieces=node.pages.map(key=>pages.get(key));
         if(pieces.some(p=>!p))throw new Error("Missing prepared WMTS image piece.");
         const visible=pieces.map(p=>{
@@ -218,7 +216,10 @@ function selectWmtsTree(plan: PreparedPagePlan,pages: ReadonlyMap<string, Prepar
       const childGroups=entry.node.children.map(key=>visit(key,next,lineage));
       const deeper=childGroups.flat();
       if(deeper.length<=capacity&&deeper.reduce((s,p)=>s+p.node.width*p.node.height*4,0)<=byteCapacity){
-        if(pending.length===pendingStart || !own.length)return deeper;
+        // Known children can load while siblings await metadata. Pending groups
+        // retain their lineage, so the existing fallback/publication policy
+        // keeps covering ancestors until those branches are ready too.
+        return deeper;
       }else{
         constrained = true;
       }
