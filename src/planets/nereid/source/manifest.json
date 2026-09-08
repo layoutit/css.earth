@@ -1,0 +1,218 @@
+{
+  "schema": "cssnereid-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "size-approximation",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 65105,
+      "expectedSha256": "3d1774b4bcf9df00dea95af8d7d94466bb8cfca7280616fc1eb07b30b53fd7bd",
+      "origin": "https://doi.org/10.1093/mnras/stw081",
+      "credit": "Kiss et al. (2016) ellipsoid family; JPL nominal size; cssEarth approximation and standard grid",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1093/mnras/stw081",
+        "https://ssd.jpl.nasa.gov/sats/phys_par/"
+      ],
+      "acquisition": "Checked-in representative ellipsoid; published family, normalization and formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 170000
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://doi.org/10.1093/mnras/stw081",
+      "credit": "Kiss et al. (2016) ellipsoid family; JPL nominal size; cssEarth approximation and standard grid",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1093/mnras/stw081",
+        "https://ssd.jpl.nasa.gov/sats/phys_par/"
+      ],
+      "acquisition": "Checked-in representative ellipsoid; published family, normalization and formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 170000
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3654,
+      "expectedSha256": "c57aae94b6ab42f2f38ca5863d49ab91c407108cc13f14fd636f2093d12993d8",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1509,
+      "expectedSha256": "f6102b3916cacd53b06e86d042afeb9174780506a37246c0932d1a54691e1b3b",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1322,
+      "expectedSha256": "316f0bc8b0f60747a555bbcccf6b423db3230e00ad8a1ba10182cb9172cf39e0",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 582,
+      "expectedSha256": "de2e85c772b9ac7f99f3bbdbb753fc75876b983730727c8f4d04ce401f9a3768",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2546,
+      "expectedSha256": "6e108292267e91b69aca652270758d39b2dfafd96d0e5bfe7297f90823e66347",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3500,
+      "expectedSha256": "c5b33c009ea17416dfdbbb831d9ffad04f2c273d5ab81c058cec3316b498014a",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "9bfe86d24b58d83bddf3ddcd6c63e4cb9f5981854712ab39855b9df0fd5c74fe",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/C1129120_CALIB.LBL",
+      "expectedBytes": 4046,
+      "expectedSha256": "78d670d13d815f7f6a239b6996852a49d51dd0026f195ea4a8e1a48e159b78a4",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/C1137631_CALIB.LBL",
+      "expectedBytes": 4059,
+      "expectedSha256": "18befd395d148dbcfbbcf6c3abd38a11070b63edbc3f4d74d5a4a08d4acd3d7a",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/kiss2016-model.json",
+      "expectedBytes": 1623,
+      "expectedSha256": "97d5cf9f23e55b961e43da9d2339551d1632a696bae600f44fc38d6697191677",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/native-inspection.json",
+      "expectedBytes": 984,
+      "expectedSha256": "9eaf25152f70510e5c434a33bb2b57edbf8ac19ff2c64e30709b1f1c64d507cc",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/opus.json",
+      "expectedBytes": 1891,
+      "expectedSha256": "cae69adf92b0699e399961764534112246e589e54db3cb9f6a8275e52059c422",
+      "purpose": "Scientific source and authored preparation evidence."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1093/mnras/stw081",
+      "credit": "Kiss et al. (2016) ellipsoid family; JPL nominal size; cssEarth approximation and standard grid",
+      "license": "MIT display representation from published scientific measurements; retain source citation.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "size-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 75524,
+      "expectedSha256": "daf0bc1595072d52c3d02d1cb4d33e57ec80eda36c5e456c609fb4172e79c86f"
+    }
+  ]
+}

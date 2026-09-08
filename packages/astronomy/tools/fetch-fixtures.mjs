@@ -45,6 +45,11 @@ const targets = [
 ]
 
 const SATELLITES = [
+  ['siarnaq', '629', '500@699', 'daily'],
+  ['ymir', '619', '500@699', 'daily'],
+
+  ['nereid', '802', '500@899', 'daily'],
+  ['himalia', '506', '500@599', 'daily'],
   ['phobos', '401', '500@499'],
   ['deimos', '402', '500@499'],
   ['io', '501', '500@599'],
