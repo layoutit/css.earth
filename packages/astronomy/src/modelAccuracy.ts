@@ -99,6 +99,10 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   triton: 49252.75275560124,
   proteus: 684.0919384620709,
   larissa: 471.54964789874685,
+  naiad: 237.63844794163802,
+  thalassa: 104.86029958307859,
+  despina: 63.347226539073226,
+  galatea: 54.73951237290662,
   charon: 1.0206866493052924,
 }
 
@@ -151,7 +155,7 @@ ACCURACY_BY_FRAME.set(
     'sun',
     'Eight-planet mass-weighted barycentric correction',
     'fit-residual',
-    164.70295316462096,
+    164.71019094004845,
     VSOP87A_VALID_FROM_JD,
     VSOP87A_VALID_TO_JD,
     'JPL Horizons DE441 Sun-to-SSB vector fixtures',
