@@ -127,8 +127,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 8193,
-      "expectedSha256": "26dfbde97dd6b8a153ebfc7274bb15ae9ba2fe063ac460bcaa58c15c35dd0abd"
+      "expectedBytes": 9872,
+      "expectedSha256": "11ad30ad51acfbe05534ccd7f38e51bdd3e1ee5ad1c4403760d18d4c49c4c33e"
     },
     {
       "path": "preparation/acquisition.json",
@@ -151,8 +151,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 3627,
-      "expectedSha256": "f974f70b89ae4bbc4355a4be13785e8cf3cd4e4deb12aa21bf817af781f4cda7"
+      "expectedBytes": 3749,
+      "expectedSha256": "95b678ef073f8566a545d6a2e8276ccc5d0e0d95a0322be77eb4484663eb8281"
     },
     {
       "path": "presentation/title-mark.json",

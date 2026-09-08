@@ -11,28 +11,58 @@
     "facts": [
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "39 AU (mean)"
+        "label": "Solar semimajor axis",
+        "value": "39.482 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "radius",
-        "label": "Radius",
-        "value": "1,188.3 km"
+        "label": "Mean radius",
+        "value": "1,188.3 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "247.92065 years"
+        "value": "247.92 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "6.3872 days, retrograde"
+        "value": "6.39 days · retrograde",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "axial-tilt",
         "label": "Axial tilt",
-        "value": "57°"
+        "value": "About 120°",
+        "source": {
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/plutofact.html?level=1",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "moon-count",
@@ -45,7 +75,30 @@
         "value": "None"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.302 × 10²² kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.853 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "controls": {
     "lenses": {
@@ -67,7 +120,7 @@
           "id": "surface",
           "label": "Visible color",
           "thumbnailUrl": "/scenes/pluto/pluto-surface-thumbnail.webp",
-          "description": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+          "description": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
           "title": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
           "detail": "Color mosaic"
         },
@@ -75,7 +128,7 @@
           "id": "topography",
           "label": "Elevation",
           "thumbnailUrl": "/scenes/pluto/pluto-topography-thumbnail.webp",
-          "description": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+          "description": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
           "title": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
           "detail": "Stereo relief",
           "legend": {
@@ -97,7 +150,7 @@
           "id": "monochrome",
           "label": "Monochrome",
           "thumbnailUrl": "/scenes/pluto/pluto-monochrome-thumbnail.webp",
-          "description": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+          "description": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
           "title": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
           "detail": "Photo mosaic"
         }

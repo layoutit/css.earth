@@ -169,9 +169,9 @@ export function parsePdsVertexFacetShape(text, profile) {
 
 /** Sample a bounded scientific grid from the source mesh. A facet-support
  * column can withhold regions whose detailed SPC solution is absent. */
-export async function loadShapeScalarGrid(root, lens) {
+export async function loadShapeScalarGrid(root, lens, sourceMesh) {
   const load = lens.format === 'stl' ? loadStlShape : lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
-  const mesh = await load(resolve(root, lens.path), lens.grid);
+  const mesh = sourceMesh ?? await load(resolve(root, lens.path), lens.grid);
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');
   let validity;
@@ -183,10 +183,13 @@ export async function loadShapeScalarGrid(root, lens) {
   }
   const data=new Float64Array(width*height);data.fill(NaN);
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){
-    const h=mesh.hit(x/(width-1)*360,90-y/(height-1)*180);
+    // A flat longitude/latitude map cannot identify more than one surface on
+    // a center ray. Withhold ambiguous preview cells; the triangle atlas below
+    // samples the actual source surface instead of painting this map on it.
+    const h=mesh.hit(x/(width-1)*360,90-y/(height-1)*180, !!lens.surfaceSampling);
     if(h && (!validity || validity[h.faceId])) data[y*width+x]=h.radius;
   }
-  return {sample(longitude,latitude){
+  return { ...(lens.surfaceSampling ? createShapeSurfaceSampler(mesh, lens, validity) : {}), sample(longitude,latitude){
     if(!Number.isFinite(longitude)||!Number.isFinite(latitude)||Math.abs(latitude)>90)return null;
     const x=((longitude%360+360)%360)/360*(width-1),y=(90-latitude)/180*(height-1);
     const x0=Math.floor(x),x1=Math.min(width-1,x0+1),y0=Math.floor(y),y1=Math.min(height-1,y0+1);
@@ -196,6 +199,50 @@ export async function loadShapeScalarGrid(root, lens) {
     const radius=(v[0]*(1-u)+v[1]*u)*(1-t)+(v[2]*(1-u)+v[3]*u)*t;
     return radius*(lens.valueTransform?.scale??1)+(lens.valueTransform?.offset??0);
   }};
+}
+
+/** Radius belongs to the full source surface point, not its longitude/latitude
+ * ray. The distance bound is authored in metres alongside simplification. */
+export function createShapeSurfaceSampler(mesh, lens, validity) {
+  const policy = lens.surfaceSampling;
+  if (policy?.method !== 'closest-source-point' || !(policy.maximumDistanceMeters > 0) ||
+      !Number.isFinite(policy.maximumDistanceMeters) || typeof mesh.closestPoint !== 'function') {
+    throw new TypeError('Source surface sampling requires a mesh and a finite distance bound.');
+  }
+  return { samplePoint(point) {
+    const hit = mesh.closestPoint(point, policy.maximumDistanceMeters);
+    if (!hit || (validity && !validity[hit.faceId])) return null;
+    return { ...hit, value: hit.radius * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0) };
+  } };
+}
+
+/** Euclidean projection onto a triangle, including its boundary. The returned
+ * barycentric weights identify the source point independently of any ray. */
+export function closestTrianglePoint(point, a, ab, ac) {
+  const ap = sub(point, a), d1 = dot(ab, ap), d2 = dot(ac, ap);
+  let u = 0, v = 0;
+  if (!(d1 <= 0 && d2 <= 0)) {
+    const bp = sub(ap, ab), d3 = dot(ab, bp), d4 = dot(ac, bp);
+    if (d3 >= 0 && d4 <= d3) u = 1;
+    else {
+      const vc = d1 * d4 - d3 * d2;
+      if (vc <= 0 && d1 >= 0 && d3 <= 0) u = d1 / (d1 - d3);
+      else {
+        const cp = sub(ap, ac), d5 = dot(ab, cp), d6 = dot(ac, cp);
+        if (d6 >= 0 && d5 <= d6) v = 1;
+        else {
+          const vb = d5 * d2 - d1 * d6;
+          if (vb <= 0 && d2 >= 0 && d6 <= 0) v = d2 / (d2 - d6);
+          else {
+            const va = d3 * d6 - d5 * d4;
+            if (va <= 0 && d4 >= d3 && d5 >= d6) { v = (d4 - d3) / ((d4 - d3) + (d5 - d6)); u = 1 - v; }
+            else { const inverse = 1 / (va + vb + vc); u = vb * inverse; v = vc * inverse; }
+          }
+        }
+      }
+    }
+  }
+  return { point: a.map((n, i) => n + u * ab[i] + v * ac[i]), barycentric: [1 - u - v, u, v] };
 }
 
 export function parseObjShape(text, { metersPerUnit, expectedVertices, expectedFaces }) {
@@ -234,10 +281,11 @@ function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expec
     return {min,max,left:build(items.slice(0,half)),right:build(items.slice(half))};
   }
   const root = build(faces);
-  function intersect(origin, d, maximumDistance = Infinity) {
+  function intersect(origin, d, maximumDistance = Infinity, requireUnique = false) {
     let nearest=maximumDistance, faceId=-1;
+    let farthest = 0;
     function visit(n) {
-      let lo=0,hi=nearest;
+      let lo=0,hi=requireUnique ? maximumDistance : nearest;
       for (let i=0;i<3;i++) {
         if (Math.abs(d[i])<1e-15) { if(n.min[i]>origin[i]||n.max[i]<origin[i])return; continue; }
         const a=(n.min[i]-origin[i])/d[i],b=(n.max[i]-origin[i])/d[i]; lo=Math.max(lo,Math.min(a,b));hi=Math.min(hi,Math.max(a,b));
@@ -252,17 +300,54 @@ function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expec
         const q=cross(s,f.ab),v=dot(d,q)/det;
         if(v < -1e-9 || u+v > 1+1e-9)continue;
         const t=dot(f.ac,q)/det;
-        if(t>0&&t<nearest){nearest=t;faceId=f.id;}
+        if (t > 0 && t < maximumDistance) {
+          farthest = Math.max(farthest, t);
+          if (t < nearest) { nearest = t; faceId = f.id; }
+        }
       }
     }
     visit(root);
-    return faceId<0?null:{radius:nearest,faceId};
+    return faceId<0 || (requireUnique && farthest - nearest > 1e-7) ? null : {radius:nearest,faceId};
   }
-  function hit(longitude, latitude) {
+  function hit(longitude, latitude, requireUnique = false) {
     if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || Math.abs(latitude)>90) return null;
     const lon=longitude*Math.PI/180, lat=latitude*Math.PI/180;
-    return intersect([0,0,0],[Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)]);
+    return intersect([0,0,0],[Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)], Infinity, requireUnique);
+  }
+  function closestPoint(point, maximumDistance = Infinity) {
+    if (!Array.isArray(point) || point.length !== 3 || !point.every(Number.isFinite) || !(maximumDistance > 0)) {
+      throw new TypeError('Surface projection requires a finite point and positive distance bound.');
+    }
+    let distanceSquared = maximumDistance * maximumDistance, result = null, ambiguous = false;
+    // Coincident hits at an edge identify the same point; equal-distance hits
+    // on distinct surfaces do not establish a unique correspondence.
+    const tieSquared = 1e-12;
+    const boxDistance = node => point.reduce((sum, p, i) => sum + Math.max(node.min[i] - p, 0, p - node.max[i]) ** 2, 0);
+    function visit(node) {
+      if (boxDistance(node) > distanceSquared + tieSquared) return;
+      if (!node.items) {
+        const leftFirst = boxDistance(node.left) <= boxDistance(node.right);
+        visit(leftFirst ? node.left : node.right); visit(leftFirst ? node.right : node.left); return;
+      }
+      for (const face of node.items) {
+        const projected = closestTrianglePoint(point, face.a, face.ab, face.ac);
+        const delta = sub(point, projected.point), squared = dot(delta, delta);
+        if (squared > distanceSquared + tieSquared) continue;
+        if (result && Math.abs(squared - distanceSquared) <= tieSquared) {
+          const separation = sub(result.point, projected.point);
+          if (dot(separation, separation) > tieSquared) ambiguous = true;
+          continue;
+        }
+        const normal = cross(face.ab, face.ac), length = Math.hypot(...normal);
+        distanceSquared = squared; ambiguous = false;
+        result = { ...projected, faceId: face.id, normal: normal.map(n => n / length),
+          radius: Math.hypot(...projected.point), distanceMeters: Math.sqrt(squared) };
+      }
+    }
+    visit(root);
+    return ambiguous ? null : result;
   }
   return { vertices: vertices.length, faces: faces.length, positions: vertices, indices, bounds:[root.min,root.max], hit, intersect,
+    closestPoint,
     sample(longitude,latitude) {return hit(longitude,latitude)?.radius??null;} };
 }

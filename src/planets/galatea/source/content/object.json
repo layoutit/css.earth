@@ -9,7 +9,13 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "About 88 km"
+        "value": "79 ± 12 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "dimensions",
@@ -23,12 +29,12 @@
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Neptune",
+        "label": "Mean distance from Neptune",
         "value": "About 62,000 km"
       },
       {
         "id": "rotation-period",
-        "label": "Rotation",
+        "label": "Rotation period",
         "value": "Assumed synchronous"
       },
       {

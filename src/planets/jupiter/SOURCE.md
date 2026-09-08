@@ -74,19 +74,21 @@ The Hubble OPAL Cycle 32 high-level science products observed on 11 December
 - `F275W` at 275 nm for the ultraviolet lens.
 - `FQ889N` at 889 nm for the methane-band lens.
 
-Both FITS products are calibrated single-band measurements. Preparation reads
-the primary floating-point image and accepts only a row with a complete 3,600
-pixel longitude span as a polar coverage anchor. The resulting measured bounds
-are rows 50 through 1,709 for F275W and 52 through 1,705 for FQ889N. Gaps inside
-that measured band are closed horizontally. The polar atlas reprojects the
-measured spectral pixels from 64° through the last complete source row with
-nine-sample angular supersampling. Beyond that measured coverage, two low
-angular modes preserve the Hubble band color and broad luminance while the
-checked Juno PIA23808 north-pole and PIA23556 south-pole products supply only
-the cyclone structure. Those Juno details are not direct F275W or FQ889N
-measurements. A declared percentile stretch and false-color palette produce
-fixed DPR surface, polar, and thumbnail assets. The browser applies no filters
-or raster processing.
+Both FITS products are single-band measurements from 11 December 2025.
+Preparation preserves the measured values, including dark and finite negative
+samples. The pinned maps contain exact-zero exterior fill but no separate
+validity extension. Only exact-zero regions connected to a polar source edge,
+and any non-finite samples, are marked unavailable; isolated interior zero
+samples remain observations. This conservative coverage rule is an explicitly
+qualified interpretation of the source fill, not a brightness threshold.
+
+The scalar map, both surface densities, polar atlases and thumbnail use the
+same validity mask. Interpolation rejects footprints containing missing
+samples. Gray grid marks those gaps. A measured-pixel percentile stretch and
+false-color palette provide relative display contrast. No Juno structure,
+harmonic extrapolation or neighboring longitude fill supplies spectral data.
+The normal visible-color composite still has its separately disclosed Juno
+polar illustration; it is not a new geodetic map.
 
 ## Satellite source archive
 

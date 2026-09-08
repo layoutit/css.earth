@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "proteus",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "planet",
+        "name",
+        "code",
+        "GMKm3PerSec2",
+        "GMSigma",
+        "GMReference",
+        "meanRadiusKm",
+        "radiusSigmaKm",
+        "radiusReference",
+        "densityGPerCm3",
+        "densitySigma",
+        "densityReference"
+      ],
+      "row": [
+        "Neptune",
+        "Proteus",
+        "808",
+        "2.58342",
+        "2.42070",
+        "NEP097",
+        "208.00",
+        "8.00",
+        "1",
+        "1.0269",
+        "0.9695",
+        "*"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "30.070 AU"
+      }
+    }
+  ]
+}

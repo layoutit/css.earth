@@ -151,6 +151,18 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
   overflow-wrap: anywhere;
 }
 
+.planet-surface-minimap + .planet-lens-details-copy {
+  margin-top: 10px;
+  margin-inline-end: 4px;
+}
+
+.planet-motion-description {
+  margin: 0 0 8px;
+  padding: 8px var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
+  color: var(--shell-text-secondary);
+  font: 400 0.75rem/18px var(--shell-ui-font);
+}
+
 .planet-lens-texture {
   display: block;
   width: 100%;
@@ -651,6 +663,7 @@ button.planet-title-tag:hover {
 }
 
 .planet-facts li {
+  min-width: 0;
   margin: 0;
   color: inherit;
   font: inherit;
@@ -666,6 +679,7 @@ button.planet-title-tag:hover {
 
 .planet-primary-facts,
 .planet-additional-facts {
+  min-width: 0;
   display: grid;
   gap: 2px;
   margin: 0;
@@ -674,6 +688,7 @@ button.planet-title-tag:hover {
 }
 
 .planet-facts-overflow {
+  min-width: 0;
   display: grid;
   width: 100%;
   margin: 0;
@@ -1537,19 +1552,19 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-facts li {
     display: grid;
-    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) max-content;
+    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) minmax(0, 55%);
     align-items: baseline;
     gap: 8px;
     width: 100%;
   }
 
   .planet-facts li::before {
-    align-self: center;
+    align-self: start;
+    margin-top: 0.85em;
     grid-column: 2;
     grid-row: 1;
     border-bottom: 1px dotted rgb(255 255 255 / 12%);
     content: "";
-    transform: translateY(0.3em);
   }
 
   .planet-fact-label {
@@ -1559,8 +1574,8 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     overflow: hidden;
     color: var(--shell-text-muted);
     opacity: 1;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .planet-fact-label::after {
@@ -1571,7 +1586,10 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     grid-column: 3;
     grid-row: 1;
     font: inherit;
-    white-space: nowrap;
+    min-width: 0;
+    text-align: right;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
 }
@@ -1859,19 +1877,19 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-facts li {
     display: grid;
-    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) max-content;
+    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) minmax(0, 55%);
     align-items: baseline;
     gap: 8px;
     width: 100%;
   }
 
   .planet-facts li::before {
-    align-self: center;
+    align-self: start;
+    margin-top: 0.85em;
     grid-column: 2;
     grid-row: 1;
     border-bottom: 1px dotted rgb(255 255 255 / 12%);
     content: "";
-    transform: translateY(0.3em);
   }
 
   .planet-fact-label {
@@ -1881,8 +1899,8 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     overflow: hidden;
     color: var(--shell-text-muted);
     opacity: 1;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .planet-fact-label::after {
@@ -1892,7 +1910,10 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   .planet-fact-value {
     grid-column: 3;
     grid-row: 1;
-    white-space: nowrap;
+    min-width: 0;
+    text-align: right;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .planet-resources-panel,

@@ -178,13 +178,14 @@ const hasResources = sources.length > 0;
   <h2 id={`${objectId}-settings-title`}>{PREPARED_SHELL_TITLES.settings.label}</h2>
   <div class="planet-settings">
     <label class="planet-setting-control planet-motion-setting-control">
-      <input class="planet-motion-setting" type="checkbox" name="motion" />
-      <span class="planet-setting-text">Motion</span>
+      <input class="planet-motion-setting" type="checkbox" name="motion" aria-describedby={`${objectId}-motion-description`} />
+      <span class="planet-setting-text">Illustrative rotation</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
       <span id={`${objectId}-motion-blocked`} class="planet-motion-blocked" hidden>
         Paused by reduced motion
       </span>
     </label>
+    <p id={`${objectId}-motion-description`} class="planet-motion-description">Accelerated display rotation. The scene epoch stays fixed.</p>
     {speedSetting && <label class="planet-setting-control planet-speed-setting-control">
       <span class="planet-setting-text">{speedSetting.label}</span>
       <input

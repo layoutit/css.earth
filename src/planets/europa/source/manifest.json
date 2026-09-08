@@ -87,7 +87,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git."
     },
     {
@@ -978,8 +978,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 7646,
-      "expectedSha256": "50ab6f07987ee185d58024caf92a7a4a20a3661222890a61e58e0a248e3afb5f",
+      "expectedBytes": 9623,
+      "expectedSha256": "a05d532da9cb84cca788a5e0020a5e9cbe057d577bdf72417eabd1069f715966",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -999,6 +999,13 @@
       "expectedBytes": 12905,
       "expectedSha256": "620ecbe8332f0771caa3d6e1a202cacb0aa2c5135d039813b16df8358302e3c3",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1418,
+      "expectedSha256": "d1cd1a95dc286994f9541c09b8d5eaf611650126bcbbcc944d8489cd9734346c"
     }
   ]
 }
