@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "amalthea",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://sbn.psi.edu/pds/resource/stkshape.html",
+    "credit": "NASA/JPL; Philip Stooke; NASA PDS",
+    "license": "Public PDS scientific data; retain mission and model attribution.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "c0368603500",
+        "c0420626379",
+        "c0420652501",
+        "c0512324200",
+        "c0532888100",
+        "stooke-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 196.11,
+      "latitudeDegrees": 0.18,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "normal"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 44558,
+    "expectedSha256": "cc24a3d225625321b94229125518492454d0d2262642fdcf215f5c8719c516d7"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

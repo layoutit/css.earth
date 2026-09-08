@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "amalthea",
+  "displayName": "Amalthea",
+  "panel": {
+    "introduction": "Amalthea is Jupiter’s largest inner moon, an elongated, reddish world with giant craters and bright patches. Dust escaping its low-gravity surface helps form Jupiter’s faint gossamer ring.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "83.5 km"
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Distance from Sun",
+        "value": "5.2 AU (system mean)"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Jupiter",
+        "value": "11.96 hours"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation",
+        "value": "Synchronous with its orbit"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Jupiter",
+        "value": "About 181,400 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Edward Emerson Barnard · 1892"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+        "title": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+        "detail": "Galileo",
+        "thumbnail": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
+        "surface": "amalthea-normal-surface@2x.webp",
+        "poles": "amalthea-normal-surface@2x.webp",
+        "source": {
+          "id": "c0532888100",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/galileo/ssi/"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+        "title": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+        "detail": "Radial shape",
+        "thumbnail": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
+        "surface": "amalthea-elevation-surface@2x.webp",
+        "poles": "amalthea-elevation-surface@2x.webp",
+        "source": {
+          "id": "stooke-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/stkshape.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−35",
+            "0",
+            "+50"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
+          "image": "/scenes/amalthea/amalthea-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Amalthea overview",
+      "href": "https://science.nasa.gov/jupiter/jupiter-moons/amalthea/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "surface",
+      "description": "Galileo imagery and Stooke shape model",
+      "href": "https://sbn.psi.edu/pds/resource/stkshape.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/jupiter/jupiter-moons/amalthea/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

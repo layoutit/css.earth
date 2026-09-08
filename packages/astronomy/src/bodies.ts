@@ -90,6 +90,11 @@ export const BODIES: Record<BodyId, BodyData> = {
   europa: body('europa', 'Europa', '502', 1560.8, 3202.7121, 'jupiter'),
   ganymede: body('ganymede', 'Ganymede', '503', 2631.2, 9887.8328, 'jupiter'),
   callisto: body('callisto', 'Callisto', '504', 2410.3, 7179.2834, 'jupiter'),
+  // JPL Horizons OBJ_DATA physical blocks, retrieved 2026-09-08.
+  amalthea: body('amalthea', 'Amalthea', '505', 83.5, 0.1646, 'jupiter'),
+  thebe: body('thebe', 'Thebe', '514', 49.3, 0.0301, 'jupiter'),
+  adrastea: body('adrastea', 'Adrastea', '515', 8.2, 0.0001, 'jupiter'),
+  metis: body('metis', 'Metis', '516', 21.5, 0.0025, 'jupiter'),
 
   mimas: body('mimas', 'Mimas', '601', 198.8, 2.503489, 'saturn'),
   enceladus: body('enceladus', 'Enceladus', '602', 252.3, 7.210367, 'saturn'),
