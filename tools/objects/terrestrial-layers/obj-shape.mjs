@@ -61,6 +61,34 @@ export function parseVrmlShape(text, profile) {
   return radialShape(vertices, indices, profile);
 }
 
+/** Preserve the published comet plate model, including its confidence codes.
+ * Weakly constrained regions are source estimates and are labelled in the
+ * prepared constraint lens; the loader does not invent replacement geometry. */
+export async function loadPdsPlanetocentricShape(path, profile) {
+  return parsePdsPlanetocentricShape(await readFile(path, 'utf8'), profile);
+}
+
+export function parsePdsPlanetocentricShape(text, profile) {
+  const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
+  const header = rows.shift(), [vertexCount, faceCount] = header;
+  if (header.length !== 2 || vertexCount !== profile.expectedVertices || faceCount !== profile.expectedFaces ||
+      rows.length !== vertexCount + faceCount || !(profile.metersPerUnit > 0) || !Number.isFinite(profile.metersPerUnit)) throw new Error('Invalid PDS comet shape dimensions or units.');
+  const coordinates = [], flags = [], counts = { 1: 0, 2: 0, 3: 0 };
+  const positions = rows.slice(0, vertexCount).map(row => {
+    const [latitude, longitude, radius, flag] = row;
+    if (row.length !== 4 || !row.every(Number.isFinite) || Math.abs(latitude) > 90 ||
+        longitude < 0 || longitude >= 360 || !(radius > 0) || ![1, 2, 3].includes(flag)) throw new Error('Invalid PDS shape vertex or constraint flag.');
+    flags.push(flag); counts[flag]++; coordinates.push([latitude, longitude]);
+    const lat = latitude * Math.PI / 180, lon = longitude * Math.PI / 180, r = radius * profile.metersPerUnit;
+    return [r * Math.cos(lat) * Math.cos(lon), r * Math.cos(lat) * Math.sin(lon), r * Math.sin(lat)];
+  });
+  const indices = rows.slice(vertexCount);
+  if (indices.some(face => face.length !== 3 || face.some(i => !Number.isInteger(i) || i < 0 || i >= vertexCount))) throw new Error('Invalid PDS plate connectivity.');
+  return { ...radialShape(positions, indices, profile), constraintFlags: flags, coordinates,
+    coverage: { model: 'pds-vertex-constraint-flags', sourceVertices: vertexCount, sourceFaces: faceCount,
+      vertexFlags: counts, interpretation: '1 stereo control; 2 limb silhouette; 3 not well constrained. The complete published model is retained.' } };
+}
+
 /** PDS longitude/latitude/radius tables preserve their authored origin. The
  * regular grid defines the connectivity; duplicated seam/pole rows are welded. */
 export async function loadPdsRadiusTable(path, profile) {

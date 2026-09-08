@@ -3,11 +3,13 @@ import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
-import { loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable } from './obj-shape.mjs';
+import { loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsPlanetocentricShape, loadPdsRadiusTable } from './obj-shape.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { loadPdsRadialTable } from './pds-radial-table.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
 import { renderRadialSnapshot } from './radial-snapshot.mjs';
+import { createSourceMeshLighting } from './source-mesh-lighting.mjs';
+import { preparePdsConstraintMap } from './pds-constraint-map.mjs';
 
 const sub = (a, b) => a.map((v, i) => v - b[i]);
 const dot = (a, b) => a.reduce((sum, v, i) => sum + v * b[i], 0);
@@ -19,13 +21,18 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
   await source.validatePath(profile.path);
-  const loader = profile.format === 'pds-radius-table' ? loadPdsRadiusTable
+  const loader = profile.format === 'pds-planetocentric-plate' ? loadPdsPlanetocentricShape
+    : profile.format === 'pds-radius-table' ? loadPdsRadiusTable
     : ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape
     : profile.format === 'vrml-mesh' ? loadVrmlShape
     : profile.format === 'pds-plate-model' ? loadPdsPlateShape
     : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape
     : profile.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
   const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
+  for (const entry of source.manifest.inputs.filter(entry =>
+    entry.generator === 'tools/objects/terrestrial-layers/pds-constraint-map.mjs')) {
+    source.assertBytes(entry, await preparePdsConstraintMap(grid, entry.recipe));
+  }
   const scale = config.geometry.radius / (config.geometry.radiusKm * 1000);
   if (profile.primitive !== undefined && profile.primitive !== 'u') throw new TypeError('Unknown radial triangle primitive.');
   const simplified = profile.simplification?.method === 'meshoptimizer'
@@ -57,6 +64,7 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
     style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }));
   return { grid, faces, plans, leaves, width, height, tileSize,
+    ...(grid.coverage ? { coverage: grid.coverage } : {}),
     ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };
 }
 
@@ -208,6 +216,9 @@ export function shadeRadialFaces(faces) {
  */
 export async function prepareRadialMaterials({ radial, surfaces, config, source, publicDirectory, outputDirectory, sunDirection }) {
   const { width, height, tileSize } = radial;
+  const lightingRecipe = config.geometry.radialTerrain.sourceLighting;
+  const lighting = lightingRecipe ? createSourceMeshLighting(radial.grid, lightingRecipe,
+    config.geometry.radiusKm * 1000 / config.geometry.radius, sunDirection) : null;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
     const { data: map, info } = await sharp(resolve(publicDirectory, surface.map.url.split('/').at(-1))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -225,7 +236,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         // raster so antialiasing never samples a transparent triangle edge.
         const normal = unit(face.vertexNormals[0].map((n, i) => n * (1 - u - v) + face.vertexNormals[1][i] * u + face.vertexNormals[2][i] * v));
         // Fixed-epoch directional illumination is baked in the body's frame.
-        const illumination = .12 + .88 * Math.max(0, dot(normal, sunDirection));
+        const light = lighting?.sample(point, normal);
+        const illumination = light?.shadow ?? (.12 + .88 * Math.max(0, dot(normal, sunDirection)));
         const lon = (Math.atan2(point[1], point[0]) / (2 * Math.PI) + 1) % 1;
         const lat = Math.atan2(point[2], Math.hypot(point[0], point[1]));
         const sx = lon * info.width - .5, sy = Math.max(0, Math.min(info.height - 1, (.5 - lat / Math.PI) * info.height - .5));
@@ -234,8 +246,9 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         for (let channel = 0; channel < 3; channel++) {
           const top = map[(y0 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y0 * info.width + x1) * 4 + channel] * tx;
           const bottom = map[(y1 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y1 * info.width + x1) * 4 + channel] * tx;
-          flood[offset + channel] = Math.round(top * (1 - ty) + bottom * ty);
-          shadow[offset + channel] = Math.round(flood[offset + channel] * illumination);
+          const color = top * (1 - ty) + bottom * ty;
+          flood[offset + channel] = Math.round(color * (light?.flood ?? 1));
+          shadow[offset + channel] = Math.round((light ? color : Math.round(color)) * illumination);
         }
         flood[offset + 3] = shadow[offset + 3] = 255;
       }
@@ -246,6 +259,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     surface.polesUrl = surface.surface.url;
     surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
   }
+  if (lighting) await writeFile(resolve(outputDirectory, 'source-lighting.json'), JSON.stringify({ ...lighting.report, recipe: lightingRecipe }) + '\n');
   for (const entry of source.manifest.generatedIntermediates.filter(entry =>
     entry.generator === 'tools/objects/terrestrial-layers/radial-snapshot.mjs')) {
     const surface = surfaces.find(surface => surface.id === entry.recipe?.lensId);
@@ -256,6 +270,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   }
   await writeFile(resolve(outputDirectory, 'terrain.json'), JSON.stringify({ schema: 'cssearth-prepared-radial-terrain@1',
     source: config.geometry.radialTerrain, faces: radial.faces, width, height,
+    ...(radial.coverage ? { coverage: radial.coverage } : {}),
     ...(radial.simplification ? { simplification: radial.simplification } : {}) }) + '\n');
   return surfaces;
 }

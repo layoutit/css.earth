@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 226.12,
+  "declinationDegrees": 39.37,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "source": "reference/dataset.cat",
+  "qualification": "The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+}

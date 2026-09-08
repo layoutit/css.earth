@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-103p",
+  "displayName": "Hartley 2",
+  "panel": {
+    "introduction": "103P/Hartley 2 is the elongated, two-lobed comet visited by EPOXI in 2010. Gray marks stereo control, blue limb silhouettes, and ochre poorly constrained regions of the published shape.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Equivalent diameter",
+        "value": "1.16 \u00b1 0.036 km"
+      },
+      {
+        "id": "mission",
+        "label": "Explored by",
+        "value": "EPOXI"
+      },
+      {
+        "id": "source-epoch",
+        "label": "Shape observations",
+        "value": "4 November 2010"
+      },
+      {
+        "id": "coverage",
+        "label": "Stereo coverage",
+        "value": "244 stereo control points on about half the nucleus"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "rendering",
+        "label": "Presentation",
+        "value": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "constraints",
+    "labels": {
+      "model": "Shape model",
+      "constraints": "Source constraints"
+    },
+    "controls": [
+      {
+        "id": "constraints",
+        "label": "Source constraints",
+        "description": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
+        "title": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
+        "detail": "PDS flags",
+        "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
+        "surface": "comet-103p-constraints-surface@2x.webp",
+        "poles": "comet-103p-constraints-poles@2x.webp",
+        "source": {
+          "id": "pds-shape",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab"
+        }
+      },
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Complete published PDS shape, simplified for display. Gray is a model material, not observed albedo. Poorly constrained source estimates are included; switch to Source constraints to identify them.",
+        "title": "Complete published PDS shape, simplified for display. Gray is a model material, not observed albedo. Poorly constrained source estimates are included; switch to Source constraints to identify them.",
+        "detail": "Neutral gray",
+        "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
+        "surface": "comet-103p-model-surface@2x.webp",
+        "poles": "comet-103p-model-poles@2x.webp",
+        "source": {
+          "id": "pds-shape",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": true
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA PDS",
+      "role": "surface",
+      "description": "Farnham & Thomas 2013 shape model and constraint codes",
+      "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/dataset.shtml"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/catalog/dataset.cat",
+      "credit": "Farnham & Thomas (2013)"
+    },
+    "physical": {
+      "path": "../reference/dataset.cat",
+      "credit": "Farnham & Thomas (2013)"
+    }
+  }
+}

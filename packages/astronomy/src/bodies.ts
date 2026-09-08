@@ -35,7 +35,8 @@ export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'sat
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
 export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis'
-export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId
+export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId | CometId
+export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p'
 
 export const PLANET_IDS: readonly PlanetId[] = [
   'mercury',
@@ -50,6 +51,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
 export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis']
+export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p']
 
 const body = (
   id: BodyId,
@@ -62,6 +64,13 @@ const body = (
 
 export const BODIES: Record<BodyId, BodyData> = {
   sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
+  // ESA/RMOC MTP019 equivalent-volume radius (ESA_MODEL_INFO.ASC); mass 9.982e12 kg
+  // (Preusker et al. 2017) times CODATA G. Shape remains object-owned.
+  'comet-67p': body('comet-67p', '67P/Churyumov–Gerasimenko', 'DES=67P;CAP;', 1.65, 9.982e12 * 6.6743e-20, 'sun'),
+  // Farnham & Thomas (2013) PDS shape catalogue equivalent-volume radii.
+  // No measured GM is supplied by these source records; zero follows this registry's unknown-GM convention.
+  'comet-103p': body('comet-103p', '103P/Hartley 2', 'DES=103P;CAP;', 0.58, 0, 'sun'),
+  'comet-9p': body('comet-9p', '9P/Tempel 1', 'DES=9P;CAP;', 2.83, 0, 'sun'),
   // JPL Horizons physical block, solution JPL#36 (2021-Apr-13), retrieved 2026-09-07.
   vesta: body('vesta', 'Vesta', '4;', 261.385, 17.28828, 'sun'),
   // Body-owned Horizons physical blocks, retrieved 2026-09-07.

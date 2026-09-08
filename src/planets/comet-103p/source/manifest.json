@@ -1,0 +1,230 @@
+{
+  "schema": "csscomet-103p-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "pds-shape",
+      "path": "shape/hartley2_2012_plan.tab",
+      "expectedBytes": 1586079,
+      "expectedSha256": "0553bcaf1733d520efa30abf3832f6af6ba3c93b4d146fa373e8e81f03e21940",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab",
+      "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 174,
+      "expectedSha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral model material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 580
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    },
+    {
+      "id": "constraint-surface",
+      "path": "material/constraints.png",
+      "expectedBytes": 4571,
+      "expectedSha256": "2bc3bb039f99930fd7cfca38520ac030c2e1ba4280ee2f6cc71e5b1849be4d12",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab",
+      "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Checked-in categorical map, reproduced from the original PDS flags during preparation.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "constraints",
+      "label": "Source constraints",
+      "falseColor": true,
+      "width": 512,
+      "height": 256,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 580
+      },
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "recipe": {
+        "width": 512,
+        "height": 256,
+        "stepDegrees": 2,
+        "colors": {
+          "1": "#b8b6b2",
+          "2": "#578dba",
+          "3": "#b07c42"
+        }
+      }
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 65744,
+      "expectedSha256": "3ed6c3debacbf06820b060fa258a6468fb17c9126361e18173bb3e7493eae7ed",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab",
+      "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Checked-in derived context image; reproduced and hash-verified by preparation.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "pds-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 15,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5163,
+      "expectedSha256": "bec527237884b7c3fe2c757a970753bcd94235953115c84828d34db2c8368d0e",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 736,
+      "expectedSha256": "84c66c54d4853ca9ce8e91cc88ff09e55b674421341ae56031efcf72ff096a7e",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1621,
+      "expectedSha256": "1a9534b2f359f338418f53d056bbe893e65db4bc91348434cd3ae97f12d2d49d",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 441,
+      "expectedSha256": "96fb45bb515a9e33170ee398574e8aef17dd599d1ae0445807a3e778494fb201",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 4380,
+      "expectedSha256": "072c735cc525f57f1f04d1d1d57137d5260373ed1ed00f0cb768d33ed1eba7bd",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 41,
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3979,
+      "expectedSha256": "15b341f13ed33579391eda0943a1d6af71a7be18928572e95308b534064d69e8",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/dataset.cat",
+      "expectedBytes": 16000,
+      "expectedSha256": "ee81fa632064305849cdd283ef331bf8996d567e1de3924b2321e51c6ac6d0b0",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/hartley2_2012_plan.lbl",
+      "expectedBytes": 12560,
+      "expectedSha256": "7890b02a5df3d77a18d195c3fb1a1880927613af07006f8d4489f3ea951db223",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 853,
+      "expectedSha256": "e25995be192ffa81faad3695eb34be3d208fc94402945394d6059777433cb14e",
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    }
+  ]
+}
