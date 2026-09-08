@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-linear-rotation@1",
+  "rightAscensionDegrees": 257.26977599786835,
+  "declinationDegrees": -15.260511052983508,
+  "referenceEpochJdTt": 2461286.5,
+  "primeMeridianDegrees": 93.3482694979757,
+  "spinRateDegreesPerDay": -956.406815,
+  "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "coordinateSystem": "ICRF / IAU_OPHELIA, NAIF707; east-positive body longitude",
+  "sourceModel": {
+    "bodyId": 707,
+    "rightAscensionDegrees": 257.31,
+    "declinationDegrees": -15.18,
+    "primeMeridianAtJ2000Degrees": 130.35,
+    "spinRateDegreesPerDay": -956.406815,
+    "periodicAngle": "U2=141.69+41887.66*T degrees; T=(JD-2451545)/36525",
+    "poleRaCorrectionDegrees": "-0.09 sin(U2)",
+    "poleDecCorrectionDegrees": "0.09 cos(U2)",
+    "meridianCorrectionDegrees": "-0.03 sin(U2)"
+  },
+  "qualification": "PCK00011 IAU periodic terms evaluated at the prepared scene epoch. Runtime advances the linear prime meridian and holds the small pole/periodic correction at that epoch; this is a display approximation, not a full long-term nutation ephemeris. Old PCK spherical radii are not used for shape."
+}

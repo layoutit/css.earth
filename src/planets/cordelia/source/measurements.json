@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://arxiv.org/abs/2401.04634",
+  "citation": "French et al. (2024), Table3, reproducing Karkoschka (2001) Voyager paper TableV; adopted prolate axes also in Karkoschka HST paper TableIV.",
+  "semiAxesKm": [
+    25,
+    18,
+    18
+  ],
+  "referenceRadiusKm": 20.082988502465085,
+  "projectedRadiusKm": {
+    "value": 21,
+    "uncertainty": 3,
+    "definition": "sqrt(A*B), not volume-equivalent radius"
+  },
+  "minorMajorRatio": {
+    "value": 0.7,
+    "uncertainty": 0.2
+  },
+  "derivedVolumeEquivalentRadiusKm": 20.082988502465085,
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/25)^2+(cos(lat)*sin(lon)/18)^2+(sin(lat)/18)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "orientation": "IAU/WGCCRE BODY706 frame from pinned PCK. Published prolate interpretation assumes the long axis toward Uranus and the other axes equal.",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Published size and elongation fit, not a detailed terrain mesh. The third semi-axis18km is the prolate assumption, not an independent measurement. Reported uncertainties apply to projected radius sqrt(A*B) and ratioB/A; no separate-axis error bars are invented.",
+  "measuredGM": {
+    "valueKm3PerS2": 0.00406,
+    "uncertaintyKm3PerS2": 0.00038,
+    "massKg": 6.08e+16,
+    "massUncertaintyKg": 5700000000000000.0,
+    "source": "https://arxiv.org/pdf/2401.04634",
+    "table": "3, footnote b, PDFpage10; Table19 and Section9.2",
+    "method": "Inferred from amplitudes of forced ring normal modes, not from an assumed density."
+  }
+}

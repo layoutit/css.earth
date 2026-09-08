@@ -1,0 +1,222 @@
+{
+  "schema": "cssstyx-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "measured-shape",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 13444,
+      "expectedSha256": "7451d881aa65e2765a9fdadef697b10828796af9af7da5df09fbe19bd0c70542",
+      "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+      "credit": "Porter et al. (2025) fitted dimensions; cssEarth analytic ellipsoid",
+      "license": "MIT representation of published scientific dimensions",
+      "licenseEvidence": [
+        "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+      ],
+      "acquisition": "Checked-in analytic radius table; formula and axes in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 3500
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+      "credit": "cssEarth standard no-coverage grid",
+      "license": "MIT representation of published scientific dimensions",
+      "licenseEvidence": [
+        "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+      ],
+      "acquisition": "Checked in; radius formula, dimensions and material bytes are specified in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 3500
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3829,
+      "expectedSha256": "0c469d8801ea21972c6842f7f855c73aa787622f17e80e8c7f2e84bc6cd110cd",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1154,
+      "expectedSha256": "ba60aa21d863f484abdc828b0b0e41b49dbb5b5c13c53ff32bae0d158f7a60a6",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1306,
+      "expectedSha256": "51bc761e0b31925c7b62771a4bc6c22386f50aece7b9db245dd94473f69d3a27",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2378,
+      "expectedSha256": "d09f4e9f3840bf5fedc1da1e5669eab5c9e034132005bf0e845a0bb87acdffc9",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2471,
+      "expectedSha256": "48c01924d05c8bd99afa690b5425e152dd5fb343f3f5da76e7328635c7a31d73",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "shape/publication.json",
+      "expectedBytes": 1026,
+      "expectedSha256": "fcd635de9fc001dfff42c9e8e26fe1e060f805f8195f3e1775351a0cd9faa99d",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "shape/rotation.json",
+      "expectedBytes": 839,
+      "expectedSha256": "f531a97ba073afd2e7c922a8630f0ae96dc6d434e1de4b5c385d5775db9ca949",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 847,
+      "expectedSha256": "775dab2a1cb8e98d71fdbe0ec99dd6bb6a383fbcea034b426ffa742e2dec66ee",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/lorri-best-metadata.json",
+      "expectedBytes": 14008,
+      "expectedSha256": "c75540426c959498c3e185d0c2bf259814077233251a3469c43c71c4d9c60b3e",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/lorri-best.lbl",
+      "expectedBytes": 46080,
+      "expectedSha256": "320423f5cb093480917250ebf24ff2df21cd766dffda3dda0c92c26399e4e696",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/lorri-search.json",
+      "expectedBytes": 2370,
+      "expectedSha256": "99a9d665a45831fff918d29a7962c9f7010352e1bc79978e1d594db448d578d8",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/mvic-search.json",
+      "expectedBytes": 211,
+      "expectedSha256": "b23082f8da076df5178ed51ab6c5919cda3c5e84f13d7f15da707a10f2011510",
+      "purpose": "Styx source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/native-inspection.json",
+      "expectedBytes": 764,
+      "expectedSha256": "88fffb320e2a113f2dc9723d78c6fd5673a9abc6d5f0d0bb308ff9bf3305509f",
+      "purpose": "Styx source evidence or authored preparation data."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+      "credit": "Porter et al. (2025) dimensions; cssEarth shape visualization",
+      "license": "MIT representation of scientific dimensions; retain attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "measured-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 40,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 52995,
+      "expectedSha256": "526ffdbc4edf03d297680ff0d60f370cc24739f2885a3ea2ea5a90b6e95f65da"
+    }
+  ]
+}

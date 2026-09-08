@@ -1,0 +1,47 @@
+{
+  "source": "https://lunar.earth.northwestern.edu/courses/450/uranus2.pdf",
+  "doi": "10.1006/icar.2001.6596",
+  "title": "Comprehensive Photometry of the Rings and 16 Satellites of Uranus with the Hubble Space Telescope",
+  "author": "Erich Karkoschka",
+  "pages": "Icarus151:51–68",
+  "table": "IV",
+  "printedPage": 55,
+  "pdfPage": 5,
+  "sha256": "44d8d852a69117528e152801d3152d6f511e272833496f7e6c878d152cc414c3",
+  "sourceModel": "Adopted prolate spheroids: long a toward Uranus, minor b in both perpendicular directions. Not independently measured triaxial shapes.",
+  "moons": [
+    {
+      "name": "Portia",
+      "semiaxesKm": [
+        78,
+        63,
+        63
+      ],
+      "fullDimensionsKm": [
+        156,
+        126,
+        126
+      ],
+      "derivedVolumeEquivalentRadiusKm": 67.64856167757256,
+      "photometricReferenceRadiusKm": 70.09992867328754,
+      "thirdAxis": "assumed equal to minor axis in the published prolate model",
+      "reportedSqrtABRadiusKm": {
+        "value": 70,
+        "uncertainty": 4
+      },
+      "reportedMinorMajorRatio": {
+        "value": 0.8,
+        "uncertainty": 0.1
+      }
+    }
+  ],
+  "uncertaintyQualification": "Uncertainties reported for sqrt(A*B) and B/A are reproduced explicitly from Karkoschka2001 TableV by French et al.2024 Table3. These are not individual-axis uncertainties. Third dimension B is the published prolate assumption.",
+  "uncertaintySource": {
+    "url": "https://arxiv.org/pdf/2401.04634",
+    "paper": "French et al.2024, The Uranus System from Occultation Observations",
+    "pdfPage": 10,
+    "table": "3",
+    "originalTable": "Karkoschka2001 Voyager paper, TableV",
+    "sha256": "f733085381f1cd5458160fa2010ba3dc30ef1a653942ac6a8dd10005be6fdbff"
+  }
+}

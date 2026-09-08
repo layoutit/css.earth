@@ -1,14 +1,14 @@
 # Exceptional asteroid coverage
 
-This addition selects 52 bodies from the [list of exceptional asteroids](https://en.wikipedia.org/wiki/List_of_exceptional_asteroids) for which original calibrated shape models and paired spin data could be pinned. Per-body source notes below identify the exact model, authors, frame, reduction error, limitations and restoration path. The list is a discovery index; the underlying research and original data supply the physical properties.
+This addition selects 65 bodies from the [list of exceptional asteroids](https://en.wikipedia.org/wiki/List_of_exceptional_asteroids) for which original calibrated shape models and source-specific orientation evidence could be pinned. Per-body source notes below identify the exact model, authors, frame, reduction error, limitations and restoration path. The list is a discovery index; the underlying research and original data supply the physical properties.
 
 The [validation record](asteroids-validation.md) includes browser examples, fresh-install evidence, measured drag traces and the remaining aggregate-check limitations.
 
-Every body uses the existing generic object package, shared application shell and Solar System asteroid accordion. Each package has Shape and Elevation views. Shape uses the shared missing-imagery grid: no surface texture, reflectance, composition or regolith is invented. Elevation is source radius minus the documented reference sphere, not an independent terrain measurement or height above an equipotential. Rotation has an arbitrary display meridian, not an absolute phase prediction.
+Every body uses the existing generic object package, shared application shell and Solar System asteroid accordion. All additions have Shape; 64 also have Elevation. Donaldjohanson withholds radial Elevation because its source mesh has overlapping surfaces on some rays. Shape uses the shared missing-imagery grid: no surface texture, reflectance, composition or regolith is invented. Elevation is source radius minus the documented reference sphere, not an independent terrain measurement or height above an equipotential. Single-axis spin solutions use an arbitrary display meridian. The tumbling Apophis and Donaldjohanson packages use the established fixed illustrative display frame.
 
-The existing meshoptimizer preparation path reduces the original connected meshes while preserving their closed topology. Every result has 800 native PolyCSS u raster leaves and 128 by 128 px cells. The nine DAMIT models already containing 800 triangles require no edge collapse. All geometry, surface texels and directional/flood lighting are prepared ahead of runtime. Both DPRs select the same highest-density asset bank.
+The existing meshoptimizer preparation path reduces the original connected meshes while preserving their closed topology. Every result has 800 native PolyCSS u raster leaves and 128 by 128 px cells. The twelve DAMIT models already containing 800 triangles require no edge collapse. All geometry, surface texels and directional/flood lighting are prepared ahead of runtime. Both DPRs select the same highest-density asset bank.
 
-52 Europa and 9 Metis retain their asteroid numbers in display names to distinguish them from the moons Europa and Metis. Their route IDs are europa-52 and metis-9. The 1994 CC package explicitly displays Alpha alone; its two satellites are not included. Castalia retains the published northern spin solution and documents the unresolved alternative.
+52 Europa, 9 Metis and 666 Desdemona retain their asteroid numbers in display names to distinguish them from the moons Europa and Metis. Their route IDs are europa-52, metis-9 and desdemona-666. The 1994 CC package explicitly displays Alpha alone; its two satellites are not included. Castalia retains the published northern spin solution and documents the unresolved alternative.
 
 | Number | Body and provenance | Selected source family | Reference diameter (km) | Period (h) |
 | --- | --- | --- | ---: | ---: |
@@ -65,8 +65,28 @@ The existing meshoptimizer preparation path reduces the original connected meshe
 | 1036 | [Ganymed](../src/planets/ganymed/SOURCE.md) | DAMIT | 39 | 10.31304 |
 | 66391 | [Moshup](../src/planets/moshup/SOURCE.md) | NASA/JPL radar | 1.317 | 2.7645 |
 
+| 65 | [Cybele](../src/planets/cybele/SOURCE.md) | DAMIT 1843 | 313 | 6.081435 |
+| 94 | [Aurora](../src/planets/aurora/SOURCE.md) | DAMIT 1830 | 198 | 7.226189 |
+| 372 | [Palma](../src/planets/palma/SOURCE.md) | DAMIT 298 | 187 | 8.58189 |
+| 279 | [Thule](../src/planets/thule/SOURCE.md) | DAMIT 16313 | 116 | 23.8964 |
+| 624 | [Hektor](../src/planets/hektor/SOURCE.md) | DAMIT 232 | 175 | 6.920509 |
+| 100 | [Hekate](../src/planets/hekate/SOURCE.md) | DAMIT 3088 | 87 | 27.0703 |
+| 3200 | [Phaethon](../src/planets/phaethon/SOURCE.md) | DAMIT 4394 | 5.1 | 3.603957 |
+| 40 | [Harmonia](../src/planets/harmonia/SOURCE.md) | DAMIT 1855 | 111 | 8.908485 |
+| 70 | [Panopaea](../src/planets/panopaea/SOURCE.md) | DAMIT 6171 | 128 | 15.8044 |
+| 666 | [666 Desdemona](../src/planets/desdemona-666/SOURCE.md) | DAMIT 6218 | 28.4 | 14.60796 |
+| 29075 | [1950 DA](../src/planets/asteroid-1950-da/SOURCE.md) | NASA/JPL retrograde radar | 1.3 | 2.1216 |
+| 99942 | [Apophis](../src/planets/apophis/SOURCE.md) | NASA/PDS radar Model B | 0.34 | 27.45 / 265.7 (tumbling) |
+| 52246 | [Donaldjohanson](../src/planets/donaldjohanson/SOURCE.md) | Lucy / DLR DSK | 4.81065 | 252.6 / 455.2 (lightcurve) |
+
 The reference diameter sets the explicitly stated elevation sphere and object scale. The original calibrated coordinates are not rescaled to rounded or averaged catalog diameters. Individual source records provide more precise geometric measurements.
 
 Original-to-reduced geometry inspection covers front, back and both poles. Independent nearest-triangle sampling uses 8192 area-stratified samples in each direction; these are sampled distances, not a proof of a Hausdorff bound. Radial ambiguity checks cover every source face centroid plus 8192 directions. Source/model limitations remain visible in each package rather than being hidden behind a generic surface claim.
 
 Runtime assets are installed through the existing runtime-assets.json inventories. Source/preparation/acquisition.json restores original source inputs separately; pinned HTML and small source tables remain checked in where applicable. All source manifests verify byte counts and SHA-256 identities.
+
+## Source availability beyond the selected bodies
+
+The [candidate survey](asteroid-candidate-survey.json) records 142 distinct DAMIT targets and the additional mission/radar checks. A missing calibrated mesh is a source gap, not permission to synthesize an ellipsoid or rescale an unrelated model. This record is a dated survey, not a claim that no usable data exists anywhere.
+
+Cybele retains its explicitly identified 2017 model rather than relabeling it as the 2023 SPHERE reconstruction. Hektor uses the published convex primary model and does not claim to resolve the bilobed shape or its moon. Phaethon uses the 2018 convex solution. Apophis’s 2026 archive release contains the preliminary 2018 Model B. Donaldjohanson preserves the source authors’ reconstruction of its unseen side; it does not present that region as observed terrain. Per-body source records explain these choices.

@@ -34,7 +34,7 @@ export interface BodyData {
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
-export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche' | 'interamnia' | 'davida' | 'sylvia' | 'eunomia' | 'euphrosyne' | 'bamberga' | 'fortuna' | 'themis' | 'amphitrite' | 'egeria' | 'elektra' | 'iris' | 'hebe' | 'eugenia' | 'daphne' | 'eleonora' | 'nemesis' | 'kalliope' | 'nemausa' | 'parthenope' | 'melpomene' | 'julia' | 'victoria' | 'urania' | 'flora' | 'europa-52' | 'metis-9' | 'camilla' | 'thisbe' | 'doris' | 'hermione' | 'diotima' | 'herculina' | 'nausikaa' | 'astraea' | 'irene' | 'nysa' | 'sappho' | 'betulia' | 'castalia' | 'asteroid-1998-wt24' | 'asteroid-1994-cc' | 'fides' | 'penelope' | 'alphonsina' | 'angelina' | 'ganymed' | 'moshup'
+export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche' | 'interamnia' | 'davida' | 'sylvia' | 'eunomia' | 'euphrosyne' | 'bamberga' | 'fortuna' | 'themis' | 'amphitrite' | 'egeria' | 'elektra' | 'iris' | 'hebe' | 'eugenia' | 'daphne' | 'eleonora' | 'nemesis' | 'kalliope' | 'nemausa' | 'parthenope' | 'melpomene' | 'julia' | 'victoria' | 'urania' | 'flora' | 'europa-52' | 'metis-9' | 'camilla' | 'thisbe' | 'doris' | 'hermione' | 'diotima' | 'herculina' | 'nausikaa' | 'astraea' | 'irene' | 'nysa' | 'sappho' | 'betulia' | 'castalia' | 'asteroid-1998-wt24' | 'asteroid-1994-cc' | 'fides' | 'penelope' | 'alphonsina' | 'angelina' | 'ganymed' | 'moshup' | 'cybele' | 'aurora' | 'palma' | 'thule' | 'hektor' | 'hekate' | 'phaethon' | 'harmonia' | 'panopaea' | 'desdemona-666' | 'asteroid-1950-da' | 'apophis' | 'donaldjohanson'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId
 
 export const PLANET_IDS: readonly PlanetId[] = [
@@ -49,7 +49,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 ]
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
-export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche', 'interamnia', 'davida', 'sylvia', 'eunomia', 'euphrosyne', 'bamberga', 'fortuna', 'themis', 'amphitrite', 'egeria', 'elektra', 'iris', 'hebe', 'eugenia', 'daphne', 'eleonora', 'nemesis', 'kalliope', 'nemausa', 'parthenope', 'melpomene', 'julia', 'victoria', 'urania', 'flora', 'europa-52', 'metis-9', 'camilla', 'thisbe', 'doris', 'hermione', 'diotima', 'herculina', 'nausikaa', 'astraea', 'irene', 'nysa', 'sappho', 'betulia', 'castalia', 'asteroid-1998-wt24', 'asteroid-1994-cc', 'fides', 'penelope', 'alphonsina', 'angelina', 'ganymed', 'moshup']
+export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche', 'interamnia', 'davida', 'sylvia', 'eunomia', 'euphrosyne', 'bamberga', 'fortuna', 'themis', 'amphitrite', 'egeria', 'elektra', 'iris', 'hebe', 'eugenia', 'daphne', 'eleonora', 'nemesis', 'kalliope', 'nemausa', 'parthenope', 'melpomene', 'julia', 'victoria', 'urania', 'flora', 'europa-52', 'metis-9', 'camilla', 'thisbe', 'doris', 'hermione', 'diotima', 'herculina', 'nausikaa', 'astraea', 'irene', 'nysa', 'sappho', 'betulia', 'castalia', 'asteroid-1998-wt24', 'asteroid-1994-cc', 'fides', 'penelope', 'alphonsina', 'angelina', 'ganymed', 'moshup', 'cybele', 'aurora', 'palma', 'thule', 'hektor', 'hekate', 'phaethon', 'harmonia', 'panopaea', 'desdemona-666', 'asteroid-1950-da', 'apophis', 'donaldjohanson']
 
 const body = (
   id: BodyId,
@@ -142,6 +142,25 @@ export const BODIES: Record<BodyId, BodyData> = {
   'ganymed': body('ganymed', 'Ganymed', '1036;', 19.5, 0, 'sun'),
   'moshup': body('moshup', 'Moshup', '66391;', 0.6585, 0, 'sun'),
 
+  // Calibrated model radii and paired Horizons physical records.
+  'cybele': body('cybele', 'Cybele', '65;', 156.5, 0, 'sun'),
+  'aurora': body('aurora', 'Aurora', '94;', 99, 0, 'sun'),
+  'palma': body('palma', 'Palma', '372;', 93.5, 0, 'sun'),
+  'thule': body('thule', 'Thule', '279;', 58, 0, 'sun'),
+  'hektor': body('hektor', 'Hektor', '624;', 87.5, 0, 'sun'),
+  'hekate': body('hekate', 'Hekate', '100;', 43.5, 0, 'sun'),
+  'phaethon': body('phaethon', 'Phaethon', '3200;', 2.55, 0, 'sun'),
+
+  'harmonia': body('harmonia', 'Harmonia', '40;', 55.5, 0, 'sun'),
+  'panopaea': body('panopaea', 'Panopaea', '70;', 64, 0, 'sun'),
+  'desdemona-666': body('desdemona-666', '666 Desdemona', '666;', 14.2, 0, 'sun'),
+
+  'asteroid-1950-da': body('asteroid-1950-da', '1950 DA', '29075;', 0.65, 0, 'sun'),
+
+  'apophis': body('apophis', 'Apophis', '99942;', 0.17, 0, 'sun'),
+
+  'donaldjohanson': body('donaldjohanson', 'Donaldjohanson', '52246;', 2.405325, 0, 'sun'),
+
   mercury: body('mercury', 'Mercury', '199', 2439.4, 22031.86855, 'sun'),
   venus: body('venus', 'Venus', '299', 6051.84, 324858.592, 'sun'),
   earth: body('earth', 'Earth', '399', 6371.01, 398600.435436, 'sun'),
@@ -168,6 +187,10 @@ export const BODIES: Record<BodyId, BodyData> = {
   adrastea: body('adrastea', 'Adrastea', '515', 8.2, 0.0001, 'jupiter'),
   metis: body('metis', 'Metis', '516', 21.5, 0.0025, 'jupiter'),
 
+  // No measured GM is supplied for these small moons; zero means omitted mass.
+  // Radii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.
+  methone: body('methone', 'Methone', '632', 1.45, 0, 'saturn'),
+  pallene: body('pallene', 'Pallene', '633', 2.23, 0, 'saturn'),
   mimas: body('mimas', 'Mimas', '601', 198.8, 2.503489, 'saturn'),
   enceladus: body('enceladus', 'Enceladus', '602', 252.3, 7.210367, 'saturn'),
   tethys: body('tethys', 'Tethys', '603', 536.3, 41.21, 'saturn'),
@@ -193,6 +216,15 @@ export const BODIES: Record<BodyId, BodyData> = {
   pandora: body('pandora', 'Pandora', '617', 40.6, 0.00926, 'saturn'),
   pan: body('pan', 'Pan', '618', 14, 0.00028, 'saturn'),
 
+  puck: body('puck', 'Puck', '715', 81, 0, 'uranus'),
+  // Volume-equivalent radii of Karkoschka's published prolate shape fits.
+  portia: body('portia', 'Portia', '712', 67.64856167757256, 0, 'uranus'),
+  juliet: body('juliet', 'Juliet', '711', 46.82612683898881, 0, 'uranus'),
+  belinda: body('belinda', 'Belinda', '714', 40.317473596635935, 0, 'uranus'),
+  // Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.
+  // https://arxiv.org/abs/2401.04634; same published prolate radii as above.
+  cordelia: body('cordelia', 'Cordelia', '706', 20.082988502465085, 0.00406, 'uranus'),
+  ophelia: body('ophelia', 'Ophelia', '707', 21.361102076705983, 0.00238, 'uranus'),
   miranda: body('miranda', 'Miranda', '705', 235.7, 4.3, 'uranus'),
   ariel: body('ariel', 'Ariel', '701', 578.9, 83.43, 'uranus'),
   umbriel: body('umbriel', 'Umbriel', '702', 584.7, 85.4, 'uranus'),
@@ -209,6 +241,12 @@ export const BODIES: Record<BodyId, BodyData> = {
   galatea: body('galatea', 'Galatea', '806', 88, 0.1899, 'neptune'),
 
   charon: body('charon', 'Charon', '901', 606, 106.10, 'pluto'),
+  // PLU060 Horizons GMs (2024); radii match the sourced display shapes.
+  // Nix/Hydra: Porter released meshes. Kerberos/Styx: Porter2025 fitted volumes.
+  nix: body('nix', 'Nix', '902', 18.265603887767425, 0.001496, 'pluto'),
+  hydra: body('hydra', 'Hydra', '903', 18.11455731342771, 0.00201, 'pluto'),
+  kerberos: body('kerberos', 'Kerberos', '904', 4.75, 0.00006038, 'pluto'),
+  styx: body('styx', 'Styx', '905', 3.5, 0.0000405, 'pluto'),
 
   // Dwarf planets. `horizonsCode` is the exact string this package's Horizons
   // queries use (`generate-dwarf-planets.mjs`, `fetch-fixtures.mjs`) — for

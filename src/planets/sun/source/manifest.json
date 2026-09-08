@@ -723,8 +723,9 @@
       "consumers": [
         "world-context"
       ],
-      "expectedBytes": 13714,
-      "expectedSha256": "0d1b1809534ddea7995b29161ceabfb3b03d97c70733328fb69bfadb4ca022c4"
+      "expectedBytes": 15865,
+      "expectedSha256": "b35ec5ad726571ab00c73bdf6cc12b2ebf0188cdf22b6ba5a1fdd7db12b8c167",
+      "sha256": "b35ec5ad726571ab00c73bdf6cc12b2ebf0188cdf22b6ba5a1fdd7db12b8c167"
     }
   ],
   "generatedIntermediates": [],
@@ -761,8 +762,8 @@
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 16222,
-      "expectedSha256": "33dcff59d4a6e6265f7a7b7b904b44f4c936cc8b1b3e3830c7e7f6f7c8560f02",
+      "expectedBytes": 16320,
+      "expectedSha256": "ddedfb97fa34017778c261ab69e09f816840523ffbb0fbbf6307abaa5a329ca9",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {

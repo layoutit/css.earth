@@ -1,0 +1,210 @@
+{
+  "schema": "csskerberos-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "measured-ellipsoid",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 59703,
+      "expectedSha256": "991139484557da7fefd5ec6793749e4a4fb6e72a6a205bdb77b29bcdbdda8fc1",
+      "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+      "credit": "Porter, Verbiscer and Canup (2025); cssEarth standard no-coverage visualization",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4750
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+      "credit": "Porter, Verbiscer and Canup (2025); cssEarth standard no-coverage visualization",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4750
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3949,
+      "expectedSha256": "81788c27a682bf1f2db68a883a169034cd0c1f716b9a169d0a60a05c2c14d6e7",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1131,
+      "expectedSha256": "4b6f4c8a711a4e85b517f4ac208709e7b49226a14a93351f86423624bffbb795",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1372,
+      "expectedSha256": "b8e27bb27d8281445a91121e30e6f7ffa3f0a8b44cee194b701858fc5fd59d6e",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2565,
+      "expectedSha256": "ae527b8b57b62bce1eec465b4ac83bfbfc6964d292174cde6a4cedeacf211fd2",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4766,
+      "expectedSha256": "0b82431d9035a886f8c4e1de9dd3df7a26572cb14a86720022f5539d50d6a13a",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "rotation.json",
+      "expectedBytes": 662,
+      "expectedSha256": "c3ee1709551aa069c64672c19d2714679f4798811674abeec9d60991252eef22",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "11c6be456d188adf0aa4c2d387f06b20d6c62bdce271a25de3d16abad0972005",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/0299136735-metadata.json",
+      "expectedBytes": 14257,
+      "expectedSha256": "7d5ee9d598c2d28354690f9665ddefd976d9615865a8695d4720940269133f0e",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/0299153805-metadata.json",
+      "expectedBytes": 14250,
+      "expectedSha256": "2ad2ba8ca80b71893911fa339c1461436a5a146c03a099a195d5a4390ea15d28",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/opus-finest.json",
+      "expectedBytes": 1089,
+      "expectedSha256": "1f564d44f987a89e4421d0ebf77b402fb4154074a8197b0ed0599f66847020a0",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/qualification.json",
+      "expectedBytes": 1776,
+      "expectedSha256": "d0e087a609791b4d033c34205b4f0434786f2522e2053205360ff28b6e3e97d2",
+      "purpose": "Kerberos scientific source or authored preparation evidence."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+      "credit": "Porter, Verbiscer and Canup (2025) approximate dimensions; cssEarth standard no-coverage grid",
+      "license": "MIT display representation from published scientific measurements; retain source citation.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "measured-ellipsoid",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 56437,
+      "expectedSha256": "c65abda48c58a8beedfb305a5adfd56a9b6d930e597f5b9c175af4f9c77b79a8"
+    }
+  ]
+}

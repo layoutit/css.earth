@@ -1,0 +1,36 @@
+{
+  "title": "Shapes, Masses, and Densities of the Small Satellites of Pluto",
+  "authors": [
+    "Simon B. Porter",
+    "Anne J. Verbiscer",
+    "Robin M. Canup"
+  ],
+  "year": 2025,
+  "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+  "abstractUrl": "https://www.hou.usra.edu/meetings/plutosystem2025/pdf/7035.pdf",
+  "location": "Presentation slide 9: Styx Size and Pole",
+  "body": "Styx",
+  "fullAxesKm": [
+    10.6,
+    6,
+    5.3
+  ],
+  "volumeEquivalentDiameterKm": 7,
+  "status": "Conference best-fit estimate; not a detailed archived terrain mesh",
+  "poleStatus": "No converged pole solution; four possibilities",
+  "previousSolution": {
+    "url": "https://doi.org/10.1126/science.aae0030",
+    "location": "Table 2",
+    "fullAxesKm": [
+      16,
+      9,
+      8
+    ],
+    "axisUncertaintyKm": 3,
+    "poleRaDegrees": 196,
+    "poleDecDegrees": 61,
+    "poleUncertaintyDegrees": 10,
+    "rotationPeriodDays": 3.24,
+    "rotationPeriodUncertaintyDays": 0.07
+  }
+}

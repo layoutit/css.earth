@@ -78,6 +78,18 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
   despina: 73,
   galatea: 63,
   charon: 2,
+  nix: 109,
+  hydra: 55,
+  kerberos: 144,
+  styx: 447,
+  puck: 54,
+  methone: 20138,
+  pallene: 32,
+  belinda: 33,
+  juliet: 138,
+  portia: 107,
+  cordelia: 1,
+  ophelia: 3,
   dimorphos: .06,
 }
 
@@ -128,11 +140,14 @@ describe('satellite ephemerides against JPL Horizons', () => {
     }
   })
 
-  it.each(SATELLITE_IDS)('bounds %s by a(1 + e) over a hundred orbits', (id) => {
+  it.each(SATELLITE_IDS)('bounds %s relative to its physical parent over a hundred orbits', (id) => {
     const record = satelliteRecord(id)
     const elements = record.elements as KeplerianElements
     const bound = satelliteApoapsisKm(id)
-    expect(bound).toBe(keplerApoapsisKm(elements))
+    const companion = record.barycentreCompanion && bodyData(record.barycentreCompanion as SatelliteId)
+    const weight = companion ? companion.gravitationalParameterKm3PerS2 /
+      (companion.gravitationalParameterKm3PerS2 + bodyData(record.parent as 'pluto').gravitationalParameterKm3PerS2) : 0
+    expect(bound).toBe(keplerApoapsisKm(elements) + (companion ? satelliteApoapsisKm(companion.id as SatelliteId) * weight : 0))
     const period = (2 * Math.PI) / elements.meanMotionRadPerDay
     let farthest = 0
     for (let i = 0; i <= 5000; i++) {

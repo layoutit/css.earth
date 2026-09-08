@@ -1,0 +1,44 @@
+{
+  "modelId": 16313,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16313",
+  "fields": {
+    "ID": "16313",
+    "Asteroid ID": "(279) Thule",
+    "Lambda": "58",
+    "Beta": "2",
+    "Period": "23.8964",
+    "YORP": "",
+    "JD0": "2445933",
+    "Phi0": "0",
+    "Light Scattering Model": "H",
+    "LSM Parameter 1": "0.04",
+    "LSM Parameter 2": "-0.37",
+    "LSM Parameter 3": "0.093",
+    "LSM Parameter 4": "1.25",
+    "LSM Parameter 5": "20",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "116",
+    "Equivalent Diameter Error": "9",
+    "Thermal Inertia": "76",
+    "Thermal Inertia Min": "1",
+    "Thermal Inertia Max": "120",
+    "Visual Albedo": "0.039",
+    "Visual Albedo Error": "0.005",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2025-07-17",
+    "Comment": "size from occultations 115 +/- 12 km",
+    "Created": "2025-07-17 09:10:10",
+    "Modified": "2025-07-17 09:12:50"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/130081/IAUspin",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/130082/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/130083/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/678"
+  ]
+}
