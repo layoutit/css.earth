@@ -36,9 +36,6 @@
         "id": "osiris",
         "format": "osiris-geo",
         "consumer": "osiris-observation",
-        "path": "observations/n20140805t194314611id50f22.IMG",
-        "qualityPath": "observations/n20140805t194314611id40f22.IMG",
-        "startTime": "2014-08-05T19:44:22.918",
         "filter": "FFP-Vis_Orange",
         "allowLossy": true,
         "transfer": {
@@ -61,9 +58,42 @@
           99
         ],
         "metadata": {
-          "label": "OSIRIS observation",
+          "label": "OSIRIS mosaic",
           "falseColor": false,
-          "coverage": "OSIRIS orange-filter observation, 5 August 2014. Grayscale with approximate illumination correction; residual photographed shadows remain. Gray grid marks missing or rejected imagery. Shadows off shows the corrected image uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map."
+          "coverage": "Four OSIRIS orange-filter observations, 5–6 August 2014. Grayscale with approximate illumination correction and bounded brightness matching; photographed shadows and some seams remain. Gray grid marks missing or rejected imagery. Shadows off shows the mosaic uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map."
+        },
+        "frames": [
+          {
+            "id": "aug05-1944",
+            "path": "observations/n20140805t194314611id50f22.IMG",
+            "qualityPath": "observations/n20140805t194314611id40f22.IMG",
+            "startTime": "2014-08-05T19:44:22.918"
+          },
+          {
+            "id": "aug05-2344",
+            "path": "observations/n20140805t234316579id50f22.IMG",
+            "qualityPath": "observations/n20140805t234316579id40f22.IMG",
+            "startTime": "2014-08-05T23:44:24.891"
+          },
+          {
+            "id": "aug06-0244",
+            "path": "observations/n20140806t024316574id50f22.IMG",
+            "qualityPath": "observations/n20140806t024316574id40f22.IMG",
+            "startTime": "2014-08-06T02:44:24.890"
+          },
+          {
+            "id": "aug06-0520",
+            "path": "observations/n20140806t051914575id50f22.IMG",
+            "qualityPath": "observations/n20140806t051914575id40f22.IMG",
+            "startTime": "2014-08-06T05:20:22.894"
+          }
+        ],
+        "selection": "lowest-emission",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 128,
+          "maximumLogMad": 0.25,
+          "maximumGain": 1.35
         }
       }
     ]
