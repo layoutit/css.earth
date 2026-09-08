@@ -59,3 +59,16 @@ test('constraint colors wrap east longitude and retain source pole flags without
   assert.deepEqual(at(15, 3), [255, 0, 0]);
   await assert.rejects(preparePdsConstraintMap({ ...mesh, coordinates: mesh.coordinates.slice(1), constraintFlags: mesh.constraintFlags.slice(1) }, recipe), /Missing PDS/);
 });
+
+test('a source-selected constraint grid preserves stereo and limb categories even with identical input colors', async () => {
+  const mesh = parsePdsPlanetocentricShape(table, profile);
+  const recipe = { width: 64, height: 32, stepDegrees: 90, gridFlags: [3],
+    colors: { 1: '#000000', 2: '#000000', 3: '#000000' } };
+  const { data, info } = await sharp(await preparePdsConstraintMap(mesh, recipe)).raw().toBuffer({ resolveWithObject: true });
+  const grid = paintMissingCoverage(Buffer.alloc(data.length), info, new Uint8Array(info.width * info.height).fill(1));
+  const at = (buffer, x, y) => buffer.subarray((y * info.width + x) * 3, (y * info.width + x + 1) * 3);
+  for (const [x, y] of [[0, 0], [0, 15], [16, 15], [63, 15]]) assert.deepEqual(at(data, x, y), Buffer.alloc(3));
+  for (const [x, y] of [[0, 31], [32, 15]]) assert.deepEqual(at(data, x, y), at(grid, x, y));
+  await assert.rejects(preparePdsConstraintMap(mesh, { ...recipe, gridFlags: [4] }), /Invalid PDS constraint map/);
+  await assert.rejects(preparePdsConstraintMap(mesh, { ...recipe, gridFlags: [3, 3] }), /Invalid PDS constraint map/);
+});

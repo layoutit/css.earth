@@ -4,12 +4,12 @@
   "id": "comet-103p",
   "displayName": "Hartley 2",
   "panel": {
-    "introduction": "103P/Hartley 2 is the elongated, two-lobed comet visited by EPOXI in 2010. Gray marks stereo control, blue limb silhouettes, and ochre poorly constrained regions of the published shape.",
+    "introduction": "103P/Hartley 2 is the elongated, two-lobed comet visited by EPOXI in 2010. In Source constraints, solid gray marks stereo control and blue marks limb silhouettes. The gray grid identifies poorly constrained regions in both views.",
     "facts": [
       {
         "id": "diameter",
         "label": "Equivalent diameter",
-        "value": "1.16 \u00b1 0.036 km"
+        "value": "1.16 ± 0.036 km"
       },
       {
         "id": "mission",
@@ -31,7 +31,7 @@
       {
         "id": "rendering",
         "label": "Presentation",
-        "value": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+        "value": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
       }
     ]
   },
@@ -46,9 +46,9 @@
       {
         "id": "constraints",
         "label": "Source constraints",
-        "description": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
-        "title": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
-        "detail": "PDS flags",
+        "description": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
+        "title": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
+        "detail": "Grid = poorly constrained",
         "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
         "surface": "comet-103p-constraints-surface@2x.webp",
         "poles": "comet-103p-constraints-poles@2x.webp",
@@ -61,9 +61,9 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Complete published PDS shape, simplified for display. Gray is a model material, not observed albedo. Poorly constrained source estimates are included; switch to Source constraints to identify them.",
-        "title": "Complete published PDS shape, simplified for display. Gray is a model material, not observed albedo. Poorly constrained source estimates are included; switch to Source constraints to identify them.",
-        "detail": "Neutral gray",
+        "description": "Complete published PDS shape, simplified for display. The gray grid identifies source-flagged poorly constrained regions; solid gray covers stereo-controlled and limb-constrained regions. These are model materials, not observed albedo. Source constraints distinguishes the two better-constrained categories.",
+        "title": "Complete published PDS shape, simplified for display. The gray grid identifies source-flagged poorly constrained regions; solid gray covers stereo-controlled and limb-constrained regions. These are model materials, not observed albedo. Source constraints distinguishes the two better-constrained categories.",
+        "detail": "Grid = poorly constrained",
         "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
         "surface": "comet-103p-model-surface@2x.webp",
         "poles": "comet-103p-model-poles@2x.webp",

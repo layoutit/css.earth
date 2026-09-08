@@ -24,7 +24,7 @@
         "metadata": {
           "label": "Shape model",
           "modeled": true,
-          "coverage": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+          "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
         }
       },
       {
@@ -37,7 +37,7 @@
         "metadata": {
           "label": "Source constraints",
           "modeled": true,
-          "coverage": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+          "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
         }
       }
     ],
@@ -118,7 +118,7 @@
   },
   "celestial": {
     "sunSource": "JPL Horizons osculating elements; PDS source orientation held at arbitrary phase.",
-    "qualification": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
+    "qualification": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
   },
   "presentation": {
     "defaultLens": "constraints",

@@ -20,37 +20,51 @@
     },
     {
       "id": "model-surface",
-      "path": "material/neutral.png",
-      "expectedBytes": 174,
-      "expectedSha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
+      "path": "material/model-coverage.png",
+      "expectedBytes": 7580,
+      "expectedSha256": "b5a1d39f0f0b7453507a01ba1507958be6ec0a8090ac3f2cc6abc783d9a75add",
       "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth neutral model material",
+      "credit": "Farnham & Thomas (2013), NASA PDS flags; cssEarth coverage material",
       "license": "MIT",
       "licenseEvidence": [
         "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
       ],
-      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "acquisition": "Checked-in material, reproduced from the original PDS constraint flags during preparation.",
       "redistribution": "Authored neutral material under the repository MIT license.",
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2830
       },
-      "width": 64,
-      "height": 32,
+      "width": 512,
+      "height": 256,
       "lensId": "model",
       "label": "Shape model",
-      "falseColor": false
+      "falseColor": false,
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "recipe": {
+        "width": 512,
+        "height": 256,
+        "stepDegrees": 2,
+        "colors": {
+          "1": "#b8b6b2",
+          "2": "#b8b6b2",
+          "3": "#b8b6b2"
+        },
+        "gridFlags": [
+          3
+        ]
+      }
     },
     {
       "id": "constraint-surface",
       "path": "material/constraints.png",
-      "expectedBytes": 4724,
-      "expectedSha256": "81416f47ecc6f8f6beb51f23a349b14f57969fe7fc4453603afeae50a78ff984",
+      "expectedBytes": 7711,
+      "expectedSha256": "4d5d83e2c82109d4747de00e22df1ef50f862f85a66330ed7c5ce4d8873221dd",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
       "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -72,7 +86,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2830
       },
-      "coverage": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
       "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
       "recipe": {
         "width": 512,
@@ -81,8 +95,11 @@
         "colors": {
           "1": "#b8b6b2",
           "2": "#578dba",
-          "3": "#b07c42"
-        }
+          "3": "#b8b6b2"
+        },
+        "gridFlags": [
+          3
+        ]
       }
     },
     {
@@ -124,8 +141,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 64915,
-      "expectedSha256": "33ba6aa3f3f8e731d0fbce8c8dd476082886a2fd3ecfc2249d6c676b1c9ce8df",
+      "expectedBytes": 77009,
+      "expectedSha256": "c5f29901da5a74f1009082cc29548a2b87cdb15c9fdcc3a11aab529ff4f2ff9a",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
       "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -156,8 +173,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5165,
-      "expectedSha256": "17fe8d3ae9940955819f9d8a78d37ecb774a657b04a53cc0128e1fda7bb72744",
+      "expectedBytes": 5798,
+      "expectedSha256": "8599bdaf5632fd9ccc6aa0d61ef3c2e5b7c664bb2e41096221f687395079a90b",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {
@@ -169,7 +186,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1624,
-      "expectedSha256": "27136284e9b1e8c20b3eab28d7218b2eca062cf5967db21926969df4c50f37ab",
+      "expectedSha256": "4a9775255e083e8ca3bca4e995a1bf5f2bd0d479520afc06e75912ec7172d2d7",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {
@@ -180,8 +197,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4301,
-      "expectedSha256": "140020ffef4c45f403b883fb1769cacf9ffad258603f90ea123ab49d18d0b0ff",
+      "expectedBytes": 4649,
+      "expectedSha256": "22220e8df3b1bd565b853c9e3c21a4daa38259308ffd9b3cdf5aeff8349eed46",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {

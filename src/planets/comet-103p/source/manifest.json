@@ -20,37 +20,51 @@
     },
     {
       "id": "model-surface",
-      "path": "material/neutral.png",
-      "expectedBytes": 174,
-      "expectedSha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
+      "path": "material/model-coverage.png",
+      "expectedBytes": 6627,
+      "expectedSha256": "0db4d110f3ee6967e751be2ee1526e08183e9a2e40b6075893275129118a564d",
       "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth neutral model material",
+      "credit": "Farnham & Thomas (2013), NASA PDS flags; cssEarth coverage material",
       "license": "MIT",
       "licenseEvidence": [
         "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
       ],
-      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "acquisition": "Checked-in material, reproduced from the original PDS constraint flags during preparation.",
       "redistribution": "Authored neutral material under the repository MIT license.",
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 580
       },
-      "width": 64,
-      "height": 32,
+      "width": 512,
+      "height": 256,
       "lensId": "model",
       "label": "Shape model",
-      "falseColor": false
+      "falseColor": false,
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "recipe": {
+        "width": 512,
+        "height": 256,
+        "stepDegrees": 2,
+        "colors": {
+          "1": "#b8b6b2",
+          "2": "#b8b6b2",
+          "3": "#b8b6b2"
+        },
+        "gridFlags": [
+          3
+        ]
+      }
     },
     {
       "id": "constraint-surface",
       "path": "material/constraints.png",
-      "expectedBytes": 4571,
-      "expectedSha256": "2bc3bb039f99930fd7cfca38520ac030c2e1ba4280ee2f6cc71e5b1849be4d12",
+      "expectedBytes": 6940,
+      "expectedSha256": "e86d3d21b51f68051178b22179d117a5e4e67da94b14daa2f37b75f3a1c834db",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab",
       "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -72,7 +86,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 580
       },
-      "coverage": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
       "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
       "recipe": {
         "width": 512,
@@ -81,8 +95,11 @@
         "colors": {
           "1": "#b8b6b2",
           "2": "#578dba",
-          "3": "#b07c42"
-        }
+          "3": "#b8b6b2"
+        },
+        "gridFlags": [
+          3
+        ]
       }
     },
     {
@@ -124,8 +141,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 65744,
-      "expectedSha256": "3ed6c3debacbf06820b060fa258a6468fb17c9126361e18173bb3e7493eae7ed",
+      "expectedBytes": 74996,
+      "expectedSha256": "5ff80a2ce37c4e9b017de88ee917a53c40f55ed47ead38304ce6403b0bb9003d",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab",
       "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -156,8 +173,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5163,
-      "expectedSha256": "bec527237884b7c3fe2c757a970753bcd94235953115c84828d34db2c8368d0e",
+      "expectedBytes": 5824,
+      "expectedSha256": "8c49053f7fe3dbf0c7cb158afa0d5129d65d41ce30760cda4d4795d3dd433a35",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
     },
     {
@@ -169,7 +186,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1621,
-      "expectedSha256": "1a9534b2f359f338418f53d056bbe893e65db4bc91348434cd3ae97f12d2d49d",
+      "expectedSha256": "f94b9fb7bd168c12c52e2622aa815e0e7b1d56537e72323199df3336b0ae24f4",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
     },
     {
@@ -180,8 +197,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4380,
-      "expectedSha256": "072c735cc525f57f1f04d1d1d57137d5260373ed1ed00f0cb768d33ed1eba7bd",
+      "expectedBytes": 4752,
+      "expectedSha256": "96f1230ee45a0476ef3cdbda77594f8ad31486994e4728667b75ad56733f4b7c",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
     },
     {
