@@ -14,6 +14,8 @@ export function mountPlanetShell({
   onMotionChange = () => {},
   heliosphereEnabled = false,
   onHeliosphereChange = () => {},
+  asteroidOrbitsEnabled = false,
+  onAsteroidOrbitsChange = () => {},
 }) {
   const drawer = documentTarget.querySelector(".planet-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
@@ -130,8 +132,9 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget, owner));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled,
+      { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
+        onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
       }, owner));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget,
       onInteraction() { settingsController.setMotionEnabled(false); },
@@ -237,7 +240,8 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
 function createSettingsController(
   documentTarget,
   windowTarget,
-  { motionEnabled, onMotionChange, highContrastSky = false, heliosphereEnabled, onHeliosphereChange },
+  { motionEnabled, onMotionChange, highContrastSky = false, heliosphereEnabled, onHeliosphereChange,
+    asteroidOrbitsEnabled, onAsteroidOrbitsChange },
   lifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -245,6 +249,7 @@ function createSettingsController(
   }
   const motion = documentTarget.querySelector(".planet-motion-setting");
   const heliosphere = documentTarget.querySelector(".planet-heliosphere-setting");
+  const asteroidOrbits = documentTarget.querySelector(".planet-asteroid-orbits-setting");
   const skyContrast = documentTarget.querySelector(
     ".planet-sky-contrast-setting",
   );
@@ -253,6 +258,7 @@ function createSettingsController(
   );
   if (!(motion instanceof windowTarget.HTMLInputElement) ||
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
+      !(asteroidOrbits instanceof windowTarget.HTMLInputElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
       !(skyContrast instanceof windowTarget.HTMLInputElement)) {
     throw new Error("Planet shell settings controls are incomplete.");
@@ -282,6 +288,16 @@ function createSettingsController(
   }, { signal: events.signal });
   heliosphere.checked = heliosphereEnabled === true;
   heliosphere.addEventListener("change", () => onHeliosphereChange(heliosphere.checked), { signal: events.signal });
+  const renderAsteroidOrbits = () => {
+    asteroidOrbits.checked = asteroidOrbitsEnabled === true;
+    documentTarget.body.dataset.asteroidOrbits = asteroidOrbits.checked ? 'on' : 'off';
+  };
+  asteroidOrbits.addEventListener("change", () => {
+    asteroidOrbitsEnabled = asteroidOrbits.checked;
+    renderAsteroidOrbits();
+    onAsteroidOrbitsChange(asteroidOrbitsEnabled);
+  }, { signal: events.signal });
+  renderAsteroidOrbits();
   renderMotion();
   renderSkyContrast();
 
@@ -299,7 +315,10 @@ function createSettingsController(
       const blocked = motionOn && reason === "reduced-motion";
       row.dataset.motionBlocked = String(blocked);
       explanation.hidden = !blocked;
-      if (blocked) motion.setAttribute("aria-describedby", explanation.id);
+      const descriptions = new Set((motion.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/u).filter(id => id && id !== explanation.id));
+      if (blocked) descriptions.add(explanation.id);
+      if (descriptions.size) motion.setAttribute("aria-describedby", [...descriptions].join(" "));
       else motion.removeAttribute("aria-describedby");
     },
     destroy() {

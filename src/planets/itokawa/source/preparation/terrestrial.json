@@ -53,6 +53,10 @@
             0.7071067811865476
           ],
           "ambient": 0.55
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 6
         }
       }
     ],

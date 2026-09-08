@@ -1,0 +1,45 @@
+{
+  "modelId": 1836,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1836",
+  "fields": {
+    "ID": "1836",
+    "Asteroid ID": "(423) Diotima",
+    "Lambda": "354",
+    "Beta": "0",
+    "Period": "4.775377",
+    "YORP": "",
+    "JD0": "2444826",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "209",
+    "Equivalent Diameter Error": "7",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-07-11",
+    "Comment": "",
+    "Created": "2017-07-11 07:59:59",
+    "Modified": "2017-07-11 08:06:30"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/667/AO.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/668/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/669/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/670/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/167"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "source": "https://www2.boulder.swri.edu/~bottke/Reprints/Marchi_2026_Science.aec0503._DJ_Asteroid.pdf",
+  "diameterKm": 4.81065,
+  "diameterInterpretation": "Volume-equivalent diameter computed from the archived DSK mesh; original coordinates are not rescaled.",
+  "lightcurvePeriodsHours": [
+    252.6,
+    455.2
+  ],
+  "lightcurvePeriodUncertaintiesHours": [
+    0.4,
+    0.9
+  ],
+  "displayOrientation": "fixed-illustrative",
+  "limitations": "Lucy stereo images constrain about 40% of the surface. The source authors completed the unseen part using a two-ellipsoid fit and symmetry; it is not all observed terrain. The body tumbles, and the preliminary frame is accurate only near the 2025 encounter. This display uses a fixed illustrative orientation and does not propagate that attitude. No registered optical surface map is supplied.",
+  "shape": {
+    "source": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
+    "vertices": 274000,
+    "faces": 547996,
+    "units": "km",
+    "firstVertexKm": [
+      0.0035343599324631,
+      -0.013500515735165199,
+      -1.315900964425746
+    ],
+    "firstFaceZeroBased": [
+      0,
+      2,
+      5
+    ],
+    "extentsKm": [
+      8.821631717505912,
+      4.4112336571227555,
+      3.09636843889667
+    ],
+    "volumeCubicKm": 58.292108841686264,
+    "volumeEquivalentRadiusKm": 2.4053247457252875,
+    "radialRangeKm": [
+      1.2355700750708736,
+      4.745909389710068
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 547996,
+    "ambiguous": 729,
+    "maxErrorMeters": 400.1240753512784,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 547996,
+    "sourceVertices": 274000,
+    "weldedVertices": 274000,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 56,
+    "estimatedErrorMeters": 55.8275146484375,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 57212292168.26406
+    }
+  }
+}

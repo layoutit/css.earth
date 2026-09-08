@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27130%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                130 Elektra (A873 DA)          2026-Sep-07 20:32:42
+Rec #:     130 (+COV) Soln.date: 2026-Jun-05_03:11:15  # obs: 16780 (1893-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457583.5 ! 2016-Jul-14.00 (TDB)         Residual RMS= .18393
+   EC= .2080190330468073   QR= 2.477820763170086   TP= 2456876.6540041063
+   OM= 145.4035359770363   W=  236.2006150511485   IN= 22.84888841034965
+   A= 3.128636755883717    MA= 125.8914284280529   ADIST= 3.779452748597347
+   PER= 5.53402            N= .178103051           ANGMOM= .029761394
+   DAN= 3.38496            DDN= 2.68281            L= 19.4078579
+   B= -18.824792           MOID= 1.54445004        TP= 2014-Aug-07.1540041063
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 90.326             ROTPER= 5.225
+   H= 7.46                 G= .150                 B-V= .753
+                           ALBEDO= .086            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#151, OCC=0
+2: source=ORB
+*******************************************************************************

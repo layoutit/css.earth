@@ -1,0 +1,71 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
+  "diameterKm": 0.34,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "precessionPeriodHours": 27.45,
+  "rotationPeriodHours": 265.7,
+  "angularMomentumEclipticJ2000Degrees": [
+    246.8,
+    -59.3
+  ],
+  "displayOrientation": "fixed-illustrative",
+  "limitations": "The weak 2012–2013 radar data admit multiple shapes; the 2026 PDS release preserves the 2018 Model B rather than a new reconstruction. Apophis tumbles: the archived precession and rotation periods are 27.45 and 265.7 hours. This view uses a fixed illustrative frame, without propagating its tumbling attitude. No optical surface map is supplied.",
+  "shape": {
+    "source": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-apophis.jpl.radar.shape_model_v1.0/data/apophis_v233s7.obj",
+    "vertices": 2000,
+    "faces": 3996,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.166496
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      0.40974099999999997,
+      0.349074,
+      0.318034
+    ],
+    "volumeCubicKm": 0.019825778758735674,
+    "volumeEquivalentRadiusKm": 0.16789865433240733,
+    "radialRangeKm": [
+      0.125365965620658,
+      0.2216398843665102
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 3996,
+    "ambiguous": 0,
+    "maxErrorMeters": 1.1368683772161603e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3996,
+    "sourceVertices": 2000,
+    "weldedVertices": 2000,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 4,
+    "estimatedErrorMeters": 3.195056915283203,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 19751180.912971914
+    }
+  }
+}

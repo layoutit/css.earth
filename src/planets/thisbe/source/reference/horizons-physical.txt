@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2788%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 88 Thisbe (A866 LA)           2026-Sep-07 21:00:12
+Rec #:      88 (+COV) Soln.date: 2026-Jun-05_03:08:27   # obs: 5605 (1866-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458041.5 ! 2017-Oct-15.00 (TDB)         Residual RMS= .20633
+   EC= .1620199520432228   QR= 2.321739579915988   TP= 2458370.1004363042
+   OM= 276.4820378796446   W=  36.01716698822869   IN= 5.211259324794358
+   A= 2.77063825753014     MA= 289.7732663002165   ADIST= 3.219536935144292
+   PER= 4.61188            N= .21371467            ANGMOM= .028254979
+   DAN= 2.38532            DDN= 3.10478            L= 312.3864034
+   B= 3.0615979            MOID= 1.30947995        TP= 2018-Sep-08.6004363042
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 116.               ROTPER= 6.042
+   H= 7.24                 G= .140                 B-V= .681
+                           ALBEDO= .0671           STYP= B
+
+ASTEROID comments: 
+1: soln ref.= JPL#192, OCC=0
+2: source=ORB
+*******************************************************************************

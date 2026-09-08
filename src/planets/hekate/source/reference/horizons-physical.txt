@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27100%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                100 Hekate (A868 NA)           2026-Sep-08 03:29:47
+Rec #:     100 (+COV) Soln.date: 2026-Jun-05_03:09:24   # obs: 9118 (1871-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457338.5 ! 2015-Nov-12.00 (TDB)         Residual RMS= .23766
+   EC= .1683901145146725   QR= 2.569540474550763   TP= 2457244.5053289924
+   OM= 127.2031832248429   W=  184.7858435206991   IN= 6.429814827575013
+   A= 3.089838780657566    MA= 17.0570364081952    ADIST= 3.61013708676437
+   PER= 5.4314             N= .181468122           ANGMOM= .02980596
+   DAN= 3.60759            DDN= 2.57083            L= 311.9590613
+   B= -.5353325            MOID= 1.55387998        TP= 2015-Aug-10.0053289924
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 42.867             ROTPER= 27.066
+   H= 7.73                 G= .150                 B-V= .838
+                           ALBEDO= .205            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#77, OCC=0
+2: source=ORB
+*******************************************************************************

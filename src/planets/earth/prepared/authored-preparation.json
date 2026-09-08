@@ -1,1 +1,54 @@
-{"schema":"cssearth-authored-preparation@1","id":"earth","sources":[{"id":"paged-ellipsoid","path":"source/preparation/paged-ellipsoid.json","sha256":"62ae5d1954af494489b3fa0ef6fcd6eec8fad62cd8c2e46a9d6b0eba95cdfc54"},{"id":"celestial","path":"source/preparation/celestial.json","sha256":"3e6925a3c4ed5209a8ed6c3f6286ef807bd8afccdd5946db3cc80ed6ab634e0d"},{"id":"content","path":"source/content/object.json","sha256":"216a0a611d08609793decaf90cafb592ffebd1a405cc9cdc52d90cc3c75566e0"},{"id":"lens-bindings","path":"source/content/lens-bindings.json","sha256":"19567369d492595a583163c699c53898a5f8a5a22d75a3c02f065df38d202e35"},{"id":"charts","path":"source/content/charts.json","sha256":"521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa"},{"id":"title","path":"source/presentation/title-mark.json","sha256":"72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9"},{"id":"editorial","path":"source/editorial/earth.json","sha256":"afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d"},{"id":"acquisition","path":"source/preparation/acquisition.json","sha256":"23257f353d3af2e8c445a00e160b59add4a9b3266206b031d01e4646d7b3ac8d"}],"lanes":{"raster":true,"celestial":true,"geometry":true,"content":true,"presentation":true,"geographicPages":true}}
+{
+  "schema": "cssearth-authored-preparation@1",
+  "id": "earth",
+  "sources": [
+    {
+      "id": "paged-ellipsoid",
+      "path": "source/preparation/paged-ellipsoid.json",
+      "sha256": "62ae5d1954af494489b3fa0ef6fcd6eec8fad62cd8c2e46a9d6b0eba95cdfc54"
+    },
+    {
+      "id": "celestial",
+      "path": "source/preparation/celestial.json",
+      "sha256": "3e6925a3c4ed5209a8ed6c3f6286ef807bd8afccdd5946db3cc80ed6ab634e0d"
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "a116c46c729c0c8f9e38deb5cb055d292ea1df90818befbede22d0bbcd998281"
+    },
+    {
+      "id": "lens-bindings",
+      "path": "source/content/lens-bindings.json",
+      "sha256": "19567369d492595a583163c699c53898a5f8a5a22d75a3c02f065df38d202e35"
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa"
+    },
+    {
+      "id": "title",
+      "path": "source/presentation/title-mark.json",
+      "sha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9"
+    },
+    {
+      "id": "editorial",
+      "path": "source/editorial/earth.json",
+      "sha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d"
+    },
+    {
+      "id": "acquisition",
+      "path": "source/preparation/acquisition.json",
+      "sha256": "23257f353d3af2e8c445a00e160b59add4a9b3266206b031d01e4646d7b3ac8d"
+    }
+  ],
+  "lanes": {
+    "raster": true,
+    "celestial": true,
+    "geometry": true,
+    "content": true,
+    "presentation": true,
+    "geographicPages": true
+  }
+}

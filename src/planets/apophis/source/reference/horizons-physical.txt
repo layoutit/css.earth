@@ -1,0 +1,35 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2799942%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              99942 Apophis (2004 MN4)         2026-Sep-08 03:56:40
+Rec #:   99942 (+COV) Soln.date: 2024-Jun-25_10:48:08   # obs: 7370 (2004-2022)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2459215.5 ! 2021-Jan-01.00 (TDB)         Residual RMS= .080135
+   EC= .1915216893501022   QR= .7458270478466523   TP= 2459101.0394224627
+   OM= 204.0389272089208   W=  126.6520518368553   IN= 3.336751320066756
+   A= .9225071817289903    MA= 127.3225632013606   ADIST= 1.099187315611328
+   PER= .88606             N= 1.112370442          ANGMOM= .016216289
+   DAN= 1.00339            DDN= .79749             L= 330.7375495
+   B= 2.6764541            MOID= .0003822          TP= 2020-Sep-08.5394224627
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .170               ROTPER= 30.56
+   H= 19.09                G= .240                 B-V= n.a.
+                           ALBEDO= .350            STYP= Sq
+
+Non-default Earth gravity model (EOBL_LIM= au):
+   EOBL_LIM= 1.000                                 EOBL_MOD = 2x0 (J2 only)
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 4.999999873689E-13  A2= -2.901766720242E-14 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#220, PHA  OCC=0       radar(20 delay,30 Dop.)
+2: source=ORB
+*******************************************************************************

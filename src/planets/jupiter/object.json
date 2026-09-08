@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "61c3d2aa8a46b022450c335d577c842faa012a86ce46805073298414c6546b52"
+    "sha256": "58aeba6eff7dcc3ca8fb0cbec2213f2ca25c20ba1b0ffe422f733697221e96a2"
   },
   "id": "jupiter",
   "properties": {
@@ -62,7 +62,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4058707356f87760a57ff70a1a97758e49a1595da7ef921c439380ee14ec3690"
+          "sha256": "353dceefd91c1f8f0984ec95c1b450f3d5fd15f3c92c7894bcc06f9b7084b456"
         },
         {
           "id": "rings",
@@ -97,7 +97,7 @@
         {
           "id": "observations",
           "path": "source/preparation/observations.json",
-          "sha256": "b29fc8270ed0e63241efc8d3ae6c0bea7cd8c2ddaa7193fa258c67a0bf2b3040"
+          "sha256": "d8a911e3846681784e60075353af9b8763044210fc75846087c50c41c6733894"
         },
         {
           "id": "charts",

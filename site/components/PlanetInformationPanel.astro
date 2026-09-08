@@ -187,7 +187,7 @@ const serializedEntity = JSON.stringify(initialEntity).replaceAll("<", "\\u003c"
               data-lens-details={lens.id}
               hidden={lens.id !== lenses.defaultLens}
             >
-              {lens.texture ? <div
+              {lens.texture && <div
                 class="planet-surface-minimap"
                 data-surface-minimap={lens.texture.minimap ? JSON.stringify(lens.texture.minimap) : undefined}
                 role={lens.texture.minimap ? "group" : undefined}
@@ -212,7 +212,8 @@ const serializedEntity = JSON.stringify(initialEntity).replaceAll("<", "\\u003c"
                     hidden
                   ></span>)}
                 </>}
-              </div> : <p class="planet-lens-details-copy">{lens.description}</p>}
+              </div>}
+              <p class="planet-lens-details-copy">{lens.description}</p>
               <p class="planet-place-lens-note" data-page-status={lens.id} role="status" hidden></p>
               {lens.texture?.attribution && <p class="planet-lens-source">
                 Source: {lens.texture.attribution.url

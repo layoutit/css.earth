@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "968fc3c79f4d2bbe29491ab62dd76c3bb7e4ee645dc3450bd4df9223c4a9698e"
+    "sha256": "d3306d027915343a349bd18dc7008885990fd074ed0f4514b1b5f6d0db98477b"
   },
   "id": "earth",
   "properties": {
@@ -36,7 +36,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "216a0a611d08609793decaf90cafb592ffebd1a405cc9cdc52d90cc3c75566e0"
+          "sha256": "a116c46c729c0c8f9e38deb5cb055d292ea1df90818befbede22d0bbcd998281"
         },
         {
           "id": "lens-bindings",
@@ -135,9 +135,9 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        141962558657.7742,
-        -46995814467.00334,
-        -20372720509.507584
+        141959825478.14285,
+        -46998943836.62604,
+        -20374527591.113754
       ],
       "presentationToReference": [
         0.6635722991247324,

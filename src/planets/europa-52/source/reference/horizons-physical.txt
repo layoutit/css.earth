@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2752%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 52 Europa (A858 CA)           2026-Sep-07 20:44:14
+Rec #:      52 (+COV) Soln.date: 2026-Jun-05_03:05:24  # obs: 12102 (1860-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457880.5 ! 2017-May-07.00 (TDB)         Residual RMS= .20581
+   EC= .1096307163895389   QR= 2.75637977462794    TP= 2457293.0467570615
+   OM= 128.6369293680557   W=  343.9803157980851   IN= 7.475934516094139
+   A= 3.095771412341155    MA= 106.2977449499215   ADIST= 3.435163050054371
+   PER= 5.44705            N= .180946733           ANGMOM= .03008432
+   DAN= 2.767              DDN= 3.41882            L= 112.7465157
+   B= -2.0577088           MOID= 1.77419996        TP= 2015-Sep-27.5467570615
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 151.959            ROTPER= 5.6304
+   H= 6.65                 G= .180                 B-V= .679
+                           ALBEDO= .057            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#143, OCC=0
+2: source=ORB
+*******************************************************************************

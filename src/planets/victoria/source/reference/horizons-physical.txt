@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2712%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                12 Victoria (A850 RA)          2026-Sep-07 20:32:59
+Rec #:      12 (+COV) Soln.date: 2026-Jun-05_03:03:20   # obs: 4570 (1850-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457811.5 ! 2017-Feb-27.00 (TDB)         Residual RMS= .254
+   EC= .2202256183141647   QR= 1.820602273760221   TP= 2458117.6689920421
+   OM= 235.4173040568518   W=  69.52397935985611   IN= 8.370707630956669
+   A= 2.334780824453562    MA= 275.4144647873551   ADIST= 2.848959375146903
+   PER= 3.56761            N= .276270744           ANGMOM= .02563947
+   DAN= 2.06264            DDN= 2.40697            L= 304.7393672
+   B= 7.8383962            MOID= .82396603         TP= 2017-Dec-30.1689920421
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 57.5435            ROTPER= 8.6599
+   H= 7.3                  G= .220                 B-V= .874
+                           ALBEDO= .163            STYP= L
+
+ASTEROID comments: 
+1: soln ref.= JPL#159, OCC=0
+2: source=ORB
+*******************************************************************************

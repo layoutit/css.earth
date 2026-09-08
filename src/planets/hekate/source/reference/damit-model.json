@@ -1,0 +1,44 @@
+{
+  "modelId": 3088,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3088",
+  "fields": {
+    "ID": "3088",
+    "Asteroid ID": "(100) Hekate",
+    "Lambda": "306",
+    "Beta": "52",
+    "Period": "27.0703",
+    "YORP": "",
+    "JD0": "2443376",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "87",
+    "Equivalent Diameter Error": "5",
+    "Thermal Inertia": "4",
+    "Thermal Inertia Min": "2",
+    "Thermal Inertia Max": "70",
+    "Visual Albedo": "0.22",
+    "Visual Albedo Error": "0.03",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-06-24",
+    "Comment": "",
+    "Created": "2019-06-24 15:55:36",
+    "Modified": "2019-06-25 11:28:37"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/9785/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/9786/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/9787/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/179"
+  ]
+}

@@ -99,8 +99,8 @@ export interface ObjectContentSource {
   title: TitleSource;
   panel: {
     introduction: string;
-    facts: Array<{ id: string; label: string; value: string }>;
-    moreFacts?: Array<{ id: string; label: string; value: string }>;
+    facts: Fact[];
+    moreFacts?: Fact[];
   };
   lenses: {
     titleKey: "lenses";
@@ -123,6 +123,13 @@ export interface ObjectContentSource {
   galleries?: GalleryRecipe[];
   resources: Array<{ label: string; role: string; description: string; href: string }>;
   provenance: Record<string, { id?: string; path?: string; url?: string; credit?: string; license?: string }>;
+}
+
+export interface Fact {
+  id: string;
+  label: string;
+  value: string;
+  source?: { url: string; label: string; checked: string; path?: string };
 }
 
 export interface PreparedObjectContent {

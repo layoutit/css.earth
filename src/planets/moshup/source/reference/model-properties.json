@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html",
+  "diameterKm": 1.317,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 2.7645,
+  "poleEclipticJ2000Degrees": [
+    326,
+    -65
+  ],
+  "limitations": "This is the archived Alpha model alone; its companion Squannit is not rendered. The source paper identifies regions constrained by weaker Goldstone images where reconstruction accuracy is lower. Table 2 supplies the equivalent diameter, rotation period and ecliptic pole; no gravitational-slope or optical albedo map is inferred.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj",
+    "vertices": 4586,
+    "faces": 9168,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.645205
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      1.5314189999999999,
+      1.494357,
+      1.347514
+    ],
+    "volumeCubicKm": 1.195308026145112,
+    "volumeEquivalentRadiusKm": 0.6583604632114168,
+    "radialRangeKm": [
+      0.559927663166413,
+      0.7837939967529732
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 9168,
+    "ambiguous": 0,
+    "maxErrorMeters": 3.410605131648481e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 9168,
+    "sourceVertices": 4586,
+    "weldedVertices": 4586,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 14,
+    "estimatedErrorMeters": 13.598885536193848,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1192189367.6070337
+    }
+  }
+}

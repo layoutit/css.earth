@@ -20,6 +20,7 @@
     "prepare:checkout": "node tools/restore-source-inputs.mjs && pnpm prepare:planets",
     "preview": "node tools/preview.mjs",
     "prepare:planet-info": "node tools/prepare-planet-information.mjs",
+    "prepare:factsheets": "node tools/prepare-factsheets.mjs",
     "prepare:navigation": "node tools/prepare-navigation.mjs",
     "prepare:planet-title-sources": "node tools/prepare-planet-title-sources.mjs",
     "prepare:overview-titles": "node tools/prepare-overview-titles.mjs",

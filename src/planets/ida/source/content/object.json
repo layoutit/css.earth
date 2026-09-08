@@ -30,8 +30,8 @@
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "2.861 AU (mean)"
+        "label": "Solar semimajor axis",
+        "value": "2.861 AU"
       },
       {
         "id": "orbital-period",
@@ -44,7 +44,19 @@
         "value": "4.634 hours · retrograde"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.262",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-08",
+          "path": "source/reference/horizons-physical.txt"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -53,7 +65,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Galileo SSI · processed image mosaic",
+        "description": "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting.",
         "title": "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting.",
         "thumbnail": "/scenes/ida/ida-normal-thumbnail.webp",
         "surface": "ida-normal-surface@2x.webp",
@@ -68,7 +80,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
+        "description": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
         "title": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
         "thumbnail": "/scenes/ida/ida-elevation-thumbnail.webp",
         "surface": "ida-elevation-surface@2x.webp",
