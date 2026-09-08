@@ -15,7 +15,7 @@ const parents = new Map(preparedWorld.bodies.map(body => [body.id, body.orbit?.c
 const names = new Map(PLANET_SEARCH_OBJECTS.map(object => [object.id, object.name]));
 const types = new Map([
   ['planet', 'Planets'], ['satellite', 'Moons'], ['dwarf-planet', 'Dwarf planets'],
-  ['star', 'Stars'], ['asteroid', 'Asteroids'],
+  ['star', 'Stars'], ['asteroid', 'Asteroids'], ['comet', 'Comets'],
 ]);
 for (const object of PLANET_SEARCH_OBJECTS) if (!types.has(object.classification)) {
   types.set(object.classification, object.classification.replaceAll('-', ' ') + 's');

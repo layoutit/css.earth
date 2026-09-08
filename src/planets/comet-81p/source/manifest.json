@@ -1,0 +1,227 @@
+{
+  "schema": "csscomet-81p-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "pds-shape",
+      "path": "shape/wild2_cart_full.tab",
+      "expectedBytes": 1392840,
+      "expectedSha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+      "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+      ],
+      "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "pds-observed-reference",
+      "path": "shape/wild2_cart_vis.tab",
+      "expectedBytes": 890509,
+      "expectedSha256": "6937d2ae98e3a21594aa27fbff57567332e146dccfa0dcbef1fac4a1ec371820",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.tab",
+      "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+      ],
+      "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "model-surface",
+      "path": "material/model-coverage.png",
+      "expectedBytes": 6258,
+      "expectedSha256": "cbe16ca5372858e816d725a210beed6c5b7a7a614dfb028240d061448fbf766b",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "NASA/Stardust/PDS plate provenance; cssEarth gray coverage grid",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in coverage material, reproduced from the original PDS plate flags during preparation.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1917.1067262613963
+      },
+      "width": 512,
+      "height": 256,
+      "lensId": "model",
+      "label": "Completed shape model",
+      "falseColor": false,
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "recipe": {
+        "kind": "plate-coverage",
+        "width": 512,
+        "height": 256,
+        "observedColor": "#b8b6b2"
+      }
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 104636,
+      "expectedSha256": "2ea23b6844dd6fd019679402137e2dbc825214bd480ebae53d1c82a9493e821a",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+      "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+      ],
+      "acquisition": "Checked-in derived context image; regenerated and hash-verified by the radial snapshot recipe.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "pds-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 180,
+        "latitudeDegrees": 65,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4098,
+      "expectedSha256": "a658489cfcea9ceea93a61b9b6827b58c98c0876d99fad3e9338a621d6882798",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 972,
+      "expectedSha256": "152eef487effe0314da841df362766c332ad705dd019a6457486fc8ae36c4b49",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1622,
+      "expectedSha256": "902d7be140066756dc5d525a9a3ddff18bdc961f2d31297570289cfaec7e3b04",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 469,
+      "expectedSha256": "cf53beb9dad865374af2ce5cb6c893c2da4774de17cacf2c52bd86c626357738",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3387,
+      "expectedSha256": "1d686044de538323756d0a67e05153eaac3b44c0dd398a9bac011b3d1cba37f8",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 33,
+      "expectedSha256": "52d70435e15a859e8654ab7f16e7a0bd10bcae3a8a6dfadf67c714d3895bd831",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2553,
+      "expectedSha256": "dd2089177325a29b83f4f03e154956200305192b9423ba033ce4ae9cf328027b",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 852,
+      "expectedSha256": "1087e7de5e0bc3f74818a33d2c09b367fda90aa3d89913f38ebe4a5b26229650",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/wild2_cart_vis.lbl",
+      "expectedBytes": 9440,
+      "expectedSha256": "5656202b19c6dc8fac6f4cac6451caa77ca48b89059e0684ec8d6ff616521b96",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/dataset.cat",
+      "expectedBytes": 16000,
+      "expectedSha256": "a0613bef31d51ae2143cf4a56849d0719cd32f5b2ece1702833fc136a8b612d6",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/wild2_plan_full.lbl",
+      "expectedBytes": 14080,
+      "expectedSha256": "ca00734e76f2feeb9d61fd91a88124536f43c26ea966de43211ac5893b963a5a",
+      "purpose": "Wild 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/wild2_cart_full.lbl",
+      "purpose": "Wild 2 source evidence or authored preparation input.",
+      "expectedBytes": 12800,
+      "expectedSha256": "37c79ed2a1d10276168b7de8b9ac38a337af7cb7f1ff217754da2831a3eeb0d2"
+    }
+  ]
+}

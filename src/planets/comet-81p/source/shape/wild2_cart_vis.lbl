@@ -1,0 +1,118 @@
+PDS_VERSION_ID = PDS3                                                         
+LABEL_REVISION_NOTE   = "T. Farnham; 15 Nov 2005                              
+  2007-04-13  A.C.Raugh  Modified DSID for V2.1                               
+  "                                                                           
+RECORD_TYPE  = "FIXED_LENGTH"                                                 
+RECORD_BYTES = 47                                                             
+FILE_RECORDS = 18947                                                          
+                                                                              
+^COUNTS_TABLE       = ("WILD2_CART_VIS.TAB",1)                                
+^VERTEX_TABLE       = ("WILD2_CART_VIS.TAB",2)                                
+^PLATE_TABLE        = ("WILD2_CART_VIS.TAB",6434)                             
+                                                                              
+DATA_SET_ID  = "SDU-C-NAVCAM-5-WILD2-SHAPE-MODEL-V2.1"                        
+PRODUCT_NAME = "CARTESIAN PLATE MODEL FOR THE VISIBLE SURFACE OF COMET WILD 2"
+PRODUCT_ID   = "WILD2-CARTESIAN-PLATE-MODEL-VISIBLE"                          
+INSTRUMENT_HOST_NAME  = "STARDUST"                                            
+INSTRUMENT_NAME       = "NAVIGATION CAMERA"                                   
+TARGET_NAME           = "81P/WILD 2 (1978 A2)"                                
+START_TIME            = "N/A"                                                 
+STOP_TIME             = "N/A"                                                 
+PRODUCT_CREATION_TIME = 2005-12-12                                            
+                                                                              
+OBJECT     = COUNTS_TABLE                                                     
+  ROWS               = 1                                                      
+  ROW_BYTES          = 47                                                     
+  INTERCHANGE_FORMAT = ASCII                                                  
+  COLUMNS            = 2                                                      
+  DESCRIPTION        = "Table that gives the count of vertices and plates     
+    representing the surface of the numerical shape model of comet Wild 2, as 
+    derived from the Stardust NavCam data.  The shape model comprises         
+    triangular plates and vertices that are specified in a body-fixed         
+    coordinate system."                                                       
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "NUMVERTICES"                                             
+    DESCRIPTION   = "NUMBER OF VERTICES IN SHAPE MODEL"                       
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 8                                                         
+    BYTES         = 5                                                         
+    FORMAT        = "I5"                                                      
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "NUMPLATES"                                               
+    DESCRIPTION   = "NUMBER OF TRIANGULAR PLATES IN SHAPE MODEL"              
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 20                                                        
+    BYTES         = 5                                                         
+    FORMAT        = "I5"                                                      
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = COUNTS_TABLE                                                     
+                                                                              
+OBJECT     = VERTEX_TABLE                                                     
+  ROWS               = 6432                                                   
+  ROW_BYTES          = 47                                                     
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 1                                                      
+  DESCRIPTION        = "Table of vertices of numerical shape model of Comet   
+    Wild 2.  These are the vertices of plates that approximate the surface of 
+    the nucleus.  Only the portions of the surface that were visible and      
+    illuminated during the Stardust encounter are included in this version.   
+                                                                              
+    Each row of this table contains the X, Y and Z coordinates of one vertex  
+    in a Cartesian coordinate system.  The axes are defined by the            
+    best-fitting ellipsoid, with the +Z axis coincident with the spin axis    
+    (RA=112, dec=-17) and the +X axis, along the long dimension, defining the 
+    prime meridian.  The +Y axis completes the system by the right hand       
+    rule."                                                                    
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "COORDINATES"                                             
+    DESCRIPTION   = "The (x,y,z) coordinates of one vertex in the model"      
+    UNIT          = "METER"                                                   
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 1                                                         
+    BYTES         = 45                                                        
+    ITEMS         = 3                                                         
+    ITEM_BYTES    = 15                                                        
+    FORMAT        = "3(F15.4)"                                                
+  END_OBJECT = COLUMN                                                         
+                                                                              
+END_OBJECT = VERTEX_TABLE                                                     
+                                                                              
+OBJECT     = PLATE_TABLE                                                      
+  ROWS               = 12514                                                  
+  ROW_BYTES          = 47                                                     
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 1                                                      
+  DESCRIPTION        = "Table of triangular plates of numerical shape model   
+    of Comet Wild 2.  These triangular plates approximate the surface of      
+    the nucleus.                                                              
+                                                                              
+    Each row of this table contains three integer offsets that point to three 
+    vertices from the previous table.  Those three vertices are the vertices  
+    of one triangular plate of the shape model.  Each integer is the offset   
+    from the first row in the table of vertices.  An offset of 0 points to    
+    the first row in the table of vertices, an offset of 1 to the second row, 
+    and so on."                                                               
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "PLATE VERTICES"                                          
+    DESCRIPTION   = "Offsets of the three vertices defining this              
+      triangular plane. The offsets refer to the vertices listed in           
+      the preceding vertex table."                                            
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 1                                                         
+    BYTES         = 30                                                        
+    ITEMS         = 3                                                         
+    ITEM_BYTES    = 10                                                        
+    FORMAT        = "3(I10)"                                                  
+  END_OBJECT = COLUMN                                                         
+                                                                              
+END_OBJECT = PLATE_TABLE                                                      
+END                                                                           

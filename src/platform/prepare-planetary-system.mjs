@@ -150,6 +150,9 @@ export async function preparePlanetarySystem({
     ASTEROID_IDS,
     asteroidElements,
     asteroidPositionKm,
+    COMET_IDS = [],
+    cometElements,
+    cometPositionKm,
   } = astronomy ?? await loadAstronomyPackage();
   if (!Array.isArray(asteroids) || asteroids.some(id => !ASTEROID_IDS.includes(id)) ||
       new Set([...bodies, ...dwarfPlanets, ...asteroids]).size !== bodies.length + dwarfPlanets.length + asteroids.length) {
@@ -158,7 +161,9 @@ export async function preparePlanetarySystem({
   // A selected heliocentric small body participates in the same system even
   // when it is not one of the context objects requested by a different scene.
   const smallBodies = [...asteroids];
-  if (ASTEROID_IDS.includes(bodyId) && !smallBodies.includes(bodyId)) smallBodies.push(bodyId);
+  if ([...ASTEROID_IDS, ...COMET_IDS].includes(bodyId) && !smallBodies.includes(bodyId)) smallBodies.push(bodyId);
+  const smallBodyPosition = (id, epoch) => (COMET_IDS.includes(id) ? cometPositionKm : asteroidPositionKm)(id, epoch);
+  const smallBodyElements = id => (COMET_IDS.includes(id) ? cometElements : asteroidElements)(id);
   if (dwarfPlanets.some((id) => !DWARF_PLANET_IDS.includes(id))) {
     throw new TypeError("An unknown dwarf planet was requested.");
   }
@@ -211,7 +216,7 @@ export async function preparePlanetarySystem({
       id,
       "sun",
       id === parent ? parentUnitMeters : M_PER_KM,
-      scale((smallBodies.includes(id) ? asteroidPositionKm : dwarfPlanetPositionKm)(id, SOLAR_GEOMETRY_EPOCH_JD_TT), 1 / ASTRONOMICAL_UNIT_KILOMETERS),
+      scale((smallBodies.includes(id) ? smallBodyPosition : dwarfPlanetPositionKm)(id, SOLAR_GEOMETRY_EPOCH_JD_TT), 1 / ASTRONOMICAL_UNIT_KILOMETERS),
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
   }
@@ -283,10 +288,10 @@ export async function preparePlanetarySystem({
   };
   const orbitFacts = (id) => {
     if (dwarfPlanets.includes(id) || smallBodies.includes(id)) {
-      const elements = (smallBodies.includes(id) ? asteroidElements : dwarfPlanetElements)(id);
+      const elements = (smallBodies.includes(id) ? smallBodyElements : dwarfPlanetElements)(id);
       const { normalIcrf, perihelionIcrf } = keplerOrientation(elements);
       return {
-        kind: smallBodies.includes(id) ? 'asteroid' : 'dwarf-planet',
+        kind: COMET_IDS.includes(id) ? 'comet' : smallBodies.includes(id) ? 'asteroid' : 'dwarf-planet',
         semiMajorAxisAu: elements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity: elements.eccentricity,
         inclinationDegrees: elements.inclinationRad * 180 / Math.PI,

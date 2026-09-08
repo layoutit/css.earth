@@ -1,0 +1,213 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.76",
+  "baseUrl": "http://127.0.0.1:4259",
+  "capturedAt": "2026-09-08T13:15:07.731Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "comet-1p",
+      "viewport": "initial-shell",
+      "speedDisabled": false
+    },
+    {
+      "id": "comet-1p",
+      "viewport": "desktop",
+      "surfaceFlyTo": {
+        "pitchDelta": -20.548700356666792,
+        "zoomRatio": 2.8110312590909934
+      },
+      "zoomPublication": {
+        "skyCube": 0,
+        "skyOrientation": 0
+      },
+      "projectiveTextureReport": {
+        "texturedLeafCount": 1000,
+        "nestedProjectiveTextureCount": 0,
+        "finiteTextureBounds": true
+      },
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 5,
+      "stageElements": 27074,
+      "stable": true,
+      "retainedProof": {
+        "initialNodeCount": 27074,
+        "currentNodeCount": 27074,
+        "maximumNodeCount": 27074,
+        "initialNodesIntact": true,
+        "shellTextNodesIntact": true,
+        "undeclaredAddedRoots": [],
+        "undeclaredRemovedRoots": [],
+        "allowedMounts": []
+      }
+    },
+    {
+      "id": "comet-1p",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 5,
+      "stageElements": 27074,
+      "stable": true
+    },
+    {
+      "id": "comet-1p",
+      "viewport": "pre-ready-hidden-motion-off",
+      "animationCount": 0
+    },
+    {
+      "id": "comet-1p",
+      "viewport": "pre-ready-visible-motion-off",
+      "animationCount": 0
+    },
+    {
+      "id": "comet-1p",
+      "viewport": "pre-ready-hidden-motion-on",
+      "animationCount": 0
+    },
+    {
+      "id": "comet-1p",
+      "viewport": "pre-ready-visible-motion-on",
+      "animationCount": 0
+    },
+    {
+      "id": "comet-1p",
+      "viewport": "dpr-1",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/comet-1p/comet-1p-lighting.webp",
+        "/scenes/comet-1p/comet-1p-model-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 0.7231304347826086,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.47003478260869563,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.2908752418181817,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "comet-1p-dpr-1.webm"
+    },
+    {
+      "id": "comet-1p",
+      "viewport": "dpr-2",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/comet-1p/comet-1p-lighting.webp",
+        "/scenes/comet-1p/comet-1p-model-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 0.7231304347826086,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.47003478260869563,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.6839073054545455,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "comet-1p-dpr-2.webm"
+    }
+  ]
+}

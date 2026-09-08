@@ -1,0 +1,34 @@
+{
+  "full-build.log": {
+    "bytes": 661239,
+    "sha256": "c2602943672200d4f4f1bf90e319652eebe5340e64ee719c3d1c1dfbd7c0af11"
+  },
+  "full-tests-retry.log": {
+    "bytes": 99909,
+    "sha256": "92693c91a09eebd0006cc8cdf6030967394ebf6e2c2dba7c62cace6cd50995c4"
+  },
+  "full-source-verify.log": {
+    "bytes": 6596,
+    "sha256": "1d6882f28f82eb4cac842aa26de956a34c821a55a75679ff6ae12caced7f4edc"
+  },
+  "full-focused.log": {
+    "bytes": 840,
+    "sha256": "d38df4feafc499cc9d9c7423c2e4faac0f6e6e818dae59f2906bfef44150b17e"
+  },
+  "full-preparer-tests.log": {
+    "bytes": 607,
+    "sha256": "1af80f8a137b8b28179d33a360b539e66fbf9498667661ff6030f8c74bb0d883"
+  },
+  "full-runtime-install.log": {
+    "bytes": 254,
+    "sha256": "e1ab8c2e81c0b6b8b7e16da8cc74fc3dab64d47f362c77faaa0b2807b11eb406"
+  },
+  "full-publish.log": {
+    "bytes": 662,
+    "sha256": "87819f2ba1943fd51f3aa9e063ef4dd41b1e467e3a119000f287324081fa0f87"
+  },
+  "full-navigation.log": {
+    "bytes": 5947,
+    "sha256": "0996e12241502f003177404a7e8c2497b5b76d387980ae0eb261a92a6e631334"
+  }
+}
