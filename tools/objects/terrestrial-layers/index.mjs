@@ -17,6 +17,7 @@ import { prepareAffineLayers } from './affine-preparation.mjs';
 import { validateRadialTableProfile } from './pds-radial-table.mjs';
 import { validateFitsObservationPolicy } from './observed-fits.mjs';
 import { validateGeoSurfaceRecipe } from './observed-geo-surface.mjs';
+import { validateFacetFieldRecipe } from './fits-facet-field.mjs';
 
 export function parseTerrestrialProfile(value) {
   if (value?.schema === 'cssearth-terrestrial-preparation@1' && value.kind === 'affine-photographic-atmosphere') {
@@ -90,6 +91,10 @@ export function parseTerrestrialProfile(value) {
         !Number.isSafeInteger(lens.grid.expectedFaces) || lens.grid.expectedFaces < 4 ||
         (lens.coverage && [lens.coverage.path,lens.coverage.member].some(p => typeof p !== 'string' || p.startsWith('/') || p.split('/').includes('..'))))) {
       throw new TypeError('Invalid sourced mesh grid.');
+    }
+    if (lens.facetField !== undefined) {
+      validateFacetFieldRecipe(lens.facetField);
+      if (!meshGrid || !lens.surfaceSampling) throw new TypeError('Facet fields require source-surface sampling.');
     }
     if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
         !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||

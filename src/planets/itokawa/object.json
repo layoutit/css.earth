@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8657e9c3ace00369b2b87fa87d63b7d403d3c02f27e7d7f1d9d15417fc214417"
+    "sha256": "6eb8b1b0466a4bd8f3fc1fbcba80ac8bdfbade930582efc349d97dd8fea57844"
   },
   "id": "itokawa",
   "properties": {
@@ -28,6 +28,11 @@
           "projection": "equirectangular",
           "lenses": [
             {
+              "id": "amica",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "elevation",
               "source": "content",
               "material": "lighting"
@@ -51,7 +56,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "15c4eff105e17e03577972c15aed2ce102f6769e87f279f0dca43191b94fbf8d"
+          "sha256": "1533c74f2f2359801d69b617337b25e699dec6a60d1752e11da35cb92d7c285b"
         },
         {
           "id": "rotation",
@@ -61,7 +66,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "eefeba821f7f5ad79c39b52ad02411bf86927d93b0291093b3b81c20f4d544f8"
+          "sha256": "2fd94e2c803dbffb8545f970f61b4858bfabcf7a7c9734b06bd2b98dbfaa0dc7"
         },
         {
           "id": "title",
@@ -76,7 +81,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e99f4acb4d1d1884b3779cbdab568a7f43319a6f8479a245c9ac8ab99a00bbb8"
+          "sha256": "98aa45e3e8f730b14d83493f45e2c3d4f632326d20c13e71f23231375ce1facb"
         }
       ]
     },

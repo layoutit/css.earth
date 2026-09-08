@@ -20,7 +20,8 @@ export const browserProfile=createObjectBrowserProfile({id:'didymos',controls,au
   "retained": {
     "lensIds": [
       "shape",
-      "elevation"
+      "elevation",
+      "albedo"
     ],
     "speedClicks": 5,
     "allowedMountSelectors": []

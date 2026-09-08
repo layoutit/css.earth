@@ -5,14 +5,14 @@ export const PLANE_NAMES = ['IMAGE', 'DISTANCE_IMAGE', 'EMISSION_ANGLE_IMAGE',
   'INCIDENCE_ANGLE_IMAGE', 'PHASE_ANGLE_IMAGE', 'FACET_INDEX_IMAGE',
   'COORDINATE_X_IMAGE', 'COORDINATE_Y_IMAGE', 'COORDINATE_Z_IMAGE'];
 
-const field = (text, name) => {
+export const field = (text, name) => {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const hits = [...text.matchAll(new RegExp(`^\\s*${escaped}[ \\t]*=[ \\t]*(?:\\r?\\n[ \\t]*)?("[^"\\r\\n]*"|[^\\r\\n]+)`, 'gm'))];
   if (hits.length !== 1) throw new Error(`Expected one PDS field: ${name}`);
   return hits[0][1].trim().replace(/^"(.*)"$/, '$1');
 };
 
-function imageBlock(label, name) {
+export function imageBlock(label, name) {
   const matches = [...label.matchAll(new RegExp(`^OBJECT\\s*=\\s*${name}\\s*\\r?\\n([\\s\\S]*?)^END_OBJECT\\s*=\\s*${name}\\s*$`, 'gm'))];
   if (matches.length !== 1) throw new Error(`Missing or duplicate IMAGE object: ${name}`);
   return matches[0][1];
@@ -119,6 +119,19 @@ export function lommelSeeligerGain(incidence, emission, policy) {
   return gain <= policy.maximumGain ? gain : null;
 }
 
+export function diskGain(incidence, emission, policy, phase) {
+  if (policy.model === 'retained-observation') return Number.isFinite(incidence) && Number.isFinite(emission) &&
+    incidence >= 0 && emission >= 0 && incidence <= policy.maximumIncidenceDegrees*Math.PI/180 &&
+    emission <= policy.maximumEmissionDegrees*Math.PI/180 ? 1 : null;
+  if (policy.model !== 'minnaert') return lommelSeeligerGain(incidence, emission, policy);
+  if (![incidence, emission, phase].every(Number.isFinite) || incidence < 0 || emission < 0 || phase < 0 || phase > Math.PI ||
+      incidence > policy.maximumIncidenceDegrees * Math.PI/180 || emission > policy.maximumEmissionDegrees * Math.PI/180) return null;
+  const k = policy.coefficient + (policy.phaseCoefficientPerDegree ?? 0) * phase * 180/Math.PI;
+  if (!(k >= .5 && k <= 1)) return null;
+  const gain = 1/(Math.cos(incidence)**k * Math.cos(emission)**(k-1));
+  return gain > 0 && gain <= policy.maximumGain ? gain : null;
+}
+
 const dot = (a, b) => a.reduce((sum, n, i) => sum + n * b[i], 0);
 export function project(matrix, point) {
   const q = [...point, 1], h = matrix.map(row => dot(row, q));
@@ -177,11 +190,12 @@ export function fitCamera(points, pixels, width, height) {
 }
 
 export function sampleGeo(frame, matrix, pointKm, { maximumSeparationMeters, maximumEmissionDegrees, photometry }) {
-  const [x, y, depth] = project(matrix, pointKm), { width, height, planes } = frame;
+  const [x, y, depth] = frame.projectPoint ? frame.projectPoint(pointKm) : project(matrix, pointKm), { width, height, planes } = frame;
   if (!(depth > 0) || !Number.isFinite(x + y) || x < 0 || y < 0 || x >= width - 1 || y >= height - 1) return { reason: 'outside' };
   const ix = Math.floor(x), iy = Math.floor(y), tx = x - ix, ty = y - iy;
   const ids = [iy * width + ix, iy * width + ix + 1, (iy + 1) * width + ix, (iy + 1) * width + ix + 1];
   if (ids.some(i => !frame.valid(i))) return { reason: 'no-geometry' };
+  if (frame.acceptPixel && ids.some(i => !frame.acceptPixel(i))) return { reason: 'quality' };
   if (frame.quality && ids.some(i => !acceptOsirisQuality(frame.quality.flags[i], frame.quality.allowLossy))) return { reason: 'quality' };
   if (ids.some(i => !Number.isFinite(planes.EMISSION_ANGLE_IMAGE[i]) || planes.EMISSION_ANGLE_IMAGE[i] < 0 ||
       planes.EMISSION_ANGLE_IMAGE[i] > maximumEmissionDegrees * Math.PI / 180)) return { reason: 'grazing' };
@@ -190,7 +204,7 @@ export function sampleGeo(frame, matrix, pointKm, { maximumSeparationMeters, max
   const separationMeters = Math.max(...ids.map(i => Math.hypot(...frame.xyz(i).map((n, j) => n - pointKm[j])) * 1000));
   if (separationMeters > maximumSeparationMeters) return { reason: 'geometry-mismatch', separationMeters };
   const weights = [(1 - tx) * (1 - ty), tx * (1 - ty), (1 - tx) * ty, tx * ty];
-  const gains = ids.map(i => photometry ? lommelSeeligerGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry) : 1);
+  const gains = ids.map(i => photometry ? diskGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry, planes.PHASE_ANGLE_IMAGE?.[i]) : 1);
   if (gains.some(gain => gain === null)) return { reason: 'photometry' };
   return { radiance: ids.reduce((sum, id, i) => sum + planes.IMAGE[id] * weights[i] * gains[i], 0), separationMeters,
     gain: Math.max(...gains), maximumEmissionDegrees: Math.max(...ids.map(i => planes.EMISSION_ANGLE_IMAGE[i])) * 180 / Math.PI };
