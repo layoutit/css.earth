@@ -28,3 +28,7 @@ Follow-up evidence: [Halley](HALLEY.md), [Wild 2 completion](WILD2-COMPLETION.md
 [Wild 2 grid](WILD2-GRID.md), and [Hartley/Tempel grids](CONSTRAINT-GRIDS.md).
 [Main integration](MAIN-INTEGRATION.md) records the combined registry checks.
 Earlier evidence retains its original revision and scope.
+
+[67P OSIRIS application lens](67P-OSIRIS-INTEGRATION.md) records the optional
+photographic dataset, source qualification, lighting behavior and browser gates.
+The [original trial](67P-OSIRIS-TRIAL.md) preserves its separate camera comparison.

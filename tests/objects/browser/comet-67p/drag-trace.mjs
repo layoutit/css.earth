@@ -15,6 +15,10 @@ const dpr = Number(process.argv[3] ?? 1);
 assert.ok([1, 2].includes(dpr));
 const id = process.argv[5] ?? 'comet-67p';
 assert.ok(OBJECTS.some(object => object.id === id && object.classification === 'comet'));
+const lensId = process.argv[6] ?? null;
+const viewToken = process.argv[7] ?? null;
+if (lensId) assert.match(lensId, /^[a-z][a-z0-9-]*$/);
+if (viewToken) assert.match(viewToken, /^[A-Za-z0-9_-]+$/);
 const output = resolve(process.argv[4] ?? `output/comet-performance/${id}-dpr-${dpr}`);
 await mkdir(output, { recursive: true });
 const viewport = { width: 1440, height: 900 };
@@ -32,9 +36,17 @@ try {
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   page.on('request', request => requests.push(request.url()));
-  await page.goto(`${origin}/${id}/`, { waitUntil: 'networkidle' });
+  const viewUrl = new URL(`/${id}/`, origin);
+  if (viewToken) viewUrl.searchParams.set('v', viewToken);
+  await page.goto(viewUrl.href, { waitUntil: 'networkidle' });
   await page.waitForFunction(id => document.documentElement.dataset.ready === 'true' &&
     document.querySelector('.planet-stage').dataset.objectId === id, id);
+  if (lensId) {
+    await page.locator(`button[name="lens"][value="${lensId}"]`).click();
+    await page.waitForFunction(lens => document.querySelector(`button[name="lens"][value="${lens}"]`)?.getAttribute('aria-pressed') === 'true', lensId);
+  }
+  assert.equal(await page.locator('input[name="shadows"]').isChecked(), true);
+  await page.waitForLoadState('networkidle');
   await Promise.all(responseTasks);
   await page.waitForTimeout(1000);
   const initial = await page.evaluate(id => {
@@ -46,6 +58,7 @@ try {
       atlasUrls, diagnosticsAvailable: !!window[`__${id}`] };
   }, id);
   assert.ok(initial.atlasUrls.length && initial.atlasUrls.every(url => /@2x\.webp/.test(url)));
+  if (lensId) assert.ok(initial.atlasUrls.every(url => url.includes(`-${lensId}-`)), 'Trace must load the selected lens atlas.');
   await page.screenshot({ path: resolve(output, 'before.png') });
   const cdp = await context.newCDPSession(page);
   const host = await browser.newBrowserCDPSession();
@@ -102,9 +115,11 @@ try {
   for (const path of pinPaths) { const b = await readFile(path); prepared[path] = { bytes: b.length, sha256: hash(b) }; }
   const report = { schema: 'cssearth-comet-drag-trace@1', capturedAt: new Date().toISOString(),
     codeRevision: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+    worktreeDiffSha256: hash(execFileSync('git', ['diff', 'HEAD', '--', 'tools', 'site', 'packages',
+      'src/platform', 'src/renderers', `src/planets/${id}/source`, `tests/objects/browser/${id}`], { maxBuffer: 32 * 1024 * 1024 })),
     build: initial.diagnosticsAvailable ? 'development' : 'production', route: page.url(), browser: browser.version(), headless: true,
     viewport, dpr, hardware: process.platform === 'darwin' ? execFileSync('sysctl', ['-n', 'hw.model', 'hw.memsize', 'machdep.cpu.brand_string'], { encoding: 'utf8' }).trim().split('\n') : process.arch,
-    gpu, workload: { cycles: 3, stepsPerLeg: 60, x: .6, startY: .485, upperY: .283, lowerY: .582, shadows: true, wheels: 0 },
+    gpu, workload: { cycles: 3, stepsPerLeg: 60, x: .6, startY: .485, upperY: .283, lowerY: .582, shadows: true, wheels: 0, ...(lensId ? { lensId } : {}) },
     initial, final, errors, interactionRequests: requests.slice(requestOffset), prepared, loaded: loaded.sort((a,b) => a.url.localeCompare(b.url)),
     durationMs: (end.ts - start.ts) / 1000, rendererMain: { pid: start.pid, tid: start.tid },
     rafIntervals: stats(raf.slice(1).map((t, i) => t - raf[i])),
