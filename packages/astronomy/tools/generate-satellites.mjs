@@ -75,9 +75,13 @@ const CURRENT_SATURN_FROM_JD = 2458849.5
 const CURRENT_SATURN_TO_JD = 2463232.5
 const INNER_SATURN_FROM_JD = 2433282.5
 const INNER_SATURN_TO_JD = 2469807.5
+// Daphnis has no Horizons ephemeris beyond 2018-01-17. Its later position
+// extrapolates this Cassini-era fit and carries that limited validity interval.
+const DAPHNIS_FROM_JD = 2453371.5
+const DAPHNIS_TO_JD = 2458119.5
 const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'atlas', 'prometheus', 'pandora', 'pan'])
+const RADIAL_FIT_IDS = new Set(['hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan'])
 
 // id, Horizons target code, Horizons centre, parent body id, optional fit window and cadence
 const SATELLITES = [
@@ -98,6 +102,9 @@ const SATELLITES = [
   ['phoebe', '609', '500@699', 'saturn'],
   ['janus', '610', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
   ['epimetheus', '611', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
+  ['helene', '612', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
+  ['calypso', '614', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
+  ['daphnis', '635', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 5],
   ['telesto', '613', '500@699', 'saturn'],
   ['atlas', '615', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
   ['prometheus', '616', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
