@@ -12,7 +12,7 @@ test('Wild 2 retains original observed positions, open boundaries and all source
  assert.equal(before.boundary.length,348);assert.equal(before.edgeComponents,8);assert.equal(before.windingConflicts.length,6);
  const corrected=orientObservedSurface(source);assert.deepEqual(corrected.sourceOrientation.reorientedFaces,[12386,12453]);
  const after=validateObservedReduction(Uint32Array.from(corrected.indices.flat()),Uint32Array.from(indices),source.positions);
- assert.equal(terrain.faces.length,1292);assert.equal(after.boundaryEdges,348);assert.equal(after.edgeComponents,8);assert.equal(after.eulerCharacteristic,1);
+ assert.equal(terrain.faces.length,996);assert.equal(after.boundaryEdges,348);assert.equal(after.edgeComponents,8);assert.equal(after.eulerCharacteristic,1);
  const runtime=await json('prepared/runtime.json');assert.equal(runtime.surfaceHit.frontFace,'clockwise');
- assert.equal(runtime.surfaceHit.triangles.length,1292);assert.equal((await json('source/preparation/rotation.json')).schema,'cssearth-display-orientation@1');
+ assert.equal(runtime.surfaceHit.triangles.length,996);assert.equal((await json('source/preparation/rotation.json')).schema,'cssearth-display-orientation@1');
 });
