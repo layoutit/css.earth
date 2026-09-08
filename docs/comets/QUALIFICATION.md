@@ -1,5 +1,10 @@
 # Qualification record
 
+[Halley's qualification](HALLEY.md) adds the fifth comet and brings the registry
+to 76 objects. It records current aggregate checks, a nine-case Halley interaction
+audit, production navigation, native surface targeting and matched drag traces.
+Halley's historical model has 1,000 leaves and a whole-model uncertainty label.
+
 Wild 2 uses the closed, completed PDS model at 992 leaves; [its completion record](WILD2-COMPLETION.md) and [estimated-region grid update](WILD2-GRID.md) supersede the original Wild 2 evidence below. Hartley 2 and Tempel 1 now mark their source-flagged poorly constrained regions with the [shared grid in both views](CONSTRAINT-GRIDS.md), retaining 1,000 leaves each. 67P is unchanged. The original qualification below remains historical evidence for unchanged geometry and behavior, not the latest material hashes.
 
 ## Original four-comet qualification
@@ -45,4 +50,4 @@ These are unmodified Chrome screenshots. The original NAVCAM reference beside 67
 
 The earlier missing-graphics interpretation of Hartley 2 screenshots was disproved by identical file hashes and direct pixel checks. The [capture verification](evidence/capture-anomalies.json) preserves that correction; no application paint fix was made. Production attempts with the development-only conformance harness, hot-reload-interrupted captures and response-body collection failures are excluded from accepted evidence.
 
-Borrelly and Halley remain unresolved candidates in [CANDIDATES.md](CANDIDATES.md), with no placeholder routes. No tail, coma or outgassing simulation is added. The completed Wild 2 shape uses published estimated geometry, explicitly labeled.
+Borrelly remains unresolved in [CANDIDATES.md](CANDIDATES.md), with no placeholder route. Halley's historical model is now included with the limitations in [HALLEY.md](HALLEY.md). No tail, coma or outgassing simulation is added. The completed Wild 2 shape uses published estimated geometry, explicitly labeled.

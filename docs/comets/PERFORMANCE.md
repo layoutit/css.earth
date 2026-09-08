@@ -1,5 +1,9 @@
 # Production drag traces
 
+[HALLEY.md](HALLEY.md#production-drag-traces) records the fifth comet's current
+production measurements alongside freshly captured 67P controls at DPR 1 and 2.
+Those runs use the 76-object registry; the table below retains its historical scope.
+
 The Wild 2 measurements below describe the original 996-leaf open surface. Its current 992-leaf completed model and replacement measurements are in [WILD2-COMPLETION.md](WILD2-COMPLETION.md). Measurements for the other three comets remain applicable.
 
 Captured against evidence revision **c94c7abe**, whose application code and prepared runtime bytes are unchanged from the final **67217245** build. Chrome 152.0.7977.76, headless hardware-accelerated Chrome on Apple M3 Max (Mac15,11, 36 GiB), 1440 × 900 CSS pixels with emulated DPR 1 and 2. These are local shared-workstation measurements, not a device-wide performance guarantee.

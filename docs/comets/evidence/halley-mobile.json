@@ -1,0 +1,41 @@
+{
+  "browser": "152.0.7977.76",
+  "headless": true,
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "dpr": 2,
+  "loaded": [
+    {
+      "filename": "comet-1p-model-surface@2x.webp",
+      "bytes": 82802,
+      "sha256": "8d950b8eb503d9a46884f5862d2cc7265b677d9f8f81b62205b8046d3bf9b3a0"
+    },
+    {
+      "filename": "comet-1p-model-shadow@2x.webp",
+      "bytes": 85752,
+      "sha256": "96376ae1147449ed9b9949aa7670a2b0eaa2691fb0ef021913fc26423b18af10"
+    }
+  ],
+  "captures": [
+    {
+      "path": "output/comet-intake/halley/mobile-shadows.png",
+      "sha256": "29f9b5cb9bfa8ff6cc7084dbb5bdf77d6b6d767584e6ab0904ea8cea81acd058",
+      "width": 390,
+      "leaves": 1000,
+      "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 8e-06, 0, -1036.68, 1)",
+      "shadows": true
+    },
+    {
+      "path": "output/comet-intake/halley/mobile-flood.png",
+      "sha256": "9c3a5cb35e7d93e9507b4d5a2e04590e28d6be3db6dfb0bd380f32dd16c90dbd",
+      "width": 390,
+      "leaves": 1000,
+      "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 8e-06, 0, -1036.68, 1)",
+      "shadows": false
+    }
+  ],
+  "errors": [],
+  "runtimeSha256": "e352d532ebdd27610c104f78423c5d50a28f92b7d9564e1fcd652ba2777eb6dc"
+}
