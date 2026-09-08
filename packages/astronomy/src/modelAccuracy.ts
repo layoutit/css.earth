@@ -79,6 +79,9 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   phoebe: 640720.6899566406,
   janus: 113343.60390661786,
   epimetheus: 297616.7325933514,
+  helene: 79944.84840594218,
+  calypso: 17895.200900517168,
+  daphnis: 1129.3174840451686,
   telesto: 17176.524789155148,
   atlas: 7503.609904483168,
   prometheus: 1684.0659231836269,
@@ -143,7 +146,7 @@ ACCURACY_BY_FRAME.set(
     'sun',
     'Eight-planet mass-weighted barycentric correction',
     'fit-residual',
-    164.69641135418354,
+    164.69641884846163,
     VSOP87A_VALID_FROM_JD,
     VSOP87A_VALID_TO_JD,
     'JPL Horizons DE441 Sun-to-SSB vector fixtures',
@@ -207,7 +210,7 @@ for (const id of SATELLITE_IDS) {
 }
 
 for (const planet of PLANET_IDS) {
-  const moons = moonsOf(planet)
+  const moons = moonsOf(planet).filter(id => bodyData(id).gravitationalParameterKm3PerS2 > 0)
   if (moons.length === 0) {
     ACCURACY_BY_FRAME.set(
       planet,
