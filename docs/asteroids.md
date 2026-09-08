@@ -2,6 +2,8 @@
 
 This addition selects 52 bodies from the [list of exceptional asteroids](https://en.wikipedia.org/wiki/List_of_exceptional_asteroids) for which original calibrated shape models and paired spin data could be pinned. Per-body source notes below identify the exact model, authors, frame, reduction error, limitations and restoration path. The list is a discovery index; the underlying research and original data supply the physical properties.
 
+The [validation record](asteroids-validation.md) includes browser examples, fresh-install evidence, measured drag traces and the remaining aggregate-check limitations.
+
 Every body uses the existing generic object package, shared application shell and Solar System asteroid accordion. Each package has Shape and Elevation views. Shape uses the shared missing-imagery grid: no surface texture, reflectance, composition or regolith is invented. Elevation is source radius minus the documented reference sphere, not an independent terrain measurement or height above an equipotential. Rotation has an arbitrary display meridian, not an absolute phase prediction.
 
 The existing meshoptimizer preparation path reduces the original connected meshes while preserving their closed topology. Every result has 800 native PolyCSS u raster leaves and 128 by 128 px cells. The nine DAMIT models already containing 800 triangles require no edge collapse. All geometry, surface texels and directional/flood lighting are prepared ahead of runtime. Both DPRs select the same highest-density asset bank.
