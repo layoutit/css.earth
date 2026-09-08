@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "sycorax",
+  "targetNaif": "717",
+  "parentNaif": "799",
+  "source": {
+    "url": "https://arxiv.org/pdf/1706.06837",
+    "papers": [
+      "https://arxiv.org/pdf/1706.06837",
+      "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+    ],
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "semiAxesKm": [
+      84.50251926994204,
+      75.66057835448169,
+      75.66057835448169
+    ],
+    "fullAxesKm": [
+      169.00503853988408,
+      151.32115670896337,
+      151.32115670896337
+    ],
+    "referenceRadiusKm": 78.5,
+    "axisConvention": "a,b,c are semiaxes; full axes = 2a,2b,2c",
+    "scale": "Thermophysical D=157 +23/-15 km, not the separate NEATM165±13 km solution.",
+    "qualification": "Amplitude-constrained minimum-elongation approximation; it does not reproduce a measured light curve or establish terrain.",
+    "peakToPeakAmplitudeMagnitude": 0.12,
+    "amplitudeUncertaintyMagnitude": 0.019,
+    "minimumEquatorialRatio": 1.1168632477805611,
+    "ratioAtAmplitudeMinusPlus1Sigma": [
+      1.0974885550989477,
+      1.1365799747501522
+    ],
+    "formula": "q=10^(0.4*Delta_m); b=c=R/q^(1/3); a=q*b",
+    "radiusUncertaintyKm": {
+      "minus": 7.5,
+      "plus": 11.5
+    }
+  },
+  "approximation": {
+    "semiAxesKm": [
+      84.50251926994204,
+      75.66057835448169,
+      75.66057835448169
+    ],
+    "assumptions": [
+      "Uniform reflectivity and equator-on projected-area interpretation select a minimum elongation.",
+      "Equal short axes b=c; unknown polar compression is not measured.",
+      "Effective/photometric scale normalized as volume-equivalent display radius only.",
+      "Arbitrary ICRF north pole, spin sense and meridian, not current body attitude."
+    ],
+    "qualification": "Amplitude-constrained minimum-elongation approximation; it does not reproduce a measured light curve or establish terrain."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "spin": {
+    "periodHours": 6.9162,
+    "uncertaintyHours": 0.0013,
+    "meaning": "Published doubled rotational interpretation; phase/pole are illustrative.",
+    "poleIcrfRaDecDegrees": [
+      0,
+      90
+    ],
+    "meridianDegrees": 0
+  },
+  "unresolved": []
+}

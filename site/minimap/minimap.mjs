@@ -1,6 +1,5 @@
 import prepared from './prepared.json' with { type: 'json' };
 import { worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
-import './minimap.css';
 
 // Spatial overview, published by the same camera as the main world.
 // No second scene/camera, navigation writes, ephemeris work, or runtime geometry.

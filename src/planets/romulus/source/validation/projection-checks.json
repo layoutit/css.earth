@@ -1,0 +1,427 @@
+{
+  "schema": "cssearth-romulus-projection-checks@1",
+  "validation": {
+    "model": "Independent primary-source sky-plane comparisons; quantitative disagreement is retained, not calibrated away.",
+    "projectionMethod": "Right-handed Rz(Omega) Rx(i) Rz(omega) rotation of the circular Kepler plane. Compare Romulus minus Sylvia against local east/north using JPL geocentric LT-corrected ICRF line of sight, range, and Romulus at TT minus parent light time.",
+    "miriadeSolution": "Genoide solution1, 2024-01-16T21:19:51.861, Kepler; reported fit FOM9.42mas belongs to this service model.",
+    "miriadeEpochSemantics": "Request declares TT and Requested Epoch is the requested TT calendar, but returned table JD numerically equals UTC (TT−69.184s); preserve both and associate by requested epoch.",
+    "comparisonCount": 6,
+    "comparisons": [
+      {
+        "label": "2018",
+        "epochJdTt": 2458429.5,
+        "responseTableJd": 2458429.499199259,
+        "geocentricLightTimeDays": 0.01394218974127522,
+        "emissionEpochJdTt": 2458429.4860578105,
+        "miriadePositionMas": [
+          177.21,
+          270.38
+        ],
+        "publishedModelPositionMas": [
+          237.3600229471141,
+          266.34497554496903
+        ],
+        "differenceMas": [
+          60.15002294711408,
+          -4.035024455030964
+        ],
+        "differenceMagnitudeMas": 60.285211145778106,
+        "skyPlaneDifferenceKm": 105.54826223231301,
+        "projectionPositionAngleDifferenceDegrees": -8.465361131481927,
+        "miriadeUncertaintyAvailable": false,
+        "sourcePins": [
+          "miriade2018",
+          "geocentric2018"
+        ]
+      },
+      {
+        "label": "2018",
+        "epochJdTt": 2458430.5,
+        "responseTableJd": 2458430.499199259,
+        "geocentricLightTimeDays": 0.01392894718278352,
+        "emissionEpochJdTt": 2458430.486071053,
+        "miriadePositionMas": [
+          -761.28,
+          -51.32
+        ],
+        "publishedModelPositionMas": [
+          -753.1529137950355,
+          -29.31033194807
+        ],
+        "differenceMas": [
+          8.127086204964485,
+          22.00966805193
+        ],
+        "differenceMagnitudeMas": 23.46220402986625,
+        "skyPlaneDifferenceKm": 41.03896609571223,
+        "projectionPositionAngleDifferenceDegrees": -1.6279865551974524,
+        "miriadeUncertaintyAvailable": false,
+        "sourcePins": [
+          "miriade2018",
+          "geocentric2018"
+        ]
+      },
+      {
+        "label": "2018",
+        "epochJdTt": 2458431.5,
+        "responseTableJd": 2458431.499199259,
+        "geocentricLightTimeDays": 0.01391740749546294,
+        "emissionEpochJdTt": 2458431.4860825925,
+        "miriadePositionMas": [
+          62.5,
+          -254.92
+        ],
+        "publishedModelPositionMas": [
+          -0.3236065130635952,
+          -257.81319737412434
+        ],
+        "differenceMas": [
+          -62.823606513063595,
+          -2.8931973741243553
+        ],
+        "differenceMagnitudeMas": 62.89019101858323,
+        "skyPlaneDifferenceKm": 109.91338155835678,
+        "projectionPositionAngleDifferenceDegrees": -13.847674445033476,
+        "miriadeUncertaintyAvailable": false,
+        "sourcePins": [
+          "miriade2018",
+          "geocentric2018"
+        ]
+      },
+      {
+        "label": "2026",
+        "epochJdTt": 2461286.5,
+        "responseTableJd": 2461286.499199259,
+        "geocentricLightTimeDays": 0.0264755890435985,
+        "emissionEpochJdTt": 2461286.4735244107,
+        "miriadePositionMas": [
+          -291.35,
+          -121.89
+        ],
+        "publishedModelPositionMas": [
+          -331.1116111346455,
+          -107.60844245078015
+        ],
+        "differenceMas": [
+          -39.76161113464548,
+          14.281557549219855
+        ],
+        "differenceMagnitudeMas": 42.24865212115579,
+        "skyPlaneDifferenceKm": 140.46489586095691,
+        "projectionPositionAngleDifferenceDegrees": -4.698901610897309,
+        "miriadeUncertaintyAvailable": false,
+        "sourcePins": [
+          "miriade2026",
+          "geocentric2026"
+        ]
+      },
+      {
+        "label": "2026",
+        "epochJdTt": 2461287.5,
+        "responseTableJd": 2461287.499199259,
+        "geocentricLightTimeDays": 0.02643548504743056,
+        "emissionEpochJdTt": 2461287.473564515,
+        "miriadePositionMas": [
+          316.91,
+          -50.78
+        ],
+        "publishedModelPositionMas": [
+          273.6631053162746,
+          -71.99686188446003
+        ],
+        "differenceMas": [
+          -43.24689468372543,
+          -21.21686188446003
+        ],
+        "differenceMagnitudeMas": 48.171040345932866,
+        "skyPlaneDifferenceKm": 159.9125767990217,
+        "projectionPositionAngleDifferenceDegrees": -5.636304776926664,
+        "miriadeUncertaintyAvailable": false,
+        "sourcePins": [
+          "miriade2026",
+          "geocentric2026"
+        ]
+      },
+      {
+        "label": "2026",
+        "epochJdTt": 2461288.5,
+        "responseTableJd": 2461288.499199259,
+        "geocentricLightTimeDays": 0.02639448420839505,
+        "emissionEpochJdTt": 2461288.473605516,
+        "miriadePositionMas": [
+          197.79,
+          136.21
+        ],
+        "publishedModelPositionMas": [
+          250.55527482576815,
+          128.38517248965007
+        ],
+        "differenceMas": [
+          52.76527482576816,
+          -7.824827510349934
+        ],
+        "differenceMagnitudeMas": 53.34231109546691,
+        "skyPlaneDifferenceKm": 176.80490926748044,
+        "projectionPositionAngleDifferenceDegrees": -7.422898542697709,
+        "miriadeUncertaintyAvailable": false,
+        "sourcePins": [
+          "miriade2026",
+          "geocentric2026"
+        ]
+      }
+    ],
+    "maxDifferenceMas": 62.89019101858323,
+    "scientificPrecisionQualified": false,
+    "publishedFitReproduction": {
+      "comparisonCount": 6,
+      "comparisons": [
+        {
+          "line": 1,
+          "sourceRow": "2002-05-07 09:37:02.42 Keck   NIRC2  H  -595.9   -1.0  -1.7   5.7 10.0  6.8 0.20",
+          "jdUtc": 2452401.900722454,
+          "observedMas": [
+            -595.9,
+            -1.0
+          ],
+          "reportedObservedMinusComputedMas": [
+            -1.7,
+            5.7
+          ],
+          "epochJdTt": 2452401.901465324,
+          "ttMinusUtcSeconds": 64.184,
+          "geocentricLightTimeDays": 0.01599395368810098,
+          "reportedModelPositionMas": [
+            -594.1999999999999,
+            -6.7
+          ],
+          "publishedPrintedElementsPositionMas": [
+            -619.7867013818634,
+            0.4052035435336309
+          ],
+          "differenceMagnitudeMas": 26.554909244802484,
+          "comparisonKind": "Independent historical coordinate/projection consistency check. These are the source fit observations, not an independent scientific holdout."
+        },
+        {
+          "line": 26,
+          "sourceRow": "2005-11-01 13:13:18.10 Gemini NIRI   Ks    2.8 -259.7   6.8  -5.3 21.9  6.0 1.20",
+          "jdUtc": 2453676.050903935,
+          "observedMas": [
+            2.8,
+            -259.7
+          ],
+          "reportedObservedMinusComputedMas": [
+            6.8,
+            -5.3
+          ],
+          "epochJdTt": 2453676.0516468054,
+          "ttMinusUtcSeconds": 64.184,
+          "geocentricLightTimeDays": 0.01410548495471672,
+          "reportedModelPositionMas": [
+            -4.0,
+            -254.39999999999998
+          ],
+          "publishedPrintedElementsPositionMas": [
+            32.856612625767156,
+            -248.52842532216658
+          ],
+          "differenceMagnitudeMas": 37.32137837008747,
+          "comparisonKind": "Independent historical coordinate/projection consistency check. These are the source fit observations, not an independent scientific holdout."
+        },
+        {
+          "line": 51,
+          "sourceRow": "2010-08-15 08:37:36.90 Gemini NIRI   Kp  684.0 -289.9  16.8  -8.1 21.9  5.8 0.00",
+          "jdUtc": 2455423.859454861,
+          "observedMas": [
+            684.0,
+            -289.9
+          ],
+          "reportedObservedMinusComputedMas": [
+            16.8,
+            -8.1
+          ],
+          "epochJdTt": 2455423.8602208793,
+          "ttMinusUtcSeconds": 66.184,
+          "geocentricLightTimeDays": 0.01346308260120444,
+          "reportedModelPositionMas": [
+            667.2,
+            -281.79999999999995
+          ],
+          "publishedPrintedElementsPositionMas": [
+            672.3778024114256,
+            -275.73156197850756
+          ],
+          "differenceMagnitudeMas": 7.977191099156316,
+          "comparisonKind": "Independent historical coordinate/projection consistency check. These are the source fit observations, not an independent scientific holdout."
+        },
+        {
+          "line": 76,
+          "sourceRow": "2011-12-16 04:30:16.20 Keck   NIRC2  H   396.0  -38.2  20.0  -0.2 10.0  6.2 0.10",
+          "jdUtc": 2455911.6876875,
+          "observedMas": [
+            396.0,
+            -38.2
+          ],
+          "reportedObservedMinusComputedMas": [
+            20.0,
+            -0.2
+          ],
+          "epochJdTt": 2455911.6884535183,
+          "ttMinusUtcSeconds": 66.184,
+          "geocentricLightTimeDays": 0.01634371965540465,
+          "reportedModelPositionMas": [
+            376.0,
+            -38.0
+          ],
+          "publishedPrintedElementsPositionMas": [
+            369.10895967841697,
+            -36.118834581242744
+          ],
+          "differenceMagnitudeMas": 7.143193966735844,
+          "comparisonKind": "Independent historical coordinate/projection consistency check. These are the source fit observations, not an independent scientific holdout."
+        },
+        {
+          "line": 101,
+          "sourceRow": "2018-10-15 09:00:40.47 VLT    ZIMPOL R   728.1   45.8   4.7 -11.1 10.8  7.9 0.20",
+          "jdUtc": 2458406.8754684026,
+          "observedMas": [
+            728.1,
+            45.8
+          ],
+          "reportedObservedMinusComputedMas": [
+            4.7,
+            -11.1
+          ],
+          "epochJdTt": 2458406.876269144,
+          "ttMinusUtcSeconds": 69.184,
+          "geocentricLightTimeDays": 0.01465765480555756,
+          "reportedModelPositionMas": [
+            723.4,
+            56.9
+          ],
+          "publishedPrintedElementsPositionMas": [
+            716.5572784172498,
+            34.67308710770168
+          ],
+          "differenceMagnitudeMas": 23.256364620912965,
+          "comparisonKind": "Independent historical coordinate/projection consistency check. These are the source fit observations, not an independent scientific holdout."
+        },
+        {
+          "line": 130,
+          "sourceRow": "2018-11-29 04:41:40.71 VLT    ZIMPOL R  -329.7  213.9  -1.3   5.8 10.8  8.0 0.30",
+          "jdUtc": 2458451.6956100697,
+          "observedMas": [
+            -329.7,
+            213.9
+          ],
+          "reportedObservedMinusComputedMas": [
+            -1.3,
+            5.8
+          ],
+          "epochJdTt": 2458451.696410811,
+          "ttMinusUtcSeconds": 69.184,
+          "geocentricLightTimeDays": 0.01405710948622098,
+          "reportedModelPositionMas": [
+            -328.4,
+            208.1
+          ],
+          "publishedPrintedElementsPositionMas": [
+            -268.3650322895618,
+            218.98898923532903
+          ],
+          "differenceMagnitudeMas": 61.014485448624974,
+          "comparisonKind": "Independent historical coordinate/projection consistency check. These are the source fit observations, not an independent scientific holdout."
+        }
+      ],
+      "maxDifferenceMas": 61.014485448624974,
+      "qualification": "Raw printed orbital elements do not reproduce the paper-reported computed astrometry at the quoted fit RMS. Do not equate parameter transcription/parsing correctness with faithful reproduction of the authors’ fit."
+    },
+    "orbitalPoleCrossCheck": {
+      "fromElementsRaDecDegrees": [
+        7.1,
+        82.6
+      ],
+      "paperRaDecDegrees": [
+        7,
+        83
+      ],
+      "paperUncertainty3SigmaDegrees": [
+        6,
+        2
+      ]
+    },
+    "periodOnlyScenePhaseSensitivityDegrees": 7.723899131715963,
+    "epochOnlyPhaseSensitivityDegrees": 9.97072441956905,
+    "parameterUncertaintyQualification": "Sensitivities vary one parameter at a time by its quoted 3 sigma; correlations are unknown, so neither is a joint confidence bound."
+  },
+  "sources": {
+    "miriadeSolutions": {
+      "path": "source/orbit/miriade-solutions.txt",
+      "url": "https://ssp.imcce.fr/webservices/miriade/api/ephemsys.php?-get=gensol&-name=Sylvia&-from=cssEarth",
+      "sha256": "c3c0bd648373e3b47b8849fe68b3b3663b9054496aa560ab6fd7be34e69eb500",
+      "bytes": 719
+    },
+    "miriade2018": {
+      "path": "source/orbit/miriade-2018.xml",
+      "url": "https://ssp.imcce.fr/webservices/miriade/api/ephemsys.php?-name=Sylvia&-ep=2458429.5&-tscale=TT&-gensol=1&-nbd=3&-step=1d&-mime=votable&-from=cssEarth",
+      "sha256": "6e51c7cf84e038ccb32fd443c2b1d493ceb3eac52476d0d52901bd5e6974c242",
+      "bytes": 20658
+    },
+    "miriade2026": {
+      "path": "source/orbit/miriade-2026.xml",
+      "url": "https://ssp.imcce.fr/webservices/miriade/api/ephemsys.php?-name=Sylvia&-ep=2461286.5&-tscale=TT&-gensol=1&-nbd=3&-step=1d&-mime=votable&-from=cssEarth",
+      "sha256": "c17731d2b40b1f80cb593e3f2ec35740afbfe848ee16d99998e6e74e3c87d468",
+      "bytes": 20657
+    },
+    "geocentric2018": {
+      "path": "source/orbit/geocentric-2018.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&CENTER=500%40399&VEC_CORR=LT&TLIST=2458429.499199259%0A2458430.499199259%0A2458431.499199259",
+      "sha256": "3a532625e0a4436905bed3187d9a4359648d5790bf9c0d20f6cdc9c723d65425",
+      "bytes": 9044
+    },
+    "geocentric2026": {
+      "path": "source/orbit/geocentric-2026.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&CENTER=500%40399&VEC_CORR=LT&TLIST=2461286.499199259%0A2461287.499199259%0A2461288.499199259",
+      "sha256": "e8afc90caa7fd06b9ab42e3eb7f2d56704b7eefdb3baecf4ab977c33afc074c2",
+      "bytes": 9044
+    },
+    "geocentricAstrometry": {
+      "path": "source/orbit/geocentric-astrometry.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&CENTER=500%40399&VEC_CORR=LT&TLIST=2452401.900722454%0A2453676.050903935%0A2455423.859454861%0A2455911.6876875%0A2458406.8754684026%0A2458451.6956100697",
+      "sha256": "a6a058d9e1ba7bbb96a474acec1e2d3bb217180eaf8589cafadc47275ce4306a",
+      "bytes": 9845
+    },
+    "paperAstrometry": {
+      "path": "source/orbit/paper-astrometry.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/650/A129/tablec1.dat",
+      "sha256": "412aa8442b2784595a3ffc038384f4c007e9253e8f1a7cf35663a600c5df0ecc",
+      "bytes": 10530
+    },
+    "paperAstrometryReadme": {
+      "path": "source/orbit/paper-astrometry-readme.txt",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/650/A129/ReadMe",
+      "sha256": "0f1aa8a1b2b56d6bd76b8d272f706358492a38b63799b3e5e34adfff2ea35276",
+      "bytes": 9139
+    },
+    "parent": {
+      "path": "source/orbit/sylvia-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259&CENTER=500%4010&VEC_CORR=NONE",
+      "sha256": "52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118",
+      "bytes": 8489,
+      "target": 87,
+      "center": 10,
+      "solution": "JPL#130",
+      "requestEpochJdUtc": 2461286.499199259,
+      "ttMinusUtcSeconds": 69.184,
+      "targetKind": "numbered-asteroid"
+    }
+  },
+  "limits": [
+    "This is an extrapolation of rounded 2021 published elements to 2026-09-03, beyond the retained 2002–2018 astrometry; current phase is approximate.",
+    "The full model covariance and an explicit time scale for the printed pericenter epoch are absent. Quoted independent parameter uncertainties must not be treated as a scene covariance.",
+    "The six independent Miriade 2024-solution projections differ by 23–63 mas, including about 42 mas (140 km on the sky plane) at the scene epoch; this is measured disagreement, not a guaranteed error bound.",
+    "The printed parameters differ from six reported paper-fit positions by 7–62 mas with the documented geometric projection. The paper’s 9.85 mas fit RMS is not achieved or asserted for this illustration.",
+    "Miriade permits orbit computation from 1990 to 2030, but its position-error service stops at 2026-Jan-01; empty errors at this scene date are unavailable, not zero.",
+    "Sky-plane checks do not independently determine the line-of-sight component, and geocentric projection omits observatory parallax and differential aberration.",
+    "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
+  ]
+}

@@ -20,6 +20,24 @@ const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1
 const heliocentricKm = id => scale(apply(geometry.BODY_FIXED_TO_ICRF_MATRICES[id], geometry.BODY_FIXED_SUN_DIRECTIONS[id]),
   -geometry.BODY_ORBITS[id].heliocentricDistanceAu * geometry.ASTRONOMICAL_UNIT_KILOMETERS);
 
+test('primary-specific companion sources define one global parent origin and conic at the scene epoch', async () => {
+  for (const id of ['hiiaka', 'menoetius', 'romulus']) {
+    const source = JSON.parse(await readFile(new URL(`../src/planets/${id}/source/validation/epoch-state.json`, import.meta.url), 'utf8'));
+    const parent = source.centerBodyId, primary = source.parentHeliocentricState;
+    assert.deepEqual(geometry.BODY_HELIOCENTRIC_STATES[parent].positionKm, primary.positionKm);
+    assert.deepEqual(geometry.BODY_HELIOCENTRIC_STATES[parent].velocityKmPerDay, primary.velocityKmPerDay);
+    const relative = sub(heliocentricKm(id), primary.positionKm);
+    assert.ok(Math.hypot(...sub(relative, source.positionKm)) < .00001, `${id}: global center composition`);
+    if (geometry.BODY_ORBITS[parent]) {
+      assert.ok(Math.hypot(...sub(heliocentricKm(parent), primary.positionKm)) < .00001, `${parent}: visible body shares the primary origin`);
+      const normal = unit(apply(geometry.BODY_FIXED_TO_ICRF_MATRICES[parent], geometry.BODY_FIXED_ORBIT_NORMAL_DIRECTIONS[parent]));
+      assert.ok(Math.hypot(...sub(normal, unit(cross(primary.positionKm, primary.velocityKmPerDay)))) < 1e-12, `${parent}: conic uses source velocity`);
+      assert.equal(geometry.BODY_POSITION_PROVENANCE[parent].sha256, geometry.BODY_HELIOCENTRIC_STATES[parent].provenance.sha256);
+    }
+  }
+  assert.equal(geometry.BODY_ORBITS.patroclus, undefined, 'a coordinate origin does not create a standalone scene');
+});
+
 for (const id of ['phobos', 'mimas', 'janus', 'epimetheus', 'helene', 'triton']) {
   test(`${id}: the published position and orbit plane reproduce retained Horizons, not the displaced compact fit`, () => {
     const source = snapshots.get(id);

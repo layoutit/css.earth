@@ -1,0 +1,771 @@
+{
+  "schema": "cssearth-orbit-fit-checks@1",
+  "id": "erriapus",
+  "checkedOn": "2026-09-08",
+  "targetNaif": "628",
+  "parent": "saturn",
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "timeScale": "TDB treated as TT; difference below2ms",
+  "sourceFit": {
+    "fromJdTdb": 2458849.5,
+    "toJdTdb": 2463229.5,
+    "stepDays": 5,
+    "residualMethod": "128-term bounded cosine series per ICRF axis",
+    "generator": "packages/astronomy/tools/generate-satellites.mjs"
+  },
+  "runs": [
+    {
+      "label": "fixtures",
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27628%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%40699%27&TLIST=2458862.25%2C2460310.75%2C2461041.625%2C2461772.25%2C2462502.75%2C2463219.25&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+      "comparisons": [
+        {
+          "jdTdb": 2458862.25,
+          "expectedPositionKm": [
+            -12867054.04297561,
+            -10180890.67454807,
+            9264297.413903896
+          ],
+          "expectedVelocityKmPerDay": [
+            4217.638393463571,
+            -116656.7772871059,
+            -6847.543067340343
+          ],
+          "positionErrorKm": 11239.635338310401,
+          "velocityErrorKmPerDay": 2465.867578392942,
+          "radialRelativeError": 0.0005923929909967818,
+          "angleDegrees": 0.004005057271447898
+        },
+        {
+          "jdTdb": 2460310.75,
+          "expectedPositionKm": [
+            12084181.29961894,
+            -1708981.082695378,
+            -8687768.967640502
+          ],
+          "expectedVelocityKmPerDay": [
+            -27763.73246600636,
+            142549.0833109124,
+            26465.00061718703
+          ],
+          "positionErrorKm": 1134.4184228730035,
+          "velocityErrorKmPerDay": 159.92456032525232,
+          "radialRelativeError": 0.000057666432857206296,
+          "angleDegrees": 0.0028121337881366914
+        },
+        {
+          "jdTdb": 2461041.625,
+          "expectedPositionKm": [
+            8704862.084734734,
+            -17126715.38754749,
+            -7395770.178439091
+          ],
+          "expectedVelocityKmPerDay": [
+            51783.903727253,
+            87398.55185658991,
+            -31385.21114139583
+          ],
+          "positionErrorKm": 728.8404161358023,
+          "velocityErrorKmPerDay": 181.51149926747465,
+          "radialRelativeError": 0.00002141499065566599,
+          "angleDegrees": 0.001615361850084107
+        },
+        {
+          "jdTdb": 2461772.25,
+          "expectedPositionKm": [
+            -1044470.149343819,
+            -24474831.75799759,
+            -1872757.908767011
+          ],
+          "expectedVelocityKmPerDay": [
+            65438.56122122968,
+            13222.41382725669,
+            -48360.29435856768
+          ],
+          "positionErrorKm": 850.7342591015838,
+          "velocityErrorKmPerDay": 135.75597757521152,
+          "radialRelativeError": 0.00003067707792692165,
+          "angleDegrees": 0.0009202131420696114
+        },
+        {
+          "jdTdb": 2462502.75,
+          "expectedPositionKm": [
+            -8755194.079518676,
+            -23226987.06042365,
+            3900779.201839315
+          ],
+          "expectedVelocityKmPerDay": [
+            50774.27852668456,
+            -42992.89342495592,
+            -47053.78595068739
+          ],
+          "positionErrorKm": 864.897983451869,
+          "velocityErrorKmPerDay": 118.67728270153478,
+          "radialRelativeError": 0.000010790375388536333,
+          "angleDegrees": 0.0018727680135752964
+        },
+        {
+          "jdTdb": 2463219.25,
+          "expectedPositionKm": [
+            -12200750.24763396,
+            -12287665.45320795,
+            9215590.790823387
+          ],
+          "expectedVelocityKmPerDay": [
+            10257.59145989532,
+            -108799.8727888246,
+            -24099.99606487978
+          ],
+          "positionErrorKm": 3944.100086476931,
+          "velocityErrorKmPerDay": 3338.6173443099337,
+          "radialRelativeError": 0.00009596240929399258,
+          "angleDegrees": 0.010124204976771235
+        }
+      ],
+      "maxPositionErrorKm": 11239.635338310401,
+      "maxRadialRelativeError": 0.0005923929909967818,
+      "maxAngleDegrees": 0.010124204976771235
+    },
+    {
+      "label": "holdouts",
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27628%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%40699%27&TLIST=2458850.25%2C2458890.25%2C2459017.75%2C2459145.25%2C2459272.75%2C2459400.25%2C2459527.75%2C2459655.25%2C2459782.75%2C2459910.25%2C2460037.75%2C2460165.25%2C2460292.75%2C2460420.25%2C2460547.75%2C2460675.25%2C2460802.75%2C2460930.25%2C2461057.75%2C2461185.25%2C2461286.5%2C2461312.75%2C2461440.25%2C2461567.75%2C2461695.25%2C2461822.75%2C2461950.25%2C2462077.75%2C2462205.25%2C2462332.75%2C2462460.25%2C2462587.75%2C2462715.25%2C2462842.75%2C2462970.25%2C2463097.75%2C2463228.75&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+      "comparisons": [
+        {
+          "jdTdb": 2458850.25,
+          "expectedPositionKm": [
+            -12878244.92914833,
+            -8750688.104691917,
+            9317067.814693257
+          ],
+          "expectedVelocityKmPerDay": [
+            -2617.867248995758,
+            -121866.0515952213,
+            -1824.753062921639
+          ],
+          "positionErrorKm": 51119.63666087437,
+          "velocityErrorKmPerDay": 7934.014494123783,
+          "radialRelativeError": 0.0028062651140093875,
+          "angleDegrees": 0.014309723913664118
+        },
+        {
+          "jdTdb": 2458890.25,
+          "expectedPositionKm": [
+            -12547503.57750819,
+            -13274129.54005529,
+            8930182.78304131
+          ],
+          "expectedVelocityKmPerDay": [
+            17882.08627994249,
+            -104115.5426348114,
+            -16588.96223939848
+          ],
+          "positionErrorKm": 2258.4615516023014,
+          "velocityErrorKmPerDay": 1231.1830032706985,
+          "radialRelativeError": 0.00010849765026166303,
+          "angleDegrees": 0.001364184688661312
+        },
+        {
+          "jdTdb": 2459017.75,
+          "expectedPositionKm": [
+            -7739953.570185973,
+            -22946842.74686915,
+            5047686.599489388
+          ],
+          "expectedVelocityKmPerDay": [
+            51814.66822706893,
+            -47959.10580713327,
+            -40113.32133871232
+          ],
+          "positionErrorKm": 1724.1239461480316,
+          "velocityErrorKmPerDay": 312.12960603346767,
+          "radialRelativeError": 0.00004630269736471959,
+          "angleDegrees": 0.002984651996806673
+        },
+        {
+          "jdTdb": 2459145.25,
+          "expectedPositionKm": [
+            -292101.2845505924,
+            -25646729.85041637,
+            -580080.8627213851
+          ],
+          "expectedVelocityKmPerDay": [
+            62082.17705232221,
+            5781.428834896328,
+            -46003.19450160077
+          ],
+          "positionErrorKm": 2247.9644728820276,
+          "velocityErrorKmPerDay": 106.02623318506303,
+          "radialRelativeError": 0.00003243576449851737,
+          "angleDegrees": 0.004663714689010306
+        },
+        {
+          "jdTdb": 2459272.75,
+          "expectedPositionKm": [
+            7349802.181316143,
+            -21399910.94693046,
+            -6117991.679779968
+          ],
+          "expectedVelocityKmPerDay": [
+            54273.36029511845,
+            61899.88860191238,
+            -38245.15897452758
+          ],
+          "positionErrorKm": 1477.4724218902531,
+          "velocityErrorKmPerDay": 137.26118548525818,
+          "radialRelativeError": 6.675936343736311e-7,
+          "angleDegrees": 0.00361136140211786
+        },
+        {
+          "jdTdb": 2459400.25,
+          "expectedPositionKm": [
+            12206471.87198622,
+            -9661584.30575346,
+            -9322766.55296584
+          ],
+          "expectedVelocityKmPerDay": [
+            13219.22654441582,
+            122489.6999374285,
+            -5638.888874025802
+          ],
+          "positionErrorKm": 444.78300785004217,
+          "velocityErrorKmPerDay": 155.92068772464094,
+          "radialRelativeError": 0.0000011700326798536054,
+          "angleDegrees": 0.0014028363589322402
+        },
+        {
+          "jdTdb": 2459527.75,
+          "expectedPositionKm": [
+            6558758.803595139,
+            7418794.927205642,
+            -4569981.713032424
+          ],
+          "expectedVelocityKmPerDay": [
+            -124380.4055630416,
+            105603.8848396653,
+            95336.32279038282
+          ],
+          "positionErrorKm": 1032.6264686819582,
+          "velocityErrorKmPerDay": 82.59037037725338,
+          "radialRelativeError": 0.00006129228820173083,
+          "angleDegrees": 0.004134860146148205
+        },
+        {
+          "jdTdb": 2459655.25,
+          "expectedPositionKm": [
+            -10508046.65151207,
+            2545887.232173705,
+            7822460.93275477
+          ],
+          "expectedVelocityKmPerDay": [
+            -73389.00435059024,
+            -135901.7037410642,
+            49077.11892434163
+          ],
+          "positionErrorKm": 1191.8131539112765,
+          "velocityErrorKmPerDay": 66.3753101665762,
+          "radialRelativeError": 0.00007907454441136164,
+          "angleDegrees": 0.002378384448402885
+        },
+        {
+          "jdTdb": 2459782.75,
+          "expectedPositionKm": [
+            -12504511.015583,
+            -13508946.14192837,
+            8693219.128072094
+          ],
+          "expectedVelocityKmPerDay": [
+            24342.54126367827,
+            -101949.4588800762,
+            -21849.20418238526
+          ],
+          "positionErrorKm": 539.7985284873804,
+          "velocityErrorKmPerDay": 92.53722665998934,
+          "radialRelativeError": 0.000021046251148293393,
+          "angleDegrees": 0.0009241491411678515
+        },
+        {
+          "jdTdb": 2459910.25,
+          "expectedPositionKm": [
+            -6906804.423408532,
+            -22729924.05110938,
+            4214868.399274481
+          ],
+          "expectedVelocityKmPerDay": [
+            57750.67790029319,
+            -42498.12011628232,
+            -44147.74366261646
+          ],
+          "positionErrorKm": 370.5757826507501,
+          "velocityErrorKmPerDay": 118.8649629455318,
+          "radialRelativeError": 0.000014098584798505343,
+          "angleDegrees": 0.0003491631517466422
+        },
+        {
+          "jdTdb": 2460037.75,
+          "expectedPositionKm": [
+            1195805.40949653,
+            -24402502.16698273,
+            -1789798.724132605
+          ],
+          "expectedVelocityKmPerDay": [
+            66027.59611424344,
+            16687.06288151206,
+            -47549.98398704593
+          ],
+          "positionErrorKm": 953.5552469001098,
+          "velocityErrorKmPerDay": 120.60704456119359,
+          "radialRelativeError": 0.000012677590075504952,
+          "angleDegrees": 0.002108621625484191
+        },
+        {
+          "jdTdb": 2460165.25,
+          "expectedPositionKm": [
+            9001320.789225796,
+            -18355447.43271668,
+            -7210729.041474043
+          ],
+          "expectedVelocityKmPerDay": [
+            51719.39179029041,
+            79236.72021691212,
+            -34015.26675229006
+          ],
+          "positionErrorKm": 1054.3040959163654,
+          "velocityErrorKmPerDay": 144.39181870244454,
+          "radialRelativeError": 0.00001695861846273683,
+          "angleDegrees": 0.0026116779543394566
+        },
+        {
+          "jdTdb": 2460292.75,
+          "expectedPositionKm": [
+            12427285.85950741,
+            -4241674.063464613,
+            -9050947.832437621
+          ],
+          "expectedVelocityKmPerDay": [
+            -10873.03330762523,
+            138586.6772793722,
+            14181.82519994513
+          ],
+          "positionErrorKm": 750.9449217882942,
+          "velocityErrorKmPerDay": 177.6210952587858,
+          "radialRelativeError": 0.00004452064182225435,
+          "angleDegrees": 0.0008783808166546627
+        },
+        {
+          "jdTdb": 2460420.25,
+          "expectedPositionKm": [
+            1790504.515863215,
+            10550547.4208197,
+            -753684.9605226114
+          ],
+          "expectedVelocityKmPerDay": [
+            -153249.6208361727,
+            29557.76675271409,
+            110718.045282668
+          ],
+          "positionErrorKm": 828.9798880790994,
+          "velocityErrorKmPerDay": 193.93523566222774,
+          "radialRelativeError": 0.0000623215852841863,
+          "angleDegrees": 0.0026175073710315053
+        },
+        {
+          "jdTdb": 2460547.75,
+          "expectedPositionKm": [
+            -12613598.07033123,
+            -12383.08579438767,
+            8965785.043105546
+          ],
+          "expectedVelocityKmPerDay": [
+            -47244.14719599572,
+            -132609.4082201613,
+            26583.09328008115
+          ],
+          "positionErrorKm": 749.0472879336277,
+          "velocityErrorKmPerDay": 145.5512395113295,
+          "radialRelativeError": 0.0000099910593969188,
+          "angleDegrees": 0.002713543691012904
+        },
+        {
+          "jdTdb": 2460675.25,
+          "expectedPositionKm": [
+            -12830108.4440132,
+            -14907960.85336133,
+            8275159.755750522
+          ],
+          "expectedVelocityKmPerDay": [
+            31430.75299193611,
+            -92537.31479600149,
+            -28090.1828660444
+          ],
+          "positionErrorKm": 621.4598436455186,
+          "velocityErrorKmPerDay": 90.5765122599825,
+          "radialRelativeError": 0.000027630256645649887,
+          "angleDegrees": 0.0005274980898205373
+        },
+        {
+          "jdTdb": 2460802.75,
+          "expectedPositionKm": [
+            -6603718.023446946,
+            -23020039.06598295,
+            3285608.247721111
+          ],
+          "expectedVelocityKmPerDay": [
+            61328.35199434066,
+            -33952.71159852257,
+            -46522.04122107138
+          ],
+          "positionErrorKm": 165.67335651273126,
+          "velocityErrorKmPerDay": 73.91574004482763,
+          "radialRelativeError": 0.000005369809484068178,
+          "angleDegrees": 0.00024402099474175653
+        },
+        {
+          "jdTdb": 2460930.25,
+          "expectedPositionKm": [
+            1825137.559193931,
+            -23472499.38053213,
+            -2847029.627043484
+          ],
+          "expectedVelocityKmPerDay": [
+            67444.76384557303,
+            27859.3527559064,
+            -47018.01607541741
+          ],
+          "positionErrorKm": 459.01921585398486,
+          "velocityErrorKmPerDay": 91.49341721884826,
+          "radialRelativeError": 0.000011184189435020642,
+          "angleDegrees": 0.0009051228873441744
+        },
+        {
+          "jdTdb": 2461057.75,
+          "expectedPositionKm": [
+            9500881.184428336,
+            -15645863.76321733,
+            -7868432.477220629
+          ],
+          "expectedVelocityKmPerDay": [
+            46853.87743335631,
+            96502.67777408435,
+            -27147.15765336158
+          ],
+          "positionErrorKm": 931.3529004670233,
+          "velocityErrorKmPerDay": 120.97752770640786,
+          "radialRelativeError": 0.000003143614420442198,
+          "angleDegrees": 0.0026722268162306913
+        },
+        {
+          "jdTdb": 2461185.25,
+          "expectedPositionKm": [
+            10851313.7484909,
+            788378.9744353193,
+            -7680003.676860281
+          ],
+          "expectedVelocityKmPerDay": [
+            -46072.27269504068,
+            149792.5650731026,
+            43890.95078049295
+          ],
+          "positionErrorKm": 1138.7997488371825,
+          "velocityErrorKmPerDay": 172.34199994263165,
+          "radialRelativeError": 0.0000788143728039925,
+          "angleDegrees": 0.0019008353263868984
+        },
+        {
+          "jdTdb": 2461286.5,
+          "expectedPositionKm": [
+            -635459.7846645693,
+            10569028.53786898,
+            1258163.651151341
+          ],
+          "expectedVelocityKmPerDay": [
+            -156587.3706778986,
+            -4911.64331709302,
+            111529.8783488152
+          ],
+          "positionErrorKm": 897.0459275157232,
+          "velocityErrorKmPerDay": 96.42071651080762,
+          "radialRelativeError": 0.00005426592380408657,
+          "angleDegrees": 0.003683391067776665
+        },
+        {
+          "jdTdb": 2461312.75,
+          "expectedPositionKm": [
+            -4594550.898420421,
+            9647969.303825201,
+            4019220.887924284
+          ],
+          "expectedVelocityKmPerDay": [
+            -141975.3889542625,
+            -62344.14065373551,
+            96766.6444877079
+          ],
+          "positionErrorKm": 935.9044743582505,
+          "velocityErrorKmPerDay": 186.9388648627303,
+          "radialRelativeError": 0.000002607939669108106,
+          "angleDegrees": 0.004694427327584673
+        },
+        {
+          "jdTdb": 2461440.25,
+          "expectedPositionKm": [
+            -14322586.63953734,
+            -4868397.274727634,
+            9825303.612094771
+          ],
+          "expectedVelocityKmPerDay": [
+            -18918.03874421047,
+            -122401.1753843886,
+            3366.614940163599
+          ],
+          "positionErrorKm": 501.11530050357896,
+          "velocityErrorKmPerDay": 167.51610404380227,
+          "radialRelativeError": 0.000011840794968742685,
+          "angleDegrees": 0.0014398983034515644
+        },
+        {
+          "jdTdb": 2461567.75,
+          "expectedPositionKm": [
+            -12552241.45667699,
+            -17796242.67700129,
+            7389808.889895641
+          ],
+          "expectedVelocityKmPerDay": [
+            38360.11540721391,
+            -76663.92181651115,
+            -35299.85862580861
+          ],
+          "positionErrorKm": 589.1516118802194,
+          "velocityErrorKmPerDay": 141.6969331540428,
+          "radialRelativeError": 0.000015844367568740303,
+          "angleDegrees": 0.0011534279733102783
+        },
+        {
+          "jdTdb": 2461695.25,
+          "expectedPositionKm": [
+            -5960383.844331819,
+            -24125955.24532058,
+            1880231.061598762
+          ],
+          "expectedVelocityKmPerDay": [
+            61286.70483787315,
+            -21823.06870486135,
+            -48226.02399226728
+          ],
+          "positionErrorKm": 523.6084632932685,
+          "velocityErrorKmPerDay": 95.94938821573267,
+          "radialRelativeError": 0.000019844417565639816,
+          "angleDegrees": 0.00039530918405667164
+        },
+        {
+          "jdTdb": 2461822.75,
+          "expectedPositionKm": [
+            2239196.23597989,
+            -23195875.72303035,
+            -4247741.444273309
+          ],
+          "expectedVelocityKmPerDay": [
+            64197.39025292881,
+            37767.86349391263,
+            -45249.39823674952
+          ],
+          "positionErrorKm": 269.8318016722438,
+          "velocityErrorKmPerDay": 67.70631500404392,
+          "radialRelativeError": 0.00001051773779581211,
+          "angleDegrees": 0.00025064619014192546
+        },
+        {
+          "jdTdb": 2461950.25,
+          "expectedPositionKm": [
+            9301461.876758637,
+            -14097949.96751584,
+            -8732313.920224117
+          ],
+          "expectedVelocityKmPerDay": [
+            39915.24225905033,
+            107133.7756237815,
+            -19515.85244260386
+          ],
+          "positionErrorKm": 361.71083518342056,
+          "velocityErrorKmPerDay": 55.13663221245008,
+          "radialRelativeError": 2.0086771090888078e-7,
+          "angleDegrees": 0.0010899132049382392
+        },
+        {
+          "jdTdb": 2462077.75,
+          "expectedPositionKm": [
+            8712145.491614616,
+            3537182.364258193,
+            -6372741.098409859
+          ],
+          "expectedVelocityKmPerDay": [
+            -77394.29184881992,
+            147898.1221739708,
+            76290.8804767347
+          ],
+          "positionErrorKm": 679.7136468527523,
+          "velocityErrorKmPerDay": 41.10245721637699,
+          "radialRelativeError": 0.000008961584850752935,
+          "angleDegrees": 0.003389909203689235
+        },
+        {
+          "jdTdb": 2462205.25,
+          "expectedPositionKm": [
+            -8450839.860266818,
+            5571249.81387363,
+            7199592.532977534
+          ],
+          "expectedVelocityKmPerDay": [
+            -106423.1355832147,
+            -114090.1717132897,
+            70259.03817604613
+          ],
+          "positionErrorKm": 635.9187039361452,
+          "velocityErrorKmPerDay": 113.27379779104255,
+          "radialRelativeError": 0.0000444021112457893,
+          "angleDegrees": 0.001460174599880378
+        },
+        {
+          "jdTdb": 2462332.75,
+          "expectedPositionKm": [
+            -14042795.89366889,
+            -10132668.08995671,
+            9775540.613033213
+          ],
+          "expectedVelocityKmPerDay": [
+            1830.835833683547,
+            -110066.081797635,
+            -14415.25690990708
+          ],
+          "positionErrorKm": 866.0334532167617,
+          "velocityErrorKmPerDay": 119.80536142461257,
+          "radialRelativeError": 0.000031581828911053655,
+          "angleDegrees": 0.0017182143192843718
+        },
+        {
+          "jdTdb": 2462460.25,
+          "expectedPositionKm": [
+            -10763898.81389285,
+            -21038548.28472728,
+            5816742.243961155
+          ],
+          "expectedVelocityKmPerDay": [
+            43492.5104580796,
+            -59977.79994755095,
+            -42804.45373394535
+          ],
+          "positionErrorKm": 1093.951329800432,
+          "velocityErrorKmPerDay": 104.3298632239643,
+          "radialRelativeError": 0.000024219623998233963,
+          "angleDegrees": 0.0021695870057864683
+        },
+        {
+          "jdTdb": 2462587.75,
+          "expectedPositionKm": [
+            -4036893.404900942,
+            -25404820.67194357,
+            -288601.7211267278
+          ],
+          "expectedVelocityKmPerDay": [
+            59075.30313759943,
+            -8139.955260164473,
+            -50464.91758378003
+          ],
+          "positionErrorKm": 795.1977720464429,
+          "velocityErrorKmPerDay": 106.64818067740987,
+          "radialRelativeError": 0.000010042252814201902,
+          "angleDegrees": 0.0016750255643164314
+        },
+        {
+          "jdTdb": 2462715.25,
+          "expectedPositionKm": [
+            3578297.431610634,
+            -23021487.81783701,
+            -6433536.140265162
+          ],
+          "expectedVelocityKmPerDay": [
+            57600.16523777605,
+            46577.63435828609,
+            -43281.82048653934
+          ],
+          "positionErrorKm": 223.5901302180646,
+          "velocityErrorKmPerDay": 136.21553953937882,
+          "radialRelativeError": 5.619784695376495e-7,
+          "angleDegrees": 0.0005290510891507586
+        },
+        {
+          "jdTdb": 2462842.75,
+          "expectedPositionKm": [
+            9632171.121727606,
+            -13239057.94872639,
+            -10374658.29691658
+          ],
+          "expectedVelocityKmPerDay": [
+            31338.81015747828,
+            108397.5598562215,
+            -12809.71034001736
+          ],
+          "positionErrorKm": 1695.1825336291254,
+          "velocityErrorKmPerDay": 124.64005816373192,
+          "radialRelativeError": 0.000030444510290994486,
+          "angleDegrees": 0.0046977006356332335
+        },
+        {
+          "jdTdb": 2462970.25,
+          "expectedPositionKm": [
+            8241816.927485725,
+            3878350.716299676,
+            -6806742.903004807
+          ],
+          "expectedVelocityKmPerDay": [
+            -78978.34177945106,
+            138789.2974347105,
+            89142.38000789944
+          ],
+          "positionErrorKm": 3222.8291670871336,
+          "velocityErrorKmPerDay": 113.67605357545901,
+          "radialRelativeError": 0.0002521604055456539,
+          "angleDegrees": 0.007414985095923256
+        },
+        {
+          "jdTdb": 2463097.75,
+          "expectedPositionKm": [
+            -8364250.765297919,
+            3521130.222120799,
+            7942825.286542164
+          ],
+          "expectedVelocityKmPerDay": [
+            -91899.25542577828,
+            -134227.1138962987,
+            63823.22730795977
+          ],
+          "positionErrorKm": 2580.161843243811,
+          "velocityErrorKmPerDay": 331.6885954919852,
+          "radialRelativeError": 0.00007720091557739117,
+          "angleDegrees": 0.01143157020581226
+        },
+        {
+          "jdTdb": 2463228.75,
+          "expectedPositionKm": [
+            -12082719.17658198,
+            -13299397.1083566,
+            8971038.275184039
+          ],
+          "expectedVelocityKmPerDay": [
+            14370.86700582523,
+            -104261.613442647,
+            -27315.11581409702
+          ],
+          "positionErrorKm": 47830.558118896726,
+          "velocityErrorKmPerDay": 7590.24019765173,
+          "radialRelativeError": 0.00136479393960931,
+          "angleDegrees": 0.11175045527059227
+        }
+      ],
+      "maxPositionErrorKm": 51119.63666087437,
+      "maxRadialRelativeError": 0.0028062651140093875,
+      "maxAngleDegrees": 0.11175045527059227
+    }
+  ],
+  "additionalPositionGuardKm": 58788,
+  "qualification": "Sampled residuals of a compact fitted preview, not guaranteed bounds or observational uncertainty. Source sample interval2020–2032 only; no precision, endpoint-velocity or extrapolation claim."
+}

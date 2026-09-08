@@ -9,7 +9,7 @@
 
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
-export const SATELLITE_ELEMENTS_PLUTO = {
+export const SATELLITE_ELEMENTS_PLUTO: Readonly<Record<'charon' | 'nix' | 'hydra' | 'kerberos' | 'styx', SatelliteRecord>> = {
   charon: {
     parent: 'pluto',
     horizonsCode: '901',

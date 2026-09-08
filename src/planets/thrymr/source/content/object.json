@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "thrymr",
+  "displayName": "Thrymr",
+  "panel": {
+    "introduction": "Thrymr’s long rotation period remains tentative. Its modest elongation is a lower-limit interpretation of unresolved brightness measurements, with assumed depth and orientation. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Diameter estimate",
+        "value": "8 (+2.25/−1.25) km"
+      },
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Saturn"
+      },
+      {
+        "id": "shape",
+        "label": "Minimum equatorial ratio",
+        "value": "1.21:1 · uniform-reflectivity model"
+      },
+      {
+        "id": "rotation",
+        "label": "Tentative rotation period",
+        "value": "38.79 ± 0.25 h · tentative"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "2000"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "scale-assumption",
+        "label": "Size assumption",
+        "value": "Geometric albedo 0.06; brightness-based estimate"
+      },
+      {
+        "id": "orientation-limit",
+        "label": "Orientation",
+        "value": "Unknown physical pole and phase; illustrative display"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.21:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+        "title": "Approximate ellipsoid adopting minimum equatorial ratio 1.21:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/thrymr/thrymr-model-thumbnail.webp",
+        "surface": "thrymr-model-surface@2x.webp",
+        "poles": "thrymr-model-poles@2x.webp",
+        "source": {
+          "id": "lightcurve-approximation",
+          "path": "../manifest.json",
+          "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Denk et al. (2018)",
+      "role": "surface",
+      "description": "Lightcurve shape constraints",
+      "href": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
+    },
+    {
+      "label": "Tilmann Denk",
+      "role": "facts",
+      "description": "Physical estimates and Cassini observations",
+      "href": "https://tilmanndenk.de/outersaturnianmoons/thrymr/"
+    },
+    {
+      "label": "NASA PDS",
+      "role": "observations",
+      "description": "Cassini ISS archive",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://tilmanndenk.de/outersaturnianmoons/thrymr/",
+      "credit": "Tilmann Denk"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Denk et al. (2018); Denk and Mottola (2019)"
+    }
+  }
+}

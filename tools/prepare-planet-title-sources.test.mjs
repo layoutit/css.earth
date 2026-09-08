@@ -3,15 +3,35 @@ import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import test from "node:test";
+import * as fontkit from "fontkit";
 
 import { OBJECTS } from "../site/objects.mjs";
 import { PLANET_TITLE_RECIPE } from
   "../src/platform/planet-title-recipe.mjs";
-import { createPreparedTitleLayout } from "../src/platform/prepared-title.mjs";
-import { preparePlanetTitleSources } from
+import { createPreparedTitleLayout, sha256 } from "../src/platform/prepared-title.mjs";
+import { createPlanetTitleSource, preparePlanetTitleSources } from
   "./prepare-planet-title-sources.mjs";
 
 const projectRoot = resolve(import.meta.dirname, "..");
+
+test("Hiʻiaka preserves its okina using a real glyph in the pinned title font", async () => {
+  const fontPath = resolve(projectRoot, PLANET_TITLE_RECIPE.checkedFontPath);
+  assert.equal(sha256(await readFile(fontPath)), PLANET_TITLE_RECIPE.sourceSha256);
+  const font = fontkit.openSync(fontPath).getVariation({
+    wght: PLANET_TITLE_RECIPE.weight,
+    opsz: PLANET_TITLE_RECIPE.opticalSize,
+  });
+  const okina = font.layout("ʻ").glyphs;
+  assert.equal(okina.length, 1);
+  assert.notEqual(okina[0].id, 0, "the okina must not render as .notdef");
+  assert.ok(okina[0].path.commands.length > 0, "the okina must have visible outlines");
+  const source = createPlanetTitleSource("Hiʻiaka", font);
+  assert.equal(source.label, "Hiʻiaka");
+  assert.ok(source.width > 0);
+  assert.notEqual(source.path, createPlanetTitleSource("Hiiaka", font).path);
+  assert.throws(() => createPlanetTitleSource("海王星", font), /missing from the title font/u);
+  assert.throws(() => createPlanetTitleSource("Hi\nʻiaka", font), /label is invalid/u);
+});
 
 test("regenerates every planet title from one pinned Saturn recipe", async () => {
   const generated = await preparePlanetTitleSources({
