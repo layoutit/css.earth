@@ -17,14 +17,14 @@ Open <http://127.0.0.1:4331/>. A dedicated Vite configuration serves only the la
 - Inspect the whole object, diffuse component, or compact detail.
 - Use Auto for normal axis selection, or isolate X, Y, or Z. Diffuse and compact-detail inspection uses Z; choosing another axis restores Whole object because the side banks combine both components. A subject without a separate detail bank disables Compact detail.
 - Depth selects all layers or one prepared layer. Selecting a layer in Auto freezes the currently dominant axis so the layer remains identifiable while orbiting.
-- Source image shows the available local references. Where several exist, its Image chooser switches between the wide field and a detail reference; this changes only the comparison image, not the 3D model. Source and credit follows the inspected image and returns to the model's base source in 3D view.
+- Alignment shows the neutral density field with registered image overlays and visible adjustment panels. Reconstruction shows the prepared colored 3D result. Original photographs and processing panels remain in the source and model directories.
 - Reset camera restores the subject's initial view.
 
 The subjects include M31, M33, LMC and SMC image layers, separate LMC and SMC particle volumes, and the Milky Way volume reference. The selector is populated from the viewer's subject catalogue; further prepared subjects can use the same controls. Modeled image depth is an interpretation of a two-dimensional image, not a measured reconstruction.
 
-Each subject names a prepared object directory. Its comparison image can be relative to that directory (`image`) or to the repository (`imagePath`); the image is displayed only in the Source tab. Density models use the existing prepared-volume loader and renderer, with an explicit model description and no compact-detail control when no separate detail bank exists.
+Each subject names a prepared object directory. Its comparison image can be relative to that directory (`image`) or to the repository (`imagePath`); these source references remain research metadata; registered image inspection uses the Alignment tab's overlay catalogue. Density models use the existing prepared-volume loader and renderer, with an explicit model description and no compact-detail control when no separate detail bank exists.
 
-Extraction writes `{id}-{cutout,diffuse,residual,mask,comparison}.png` and `{id}-receipt.json` to the local output directory. The comparison panels show source, diffuse, compact residual, alpha mask, and final cutout. The Source image chooser discovers the cutout, diffuse, residual, and mask candidates. These offline experiments do not replace the prepared 3D banks or modify production assets.
+Extraction writes `{id}-{cutout,diffuse,residual,mask,comparison}.png` and `{id}-receipt.json` to the local output directory. The comparison panels show source, diffuse, compact residual, alpha mask, and final cutout. Open those saved panels directly to inspect extraction results. These offline experiments do not replace the prepared 3D banks or modify production assets.
 
 `src/viewer.ts` owns the actual renderer and camera. `src/main.ts` only connects retained controls to its API. All images and geometry are prepared before inspection.
 
@@ -38,7 +38,7 @@ The particle subjects use the 2.2 Gyr snapshot from [Garver et al.'s simulation 
 - The LMC experiment constrains projected brightness as well as color. It distributes photo emission along the simulated conditional depth profile, with an authored narrower depth for positive local detail. A shared-opacity bake preserves constant column hue through ordinary CSS alpha composition. No foreground-star depth or gas tomography is inferred.
 - This collisionless simulation supplies stellar mass density, not gas, dust extinction, or emission-line structure. These are initial morphology experiments, not final optical reconstructions.
 - LMC's higher-resolution grid covers the photographed core and retains 78.64% of the simulation's stellar mass; the full imported particles are preserved. The SMC density experiment retains 99.55%. Receipts record exact retained mass, units, transformation, source hashes and output hashes.
-- The LMC Source image chooser includes a physical-scale photo / stellar mass / contour comparison. It exposes mismatches; the independently measured centroids and display contours are not a fit score. The photo footprint follows published sky coordinates and distance; its central-bar placement remains authored.
+- The saved LMC source evidence includes a physical-scale photo / stellar mass / contour comparison. It exposes mismatches; the independently measured centroids and display contours are not a fit score. The photo footprint follows published sky coordinates and distance; its central-bar placement remains authored.
 
 The prepared candidates are checked in. Rebuilding requires Python 3 and a manual download of `lsmcmodelA2020_2500Myr.zip` from the linked dataset. From a clean checkout, after placing the archive in Downloads:
 
@@ -63,7 +63,7 @@ Tone controls call the lab's local Node preparation service, which reads hash-ve
 
 LMC has six choices: full SMASH, VISTA infrared, the previous SMASH extraction, Gaia EDR3 with foreground stars removed, Horálek's optical wide field, and the ESO VST Tarantula detail patch. SMC has SMASH and VISTA. Only enabled images load. New LMC previews retain up to 4096 pixels; full native sources remain hash-pinned for later processing.
 
-**Density opens from the solar observer**, equivalent to Earth's location at this scale, with optical magnification. **Reference view** and **Reset camera** return there; **Fit cloud** shows the full bounds from a nearer or farther inspection camera. Camera adjustments are retained when revisiting the same density field. Dragging and dollying explore the actual 3D cloud and fixed photographic planes, changing the comparison projection.
+**Alignment opens from the solar observer**, equivalent to Earth's location at this scale, with optical magnification. **Reference view** and **Reset camera** return there; **Fit cloud** shows the full bounds from a nearer or farther inspection camera. Camera adjustments are retained when revisiting the same density field. Dragging and dollying explore the actual 3D cloud and fixed photographic planes, changing the comparison projection.
 
 The supplied LMC starting fit preserves the manually chosen SMASH offset (−1.2, −1.7, 0 kpc), Z rotation 39°, size 3, and opacity 0.29. Its common affine transform transfers to every registered image around each image's own centre. This is an authored alignment against the simulation, kept separate from the sky calibration. It does not validate the model's morphology or alter its viewing direction.
 
@@ -85,7 +85,7 @@ pnpm test:lab:nebula
 pnpm lab:nebula
 ```
 
-To regenerate the full scalar grids themselves, first run the complete Magellanic particle workflow above with the downloaded archive, then run `pnpm lab:nebula:density`. The full-density recipe verifies the original centred particle bytes and applies the observer transform once, before deriving bounds from every particle. The old photographic candidates remain available in 3D view for comparison; they are not the neutral density source.
+To regenerate the full scalar grids themselves, first run the complete Magellanic particle workflow above with the downloaded archive, then run `pnpm lab:nebula:density`. The full-density recipe verifies the original centred particle bytes and applies the observer transform once, before deriving bounds from every particle. The old photographic candidates remain available in Reconstruction for comparison; they are not the neutral density source.
 
 ## Full-resolution photographs
 

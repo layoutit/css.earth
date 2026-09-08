@@ -4,8 +4,8 @@
 
 ## Inspect
 
-- [Tarantula controls](http://127.0.0.1:4331/?subject=tarantula-coherent) and [Orion controls](http://127.0.0.1:4331/?subject=orion-coherent).
-- [Tarantula extraction](http://127.0.0.1:4331/?tab=structure&benchmark=tarantula-core) and [Orion extraction](http://127.0.0.1:4331/?tab=structure&benchmark=orion-llori).
+- [Tarantula controls](http://127.0.0.1:4331/?subject=tarantula-coherent&tab=reconstruction) and [Orion controls](http://127.0.0.1:4331/?subject=orion-coherent&tab=reconstruction).
+- [Tarantula extraction evidence](../models/tarantula-core-benchmark/benchmark.json) and [Orion extraction evidence](../models/orion-structure-benchmark/benchmark.json). These saved research products have no separate UI tab.
 
 **Camera pose** provides front, ±30°, ±60°, and edge-on views. Switching A/B/C within a subject preserves rotation and distance. Pointer orbit and wheel zoom remain available. These comparisons scale focal length and fitting distance together by 100, approximating the parallel projection assumed by the photograph columns. Existing subjects retain their camera. The original close camera introduced radial front-view streaking independently of depth smearing; that comparison error was corrected.
 

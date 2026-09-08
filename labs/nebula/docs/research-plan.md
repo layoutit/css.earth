@@ -2,6 +2,8 @@
 
 Status: automatic 2D benchmarks and isolated 3D controls implemented for Tarantula and Orion. Reusable tooling passes; current masks fail the production morphology gate. [Decision and results](coherent-depth.md). Updated 2026-09-08.
 
+The next bounded experiment is [photograph-constrained LMC reconstruction](filled-observation.md): calibrated Earth rays, filled grayscale reconstruction, finite cloud profiles, and separate full-photo diagnostics. Its acceptance is recorded separately from the rejected sparse-mask benchmark.
+
 **Automatic approximation first; optional detailed refinement second.** The pipeline must discover structures without hand-authoring every cloud. Tarantula inside the LMC is the initial benchmark and later a candidate for registered high-resolution refinement. Its name and specific features must not enter reusable algorithms. Prove a coherent local volume before production integration; the Orion transfer diagnostic does not establish that acceptance.
 
 The first implemented comparison is documented in [automatic structure benchmark](structure-benchmark.md). It compares an independent starlet prototype, the existing median kernel, and an imported run of official getsf when available. These are 2D morphology experiments; none recovers measured gas depth.

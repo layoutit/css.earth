@@ -35,6 +35,9 @@ interface LabSubjectRecord {
   hasDetail?: boolean;
   comparisonGroup?: string;
   referenceProjectionScale?: number;
+  /** Calibrated observer for prepared photographic-volume experiments. */
+  referenceDistanceUnits?: number;
+  referenceEastLeft?: boolean;
   density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
@@ -48,6 +51,10 @@ export const subjects = subjectRecords.map(record => {
       (!Number.isFinite(record.referenceProjectionScale) || record.referenceProjectionScale <= 0)) {
     throw new TypeError(`Lab subject ${record.id} has an invalid reference projection scale.`);
   }
+  if (record.referenceDistanceUnits !== undefined && (!Number.isFinite(record.referenceDistanceUnits) || record.referenceDistanceUnits <= 0))
+    throw new TypeError(`Lab subject ${record.id} has an invalid observer distance.`);
+  if (record.referenceEastLeft !== undefined && typeof record.referenceEastLeft !== 'boolean')
+    throw new TypeError(`Lab subject ${record.id} has an invalid sky handedness.`);
   const recipe = recipes[`../../../${record.directory}/source/recipe.json`];
   const imagePath = record.imagePath ?? (record.image ? `${record.directory}/${record.image}` : null);
   if (!imagePath) throw new TypeError(`Lab subject ${record.id} has no comparison image path.`);
@@ -199,7 +206,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   function rotate(delta: CameraDelta) {
     // Density's physical east/north frame needs an east-left screen bridge.
     // Conjugate input rotation by that reflection so dragging follows the pointer.
-    if (currentMode === 'density') delta = { ...delta, controlYawDelta: -delta.controlYawDelta,
+    if (currentMode === 'density' || subject.referenceEastLeft) delta = { ...delta, controlYawDelta: -delta.controlYawDelta,
       ...(delta.rotation ? { rotation: [delta.rotation[0], -delta.rotation[1], -delta.rotation[2], delta.rotation[3]] as [number, number, number, number] } : {}) };
     const changedRotation = Boolean(delta.rotation) || delta.controlPitchDelta !== 0 || delta.controlYawDelta !== 0;
     camera.update({ rotX: values.rotX + delta.controlPitchDelta, rotY: values.rotY + delta.controlYawDelta,
@@ -370,8 +377,12 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   const observer = new ResizeObserver(measure); observer.observe(host); measure();
   function reset() {
     controls.stop(); cameraScale = 1; pose = 'front'; rotation = new DOMMatrix().rotateAxisAngle(1, 0, 0, 180); measure();
+    if (subject.referenceDistanceUnits !== undefined) {
+      cameraScale = subject.referenceDistanceUnits * Math.min(width, height) * .32 / (radius * focal); measure();
+    }
     fitDistance = Math.max(radius * 2, focal * radius / (Math.min(width, height) * .32));
-    values.distance = fitDistance; values.zoom = 1; values.rotX = values.rotY = 0; revision++;
+    values.distance = subject.referenceDistanceUnits ?? fitDistance; values.zoom = fitDistance / values.distance;
+    values.rotX = values.rotY = 0; revision++;
     schedule(); report();
   }
   async function referenceView() {
@@ -444,7 +455,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       overlayBases.set(saved.id, saved.basis);
     }
     host.dataset.mode = currentMode; host.dataset.ready = 'false';
-    host.style.transform = currentMode === 'density' ? 'scaleX(-1)' : '';
+    host.style.transform = currentMode === 'density' || subject.referenceEastLeft ? 'scaleX(-1)' : '';
     report();
     if (!directory) {
       status = 'No independent density field is available for this subject';

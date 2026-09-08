@@ -97,7 +97,7 @@ async function writeContactSheet(files: string[]) {
 
 try {
   for (const subject of expected) {
-    await page.goto(`${baseURL}/?subject=${encodeURIComponent(subject)}`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${baseURL}/?subject=${encodeURIComponent(subject)}&tab=reconstruction`, { waitUntil: 'domcontentloaded' });
     await waitReady();
     const descriptor = JSON.parse(await readFile(`${subjects.find(value => value.id === subject)!.directory}/object.json`, 'utf8'));
     const bounds = descriptor.properties.volume.boundsUnits;
@@ -117,7 +117,7 @@ try {
   }
   for (const group of byGroup.values()) {
     assert.equal(group.length, 3, `${group[0]}: expected three paired variants`);
-    await page.goto(`${baseURL}/?subject=${encodeURIComponent(group[0])}`, { waitUntil: 'domcontentloaded' }); await waitReady();
+    await page.goto(`${baseURL}/?subject=${encodeURIComponent(group[0])}&tab=reconstruction`, { waitUntil: 'domcontentloaded' }); await waitReady();
     await page.selectOption('#camera-pose', 'y-plus-60');
     const box = await page.locator('#viewer').boundingBox(); assert.ok(box, `${group[0]}: viewer has no bounds`);
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); const before = await page.locator('#viewer').getAttribute('data-distance');

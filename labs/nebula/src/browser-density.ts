@@ -88,8 +88,10 @@ try {
   await page.click('#reference-view'); await page.waitForFunction(distance => Number(document.querySelector<HTMLElement>('#viewer')?.dataset.distance) === distance, lmcOverlays.referenceDistanceUnits);
   assert.deepEqual((await state()).transforms, referenceTransforms, 'Reference view did not restore the Earth observer world transform');
   report.subjects.push(await capture('lmc-particles', 'front'));
-  await page.click('#source-tab'); await page.waitForFunction(() => { const image = document.querySelector<HTMLImageElement>('#source-image'); return image?.complete && image.naturalWidth > 0; });
-  await page.click('#structure-tab'); await page.locator('#structure-panel h2').waitFor({ state: 'visible' }); await page.click('#density-tab'); await ready('density', 'lmc-particles');
+  assert.equal(await page.locator('[role="tab"]').count(), 2, 'obsolete lab tabs remain');
+  assert.equal(await page.locator('#source-tab, #structure-tab').count(), 0, 'removed research tabs remain in the UI');
+  await page.goto(`${baseURL}/?subject=lmc-particles&tab=structure`, { waitUntil: 'domcontentloaded' }); await ready('density', 'lmc-particles');
+  assert.equal(new URL(page.url()).searchParams.get('tab'), 'alignment', 'legacy Structure URL did not fall back to Alignment');
   await page.selectOption('#axis', 'z'); const max = Number(await page.locator('#layer').getAttribute('max')); assert.ok(max >= 0, 'density has no inspectable slabs');
   await page.locator('#layer').evaluate((node, value) => { (node as HTMLInputElement).value = String(value); node.dispatchEvent(new Event('input', { bubbles: true })); }, Math.floor(max / 2));
   assert.notEqual(await page.locator('#layer').getAttribute('aria-valuetext'), 'All layers', 'density slab selection did not publish'); await page.click('#all-layers'); await page.selectOption('#axis', 'auto');
@@ -107,7 +109,7 @@ try {
   assert.equal(await page.locator('#overlay-choice').inputValue(), smcOverlays.overlays[0]!.id, 'SMC default selection differs from its manifest');
   report.subjects.push(await capture('smc-particles', 'front'), await capture('smc-particles', 'y-plus-60'));
   await page.route(`**${densityPath}**`, async route => { await new Promise(resolve => setTimeout(resolve, 120)); await route.continue(); });
-  await page.goto(`${baseURL}/?subject=lmc-particles`, { waitUntil: 'domcontentloaded' }); await ready('photo', 'lmc-particles');
+  await page.goto(`${baseURL}/?subject=lmc-particles&tab=reconstruction`, { waitUntil: 'domcontentloaded' }); await ready('photo', 'lmc-particles');
   await page.click('#density-tab'); await page.click('#render-tab'); await ready('photo', 'lmc-particles'); await page.waitForTimeout(500);
   const final = await state(); validScene(final, 'rapid-switch'); assert.equal(await page.locator('#render-tab').getAttribute('aria-selected'), 'true');
   assert.ok(final.textures.every(url => url.includes(`${photoPath}prepared/`)), 'rapid switch left wrong representation');

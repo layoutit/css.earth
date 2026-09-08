@@ -6,7 +6,7 @@ type Bounds = { min: Vec3; max: Vec3 };
 
 /** Check every bank's depth quadrature separately from slab spacing and texture resolution. */
 export function validateCoherentAxisSampling(options: {
-  sampler: CoherentVolumeSampler; bounds: Bounds;
+  sampler: Pick<CoherentVolumeSampler, 'sample'>; bounds: Bounds;
   samples: { x: number; y: number; z: number }; exposureGain: number;
 }) {
   const results: Record<string, { rays: number; samples: number[]; maximumDisplayDifference: number }> = {};

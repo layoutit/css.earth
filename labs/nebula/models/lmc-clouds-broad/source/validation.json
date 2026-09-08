@@ -1,0 +1,45 @@
+{
+  "projected": {
+    "testedRays": 362,
+    "depthSamples": [
+      1536,
+      3072
+    ],
+    "maximumDisplayChannelError": [
+      0.000007202587139709671,
+      5.151244889811668e-7
+    ],
+    "maximumConvergenceDifference": [
+      0.000007151282624073829,
+      0.000007151282624073829,
+      0.000007151282624073829
+    ],
+    "meaning": "Physical Earth-ray integration before texture quantization. A projection fit does not validate unobserved geometry."
+  },
+  "quadrature": {
+    "x": {
+      "rays": 121,
+      "samples": [
+        1024,
+        2048
+      ],
+      "maximumDisplayDifference": 0.0006251830235114442
+    },
+    "y": {
+      "rays": 121,
+      "samples": [
+        768,
+        1536
+      ],
+      "maximumDisplayDifference": 0.00137705780206121
+    },
+    "z": {
+      "rays": 121,
+      "samples": [
+        1536,
+        3072
+      ],
+      "maximumDisplayDifference": 0.00003082970318788597
+    }
+  }
+}
