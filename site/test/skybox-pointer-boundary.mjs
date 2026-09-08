@@ -148,19 +148,23 @@ export async function emptySkyPoint(page, id, selector, preferred, cameraPlan) {
         Math.sqrt((perspective / depthRadius) ** 2 - 1);
     }
     if (!Number.isFinite(radius) || radius <= 0) throw new Error(`${id}: prepared body projection is invalid (${radius})`);
-    const candidates = [preferred, ...[32, 72, 120, 180].flatMap(inset =>
-      [96, 150, 220, innerHeight - 96].map(y => ({ x: innerWidth - inset, y })))];
-    const inspected = candidates.map(point => {
+    const candidates = [preferred,
+      ...[innerWidth - 32, innerWidth - 72, innerWidth - 120, innerWidth - 180,
+        32, 72, 120, 180, innerWidth * .35, innerWidth * .5, innerWidth * .65]
+        .flatMap(x => [96, 150, 220, innerHeight - 96, innerHeight - 48].map(y => ({ x, y })))];
+    const inspected = [];
+    for (const point of candidates) {
       const elements = document.elementsFromPoint(point.x, point.y);
       const targets = elements.filter(element => element instanceof HTMLElement &&
         element.dataset.objectNavigate && element.style.pointerEvents === "auto" && element.ariaDisabled !== "true")
         .map(element => element.dataset.objectNavigate);
       const outsideBody = Math.hypot(point.x - camera.x - camera.width / 2,
         point.y - camera.y - camera.height / 2) > radius + 12;
-      return { point, targets, onInput: input.contains(elements[0]), outsideBody };
-    });
-    return { selected: inspected.find(candidate => candidate.onInput && candidate.outsideBody && !candidate.targets.length)?.point,
-      inspected };
+      const candidate = { point, targets, onInput: input.contains(elements[0]), outsideBody };
+      inspected.push(candidate);
+      if (candidate.onInput && outsideBody && !targets.length) return { selected: point, inspected };
+    }
+    return { inspected };
   }, { id, selector, preferred, cameraPlan, baseTile: BASE_TILE });
   assert.ok(result.selected, `${id}: no verified empty sky point: ${JSON.stringify(result.inspected)}`);
   return result.selected;

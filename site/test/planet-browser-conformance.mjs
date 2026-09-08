@@ -1039,6 +1039,8 @@ async function proveWheelTakeover(page, planet, profile) {
   });
   await reset();
   const coordinates = await surfaceFlyCoordinates(page);
+  const { camera: cameraPlan } = JSON.parse(await readFile(
+    resolve(`src/planets/${planet.id}/prepared/runtime.json`), 'utf8'));
   const startWheel = async () => {
     await page.mouse.move(coordinates.surface.x, coordinates.surface.y);
     await page.mouse.wheel(0, -40);
@@ -1060,9 +1062,11 @@ async function proveWheelTakeover(page, planet, profile) {
   await showInteractionPhase(page, "Sky press must stop wheel motion");
   await reset();
   await startWheel();
-  // Use the viewport corner: zoom can expand a large body's limb over the
-  // point that was just outside its disc before the wheel gesture began.
-  await page.mouse.move(page.viewportSize().width - 32, 96);
+  // Context bodies can fill a viewport corner. Verify the input target with
+  // the current projection while the wheel is still moving.
+  const sky = await emptySkyPoint(page, planet.id, profile.inputSelector,
+    { x: page.viewportSize().width - 32, y: 96 }, cameraPlan);
+  await page.mouse.move(sky.x, sky.y);
   await page.mouse.down();
   assert.equal((await interactionStats(page, planet.id)).pendingPointer, true,
     `${planet.id}: the sky press must reserve an orbit drag`);
@@ -1321,6 +1325,16 @@ async function proveInteractionInterruptions(page, planet, profile) {
   await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 50);
   assert.notEqual((await profile.camera(page)).zoom, zoomBeforeFlyWheel,
     `${planet.id}: wheel must still change zoom after stopping the flight`);
+  // This assertion concerns canceled flight ownership. Establish actual
+  // wheel completion before comparing a resting pose; a command delay is
+  // not evidence that its animation frame has already been delivered.
+  const wheelCompletionBefore = await interactionStats(page, planet.id);
+  await page.waitForFunction(id =>
+    !window[`__${id}`].camera.stats().dragInertia.wheelZoom.active,
+  planet.id, { timeout: 1000 });
+  const wheelCompletionAfter = await interactionStats(page, planet.id);
+  assert.equal(wheelCompletionAfter.surfaceFlyTo.frames, flyAfterWheel.surfaceFlyTo.frames,
+    `${planet.id}: canceled flight cannot publish while wheel zoom finishes`);
   const wheelRest = await cameraPose(page, planet.id);
   await page.waitForTimeout(250);
   assert.deepEqual(await cameraPose(page, planet.id), wheelRest,
@@ -1428,6 +1442,10 @@ async function proveInteractionInterruptions(page, planet, profile) {
     pointerStoppedInertia: true,
     captureLossStoppedDrag: true,
     wheelCoexistedWithFlyTo: true,
+    wheelCompletion: {
+      before: { wheel: wheelCompletionBefore.wheelZoom, flightFrames: wheelCompletionBefore.surfaceFlyTo.frames },
+      after: { wheel: wheelCompletionAfter.wheelZoom, flightFrames: wheelCompletionAfter.surfaceFlyTo.frames },
+    },
     dragInterruptedFlyTo: true,
     repeatedDoubleClickRestartedFlyTo: true,
     flyToCompletedAndRested: true,
