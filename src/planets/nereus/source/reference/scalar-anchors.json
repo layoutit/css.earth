@@ -1,0 +1,178 @@
+{
+  "sourceSha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19",
+  "method": "Existing independent NumPy plane/edge projection against every original source triangle; retained face centroids, source extrema and every multiple-ray source centroid.",
+  "fullCheckCount": 806,
+  "fullWithheldCount": 0,
+  "checks": [
+    {
+      "kind": "source-extreme-0--1",
+      "query": [
+        -253.80700000000002,
+        0,
+        0
+      ],
+      "point": [
+        -253.80700000000002,
+        0.0,
+        0.0
+      ],
+      "value": 0.088807,
+      "distanceMeters": 0.0,
+      "accepted": true,
+      "sourceFace": 1085
+    },
+    {
+      "kind": "source-extreme-0-1",
+      "query": [
+        256.398,
+        0,
+        0
+      ],
+      "point": [
+        256.398,
+        0.0,
+        0.0
+      ],
+      "value": 0.09139800000000001,
+      "distanceMeters": 0.0,
+      "accepted": true,
+      "sourceFace": 1026
+    },
+    {
+      "kind": "source-extreme-1--1",
+      "query": [
+        74.89,
+        -168.971,
+        -19.526999999999997
+      ],
+      "point": [
+        74.89,
+        -168.971,
+        -19.526999999999997
+      ],
+      "value": 0.02085213119574389,
+      "distanceMeters": 0.0,
+      "accepted": true,
+      "sourceFace": 1243
+    },
+    {
+      "kind": "source-extreme-1-1",
+      "query": [
+        0,
+        161.38,
+        -17.008
+      ],
+      "point": [
+        0.0,
+        161.38,
+        -17.008
+      ],
+      "value": -0.0027262298952785147,
+      "distanceMeters": 0.0,
+      "accepted": true,
+      "sourceFace": 1175
+    },
+    {
+      "kind": "source-extreme-2--1",
+      "query": [
+        -6.326,
+        11.013,
+        -121.684
+      ],
+      "point": [
+        -6.326,
+        11.013,
+        -121.684
+      ],
+      "value": -0.042654994785238584,
+      "distanceMeters": 0.0,
+      "accepted": true,
+      "sourceFace": 2273
+    },
+    {
+      "kind": "source-extreme-2-1",
+      "query": [
+        38.737,
+        0,
+        119.535
+      ],
+      "point": [
+        38.737,
+        0.0,
+        119.535
+      ],
+      "value": -0.03934503036489165,
+      "distanceMeters": 0.0,
+      "accepted": true,
+      "sourceFace": 24
+    },
+    {
+      "kind": "retained-face-centroid",
+      "query": [
+        9.261999999999999,
+        143.09533333333334,
+        29.76366666666667
+      ],
+      "point": [
+        9.387899262503787,
+        145.23484628126903,
+        30.562714389568587
+      ],
+      "value": -0.016287617402702098,
+      "distanceMeters": 2.287322352043582,
+      "accepted": true,
+      "sourceFace": 936
+    },
+    {
+      "kind": "retained-face-centroid",
+      "query": [
+        23.38666666666667,
+        -87.84033333333333,
+        95.25099999999999
+      ],
+      "point": [
+        23.347627443542866,
+        -89.0626148057787,
+        97.01633394916739
+      ],
+      "value": -0.03124862574081208,
+      "distanceMeters": 2.1475334714290883,
+      "accepted": true,
+      "sourceFace": 358
+    },
+    {
+      "kind": "retained-face-centroid",
+      "query": [
+        -5.098,
+        90.71466666666667,
+        -100.91333333333334
+      ],
+      "point": [
+        -4.922244796042594,
+        91.42970165734125,
+        -102.85340282206977
+      ],
+      "value": -0.027295819558513235,
+      "distanceMeters": 2.0750986845769837,
+      "accepted": true,
+      "sourceFace": 2019
+    },
+    {
+      "kind": "retained-face-centroid",
+      "query": [
+        6.1093333333333355,
+        -93.88766666666668,
+        91.40266666666666
+      ],
+      "point": [
+        6.025909160392138,
+        -94.89401380134302,
+        93.06652574184125
+      ],
+      "value": -0.03194901860491378,
+      "distanceMeters": 1.9463096285388513,
+      "accepted": true,
+      "sourceFace": 356
+    }
+  ]
+}

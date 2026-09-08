@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 63.7572215233784,
+  "declinationDegrees": -25.698398654428534,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 5.223327,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy: ecliptic J2000 lambda 55 deg, beta -46 deg, period 5.223327 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied."
+}
