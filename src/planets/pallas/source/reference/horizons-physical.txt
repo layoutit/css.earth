@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 2 Pallas (A802 FA)            2026-Sep-07 19:56:18
+Rec #:       2 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 9772 (1804-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457870.5 ! 2017-Apr-27.00 (TDB)         Residual RMS= .2715
+   EC= .2306545322740501   QR= 2.133412766281533   TP= 2458320.7264918056
+   OM= 173.0883296888898   W=  309.9974922427895   IN= 34.83970334384021
+   A= 2.773023116113918    MA= 263.9040941962388   ADIST= 3.412633465946302
+   PER= 4.61784            N= .21343903            ANGMOM= .027873209
+   DAN= 2.28651            DDN= 3.08249            L= 128.7190393
+   B= -25.9536438          MOID= 1.23221004        TP= 2018-Jul-21.2264918056
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= 13.63               RAD= 256.5              ROTPER= 7.813221
+   H= 4.12                 G= .110                 B-V= .635
+                           ALBEDO= .155            STYP= B
+
+ASTEROID comments: 
+1: soln ref.= JPL#74, OCC=0
+2: source=ORB
+*******************************************************************************

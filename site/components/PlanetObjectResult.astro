@@ -16,7 +16,7 @@ const { object, activeObjectId, detail } = Astro.props;
       <span class="planet-object-name">{object.name}</span>
       <span class="planet-object-distance">
         {detail ?? (object.classification === "star" && object.distanceAu === 0 ? "Our star" : <>
-          <span class="planet-object-distance-value">{object.distanceAu}</span>{" "}
+          <span class="planet-object-distance-value">{Number(object.distanceAu.toFixed(3))}</span>{" "}
           <span class="planet-object-distance-unit">AU</span>
         </>)}
       </span>

@@ -25,28 +25,58 @@
     "facts": [
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "108 million km"
+        "label": "Solar semimajor axis",
+        "value": "0.723 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
-        "id": "diameter",
-        "label": "Diameter",
-        "value": "12,104 km"
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "6,051.8 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "225 Earth days"
+        "value": "224.7 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "243 Earth days"
+        "value": "243.02 days · retrograde",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "axial-tilt",
         "label": "Axial tilt",
-        "value": "3°"
+        "value": "177.3°",
+        "source": {
+          "url": "https://solarsystem.nasa.gov/internal_resources/1028/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "moon-count",
@@ -63,12 +93,45 @@
       {
         "id": "surface-temperature",
         "label": "Surface temperature",
-        "value": "467°C"
+        "value": "467 °C"
       },
       {
         "id": "surface-pressure",
         "label": "Surface pressure",
-        "value": "93× Earth"
+        "value": "93 × Earth"
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.867 × 10²⁴ kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "5.243 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Equatorial gravity",
+        "value": "8.87 m/s²",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ]
   },
@@ -79,8 +142,8 @@
       {
         "id": "clouds",
         "label": "Clouds",
-        "description": "Visible cloud deck",
-        "title": "OpenSpace synchronized Venus cloud deck",
+        "description": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
+        "title": "OpenSpace cloud presentation; observational lineage unresolved",
         "thumbnail": "venus-lens-clouds.webp",
         "surface": "venus-clouds.webp",
         "source": {
@@ -90,14 +153,14 @@
         "poles": "venus-poles-clouds.webp",
         "material": "venus-material.webp",
         "shortLabel": "VIS",
-        "qualification": "OpenSpace synchronized Venus cloud deck",
+        "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
         "falseColor": false,
-        "detail": "Visible light"
+        "detail": "Illustration"
       },
       {
         "id": "radar",
         "label": "Radar",
-        "description": "Magellan radar mosaic",
+        "description": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic. Colors represent an archival radar presentation, not visible surface color.",
         "title": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
         "thumbnail": "venus-lens-radar.webp",
         "surface": "venus-radar.webp",
@@ -115,7 +178,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Magellan shaded relief",
+        "description": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color.",
         "title": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
         "thumbnail": "venus-lens-elevation.webp",
         "surface": "venus-elevation.webp",

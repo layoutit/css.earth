@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/kw4a.obj",
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/1999kw4.html",
+      "url": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/1999kw4.table2.gif",
+      "url": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.table2.gif"
+    }
+  ]
+}

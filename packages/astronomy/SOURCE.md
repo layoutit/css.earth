@@ -29,3 +29,11 @@ Independent vector fixtures bound the fit below one meter at the epoch and
 below 300 km at the two sampled dates thirty days either side. These checks
 do not establish long-term perturbed-orbit accuracy. Horizons' TDB epoch is
 approximated as TT, with a difference below two milliseconds.
+
+The local `source/scene-epoch/` closure and `tools/scene-ephemeris.mjs` /
+`tools/acquire-scene-ephemeris.mjs` belong to cssEarth's fixed-date preparation.
+They are explicitly preserved by sync, not presented as copies from the mirrored
+upstream commit. The local manifest hashes the raw NASA/JPL responses; preparation
+and independent world-context tests verify their centers, time conventions and
+actual published state. See that directory's README for the acquisition and
+no-image regeneration commands.

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "earth",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "1.000 AU"
+      }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "columns": [
+        "name",
+        "equatorialRadiusKm",
+        "meanRadiusKm",
+        "mass",
+        "densityGPerCm3",
+        "siderealRotationDays",
+        "siderealOrbitYears",
+        "magnitude",
+        "geometricAlbedo",
+        "equatorialGravityMPerSec2",
+        "escapeVelocityKmPerSec"
+      ],
+      "row": [
+        "Earth",
+        "6378.1366 [D] ±0.0001",
+        "6371.0084 [D] ±0.0001",
+        "5.97217 [H] ±0.00028",
+        "5.5134 [*] ±0.0003",
+        "0.99726968 [B]",
+        "1.0000174 [B]",
+        "-3.86 [B]",
+        "0.367 [B]",
+        "9.80 [*]",
+        "11.19 [*]"
+      ],
+      "massUnitKg": "1e24"
+    }
+  ]
+}

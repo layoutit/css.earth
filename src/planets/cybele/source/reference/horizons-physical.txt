@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2765%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 65 Cybele (A861 EB)           2026-Sep-08 03:29:43
+Rec #:      65 (+COV) Soln.date: 2026-Jun-05_03:06:44   # obs: 6456 (1861-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457873.5 ! 2017-Apr-30.00 (TDB)         Residual RMS= .23893
+   EC= .1113143957469976   QR= 3.046856558821604   TP= 2456917.8469244749
+   OM= 155.6329280269273   W=  102.3483241624334   IN= 3.562760547807362
+   A= 3.428497709696427    MA= 148.3708347827881   ADIST= 3.81013886057125
+   PER= 6.3484             N= .155255959           ANGMOM= .031653805
+   DAN= 3.46859            DDN= 3.30729            L= 258.004428
+   B= 3.4802353            MOID= 2.03447008        TP= 2014-Sep-17.3469244749
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 118.63             ROTPER= 6.0814
+   H= 6.83                 G= .010                 B-V= .690
+                           ALBEDO= .0706           STYP= Xc
+
+ASTEROID comments: 
+1: soln ref.= JPL#122, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf",
+  "diameterKm": 0.415,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 3.697,
+  "poleEclipticJ2000Degrees": [
+    15,
+    -22
+  ],
+  "limitations": "The published model has uneven latitude coverage, including an unseen region near the north pole. Its small depressions and rounded outline are radar-derived geometry; no measured optical surface texture is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/wt24.obj",
+    "vertices": 4000,
+    "faces": 7996,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.182011
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      0.470798,
+      0.425616,
+      0.404051
+    ],
+    "volumeCubicKm": 0.037509349569970804,
+    "volumeEquivalentRadiusKm": 0.2076587846944416,
+    "radialRangeKm": [
+      0.13715754093012897,
+      0.2603054198302448
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 7996,
+    "ambiguous": 0,
+    "maxErrorMeters": 1.7053025658242404e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 7996,
+    "sourceVertices": 4000,
+    "weldedVertices": 4000,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 4,
+    "estimatedErrorMeters": 3.6165013313293457,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 37355470.235884994
+    }
+  }
+}

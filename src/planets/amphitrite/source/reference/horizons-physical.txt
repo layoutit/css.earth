@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2729%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               29 Amphitrite (A854 EB)         2026-Sep-07 20:32:39
+Rec #:      29 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 3549 (1855-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458019.5 ! 2017-Sep-23.00 (TDB)         Residual RMS= .27327
+   EC= .07178411935882137  QR= 2.372732627023811   TP= 2457419.770027319
+   OM= 356.4133157706164   W=  62.72783378275216   IN= 6.085735463194247
+   A= 2.556229295909925    MA= 144.6305761553743   ADIST= 2.739725964796039
+   PER= 4.08703            N= .241159493           ANGMOM= .027432128
+   DAN= 2.46207            DDN= 2.62955            L= 59.0090511
+   B= 5.4071018            MOID= 1.39091003        TP= 2016-Feb-01.2700273190
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 94.7795            ROTPER= 5.3921
+   H= 5.97                 G= .200                 B-V= .838
+                           ALBEDO= .216            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#175, OCC=0
+2: source=ORB
+*******************************************************************************

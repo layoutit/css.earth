@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2748%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 48 Doris (A857 SA)            2026-Sep-07 21:00:13
+Rec #:      48 (+COV) Soln.date: 2026-Jun-05_03:05:11   # obs: 5531 (1860-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457787.5 ! 2017-Feb-03.00 (TDB)         Residual RMS= .21806
+   EC= .07290859712664134  QR= 2.884595052473608   TP= 2458216.2274005283
+   OM= 183.5652144471161   W=  253.4213481750631   IN= 6.547360169048769
+   A= 3.111446232306013    MA= 283.0086625777604   ADIST= 3.338297412138419
+   PER= 5.48847            N= .179581098           ANGMOM= .03026253
+   DAN= 3.16066            DDN= 3.03184            L= 76.8837549
+   B= -6.2740624           MOID= 1.90764999        TP= 2018-Apr-07.7274005283
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 108.2365           ROTPER= 11.89
+   H= 7.1                  G= .150                 B-V= .716
+                           ALBEDO= .065            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#207, OCC=0
+2: source=ORB
+*******************************************************************************

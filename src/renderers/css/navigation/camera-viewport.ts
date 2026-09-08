@@ -1,0 +1,83 @@
+export interface CameraViewportSnapshot {
+  readonly bounds: { readonly x: number; readonly y: number; readonly left: number; readonly top: number; readonly width: number; readonly height: number };
+  readonly focalPixels: number;
+  readonly previewTop: number | null;
+}
+export interface CameraViewport {
+  read(cssPerspective: string): CameraViewportSnapshot;
+  subscribe(listener: () => void): () => void;
+  destroy(): void;
+}
+
+/** The shell's physical cameras share its viewport. Keep measurement and resize
+ * ownership alive across object mounts; scene construction only reads a snapshot.
+ * CSS still resolves authored projection units (including container units). */
+export function createCameraViewport(stage: HTMLElement, previewElement: HTMLElement | null = null): CameraViewport {
+  const view = stage.ownerDocument.defaultView;
+  if (!view) throw new Error('Camera viewport requires a window.');
+  const projections = new Map<string, { probe: HTMLElement; snapshot: CameraViewportSnapshot | null }>();
+  let frame: number | null = null, destroyed = false;
+  const listeners = new Set<() => void>();
+  const measure = () => {
+    const bounds = stage.getBoundingClientRect();
+    const measuredBounds = Object.freeze({ x: bounds.x, y: bounds.y, left: bounds.x, top: bounds.y, width: bounds.width, height: bounds.height });
+    const previewTop = previewElement?.getBoundingClientRect().top ?? null;
+    let changed = false;
+    for (const entry of projections.values()) {
+      const focalPixels = Number.parseFloat(view.getComputedStyle(entry.probe).perspective);
+      if (!(bounds.width > 0 && bounds.height > 0 && focalPixels > 0)) throw new Error('Shared camera viewport has no projection.');
+      const previous = entry.snapshot;
+      if (previous && previous.focalPixels === focalPixels && previous.previewTop === previewTop &&
+          Object.entries(measuredBounds).every(([key, value]) => previous.bounds[key as keyof CameraViewportSnapshot['bounds']] === value)) continue;
+      entry.snapshot = Object.freeze({ bounds: measuredBounds, focalPixels, previewTop });
+      changed = true;
+    }
+    return changed;
+  };
+  const invalidate = () => {
+    // Keep the last published measurement until the layout owner refreshes it.
+    // Sidebar content resizes must not force an incoming scene to measure DOM.
+    if (destroyed || frame !== null || projections.size === 0) return;
+    frame = view.requestAnimationFrame(() => {
+      frame = null;
+      if (destroyed) return;
+      if (measure()) for (const listener of listeners) listener();
+    });
+  };
+  const observer = new view.ResizeObserver(invalidate);
+  observer.observe(stage);
+  if (previewElement) observer.observe(previewElement);
+  view.addEventListener('resize', invalidate, { passive: true });
+  view.addEventListener('scroll', invalidate, { passive: true });
+  return {
+    read(cssPerspective) {
+      if (destroyed) throw new Error('Camera viewport has been destroyed.');
+      let entry = projections.get(cssPerspective);
+      if (!entry) {
+        // Each authored projection is resolved once during preparation. An
+        // incoming FOV must not invalidate the outgoing camera's snapshot.
+        const probe = stage.ownerDocument.createElement('div');
+        probe.style.cssText = 'position:absolute;inset:0;visibility:hidden;pointer-events:none';
+        probe.ariaHidden = 'true';
+        probe.style.perspective = cssPerspective;
+        stage.appendChild(probe);
+        entry = { probe, snapshot: null };
+        projections.set(cssPerspective, entry);
+      }
+      if (!entry.snapshot) measure();
+      return entry.snapshot!;
+    },
+    subscribe(listener) { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    destroy() {
+      if (destroyed) return;
+      destroyed = true;
+      if (frame !== null) view.cancelAnimationFrame(frame);
+      observer.disconnect();
+      view.removeEventListener('resize', invalidate);
+      view.removeEventListener('scroll', invalidate);
+      listeners.clear();
+      for (const { probe } of projections.values()) probe.remove();
+      projections.clear();
+    },
+  };
+}

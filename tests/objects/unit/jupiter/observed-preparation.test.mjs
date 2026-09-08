@@ -15,6 +15,8 @@ test('reproduces every observed/polar asset from pinned sources without prepared
     assert.ok(lens.sourceRange[0]>0&&lens.sourceRange[1]>lens.sourceRange[0]);
     assert.equal(lens.coveragePreparation.runtimeCoverageRepair,false);
     assert.equal(lens.coveragePreparation.structuralDetailMeasurement,false);
-    assert.deepEqual(lens.coveragePreparation.detailedPoles,['south','north']);
+    assert.deepEqual(lens.coveragePreparation.detailedPoles,[]);
+    assert.equal(lens.coveragePreparation.model,'measured-polar-projection-with-neutral-gaps');
+    assert.ok(lens.coveragePreparation.sourceMissingPixels>0);
   }
 });

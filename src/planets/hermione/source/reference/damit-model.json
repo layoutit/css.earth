@@ -1,0 +1,47 @@
+{
+  "modelId": 156,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/156",
+  "fields": {
+    "ID": "156",
+    "Asteroid ID": "(121) Hermione",
+    "Lambda": "3",
+    "Beta": "15",
+    "Period": "5.550877",
+    "YORP": "",
+    "JD0": "2443032",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "200",
+    "Equivalent Diameter Error": "15",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-09-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2017-09-21 14:36:17"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/374/AO.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/375/3D.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/376/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/377/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/378/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/171",
+    "https://damit.cuni.cz/projects/damit/references/view/131"
+  ]
+}

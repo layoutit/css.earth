@@ -1,0 +1,45 @@
+{
+  "modelId": 4394,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4394",
+  "fields": {
+    "ID": "4394",
+    "Asteroid ID": "(3200) Phaethon",
+    "Lambda": "318",
+    "Beta": "-47",
+    "Period": "3.603957",
+    "YORP": "",
+    "JD0": "2447808",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "5.1",
+    "Equivalent Diameter Error": "0.2",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-12-03",
+    "Comment": "",
+    "Created": "2020-02-13 08:54:32",
+    "Modified": "2020-02-13 09:01:31"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/51144/IAUspin",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/51145/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/51146/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/164",
+    "https://damit.cuni.cz/projects/damit/references/view/646"
+  ]
+}

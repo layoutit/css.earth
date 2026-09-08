@@ -12,13 +12,19 @@
     "facts": [
       {
         "id": "distance-from-earth",
-        "label": "Distance from Earth",
+        "label": "Mean distance from Earth",
         "value": "384,400 km"
       },
       {
         "id": "radius",
-        "label": "Radius",
-        "value": "1,737.4 km"
+        "label": "Mean radius",
+        "value": "1,737.4 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
@@ -28,11 +34,17 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "Synchronous"
+        "value": "27.32 days · synchronous",
+        "source": {
+          "url": "https://science.nasa.gov/moon/facts/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-inclination",
-        "label": "Orbital inclination",
+        "label": "Inclination to ecliptic",
         "value": "5.16°"
       },
       {
@@ -42,8 +54,14 @@
       },
       {
         "id": "density",
-        "label": "Density",
-        "value": "3.344 g/cm³"
+        "label": "Mean density",
+        "value": "3.344 ± 0.001 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ],
     "moreFacts": []
@@ -68,7 +86,7 @@
           "id": "surface",
           "label": "Visible color",
           "thumbnailUrl": "/scenes/moon/moon-surface-thumbnail.webp",
-          "description": "LRO visible-colour surface",
+          "description": "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display.",
           "title": "Visible color: NASA LRO/LROC visible-colour global surface mosaic",
           "detail": "Global mosaic"
         },
@@ -76,7 +94,7 @@
           "id": "topography",
           "label": "Elevation",
           "thumbnailUrl": "/scenes/moon/moon-topography-thumbnail.webp",
-          "description": "LOLA elevation",
+          "description": "LOLA elevation relative to a 1,737.4 km reference sphere, shown with color and cartographic shaded relief. This archival map does not share the orbital scene epoch.",
           "legend": {
             "kind": "scale",
             "title": "Relative elevation",
@@ -159,7 +177,7 @@
           "id": "crust",
           "label": "Crust",
           "thumbnailUrl": "/scenes/moon/moon-crustal-thickness-thumbnail.webp",
-          "description": "GRAIL crustal thickness",
+          "description": "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust.",
           "legend": {
             "kind": "scale",
             "title": "Relative crustal thickness",

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mjs';
@@ -43,3 +44,20 @@ test('unsupported motion cannot silently become an unowned native animation', as
   await setCss(css + ' @keyframes spin { from { opacity:0; } to { opacity:1; } }');
   await assert.rejects(preparePresentationBindings(definition, root), /linear transform keyframes/);
 }));
+
+test('repreparation starts from canonical topology and reproduces the final depth transport', async () => {
+  const root = fileURLToPath(new URL('../', import.meta.url));
+  const source = JSON.parse(await readFile(join(root, 'src/planets/deimos/prepared/runtime.json'), 'utf8'));
+  const first = await preparePresentationBindings(source, root);
+  const second = await preparePresentationBindings(first, root);
+  assert.deepEqual(second, first);
+  assert.equal(first.facing.length, first.surfaceHit.triangles.length);
+  assert.ok(first.depthPartitions.groups.length > 1);
+  assert.ok(first.tree.activationGroups.length < 40);
+  // A new local frame owner invalidates the old partition instead of retaining
+  // a cached layout that can no longer follow that source's material state.
+  const changed = structuredClone(first);
+  changed.viewBindings.push({ kind: 'view-property', target: first.surfaceHit.target,
+    property: '--local-material', source: 'billboard-opacity', precision: 6 });
+  assert.equal((await preparePresentationBindings(changed, root)).depthPartitions, undefined);
+});
