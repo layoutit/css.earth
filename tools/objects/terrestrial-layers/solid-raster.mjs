@@ -78,7 +78,7 @@ export async function readObservation(sourceDirectory, entry, validity, width, h
 }
 
 /** Surface composition is source-dependent; the projection/packing is shared. */
-export async function prepareSolidRasters({ sourceDirectory, publicDirectory, outputDirectory, config, source }) {
+export async function prepareSolidRasters({ sourceDirectory, publicDirectory, outputDirectory, config, source, radial }) {
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const { width, height, bandCount, gutter } = config.raster;
   const emit = createRasterEmitter(publicDirectory, config.publicBase), surfaces = [], observations = new Map();
@@ -136,7 +136,15 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
       return {id: input.id, sha256: input.expectedSha256, width: input.width, height: input.height};
     });
-    const raster = await loadScienceSurface(sourceDirectory, lens);
+    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || lens.path !== config.geometry.radialTerrain.path)) {
+      throw new Error('Source-surface science requires the actual rendered source mesh.');
+    }
+    // Reuse the already loaded geometry BVH, especially for large OLA meshes.
+    const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling ? radial.grid : undefined);
+    if (lens.surfaceSampling) {
+      radial.scientificSurfaces ??= new Map();
+      radial.scientificSurfaces.set(lens.id, raster);
+    }
     const { rgb, missing } = paintScienceSurface(raster, lens, width, height);
     const scale = Buffer.alloc(256 * 3);
     for (let x = 0; x < 256; x++) scale.set(colorForValue(lens.minimum + x / 255 * (lens.maximum - lens.minimum), lens), x * 3);
@@ -145,6 +153,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       source: { id: entry.id, sha256: entry.expectedSha256, width: entry.width, height: entry.height },
       ...(additionalSources.length ? {additionalSources} : {}),
       projection: entry.projection, coverage: entry.coverage, scientific: true, legend,
+      ...(lens.surfaceSampling ? { surfaceSampling: { ...lens.surfaceSampling,
+        previewPolicy: 'Radial rays with more than one distinct source intersection are withheld; the triangle atlas samples the source surface in 3D.' } } : {}),
       missingPixels: missing.reduce((sum, value) => sum + value, 0) }));
   }
   for (const recipe of config.raster.observedColors ?? []) {

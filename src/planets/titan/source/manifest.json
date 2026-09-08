@@ -193,8 +193,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 6684,
-      "expectedSha256": "bcc1c3a1bd93a9779b74f04a7edc05d866a1632cd2cca1b3fe5bb97389f8f845",
+      "expectedBytes": 8031,
+      "expectedSha256": "d24bbb16dd98c8baac6f94f865b28dce95547ee882026e93e1f2db4f0a82a77e",
       "purpose": "Authored preparation, shared source licensing or editorial content."
     },
     {
@@ -208,6 +208,13 @@
       "expectedBytes": 8519,
       "expectedSha256": "73e3a95aaad6e2fb7b3c180a57cfeba19378bb5d16788df7ee483dd9603230f8",
       "purpose": "Original detached PDS3 label; attached label is consumed during preparation."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1087,
+      "expectedSha256": "ac7aa2fd6d80d4e2368427a1e035a1f4eb9d107689db48c6f948f456759edce4"
     }
   ]
 }

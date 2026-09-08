@@ -8,6 +8,7 @@ import { packProjectiveSurfaceRaster } from
 
 import {createEllipsoidGeometry} from './ellipsoid-geometry.mjs';
 import {preparePolarAtlas} from './polar-stabilization.mjs';
+import {polarZeroCoverage,resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.mjs';
 
 
 
@@ -56,10 +57,11 @@ async function prepareLens(plan) {
       source.info.channels !== 3) {
     throw new Error(`${plan.label} Ellipsoid lens dimensions changed.`);
   }
-  const complete = plan.coverage?.kind === "illustrative-grayscale-gap"
-    ? await fillGrayscaleCoverage(source, plan.coverage)
-    : source;
-  const source1x = await sharp(complete.data, { raw: complete.info })
+  const measuredOnly = plan.coverage?.kind === 'polar-connected-zero';
+  if (plan.coverage && !measuredOnly) throw new TypeError('Unsupported observed lens coverage.');
+  const observed = measuredOnly ? {...source, missing:polarZeroCoverage(source.data, source.info)} : null;
+  const complete = measuredOnly ? resizeObservedRgb(observed, BODY_2X_WIDTH, BODY_2X_HEIGHT) : source;
+  const source1x = measuredOnly ? resizeObservedRgb(observed, BODY_WIDTH, BODY_HEIGHT) : await sharp(complete.data, { raw: complete.info })
     .resize(BODY_WIDTH, BODY_HEIGHT, { fit: "fill" })
     .raw()
     .toBuffer({ resolveWithObject: true });
@@ -72,7 +74,7 @@ async function prepareLens(plan) {
     writeProjectiveSurface(source1x, surfacePath),
     writeProjectiveSurface(complete, surface2xPath),
   ]);
-  const polar = preparePolarAtlas(complete, POLAR_TILE_SIZE * 2, {
+  const polar = measuredOnly ? prepareMeasuredPolarAtlas(observed, POLAR_TILE_SIZE * 2, {projection:'orthographic', ...shape.polar}) : preparePolarAtlas(complete, POLAR_TILE_SIZE * 2, {
     ...shape.polar,
     boundaryLatitudeDegrees: shape.polar.boundaryLatitudeDegrees,
     overlap: POLAR_OVERLAP,
@@ -119,6 +121,7 @@ async function prepareLens(plan) {
     falseColor: plan.falseColor,
     qualification: plan.qualification,
     coveragePreparation: plan.coveragePreparation,
+    sourceMissingPixels: observed ? observed.missing.reduce((sum,value)=>sum+value,0) : undefined,
     polarPreparation: Object.freeze({
       boundaryLatitudeDegrees: shape.polar.boundaryLatitudeDegrees,
       singularityStabilization: polar.stabilization,
@@ -132,80 +135,6 @@ async function prepareLens(plan) {
       poles2x: digest(assets[3]),
       thumbnail: digest(assets[4]),
     }),
-  });
-}
-
-async function fillGrayscaleCoverage(source, coverageProfile) {
-  const output = Buffer.from(source.data);
-  const { width, height, channels } = source.info;
-  const rowHasData = (row) => {
-    for (let column = 0; column < width; column += 16) {
-      const offset = (row * width + column) * channels;
-      if (output[offset] || output[offset + 1] || output[offset + 2]) return true;
-    }
-    return false;
-  };
-  let first = 0;
-  while (first < height && !rowHasData(first)) first += 1;
-  let last = height - 1;
-  while (last >= 0 && !rowHasData(last)) last -= 1;
-  if (first !== coverageProfile.firstRow || last !== coverageProfile.lastRow) {
-    throw new Error(`Observed grayscale coverage drifted: ${first}-${last}.`);
-  }
-  const fallback = await sharp(resolve(
-    sourceDirectory,
-    coverageProfile.source,
-  ))
-    .resize(width, height, { fit: "fill" })
-    .greyscale()
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-  const observedRange = channelRange(output, channels, 64);
-  const fallbackRange = channelRange(fallback.data, fallback.info.channels, 0);
-  const coverage = Buffer.alloc(width * height);
-  for (let pixel = 0; pixel < width * height; pixel += 1) {
-    coverage[pixel] = pixelHasData(pixel * channels) ? 255 : 0;
-  }
-  const softenedCoverage = await sharp(coverage, {
-    raw: { width, height, channels: 1 },
-  }).blur(12).raw().toBuffer();
-  for (let pixel = 0; pixel < width * height; pixel += 1) {
-    const offset = pixel * channels;
-    const sourceValue = fallback.data[pixel * fallback.info.channels];
-    const normalized = (sourceValue - fallbackRange.mean) /
-      Math.max(fallbackRange.deviation, 1);
-    const fallbackValue = Math.max(64, Math.min(224, Math.round(
-      observedRange.mean + normalized * observedRange.deviation,
-    )));
-    const weight = coverage[pixel] === 0 ? 0 : softenedCoverage[pixel] / 255;
-    for (let channel = 0; channel < channels; channel += 1) {
-      output[offset + channel] = Math.round(
-        output[offset + channel] * weight + fallbackValue * (1 - weight),
-      );
-    }
-  }
-  return Object.freeze({ data: output, info: source.info });
-
-  function pixelHasData(offset) {
-    return output[offset] + output[offset + 1] + output[offset + 2] >= 192;
-  }
-}
-
-function channelRange(data, channels, minimum) {
-  let count = 0;
-  let sum = 0;
-  let squared = 0;
-  for (let offset = 0; offset < data.length; offset += channels) {
-    const value = data[offset];
-    if (value < minimum) continue;
-    count += 1;
-    sum += value;
-    squared += value * value;
-  }
-  const mean = sum / count;
-  return Object.freeze({
-    mean,
-    deviation: Math.sqrt(Math.max(0, squared / count - mean * mean)),
   });
 }
 

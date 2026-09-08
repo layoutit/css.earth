@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "iris",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://observations.lam.fr/astero/3Dshape/7_Iris_mpcd.obj",
+    "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+    "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+    "consumers": [
+      "navigation"
+    ],
+    "expectedBytes": 76835,
+    "expectedSha256": "ad1ca1847b38e45c91e128e5b2e8657be673b9f31040a020d74a1c514610d5c7",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "iris-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 35,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "shape"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

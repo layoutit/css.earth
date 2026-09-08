@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27704%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              704 Interamnia (A910 TC)         2026-Sep-07 20:32:29
+Rec #:     704 (+COV) Soln.date: 2026-Jun-05_03:56:56   # obs: 8225 (1910-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458017.5 ! 2017-Sep-21.00 (TDB)         Residual RMS= .21896
+   EC= .1544907966122377   QR= 2.586047142291063   TP= 2458055.1798834042
+   OM= 280.2915505068219   W=  95.11910176428331   IN= 17.30633244763847
+   A= 3.058567703260193    MA= 353.0571708745686   ADIST= 3.531088264229322
+   PER= 5.34916            N= .184258243           ANGMOM= .029723154
+   DAN= 3.0273             DDN= 2.94497            L= 15.6520118
+   B= 17.2351389           MOID= 1.65848005        TP= 2017-Oct-28.6798834042
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= 5.                  RAD= 153.1565           ROTPER= 8.727
+   H= 6.34                 G= -.020                B-V= .645
+                           ALBEDO= .078            STYP= B
+
+ASTEROID comments: 
+1: soln ref.= JPL#179, OCC=0
+2: source=ORB
+*******************************************************************************

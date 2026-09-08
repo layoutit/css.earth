@@ -3,10 +3,12 @@
 import assert from 'node:assert/strict';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 
 const origin = process.env.ORIGIN ?? 'http://127.0.0.1:4221';
 const output = process.env.OUTPUT ?? 'output/playwright/replacement-flight';
+const buildDirectory = process.env.BUILD_DIR ?? 'dist';
 const pairs = process.env.PAIRS ? JSON.parse(process.env.PAIRS) : [['jupiter', 'europa'], ['pluto', 'charon'], ['saturn', 'daphnis']];
 const dprs = process.env.DPR ? [Number(process.env.DPR)] : [1, 2];
 const start = '/sun/?overview=solar-system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbkXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA';
@@ -24,10 +26,10 @@ try {
     // Match the immutable emitted bank by bytes, independent of Astro's filename hash.
     const expected = await readFile(`src/planets/${replacement}/prepared/object.json`);
     const hash = createHash('sha256').update(expected).digest('hex');
-    const filenames = (await readdir('dist/_astro')).filter(name => name.startsWith('object.') && name.endsWith('.json'));
+    const filenames = (await readdir(resolve(buildDirectory, '_astro'))).filter(name => name.startsWith('object.') && name.endsWith('.json'));
     let bank;
     for (const name of filenames) {
-      const bytes = await readFile(`dist/_astro/${name}`);
+      const bytes = await readFile(resolve(buildDirectory, '_astro', name));
       if (bytes.length === expected.length && createHash('sha256').update(bytes).digest('hex') === hash) { bank = name; break; }
     }
     assert.ok(bank, `The served ${replacement} bank must match preparation`);

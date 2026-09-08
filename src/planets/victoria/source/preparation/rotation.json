@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 165.90774573574978,
+  "declinationDegrees": -23.45190436847821,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 8.660345,
+  "coordinateSystem": "Released MPCD body-fixed Cartesian axes; positive Z is the north pole; east-positive longitude; arbitrary prime-meridian display phase",
+  "source": "Vernazza et al. (2021), Table A.1: ecliptic J2000 lambda 177 deg, beta -27 deg, period 8.660345 h; equatorial J2000 conversion uses obliquity 23.439291111 deg. The unlabeled public parameter file is preserved but is not interpreted as an IAU prime-meridian ephemeris."
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2714%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 14 Irene (A851 KA)            2026-Sep-07 21:00:21
+Rec #:      14 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 3696 (1851-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457774.5 ! 2017-Jan-21.00 (TDB)         Residual RMS= .31784
+   EC= .1665566215357688   QR= 2.155221275319187   TP= 2457905.66740085
+   OM= 86.14590314937736   W=  98.09741208784351   IN= 9.118987948889956
+   A= 2.585924048362552    MA= 328.9110296078697   ADIST= 3.016626821405916
+   PER= 4.15845            N= .237017507           ANGMOM= .027275975
+   DAN= 2.57459            DDN= 2.45656            L= 184.345565
+   B= 9.027308             MOID= 1.17928004        TP= 2017-Jun-01.1674008500
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 76.                ROTPER= 15.028
+   H= 6.55                 G= .150                 B-V= .833
+                           ALBEDO= .159            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#118, OCC=0
+2: source=ORB
+*******************************************************************************

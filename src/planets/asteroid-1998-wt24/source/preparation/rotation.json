@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 22.402450856426658,
+  "declinationDegrees": -14.37333657897828,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 3.697,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL: ecliptic J2000 lambda 15 deg, beta -22 deg, period 3.697 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. The published model has uneven latitude coverage, including an unseen region near the north pole. Its small depressions and rounded outline are radar-derived geometry; no measured optical surface texture is supplied."
+}

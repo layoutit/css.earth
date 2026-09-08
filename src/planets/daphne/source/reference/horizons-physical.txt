@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2741%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 41 Daphne (A856 KA)           2026-Sep-07 20:32:47
+Rec #:      41 (+COV) Soln.date: 2026-Jun-05_03:04:51   # obs: 8160 (1866-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458011.5 ! 2017-Sep-15.00 (TDB)         Residual RMS= .15194
+   EC= .2757744712228835   QR= 1.999174600351372   TP= 2457975.3631067513
+   OM= 178.0901235110595   W=  45.86126416021672   IN= 15.79465787050737
+   A= 2.760430999618389    MA= 7.765859747282798   ADIST= 3.521687398885406
+   PER= 4.58642            N= .214901145           ANGMOM= .02747222
+   DAN= 2.13959            DDN= 3.15675            L= 222.848924
+   B= 11.2645319           MOID= 1.02497005        TP= 2017-Aug-09.8631067513
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 102.7475           ROTPER= 5.988
+   H= 7.58                 G= .100                 B-V= .726
+                           ALBEDO= .059            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#169, OCC=0
+2: source=ORB
+*******************************************************************************

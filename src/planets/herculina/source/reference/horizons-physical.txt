@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27532%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               532 Herculina (A904 HE)         2026-Sep-07 21:00:18
+Rec #:     532 (+COV) Soln.date: 2026-Mar-11_21:55:23   # obs: 5497 (1904-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457760.5 ! 2017-Jan-07.00 (TDB)         Residual RMS= .23886
+   EC= .1756494802683354   QR= 2.286338755867618   TP= 2456986.5491473898
+   OM= 107.5512366065478   W=  76.12931038616139   IN= 16.31251332460267
+   A= 2.773503141129634    MA= 165.1484354806428   ADIST= 3.26066752639165
+   PER= 4.61903            N= .213383621           ANGMOM= .028202698
+   DAN= 2.57932            DDN= 2.80609            L= 183.1225767
+   B= 15.8241478           MOID= 1.35450995        TP= 2014-Nov-25.0491473898
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 83.8955            ROTPER= 9.405
+   H= 5.92                 G= .260                 B-V= .857
+                           ALBEDO= .285            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#139, OCC=0
+2: source=ORB
+*******************************************************************************

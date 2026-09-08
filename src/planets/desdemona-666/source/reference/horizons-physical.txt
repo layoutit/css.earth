@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27666%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               666 Desdemona (A908 OG)         2026-Sep-08 03:34:48
+Rec #:     666 (+COV) Soln.date: 2026-Jun-05_03:54:15   # obs: 9455 (1908-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458132.5 ! 2018-Jan-14.00 (TDB)         Residual RMS= .23064
+   EC= .2381331022594003   QR= 1.97560117392583    TP= 2458012.5897930991
+   OM= 215.4087920133374   W=  174.1157737460873   IN= 7.585806914111539
+   A= 2.593105409599358    MA= 28.30283695181189   ADIST= 3.210609645272886
+   PER= 4.17579            N= .236033593           ANGMOM= .026903869
+   DAN= 3.20533            DDN= 1.97761            L= 29.5757063
+   B= .7754406             MOID= .98015302         TP= 2017-Sep-16.0897930991
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 16.3705            ROTPER= 14.608
+   H= 10.7                 G= .150                 B-V= n.a.
+                           ALBEDO= .095            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#79, OCC=0
+2: source=ORB
+*******************************************************************************

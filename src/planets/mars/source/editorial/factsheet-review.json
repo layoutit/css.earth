@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "mars",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "1.524 AU"
+      }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "columns": [
+        "name",
+        "equatorialRadiusKm",
+        "meanRadiusKm",
+        "mass",
+        "densityGPerCm3",
+        "siderealRotationDays",
+        "siderealOrbitYears",
+        "magnitude",
+        "geometricAlbedo",
+        "equatorialGravityMPerSec2",
+        "escapeVelocityKmPerSec"
+      ],
+      "row": [
+        "Mars",
+        "3396.19 [D] ±0.1",
+        "3389.50 [D] ±0.2",
+        "0.641691 [I] ±0.000030",
+        "3.9340 [*] ±0.0007",
+        "1.02595676 [C]",
+        "1.8808476 [B]",
+        "-1.52 [B]",
+        "0.150 [B]",
+        "3.71 [*]",
+        "5.03 [*]"
+      ],
+      "massUnitKg": "1e24"
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "schema": "csscybele-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "cybele-shape",
+      "path": "shape/model-1843.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/3075/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Cybele model 1843, version 2017-09-21; source authors listed in the pinned model record.",
+      "license": "CC-BY-4.0; DAMIT site license, retained with author and model attribution.",
+      "acquisition": "Restore the original counted triangle table through source/preparation/acquisition.json.",
+      "redistribution": "CC-BY-4.0 with author/model attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 156500
+      },
+      "coverage": "Calibrated nonconvex ground-based reconstruction. The grid is an explicit no-imagery treatment; no small-scale surface detail is inferred.",
+      "expectedBytes": 32486,
+      "expectedSha256": "e9648065de0673532a759e5148dbead9e4bbba55edaf1231e21b2d911e55e35f"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/3075/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Cybele model 1843, version 2017-09-21; source authors listed in the pinned model record.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 88014,
+      "expectedSha256": "64ff49c585d7378e4e6fc52be152ecc3ee3ee155125cd4a8cfd6d14d6764b786",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "cybele-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 8526,
+      "expectedSha256": "e02fb1c989a2201f451a387efd1965efff18dbdbdbb34ee42d7c3d7782cf3cce"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 752,
+      "expectedSha256": "0a4a96fd97a69acf034ba770b6da73df39e02e8dd1dfe35fceaa009ff2e18c46"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 1285,
+      "expectedSha256": "0250e80ec510cfa7f510e157cf1d9e73f75649ddfc0ba70ab8f07a167d9b2d94"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 709,
+      "expectedSha256": "21e539ad7cc21d58863e4af2e8df5e364b1b271457d5d01773432d0fdec6413d"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 3008,
+      "expectedSha256": "8d94f25deda36889e0296e82b5abd8bfb881920b49a930a45cf79217888d2b42"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 3699,
+      "expectedSha256": "09f218acf80ec316379fda6b3c4db754c080240273bf164ab32de2ce6e1d5d79"
+    },
+    {
+      "path": "reference/IAUspin.txt",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 36,
+      "expectedSha256": "5e13f684214246a82b72e2747f6b2f31bbdcf0641f2fd292b77120f6cd7060a6"
+    },
+    {
+      "path": "reference/damit-documentation.html",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 40661,
+      "expectedSha256": "db492ddc44b5d537ace468dd7937dd4f430d9d54a7ebd9fcd3ff615053c99237"
+    },
+    {
+      "path": "reference/damit-model.html",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 87531,
+      "expectedSha256": "75936b73a1be2c728574d6bd64f4cb7b7e6ed0a42e400cb0ba2421de1d510f8b"
+    },
+    {
+      "path": "reference/damit-model.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 1362,
+      "expectedSha256": "e9b893ef809a23f6338dfa89260e1e4b37ef4a2b88ee19c6cd39baf9f2e96158"
+    },
+    {
+      "path": "reference/damit-reference-171.html",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 13491,
+      "expectedSha256": "06c35fb28ec2ff8977e9f1f85e3a17bb41aaa85f103675f18ba80f31c595c2cb"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 7353,
+      "expectedSha256": "d5de06ffb6f98488478f2e173855a88d21118285bd3ca774a028709f346ca372"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 1390,
+      "expectedSha256": "ece0f6f29b1060577ae3081f16c3e6488854f56d7bb37afc5a92c1279d2c4521"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 6643,
+      "expectedSha256": "63f6a710274be1033c8ab607b95307d72fd4fa86a259912236bb6d720d5d8ed2"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 1796,
+      "expectedSha256": "19a309ddd5a56dfb328432dd8bab873cae721b07df793e981d2a7e498891e5f7"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "expectedBytes": 144975,
+      "expectedSha256": "3a474b7f2e6326bb2852482a6681250ec01a5e718b5e8a51624defda1da41baa"
+    }
+  ]
+}

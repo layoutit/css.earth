@@ -1,0 +1,70 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1849",
+  "modelId": 1849,
+  "modelVersion": "2017-09-21",
+  "diameterKm": 39,
+  "diameterInterpretation": "DAMIT calibrated model equivalent diameter, rounded in the model record; original coordinates are not rescaled.",
+  "periodHours": 10.31304,
+  "poleEclipticJ2000Degrees": [
+    195,
+    -79
+  ],
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/873/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "units": "km",
+    "format": "Counted XYZ vertices and one-based triangle indices; identical layout to the existing PDS plate reader, not a PDS dataset.",
+    "firstVertexKm": [
+      -0.011932,
+      2.541107,
+      16.286686
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      44.163,
+      42.7363,
+      33.149300000000004
+    ],
+    "volumeCubicKm": 31105.990054071677,
+    "volumeEquivalentRadiusKm": 19.50975458951402,
+    "radialRangeKm": [
+      14.730451006899587,
+      24.585173148157185
+    ]
+  },
+  "radialAmbiguity": {
+    "maxMeters": 7.275957614183426e-12,
+    "minMeters": -1.0913936421275139e-11,
+    "aboveOneMeter": 0,
+    "total": 800
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 31105990054071.676
+    }
+  }
+}

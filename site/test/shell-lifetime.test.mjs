@@ -11,6 +11,7 @@ class Element extends EventTarget {
   querySelector(selector) { return this.selectors.get(selector) ?? null; }
   querySelectorAll(selector) { return this.selectors.get(selector) ?? []; }
   setAttribute(key, value) { this.attributes.set(key, value); }
+  getAttribute(key) { return this.attributes.get(key) ?? null; }
   removeAttribute(key) { this.attributes.delete(key); }
   addEventListener(type, listener, options) {
     super.addEventListener(type, listener, options);
@@ -18,7 +19,7 @@ class Element extends EventTarget {
     options?.signal?.addEventListener("abort", () => this.listeners.delete(listener), { once: true });
   }
 }
-function fixture() {
+function fixture(options = {}) {
   const selectors = new Map();
   const elements = [];
   for (const selector of [".planet-drawer-content", ".planet-sidebar", ".planet-sidebar-toggle",
@@ -26,7 +27,7 @@ function fixture() {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting"]) {
+    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-orbits-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -52,12 +53,34 @@ function fixture() {
   windowTarget.localStorage = { getItem() { return null; } };
   const changes = [];
   return { documentTarget, windowTarget, selectors, elements, frames, row, explanation, changes,
-    mount: () => mountPlanetShell({ objectId: "fixture", documentTarget, windowTarget, onMotionChange: (value) => changes.push(value) }) };
+    mount: () => mountPlanetShell({ objectId: "fixture", documentTarget, windowTarget, onMotionChange: (value) => changes.push(value), ...options }) };
 }
+
+test('Asteroids Orbits starts off and retains its independent preference across body navigation', () => {
+  const changes = [], f = fixture({ onAsteroidOrbitsChange: value => changes.push(value) }), shell = f.mount();
+  const toggle = f.selectors.get('.planet-asteroid-orbits-setting');
+  assert.equal(toggle.checked, false);
+  assert.equal(f.documentTarget.body.dataset.asteroidOrbits, 'off');
+  for (const enabled of [true, false]) {
+    toggle.checked = enabled; toggle.dispatchEvent(new Event('change'));
+    for (const id of ['itokawa', 'sun', 'saturn']) {
+      shell.setObject({ id, name: id, apply() {} });
+      assert.equal(toggle.checked, enabled);
+      assert.equal(f.documentTarget.body.dataset.asteroidOrbits, enabled ? 'on' : 'off');
+      assert.equal(f.selectors.get('.planet-heliosphere-setting').checked, false);
+    }
+  }
+  assert.deepEqual(changes, [true, false]);
+  shell.destroy();
+  toggle.dispatchEvent(new Event('change'));
+  assert.deepEqual(changes, [true, false]);
+  assert.ok(f.elements.every(element => element.listeners.size === 0));
+});
 
 test("shell with no optional controls keeps Motion/high contrast and accessible blocked intent", () => {
   const f = fixture(), shell = f.mount();
   const motion = f.selectors.get(".planet-motion-setting");
+  motion.setAttribute('aria-describedby', 'fixture-motion-description');
   const contrast = f.selectors.get(".planet-sky-contrast-setting");
   assert.equal(contrast.checked, false, 'High contrast starts off');
   assert.equal(f.selectors.get('.planet-heliosphere-setting').checked, false, 'Heliosphere starts off');
@@ -65,11 +88,11 @@ test("shell with no optional controls keeps Motion/high contrast and accessible 
   shell.setPlaybackState({ motionRequested: true, reason: "reduced-motion" });
   assert.equal(motion.checked, true);
   assert.equal(f.explanation.hidden, false);
-  assert.equal(motion.attributes.get("aria-describedby"), f.explanation.id);
+  assert.equal(motion.attributes.get("aria-describedby"), `fixture-motion-description ${f.explanation.id}`);
   assert.deepEqual(f.changes, [], "Rendering policy must not dispatch another intent event");
   shell.setPlaybackState({ motionRequested: true, reason: "allowed" });
   assert.equal(f.explanation.hidden, true);
-  assert.equal(motion.attributes.has("aria-describedby"), false);
+  assert.equal(motion.attributes.get("aria-describedby"), 'fixture-motion-description');
   motion.checked = false; motion.dispatchEvent(new Event("change"));
   assert.deepEqual(f.changes, [false]);
   contrast.checked = true; contrast.dispatchEvent(new Event("change"));

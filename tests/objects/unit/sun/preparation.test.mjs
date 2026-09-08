@@ -21,8 +21,33 @@ test("binds the exact Sun source and runtime closures", async () => {
   assert.deepEqual(await verifySunSourceManifest(), {
     inputCount: 38,
     generatedIntermediateCount: 0,
-    documentCount: 8,
+    documentCount: 9,
   });
+  const [manifest, review] = await Promise.all([
+    readFile(new URL("../../../../src/planets/sun/source/manifest.json", import.meta.url), "utf8").then(JSON.parse),
+    readFile(new URL("../../../../src/planets/sun/source/editorial/factsheet-review.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
+  assert.ok(manifest.documents.some(({ path }) => path === "editorial/factsheet-review.json"));
+  assert.equal(review.schema, "cssearth-factsheet-source-review@1");
+  assert.equal(review.objectId, "sun");
+  const factsUrl = "https://science.nasa.gov/sun/facts/";
+  const cyclesUrl = "https://science.nasa.gov/heliophysics/focus-areas/solar-science/";
+  assert.equal(review.references.find(({ url }) => url === factsUrl)?.values["rotation-period"], "About 25 days");
+  const cycles = review.references.find(({ url }) => url === cyclesUrl);
+  assert.equal(cycles?.activityCycleYears, 11);
+  assert.equal(cycles?.magneticCycleYears, 22);
+  const facts = [...PREPARED_SUN_PANEL.facts, ...PREPARED_SUN_PANEL.moreFacts];
+  for (const [id, label, value, url] of [
+    ["rotation-period", "Equatorial rotation", "About 25 days", factsUrl],
+    ["activity-cycle", "Activity cycle", "About 11 years", cyclesUrl],
+    ["magnetic-cycle", "Magnetic cycle", "About 22 years", cyclesUrl],
+  ]) {
+    const fact = facts.find((entry) => entry.id === id);
+    assert.equal(fact?.label, label);
+    assert.equal(fact?.value, value);
+    assert.equal(fact?.source?.url, url);
+    assert.equal(fact?.source?.path, "source/editorial/factsheet-review.json");
+  }
   const runtime = JSON.parse(await readFile(
     new URL("../../../../src/planets/sun/runtime-assets.json", import.meta.url),
     "utf8",

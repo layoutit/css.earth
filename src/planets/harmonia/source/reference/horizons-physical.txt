@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2740%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                40 Harmonia (A856 FA)          2026-Sep-08 03:34:46
+Rec #:      40 (+COV) Soln.date: 2026-Jun-05_03:04:37  # obs: 11061 (1860-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457725.5 ! 2016-Dec-03.00 (TDB)         Residual RMS= .3063
+   EC= .04656476721376963  QR= 2.161906844676575   TP= 2458227.858070496
+   OM= 94.19778229714584   W=  269.6415958594536   IN= 4.256830498673619
+   A= 2.26749208581145     MA= 214.9897211429624   ADIST= 2.373077326946325
+   PER= 3.4145             N= .2886592             ANGMOM= .025875156
+   DAN= 2.26323            DDN= 2.26192            L= 3.8383867
+   B= -4.2567471           MOID= 1.16232002        TP= 2018-Apr-19.3580704960
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 55.6255            ROTPER= 8.91
+   H= 6.57                 G= .150                 B-V= .854
+                           ALBEDO= .220            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#154, OCC=0
+2: source=ORB
+*******************************************************************************

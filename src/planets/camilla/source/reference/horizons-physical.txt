@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27107%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                107 Camilla (A868 WA)          2026-Sep-07 21:00:10
+Rec #:     107 (+COV) Soln.date: 2026-Jun-05_03:09:57   # obs: 6755 (1868-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458158.5 ! 2018-Feb-09.00 (TDB)         Residual RMS= .19422
+   EC= .06561377007303566  QR= 3.262024258261425   TP= 2458823.3467258574
+   OM= 172.6102139793551   W=  306.7907731556056   IN= 10.00150438072522
+   A= 3.491087682784451    MA= 259.5420126137547   ADIST= 3.720151107307477
+   PER= 6.52303            N= .151099469           ANGMOM= .032071919
+   DAN= 3.34463            DDN= 3.61824            L= 119.8226935
+   B= -7.9947869           MOID= 2.28992009        TP= 2019-Dec-05.8467258574
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= .7475               RAD= 105.185            ROTPER= 4.844
+   H= 7.09                 G= .080                 B-V= .705
+                           ALBEDO= .059            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#149, OCC=0
+2: source=ORB
+*******************************************************************************

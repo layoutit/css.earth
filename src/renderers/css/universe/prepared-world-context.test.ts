@@ -120,6 +120,32 @@ test('camera viewport snapshots drive clipping and resize without reading host l
   layer.destroy();
 });
 
+test('hidden orbit selection leaves other orbits intact and retains the same body nodes', () => {
+  const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
+  const target = find(root, 'contextOrbit', 'mercury'), other = find(root, 'contextOrbit', 'venus');
+  const visibleTarget = target.style.opacity, visibleOther = other.style.opacity;
+  expect(visibleTarget).not.toBe('calc(0 * var(--context-line-opacity, 1))');
+  layer.setHiddenOrbits(['mercury']);
+  root.ownerDocument.defaultView.advance(200);
+  expect(target.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(target.style.getPropertyValue('--context-orbit-pointer-events')).toBe('none');
+  expect(target.dataset.objectNavigate).toBeUndefined();
+  expect(other.style.opacity).toBe(visibleOther);
+  expect(find(root, 'contextLabel', 'mercury').style.visibility).toBe('');
+  expect(find(root, 'contextIndicator', 'mercury').style.visibility).toBe('');
+  expect(all(root)).toEqual(nodes);
+  layer.setNavigationIndicatorsVisible(false);
+  layer.setHiddenOrbits([]);
+  expect(target.style.opacity).toBe('0');
+  expect(target.dataset.objectNavigate).toBeUndefined();
+  layer.setNavigationIndicatorsVisible(true);
+  expect(target.style.opacity).toBe(visibleTarget);
+  expect(target.dataset.objectNavigate).toBe('mercury');
+  expect(other.style.opacity).toBe(visibleOther);
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   expect(parsePreparedWorldContext(source).bodies.map(body => body.id).sort())

@@ -332,6 +332,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       orbitPick: null as ScreenPickTarget | null,
       indicatorPick: null as ScreenPickTarget | null,
       orbitAppearance: { width: 1, opacity: 1, markerOpacity: 1 },
+      orbitHidden: false,
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, previousCount: 0,
       fade: { element: label, target: 0, hideTimer: null } as LabelFadeState };
@@ -422,6 +423,16 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       overview = enabled;
       if (latest) this.publish(latest.world, latest.viewport);
     },
+    setHiddenOrbits(ids: readonly string[]) {
+      if (destroyed) return;
+      const hidden = new Set(ids);
+      let changed = false;
+      for (const entry of bodies) {
+        const next = hidden.has(entry.body.id);
+        if (entry.orbitHidden !== next) { entry.orbitHidden = next; changed = true; }
+      }
+      if (changed && latest) this.publish(latest.world, latest.viewport);
+    },
     inspect() {
       return Object.freeze(bodies.map(({ body, marker, indicator, label, pieces }) => Object.freeze({
         id: body.id, marker, indicator, label, orbit: Object.freeze([...pieces]),
@@ -504,15 +515,15 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const proxyOpacity = 1 - bodyLod.markerOpacity * (1 - appearance.markerOpacity);
         const markerOpacity = (isSelected ? lod.billboardOpacity : 1) *
           (isAnchor ? 1 : opacity * (isSelected ? 1 : proxyOpacity));
-        const orbitVisibility = appearance.opacity * orbitOpacity * opacity;
+        const orbitVisibility = entry.orbitHidden ? 0 : appearance.opacity * orbitOpacity * opacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         const indicatorOpacity = isAnchor && overview ? 1 :
           bodyLod.markerOpacity * (isAnchor ? 1 : entry.closedOrbit
-            ? orbitVisibility : opacity * (isSelected ? 1 : appearance.markerOpacity));
+            ? orbitVisibility : opacity * (isSelected || entry.orbitHidden ? 1 : appearance.markerOpacity));
         const hovered = entry.group.dataset.objectHovered === 'true' || label.dataset.objectHovered === 'true' || marker.dataset.objectHovered === 'true' || indicator.dataset.objectHovered === 'true' || host.ownerDocument.activeElement === label || host.ownerDocument.activeElement === indicator;
         const primary = entry.parent === null || entry.parent.id === plan.focus.id;
         const priority = (isAnchor ? 4e6 : 0) + (hovered ? 2e6 : 0) + (isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
-        if (navigationIndicatorsVisible && annotationVisible && indicatorOpacity > 0) {
+        if (navigationIndicatorsVisible && annotationVisible && indicatorOpacity > 0 && !entry.orbitHidden) {
           const radius = BODY_INDICATOR_DIAMETER / 2, padding = entry.indicatorShown ? 0 : 2;
           indicators.add({ owner: 0, id: body.id, priority: priority + (entry.indicatorShown ? 100 : 0),
             anchor: [x, y], widthPx: BODY_INDICATOR_DIAMETER + padding * 2,
@@ -536,7 +547,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const { entry, x, y, indicatorOpacity, segments } = projected;
         if (!navigationIndicatorsVisible) continue;
         entry.indicatorShown = indicators.accepted(0, entry.body.id);
-        const crowded = projected.annotationVisible && indicatorOpacity > 0 && !entry.indicatorShown;
+        const crowded = projected.annotationVisible && indicatorOpacity > 0 && !entry.indicatorShown && !entry.orbitHidden;
         if (crowded) {
           projected.markerOpacity = 0;
           if (entry.closedOrbit) projected.orbitVisibility = 0;
@@ -554,10 +565,12 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const { body, labelSize: size } = entry;
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
-        if (!annotationVisible || markerOpacity <= 0.5 || size.width === 0 ||
+        const labelOpacity = entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
+        if (!annotationVisible || labelOpacity <= 0.5 || size.width === 0 ||
             (!resolvedDisc && body.id !== selectedId &&
               ((satellite && parentDiameter < plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels) ||
-               (entry.orbit && orbitVisibility <= 0.5))) || (indicatorOpacity > 0 && !entry.indicatorShown)) continue;
+               (entry.orbit && !entry.orbitHidden && orbitVisibility <= 0.5))) ||
+            (!entry.orbitHidden && indicatorOpacity > 0 && !entry.indicatorShown)) continue;
         const gap = Math.max(5, diameter / 2, entry.indicatorShown ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
@@ -574,7 +587,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           const [lx, ly] = positions[index];
           return withinViewport(index) &&
             !projectedBodies.some(other => {
-              if (other.entry === entry || !other.entry.indicatorShown || other.indicatorOpacity <= 0.1) return false;
+              if (other.entry === entry || other.entry.orbitHidden || !other.entry.indicatorShown || other.indicatorOpacity <= 0.1) return false;
               const nearestX = Math.max(lx, Math.min(lx + size.width, other.x));
               const nearestY = Math.max(ly, Math.min(ly + size.height, other.y));
               return Math.hypot(nearestX - other.x, nearestY - other.y) < BODY_INDICATOR_DIAMETER / 2 + 4;
@@ -613,10 +626,12 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           // through that empty part of its projected rectangle.
           pickTargets.push({ element: marker, rank, shape: { kind: 'circle', x, y, radius } });
         }
-        indicator.style.visibility = entry.indicatorShown ? '' : 'hidden';
+        entry.labelShown = labels.accepted(0, entry.body.id);
+        const indicatorShown = entry.indicatorShown || (entry.orbitHidden && entry.labelShown);
+        indicator.style.visibility = indicatorShown ? '' : 'hidden';
         indicator.style.setProperty('--context-line-width', `${lineWidth}px`);
-        entry.indicatorNavigation.update(entry.indicatorShown && indicatorOpacity > 0.1 ? body.id : null, body.name);
-        entry.indicatorPick = entry.indicatorShown && indicatorOpacity > .1 ? { element: indicator, rank: rank + 2,
+        entry.indicatorNavigation.update(indicatorShown && indicatorOpacity > 0.1 ? body.id : null, body.name);
+        entry.indicatorPick = indicatorShown && indicatorOpacity > .1 ? { element: indicator, rank: rank + 2,
           shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } } : null;
         if (entry.indicatorPick) pickTargets.push(entry.indicatorPick);
         if (annotationVisible) {
@@ -642,8 +657,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             shape: { kind: 'segments', segments, halfWidth: lineWidth / 2 + 7 } } : null;
           if (entry.orbitPick) pickTargets.push(entry.orbitPick);
         }
-        entry.labelShown = labels.accepted(0, entry.body.id);
-        fade(entry.fade, entry.labelShown ? markerOpacity : 0, !inFrame || !annotationVisible);
+        const labelOpacity = entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
+        fade(entry.fade, entry.labelShown ? labelOpacity : 0, !inFrame || !annotationVisible);
         entry.labelNavigation.update(entry.labelShown ? body.id : null, body.name);
         if (entry.labelShown && labelPosition) {
           label.style.transform = `translate(${labelPosition[0]}px,${labelPosition[1]}px)`;

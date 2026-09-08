@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273200%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               3200 Phaethon (1983 TB)         2026-Sep-08 03:29:48
+Rec #:    3200 (+COV) Soln.date: 2026-Jun-25_06:18:30   # obs: 8544 (1983-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457597.5 ! 2016-Jul-28.00 (TDB)         Residual RMS= .1277
+   EC= .8899020560832641   QR= .1399569574003049   TP= 2457620.3178348858
+   OM= 265.2511518563054   W=  322.153931292445    IN= 22.24577916900697
+   A= 1.271204097200494    MA= 344.3088208415825   ADIST= 2.402451237000684
+   PER= 1.43328            N= .6876716939999999    ANGMOM= .008847047
+   DAN= .15534             DDN= .88976             L= 229.5298366
+   B= -13.4310514          MOID= .0199191          TP= 2016-Aug-19.8178348858
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 3.125              ROTPER= 3.604
+   H= 14.38                G= .150                 B-V= n.a.
+                           ALBEDO= .1066           STYP= B
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -6.139940182948E-15 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  0.       R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#1003, PHA  OCC=0       radar( 8 delay, 0 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************

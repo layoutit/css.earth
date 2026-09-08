@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:gbo.ast-apophis.jpl.radar.shape_model:data:apophis_v233s7_spin_state_csv</logical_identifier> 
+    <version_id>1.0</version_id>
+    <title>(99942) Apophis pole orientation and rotation period</title>
+    <information_model_version>1.23.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2012-12-21Z</start_date_time>
+      <stop_date_time>2013-03-16Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>No Specific Investigation</name>
+      <type>Individual Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+      <Observing_System>
+        <name>Monostatic Arecibo Radar</name>
+        <Observing_System_Component>
+          <name>Arecibo Observatory</name>
+          <type>Host</type>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+            <reference_type>is_facility</reference_type>
+          </Internal_Reference>
+        </Observing_System_Component>
+        <Observing_System_Component>
+          <name>305-m fixed spherical reflecting antenna</name>
+          <type>Telescope</type>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+            <reference_type>is_telescope</reference_type>
+          </Internal_Reference>
+        </Observing_System_Component>
+        <Observing_System_Component>
+          <name>Arecibo Planetary Radar Transmitter</name>
+          <type>Instrument</type>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.trans_s</lid_reference>
+            <reference_type>is_instrument</reference_type>
+          </Internal_Reference>
+        </Observing_System_Component>
+        <Observing_System_Component>
+          <name>Arecibo 2380 MHz Radar Receiver</name>
+          <type>Instrument</type>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.recv_s</lid_reference>
+            <reference_type>is_instrument</reference_type>
+          </Internal_Reference>
+        </Observing_System_Component>
+      </Observing_System>
+      <Observing_System>
+        <name>Goldstone Solar System Radar</name>
+        <Observing_System_Component>
+          <name>Goldstone Deep Space Communications Complex</name>
+          <type>Host</type>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:facility:observatory.goldstone</lid_reference>
+            <reference_type>is_facility</reference_type>
+          </Internal_Reference>
+        </Observing_System_Component>
+        <Observing_System_Component>
+          <name>DSS-14 70-m Radio Telescope</name>
+          <type>Telescope</type>
+          <description>Transmit Station</description>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:telescope:goldstone.dss14_70m</lid_reference>
+            <reference_type>is_telescope</reference_type>
+          </Internal_Reference>
+        </Observing_System_Component>
+        <Observing_System_Component>
+          <name>DSS-14 X-band Goldstone Solar System Radar Transmitter</name>
+          <type>Instrument</type>
+          <description>2-250kW klystrons</description>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:instrument:goldstone.dss14_70m.trans_x</lid_reference>
+            <reference_type>is_instrument</reference_type>
+          </Internal_Reference>
+        </Observing_System_Component>  
+        <Observing_System_Component>
+          <name>DSS-14 X-band Goldstone Solar System Radar Receiver</name>
+          <type>Instrument</type>
+          <description>GSSR X-band HEMT LNA</description>
+          <Internal_Reference>
+            <lid_reference>urn:nasa:pds:context:instrument:goldstone.dss14_70m.recv_x</lid_reference>
+            <reference_type>is_instrument</reference_type>
+          </Internal_Reference>
+        </Observing_System_Component>
+      </Observing_System>        
+      <Target_Identification>
+        <name>(99942) Apophis</name>
+        <type>Asteroid</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:target:asteroid.99942_apophis</lid_reference>
+          <reference_type>data_to_target</reference_type>
+        </Internal_Reference>
+      </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <doi>10.1016/j.icarus.2017.08.032</doi>
+      <reference_text>Brozovic, M., Benner, L., McMichael, J., Giorgini, J., Pravec, P., Scheirich, P., Magri, M., Busch, M., Jao, J., Lee. C., Snedecker, L., Silva, M., Slade, M., Semenov, B., Nolan, M., Taylor, P., Howell, E., Lawrence, K., Icarus 300, 115-128, 2018, doi:10.1016/j.icarus.2017.08.032.</reference_text>
+      <description>This data set contains a preliminary three-dimensional shape model and rotation state of near-Earth asteroid (99942) Apophis based on ground-based radar images as reported by Brozovic et al. (2018).  The rotation state is the same as Model R in the Supplementary Table 1 in Brozovic et al. 2018.  The spin state is listed in the Pravec et al. 2014 notation for non-principal axis rotation. </description>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>apophis_v233s7_spin_state.csv</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2025-05-28</creation_date_time>
+    </File>
+    <Table_Delimited>
+      <local_identifier>TABLE</local_identifier>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+      <records>1</records>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <field_delimiter>Comma</field_delimiter>
+      <Record_Delimited>
+        <fields>20</fields>
+        <groups>0</groups>
+        <Field_Delimited>
+          <name>Asteroid</name>
+          <data_type>UTF8_String</data_type>
+          <description>Asteroid number</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Pole_longitude</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Ecliptic Longitude of the pole.</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Longitude_error</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Uncertainty of the longitude</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Pole_latitude</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Ecliptic Latitude of the pole</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Latitude_error</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Uncertainty of the latitude</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Rotational_period1, P(phi)</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>hours</unit>
+          <description>Period of the asteroid's Euler angle, P(phi) or P1. The period of the precession of the short axis around the angular momentum vector.  The Samarasinha convention is used (Samarasinha and A'Hearn, 1991).</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Rotational_period1_error</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>hours</unit>
+          <description>Uncertainty of the rotational period, P(phi) or P1</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Rotational_period2, P(psi)</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>hours</unit>
+          <description>Period of the asteroid's Euler angle, P(psi) or P2. The period of rotation of the body around short principal axis. The units of P2 is hours.  Within the Supplementary Table 1 in Brozovic et al. 2018 the units are stated as days which is incorrect. The Samarasinha convention is used (Samarasinha and A'Hearn, 1991).</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Rotational_period2_error</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>hours</unit>
+          <description>Uncertainty of the rotational period, P(psi) or P2</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Euler_angle_of_precession_at_t0_year</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Euler angle of precession, phi(0), at the zero-epoch date and time</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Euler_angle_of_nutation_at_t0_year</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Euler angle of nutation, theta(0), at the zero-epoch date and time</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Euler_angle_of_rotation_at_t0_year</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>degrees</unit>
+          <description>Euler angle of rotation, psi(0), at the zero-epoch date and time</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Moment of inertia ratio</name>
+          <data_type>ASCII_Real</data_type>
+          <description>Moment of inertia ratio, Il/Is, for the longest and short axes of the body's ellipsoid of inertia</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Moment of inertia ratio</name>
+          <data_type>ASCII_Real</data_type>
+          <description>Moment of inertia ratio, Ii/Is, for the intermediate and short axes of the body's ellipsoid of inertia</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>year</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>year</unit>
+          <description>Zero-epoch year.  The Zero-epoch refers to the specific point in time at which an initial condition of the targets's spin state or orientation is met. Within the Supplementary document, the zero-epoch time is incorrect and should read 04:14:00.</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>month</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>month</unit>
+          <description>Zero-epoch month</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>day</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>day</unit>
+          <description>Zero-epoch day</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>hours</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>hours</unit>
+          <description>Zero-epoch hour</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>minutes</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>minutes</unit>
+          <description>Zero-epoch minute</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>seconds</name>
+          <data_type>ASCII_Integer</data_type>
+          <unit>seconds</unit>
+          <description>Zero-epoch second</description>
+        </Field_Delimited>
+      </Record_Delimited>
+    </Table_Delimited>
+  </File_Area_Observational>
+</Product_Observational>

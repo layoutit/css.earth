@@ -1,0 +1,83 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "donaldjohanson",
+  "displayName": "Donaldjohanson",
+  "publicBase": "/scenes/donaldjohanson/",
+  "distanceAu": 2.3839407716914627,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 2.405325,
+    "camera": {
+      "initialScenePitchDegrees": 46.741573033707866,
+      "defaultControlYawDegrees": 240,
+      "framingScale": 0.8
+    },
+    "mapUrl": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
+    "polesUrl": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "compression": "gzip",
+        "expectedVertices": 274000,
+        "expectedFaces": 547996
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 56,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Pinned JPL Horizons elements and a fixed illustrative source-model frame; no tumbling attitude propagation"
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      170,
+      170,
+      170
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

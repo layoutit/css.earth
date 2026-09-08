@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "neptune",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "30.070 AU"
+      }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "columns": [
+        "name",
+        "equatorialRadiusKm",
+        "meanRadiusKm",
+        "mass",
+        "densityGPerCm3",
+        "siderealRotationDays",
+        "siderealOrbitYears",
+        "magnitude",
+        "geometricAlbedo",
+        "equatorialGravityMPerSec2",
+        "escapeVelocityKmPerSec"
+      ],
+      "row": [
+        "Neptune",
+        "24764 [D] ±15",
+        "24622 [D] ±19",
+        "102.4092 [M] ±0.0048",
+        "1.638 [*] ±0.004",
+        "0.67125 [C]",
+        "164.79132 [B]",
+        "-6.87 [B]",
+        "0.41 [B]",
+        "11.15 [*]",
+        "23.56 [*]"
+      ],
+      "massUnitKg": "1e24"
+    },
+    {
+      "url": "https://science.nasa.gov/neptune/moons/",
+      "values": {
+        "moon-count": "16 · Sep 2026"
+      }
+    }
+  ]
+}

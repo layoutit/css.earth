@@ -25,23 +25,47 @@
     "facts": [
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "4.5 billion km"
+        "label": "Solar semimajor axis",
+        "value": "30.070 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
-        "id": "diameter",
-        "label": "Diameter",
-        "value": "49,528 km"
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "24,622 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "165 Earth years"
+        "value": "164.79 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "16 hours"
+        "value": "16.11 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "axial-tilt",
@@ -50,8 +74,14 @@
       },
       {
         "id": "moon-count",
-        "label": "Moons",
-        "value": "16"
+        "label": "Known moons",
+        "value": "16 · Sep 2026",
+        "source": {
+          "url": "https://science.nasa.gov/neptune/moons/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "ring-system",
@@ -62,8 +92,41 @@
     "moreFacts": [
       {
         "id": "wind-speed",
-        "label": "Wind",
-        "value": "2,000 km/h"
+        "label": "Cloud-top winds",
+        "value": "Over 2,000 km/h"
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.024 × 10²⁶ kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.638 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Equatorial gravity",
+        "value": "11.15 m/s²",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ]
   },
@@ -74,8 +137,8 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "True color + Hubble detail",
-        "title": "Visible color",
+        "description": "Color-adjusted Hubble OPAL composite from 2025, with approximate visible-color calibration. North of about 30° N, missing observations are continued from the boundary and faded to a uniform pole; that cap is illustrative.",
+        "title": "Color-adjusted Hubble composite with an illustrative unobserved cap",
         "thumbnail": "/scenes/neptune/neptune-lens-normal.webp",
         "surface": "/scenes/neptune/neptune-surface-normal.webp",
         "poles": "/scenes/neptune/neptune-poles-normal.webp",
@@ -90,7 +153,7 @@
       {
         "id": "methane",
         "label": "Methane",
-        "description": "Hubble at 619 nm",
+        "description": "Hubble OPAL 619 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage.",
         "title": "Methane, FQ619N false color",
         "thumbnail": "/scenes/neptune/neptune-lens-methane.webp",
         "surface": "/scenes/neptune/neptune-surface-methane.webp",
@@ -135,7 +198,7 @@
       {
         "id": "near-infrared",
         "label": "Near infrared",
-        "description": "Hubble at 845 nm",
+        "description": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage.",
         "title": "Near infrared, F845M false color",
         "thumbnail": "/scenes/neptune/neptune-lens-near-infrared.webp",
         "surface": "/scenes/neptune/neptune-surface-near-infrared.webp",
