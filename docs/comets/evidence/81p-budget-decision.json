@@ -330,5 +330,67 @@
         }
       }
     ]
-  }
+  },
+  "atlases": [
+    {
+      "faces": 996,
+      "files": [
+        {
+          "filename": "comet-81p-model-surface@2x.webp",
+          "width": 1024,
+          "height": 4032,
+          "installBytes": 163714,
+          "rgbaBytes": 16515072
+        },
+        {
+          "filename": "comet-81p-model-shadow@2x.webp",
+          "width": 1024,
+          "height": 4032,
+          "installBytes": 131344,
+          "rgbaBytes": 16515072
+        }
+      ],
+      "interpretation": "Calculated RGBA pixel storage, not measured GPU residency. Native u leaves are 64 by 64 CSS pixels before their prepared transforms."
+    },
+    {
+      "faces": 1292,
+      "files": [
+        {
+          "filename": "comet-81p-model-surface@2x.webp",
+          "width": 1024,
+          "height": 5184,
+          "installBytes": 197928,
+          "rgbaBytes": 21233664
+        },
+        {
+          "filename": "comet-81p-model-shadow@2x.webp",
+          "width": 1024,
+          "height": 5184,
+          "installBytes": 155872,
+          "rgbaBytes": 21233664
+        }
+      ],
+      "interpretation": "Calculated RGBA pixel storage, not measured GPU residency. Native u leaves are 64 by 64 CSS pixels before their prepared transforms."
+    },
+    {
+      "faces": 1494,
+      "files": [
+        {
+          "filename": "comet-81p-model-surface@2x.webp",
+          "width": 1024,
+          "height": 6016,
+          "installBytes": 220612,
+          "rgbaBytes": 24641536
+        },
+        {
+          "filename": "comet-81p-model-shadow@2x.webp",
+          "width": 1024,
+          "height": 6016,
+          "installBytes": 171400,
+          "rgbaBytes": 24641536
+        }
+      ],
+      "interpretation": "Calculated RGBA pixel storage, not measured GPU residency. Native u leaves are 64 by 64 CSS pixels before their prepared transforms."
+    }
+  ]
 }

@@ -2,27 +2,27 @@
   "ok": true,
   "browser": "152.0.7977.76",
   "baseUrl": "http://127.0.0.1:4257",
-  "capturedAt": "2026-09-08T06:40:22.461Z",
+  "capturedAt": "2026-09-08T06:42:52.660Z",
   "qualification": "Natural-clock browser interaction checks; no native parity claim.",
   "reports": [
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "initial-shell",
       "speedDisabled": false
     },
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "desktop",
       "surfaceFlyTo": {
-        "pitchDelta": -20.5487003980859,
-        "zoomRatio": 2.811031261219663
+        "pitchDelta": -20.54870120330706,
+        "zoomRatio": 2.8110312552565184
       },
       "zoomPublication": {
         "skyCube": 0,
         "skyOrientation": 0
       },
       "projectiveTextureReport": {
-        "texturedLeafCount": 1000,
+        "texturedLeafCount": 996,
         "nestedProjectiveTextureCount": 0,
         "finiteTextureBounds": true
       },
@@ -32,12 +32,12 @@
       "canvasCount": 0,
       "sceneSvgCount": 0,
       "stageChildren": 5,
-      "stageElements": 26829,
+      "stageElements": 26825,
       "stable": true,
       "retainedProof": {
-        "initialNodeCount": 26829,
-        "currentNodeCount": 26829,
-        "maximumNodeCount": 26829,
+        "initialNodeCount": 26825,
+        "currentNodeCount": 26825,
+        "maximumNodeCount": 26825,
         "initialNodesIntact": true,
         "shellTextNodesIntact": true,
         "undeclaredAddedRoots": [],
@@ -46,7 +46,7 @@
       }
     },
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "mobile",
       "mountedPlanets": 1,
       "stageCount": 1,
@@ -54,36 +54,36 @@
       "canvasCount": 0,
       "sceneSvgCount": 0,
       "stageChildren": 5,
-      "stageElements": 26829,
+      "stageElements": 26825,
       "stable": true
     },
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "pre-ready-hidden-motion-off",
       "animationCount": 0
     },
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "pre-ready-visible-motion-off",
       "animationCount": 0
     },
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "pre-ready-hidden-motion-on",
       "animationCount": 0
     },
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "pre-ready-visible-motion-on",
       "animationCount": 0
     },
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "dpr-1",
       "selectedDensity": 2,
       "requestedCanonicalAssets": [
-        "/scenes/comet-67p/comet-67p-lighting.webp",
-        "/scenes/comet-67p/comet-67p-model-surface@2x.webp"
+        "/scenes/comet-81p/comet-81p-lighting.webp",
+        "/scenes/comet-81p/comet-81p-model-surface@2x.webp"
       ],
       "skyboxPointerBoundary": [
         {
@@ -141,15 +141,15 @@
         "nonLaunchingReleaseRetainsDragPose": true,
         "pausedReleaseCannotRestartMotion": true
       },
-      "video": "comet-67p-dpr-1.webm"
+      "video": "comet-81p-dpr-1.webm"
     },
     {
-      "id": "comet-67p",
+      "id": "comet-81p",
       "viewport": "dpr-2",
       "selectedDensity": 2,
       "requestedCanonicalAssets": [
-        "/scenes/comet-67p/comet-67p-lighting.webp",
-        "/scenes/comet-67p/comet-67p-model-surface@2x.webp"
+        "/scenes/comet-81p/comet-81p-lighting.webp",
+        "/scenes/comet-81p/comet-81p-model-surface@2x.webp"
       ],
       "skyboxPointerBoundary": [
         {
@@ -207,7 +207,7 @@
         "nonLaunchingReleaseRetainsDragPose": true,
         "pausedReleaseCannotRestartMotion": true
       },
-      "video": "comet-67p-dpr-2.webm"
+      "video": "comet-81p-dpr-2.webm"
     }
   ]
 }
