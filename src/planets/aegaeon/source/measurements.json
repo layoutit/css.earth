@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://arxiv.org/abs/1912.09192",
+  "citation": "Hedman et al. (2020), Table 1 and Appendix B",
+  "semiAxesKm": [
+    0.7,
+    0.25,
+    0.2
+  ],
+  "semiAxesUncertaintyKm": [
+    0.05,
+    0.06,
+    0.08
+  ],
+  "referenceRadiusKm": 0.327106631018859,
+  "sizeInterpretation": "Analytic ellipsoid approximating measured axes, not the detailed shape solution",
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery."
+}

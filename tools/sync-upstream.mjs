@@ -234,7 +234,7 @@ export function locallyMaintainedFile(target, rel) {
   if (target.id !== "astronomy") return false;
   return ["README.md", "AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs",
     "src/index.ts", "src/asteroids.ts", "src/asteroids.test.ts", "src/data/asteroidElements.data.ts", "tools/generate-asteroids.mjs",
-    "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs",
+    "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs", "tools/lib/fit-libration.mjs",
     "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",
     "src/bodies.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
     "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/satellites.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||

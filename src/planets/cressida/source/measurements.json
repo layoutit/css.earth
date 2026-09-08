@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://arxiv.org/abs/2401.04634",
+  "citation": "French et al. (2024), Table 3, reproducing Karkoschka (2001), Voyager paper Table V. Adopted axes also appear in the companion HST paper, Table IV.",
+  "semiAxesKm": [
+    46,
+    37,
+    37
+  ],
+  "referenceRadiusKm": 39.78509749046438,
+  "projectedRadiusKm": {
+    "value": 41,
+    "uncertainty": 2,
+    "definition": "sqrt(A B), distinct from volume-equivalent radius"
+  },
+  "minorMajorRatio": {
+    "value": 0.8,
+    "uncertainty": 0.3
+  },
+  "derivedVolumeEquivalentRadiusKm": 39.78509749046438,
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/46)^2+(cos(lat)*sin(lon)/37)^2+(sin(lat)/37)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "orientation": "IAU BODY709; the published prolate interpretation assumes the long axis toward Uranus and repeats B on the third axis.",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Published 92 × 74 × 74 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo. Reported uncertainties belong to projected radius and axis ratio; no independent axis uncertainties are invented.",
+  "ringInferredMass": {
+    "gmKm3PerS2": 0.01227,
+    "gmUncertaintyKm3PerS2": 0.00141,
+    "massKg": 1.839e+17,
+    "massUncertaintyKg": 2.12e+16,
+    "source": "https://arxiv.org/abs/2401.04634",
+    "location": "Table 3, Cressida footnote b; Section 9.2",
+    "interpretation": "Inferred from the amplitude of a satellite-forced ring mode, with model assumptions; not the table row computed using assumed density."
+  }
+}
