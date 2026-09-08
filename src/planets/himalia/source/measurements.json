@@ -1,0 +1,39 @@
+{
+  "schema": "cssearth-ellipsoid-approximation@1",
+  "source": "https://doi.org/10.1126/science.1079462",
+  "citation": "Porco et al. (2003), Cassini Imaging of Jupiter’s Atmosphere, Satellites, and Rings; JPL mean radius for model scale",
+  "meanRadiusKm": 85,
+  "meanRadiusUncertaintyKm": 10,
+  "referenceRadiusKm": 85,
+  "gmKm3S2": 0.15155,
+  "gmInterpretation": "0.15155 ± 0.05763 km³/s²",
+  "semiAxesKm": [
+    98.63376271427155,
+    78.90701017141724,
+    78.90701017141724
+  ],
+  "semiAxesInterpretation": "Modeled prolate ellipsoid: the projected Cassini ratio 150:120 is treated as intrinsic a:b, and unobserved depth is assumed equal to b. Axes are volume-normalized to JPL mean radius 85 km; these are not three measured axes.",
+  "formula": "q=150/120; b=c=meanRadiusKm/q^(1/3); a=q*b; r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
+  "meanRadiusSource": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+  "projectedCassiniDiametersKm": [
+    150,
+    120
+  ],
+  "projectedCassiniAxisUncertaintyKm": 20,
+  "projectedCassiniPhaseAngleDegrees": 70,
+  "axisRatio": 1.25,
+  "axisRatioInterpretation": "Approximate elongation from a partly illuminated projected disk; viewing geometry and limb darkening prevent a unique intrinsic shape."
+}
