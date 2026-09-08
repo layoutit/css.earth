@@ -8,7 +8,7 @@ Juno is an irregular main-belt asteroid with broad departures from an ellipsoid.
 - [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/3_Juno_mpcd.obj): 13506 vertices, 27008 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 126.115500 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 288.220 × 273.645 × 245.762 km; these are not best-fit ellipsoid axes.
 - [Original ADAM comparison](https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj): radius 127.337488 km. Excluded as a second lens: it is an alternative reconstruction of the same shape. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
 - [Released SPHERE images](https://observations.lam.fr/astero/Data/3Juno/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
-- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons. 
+- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
 
 ## Shape, elevation and lighting
 

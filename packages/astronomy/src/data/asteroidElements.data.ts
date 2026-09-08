@@ -221,5 +221,45 @@ export const ASTEROID_ELEMENTS = {
   "sappho": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2780%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 343561051.2135292, "eccentricity": 0.2002065487820462, "inclinationRad": 0.3048410235733978, "ascendingNodeRad": 5.964532110451048, "argumentOfPeriapsisRad": 0.271306959328009, "meanAnomalyAtEpochRad": 2.4107143706244973, "meanMotionRadPerDay": 0.004942693440981841 }
+  },
+  "betulia": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271580%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 328326395.5962425, "eccentricity": 0.4876458435924789, "inclinationRad": 1.1418011079197954, "ascendingNodeRad": 0.8767437809423376, "argumentOfPeriapsisRad": 3.1847474647438303, "meanAnomalyAtEpochRad": 2.9144483481283405, "meanMotionRadPerDay": 0.005290672282838876 }
+  },
+  "castalia": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274769%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 159039004.9267486, "eccentricity": 0.4831451060771482, "inclinationRad": 0.5436248995934336, "ascendingNodeRad": 6.11322447878659, "argumentOfPeriapsisRad": 1.6690366078108612, "meanAnomalyAtEpochRad": 3.8561824657911075, "meanMotionRadPerDay": 0.015693293058631135 }
+  },
+  "asteroid-1998-wt24": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2733342%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 107515093.8131289, "eccentricity": 0.4176363602633775, "inclinationRad": 0.4452496227521575, "ascendingNodeRad": 0.29906554852673567, "argumentOfPeriapsisRad": 4.076221618870616, "meanAnomalyAtEpochRad": 0.998759371477056, "meanMotionRadPerDay": 0.028233544397225203 }
+  },
+  "asteroid-1994-cc": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27136617%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 244991591.5509067, "eccentricity": 0.4174161706203062, "inclinationRad": 0.41461981389514196, "ascendingNodeRad": 6.079249907474356, "argumentOfPeriapsisRad": 5.308637789425226, "meanAnomalyAtEpochRad": 1.1549338638646551, "meanMotionRadPerDay": 0.008208102875713916 }
+  },
+  "fides": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2737%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 395456291.6600901, "eccentricity": 0.1744987012232451, "inclinationRad": 0.46225195190225454, "ascendingNodeRad": 0.015092309823187319, "argumentOfPeriapsisRad": 1.2002613893495846, "meanAnomalyAtEpochRad": 4.161529184330332, "meanMotionRadPerDay": 0.004002412307125924 }
+  },
+  "penelope": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27201%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 400636739.2553284, "eccentricity": 0.1814738613733544, "inclinationRad": 0.31892523929763134, "ascendingNodeRad": 0.12685787701199117, "argumentOfPeriapsisRad": 5.785868059970241, "meanAnomalyAtEpochRad": 3.2677618988576462, "meanMotionRadPerDay": 0.003925033798088675 }
+  },
+  "alphonsina": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27925%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 404062027.8110704, "eccentricity": 0.08187930232357511, "inclinationRad": 0.6674357875944428, "ascendingNodeRad": 5.752388258982002, "argumentOfPeriapsisRad": 2.91167298687332, "meanAnomalyAtEpochRad": 6.11815825061178, "meanMotionRadPerDay": 0.0038752301555848487 }
+  },
+  "angelina": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2764%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 400963308.7951532, "eccentricity": 0.1266787195932644, "inclinationRad": 0.4237686723911895, "ascendingNodeRad": 6.240073723482426, "argumentOfPeriapsisRad": 2.310518257719369, "meanAnomalyAtEpochRad": 4.870125134624312, "meanMotionRadPerDay": 0.003920239585910421 }
+  },
+  "ganymed": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271036%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 398486185.0700304, "eccentricity": 0.5336654851807957, "inclinationRad": 0.2638544482755558, "ascendingNodeRad": 4.786642210503456, "argumentOfPeriapsisRad": 1.2304491178461834, "meanAnomalyAtEpochRad": 2.8358069522466463, "meanMotionRadPerDay": 0.003956850620995334 }
+  },
+  "moshup": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2766391%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 96100145.23893991, "eccentricity": 0.6883641517337373, "inclinationRad": 0.6090931049608264, "ascendingNodeRad": 4.82681291026139, "argumentOfPeriapsisRad": 2.6814461375966525, "meanAnomalyAtEpochRad": 2.9685919896971122, "meanMotionRadPerDay": 0.03341053988475536 }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

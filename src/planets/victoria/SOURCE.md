@@ -8,7 +8,7 @@ Victoria is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publ
 - [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/12_Victoria_mpcd.obj): 1434 vertices, 2864 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 57.835845 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 150.907 × 120.732 × 101.572 km; these are not best-fit ellipsoid axes.
 - The optional ADAM download returns HTTP 403. It was not substituted for the available original MPCD model.
 - [Released SPHERE images](https://observations.lam.fr/astero/Data/12Victoria/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
-- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons. 
+- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
 
 ## Shape, elevation and lighting
 

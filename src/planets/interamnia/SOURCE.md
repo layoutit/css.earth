@@ -8,7 +8,7 @@ Interamnia is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its pu
 - [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/704_Interamnia_mpcd.obj): 6514 vertices, 13024 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 166.107985 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 349.507 × 350.332 × 310.142 km; these are not best-fit ellipsoid axes.
 - [Alternative released mesh](https://observations.lam.fr/astero/3Dshape/704_Interamnia_adam.obj): radius 166.246447 km. The ADAM model is an alternative reconstruction of the same shape. Excluded as a second lens. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
 - [Released SPHERE images](https://observations.lam.fr/astero/Data/704Interamnia/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
-- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons. 
+- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
 
 ## Shape, elevation and lighting
 

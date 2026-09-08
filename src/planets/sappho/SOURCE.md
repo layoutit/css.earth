@@ -15,7 +15,7 @@ Shape uses the shared missing-imagery grid. DAMIT's viewer illustrations are not
 
 The original already contains 800 triangles. Meshoptimizer performs no edge collapse: all source geometry is retained, with zero estimated simplification error. All models use 800 native PolyCSS u raster leaves, 128 × 128 px per leaf in a 2048 × 6400 atlas, with lighting and texels prepared ahead of runtime. The surface remains one closed component with Euler characteristic 2.
 
-Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 0.000 m, maximum 0.000 m. These are sampled bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found. Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
+Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 0.000 m, maximum 0.000 m. These are sampled distances, not exhaustive geometric bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found. Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
 
 ## Frame, source closure and delivery
 

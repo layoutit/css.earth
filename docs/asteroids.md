@@ -1,12 +1,12 @@
 # Exceptional asteroid coverage
 
-This addition selects 42 bodies from the [list of exceptional asteroids](https://en.wikipedia.org/wiki/List_of_exceptional_asteroids) for which original calibrated shape models and paired spin data could be pinned. Per-body source notes below identify the exact model, authors, frame, reduction error, limitations and restoration path. The list is a discovery index; the underlying research and original data supply the physical properties.
+This addition selects 52 bodies from the [list of exceptional asteroids](https://en.wikipedia.org/wiki/List_of_exceptional_asteroids) for which original calibrated shape models and paired spin data could be pinned. Per-body source notes below identify the exact model, authors, frame, reduction error, limitations and restoration path. The list is a discovery index; the underlying research and original data supply the physical properties.
 
 Every body uses the existing generic object package, shared application shell and Solar System asteroid accordion. Each package has Shape and Elevation views. Shape uses the shared missing-imagery grid: no surface texture, reflectance, composition or regolith is invented. Elevation is source radius minus the documented reference sphere, not an independent terrain measurement or height above an equipotential. Rotation has an arbitrary display meridian, not an absolute phase prediction.
 
-The existing meshoptimizer preparation path reduces the original connected meshes while preserving their closed topology. Every result has 800 native PolyCSS u raster leaves and 128 by 128 px cells. The eight DAMIT models already containing 800 triangles require no edge collapse. All geometry, surface texels and directional/flood lighting are prepared ahead of runtime. Both DPRs select the same highest-density asset bank.
+The existing meshoptimizer preparation path reduces the original connected meshes while preserving their closed topology. Every result has 800 native PolyCSS u raster leaves and 128 by 128 px cells. The nine DAMIT models already containing 800 triangles require no edge collapse. All geometry, surface texels and directional/flood lighting are prepared ahead of runtime. Both DPRs select the same highest-density asset bank.
 
-52 Europa and 9 Metis retain their asteroid numbers in display names to distinguish them from the moons Europa and Metis. Their route IDs are europa-52 and metis-9.
+52 Europa and 9 Metis retain their asteroid numbers in display names to distinguish them from the moons Europa and Metis. Their route IDs are europa-52 and metis-9. The 1994 CC package explicitly displays Alpha alone; its two satellites are not included. Castalia retains the published northern spin solution and documents the unresolved alternative.
 
 | Number | Body and provenance | Selected source family | Reference diameter (km) | Period (h) |
 | --- | --- | --- | ---: | ---: |
@@ -52,6 +52,16 @@ The existing meshoptimizer preparation path reduces the original connected meshe
 | 14 | [Irene](../src/planets/irene/SOURCE.md) | DAMIT | 153 | 15.02987 |
 | 44 | [Nysa](../src/planets/nysa/SOURCE.md) | DAMIT | 75 | 6.421418 |
 | 80 | [Sappho](../src/planets/sappho/SOURCE.md) | DAMIT | 61 | 14.03086 |
+| 1580 | [Betulia](../src/planets/betulia/SOURCE.md) | NASA/JPL radar | 5.39 | 6.13836 |
+| 4769 | [Castalia](../src/planets/castalia/SOURCE.md) | NASA/JPL radar | 1.084476 | 4.089 |
+| 33342 | [1998 WT24](../src/planets/asteroid-1998-wt24/SOURCE.md) | NASA/JPL radar | 0.415 | 3.697 |
+| 136617 | [1994 CC Alpha](../src/planets/asteroid-1994-cc/SOURCE.md) | NASA/JPL radar | 0.62 | 2.3886 |
+| 37 | [Fides](../src/planets/fides/SOURCE.md) | DAMIT | 118 | 7.332527 |
+| 201 | [Penelope](../src/planets/penelope/SOURCE.md) | DAMIT | 85 | 3.747455 |
+| 925 | [Alphonsina](../src/planets/alphonsina/SOURCE.md) | DAMIT | 58 | 7.87754 |
+| 64 | [Angelina](../src/planets/angelina/SOURCE.md) | DAMIT | 52 | 8.75033 |
+| 1036 | [Ganymed](../src/planets/ganymed/SOURCE.md) | DAMIT | 39 | 10.31304 |
+| 66391 | [Moshup](../src/planets/moshup/SOURCE.md) | NASA/JPL radar | 1.317 | 2.7645 |
 
 The reference diameter sets the explicitly stated elevation sphere and object scale. The original calibrated coordinates are not rescaled to rounded or averaged catalog diameters. Individual source records provide more precise geometric measurements.
 

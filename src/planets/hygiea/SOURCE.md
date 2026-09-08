@@ -8,7 +8,7 @@ Hygiea is a nearly spherical main-belt asteroid. VLT/SPHERE observations reveale
 - [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/10_Hygiea_mpcd.obj): 8834 vertices, 17664 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 215.372911 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 424.926 × 450.190 × 418.133 km; these are not best-fit ellipsoid axes.
 - [Original ADAM comparison](https://observations.lam.fr/astero/3Dshape/10_Hygiea_adam.obj): radius 216.879698 km. Excluded as a second lens: it is an alternative reconstruction of the same shape. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
 - [Released SPHERE images](https://observations.lam.fr/astero/Data/10Hygiea/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
-- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2019.pdf): complementary interpretation and model/image comparisons. 
+- [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2019.pdf): complementary interpretation and model/image comparisons.
 
 ## Shape, elevation and lighting
 

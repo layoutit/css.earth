@@ -16,7 +16,7 @@ Shape uses the shared missing-imagery grid. DAMIT's viewer illustrations are not
 
 The existing source-meshoptimizer recipe reduces the original connected surface to 800 triangles. Meshoptimizer 1.2.0 reports 2008.8 m estimated error, below the authored 2100 m stopping threshold; this estimate is not a Hausdorff bound. All models use 800 native PolyCSS u raster leaves, 128 × 128 px per leaf in a 2048 × 6400 atlas, with lighting and texels prepared ahead of runtime. The surface remains one closed component with Euler characteristic 2.
 
-Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 863.932 m, maximum 1920.115 m. These are sampled bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found. Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
+Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 863.932 m, maximum 1920.115 m. These are sampled distances, not exhaustive geometric bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found. Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
 
 ## Frame, source closure and delivery
 

@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 22.29842144622292,
+  "declinationDegrees": -67.74778672553549,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 2.7645,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL: ecliptic J2000 lambda 326 deg, beta -65 deg, period 2.7645 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. This is the archived Alpha model alone; its companion Squannit is not rendered. The source paper identifies regions constrained by weaker Goldstone images where reconstruction accuracy is lower. Table 2 supplies the equivalent diameter, rotation period and ecliptic pole; no gravitational-slope or optical albedo map is inferred."
+}
