@@ -16,7 +16,7 @@ The shape-specific coordinate document, `didymos_coordinate_system_description_v
 
 ## Views and preparation
 
-- **Shape** uses the shared no-imagery grid over the released terrain. It is a scientific shape model without observed surface imagery, not a photograph or measured surface albedo. Shadows default on so its topography is visible immediately.
+- **Shape** uses the shared no-imagery grid over the released terrain. It is a scientific shape model without observed surface imagery, not a photograph or measured surface albedo. Shadows default off; prepared directional lighting remains available through the control.
 - **Elevation** is source radius minus a 365 m reference sphere, in meters (−120 to +90 m display scale), with prepared cartographic relief. It includes whole-body flattening and the equatorial ridge; it is not height above a gravitational equipotential.
 
 The existing source-meshoptimizer recipe preserves original connectivity before simplifying with meshoptimizer 1.2.0 `ErrorAbsolute` and `RegularizeLight`, target 800 faces, 8 m allowed library error estimate. Its 800 faces form a closed single genus-zero surface. The estimate is 6.285758 m; this is not an exhaustive physical-error bound. A separate 2,592-direction ray comparison (5° latitude/longitude spacing, half-cell offsets) measures mean 1.64899 m, 95th percentile 3.96109 m and maximum 7.01284 m radial error from the selected source model. The simplified volume is 0.200421741 km³, about 1.44% below the selected source volume. These are display approximation errors, distinct from source uncertainty.
