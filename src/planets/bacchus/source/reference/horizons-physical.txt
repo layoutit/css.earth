@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272063%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               2063 Bacchus (1977 HB)          2026-Sep-08 06:29:21
+Rec #:    2063 (+COV) Soln.date: 2026-Jun-16_11:32:16   # obs: 1561 (1977-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458546.5 ! 2019-Mar-04.00 (TDB)         Residual RMS= .26695
+   EC= .3494581121527884   QR= .7012131908163112   TP= 2458689.5799246756
+   OM= 33.09775069072746   W=  55.32796658078752   IN= 9.4322272147331
+   A= 1.077890915121211    MA= 233.9854887254342   ADIST= 1.454568639426111
+   PER= 1.1191             N= .880728107           ANGMOM= .016733477
+   DAN= .78934             DDN= 1.18105            L= 88.05996039999999
+   B= 7.7458517            MOID= .0671072          TP= 2019-Jul-25.0799246756
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .512               ROTPER= 14.904
+   H= 17.21                G= .150                 B-V= n.a.
+                           ALBEDO= .203            STYP= Sq
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -8.146607797244E-15 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#259, OCC=0           radar( 7 delay, 5 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************
