@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "larissa",
+  "displayName": "Larissa",
+  "panel": {
+    "introduction": "Larissa is a small, irregular moon orbiting close to Neptune. Voyager 2 resolved a dark, cratered surface, but only a limited part of this distant world has been seen.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "96 km"
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Distance from Sun",
+        "value": "30.07 AU (system mean)"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Neptune",
+        "value": "13.32 hours"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation",
+        "value": "Synchronous with its orbit"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Neptune",
+        "value": "About 73,500 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Reitsema, Hubbard, Lebofsky and Tholen · 1981"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+        "title": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+        "detail": "Voyager 2",
+        "thumbnail": "/scenes/larissa/larissa-normal-thumbnail.webp",
+        "surface": "larissa-normal-surface@2x.webp",
+        "poles": "larissa-normal-surface@2x.webp",
+        "source": {
+          "id": "c1138148",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+        "title": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+        "detail": "Radial shape",
+        "thumbnail": "/scenes/larissa/larissa-elevation-thumbnail.webp",
+        "surface": "larissa-elevation-surface@2x.webp",
+        "poles": "larissa-elevation-surface@2x.webp",
+        "source": {
+          "id": "stooke-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/stkshape.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-12",
+            "0",
+            "+12"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
+          "image": "/scenes/larissa/larissa-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Larissa overview",
+      "href": "https://science.nasa.gov/neptune/moons/larissa/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "surface",
+      "description": "Voyager imagery and Stooke shape model",
+      "href": "https://sbn.psi.edu/pds/resource/stkshape.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/neptune/moons/larissa/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

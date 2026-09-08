@@ -1,0 +1,44 @@
+{
+  "sources": {
+    "viewingGeometry": "OPUS PDS target-centered surface geometry",
+    "roll": "PDS Voyager ISS SEDR CK with NAIF pck00011, evaluated at exposure end",
+    "imageScale": "GEOMED detached PDS label pixel FOV; distortion-corrected 1000x1000 grid"
+  },
+  "method": "Body-frame vectors and camera roll are source-derived. Only image-center translation is refined against sunlit shape-limb gradients. No mesh vertices or source terrain are edited. Photometric background offset is the median of the recorded empty-sky region.",
+  "limitations": "SEDR pointing is uncorrected. The Stooke model is coarse and can exaggerate facets or depressions; image registration is approximate at that shape accuracy, not a modern photogrammetric solution.",
+  "frames": [
+    {
+      "id": "c1138148",
+      "path": "observations/C1138148_GEOMED.IMG",
+      "labelPath": "observations/C1138148_GEOMED.LBL",
+      "observerLatitude": -23.753,
+      "observerWestLongitude": 89.926,
+      "sunLatitude": -23.383,
+      "sunWestLongitude": 114.142,
+      "rangeKm": 451875.577,
+      "northAzimuthDegrees": 20.526876649622658,
+      "center": [
+        560.283,
+        287.94
+      ],
+      "pixelAngleMicroradians": 7.841764329210524,
+      "ckTick": 6317606415.0,
+      "requestedTick": 6317606375.939178,
+      "time": "1989-08-24T21:08:45.000",
+      "backgroundOffset": 0.0006,
+      "backgroundMaximum": 0.0010378,
+      "registration": {
+        "method": "SEDR roll and OPUS viewing geometry; pointing translation fitted to sunlit shape-limb gradients",
+        "skyRegion": [
+          50,
+          50,
+          850,
+          850
+        ],
+        "skyMedianIF": 0.0006000000000000001,
+        "skyRobustSigmaIF": 0.00103782,
+        "limbContrastIF": 0.01863929773461321
+      }
+    }
+  ]
+}

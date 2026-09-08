@@ -1,6 +1,7 @@
 import { SATELLITE_ELEMENTS, type SatelliteId, type SatelliteRecord } from './data/satelliteElements.data.js'
 import { keplerApoapsisKm, keplerStateKm, type KeplerianElements } from './kepler.js'
-import type { Vec3 } from './vec3.js'
+import { add, scale, type Vec3 } from './vec3.js'
+import { bodyData, type BodyId } from './bodies.js'
 
 export { SATELLITE_ELEMENTS }
 export type { SatelliteId, SatelliteRecord }
@@ -56,10 +57,40 @@ const toIcrf = (record: SatelliteRecord, v: Vec3): Vec3 => {
   ]
 }
 
+// Evaluate the prepared phase correction and its derivative together so the
+// position and velocity paths remain consistent.
+function elementsAtEpoch(record: SatelliteRecord, epochJdTt: number): KeplerianElements {
+  const elements = record.elements as KeplerianElements;
+  if (!record.longitudeHarmonics?.length) return elements;
+  let phase = 0, rate = 0;
+  for (const h of record.longitudeHarmonics) {
+    const angle = h.rateRadPerDay * (epochJdTt - h.epochJdTt);
+    phase += h.cosineRad * Math.cos(angle) + h.sineRad * Math.sin(angle);
+    rate += h.rateRadPerDay * (-h.cosineRad * Math.sin(angle) + h.sineRad * Math.cos(angle));
+  }
+  return { ...elements,
+    meanAnomalyAtEpochRad: elements.meanAnomalyAtEpochRad + phase - rate * (epochJdTt - elements.epochJdTt),
+    meanMotionRadPerDay: elements.meanMotionRadPerDay + rate };
+}
+
 /** Position of a moon relative to its planet's centre, in km, on ICRF axes. */
 export const satellitePositionKm = (id: SatelliteId, epochJdTt: number): Vec3 => {
   const record = satelliteRecord(id)
-  return toIcrf(record, keplerStateKm(record.elements as KeplerianElements, epochJdTt).positionKm)
+  const position = toIcrf(record, keplerStateKm(elementsAtEpoch(record, epochJdTt), epochJdTt).positionKm)
+  const companion = barycentreCompanion(record)
+  if (!companion) return position
+  const offset = satellitePositionKm(companion.id, epochJdTt)
+  return add(position, scale(offset, companion.weight))
+}
+
+// The fitted ellipse may orbit a binary barycentre while the frame tree still
+// owns a physical parent body. Its companion gives the centre's displacement.
+function barycentreCompanion(record: SatelliteRecord): { id: SatelliteId; weight: number } | null {
+  if (!record.barycentreCompanion) return null
+  const companion = bodyData(record.barycentreCompanion as BodyId)
+  const parent = bodyData(record.parent as BodyId)
+  return { id: companion.id as SatelliteId,
+    weight: companion.gravitationalParameterKm3PerS2 / (parent.gravitationalParameterKm3PerS2 + companion.gravitationalParameterKm3PerS2) }
 }
 
 /** Position and velocity of a moon relative to its planet's centre, km and km/day, on ICRF axes. */
@@ -68,10 +99,20 @@ export const satelliteStateKm = (
   epochJdTt: number,
 ): { readonly positionKm: Vec3; readonly velocityKmPerDay: Vec3 } => {
   const record = satelliteRecord(id)
-  const state = keplerStateKm(record.elements as KeplerianElements, epochJdTt)
-  return { positionKm: toIcrf(record, state.positionKm), velocityKmPerDay: toIcrf(record, state.velocityKmPerDay) }
+  const state = keplerStateKm(elementsAtEpoch(record, epochJdTt), epochJdTt)
+  const positionKm = toIcrf(record, state.positionKm), velocityKmPerDay = toIcrf(record, state.velocityKmPerDay)
+  const companion = barycentreCompanion(record)
+  if (!companion) return { positionKm, velocityKmPerDay }
+  const offset = satelliteStateKm(companion.id, epochJdTt)
+  return {
+    positionKm: add(positionKm, scale(offset.positionKm, companion.weight)),
+    velocityKmPerDay: add(velocityKmPerDay, scale(offset.velocityKmPerDay, companion.weight)),
+  }
 }
 
-/** `a(1 + e)` for a moon — the exact bound its frame's `maxOffsetInParent` needs. */
-export const satelliteApoapsisKm = (id: SatelliteId): number =>
-  keplerApoapsisKm(satelliteRecord(id).elements as KeplerianElements)
+/** Ellipse apoapsis plus the binary-centre offset, when present. */
+export const satelliteApoapsisKm = (id: SatelliteId): number => {
+  const record = satelliteRecord(id), companion = barycentreCompanion(record)
+  return keplerApoapsisKm(record.elements as KeplerianElements) +
+    (companion ? satelliteApoapsisKm(companion.id) * companion.weight : 0)
+}

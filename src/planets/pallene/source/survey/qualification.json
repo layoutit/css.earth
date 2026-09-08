@@ -1,0 +1,181 @@
+{
+  "schema": "cssearth-observation-qualification@1",
+  "selected": [
+    "n1496910582"
+  ],
+  "camera2005": {
+    "threshold": 0.12,
+    "image": "N1496910582_1_CALIB.IMG",
+    "center": [
+      510.4075461657933,
+      511.810320506261
+    ],
+    "northAzimuthDegrees": 269.7761048836602,
+    "boundaryRmsPixels": 0.49798008248536413,
+    "method": "Measured-axis illuminated limb and terminator fit with OPUS observer/Sun geometry; native I/F threshold0.12; north azimuth fixed independently by CK/BPC; fixed plate scale/range"
+  },
+  "candidate2010": {
+    "frame": {
+      "id": "n1665947247",
+      "observerLatitude": 14.523,
+      "observerWestLongitude": 181.08,
+      "sunLatitude": 6.492,
+      "sunWestLongitude": 105.28,
+      "rangeKm": 36677.989,
+      "northAzimuthDegrees": 180.08530931278568,
+      "pixelAngleMicroradians": 5.991877035570298,
+      "path": "observations/N1665947247_1_CALIB.IMG",
+      "labelPath": "observations/N1665947247_1_CALIB.LBL",
+      "center": [
+        114.06381879,
+        613.17728458
+      ],
+      "coverageInsetPixels": 1,
+      "saturationSource": {
+        "path": "observations/N1665947247_1.IMG",
+        "encoding": "vicar-byte-dn",
+        "maximumValidValue": 0.996078431372549
+      }
+    },
+    "rawSaturatedPixelsIn25Square": 45,
+    "result": {
+      "id": "n1665947247",
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "rasterOffset": 8192,
+      "encoding": "calibrated",
+      "resolutionMeters": 219.77000000000004,
+      "correctedPixels": 0,
+      "level": 1,
+      "overlapSamples": 0
+    },
+    "disposition": "Excluded from selected mapping: no valid pixels remain after pairedraw saturation rejection,1pixel inset and55degree incidence/emission cuts."
+  },
+  "candidate2011": {
+    "frame": {
+      "id": "n1694661188",
+      "et": 369239077.2344563,
+      "utc": "2011-09-14T02:23:31.052000",
+      "bodyToCamera": [
+        [
+          -0.5695660661929167,
+          -0.8216084390457272,
+          -0.023538673080055136
+        ],
+        [
+          0.049259951823724196,
+          -0.0055343406339665845,
+          -0.9987706584697369
+        ],
+        [
+          0.820468130635097,
+          -0.5700253888754351,
+          0.04362456474921773
+        ]
+      ],
+      "northAzimuthDegrees": 178.64992328702024,
+      "observerLatitude": -2.522,
+      "observerWestLongitude": 214.815,
+      "sunLatitude": 11.159,
+      "sunWestLongitude": 112.871,
+      "rangeKm": 40718.856,
+      "pixelAngleMicroradians": 5.99181863066094,
+      "predictedCenter": [
+        439.92018018616216,
+        576.4231181317708
+      ]
+    },
+    "fit": {
+      "threshold": 0.012,
+      "image": "N1694661188_1_CALIB.IMG",
+      "center": [
+        496.3950615585054,
+        419.8063049144488
+      ],
+      "northAzimuthDegrees": 178.64992328702024,
+      "boundaryRmsPixels": 0.7556286969203705,
+      "method": "Measured-axis illuminated limb and terminator fit with OPUS observer/Sun geometry; native I/F threshold0.12; north azimuth fixed independently by CK/BPC; fixed plate scale/range"
+    },
+    "onePixelInset": {
+      "model": "controlled-shape-camera",
+      "photometry": {
+        "weight": 1,
+        "maximumGain": 2,
+        "displayMaximum": 0.7,
+        "gamma": 2.2,
+        "maximumIncidenceDegrees": 55,
+        "maximumEmissionDegrees": 55,
+        "minimumLevel": 1,
+        "maximumLevel": 1
+      },
+      "frames": [
+        {
+          "id": "n1694661188",
+          "sourceWidth": 1024,
+          "sourceHeight": 1024,
+          "rasterOffset": 8192,
+          "encoding": "calibrated",
+          "resolutionMeters": 243.98000000000002,
+          "correctedPixels": 115,
+          "level": 1,
+          "overlapSamples": 0
+        }
+      ],
+      "coveragePixels": 115,
+      "totalPixels": 131072,
+      "projectedValidBounds": [
+        [
+          488.1025509942551,
+          489.2351235361642
+        ],
+        [
+          419.0160558385426,
+          422.7550593888149
+        ]
+      ],
+      "distinctInterpolationFootprints": [
+        "489,422",
+        "488,421",
+        "488,420",
+        "488,419"
+      ]
+    },
+    "twoPixelInset": {
+      "model": "controlled-shape-camera",
+      "photometry": {
+        "weight": 1,
+        "maximumGain": 2,
+        "displayMaximum": 0.7,
+        "gamma": 2.2,
+        "maximumIncidenceDegrees": 55,
+        "maximumEmissionDegrees": 55,
+        "minimumLevel": 1,
+        "maximumLevel": 1
+      },
+      "frames": [
+        {
+          "id": "n1694661188",
+          "sourceWidth": 1024,
+          "sourceHeight": 1024,
+          "rasterOffset": 8192,
+          "encoding": "calibrated",
+          "resolutionMeters": 243.98000000000002,
+          "correctedPixels": 0,
+          "level": 1,
+          "overlapSamples": 0
+        }
+      ],
+      "coveragePixels": 0,
+      "totalPixels": 131072
+    },
+    "disposition": "Excluded from selected mapping: the onepixel-margin remnant is only1.13nativepixels wide, comparable to boundaryfit0.76pixel plus PSF/shape uncertainty; a2pixel margin leaves no samples."
+  },
+  "orbit": {
+    "maximumIndependentEpochResidualKm": 27.65,
+    "qualification": "Cassini-era fit sampled daily with six independent check epochs. Propagation to the2026 application epoch is unqualified.",
+    "fitIntervalYears": [
+      2005,
+      2018
+    ]
+  }
+}

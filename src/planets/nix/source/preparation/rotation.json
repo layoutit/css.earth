@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 350,
+  "declinationDegrees": 42,
+  "periodHours": 43.896,
+  "phase": "arbitrary-display-phase",
+  "displayMeridianDegrees": 0,
+  "source": "https://arxiv.org/abs/1604.05366",
+  "coordinateSystem": "Historical 2015 encounter pole fit, ICRF/J2000; arbitrary display phase",
+  "qualification": "Weaver et al. (2016) Table 2 historical pole, about 10 degree uncertainty, and 1.829 day spin. This is not a 2026 pole ephemeris and does not register the Porter 2021 released mesh. It is an explicit display approximation, without synchronous alignment or an absolute prime meridian."
+}

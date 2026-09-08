@@ -1,6 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape} from './obj-shape.mjs';
+import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mjs';
 
 const rad = Math.PI / 180;
 const dot = (a,b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
@@ -11,18 +11,28 @@ const vector = (latitude, westLongitude) => [Math.cos(latitude*rad)*Math.cos(-we
 
 /** CISSCAL retains a VICAR binary telemetry record. Some detached PDS labels
  * still point at record 2: the attached header, not that stale pointer, owns
- * the raster layout. Never interpret telemetry bytes as calibrated pixels. */
-export function decodeCalibratedCamera(bytes) {
+ * the raster layout. Never interpret telemetry bytes as image pixels.
+ * Raw BYTE detector DN is opt-in and normalized to 0..1 for display only;
+ * that path does not imply radiometric calibration. */
+export function decodeCalibratedCamera(bytes, encoding = 'calibrated') {
   const text = bytes.subarray(0,4096).toString('ascii');
   const field = name => text.match(new RegExp(`(?:^|\\s)${name}=(?:'([^']*)'|([^\\s]+))`))?.slice(1).find(v=>v!==undefined);
   const n = name => Number(field(name));
   const width=n('NS'),height=n('NL'),record=n('RECSIZE'),offset=n('LBLSIZE')+n('NLB')*record;
-  if (field('FORMAT')!=='REAL'||field('ORG')!=='BSQ'||n('NB')!==1||n('NBB')!==0||
-      !['RIEEE','IEEE'].includes(field('REALFMT')) || ![width,height,record,offset].every(v=>Number.isSafeInteger(v)&&v>0)||
-      record!==width*4 || offset+height*record>bytes.length || n('LBLSIZE')>bytes.length || n('NLB')<0) throw new Error('Unsupported calibrated VICAR layout.');
-  const data=new Float32Array(width*height), little=field('REALFMT')==='RIEEE';
-  for(let i=0;i<data.length;i++)data[i]=little?bytes.readFloatLE(offset+4*i):bytes.readFloatBE(offset+4*i);
-  return {data,width,height,offset};
+  const raw=encoding==='vicar-byte-dn', half=field('FORMAT')==='HALF', size=raw?1:half?2:4;
+  const prefix=n('NBB');
+  // Voyager FICOR77 stores signed integers with an explicit I/F multiplier.
+  // The VAX REALFMT field is irrelevant for HALF samples; INTFMT owns them.
+  const scale=raw?1/255:half?Number(text.match(/FOR \(I\/F\)\*10000\., MULTIPLY DN VALUE BY\s+([\d.E+-]+)/)?.[1])*1e-4:1;
+  if (!['calibrated','vicar-byte-dn'].includes(encoding)||(raw?field('FORMAT')!=='BYTE':!half&&field('FORMAT')!=='REAL')||field('ORG')!=='BSQ'||n('NB')!==1||
+      !Number.isSafeInteger(prefix)||prefix<0||(!raw&&prefix!==0)||
+      !(scale>0)||(!raw&&!(half?['LOW','HIGH'].includes(field('INTFMT')):['RIEEE','IEEE'].includes(field('REALFMT')))) ||
+      ![width,height,record,offset].every(v=>Number.isSafeInteger(v)&&v>0)||
+      record!==prefix+width*size || offset+height*record>bytes.length || n('LBLSIZE')>bytes.length || n('NLB')<0) throw new Error('Unsupported VICAR camera layout.');
+  const data=new Float32Array(width*height), little=half?field('INTFMT')==='LOW':field('REALFMT')==='RIEEE';
+  for(let i=0;i<data.length;i++)data[i]=(raw?bytes[offset+Math.floor(i/width)*record+prefix+i%width]:half?(little?bytes.readInt16LE(offset+2*i):bytes.readInt16BE(offset+2*i)):
+    (little?bytes.readFloatLE(offset+4*i):bytes.readFloatBE(offset+4*i)))*scale;
+  return {data,width,height,offset,encoding};
 }
 
 /** Camera is centred on the controlled body origin. North azimuth is clockwise
@@ -59,6 +69,21 @@ function maskBackground(image,threshold){
   image.missing=mask;
 }
 
+// An authored pointing/shape uncertainty can withhold source pixels next to
+// a known invalid boundary. This does not invent or stretch observed coverage.
+export function insetCoverage(image,pixels){
+  if(pixels===undefined||pixels===0)return;
+  if(!Number.isSafeInteger(pixels)||pixels<0||pixels>64)throw new Error('Invalid camera coverage inset.');
+  const mask=image.missing??new Uint8Array(image.data.length),distance=new Uint8Array(mask.length).fill(255),queue=new Int32Array(mask.length);let end=0;
+  const add=(i,d)=>{if(distance[i]!==255)return;distance[i]=d;mask[i]=1;queue[end++]=i;};
+  for(let i=0;i<mask.length;i++)if(mask[i])add(i,0);
+  for(let x=0;x<image.width;x++){add(x,0);add((image.height-1)*image.width+x,0);}
+  for(let y=0;y<image.height;y++){add(y*image.width,0);add(y*image.width+image.width-1,0);}
+  for(let q=0;q<end;q++){const i=queue[q],d=distance[i]+1,x=i%image.width;if(d>pixels)continue;
+    if(x>0)add(i-1,d);if(x<image.width-1)add(i+1,d);if(i>=image.width)add(i-image.width,d);if(i<mask.length-image.width)add(i+image.width,d);}
+  image.missing=mask;
+}
+
 function bilinear(image,x,y){
   if(x<1||y<1||x>=image.width-2||y>=image.height-2)return null;
   const ix=Math.floor(x),iy=Math.floor(y),u=x-ix,v=y-iy,i=iy*image.width+ix;
@@ -84,7 +109,7 @@ function smoothNormals(mesh){
   };
 }
 
-/** Project calibrated observations using their source mesh and camera solution.
+/** Project source observations using their source mesh and camera solution.
  * All ray intersections, illumination normalization and level matching happen
  * here at preparation time. Unobserved/unstable pixels remain explicit gaps. */
 export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,width,height,shape){
@@ -95,7 +120,7 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
   const paths=new Set(entries.map(e=>e.path));
   for(const f of recipe.frames)if(!paths.has(f.path)||!paths.has(f.labelPath))throw new Error(`Unpinned camera input: ${f.id}`);
   if(paths.size!==new Set(recipe.frames.flatMap(f=>[f.path,f.labelPath])).size)throw new Error('Unconsumed camera input.');
-  const load=shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
+  const load=shape.format==='stl'?loadStlShape:shape.format==='pds-radius-table'?loadPdsRadiusTable:shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
   const mesh=await load(resolve(sourceDirectory,shape.path),shape.grid),normalAt=smoothNormals(mesh);
   const points=new Float64Array(width*height*3),normals=new Float32Array(points.length),valid=new Uint8Array(width*height);
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){
@@ -107,8 +132,13 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
   const minI=Math.cos(p.maximumIncidenceDegrees*rad),minE=Math.cos(p.maximumEmissionDegrees*rad),epsilon=.01;
   // Coarse coverage first; finer images replace only their reliable interior.
   for(const frame of [...recipe.frames].sort((a,b)=>b.rangeKm-a.rangeKm)){
-    const image=decodeCalibratedCamera(await readFile(resolve(sourceDirectory,frame.path))),camera=controlledShapeCamera(frame);
+    const image=decodeCalibratedCamera(await readFile(resolve(sourceDirectory,frame.path)),frame.encoding),camera=controlledShapeCamera(frame);
+    if(frame.backgroundOffset!==undefined){
+      if(!Number.isFinite(frame.backgroundOffset))throw new Error('Invalid measured camera background offset.');
+      for(let i=0;i<image.data.length;i++)image.data[i]-=frame.backgroundOffset;
+    }
     maskBackground(image,frame.backgroundMaximum??p.backgroundMaximum);
+    insetCoverage(image,frame.coverageInsetPixels);
     const entry=entries.find(e=>e.path===frame.path);
     if(entry.width!==image.width||entry.height!==image.height)throw new Error(`Camera dimensions differ from pinned metadata: ${frame.id}`);
     const samples=[],ratios=[];
@@ -131,7 +161,7 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
     for(let j=0;j<samples.length;j+=3){const [i,value,weight]=samples.slice(j,j+3);
       values[i]=missing[i]?value*level:values[i]*(1-weight)+value*level*weight;missing[i]=0;}
     statistics.push({id:frame.id,sourceWidth:image.width,sourceHeight:image.height,rasterOffset:image.offset,
-      resolutionMeters:frame.rangeKm*frame.pixelAngleMicroradians*.001,correctedPixels:samples.length/3,level,overlapSamples:ratios.length});
+      encoding:image.encoding,resolutionMeters:frame.rangeKm*frame.pixelAngleMicroradians*.001,correctedPixels:samples.length/3,level,overlapSamples:ratios.length});
   }
   const rgb=Buffer.alloc(values.length*3);
   for(let i=0;i<values.length;i++){const v=Math.round(255*Math.min(1,values[i]/p.displayMaximum)**(1/p.gamma));rgb.fill(v,i*3,i*3+3);}

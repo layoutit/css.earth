@@ -1,0 +1,102 @@
+{
+  "sources": "OPUS target-centered Sun/observer coordinates and range (checked against phase and pixel scale). Original PDS Galileo SSI NORTH_AZIMUTH clockwise from image right, converted by +90 degrees to image up. OPUS positions/roll are not used: they mismatch the raw image. Earlier PDS label Sun/range fields also disagree with recorded phase and pixel scale, so are not used.",
+  "method": "Only image-center translation is fitted to the apparent illuminated ellipsoid; fixed dimensions, body axes and source Sun/observer geometry. Sky median is subtracted before empirical bounded lunar-Lambert normalization of relative DN.",
+  "limits": "Original eight-bit reconstructed SSI counts, not radiometrically calibrated I/F. Smooth ellipsoid and approximate pointing limit registration, especially for images only 5 to 20 pixels across. Original phase and cast shadows cannot be recovered where source signal is absent.",
+  "frames": [
+    {
+      "id": "c0532890500",
+      "path": "observations/C0532890500R.IMG",
+      "labelPath": "observations/C0532890500R.LBL",
+      "encoding": "vicar-byte-dn",
+      "observerLatitude": -0.197,
+      "observerWestLongitude": 158.053,
+      "sunLatitude": 3.071,
+      "sunWestLongitude": 103.828,
+      "rangeKm": 292573.837,
+      "northAzimuthDegrees": 184.857,
+      "center": [
+        443.9099,
+        175.5443
+      ],
+      "pixelAngleMicroradians": 10.152958413708058,
+      "backgroundOffset": 0.02352941,
+      "backgroundMaximum": 0.03137255
+    },
+    {
+      "id": "c0420681401",
+      "path": "observations/C0420681401R.IMG",
+      "labelPath": "observations/C0420681401R.LBL",
+      "encoding": "vicar-byte-dn",
+      "observerLatitude": -0.264,
+      "observerWestLongitude": 210.323,
+      "sunLatitude": 0.418,
+      "sunWestLongitude": 244.056,
+      "rangeKm": 569130.386,
+      "northAzimuthDegrees": 357.974,
+      "center": [
+        407.864,
+        94.5053
+      ],
+      "pixelAngleMicroradians": 10.152963437098927,
+      "backgroundOffset": 0.01568627,
+      "backgroundMaximum": 0.02352941
+    },
+    {
+      "id": "c0420685801",
+      "path": "observations/C0420685801R.IMG",
+      "labelPath": "observations/C0420685801R.LBL",
+      "encoding": "vicar-byte-dn",
+      "observerLatitude": -0.223,
+      "observerWestLongitude": 248.6,
+      "sunLatitude": 0.419,
+      "sunWestLongitude": 281.785,
+      "rangeKm": 637500.382,
+      "northAzimuthDegrees": 357.994,
+      "center": [
+        433.3185,
+        78.4733
+      ],
+      "pixelAngleMicroradians": 10.15296646520284,
+      "backgroundOffset": 0.01176471,
+      "backgroundMaximum": 0.01960784
+    },
+    {
+      "id": "c0394682801",
+      "path": "observations/C0394682801R.IMG",
+      "labelPath": "observations/C0394682801R.LBL",
+      "encoding": "vicar-byte-dn",
+      "observerLatitude": 0.383,
+      "observerWestLongitude": 97.321,
+      "sunLatitude": -0.451,
+      "sunWestLongitude": 157.777,
+      "rangeKm": 671909.869,
+      "northAzimuthDegrees": 2.257000000000005,
+      "center": [
+        282.2301,
+        149.0377
+      ],
+      "pixelAngleMicroradians": 10.15296889470156,
+      "backgroundOffset": 0.01568627,
+      "backgroundMaximum": 0.02352941
+    },
+    {
+      "id": "c0401751800",
+      "path": "observations/C0401751800R.IMG",
+      "labelPath": "observations/C0401751800R.LBL",
+      "encoding": "vicar-byte-dn",
+      "observerLatitude": 0.155,
+      "observerWestLongitude": 308.318,
+      "sunLatitude": -0.217,
+      "sunWestLongitude": 291.308,
+      "rangeKm": 861177.347,
+      "northAzimuthDegrees": 177.83100000000002,
+      "center": [
+        416.3304,
+        68.7076
+      ],
+      "pixelAngleMicroradians": 10.152972590905833,
+      "backgroundOffset": 0.01568627,
+      "backgroundMaximum": 0.02352941
+    }
+  ]
+}

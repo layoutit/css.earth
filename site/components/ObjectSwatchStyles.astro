@@ -15,10 +15,14 @@ const styles = OBJECTS.flatMap(({ id }) => {
   const group = `.prepared-world-context [data-context-group="${id}"]`;
   return [`${group} { --shell-text: ${hex}; }`];
 }).join('\n');
+const majorBodyLabelStyles = OBJECTS
+  .filter(({ classification }) => classification === 'star' || classification === 'planet')
+  .map(({ id }) => `.prepared-world-context [data-context-label="${id}"] { text-transform: uppercase; }`)
+  .join('\n');
 const dwarfOrbitStyles = OBJECTS
   .filter(({ classification }) => classification === 'dwarf-planet')
   .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-line-opacity: .25; --context-base-label-opacity: .5; }`)
   .join('\n');
 ---
 
-<style is:inline set:html={styles + '\n' + dwarfOrbitStyles}></style>
+<style is:inline set:html={[styles, majorBodyLabelStyles, dwarfOrbitStyles].join('\n')}></style>

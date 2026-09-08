@@ -1,0 +1,253 @@
+{
+  "schema": "csslarissa-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "c1138148",
+      "path": "observations/C1138148_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "c39ac58bbc5c4fe39c43adea9807a614b1510b63c886b0a3d90c7b4f75c9f26e",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11381XX/C1138148_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1138148",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-clear-frames"
+      ],
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c1138148-label",
+      "path": "observations/C1138148_GEOMED.LBL",
+      "expectedBytes": 3285,
+      "expectedSha256": "681845179a0c761d7b427d44095978c94b872d83e18de95e657a4e23dc8045ef",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11381XX/C1138148_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1138148",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-clear-frames"
+      ]
+    },
+    {
+      "id": "stooke-shape",
+      "path": "shape/n7larissa.tab",
+      "expectedBytes": 70226,
+      "expectedSha256": "c22e8f6968eeab0519c238851542780f9a94b15ee1c7bbe6067fe1ce774deaeb",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n7larissa.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "credit": "Philip Stooke; NASA Planetary Data System",
+      "license": "Public PDS scientific data release; cite Stooke (2025), DOI 10.26033/yt84-5y91.",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "acquisition": "Download the released longitude/latitude/radius table.",
+      "redistribution": "Retain Stooke and PDS attribution.",
+      "consumers": [
+        "shape",
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-centered-radius-grid",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "credit": "NASA/JPL; Philip Stooke; NASA PDS",
+      "license": "Public PDS scientific data; retain mission and model attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "c1138148",
+          "stooke-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 270,
+        "latitudeDegrees": -24,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 107361,
+      "expectedSha256": "468d514a3fe40d8815536d38d3001d78ebf80c7144d42f07c7107a718b0df522"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5022,
+      "expectedSha256": "6fe29ad58148e7fd3c6ef47d9431a21108a44be9bfd675847ae403c8715be914",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/c1138148-opus.json",
+      "expectedBytes": 11704,
+      "expectedSha256": "10a057026351d359ec7a33b37e1878aea50d1a98b5ff4c1c022e6b9380d0279e",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/naif0012.tls",
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/registration.json",
+      "expectedBytes": 1802,
+      "expectedSha256": "486de67f47252d01f1f19621ed66e970311b4accb22ebe65eb29404472b36e95",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/vg200051.tsc",
+      "expectedBytes": 108191,
+      "expectedSha256": "bf8ae3b237a4f75362ae4bf5fe133ec4a888877f6183f1705330b9433f81dcac",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/vg2_nep_version1_type1_iss_sedr.bc",
+      "expectedBytes": 885760,
+      "expectedSha256": "f181a43f5785867afc81436a202a6ec453c8dd5538172ae916ca979981051f11",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/vg2_nep_version1_type1_iss_sedr.txt",
+      "expectedBytes": 5575,
+      "expectedSha256": "8bce7257eea9a974b3b6a488bb248c662048459c8669d19c1e1b3259a7fbfab7",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/vg2_v02.tf",
+      "expectedBytes": 12008,
+      "expectedSha256": "aa529b2dbf43b7f925b3e81e86a3d7e74a4d99c392113197e5f6d5bf13c37fcb",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1228,
+      "expectedSha256": "e674b85d27eedf1e45c939bb5eeb9feb701fe39d50d5a718c511cccf044c2872",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1236,
+      "expectedSha256": "1ea67bbb7d096dbd56a790df8b4b9c214062337032295e5c572e7d0ab572a1ad",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 4649,
+      "expectedSha256": "6c80b6aff31f9535faaf9107d891ee9a0982ad52702081461db10dcdca16fab1",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4630,
+      "expectedSha256": "711017306cf04ff82256c8b820f65e70eedafc1dff0f7d5074294c420e2215e9",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/bundle_description.txt",
+      "expectedBytes": 5105,
+      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/n7larissa.xml",
+      "expectedBytes": 6399,
+      "expectedSha256": "23af7778a3917263f5ee479036ac9bd6b05527718793b2883d480d8670604085",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "663c9408f76fe78d447c95010f4750aae286075e47a1d664901f02ed32eca4e1",
+      "purpose": "Authored source interpretation or preparation metadata."
+    }
+  ]
+}

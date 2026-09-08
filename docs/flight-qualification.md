@@ -183,3 +183,32 @@ The final renderer suite passes all 329 tests, including the new context-picking
 regression. Renderer typecheck and the typed source-closure audit pass again after
 the last runtime change. Logs: `renderer-final.log`, `typecheck-final.log` and
 `closure-final.log` under `output/depth-prototype/`.
+
+## Integration with main `000b67d7`
+
+Main was merged into the PR branch locally, preserving its 38 added bodies,
+epoch data and orbit presentation changes. This is not a merge of PR #27 into
+main. The resulting registry has 90 objects. Every checked runtime equals its
+transported data and every descriptor matches the payload SHA. The three
+qualified depth banks retain the same bytes as the matched visual/performance
+matrix; new entries are not assumed eligible. A surface must satisfy the face
+budget in every group or retain its entire previous layout. The seven newly
+added, only partly separable meshes correctly retain their previous layout.
+
+The integration passes all 608 package tests, 16 preparation/activation/layout
+checks, and both actual-registry source-closure checks (including independent
+camera ownership for every object). The shell suite remains 229/230: navigation
+atlas reproduction cannot open the generated/pinned Naiad
+`source/presentation/context.png`. Source-image restoration and the full
+aggregate gate are not claimed complete. Logs and exact registry hashes are in
+`output/depth-prototype/integration-*`.
+
+Phobos's integration replay exposed a second background-picking boundary: a
+resolved background body's disc can overlap the visible detailed surface even
+when its centre is not occluded. Its failed DPR 1 video remains under
+`output/playwright/depth-integration-phobos/`. The shared input owner now consults
+its existing surface hit test before accepting a context target during geometry
+LOD. Hover and activation share this rule; outside the detailed surface and in
+overview, context targets remain navigable. No second hit mesh or body-specific
+exception was added. The renderer suite passes all 331 tests, including native
+double-click/hover regression coverage, and renderer typecheck passes.

@@ -1,0 +1,26 @@
+{
+  "title": "Comprehensive Photometry of the Rings and 16 Satellites of Uranus with the Hubble Space Telescope",
+  "authors": [
+    "Erich Karkoschka"
+  ],
+  "year": 2001,
+  "url": "https://doi.org/10.1006/icar.2001.6596",
+  "location": "Table IV, printed page 55 / PDF page 5",
+  "body": "Juliet",
+  "semiAxesKm": [
+    75,
+    37,
+    37
+  ],
+  "model": "Adopted prolate spheroid: major axis points toward Uranus; the two perpendicular axes equal B. The third axis is a published assumption, not an independent measurement.",
+  "uncertainties": {
+    "url": "https://arxiv.org/abs/2401.04634",
+    "location": "French et al. (2024), Table 3, PDF page 10, reproducing Karkoschka (2001) Voyager paper Table V",
+    "originalSource": "https://doi.org/10.1006/icar.2001.6597",
+    "projectedSqrtABRadiusKm": 53,
+    "projectedRadiusUncertaintyKm": 4,
+    "minorMajorRatio": 0.5,
+    "minorMajorRatioUncertainty": 0.1
+  },
+  "qualification": "An analytic representation of published adopted dimensions, not resolved terrain or an archived detailed mesh. The uncertainties are on projected radius and axis ratio, not independent uncertainties on all three axes."
+}

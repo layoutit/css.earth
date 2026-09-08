@@ -1,0 +1,137 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "mathilde",
+  "displayName": "Mathilde",
+  "publicBase": "/scenes/mathilde/",
+  "distanceAu": 2.646575720427923,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 78,
+          "centerLongitude": 180,
+          "connectedEdge": "north",
+          "connectedFillRange": [
+            75,
+            81
+          ]
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/253mathilde.tab",
+        "format": "pds-radial-table",
+        "grid": {
+          "latitudeStepDegrees": 3,
+          "longitudeStepDegrees": 3,
+          "longitudeDirection": "west",
+          "metersPerUnit": 1000,
+          "expectedRecords": 7381,
+          "noDataRadius": 26.5
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -26.4
+        },
+        "minimum": -11,
+        "maximum": 10,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 26400,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 26.4,
+    "camera": {
+      "initialScenePitchDegrees": 25,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
+    "polesUrl": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/stooke-253mathilde.tab",
+      "format": "pds-radial-table",
+      "grid": {
+        "latitudeStepDegrees": 5,
+        "longitudeStepDegrees": 5,
+        "longitudeDirection": "east",
+        "metersPerUnit": 1000,
+        "expectedRecords": 2701,
+        "columns": [
+          "longitude",
+          "latitude",
+          "radius"
+        ]
+      },
+      "latitudeSegments": 36,
+      "longitudeSegments": 72,
+      "faceBudget": 800,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 600,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Illustrative directional lighting in the published Mathilde mapping frame; source spin pole and phase are unknown",
+    "sunQualification": "Illustrative directional lighting in Mathilde’s explicitly arbitrary J2000-parallel mapping frame. The source has no solved spin pole or rotational phase, so this is not an accurately timed body-fixed Sun solution. The Monochrome view separately retains NEAR encounter illumination and photographed shadows."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      180,
+      180,
+      180
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
+  "citation": "PDS Ring-Moon Systems Node Uranus satellite table; Karkoschka (2001) Voyager/HST size measurements",
+  "semiAxesKm": [
+    81,
+    81,
+    81
+  ],
+  "referenceRadiusKm": 81,
+  "formula": "r(lon,lat)=81 km",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "qualification": "Approximate reference sphere consistent with the 162 km diameter; it is not a measured detailed mesh. No detailed scientific Puck shape release was located. The older PCK715 sphere radius of 77 km is not used for the displayed size.",
+  "orientation": "IAU/WGCCRE Puck pole/prime-meridian model from pinned pck00011.tpc."
+}

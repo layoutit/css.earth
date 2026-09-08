@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:compil.ast.radar.shape-models:data:4179toutatis2_tab</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>High-resolution Radar Shape Model for 4179 Toutatis</title>
+    <information_model_version>1.10.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Hudson, R.S., Ostro, S.J., and Scheeres, D.J.</author_list>
+      <publication_year>2020</publication_year>
+      <description>This high resolution shape model of asteroid 4179 Toutatis was created by R.S. Hudson
+et al. (2003) based on radar observations and has the form
+
+ v x1 y1 z1  
+ v x2 y2 z2  
+ v x3 y3 z3              
+ (etc.)    
+ f i1 j1 k1 
+ (etc.)
+
+where the letter 'v' denotes a vertex and the letter 'f' denotes a triangular facet. 
+    
+This format is identical to a Wavefront OBJ file. There is a freeware program called
+WCVT2POV that will convert this format into other formats such as POVray and DXF. 
+ 
+Hudson, R.S., S.J. Ostro, and D.J. Scheeres 2003.  
+High-resolution model of asteroid 4179 Toutatis.  
+Icarus 161, 346-355.
+[HUDSONETAL2003]</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>1992-12-02Z</start_date_time>
+      <stop_date_time>1996-12-03Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>None</name>
+      <type>Other Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>305-m fixed spherical reflecting antenna</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Observatory</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo 2380 MHz Radar Receiver</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.recv_s</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>305-m fixed spherical reflecting antenna</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Observatory</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Planetary Radar Transmitter</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.trans_s</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>70-m steerable parabolic radio telescope</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:goldstone.dss14_70m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Goldstone Complex</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.goldstone</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Goldstone Solar System Radar Receiver</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:goldstone.dss14_70m.recv_x</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>70-m steerable parabolic radio telescope</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:goldstone.dss14_70m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Goldstone Complex</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.goldstone</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Goldstone Solar System Radar Transmitter</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:goldstone.dss14_70m.trans_x</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>34-m antenna</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:goldstone.dss13_34m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Goldstone Complex</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.goldstone</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>goldstone.dss13_34m.recv_x</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:goldstone.dss13_34m.recv_x</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(4179) Toutatis</name>
+      <type>Asteroid</type>
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <reference_text>10.1016/S0019-1035(02)00042-8</reference_text>
+      <reference_text>Hudson, R.S., S.J. Ostro, and D.J. Scheeres, High- resolution model of asteroid 4179
+Toutatis, Icarus 161, 346-355, 2003.</reference_text>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>4179toutatis2.tab</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2020-05-05</creation_date_time>
+      <file_size unit="byte">2879779</file_size>
+      <records>59996</records>
+    </File>
+    <Table_Character>
+      <local_identifier>Vertex Table</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>20000</records>
+      <description>The VERTEX_TABLE is the first part, describing the positions of the vertices of the
+shape model.  The floating point numbers x1 y1 z1 are the coordinates of vertex 1,
+and so on (vertices are implicitly numbered beginning with 1).  The origin is the
+center of mass, and the axes are the principle axes of the shape model.  The units
+are kilometers.  The linking of vertices into facets is provided  in the FACET_TABLE.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">48</record_length>
+        <Field_Character>
+          <name>Vertex Flag</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>UTF8_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>A 'v', indicating this record contains the coordinates of a vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>X Coordinate</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.6e</field_format>
+          <description>X coordinate of the vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Y Coordinate</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">18</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.6e</field_format>
+          <description>Y coordinate of the vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Z Coordinate</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">33</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.6e</field_format>
+          <description>Z coordinate of the vertex</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>Facet Table</local_identifier>
+      <offset unit="byte">960000</offset>
+      <records>39996</records>
+      <description>The FACET_TABLE is the second part of the shape model file providing the linking of
+vertices into facets. The integers i1 j1 k1 are the indices of the 3 vertices that
+form triangular facet 1, and so on.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">48</record_length>
+        <Field_Character>
+          <name>Facet Flag</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>UTF8_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>A 'f', indicating this record contains the indices of three vertices defining a
+single, triangular facet</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Vertex 1</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">5</field_length>
+          <field_format>%5d</field_format>
+          <description>Index of the first vertex (record number in the preceding table</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Vertex 2</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">9</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">5</field_length>
+          <field_format>%5d</field_format>
+          <description>Index of the second vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Vertex 3</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">15</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">5</field_length>
+          <field_format>%5d</field_format>
+          <description>Index of the third vertex</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
+

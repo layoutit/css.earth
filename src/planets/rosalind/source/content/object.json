@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "rosalind",
+  "displayName": "Rosalind",
+  "panel": {
+    "introduction": "Rosalind is a small inner moon of Uranus discovered by Voyager 2. Its measured outline is consistent with a nearly spherical body.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Projected radius",
+        "value": "36 ± 6 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Model dimensions",
+        "value": "72 × 72 × 72 km"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Uranus",
+        "value": "About 69,927 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 imaging team · 1986"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Sphere consistent with measured outline"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+        "title": "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+        "detail": "Measured shape",
+        "thumbnail": "/scenes/rosalind/rosalind-model-thumbnail.webp",
+        "surface": "rosalind-model-surface@2x.webp",
+        "poles": "rosalind-model-poles@2x.webp",
+        "source": {
+          "id": "measured-ellipsoid",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2401.04634"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Rosalind overview",
+      "href": "https://science.nasa.gov/uranus/moons/rosalind/"
+    },
+    {
+      "label": "Karkoschka; French et al.",
+      "role": "surface",
+      "description": "Published prolate dimensions and uncertainty",
+      "href": "https://arxiv.org/abs/2401.04634"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Voyager source inventory",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/uranus/moons/rosalind/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2001); French et al. (2024); IAU/WGCCRE"
+    }
+  }
+}

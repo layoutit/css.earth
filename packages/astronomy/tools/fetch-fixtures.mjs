@@ -51,6 +51,15 @@ const SATELLITES = [
   ['europa', '502', '500@599'],
   ['ganymede', '503', '500@599'],
   ['callisto', '504', '500@599'],
+  ['amalthea', '505', '500@599'],
+  ['thebe', '514', '500@599'],
+  ['adrastea', '515', '500@599', 'daily'],
+  ['metis', '516', '500@599', 'daily'],
+  ['methone', '632', '500@699', 'cassini-era'],
+  ['polydeuces', '634', '500@699', 'daily'],
+  ['anthe', '649', '500@699', 'daily'],
+  ['aegaeon', '653', '500@699', 'daily'],
+  ['pallene', '633', '500@699', 'cassini-era'],
   ['mimas', '601', '500@699'],
   ['enceladus', '602', '500@699'],
   ['tethys', '603', '500@699'],
@@ -70,6 +79,16 @@ const SATELLITES = [
   ['prometheus', '616', '500@699', 'limited'],
   ['pandora', '617', '500@699', 'limited'],
   ['pan', '618', '500@699', 'source-limited'],
+  ['bianca', '708', '500@799', 'daily'],
+  ['cressida', '709', '500@799', 'daily'],
+  ['desdemona', '710', '500@799', 'daily'],
+  ['rosalind', '713', '500@799', 'daily'],
+  ['puck', '715', '500@799', 'daily'],
+  ['portia', '712', '500@799', 'daily'],
+  ['juliet', '711', '500@799', 'daily'],
+  ['belinda', '714', '500@799', 'daily'],
+  ['cordelia', '706', '500@799', 'daily'],
+  ['ophelia', '707', '500@799', 'daily'],
   ['miranda', '705', '500@799'],
   ['ariel', '701', '500@799'],
   ['umbriel', '702', '500@799'],
@@ -77,7 +96,17 @@ const SATELLITES = [
   ['oberon', '704', '500@799'],
   ['triton', '801', '500@899'],
   ['proteus', '808', '500@899'],
+  ['larissa', '807', '500@899'],
+  ['naiad', '803', '500@899', 'daily'],
+  ['thalassa', '804', '500@899', 'daily'],
+  ['despina', '805', '500@899', 'daily'],
+  ['galatea', '806', '500@899', 'daily'],
   ['charon', '901', '500@999'],
+  ['nix', '902', '500@999', 'daily'],
+  ['hydra', '903', '500@999', 'daily'],
+  ['kerberos', '904', '500@999', 'daily'],
+  ['styx', '905', '500@999', 'daily'],
+  ['dimorphos', '120065803', '500@920065803', 'dart'],
 ]
 
 // Deliberately NOT the epochs the mean elements were fitted on: the satellite
@@ -86,7 +115,7 @@ const SATELLITES = [
 const SATELLITE_EPOCHS = [2415033.25, 2433295.75, 2451545.0, 2461041.5, 2469820.25, 2488056.25]
 
 // Six independent epochs inside the 2020-01-01 .. 2032-01-01 current-era fit
-// used for the fast and resonant added Saturn moons. None is on its 5-day grid.
+// used for the fast and resonant added inner moons. None is on its 5-day grid.
 const LIMITED_SATELLITE_EPOCHS = [2458862.25, 2460310.75, 2461041.5, 2461772.25, 2462502.75, 2463219.25]
 
 // Pan's source supports 1949-12-27 .. 2050-01-09 and its simple fit remains
@@ -134,8 +163,12 @@ for (const [name, description, command, center, epochs] of targets) {
 }
 for (const [id, command, center, range] of SATELLITES) {
   const epochs =
-    range === 'cassini-era'
+    range === 'daily'
+      ? [2458862.25, 2460310.75, 2461041.625, 2461772.25, 2462502.75, 2463219.25]
+      : range === 'cassini-era'
       ? [2453383.25, 2454113.75, 2455197.25, 2456658.75, 2457389.25, 2458110.25]
+      : range === 'dart'
+      ? [2461258.75, 2461267.25, 2461276.75, 2461286.75, 2461302.25, 2461314.75]
       : range === 'limited'
       ? LIMITED_SATELLITE_EPOCHS
       : range === 'source-limited'

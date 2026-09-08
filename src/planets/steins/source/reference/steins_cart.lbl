@@ -1,0 +1,125 @@
+PDS_VERSION_ID = PDS3                                                         
+LABEL_REVISION_NOTE   = "15 Jan 2013:  T. Farnham;  Created                   
+"                                                                             
+                                                                              
+RECORD_TYPE  = "FIXED_LENGTH"                                                 
+RECORD_BYTES = 80                                                             
+FILE_RECORDS = 30875                                                          
+                                                                              
+^COUNTS_TABLE       = ("STEINS_CART.WRL",6)                                   
+^VERTEX_TABLE       = ("STEINS_CART.WRL",7)                                   
+^PLATE_TABLE        = ("STEINS_CART.WRL",10252)                               
+                                                                              
+DATA_SET_ID  = "RO-A-OSINAC/OSIWAC-5-STEINS-SHAPE-V1.0"                       
+PRODUCT_NAME = "CARTESIAN PLATE MODEL FOR THE SURFACE OF ASTEROID STEINS"     
+PRODUCT_ID   = "STEINS-CARTESIAN-PLATE-MODEL"                                 
+INSTRUMENT_HOST_ID    = "RO"                                                  
+INSTRUMENT_HOST_NAME  = "ROSETTA-ORBITER"                                     
+INSTRUMENT_ID         = {"OSINAC","OSIWAC"}                                   
+TARGET_NAME           = "2867 STEINS"                                         
+START_TIME            = "N/A"                                                 
+STOP_TIME             = "N/A"                                                 
+PRODUCT_CREATION_TIME = 2013-01-15                                            
+                                                                              
+OBJECT     = COUNTS_TABLE                                                     
+  ROWS               = 1                                                      
+  ROW_BYTES          = 80                                                     
+  INTERCHANGE_FORMAT = ASCII                                                  
+  COLUMNS            = 2                                                      
+  DESCRIPTION        = "Table that gives the count of vertices and plates     
+    representing the surface of the numerical shape model.  The shape model   
+    comprises triangular plates and vertices that are specified in a          
+    body-fixed cartesian coordinate system."                                  
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "NUMVERTICES"                                             
+    DESCRIPTION   = "NUMBER OF VERTICES IN SHAPE MODEL"                       
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 5                                                         
+    BYTES         = 5                                                         
+    FORMAT        = "I5"                                                      
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "NUMPLATES"                                               
+    DESCRIPTION   = "NUMBER OF TRIANGULAR PLATES IN SHAPE MODEL"              
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 13                                                        
+    BYTES         = 5                                                         
+    FORMAT        = "I5"                                                      
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = COUNTS_TABLE                                                     
+                                                                              
+OBJECT     = VERTEX_TABLE                                                     
+  ROWS               = 10242                                                  
+  ROW_BYTES          = 80                                                     
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 1                                                      
+  DESCRIPTION        = "Table of vertices of the numerical shape model.       
+    These are the vertices of plates that approximate the surface             
+    of the body.                                                              
+                                                                              
+    Each row of this table contains the X, Y and Z coordinates of one vertex  
+    in a Cartesian coordinate system                                          
+    "                                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "COORDINATES"                                             
+    DESCRIPTION   = "The (x,y,z) coordinates of one vertex in the model"      
+    UNIT          = "KILOMETER"                                               
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 1                                                         
+    BYTES         = 49                                                        
+    ITEMS         = 3                                                         
+    ITEM_BYTES    = 16                                                        
+    FORMAT        = "3(F16.12)"                                               
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = VERTEX_TABLE                                                     
+                                                                              
+OBJECT     = PLATE_TABLE                                                      
+  ROWS               = 20480                                                  
+  ROW_BYTES          = 80                                                     
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 2                                                      
+  DESCRIPTION        = "Table of triangular plates of the numerical shape     
+    model.  These triangular plates approximate the surface of the body.      
+                                                                              
+    Each row of this table contains three integer offsets that point to three 
+    vertices from the previous table.  The three entries are the vertices of  
+    one triangular plate of the shape model, and denote the offset from the   
+    first row in the table of vertices.  An offset of 0 points to the first   
+    row in the table of vertices, an offset of 1 to the second row, and so    
+    on.                                                                       
+    "                                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "PLATE_VERTICES"                                          
+    DESCRIPTION   = "Offsets of the three vertices defining this              
+      triangular plane. The offsets refer to the vertices listed in           
+      the preceding vertex table."                                            
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 1                                                         
+    BYTES         = 30                                                        
+    ITEMS         = 3                                                         
+    ITEM_BYTES    = 10                                                        
+    FORMAT        = "3(I10)"                                                  
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "FLAG"                                                    
+    DESCRIPTION   = "VRML Flag denoting the end of the facet."                
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 39                                                        
+    BYTES         = 2                                                         
+    ITEMS         = 1                                                         
+    ITEM_BYTES    = 2                                                         
+    FORMAT        = "(I2)"                                                    
+  END_OBJECT = COLUMN                                                         
+                                                                              
+END_OBJECT = PLATE_TABLE                                                      
+END                                                                           

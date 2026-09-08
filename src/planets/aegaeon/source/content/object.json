@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "aegaeon",
+  "displayName": "Aegaeon",
+  "panel": {
+    "introduction": "Aegaeon is a tiny, elongated moon embedded in Saturn’s G-ring arc. Cassini images measured its outline; impacts on the moon can supply dust to the arc.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "0.33 ± 0.06 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Measured dimensions",
+        "value": "1.4 × 0.5 × 0.4 km"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Saturn",
+        "value": "About 167,500 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 19.3 hours"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery images",
+        "value": "Cassini imaging team · 2008"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Analytic ellipsoid approximating measured axes, not the detailed shape solution"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+        "title": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+        "detail": "Measured shape",
+        "thumbnail": "/scenes/aegaeon/aegaeon-model-thumbnail.webp",
+        "surface": "aegaeon-model-surface@2x.webp",
+        "poles": "aegaeon-model-poles@2x.webp",
+        "source": {
+          "id": "measured-ellipsoid",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1912.09192"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Aegaeon overview",
+      "href": "https://science.nasa.gov/saturn/moons/aegaeon/"
+    },
+    {
+      "label": "Hedman et al.",
+      "role": "surface",
+      "description": "Cassini shape and photometric analysis",
+      "href": "https://arxiv.org/abs/1912.09192"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Cassini source inventory",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/aegaeon/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Hedman et al. (2020), Table 1 and Appendix B"
+    }
+  }
+}

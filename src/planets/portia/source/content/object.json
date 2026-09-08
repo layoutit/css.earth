@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "portia",
+  "displayName": "Portia",
+  "panel": {
+    "introduction": "Portia lends its name to a crowded group of moons close to Uranus. Voyager 2 observations reveal an elongated body, while its surface remains unresolved in useful detail.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Projected radius",
+        "value": "70 ± 4 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Model dimensions",
+        "value": "156 × 126 × 126 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Uranus",
+        "value": "About 12.32 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Uranus",
+        "value": "About 66,100 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation",
+        "value": "Synchronous model"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 imaging team · 1986"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published prolate shape fit: 156 × 126 × 126 km. The third axis is assumed equal to the shorter measured axis. Voyager images constrain size and elongation but do not resolve a usable surface map. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "title": "Published prolate shape fit: 156 × 126 × 126 km. The third axis is assumed equal to the shorter measured axis. Voyager images constrain size and elongation but do not resolve a usable surface map. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "detail": "Measured shape",
+        "thumbnail": "/scenes/portia/portia-model-thumbnail.webp",
+        "surface": "portia-model-surface@2x.webp",
+        "poles": "portia-model-poles@2x.webp",
+        "source": {
+          "id": "measured-ellipsoid",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2401.04634"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Portia overview",
+      "href": "https://science.nasa.gov/uranus/moons/portia/"
+    },
+    {
+      "label": "Karkoschka; French et al.",
+      "role": "surface",
+      "description": "Published prolate dimensions and uncertainty",
+      "href": "https://arxiv.org/abs/2401.04634"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Voyager source inventory",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/uranus/moons/portia/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2001); French et al. (2024); IAU/WGCCRE"
+    }
+  }
+}

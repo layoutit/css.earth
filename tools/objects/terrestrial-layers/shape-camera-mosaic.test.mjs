@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {decodeCalibratedCamera,controlledShapeCamera} from './shape-camera-mosaic.mjs';
+import {decodeCalibratedCamera,controlledShapeCamera,insetCoverage} from './shape-camera-mosaic.mjs';
 import {parsePdsPlateShape} from './obj-shape.mjs';
 
 test('calibrated VICAR skips binary telemetry and honors source byte order',()=>{
@@ -33,4 +33,39 @@ test('PDS4 zero-based plate topology supports external camera and shadow rays',(
   assert.equal(mesh.intersect([5000,0,0],[1,0,0]),null);
   assert.equal(mesh.intersect([5000,0,0],[-1,0,0],2500),null);
   assert.throws(()=>parsePdsPlateShape(text,{...profile,indexBase:1}),/absent/);
+});
+
+test('Voyager geometric images use signed HALF pixels and their FICOR I/F scale',()=>{
+  for(const endian of ['LOW','HIGH']){
+    const b=Buffer.alloc(516);b.write(`LBLSIZE=512 FORMAT='HALF' ORG='BSQ' NS=2 NL=1 NB=1 NBB=0 NLB=0 RECSIZE=4 INTFMT='${endian}' REALFMT='VAX' LABEL3='FOR (I/F)*10000., MULTIPLY DN VALUE BY 2.00000'`);
+    [-30,500].forEach((v,i)=>endian==='LOW'?b.writeInt16LE(v,512+2*i):b.writeInt16BE(v,512+2*i));
+    const im=decodeCalibratedCamera(b);assert.ok(Math.abs(im.data[0]+.006)<1e-8);assert.ok(Math.abs(im.data[1]-.1)<1e-8);
+    const uncalibrated=Buffer.from(b);uncalibrated.write('X',uncalibrated.indexOf('FOR (I/F)'));
+    assert.throws(()=>decodeCalibratedCamera(uncalibrated),/layout/);
+  }
+});
+
+// Raw detector DN is opt-in: it must never be misreported as calibrated I/F.
+test('raw BYTE camera skips telemetry and each row prefix without treating it as radiance',()=>{
+  const b=Buffer.alloc(512+5+10,255);b.fill(0,0,512);
+  b.write("LBLSIZE=512 FORMAT='BYTE' ORG='BSQ' NS=3 NL=2 NB=1 NBB=2 NLB=1 RECSIZE=5 ");
+  b.set([222,223,0,51,102,224,225,153,204,255],517);
+  const result=decodeCalibratedCamera(b,'vicar-byte-dn');
+  assert.equal(result.encoding,'vicar-byte-dn');
+  assert.equal(result.offset,517);
+  assert.deepEqual(Array.from(result.data).map(v=>Math.round(v*255)),[0,51,102,153,204,255]);
+  assert.throws(()=>decodeCalibratedCamera(b),/Unsupported/);
+  assert.throws(()=>decodeCalibratedCamera(b.subarray(0,-1),'vicar-byte-dn'),/Unsupported/);
+});
+
+test('coverage uncertainty insets known gaps while retaining dark valid interior samples',()=>{
+  const width=11,height=11,image={width,height,data:new Float32Array(width*height).fill(.1),missing:new Uint8Array(width*height)};
+  image.missing[5*width+2]=1;image.data[5*width+7]=.00001;
+  insetCoverage(image,2);
+  assert.equal(image.missing[5*width+4],1); // Two pixels from an identified hole.
+  assert.equal(image.missing[5*width+5],0); // Beyond the uncertainty band.
+  assert.equal(image.missing[5*width+7],0); // Dim observed terrain is not a gap.
+  assert.equal(image.data[5*width+7],Math.fround(.00001));
+  assert.equal(image.missing[2*width+5],1); // Raster edge receives the same margin.
+  assert.throws(()=>insetCoverage(image,-1),/inset/);
 });

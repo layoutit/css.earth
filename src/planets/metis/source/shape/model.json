@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "pck00011.tpc",
+  "sourceKey": "BODY516_RADII",
+  "semiAxesKm": [
+    30,
+    20,
+    17
+  ],
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "west-positive",
+  "qualification": "Smooth reference ellipsoid from measured dimensions; no local relief. Sampling density does not imply additional measurements."
+}

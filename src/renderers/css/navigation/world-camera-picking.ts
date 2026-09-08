@@ -10,7 +10,8 @@ const DOUBLE_CLICK_MILLISECONDS = 500;
 const CLICK_SLOP_PIXELS = 5;
 
 export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElement,
-  readBounds?: () => { left: number; top: number; width: number; height: number }) {
+  readBounds?: () => { left: number; top: number; width: number; height: number },
+  detailOccludes?: (clientX: number, clientY: number) => boolean) {
   const document = inputSurface.ownerDocument;
   const windowTarget = document.defaultView;
   if (!windowTarget) throw new Error('World picking requires a mounted window.');
@@ -26,8 +27,12 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   if (!readBounds) windowTarget.addEventListener('resize', resize);
   const pick = (event: MouseEvent) => {
     const bounds = readBounds?.() ?? fallbackBounds!;
-    return registry.pick(event.clientX - bounds.left - bounds.width / 2,
+    const target = registry.pick(event.clientX - bounds.left - bounds.width / 2,
       event.clientY - bounds.top - bounds.height / 2);
+    // Context sprites paint behind the selected detailed surface. Their screen
+    // bounds can overlap it even when their centres are not occluded. Reuse the
+    // detail owner's existing hit contract for both hover and activation.
+    return target && detailOccludes?.(event.clientX, event.clientY) ? null : target;
   };
   let hoveredGroup: HTMLElement | null = null;
   const setHovered = (target: HTMLElement | null) => {

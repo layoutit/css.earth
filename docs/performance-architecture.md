@@ -36,6 +36,10 @@ render leaf. It compares the complete computed CSS cascade before and after
 compilation for every dataset and geometry/billboard/marker LOD. Unsupported
 cases keep native depth. The typed runtime validator bounds group count and tree
 depth and requires independent carriers and exact unique order coverage.
+Every emitted group must contain at most 64 source faces. A partially separable
+surface with any larger remainder keeps its entire original representation;
+preparation does not accept only the easy fragments. This bound also applies to
+new registry entries without an object allowlist.
 
 The checked runtime JSON remains exactly equal to the final transported data.
 Before recompilation, preparation recovers the original branch by removing only
@@ -51,7 +55,8 @@ those detail batches.
 ## Matched browser result
 
 Baseline: immutable production-shaped build from `4fa34b72`, cloned before the
-implementation. Candidate: the prepared depth implementation on top of
+implementation. Both builds use the then-current 52-object registry. Candidate:
+the prepared depth implementation on top of
 `827db935`, identified by the actual response hashes below. Canary
 155.0.8043.0, Apple M3 Max / ANGLE Metal, headless, 1995 × 1236 CSS pixels.
 Each pair uses the same close surface, camera input path and DPR. Recordings ran
@@ -193,8 +198,8 @@ An early spatial-cut prototype increased Deimos from 1,216 to 3,160 triangles at
 a 64-leaf target and produced visible seam risk. Another flattening experiment
 reduced compositor time but transferred cost to style and used incorrect depth.
 Both were rejected. The implemented compiler accepts only separating planes
-that preserve every original face. The 64-leaf target guides offline splitting;
-an unpartitionable region is retained intact, not silently simplified.
+that preserve every original face. The 64-leaf limit bounds every emitted group;
+if any region cannot meet it, the entire surface keeps its original layout.
 
 ## Reproduction and evidence
 
@@ -228,7 +233,7 @@ preparation readiness limits remain in [flight qualification](flight-qualificati
 This change does not declare every object ready or authorize merging.
 
 
-The final build also corrects transparent-corner picking for resolved context
+The pre-main-integration build also corrects transparent-corner picking for resolved context
 sprites. It keeps the same prepared surface banks; its packaged runtime SHA-256
 is `eb0f577251961b63e732991d511a49f55526b9f443700e867c9a6b8a8dd39b05`.
 A final Deimos DPR 2 drag on those bytes records draw-pass p95 5.052 ms,

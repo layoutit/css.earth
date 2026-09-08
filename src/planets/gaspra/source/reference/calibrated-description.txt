@@ -1,0 +1,89 @@
+Description of the Galileo SSI Gaspra Radiometrically Calibrated Images bundle V1.0
+===================================================================================
+
+Note: This bundle was migrated to PDS4 from the PDS3 data set GO-A-SSI-3-GASPRA-CALIMAGES-V1.0.  For PDS3 data sets migrated to PDS4, the following text is taken verbatim from the data set description and confidence level note of the PDS3 data set catalog file. In these cases, some details may not be correct as a description of the PDS4 bundle.
+
+This dataset includes the Galileo Orbiter Solid State Imaging data on the asteroid 951 Gaspra.  The raw data have already been archived in PDS with the data set name 'Galileo Imaging (SSI) Asteroid, Earth and Moon Experiment Data Records' and can be found by searching on the data set identification 'GO-A/E-SSI-2-REDR-V1.0'. Only those images in which Gaspra actually appears have been included here. Images in both FITS and ISIS Cube format are provided.
+
+
+Processing
+==========
+
+Preparation in IRAF
+-------------------
+
+The raw images were converted from VICAR format to FITS format using the image reduction package IRAF.  The image prefix tables, telemetry tables, and bad data value headers were removed from the raw images.  All relevant label keywords describing the image have been retained in the raw image labels.
+
+
+Processing in ISIS and preparation of ISIS cube versions
+--------------------------------------------------------
+
+The FITS images prepared as above in IRAF were converted from FITS format to ISIS cube format using GLLSSI2ISIS, and radiometrically calibrated using GLLSSICAL.  GLLSSICAL was the tool provided in the original, raw data delivery for calibration of Galileo SSI images.
+
+- GLLSSI2ISIS inputs were the raw image file name and the output image file name for the ISIS format image.                                             
+
+- GLLSSICAL inputs were image file name in the ISIS format created by GLLSSI2ISIS, units = IOF, scale=1.
+
+- The GLLSSICAL output was the radiometrically calibrated image in ISIS cube format, which is archived in the data/qube directory of this data set.
+
+
+Preparation of the FITS versions
+--------------------------------
+
+The radiometrically calibrated ISIS cube format images were converted to FITS format using the ISIS routine ISIS2FITS.
+
+- ISIS2FITS inputs were the radiometrically calibrated image file name (in ISIS cube format), bittype=32, minpercent=0.5, maxpercent=99.5, info=Nominal (nominal fits header).
+
+- The ISIS2FITS output was the radiometrically calibrated image in FITS format, which is archived in the data/fits directory of this data set.
+
+
+References for ISIS software
+----------------------------
+
+Anderson, J.A., 2008. 
+ISIS camera model design, 
+39th LPSC (Houston), Abstract #2159, Lunar and Planetary Institute.
+
+Anderson, J.A., Sides, S.C., Sotesz, D.L., Sucharski, T.L., Beker, K.J., 2004. 
+Modernization of the integrated software for imagers and spectrometers, 
+35th LPSC (Houston), Abstract #2039, Lunar and Planetary Institute.
+
+
+Data
+====
+
+The data are included in a series of files with filenames of the form *rcal_XXX.FIT, where * denotes the spacecraft cloak start count, rcal denotes the image has been radiometrically calibrated, and XXX denotes the filter name where:
+
+Filter Name       XXX
+CLEAR             clr
+RED               red
+GREEN             gre
+VIOLET            vio
+IR-7560           ir7
+IR-8890           ir8
+IR-9680           ir9
+
+The filename of the original, raw files were the last four digits of the spacecraft clock start count.
+
+Filter response curves taken from Klaasen et al. 1997 are included in the document directory.
+
+The general table, color-set_id.tab, denotes which images were acquired at similar viewing conditions but in separate filters, thus constituting a color image set. The table includes image file named, filter name, and a designator for which color set the image belongs. Images with the same designator value (A-F) belong to the same color image set.
+
+Reference for Galileo SSI Camera Perfomance
+-------------------------------------------
+
+K.P. Klaasen, M.J.S. Belton, H.H. Brenenman, A.S. McEwen, M.E. Davies, R.J. Sullivan, C.R. Clark, G. Neukum, C.M. Heffernan, A.P. Harch, J.M. Kaufman, W.J. Merline, L.R. Gaddis, W.F. Cunningham, P. Helfenstein, T.R. Colvin 1997.
+Inflight performance characteristics, calibration, and utilization of the Galileo solid-state imaging camera, 
+Opt. Eng.36, 3001-3027).
+doi:10.1117/1.601525
+
+
+Confidence Level Overview
+=========================
+
+Data Coverage and Quality
+-------------------------
+
+This dataset includes only those Galileo SSI images in which 951 Gaspra actually appears. No viable camera kernels for the time frame in which the Gaspra images were acquired were included in the original PDS archive. These kernels are used by GLLSSICAL to convert raw values to reflectance. A work around was used in which GLLSSICAL was set to assume nadir pointing for all images. This produces negligible errors in radiometric values, but disables any calculations of viewing and illumination conditions.
+
+Several images include saturated lines (rows of pixels) and pixels. These were present in the original raw images and not removed in the radiometric calibration process.

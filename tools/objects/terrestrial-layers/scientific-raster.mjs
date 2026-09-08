@@ -4,6 +4,7 @@ import {loadIsis3Raster} from './isis3-raster.mjs';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 import {composeCorrectedColor} from './photometric-observations.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
+import { loadPdsRadialTable } from './pds-radial-table.mjs';
 import { loadShapeScalarGrid } from './obj-shape.mjs';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
@@ -70,15 +71,16 @@ export function scienceMapPoint(longitude, latitude, grid) {
 }
 
 export async function loadScienceSurface(root, lens) {
-  if (lens.format === 'pds3-radius-zip') {
-    const raster = await loadPdsScalarGrid(resolve(root, lens.path), lens.grid, lens.sampleGrid);
+  if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {
+    const loader = lens.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
+    const raster = await loader(resolve(root, lens.path), lens.grid, lens.sampleGrid);
     return { sample(longitude, latitude) {
       if (latitude < -90 || latitude > 90) return null;
       const value = raster.sample(longitude, latitude);
       return value === null ? null : value * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0);
     } };
   }
-  if (['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format)) return loadShapeScalarGrid(root, lens);
+  if (['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format)) return loadShapeScalarGrid(root, lens);
   if (lens.additionalGrids?.length) {
     const rasters = await Promise.all([lens, ...lens.additionalGrids].map(entry =>
       loadScienceSurface(root, {...lens, ...entry, additionalGrids: undefined})));
