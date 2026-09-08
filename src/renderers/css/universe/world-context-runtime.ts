@@ -26,7 +26,9 @@ export function createWorldContextObjectRuntime({ definition, context, frame }: 
     worldContext: { frame: selectedFrame, bodyRadiusUnits: selectedFrame.bodyRadiusM / selectedFrame.metersPerUnit,
       kilometersPerUnit: selectedFrame.metersPerUnit / 1000,
       maximumExtentUnits: plan.camera.maximumDistanceM / selectedFrame.metersPerUnit,
-      detailRetirement: { originM: plan.focus.positionM, distanceM: plan.volume.fullDistanceM },
+      // Unresolved detail belongs to the system that supplied the body, not
+      // the much larger volume that becomes visible after that system retires.
+      detailRetirement: { originM: plan.focus.positionM, distanceM: plan.system.hiddenDistanceM },
       framingReferenceZoom: isFocus ? plan.camera.framingReferenceZoom
         : definition.camera.defaultZoom * definition.camera.logicalBodyDiameter / 2 /
           (selectedFrame.bodyRadiusM / selectedFrame.metersPerUnit),
