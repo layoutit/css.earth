@@ -13,7 +13,8 @@ export async function renderRadialSnapshot({ faces, map, size, longitudeDegrees,
   const lon = longitudeDegrees * Math.PI / 180, lat = latitudeDegrees * Math.PI / 180;
   const eye = [Math.cos(lat) * Math.cos(lon), Math.cos(lat) * Math.sin(lon), Math.sin(lat)];
   const right = [-Math.sin(lon), Math.cos(lon), 0], up = [-Math.sin(lat) * Math.cos(lon), -Math.sin(lat) * Math.sin(lon), Math.cos(lat)];
-  const radius = Math.max(...faces.flatMap(face => face.vertices.map(v => Math.hypot(...v))));
+  const radius = faces.reduce((maximum, face) => face.vertices.reduce(
+    (maximum, vertex) => Math.max(maximum, Math.hypot(...vertex)), maximum), 0);
   const scale = width * .47 / radius;
   for (const face of faces) {
     if (dot(face.normal, eye) <= 0) continue;

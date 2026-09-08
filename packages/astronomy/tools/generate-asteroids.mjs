@@ -4,7 +4,7 @@ import { writeFileSync } from 'node:fs';
 import { elementsUrl, vectorsUrl, horizons, parseElements, parseVectors } from './lib/horizons.mjs';
 
 const epochJdTt = 2461286.5;
-const bodies = [['vesta', '4;'], ['eros', '433;'], ['itokawa', '25143;'], ['bennu', '101955;'], ['ryugu', '162173;'], ['ida', '243;'], ['gaspra', '951;'], ['mathilde', '253;'], ['lutetia', '21;'], ['steins', '2867;'], ['didymos', '65803;'], ['kleopatra', '216;'], ['toutatis', '4179;']];
+const bodies = [['vesta', '4;'], ['eros', '433;'], ['itokawa', '25143;'], ['bennu', '101955;'], ['ryugu', '162173;'], ['ida', '243;'], ['gaspra', '951;'], ['mathilde', '253;'], ['lutetia', '21;'], ['steins', '2867;'], ['didymos', '65803;'], ['kleopatra', '216;'], ['toutatis', '4179;'], ['pallas', '2;'], ['hygiea', '10;'], ['juno', '3;'], ['psyche', '16;']];
 const records = {}, fixtures = {};
 for (const [id, command] of bodies) {
   const query = elementsUrl({ command, center: '500@10', startJd: epochJdTt, stopJd: epochJdTt + 1, stepDays: 1 });
@@ -24,4 +24,4 @@ writeFileSync(new URL('../src/data/asteroidElements.data.ts', import.meta.url), 
   "import type { KeplerianElements } from '../kepler.js'\n" +
   `export const ASTEROID_ELEMENTS = ${JSON.stringify(records, null, 2)} satisfies Record<string, {query: string; elements: KeplerianElements}>\n`);
 writeFileSync(new URL('../src/__fixtures__/horizons.asteroids.ts', import.meta.url), header +
-  `export const ASTEROID_FIXTURES = ${JSON.stringify(fixtures, null, 2)} as const\n`);
+  `export const ASTEROID_FIXTURES = ${JSON.stringify(fixtures, null, 2).replace(/\[\n\s+(-?[\d.eE+]+(?:,\n\s+-?[\d.eE+]+)*)\n\s+\]/g, (_, values) => '[' + values.replace(/,\n\s+/g, ', ') + ']')} as const\n`);
