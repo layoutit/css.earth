@@ -1,0 +1,207 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "calypso",
+  "displayName": "Calypso",
+  "publicBase": "/scenes/calypso/",
+  "distanceAu": 9.58,
+  "raster": {
+    "width": 2048,
+    "height": 1024,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "scientific-surfaces",
+        "path": "shape/calypso_30k_plt.tab",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 14140,
+          "expectedFaces": 28276,
+          "indexBase": 0
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -10.7
+        },
+        "minimum": -6,
+        "maximum": 6,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 10700,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.45
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        }
+      }
+    ],
+    "observedColors": [],
+    "mosaics": [
+      {
+        "id": "normal",
+        "format": "controlled-shape-camera",
+        "consumer": "cassini-frames",
+        "frames": [
+          {
+            "id": "n1506184171_1",
+            "path": "observations/N1506184171_1_CALIB.IMG",
+            "labelPath": "observations/N1506184171_1_CALIB.LBL",
+            "observerLatitude": 3.51,
+            "observerWestLongitude": 272.55,
+            "sunLatitude": -18.81,
+            "sunWestLongitude": 224.17,
+            "rangeKm": 109375.2,
+            "northAzimuthDegrees": 340.91,
+            "center": [
+              600.5,
+              685
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1644755203_1",
+            "path": "observations/N1644755203_1_CALIB.IMG",
+            "labelPath": "observations/N1644755203_1_CALIB.LBL",
+            "observerLatitude": -12.54,
+            "observerWestLongitude": 92.31,
+            "sunLatitude": 4.27,
+            "sunWestLongitude": 18.55,
+            "rangeKm": 21369.2,
+            "northAzimuthDegrees": 181.21,
+            "center": [
+              615.9,
+              434
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1644756472_1",
+            "path": "observations/N1644756472_1_CALIB.IMG",
+            "labelPath": "observations/N1644756472_1_CALIB.LBL",
+            "observerLatitude": -10.04,
+            "observerWestLongitude": 62.77,
+            "sunLatitude": 4.28,
+            "sunWestLongitude": 21.35,
+            "rangeKm": 24203,
+            "northAzimuthDegrees": 180.54,
+            "center": [
+              475.6,
+              455.6
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1644756964_1",
+            "path": "observations/N1644756964_1_CALIB.IMG",
+            "labelPath": "observations/N1644756964_1_CALIB.LBL",
+            "observerLatitude": -8.67,
+            "observerWestLongitude": 54.45,
+            "sunLatitude": 4.28,
+            "sunWestLongitude": 22.43,
+            "rangeKm": 26895.4,
+            "northAzimuthDegrees": 180.3,
+            "center": [
+              457.3,
+              469.4
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          }
+        ],
+        "photometry": {
+          "weight": 0.5,
+          "maximumGain": 2.5,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 78,
+          "displayMaximum": 1.05,
+          "gamma": 1,
+          "minimumLevel": 0.7,
+          "maximumLevel": 1.4,
+          "backgroundMaximum": 0.003
+        },
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 10.7,
+    "camera": {
+      "initialScenePitchDegrees": -17.02336965221037,
+      "defaultControlYawDegrees": 177.30850885896365
+    },
+    "mapUrl": "/scenes/calypso/calypso-normal-surface@2x.webp",
+    "polesUrl": "/scenes/calypso/calypso-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/calypso_30k_plt.tab",
+      "format": "pds-plate-model",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 14140,
+        "expectedFaces": 28276,
+        "indexBase": 0
+      },
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 600,
+        "maximumErrorMeters": 400,
+        "method": "source-meshoptimizer"
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Vendored JPL Saturn satellite orbit and the Archinal rotation frame documented with the PDS shape model."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      155,
+      151,
+      146
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

@@ -62,6 +62,9 @@ const SATELLITES = [
   ['phoebe', '609', '500@699'],
   ['janus', '610', '500@699', 'limited'],
   ['epimetheus', '611', '500@699', 'limited'],
+  ['helene', '612', '500@699', 'limited'],
+  ['calypso', '614', '500@699', 'limited'],
+  ['daphnis', '635', '500@699', 'cassini-era'],
   ['telesto', '613', '500@699'],
   ['atlas', '615', '500@699', 'limited'],
   ['prometheus', '616', '500@699', 'limited'],
@@ -131,7 +134,9 @@ for (const [name, description, command, center, epochs] of targets) {
 }
 for (const [id, command, center, range] of SATELLITES) {
   const epochs =
-    range === 'limited'
+    range === 'cassini-era'
+      ? [2453383.25, 2454113.75, 2455197.25, 2456658.75, 2457389.25, 2458110.25]
+      : range === 'limited'
       ? LIMITED_SATELLITE_EPOCHS
       : range === 'source-limited'
         ? SOURCE_LIMITED_SATELLITE_EPOCHS

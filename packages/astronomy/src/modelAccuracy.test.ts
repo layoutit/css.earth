@@ -106,7 +106,7 @@ describe('frame position-model accuracy metadata', () => {
   it.each(PLANET_IDS)(
     'conservatively propagates represented-moon errors onto the %s centre edge',
     (planet) => {
-      const moons = moonsOf(planet)
+      const moons = moonsOf(planet).filter(id => bodyData(id).gravitationalParameterKm3PerS2 > 0)
       const accuracy = frameModelAccuracy(planet)
       if (moons.length === 0) {
         expect(accuracy.kind).toBe('exact-convention')
