@@ -12,6 +12,7 @@ The PoC preserves the non-convex, two-lobed nucleus as a connected triangle mesh
 | [DLR SHAP7 and textured model](https://europlanet.dlr.de/Rosetta/) | Global shape and a textured model are described; data access is by contacting the provider. | Access and exact texture registration remain unresolved; no request or redistribution claim made. |
 | MiARD SHAP8 | Publication route was not successfully retrieved during this survey. | Unresolved, not evidence that a product is unavailable. |
 | [NAVCAM, 20 July 2015](https://blogs.esa.int/rosetta/2015/07/28/cometwatch-20-july/) | Dated 1024×1024 display image, range 171 km, scale 14.5 m/pixel, visibly active nucleus. | Retained original observational reference, not a registered texture. |
+| [OSIRIS GEO, 5 August 2014](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/) | Public calibrated orange-filter radiance with corrected SHAP7 XYZ, angles and a separately matched L4 quality map. | Selected as an optional grayscale observation lens. Full source camera/quality checks and conservative surface correspondence precede texture transfer. |
 
 ## Exact inputs
 
@@ -24,8 +25,19 @@ The released pole RA 69.4°, Dec +64.1° and pre-perihelion rotation period 12.4
 ## Prepared interpretation
 
 - Shape: meshoptimizer 1.2.0 reduces the released mesh to 1,000 closed, consistently wound triangles. It preserves both lobes, the neck and recessed surfaces without a radial resample. `prepared/terrain.json` records topology and the simplifier's estimated error; that estimate is not a Hausdorff bound or the source measurement uncertainty.
-- Material: `source/material/neutral.png` is an authored solid gray image, every pixel #b8b6b2. It carries no observed albedo, color or geographic coverage. The only lens is **Shape model**; its uniform input is omitted from the surface-map panel.
-- Relief and lighting: per-texel rays project nearby simplified surface positions onto the original mesh along the local interpolated normal. Original vertex normals and original-mesh shadow rays generate two immutable atlases. The 150 m search limit is a projection cutoff; fallback texels retain the coarse normal. Reported raster counts include triangle padding, not only visible surface samples. Shadows use the shared epoch and arbitrary rotation phase; Shadows off uses three authored fill lights to inspect the shape.
+- Shape model material: `source/material/neutral.png` is an authored solid gray image, every pixel #b8b6b2. It carries no observed albedo, color or geographic coverage. This remains the default lens; its uniform input is omitted from the surface-map panel.
+- OSIRIS observation: the calibrated label time is 2014-08-05T19:44:22.918 UTC. The single orange filter supplies grayscale only. The companion L4 image must match every GEO radiance pixel and its observation identity before its quality flags are used. Positive VALID is required, LOSSY is explicitly permitted for visual use, and every other quality flag is rejected before bilinear interpolation.
+- OSIRIS transfer: the corrected GEO shape identifier is required by the archive errata. A projective camera fitted from archived XYZ/pixel correspondences must predict the remaining pixels within 0.01 source pixel. Retained triangle texels match the closest original RMOC source triangle within 50 m; every source pixel contributor must lie within 20 m of that matched point, with emission ≤80° and an independent full-RMOC visibility ray. Atlas bleed stays on its own retained face. Grid denotes rejected or absent photography, not uncertainty in the underlying shape.
+- OSIRIS illumination: [Fornasier et al. (2015)](https://doi.org/10.1051/0004-6361/201525901) provides the comet-specific Lommel–Seeliger disk-law basis. Radiance is divided by `2 cos(i)/(cos(i)+cos(e))` before interpolation, referenced to zero incidence/emission, with both angles ≤80° and gain ≤3. A single 1–99% linear grayscale stretch follows. There is no phase, roughness or cast-shadow recovery; this is relative observed appearance, not measured albedo. Shadows off displays the corrected image uniformly lit; Shadows on adds the prepared Sun lighting. Residual photographed shadows are disclosed beside the lens.
+- Relief and lighting: per-texel rays project nearby simplified surface positions onto the original mesh along the local interpolated normal. Original vertex normals and original-mesh shadow rays prepare the modeled lighting. The 150 m search limit is a projection cutoff; fallback texels retain the coarse normal. Reported lighting raster counts include triangle padding, not only visible surface samples. Shadows use the shared epoch and arbitrary rotation phase. In Shape model, Shadows off uses three authored fill lights to inspect the shape.
 - Runtime: 1,000 native `u` triangles. Geometry, atlas pixels, light/shadow computation and transforms are prepared. Runtime switches prepared resources through the existing object contract. No tails or dust simulation are included.
 
 The checked context thumbnail is reproducible with the manifest's `radial-snapshot.mjs` recipe and the same prepared faces. Preparation checks its exact bytes. Original photographs and the browser are useful qualitative comparisons, but their poses, epoch and optical model are unmatched: **not a pixel-parity oracle**.
+
+The OSIRIS thumbnail samples the same normalized observation on the same retained
+mesh, viewed toward its acquisition camera. Its dedicated flat minimap withholds
+ambiguous radial intersections; runtime never uses that map to choose a surface
+sheet. [OSIRIS provenance](source/reference/osiris-georeference.json) records the
+manual hashes, quality-bit interpretation and correction limits. The
+[initial photographic trial](../../../docs/comets/67P-OSIRIS-TRIAL.md) retains its
+original unnormalized camera comparison and distinct scope.

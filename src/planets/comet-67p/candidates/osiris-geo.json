@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-osiris-geo-trial@1",
+  "status": "historical raw-photograph trial; production quality and illumination policies are in source/preparation/terrestrial.json",
+  "frame": {
+    "file": "n20140805t194314611id50f22.img",
+    "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/data/img/n20140805t194314611id50f22.img",
+    "bytes": 151028736,
+    "sha256": "de0884a0d83f972bb7f7025dfa784d2b153763dda035b43afa918c8023fe511b",
+    "startTime": "2014-08-05T19:44:22.918",
+    "filter": "FFP-Vis_Orange",
+    "license": "CC-BY-SA-4.0",
+    "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+    "licenseSource": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+  },
+  "shape": {
+    "path": "shape/mtp019.obj",
+    "sha256": "e90fd0b7d86bc826cf967e2e0234a945c55be7dfd2f710c00e11ed953b14f801",
+    "license": "CC-BY-SA-3.0-IGO; see the existing comet-67p source NOTICE"
+  },
+  "transfer": {
+    "maximumSourceDistanceMeters": 50,
+    "maximumSeparationMeters": 20,
+    "maximumEmissionDegrees": 80,
+    "visibilityToleranceMeters": 0.5,
+    "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must be within 20 m of the closest RMOC source point; the same point must be visible in the full RMOC mesh."
+  },
+  "limitations": [
+    "One grayscale observation retaining photographed illumination; not true color or recovered albedo.",
+    "This historical trial omits detector-quality gating. The application integration separately qualifies the matching L4 quality companion.",
+    "GEO geometry uses SHAP7; the retained mesh uses RMOC MTP019. Their agreement is measured, not assumed identical.",
+    "The archive errata accept only cg-dlr_spg-shap7-v1.0_4Mfacets.ver.",
+    "Gray grid means no accepted photograph sample; it does not classify the underlying RMOC shape as unmeasured."
+  ]
+}

@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "6b2cbe939f77163ce251f19f202c79a2b681ea0918caf10dbc55fcc7ff3d5b2d"
+          "sha256": "9fc4d63d53ad5cc4f68c7ed94f358bd19f153f3ccb0e5f9c862d58846a68f40e"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "622ff147c41819c582fd76565a676baaa3e872cab067b86282f9b199b467cc8e"
+          "sha256": "a8600c9a99d7af06f428a359ad937172f72572290fae3d10507a9fd17f7bf60d"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "dafa875a518c67433a1196a2ab5f4bf5d873db2c1d3eb48760d3bf9394c3ac38"
+          "sha256": "cf35219892c62c36555582611e2baa4d243f46c75b98147af66a38d12c9c7b1e"
         },
         {
           "id": "rotation",
@@ -63,6 +63,11 @@
           "lenses": [
             {
               "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "osiris",
               "source": "content",
               "material": "lighting"
             }
@@ -108,6 +113,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d5ca8e50be8d0ce9b9abe5cc6da20834493de706dba18f89f1d19d8d80e19cdf"
+    "sha256": "1d3eea82f651a40b9c7dfb761e09613627829f7a42a203d70ce520bc5c2e774d"
   }
 }
