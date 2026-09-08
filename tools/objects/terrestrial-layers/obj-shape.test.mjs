@@ -65,3 +65,17 @@ test('PDS vertex-facet rows reproduce analytic octahedron intersections', async 
   assert.throws(()=>parsePdsVertexFacetShape(text.replace('1 1 3 5','1 1 3 99'),profile),/absent/);
   assert.throws(()=>parsePdsVertexFacetShape(text,{...profile,metersPerUnit:0}),/units/);
 });
+
+test('radius tables retain west longitude, asymmetric radii and closed poles', async () => {
+  const {parsePdsRadiusTable}=await import('./obj-shape.mjs');
+  const rows=[];
+  for(let lon=0;lon<=360;lon+=90)for(const lat of [-90,0,90])rows.push([lon,lat,lat===0?({0:2,90:3,180:4,270:5,360:2}[lon]):6].join(' '));
+  const p={metersPerUnit:1000,stepDegrees:90,longitudeDirection:'west-positive',expectedVertices:6,expectedFaces:8};
+  const mesh=parsePdsRadiusTable(rows.join('\n'),p);
+  for(const [lon,lat,expected] of [[0,0,2000],[90,0,5000],[180,0,4000],[270,0,3000],[0,90,6000],[0,-90,6000]])assert.ok(Math.abs(mesh.sample(lon,lat)-expected)<1e-8);
+  const edges=new Map();
+  for(const f of mesh.indices)for(let i=0;i<3;i++) {const a=f[i],b=f[(i+1)%3],k=[a,b].sort((a,b)=>a-b).join(',');edges.set(k,[...(edges.get(k)??[]),a<b?1:-1]);}
+  assert.ok([...edges.values()].every(e=>e.length===2&&e[0]+e[1]===0));
+  assert.throws(()=>parsePdsRadiusTable(rows.slice(1).join('\n'),p),/dimensions/);
+  assert.throws(()=>parsePdsRadiusTable(rows.join('\n').replace('360 0 2','360 0 3'),p),/seam or pole/);
+});

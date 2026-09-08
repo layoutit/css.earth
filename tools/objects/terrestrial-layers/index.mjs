@@ -57,7 +57,7 @@ export function parseTerrestrialProfile(value) {
         !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
   }
   for (const lens of value.raster.scientific ?? []) {
-    const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh'].includes(lens.format);
+    const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
@@ -69,7 +69,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||

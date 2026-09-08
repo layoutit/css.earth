@@ -7,6 +7,13 @@ import gaspraDescriptor from "../src/planets/gaspra/object.json" with { type: "j
 import mathildeDescriptor from "../src/planets/mathilde/object.json" with { type: "json" };
 import lutetiaDescriptor from "../src/planets/lutetia/object.json" with { type: "json" };
 import steinsDescriptor from "../src/planets/steins/object.json" with { type: "json" };
+
+import adrasteaDescriptor from "../src/planets/adrastea/object.json" with { type: "json" };
+import metisDescriptor from "../src/planets/metis/object.json" with { type: "json" };
+import thebeDescriptor from "../src/planets/thebe/object.json" with { type: "json" };
+import amaltheaDescriptor from "../src/planets/amalthea/object.json" with { type: "json" };
+import proteusDescriptor from "../src/planets/proteus/object.json" with { type: "json" };
+import larissaDescriptor from "../src/planets/larissa/object.json" with { type: "json" };
 import daphnisDescriptor from "../src/planets/daphnis/object.json" with { type: "json" };
 import calypsoDescriptor from "../src/planets/calypso/object.json" with { type: "json" };
 import telestoDescriptor from "../src/planets/telesto/object.json" with { type: "json" };
@@ -62,6 +69,40 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("amalthea", "Amalthea", "satellite", "#b39a85", 5.2,
+    "Explore Amalthea with Galileo imagery and its source-backed irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(amaltheaDescriptor);
+    }, amaltheaDescriptor.properties.worldFrame),
+  object("thebe", "Thebe", "satellite", "#9f9287", 5.2,
+    "Explore Thebe with Galileo imagery and its source-backed irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(thebeDescriptor);
+    }, thebeDescriptor.properties.worldFrame),
+  object("metis", "Metis", "satellite", "#9a8f85", 5.2,
+    "Explore Metis with Galileo imagery on a dimension-constrained shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(metisDescriptor);
+    }, metisDescriptor.properties.worldFrame),
+  object("adrastea", "Adrastea", "satellite", "#a0a0a0", 5.2,
+    "Explore Adrastea through a model based on its measured dimensions.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(adrasteaDescriptor);
+    }, adrasteaDescriptor.properties.worldFrame),
+
+  object("proteus", "Proteus", "satellite", "#a39e96", 30.07,
+    "Explore Proteus with Voyager 2 imagery and its source-backed irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(proteusDescriptor);
+    }, proteusDescriptor.properties.worldFrame),
+
+  object("larissa", "Larissa", "satellite", "#a39e96", 30.07,
+    "Explore Larissa with Voyager 2 imagery and its source-backed irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(larissaDescriptor);
+    }, larissaDescriptor.properties.worldFrame),
+
+
   object("daphnis", "Daphnis", "satellite", "#c3bfb7", 9.58,
     "Explore Daphnis in 3D with Cassini imagery and its measured irregular shape.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

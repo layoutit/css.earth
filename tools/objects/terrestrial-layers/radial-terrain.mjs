@@ -3,7 +3,7 @@ import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
-import { loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape } from './obj-shape.mjs';
+import { loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable } from './obj-shape.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { loadPdsRadialTable } from './pds-radial-table.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
@@ -19,7 +19,8 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
   await source.validatePath(profile.path);
-  const loader = ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape
+  const loader = profile.format === 'pds-radius-table' ? loadPdsRadiusTable
+    : ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape
     : profile.format === 'vrml-mesh' ? loadVrmlShape
     : profile.format === 'pds-plate-model' ? loadPdsPlateShape
     : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape

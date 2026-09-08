@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "proteus",
+  "displayName": "Proteus",
+  "panel": {
+    "introduction": "Proteus is Neptune’s largest inner moon. Voyager 2 revealed an angular, cratered world, dominated on one side by the enormous impact basin Pharos.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "208 km"
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Distance from Sun",
+        "value": "30.07 AU (system mean)"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Neptune",
+        "value": "26.94 hours"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation",
+        "value": "Synchronous with its orbit"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Neptune",
+        "value": "About 117,674 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 imaging team · 1989"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+        "title": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+        "detail": "Voyager 2",
+        "thumbnail": "/scenes/proteus/proteus-normal-thumbnail.webp",
+        "surface": "proteus-normal-surface@2x.webp",
+        "poles": "proteus-normal-surface@2x.webp",
+        "source": {
+          "id": "c1137317",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+        "title": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+        "detail": "Radial shape",
+        "thumbnail": "/scenes/proteus/proteus-elevation-thumbnail.webp",
+        "surface": "proteus-elevation-surface@2x.webp",
+        "poles": "proteus-elevation-surface@2x.webp",
+        "source": {
+          "id": "stooke-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/stkshape.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-35",
+            "0",
+            "+25"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
+          "image": "/scenes/proteus/proteus-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Proteus overview",
+      "href": "https://science.nasa.gov/neptune/moons/proteus/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "surface",
+      "description": "Voyager imagery and Stooke shape model",
+      "href": "https://sbn.psi.edu/pds/resource/stkshape.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/neptune/moons/proteus/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

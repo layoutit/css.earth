@@ -42,6 +42,10 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
   europa: 1092,
   ganymede: 3674,
   callisto: 5093,
+  amalthea: 1458,
+  thebe: 610,
+  adrastea: 1119,
+  metis: 1089,
   mimas: 165300,
   enceladus: 2204,
   tethys: 13860,
@@ -68,6 +72,7 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
   oberon: 1587,
   triton: 56642,
   proteus: 787,
+  larissa: 543,
   charon: 2,
   dimorphos: .06,
 }

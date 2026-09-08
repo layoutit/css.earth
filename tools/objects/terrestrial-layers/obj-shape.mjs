@@ -61,6 +61,53 @@ export function parseVrmlShape(text, profile) {
   return radialShape(vertices, indices, profile);
 }
 
+/** PDS longitude/latitude/radius tables preserve their authored origin. The
+ * regular grid defines the connectivity; duplicated seam/pole rows are welded. */
+export async function loadPdsRadiusTable(path, profile) {
+  return parsePdsRadiusTable(await readFile(path, 'utf8'), profile);
+}
+
+export function parsePdsRadiusTable(text, profile) {
+  const { stepDegrees: step, longitudeDirection } = profile;
+  if (!(step > 0 && step <= 90) || 180 % step ||
+      !['east-positive', 'west-positive'].includes(longitudeDirection)) throw new Error('Invalid radius table grid.');
+  const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
+  const nx = 360 / step, ny = 180 / step, radii = new Map();
+  if (rows.length !== (nx + 1) * (ny + 1)) throw new Error('Radius table dimensions changed.');
+  for (const row of rows) {
+    const [lon, lat, radius] = row;
+    if (row.length !== 3 || !row.every(Number.isFinite) || !(radius > 0) ||
+        lon < 0 || lon > 360 || lat < -90 || lat > 90 || lon % step || (lat + 90) % step) throw new Error('Invalid radius table row.');
+    const key = `${lon},${lat}`;
+    if (radii.has(key)) throw new Error('Duplicate radius table row.');
+    radii.set(key, radius);
+  }
+  const positions = [], indices = [], ids = new Map();
+  const at = (x, y) => {
+    const lon = x * step, lat = -90 + y * step;
+    const key = Math.abs(lat) === 90 ? `pole,${lat}` : `${x % nx},${y}`;
+    const radius = radii.get(`${lon},${lat}`), prior = ids.get(key);
+    if (prior !== undefined) {
+      if (Math.abs(Math.hypot(...positions[prior]) / profile.metersPerUnit - radius) > 1e-6) throw new Error('Inconsistent radius table seam or pole.');
+      return prior;
+    }
+    const l = lon * Math.PI / 180 * (longitudeDirection === 'west-positive' ? -1 : 1), p = lat * Math.PI / 180;
+    const id = positions.length;
+    positions.push([Math.cos(p) * Math.cos(l), Math.cos(p) * Math.sin(l), Math.sin(p)].map(v => v * radius * profile.metersPerUnit));
+    ids.set(key, id);
+    return id;
+  };
+  for (let x = 0; x < nx; x++) for (let y = 0; y < ny; y++) {
+    const a = at(x,y), b = at(x+1,y), c = at(x+1,y+1), d = at(x,y+1);
+    for (const f of [[a,b,c],[a,c,d]]) if (new Set(f).size === 3) {
+      const [v,w,z] = f.map(i => positions[i]);
+      if (dot(v,cross(sub(w,v),sub(z,v))) < 0) f.reverse();
+      indices.push(f);
+    }
+  }
+  return radialShape(positions, indices, profile);
+}
+
 export function parsePdsPlateShape(text, profile) {
   const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
   const [vertices, faces] = rows.shift();
@@ -89,7 +136,7 @@ export function parsePdsVertexFacetShape(text, profile) {
 /** Sample a bounded scientific grid from the source mesh. A facet-support
  * column can withhold regions whose detailed SPC solution is absent. */
 export async function loadShapeScalarGrid(root, lens) {
-  const load = lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
+  const load = lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
   const mesh = await load(resolve(root, lens.path), lens.grid);
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');
