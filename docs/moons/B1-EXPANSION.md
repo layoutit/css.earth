@@ -2,7 +2,7 @@
 
 Status: implementation complete; final qualification in progress. Branch
 `feat/moons-26-expansion`. Implementation began at main `c6850e28` and integrates
-main `c61d1bf9`. The tested implementation commit is
+main `9228eac5` (including PR54). The first integrated qualification commit was
 `2900da4f78e21caa2e08064ec191552c9cd78f97`; later corrections and main integration retain separate validation receipts.
 
 All 26 reviewed candidates now have body-owned source packages and standalone
@@ -53,12 +53,12 @@ are not silently promoted into a measured pole or rotational phase.
 | Parent orbit consistency | Final 28 solar/planetary tests and independent metadata/carrier checks pass for all 26 moons; source r/v, ring closure and hidden-parent transport evidence is retained in the science report |
 | Package lint and type checking | Pass |
 | Body acquisition and preparation | All 26 prepared; 80/80 unit tests and 26/26 source verifications pass (478 pinned files) |
-| Aggregate source verification | Blocked by 822 unchanged missing pins (12.61 GiB) in 200 existing/incoming-main packages; no B1 pins missing. All pins match their respective merged baselines; see the integrated source-gap report. |
+| Aggregate source verification | Blocked by 827 unchanged baseline missing pins (12.65 GiB) in 200 existing/incoming-main packages; no B1 pins missing. All pins match their respective merged baselines; see the integrated source-gap report. |
 | Production build | Pass: 254 pages for the integrated 253-object registry |
-| Full test suite at `2900da4f` | Package 761, renderer 346 and platform 1,826 tests pass. Shell: 201 pass and 3 file-level CSS import failures; correction pending. |
+| Full test suite at `2900da4f` | Package 761, renderer 346 and platform 1,826 tests pass. Shell: 201 pass and 3 CSS import failures; the import-owner fix passes 57 focused tests. A full rerun of the corrected version is pending. |
 | Full production browser gate at `2900da4f` | Pass: 506 object/DPR cases, two six-hop navigation sequences and zero browser problems |
 | Detailed real Chrome DPR 1 and 2 interaction checks | Pass: all 26 moons plus Haumea and Sylvia, 56 cases; visual acceptance is separate |
-| Visual inspection | Five representatives pass; Squannit has confirmed fine raster seams in lossless captures and remains blocked pending correction |
+| Visual inspection | All six representatives pass. Squannit now retains the rear faces of the same 800 triangles; fresh DPR 1/2 and lossless yaw 0/60/120 checks pass, with all image assets unchanged |
 | Remote runtime publication and fresh installation | Pass: 874 files / 199,806,888 bytes across 28 affected packages published; fresh remote installation returned 874 HTTP 200 responses with exact SHA-256 and sizes. A second offline run reused all 874 files. |
 | Pull request | Not opened |
 
@@ -72,3 +72,5 @@ are not silently promoted into a measured pole or rotational phase.
 Canonical state claims cover the generated state map, the current planetary-system preparer, physical world frames and the shared external world context used by the app. Older cached body-local fallback orbit plans are outside this qualification. Preparation of object JSON does not refresh every cached ephemeris.
 
 Preparation and browser evidence stay in the reused Moons worktree. Final command results, full-gate receipts and representative captures are added as the remaining checks finish.
+
+The [Squannit correction receipt](b1-preparation/qualification-squannit-seam.json), [visual gallery](b1-preparation/visual/README.md), and [PR54 integration audit](b1-preparation/pr54-integration-audit.md) record the final local corrections. All 478 current B1 source pins verify, and all 874 published runtime images remain unchanged.

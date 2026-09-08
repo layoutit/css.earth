@@ -1,25 +1,17 @@
-# Integrated source verification gap: 253 objects
+# Integrated source verification gap after PR54
 
-The integrated checkout lacks **822 pinned source files** totaling **13,536,279,715 bytes (12.61 GiB)** across **200 packages**. No sources were restored.
+At `133339e058fea24da729f187d8a6b17f99e61e54`, the **253-object registry** lacks **827 pinned source files / 13,580,332,983 bytes (12.65 GiB)** across **200 packages**. All missing expected byte counts and SHA-256 hashes exactly match the corresponding retained baseline. B1's 26 new moons have **zero missing sources**.
 
-This inventory covers the 204 objects on the B1 branch and the 49 asteroid objects added by main at `c61d1bf9`. Existing omissions are checked against `c6850e28`; incoming asteroid omissions are checked against `c61d1bf9`. The original 204-object audit remains in [baseline-source-gap-report.md](baseline-source-gap-report.md).
+PR54 changes the 67P source package. Its current omissions are compared with latest main `9228eac50d9e38103f80add72d58dfef4c9210c3`; other historical omissions retain the `c6850e28` baseline and the 49 incoming asteroids retain `c61d1bf9`. The preceding **822 files / 13,536,279,715 bytes** receipt is preserved byte-for-byte in [the pre-PR54 inventory](integrated-source-gap-pre-pr54-inventory.json), [report](integrated-source-gap-pre-pr54-report.md), and [gate log](integrated-source-gate-pre-pr54.txt). The older 204-object inventory also remains unchanged.
 
-|Scope|Missing files|Pinned bytes|Affected packages|Pin comparison|
-|---|---:|---:|---:|---|
-|historical-204-missing-pin|669|11,976,764,359|151|All bytes and hashes match baseline|
-|incoming-49-asteroids|153|1,559,515,356|49|All bytes and hashes match baseline|
+|Scope|Missing files|Pinned bytes|Affected packages|
+|---|---:|---:|---:|
+|historical-204-missing-pin|657|11,186,178,084|150|
+|incoming-pr54-comet-67p|17|834,639,543|1|
+|incoming-49-asteroids|153|1,559,515,356|49|
 
-- Missing pinned inputs for the 26 B1 moons: **0**.
-- Unique missing content: 411 hashes / 6,859,076,009 bytes.
-- All missing byte counts and hashes match their respective baseline: **822/822**.
-- Historical PCK-named files rechecked unchanged: **33/33**.
+The inventory change is **5 added paths**, **0 removed paths**, and **0 changed pins at retained paths**: net **5 files / 44,053,268 bytes**. 822 current missing rows retain the exact preceding expected bytes and hashes. Removal from the missing list may mean the new manifest no longer declares that source; it is not a claim of restoration. Per-path deltas are in [the current inventory](integrated-source-gap-inventory.json).
 
-|Restoration route|Files|Pinned bytes|
-|---|---:|---:|
-|authored-direct-download|795|12,946,703,016|
-|no-matching-authored-target-operation|18|58,701,446|
-|authored-generated-extracted-or-request-dependent|9|530,875,253|
+The read-only command `pnpm acquire:planets -- --verify-only` again exits **1**, first at `comet-1p` for `stars/eso0932a.tif` and `presentation/InterVariable.ttf`; it reports no undeclared files there. [Exact command log](integrated-source-gate.txt). That fail-fast result alone does not enumerate later packages.
 
-An authored HTTP route does not prove current endpoint availability. Several other inputs require generated data, extraction, or request-specific acquisition. The total exceeds the bounded restoration scope; no source downloads, source copying, rebakes, overwrites, or deletion were performed. File-level source paths, expected bytes/hashes, acquisition routes, and the matching baseline pins are retained in [integrated-source-gap-inventory.json](integrated-source-gap-inventory.json).
-
-The required full command `pnpm acquire:planets -- --verify-only` was rerun on this 253-object registry and exited **1** at `comet-1p`: missing `stars/eso0932a.tif` and `presentation/InterVariable.ttf`, with no undeclared inputs. Both pins match `c6850e28`. The command stops at the first failed package; the inventory above independently covers every registered package. [Retained command output](integrated-source-gate.txt) normalizes checkout-specific path prefixes.
+All 33 historical PCK-named file receipts remain unchanged. No source downloads, copying, restoration, rebakes, runtime writes, or deletions were performed for this audit. Authored HTTP acquisition routes describe restoration mechanisms and have not been tested for current remote availability. Those existing and incoming-main sources were not restored as part of the B1 cohort.

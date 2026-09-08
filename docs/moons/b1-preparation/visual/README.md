@@ -34,6 +34,13 @@ The released radar shape supplies the irregular geometry. Its neutral grid commu
 
 ![Squannit with its radar-shape explanation](squannit.png)
 
+A source-owned two-sided coverage option removes the fine raster contour without changing the original mesh, its 800 retained triangles or any atlas. The [correction receipt](../qualification-squannit-seam.json) records the exact source/runtime pins and fresh DPR1/2 checks. These unmodified lossless screenshots use the same diagnostic yaw60 view:
+
+| Before | Corrected prepared package |
+|---|---|
+| ![Fine raster contour before the coverage correction](squannit-before-yaw60.png) | ![Continuous surface after the coverage correction](squannit-after-yaw60.png) |
+
+
 ## Romulus
 
 An explicitly assumption-dependent ellipsoid uses the published occultation constraints. Orbital projection uncertainty remains separate from shape evidence.

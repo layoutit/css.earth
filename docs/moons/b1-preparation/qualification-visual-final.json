@@ -1,9 +1,9 @@
 {
   "schema": "cssearth-b1-representative-visual-review@1",
   "stage": "post-integration",
-  "updatedUtc": "2026-09-08T22:21:12.591552+00:00",
+  "updatedUtc": "2026-09-08T22:51:43.267629+00:00",
   "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
-  "head": "2900da4f78e21caa2e08064ec191552c9cd78f97",
+  "head": "133339e058fea24da729f187d8a6b17f99e61e54",
   "scope": [
     "paaliaq",
     "bestla",
@@ -12,7 +12,7 @@
     "squannit",
     "romulus"
   ],
-  "ok": false,
+  "ok": true,
   "densityLaneSummaries": [
     {
       "path": "output/playwright/moons-b1-qualification/final-jupiter-summary.json",
@@ -23,6 +23,11 @@
       "path": "output/playwright/moons-b1-qualification/final-saturn-summary.json",
       "sha256": "bf4caaf9b11407651fc2df1176fd57a4c211711ca296b64537b1d7af6712f84a",
       "bytes": 27930
+    },
+    {
+      "path": "output/playwright/moons-b1-qualification/squannit-corrected-summary.json",
+      "sha256": "0d6605efcaf1a1653cfd4c557a9c7baaf3fc9674fd45ca75ee9900908020a4cb",
+      "bytes": 3894
     }
   ],
   "frameExtraction": {
@@ -420,43 +425,43 @@
     {
       "id": "squannit",
       "reviewed": true,
-      "status": "reviewed-with-findings",
+      "status": "reviewed-no-visible-blocker",
       "browser": "152.0.7977.76",
       "baseUrl": "http://127.0.0.1:4211",
-      "browserCapturedAt": "2026-09-08T22:09:11.892Z",
+      "browserCapturedAt": "2026-09-08T22:47:15.908Z",
       "report": {
-        "path": "output/playwright/moons-b1-final-squannit/attempt-1/report.json",
-        "sha256": "96a3707cb5cb5f978102c29620fc419b66490daf40245fd8210baf9f981227f6",
-        "bytes": 4378
+        "path": "output/playwright/moons-b1-corrected-squannit/attempt-1/report.json",
+        "sha256": "c7bda9bda9cea6832557b8f5251ee52b549a2aa443dc3a717e5fbeb784613a2c",
+        "bytes": 4386
       },
       "video": {
-        "path": "output/playwright/moons-b1-final-squannit/attempt-1/squannit-dpr-2.webm",
-        "sha256": "56d8fabc9a9eb195dd09bffe4332f42413e6a84bd72d02daab3a1e1695fd7d4c",
-        "bytes": 2347579
+        "path": "output/playwright/moons-b1-corrected-squannit/attempt-1/squannit-dpr-2.webm",
+        "sha256": "639a64a9b86e95159fdad7a5ad7448c6ed27780a49d6066613d0f49377122cb4",
+        "bytes": 2475097
       },
       "frames": [
         {
-          "path": "output/playwright/moons-b1-final-visual/squannit-56d8fabc9a9e-dpr-2-t4.png",
-          "sha256": "96aa9bda805beb593e38ecbed4db0c44e6082040a3b8b146af34e8a0e0cc9311",
-          "bytes": 299710,
+          "path": "output/playwright/moons-b1-final-visual/squannit-639a64a9b86e-dpr-2-t4.png",
+          "sha256": "126f42661087364174bdecfd42fd183dda170e89d23fb818a24b4d61015d3787",
+          "bytes": 337313,
           "videoTimestampSeconds": 4
         },
         {
-          "path": "output/playwright/moons-b1-final-visual/squannit-56d8fabc9a9e-dpr-2-t18.png",
-          "sha256": "78a720b92bc38d5654652fc76eddcd3e48fb7159b3ef2d068bec8acccf7506a1",
-          "bytes": 351754,
+          "path": "output/playwright/moons-b1-final-visual/squannit-639a64a9b86e-dpr-2-t18.png",
+          "sha256": "b843f0f3e714f8838891e29d96451cedca681b22787539ca4dbf6a9495b41cb1",
+          "bytes": 328189,
           "videoTimestampSeconds": 18
         }
       ],
       "sourcePackage": [
         {
           "path": "src/planets/squannit/object.json",
-          "sha256": "dea07c907ed37885f47b65df0a7a7360bd757875a75fe4e7ee5cafad381cf153",
+          "sha256": "a715df65badf361c8bb00d1995621d954109ac45f6a8e2ce32e54e8acfc8b1a5",
           "bytes": 3052
         },
         {
           "path": "src/planets/squannit/source/manifest.json",
-          "sha256": "02a4ca0d976e0ed69c9585dfa87b0fdcc641d68e2db880cfd32344ff1a800ea1",
+          "sha256": "41831460cf95c6cab486467d721233a66eec8150ebe5af2b52d4e3b92727fcc8",
           "bytes": 8745
         },
         {
@@ -471,8 +476,8 @@
         },
         {
           "path": "src/planets/squannit/prepared/object.json",
-          "sha256": "cfb550ae05eb8e22586194d7a41f5ccbede85c7361b22039efcece3891191afd",
-          "bytes": 6989245
+          "sha256": "11a145f90a85368744e623d642c8a604f149ab97710a19bfe745df6d8db4a4a4",
+          "bytes": 6902156
         },
         {
           "path": "src/planets/squannit/prepared/runtime-assets.json",
@@ -496,44 +501,177 @@
           "matchesRuntimeManifest": true
         }
       ],
-      "reviewedUtc": "2026-09-08T22:21:12.553662+00:00",
-      "reviewedVideoSha256": "56d8fabc9a9eb195dd09bffe4332f42413e6a84bd72d02daab3a1e1695fd7d4c",
+      "reviewedVideoSha256": "639a64a9b86e95159fdad7a5ad7448c6ed27780a49d6066613d0f49377122cb4",
+      "reviewedAtUtc": "2026-09-08T22:51:11.197898+00:00",
       "selectedTimestampSeconds": 4,
-      "assessment": "The broad irregular radar-model outline and neutral grid are consistent with the retained source, and the visible introduction preserves original mesh scale, later photometric size tension, arbitrary current attitude and extrapolated orbit qualifications. Fine dark contours seen in video are also present in direct lossless DPR2 screenshots at diagnostic yaw0 and yaw60. Their rendering cause remains under investigation; this body is not visually qualified yet.",
-      "findings": [
+      "assessment": "The corrected original-scale JPL radar figure has a continuous neutral grid and closed visible silhouette. No long dotted raster contour remains in final video frames at 4 and 18 seconds or direct lossless actual-package DPR2 views at yaw0,60,120. The visible text preserves the original2006 scale, later130% photometric discrepancy, unmapped terrain/current attitude, and approximate orbital phase.",
+      "findings": [],
+      "resolvedFindings": [
         {
           "id": "squannit-fine-raster-seams",
-          "severity": "blocking-visual",
-          "summary": "Thin dotted dark contours cross the otherwise uniform body surface at some viewing angles, confirmed in lossless direct screenshots.",
-          "status": "open",
-          "diagnosticReport": {
-            "path": "output/playwright/moons-b1-final-visual/squannit-lossless/report.json",
-            "sha256": "69bd4fb00f665a4a0e3a8ede92343411e8b9491449b27bc75987f1054a993b47",
-            "bytes": 7319
-          },
-          "screenshots": [
-            {
-              "path": "output/playwright/moons-b1-final-visual/squannit-lossless/squannit-dpr2-yaw-0.png",
-              "sha256": "e0782dd2be3ca9f3c4c490fdc36248e3862518edd7df8063f66a2aa50860d7eb",
-              "bytes": 609940
-            },
-            {
-              "path": "output/playwright/moons-b1-final-visual/squannit-lossless/squannit-dpr2-yaw-60.png",
-              "sha256": "6c5e2727552ee309a1e31be98cf11fc09e6535a87f253a1e8a4bd3207f477f77",
-              "bytes": 755386
-            },
-            {
-              "path": "output/playwright/moons-b1-final-visual/squannit-lossless/squannit-dpr2-yaw-120.png",
-              "sha256": "e77a840a7bc4a53803ccbd6f60da4dad0a96594f53d089b1e024f1ed2805280c",
-              "bytes": 632884
-            }
-          ]
+          "status": "resolved",
+          "correction": "Explicit source-owned backfaceVisible:true prepares two-sided native-u leaves and omits hidden-facing bindings. Source vertices, 800 retained faces, estimated2.0272746086m error and all31 image assets are unchanged.",
+          "qualification": {
+            "path": "docs/moons/b1-preparation/qualification-squannit-seam.json",
+            "sha256": "0a4476a9c824d411a7263169aa25abf52de11d4e991f3efd7e54ba9b3196cc43",
+            "bytes": 29520
+          }
         }
       ],
+      "losslessActualPackage": {
+        "report": {
+          "path": "output/playwright/moons-b1-final-visual/squannit-corrected-lossless/report.json",
+          "sha256": "61d4f660ad6413db601dc37a44bce3aa672be8fb1f8af564486bc5c2038d43d6",
+          "bytes": 7527
+        },
+        "screenshots": [
+          {
+            "path": "output/playwright/moons-b1-final-visual/squannit-corrected-lossless/squannit-dpr2-yaw-0.png",
+            "sha256": "eab380c3426728714bf15759e976b505866b81b9e8f0418a25ba3b626df32877",
+            "bytes": 609751,
+            "capturedAt": "2026-09-08T22:47:40.700Z",
+            "cameraState": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(1,0,0,0,0,0.939692620786,0.342020143326,0,0,-0.342020143326,0.939692620786,0,0,0,0,1)",
+                "skybox": "matrix3d(-0.2955012,-0.326746310371,0.897728109635,0,-0.8765094,0.466515680786,-0.118718863516,0,-0.3800133,-0.821948786185,-0.424252178679,0,0,0,0,1)",
+                "sunView": "matrix3d(0.707106781187,0,0.707106781187,0,0,1,0,0,-0.707106781187,0,0.707106781187,0,0,0,0,1)"
+              },
+              "pitch": 61.61538461538461,
+              "controlPitch": 61.61538461538461,
+              "controlYaw": 0,
+              "zoom": 1.2100000000000002,
+              "distance": 972.3482663927697,
+              "distanceKilometers": 0.9533424352950869,
+              "distanceRadii": 4.227601158229433,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 506.00000170487306,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1039.23,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -600,
+                "right": 600,
+                "top": -391,
+                "bottom": 391
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 253.00000085243653
+            }
+          },
+          {
+            "path": "output/playwright/moons-b1-final-visual/squannit-corrected-lossless/squannit-dpr2-yaw-60.png",
+            "sha256": "6ee70d37324f3f297cf3f67fcddca18ee2f04362dce906de931eb0aee7b26753",
+            "bytes": 751915,
+            "capturedAt": "2026-09-08T22:47:41.055Z",
+            "cameraState": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(0.5,0.296198132726,-0.813797681349,0,0,0.939692620786,0.342020143326,0,0.866025403784,-0.171010071663,0.469846310393,0,0,0,0,1)",
+                "skybox": "matrix3d(0.67960010111,-0.250900058844,0.689342246213,0,-0.673048909398,0.16053149559,0.72196577602,0,-0.291802393652,-0.954609155515,-0.059770809487,0,0,0,0,1)",
+                "sunView": "matrix3d(-0.258819045103,0,0.965925826289,0,0,1,0,0,-0.965925826289,0,-0.258819045103,0,0,0,0,1)"
+              },
+              "pitch": 61.61538461538461,
+              "controlPitch": 61.61538461538461,
+              "controlYaw": 60,
+              "zoom": 1.2100000000000002,
+              "distance": 972.3482663927697,
+              "distanceKilometers": 0.9533424352950869,
+              "distanceRadii": 4.227601158229433,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 506.000001995682,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1039.23,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -600,
+                "right": 600,
+                "top": -391,
+                "bottom": 391
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 253.000000997841
+            }
+          },
+          {
+            "path": "output/playwright/moons-b1-final-visual/squannit-corrected-lossless/squannit-dpr2-yaw-120.png",
+            "sha256": "51499dfc2ac2e8086efd1de0a372cff910aeef53b9c248407f4b5e280efa0b9c",
+            "bytes": 632905,
+            "capturedAt": "2026-09-08T22:47:41.345Z",
+            "cameraState": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(-0.5,0.296198132726,-0.813797681349,0,0,0.939692620786,0.342020143326,0,0.866025403784,0.171010071663,-0.469846310393,0,0,0,0,1)",
+                "skybox": "matrix3d(0.97510130111,0.075846251527,-0.208385863421,0,0.203460490602,0.067804020392,0.976732420289,0,0.088210906348,-0.994811434434,0.050684044054,0,0,0,0,1)",
+                "sunView": "matrix3d(-0.965925826289,0,0.258819045103,0,0,1,0,0,-0.258819045103,0,-0.965925826289,0,0,0,0,1)"
+              },
+              "pitch": 61.61538461538461,
+              "controlPitch": 61.61538461538461,
+              "controlYaw": 120,
+              "zoom": 1.2100000000000002,
+              "distance": 972.3482663927697,
+              "distanceKilometers": 0.9533424352950869,
+              "distanceRadii": 4.227601158229433,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 505.99999360104925,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1039.23,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -600,
+                "right": 600,
+                "top": -391,
+                "bottom": 391
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 252.99999680052463
+            }
+          }
+        ],
+        "all800LeavesTwoSided": {
+          "count": 800,
+          "allBackfacesVisible": true,
+          "hiddenLeaves": 0
+        },
+        "actualCanonicalResponses": [
+          {
+            "url": "http://127.0.0.1:4211/scenes/squannit/squannit-model-surface@2x.webp",
+            "status": 200,
+            "sha256": "5cec7c32fcb87b473ac61b0c133f630674b0bd6071c58fec85d26e03b9103a38",
+            "bytes": 68658,
+            "matchesLocalPreparedBytes": true
+          },
+          {
+            "url": "http://127.0.0.1:4211/scenes/squannit/squannit-lighting.webp",
+            "status": 200,
+            "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+            "bytes": 1050836,
+            "matchesLocalPreparedBytes": true
+          }
+        ]
+      },
       "portableFrame": {
         "path": "docs/moons/b1-preparation/visual/squannit.png",
-        "sha256": "96aa9bda805beb593e38ecbed4db0c44e6082040a3b8b146af34e8a0e0cc9311",
-        "bytes": 299710,
+        "sha256": "126f42661087364174bdecfd42fd183dda170e89d23fb818a24b4d61015d3787",
+        "bytes": 337313,
         "videoTimestampSeconds": 4,
         "matchesUnmodifiedExtractedBytes": true
       }

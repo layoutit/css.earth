@@ -40,3 +40,7 @@ All source parameters stay in authored data; shared preparation creates the reta
 ## Retained orbit qualification
 
 The fixed-epoch orbit is evaluated from Scheirich et al. (2021), Table 4 and section 2.2, with the phase-bearing source parameters retained in source/orbit/published-parameters.json. The 2026 scene extrapolates the 2000–2019 photometric fit. Summed individual phase sensitivities are about 55 degrees at this epoch; this is not a formal confidence interval, and no independent 2026 position product was acquired. The older radar pole checks the orbital plane but does not verify the extrapolated current phase. Geometry retains the original 2006 OBJ scale independently of the later photometric size preference. No current attitude or libration is predicted.
+
+## Retained triangle coverage
+
+The prepared surface displays both sides of its existing 800 native triangles. This prevents rear-face suppression from exposing fine raster edge cracks in Chrome. It adds no faces and changes no source vertex, scale, atlas or texture. The source-mesh simplification remains at an estimated 2.0273 m error within its retained 4 m budget; that estimator is not a guaranteed maximum surface distance. The original 2,292-face OBJ remains pinned and unchanged.

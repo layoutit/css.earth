@@ -70,7 +70,8 @@
         "maximumErrorMeters": 4,
         "method": "source-meshoptimizer"
       },
-      "primitive": "u"
+      "primitive": "u",
+      "backfaceVisible": true
     }
   },
   "celestial": {
