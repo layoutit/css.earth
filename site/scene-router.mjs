@@ -10,7 +10,7 @@ import { createNavigationHistory, bindNavigationLinks } from './navigation-histo
 import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mjs';
 import * as applicationWorldContext from './application-world-context.mjs';
-import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mjs';
+import { selectionAtCamera, solarSystemFocus, watchOverviewSelection } from './overview-selection.mjs';
 import { createNavigationTiming } from './navigation-timing.mjs';
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
@@ -75,6 +75,27 @@ export function createSceneRouter({
     },
   });
 
+  // The shell survives body navigation. Create its callbacks in the router's
+  // scope so their lexical environment cannot retain the first mount session.
+  function ensureShell() {
+    if (shellOwner) return;
+    const owner = {};
+    shellOwner = owner;
+    owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, heliosphereEnabled, asteroidOrbitsEnabled,
+      onMotionChange(next) { if (shellOwner === owner && active) {
+        motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
+      } },
+      onHeliosphereChange(next) { if (shellOwner === owner && active) {
+        heliosphereEnabled = next === true;
+        worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
+      } },
+      onAsteroidOrbitsChange(next) { if (shellOwner === owner && active) {
+        asteroidOrbitsEnabled = next === true;
+        worldContextMount?.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
+      } },
+    });
+  }
+
   async function mountApplication({ factory, content, handoff, request } = {}) {
     if (destroyed || active) return;
     const session = {
@@ -101,23 +122,7 @@ export function createSceneRouter({
         syncPlayback();
         session.viewUrl?.schedule();
       };
-      if (!shellOwner) {
-        const owner = {};
-        shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, heliosphereEnabled, asteroidOrbitsEnabled,
-          onMotionChange(next) { if (shellOwner === owner && active) {
-            motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
-          } },
-          onHeliosphereChange(next) { if (shellOwner === owner && active) {
-            heliosphereEnabled = next === true;
-            worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
-          } },
-          onAsteroidOrbitsChange(next) { if (shellOwner === owner && active) {
-            asteroidOrbitsEnabled = next === true;
-            worldContextMount?.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
-          } },
-        });
-      }
+      ensureShell();
       const shell = shellOwner.shell;
       session.shell = shell;
       if (content) shell.setObject(content);
@@ -321,6 +326,17 @@ export function createSceneRouter({
       const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
       if (loaded.cancelled || pending !== request) return false;
       const [factory, content, handoff] = loaded.value;
+      if (request.options.automaticOverview) {
+        const navigation = source?.mount?.navigation;
+        const world = active === source ? navigation?.capture() : null;
+        const intent = world && selectionAtCamera({ world, viewport: navigation.optics(),
+          objects, objectId, overview });
+        if (!intent?.overview || intent.objectId !== object.id) {
+          const error = new DOMException('The camera no longer requests the overview.', 'AbortError');
+          error.preserveView = true;
+          throw error;
+        }
+      }
       request.timing.mark('handoff');
       if (active) retire(active, null, { preserveShell: true, flush: false });
       objectId = object.id;
@@ -539,7 +555,7 @@ export function createSceneRouter({
           historyOwner?.commit(url.href, { history: 'replace' });
           return;
         }
-        void navigate(sun.id, { overview: true, history: 'replace', preserveView: true });
+        void navigate(sun.id, { overview: true, history: 'replace', preserveView: true, automaticOverview: true });
       },
     }));
   }

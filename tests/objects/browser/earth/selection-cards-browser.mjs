@@ -32,7 +32,7 @@ try{
    await page.evaluate(()=>{window.__cardIdentity=document.querySelector('[data-entity-card]');window.__sceneIdentity=document.querySelector('.polycss-scene');});
    await select('Argentina','country:AR',['normal']);await select('Buenos Aires','3435910',['normal','buenos-aires-noise']);
    assert.equal(await page.locator('[data-entity-parent="country:AR"]').textContent(),'Argentina');
-   const parents=await page.locator('[data-entity-parent]').evaluateAll(nodes=>nodes.map(n=>({id:n.dataset.entityParent,name:n.textContent})));assert.ok(parents.some(p=>p.id.startsWith('adm1:')));row.parents=parents;
+   const parents=await page.locator('[data-entity-parent]').evaluateAll(nodes=>nodes.map(n=>({id:n.dataset.entityParent,name:n.textContent})));row.parents=parents;assert.ok(parents.some(p=>p.id==='admin1:3433955'),'Buenos Aires must retain its sourced federal-district parent');
    const noise=page.locator('button[name="lens"][value="buenos-aires-noise"]');await noise.click();
    await page.waitForFunction(()=>document.querySelector('button[value="buenos-aires-noise"]')?.getAttribute('aria-pressed')==='true');
    await page.waitForFunction(()=>[...document.querySelectorAll('[data-city-page]')].some(n=>n.dataset.cityPage.startsWith('noise-')&&n.style.visibility==='visible'),null,{timeout:90000});

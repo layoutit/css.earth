@@ -1,4 +1,4 @@
-import { readPreparedJson } from "./prepared-json-transport.mjs";
+import { readPreparedJson } from "../prepared-json-transport.mjs";
 import { isPreparedCityAssetUrl } from "./city-asset-url.mjs";
 import { isPreparedBlockReference, readPreparedWmtsBlock, preparedReferenceKey, PreparedBlockTransferError } from "./prepared-block-transport.mjs";
 import { requireGeographicDirectory, requireGeographicDirectoryReference } from "./geographic-index-contract.mjs";

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createSceneRouter } from '../scene-router.mjs';
-import { formatSharedView } from '../../src/renderers/css/dist/index.js';
+import { formatSharedView, worldCameraFromCenteredPresentation } from '../../src/renderers/css/dist/index.js';
 
 const flush = () => new Promise(setImmediate);
 function deferred() {
@@ -12,7 +12,7 @@ function deferred() {
 const saved = distance => ({ camera: { distanceKilometers: distance,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
-function harness({ prepare = async () => ({}), focus = undefined, factoryGate = null, contentGate = null, persistentWorldContext = null, destinations = false } = {}) {
+function harness({ prepare = async () => ({}), focus = undefined, factoryGate = null, contentGate = null, persistentWorldContext = null, destinations = false, registeredObjects = null, camera = null } = {}) {
   const documentTarget = new EventTarget(), windowTarget = new EventTarget(), media = new EventTarget();
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
   documentTarget.body = { classList: { add() {}, remove() {} } };
@@ -28,7 +28,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     back() { if (index) { const entry = entries[--index]; location = new URL(entry.url); const event = new Event('popstate'); event.state = entry.state; windowTarget.dispatchEvent(event); } },
     forward() { if (index < entries.length - 1) { const entry = entries[++index]; location = new URL(entry.url); const event = new Event('popstate'); event.state = entry.state; windowTarget.dispatchEvent(event); } },
   };
-  const objects = ['mercury', 'venus', 'earth'].map(id => ({ id, name: id, route: `/${id}/` }));
+  const objects = registeredObjects ?? ['mercury', 'venus', 'earth'].map(id => ({ id, name: id, route: `/${id}/` }));
   const stage = { dataset: { objectId: 'mercury' } }, input = {}, renders = new Set(), mounts = [], errors = [], shells = [], preparations = [], disposedContent = [];
   let maxRendered = 0;
   const factory = id => (nativeStage, options) => {
@@ -46,12 +46,12 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     if (destinations) mount.destinations = {};
     if (persistentWorldContext) {
       mount.navigation = {
-        frame: { id },
-        capture: () => ({ id }),
+        frame: objects.find(object => object.id === id)?.worldFrame ?? { id },
+        capture: () => camera?.world ?? ({ id }),
         apply() {},
         optics: () => ({ focalPixels: 1, principalOffsetPixels: [0, 0], framingRadiusPixels: 1, detailHandoffDiameterPixels: 1 }),
         subscribe(listener) {
-          const world = { referenceFrame: 'test', epochJdTt: 1, pose: { id } };
+          const world = camera?.world ?? { referenceFrame: 'test', epochJdTt: 1, pose: { id } };
           const viewport = { focalPixels: 10, principalOffsetPixels: [id === 'mercury' ? 1 : 2, 0] };
           listeners.add(listener); listener(world, viewport);
           return () => listeners.delete(listener);
@@ -91,7 +91,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     },
     persistentWorldContext,
   });
-  return { router, windowTarget, documentTarget, media, mounts, shells, renders, errors, writes, entries, preparations, disposedContent,
+  return { router, stage, windowTarget, documentTarget, media, mounts, shells, renders, errors, writes, entries, preparations, disposedContent,
     maxRendered: () => maxRendered };
 }
 
@@ -441,4 +441,23 @@ test('plain current-object anchors focus but saved-view links restore their spec
   assert.equal(h.mounts[0].value.camera.distanceKilometers, 77777);
   assert.equal(h.mounts.length, 1);
   h.router.destroy();
+});
+
+for (const reversed of [true, false]) test(`automatic overview validates its camera intent after loading: reversed=${reversed}`, async () => {
+  const rotation = [1,0,0,0,1,0,0,0,1];
+  const frame = (originM, bodyRadiusM) => ({ originM, bodyRadiusM, referenceFrame:'test', epochJdTt:1, presentationToReference:rotation, metersPerUnit:1 });
+  const objects = [{id:'mercury',name:'Mercury',route:'/mercury/',worldFrame:frame([1000,0,0],1)},
+    {id:'venus',name:'Test focus',route:'/venus/',classification:'star',distanceAu:0,worldFrame:frame([0,0,0],10)}];
+  const world = distance => worldCameraFromCenteredPresentation({rotation,distanceUnits:distance},objects[0].worldFrame,{focalPixels:1000,principalOffsetPixels:[0,0]});
+  const camera = {world:world(50)}, gate=deferred();
+  const h=harness({registeredObjects:objects,camera,contentGate:gate,persistentWorldContext:{mount:async()=>({publish(){},selectObject(){},setOverview(){},destroy(){}})}});
+  await h.router.settled;assert.deepEqual(h.errors,[]);const source=h.mounts[0],restores=source.restores;
+  camera.world=world(1700);
+  const pending=h.router.navigate('venus',{overview:true,preserveView:true,automaticOverview:true,history:'replace'});
+  await flush();if(reversed)camera.world=world(50);gate.resolve();
+  const completed=await pending;assert.deepEqual(h.errors,[]);assert.equal(completed,!reversed);
+  assert.equal(h.stage.dataset.objectId,reversed?'mercury':'venus');
+  assert.equal(h.mounts.length,reversed?1:2);
+  if(reversed){assert.ok(!source.calls.includes('destroy'));assert.equal(source.restores,restores);assert.equal(new URL(h.windowTarget.location.href).pathname,'/mercury/');assert.ok(h.disposedContent.includes('venus'));}
+  assert.deepEqual(h.errors,[]);h.router.destroy();
 });

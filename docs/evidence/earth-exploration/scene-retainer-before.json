@@ -1,0 +1,134 @@
+{
+  "candidate": "176db78b",
+  "qualification": "Diagnostic Earth -> Mars navigation before the shell-scope correction. Weak and weak-map key-conditional edges were excluded from this strong retainer path. This diagnostic skipped the idle-expiry wait and is not its qualification.",
+  "detachedNodes": 2103,
+  "heapSnapshotObjectId": 3349577,
+  "path": [
+    {
+      "from": "",
+      "edge": 1,
+      "to": "(GC roots)"
+    },
+    {
+      "from": "(GC roots)",
+      "edge": 29,
+      "to": "C++ Persistent roots"
+    },
+    {
+      "from": "C++ Persistent roots",
+      "edge": "blink::WebLocalFrameImpl::WebLocalFrameImpl(base::PassKey<WebLocalFrameImpl>, mojom::blink::TreeScopeType, WebLocalFrameClient *, blink::InterfaceRegistry *, const LocalFrameToken &)@../../third_party/blink/renderer/core/frame/web_local_frame_impl.cc:2295",
+      "to": "blink::WebLocalFrameImpl"
+    },
+    {
+      "from": "blink::WebLocalFrameImpl",
+      "edge": 7,
+      "to": "blink::HistoryItem"
+    },
+    {
+      "from": "blink::HistoryItem",
+      "edge": 1,
+      "to": "blink::DocumentState"
+    },
+    {
+      "from": "blink::DocumentState",
+      "edge": 4,
+      "to": "<input class=\"planet-motion-setting\" type=\"checkbox\" name=\"motion\" aria-describedby=\"mars-motion-description\">"
+    },
+    {
+      "from": "<input class=\"planet-motion-setting\" type=\"checkbox\" name=\"motion\" aria-describedby=\"mars-motion-description\">",
+      "edge": 11,
+      "to": "blink::EventTargetData"
+    },
+    {
+      "from": "blink::EventTargetData",
+      "edge": 1,
+      "to": "blink::BasicHeapVector<blink::internal::HeapCollectionType::kGCed, cppgc::internal::BasicMember<blink::RegisteredEventListener, cppgc::internal::StrongMemberTag, cppgc::internal::DijkstraWriteBarrierPolicy>, 1>"
+    },
+    {
+      "from": "blink::BasicHeapVector<blink::internal::HeapCollectionType::kGCed, cppgc::internal::BasicMember<blink::RegisteredEventListener, cppgc::internal::StrongMemberTag, cppgc::internal::DijkstraWriteBarrierPolicy>, 1>",
+      "edge": 1,
+      "to": "blink::RegisteredEventListener"
+    },
+    {
+      "from": "blink::RegisteredEventListener",
+      "edge": 1,
+      "to": "EventListener"
+    },
+    {
+      "from": "EventListener",
+      "edge": 1,
+      "to": "V8EventListener"
+    },
+    {
+      "from": "V8EventListener",
+      "edge": 1,
+      "to": ""
+    },
+    {
+      "from": "",
+      "edge": "context",
+      "to": "system / Context / scope @3997557"
+    },
+    {
+      "from": "system / Context / scope @3997557",
+      "edge": "previous",
+      "to": "system / Context / scope @3997547"
+    },
+    {
+      "from": "system / Context / scope @3997547",
+      "edge": "r",
+      "to": "onMotionChange"
+    },
+    {
+      "from": "onMotionChange",
+      "edge": "context",
+      "to": "system / Context / scope @3991963"
+    },
+    {
+      "from": "system / Context / scope @3991963",
+      "edge": "previous",
+      "to": "system / Context / scope @3991933"
+    },
+    {
+      "from": "system / Context / scope @3991933",
+      "edge": 2,
+      "to": "Object"
+    },
+    {
+      "from": "Object",
+      "edge": "get destinations",
+      "to": "get destinations"
+    },
+    {
+      "from": "get destinations",
+      "edge": "context",
+      "to": "system / Context / scope @3834607"
+    },
+    {
+      "from": "system / Context / scope @3834607",
+      "edge": "a",
+      "to": "Object"
+    },
+    {
+      "from": "Object",
+      "edge": "pause",
+      "to": "pause"
+    },
+    {
+      "from": "pause",
+      "edge": "context",
+      "to": "system / Context / scope @3856817"
+    },
+    {
+      "from": "system / Context / scope @3856817",
+      "edge": "T",
+      "to": "Object"
+    },
+    {
+      "from": "Object",
+      "edge": "sceneElement",
+      "to": "<div class=\"polycss-scene\" style=\"transform: translate3d(0px, 0px, -257829px) scale3d(22.528, 22.528, 22.528) matrix3d(-0.999961, 0.004954, 0.0073403, 0, 0, 0.828882, -0.559424, 0, -0.0088556, -0.559402, -0.828849, 0, 0, 0, 0, 1);\">"
+    }
+  ],
+  "source": "site/scene-router.mjs: persistent shell callbacks were created inside mountApplication and retained its initial mount activation."
+}

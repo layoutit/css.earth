@@ -6,15 +6,9 @@ import { PREPARED_EARTH_PANEL } from "../../unit/earth/prepared-fixture.mjs";
 
 test("publishes evidence-backed Earth shell content", async () => {
   assert.match(PREPARED_EARTH_PANEL.introduction, /third planet from the Sun/u);
-  assert.deepEqual(PREPARED_EARTH_PANEL.facts, [
-    { id: "distance-from-sun", label: "Distance from Sun", value: "150 million km" },
-    { id: "diameter", label: "Diameter", value: "12,756 km" },
-    { id: "orbital-period", label: "Orbital period", value: "365.25 days" },
-    { id: "rotation-period", label: "Rotation period", value: "23.9 hours" },
-    { id: "axial-tilt", label: "Axial tilt", value: "23.4°" },
-    { id: "moon-count", label: "Moons", value: "1" },
-    { id: "ring-system", label: "Rings", value: "None" },
-  ]);
+  const authored = JSON.parse(await readFile(new URL(
+    "../../../../src/planets/earth/source/content/object.json", import.meta.url), "utf8"));
+  assert.deepEqual(PREPARED_EARTH_PANEL.facts, authored.panel.facts);
   assert.deepEqual(PREPARED_EARTH_LENSES.controls.map(({ id }) => id), [
     "normal", "topography", "night-lights", "cross-section",
   ]);
@@ -22,19 +16,14 @@ test("publishes evidence-backed Earth shell content", async () => {
   assert.equal(snapshot.sourceId, 48583);
   assert.equal(snapshot.sections.length, 12);
   assert.equal(snapshot.credit, "NASA Science");
-  const allParagraphs = snapshot.sections.flatMap(({ paragraphs }) => paragraphs)
-    .join(" ");
+  // Scientific values now cite the pinned factsheet review, separately from
+  // the older NASA editorial introduction.
   for (const fact of PREPARED_EARTH_PANEL.facts.slice(0, 4)) {
-    const evidence = fact.value
-      .replace(" million km", " million kilometers")
-      .replace(" km", " kilometers");
-    assert.ok(allParagraphs.includes(evidence),
-      `NASA editorial does not contain prepared fact: ${evidence}`);
+    assert.equal(fact.source.path, "source/editorial/factsheet-review.json");
+    assert.equal(new URL(fact.source.url).hostname, "ssd.jpl.nasa.gov");
+    assert.match(fact.source.checked, /^\d{4}-\d{2}-\d{2}$/u);
   }
-  assert.deepEqual(PREPARED_EARTH_PANEL.moreFacts, [
-    { id: "ocean-coverage", label: "Ocean coverage", value: "71%" },
-    { id: "atmosphere-composition", label: "Atmosphere", value: "78% N₂, 21% O₂" },
-  ]);
+  assert.deepEqual(PREPARED_EARTH_PANEL.moreFacts, authored.panel.moreFacts);
   const license = await readFile(
     new URL("../../../../src/planets/earth/source/presentation/LICENSE.INTER-OFL", import.meta.url),
     "utf8",

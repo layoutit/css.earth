@@ -1,0 +1,72 @@
+{
+  "scope": "155-body main 1a5c9968 plus repair candidate before the later main integration",
+  "head": "176db78b5a2a865b932c61246e01902f2ab14c43",
+  "sourceSha256": "db72e9128a043b59b6c1d19f50fd8d3bedcfeb86d0a968524b80880de9ae0797",
+  "regression": "Delayed automatic overview handoff is revalidated against the live source camera before retiring the source scene. A canceled handoff retains the current view. Explicit navigation is unchanged.",
+  "unit": {
+    "path": "output/playwright/regroup-20260908/overview-and-closure-fixed.log",
+    "passed": 66
+  },
+  "browser": {
+    "head": "176db78b5a2a865b932c61246e01902f2ab14c43",
+    "cwd": "/Users/ekrof/fed/cssEarth-earth-8x",
+    "driverSha256": "8234ccbe8730e15b6064020711a177502c252d40c9c17eeaa39fac706a641496",
+    "serverSha256": "c93ec910075e8d0b7a2e9a80f11a6b621a28d94486cdbac242ea6d08b02acca6",
+    "rendererSha256": "09de5fa9afca9199158b966391e759466727f595bcb4f39b289cd234b03f2bf3",
+    "wheelSourceSha256": "58f4daf45bcaf31d5cc74ba36649a9857a2631d4032f0f223c8940517b1afd0d",
+    "skyHarnessSha256": "5b6fa160516e516bf563bdd5bdff348aed896c52482937586ce9f1f585b8717d",
+    "harnessSha256": "65c677f32d14ab111d65326c538f327f1360b60f91bbac7b13b2e75b222f3acc",
+    "wheelHarnessSha256": "39ea3233b43df5c155b065b0d7f9528b994c3725c525f71aaea84a2a670e8eb7",
+    "qualification": "Full cases after verifying actual empty-sky targets and wheel completion; production wheel correction unchanged, in sequential batches of at most six objects. Each batch has its own programmatic Astro server and port; closed between batches to bound observed development-process heap growth. User preview is not used. This is functional conformance, not production timing.",
+    "batches": [
+      {
+        "ids": [
+          "earth"
+        ],
+        "started": "2026-09-08T14:34:32.124Z",
+        "server": {
+          "ready": true,
+          "pid": 63891,
+          "port": 64641
+        },
+        "origin": "http://127.0.0.1:64641",
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "finished": "2026-09-08T14:36:13.845Z",
+        "closed": true
+      }
+    ],
+    "objects": [
+      {
+        "id": "earth",
+        "origin": "http://127.0.0.1:64641",
+        "pid": 63894,
+        "started": "2026-09-08T14:34:33.827Z",
+        "exitCode": 0,
+        "passed": true,
+        "cases": [
+          "earth/initial-shell (5985ms)",
+          "earth/desktop (15374ms)",
+          "earth/mobile (4080ms)",
+          "earth/pre-ready-hidden-motion-off (4002ms)",
+          "earth/pre-ready-visible-motion-off (3975ms)",
+          "earth/pre-ready-hidden-motion-on (4001ms)",
+          "earth/pre-ready-visible-motion-on (4017ms)",
+          "earth/dpr-1 (20271ms)",
+          "earth/dpr-2 (20672ms)",
+          "earth/lens-race (3830ms)",
+          "earth/lens-reacquire (4438ms)",
+          "earth/lens-rejection (4481ms)",
+          "earth/lens-destroy (3910ms)"
+        ],
+        "failures": [],
+        "finished": "2026-09-08T14:36:13.819Z"
+      }
+    ],
+    "complete": true,
+    "passed": true
+  },
+  "captured": "2026-09-08T11:41:32-03:00"
+}

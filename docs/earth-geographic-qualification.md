@@ -1,13 +1,78 @@
 # Geographic feature qualification
 
-The final browser qualification uses production build `0292b3ba`. It includes
-shared input corrections for surface occlusion (`74f06f15`) and queued wheel
-events (`fed30392`). Earlier native-memory measurements at `eb53bfeb` retain
-their original scope below. Asset publication and application deployment are
-separate operations.
-## Final build and visible checkpoints
+The repair candidate integrates main `1a5c9968` and all 155 registered bodies.
+Current source verification, input response and image-ownership checks pass;
+the final aggregate and browser gates are still in progress. No merge verdict is
+claimed until those finish. Application deployment remains the maintainer's decision.
 
-The final production build at `0292b3ba` was qualified sequentially, with no
+## Current repairs and focused evidence
+
+- A canceled destination can no longer replace a newer Back/Forward restoration
+  or publish an extra history entry after its detail request completes.
+- Failed visible imagery and directory entries can retry through the active
+  dataset control at the same view. Ready detail and backing remain available,
+  and the existing source area reports the failure.
+- Nonpacked directory responses are bounded while streaming, before their final
+  declared length and SHA-256 checks.
+- The persistent shell's callbacks no longer retain the first mount's async
+  scope. A real Earth -> Mars transition previously retained all 2,103 detached
+  Earth nodes. After the fix, none remain reachable after collection. The
+  [strong retainer path](evidence/earth-exploration/scene-retainer-before.json)
+  identifies the old motion-handler ownership.
+
+An automatic overview handoff now rechecks the live camera after loading, before
+retiring Earth. Reversing toward Earth during the load cancels the stale handoff
+and preserves the current view. The [regression receipt](evidence/earth-exploration/overview-handoff.json)
+records both delayed unit cases and all 13 passing Earth browser conformance cases.
+
+The [input response receipt](evidence/earth-exploration/input-response.json)
+covers globe, regional and city scales at DPR 1 and 2 on the integrated build.
+A requested 1.2x zoom measures 1.200005–1.200786x; reversing restores 1.0x.
+The largest error on an 80 px drag is 0.0204 px. Grabbing the map interrupts a
+real destination flight without later resumption. The no-video DPR 1 run measures
+32.7–48.7 ms event-queue p95 and 17.4–17.6 ms from delivery to the first observed
+CSS motion. This is Chrome-generated trusted input, not a physical trackpad or
+display-presentation latency test. The subsequent shell-lifetime correction
+changes ownership only; input controllers, policy and prepared geometry are unchanged.
+
+![DPR 2 Buenos Aires after the measured city drag](evidence/earth-exploration/repair-dpr2-city.png)
+
+The [image ownership receipt](evidence/earth-exploration/image-ownership.json)
+uses the corrected shell and eight independent, bounded native traces. All have
+complete renderer association and no data loss. The first attempt's single
+64 MiB trace overflowed and is excluded from native totals.
+
+At Earth startup, retained image dimensions represent approximately 439 MB of
+Earth RGBA pixels and 373 MB of shared context/navigation pixels. These are
+nominal dimensions, not proof that every decode is resident. The surface bank
+and shared context remain separate from geographic paging budgets.
+
+| State | Geographic blobs | Bound blobs | Native image-cache counter | Renderer private footprint |
+| --- | ---: | ---: | ---: | ---: |
+| Globe | 0 | 0 | 508 MiB | 466 MiB |
+| Buenos Aires visible | 71 | 69 | 911 MiB | 691 MiB |
+| Noise / visible revisit | 87 | 85 / 69 | 960 MiB | 696 / 695 MiB |
+| After the real 123-second expiry wait | 69 | 69 | Not reported | 624 MiB |
+| Mars after Earth | 0 | 0 | 204 MiB | 600 MiB |
+| Earth remount | 0 | 0 | 658 MiB | 633 MiB |
+
+The expiry wait removes all 18 unbound images. Leaving Earth releases its image
+handles, geographic blobs and detached scene; the shared context persists.
+Chrome's native caches can remain populated after application owners release
+resources. Native cache/compositor figures overlap, and GPU image allocations
+are children of cache accounting; they must not be added together or to nominal
+image dimensions. A missing allocator is reported as unavailable, not zero.
+This shorter ownership route does not replace the older 140-action endurance
+runs or establish a universal browser/GPU memory ceiling.
+
+## Historical production build and visible checkpoints
+
+These September 8 runs use `0292b3ba`. They precede the current repairs and main
+integration. Their `interactionCallback` fields measure spacing between animation
+frame callbacks during interaction, not event delivery or input latency. The
+measurements and original receipt field names below retain that historical scope.
+
+The historical production build at `0292b3ba` was qualified sequentially, with no
 concurrent preparation, build or browser qualification. All three Earth runs
 served the same five application/worker script hashes. The
 [final measurement receipt](evidence/earth-exploration/final.json) preserves those
@@ -17,11 +82,11 @@ records the new video hash and approximate seek positions.
 
 | Final-build run | Result | Measurement boundary |
 | --- | --- | --- |
-| DPR 1, six cycles, 140 actions | Pass; callback p95 18.5 ms, maximum 67.1 ms; search p95 47 ms | No video, screenshots or memory dumps |
+| DPR 1, six cycles, 140 actions | Pass; frame-callback interval p95 18.5 ms, maximum 67.1 ms; search p95 47 ms | No video, screenshots or memory dumps |
 | DPR 2, six cycles, 140 actions | Pass; retained scene and coherent entity/lens/history through loading, cancellation, offline recovery and revisits | Fresh video and eight native-memory snapshots |
-| DPR 2, two cycles, 56 actions | Pass; callback p95 18.5 ms, maximum 58 ms; search p95 45.2 ms | No video, screenshots or memory dumps |
+| DPR 2, two cycles, 56 actions | Pass; frame-callback interval p95 18.5 ms, maximum 58 ms; search p95 45.2 ms | No video, screenshots or memory dumps |
 
-Both timing controls have zero interaction callbacks over 100 ms. Their frame
+Both timing controls have zero frame-callback intervals over 100 ms during interaction. Their frame
 p95 is 16.8 ms; two frame gaps over 100 ms occur during startup. The final native
 run's two longer callbacks occur at memory-snapshot marks. These are local Chrome
 measurements, not physical trackpad/phone qualification or deployment evidence.
@@ -70,10 +135,10 @@ switches card-owned lenses, goes offline, retries and revisits.
 
 | Run | Result | Measurement boundary |
 | --- | --- | --- |
-| Desktop DPR 1, 56 actions | Pass; callback p95 18.5 ms, maximum 55.3 ms, none over 100 ms | No video, screenshots or memory dumps |
-| Desktop DPR 2, 56 actions | Pass; callback p95 18.4 ms, maximum 58.8 ms, none over 100 ms | No video, screenshots or memory dumps |
+| Desktop DPR 1, 56 actions | Pass; frame-callback interval p95 18.5 ms, maximum 55.3 ms, none over 100 ms | No video, screenshots or memory dumps |
+| Desktop DPR 2, 56 actions | Pass; frame-callback interval p95 18.4 ms, maximum 58.8 ms, none over 100 ms | No video, screenshots or memory dumps |
 | DPR 1 and 2, six cycles each | 140 actions pass per run; one scene, retained scene identity and zero final pending requests | Native-memory observers; DPR 1 also records video |
-| 800 × 900, DPR 2, emulated touch, 4× CPU slowdown, 10 Mbps down/1 Mbps up and 150 ms latency | 56 actions pass; callback p95 45.4 ms, maximum 147.2 ms, 12 intervals over 100 ms | Recovery works; smooth performance on this constrained profile is not established |
+| 800 × 900, DPR 2, emulated touch, 4× CPU slowdown, 10 Mbps down/1 Mbps up and 150 ms latency | 56 actions pass; frame-callback interval p95 45.4 ms, maximum 147.2 ms, 12 intervals over 100 ms | Recovery works; smooth performance on this constrained profile is not established |
 
 The desktop timing controls have a 16.8 ms frame-interval p95. Their three
 frame gaps over 100 ms occur during startup. Those startup gaps remain visible
@@ -93,7 +158,7 @@ in both runs. This is substantial browser residency. The observed plateau and
 enforced application limits support this finite endurance result; they are not
 a hard bound on all Chrome/GPU memory or proof of indefinite operation.
 
-Memory snapshots account for every interaction callback over 100 ms in the
+Memory snapshots account for every frame-callback interval over 100 ms during interaction in the
 native runs. Timing conclusions therefore use the separate observer-free runs.
 One earlier timing attempt hung during browser teardown and one recording attempt
 failed to write its report when the disk filled. Both remain marked invalid;
@@ -134,7 +199,7 @@ animation windows; it does not remove Chromium's input queue latency.
 occlusion regressions and the queued-wheel regressions. Renderer and preparation
 type checking pass. The earlier 1,904-check receipt remains attached to its
 native-memory candidate.
-The final production build at `0292b3ba` generates 72 pages and passes the
+The historical production build at `0292b3ba` generates 72 pages and passes the
 retained-DOM gate for all 71 registered objects at DPR 1 and 2, plus six
 shared-navigation hops at each density without node or stylesheet growth.
 
@@ -160,11 +225,12 @@ limit. That development-server failure is separate from browser residency and
 the production fixture. `CSSEARTH_CONFORMANCE_RECORD=0` retains conformance JSON
 without recording a video for every object/DPR pair.
 
-Earth source verification passes all 62 declared records. Aggregate source
-verification remains incomplete because this checkout lacks some ignored source
-inputs, including Naiad's manifest-pinned analytic radius table. Passing CI,
-prepared-runtime hashes and browser checks do not establish that missing source
-closure. No all-object source-readiness claim is made.
+At the historical candidate, Earth source verification passed all 62 records
+but aggregate verification lacked ignored inputs, including Naiad's pinned
+radius table. This gap is resolved for the current 155-body integration: exact
+manifest-matching local inputs were restored and `pnpm acquire:planets --
+--verify-only` passes for the entire registry. No source values were invented
+or hashes relaxed to obtain that result.
 
 ## Delivery scenarios
 

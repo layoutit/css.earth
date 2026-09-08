@@ -347,9 +347,9 @@ test("metadata residency releases, cancels and rejects corrupt directories", asy
   const failedChanges = [];
   const corrupt = createCityIndex(plan,()=>failedChanges.push(corrupt.stats()),async()=>new Response(Buffer.alloc(bytes.length)));
   corrupt.update([ref]);await wait(corrupt);
-  assert.match(corrupt.stats().errors[0],/hash mismatch/);
+  assert.match(corrupt.stats().errors[0],/Prepared JSON identity drifted/);
   assert.equal(failedChanges.at(-1).activeLoads, 0);
-  assert.match(failedChanges.at(-1).errors[0], /hash mismatch/);
+  assert.match(failedChanges.at(-1).errors[0], /Prepared JSON identity drifted/);
   corrupt.update([ref]);assert.equal(corrupt.stats().requests,1);
   corrupt.destroy();
   const cancelledChanges = [];

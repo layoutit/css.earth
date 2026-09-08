@@ -7,23 +7,14 @@ const PREPARED_SATURN_PANEL=await readPreparedFixture('saturn','content');
 const PREPARED_SATURN_TITLE=PREPARED_SATURN_PANEL.title;
 const moonCatalog=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/source/moons/saturn-moons.json',import.meta.url),'utf8'));
 
-test("publishes the prepared Saturn shell content", () => {
+test("publishes the prepared Saturn shell content", async () => {
   assert.equal(PREPARED_SATURN_TITLE.label, "Saturn");
   assert.match(PREPARED_SATURN_PANEL.introduction, /sixth planet from the Sun/u);
-  assert.deepEqual(PREPARED_SATURN_PANEL.facts, [
-    { id: "distance-from-sun", label: "Distance from Sun", value: "1.4 billion km" },
-    { id: "diameter", label: "Diameter", value: "120,500 km" },
-    { id: "orbital-period", label: "Orbital period", value: "29.4 Earth years" },
-    { id: "rotation-period", label: "Rotation period", value: "10.7 hours" },
-    { id: "axial-tilt", label: "Axial tilt", value: "26.73°" },
-    { id: "moon-count", label: "Moons", value: "274" },
-    { id: "ring-system", label: "Rings", value: "Present" },
-  ]);
-  assert.deepEqual(PREPARED_SATURN_PANEL.moreFacts, [
-    { id: "ring-span", label: "Ring span", value: "282,000 km" },
-    { id: "ring-thickness", label: "Ring thickness", value: "10 m" },
-  ]);
-  assert.equal(PREPARED_SATURN_PANEL.facts.find(fact=>fact.id==='moon-count').value,'274');
+  const authored = JSON.parse(await readFile(new URL(
+    '../../../../src/planets/saturn/source/content/object.json', import.meta.url), 'utf8'));
+  assert.deepEqual(PREPARED_SATURN_PANEL.facts, authored.panel.facts);
+  assert.deepEqual(PREPARED_SATURN_PANEL.moreFacts, authored.panel.moreFacts);
+  assert.equal(Number.parseInt(PREPARED_SATURN_PANEL.facts.find(fact=>fact.id==='moon-count').value, 10), moonCatalog.counts.confirmed);
   assert.equal(moonCatalog.counts.confirmed,293);
 });
 

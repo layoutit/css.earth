@@ -1,0 +1,491 @@
+{
+  "schema": "cssearth-image-ownership-qualification@1",
+  "buildBase": "176db78b5a2a865b932c61246e01902f2ab14c43",
+  "main": "1a5c996862115e1a2947052c3973ae279b59e2f1",
+  "sceneRouterSha256": "36fc638911b5a8173abc8966a26e972e79e757db0c4bace05568fba70fe917cb",
+  "browser": "152.0.7977.76",
+  "dpr": 2,
+  "idleSeconds": 123,
+  "harnessSha256": "c4f43274f9ab863f952bf4855ba72f30871e40f5003cfee4b68612f27aba4b2e",
+  "scripts": [
+    {
+      "path": "/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.c52f9wLD.js",
+      "method": "GET",
+      "bytes": 2081521,
+      "status": 200,
+      "sha256": "0d14808a1590bfee2dc98eb23dcb417d7f5a1140b5c85ff7c36db40e25ad4789"
+    },
+    {
+      "path": "/_astro/point-field-selection-worker-CMrTEVt-.js",
+      "method": "GET",
+      "bytes": 8296,
+      "status": 200,
+      "sha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
+    },
+    {
+      "path": "/_astro/packaged-object-runtime.DnKwaZJa.js",
+      "method": "GET",
+      "bytes": 264341,
+      "status": 200,
+      "sha256": "3472101ce3f9561e09f8ac07e5fe4eac6bc4c4f9728d26c3c8424429b10053b0"
+    },
+    {
+      "path": "/_astro/prepared-object-worker-DJctg7l9.js",
+      "method": "GET",
+      "bytes": 110096,
+      "status": 200,
+      "sha256": "b060a2e0291f7d8ad6467b7b5d8c921ab1f513732d980864c3fa3d685a645176"
+    },
+    {
+      "path": "/_astro/prepared-destination-worker-B5vs4UR0.js",
+      "method": "GET",
+      "bytes": 8706,
+      "status": 200,
+      "sha256": "d00c268f1e6e12fa4f44884e212bb477f2036826e6e60f4d234820c9be8fcebf"
+    }
+  ],
+  "passed": true,
+  "closed": true,
+  "qualification": [
+    "Finite DPR 2 Chrome snapshots with real imagery on Apple M3 Max / 36 GiB.",
+    "Nominal RGBA bytes are width times height times four for held image handles, not a claim that all of those decodes are currently resident.",
+    "Native image-cache and compositor figures are overlapping allocator categories; GPU image allocations are children of the cache total. Do not add them or add nominal handle bytes.",
+    "An omitted native allocator is null, not zero. The idle-expired snapshot omits cc/image_memory. The original raw summary defaulted this missing field to zero; this receipt corrects it from the retained trace.",
+    "Each snapshot uses its own bounded trace and has no data loss. The earlier single 64 MiB trace overflow is excluded.",
+    "Before the shell-scope fix 2,103 detached Earth nodes survived; after it the departed tree, Earth image handles and geographic blobs are released. This is not an indefinite-run or physical GPU budget guarantee."
+  ],
+  "rows": [
+    {
+      "name": "earth-globe",
+      "entity": "earth",
+      "lens": "normal",
+      "scenes": 1,
+      "pages": 0,
+      "images": 658,
+      "imageGroups": {
+        "Other images": {
+          "handles": 38,
+          "nominalRgbaBytes": 1301892
+        },
+        "Shared prepared context": {
+          "handles": 428,
+          "nominalRgbaBytes": 201160708
+        },
+        "Shared body context": {
+          "handles": 137,
+          "nominalRgbaBytes": 172041964
+        },
+        "Other Earth images": {
+          "handles": 2,
+          "nominalRgbaBytes": 4326400
+        },
+        "Earth surface including poles": {
+          "handles": 50,
+          "nominalRgbaBytes": 385351680
+        },
+        "Earth atmosphere": {
+          "handles": 3,
+          "nominalRgbaBytes": 49548288
+        }
+      },
+      "blobs": 0,
+      "boundBlobs": 0,
+      "encodedBlobBytes": 0,
+      "oldEarthAlive": null,
+      "oldEarthConnected": null,
+      "native": {
+        "rendererPid": 87680,
+        "traceId": "0x0",
+        "imageCacheBytes": 533149056,
+        "compositorBytes": 611104128,
+        "v8AccountedBytes": 93096376,
+        "privateFootprintBytes": 488856576,
+        "gpuImageBytes": 264861056
+      },
+      "trace": {
+        "file": "trace-earth-globe.json.gz",
+        "sha256": "2dc1563147201bab45a2983c4b9a82aebb460216edcbb1600b5d8c2b4440c170",
+        "dataLoss": false
+      }
+    },
+    {
+      "name": "city-visible",
+      "entity": "3435910",
+      "lens": "normal",
+      "scenes": 1,
+      "pages": 69,
+      "images": 729,
+      "imageGroups": {
+        "Other images": {
+          "handles": 38,
+          "nominalRgbaBytes": 1301892
+        },
+        "Shared prepared context": {
+          "handles": 428,
+          "nominalRgbaBytes": 201160708
+        },
+        "Shared body context": {
+          "handles": 137,
+          "nominalRgbaBytes": 172041964
+        },
+        "Other Earth images": {
+          "handles": 2,
+          "nominalRgbaBytes": 4326400
+        },
+        "Earth surface including poles": {
+          "handles": 50,
+          "nominalRgbaBytes": 385351680
+        },
+        "Earth atmosphere": {
+          "handles": 3,
+          "nominalRgbaBytes": 49548288
+        },
+        "Geographic images": {
+          "handles": 71,
+          "nominalRgbaBytes": 18628736
+        }
+      },
+      "blobs": 71,
+      "boundBlobs": 69,
+      "encodedBlobBytes": 7710821,
+      "oldEarthAlive": null,
+      "oldEarthConnected": null,
+      "native": {
+        "rendererPid": 87680,
+        "traceId": "0x0",
+        "imageCacheBytes": 954974912,
+        "compositorBytes": 1168245440,
+        "v8AccountedBytes": 180417792,
+        "privateFootprintBytes": 724739072,
+        "gpuImageBytes": 828900032
+      },
+      "trace": {
+        "file": "trace-city-visible.json.gz",
+        "sha256": "6dc9136696615276d12e5e88cbebe566d5c9c10b1c150120b6e866f4471fc428",
+        "dataLoss": false
+      }
+    },
+    {
+      "name": "city-noise",
+      "entity": "3435910",
+      "lens": "buenos-aires-noise",
+      "scenes": 1,
+      "pages": 85,
+      "images": 745,
+      "imageGroups": {
+        "Other images": {
+          "handles": 38,
+          "nominalRgbaBytes": 1301892
+        },
+        "Shared prepared context": {
+          "handles": 428,
+          "nominalRgbaBytes": 201160708
+        },
+        "Shared body context": {
+          "handles": 137,
+          "nominalRgbaBytes": 172041964
+        },
+        "Other Earth images": {
+          "handles": 2,
+          "nominalRgbaBytes": 4326400
+        },
+        "Earth surface including poles": {
+          "handles": 50,
+          "nominalRgbaBytes": 385351680
+        },
+        "Earth atmosphere": {
+          "handles": 3,
+          "nominalRgbaBytes": 49548288
+        },
+        "Geographic images": {
+          "handles": 87,
+          "nominalRgbaBytes": 85737600
+        }
+      },
+      "blobs": 87,
+      "boundBlobs": 85,
+      "encodedBlobBytes": 11370109,
+      "oldEarthAlive": null,
+      "oldEarthConnected": null,
+      "native": {
+        "rendererPid": 87680,
+        "traceId": "0x0",
+        "imageCacheBytes": 1006764736,
+        "compositorBytes": 1305952960,
+        "v8AccountedBytes": 179626248,
+        "privateFootprintBytes": 730227712,
+        "gpuImageBytes": 896008896
+      },
+      "trace": {
+        "file": "trace-city-noise.json.gz",
+        "sha256": "90f0541d8a391d3e86816f27e3b8ddc033f4e5fd3e8cb36ed07323c6fc0f90e4",
+        "dataLoss": false
+      }
+    },
+    {
+      "name": "city-visible-revisit",
+      "entity": "3435910",
+      "lens": "normal",
+      "scenes": 1,
+      "pages": 69,
+      "images": 745,
+      "imageGroups": {
+        "Other images": {
+          "handles": 38,
+          "nominalRgbaBytes": 1301892
+        },
+        "Shared prepared context": {
+          "handles": 428,
+          "nominalRgbaBytes": 201160708
+        },
+        "Shared body context": {
+          "handles": 137,
+          "nominalRgbaBytes": 172041964
+        },
+        "Other Earth images": {
+          "handles": 2,
+          "nominalRgbaBytes": 4326400
+        },
+        "Earth surface including poles": {
+          "handles": 50,
+          "nominalRgbaBytes": 385351680
+        },
+        "Earth atmosphere": {
+          "handles": 3,
+          "nominalRgbaBytes": 49548288
+        },
+        "Geographic images": {
+          "handles": 87,
+          "nominalRgbaBytes": 85737600
+        }
+      },
+      "blobs": 87,
+      "boundBlobs": 69,
+      "encodedBlobBytes": 11370109,
+      "oldEarthAlive": null,
+      "oldEarthConnected": null,
+      "native": {
+        "rendererPid": 87680,
+        "traceId": "0x0",
+        "imageCacheBytes": 1006764736,
+        "compositorBytes": 1304969920,
+        "v8AccountedBytes": 179549440,
+        "privateFootprintBytes": 729195520,
+        "gpuImageBytes": 896008896
+      },
+      "trace": {
+        "file": "trace-city-visible-revisit.json.gz",
+        "sha256": "4cc017c9dd1b73e290cca9b4deb39ef3742ad11270155456a16e996246059ac3",
+        "dataLoss": false
+      }
+    },
+    {
+      "name": "city-visible-idle",
+      "entity": "3435910",
+      "lens": "normal",
+      "scenes": 1,
+      "pages": 69,
+      "images": 745,
+      "imageGroups": {
+        "Other images": {
+          "handles": 38,
+          "nominalRgbaBytes": 1301892
+        },
+        "Shared prepared context": {
+          "handles": 428,
+          "nominalRgbaBytes": 201160708
+        },
+        "Shared body context": {
+          "handles": 137,
+          "nominalRgbaBytes": 172041964
+        },
+        "Other Earth images": {
+          "handles": 2,
+          "nominalRgbaBytes": 4326400
+        },
+        "Earth surface including poles": {
+          "handles": 50,
+          "nominalRgbaBytes": 385351680
+        },
+        "Earth atmosphere": {
+          "handles": 3,
+          "nominalRgbaBytes": 49548288
+        },
+        "Geographic images": {
+          "handles": 87,
+          "nominalRgbaBytes": 85737600
+        }
+      },
+      "blobs": 87,
+      "boundBlobs": 69,
+      "encodedBlobBytes": 11370109,
+      "oldEarthAlive": null,
+      "oldEarthConnected": null,
+      "native": {
+        "rendererPid": 87680,
+        "traceId": "0x0",
+        "imageCacheBytes": 1006764736,
+        "compositorBytes": 1219773120,
+        "v8AccountedBytes": 147393788,
+        "privateFootprintBytes": 698770432,
+        "gpuImageBytes": 896008896
+      },
+      "trace": {
+        "file": "trace-city-visible-idle.json.gz",
+        "sha256": "2a726aa69dc97d8dafa3b7223b4f76ab26b6033725c54b48f1da3bbe3ce7eca8",
+        "dataLoss": false
+      }
+    },
+    {
+      "name": "city-visible-idle-expired",
+      "entity": "3435910",
+      "lens": "normal",
+      "scenes": 1,
+      "pages": 69,
+      "images": 727,
+      "imageGroups": {
+        "Other images": {
+          "handles": 38,
+          "nominalRgbaBytes": 1301892
+        },
+        "Shared prepared context": {
+          "handles": 428,
+          "nominalRgbaBytes": 201160708
+        },
+        "Shared body context": {
+          "handles": 137,
+          "nominalRgbaBytes": 172041964
+        },
+        "Other Earth images": {
+          "handles": 2,
+          "nominalRgbaBytes": 4326400
+        },
+        "Earth surface including poles": {
+          "handles": 50,
+          "nominalRgbaBytes": 385351680
+        },
+        "Earth atmosphere": {
+          "handles": 3,
+          "nominalRgbaBytes": 49548288
+        },
+        "Geographic images": {
+          "handles": 69,
+          "nominalRgbaBytes": 18096192
+        }
+      },
+      "blobs": 69,
+      "boundBlobs": 69,
+      "encodedBlobBytes": 7515882,
+      "oldEarthAlive": null,
+      "oldEarthConnected": null,
+      "native": {
+        "rendererPid": 87680,
+        "traceId": "0x0",
+        "imageCacheBytes": null,
+        "compositorBytes": 213008384,
+        "v8AccountedBytes": 137604540,
+        "privateFootprintBytes": 654106624,
+        "gpuImageBytes": null
+      },
+      "trace": {
+        "file": "trace-city-visible-idle-expired.json.gz",
+        "sha256": "121b48ca624f6d5fa0c61d712a028c202cd82bbe7d60b88d12a697c03582159b",
+        "dataLoss": false
+      }
+    },
+    {
+      "name": "mars-after-earth",
+      "entity": "mars",
+      "lens": "normal",
+      "scenes": 1,
+      "pages": 0,
+      "images": 606,
+      "imageGroups": {
+        "Other images": {
+          "handles": 41,
+          "nominalRgbaBytes": 14281092
+        },
+        "Shared prepared context": {
+          "handles": 428,
+          "nominalRgbaBytes": 201160708
+        },
+        "Shared body context": {
+          "handles": 137,
+          "nominalRgbaBytes": 172041964
+        }
+      },
+      "blobs": 0,
+      "boundBlobs": 0,
+      "encodedBlobBytes": 0,
+      "oldEarthAlive": 0,
+      "oldEarthConnected": 0,
+      "native": {
+        "rendererPid": 87680,
+        "traceId": "0x0",
+        "imageCacheBytes": 213662444,
+        "compositorBytes": 538721004,
+        "v8AccountedBytes": 77924720,
+        "privateFootprintBytes": 628760576,
+        "gpuImageBytes": 109198060
+      },
+      "trace": {
+        "file": "trace-mars-after-earth.json.gz",
+        "sha256": "9aab9712f750bb7f06898c54ccddb431d10096010c68a8636e5e87cf78a0e4e6",
+        "dataLoss": false
+      }
+    },
+    {
+      "name": "earth-globe-remount",
+      "entity": "earth",
+      "lens": "normal",
+      "scenes": 1,
+      "pages": 0,
+      "images": 658,
+      "imageGroups": {
+        "Other images": {
+          "handles": 38,
+          "nominalRgbaBytes": 1301892
+        },
+        "Shared prepared context": {
+          "handles": 428,
+          "nominalRgbaBytes": 201160708
+        },
+        "Shared body context": {
+          "handles": 137,
+          "nominalRgbaBytes": 172041964
+        },
+        "Other Earth images": {
+          "handles": 2,
+          "nominalRgbaBytes": 4326400
+        },
+        "Earth surface including poles": {
+          "handles": 50,
+          "nominalRgbaBytes": 385351680
+        },
+        "Earth atmosphere": {
+          "handles": 3,
+          "nominalRgbaBytes": 49548288
+        }
+      },
+      "blobs": 0,
+      "boundBlobs": 0,
+      "encodedBlobBytes": 0,
+      "oldEarthAlive": 0,
+      "oldEarthConnected": 0,
+      "native": {
+        "rendererPid": 87680,
+        "traceId": "0x0",
+        "imageCacheBytes": 690406800,
+        "compositorBytes": 953550224,
+        "v8AccountedBytes": 84966696,
+        "privateFootprintBytes": 664036352,
+        "gpuImageBytes": 413517200
+      },
+      "trace": {
+        "file": "trace-earth-globe-remount.json.gz",
+        "sha256": "656f8d70d0f4c35f6e10361d30ded02f9de0b08bb9720b4eefae8327cb2f51c1",
+        "dataLoss": false
+      }
+    }
+  ]
+}

@@ -33,7 +33,9 @@ export function createObjectBrowserProfile({ id, audit, controls,
     }),
     playbackRunning: page => page.evaluate(key => window[key].runtime.playback().animations.some(animation => animation.running), key),
     camera: page => page.evaluate(({ key, fields }) => {
-      const state = window[key].camera.state();
+      const runtime = window[key];
+      if (!runtime) throw new Error(`Expected ${key} camera; active=${document.querySelector(".planet-stage")?.dataset.objectId}, url=${location.href}`);
+      const state = runtime.camera.state();
       return Object.fromEntries(fields.map(field => [field, state[field]]));
     }, { key, fields: cameraFields }),
     setCamera: (page, { pitch, controlPitch = pitch, controlYaw, zoom }) => page.evaluate(({ key, controlPitch, controlYaw, zoom }) =>

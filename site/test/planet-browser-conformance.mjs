@@ -625,6 +625,18 @@ async function proveDesktop(browser, planet, profile) {
       ...baseline,
       retainedProof,
     };
+  } catch (error) {
+    if (evidenceDirectory) {
+      await page.screenshot({ path: resolve(evidenceDirectory, `${planet.id}-desktop-failure.png`) }).catch(() => {});
+      await writeFile(resolve(evidenceDirectory, `${planet.id}-desktop-failure.json`), JSON.stringify({
+        error: error.message, url: page.url(), state: await page.evaluate(() => ({
+          active: document.querySelector('.planet-stage')?.dataset.objectId,
+          ready: document.documentElement.dataset.ready,
+          sceneState: document.documentElement.dataset.sceneState,
+        })).catch(() => null), evidence,
+      }, null, 2));
+    }
+    throw error;
   } finally {
     await page.close();
   }

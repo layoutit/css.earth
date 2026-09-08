@@ -12,7 +12,10 @@ test("publishes one source-bound Saturn panel model", async () => {
   assert.equal(PREPARED_SATURN_PANEL.objectId, 'saturn');
   assert.equal(PREPARED_SATURN_PANEL.provenance.editorial.sourceId, editorial.sourceId);
   assert.equal(PREPARED_SATURN_PANEL.provenance.editorial.modified, editorial.modified);
-  assert.equal(PREPARED_SATURN_PANEL.facts.find(fact=>fact.id==='moon-count').value,'274');
+  const moons = PREPARED_SATURN_PANEL.facts.find(fact=>fact.id==='moon-count');
+  assert.equal(Number.parseInt(moons.value, 10), moonCatalog.counts.confirmed);
+  assert.match(moons.value, / · [A-Z][a-z]{2} \d{4}$/u);
+  assert.equal(moons.source.path, 'source/editorial/factsheet-review.json');
   assert.equal(moonCatalog.counts.confirmed,293);
   assert.ok(Number.isFinite(Date.parse(moonCatalog.retrievedAt)));
   const panel = await readFile(new URL('../../../../site/components/PreparedObjectPanel.astro',import.meta.url),'utf8');

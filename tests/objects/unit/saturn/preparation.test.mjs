@@ -7,8 +7,9 @@ import {readPreparedFixture,projectRoot} from '../../fixtures.mjs';
 import {parseSourceManifest,verifySources} from '../../../../tools/objects/dist/operations.js';
 const sourceRoot=new URL('../../../../src/planets/saturn/source/',import.meta.url).pathname;
 const manifest=parseSourceManifest(JSON.parse(await readFile(sourceRoot+'manifest.json','utf8')),'saturn');
+const sourceCounts={inputCount:manifest.inputs.length,generatedIntermediateCount:manifest.generatedIntermediates.length,documentCount:manifest.documents.length,verifiedCount:manifest.inputs.length+manifest.generatedIntermediates.length+manifest.documents.length};
 test('prepares Saturn from a complete checked source closure',async()=>{
- assert.deepEqual(await verifySources({sourceRoot,manifest}),{inputCount:39,generatedIntermediateCount:1,documentCount:2,verifiedCount:42});
+ assert.deepEqual(await verifySources({sourceRoot,manifest}),sourceCounts);
 });
 test('composition consumes the verified phase and never reruns its numerical generator',async()=>{
  const source=await readFile(new URL('../../../../tools/objects/material-composition/layered-oblate.mjs',import.meta.url),'utf8');
@@ -23,7 +24,7 @@ test('composition consumes the verified phase and never reruns its numerical gen
 });
 test('executes every pinned Saturn acquisition verifier',async()=>{
  const {stdout}=await promisify(execFile)(process.execPath,['tools/objects/dist/operations.js','acquire','saturn','--verify-only'],{cwd:projectRoot});
- assert.deepEqual(JSON.parse(stdout),{inputCount:39,generatedIntermediateCount:1,documentCount:2,verifiedCount:42});
+ assert.deepEqual(JSON.parse(stdout),sourceCounts);
  const plan=JSON.parse(await readFile(sourceRoot+'preparation/acquisition.json','utf8'));
  assert.ok(plan.operations.some(step=>step.kind==='satellite-catalog'));
  for(const path of ['lenses/2025a_225.fits','moons/titan.jpg'])assert.ok(manifest.inputs.some(entry=>entry.path===path)||plan.operations.some(step=>step.kind==='download'));

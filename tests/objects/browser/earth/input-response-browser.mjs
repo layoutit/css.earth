@@ -7,6 +7,7 @@ import {chromium} from 'playwright';
 import {serveBuiltFixture} from '../../../../tools/test-built-server.mjs';
 import {prepareLocationPoint} from '../../../../tools/objects/geographic-pages/prepare-location.mjs';
 import {WHEEL_ZOOM_SPEED_MULTIPLIER} from '../../../../site/runtime-policy.mjs';
+const boundedClose=async(promise,label)=>{let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(label+' cleanup timed out')),15000);})]);}finally{clearTimeout(timer);}};
 const option=(name,fallback)=>process.argv.find(a=>a.startsWith(`--${name}=`))?.slice(name.length+3)??fallback;
 const built=resolve(option('built','dist')),output=resolve(option('output',`output/playwright/input-response-${Date.now()}`));
 const dpr=Number(option('dpr','1')),record=option('record','false')==='true';assert.ok([1,2].includes(dpr));await mkdir(output,{recursive:true});
@@ -93,6 +94,8 @@ try{
 finally{
  report.scripts=[...new Map(fixture.requests.filter(r=>r.sha256).map(r=>[r.path,r])).values()];
  for(const r of report.scripts)assert.equal(r.sha256,createHash('sha256').update(await readFile(resolve(built,'.'+r.path))).digest('hex'));
- await context?.close();report.video=await page?.video()?.path();await browser?.close();await fixture.close();report.closed=true;
+ await writeFile(resolve(output,'before-cleanup.json'),JSON.stringify(report,null,2)+'\n');
+ for(const [label,close]of [['Context',()=>context?.close()],['Browser',()=>browser?.close()],['Fixture',()=>fixture.close()]]){try{await boundedClose(close(),label);}catch(e){(report.cleanupErrors??=[]).push(e.message);process.exitCode=1;}}
+ report.video=await page?.video()?.path();report.closed=!report.cleanupErrors;
  await writeFile(resolve(output,'report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({output,passed:report.passed??false,error:report.error,scales:report.scales.map(({name,response})=>({name,response}))}));
 }

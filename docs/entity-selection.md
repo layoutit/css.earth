@@ -88,6 +88,12 @@ Base imagery has 512 retained slots, at most 256 displayed pieces, a 128 MiB
 conservative decoded reservation and a separate 96-directory / 12 MiB metadata
 allowance. Observation paging has 32 slots, three image loads and a 128 MiB
 allowance including any overview. Both reserve capacity for replacement.
+After a visible image or directory failure, the active dataset control retries
+failed resources at the same camera view. Its existing source area reports the
+failure. Ready detail and backing remain available; recovery does not depend on
+leaving the city, zooming or reloading the page. Directory responses are bounded
+while streaming, then checked against their declared byte length and hash.
+
 Shared native image ownership deduplicates resources across pages and revisits;
 idle reuse yields to current demand and expires after two minutes. Teardown
 clears bindings, decode owners and blobs. Chrome's internal caches and total
@@ -155,9 +161,12 @@ The normal repository gates are `pnpm acquire:planets -- --verify-only`,
 DPR 1 and 2. Focused built-app entry points are:
 
 ```sh
-node tests/objects/browser/earth/card-lens-ownership-browser.mjs --built-dir=dist --dpr=1 --record=false
+pnpm test:browser:earth-entities --built-dir=dist
+node tests/objects/browser/earth/history-interruption-browser.mjs --built-dir=dist --output=<new-run-directory>
 node tests/objects/browser/earth/exploration-browser.mjs --built=dist --journey=continuous-exploration --cycles=2 --dpr=1 --trace=false --output=<new-run-directory>
-node tests/objects/browser/earth/global-recovery-browser.mjs --built-dir=dist --dpr=1
+node tests/objects/browser/earth/global-recovery-browser.mjs --built-dir=dist --dpr=1,2 --output=<new-run-directory>
+node tests/objects/browser/earth/input-response-browser.mjs --built=dist --dpr=1 --output=<new-run-directory>
+node tests/objects/browser/earth/image-ownership-browser.mjs --built=dist --output=<new-run-directory>
 pnpm test:earth-delivery --built-dir=dist
 ```
 
