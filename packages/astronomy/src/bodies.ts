@@ -65,7 +65,7 @@ const body = (
 export const BODIES: Record<BodyId, BodyData> = {
   sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
   // ESA/RMOC MTP019 equivalent-volume radius (ESA_MODEL_INFO.ASC); mass 9.982e12 kg
-  // (Preusker et al. 2017) times CODATA G. Shape remains object-owned.
+  // (Pätzold et al. 2016, doi:10.1038/nature16535) times CODATA G. Shape remains object-owned.
   'comet-67p': body('comet-67p', '67P/Churyumov–Gerasimenko', 'DES=67P;CAP;', 1.65, 9.982e12 * 6.6743e-20, 'sun'),
   // Farnham & Thomas (2013) PDS shape catalogue equivalent-volume radii.
   // No measured GM is supplied by these source records; zero follows this registry's unknown-GM convention.
