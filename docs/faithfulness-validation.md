@@ -11,6 +11,9 @@ upstream packages; this is not a new scientific audit of those bodies.
 - `pnpm acquire:planets -- --verify-only`: 87 bodies, 2,173 pinned files.
 - `pnpm prepare:factsheets -- --check --editorial`: 87 bodies, 589 facts.
 - Package and renderer suites, and all 785 platform tests from `pnpm test`.
+- Final `pnpm test:shell`: 221/221, including byte-identical reproduction of
+  the corrected shared navigation atlas. The initial full test run's sole
+  remaining failure is therefore resolved in its complete owning suite.
 - `pnpm build`; renderer and preparation typechecks.
 - 139 universe/frame preparation tests, plus 53 focused epoch/source checks.
 - 29 source-surface tests, nine independently computed full-source anchors,
@@ -24,8 +27,11 @@ upstream packages; this is not a new scientific audit of those bodies.
   (174 visits), plus six navigation hops at each density. Exactly one scene,
   stable retained DOM, no node/stylesheet growth, and zero reported errors.
 
-The complete browser run used the production preview. The final navigation
-source/atlas correction receives its separate regeneration and browser check.
+The complete browser run used the production preview. After the final navigation
+source/atlas correction, eight focused source/marker checks passed, the production
+site was rebuilt, all three served navigation images matched their checked-in
+bytes, and Itokawa passed again at both DPR 1 and 2. The earlier full browser run
+is retained as evidence for the unchanged scene/interaction behavior.
 
 ## Fresh installation
 
