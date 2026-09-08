@@ -119,4 +119,8 @@ area nor layer count is a GPU memory measurement.
 After integration: renderer build/typecheck, 136 focused renderer tests, and 231
 preparation tests pass. This is not an aggregate green browser gate or an object
 readiness claim. No new worktree was created, no unrelated checkout was modified,
-and none of this follow-up has been pushed to the merged PR.
+and this follow-up continues separately from the merged PR.
+
+Merged main `c6850e28` is integrated in follow-up commit `a47ced48`. All source
+and prepared asset files hashed by the integrated Sun-route capture match after
+that integration; newly merged 67P assets are outside this route.
