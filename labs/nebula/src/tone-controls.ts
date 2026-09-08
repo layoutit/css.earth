@@ -2,7 +2,7 @@ import { defaultOverlayTone, updateOverlayTone, type OverlayTone } from './overl
 
 export interface ToneResource { sourcePath: string; url: string; width: number; height: number; }
 type ToneTarget = 'image' | 'density';
-interface ToneContext { subjectId: string; imageId?: string; }
+interface ToneContext { subjectId: string; imageId?: string; imageLayer?: 'original' | 'diffuse' | 'stars'; }
 interface ToneSpec { key: keyof OverlayTone; label: string; min: number; max: number; step: number; }
 
 const STORAGE_KEY = 'cssearth-nebula-tone-state-v1';
@@ -114,12 +114,12 @@ export function createToneControls({ host, target, onApply }: {
   actions.append(reset, copy); group.append(actions, status); host.replaceChildren(group); render();
   return Object.freeze({
     setContext(next: ToneContext | null) {
-      if (context && next && contextKey(target, context) === contextKey(target, next)) return;
+      if (context && next && contextKey(target, context) === contextKey(target, next) && context.imageLayer === next.imageLayer) return;
       if (!context && !next) return;
       revision++; pending?.abort(); if (timer !== undefined) window.clearTimeout(timer); timer = undefined; context = next ? { ...next } : null;
       tone = context ? { ...(saved.get(contextKey(target, context)) ?? defaultOverlayTone()) } : defaultOverlayTone();
       status.textContent = ''; render();
-      if (context && (!sameTone(tone, defaultOverlayTone()) || touched.has(contextKey(target, context)))) schedule();
+      if (context && (context.imageLayer !== undefined || !sameTone(tone, defaultOverlayTone()) || touched.has(contextKey(target, context)))) schedule();
     },
     getValue: () => ({ ...tone }),
     destroy() { revision++; pending?.abort(); if (timer !== undefined) window.clearTimeout(timer); },

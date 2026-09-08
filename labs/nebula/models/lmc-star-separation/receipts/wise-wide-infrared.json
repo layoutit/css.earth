@@ -1,0 +1,176 @@
+{
+  "schema": "cssearth-star-separation-receipt@1",
+  "status": "inspectable-trial",
+  "source": {
+    "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+    "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+    "nativeDimensions": [
+      6000,
+      6000
+    ],
+    "dtype": "uint8"
+  },
+  "sourceSha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+  "recipeSha256": "5b8057367005c7eaba3791c172871047f12158b84fca41b2e880e94487511765",
+  "scriptSha256": "0dfaa6eb36a60fb1543233f660430a312b2a766104692bbd77f840eaff18b96e",
+  "parameters": {
+    "detectionSigma": 2,
+    "detectionThreshold": 0.025,
+    "minimumSeparation": 7,
+    "maximumDetections": 250000,
+    "tileSize": 768,
+    "minimumPeak": 0.035,
+    "minimumSigma": 0.65,
+    "maximumSigma": 3.5,
+    "maximumElongation": 1.55,
+    "maximumMaskRadius": 12,
+    "maskSigma": 2.8,
+    "profileFraction": 0.2,
+    "minimumGaussianCorrelation": 0.75,
+    "annulusWidth": 5
+  },
+  "dependencies": {
+    "opencv": "4.11.0",
+    "numpy": "1.26.4"
+  },
+  "coordinateConvention": "Zero-based native raster pixel centres, top left; no orientation, crop, resize or registration transform applied.",
+  "detectionsWrittenBeforeSeparation": true,
+  "detectionsInput": null,
+  "detectedCount": 128895,
+  "acceptedCount": 48970,
+  "rejected": {
+    "non-psf-width-or-elongation": 56800,
+    "edge-neighborhood": 1259,
+    "extended-or-connected-profile": 5140,
+    "non-psf-profile": 2405,
+    "low-compact-contrast": 14321
+  },
+  "verification": {
+    "maximumReconstructionErrorCodeValues": 0,
+    "changedPixelsOutsideMask": 0,
+    "nativeDimensions": [
+      6000,
+      6000
+    ],
+    "maskPixels": 2064900,
+    "sourceChannelTotals": [
+      49124209,
+      80845505,
+      214824279
+    ],
+    "diffuseChannelTotals": [
+      35864712,
+      66222471,
+      204760627
+    ],
+    "diffusePercentileFractions": [
+      0,
+      0.1,
+      0.5,
+      0.9,
+      0.99,
+      0.999,
+      1
+    ],
+    "diffuseChannelPercentiles": [
+      [
+        0,
+        0,
+        0,
+        2,
+        16,
+        61,
+        255
+      ],
+      [
+        0,
+        0,
+        1,
+        4,
+        19,
+        72,
+        255
+      ],
+      [
+        0,
+        3,
+        5,
+        7,
+        19,
+        70,
+        255
+      ]
+    ],
+    "brightnessMeaning": "Unsigned display code values in native BGR channel order (or grayscale); full footprint including no-data code values. Not radiance, photometric flux or signal-to-noise.",
+    "encodedRoundTripExact": true
+  },
+  "preview": {
+    "maxDimension": 1200,
+    "exposure": 1,
+    "gamma": 1,
+    "meaning": "One identical global exposure and gamma on source/diffuse/stars; reduced preview only."
+  },
+  "method": "Compact-profile gates; bounded circular masks; local harmonic background interpolation; positive residual with exact integer subtraction. Overlap uses maximum residual, never summed subtraction.",
+  "alphaPolicy": "If present, source alpha is copied unchanged into both outputs; arithmetic reconstruction is checked on color channels.",
+  "limitations": [
+    "Automatic compact-source candidates, not physical foreground/LMC membership.",
+    "Compact nebular knots can resemble stars; ambiguous sources may be removed and rejected or undetected stars remain.",
+    "Diffuse structure inside accepted masks is an interpolation hypothesis; outside-mask pixels remain exact.",
+    "Saturated stars, broad wings, diffraction spikes, crowded blends and edge sources are deliberately incomplete.",
+    "No calibrated PSF or noise model exists for these display composites; brightness is not photometric SNR."
+  ],
+  "outputs": {
+    "star-detections.json": {
+      "sha256": "3581d9c2d9643cb07fa88ac86f2bacbb3495dd75f20158cb1d61453195a61bde",
+      "bytes": 4597357
+    },
+    "star-detection-map.png": {
+      "sha256": "79e0008f0b821fc805000da1924cdb38844f266ab9ad9b32de851f880b1e75eb",
+      "bytes": 555664
+    },
+    "diffuse.png": {
+      "sha256": "412f0978e0376010e3d06eb0bebd738f413ff842cecc9f446e18d80330722059",
+      "bytes": 20305790
+    },
+    "stars.png": {
+      "sha256": "4bedfbf64b0a26e2bcf14fd97c9b71c4ac63edf23c032587ae31b2ccd9708cd4",
+      "bytes": 4608277
+    },
+    "star-mask.png": {
+      "sha256": "0fe0c6f637a38be833c574577aed2f0c73449839014d6c092a34a6e01a3d5a0f",
+      "bytes": 1335891
+    },
+    "accepted-stars.json": {
+      "sha256": "aa4f643a56e0b12198b2417f4190b8ec66c8b76ed25d7cecef6c72e0ac1b4b22",
+      "bytes": 10916628
+    },
+    "comparison.png": {
+      "sha256": "073d493759630874d5859b66e31da6e81f61f57ccab8675de2d75dc81348c447",
+      "bytes": 2794424
+    }
+  },
+  "elapsedSeconds": 35.137,
+  "delivery": {
+    "sourceReceiptSha256": "6773c7944d18c840764decb8cc9ab1723de27ca5f1f262d5e6ff0acab9cf75cd",
+    "scriptSha256": "3173cd9f6152ca0440ebbdddda652935ee6c582af6da3773d0419c23121fb198",
+    "layers": [
+      {
+        "id": "diffuse",
+        "label": "Diffuse trial",
+        "texturePath": "labs/nebula/models/lmc-star-separation/prepared/wise-wide-infrared-diffuse.webp",
+        "widthPx": 4096,
+        "heightPx": 4096,
+        "sha256": "2c02003d58b26752faf9a2f39985e2a734e5fc919ccbd7633f1d1b71f96fdf6f"
+      },
+      {
+        "id": "stars",
+        "label": "Compact residual",
+        "texturePath": "labs/nebula/models/lmc-star-separation/prepared/wise-wide-infrared-stars.webp",
+        "widthPx": 4096,
+        "heightPx": 4096,
+        "sha256": "94ca315e05d8f184b09eeef1dcf5af4a84027ed917f4da1f34e49be59ce2b2d6"
+      }
+    ],
+    "note": "Full source extent, reduced delivery sampling only. Original sky geometry and placement reused. No crop, tone change or 3D reconstruction."
+  }
+}

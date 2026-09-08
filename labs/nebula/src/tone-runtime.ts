@@ -6,6 +6,10 @@ export function createToneResourceController() {
   let generation = 0;
   return {
     clear() { generation++; bindings.clear(); urls.clear(); },
+    unbind(nodes: HTMLElement[]) {
+      const removed = new Set(nodes);
+      for (const binding of bindings.values()) binding.nodes = binding.nodes.filter(node => !removed.has(node));
+    },
     bind(path: string, width: number, height: number, nodes: HTMLElement[] = []) {
       const prior = bindings.get(path);
       bindings.set(path, { width, height, nodes: [...(prior?.nodes ?? []), ...nodes] });

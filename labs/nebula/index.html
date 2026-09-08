@@ -52,6 +52,11 @@
               <legend>Image adjustments</legend>
               <label class="field-label" for="overlay-choice">Image</label>
               <select id="overlay-choice"></select>
+              <div id="overlay-layer-control" hidden>
+                <label class="field-label" for="overlay-layer">Image layer</label>
+                <select id="overlay-layer" aria-describedby="overlay-layer-note"></select>
+                <p id="overlay-layer-note" class="overlay-detail"></p>
+              </div>
               <div class="overlay-visibility">
                 <label id="overlay-enabled-label" for="overlay-enabled"><input id="overlay-enabled" type="checkbox" /> Show image</label>
                 <label for="overlay-opacity">Opacity</label>

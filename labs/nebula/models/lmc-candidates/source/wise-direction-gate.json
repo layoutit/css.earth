@@ -1,0 +1,188 @@
+{
+  "schema": "cssearth-fixed-wcs-catalogue-direction-gate@1",
+  "pass": true,
+  "gates": {
+    "uniqueMatches": true,
+    "allFourQuadrants": true,
+    "halfImageHull": true,
+    "median": true,
+    "p90": true,
+    "shiftedControls": true
+  },
+  "predeclaredProtocol": {
+    "minUniqueMatches": 100,
+    "minQuadrants": 4,
+    "minHullFraction": 0.5,
+    "maxMedianNativeWisePixels": 0.75,
+    "maxP90NativeWisePixels": 1.5,
+    "maxEachShiftedControlFraction": 0.1,
+    "correspondenceWindowNativeWisePixels": 2.5,
+    "catalogueIsolationPixels": 5,
+    "catalogueMagnitudeRangeW1": [
+      8,
+      11
+    ]
+  },
+  "source": {
+    "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+    "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+    "nativeDimensions": [
+      6000,
+      6000
+    ],
+    "channel": "W1 in JPEG blue channel",
+    "wcs": {
+      "projection": "TAN",
+      "coordinateFrame": "ICRS",
+      "referenceDimension": [
+        6000,
+        6000
+      ],
+      "referencePixel": [
+        3000,
+        3000
+      ],
+      "referenceValueDeg": [
+        78.76,
+        -69.19
+      ],
+      "scaleDeg": [
+        -0.0040595312971682,
+        0.0040595312971682
+      ],
+      "rotationDeg": 0
+    }
+  },
+  "catalogue": {
+    "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/allwise-bright.csv",
+    "sha256": "57b77df8a37cb5cf9076f7b99c30c43674cea26ce44f48c02a74e360363f3e3d",
+    "name": "IRSA AllWISE Source Catalog allwise_p3as_psd",
+    "query": {
+      "endpoint": "https://irsa.ipac.caltech.edu/TAP/sync",
+      "parameters": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT TOP 200000 designation,ra,dec,w1mpro,w1snr,cc_flags,ext_flg FROM allwise_p3as_psd WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',78.76,-69.19,17)) AND w1mpro BETWEEN 8 AND 11 AND w1snr>30 AND ext_flg=0 AND cc_flags LIKE '0%'",
+        "MAXREC": "200000"
+      },
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+TOP+200000+designation%2Cra%2Cdec%2Cw1mpro%2Cw1snr%2Ccc_flags%2Cext_flg+FROM+allwise_p3as_psd+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C78.76%2C-69.19%2C17%29%29+AND+w1mpro+BETWEEN+8+AND+11+AND+w1snr%3E30+AND+ext_flg%3D0+AND+cc_flags+LIKE+%270%25%27&MAXREC=200000"
+    },
+    "downloadedRows": 70630,
+    "inFieldIsolatedCandidates": 42024,
+    "selection": "8<=W1<=11, W1 SNR>30, ext_flg=0, W1 cc_flags=0; >5 image pixels from another selected catalogue object"
+  },
+  "coordinateConvention": "Zero-based top-left raster pixel centres; edges at -.5 and size-.5. Resize: x_native=(x_work+.5)*native_width/work_width-.5, likewise y. AVM/FITS: x_fits=(x_native+.5)*reference_width/native_width+.5; y_fits=reference_height+.5-(y_native+.5)*reference_height/native_height. Row-major homography maps source native centres to reference native centres.",
+  "refitted": false,
+  "uniqueMatchedStars": 34811,
+  "allCoordinatesHeldOutFromAnyFit": true,
+  "reservedCheckCount": 11604,
+  "residualNativeWisePixels": {
+    "median": 0.32148315516473114,
+    "p90": 0.6385184658224533,
+    "max": 2.4998290694084155
+  },
+  "reservedCheckResidualNativeWisePixels": {
+    "median": 0.31571389137939676,
+    "p90": 0.6322795262452354,
+    "max": 2.496394098627247
+  },
+  "matchedSourceHullFraction": 0.9929390230930758,
+  "quadrantMatchCounts": [
+    9585,
+    6592,
+    11074,
+    7560
+  ],
+  "shiftedControls": [
+    {
+      "offsetNativeWisePixels": [
+        40,
+        0
+      ],
+      "matchesWithin2_5Pixels": 2466
+    },
+    {
+      "offsetNativeWisePixels": [
+        0,
+        40
+      ],
+      "matchesWithin2_5Pixels": 2484
+    },
+    {
+      "offsetNativeWisePixels": [
+        100,
+        -70
+      ],
+      "matchesWithin2_5Pixels": 2466
+    }
+  ],
+  "wrongTransformControls": {
+    "mirror-x": {
+      "matchesWithin2_5Pixels": 2371
+    },
+    "mirror-y": {
+      "matchesWithin2_5Pixels": 2470
+    },
+    "rotate90": {
+      "matchesWithin2_5Pixels": 2443
+    },
+    "scale0.9": {
+      "matchesWithin2_5Pixels": 2548
+    },
+    "scale1.1": {
+      "matchesWithin2_5Pixels": 2210
+    }
+  },
+  "cloudProcessingPerformed": false,
+  "limitations": [
+    "Catalogue and image originate from the same infrared survey but coordinates are checked independently against the published image WCS.",
+    "The JPEG is a 14.6arcsec/pixel display composite; residuals are not native detector astrometric precision.",
+    "Blue W1 centroids verify common image geometry, not diffuse W3/W4 photometry, seams, or cloud quality.",
+    "Identities are associated within a predeclared 2.5 pixel window; shifted controls measure chance associations.",
+    "Fixed publisher WCS is verified without fitting an offset, scale, reflection or homography."
+  ],
+  "id": "wise-wide-infrared",
+  "imageSha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+  "status": "passed",
+  "verifiedWcs": {
+    "projection": "TAN",
+    "coordinateFrame": "ICRS",
+    "referenceDimension": [
+      6000,
+      6000
+    ],
+    "referencePixel": [
+      3000,
+      3000
+    ],
+    "referenceValueDeg": [
+      78.76,
+      -69.19
+    ],
+    "scaleDeg": [
+      -0.0040595312971682,
+      0.0040595312971682
+    ],
+    "rotationDeg": 0
+  },
+  "method": "Fixed publisher TAN WCS tested against external AllWISE W1 catalogue coordinates using the blue channel. No registration parameters fitted.",
+  "predeclaredProtocolSource": "Thresholds declared before catalogue matching in the alignment task; unchanged after measurement.",
+  "catalogueDocumentationUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/expsup/sec2_1.html",
+  "bandMappingEvidence": {
+    "path": ".local/nebula-lab/image-candidates/wise-wide/receipt.json",
+    "sha256": "c0471ef6bb3d9cf8cd06900c9c238dc8322407ba48ea57abc4f05c8246f39a08"
+  },
+  "matchedStarEvidence": {
+    "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/matched-catalogue-stars.json",
+    "sha256": "42897adacce126cd52dc9bf758066e81c4f72b2d6ce7807849a1b70f85d5e235"
+  },
+  "starMapEvidence": {
+    "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/wise-w1-star-centroids.json",
+    "sha256": "bb5c285efd832af32f71f365621dcfa7a3d663f36e20e2e3cc53dfc1c00cc1ac"
+  },
+  "checkScript": {
+    "path": "labs/nebula/models/lmc-candidates/source/wise-registration/check-wise-catalogue.py",
+    "sha256": "dd8a7830d8bf1ea8611770eab27d1157f811b47883091712ffa08c6c8e54cf76"
+  }
+}

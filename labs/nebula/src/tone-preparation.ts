@@ -3,17 +3,19 @@ import { createHash, randomUUID } from 'node:crypto';
 import { mkdir, readFile, readdir, realpath, rename, rm, stat, utimes, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
+import { overlayVariantsPath, parseOverlayVariants, variantsForImage, type ImageLayer } from './overlay-variants.js';
 import type { Plugin } from 'vite';
 import { defaultOverlayTone, isNeutralOverlayTone, overlayToneSample, updateOverlayTone, type OverlayTone } from './overlay-tone.js';
 
-export interface TonePreparationRequest { subjectId: string; target: 'image' | 'density'; imageId?: string; tone: OverlayTone }
+export interface TonePreparationRequest { subjectId: string; target: 'image' | 'density'; imageId?: string; imageLayer?: ImageLayer; tone: OverlayTone }
 export interface ToneResource { sourcePath: string; url: string; width: number; height: number }
 interface SourceResource { path: string; sha256: string; width: number; height: number }
 interface Subject { id: string; density?: { directory: string; overlays?: string } }
 const digest = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 export function parseTonePreparationRequest(input: unknown): TonePreparationRequest {
-  if (!record(input) || Object.keys(input).some(key => !['subjectId', 'target', 'imageId', 'tone'].includes(key)) ||
+  if (!record(input) ||
+      (input.imageLayer !== undefined && (input.target !== 'image' || !['original', 'diffuse', 'stars'].includes(input.imageLayer as string))) || Object.keys(input).some(key => !['subjectId', 'target', 'imageId', 'imageLayer', 'tone'].includes(key)) ||
       typeof input.subjectId !== 'string' || !/^[a-z0-9-]+$/.test(input.subjectId) ||
       !['image', 'density'].includes(input.target as string) || !record(input.tone) ||
       Object.keys(defaultOverlayTone()).some(key => !Object.hasOwn(input.tone as object, key)) ||
@@ -21,7 +23,7 @@ export function parseTonePreparationRequest(input: unknown): TonePreparationRequ
     throw new TypeError('Invalid local tone preparation request.');
   }
   return { subjectId: input.subjectId, target: input.target as 'image' | 'density',
-    ...(input.target === 'image' ? { imageId: input.imageId as string } : {}),
+    ...(input.target === 'image' ? { imageId: input.imageId as string, ...(input.imageLayer ? { imageLayer: input.imageLayer as ImageLayer } : {}) } : {}),
     tone: updateOverlayTone(defaultOverlayTone(), input.tone) };
 }
 /** Copy RGBA bytes. Density affects alpha only and preserves empty support exactly. */
@@ -67,6 +69,12 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
       const catalogue = await json(subject.density.overlays);
       const image = catalogue.overlays?.find((item: { id: string }) => item.id === request.imageId);
       if (!image) throw new TypeError('Unknown prepared image overlay.');
+      if (request.imageLayer && request.imageLayer !== 'original') {
+        const layers = variantsForImage(parseOverlayVariants(await json(overlayVariantsPath)), image);
+        const layer = layers.find(item => item.id === request.imageLayer);
+        if (!layer) throw new TypeError('Unknown prepared image layer.');
+        return [{ path: layer.texturePath, sha256: layer.sha256, width: layer.widthPx, height: layer.heightPx }];
+      }
       return [{ path: relative(root, resolve(root, dirname(subject.density.overlays), image.texturePath)),
         sha256: image.sha256, width: image.widthPx, height: image.heightPx }];
     }

@@ -52,3 +52,16 @@ test('prepared tone selected before an overlay mounts reaches its later retained
     controller.bind('a', 10, 10, [node]); assert.equal(node.style.backgroundImage, 'url("/@fs/toned")');
   } finally { globalThis.Image = originalImage; }
 });
+
+test('a retained leaf rebound to another image layer is no longer changed by its old tone resource', async () => {
+  const originalImage = globalThis.Image;
+  globalThis.Image = class { src = ''; naturalWidth = 10; naturalHeight = 10; async decode() {} } as unknown as typeof Image;
+  try {
+    const controller = createToneResourceController(), node = { style: { backgroundImage: 'diffuse' } } as HTMLElement;
+    controller.bind('original', 10, 10, [node]); controller.unbind([node]); controller.bind('diffuse', 10, 10, [node]);
+    await controller.apply([{ sourcePath: 'original', url: '/@fs/original-toned', width: 10, height: 10 }], ['original'], () => true);
+    assert.equal(node.style.backgroundImage, 'diffuse');
+    await controller.apply([{ sourcePath: 'diffuse', url: '/@fs/diffuse-toned', width: 10, height: 10 }], ['diffuse'], () => true);
+    assert.equal(node.style.backgroundImage, 'url("/@fs/diffuse-toned")');
+  } finally { globalThis.Image = originalImage; }
+});

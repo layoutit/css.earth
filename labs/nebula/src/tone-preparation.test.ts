@@ -79,3 +79,25 @@ test('local preparation writes verifiable pixels, deduplicates concurrent cache 
     await assert.rejects(prepare(request), /hash differs/);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
+
+test('image tone targets the selected prepared layer and rejects a mismatched original', async () => {
+  const f = await fixture();
+  try {
+    const layerPath = 'labs/nebula/models/separation/diffuse.png';
+    const layer = await sharp({ create: { width: 2, height: 1, channels: 4, background: '#123456' } }).png().toBuffer();
+    await f.write(layerPath, layer);
+    const metadata = { schema: 'cssearth-nebula-overlay-variants@1', variants: [{ imageId: 'test-photo',
+      originalTextureSha256: hash(f.image), sourceSha256: hash(f.image), receiptPath: 'receipt.json',
+      layers: [{ id: 'diffuse', label: 'Diffuse trial', texturePath: layerPath, widthPx: 2, heightPx: 1, sha256: hash(layer) }] }] };
+    const metadataPath = 'labs/nebula/models/lmc-star-separation/variants.json';
+    await f.write(metadataPath, JSON.stringify(metadata));
+    const prepare = createTonePreparer(f.root), request = { subjectId: 'test', target: 'image', imageId: 'test-photo',
+      imageLayer: 'diffuse', tone: defaultOverlayTone() };
+    assert.equal((await prepare(request)).resources[0].sourcePath, layerPath);
+    assert.equal((await prepare({ ...request, imageLayer: 'original' })).resources[0].sourcePath, f.imagePath);
+    await assert.rejects(prepare({ ...request, imageLayer: 'stars' }), /Unknown prepared image layer/);
+    await assert.rejects(prepare({ ...request, imageLayer: '../bad' }), TypeError);
+    metadata.variants[0].originalTextureSha256 = '0'.repeat(64); await f.write(metadataPath, JSON.stringify(metadata));
+    await assert.rejects(prepare(request), /source or pixel grid/);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});

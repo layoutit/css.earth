@@ -5,6 +5,7 @@ import { createToneControls } from './tone-controls';
 import { createCloudControls } from './cloud-controls';
 import { createCloudDensityControls } from './cloud-density-controls';
 import { createCloudStarControls } from './cloud-star-controls';
+import type { ImageLayer } from './overlay-variants';
 
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
@@ -27,6 +28,9 @@ const cloudDensityPanel = element<HTMLElement>('cloud-density-panel');
 const overlayControls = element<HTMLFieldSetElement>('overlay-controls');
 const overlayOptions = element('overlay-options');
 const overlayChoice = element<HTMLSelectElement>('overlay-choice');
+const overlayLayerControl = element('overlay-layer-control');
+const overlayLayer = element<HTMLSelectElement>('overlay-layer');
+const overlayLayerNote = element('overlay-layer-note');
 const overlayEnabled = element<HTMLInputElement>('overlay-enabled');
 const overlayEnabledLabel = element<HTMLLabelElement>('overlay-enabled-label');
 const overlayOpacity = element<HTMLInputElement>('overlay-opacity');
@@ -52,6 +56,7 @@ type Overlay = Awaited<ReturnType<Viewer['loadOverlayCatalogue']>>[number];
 let currentOverlays: Overlay[] = [];
 let selectedOverlayId: string | null = null;
 let overlayActivation = 0;
+let layerActivation = 0;
 const cloudStarControls = createCloudStarControls({ host: element('cloud-star-controls'), onChange(options) { viewer?.setStars(options); } });
 const cloudDensityControls = createCloudDensityControls({ host: element('cloud-density-controls'),
   async onApply(context, resources, isCurrent) {
@@ -197,6 +202,12 @@ function renderSelectedOverlay() {
   if (!item?.density?.overlays || !overlay) return;
   const prior = viewer.getOverlayState().find(value => value.id === overlay.id);
   overlayChoice.value = overlay.id;
+  overlayLayerControl.hidden = !overlay.variants?.length;
+  overlayLayer.replaceChildren(new Option('Original', 'original'),
+    ...(overlay.variants ?? []).map(layer => new Option(layer.label, layer.id)));
+  overlayLayer.value = viewer.getOverlayLayer(overlay.id);
+  overlayLayerNote.textContent = overlayLayer.value === 'original' ? '' :
+    '2D separation trial. Compact residual can include bright nebula knots; this is not a measured star catalogue.';
   overlayEnabled.id = `overlay-${overlay.id}`; overlayEnabledLabel.htmlFor = overlayEnabled.id;
   overlayEnabled.checked = prior?.enabled ?? false;
   overlayOpacity.value = String(Math.round((prior?.opacity ?? overlay.initialOpacity ?? .55) * 100));
@@ -222,9 +233,9 @@ function renderSelectedOverlay() {
   overlaySource.href = overlay.sourcePageUrl;
   overlayStatus.textContent = `${currentOverlays.indexOf(overlay) + 1} of ${currentOverlays.length} images`;
   overlayPanel.dataset.selectedOverlay = overlay.id;
-  imageTone.setContext(toneReadyFor(item.id) ? { subjectId: item.id, imageId: overlay.id } : null);
+  imageTone.setContext(toneReadyFor(item.id) ? { subjectId: item.id, imageId: overlay.id, imageLayer: viewer.getOverlayLayer(overlay.id) } : null);
 }
-async function activateOverlay(id: string) {
+async function activateOverlay(id: string, refresh = true) {
   if (!viewer) return;
   const activation = ++overlayActivation, state = new Map(viewer.getOverlayState().map(value => [value.id, value]));
   for (const overlay of currentOverlays) {
@@ -235,7 +246,7 @@ async function activateOverlay(id: string) {
   if (activation !== overlayActivation) return;
   const selected = currentOverlays.find(overlay => overlay.id === id), saved = state.get(id);
   await viewer.setOverlay(id, true, saved?.opacity ?? selected?.initialOpacity ?? .55);
-  if (activation === overlayActivation && selectedOverlayId === id) renderSelectedOverlay();
+  if (refresh && activation === overlayActivation && selectedOverlayId === id) renderSelectedOverlay();
 }
 async function refreshOverlayControls() {
   const item = subjects.find(value => value.id === sourceSubject), catalogue = item?.density?.overlays;
@@ -268,10 +279,24 @@ async function refreshOverlayControls() {
   setBusy(busy);
 }
 overlayChoice.addEventListener('change', () => {
+  layerActivation++;
   const item = subjects.find(value => value.id === sourceSubject);
   if (!item?.density?.overlays) return;
   selectedOverlayId = overlayChoice.value; rememberOverlayId(item.density.overlays, selectedOverlayId);
   renderSelectedOverlay(); overlayEnabled.checked = true; void run(() => activateOverlay(selectedOverlayId!));
+});
+overlayLayer.addEventListener('change', () => {
+  if (!viewer || !selectedOverlayId) return;
+  const id = selectedOverlayId, layer = overlayLayer.value as ImageLayer, request = ++layerActivation;
+  imageTone.setContext(null); overlayLayerNote.textContent = 'Loading prepared image layer…';
+  void run(async () => {
+    try {
+      await activateOverlay(id, false);
+      if (request !== layerActivation || selectedOverlayId !== id) return;
+      imageTone.setContext(null);
+      await viewer!.setOverlayLayer(id, layer);
+    } finally { if (request === layerActivation && selectedOverlayId === id) renderSelectedOverlay(); }
+  });
 });
 overlayEnabled.addEventListener('change', () => {
   if (!selectedOverlayId) return;

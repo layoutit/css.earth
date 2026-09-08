@@ -1,4 +1,5 @@
 import records from './subjects.json';
+import { overlayVariantsPath, parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
 import sourceCatalog from '../sources/index.json';
 import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from './overlay-placement';
 import { readOverlaySessions, writeOverlaySessions, resolveSavedPlacement } from './overlay-store';
@@ -148,7 +149,7 @@ function parseOverlayCatalogue(value: unknown): DensityOverlayCatalogue {
     const initialPlacement = item.initialPlacement === undefined ? undefined : updateOverlayPlacement(defaultOverlayPlacement(), item.initialPlacement as Partial<OverlayPlacement>);
     if (item.legacyPlacementBasis !== undefined && typeof item.legacyPlacementBasis !== 'string') throw new TypeError('Invalid legacy image placement basis.');
     if (item.initialOpacity !== undefined && (typeof item.initialOpacity !== 'number' || !Number.isFinite(item.initialOpacity) || item.initialOpacity < 0 || item.initialOpacity > 1)) throw new TypeError('Invalid initial image opacity.');
-    return { id: item.id, label: item.label, texturePath: item.texturePath, widthPx: item.widthPx, heightPx: item.heightPx,
+    return { id: item.id, label: item.label, sha256: item.sha256, texturePath: item.texturePath, widthPx: item.widthPx, heightPx: item.heightPx,
       pivotCssPx: item.pivotCssPx, initialPlacement, initialOpacity: item.initialOpacity, legacyPlacementBasis: item.legacyPlacementBasis,
       style: Object.fromEntries(styleKeys.map(key => [key, style[key]])) as DensityOverlay['style'],
       sourcePageUrl: item.sourcePageUrl, credit: item.credit, registrationNote: item.registrationNote };
@@ -174,7 +175,8 @@ export interface LabState {
 }
 
 export interface DensityOverlay {
-  id: string; label: string; texturePath: string; widthPx: number; heightPx: number;
+  id: string; label: string; sha256: string; texturePath: string; widthPx: number; heightPx: number;
+  variants?: OverlayVariant[];
   pivotCssPx: [number, number, number];
   initialPlacement?: OverlayPlacement; initialOpacity?: number;
   legacyPlacementBasis?: string;
@@ -208,6 +210,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   const overlayDefaults = new Map<string, OverlayPlacement>();
   const overlayBases = new Map<string, string>(), overlaySessions = readOverlaySessions();
   const overlayLoading = new Map<string, Promise<void>>();
+  const overlayLayers = new Map<string, ImageLayer>(), overlayLayerRequests = new Map<string, number>();
   const toneResources = createToneResourceController();
   let axis: Axis = 'auto', component: Component = 'all', layer: number | null = null;
   let pose: CameraPose = 'front';
@@ -316,6 +319,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   function clearOverlays() {
     overlayMeshes = []; overlayNodes.clear(); overlayCatalogue = null; overlayBasePath = ''; overlayCataloguePending = null; overlayLoading.clear();
     overlayEnabled.clear(); overlayOpacity.clear(); overlayPlacements.clear(); overlayBases.clear(); overlayDefaults.clear();
+    overlayLayers.clear(); overlayLayerRequests.clear();
   }
   async function loadOverlayCatalogue() {
     if (currentMode !== 'density' || !payload || !subject.density?.overlays) return [] as DensityOverlay[];
@@ -326,6 +330,10 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       const manifestPath = subject.density!.overlays!, response = await fetch(localFile(manifestPath));
       if (!response.ok) throw new Error(`Density overlay catalogue is unavailable (HTTP ${response.status}).`);
       const parsed = parseOverlayCatalogue(await response.json());
+      const variantResponse = await fetch(localFile(overlayVariantsPath));
+      if (!variantResponse.ok) throw new Error(`Image layer catalogue is unavailable (HTTP ${variantResponse.status}).`);
+      const variants = parseOverlayVariants(await variantResponse.json());
+      for (const item of parsed.overlays) item.variants = variantsForImage(variants, item);
       if (disposed || expectedVersion !== loadVersion || expectedPayload !== payload || expectedSubject !== subject.id || currentMode !== 'density') return [];
       if (!sameOverlayFrame(parsed.frame, payload.frame)) throw new TypeError('Density overlays use a different physical reference frame.');
       const candidates = candidateOverlays(parsed.overlays);
@@ -346,6 +354,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
         overlayDefaults.set(item.id, item.initialPlacement ?? defaultOverlayPlacement());
         overlayBases.set(item.id, item.style.transform);
         toneResources.bind(`${overlayBasePath}${item.texturePath}`, item.widthPx, item.heightPx);
+        for (const variant of item.variants ?? []) toneResources.bind(variant.texturePath, variant.widthPx, variant.heightPx);
       }
       persistOverlays();
       return candidates;
@@ -401,7 +410,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
           if (disposed || version !== loadVersion || currentMode !== 'density' || !overlayEnabled.get(id)) return;
           const current = overlayNodes.get(id);
           if (current) return;
-          const created = overlayMeshes.map(mesh => { const node = document.createElement('s'); node.dataset.overlayLeaf = id; Object.assign(node.style, item.style);
+          const created = overlayMeshes.map(mesh => { const node = document.createElement('s'); node.dataset.overlayLeaf = id; node.dataset.imageLayer = 'original'; Object.assign(node.style, item.style);
             node.style.backgroundImage = `url("${url.replace(/["\\\n\r]/g, character => `\\${character}`)}")`;
             mesh.append(node); return node; }); overlayNodes.set(id, created);
           toneResources.bind(path, item.widthPx, item.heightPx, created);
@@ -420,6 +429,26 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     for (const node of nodes ?? []) { node.style.opacity = String(latestOpacity); node.style.visibility = latestEnabled ? 'visible' : 'hidden'; }
     applyOverlayPlacement(item);
     publish();
+  }
+  function getOverlayLayer(id: string): ImageLayer { return overlayLayers.get(id) ?? 'original'; }
+  async function setOverlayLayer(id: string, layer: ImageLayer) {
+    const item = overlayCatalogue?.overlays.find(value => value.id === id);
+    const variant = item?.variants?.find(value => value.id === layer);
+    if (!item || (layer !== 'original' && !variant)) throw new TypeError('Unknown image layer.');
+    const request = (overlayLayerRequests.get(id) ?? 0) + 1, version = loadVersion;
+    overlayLayerRequests.set(id, request);
+    const current = () => !disposed && version === loadVersion && overlayLayerRequests.get(id) === request;
+    const path = variant?.texturePath ?? `${overlayBasePath}${item.texturePath}`;
+    const width = variant?.widthPx ?? item.widthPx, height = variant?.heightPx ?? item.heightPx;
+    const url = toneResources.url(path, localFile(path)), image = new Image(); image.src = url; await image.decode();
+    if (image.naturalWidth !== width || image.naturalHeight !== height) throw new TypeError('Image layer decoded at the wrong size.');
+    if (!current()) return;
+    if (!overlayNodes.has(id)) await setOverlay(id, true);
+    if (!current()) return;
+    const nodes = overlayNodes.get(id) ?? [];
+    toneResources.unbind(nodes);
+    for (const node of nodes) { node.style.backgroundImage = `url(${JSON.stringify(url)})`; node.dataset.imageLayer = layer; }
+    toneResources.bind(path, width, height, nodes); overlayLayers.set(id, layer);
   }
   function measure() {
     width = Math.max(1, host.clientWidth); height = Math.max(1, host.clientHeight);
@@ -487,7 +516,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     if (currentMode !== 'density' || !payload || host.dataset.ready !== 'true') throw new Error('Density is still loading; tone can be applied when it is ready.');
     const version = loadVersion;
     const overlay = overlayCatalogue?.overlays.find(item => item.id === imageId);
-    const expected = target === 'image' ? (overlay ? [`${overlayBasePath}${overlay.texturePath}`] : []) :
+    const variant = overlay?.variants?.find(item => item.id === getOverlayLayer(overlay.id));
+    const expected = target === 'image' ? (overlay ? [variant?.texturePath ?? `${overlayBasePath}${overlay.texturePath}`] : []) :
       payload.resources.map(item => `${subject.density!.directory}/prepared/${item.path}`);
     await toneResources.apply(resources, expected, () => !disposed && version === loadVersion && isCurrent());
   }
@@ -620,7 +650,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     }
   }
   await setSubject(subject.id);
-  return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayPlacement, getOverlayState,
+  return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayLayer, getOverlayLayer, setOverlayPlacement, getOverlayState,
     referenceView, fitCloud, applyToneResources, applyCloudDensityResources,
     getStars: () => starInfo,
     setStars(options: CloudStarOptions) {

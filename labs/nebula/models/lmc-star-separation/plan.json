@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-image-processing-plan@1",
+  "catalogue": "labs/nebula/models/image-candidates.json",
+  "alignmentReport": {
+    "path": "labs/nebula/models/lmc-candidates/source/alignment-report.json",
+    "sha256": "c9da3dc239c365f10ec3527386b6081a4a74d1909b9d316395cfaa34d3471e98"
+  },
+  "selections": [
+    {
+      "id": "vista-infrared",
+      "recipe": "labs/nebula/models/lmc-star-separation/vista-infrared.json",
+      "recipeSha256": "9bc9ac98c30f55c2ea081d2ab1da2581f58ebdedb67c6c20fed74bff92462804"
+    },
+    {
+      "id": "horalek-widefield",
+      "recipe": "labs/nebula/models/lmc-star-separation/horalek-widefield.json",
+      "recipeSha256": "4c2e8b716612dfa45cf0661a9b5a146654b4d6ebb1840ea50b46c83140d827e0"
+    },
+    {
+      "id": "wise-wide-infrared",
+      "recipe": "labs/nebula/models/lmc-star-separation/wise-wide-infrared.json",
+      "recipeSha256": "5b8057367005c7eaba3791c172871047f12158b84fca41b2e880e94487511765"
+    }
+  ]
+}

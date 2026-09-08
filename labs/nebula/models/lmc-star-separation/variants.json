@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-nebula-overlay-variants@1",
+  "variants": [
+    {
+      "imageId": "vista-infrared",
+      "originalTextureSha256": "8fa8fa33a1b790bd19e9cb07186667c3d1d2e8108380f2c65bd80e9b5b37b96d",
+      "sourceSha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
+      "receiptPath": "labs/nebula/models/lmc-star-separation/receipts/vista-infrared.json",
+      "layers": [
+        {
+          "id": "diffuse",
+          "label": "Diffuse trial",
+          "texturePath": "labs/nebula/models/lmc-star-separation/prepared/vista-infrared-diffuse.webp",
+          "widthPx": 3668,
+          "heightPx": 4096,
+          "sha256": "abba60d5cb25ad485e6258ae3f48e2508c7c6fa2cf85a6868b97d84403474476"
+        },
+        {
+          "id": "stars",
+          "label": "Compact residual",
+          "texturePath": "labs/nebula/models/lmc-star-separation/prepared/vista-infrared-stars.webp",
+          "widthPx": 3668,
+          "heightPx": 4096,
+          "sha256": "d5408947f063b5a2277c6693f1e8e2fc24f04e514dba457dd6882fc8e158dde9"
+        }
+      ]
+    },
+    {
+      "imageId": "horalek-widefield",
+      "originalTextureSha256": "ada2c5d4b6f75f24ca37f1446e6ccb98993e4c996ce6ab0da5d662722ec1d046",
+      "sourceSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+      "receiptPath": "labs/nebula/models/lmc-star-separation/receipts/horalek-widefield.json",
+      "layers": [
+        {
+          "id": "diffuse",
+          "label": "Diffuse trial",
+          "texturePath": "labs/nebula/models/lmc-star-separation/prepared/horalek-widefield-diffuse.webp",
+          "widthPx": 4096,
+          "heightPx": 2731,
+          "sha256": "3795f7d2e3264bfa3ffea3fdbf277210f2c7bcd4d95a59ce069e8e879ca06249"
+        },
+        {
+          "id": "stars",
+          "label": "Compact residual",
+          "texturePath": "labs/nebula/models/lmc-star-separation/prepared/horalek-widefield-stars.webp",
+          "widthPx": 4096,
+          "heightPx": 2731,
+          "sha256": "6d491381a20c737abc59748e4b9ff7b7f46ba0a9c231c5da380cf2d55c584c33"
+        }
+      ]
+    },
+    {
+      "imageId": "wise-wide-infrared",
+      "originalTextureSha256": "76c3e0f512e4a546ca364135a5af12abb866d935358649abcdd6c7c6c42cbdf4",
+      "sourceSha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+      "receiptPath": "labs/nebula/models/lmc-star-separation/receipts/wise-wide-infrared.json",
+      "layers": [
+        {
+          "id": "diffuse",
+          "label": "Diffuse trial",
+          "texturePath": "labs/nebula/models/lmc-star-separation/prepared/wise-wide-infrared-diffuse.webp",
+          "widthPx": 4096,
+          "heightPx": 4096,
+          "sha256": "2c02003d58b26752faf9a2f39985e2a734e5fc919ccbd7633f1d1b71f96fdf6f"
+        },
+        {
+          "id": "stars",
+          "label": "Compact residual",
+          "texturePath": "labs/nebula/models/lmc-star-separation/prepared/wise-wide-infrared-stars.webp",
+          "widthPx": 4096,
+          "heightPx": 4096,
+          "sha256": "94ca315e05d8f184b09eeef1dcf5af4a84027ed917f4da1f34e49be59ce2b2d6"
+        }
+      ]
+    }
+  ]
+}
