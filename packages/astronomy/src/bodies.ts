@@ -34,7 +34,7 @@ export interface BodyData {
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
-export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis'
+export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId
 
 export const PLANET_IDS: readonly PlanetId[] = [
@@ -49,7 +49,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 ]
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
-export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis']
+export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche']
 
 const body = (
   id: BodyId,
@@ -81,6 +81,11 @@ export const BODIES: Record<BodyId, BodyData> = {
   // MPCD2021 diameter/mass; Toutatis radar-mesh volume-equivalent radius.
   kleopatra: body('kleopatra', 'Kleopatra', '216;', 59.1, .1982, 'sun'),
   toutatis: body('toutatis', 'Toutatis', '4179;', 1.224, 0, 'sun'),
+  // Vernazza et al. (2021), Table 1: mean ADAM/MPCD radii and masses; GM = G * mass.
+  pallas: body('pallas', 'Pallas', '2;', 255.5, 13.6289206, 'sun'),
+  hygiea: body('hygiea', 'Hygiea', '10;', 216.5, 5.8333382, 'sun'),
+  juno: body('juno', 'Juno', '3;', 127, 1.802061, 'sun'),
+  psyche: body('psyche', 'Psyche', '16;', 111.5, 1.5083918, 'sun'),
 
   mercury: body('mercury', 'Mercury', '199', 2439.4, 22031.86855, 'sun'),
   venus: body('venus', 'Venus', '299', 6051.84, 324858.592, 'sun'),

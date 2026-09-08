@@ -1,3 +1,7 @@
+import pallasDescriptor from "../src/planets/pallas/object.json" with { type: "json" };
+import hygieaDescriptor from "../src/planets/hygiea/object.json" with { type: "json" };
+import junoDescriptor from "../src/planets/juno/object.json" with { type: "json" };
+import psycheDescriptor from "../src/planets/psyche/object.json" with { type: "json" };
 import toutatisDescriptor from "../src/planets/toutatis/object.json" with { type: "json" };
 import kleopatraDescriptor from "../src/planets/kleopatra/object.json" with { type: "json" };
 import dimorphosDescriptor from "../src/planets/dimorphos/object.json" with { type: "json" };
@@ -247,6 +251,30 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(toutatisDescriptor);
     }, toutatisDescriptor.properties.worldFrame),
+  object("pallas", "Pallas", "asteroid", "#aaaaaa", 2.769411416140799,
+    "Explore Pallas in 3D with its published VLT/SPHERE shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(pallasDescriptor);
+    }, pallasDescriptor.properties.worldFrame),
+
+  object("hygiea", "Hygiea", "asteroid", "#aaaaaa", 3.1509104848150167,
+    "Explore Hygiea in 3D with its published VLT/SPHERE shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hygieaDescriptor);
+    }, hygieaDescriptor.properties.worldFrame),
+
+  object("juno", "Juno", "asteroid", "#aaaaaa", 2.6710204451309156,
+    "Explore Juno in 3D with its published VLT/SPHERE shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(junoDescriptor);
+    }, junoDescriptor.properties.worldFrame),
+
+  object("psyche", "Psyche", "asteroid", "#aaaaaa", 2.9261360015644122,
+    "Explore Psyche in 3D with its published VLT/SPHERE shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(psycheDescriptor);
+    }, psycheDescriptor.properties.worldFrame),
+
   object("vesta", "Vesta", "asteroid", "#a49c8d", 2.36,
     "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

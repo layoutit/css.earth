@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2716%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 16 Psyche (A852 FA)           2026-Sep-07 19:56:21
+Rec #:      16 (+COV) Soln.date: 2025-Feb-06_14:15:44   # obs: 7401 (1984-2024)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457856.5 ! 2017-Apr-13.00 (TDB)         Residual RMS= .1514
+   EC= .1354428631790678   QR= 2.527888467382581   TP= 2457129.4685003939
+   OM= 150.2750236911914   W=  227.3612622931746   IN= 3.098574197998143
+   A= 2.923911398936447    MA= 143.3213825593065   ADIST= 3.319934330490313
+   PER= 4.99982            N= .197132287           ANGMOM= .029143589
+   DAN= 3.16021            DDN= 2.62907            L= 17.5945124
+   B= -2.2789228           MOID= 1.53169           TP= 2015-Apr-16.9685003939
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= 1.601               RAD= 111.               ROTPER= 4.196
+   H= 6.2                  G= .200                 B-V= .729
+                           ALBEDO= .1203           STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#92, OCC=0
+2: source=ORB
+*******************************************************************************

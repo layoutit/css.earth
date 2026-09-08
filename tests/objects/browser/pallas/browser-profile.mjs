@@ -1,0 +1,3 @@
+import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mjs';
+import controls from '../../../../src/planets/pallas/prepared/controls.json' with {type:'json'};
+export const browserProfile=createObjectBrowserProfile({id:'pallas',controls,audit:{preparedAssetPairs:[{one:'/scenes/pallas/pallas-directional-sun.webp',two:'/scenes/pallas/pallas-directional-sun@2x.webp'}],canonicalPreparedAssets:['/scenes/pallas/pallas-shape-surface@2x.webp','/scenes/pallas/pallas-elevation-surface@2x.webp'],retained:{lensIds:['shape','elevation'],speedClicks:5,allowedMountSelectors:[]}}});
