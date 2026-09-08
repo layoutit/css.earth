@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://arxiv.org/abs/2401.04634",
+  "citation": "French et al. (2024), Table3, reproducing Karkoschka (2001) Voyager paper TableV; adopted prolate axes also in Karkoschka HST paper TableIV.",
+  "semiAxesKm": [
+    78,
+    63,
+    63
+  ],
+  "referenceRadiusKm": 67.64856167757256,
+  "projectedRadiusKm": {
+    "value": 70,
+    "uncertainty": 4,
+    "definition": "sqrt(A*B), not volume-equivalent radius"
+  },
+  "minorMajorRatio": {
+    "value": 0.8,
+    "uncertainty": 0.1
+  },
+  "derivedVolumeEquivalentRadiusKm": 67.64856167757256,
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/78)^2+(cos(lat)*sin(lon)/63)^2+(sin(lat)/63)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "orientation": "IAU/WGCCRE BODY712 frame from pinned PCK. Published prolate interpretation assumes the long axis toward Uranus and the other axes equal.",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Published size and elongation fit, not a detailed terrain mesh. The third semi-axis63km is the prolate assumption, not an independent measurement. Reported uncertainties apply to projected radius sqrt(A*B) and ratioB/A; no separate-axis error bars are invented."
+}

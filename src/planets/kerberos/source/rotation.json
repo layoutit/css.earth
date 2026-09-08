@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "phase": "arbitrary-display-phase",
+  "rightAscensionDegrees": 222,
+  "declinationDegrees": 72,
+  "displayMeridianDegrees": 0,
+  "source": "https://arxiv.org/abs/1604.05366",
+  "coordinateSystem": "ICRF J2000; illustrative historical flyby pole",
+  "qualification": "Weaver et al. (2016) estimated this pole at the New Horizons encounter. Porter, Verbiscer and Canup (2025) report no converged Kerberos pole. The display adopts the historical pole only as an illustrative orientation and arbitrary zero meridian, with no current phase/spin prediction.",
+  "historicalPeriodDays": 5.31,
+  "poleUncertain": true
+}

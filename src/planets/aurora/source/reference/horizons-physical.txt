@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2794%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 94 Aurora (A867 RA)           2026-Sep-08 03:29:44
+Rec #:      94 (+COV) Soln.date: 2026-Jun-05_03:08:38   # obs: 9010 (1872-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458346.5 ! 2018-Aug-16.00 (TDB)         Residual RMS= .18743
+   EC= .09381671582456221  QR= 2.859893913161304   TP= 2458891.9412011085
+   OM= 2.573457393141462   W=  60.56167280044217   IN= 7.9713539109385
+   A= 3.155977342667056    MA= 264.1148837470587   ADIST= 3.452060772172808
+   PER= 5.60672            N= .175793681           ANGMOM= .030424866
+   DAN= 2.99032            DDN= 3.27941            L= 62.8964176
+   B= 6.9366939            MOID= 1.88238001        TP= 2020-Feb-12.4412011085
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 102.445            ROTPER= 7.22
+   H= 7.7                  G= .150                 B-V= .663
+                           ALBEDO= .0395           STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#140, OCC=0
+2: source=ORB
+*******************************************************************************

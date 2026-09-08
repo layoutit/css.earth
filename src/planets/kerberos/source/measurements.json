@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+  "citation": "Porter, Verbiscer and Canup (2025), Shapes, Masses, and Densities of the Small Satellites of Pluto, presentation slide 7",
+  "semiAxesKm": [
+    7.25,
+    4.1,
+    3.6
+  ],
+  "referenceRadiusKm": 4.75,
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/7.25)^2+(cos(lat)*sin(lon)/4.1)^2+(sin(lat)/3.6)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "orientation": "Non-synchronous flyby rotation approximation; prime meridian is a display convention. The 2025 fit has no converged pole solution. No body-fixed cartographic registration is claimed.",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Approximate single-triaxial 2025 fit to two resolved LORRI epochs and approach photometry. The source also permits a contact-binary interpretation; no unique detailed mesh or surface map is claimed. Older 19 × 10 × 9 km dimensions are not used."
+}

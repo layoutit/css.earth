@@ -1,0 +1,103 @@
+{
+  "query": "https://opus.pds-rings.seti.org/opus/api/data.json?surfacegeometrytargetlist=Methone&instrument=Cassini%20ISS&COISSfilter=CLEAR&cols=opusid,time1,SURFACEGEOmethone_centerresolution1,COISSfilter,SURFACEGEOmethone_subobserverIAUlongitude1,SURFACEGEOmethone_centerphaseangle1&limit=50&order=SURFACEGEOmethone_centerresolution1",
+  "columns": [
+    "OPUS ID",
+    "Observation Start Time (YMDhms)",
+    "Body Center Resolution (Min) [Methone] (km/pixel)",
+    "Filter [Cassini ISS]",
+    "Sub-Observer IAU West Longitude (Min) [Methone] (degrees)",
+    "Phase Angle at Body Center (Min) [Methone] (degrees)"
+  ],
+  "available": 4397,
+  "bestEleven": [
+    [
+      "co-iss-n1716192103",
+      "2012-05-20T07:09:49.659",
+      "0.02669",
+      "CLEAR",
+      "130.366",
+      "63.096"
+    ],
+    [
+      "co-iss-n1716192290",
+      "2012-05-20T07:12:56.670",
+      "0.03202",
+      "CLEAR",
+      "127.691",
+      "58.886"
+    ],
+    [
+      "co-iss-n1716192782",
+      "2012-05-20T07:21:08.694",
+      "0.04654",
+      "CLEAR",
+      "124.706",
+      "52.593"
+    ],
+    [
+      "co-iss-n1716193864",
+      "2012-05-20T07:39:10.643",
+      "0.07931",
+      "CLEAR",
+      "125.043",
+      "47.242"
+    ],
+    [
+      "co-iss-n1716194847",
+      "2012-05-20T07:55:33.636",
+      "0.10938",
+      "CLEAR",
+      "127.812",
+      "45.449"
+    ],
+    [
+      "co-iss-n1716195180",
+      "2012-05-20T08:01:06.634",
+      "0.1196",
+      "CLEAR",
+      "128.973",
+      "45.116"
+    ],
+    [
+      "co-iss-n1716195513",
+      "2012-05-20T08:06:39.632",
+      "0.12985",
+      "CLEAR",
+      "130.208",
+      "44.872"
+    ],
+    [
+      "co-iss-n1716195846",
+      "2012-05-20T08:12:12.630",
+      "0.14012",
+      "CLEAR",
+      "131.505",
+      "44.702"
+    ],
+    [
+      "co-iss-n1716196179",
+      "2012-05-20T08:17:45.628",
+      "0.15043",
+      "CLEAR",
+      "132.853",
+      "44.593"
+    ],
+    [
+      "co-iss-n1716196512",
+      "2012-05-20T08:23:18.626",
+      "0.16077",
+      "CLEAR",
+      "134.245",
+      "44.535"
+    ],
+    [
+      "co-iss-n1495311747",
+      "2005-05-20T19:55:10.803",
+      "3.35274",
+      "CLEAR",
+      "42.168",
+      "34.854"
+    ]
+  ],
+  "disposition": "Only the 2012 flyby provides spatially useful clear-filter coverage, at observer west longitudes 124.7\u2013134.3 degrees. The next-best independent encounter is 3.35 km/pixel, approximately one native pixel across the body, and cannot provide mapped terrain."
+}
