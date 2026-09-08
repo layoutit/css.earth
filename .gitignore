@@ -66,3 +66,6 @@ src/planets/*/source/**/*.stl.gz
 # Pinned mission attitude kernels restored by body acquisition recipes.
 src/planets/*/source/**/*.bc
 src/planets/*/source/**/*.bpc
+
+# Published SHAP5 reference mesh, restored from its pinned archive.
+/src/planets/comet-67p/source/science/*.wrl

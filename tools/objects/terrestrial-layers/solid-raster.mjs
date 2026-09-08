@@ -153,8 +153,13 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
       return {id: input.id, sha256: input.expectedSha256, width: input.width, height: input.height};
     });
-    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || lens.path !== config.geometry.radialTerrain.path)) {
+    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && lens.path !== config.geometry.radialTerrain.path))) {
       throw new Error('Source-surface science requires the actual rendered source mesh.');
+    }
+    if (lens.format === 'pds3-scalar-map') {
+      for (const path of [lens.labelPath, lens.surfaceSampling.ambiguityReference.path]) {
+        if (!source.manifest.inputs.some(input => input.path === path && input.consumers.includes(lens.consumer))) throw new Error(`Unpinned scalar-map dependency: ${path}`);
+      }
     }
     // Reuse the already loaded geometry BVH, especially for large OLA meshes.
     const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling ? radial.grid : undefined);
@@ -170,6 +175,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       source: { id: entry.id, sha256: entry.expectedSha256, width: entry.width, height: entry.height },
       ...(additionalSources.length ? {additionalSources} : {}),
       projection: entry.projection, coverage: entry.coverage, scientific: true, legend,
+      ...(raster.report ? { scalarMap: raster.report } : {}),
       ...(lens.surfaceSampling ? { surfaceSampling: { ...lens.surfaceSampling,
         previewPolicy: 'Radial rays with more than one distinct source intersection are withheld; the triangle atlas samples the source surface in 3D.' } } : {}),
       missingPixels: missing.reduce((sum, value) => sum + value, 0) }));
