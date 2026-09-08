@@ -1,0 +1,13 @@
+Thalassa (Neptune IV, NAIF 804).
+
+Karkoschka (2003), Icarus 162, 400–407, DOI 10.1016/S0019-1035(03)00002-2: semi-axes 54 × 50 × 26 km. The adopted 40 km reference mean radius is the older PCK/JPL value; the triaxial shape comes from the later measurement.
+
+PCK00011 supplies body-fixed orientation and rotation, not the displayed axes (its BODY804_RADII is the older 40 km sphere). Synchronous reference orientation places the longest axis toward Neptune and the shortest along the pole.
+
+NASA: discovered in Voyager 2 images, August 1989; unusually disk-shaped.
+Orbit: about 50,074 km from Neptune’s center; 7.48 hours.
+
+Sources:
+https://doi.org/10.1016/S0019-1035(03)00002-2
+https://science.nasa.gov/neptune/moons/thalassa/
+https://ssd.jpl.nasa.gov/sats/phys_par/

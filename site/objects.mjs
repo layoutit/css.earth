@@ -1,3 +1,7 @@
+import naiadDescriptor from "../src/planets/naiad/object.json" with { type: "json" };
+import thalassaDescriptor from "../src/planets/thalassa/object.json" with { type: "json" };
+import despinaDescriptor from "../src/planets/despina/object.json" with { type: "json" };
+import galateaDescriptor from "../src/planets/galatea/object.json" with { type: "json" };
 import adrasteaDescriptor from "../src/planets/adrastea/object.json" with { type: "json" };
 import metisDescriptor from "../src/planets/metis/object.json" with { type: "json" };
 import thebeDescriptor from "../src/planets/thebe/object.json" with { type: "json" };
@@ -79,6 +83,27 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(adrasteaDescriptor);
     }, adrasteaDescriptor.properties.worldFrame),
+
+  object("naiad", "Naiad", "satellite", "#a0a0a0", 30.07,
+    "Explore Naiad through its Voyager-derived shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(naiadDescriptor);
+    }, naiadDescriptor.properties.worldFrame),
+  object("thalassa", "Thalassa", "satellite", "#a0a0a0", 30.07,
+    "Explore Thalassa through its Voyager-derived shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(thalassaDescriptor);
+    }, thalassaDescriptor.properties.worldFrame),
+  object("despina", "Despina", "satellite", "#a0a0a0", 30.07,
+    "Explore Despina through its Voyager-derived shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(despinaDescriptor);
+    }, despinaDescriptor.properties.worldFrame),
+  object("galatea", "Galatea", "satellite", "#a0a0a0", 30.07,
+    "Explore Galatea through its Voyager-derived shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(galateaDescriptor);
+    }, galateaDescriptor.properties.worldFrame),
 
   object("proteus", "Proteus", "satellite", "#a39e96", 30.07,
     "Explore Proteus with Voyager 2 imagery and its source-backed irregular shape.", async () => {
