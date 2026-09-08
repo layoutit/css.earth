@@ -247,3 +247,14 @@ positions at the application's 2026 epoch are unqualified extrapolations;
 those in-window residuals do not bound the later error. Their source-image
 camera registration uses the archived acquisition epochs, independently of
 the illustrative frozen surface orientation used by the scene.
+
+### Slow longitude libration
+
+Polydeuces, Anthe and Aegaeon retain the shared precessing-ellipse model with
+three prepared harmonic terms in mean longitude. `tools/lib/fit-libration.mjs`
+fits those terms jointly with the linear longitude trend to daily JPL Horizons
+samples over 2020–2032. The compact model represents slow resonant motion; it
+is not an N-body integration or a qualified extrapolation outside that interval.
+Position and velocity evaluate the same phase correction and its derivative.
+Worst residuals at the six independent fixture epochs are 940 km, 2030 km and
+307 km respectively. These are sampled fit errors, not universal error bounds.

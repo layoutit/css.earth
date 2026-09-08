@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "polydeuces",
+  "displayName": "Polydeuces",
+  "panel": {
+    "introduction": "Polydeuces shares Dione’s orbit around Saturn, wandering around its trailing Lagrange region. Cassini measured this small moon’s elongated outline.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "1.53 ± 0.20 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Measured dimensions",
+        "value": "3.5 × 3.1 × 2.62 km"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Saturn",
+        "value": "About 377,400 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 65.69 hours"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery images",
+        "value": "Cassini imaging team · 2004"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Analytic ellipsoid approximating measured axes, not the detailed shape solution"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
+        "title": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
+        "detail": "Near infrared · coarse coverage",
+        "thumbnail": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
+        "surface": "polydeuces-normal-surface@2x.webp",
+        "poles": "polydeuces-normal-poles@2x.webp",
+        "source": {
+          "id": "cassini-n1527002576",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1912.09192"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Polydeuces overview",
+      "href": "https://science.nasa.gov/saturn/moons/polydeuces/"
+    },
+    {
+      "label": "Hedman et al.",
+      "role": "surface",
+      "description": "Cassini shape and photometric analysis",
+      "href": "https://arxiv.org/abs/1912.09192"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Cassini source inventory",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/polydeuces/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Hedman et al. (2020), Table 1 and Appendix B"
+    }
+  }
+}
