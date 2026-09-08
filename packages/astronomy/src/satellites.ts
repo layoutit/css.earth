@@ -1,6 +1,7 @@
 import { SATELLITE_ELEMENTS, type SatelliteId, type SatelliteRecord } from './data/satelliteElements.data.js'
 import { keplerApoapsisKm, keplerStateKm, type KeplerianElements } from './kepler.js'
 import { add, scale, type Vec3 } from './vec3.js'
+import { periodicCorrectionStateKm, periodicCorrectionBoundKm } from './periodicCorrection.js'
 import { bodyData, type BodyId } from './bodies.js'
 
 export { SATELLITE_ELEMENTS }
@@ -76,7 +77,8 @@ function elementsAtEpoch(record: SatelliteRecord, epochJdTt: number): KeplerianE
 /** Position of a moon relative to its planet's centre, in km, on ICRF axes. */
 export const satellitePositionKm = (id: SatelliteId, epochJdTt: number): Vec3 => {
   const record = satelliteRecord(id)
-  const position = toIcrf(record, keplerStateKm(elementsAtEpoch(record, epochJdTt), epochJdTt).positionKm)
+  let position = toIcrf(record, keplerStateKm(elementsAtEpoch(record, epochJdTt), epochJdTt).positionKm)
+  if (record.positionCorrection) position = add(position, periodicCorrectionStateKm(record.positionCorrection, epochJdTt).positionKm)
   const companion = barycentreCompanion(record)
   if (!companion) return position
   const offset = satellitePositionKm(companion.id, epochJdTt)
@@ -100,7 +102,12 @@ export const satelliteStateKm = (
 ): { readonly positionKm: Vec3; readonly velocityKmPerDay: Vec3 } => {
   const record = satelliteRecord(id)
   const state = keplerStateKm(elementsAtEpoch(record, epochJdTt), epochJdTt)
-  const positionKm = toIcrf(record, state.positionKm), velocityKmPerDay = toIcrf(record, state.velocityKmPerDay)
+  let positionKm = toIcrf(record, state.positionKm), velocityKmPerDay = toIcrf(record, state.velocityKmPerDay)
+  if (record.positionCorrection) {
+    const correction = periodicCorrectionStateKm(record.positionCorrection, epochJdTt)
+    positionKm = add(positionKm, correction.positionKm)
+    velocityKmPerDay = add(velocityKmPerDay, correction.velocityKmPerDay)
+  }
   const companion = barycentreCompanion(record)
   if (!companion) return { positionKm, velocityKmPerDay }
   const offset = satelliteStateKm(companion.id, epochJdTt)
@@ -110,9 +117,10 @@ export const satelliteStateKm = (
   }
 }
 
-/** Ellipse apoapsis plus the binary-centre offset, when present. */
+/** Ellipse apoapsis plus bounded residual and binary-centre offset, when present. */
 export const satelliteApoapsisKm = (id: SatelliteId): number => {
   const record = satelliteRecord(id), companion = barycentreCompanion(record)
   return keplerApoapsisKm(record.elements as KeplerianElements) +
+    (record.positionCorrection ? periodicCorrectionBoundKm(record.positionCorrection) : 0) +
     (companion ? satelliteApoapsisKm(companion.id) * companion.weight : 0)
 }

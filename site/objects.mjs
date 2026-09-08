@@ -1,3 +1,5 @@
+import ymirDescriptor from "../src/planets/ymir/object.json" with { type: "json" };
+import siarnaqDescriptor from "../src/planets/siarnaq/object.json" with { type: "json" };
 import himaliaDescriptor from "../src/planets/himalia/object.json" with { type: "json" };
 import nereidDescriptor from "../src/planets/nereid/object.json" with { type: "json" };
 import aegaeonDescriptor from "../src/planets/aegaeon/object.json" with { type: "json" };
@@ -94,6 +96,16 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("ymir", "Ymir", "satellite", "#a0a0a0", 9.58,
+    "Explore Ymir, a moon of Saturn, through its source-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ymirDescriptor);
+    }, ymirDescriptor.properties.worldFrame),
+  object("siarnaq", "Siarnaq", "satellite", "#a0a0a0", 9.58,
+    "Explore Siarnaq, a moon of Saturn, through its source-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(siarnaqDescriptor);
+    }, siarnaqDescriptor.properties.worldFrame),
   object("himalia", "Himalia", "satellite", "#a0a0a0", 5.2,
     "Explore Himalia, a moon of Jupiter, through its source-backed size model.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
