@@ -9,7 +9,8 @@ const AXES = ['x', 'y', 'z'] as const;
 class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null; className = '';
-  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) { Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
+  readonly propertyWrites: string[] = [];
+  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) { Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.propertyWrites.push(name); this.style[name] = value; } }); }
   setAttribute(name: string, value: string): void { this.dataset[name.slice(5).replace(/-([a-z])/gu, (_, letter: string) => letter.toUpperCase())] = value; }
   append(child: FakeElement): void { this.insertBefore(child, null); }
   insertBefore(child: FakeElement, before: FakeElement | null): void { child.remove(); child.parentNode = this; this.children.splice(before === null ? this.children.length : this.children.indexOf(before), 0, child); }
@@ -82,6 +83,26 @@ test('optical copies reuse canonical textures and transforms inside isolated unf
   const css = readFileSync(new URL('../styles/volume.css', import.meta.url), 'utf8');
   expect(css).toMatch(/\.css-volume-projection\s*\{[^}]*background:\s*#000[^}]*transform-style:\s*flat/su);
   expect(css).toMatch(/\.css-volume-camera,\s*\.css-volume-scene,\s*\.css-volume-mesh\s*\{[^}]*transform-style:\s*preserve-3d/su);
+});
+
+test('translation updates retained cameras without republishing direction-owned optical coefficients', () => {
+  const { runtime, roots, scenes } = (() => {
+    const mounted = mount();
+    return { ...mounted, scenes: mounted.roots.map(root => root.children[0]!.children[0]!) };
+  })();
+  runtime.publish(publication([1, 1, 1]));
+  const transforms = scenes.map(scene => scene.style.transform);
+  const optics = roots.map(root => [root.style['--volume-optical-copy-1'], root.style['--volume-optical-copy-2'], root.style.opacity]);
+  for (const root of roots) root.propertyWrites.length = 0;
+  runtime.publish(publication([1, 1, 1], [3, 4, 12]));
+  expect(scenes.map(scene => scene.style.transform)).not.toEqual(transforms);
+  expect(roots.map(root => root.propertyWrites)).toEqual([[], [], []]);
+  expect(roots.map(root => [root.style['--volume-optical-copy-1'], root.style['--volume-optical-copy-2'], root.style.opacity])).toEqual(optics);
+  runtime.publish(publication([1, 0, 0], [3, 4, 12]));
+  expect(roots.every(root => root.propertyWrites.length === 2)).toBe(true);
+  expect(roots[0]!.style.visibility).toBe('visible');
+  expect(roots[1]!.style.visibility).toBe('hidden');
+  runtime.destroy();
 });
 
 test('actual baked homogeneous emission keeps physical optical density through a full rotation and stack handoffs', () => {

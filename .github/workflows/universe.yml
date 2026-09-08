@@ -49,6 +49,6 @@ jobs:
         run: >-
           pnpm test:renderer
           volume/ sky/ shell/ stars/ labels/ universe/
-          solar-system/heliocentric-geometry
+          solar-system/
           navigation/world-camera navigation/screen-picking rendering/prepared-activation
           navigation/saved-world-camera
