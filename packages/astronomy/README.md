@@ -207,3 +207,10 @@ Pluto-centred child frame uses the same unit/containment rule as other moons.
 Pluto's existing heliocentric elements target its centre, not its barycentre.
 
 The DART additions use the same source-fitted conics. Didymos, Kleopatra, and Toutatis have maximum ±30-day heliocentric vector residuals of 131, 241, and 330 km respectively (fitted JD 2461286.5, 2026-09-03). Dimorphos is a satellite of Didymos, fitted over JD 2461256.5–2461316.5 to the post-impact DART s547 relative trajectory; six independent samples measure a maximum 0.054003 km position residual and 3.135% radial residual. Its orbit is strongly perturbed, so this compact 60-day fit is not a long-term satellite theory. Source shape radii describe encounter/reconstruction meshes, not a new post-impact shape measurement.
+
+The four inner Jovian moons use the same Horizons-fitted precessing ellipse.
+Amalthea and Thebe use the 1900–2100 fit; Metis and Adrastea use daily samples
+over 2020–2032 because their osculating phase cannot be unwrapped at the older
+coarse cadence. Independent fixture maximum residuals are 1,267.43 km
+(Amalthea), 530.07 km (Thebe), 972.87 km (Adrastea), and 946.81 km (Metis).
+These are fit residuals, not measured orbital uncertainties.

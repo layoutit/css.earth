@@ -36,6 +36,10 @@ const BODIES = [
   ['europa', '502'],
   ['ganymede', '503'],
   ['callisto', '504'],
+  ['amalthea', '505'],
+  ['thebe', '514'],
+  ['adrastea', '515'],
+  ['metis', '516'],
   ['saturn', '699'],
   ['mimas', '601'],
   ['enceladus', '602'],
@@ -53,6 +57,7 @@ const BODIES = [
   ['neptune', '899'],
   ['triton', '801'],
   ['proteus', '808'],
+  ['larissa', '807'],
   ['charon', '901'],
   ['pluto', '999'],
   // Ceres has no major-body number, but Horizons resolves '2000001' (the

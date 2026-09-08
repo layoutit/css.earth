@@ -229,6 +229,38 @@ const MODELS: Record<string, Model> = {
     }
   },
 
+  // IAU/WGCCRE coefficients archived in NAIF pck00011, including J1/J2 terms.
+  amalthea: (d, T) => {
+    const j1 = 73.32 + 91472.9 * T
+    return {
+      rightAscensionDeg: 268.05 - 0.009 * T - 0.84 * sinDeg(j1) + 0.01 * sinDeg(2 * j1),
+      declinationDeg: 64.49 + 0.003 * T - 0.36 * cosDeg(j1),
+      primeMeridianDeg: 231.67 + 722.631456 * d + 0.76 * sinDeg(j1) - 0.01 * sinDeg(2 * j1),
+      spinRateDegPerDay: 722.631456,
+    }
+  },
+  thebe: (d, T) => {
+    const j2 = 24.62 + 45137.2 * T
+    return {
+      rightAscensionDeg: 268.05 - 0.009 * T - 2.11 * sinDeg(j2) + 0.04 * sinDeg(2 * j2),
+      declinationDeg: 64.49 + 0.003 * T - 0.91 * cosDeg(j2) + 0.01 * cosDeg(2 * j2),
+      primeMeridianDeg: 8.56 + 533.700410 * d + 1.91 * sinDeg(j2) - 0.04 * sinDeg(2 * j2),
+      spinRateDegPerDay: 533.700410,
+    }
+  },
+  adrastea: (d, T) => ({
+    rightAscensionDeg: 268.05 - 0.009 * T,
+    declinationDeg: 64.49 + 0.003 * T,
+    primeMeridianDeg: 33.29 + 1206.9986602 * d,
+    spinRateDegPerDay: 1206.9986602,
+  }),
+  metis: (d, T) => ({
+    rightAscensionDeg: 268.05 - 0.009 * T,
+    declinationDeg: 64.49 + 0.003 * T,
+    primeMeridianDeg: 346.09 + 1221.2547301 * d,
+    spinRateDegPerDay: 1221.2547301,
+  }),
+
   io: (d, T) => {
     const j3 = 283.9 + 4850.7 * T
     const j4 = 355.8 + 1191.3 * T
@@ -434,6 +466,18 @@ const MODELS: Record<string, Model> = {
     for (let k = 0; k < decCoefficients.length; k++) declinationDeg += decCoefficients[k]! * cosDeg((k + 1) * n7)
     for (let k = 0; k < wCoefficients.length; k++) primeMeridianDeg += wCoefficients[k]! * sinDeg((k + 1) * n7)
     return { rightAscensionDeg, declinationDeg, primeMeridianDeg, spinRateDegPerDay: -61.2572637 }
+  },
+
+  // NAIF pck00011: BODY807; N5 = 35.36 + 14325.4 T.
+  larissa: (d, T) => {
+    const n = 357.85 + 52.316 * T
+    const n5 = 35.36 + 14325.4 * T
+    return {
+      rightAscensionDeg: 299.36 + 0.7 * sinDeg(n) - 0.27 * sinDeg(n5),
+      declinationDeg: 43.41 - 0.51 * cosDeg(n) - 0.2 * cosDeg(n5),
+      primeMeridianDeg: 179.41 + 649.053447 * d - 0.48 * sinDeg(n) + 0.19 * sinDeg(n5),
+      spinRateDegPerDay: 649.053447,
+    }
   },
 
   proteus: (d, T) => {

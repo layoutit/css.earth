@@ -1,0 +1,423 @@
+{
+  "schema": "cssamalthea-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "c0368603500",
+      "path": "observations/C0368603500R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "0c2786700d45f25d74828a2a274ffc1e8b2cd9fdaf049e5c461e44800b7d48ee",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c0368603500-label",
+      "path": "observations/C0368603500R.LBL",
+      "expectedBytes": 4754,
+      "expectedSha256": "498fc2ee6c38eca35f33051a78f5e4b5ae082914e7dd8deee57f643259f02296",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ]
+    },
+    {
+      "id": "c0420626379",
+      "path": "observations/C0420626379R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "5183ec1e59c472691fd82c30956f485b37d499154a0ca9fddbc245ccadf25e0a",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420626379",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c0420626379-label",
+      "path": "observations/C0420626379R.LBL",
+      "expectedBytes": 4842,
+      "expectedSha256": "ba48dd397a1e9dfd94b6dce4c71c07e9c3c9f80f0958fa1140d9b4e67a793a73",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420626379",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ]
+    },
+    {
+      "id": "c0420652501",
+      "path": "observations/C0420652501R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "ed9310d63df477a715f46349aec4d07eb66466ef7878046f6de8fcc7a8e33495",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420652501",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c0420652501-label",
+      "path": "observations/C0420652501R.LBL",
+      "expectedBytes": 5012,
+      "expectedSha256": "ec662262f35a5c10841283d69884888b2ba639bde352826224afd1ae8f35430d",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420652501",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ]
+    },
+    {
+      "id": "c0512324200",
+      "path": "observations/C0512324200R.IMG",
+      "expectedBytes": 831488,
+      "expectedSha256": "28617d6c3a4e3efe8532db03d6479ed494f79712dd2c24d1ddd0e99964bc5b4f",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0512324200",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c0512324200-label",
+      "path": "observations/C0512324200R.LBL",
+      "expectedBytes": 5010,
+      "expectedSha256": "2223991ed2b60d11428be5efc996132318c440be0f945ae4fc8f576e10a8dd32",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0512324200",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ]
+    },
+    {
+      "id": "c0532888100",
+      "path": "observations/C0532888100R.IMG",
+      "expectedBytes": 840192,
+      "expectedSha256": "a9984536219b37e770cd92036aca30cd53a83b91b9d87e881550ed0de23a01bf",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888100",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ],
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c0532888100-label",
+      "path": "observations/C0532888100R.LBL",
+      "expectedBytes": 5038,
+      "expectedSha256": "7f3421111331a7dad25384ac63a89eebc4b63e672d34905e977ece5f5dbbe73e",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888100",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "galileo-frames"
+      ]
+    },
+    {
+      "id": "stooke-shape",
+      "path": "shape/j5amalthea.tab",
+      "expectedBytes": 70226,
+      "expectedSha256": "031ee6036cf67e170d39da24487672cd3d4dd2bbb5e9391cf1e3ad56c67706f1",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j5amalthea.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "credit": "Philip Stooke; NASA PDS",
+      "license": "Public PDS scientific data release; cite Stooke (2025), DOI 10.26033/yt84-5y91.",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "acquisition": "Download released radius grid.",
+      "redistribution": "Retain Stooke and PDS attribution.",
+      "consumers": [
+        "shape",
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-centered-radius-grid",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "credit": "NASA/JPL; Philip Stooke; NASA PDS",
+      "license": "Public PDS scientific data; retain mission and model attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "c0368603500",
+          "c0420626379",
+          "c0420652501",
+          "c0512324200",
+          "c0532888100",
+          "stooke-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 196.11,
+        "latitudeDegrees": 0.18,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 44558,
+      "expectedSha256": "cc24a3d225625321b94229125518492454d0d2262642fdcf215f5c8719c516d7"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5096,
+      "expectedSha256": "d2990c4c5e09d35d67009971d976eee28e01061ccc26e0e66bfe98846757086e",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/c0368603500-opus.json",
+      "expectedBytes": 11797,
+      "expectedSha256": "11558603ad40acad346d3316c5183ea94da07d349bd293b6cd1fff0341dfb651",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/c0420626379-opus.json",
+      "expectedBytes": 11837,
+      "expectedSha256": "599e1a01848fa006fe07437da0060b8fee6e634e5e035e9f8a64ac6ce2e3461f",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/c0420652501-opus.json",
+      "expectedBytes": 11861,
+      "expectedSha256": "543c22228daf4fa42b8504da65b30a4232ff17cd77f3b4d54637d97b54a9474b",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/c0512324200-opus.json",
+      "expectedBytes": 11743,
+      "expectedSha256": "45e26a333c72e95b5a1e750299af1319166711b0a8cec746a2e2df126bda5dba",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/c0532888100-opus.json",
+      "expectedBytes": 11894,
+      "expectedSha256": "178124fb4138043d6547fd4cb3eea736d6255f1084ee40160da42b9a3ff3647c",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "geometry/registration.json",
+      "expectedBytes": 5442,
+      "expectedSha256": "fe084d9fa7458808865e61164922942053d18516feb600ea184036381e4d8370",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 3118,
+      "expectedSha256": "8d8db71ea3da4dac849a559b1df89fa7f05dd439d50cf61a9d33b28c0fb02323",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1335,
+      "expectedSha256": "22fa62d0f01c74e99cb86e2f55fb0ae858053d9498cb9796aa45fcf381a125c4",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 7443,
+      "expectedSha256": "2fd15ae8786fc1886e0aed3b55aa5c186afc20728f253ba70724eb5a8e529bae",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4916,
+      "expectedSha256": "e09217233c486be1bed48d9f4d5387cafd9452f4fdfbce8574ea87534b02c2fe",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/bundle_description.txt",
+      "expectedBytes": 5105,
+      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/j5amalthea.xml",
+      "expectedBytes": 7253,
+      "expectedSha256": "28dc9407ec6bcc566522edbede2bc7255e3f5fd8ed7167df49a4aa227e9d7aed",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "9bac48f4709cae24d64c479cd796f9fb8dfbbc5e53b4262c340256954769c72b",
+      "purpose": "Authored source interpretation or preparation metadata."
+    }
+  ]
+}
