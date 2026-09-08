@@ -36,6 +36,10 @@ import {
  * deliberately compact model cannot carry.
  */
 const TOLERANCE_KM: Record<SatelliteId, number> = {
+  bianca: 72,
+  cressida: 36,
+  desdemona: 115,
+  rosalind: 105,
   phobos: 1610,
   deimos: 130,
   io: 351,

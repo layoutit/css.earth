@@ -1,0 +1,228 @@
+{
+  "schema": "cssrosalind-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "measured-ellipsoid",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 62404,
+      "expectedSha256": "b7828ab6755652da8588cb49cdf930becf841930f45428bea7dba8918a0e0f31",
+      "origin": "https://arxiv.org/abs/2401.04634",
+      "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage visualization",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://arxiv.org/abs/2401.04634"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 35999.99999999999
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://arxiv.org/abs/2401.04634",
+      "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage visualization",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://arxiv.org/abs/2401.04634"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Published 72 × 72 × 72 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 35999.99999999999
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3487,
+      "expectedSha256": "02fdbcaa9d34501f2bb80a1ed15a4ca35758b9c5d0b655526d446e2f1e04a758",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1428,
+      "expectedSha256": "904dd6f4fd200734abbfe74e13f9c91854d47eca140cc6cfe94f440890f1a2e0",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 691,
+      "expectedSha256": "230c4e7824a868cb61539fd09656ad99c2d5bc20e31d63635b0c0fa0bcf9ba47",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1300,
+      "expectedSha256": "6537f71a88627bd481f4ebede4733dbcb0c1e660d580d1e40e79879e91d1ee97",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 794,
+      "expectedSha256": "fe5d03a7e480a0075d337eeec5c8a8fe9d6dee2cfcdd1007d0106e43167e9dd5",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2519,
+      "expectedSha256": "7efe8019ea2864792eb15f48fadd26a272bdb367b2e211ad34d9e0274e5ddf3b",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4591,
+      "expectedSha256": "11c35338b2b1d923b33040a5c51be6165b264afa751f36e91d11ae88df372014",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "b35b320e8fce3cf8c9c28d485cd5113ca4764a5c16069134fc69b085272ef2a3",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/best-files.json",
+      "expectedBytes": 13409,
+      "expectedSha256": "abee6d41dc236d944fef22743295d0dd022915f05c0fb049f0fb6561731cd280",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/best-image.lbl",
+      "expectedBytes": 3347,
+      "expectedSha256": "99a5e260ea4068823ef268caf9b8cea60c68302fb25598e29cbe1a9cd07a69e2",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/best-metadata.json",
+      "expectedBytes": 14817,
+      "expectedSha256": "00d4695968a745619636ec86811fcffa519f9cfb27eb371c09439d277ccc7c7f",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/native-inspection.json",
+      "expectedBytes": 856,
+      "expectedSha256": "4080bd403edd1dffb1cbc40c08b71f39cceef9f388a3a06c018fca46f31bf504",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/opus-finest.json",
+      "expectedBytes": 652,
+      "expectedSha256": "fd70e357a8090e585454ea5d78c916cd88bd6e570346d8f6a5ded5834604a7f1",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/surface-intersections.json",
+      "expectedBytes": 725,
+      "expectedSha256": "f209d450d7b22731308e27f4a3977f0841d6dfdd0247e7dd93739e837d192f9d",
+      "purpose": "Scientific source and authored preparation evidence."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/abs/2401.04634",
+      "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage grid",
+      "license": "MIT display representation from published scientific measurements; retain source citation.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "measured-ellipsoid",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 91942,
+      "expectedSha256": "c9420576108c0efb65e812b006e1ef44dc445c97c1ebbe12ddd996cb91e7f89f"
+    }
+  ]
+}
