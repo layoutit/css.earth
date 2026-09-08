@@ -49,14 +49,14 @@ test('grazing near-surface views select the real forward patch while clipping an
   assert.equal(clipped.visible,true);assert.ok(Number.isFinite(clipped.span));assert.ok(clipped.center.every(Number.isFinite));
 });
 
-test('ordinary loaded WMTS tiles retain invisible-image proof while their conservative stub remains visible',()=>{
+test.each([6,11])('loaded level %i WMTS tiles retain invisible-image proof while their conservative stub remains visible',(level)=>{
   const directory={url:'/scenes/earth/ordinary.pack',bytes:100,sha256:'b'.repeat(64)};
-  const base:PreparedPage={...square,key:'tile',level:11,children:[],pages:['image'],directory,
+  const base:PreparedPage={...square,key:'tile',level,children:[],pages:['image'],directory,
     url:'',width:256,height:256,maximumCssSpan:256,sha256:'a'.repeat(64),coarseKey:'root',
     frameMatrix:identity.join(','),textureMatrix:identity.join(',')};
   const image:PreparedPage={...base,key:'image',pages:undefined,directory:undefined,
     corners:square.corners.map(([x,y,z])=>[x+200,y,z] as const),url:'/scenes/earth/image.webp'};
-  const root={...base,key:'root',level:10,children:['tile'],pages:[],directory:undefined,maximumCssSpan:1};
+  const root={...base,key:'root',level:level-1,children:['tile'],pages:[],directory:undefined,maximumCssSpan:1};
   const plan={topology:'wmts-quadtree@1',roots:[root],poolSize:8,
     maximumDecodedBytes:8*256*256*4} as PreparedPagePlan;
   const pages=new Map([root,base,image].map(page=>[page.key,page]));

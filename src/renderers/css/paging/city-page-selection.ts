@@ -160,10 +160,12 @@ function selectWmtsTree(plan: PreparedPagePlan,pages: ReadonlyMap<string, Prepar
     const node=pages.get(key);if(!node)throw new Error(`Missing prepared WMTS tree node ${key}.`);
     if(!projected.has(key)){
       let projection=projectCityPage(node,matrix,scale,viewport);
-      if(node.level>=10 && node.pages?.length){
+      if(node.pages?.length){
         // A source tile can touch both the cap apron and a regular face. The
         // space between those prepared pieces is not coverage. Cull each real
         // piece instead of treating their combined bounding box as a surface.
+        // Coarse tiles need this too: their bounds can cross the eye plane and
+        // exhaust metadata on empty space before useful children can load.
         const pieces=node.pages.map(key=>pages.get(key));
         if(pieces.some(p=>!p))throw new Error("Missing prepared WMTS image piece.");
         const visible=pieces.map(p=>{
