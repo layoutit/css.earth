@@ -258,17 +258,3 @@ is not an N-body integration or a qualified extrapolation outside that interval.
 Position and velocity evaluate the same phase correction and its derivative.
 Worst residuals at the six independent fixture epochs are 940 km, 2030 km and
 307 km respectively. These are sampled fit errors, not universal error bounds.
-
-Nereid and Himalia use current-era Horizons fits (2020–2032, five-day sampling).
-Nereid’s six independent vector epochs have a maximum position residual of 10,417.20
-km (0.19% of the fitted semimajor axis; regression guard 11,980 km). Himalia also uses
-the existing prepared slow-longitude correction; its residual is 645,823.51 km (5.6%;
-guard 742,698 km). Himalia is a coarse orbital preview: the fitted ellipse does not
-reproduce all solar perturbations. These are sampled fit residuals, not universal
-bounds or measured orbit uncertainties. Geometry uses JPL’s mean radius estimates (170
-± 25 km and 85 ± 10 km), without inferring unmeasured shape axes. Nereid’s zero
-modeled GM means its mass is omitted, not physically zero.
-
-Himalia’s maximum radial residual at those same epochs is 2.298%; its
-regression guard is 2.7%, while the existing 2% check remains for other moons
-except the previously documented Dimorphos fit.
