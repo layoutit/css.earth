@@ -27,23 +27,47 @@
     "facts": [
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "228 million km"
+        "label": "Solar semimajor axis",
+        "value": "1.524 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
-        "id": "diameter",
-        "label": "Diameter",
-        "value": "6,780 km"
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "3,389.5 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "687 Earth days"
+        "value": "686.98 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "24.6 hours"
+        "value": "24.62 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "axial-tilt",
@@ -61,7 +85,41 @@
         "value": "None"
       }
     ],
-    "moreFacts": [],
+    "moreFacts": [
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "6.417 × 10²³ kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "3.934 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Equatorial gravity",
+        "value": "3.71 m/s²",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ],
     "sources": {
       "editorial": {
         "sourceId": 107740,
@@ -84,7 +142,7 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "Viking visible color",
+        "description": "USGS Viking MDIM 2.1 global mosaic, colorized with NASA Ames processing. Source sampling is about 1 km; resolution and photographed lighting vary. This assembled historical map does not depict the scene date.",
         "title": "Viking MDIM 2.1 visible-color mosaic. USGS Viking MDIM 2.1 colorized global mosaic",
         "thumbnail": "/scenes/mars/mars-lens-normal.webp",
         "surface": "/scenes/mars/mars-surface.webp",
@@ -98,7 +156,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "MOLA shaded relief",
+        "description": "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout.",
         "title": "MOLA topographic elevation with shaded relief. USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
         "thumbnail": "/scenes/mars/mars-lens-elevation-thumbnail.webp",
         "surface": "/scenes/mars/mars-lens-elevation.webp",
@@ -164,8 +222,8 @@
       {
         "id": "thermal",
         "label": "Thermal infrared",
-        "description": "THEMIS infrared",
-        "title": "THEMIS daytime thermal infrared response. USGS and ASU THEMIS daytime infrared response where available; prepared Viking grayscale detail fills source gaps; not a calibrated temperature retrieval",
+        "description": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Gray grid marks unavailable source coverage; dark interior samples remain. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
+        "title": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Gray grid marks unavailable source coverage; dark interior samples remain. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
         "thumbnail": "/scenes/mars/mars-lens-thermal-thumbnail.webp",
         "surface": "/scenes/mars/mars-lens-thermal.webp",
         "poles": "/scenes/mars/mars-lens-thermal-poles.webp",

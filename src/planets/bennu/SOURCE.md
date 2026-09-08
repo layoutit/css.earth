@@ -13,7 +13,7 @@ Included: the 6.25 cm zero-phase albedo map on OLA v20, the separate 5 cm global
 
 The source shape uses kilometers, right-handed body-fixed axes and east longitude. The shared preparer converts positions to meters and scales them by the independently sourced 0.241 km radius. Original connectivity is welded at exact position duplicates and simplified by meshoptimizer 1.2.0 before texture and lighting baking. The target is 800 native PolyCSS u triangles with 128px raster cells and a 10 m library error allowance. A regularized error estimate is not a guaranteed maximum surface deviation. The output has 800 faces; meshoptimizer reports 9.372 m estimated error. Exact coincident, oppositely wound pairs left by collapses are removed (0 faces), then every edge must have two opposite incidents. The result has one connected component and Euler characteristic two.
 
-The shared frame is fixed at 2026-09-04 TT. Horizons osculating elements approximate TDB as TT; these conics are not long-term perturbation models. Rotation follows the pinned mission PCK. Shadows uses prepared diffuse lighting in that body frame, not runtime physics. Elevation is radial height above the 241 m sphere, not height above a gravitational equipotential. No geometry or image is synthesized at runtime.
+The shared frame is fixed at 2026-09-03 TT. Horizons osculating elements approximate TDB as TT; these conics are not long-term perturbation models. Rotation follows the pinned mission PCK. Shadows use prepared diffuse lighting in that body frame, not runtime physics. Elevation is radial height above the 241 m sphere, not height above a gravitational equipotential. No geometry or image is synthesized at runtime.
 
 ## Reproduction
 
@@ -21,7 +21,11 @@ Restore source pins with `node tools/objects/dist/operations.js acquire bennu`, 
 
 The albedo view covers approximately 55 degrees south to 55 degrees north and marks missing poles. Its publisher stretch maps 0.002–0.007 albedo to codes 1–254. The monochrome basemap uses different phase normalization (Minnaert at 30 degrees) and source control (SPC v28), so it remains a separate view rather than filling the albedo gaps. Spherical mapping cannot register individual boulders perfectly to the simplified OLA silhouette.
 
-Elevation colors use the nearest positive radial intersection of the full source mesh, sampled into a bounded geographic grid. That scalar map cannot describe multiple surfaces on one ray; display geometry retains the released connectivity before simplification.
+Elevation atlas colors use the nearest point on the full source triangle surface in three dimensions, with a maximum source-to-display distance of 10 m. The radius, barycentric position and facet normal belong to that same source surface; the height subtracts the stated reference-sphere radius. The distance allowance is enforced per prepared atlas texel, independently of meshoptimizer’s estimated error. Equidistant distinct surfaces or projections beyond the bound are withheld with the shared gray grid. No orientation heuristic substitutes a farther source branch. Raster bleed clamps to its retained triangle edge before projection.
+
+The flat longitude/latitude preview cannot represent more than one source surface on a center ray, so ambiguous sample cells and their interpolation footprints are withheld. The three-dimensional Elevation atlas is baked directly from source-surface correspondence and does not paint this preview onto the body. Cartographic relief uses the matched source facet normal in a local east/north/up frame; optional Sun lighting uses that same normal. Full source connectivity is retained before simplification. Photographic/albedo datasets keep their original mapping and are not recalibrated by this scalar correction.
+
+`node --test tools/objects/terrestrial-layers/source-surface.test.mjs` checks exact pinned-source facet regressions for Itokawa, Ryugu, Eros and Bennu. `python3 tools/objects/terrestrial-layers/verify-source-surface.py bennu` (NumPy required) independently verifies the fixture against every triangle of the full original source using planar projection plus closest edges. These numerical checks establish scalar correspondence; they do not replace browser visual qualification.
 
 ## Qualification limits
 

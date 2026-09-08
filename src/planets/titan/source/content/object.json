@@ -26,35 +26,59 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "2,575.5 km"
+        "value": "2,574.76 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "9.58 AU (mean)"
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbit around Saturn",
-        "value": "15.95 Earth days"
+        "value": "15.95 days"
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "15.95 Earth days"
+        "value": "15.95 days · synchronous"
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Saturn",
+        "label": "Mean distance from Saturn",
         "value": "About 1,222,000 km"
       },
       {
-        "id": "atmosphere",
+        "id": "atmosphere-composition",
         "label": "Atmosphere",
         "value": "Dense nitrogen atmosphere with methane and organic haze"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.8814 ± 0.0001 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -63,7 +87,7 @@
       {
         "id": "normal",
         "label": "Near-infrared",
-        "description": "Cassini ISS · 938 nm",
+        "description": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
         "title": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
         "thumbnail": "/scenes/titan/titan-normal-thumbnail.webp",
         "surface": "titan-normal-surface@2x.webp",
@@ -76,7 +100,7 @@
       {
         "id": "radar",
         "label": "Radar",
-        "description": "Cassini SAR / HiSAR · 2.2 cm",
+        "description": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
         "title": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
         "thumbnail": "/scenes/titan/titan-radar-thumbnail.webp",
         "surface": "titan-radar-surface@2x.webp",

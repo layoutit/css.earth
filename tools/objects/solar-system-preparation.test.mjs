@@ -225,10 +225,31 @@ test("Venus physical frame resolves real astronomy positions with a 6051.84km bo
   }
   const sunOffsetM = scale(multiply(world.presentationToReference, prepared.heliocentricView.sun.position), world.metersPerUnit);
   nearVector(sunOffsetM, scale(venusM, -1), 0.05, "Sun relative to Venus");
+  // Independently read the retained Earth-to-EMB observation. Comparing Earth
+  // against VSOP87A's barycentre would reject the corrected planet centre by
+  // about 4,500 km; do not reuse the generated geometry as its own oracle.
+  const ephemerisRoot = new URL('../../packages/astronomy/source/scene-epoch/', import.meta.url);
+  const ephemeris = JSON.parse(await readFile(new URL('manifest.json', ephemerisRoot), 'utf8'));
+  const earthSource = ephemeris.records.find(record => record.id === 'earth');
+  assert.equal(ephemeris.epochJdTt, epoch);
+  assert.equal(earthSource.target, 399);
+  assert.equal(earthSource.center, 3);
+  const earthBytes = await readFile(new URL(earthSource.path, ephemerisRoot));
+  assert.equal(createHash('sha256').update(earthBytes).digest('hex'), earthSource.sha256);
+  const earthText = earthBytes.toString('utf8');
+  assert.match(earthText, /^Target body name: Earth \(399\)/m);
+  assert.match(earthText, /^Center body name: Earth-Moon Barycenter \(3\)/m);
+  assert.match(earthText, /^Reference frame\s+: ICRF\s*$/m);
+  assert.match(earthText, /^Output units\s+: KM-D\s*$/m);
+  const earthRow = earthText.split('$$SOE')[1].split('$$EOE')[0].trim().split(',');
+  assert.ok(Math.abs(Number(earthRow[0]) + ephemeris.ttMinusUtcSeconds / 86400 - epoch) < 1e-9);
+  const earthOffsetKm = earthRow.slice(2, 5).map(Number);
+  assert.ok(earthOffsetKm.every(Number.isFinite));
   for (const body of prepared.heliocentricView.system.bodies) {
-    const expectedKm = body.kind === "dwarf-planet"
+    let expectedKm = body.kind === "dwarf-planet"
       ? astronomy.dwarfPlanetPositionKm(body.id, epoch)
       : scale(astronomy.systemBarycentreHeliocentricAu(body.id === "earth" ? "emb" : body.id, epoch), astronomy.M_PER_AU / 1000);
+    if (body.id === 'earth') expectedKm = expectedKm.map((value, axis) => value + earthOffsetKm[axis]);
     const offsetM = scale(multiply(world.presentationToReference, body.position), world.metersPerUnit);
     // The existing marker dataset rounds each coordinate to one scene unit;
     // its Euclidean quantization bound is half a unit along each of three axes.
@@ -301,7 +322,11 @@ test("incompatible sky, missing physical scale, marker, and phase inputs fail at
   await assert.rejects(prepareSolarSystemScene({ ...mercuryConfig, starfield: { ...mercurySky, astrometricRegistration: undefined } }), /astrometric/u);
   await assert.rejects(prepareSolarSystemScene({ ...mercuryConfig, bodyRadiusKilometers: 0 }), /invalid/u);
   assert.throws(() => prepareSolarSystemCamera({ bodyRadiusUnits: 0 }), /Physical camera/u);
-  assert.throws(() => prepareSolarSystemPresentation({ ...presentationConfig, systemMarkerStrip: null }), /No prepared marker/u);
+  // The shared atlas now supplies every registered body. Exercise a missing
+  // marker by withholding both its shared entry and its legacy strip fallback.
+  const navigationMarkers = { ...PREPARED_NAVIGATION_MARKERS, ceres: undefined };
+  assert.ok(prepareSolarSystemPresentation({ ...presentationConfig, navigationMarkers }).systemMarkers.bodies.ceres);
+  assert.throws(() => prepareSolarSystemPresentation({ ...presentationConfig, navigationMarkers, systemMarkerStrip: null }), /No prepared marker/u);
   assert.throws(() => prepareSolarSystemPresentation({ ...presentationConfig, phaseAtlas: null }), /phase atlas/u);
   assert.throws(() => prepareSolarSystemPresentation({ ...presentationConfig, captionNames: {} }), /caption/u);
 });
