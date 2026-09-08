@@ -78,7 +78,7 @@ export async function loadScienceSurface(root, lens) {
       return value === null ? null : value * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0);
     } };
   }
-  if (['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'pds-radius-table'].includes(lens.format)) return loadShapeScalarGrid(root, lens);
+  if (['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'pds-radius-table'].includes(lens.format)) return loadShapeScalarGrid(root, lens);
   if (lens.additionalGrids?.length) {
     const rasters = await Promise.all([lens, ...lens.additionalGrids].map(entry =>
       loadScienceSurface(root, {...lens, ...entry, additionalGrids: undefined})));

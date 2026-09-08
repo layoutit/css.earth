@@ -1,0 +1,15 @@
+---
+import PlanetLayout from "../layouts/PlanetLayout.astro";
+import PreparedObjectHead from "../components/PreparedObjectHead.astro";
+import PreparedObjectPanel from "../components/PreparedObjectPanel.astro";
+import preparedContent from "../../src/planets/puck/prepared/content.json";
+import preparedObject from "../../src/planets/puck/prepared/object.json";
+import type { PreparedObjectContentDocument } from "../../tools/objects/content/types";
+import "../../src/renderers/css/styles/puck-surfaces.css";
+import "../planet-shell.css";
+---
+
+<PlanetLayout objectId="puck">
+  <PreparedObjectHead slot="planet-head" preparedAssets={preparedObject.data.assets} />
+  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent as PreparedObjectContentDocument} preparedControls={preparedObject.data.controls} />
+</PlanetLayout>

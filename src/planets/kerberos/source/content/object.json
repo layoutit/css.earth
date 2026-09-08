@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kerberos",
+  "displayName": "Kerberos",
+  "panel": {
+    "introduction": "Kerberos is a tiny, elongated moon in the Pluto–Charon system. New Horizons glimpsed it in 2015, but its possible double-lobed shape and spin orientation remain uncertain.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Equivalent radius",
+        "value": "About 4.75 km (2025 fit)"
+      },
+      {
+        "id": "dimensions",
+        "label": "Approximate dimensions",
+        "value": "14.5 × 8.2 × 7.2 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Pluto–Charon",
+        "value": "About 32.17 days"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from system barycenter",
+        "value": "About 58,300 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation at 2015 flyby",
+        "value": "About 5.31 days; uncertain pole"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Hubble Space Telescope · 2011"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "title": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/kerberos/kerberos-model-thumbnail.webp",
+        "surface": "kerberos-model-surface@2x.webp",
+        "poles": "kerberos-model-poles@2x.webp",
+        "source": {
+          "id": "measured-ellipsoid",
+          "path": "../manifest.json",
+          "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Kerberos overview",
+      "href": "https://science.nasa.gov/dwarf-planets/pluto/moons/kerberos/"
+    },
+    {
+      "label": "Porter et al. (2025)",
+      "role": "surface",
+      "description": "Joint photometric and resolved-image shape fit",
+      "href": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+    },
+    {
+      "label": "NASA/JHUAPL/SwRI; PDS",
+      "role": "observations",
+      "description": "Original New Horizons LORRI imagery",
+      "href": "https://pds-rings.seti.org/newhorizons/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/kerberos/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Porter, Verbiscer and Canup (2025); Weaver et al. (2016); NASA/JPL"
+    }
+  }
+}

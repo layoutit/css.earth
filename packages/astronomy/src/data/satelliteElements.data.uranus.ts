@@ -10,6 +10,27 @@
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
 export const SATELLITE_ELEMENTS_URANUS = {
+  puck: {
+    parent: 'uranus',
+    horizonsCode: '715',
+    fitFromJdTdb: 2458849.5,
+    fitToJdTdb: 2463232.5,
+    fitStepDays: 1,
+    poleRightAscensionRad: 1.349126485664,
+    poleDeclinationRad: 0.26532098686,
+    elements: {
+      epochJdTt: 2451545,
+      semiMajorAxisKm: 86006.525,
+      eccentricity: 0.009026493713,
+      inclinationRad: 0.018371365419,
+      ascendingNodeRad: -1.56073388785,
+      argumentOfPeriapsisRad: 0.282461892946,
+      meanAnomalyAtEpochRad: -60237.18798168945,
+      meanMotionRadPerDay: 8.243015107941062,
+      ascendingNodeRateRadPerDay: -0.004433097951801137,
+      argumentOfPeriapsisRateRadPerDay: 0.008870285457599419,
+    },
+  },
   miranda: {
     parent: 'uranus',
     horizonsCode: '705',

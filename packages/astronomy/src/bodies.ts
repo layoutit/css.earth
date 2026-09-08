@@ -96,6 +96,10 @@ export const BODIES: Record<BodyId, BodyData> = {
   adrastea: body('adrastea', 'Adrastea', '515', 8.2, 0.0001, 'jupiter'),
   metis: body('metis', 'Metis', '516', 21.5, 0.0025, 'jupiter'),
 
+  // No measured GM is supplied for these small moons; zero means omitted mass.
+  // Radii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.
+  methone: body('methone', 'Methone', '632', 1.45, 0, 'saturn'),
+  pallene: body('pallene', 'Pallene', '633', 2.23, 0, 'saturn'),
   mimas: body('mimas', 'Mimas', '601', 198.8, 2.503489, 'saturn'),
   enceladus: body('enceladus', 'Enceladus', '602', 252.3, 7.210367, 'saturn'),
   tethys: body('tethys', 'Tethys', '603', 536.3, 41.21, 'saturn'),
@@ -121,6 +125,7 @@ export const BODIES: Record<BodyId, BodyData> = {
   pandora: body('pandora', 'Pandora', '617', 40.6, 0.00926, 'saturn'),
   pan: body('pan', 'Pan', '618', 14, 0.00028, 'saturn'),
 
+  puck: body('puck', 'Puck', '715', 81, 0, 'uranus'),
   miranda: body('miranda', 'Miranda', '705', 235.7, 4.3, 'uranus'),
   ariel: body('ariel', 'Ariel', '701', 578.9, 83.43, 'uranus'),
   umbriel: body('umbriel', 'Umbriel', '702', 584.7, 85.4, 'uranus'),
@@ -137,6 +142,12 @@ export const BODIES: Record<BodyId, BodyData> = {
   galatea: body('galatea', 'Galatea', '806', 88, 0.1899, 'neptune'),
 
   charon: body('charon', 'Charon', '901', 606, 106.10, 'pluto'),
+  // PLU060 Horizons GMs (2024); radii match the sourced display shapes.
+  // Nix/Hydra: Porter released meshes. Kerberos/Styx: Porter2025 fitted volumes.
+  nix: body('nix', 'Nix', '902', 18.265603887767425, 0.001496, 'pluto'),
+  hydra: body('hydra', 'Hydra', '903', 18.11455731342771, 0.00201, 'pluto'),
+  kerberos: body('kerberos', 'Kerberos', '904', 4.75, 0.00006038, 'pluto'),
+  styx: body('styx', 'Styx', '905', 3.5, 0.0000405, 'pluto'),
 
   // Dwarf planets. `horizonsCode` is the exact string this package's Horizons
   // queries use (`generate-dwarf-planets.mjs`, `fetch-fixtures.mjs`) — for

@@ -1,0 +1,441 @@
+{
+  "schema": "csspallene-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "pallene-ellipsoid",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 59703,
+      "expectedSha256": "c9baed96538b317f873dd3eb153c6088e4ac319d1ac2c32cbbbaa26cac857448",
+      "origin": "https://doi.org/10.1016/j.icarus.2013.07.022",
+      "credit": "Thomas et al. (2013); NAIF/JPL; cssEarth analytic sampling",
+      "license": "Published measurement values; MIT analytic representation",
+      "licenseEvidence": [
+        "measurements.json",
+        "geometry/pck00011.tpc",
+        "../../../../LICENSE"
+      ],
+      "acquisition": "Checked-in radius table; formula and 5 degree sample spacing in measurements.json.",
+      "redistribution": "Retain measurement citation and explicitly identify the analytic ellipsoid approximation.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Analytic realization of measured 2.88 × 2.08 × 1.8 km semi-axes; no detailed terrain reconstruction.",
+      "projection": {
+        "type": "body-fixed-radial-table",
+        "metersPerUnit": 1000,
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2230
+      }
+    },
+    {
+      "id": "cassini-n1496910582",
+      "path": "observations/N1496910582_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "66363342333486a6967427925416bdae1aa385de8efcc78e4e820b0447646143",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.IMG",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "NASA/PDS scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/PolicyOnUseOfPDSSourcedMaterials.txt"
+      ],
+      "acquisition": "Pinned original PDS download in preparation/acquisition.json.",
+      "redistribution": "Attribute NASA/JPL-Caltech/SSI and the PDS archive. No endorsement.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "coverage": "Original CISSCAL 4.0beta I/F,1024×1024; mapped only within authored illumination and pointing validity.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "survey/n1496910582-camera.json",
+        "referenceRadiusMeters": 2230
+      },
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false
+    },
+    {
+      "id": "cassini-n1496910582-label",
+      "path": "observations/N1496910582_1_CALIB.LBL",
+      "expectedBytes": 3830,
+      "expectedSha256": "a5f37bb03ca306fb81d8c18e7f9523127abd8c471af1dc3814c9765f51af5cf0",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.LBL",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "NASA/PDS scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/PolicyOnUseOfPDSSourcedMaterials.txt"
+      ],
+      "acquisition": "Pinned original PDS download in preparation/acquisition.json.",
+      "redistribution": "Attribute NASA/JPL-Caltech/SSI and the PDS archive. No endorsement.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "coverage": "Original detached PDS label describing calibration, exposure and instrument.",
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "survey/n1496910582-camera.json",
+        "referenceRadiusMeters": 2230
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3971,
+      "expectedSha256": "a2bd7bf9c8f4b8f5497f79c4ff287d89621224e68647dc364afc8859be6b179b",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/05157_05162ra.bc",
+      "expectedBytes": 6858752,
+      "expectedSha256": "3c7599503bd1648fb1914d130f5e2d67b86d5f1a859fd3df3f78a1d627affdc5",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/10289_10294ra.bc",
+      "expectedBytes": 6853632,
+      "expectedSha256": "a46a260a002f40386d7fb9de387acf7cff298dc48c06bc8bd0760585676d5add",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/cas00172.tsc",
+      "expectedBytes": 18954,
+      "expectedSha256": "9aebd8d2783d06c12c33d2c5794a04a7bcde26c95efd4fee974acd9b356442f8",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/cas_iss_v10.ti",
+      "expectedBytes": 31060,
+      "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/cas_rocks_v18.tf",
+      "expectedBytes": 22880,
+      "expectedSha256": "4792ed40b4f084aa7aad1ce5265bbc12f44be6ac0c7965653e79d86cda394baa",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/cas_v43.tf",
+      "expectedBytes": 196583,
+      "expectedSha256": "09b1f6f27a74d3cc64b28ef91fcea02bed78fe63c93035b8434a6b67e5224b5a",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/naif0012.tls",
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/pallene_mst2013.bpc",
+      "expectedBytes": 3156992,
+      "expectedSha256": "6424cdd916fc8dba014f40268a5e585fa274d8c0485033719f5a887dbb6f8817",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "geometry/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 879,
+      "expectedSha256": "27ba9b9042f0037815795ffcfdd9cff0ea442bdf3bd39a77023e7a7a4cfed93c",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "observations/N1496910582_1.IMG",
+      "expectedBytes": 1077344,
+      "expectedSha256": "905b9ed1fa44c865784897f25d2601cb0f8ee9656e4c0db3190c185481044a57",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "observations/N1496910582_1.LBL",
+      "expectedBytes": 3630,
+      "expectedSha256": "e9fcc43579339d9b59a4ca76fbfa3c0bbf7c2380c21850fe9021721fc8d96b34",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "observations/N1665947247_1.IMG",
+      "expectedBytes": 1077344,
+      "expectedSha256": "c2ac5a48d847ef782953a49a71be6bc3f1b80a2d49f82b01c4491c56af9d006a",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "observations/N1665947247_1.LBL",
+      "expectedBytes": 3692,
+      "expectedSha256": "c1b1d425bc73bdf8139946869e633d1e173e0b11f105300cf1ee74339ea81764",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "observations/N1665947247_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "779a5fe95fee36faaeb382992a282b9d244efe091e046c6197bf22e4229b1e6a",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "observations/N1665947247_1_CALIB.LBL",
+      "expectedBytes": 3853,
+      "expectedSha256": "ad9c86e876d841f94012beaefbbe871bf97760d96b66b34001113b0e8cba10e5",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 4540,
+      "expectedSha256": "1c2b7a84c45f71039240ad66993e3dc34c7da825718baef4bcaa156d90fc9252",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1295,
+      "expectedSha256": "7d89e9761414bde6b37837428dccb408cced57012868f099dad8f6ac4b62f86e",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 709,
+      "expectedSha256": "3105cd84de33cb0d0e9c89cc0d26b526c5cc027f09f57abe644f4f369e07bcee",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3495,
+      "expectedSha256": "680c3409fc8dfe3b586a04681da279a813ea04c407c01f145f8e83574e09e3d9",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3741,
+      "expectedSha256": "71a18da5f3d889201726239f4813046927483c77ff53c504149ee610f51f20fd",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "db657a2e4032c5430e2ee8b0cb8aacbbb05d01bfa23ae2cab6474c40eaa07c9d",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/2011-trial.json",
+      "expectedBytes": 864,
+      "expectedSha256": "352604377aebd0f9b54d2daa1d9bc1006c07d5d5898295f3baac2c7c24181e55",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/2011-two-pixel-inset.json",
+      "expectedBytes": 601,
+      "expectedSha256": "3a3999356e66675a7d305aed319c707b90f7bc256348e149f994c5addd7b438b",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/N1665947247_1_CALIB.LBL",
+      "expectedBytes": 3853,
+      "expectedSha256": "ad9c86e876d841f94012beaefbbe871bf97760d96b66b34001113b0e8cba10e5",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/N1694657087-metadata.json",
+      "expectedBytes": 12017,
+      "expectedSha256": "80d458c7ff4f463650afb7205c79adf095eb86cf98200535ac5da9decf18976c",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/N1694657087_CALIB.LBL",
+      "expectedBytes": 3857,
+      "expectedSha256": "30dfd6c9006c036b89a386e6ced1e9d64a5476e56d96b67025794ea4f91df0c2",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/N1694661188_1_CALIB.LBL",
+      "expectedBytes": 3858,
+      "expectedSha256": "e6e03c57970473748ce28a94fa743ae73a43915161795648a8e5536b1d672628",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/camera-fit-0.08.json",
+      "expectedBytes": 404,
+      "expectedSha256": "c4b64c483a2422b3f77a4a4cd99fabec2ceec14e129e1c99b8426aa671f5392a",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/camera-fit-0.12.json",
+      "expectedBytes": 405,
+      "expectedSha256": "61964398b54d3b0456c11164859b8a9765b1b91bfee22bdb716ae2833fcb5d7c",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/camera-fit-0.16.json",
+      "expectedBytes": 406,
+      "expectedSha256": "4bbde6f449a234807ee3bda54934e631a337baa1376a68aa92ca77215215627d",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/camera-fit-0.2.json",
+      "expectedBytes": 405,
+      "expectedSha256": "216081a6a5a4dc3b7f4bcb0efb67a014c694fd356a1c2e0b5798a81089f2c752",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/camera-fit-2010.json",
+      "expectedBytes": 407,
+      "expectedSha256": "b67f6c13a4f8539fed21de684ce480f45343fd0343ceabe2c27bf442bf208aca",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/camera-fit-2011-0.012.json",
+      "expectedBytes": 407,
+      "expectedSha256": "3269948b1438420e87875394054b3ccc1bb8167c1dbf6eee4396426067a312af",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/n1496910582-camera.json",
+      "expectedBytes": 709,
+      "expectedSha256": "f95a89cf3a01eba104b327d0925da172a8a30af6510cfd1a1ef2f0d3131204bc",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/n1496910582-files.json",
+      "expectedBytes": 8509,
+      "expectedSha256": "9f2c4cb93a8448c687cb60c6e14a5e4fccdeb71137c178a7d0f9c4e22a47ce4b",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/n1496910582-metadata.json",
+      "expectedBytes": 12061,
+      "expectedSha256": "db4ee0ca408fbcab5b5d946f225aa94103b5842cef8fa0b62cbf8c78e19e9071",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/n1665947247-camera.json",
+      "expectedBytes": 708,
+      "expectedSha256": "741bdfacb468442061f295a76932b7c246e46bc4690f0c039c369a9cbbac5b10",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/n1665947247-files.json",
+      "expectedBytes": 8511,
+      "expectedSha256": "7848d59f0c6b2eb04a048f0a2c9e7581644a76f097958059bdaedac74dbc7514",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/n1665947247-metadata.json",
+      "expectedBytes": 12096,
+      "expectedSha256": "6fdd271e810de0ef3dc65e4eca5c85dedeb9ae75797ce2d3f12695f1ba99d979",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/n1694661188-camera.json",
+      "expectedBytes": 710,
+      "expectedSha256": "796debb0c3e39c11078cfa560a0b2e9b4d56380543272526dfb980e39cceee86",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/n1694661188-metadata.json",
+      "expectedBytes": 12088,
+      "expectedSha256": "fd37f56dccc4d2cf578f55bc8c00c70c4714a1c83f6cae32a2d3f2ba46a28e94",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/observed-pole.json",
+      "expectedBytes": 431,
+      "expectedSha256": "9db95de52fa3c7721c8b589b1534d06e984eacfcc9da74cfbede22b0ba8c8b5a",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/opus-resolved.json",
+      "expectedBytes": 3271,
+      "expectedSha256": "a218fafb44f146cb86a9cbe54737d542cfc6c6455f7ba2df33d8997343536f08",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/qualification.json",
+      "expectedBytes": 5348,
+      "expectedSha256": "1d6fe0023a3d49a64ef7fb509692ee6c9705ce6c7237bda39eb957d6ca6a85ac",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-cassini-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1016/j.icarus.2013.07.022",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; Thomas et al.; cssEarth preparation",
+      "license": "NASA/PDS data; MIT preparation",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "pallene-ellipsoid",
+          "cassini-n1496910582",
+          "cassini-n1496910582-label"
+        ],
+        "size": 512,
+        "longitudeDegrees": 105,
+        "latitudeDegrees": -7,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 67251,
+      "expectedSha256": "1a7909939de1601a25f41d8b09c6ef918f47cb7b127ebee8076a6552a2bee33e"
+    }
+  ]
+}
