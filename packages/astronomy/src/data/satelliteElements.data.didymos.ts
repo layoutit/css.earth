@@ -9,7 +9,7 @@
 
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
-export const SATELLITE_ELEMENTS_DIDYMOS = {
+export const SATELLITE_ELEMENTS_DIDYMOS: Readonly<Record<'dimorphos', SatelliteRecord>> = {
   dimorphos: {
     parent: 'didymos',
     horizonsCode: '120065803',

@@ -9,7 +9,7 @@
 
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
-export const SATELLITE_ELEMENTS_JUPITER = {
+export const SATELLITE_ELEMENTS_JUPITER: Readonly<Record<'himalia' | 'io' | 'europa' | 'ganymede' | 'callisto' | 'amalthea' | 'thebe' | 'adrastea' | 'metis', SatelliteRecord>> = {
   himalia: {
     parent: 'jupiter',
     horizonsCode: '506',

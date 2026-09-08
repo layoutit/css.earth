@@ -64,8 +64,11 @@ export interface OrbitalState {
   readonly trueAnomalyRadians: number;
 }
 export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail'; }
+/** A source-backed coordinate origin with no rendered body, surface or marker. */
+export interface WorldContextOrbitCenter { readonly positionM: Vector3; readonly centerBodyId: string; }
 export interface PreparedWorldContext {
   readonly schema: 'cssearth-world-context@1';
+  readonly orbitCenters?: Readonly<Record<string, WorldContextOrbitCenter>>;
   readonly sky: { readonly sceneRegistration: string };
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number };
@@ -121,19 +124,36 @@ function parseVolumeOpacityProfile(value: unknown): VolumeOpacityProfile {
 
 /** Builds static true-ellipse vertices in physical metres from a same-epoch ephemeris adapter. */
 export function prepareWorldContext(source: WorldContextSource, facts: Readonly<Record<string, WorldContextBodyFact>>,
-  states: Readonly<Record<string, OrbitalState>>): PreparedWorldContext {
+  states: Readonly<Record<string, OrbitalState>>,
+  orbitCenters: Readonly<Record<string, WorldContextOrbitCenter>> = {}): PreparedWorldContext {
+  for (const [id, center] of Object.entries(orbitCenters)) {
+    identifier(id, 'Orbit center id'); identifier(center.centerBodyId, `${id} orbit center parent`);
+    if (!Array.isArray(center.positionM) || center.positionM.length !== 3 || center.positionM.some(value => !Number.isFinite(value))) {
+      throw new TypeError(`${id} orbit center must have a finite position.`);
+    }
+    if (states[id] || id === source.focus.id) throw new TypeError(`${id} orbit center duplicates a prepared body.`);
+  }
+  const visibleIds = new Set(source.bodies.map(body => body.id));
+  const centerState = (id: string) => visibleIds.has(id) ? states[id] : orbitCenters[id];
+  for (const id of Object.keys(orbitCenters)) {
+    const ancestors = new Set<string>();
+    for (let parentId = id; parentId !== source.focus.id; parentId = centerState(parentId)!.centerBodyId) {
+      if (ancestors.has(parentId) || !centerState(parentId)) throw new TypeError(`${id} orbit center hierarchy is invalid.`);
+      ancestors.add(parentId);
+    }
+  }
   const bodies = source.bodies.map(body => {
     const fact = facts[body.id], state = states[body.id];
     if (!fact || !state || !positive(fact.radiusM, `${body.id} radius`)) throw new TypeError(`Missing physical facts for ${body.id}.`);
     validateState(state, body.id);
-    const parent = state.centerBodyId === source.focus.id ? source.frame.originM : states[state.centerBodyId]?.positionM;
-    if (!parent || state.centerBodyId === body.id || !source.bodies.some(body => body.id === state.centerBodyId) && state.centerBodyId !== source.focus.id ||
+    const parent = state.centerBodyId === source.focus.id ? source.frame.originM : centerState(state.centerBodyId)?.positionM;
+    if (!parent || state.centerBodyId === body.id || !source.bodies.some(body => body.id === state.centerBodyId) && !orbitCenters[state.centerBodyId] && state.centerBodyId !== source.focus.id ||
         Math.hypot(...parent.map((value, axis) => value - state.centerPositionM[axis]!)) > .001) {
       throw new TypeError(`${body.id} orbit centre must match its prepared parent.`);
     }
     const ancestors = new Set([body.id]);
-    for (let parentId = state.centerBodyId; parentId !== source.focus.id; parentId = states[parentId]!.centerBodyId) {
-      if (ancestors.has(parentId) || !states[parentId]) throw new TypeError(`${body.id} orbit parent hierarchy is invalid.`);
+    for (let parentId = state.centerBodyId; parentId !== source.focus.id; parentId = centerState(parentId)!.centerBodyId) {
+      if (ancestors.has(parentId) || !centerState(parentId)) throw new TypeError(`${body.id} orbit parent hierarchy is invalid.`);
       ancestors.add(parentId);
     }
     const minor = state.semiMajorAxisM * Math.sqrt(1 - state.eccentricity ** 2), centre = add(state.centerPositionM, scale(state.perihelionDirection, -state.semiMajorAxisM * state.eccentricity));
@@ -154,7 +174,10 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
       orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords }) });
   });
-  return freeze({ schema: 'cssearth-world-context@1', sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM }), bodies: freeze(bodies), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
+  return freeze({ schema: 'cssearth-world-context@1',
+    ...(Object.keys(orbitCenters).length ? { orbitCenters: freeze(Object.fromEntries(Object.entries(orbitCenters).map(([id, center]) =>
+      [id, freeze({ positionM: copy(center.positionM), centerBodyId: center.centerBodyId })]))) } : {}),
+    sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM }), bodies: freeze(bodies), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
 
 function parseStars(value: unknown, volumeFadeStartDistanceM: number): WorldContextSource['stars'] {

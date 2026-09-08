@@ -9,7 +9,7 @@
 
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
-export const SATELLITE_ELEMENTS_MARS = {
+export const SATELLITE_ELEMENTS_MARS: Readonly<Record<'phobos' | 'deimos', SatelliteRecord>> = {
   phobos: {
     parent: 'mars',
     horizonsCode: '401',

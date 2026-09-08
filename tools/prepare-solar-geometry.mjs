@@ -47,6 +47,7 @@ const {
   ASTEROID_IDS, asteroidElements,
   COMET_IDS, cometElements,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
+  SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
   systemBarycentreHeliocentricAu,
   systemBarycentreVelocityAuPerDay,
   bodyRotationAt,
@@ -105,6 +106,21 @@ const authoredRotations = new Map(await Promise.all(BODIES.map(async id => {
 const rotationAtEpoch = id => authoredRotations.get(id) ?? bodyRotationAt(id, EPOCH_JD_TT);
 
 const epochStates = await loadSceneEpochEphemeris(EPOCH_JD_TT);
+for (const id of SCENE_SATELLITE_IDS) epochStates.set(id, sceneSatelliteStateKm(id, EPOCH_JD_TT));
+// A primary-specific satellite solution owns ONE heliocentric primary state
+// at this epoch. Every observer and the global context must use that same
+// origin; mixing it with an older parent conic breaks the physical hierarchy.
+const primaryStates = new Map();
+for (const state of epochStates.values()) {
+  if (!state.parentHeliocentricState) continue;
+  const primary = state.parentHeliocentricState;
+  const previous = primaryStates.get(state.centerBodyId);
+  if (previous && ['positionKm', 'velocityKmPerDay'].some(key =>
+    primary[key].some((value, axis) => value !== previous[key][axis]))) {
+    throw new TypeError(`Incompatible primary states for ${state.centerBodyId}.`);
+  }
+  primaryStates.set(state.centerBodyId, primary);
+}
 const planetPosition = id => systemBarycentreHeliocentricAu(VSOP87A_KEY[id] ?? id, EPOCH_JD_TT)
   .map((value, axis) => value + (id === "earth" ? epochStates.get("earth").positionKm[axis] / ASTRONOMICAL_UNIT_KILOMETERS : 0));
 const planetVelocity = id => systemBarycentreVelocityAuPerDay(VSOP87A_KEY[id] ?? id, EPOCH_JD_TT)
@@ -124,14 +140,16 @@ const entries = BODIES.map((body) => {
     : moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT + dt).map((value, index) =>
       (value - moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
   const parentPosition = isSatellite
-    ? DWARF_PLANET_IDS.includes(parent)
+    ? primaryStates.has(parent)
+      ? primaryStates.get(parent).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : DWARF_PLANET_IDS.includes(parent)
       ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : ASTEROID_IDS.includes(parent)
       ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : planetPosition(parent) : null;
   const mu = isSatellite
-    ? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
-       ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
+    ? (epochState?.gravitationalParametersKm3PerS2?.combined ?? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
+       ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2)) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
     : GM_SUN_AU3_PER_DAY2;
   const kepler = DWARF_PLANET_IDS.includes(body)
     ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
@@ -139,11 +157,11 @@ const entries = BODIES.map((body) => {
     : COMET_IDS.includes(body) ? keplerStateKm(cometElements(body), EPOCH_JD_TT) : null;
   const heliocentricAu = isSatellite
     ? parentPosition.map((value, index) => value + moonPosition[index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
-    ? kepler.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+    ? (primaryStates.get(body) ?? kepler).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
     : planetPosition(body);
   const velocityAuPerDay = isSatellite
     ? moonVelocity.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
-    ? kepler.velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+    ? (primaryStates.get(body) ?? kepler).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
     : planetVelocity(body);
   const orbitPositionAu = isSatellite ? moonPosition.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : heliocentricAu;
   const toSunIcrf = normalize(heliocentricAu.map((component) => -component));
@@ -301,7 +319,11 @@ export const SOLAR_GEOMETRY_EPOCH_LABEL = ${JSON.stringify(EPOCH_LABEL)};
 export const ASTRONOMICAL_UNIT_KILOMETERS = ${ASTRONOMICAL_UNIT_KILOMETERS};
 
 // Preparation provenance; these snapshots cannot be extrapolated to other dates.
-export const BODY_POSITION_PROVENANCE = Object.freeze(${JSON.stringify(Object.fromEntries([...epochStates].map(([id, state]) => [id, { ...state.provenance, ...(id === "earth" ? {model:"VSOP87A EMB plus Horizons Earth-center offset"} : {}) }])), null, 2)});
+export const BODY_POSITION_PROVENANCE = Object.freeze(${JSON.stringify(Object.fromEntries([...epochStates, ...primaryStates].map(([id, state]) => [id, { ...state.provenance, ...(id === "earth" ? {model:"VSOP87A EMB plus Horizons Earth-center offset"} : {}) }])), null, 2)});
+
+// Canonical ICRF heliocentric primary states at this exact scene epoch. A
+// coordinate origin here need not have a visible surface or navigation marker.
+export const BODY_HELIOCENTRIC_STATES = Object.freeze(${JSON.stringify(Object.fromEntries(primaryStates), null, 2)});
 
 export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
 ${
@@ -392,7 +414,7 @@ ${
     `  // a ${semiMajorAxisAu.toPrecision(5)} AU, e ${eccentricity.toPrecision(5)}, ` +
     `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu.toPrecision(5)} AU\n` +
     `  ${sourceKey(body)}: Object.freeze({\n` +
-    (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n`) +
+    (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n${epochStates.get(body)?.parentHeliocentricState ? `    parentHeliocentricState: ${JSON.stringify(epochStates.get(body).parentHeliocentricState)},\n` : ""}`) +
     `    semiMajorAxisAu: ${semiMajorAxisAu},\n` +
     `    eccentricity: ${eccentricity},\n` +
     `    heliocentricDistanceAu: ${heliocentricDistanceAu},\n` +

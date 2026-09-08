@@ -99,10 +99,383 @@ export const BODY_POSITION_PROVENANCE = Object.freeze({
     "sourcePath": "packages/astronomy/source/scene-epoch/earth.txt",
     "sha256": "34591ceb0064d9450c05273365df520cf9cc3a6a4d134ce1cfb700b06d41a855",
     "timeQualification": "Horizons UT vector output uses UTC after 1962. TT = UTC + 69.184 seconds at this epoch; float64 JD conversion and output rounding are below 0.1 ms."
+  },
+  "hiiaka": {
+    "model": "Horizons geometric state at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "target": 120136108,
+    "center": 920136108,
+    "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136108&CENTER=500%40920136108&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+    "sourcePath": "src/planets/hiiaka/source/orbit/hiiaka-epoch.txt",
+    "sha256": "5c2d93c8540488799fa2e147849419e234138732a845c479b24af0385b608288",
+    "solution": "tnosat_v001b_20136108_jpl110_20221014",
+    "limitations": [
+      "Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.",
+      "This is the retained JPL solution, not the newer Proudfoot et al. 2024 interacting solution; phase accuracy is limited.",
+      "The solution GM values define this orbit calculation and are separate from the occultation shape/size measurements."
+    ],
+    "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+  },
+  "menoetius": {
+    "model": "Horizons geometric state at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "target": 120000617,
+    "center": 920000617,
+    "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120000617&CENTER=500%40920000617&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+    "sourcePath": "src/planets/menoetius/source/orbit/menoetius-epoch.txt",
+    "sha256": "f6469c4b2b71cf87e87f1965c8dccf57960669e0843fae1928f41a66d1b38b9b",
+    "solution": "tnosat_v001_20000617_jpl082_20230601",
+    "limitations": [
+      "The JPL satellite solution uses its own JPL#82 barycenter, not the current integrated 617; orbit.",
+      "The response contains no covariance or scene-epoch uncertainty bound; do not infer one from printed digits.",
+      "The primary response contains an inconsistent satellite provisional-designation note; target and center numeric IDs plus the Menoetius response establish identity."
+    ],
+    "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+  },
+  "squannit": {
+    "model": "Published mutual-orbit model evaluated once at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "source": "https://arxiv.org/abs/1912.06456v2",
+    "sourcePath": "src/planets/squannit/source/orbit/published-parameters.json",
+    "sha256": "0061b2a8a915b03b9cd65cb4216fb757249ae868face4c8014e95cdbb86bb2bf",
+    "timeQualification": "The paper defines JD 2455305.0 as asterocentric (light-time-corrected), without naming UTC/TT/TDB. This preparation treats that numerical epoch as TT; a clock-scale ambiguity up to 70 seconds contributes less than 0.41 degree of phase, separate from the much larger source-parameter/extrapolation uncertainty. No light-time correction is applied to the resulting geometric vector.",
+    "limitations": [
+      "The 2026 position extrapolates the 2000–2019 photometric drift fit. It is context, not an observed or precisely predicted current position.",
+      "The sum of the individual phase-sensitivity ranges is about 55 degrees at this scene epoch; future drift changes and missing covariance can increase actual uncertainty.",
+      "J2000 equatorial axes are treated as ICRF at this coarse precision; the small frame bias is negligible relative to source pole errors.",
+      "No present-epoch attitude or libration prediction is inferred from this mutual orbit.",
+      "The original 2006 Beta mesh scale is retained independently of the 2021 photometric preference for a secondary about 130% as large."
+    ]
+  },
+  "romulus": {
+    "model": "Published mutual-orbit model evaluated once at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "source": "https://www.aanda.org/articles/aa/pdf/2021/06/aa40342-21.pdf",
+    "sourcePath": "src/planets/romulus/source/orbit/published-parameters.json",
+    "sha256": "8a1e50f6040b207756bec082d48d03537da1dcc8a466a5b363e184e73b4e6362",
+    "timeQualification": "Table 3 labels tp as JD without a time scale. TT is an explicit preparation convention; the CDS observed timestamps are UTC. Choosing UTC instead would shift this phase by about one minute, smaller than the quoted 0.10085-day epoch uncertainty, but this does not establish a source-owned exact time scale.",
+    "limitations": [
+      "This is an extrapolation of rounded 2021 published elements to 2026-09-03, beyond the retained 2002–2018 astrometry; current phase is approximate.",
+      "The full model covariance and an explicit time scale for the printed pericenter epoch are absent. Quoted independent parameter uncertainties must not be treated as a scene covariance.",
+      "The six independent Miriade 2024-solution projections differ by 23–63 mas, including about 42 mas (140 km on the sky plane) at the scene epoch; this is measured disagreement, not a guaranteed error bound.",
+      "The printed parameters differ from six reported paper-fit positions by 7–62 mas with the documented geometric projection. The paper’s 9.85 mas fit RMS is not achieved or asserted for this illustration.",
+      "Miriade permits orbit computation from 1990 to 2030, but its position-error service stops at 2026-Jan-01; empty errors at this scene date are unavailable, not zero.",
+      "Sky-plane checks do not independently determine the line-of-sight component, and geocentric projection omits observatory parallax and differential aberration.",
+      "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
+    ]
+  },
+  "haumea": {
+    "model": "Horizons geometric state at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "target": 920136108,
+    "center": 10,
+    "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+    "sourcePath": "src/planets/hiiaka/source/orbit/haumea-epoch.txt",
+    "sha256": "3337cf80561af77c3a24e634c5f0a58a258197b55a8c9faad3f43f8113c6d08f",
+    "solution": "tnosat_v001b_20136108_jpl110_20221014",
+    "limitations": [
+      "Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.",
+      "This is the retained JPL solution, not the newer Proudfoot et al. 2024 interacting solution; phase accuracy is limited.",
+      "The solution GM values define this orbit calculation and are separate from the occultation shape/size measurements."
+    ],
+    "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+  },
+  "patroclus": {
+    "model": "Horizons geometric state at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "target": 920000617,
+    "center": 10,
+    "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920000617&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+    "sourcePath": "src/planets/menoetius/source/orbit/patroclus-epoch.txt",
+    "sha256": "427924d795a0887115acb4ee033f42f7a2c254d63a9a2d6abe51b421c9132a97",
+    "solution": "tnosat_v001_20000617_jpl082_20230601",
+    "limitations": [
+      "The JPL satellite solution uses its own JPL#82 barycenter, not the current integrated 617; orbit.",
+      "The response contains no covariance or scene-epoch uncertainty bound; do not infer one from printed digits.",
+      "The primary response contains an inconsistent satellite provisional-designation note; target and center numeric IDs plus the Menoetius response establish identity."
+    ],
+    "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+  },
+  "sylvia": {
+    "model": "Horizons numbered-asteroid geometric state at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "target": 87,
+    "targetKind": "numbered-asteroid",
+    "center": 10,
+    "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259&CENTER=500%4010&VEC_CORR=NONE",
+    "sourcePath": "src/planets/romulus/source/orbit/sylvia-heliocentric.txt",
+    "sha256": "52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118",
+    "qualification": [
+      "This is an extrapolation of rounded 2021 published elements to 2026-09-03, beyond the retained 2002–2018 astrometry; current phase is approximate.",
+      "The full model covariance and an explicit time scale for the printed pericenter epoch are absent. Quoted independent parameter uncertainties must not be treated as a scene covariance.",
+      "The six independent Miriade 2024-solution projections differ by 23–63 mas, including about 42 mas (140 km on the sky plane) at the scene epoch; this is measured disagreement, not a guaranteed error bound.",
+      "The printed parameters differ from six reported paper-fit positions by 7–62 mas with the documented geometric projection. The paper’s 9.85 mas fit RMS is not achieved or asserted for this illustration.",
+      "Miriade permits orbit computation from 1990 to 2030, but its position-error service stops at 2026-Jan-01; empty errors at this scene date are unavailable, not zero.",
+      "Sky-plane checks do not independently determine the line-of-sight component, and geocentric projection omits observatory parallax and differential aberration.",
+      "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
+    ]
+  }
+});
+
+// Canonical ICRF heliocentric primary states at this exact scene epoch. A
+// coordinate origin here need not have a visible surface or navigation marker.
+export const BODY_HELIOCENTRIC_STATES = Object.freeze({
+  "haumea": {
+    "positionKm": [
+      -5487487239.17944,
+      -4698328457.056636,
+      1797316425.25533
+    ],
+    "velocityKmPerDay": [
+      210094.2578290008,
+      -230096.3537848578,
+      -123974.8700480089
+    ],
+    "provenance": {
+      "model": "Horizons geometric state at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "target": 920136108,
+      "center": 10,
+      "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sourcePath": "src/planets/hiiaka/source/orbit/haumea-epoch.txt",
+      "sha256": "3337cf80561af77c3a24e634c5f0a58a258197b55a8c9faad3f43f8113c6d08f",
+      "solution": "tnosat_v001b_20136108_jpl110_20221014",
+      "limitations": [
+        "Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.",
+        "This is the retained JPL solution, not the newer Proudfoot et al. 2024 interacting solution; phase accuracy is limited.",
+        "The solution GM values define this orbit calculation and are separate from the occultation shape/size measurements."
+      ],
+      "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+    }
+  },
+  "patroclus": {
+    "positionKm": [
+      219530347.7320293,
+      587045097.8743559,
+      408156964.6816921
+    ],
+    "velocityKmPerDay": [
+      -1023130.592430021,
+      209778.8583424715,
+      535080.2656559118
+    ],
+    "provenance": {
+      "model": "Horizons geometric state at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "target": 920000617,
+      "center": 10,
+      "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920000617&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sourcePath": "src/planets/menoetius/source/orbit/patroclus-epoch.txt",
+      "sha256": "427924d795a0887115acb4ee033f42f7a2c254d63a9a2d6abe51b421c9132a97",
+      "solution": "tnosat_v001_20000617_jpl082_20230601",
+      "limitations": [
+        "The JPL satellite solution uses its own JPL#82 barycenter, not the current integrated 617; orbit.",
+        "The response contains no covariance or scene-epoch uncertainty bound; do not infer one from printed digits.",
+        "The primary response contains an inconsistent satellite provisional-designation note; target and center numeric IDs plus the Menoetius response establish identity."
+      ],
+      "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+    }
+  },
+  "sylvia": {
+    "positionKm": [
+      -303715339.4835702,
+      392807937.420781,
+      259332875.2341258
+    ],
+    "velocityKmPerDay": [
+      -1091984.678341611,
+      -661020.912473434,
+      -108839.3132098869
+    ],
+    "provenance": {
+      "model": "Horizons numbered-asteroid geometric state at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "target": 87,
+      "targetKind": "numbered-asteroid",
+      "center": 10,
+      "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259&CENTER=500%4010&VEC_CORR=NONE",
+      "sourcePath": "src/planets/romulus/source/orbit/sylvia-heliocentric.txt",
+      "sha256": "52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118",
+      "qualification": [
+        "This is an extrapolation of rounded 2021 published elements to 2026-09-03, beyond the retained 2002–2018 astrometry; current phase is approximate.",
+        "The full model covariance and an explicit time scale for the printed pericenter epoch are absent. Quoted independent parameter uncertainties must not be treated as a scene covariance.",
+        "The six independent Miriade 2024-solution projections differ by 23–63 mas, including about 42 mas (140 km on the sky plane) at the scene epoch; this is measured disagreement, not a guaranteed error bound.",
+        "The printed parameters differ from six reported paper-fit positions by 7–62 mas with the documented geometric projection. The paper’s 9.85 mas fit RMS is not achieved or asserted for this illustration.",
+        "Miriade permits orbit computation from 1990 to 2030, but its position-error service stops at 2026-Jan-01; empty errors at this scene date are unavailable, not zero.",
+        "Sky-plane checks do not independently determine the line-of-sight component, and geocentric projection omits observatory parallax and differential aberration.",
+        "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
+      ]
+    }
   }
 });
 
 export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
+  // subsolar latitude -13.971°, longitude -49.430°
+  hiiaka: Object.freeze([
+    0.6311340057882743,
+    -0.7371438613524884,
+    -0.24143072382774722,
+  ]),
+  // subsolar latitude 16.046°, longitude -17.794°
+  squannit: Object.freeze([
+    0.9150622394486375,
+    -0.29369530303916935,
+    0.2764130367909134,
+  ]),
+  // subsolar latitude -27.578°, longitude -142.289°
+  romulus: Object.freeze([
+    -0.7012265317806313,
+    -0.5421795083972158,
+    -0.4629500316460305,
+  ]),
+  // subsolar latitude 36.705°, longitude 7.617°
+  menoetius: Object.freeze([
+    0.7946527885056824,
+    0.10626582967967846,
+    0.597690989695037,
+  ]),
+  // subsolar latitude -20.392°, longitude 150.304°
+  caliban: Object.freeze([
+    -0.814227403297671,
+    0.4643510232819451,
+    -0.34844205098716546,
+  ]),
+  // subsolar latitude -20.531°, longitude 150.433°
+  sycorax: Object.freeze([
+    -0.8145396185263766,
+    0.46209333061072433,
+    -0.3507063781227721,
+  ]),
+  // subsolar latitude -20.471°, longitude 149.865°
+  prospero: Object.freeze([
+    -0.810226993420195,
+    0.47033482250188385,
+    -0.3497390082266959,
+  ]),
+  // subsolar latitude -20.282°, longitude 150.064°
+  setebos: Object.freeze([
+    -0.8128506194898415,
+    0.46809020448074756,
+    -0.34664885816075164,
+  ]),
+  // subsolar latitude -1.435°, longitude 99.751°
+  paaliaq: Object.freeze([
+    -0.16931431000193545,
+    0.9852437060497964,
+    -0.02505003229201269,
+  ]),
+  // subsolar latitude -2.339°, longitude 100.039°
+  tarvos: Object.freeze([
+    -0.17417963065255662,
+    0.9838675484742985,
+    -0.04081792896403496,
+  ]),
+  // subsolar latitude -1.416°, longitude 100.470°
+  ijiraq: Object.freeze([
+    -0.18166483083708496,
+    0.9830499258641134,
+    -0.024713002559266044,
+  ]),
+  // subsolar latitude -1.684°, longitude 100.137°
+  suttungr: Object.freeze([
+    -0.17591886635074167,
+    0.9839657106537499,
+    -0.029394433478654516,
+  ]),
+  // subsolar latitude -1.461°, longitude 99.236°
+  mundilfari: Object.freeze([
+    -0.16044912625549984,
+    0.9867145596586943,
+    -0.025504031865484552,
+  ]),
+  // subsolar latitude -1.905°, longitude 99.610°
+  skathi: Object.freeze([
+    -0.16685472917617022,
+    0.9854207889882654,
+    -0.03324707477796488,
+  ]),
+  // subsolar latitude -1.727°, longitude 100.424°
+  erriapus: Object.freeze([
+    -0.18084542593611624,
+    0.9830494637986452,
+    -0.030144379960127237,
+  ]),
+  // subsolar latitude -1.455°, longitude 99.412°
+  thrymr: Object.freeze([
+    -0.16347398077802658,
+    0.9862210208182801,
+    -0.02538416247849882,
+  ]),
+  // subsolar latitude -1.816°, longitude 99.542°
+  bebhionn: Object.freeze([
+    -0.1656914764056711,
+    0.9856682072139222,
+    -0.031694162462536424,
+  ]),
+  // subsolar latitude -1.356°, longitude 99.407°
+  bergelmir: Object.freeze([
+    -0.16340043759656256,
+    0.9862759061118982,
+    -0.023667150576401133,
+  ]),
+  // subsolar latitude -2.799°, longitude -9.788°
+  bestla: Object.freeze([
+    0.9842677977595455,
+    -0.16980277735086535,
+    -0.04882539398209396,
+  ]),
+  // subsolar latitude -1.569°, longitude 99.395°
+  fornjot: Object.freeze([
+    -0.16318419935294193,
+    0.9862155331309399,
+    -0.02738319361935925,
+  ]),
+  // subsolar latitude -1.688°, longitude 100.441°
+  hati: Object.freeze([
+    -0.18113585455378464,
+    0.9830167235322302,
+    -0.02946054057598556,
+  ]),
+  // subsolar latitude -2.009°, longitude 99.733°
+  hyrrokkin: Object.freeze([
+    -0.16894780202485188,
+    0.9850014753749639,
+    -0.03505329799200036,
+  ]),
+  // subsolar latitude -1.769°, longitude 100.518°
+  loge: Object.freeze([
+    -0.18245097233171648,
+    0.9827304539307671,
+    -0.030862560040271783,
+  ]),
+  // subsolar latitude -1.408°, longitude 99.572°
+  skoll: Object.freeze([
+    -0.16623287012063223,
+    0.9857803832602636,
+    -0.024569673801351322,
+  ]),
+  // subsolar latitude -1.877°, longitude 100.647°
+  greip: Object.freeze([
+    -0.18466182264528175,
+    0.982255945901229,
+    -0.03276076920654441,
+  ]),
+  // subsolar latitude -1.066°, longitude 99.502°
+  tarqeq: Object.freeze([
+    -0.16504664682392886,
+    0.9861102693777309,
+    -0.018604864953986725,
+  ]),
   // subsolar latitude -1.066°, longitude 99.939°
   albiorix: Object.freeze([
     -0.17257194293511177,
@@ -489,9 +862,9 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
   ]),
   // subsolar latitude -24.831°, longitude -154.517°
   sylvia: Object.freeze([
-    -0.8192573094448139,
-    -0.39046922152196395,
-    -0.4199419578528393,
+    -0.8192573094566502,
+    -0.3904692214883611,
+    -0.4199419578609926,
   ]),
   // subsolar latitude 4.644°, longitude 109.245°
   eunomia: Object.freeze([
@@ -1441,11 +1814,11 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.12385699249694682,
     -0.6947532246593462,
   ]),
-  // subsolar latitude -21.455°, longitude -19.723°
+  // subsolar latitude -21.456°, longitude -19.723°
   haumea: Object.freeze([
-    0.8761058512125794,
-    -0.3140829297079759,
-    -0.36577376988671045,
+    0.8761039920619402,
+    -0.3140815383658555,
+    -0.3657794176151382,
   ]),
   // subsolar latitude -20.268°, longitude -68.219°
   makemake: Object.freeze([
@@ -1462,6 +1835,162 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude -28.201°
+  hiiaka: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude -6.338°
+  squannit: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude -8.385°
+  romulus: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 152.398°, Sun ecliptic latitude -10.864°
+  menoetius: Object.freeze([
+    0.3975348408360991,
+    0.23800156200201386,
+    -0.8861835627035851,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 0.240°
+  caliban: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 0.128°
+  sycorax: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 0.081°
+  prospero: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 0.303°
+  setebos: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.543°
+  paaliaq: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 1.824°
+  tarvos: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.842°
+  ijiraq: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.465°
+  suttungr: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.317°
+  mundilfari: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.055°
+  skathi: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.538°
+  erriapus: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.392°
+  thrymr: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.111°
+  bebhionn: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.481°
+  bergelmir: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 180.000°, Sun ecliptic latitude 2.799°
+  bestla: Object.freeze([
+    -4.871365207859557e-17,
+    -1.9391710459615297e-12,
+    -1,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.280°
+  fornjot: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.580°
+  hati: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.008°
+  hyrrokkin: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.537°
+  loge: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.498°
+  skoll: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.487°
+  greip: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.785°
+  tarqeq: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
   // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.957°
   albiorix: Object.freeze([
     -0.3977771559319137,
@@ -2823,6 +3352,162 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
 // The orbit lies in the plane perpendicular to this direction; every
 // direction from the body to another point of its orbit does too.
 export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
+  // orbital inclination to the ecliptic 126.094°, obliquity to the orbit 104.650°
+  hiiaka: Object.freeze([
+    0.8976598960554517,
+    0.3608946103451171,
+    -0.25290668484158707,
+  ]),
+  // orbital inclination to the ecliptic 152.300°, obliquity to the orbit 154.945°
+  squannit: Object.freeze([
+    0.13637393371150106,
+    -0.4009326184597491,
+    -0.9059002073402236,
+  ]),
+  // orbital inclination to the ecliptic 25.377°, obliquity to the orbit 7.400°
+  romulus: Object.freeze([
+    0.015919325934659497,
+    -0.12780798394293047,
+    0.9916711623830905,
+  ]),
+  // orbital inclination to the ecliptic 152.530°, obliquity to the orbit 0.221°
+  menoetius: Object.freeze([
+    -0.0004212691264865627,
+    -0.0038296419969203743,
+    0.9999925781597074,
+  ]),
+  // orbital inclination to the ecliptic 139.515°, obliquity to the orbit 116.122°
+  caliban: Object.freeze([
+    0.8965291397478383,
+    -0.04878636716698529,
+    -0.4402901224893073,
+  ]),
+  // orbital inclination to the ecliptic 154.334°, obliquity to the orbit 142.831°
+  sycorax: Object.freeze([
+    0.42795180349886214,
+    0.4264643257132872,
+    -0.7968597321837657,
+  ]),
+  // orbital inclination to the ecliptic 143.836°, obliquity to the orbit 158.488°
+  prospero: Object.freeze([
+    -0.11623648337353021,
+    0.3477891792641593,
+    -0.9303395975232472,
+  ]),
+  // orbital inclination to the ecliptic 149.992°, obliquity to the orbit 137.941°
+  setebos: Object.freeze([
+    0.4645130603556507,
+    0.48269176711785267,
+    -0.7424528771010808,
+  ]),
+  // orbital inclination to the ecliptic 43.370°, obliquity to the orbit 64.769°
+  paaliaq: Object.freeze([
+    -0.8443072118945925,
+    0.32472043670983813,
+    0.42626514040647445,
+  ]),
+  // orbital inclination to the ecliptic 40.893°, obliquity to the orbit 56.377°
+  tarvos: Object.freeze([
+    -0.6232040735027599,
+    -0.5522717181275604,
+    0.5537261345882091,
+  ]),
+  // orbital inclination to the ecliptic 48.850°, obliquity to the orbit 32.876°
+  ijiraq: Object.freeze([
+    0.2828337971051104,
+    -0.4633202301284079,
+    0.8398448711332733,
+  ]),
+  // orbital inclination to the ecliptic 173.957°, obliquity to the orbit 155.694°
+  suttungr: Object.freeze([
+    0.39792636681565574,
+    0.10524025173671808,
+    -0.9113611227210016,
+  ]),
+  // orbital inclination to the ecliptic 168.670°, obliquity to the orbit 151.707°
+  mundilfari: Object.freeze([
+    0.4339964921601227,
+    -0.1905228061299954,
+    -0.8805385313187951,
+  ]),
+  // orbital inclination to the ecliptic 148.692°, obliquity to the orbit 151.203°
+  skathi: Object.freeze([
+    0.12661516949114873,
+    0.46477202930729056,
+    -0.876330736439337,
+  ]),
+  // orbital inclination to the ecliptic 39.688°, obliquity to the orbit 35.712°
+  erriapus: Object.freeze([
+    -0.061770428783786,
+    -0.5804278435244855,
+    0.811965474998403,
+  ]),
+  // orbital inclination to the ecliptic 173.633°, obliquity to the orbit 156.542°
+  thrymr: Object.freeze([
+    0.3825755949950091,
+    0.11001803193290405,
+    -0.91735050376823,
+  ]),
+  // orbital inclination to the ecliptic 42.127°, obliquity to the orbit 18.713°
+  bebhionn: Object.freeze([
+    0.32008213059673507,
+    0.02187165182011247,
+    0.9471372976075403,
+  ]),
+  // orbital inclination to the ecliptic 157.539°, obliquity to the orbit 139.004°
+  bergelmir: Object.freeze([
+    0.5824039544906594,
+    0.3019135821129051,
+    -0.7547541472091399,
+  ]),
+  // orbital inclination to the ecliptic 143.148°, obliquity to the orbit 36.852°
+  bestla: Object.freeze([
+    0.26799631732099066,
+    -0.5365466090276927,
+    0.8001847975582084,
+  ]),
+  // orbital inclination to the ecliptic 166.899°, obliquity to the orbit 158.012°
+  fornjot: Object.freeze([
+    0.3097881656102702,
+    0.2102819256717114,
+    -0.9272609148366066,
+  ]),
+  // orbital inclination to the ecliptic 164.402°, obliquity to the orbit 169.311°
+  hati: Object.freeze([
+    0.15488009872163497,
+    0.10205324299668683,
+    -0.9826481011093624,
+  ]),
+  // orbital inclination to the ecliptic 152.847°, obliquity to the orbit 149.795°
+  hyrrokkin: Object.freeze([
+    0.24352795295904572,
+    -0.44022382099349294,
+    -0.8642321005132045,
+  ]),
+  // orbital inclination to the ecliptic 167.918°, obliquity to the orbit 168.630°
+  loge: Object.freeze([
+    0.19702322981021328,
+    -0.006795992736387847,
+    -0.9803752655987802,
+  ]),
+  // orbital inclination to the ecliptic 156.079°, obliquity to the orbit 159.822°
+  skoll: Object.freeze([
+    0.13307022456534823,
+    0.31824444473430086,
+    -0.938622814942128,
+  ]),
+  // orbital inclination to the ecliptic 173.413°, obliquity to the orbit 163.079°
+  greip: Object.freeze([
+    0.29070861975399914,
+    0.014122663225801975,
+    -0.9567073997749445,
+  ]),
+  // orbital inclination to the ecliptic 48.974°, obliquity to the orbit 56.432°
+  tarqeq: Object.freeze([
+    -0.3748148787161197,
+    -0.7441635196068556,
+    0.5529326023841943,
+  ]),
   // orbital inclination to the ecliptic 33.192°, obliquity to the orbit 45.196°
   albiorix: Object.freeze([
     -0.4784324950314792,
@@ -3209,9 +3894,9 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
   ]),
   // orbital inclination to the ecliptic 10.835°, obliquity to the orbit 28.393°
   sylvia: Object.freeze([
-    -0.47321558186815466,
-    0.046765520196986994,
-    0.8797044953834718,
+    -0.47321558186812956,
+    0.046765520196915704,
+    0.8797044953834893,
   ]),
   // orbital inclination to the ecliptic 11.761°, obliquity to the orbit 168.988°
   eunomia: Object.freeze([
@@ -4161,11 +4846,11 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.31992604595287655,
     -0.46437904019252146,
   ]),
-  // orbital inclination to the ecliptic 28.208°, obliquity to the orbit 87.034°
+  // orbital inclination to the ecliptic 28.209°, obliquity to the orbit 87.029°
   haumea: Object.freeze([
-    0.3560881271482898,
-    0.9330188008541714,
-    0.05174130803011588,
+    0.35611638812303326,
+    0.9330034751570396,
+    0.051823097698737206,
   ]),
   // orbital inclination to the ecliptic 29.032°, obliquity to the orbit 39.979°
   makemake: Object.freeze([
@@ -4185,6 +4870,162 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
 // the epoch, perpendicular to the orbit normal but not to the Sun direction
 // (the flight-path angle is the orbit's eccentricity showing).
 export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
+  // flight-path angle -0.193°
+  hiiaka: Object.freeze([
+    -0.0687520220476506,
+    0.6815491598247797,
+    0.7285354502057511,
+  ]),
+  // flight-path angle -0.000°
+  squannit: Object.freeze([
+    0.8780657365339071,
+    0.4723275498522179,
+    -0.07685862330127818,
+  ]),
+  // flight-path angle -0.000°
+  romulus: Object.freeze([
+    0.12980875201847203,
+    0.9836673417768818,
+    0.12469261654568797,
+  ]),
+  // flight-path angle -0.204°
+  menoetius: Object.freeze([
+    -0.9801146058403886,
+    -0.1984287880587733,
+    -0.001172811948429997,
+  ]),
+  // flight-path angle -3.622°
+  caliban: Object.freeze([
+    0.2220885201326588,
+    0.9094845291763656,
+    0.35144641186691633,
+  ]),
+  // flight-path angle 22.939°
+  sycorax: Object.freeze([
+    0.5407746579106519,
+    -0.8272625763303911,
+    -0.15231348976640638,
+  ]),
+  // flight-path angle -11.171°
+  prospero: Object.freeze([
+    -0.47132051653216755,
+    0.8051923296630306,
+    0.3598920434625812,
+  ]),
+  // flight-path angle -27.488°
+  setebos: Object.freeze([
+    -0.8074850565863594,
+    0.5750853147201689,
+    -0.13131932143796793,
+  ]),
+  // flight-path angle 28.324°
+  paaliaq: Object.freeze([
+    -0.20316227244328613,
+    -0.9300680101654318,
+    0.3061022501103091,
+  ]),
+  // flight-path angle 29.361°
+  tarvos: Object.freeze([
+    -0.7209980300376546,
+    0.6800056788945466,
+    -0.13324457719918015,
+  ]),
+  // flight-path angle -19.541°
+  ijiraq: Object.freeze([
+    0.10677136287945521,
+    0.8853627521731451,
+    0.4524739474635614,
+  ]),
+  // flight-path angle 1.391°
+  suttungr: Object.freeze([
+    -0.8465629382482208,
+    -0.34069112738303226,
+    -0.40897524045719125,
+  ]),
+  // flight-path angle 3.382°
+  mundilfari: Object.freeze([
+    -0.5659888240829756,
+    0.7027647257549048,
+    -0.4310201749892966,
+  ]),
+  // flight-path angle -13.270°
+  skathi: Object.freeze([
+    0.878532407317788,
+    0.35766991617289934,
+    0.3166276051725171,
+  ]),
+  // flight-path angle 5.278°
+  erriapus: Object.freeze([
+    -0.02513457323136442,
+    0.814165598346489,
+    0.5800884688541745,
+  ]),
+  // flight-path angle -27.624°
+  thrymr: Object.freeze([
+    0.6816607310239211,
+    0.6366183797127832,
+    0.36063234240955716,
+  ]),
+  // flight-path angle 24.454°
+  bebhionn: Object.freeze([
+    0.1785129747132405,
+    -0.9832179934054938,
+    -0.03762306875714027,
+  ]),
+  // flight-path angle -3.691°
+  bergelmir: Object.freeze([
+    0.3294970019340054,
+    0.7611022712201762,
+    0.5587083840967411,
+  ]),
+  // flight-path angle -26.450°
+  bestla: Object.freeze([
+    0.15046177929257729,
+    -0.7970660746880877,
+    -0.5848477798140603,
+  ]),
+  // flight-path angle 8.014°
+  fornjot: Object.freeze([
+    0.36188032775793155,
+    0.8757625396055231,
+    0.31950368167753035,
+  ]),
+  // flight-path angle -25.530°
+  hati: Object.freeze([
+    -0.9287917127427423,
+    -0.32393480323459967,
+    -0.18003387901660223,
+  ]),
+  // flight-path angle 21.167°
+  hyrrokkin: Object.freeze([
+    -0.9491143691660706,
+    -0.2916250018768509,
+    -0.11889816030039646,
+  ]),
+  // flight-path angle 11.391°
+  loge: Object.freeze([
+    0.9703975910584165,
+    -0.14111689033071292,
+    0.19599627172834702,
+  ]),
+  // flight-path angle 30.979°
+  skoll: Object.freeze([
+    -0.9877037392977641,
+    -0.03582852959770812,
+    -0.1521763445614344,
+  ]),
+  // flight-path angle 14.791°
+  greip: Object.freeze([
+    -0.10210729689423721,
+    -0.9937232993208966,
+    -0.04569577997741152,
+  ]),
+  // flight-path angle 5.159°
+  tarqeq: Object.freeze([
+    0.6644805255673876,
+    -0.6315402342271923,
+    -0.39952792605017184,
+  ]),
   // flight-path angle 1.513°
   albiorix: Object.freeze([
     0.8755676133977893,
@@ -4571,9 +5412,9 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
   ]),
   // flight-path angle 3.497°
   sylvia: Object.freeze([
-    -0.27328494588471197,
-    0.9415322490501498,
-    -0.19705928638700862,
+    -0.2732849458518782,
+    0.9415322490632488,
+    -0.1970592863699549,
   ]),
   // flight-path angle 0.089°
   eunomia: Object.freeze([
@@ -5523,11 +6364,11 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     -0.10162703185290073,
     0.8834350301331352,
   ]),
-  // flight-path angle -6.789°
+  // flight-path angle -6.778°
   haumea: Object.freeze([
-    0.4263158159998441,
-    -0.21147786572868782,
-    0.8795066442814552,
+    0.4261305582263728,
+    -0.21150526260455194,
+    0.8795898312487811,
   ]),
   // flight-path angle 1.362°
   makemake: Object.freeze([
@@ -5547,6 +6388,162 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
 // (prime meridian), +Y and +Z (north pole) axes in ICRF, so an ICRF direction
 // is the matrix times a body-fixed direction and the transpose goes back.
 export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  hiiaka: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  squannit: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  romulus: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 178.000°, Dec -74.100°, prime meridian W 0.000°
+  menoetius: Object.freeze([
+    -0.03489949670250076, -0.9611554427288145, -0.27379233013853554,
+    -0.9993908270190958, 0.033564287661271466, 0.009561038849376237,
+    0, 0.2739592186924326, -0.9617413095492113,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  caliban: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  sycorax: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  prospero: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  setebos: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  paaliaq: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  tarvos: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  ijiraq: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  suttungr: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  mundilfari: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  skathi: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  erriapus: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  thrymr: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  bebhionn: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  bergelmir: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 90.000°, Dec -66.561°, prime meridian W 0.000°
+  bestla: Object.freeze([
+    -1, 1.1235914705890815e-16, 4.8713652078377687e-17,
+    1.2246467991473532e-16, 0.9174820620699532, 0.3977771559301345,
+    0, 0.3977771559301345, -0.9174820620699532,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  fornjot: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  hati: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  hyrrokkin: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  loge: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  skoll: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  greip: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  tarqeq: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
   // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
   albiorix: Object.freeze([
     6.123233995736766e-17, -1, 0,
@@ -6911,6 +7908,451 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
 // frame; inclinationDegrees is the same value as
 // BODY_FIXED_ORBIT_NORMAL_DIRECTIONS' orbital inclination comment above.
 export const BODY_ORBITS = Object.freeze({
+  // a 0.00033032 AU, e 0.061932, perihelion 0.00030986 AU, aphelion 0.00035078 AU
+  hiiaka: Object.freeze({
+    centerBodyId: "haumea",
+    centerPositionAu: Object.freeze([0.00015259663558468667,-0.00022247618354594547,0.0002241515462550435]),
+    parentHeliocentricState: {"positionKm":[-5487487239.17944,-4698328457.056636,1797316425.25533],"velocityKmPerDay":[210094.2578290008,-230096.3537848578,-123974.8700480089],"provenance":{"model":"Horizons geometric state at prepared epoch","epochJdTt":2461286.5,"referenceFrame":"ICRF","target":920136108,"center":10,"source":"https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259","sourcePath":"src/planets/hiiaka/source/orbit/haumea-epoch.txt","sha256":"3337cf80561af77c3a24e634c5f0a58a258197b55a8c9faad3f43f8113c6d08f","solution":"tnosat_v001b_20136108_jpl110_20221014","limitations":["Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.","This is the retained JPL solution, not the newer Proudfoot et al. 2024 interacting solution; phase accuracy is limited.","The solution GM values define this orbit calculation and are separate from the occultation shape/size measurements."],"timeQualification":"UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."}},
+    semiMajorAxisAu: 0.000330322293966384,
+    eccentricity: 0.06193210232895721,
+    heliocentricDistanceAu: 49.76207621333537,
+    perihelionDirection: Object.freeze([
+      0.43090454914243254,
+      -0.5985422098424102,
+      0.6753284331088996,
+    ]),
+    trueAnomalyDegrees: 182.92750433265272,
+    inclinationDegrees: 126.09358913902425,
+    perihelionAu: 0.000309864739854922,
+    aphelionAu: 0.00035077984807784597,
+  }),
+  // a 1.7028e-8 AU, e 0.00023553, perihelion 1.7024e-8 AU, aphelion 1.7032e-8 AU
+  squannit: Object.freeze({
+    centerBodyId: "moshup",
+    centerPositionAu: Object.freeze([7.812673568357305e-9,-1.3369669265768539e-8,7.093255396035994e-9]),
+    semiMajorAxisAu: 1.7028317282655093e-8,
+    eccentricity: 0.00023553148666038783,
+    heliocentricDistanceAu: 1.082265227699493,
+    perihelionDirection: Object.freeze([
+      0.45869675443510877,
+      -0.7849584199851175,
+      0.4164583609019817,
+    ]),
+    trueAnomalyDegrees: 180.00000085377363,
+    inclinationDegrees: 152.3,
+    perihelionAu: 1.7024306577770185e-8,
+    aphelionAu: 1.7032327987540002e-8,
+  }),
+  // a 0.0000089614 AU, e 6.5778e-16, perihelion 0.0000089614 AU, aphelion 0.0000089614 AU
+  romulus: Object.freeze({
+    centerBodyId: "sylvia",
+    centerPositionAu: Object.freeze([-0.000008884390620352714,0.0000011357855119821134,2.890030257666556e-7]),
+    parentHeliocentricState: {"positionKm":[-303715339.4835702,392807937.420781,259332875.2341258],"velocityKmPerDay":[-1091984.678341611,-661020.912473434,-108839.3132098869],"provenance":{"model":"Horizons numbered-asteroid geometric state at prepared epoch","epochJdTt":2461286.5,"referenceFrame":"ICRF","target":87,"targetKind":"numbered-asteroid","center":10,"source":"https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259&CENTER=500%4010&VEC_CORR=NONE","sourcePath":"src/planets/romulus/source/orbit/sylvia-heliocentric.txt","sha256":"52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118","qualification":["This is an extrapolation of rounded 2021 published elements to 2026-09-03, beyond the retained 2002–2018 astrometry; current phase is approximate.","The full model covariance and an explicit time scale for the printed pericenter epoch are absent. Quoted independent parameter uncertainties must not be treated as a scene covariance.","The six independent Miriade 2024-solution projections differ by 23–63 mas, including about 42 mas (140 km on the sky plane) at the scene epoch; this is measured disagreement, not a guaranteed error bound.","The printed parameters differ from six reported paper-fit positions by 7–62 mas with the documented geometric projection. The paper’s 9.85 mas fit RMS is not achieved or asserted for this illustration.","Miriade permits orbit computation from 1990 to 2030, but its position-error service stops at 2026-Jan-01; empty errors at this scene date are unavailable, not zero.","Sky-plane checks do not independently determine the line-of-sight component, and geocentric projection omits observatory parallax and differential aberration.","No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."]}},
+    semiMajorAxisAu: 0.000008961357496113082,
+    eccentricity: 6.577757163938442e-16,
+    heliocentricDistanceAu: 3.744535674842145,
+    perihelionDirection: Object.freeze([
+      0.9991981626337085,
+      0.03847375493375645,
+      -0.011081605060565299,
+    ]),
+    trueAnomalyDegrees: 350.4348928866761,
+    inclinationDegrees: 25.376899319450917,
+    perihelionAu: 0.000008961357496113075,
+    aphelionAu: 0.000008961357496113088,
+  }),
+  // a 0.0000046293 AU, e 0.0052519, perihelion 0.0000046050 AU, aphelion 0.0000046536 AU
+  menoetius: Object.freeze({
+    centerBodyId: "patroclus",
+    centerPositionAu: Object.freeze([8.989773792659103e-7,-0.00000452293584632146,-1.694263939671887e-8]),
+    parentHeliocentricState: {"positionKm":[219530347.7320293,587045097.8743559,408156964.6816921],"velocityKmPerDay":[-1023130.592430021,209778.8583424715,535080.2656559118],"provenance":{"model":"Horizons geometric state at prepared epoch","epochJdTt":2461286.5,"referenceFrame":"ICRF","target":920000617,"center":10,"source":"https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920000617&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259","sourcePath":"src/planets/menoetius/source/orbit/patroclus-epoch.txt","sha256":"427924d795a0887115acb4ee033f42f7a2c254d63a9a2d6abe51b421c9132a97","solution":"tnosat_v001_20000617_jpl082_20230601","limitations":["The JPL satellite solution uses its own JPL#82 barycenter, not the current integrated 617; orbit.","The response contains no covariance or scene-epoch uncertainty bound; do not infer one from printed digits.","The primary response contains an inconsistent satellite provisional-designation note; target and center numeric IDs plus the Menoetius response establish identity."],"timeQualification":"UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."}},
+    semiMajorAxisAu: 0.000004629332192936471,
+    eccentricity: 0.005251850219817309,
+    heliocentricDistanceAu: 4.999640754335188,
+    perihelionDirection: Object.freeze([
+      -0.809701732223975,
+      0.5868385390201191,
+      0.0019062933211987654,
+    ]),
+    trueAnomalyDegrees: 317.17470262233604,
+    inclinationDegrees: 152.53042640575762,
+    perihelionAu: 0.00000460501963364139,
+    aphelionAu: 0.000004653644752231552,
+  }),
+  // a 0.047926 AU, e 0.079333, perihelion 0.044124 AU, aphelion 0.051729 AU
+  caliban: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([0.018091919182965124,-0.016176761940857712,0.0386316597177894]),
+    semiMajorAxisAu: 0.047926492696563086,
+    eccentricity: 0.07933257546782416,
+    heliocentricDistanceAu: 19.410648871355058,
+    perihelionDirection: Object.freeze([
+      -0.0549314713679019,
+      0.974002333587139,
+      -0.21977713170429058,
+    ]),
+    trueAnomalyDegrees: 303.5898719138689,
+    inclinationDegrees: 139.51510027501064,
+    perihelionAu: 0.044124360597804876,
+    aphelionAu: 0.0517286247953213,
+  }),
+  // a 0.081608 AU, e 0.46324, perihelion 0.043804 AU, aphelion 0.11941 AU
+  sycorax: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([-0.09109735067837631,-0.0014943434529175205,-0.04972338052674309]),
+    semiMajorAxisAu: 0.08160786121589678,
+    eccentricity: 0.46323588816873934,
+    heliocentricDistanceAu: 19.537259004661063,
+    perihelionDirection: Object.freeze([
+      -0.8463870217107938,
+      0.49833915704453763,
+      -0.18784859338220142,
+    ]),
+    trueAnomalyDegrees: 145.6555803590142,
+    inclinationDegrees: 154.3339683044431,
+    perihelionAu: 0.04380417114399962,
+    aphelionAu: 0.11941155128779393,
+  }),
+  // a 0.10819 AU, e 0.38664, perihelion 0.066360 AU, aphelion 0.15002 AU
+  prospero: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([0.11119469595930642,0.09100268398114934,0.020126917519570624]),
+    semiMajorAxisAu: 0.10819039307068508,
+    eccentricity: 0.38663574426790914,
+    heliocentricDistanceAu: 19.391577394560727,
+    perihelionDirection: Object.freeze([
+      0.5204074206145847,
+      0.8191446444182712,
+      0.24120150930319395,
+    ]),
+    trueAnomalyDegrees: 198.90134976540335,
+    inclinationDegrees: 143.8362362598142,
+    perihelionAu: 0.06636011992316311,
+    aphelionAu: 0.15002066621820703,
+  }),
+  // a 0.11596 AU, e 0.47753, perihelion 0.060587 AU, aphelion 0.17134 AU
+  setebos: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([-0.0050132987213091515,0.08509810405981667,0.05218837813221135]),
+    semiMajorAxisAu: 0.11596306777804526,
+    eccentricity: 0.4775303899117205,
+    heliocentricDistanceAu: 19.471951014424214,
+    perihelionDirection: Object.freeze([
+      -0.8737286981309738,
+      0.38642979202827443,
+      -0.2954152634772593,
+    ]),
+    trueAnomalyDegrees: 257.37441267826676,
+    inclinationDegrees: 149.9924924610442,
+    perihelionAu: 0.060587178806636034,
+    aphelionAu: 0.17133895674945449,
+  }),
+  // a 0.096772 AU, e 0.55620, perihelion 0.042948 AU, aphelion 0.15060 AU
+  paaliaq: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.03456526712162152,0.03843581576688162,0.03918408485103914]),
+    semiMajorAxisAu: 0.09677229173673822,
+    eccentricity: 0.5561957823185052,
+    heliocentricDistanceAu: 9.474052425526029,
+    perihelionDirection: Object.freeze([
+      -0.08544489717836351,
+      0.7037195081018854,
+      -0.70532122005723,
+    ]),
+    trueAnomalyDegrees: 86.86909221850985,
+    inclinationDegrees: 43.369798757073035,
+    perihelionAu: 0.042947951227468494,
+    aphelionAu: 0.15059663224600797,
+  }),
+  // a 0.12217 AU, e 0.55955, perihelion 0.053809 AU, aphelion 0.19053 AU
+  tarvos: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.014312724805252287,-0.120571220911632,-0.10414593663875694]),
+    semiMajorAxisAu: 0.12216943756683417,
+    eccentricity: 0.5595533531034882,
+    heliocentricDistanceAu: 9.325689723769255,
+    perihelionDirection: Object.freeze([
+      0.4857918013084113,
+      -0.8282426460325472,
+      -0.27932140103209774,
+    ]),
+    trueAnomalyDegrees: 148.16789045475414,
+    inclinationDegrees: 40.8932901765319,
+    perihelionAu: 0.053809119129544856,
+    aphelionAu: 0.19052975600412347,
+  }),
+  // a 0.075582 AU, e 0.42967, perihelion 0.043107 AU, aphelion 0.10806 AU
+  ijiraq: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([-0.08385377916586727,0.02527945770589099,0.04218537034952996]),
+    semiMajorAxisAu: 0.0755820495832888,
+    eccentricity: 0.42966839923223366,
+    heliocentricDistanceAu: 9.481811574097803,
+    perihelionDirection: Object.freeze([
+      -0.515182404370692,
+      0.665193453129577,
+      0.5404671684204156,
+    ]),
+    trueAnomalyDegrees: 211.58006919177646,
+    inclinationDegrees: 48.84960605588658,
+    perihelionAu: 0.043106831328145793,
+    aphelionAu: 0.10805726783843182,
+  }),
+  // a 0.13149 AU, e 0.081386, perihelion 0.12079 AU, aphelion 0.14220 AU
+  suttungr: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([-0.04717284521774308,0.13353018266771813,-0.005177496333577632]),
+    semiMajorAxisAu: 0.13149473105826598,
+    eccentricity: 0.08138590426213618,
+    heliocentricDistanceAu: 9.583001508935995,
+    perihelionDirection: Object.freeze([
+      -0.08491723839434649,
+      0.9933591365929765,
+      0.07763174847144724,
+    ]),
+    trueAnomalyDegrees: 164.0361402554066,
+    inclinationDegrees: 173.9571812692948,
+    perihelionAu: 0.1207929134653826,
+    aphelionAu: 0.14219654865114933,
+  }),
+  // a 0.12373 AU, e 0.23332, perihelion 0.094858 AU, aphelion 0.15259 AU
+  mundilfari: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.11121412140402509,0.09751180579486429,0.03371608923542688]),
+    semiMajorAxisAu: 0.12372558247251494,
+    eccentricity: 0.23331660607946797,
+    heliocentricDistanceAu: 9.519801264828274,
+    perihelionDirection: Object.freeze([
+      0.8212731629919989,
+      0.48544921663799073,
+      0.29974897800439326,
+    ]),
+    trueAnomalyDegrees: 168.73481160032443,
+    inclinationDegrees: 168.6700789803307,
+    perihelionAu: 0.09485834948482244,
+    aphelionAu: 0.15259281546020745,
+  }),
+  // a 0.10468 AU, e 0.27995, perihelion 0.075374 AU, aphelion 0.13398 AU
+  skathi: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.07923876841688161,-0.08610243344290645,-0.03421673048695798]),
+    semiMajorAxisAu: 0.10467806679498008,
+    eccentricity: 0.2799491239928284,
+    heliocentricDistanceAu: 9.345969129879206,
+    perihelionDirection: Object.freeze([
+      0.9840066834633837,
+      -0.1704404145673596,
+      0.05177752390273814,
+    ]),
+    trueAnomalyDegrees: 221.80658124668756,
+    inclinationDegrees: 148.69156666529219,
+    perihelionAu: 0.07537353369446262,
+    aphelionAu: 0.13398259989549755,
+  }),
+  // a 0.11724 AU, e 0.40105, perihelion 0.070220 AU, aphelion 0.16426 AU
+  erriapus: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([-0.07065391087105484,-0.004243927216858382,-0.008408751483338459]),
+    semiMajorAxisAu: 0.1172393703523727,
+    eccentricity: 0.4010528262394771,
+    heliocentricDistanceAu: 9.451783579788158,
+    perihelionDirection: Object.freeze([
+      0.9769353768421881,
+      -0.20176655025671308,
+      -0.06991086232995172,
+    ]),
+    trueAnomalyDegrees: 18.538933693950828,
+    inclinationDegrees: 39.687883146496816,
+    perihelionAu: 0.07022018952601687,
+    aphelionAu: 0.1642585511787285,
+  }),
+  // a 0.13512 AU, e 0.47228, perihelion 0.071304 AU, aphelion 0.19893 AU
+  thrymr: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.1054730671964556,-0.04627468897937015,0.03843718522415901]),
+    semiMajorAxisAu: 0.13511657446450712,
+    eccentricity: 0.4722811422692215,
+    heliocentricDistanceAu: 9.378769893400381,
+    perihelionDirection: Object.freeze([
+      0.5506387501157327,
+      0.7701368963415924,
+      0.3220033039649174,
+    ]),
+    trueAnomalyDegrees: 253.3370985745937,
+    inclinationDegrees: 173.63326253102392,
+    perihelionAu: 0.07130356433690538,
+    aphelionAu: 0.19892958459210885,
+  }),
+  // a 0.11308 AU, e 0.46247, perihelion 0.060783 AU, aphelion 0.16537 AU
+  bebhionn: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.0676166982720333,0.05002138879439374,-0.024005967565137343]),
+    semiMajorAxisAu: 0.11307843806748741,
+    eccentricity: 0.4624677952242196,
+    heliocentricDistanceAu: 9.481726231669445,
+    perihelionDirection: Object.freeze([
+      -0.5745881752270677,
+      0.7993562819829377,
+      0.17572126605406166,
+    ]),
+    trueAnomalyDegrees: 87.97859585444621,
+    inclinationDegrees: 42.12697490479333,
+    perihelionAu: 0.060783302127018046,
+    aphelionAu: 0.16537357400795677,
+  }),
+  // a 0.12889 AU, e 0.14607, perihelion 0.11007 AU, aphelion 0.14772 AU
+  bergelmir: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.1112392041985544,-0.07640075331719841,0.05527591661970937]),
+    semiMajorAxisAu: 0.1288949343136186,
+    eccentricity: 0.14607007022831364,
+    heliocentricDistanceAu: 9.347702703492036,
+    perihelionDirection: Object.freeze([
+      0.8122808077013552,
+      -0.17992384675560427,
+      0.5548218622303018,
+    ]),
+    trueAnomalyDegrees: 202.45698868785803,
+    inclinationDegrees: 157.53908655304815,
+    perihelionAu: 0.11006724220635446,
+    aphelionAu: 0.14772262642088274,
+  }),
+  // a 0.13898 AU, e 0.54856, perihelion 0.062740 AU, aphelion 0.21522 AU
+  bestla: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.17339978710266696,-0.020170662246404705,-0.07159971668137347]),
+    semiMajorAxisAu: 0.13897884473151895,
+    eccentricity: 0.5485634295901065,
+    heliocentricDistanceAu: 9.620567203281015,
+    perihelionDirection: Object.freeze([
+      0.6776154106680766,
+      -0.4854328557502928,
+      -0.5524421216591373,
+    ]),
+    trueAnomalyDegrees: 207.8389456228525,
+    inclinationDegrees: 143.14775284618287,
+    perihelionAu: 0.062740133025126,
+    aphelionAu: 0.21521755643791188,
+  }),
+  // a 0.16637 AU, e 0.21930, perihelion 0.12989 AU, aphelion 0.20286 AU
+  fornjot: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.11313245131327876,-0.07619101887402532,0.020517957881322522]),
+    semiMajorAxisAu: 0.16637295686684642,
+    eccentricity: 0.21929953677922323,
+    heliocentricDistanceAu: 9.348487606076198,
+    perihelionDirection: Object.freeze([
+      -0.9087638074793761,
+      -0.22130699327261016,
+      -0.35379592556193257,
+    ]),
+    trueAnomalyDegrees: 47.48687692426961,
+    inclinationDegrees: 166.89897481343436,
+    perihelionAu: 0.12988744449335732,
+    aphelionAu: 0.20285846924033551,
+  }),
+  // a 0.13287 AU, e 0.43160, perihelion 0.075521 AU, aphelion 0.19021 AU
+  hati: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([-0.09115415459290686,0.09180321417153661,-0.0048330106506595]),
+    semiMajorAxisAu: 0.13286614877172018,
+    eccentricity: 0.4315981239596144,
+    heliocentricDistanceAu: 9.549804898240057,
+    perihelionDirection: Object.freeze([
+      -0.9094196577427873,
+      -0.3738603804980598,
+      -0.1821655895190893,
+    ]),
+    trueAnomalyDegrees: 247.54145412379154,
+    inclinationDegrees: 164.40153505197333,
+    perihelionAu: 0.07552136822410672,
+    aphelionAu: 0.19021092931933362,
+  }),
+  // a 0.12397 AU, e 0.38712, perihelion 0.075977 AU, aphelion 0.17196 AU
+  hyrrokkin: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.022303477749598233,0.1278740758266385,-0.05885189170361077]),
+    semiMajorAxisAu: 0.12396751226908417,
+    eccentricity: 0.3871215243819155,
+    heliocentricDistanceAu: 9.567182403973291,
+    perihelionDirection: Object.freeze([
+      0.8132723301247078,
+      0.578201188091986,
+      -0.06535673754514175,
+    ]),
+    trueAnomalyDegrees: 132.30132297785624,
+    inclinationDegrees: 152.84653203857346,
+    perihelionAu: 0.0759770199456425,
+    aphelionAu: 0.17195800459252586,
+  }),
+  // a 0.15580 AU, e 0.22557, perihelion 0.12065 AU, aphelion 0.19094 AU
+  loge: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([-0.0568819046552402,-0.16317706341776445,-0.010300246027761849]),
+    semiMajorAxisAu: 0.15579578171135286,
+    eccentricity: 0.22556638859645545,
+    heliocentricDistanceAu: 9.293125706363904,
+    perihelionDirection: Object.freeze([
+      -0.917128884896439,
+      -0.35468817855848483,
+      -0.18185407468483922,
+    ]),
+    trueAnomalyDegrees: 130.27825973233385,
+    inclinationDegrees: 167.91773124204366,
+    perihelionAu: 0.1206534898721613,
+    aphelionAu: 0.19093807355054443,
+  }),
+  // a 0.11858 AU, e 0.51570, perihelion 0.057428 AU, aphelion 0.17973 AU
+  skoll: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.05387136182177046,0.10215511720035887,0.04227360781541009]),
+    semiMajorAxisAu: 0.11858081883621019,
+    eccentricity: 0.515704666492821,
+    heliocentricDistanceAu: 9.533533010047304,
+    perihelionDirection: Object.freeze([
+      0.9807560002589645,
+      0.09422964306255001,
+      0.1709925212526625,
+    ]),
+    trueAnomalyDegrees: 124.51739187690602,
+    inclinationDegrees: 156.07850396062597,
+    perihelionAu: 0.05742813720583679,
+    aphelionAu: 0.17973350046658357,
+  }),
+  // a 0.12199 AU, e 0.26709, perihelion 0.089407 AU, aphelion 0.15457 AU
+  greip: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([-0.11788452808293035,0.047612297164261574,-0.03511798489170885]),
+    semiMajorAxisAu: 0.12198931909071033,
+    eccentricity: 0.267093527195219,
+    heliocentricDistanceAu: 9.512212212530846,
+    perihelionDirection: Object.freeze([
+      -0.1821213896864426,
+      0.982427645599329,
+      -0.040837734766240794,
+    ]),
+    trueAnomalyDegrees: 121.88943169628628,
+    inclinationDegrees: 173.41315357579072,
+    perihelionAu: 0.08940676157462943,
+    aphelionAu: 0.15457187660679123,
+  }),
+  // a 0.11783 AU, e 0.14604, perihelion 0.10062 AU, aphelion 0.13504 AU
+  tarqeq: Object.freeze({
+    centerBodyId: "saturn",
+    centerPositionAu: Object.freeze([0.07678577591018956,0.035960199408478506,0.1004475402661954]),
+    semiMajorAxisAu: 0.11783346958242229,
+    eccentricity: 0.14604369848269816,
+    heliocentricDistanceAu: 9.46321643376211,
+    perihelionDirection: Object.freeze([
+      0.10035217921319058,
+      0.5603413224733249,
+      0.8221599859248861,
+    ]),
+    trueAnomalyDegrees: 147.15795952582434,
+    inclinationDegrees: 48.97422002724639,
+    perihelionAu: 0.10062463387955682,
+    aphelionAu: 0.13504230528528774,
+  }),
   // a 0.11019 AU, e 0.60817, perihelion 0.043178 AU, aphelion 0.17721 AU
   albiorix: Object.freeze({
     centerBodyId: "saturn",
@@ -7947,18 +9389,18 @@ export const BODY_ORBITS = Object.freeze({
   }),
   // a 3.4931 AU, e 0.094255, perihelion 3.1638 AU, aphelion 3.8223 AU
   sylvia: Object.freeze({
-    semiMajorAxisAu: 3.4930585312192792,
-    eccentricity: 0.0942547438087025,
-    heliocentricDistanceAu: 3.7445301944803897,
+    semiMajorAxisAu: 3.4930585312189604,
+    eccentricity: 0.09425474380869092,
+    heliocentricDistanceAu: 3.7445301944720266,
     perihelionDirection: Object.freeze([
-      -0.4616297487703586,
-      -0.8636715019114529,
-      -0.20240926815793392,
+      -0.46162974877155616,
+      -0.8636715019106396,
+      -0.20240926815867422,
     ]),
-    trueAnomalyDegrees: 143.17126323818488,
-    inclinationDegrees: 10.834605390509944,
-    perihelionAu: 3.1638211942504033,
-    aphelionAu: 3.822295868188155,
+    trueAnomalyDegrees: 143.17126323618396,
+    inclinationDegrees: 10.834605390512788,
+    perihelionAu: 3.163821194250155,
+    aphelionAu: 3.8222958681877657,
   }),
   // a 2.6420 AU, e 0.18776, perihelion 2.1459 AU, aphelion 3.1380 AU
   eunomia: Object.freeze({
@@ -10394,20 +11836,20 @@ export const BODY_ORBITS = Object.freeze({
     perihelionAu: 0.0003129735119609448,
     aphelionAu: 0.0004505945773187059,
   }),
-  // a 43.016 AU, e 0.19551, perihelion 34.606 AU, aphelion 51.426 AU
+  // a 43.084 AU, e 0.19396, perihelion 34.727 AU, aphelion 51.440 AU
   haumea: Object.freeze({
-    semiMajorAxisAu: 43.01623145274767,
-    eccentricity: 0.19550633543357385,
-    heliocentricDistanceAu: 49.761786841583024,
+    semiMajorAxisAu: 43.08387135808573,
+    eccentricity: 0.19396155058987066,
+    heliocentricDistanceAu: 49.76187002533551,
     perihelionDirection: Object.freeze([
-      0.9200786409604006,
-      -0.35974731913384383,
-      0.1550392235031983,
+      0.9192332855463641,
+      -0.35974631286374836,
+      0.1599773644131413,
     ]),
-    trueAnomalyDegrees: 210.4165469171031,
-    inclinationDegrees: 28.20842063408973,
-    perihelionAu: 34.60628567725853,
-    aphelionAu: 51.4261772282368,
+    trueAnomalyDegrees: 210.70393576973288,
+    inclinationDegrees: 28.208512920812296,
+    perihelionAu: 34.727256864056905,
+    aphelionAu: 51.440485852114556,
   }),
   // a 45.523 AU, e 0.16011, perihelion 38.234 AU, aphelion 52.812 AU
   makemake: Object.freeze({

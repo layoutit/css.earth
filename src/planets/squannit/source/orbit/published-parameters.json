@@ -1,0 +1,83 @@
+{
+  "schema": "cssearth-published-mutual-orbit@1",
+  "id": "squannit",
+  "centerBodyId": "moshup",
+  "referenceFrame": "ECLIPJ2000",
+  "epochJd": 2455305.0,
+  "timeScale": "asterocentric; underlying clock scale not stated in Table 4",
+  "timeQualification": "The paper defines JD 2455305.0 as asterocentric (light-time-corrected), without naming UTC/TT/TDB. This preparation treats that numerical epoch as TT; a clock-scale ambiguity up to 70 seconds contributes less than 0.41 degree of phase, separate from the much larger source-parameter/extrapolation uncertainty. No light-time correction is applied to the resulting geometric vector.",
+  "semiMajorAxisKm": 2.548,
+  "eccentricity": 0,
+  "inclinationDegrees": 152.3,
+  "ascendingNodeDegrees": 59.6,
+  "argumentPeriapsisDegrees": 0,
+  "meanAnomalyDegrees": -19.6,
+  "meanMotionDegreesPerDay": 494.9125396746293,
+  "quadraticMeanAnomalyDegreesPerYear2": -0.65,
+  "citation": {
+    "authors": "Scheirich et al.",
+    "year": 2021,
+    "title": "A satellite orbit drift in binary near-Earth asteroids (66391) 1999 KW4 and (88710) 2001 SL9 — Indication of the BYORP effect",
+    "url": "https://arxiv.org/abs/1912.06456v2",
+    "locator": "Table 4 (PDF page 13), section 2.2 equations 1–2 (pages 8–9), phase definition (page 14)",
+    "document": {
+      "url": "https://arxiv.org/pdf/1912.06456v2",
+      "sha256": "ebdc8ffac56d7a1707b29ee9a1e9c363eb03edd58ac8fc399f24469db11cb3f3",
+      "bytes": 23170114,
+      "retention": "Remote document pin; numerical facts below are the checked preparation input."
+    }
+  },
+  "sourceValues": {
+    "poleEclipticLongitudeDegrees": 329.6,
+    "poleEclipticLatitudeDegrees": -62.3,
+    "longitudeAtEpochDegrees": 40,
+    "periodHours": 17.45763,
+    "eccentricityUpperBound": 0.006,
+    "semimajorAxisDriftCmPerYear": 1.2,
+    "observationsYearRange": [
+      2000,
+      2019
+    ]
+  },
+  "parameterConversion": "The orbital normal gives i = 90 − poleLatitude and Ω = poleLongitude + 90 modulo 360. The circular fit uses ω = 0 as an element convention and M0 = L0 − Ω; this preserves the published longitude, rather than inventing a pericenter phase.",
+  "modelQualification": "Section 2.2 sets eccentricity to zero for the all-apparition drift fit. Preserve constant mean separation in this display model; the approximately 1.2 cm/year physical radius drift is negligible relative to the ±15 m source scale uncertainty. The quadratic anomaly coefficient is half the mean-motion derivative, so it enters M directly with no extra factor of 1/2.",
+  "uncertainties": {
+    "semiMajorAxisKm1Sigma": 0.015,
+    "periodHours3Sigma": 4e-05,
+    "longitudeAtEpochDegrees3Sigma": 5,
+    "quadraticMeanAnomalyDegreesPerYear2_3Sigma": 0.16,
+    "poleErrorAreaSemiaxesDegrees3Sigma": [
+      12,
+      4
+    ],
+    "note": "Individual fit ranges are not a full covariance matrix. The pole uncertainty area is not a rectangular RA/Dec error box."
+  },
+  "independentPlaneReference": {
+    "citation": "Ostro et al. (2006), Table 1, published JPL author page",
+    "url": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html",
+    "poleIcrfRightAscensionDegrees": 15.4,
+    "poleIcrfDeclinationDegrees": -66.1,
+    "rightAscensionErrorDegrees1Sigma": 3,
+    "declinationErrorDegrees1Sigma": 2,
+    "document": {
+      "url": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.table1.gif",
+      "sha256": "beb2783f85d8468f7bbacc3827b24f5ddf3d3bda5c2afee1025079e24975de5b",
+      "bytes": 15612,
+      "retention": "Remote document pin; numerical facts below are the checked preparation input."
+    }
+  },
+  "massRatioReference": {
+    "citation": "Ostro et al. (2006), Table 2",
+    "parentMassKg": 2353000000000.0,
+    "bodyMassKg": 135000000000.0,
+    "parentMassErrorKg1Sigma": 100000000000.0,
+    "bodyMassErrorKg1Sigma": 24000000000.0,
+    "document": {
+      "url": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.table2.gif",
+      "sha256": "dfbeba97244d07296b2e7a8eb6b6d959d1dccc3d75f2388cb8327f223652757e",
+      "bytes": 17334,
+      "retention": "Remote document pin; numerical facts below are the checked preparation input."
+    }
+  },
+  "gravityQualification": "The effective combined GM is derived from the selected a and period at the source epoch. The nominal split uses the 2006 radar mass ratio; it is a display calculation convention, not a new measurement of either body mass."
+}

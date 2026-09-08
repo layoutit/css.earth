@@ -3,6 +3,7 @@ import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { stripTypeScriptTypes } from "node:module";
 import { chromium } from "playwright";
+import { conformanceBrowserLaunch } from "./conformance-browser-launch.mjs";
 
 import { OBJECTS } from "../objects.mjs";
 import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
@@ -41,10 +42,11 @@ const selected = requestedId
   : implemented;
 assert.ok(selected.length > 0, `No implemented planet selected: ${requestedId}.`);
 
-const browser = await chromium.launch({
-  headless: true,
+const browserLaunch = await conformanceBrowserLaunch({
   channel: process.env.PLAYWRIGHT_CHANNEL ?? "chrome",
+  evidenceDirectory,
 });
+const browser = await chromium.launch(browserLaunch.options);
 const reports = [];
 const surfaceHitPlans = new Map();
 try {
@@ -401,6 +403,7 @@ console.log(JSON.stringify({ ok: true, reports }, null, 2));
 if (evidenceDirectory) {
   await writeFile(resolve(evidenceDirectory, "report.json"), JSON.stringify({
     ok: true, browser: browser.version(), baseUrl,
+    ...(browserLaunch.diagnostics ? { browserLaunch: browserLaunch.diagnostics } : {}),
     capturedAt: new Date().toISOString(),
     qualification: "Natural-clock browser interaction checks; no native parity claim.",
     reports,

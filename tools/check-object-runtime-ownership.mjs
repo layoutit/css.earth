@@ -429,6 +429,15 @@ function requireContextFrame(value, objectId) {
       !vector(body.positionM) || !Number.isFinite(body.radiusM) || !(body.radiusM > 0)) fail('body inventory identity or physical point is invalid');
     points.set(body.id, body);
   }
+  if (context.orbitCenters !== undefined) {
+    if (!context.orbitCenters || typeof context.orbitCenters !== 'object' || Array.isArray(context.orbitCenters)) fail('orbit centre inventory is invalid');
+    for (const [id, center] of Object.entries(context.orbitCenters)) {
+      if (!/^[a-z][a-z0-9-]*$/.test(id) || points.has(id) || !center || typeof center !== 'object' || Array.isArray(center) ||
+        Object.keys(center).some(key => !['positionM', 'centerBodyId'].includes(key)) || !vector(center.positionM) ||
+        !/^[a-z][a-z0-9-]*$/.test(center.centerBodyId ?? '')) fail('orbit centre identity or position is invalid');
+      points.set(id, { id, positionM: center.positionM, orbit: { centerBodyId: center.centerBodyId } });
+    }
+  }
   for (const body of context.bodies) {
     if (body.orbit === undefined) continue;
     const orbit = body.orbit, parent = points.get(orbit?.centerBodyId);
@@ -438,8 +447,11 @@ function requireContextFrame(value, objectId) {
       !orbit.verticesM[0].every((value, axis) => value === body.positionM[axis]) ||
       !Array.isArray(orbit.trail) || orbit.trail.length !== orbit.verticesM.length ||
       orbit.trail.some(weight => !Number.isFinite(weight) || weight < 0 || weight > 1)) fail('body orbit parent or prepared vertices are invalid');
-    const ancestors = new Set([body.id]);
-    for (let id = orbit.centerBodyId; id !== undefined && id !== focus.id; id = points.get(id).orbit?.centerBodyId) {
+  }
+  // Include coordinate-only origins, even unused ones, in the hierarchy check.
+  for (const [start, point] of points) {
+    const ancestors = new Set([start]);
+    for (let id = point.orbit?.centerBodyId; id !== undefined && id !== focus.id; id = points.get(id).orbit?.centerBodyId) {
       if (ancestors.has(id) || !points.has(id)) fail('body orbit parent hierarchy is invalid');
       ancestors.add(id);
     }

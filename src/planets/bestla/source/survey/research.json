@@ -1,0 +1,157 @@
+{
+  "schema": "cssearth-source-feasibility-receipt@1",
+  "checkedOn": "2026-09-08",
+  "key": "Saturn|XXXIX",
+  "identity": {
+    "id": "bestla",
+    "displayName": "Bestla",
+    "parentId": "saturn",
+    "parentNaif": "699",
+    "targetNaif": "639",
+    "key": "Saturn|XXXIX",
+    "iauNumber": "XXXIX",
+    "designation": "S/2004 S18",
+    "solution": "SAT456",
+    "meanElements": {
+      "epoch": "2000-01-01.5",
+      "frame": "ecliptic",
+      "semimajorAxisKm": 20337800,
+      "eccentricity": 0.486,
+      "inclinationDegrees": 138.3,
+      "periodDays": 1082.9444
+    },
+    "aliases": [],
+    "identitySourcePinIds": [
+      "jpl-discovery",
+      "jpl-elements",
+      "jpl-ephemerides"
+    ]
+  },
+  "scale": {
+    "adoptedReferenceRadiusKm": 3.3,
+    "displayEquivalentDiameterKm": 6.6,
+    "publishedRoundedDiameterKm": 7,
+    "publishedDiameterUpperIncrementKm": 2,
+    "publishedDiameterLowerIncrementKm": 1.25,
+    "publishedDiameterIntervalKm": [
+      5.75,
+      9
+    ],
+    "diameterDisplayText": "7 (+2/−1.25) km",
+    "absoluteVisualMagnitudeH": 14.6,
+    "geometricAlbedoAssumption": 0.06,
+    "albedoMeasured": false,
+    "sizeBasis": "Brightness converted to a reference-sphere size; not resolved dimensions or measured volume.",
+    "uncertaintyInterpretation": "Author sensitivity estimate approximately -15/+30 percent for assumed albedo ±0.02 and H ±0.1 mag; not a measured Gaussian 1-sigma interval. Published rounded diameter/radius need not be exact doubles.",
+    "assumedAlbedoSensitivity": 0.02,
+    "assumedHSensitivityMagnitude": 0.1,
+    "referenceRadiusUse": "Adopt the body-page nominal radius, as Kiviuq does, and use it as equal-volume display scale only. Do not recompute it from rounded H or silently substitute the older 122-body table diameter.",
+    "sourcePinIds": [
+      "author-bestla",
+      "denk2018"
+    ]
+  },
+  "rotation": {
+    "hours": 14.6238,
+    "uncertaintyHours": 0.0001,
+    "tentative": false,
+    "type": "sidereal",
+    "alternativesHours": [],
+    "alternativesExplanation": null,
+    "table3MaximaPerRotation": "2",
+    "sourcePinIds": [
+      "denk2018",
+      "author-bestla"
+    ],
+    "displayText": "14.6238 ± 0.0001 h"
+  },
+  "displayOrientation": {
+    "status": "representative-display-pole-consistent-with-partial-measurement",
+    "coordinateSystem": "ICRF/J2000",
+    "rightAscensionDegrees": 90,
+    "declinationDegrees": -66.560708889,
+    "observedPole": {
+      "coordinateSystem": "ecliptic",
+      "latitudeDegrees": -85,
+      "latitudeUncertaintyDegrees": 15,
+      "longitudeDegrees": null,
+      "spinSense": "retrograde",
+      "sourcePinIds": [
+        "denk2018"
+      ],
+      "reference": "§3.2(l), book page 419 / PDF page 11"
+    },
+    "phaseStatus": "arbitrary-display-phase",
+    "displayMeridianDegrees": 0,
+    "phaseEpoch": "display reference only; no measured W0 or landmark epoch",
+    "spinSense": "Reported retrograde sense; no time propagation",
+    "displayRotationPeriodHours": null,
+    "displayPeriodUse": "The reported rotation period is an informational fact. The prepared scene uses a fixed arbitrary display phase and does not propagate physical spin",
+    "qualification": "Partial observed south-ecliptic pole latitude and retrograde sense are preserved. Exact pole longitude and current phase remain unknown; ecliptic south is a representative display convention, not the full measured pole. Author body-page pole cells are blank; the primary paper supplies this partial constraint.",
+    "selectedEclipticPole": {
+      "latitudeDegrees": -90,
+      "longitudeDegrees": null,
+      "meaning": "Ecliptic south is a chosen representative within the measured latitude interval; longitude undefined at the pole, not a measured zero."
+    },
+    "conversion": {
+      "obliquityDegrees": 23.439291111,
+      "formula": "Ecliptic (0,0,-1) rotated by J2000 obliquity -> ICRF (0,sin(epsilon),-cos(epsilon)); RA=90 deg, Dec=epsilon-90 deg."
+    }
+  },
+  "shapeLimit": "Published south-ecliptic pole latitude approximately -85 ± 15 degrees and sidereal period are useful; do not invent a pole longitude or native convex mesh.",
+  "sourceDiscrepancies": [
+    "Individual page lists pole unknown; primary 2018 §3.2(l) gives beta=-85 ±15 deg and retrograde spin. Use the partial primary constraint; do not invent pole longitude.",
+    "Older 122-target overview nominal diameter 6.7 km differs from current Table 1C rounding/inputs. Adopt this row's body-page radius 3.3 km and retain quoted diameter range; do not mix them as precise measurements."
+  ],
+  "sourcePins": [
+    {
+      "id": "denk2018",
+      "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+      "retrieved": "2026-09-08",
+      "expectedBytes": 2067178,
+      "sha256": "0b3ae2f7b63937649a45b6f4b522289eae99e8dfe7c6986f81f7c9d40b0d4add",
+      "purpose": "Primary Table 3 ratios/periods, §3.2 target limitations, Table 2 size assumptions; PDF page 8 is Table 3."
+    },
+    {
+      "id": "denk2026",
+      "url": "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf",
+      "retrieved": "2026-09-08",
+      "expectedBytes": 17218755,
+      "sha256": "1cde9dc8a49fd79c4694934c3d7720299788ea92af1323d9910072afe012d128",
+      "purpose": "Convex-inversion release status; footnote 47 papers in preparation, no native mesh assumed."
+    },
+    {
+      "id": "author-bestla",
+      "url": "https://tilmanndenk.de/outersaturnianmoons/bestla/",
+      "retrieved": "2026-09-08",
+      "expectedBytes": 77765,
+      "sha256": "220d83857b40c265e0bfc42d56f4b96c8a2f80650c1c94546338759d8ffb06e8",
+      "purpose": "Body Table 1C nominal radius/diameter, H, albedo and notes (1),(2),(4),(9); local HTML membership read individually."
+    },
+    {
+      "id": "jpl-discovery",
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "retrieved": "2026-09-08",
+      "expectedBytes": 116148,
+      "sha256": "4836d801269036704bcc685000d198d92a3eb36dc9622b298b3e7c94d8c0daa5",
+      "purpose": "Exact 293-row catalog identity and aliases."
+    },
+    {
+      "id": "jpl-elements",
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "retrieved": "2026-09-08",
+      "expectedBytes": 580012,
+      "sha256": "1e5e52225cf636b78d0ac602eb5352c5648aa025ba45d61593d824e70779dfdd",
+      "purpose": "Exact 18 body IDs and SAT456 solution; mean elements are context, not a current runtime fit."
+    },
+    {
+      "id": "jpl-ephemerides",
+      "url": "https://ssd.jpl.nasa.gov/sats/ephem/sep.html",
+      "retrieved": "2026-09-08",
+      "expectedBytes": 137644,
+      "sha256": "da77b9ca6f71c72c52c01c697dd9fbe6d297571f3a534785165e1668533d3dcb",
+      "purpose": "Independent grouped solution/code mapping, including legacy Skadi spelling."
+    }
+  ],
+  "scope": "Published numerical constraints only; full research papers/pages are not bundled or relabeled with the repository license."
+}
