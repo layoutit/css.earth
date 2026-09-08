@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "nereid",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-ellipsoid-context",
+    "path": "presentation/context.png",
+    "origin": "https://doi.org/10.1093/mnras/stw081",
+    "credit": "Kiss et al. (2016) ellipsoid family; JPL nominal size; cssEarth approximation and standard grid",
+    "license": "MIT display representation from published scientific measurements; retain source citation.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "size-approximation",
+        "model-surface"
+      ],
+      "size": 512,
+      "longitudeDegrees": 55,
+      "latitudeDegrees": 20,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "model"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 75524,
+    "expectedSha256": "daf0bc1595072d52c3d02d1cb4d33e57ec80eda36c5e456c609fb4172e79c86f"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

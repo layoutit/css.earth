@@ -11,6 +11,7 @@ import {
 } from './frames.js'
 import { keplerPeriodDays, type KeplerianElements } from './kepler.js'
 import { SATELLITE_IDS, satelliteRecord } from './satellites.js'
+import { periodicCorrectionBoundKm } from './periodicCorrection.js'
 import {
   FRAME_EVICTION_TO_CAPTURE_RATIO,
   FRAME_UNIT_LADDER_M,
@@ -83,7 +84,7 @@ describe('the solar-system frame tree', () => {
     const specs = solarSystemFrameSpecs()
     for (const { frame } of specs) {
       if (frame.parent === null) continue
-      let worst = 0
+      let worst = 0, correctionAllowance = 0
       const samples = 2000
       for (let i = 0; i <= samples; i++) {
         const epoch = VALID_FROM_JD + ((VALID_TO_JD - VALID_FROM_JD) * i) / samples
@@ -92,7 +93,12 @@ describe('the solar-system frame tree', () => {
       // A moon's period is days; a 200-year sweep at 2000 points steps past
       // hundreds of them, so sweep its own period finely too.
       if (SATELLITE_IDS.includes(frame.id as never)) {
-        const period = keplerPeriodDays(satelliteRecord(frame.id as never).elements as KeplerianElements)
+        const record = satelliteRecord(frame.id as never)
+        const period = keplerPeriodDays(record.elements as KeplerianElements)
+        if (record.positionCorrection) {
+          const parentUnitM = specs.find(spec => spec.frame.id === frame.parent)!.frame.unitM
+          correctionAllowance = periodicCorrectionBoundKm(record.positionCorrection) * M_PER_KM / parentUnitM
+        }
         for (let i = 0; i <= 4000; i++) {
           worst = Math.max(worst, magnitude(frame.originInParent(2451545 + (i * period * 37.3) / 4000)))
         }
@@ -106,7 +112,11 @@ describe('the solar-system frame tree', () => {
       // ... and the bound is not absurdly slack: a `maxOffsetInParent` of
       // Infinity would satisfy the line above and destroy the anchoring rule's
       // termination argument by eating the whole exit-ball budget.
-      if (frame.maxOffsetInParent > 0) expect(worst / frame.maxOffsetInParent).toBeGreaterThan(0.9)
+      // Independent correction phases need not attain their individual maxima
+      // simultaneously. Credit only their explicit analytic allowance; arbitrary
+      // slack in the base bound still fails, and every bound must remain finite.
+      expect(Number.isFinite(frame.maxOffsetInParent)).toBe(true)
+      if (frame.maxOffsetInParent > 0) expect((worst + correctionAllowance) / frame.maxOffsetInParent).toBeGreaterThan(0.9)
     }
   })
 

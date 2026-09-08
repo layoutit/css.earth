@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "nereid",
+  "displayName": "Nereid",
+  "panel": {
+    "introduction": "Nereid follows a highly elongated orbit around Neptune. This approximate ellipsoid comes from light-curve and thermal modelling; its shape and pole are not unique. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius estimate",
+        "value": "170 ± 25 km"
+      },
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Neptune"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Approximate ellipsoid · long/short ≈ 1.3"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Gerard Kuiper · 1949"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "11.594 ± 0.017 hours"
+      },
+      {
+        "id": "shape-axes",
+        "label": "Model semiaxes",
+        "value": "194 × 171 × 148 km · derived approximation"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
+        "title": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
+        "detail": "Approximate ellipsoid",
+        "thumbnail": "/scenes/nereid/nereid-model-thumbnail.webp",
+        "surface": "nereid-model-surface@2x.webp",
+        "poles": "nereid-model-poles@2x.webp",
+        "source": {
+          "id": "size-approximation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1093/mnras/stw081"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Kiss et al.",
+      "role": "surface",
+      "description": "Light-curve and thermal shape modelling",
+      "href": "https://doi.org/10.1093/mnras/stw081"
+    },
+    {
+      "label": "JPL",
+      "role": "surface",
+      "description": "Satellite physical parameters",
+      "href": "https://ssd.jpl.nasa.gov/sats/phys_par/"
+    },
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Nereid observation",
+      "href": "https://science.nasa.gov/resource/nereid/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Voyager imaging archive",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/resource/nereid/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Kiss et al. (2016); JPL Solar System Dynamics"
+    }
+  }
+}

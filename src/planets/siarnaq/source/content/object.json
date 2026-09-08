@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "siarnaq",
+  "displayName": "Siarnaq",
+  "panel": {
+    "introduction": "Siarnaq is a distant prograde moon of Saturn. This approximate triangular shape follows a published light-curve model’s outline, with assumed depth and polar caps. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Mean diameter estimate",
+        "value": "39 ± 6 km"
+      },
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Saturn"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Approximate triangular model"
+      },
+      {
+        "id": "rotation",
+        "label": "Sidereal rotation",
+        "value": "10.18785 hours"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Gladman, Kavelaars and colleagues · 2000"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
+        "title": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/siarnaq/siarnaq-model-thumbnail.webp",
+        "surface": "siarnaq-model-surface@2x.webp",
+        "poles": "siarnaq-model-poles@2x.webp",
+        "source": {
+          "id": "shape-approximation",
+          "path": "../manifest.json",
+          "url": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Denk et al.",
+      "role": "surface",
+      "description": "Cassini lightcurve shape model",
+      "href": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Cassini ISS observation archive",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+      "credit": "Tilmann Denk"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Denk et al.; Cassini ISS; NEOWISE"
+    }
+  }
+}

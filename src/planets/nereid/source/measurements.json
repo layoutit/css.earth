@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-ellipsoid-approximation@1",
+  "source": "https://doi.org/10.1093/mnras/stw081",
+  "citation": "Kiss et al. (2016), MNRAS 457, 2908–2917, Eq. 4 and sections 2.3, 3.4, 4",
+  "meanRadiusKm": 170,
+  "meanRadiusUncertaintyKm": 25,
+  "referenceRadiusKm": 170,
+  "gmKm3S2": 0,
+  "gmInterpretation": "Unmodeled mass, not physical zero",
+  "semiAxesKm": [
+    193.7592726282482,
+    171.0143624256383,
+    148.2694522230284
+  ],
+  "semiAxesInterpretation": "Derived representative ellipsoid axes from the published X=0.133 family; normalized to the volume of a 170 km-radius sphere. These are model axes, not measured limb dimensions.",
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
+  "radiusSource": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+  "axisRatioParameter": 0.133,
+  "axisRatioFamily": "a=(1+X)b; c=(1-X)b",
+  "scaleNormalization": "b=referenceRadiusKm/cbrt(1-X²); retains the JPL nominal-radius volume as a display scale convention, not a new size measurement.",
+  "rotationPeriodHours": 11.594,
+  "rotationPeriodUncertaintyHours": 0.017
+}

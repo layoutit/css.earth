@@ -1,0 +1,26 @@
+{
+  "entries": [
+    {
+      "product": "C1137631_CALIB.IMG",
+      "bytes": 1283200,
+      "sha256": "e66704b7e64aee341b90e72ffd3283730f146977368f53bfb6a1c8588c977178",
+      "nativeDimensions": [
+        800,
+        800
+      ],
+      "samplingKm": 43.26752
+    },
+    {
+      "product": "C1129120_CALIB.IMG",
+      "bytes": 1283200,
+      "sha256": "1984547416f9bd5296307c1e27ebb8d7b0be4c61c09eafa850d94eed1c4ffb88",
+      "nativeDimensions": [
+        800,
+        800
+      ],
+      "samplingKm": 62.08622
+    }
+  ],
+  "decision": "Both complete calibrated Voyager rasters inspected. The disc near (342,507) in C1137631 is about eight pixels across; C1129120 near (271,399) is about five. Shading and detector sampling dominate. The archive geometry does not establish a reliable surface-coordinate orientation. These images do not qualify a registered terrain or albedo map.",
+  "disposition": "Model-only presentation; photographic mapping remains unqualified, not absent."
+}

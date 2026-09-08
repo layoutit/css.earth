@@ -1,0 +1,84 @@
+{
+  "retrievedOn": "2026-09-08",
+  "qualification": "Unqualified archive candidates; no mapped imagery selected.",
+  "query": "https://opus.pds-rings.seti.org/opus/api/data.json?planet=Neptune&mission=Voyager&cols=opusid%2CSURFACEGEOnereid_centerresolution1%2CSURFACEGEOnereid_centerphaseangle1&order=SURFACEGEOnereid_centerresolution1&limit=12&SURFACEGEOnereid_centerresolution1=0",
+  "result": {
+    "start_obs": 1,
+    "limit": 12,
+    "count": 12,
+    "available": 325,
+    "order": "SURFACEGEOnereid_centerresolution1,opusid",
+    "labels": [
+      "OPUS ID",
+      "Body Center Resolution (Min) [Nereid] (km/pixel)",
+      "Phase Angle at Body Center (Min) [Nereid] (degrees)"
+    ],
+    "columns": [
+      "OPUS ID",
+      "Body Center Resolution (Min) [Nereid] (km/pixel)",
+      "Phase Angle at Body Center (Min) [Nereid] (degrees)"
+    ],
+    "page": [
+      [
+        "vg-iss-2-n-c1137631",
+        "43.26752",
+        "96.116"
+      ],
+      [
+        "vg-iss-2-n-c1137625",
+        "43.27243",
+        "96.053"
+      ],
+      [
+        "vg-iss-2-n-c1137619",
+        "43.27743",
+        "95.99"
+      ],
+      [
+        "vg-iss-2-n-c1137613",
+        "43.28251",
+        "95.926"
+      ],
+      [
+        "vg-iss-2-n-c1129120",
+        "62.08622",
+        "55.737"
+      ],
+      [
+        "vg-iss-2-n-c1129109",
+        "62.14912",
+        "55.681"
+      ],
+      [
+        "vg-iss-2-n-c1129058",
+        "62.21072",
+        "55.626"
+      ],
+      [
+        "vg-iss-2-n-c1129047",
+        "62.27374",
+        "55.57"
+      ],
+      [
+        "vg-iss-2-n-c1129036",
+        "62.33546",
+        "55.516"
+      ],
+      [
+        "vg-iss-2-n-c1129025",
+        "62.39859",
+        "55.46"
+      ],
+      [
+        "vg-iss-2-n-c1129014",
+        "62.46041",
+        "55.406"
+      ],
+      [
+        "vg-iss-2-n-c1129003",
+        "62.52366",
+        "55.351"
+      ]
+    ]
+  }
+}
