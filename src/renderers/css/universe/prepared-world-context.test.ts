@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
 import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
+import { screenPicking } from '../navigation/screen-picking.js';
 import { OBJECTS } from '../../../../site/objects.mjs';
 
 class FakeElement extends EventTarget {
@@ -83,6 +84,19 @@ function mount(scale: number) {
   mounted.set(layer.root as unknown as FakeElement, layer);
   return layer.root as unknown as FakeElement;
 }
+
+test('a resolved background sprite does not pick through its transparent square corners', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  layer.selectObject('mercury');
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 100], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+  const registry = screenPicking(root.parentNode! as unknown as HTMLElement);
+  const sun = layer.inspect().find(body => body.id === 'sun')!.marker;
+  expect(registry.pick(0, 0)).toBe(sun);
+  expect(registry.pick(35, 35)).not.toBe(sun);
+  layer.destroy();
+});
 
 test('camera viewport snapshots drive clipping and resize without reading host layout', () => {
   const root = mount(1), layer = mounted.get(root)!;

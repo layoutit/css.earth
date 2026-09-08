@@ -38,7 +38,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -98,6 +98,35 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     }
   }
   function ancestor(child, parent) { for (let id = tree.nodes[child]?.parent; id >= 0; id = tree.nodes[id].parent) if (id === parent) return true; return false; }
+  const partitionScenes = new Set();
+  if (plan.depthPartitions !== undefined) {
+    const partition = plan.depthPartitions;
+    record(partition, 'depth partitions', ['groups', 'order']);
+    const roots = new Set(), ordered = new Set();
+    const groups = array(partition.groups, 'depth groups');
+    if (groups.length < 2 || groups.length > 128) fail('depth partitions require 2 to 128 retained groups');
+    for (const group of groups) {
+      record(group, 'depth group', ['root', 'scene']); node(group.root); node(group.scene);
+      if (tree.nodes[group.root].parent !== tree.camera || !ancestor(group.scene, group.root) ||
+          roots.has(group.root) || partitionScenes.has(group.scene) || [tree.scene, tree.camera].includes(group.scene)) fail('depth group must own an independent projected carrier');
+      roots.add(group.root); partitionScenes.add(group.scene);
+    }
+    function order(entry, depth = 0) {
+      if (depth > 64) fail('depth order exceeds prepared traversal bound');
+      if (Object.hasOwn(entry, 'group')) {
+        record(entry, 'depth leaf', ['group']); integer(entry.group, 'depth group index');
+        if (entry.group >= groups.length || ordered.has(entry.group)) fail('depth order requires each group exactly once');
+        ordered.add(entry.group);
+      } else {
+        record(entry, 'depth split', ['plane', 'back', 'front']);
+        if (array(entry.plane, 'depth plane').length !== 4 || !entry.plane.every(Number.isFinite) ||
+            Math.abs(Math.hypot(...entry.plane.slice(0, 3)) - 1) > 1e-6) fail('depth split requires a normalized finite plane');
+        order(entry.back, depth + 1); order(entry.front, depth + 1);
+      }
+    }
+    order(partition.order);
+    if (ordered.size !== groups.length) fail('depth order must cover every group');
+  }
   function attribute(name) { if (!/^(?:data-[a-z0-9-]+|aria-[a-z0-9-]+)$/.test(name)) fail(`unsupported attribute ${name}`); }
   const forbiddenProperty = /^(?:transform|scale|rotate|perspective)$/;
   const activationTargets = new Set(tree.activationGroups?.flat() ?? []);
@@ -350,7 +379,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       record(face, 'facing plane', ['target', 'plane', 'tolerance']); node(face.target);
       if (!(Number.isFinite(face.tolerance) && face.tolerance > 0)) fail('native backface tolerance must be positive');
       if ([tree.camera, tree.scene].includes(face.target) || targets.has(face.target) || tree.nodes.some(node => node.parent === face.target)) fail('facing target must be a unique prepared leaf');
-      if (!ancestor(face.target, tree.scene)) fail('facing target must belong to scene');
+      if (!ancestor(face.target, tree.scene) && ![...partitionScenes].some(scene => ancestor(face.target, scene))) fail('facing target must belong to scene');
       targets.add(face.target);
       if (array(face.plane, 'facing plane coordinates').length !== 4) fail('facing plane needs four coordinates');
       face.plane.forEach(value => finite(value, 'facing plane coordinate'));

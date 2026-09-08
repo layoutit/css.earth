@@ -108,7 +108,78 @@ the distinction between partial and complete updates. The broader stress results
 above remain a separate qualification limit; this shorter journey does not prove
 that all navigation is smooth.
 
-The subsequent [architecture investigation](performance-architecture.md)
-separates compositor cost from loading and application publication, records a
-read-only native profile, and sets the proof required before a new prepared
-surface representation can enter this PR.
+The [prepared depth implementation](performance-architecture.md) addresses the
+measured compositor bottleneck while preserving original source leaves and
+textures. Its matched timings, visual differences, memory observations and
+scope limits are recorded separately.
+
+
+## Prepared depth integration qualification
+
+The depth implementation is generic and preparation-owned. Deimos, Phobos and
+Phoebe meet its source and ownership requirements; their geometry, texture
+resources and original binding tree recover exactly to `827db935`. Each checked
+runtime equals its final transported data. Repeated preparation reproduces the
+same bank bytes. Other surface families retain their previous representation.
+
+The full `pnpm test` run after this integration passed 454 package tests, 328
+renderer tests, all 776 platform tests, and 229 of 230 shell tests. The shell
+failure is `navigation-preparation.test.mjs`, missing the pinned/generated
+Daphnis `source/presentation/context.png`; it is also absent in the main checkout.
+The earlier six source/runtime mismatch failures were introduced during this
+work and corrected, without relaxing source closure. Their successful rerun is
+in `output/depth-prototype/test-final.log`. This remains a non-green aggregate,
+not an object-ready or merge-ready declaration.
+
+The production-shaped performance build and renderer typecheck pass. The actual
+compiled banks were regenerated after the preparation restoration fix and match
+the bytes used for the matched compositor measurements. Thirty-six paired views
+cover every affected object, both datasets, orbit, coarse LOD, return and resize
+at DPR 1/2. Appearance is not pixel-identical; the inspected edge differences and
+A/A calibration are recorded in the architecture document rather than hidden
+behind a passing tolerance.
+
+The short requested journey—wide system → Mars → Venus → overview → Makemake,
+with native drags and wheel input—completed at both DPRs with retained world,
+input and document identity, and no application/HTTP errors. Reports are in
+`output/playwright/natural-depth-final-{1,2}/`. These are functional regression
+runs, not a new isolated performance comparison: DPR 1's trace transport briefly
+overlapped the start of DPR 2.
+
+Six replacement-flight cases (Mars → Deimos, Mars → Phobos, Saturn → Phoebe at
+DPR 1/2) hold the exact incoming prepared bank. The retained world moves before
+release, first-motion marks occur in 17.3–28.3 ms, and all arrive ready with one
+scene and no errors. Report: `output/playwright/replacement-depth-final/`.
+
+All three affected packages completed the 13-case browser conformance suite:
+initial shell, desktop/mobile, four pre-ready motion/visibility combinations,
+DPR 1/2 interaction and density, dataset race/reacquisition/rejection/disposal.
+Phobos had an earlier failed DPR 2 repeated-double-click run that selected Mars;
+the same baseline probe and the candidate repeat passed. Its failure video is
+preserved. Inspection found that resolved background sprites published square
+hit boxes including transparent corners. The shared publisher now uses the
+projected disc, with a regression against the real context publication and
+picking registry. This correction changes hit coverage, not painted appearance.
+
+The conformance census now reads actual texture leaves under the one object
+camera, including prepared carriers. It still requires nonempty mounted texture
+coverage, finite geometry bounds, one scene and retained identities; it no longer
+assumes every painted leaf descends from the camera's reference transform node.
+
+Reports: `output/playwright/depth-conformance-v2/`,
+`depth-conformance-phobos-repeat/`, `depth-conformance-phoebe/`; the initial Phobos
+failure remains in `depth-conformance-phobos/`. These suite results precede the
+final transparent-corner correction; its focused final results are recorded below.
+
+
+After the transparent-corner correction, the rebuilt server passed Phobos's full
+13-case conformance suite again (`depth-conformance-phobos-final/`). The standard
+DOM-cleanliness browser check passed Deimos, Phobos and Phoebe at both DPRs,
+reporting 21,808 total stage nodes, stable identity and no interaction topology
+changes in each case. The final Deimos DPR 2 performance confirmation and its
+actual runtime bundle hash are in the architecture document. No merge was run.
+
+The final renderer suite passes all 329 tests, including the new context-picking
+regression. Renderer typecheck and the typed source-closure audit pass again after
+the last runtime change. Logs: `renderer-final.log`, `typecheck-final.log` and
+`closure-final.log` under `output/depth-prototype/`.
