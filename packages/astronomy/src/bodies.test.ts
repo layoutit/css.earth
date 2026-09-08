@@ -4,6 +4,7 @@ import {
   BODY_IDS,
   DWARF_PLANET_IDS,
   ASTEROID_IDS,
+  COMET_IDS,
   PLANET_IDS,
   bodyData,
   moonsOf,
@@ -17,8 +18,8 @@ const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 
 describe('the body table', () => {
   it('has an entry for the Sun, eight planets, the Moon, every satellite and the five dwarf planets', () => {
-    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + DWARF_PLANET_IDS.length + ASTEROID_IDS.length)
-    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS] as BodyId[]) {
+    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + DWARF_PLANET_IDS.length + ASTEROID_IDS.length + COMET_IDS.length)
+    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS, ...COMET_IDS] as BodyId[]) {
       expect(BODIES[id]).toBeDefined()
       expect(BODIES[id].id).toBe(id)
     }

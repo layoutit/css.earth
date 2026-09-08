@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-9p",
+  "displayName": "Tempel 1",
+  "panel": {
+    "introduction": "9P/Tempel 1 was visited by Deep Impact in 2005 and Stardust-NExT in 2011. Their images constrain the published nucleus model. Gray marks stereo control, blue limb silhouettes, and ochre poorly constrained regions of the published shape.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Equivalent diameter",
+        "value": "5.66 \u00b1 0.20 km"
+      },
+      {
+        "id": "mission",
+        "label": "Explored by",
+        "value": "Deep Impact \u00b7 Stardust-NExT"
+      },
+      {
+        "id": "source-epoch",
+        "label": "Shape observations",
+        "value": "2005 and 2011"
+      },
+      {
+        "id": "coverage",
+        "label": "Stereo coverage",
+        "value": "480 stereo control points on about 70% of the nucleus"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "rendering",
+        "label": "Presentation",
+        "value": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "constraints",
+    "labels": {
+      "model": "Shape model",
+      "constraints": "Source constraints"
+    },
+    "controls": [
+      {
+        "id": "constraints",
+        "label": "Source constraints",
+        "description": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+        "title": "Published PDS shape model, including poorly constrained source estimates. The constraint lens uses gray for stereo control, blue for limb silhouettes, and ochre for poorly constrained terrain. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+        "detail": "PDS flags",
+        "thumbnail": "/scenes/comet-9p/comet-9p-constraints-thumbnail.webp",
+        "surface": "comet-9p-constraints-surface@2x.webp",
+        "poles": "comet-9p-constraints-poles@2x.webp",
+        "source": {
+          "id": "pds-shape",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab"
+        }
+      },
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Complete published PDS shape, simplified for display. Gray is a model material, not observed albedo. Poorly constrained source estimates are included; switch to Source constraints to identify them.",
+        "title": "Complete published PDS shape, simplified for display. Gray is a model material, not observed albedo. Poorly constrained source estimates are included; switch to Source constraints to identify them.",
+        "detail": "Neutral gray",
+        "thumbnail": "/scenes/comet-9p/comet-9p-model-thumbnail.webp",
+        "surface": "comet-9p-model-surface@2x.webp",
+        "poles": "comet-9p-model-poles@2x.webp",
+        "source": {
+          "id": "pds-shape",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": true
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA PDS",
+      "role": "surface",
+      "description": "Farnham & Thomas 2013 shape model and constraint codes",
+      "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/dataset.shtml"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/catalog/dataset.cat",
+      "credit": "Farnham & Thomas (2013)"
+    },
+    "physical": {
+      "path": "../reference/dataset.cat",
+      "credit": "Farnham & Thomas (2013)"
+    }
+  }
+}
