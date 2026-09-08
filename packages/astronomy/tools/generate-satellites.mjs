@@ -82,15 +82,13 @@ const DAPHNIS_FROM_JD = 2453371.5
 const DAPHNIS_TO_JD = 2458119.5
 const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['nereid', 'himalia', 'polydeuces', 'anthe', 'aegaeon', 'dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
+const RADIAL_FIT_IDS = new Set(['polydeuces', 'anthe', 'aegaeon', 'dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
 
 // Metis and Adrastea need daily samples: Jupiter's strong J2 makes their
 // osculating mean-motion prediction ambiguous across a five-day sample gap.
 // id, Horizons target code, Horizons centre, parent body id, optional fit window and cadence
-const LIBRATION_FIT_IDS = new Set(['himalia', 'polydeuces', 'anthe', 'aegaeon'])
+const LIBRATION_FIT_IDS = new Set(['polydeuces', 'anthe', 'aegaeon'])
 const SATELLITES = [
-  ['nereid', '802', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
-  ['himalia', '506', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
   ['polydeuces', '634', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['anthe', '649', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['aegaeon', '653', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],

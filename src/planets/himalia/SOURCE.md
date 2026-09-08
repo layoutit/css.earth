@@ -1,6 +1,6 @@
 # Himalia source survey
 
-Status: size-model presentation implemented; photographic surface mapping is unqualified.
+Status: research only. The radius-only spherical scene has been withdrawn; neither a complete shape nor photographic surface mapping is qualified.
 
 ## Physical interpretation
 
@@ -16,14 +16,11 @@ Status: size-model presentation implemented; photographic surface mapping is unq
 - [Denk et al. (2026), section 4.3.3 and Figure 20](https://refubium.fu-berlin.de/bitstream/handle/fub188/51747/11214_2026_Article_1263.pdf?sequence=1) analyzes Cassini's shorter exposures in seven filters: approximately 4–6 pixels span the disc, without unambiguous surface spots. Color photometry is integrated context, not a defensible spatial color/composition lens. The same review finds New Horizons' 2007 images barely resolved. Neither supplies a qualified terrain map for this package.
 - The 2018 occultation constrains a projected ellipse. It does not determine the third axis or a unique pole, so this package does not invent an elongated 3D shape from it. No registered DEM or mapped geology release was qualified.
 
-## Included model and shared behavior
+## Presentation decision
 
-The Shape model dataset shows a spherical **size approximation** from JPL's mean radius, not a measured spherical shape. The entire surface uses the ordinary shared missing-data grid. The active lens visibly discloses the approximation and absent mapping. No terrain, albedo, rings or atmosphere are invented.
-
-The radius table is reproducible with `r(lon, lat) = meanRadiusKm` on the checked-in 5° grid. Meshoptimizer produces 480 native triangle leaves, below the 2,000-leaf budget. Its geometric simplification tolerance is not measurement uncertainty. Shared Flood lighting is the default; directional Shadows remains available. Minimap, thumbnail and context billboard derive from the same model.
-
-The display pole uses the fitted orbital normal with an arbitrary meridian. This is an illustration convention, not a measured spin pole, synchronous rotation or current landmark phase. Orbital position is separately fitted from JPL Horizons over 2020–2032; the six independent fractional-day vectors in the astronomy fixtures measure residuals rather than a universal accuracy bound. Extrapolation outside that interval is not qualified.
-
-Source inputs and authored documents are pinned in `source/manifest.json`. External preparation inputs are restored by `preparation/acquisition.json`. Archive images surveyed but not used to bake assets are recorded as evidence rather than required runtime downloads.
-
-At the six committed reference epochs, the maximum position residual is 645,824 km. This is about 5.6% of the fitted semimajor axis: a coarse orbit preview, not precision tracking. The existing prepared slow-longitude correction reduces the error but does not represent all solar perturbations.
+No standalone scene is included. A mean-radius estimate does not establish a
+spherical shape, and the gray missing-data grid cannot correct unsupported
+geometry. The initial spherical size proxy was withdrawn after visual review.
+The original native-image inspection and candidate evidence are retained above.
+A future scene needs defensible geometry and honest coverage; missing axes must
+not be silently invented from a projected outline.

@@ -36,8 +36,6 @@ import {
  * deliberately compact model cannot carry.
  */
 const TOLERANCE_KM: Record<SatelliteId, number> = {
-  nereid: 11980,
-  himalia: 742698,
   polydeuces: 1081,
   anthe: 2334,
   aegaeon: 353,
@@ -143,9 +141,8 @@ describe('satellite ephemerides against JPL Horizons', () => {
     for (const row of fixture.rows) {
       const computed = magnitude(satellitePositionKm(id, row.jdTdb))
       const reference = magnitude(row.positionKm)
-      // The documented coarse fits measure 3.135% (Dimorphos) and 2.298%
-      // (Himalia) radial residuals at these independent epochs.
-      const radialTolerance = ({ dimorphos: 0.033, himalia: 0.027 } as Partial<Record<SatelliteId, number>>)[id] ?? 0.02
+      // The strongly perturbed DART post-impact fit measures 3.135% radial residual.
+      const radialTolerance = id === 'dimorphos' ? 0.033 : 0.02
       expect(Math.abs(computed - reference) / reference).toBeLessThan(radialTolerance)
     }
   })
