@@ -409,3 +409,26 @@ test('local fixed-epoch science inputs survive upstream refresh without being at
   }
   assert.equal(locallyMaintainedFile(astronomy, 'source/unrelated-model.txt'), false);
 });
+
+
+test('scene companion integration is preserved locally while shared ephemeris math stays mirrored', async () => {
+  const astronomy = targetFor('astronomy');
+  const provenance = await readProvenance(astronomy);
+  const mirrored = await buildManifest(astronomy);
+  for (const file of ['tools/body-epoch-ephemeris.mjs', 'tools/generate-scene-satellites.mjs',
+    'src/sceneSatellites.ts', 'src/sceneSatellites.test.ts', 'src/data/sceneSatelliteStates.data.ts',
+    'src/solarSystem.ts']) {
+    assert.ok(existsSync(join(astronomy.dest, file)), file);
+    assert.ok(isOwnedFile(astronomy, file), `${file} survives clearVendored and upstream copy`);
+    assert.ok(provenance.locallyMaintainedFiles.includes(file), `${file} has explicit local provenance`);
+    assert.ok(!Object.hasOwn(mirrored, file), `${file} is excluded from mirrored-byte claims`);
+    assert.ok(!Object.hasOwn(provenance.files, file), `${file} is not attributed to the upstream commit`);
+  }
+  for (const file of ['src/frames.ts', 'src/kepler.ts', 'src/vsop87.ts']) {
+    assert.equal(isOwnedFile(astronomy, file), false, file);
+    assert.ok(Object.hasOwn(mirrored, file), `${file} retains exact-copy protection`);
+  }
+  assert.equal(isOwnedFile(astronomy, 'src/sceneUnrelated.ts'), false, 'no broad scene-prefix exemption');
+  assert.equal(isOwnedFile(astronomy, 'tools/unrelated-ephemeris.mjs'), false, 'no broad tools exemption');
+  assert.match(provenance.locallyMaintainedOrigins['src/solarSystem.ts'].lastMirroredSha256, /^[0-9a-f]{64}$/);
+});

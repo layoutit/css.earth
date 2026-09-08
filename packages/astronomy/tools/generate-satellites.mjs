@@ -83,17 +83,64 @@ const DAPHNIS_FROM_JD = 2453371.5
 const DAPHNIS_TO_JD = 2458119.5
 const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['kiviuq', 'albiorix', 'siarnaq', 'ymir', 'nereid', 'himalia', 'polydeuces', 'anthe', 'aegaeon', 'dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
+const RADIAL_FIT_IDS = new Set(['paaliaq', 'tarvos', 'ijiraq', 'suttungr', 'mundilfari', 'skathi', 'erriapus', 'thrymr', 'bebhionn', 'bergelmir', 'bestla', 'fornjot', 'hati', 'hyrrokkin', 'loge', 'skoll', 'greip', 'tarqeq', 'caliban', 'sycorax', 'prospero', 'setebos', 'kiviuq', 'albiorix', 'siarnaq', 'ymir', 'nereid', 'himalia', 'polydeuces', 'anthe', 'aegaeon', 'dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
 
 // Metis and Adrastea need daily samples: Jupiter's strong J2 makes their
 // osculating mean-motion prediction ambiguous across a five-day sample gap.
 // id, Horizons target code, Horizons centre, parent body id, optional fit window and cadence
 const LIBRATION_FIT_IDS = new Set(['albiorix', 'himalia', 'polydeuces', 'anthe', 'aegaeon'])
-const POSITION_CORRECTION_FIT_IDS = new Set(['kiviuq', 'albiorix', 'himalia', 'siarnaq', 'ymir'])
+const POSITION_CORRECTION_FIT_IDS = new Set(['paaliaq', 'tarvos', 'ijiraq', 'suttungr', 'mundilfari', 'skathi', 'erriapus', 'thrymr', 'bebhionn', 'bergelmir', 'bestla', 'fornjot', 'hati', 'hyrrokkin', 'loge', 'skoll', 'greip', 'tarqeq', 'caliban', 'sycorax', 'prospero', 'setebos', 'kiviuq', 'albiorix', 'himalia', 'siarnaq', 'ymir'])
 // A fixed cosine basis resolves this strongly perturbed orbit without a
 // nonlinear frequency search. Both methods publish the same bounded series.
-const POSITION_CORRECTION_OPTIONS = { albiorix: { count: 512, method: 'cosine' } }
+const POSITION_CORRECTION_OPTIONS = {
+  albiorix: { count: 512, method: 'cosine' },
+  paaliaq: { count: 128, method: 'cosine' },
+  tarvos: { count: 128, method: 'cosine' },
+  ijiraq: { count: 128, method: 'cosine' },
+  suttungr: { count: 128, method: 'cosine' },
+  mundilfari: { count: 128, method: 'cosine' },
+  skathi: { count: 128, method: 'cosine' },
+  erriapus: { count: 128, method: 'cosine' },
+  thrymr: { count: 128, method: 'cosine' },
+  bebhionn: { count: 128, method: 'cosine' },
+  bergelmir: { count: 128, method: 'cosine' },
+  bestla: { count: 128, method: 'cosine' },
+  fornjot: { count: 128, method: 'cosine' },
+  hati: { count: 128, method: 'cosine' },
+  hyrrokkin: { count: 128, method: 'cosine' },
+  loge: { count: 128, method: 'cosine' },
+  skoll: { count: 128, method: 'cosine' },
+  greip: { count: 128, method: 'cosine' },
+  tarqeq: { count: 128, method: 'cosine' },
+  caliban: { count: 128, method: 'cosine' },
+  sycorax: { count: 128, method: 'cosine' },
+  prospero: { count: 128, method: 'cosine' },
+  setebos: { count: 128, method: 'cosine' },
+}
 const SATELLITES = [
+  ['paaliaq', '620', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['tarvos', '621', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['ijiraq', '622', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['suttungr', '623', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['mundilfari', '625', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['skathi', '627', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['erriapus', '628', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['thrymr', '630', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['bebhionn', '637', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['bergelmir', '638', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['bestla', '639', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['fornjot', '642', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['hati', '643', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['hyrrokkin', '644', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['loge', '646', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['skoll', '647', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['greip', '651', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['tarqeq', '652', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['caliban', '716', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['sycorax', '717', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['prospero', '718', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['setebos', '719', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+
   ['siarnaq', '629', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
   ['ymir', '619', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
 

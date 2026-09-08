@@ -1,12 +1,23 @@
 #!/usr/bin/env node
 // Single-epoch osculating elements and independent Horizons vector fixtures.
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { elementsUrl, vectorsUrl, horizons, parseElements, parseVectors } from './lib/horizons.mjs';
 
 const epochJdTt = 2461286.5;
-const bodies = [["vesta","4;"],["eros","433;"],["itokawa","25143;"],["bennu","101955;"],["ryugu","162173;"],["ida","243;"],["gaspra","951;"],["mathilde","253;"],["lutetia","21;"],["steins","2867;"],["didymos","65803;"],["kleopatra","216;"],["toutatis","4179;"],["pallas","2;"],["hygiea","10;"],["juno","3;"],["psyche","16;"],["interamnia","704;"],["davida","511;"],["sylvia","87;"],["eunomia","15;"],["euphrosyne","31;"],["bamberga","324;"],["fortuna","19;"],["themis","24;"],["amphitrite","29;"],["egeria","13;"],["elektra","130;"],["iris","7;"],["hebe","6;"],["eugenia","45;"],["daphne","41;"],["eleonora","354;"],["nemesis","128;"],["kalliope","22;"],["nemausa","51;"],["parthenope","11;"],["melpomene","18;"],["julia","89;"],["victoria","12;"],["urania","30;"],["flora","8;"],["europa-52","52;"],["metis-9","9;"],["camilla","107;"],["thisbe","88;"],["doris","48;"],["hermione","121;"],["diotima","423;"],["herculina","532;"],["nausikaa","192;"],["astraea","5;"],["irene","14;"],["nysa","44;"],["sappho","80;"],["betulia","1580;"],["castalia","4769;"],["asteroid-1998-wt24","33342;"],["asteroid-1994-cc","136617;"],["fides","37;"],["penelope","201;"],["alphonsina","925;"],["angelina","64;"],["ganymed","1036;"],["moshup","66391;"],["cybele","65;"],["aurora","94;"],["palma","372;"],["thule","279;"],["hektor","624;"],["hekate","100;"],["phaethon","3200;"],["harmonia","40;"],["panopaea","70;"],["desdemona-666","666;"],["asteroid-1950-da","29075;"],["apophis","99942;"],["donaldjohanson","52246;"],["geographos","1620;"],["bacchus","2063;"],["mithra","4486;"],["nereus","4660;"],["golevka","6489;"],["yorp","54509;"],["asteroid-1996-hw1","8567;"],["asteroid-2008-ev5","341843;"],["ra-shalom","2100;"],["asteroid-1992-sk","10115;"],["asteroid-1998-ml14","52760;"],["asteroid-2002-ce26","276049;"]];
-const records = {}, fixtures = {};
-for (const [id, command] of bodies) {
+const bodies = [["patroclus","920000617"],["vesta","4;"],["eros","433;"],["itokawa","25143;"],["bennu","101955;"],["ryugu","162173;"],["ida","243;"],["gaspra","951;"],["mathilde","253;"],["lutetia","21;"],["steins","2867;"],["didymos","65803;"],["kleopatra","216;"],["toutatis","4179;"],["pallas","2;"],["hygiea","10;"],["juno","3;"],["psyche","16;"],["interamnia","704;"],["davida","511;"],["sylvia","87;"],["eunomia","15;"],["euphrosyne","31;"],["bamberga","324;"],["fortuna","19;"],["themis","24;"],["amphitrite","29;"],["egeria","13;"],["elektra","130;"],["iris","7;"],["hebe","6;"],["eugenia","45;"],["daphne","41;"],["eleonora","354;"],["nemesis","128;"],["kalliope","22;"],["nemausa","51;"],["parthenope","11;"],["melpomene","18;"],["julia","89;"],["victoria","12;"],["urania","30;"],["flora","8;"],["europa-52","52;"],["metis-9","9;"],["camilla","107;"],["thisbe","88;"],["doris","48;"],["hermione","121;"],["diotima","423;"],["herculina","532;"],["nausikaa","192;"],["astraea","5;"],["irene","14;"],["nysa","44;"],["sappho","80;"],["betulia","1580;"],["castalia","4769;"],["asteroid-1998-wt24","33342;"],["asteroid-1994-cc","136617;"],["fides","37;"],["penelope","201;"],["alphonsina","925;"],["angelina","64;"],["ganymed","1036;"],["moshup","66391;"],["cybele","65;"],["aurora","94;"],["palma","372;"],["thule","279;"],["hektor","624;"],["hekate","100;"],["phaethon","3200;"],["harmonia","40;"],["panopaea","70;"],["desdemona-666","666;"],["asteroid-1950-da","29075;"],["apophis","99942;"],["donaldjohanson","52246;"],["geographos","1620;"],["bacchus","2063;"],["mithra","4486;"],["nereus","4660;"],["golevka","6489;"],["yorp","54509;"],["asteroid-1996-hw1","8567;"],["asteroid-2008-ev5","341843;"],["ra-shalom","2100;"],["asteroid-1992-sk","10115;"],["asteroid-1998-ml14","52760;"],["asteroid-2002-ce26","276049;"]];
+const selected = new Set(process.argv.slice(2).map(arg => {
+  if (!/^--object=[a-z][a-z0-9-]*$/.test(arg)) throw new Error('Use --object=id');
+  const id = arg.slice(9);
+  if (!bodies.some(row => row[0] === id)) throw new Error(`Unknown asteroid ${id}`);
+  return id;
+}));
+const readChecked = (path, symbol) => {
+  const text = readFileSync(new URL(path, import.meta.url), 'utf8');
+  return JSON.parse(text.split(`export const ${symbol} = `)[1].replace(/ (?:satisfies|as const)[\s\S]*$/, ''));
+};
+const records = selected.size ? readChecked('../src/data/asteroidElements.data.ts', 'ASTEROID_ELEMENTS') : {};
+const fixtures = selected.size ? readChecked('../src/__fixtures__/horizons.asteroids.ts', 'ASTEROID_FIXTURES') : {};
+for (const [id, command] of bodies.filter(([id]) => !selected.size || selected.has(id))) {
   const query = elementsUrl({ command, center: '500@10', startJd: epochJdTt, stopJd: epochJdTt + 1, stepDays: 1 });
   const row = parseElements(await horizons(query, `asteroid-elements-${id}`), id)[0];
   const rad = Math.PI / 180;
@@ -24,4 +35,4 @@ writeFileSync(new URL('../src/data/asteroidElements.data.ts', import.meta.url), 
   "import type { KeplerianElements } from '../kepler.js'\n" +
   `export const ASTEROID_ELEMENTS = ${JSON.stringify(records, null, 2).replace(/\"elements\": \{\n([\s\S]*?)\n    \}/g, (_, fields) => '\"elements\": { ' + fields.trim().replace(/\n\s*/g, ' ') + ' }')} satisfies Record<string, {query: string; elements: KeplerianElements}>\n`);
 writeFileSync(new URL('../src/__fixtures__/horizons.asteroids.ts', import.meta.url), header +
-  `export const ASTEROID_FIXTURES = ${JSON.stringify(fixtures, null, 2).replace(/\{\n\s+\"jd\":([\s\S]*?)\n\s+\}/g, (_, fields) => '{ \"jd\":' + fields.trim().replace(/\s*\n\s*/g, ' ') + ' }')} as const\n`);
+  `export const ASTEROID_FIXTURES = ${JSON.stringify(fixtures, null, 2).replace(/\{\n\s+\"jd\":([\s\S]*?)\n\s+\}/g, (_, fields) => '{ \"jd\":' + fields.trim().replace(/\s*\n\s*/g, ' ') + ' }').replace(/"rows": \[\n\s+/g, '"rows": [ ').replace(/ \}\n    \]/g, ' } ]')} as const\n`);

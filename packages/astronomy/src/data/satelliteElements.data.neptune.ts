@@ -9,7 +9,7 @@
 
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
-export const SATELLITE_ELEMENTS_NEPTUNE = {
+export const SATELLITE_ELEMENTS_NEPTUNE: Readonly<Record<'nereid' | 'triton' | 'proteus' | 'larissa' | 'naiad' | 'thalassa' | 'despina' | 'galatea', SatelliteRecord>> = {
   nereid: {
     parent: 'neptune',
     horizonsCode: '802',

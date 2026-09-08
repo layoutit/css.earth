@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-published-body-epoch-ephemeris@1",
+  "id": "squannit",
+  "centerBodyId": "moshup",
+  "epochJdTt": 2461286.5,
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "positionKm": [
+    -2.0000740541222055,
+    -1.1687593303004236,
+    -1.06113590357827
+  ],
+  "velocityKmPerDay": [
+    -10.394350942443586,
+    19.323292530626844,
+    -1.6914014518029237
+  ],
+  "gravitationalParametersKm3PerS2": {
+    "body": 8.971515858775238e-09,
+    "parent": 1.5637019863480103e-07,
+    "combined": 1.6534171449357626e-07
+  },
+  "source": {
+    "path": "source/orbit/published-parameters.json",
+    "sha256": "0061b2a8a915b03b9cd65cb4216fb757249ae868face4c8014e95cdbb86bb2bf",
+    "bytes": 4407
+  },
+  "validation": {
+    "sourceEpochState": {
+      "positionKm": [
+        0.5619373369966281,
+        2.408899695763633,
+        0.6113368016396643
+      ],
+      "velocityKmPerDay": [
+        19.56986122682051,
+        -6.5143581436185105,
+        7.68054472505398
+      ]
+    },
+    "orbitalPlaneVsIndependentRadarDegrees": 1.8167123873000217,
+    "orbitalPlaneToleranceDegrees": 7,
+    "planeQualification": "The 2006 radar pole independently constrains orbit-plane direction and reference-frame signs. This is not an independent check of the 2026 orbital phase.",
+    "phaseSensitivity": {
+      "driftTermDegrees": -174.3223699368617,
+      "driftRangeContributionDegrees": 42.910121830612105,
+      "periodRangeContributionDegrees": 6.782866531284705,
+      "epochLongitudeRangeDegrees": 5,
+      "clockScaleAmbiguityDegreesUpperEstimate": 0.41,
+      "sumOfComponentRangesDegrees": 55.10298836189681
+    },
+    "phaseSensitivityQualification": "Sum of individual published parameter ranges and a clock-scale estimate; not a formal 2026 confidence interval, since full covariance and future dynamical changes are unavailable.",
+    "independentPositionProjection": "No independent 2026 sky-plane or 3D position product was acquired; phase remains an explicitly qualified extrapolation of the published 2000–2019 model.",
+    "implementation": "Independent Python plane-basis evaluation retained here; JS preparation re-evaluates source parameters and checks vectors."
+  },
+  "limitations": [
+    "The 2026 position extrapolates the 2000–2019 photometric drift fit. It is context, not an observed or precisely predicted current position.",
+    "The sum of the individual phase-sensitivity ranges is about 55 degrees at this scene epoch; future drift changes and missing covariance can increase actual uncertainty.",
+    "J2000 equatorial axes are treated as ICRF at this coarse precision; the small frame bias is negligible relative to source pole errors.",
+    "No present-epoch attitude or libration prediction is inferred from this mutual orbit.",
+    "The original 2006 Beta mesh scale is retained independently of the 2021 photometric preference for a secondary about 130% as large."
+  ],
+  "runtimeExtrapolation": false
+}

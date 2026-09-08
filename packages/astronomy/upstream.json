@@ -34,8 +34,8 @@
   },
   "excludedFiles": {},
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mjs (tools/prepare-solar-geometry.mjs first). A catalog consumer would be wired the same way.",
-  "fileCount": 30,
-  "byteCount": 376028,
+  "fileCount": 29,
+  "byteCount": 362136,
   "files": {
     "package.json": {
       "sha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
@@ -98,10 +98,6 @@
     "src/rotation.test.ts": {
       "sha256": "19f275611fff9f11a7d2643ef2bf927dd76187e632449c7bb230006982ff83bd",
       "bytes": 11071
-    },
-    "src/solarSystem.ts": {
-      "sha256": "983b41b3be353feeb5d9cc71669acf2d3a02611f62b3f27fb2e5de9378b0a658",
-      "bytes": 13892
     },
     "src/time.test.ts": {
       "sha256": "11890c51bd5e841cdd5d439ad925e1c0e716f5e6cee0e132a149346f22131aa9",
@@ -191,6 +187,7 @@
     "src/data/satelliteElements.data.saturn.ts",
     "src/data/satelliteElements.data.ts",
     "src/data/satelliteElements.data.uranus.ts",
+    "src/data/sceneSatelliteStates.data.ts",
     "src/dwarfPlanets.test.ts",
     "src/dwarfPlanets.ts",
     "src/index.ts",
@@ -200,12 +197,17 @@
     "src/rotation.ts",
     "src/satellites.test.ts",
     "src/satellites.ts",
+    "src/sceneSatellites.test.ts",
+    "src/sceneSatellites.ts",
     "src/solarSystem.test.ts",
+    "src/solarSystem.ts",
+    "tools/body-epoch-ephemeris.mjs",
     "tools/fetch-fixtures.mjs",
     "tools/fetch-rotation-fixtures.mjs",
     "tools/generate-asteroids.mjs",
     "tools/generate-comets.mjs",
     "tools/generate-satellites.mjs",
+    "tools/generate-scene-satellites.mjs",
     "tools/lib/write-record-sections.mjs"
   ],
   "originalLocalFileHashes": {
@@ -295,6 +297,14 @@
     "src/satellites.ts": {
       "sha256": "d0b443d5fa51dea9337770dc5ca0ed02f4292776b8f05009c43b6870757dbfd0",
       "bytes": 3532
+    }
+  },
+  "locallyMaintainedOrigins": {
+    "src/solarSystem.ts": {
+      "lastMirroredSha256": "983b41b3be353feeb5d9cc71669acf2d3a02611f62b3f27fb2e5de9378b0a658",
+      "lastMirroredBytes": 13892,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The solar-system integration now composes local fixed-epoch companion states. This file is maintained locally; its current bytes are not attributed to the mirrored commit."
     }
   }
 }
