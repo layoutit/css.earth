@@ -13,7 +13,7 @@ Six archived NASA/JPL radar models extend the registry from 78 to 84 asteroids. 
 
 Original coordinates retain their kilometer scale. Reference radii supply display and scalar datums; they do not rescale the meshes. Geographos uses the volume-equivalent radius calculated from the selected archive geometry. The other five use the equivalent diameter associated with their published model.
 
-The established meshoptimizer source-connectivity path reduces the four denser meshes. Bacchus and YORP retain their original triangles. Every body uses native PolyCSS `u` primitives in raster mode, 128 px cells, prepared lighting and the shared missing-imagery grid. Both device densities use the same highest-density asset bank. No new renderer or runtime geometry path is introduced.
+The established meshoptimizer source-connectivity path reduces the four denser meshes. Bacchus and YORP retain their original triangles. Every body uses native PolyCSS `u` primitives in raster mode, 128 px cells, prepared lighting and the shared missing-imagery grid. Shadows default to off for all six bodies and remain available through the existing toggle. Both device densities use the same highest-density asset bank. No new renderer or runtime geometry path is introduced.
 
 ![The six radar asteroids in their Shape views](asteroids-radar.webp)
 
@@ -37,7 +37,7 @@ The shared Solar System context and asteroid accordion include all six. The main
 
 ## Validation
 
-The [machine-readable validation record](asteroids-radar-validation.json) binds the implementation at `68b696d3` to source hashes, prepared transport hashes, installation totals and browser observations.
+The [machine-readable validation record](asteroids-radar-validation.json) binds the implementation at `68b696d3` to source hashes, prepared transport hashes, installation totals and browser observations. Its subsequent shadows-default record identifies the updated prepared packages: all six start with Shadows off, the toggle restores both states, and retained raster faces stay unchanged. This settings update passed 28 focused package tests, a 162-page static build and seven live headless Chrome mounts (all six at DPR 1, plus the saved Nereus view at DPR 2). Published runtime asset hashes are unchanged.
 
 - All six packages passed empty-directory source restoration, source/runtime closure and 28 focused source and prepared-package tests. Final content corrections and coverage assertions received focused reruns. Original and reduced front, back and pole views were inspected; 92 interior atlas anchor locations were checked against independently projected source points. Maximum observed RGB error was 8/255. Boundary RGB remains unproven where source-facet normals are nonunique or lossy WebP mixes cell-edge colors; corresponding scalar and source-point checks are retained.
 - Full `pnpm test` passed 2,145 tests. Full `pnpm build` passed, producing 162 pages and assembling the complete primary checkout. Every one of the 931 prior solar-geometry entries remained unchanged.

@@ -746,5 +746,106 @@
     "Original/reduced geometry fits are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties.",
     "Scientific scalar transfer withholds ambiguous or out-of-allowance points. Exact boundary RGB remains unproven where incident source-facet normals are nonunique and WebP mixes cell-edge colors.",
     "Draw traces are short headless observations on this host, not performance guarantees."
-  ]
+  ],
+  "shadowDefaultFollowup": {
+    "date": "2026-09-08",
+    "setting": "shadows",
+    "default": false,
+    "scope": [
+      "geographos",
+      "bacchus",
+      "mithra",
+      "nereus",
+      "golevka",
+      "yorp"
+    ],
+    "focusedPackageTests": {
+      "passed": true,
+      "tests": 28
+    },
+    "staticBuild": {
+      "passed": true,
+      "pages": 162,
+      "command": "pnpm exec astro build --outDir output/asteroids-radar-six/shadows-site"
+    },
+    "runtimeAssetsUnchanged": true,
+    "browser": {
+      "passed": true,
+      "headless": true,
+      "delivery": "Existing live preview on port 4278; route responses matched the promoted production build by SHA-256.",
+      "mounts": [
+        {
+          "id": "geographos",
+          "dpr": 1,
+          "defaultShadows": false,
+          "toggleOnAndOff": true,
+          "retainedFaces": true,
+          "faceCount": 800,
+          "browser": "152.0.7977.76"
+        },
+        {
+          "id": "bacchus",
+          "dpr": 1,
+          "defaultShadows": false,
+          "toggleOnAndOff": true,
+          "retainedFaces": true,
+          "faceCount": 508,
+          "browser": "152.0.7977.76"
+        },
+        {
+          "id": "mithra",
+          "dpr": 1,
+          "defaultShadows": false,
+          "toggleOnAndOff": true,
+          "retainedFaces": true,
+          "faceCount": 800,
+          "browser": "152.0.7977.76"
+        },
+        {
+          "id": "nereus",
+          "dpr": 1,
+          "defaultShadows": false,
+          "toggleOnAndOff": true,
+          "retainedFaces": true,
+          "faceCount": 800,
+          "browser": "152.0.7977.76"
+        },
+        {
+          "id": "nereus",
+          "dpr": 2,
+          "defaultShadows": false,
+          "toggleOnAndOff": true,
+          "retainedFaces": true,
+          "faceCount": 800,
+          "browser": "152.0.7977.76"
+        },
+        {
+          "id": "golevka",
+          "dpr": 1,
+          "defaultShadows": false,
+          "toggleOnAndOff": true,
+          "retainedFaces": true,
+          "faceCount": 800,
+          "browser": "152.0.7977.76"
+        },
+        {
+          "id": "yorp",
+          "dpr": 1,
+          "defaultShadows": false,
+          "toggleOnAndOff": true,
+          "retainedFaces": true,
+          "faceCount": 572,
+          "browser": "152.0.7977.76"
+        }
+      ]
+    },
+    "preparedPackages": {
+      "geographos": "6044703a757763cf366f8367b1f056dfde916519272f5e8fabc80632c6721b28",
+      "bacchus": "656e11963f0af53570aaa427d2ac17336cbca945c8b4862d73dce0708ca126e5",
+      "mithra": "ac49094659d661200a104940707dd1041ade44ae5a5606d58147e5bf59c2c2ed",
+      "nereus": "66dbfa521a21b005b9f33741ac4fd97861dc326a75f5c506cae60c8fe00dfbd9",
+      "golevka": "5968ebcd2330027a2071469c850686eaaa57ca80c3e1228277ca7b8f4013f1e7",
+      "yorp": "558f6e22a4cfbcf20c6ce7887fc1e35cd062b0949558b0365c82510d704c0cc6"
+    }
+  }
 }
