@@ -9,11 +9,12 @@ import {resolve} from 'node:path';
 import {cpus,totalmem} from 'node:os';
 import {chromium} from 'playwright';
 import {serveBuiltFixture} from '../../../../tools/test-built-server.mjs';
+import {WHEEL_ZOOM_SPEED_MULTIPLIER} from '../../../../site/runtime-policy.mjs';
 
 const option=(key,fallback)=>process.argv.find(arg=>arg.startsWith(`--${key}=`))?.slice(key.length+3)??fallback;
 const dpr=Number(option('dpr','1')), cycles=Number(option('cycles','2'));
 const journey=option('journey',cycles===0?'first-city-visit':'extended-exploration');
-assert.ok(['first-city-visit','extended-exploration','polar-exploration'].includes(journey));
+assert.ok(['first-city-visit','extended-exploration','polar-exploration','continuous-exploration'].includes(journey));
 const viewport={width:Number(option('width','1440')),height:Number(option('height','1000'))};
 const touch=option('touch',String(viewport.width<=820||viewport.width<viewport.height))==='true';
 assert.ok(Number.isInteger(viewport.width)&&viewport.width>=800&&viewport.width<=1920&&Number.isInteger(viewport.height)&&viewport.height>=600&&viewport.height<=1400);
@@ -34,6 +35,7 @@ assert.ok(/^[a-z0-9-]+$/.test(traceFrom)&&/^[a-z0-9-]+$/.test(traceUntil));
 assert.ok(!memoryDumps||(traceFrom==='startup'&&traceUntil==='final'),'Phase-limited traces require --memory-dumps=false');
 assert.ok([1,2].includes(dpr)&&Number.isInteger(cycles)&&cycles>=0&&cycles<=6);
 const built=resolve(option('built','dist')), output=resolve(option('output',`output/playwright/exploration-dpr${dpr}-${Date.now()}`));
+const cameraPlan=JSON.parse(await readFile('src/planets/earth/prepared/runtime.json')).camera;
 await mkdir(output,{recursive:true});
 const harnessSource=await readFile(new URL(import.meta.url));
 await writeFile(resolve(output,'captured-harness.mjs'),harnessSource);
@@ -111,6 +113,8 @@ await context.addInitScript(()=>{
     let stable=null;
     if(checkIdentity&&stage){const nodes=[...stage.querySelectorAll('*')];baseline??=nodes;stable=baseline.length===nodes.length&&baseline.every((node,i)=>node===nodes[i])}
     return {at:performance.now(),phase:p.phase,url:location.href,ready:document.documentElement.dataset.ready,
+      emptyObjectCardVisible:(()=>{const system=document.querySelector('[data-solar-system-results]');return Boolean(system&&!system.closest('[hidden]')&&
+        ![...system.querySelectorAll('.planet-object-item')].some(item=>!item.closest('[hidden]')))})(),
       entity:card?.dataset.entityId,kind:card?.dataset.entityKind,busy:card?.ariaBusy,title:card?.querySelector('h1')?.ariaLabel,
       introduction:card?.querySelector('.planet-introduction')?.textContent,introductionState:card?.dataset.introductionState,introductionSource:card?.dataset.introductionSource,
       parents:[...document.querySelectorAll('[data-entity-parent]')].filter(e=>!e.parentElement.hidden).map(e=>({id:e.dataset.entityParent,name:e.textContent})),
@@ -179,8 +183,10 @@ const mark=async name=>{
 const state=()=>page.evaluate(()=>window.__exploration.state(true));
 const action=async(name,run)=>{
   await mark(name);const row={name,at:relative(),before:await state()};report.actions.push(row);
+  row.pendingBefore=[...contextRequests.values()].filter(r=>r.end===undefined&&/city-|wmts|worldcover/i.test(r.url)).map(r=>r.url);
   try{await run();row.ok=true}catch(error){row.ok=false;row.error=String(error);throw error}
-  finally{row.end=relative();row.after=await state()}
+  finally{row.end=relative();row.after=await state();
+    row.transportOverlap=[...contextRequests.values()].filter(r=>/city-|wmts|worldcover/i.test(r.url)&&r.at<row.end&&(r.end===undefined||r.end>row.at)).map(r=>r.url)}
 };
 const look=ms=>page.waitForTimeout(ms);
 const search=page.getByRole('searchbox',{name:'Search objects and places'});
@@ -261,6 +267,9 @@ const wheel=async(total,steps=20)=>{
   assert.ok(delivered.length>0&&delivered.every(event=>event.trusted&&event.sceneTarget),'Zoom input must reach the map');
   assert.notEqual((await state()).transform,before,'The zoom gesture must actually move the camera');
 };
+// Express the new journey in visible scale changes. Old wheel packet totals
+// were calibrated around the enclosing-sphere bug and are unsuitable here.
+const zoom=scale=>wheel(-Math.log(scale)*(touch?400:1/(cameraPlan.dolly.wheelStepPerDelta*WHEEL_ZOOM_SPEED_MULTIPLIER)),20);
 const checkpoint=async name=>{
   await mark(`checkpoint-${name}`);
   const row={name,at:relative(),state:await state(),heap:await cdp.send('Runtime.getHeapUsage'),dom:await cdp.send('Memory.getDOMCounters')};
@@ -276,9 +285,12 @@ const checkpoint=async name=>{
   await writeFile(resolve(output,'progress.json'),JSON.stringify({checkpoint:row,actions:report.actions.length,errors:report.errors},null,2));
   console.log(JSON.stringify({checkpoint:name,entity:row.state.entity,pages:row.state.pages.length,pending:row.pendingRequests.length,elapsed:relative(),output}));
   assert.equal(row.state.stable,true);assert.equal(row.state.sceneCount,1);assert.equal(row.state.diagnosticsAbsent,true);
+  assert.equal(row.state.emptyObjectCardVisible,false,'Search must not show an empty Solar System card');
   assert.ok(row.state.retainedPages<=544);
 };
 const assertOwner=async id=>{
+  // Await the requested card's asynchronous record, not imagery or flight.
+  await page.waitForFunction(id=>document.querySelector('[data-entity-card]')?.dataset.entityId===id,id,{timeout:15000});
   const s=await state();assert.equal(s.entity,id);
   const allowed=id==='earth'?['normal','night-lights']:id==='3435910'?['normal','buenos-aires-noise']:['normal'];
   assert.deepEqual(s.lenses.map(l=>l.id),allowed);
@@ -296,20 +308,78 @@ try{
   pointer=await page.evaluate(()=>{const r=document.querySelector('.polycss-camera').getBoundingClientRect();return {x:Math.min(innerWidth-190,r.left+r.width/2+40),y:r.top+r.height/2}});
   report.pointer=pointer;
   await look(1800);await checkpoint('globe');
-  if(journey==='polar-exploration'){
+  if(journey==='continuous-exploration'){
+    await action('correct-search',async()=>{
+      await search.click({clickCount:3,delay:100});await search.pressSequentially('Buneos',{delay:90});
+      await look(350);await search.press('ControlOrMeta+A');await search.pressSequentially('Buenos Aires',{delay:85});
+      await page.locator('[data-destination-id="3435910"]:visible').click({delay:100});
+    });
+    // Watch the accepted 4.5 second flight, then interact immediately. This
+    // observes travel time and never waits for imagery or a completed tile cut.
+    await look(4500);await action('zoom-during-arrival',()=>zoom(1.2));
+    await action('drag-during-arrival',()=>drag(90,-20));
+    await action('noise-during-arrival',()=>lens('buenos-aires-noise'));
+    await look(400);await action('visible-during-arrival',()=>lens('normal'));
+    await checkpoint('arrival-interrupted');
+    for(let cycle=1;cycle<=cycles;cycle++){
+      await action(`${cycle}-tokyo`,()=>select('Tokyo','1850147'));await look(600);
+      await action(`${cycle}-interrupt-with-polar-destination`,async()=>{
+        const a=(await state()).transform;await look(150);const b=(await state()).transform;
+        assert.notEqual(a,b,'Destination replacement must interrupt a moving flight');
+        await select('Longyearbyen','2729907');
+      });
+      await look(450);await action(`${cycle}-polar-zoom`,()=>zoom(1.2));
+      await action(`${cycle}-polar-drag`,()=>drag(100,40));
+      await action(`${cycle}-polar-reverse`,()=>zoom(1/1.2));await assertOwner('2729907');
+      await action(`${cycle}-suva`,()=>select('Suva','2198148'));await look(500);
+      await action(`${cycle}-dateline-zoom`,()=>zoom(1.15));
+      await action(`${cycle}-dateline-drag`,()=>drag(-120,-15));await assertOwner('2198148');
+      await action(`${cycle}-apia`,()=>select('Apia','4035413'));await look(500);
+      await action(`${cycle}-history-back`,()=>page.goBack({waitUntil:'domcontentloaded'}));await assertOwner('2198148');
+      await action(`${cycle}-history-forward`,()=>page.goForward({waitUntil:'domcontentloaded'}));await assertOwner('4035413');
+      await checkpoint(`${cycle}-revisit`);
+      if(cycle===1){
+        await action('network-offline',()=>setOffline(true));
+        await action('select-uncached-place-offline',()=>select('Ushuaia','3833367'));
+        await action('pan-while-offline',()=>drag(70,10));
+        await page.waitForFunction(()=>document.querySelector('.planet-destination-hint')?.textContent.includes('This place could not open'),null,{timeout:15000});
+        report.offlineFeedback=await page.locator('.planet-destination-hint').textContent();
+        await checkpoint('offline');
+        await action('network-restored',()=>setOffline(false));
+        await action('retry-place',()=>select('Ushuaia','3833367'));await assertOwner('3833367');
+        report.recoveredEntity=(await state()).entity;
+        await action('zoom-after-recovery',()=>zoom(1.1));
+      }
+      await action(`${cycle}-return-city`,()=>select('Buenos Aires','3435910'));await look(4500);
+      await action(`${cycle}-city-revisit-zoom`,()=>zoom(1.1));
+      await action(`${cycle}-city-revisit-pan`,()=>drag(80,-20));
+      await action(`${cycle}-noise-revisit`,()=>lens('buenos-aires-noise'));await look(350);
+      await action(`${cycle}-province`,()=>page.locator('[data-entity-parent="admin1:3433955"]').click());await assertOwner('admin1:3433955');
+      await action(`${cycle}-country`,()=>page.locator('[data-entity-parent="country:AR"]').click());await assertOwner('country:AR');
+      await action(`${cycle}-earth`,()=>page.locator('[data-entity-parent="earth"]').click());await assertOwner('earth');
+      await action(`${cycle}-night-lights`,()=>lens('night-lights'));await look(600);
+      await action(`${cycle}-visible-global`,()=>lens('normal'));await look(300);
+    }
+    await action('return-city-final',()=>select('Buenos Aires','3435910'));
+    await action('noise-final',()=>lens('buenos-aires-noise'));
+    report.imageLoadingGestures=report.actions.filter(a=>/zoom|drag|pan/.test(a.name)&&
+      a.transportOverlap.some(url=>/\.(webp|png)(?:[?#]|$)|\/wmts\//i.test(url))).map(a=>a.name);
+    assert.ok(report.imageLoadingGestures.length>=3,
+      'At least three continuous gestures must overlap actual geographic image downloads');
+  }else if(journey==='polar-exploration'){
     await action('select-northern-place',()=>select('Longyearbyen','2729907'));await look(6500);
-    await action('northern-wider-view',()=>wheel(600,30));await look(2200);
+    await action('northern-wider-view',()=>zoom(.5));await look(2200);
     await action('northern-pan',()=>drag(-180,160));await look(2200);await checkpoint('north-wide');
-    await action('northern-closer-view',()=>wheel(-350,24));await look(2200);await checkpoint('north-close');
-    await action('northern-reversal',()=>wheel(350,24));await look(1800);
+    await action('northern-closer-view',()=>zoom(1.5));await look(2200);await checkpoint('north-close');
+    await action('northern-reversal',()=>zoom(1/1.5));await look(1800);
     await action('select-antarctica',()=>select('Antarctica','country:AQ'));await look(6500);await assertOwner('country:AQ');await checkpoint('south-arrival');
-    for(let i=1;i<=3;i++){await action(`southern-closer-view-${i}`,()=>wheel(-350,24));await look(1800)}
+    for(let i=1;i<=3;i++){await action(`southern-closer-view-${i}`,()=>zoom(1.5));await look(1800)}
     await action('southern-pan',()=>drag(140,-90));await look(2400);await checkpoint('south-close');
-    await action('southern-reversal',()=>wheel(350,24));await look(2200);
+    await action('southern-reversal',()=>zoom(1/1.5));await look(2200);
   }else if(journey==='first-city-visit'){
     await action('select-buenos-aires',()=>select('Buenos Aires','3435910'));
     await look(7000);
-    for(let i=1;i<=3;i++){await action(`closer-look-${i}`,()=>wheel(-180,16));await look(i===3?3500:1700)}
+    for(let i=1;i<=3;i++){await action(`closer-look-${i}`,()=>zoom(1.2));await look(i===3?3500:1700)}
     await action('follow-river',()=>drag(150,-35));await look(3500);
     await action('noise',()=>lens('buenos-aires-noise'));await look(6000);await checkpoint('first-noise');await assertOwner('3435910');
     await action('compare-imagery',()=>lens('normal'));await look(3500);
@@ -322,7 +392,7 @@ try{
       await search.pressSequentially('Buenos Aires',{delay:90});assert.equal(await search.inputValue(),'Buenos Aires');
       await page.locator('[data-destination-id="3435910"]:visible').click({delay:100});
     });
-    await look(6500);await action('small-zoom',()=>wheel(-51,10));await look(2000);
+    await look(6500);await action('small-zoom',()=>zoom(1.2));await look(2000);
     await action('city-drag',()=>drag(-100));await look(1600);
     await action('noise',()=>lens('buenos-aires-noise'));await look(5000);await checkpoint('first-noise');await assertOwner('3435910');
   }
@@ -337,12 +407,12 @@ try{
       report.actions.at(-1).cameraMovingBeforeChange=a!==b;assert.notEqual(a,b,'The destination change must interrupt a moving camera');
       await select('Longyearbyen','2729907');
     });
-    await look(6000);await action(`${cycle}-polar-zoom-out`,()=>wheel(300));await look(1600);
+    await look(6000);await action(`${cycle}-polar-zoom-out`,()=>zoom(.5));await look(1600);
     await action(`${cycle}-polar-drag`,()=>drag(140,-50));await look(2000);await assertOwner('2729907');await checkpoint(`${cycle}-polar`);
     await action(`${cycle}-suva`,()=>select('Suva','2198148'));await look(6200);
-    await action(`${cycle}-dateline-zoom-out`,()=>wheel(550,30));await look(1800);
+    await action(`${cycle}-dateline-zoom-out`,()=>zoom(.5));await look(1800);
     await action(`${cycle}-dateline-drag`,()=>drag(-180,-10));await look(2000);await checkpoint(`${cycle}-dateline`);
-    await action(`${cycle}-dateline-reversal`,()=>wheel(-250));await look(1600);
+    await action(`${cycle}-dateline-reversal`,()=>zoom(1.5));await look(1600);
     await action(`${cycle}-apia`,()=>select('Apia','4035413'));await look(5500);await checkpoint(`${cycle}-apia`);
     await action(`${cycle}-return-city`,()=>select('Buenos Aires','3435910'));await look(6000);
     await action(`${cycle}-noise-revisit`,()=>lens('buenos-aires-noise'));await look(4000);await checkpoint(`${cycle}-revisit`);

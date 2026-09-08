@@ -181,3 +181,18 @@ test('camera scale changes retained overview content without moving the camera a
   assert.equal(groups[0].open, true); assert.equal(groups[1].open, false, 'Search preserves the previous collapsed state');
   shell.destroy(); assert.equal(listeners.size, 0);
 });
+
+test('place-only search hides the empty Solar System card and restores it for object matches', () => {
+  const f = fixture(), browser = f.selectors.get('.planet-object-browser');
+  const system = new Element();
+  browser.selectors.set('[data-solar-system-results]', system);
+  const item = browser.querySelectorAll('.planet-object-item')[0];
+  item.dataset.objectName = 'earth';
+  const shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  search.value = 'Ushuaia'; search.dispatchEvent(new Event('input'));
+  assert.equal(system.hidden, true, 'An empty object result card must not appear above place results or retry feedback');
+  search.value = 'Earth'; search.dispatchEvent(new Event('input'));
+  assert.equal(system.hidden, false);
+  assert.equal(item.hidden, false);
+  shell.destroy();
+});

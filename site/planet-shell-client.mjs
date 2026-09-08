@@ -410,6 +410,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     }
     filteringGroups = filtering;
     visibleObjects = visible;
+    if (system) system.hidden = visible === 0;
     empty.hidden = visible !== 0 || Boolean(destinations && !classification && !showAll);
   };
   const render = (next, { resetQuery = false } = {}) => {
