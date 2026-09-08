@@ -1,0 +1,70 @@
+{
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "table": "Table 1 and Table A.1",
+  "diameterKm": 116,
+  "diameterInterpretation": "Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average.",
+  "periodHours": 8.660345,
+  "poleEclipticJ2000Degrees": [
+    177,
+    -27
+  ],
+  "massKg": 2700000000000000000,
+  "shape": {
+    "source": "https://observations.lam.fr/astero/3Dshape/12_Victoria_mpcd.obj",
+    "vertices": 1434,
+    "faces": 2864,
+    "units": "km",
+    "firstVertexKm": [
+      -0.043848254,
+      -3.1824744,
+      40.617722
+    ],
+    "firstFaceZeroBased": [
+      0,
+      360,
+      361
+    ],
+    "extentsKm": [
+      150.906532,
+      120.731522,
+      101.571987
+    ],
+    "volumeCubicKm": 810363.5063239451,
+    "volumeEquivalentRadiusKm": 57.83584545124532,
+    "radialRangeKm": [
+      38.49679176101501,
+      82.55033041173819
+    ]
+  },
+  "comparison": null,
+  "radialAmbiguity": {
+    "maxMeters": 2.9103830456733704e-11,
+    "minMeters": -2.9103830456733704e-11,
+    "aboveOneMeter": 0,
+    "total": 2864
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2864,
+    "sourceVertices": 1434,
+    "weldedVertices": 1434,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1100,
+    "estimatedErrorMeters": 1040.2601318359375,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 805278520289364.1
+    }
+  }
+}

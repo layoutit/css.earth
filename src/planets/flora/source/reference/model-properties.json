@@ -1,0 +1,70 @@
+{
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "table": "Table 1 and Table A.1",
+  "diameterKm": 146,
+  "diameterInterpretation": "Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average.",
+  "periodHours": 12.86667,
+  "poleEclipticJ2000Degrees": [
+    337,
+    -1
+  ],
+  "massKg": 4000000000000000000,
+  "shape": {
+    "source": "https://observations.lam.fr/astero/3Dshape/8_Flora_mpcd.obj",
+    "vertices": 4002,
+    "faces": 8000,
+    "units": "km",
+    "firstVertexKm": [
+      0.11707805,
+      0.28197268,
+      62.424511
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1002,
+      1003
+    ],
+    "extentsKm": [
+      154.744629,
+      149.76244400000002,
+      127.65412899999998
+    ],
+    "volumeCubicKm": 1498117.6037469828,
+    "volumeEquivalentRadiusKm": 70.98268657749367,
+    "radialRangeKm": [
+      55.57066190937975,
+      80.37339314946936
+    ]
+  },
+  "comparison": null,
+  "radialAmbiguity": {
+    "maxMeters": 4.3655745685100555e-11,
+    "minMeters": -4.3655745685100555e-11,
+    "aboveOneMeter": 0,
+    "total": 8000
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 8000,
+    "sourceVertices": 4002,
+    "weldedVertices": 4002,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1300,
+    "estimatedErrorMeters": 1235.4903564453125,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1485563374863548
+    }
+  }
+}

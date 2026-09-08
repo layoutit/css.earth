@@ -25,28 +25,58 @@
     "facts": [
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "58 million km"
+        "label": "Solar semimajor axis",
+        "value": "0.387 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
-        "id": "diameter",
-        "label": "Diameter",
-        "value": "4,880 km"
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "2,439.4 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "88 Earth days"
+        "value": "87.97 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "59 Earth days"
+        "value": "58.65 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "axial-tilt",
         "label": "Axial tilt",
-        "value": "2°"
+        "value": "0.034°",
+        "source": {
+          "url": "https://pgda.gsfc.nasa.gov/products/105",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "moon-count",
@@ -63,7 +93,40 @@
       {
         "id": "surface-temperature",
         "label": "Surface temperature",
-        "value": "−180–430°C"
+        "value": "−180–430 °C"
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "3.301 × 10²³ kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "5.429 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Equatorial gravity",
+        "value": "3.70 m/s²",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ]
   },
@@ -91,7 +154,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced",
-        "description": "USGS enhanced color + BDR coverage",
+        "description": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage.",
         "title": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color",
         "thumbnail": "mercury-lens-enhanced.webp",
         "surface": "mercury-surface-enhanced.webp",

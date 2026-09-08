@@ -1,0 +1,45 @@
+{
+  "modelId": 5926,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5926",
+  "fields": {
+    "ID": "5926",
+    "Asteroid ID": "(88) Thisbe",
+    "Lambda": "74",
+    "Beta": "63",
+    "Period": "6.041319",
+    "YORP": "",
+    "JD0": "2443380",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "218",
+    "Equivalent Diameter Error": "3",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2021-11-12",
+    "Comment": "",
+    "Created": "2021-11-26 10:31:24",
+    "Modified": "2021-11-26 10:32:23"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/64861/AO.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/64862/IAUspin",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/64863/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/64864/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/660"
+  ]
+}

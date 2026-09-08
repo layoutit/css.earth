@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1L00.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_SPICE_Kernel xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1L00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:lucy.spice:spice_kernels:dsk_lcy_donj_k548_iso20m_v10.bds</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>lcy_donj_k548_iso20m_v10.bds</title>
+    <information_model_version>1.21.0.0</information_model_version>
+    <product_class>Product_SPICE_Kernel</product_class>
+    <Citation_Information>
+      <publication_year>2025</publication_year>
+      <keyword>Observation Geometry</keyword>
+      <description>SPICE DSK shape model of DonaldJohanson generated using stereophotogrammetry and contour fitting, created by the DLR Team.</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Context_Area>
+    <Time_Coordinates>
+      <start_date_time>2000-01-01T00:00:00Z</start_date_time>
+      <stop_date_time>2099-01-01T00:00:00Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Observation Geometry</purpose>
+      <processing_level>Derived</processing_level>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Lucy Mission</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.lucy</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Lucy Spacecraft</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.lucy</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>52246 Donaldjohanson</name>
+      <type>Asteroid</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:asteroid.52246_donaldjohanson</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+  </Context_Area>
+  <Reference_List>
+    <Internal_Reference>
+      <lid_reference>urn:nasa:pds:lucy.spice:document:spiceds</lid_reference>
+      <reference_type>data_to_document</reference_type>
+    </Internal_Reference>
+  </Reference_List>
+  <File_Area_SPICE_Kernel>
+    <File>
+      <file_name>lcy_donj_k548_iso20m_v10.bds</file_name>
+      <creation_date_time>2025-11-04T11:11:04</creation_date_time>
+      <file_size unit="byte">23416832</file_size>
+      <md5_checksum>bd04e5f5d3da65da2a5ba470fc07c882</md5_checksum>
+    </File>
+    <SPICE_Kernel>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">23416832</object_length>
+      <parsing_standard_id>SPICE</parsing_standard_id>
+      <description>SPICE DSK shape model of DonaldJohanson generated using stereophotogrammetry and contour fitting, created by the DLR Team.</description>
+      <kernel_type>DSK</kernel_type>
+      <encoding_type>Binary</encoding_type>
+    </SPICE_Kernel>
+  </File_Area_SPICE_Kernel>
+</Product_SPICE_Kernel>

@@ -30,8 +30,8 @@
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "2.210 AU (mean)"
+        "label": "Solar semimajor axis",
+        "value": "2.210 AU"
       },
       {
         "id": "orbital-period",
@@ -44,7 +44,19 @@
         "value": "7.04 hours"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.246",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-08",
+          "path": "source/reference/horizons-elements.txt"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -53,7 +65,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Galileo SSI · high-pass mosaic",
+        "description": "Galileo’s highest-resolution pair, 107318313 and 107318326, mapped onto the Thomas shape. The source is high-pass filtered and retains photographed illumination; it is not calibrated albedo or natural color. Best original detail is approximately 55 m/pixel and varies greatly. The gray grid marks poor or missing coverage. Shadows adds approximate fixed-epoch Sun lighting.",
         "title": "Galileo’s highest-resolution pair, 107318313 and 107318326, mapped onto the Thomas shape. The source is high-pass filtered and retains photographed illumination; it is not calibrated albedo or natural color. Best original detail is approximately 55 m/pixel and varies greatly. The gray grid marks poor or missing coverage. Shadows adds approximate fixed-epoch Sun lighting.",
         "thumbnail": "/scenes/gaspra/gaspra-normal-thumbnail.webp",
         "surface": "gaspra-normal-surface@2x.webp",
@@ -68,7 +80,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Thomas shape · radial height",
+        "description": "Color shows the published shape radius minus a 6.1 km reference sphere, including Gaspra’s broad irregular shape. This is shape-derived height, not gravitational elevation or a photographic observation. Shape constraints vary with the flyby coverage; unseen regions are less certain. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
         "title": "Color shows the published shape radius minus a 6.1 km reference sphere, including Gaspra’s broad irregular shape. This is shape-derived height, not gravitational elevation or a photographic observation. Shape constraints vary with the flyby coverage; unseen regions are less certain. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
         "thumbnail": "/scenes/gaspra/gaspra-elevation-thumbnail.webp",
         "surface": "gaspra-elevation-surface@2x.webp",

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%277%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  7 Iris (A847 PA)             2026-Sep-07 20:32:43
+Rec #:       7 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 5954 (1848-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457701.5 ! 2016-Nov-09.00 (TDB)         Residual RMS= .20279
+   EC= .2314038302359487   QR= 1.833346969212803   TP= 2458075.9324631989
+   OM= 259.5702297985244   W=  145.351701854154    IN= 5.523471273169206
+   A= 2.385318898708038    MA= 259.8253358195066   ADIST= 2.937290828203273
+   PER= 3.68407            N= .267537337           ANGMOM= .025846636
+   DAN= 2.78841            DDN= 1.89655            L= 45.0465451
+   B= 3.1370053            MOID= .84558302         TP= 2017-Nov-18.4324631989
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 99.915             ROTPER= 7.139
+   H= 5.7                  G= .150                 B-V= .855
+                           ALBEDO= .2766           STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#144, OCC=0           radar( 2 delay, 0 Dop.)
+2: source=ORB
+*******************************************************************************

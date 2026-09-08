@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27354%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               354 Eleonora (A893 BC)          2026-Sep-07 20:32:48
+Rec #:     354 (+COV) Soln.date: 2026-Jun-05_03:29:49   # obs: 4613 (1893-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457788.5 ! 2017-Feb-04.00 (TDB)         Residual RMS= .25508
+   EC= .1146207070103491   QR= 2.477369216268244   TP= 2457012.8872583327
+   OM= 140.3718881352633   W=  5.54943181973734    IN= 18.40197299327338
+   A= 2.798088046426902    MA= 163.32660875794     ADIST= 3.11880687658556
+   PER= 4.68059            N= .210577521           ANGMOM= .028585143
+   DAN= 2.47856            DDN= 3.11692            L= 145.6391893
+   B= 1.7493882            MOID= 1.49053001        TP= 2014-Dec-21.3872583327
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 74.485             ROTPER= 4.277
+   H= 6.17                 G= .370                 B-V= .949
+                           ALBEDO= .201            STYP= Sl
+
+ASTEROID comments: 
+1: soln ref.= JPL#136, OCC=0
+2: source=ORB
+*******************************************************************************

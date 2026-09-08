@@ -8,10 +8,13 @@ import type { StarLabelCandidate } from './point-field-labels.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
 import { createOpacityFader } from './opacity-fader.js';
 import { createPointFieldSelection } from './point-field-selection.js';
-import { createPointFieldSelectionClient } from './point-field-selection-client.js';
+import { createPointSample, samplePreparedPoint } from './point-field-projection.js';
+import { createRetainedLeafPool } from '../rendering/retained-leaf-pool.js';
+export { pointPhotometry, projectPreparedPoint } from './point-field-projection.js';
+import { createPointFieldSelectionClient, samePointFieldView } from './point-field-selection-client.js';
 import type { PointFieldView } from './point-field-selection.js';
 
-type Slot = { element: HTMLElement; reference: PointReference | null; entering: boolean;
+type Slot = { sample: ReturnType<typeof createPointSample>; element: HTMLElement; setVisible(shown: boolean): void; reference: PointReference | null; entering: boolean;
   identity: string | null; shown: boolean; x: number; y: number; size: number };
 type Publication = { world: WorldCameraPose; viewport: WorldCameraViewport; labelExclusionRects: readonly LabelScreenRect[] };
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
@@ -35,12 +38,11 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   const atlasUrl = resolveResource(payload.atlas.path);
   starLayer.style.setProperty('--point-atlas', `url(${JSON.stringify(atlasUrl)})`);
   starLayer.style.setProperty('--point-tile-size', `${payload.atlas.tileSize}px`);
-  const makeSlots = (count: number): Slot[] => Array.from({ length: count }, () => {
-    const element = host.ownerDocument.createElement('s');
-    element.style.visibility = 'hidden';
-    starLayer.appendChild(element);
-    return { element, reference: null, entering: false, identity: null, shown: false, x: NaN, y: NaN, size: NaN };
-  });
+  const makeSlots = (count: number): Slot[] => {
+    const pool = createRetainedLeafPool(starLayer, count, 'prepared-point-field-block');
+    return pool.elements.map((element, index) => ({ element, setVisible: shown => pool.setVisible(index, shown),
+      sample: createPointSample(), reference: null, entering: false, identity: null, shown: false, x: NaN, y: NaN, size: NaN }));
+  };
   const outgoing = makeSlots(payload.policy.transitionSlots);
   const active = makeSlots(payload.policy.activeSlots);
   const fader = createOpacityFader(host.ownerDocument.defaultView!);
@@ -54,8 +56,14 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   let destroyed = false, initialized = false;
   let selected: PreparedPointFieldSelection | null = null;
   let visiblePoints = 0, individualPoints = 0;
+  let pointRevision = 0, renderedRevision = -1, renderPasses = 0, projectedPoints = 0;
+  let renderedView: PointFieldView | null = null;
+  let renderedOffset: readonly number[] = [];
+  let candidates: StarLabelCandidate[] = [];
+  const labelSample = createPointSample();
 
   let pendingSelection: PreparedPointFieldSelection | null = null;
+  let selectionViewCompleted: PointFieldView | null = null;
   let adoptionFrame: number | null = null;
   const windowTarget = host.ownerDocument.defaultView!;
   const selector = typeof Worker === 'undefined' ? null : createPointFieldSelectionClient(payload, selection => {
@@ -81,12 +89,15 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     const view = selectionView(publication);
     // Seed the first view synchronously: the ready scene never flashes an empty sky.
     // All subsequent browser selection belongs to the application-lifetime worker.
-    if (!initialized || !selector) assign(selectInitial(view));
+    if (!initialized || (!selector && (!selectionViewCompleted || !samePointFieldView(selectionViewCompleted, view)))) {
+      assign(selectInitial(view)); selectionViewCompleted = view;
+    }
     else if (pendingSelection) { const next = pendingSelection; pendingSelection = null; assign(next); }
     if (timer === null) selector?.request(view);
   }
 
   function assign(selection: PreparedPointFieldSelection) {
+    pointRevision++;
     const next = new Map(selection.representatives.map(reference => [key(reference), reference]));
     const survivors = new Set<string>();
     let removed = 0;
@@ -116,6 +127,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
 
   function finishTransition() {
     timer = null;
+    pointRevision++;
     for (const slot of outgoing) {
       slot.reference = null;
       setShown(slot, false);
@@ -131,33 +143,41 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     const halfWidth = (publication.viewport.widthPixels ?? host.clientWidth) / 2;
     const halfHeight = (publication.viewport.heightPixels ?? host.clientHeight) / 2;
     let visible = 0, individual = 0;
-    const candidates: StarLabelCandidate[] = [];
-    const occluded = (position: Vector3) => occluderLocal && rayHitsSphereBefore(
-      position.map((value, axis) => value - local.positionUnits[axis]) as unknown as Vector3,
-      occluderLocal.map((value, axis) => value - local.positionUnits[axis]) as unknown as Vector3,
-      occluder!.radiusM / payload.frame.metersPerUnit);
-    const label = (index: number): StarLabelCandidate | null => {
+    const view = { eyeUnits: local.positionUnits, viewRotation: rotation, focalPx: focal,
+      viewportHalfWidthPx: halfWidth, viewportHalfHeightPx: halfHeight };
+    const occluderRelative = occluderLocal && [occluderLocal[0] - local.positionUnits[0],
+      occluderLocal[1] - local.positionUnits[1], occluderLocal[2] - local.positionUnits[2]] as Vector3;
+    const occluderRadius = (occluder?.radiusM ?? 0) / payload.frame.metersPerUnit;
+    const occluded = (sample: ReturnType<typeof createPointSample>) => occluderRelative &&
+      rayHitsSphereBefore(sample.relative, occluderRelative, occluderRadius);
+    const label = (index: number, existing?: ReturnType<typeof createPointSample>): StarLabelCandidate | null => {
       const star = payload.stars[index];
-      if (!star.name || occluded(star.positionUnits)) return null;
-      const p = projectPreparedPoint(star.positionUnits, local.positionUnits, rotation, focal, ox, oy);
-      const light = pointPhotometry(payload, star.absoluteMagnitude, p.distanceUnits, star.coverageAnchor);
-      if (p.depth <= 0 || Math.abs(p.x) >= halfWidth - 30 || Math.abs(p.y) >= halfHeight - 30 ||
-          light.magnitude > payload.photometry.hintsLimitMagnitude) return null;
-      return { index, name: star.name, x: p.x, y: p.y, ...light };
+      if (!star.name) return null;
+      const p = existing ?? samplePreparedPoint(labelSample, star, payload, local.positionUnits, rotation, focal, ox, oy);
+      if (occluded(p) || p.depth <= 0 || Math.abs(p.x) >= halfWidth - 30 || Math.abs(p.y) >= halfHeight - 30 ||
+          p.light.magnitude > payload.photometry.hintsLimitMagnitude) return null;
+      return { index, name: star.name, x: p.x, y: p.y, ...p.light };
     };
+    if (renderedRevision === pointRevision && renderedView && samePointFieldView(renderedView, view) &&
+        renderedOffset[0] === ox && renderedOffset[1] === oy) {
+      // Foreground label exclusions can change with the same camera.
+      labels?.publish(candidates, label, publication.labelExclusionRects);
+      return;
+    }
+    renderedView = view; renderedOffset = [ox, oy]; renderedRevision = pointRevision;
+    renderPasses++; candidates = [];
     const write = (slot: Slot, departing: boolean) => {
       const reference = slot.reference, element = slot.element;
       if (!reference) { setShown(slot, false); return; }
       const point = reference.kind === 'star' ? payload.stars[reference.index] : payload.nodes[reference.index];
-      const projection = projectPreparedPoint(point.positionUnits, local.positionUnits, rotation, focal, ox, oy);
-      const light = pointPhotometry(payload, point.absoluteMagnitude, projection.distanceUnits,
-        reference.kind === 'star' && payload.stars[reference.index].coverageAnchor);
-      const size = light.radiusPx * 2 * payload.atlas.haloRadii;
-      const shown = projection.depth > 0 && light.luminance > 0 && !occluded(point.positionUnits) && Math.abs(projection.x) < halfWidth + size && Math.abs(projection.y) < halfHeight + size;
+      const projection = samplePreparedPoint(slot.sample, point, payload, local.positionUnits, rotation, focal, ox, oy);
+      const { light, size } = projection;
+      projectedPoints++;
+      const shown = projection.depth > 0 && light.luminance > 0 && !occluded(projection) && Math.abs(projection.x) < halfWidth + size && Math.abs(projection.y) < halfHeight + size;
       setShown(slot, shown);
       if (!shown) return;
       if (!departing) { visible++; if (reference.kind === 'star') individual++; }
-      if (labels && !departing && reference.kind === 'star') { const candidate = label(reference.index); if (candidate) candidates.push(candidate); }
+      if (labels && !departing && reference.kind === 'star') { const candidate = label(reference.index, projection); if (candidate) candidates.push(candidate); }
       const identity = key(reference);
       if (slot.identity !== identity) {
         slot.identity = identity;
@@ -190,12 +210,14 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
         coveredCount: selected?.coveredCount ?? 0, consideredCount: selected?.consideredCount ?? 0,
         drawnCount: selected?.drawnCount ?? 0, representatives: selected?.representatives.length ?? 0,
         maxProjectedErrorPx: selected?.maxProjectedErrorPx ?? 0, budgetLimited: selected?.budgetLimited ?? false,
-        visiblePoints, individualPoints,
+        visiblePoints, individualPoints, renderPasses, projectedPoints,
         points: Object.freeze([...outgoing, ...active].map(slot => Object.freeze({ element: slot.element,
           reference: slot.reference === null ? null : key(slot.reference) }))),
       });
     },
     setOccluder(body: { positionM: Vector3; radiusM: number }) {
+      if (occluder && occluder.radiusM === body.radiusM && occluder.positionM.every((value, axis) => value === body.positionM[axis])) return;
+      pointRevision++;
       occluder = body;
       occluderLocal = presentPhysicalPoseInVolume({ positionM: body.positionM,
         orientationXyzw: [0, 0, 0, 1] }, payload.frame).positionUnits;
@@ -225,7 +247,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
 function setShown(slot: Slot, shown: boolean) {
   if (slot.shown === shown) return;
   slot.shown = shown;
-  slot.element.style.visibility = shown ? '' : 'hidden';
+  slot.setVisible(shown);
 }
 
 function camera(publication: Publication, payload: PreparedCssPointField) {
@@ -235,24 +257,4 @@ function camera(publication: Publication, payload: PreparedCssPointField) {
   const local = presentPhysicalPoseInVolume(publication.world.pose, payload.frame);
   const rotation = transposeWorldRotation(worldRotationFromQuaternion(local.orientationXyzw)) as Matrix3;
   return { local, rotation };
-}
-
-export function projectPreparedPoint(position: Vector3, eye: Vector3, rotation: Matrix3, focal: number, ox = 0, oy = 0) {
-  const x = position[0] - eye[0], y = position[1] - eye[1], z = position[2] - eye[2];
-  const depth = -(rotation[6] * x + rotation[7] * y + rotation[8] * z);
-  return { x: ox + focal * (rotation[0] * x + rotation[1] * y + rotation[2] * z) / depth,
-    y: oy + focal * (rotation[3] * x + rotation[4] * y + rotation[5] * z) / depth,
-    depth, distanceUnits: Math.hypot(x, y, z) };
-}
-
-/** Apparent magnitude selects/interpolates prepared exposure samples, not source imagery. */
-export function pointPhotometry(payload: PreparedCssPointField, absoluteMagnitude: number, distanceUnits: number, coverageAnchor = false) {
-  const distancePc = distanceUnits * payload.frame.metersPerUnit / 3.085677581491367e16;
-  const magnitude = absoluteMagnitude + 5 * Math.log10(Math.max(distancePc, Number.MIN_VALUE)) - 5;
-  const table = payload.photometry;
-  const coordinate = Math.max(0, Math.min(table.samples.length - 1, (magnitude - table.minimumMagnitude) / table.step));
-  const index = Math.floor(coordinate), t = coordinate - index;
-  const a = table.samples[index], b = table.samples[Math.min(index + 1, table.samples.length - 1)];
-  return { magnitude, radiusPx: Math.max(coverageAnchor ? table.minimumRadiusPx : 0, a.radiusPx + (b.radiusPx - a.radiusPx) * t),
-    luminance: Math.max(coverageAnchor ? table.floor : 0, a.luminance + (b.luminance - a.luminance) * t) };
 }

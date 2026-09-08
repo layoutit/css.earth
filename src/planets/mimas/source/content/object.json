@@ -9,12 +9,24 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "198.8 km"
+        "value": "198.2 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "9.58 AU (mean)"
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
@@ -28,7 +40,7 @@
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Saturn",
+        "label": "Mean distance from Saturn",
         "value": "About 186,000 km"
       },
       {
@@ -37,7 +49,19 @@
         "value": "William Herschel · 1789"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.150 ± 0.007 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -51,7 +75,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini ISS · 2017 mosaic",
+        "description": "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model.",
         "title": "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model.",
         "thumbnail": "/scenes/mimas/mimas-normal-thumbnail.webp",
         "surface": "mimas-normal-surface@2x.webp",
@@ -64,7 +88,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Cassini ISS · infrared–green–UV",
+        "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model.",
         "title": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model.",
         "thumbnail": "/scenes/mimas/mimas-enhanced-thumbnail.webp",
         "surface": "mimas-enhanced-surface@2x.webp",
@@ -77,7 +101,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Cassini terrain model · shaded relief",
+        "description": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model.",
         "title": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model.",
         "thumbnail": "/scenes/mimas/mimas-elevation-thumbnail.webp",
         "surface": "mimas-elevation-surface@2x.webp",

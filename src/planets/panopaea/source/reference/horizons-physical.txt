@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2770%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                70 Panopaea (A861 JA)          2026-Sep-08 03:34:47
+Rec #:      70 (+COV) Soln.date: 2026-Jun-05_03:07:07   # obs: 7968 (1866-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457567.5 ! 2016-Jun-28.00 (TDB)         Residual RMS= .20106
+   EC= .181839263255167    QR= 2.139436745888775   TP= 2458297.4465441718
+   OM= 47.72888995013752   W=  255.373123743617    IN= 11.59061749465384
+   A= 2.614934510791637    MA= 189.8609883629167   ADIST= 3.090432275694499
+   PER= 4.22863            N= .233084207           ANGMOM= .027353341
+   DAN= 2.65016            DDN= 2.41746            L= 302.8109823
+   B= -11.2100222          MOID= 1.15883994        TP= 2018-Jun-27.9465441718
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 63.9555            ROTPER= 15.8052
+   H= 8.16                 G= .140                 B-V= .740
+                           ALBEDO= .038            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#89, OCC=0
+2: source=ORB
+*******************************************************************************

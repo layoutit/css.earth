@@ -59,7 +59,8 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
           publication.world.epochJdTt !== frame.epochJdTt)) throw new TypeError('Environment labels and world camera use different prepared frames.');
       if (!(publication.viewport.focalPixels > 0) || publication.viewport.principalOffsetPixels.length !== 2 ||
           !publication.viewport.principalOffsetPixels.every(Number.isFinite)) throw new TypeError('Environment label viewport is invalid.');
-      const width = host.clientWidth, height = host.clientHeight;
+      const width = publication.viewport.widthPixels ?? host.clientWidth;
+      const height = publication.viewport.heightPixels ?? host.clientHeight;
       if (!(width > 0) || !(height > 0)) { accepted = hideAll(entries, fader); return accepted; }
       if (publication.shellStats.length !== shells.length) throw new TypeError('Environment label shell statistics must align with prepared shells.');
       const blockers = publication.blockerRects ?? [], next: LabelScreenRect[] = [];

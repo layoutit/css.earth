@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2780%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 80 Sappho (A864 JA)           2026-Sep-07 21:00:23
+Rec #:      80 (+COV) Soln.date: 2026-Jun-05_03:07:45   # obs: 4692 (1865-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457809.5 ! 2017-Feb-25.00 (TDB)         Residual RMS= .27525
+   EC= .1996679853512046   QR= 1.837998296084344   TP= 2458257.0269348877
+   OM= 218.6965131119759   W=  139.5615371998838   IN= 8.674278159742707
+   A= 2.296544761977191    MA= 233.2608235366887   ADIST= 2.755091227870039
+   PER= 3.48033            N= .283198991           ANGMOM= .025543743
+   DAN= 2.60012            DDN= 1.91411            L= 358.5831495
+   B= 5.6139152            MOID= .84294701         TP= 2018-May-18.5269348877
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 34.2815            ROTPER= 14.03
+   H= 8.06                 G= .150                 B-V= .901
+                           ALBEDO= .206            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#82, OCC=0
+2: source=ORB
+*******************************************************************************

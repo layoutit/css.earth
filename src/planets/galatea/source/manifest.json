@@ -90,8 +90,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3775,
-      "expectedSha256": "32fc8f7a087282836cf1d80dad28c7bd9a4a613aa333053f42ad8bb39d7f8b96",
+      "expectedBytes": 4013,
+      "expectedSha256": "3e2838f60e2b2ebdbab317ea6a66c8a3f3ef246d33992bf05f42501c73ed0556",
       "purpose": "Galatea scientific source or authored preparation evidence."
     },
     {
@@ -183,6 +183,13 @@
       "expectedBytes": 2405,
       "expectedSha256": "5d1854cb159c086e91e8c541be77e4f5cf6b481ae99c9b621e73476bc7c66d27",
       "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 720,
+      "expectedSha256": "bf9fe9d1d57eaaca6e2c747f832e6a22a8ead0f16e15afe7196da48b5eca7591"
     }
   ],
   "generatedIntermediates": [

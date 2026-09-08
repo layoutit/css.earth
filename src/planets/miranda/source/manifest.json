@@ -143,8 +143,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 9546,
-      "expectedSha256": "fdaa2a09cb0194200234db2fb07ff06d7cdf7f40acb2fcbd23903d1e713743a5",
+      "expectedBytes": 10354,
+      "expectedSha256": "10ceda01821a91ce0387d89d45da178bba6b99f23f414126f7e39e7e427811f5",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -182,6 +182,13 @@
       "purpose": "Original author README with DEM datum, construction and limitations.",
       "expectedBytes": 2426,
       "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1076,
+      "expectedSha256": "743047fa1d0f2f78dc53450faf349ffaddfa004b8a683f7325c20888a6d970ea"
     }
   ]
 }

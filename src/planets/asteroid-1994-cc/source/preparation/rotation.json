@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": -30.302483176035235,
+  "declinationDegrees": 11.167929702828165,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 2.3886,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Brozović et al. (2011), Icarus 216, 241–256; Goldstone, Arecibo and NASA/JPL: ecliptic J2000 lambda 336 deg, beta 22 deg, period 2.3886 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. The archive explicitly identifies this mesh as Alpha, the primary; Beta and Gamma are not modeled here. The adopted nominal solution is model 17, with ecliptic pole (336°, 22°). Many radar pole solutions remain plausible, so the nominal orientation does not establish a unique spin pole."
+}

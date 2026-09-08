@@ -30,8 +30,8 @@
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "2.363 AU (mean)"
+        "label": "Solar semimajor axis",
+        "value": "2.363 AU"
       },
       {
         "id": "orbital-period",
@@ -44,7 +44,19 @@
         "value": "6.05 hours"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.3",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-08",
+          "path": "source/reference/horizons-physical.txt"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -53,7 +65,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Rosetta OSIRIS · Stooke mosaic",
+        "description": "A visualization mosaic compiled by Phil Stooke from Rosetta OSIRIS observations, controlled against Leyrat et al. (2010). Extensive processing, photographed shadows and a revised south-pole interpretation remain; this is not calibrated reflectance. The gray grid marks exterior gaps identified in the published map. Camera detail is approximately 80 m/pixel at best, despite the enlarged map. Shadows adds approximate fixed-epoch Sun lighting.",
         "title": "A visualization mosaic compiled by Phil Stooke from Rosetta OSIRIS observations, controlled against Leyrat et al. (2010). Extensive processing, photographed shadows and a revised south-pole interpretation remain; this is not calibrated reflectance. The gray grid marks exterior gaps identified in the published map. Camera detail is approximately 80 m/pixel at best, despite the enlarged map. Shadows adds approximate fixed-epoch Sun lighting.",
         "thumbnail": "/scenes/steins/steins-normal-thumbnail.webp",
         "surface": "steins-normal-surface@2x.webp",
@@ -68,7 +80,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Jorda shape · radial height",
+        "description": "Color shows radius in the published Jorda shape minus a 2.58 km reference sphere. It includes the broad irregular form and is not gravitational elevation. OSIRIS constrains the observed terrain; light-curve inversion supplies the unseen region. The source has a documented artificial elevation jump where those methods meet, retained here. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
         "title": "Color shows radius in the published Jorda shape minus a 2.58 km reference sphere. It includes the broad irregular form and is not gravitational elevation. OSIRIS constrains the observed terrain; light-curve inversion supplies the unseen region. The source has a documented artificial elevation jump where those methods meet, retained here. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
         "thumbnail": "/scenes/steins/steins-elevation-thumbnail.webp",
         "surface": "steins-elevation-surface@2x.webp",

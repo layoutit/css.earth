@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
 import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
+import { screenPicking } from '../navigation/screen-picking.js';
 import { OBJECTS } from '../../../../site/objects.mjs';
 
 class FakeElement extends EventTarget {
@@ -83,6 +84,67 @@ function mount(scale: number) {
   mounted.set(layer.root as unknown as FakeElement, layer);
   return layer.root as unknown as FakeElement;
 }
+
+test('a resolved background sprite does not pick through its transparent square corners', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  layer.selectObject('mercury');
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 100], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+  const registry = screenPicking(root.parentNode! as unknown as HTMLElement);
+  const sun = layer.inspect().find(body => body.id === 'sun')!.marker;
+  expect(registry.pick(0, 0)).toBe(sun);
+  expect(registry.pick(35, 35)).not.toBe(sun);
+  layer.destroy();
+});
+
+test('camera viewport snapshots drive clipping and resize without reading host layout', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  Object.defineProperties(root.parentNode!, {
+    clientWidth: { get() { throw new Error('Publication flushed host layout'); } },
+    clientHeight: { get() { throw new Error('Publication flushed host layout'); } },
+  });
+  const mercury = layer.inspect().find(entry => entry.id === 'mercury')!;
+  const publish = (widthPixels: number, heightPixels: number) => layer.publish({
+    referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] },
+  }, { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels, heightPixels });
+  publish(800, 600);
+  expect(mercury.indicator.style.visibility).toBe('');
+  publish(40, 600);
+  expect(mercury.indicator.style.visibility).toBe('hidden');
+  publish(800, 600);
+  expect(mercury.indicator.style.visibility).toBe('');
+  publish(800, 10);
+  expect(mercury.indicator.style.visibility).toBe('hidden');
+  layer.destroy();
+});
+
+test('hidden orbit selection leaves other orbits intact and retains the same body nodes', () => {
+  const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
+  const target = find(root, 'contextOrbit', 'mercury'), other = find(root, 'contextOrbit', 'venus');
+  const visibleTarget = target.style.opacity, visibleOther = other.style.opacity;
+  expect(visibleTarget).not.toBe('calc(0 * var(--context-line-opacity, 1))');
+  layer.setHiddenOrbits(['mercury']);
+  root.ownerDocument.defaultView.advance(200);
+  expect(target.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(target.style.getPropertyValue('--context-orbit-pointer-events')).toBe('none');
+  expect(target.dataset.objectNavigate).toBeUndefined();
+  expect(other.style.opacity).toBe(visibleOther);
+  expect(find(root, 'contextLabel', 'mercury').style.visibility).toBe('');
+  expect(find(root, 'contextIndicator', 'mercury').style.visibility).toBe('');
+  expect(all(root)).toEqual(nodes);
+  layer.setNavigationIndicatorsVisible(false);
+  layer.setHiddenOrbits([]);
+  expect(target.style.opacity).toBe('0');
+  expect(target.dataset.objectNavigate).toBeUndefined();
+  layer.setNavigationIndicatorsVisible(true);
+  expect(target.style.opacity).toBe(visibleTarget);
+  expect(target.dataset.objectNavigate).toBe('mercury');
+  expect(other.style.opacity).toBe(visibleOther);
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
 
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
@@ -303,7 +365,7 @@ test('orbit and circle keep a one-pixel stroke across zoom and physical system s
         { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 5000, heightPixels: 5000 });
       const mercury = layer.inspect().find(body => body.id === 'mercury')!;
       const width = (mercury.indicator as unknown as FakeElement).style['--context-line-width'];
-      expect((mercury.orbit[0].parentNode as unknown as FakeElement).style['--context-line-width']).toBe(width);
+      expect((mercury.orbit[0].parentNode as unknown as FakeElement).parentNode!.style['--context-line-width']).toBe(width);
       expect(find(root, 'contextIndicator', 'sun').style['--context-line-width']).toBe(width);
       return parseFloat(width);
     };
@@ -852,4 +914,30 @@ test('orbit endpoints follow the rendered circle through growth and shrink witho
     layer?.destroy();
     vi.unstubAllGlobals();
   }
+});
+
+test('flight overlays fade independently while retained body images keep following the camera', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const mercury = layer.inspect().find(entry => entry.id === 'mercury')!;
+  const nodes = all(root), orbit = mercury.orbit.map(node => ({ ...node.style }));
+  const markerTransform = mercury.marker.style.transform, markerOpacity = mercury.marker.style.opacity;
+  const labelTransform = mercury.label.style.transform;
+  layer.setNavigationIndicatorsVisible(false);
+  const measurements = nodes.reduce((sum, node) => sum + node.measurements, 0);
+  expect(mercury.label.style.opacity).toBe('0');
+  expect(mercury.indicator.style.opacity).toBe('0');
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [50, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels: 800, heightPixels: 600 });
+  expect(nodes.reduce((sum, node) => sum + node.measurements, 0)).toBe(measurements);
+  expect(mercury.marker.style.transform).not.toBe(markerTransform);
+  expect(Number(mercury.marker.style.opacity)).toBeCloseTo(Number(markerOpacity), 4);
+  expect(mercury.orbit.map(node => ({ ...node.style }))).toEqual(orbit);
+  expect(mercury.label.style.transform).toBe(labelTransform);
+  layer.setNavigationIndicatorsVisible(true);
+  expect(mercury.indicator.style.opacity).not.toBe('0');
+  expect(mercury.indicator.style.transform).toContain('50px');
+  expect(mercury.orbit.map(node => ({ ...node.style }))).not.toEqual(orbit);
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
 });

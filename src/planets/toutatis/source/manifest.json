@@ -91,8 +91,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 7833,
-      "expectedSha256": "9fbc3fa1ed4d51f3992937eb4871151121d67597f58a9f9e4a74f513ea2a1324"
+      "expectedBytes": 8605,
+      "expectedSha256": "ad7fca0b33971a84c3a7823a8094957eac35d45a57ea3899537a22b88626a413"
     },
     {
       "path": "preparation/acquisition.json",
@@ -165,6 +165,14 @@
       "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "id": "sbdb-physical",
+      "path": "reference/sbdb-physical.json",
+      "origin": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=Toutatis&phys-par=1",
+      "expectedBytes": 5876,
+      "expectedSha256": "280a10bae7683be9dd246ccc3bbf70bae3bbc0087c5d2ed9cfe11ab24a260951",
+      "purpose": "Pinned JPL SBDB physical record retaining the NEOWISE geometric albedo value, uncertainty and reference for factsheet interpretation."
     }
   ]
 }

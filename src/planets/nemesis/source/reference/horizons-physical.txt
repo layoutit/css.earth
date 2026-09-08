@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27128%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                128 Nemesis (A872 WA)          2026-Sep-07 20:32:50
+Rec #:     128 (+COV) Soln.date: 2026-Jun-05_03:11:08   # obs: 6817 (1872-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458020.5 ! 2017-Sep-24.00 (TDB)         Residual RMS= .25833
+   EC= .1271334422214103   QR= 2.399755444202068   TP= 2458267.7914668885
+   OM= 76.24519721457351   W=  303.8614336789806   IN= 6.245359925326074
+   A= 2.749281001564946    MA= 306.533161106195    ADIST= 3.098806558927825
+   PER= 4.55866            N= .216209801           ANGMOM= .02829128
+   DAN= 2.52592            DDN= 2.91106            L= 20.2646077
+   B= -5.1828708           MOID= 1.40898001        TP= 2018-May-29.2914668885
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 81.2575            ROTPER= 38.9325
+   H= 7.68                 G= .150                 B-V= .685
+                           ALBEDO= .067            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#144, OCC=0
+2: source=ORB
+*******************************************************************************

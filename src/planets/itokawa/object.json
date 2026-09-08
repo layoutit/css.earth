@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "66057274ee2f6e9a4809aa701e70328d7b21a28b938356e2c3dfd168ee2b8b14"
+    "sha256": "aabc1d0822e9957e6e1cdaaf7a9bf16edd0fc978332b673b529065ec6d5df4f3"
   },
   "id": "itokawa",
   "properties": {
@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "c679167ebb03c50300e02cfe2bf697aeaa89aed135f6aafb49cb6ed2647d07f4"
+          "sha256": "15c4eff105e17e03577972c15aed2ce102f6769e87f279f0dca43191b94fbf8d"
         },
         {
           "id": "rotation",
@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "abc0594de3e532d21294ed989ba088e2ebadc2b1e57f5fcb45d4700fa370db6e"
+          "sha256": "eefeba821f7f5ad79c39b52ad02411bf86927d93b0291093b3b81c20f4d544f8"
         },
         {
           "id": "title",
@@ -71,7 +71,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "dd2e51c9489489512ac9fc8f4203923fb6c95cc9ad8c73590648c8d916c78cf5"
+          "sha256": "7bdf7f773b02c471be5f06cd2c0dc246489fcf1319a155cba28d0e52a73e98d5"
         },
         {
           "id": "acquisition",

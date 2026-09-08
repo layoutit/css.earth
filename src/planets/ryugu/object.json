@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9ebace905d5382b00d1a0a2786392317af5f7b6bd840740541ca2744f137f9da"
+    "sha256": "01944544e8618e45a6f987d8de9c312c6a6d6194dc777cad0bed7362c958462c"
   },
   "id": "ryugu",
   "properties": {
@@ -61,7 +61,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "82610c1a576bc899f1a33a4400252af9485aed7f9d16a2a56dd637643fa998d0"
+          "sha256": "eea10abc78d58897604f11365abfec6a05e637ca3a1c79702f3fe0096dc0c8fc"
         },
         {
           "id": "rotation",
@@ -71,7 +71,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0734cd1a7f16f516e650593ecceef9d32dc6d687685a3fc5161e27b8e9f6451c"
+          "sha256": "32b7078c4904f0cdd43f6ded7b2052a9d7e7e2f1819611327b30590d7d1feb9c"
         },
         {
           "id": "title",

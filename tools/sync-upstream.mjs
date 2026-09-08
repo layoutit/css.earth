@@ -237,9 +237,11 @@ export function locallyMaintainedFile(target, rel) {
     "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs", "tools/lib/fit-libration.mjs",
     "tools/lib/fit-harmonics.mjs", "tools/lib/fit-harmonics.test.mjs", "tools/lib/fit-position-correction.mjs",
     "src/periodicCorrection.ts", "src/periodicCorrection.test.ts",
+    "tools/scene-ephemeris.mjs", "tools/acquire-scene-ephemeris.mjs",
     "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",
     "src/bodies.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
     "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/satellites.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
+    rel.startsWith("source/scene-epoch/") ||
     /^src\/(?:data\/satelliteElements\.data|__fixtures__\/horizons)(?:\.[a-z0-9-]+)?\.ts$/.test(rel);
 }
 

@@ -1,0 +1,198 @@
+{
+  "schema": "cssiris-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "iris-shape",
+      "path": "shape/7_Iris_mpcd.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/7_Iris_mpcd.obj",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+      "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 99500
+      },
+      "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "expectedBytes": 1676539,
+      "expectedSha256": "643b9de344348458d1c2b32e41cb9cec01d3b98033a8a821f2c09757ac3f0d04"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "iris-survey-research",
+      "path": "reference/vernazza-2021.pdf",
+      "origin": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "license": "CC-BY-4.0",
+      "acquisition": "Restore the original article through source/preparation/acquisition.json.",
+      "redistribution": "CC-BY-4.0 with attribution.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 25270498,
+      "expectedSha256": "85c45bbcf5705a5173fa1da7593aba777f3c083c61bb6a88ecf15a6513a7725f"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://observations.lam.fr/astero/3Dshape/7_Iris_mpcd.obj",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 76835,
+      "expectedSha256": "ad1ca1847b38e45c91e128e5b2e8657be673b9f31040a020d74a1c514610d5c7",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "iris-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 6407,
+      "expectedSha256": "4a00a92e844fc9360a86598e85e035ecb48c895cf43c903c622ae001d66262b8"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 1114,
+      "expectedSha256": "5a0f09013fb733661eead762de1185bc8968662add9ea52c2d050afda1bfc20a"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 1329,
+      "expectedSha256": "af15727f297a644876f0d3f2ca47f1f1a1f58629cf17f1805f951caaa9eac0df"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 669,
+      "expectedSha256": "88f3f5be1bdf3b7222d7a3ff923146413900f395252e003649b4d818c5281824"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 2996,
+      "expectedSha256": "9ad311b05077b6efaad6a91a7f5517ece95691657ba327d1d78f81edcda98b6b"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 1833,
+      "expectedSha256": "f56a7cad85a49b3b5c4693edf6168c73af50825442122ab0313e2bf8727f1f90"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 7352,
+      "expectedSha256": "a8e41dc0649bfc1a4aee10cd588aec79c2ece402ae9e722770693df74ec89076"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 1422,
+      "expectedSha256": "0929441e17448b96fcc310bf9df9d3401d2c1924a683ba951fd94ae6e85b7ef4"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 6642,
+      "expectedSha256": "b0793833b50071b14f4ae52d9d7e1e7e7aa668519adaf8d6472f34de463291a6"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 1832,
+      "expectedSha256": "7528495542d2918e561a269f76951bc3fc1d1b35377d16a4165a950c9dd5a97d"
+    },
+    {
+      "path": "reference/release-parameters.txt",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 44,
+      "expectedSha256": "5cba81fef15e64a11b68d12e64e3ac66ed18932f1f20b57696179e3d4101ae2d"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "expectedBytes": 144973,
+      "expectedSha256": "4c2b6415992d8e5a6e7826e57dbdaa525c88a60dc9c984da4e413983689d7fcf"
+    }
+  ]
+}

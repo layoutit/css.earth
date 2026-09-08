@@ -25,23 +25,47 @@
     "facts": [
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "778 million km"
+        "label": "Solar semimajor axis",
+        "value": "5.203 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
-        "id": "diameter",
-        "label": "Diameter",
-        "value": "139,822 km"
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "69,911 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "12 Earth years"
+        "value": "11.86 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "9.9 hours"
+        "value": "9.92 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "axial-tilt",
@@ -50,8 +74,14 @@
       },
       {
         "id": "moon-count",
-        "label": "Moons",
-        "value": "115"
+        "label": "Known moons",
+        "value": "115 · Sep 2026",
+        "source": {
+          "url": "https://science.nasa.gov/jupiter/jupiter-moons/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "ring-system",
@@ -62,13 +92,52 @@
     "moreFacts": [
       {
         "id": "wind-speed",
-        "label": "Wind",
-        "value": "539 km/h"
+        "label": "Cloud-top winds",
+        "value": "Up to 539 km/h"
       },
       {
         "id": "great-red-spot-depth",
         "label": "Great Red Spot depth",
-        "value": "500 km"
+        "value": "About 500 km",
+        "source": {
+          "url": "https://www.nasa.gov/news-release/nasas-juno-science-results-offer-first-3d-view-of-jupiter-atmosphere/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.898 × 10²⁷ kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.326 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Equatorial gravity",
+        "value": "24.79 m/s²",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ]
   },
@@ -79,7 +148,7 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "Hubble visible color",
+        "description": "Hubble visible-color map from 27 June 2019 with Juno-derived polar cloud structure and transferred visible color. Polar sources are not registered to the Hubble longitudes. This multi-source illustration does not depict one observation date or a geodetic polar map.",
         "title": "Hubble WFC3 visible-color global map. NASA/ESA Hubble WFC3 395, 502, and 631 nm visible-color map",
         "thumbnail": "/scenes/jupiter/jupiter-lens-normal.webp",
         "surface": "/scenes/jupiter/jupiter-surface.webp",
@@ -94,8 +163,8 @@
       {
         "id": "ultraviolet",
         "label": "Ultraviolet",
-        "description": "Hubble at 275 nm",
-        "title": "Hubble WFC3 F275W ultraviolet reflectance. F275W single-band Hubble OPAL data with declared false color and Juno-structured continuation beyond measured polar coverage",
+        "description": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
+        "title": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
         "thumbnail": "/scenes/jupiter/jupiter-lens-ultraviolet-thumbnail.webp",
         "surface": "/scenes/jupiter/jupiter-lens-ultraviolet.webp",
         "poles": "/scenes/jupiter/jupiter-lens-ultraviolet-poles.webp",
@@ -138,8 +207,8 @@
       {
         "id": "methane",
         "label": "Methane",
-        "description": "Hubble at 889 nm",
-        "title": "Hubble WFC3 FQ889N methane-band reflectance. FQ889N single-band Hubble OPAL data with declared false color and Juno-structured continuation beyond measured polar coverage",
+        "description": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
+        "title": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
         "thumbnail": "/scenes/jupiter/jupiter-lens-methane-thumbnail.webp",
         "surface": "/scenes/jupiter/jupiter-lens-methane.webp",
         "poles": "/scenes/jupiter/jupiter-lens-methane-poles.webp",

@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "phobos",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "planet",
+        "name",
+        "code",
+        "GMKm3PerSec2",
+        "GMSigma",
+        "GMReference",
+        "meanRadiusKm",
+        "radiusSigmaKm",
+        "radiusReference",
+        "densityGPerCm3",
+        "densitySigma",
+        "densityReference"
+      ],
+      "row": [
+        "Mars",
+        "Phobos",
+        "401",
+        "0.0007087",
+        "0.0000006",
+        "MAR097",
+        "11.08",
+        "0.04",
+        "1",
+        "1.872",
+        "0.076",
+        "*"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "1.524 AU"
+      }
+    }
+  ]
+}

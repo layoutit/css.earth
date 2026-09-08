@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2745%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                45 Eugenia (A857 MA)           2026-Sep-07 20:32:46
+Rec #:      45 (+COV) Soln.date: 2026-Jun-05_03:05:02  # obs: 13144 (1866-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457978.5 ! 2017-Aug-13.00 (TDB)         Residual RMS= .24023
+   EC= .08398705645939661  QR= 2.491134005025927   TP= 2458428.3632448744
+   OM= 147.6713136194843   W=  88.76053537454749   IN= 6.603997386113524
+   A= 2.71954017963667     MA= 261.1352742594751   ADIST= 2.947946354247413
+   PER= 4.48489            N= .219766178           ANGMOM= .028267802
+   DAN= 2.69546            DDN= 2.70527            L= 236.4235725
+   B= 6.6024453            MOID= 1.49127996        TP= 2018-Nov-05.8632448744
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 101.1635           ROTPER= 5.699
+   H= 7.74                 G= .070                 B-V= .676
+                           ALBEDO= .045            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#150, OCC=0
+2: source=ORB
+*******************************************************************************

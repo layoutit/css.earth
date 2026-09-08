@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf",
+  "diameterKm": 0.62,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 2.3886,
+  "poleEclipticJ2000Degrees": [
+    336,
+    22
+  ],
+  "limitations": "The archive explicitly identifies this mesh as Alpha, the primary; Beta and Gamma are not modeled here. The adopted nominal solution is model 17, with ecliptic pole (336°, 22°). Many radar pole solutions remain plausible, so the nominal orientation does not establish a unique spin pole.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/1994CC_nominal.mod.wf",
+    "vertices": 2000,
+    "faces": 3996,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.290473
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      0.688404,
+      0.667458,
+      0.638717
+    ],
+    "volumeCubicKm": 0.12488020130803003,
+    "volumeEquivalentRadiusKm": 0.31007612420753544,
+    "radialRangeKm": [
+      0.2876157688636004,
+      0.348885
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 3996,
+    "ambiguous": 0,
+    "maxErrorMeters": 2.2737367544323206e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3996,
+    "sourceVertices": 2000,
+    "weldedVertices": 2000,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 6,
+    "estimatedErrorMeters": 5.365913391113281,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 124842111.41672187
+    }
+  }
+}
