@@ -62,6 +62,9 @@ const VSOP_THEORY_DISCREPANCY_KM: Record<Vsop87BodyKey, number> = {
  * statistical uncertainties.
  */
 const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
+  kiviuq: 28145.685414789965,
+  albiorix: 18473.578208360203,
+
   siarnaq: 280355.5692405671,
   ymir: 161334.72011835242,
   nereid: 10417.19020260089,

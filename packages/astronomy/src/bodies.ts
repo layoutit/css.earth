@@ -311,6 +311,9 @@ export const BODIES: Record<BodyId, BodyData> = {
   prometheus: body('prometheus', 'Prometheus', '616', 43.1, 0.01071, 'saturn'),
   pandora: body('pandora', 'Pandora', '617', 40.6, 0.00926, 'saturn'),
   pan: body('pan', 'Pan', '618', 14, 0.00028, 'saturn'),
+  // Denk et al. (2018) size estimates: adopted display scales, not measured volumes.
+  kiviuq: body('kiviuq', 'Kiviuq', '624', 8.4, 0, 'saturn'),
+  albiorix: body('albiorix', 'Albiorix', '626', 14.3, 0, 'saturn'),
 
   puck: body('puck', 'Puck', '715', 81, 0, 'uranus'),
   // Volume-equivalent radii of Karkoschka's published prolate shape fits.

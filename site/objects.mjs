@@ -47,6 +47,8 @@ import raupDescriptor from "../src/planets/raup/object.json" with { type: "json"
 import asteroid2001qw16Descriptor from "../src/planets/asteroid-2001-qw16/object.json" with { type: "json" };
 import asteroid1999fr33Descriptor from "../src/planets/asteroid-1999-fr33/object.json" with { type: "json" };
 import dikeDescriptor from "../src/planets/dike/object.json" with { type: "json" };
+import albiorixDescriptor from "../src/planets/albiorix/object.json" with { type: "json" };
+import kiviuqDescriptor from "../src/planets/kiviuq/object.json" with { type: "json" };
 import asteroid1996hw1Descriptor from "../src/planets/asteroid-1996-hw1/object.json" with { type: "json" };
 import asteroid2008ev5Descriptor from "../src/planets/asteroid-2008-ev5/object.json" with { type: "json" };
 import rashalomDescriptor from "../src/planets/ra-shalom/object.json" with { type: "json" };
@@ -228,6 +230,16 @@ import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { typ
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("albiorix", "Albiorix", "satellite", "#a0a0a0", 9.58,
+    "Explore Albiorix, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(albiorixDescriptor);
+    }, albiorixDescriptor.properties.worldFrame),
+  object("kiviuq", "Kiviuq", "satellite", "#a0a0a0", 9.58,
+    "Explore Kiviuq, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(kiviuqDescriptor);
+    }, kiviuqDescriptor.properties.worldFrame),
   object("comet-1p", "Halley", "comet", "#b8b6b2", 17.859,
     "Explore Halley's historical Giotto/Vega shape model, with its uncertainty made explicit.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
