@@ -351,6 +351,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   });
   lifetime.onDispose(() => destinations?.destroy());
   let open = false;
+  let browsing = false;
   const filter = () => {
     const query = search.value.trim().toLocaleLowerCase("en");
     const galactic = query === 'milky way';
@@ -405,6 +406,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     empty.hidden = visible !== 0 || Boolean(destinations && !classification && !showAll);
   };
   const render = (next, { resetQuery = false } = {}) => {
+    if (!next) browsing = false;
     if (overview && !next) { next = true; search.value = overviewName(); }
     open = next;
     if (next && resetQuery) search.value = "";
@@ -421,6 +423,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   };
 
   trigger.addEventListener("click", () => {
+    browsing = !open;
     if (open) render(false);
     else render(true, { resetQuery: true });
   }, {
@@ -435,9 +438,11 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       ? event.target.closest("[data-object-query]") : null;
     if (!tag || !information.contains(tag)) return;
     search.value = tag.dataset.objectQuery;
+    browsing = true;
     render(true);
   }, { signal: events.signal });
   search.addEventListener("input", () => {
+    browsing = true;
     if (!open) render(true);
     else if (open) filter();
   }, { signal: events.signal });
@@ -497,22 +502,27 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       };
     },
     showSolarSystem() {
+      browsing = true;
       search.value = "Solar System";
       render(true);
     },
     setOverview(enabled, scope = 'solar-system') {
+      const editing = browsing;
       overview = enabled;
       overviewScope = scope;
       markSelection();
       if (enabled) destinations?.bind(null);
-      render(false);
+      render(editing);
     },
     setObject(name) {
+      // A completed flight publishes the selection, but a newer search owns
+      // its query and results until the user chooses or dismisses them.
+      const editing = browsing;
       overview = false;
       selectedSearchValue = name; currentSearchValue = name;
       markSelection();
       destinations?.bind(null);
-      render(false);
+      render(editing);
     },
     setDestinations(provider) { destinations?.bind(provider); },
     destroy() {

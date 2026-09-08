@@ -26,6 +26,7 @@ page.on('response', response => {
 });
 const state = () => page.evaluate(() => {
   const app = window.__cssEarth;
+  if (!app) return { initialized: false };
   return { active: app.activeObjectId, selected: app.selectedObjectId, ready: app.ready, error: app.error,
     overview: app.overview, camera: window[`__${app.activeObjectId}`]?.camera?.state(),
     scenes: document.querySelectorAll('.planet-stage > .polycss-camera').length };
@@ -118,7 +119,7 @@ finally {
     } finally { await file.close(); await cdp.send('IO.close', { handle: stream }); }
   }
   const diagnostics = await page.evaluate(() => { window.__cssEarthRecorder?.stop(); return window.__cssEarthRecorder?.lastRecording; }).catch(() => null);
-  await writeFile(`${output}/diagnostics.json`, JSON.stringify(diagnostics));
+  await writeFile(`${output}/diagnostics.json`, JSON.stringify(diagnostics ?? null));
   await page.screenshot({ path: `${output}/final.png` });
   report.final = await state(); await Promise.allSettled(responses);
   await browser.close(); await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2));

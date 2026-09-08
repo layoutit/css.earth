@@ -79,7 +79,9 @@
     "test:seo": "node site/test/seo-browser.mjs",
     "prepare:social": "node tools/prepare-social-images.mjs",
     "test:browser:flight": "node site/test/flight-registry-browser.mjs",
-    "test:browser:interaction-chain": "node site/test/interaction-chain-browser.mjs"
+    "test:browser:interaction-chain": "node site/test/interaction-chain-browser.mjs",
+    "test:browser:navigation-stress": "node site/test/navigation-stress-browser.mjs",
+    "test:browser:navigation-stress:matrix": "node site/test/navigation-stress-matrix.mjs"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
