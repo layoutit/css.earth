@@ -24,7 +24,7 @@ import type { CameraDelta, CameraUpdate } from '../../../src/renderers/css/navig
 import '../../../src/renderers/css/styles/volume.css';
 
 declare const __NEBULA_REPO_ROOT__: string;
-interface LabSubjectRecord {
+export interface LabSubjectRecord {
   id: string;
   name: string;
   directory: string;
@@ -40,13 +40,14 @@ interface LabSubjectRecord {
   framingRadiusUnits?: number;
   hasDetail?: boolean;
   comparisonGroup?: string;
+  reconstructionImage?: { group: string; label: string; note: string };
   referenceProjectionScale?: number;
   /** Calibrated observer for prepared photographic-volume experiments. */
   referenceDistanceUnits?: number;
   referenceEastLeft?: boolean;
   cloudParts?: { descriptor: string; catalogue: string };
   stars?: string;
-  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string };
+  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; candidateImageIds?: string[] };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
 export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${path}`;
@@ -55,6 +56,20 @@ const recipes = import.meta.glob('../../../src/objects/*/source/recipe.json', { 
 const candidates = import.meta.glob('../../../.local/nebula-lab/*-{cutout,diffuse,residual,mask}.png',
   { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 export const subjects = subjectRecords.map(record => {
+  if (record.reconstructionImage !== undefined) {
+    const image = record.reconstructionImage;
+    if (!image || typeof image !== 'object' || Array.isArray(image) ||
+        Object.keys(image).some(key => !['group', 'label', 'note'].includes(key)) ||
+        ![image.group, image.label, image.note].every(value => typeof value === 'string' && value.trim().length > 0) ||
+        !record.comparisonGroup || subjectRecords.some(other => other.reconstructionImage?.group === image.group && other.comparisonGroup !== record.comparisonGroup)) {
+      throw new TypeError(`Lab subject ${record.id} has invalid reconstruction image metadata.`);
+    }
+  }
+  const candidateIds = record.density?.candidateImageIds;
+  if (candidateIds !== undefined && (!record.density?.overlays || !Array.isArray(candidateIds) || !candidateIds.length ||
+      candidateIds.some(id => typeof id !== 'string' || !id.trim()) || new Set(candidateIds).size !== candidateIds.length)) {
+    throw new TypeError(`Lab subject ${record.id} has invalid candidate image ids.`);
+  }
   if (record.referenceProjectionScale !== undefined &&
       (!Number.isFinite(record.referenceProjectionScale) || record.referenceProjectionScale <= 0)) {
     throw new TypeError(`Lab subject ${record.id} has an invalid reference projection scale.`);
@@ -69,6 +84,8 @@ export const subjects = subjectRecords.map(record => {
   const sourceUrl = localFile(imagePath);
   const sourcePageUrl = record.sourcePageUrl ?? recipe?.source.publisherUrl;
   const credit = record.credit ?? recipe?.source.credit;
+  if (record.reconstructionImage && (!sourcePageUrl || !/^https?:\/\//i.test(sourcePageUrl) || !credit?.trim()))
+    throw new TypeError(`Lab subject ${record.id} needs a reconstruction publisher URL and source credit.`);
   const declared = sourceCatalog.subjects.find(item => item.subjectId === (record.sourceSubjectId ?? record.id))?.sources;
   const sourceImages = declared?.map(source => ({ id: source.id, name: source.name,
     sourceUrl: localFile(`${sourceCatalog.pathBase}/${source.path}`), sourcePageUrl: source.sourcePageUrl, credit: source.credit }))
@@ -300,7 +317,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   }
   async function loadOverlayCatalogue() {
     if (currentMode !== 'density' || !payload || !subject.density?.overlays) return [] as DensityOverlay[];
-    if (overlayCatalogue) return overlayCatalogue.overlays;
+    if (overlayCatalogue) return candidateOverlays(overlayCatalogue.overlays);
     if (overlayCataloguePending) return overlayCataloguePending;
     const expectedVersion = loadVersion, expectedPayload = payload, expectedSubject = subject.id;
     const pending = (async () => {
@@ -309,6 +326,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       const parsed = parseOverlayCatalogue(await response.json());
       if (disposed || expectedVersion !== loadVersion || expectedPayload !== payload || expectedSubject !== subject.id || currentMode !== 'density') return [];
       if (!sameOverlayFrame(parsed.frame, payload.frame)) throw new TypeError('Density overlays use a different physical reference frame.');
+      const candidates = candidateOverlays(parsed.overlays);
       overlayCatalogue = parsed; overlayBasePath = manifestPath.slice(0, manifestPath.lastIndexOf('/') + 1);
       const available = new Set(parsed.overlays.map(item => item.id));
       for (const id of overlayBases.keys()) if (!available.has(id)) {
@@ -324,10 +342,19 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
         toneResources.bind(`${overlayBasePath}${item.texturePath}`, item.widthPx, item.heightPx);
       }
       persistOverlays();
-      return parsed.overlays;
+      return candidates;
     })();
     overlayCataloguePending = pending;
     try { return await pending; } finally { if (overlayCataloguePending === pending) overlayCataloguePending = null; }
+  }
+  function candidateOverlays(overlays: DensityOverlay[]) {
+    const ids = subject.density?.candidateImageIds;
+    if (!ids) return overlays;
+    return ids.map(id => {
+      const item = overlays.find(overlay => overlay.id === id);
+      if (!item) throw new TypeError(`Unknown candidate image ${id} for lab subject ${subject.id}.`);
+      return item;
+    });
   }
   function applyOverlayPlacement(item: DensityOverlay) {
     if (!payload) return;
@@ -353,7 +380,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     if (disposed || version !== loadVersion || currentMode !== 'density') return;
     const item = overlays.find(value => value.id === id);
     if (!item) throw new TypeError(`Unknown density overlay: ${id}`);
-    if (enabled) for (const [otherId, active] of overlayEnabled) if (otherId !== id && active) {
+    if (enabled) for (const [otherId, active] of overlayEnabled) if (otherId !== id && active && overlays.some(overlay => overlay.id === otherId)) {
       overlayEnabled.set(otherId, false);
       for (const node of overlayNodes.get(otherId) ?? []) node.style.visibility = 'hidden';
     }
@@ -435,10 +462,12 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     values.rotX = rotX; values.rotY = rotY; revision++; schedule(); report();
   }
   function retainCamera() {
-    return { pose, rotation: new DOMMatrix(Array.from(rotation.toFloat64Array())), rotX: values.rotX, rotY: values.rotY, distance: values.distance, cameraScale };
+    return { pose, rotation: new DOMMatrix(Array.from(rotation.toFloat64Array())), rotX: values.rotX, rotY: values.rotY, distance: values.distance,
+      cameraScale, projectionScale: subject.referenceProjectionScale ?? 1 };
   }
   function restoreCamera(saved: ReturnType<typeof retainCamera>) {
-    controls.stop(); cameraScale = saved.cameraScale; pose = saved.pose; rotation = saved.rotation; measure();
+    controls.stop(); cameraScale = saved.cameraScale * saved.projectionScale / (subject.referenceProjectionScale ?? 1);
+    pose = saved.pose; rotation = saved.rotation; measure();
     fitDistance = Math.max(radius * 2, focal * radius / (Math.min(width, height) * .32));
     values.rotX = saved.rotX; values.rotY = saved.rotY; values.distance = saved.distance; values.zoom = fitDistance / values.distance; revision++;
     schedule(); report();
@@ -473,25 +502,29 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       cameraOverride ?? (subject.id !== next.id && subject.comparisonGroup !== undefined && subject.comparisonGroup === next.comparisonGroup ? retainCamera() : null);
     const directory = currentMode === 'density' ? next.density?.directory : next.directory;
     const version = ++loadVersion;
-    if (overlayCatalogue && subject.density?.overlays) overlaySessions.set(subject.density.overlays, getOverlayState());
-    controls.stop(); subject = next; status = 'Loading prepared object'; error = undefined;
-    measure();
-    axis = 'auto'; component = 'all'; layer = null;
-    mounted?.destroy(); mounted = null; banks = []; payload = null; layerCount = 0; clearOverlays(); toneResources.clear();
-    cloudSurface?.destroy(); cloudSurface = null;
-    starLayer?.destroy(); starLayer = null; starInfo = null;
-    cloud = null; cloudBrightness = nativeCloudBrightness(); host.style.opacity = '1';
-    cloudFilter = { cutoff: 0, softness: .25, showRemoved: false };
-    delete host.dataset.cloudSelection; delete host.dataset.cloudBrightness; delete host.dataset.cloudOpacity;
-    delete host.dataset.cloudDensityFilter; delete host.dataset.cloudDensityReady;
-    for (const saved of overlaySessions.get(next.density?.overlays ?? '') ?? []) {
-      overlayEnabled.set(saved.id, saved.enabled); overlayOpacity.set(saved.id, saved.opacity); overlayPlacements.set(saved.id, { ...saved.placement });
-      overlayBases.set(saved.id, saved.basis);
-    }
-    host.dataset.mode = currentMode; host.dataset.ready = 'false';
-    host.style.transform = currentMode === 'density' || subject.referenceEastLeft ? 'scaleX(-1)' : '';
+    controls.stop(); status = 'Loading prepared object'; error = undefined;
+    host.dataset.ready = 'false';
     report();
+    // Keep the current scene intact until every selected prepared texture has decoded.
+    const replaceSubject = () => {
+      if (overlayCatalogue && subject.density?.overlays) overlaySessions.set(subject.density.overlays, getOverlayState());
+      subject = next; measure(); axis = 'auto'; component = 'all'; layer = null;
+      mounted?.destroy(); mounted = null; banks = []; payload = null; layerCount = 0; clearOverlays(); toneResources.clear();
+      cloudSurface?.destroy(); cloudSurface = null;
+      starLayer?.destroy(); starLayer = null; starInfo = null;
+      cloud = null; cloudBrightness = nativeCloudBrightness(); host.style.opacity = '1';
+      cloudFilter = { cutoff: 0, softness: .25, showRemoved: false };
+      delete host.dataset.cloudSelection; delete host.dataset.cloudBrightness; delete host.dataset.cloudOpacity;
+      delete host.dataset.cloudDensityFilter; delete host.dataset.cloudDensityReady;
+      for (const saved of overlaySessions.get(next.density?.overlays ?? '') ?? []) {
+        overlayEnabled.set(saved.id, saved.enabled); overlayOpacity.set(saved.id, saved.opacity); overlayPlacements.set(saved.id, { ...saved.placement });
+        overlayBases.set(saved.id, saved.basis);
+      }
+      host.dataset.mode = currentMode;
+      host.style.transform = currentMode === 'density' || subject.referenceEastLeft ? 'scaleX(-1)' : '';
+    };
     if (!directory) {
+      replaceSubject();
       status = 'No independent density field is available for this subject';
       host.dataset.subject = id; host.dataset.ready = 'true'; report();
       return;
@@ -508,6 +541,10 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       const isImage = descriptor.type === 'image-layer-bank';
       const loaded = await (isImage ? loadPreparedCssImageLayers : loadPreparedCssVolume)(descriptor, { read: fetchBytes });
       if (disposed || version !== loadVersion) return;
+      if (payload && subject.id !== next.id && subject.reconstructionImage?.group === next.reconstructionImage?.group &&
+          next.reconstructionImage && !sameOverlayFrame(loaded.frame, payload.frame)) {
+        throw new TypeError('Reconstruction images use different physical reference frames.');
+      }
       const loadedCloud = cloudFiles ? createCloudInspection(parseCloudCatalogue(
         JSON.parse(new TextDecoder().decode(await fetchBytes(cloudFiles.catalogue))), next.id,
         loaded.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.id)))) : null;
@@ -525,6 +562,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
         }
       }));
       if (disposed || version !== loadVersion) return;
+      replaceSubject();
       payload = loaded;
       cloud = loadedCloud;
       if (cloud) { host.dataset.cloudSelection = JSON.stringify(cloud.selection()); host.dataset.cloudBrightness = JSON.stringify(cloudBrightness); }
@@ -569,7 +607,9 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       schedule(); report();
     } catch (failure) {
       if (disposed || version !== loadVersion) return;
+      if (mounted && payload) { currentMode = host.dataset.mode as ViewerMode; host.dataset.ready = 'true'; }
       status = 'Could not load prepared object'; error = failure instanceof Error ? failure.message : String(failure); report();
+      throw failure;
     }
   }
   await setSubject(subject.id);

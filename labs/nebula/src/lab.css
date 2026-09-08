@@ -64,6 +64,11 @@ input[type="range"] { width: 100%; margin: 12px 0 3px; accent-color: #c2ccd8; }
 .image-overlay-panel { right: 14px; }
 .density-adjustment-panel { left: 14px; }
 .cloud-adjustment-panel { right: 14px; }
+#reconstruction-image-controls { padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--divider); }
+.reconstruction-image-detail { margin: 8px 0 0; color: var(--text-muted); font-size: 11px; overflow-wrap: anywhere; }
+a.reconstruction-image-detail { display: inline-block; }
+#reconstruction-image-status:empty { display: none; }
+#reconstruction-image-status[data-error="true"] { color: #f0a49e; }
 .floating-panel fieldset,
 .image-overlay-panel fieldset { margin: 0; }
 .floating-panel legend,

@@ -21,6 +21,12 @@ const densityAdjustmentPanel = element<HTMLElement>('density-adjustment-panel');
 const densityToneFieldset = element<HTMLFieldSetElement>('density-tone-fieldset');
 const overlayPanel = element<HTMLElement>('image-overlay-panel');
 const cloudPanel = element<HTMLElement>('cloud-adjustment-panel');
+const reconstructionImages = element<HTMLFieldSetElement>('reconstruction-image-controls');
+const reconstructionImage = element<HTMLSelectElement>('reconstruction-image');
+const reconstructionImageNote = element('reconstruction-image-note');
+const reconstructionImageCredit = element('reconstruction-image-credit');
+const reconstructionImageSource = element<HTMLAnchorElement>('reconstruction-image-source');
+const reconstructionImageStatus = element('reconstruction-image-status');
 const cloudDensityPanel = element<HTMLElement>('cloud-density-panel');
 const overlayControls = element<HTMLFieldSetElement>('overlay-controls');
 const overlayOptions = element('overlay-options');
@@ -43,6 +49,9 @@ let currentMode: 'photo' | 'density' = 'density';
 let modeRequest = 0;
 let requestedMode: 'photo' | 'density' = 'photo';
 let modePending = false;
+let pendingSubject: string | null = null;
+let reconstructionImageError = '';
+let reconstructionImageGroup: string | null = null;
 type Overlay = Awaited<ReturnType<Viewer['loadOverlayCatalogue']>>[number];
 let currentOverlays: Overlay[] = [];
 let selectedOverlayId: string | null = null;
@@ -110,11 +119,13 @@ tabs.forEach((tab, index) => {
 
 function setBusy(value: boolean) {
   busy = value; subject.disabled = value; controls.disabled = value;
+  reconstructionImage.disabled = value;
+  tabs.forEach(tab => { tab.disabled = value; });
   cloudControls.setBusy(value);
   const density = currentMode === 'density';
   const currentSubject = subjects.find(item => item.id === sourceSubject);
   const hasCloudParts = !density && Boolean(currentSubject?.cloudParts);
-  document.querySelector<HTMLElement>('.component-options')!.hidden = hasCloudParts;
+  document.querySelector<HTMLElement>('.component-options')!.hidden = hasCloudParts || (!density && Boolean(currentSubject?.reconstructionImage));
   const densityMissing = density && !subjects.find(item => item.id === sourceSubject)?.density;
   document.querySelectorAll<HTMLInputElement>('input[name="component"]').forEach(input => {
     input.disabled = value || density || hasCloudParts || (input.value === 'detail' && currentSubject?.hasDetail === false);
@@ -129,6 +140,8 @@ function setBusy(value: boolean) {
   element<HTMLButtonElement>('reference-view').disabled = value || densityMissing;
   element<HTMLButtonElement>('fit-cloud').disabled = value || densityMissing;
   element('viewer').setAttribute('aria-busy', String(value));
+  element('viewer').inert = value;
+  refreshReconstructionImages();
 }
 function fail(error: unknown) {
   const message = error instanceof Error ? error.message : String(error);
@@ -147,6 +160,26 @@ function updateSubject(id: string) {
     'modelNote' in item && typeof item.modelNote === 'string' ? item.modelNote : 'Depth is modeled from a source image; it is not a measured 3D reconstruction.';
   document.querySelector<HTMLInputElement>('input[name="component"][value="detail"]')!.disabled = item.hasDetail === false;
   updateCredit();
+  refreshReconstructionImages();
+}
+function refreshReconstructionImages() {
+  const item = subjects.find(value => value.id === (pendingSubject ?? sourceSubject));
+  const metadata = item?.reconstructionImage;
+  const visible = currentTab === 1 && Boolean(metadata);
+  reconstructionImages.hidden = !visible;
+  if (visible) cloudPanel.hidden = false;
+  if (!metadata || !item) return;
+  if (reconstructionImageGroup !== metadata.group) {
+    reconstructionImageGroup = metadata.group;
+    reconstructionImage.replaceChildren(...subjects.filter(value => value.reconstructionImage?.group === metadata.group)
+      .map(value => new Option(value.reconstructionImage!.label, value.id)));
+  }
+  reconstructionImage.value = item.id;
+  reconstructionImageNote.textContent = metadata.note;
+  reconstructionImageCredit.textContent = item.credit ?? '';
+  reconstructionImageSource.href = item.sourcePageUrl!;
+  reconstructionImageStatus.textContent = reconstructionImageError || (busy ? `Loading ${metadata.label} prepared layers…` : '');
+  reconstructionImageStatus.dataset.error = String(Boolean(reconstructionImageError));
 }
 function updateCredit() {
   const item = subjects.find(value => value.id === sourceSubject);
@@ -218,11 +251,12 @@ async function refreshOverlayControls() {
   const densityVisible = currentTab === 0 && currentMode === 'density' && Boolean(item?.density);
   const visible = densityVisible && Boolean(catalogue);
   const cloud = currentTab === 1 && currentMode === 'photo' && !busy && !modePending ? viewer?.getCloudParts() : null;
-  cloudPanel.hidden = !cloud;
+  cloudPanel.hidden = !(currentTab === 1 && item?.reconstructionImage) && !cloud;
   cloudDensityPanel.hidden = !cloud;
   cloudControls.setContext(cloud ? { id: cloud.id, parts: cloud.parts } : null);
   cloudDensityControls.setContext(cloud ? { subjectId: cloud.id } : null);
   cloudStarControls.setContext(cloud ? viewer?.getStars() ?? null : null);
+  refreshReconstructionImages();
   densityViewControls.hidden = !densityVisible; densityAdjustmentPanel.hidden = !densityVisible; overlayPanel.hidden = !visible;
   densityTone.setContext(densityVisible && item && toneReadyFor(item.id) ? { subjectId: item.id } : null);
   if (!visible) imageTone.setContext(null);
@@ -257,16 +291,25 @@ overlayOpacity.addEventListener('input', () => {
   if (!selectedOverlayId) return;
   void run(() => viewer!.setOverlay(selectedOverlayId!, overlayEnabled.checked, Number(overlayOpacity.value) / 100));
 });
-subject.addEventListener('change', async () => {
+async function changeSubject(id: string) {
   if (!viewer || busy) return;
+  pendingSubject = id; reconstructionImageError = '';
   invalidateToneContexts();
+  cloudControls.setContext(null);
   cloudDensityControls.setContext(null);
   cloudStarControls.setContext(null);
   setBusy(true); status.textContent = 'Loading prepared layers…'; delete status.dataset.error;
-  try { await viewer.setSubject(subject.value); }
-  catch (error) { fail(error); }
-  finally { if (!disposed) { setBusy(false); void refreshOverlayControls(); } }
-});
+  void refreshOverlayControls();
+  try {
+    await viewer.setSubject(id);
+    const url = new URL(location.href); url.searchParams.set('subject', id);
+    history.replaceState(history.state, '', url);
+  }
+  catch (error) { reconstructionImageError = error instanceof Error ? error.message : String(error); fail(error); }
+  finally { pendingSubject = null; if (!disposed) { subject.value = sourceSubject ?? subject.value; setBusy(false); void refreshOverlayControls(); } }
+}
+subject.addEventListener('change', () => void changeSubject(subject.value));
+reconstructionImage.addEventListener('change', () => void changeSubject(reconstructionImage.value));
 document.querySelectorAll<HTMLInputElement>('input[name="component"]').forEach(input => {
   input.addEventListener('change', () => { if (input.checked) void run(() => viewer!.setComponent(input.value as 'all' | 'diffuse' | 'detail')); });
 });
@@ -292,12 +335,16 @@ async function switchMode(next: 'photo' | 'density') {
   const request = ++modeRequest;
   modePending = true;
   setBusy(true); delete status.dataset.error;
+  let failed = false;
   try { await viewer.setMode(next); }
-  catch (error) { if (request === modeRequest) fail(error); }
+  catch (error) { failed = true; if (request === modeRequest) fail(error); }
   finally {
     if (request !== modeRequest || disposed) return;
     modePending = false;
-    currentMode = next; updateSubject(subject.value); updateCredit(); setBusy(false); void refreshOverlayControls();
+    currentMode = element('viewer').dataset.mode === 'density' ? 'density' : 'photo';
+    updateSubject(subject.value); updateCredit(); setBusy(false);
+    if (failed) selectTab(currentMode === 'density' ? 0 : 1);
+    else void refreshOverlayControls();
   }
 }
 

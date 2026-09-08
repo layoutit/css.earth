@@ -77,6 +77,15 @@
             </fieldset>
           </aside>
           <aside id="cloud-adjustment-panel" class="floating-panel cloud-adjustment-panel" aria-label="Reconstruction adjustments" hidden>
+            <fieldset id="reconstruction-image-controls" hidden>
+              <legend>Reconstruction</legend>
+              <label class="field-label" for="reconstruction-image">Source image</label>
+              <select id="reconstruction-image" aria-describedby="reconstruction-image-note reconstruction-image-status" disabled></select>
+              <p id="reconstruction-image-note" class="reconstruction-image-detail"></p>
+              <p id="reconstruction-image-credit" class="reconstruction-image-detail"></p>
+              <a id="reconstruction-image-source" class="reconstruction-image-detail" target="_blank" rel="noreferrer">Publisher source ↗</a>
+              <p id="reconstruction-image-status" class="reconstruction-image-detail" role="status" aria-live="polite"></p>
+            </fieldset>
             <div id="cloud-star-controls" hidden></div>
             <div id="cloud-controls"></div>
           </aside>
