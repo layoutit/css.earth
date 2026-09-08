@@ -52,14 +52,16 @@ describe('the body table', () => {
     for (const id of BODY_IDS) {
       const data = bodyData(id)
       expect(data.meanRadiusKm).toBeGreaterThan(0)
-      expect(data.gravitationalParameterKm3PerS2).toBeGreaterThan(0)
-      // Mean density between 0.3 and 8.5 g/cm^3 covers low-density Pan and
+      expect(data.gravitationalParameterKm3PerS2).toBeGreaterThanOrEqual(0)
+      // Zero represents an unpublished GM, not a measured massless body.
+      if (data.gravitationalParameterKm3PerS2 === 0) continue
+      // Mean density between 0.2 and 8.5 g/cm^3 covers porous Helene and
       // Atlas through Mercury and catches a GM or radius entered in the wrong
       // unit, which is the failure this table is most exposed to.
       const massKg = data.gravitationalParameterKm3PerS2 / GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2
       const volumeKm3 = (4 / 3) * Math.PI * data.meanRadiusKm ** 3
       const densityGramsPerCm3 = massKg / volumeKm3 / 1e12
-      expect(densityGramsPerCm3).toBeGreaterThan(0.3)
+      expect(densityGramsPerCm3).toBeGreaterThan(0.2)
       expect(densityGramsPerCm3).toBeLessThan(8.5)
     }
   })
@@ -93,6 +95,9 @@ describe('the body table', () => {
       'phoebe',
       'janus',
       'epimetheus',
+      'helene',
+      'calypso',
+      'daphnis',
       'telesto',
       'atlas',
       'prometheus',
