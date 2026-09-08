@@ -3,6 +3,8 @@ import { defaultOverlayPlacement } from './overlay-placement';
 import { createOverlayPlacementControls } from './overlay-placement-controls';
 import { createToneControls } from './tone-controls';
 import { createCloudControls } from './cloud-controls';
+import { createCloudDensityControls } from './cloud-density-controls';
+import { createCloudStarControls } from './cloud-star-controls';
 
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
@@ -19,6 +21,7 @@ const densityAdjustmentPanel = element<HTMLElement>('density-adjustment-panel');
 const densityToneFieldset = element<HTMLFieldSetElement>('density-tone-fieldset');
 const overlayPanel = element<HTMLElement>('image-overlay-panel');
 const cloudPanel = element<HTMLElement>('cloud-adjustment-panel');
+const cloudDensityPanel = element<HTMLElement>('cloud-density-panel');
 const overlayControls = element<HTMLFieldSetElement>('overlay-controls');
 const overlayOptions = element('overlay-options');
 const overlayChoice = element<HTMLSelectElement>('overlay-choice');
@@ -44,6 +47,15 @@ type Overlay = Awaited<ReturnType<Viewer['loadOverlayCatalogue']>>[number];
 let currentOverlays: Overlay[] = [];
 let selectedOverlayId: string | null = null;
 let overlayActivation = 0;
+const cloudStarControls = createCloudStarControls({ host: element('cloud-star-controls'), onChange(options) { viewer?.setStars(options); } });
+const cloudDensityControls = createCloudDensityControls({ host: element('cloud-density-controls'),
+  async onApply(context, resources, isCurrent) {
+    if (!viewer || viewer.getCloudParts()?.id !== context.subjectId) return;
+    await viewer.applyCloudDensityResources(resources, isCurrent);
+    if (isCurrent()) { const host = element('viewer');
+      host.dataset.cloudDensityFilter = JSON.stringify(context.filter); host.dataset.cloudDensityReady = 'true'; }
+  },
+});
 const cloudControls = createCloudControls({ host: element('cloud-controls'),
   onChange(selection) {
     if (!viewer || viewer.getCloudParts()?.id !== selection.contextId) return;
@@ -207,7 +219,10 @@ async function refreshOverlayControls() {
   const visible = densityVisible && Boolean(catalogue);
   const cloud = currentTab === 1 && currentMode === 'photo' && !busy && !modePending ? viewer?.getCloudParts() : null;
   cloudPanel.hidden = !cloud;
+  cloudDensityPanel.hidden = !cloud;
   cloudControls.setContext(cloud ? { id: cloud.id, parts: cloud.parts } : null);
+  cloudDensityControls.setContext(cloud ? { subjectId: cloud.id } : null);
+  cloudStarControls.setContext(cloud ? viewer?.getStars() ?? null : null);
   densityViewControls.hidden = !densityVisible; densityAdjustmentPanel.hidden = !densityVisible; overlayPanel.hidden = !visible;
   densityTone.setContext(densityVisible && item && toneReadyFor(item.id) ? { subjectId: item.id } : null);
   if (!visible) imageTone.setContext(null);
@@ -245,6 +260,8 @@ overlayOpacity.addEventListener('input', () => {
 subject.addEventListener('change', async () => {
   if (!viewer || busy) return;
   invalidateToneContexts();
+  cloudDensityControls.setContext(null);
+  cloudStarControls.setContext(null);
   setBusy(true); status.textContent = 'Loading prepared layers…'; delete status.dataset.error;
   try { await viewer.setSubject(subject.value); }
   catch (error) { fail(error); }
@@ -270,6 +287,8 @@ async function switchMode(next: 'photo' | 'density') {
   currentMode = next;
   if (!viewer || !needsSwitch) { setBusy(busy); return; }
   invalidateToneContexts();
+  cloudDensityControls.setContext(null);
+  cloudStarControls.setContext(null);
   const request = ++modeRequest;
   modePending = true;
   setBusy(true); delete status.dataset.error;
@@ -316,6 +335,6 @@ try {
   }
 } catch (error) { fail(error); }
 
-function destroy() { if (!disposed) { disposed = true; densityTone.destroy(); imageTone.destroy(); cloudControls.destroy(); viewer?.destroy(); } }
+function destroy() { if (!disposed) { disposed = true; densityTone.destroy(); imageTone.destroy(); cloudControls.destroy(); cloudDensityControls.destroy(); cloudStarControls.destroy(); viewer?.destroy(); } }
 window.addEventListener('pagehide', destroy, { once: true });
 if (import.meta.hot) import.meta.hot.dispose(destroy);

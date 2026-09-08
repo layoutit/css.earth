@@ -26,7 +26,7 @@ if (command === 'test') {
     (args.length === 0 || args.includes(name.replace(/\.test\.ts$/, '')))).sort();
   if (!names.length) throw new TypeError('No matching lab tests.');
   execution = ['--test', ...await Promise.all(names.map(compile))];
-} else if (['browser-cloud-controls', 'prepare-parts', 'browser-filled', 'prepare-filled', 'browser-overlays', 'prepare-overlays', 'prepare-full-density', 'browser-density', 'prepare-particles', 'prepare-master', 'prepare-coherent', 'prepare-prior-window',
+} else if (['prepare-lmc-stars', 'browser-cloud-density', 'browser-cloud-controls', 'prepare-parts', 'browser-filled', 'prepare-filled', 'browser-overlays', 'prepare-overlays', 'prepare-full-density', 'browser-density', 'prepare-particles', 'prepare-master', 'prepare-coherent', 'prepare-prior-window',
   'prepare-structures', 'getsf-run', 'getsf-install', 'extract', 'acquire-images', 'browser-coherent'].includes(command ?? '')) {
   execution = [await compile(`${command}.ts`), ...args];
 } else {

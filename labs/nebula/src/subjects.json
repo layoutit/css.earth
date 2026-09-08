@@ -364,6 +364,7 @@
     "id": "lmc-clouds",
     "name": "LMC clouds \u00b7 reconstructed",
     "directory": "labs/nebula/models/lmc-clouds",
+    "stars": "labs/nebula/models/lmc-stars/prepared/stars.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"

@@ -29,7 +29,7 @@ async function ready(subject = 'lmc-clouds', mode = 'photo') {
 async function state() {
   return page.evaluate(() => {
     const host = document.querySelector<HTMLElement>('#viewer')!;
-    const roots = [...host.querySelectorAll<HTMLElement>(':scope > .css-volume-projection')];
+    const roots = [...host.querySelectorAll<HTMLElement>('.css-volume-projection')];
     const leaves = [...host.querySelectorAll<HTMLElement>('.css-volume-mesh s')];
     const forbidden: string[] = [];
     for (const node of [host, ...host.querySelectorAll<HTMLElement>('*')]) {
@@ -44,7 +44,7 @@ async function state() {
       parts[leaf.dataset.cloudPart] = (parts[leaf.dataset.cloudPart] ?? 0) + 1;
     return { subject: host.dataset.subject, mode: host.dataset.mode, revision: host.dataset.cameraRevision,
       distance: host.dataset.distance, selection: host.dataset.cloudSelection, brightness: host.dataset.cloudBrightness,
-      opacity: Number(host.dataset.cloudOpacity), computedOpacity: Number(getComputedStyle(host).opacity),
+      opacity: Number(host.dataset.cloudOpacity), computedOpacity: Number(getComputedStyle(host.querySelector('.nebula-cloud-surface') ?? host).opacity),
       rootCount: roots.length, scenes: host.querySelectorAll('.css-volume-scene').length, leaves: leaves.length,
       retained: Boolean(window.__cloudControlLeaves && leaves.length === window.__cloudControlLeaves.length &&
         leaves.every((node, i) => node === window.__cloudControlLeaves![i])),
@@ -97,6 +97,7 @@ function weightedOpacity(s: State, gains: number[], overall: number) {
 try {
   await page.goto(`${baseURL}/?subject=lmc-clouds&tab=reconstruction`, { waitUntil: 'domcontentloaded' });
   await ready(); await page.locator(selectors.panel).waitFor({ state: 'visible', timeout: 60000 });
+  if (await page.locator('#cloud-stars-enabled').isVisible()) await page.locator('#cloud-stars-enabled').uncheck();
   await page.waitForFunction(selector => document.querySelectorAll(selector).length >= 3, selectors.parts);
   await defaults(); await page.selectOption('#camera-pose', 'front'); await frame();
   for (const axis of ['overall', 'x', 'y', 'z']) await control(axis, 1);

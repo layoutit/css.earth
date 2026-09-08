@@ -106,7 +106,7 @@ export function createCloudControls({ host, onChange, onBrightness }: {
     const signalSummary = document.createElement('p'); signalSummary.className = 'cloud-signal-summary';
     const updateSummary = () => {
       const retained = current.parts.reduce((sum, part) => sum + (enabled.has(part.id) ? part.signalFraction : 0), 0);
-      signalSummary.textContent = `Source signal retained: ${(retained * 100).toFixed(1)}%`;
+      signalSummary.textContent = `Source signal selected: ${(retained * 100).toFixed(1)}%`;
     };
 
     const brightnessHeading = document.createElement('h3'); brightnessHeading.textContent = 'Live brightness';

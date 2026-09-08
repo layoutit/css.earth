@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-pinned-catalogue@1",
+  "catalogue": "J/AJ/138/1003",
+  "files": [
+    {
+      "path": "Bonanos2009-ReadMe.txt",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/ReadMe",
+      "sha256": "56d1846aa9c97ac7d55bbc0cabc40cf569a212ba2254ec08103ce103bfae90dc"
+    },
+    {
+      "path": "table1.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/table1.dat",
+      "sha256": "e5ff8b477fa08d6be1b6786990a9b77affff3a2dcb1791c48201b8080dd652dc"
+    },
+    {
+      "path": "table3.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/table3.dat",
+      "sha256": "7be6d2307566607a9bf58ebbeddca97a805b2bdeb5c024bf18413e50306019ef"
+    },
+    {
+      "path": "refs.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/refs.dat",
+      "sha256": "ced374c916db9cf5409bc3bcef91018f64671ae673f9595cd28ba041781127e4"
+    }
+  ],
+  "depthModel": {
+    "object": {
+      "path": "labs/nebula/models/lmc-clouds/object.json",
+      "sha256": "710e1fa5a2cfd1d4ab41650aeed5aec72684fb867b5ebcc175a4d5b6dd2ceeb5"
+    },
+    "provenance": {
+      "path": "labs/nebula/models/lmc-clouds/source/provenance.json",
+      "sha256": "1821b677af22e83b79c21427e172d3e4c07c704195156a19db9f7a74d07d0eb0"
+    }
+  }
+}

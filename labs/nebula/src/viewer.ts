@@ -5,6 +5,9 @@ import { readOverlaySessions, writeOverlaySessions } from './overlay-store';
 import { createToneResourceController, type ToneResource } from './tone-runtime';
 import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, parseCloudCatalogue, validateCloudBrightness } from './cloud-inspection';
 import type { CloudBrightness } from './cloud-controls';
+import { createCloudSurface } from './cloud-surface';
+import { mountPreparedLmcStars, parsePreparedLmcStars } from './lmc-stars';
+import type { CloudStarOptions, CloudStarContext } from './cloud-star-controls';
 import * as runtimePolicy from '../../../site/runtime-policy.mjs';
 import { createObjectInteractionControls } from '../../../src/renderers/css/navigation/object-interaction-controls';
 import { worldCameraFromCenteredPresentation } from '../../../src/renderers/css/navigation/world-camera';
@@ -41,6 +44,7 @@ interface LabSubjectRecord {
   referenceDistanceUnits?: number;
   referenceEastLeft?: boolean;
   cloudParts?: { descriptor: string; catalogue: string };
+  stars?: string;
   density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
@@ -175,6 +179,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   let mounted: { publish(publication: Parameters<ReturnType<typeof mountPreparedCssImageLayers>['publish']>[0]): void; destroy(): void } | null = null;
   let banks: { axis: Exclude<Axis, 'auto'>; root: HTMLElement; leaves: { id: string; nodes: HTMLElement[]; detail: boolean }[] }[] = [];
   let cloud: ReturnType<typeof createCloudInspection> | null = null, cloudBrightness = nativeCloudBrightness();
+  let cloudSurface: ReturnType<typeof createCloudSurface> | null = null;
+  let starLayer: ReturnType<typeof mountPreparedLmcStars> | null = null, starInfo: CloudStarContext | null = null;
   let overlayCatalogue: DensityOverlayCatalogue | null = null, overlayBasePath = '';
   let overlayMeshes: HTMLElement[] = [];
   let overlayCataloguePending: Promise<DensityOverlay[]> | null = null;
@@ -266,11 +272,13 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     const world = worldCameraFromCenteredPresentation({ rotation: rotationFromMatrix3d(rotation), distanceUnits: values.distance },
       { ...frame, presentationToReference: worldRotationFromQuaternion(frame.localToReferenceXyzw), bodyRadiusM: radius * frame.metersPerUnit },
       { focalPixels: focal, principalOffsetPixels: [0, 0] });
-    mounted.publish({ world, viewport: { widthPixels: width, heightPixels: height, focalPixels: focal, principalOffsetPixels: [0, 0] } });
+    const publication = { world, viewport: { widthPixels: width, heightPixels: height, focalPixels: focal, principalOffsetPixels: [0, 0] as [number, number] } };
+    mounted.publish(publication); starLayer?.publish(publication);
     inspectLayers(); host.dataset.cameraRevision = String(revision); host.dataset.distance = String(values.distance);
     const opacity = cloud ? cloudCompositeOpacity(banks.map(bank => ({ axis: bank.axis,
       opacity: Number(bank.root.style.opacity), visible: bank.root.style.visibility !== 'hidden' })), cloudBrightness) : 1;
-    host.style.opacity = String(opacity); host.dataset.cloudOpacity = String(opacity);
+    if (cloudSurface) cloudSurface.root.style.opacity = String(opacity);
+    host.dataset.cloudOpacity = String(opacity);
   }
   function getOverlayState() {
     return [...new Set([...overlayEnabled.keys(), ...overlayPlacements.keys()])].map(id => ({ id,
@@ -446,6 +454,12 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       payload.resources.map(item => `${subject.density!.directory}/prepared/${item.path}`);
     await toneResources.apply(resources, expected, () => !disposed && version === loadVersion && isCurrent());
   }
+  async function applyCloudDensityResources(resources: ToneResource[], isCurrent = () => true) {
+    if (currentMode !== 'photo' || !cloud || !payload || host.dataset.ready !== 'true') throw new Error('Reconstruction is still loading.');
+    const version = loadVersion;
+    await toneResources.apply(resources, payload.resources.map(item => `${subject.directory}/prepared/${item.path}`),
+      () => !disposed && version === loadVersion && isCurrent());
+  }
   async function setSubject(id: string, cameraOverride: ReturnType<typeof retainCamera> | null = null) {
     const next = subjects.find(item => item.id === id);
     if (!next) throw new TypeError(`Unknown lab subject: ${id}`);
@@ -459,8 +473,11 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     measure();
     axis = 'auto'; component = 'all'; layer = null;
     mounted?.destroy(); mounted = null; banks = []; payload = null; layerCount = 0; clearOverlays(); toneResources.clear();
+    cloudSurface?.destroy(); cloudSurface = null;
+    starLayer?.destroy(); starLayer = null; starInfo = null;
     cloud = null; cloudBrightness = nativeCloudBrightness(); host.style.opacity = '1';
     delete host.dataset.cloudSelection; delete host.dataset.cloudBrightness; delete host.dataset.cloudOpacity;
+    delete host.dataset.cloudDensityFilter; delete host.dataset.cloudDensityReady;
     for (const saved of overlaySessions.get(next.density?.overlays ?? '') ?? []) {
       overlayEnabled.set(saved.id, saved.enabled); overlayOpacity.set(saved.id, saved.opacity); overlayPlacements.set(saved.id, { ...saved.placement });
       overlayBases.set(saved.id, saved.basis);
@@ -488,6 +505,10 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       const loadedCloud = cloudFiles ? createCloudInspection(parseCloudCatalogue(
         JSON.parse(new TextDecoder().decode(await fetchBytes(cloudFiles.catalogue))), next.id,
         loaded.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.id)))) : null;
+      if (next.stars && !relativePath(next.stars)) throw new TypeError('Invalid prepared star path.');
+      const starResponse = loadedCloud && next.stars ? await fetch(localFile(next.stars)) : null;
+      if (starResponse && !starResponse.ok) throw new Error(`Prepared stars failed to load (${starResponse.status}).`);
+      const stars = starResponse ? parsePreparedLmcStars(await starResponse.json(), loaded.frame) : null;
       if (disposed || version !== loadVersion) return;
       const resourceUrl = (path: string) => localFile(`${directory}/prepared/${path}`);
       // Decode the selected fixed bank before presenting it; no source processing happens in the lab renderer.
@@ -501,13 +522,17 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       payload = loaded;
       cloud = loadedCloud;
       if (cloud) { host.dataset.cloudSelection = JSON.stringify(cloud.selection()); host.dataset.cloudBrightness = JSON.stringify(cloudBrightness); }
-      const options = { host, before: end, payload: loaded, resolveResource: resourceUrl };
+      if (cloud) { host.dataset.cloudDensityFilter = JSON.stringify({ cutoff: 0, softness: .25, showRemoved: false }); host.dataset.cloudDensityReady = 'true'; }
+      if (cloud) cloudSurface = createCloudSurface(host, end);
+      const options = { host: cloudSurface?.root ?? host, before: cloudSurface?.end ?? end, payload: loaded, resolveResource: resourceUrl };
       const instance = isImage ? mountPreparedCssImageLayers({ ...options, payload: loaded as PreparedCssImageLayers }) : mountPreparedCssVolume(options);
       mounted = instance;
+      if (stars) { starLayer = mountPreparedLmcStars({ host, before: end, payload: stars }); starLayer.setVisible(false);
+        starInfo = { id: next.id, count: stars.stars.length, sourceUrl: stars.sourceUrl }; }
       const roots = 'root' in instance ? [...instance.root.querySelectorAll<HTMLElement>('[data-image-layer-axis]')] : instance.roots;
       banks = loaded.stacks.map((stack, index) => {
         const nodes = [...roots[index].querySelectorAll<HTMLElement>('.css-volume-mesh s')], copies = isImage ? 1 : 3;
-        if (currentMode === 'density') for (let i = 0; i < stack.leaves.length; i++) {
+        if (currentMode === 'density' || cloud) for (let i = 0; i < stack.leaves.length; i++) {
           const leaf = stack.leaves[i]!;
           toneResources.bind(`${directory}/prepared/${leaf.texturePath}`, leaf.widthPx, leaf.heightPx, nodes.slice(i * copies, (i + 1) * copies));
         }
@@ -542,7 +567,9 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   }
   await setSubject(subject.id);
   return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayPlacement, getOverlayState,
-    referenceView, fitCloud, applyToneResources,
+    referenceView, fitCloud, applyToneResources, applyCloudDensityResources,
+    getStars: () => starInfo,
+    setStars(options: CloudStarOptions) { if (starLayer) { starLayer.setVisible(options.enabled); starLayer.root.style.opacity = String(options.brightness); } },
     getCloudParts: () => cloud?.catalogue ?? null,
     setCloudSelection(ids: readonly string[]) {
       if (!cloud) throw new Error('This reconstruction has no prepared contribution bank.');
@@ -578,7 +605,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     },
     destroy() {
       if (disposed) return; disposed = true; loadVersion++; cancelAnimationFrame(frameRequest);
-      observer.disconnect(); controls.destroy(); mounted?.destroy(); end.remove();
+      observer.disconnect(); controls.destroy(); mounted?.destroy(); cloudSurface?.destroy(); starLayer?.destroy(); end.remove();
     },
   });
 }
