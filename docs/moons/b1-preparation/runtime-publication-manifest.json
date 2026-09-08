@@ -16253,13 +16253,14 @@
   ],
   "integrationVerification": {
     "path": "docs/moons/b1-preparation/runtime-integration-verification.json",
-    "bytes": 199806888,
+    "bytes": 491557,
     "sha256": "8c612f8a489c04ed7a77953df525b65285838c348bc12c722180e9a8889a0f0a",
     "checkedAt": "2026-09-08T21:39:23.329Z",
     "registryObjectCount": 253,
     "packages": 28,
     "files": 874,
     "publishedBytesUnchanged": true,
-    "noNewNetworkRequests": true
+    "noNewNetworkRequests": true,
+    "runtimeAssetBytes": 199806888
   }
 }

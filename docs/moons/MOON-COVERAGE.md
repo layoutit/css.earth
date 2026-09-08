@@ -4,7 +4,7 @@
 
 This is the working coverage document. Update its rows as work is selected, implemented, and qualified. The [JSON snapshot](moon-coverage-2026-09-08.json) preserves the initial machine-readable inventory and source receipt; it is historical evidence, not a second live tracker.
 
-## Where we stand
+## Merged baseline at source review
 
 **69 standalone moon scenes across 178 registered objects.** Of these, **68 / 461 (14.8%)** cover satellites of planets and Pluto in the JPL benchmark; **Dimorphos** is an additional asteroid moon. **393** benchmark moons have no standalone package.
 

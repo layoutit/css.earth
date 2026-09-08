@@ -1,7 +1,9 @@
 # B1: 26-moon expansion
 
-Status: implementation and qualification in progress. Branch
-`feat/moons-26-expansion`, based on merged main `c6850e2839520e32c3e6526bc1fd8a95866a9eb2`.
+Status: implementation complete; final qualification in progress. Branch
+`feat/moons-26-expansion`. Implementation began at main `c6850e28` and integrates
+main `c61d1bf9`. The tested implementation commit is
+`2900da4f78e21caa2e08064ec191552c9cd78f97`; later corrections and main integration retain separate validation receipts.
 
 All 26 reviewed candidates now have body-owned source packages and standalone
 routes through the existing generic object adapter. The branch registry grows
@@ -46,18 +48,27 @@ are not silently promoted into a measured pole or rotational phase.
 | Check | Current result |
 |---|---|
 | Full document review | 484/484 reviewed before implementation; frozen evidence retained |
-| Astronomy suite | 668 tests pass before main integration; final integrated run pending |
+| Astronomy suite | 668 tests pass in the final integrated full-suite run |
 | Source-state, generator and Unicode title checks | 8 tests pass before main integration |
-| Parent orbit consistency | 28 solar/planetary, 6 core-context, 4 adapter and 47 renderer tests pass; source r/v, ring closure and hidden-parent transport checked |
+| Parent orbit consistency | Final 28 solar/planetary tests and independent metadata/carrier checks pass for all 26 moons; source r/v, ring closure and hidden-parent transport evidence is retained in the science report |
 | Package lint and type checking | Pass |
 | Body acquisition and preparation | All 26 prepared; 80/80 unit tests and 26/26 source verifications pass (478 pinned files) |
 | Aggregate source verification | Blocked by 822 unchanged missing pins (12.61 GiB) in 200 existing/incoming-main packages; no B1 pins missing. All pins match their respective merged baselines; see the integrated source-gap report. |
-| Aggregate test/build/browser gates | Preintegration production build passes (205 pages); tests exceeded the default 4 GiB Node heap in two audits. Integrated rerun pending with a larger test heap. |
-| All 26 real Chrome DPR 1 and 2 checks | Pending |
-| Visual inspection | Pending |
+| Production build | Pass: 254 pages for the integrated 253-object registry |
+| Full test suite at `2900da4f` | Package 761, renderer 346 and platform 1,826 tests pass. Shell: 201 pass and 3 file-level CSS import failures; correction pending. |
+| Full production browser gate at `2900da4f` | Pass: 506 object/DPR cases, two six-hop navigation sequences and zero browser problems |
+| Detailed real Chrome DPR 1 and 2 interaction checks | Pass: all 26 moons plus Haumea and Sylvia, 56 cases; visual acceptance is separate |
+| Visual inspection | Five representatives pass; Squannit has confirmed fine raster seams in lossless captures and remains blocked pending correction |
 | Remote runtime publication and fresh installation | Pass: 874 files / 199,806,888 bytes across 28 affected packages published; fresh remote installation returned 874 HTTP 200 responses with exact SHA-256 and sizes. A second offline run reused all 874 files. |
 | Pull request | Not opened |
 
-Preparation and browser evidence stay in the reused Moons worktree. This report
-will be finalized with exact command results and artifact locations before the
-batch is represented as ready.
+## Evidence and limits
+
+- [Final source qualification](b1-preparation/qualification-source.json) records all 26 packages and their 478 pinned files. The earlier run is retained separately.
+- [Science integration](b1-preparation/science-integration.md) distinguishes independent source checks from same-model numerical closure. The approximately six-micrometre numerical discrepancy is not a physical accuracy claim.
+- [Runtime publication and fresh installation](b1-preparation/runtime-publication-report.md) records the 874-file delivery and the final integration recheck.
+- [Aggregate source-gap report](b1-preparation/integrated-source-gap-report.md) identifies every missing baseline input and preserves the actual failing acquisition command.
+
+Canonical state claims cover the generated state map, the current planetary-system preparer, physical world frames and the shared external world context used by the app. Older cached body-local fallback orbit plans are outside this qualification. Preparation of object JSON does not refresh every cached ephemeris.
+
+Preparation and browser evidence stay in the reused Moons worktree. Final command results, full-gate receipts and representative captures are added as the remaining checks finish.

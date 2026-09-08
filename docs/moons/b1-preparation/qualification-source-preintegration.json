@@ -1,11 +1,10 @@
 {
   "schema": "cssearth-b1-source-qualification@1",
-  "startedUtc": "2026-09-08T22:04:38.319Z",
-  "cwd": ".",
-  "head": "2900da4f78e21caa2e08064ec191552c9cd78f97",
+  "startedUtc": "2026-09-08T20:30:56Z",
+  "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "head": "c6850e2839520e32c3e6526bc1fd8a95866a9eb2",
   "branch": "feat/moons-26-expansion",
   "nodeVersion": "v24.19.0",
-  "registryObjectCount": 253,
   "cohort": [
     "paaliaq",
     "tarvos",
@@ -35,7 +34,6 @@
     "menoetius"
   ],
   "cohortCount": 26,
-  "childConcurrency": 1,
   "batchDefinition": {
     "path": "docs/moons/PR-BATCHES.json",
     "sha256": "8a7ccbe89d225e99d14fcdfef1db18f8e606c8b5a5a08354e8a7d218ef875708",
@@ -46,25 +44,27 @@
     "sha256": "0917f52723be404ca461b40d4bd45f91a776c6779107b42ce7d5c016f3d169ce",
     "bytes": 45855
   },
-  "scope": "All 26 B1 object unit/source test files and exact per-body source verification at committed final implementation head 2900da4f. Source/runtime files are read only. No acquisition restoration, body preparation, publication or browser qualification is asserted.",
-  "preintegrationRecord": {
-    "path": "docs/moons/b1-preparation/qualification-source-preintegration.json",
-    "sha256": "ae2bfc1bd776893bcd8d34dab68a58425aa5a397a2f668820615bb7d15e609a0",
-    "bytes": 70271,
-    "head": "c6850e2839520e32c3e6526bc1fd8a95866a9eb2",
-    "completedUtc": "2026-09-08T20:31:03Z"
+  "scope": "All26 B1 body unit/source test files and exact per-body cached source verification. No remote restoration, body preparation, publication or browser qualification is asserted by these checks.",
+  "baselineExclusion": {
+    "id": "comet-1p",
+    "manifestPath": "src/planets/comet-1p/source/manifest.json",
+    "baselineCommit": "c6850e2839520e32c3e6526bc1fd8a95866a9eb2",
+    "baselineManifestSha256": "bfa4a165255cb817e599033d197fc6f69aa916d4c3e2e4db7e8d20a3f2ac09ae",
+    "workingManifestSha256": "bfa4a165255cb817e599033d197fc6f69aa916d4c3e2e4db7e8d20a3f2ac09ae",
+    "manifestUnchanged": true,
+    "missingInputs": [
+      "stars/eso0932a.tif",
+      "presentation/InterVariable.ttf"
+    ],
+    "disposition": "Unrelated existing package; missing ignored ESO/font inputs confirmed. No restoration or modification performed.",
+    "manifestStillUnchanged": true
   },
-  "aggregateSourceGateBoundary": {
-    "report": "docs/moons/b1-preparation/integrated-source-gap-report.md",
-    "scope": "The all-253-object aggregate source gate separately remains blocked by baseline source omissions; this run verifies the complete 26-object B1 scope."
-  },
-  "outputDirectory": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD",
   "bodies": [
     {
       "id": "paaliaq",
       "descriptorBefore": {
         "path": "src/planets/paaliaq/object.json",
-        "sha256": "b03260efa08ddf20adc7f0f1c9395ee1a456fb8908f890e9bfcd24d737fc688a",
+        "sha256": "0108482405622b31deb97a433006dd00278af5c4509472ee28655ceb01bc5243",
         "bytes": 3014
       },
       "sourceManifestBefore": {
@@ -81,18 +81,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/paaliaq/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2667,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/paaliaq-unit.tap",
-        "logSha256": "edaa940878500e0059bd62757f68d0db2e589dc585667a56ba9f1d34d23fc163",
+        "durationSeconds": 0.2482,
+        "logPath": "output/playwright/moons-b1-qualification/source/paaliaq-unit.tap",
+        "logSha256": "c6eb278745f0ed2057df74654356b85bcb0db7131b54310a1306be430b3423cd",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -105,17 +103,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "paaliaq",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0839,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/paaliaq-acquire-verify.log",
+        "durationSeconds": 0.0786,
+        "logPath": "output/playwright/moons-b1-qualification/source/paaliaq-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -126,7 +123,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/paaliaq/object.json",
-        "sha256": "b03260efa08ddf20adc7f0f1c9395ee1a456fb8908f890e9bfcd24d737fc688a",
+        "sha256": "0108482405622b31deb97a433006dd00278af5c4509472ee28655ceb01bc5243",
         "bytes": 3014
       },
       "sourceManifestAfter": {
@@ -141,7 +138,7 @@
       "id": "tarvos",
       "descriptorBefore": {
         "path": "src/planets/tarvos/object.json",
-        "sha256": "c2bf6a202f677dad829b862e76ab71db5727e36cc5fd29efa8b16cdcdfcbeb4f",
+        "sha256": "3686e7abb70089ba0c8962023a1065ae671211b737f6261e6812bfbe61eac1d7",
         "bytes": 3013
       },
       "sourceManifestBefore": {
@@ -158,18 +155,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/tarvos/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2049,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/tarvos-unit.tap",
-        "logSha256": "814342ba0d84ff9970a15b4b774d20990cbb41ddf442a662ff3e155cf25e3a40",
+        "durationSeconds": 0.1943,
+        "logPath": "output/playwright/moons-b1-qualification/source/tarvos-unit.tap",
+        "logSha256": "09fcd926a27591701fc3acc68a5b037823ecbcc2871db867514d4f0394632843",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -182,17 +177,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "tarvos",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0802,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/tarvos-acquire-verify.log",
+        "durationSeconds": 0.0785,
+        "logPath": "output/playwright/moons-b1-qualification/source/tarvos-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -203,7 +197,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/tarvos/object.json",
-        "sha256": "c2bf6a202f677dad829b862e76ab71db5727e36cc5fd29efa8b16cdcdfcbeb4f",
+        "sha256": "3686e7abb70089ba0c8962023a1065ae671211b737f6261e6812bfbe61eac1d7",
         "bytes": 3013
       },
       "sourceManifestAfter": {
@@ -218,7 +212,7 @@
       "id": "ijiraq",
       "descriptorBefore": {
         "path": "src/planets/ijiraq/object.json",
-        "sha256": "8dd05072faade4386896625c08c2669b0bdbef836270bb4afcb65520b109b3d5",
+        "sha256": "e75b4ba6d67282f53e4e41d09609e2d41e398ead0cff94f348e53d060e410405",
         "bytes": 3015
       },
       "sourceManifestBefore": {
@@ -235,18 +229,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/ijiraq/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.201,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/ijiraq-unit.tap",
-        "logSha256": "c611b9322f1e7ca3e2e878fb0c3be749586b4f38b37b9a75f447e92f6db7f3f7",
+        "durationSeconds": 0.19,
+        "logPath": "output/playwright/moons-b1-qualification/source/ijiraq-unit.tap",
+        "logSha256": "6f62f8e3d30e07c20173ccec7adc8870868858ece6d06d7b56f679d15fcb442d",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -259,17 +251,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "ijiraq",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0866,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/ijiraq-acquire-verify.log",
+        "durationSeconds": 0.0839,
+        "logPath": "output/playwright/moons-b1-qualification/source/ijiraq-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -280,7 +271,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/ijiraq/object.json",
-        "sha256": "8dd05072faade4386896625c08c2669b0bdbef836270bb4afcb65520b109b3d5",
+        "sha256": "e75b4ba6d67282f53e4e41d09609e2d41e398ead0cff94f348e53d060e410405",
         "bytes": 3015
       },
       "sourceManifestAfter": {
@@ -295,7 +286,7 @@
       "id": "suttungr",
       "descriptorBefore": {
         "path": "src/planets/suttungr/object.json",
-        "sha256": "74a89df7779e609ec43fb47cc6263ce70d816c73a56e9f486eb518c5cbb653b3",
+        "sha256": "3986d7227be595a60381881255c8fd100f01c0c6121e386a5a9c98274559dfd7",
         "bytes": 3017
       },
       "sourceManifestBefore": {
@@ -312,18 +303,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/suttungr/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2055,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/suttungr-unit.tap",
-        "logSha256": "c4a51eb23a95eae74d6ed3e39f8d315108962fc207b869e465e4b1901ca2de56",
+        "durationSeconds": 0.1922,
+        "logPath": "output/playwright/moons-b1-qualification/source/suttungr-unit.tap",
+        "logSha256": "ab6e8ecaa1311b65bf1129ae036474bb2924d15ff53d70b1f9c0f258897fa9e0",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -336,17 +325,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "suttungr",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0922,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/suttungr-acquire-verify.log",
+        "durationSeconds": 0.0923,
+        "logPath": "output/playwright/moons-b1-qualification/source/suttungr-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -357,7 +345,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/suttungr/object.json",
-        "sha256": "74a89df7779e609ec43fb47cc6263ce70d816c73a56e9f486eb518c5cbb653b3",
+        "sha256": "3986d7227be595a60381881255c8fd100f01c0c6121e386a5a9c98274559dfd7",
         "bytes": 3017
       },
       "sourceManifestAfter": {
@@ -372,7 +360,7 @@
       "id": "mundilfari",
       "descriptorBefore": {
         "path": "src/planets/mundilfari/object.json",
-        "sha256": "8dc98ec29c75fd62bc6cdd99cb46cc8c6b8826e2bfeec5a972e6632b83d5c633",
+        "sha256": "43f603aeaef57342af08efbf71ebfba1670d094837e31e6c17262f04e5a9f66c",
         "bytes": 3021
       },
       "sourceManifestBefore": {
@@ -389,18 +377,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/mundilfari/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2293,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/mundilfari-unit.tap",
-        "logSha256": "b63a6029052c565c4a727d544b5fe486796eeae5f06b8b2fbbd382d46e24add2",
+        "durationSeconds": 0.1999,
+        "logPath": "output/playwright/moons-b1-qualification/source/mundilfari-unit.tap",
+        "logSha256": "3cee7a486f04a98c0f16662d498b49a3350c9d5ac1cbb9978919c6885e716f7c",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -413,17 +399,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "mundilfari",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0863,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/mundilfari-acquire-verify.log",
+        "durationSeconds": 0.0891,
+        "logPath": "output/playwright/moons-b1-qualification/source/mundilfari-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -434,7 +419,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/mundilfari/object.json",
-        "sha256": "8dc98ec29c75fd62bc6cdd99cb46cc8c6b8826e2bfeec5a972e6632b83d5c633",
+        "sha256": "43f603aeaef57342af08efbf71ebfba1670d094837e31e6c17262f04e5a9f66c",
         "bytes": 3021
       },
       "sourceManifestAfter": {
@@ -449,7 +434,7 @@
       "id": "skathi",
       "descriptorBefore": {
         "path": "src/planets/skathi/object.json",
-        "sha256": "df8faf2be38bdf0dbfd7a64671f12fc2af9485a542f73c617169bb0579e39c6f",
+        "sha256": "7a363ad8cdaedfc7d4949644d1db5c53e1cd5ee48a89c6cbc1abfb62d16de76d",
         "bytes": 3012
       },
       "sourceManifestBefore": {
@@ -466,18 +451,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/skathi/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2109,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/skathi-unit.tap",
-        "logSha256": "e945a4c0f4590df0374e20f7e2b37ae51fe9dce7d3c0a6202bc2fe755f3d1217",
+        "durationSeconds": 0.1999,
+        "logPath": "output/playwright/moons-b1-qualification/source/skathi-unit.tap",
+        "logSha256": "90380871a23fc7a93f29a2e409ba0e2b829d78b4e16c76aa97c2928e91bae3dd",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -490,17 +473,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "skathi",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0887,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/skathi-acquire-verify.log",
+        "durationSeconds": 0.0833,
+        "logPath": "output/playwright/moons-b1-qualification/source/skathi-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -511,7 +493,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/skathi/object.json",
-        "sha256": "df8faf2be38bdf0dbfd7a64671f12fc2af9485a542f73c617169bb0579e39c6f",
+        "sha256": "7a363ad8cdaedfc7d4949644d1db5c53e1cd5ee48a89c6cbc1abfb62d16de76d",
         "bytes": 3012
       },
       "sourceManifestAfter": {
@@ -526,7 +508,7 @@
       "id": "erriapus",
       "descriptorBefore": {
         "path": "src/planets/erriapus/object.json",
-        "sha256": "defe47c1fff3413cc2c89fecbce04aefe4d50d3e8c972c2c41a6b7eb6a55ba60",
+        "sha256": "5f59ae5b61ddfbd5b3284670805da57de48b800e650400c706006ab5220c0472",
         "bytes": 3017
       },
       "sourceManifestBefore": {
@@ -543,18 +525,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/erriapus/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2024,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/erriapus-unit.tap",
-        "logSha256": "3d996c5e45cd1bd82251309a6cf45f0bcf8cc2a225ad9039350c8fe6aa1269e8",
+        "durationSeconds": 0.2033,
+        "logPath": "output/playwright/moons-b1-qualification/source/erriapus-unit.tap",
+        "logSha256": "19c330df7bfc1cd79f1d7b6163539a179886b9e55d846ce945b56e310d019227",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -567,17 +547,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "erriapus",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0838,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/erriapus-acquire-verify.log",
+        "durationSeconds": 0.0795,
+        "logPath": "output/playwright/moons-b1-qualification/source/erriapus-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -588,7 +567,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/erriapus/object.json",
-        "sha256": "defe47c1fff3413cc2c89fecbce04aefe4d50d3e8c972c2c41a6b7eb6a55ba60",
+        "sha256": "5f59ae5b61ddfbd5b3284670805da57de48b800e650400c706006ab5220c0472",
         "bytes": 3017
       },
       "sourceManifestAfter": {
@@ -603,7 +582,7 @@
       "id": "thrymr",
       "descriptorBefore": {
         "path": "src/planets/thrymr/object.json",
-        "sha256": "acaa26929ef8a2f6553c1911329334b5060a9107bfdcc04c0377edbfa473bf5f",
+        "sha256": "7e319c567eb9697443fbe060e3e58fc7008f08a582541353f01bbca23f300673",
         "bytes": 3009
       },
       "sourceManifestBefore": {
@@ -620,18 +599,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/thrymr/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2198,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/thrymr-unit.tap",
-        "logSha256": "88bbc729d66c800bba489ab4bad443c24c205c2275b54989d584973d1f4b8963",
+        "durationSeconds": 0.1965,
+        "logPath": "output/playwright/moons-b1-qualification/source/thrymr-unit.tap",
+        "logSha256": "139f19549e98664ae7c0f5ca9acdefbc9249bb43fc496849c7f86ea3d93d59c1",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -644,17 +621,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "thrymr",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0823,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/thrymr-acquire-verify.log",
+        "durationSeconds": 0.0787,
+        "logPath": "output/playwright/moons-b1-qualification/source/thrymr-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -665,7 +641,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/thrymr/object.json",
-        "sha256": "acaa26929ef8a2f6553c1911329334b5060a9107bfdcc04c0377edbfa473bf5f",
+        "sha256": "7e319c567eb9697443fbe060e3e58fc7008f08a582541353f01bbca23f300673",
         "bytes": 3009
       },
       "sourceManifestAfter": {
@@ -680,7 +656,7 @@
       "id": "bebhionn",
       "descriptorBefore": {
         "path": "src/planets/bebhionn/object.json",
-        "sha256": "0540490a3272dacdb72e14186dc94bef6ce70ef21091cb62404957851261b2a1",
+        "sha256": "854e0502dcf7fb93a1b3852d9c32d8451ac3d3ca91c89188b19ca4244cf302a0",
         "bytes": 3018
       },
       "sourceManifestBefore": {
@@ -697,18 +673,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/bebhionn/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.197,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/bebhionn-unit.tap",
-        "logSha256": "e2988ecd026924c33b525f94258d3cf4733e47a6e3e476de4026a6265918d90d",
+        "durationSeconds": 0.1942,
+        "logPath": "output/playwright/moons-b1-qualification/source/bebhionn-unit.tap",
+        "logSha256": "e28c0b45756f9fa88f6c2a6a962c7aa6005ae09d4e8d09d1bbfb019632fbf232",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -721,17 +695,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "bebhionn",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0827,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/bebhionn-acquire-verify.log",
+        "durationSeconds": 0.0801,
+        "logPath": "output/playwright/moons-b1-qualification/source/bebhionn-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -742,7 +715,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/bebhionn/object.json",
-        "sha256": "0540490a3272dacdb72e14186dc94bef6ce70ef21091cb62404957851261b2a1",
+        "sha256": "854e0502dcf7fb93a1b3852d9c32d8451ac3d3ca91c89188b19ca4244cf302a0",
         "bytes": 3018
       },
       "sourceManifestAfter": {
@@ -757,7 +730,7 @@
       "id": "bergelmir",
       "descriptorBefore": {
         "path": "src/planets/bergelmir/object.json",
-        "sha256": "94b0350ce8883bb439a66acd807a081941367c8e85144e2e3f5523d65fd5c5d0",
+        "sha256": "601f7424f6354add43f3e4e3d456e8c5bbeabdb7b7cd3ef10cd7d048105e6067",
         "bytes": 3021
       },
       "sourceManifestBefore": {
@@ -774,18 +747,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/bergelmir/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1998,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/bergelmir-unit.tap",
-        "logSha256": "b5b914a1c28f27535a2fa85990a654ab388005aa79180f727bf138f85b4f1ca4",
+        "durationSeconds": 0.1896,
+        "logPath": "output/playwright/moons-b1-qualification/source/bergelmir-unit.tap",
+        "logSha256": "5f5cd2e38b1b828c1bac79ad632d728cabe4f2b66a8aa90a585d0ab2087668b7",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -798,17 +769,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "bergelmir",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1039,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/bergelmir-acquire-verify.log",
+        "durationSeconds": 0.0822,
+        "logPath": "output/playwright/moons-b1-qualification/source/bergelmir-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -819,7 +789,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/bergelmir/object.json",
-        "sha256": "94b0350ce8883bb439a66acd807a081941367c8e85144e2e3f5523d65fd5c5d0",
+        "sha256": "601f7424f6354add43f3e4e3d456e8c5bbeabdb7b7cd3ef10cd7d048105e6067",
         "bytes": 3021
       },
       "sourceManifestAfter": {
@@ -834,7 +804,7 @@
       "id": "bestla",
       "descriptorBefore": {
         "path": "src/planets/bestla/object.json",
-        "sha256": "dbd2dd6d27162734ed934825af859299d1a3d68dbcb403cc473827ffeaba9056",
+        "sha256": "00fed1dc8d5bd8e8d145ba5e0e0f1d568c9d6b47c7ced21a38f993901f519eb4",
         "bytes": 3016
       },
       "sourceManifestBefore": {
@@ -851,18 +821,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/bestla/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2803,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/bestla-unit.tap",
-        "logSha256": "a0c17ec6a05e0024f984b50a22a81c7fe092d70c00aa2981b4fabff0e6247d67",
+        "durationSeconds": 0.2178,
+        "logPath": "output/playwright/moons-b1-qualification/source/bestla-unit.tap",
+        "logSha256": "12db4fa1c5e033a6da2757a39a8df3bbd1a2f6a9f6ba76cb1cbc62f62d5aa2f2",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -875,17 +843,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "bestla",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0872,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/bestla-acquire-verify.log",
+        "durationSeconds": 0.0772,
+        "logPath": "output/playwright/moons-b1-qualification/source/bestla-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -896,7 +863,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/bestla/object.json",
-        "sha256": "dbd2dd6d27162734ed934825af859299d1a3d68dbcb403cc473827ffeaba9056",
+        "sha256": "00fed1dc8d5bd8e8d145ba5e0e0f1d568c9d6b47c7ced21a38f993901f519eb4",
         "bytes": 3016
       },
       "sourceManifestAfter": {
@@ -911,7 +878,7 @@
       "id": "fornjot",
       "descriptorBefore": {
         "path": "src/planets/fornjot/object.json",
-        "sha256": "be08d6664fdfa027bc401651e83c10e5b78407f7ded75b9fca26e8f3687f995c",
+        "sha256": "aeb19bed9fcc9d5436525adc542bdd10f778f8e6412cb06fdd5e8c0c8cc9216d",
         "bytes": 3015
       },
       "sourceManifestBefore": {
@@ -928,18 +895,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/fornjot/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2091,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/fornjot-unit.tap",
-        "logSha256": "e935661213f1bec50b065d32c8faa0868e4e1184f2fe38f9baa16f4cb0c21e44",
+        "durationSeconds": 0.1913,
+        "logPath": "output/playwright/moons-b1-qualification/source/fornjot-unit.tap",
+        "logSha256": "c1e25974f90a2f5a60f2aa729f1c5c406eac5c5dcca08284c1e909ac2c56fc67",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -952,17 +917,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "fornjot",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0828,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/fornjot-acquire-verify.log",
+        "durationSeconds": 0.0772,
+        "logPath": "output/playwright/moons-b1-qualification/source/fornjot-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -973,7 +937,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/fornjot/object.json",
-        "sha256": "be08d6664fdfa027bc401651e83c10e5b78407f7ded75b9fca26e8f3687f995c",
+        "sha256": "aeb19bed9fcc9d5436525adc542bdd10f778f8e6412cb06fdd5e8c0c8cc9216d",
         "bytes": 3015
       },
       "sourceManifestAfter": {
@@ -988,7 +952,7 @@
       "id": "hati",
       "descriptorBefore": {
         "path": "src/planets/hati/object.json",
-        "sha256": "abfcee60247a1db9f0edfd1b7ac8e721faf7eb068f4bb042d016bb7cb83b7360",
+        "sha256": "0dbc167c4633fd5e5f1e7b574b6d73e00037e151c09b695c249de6c145912350",
         "bytes": 3009
       },
       "sourceManifestBefore": {
@@ -1005,18 +969,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/hati/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2093,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/hati-unit.tap",
-        "logSha256": "5fcfd6658f8ef200f4d2ebceaa3e5ba57af81f7c30a62c68c9166cf8715125e5",
+        "durationSeconds": 0.1901,
+        "logPath": "output/playwright/moons-b1-qualification/source/hati-unit.tap",
+        "logSha256": "49fd34a0407134a526c2acaf85e9225832a5d6bcfba416dfb49ffc698186f01a",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -1029,17 +991,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "hati",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0907,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/hati-acquire-verify.log",
+        "durationSeconds": 0.0802,
+        "logPath": "output/playwright/moons-b1-qualification/source/hati-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -1050,7 +1011,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/hati/object.json",
-        "sha256": "abfcee60247a1db9f0edfd1b7ac8e721faf7eb068f4bb042d016bb7cb83b7360",
+        "sha256": "0dbc167c4633fd5e5f1e7b574b6d73e00037e151c09b695c249de6c145912350",
         "bytes": 3009
       },
       "sourceManifestAfter": {
@@ -1065,7 +1026,7 @@
       "id": "hyrrokkin",
       "descriptorBefore": {
         "path": "src/planets/hyrrokkin/object.json",
-        "sha256": "95570cda16c29b64d8e201eea2c811749e6f79a539d0031f25f865191d9d885d",
+        "sha256": "ce1ce3730eba981b631b6053ece8139b66510fe45768e86c0ffffa09fbdecddc",
         "bytes": 3018
       },
       "sourceManifestBefore": {
@@ -1082,18 +1043,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/hyrrokkin/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2237,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/hyrrokkin-unit.tap",
-        "logSha256": "1bf180a99ee89ed7960eb296a345b360ad2c1197be6bbf18e68c96ef43570d6c",
+        "durationSeconds": 0.1937,
+        "logPath": "output/playwright/moons-b1-qualification/source/hyrrokkin-unit.tap",
+        "logSha256": "92853f4bbb97d6030412fac49c984fecf1aed5f68154ccaeb076cd0b83b8f4af",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -1106,17 +1065,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "hyrrokkin",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0985,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/hyrrokkin-acquire-verify.log",
+        "durationSeconds": 0.1347,
+        "logPath": "output/playwright/moons-b1-qualification/source/hyrrokkin-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -1127,7 +1085,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/hyrrokkin/object.json",
-        "sha256": "95570cda16c29b64d8e201eea2c811749e6f79a539d0031f25f865191d9d885d",
+        "sha256": "ce1ce3730eba981b631b6053ece8139b66510fe45768e86c0ffffa09fbdecddc",
         "bytes": 3018
       },
       "sourceManifestAfter": {
@@ -1142,7 +1100,7 @@
       "id": "loge",
       "descriptorBefore": {
         "path": "src/planets/loge/object.json",
-        "sha256": "6fdb405f7e74a304cafd194b9e6436d308ff2dda3bc7371b55485cee6f272eb8",
+        "sha256": "1f0cf3b82dc498e1bffb2848d20aa034efa898bb9fbb3c90390c1b57f17ee979",
         "bytes": 3009
       },
       "sourceManifestBefore": {
@@ -1159,18 +1117,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/loge/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2149,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/loge-unit.tap",
-        "logSha256": "5ef86d1bc5a692bd1a5b79994f23fcdbb90c681e0c20c3901f476ff974511f98",
+        "durationSeconds": 0.228,
+        "logPath": "output/playwright/moons-b1-qualification/source/loge-unit.tap",
+        "logSha256": "fe67d21eb00accb756ec994a9424c15a7cf9e32c1f6cec50e9b3c3178db23a3b",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -1183,17 +1139,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "loge",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0903,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/loge-acquire-verify.log",
+        "durationSeconds": 0.0785,
+        "logPath": "output/playwright/moons-b1-qualification/source/loge-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -1204,7 +1159,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/loge/object.json",
-        "sha256": "6fdb405f7e74a304cafd194b9e6436d308ff2dda3bc7371b55485cee6f272eb8",
+        "sha256": "1f0cf3b82dc498e1bffb2848d20aa034efa898bb9fbb3c90390c1b57f17ee979",
         "bytes": 3009
       },
       "sourceManifestAfter": {
@@ -1219,7 +1174,7 @@
       "id": "skoll",
       "descriptorBefore": {
         "path": "src/planets/skoll/object.json",
-        "sha256": "f4503b20522a9c659e101512ef2c639758b8deace89848e241d389e49ced98d5",
+        "sha256": "e8253ac75c267f0a541de49b6c5cde7431172cb2fd9dfe5d3ca791dc615e9c6a",
         "bytes": 2994
       },
       "sourceManifestBefore": {
@@ -1236,18 +1191,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/skoll/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2219,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/skoll-unit.tap",
-        "logSha256": "79f4eac79b8fc2147120c66f3c1e581b69ec70e0bf5967e007423e7bf57a830e",
+        "durationSeconds": 0.1897,
+        "logPath": "output/playwright/moons-b1-qualification/source/skoll-unit.tap",
+        "logSha256": "2d50a86c195cb04eff446d26484b299888fcfeaa6e90a6af33ec8b46e4413b68",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -1260,17 +1213,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "skoll",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0895,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/skoll-acquire-verify.log",
+        "durationSeconds": 0.0834,
+        "logPath": "output/playwright/moons-b1-qualification/source/skoll-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -1281,7 +1233,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/skoll/object.json",
-        "sha256": "f4503b20522a9c659e101512ef2c639758b8deace89848e241d389e49ced98d5",
+        "sha256": "e8253ac75c267f0a541de49b6c5cde7431172cb2fd9dfe5d3ca791dc615e9c6a",
         "bytes": 2994
       },
       "sourceManifestAfter": {
@@ -1296,7 +1248,7 @@
       "id": "greip",
       "descriptorBefore": {
         "path": "src/planets/greip/object.json",
-        "sha256": "daafe26242564791dc44663997e59df0e9d4db37ab4c5826b05e364b05338cc2",
+        "sha256": "cbf2e8a1cdfc47e68217e45319b78615386acbb6d8ebcefd8bd62dd7f5382517",
         "bytes": 2996
       },
       "sourceManifestBefore": {
@@ -1313,18 +1265,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/greip/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2138,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/greip-unit.tap",
-        "logSha256": "37250e130f73e30c0a517bdfe9ceb4a56c40779d2e3046fdd863bbb41d6c2364",
+        "durationSeconds": 0.1929,
+        "logPath": "output/playwright/moons-b1-qualification/source/greip-unit.tap",
+        "logSha256": "b8214a4cc530fd3c893ef79dc847d12982db73c0d2b807b9adab4c7c127c8165",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -1337,17 +1287,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "greip",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.095,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/greip-acquire-verify.log",
+        "durationSeconds": 0.0793,
+        "logPath": "output/playwright/moons-b1-qualification/source/greip-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -1358,7 +1307,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/greip/object.json",
-        "sha256": "daafe26242564791dc44663997e59df0e9d4db37ab4c5826b05e364b05338cc2",
+        "sha256": "cbf2e8a1cdfc47e68217e45319b78615386acbb6d8ebcefd8bd62dd7f5382517",
         "bytes": 2996
       },
       "sourceManifestAfter": {
@@ -1373,7 +1322,7 @@
       "id": "tarqeq",
       "descriptorBefore": {
         "path": "src/planets/tarqeq/object.json",
-        "sha256": "5962d843b886eaa2c53b47c952be47148137b69f2e1539ed3c568e956c43e38d",
+        "sha256": "0f8b764f9af2fb5f0643f1703e6f699953abf1feb05b63c764ad2c5ba4ba0084",
         "bytes": 3009
       },
       "sourceManifestBefore": {
@@ -1390,18 +1339,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/tarqeq/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2155,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/tarqeq-unit.tap",
-        "logSha256": "57ff7d64f58e9d390eb62a09a420c1b7ce562e1f20162ba14906e5339fd7ad7d",
+        "durationSeconds": 0.1907,
+        "logPath": "output/playwright/moons-b1-qualification/source/tarqeq-unit.tap",
+        "logSha256": "a7f6f89e2b0528b2878b5d602de338257e0ead524179c7ad88a3006a8518d1c0",
         "counts": {
           "tests": 4,
           "suites": 0,
@@ -1414,17 +1361,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "tarqeq",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0833,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/tarqeq-acquire-verify.log",
+        "durationSeconds": 0.0797,
+        "logPath": "output/playwright/moons-b1-qualification/source/tarqeq-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -1435,7 +1381,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/tarqeq/object.json",
-        "sha256": "5962d843b886eaa2c53b47c952be47148137b69f2e1539ed3c568e956c43e38d",
+        "sha256": "0f8b764f9af2fb5f0643f1703e6f699953abf1feb05b63c764ad2c5ba4ba0084",
         "bytes": 3009
       },
       "sourceManifestAfter": {
@@ -1450,7 +1396,7 @@
       "id": "caliban",
       "descriptorBefore": {
         "path": "src/planets/caliban/object.json",
-        "sha256": "2e7eaf509af0cb1d17676cdecce69a9abed6fe36b61bc5c749e6efb5c79a4415",
+        "sha256": "7f03e4a2fab9d8fd7fe392c3bdd2530df0809a227c3904a02d29a9d290be47b0",
         "bytes": 3015
       },
       "sourceManifestBefore": {
@@ -1467,18 +1413,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/caliban/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1828,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/caliban-unit.tap",
-        "logSha256": "1c070ab943bf73af4b3d0f20c10b2ca9f595af5d8a91d3d767788ac186b9387f",
+        "durationSeconds": 0.1595,
+        "logPath": "output/playwright/moons-b1-qualification/source/caliban-unit.tap",
+        "logSha256": "f450b3d2e65d3a60dbffa43010e423148a2946cd9d2e03fae5f3b12d9b73b680",
         "counts": {
           "tests": 1,
           "suites": 0,
@@ -1491,17 +1435,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "caliban",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1038,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/caliban-acquire-verify.log",
+        "durationSeconds": 0.0816,
+        "logPath": "output/playwright/moons-b1-qualification/source/caliban-acquire-verify.log",
         "logSha256": "7ab35622639e18331078fca0a1b812072819059aaa77c83c0d0d2fda50979c61",
         "counts": {
           "inputCount": 4,
@@ -1512,7 +1455,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/caliban/object.json",
-        "sha256": "2e7eaf509af0cb1d17676cdecce69a9abed6fe36b61bc5c749e6efb5c79a4415",
+        "sha256": "7f03e4a2fab9d8fd7fe392c3bdd2530df0809a227c3904a02d29a9d290be47b0",
         "bytes": 3015
       },
       "sourceManifestAfter": {
@@ -1527,7 +1470,7 @@
       "id": "sycorax",
       "descriptorBefore": {
         "path": "src/planets/sycorax/object.json",
-        "sha256": "291a205d45a0a20e1b5f59a6765c976a1049b3ec685480947c86bf97b6f16d37",
+        "sha256": "f365295c7b4958d6344fdb45c5be26125eecb73b554e33f0d9d92feba6d8f730",
         "bytes": 3018
       },
       "sourceManifestBefore": {
@@ -1544,18 +1487,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/sycorax/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1872,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/sycorax-unit.tap",
-        "logSha256": "69602a959559281858fa9069a34b4d3d1f321c5f5c9859b2843461803d7eafd3",
+        "durationSeconds": 0.1641,
+        "logPath": "output/playwright/moons-b1-qualification/source/sycorax-unit.tap",
+        "logSha256": "5afa2068b96aef26cbaa8d6a8220c50a69375817cb9d392e18b922a337101fd4",
         "counts": {
           "tests": 1,
           "suites": 0,
@@ -1568,17 +1509,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "sycorax",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0834,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/sycorax-acquire-verify.log",
+        "durationSeconds": 0.0772,
+        "logPath": "output/playwright/moons-b1-qualification/source/sycorax-acquire-verify.log",
         "logSha256": "7ab35622639e18331078fca0a1b812072819059aaa77c83c0d0d2fda50979c61",
         "counts": {
           "inputCount": 4,
@@ -1589,7 +1529,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/sycorax/object.json",
-        "sha256": "291a205d45a0a20e1b5f59a6765c976a1049b3ec685480947c86bf97b6f16d37",
+        "sha256": "f365295c7b4958d6344fdb45c5be26125eecb73b554e33f0d9d92feba6d8f730",
         "bytes": 3018
       },
       "sourceManifestAfter": {
@@ -1604,7 +1544,7 @@
       "id": "prospero",
       "descriptorBefore": {
         "path": "src/planets/prospero/object.json",
-        "sha256": "8159ecc7332e1e1157b40dd5c1491bc4dcfba5da9418a4d63d8b8af7ae57bbc9",
+        "sha256": "418b77a925a94db09b4b1be3400143a7abf684fa975af183ced2becf7f22c855",
         "bytes": 3017
       },
       "sourceManifestBefore": {
@@ -1621,18 +1561,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/prospero/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1764,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/prospero-unit.tap",
-        "logSha256": "2ac34d7029bf2e964eaecf152d3be50dc2890ed5379f02373960140888017e3d",
+        "durationSeconds": 0.1622,
+        "logPath": "output/playwright/moons-b1-qualification/source/prospero-unit.tap",
+        "logSha256": "94d356ad07fb239f13ea879a549e7c924f4acd9ee950a82b588c268dc3dc2843",
         "counts": {
           "tests": 1,
           "suites": 0,
@@ -1645,17 +1583,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "prospero",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.09,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/prospero-acquire-verify.log",
+        "durationSeconds": 0.0796,
+        "logPath": "output/playwright/moons-b1-qualification/source/prospero-acquire-verify.log",
         "logSha256": "7ab35622639e18331078fca0a1b812072819059aaa77c83c0d0d2fda50979c61",
         "counts": {
           "inputCount": 4,
@@ -1666,7 +1603,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/prospero/object.json",
-        "sha256": "8159ecc7332e1e1157b40dd5c1491bc4dcfba5da9418a4d63d8b8af7ae57bbc9",
+        "sha256": "418b77a925a94db09b4b1be3400143a7abf684fa975af183ced2becf7f22c855",
         "bytes": 3017
       },
       "sourceManifestAfter": {
@@ -1681,7 +1618,7 @@
       "id": "setebos",
       "descriptorBefore": {
         "path": "src/planets/setebos/object.json",
-        "sha256": "1c013eb91d747a10a44b1f93529f14eb57c91c91389c403bd1d35cdf058f58e6",
+        "sha256": "cb81e908b7387adefda14ea5de2a16200e8b4b4ebe77e2c3538e7bb072776599",
         "bytes": 3017
       },
       "sourceManifestBefore": {
@@ -1698,18 +1635,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/setebos/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1946,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/setebos-unit.tap",
-        "logSha256": "20a6e8135e12e7a58d905d9e282e0a813d24d45e3e6230504a4f3b02a4e1188b",
+        "durationSeconds": 0.1654,
+        "logPath": "output/playwright/moons-b1-qualification/source/setebos-unit.tap",
+        "logSha256": "293969979e9b9f9054ae194343d8a14a8ab05a3b2865d6c1a50e37cf17713e90",
         "counts": {
           "tests": 1,
           "suites": 0,
@@ -1722,17 +1657,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "setebos",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0895,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/setebos-acquire-verify.log",
+        "durationSeconds": 0.0795,
+        "logPath": "output/playwright/moons-b1-qualification/source/setebos-acquire-verify.log",
         "logSha256": "7ab35622639e18331078fca0a1b812072819059aaa77c83c0d0d2fda50979c61",
         "counts": {
           "inputCount": 4,
@@ -1743,7 +1677,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/setebos/object.json",
-        "sha256": "1c013eb91d747a10a44b1f93529f14eb57c91c91389c403bd1d35cdf058f58e6",
+        "sha256": "cb81e908b7387adefda14ea5de2a16200e8b4b4ebe77e2c3538e7bb072776599",
         "bytes": 3017
       },
       "sourceManifestAfter": {
@@ -1758,7 +1692,7 @@
       "id": "hiiaka",
       "descriptorBefore": {
         "path": "src/planets/hiiaka/object.json",
-        "sha256": "63d95ba59b222a73c2ea0aecc03c9c374178180137e055e4486716d142f82125",
+        "sha256": "8b4d9ee42b417172fd79f9358e8fbc48856ff2832055bb1a7133e20d3b3243fd",
         "bytes": 3045
       },
       "sourceManifestBefore": {
@@ -1775,18 +1709,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/hiiaka/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2313,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/hiiaka-unit.tap",
-        "logSha256": "d87ea76f1fb037f6086df91ca8d24e5914088c59bae7ab15996a10cc32c8e7af",
+        "durationSeconds": 0.161,
+        "logPath": "output/playwright/moons-b1-qualification/source/hiiaka-unit.tap",
+        "logSha256": "a20a14e02ec93a84257f02145be8ad88fe48bb3803a94459a309802a428e104c",
         "counts": {
           "tests": 1,
           "suites": 0,
@@ -1799,17 +1731,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "hiiaka",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1121,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/hiiaka-acquire-verify.log",
+        "durationSeconds": 0.0805,
+        "logPath": "output/playwright/moons-b1-qualification/source/hiiaka-acquire-verify.log",
         "logSha256": "4b97de211e8548d8e5ee79edbf0456834c80c1fdd1b8caff422ab2d14dcb936e",
         "counts": {
           "inputCount": 4,
@@ -1820,7 +1751,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/hiiaka/object.json",
-        "sha256": "63d95ba59b222a73c2ea0aecc03c9c374178180137e055e4486716d142f82125",
+        "sha256": "8b4d9ee42b417172fd79f9358e8fbc48856ff2832055bb1a7133e20d3b3243fd",
         "bytes": 3045
       },
       "sourceManifestAfter": {
@@ -1835,7 +1766,7 @@
       "id": "squannit",
       "descriptorBefore": {
         "path": "src/planets/squannit/object.json",
-        "sha256": "dea07c907ed37885f47b65df0a7a7360bd757875a75fe4e7ee5cafad381cf153",
+        "sha256": "20d326e99a605ca05dd17c53278c32cbdbfcc92a3bd9e2086f90e4f831d134bd",
         "bytes": 3052
       },
       "sourceManifestBefore": {
@@ -1852,18 +1783,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/squannit/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.2132,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/squannit-unit.tap",
-        "logSha256": "3fe3da7e96384eea3da4882b1a6da81882c3c28974a08d0ca51055125d81d5fa",
+        "durationSeconds": 0.1492,
+        "logPath": "output/playwright/moons-b1-qualification/source/squannit-unit.tap",
+        "logSha256": "a03d6bdca22c7c57666c3ef8d884117e99bc3ecf5124350fd65816e4cf0543e8",
         "counts": {
           "tests": 1,
           "suites": 0,
@@ -1876,17 +1805,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "squannit",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1094,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/squannit-acquire-verify.log",
+        "durationSeconds": 0.0794,
+        "logPath": "output/playwright/moons-b1-qualification/source/squannit-acquire-verify.log",
         "logSha256": "d10c670ccd33b28f5b9d5aad7e542c835b750700bc76ecd3bd7bde15e4a1b97b",
         "counts": {
           "inputCount": 4,
@@ -1897,7 +1825,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/squannit/object.json",
-        "sha256": "dea07c907ed37885f47b65df0a7a7360bd757875a75fe4e7ee5cafad381cf153",
+        "sha256": "20d326e99a605ca05dd17c53278c32cbdbfcc92a3bd9e2086f90e4f831d134bd",
         "bytes": 3052
       },
       "sourceManifestAfter": {
@@ -1912,7 +1840,7 @@
       "id": "romulus",
       "descriptorBefore": {
         "path": "src/planets/romulus/object.json",
-        "sha256": "eafb9b44fd8d70cde04210811a78db09504b54b8c57b24e40d3d8292ef8f06d4",
+        "sha256": "bafb5be5a2e8f9d94bff1bb37f84b394a943e62dd6c23646485a958d9b6070d0",
         "bytes": 3042
       },
       "sourceManifestBefore": {
@@ -1929,18 +1857,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/romulus/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.1843,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/romulus-unit.tap",
-        "logSha256": "d3bc397e36710107a0eed128ebb208dccff86d7dabfee05cfbd5ab3ff98c93e6",
+        "durationSeconds": 0.1593,
+        "logPath": "output/playwright/moons-b1-qualification/source/romulus-unit.tap",
+        "logSha256": "6d6ba74f333906bf5b9277a069af0468326e5f38a17ceba915af44db37029ec9",
         "counts": {
           "tests": 1,
           "suites": 0,
@@ -1953,17 +1879,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "romulus",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0954,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/romulus-acquire-verify.log",
+        "durationSeconds": 0.0811,
+        "logPath": "output/playwright/moons-b1-qualification/source/romulus-acquire-verify.log",
         "logSha256": "e46d31d9a17fe34f1ecac84575c679b1c604dd2cc9fc2c0d28bc5037d610d4de",
         "counts": {
           "inputCount": 4,
@@ -1974,7 +1899,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/romulus/object.json",
-        "sha256": "eafb9b44fd8d70cde04210811a78db09504b54b8c57b24e40d3d8292ef8f06d4",
+        "sha256": "bafb5be5a2e8f9d94bff1bb37f84b394a943e62dd6c23646485a958d9b6070d0",
         "bytes": 3042
       },
       "sourceManifestAfter": {
@@ -1989,7 +1914,7 @@
       "id": "menoetius",
       "descriptorBefore": {
         "path": "src/planets/menoetius/object.json",
-        "sha256": "9b66022aa66b97ffede058c962cc7d12e4c40b318208d715c131e0ad5a9a679a",
+        "sha256": "dd9c9278fa7bd56b458c2a09d844253009a675312774a1ba45a483714b54f70c",
         "bytes": 3091
       },
       "sourceManifestBefore": {
@@ -2006,18 +1931,16 @@
       ],
       "unit": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "--test",
           "--test-reporter=tap",
-          "--test-concurrency=1",
           "tests/objects/unit/menoetius/source.test.mjs"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.222,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/menoetius-unit.tap",
-        "logSha256": "04910ebacf43e50325acf7747eac8d85bd34e8990d97e2391d625eae48df9919",
+        "durationSeconds": 0.1594,
+        "logPath": "output/playwright/moons-b1-qualification/source/menoetius-unit.tap",
+        "logSha256": "29fdbb871b28c334f954408b8721c5626e6b5bfe5b6d5e31dd03ffcaa28f10fd",
         "counts": {
           "tests": 1,
           "suites": 0,
@@ -2030,17 +1953,16 @@
       },
       "acquisitionVerify": {
         "argv": [
-          "node",
+          "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
           "tools/objects/dist/operations.js",
           "acquire",
           "menoetius",
           "--verify-only"
         ],
-        "cwd": ".",
+        "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
         "exitCode": 0,
-        "signal": null,
-        "durationSeconds": 0.0906,
-        "logPath": "output/playwright/moons-b1-qualification/source-final-2900da4f-aeU5lD/menoetius-acquire-verify.log",
+        "durationSeconds": 0.0808,
+        "logPath": "output/playwright/moons-b1-qualification/source/menoetius-acquire-verify.log",
         "logSha256": "4b97de211e8548d8e5ee79edbf0456834c80c1fdd1b8caff422ab2d14dcb936e",
         "counts": {
           "inputCount": 4,
@@ -2051,7 +1973,7 @@
       },
       "descriptorAfter": {
         "path": "src/planets/menoetius/object.json",
-        "sha256": "9b66022aa66b97ffede058c962cc7d12e4c40b318208d715c131e0ad5a9a679a",
+        "sha256": "dd9c9278fa7bd56b458c2a09d844253009a675312774a1ba45a483714b54f70c",
         "bytes": 3091
       },
       "sourceManifestAfter": {
@@ -2063,8 +1985,7 @@
       "passed": true
     }
   ],
-  "endedUtc": "2026-09-08T22:04:46.572Z",
-  "headAfter": "2900da4f78e21caa2e08064ec191552c9cd78f97",
+  "endedUtc": "2026-09-08T20:31:03Z",
   "operationsBuildAfter": {
     "path": "tools/objects/dist/operations.js",
     "sha256": "0917f52723be404ca461b40d4bd45f91a776c6779107b42ce7d5c016f3d169ce",
