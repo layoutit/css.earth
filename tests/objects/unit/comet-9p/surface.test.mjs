@@ -26,8 +26,11 @@ test('Tempel 1 retains published geometry, source constraint flags and fixed non
   const original = validateClosedMesh(Uint32Array.from(source.indices.flat()), source.positions);
   assert.equal(topology.components, 1); assert.equal(topology.eulerCharacteristic, 2);
   assert.ok(Math.abs(topology.signedVolumeCubicMeters / original.signedVolumeCubicMeters - 1) < .02);
-  const manifest = await json('source/manifest.json'), entry = manifest.inputs.find(e => e.id === 'constraint-surface');
-  assert.deepEqual(await preparePdsConstraintMap(source, entry.recipe), await readFile(resolve(root, 'source', entry.path)));
+  const manifest = await json('source/manifest.json');
+  for (const entry of manifest.inputs.filter(e => e.consumers.includes('surfaces'))) {
+    assert.deepEqual(entry.recipe.gridFlags, [3], 'only the poorly constrained source category receives the grid in either lens');
+    assert.deepEqual(await preparePdsConstraintMap(source, entry.recipe), await readFile(resolve(root, 'source', entry.path)));
+  }
   const orientation = await json('source/preparation/rotation.json');
   assert.equal(orientation.schema, 'cssearth-display-orientation@1');
   assert.equal(orientation.periodHours, undefined);
