@@ -4,10 +4,12 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import { projectPreparedPoint } from '../../../src/renderers/css/stars/prepared-point-field-runtime';
 import { transposeWorldRotation, worldRotationFromQuaternion } from '../../../src/renderers/css/navigation/world-camera-math';
 import type { WorldCameraPose, WorldCameraViewport } from '../../../src/renderers/css/navigation/world-camera';
+import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from './cloud-density';
 
 export interface PreparedLmcStar {
   id: string; raDeg: number; decDeg: number; magnitude: number; colorIndexBv: number | null; spectralType: string;
   positionUnits: [number, number, number]; sizePx: number; colorCss: string; opacity: number;
+  cloudSignal: number; cloudPartIds: string[];
 }
 export interface PreparedLmcStars {
   schema: 'cssearth-lmc-stars@1'; id: 'lmc-stars'; frame: DensityVolumeFrame;
@@ -32,6 +34,9 @@ export function parsePreparedLmcStars(value: unknown, expectedFrame: DensityVolu
     if (!star || typeof star.id !== 'string' || !star.id.startsWith('Bonanos2009:') || star.id.length > 100 || ids.has(star.id) ||
         typeof star.spectralType !== 'string' || !finiteArray(star.positionUnits, 3) || !Number.isFinite(star.raDeg) || star.raDeg < 0 || star.raDeg >= 360 ||
         !Number.isFinite(star.decDeg) || Math.abs(star.decDeg) > 90 || !Number.isFinite(star.magnitude) ||
+        !Number.isFinite(star.cloudSignal) || star.cloudSignal <= 0 || star.cloudSignal > 1 ||
+        !Array.isArray(star.cloudPartIds) || !star.cloudPartIds.length || star.cloudPartIds.some(id => typeof id !== 'string' || !id) ||
+        new Set(star.cloudPartIds).size !== star.cloudPartIds.length ||
         !(star.colorIndexBv === null || Number.isFinite(star.colorIndexBv)) || !Number.isFinite(star.sizePx) || star.sizePx < .5 || star.sizePx > 4 ||
         !Number.isFinite(star.opacity) || star.opacity < 0 || star.opacity > 1 || !/^#[0-9a-f]{6}$/i.test(star.colorCss))
       throw new TypeError('Invalid prepared LMC star point.');
@@ -54,6 +59,7 @@ export function mountPreparedLmcStars({ host, payload, before = null }: {
   });
   host.insertBefore(root, before);
   let enabled = true, destroyed = false, visibleCount = 0;
+  const support = new Float64Array(payload.stars.length).fill(1);
   const publish = ({ world, viewport }: { world: WorldCameraPose; viewport: WorldCameraViewport }) => {
     if (destroyed) return;
     if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt)
@@ -66,7 +72,7 @@ export function mountPreparedLmcStars({ host, payload, before = null }: {
     visibleCount = 0;
     payload.stars.forEach((star, index) => {
       const p = projectPreparedPoint(star.positionUnits, local.positionUnits, rotation, focal, ox, oy), node = nodes[index]!;
-      const shown = p.depth > 0 && Math.abs(p.x) < halfWidth + star.sizePx && Math.abs(p.y) < halfHeight + star.sizePx;
+      const shown = support[index]! > 0 && p.depth > 0 && Math.abs(p.x) < halfWidth + star.sizePx && Math.abs(p.y) < halfHeight + star.sizePx;
       node.style.visibility = shown ? '' : 'hidden';
       if (shown) {
         visibleCount++;
@@ -79,6 +85,15 @@ export function mountPreparedLmcStars({ host, payload, before = null }: {
   return Object.freeze({ root, count: payload.stars.length,
     magnitudeRange: [Math.min(...payload.stars.map(s => s.magnitude)), Math.max(...payload.stars.map(s => s.magnitude))] as [number, number],
     publish,
+    setCloudSupport(filter: CloudDensityFilter, partIds: readonly string[]) {
+      const valid = validateCloudDensityFilter(filter), selected = new Set(partIds);
+      payload.stars.forEach((star, index) => {
+        const weight = cloudDensityWeight(star.cloudSignal, valid);
+        support[index] = star.cloudPartIds.some(id => selected.has(id)) ? (valid.showRemoved ? 1 - weight : weight) : 0;
+        nodes[index]!.style.opacity = String(star.opacity * support[index]!);
+        if (!support[index]) nodes[index]!.style.visibility = 'hidden';
+      });
+    },
     setVisible(value: boolean) { enabled = value; root.style.visibility = value ? '' : 'hidden';
       // Explicit child visibility can escape a hidden parent, so hide the root's display as one retained layer.
       root.style.display = value ? 'block' : 'none'; root.dataset.visibleStars = String(value ? visibleCount : 0); },

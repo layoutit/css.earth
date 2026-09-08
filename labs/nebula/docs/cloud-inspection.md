@@ -31,7 +31,9 @@ All sampling and image processing run in the local Node preparation service, not
 
 Oblique sightlines mix different photo columns, which can make the result brighter and less saturated. The source textures have similar saturation across all three banks. Brightness attenuation can reduce the extra light, but cannot restore the mixed colors; see [the measured color diagnosis](view-direction-color.md).
 
-Bright catalog stars are an independent layer with a visible on/off switch and brightness control. Their sky positions come from the cited catalog; their individual depths remain modeled. The cloud's cutoff and brightness controls do not remove or dim these catalog points.
+Bright catalog stars have a separate on/off switch and brightness control. Their sky positions come from the cited catalog; their depths sample the overlap of actual reconstructed cloud emission and simulation stellar density along those sightlines. They occupy modeled cloud volume rather than its fitted plane. This display placement does not recover individual distances or establish physical membership in emitting structures.
+
+Stars follow the same projected cutoff and edge softness as their cloud support, including the complementary removed-signal preview. Hiding all supporting structures hides a star; restoring them restores the retained point. Their positions stay fixed. Cloud brightness and star brightness remain independent.
 
 ## Preparation and interpretation
 

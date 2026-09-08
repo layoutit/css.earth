@@ -8,6 +8,7 @@ import type { CloudBrightness } from './cloud-controls';
 import { createCloudSurface } from './cloud-surface';
 import { mountPreparedLmcStars, parsePreparedLmcStars } from './lmc-stars';
 import type { CloudStarOptions, CloudStarContext } from './cloud-star-controls';
+import { validateCloudDensityFilter, type CloudDensityFilter } from './cloud-density';
 import * as runtimePolicy from '../../../site/runtime-policy.mjs';
 import { createObjectInteractionControls } from '../../../src/renderers/css/navigation/object-interaction-controls';
 import { worldCameraFromCenteredPresentation } from '../../../src/renderers/css/navigation/world-camera';
@@ -179,6 +180,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   let mounted: { publish(publication: Parameters<ReturnType<typeof mountPreparedCssImageLayers>['publish']>[0]): void; destroy(): void } | null = null;
   let banks: { axis: Exclude<Axis, 'auto'>; root: HTMLElement; leaves: { id: string; nodes: HTMLElement[]; detail: boolean }[] }[] = [];
   let cloud: ReturnType<typeof createCloudInspection> | null = null, cloudBrightness = nativeCloudBrightness();
+  let cloudFilter: CloudDensityFilter = { cutoff: 0, softness: .25, showRemoved: false };
   let cloudSurface: ReturnType<typeof createCloudSurface> | null = null;
   let starLayer: ReturnType<typeof mountPreparedLmcStars> | null = null, starInfo: CloudStarContext | null = null;
   let overlayCatalogue: DensityOverlayCatalogue | null = null, overlayBasePath = '';
@@ -454,11 +456,14 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       payload.resources.map(item => `${subject.density!.directory}/prepared/${item.path}`);
     await toneResources.apply(resources, expected, () => !disposed && version === loadVersion && isCurrent());
   }
-  async function applyCloudDensityResources(resources: ToneResource[], isCurrent = () => true) {
+  async function applyCloudDensityResources(resources: ToneResource[], filter: CloudDensityFilter, isCurrent = () => true) {
     if (currentMode !== 'photo' || !cloud || !payload || host.dataset.ready !== 'true') throw new Error('Reconstruction is still loading.');
-    const version = loadVersion;
+    const version = loadVersion, valid = validateCloudDensityFilter(filter);
     await toneResources.apply(resources, payload.resources.map(item => `${subject.directory}/prepared/${item.path}`),
       () => !disposed && version === loadVersion && isCurrent());
+    if (!disposed && version === loadVersion && isCurrent()) {
+      cloudFilter = valid; starLayer?.setCloudSupport(cloudFilter, cloud.selection()); publish();
+    }
   }
   async function setSubject(id: string, cameraOverride: ReturnType<typeof retainCamera> | null = null) {
     const next = subjects.find(item => item.id === id);
@@ -476,6 +481,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     cloudSurface?.destroy(); cloudSurface = null;
     starLayer?.destroy(); starLayer = null; starInfo = null;
     cloud = null; cloudBrightness = nativeCloudBrightness(); host.style.opacity = '1';
+    cloudFilter = { cutoff: 0, softness: .25, showRemoved: false };
     delete host.dataset.cloudSelection; delete host.dataset.cloudBrightness; delete host.dataset.cloudOpacity;
     delete host.dataset.cloudDensityFilter; delete host.dataset.cloudDensityReady;
     for (const saved of overlaySessions.get(next.density?.overlays ?? '') ?? []) {
@@ -528,6 +534,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       const instance = isImage ? mountPreparedCssImageLayers({ ...options, payload: loaded as PreparedCssImageLayers }) : mountPreparedCssVolume(options);
       mounted = instance;
       if (stars) { starLayer = mountPreparedLmcStars({ host, before: end, payload: stars }); starLayer.setVisible(false);
+        starLayer.setCloudSupport(cloudFilter, cloud!.selection());
         starInfo = { id: next.id, count: stars.stars.length, sourceUrl: stars.sourceUrl }; }
       const roots = 'root' in instance ? [...instance.root.querySelectorAll<HTMLElement>('[data-image-layer-axis]')] : instance.roots;
       banks = loaded.stacks.map((stack, index) => {
@@ -573,7 +580,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     getCloudParts: () => cloud?.catalogue ?? null,
     setCloudSelection(ids: readonly string[]) {
       if (!cloud) throw new Error('This reconstruction has no prepared contribution bank.');
-      host.dataset.cloudSelection = JSON.stringify(cloud.setSelection(ids)); layer = null; publish(); report();
+      host.dataset.cloudSelection = JSON.stringify(cloud.setSelection(ids));
+      starLayer?.setCloudSupport(cloudFilter, cloud.selection()); layer = null; publish(); report();
     },
     setCloudBrightness(value: CloudBrightness) {
       if (!cloud) throw new Error('This reconstruction has no prepared contribution bank.');

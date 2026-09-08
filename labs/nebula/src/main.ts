@@ -51,7 +51,7 @@ const cloudStarControls = createCloudStarControls({ host: element('cloud-star-co
 const cloudDensityControls = createCloudDensityControls({ host: element('cloud-density-controls'),
   async onApply(context, resources, isCurrent) {
     if (!viewer || viewer.getCloudParts()?.id !== context.subjectId) return;
-    await viewer.applyCloudDensityResources(resources, isCurrent);
+    await viewer.applyCloudDensityResources(resources, context.filter, isCurrent);
     if (isCurrent()) { const host = element('viewer');
       host.dataset.cloudDensityFilter = JSON.stringify(context.filter); host.dataset.cloudDensityReady = 'true'; }
   },
