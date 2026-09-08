@@ -75,8 +75,14 @@ import comet67pDescriptor from "../src/planets/comet-67p/object.json" with { typ
 
 import comet103pDescriptor from "../src/planets/comet-103p/object.json" with { type: "json" };
 import comet9pDescriptor from "../src/planets/comet-9p/object.json" with { type: "json" };
+import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("comet-81p", "Wild 2", "comet", "#b8b6b2", 3.450,
+    "Explore Wild 2's observed Stardust terrain, preserving its real coverage gaps.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet81pDescriptor);
+    }, comet81pDescriptor.properties.worldFrame),
   object("comet-103p", "Hartley 2", "comet", "#b8b6b2", 3.477,
     "Explore Hartley 2's published EPOXI nucleus model and its source constraints.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

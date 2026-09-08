@@ -132,5 +132,49 @@ export const COMET_FIXTURES = {
         ]
       }
     ]
+  },
+  "comet-81p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D81P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          778210012.8942435,
+          91552956.8816794,
+          2636098.359600365
+        ],
+        "velocity": [
+          -216338.8088429217,
+          696563.5472781288,
+          277926.4226605412
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          770997401.9409511,
+          112357815.8519602,
+          10968714.54258531
+        ],
+        "velocity": [
+          -264561.82332631,
+          690193.1908750265,
+          277493.5647907647
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          762332396.0511973,
+          132950228.9036938,
+          19280351.98534697
+        ],
+        "velocity": [
+          -313175.0634476502,
+          682390.1262643285,
+          276524.2711845424
+        ]
+      }
+    ]
   }
 } as const

@@ -6,20 +6,23 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { OBJECTS } from '../../../../site/objects.mjs';
-import { loadObjShape, loadPdsPlanetocentricShape, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import { loadObjShape, loadPdsPlanetocentricShape, loadPdsPlateShape, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
 import { surfaceDistanceIndex } from './surface-distance.mjs';
 
 const output = resolve(process.argv[2] ?? 'output/comet-source-fit');
+const selected = OBJECTS.filter(object => object.classification === 'comet' && (!process.argv[3] || object.id === process.argv[3]));
+assert.ok(selected.length, 'Select a registered comet for source comparison.');
 await mkdir(output, { recursive: true });
 const reports = [];
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
-for (const { id } of OBJECTS.filter(object => object.classification === 'comet')) {
+for (const { id } of selected) {
   const root = resolve('src/planets', id);
   const config = JSON.parse(await readFile(resolve(root, 'source/preparation/terrestrial.json')));
   const profile = config.geometry.radialTerrain;
   const sourcePath = resolve(root, 'source', profile.path);
-  const loader = profile.format === 'wavefront-obj' ? loadObjShape : loadPdsPlanetocentricShape;
-  assert.ok(['wavefront-obj', 'pds-planetocentric-plate'].includes(profile.format));
+  const loader = { 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
+    'pds-plate-model': loadPdsPlateShape }[profile.format];
+  assert.ok(loader, 'Source comparison requires a supported released mesh.');
   const source = await loader(sourcePath, profile.grid);
   const preparedBytes = await readFile(resolve(root, 'prepared/terrain.json'));
   const terrain = JSON.parse(preparedBytes);
@@ -78,6 +81,7 @@ for (const { id } of OBJECTS.filter(object => object.classification === 'comet')
     method: 'Six orthographic +/-XYZ views; first surface intersection from outside the source bounding box; pixel-centered regular grids',
     gridPerView: [grid, grid], boundingBoxPadding: padding, totalRays: grid * grid * 6,
     interpretation: 'Sampled line-of-sight range differences in meters, conditional on both meshes being hit. Silhouette disagreements are reported separately. These are not exhaustive geometric error bounds or observational uncertainties.',
+    raySidedness: 'Two-sided geometry intersections; painted-side visibility and browser targeting are qualified separately.',
     sourceBoundsMeters: source.bounds, views: rays, rangeDifferenceMeters: stats(errors), surfaceDistances };
   await writeFile(resolve(output, `${id}.json`), JSON.stringify(report, null, 2) + '\n');
   reports.push(report);
