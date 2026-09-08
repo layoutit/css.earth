@@ -126,7 +126,7 @@ function cameraPose(page, id) {
   }, id);
 }
 
-async function emptySkyPoint(page, id, selector, preferred, cameraPlan) {
+export async function emptySkyPoint(page, id, selector, preferred, cameraPlan) {
   const result = await page.evaluate(({ id, selector, preferred, cameraPlan, baseTile }) => {
     const input = document.querySelector(selector);
     const cameraElement = document.querySelector(".polycss-camera");

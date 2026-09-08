@@ -171,12 +171,16 @@ export function createPreparedWheelZoomControls({
         PREPARED_WHEEL_ZOOM.intervalMilliseconds), minimumZoom, maximumZoom);
     }
     direction = nextDirection;
-    expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
+    // Native events may wait in Chromium's input queue longer than this
+    // animation lasts. Use receipt time for motion; event time above still
+    // classifies the device cadence.
+    const receivedAt = windowTarget.performance.now();
+    expiresAt = receivedAt + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
     // A dolly has no surface anchor: the eye moves along its own axis.
     anchor = dolly === null ? { x:event.clientX, y:event.clientY } : null;
     events += 1;
     if (frame === null) {
-      previousTimestamp = event.timeStamp;
+      previousTimestamp = receivedAt;
       frame = requestFrame(animate);
     }
   };

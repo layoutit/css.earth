@@ -71,6 +71,21 @@ test('reversing or stopping a trackpad gesture drops unfinished zoom immediately
   expect(f.surface.listenerCount()).toBe(0);
 });
 
+test('a queued native wheel event gets its full animation window after delivery', () => {
+  const f = fixture();
+  try {
+    f.surface.tick(330);
+    f.surface.dispatch('wheel', { deltaY: -40, timeStamp: 0 });
+    f.surface.tick(346);
+    const logDistance = -.006 * 40 * runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER;
+    expect(f.camera.state.distance).toBeCloseTo(1000 * Math.exp(logDistance * 16 / 200), 10);
+    expect(f.controls.stats().active).toBe(true);
+    f.surface.tick(530);
+    expect(f.camera.state.distance).toBeCloseTo(1000 * Math.exp(logDistance), 10);
+    expect(f.controls.stats().active).toBe(false);
+  } finally { f.controls.destroy(); }
+});
+
 test('touch pinch preserves the prepared distance origin while ordinary page scrolling stays disabled', () => {
   const f = fixture({ stepPerDelta: .006, distanceOrigin: 900 });
   f.controls.update({ wheel: false });

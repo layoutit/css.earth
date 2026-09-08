@@ -7,7 +7,7 @@ import { OBJECTS } from "../objects.mjs";
 import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
   WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../runtime-policy.mjs";
 import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mjs";
-import { proveSkyboxPointerBoundary } from "./skybox-pointer-boundary.mjs";
+import { emptySkyPoint, proveSkyboxPointerBoundary } from "./skybox-pointer-boundary.mjs";
 import { proveWheelZoomDistance, wheelWithReceipt, cameraDollyDistance as cameraDistance } from "./wheel-zoom-distance.mjs";
 import { GOOGLE_EARTH_SURFACE_FLY_TO } from
   "../../src/platform/google-earth-surface-fly-to.mjs";
@@ -525,11 +525,13 @@ async function proveDesktop(browser, planet, profile) {
       zoom: bounds.defaultZoom,
     });
     const beforeEmptyDoubleClick = await profile.camera(page);
-    await page.mouse.dblclick(
-      flyCoordinates.empty.x,
-      flyCoordinates.empty.y,
-      { delay: 45 },
-    );
+    const { camera: cameraPlan } = JSON.parse(await readFile(
+      resolve(`src/planets/${planet.id}/prepared/runtime.json`), 'utf8'));
+    // Resetting after the flight also moves context bodies. Recheck the actual
+    // sky target now instead of reusing a point from before that flight.
+    const empty = await emptySkyPoint(page, planet.id, profile.inputSelector,
+      flyCoordinates.empty, cameraPlan);
+    await page.mouse.dblclick(empty.x, empty.y, { delay: 45 });
     await waitFrames(page);
     assert.deepEqual(
       await profile.camera(page),

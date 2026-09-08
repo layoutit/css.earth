@@ -1,14 +1,14 @@
 import {afterEach,expect,it,vi} from 'vitest';
 import {createPreparedWheelZoomControls} from './prepared-wheel-zoom.js';
 import type {PreparedWheelZoomOptions} from './prepared-wheel-zoom.js';
-const pending=new Map<number,FrameRequestCallback>();let id=0;
+const pending=new Map<number,FrameRequestCallback>();let id=0,now=0;
 class Surface {
   listeners=new Map<string,(event:WheelEvent)=>void>();
-  ownerDocument={defaultView:{requestAnimationFrame:(cb:FrameRequestCallback)=>{pending.set(++id,cb);return id;},cancelAnimationFrame:(key:number)=>pending.delete(key)}};
+  ownerDocument={defaultView:{performance:{now:()=>now},requestAnimationFrame:(cb:FrameRequestCallback)=>{pending.set(++id,cb);return id;},cancelAnimationFrame:(key:number)=>pending.delete(key)}};
   addEventListener(name:string,callback:(event:WheelEvent)=>void){this.listeners.set(name,callback);}
   removeEventListener(name:string){this.listeners.delete(name);}
 }
-afterEach(()=>{vi.unstubAllGlobals();pending.clear();});
+afterEach(()=>{vi.unstubAllGlobals();pending.clear();now=0;});
 it('applies the same wheel gesture proportionally to altitude, with reversible smooth intermediate frames', () => {
   vi.stubGlobal('HTMLElement',Surface);
   const surface=new Surface(),radius=6378;
@@ -18,8 +18,8 @@ it('applies the same wheel gesture proportionally to altitude, with reversible s
     minimumZoom:.1,maximumZoom:4096,dolly:{stepPerDelta:.006,distanceOrigin:radius},
     trackballMetrics:()=>{throw new Error('Dolly must not rotate the surface.');},
     rotate(delta){camera.state.distance=delta.distance!;expect(delta.rotation).toBeUndefined();}});
-  const tick=(time:number)=>{const callbacks=[...pending.values()];pending.clear();for(const callback of callbacks)callback(time);};
-  const scroll=(deltaY:number,timeStamp:number)=>surface.listeners.get('wheel')!({deltaY,timeStamp,deltaMode:0,preventDefault(){}} as WheelEvent);
+  const tick=(time:number)=>{now=time;const callbacks=[...pending.values()];pending.clear();for(const callback of callbacks)callback(time);};
+  const scroll=(deltaY:number,timeStamp:number)=>{now=timeStamp;surface.listeners.get('wheel')!({deltaY,timeStamp,deltaMode:0,preventDefault(){}} as WheelEvent);};
   scroll(-8,0);tick(100);const intermediate=camera.state.distance-radius;tick(200);
   const end=camera.state.distance-radius;
   expect(intermediate).toBeGreaterThan(end);expect(intermediate).toBeLessThan(60);

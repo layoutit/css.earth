@@ -9,6 +9,8 @@ export class Surface {
     this.style.setProperty = (key, value) => { this.style[key] = value; };
     this.frames = new Map();
     this.nextFrame = 0;
+    this.now = 0;
+    this.performance = { now: () => this.now };
     this.captured = new Set();
   }
   addEventListener(name, callback) {
@@ -19,10 +21,11 @@ export class Surface {
   listenerCount() { return [...this.listeners.values()].reduce((sum, set) => sum + set.size, 0); }
   dispatch(name, partial = {}) {
     const event = { type:name, isPrimary:true, preventDefault() {}, pointerId: 1, button: 0, clientX: 0, clientY: 0, timeStamp: 0, ...partial };
+    this.now = Math.max(this.now, event.timeStamp);
     for (const callback of this.listeners.get(name) ?? []) callback(event);
   }
   requestAnimationFrame(callback) { const id = ++this.nextFrame; this.frames.set(id,callback); return id; }
-  tick(time) { const callbacks=[...this.frames.values()]; this.frames.clear(); callbacks.forEach(callback=>callback(time)); }
+  tick(time) { this.now = time; const callbacks=[...this.frames.values()]; this.frames.clear(); callbacks.forEach(callback=>callback(time)); }
   cancelAnimationFrame(id) { this.frames.delete(id); }
   setPointerCapture(id) { this.captured.add(id); }
   hasPointerCapture(id) { return this.captured.has(id); }

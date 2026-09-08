@@ -15,10 +15,11 @@ for (const speedMultiplier of [1, WHEEL_ZOOM_SPEED_MULTIPLIER]) test(
     if (original === undefined) delete globalThis.HTMLElement;
     else globalThis.HTMLElement = original;
   });
-  const pending = new Map(); let id = 0;
+  const pending = new Map(); let id = 0, now = 0;
   class Surface {
     listeners = new Map();
     ownerDocument = { defaultView: {
+      performance: { now: () => now },
       requestAnimationFrame: callback => (pending.set(++id, callback), id),
       cancelAnimationFrame: key => pending.delete(key),
     } };
@@ -37,10 +38,13 @@ for (const speedMultiplier of [1, WHEEL_ZOOM_SPEED_MULTIPLIER]) test(
       surfaceRadius:120, focalLength:600 }),
     rotate:value => { camera.state.zoom=value.zoom; published.push(value); },
   });
-  const emit = (deltaY, timeStamp, clientX=300) =>
+  const emit = (deltaY, timeStamp, clientX=300) => {
+    now = timeStamp;
     surface.listeners.get("wheel")({ deltaY, timeStamp, clientX,
       clientY:300, preventDefault() {} });
+  };
   const tick = timestamp => {
+    now = timestamp;
     const callbacks=[...pending.values()]; pending.clear();
     callbacks.forEach(callback=>callback(timestamp));
   };
@@ -137,6 +141,34 @@ test("wheel steps use a gentler gain without clipping precision gestures", async
     assert.equal(f.camera.state.zoom, stopped);
     assert.equal(f.surface.frames.size, 0);
   } finally { f.controls.destroy(); }
+});
+
+test("queued wheel events animate from delivery while classification keeps event cadence", async t => {
+  const { Surface } = await import("./test/orbit-fixture.mjs");
+  const prior = globalThis.HTMLElement; globalThis.HTMLElement = Surface;
+  t.after(() => { globalThis.HTMLElement = prior; });
+  const surface = new Surface(), camera = { state: { zoom: 1 } };
+  const controls = createPreparedWheelZoomControls({ inputSurface: surface, camera,
+    minimumZoom: .4, maximumZoom: 4,
+    trackballMetrics: () => ({ centerX: 0, centerY: 0, surfaceRadius: 120, focalLength: 600 }),
+    rotate(value) { camera.state.zoom = value.zoom; },
+  });
+  try {
+    surface.dispatch("wheel", { deltaY: -2, timeStamp: 0 });
+    surface.tick(200);
+    const before = camera.state.zoom;
+    // The accelerated packet belongs to the same precision gesture, even
+    // though Chromium did not deliver it until after the prior motion ended.
+    surface.tick(330);
+    surface.dispatch("wheel", { deltaY: -98, timeStamp: 8 });
+    surface.tick(346);
+    const logScale = .216 * .98 * WHEEL_ZOOM_SPEED_MULTIPLIER;
+    assert.ok(Math.abs(camera.state.zoom - before * Math.exp(logScale * 16 / 200)) < 1e-12);
+    assert.equal(controls.stats().active, true);
+    surface.tick(530);
+    assert.ok(Math.abs(camera.state.zoom - Math.exp(.216 * WHEEL_ZOOM_SPEED_MULTIPLIER)) < 1e-12);
+    assert.equal(controls.stats().active, false);
+  } finally { controls.destroy(); }
 });
 
 test("zoom-out follows the native viewing-ray scale instead of a surface grab", () => {
