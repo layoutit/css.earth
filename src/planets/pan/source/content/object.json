@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "pan",
+  "displayName": "Pan",
+  "panel": {
+    "introduction": "Pan orbits inside the Encke Gap of Saturn’s A ring. Its gravity helps keep the gap open. Cassini revealed a small icy body surrounded by a broad equatorial ridge.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "14 km"
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Distance from Sun",
+        "value": "9.58 AU (system mean)"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 13.8 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Saturn",
+        "value": "About 134,000 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Mark Showalter · 1990"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+        "title": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+        "detail": "Cassini · corrected mosaic",
+        "thumbnail": "/scenes/pan/pan-normal-thumbnail.webp",
+        "surface": "pan-normal-surface@2x.webp",
+        "poles": "pan-normal-poles@2x.webp",
+        "source": {
+          "id": "n1867604669",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/access.html"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
+        "title": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid.",
+        "detail": "Shaded relief",
+        "thumbnail": "/scenes/pan/pan-elevation-thumbnail.webp",
+        "surface": "pan-elevation-surface@2x.webp",
+        "poles": "pan-elevation-poles@2x.webp",
+        "source": {
+          "id": "thomas-2018-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-7",
+            "0",
+            "7"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+          "image": "/scenes/pan/pan-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Pan overview",
+      "href": "https://science.nasa.gov/saturn/moons/pan/"
+    },
+    {
+      "label": "NASA/JPL-Caltech/SSI; PDS",
+      "role": "surface",
+      "description": "Cassini calibrated images and shape model",
+      "href": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/pan/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

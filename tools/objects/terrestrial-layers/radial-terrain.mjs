@@ -3,7 +3,7 @@ import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
-import { loadObjShape, loadPdsVertexFacetShape } from './obj-shape.mjs';
+import { loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape } from './obj-shape.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
 import { renderRadialSnapshot } from './radial-snapshot.mjs';
@@ -18,7 +18,7 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
   await source.validatePath(profile.path);
-  const loader = ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadPdsScalarGrid;
+  const loader = ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape : profile.format === 'pds-plate-model' ? loadPdsPlateShape : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadPdsScalarGrid;
   const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
   const scale = config.geometry.radius / (config.geometry.radiusKm * 1000);
   if (profile.primitive !== undefined && profile.primitive !== 'u') throw new TypeError('Unknown radial triangle primitive.');
@@ -50,7 +50,8 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const leaves = plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
     style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }));
-  return { grid, faces, plans, leaves, width, height, tileSize, ...(simplified ? { simplification: simplified.report } : {}) };
+  return { grid, faces, plans, leaves, width, height, tileSize,
+    ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };
 }
 
 /** Simplify the released topology before UV sampling. Original positions are
@@ -59,15 +60,81 @@ export async function simplifyRadialShape(mesh, profile, scale) {
   const { targetFaces, maximumErrorMeters } = profile.simplification;
   if (!mesh.positions || !mesh.indices || !Number.isInteger(targetFaces) || targetFaces < 4 ||
       !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 2000 ||
-      !(maximumErrorMeters > 0) || !Number.isFinite(maximumErrorMeters) || !(scale > 0)) throw new TypeError('Invalid source mesh simplification.');
+      !(maximumErrorMeters > 0) || !Number.isFinite(maximumErrorMeters) || !(scale > 0) ||
+      ['regularize', 'prune'].some(key => profile.simplification[key] !== undefined && typeof profile.simplification[key] !== 'boolean')) throw new TypeError('Invalid source mesh simplification.');
   await MeshoptSimplifier.ready;
-  const [indices] = MeshoptSimplifier.simplify(Uint32Array.from(mesh.indices.flat()),
-    Float32Array.from(mesh.positions.flat()), 3, targetFaces * 3, maximumErrorMeters, ['ErrorAbsolute']);
-  if (!indices.length || indices.length / 3 > targetFaces) throw new Error('Source mesh cannot meet the leaf target within its authored error limit.');
+  const preserveSource = profile.simplification.method === 'source-meshoptimizer';
+  let sourceIndices = Uint32Array.from(mesh.indices.flat()), positions = mesh.positions;
+  if (preserveSource) {
+    // ICQ releases duplicate cube-edge positions. Weld before assigning UVs,
+    // using the same meshoptimizer remap and physical compaction as Vesta.
+    const remap = MeshoptSimplifier.generatePositionRemap(Float32Array.from(positions.flat()), 3);
+    sourceIndices = sourceIndices.map(index => remap[index]);
+    const [compact, count] = MeshoptSimplifier.compactMesh(sourceIndices);
+    const unique = new Array(count);
+    for (let i = 0; i < compact.length; i++) if (compact[i] !== 0xffffffff) unique[compact[i]] = positions[i];
+    positions = unique;
+  }
+  const flags = ['ErrorAbsolute', ...(preserveSource && profile.simplification.regularize ? ['RegularizeLight'] : []),
+    ...(preserveSource && profile.simplification.prune ? ['Prune'] : [])];
+  const [simplified, error] = MeshoptSimplifier.simplify(sourceIndices,
+    Float32Array.from(positions.flat()), 3, targetFaces * 3, maximumErrorMeters, flags);
+  // Edge collapses can leave exactly coincident, oppositely wound face pairs
+  // (zero-volume fins). Cancel only those exact pairs, then require closure.
+  // No positions are moved and no source feature is approximated in cleanup.
+  const indices = preserveSource ? removeOppositeFacePairs(simplified) : simplified;
+  if (!indices.length || indices.length / 3 > targetFaces) throw new Error(`Source mesh reached ${indices.length / 3} faces at ${error} m estimated error; requested ${targetFaces} within ${maximumErrorMeters} m.`);
+  const topology = preserveSource ? validateClosedMesh(indices, positions) : undefined;
   const triangles = [];
   for (let i = 0; i < indices.length; i += 3) triangles.push(Array.from(indices.subarray(i, i + 3),
-    index => mesh.positions[index].map(value => value * scale)));
-  return surfaceTriangles(triangles);
+    index => positions[index].map(value => value * scale)));
+  const faces = surfaceTriangles(triangles, preserveSource);
+  if (preserveSource) faces.simplification = { method: 'source-meshoptimizer', version: '1.2.0', flags,
+    sourceFaces: mesh.indices.length, sourceVertices: mesh.positions.length, weldedVertices: positions.length,
+    targetFaces, outputFaces: faces.length, removedOppositeFaces: (simplified.length - indices.length) / 3,
+    maximumErrorMeters, estimatedErrorMeters: error, topology };
+  return faces;
+}
+
+export function removeOppositeFacePairs(indices) {
+  const seen = new Map(), removed = new Set();
+  for (let i = 0; i < indices.length; i += 3) {
+    const triangle = Array.from(indices.slice(i, i + 3)), sorted = [...triangle].sort((a, b) => a - b);
+    const key = sorted.join(','), previous = seen.get(key);
+    if (!previous) { seen.set(key, { offset: i, triangle }); continue; }
+    const index = previous.triangle.indexOf(triangle[0]);
+    if (removed.has(previous.offset) || previous.triangle[(index + 2) % 3] !== triangle[1]) {
+      throw new Error('Source mesh has ambiguous duplicate faces.');
+    }
+    removed.add(previous.offset); removed.add(i);
+  }
+  return indices.filter((_, i) => !removed.has(i - i % 3));
+}
+
+/** Edge incidents establish orientation without assuming a radial surface or
+ * requiring a single component. The signed volume rejects inverted shells. */
+export function validateClosedMesh(indices, positions) {
+  const edges = new Map(), vertices = new Set(), parents = new Map();
+  const find = v => { let root = v; while (parents.get(root) !== root) root = parents.get(root); return root; };
+  let volume = 0;
+  for (let i = 0; i < indices.length; i += 3) {
+    const triangle = Array.from(indices.slice(i, i + 3)), [a, b, c] = triangle.map(index => positions[index]);
+    if (triangle.length !== 3 || ![a, b, c].every(v => v?.length === 3 && v.every(Number.isFinite)) ||
+        !(Math.hypot(...cross(sub(b, a), sub(c, a))) > 0)) throw new Error('Source mesh has a degenerate face.');
+    volume += dot(a, cross(b, c)) / 6;
+    for (const v of triangle) { vertices.add(v); if (!parents.has(v)) parents.set(v, v); }
+    for (let j = 0; j < 3; j++) {
+      const a = triangle[j], b = triangle[(j + 1) % 3], key = a < b ? `${a},${b}` : `${b},${a}`;
+      const edge = edges.get(key) ?? [0, 0]; edge[0]++; edge[1] += a < b ? 1 : -1; edges.set(key, edge);
+      const rootA = find(a), rootB = find(b); if (rootA !== rootB) parents.set(rootB, rootA);
+    }
+  }
+  if (![...edges.values()].every(([count, winding]) => count === 2 && winding === 0) || !(volume > 0)) {
+    throw new Error('Source mesh is not closed and consistently outward wound.');
+  }
+  return { vertices: vertices.size, edges: edges.size, faces: indices.length / 3,
+    components: new Set([...vertices].map(find)).size, eulerCharacteristic: vertices.size - edges.size + indices.length / 3,
+    signedVolumeCubicMeters: volume };
 }
 
 export function radialTriangles(sample, profile, scale) {
@@ -104,10 +171,10 @@ export function sampleRadialTriangles(sample, rows, columns, scale, canonicalPol
   return shadeRadialFaces(faces);
 }
 
-function surfaceTriangles(triangles) {
+function surfaceTriangles(triangles, preserveSourceWinding = false) {
   const faces = triangles.map(([a, b, c]) => {
     let normal = cross(sub(b, a), sub(c, a));
-    if (dot(normal, a) < 0) { [b, c] = [c, b]; normal = normal.map(x => -x); }
+    if (!preserveSourceWinding && dot(normal, a) < 0) { [b, c] = [c, b]; normal = normal.map(x => -x); }
     if (!(Math.hypot(...normal) > 1e-8)) throw new Error('Degenerate terrain face.');
     return { vertices: [a, b, c], normal: unit(normal) };
   });

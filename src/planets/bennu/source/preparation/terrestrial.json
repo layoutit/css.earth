@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "bennu",
+  "displayName": "Bennu",
+  "publicBase": "/scenes/bennu/",
+  "distanceAu": 1.126,
+  "raster": {
+    "width": 8192,
+    "height": 4096,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-byte-monochrome",
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 0.062499364452825,
+          "origin": [
+            -785.42951307865,
+            392.74600622155
+          ],
+          "displayRange": [
+            0,
+            255
+          ],
+          "specialValueMagnitude": 1e+30
+        }
+      },
+      {
+        "id": "surface",
+        "validity": {
+          "kind": "geotiff-byte-monochrome",
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 0.05,
+          "origin": [
+            -785.4,
+            392.7
+          ],
+          "displayRange": [
+            0,
+            255
+          ],
+          "specialValueMagnitude": 1e+30
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/g_00880mm_alt_ptm_0000n00000_v020.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 1683079,
+          "expectedFaces": 3366134
+        },
+        "sampleGrid": {
+          "width": 1025,
+          "height": 513
+        },
+        "valueTransform": {
+          "scale": 1,
+          "offset": -241
+        },
+        "minimum": -45,
+        "maximum": 60,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 241,
+          "heightToMeters": 1,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.241,
+    "camera": {
+      "initialScenePitchDegrees": 25,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/bennu/bennu-normal-surface@2x.webp",
+    "polesUrl": "/scenes/bennu/bennu-normal-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/g_00880mm_alt_ptm_0000n00000_v020.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 1683079,
+        "expectedFaces": 3366134
+      },
+      "faceBudget": 850,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 10,
+        "regularize": true,
+        "prune": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      180,
+      180,
+      180
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

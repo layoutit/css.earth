@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "maps/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://dataverse.harvard.edu/api/access/datafile/13452500",
+      "archiveBytes": 227736870,
+      "archiveSha256": "501fbca6518b7d78e8187878076c9917d114b3dcd7dd8801f9f436da6ac1b061",
+      "member": "GLOBAL/ryugu_global.png",
+      "path": "maps/ryugu_global.png"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://dataverse.harvard.edu/api/access/datafile/13452500",
+      "archiveBytes": 227736870,
+      "archiveSha256": "501fbca6518b7d78e8187878076c9917d114b3dcd7dd8801f9f436da6ac1b061",
+      "member": "GLOBAL/ryugu_global_color_enhanced.png",
+      "path": "maps/ryugu_global_color_enhanced.png"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://dataverse.harvard.edu/api/access/datafile/13452500",
+      "archiveBytes": 227736870,
+      "archiveSha256": "501fbca6518b7d78e8187878076c9917d114b3dcd7dd8801f9f436da6ac1b061",
+      "member": "GLOBAL/ryugu_global.tif",
+      "path": "maps/ryugu_global.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/ryugu_shape_spc_200k_v20200323.bds",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/info.zip",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/13463836"
+    }
+  ]
+}

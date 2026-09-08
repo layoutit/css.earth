@@ -15,10 +15,12 @@ export async function readAuthoredRotation(directory, reference, epochJdTt) {
     if (![rightAscensionDegrees, declinationDegrees, primeMeridianDegrees, spinDegreesPerDay, referenceEpochJdTt, epochJdTt].every(Number.isFinite) ||
         Math.abs(declinationDegrees) > 90 || spinDegreesPerDay === 0 || typeof source.source !== 'string' ||
         typeof source.coordinateSystem !== 'string' || !source.coordinateSystem.trim()) throw new TypeError('Invalid measured rotation source.');
-    const rad = Math.PI / 180;
+    const quadratic = source.primeMeridianQuadraticDegreesPerDaySquared ?? 0;
+    if (!Number.isFinite(quadratic)) throw new TypeError('Invalid measured rotation acceleration.');
+    const rad = Math.PI / 180, days = epochJdTt - referenceEpochJdTt;
     return { poleRightAscensionRad: rightAscensionDegrees * rad, poleDeclinationRad: declinationDegrees * rad,
-      primeMeridianRad: ((primeMeridianDegrees + (epochJdTt - referenceEpochJdTt) * spinDegreesPerDay) % 360) * rad,
-      spinRateRadPerDay: spinDegreesPerDay * rad };
+      primeMeridianRad: ((primeMeridianDegrees + days * spinDegreesPerDay + days * days * quadratic) % 360) * rad,
+      spinRateRadPerDay: (spinDegreesPerDay + 2 * days * quadratic) * rad };
   }
   if (source.schema === 'cssearth-linear-rotation@1') {
     const { rightAscensionDegrees: ra, declinationDegrees: dec, referenceEpochJdTt: epoch,

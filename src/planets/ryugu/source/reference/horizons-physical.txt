@@ -1,0 +1,32 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               162173 Ryugu (1999 JU3)         2026-Sep-07 14:42:59
+Rec #:  162173 (+COV) Soln.date: 2026-Aug-11_13:41:47   # obs: 5124 (1986-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458753.5 ! 2019-Sep-27.00 (TDB)         Residual RMS= .18156
+   EC= .1903782605596403   QR= .963114783617966    TP= 2458745.5392894726
+   OM= 251.5874649641874   W=  211.4457746039085   IN= 5.884195597891756
+   A= 1.18958611991287     MA= 6.047307793310185   ADIST= 1.416057456207773
+   PER= 1.29748            N= .759644227           ANGMOM= .018418869
+   DAN= 1.36879            DDN= .98628             L= 102.8986866
+   B= -3.0658037           MOID= 8.213E-5          TP= 2019-Sep-19.0392894726
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= 3.E-8               RAD= .448               ROTPER= 7.63262
+   H= 19.55                G= .150                 B-V= n.a.
+                           ALBEDO= .045            STYP= Cb
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -2.487268602636E-14 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#270, PHA  OCC=0       radar( 2 delay, 0 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************
