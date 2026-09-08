@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
+  "diameterKm": 1,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 7.3182,
+  "poleEclipticJ2000Degrees": [
+    99,
+    -3
+  ],
+  "limitations": "This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj",
+    "vertices": 510,
+    "faces": 1016,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.404429
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      1.392511,
+      0.901153,
+      0.9097540000000001
+    ],
+    "volumeCubicKm": 0.5313980797917844,
+    "volumeEquivalentRadiusKm": 0.5024703700722238,
+    "radialRangeKm": [
+      0.39373190390543666,
+      0.7264042639577496
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 1016,
+    "ambiguous": 0,
+    "maxErrorMeters": 2.2737367544323206e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1016,
+    "sourceVertices": 510,
+    "weldedVertices": 510,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 9,
+    "estimatedErrorMeters": 8.792428016662598,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 531630998.0972226
+    }
+  }
+}

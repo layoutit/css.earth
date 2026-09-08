@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 104.8009394251301,
+  "declinationDegrees": -65.8469899562687,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 3.725,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive: ecliptic J2000 lambda 180 deg, beta -84 deg, period 3.725 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied."
+}

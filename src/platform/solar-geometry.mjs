@@ -835,6 +835,42 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.9826214975894877,
     -0.002648117497175473,
   ]),
+  // subsolar latitude 50.546°, longitude 102.837°
+  "asteroid-1996-hw1": Object.freeze([
+    -0.14118400349242557,
+    0.6195826625177966,
+    0.7721297827860346,
+  ]),
+  // subsolar latitude -1.360°, longitude -27.020°
+  "asteroid-2008-ev5": Object.freeze([
+    0.8905980181729509,
+    -0.4541718560380017,
+    -0.023729627249680585,
+  ]),
+  // subsolar latitude -34.458°, longitude 30.765°
+  "ra-shalom": Object.freeze([
+    0.7085081783510024,
+    0.4217706196455638,
+    -0.5657965231543416,
+  ]),
+  // subsolar latitude -62.760°, longitude -43.860°
+  "asteroid-1992-sk": Object.freeze([
+    0.33002954327024353,
+    -0.3171494684389529,
+    -0.8890988219752202,
+  ]),
+  // subsolar latitude -1.179°, longitude -94.486°
+  "asteroid-1998-ml14": Object.freeze([
+    -0.07819952308895364,
+    -0.9967252593612522,
+    -0.02058134932176838,
+  ]),
+  // subsolar latitude 28.275°, longitude -11.473°
+  "asteroid-2002-ce26": Object.freeze([
+    0.8630829727955757,
+    -0.17517165079352404,
+    0.4737115945684921,
+  ]),
   // subsolar latitude -18.039°, longitude -126.751°
   vesta: Object.freeze([
     -0.5689269136961081,
@@ -1821,6 +1857,42 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     0.08544632469968667,
     0.01717699302007475,
     -0.9961946980917455,
+  ]),
+  // pole tilt to the ecliptic 121.000°, Sun ecliptic latitude 8.312°
+  "asteroid-1996-hw1": Object.freeze([
+    -0.11022578907226692,
+    0.8500506201503665,
+    -0.5150380749084223,
+  ]),
+  // pole tilt to the ecliptic 174.000°, Sun ecliptic latitude 5.910°
+  "asteroid-2008-ev5": Object.freeze([
+    0.10161679267450822,
+    0.02449953223315121,
+    -0.9945218953682733,
+  ]),
+  // pole tilt to the ecliptic 74.000°, Sun ecliptic latitude 8.997°
+  "ra-shalom": Object.freeze([
+    -0.126417843154393,
+    0.9529126806855899,
+    0.27563735581519855,
+  ]),
+  // pole tilt to the ecliptic 93.000°, Sun ecliptic latitude -14.338°
+  "asteroid-1992-sk": Object.freeze([
+    0.06618812649955771,
+    0.9964336804797472,
+    -0.052335956244856714,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 0.700°
+  "asteroid-1998-ml14": Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 110.000°, Sun ecliptic latitude -37.073°
+  "asteroid-2002-ce26": Object.freeze([
+    -0.33235396262547634,
+    0.8789556673049459,
+    -0.3420201433244255,
   ]),
   // pole tilt to the ecliptic 32.285°, Sun ecliptic latitude 7.124°
   vesta: Object.freeze([
@@ -2810,6 +2882,42 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     0.11317678682072764,
     0.01870014421783917,
     -0.9933988723222751,
+  ]),
+  // orbital inclination to the ecliptic 8.449°, obliquity to the orbit 129.176°
+  "asteroid-1996-hw1": Object.freeze([
+    -0.06454394362867398,
+    0.7725219561341178,
+    -0.6316992216487012,
+  ]),
+  // orbital inclination to the ecliptic 7.448°, obliquity to the orbit 178.505°
+  "asteroid-2008-ev5": Object.freeze([
+    -0.026058537270005178,
+    0.0011314489457081023,
+    -0.9996597783539314,
+  ]),
+  // orbital inclination to the ecliptic 15.759°, obliquity to the orbit 58.330°
+  "ra-shalom": Object.freeze([
+    -0.08484281950691283,
+    0.8468427227432305,
+    0.5250324741527418,
+  ]),
+  // orbital inclination to the ecliptic 15.318°, obliquity to the orbit 108.318°
+  "asteroid-1992-sk": Object.freeze([
+    0.0635316177424186,
+    0.9471983097570907,
+    -0.31429141817800516,
+  ]),
+  // orbital inclination to the ecliptic 2.427°, obliquity to the orbit 25.714°
+  "asteroid-1998-ml14": Object.freeze([
+    -0.43361038841238797,
+    0.015415457990537857,
+    0.9009685869750399,
+  ]),
+  // orbital inclination to the ecliptic 47.288°, obliquity to the orbit 121.490°
+  "asteroid-2002-ce26": Object.freeze([
+    0.4354951213224333,
+    0.7331405514087206,
+    -0.5223494339850254,
   ]),
   // orbital inclination to the ecliptic 7.144°, obliquity to the orbit 27.437°
   vesta: Object.freeze([
@@ -3801,6 +3909,42 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     -0.3799846414570163,
     -0.11176426188093612,
   ]),
+  // flight-path angle 25.955°
+  "asteroid-1996-hw1": Object.freeze([
+    -0.82644861757149,
+    -0.39616799424280874,
+    -0.40004200135961065,
+  ]),
+  // flight-path angle 4.379°
+  "asteroid-2008-ev5": Object.freeze([
+    0.3847263800205175,
+    0.9229869433271027,
+    -0.008984150711132512,
+  ]),
+  // flight-path angle -22.596°
+  "ra-shalom": Object.freeze([
+    0.919035671769942,
+    -0.13705872893269724,
+    0.3695785962927565,
+  ]),
+  // flight-path angle -7.373°
+  "asteroid-1992-sk": Object.freeze([
+    0.9763950572467659,
+    0.0061497795213038,
+    0.21590477622304663,
+  ]),
+  // flight-path angle 5.848°
+  "asteroid-1998-ml14": Object.freeze([
+    -0.8850625741026268,
+    0.18051482333989344,
+    -0.4290438654466456,
+  ]),
+  // flight-path angle -8.871°
+  "asteroid-2002-ce26": Object.freeze([
+    -0.11963557433537844,
+    0.6222547193245699,
+    0.7736190235715154,
+  ]),
   // flight-path angle 4.883°
   vesta: Object.freeze([
     -0.6304944306721749,
@@ -4790,6 +4934,42 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     -0.9766559603917785, -0.19633392864534874, -0.08715574274765824,
     -0.2148095319840646, 0.8926545291893229, 0.3962634937596138,
     0, 0.4057349873753451, -0.913990765828369,
+  ]),
+  // pole RA -73.913°, Dec -53.827°, prime meridian W 0.000°
+  "asteroid-1996-hw1": Object.freeze([
+    0.960839823750299, 0.22368844256922926, 0.16355523151659504,
+    0.2771043722056626, -0.7756238633928169, -0.5671162045296417,
+    0, 0.5902297037565574, -0.8072353416466889,
+  ]),
+  // pole RA 104.801°, Dec -65.847°, prime meridian W 0.000°
+  "asteroid-2008-ev5": Object.freeze([
+    -0.966819200170122, -0.23309747864210875, -0.1045284632676536,
+    -0.2554616099972862, 0.8821799794686558, 0.3955980910498388,
+    0, 0.4091748394945292, -0.9124559993362016,
+  ]),
+  // pole RA 71.469°, Dec 38.479°, prime meridian W 0.000°
+  "ra-shalom": Object.freeze([
+    -0.9481541795117866, -0.1977518078475069, 0.2487928342363854,
+    0.3178107170539264, -0.5899713038462777, 0.7422467303825543,
+    0, 0.7828333686877212, 0.6222314013845928,
+  ]),
+  // pole RA 99.578°, Dec 20.141°, prime meridian W 0.000°
+  "asteroid-1992-sk": Object.freeze([
+    -0.9860591801649164, 0.057293810671517946, -0.15622007704270613,
+    -0.16639499154870252, -0.3395239691619279, 0.9257624863603177,
+    0, 0.9388508367271483, 0.3443241298206292,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  "asteroid-1998-ml14": Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA -33.329°, Dec -34.661°, prime meridian W 0.000°
+  "asteroid-2002-ce26": Object.freeze([
+    0.5494478270521169, 0.4751817719158798, 0.687247676595994,
+    0.8355280278648389, -0.3124821470096635, -0.4519378524227906,
+    0, 0.822530966857246, -0.5687203254332345,
   ]),
   // pole RA 309.033°, Dec 42.226°, prime meridian W 285.287°
   vesta: Object.freeze([
@@ -6950,6 +7130,96 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 1.5993280699204167,
     perihelionAu: 0.7745589204558881,
     aphelionAu: 1.2372698703957103,
+  }),
+  // a 2.0457 AU, e 0.44907, perihelion 1.1271 AU, aphelion 2.9644 AU
+  "asteroid-1996-hw1": Object.freeze({
+    semiMajorAxisAu: 2.045734902387307,
+    eccentricity: 0.44906852849354406,
+    heliocentricDistanceAu: 1.816912895513604,
+    perihelionDirection: Object.freeze([
+      0.9307149034132833,
+      0.27496753557898657,
+      0.2411692827497342,
+    ]),
+    trueAnomalyDegrees: 103.013289409288,
+    inclinationDegrees: 8.449278150503504,
+    perihelionAu: 1.1270597400843552,
+    aphelionAu: 2.964410064690259,
+  }),
+  // a 0.95976 AU, e 0.082880, perihelion 0.88021 AU, aphelion 1.0393 AU
+  "asteroid-2008-ev5": Object.freeze({
+    semiMajorAxisAu: 0.9597570834007838,
+    eccentricity: 0.0828800047282451,
+    heliocentricDistanceAu: 0.9287071386367713,
+    perihelionDirection: Object.freeze([
+      -0.7134974544184834,
+      -0.7004315239913466,
+      0.017806255572238198,
+    ]),
+    trueAnomalyDegrees: 71.47335282043319,
+    inclinationDegrees: 7.4478419231935575,
+    perihelionAu: 0.8802124117905601,
+    aphelionAu: 1.0393017550110075,
+  }),
+  // a 0.83203 AU, e 0.43651, perihelion 0.46884 AU, aphelion 1.1952 AU
+  "ra-shalom": Object.freeze({
+    semiMajorAxisAu: 0.8320332524890323,
+    eccentricity: 0.4365106962277907,
+    heliocentricDistanceAu: 1.0187135653765382,
+    perihelionDirection: Object.freeze([
+      0.9916331446074538,
+      0.12321488322706753,
+      -0.038494143285348184,
+    ]),
+    trueAnomalyDegrees: 219.07436866653444,
+    inclinationDegrees: 15.75925497285588,
+    perihelionAu: 0.4688418381603716,
+    aphelionAu: 1.195224666817693,
+  }),
+  // a 1.2485 AU, e 0.32485, perihelion 0.84295 AU, aphelion 1.6541 AU
+  "asteroid-1992-sk": Object.freeze({
+    semiMajorAxisAu: 1.248545087056366,
+    eccentricity: 0.32485168213322213,
+    heliocentricDistanceAu: 1.6242549405307205,
+    perihelionDirection: Object.freeze([
+      0.5753582671669557,
+      -0.29208504104939537,
+      -0.7639693666619174,
+    ]),
+    trueAnomalyDegrees: 195.89523174965373,
+    inclinationDegrees: 15.318085473953621,
+    perihelionAu: 0.8429531153069352,
+    aphelionAu: 1.6541370588057966,
+  }),
+  // a 2.4075 AU, e 0.62404, perihelion 0.90514 AU, aphelion 3.9099 AU
+  "asteroid-1998-ml14": Object.freeze({
+    semiMajorAxisAu: 2.407527644245818,
+    eccentricity: 0.6240363397548168,
+    heliocentricDistanceAu: 3.8975074237281047,
+    perihelionDirection: Object.freeze([
+      -0.022483391645474422,
+      -0.9997274633318657,
+      0.00628459705545118,
+    ]),
+    trueAnomalyDegrees: 176.45121861410124,
+    inclinationDegrees: 2.427218644710024,
+    perihelionAu: 0.9051429052721212,
+    aphelionAu: 3.909912383219515,
+  }),
+  // a 2.2329 AU, e 0.56108, perihelion 0.98007 AU, aphelion 3.4858 AU
+  "asteroid-2002-ce26": Object.freeze({
+    semiMajorAxisAu: 2.232934797599618,
+    eccentricity: 0.5610838659867287,
+    heliocentricDistanceAu: 3.452131036099929,
+    perihelionDirection: Object.freeze([
+      0.8249615605237578,
+      -0.09281850338163868,
+      0.5575151559269033,
+    ]),
+    trueAnomalyDegrees: 187.0819439510328,
+    inclinationDegrees: 47.28800261637596,
+    perihelionAu: 0.9800711088661309,
+    aphelionAu: 3.485798486333105,
   }),
   // a 2.3613 AU, e 0.090226, perihelion 2.1482 AU, aphelion 2.5743 AU
   vesta: Object.freeze({

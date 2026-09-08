@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf",
+  "diameterKm": 0.4,
+  "diameterInterpretation": "The 400 ± 50 m equivalent diameter in Busch et al. (2011), Table 2. The archived mesh has a 405.2 m volume-equivalent diameter and is not rescaled to the rounded published value.",
+  "periodHours": 3.725,
+  "poleEclipticJ2000Degrees": [
+    180,
+    -84
+  ],
+  "limitations": "The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj",
+    "vertices": 2000,
+    "faces": 3996,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.190623
+    ],
+    "firstFaceZeroBased": [
+      1071,
+      1356,
+      968
+    ],
+    "extentsKm": [
+      0.458038,
+      0.44489,
+      0.404141
+    ],
+    "volumeCubicKm": 0.03483831510970516,
+    "volumeEquivalentRadiusKm": 0.20260780796502473,
+    "radialRangeKm": [
+      0.17671788810700517,
+      0.2307831631575406
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 3996,
+    "ambiguous": 0,
+    "maxErrorMeters": 1.1368683772161603e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3996,
+    "sourceVertices": 2000,
+    "weldedVertices": 2000,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 5,
+    "estimatedErrorMeters": 4.5549702644348145,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 34818482.69786304
+    }
+  }
+}
