@@ -93,4 +93,9 @@ test('radius tables retain west longitude, asymmetric radii and closed poles', a
   assert.ok([...edges.values()].every(e=>e.length===2&&e[0]+e[1]===0));
   assert.throws(()=>parsePdsRadiusTable(rows.slice(1).join('\n'),p),/dimensions/);
   assert.throws(()=>parsePdsRadiusTable(rows.join('\n').replace('360 0 2','360 0 3'),p),/seam or pole/);
+  // Decimal subtraction slightly exceeds 1e-6 in binary floating point.
+  const rounded = rows.join('\n').replace('360 0 2', '360 0 2.000001').replace('90 -90 6', '90 -90 6.000001');
+  const welded = parsePdsRadiusTable(rounded, p);
+  assert.deepEqual(welded.positions, mesh.positions);
+  assert.throws(()=>parsePdsRadiusTable(rounded.replace('6.000001', '6.000002'),p),/seam or pole/);
 });

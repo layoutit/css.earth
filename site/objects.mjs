@@ -76,8 +76,14 @@ import comet67pDescriptor from "../src/planets/comet-67p/object.json" with { typ
 import comet103pDescriptor from "../src/planets/comet-103p/object.json" with { type: "json" };
 import comet9pDescriptor from "../src/planets/comet-9p/object.json" with { type: "json" };
 import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { type: "json" };
+import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("comet-1p", "Halley", "comet", "#b8b6b2", 17.859,
+    "Explore Halley's historical Giotto/Vega shape model, with its uncertainty made explicit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet1pDescriptor);
+    }, comet1pDescriptor.properties.worldFrame),
   object("comet-81p", "Wild 2", "comet", "#b8b6b2", 3.450,
     "Explore Wild 2's observed Stardust terrain, preserving its real coverage gaps.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

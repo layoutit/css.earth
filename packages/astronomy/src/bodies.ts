@@ -36,7 +36,7 @@ export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'sat
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
 export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId | CometId
-export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p'
+export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p' | 'comet-1p'
 
 export const PLANET_IDS: readonly PlanetId[] = [
   'mercury',
@@ -51,7 +51,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
 export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis']
-export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p']
+export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p', 'comet-1p']
 
 const body = (
   id: BodyId,
@@ -64,6 +64,9 @@ const body = (
 
 export const BODIES: Record<BodyId, BodyData> = {
   sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
+  // Equivalent-volume radius of the triangulated PDS Stooke historical model.
+  // Approximate model scale, not a measured mean radius; no known GM is asserted.
+  'comet-1p': body('comet-1p', '1P/Halley', 'DES=1P;CAP;', 4.57906433330178, 0, 'sun'),
   // ESA/RMOC MTP019 equivalent-volume radius (ESA_MODEL_INFO.ASC); mass 9.982e12 kg
   // (Pätzold et al. 2016, doi:10.1038/nature16535) times CODATA G. Shape remains object-owned.
   'comet-67p': body('comet-67p', '67P/Churyumov–Gerasimenko', 'DES=67P;CAP;', 1.65, 9.982e12 * 6.6743e-20, 'sun'),
