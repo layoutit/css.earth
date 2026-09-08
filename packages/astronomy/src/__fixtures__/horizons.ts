@@ -1,5 +1,6 @@
 import { HORIZONS_PLANETARY } from './horizons.planetary.js'
 import { HORIZONS_MOONS_AND_SMALL_BODIES } from './horizons.moons-and-small-bodies.js'
+import { HORIZONS_MOONS_AND_SMALL_BODIES_2 } from './horizons.moons-and-small-bodies-2.js'
 
 // GENERATED FILE — do not edit by hand.
 //
@@ -30,6 +31,7 @@ export interface HorizonsFixture {
 export const HORIZONS: Record<string, HorizonsFixture> = {
   ...HORIZONS_PLANETARY,
   ...HORIZONS_MOONS_AND_SMALL_BODIES,
+  ...HORIZONS_MOONS_AND_SMALL_BODIES_2,
 }
 
 /**

@@ -1,6 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mjs';
+import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mjs';
 
 const rad = Math.PI / 180;
 const dot = (a,b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
@@ -120,7 +120,7 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
   const paths=new Set(entries.map(e=>e.path));
   for(const f of recipe.frames)if(!paths.has(f.path)||!paths.has(f.labelPath))throw new Error(`Unpinned camera input: ${f.id}`);
   if(paths.size!==new Set(recipe.frames.flatMap(f=>[f.path,f.labelPath])).size)throw new Error('Unconsumed camera input.');
-  const load=shape.format==='pds-radius-table'?loadPdsRadiusTable:shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
+  const load=shape.format==='stl'?loadStlShape:shape.format==='pds-radius-table'?loadPdsRadiusTable:shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
   const mesh=await load(resolve(sourceDirectory,shape.path),shape.grid),normalAt=smoothNormals(mesh);
   const points=new Float64Array(width*height*3),normals=new Float32Array(points.length),valid=new Uint8Array(width*height);
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){

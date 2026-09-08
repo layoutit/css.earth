@@ -1,0 +1,39 @@
+{
+  "title": "Comprehensive Photometry of the Rings and 16 Satellites of Uranus with the Hubble Space Telescope",
+  "authors": [
+    "Erich Karkoschka"
+  ],
+  "year": 2001,
+  "url": "https://doi.org/10.1006/icar.2001.6596",
+  "location": "Table IV, printed page 55 / PDF page 5",
+  "body": "Ophelia",
+  "semiAxesKm": [
+    27,
+    19,
+    19
+  ],
+  "model": "Adopted prolate spheroid: major axis points toward Uranus; the two perpendicular axes equal B. The third axis is a published assumption, not an independent measurement.",
+  "uncertainties": {
+    "url": "https://arxiv.org/abs/2401.04634",
+    "location": "French et al. (2024), Table 3, PDF page 10, reproducing Karkoschka (2001) Voyager paper Table V",
+    "originalSource": "https://doi.org/10.1006/icar.2001.6597",
+    "projectedSqrtABRadiusKm": 23,
+    "projectedRadiusUncertaintyKm": 4,
+    "minorMajorRatio": 0.7,
+    "minorMajorRatioUncertainty": 0.3
+  },
+  "qualification": "An analytic representation of published adopted dimensions, not resolved terrain or an archived detailed mesh. The uncertainties are on projected radius and axis ratio, not independent uncertainties on all three axes.",
+  "mass": {
+    "source": "https://arxiv.org/abs/2401.04634",
+    "location": "Table 3 footnote b and Sections 9.1–9.2",
+    "gmKm3PerS2": 0.00238,
+    "gmUncertaintyKm3PerS2": 0.00022,
+    "massKg": 35700000000000000,
+    "massUncertaintyKg": 3200000000000000,
+    "method": "Dynamical inference from forced normal-mode amplitudes: the gamma-ring 6:5 inner Lindblad resonance and epsilon outer-edge 14:13 inner Lindblad resonance.",
+    "qualification": "Ring-forcing inference, not the separate mass row computed with assumed 0.90 g/cm³ density. Inferred density 0.87(+0.89/−0.30)g/cm³ combines this mass with an uncertain prolate volume; it is not a directly measured composition.",
+    "densityGPerCm3": 0.87,
+    "densityUncertaintyPlusGPerCm3": 0.89,
+    "densityUncertaintyMinusGPerCm3": 0.3
+  }
+}

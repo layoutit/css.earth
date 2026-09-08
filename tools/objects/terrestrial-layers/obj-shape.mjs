@@ -18,6 +18,40 @@ export async function loadObjShape(path, profile) {
   return parseObjShape(text, profile);
 }
 
+/** STL releases repeat vertices per facet. Weld exact source coordinates before
+ * the common mesh simplifier; retain positions, winding and explicit units. */
+export async function loadStlShape(path, profile) {
+  const bytes = await readFile(path);
+  return parseStlShape(profile.compression === 'gzip' ? gunzipSync(bytes) : bytes, profile);
+}
+
+export function parseStlShape(bytes, profile) {
+  const data = Buffer.from(bytes), vertices = [], indices = [], ids = new Map();
+  const addFace = points => {
+    if (points.length !== 3 || points.some(v => v.length !== 3 || !v.every(Number.isFinite))) throw new Error('Invalid STL facet.');
+    indices.push(points.map(v => {
+      const key = v.join(',');
+      if (!ids.has(key)) {
+        ids.set(key, vertices.length);
+        vertices.push(v.map(n => n * profile.metersPerUnit));
+      }
+      return ids.get(key);
+    }));
+  };
+  if (data.length >= 84 && data.length === 84 + data.readUInt32LE(80) * 50) {
+    for (let offset = 84; offset < data.length; offset += 50) {
+      addFace([0,1,2].map(i => [0,1,2].map(j => data.readFloatLE(offset + 12 + i * 12 + j * 4))));
+    }
+  } else {
+    const text = data.toString('utf8');
+    if (!/^\s*solid\b/.test(text) || !/endsolid\b/.test(text)) throw new Error('Invalid STL document.');
+    for (const facet of text.matchAll(/facet\s+normal\b[\s\S]*?endfacet/g)) {
+      addFace(Array.from(facet[0].matchAll(/\bvertex\s+([^\r\n]+)/g), m => m[1].trim().split(/\s+/).map(Number)));
+    }
+  }
+  return radialShape(vertices, indices, profile);
+}
+
 /** PDS vertex-facet tables retain their explicit row ids and kilometre units. */
 export async function loadPdsVertexFacetShape(path, profile) {
   return parsePdsVertexFacetShape(await readFile(path, 'utf8'), profile);
@@ -136,7 +170,7 @@ export function parsePdsVertexFacetShape(text, profile) {
 /** Sample a bounded scientific grid from the source mesh. A facet-support
  * column can withhold regions whose detailed SPC solution is absent. */
 export async function loadShapeScalarGrid(root, lens) {
-  const load = lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
+  const load = lens.format === 'stl' ? loadStlShape : lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
   const mesh = await load(resolve(root, lens.path), lens.grid);
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "citation": "Thomas et al. (2013), Icarus 226, 999–1019; NAIF PCK00011 BODY633_RADII.",
+  "semiAxesKm": [
+    2.88,
+    2.08,
+    1.8
+  ],
+  "referenceRadiusKm": 2.23,
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/2.88)^2+(cos(lat)*sin(lon)/2.08)^2+(sin(lat)/1.8)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "orientation": "XYZ long, intermediate and polar axes; IAU_PALLENE, east-positive mesh longitude. Photographic frame uses archived mission geometry and fitted image center. Runtime orientation is a stated historical-pole display approximation.",
+  "qualification": "An analytic realization of measured ellipsoid dimensions. It is not a measured detailed mesh, and no crater or terrain radius is invented."
+}
