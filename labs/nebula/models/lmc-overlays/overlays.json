@@ -54,6 +54,30 @@
       "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing."
     },
     {
+      "id": "dss2-wide-optical",
+      "label": "DSS2 · 24° wide optical",
+      "texturePath": "prepared/dss2-wide-optical.webp",
+      "widthPx": 6000,
+      "heightPx": 6000,
+      "sha256": "32615b2bd3c035eb947b45d292365e6fe5424391423e8952e26f7e92ca2f87a6",
+      "bytes": 3208688,
+      "pivotCssPx": [
+        0.08784019075619652,
+        -0.0878401907564239,
+        0
+      ],
+      "style": {
+        "width": "6000px",
+        "height": "6000px",
+        "transform": "matrix3d(0,-0.1756803815124602,0,0,-0.1756803815124602,-3.789561257387201e-17,0,5.392692719531728e-20,0,0,1,0,527.1289847281369,526.9533043466243,0,1)",
+        "backgroundSize": "6000px 6000px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
+      "credit": "Digitized Sky Survey - STScI/NASA, Colored & Healpixed by CDS",
+      "registrationNote": "Survey WCS placement across a 24° field. Photographic plate seams, foreground stars and uneven backgrounds remain; use for coverage comparison before reconstruction. This is not calibrated diffuse emission."
+    },
+    {
       "id": "vista-infrared",
       "label": "VISTA · infrared Y/J/Ks",
       "texturePath": "prepared/vista-infrared.webp",

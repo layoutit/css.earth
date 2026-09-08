@@ -15,7 +15,7 @@ interface InputImage {
   sourcePageUrl: string; credit: string; license: string;
   wcs?: ImageWcs; wcsSource: { url: string; sha256: string; description: string };
   registration?: ImageRegistration;
-  registrationNote: string; maxPixels?: number; legacyPlacementBasis?: string;
+  registrationNote: string; maxPixels?: number; legacyPlacementBasis?: string; useSavedAlignment?: boolean;
 }
 interface Recipe {
   schema: 'cssearth-nebula-overlay-recipe@1'; maxPixels: number;
@@ -85,6 +85,7 @@ export async function prepareOverlays(path: string) {
       const placement = updateOverlayPlacement(defaultOverlayPlacement(), { ...saved.positionKpc,
         rotationX: saved.rotationDegrees.x, rotationY: saved.rotationDegrees.y, rotationZ: saved.rotationDegrees.z, scale: saved.scale });
       for (const image of overlays) {
+        if (target.images.find(input => input.id === image.id)?.useSavedAlignment === false) continue;
         image.initialPlacement = transferOverlayAlignment(placement, reference.pivotCssPx, image.pivotCssPx, 50 * 3.085677581491367e19 / frame.metersPerUnit);
         image.initialOpacity = saved.opacity;
       }
@@ -96,7 +97,7 @@ export async function prepareOverlays(path: string) {
       frame: { path: target.referenceObject, sha256: sha256(referenceBytes) }, images: evidence, alignment: target.alignment,
       method: 'Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.',
       limits: ['Image WCS metadata supplies angular registration; it does not validate the simulation morphology.',
-        'Source sky placement is retained. An optional saved manual alignment supplies separate initial display controls for every image.',
+        'Source sky placement is retained. An optional saved manual alignment supplies initial display controls unless an image explicitly keeps calibrated sky placement.',
         'The flat image plane records one observed projection; it does not assert physical depths for photographed features.',
         'Textures are bounded inspection previews; native sources and WCS remain pinned for later processing.'],
     }, null, 2) + '\n');

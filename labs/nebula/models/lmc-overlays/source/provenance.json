@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
     "path": "labs/nebula/models/image-overlays.json",
-    "sha256": "8498acbbe46e1ab159f1299ea169fdf320821016ca69161cbfb24fc7617e9160"
+    "sha256": "db0d13d217f6db0fe0a410d4a3cfd330bbaa7e5976260f465c279d479cdc827c"
   },
   "frame": {
     "path": "labs/nebula/models/lmc-particles/object.json",
@@ -79,6 +79,80 @@
         "height": 1987,
         "sha256": "0aacd67cc1cff5f083827f8e70b2d12356169d97da20368dd86f4218e798ff9c",
         "bytes": 2113466
+      }
+    },
+    {
+      "input": {
+        "id": "dss2-wide-optical",
+        "label": "DSS2 · 24° wide optical",
+        "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.jpg",
+        "sha256": "add16f9657563bde2b7e10320edc2cd12b419202624bcb192be2f5781797ce70",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
+        "sourcePageUrl": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
+        "credit": "Digitized Sky Survey - STScI/NASA, Colored & Healpixed by CDS",
+        "license": "ODbL-1.0",
+        "maxPixels": 6000,
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            6000,
+            6000
+          ],
+          "referencePixel": [
+            3000,
+            3000
+          ],
+          "referenceValueDeg": [
+            78.76,
+            -69.19
+          ],
+          "scaleDeg": [
+            -0.0040595312971682,
+            0.0040595312971682
+          ],
+          "rotationDeg": 0
+        },
+        "wcsSource": {
+          "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
+          "sha256": "a72fa01bce7c3f05b7d17b6ec4eff58afd5a1302594e89a230bda45dc0b4c92d",
+          "description": "Exact ICRS TAN WCS from the matching CDS HiPS2FITS color FITS; JPEG/FITS orientation verified. See source/dss2-wide-receipt.json."
+        },
+        "registrationNote": "Survey WCS placement across a 24° field. Photographic plate seams, foreground stars and uneven backgrounds remain; use for coverage comparison before reconstruction. This is not calibrated diffuse emission.",
+        "useSavedAlignment": false
+      },
+      "sourceDimensions": [
+        6000,
+        6000
+      ],
+      "verticesUnits": [
+        [
+          10.539066086932486,
+          10.542579694562738,
+          3.9968028886505635e-15
+        ],
+        [
+          -10.542579694562738,
+          10.542579694562736,
+          3.552713678800501e-15
+        ],
+        [
+          -10.54257969456274,
+          -10.539066086932488,
+          -3.552713678800501e-15
+        ],
+        [
+          10.53906608693248,
+          -10.539066086932486,
+          -8.881784197001252e-16
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/dss2-wide-optical.webp",
+        "width": 6000,
+        "height": 6000,
+        "sha256": "32615b2bd3c035eb947b45d292365e6fe5424391423e8952e26f7e92ca2f87a6",
+        "bytes": 3208688
       }
     },
     {
@@ -508,7 +582,7 @@
   "method": "Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.",
   "limits": [
     "Image WCS metadata supplies angular registration; it does not validate the simulation morphology.",
-    "Source sky placement is retained. An optional saved manual alignment supplies separate initial display controls for every image.",
+    "Source sky placement is retained. An optional saved manual alignment supplies initial display controls unless an image explicitly keeps calibrated sky placement.",
     "The flat image plane records one observed projection; it does not assert physical depths for photographed features.",
     "Textures are bounded inspection previews; native sources and WCS remain pinned for later processing."
   ]

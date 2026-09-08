@@ -44,6 +44,45 @@
           "legacyPlacementBasis": "matrix3d(0.057659,-0.189304,0,0.000001,-0.18915,-0.057712,0,-0.000003,0,0,1,0,26.231508,251.653384,0,1)"
         },
         {
+          "id": "dss2-wide-optical",
+          "label": "DSS2 · 24° wide optical",
+          "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.jpg",
+          "sha256": "add16f9657563bde2b7e10320edc2cd12b419202624bcb192be2f5781797ce70",
+          "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
+          "sourcePageUrl": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
+          "credit": "Digitized Sky Survey - STScI/NASA, Colored & Healpixed by CDS",
+          "license": "ODbL-1.0",
+          "maxPixels": 6000,
+          "wcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6000,
+              6000
+            ],
+            "referencePixel": [
+              3000.0,
+              3000.0
+            ],
+            "referenceValueDeg": [
+              78.76,
+              -69.19
+            ],
+            "scaleDeg": [
+              -0.0040595312971682,
+              0.0040595312971682
+            ],
+            "rotationDeg": 0.0
+          },
+          "wcsSource": {
+            "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
+            "sha256": "a72fa01bce7c3f05b7d17b6ec4eff58afd5a1302594e89a230bda45dc0b4c92d",
+            "description": "Exact ICRS TAN WCS from the matching CDS HiPS2FITS color FITS; JPEG/FITS orientation verified. See source/dss2-wide-receipt.json."
+          },
+          "registrationNote": "Survey WCS placement across a 24° field. Photographic plate seams, foreground stars and uneven backgrounds remain; use for coverage comparison before reconstruction. This is not calibrated diffuse emission.",
+          "useSavedAlignment": false
+        },
+        {
           "id": "vista-infrared",
           "label": "VISTA · infrared Y/J/Ks",
           "path": ".local/nebula-lab/registration/eso1914a.jpg",

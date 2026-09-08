@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
     "path": "labs/nebula/models/image-overlays.json",
-    "sha256": "8498acbbe46e1ab159f1299ea169fdf320821016ca69161cbfb24fc7617e9160"
+    "sha256": "db0d13d217f6db0fe0a410d4a3cfd330bbaa7e5976260f465c279d479cdc827c"
   },
   "frame": {
     "path": "labs/nebula/models/smc-particles/object.json",
@@ -158,7 +158,7 @@
   "method": "Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.",
   "limits": [
     "Image WCS metadata supplies angular registration; it does not validate the simulation morphology.",
-    "Source sky placement is retained. An optional saved manual alignment supplies separate initial display controls for every image.",
+    "Source sky placement is retained. An optional saved manual alignment supplies initial display controls unless an image explicitly keeps calibrated sky placement.",
     "The flat image plane records one observed projection; it does not assert physical depths for photographed features.",
     "Textures are bounded inspection previews; native sources and WCS remain pinned for later processing."
   ]
