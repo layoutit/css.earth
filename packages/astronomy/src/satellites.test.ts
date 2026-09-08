@@ -37,6 +37,9 @@ import {
  * deliberately compact model cannot carry.
  */
 const TOLERANCE_KM: Record<SatelliteId, number> = {
+  kiviuq: 32368,
+  albiorix: 21245,
+
   siarnaq: 322409,
   ymir: 185535,
   nereid: 11980,
