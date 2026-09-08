@@ -1,0 +1,71 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf",
+  "diameterKm": 0.63,
+  "diameterInterpretation": "Published conservative radar-model effective diameter 0.63 km with +0.13/-0.06 km uncertainty; no catalog diameter rescales the archived vertices.",
+  "periodHours": 15,
+  "poleEclipticJ2000Degrees": [
+    24,
+    -26
+  ],
+  "limitations": "This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
+    "vertices": 256,
+    "faces": 508,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.20303
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      1.105818,
+      0.529568,
+      0.503943
+    ],
+    "volumeCubicKm": 0.1312520820552817,
+    "volumeEquivalentRadiusKm": 0.31526265646468804,
+    "radialRangeKm": [
+      0.1962133433637988,
+      0.562269
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 508,
+    "ambiguous": 0,
+    "maxErrorMeters": 2.2737367544323206e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 508,
+    "sourceVertices": 256,
+    "weldedVertices": 256,
+    "targetFaces": 508,
+    "outputFaces": 508,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 256,
+      "edges": 762,
+      "faces": 508,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 131252082.0552817
+    }
+  },
+  "referenceRadiusKm": 0.315,
+  "radiusInterpretation": "Half the 0.63 km equivalent diameter of the conservative single-lobe working model; diameter uncertainty is +0.13/-0.06 km. Original vertices are not rescaled."
+}

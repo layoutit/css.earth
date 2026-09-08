@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%274660%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                4660 Nereus (1982 DB)          2026-Sep-08 06:29:38
+Rec #:    4660 (+COV) Soln.date: 2026-Jun-22_06:20:32   # obs: 5002 (1981-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2452640.5 ! 2003-Jan-01.00 (TDB)         Residual RMS= .226
+   EC= .3600525234406642   QR= .9526811748087848   TP= 2452952.1027570381
+   OM= 314.5537554149931   W=  157.880252270391    IN= 1.432572650365859
+   A= 1.488686508978604    MA= 190.9167890882374   ADIST= 2.024691843148423
+   PER= 1.81641            N= .5426242449999999    ANGMOM= .019580919
+   DAN= 1.94418            DDN= .97161             L= 112.440255
+   B= .5393778             MOID= .00326224         TP= 2003-Nov-08.6027570381
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .165               ROTPER= 15.1749
+   H= 18.75                G= .150                 B-V= n.a.
+                           ALBEDO= .550            STYP= Xe
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= 1.355836388939E-14  A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#278, PHA  OCC=0       radar(20 delay,17 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************
