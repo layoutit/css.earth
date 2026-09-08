@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-convex-approximation@1",
+  "source": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+  "citation": "Denk et al. (2018), The Irregular Satellites of Saturn; Denk and Mottola, Cassini lightcurve modelling",
+  "meanRadiusKm": 9.6,
+  "referenceRadiusKm": 9.6,
+  "gmKm3S2": 0,
+  "gmInterpretation": "Unmodeled mass, not measured physical zero",
+  "equatorialPolygonKm": [
+    [
+      -13.673333333333332,
+      -5.956878377136803
+    ],
+    [
+      11.326666666666668,
+      -5.956878377136803
+    ],
+    [
+      2.3466666666666676,
+      11.913756754273606
+    ]
+  ],
+  "polarSemiAxisKm": 8,
+  "volumeEquivalentRadiusKm": 8.285715904118893,
+  "formula": "Let rho(lon) be the positive intersection of the equatorial ray with the CCW convex polygon. r(lon,lat)=1/sqrt((cos(lat)/rho(lon))^2+(sin(lat)/polarSemiAxisKm)^2). This assumes geometrically similar cross-sections scaled by sqrt(1-(z/c)^2).",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
+  "evidence": {
+    "numericSource": "https://tilmanndenk.de/wp-content/uploads/619_Ymi_1_Table.txt",
+    "independentSource": "https://www.dpg-verhandlungen.de/2013/jena/ep7.pdf",
+    "equatorialSideLengthsKm": [
+      25,
+      20,
+      24
+    ],
+    "polarSemiAxisKm": 8,
+    "referenceEllipsoidSemiAxesKm": [
+      12,
+      11,
+      8
+    ],
+    "assumption": "Elliptical polar cap law; dimensions are preserved, not rescaled to photometric mean radius. This is a coarse convex approximation, not a contact-binary reconstruction."
+  }
+}
