@@ -21,10 +21,10 @@
     "prose-project-link": "*.md: the [Galaxio](repo) project link -> [cssEarth](repo)",
     "prose-pipeline-writer-path": "*.md: the Python writer's path inside the upstream pipeline/ (absent here) -> `formats/catalog.py` of the external catalogue pipeline (not part of this repository)",
     "prose-pipeline-directory": "*.md: \"A Python writer lives in the repo's `pipeline/`\" (absent here) -> the external catalogue pipeline (not part of this repository)",
-    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md §2 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
+    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md \u00a72 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
     "prose-claude-symlink": "AGENTS.md: drop the sentence announcing the CLAUDE.md symlink, which is not mirrored (EXCLUDED_FILES)",
     "code-project-url": "src/modelAccuracy.ts: PROJECT_SOURCE_URL string literal, the upstream ARCHITECTURE.md -> this package's AGENTS.md in the cssEarth repository (a documentation URL; no behaviour change)",
-    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio … convention/definition' sourceLabel string literals -> 'cssEarth …' (labels only; no behaviour change)"
+    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio \u2026 convention/definition' sourceLabel string literals -> 'cssEarth \u2026' (labels only; no behaviour change)"
   },
   "rewrittenFiles": {
     "package.json": [
@@ -195,6 +195,7 @@
     "src/index.ts",
     "src/modelAccuracy.test.ts",
     "src/modelAccuracy.ts",
+    "src/rotation-neptune.ts",
     "src/rotation.ts",
     "src/satellites.test.ts",
     "src/solarSystem.test.ts",

@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "despina",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-ellipsoid-context",
+    "path": "presentation/context.png",
+    "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+    "credit": "Karkoschka (2003); cssEarth standard no-coverage grid",
+    "license": "Measured scientific parameters; MIT display representation.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "measured-shape",
+        "model-surface"
+      ],
+      "size": 512,
+      "longitudeDegrees": 40,
+      "latitudeDegrees": 20,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "model"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 69688,
+    "expectedSha256": "b8efc79f694b5f5012db90db86fdbe8d33251a063428faecfcf3aac9052abffe"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

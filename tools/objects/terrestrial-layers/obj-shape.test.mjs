@@ -1,11 +1,37 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseObjShape } from './obj-shape.mjs';
+import { parseObjShape, parseVrmlShape } from './obj-shape.mjs';
 
 // An octahedron has analytic radial intersections, including vertices and edges.
 const octahedron = 'v 2 0 0\nv -2 0 0\nv 0 3 0\nv 0 -3 0\nv 0 0 4\nv 0 0 -4\n'+
   'f 1 3 5\nf 3 2 5\nf 2 4 5\nf 4 1 5\nf 3 1 6\nf 2 3 6\nf 4 2 6\nf 1 4 6\n';
 const profile = {metersPerUnit:1000,expectedVertices:6,expectedFaces:8};
+const vrmlOctahedron = `#VRML V2.0 utf8
+Shape { geometry IndexedFaceSet { coord Coordinate { point [
+  2e0 0 0, -2 0 0, 0 3 0, 0 -3 0, 0 0 4, 0 0 -4
+] } solid FALSE coordIndex [
+  0 2 4 -1, 2 1 4 -1, 1 3 4 -1, 3 0 4 -1,
+  2 0 5 -1, 1 2 5 -1, 3 1 5 -1, 0 3 5 -1
+] } appearance Appearance { material Material { diffuseColor 1 1 1 } } }
+DEF example Script { url "javascript: throw new Error('viewer script must not run');" }
+`;
+test('Rosetta VRML triangle coordinates retain the analytic body frame and units', () => {
+  const mesh = parseVrmlShape(vrmlOctahedron, profile);
+  for (const [lon,lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[0,-90],[45,30],[359.9,-67]]) {
+    const l=lon*Math.PI/180,p=lat*Math.PI/180;
+    const expected=1000/(Math.abs(Math.cos(p)*Math.cos(l))/2+Math.abs(Math.cos(p)*Math.sin(l))/3+Math.abs(Math.sin(p))/4);
+    assert.ok(Math.abs(mesh.sample(lon,lat)-expected)<1e-8);
+  }
+});
+test('VRML rejects transformed geometry, non-triangles, invalid indices and truncated source', () => {
+  assert.throws(() => parseVrmlShape(vrmlOctahedron.replace('Shape {', 'Transform { children [ Shape {'),profile), /untransformed/);
+  assert.throws(() => parseVrmlShape(vrmlOctahedron.replace('0 2 4 -1','0 2 4 5 -1'),profile), /triangles/);
+  assert.throws(() => parseVrmlShape(vrmlOctahedron.replace('0 2 4 -1','0 2 99 -1'),profile), /absent/);
+  assert.throws(() => parseVrmlShape(vrmlOctahedron.replace('2e0','NaN'),profile), /coordinate/);
+  assert.throws(() => parseVrmlShape(vrmlOctahedron.replace('solid FALSE','ccw FALSE'),profile), /untransformed/);
+  assert.throws(() => parseVrmlShape(vrmlOctahedron,{...profile,expectedFaces:7}), /triangles/);
+  assert.throws(() => parseVrmlShape(vrmlOctahedron,{...profile,metersPerUnit:0}), /units/);
+});
 test('sourced radial intersections preserve units, seam and polar shape',()=>{
   const mesh=parseObjShape(octahedron,profile);
   for(const [lon,lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[0,-90],[45,30],[359.9,-67],[-.1,-67]]){

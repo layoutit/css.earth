@@ -447,22 +447,26 @@
     {
       "label": "NASA Science",
       "description": "Facts & interior",
-      "href": "https://science.nasa.gov/sun/facts/"
+      "href": "https://science.nasa.gov/sun/facts/",
+      "role": "facts"
     },
     {
       "label": "NASA SDO",
       "description": "Solar surface & corona",
-      "href": "https://sdo.gsfc.nasa.gov/data/synoptic/"
+      "href": "https://sdo.gsfc.nasa.gov/data/synoptic/",
+      "role": "surface"
     },
     {
       "label": "JSOC HMI",
       "description": "Magnetic surface lens",
-      "href": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
+      "href": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html",
+      "role": "magnetism"
     },
     {
       "label": "HYG",
       "description": "Background star field",
-      "href": "https://github.com/astronexus/HYG-Database"
+      "href": "https://github.com/astronexus/HYG-Database",
+      "role": "stars"
     }
   ],
   "provenance": {

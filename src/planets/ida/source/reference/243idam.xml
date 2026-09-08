@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1F00_1810.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1F00_1500.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:disp="http://pds.nasa.gov/pds4/disp/v1" xmlns:img="http://pds.nasa.gov/pds4/img/v1" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd http://pds.nasa.gov/pds4/img/v1 https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1F00_1810.xsd http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1F00_1500.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:ast-sat.thomas.shape-models:data:243idam_fit</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>243 IDA IMAGE MOSAIC</title>
+    <information_model_version>1.15.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Thomas, P.C.</author_list>
+      <publication_year>2021</publication_year>
+      <description>Image mosaic of 243 Ida.  This image mosaic is a high-pass filtered version
+constructed from Galileo SSI images in a simple cylindrical projection.  The images
+used were those at and after FDS 202558300 on a low-pass filtered map of the lower
+resolution images. Black areas are those with unprojectable surfaces.  Resolution on
+original images varied greatly, so some regions of low intrinsic resolution are very
+oversampled in the resampled mosaic.  The highest resolution on the images used to
+create the mosaic is approximately 25 m/pixel.  The scale is 7 pixels/degree.  The
+mosaic is centered on 0 latitude, 0 longitude, with longitude increasing to the east.
+ See Thomas, et al. (1996) for description of mosaic contents.</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>1993-08-28T11:28:29.635Z</start_date_time>
+      <stop_date_time>1993-08-28T16:52:53.290Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Physical Properties</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Galileo</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.galileo</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Galileo Orbiter</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.go</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Solid State Imaging System</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:go.ssi</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(243) Ida</name>
+      <type>Asteroid</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:asteroid.243_ida</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Discipline_Area>
+      <img:Imaging>
+        <Local_Internal_Reference>
+          <local_identifier_reference>primary_image</local_identifier_reference>
+          <local_reference_type>imaging_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <img:Exposure>
+          <img:exposure_count>1</img:exposure_count>
+          <img:exposure_duration unit="s">1</img:exposure_duration>
+        </img:Exposure>
+      </img:Imaging>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>primary_image</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+    </Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <doi>10.1006/icar.1996.0033</doi>
+      <reference_text>Thomas, P.C., M.J.S. Belton, B. Carcich, C.R. Chapman, M.E. Davies, R. Sullivan, and
+J. Veverka, The Shape of Ida, Icarus 120, 20-32, 1996. doi: 10.1006/icar.1996.0033</reference_text>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>243idam.fit</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2021-10-06</creation_date_time>
+    </File>
+    <Array_2D>
+      <local_identifier>primary_image</local_identifier>
+      <offset unit="byte">2880</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Image mosaic of 243 Ida.  This image mosaic is a high-pass filtered version
+constructed from Galileo SSI images in a simple cylindrical projection.  The images
+used were those at and after FDS 202558300 on a low-pass filtered map of the lower
+resolution images. Black areas are those with unprojectable surfaces.  Resolution on
+original images varied greatly, so some regions of low intrinsic resolution are very
+oversampled in the resampled mosaic.  The highest resolution on the images used to
+create the mosaic is approximately 25 m/pixel.  The scale is 7 pixels/degree.  The
+mosaic is centered on 0 latitude, 0 longitude, with longitude increasing to the east.
+ See Thomas, et al. (1996) for description of mosaic contents.</description>
+      <Element_Array>
+        <data_type>UnsignedByte</data_type>
+        <unit>counts</unit>
+        <scaling_factor>1</scaling_factor>
+        <value_offset>0.0</value_offset>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1260</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>2520</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+    </Array_2D>
+  </File_Area_Observational>
+</Product_Observational>
+

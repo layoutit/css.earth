@@ -82,7 +82,12 @@ const SATELLITES = [
   ['triton', '801', '500@899'],
   ['proteus', '808', '500@899'],
   ['larissa', '807', '500@899'],
+  ['naiad', '803', '500@899', 'daily'],
+  ['thalassa', '804', '500@899', 'daily'],
+  ['despina', '805', '500@899', 'daily'],
+  ['galatea', '806', '500@899', 'daily'],
   ['charon', '901', '500@999'],
+  ['dimorphos', '120065803', '500@920065803', 'dart'],
 ]
 
 // Deliberately NOT the epochs the mean elements were fitted on: the satellite
@@ -143,6 +148,8 @@ for (const [id, command, center, range] of SATELLITES) {
       ? [2458862.25, 2460310.75, 2461041.625, 2461772.25, 2462502.75, 2463219.25]
       : range === 'cassini-era'
       ? [2453383.25, 2454113.75, 2455197.25, 2456658.75, 2457389.25, 2458110.25]
+      : range === 'dart'
+      ? [2461258.75, 2461267.25, 2461276.75, 2461286.75, 2461302.25, 2461314.75]
       : range === 'limited'
       ? LIMITED_SATELLITE_EPOCHS
       : range === 'source-limited'

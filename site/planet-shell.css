@@ -1414,7 +1414,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     letter-spacing: 0;
     text-overflow: ellipsis;
     text-transform: uppercase;
-    transform: translateY(1.5px);
+    transform: translateY(-1px);
     white-space: nowrap;
   }
 
@@ -1817,7 +1817,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     letter-spacing: 0;
     text-overflow: ellipsis;
     text-transform: uppercase;
-    transform: translateY(1.5px);
+    transform: translateY(-1px);
     white-space: nowrap;
   }
 

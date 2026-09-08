@@ -237,7 +237,7 @@ export function locallyMaintainedFile(target, rel) {
     "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs",
     "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",
     "src/bodies.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
-    "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/rotation.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
+    "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
     /^src\/(?:data\/satelliteElements\.data|__fixtures__\/horizons)(?:\.[a-z-]+)?\.ts$/.test(rel);
 }
 

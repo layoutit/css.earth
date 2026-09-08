@@ -29,6 +29,38 @@ export async function loadPdsPlateShape(path, profile) {
   return parsePdsPlateShape(await readFile(path, 'utf8'), profile);
 }
 
+/** Rosetta's PDS VRML releases wrap one body-fixed triangular surface in viewer
+ * material, lighting and scripts. Read only that untransformed IndexedFaceSet;
+ * viewer code is never evaluated and does not define the scientific frame. */
+export async function loadVrmlShape(path, profile) {
+  return parseVrmlShape(await readFile(path, 'utf8'), profile);
+}
+
+export function parseVrmlShape(text, profile) {
+  if (!/^#VRML V2\.0 utf8\s/.test(text)) throw new Error('Unsupported VRML shape header.');
+  const source = text.replace(/#[^\r\n]*/g, '').trim();
+  const mesh = /^Shape\s*\{\s*geometry\s+IndexedFaceSet\s*\{\s*coord\s+Coordinate\s*\{\s*point\s*\[([^\]]*)\]\s*\}\s*(?:solid\s+(?:TRUE|FALSE)\s*)?coordIndex\s*\[([^\]]*)\]\s*\}/.exec(source);
+  if (!mesh || (source.match(/\bIndexedFaceSet\s*\{/g) ?? []).length !== 1) {
+    throw new Error('Expected one untransformed VRML triangle surface.');
+  }
+  const tokens = value => value.trim().split(/[\s,]+/);
+  const points = tokens(mesh[1]);
+  if (points.length !== profile.expectedVertices * 3 || points.some(value =>
+    !/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/.test(value) || !Number.isFinite(Number(value)))) {
+    throw new Error('VRML coordinate dimensions or values changed.');
+  }
+  const facets = tokens(mesh[2]);
+  if (facets.length !== profile.expectedFaces * 4 || facets.some((value, index) =>
+    index % 4 === 3 ? value !== '-1' : !/^\d+$/.test(value))) {
+    throw new Error('VRML faces must be zero-based triangles terminated by -1.');
+  }
+  const vertices = Array.from({ length: profile.expectedVertices }, (_, i) =>
+    points.slice(i * 3, i * 3 + 3).map(value => Number(value) * profile.metersPerUnit));
+  const indices = Array.from({ length: profile.expectedFaces }, (_, i) =>
+    facets.slice(i * 4, i * 4 + 3).map(Number));
+  return radialShape(vertices, indices, profile);
+}
+
 /** PDS longitude/latitude/radius tables preserve their authored origin. The
  * regular grid defines the connectivity; duplicated seam/pole rows are welded. */
 export async function loadPdsRadiusTable(path, profile) {
@@ -104,7 +136,7 @@ export function parsePdsVertexFacetShape(text, profile) {
 /** Sample a bounded scientific grid from the source mesh. A facet-support
  * column can withhold regions whose detailed SPC solution is absent. */
 export async function loadShapeScalarGrid(root, lens) {
-  const load = lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
+  const load = lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
   const mesh = await load(resolve(root, lens.path), lens.grid);
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');

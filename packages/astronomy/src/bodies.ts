@@ -34,7 +34,7 @@ export interface BodyData {
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
-export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu'
+export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId
 
 export const PLANET_IDS: readonly PlanetId[] = [
@@ -49,7 +49,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 ]
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
-export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu']
+export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis']
 
 const body = (
   id: BodyId,
@@ -69,6 +69,18 @@ export const BODIES: Record<BodyId, BodyData> = {
   itokawa: body('itokawa', 'Itokawa', '25143;', 0.165, 2.1e-9, 'sun'),
   bennu: body('bennu', 'Bennu', '101955;', 0.241, 0, 'sun'),
   ryugu: body('ryugu', 'Ryugu', '162173;', 0.448, 3e-8, 'sun'),
+  ida: body('ida', 'Ida', '243;', 16, 0.00275, 'sun'),
+  gaspra: body('gaspra', 'Gaspra', '951;', 6.1, 0, 'sun'),
+  mathilde: body('mathilde', 'Mathilde', '253;', 26.4, 0.00689, 'sun'),
+  lutetia: body('lutetia', 'Lutetia', '21;', 49, 0.1134, 'sun'),
+  steins: body('steins', 'Steins', '2867;', 2.58, 0, 'sun'),
+
+  // DART s547 GM and released encounter-mesh reference radii; body source records.
+  didymos: body('didymos', 'Didymos', '65803;', .365, 3.51278e-8, 'sun'),
+  dimorphos: body('dimorphos', 'Dimorphos', '120065803', .075, 3.02680e-10, 'didymos'),
+  // MPCD2021 diameter/mass; Toutatis radar-mesh volume-equivalent radius.
+  kleopatra: body('kleopatra', 'Kleopatra', '216;', 59.1, .1982, 'sun'),
+  toutatis: body('toutatis', 'Toutatis', '4179;', 1.224, 0, 'sun'),
 
   mercury: body('mercury', 'Mercury', '199', 2439.4, 22031.86855, 'sun'),
   venus: body('venus', 'Venus', '299', 6051.84, 324858.592, 'sun'),
@@ -130,6 +142,12 @@ export const BODIES: Record<BodyId, BodyData> = {
   triton: body('triton', 'Triton', '801', 1352.6, 1428.495, 'neptune'),
   proteus: body('proteus', 'Proteus', '808', 208, 2.58, 'neptune'),
   larissa: body('larissa', 'Larissa', '807', 96, 0.25484, 'neptune'),
+  // Current Horizons GMs; Karkoschka ellipsoid dimensions belong to body sources.
+  naiad: body('naiad', 'Naiad', '803', 29, 0.00853, 'neptune'),
+  thalassa: body('thalassa', 'Thalassa', '804', 40, 0.02359, 'neptune'),
+  despina: body('despina', 'Despina', '805', 74, 0.11673, 'neptune'),
+  galatea: body('galatea', 'Galatea', '806', 88, 0.1899, 'neptune'),
+
   charon: body('charon', 'Charon', '901', 606, 106.10, 'pluto'),
 
   // Dwarf planets. `horizonsCode` is the exact string this package's Horizons
