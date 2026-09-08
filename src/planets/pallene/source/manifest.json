@@ -116,8 +116,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3971,
-      "expectedSha256": "a2bd7bf9c8f4b8f5497f79c4ff287d89621224e68647dc364afc8859be6b179b",
+      "expectedBytes": 3951,
+      "expectedSha256": "c6107419d3942e49df0dd279643d1e51c3884116a7fdfe8e8cf6e4062782abbc",
       "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
     },
     {
@@ -236,8 +236,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3495,
-      "expectedSha256": "680c3409fc8dfe3b586a04681da279a813ea04c407c01f145f8e83574e09e3d9",
+      "expectedBytes": 3516,
+      "expectedSha256": "f4c4ee17df02440d5694e6a982ddd402603f453f2584956926f7a4aa08b29e82",
       "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
     },
     {
@@ -406,6 +406,12 @@
       "path": "survey/qualification.json",
       "expectedBytes": 5348,
       "expectedSha256": "1d6fe0023a3d49a64ef7fb509692ee6c9705ce6c7237bda39eb957d6ca6a85ac",
+      "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "survey/radial-error.json",
+      "expectedBytes": 300,
+      "expectedSha256": "27ffbc964efd12edd5a301b54cb593e5e8f7ed3e5d2447cb382d45d8600da4b1",
       "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
     }
   ],

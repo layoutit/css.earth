@@ -138,6 +138,14 @@ export const BODIES: Record<BodyId, BodyData> = {
   pan: body('pan', 'Pan', '618', 14, 0.00028, 'saturn'),
 
   puck: body('puck', 'Puck', '715', 81, 0, 'uranus'),
+  // Volume-equivalent radii of Karkoschka's published prolate shape fits.
+  portia: body('portia', 'Portia', '712', 67.64856167757256, 0, 'uranus'),
+  juliet: body('juliet', 'Juliet', '711', 46.82612683898881, 0, 'uranus'),
+  belinda: body('belinda', 'Belinda', '714', 40.317473596635935, 0, 'uranus'),
+  // Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.
+  // https://arxiv.org/abs/2401.04634; same published prolate radii as above.
+  cordelia: body('cordelia', 'Cordelia', '706', 20.082988502465085, 0.00406, 'uranus'),
+  ophelia: body('ophelia', 'Ophelia', '707', 21.361102076705983, 0.00238, 'uranus'),
   miranda: body('miranda', 'Miranda', '705', 235.7, 4.3, 'uranus'),
   ariel: body('ariel', 'Ariel', '701', 578.9, 83.43, 'uranus'),
   umbriel: body('umbriel', 'Umbriel', '702', 584.7, 85.4, 'uranus'),
