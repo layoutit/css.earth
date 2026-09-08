@@ -1,9 +1,10 @@
 # Comet branch integration with main
 
 PR #37 combines comet head `e15beb931f4b7d57d7a4bbcadc4adf2877ab12b9`
-with main `7b311eb3981d9e359e2174da1d0b01b6e07ebfba`. The first merge resolved
+with main `11f1ff6aa0a9e273fa28f1c868518c2afcfa7b4a`. The first merge resolved
 142 conflicted paths against `679254264fc8e5c5eef7905974482ac60788735e`.
 Main then added six radar asteroids; a second merge resolved nine more conflicts.
+The subsequent UI update from PR #44 merged without conflicts.
 The single registry retains main's 161 objects plus all five comets. The PR remains unmerged.
 
 The authored resolution retains both sets of astronomy fixtures and body records,
