@@ -319,3 +319,71 @@ DPRs, with one retained worker and stable slots. The exact-projection image
 comparison differs in one of 800,000 pixels at DPR 1 and none of 3,200,000 at DPR 2
 at the existing 0.01 comparison threshold. This proves the focused publication
 change, not completion of the full-route performance target.
+
+
+## Combined publication change and same-document repetition
+
+The full `3e86a4f9` capture completed after the real-worker checks above. The
+following cold/warm pair repeats the native Sun → Milky Way → Sun route without
+reloading the document or replacing the retained world. Both use the same build,
+prepared resources and physical input tape; the warm return-to-start differs by
+2 km at about 3.42 million km due to bounded native-wheel rounding.
+
+| Run | Band >25 ms | Band p95 | Maximum movement interval | Style total | Recorder mean |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `retained-publication-owned` | 72/581 | 33.3 ms | 133.3 ms | 3401 ms | 0.96 ms |
+| `same-scene-cold` | 112/593 | 33.4 ms | 400.0 ms | 4362 ms | 1.33 ms |
+| `same-scene-warm` | 176/619 | 33.4 ms | 216.7 ms | 4859 ms | 1.31 ms |
+
+All three sets contain native recorder JSON, compressed Chrome trace and video.
+Synchronization passes, with retained world/input/document identity, no HMR, no
+reported errors and no trace loss. Clock offsets for the cold/warm pair agree
+within 68 microseconds across the recordings. Full hashes and measured clock
+errors are in `output/world-context-zoom/same-scene-comparison.json`.
+
+The cold run's 400 ms interval aligns with a 420.4 ms GPU ScheduleOverlays call
+near initial volume entry. The warm run avoids that particular first-entry
+stall but still has a 216.7 ms interval during the return, aligned with a
+233.6 ms ScheduleOverlays call. These traces do not establish that earlier
+image decoding alone would solve the rendering stalls. Other active browser
+and build workloads were observed on the workstation after the pair; these
+are uncontrolled single runs, not an isolated speedup benchmark. The earlier
+72/581 result is encouraging but is not a stable achieved frame budget.
+
+
+## Orbit projection follows the consumer's demand
+
+Hidden orbit paths previously projected and allocated their entire clipped path
+just to determine a proxy fade. The shared prepared-ring projector now has a
+measurement-only operation beside full geometry publication. Both visit the
+same prepared chords and use identical clipping and occlusion; the measurement
+stops only once the existing 48/128 CSS-pixel fade has saturated. Its return
+value is a scalar, so truncated geometry cannot escape into painting or picking.
+Visible and hovered paths still publish their full original geometry. Endpoint
+transforms are lazy and shared within the visit, including sparse active chords.
+
+Using the recorded camera and optics at 87 planetary-band samples, a pure
+projection census of 5,824 hidden asteroid paths reduces vertex transforms from
+442,624 to 305,580 (31%). 2,749 paths stop early, with every capped extent exactly
+equal to its full-path reference. This counts mathematical work, not saved frame
+time. Evidence: `output/playwright/orbit-demand-work.json`.
+
+Ten settled browser comparisons replay identical recorded physical frames through
+the exact `3e86a4f9` and candidate world renderers at DPR 1/2. All published styles
+are identical, all 44,079 fixture nodes remain retained, and images differ by at
+most one channel level. The fixture uses the published 178-body context, its
+marker assets and renderer CSS. It isolates world annotations; it is not a second
+application scene or a full-route performance trace. Bundle/catalog hashes and
+images: `output/playwright/orbit-demand-replay-settled/`. The broader focused
+shared-world, solar-system and picking suite passes 89 tests; renderer typecheck
+and build pass.
+
+Native baseline navigation/toggles completed 14 views at DPR 1/2. Seven candidate
+DPR 1 views (zoom, asteroid hover, toggles, return) matched rendered declarations
+within camera roundoff and images within one channel level. Separate native runs
+are not exact-history image oracles: hidden labels retain older positions, CSS
+declaration order can vary, and decluttering remembers prior placement. The
+initial full-scene comparisons are therefore not claimed as all-DPR parity; one
+DPR 2 image differs by up to three levels. The exact-history replay above is the
+renderer equivalence evidence. The first replay sampled its 200 ms label fade
+before it had settled and is excluded; the qualified replay waits 500 ms.

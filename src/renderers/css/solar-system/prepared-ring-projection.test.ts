@@ -83,3 +83,39 @@ test('broad phase preserves detailed clipping at limbs, eye plane, near-plane cr
     }
   }
 });
+
+test('measurement demand preserves the clipped extent up to its existing saturation at every physical scale', () => {
+  let seed = 928571;
+  const random = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 2 ** 32);
+  for (const scale of [1, 1e8, 1e16]) for (let view = 0; view < 80; view++) {
+    const distance = (random() - .2) * 500 * scale, radius = 10 ** (random() * 3) * scale;
+    const vertices: Vector3[] = Array.from({ length: 128 }, (_, index) => {
+      const angle = index * Math.PI / 64;
+      return [radius * Math.cos(angle), radius * .7 * Math.sin(angle), distance + radius * .4 * Math.sin(angle)];
+    });
+    const trail = vertices.map((_, index) => view % 3 === 0 && index < 93 ? 0 : (index + 1) / 128);
+    const active = trail.flatMap((weight, index) => weight > 0 ? [index] : []);
+    const occluder: Vector3 = [30 * scale, -15 * scale, -100 * scale];
+    const projector = createPreparedRingProjector({ ...limits, near: .1 * scale,
+      hidden: point => rayHitsSphereBefore(point, occluder, 12 * scale),
+      mayOcclude: createSphereChordTest(occluder, 12 * scale, project) });
+    const segments = projector(vertices, trail, active);
+    const xs = segments.flatMap(s => [s[0], s[2]]), ys = segments.flatMap(s => [s[1], s[3]]);
+    const extent = Math.max(1, Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+    for (const saturation of [48, 128]) {
+      expect(projector.measureExtent(vertices, trail, saturation, active)).toBe(Math.min(extent, saturation));
+    }
+  }
+});
+
+test('a saturated hidden orbit stops transforming chords while its visible path still projects completely', () => {
+  const vertices: Vector3[] = Array.from({ length: 128 }, (_, index) => [100 * Math.cos(index * Math.PI / 64), 80 * Math.sin(index * Math.PI / 64), -200]);
+  const trail = vertices.map(() => 1); let transforms = 0;
+  const projector = createPreparedRingProjector({ ...limits, toEye: p => { transforms++; return p; }, hidden: () => false, mayOcclude: () => false });
+  expect(projector.measureExtent(vertices, trail, 128)).toBe(128);
+  expect(transforms).toBeLessThan(20);
+  transforms = 0;
+  expect(projector(vertices, trail)).toHaveLength(128);
+  expect(transforms).toBe(128);
+  for (const invalid of [0, NaN, Infinity]) expect(() => projector.measureExtent(vertices, trail, invalid)).toThrow();
+});

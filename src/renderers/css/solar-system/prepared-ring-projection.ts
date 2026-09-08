@@ -33,18 +33,18 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   clipX: number;
   clipY: number;
 }) {
-  return (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[]): readonly OrbitSegment[] => {
-    const eyes = activeChords ? null : vertices.map(toEye);
-    const segments: OrbitSegment[] = [];
-    let lastEndIndex = -1, lastEnd: Vector3 | null = null;
+  // Painting and presentation measurement share the exact clipping path. A
+  // measurement may stop once its consumer's existing fade is fully saturated.
+  const visit = (vertices: readonly Vector3[], trail: readonly number[], activeChords: readonly number[] | undefined,
+    segment: (x0: number, y0: number, x1: number, y1: number, weight: number) => boolean) => {
+    const eyes: (Vector3 | undefined)[] = [];
+    const eyeAt = (index: number) => eyes[index] ??= toEye(vertices[index]);
     for (let ordinal = 0; ordinal < (activeChords?.length ?? vertices.length); ordinal++) {
       const index = activeChords?.[ordinal] ?? ordinal;
       const weight = trail[index];
       if (!(weight > 0)) continue;
       const next = (index + 1) % vertices.length;
-      let start = eyes ? eyes[index] : lastEndIndex === index ? lastEnd! : toEye(vertices[index]);
-      let end = eyes ? eyes[next] : toEye(vertices[next]);
-      lastEndIndex = next; lastEnd = end;
+      let start = eyeAt(index), end = eyeAt(next);
       let startDepth = -start[2], endDepth = -end[2];
       if (startDepth <= near && endDepth <= near) continue;
       if (startDepth <= near) {
@@ -65,11 +65,34 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
       for (const [pieceStart, pieceEnd] of pieces) {
         const [x0, y0] = project(pieceStart), [x1, y1] = project(pieceEnd);
         if (![x0, y0, x1, y1].every(Number.isFinite) || Math.hypot(x1 - x0, y1 - y0) < 0.05) continue;
-        segments.push(Object.freeze([x0, y0, x1, y1, weight]));
+        if (!segment(x0, y0, x1, y1, weight)) return;
       }
     }
+  };
+  const projectRing = (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[]): readonly OrbitSegment[] => {
+    const segments: OrbitSegment[] = [];
+    visit(vertices, trail, activeChords, (x0, y0, x1, y1, weight) => {
+      segments.push(Object.freeze([x0, y0, x1, y1, weight]));
+      return true;
+    });
     return Object.freeze(segments);
   };
+  return Object.assign(projectRing, {
+    /** Exact projected extent, capped only at the caller's saturation point.
+     * No partial geometry escapes this measurement-only operation. */
+    measureExtent(vertices: readonly Vector3[], trail: readonly number[], saturation: number, activeChords?: readonly number[]): number {
+      if (!(saturation >= 1) || !Number.isFinite(saturation)) throw new TypeError('Orbit extent saturation must be finite and at least one pixel.');
+      let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
+      let extent = 1;
+      visit(vertices, trail, activeChords, (x0, y0, x1, y1) => {
+        left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
+        top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
+        extent = Math.max(1, right - left, bottom - top);
+        return extent < saturation;
+      });
+      return Math.min(extent, saturation);
+    },
+  });
 }
 
 /** The perspective projection of a sphere lies inside its enclosing cube's

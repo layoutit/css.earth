@@ -20,13 +20,17 @@ const BODY_INDICATOR_DIAMETER = 16;
 const CONTEXT_LINE_WIDTH = 1;
 const ORBIT_FADE_START_PIXELS = 12;
 
-function orbitPresentation(segments: readonly OrbitSegment[], closed: boolean) {
+function orbitPresentation(segments: readonly OrbitSegment[] | number, closed: boolean) {
+  if (typeof segments === 'number') return orbitPresentationForExtent(segments, closed);
   let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
   for (const [x0, y0, x1, y1] of segments) {
     left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
     top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
   }
-  const extent = Math.max(1, right - left, bottom - top);
+  return orbitPresentationForExtent(Math.max(1, right - left, bottom - top), closed);
+}
+
+function orbitPresentationForExtent(extent: number, closed: boolean) {
   const opacity = logarithmicFade(extent, ORBIT_FADE_START_PIXELS, 48);
   // Closed planetary rings and their circles share one zoom fade.
   // Fading trails retain their earlier marker-crowding threshold.
@@ -587,18 +591,27 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const parentDepth = parentEye === null ? 0 : -parentEye[2];
         const parentDiameter = entry.parent && parentDepth > entry.parent.radiusM
           ? 2 * focal * entry.parent.radiusM / Math.sqrt(parentDepth ** 2 - entry.parent.radiusM ** 2) : 0;
+        const hovered = entry.group.dataset.objectHovered === 'true' || label.dataset.objectHovered === 'true' || marker.dataset.objectHovered === 'true' || indicator.dataset.objectHovered === 'true' || host.ownerDocument.activeElement === label || host.ownerDocument.activeElement === indicator;
         const bounds = entry.orbit?.bounds;
-        const segments = navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 &&
-          (!bounds || orbitBoundsMayContribute(toEye(bounds.centerM), bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS)) ? createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
-          mayOcclude: (a, b) => focusMayOcclude(a, b) || selectedMayOcclude(a, b) || Boolean(parentMayOcclude?.(a, b)),
-          near, clipX: width / 2, clipY: height / 2 })(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords) : [];
-        if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(segments, entry.closedOrbit);
+        let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
+        if (navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 &&
+            (!bounds || orbitBoundsMayContribute(toEye(bounds.centerM), bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
+          const projector = createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
+            mayOcclude: (a, b) => focusMayOcclude(a, b) || selectedMayOcclude(a, b) || Boolean(parentMayOcclude?.(a, b)),
+            near, clipX: width / 2, clipY: height / 2 });
+          if (entry.orbitHidden && !hovered) {
+            // Hidden paths have no geometry consumer. Their proxies still need
+            // the exact existing fade, which saturates at 48/128 CSS pixels.
+            measuredExtent = projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
+              entry.closedOrbit ? 48 : 128, entry.orbit.activeChords);
+          } else segments = projector(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords);
+        }
+        if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments, entry.closedOrbit);
         const appearance = entry.orbitAppearance;
         const bodyLod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, diameter);
         const proxyOpacity = 1 - bodyLod.markerOpacity * (1 - appearance.markerOpacity);
         const markerOpacity = (isSelected ? lod.billboardOpacity : 1) *
           (isAnchor ? 1 : opacity * (isSelected ? 1 : proxyOpacity));
-        const hovered = entry.group.dataset.objectHovered === 'true' || label.dataset.objectHovered === 'true' || marker.dataset.objectHovered === 'true' || indicator.dataset.objectHovered === 'true' || host.ownerDocument.activeElement === label || host.ownerDocument.activeElement === indicator;
         const orbitVisibility = entry.orbitHidden && !hovered ? 0 : appearance.opacity * orbitOpacity * opacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         const indicatorOpacity = isAnchor && overview ? 1 :
