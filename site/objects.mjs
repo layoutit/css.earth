@@ -1,3 +1,9 @@
+import asteroid1996hw1Descriptor from "../src/planets/asteroid-1996-hw1/object.json" with { type: "json" };
+import asteroid2008ev5Descriptor from "../src/planets/asteroid-2008-ev5/object.json" with { type: "json" };
+import rashalomDescriptor from "../src/planets/ra-shalom/object.json" with { type: "json" };
+import asteroid1992skDescriptor from "../src/planets/asteroid-1992-sk/object.json" with { type: "json" };
+import asteroid1998ml14Descriptor from "../src/planets/asteroid-1998-ml14/object.json" with { type: "json" };
+import asteroid2002ce26Descriptor from "../src/planets/asteroid-2002-ce26/object.json" with { type: "json" };
 import ymirDescriptor from "../src/planets/ymir/object.json" with { type: "json" };
 import siarnaqDescriptor from "../src/planets/siarnaq/object.json" with { type: "json" };
 import himaliaDescriptor from "../src/planets/himalia/object.json" with { type: "json" };
@@ -895,6 +901,42 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(yorpDescriptor);
     }, yorpDescriptor.properties.worldFrame),
+
+  object("asteroid-1996-hw1", "1996 HW1", "asteroid", "#aaaaaa", 2.0457349024000404,
+    "Explore 1996 HW1 in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asteroid1996hw1Descriptor);
+    }, asteroid1996hw1Descriptor.properties.worldFrame),
+
+  object("asteroid-2008-ev5", "2008 EV5", "asteroid", "#aaaaaa", 0.9597570834058771,
+    "Explore 2008 EV5 in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asteroid2008ev5Descriptor);
+    }, asteroid2008ev5Descriptor.properties.worldFrame),
+
+  object("ra-shalom", "Ra-Shalom", "asteroid", "#aaaaaa", 0.8320332524916527,
+    "Explore Ra-Shalom in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(rashalomDescriptor);
+    }, rashalomDescriptor.properties.worldFrame),
+
+  object("asteroid-1992-sk", "1992 SK", "asteroid", "#aaaaaa", 1.2485450870597032,
+    "Explore 1992 SK in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asteroid1992skDescriptor);
+    }, asteroid1992skDescriptor.properties.worldFrame),
+
+  object("asteroid-1998-ml14", "1998 ML14", "asteroid", "#aaaaaa", 2.407527644248636,
+    "Explore 1998 ML14 in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asteroid1998ml14Descriptor);
+    }, asteroid1998ml14Descriptor.properties.worldFrame),
+
+  object("asteroid-2002-ce26", "2002 CE26 Primary", "asteroid", "#aaaaaa", 2.232934797602879,
+    "Explore 2002 CE26 Primary in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asteroid2002ce26Descriptor);
+    }, asteroid2002ce26Descriptor.properties.worldFrame),
 
   object("vesta", "Vesta", "asteroid", "#a49c8d", 2.36,
     "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.", async () => {

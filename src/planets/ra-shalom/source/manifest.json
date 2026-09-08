@@ -1,0 +1,240 @@
+{
+  "schema": "cssra-shalom-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "ra-shalom-shape",
+      "path": "shape/rashalom.obj",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj",
+      "credit": "Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 1150
+      },
+      "coverage": "This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied.",
+      "expectedBytes": 67284,
+      "expectedSha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "ra-shalom-research-rashalom",
+      "path": "reference/rashalom.pdf",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf",
+      "credit": "Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 2440297,
+      "expectedSha256": "36447f3728e28c8a7b63a70617ad08b8e3a70e58f6920708b6fabedbb10fe1a5"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj",
+      "credit": "Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 75741,
+      "expectedSha256": "a65ce4cac653a90f2de8445c7439d5edcc7f10985573a690eb28b212e7dd7685",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "ra-shalom-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 11804,
+      "expectedSha256": "3d6b9baf5233445ac4d986e407c697d865d0c986884d2fdb8edf32bb8fc09801"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 975,
+      "expectedSha256": "96dbc0a5e98131766ca44e871302c7da4ebfccb2009374eda74c59fa42190a7f"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1320,
+      "expectedSha256": "9a344d1d36e459ec5b2b9d1904d8ab74b6cdd6952cd4459efa9b0197a05889d7"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 981,
+      "expectedSha256": "e9d39b5c6d97e7162d9da2b230413f9757ab96d13c55b9fa5b48c35a6a61996d"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3099,
+      "expectedSha256": "6a2c3536ab36670019b7ae21da8a4087f2d6364d8120d2ab844c893840fb5b81"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 5650,
+      "expectedSha256": "299ebf490881b4158d989c397788e226e82f2fd56d537da9b5de32378dc108cf"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7758,
+      "expectedSha256": "4bfb2785deaabcef8fd028c9cf7c47fac1799e90d86c20698a1c65c174262608"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1755,
+      "expectedSha256": "e01683393f61e17a89e397e93c0b8368c7519b8e3a9f22cbc7fc57df2decd55b"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7048,
+      "expectedSha256": "8cbdf52d86cb25e44fc7a224bf435bebd63ecddde5632bc4745bf4969dcbd9bc"
+    },
+    {
+      "path": "reference/jpl-shape-index.html",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2608,
+      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2006,
+      "expectedSha256": "a9e11fe4cffba067eea37e6de9216f1676e05b634a9e3ee82416fe1dfc0f12e7"
+    },
+    {
+      "path": "reference/pds-a2100_spin_state.csv",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 55,
+      "expectedSha256": "df9aa653fefa91fd37925e0bc96810640b1f871a41ce261e07f45efd78cc6a31"
+    },
+    {
+      "path": "reference/pds-a2100_spin_state.xml",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 10946,
+      "expectedSha256": "0062a604e0860223e3e7a76859f06a9127c921eea39032a8842c380134903102"
+    },
+    {
+      "path": "reference/pds-a2100rashalom.xml",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 10567,
+      "expectedSha256": "f9fed2bb09365e3294ca881ac0e81d59fd7fed592f958dce3dd0e62f734fce69"
+    },
+    {
+      "path": "reference/pds-bundle_description.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7530,
+      "expectedSha256": "e60fe2bc0a6364689d1cf4e8b467e808dec7177a23d2f0bb26e62dada8f052ef"
+    },
+    {
+      "path": "reference/rashalom-2016.html",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 34167,
+      "expectedSha256": "47d489d140353f1f005580d03067d2177223f9b3d26057fc72d51753c28e42ce"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 144978,
+      "expectedSha256": "261f193bf3ba1bea4d3db3b458ed65d9d69f45fca8ac96d6d7116360ac61454e"
+    },
+    {
+      "path": "reference/scalar-anchors.json",
+      "purpose": "Independent NumPy source-surface scalar anchors; measured against every original triangle.",
+      "expectedBytes": 9668,
+      "expectedSha256": "afa6ae7f80d7439f26dba1234d69cea5706543dbaeca118203177c6801a640b7"
+    },
+    {
+      "path": "reference/pds-mesh-comparison.json",
+      "purpose": "Independent parsed-coordinate and connectivity comparison with the PDS archive counterpart.",
+      "expectedBytes": 176,
+      "expectedSha256": "f3d2554e5ec688a2b3969355141f88f8bb3e6d8c5717e09c054607a96063a086"
+    }
+  ]
+}

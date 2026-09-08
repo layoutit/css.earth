@@ -30,7 +30,8 @@ describe('asteroid positions against JPL Horizons', () => {
       'betulia': 390, 'castalia': 160, 'asteroid-1998-wt24': 530, 'asteroid-1994-cc': 330,
       'fides': 260, 'penelope': 1500, 'alphonsina': 1920, 'angelina': 320, 'ganymed': 1320, 'moshup': 230,
       'cybele': 400, 'aurora': 3150, 'palma': 350, 'thule': 350, 'hektor': 550, 'hekate': 250, 'phaethon': 400, 'harmonia': 950, 'panopaea': 200, 'desdemona-666': 1400, 'asteroid-1950-da': 350, 'apophis': 200, 'donaldjohanson': 250,
-      geographos: 2000, bacchus: 190, mithra: 260, nereus: 145, golevka: 750, yorp: 330}
+      geographos: 2000, bacchus: 190, mithra: 260, nereus: 145, golevka: 750, yorp: 330,
+      'asteroid-1996-hw1': 845, 'asteroid-2008-ev5': 230, 'ra-shalom': 265, 'asteroid-1992-sk': 495, 'asteroid-1998-ml14': 1020, 'asteroid-2002-ce26': 360}
     for (const id of ASTEROID_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])

@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf",
+  "diameterKm": 2.3,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 19.793,
+  "poleEclipticJ2000Degrees": [
+    75,
+    16
+  ],
+  "limitations": "This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj",
+    "vertices": 1148,
+    "faces": 2292,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.892511
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      2.9584220000000006,
+      2.455054,
+      1.9541199999999999
+    ],
+    "volumeCubicKm": 6.203733938477497,
+    "volumeEquivalentRadiusKm": 1.139868760644414,
+    "radialRangeKm": [
+      0.8264754790137455,
+      1.5115439988253736
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 2292,
+    "ambiguous": 0,
+    "maxErrorMeters": 6.821210263296962e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2292,
+    "sourceVertices": 1148,
+    "weldedVertices": 1148,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 24,
+    "estimatedErrorMeters": 23.015840530395508,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 6200198621.120028
+    }
+  }
+}

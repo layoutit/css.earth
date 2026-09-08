@@ -1,0 +1,36 @@
+{
+  "checked": "2026-09-08",
+  "scope": "Bounded primary study, source archive and complementary observations survey. No resolved optical texture located among these candidates.",
+  "candidates": [
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj",
+      "adds": "Original full source radar shape",
+      "status": "included",
+      "reason": "The unmodified source has 1392 vertices and 2780 faces. Original kilometer coordinates are retained."
+    },
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+      "adds": "Published physical properties, radar/lightcurve constraints and model uncertainty",
+      "status": "included",
+      "reason": "Half the 2.02 km volume-equivalent diameter in Magri et al. (2011), Table 3, with 8% diameter uncertainty. Original vertices are not rescaled."
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-8567.radar.shape-model/data/a8567.xml",
+      "adds": "PDS source coordinate contract",
+      "status": "included as qualification",
+      "reason": "The paired a8567.tab has exactly the same numerical vertices and faces as the selected JPL OBJ. The label identifies kilometer units, modeled center of mass, principal axes and positive Z spin axis."
+    },
+    {
+      "url": "https://www.sciencedirect.com/science/article/pii/S001910351730060X",
+      "adds": "SHERMAN thermophysical study (2017)",
+      "status": "deferred",
+      "reason": "The indexed study applies thermal modeling to multiple HW1 observations; full text could not be retrieved in this bounded survey. No thermal field, alternate scale, or surface texture is inferred from an unread source."
+    },
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/1996HW1/1996hw1.html",
+      "adds": "Radar images and optical/infrared spectra in the linked study",
+      "status": "included as qualification",
+      "reason": "Radar delay-Doppler pixels overlap surface locations; disk-integrated spectra do not provide a registered photographic or compositional map. The paper describes weak radar coverage and optical constraints over nearly the entire shape."
+    }
+  ]
+}

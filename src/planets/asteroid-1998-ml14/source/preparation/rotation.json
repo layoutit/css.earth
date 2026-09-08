@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 0,
+  "declinationDegrees": 90,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "qualification": "The archived 1998 radar reconstruction has no determined inertial spin pole. Use the existing fixed arbitrary display frame; optional directional lighting is illustrative. The historical modeling period and newer photometric period are recorded as information only, and neither is propagated into a current attitude.",
+  "source": "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf",
+  "coordinateSystem": "Unmodified body-centered Cartesian mesh with arbitrary inertial display axes; positive X defines displayed zero longitude; no observed inertial pole is assigned."
+}

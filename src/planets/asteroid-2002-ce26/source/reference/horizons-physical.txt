@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27276049%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 276049 (2002 CE26)            2026-Sep-08 08:22:13
+Rec #:  276049 (+COV) Soln.date: 2026-Aug-31_06:26:06   # obs: 2160 (2001-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457377.5 ! 2015-Dec-21.00 (TDB)         Residual RMS= .30813
+   EC= .5598636926373228   QR= .98337602142478     TP= 2456950.3184221033
+   OM= 161.9253148687242   W=  228.0533149954937   IN= 47.30025916420581
+   A= 2.23425335509635     MA= 126.0718022548609   ADIST= 3.485130688767921
+   PER= 3.3397             N= .295124623           ANGMOM= .021305149
+   DAN= 2.45129            DDN= 1.11621            L= 18.9627812
+   B= -33.1345908          MOID= .100019           TP= 2014-Oct-19.8184221033
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 1.75               ROTPER= 3.2931
+   H= 16.64                G= -.250                B-V= n.a.
+                           ALBEDO= .070            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#257, OCC=0           radar( 7 delay, 0 Dop.)
+2: source=ORB
+*******************************************************************************
