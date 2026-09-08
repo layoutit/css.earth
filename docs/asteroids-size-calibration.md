@@ -85,4 +85,35 @@ Each prepared body has 800 native raster triangles. The preparation reports no w
 
 [Full scientific evidence](asteroids-size-calibration-scientific-evidence.tar.gz) contains the pinned query results, exact comparison images, inspection records and verification helpers (40.65 MB compressed).
 
-Production, browser and fresh-install qualification is in progress.
+### Complete baseline checks: `863c3adf`
+
+Source verification and full `pnpm test` passed with an 8 GiB Node heap, as did all 49 prepared-package checks, production build and assembly. Primary and fresh-checkout Chrome matrices completed **196 cases**: all 49 additions at DPR 1/2 in both checkouts. Each retained 800 native raster triangles through lens/shadow changes and native drag. The standard DOM browser checks also passed for all 49 at both DPRs. Overview and mobile checks passed; Shadows and asteroid orbits started off.
+
+Normal fresh `pnpm install --frozen-lockfile` reproduced **all 227 compiled object documents byte for byte**. Runtime installation downloaded all **1,715 asteroid assets**, with zero reused assets, totaling **382,888,406 inventory bytes**. Independent normal source acquisition then restored and verified **1,420 manifest entries across all 49 bodies**. This was a fresh checkout on the existing macOS arm64 host with Node 24.19.0 and its installed browser.
+
+[Selected default views](https://github.com/layoutit/cssEarth/blob/feat/asteroids-wikipedia-models/docs/asteroids-size-calibration.webp) · [All 49 default views](https://github.com/layoutit/cssEarth/blob/feat/asteroids-wikipedia-models/docs/asteroids-size-calibration-gallery.webp)
+
+### Final main integration: `7b59763e`
+
+The final application incorporates main `c6850e28`, including its shared orbit-renderer and comet updates. **74 focused tests passed**, production built **228 pages**, and all **227 objects assembled**. All **1,749 checked public/dist assets** matched their pins: the 1,715 asteroid assets and 34 incoming comet assets. All 49 asteroid packages and compiled payloads remained byte-identical to `863c3adf`.
+
+Preparation verified 225 unchanged compiler-input closures. A partial normal pass produced 75 objects: 74 matched the baseline and the updated comet changed as expected. The remaining 152 payloads were reused, then the normal targeted entry point prepared Sun and comet 67P. All 227 resulting compiled payloads match the baseline except the comet; the Sun's 226-body world context includes the incoming orbit metadata. The complete 227-body fresh-postinstall comparison and full suites above belong to `863c3adf`.
+
+Dike, Massalia, Gryphia, IAU, Schorria and Tartaglia completed final DPR 1/2 browser checks; overview at both DPRs and mobile also passed. The body harness hung during cleanup after Chrome exited and was stopped with SIGTERM. Its `exitCode: null` is preserved; all 12 completed cases were independently revalidated against production-file hashes before only overview/mobile resumed.
+
+### Final drag measurements
+
+Twelve native mouse-drag traces at `7b59763e` covered the five additions below plus Pallas as a reference, at DPR 1/2 in headless Chrome 152.0.7977.76. Each measured about 2.5 seconds at a 1505 × 1237 CSS-pixel viewport, with optional Shadows enabled. All drags moved the scene with no recorded errors.
+
+| Body | Draw events/s, DPR 1 / 2 | Draw-event p95 ms, DPR 1 / 2 |
+| --- | ---: | ---: |
+| Pallas (reference) | 59.41 / 59.01 | 3.71 / 3.60 |
+| Dike | 59.40 / 59.01 | 9.40 / 9.30 |
+| Massalia | 59.40 / 58.98 | 9.58 / 9.55 |
+| Gryphia | 58.99 / 59.03 | 8.18 / 8.14 |
+| Schorria | 59.39 / 59.03 | 7.17 / 7.81 |
+| Tartaglia | 59.02 / 59.40 | 8.14 / 8.25 |
+
+Cadence uses Chrome's traced `DrawFrame` events; duration is `DirectRenderer::DrawFrame`. These measurements describe the recorded headless workload, rather than display presentation latency or performance on every device. Browser response interception binds the delivered production-file bytes and does not measure HTTP transfer timing.
+
+[Complete qualification record](asteroids-size-calibration-validation.json) · [Browser evidence and raw traces](asteroids-size-calibration-browser-evidence.tar.gz). The archive preserves the full browser receipts, selected captures, normal-installation and source-restoration receipts, the cleanup interruption, and all 12 raw traces with their hashes.
