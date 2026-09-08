@@ -85,8 +85,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 105884,
-      "expectedSha256": "c66b7b2340498910698cc05deb7a0731f42cbfe719724d6c1860f83f38ad5459",
+      "expectedBytes": 103006,
+      "expectedSha256": "456c01283820d18a28a54f758f2b7c082c51a8472f6bb310182adeb59b73a72f",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_vis.tab",
       "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
       "license": "PDS public scientific archive",
@@ -130,7 +130,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1621,
-      "expectedSha256": "b7c1fed78f615d4cbfcfe6c95875f1abe81597f22550f1ec7e2f9bbe3c8cd191",
+      "expectedSha256": "f48d408e03c31559b136ce9b6feec744ddc91af29f0297bc6b1aed0f7a63b30a",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -142,7 +142,7 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3554,
-      "expectedSha256": "68a796a500eba9480b5b4c33a60563909499f69479fa8f3afe8542c226817821",
+      "expectedSha256": "f48695905fb2493c8fee67e6cfee05679319f5bac65b711ada2965e11881bba0",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
