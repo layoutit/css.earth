@@ -56,11 +56,11 @@ try {
       assert.equal(before.scenes, 0, 'The replacement exercises the gap after detail retirement');
       const started = performance.now();
       await page.waitForFunction(id => performance.getEntriesByName('cssEarth:navigation:first-motion')
-        .some(entry => entry.detail?.to === id), replacement, { timeout: 1200 });
+        .some(entry => entry.entryType === 'mark' && entry.detail?.to === id), replacement, { timeout: 1200 });
       const moving = await page.evaluate(id => {
-        const entries = performance.getEntriesByName('cssEarth:navigation:requested').filter(entry => entry.detail?.to === id);
+        const entries = performance.getEntriesByName('cssEarth:navigation:requested').filter(entry => entry.entryType === 'mark' && entry.detail?.to === id);
         const requested = entries.at(-1);
-        const motion = performance.getEntriesByName('cssEarth:navigation:first-motion').find(entry => entry.detail?.id === requested.detail.id);
+        const motion = performance.getEntriesByName('cssEarth:navigation:first-motion').find(entry => entry.entryType === 'mark' && entry.detail?.id === requested.detail.id);
         return { selected: window.__cssEarth.selectedObjectId, ready: window.__cssEarth.ready,
           scenes: document.querySelectorAll('.planet-stage > .polycss-camera').length,
           changedTransforms: [...window.__replacementStyles].filter(([node, transform]) => node.style.transform !== transform).length,

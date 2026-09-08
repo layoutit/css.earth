@@ -4,7 +4,10 @@ Object selection starts one application-owned world flight. Loading a detailed
 object changes its presentation owner; it does not start another camera path or
 reset the flight clock. The persistent universe continues publishing the latest
 pose while the incoming retained scene connects. The incoming navigation owner
-joins that pose before activation finishes.
+joins that pose before activation finishes. A replacement selection can retire a
+detail that is still activating; the persistent world then owns departure
+publication while the replacement factory and assets load. Its camera starts
+from the last drawn pose and retains the same destination-detail hold.
 
 Preparation supplies `tree.activationGroups` for every registered object. Each
 group contains at most 64 existing sibling leaves; containers and leaves whose
@@ -82,6 +85,7 @@ node --test tools/prepared-activation-transport.test.mjs
 HOPS=30 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:navigation-stress:matrix
 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 DPR=2 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
+ORIGIN=http://127.0.0.1:4221 node site/test/replacement-flight-browser.mjs
 node site/test/flight-registry-browser.mjs http://127.0.0.1:4210
 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 mars
 DPR=2 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 saturn
@@ -115,3 +119,11 @@ supersession, and wheel/drag/Escape interruption. Artifacts retain seeds, action
 coordinates, camera state, source revision, Chrome traces, and diagnostics.
 A failed chain remains failed; reloads, competing selections, lost retained
 nodes, wrong destinations, and application errors are not counted as coverage.
+
+For a shorter run, `SEEDS=2800682729,2685674292,1555659821` selects three of
+the matrix's chains. `HOPS` sets selections per chain. The replacement-flight
+check uses native sidebar clicks during activation, holds the destination's
+prepared bank, and verifies that retained-world transforms change before
+releasing those bytes, then checks arrival at DPR 1 and 2.
+
+Recorded results and remaining limits are in [flight qualification](flight-qualification.md).
