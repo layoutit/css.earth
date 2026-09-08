@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "dec70ea339234e2aa84fcfa75c9faae7c07ed48c801c9f20294e98ee81486cf5"
+    "sha256": "35f55fb9ebb212e9b15feae4d5a2338120572964e203329a84da099f7a01d32a"
   },
   "id": "saturn",
   "properties": {
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "73992b49fd4c12caae215d8699c1e6c662d33e144ffffa6c8954ac0185f853e8"
+          "sha256": "5f193a898d67f65fd9a4e3c8bbdb1168003f70a33afab63a2c123a050236a677"
         },
         {
           "id": "geometry",
@@ -51,7 +51,7 @@
         {
           "id": "surface",
           "path": "source/preparation/surface.json",
-          "sha256": "7eb6b780e8f338a3eedb3286fb092b58eb58121866be10a933aab881842324e6"
+          "sha256": "174aaeebbc2c1aa6075903414eace181cf37974dd0eccf1106d62e5ae4dce0e8"
         },
         {
           "id": "materials",

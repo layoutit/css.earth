@@ -235,11 +235,13 @@ export function locallyMaintainedFile(target, rel) {
   return ["README.md", "AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs",
     "src/index.ts", "src/asteroids.ts", "src/asteroids.test.ts", "src/data/asteroidElements.data.ts", "tools/generate-asteroids.mjs",
     "src/comets.ts", "src/comets.test.ts", "src/data/cometElements.data.ts", "tools/generate-comets.mjs",
-    "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs",
+    "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs", "tools/lib/fit-libration.mjs",
+    "tools/scene-ephemeris.mjs", "tools/acquire-scene-ephemeris.mjs",
     "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",
     "src/bodies.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
-    "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
-    /^src\/(?:data\/satelliteElements\.data|__fixtures__\/horizons)(?:\.[a-z-]+)?\.ts$/.test(rel);
+    "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/satellites.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
+    rel.startsWith("source/scene-epoch/") ||
+    /^src\/(?:data\/satelliteElements\.data|__fixtures__\/horizons)(?:\.[a-z0-9-]+)?\.ts$/.test(rel);
 }
 
 function packageOwnedFiles() {

@@ -3,30 +3,44 @@ import { directionOnMap, mapDirection, orbitMapCamera } from './surface-minimap-
 import { surfaceViewRectangle } from './surface-minimap-rectangle.mjs';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mjs';
 
-export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onInteraction }) {
-  const maps = [...drawer.querySelectorAll('[data-surface-minimap]')];
+export function loadSurfacePreview(map) {
+  const image = map.querySelector('[data-surface-preview-src]');
+  if (!image || image.hasAttribute('src')) return;
+  image.src = image.dataset.surfacePreviewSrc;
+  map.style.setProperty('--surface-preview-image', `url(${JSON.stringify(image.dataset.surfacePreviewSrc)})`);
+}
+
+export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onInteraction, surfaceReader }) {
+  const maps = [...drawer.querySelectorAll('[data-surface-minimap], .planet-surface-minimap')];
   const events = new AbortController();
   const elements = new Map(maps.map(map => [map, {
-    config: JSON.parse(map.dataset.surfaceMinimap),
+    config: map.dataset.surfaceMinimap ? JSON.parse(map.dataset.surfaceMinimap) : null,
     rectangles: [...map.querySelectorAll('.planet-minimap-viewport')],
+    size: null,
   }]));
   let camera = null, unsubscribe = null, frame = null, disposed = false;
   let playing = false, pinching = false;
   const pointers = new Map();
   let pinchDistance = null;
-  const active = map => !map.closest('[data-lens-details]')?.hidden;
+  let visibleMaps = [];
+  const active = map => map.isConnected && !documentTarget.hidden && !map.closest('[hidden], details:not([open])');
 
   function context(map) {
-    if (!camera?.navigation || !active(map)) return null;
-    return surfaceMapContext(elements.get(map).config, camera, documentTarget, windowTarget);
+    if (!camera?.navigation || !active(map) || !elements.get(map).config) return null;
+    return surfaceReader ? surfaceReader.read(map, camera)
+      : surfaceMapContext(elements.get(map).config, camera, documentTarget, windowTarget);
   }
 
   function render() {
     frame = null;
     if (disposed) return;
     let visible = false;
-    for (const map of maps) {
-      const bounds = map.getBoundingClientRect();
+    for (const map of visibleMaps) {
+      if (!active(map)) continue;
+      loadSurfacePreview(map);
+      const item = elements.get(map);
+      if (!item.config) continue;
+      const bounds = item.size ??= map.getBoundingClientRect();
       if (!bounds.width || !bounds.height) continue;
       const state = context(map);
       map.dataset.ready = String(Boolean(state));
@@ -56,8 +70,20 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     if (playing && visible) schedule();
   }
   const schedule = () => {
-    if (!disposed && frame === null) frame = windowTarget.requestAnimationFrame(render);
+    if (!disposed && visibleMaps.some(active) && frame === null) frame = windowTarget.requestAnimationFrame(render);
   };
+  function syncVisibility() {
+    visibleMaps = maps.filter(active);
+    if (visibleMaps.some(map => elements.get(map).config)) {
+      unsubscribe ??= camera?.sharedView?.subscribe(schedule) ?? null;
+      schedule();
+    } else {
+      unsubscribe?.(); unsubscribe = null;
+      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+      frame = null;
+      if (visibleMaps.length) schedule();
+    }
+  }
   function navigate(map, u, v) {
     const state = context(map);
     if (!state) return;
@@ -85,6 +111,7 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     }));
   }
   for (const map of maps) {
+    if (!elements.get(map).config) continue;
     map.addEventListener('pointerdown', event => {
       if (!camera?.navigation || event.button !== 0) return;
       event.preventDefault(); event.stopPropagation();
@@ -131,20 +158,33 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     }, { signal: events.signal });
     map.addEventListener('dragstart', event => event.preventDefault(), { signal: events.signal });
   }
-  const observer = maps.length ? new windowTarget.MutationObserver(schedule) : null;
-  for (const detail of drawer.querySelectorAll('[data-lens-details]')) observer?.observe(detail, { attributes: true, attributeFilter: ['hidden'] });
-  for (const detail of drawer.querySelectorAll('details')) observer?.observe(detail, { attributes: true, attributeFilter: ['open'] });
-  const resize = maps.length && windowTarget.ResizeObserver ? new windowTarget.ResizeObserver(schedule) : null;
+  const observer = maps.length ? new windowTarget.MutationObserver(syncVisibility) : null;
+  // Watch visibility/connection owners, not our own rectangle's hidden writes.
+  const ancestors = new Set();
+  for (const map of maps) for (let node = map; node; node = node.parentElement) ancestors.add(node);
+  for (const node of ancestors) observer?.observe(node, { childList: true, attributes: true, attributeFilter: ['hidden', 'open'] });
+  const resize = maps.length && windowTarget.ResizeObserver ? new windowTarget.ResizeObserver(entries => {
+    for (const entry of entries) {
+      const box = entry.borderBoxSize?.[0];
+      elements.get(entry.target).size = box?.inlineSize > 0 && box?.blockSize > 0
+        ? { width: box.inlineSize, height: box.blockSize } : null;
+    }
+    syncVisibility();
+  }) : null;
   for (const map of maps) resize?.observe(map);
-  windowTarget.addEventListener('resize', schedule, { signal: events.signal });
+  windowTarget.addEventListener('resize', () => {
+    for (const item of elements.values()) item.size = null;
+    syncVisibility();
+  }, { signal: events.signal });
+  documentTarget.addEventListener('visibilitychange', syncVisibility, { signal: events.signal });
+  syncVisibility();
   return {
     setPlaybackState(state) { playing = state.allowed; schedule(); },
     setCamera(next) {
-      unsubscribe?.(); camera = next;
-      unsubscribe = next?.sharedView?.subscribe(schedule) ?? null;
+      unsubscribe?.(); unsubscribe = null; camera = next;
       pointers.clear(); pinching = false; pinchDistance = null;
       for (const map of maps) delete map.dataset.dragging;
-      schedule();
+      syncVisibility();
     },
     destroy() {
       disposed = true; unsubscribe?.(); observer?.disconnect(); resize?.disconnect(); events.abort();

@@ -3,6 +3,8 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
+import { screenPicking } from '../navigation/screen-picking.js';
+import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import { pointPhotometry } from '../stars/prepared-point-field-runtime.js';
 import type { PreparedCssPointField } from '../stars/types.js';
 import type { PreparedWorldContext } from './prepared-world-context.js';
@@ -77,8 +79,8 @@ export function worldContextPointAppearance(plan: PreparedWorldContext, field: P
 }
 
 /** Retained single-node renderer. It consumes the checked point atlas; it creates no image or geometry. */
-export function mountWorldContextPointSource({ host, before, plan, field, resolveResource }: {
-  host: HTMLElement; before: Element; plan: PreparedWorldContext; field: PreparedCssPointField; resolveResource(path: string): string;
+export function mountWorldContextPointSource({ host, before, plan, field, resolveResource, pickingHost = host }: {
+  host: HTMLElement; before: Element; plan: PreparedWorldContext; field: PreparedCssPointField; resolveResource(path: string): string; pickingHost?: HTMLElement;
 }) {
   if (!plan.focus.pointSource) return null;
   const element = host.ownerDocument.createElement('s');
@@ -87,12 +89,16 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
   element.style.backgroundImage = `url(${JSON.stringify(resolveResource(field.atlas.path))})`;
   host.insertBefore(element, before);
   const navigation = bindObjectNavigationTarget(element, host);
+  const picking = screenPicking(pickingHost);
+  let navigationEnabled = true, target: ScreenPickTarget[] = [];
   let destroyed = false;
   return Object.freeze({ element,
+    setNavigationEnabled(enabled: boolean) { navigationEnabled = enabled; picking.publish(element, enabled ? target : []); },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, publication: PointSourcePublication = {}) {
       if (destroyed) return;
       const appearance = worldContextPointAppearance(plan, field, world, viewport, publication);
       if (!appearance || appearance.opacity <= 0 || appearance.luminance <= 0) {
+        target = []; picking.publish(element, target);
         element.style.visibility = 'hidden'; navigation.update(null); return;
       }
       const size = appearance.radiusPx * 2 * field.atlas.haloRadii;
@@ -102,9 +108,12 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
       const alpha = appearance.opacity * appearance.luminance;
       element.style.opacity = String(alpha);
       navigation.update(alpha > .1 ? plan.focus.id : null, plan.focus.name);
+      target = alpha > .1 ? [{ element, rank: -1, shape: { kind: 'rect', left: appearance.x - size / 2,
+        top: appearance.y - size / 2, right: appearance.x + size / 2, bottom: appearance.y + size / 2 } }] : [];
+      picking.publish(element, navigationEnabled ? target : []);
       element.dataset.pointSourceDiameter = String(appearance.diameterPx);
     },
-    destroy() { if (!destroyed) { destroyed = true; navigation.destroy(); element.remove(); } },
+    destroy() { if (!destroyed) { destroyed = true; picking.remove(element); navigation.destroy(); element.remove(); } },
   });
 }
 

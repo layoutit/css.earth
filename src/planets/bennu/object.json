@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9c40a1e92a9885ab3bede32a17af50c720fa5dc835244763418114c6251e92f6"
+    "sha256": "69d468174e54fedab5b05f9782cbabcc5138942d023d1dc7b60638f80293c0fb"
   },
   "id": "bennu",
   "properties": {
@@ -61,7 +61,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "f974f70b89ae4bbc4355a4be13785e8cf3cd4e4deb12aa21bf817af781f4cda7"
+          "sha256": "95b678ef073f8566a545d6a2e8276ccc5d0e0d95a0322be77eb4484663eb8281"
         },
         {
           "id": "rotation",
@@ -71,7 +71,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "26dfbde97dd6b8a153ebfc7274bb15ae9ba2fe063ac460bcaa58c15c35dd0abd"
+          "sha256": "11ad30ad51acfbe05534ccd7f38e51bdd3e1ee5ad1c4403760d18d4c49c4c33e"
         },
         {
           "id": "title",

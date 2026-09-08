@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2751%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                51 Nemausa (A858 BA)           2026-Sep-07 20:32:53
+Rec #:      51 (+COV) Soln.date: 2026-Jun-05_03:05:19  # obs: 12525 (1863-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457839.5 ! 2017-Mar-27.00 (TDB)         Residual RMS= .23843
+   EC= .06692524990276839  QR= 2.207233187206236   TP= 2458245.6876116404
+   OM= 176.0189220446626   W=  2.504483009323318   IN= 9.980210230817471
+   A= 2.365548083876699    MA= 249.9644351491493   ADIST= 2.523862980547162
+   PER= 3.63836            N= .270898377           ANGMOM= .026398093
+   DAN= 2.20737            DDN= 2.52369            L= 178.4855536
+   B= .4339129             MOID= 1.21113002        TP= 2018-May-07.1876116404
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 69.0795            ROTPER= 7.783
+   H= 7.72                 G= .080                 B-V= .789
+                           ALBEDO= .100            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#158, OCC=0
+2: source=ORB
+*******************************************************************************

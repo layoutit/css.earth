@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2711%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               11 Parthenope (A850 JA)         2026-Sep-07 20:32:54
+Rec #:      11 (+COV) Soln.date: 2026-Jun-05_03:03:26  # obs: 10636 (1850-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457999.5 ! 2017-Sep-03.00 (TDB)         Residual RMS= .27945
+   EC= .1004692890966026   QR= 2.206082926561954   TP= 2457514.9711318435
+   OM= 125.5590146314293   W=  195.8660539648773   IN= 4.62977341059837
+   A= 2.452482055166731    MA= 124.3411769221818   ADIST= 2.698881183771507
+   PER= 3.84076            N= .256622846           ANGMOM= .026802871
+   DAN= 2.68745            DDN= 2.21378            L= 321.375893
+   B= -1.2644565           MOID= 1.19312           TP= 2016-May-06.4711318435
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 71.4435            ROTPER= 13.7204
+   H= 6.73                 G= .150                 B-V= .837
+                           ALBEDO= .191            STYP= Sk
+
+ASTEROID comments: 
+1: soln ref.= JPL#142, OCC=0
+2: source=ORB
+*******************************************************************************

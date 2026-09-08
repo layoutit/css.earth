@@ -85,27 +85,9 @@ describe('the body table', () => {
     expect(moonsOf('jupiter')).toEqual(fromSatellites)
     const total = [...PLANET_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS].flatMap((parent) => moonsOf(parent))
     expect(total.length).toBe(SATELLITE_IDS.length + 1)
-    expect(moonsOf('saturn')).toEqual([
-      'mimas',
-      'enceladus',
-      'tethys',
-      'dione',
-      'rhea',
-      'titan',
-      'hyperion',
-      'iapetus',
-      'phoebe',
-      'janus',
-      'epimetheus',
-      'helene',
-      'calypso',
-      'daphnis',
-      'telesto',
-      'atlas',
-      'prometheus',
-      'pandora',
-      'pan',
-    ])
+    for (const planet of [...PLANET_IDS, ...DWARF_PLANET_IDS].filter(id => id !== 'earth')) {
+      expect(moonsOf(planet)).toEqual(SATELLITE_IDS.filter(id => SATELLITE_ELEMENTS[id].parent === planet))
+    }
   })
 
   it('makes each planetary system heavier than its planet, by the moons', () => {

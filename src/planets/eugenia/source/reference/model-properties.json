@@ -1,0 +1,73 @@
+{
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "table": "Table 1 and Table A.1",
+  "diameterKm": 188,
+  "diameterInterpretation": "Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average.",
+  "periodHours": 5.699151,
+  "poleEclipticJ2000Degrees": [
+    128,
+    -35
+  ],
+  "massKg": 5800000000000000000,
+  "shape": {
+    "source": "https://observations.lam.fr/astero/3Dshape/45_Eugenia_mpcd.obj",
+    "vertices": 3634,
+    "faces": 7264,
+    "units": "km",
+    "firstVertexKm": [
+      -7.599606,
+      -0.2306792,
+      61.276493
+    ],
+    "firstFaceZeroBased": [
+      0,
+      910,
+      911
+    ],
+    "extentsKm": [
+      207.8269,
+      243.45869,
+      136.93447899999998
+    ],
+    "volumeCubicKm": 3447650.1209491864,
+    "volumeEquivalentRadiusKm": 93.71552133300875,
+    "radialRangeKm": [
+      60.0774821009744,
+      127.72606422689796
+    ]
+  },
+  "comparison": {
+    "source": "https://observations.lam.fr/astero/3Dshape/45_Eugenia_adam.obj",
+    "volumeEquivalentRadiusKm": 93.99087005380717
+  },
+  "radialAmbiguity": {
+    "maxMeters": 5.820766091346741e-11,
+    "minMeters": -5.820766091346741e-11,
+    "aboveOneMeter": 0,
+    "total": 7264
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 7264,
+    "sourceVertices": 3634,
+    "weldedVertices": 3634,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1700,
+    "estimatedErrorMeters": 1635.892333984375,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 3413893628595760.5
+    }
+  }
+}

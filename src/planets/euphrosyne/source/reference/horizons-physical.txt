@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2731%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               31 Euphrosyne (A854 RA)         2026-Sep-07 20:32:34
+Rec #:      31 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 4782 (1860-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457909.5 ! 2017-Jun-05.00 (TDB)         Residual RMS= .21777
+   EC= .2213423263423602   QR= 2.457601479520319   TP= 2458104.7295951354
+   OM= 31.11881601611178   W=  61.42803992629701   IN= 26.30556741794948
+   A= 3.156202735376723    MA= 325.6835471936204   ADIST= 3.854803991233128
+   PER= 5.60732            N= .17577485            ANGMOM= .029802718
+   DAN= 2.71424            DDN= 3.35694            L= 89.8404316
+   B= 22.9040593           MOID= 1.56971002        TP= 2017-Dec-17.2295951354
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 133.54             ROTPER= 5.53
+   H= 6.83                 G= .150                 B-V= .687
+                           ALBEDO= .053            STYP= Cb
+
+ASTEROID comments: 
+1: soln ref.= JPL#135, OCC=0
+2: source=ORB
+*******************************************************************************

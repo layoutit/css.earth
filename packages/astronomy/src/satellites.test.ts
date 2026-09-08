@@ -36,6 +36,13 @@ import {
  * deliberately compact model cannot carry.
  */
 const TOLERANCE_KM: Record<SatelliteId, number> = {
+  polydeuces: 1081,
+  anthe: 2334,
+  aegaeon: 353,
+  bianca: 72,
+  cressida: 36,
+  desdemona: 115,
+  rosalind: 105,
   phobos: 1610,
   deimos: 130,
   io: 351,
@@ -78,6 +85,18 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
   despina: 73,
   galatea: 63,
   charon: 2,
+  nix: 109,
+  hydra: 55,
+  kerberos: 144,
+  styx: 447,
+  puck: 54,
+  methone: 20138,
+  pallene: 32,
+  belinda: 33,
+  juliet: 138,
+  portia: 107,
+  cordelia: 1,
+  ophelia: 3,
   dimorphos: .06,
 }
 
@@ -128,11 +147,14 @@ describe('satellite ephemerides against JPL Horizons', () => {
     }
   })
 
-  it.each(SATELLITE_IDS)('bounds %s by a(1 + e) over a hundred orbits', (id) => {
+  it.each(SATELLITE_IDS)('bounds %s relative to its physical parent over a hundred orbits', (id) => {
     const record = satelliteRecord(id)
     const elements = record.elements as KeplerianElements
     const bound = satelliteApoapsisKm(id)
-    expect(bound).toBe(keplerApoapsisKm(elements))
+    const companion = record.barycentreCompanion && bodyData(record.barycentreCompanion as SatelliteId)
+    const weight = companion ? companion.gravitationalParameterKm3PerS2 /
+      (companion.gravitationalParameterKm3PerS2 + bodyData(record.parent as 'pluto').gravitationalParameterKm3PerS2) : 0
+    expect(bound).toBe(keplerApoapsisKm(elements) + (companion ? satelliteApoapsisKm(companion.id as SatelliteId) * weight : 0))
     const period = (2 * Math.PI) / elements.meanMotionRadPerDay
     let farthest = 0
     for (let i = 0; i <= 5000; i++) {
@@ -165,12 +187,12 @@ describe('satellite ephemerides against JPL Horizons', () => {
     // Phobos's 7.65-hour period. This is the test that caught `keplerStateKm`
     // ignoring the precession rates.
     const h = 1 / 1024
-    for (const id of SATELLITE_IDS) {
-      const at = (offset: number) => satellitePositionKm(id, 2451545 + offset)
+    for (const id of SATELLITE_IDS) for (const epoch of [2451545, 2461286.5]) {
+      const at = (offset: number) => satellitePositionKm(id, epoch + offset)
       const numeric = [0, 1, 2].map(
         (i) => (-at(2 * h)[i]! + 8 * at(h)[i]! - 8 * at(-h)[i]! + at(-2 * h)[i]!) / (12 * h),
       )
-      const analytic = satelliteStateKm(id, 2451545).velocityKmPerDay
+      const analytic = satelliteStateKm(id, epoch).velocityKmPerDay
       expect(distance(numeric, analytic) / magnitude(analytic)).toBeLessThan(1e-8)
     }
   })

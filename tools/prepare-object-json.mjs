@@ -11,7 +11,7 @@ import { prepareMarkerBindings } from './prepare-marker-bindings.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = 'cssearth-css-object@4';
 
-export async function writeObjectJson(id, definition) {
+export async function writeObjectJson(id, definition, options) {
   if (!OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
     throw new TypeError('Prepared object identity does not match the application registry.');
   }
@@ -25,7 +25,7 @@ export async function writeObjectJson(id, definition) {
   definition = prepareMarkerBindings(definition);
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot: root });
   definition = preparedNavigation.definition;
-  definition = await preparePresentationBindings(definition, root);
+  definition = await preparePresentationBindings(definition, root, options);
   const scene = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(resolve(objectDirectory, 'prepared'), { ...preparedNavigation, definition }, scene);
   descriptor = { ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } };
@@ -50,7 +50,7 @@ export async function updateObjectJsonForPresentation(target, presentation, cont
   return writeObjectJson(id, { ...presentation, schema: 'cssearth-object-runtime@4', id, controls });
 }
 
-export async function prepareObjectJson(ids) {
+export async function prepareObjectJson(ids, options) {
   const results = [];
   for (const object of OBJECTS) {
     if (ids && !ids.includes(object.id)) continue;
@@ -59,7 +59,7 @@ export async function prepareObjectJson(ids) {
     const runtimeDefinition = await authoredObject(object.id, root)
       ? JSON.parse(await readFile(resolve(root, 'src/planets', object.id, 'prepared/runtime.json'), 'utf8'))
       : (await import(pathToFileURL(resolve(root, `src/planets/${object.id}/runtime/definition.mjs`)).href)).runtimeDefinition;
-    results.push(await writeObjectJson(object.id, runtimeDefinition));
+    results.push(await writeObjectJson(object.id, runtimeDefinition, options));
   }
   if (ids && results.length !== new Set(ids).size) throw new TypeError('A requested object has no registered JSON descriptor.');
   // Contexts consume finalized body frames. Preparing them first can retain a

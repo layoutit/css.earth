@@ -1,0 +1,44 @@
+{
+  "model": "controlled-shape-camera",
+  "photometry": {
+    "weight": 1,
+    "maximumGain": 2,
+    "displayMaximum": 0.7,
+    "gamma": 2.2,
+    "maximumIncidenceDegrees": 55,
+    "maximumEmissionDegrees": 55,
+    "minimumLevel": 1,
+    "maximumLevel": 1
+  },
+  "frames": [
+    {
+      "id": "n1694661188",
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "rasterOffset": 8192,
+      "encoding": "calibrated",
+      "resolutionMeters": 243.98000000000002,
+      "correctedPixels": 115,
+      "level": 1,
+      "overlapSamples": 0
+    }
+  ],
+  "coveragePixels": 115,
+  "totalPixels": 131072,
+  "projectedValidBounds": [
+    [
+      488.1025509942551,
+      489.2351235361642
+    ],
+    [
+      419.0160558385426,
+      422.7550593888149
+    ]
+  ],
+  "distinctInterpolationFootprints": [
+    "489,422",
+    "488,421",
+    "488,420",
+    "488,419"
+  ]
+}

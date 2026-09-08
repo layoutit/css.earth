@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "mercury",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "0.387 AU"
+      }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "columns": [
+        "name",
+        "equatorialRadiusKm",
+        "meanRadiusKm",
+        "mass",
+        "densityGPerCm3",
+        "siderealRotationDays",
+        "siderealOrbitYears",
+        "magnitude",
+        "geometricAlbedo",
+        "equatorialGravityMPerSec2",
+        "escapeVelocityKmPerSec"
+      ],
+      "row": [
+        "Mercury",
+        "2440.53 [D] ±0.04",
+        "2439.4 [D] ±0.1",
+        "0.330103 [F] ±0.000021",
+        "5.4289 [*] ±0.0007",
+        "58.6462 [C]",
+        "0.2408467 [B]",
+        "-0.60 [E] ±0.10",
+        "0.106 [B]",
+        "3.70 [*]",
+        "4.25 [*]"
+      ],
+      "massUnitKg": "1e24"
+    },
+    {
+      "url": "https://pgda.gsfc.nasa.gov/products/105",
+      "obliquityArcminutes": 2.031,
+      "oneSigmaArcminutes": 0.03,
+      "conversion": "degrees = arcminutes / 60; rounded to 0.034 degrees"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-measured-rotation@1",
+  "rightAscensionDegrees": 257.35647418354256,
+  "declinationDegrees": -15.333101764405413,
+  "primeMeridianDegrees": 89.90817800997476,
+  "spinDegreesPerDay": -828.391476,
+  "referenceEpochJdTt": 2461286.5,
+  "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "coordinateSystem": "IAU_BIANCA, NAIF BODY708; ICRF pole and east-positive body longitude",
+  "qualification": "SPICE evaluates the full PCK periodic terms at the prepared epoch. The shared linear display advances the reported secular rate and freezes the small periodic terms after this epoch. This does not supply surface landmark registration.",
+  "spiceBodeulRadians": [
+    4.491717825826603,
+    -0.26761311033222634,
+    1.5691937307432227
+  ]
+}

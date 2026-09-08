@@ -1,3 +1,4 @@
+import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabilities,
   createWorldContextObjectRuntime, createPreparedObjectNavigation } from '../src/renderers/css/dist/index.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
@@ -12,7 +13,7 @@ export function bindPackagedObject(definition, mount = createObjectRuntime(defin
     capabilities: preparedObjectCapabilities,
     inputSurface: stage.ownerDocument.querySelector('.planet-input-surface'),
     mobilePreviewElement: stage.ownerDocument.querySelector('.planet-sidebar'),
-    diagnostics: import.meta.env?.DEV === true,
+    diagnostics: DIAGNOSTICS_ENABLED,
   });
 }
 

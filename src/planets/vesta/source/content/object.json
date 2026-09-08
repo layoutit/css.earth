@@ -30,8 +30,8 @@
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "2.36 AU (mean)"
+        "label": "Solar semimajor axis",
+        "value": "2.36 AU"
       },
       {
         "id": "orbital-period",
@@ -44,7 +44,19 @@
         "value": "5.34 hours"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.423",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-08",
+          "path": "source/reference/horizons-physical.txt"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -53,7 +65,7 @@
       {
         "id": "normal",
         "label": "Natural color",
-        "description": "Dawn HAMO · photometrically corrected",
+        "description": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
         "title": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
         "thumbnail": "/scenes/vesta/vesta-normal-thumbnail.webp",
         "surface": "vesta-normal-surface@2x.webp",
@@ -67,7 +79,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Dawn stereo model · shaded relief",
+        "description": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting.",
         "title": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting.",
         "thumbnail": "/scenes/vesta/vesta-elevation-thumbnail.webp",
         "surface": "vesta-elevation-surface@2x.webp",

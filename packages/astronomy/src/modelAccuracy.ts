@@ -62,6 +62,13 @@ const VSOP_THEORY_DISCREPANCY_KM: Record<Vsop87BodyKey, number> = {
  * statistical uncertainties.
  */
 const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
+  polydeuces: 939.7293216478489,
+  anthe: 2029.4157931053912,
+  aegaeon: 306.9010577737413,
+  bianca: 62.38429913291977,
+  cressida: 31.167287112096254,
+  desdemona: 99.17274979901151,
+  rosalind: 90.45546017581691,
   phobos: 1395.0463862179204,
   deimos: 112.87860276333798,
   io: 305.340674039755,
@@ -104,6 +111,18 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   despina: 63.347226539073226,
   galatea: 54.73951237290662,
   charon: 1.0206866493052924,
+  nix: 94.35775652756546,
+  hydra: 47.05466895261672,
+  kerberos: 125.18018743032951,
+  styx: 388.06247072435855,
+  puck: 46.42767332013248,
+  methone: 17510.670766114912,
+  pallene: 27.64911948293053,
+  belinda: 28.493677463456997,
+  juliet: 119.87199717537884,
+  portia: 92.4705283027405,
+  cordelia: 0.4561261348117766,
+  ophelia: 2.0127049908729133,
   dimorphos: 0.054002378820475615,
 }
 
@@ -156,7 +175,7 @@ ACCURACY_BY_FRAME.set(
     'sun',
     'Eight-planet mass-weighted barycentric correction',
     'fit-residual',
-    164.71019094004845,
+    164.70978663615983,
     VSOP87A_VALID_FROM_JD,
     VSOP87A_VALID_TO_JD,
     'JPL Horizons DE441 Sun-to-SSB vector fixtures',

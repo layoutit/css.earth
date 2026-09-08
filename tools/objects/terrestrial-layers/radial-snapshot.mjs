@@ -4,16 +4,18 @@ const dot = (a, b) => a.reduce((sum, v, i) => sum + v * b[i], 0);
 
 /** An orthographic, full-phase context image from the same prepared surface
  * and mesh. This CPU rasterization runs only during source preparation. */
-export async function renderRadialSnapshot({ faces, map, size, longitudeDegrees, latitudeDegrees, ambient, diffuse }) {
+export async function renderRadialSnapshot({ faces, map, sampleSurface, size, longitudeDegrees, latitudeDegrees, ambient, diffuse }) {
   if (!Number.isInteger(size) || size < 16 || size > 1024 ||
       ![longitudeDegrees, latitudeDegrees, ambient, diffuse].every(Number.isFinite) ||
-      Math.abs(latitudeDegrees) > 90 || ambient < 0 || diffuse < 0 || ambient + diffuse > 1) throw new TypeError('Invalid radial snapshot.');
-  const { data, info } = await sharp(map).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+      Math.abs(latitudeDegrees) > 90 || ambient < 0 || diffuse < 0 || ambient + diffuse > 1 ||
+      (sampleSurface !== undefined && typeof sampleSurface !== 'function')) throw new TypeError('Invalid radial snapshot.');
+  const { data, info } = sampleSurface ? {} : await sharp(map).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   const width = size * 2, pixels = Buffer.alloc(width * width * 4), depth = new Float64Array(width * width).fill(-Infinity);
   const lon = longitudeDegrees * Math.PI / 180, lat = latitudeDegrees * Math.PI / 180;
   const eye = [Math.cos(lat) * Math.cos(lon), Math.cos(lat) * Math.sin(lon), Math.sin(lat)];
   const right = [-Math.sin(lon), Math.cos(lon), 0], up = [-Math.sin(lat) * Math.cos(lon), -Math.sin(lat) * Math.sin(lon), Math.cos(lat)];
-  const radius = Math.max(...faces.flatMap(face => face.vertices.map(v => Math.hypot(...v))));
+  const radius = faces.reduce((maximum, face) => face.vertices.reduce(
+    (maximum, vertex) => Math.max(maximum, Math.hypot(...vertex)), maximum), 0);
   const scale = width * .47 / radius;
   for (const face of faces) {
     if (dot(face.normal, eye) <= 0) continue;
@@ -30,11 +32,17 @@ export async function renderRadialSnapshot({ faces, map, size, longitudeDegrees,
         if (z <= depth[index]) continue;
         depth[index] = z;
         const point = face.vertices[0].map((n, i) => n * u + face.vertices[1][i] * v + face.vertices[2][i] * w);
-        const normal = face.vertexNormals[0].map((n, i) => n * u + face.vertexNormals[1][i] * v + face.vertexNormals[2][i] * w);
+        const sample = sampleSurface?.(point);
+        const normal = sample?.normal ?? face.vertexNormals[0].map((n, i) => n * u + face.vertexNormals[1][i] * v + face.vertexNormals[2][i] * w);
         const illumination = ambient + diffuse * Math.max(0, dot(normal, eye) / Math.hypot(...normal));
-        const mx = Math.floor(((Math.atan2(point[1], point[0]) / (2 * Math.PI) + 1) % 1) * info.width);
-        const my = Math.min(info.height - 1, Math.floor((.5 - Math.atan2(point[2], Math.hypot(point[0], point[1])) / Math.PI) * info.height));
-        for (let channel = 0; channel < 3; channel++) pixels[index * 4 + channel] = Math.round(data[(my * info.width + mx) * 3 + channel] * illumination);
+        let color = sample?.color;
+        if (!color) {
+          if (sampleSurface) throw new Error('A source-surface snapshot must explicitly style missing coverage.');
+          const mx = Math.floor(((Math.atan2(point[1], point[0]) / (2 * Math.PI) + 1) % 1) * info.width);
+          const my = Math.min(info.height - 1, Math.floor((.5 - Math.atan2(point[2], Math.hypot(point[0], point[1])) / Math.PI) * info.height));
+          color = data.subarray((my * info.width + mx) * 3, (my * info.width + mx) * 3 + 3);
+        }
+        for (let channel = 0; channel < 3; channel++) pixels[index * 4 + channel] = Math.round(color[channel] * illumination);
         pixels[index * 4 + 3] = 255;
       }
     }

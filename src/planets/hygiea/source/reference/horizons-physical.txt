@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 10 Hygiea (A849 GA)           2026-Sep-07 19:56:19
+Rec #:      10 (+COV) Soln.date: 2026-Jun-16_11:32:04   # obs: 5207 (1849-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458286.5 ! 2018-Jun-17.00 (TDB)         Residual RMS= .19672
+   EC= .112654977900141    QR= 2.786705885566622   TP= 2457740.1931742947
+   OM= 283.2130782677748   W=  312.1526533545334   IN= 3.831604174627114
+   A= 3.140498696856402    MA= 96.74817340659773   ADIST= 3.494291508146182
+   PER= 5.56552            N= .177094938           ANGMOM= .030290557
+   DAN= 2.8827             DDN= 3.35423            L= 235.4295289
+   B= -2.8396414           MOID= 1.77683997        TP= 2016-Dec-17.6931742947
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= 7.                  RAD= 203.56             ROTPER= 13.828
+   H= 5.65                 G= .150                 B-V= .696
+                           ALBEDO= .0717           STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#129, OCC=0
+2: source=ORB
+*******************************************************************************

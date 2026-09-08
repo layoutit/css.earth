@@ -14,6 +14,12 @@ const copy = (index = 1): Record<string, unknown> => record(structuredClone(orig
 const child = (value: unknown, key: string) => record(record(value, 'test parent')[key], key);
 const item = (value: unknown, index = 0) => record(array(value, 'test array')[index], 'test record');
 
+test('external transport cannot silently omit prepared activation ownership', () => {
+  const missing = copy();
+  delete child(missing, 'tree').activationGroups;
+  assert.throws(() => parsePreparedObjectRuntime(missing), /activation groups must be prepared/);
+});
+
 test('actual prepared Mercury and Venus documents preserve every JSON value and reference', () => {
   for (const original of originals) {
     const parsed = parsePreparedObjectRuntime(original);

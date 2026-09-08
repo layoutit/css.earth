@@ -221,8 +221,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 9439,
-      "expectedSha256": "b90f05df6ded8994e3ceeb23d407513ce42eb6c2146b475752d74cc5dad7011f",
+      "expectedBytes": 11120,
+      "expectedSha256": "647738122e552ac88b90daa6fd918bb44348ef8308f4e68db6cc031bd19e0509",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -251,6 +251,13 @@
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/document/bundle_description.txt",
       "expectedBytes": 4013,
       "expectedSha256": "0c25741e86bdc1385dca69b020e1b3b65eeb45ac7d59c296fa87c71d49799d42"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1083,
+      "expectedSha256": "87ee97453d388b3fe81c9c9a46abdab8f5c167d6d38cf022b53fe0d8c3ac7c13"
     }
   ],
   "generatedIntermediates": [
