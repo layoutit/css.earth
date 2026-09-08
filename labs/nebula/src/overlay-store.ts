@@ -2,6 +2,11 @@ import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement 
 
 export interface SavedOverlay {
   id: string; enabled: boolean; opacity: number; placement: OverlayPlacement; basis: string;
+  defaultPlacement?: OverlayPlacement;
+}
+/** Follow corrected defaults only while the saved placement is still the previous default. */
+export function resolveSavedPlacement(saved: OverlayPlacement, previousDefault = defaultOverlayPlacement(), nextDefault = defaultOverlayPlacement()): OverlayPlacement {
+  return (Object.keys(previousDefault) as (keyof OverlayPlacement)[]).every(key => saved[key] === previousDefault[key]) ? { ...nextDefault } : { ...saved };
 }
 const KEY = 'cssearth-nebula-overlay-state-v1';
 type StoragePort = Pick<Storage, 'getItem' | 'setItem'>;
@@ -22,7 +27,8 @@ export function readOverlaySessions(storage = browserStorage()): Map<string, Sav
               typeof row.opacity !== 'number' || !Number.isFinite(row.opacity) || row.opacity < 0 || row.opacity > 1 ||
               !row.placement || Object.keys(row.placement).length !== 7) continue;
           values.push({ id: row.id, basis: row.basis, enabled: row.enabled, opacity: row.opacity,
-            placement: updateOverlayPlacement(defaultOverlayPlacement(), row.placement) });
+            placement: updateOverlayPlacement(defaultOverlayPlacement(), row.placement),
+            ...(row.defaultPlacement ? { defaultPlacement: updateOverlayPlacement(defaultOverlayPlacement(), row.defaultPlacement) } : {}) });
         } catch { /* Discard only the malformed record. */ }
       }
       result.set(entry[0], values);

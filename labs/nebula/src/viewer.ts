@@ -1,7 +1,7 @@
 import records from './subjects.json';
 import sourceCatalog from '../sources/index.json';
 import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from './overlay-placement';
-import { readOverlaySessions, writeOverlaySessions } from './overlay-store';
+import { readOverlaySessions, writeOverlaySessions, resolveSavedPlacement } from './overlay-store';
 import { createToneResourceController, type ToneResource } from './tone-runtime';
 import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, parseCloudCatalogue, validateCloudBrightness } from './cloud-inspection';
 import type { CloudBrightness } from './cloud-controls';
@@ -205,6 +205,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   let overlayCataloguePending: Promise<DensityOverlay[]> | null = null;
   const overlayNodes = new Map<string, HTMLElement[]>(), overlayEnabled = new Map<string, boolean>(), overlayOpacity = new Map<string, number>();
   const overlayPlacements = new Map<string, OverlayPlacement>();
+  const overlayDefaults = new Map<string, OverlayPlacement>();
   const overlayBases = new Map<string, string>(), overlaySessions = readOverlaySessions();
   const overlayLoading = new Map<string, Promise<void>>();
   const toneResources = createToneResourceController();
@@ -303,6 +304,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     return [...new Set([...overlayEnabled.keys(), ...overlayPlacements.keys()])].map(id => ({ id,
       enabled: overlayEnabled.get(id) ?? false, opacity: overlayOpacity.get(id) ?? .55,
       placement: { ...(overlayPlacements.get(id) ?? defaultOverlayPlacement()) },
+      defaultPlacement: { ...(overlayDefaults.get(id) ?? defaultOverlayPlacement()) },
       basis: overlayBases.get(id) ?? '',
     }));
   }
@@ -313,7 +315,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   }
   function clearOverlays() {
     overlayMeshes = []; overlayNodes.clear(); overlayCatalogue = null; overlayBasePath = ''; overlayCataloguePending = null; overlayLoading.clear();
-    overlayEnabled.clear(); overlayOpacity.clear(); overlayPlacements.clear(); overlayBases.clear();
+    overlayEnabled.clear(); overlayOpacity.clear(); overlayPlacements.clear(); overlayBases.clear(); overlayDefaults.clear();
   }
   async function loadOverlayCatalogue() {
     if (currentMode !== 'density' || !payload || !subject.density?.overlays) return [] as DensityOverlay[];
@@ -330,14 +332,18 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       overlayCatalogue = parsed; overlayBasePath = manifestPath.slice(0, manifestPath.lastIndexOf('/') + 1);
       const available = new Set(parsed.overlays.map(item => item.id));
       for (const id of overlayBases.keys()) if (!available.has(id)) {
-        overlayBases.delete(id); overlayPlacements.delete(id); overlayOpacity.delete(id); overlayEnabled.delete(id);
+        overlayBases.delete(id); overlayPlacements.delete(id); overlayOpacity.delete(id); overlayEnabled.delete(id); overlayDefaults.delete(id);
       }
       for (const item of parsed.overlays) {
         const savedBasis = overlayBases.get(item.id);
         if (savedBasis !== item.style.transform && !(savedBasis && savedBasis === item.legacyPlacementBasis)) {
           overlayPlacements.set(item.id, item.initialPlacement ?? defaultOverlayPlacement());
           overlayOpacity.set(item.id, item.initialOpacity ?? .55); overlayEnabled.set(item.id, false);
+        } else {
+          overlayPlacements.set(item.id, resolveSavedPlacement(overlayPlacements.get(item.id) ?? defaultOverlayPlacement(),
+            overlayDefaults.get(item.id), item.initialPlacement));
         }
+        overlayDefaults.set(item.id, item.initialPlacement ?? defaultOverlayPlacement());
         overlayBases.set(item.id, item.style.transform);
         toneResources.bind(`${overlayBasePath}${item.texturePath}`, item.widthPx, item.heightPx);
       }
@@ -519,6 +525,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       for (const saved of overlaySessions.get(next.density?.overlays ?? '') ?? []) {
         overlayEnabled.set(saved.id, saved.enabled); overlayOpacity.set(saved.id, saved.opacity); overlayPlacements.set(saved.id, { ...saved.placement });
         overlayBases.set(saved.id, saved.basis);
+        if (saved.defaultPlacement) overlayDefaults.set(saved.id, saved.defaultPlacement);
       }
       host.dataset.mode = currentMode;
       host.style.transform = currentMode === 'density' || subject.referenceEastLeft ? 'scaleX(-1)' : '';

@@ -10,13 +10,9 @@ const element = <T extends HTMLElement>(id: string) => document.getElementById(i
 const subject = element<HTMLSelectElement>('subject');
 const controls = element<HTMLFieldSetElement>('render-controls');
 const cameraPose = element<HTMLSelectElement>('camera-pose');
-const axis = element<HTMLSelectElement>('axis');
-const layer = element<HTMLInputElement>('layer');
-const layerValue = element<HTMLOutputElement>('layer-value');
 const status = element('status');
 const sourceLink = element<HTMLAnchorElement>('source-link');
-const sourceCredit = element('source-credit');
-const densityViewControls = element<HTMLFieldSetElement>('density-view-controls');
+const densityViewControls = element<HTMLElement>('density-view-controls');
 const densityAdjustmentPanel = element<HTMLElement>('density-adjustment-panel');
 const densityToneFieldset = element<HTMLFieldSetElement>('density-tone-fieldset');
 const overlayPanel = element<HTMLElement>('image-overlay-panel');
@@ -89,7 +85,12 @@ const imageTone = createToneControls({ host: element('image-tone-controls'), tar
   } });
 function invalidateToneContexts() { densityTone.setContext(null); imageTone.setContext(null); }
 
-for (const value of subjects) subject.add(new Option(value.name, value.id));
+const visibleObjects = [
+  { id: 'lmc-clouds', name: 'LMC' },
+  { id: 'smc-particles', name: 'SMC' },
+  { id: 'milky-way', name: 'Milky Way' },
+];
+for (const value of visibleObjects) subject.add(new Option(value.name, value.id));
 
 function selectTab(index: number, updateUrl = true) {
   currentTab = index;
@@ -113,6 +114,7 @@ tabs.forEach((tab, index) => {
     event.preventDefault();
     const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
       (index + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+    if (tabs[next]!.disabled) return;
     selectTab(next); tabs[next].focus();
   });
 });
@@ -120,21 +122,13 @@ tabs.forEach((tab, index) => {
 function setBusy(value: boolean) {
   busy = value; subject.disabled = value; controls.disabled = value;
   reconstructionImage.disabled = value;
-  tabs.forEach(tab => { tab.disabled = value; });
+  tabs.forEach((tab, index) => { tab.disabled = value || (index === 0 && Boolean(sourceSubject) && !subjects.find(item => item.id === sourceSubject)?.density); });
   cloudControls.setBusy(value);
   const density = currentMode === 'density';
   const currentSubject = subjects.find(item => item.id === sourceSubject);
-  const hasCloudParts = !density && Boolean(currentSubject?.cloudParts);
-  document.querySelector<HTMLElement>('.component-options')!.hidden = hasCloudParts || (!density && Boolean(currentSubject?.reconstructionImage));
-  const densityMissing = density && !subjects.find(item => item.id === sourceSubject)?.density;
-  document.querySelectorAll<HTMLInputElement>('input[name="component"]').forEach(input => {
-    input.disabled = value || density || hasCloudParts || (input.value === 'detail' && currentSubject?.hasDetail === false);
-  });
-  cameraPose.disabled = value || densityMissing; axis.disabled = value || densityMissing;
-  layer.disabled = value || densityMissing || layer.max === '-1';
-  element<HTMLButtonElement>('all-layers').disabled = value || densityMissing;
+  const densityMissing = density && !currentSubject?.density;
+  cameraPose.disabled = value || densityMissing;
   element<HTMLButtonElement>('reset').disabled = value || densityMissing;
-  densityViewControls.disabled = value || currentTab !== 0 || !density;
   densityToneFieldset.disabled = value || currentTab !== 0 || !density;
   overlayControls.disabled = value || currentTab !== 0 || !density;
   element<HTMLButtonElement>('reference-view').disabled = value || densityMissing;
@@ -145,7 +139,7 @@ function setBusy(value: boolean) {
 }
 function fail(error: unknown) {
   const message = error instanceof Error ? error.message : String(error);
-  status.textContent = message; status.dataset.error = 'true';
+  status.hidden = false; status.textContent = message; status.dataset.error = 'true';
   console.error(error);
 }
 async function run(action: () => unknown | Promise<unknown>) {
@@ -156,9 +150,6 @@ function updateSubject(id: string) {
   const item = subjects.find(value => value.id === id);
   if (!item) return;
   sourceSubject = id;
-  element('model-note').textContent = currentMode === 'density' && currentTab === 0 && item.density ? item.density.modelNote :
-    'modelNote' in item && typeof item.modelNote === 'string' ? item.modelNote : 'Depth is modeled from a source image; it is not a measured 3D reconstruction.';
-  document.querySelector<HTMLInputElement>('input[name="component"][value="detail"]')!.disabled = item.hasDetail === false;
   updateCredit();
   refreshReconstructionImages();
 }
@@ -186,7 +177,7 @@ function updateCredit() {
   const density = currentMode === 'density' && currentTab === 0 ? item?.density : null;
   sourceLink.hidden = !(density?.sourcePageUrl ?? item?.sourcePageUrl);
   if (density?.sourcePageUrl ?? item?.sourcePageUrl) sourceLink.href = density?.sourcePageUrl ?? item!.sourcePageUrl!;
-  sourceCredit.textContent = density?.credit ?? item?.credit ?? '';
+  sourceLink.title = density?.credit ?? item?.credit ?? '';
 }
 let overlayRequest = 0;
 function overlaySelectionKey(catalogue: string) { return `cssearth-nebula-selected-overlay:${catalogue}`; }
@@ -298,10 +289,13 @@ async function changeSubject(id: string) {
   cloudControls.setContext(null);
   cloudDensityControls.setContext(null);
   cloudStarControls.setContext(null);
-  setBusy(true); status.textContent = 'Loading prepared layers…'; delete status.dataset.error;
+  setBusy(true); status.hidden = false; status.textContent = 'Loading…'; delete status.dataset.error;
   void refreshOverlayControls();
   try {
     await viewer.setSubject(id);
+    if (currentTab === 0 && !subjects.find(item => item.id === id)?.density) {
+      await viewer.setMode('photo'); selectTab(1);
+    }
     const url = new URL(location.href); url.searchParams.set('subject', id);
     history.replaceState(history.state, '', url);
   }
@@ -310,13 +304,7 @@ async function changeSubject(id: string) {
 }
 subject.addEventListener('change', () => void changeSubject(subject.value));
 reconstructionImage.addEventListener('change', () => void changeSubject(reconstructionImage.value));
-document.querySelectorAll<HTMLInputElement>('input[name="component"]').forEach(input => {
-  input.addEventListener('change', () => { if (input.checked) void run(() => viewer!.setComponent(input.value as 'all' | 'diffuse' | 'detail')); });
-});
-axis.addEventListener('change', () => void run(() => viewer!.setAxis(axis.value as 'auto' | 'x' | 'y' | 'z')));
 cameraPose.addEventListener('change', () => void run(() => viewer!.setPose(cameraPose.value as Parameters<Viewer['setPose']>[0])));
-layer.addEventListener('input', () => void run(() => viewer!.setLayer(Number(layer.value) < 0 ? null : Number(layer.value))));
-element('all-layers').addEventListener('click', () => void run(() => viewer!.setLayer(null)));
 element('reset').addEventListener('click', () => void run(() => viewer!.reset()));
 element('reference-view').addEventListener('click', () => void run(() => viewer!.referenceView()));
 element('fit-cloud').addEventListener('click', () => void run(() => viewer!.fitCloud()));
@@ -355,22 +343,21 @@ selectTab(initialTab);
 try {
   if (!subjects.length) throw new Error('No prepared subjects are available.');
   const requestedSubject = new URL(location.href).searchParams.get('subject');
-  const initialSubject = subjects.find(item => item.id === requestedSubject) ?? subjects[0];
+  const requestedObject = visibleObjects.find(item => item.id === requestedSubject ||
+    (item.id === 'lmc-clouds' && requestedSubject?.startsWith('lmc')) ||
+    (item.id === 'smc-particles' && requestedSubject?.startsWith('smc'))) ?? visibleObjects[0]!;
+  const initialSubject = subjects.find(item => item.id === requestedObject.id)!;
+  const mountTab = initialSubject.density ? initialTab : 1;
+  selectTab(mountTab);
   viewer = await createNebulaLabViewer({ host: element('viewer'), subjectId: initialSubject.id,
-    mode: initialTab === 0 ? 'density' : 'photo', onState(state) {
+    mode: mountTab === 0 ? 'density' : 'photo', onState(state) {
     if (disposed) return;
     currentMode = state.mode;
     subject.value = state.subjectId;
     updateSubject(state.subjectId);
     cameraPose.value = state.pose;
-    axis.value = state.axis;
-    document.querySelectorAll<HTMLInputElement>('input[name="component"]').forEach(input => { input.checked = input.value === state.component; });
-    layer.max = String(Math.max(-1, state.layerCount - 1));
-    layer.value = String(state.layer ?? -1);
-    layer.disabled = state.layerCount === 0;
-    const text = state.layer === null ? 'All layers' : `Layer ${state.layer + 1} / ${state.layerCount}`;
-    layerValue.textContent = text; layer.setAttribute('aria-valuetext', text);
-    status.textContent = state.status ?? `${state.layerCount} layers`;
+    status.textContent = state.status ?? '';
+    status.hidden = element('viewer').dataset.ready === 'true' && !state.error;
     delete status.dataset.error;
     if (state.error) fail(state.error);
   } });

@@ -14,7 +14,13 @@ The previews are bounded at 4096/6000 pixels. Original downloads remain pinned i
 
 Detected compact-source maps were extracted before matching. 16,020 discrete star identities agree with surrounding-star patterns; 5,340 were held out of the final fit. Their median residual is 0.276 native SMASH pixels and P90 is 0.667 pixels (~3.3″). The matched convex hull covers 83.1% of VISTA; its remaining outer corners are extrapolated. Shifted-star controls produce zero confirmed patterns; mirror, rotation and scale controls fail.
 
-The publisher VISTA WCS alone fails this check (median 37.2 SMASH pixels). The active overlay uses the exact verified homography, not a forced rotation-only approximation or the old manual fit. SMASH AVM supplies the absolute sky anchor; this is a relative image registration, not an independent absolute astrometric solution or a match of simulated particles to individual observed stars. [Pinned direction receipt](../models/lmc-candidates/source/vista-direction-gate.json).
+The publisher VISTA WCS alone fails this check (median 37.2 SMASH pixels). The active overlay uses the exact verified homography for its registration to SMASH. SMASH AVM supplies the sky anchor; this is a relative image registration, not an independent absolute astrometric solution or a match of simulated particles to individual observed stars. [Pinned direction receipt](../models/lmc-candidates/source/vista-direction-gate.json).
+
+## Shared model fit in Alignment
+
+All three previews retain the existing saved user-authored model fit: scale 3, +39° rotation and translation (−1.2, −1.7, 0) kpc about the SMASH image centre. Each candidate receives the same transform with its own centre compensated, so the VISTA-to-SMASH matched-star registration remains intact. This restores the accepted inspection placement; the scale and rotation do not establish scientific size or simulated-to-observed correspondence. WISE remains unverified against the other images.
+
+The prepared VISTA and SMASH CSS geometry agrees with the measured homography to floating-point precision. Their held-out star residuals remain the evidence for image-to-image alignment; the shared model fit is a separate display choice. No source pixels, textures or cloud products changed when this placement was restored.
 
 ## Further research
 

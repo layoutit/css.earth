@@ -1,6 +1,6 @@
 # Nebula Lab
 
-Local tooling for inspecting galaxy and nebula reconstructions with the actual PolyCSS renderer. Drag to rotate, scroll to zoom, inspect individual layers, and compare source images. The lab is separate from the website.
+Local tooling for inspecting galaxy and nebula reconstructions with the actual PolyCSS renderer. Drag to rotate, scroll to zoom, and compare source images. The lab is separate from the website.
 
 ```text
 labs/nebula/
@@ -25,7 +25,7 @@ pnpm install --frozen-lockfile
 pnpm lab:nebula
 ```
 
-Open <http://127.0.0.1:4331/> or the [high-resolution LMC candidate](http://127.0.0.1:4331/?subject=lmc-highres-1024&tab=reconstruction). Other catalogue subjects require their prepared assets to be present; the viewer does not acquire or bake them.
+Open <http://127.0.0.1:4331/>. The header selects LMC, SMC or Milky Way and the inspection tab. Camera controls share the left sidebar with density adjustments; image and reconstruction adjustments stay on the right. Earlier experiment records remain available to offline tooling. Milky Way opens its prepared reconstruction because it has no separate alignment density field. The viewer does not acquire or bake objects.
 
 - **[Alignment](http://127.0.0.1:4331/?subject=lmc-clouds&tab=alignment)**: compare the current SMASH source, the star-aligned 10k ESO VISTA infrared image, and the wide NASA WISE/CDS infrared candidate over the complete simulated stellar field. Older LMC experiments are hidden from this selector, with their data and saved fits retained. Visible tone and placement controls remain in the floating sidebars. These are image previews; cloud processing and baking wait for approval. [Candidate sources and gates](docs/image-candidates.md).
 - **[Reconstruction](http://127.0.0.1:4331/?subject=lmc-clouds&tab=reconstruction)**: inspect the colored 3D cloud. The left panel removes faint regions using a fixed Earth-facing projection, with soft edges and a removed-signal preview. The right panel controls structures, diffuse/compact light, brightness, and a separate layer of 943 [published LMC stars](models/lmc-stars/README.md). [Cloud controls](docs/cloud-inspection.md) · [Viewing-direction color](docs/view-direction-color.md) · [Method and limits](docs/filled-observation.md).

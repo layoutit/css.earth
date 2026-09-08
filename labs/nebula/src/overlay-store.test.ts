@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readOverlaySessions, writeOverlaySessions, type SavedOverlay } from './overlay-store.js';
-import type { OverlayPlacement } from './overlay-placement.js';
+import { readOverlaySessions, writeOverlaySessions, resolveSavedPlacement, type SavedOverlay } from './overlay-store.js';
+import { defaultOverlayPlacement, type OverlayPlacement } from './overlay-placement.js';
 
 const KEY = 'cssearth-nebula-overlay-state-v1';
 class MemoryStorage {
@@ -47,4 +47,16 @@ test('denied reads and quota-failed writes degrade safely', () => {
   assert.deepEqual(readOverlaySessions(denied), new Map());
   assert.equal(writeOverlaySessions(new Map([['catalogue.json', [saved('image', 'basis')]]]), denied), false);
   assert.equal(writeOverlaySessions(new Map(), undefined), false);
+});
+
+test('corrected alignment replaces an untouched old default without erasing manual fits', () => {
+  const identity = defaultOverlayPlacement();
+  assert.deepEqual(resolveSavedPlacement(identity, undefined, placement), placement);
+  const adjusted = { ...identity, rotationZ: 12, scale: 2.5 };
+  assert.deepEqual(resolveSavedPlacement(adjusted, undefined, placement), adjusted);
+  // Choosing the unadjusted sky view after the correction remains an intentional choice on reload.
+  const storage = new MemoryStorage();
+  writeOverlaySessions(new Map([['candidates', [{ ...saved('image', 'basis'), placement: identity, defaultPlacement: placement }]]]), storage);
+  const restored = readOverlaySessions(storage).get('candidates')![0]!;
+  assert.deepEqual(resolveSavedPlacement(restored.placement, restored.defaultPlacement, placement), identity);
 });

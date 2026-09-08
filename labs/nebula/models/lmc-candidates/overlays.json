@@ -24,6 +24,16 @@
       "texturePath": "prepared/smash-original.webp",
       "widthPx": 4096,
       "heightPx": 3974,
+      "initialPlacement": {
+        "x": -1.2,
+        "y": -1.7,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "initialOpacity": 0.29,
       "sha256": "6294691a6bc2ec9fd9e505b6315e72780cd7d60921ecab0b856743413ee3d072",
       "bytes": 10537480,
       "pivotCssPx": [
@@ -40,7 +50,7 @@
       },
       "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
       "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever; image processing: Travis Rector, Mahdi Zamani & Davide de Martin",
-      "registrationNote": "Current cloud color source. Full 6737 × 6536 image; about 9.35° × 9.07°. Publisher sky coordinates anchor the matched-star comparison. No manual scale or rotation is applied. Covers only part of the full simulated stellar field."
+      "registrationNote": "Current cloud color source. Full 6737 × 6536 image; about 9.35° × 9.07°. Publisher sky coordinates anchor the relative image comparison. The shared saved user-authored model fit (scale 3, +39°, translated about the SMASH pivot) is applied for the Alignment display; it does not establish scientific size or simulated-to-observed star identities. Covers only part of the full simulated stellar field."
     },
     {
       "id": "vista-infrared",
@@ -48,6 +58,16 @@
       "texturePath": "prepared/vista-infrared.webp",
       "widthPx": 5372,
       "heightPx": 6000,
+      "initialPlacement": {
+        "x": -0.9001341686099777,
+        "y": 1.6901640670280988,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "initialOpacity": 0.29,
       "sha256": "8fa8fa33a1b790bd19e9cb07186667c3d1d2e8108380f2c65bd80e9b5b37b96d",
       "bytes": 17455320,
       "pivotCssPx": [
@@ -64,7 +84,7 @@
       },
       "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
       "credit": "ESO/VMC Survey",
-      "registrationNote": "8954 × 10000 ESO Y/J/Ks image; about 7.7° × 8.6°. Scale, rotation and handedness fitted to 16,020 SMASH stars; 5,340 held out, P90 error 0.67 SMASH pixels (~3.3 arcsec), matched hull 83%. Corrected the publisher placement; corners outside the matched hull are extrapolated. Infrared display colors; still partial density coverage. Awaiting approval before cloud processing."
+      "registrationNote": "8954 × 10000 ESO Y/J/Ks image; about 7.7° × 8.6°. Image-to-image scale, rotation and handedness fitted to 16,020 SMASH stars; 5,340 held out, P90 error 0.67 SMASH pixels (~3.3 arcsec), matched hull 83%. Corrected the publisher placement; corners outside the matched hull are extrapolated. The same saved user-authored model fit as SMASH is then applied for display, not as scientific size or simulation registration. Infrared display colors; still partial density coverage. Awaiting approval before cloud processing."
     },
     {
       "id": "wise-wide-infrared",
@@ -72,6 +92,16 @@
       "texturePath": "prepared/wise-wide-infrared.webp",
       "widthPx": 6000,
       "heightPx": 6000,
+      "initialPlacement": {
+        "x": 1.5626367397788687,
+        "y": 2.1726510201541025,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "initialOpacity": 0.29,
       "sha256": "76c3e0f512e4a546ca364135a5af12abb866d935358649abcdd6c7c6c42cbdf4",
       "bytes": 2049980,
       "pivotCssPx": [
@@ -88,7 +118,7 @@
       },
       "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
       "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
-      "registrationNote": "Widest candidate: 6000 × 6000 pixels across 24°, with full pixel coverage. NASA WISE infrared data, display colors by CDS (not visible-light color). ~14.6 arcsec/pixel sampling. Rectangular atlas color/brightness seams cross the LMC: preview only, not approved for cloud processing. FITS orientation verified; independent star-field alignment pending."
+      "registrationNote": "Widest candidate: 6000 × 6000 pixels across 24°, with full pixel coverage. NASA WISE infrared data, display colors by CDS (not visible-light color). ~14.6 arcsec/pixel sampling. Rectangular atlas color/brightness seams cross the LMC: preview only, not approved for cloud processing. FITS orientation verified; independent star-field alignment pending. The shared saved user-authored model fit is applied for display only; it does not validate WISE-to-SMASH or simulation alignment."
     }
   ]
 }

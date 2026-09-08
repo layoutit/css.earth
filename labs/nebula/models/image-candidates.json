@@ -8,7 +8,7 @@
       "images": [
         {
           "id": "smash-original",
-          "label": "SMASH \u00b7 current reconstruction",
+          "label": "SMASH · current reconstruction",
           "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
           "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
@@ -40,15 +40,14 @@
             "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
             "description": "ICRS TAN AVM fields extracted from the pinned publisher TIFF; original reference dimensions retained."
           },
-          "registrationNote": "Current cloud color source. Full 6737 \u00d7 6536 image; about 9.35\u00b0 \u00d7 9.07\u00b0. Publisher sky coordinates anchor the matched-star comparison. No manual scale or rotation is applied. Covers only part of the full simulated stellar field.",
+          "registrationNote": "Current cloud color source. Full 6737 × 6536 image; about 9.35° × 9.07°. Publisher sky coordinates anchor the relative image comparison. The shared saved user-authored model fit (scale 3, +39°, translated about the SMASH pivot) is applied for the Alignment display; it does not establish scientific size or simulated-to-observed star identities. Covers only part of the full simulated stellar field.",
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
           "maxPixels": 4096,
-          "useSavedAlignment": false,
           "allowLargeTiff": true
         },
         {
           "id": "vista-infrared",
-          "label": "ESO VISTA \u00b7 infrared, star-aligned",
+          "label": "ESO VISTA · infrared, star-aligned",
           "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
           "sha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
           "url": "https://cdn.eso.org/images/publicationtiff10k/eso1914a.tif",
@@ -81,7 +80,7 @@
             "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
             "description": "Sky anchor is SMASH publisher AVM. Exact native-pixel homography is verified against discrete matched star fields, with held-out residuals and negative controls in source/vista-direction-gate.json. Original VISTA WCS is retained as provenance but not used for geometry."
           },
-          "registrationNote": "8954 \u00d7 10000 ESO Y/J/Ks image; about 7.7\u00b0 \u00d7 8.6\u00b0. Scale, rotation and handedness fitted to 16,020 SMASH stars; 5,340 held out, P90 error 0.67 SMASH pixels (~3.3 arcsec), matched hull 83%. Corrected the publisher placement; corners outside the matched hull are extrapolated. Infrared display colors; still partial density coverage. Awaiting approval before cloud processing.",
+          "registrationNote": "8954 × 10000 ESO Y/J/Ks image; about 7.7° × 8.6°. Image-to-image scale, rotation and handedness fitted to 16,020 SMASH stars; 5,340 held out, P90 error 0.67 SMASH pixels (~3.3 arcsec), matched hull 83%. Corrected the publisher placement; corners outside the matched hull are extrapolated. The same saved user-authored model fit as SMASH is then applied for display, not as scientific size or simulation registration. Infrared display colors; still partial density coverage. Awaiting approval before cloud processing.",
           "registration": {
             "referenceWcs": {
               "projection": "TAN",
@@ -113,18 +112,17 @@
               0.1190037618003177,
               0.596664958469161,
               -1479.567248000351,
-              -2.639112449735194e-06,
-              -1.2871658418376004e-06,
-              1.0
+              -0.000002639112449735194,
+              -0.0000012871658418376004,
+              1
             ]
           },
           "maxPixels": 6000,
-          "useSavedAlignment": false,
           "allowLargeTiff": true
         },
         {
           "id": "wise-wide-infrared",
-          "label": "NASA WISE \u00b7 24\u00b0 infrared candidate",
+          "label": "NASA WISE · 24° infrared candidate",
           "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
           "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
           "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
@@ -139,8 +137,8 @@
               6000
             ],
             "referencePixel": [
-              3000.0,
-              3000.0
+              3000,
+              3000
             ],
             "referenceValueDeg": [
               78.76,
@@ -157,11 +155,14 @@
             "sha256": "33cd09d02bcf3c3d3b1b0aeaeec3244400136bc19280c67ef54ab3693e932a7f",
             "description": "Exact ICRS TAN WCS from matching CDS HiPS2FITS; JPEG/FITS raster orientation verified. NASA/IPAC data, CDS W4/W2/W1 display-color composition."
           },
-          "registrationNote": "Widest candidate: 6000 \u00d7 6000 pixels across 24\u00b0, with full pixel coverage. NASA WISE infrared data, display colors by CDS (not visible-light color). ~14.6 arcsec/pixel sampling. Rectangular atlas color/brightness seams cross the LMC: preview only, not approved for cloud processing. FITS orientation verified; independent star-field alignment pending.",
-          "maxPixels": 6000,
-          "useSavedAlignment": false
+          "registrationNote": "Widest candidate: 6000 × 6000 pixels across 24°, with full pixel coverage. NASA WISE infrared data, display colors by CDS (not visible-light color). ~14.6 arcsec/pixel sampling. Rectangular atlas color/brightness seams cross the LMC: preview only, not approved for cloud processing. FITS orientation verified; independent star-field alignment pending. The shared saved user-authored model fit is applied for display only; it does not validate WISE-to-SMASH or simulation alignment.",
+          "maxPixels": 6000
         }
-      ]
+      ],
+      "alignment": {
+        "path": "labs/nebula/models/lmc-overlays/source/manual-placement.json",
+        "sha256": "f51f97c5976dfb7a6d2e094c144c876a57c3ac6339e9ba50238bb56151635783"
+      }
     }
   ]
 }

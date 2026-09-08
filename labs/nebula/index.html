@@ -9,54 +9,43 @@
   </head>
   <body>
     <header class="lab-header">
-      <div class="lab-brand"><h1>Nebula Lab</h1><span>Local workspace</span></div>
-      <div class="header-controls" aria-label="Inspection controls">
-        <div class="header-field subject-field"><label for="subject">Subject</label><select id="subject" disabled></select></div>
-        <fieldset id="render-controls" disabled>
-          <legend class="visually-hidden">Prepared image layers</legend>
-          <div class="component-options">
-            <label><input type="radio" name="component" value="all" checked /> Whole object</label>
-            <label><input type="radio" name="component" value="diffuse" /> Diffuse</label>
-            <label><input type="radio" name="component" value="detail" /> Compact detail</label>
-          </div>
-          <div class="header-field pose-field">
-            <label for="camera-pose">Camera</label>
-            <select id="camera-pose" aria-label="Fixed camera pose">
-              <option value="front">Front</option><option value="x-minus-60">X −60°</option><option value="x-minus-30">X −30°</option>
-              <option value="x-plus-30">X +30°</option><option value="x-plus-60">X +60°</option><option value="y-minus-60">Y −60°</option>
-              <option value="y-minus-30">Y −30°</option><option value="y-plus-30">Y +30°</option><option value="y-plus-60">Y +60°</option>
-              <option value="edge-x">Edge X</option><option value="edge-y">Edge Y</option><option value="manual">Manual</option>
-            </select>
-          </div>
-          <div class="header-field axis-field"><label for="axis">Axis</label><select id="axis"><option value="auto">Auto</option><option value="x">X</option><option value="y">Y</option><option value="z">Z</option></select></div>
-          <div class="header-field depth-field"><span><label for="layer">Depth</label><output id="layer-value" for="layer">All layers</output></span><input id="layer" type="range" min="-1" max="-1" step="1" value="-1" aria-valuetext="All layers" /></div>
-          <div class="header-actions"><button id="all-layers" class="text-button" type="button">All layers</button><button id="reset" type="button">Reset camera</button></div>
-        </fieldset>
-        <fieldset id="density-view-controls" hidden>
-          <legend class="visually-hidden">Density view</legend>
-          <button id="reference-view" type="button">Reference view</button><button id="fit-cloud" type="button">Fit cloud</button>
-        </fieldset>
+      <h1>Nebula Lab</h1>
+      <div class="subject-field"><label for="subject">Object</label><select id="subject" disabled></select></div>
+      <div role="tablist" aria-label="View">
+        <button id="density-tab" type="button" role="tab" aria-selected="true" aria-controls="render-panel">Alignment</button>
+        <button id="render-tab" type="button" role="tab" aria-selected="false" aria-controls="render-panel" tabindex="-1">Reconstruction</button>
       </div>
-      <div class="header-context"><span class="interaction-hint">Drag to orbit. Scroll or pinch to zoom.</span><span id="model-note">Depth is modeled from a source image; it is not a measured 3D reconstruction.</span><a id="source-link" hidden target="_blank" rel="noreferrer">Source ↗</a><span id="source-credit"></span></div>
     </header>
     <main class="lab-layout">
       <section class="lab-workspace" aria-label="Object inspection">
-        <div class="workspace-toolbar">
-          <div role="tablist" aria-label="View">
-            <button id="density-tab" type="button" role="tab" aria-selected="true" aria-controls="render-panel">Alignment</button>
-            <button id="render-tab" type="button" role="tab" aria-selected="false" aria-controls="render-panel" tabindex="-1">Reconstruction</button>
-          </div>
-          <p id="status" role="status" aria-live="polite">Loading prepared layers…</p>
-        </div>
         <div class="workspace-content">
           <div id="render-panel" role="tabpanel" aria-labelledby="density-tab">
             <div id="viewer" aria-label="Interactive prepared object" tabindex="0"></div>
           </div>
-          <aside id="density-adjustment-panel" class="floating-panel density-adjustment-panel" aria-label="Density adjustments" hidden>
-            <fieldset id="density-tone-fieldset" disabled><legend>Density adjustments</legend><div id="density-tone-controls"></div></fieldset>
-          </aside>
-          <aside id="cloud-density-panel" class="floating-panel density-adjustment-panel" aria-label="Reconstruction density filter" hidden>
-            <div id="cloud-density-controls"></div>
+          <aside id="inspection-panel" class="floating-panel density-adjustment-panel" aria-label="Camera and density adjustments">
+            <fieldset id="render-controls" disabled>
+              <legend>Camera</legend>
+              <label class="field-label" for="camera-pose">View</label>
+              <select id="camera-pose" aria-label="Fixed camera pose">
+                <option value="front">Front</option><option value="x-minus-60">X −60°</option><option value="x-minus-30">X −30°</option>
+                <option value="x-plus-30">X +30°</option><option value="x-plus-60">X +60°</option><option value="y-minus-60">Y −60°</option>
+                <option value="y-minus-30">Y −30°</option><option value="y-plus-30">Y +30°</option><option value="y-plus-60">Y +60°</option>
+                <option value="edge-x">Edge X</option><option value="edge-y">Edge Y</option><option value="manual">Manual</option>
+              </select>
+              <div class="camera-actions"><button id="reset" type="button">Reset camera</button></div>
+              <div id="density-view-controls" class="camera-actions" hidden>
+                <button id="reference-view" type="button">Earth view</button><button id="fit-cloud" type="button">Fit cloud</button>
+              </div>
+              <p class="interaction-hint">Drag to orbit. Scroll to zoom.</p>
+            </fieldset>
+            <section id="density-adjustment-panel" class="inspection-section" hidden>
+              <fieldset id="density-tone-fieldset" disabled><legend>Density adjustments</legend><div id="density-tone-controls"></div></fieldset>
+            </section>
+            <section id="cloud-density-panel" class="inspection-section" aria-label="Reconstruction density filter" hidden>
+              <div id="cloud-density-controls"></div>
+            </section>
+            <p id="status" role="status" aria-live="polite">Loading…</p>
+            <a id="source-link" class="model-source" hidden target="_blank" rel="noreferrer">Model source ↗</a>
           </aside>
           <aside id="image-overlay-panel" class="image-overlay-panel" aria-label="Image placement" hidden>
             <fieldset id="overlay-controls" disabled>
