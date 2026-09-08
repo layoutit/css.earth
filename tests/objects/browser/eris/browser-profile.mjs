@@ -5,6 +5,6 @@ export const browserProfile = createObjectBrowserProfile({ id: "eris", controls:
   audit: {
     preparedAssetPairs: [{ one: "/scenes/eris/eris-directional-sun.webp", two: "/scenes/eris/eris-directional-sun@2x.webp" }],
     canonicalPreparedAssets: ["/scenes/eris/surface.webp", "/scenes/eris/poles.webp", "/scenes/eris/lighting.webp"],
-    retained: { lensIds: [], allowedMountSelectors: [] },
+    retained: { lensIds: ['illustration'], allowedMountSelectors: [] },
   },
 });

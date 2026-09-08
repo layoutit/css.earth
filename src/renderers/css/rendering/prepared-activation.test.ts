@@ -22,6 +22,8 @@ test('connected prepared groups retain identity and become layout-active across 
     expect(f.groups.filter(n=>n.style.display !== 'none')).toHaveLength(i+1);
     expect(f.groups).toEqual(identities);
   }
+  expect(f.callbacks.size).toBe(1);
+  f.paint();
   await ready;
   expect(f.callbacks.size).toBe(0);
 });
@@ -32,6 +34,11 @@ test('one paint activates only its prepared batch, including the final shorter b
     f.paint();
     expect(f.groups.filter(node => node.style.display !== 'none')).toHaveLength(count);
   }
+  let settled = false;
+  ready.then(() => { settled = true; });
+  await Promise.resolve();
+  expect(settled).toBe(false, 'The continuation cannot share the final batch publication frame');
+  f.paint();
   await ready;
   expect(f.callbacks.size).toBe(0);
 });

@@ -11,7 +11,8 @@ group contains at most 64 existing sibling leaves; containers and leaves whose
 display belongs to selection are excluded. The preparation pipeline writes this
 metadata, the transport validator rejects its absence, and the registry test
 checks the generated bank against the checked-in tree and descriptor hash.
-Runtime only restores these prepared leaves over successive frames. It never
+Runtime only restores these prepared leaves over successive frames and gives the
+final batch a rendering opportunity before resolving readiness. It never
 derives geometry or chooses a different asset bank. Direct and reduced-motion
 arrivals remain atomic. A flight holds before the destination needs its detailed
 surface if activation is still pending.
@@ -41,6 +42,19 @@ curve reaches its exact terminal position and orientation before its duration
 cap, the lifecycle completes then rather than republishing a stationary pose.
 Destination-detail readiness holds still take precedence.
 
+Picking uses the same viewport-centred geometry published by retained markers,
+labels, and clipped orbit chords. It coalesces pointer movement into one frame,
+refreshes a stationary hover when the presentation changes, and removes a
+publisher's targets on disposal. Input never asks `elementsFromPoint` to search
+the scene or flush pending style/layout. Indicator resize updates both the
+visible orbit cutout and its hit geometry.
+
+Preparation can merge ordered constant-colour coplanar faces into lossless image
+tiles. Source coverage, holes, alpha, and paint order are rasterized offline;
+runtime receives the final image and affine leaves. The shape-model adapter uses
+this for its uniform ring (128 source faces become 16 tiles). Curved surfaces and
+textured/noncoplanar faces retain their original representation.
+
 ## Verification
 
 After the normal package/renderer build and `pnpm prepare:object-json`:
@@ -48,6 +62,8 @@ After the normal package/renderer build and `pnpm prepare:object-json`:
 ```sh
 node --test tools/prepared-activation-registry.test.mjs
 node --test tools/prepared-activation-transport.test.mjs
+ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
+DPR=2 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 node site/test/flight-registry-browser.mjs http://127.0.0.1:4210
 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 mars
 DPR=2 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 saturn
@@ -64,3 +80,12 @@ Frame-rate claims additionally require matched scene bytes, camera path,
 viewport, browser, and full-presentation timing; JavaScript duration alone does
 not measure compositor stalls. Development recordings attach an ID to navigation
 marks so the metadata and Chrome trace can be correlated.
+
+The interaction-chain recording covers scene picks, pointer movement during
+flight, sustained close dragging, overview return, a native wheel interruption,
+Sun arrival, zooming back to 5 AU, and subsequent body selections. It records
+trace marks, diagnostics, input dispatch times, resource hashes, and whether a
+selection needed the sidebar. An input probe rejects any DOM hit-test fallback.
+Run recordings separately from builds and other tests; an overloaded harness is
+functional evidence only. Compare matching drag phases and count complete
+presentation events, rather than treating RAF timing as delivered-frame proof.

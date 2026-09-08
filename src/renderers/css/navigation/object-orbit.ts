@@ -124,7 +124,8 @@ export function createRetainedCubicSkyOrbit({
     throw new TypeError("Shared retained cubic-sky orbit is invalid.");
   }
   const lifetime = createSceneLifetime();
-  if (perspectiveCamera) lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage));
+  if (perspectiveCamera) lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage,
+    viewport ? () => viewport.read(cameraPlan.projection!.cssPerspective).bounds : undefined));
   let constructing = true;
   const retireFailure = (error: unknown) => {
     if (constructing) throw error;
