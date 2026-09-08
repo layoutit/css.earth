@@ -455,7 +455,6 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     const query = search.value.trim().toLocaleLowerCase("en")
       || (overview ? overviewName().toLocaleLowerCase("en") : "");
     information.hidden = query.length > 0;
-    destinations?.setOpen(query.length > 0);
     const galactic = query === 'milky way';
     if (galaxy) galaxy.hidden = !galactic;
     if (system) system.hidden = galactic;
