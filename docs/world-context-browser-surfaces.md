@@ -244,3 +244,78 @@ New synchronized capture identities and immutable raw artifact hashes:
   - `cssearth-diagnostics-afa57c1e-0f35-4d53-8a79-97ca1d6100ad.json` SHA-256: `08b912c3158c3e624a3d608e6733bb5e8b7736c4813f11db6a2ef201a4d973e0`.
   - `trace.json.gz` SHA-256: `fa3a951e3fd9faafffe9fbadc82b81e4bbac99d576d4b61b89a781178cf042e3`.
   - `sun-milky-way-sun.mp4` SHA-256: `e9d40476f4642a70c82ea790d7d525ff012712e2285c4c01929616627ed6db82`.
+
+
+## Retained picking, diagnostic counts, and the system handoff
+
+`f034b683` removes per-orbit-chord CSS hit boxes and their inherited pointer policy.
+The retained screen picker already owns the exact clipped corridor, depth priority,
+hover, and click dispatch. This removes duplicate browser interaction geometry;
+all prepared orbit segments, line widths, colors, fades, and hit widths remain.
+Six native views at DPR 1/2 preserve every measured rectangle exactly and differ
+by at most one channel level. Native off-line hover, 16→20 px circle growth,
+Neptune navigation, and Back pass with the same retained leaves and one scene.
+Evidence: `output/playwright/orbit-picker-visual-proof/` and
+`output/playwright/orbit-picker-native-proof/`.
+
+`c9cd885a` exposes the retained blocks' existing visible membership to diagnostics.
+Complete blocks use their publisher-owned counts; unpooled leaves and partial
+blocks keep direct reads. The recorder keeps the same direct-hidden-leaf metric,
+125 ms sampling, immutable sample copies, camera/resource fields and clock marks.
+Eight native checks across Sun, hover, Neptune, and Back at DPR 1/2 match a direct
+DOM scan exactly, including more than 50,000 retained leaves. The first indexed
+snapshot is lazy; this does not add a per-frame observer or new scene nodes.
+Evidence: `output/playwright/retained-geometry-native-proof-verified/`.
+
+`3c0426f5` corrects the detail lifetime to use `plan.system.hiddenDistanceM`,
+not the larger volume extent used in the earlier experiment above. Unresolved
+planetary detail retires with its owning system, at 1e15 metres (about 6,684 AU)
+in the current prepared context. A resolved nearby body still stays visible.
+The physical projection keeps updating and the same detail restores on return.
+Native tests just before/after the boundary remove 515 content layers (528→13),
+are pixel-identical at DPR 1 and differ by at most two channel levels at DPR 2;
+the unretired before-boundary comparison has the same two-level variation.
+Dragging while retired and returning to the resolved Sun preserve identity.
+Evidence: `output/playwright/system-detail-retirement-proof/`.
+
+These synchronized single captures show reduced specific costs, not completion
+of the performance target. The orbit cleanup lowers style time in this pair;
+the diagnostics change lowers sampling cost. Planetary-band p95 remains 33.4 ms,
+and GPU stalls remain at first volume entry. No overall speedup is claimed from
+these single runs. rAF intervals are not a count of dropped display frames.
+
+| Run | Band >25 ms | Band p95 | Max interval | Style total | Mean recorder sample |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `context-retirement` | 104/571 | 33.4 ms | 66.7 ms | 4353 ms | 4.15 ms |
+| `orbit-picker-owned` | 106/576 | 33.4 ms | 83.3 ms | 3814 ms | 4.11 ms |
+| `retained-geometry-owned` | 111/585 | 33.4 ms | 233.3 ms | 4115 ms | 1.27 ms |
+| `system-detail-retirement` | 113/580 | 33.4 ms | 183.3 ms | 3882 ms | 1.22 ms |
+
+All four captures have recorder JSON, gzip Chrome trace, video, loaded/source
+identities and verified synchronization. Detailed hashes and clock deltas are
+in `output/world-context-zoom/retained-publication-comparison.json`.
+The long `world-style-invalidation` diagnostic is INVALID for synchronization:
+Chrome's continuous buffer overwrote its start mark. Surviving mutation stacks
+were useful only for locating publishers. `orbit-picker-invalidation` is a
+separate bounded, synchronized diagnostic; it is not a full-route timing pair.
+The earlier `retained-geometry-native-proof` attempt stopped on its unrelated
+whole-page pixel assertion; the focused verified counter/navigation run above
+is the evidence for the counter change.
+
+
+### Unchanged point-worker publications
+
+The real worker returned the same 2,048 identities to a stationary camera, but
+the runtime incremented its point-image revision unconditionally: one render
+became two and 2,048 projections became 4,096. Membership now invalidates the
+image only when identities are added or removed. Selection diagnostics still
+update, and a changed camera still projects immediately. The same real-worker
+probe now stays at one render and 2,048 projections. Both captures retain 1,953
+visible points and the same maximum projection error, 0.000877 CSS px.
+Evidence: `output/playwright/point-selection-identical-{baseline,candidate}/`.
+
+The existing real-worker conformance passes six positions/orientations at both
+DPRs, with one retained worker and stable slots. The exact-projection image
+comparison differs in one of 800,000 pixels at DPR 1 and none of 3,200,000 at DPR 2
+at the existing 0.01 comparison threshold. This proves the focused publication
+change, not completion of the full-route performance target.
