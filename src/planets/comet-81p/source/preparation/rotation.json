@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 112,
+  "declinationDegrees": -17,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "source": "reference/dataset.cat",
+  "qualification": "PDS model +Z is the minor axis of the fitted ellipsoid; it was assumed to represent the posigrade spin pole. The display retains this archived axis at an arbitrary fixed phase. It is not a current pole or a simulation of rotation."
+}

@@ -45,9 +45,9 @@ test('Earth is displaced from the EMB by the retained Earth-center vector and th
   assert.ok(Math.hypot(...sub(lunarOffset, astronomy.moonPositionRelativeToPlanetKm('moon', epoch))) < 1e-7);
 });
 
-test('regeneration retains every current registry orbit, including the newly added moons', () => {
+test('regeneration retains every current registry orbit, including moons and comets', () => {
   assert.deepEqual(Object.keys(geometry.BODY_ORBITS), OBJECTS.filter(body =>
-    ['planet', 'dwarf-planet', 'satellite', 'asteroid'].includes(body.classification)).map(body => body.id));
+    ['planet', 'dwarf-planet', 'satellite', 'asteroid', 'comet'].includes(body.classification)).map(body => body.id));
   assert.equal(geometry.BODY_POSITION_PROVENANCE.daphnis, undefined, 'unavailable contemporary ephemeris is not relabeled as observed');
 });
 

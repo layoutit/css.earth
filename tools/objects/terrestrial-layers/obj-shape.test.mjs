@@ -1,6 +1,21 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler } from './obj-shape.mjs';
+import { parsePdsPlateShape } from './obj-shape.mjs';
+
+test('flagged PDS plates preserve observed, ellipsoid and joining provenance', () => {
+  const table = '4 4\n1 0 0 0\n0 1 0 0\n0 0 1 0\n-1 -1 -1 1\n0 1 2 0\n0 3 1 2\n1 3 2 2\n2 3 0 2';
+  const p = { metersPerUnit: 1000, indexBase: 0, expectedVertices: 4, expectedFaces: 4, provenanceFlags: 'observed-ellipsoid' };
+  const mesh = parsePdsPlateShape(table, p);
+  assert.deepEqual(mesh.positions[0], [1000, 0, 0]);
+  assert.deepEqual(mesh.faceProvenance, [0, 2, 2, 2]);
+  assert.equal(mesh.coverage.observedVertices, 3);
+  const ellipsoid = table.replace('1 0 0 0', '1 0 0 1').replace('0 1 0 0', '0 1 0 1').replace('0 0 1 0', '0 0 1 1').replace(/(\d \d \d) [02]$/gm, '$1 1');
+  assert.equal(parsePdsPlateShape(ellipsoid, p).coverage.ellipsoidFaces, 4);
+  assert.throws(() => parsePdsPlateShape(table.replace('0 1 2 0', '0 1 2 1'), p), /provenance/);
+  assert.throws(() => parsePdsPlateShape(table.replace('-1 -1 -1 1', '-1 -1 -1 9'), p), /provenance/);
+  assert.throws(() => parsePdsPlateShape(table, { ...p, provenanceFlags: undefined }), /rows changed/);
+});
 
 // An octahedron has analytic radial intersections, including vertices and edges.
 const octahedron = 'v 2 0 0\nv -2 0 0\nv 0 3 0\nv 0 -3 0\nv 0 0 4\nv 0 0 -4\n'+
@@ -113,6 +128,11 @@ test('radius tables retain west longitude, asymmetric radii and closed poles', a
   assert.ok([...edges.values()].every(e=>e.length===2&&e[0]+e[1]===0));
   assert.throws(()=>parsePdsRadiusTable(rows.slice(1).join('\n'),p),/dimensions/);
   assert.throws(()=>parsePdsRadiusTable(rows.join('\n').replace('360 0 2','360 0 3'),p),/seam or pole/);
+  // Decimal subtraction slightly exceeds 1e-6 in binary floating point.
+  const rounded = rows.join('\n').replace('360 0 2', '360 0 2.000001').replace('90 -90 6', '90 -90 6.000001');
+  const welded = parsePdsRadiusTable(rounded, p);
+  assert.deepEqual(welded.positions, mesh.positions);
+  assert.throws(()=>parsePdsRadiusTable(rounded.replace('6.000001', '6.000002'),p),/seam or pole/);
 });
 
 test('ASCII and binary STL preserve the same physical mesh and reject malformed facets', async () => {

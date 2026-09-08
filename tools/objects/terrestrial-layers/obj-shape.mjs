@@ -57,7 +57,7 @@ export async function loadPdsVertexFacetShape(path, profile) {
   return parsePdsVertexFacetShape(await readFile(path, 'utf8'), profile);
 }
 
-/** PDS4 plate tables: counts on the first row, followed by unnumbered XYZ
+/** PDS plate tables: counts on the first row, followed by unnumbered XYZ
  * vertices and explicitly indexed triangles. Keep the released topology and units. */
 export async function loadPdsPlateShape(path, profile) {
   return parsePdsPlateShape(await readFile(path, 'utf8'), profile);
@@ -95,6 +95,34 @@ export function parseVrmlShape(text, profile) {
   return radialShape(vertices, indices, profile);
 }
 
+/** Preserve the published comet plate model, including its confidence codes.
+ * Weakly constrained regions are source estimates and are labelled in the
+ * prepared constraint lens; the loader does not invent replacement geometry. */
+export async function loadPdsPlanetocentricShape(path, profile) {
+  return parsePdsPlanetocentricShape(await readFile(path, 'utf8'), profile);
+}
+
+export function parsePdsPlanetocentricShape(text, profile) {
+  const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
+  const header = rows.shift(), [vertexCount, faceCount] = header;
+  if (header.length !== 2 || vertexCount !== profile.expectedVertices || faceCount !== profile.expectedFaces ||
+      rows.length !== vertexCount + faceCount || !(profile.metersPerUnit > 0) || !Number.isFinite(profile.metersPerUnit)) throw new Error('Invalid PDS comet shape dimensions or units.');
+  const coordinates = [], flags = [], counts = { 1: 0, 2: 0, 3: 0 };
+  const positions = rows.slice(0, vertexCount).map(row => {
+    const [latitude, longitude, radius, flag] = row;
+    if (row.length !== 4 || !row.every(Number.isFinite) || Math.abs(latitude) > 90 ||
+        longitude < 0 || longitude >= 360 || !(radius > 0) || ![1, 2, 3].includes(flag)) throw new Error('Invalid PDS shape vertex or constraint flag.');
+    flags.push(flag); counts[flag]++; coordinates.push([latitude, longitude]);
+    const lat = latitude * Math.PI / 180, lon = longitude * Math.PI / 180, r = radius * profile.metersPerUnit;
+    return [r * Math.cos(lat) * Math.cos(lon), r * Math.cos(lat) * Math.sin(lon), r * Math.sin(lat)];
+  });
+  const indices = rows.slice(vertexCount);
+  if (indices.some(face => face.length !== 3 || face.some(i => !Number.isInteger(i) || i < 0 || i >= vertexCount))) throw new Error('Invalid PDS plate connectivity.');
+  return { ...radialShape(positions, indices, profile), constraintFlags: flags, coordinates,
+    coverage: { model: 'pds-vertex-constraint-flags', sourceVertices: vertexCount, sourceFaces: faceCount,
+      vertexFlags: counts, interpretation: '1 stereo control; 2 limb silhouette; 3 not well constrained. The complete published model is retained.' } };
+}
+
 /** PDS longitude/latitude/radius tables preserve their authored origin. The
  * regular grid defines the connectivity; duplicated seam/pole rows are welded. */
 export async function loadPdsRadiusTable(path, profile) {
@@ -122,7 +150,11 @@ export function parsePdsRadiusTable(text, profile) {
     const key = Math.abs(lat) === 90 ? `pole,${lat}` : `${x % nx},${y}`;
     const radius = radii.get(`${lon},${lat}`), prior = ids.get(key);
     if (prior !== undefined) {
-      if (Math.abs(Math.hypot(...positions[prior]) / profile.metersPerUnit - radius) > 1e-6) throw new Error('Inconsistent radius table seam or pole.');
+      // Published decimal radii can differ by the last 1e-6 source unit.
+      // Allow floating-point roundoff at that boundary, without widening the
+      // source precision tolerance (1 mm for kilometre tables).
+      const roundoff = 8 * Number.EPSILON * Math.max(1, radius);
+      if (Math.abs(Math.hypot(...positions[prior]) / profile.metersPerUnit - radius) > 1e-6 + roundoff) throw new Error('Inconsistent radius table seam or pole.');
       return prior;
     }
     const l = lon * Math.PI / 180 * (longitudeDirection === 'west-positive' ? -1 : 1), p = lat * Math.PI / 180;
@@ -144,11 +176,26 @@ export function parsePdsRadiusTable(text, profile) {
 
 export function parsePdsPlateShape(text, profile) {
   const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
-  const [vertices, faces] = rows.shift();
-  if (![0,1].includes(profile.indexBase) || vertices !== profile.expectedVertices || faces !== profile.expectedFaces || rows.length !== vertices + faces ||
-      rows.some(row => row.length !== 3 || row.some(n => !Number.isFinite(n)))) throw new Error('PDS plate dimensions or rows changed.');
-  return radialShape(rows.slice(0, vertices).map(v => v.map(n => n * profile.metersPerUnit)),
-    rows.slice(vertices).map(f => f.map(n => n - profile.indexBase)), profile);
+  const header = rows.shift(), [vertices, faces] = header;
+  const flagged = profile.provenanceFlags === 'observed-ellipsoid';
+  if (profile.provenanceFlags !== undefined && !flagged) throw new TypeError('Unknown PDS plate provenance flags.');
+  if (header.length !== 2 || ![0,1].includes(profile.indexBase) || vertices !== profile.expectedVertices || faces !== profile.expectedFaces || rows.length !== vertices + faces ||
+      rows.some(row => row.length !== (flagged ? 4 : 3) || row.some(n => !Number.isFinite(n)))) throw new Error('PDS plate dimensions or rows changed.');
+  const mesh = radialShape(rows.slice(0, vertices).map(v => v.slice(0, 3).map(n => n * profile.metersPerUnit)),
+    rows.slice(vertices).map(f => f.slice(0, 3).map(n => n - profile.indexBase)), profile);
+  if (!flagged) return mesh;
+  const vertexProvenance = rows.slice(0, vertices).map(row => row[3]);
+  const faceProvenance = rows.slice(vertices).map(row => row[3]);
+  if (vertexProvenance.some(flag => ![0, 1].includes(flag)) || faceProvenance.some((flag, i) => {
+    const flags = mesh.indices[i].map(index => vertexProvenance[index]);
+    return flag !== (flags.every(n => n === 0) ? 0 : flags.every(n => n === 1) ? 1 : 2);
+  })) throw new Error('PDS plate provenance disagrees with its vertex flags.');
+  const count = (values, flag) => values.filter(value => value === flag).length;
+  return { ...mesh, vertexProvenance, faceProvenance, coverage: {
+    model: 'pds-observed-ellipsoid-flags', sourceVertices: vertices, sourceFaces: faces,
+    observedVertices: count(vertexProvenance, 0), ellipsoidVertices: count(vertexProvenance, 1),
+    observedFaces: count(faceProvenance, 0), ellipsoidFaces: count(faceProvenance, 1), connectingFaces: count(faceProvenance, 2),
+  } };
 }
 
 export function parsePdsVertexFacetShape(text, profile) {
