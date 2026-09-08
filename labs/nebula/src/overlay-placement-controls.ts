@@ -13,16 +13,16 @@ interface ControlSpec {
 }
 
 const TRANSLATION: ControlSpec[] = [
-  { key: 'x', label: 'X (kpc)', min: -30, max: 30, step: .1 },
-  { key: 'y', label: 'Y (kpc)', min: -30, max: 30, step: .1 },
-  { key: 'z', label: 'Z (kpc)', min: -30, max: 30, step: .1 },
+  { key: 'x', label: 'X (kpc)', min: -30, max: 30, step: .05 },
+  { key: 'y', label: 'Y (kpc)', min: -30, max: 30, step: .05 },
+  { key: 'z', label: 'Z (kpc)', min: -30, max: 30, step: .05 },
 ];
-const ROTATION: ControlSpec = { key: 'rotationZ', label: 'Rotation', min: -180, max: 180, step: 1, numberMin: -180, numberMax: 180 };
+const ROTATION: ControlSpec = { key: 'rotationZ', label: 'Rotation', min: -180, max: 180, step: .25, numberMin: -180, numberMax: 180 };
 const TILT: ControlSpec[] = [
-  { key: 'rotationX', label: 'X tilt', min: -180, max: 180, step: 1, numberMin: -180, numberMax: 180 },
-  { key: 'rotationY', label: 'Y tilt', min: -180, max: 180, step: 1, numberMin: -180, numberMax: 180 },
+  { key: 'rotationX', label: 'X tilt', min: -180, max: 180, step: .25, numberMin: -180, numberMax: 180 },
+  { key: 'rotationY', label: 'Y tilt', min: -180, max: 180, step: .25, numberMin: -180, numberMax: 180 },
 ];
-const SIZE: ControlSpec = { key: 'scale', label: 'Size (%)', min: 10, max: 300, step: 1, numberMin: .01 };
+const SIZE: ControlSpec = { key: 'scale', label: 'Size (%)', min: 10, max: 300, step: .5, numberMin: .01 };
 
 function addControl(host: HTMLElement, prefix: string, spec: ControlSpec, value: number,
   onChange: (partial: Partial<OverlayPlacement>) => void) {
@@ -49,39 +49,44 @@ function addControl(host: HTMLElement, prefix: string, spec: ControlSpec, value:
   return { spec, range, number };
 }
 
-export function createOverlayPlacementControls({ id, label, placement, defaults, onChange, onCopy }: {
+export function createOverlayPlacementControls({ id, label, placement, defaults, original, savedLocally, onChange, onCopy }: {
   id: string;
   label: string;
   placement: OverlayPlacement;
   defaults: OverlayPlacement;
+  original?: OverlayPlacement;
+  savedLocally: boolean;
   onChange(partial: Partial<OverlayPlacement>): void;
   onCopy(): Promise<void>;
 }) {
-  const details = document.createElement('details'); details.className = 'overlay-placement';
-  details.dataset.placementFor = id;
-  const summary = document.createElement('summary'); summary.textContent = 'Adjust placement'; details.append(summary);
+  const panel = document.createElement('section'); panel.className = 'overlay-placement';
+  panel.dataset.placementFor = id;
   const hint = document.createElement('p'); hint.className = 'placement-hint';
-  hint.textContent = 'Manual placement for this session. Reset restores the original. Local +Y points up in Reference view.';
-  details.append(hint);
-  const controls = [...TRANSLATION.map(spec => addControl(details, `placement-${id}`, spec, placement[spec.key], onChange)),
-    addControl(details, `placement-${id}`, ROTATION, placement.rotationZ, onChange),
-    addControl(details, `placement-${id}`, SIZE, placement.scale, onChange)];
-  const tilt = document.createElement('details'); tilt.className = 'overlay-tilt';
-  const tiltSummary = document.createElement('summary'); tiltSummary.textContent = '3D tilt'; tilt.append(tiltSummary);
-  controls.push(...TILT.map(spec => addControl(tilt, `placement-${id}`, spec, placement[spec.key], onChange)));
-  details.append(tilt);
+  hint.textContent = `Local +Y points up in Reference view. ${savedLocally ? 'Changes are saved locally.' : 'Changes last for this session.'}`;
+  panel.append(hint);
+  const controls = [...TRANSLATION.map(spec => addControl(panel, `placement-${id}`, spec, placement[spec.key], onChange)),
+    addControl(panel, `placement-${id}`, ROTATION, placement.rotationZ, onChange),
+    ...TILT.map(spec => addControl(panel, `placement-${id}`, spec, placement[spec.key], onChange)),
+    addControl(panel, `placement-${id}`, SIZE, placement.scale, onChange)];
+  const setValues = (value: OverlayPlacement) => {
+    for (const control of controls) {
+      const next = control.spec.key === 'scale' ? value.scale * 100 : value[control.spec.key];
+      control.range.value = String(next); control.number.value = String(next);
+    }
+  };
   const actions = document.createElement('div'); actions.className = 'placement-actions';
   const reset = document.createElement('button'); reset.type = 'button'; reset.className = 'text-button placement-reset';
   reset.id = `reset-placement-${id}`;
-  reset.textContent = 'Reset placement';
-  reset.addEventListener('click', () => {
-    onChange(defaults);
-    for (const control of controls) {
-      const value = control.spec.key === 'scale' ? defaults.scale * 100 : defaults[control.spec.key];
-      control.range.value = String(value); control.number.value = String(value);
-    }
-  });
-  reset.setAttribute('aria-label', `Reset ${label} placement`);
+  reset.textContent = 'Reset fit';
+  reset.addEventListener('click', () => { onChange(defaults); setValues(defaults); });
+  reset.setAttribute('aria-label', `Reset ${label} fit`);
+  if (original) {
+    const originalButton = document.createElement('button'); originalButton.type = 'button';
+    originalButton.className = 'text-button placement-original'; originalButton.id = `original-placement-${id}`;
+    originalButton.textContent = 'Original sky';
+    originalButton.addEventListener('click', () => { onChange(original); setValues(original); });
+    originalButton.setAttribute('aria-label', `Restore ${label} original sky placement`); actions.append(originalButton);
+  }
   const copy = document.createElement('button'); copy.type = 'button'; copy.className = 'text-button placement-copy';
   copy.id = `copy-placement-${id}`; copy.textContent = 'Copy positioning';
   copy.setAttribute('aria-label', `Copy ${label} positioning`);
@@ -96,6 +101,6 @@ export function createOverlayPlacementControls({ id, label, placement, defaults,
       copy.textContent = 'Copy failed — try again';
     } finally { copy.disabled = false; }
   });
-  actions.append(reset, copy); details.append(actions);
-  return details;
+  actions.prepend(reset); actions.append(copy); panel.append(actions);
+  return panel;
 }

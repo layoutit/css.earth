@@ -77,3 +77,9 @@ The defensible pre-processing diagnostic is:
 5. only decide any later crop after the full-field footprint, handedness, north/east orientation, centre offsets, and overlap are visibly validated.
 
 The current local `−34°` XZ rotation, `colorCenterKpc=(0.138536068,-1.648790306,0)`, and central-bar match are explicitly documented as authored placement. No primary source found supports them as an astrometric registration. They must not be used for the requested scientific overlap.
+
+## Lab observer display
+
+Density view starts at the Solar System observer, equivalent to Earth at Magellanic distances. The saved object frame has axes celestial east, north, and away from the observer. The camera's front pose fixes the observer side; a final horizontal display reflection makes the sky north-up and east-left. Input rotation increments are conjugated by that reflection so dragging follows the pointer. The density and photographic planes receive the same display transform; neither their physical coordinates nor their relative alignment changes.
+
+The checked-in `models/lmc-overlays/source/observer-basis-receipt.json` records both clouds' frame bases, observer positions, cardinal projections, and rotation-conjugation checks. This verifies the viewing convention, not exact agreement of the simulation with observed structure. The paper-derived transform retains its documented uncertainty and model/observation mismatch.

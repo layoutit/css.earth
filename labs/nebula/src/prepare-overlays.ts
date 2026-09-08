@@ -6,16 +6,20 @@ import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import { sha256 } from '../../../src/preparation/volume/source.js';
 import { overlayCorners, type ImageWcs, type OverlayFrame } from './overlay-wcs.js';
+import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from './overlay-placement.js';
+import { transferOverlayAlignment } from './overlay-alignment.js';
+import { registeredOverlayCorners, type ImageRegistration } from './overlay-registration.js';
 
 interface InputImage {
   id: string; label: string; path: string; sha256: string; url?: string;
   sourcePageUrl: string; credit: string; license: string;
-  wcs: ImageWcs; wcsSource: { url: string; sha256: string; description: string };
-  registrationNote: string;
+  wcs?: ImageWcs; wcsSource: { url: string; sha256: string; description: string };
+  registration?: ImageRegistration;
+  registrationNote: string; maxPixels?: number;
 }
 interface Recipe {
   schema: 'cssearth-nebula-overlay-recipe@1'; maxPixels: number;
-  targets: { directory: string; referenceObject: string; images: InputImage[] }[];
+  targets: { directory: string; referenceObject: string; images: InputImage[]; alignment?: { path: string; sha256: string } }[];
 }
 async function inputBytes(input: InputImage) {
   let bytes = await readFile(input.path).catch(() => null);
@@ -44,13 +48,17 @@ export async function prepareOverlays(path: string) {
       if (!/^[a-z0-9-]+$/.test(input.id)) throw new TypeError('Overlay ids must be safe names.');
       const bytes = await inputBytes(input), original = await sharp(bytes).metadata();
       if (!original.width || !original.height) throw new TypeError('Overlay source dimensions missing.');
-      const aspect = input.wcs.referenceDimension[0] / input.wcs.referenceDimension[1];
-      if (Math.abs(original.width / original.height / aspect - 1) > .001) throw new TypeError(`WCS aspect differs: ${input.id}`);
-      const texture = await sharp(bytes).toColourspace('srgb').resize({ width: recipe.maxPixels, height: recipe.maxPixels,
+      if (input.wcs) {
+        const aspect = input.wcs.referenceDimension[0] / input.wcs.referenceDimension[1];
+        if (Math.abs(original.width / original.height / aspect - 1) > .001) throw new TypeError(`WCS aspect differs: ${input.id}`);
+      } else if (!input.registration) throw new TypeError(`Image needs a sky registration: ${input.id}`);
+      const maxPixels = input.maxPixels ?? recipe.maxPixels;
+      if (!Number.isInteger(maxPixels) || maxPixels < 256 || maxPixels > 8192) throw new TypeError('Invalid image preview resolution.');
+      const texture = await sharp(bytes).toColourspace('srgb').resize({ width: maxPixels, height: maxPixels,
         fit: 'inside', withoutEnlargement: true }).webp({ quality: 92, alphaQuality: 100, effort: 5 }).toBuffer({ resolveWithObject: true });
       const texturePath = `prepared/${input.id}.webp`, width = texture.info.width, height = texture.info.height;
       await writeFile(resolve(target.directory, texturePath), texture.data);
-      const vertices = overlayCorners(input.wcs, frame);
+      const vertices = input.registration ? registeredOverlayCorners(input.registration, original.width, original.height, frame) : overlayCorners(input.wcs!, frame);
       const polygon: Polygon = { vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], texture: texturePath,
         textureImageSource: { url: texturePath, width, height }, doubleSided: true,
         texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' } };
@@ -63,6 +71,7 @@ export async function prepareOverlays(path: string) {
       const pivotCssPx = [0, 1, 2].map(axis => (matrix[axis]! * cx + matrix[axis + 4]! * cy + matrix[axis + 12]!) / w);
       if (!pivotCssPx.every(Number.isFinite)) throw new TypeError(`Invalid image centre: ${input.id}`);
       overlays.push({ id: input.id, label: input.label, texturePath, widthPx: width, heightPx: height,
+        initialPlacement: undefined as OverlayPlacement | undefined, initialOpacity: undefined as number | undefined,
         sha256: sha256(texture.data), bytes: texture.data.length, pivotCssPx,
         style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`, transform: `matrix3d(${geometry.matrix})`,
           backgroundSize: geometry.backgroundSize.map(n => `${n}px`).join(' '),
@@ -71,16 +80,30 @@ export async function prepareOverlays(path: string) {
       evidence.push({ input, sourceDimensions: [original.width, original.height], verticesUnits: vertices,
         output: { texturePath, width, height, sha256: sha256(texture.data), bytes: texture.data.length } });
     }
+    if (target.alignment) {
+      const bytes = await readFile(target.alignment.path);
+      if (sha256(bytes) !== target.alignment.sha256) throw new TypeError('Saved image alignment has changed.');
+      const saved = JSON.parse(bytes.toString('utf8'));
+      const reference = overlays.find(image => image.id === saved.imageId);
+      if (saved.schema !== 'cssearth-nebula-image-placement@1' || !reference ||
+          !(saved.opacity >= 0 && saved.opacity <= 1)) throw new TypeError('Invalid saved image alignment.');
+      const placement = updateOverlayPlacement(defaultOverlayPlacement(), { ...saved.positionKpc,
+        rotationX: saved.rotationDegrees.x, rotationY: saved.rotationDegrees.y, rotationZ: saved.rotationDegrees.z, scale: saved.scale });
+      for (const image of overlays) {
+        image.initialPlacement = transferOverlayAlignment(placement, reference.pivotCssPx, image.pivotCssPx, 50 * 3.085677581491367e19 / frame.metersPerUnit);
+        image.initialOpacity = saved.opacity;
+      }
+    }
     await writeFile(resolve(target.directory, 'overlays.json'), JSON.stringify({ schema: 'cssearth-nebula-overlays@1', frame, referenceDistanceUnits: Math.hypot(...frame.originM) / frame.metersPerUnit, overlays }, null, 2) + '\n');
     await mkdir(resolve(target.directory, 'source'), { recursive: true });
     await writeFile(resolve(target.directory, 'source/provenance.json'), JSON.stringify({
       schema: 'cssearth-nebula-overlay-provenance@1', recipe: { path, sha256: sha256(recipeBytes) },
-      frame: { path: target.referenceObject, sha256: sha256(referenceBytes) }, images: evidence,
-      method: 'Publisher ICRS TAN WCS rays intersect the observation tangent plane. Full image edges become a fixed PolyCSS projective quad.',
+      frame: { path: target.referenceObject, sha256: sha256(referenceBytes) }, images: evidence, alignment: target.alignment,
+      method: 'Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.',
       limits: ['Image WCS metadata supplies angular registration; it does not validate the simulation morphology.',
-        'No photograph-derived masks, cutouts, scale fitting or density-driven image warps are applied.',
+        'Source sky placement is retained. An optional saved manual alignment supplies separate initial display controls for every image.',
         'The flat image plane records one observed projection; it does not assert physical depths for photographed features.',
-        'The 2048px textures are inspection previews; native sources and WCS remain pinned for later processing.'],
+        'Textures are bounded inspection previews; native sources and WCS remain pinned for later processing.'],
     }, null, 2) + '\n');
     console.log(`OVERLAYS_READY ${target.directory}: ${overlays.length} WCS image planes`);
   }

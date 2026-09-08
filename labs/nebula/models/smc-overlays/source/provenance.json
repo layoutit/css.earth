@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
     "path": "labs/nebula/models/image-overlays.json",
-    "sha256": "bbfa5a15d79b23271e1ba92dba463473b9e3ce9de3a0e705e7a81278396b3867"
+    "sha256": "a85fa93a0bfca82ae02280e43060e7990fdc376573a3b25f8c51be58b9960703"
   },
   "frame": {
     "path": "labs/nebula/models/smc-particles/object.json",
@@ -153,11 +153,11 @@
       }
     }
   ],
-  "method": "Publisher ICRS TAN WCS rays intersect the observation tangent plane. Full image edges become a fixed PolyCSS projective quad.",
+  "method": "Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.",
   "limits": [
     "Image WCS metadata supplies angular registration; it does not validate the simulation morphology.",
-    "No photograph-derived masks, cutouts, scale fitting or density-driven image warps are applied.",
+    "Source sky placement is retained. An optional saved manual alignment supplies separate initial display controls for every image.",
     "The flat image plane records one observed projection; it does not assert physical depths for photographed features.",
-    "The 2048px textures are inspection previews; native sources and WCS remain pinned for later processing."
+    "Textures are bounded inspection previews; native sources and WCS remain pinned for later processing."
   ]
 }

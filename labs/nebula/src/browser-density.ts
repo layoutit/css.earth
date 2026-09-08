@@ -10,6 +10,13 @@ const subjects = JSON.parse(await readFile('labs/nebula/src/subjects.json', 'utf
   { id: string; directory: string; imagePath?: string; density?: { directory: string; overlays?: string } }[];
 const lmc = subjects.find(subject => subject.id === 'lmc-particles');
 assert.ok(lmc?.density, 'LMC density subject is unavailable');
+assert.ok(lmc.density.overlays, 'LMC overlay catalogue is unavailable');
+const lmcOverlays = JSON.parse(await readFile(lmc.density.overlays, 'utf8')) as
+  { referenceDistanceUnits?: number; overlays: { id: string; texturePath: string }[] };
+const smc = subjects.find(subject => subject.id === 'smc-particles');
+assert.ok(smc?.density?.overlays, 'SMC overlay catalogue is unavailable');
+const smcOverlays = JSON.parse(await readFile(smc.density.overlays, 'utf8')) as
+  { referenceDistanceUnits?: number; overlays: { id: string; texturePath: string }[] };
 const densityPath = `/${lmc.density.directory}/`, photoPath = `/${lmc.directory}/`;
 const overlayPath = lmc.density.overlays ? `/${lmc.density.overlays.slice(0, lmc.density.overlays.lastIndexOf('/') + 1)}prepared/` : null;
 await mkdir(shots, { recursive: true });
@@ -66,10 +73,20 @@ async function dragAndZoom() {
 
 try {
   await page.goto(`${baseURL}/?subject=lmc-particles&tab=density`, { waitUntil: 'domcontentloaded' }); await ready('density', 'lmc-particles');
+  await page.waitForFunction(count => document.querySelectorAll('#overlay-choice option').length === count, lmcOverlays.overlays.length);
   const direct = await state(); validScene(direct, 'lmc-particles/direct');
+  assert.equal(direct.pose, 'front', 'direct Density did not use the Earth observer pose');
+  assert.equal(Number(direct.distance), lmcOverlays.referenceDistanceUnits, 'direct Density did not use the Earth observer distance');
+  assert.equal(await page.locator('#image-overlay-panel').isVisible(), true, 'image placement panel is not visible');
+  assert.equal(await page.locator('#overlay-choice').inputValue(), lmcOverlays.overlays[0]!.id, 'default selection differs from the overlay manifest');
+  assert.equal(await page.locator(`#overlay-${lmcOverlays.overlays[0]!.id}`).isChecked(), false, 'default selection requested image pixels');
   const prepared = requests.filter(url => url.includes('/prepared/')); assert.ok(prepared.length > 0, 'direct density loaded no prepared resources');
   assert.ok(prepared.every(url => url.includes(`${densityPath}prepared/`)), 'direct density loaded non-density prepared resources');
   assert.ok(requests.every(url => !url.includes(`${photoPath}prepared/`) && (!lmc.imagePath || !url.includes(`/${lmc.imagePath}`)) && (!overlayPath || !url.includes(overlayPath))), 'direct density requested photograph resources');
+  const referenceTransforms = direct.transforms;
+  await page.click('#fit-cloud'); await page.waitForFunction(distance => document.querySelector<HTMLElement>('#viewer')?.dataset.distance !== distance, direct.distance);
+  await page.click('#reference-view'); await page.waitForFunction(distance => Number(document.querySelector<HTMLElement>('#viewer')?.dataset.distance) === distance, lmcOverlays.referenceDistanceUnits);
+  assert.deepEqual((await state()).transforms, referenceTransforms, 'Reference view did not restore the Earth observer world transform');
   report.subjects.push(await capture('lmc-particles', 'front'));
   await page.click('#source-tab'); await page.waitForFunction(() => { const image = document.querySelector<HTMLImageElement>('#source-image'); return image?.complete && image.naturalWidth > 0; });
   await page.click('#structure-tab'); await page.locator('#structure-panel h2').waitFor({ state: 'visible' }); await page.click('#density-tab'); await ready('density', 'lmc-particles');
@@ -85,6 +102,9 @@ try {
   await page.selectOption('#subject', 'm31'); await ready('density', 'm31'); assert.match(await page.locator('#status').innerText(), /No independent density field/);
   assert.equal((await state()).roots, 0, 'unavailable density retained a scene'); assert.equal(await page.locator('#source-image').isVisible(), false, 'unavailable density displayed a photograph');
   await page.selectOption('#subject', 'smc-particles'); await ready('density', 'smc-particles');
+  await page.waitForFunction(count => document.querySelectorAll('#overlay-choice option').length === count, smcOverlays.overlays.length);
+  assert.equal(Number((await state()).distance), smcOverlays.referenceDistanceUnits, 'unseen SMC did not open at its Earth observer distance');
+  assert.equal(await page.locator('#overlay-choice').inputValue(), smcOverlays.overlays[0]!.id, 'SMC default selection differs from its manifest');
   report.subjects.push(await capture('smc-particles', 'front'), await capture('smc-particles', 'y-plus-60'));
   await page.route(`**${densityPath}**`, async route => { await new Promise(resolve => setTimeout(resolve, 120)); await route.continue(); });
   await page.goto(`${baseURL}/?subject=lmc-particles`, { waitUntil: 'domcontentloaded' }); await ready('photo', 'lmc-particles');

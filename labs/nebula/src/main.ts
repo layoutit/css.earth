@@ -2,6 +2,7 @@ import { createNebulaLabViewer, localFile, subjects } from './viewer';
 import { createBenchmarkView } from './benchmark-view';
 import { defaultOverlayPlacement } from './overlay-placement';
 import { createOverlayPlacementControls } from './overlay-placement-controls';
+import { createToneControls } from './tone-controls';
 
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
@@ -16,10 +17,20 @@ const imageStatus = element('source-image-status');
 const sourceChoice = element<HTMLSelectElement>('source-choice');
 const sourceLink = element<HTMLAnchorElement>('source-link');
 const sourceCredit = element('source-credit');
+const densityViewControls = element<HTMLFieldSetElement>('density-view-controls');
+const densityAdjustmentPanel = element<HTMLElement>('density-adjustment-panel');
+const densityToneFieldset = element<HTMLFieldSetElement>('density-tone-fieldset');
+const overlayPanel = element<HTMLElement>('image-overlay-panel');
 const overlayControls = element<HTMLFieldSetElement>('overlay-controls');
 const overlayOptions = element('overlay-options');
+const overlayChoice = element<HTMLSelectElement>('overlay-choice');
+const overlayEnabled = element<HTMLInputElement>('overlay-enabled');
+const overlayEnabledLabel = element<HTMLLabelElement>('overlay-enabled-label');
+const overlayOpacity = element<HTMLInputElement>('overlay-opacity');
 const overlayStatus = element('overlay-status');
 const overlayRegistration = element('overlay-registration');
+const overlayCredit = element('overlay-credit');
+const overlaySource = element<HTMLAnchorElement>('overlay-source');
 const tabs = ['render-tab', 'density-tab', 'source-tab', 'structure-tab'].map(id => element<HTMLButtonElement>(id));
 const tabNames = ['render', 'density', 'source', 'structure'];
 const benchmark = createBenchmarkView({ host: element('structure-panel'),
@@ -33,6 +44,21 @@ let currentMode: 'photo' | 'density' = 'photo';
 let modeRequest = 0;
 let requestedMode: 'photo' | 'density' = 'photo';
 let modePending = false;
+type Overlay = Awaited<ReturnType<Viewer['loadOverlayCatalogue']>>[number];
+let currentOverlays: Overlay[] = [];
+let selectedOverlayId: string | null = null;
+let overlayActivation = 0;
+const densityTone = createToneControls({ host: element('density-tone-controls'), target: 'density',
+  async onApply(_context, resources, isCurrent) {
+    if (!viewer) throw new Error('Viewer is unavailable.');
+    await viewer.applyToneResources('density', undefined, resources, isCurrent);
+  } });
+const imageTone = createToneControls({ host: element('image-tone-controls'), target: 'image',
+  async onApply(context, resources, isCurrent) {
+    if (!viewer) throw new Error('Viewer is unavailable.');
+    await viewer.applyToneResources('image', context.imageId, resources, isCurrent);
+  } });
+function invalidateToneContexts() { densityTone.setContext(null); imageTone.setContext(null); }
 
 for (const value of subjects) subject.add(new Option(value.name, value.id));
 
@@ -79,6 +105,8 @@ function setBusy(value: boolean) {
   layer.disabled = value || densityMissing || layer.max === '-1';
   element<HTMLButtonElement>('all-layers').disabled = value || densityMissing;
   element<HTMLButtonElement>('reset').disabled = value || densityMissing;
+  densityViewControls.disabled = value || currentTab !== 1 || !density;
+  densityToneFieldset.disabled = value || currentTab !== 1 || !density;
   overlayControls.disabled = value || currentTab !== 1 || !density;
   element<HTMLButtonElement>('reference-view').disabled = value || densityMissing;
   element<HTMLButtonElement>('fit-cloud').disabled = value || densityMissing;
@@ -119,50 +147,101 @@ function updateCredit() {
   sourceCredit.hidden = element('model-note').hidden = currentTab === 3;
 }
 let overlayRequest = 0;
+function overlaySelectionKey(catalogue: string) { return `cssearth-nebula-selected-overlay:${catalogue}`; }
+function storedOverlayId(catalogue: string) {
+  try { return localStorage.getItem(overlaySelectionKey(catalogue)); } catch { return null; }
+}
+function rememberOverlayId(catalogue: string, id: string) {
+  try { localStorage.setItem(overlaySelectionKey(catalogue), id); } catch { /* Selection still works without storage. */ }
+}
+function toneReadyFor(subjectId: string) {
+  const host = element('viewer');
+  return !busy && !modePending && host.dataset.ready === 'true' && host.dataset.mode === 'density' && host.dataset.subject === subjectId;
+}
+function renderSelectedOverlay() {
+  if (!viewer || !selectedOverlayId) return;
+  const item = subjects.find(value => value.id === sourceSubject), overlay = currentOverlays.find(value => value.id === selectedOverlayId);
+  if (!item?.density?.overlays || !overlay) return;
+  const prior = viewer.getOverlayState().find(value => value.id === overlay.id);
+  overlayChoice.value = overlay.id;
+  overlayEnabled.id = `overlay-${overlay.id}`; overlayEnabledLabel.htmlFor = overlayEnabled.id;
+  overlayEnabled.checked = prior?.enabled ?? false;
+  overlayOpacity.value = String(Math.round((prior?.opacity ?? overlay.initialOpacity ?? .55) * 100));
+  overlayOpacity.setAttribute('aria-label', `${overlay.label} opacity`);
+  const identity = defaultOverlayPlacement(), fitted = overlay.initialPlacement ?? identity;
+  const placement = createOverlayPlacementControls({ id: overlay.id, label: overlay.label,
+    placement: prior?.placement ?? fitted, defaults: fitted, ...(overlay.initialPlacement ? { original: identity } : {}),
+    savedLocally: element('viewer').dataset.overlayStorage === 'saved',
+    async onCopy() {
+      const saved = viewer!.getOverlayState().find(value => value.id === overlay.id);
+      const value = saved?.placement ?? fitted;
+      await navigator.clipboard.writeText(JSON.stringify({
+        schema: 'cssearth-nebula-image-placement@1', subjectId: item.id,
+        overlayCatalogue: item.density!.overlays, imageId: overlay.id,
+        positionKpc: { x: value.x, y: value.y, z: value.z },
+        rotationDegrees: { x: value.rotationX, y: value.rotationY, z: value.rotationZ },
+        scale: value.scale, opacity: saved?.opacity ?? overlay.initialOpacity ?? .55, tone: imageTone.getValue(),
+      }, null, 2));
+    },
+    onChange: partial => { try { viewer!.setOverlayPlacement(overlay.id, partial); } catch (error) { fail(error); } } });
+  overlayOptions.replaceChildren(placement);
+  overlayRegistration.textContent = overlay.registrationNote; overlayCredit.textContent = overlay.credit;
+  overlaySource.href = overlay.sourcePageUrl;
+  overlayStatus.textContent = `${currentOverlays.indexOf(overlay) + 1} of ${currentOverlays.length} images`;
+  overlayPanel.dataset.selectedOverlay = overlay.id;
+  imageTone.setContext(toneReadyFor(item.id) ? { subjectId: item.id, imageId: overlay.id } : null);
+}
+async function activateOverlay(id: string) {
+  if (!viewer) return;
+  const activation = ++overlayActivation, state = new Map(viewer.getOverlayState().map(value => [value.id, value]));
+  for (const overlay of currentOverlays) {
+    if (activation !== overlayActivation) return;
+    const saved = state.get(overlay.id);
+    if (overlay.id !== id && saved?.enabled) await viewer.setOverlay(overlay.id, false, saved.opacity);
+  }
+  if (activation !== overlayActivation) return;
+  const selected = currentOverlays.find(overlay => overlay.id === id), saved = state.get(id);
+  await viewer.setOverlay(id, true, saved?.opacity ?? selected?.initialOpacity ?? .55);
+  if (activation === overlayActivation && selectedOverlayId === id) renderSelectedOverlay();
+}
 async function refreshOverlayControls() {
-  const item = subjects.find(value => value.id === sourceSubject), visible = currentTab === 1 && currentMode === 'density' && Boolean(item?.density?.overlays);
-  overlayControls.hidden = !visible; overlayOptions.replaceChildren(); overlayStatus.textContent = ''; overlayRegistration.textContent = '';
-  if (!visible || !viewer) return;
+  const item = subjects.find(value => value.id === sourceSubject), catalogue = item?.density?.overlays;
+  const densityVisible = currentTab === 1 && currentMode === 'density' && Boolean(item?.density);
+  const visible = densityVisible && Boolean(catalogue);
+  densityViewControls.hidden = !densityVisible; densityAdjustmentPanel.hidden = !densityVisible; overlayPanel.hidden = !visible;
+  densityTone.setContext(densityVisible && item && toneReadyFor(item.id) ? { subjectId: item.id } : null);
+  if (!visible) imageTone.setContext(null);
+  currentOverlays = []; selectedOverlayId = null; overlayOptions.replaceChildren();
+  overlayStatus.textContent = ''; overlayRegistration.textContent = ''; overlayCredit.textContent = ''; overlaySource.removeAttribute('href');
+  if (!visible || !viewer || !catalogue) return;
   const request = ++overlayRequest;
   try {
     const overlays = await viewer.loadOverlayCatalogue();
     if (request !== overlayRequest || currentTab !== 1 || currentMode !== 'density') return;
-    const saved = new Map(viewer.getOverlayState().map(value => [value.id, value]));
-    for (const overlay of overlays) {
-      const row = document.createElement('div'); row.className = 'overlay-option';
-      const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.id = `overlay-${overlay.id}`;
-      const label = document.createElement('label'); label.htmlFor = checkbox.id; label.textContent = overlay.label;
-      const prior = saved.get(overlay.id), opacity = document.createElement('input'); opacity.type = 'range'; opacity.min = '0'; opacity.max = '100'; opacity.value = String(Math.round((prior?.opacity ?? .55) * 100));
-      checkbox.checked = prior?.enabled ?? false; opacity.setAttribute('aria-label', `${overlay.label} opacity`); opacity.disabled = busy || !checkbox.checked;
-      const placement = createOverlayPlacementControls({ id: overlay.id, label: overlay.label,
-        placement: prior?.placement ?? defaultOverlayPlacement(), defaults: defaultOverlayPlacement(),
-        async onCopy() {
-          const saved = viewer!.getOverlayState().find(value => value.id === overlay.id);
-          const value = saved?.placement ?? defaultOverlayPlacement();
-          await navigator.clipboard.writeText(JSON.stringify({
-            schema: 'cssearth-nebula-image-placement@1', subjectId: item!.id,
-            overlayCatalogue: item!.density!.overlays, imageId: overlay.id,
-            positionKpc: { x: value.x, y: value.y, z: value.z },
-            rotationDegrees: { x: value.rotationX, y: value.rotationY, z: value.rotationZ },
-            scale: value.scale, opacity: saved?.opacity ?? .55,
-          }, null, 2));
-        },
-        onChange: partial => { try { viewer!.setOverlayPlacement(overlay.id, partial); } catch (error) { fail(error); } } });
-      const credit = document.createElement('details'); credit.className = 'overlay-credit overlay-detail';
-      const creditSummary = document.createElement('summary'); creditSummary.textContent = 'Image notes and credit';
-      const detail = document.createElement('p'); detail.textContent = `${overlay.credit} ${overlay.registrationNote}`;
-      const source = document.createElement('a'); source.href = overlay.sourcePageUrl; source.target = '_blank'; source.rel = 'noreferrer'; source.textContent = 'Source ↗'; source.className = 'overlay-detail';
-      credit.append(creditSummary, detail, source);
-      const update = (enabled: boolean, value: number) => { checkbox.disabled = busy; opacity.disabled = busy || !enabled; void viewer!.setOverlay(overlay.id, enabled, value / 100).catch(fail); };
-      checkbox.addEventListener('change', () => update(checkbox.checked, Number(opacity.value)));
-      opacity.addEventListener('input', () => { if (checkbox.checked) update(true, Number(opacity.value)); });
-      row.append(label, checkbox, opacity, placement, credit); overlayOptions.append(row);
-    }
-    overlayStatus.textContent = 'Prepared photo planes share the density reference frame.';
-    overlayRegistration.textContent = 'Approximate paper-based simulation placement; image WCS registration. Model/observation correspondence remains unvalidated. Outside the photograph footprint is unknown.';
+    currentOverlays = overlays;
+    overlayChoice.replaceChildren(...overlays.map(overlay => new Option(overlay.label, overlay.id)));
+    const stored = storedOverlayId(catalogue), enabled = viewer.getOverlayState().find(value => value.enabled)?.id;
+    selectedOverlayId = overlays.some(overlay => overlay.id === stored) ? stored :
+      overlays.some(overlay => overlay.id === enabled) ? enabled! : overlays[0]?.id ?? null;
+    if (selectedOverlayId) renderSelectedOverlay();
   } catch (error) { if (request === overlayRequest) overlayStatus.textContent = error instanceof Error ? error.message : String(error); }
   setBusy(busy);
 }
+overlayChoice.addEventListener('change', () => {
+  const item = subjects.find(value => value.id === sourceSubject);
+  if (!item?.density?.overlays) return;
+  selectedOverlayId = overlayChoice.value; rememberOverlayId(item.density.overlays, selectedOverlayId);
+  renderSelectedOverlay(); overlayEnabled.checked = true; void run(() => activateOverlay(selectedOverlayId!));
+});
+overlayEnabled.addEventListener('change', () => {
+  if (!selectedOverlayId) return;
+  void run(() => overlayEnabled.checked ? activateOverlay(selectedOverlayId!) :
+    viewer!.setOverlay(selectedOverlayId!, false, Number(overlayOpacity.value) / 100));
+});
+overlayOpacity.addEventListener('input', () => {
+  if (!selectedOverlayId) return;
+  void run(() => viewer!.setOverlay(selectedOverlayId!, overlayEnabled.checked, Number(overlayOpacity.value) / 100));
+});
 function showSource() {
   if (element('source-panel').hidden) return;
   const item = chosenSource();
@@ -178,6 +257,7 @@ image.addEventListener('error', () => { imageStatus.textContent = 'The local sou
 
 subject.addEventListener('change', async () => {
   if (!viewer || busy) return;
+  invalidateToneContexts();
   setBusy(true); status.textContent = 'Loading prepared layers…'; delete status.dataset.error;
   try { await viewer.setSubject(subject.value); }
   catch (error) { fail(error); }
@@ -202,6 +282,7 @@ async function switchMode(next: 'photo' | 'density') {
   const needsSwitch = currentMode !== next;
   currentMode = next;
   if (!viewer || !needsSwitch) { setBusy(busy); return; }
+  invalidateToneContexts();
   const request = ++modeRequest;
   modePending = true;
   setBusy(true); delete status.dataset.error;
@@ -247,6 +328,6 @@ try {
   }
 } catch (error) { fail(error); }
 
-function destroy() { if (!disposed) { disposed = true; benchmark.destroy(); viewer?.destroy(); } }
+function destroy() { if (!disposed) { disposed = true; benchmark.destroy(); densityTone.destroy(); imageTone.destroy(); viewer?.destroy(); } }
 window.addEventListener('pagehide', destroy, { once: true });
 if (import.meta.hot) import.meta.hot.dispose(destroy);

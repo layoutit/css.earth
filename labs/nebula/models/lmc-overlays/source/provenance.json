@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
     "path": "labs/nebula/models/image-overlays.json",
-    "sha256": "bbfa5a15d79b23271e1ba92dba463473b9e3ce9de3a0e705e7a81278396b3867"
+    "sha256": "a85fa93a0bfca82ae02280e43060e7990fdc376573a3b25f8c51be58b9960703"
   },
   "frame": {
     "path": "labs/nebula/models/lmc-particles/object.json",
@@ -222,13 +222,288 @@
         "sha256": "1ff8f2e24aba2e84b03f48ff3419a2ab3908ac41bdfdfe47a4d08d638c45446e",
         "bytes": 677286
       }
+    },
+    {
+      "input": {
+        "id": "gaia-edr3-stars",
+        "label": "Gaia EDR3 · foreground removed",
+        "path": ".local/nebula-lab/new-references/gaia-lmc.png",
+        "sha256": "8f77da661a66fa11b2c162552fbce922ed2f96a87351b9eafecd82f1309603e4",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Large_Magellanic_Cloud_rendered_from_Gaia_EDR3_without_foreground_stars.png",
+        "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Large_Magellanic_Cloud_rendered_from_Gaia_EDR3_without_foreground_stars.png",
+        "credit": "Kevinmloch; ESA/Gaia/DPAC Gaia EDR3; rendered with bsrender",
+        "license": "CC-BY-SA-4.0",
+        "registration": {
+          "referenceWcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6737,
+              6536
+            ],
+            "referencePixel": [
+              3368.5,
+              3268
+            ],
+            "referenceValueDeg": [
+              78.7957840796,
+              -71.566506171
+            ],
+            "scaleDeg": [
+              -0.00138784675876,
+              0.00138784675876
+            ],
+            "rotationDeg": -16.920000000000027
+          },
+          "referenceWidthPx": 6737,
+          "referenceHeightPx": 6536,
+          "imageToReferenceMatrix": [
+            1.3926688778182288,
+            -0.3714748011724771,
+            -1177.4030363523407,
+            0.37158794634465725,
+            1.3938586909736124,
+            -5870.449435468486,
+            -2.434776283344685e-7,
+            2.784333964270905e-7,
+            1
+          ]
+        },
+        "registrationNote": "Measured registration to SMASH using 330 unique point sources; 110 held out of final fit, median 1.17 SMASH pixels and P90 2.09 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 17.8% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied.",
+        "wcsSource": {
+          "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+          "description": "Registered to discrete stars in the pinned full-size SMASH image, whose publisher ICRS TAN AVM supplies the sky anchor. Exact correspondences, held-out residuals and source hull recorded in registration receipt."
+        },
+        "maxPixels": 4096
+      },
+      "sourceDimensions": [
+        8000,
+        8000
+      ],
+      "verticesUnits": [
+        [
+          8.378856671438811,
+          6.8004800013173,
+          2.6645352591003757e-15
+        ],
+        [
+          -5.391408330250368,
+          7.293464357889175,
+          9.769962616701378e-15
+        ],
+        [
+          -5.924193781797841,
+          -6.5378703953365775,
+          1.0436096431476471e-14
+        ],
+        [
+          7.975999096278298,
+          -7.014837785322166,
+          1.4210854715202004e-14
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/gaia-edr3-stars.webp",
+        "width": 4096,
+        "height": 4096,
+        "sha256": "f4fb5ade1035af9a4ddf044734a27aaf44958607431cea023e093bd9382f4030",
+        "bytes": 5965610
+      }
+    },
+    {
+      "input": {
+        "id": "horalek-widefield",
+        "label": "Horálek · optical wide field",
+        "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+        "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg",
+        "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
+        "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+        "license": "CC-BY-4.0",
+        "registration": {
+          "referenceWcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6737,
+              6536
+            ],
+            "referencePixel": [
+              3368.5,
+              3268
+            ],
+            "referenceValueDeg": [
+              78.7957840796,
+              -71.566506171
+            ],
+            "scaleDeg": [
+              -0.00138784675876,
+              0.00138784675876
+            ],
+            "rotationDeg": -16.920000000000027
+          },
+          "referenceWidthPx": 6737,
+          "referenceHeightPx": 6536,
+          "imageToReferenceMatrix": [
+            -0.9925301807308614,
+            0.47532659519967235,
+            5752.612114776925,
+            -0.4729033967977122,
+            -0.9970462494720148,
+            5409.185308143818,
+            2.3045914082800085e-7,
+            -4.331845136939875e-7,
+            1
+          ]
+        },
+        "registrationNote": "Measured registration to SMASH using 592 unique point sources; 198 held out of final fit, median 0.59 SMASH pixels and P90 1.12 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 60.2% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied.",
+        "wcsSource": {
+          "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+          "description": "Registered to discrete stars in the pinned full-size SMASH image, whose publisher ICRS TAN AVM supplies the sky anchor. Exact correspondences, held-out residuals and source hull recorded in registration receipt."
+        },
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            6582,
+            4388
+          ],
+          "referencePixel": [
+            3291.5,
+            2193.5
+          ],
+          "referenceValueDeg": [
+            80.019642727,
+            -69.3725614263
+          ],
+          "scaleDeg": [
+            -0.00152846329107676,
+            0.00153282698541333
+          ],
+          "rotationDeg": -170.2376608393
+        },
+        "maxPixels": 4096
+      },
+      "sourceDimensions": [
+        6582,
+        4388
+      ],
+      "verticesUnits": [
+        [
+          -3.488966297588677,
+          -3.6886303332796695,
+          8.215650382226158e-15
+        ],
+        [
+          5.121066913779063,
+          -2.3917446224300005,
+          4.884981308350689e-15
+        ],
+        [
+          4.235445126282118,
+          3.3480334410529586,
+          8.215650382226158e-15
+        ],
+        [
+          -4.351779483333175,
+          2.069618029539166,
+          6.661338147750939e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/horalek-widefield.webp",
+        "width": 4096,
+        "height": 2731,
+        "sha256": "ada2c5d4b6f75f24ca37f1446e6ccb98993e4c996ce6ab0da5d662722ec1d046",
+        "bytes": 3353640
+      }
+    },
+    {
+      "input": {
+        "id": "tarantula-vst",
+        "label": "ESO VST · Tarantula detail",
+        "path": ".local/nebula-lab/new-references/tarantula-eso1816a-publication.jpg",
+        "sha256": "fe6453a8a9c471bd1bc1209593bc2054bcd0eb20a8608a8f77dcac5877cc03a0",
+        "url": "https://cdn.eso.org/images/publicationjpg/eso1816a.jpg",
+        "sourcePageUrl": "https://www.eso.org/public/images/eso1816a/",
+        "credit": "ESO",
+        "license": "CC-BY-4.0",
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "equinox": "J2000",
+          "referenceDimension": [
+            16655,
+            16719
+          ],
+          "referencePixel": [
+            8327.5,
+            8359.5
+          ],
+          "referenceValueDeg": [
+            84.7516797916,
+            -69.4417113845
+          ],
+          "scaleDeg": [
+            -0.0000594553783266,
+            0.0000594553783266
+          ],
+          "rotationDeg": 0.020000000000000004
+        },
+        "wcsSource": {
+          "url": "https://cdn.eso.org/images/publicationjpg/eso1816a.jpg",
+          "sha256": "fe6453a8a9c471bd1bc1209593bc2054bcd0eb20a8608a8f77dcac5877cc03a0",
+          "description": "ICRS TAN AVM fields embedded in the downloaded publisher publication JPEG; original 16655 x 16719 reference dimensions retained."
+        },
+        "registrationNote": "Uncropped publisher full-frame proportional derivative at 3985 x 4000. Embedded AVM retains the original mosaic reference dimensions and is identical to the already pinned source registration. Publisher WCS placement is not independently star-fitted; verify matched-star residuals before composition.",
+        "maxPixels": 4096
+      },
+      "sourceDimensions": [
+        3985,
+        4000
+      ],
+      "verticesUnits": [
+        [
+          2.2881119034440465,
+          0.07978685265142693,
+          4.746203430272544e-15
+        ],
+        [
+          1.4339370615770668,
+          0.16309448203171906,
+          3.677613769070831e-15
+        ],
+        [
+          1.3501790125508633,
+          -0.693499493837343,
+          1.0269562977782698e-14
+        ],
+        [
+          2.204338522977535,
+          -0.7773604347195273,
+          4.9404924595819466e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/tarantula-vst.webp",
+        "width": 3985,
+        "height": 4000,
+        "sha256": "f17e886e5b86352e9def6a49c2e7f9cf1d4f1cf3d9d9bc8fec6b8f1c7bc732f1",
+        "bytes": 8979790
+      }
     }
   ],
-  "method": "Publisher ICRS TAN WCS rays intersect the observation tangent plane. Full image edges become a fixed PolyCSS projective quad.",
+  "alignment": {
+    "path": "labs/nebula/models/lmc-overlays/source/manual-placement.json",
+    "sha256": "f51f97c5976dfb7a6d2e094c144c876a57c3ac6339e9ba50238bb56151635783"
+  },
+  "method": "Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.",
   "limits": [
     "Image WCS metadata supplies angular registration; it does not validate the simulation morphology.",
-    "No photograph-derived masks, cutouts, scale fitting or density-driven image warps are applied.",
+    "Source sky placement is retained. An optional saved manual alignment supplies separate initial display controls for every image.",
     "The flat image plane records one observed projection; it does not assert physical depths for photographed features.",
-    "The 2048px textures are inspection previews; native sources and WCS remain pinned for later processing."
+    "Textures are bounded inspection previews; native sources and WCS remain pinned for later processing."
   ]
 }

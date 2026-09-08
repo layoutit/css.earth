@@ -9,63 +9,37 @@
   </head>
   <body>
     <header class="lab-header">
-      <h1>Nebula Lab</h1>
-      <span>Local workspace</span>
-    </header>
-    <main class="lab-layout">
-      <aside class="lab-controls" aria-label="Inspection controls">
-        <label class="field-label" for="subject">Subject</label>
-        <select id="subject" disabled></select>
+      <div class="lab-brand"><h1>Nebula Lab</h1><span>Local workspace</span></div>
+      <div class="header-controls" aria-label="Inspection controls">
+        <div class="header-field subject-field"><label for="subject">Subject</label><select id="subject" disabled></select></div>
         <fieldset id="render-controls" disabled>
-          <legend>Prepared image layers</legend>
+          <legend class="visually-hidden">Prepared image layers</legend>
           <div class="component-options">
             <label><input type="radio" name="component" value="all" checked /> Whole object</label>
             <label><input type="radio" name="component" value="diffuse" /> Diffuse</label>
             <label><input type="radio" name="component" value="detail" /> Compact detail</label>
           </div>
-          <label class="field-label" for="camera-pose">Camera pose</label>
-          <select id="camera-pose" aria-label="Fixed camera pose">
-            <option value="front">Front</option>
-            <option value="x-minus-60">Around X −60°</option>
-            <option value="x-minus-30">Around X −30°</option>
-            <option value="x-plus-30">Around X +30°</option>
-            <option value="x-plus-60">Around X +60°</option>
-            <option value="y-minus-60">Around Y −60°</option>
-            <option value="y-minus-30">Around Y −30°</option>
-            <option value="y-plus-30">Around Y +30°</option>
-            <option value="y-plus-60">Around Y +60°</option>
-            <option value="edge-x">Edge-on X</option>
-            <option value="edge-y">Edge-on Y</option>
-            <option value="manual">Manual</option>
-          </select>
-          <label class="field-label" for="axis">Projection axis</label>
-          <select id="axis">
-            <option value="auto">Auto</option>
-            <option value="x">X</option>
-            <option value="y">Y</option>
-            <option value="z">Z</option>
-          </select>
-          <div class="layer-heading">
-            <label for="layer">Depth</label>
-            <output id="layer-value" for="layer">All layers</output>
+          <div class="header-field pose-field">
+            <label for="camera-pose">Camera</label>
+            <select id="camera-pose" aria-label="Fixed camera pose">
+              <option value="front">Front</option><option value="x-minus-60">X −60°</option><option value="x-minus-30">X −30°</option>
+              <option value="x-plus-30">X +30°</option><option value="x-plus-60">X +60°</option><option value="y-minus-60">Y −60°</option>
+              <option value="y-minus-30">Y −30°</option><option value="y-plus-30">Y +30°</option><option value="y-plus-60">Y +60°</option>
+              <option value="edge-x">Edge X</option><option value="edge-y">Edge Y</option><option value="manual">Manual</option>
+            </select>
           </div>
-          <input id="layer" type="range" min="-1" max="-1" step="1" value="-1" aria-valuetext="All layers" />
-          <button id="all-layers" class="text-button" type="button">Show all layers</button>
-          <button id="reset" class="reset-button" type="button">Reset camera</button>
+          <div class="header-field axis-field"><label for="axis">Axis</label><select id="axis"><option value="auto">Auto</option><option value="x">X</option><option value="y">Y</option><option value="z">Z</option></select></div>
+          <div class="header-field depth-field"><span><label for="layer">Depth</label><output id="layer-value" for="layer">All layers</output></span><input id="layer" type="range" min="-1" max="-1" step="1" value="-1" aria-valuetext="All layers" /></div>
+          <div class="header-actions"><button id="all-layers" class="text-button" type="button">All layers</button><button id="reset" type="button">Reset camera</button></div>
         </fieldset>
-        <fieldset id="overlay-controls" hidden>
-          <legend>Image overlays</legend>
-          <div id="overlay-options"></div>
-          <p id="overlay-status" class="model-note" role="status"></p>
-          <p id="overlay-registration" class="model-note"></p>
-          <button id="reference-view" class="reset-button" type="button">Reference view</button>
-          <button id="fit-cloud" class="reset-button" type="button">Fit cloud</button>
+        <fieldset id="density-view-controls" hidden>
+          <legend class="visually-hidden">Density view</legend>
+          <button id="reference-view" type="button">Reference view</button><button id="fit-cloud" type="button">Fit cloud</button>
         </fieldset>
-        <p class="interaction-hint">Drag to orbit. Scroll or pinch to zoom.</p>
-        <p id="model-note" class="model-note">Depth is modeled from a source image; it is not a measured 3D reconstruction.</p>
-        <a id="source-link" hidden target="_blank" rel="noreferrer">Source and credit ↗</a>
-        <p id="source-credit" class="source-credit"></p>
-      </aside>
+      </div>
+      <div class="header-context"><span class="interaction-hint">Drag to orbit. Scroll or pinch to zoom.</span><span id="model-note">Depth is modeled from a source image; it is not a measured 3D reconstruction.</span><a id="source-link" hidden target="_blank" rel="noreferrer">Source ↗</a><span id="source-credit"></span></div>
+    </header>
+    <main class="lab-layout">
       <section class="lab-workspace" aria-label="Object inspection">
         <div class="workspace-toolbar">
           <div role="tablist" aria-label="View">
@@ -80,6 +54,27 @@
           <div id="render-panel" role="tabpanel" aria-labelledby="render-tab">
             <div id="viewer" aria-label="Interactive prepared object" tabindex="0"></div>
           </div>
+          <aside id="density-adjustment-panel" class="floating-panel density-adjustment-panel" aria-label="Density adjustments" hidden>
+            <fieldset id="density-tone-fieldset" disabled><legend>Density adjustments</legend><div id="density-tone-controls"></div></fieldset>
+          </aside>
+          <aside id="image-overlay-panel" class="image-overlay-panel" aria-label="Image placement" hidden>
+            <fieldset id="overlay-controls" disabled>
+              <legend>Image adjustments</legend>
+              <label class="field-label" for="overlay-choice">Image</label>
+              <select id="overlay-choice"></select>
+              <div class="overlay-visibility">
+                <label id="overlay-enabled-label" for="overlay-enabled"><input id="overlay-enabled" type="checkbox" /> Show image</label>
+                <label for="overlay-opacity">Opacity</label>
+                <input id="overlay-opacity" type="range" min="0" max="100" value="55" />
+              </div>
+              <div id="image-tone-controls"></div>
+              <div id="overlay-options"></div>
+              <p id="overlay-status" class="overlay-status" role="status"></p>
+              <p id="overlay-registration" class="overlay-detail"></p>
+              <p id="overlay-credit" class="overlay-detail"></p>
+              <a id="overlay-source" class="overlay-detail" target="_blank" rel="noreferrer">Image source ↗</a>
+            </fieldset>
+          </aside>
           <div id="source-panel" role="tabpanel" aria-labelledby="source-tab" hidden>
             <div id="source-choice-wrapper" class="source-tools" hidden>
               <label for="source-choice">Image</label>

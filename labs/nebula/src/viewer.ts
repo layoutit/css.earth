@@ -1,6 +1,8 @@
 import records from './subjects.json';
 import sourceCatalog from '../sources/index.json';
 import { defaultOverlayPlacement, updateOverlayPlacement, overlayPlacementTransform, type OverlayPlacement } from './overlay-placement';
+import { readOverlaySessions, writeOverlaySessions } from './overlay-store';
+import { createToneResourceController, type ToneResource } from './tone-runtime';
 import * as runtimePolicy from '../../../site/runtime-policy.mjs';
 import { createObjectInteractionControls } from '../../../src/renderers/css/navigation/object-interaction-controls';
 import { worldCameraFromCenteredPresentation } from '../../../src/renderers/css/navigation/world-camera';
@@ -36,7 +38,7 @@ interface LabSubjectRecord {
   density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
-export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__}/${path}`;
+export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${path}`;
 const recipes = import.meta.glob('../../../src/objects/*/source/recipe.json', { eager: true, import: 'default' }) as
   Record<string, { source: { publisherUrl: string; credit: string }; geometry: { supportRadiusKpc: number } }>;
 const candidates = import.meta.glob('../../../.local/nebula-lab/*-{cutout,diffuse,residual,mask}.png',
@@ -111,8 +113,10 @@ function parseOverlayCatalogue(value: unknown): DensityOverlayCatalogue {
       throw new TypeError('Invalid prepared density overlay.');
     }
     ids.add(item.id);
+    const initialPlacement = item.initialPlacement === undefined ? undefined : updateOverlayPlacement(defaultOverlayPlacement(), item.initialPlacement as Partial<OverlayPlacement>);
+    if (item.initialOpacity !== undefined && (typeof item.initialOpacity !== 'number' || !Number.isFinite(item.initialOpacity) || item.initialOpacity < 0 || item.initialOpacity > 1)) throw new TypeError('Invalid initial image opacity.');
     return { id: item.id, label: item.label, texturePath: item.texturePath, widthPx: item.widthPx, heightPx: item.heightPx,
-      pivotCssPx: item.pivotCssPx,
+      pivotCssPx: item.pivotCssPx, initialPlacement, initialOpacity: item.initialOpacity,
       style: Object.fromEntries(styleKeys.map(key => [key, style[key]])) as DensityOverlay['style'],
       sourcePageUrl: item.sourcePageUrl, credit: item.credit, registrationNote: item.registrationNote };
   });
@@ -139,6 +143,7 @@ export interface LabState {
 export interface DensityOverlay {
   id: string; label: string; texturePath: string; widthPx: number; heightPx: number;
   pivotCssPx: [number, number, number];
+  initialPlacement?: OverlayPlacement; initialOpacity?: number;
   style: { width: string; height: string; transform: string; backgroundSize: string; backgroundPosition: string };
   sourcePageUrl: string; credit: string; registrationNote: string;
 }
@@ -162,14 +167,16 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   let overlayCataloguePending: Promise<DensityOverlay[]> | null = null;
   const overlayNodes = new Map<string, HTMLElement[]>(), overlayEnabled = new Map<string, boolean>(), overlayOpacity = new Map<string, number>();
   const overlayPlacements = new Map<string, OverlayPlacement>();
-  const overlaySessions = new Map<string, { id: string; enabled: boolean; opacity: number; placement: OverlayPlacement }[]>();
+  const overlayBases = new Map<string, string>(), overlaySessions = readOverlaySessions();
   const overlayLoading = new Map<string, Promise<void>>();
+  const toneResources = createToneResourceController();
   let axis: Axis = 'auto', component: Component = 'all', layer: number | null = null;
   let pose: CameraPose = 'front';
   let layerCount = 0, status = 'Loading prepared object', error: string | undefined;
   let disposed = false, loadVersion = 0, frameRequest = 0, revision = 0;
   let radius = 1, fitDistance = 6, width = 1, height = 1, focal = 1, cameraScale = 1;
   let rotation = new DOMMatrix().rotateAxisAngle(1, 0, 0, 180);
+  const densityCameras = new Map<string, ReturnType<typeof retainCamera>>();
   const values = { rotX: 0, rotY: 0, zoom: 1, distance: fitDistance };
   const report = () => onState({ subjectId: subject.id, component, axis, layer, layerCount, status, pose, mode: currentMode,
     ...(error ? { error } : {}), distanceUnits: values.distance });
@@ -188,6 +195,10 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     },
   };
   function rotate(delta: CameraDelta) {
+    // Density's physical east/north frame needs an east-left screen bridge.
+    // Conjugate input rotation by that reflection so dragging follows the pointer.
+    if (currentMode === 'density') delta = { ...delta, controlYawDelta: -delta.controlYawDelta,
+      ...(delta.rotation ? { rotation: [delta.rotation[0], -delta.rotation[1], -delta.rotation[2], delta.rotation[3]] as [number, number, number, number] } : {}) };
     const changedRotation = Boolean(delta.rotation) || delta.controlPitchDelta !== 0 || delta.controlYawDelta !== 0;
     camera.update({ rotX: values.rotX + delta.controlPitchDelta, rotY: values.rotY + delta.controlYawDelta,
       ...(delta.zoom === undefined ? {} : { zoom: delta.zoom }), ...(delta.distance === undefined ? {} : { distance: delta.distance }) });
@@ -247,11 +258,17 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     return [...new Set([...overlayEnabled.keys(), ...overlayPlacements.keys()])].map(id => ({ id,
       enabled: overlayEnabled.get(id) ?? false, opacity: overlayOpacity.get(id) ?? .55,
       placement: { ...(overlayPlacements.get(id) ?? defaultOverlayPlacement()) },
+      basis: overlayBases.get(id) ?? '',
     }));
+  }
+  function persistOverlays() {
+    if (!subject.density?.overlays) return;
+    overlaySessions.set(subject.density.overlays, getOverlayState());
+    host.dataset.overlayStorage = writeOverlaySessions(overlaySessions) ? 'saved' : 'session';
   }
   function clearOverlays() {
     overlayMeshes = []; overlayNodes.clear(); overlayCatalogue = null; overlayBasePath = ''; overlayCataloguePending = null; overlayLoading.clear();
-    overlayEnabled.clear(); overlayOpacity.clear(); overlayPlacements.clear();
+    overlayEnabled.clear(); overlayOpacity.clear(); overlayPlacements.clear(); overlayBases.clear();
   }
   async function loadOverlayCatalogue() {
     if (currentMode !== 'density' || !payload || !subject.density?.overlays) return [] as DensityOverlay[];
@@ -265,6 +282,19 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       if (disposed || expectedVersion !== loadVersion || expectedPayload !== payload || expectedSubject !== subject.id || currentMode !== 'density') return [];
       if (!sameOverlayFrame(parsed.frame, payload.frame)) throw new TypeError('Density overlays use a different physical reference frame.');
       overlayCatalogue = parsed; overlayBasePath = manifestPath.slice(0, manifestPath.lastIndexOf('/') + 1);
+      const available = new Set(parsed.overlays.map(item => item.id));
+      for (const id of overlayBases.keys()) if (!available.has(id)) {
+        overlayBases.delete(id); overlayPlacements.delete(id); overlayOpacity.delete(id); overlayEnabled.delete(id);
+      }
+      for (const item of parsed.overlays) {
+        if (overlayBases.get(item.id) !== item.style.transform) {
+          overlayPlacements.set(item.id, item.initialPlacement ?? defaultOverlayPlacement());
+          overlayOpacity.set(item.id, item.initialOpacity ?? .55); overlayEnabled.set(item.id, false);
+        }
+        overlayBases.set(item.id, item.style.transform);
+        toneResources.bind(`${overlayBasePath}${item.texturePath}`, item.widthPx, item.heightPx);
+      }
+      persistOverlays();
       return parsed.overlays;
     })();
     overlayCataloguePending = pending;
@@ -284,7 +314,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     if (!item) throw new TypeError(`Unknown density overlay: ${id}`);
     overlayPlacements.set(id, updateOverlayPlacement(overlayPlacements.get(id) ?? defaultOverlayPlacement(), patch));
     controls.stop();
-    applyOverlayPlacement(item);
+    applyOverlayPlacement(item); persistOverlays();
   }
   async function setOverlay(id: string, enabled: boolean, opacity = overlayOpacity.get(id) ?? .55) {
     if (currentMode !== 'density' || !payload) throw new Error('Image overlays are available in Density view only.');
@@ -294,13 +324,17 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     if (disposed || version !== loadVersion || currentMode !== 'density') return;
     const item = overlays.find(value => value.id === id);
     if (!item) throw new TypeError(`Unknown density overlay: ${id}`);
-    overlayOpacity.set(id, opacity); overlayEnabled.set(id, enabled);
+    if (enabled) for (const [otherId, active] of overlayEnabled) if (otherId !== id && active) {
+      overlayEnabled.set(otherId, false);
+      for (const node of overlayNodes.get(otherId) ?? []) node.style.visibility = 'hidden';
+    }
+    overlayOpacity.set(id, opacity); overlayEnabled.set(id, enabled); persistOverlays();
     let nodes = overlayNodes.get(id);
     if (!nodes && enabled) {
       let loading = overlayLoading.get(id);
       if (!loading) {
         loading = (async () => {
-          const url = localFile(`${overlayBasePath}${item.texturePath}`), image = new Image(); image.src = url; await image.decode();
+          const path = `${overlayBasePath}${item.texturePath}`, url = toneResources.url(path, localFile(path)), image = new Image(); image.src = url; await image.decode();
           if (image.naturalWidth !== item.widthPx || image.naturalHeight !== item.heightPx) throw new TypeError(`Overlay ${id} has an unexpected prepared extent.`);
           if (disposed || version !== loadVersion || currentMode !== 'density' || !overlayEnabled.get(id)) return;
           const current = overlayNodes.get(id);
@@ -308,11 +342,15 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
           const created = overlayMeshes.map(mesh => { const node = document.createElement('s'); node.dataset.overlayLeaf = id; Object.assign(node.style, item.style);
             node.style.backgroundImage = `url("${url.replace(/["\\\n\r]/g, character => `\\${character}`)}")`;
             mesh.append(node); return node; }); overlayNodes.set(id, created);
+          toneResources.bind(path, item.widthPx, item.heightPx, created);
         })();
         overlayLoading.set(id, loading);
         void loading.then(() => { if (overlayLoading.get(id) === loading) overlayLoading.delete(id); }, () => { if (overlayLoading.get(id) === loading) overlayLoading.delete(id); });
       }
-      await loading;
+      try { await loading; } catch (failure) {
+        if (!disposed && version === loadVersion) { overlayEnabled.set(id, false); persistOverlays(); }
+        throw failure;
+      }
       if (disposed || version !== loadVersion || currentMode !== 'density') return;
       nodes = overlayNodes.get(id);
     }
@@ -372,21 +410,39 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     values.rotX = saved.rotX; values.rotY = saved.rotY; values.distance = saved.distance; values.zoom = fitDistance / values.distance; revision++;
     schedule(); report();
   }
+  function rememberDensityCamera() {
+    if (payload && host.dataset.mode === 'density' && subject.density) {
+      densityCameras.set(subject.density.directory, retainCamera());
+    }
+  }
+  async function applyToneResources(target: 'image' | 'density', imageId: string | undefined, resources: ToneResource[], isCurrent = () => true) {
+    if (currentMode !== 'density' || !payload || host.dataset.ready !== 'true') throw new Error('Density is still loading; tone can be applied when it is ready.');
+    const version = loadVersion;
+    const overlay = overlayCatalogue?.overlays.find(item => item.id === imageId);
+    const expected = target === 'image' ? (overlay ? [`${overlayBasePath}${overlay.texturePath}`] : []) :
+      payload.resources.map(item => `${subject.density!.directory}/prepared/${item.path}`);
+    await toneResources.apply(resources, expected, () => !disposed && version === loadVersion && isCurrent());
+  }
   async function setSubject(id: string, cameraOverride: ReturnType<typeof retainCamera> | null = null) {
     const next = subjects.find(item => item.id === id);
     if (!next) throw new TypeError(`Unknown lab subject: ${id}`);
-    const retain = cameraOverride ?? (subject.id !== next.id && subject.comparisonGroup !== undefined && subject.comparisonGroup === next.comparisonGroup ? retainCamera() : null);
+    rememberDensityCamera();
+    const retain = currentMode === 'density' ? densityCameras.get(next.density?.directory ?? '') :
+      cameraOverride ?? (subject.id !== next.id && subject.comparisonGroup !== undefined && subject.comparisonGroup === next.comparisonGroup ? retainCamera() : null);
     const directory = currentMode === 'density' ? next.density?.directory : next.directory;
     const version = ++loadVersion;
-    if (subject.density?.overlays) overlaySessions.set(subject.density.overlays, getOverlayState());
+    if (overlayCatalogue && subject.density?.overlays) overlaySessions.set(subject.density.overlays, getOverlayState());
     controls.stop(); subject = next; status = 'Loading prepared object'; error = undefined;
     measure();
     axis = 'auto'; component = 'all'; layer = null;
-    mounted?.destroy(); mounted = null; banks = []; payload = null; layerCount = 0; clearOverlays();
+    mounted?.destroy(); mounted = null; banks = []; payload = null; layerCount = 0; clearOverlays(); toneResources.clear();
     for (const saved of overlaySessions.get(next.density?.overlays ?? '') ?? []) {
       overlayEnabled.set(saved.id, saved.enabled); overlayOpacity.set(saved.id, saved.opacity); overlayPlacements.set(saved.id, { ...saved.placement });
+      overlayBases.set(saved.id, saved.basis);
     }
-    host.dataset.mode = currentMode; host.dataset.ready = 'false'; report();
+    host.dataset.mode = currentMode; host.dataset.ready = 'false';
+    host.style.transform = currentMode === 'density' ? 'scaleX(-1)' : '';
+    report();
     if (!directory) {
       status = 'No independent density field is available for this subject';
       host.dataset.subject = id; host.dataset.ready = 'true'; report();
@@ -418,6 +474,10 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       const roots = 'root' in instance ? [...instance.root.querySelectorAll<HTMLElement>('[data-image-layer-axis]')] : instance.roots;
       banks = loaded.stacks.map((stack, index) => {
         const nodes = [...roots[index].querySelectorAll<HTMLElement>('.css-volume-mesh s')], copies = isImage ? 1 : 3;
+        if (currentMode === 'density') for (let i = 0; i < stack.leaves.length; i++) {
+          const leaf = stack.leaves[i]!;
+          toneResources.bind(`${directory}/prepared/${leaf.texturePath}`, leaf.widthPx, leaf.heightPx, nodes.slice(i * copies, (i + 1) * copies));
+        }
         return { axis: stack.axis, root: roots[index], leaves: stack.leaves.map((leaf, leafIndex) => ({
           nodes: nodes.slice(leafIndex * copies, (leafIndex + 1) * copies), detail: leaf.id.endsWith('detail') })) };
       });
@@ -427,25 +487,30 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
         const mesh = document.createElement('div'); mesh.className = 'css-volume-mesh'; mesh.dataset.overlayMesh = 'true'; scene.append(mesh); return mesh;
       });
       if (currentMode === 'density') {
-        const enabled = [...overlayEnabled].filter(([, value]) => value);
-        await Promise.all(enabled.map(([overlayId]) => setOverlay(overlayId, true, overlayOpacity.get(overlayId))));
+        const available = await loadOverlayCatalogue();
+        if (disposed || version !== loadVersion) return;
+        const enabled = available.filter(item => overlayEnabled.get(item.id));
+        if (enabled[0]) await setOverlay(enabled[0].id, true, overlayOpacity.get(enabled[0].id));
         if (disposed || version !== loadVersion) return;
       }
       radius = next.framingRadiusUnits ?? Math.max(...loaded.frame.boundsUnits.max.map((v, index) => (v - loaded.frame.boundsUnits.min[index]) / 2));
       status = `${loaded.resources.length} prepared images · ${(loaded.resources.reduce((sum, item) => sum + item.bytes, 0) / 1e6).toFixed(1)} MB`;
+      if (retain) restoreCamera(retain); else if (currentMode === 'density') await referenceView(); else reset();
+      if (disposed || version !== loadVersion) return;
       host.dataset.mode = currentMode; host.dataset.subject = id; host.dataset.ready = 'true';
-      if (retain) restoreCamera(retain); else reset();
+      schedule(); report();
     } catch (failure) {
       if (disposed || version !== loadVersion) return;
       status = 'Could not load prepared object'; error = failure instanceof Error ? failure.message : String(failure); report();
     }
   }
   await setSubject(subject.id);
-  return Object.freeze({ setSubject, reset, loadOverlayCatalogue, setOverlay, setOverlayPlacement, getOverlayState,
-    referenceView, fitCloud,
+  return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayPlacement, getOverlayState,
+    referenceView, fitCloud, applyToneResources,
     async setMode(value: ViewerMode) {
       if (value !== 'photo' && value !== 'density') throw new TypeError('Unknown viewer mode.');
       if (value === currentMode) return;
+      rememberDensityCamera();
       const saved = retainCamera(); currentMode = value; await setSubject(subject.id, saved);
     },
     setPose(value: CameraPose) {

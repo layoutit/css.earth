@@ -1,0 +1,158 @@
+/** Local Node-only texture preparation. Browser receives finished URLs and retains its geometry. */
+import { createHash, randomUUID } from 'node:crypto';
+import { mkdir, readFile, readdir, realpath, rename, rm, stat, utimes, writeFile } from 'node:fs/promises';
+import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
+import sharp from 'sharp';
+import type { Plugin } from 'vite';
+import { defaultOverlayTone, isNeutralOverlayTone, overlayToneSample, updateOverlayTone, type OverlayTone } from './overlay-tone.js';
+
+export interface TonePreparationRequest { subjectId: string; target: 'image' | 'density'; imageId?: string; tone: OverlayTone }
+export interface ToneResource { sourcePath: string; url: string; width: number; height: number }
+interface SourceResource { path: string; sha256: string; width: number; height: number }
+interface Subject { id: string; density?: { directory: string; overlays?: string } }
+const digest = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
+const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+export function parseTonePreparationRequest(input: unknown): TonePreparationRequest {
+  if (!record(input) || Object.keys(input).some(key => !['subjectId', 'target', 'imageId', 'tone'].includes(key)) ||
+      typeof input.subjectId !== 'string' || !/^[a-z0-9-]+$/.test(input.subjectId) ||
+      !['image', 'density'].includes(input.target as string) || !record(input.tone) ||
+      Object.keys(defaultOverlayTone()).some(key => !Object.hasOwn(input.tone as object, key)) ||
+      (input.target === 'image' ? typeof input.imageId !== 'string' || !/^[a-z0-9-]+$/.test(input.imageId) : input.imageId !== undefined)) {
+    throw new TypeError('Invalid local tone preparation request.');
+  }
+  return { subjectId: input.subjectId, target: input.target as 'image' | 'density',
+    ...(input.target === 'image' ? { imageId: input.imageId as string } : {}),
+    tone: updateOverlayTone(defaultOverlayTone(), input.tone) };
+}
+/** Copy RGBA bytes. Density affects alpha only and preserves empty support exactly. */
+export function toneRgba(input: Uint8Array, target: 'image' | 'density', tone: OverlayTone): Uint8Array {
+  if (input.length % 4) throw new TypeError('Tone preparation requires RGBA pixels.');
+  const valid = updateOverlayTone(defaultOverlayTone(), tone), output = new Uint8Array(input);
+  const lut = Uint8Array.from({ length: 256 }, (_, value) => Math.round(255 * overlayToneSample(value / 255, valid)));
+  for (let i = 0; i < output.length; i += 4) {
+    if (target === 'density') output[i + 3] = input[i + 3] === 0 ? 0 : lut[input[i + 3]];
+    else for (let c = 0; c < 3; c++) output[i + c] = lut[input[i + c]];
+  }
+  return output;
+}
+function limit(concurrency: number) {
+  let active = 0; const waiting: (() => void)[] = [];
+  return async <T>(run: () => Promise<T>): Promise<T> => {
+    if (active >= concurrency) await new Promise<void>(done => waiting.push(done));
+    else active++;
+    try { return await run(); } finally { const next = waiting.shift(); if (next) next(); else active--; }
+  };
+}
+export function createTonePreparer(repositoryRoot: string, options: { maximumCacheBytes?: number; maximumCacheFiles?: number } = {}) {
+  const root = resolve(repositoryRoot), cache = resolve(root, '.local/nebula-lab/tone-cache');
+  const textureLimit = limit(4), requestLimit = limit(2), cacheLimit = limit(1);
+  const inflight = new Map<string, Promise<ToneResource>>(), protectedFiles = new Map<string, number>();
+  let requests = 0;
+  const protect = (path: string) => protectedFiles.set(path, (protectedFiles.get(path) ?? 0) + 1);
+  const unprotect = (path: string) => { const n = (protectedFiles.get(path) ?? 1) - 1; if (n) protectedFiles.set(path, n); else protectedFiles.delete(path); };
+  async function safePath(path: string) {
+    const candidate = resolve(root, path), rel = relative(root, candidate);
+    if (isAbsolute(path) || rel.startsWith(`..${sep}`) || rel === '..') throw new TypeError('Prepared resource leaves the repository.');
+    const actual = await realpath(candidate), realRoot = await realpath(root), actualRel = relative(realRoot, actual);
+    if (actualRel.startsWith(`..${sep}`) || actualRel === '..') throw new TypeError('Prepared resource resolves outside the repository.');
+    return candidate;
+  }
+  async function json(path: string) { return JSON.parse(await readFile(await safePath(path), 'utf8')); }
+  async function resources(request: TonePreparationRequest): Promise<SourceResource[]> {
+    const subjects = await json('labs/nebula/src/subjects.json') as Subject[];
+    const subject = subjects.find(item => item.id === request.subjectId);
+    if (!subject?.density) throw new TypeError('Subject has no prepared neutral density.');
+    if (request.target === 'image') {
+      if (!subject.density.overlays) throw new TypeError('Subject has no image overlays.');
+      const catalogue = await json(subject.density.overlays);
+      const image = catalogue.overlays?.find((item: { id: string }) => item.id === request.imageId);
+      if (!image) throw new TypeError('Unknown prepared image overlay.');
+      return [{ path: relative(root, resolve(root, dirname(subject.density.overlays), image.texturePath)),
+        sha256: image.sha256, width: image.widthPx, height: image.heightPx }];
+    }
+    const descriptor = await json(`${subject.density.directory}/object.json`);
+    if (descriptor.prepared?.format !== 'cssearth-density-volume@1') throw new TypeError('Density has no prepared resources.');
+    const manifestPath = relative(root, resolve(root, subject.density.directory, descriptor.prepared.url));
+    const bytes = await readFile(await safePath(manifestPath));
+    if (digest(bytes) !== descriptor.prepared.sha256) throw new TypeError('Density prepared manifest hash differs.');
+    const manifest = JSON.parse(bytes.toString('utf8'));
+    if (!Array.isArray(manifest.data?.resources) || !manifest.data.resources.length) throw new TypeError('Density resource bank is empty.');
+    return manifest.data.resources.map((item: { path: string; sha256: string; width: number; height: number }) => ({
+      ...item, path: relative(root, resolve(root, dirname(manifestPath), item.path)),
+    }));
+  }
+  async function prune() {
+    await cacheLimit(async () => {
+      const entries = await Promise.all((await readdir(cache)).filter(name => /^[a-f0-9]{64}\.png$/.test(name)).map(async name => {
+        const path = resolve(cache, name), info = await stat(path); return { path, bytes: info.size, accessed: info.mtimeMs };
+      }));
+      let bytes = entries.reduce((sum, entry) => sum + entry.bytes, 0), files = entries.length;
+      for (const entry of entries.sort((a, b) => a.accessed - b.accessed)) {
+        if (bytes <= (options.maximumCacheBytes ?? 512 * 1024 * 1024) && files <= (options.maximumCacheFiles ?? 2048)) break;
+        if (protectedFiles.has(entry.path)) continue;
+        await rm(entry.path, { force: true }); bytes -= entry.bytes; files--;
+      }
+    });
+  }
+  async function prepareOne(source: SourceResource, request: TonePreparationRequest, held: string[]): Promise<ToneResource> {
+    const path = await safePath(source.path), bytes = await readFile(path);
+    if (digest(bytes) !== source.sha256) throw new TypeError('Prepared texture hash differs.');
+    if (!Number.isInteger(source.width) || !Number.isInteger(source.height) || source.width < 1 || source.height < 1) throw new TypeError('Invalid prepared texture dimensions.');
+    const sourcePath = relative(root, path).split(sep).join('/');
+    if (isNeutralOverlayTone(request.tone)) return { sourcePath, url: `/@fs${path}`, width: source.width, height: source.height };
+    const key = digest(Buffer.concat([Buffer.from(JSON.stringify(['nebula-tone-v1-png', request.target, request.tone])), bytes]));
+    const outputPath = resolve(cache, `${key}.png`); protect(outputPath); held.push(outputPath);
+    let pending = inflight.get(key);
+    if (!pending) {
+      pending = textureLimit(async () => {
+        await mkdir(cache, { recursive: true });
+        const exists = await stat(outputPath).catch(() => null);
+        if (!exists) {
+          const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+          const { width, height, channels } = decoded.info;
+          if (width !== source.width || height !== source.height || channels !== 4) throw new TypeError('Prepared texture dimensions differ.');
+          const transformed = toneRgba(decoded.data, request.target, request.tone);
+          const output = await sharp(transformed, { raw: { width, height, channels: 4 } }).png({ compressionLevel: 6 }).toBuffer();
+          const temp = `${outputPath}.${randomUUID()}.tmp`;
+          try { await writeFile(temp, output); await rename(temp, outputPath); } finally { await rm(temp, { force: true }); }
+        } else { const now = new Date(); await utimes(outputPath, now, now); }
+        return { sourcePath, url: `/@fs${outputPath}`, width: source.width, height: source.height };
+      });
+      inflight.set(key, pending); void pending.finally(() => inflight.delete(key)).catch(() => {});
+    }
+    // Identical texture bytes may belong to multiple leaves; preserve each caller's original path.
+    return { ...await pending, sourcePath };
+  }
+  return async (input: unknown): Promise<{ resources: ToneResource[] }> => {
+    const request = parseTonePreparationRequest(input);
+    if (requests >= 8) throw new Error('Tone preparation queue is full; try again shortly.');
+    requests++;
+    try { return await requestLimit(async () => {
+      const held: string[] = [];
+      try {
+        const sources = await resources(request);
+        if (sources.length > 512) throw new TypeError('Prepared tone bank exceeds the local limit.');
+        const results = await Promise.allSettled(sources.map(source => prepareOne(source, request, held)));
+        const failure = results.find(result => result.status === 'rejected');
+        if (failure?.status === 'rejected') throw failure.reason;
+        if (!isNeutralOverlayTone(request.tone)) await prune();
+        return { resources: results.map(result => (result as PromiseFulfilledResult<ToneResource>).value) };
+      } finally { held.forEach(unprotect); }
+    }); } finally { requests--; }
+  };
+}
+export function tonePreparationPlugin(repositoryRoot: string): Plugin {
+  const prepare = createTonePreparer(repositoryRoot);
+  return { name: 'nebula-local-tone-preparation', configureServer(server) {
+    server.middlewares.use('/__nebula/prepare-tone', async (request, response) => {
+      const reply = (status: number, value: unknown) => { response.statusCode = status; response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(value)); };
+      if (request.method !== 'POST') { reply(405, { error: 'Use POST for local tone preparation.' }); return; }
+      try {
+        if (!request.headers['content-type']?.startsWith('application/json') ||
+            (request.headers.origin && new URL(request.headers.origin).host !== request.headers.host)) { reply(400, { error: 'Expected local JSON request.' }); return; }
+        let body = ''; for await (const chunk of request) { body += chunk.toString(); if (body.length > 4096) throw new TypeError('Tone request is too large.'); }
+        reply(200, await prepare(JSON.parse(body)));
+      } catch (error) { reply(error instanceof TypeError || error instanceof SyntaxError ? 400 : 500, { error: error instanceof Error ? error.message : 'Tone preparation failed.' }); }
+    });
+  } };
+}
