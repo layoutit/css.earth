@@ -53,3 +53,35 @@ test('radius tables retain west longitude, asymmetric radii and closed poles', a
   assert.throws(()=>parsePdsRadiusTable(rows.slice(1).join('\n'),p),/dimensions/);
   assert.throws(()=>parsePdsRadiusTable(rows.join('\n').replace('360 0 2','360 0 3'),p),/seam or pole/);
 });
+
+test('ASCII and binary STL preserve the same physical mesh and reject malformed facets', async () => {
+  const { parseStlShape } = await import('./obj-shape.mjs');
+  const vertices = [[2,0,0],[-2,0,0],[0,3,0],[0,-3,0],[0,0,4],[0,0,-4]];
+  const triangles = [[0,2,4],[2,1,4],[1,3,4],[3,0,4],[2,0,5],[1,2,5],[3,1,5],[0,3,5]];
+  const ascii = `solid octahedron\n${triangles.map(face =>
+    `facet normal 0 0 0\nouter loop\n${face.map(i => `vertex ${vertices[i].join(' ')}`).join('\n')}\nendloop\nendfacet`
+  ).join('\n')}\nendsolid octahedron\n`;
+  const binary = Buffer.alloc(84 + triangles.length * 50);
+  // Binary STL permits a header beginning with "solid"; length/count disambiguate it.
+  binary.write('solid binary octahedron');
+  binary.writeUInt32LE(triangles.length, 80);
+  triangles.forEach((face, index) => face.forEach((vertex, corner) =>
+    vertices[vertex].forEach((value, axis) => binary.writeFloatLE(value, 84 + index * 50 + 12 + corner * 12 + axis * 4))
+  ));
+  const [textMesh, binaryMesh] = [Buffer.from(ascii), binary].map(bytes => parseStlShape(bytes, profile));
+  assert.deepEqual(binaryMesh.positions, textMesh.positions);
+  assert.deepEqual(binaryMesh.indices, textMesh.indices);
+  assert.deepEqual(textMesh.positions, [[2000,0,0],[0,3000,0],[0,0,4000],[-2000,0,0],[0,-3000,0],[0,0,-4000]]);
+  for (const mesh of [textMesh, binaryMesh]) {
+    for (const [lon, lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[0,-90],[45,30]]) {
+      const l = lon * Math.PI / 180, p = lat * Math.PI / 180;
+      const expected = 1000 / (Math.abs(Math.cos(p)*Math.cos(l))/2 + Math.abs(Math.cos(p)*Math.sin(l))/3 + Math.abs(Math.sin(p))/4);
+      assert.ok(Math.abs(mesh.sample(lon, lat) - expected) < 1e-8);
+    }
+  }
+  assert.throws(() => parseStlShape(binary.subarray(0, binary.length - 1), profile), /STL|dimensions/);
+  assert.throws(() => parseStlShape(Buffer.from(ascii.replace('vertex 2 0 0', 'vertex NaN 0 0')), profile), /facet/);
+  assert.throws(() => parseStlShape(Buffer.from(ascii.replace('vertex 2 0 0\n', '')), profile), /facet/);
+  assert.throws(() => parseStlShape(binary, {...profile, expectedFaces: 7}), /dimensions/);
+  assert.throws(() => parseStlShape(binary, {...profile, metersPerUnit: 0}), /units/);
+});

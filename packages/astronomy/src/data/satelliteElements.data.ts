@@ -21,6 +21,8 @@ export interface SatelliteRecord {
   readonly parent: string
   /** Horizons target code, so a fixture can be re-fetched without guessing. */
   readonly horizonsCode: string
+  /** Companion defining a binary barycentre; output remains parent-centred. */
+  readonly barycentreCompanion?: string
   /** First and last JPL Horizons epochs sampled by the element fit. */
   readonly fitFromJdTdb: number
   readonly fitToJdTdb: number

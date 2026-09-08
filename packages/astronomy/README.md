@@ -217,3 +217,13 @@ The added inner Neptunian moons use daily Horizons element samples over
 2020–2032. Maximum residuals at six independent fixture epochs are238km
 (Naiad),105km(Thalassa),64km(Despina), and55km(Galatea). These are observed
 fit residuals of the shared precessing-ellipse model, not trajectory error bounds.
+
+Nix, Hydra, Kerberos and Styx use daily 2020–2032 element fits about the
+Pluto-system barycentre. Their public position/state APIs still return vectors
+relative to Pluto's physical centre: the generic `barycentreCompanion` record
+adds Charon's mass-weighted displacement to both position and velocity. Frame
+bounds include that offset. Independent Pluto-centred fixture maximum residuals
+are94.36km (Nix),47.05km (Hydra),125.18km (Kerberos),388.06km (Styx); regression
+guards add15percent. These describe the compact fit, not observed uncertainties.
+Shape orientation is separately authored by each object; no synchronous spin
+or current pole/prime-meridian ephemeris is inferred for these moons.

@@ -27,9 +27,9 @@ import { resolve } from "node:path";
 import { OBJECTS } from "../site/objects.mjs";
 import { loadAstronomyPackage } from "../src/platform/astronomy-package.mjs";
 
-// 2026-09-04T00:00:00 TT.
+// 2026-09-03T00:00:00 TT.
 const EPOCH_JD_TT = 2461286.5;
-const EPOCH_LABEL = "2026-09-04T00:00:00 TT";
+const EPOCH_LABEL = "2026-09-03T00:00:00 TT";
 
 // VSOP87A has no Earth series; the Earth-Moon barycentre stands in for Earth.
 // The offset is under 4700 km against 1 au, which moves the direction by less

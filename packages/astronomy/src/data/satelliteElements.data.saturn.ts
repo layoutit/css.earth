@@ -10,6 +10,48 @@
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
 export const SATELLITE_ELEMENTS_SATURN = {
+  methone: {
+    parent: 'saturn',
+    horizonsCode: '632',
+    fitFromJdTdb: 2453371.5,
+    fitToJdTdb: 2458119.5,
+    fitStepDays: 1,
+    poleRightAscensionRad: 0.708219794215,
+    poleDeclinationRad: 1.458000955166,
+    elements: {
+      epochJdTt: 2451545,
+      semiMajorAxisKm: 194232.783,
+      eccentricity: 0.000837373484,
+      inclinationRad: 0.00022031913,
+      ascendingNodeRad: -0.55770428763,
+      argumentOfPeriapsisRad: 2.940782899195,
+      meanAnomalyAtEpochRad: -11371.711806966076,
+      meanMotionRadPerDay: 6.206083883799187,
+      ascendingNodeRateRadPerDay: -0.014974072511188534,
+      argumentOfPeriapsisRateRadPerDay: 0.03248319684278547,
+    },
+  },
+  pallene: {
+    parent: 'saturn',
+    horizonsCode: '633',
+    fitFromJdTdb: 2453371.5,
+    fitToJdTdb: 2458119.5,
+    fitStepDays: 1,
+    poleRightAscensionRad: 0.707876468427,
+    poleDeclinationRad: 1.458070050615,
+    elements: {
+      epochJdTt: 2451545,
+      semiMajorAxisKm: 212282.942,
+      eccentricity: 0.003974751502,
+      inclinationRad: 0.003164200117,
+      ascendingNodeRad: -0.972968675035,
+      argumentOfPeriapsisRad: 3.401332379676,
+      meanAnomalyAtEpochRad: -9946.24591852577,
+      meanMotionRadPerDay: 5.43500484004621,
+      ascendingNodeRateRadPerDay: -0.010872672658822514,
+      argumentOfPeriapsisRateRadPerDay: 0.021768548419471234,
+    },
+  },
   mimas: {
     parent: 'saturn',
     horizonsCode: '601',

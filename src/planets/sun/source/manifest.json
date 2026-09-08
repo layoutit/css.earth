@@ -723,8 +723,9 @@
       "consumers": [
         "world-context"
       ],
-      "expectedBytes": 8448,
-      "expectedSha256": "82036d5e10c81fe6785bb4fbdce5e2f9ebc6f29754581a5beb1951f901849fef"
+      "expectedBytes": 8776,
+      "expectedSha256": "103d3d0fa21ad934e63bc15d189ddd9213c77b6c8e85cd49cbb9155735eca955",
+      "sha256": "dfbe98d8bc92664cb2f00b0d822f709053cc8fc03eac803599e6e43053add9e4"
     }
   ],
   "generatedIntermediates": [],

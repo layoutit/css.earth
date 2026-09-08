@@ -55,6 +55,8 @@ const SATELLITES = [
   ['thebe', '514', '500@599'],
   ['adrastea', '515', '500@599', 'daily'],
   ['metis', '516', '500@599', 'daily'],
+  ['methone', '632', '500@699', 'cassini-era'],
+  ['pallene', '633', '500@699', 'cassini-era'],
   ['mimas', '601', '500@699'],
   ['enceladus', '602', '500@699'],
   ['tethys', '603', '500@699'],
@@ -74,6 +76,7 @@ const SATELLITES = [
   ['prometheus', '616', '500@699', 'limited'],
   ['pandora', '617', '500@699', 'limited'],
   ['pan', '618', '500@699', 'source-limited'],
+  ['puck', '715', '500@799', 'daily'],
   ['miranda', '705', '500@799'],
   ['ariel', '701', '500@799'],
   ['umbriel', '702', '500@799'],
@@ -87,6 +90,10 @@ const SATELLITES = [
   ['despina', '805', '500@899', 'daily'],
   ['galatea', '806', '500@899', 'daily'],
   ['charon', '901', '500@999'],
+  ['nix', '902', '500@999', 'daily'],
+  ['hydra', '903', '500@999', 'daily'],
+  ['kerberos', '904', '500@999', 'daily'],
+  ['styx', '905', '500@999', 'daily'],
 ]
 
 // Deliberately NOT the epochs the mean elements were fitted on: the satellite

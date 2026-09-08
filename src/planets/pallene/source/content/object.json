@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "pallene",
+  "displayName": "Pallene",
+  "panel": {
+    "introduction": "Pallene is a small, elongated moon between Mimas and Enceladus. Cassini discovered it in 2004 and later resolved its smooth-looking outline. A faint dust ring follows its orbit around Saturn.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "2.23 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Measured dimensions",
+        "value": "5.76 × 4.16 × 3.60 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 27.7 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Saturn",
+        "value": "About 212,000 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Cassini imaging team · 2004"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
+        "title": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
+        "detail": "Cassini · coarse observed patch",
+        "thumbnail": "/scenes/pallene/pallene-normal-thumbnail.webp",
+        "surface": "pallene-normal-surface@2x.webp",
+        "poles": "pallene-normal-poles@2x.webp",
+        "source": {
+          "id": "cassini-n1496910582",
+          "path": "../manifest.json",
+          "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Pallene overview",
+      "href": "https://science.nasa.gov/saturn/moons/pallene/"
+    },
+    {
+      "label": "NASA/PDS",
+      "role": "surface",
+      "description": "Original calibrated Cassini image",
+      "href": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582"
+    },
+    {
+      "label": "Thomas et al.",
+      "role": "shape",
+      "description": "Cassini measurements",
+      "href": "https://doi.org/10.1016/j.icarus.2013.07.022"
+    },
+    {
+      "label": "Hedman et al.",
+      "role": "photometry",
+      "description": "Small-moon surface brightness study",
+      "href": "https://arxiv.org/abs/1912.09192"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/pallene/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Thomas et al. (2013); NAIF PCK00011; JPL"
+    }
+  }
+}
