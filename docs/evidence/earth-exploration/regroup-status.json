@@ -1,0 +1,204 @@
+{
+  "schema": "cssearth-qualification-status@1",
+  "recorded": "2026-09-08T11:54:20-03:00",
+  "candidate": "0294ed14556f01eb7d9443af666d14d5e4b89a44",
+  "integratedMain": "7b311eb3981d9e359e2174da1d0b01b6e07ebfba",
+  "objects": 161,
+  "mergeReady": false,
+  "currentChecks": {
+    "sourceVerification": {
+      "passed": true,
+      "objects": 161,
+      "path": "output/playwright/regroup-20260908/main-7b311eb-source.log",
+      "sha256": "109024ae7a104bf4d105c9cc84faea4efa5f7d328e374e2dc04e07b33b5d093e"
+    },
+    "exactPinRestoration": {
+      "pinsRestored": 242,
+      "logicalBytes": 235387857,
+      "path": "output/playwright/regroup-20260908/main-7b311eb-pin-restoration.json",
+      "sha256": "6e6e17e1af662f26a73c9113163a50894318969e057abb20f6de7a97b9074178"
+    },
+    "rendererTypes": {
+      "passed": true,
+      "path": "output/playwright/regroup-20260908/main-7b311eb-types.log",
+      "sha256": "eb7958e6096041cd43e6160058e591dec07323db90d06559471b9fe9ee869155"
+    },
+    "rendererTests": {
+      "passed": true,
+      "tests": 358,
+      "path": "output/playwright/regroup-20260908/main-7b311eb-renderer-tests-fixed.log",
+      "sha256": "cef963594d4a4fbd8f89d0377686a063abb6923ebbbfc9035d55cc860631aae2"
+    },
+    "navigationAndShell": {
+      "passed": true,
+      "tests": 54,
+      "path": "output/playwright/regroup-20260908/main-7b311eb-navigation.log",
+      "sha256": "12487dc3b1f19ed11e8eec7ce4ab941bb467825e52203d5d6c31e8974cc9a738"
+    },
+    "browserConformance": {
+      "passed": true,
+      "cases": 26,
+      "objects": [
+        "earth",
+        "deimos"
+      ],
+      "qualification": "Development functional conformance, both DPRs. No production timing claim. Capture began before the merge commit with the already-resolved working source; renderer and harness hashes are in the original report.",
+      "originalReport": {
+        "head": "3e40cfb2a6bd87a267987fca56342b5b76e4d121",
+        "cwd": "/Users/ekrof/fed/cssEarth-earth-8x",
+        "driverSha256": "8fed8fb989dc4b0c1aec3e1835a3e679c254a1b4b7829f4ce3a5a5095f3525ed",
+        "serverSha256": "c93ec910075e8d0b7a2e9a80f11a6b621a28d94486cdbac242ea6d08b02acca6",
+        "rendererSha256": "9c8473f3fb6a4b8322631be3716825a4473ee840048b682cef4dc1598b57ffad",
+        "wheelSourceSha256": "58f4daf45bcaf31d5cc74ba36649a9857a2631d4032f0f223c8940517b1afd0d",
+        "skyHarnessSha256": "5b6fa160516e516bf563bdd5bdff348aed896c52482937586ce9f1f585b8717d",
+        "harnessSha256": "4cb8ed89add18291edf32da5af2c230d50f2f98d7747951e72a83a198a1224bf",
+        "wheelHarnessSha256": "39ea3233b43df5c155b065b0d7f9528b994c3725c525f71aaea84a2a670e8eb7",
+        "qualification": "Full cases after verifying actual empty-sky targets and wheel completion; production wheel correction unchanged, in sequential batches of at most six objects. Each batch has its own programmatic Astro server and port; closed between batches to bound observed development-process heap growth. User preview is not used. This is functional conformance, not production timing.",
+        "batches": [
+          {
+            "ids": [
+              "earth",
+              "deimos"
+            ],
+            "started": "2026-09-08T14:49:46.696Z",
+            "server": {
+              "ready": true,
+              "pid": 3507,
+              "port": 49246
+            },
+            "origin": "http://127.0.0.1:49246",
+            "exit": {
+              "code": 0,
+              "signal": null
+            },
+            "finished": "2026-09-08T14:52:42.558Z",
+            "closed": true
+          }
+        ],
+        "objects": [
+          {
+            "id": "earth",
+            "origin": "http://127.0.0.1:49246",
+            "pid": 3510,
+            "started": "2026-09-08T14:49:48.442Z",
+            "exitCode": 0,
+            "passed": true,
+            "cases": [
+              "earth/initial-shell (4961ms)",
+              "earth/desktop (14059ms)",
+              "earth/mobile (3932ms)",
+              "earth/pre-ready-hidden-motion-off (3846ms)",
+              "earth/pre-ready-visible-motion-off (4728ms)",
+              "earth/pre-ready-hidden-motion-on (3884ms)",
+              "earth/pre-ready-visible-motion-on (4628ms)",
+              "earth/dpr-1 (22814ms)",
+              "earth/dpr-2 (19976ms)",
+              "earth/lens-race (3599ms)",
+              "earth/lens-reacquire (4198ms)",
+              "earth/lens-rejection (4273ms)",
+              "earth/lens-destroy (3409ms)"
+            ],
+            "failures": [],
+            "finished": "2026-09-08T14:51:28.032Z"
+          },
+          {
+            "id": "deimos",
+            "origin": "http://127.0.0.1:49246",
+            "pid": 6386,
+            "started": "2026-09-08T14:51:28.034Z",
+            "exitCode": 0,
+            "passed": true,
+            "cases": [
+              "deimos/initial-shell (1259ms)",
+              "deimos/desktop (10142ms)",
+              "deimos/mobile (2681ms)",
+              "deimos/pre-ready-hidden-motion-off (2682ms)",
+              "deimos/pre-ready-visible-motion-off (2845ms)",
+              "deimos/pre-ready-hidden-motion-on (2750ms)",
+              "deimos/pre-ready-visible-motion-on (2657ms)",
+              "deimos/dpr-1 (18545ms)",
+              "deimos/dpr-2 (18792ms)",
+              "deimos/lens-race (2741ms)",
+              "deimos/lens-reacquire (2727ms)",
+              "deimos/lens-rejection (2869ms)",
+              "deimos/lens-destroy (2837ms)"
+            ],
+            "failures": [],
+            "finished": "2026-09-08T14:52:42.502Z"
+          }
+        ],
+        "complete": true,
+        "passed": true
+      },
+      "path": "output/playwright/regroup-20260908/conformance-main-7b311eb/report.json",
+      "sha256": "b1571ff44168965f214263500b9df86b969c64dbfead59a472915d6fc04108c0"
+    },
+    "featureDiff": {
+      "passed": true,
+      "base": "7b311eb3981d9e359e2174da1d0b01b6e07ebfba",
+      "path": "output/playwright/regroup-20260908/main-7b311eb-feature-diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "prior155BodyChecks": {
+    "integratedMain": "1a5c996862115e1a2947052c3973ae279b59e2f1",
+    "scope": "Precedes the final main merge. Not evidence for all 161 bodies or the newly integrated activation, viewport and picking behavior.",
+    "build": {
+      "passed": true,
+      "path": "output/playwright/regroup-20260908/merged-build.log",
+      "sha256": "f66b7a33ce4cddb34cefb041adf30b5c1c2d51d4f6a295b16b398753cfda68b9"
+    },
+    "dom": {
+      "passed": true,
+      "objects": 155,
+      "dpr": [
+        1,
+        2
+      ],
+      "path": "output/playwright/regroup-20260908/merged-dom/report.json",
+      "sha256": "78399de45c31052214f4e4e89bbf346e8550bfa9e10b026285f380d81954eb58"
+    },
+    "entities": {
+      "passed": true,
+      "path": "output/playwright/regroup-20260908/entities-current/report.json",
+      "sha256": "511576b0ef3a80206432168247f4fc7ea803f8ed6710551fdade90ea27c3d5e2"
+    },
+    "history": {
+      "passed": true,
+      "cases": 4,
+      "path": "output/playwright/regroup-20260908/history-current/report.json",
+      "sha256": "69661ec650b7cbaad25b09c75655be5e5f7021a593f59ff5e6a6388394b4ff23"
+    },
+    "recovery": {
+      "passed": true,
+      "cases": 8,
+      "path": "output/playwright/regroup-20260908/recovery-current/report.json",
+      "sha256": "54daef8738bccc73dd201522f957430e95607af410fc2687f7ece177717e9d3d"
+    },
+    "aggregate": {
+      "passed": false,
+      "failures": 2,
+      "cause": "Compatibility city-index import path; corrected in 3e40cfb2 and covered by focused checks. Full aggregate rerun remains required.",
+      "path": "output/playwright/regroup-20260908/final-aggregate.log",
+      "sha256": "3d810a03b3dd8bb6d23ad20a3185d5198c62b020866eb97b6fae9fb2699e0560"
+    },
+    "input": "docs/evidence/earth-exploration/input-response.json",
+    "imageOwnership": "docs/evidence/earth-exploration/image-ownership.json"
+  },
+  "pending": [
+    "Full pnpm build on the 161-body candidate",
+    "Full pnpm test after canonical preparation",
+    "Built retained-DOM/browser gate for all 161 bodies at DPR 1 and 2",
+    "Refresh Earth entity/history/recovery and input/ownership evidence after the shared rendering integration",
+    "Current-candidate merge assessment"
+  ],
+  "blocker": {
+    "kind": "local-disk",
+    "availableBytes": 18080067584,
+    "minimumLargeMaterializationFreeBytes": 26843545600,
+    "generatedBuildPath": "/Users/ekrof/fed/cssEarth-earth-8x/dist",
+    "generatedBuildAllocatedKiB": 3766564,
+    "cleanupAuthorized": false,
+    "note": "Exact dist cleanup question is pending. Current free space is lower than when asked; removing dist alone is no longer sufficient. No files or evidence were deleted. Large build/asset materialization is paused under workstation AGENTS."
+  }
+}

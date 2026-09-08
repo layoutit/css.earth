@@ -1,9 +1,26 @@
 # Geographic feature qualification
 
-The repair candidate integrates main `1a5c9968` and all 155 registered bodies.
-Current source verification, input response and image-ownership checks pass;
-the final aggregate and browser gates are still in progress. No merge verdict is
-claimed until those finish. Application deployment remains the maintainer's decision.
+The candidate integrates main `7b311eb3` (161 registered bodies) in merge
+`0294ed14`. All reviewed implementation defects are repaired, but final
+qualification remains open. PR 6 stays draft; no merge or deployment is claimed.
+
+The [current gate receipt](evidence/earth-exploration/regroup-status.json) records:
+
+- Full source verification for all 161 bodies, renderer typechecking, all 358
+  renderer tests and 54 focused navigation/shell tests pass.
+- Earth and Deimos each pass all 13 browser conformance cases, including DPR 1
+  and 2, on the integrated development application.
+- The complete production build, full aggregate and all-body built-browser
+  gates must run again. The earlier 155-body build and DOM passes are preserved
+  with their actual scope. Its aggregate run had two compatibility-import
+  failures; the import is corrected, but a full rerun remains required.
+- Main changes activation, viewport and picking ownership, so Earth
+  entity/history/recovery, input and teardown evidence also needs refreshing.
+
+Local free disk space has fallen below the workstation's 25 GiB minimum for
+large materialization. The full build is paused pending space; source files,
+build output and captured evidence have not been deleted. This is an execution
+blocker, not a passing qualification or an application readiness verdict.
 
 ## Current repairs and focused evidence
 
@@ -26,7 +43,7 @@ and preserves the current view. The [regression receipt](evidence/earth-explorat
 records both delayed unit cases and all 13 passing Earth browser conformance cases.
 
 The [input response receipt](evidence/earth-exploration/input-response.json)
-covers globe, regional and city scales at DPR 1 and 2 on the integrated build.
+covers globe, regional and city scales at DPR 1 and 2 on the earlier 155-body build.
 A requested 1.2x zoom measures 1.200005–1.200786x; reversing restores 1.0x.
 The largest error on an 80 px drag is 0.0204 px. Grabbing the map interrupts a
 real destination flight without later resumption. The no-video DPR 1 run measures
@@ -38,7 +55,7 @@ changes ownership only; input controllers, policy and prepared geometry are unch
 ![DPR 2 Buenos Aires after the measured city drag](evidence/earth-exploration/repair-dpr2-city.png)
 
 The [image ownership receipt](evidence/earth-exploration/image-ownership.json)
-uses the corrected shell and eight independent, bounded native traces. All have
+uses the corrected shell before the final main merge and eight independent, bounded native traces. All have
 complete renderer association and no data loss. The first attempt's single
 64 MiB trace overflowed and is excluded from native totals.
 
@@ -192,7 +209,7 @@ unchanged. Delayed-event unit regressions cover both camera models; the original
 Ganymede wheel interruption sequence passes at DPR 1 and 2. This fixes expired
 animation windows; it does not remove Chromium's input queue latency.
 
-## Repository gates
+## Historical repository gates
 
 `pnpm test` passes in one invocation at `fed30392`: 513 package, 331 renderer,
 830 platform and 234 shell checks, totaling 1,908. This includes the two surface
@@ -218,8 +235,8 @@ canceled flight stayed at exactly 18 frames; the corrected test observes wheel
 completion and proves the flight does not resume. Ariel's earlier browser-close
 hang is superseded by a clean full-suite exit, not silently counted as a pass.
 
-These diagnostics-dependent checks use the development server; production
-correctly omits those globals. Test-owned Astro servers close after batches of
+These diagnostics-dependent checks use the development server; the standard production build
+omits those globals (main now also provides an explicit performance build). Test-owned Astro servers close after batches of
 at most six objects because a long-lived development process reached its V8 heap
 limit. That development-server failure is separate from browser residency and
 the production fixture. `CSSEARTH_CONFORMANCE_RECORD=0` retains conformance JSON
@@ -227,7 +244,7 @@ without recording a video for every object/DPR pair.
 
 At the historical candidate, Earth source verification passed all 62 records
 but aggregate verification lacked ignored inputs, including Naiad's pinned
-radius table. This gap is resolved for the current 155-body integration: exact
+radius table. This gap is resolved for the current 161-body integration: exact
 manifest-matching local inputs were restored and `pnpm acquire:planets --
 --verify-only` passes for the entire registry. No source values were invented
 or hashes relaxed to obtain that result.
