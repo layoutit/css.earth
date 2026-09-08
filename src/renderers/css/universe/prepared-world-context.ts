@@ -10,13 +10,14 @@ import { rotateWorldPosition, transposeWorldRotation, validateWorldRotation, wor
 import { levelOfDetailFor, orbitLineOpacity } from '../navigation/perspective-dolly.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { clipSegmentToRectangle, rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
-import { createPreparedRingProjector, createSphereChordTest } from '../solar-system/prepared-ring-projection.js';
+import { createPreparedRingProjector, createSphereChordTest, orbitBoundsMayContribute } from '../solar-system/prepared-ring-projection.js';
 import { applySprite, writePieces } from '../solar-system/heliocentric-sprites.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
 
 const BODY_INDICATOR_DIAMETER = 16;
+const ORBIT_FADE_START_PIXELS = 12;
 
 function orbitPresentation(segments: readonly OrbitSegment[], closed: boolean) {
   let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
@@ -25,7 +26,7 @@ function orbitPresentation(segments: readonly OrbitSegment[], closed: boolean) {
     top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
   }
   const extent = Math.max(1, right - left, bottom - top);
-  const opacity = logarithmicFade(extent, 12, 48);
+  const opacity = logarithmicFade(extent, ORBIT_FADE_START_PIXELS, 48);
   // Closed planetary rings and their circles share one zoom fade.
   // Fading trails retain their earlier marker-crowding threshold.
   return { width: 1, opacity, markerOpacity: closed ? opacity : logarithmicFade(extent, 48, 128) };
@@ -91,7 +92,8 @@ export interface PreparedContextFocus extends PreparedContextPoint {
   readonly pointSource?: PreparedContextPointSource;
 }
 export interface PreparedContextBody extends PreparedContextPoint {
-  readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[] };
+  readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
+    readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[] };
 }
 export interface PreparedContextCameraPresentation {
   readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
@@ -202,14 +204,33 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
     const body = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
     if (input.orbit === undefined) return body;
-    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail']);
+    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords']);
     const centerBodyId = text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM = vector(orbit.centerPositionM, 'orbit centre position');
     const verticesM = array(orbit.verticesM, 'orbit vertices').map(value => vector(value, 'orbit vertex'));
     const trail = numbers(orbit.trail, 'orbit trail');
     if (verticesM.length < 8 || trail.length !== verticesM.length || trail.some(value => value < 0 || value > 1) || !equalPosition(body.positionM, verticesM[0]!)) {
       throw new TypeError('Context orbit must align with its body and carry matching prepared trail weights.');
     }
-    return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail) }) });
+    const activeChords = orbit.activeChords === undefined ? undefined : numbers(orbit.activeChords, 'active orbit chords');
+    if (activeChords) {
+      const expected = trail.flatMap((weight, index) => weight > 0 ? [index] : []);
+      if (activeChords.length !== expected.length || activeChords.some((index, ordinal) => index !== expected[ordinal])) {
+        throw new TypeError('Prepared active chords must match every positive trail weight in order.');
+      }
+    }
+    let bounds: { readonly centerM: PositionM; readonly radiusM: number } | undefined;
+    if (orbit.bounds !== undefined) {
+      const input = record(orbit.bounds, 'orbit bounds', ['centerM', 'radiusM']);
+      const centerM = vector(input.centerM, 'orbit bounds centre'), radiusM = positive(input.radiusM, 'orbit bounds radius');
+      if (verticesM.some((vertex, index) => (trail[index] > 0 || trail[(index + trail.length - 1) % trail.length] > 0) &&
+        Math.hypot(...vertex.map((value, axis) => value - centerM[axis])) > radiusM)) {
+        throw new TypeError('Prepared orbit bounds must contain every active chord endpoint.');
+      }
+      bounds = Object.freeze({ centerM, radiusM });
+    }
+    // Older prepared banks retain the exact projection path; no runtime bounds bake.
+    return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail),
+      ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}) }) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
@@ -560,9 +581,11 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const parentDepth = parentEye === null ? 0 : -parentEye[2];
         const parentDiameter = entry.parent && parentDepth > entry.parent.radiusM
           ? 2 * focal * entry.parent.radiusM / Math.sqrt(parentDepth ** 2 - entry.parent.radiusM ** 2) : 0;
-        const segments = navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 ? createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
+        const bounds = entry.orbit?.bounds;
+        const segments = navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 &&
+          (!bounds || orbitBoundsMayContribute(toEye(bounds.centerM), bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS)) ? createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
           mayOcclude: (a, b) => focusMayOcclude(a, b) || selectedMayOcclude(a, b) || Boolean(parentMayOcclude?.(a, b)),
-          near, clipX: width / 2, clipY: height / 2 })(entry.orbit.verticesM, entry.orbit.trail) : [];
+          near, clipX: width / 2, clipY: height / 2 })(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords) : [];
         if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(segments, entry.closedOrbit);
         const appearance = entry.orbitAppearance;
         const bodyLod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, diameter);
