@@ -4,7 +4,7 @@ import type { ObjectControls, ObjectSelection, ObjectAction } from "../runtime/o
 import type { ObjectSelectionState } from "./object-selection-runtime.js";
 export interface ObjectControlBindingOptions {
   stage: HTMLElement; controls: ObjectControls; initialSelection: ObjectSelection; getState(): Readonly<ObjectSelectionState>;
-  getEntity?(): GeographicEntity | null; getGeographicState?(): GeographicLensState | null;
+  getEntity?(): GeographicEntity | null; getGeographicState?(): GeographicLensState | null; getPageError?(): boolean;
   onAction(action: ObjectAction): unknown; onError(error: unknown): void;
 }
 type SettingInput = HTMLInputElement | HTMLButtonElement;
@@ -13,7 +13,7 @@ const isInput = (element: SettingInput): element is HTMLInputElement => element.
 import { requireObjectControls } from "../runtime/object-contract.js";
 import { objectCycleStates, requireObjectAction, objectLensAvailable } from "../runtime/object-contract.js";
 
-export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, getEntity = () => null, getGeographicState = () => null }: ObjectControlBindingOptions) {
+export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, getEntity = () => null, getGeographicState = () => null, getPageError = () => false }: ObjectControlBindingOptions) {
   requireObjectControls(controls);
   if (!stage?.ownerDocument || [getState, onAction, onError].some(callback => typeof callback !== "function")) {
     throw new TypeError("Object controls require the mounted document and shared selection endpoint.");
@@ -21,6 +21,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const document = stage.ownerDocument;
   const lensRoot = document.querySelector(".planet-lenses");
   const settingsRoot = document.querySelector(".planet-settings");
+  const detailsRoot = document.querySelector(".planet-lens-details");
   const lensInputs = [...(lensRoot?.querySelectorAll<HTMLButtonElement>('button[name="lens"]') ?? [])].filter(input => !input.hasAttribute("data-geographic-lens"));
   const geographic = createGeographicLensBinding(lensRoot, controls.lenses?.geographicCapacity ?? 0);
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
@@ -71,6 +72,11 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const overlay = getGeographicState();
     const pressed = new Set(overlay?.id ? [overlay.id] : next.plan?.pressedLenses ?? [committed.lensId]);
     geographic.publish(getEntity(), overlay, ready);
+    for (const status of detailsRoot?.querySelectorAll<HTMLElement>('[data-page-status]') ?? []) {
+      const failed = !overlay?.id && pressed.has(status.dataset.pageStatus ?? '') && getPageError();
+      status.textContent = failed ? 'Some imagery could not load. Select this dataset again to retry.' : '';
+      status.hidden = !failed;
+    }
     for (const root of [lensRoot, settingsRoot]) {
       root?.classList.toggle("is-loading", !ready || next.pending === true || overlay?.status === "loading");
       root?.setAttribute("aria-busy", String(!ready || next.pending === true || overlay?.status === "loading"));

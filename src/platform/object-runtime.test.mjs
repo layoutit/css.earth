@@ -216,7 +216,7 @@ test("Earth's actual prepared page layers join shared publication, image ownersh
   const events = [], plans = [], imageScopes = [];
   const h = harness({ definition: earthDefinition }, { mountPages({ own, plan, images }) {
     plans.push(plan); imageScopes.push(images); own(() => events.push("destroy"));
-    return { replacePlan: () => events.push("replace"), publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), stats: () => ({}) };
+    return { replacePlan: () => events.push("replace"), publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), retry() {}, stats: () => ({ errors: [], index: {errors: []} }) };
   } }); t.after(h.restore); await h.complete();
   assert.deepEqual(plans, earthDefinition.pageLayers.map(layer => layer.plan));
   assert.equal(new Set(imageScopes).size, plans.length);
@@ -243,7 +243,7 @@ test("destinations and optional prepared lens targets use physical surface fligh
   const lensId=definition.controls.lenses.controls.find(lens=>lens.id!==definition.controls.lenses.defaultLens).id;
   for(const variant of definition.variants)if(variant.when.lensId===lensId)variant.navigation={camera};
   const h = harness({ definition }, { mountPages: () => ({
-    replacePlan() {}, setSuspended() {}, publish() {}, setLens() {}, setPlaying() {}, stats: () => ({}),
+    replacePlan() {}, setSuspended() {}, publish() {}, setLens() {}, setPlaying() {}, retry() {}, stats: () => ({ errors: [], index: {errors: []} }),
   }) });
   t.after(h.restore);
   // This boundary test records camera requests; native conformance measures

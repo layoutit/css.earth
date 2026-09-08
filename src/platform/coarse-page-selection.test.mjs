@@ -185,3 +185,20 @@ for (const outcome of ['valid', 'oversized', 'truncated', 'corrupt']) test(`dire
   if(outcome==='oversized'){assert.equal(canceled,true);assert.ok(pulls<=Math.ceil(ref.bytes/32)+2,`read ${pulls} chunks for ${ref.bytes} bytes`);}
  }finally{index.destroy();}
 });
+
+
+test('failed stationary directories retry only on explicit request, preserving loaded metadata', async () => {
+ const bytes=Buffer.from(JSON.stringify({schema:'cssearth-city-index@1',dataset:'test',nodes:[backing],external:[]})),sha256=createHash('sha256').update(bytes).digest('hex');
+ const ref={url:`https://earth-assets.lowpoly.cc/scenes/earth/city-index-test-0-0-0-${sha256.slice(0,16)}.json`,bytes:bytes.length,sha256};
+ let failing=true,calls=0;
+ const index=createCityIndex({assetPath:'/scenes/earth/',assetOrigin:'https://earth-assets.lowpoly.cc',dataset:'test',roots:[],index:{maximumDirectories:2,maximumBytes:1024,maximumConcurrentLoads:1,maximumDirectoryBytes:1024}},()=>{},async()=>{calls++;return failing?new Response('',{status:503}):new Response(bytes);});
+ const settle=async()=>{while(index.stats().activeLoads)await new Promise(resolve=>setImmediate(resolve));};
+ try{
+  index.update([ref]);await settle();assert.equal(index.stats().errors.length,1);
+  index.update([]);assert.deepEqual(index.stats().errors,[], 'Evicted failures cannot label another view as broken');
+  index.update([ref]);await settle();assert.equal(calls,2);
+  failing=false;index.update([ref]);await settle();assert.equal(calls,2);
+  index.retry();await settle();assert.equal(calls,3);assert.deepEqual(index.stats().errors,[]);assert.equal(index.nodes().get(backing.key).url,backing.url);
+  const loaded=index.nodes().get(backing.key);index.retry();index.update([ref]);await settle();assert.equal(calls,3);assert.equal(index.nodes().get(backing.key),loaded);
+ }finally{index.destroy();}
+});

@@ -11,7 +11,7 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
   const roots=[...plan.roots,...(plan.backing?.roots??[])];
   let nodes = new Map(roots.map(node => [node.key, node]));
   let activeLoads = 0, requests = 0, aborts = 0, destroyed = false, budgetBlocked = 0;
-  let errors = [];
+  const errors = new Map();
   const limits = plan.index;
   const backingRootBytes=plan.backing?.rootDecodedBytes??0;
   const resolved = new WeakMap();
@@ -35,6 +35,7 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
   const remove = (url, entry) => {
     if (entry.controller) { entry.controller.abort(); aborts++; }
     entries.delete(url);
+    errors.delete(url);
   };
   function update(references) {
     if (destroyed) return;
@@ -114,7 +115,7 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
       entry.data = data;
       rebuild();
     } catch (error) {
-      if (!destroyed && !controller.signal.aborted) errors = [...errors.slice(-7), error.message];
+      if (!destroyed && !controller.signal.aborted) errors.set(preparedReferenceKey(entry.ref), error.message);
     } finally {
       entry.controller = null;
       activeLoads--;
@@ -127,13 +128,19 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
   return {
     nodes: () => nodes,
     update,
+    retry() {
+      if (destroyed) return;
+      errors.clear();
+      for (const entry of entries.values()) if (!entry.data && !entry.controller) entry.started = false;
+      pump();
+    },
     stats: () => ({ activeLoads, requests, aborts, budgetBlocked,
       residentDirectories: entries.size, residentNodes: nodes.size,
       reservedEncodedBytes: [...entries.values()].reduce((sum, entry) => sum + entry.ref.bytes, 0),
       reservedDecodedBytes: [...entries.values()].reduce((sum, entry) => sum + (entry.ref.decodedBytes ?? entry.ref.bytes), backingRootBytes),
       rootEncodedBytes: plan.rootDirectory?.bytes ?? 0, rootDecodedBytes: (plan.rootDirectory?.decodedBytes ?? 0)+backingRootBytes,
       maximumBytes: limits.maximumBytes, maximumDirectories: limits.maximumDirectories,
-      errors: [...errors] }),
+      errors: [...errors.values()].slice(-8) }),
     destroy() {
       destroyed = true;
       for (const [url, entry] of entries) remove(url, entry);

@@ -17,10 +17,10 @@ class Input extends EventTarget {
 }
 function root(inputs, slots = []) {
   const classes = new Set();
-  return { querySelectorAll: selector => selector === "[data-geographic-option]" ? slots : selector === "[data-lens-legend]" ? [] : inputs, attributes: {}, setAttribute(key, value) { this.attributes[key] = value; },
+  return { querySelectorAll: selector => selector === "[data-geographic-option]" ? slots : ["[data-lens-legend]", "[data-page-status]"].includes(selector) ? [] : inputs, attributes: {}, setAttribute(key, value) { this.attributes[key] = value; },
     classList: { toggle(key, on) { if (on) classes.add(key); else classes.delete(key); }, remove: key => classes.delete(key), contains: key => classes.has(key) } };
 }
-function harness(controls = moonControls, mutate = () => {}) {
+function harness(controls = moonControls, mutate = () => {}, services = {}) {
   const initial = initialObjectSelection(controls);
   const lensInputs = (controls.lenses?.controls ?? []).map(lens => new Input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
   const settingInputs = (controls.settings?.controls ?? []).map(control => new Input({ name: control.name,
@@ -28,14 +28,14 @@ function harness(controls = moonControls, mutate = () => {}) {
   const motion = new Input({ name: "motion" }), contrast = new Input({ name: "skyContrast" }), heliosphere = new Input({ name: "heliosphere" });
   settingInputs.push(motion, contrast, heliosphere);
   const lensRoot = root(lensInputs, geographicControlSlots(controls.lenses?.geographicCapacity ?? 0)), settingsRoot = root(settingInputs);
-  const stage = { ownerDocument: { querySelector: selector => selector === ".planet-lenses" ? lensRoot : settingsRoot } };
+  const stage = { ownerDocument: { querySelector: selector => selector === ".planet-lenses" ? lensRoot : selector === ".planet-settings" ? settingsRoot : null } };
   const errors = [], actions = []; let state = { committed: null, desired: initial, plan: null, pending: true };
   let actionImplementation = action => {
     state = { ...state, committed: reduceObjectSelection(state.committed ?? initial, action), pending: false };
     state.desired = state.committed; binding.publish(state); return true;
   };
   mutate({ lensInputs, settingInputs, stage, lensRoot });
-  const binding = createObjectControlBinding({ stage, controls, initialSelection: initial, getState: () => state,
+  const binding = createObjectControlBinding({ stage, controls, initialSelection: initial, getState: () => state, getPageError: () => Boolean(services.error),
     onAction(action) { actions.push(action); return actionImplementation(action); }, onError: error => errors.push(error) });
   return { binding, lensInputs, settingInputs, lensRoot, settingsRoot, motion, contrast, heliosphere, errors, actions, initial,
     setState(next) { state = next; binding.publish(state); }, state: () => state,
@@ -148,4 +148,11 @@ test("prepared lens legends follow committed selection through pending work", ()
   h.setState({ committed: desired, desired, pending: false, plan: null });
   assert.deepEqual(legends.map(legend => legend.hidden), [true, false]);
   h.binding.destroy();
+});
+
+
+test('imagery failure appears in the separate shared surface details and clears after retry', () => {
+ const services={error:false},status={dataset:{pageStatus:moonControls.lenses.defaultLens},hidden:true,textContent:''};
+ const h=harness(moonControls,({stage})=>{const query=stage.ownerDocument.querySelector;stage.ownerDocument.querySelector=selector=>selector==='.planet-lens-details'?{querySelectorAll:()=>[status]}:query(selector);},services);
+ try{h.ready();assert.equal(status.hidden,true);services.error=true;h.binding.publish();assert.equal(status.hidden,false);assert.match(status.textContent,/Select this dataset again to retry/);services.error=false;h.binding.publish();assert.equal(status.hidden,true);assert.equal(status.textContent,'');}finally{h.binding.destroy();}
 });

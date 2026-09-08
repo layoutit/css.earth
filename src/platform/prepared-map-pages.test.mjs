@@ -125,7 +125,7 @@ test("prepared pages fetch, decode and publish while unrelated metadata is pendi
   }
 });
 
-for(const mode of ['complete','fallback-failure','reversal']) test(`mounted ancestor demand, progressive detail and bounded cleanup (${mode})`, async () => {
+for(const mode of ['complete','fallback-failure','reversal','detail-retry']) test(`mounted ancestor demand, progressive detail and bounded cleanup (${mode})`, async () => {
   const f=retainedPresentationFixture({assets:{entries:[]}}),identity=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
   Object.defineProperty(HTMLElement.prototype,"firstElementChild",{get(){return this.children[0];}});
   DOMMatrix.prototype.toFloat64Array=()=>new Float64Array(identity);
@@ -170,6 +170,20 @@ for(const mode of ['complete','fallback-failure','reversal']) test(`mounted ance
       assert.equal(pages.stats().activeLoads,0);assert.deepEqual(requests,['parent-image','a-image']);
       assert.deepEqual(pages.stats().errors,[]);assert.deepEqual(f.stage.children,retained);return;
     }
+    if(mode==='detail-retry'){
+      pending.get('a-image').reject(new Error('injected detail failure'));await drain();
+      for(const key of ['b','c','d']){pending.get(key+'-image')();await drain();}
+      const before=requests.length;pages.publish({zoom:1});await drain();assert.equal(requests.length,before);
+      const published=pages.stats().retained.filter(p=>p.published).map(p=>p.key);
+      assert.ok(published.includes('parent-image'),'usable parent remains behind the failed child');
+      pages.retry();await drain();
+      assert.deepEqual(requests.slice(before),['a-image']);
+      assert.ok(published.every(key=>pages.stats().retained.some(p=>p.key===key&&p.published)));
+      pending.get('a-image')();await drain();
+      assert.deepEqual(pages.stats().errors,[]);
+      assert.deepEqual(pages.stats().retained.filter(p=>p.published).map(p=>p.key).sort(),keys.slice(1).map(key=>key+'-image'));
+      assert.ok(pages.stats().reservedDecodedBytes<=32);assert.deepEqual(f.stage.children,retained);return;
+    }
     for(const key of keys.slice(1)){
       pending.get(key+'-image')();await drain();assert.ok(pages.stats().reservedDecodedBytes<=32);
       assert.ok(pages.stats().retained.some(page=>page.key===key+'-image'&&page.published),'a ready child appears before remaining siblings');
@@ -178,7 +192,7 @@ for(const mode of ['complete','fallback-failure','reversal']) test(`mounted ance
     assert.deepEqual(pages.stats().retained.filter(p=>p.published).map(p=>p.key).sort(),keys.slice(1).map(key=>key+'-image'));
     assert.deepEqual(requests,keys.map(key=>key+'-image'));
     assert.deepEqual(released,['parent-image']);assert.deepEqual(pages.stats().fallback,[]);
-    assert.deepEqual(pages.stats().errors,mode==='fallback-failure'?['injected ancestor failure']:[]);
+    assert.deepEqual(pages.stats().errors,[], 'A replaced failed ancestor no longer reports an error for the current view');
     pages.publish({zoom:1});await drain();assert.equal(requests.length,5);
     assert.deepEqual(f.stage.children,retained);
   }finally{pages?.destroy();f.restore();for(const [name,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,name,descriptor);else delete globalThis[name];}}

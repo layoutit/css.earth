@@ -51,7 +51,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   let evictions = 0;
   let publications = 0;
   let selectionRuns = 0, selectionDiagnostics: (Omit<PageSelection, "keys" | "directories"> & {scale?: number}) | null = null;
-  let errors: string[] = [];
+  const errors = new Map<string, string>();
   let index: ReturnType<typeof createCityIndex>, apiImages: ApiImageScope, imageTransport: ApiImageTransport | null = null, observer: ResizeObserver | null = null, shellObserver: MutationObserver | null = null;
   const schedule = () => {
     if (!destroyed && pendingFrame === null) pendingFrame = requestAnimationFrame(() => { try { refresh(); } catch (error) { onError(error); } });
@@ -95,6 +95,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   }
 
   function release(slot: PageSlot) {
+    if (slot.key) errors.delete(slot.key);
     slot.generation += 1;
     if (slot.controller) { slot.controller.abort(); aborts += 1; }
     if (slot.key) evictions += 1;
@@ -238,8 +239,8 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     } catch (error) {
       if (!controller.signal.aborted && !destroyed && generation === slot.generation) {
         slot.apiHandle?.invalidate();
-        errors = [...errors.slice(-7), error instanceof Error ? error.message : String(error)];
-        // Keep the failed key until the view changes; do not retry every frame.
+        errors.set(page.key, error instanceof Error ? error.message : String(error));
+        // Keep the failed key until explicit retry or eviction; never retry every frame.
         slot.controller = null;
       }
     } finally {
@@ -251,6 +252,15 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   }
 
   return Object.freeze({
+    retry() {
+      if (destroyed || !enabled || suspended) return;
+      // Explicit intent alone resets failed work. Ready and pending images keep
+      // their leases, reservations and visible backing at the current camera.
+      errors.clear();
+      for (const slot of slots) if (slot.key && !slot.ready && !slot.controller) release(slot);
+      index.retry();
+      schedule();
+    },
     whenIdle: () => activeLoads === 0 || destroyed ? Promise.resolve() : new Promise<void>(resolve => idleWaiters.add(resolve)),
     replacePlan(next: PreparedPagePlan | null) {
       if (destroyed) return;
@@ -258,7 +268,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
           next.assetOrigin !== capacity.assetOrigin || !(capacity.rasterScales ?? [capacity.rasterScale]).includes(next.rasterScale) ||
           next.poolSize !== slots.length || next.maximumDecodedBytes > capacity.maximumDecodedBytes ||
           next.maximumConcurrentLoads > capacity.maximumConcurrentLoads)) throw new Error("Map package exceeds mounted capacity.");
-      clearDesired(); errors = []; progressiveInitialView = false;
+      clearDesired(); errors.clear(); progressiveInitialView = false;
       for (const slot of slots) if (slot.key) release(slot);
       index.destroy();
       plan = next ?? capacity;
@@ -296,7 +306,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
         index: index.stats(), apiImages: apiImages.stats(),
         decodedPageByteBound: plan.maximumDecodedBytes,
         reservedDecodedBytes: slots.reduce((sum,slot)=>sum+slot.decodedBytes,0),
-        requests, aborts, evictions, publications, selectionRuns, selectionDiagnostics, errors: [...errors] };
+        requests, aborts, evictions, publications, selectionRuns, selectionDiagnostics, errors: [...errors.values()].slice(-8) };
     },
     destroy,
   });

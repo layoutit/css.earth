@@ -2,7 +2,7 @@ import { createGeographicLensBinding } from "./geographic-lens-binding.mjs";
 import { requireObjectControls } from "../../site/scene-contract.mjs";
 import { objectCycleStates, requireObjectAction, objectLensAvailable } from "./object-runtime-contract.mjs";
 
-export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, getEntity = () => null, getGeographicState = () => null }) {
+export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, getEntity = () => null, getGeographicState = () => null, getPageError = () => false }) {
   requireObjectControls(controls);
   if (!stage?.ownerDocument || [getState, onAction, onError].some(callback => typeof callback !== "function")) {
     throw new TypeError("Object controls require the mounted document and shared selection endpoint.");
@@ -10,6 +10,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const document = stage.ownerDocument;
   const lensRoot = document.querySelector(".planet-lenses");
   const settingsRoot = document.querySelector(".planet-settings");
+  const detailsRoot = document.querySelector(".planet-lens-details");
   const lensInputs = [...(lensRoot?.querySelectorAll('button[name="lens"]') ?? [])].filter(input => !input.hasAttribute?.('data-geographic-lens'));
   const geographic = createGeographicLensBinding(lensRoot, controls.lenses?.geographicCapacity ?? 0);
   const settingsInputs = [...(settingsRoot?.querySelectorAll("input[name], button[name]") ?? [])]
@@ -54,6 +55,11 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const overlay = getGeographicState();
     const pressed = new Set(overlay?.id ? [overlay.id] : next.plan?.pressedLenses ?? [committed.lensId]);
     geographic.publish(getEntity(), overlay, ready);
+    for (const status of detailsRoot?.querySelectorAll('[data-page-status]') ?? []) {
+      const failed = !overlay?.id && pressed.has(status.dataset.pageStatus ?? '') && getPageError();
+      status.textContent = failed ? 'Some imagery could not load. Select this dataset again to retry.' : '';
+      status.hidden = !failed;
+    }
     for (const root of [lensRoot, settingsRoot]) {
       root?.classList.toggle("is-loading", !ready || next.pending === true || overlay?.status === "loading");
       root?.setAttribute("aria-busy", String(!ready || next.pending === true || overlay?.status === "loading"));

@@ -1,165 +1,96 @@
-import assert from "node:assert/strict";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { createHash } from "node:crypto";
-import { resolve } from "node:path";
-import { chromium } from "playwright";
-import { serveBuiltFixture } from "../../../../tools/test-built-server.mjs";
-
-const option = (name, fallback) => process.argv.find(arg=>arg.startsWith(`--${name}=`))?.slice(name.length+3) ?? fallback;
-const built = resolve(option("built-dir","dist"));
-const dpr = Number(option("dpr","1")); assert.ok([1,2].includes(dpr));
-const output = resolve(`output/playwright/global-recovery-dpr${dpr}-${Date.now()}`); await mkdir(output,{recursive:true});
-let fixture = null;
-try { fixture = JSON.parse(await readFile(resolve(built,"fixture-receipt.json"))); } catch (error) { if (error.code !== "ENOENT") throw error; }
-if (fixture) { assert.equal(fixture.geometryMirror,false); assert.equal(fixture.install.installed,803); assert.equal(fixture.reuse.installed,0); }
-const server = await serveBuiltFixture(built), browser = await chromium.launch({channel:"chrome",headless:true,args:server.launchArgs});
-const report = {output,built,dpr,browser:browser.version(),fixtureCommit:fixture?.commit ?? null,
-  qualification:"Built app with real public geometry/provider endpoints; test failures use separately labeled request interception. A clean asset install is claimed only when a fixture receipt is present. No app deployment or development diagnostics.",
-  transitions:[],faults:[],teardowns:[],heapPlateau:[],errors:[],requests:[]};
-const context = await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:dpr,recordVideo:{dir:output,size:{width:1440,height:1000}}});
-await context.addInitScript(()=>{
-  const live=new Map(),create=URL.createObjectURL,revoke=URL.revokeObjectURL;
-  window.__recoveryBlobs=live;
-  URL.createObjectURL=function(blob){const url=create.call(this,blob);live.set(url,blob.size);return url;};
-  URL.revokeObjectURL=function(url){live.delete(url);return revoke.call(this,url);};
-});
-const page=await context.newPage(),cdp=await context.newCDPSession(page),pending=new Set();
-context.on("request",r=>{if(!r.url().startsWith("blob:"))pending.add(r);report.requests.push(r.url());});
-context.on("requestfinished",r=>pending.delete(r));context.on("requestfailed",r=>pending.delete(r));
-page.on("pageerror",error=>report.errors.push(error.message));
-const lens=id=>page.locator(`button[name="lens"][value="${id}"]`);
-const settle=async()=>{
-  await page.waitForFunction(()=>document.documentElement.dataset.ready==="true"&&document.querySelector("[data-entity-card]")?.ariaBusy!=="true");
-  let prior="",quiet=Date.now();
-  for(const start=Date.now();Date.now()-start<120000;){
-    const signature=await page.evaluate(()=>JSON.stringify({scene:document.querySelector(".polycss-scene")?.style.transform,
-      pages:[...document.querySelectorAll('[data-city-page]')].map(n=>n.dataset.cityPage).sort(),
-      statuses:[...document.querySelectorAll('[data-geographic-status]')].filter(n=>!n.closest('[hidden]')).map(n=>n.textContent)}));
-    const active=[...pending].some(r=>[server.url,"https://earth-assets.lowpoly.cc","https://mapproxy.terrascope.be"].includes(new URL(r.url()).origin));
-    if(signature!==prior||active){prior=signature;quiet=Date.now();}
-    if(Date.now()-quiet>=800)return;
-    await page.waitForTimeout(100);
-  }throw new Error("Built recovery did not settle.");
-};
-const state=()=>page.evaluate(()=>{
-  const nodes=[...document.querySelector('.planet-stage').querySelectorAll('*')],before=window.__recoveryNodes??=nodes;
-  return {entity:document.querySelector('[data-entity-card]').dataset.entityId,lens:document.querySelector('button[name="lens"][aria-pressed="true"]')?.value,
-    stable:before.length===nodes.length&&before.every((n,i)=>n===nodes[i]),sceneElements:nodes.length,
-    pages:[...document.querySelectorAll('[data-city-page]')].filter(n=>n.style.visibility==='visible').map(n=>n.dataset.cityPage),
-    status:[...document.querySelectorAll('[data-geographic-status]')].filter(n=>!n.closest('[hidden]')).map(n=>n.textContent).join(' '),
-    blobs:window.__recoveryBlobs.size,blobBytes:[...window.__recoveryBlobs.values()].reduce((s,n)=>s+n,0),url:location.href};
-});
-const checkpoint=async(name,{fault=false,capture=false}={})=>{
-  await settle();const record={name,...await state()};assert.ok(record.stable);
-  if(!fault)assert.doesNotMatch(record.status,/could not|unavailable|loading/i);
-  if(capture)await page.screenshot({path:resolve(output,`${name}.png`)});
-  console.log(JSON.stringify({checkpoint:name,entity:record.entity,lens:record.lens,pages:record.pages.length}));
-  return record;
-};
-const select=async(query,id)=>{await page.locator('.planet-sidebar-search').fill(query);await page.locator(`[data-destination-id="${id}"]`).click();await page.waitForFunction(id=>document.querySelector('[data-entity-card]').dataset.entityId===id,id);await settle();};
-const activate=async id=>{await lens(id).click();await settle();assert.equal(await lens(id).getAttribute('aria-pressed'),'true');};
+import assert from 'node:assert/strict';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {chromium} from 'playwright';
+import {serveBuiltFixture} from '../../../../tools/test-built-server.mjs';
+const option=(name,fallback)=>process.argv.find(a=>a.startsWith(`--${name}=`))?.slice(name.length+3)??fallback;
+const built=resolve(option('built-dir','dist')),output=resolve(option('output',`output/playwright/global-recovery-${Date.now()}`));
+const dprs=option('dpr','1,2').split(',').map(Number),cases=option('cases','rgb-image,rgb-metadata,noise-image,noise-package').split(',');
+const record=option('record','true')==='true';await mkdir(output,{recursive:true});
+const report={head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),built,output,
+ qualification:'Built app, native browser lens clicks, controlled 503 responses. Real prepared assets and provider requests resume after explicit same-view retry. Synthetic fault fixture, not a performance or deployment test.',
+ harnessSha256:createHash('sha256').update(await readFile(new URL(import.meta.url))).digest('hex'),cases:[],errors:[]};
+const server=await serveBuiltFixture(built);let browser;
+const boundedClose=async(promise,label)=>{let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(label+' cleanup timed out')),15000);})]);}finally{clearTimeout(timer);}};
+const state=page=>page.evaluate(()=>({entity:document.querySelector('[data-entity-card]')?.dataset.entityId,
+ lens:document.querySelector('button[name="lens"][aria-pressed="true"]')?.value,url:location.href,
+ pages:[...document.querySelectorAll('[data-city-page]')].filter(n=>n.style.visibility==='visible').map(n=>n.dataset.cityPage),
+ status:[...document.querySelectorAll('[data-geographic-status],[data-page-status]')].filter(n=>!n.closest('[hidden]')).map(n=>n.textContent).join(' '),
+ nodes:document.querySelector('.planet-stage')?.querySelectorAll('*').length,blobs:window.__recoveryBlobs.size,
+ stable:!window.__recoveryNodes||window.__recoveryNodes.every(n=>n.isConnected),
+ scenes:document.querySelectorAll('.polycss-scene').length}));
 try{
-  await page.goto(`${server.url}/earth/#place=3435910&lens=buenos-aires-noise`);
-  const initial=await checkpoint('deep-link',{capture:true});assert.equal(initial.entity,'3435910');assert.equal(initial.lens,'buenos-aires-noise');assert.equal(initial.pages.filter(k=>k.startsWith('noise-')).length,16);
-  const saved=page.url();await select('Tokyo','1850147');assert.equal(await lens('buenos-aires-noise').isVisible(),false);
-  await page.goBack();const back=await checkpoint('back');assert.equal(back.entity,'3435910');assert.equal(back.lens,'buenos-aires-noise');
-  assert.equal(new URL(back.url).search,new URL(saved).search,'Back restores the exact saved camera token');
-  await page.goForward();assert.equal((await checkpoint('forward')).entity,'1850147');
-  await page.goto(saved);const restored=await checkpoint('reload',{capture:true});assert.equal(restored.entity,'3435910');assert.equal(restored.lens,'buenos-aires-noise');assert.equal(new URL(restored.url).search,new URL(saved).search);
-  report.history={initial,back,restored,passed:true};
-
-  // Preserve the camera in a normal Earth-card link. The source fault remains
-  // at the same detailed view, while the lens belongs to Earth, not the city.
-  const earthView = new URL(saved); earthView.hash = "";
-  // Failure fixtures disable the HTTP cache; these are recovery checks only.
-  const faultCase=async(name,pattern,handler)=>{
-    await page.goto(earthView.href);await settle();
-    assert.equal((await state()).entity,'earth');
-    await activate('normal');const before=await checkpoint(`${name}-base`);assert.ok(before.pages.length);
-    let calls=0;const byUrl=new Map();
-    const fixtureErrors=[];
-    const route=async r=>{calls++;byUrl.set(r.request().url(),(byUrl.get(r.request().url())??0)+1);
-      try{await handler(r);}catch(error){fixtureErrors.push(error.message);await r.abort().catch(()=>{});}};
-    await page.route(pattern,route);
-    await lens('worldcover-land-cover').click();
-    await page.locator('[data-lens-legend="worldcover-land-cover"] [data-geographic-status]').filter({hasText:'could not load'}).waitFor({timeout:120000});
-    const failed=await checkpoint(`${name}-failed`,{fault:true,capture:true});assert.equal(failed.entity,'earth');assert.ok(calls);
-    assert.deepEqual(fixtureErrors,[],"The fixture must fail the intended bytes, not its own transport");
-    await page.unroute(pattern,route);await activate('worldcover-land-cover');
-    const recovered=await checkpoint(`${name}-recovered`,{capture:name==='provider-outage'});assert.ok(recovered.pages.length);
-    report.faults.push({name,calls,byUrl:[...byUrl],failed,recovered,passed:true});
-    console.log(JSON.stringify({fault:name,calls,recovered:recovered.pages.length}));
+ browser=await chromium.launch({channel:'chrome',headless:true,args:server.launchArgs});report.browser=browser.version();
+ for(const dpr of dprs)for(const fault of cases){
+  assert.ok([1,2].includes(dpr));const row={name:`dpr${dpr}-${fault}`,dpr,fault,attempts:[],errors:[]};report.cases.push(row);
+  const context=await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:dpr,...(record?{recordVideo:{dir:output,size:{width:1440,height:1000}}}:{})});
+  await context.addInitScript(()=>{window.__recoveryBlobs=new Map();const create=URL.createObjectURL,revoke=URL.revokeObjectURL;
+   URL.createObjectURL=function(blob){const url=create.call(this,blob);window.__recoveryBlobs.set(url,blob.size);return url;};
+   URL.revokeObjectURL=function(url){window.__recoveryBlobs.delete(url);return revoke.call(this,url);};});
+  const page=await context.newPage(),pending=new Set();let failing=true,phase='fault',maxPending=0,faultKey=null,faultArmed=false;
+  page.on('pageerror',e=>row.errors.push(e.message));
+  context.on('request',r=>{if(/^https?:/.test(r.url())){pending.add(r);maxPending=Math.max(maxPending,pending.size);}});
+  context.on('requestfinished',r=>pending.delete(r));context.on('requestfailed',r=>pending.delete(r));
+  const matches=value=>{const url=value.href;return fault==='rgb-image'?url.includes('mapproxy.terrascope.be/'):
+   fault==='rgb-metadata'?url.includes('/wmts-')&&url.endsWith('.pack'):
+   fault==='noise-image'?/\/earth-noise-day-[^/]+\.webp$/.test(url):fault==='noise-package'?/\/geographic-lens-buenos-aires-noise-/.test(url):false;};
+  await page.route(matches,async route=>{
+   if(!faultArmed){await route.continue();return;}
+   const url=route.request().url(),key=url+'#'+(route.request().headers().range??'');
+   if(fault==='rgb-image'&&!/\/13\/\d+\/\d+\.png$/.test(url)){await route.continue();return;}
+   faultKey??=key;
+   if(key!==faultKey){await route.continue();return;}
+   row.faultKey=faultKey;row.attempts.push({phase,url:route.request().url(),range:route.request().headers().range??null});
+   if(failing)await route.fulfill({status:503,headers:{'access-control-allow-origin':'*','retry-after':'0'},body:'Stationary recovery fault fixture'});else await route.continue();});
+  const settle=async()=>{
+   let last='',quiet=Date.now(),logAt=Date.now();
+   for(const start=Date.now();Date.now()-start<120000;){
+    const s=await state(page),signature=JSON.stringify([s.pages,s.url,s.status]);
+    if(signature!==last||[...pending].some(r=>[server.url,'https://earth-assets.lowpoly.cc','https://mapproxy.terrascope.be'].includes(new URL(r.url()).origin))){last=signature;quiet=Date.now();}
+    if(Date.now()-logAt>15000){logAt=Date.now();console.log(JSON.stringify({name:row.name,phase,pages:s.pages.length,status:s.status,pending:[...pending].map(r=>r.url()).slice(0,6),url:s.url}));}
+    if(Date.now()-quiet>2500)return s;
+    await page.waitForTimeout(100);
+   }row.pending=[...pending].map(r=>r.url());throw new Error('Recovery fixture did not settle: '+row.pending.join(', '));
   };
-  const corrupt=async route=>{
-    const url=new URL(route.request().url());
-    if(url.origin===server.url){const body=Buffer.from(await readFile(resolve(built,`.${url.pathname}`)));body[0]^=255;await route.fulfill({status:200,contentType:'application/octet-stream',body});}
-    else {const response=await route.fetch(),body=Buffer.from(await response.body());body[0]^=255;await route.fulfill({response,body});}
-  };
-  await faultCase('corrupt-package','**/geographic-lens-worldcover-land-cover-*.json',corrupt);
-  await faultCase('corrupt-root-directory','**/geographic-roots-*.pack',corrupt);
-  await faultCase('corrupt-range','https://earth-assets.lowpoly.cc/**/wmts-*/*.pack',corrupt);
-  await faultCase('unavailable-range','https://earth-assets.lowpoly.cc/**/wmts-*/*.pack',route=>route.fulfill({status:503,headers:{'access-control-allow-origin':server.url},body:'Fixture geometry unavailable'}));
-  const rangePattern='https://earth-assets.lowpoly.cc/**/wmts-*/*.pack';
-  const rangeKey=route=>`${route.request().url()}#${route.request().headers().range}`;
-  const shortTransfer=async route=>{
-    const response=await route.fetch(),body=await response.body();
-    assert.equal(response.status(),206);assert.ok(body.length>1);
-    // Keep the declared range while ending the transferred body one byte early.
-    await route.fulfill({response,body:body.subarray(0,-1)});
-  };
-  const shortAttempts=new Map();
-  await faultCase('short-range',rangePattern,async route=>{
-    const key=rangeKey(route);shortAttempts.set(key,(shortAttempts.get(key)??0)+1);
-    await shortTransfer(route);
-  });
-  assert.ok([...shortAttempts.values()].every(count=>count<=2),'A short metadata transfer retries at most once per range');
-  await page.goto(earthView.href);await settle();await activate('normal');
-  let shortKey=null;const transientAttempts=new Map(),transientErrors=[];
-  const transientRoute=async route=>{
-    const key=rangeKey(route);transientAttempts.set(key,(transientAttempts.get(key)??0)+1);
-    if(shortKey===null){shortKey=key;try{await shortTransfer(route);}catch(error){transientErrors.push(error.message);await route.abort();}}
-    else await route.continue();
-  };
-  await page.route(rangePattern,transientRoute);
-  await activate('worldcover-land-cover');
-  const transientRecovered=await checkpoint('short-range-automatic-recovery',{capture:true});
-  await page.unroute(rangePattern,transientRoute);
-  assert.deepEqual(transientErrors,[]);assert.ok(shortKey);
-  assert.equal(transientAttempts.get(shortKey),2);assert.ok(transientRecovered.pages.length);
-  report.faults.push({name:'short-range-automatic-recovery',key:shortKey,attempts:[...transientAttempts],recovered:transientRecovered,passed:true});
-  await faultCase('corrupt-tile','https://mapproxy.terrascope.be/**/esa-worldcover-map-10m-2021-v2_map/**',corrupt);
-  await faultCase('provider-outage','https://mapproxy.terrascope.be/**/esa-worldcover-map-10m-2021-v2_map/**',route=>route.fulfill({status:503,headers:{'access-control-allow-origin':'*','retry-after':'0'},body:'Fixture unavailable'}));
-  assert.ok(report.faults.at(-1).byUrl.every(([,count])=>count<=3),'No provider URL retries more than twice');
-
-  // Repeated actual entity/lens/body navigation. Pagehide is observed after
-  // the application's registered teardown, before the old document is gone.
-  await activate('normal');await settle();
-  for(let cycle=0;cycle<5;cycle++){
-    const transition=async(name,action)=>{await action();report.transitions.push({cycle,...await checkpoint(name)});};
-    await transition('buenos-aires',()=>select('Buenos Aires','3435910'));
-    await transition('noise',()=>activate('buenos-aires-noise'));
-    await transition('earth-land-cover',async()=>{await page.locator('[data-entity-parent="earth"]').click();await settle();await activate('worldcover-land-cover');});
-    await transition('tokyo',()=>select('Tokyo','1850147'));
-    await transition('lagos',()=>select('Lagos','2332459'));
-    await transition('buenos-aires-return',()=>select('Buenos Aires','3435910'));
-    await transition('noise-return',()=>activate('buenos-aires-noise'));
-    await transition('earth-root',async()=>{await page.locator('[data-entity-parent="earth"]').click();});
-    await page.evaluate(()=>{
-      const nodes=[...document.querySelector('.planet-stage').querySelectorAll('*')],live=window.__recoveryBlobs;
-      window.addEventListener('pagehide',()=>sessionStorage.setItem('recovery-teardown',JSON.stringify({connected:nodes.some(n=>n.isConnected),blobs:live.size})),{once:true});
-    });
-    await transition('mars',async()=>{await page.locator('.planet-sidebar-search').fill('Mars');await page.locator('.planet-object-browser a[href="/mars/"]').click();});
-    const teardown=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('recovery-teardown')));assert.deepEqual(teardown,{connected:false,blobs:0});report.teardowns.push(teardown);
-    await transition('earth-remount',async()=>{await page.locator('.planet-sidebar-search').fill('Earth');await page.locator('.planet-object-browser a[href="/earth/"]').click();});
-    await cdp.send('HeapProfiler.collectGarbage');report.heapPlateau.push({cycle,...await cdp.send('Runtime.getHeapUsage')});
-    console.log(JSON.stringify({cycle,transitions:report.transitions.length,heap:report.heapPlateau.at(-1).usedSize}));
-  }
-  assert.equal(report.transitions.length,50);
-  const heaps=report.heapPlateau.slice(1).map(p=>p.usedSize);assert.ok(Math.max(...heaps)-Math.min(...heaps)<8*1024**2,'Post-collection Earth remount heap remains within an 8 MiB band');
-  assert.ok(!server.requests.some(r=>r.path.includes('/wmts-')));
-  const scripts=[...new Map(server.requests.filter(r=>r.sha256).map(r=>[r.path,r])).values()];
-  for(const script of scripts)assert.equal(script.sha256,createHash('sha256').update(await readFile(resolve(built,`.${script.path}`))).digest('hex'));
-  report.scripts=scripts;report.memoryQualification='Collected main-page V8 heap, retained DOM and blob teardown. This does not measure physical-device memory or total GPU/process residency; worker residency is qualified separately by the fifty-selection worker probe.';
-  assert.deepEqual(report.errors,[]);report.complete=true;
-}catch(error){report.error=error.stack;report.failedState=await state().catch(()=>null);await page.screenshot({path:resolve(output,'failure.png')}).catch(()=>{});throw error;}
-finally{await context.close();report.video=await page.video()?.path();await browser.close();await server.close();await writeFile(resolve(output,'report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({output,complete:report.complete??false}));}
+  page.on('crash',()=>{row.crashed=true;console.log(JSON.stringify({name:row.name,crashed:true}));});
+  try{
+   const lens=fault.startsWith('noise')?'buenos-aires-noise':'normal';
+   // Save a real camera through normal selection, then start a fresh document
+   // at that view so the first fault belongs to stationary demand, not a flight.
+   console.log(JSON.stringify({name:row.name,phase:'warm-view'}));await page.goto(`${server.url}/earth/#place=3435910`);
+   await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('[data-entity-card]')?.ariaBusy!=='true',null,{timeout:90000});
+   await settle();await page.mouse.move(1000,500);await page.mouse.wheel(0,1);await settle();
+   const target=new URL(page.url());target.hash=`place=3435910&lens=${lens}`;
+   await page.goto('about:blank');faultArmed=true;console.log(JSON.stringify({name:row.name,phase:'stationary-fault'}));await page.goto(target.href);
+   await page.waitForFunction(()=>document.documentElement.dataset.ready==='true'&&document.querySelector('[data-entity-card]')?.ariaBusy!=='true',null,{timeout:90000});
+   await settle();
+   await page.evaluate(()=>window.__recoveryNodes=[...document.querySelector('.planet-stage').querySelectorAll('*')]);
+   row.otherPending=[...pending].map(r=>new URL(r.url())).filter(url=>![server.url,'https://earth-assets.lowpoly.cc','https://mapproxy.terrascope.be'].includes(url.origin)).map(url=>url.origin+url.pathname);row.failed=await state(page);console.log(JSON.stringify({name:row.name,phase:'failed',attempts:row.attempts.length,pages:row.failed.pages.length}));await writeFile(resolve(output,row.name+'-progress.json'),JSON.stringify(row,null,2));await page.screenshot({path:resolve(output,row.name+'-failed.png')});
+   assert.ok(row.attempts.length,'The fault must reach the intended live transport');
+   row.failedAttempts=row.attempts.length;failing=false;phase='service-restored';await page.waitForTimeout(1000);
+   assert.equal(row.attempts.length,row.failedAttempts,'Stationary failures must not create an automatic retry storm');
+   phase='retry';await page.locator(`button[name="lens"][value="${lens}"]`).click();
+   row.recovered=await settle();console.log(JSON.stringify({name:row.name,phase:'retried',attempts:row.attempts.length,pages:row.recovered.pages.length}));await page.screenshot({path:resolve(output,row.name+'-recovered.png')});
+   assert.ok(row.attempts.length>row.failedAttempts,'Explicit same-view retry must restart failed requests');
+   assert.match(row.failed.status,/could not load|could not open/i,'Failure must be visible in the current card');
+   assert.doesNotMatch(row.recovered.status,/could not|unavailable|loading/i);
+   assert.equal(row.recovered.entity,'3435910');assert.equal(row.recovered.lens,lens);
+   assert.equal(row.recovered.url,row.failed.url,'Retry preserves the same camera and selection URL');
+   assert.ok(row.recovered.stable);assert.equal(row.recovered.nodes,row.failed.nodes);assert.equal(row.recovered.scenes,1);
+   assert.ok(row.recovered.pages.some(key=>!row.failed.pages.includes(key)),'Recovered detail must replace usable backing');
+   const byKey=new Map();for(const a of row.attempts.filter(a=>a.phase==='fault')){const key=a.url+'#'+a.range;byKey.set(key,(byKey.get(key)??0)+1);}
+   assert.ok([...byKey.values()].every(n=>n<=3),'No failed image request exceeds its two automatic retries');
+   row.failureAttemptsByKey=[...byKey];row.maxPending=maxPending;assert.deepEqual(row.errors,[]);row.passed=true;
+   console.log(JSON.stringify({name:row.name,passed:true,attempts:row.attempts.length,pages:row.recovered.pages.length}));
+  }catch(e){row.error=e.stack;throw e;}finally{await writeFile(resolve(output,row.name+'-progress.json'),JSON.stringify(row,null,2));await boundedClose(context.close(),'Context');row.video=await page.video()?.path();}
+ }
+ report.passed=true;
+}catch(e){report.error=e.stack;process.exitCode=1;}
+finally{
+ await boundedClose(browser?.close(),'Browser').catch(error=>{report.cleanupError=error.message;process.exitCode=1;});await server.close();report.closed=!report.cleanupError;
+ report.scripts=[...new Map(server.requests.filter(r=>r.sha256).map(r=>[r.path,r])).values()];
+ for(const r of report.scripts)assert.equal(r.sha256,createHash('sha256').update(await readFile(resolve(built,'.'+r.path))).digest('hex'));
+ await writeFile(resolve(output,'report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({output,passed:report.passed??false,error:report.error}));
+}

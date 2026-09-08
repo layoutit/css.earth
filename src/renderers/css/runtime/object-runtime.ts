@@ -69,9 +69,18 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (!definition.pageLayers?.find(plan => plan.id === id)?.geographic) layer.setSuspended(suspended);
       }
     }
+    function pageError() {
+      const id = selection?.state().committed?.lensId;
+      return [...pageLayers].some(([key, pages]) => {
+        const layer = definition.pageLayers?.find(layer => layer.id === key);
+        if (layer?.geographic || !layer?.lensIds.includes(id ?? '')) return false;
+        const state = pages.stats();
+        return !state.suspended && Boolean(state.errors.length || state.index?.errors.length);
+      });
+    }
     function geographicStatusKey() {
       const state = geographic?.state();
-      return state ? `${state.id}:${state.status}:${state.resolution}` : 'idle';
+      return `${state ? `${state.id}:${state.status}:${state.resolution}` : 'idle'}:${pageError()}`;
     }
     function publishControls(state?: Readonly<ObjectSelectionState>) {
       lastGeographicStatus = geographicStatusKey(); controls?.publish(state);
@@ -133,7 +142,15 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (selectedEntity()?.lenses?.some(lens => lens.id === action.id)) return geographic?.select(action.id) ?? Promise.resolve(false);
         geographic?.clear();
       }
-      return selection?.dispatch(action) ?? Promise.resolve(false);
+      return (selection?.dispatch(action) ?? Promise.resolve(false)).then(accepted => {
+        if (accepted && action.kind === 'lens') {
+          for (const [key, pages] of pageLayers) {
+            const layer = definition.pageLayers?.find(layer => layer.id === key);
+            if (!layer?.geographic && layer?.lensIds.includes(action.id)) pages.retry();
+          }
+        }
+        return accepted;
+      });
     }
     const destinations = definition.destinations && capabilities.createDestinations ? capabilities.createDestinations({ plan: definition.destinations,
       ready, lifetime, selectLens: id => dispatchAction({ kind: "lens", id }),
@@ -294,7 +311,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
         getState: () => selection?.state() ?? { desired: initialSelection, committed: null, pending: true, plan: null, loadingMaterial: false, ready: false, error: null, viewRevision: null },
         getEntity: selectedEntity,
-        getGeographicState: () => geographic?.state() ?? null,
+        getGeographicState: () => geographic?.state() ?? null, getPageError: pageError,
         onAction: action => dispatchAction(action), onError: error => console.error(error) });
       context.own(() => controls?.destroy());
       // A claimed preflight bank already completed and released default startup.
@@ -317,7 +334,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         });
         context.own(() => images.destroy());
         const pages = capabilities.mountPages({ ...layer, paintLayer, plan, stage, scene: mounted.sceneElement, camera: mounted.cameraElement,
-          own: context.own, images, onStatus: layer.geographic ? publishGeographicStatus : undefined, onError: fatal });
+          own: context.own, images, onStatus: publishGeographicStatus, onError: fatal });
         pageLayers.set(layer.id, pages);
         if (layer.geographic) {
           geographic = createGeographicLensRuntime({ pages, images, capacity: plan, surface: mounted.observationSurface,
