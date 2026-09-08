@@ -18,6 +18,10 @@ const browser = await chromium.launch({ headless: true, executablePath: process.
 const page = await browser.newPage({ viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr });
 const cdp = await page.context().newCDPSession(page);
 const report = { seed, dpr, hops, start: start.id, head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), browser: browser.version(), actions: [], errors: [], documents: [] };
+page.on('requestfailed', request => {
+  const reason = request.failure()?.errorText;
+  if (reason !== 'net::ERR_ABORTED') report.errors.push(`${reason} ${request.url()}`);
+});
 page.on('pageerror', error => report.errors.push(error.message));
 page.on('request', request => { if (request.isNavigationRequest() && request.frame() === page.mainFrame()) report.documents.push(request.url()); });
 page.on('response', response => { if (response.status() >= 400) report.errors.push(`HTTP ${response.status()} ${response.url()}`); });
@@ -90,6 +94,7 @@ async function sidebarPick(id) {
   await page.locator(`.planet-object-link[data-object-id="${id}"]:visible`).first().click();
 }
 async function changeDataset() {
+  if (!await page.locator('.planet-information-panel').isVisible()) return;
   const ids = await page.locator('.planet-information-panel button[name="lens"]').evaluateAll(nodes => nodes.filter(node => !node.disabled && node.getAttribute('aria-pressed') !== 'true').map(node => node.value));
   if (!ids.length) return;
   const id = choose(ids), button = page.locator(`.planet-information-panel button[name="lens"][value="${id}"]`);

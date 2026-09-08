@@ -431,6 +431,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   });
   galaxy?.querySelector('[data-browse-solar-system]')?.addEventListener('click', event => {
     event.preventDefault();
+    browsing = true;
     search.value = 'Solar System'; render(true);
   }, { signal: events.signal });
   information.addEventListener("click", (event) => {
@@ -455,7 +456,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
         if (event.key === "Enter") first.click(); else first.focus();
       }
     } else if (event.key === "Enter") {
-      event.preventDefault(); render(true); return;
+      event.preventDefault(); browsing = true; render(true); return;
     }
     if (event.key !== "Escape" || !open) return;
     event.preventDefault();
@@ -472,6 +473,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     }
   }, { signal: events.signal });
   documentTarget.querySelector(".planet-find-destination")?.addEventListener("click", () => {
+    browsing = true;
     render(true, { resetQuery: true });
   }, { signal: events.signal });
   documentTarget.addEventListener("pointerdown", (event) => {
@@ -493,11 +495,11 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   };
   return Object.freeze({
     previewObject(name) {
-      const previous = { selectedSearchValue, currentSearchValue, overview, open, query: search.value };
+      const previous = { selectedSearchValue, currentSearchValue, overview, open, browsing, query: search.value };
       overview = false; selectedSearchValue = name; currentSearchValue = name;
       markSelection(); render(false);
       return () => {
-        ({ selectedSearchValue, currentSearchValue, overview } = previous);
+        ({ selectedSearchValue, currentSearchValue, overview, browsing } = previous);
         search.value = previous.query; markSelection(); render(previous.open);
       };
     },

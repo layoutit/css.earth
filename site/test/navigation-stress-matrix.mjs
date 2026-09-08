@@ -15,6 +15,7 @@ const output = process.env.OUTPUT ?? `output/playwright/navigation-stress-matrix
 await mkdir(output, { recursive: true });
 const report = { head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), chains };
 for (const chain of chains) {
+  if (process.env.SEEDS && !process.env.SEEDS.split(',').includes(String(chain.seed))) continue;
   console.log('START', JSON.stringify(chain));
   const log = await open(`${output}/${chain.seed}.log`, 'w');
   chain.exit = await new Promise((resolve, reject) => {
@@ -25,4 +26,4 @@ for (const chain of chains) {
   await log.close(); await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2));
   console.log('FINISH', JSON.stringify(chain));
 }
-if (chains.some(chain => chain.exit !== 0)) process.exitCode = 1;
+if (chains.some(chain => chain.exit !== undefined && chain.exit !== 0)) process.exitCode = 1;
