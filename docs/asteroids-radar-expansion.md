@@ -21,7 +21,7 @@ Ra-Shalom and 1992 SK retain the archived models' own orientation conventions, w
 
 All six use the generic object package and shared Solar System navigation. Their heliocentric conics use the existing JD 2461286.5 epoch and are checked against independent Horizons vectors 30 days either side. These are fixed-epoch display fits, not long-term perturbation ephemerides.
 
-The branch also includes main's five-comet merge (`1588a643`). The combined registry has 176 objects. All 1,043 existing solar-geometry entries and every incoming body in the world context remain unchanged. Navigation atlases and marker indices are prepared again for the combined registry.
+The branch also includes main's five-comet merge (`1588a643`). The combined registry has 176 objects. All 1,021 existing solar-geometry and provenance entries and every incoming body in the world context remain unchanged. Navigation atlases and marker indices are prepared again for the combined registry.
 
 ![The six additions in their default Shape view, with Shadows off](asteroids-radar-expansion.webp)
 

@@ -2331,7 +2331,11 @@
   },
   "geometryRetention": {
     "baseCommit": "1588a643e6c323879f9debae438440f5e6045e4e",
-    "existingEntriesChecked": 1043,
+    "existingEntriesChecked": 1021,
+    "bodyGeometryRecords": 1014,
+    "positionProvenanceEntries": 7,
+    "existingBodies": 169,
+    "epochConstantsAndAccessorsUnchanged": true,
     "allUnchanged": true
   },
   "mainRuntimeRetention": {
