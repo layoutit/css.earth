@@ -1,0 +1,196 @@
+{
+  "schema": "csskleopatra-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "kleopatra-shape",
+      "path": "shape/216_Kleopatra_mpcd.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/216_Kleopatra_mpcd.obj",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "license": "Public scientific model from the source-author release accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Original OBJ restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape"
+      ],
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 59100
+      },
+      "coverage": "Closed MPCD model constrained by VLT/SPHERE images; source connectivity retains concave neck geometry. Neutral material, not an observed surface map.",
+      "expectedBytes": 190459,
+      "expectedSha256": "a0a22f4a3bdae76cc5235d7cb90c1b75198eebbce5995d661c19d392b4278fc7"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "kleopatra-mpcd-research",
+      "path": "reference/marchis-2021.pdf",
+      "origin": "https://arxiv.org/pdf/2108.07207",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.",
+      "license": "CC-BY-4.0",
+      "acquisition": "Original research paper restored through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with attribution under the stated Creative Commons Attribution license.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 22365861,
+      "expectedSha256": "94a426e7c5eb845575e0cc74df48adfe9efab912281503d9eb03be97d92fcd0d"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://observations.lam.fr/astero/3Dshape/216_Kleopatra_mpcd.obj",
+      "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "license": "Public scientific model from the source-author release accompanying CC-BY-4.0 research; retain credit and citations.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 28785,
+      "expectedSha256": "61652a3bf5fe94d0b4fa35c0f64f3cf521666aea5fb0995a6287185510cc5e7e",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "kleopatra-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 90,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 8839,
+      "expectedSha256": "76361e07ede242ed1380f2eaad21057c083c13bbffae048aa07a8229434dfc93"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1026,
+      "expectedSha256": "ac694fdb21b1d134a88884f7f0be2e485b9539f48eded729df3d441fd7a066ca"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1331,
+      "expectedSha256": "c4cb3bd0d3879005b2b3a0cf30429611103301eaa1caa7a8277cdb266a686304"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 686,
+      "expectedSha256": "7eee4eba99c688a82e4e6d0238941790c667af952262d4a3890dffe1a4723179"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 2117,
+      "expectedSha256": "d259f97d4a857bc4dee534ad63a0ef1d77b2fed18e558bb7443981dfa8bb1252"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 5515,
+      "expectedSha256": "fe0391e22c18294dc13a2af6d6467c18e475fcb945271bef8d99dcfc60039278"
+    },
+    {
+      "path": "reference/216_Kleopatra_param.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 43,
+      "expectedSha256": "add702142ce1207ae9723f5b07c37459ab6482ec2b5fa845b0c721a49cf0bb0f"
+    },
+    {
+      "path": "reference/cds-images-readme.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 5572,
+      "expectedSha256": "b9ade700fe514eb9cb245c5255dd79dc4e4d0f12af2df944b9684df8899808d0"
+    },
+    {
+      "path": "reference/damit-survey.html",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 9072,
+      "expectedSha256": "bdb21200a0f855c7b2801416f9b16de0d4644f5bd6386cccb726b53603937504"
+    },
+    {
+      "path": "reference/lam-release.html",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 3147,
+      "expectedSha256": "8793409dced0c8f65163f17d007c1304fd0de6e1d66d5c34265e8ccf7d356a09"
+    },
+    {
+      "path": "reference/sphere-example-header.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 66339,
+      "expectedSha256": "48edf4dc904eb68d599dff0ad515588fdd565002f7ffe6b0ca5056dbcf47809a"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 89775,
+      "expectedSha256": "24dec09a561047643c9392ae64758b5f42e457c84670f399e98e6e690df53c46"
+    }
+  ]
+}

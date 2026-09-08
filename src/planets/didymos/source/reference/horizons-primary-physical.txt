@@ -1,0 +1,38 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              65803 Didymos (PRIMARY BODY center)         920065803
+Updated: 2026-Jun-24       Solution (s547) date: 2024-March 
+               https://iopscience.iop.org/article/10.3847/PSJ/ad26e7/pdf
+ 
+This is the DART mission's post-impact reconstructed trajectory for the 
+Didymos -primary- of the 65803 Didymos system. 
+
+To use Didymos (the primary) as coordinate origin, set center to "@ 920065803".
+
+ Related objects:
+  DART spacecraft           :      -135 (mission navigation)
+  LICIACube spacecraft      :      -210 (mission navigation)
+  Didymos system barycenter :  20065803 (JPL s205 reconstruction)
+                                 65803; (latest JPL ground-based solution)
+  Dimorphos satellite center: 120065803 (JPL s547 target reconstruction)
+
+ Didymos physical parameters:
+  Radii   ~ (0.39167 x 0.39167 x 0.29195) km, 710.3 m volume equivalent diam.
+  Volume  ~ 0.1876 km^3
+  GM_Didy ~ 3.51278E-08 km^3/s^2
+
+ Didymos spin pole (ICRF at J2000.0 epoch, east longitude positive)
+  RA  =  69.32686 deg. (310.0 deg. ecliptic longitude)   
+  DEC = -72.72455 deg. (-80.6 deg. ecliptic latitude)
+  PM  =   0.0     deg., 3823.008849557522 deg/day 
+         (period is 2.2600 +/- 0.0001 hrs)
+
+DART impacted Didymos' satellite (Dimorphos) on 26-Sep-2022 @ 23:14:24.183 UTC,
+equivalent to 2022-Sep-26 23:15:33.365 TDB. 
+
+ Name                                     Start (TDB)        Stop (TDB)
+ ---------------------------------------  -----------------  -----------------
+ dimorphos_s547_long                      2000-Jan-01 14:00  2024-Dec-31 00:00
+*******************************************************************************

@@ -38,7 +38,19 @@ const responsiveFit = Object.freeze({
   maximumZoom: 2,
 });
 
-export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchDegrees = 40, defaultControlYawDegrees = 0 }) {
+export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchDegrees = 40, defaultControlYawDegrees = 0, framingScale = 1 }) {
+  if (!Number.isFinite(framingScale) || framingScale <= 0 || framingScale > 1) {
+    throw new TypeError("Camera framing scale must be greater than zero and at most one.");
+  }
+  // Elongated bodies need room beyond their volume-equivalent radius. Tune
+  // the existing viewport fit at preparation time; keep physical scale intact.
+  const fit = framingScale === 1 ? responsiveFit : Object.freeze({
+    ...responsiveFit,
+    ...Object.fromEntries([
+      "portraitBaseWidthShare", "narrowPortraitWidthShareGain", "landscapeWidthShareGain",
+      "maximumHeightShare", "maximumMobilePreviewShare", "minimumZoom",
+    ].map(key => [key, responsiveFit[key] * framingScale])),
+  });
   const defaultPitch = 89 * (1 - initialScenePitchDegrees / 65);
   return Object.freeze({
     state: Object.freeze({
@@ -58,7 +70,7 @@ export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchD
     maximumZoom: 4,
     defaultZoom: 1.1,
     logicalBodyDiameter: radius * 2,
-    responsiveFit: responsiveFit,
+    responsiveFit: fit,
     // PolyCSS leaves use 50 CSS units per world unit. Framing is already
     // owned by the dolly distance; scaling the mesh by defaultZoom here makes
     // its perspective silhouette disagree with lighting and occlusion.

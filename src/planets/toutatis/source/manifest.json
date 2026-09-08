@@ -1,0 +1,170 @@
+{
+  "schema": "csstoutatis-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "toutatis-shape",
+      "path": "shape/4179toutatis2.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.tab",
+      "credit": "R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
+      "license": "Public scientific archive; retain the dataset citation and attribution.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape"
+      ],
+      "lensId": "shape",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 1224
+      },
+      "coverage": "Closed radar-derived principal-axis model, based on 1992 and 1996 observations. +Z is the long axis, not a spin pole. Later radar and Chang’e-2 images reveal shape differences.",
+      "expectedBytes": 2879779,
+      "expectedSha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.tab",
+      "credit": "R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
+      "license": "Public scientific archive; retain the dataset citation and attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 39357,
+      "expectedSha256": "bcafa52f733d71561c858cef4f0e01c061c7983fb048c6c74f58fbbc4eff896d",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "toutatis-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 90,
+        "latitudeDegrees": 15,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 7805,
+      "expectedSha256": "1306de50ce1728d4cbaa3bab3c31892f2d2c1669538850310ed203f23fe826a4"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 782,
+      "expectedSha256": "b9571c2d2620e59a4bdc91a95a9941197192d8dc87a82e067ad404ae48012829"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1315,
+      "expectedSha256": "be88f29b655c9b480c03a78346929179bdd458876916a04d2529a49b2194334f"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 649,
+      "expectedSha256": "28664341ad43161a298fb3e744f63f4e35ea2969f53ddc8670fc9a32d20dcf7a"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 2133,
+      "expectedSha256": "3788d2d631cb7e35f0cfa77bbcc5e5b43a180ad871cd17c633e01322df4a148d"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 4151,
+      "expectedSha256": "54ac8059ddde7d6b39941074a330e117cc2bacc0529a8483a6de638d242bea1c"
+    },
+    {
+      "path": "reference/4179toutatis2.xml",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 13953,
+      "expectedSha256": "eb873a7279ab7dde9211fec46235d1a3523501fb78ed7550892b11cb181e8ce3"
+    },
+    {
+      "path": "reference/bundle_description.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 2315,
+      "expectedSha256": "6630280401c8236fe149529ee19fadb12d43e45dfef4a21824dbf9a0b0494f6c"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1587,
+      "expectedSha256": "6e14de8de1fdab168eb57b08a1a8f898c89941a78d5469ec85bf2c9019ee2087"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 89774,
+      "expectedSha256": "ddab21764ba62da801d5d7e00774ce6a5481c068b53e0c8c43ac830eebd5ec55"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    }
+  ]
+}
