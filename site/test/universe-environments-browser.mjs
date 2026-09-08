@@ -7,7 +7,7 @@ import shell from '../../src/objects/heliosphere/prepared/shell.json' with { typ
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 import worldContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
-const output = resolve('.local/universe-shared-sky');
+const output = resolve(process.env.UNIVERSE_BROWSER_OUTPUT ?? '.local/universe-shared-sky');
 const reportedView = '/mercury/?v=QMZBVmWEdTha6EHA0HFrNnyfwfqFzIA0Li5BQsczQAAAAL-57UJuUPUpP6TYXnEpHWy_4dF-IEqKvAABAAAAAAAAAAA';
 const opacityProfile = worldContext.volume.opacityProfile;
 const brightnessProfile = worldContext.volume.brightnessProfile;
@@ -166,9 +166,10 @@ async function read(page) {
     volumeCopiesValid: [...document.querySelectorAll('.css-volume-mesh')].every(mesh => {
       const images = [...mesh.children];
       return images.length % 3 === 0 && images.every((node, index) => {
-        const original = images[index - index % 3];
+        const copy = index % 3, original = images[index - copy], alpha = Number(node.style.opacity);
         return node.style.transform === original.style.transform && node.style.backgroundImage === original.style.backgroundImage &&
-          node.style.opacity === (index % 3 ? `var(--volume-optical-copy-${index % 3}, 0)` : '');
+          (copy === 0 ? node.style.opacity === '' : node.style.opacity !== '' && alpha >= 0 && alpha <= 1 &&
+            node.style.opacity === images[copy].style.opacity);
       });
     }),
     volumeTransform: [...document.querySelectorAll('.css-volume-scene')].map(node => node.style.transform).join('|'),

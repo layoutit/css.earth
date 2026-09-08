@@ -507,3 +507,60 @@ in its capture manifest. It still has a 166.7 ms movement interval and 183.5 ms
 GPU overlay scheduling. Keeping the covered sky alone is not a demonstrated fix
 and is **not included in the product**. The next unresolved issue is browser
 surface/layer residency and publication cost, not missing image decoding.
+
+### Direct optical-copy publication
+
+Rotation still changed two inherited optical-opacity variables on each volume
+axis root. Those declarations reached its entire retained slice subtree. The
+runtime now retains the two lists of extra optical copies and their last numeric
+coefficients, and writes `opacity` directly only when a coefficient changes.
+Base slices, saturated coefficients, and pure camera translation receive no
+optical writes. Slice order, 3D transforms, axis mixing, optical mathematics,
+canonical textures and DOM topology are unchanged.
+
+`volume-optics-inherited` uses exact baseline `d216312f`. The
+`volume-optics-direct` capture uses that checkout with the direct runtime source
+SHA-256 `3859edc3e4fecdeb1f13f45a306e70af78974f8983fb5eb0f83424d753962d34`.
+Both replay the original Sun–galaxy–Sun wheel tape, adding a native 60-step
+forward and reverse drag at the galaxy view. Both return to the same Sun pose.
+The source and loaded module hashes are recorded independently.
+
+| Rotation phase | Inherited variables | Direct opacity |
+| --- | ---: | ---: |
+| Style recalculations | 145 | 145 |
+| Elements recalculated, summed | 387,259 | 338,923 |
+| Style time | 656.8 ms | 497.7 ms |
+| rAF callback time, inclusive | 407.6 ms | 394.5 ms |
+| rAF intervals >25 ms | 46/262 | 27/263 |
+| rAF interval p95 | 33.3 ms | 33.3 ms |
+
+The measured work reduction is 48,336 fewer element recalculations (12.5%).
+Style time was 24.2% lower in this single pair. Workstation load varies, so the
+frame-interval difference is not a controlled overall speedup claim. The direct
+capture's complete zoom route has 214/580 system-band intervals above 25 ms,
+p95 33.4 ms, and maximum 33.5 ms. Absence of a long GPU pause in this run does
+not overturn the earlier repeated GPU-stall evidence: the target remains unmet.
+
+Both captures contain recorder JSON, gzip Chrome trace and timestamped video.
+Recorder ids are `95e69467-a428-4774-8cf5-9aec7783b4c6` and
+`23e80656-e580-4b0d-ae86-061cac260568`. Clock drift is +19/-106 microseconds;
+encoded video timing error is below 0.5 ms. There are no errors, trace loss,
+recording-time HMR events, or lost world/input/document identities. The direct
+run's initial dev-server reload occurred before its final document time origin,
+over five seconds before recording. See `volume-optics-comparison.json` and the
+per-run synchronization manifests under `output/world-context-zoom/`.
+
+`output/playwright/direct-optical-copy-parity/` compares both exact renderers
+with the same recorded rotation poses and prepared volume. All 14 DPR 1/2 views
+are pixel-identical, with identical computed presentation and 1,380 retained
+nodes. The existing native universe environment check passes Mercury overview,
+heliosphere, sky/volume transitions, physical volume translation and rotation,
+and return to Sun, preserving decoded images and retained scenes. Its evidence
+is in `output/playwright/direct-optical-copy-environments/`. All 79 focused
+volume/sky/universe tests and the renderer typecheck pass, including unchanged
+optical-density and opaque-dust checks plus sparse retained-write coverage.
+
+The separate `context-layout-islands-probe` is excluded from the product.
+Adding layout/style containment to body groups did not reduce the full-route
+style/layout cost (5,860/1,338 ms versus the preceding 5,283/1,168 ms capture).
+Its synchronized evidence is retained; no containment rule was shipped.
