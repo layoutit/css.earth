@@ -1,0 +1,811 @@
+{
+  "applicationCommit": "0292b3baaa300716f36adecf3ab1dbc1d7ec1a57",
+  "scriptIdentity": {
+    "/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.DypLGSdf.js": "37d075595d1a221d29e22a49ad57e87d6c1112b033c6e410e79dfdec55054094",
+    "/_astro/packaged-object-runtime.kMiN2YGu.js": "05aa96afc8410bb7b0ba600def66bc665133c2322004ed189d3dfeccbd5ddbe0",
+    "/_astro/point-field-selection-worker-CMrTEVt-.js": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8",
+    "/_astro/prepared-destination-worker-B5vs4UR0.js": "d00c268f1e6e12fa4f44884e212bb477f2036826e6e60f4d234820c9be8fcebf",
+    "/_astro/prepared-object-worker-CQvgLn_q.js": "1c13d2c64b62237d4eb3eeb076d9c6e57b1dcdf427ad3d4a463ff7528b0b4eff"
+  },
+  "runs": [
+    {
+      "name": "final-timing-dpr1",
+      "head": "0292b3baaa300716f36adecf3ab1dbc1d7ec1a57",
+      "reportSha256": "b3095d889151c20dd1005e3c62f08f750a28c2eb00595645b517ccea77cd357e",
+      "harnessSha256": "3a08af1a0c4dd1fa249dc380f67b2069cb40360645d4f744cd2fed5ef7c389d8",
+      "dpr": 1,
+      "cycles": 6,
+      "elapsedSeconds": 399.467,
+      "closed": true,
+      "environment": {
+        "browser": "152.0.7977.76",
+        "cpu": "Apple M3 Max",
+        "cores": 14,
+        "memory": 38654705664,
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "chromeGraphite": "default",
+        "gpuDetail": false,
+        "diagnosticVolumeClip": false,
+        "emulation": {
+          "cpuRate": 1,
+          "networkProfile": "none",
+          "network": null,
+          "applied": "Before initial navigation; reapplied after offline recovery"
+        },
+        "transport": "Local HTTPS production build, normal browser cache, real public assets; no response routes or application camera writes",
+        "input": "Paced scripted Chrome mouse/keyboard; driver wheel deltas multiplied by emulated DPR to deliver the same CSS-pixel gesture",
+        "qualification": "Not a physical trackpad, phone or native-renderer parity measurement.",
+        "graphics": {
+          "devices": [
+            {
+              "vendorId": 4203,
+              "deviceId": 0,
+              "vendorString": "Google Inc. (Apple)",
+              "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+              "driverVendor": "Apple",
+              "driverVersion": "15.7.7"
+            }
+          ],
+          "auxAttributes": {
+            "amdSwitchable": false,
+            "canSupportThreadedTextureMailbox": false,
+            "directRenderingVersion": "",
+            "displayType": "ANGLE_METAL",
+            "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+            "glImplementationParts": "(gl=egl-angle,angle=metal)",
+            "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+            "glResetNotificationStrategy": 33362,
+            "glVendor": "Google Inc. (Apple)",
+            "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28467 git hash: 736ed80c7552)",
+            "glWsExtensions": "",
+            "glWsVendor": "",
+            "glWsVersion": "",
+            "inProcessGpu": false,
+            "initializationTime": 0.053554,
+            "isAsan": false,
+            "isClangCoverage": false,
+            "jpegDecodeAcceleratorSupported": false,
+            "maxMsaaSamples": "4",
+            "optimus": false,
+            "passthroughCmdDecoder": true,
+            "pixelShaderVersion": "3.00",
+            "processCrashCount": 0,
+            "sandboxed": false,
+            "skiaBackendType": "GraphiteDawnMetal",
+            "subpixelFontRendering": true,
+            "targetCpuBits": 64,
+            "vertexShaderVersion": "3.00",
+            "visibilityCallbackCallCount": 0
+          },
+          "featureStatus": {
+            "2d_canvas": "enabled",
+            "direct_rendering_display_compositor": "disabled_off_ok",
+            "gpu_compositing": "enabled",
+            "multiple_raster_threads": "enabled_on",
+            "opengl": "enabled_on",
+            "rasterization": "enabled",
+            "raw_draw": "disabled_off_ok",
+            "skia_graphite": "enabled_on",
+            "trees_in_viz": "disabled_off",
+            "video_decode": "enabled",
+            "video_encode": "enabled",
+            "webgl": "enabled",
+            "webgpu": "enabled",
+            "webnn": "disabled_off"
+          },
+          "driverBugWorkarounds": [
+            "disable_2d_canvas_auto_flush",
+            "enable_webgl_timer_query_extensions",
+            "disabled_extension_GL_KHR_blend_equation_advanced",
+            "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+          ],
+          "videoDecoding": [],
+          "videoEncoding": []
+        }
+      },
+      "observers": {
+        "sampleIntervalMs": 250,
+        "screenshots": false,
+        "memoryDumps": false,
+        "video": false,
+        "frameQualification": "No screenshot, memory-dump or video observer when record=false"
+      },
+      "summary": {
+        "functionalPassed": true,
+        "visualStatus": "not-recorded",
+        "traceStatus": "not-recorded",
+        "actions": 140,
+        "interactionCallbackP95": 18.5,
+        "interactionCallbackMax": 67.10000002384186,
+        "interactionCallbacksOver100": 0,
+        "searchResultCallbackP95": 47,
+        "frameP95": 16.79999999998836,
+        "worstFrame": 150.0999999999999,
+        "framesOver100": 2,
+        "pageErrors": 0
+      },
+      "resourcePeaks": {
+        "boundPages": 187,
+        "blobBytes": 47735391,
+        "blobCount": 528
+      },
+      "callbackIntervalsOver100": [],
+      "final": {
+        "entity": "3435910",
+        "kind": "city",
+        "lenses": [
+          {
+            "id": "normal",
+            "pressed": "false",
+            "disabled": false
+          },
+          {
+            "id": "buenos-aires-noise",
+            "pressed": "true",
+            "disabled": false
+          }
+        ],
+        "sceneCount": 1,
+        "stable": true,
+        "blobBytes": 43724453,
+        "pendingDecodes": 4
+      },
+      "finalPendingRequests": 0,
+      "finalPendingContentRequests": 0,
+      "finalPendingRequestOrigins": [],
+      "decodeCounterQualification": "Raw unsettled HTMLImageElement.decode calls, including canceled images. Native promises may not settle after source removal; application transport cancels and releases ownership independently. This counter does not identify active decoder jobs.",
+      "consoleNetworkErrors": {
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED": 24,
+        "Access to fetch at 'https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/12/4078/2256.png' from origin 'https://css.earth' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.": 1,
+        "Failed to load resource: net::ERR_FAILED": 4,
+        "Access to fetch at 'https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/12/4078/2257.png' from origin 'https://css.earth' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.": 1,
+        "Access to fetch at 'https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/11/2039/1128.png' from origin 'https://css.earth' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.": 1,
+        "Access to fetch at 'https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/12/4078/2258.png' from origin 'https://css.earth' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.": 1
+      },
+      "providerFailureReceipts": [
+        {
+          "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/12/4078/2256.png",
+          "observedAt": 229762,
+          "phase": "4-apia",
+          "attempts": [
+            {
+              "at": 41875,
+              "phase": "1-dateline-zoom",
+              "status": 200,
+              "end": 42244
+            },
+            {
+              "at": 163684,
+              "phase": "3-dateline-zoom",
+              "status": 200,
+              "end": 164088
+            },
+            {
+              "at": 225671,
+              "phase": "4-dateline-zoom",
+              "end": 229763,
+              "error": "net::ERR_FAILED"
+            },
+            {
+              "at": 230263,
+              "phase": "4-apia",
+              "status": 200,
+              "end": 230617,
+              "error": "net::ERR_ABORTED"
+            },
+            {
+              "at": 287784,
+              "phase": "5-dateline-zoom",
+              "status": 200,
+              "end": 288315
+            },
+            {
+              "at": 350336,
+              "phase": "6-dateline-zoom",
+              "status": 200,
+              "end": 350738
+            }
+          ]
+        },
+        {
+          "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/12/4078/2257.png",
+          "observedAt": 229763,
+          "phase": "4-apia",
+          "attempts": [
+            {
+              "at": 41138,
+              "phase": "1-dateline-zoom",
+              "status": 200,
+              "end": 41873
+            },
+            {
+              "at": 163201,
+              "phase": "3-dateline-zoom",
+              "status": 200,
+              "end": 163676
+            },
+            {
+              "at": 225183,
+              "phase": "4-dateline-zoom",
+              "end": 229763,
+              "error": "net::ERR_FAILED"
+            },
+            {
+              "at": 230264,
+              "phase": "4-apia",
+              "end": 230617,
+              "error": "net::ERR_ABORTED"
+            },
+            {
+              "at": 230635,
+              "phase": "4-apia",
+              "end": 230916,
+              "error": "net::ERR_ABORTED"
+            },
+            {
+              "at": 287729,
+              "phase": "5-dateline-zoom",
+              "status": 200,
+              "end": 288181
+            },
+            {
+              "at": 349863,
+              "phase": "6-dateline-zoom",
+              "status": 200,
+              "end": 350334
+            }
+          ]
+        },
+        {
+          "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/11/2039/1128.png",
+          "observedAt": 229763,
+          "phase": "4-apia",
+          "attempts": [
+            {
+              "at": 227492,
+              "phase": "4-dateline-drag",
+              "end": 229763,
+              "error": "net::ERR_FAILED"
+            },
+            {
+              "at": 230264,
+              "phase": "4-apia",
+              "end": 230617,
+              "error": "net::ERR_ABORTED"
+            },
+            {
+              "at": 230635,
+              "phase": "4-apia",
+              "end": 230984,
+              "error": "net::ERR_ABORTED"
+            }
+          ]
+        },
+        {
+          "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/12/4078/2258.png",
+          "observedAt": 229763,
+          "phase": "4-apia",
+          "attempts": [
+            {
+              "at": 41626,
+              "phase": "1-dateline-zoom",
+              "status": 200,
+              "end": 41974
+            },
+            {
+              "at": 163442,
+              "phase": "3-dateline-zoom",
+              "status": 200,
+              "end": 163873
+            },
+            {
+              "at": 225436,
+              "phase": "4-dateline-zoom",
+              "end": 229763,
+              "error": "net::ERR_FAILED"
+            },
+            {
+              "at": 230264,
+              "phase": "4-apia",
+              "end": 230617,
+              "error": "net::ERR_ABORTED"
+            },
+            {
+              "at": 230635,
+              "phase": "4-apia",
+              "end": 230900,
+              "error": "net::ERR_ABORTED"
+            },
+            {
+              "at": 287782,
+              "phase": "5-dateline-zoom",
+              "status": 200,
+              "end": 288237
+            },
+            {
+              "at": 350087,
+              "phase": "6-dateline-zoom",
+              "status": 200,
+              "end": 350535
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-native-video-dpr2",
+      "head": "0292b3baaa300716f36adecf3ab1dbc1d7ec1a57",
+      "reportSha256": "df049f43466fcea56763cdfda108d87365775a7a744b0d2dc79f9758d277e4f4",
+      "harnessSha256": "3a08af1a0c4dd1fa249dc380f67b2069cb40360645d4f744cd2fed5ef7c389d8",
+      "dpr": 2,
+      "cycles": 6,
+      "elapsedSeconds": 405.63,
+      "closed": true,
+      "environment": {
+        "browser": "152.0.7977.76",
+        "cpu": "Apple M3 Max",
+        "cores": 14,
+        "memory": 38654705664,
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "chromeGraphite": "default",
+        "gpuDetail": false,
+        "diagnosticVolumeClip": false,
+        "emulation": {
+          "cpuRate": 1,
+          "networkProfile": "none",
+          "network": null,
+          "applied": "Before initial navigation; reapplied after offline recovery"
+        },
+        "transport": "Local HTTPS production build, normal browser cache, real public assets; no response routes or application camera writes",
+        "input": "Paced scripted Chrome mouse/keyboard; driver wheel deltas multiplied by emulated DPR to deliver the same CSS-pixel gesture",
+        "qualification": "Not a physical trackpad, phone or native-renderer parity measurement.",
+        "graphics": {
+          "devices": [
+            {
+              "vendorId": 4203,
+              "deviceId": 0,
+              "vendorString": "Google Inc. (Apple)",
+              "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+              "driverVendor": "Apple",
+              "driverVersion": "15.7.7"
+            }
+          ],
+          "auxAttributes": {
+            "amdSwitchable": false,
+            "canSupportThreadedTextureMailbox": false,
+            "directRenderingVersion": "",
+            "displayType": "ANGLE_METAL",
+            "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+            "glImplementationParts": "(gl=egl-angle,angle=metal)",
+            "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+            "glResetNotificationStrategy": 33362,
+            "glVendor": "Google Inc. (Apple)",
+            "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28467 git hash: 736ed80c7552)",
+            "glWsExtensions": "",
+            "glWsVendor": "",
+            "glWsVersion": "",
+            "inProcessGpu": false,
+            "initializationTime": 0.060889,
+            "isAsan": false,
+            "isClangCoverage": false,
+            "jpegDecodeAcceleratorSupported": false,
+            "maxMsaaSamples": "4",
+            "optimus": false,
+            "passthroughCmdDecoder": true,
+            "pixelShaderVersion": "3.00",
+            "processCrashCount": 0,
+            "sandboxed": false,
+            "skiaBackendType": "GraphiteDawnMetal",
+            "subpixelFontRendering": true,
+            "targetCpuBits": 64,
+            "vertexShaderVersion": "3.00",
+            "visibilityCallbackCallCount": 0
+          },
+          "featureStatus": {
+            "2d_canvas": "enabled",
+            "direct_rendering_display_compositor": "disabled_off_ok",
+            "gpu_compositing": "enabled",
+            "multiple_raster_threads": "enabled_on",
+            "opengl": "enabled_on",
+            "rasterization": "enabled",
+            "raw_draw": "disabled_off_ok",
+            "skia_graphite": "enabled_on",
+            "trees_in_viz": "disabled_off",
+            "video_decode": "enabled",
+            "video_encode": "enabled",
+            "webgl": "enabled",
+            "webgpu": "enabled",
+            "webnn": "disabled_off"
+          },
+          "driverBugWorkarounds": [
+            "disable_2d_canvas_auto_flush",
+            "enable_webgl_timer_query_extensions",
+            "disabled_extension_GL_KHR_blend_equation_advanced",
+            "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+          ],
+          "videoDecoding": [],
+          "videoEncoding": []
+        }
+      },
+      "observers": {
+        "sampleIntervalMs": 250,
+        "screenshots": false,
+        "memoryDumps": true,
+        "video": true,
+        "frameQualification": "Includes intrusive screenshot/memory-dump checkpoints; measure their overhead separately"
+      },
+      "summary": {
+        "functionalPassed": true,
+        "visualStatus": "unreviewed",
+        "traceStatus": "captured-awaiting-analysis",
+        "actions": 140,
+        "interactionCallbackP95": 18.5,
+        "interactionCallbackMax": 110.30000001192093,
+        "interactionCallbacksOver100": 2,
+        "searchResultCallbackP95": 38.69999998807907,
+        "frameP95": 16.79999999998836,
+        "worstFrame": 150.0999999999999,
+        "framesOver100": 2,
+        "pageErrors": 0
+      },
+      "resourcePeaks": {
+        "boundPages": 200,
+        "blobBytes": 46340321,
+        "blobCount": 528
+      },
+      "callbackIntervalsOver100": [
+        {
+          "at": 296055.9,
+          "ms": 16.70000000001164,
+          "callbackAt": 296142.60000002384,
+          "callbackMs": 100.5,
+          "visibility": "visible",
+          "phase": "memory-5-revisit-start"
+        },
+        {
+          "at": 396501.8,
+          "ms": 16.70000000001164,
+          "callbackAt": 396596.8000000119,
+          "callbackMs": 110.30000001192093,
+          "visibility": "visible",
+          "phase": "memory-final-start"
+        }
+      ],
+      "final": {
+        "entity": "3435910",
+        "kind": "city",
+        "lenses": [
+          {
+            "id": "normal",
+            "pressed": "false",
+            "disabled": false
+          },
+          {
+            "id": "buenos-aires-noise",
+            "pressed": "true",
+            "disabled": false
+          }
+        ],
+        "sceneCount": 1,
+        "stable": true,
+        "blobBytes": 45171316,
+        "pendingDecodes": 5
+      },
+      "finalPendingRequests": 1,
+      "finalPendingContentRequests": 0,
+      "finalPendingRequestOrigins": [
+        {
+          "origin": "www.google-analytics.com",
+          "ageMilliseconds": 32
+        }
+      ],
+      "decodeCounterQualification": "Raw unsettled HTMLImageElement.decode calls, including canceled images. Native promises may not settle after source removal; application transport cancels and releases ownership independently. This counter does not identify active decoder jobs.",
+      "native": {
+        "qualification": "Chrome allocator accounting. GPU image bytes are children of image-cache total, not additive. Renderer private footprint is not total physical GPU memory. Memory dumps are intrusive observers; this is not a timing-control run.",
+        "head": "0292b3baaa300716f36adecf3ab1dbc1d7ec1a57",
+        "traceDataLoss": false,
+        "memoryCheckpointsComplete": true,
+        "association": "Unique renderer snapshot bracketed by trace memory start/end marks; exported IDs are not CDP dump GUIDs.",
+        "rows": [
+          {
+            "name": "globe",
+            "rendererPid": 33350,
+            "snapshotId": "0x0",
+            "dumpDelayMs": 138.666,
+            "privateFootprintBytes": 468376576,
+            "imageCacheBytes": 529954176,
+            "compositorBytes": 602109312,
+            "v8AccountedBytes": 129204912,
+            "gpuImageBytes": 264861056,
+            "heapUsedBytes": 42160636,
+            "blobBytes": 0,
+            "blobCount": 0,
+            "visiblePages": 0,
+            "pendingRequests": 0
+          },
+          {
+            "name": "1-revisit",
+            "rendererPid": 33350,
+            "snapshotId": "0x1",
+            "dumpDelayMs": 227.051,
+            "privateFootprintBytes": 1215014912,
+            "imageCacheBytes": 1030361588,
+            "compositorBytes": 1257083380,
+            "v8AccountedBytes": 317303876,
+            "gpuImageBytes": 924996084,
+            "heapUsedBytes": 76798588,
+            "blobBytes": 17882427,
+            "blobCount": 213,
+            "visiblePages": 2,
+            "pendingRequests": 4
+          },
+          {
+            "name": "2-revisit",
+            "rendererPid": 33350,
+            "snapshotId": "0x2",
+            "dumpDelayMs": 315.626,
+            "privateFootprintBytes": 1406561280,
+            "imageCacheBytes": 778255200,
+            "compositorBytes": 972782432,
+            "v8AccountedBytes": 303569012,
+            "gpuImageBytes": 369998688,
+            "heapUsedBytes": 103964948,
+            "blobBytes": 42520880,
+            "blobCount": 496,
+            "visiblePages": 2,
+            "pendingRequests": 4
+          },
+          {
+            "name": "3-revisit",
+            "rendererPid": 33350,
+            "snapshotId": "0x3",
+            "dumpDelayMs": 303.387,
+            "privateFootprintBytes": 1696183296,
+            "imageCacheBytes": 1389783496,
+            "compositorBytes": 1629317576,
+            "v8AccountedBytes": 354959952,
+            "gpuImageBytes": 1089661384,
+            "heapUsedBytes": 94043224,
+            "blobBytes": 43015244,
+            "blobCount": 486,
+            "visiblePages": 2,
+            "pendingRequests": 2
+          },
+          {
+            "name": "4-revisit",
+            "rendererPid": 33350,
+            "snapshotId": "0x4",
+            "dumpDelayMs": 334.193,
+            "privateFootprintBytes": 1699886080,
+            "imageCacheBytes": 1425488456,
+            "compositorBytes": 1665038920,
+            "v8AccountedBytes": 305412600,
+            "gpuImageBytes": 1124809288,
+            "heapUsedBytes": 101223732,
+            "blobBytes": 42332971,
+            "blobCount": 524,
+            "visiblePages": 2,
+            "pendingRequests": 4
+          },
+          {
+            "name": "5-revisit",
+            "rendererPid": 33350,
+            "snapshotId": "0x5",
+            "dumpDelayMs": 326.343,
+            "privateFootprintBytes": 1740813312,
+            "imageCacheBytes": 1422082940,
+            "compositorBytes": 1662468988,
+            "v8AccountedBytes": 309958152,
+            "gpuImageBytes": 1121846140,
+            "heapUsedBytes": 91102836,
+            "blobBytes": 41597223,
+            "blobCount": 498,
+            "visiblePages": 2,
+            "pendingRequests": 4
+          },
+          {
+            "name": "6-revisit",
+            "rendererPid": 33350,
+            "snapshotId": "0x6",
+            "dumpDelayMs": 310.063,
+            "privateFootprintBytes": 1722479616,
+            "imageCacheBytes": 1420681004,
+            "compositorBytes": 1660919596,
+            "v8AccountedBytes": 313299420,
+            "gpuImageBytes": 1121378092,
+            "heapUsedBytes": 74134128,
+            "blobBytes": 42586290,
+            "blobCount": 499,
+            "visiblePages": 2,
+            "pendingRequests": 4
+          },
+          {
+            "name": "final",
+            "rendererPid": 33350,
+            "snapshotId": "0x7",
+            "dumpDelayMs": 295.732,
+            "privateFootprintBytes": 1664152576,
+            "imageCacheBytes": 1604523652,
+            "compositorBytes": 1939035780,
+            "v8AccountedBytes": 245777940,
+            "gpuImageBytes": 1485887108,
+            "heapUsedBytes": 65814212,
+            "blobBytes": 45171316,
+            "blobCount": 525,
+            "visiblePages": 85,
+            "pendingRequests": 1
+          }
+        ],
+        "traceLines": 1779
+      },
+      "video": {
+        "file": "page@03b91c1ee2f5a2122c4b0f98f0eaa2b5.webm",
+        "bytes": 69789166,
+        "sha256": "d6610f9553b92dcf9804746a0e3ba10b788eef40929af2d8c2c196b5a5d62842"
+      },
+      "consoleNetworkErrors": {
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED": 21
+      }
+    },
+    {
+      "name": "final-timing-dpr2",
+      "head": "0292b3baaa300716f36adecf3ab1dbc1d7ec1a57",
+      "reportSha256": "981aa750b1a779df92b86d076384d0152904e05d85c6a73de3b30c2839db30e2",
+      "harnessSha256": "3a08af1a0c4dd1fa249dc380f67b2069cb40360645d4f744cd2fed5ef7c389d8",
+      "dpr": 2,
+      "cycles": 2,
+      "elapsedSeconds": 149.482,
+      "closed": true,
+      "environment": {
+        "browser": "152.0.7977.76",
+        "cpu": "Apple M3 Max",
+        "cores": 14,
+        "memory": 38654705664,
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "chromeGraphite": "default",
+        "gpuDetail": false,
+        "diagnosticVolumeClip": false,
+        "emulation": {
+          "cpuRate": 1,
+          "networkProfile": "none",
+          "network": null,
+          "applied": "Before initial navigation; reapplied after offline recovery"
+        },
+        "transport": "Local HTTPS production build, normal browser cache, real public assets; no response routes or application camera writes",
+        "input": "Paced scripted Chrome mouse/keyboard; driver wheel deltas multiplied by emulated DPR to deliver the same CSS-pixel gesture",
+        "qualification": "Not a physical trackpad, phone or native-renderer parity measurement.",
+        "graphics": {
+          "devices": [
+            {
+              "vendorId": 4203,
+              "deviceId": 0,
+              "vendorString": "Google Inc. (Apple)",
+              "deviceString": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+              "driverVendor": "Apple",
+              "driverVersion": "15.7.7"
+            }
+          ],
+          "auxAttributes": {
+            "amdSwitchable": false,
+            "canSupportThreadedTextureMailbox": false,
+            "directRenderingVersion": "",
+            "displayType": "ANGLE_METAL",
+            "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_provoking_vertex GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_APPLE_clip_distance GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_base_instance GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_multisampled_render_to_texture GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_pvrtc_sRGB GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_shader_texture_lod GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_IMG_texture_compression_pvrtc GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_framebuffer_flip_y GL_NV_fence GL_NV_framebuffer_blit GL_NV_pixel_buffer_object GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_vertex_array_object GL_QCOM_render_shared_exponent ",
+            "glImplementationParts": "(gl=egl-angle,angle=metal)",
+            "glRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3 Max, Version 15.7.7 (Build 24G720))",
+            "glResetNotificationStrategy": 33362,
+            "glVendor": "Google Inc. (Apple)",
+            "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28467 git hash: 736ed80c7552)",
+            "glWsExtensions": "",
+            "glWsVendor": "",
+            "glWsVersion": "",
+            "inProcessGpu": false,
+            "initializationTime": 0.061514,
+            "isAsan": false,
+            "isClangCoverage": false,
+            "jpegDecodeAcceleratorSupported": false,
+            "maxMsaaSamples": "4",
+            "optimus": false,
+            "passthroughCmdDecoder": true,
+            "pixelShaderVersion": "3.00",
+            "processCrashCount": 0,
+            "sandboxed": false,
+            "skiaBackendType": "GraphiteDawnMetal",
+            "subpixelFontRendering": true,
+            "targetCpuBits": 64,
+            "vertexShaderVersion": "3.00",
+            "visibilityCallbackCallCount": 0
+          },
+          "featureStatus": {
+            "2d_canvas": "enabled",
+            "direct_rendering_display_compositor": "disabled_off_ok",
+            "gpu_compositing": "enabled",
+            "multiple_raster_threads": "enabled_on",
+            "opengl": "enabled_on",
+            "rasterization": "enabled",
+            "raw_draw": "disabled_off_ok",
+            "skia_graphite": "enabled_on",
+            "trees_in_viz": "disabled_off",
+            "video_decode": "enabled",
+            "video_encode": "enabled",
+            "webgl": "enabled",
+            "webgpu": "enabled",
+            "webnn": "disabled_off"
+          },
+          "driverBugWorkarounds": [
+            "disable_2d_canvas_auto_flush",
+            "enable_webgl_timer_query_extensions",
+            "disabled_extension_GL_KHR_blend_equation_advanced",
+            "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+          ],
+          "videoDecoding": [],
+          "videoEncoding": []
+        }
+      },
+      "observers": {
+        "sampleIntervalMs": 250,
+        "screenshots": false,
+        "memoryDumps": false,
+        "video": false,
+        "frameQualification": "No screenshot, memory-dump or video observer when record=false"
+      },
+      "summary": {
+        "functionalPassed": true,
+        "visualStatus": "not-recorded",
+        "traceStatus": "not-recorded",
+        "actions": 56,
+        "interactionCallbackP95": 18.5,
+        "interactionCallbackMax": 58,
+        "interactionCallbacksOver100": 0,
+        "searchResultCallbackP95": 45.19999998807907,
+        "frameP95": 16.799999999995634,
+        "worstFrame": 150,
+        "framesOver100": 2,
+        "pageErrors": 0
+      },
+      "resourcePeaks": {
+        "boundPages": 134,
+        "blobBytes": 47042626,
+        "blobCount": 528
+      },
+      "callbackIntervalsOver100": [],
+      "final": {
+        "entity": "3435910",
+        "kind": "city",
+        "lenses": [
+          {
+            "id": "normal",
+            "pressed": "false",
+            "disabled": false
+          },
+          {
+            "id": "buenos-aires-noise",
+            "pressed": "true",
+            "disabled": false
+          }
+        ],
+        "sceneCount": 1,
+        "stable": true,
+        "blobBytes": 46081993,
+        "pendingDecodes": 6
+      },
+      "finalPendingRequests": 0,
+      "finalPendingContentRequests": 0,
+      "finalPendingRequestOrigins": [],
+      "decodeCounterQualification": "Raw unsettled HTMLImageElement.decode calls, including canceled images. Native promises may not settle after source removal; application transport cancels and releases ownership independently. This counter does not identify active decoder jobs.",
+      "consoleNetworkErrors": {
+        "Failed to load resource: net::ERR_INTERNET_DISCONNECTED": 24
+      }
+    }
+  ],
+  "qualification": "Local HTTPS production build with exact served script hashes and actual browser input. Timing controls have no video, screenshots or memory dumps. Native cache allocations are Chrome accounting, not total physical GPU/RAM; the video/native run is not observer-free timing. Physical trackpad and phone behavior remain unproven."
+}

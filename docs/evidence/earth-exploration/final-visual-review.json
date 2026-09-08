@@ -1,0 +1,26 @@
+{
+  "applicationCommit": "0292b3baaa300716f36adecf3ab1dbc1d7ec1a57",
+  "reportSha256": "df049f43466fcea56763cdfda108d87365775a7a744b0d2dc79f9758d277e4f4",
+  "harnessSha256": "3a08af1a0c4dd1fa249dc380f67b2069cb40360645d4f744cd2fed5ef7c389d8",
+  "videoSha256": "d6610f9553b92dcf9804746a0e3ba10b788eef40929af2d8c2c196b5a5d62842",
+  "dpr": 2,
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "images": [
+    {
+      "file": "final-dpr2-polar.png",
+      "sha256": "06429d6d5041dc61c2e08d97d7adb6b5d866f699e0af0a94c06635972b775eb5",
+      "videoSeconds": 342.799
+    },
+    {
+      "file": "final-dpr2-buenos-aires.png",
+      "sha256": "69f102960c33ff210baa3d7fcb4a11ed010a847b229d5c4de5b178d2b93e3adc",
+      "videoSeconds": 396.815
+    }
+  ],
+  "reviewedAt": "2026-09-08T09:47:58.932496+00:00",
+  "review": "Inspected a 16-frame contact sheet across the full recording and both full-size checkpoints. The polar return shows retained source imagery with coarser incoming edge detail; the final Buenos Aires card owns Daytime noise, its sourced legend and geographic overlay. Travel frames retain their real transitional imagery and loading behavior.",
+  "qualification": "Unretouched frames from the fresh lossy Chrome recording. Checkpoint plus 0.3-second seek positions are approximate alignment, not identical DOM/frame timestamps or native/source-pixel parity. No claim of physical-device input."
+}

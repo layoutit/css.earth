@@ -343,9 +343,9 @@ loading behavior. Scripted Chrome input does not qualify a physical trackpad.
 
 The continuous qualification covers search corrections, interrupted travel,
 parent/history navigation, lens changes, zoom and drag during downloads, offline
-recovery and sustained revisits. The final polar candidate completes six cycles
-and 140 actions at each DPR, with native-memory traces; separate observer-free
-desktop runs supply timing measurements. A narrow viewport uses explicitly
+recovery and sustained revisits. The final build completes six cycles
+and 140 actions at each DPR; DPR 2 records fresh video and native memory. Separate
+observer-free runs supply desktop timing measurements. A narrow viewport uses explicitly
 labeled CPU/network and touch emulation.
 
 [Geographic qualification](earth-geographic-qualification.md) records the current

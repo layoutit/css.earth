@@ -1,27 +1,61 @@
 # Geographic feature qualification
 
-The polar rendering and geographic endurance candidate is `eb53bfeb`. Its built
-Earth runs record the same five application/worker script hashes. Commit
-`74f06f15` subsequently fixes shared picking through visible surface geometry;
-its verification is recorded separately below. The PR remains the review record;
-asset publication is separate from application deployment.
+The final browser qualification uses production build `0292b3ba`. It includes
+shared input corrections for surface occlusion (`74f06f15`) and queued wheel
+events (`fed30392`). Earlier native-memory measurements at `eb53bfeb` retain
+their original scope below. Asset publication and application deployment are
+separate operations.
+## Final build and visible checkpoints
 
-## Visible checkpoints
+The final production build at `0292b3ba` was qualified sequentially, with no
+concurrent preparation, build or browser qualification. All three Earth runs
+served the same five application/worker script hashes. The
+[final measurement receipt](evidence/earth-exploration/final.json) preserves those
+hashes, raw capture-time summaries, resource peaks and the analyzed native
+snapshots. [Visual review and frame provenance](evidence/earth-exploration/final-visual-review.json)
+records the new video hash and approximate seek positions.
 
-These frames come from the final DPR 1 six-cycle recording. They show the
-Longyearbyen return and the final Buenos Aires noise selection. Incoming edge
-detail can remain coarser during transport. The frames are not native-renderer
-or source-pixel parity claims; [capture provenance](evidence/earth-exploration/capture.json)
-records their source video, seek positions, application identity and command.
-Underlying imagery and article credits follow the [Earth source records](../src/planets/earth/SOURCE.md).
+| Final-build run | Result | Measurement boundary |
+| --- | --- | --- |
+| DPR 1, six cycles, 140 actions | Pass; callback p95 18.5 ms, maximum 67.1 ms; search p95 47 ms | No video, screenshots or memory dumps |
+| DPR 2, six cycles, 140 actions | Pass; retained scene and coherent entity/lens/history through loading, cancellation, offline recovery and revisits | Fresh video and eight native-memory snapshots |
+| DPR 2, two cycles, 56 actions | Pass; callback p95 18.5 ms, maximum 58 ms; search p95 45.2 ms | No video, screenshots or memory dumps |
 
-![Longyearbyen after six cycles](evidence/earth-exploration/longyearbyen-after-six-cycles.png)
+Both timing controls have zero interaction callbacks over 100 ms. Their frame
+p95 is 16.8 ms; two frame gaps over 100 ms occur during startup. The final native
+run's two longer callbacks occur at memory-snapshot marks. These are local Chrome
+measurements, not physical trackpad/phone qualification or deployment evidence.
 
-![Buenos Aires noise after six cycles](evidence/earth-exploration/buenos-aires-noise-after-six-cycles.png)
+The final runs retain at most 200 bound pages and 47,735,391 bytes of encoded
+image blobs. Native image-cache accounting across revisits 3–6 is 1.39–1.43 GB;
+the final detailed Buenos Aires view records 1.60 GB. Late renderer private
+footprint is 1.66–1.74 GB. All eight snapshots have complete renderer association
+and no reported trace data loss. GPU image allocations are children of the
+cache total. This is a finite observed plateau, not a hard limit on all Chrome
+or physical GPU memory.
 
-## Continuous exploration
+Final imagery/entity network queues are empty in all three runs. At the native
+snapshot, one 32 ms analytics beacon is still pending; it returns HTTP 204 during
+cleanup. That request is retained in the receipt. The raw instrumentation also
+retains 4–6 unsettled image-decode calls, a counter that cannot distinguish
+canceled native promises from active jobs. Application cancellation releases
+owned images without waiting for native promise settlement; the receipt does
+not claim every browser decode promise settled.
 
-[Machine-readable measurements and script hashes](evidence/earth-exploration/endurance.json)
+The new full-size frames show the sixth polar return and final Buenos Aires
+noise selection. A 16-frame contact sheet across the recording was also reviewed.
+Incoming edge detail can remain coarser during transport. These unretouched
+frames are from a lossy Chrome video; they do not establish native-renderer or
+source-pixel parity. Imagery and article credits follow the
+[Earth source records](../src/planets/earth/SOURCE.md).
+
+![Final DPR 2 polar return](evidence/earth-exploration/final-dpr2-polar.png)
+
+![Final DPR 2 Buenos Aires noise selection](evidence/earth-exploration/final-dpr2-buenos-aires.png)
+
+## Earlier endurance measurements
+
+[Earlier machine-readable measurements and script hashes](evidence/earth-exploration/endurance.json)
 retain each run's commit, harness identity, resource peaks and trace association.
 
 Chrome 152.0.7977.76 ran headlessly on an Apple M3 Max with 36 GiB of memory.
@@ -84,21 +118,47 @@ paint order and uses the same prepared surface hit test as surface flight.
 Foreground targets and targets outside the silhouette remain selectable. The
 original interaction sequence passes at DPR 1 and 2 after this correction.
 
+A native wheel event also reproduced approximately 330 ms of queue delay before
+a 0.1 ms handler. The old 200 ms animation used the event's creation timestamp,
+so its first frame could consume the entire zoom. The controller now measures
+that interval from receipt with the document's monotonic clock, retaining event
+timestamps for device classification. Distance, gain and animation duration are
+unchanged. Delayed-event unit regressions cover both camera models; the original
+Ganymede wheel interruption sequence passes at DPR 1 and 2. This fixes expired
+animation windows; it does not remove Chromium's input queue latency.
+
 ## Repository gates
 
-`pnpm test` passes in one invocation: 513 package, 328 renderer, 829 platform and
-234 shell checks, totaling 1,904 at the endurance candidate. After the picking correction, the renderer
-suite passes 330 checks, including two new occlusion regressions; renderer and
-preparation type checking pass.
-The production build generates 72 pages. The unchanged built application passes
-the retained-DOM gate for all 71 registered objects at DPR 1 and 2, plus six
+`pnpm test` passes in one invocation at `fed30392`: 513 package, 331 renderer,
+830 platform and 234 shell checks, totaling 1,908. This includes the two surface
+occlusion regressions and the queued-wheel regressions. Renderer and preparation
+type checking pass. The earlier 1,904-check receipt remains attached to its
+native-memory candidate.
+The final production build at `0292b3ba` generates 72 pages and passes the
+retained-DOM gate for all 71 registered objects at DPR 1 and 2, plus six
 shared-navigation hops at each density without node or stylesheet growth.
 
-The full diagnostics-dependent interaction-conformance gate is still running.
-It must use the development server; production correctly omits those diagnostic
-globals. Built DOM and continuous-exploration results are recorded separately.
-`CSSEARTH_CONFORMANCE_RECORD=0` retains conformance JSON without recording a
-video for every object/DPR pair.
+The [cumulative shared interaction record](evidence/earth-exploration/shared-conformance.json)
+covers all 863 expected cases across
+71 registered objects at DPR 1/2. After the wheel correction, full suites were
+repeated on 14 affected/reference objects; two used the subsequent harness fix.
+Other passing cases precede the timer correction. This is cumulative coverage
+plus targeted final regression, not 863 assertions from one exact commit or one
+invocation. Original failed attempts remain in the record.
+
+The harness now verifies actual empty sky, including views where another body
+fills a viewport corner, and observes wheel completion before testing a resting
+pose. Triton's reproduced DPR 2 case had one wheel frame pending while its
+canceled flight stayed at exactly 18 frames; the corrected test observes wheel
+completion and proves the flight does not resume. Ariel's earlier browser-close
+hang is superseded by a clean full-suite exit, not silently counted as a pass.
+
+These diagnostics-dependent checks use the development server; production
+correctly omits those globals. Test-owned Astro servers close after batches of
+at most six objects because a long-lived development process reached its V8 heap
+limit. That development-server failure is separate from browser residency and
+the production fixture. `CSSEARTH_CONFORMANCE_RECORD=0` retains conformance JSON
+without recording a video for every object/DPR pair.
 
 Earth source verification passes all 62 declared records. Aggregate source
 verification remains incomplete because this checkout lacks some ignored source
@@ -114,7 +174,8 @@ The modeled retained inventory is 27.264 GB, including the unchanged 25.344 GB
 fine geometry release and 373,667,172-byte coarse release. This is a declared
 inventory basis, not a live account invoice or complete bucket inventory.
 
-The table conservatively counts every observed R2 attempt, including canceled,
+The table repeats the earlier `eb53bfeb` stress-route measurements and conservatively
+counts every observed R2 attempt, including canceled,
 offline and browser-cached requests, before applying an assumed CDN hit rate.
 It repeats measured desktop stress routes; those routes are not typical visitor
 behavior or a forecast. Free allowances are assumed available account-wide.

@@ -1,0 +1,46 @@
+{
+  "head": "0292b3baaa300716f36adecf3ab1dbc1d7ec1a57",
+  "gate": "dom-cleanliness",
+  "object": "all",
+  "harnessSha256": "22c42fdb8db224756c25f8f9a1dd8855979dbf404eaab502bf12fe3ed0c0bb55",
+  "boundary": "Existing browser gate, unchanged built files over an owned local HTTPS fixture, real public assets. Only browser launch origin/certificate arguments are added.",
+  "passed": true,
+  "scripts": [
+    {
+      "path": "/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.DypLGSdf.js",
+      "method": "GET",
+      "bytes": 1234956,
+      "status": 200,
+      "sha256": "37d075595d1a221d29e22a49ad57e87d6c1112b033c6e410e79dfdec55054094"
+    },
+    {
+      "path": "/_astro/point-field-selection-worker-CMrTEVt-.js",
+      "method": "GET",
+      "bytes": 8296,
+      "status": 200,
+      "sha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
+    },
+    {
+      "path": "/_astro/packaged-object-runtime.kMiN2YGu.js",
+      "method": "GET",
+      "bytes": 256541,
+      "status": 200,
+      "sha256": "05aa96afc8410bb7b0ba600def66bc665133c2322004ed189d3dfeccbd5ddbe0"
+    },
+    {
+      "path": "/_astro/prepared-object-worker-CQvgLn_q.js",
+      "method": "GET",
+      "bytes": 109549,
+      "status": 200,
+      "sha256": "1c13d2c64b62237d4eb3eeb076d9c6e57b1dcdf427ad3d4a463ff7528b0b4eff"
+    },
+    {
+      "path": "/_astro/prepared-destination-worker-B5vs4UR0.js",
+      "method": "GET",
+      "bytes": 8706,
+      "status": 200,
+      "sha256": "d00c268f1e6e12fa4f44884e212bb477f2036826e6e60f4d234820c9be8fcebf"
+    }
+  ],
+  "closed": true
+}
