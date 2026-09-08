@@ -221,6 +221,11 @@ const hasResources = sources.length > 0;
       <span class="planet-setting-text">Heliosphere</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
+    <label class="planet-setting-control">
+      <input class="planet-asteroid-orbits-setting" type="checkbox" name="asteroidOrbits" />
+      <span class="planet-setting-text">Asteroids Orbits</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
     {remainingSettings.map((setting) => setting.kind === "cycle" ? (
       <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
         <span class="planet-setting-text">{setting.label}</span>

@@ -2,6 +2,9 @@ import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, 
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
+import { OBJECTS } from './objects.mjs';
+
+const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 let universePromise = null;
@@ -74,6 +77,9 @@ export function createApplicationWorldContext() {
           layer.publish(world, viewport, { heliosphere: heliosphereEnabled });
         };
         return { ...layer, publish,
+          setAsteroidOrbitsEnabled(enabled) {
+            if (!destroyed) layer.setHiddenOrbits(enabled === true ? [] : asteroidIds);
+          },
           setHeliosphereEnabled(enabled) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;
             heliosphereEnabled = enabled === true;
