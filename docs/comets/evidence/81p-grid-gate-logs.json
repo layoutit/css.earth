@@ -1,0 +1,71 @@
+{
+  "applicationCommit": "71d2efd91ad1b206cffc795f229f37825c06e233",
+  "preparedRuntimeSha256": "6fbd92a05acef0e1a88bd643edbe1d0e6969e4427cc461f02238b1a3e24e6117",
+  "runtimeAssetsSha256": "e50cd1c769cc6d8c701e67310db80873839dc0d950a324854cf31ff55e617ca2",
+  "logs": [
+    {
+      "command": "pnpm acquire:planets -- --verify-only",
+      "path": "output/comet-intake/wild2/grid-source-verify.log",
+      "exitCode": 0,
+      "bytes": 6596,
+      "sha256": "1d6882f28f82eb4cac842aa26de956a34c821a55a75679ff6ae12caced7f4edc"
+    },
+    {
+      "command": "node --test tools/objects/terrestrial-layers/pds-constraint-map.test.mjs tests/objects/unit/comet-81p/surface.test.mjs tests/objects/unit/comet-103p/surface.test.mjs tests/objects/unit/comet-9p/surface.test.mjs",
+      "path": "output/comet-intake/wild2/grid-focused-tests.log",
+      "exitCode": 0,
+      "bytes": 890,
+      "sha256": "73d225011e963aa7e5ed1ad4ea93fbb3c0941f7ffd9affc78553ef56f65cf0a1"
+    },
+    {
+      "command": "pnpm build",
+      "path": "output/comet-intake/wild2/grid-production-build.log",
+      "exitCode": 0,
+      "bytes": 661269,
+      "sha256": "557f948c459d3e16c495be3037eadc53ee99cfba097292e0eefc02d138683ec5"
+    },
+    {
+      "command": "pnpm test",
+      "path": "output/comet-intake/wild2/grid-main-tests-final.log",
+      "exitCode": 0,
+      "bytes": 100166,
+      "sha256": "3236f491372b2a2b98b9285d687f3cc697e15811eb8ff3a98964488f6bb2bf8c"
+    },
+    {
+      "command": "pnpm setup:assets --object=comet-81p",
+      "path": "output/comet-intake/wild2/grid-fresh-install.log",
+      "exitCode": 0,
+      "bytes": 254,
+      "sha256": "e1ab8c2e81c0b6b8b7e16da8cc74fc3dab64d47f362c77faaa0b2807b11eb406"
+    },
+    {
+      "command": "pnpm test:browser http://127.0.0.1:4258 comet-81p",
+      "path": "output/comet-intake/wild2/grid-dom-browser.log",
+      "exitCode": 0,
+      "bytes": 254,
+      "sha256": "57f5bf2181e0fe44483a440ace324045a1f5f01782878eb3e55a07cf12edd859"
+    },
+    {
+      "command": "node tests/objects/browser/comets/navigation.mjs http://127.0.0.1:4258",
+      "path": "output/comet-intake/wild2/grid-comet-navigation.log",
+      "exitCode": 0,
+      "bytes": 96,
+      "sha256": "60eeb323a146e8c4979552dee2b8700d65169d067b78cf7da447104a4ffe463e"
+    },
+    {
+      "command": "node output/comet-intake/wild2/grid-visuals.mjs",
+      "path": "output/comet-intake/wild2/grid-visuals.log",
+      "exitCode": 0,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "output/comet-intake/wild2/grid-main-tests.log",
+      "exitCode": 1,
+      "sha256": "77e89ff0139cddacdb8016dc10fb30b96a9312be365c90540c50c3c0b97e924f",
+      "reason": "Started while preparation was still publishing; three tests read temporarily mismatched Wild 2 source pins. Final complete main-suite retry passes after preparation and build."
+    }
+  ]
+}

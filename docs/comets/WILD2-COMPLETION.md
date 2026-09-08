@@ -1,5 +1,7 @@
 # Wild 2 completed shape
 
+The current display adds a source-flag-driven [coverage grid on the estimated regions](WILD2-GRID.md). The qualification and screenshots below document the preceding uniformly colored completion; its unchanged geometry and targeting evidence remain applicable.
+
 Wild 2 now uses the full NASA PDS plate model, reduced to 992 retained CSS triangle leaves. The mesh is closed. The active lens, panel introduction and coverage fact identify the estimated far side.
 
 ## Source and geometry
