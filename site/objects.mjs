@@ -1,3 +1,7 @@
+import ymirDescriptor from "../src/planets/ymir/object.json" with { type: "json" };
+import siarnaqDescriptor from "../src/planets/siarnaq/object.json" with { type: "json" };
+import himaliaDescriptor from "../src/planets/himalia/object.json" with { type: "json" };
+import nereidDescriptor from "../src/planets/nereid/object.json" with { type: "json" };
 import geographosDescriptor from "../src/planets/geographos/object.json" with { type: "json" };
 import bacchusDescriptor from "../src/planets/bacchus/object.json" with { type: "json" };
 import mithraDescriptor from "../src/planets/mithra/object.json" with { type: "json" };
@@ -163,6 +167,26 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("ymir", "Ymir", "satellite", "#a0a0a0", 9.58,
+    "Explore Ymir, a moon of Saturn, through its source-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ymirDescriptor);
+    }, ymirDescriptor.properties.worldFrame),
+  object("siarnaq", "Siarnaq", "satellite", "#a0a0a0", 9.58,
+    "Explore Siarnaq, a moon of Saturn, through its source-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(siarnaqDescriptor);
+    }, siarnaqDescriptor.properties.worldFrame),
+  object("himalia", "Himalia", "satellite", "#a0a0a0", 5.2,
+    "Explore Himalia, a moon of Jupiter, through its source-backed size model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(himaliaDescriptor);
+    }, himaliaDescriptor.properties.worldFrame),
+  object("nereid", "Nereid", "satellite", "#a0a0a0", 30.07,
+    "Explore Nereid, a moon of Neptune, through its source-backed size model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(nereidDescriptor);
+    }, nereidDescriptor.properties.worldFrame),
   object("aegaeon", "Aegaeon", "satellite", "#a0a0a0", 9.58,
     "Explore Aegaeon, a small moon of Saturn, through its measured shape.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

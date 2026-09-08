@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "product": "N1355869401_2_CALIB.IMG",
+      "bytes": 4202496,
+      "sha256": "2207ca093a6e4c465dd2ca9fe73445633c910ba15102caa6896a32913efa9e31",
+      "nativeDimensions": [
+        1024,
+        1024
+      ],
+      "samplingKm": 26.60356
+    }
+  ],
+  "decision": "The complete calibrated Cassini raster was inspected. This finest-distance candidate used CL1/CB3 with an 8.2 second exposure and shows elongated signals, not a reliable registered disc. The 2026 mission review independently inspects shorter exposures across seven filters: 4–6 pixels across, no unambiguous surface markings. Original camera pointing and an unmeasured three-dimensional shape do not qualify a terrain map from these frames.",
+  "disposition": "Model-only presentation; photographic mapping remains unqualified, not absent.",
+  "shapeModel": "Cassini projected elongation supports a 1.25:1 approximation. Equal short axes and normalization to JPL mean radius 85 km are explicit modeling assumptions; no surface pixels are mapped."
+}

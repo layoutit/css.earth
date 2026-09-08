@@ -61,6 +61,11 @@ const body = (
 ): BodyData => ({ id, name, horizonsCode, meanRadiusKm, gravitationalParameterKm3PerS2, parent })
 
 export const BODIES: Record<BodyId, BodyData> = {
+  siarnaq: body('siarnaq', 'Siarnaq', '629', 19.5, 0, 'saturn'),
+  ymir: body('ymir', 'Ymir', '619', 9.6, 0, 'saturn'),
+
+  nereid: body('nereid', 'Nereid', '802', 170, 0, 'neptune'),
+  himalia: body('himalia', 'Himalia', '506', 85, 0.15155, 'jupiter'),
   polydeuces: body('polydeuces', 'Polydeuces', '634', 1.525973578806757, 0, 'saturn'),
   anthe: body('anthe', 'Anthe', '649', 0.5, 0, 'saturn'),
   aegaeon: body('aegaeon', 'Aegaeon', '653', 0.327106631018859, 0, 'saturn'),
