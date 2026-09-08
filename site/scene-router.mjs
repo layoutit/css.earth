@@ -1,3 +1,4 @@
+import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { requireSceneLifecycle } from "./scene-contract.mjs";
 import { objectAdapter } from "./object-adapter.mjs";
 import { mountPlanetShell } from "./planet-shell-client.mjs";
@@ -13,7 +14,6 @@ import * as applicationWorldContext from './application-world-context.mjs';
 import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mjs';
 import { createNavigationTiming } from './navigation-timing.mjs';
 
-const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
 export function createSceneRouter({
   stage,
@@ -406,7 +406,7 @@ export function createSceneRouter({
       root.dataset.playing = String(sceneState === "ready" && !scenePaused);
     } else delete root.dataset.playing;
     shellOwner?.shell?.setPlaybackState?.(readPlayback());
-    if (DEVELOPMENT_DIAGNOSTICS) {
+    if (DIAGNOSTICS_ENABLED) {
       windowTarget.__cssEarth = Object.freeze({
         activeObjectId: objectId,
         get selectedObjectId() { return readSceneState().selectedObjectId; },

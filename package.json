@@ -81,7 +81,8 @@
     "test:browser:flight": "node site/test/flight-registry-browser.mjs",
     "test:browser:interaction-chain": "node site/test/interaction-chain-browser.mjs",
     "test:browser:navigation-stress": "node site/test/navigation-stress-browser.mjs",
-    "test:browser:navigation-stress:matrix": "node site/test/navigation-stress-matrix.mjs"
+    "test:browser:navigation-stress:matrix": "node site/test/navigation-stress-matrix.mjs",
+    "build:performance": "pnpm prebuild && astro build --mode performance && pnpm assemble:planets"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

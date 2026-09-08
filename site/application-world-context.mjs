@@ -1,3 +1,4 @@
+import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
@@ -67,7 +68,7 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage);
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
         const target = stage.ownerDocument.defaultView;
-        const diagnostics = import.meta.env?.DEV === true ? Object.freeze({ inspect: layer.inspect }) : null;
+        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect }) : null;
         if (diagnostics) target.__cssEarthUniverse = diagnostics;
         let heliosphereEnabled = false, publication = null, destroyed = false;
         const publish = (world, viewport) => {
