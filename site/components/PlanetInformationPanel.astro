@@ -168,6 +168,12 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                 </>}
               </div>}
               <p class="planet-lens-details-copy">{lens.description}</p>
+              {lens.facts?.length > 0 && <ul class="planet-facts" aria-label={`${lens.label} facts`}>
+                {lens.facts.map((fact) => <li>
+                  <span class="planet-fact-label">{fact.label}</span>{" "}
+                  <span class="planet-fact-value">{fact.value}</span>
+                </li>)}
+              </ul>}
               {lens.texture?.attribution && <p class="planet-lens-source">
                 Source: {lens.texture.attribution.url
                   ? <a href={lens.texture.attribution.url} target="_blank" rel="noreferrer">{lens.texture.attribution.label}</a>
