@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27121%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               121 Hermione (A872 JA)          2026-Sep-07 21:00:15
+Rec #:     121 (+COV) Soln.date: 2026-Mar-23_10:11:21   # obs: 8202 (1904-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2461179.5 ! 2026-May-19.00 (TDB)         Residual RMS= .067729
+   EC= .1244655934323851   QR= 3.027313329478451   TP= 2461861.3378922669
+   OM= 72.87631713481821   W=  296.9487432441458   IN= 7.565606174161693
+   A= 3.457674886069324    MA= 255.4776962152349   ADIST= 3.888036442660197
+   PER= 6.42961            N= .153294947           ANGMOM= .031738267
+   DAN= 3.22235            DDN= 3.6076             L= 10.0279587
+   B= -6.7400276           MOID= 2.03570008        TP= 2028-Mar-30.8378922669
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 104.5              ROTPER= 5.55128
+   H= 7.39                 G= .150                 B-V= .739
+                           ALBEDO= .0482           STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#148, OCC=0
+2: source=ORB
+*******************************************************************************

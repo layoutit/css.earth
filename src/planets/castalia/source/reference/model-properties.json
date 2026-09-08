@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf",
+  "diameterKm": 1.084476,
+  "diameterInterpretation": "Volume-equivalent diameter computed from the original archived mesh, not a rescaled catalog diameter.",
+  "periodHours": 4.089,
+  "poleEclipticJ2000Degrees": [
+    253,
+    56
+  ],
+  "limitations": "The 1997 optical analysis statistically prefers the northern spin solution used here: period 4.089 h and ecliptic pole (253°, 56°). The alternative southern solution, period 4.094 h and pole (242°, 7°), was not absolutely excluded. This is the archived JPL shape, not a newly fitted model.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/castalia.obj",
+    "vertices": 2048,
+    "faces": 4092,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.289373
+    ],
+    "firstFaceZeroBased": [
+      1881,
+      651,
+      22
+    ],
+    "extentsKm": [
+      1.6258553999999998,
+      0.9981477999999999,
+      0.843095
+    ],
+    "volumeCubicKm": 0.6678168413731222,
+    "volumeEquivalentRadiusKm": 0.5422375459114492,
+    "radialRangeKm": [
+      0.26109930833497047,
+      0.8811146627455806
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 4092,
+    "ambiguous": 0,
+    "maxErrorMeters": 3.410605131648481e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 4092,
+    "sourceVertices": 2048,
+    "weldedVertices": 2048,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 11,
+    "estimatedErrorMeters": 10.72338581085205,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 658722750.9511324
+    }
+  }
+}

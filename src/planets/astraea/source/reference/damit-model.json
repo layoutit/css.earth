@@ -1,0 +1,46 @@
+{
+  "modelId": 1816,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1816",
+  "fields": {
+    "ID": "1816",
+    "Asteroid ID": "(5) Astraea",
+    "Lambda": "124",
+    "Beta": "39",
+    "Period": "16.80059",
+    "YORP": "",
+    "JD0": "2436250",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "112",
+    "Equivalent Diameter Error": "4",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-05-26",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:39",
+    "Modified": "2017-06-19 13:05:44"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/32/AO.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/33/occ.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/34/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/35/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/36/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/169"
+  ]
+}

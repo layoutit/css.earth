@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2722%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                22 Kalliope (A852 WA)          2026-Sep-07 20:32:51
+Rec #:      22 (+COV) Soln.date: 2026-Jun-05_03:03:26  # obs: 12455 (1854-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457864.5 ! 2017-Apr-21.00 (TDB)         Residual RMS= .21259
+   EC= .09915067635456028  QR= 2.62103102513885    TP= 2457603.5117443195
+   OM= 66.0670564554556    W=  354.9066865253793   IN= 13.71680798571669
+   A= 2.90951100960192     MA= 51.83164964229496   ADIST= 3.19799099406499
+   PER= 4.96293            N= .198597632           ANGMOM= .029197532
+   DAN= 2.62196            DDN= 3.1966             L= 61.1182744
+   B= -1.2062416           MOID= 1.63344002        TP= 2016-Aug-03.0117443195
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= .491                RAD= 83.768             ROTPER= 4.1483
+   H= 6.79                 G= .210                 B-V= .715
+                           ALBEDO= .166            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#138, OCC=0
+2: source=ORB
+*******************************************************************************

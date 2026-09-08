@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2744%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  44 Nysa (A857 KA)            2026-Sep-07 21:00:22
+Rec #:      44 (+COV) Soln.date: 2026-Jun-05_03:04:54   # obs: 8810 (1864-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457813.5 ! 2017-Mar-01.00 (TDB)         Residual RMS= .32215
+   EC= .1482907336483608   QR= 2.064059807139724   TP= 2458283.7073193877
+   OM= 131.5589991707901   W=  343.2665733674693   IN= 3.706633066002604
+   A= 2.423432371449097    MA= 237.1579368262846   ADIST= 2.782804935758471
+   PER= 3.77272            N= .261250853           ANGMOM= .026483081
+   DAN= 2.07541            DDN= 2.76244            L= 114.8586255
+   B= -1.0665284           MOID= 1.08028996        TP= 2018-Jun-14.2073193877
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 35.32              ROTPER= 6.422
+   H= 6.75                 G= .460                 B-V= .703
+                           ALBEDO= .482            STYP= Xc
+
+ASTEROID comments: 
+1: soln ref.= JPL#151, OCC=0
+2: source=ORB
+*******************************************************************************
