@@ -92,11 +92,16 @@ was still closing during the start of the completed run, so these are diagnostic
 observations, not an isolated before/after performance comparison.
 
 Navigation first-motion publication was 24 ms for Mars and about 30 ms for Venus
-and Makemake. After excluding the deliberate hover before clicking, Mars's active
-flight had a maximum complete-presentation gap of 35 ms. Venus had a 117 ms gap
-about 87 ms after its first motion, before its detail handoff at 517 ms. Makemake's
-largest gaps were at the end of approach; unchanging or subpixel motion must be
-distinguished before treating those as dropped animation. Close drags had p95
-complete-presentation gaps of 18.27 ms (Mars), 22.39 ms (Venus), and 18.34 ms
-(Makemake). The Venus departure is the next focused reproduction; this recording
-does not establish its cause or claim the remaining stalls are fixed.
+and Makemake. These mark application publication, not physical display latency.
+The previously reported 117 ms Venus departure gap contains six Chromium
+`STATE_NO_UPDATE_DESIRED` frames. The main thread continued processing short
+frame tasks during that interval; it is not evidence of a renderer stall.
+
+Grouping frame reports by source and sequence found no dropped-only sequence in
+these three flights or their close drags. Some sequences contain both partial
+and complete presentations, so that result does not establish that every main
+thread update was displayed on time. Gaps between complete-presentation endpoints
+alone must not be reported as dropped frames: they omit unchanged frames and
+the distinction between partial and complete updates. The broader stress results
+above remain a separate qualification limit; this shorter journey does not prove
+that all navigation is smooth.
