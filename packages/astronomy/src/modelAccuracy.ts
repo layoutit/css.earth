@@ -62,8 +62,10 @@ const VSOP_THEORY_DISCREPANCY_KM: Record<Vsop87BodyKey, number> = {
  * statistical uncertainties.
  */
 const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
+  siarnaq: 280355.5692405671,
+  ymir: 161334.72011835242,
   nereid: 10417.19020260089,
-  himalia: 645823.5033517482,
+  himalia: 54960.50018520494,
   polydeuces: 939.7293216478489,
   anthe: 2029.4157931053912,
   aegaeon: 306.9010577737413,
@@ -228,7 +230,9 @@ for (const id of SATELLITE_IDS) {
     id,
     metadata(
       id,
-      'Precessing Kepler ellipse fitted to JPL Horizons osculating elements',
+      record.positionCorrection
+        ? 'Horizons-fitted precessing ellipse with prepared periodic ICRF residuals'
+        : 'Precessing Kepler ellipse fitted to JPL Horizons osculating elements',
       'fit-residual',
       SATELLITE_FIXTURE_MAX_KM[id],
       record.fitFromJdTdb,

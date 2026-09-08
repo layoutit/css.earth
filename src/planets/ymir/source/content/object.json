@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ymir",
+  "displayName": "Ymir",
+  "panel": {
+    "introduction": "Ymir is a distant retrograde moon of Saturn. This triangular approximation uses published light-curve model dimensions with assumed polar caps. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Mean diameter estimate",
+        "value": "19 (+5/−3) km"
+      },
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Saturn"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Approximate triangular model"
+      },
+      {
+        "id": "rotation",
+        "label": "Sidereal rotation",
+        "value": "11.92220 hours"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Gladman, Kavelaars and colleagues · 2000"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
+        "title": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/ymir/ymir-model-thumbnail.webp",
+        "surface": "ymir-model-surface@2x.webp",
+        "poles": "ymir-model-poles@2x.webp",
+        "source": {
+          "id": "shape-approximation",
+          "path": "../manifest.json",
+          "url": "https://tilmanndenk.de/outersaturnianmoons/ymir/"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Denk et al.",
+      "role": "surface",
+      "description": "Cassini lightcurve shape model",
+      "href": "https://tilmanndenk.de/outersaturnianmoons/ymir/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Cassini ISS observation archive",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+      "credit": "Tilmann Denk"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Denk et al.; Cassini ISS; NEOWISE"
+    }
+  }
+}
