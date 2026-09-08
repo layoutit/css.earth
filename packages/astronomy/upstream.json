@@ -34,8 +34,8 @@
   },
   "excludedFiles": {},
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mjs (tools/prepare-solar-geometry.mjs first). A catalog consumer would be wired the same way.",
-  "fileCount": 32,
-  "byteCount": 386491,
+  "fileCount": 31,
+  "byteCount": 379560,
   "files": {
     "package.json": {
       "sha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
@@ -94,10 +94,6 @@
     "src/kepler.ts": {
       "sha256": "f1e29b9fc0a30a806d04e3e7be25b2d6838f24a2d8ee9cbaccad53c9cf8c277f",
       "bytes": 7044
-    },
-    "src/modelAccuracy.test.ts": {
-      "sha256": "c6fa4a6fbd68fb75d41db694cb74932da484ffe0c45e705b2a5c16b2af8ca455",
-      "bytes": 6931
     },
     "src/rotation.test.ts": {
       "sha256": "19f275611fff9f11a7d2643ef2bf927dd76187e632449c7bb230006982ff83bd",
@@ -197,6 +193,7 @@
     "src/dwarfPlanets.test.ts",
     "src/dwarfPlanets.ts",
     "src/index.ts",
+    "src/modelAccuracy.test.ts",
     "src/modelAccuracy.ts",
     "src/rotation.ts",
     "src/satellites.test.ts",

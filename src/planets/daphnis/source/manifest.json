@@ -1,0 +1,306 @@
+{
+  "schema": "cssdaphnis-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "n1656997950_1",
+      "path": "observations/N1656997950_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "d13c92192552c1c7a7cc4146b6767da7b7cc3dd1b753e80438670b08c1b16320",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1656997950",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/daphnis_document.pdf",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "n1656997950_1-label",
+      "path": "observations/N1656997950_1_CALIB.LBL",
+      "expectedBytes": 3829,
+      "expectedSha256": "4e9288fef8b341477517ceb86d5daaf12bedbf0b21178657b881628308563423",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656997950_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1656997950",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "consumers": [
+        "cassini-frames"
+      ]
+    },
+    {
+      "id": "n1656998640_1",
+      "path": "observations/N1656998640_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "c8c1b35ac229a1b69b6767088298b1c412e7e6f9c28b762f1ccaf30a73a39eb0",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1656998640",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/daphnis_document.pdf",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "n1656998640_1-label",
+      "path": "observations/N1656998640_1_CALIB.LBL",
+      "expectedBytes": 3828,
+      "expectedSha256": "4c6172fabd9dadeb93d70b6896bdf78194c8350ceed7e5ef81fd429f27fae940",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2064/data/1656971575_1657039444/N1656998640_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1656998640",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "consumers": [
+        "cassini-frames"
+      ]
+    },
+    {
+      "id": "n1863267232_1",
+      "path": "observations/N1863267232_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "b026a3faac020e7829dd36c6b7e69f7e5cb17995961117bd3c9dbdc86c93d3ac",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1863231911_1863269539/N1863267232_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1863267232",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/daphnis_document.pdf",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "n1863267232_1-label",
+      "path": "observations/N1863267232_1_CALIB.LBL",
+      "expectedBytes": 3865,
+      "expectedSha256": "25e85a27af3d62e800738d7819cd5022dc21140bc6b215c74b3e27b54dae93cc",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2110/data/1863231911_1863269539/N1863267232_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1863267232",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "consumers": [
+        "cassini-frames"
+      ]
+    },
+    {
+      "id": "thomas-2018-shape",
+      "path": "shape/daphnis_30k_plt.tab",
+      "expectedBytes": 2019600,
+      "expectedSha256": "8fc85246848ad05de7c68b0686f9fde7d3c23529d02db9c1e7287864b74c34be",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/daphnis_30k_plt.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+      "credit": "Peter Thomas, Joseph and Ansty; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; cite Thomas, Joseph and Ansty (2018), DOI 10.26033/ewy3-jy61.",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+        "shape/daphnis_document.pdf"
+      ],
+      "acquisition": "Download the original PDS plate table.",
+      "redistribution": "Retain source author and PDS archive attribution.",
+      "consumers": [
+        "shape",
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-fixed-mesh",
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+      "credit": "NASA/JPL/Space Science Institute; Peter Thomas and NASA PDS",
+      "license": "Public PDS scientific data; retain mission and model attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "n1656997950_1",
+          "n1656998640_1",
+          "n1863267232_1",
+          "thomas-2018-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 245.82,
+        "latitudeDegrees": 13.81,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 66439,
+      "expectedSha256": "89152bff736cbbf17defa35f285136cfc305f6d7ef41c11e52b77cc11d63627b"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5092,
+      "expectedSha256": "80baa139243e1b7c858b3dd9571b3a53064e6c1a4148b1cc7358c054785045d3",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 2398,
+      "expectedSha256": "8692c3d20d0069ed07f7c523f0ee523a8faa770f8f923d1bd5ed4499b9d02f96",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1333,
+      "expectedSha256": "ebbd9604cbf37dc7d1cc495ad8bf42050a2b6f3c103ead62859f0ae1ecb5923e",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 535,
+      "expectedSha256": "c4e3638c0562d89bb908473c3cc88fb97f4f54f79cefcd2480622f2c123695ee",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 5561,
+      "expectedSha256": "b1dcdef7b0dad316a807355d92bd56dc571ef66f3c6e1bbbd91d653eac841761",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4276,
+      "expectedSha256": "fd588fc9e03d23eb425d988ca6a23240ff494077014f1d6dd67b4c110fb8b031",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/daphnis_30k_plt.xml",
+      "expectedBytes": 12521,
+      "expectedSha256": "4a1fcdb111aac64b7951544af80f8d5d49f873f5f327673fc186e63e81c53bf0",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/daphnis_document.pdf",
+      "expectedBytes": 64615,
+      "expectedSha256": "70e32a5f4c9ac7855212a73017e9fc7619e5e9c564d637adfd78dd4ec6305f5b",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Authored source interpretation or preparation metadata."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "59b8aca3e9f4e4f7cc9db2064eab65d53ea4ab2da1e6f2a84375791a97233c65",
+      "purpose": "Authored source interpretation or preparation metadata."
+    }
+  ]
+}
