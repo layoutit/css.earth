@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "phase": "arbitrary-display-phase",
+  "rightAscensionDegrees": 0,
+  "declinationDegrees": 90,
+  "displayMeridianDegrees": 0,
+  "source": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf",
+  "qualification": "Hyperion has chaotic rotation and no IAU-approved pole/phase ephemeris. This fixed display orientation places the controlled PDS model in an arbitrary inertial attitude. It does not predict the current spin pole or longitude."
+}

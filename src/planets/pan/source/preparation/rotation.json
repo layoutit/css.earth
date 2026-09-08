@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-linear-rotation@1",
+  "rightAscensionDegrees": 40.59039852156057,
+  "declinationDegrees": 83.49893316906228,
+  "referenceEpochJdTt": 2451545,
+  "primeMeridianDegrees": 48.8,
+  "spinRateDegreesPerDay": 626.044,
+  "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "qualification": "IAU coefficients from pck00011, with pole evaluated at the shared 2026 epoch. This is an approximate fixed-epoch display orientation, not the pan_mst2018.bpc libration model used to control the PDS shape. Observation registration instead uses the shape release’s supplied image geometry."
+}
