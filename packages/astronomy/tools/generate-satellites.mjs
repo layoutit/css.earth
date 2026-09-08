@@ -124,6 +124,10 @@ const SATELLITES = [
   ['triton', '801', '500@899', 'neptune'],
   ['proteus', '808', '500@899', 'neptune'],
   ['larissa', '807', '500@899', 'neptune'],
+  ['naiad', '803', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['thalassa', '804', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['despina', '805', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['galatea', '806', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['charon', '901', '500@999', 'pluto'],
 ]
 
