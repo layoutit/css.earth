@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%278%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  8 Flora (A847 UA)            2026-Sep-07 20:32:55
+Rec #:       8 (+COV) Soln.date: 2025-Sep-15_15:02:53   # obs: 3564 (1847-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457961.5 ! 2017-Jul-27.00 (TDB)         Residual RMS= .28224
+   EC= .1570326231378661   QR= 1.855723154240551   TP= 2457954.901414962
+   OM= 110.9013886544614   W=  285.312194415864    IN= 5.886509529637772
+   A= 2.201417522405558    MA= 1.991137553644543   ADIST= 2.547111890570564
+   PER= 3.26634            N= .3017522             ANGMOM= .025206401
+   DAN= 2.06164            DDN= 2.24002            L= 36.2909138
+   B= -5.6768465           MOID= .87236899         TP= 2017-Jul-20.4014149620
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 73.7455            ROTPER= 12.865
+   H= 6.62                 G= .280                 B-V= .885
+                           ALBEDO= .226            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#152, OCC=0
+2: source=ORB
+*******************************************************************************

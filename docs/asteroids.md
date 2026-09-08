@@ -1,0 +1,60 @@
+# Exceptional asteroid coverage
+
+This addition selects 42 bodies from the [list of exceptional asteroids](https://en.wikipedia.org/wiki/List_of_exceptional_asteroids) for which original calibrated shape models and paired spin data could be pinned. Per-body source notes below identify the exact model, authors, frame, reduction error, limitations and restoration path. The list is a discovery index; the underlying research and original data supply the physical properties.
+
+Every body uses the existing generic object package, shared application shell and Solar System asteroid accordion. Each package has Shape and Elevation views. Shape uses the shared missing-imagery grid: no surface texture, reflectance, composition or regolith is invented. Elevation is source radius minus the documented reference sphere, not an independent terrain measurement or height above an equipotential. Rotation has an arbitrary display meridian, not an absolute phase prediction.
+
+The existing meshoptimizer preparation path reduces the original connected meshes while preserving their closed topology. Every result has 800 native PolyCSS u raster leaves and 128 by 128 px cells. The eight DAMIT models already containing 800 triangles require no edge collapse. All geometry, surface texels and directional/flood lighting are prepared ahead of runtime. Both DPRs select the same highest-density asset bank.
+
+52 Europa and 9 Metis retain their asteroid numbers in display names to distinguish them from the moons Europa and Metis. Their route IDs are europa-52 and metis-9.
+
+| Number | Body and provenance | Selected source family | Reference diameter (km) | Period (h) |
+| --- | --- | --- | ---: | ---: |
+| 2 | [Pallas](../src/planets/pallas/SOURCE.md) | VLT/SPHERE MPCD | 511 | 7.81321 |
+| 10 | [Hygiea](../src/planets/hygiea/SOURCE.md) | VLT/SPHERE MPCD | 433 | 13.82559 |
+| 3 | [Juno](../src/planets/juno/SOURCE.md) | VLT/SPHERE MPCD | 254 | 7.209531 |
+| 16 | [Psyche](../src/planets/psyche/SOURCE.md) | VLT/SPHERE MPCD | 223 | 4.195948 |
+| 704 | [Interamnia](../src/planets/interamnia/SOURCE.md) | VLT/SPHERE MPCD | 332 | 8.71234 |
+| 511 | [Davida](../src/planets/davida/SOURCE.md) | VLT/SPHERE MPCD | 298 | 5.129365 |
+| 87 | [Sylvia](../src/planets/sylvia/SOURCE.md) | VLT/SPHERE MPCD | 274 | 5.18364 |
+| 15 | [Eunomia](../src/planets/eunomia/SOURCE.md) | VLT/SPHERE MPCD | 270 | 6.082753 |
+| 31 | [Euphrosyne](../src/planets/euphrosyne/SOURCE.md) | VLT/SPHERE MPCD | 268 | 5.529595 |
+| 324 | [Bamberga](../src/planets/bamberga/SOURCE.md) | VLT/SPHERE MPCD | 227 | 29.4403 |
+| 19 | [Fortuna](../src/planets/fortuna/SOURCE.md) | VLT/SPHERE MPCD | 211 | 7.443224 |
+| 24 | [Themis](../src/planets/themis/SOURCE.md) | VLT/SPHERE MPCD | 208 | 8.374187 |
+| 29 | [Amphitrite](../src/planets/amphitrite/SOURCE.md) | VLT/SPHERE MPCD | 204 | 5.390119 |
+| 13 | [Egeria](../src/planets/egeria/SOURCE.md) | VLT/SPHERE MPCD | 202 | 7.046664 |
+| 130 | [Elektra](../src/planets/elektra/SOURCE.md) | VLT/SPHERE MPCD | 199 | 5.224663 |
+| 7 | [Iris](../src/planets/iris/SOURCE.md) | VLT/SPHERE MPCD | 199 | 7.138843 |
+| 6 | [Hebe](../src/planets/hebe/SOURCE.md) | VLT/SPHERE MPCD | 195 | 7.274467 |
+| 45 | [Eugenia](../src/planets/eugenia/SOURCE.md) | VLT/SPHERE MPCD | 188 | 5.699151 |
+| 41 | [Daphne](../src/planets/daphne/SOURCE.md) | VLT/SPHERE MPCD | 187 | 5.98798 |
+| 354 | [Eleonora](../src/planets/eleonora/SOURCE.md) | VLT/SPHERE MPCD | 165 | 4.277185 |
+| 128 | [Nemesis](../src/planets/nemesis/SOURCE.md) | VLT/SPHERE MPCD | 163 | 38.9325 |
+| 22 | [Kalliope](../src/planets/kalliope/SOURCE.md) | VLT/SPHERE MPCD | 150 | 4.1482 |
+| 51 | [Nemausa](../src/planets/nemausa/SOURCE.md) | VLT/SPHERE MPCD | 150 | 7.78484 |
+| 11 | [Parthenope](../src/planets/parthenope/SOURCE.md) | VLT/SPHERE MPCD | 149 | 13.72204 |
+| 18 | [Melpomene](../src/planets/melpomene/SOURCE.md) | VLT/SPHERE MPCD | 141 | 11.570306 |
+| 89 | [Julia](../src/planets/julia/SOURCE.md) | VLT/SPHERE MPCD | 140 | 11.388336 |
+| 12 | [Victoria](../src/planets/victoria/SOURCE.md) | VLT/SPHERE MPCD | 116 | 8.660345 |
+| 30 | [Urania](../src/planets/urania/SOURCE.md) | VLT/SPHERE MPCD | 88 | 13.68717 |
+| 8 | [Flora](../src/planets/flora/SOURCE.md) | VLT/SPHERE MPCD | 146 | 12.86667 |
+| 52 | [52 Europa](../src/planets/europa-52/SOURCE.md) | VLT/SPHERE MPCD | 319 | 5.629954 |
+| 9 | [9 Metis](../src/planets/metis-9/SOURCE.md) | VLT/SPHERE MPCD | 173 | 5.079176 |
+| 107 | [Camilla](../src/planets/camilla/SOURCE.md) | DAMIT | 260 | 4.843928 |
+| 88 | [Thisbe](../src/planets/thisbe/SOURCE.md) | DAMIT | 218 | 6.041319 |
+| 48 | [Doris](../src/planets/doris/SOURCE.md) | DAMIT | 210 | 11.8901 |
+| 121 | [Hermione](../src/planets/hermione/SOURCE.md) | DAMIT | 200 | 5.550877 |
+| 423 | [Diotima](../src/planets/diotima/SOURCE.md) | DAMIT | 209 | 4.775377 |
+| 532 | [Herculina](../src/planets/herculina/SOURCE.md) | DAMIT | 189 | 9.404937 |
+| 192 | [Nausikaa](../src/planets/nausikaa/SOURCE.md) | DAMIT | 94 | 13.62523 |
+| 5 | [Astraea](../src/planets/astraea/SOURCE.md) | DAMIT | 112 | 16.80059 |
+| 14 | [Irene](../src/planets/irene/SOURCE.md) | DAMIT | 153 | 15.02987 |
+| 44 | [Nysa](../src/planets/nysa/SOURCE.md) | DAMIT | 75 | 6.421418 |
+| 80 | [Sappho](../src/planets/sappho/SOURCE.md) | DAMIT | 61 | 14.03086 |
+
+The reference diameter sets the explicitly stated elevation sphere and object scale. The original calibrated coordinates are not rescaled to rounded or averaged catalog diameters. Individual source records provide more precise geometric measurements.
+
+Original-to-reduced geometry inspection covers front, back and both poles. Independent nearest-triangle sampling uses 8192 area-stratified samples in each direction; these are sampled distances, not a proof of a Hausdorff bound. Radial ambiguity checks cover every source face centroid plus 8192 directions. Source/model limitations remain visible in each package rather than being hidden behind a generic surface claim.
+
+Runtime assets are installed through the existing runtime-assets.json inventories. Source/preparation/acquisition.json restores original source inputs separately; pinned HTML and small source tables remain checked in where applicable. All source manifests verify byte counts and SHA-256 identities.

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2715%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                15 Eunomia (A851 OA)           2026-Sep-07 20:32:32
+Rec #:      15 (+COV) Soln.date: 2026-Jun-16_11:32:04   # obs: 5326 (1851-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457933.5 ! 2017-Jun-29.00 (TDB)         Residual RMS= .23794
+   EC= .1868495533189816   QR= 2.150324403143148   TP= 2457360.3919607955
+   OM= 293.159840305314    W=  97.68892622201878   IN= 11.73422707649824
+   A= 2.644436108865196    MA= 131.3532904210819   ADIST= 3.138547814587243
+   PER= 4.30039            N= .229194639           ANGMOM= .02748092
+   DAN= 2.61755            DDN= 2.48987            L= 31.0108577
+   B= 11.627246            MOID= 1.19279003        TP= 2015-Dec-03.8919607955
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 115.8445           ROTPER= 6.083
+   H= 5.42                 G= .230                 B-V= .839
+                           ALBEDO= .248            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#109, OCC=0
+2: source=ORB
+*******************************************************************************
