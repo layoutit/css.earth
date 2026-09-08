@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { DWARF_PLANET_IDS, bodyData } from './bodies.js'
+import { DWARF_PLANET_IDS, bodyData, moonsOf } from './bodies.js'
 import { distance, magnitude } from './__fixtures__/compare.js'
 import { HORIZONS } from './__fixtures__/horizons.js'
 import {
@@ -12,6 +12,7 @@ import { FrameTree, fixedFrame } from './frames.js'
 import { keplerApoapsisKm, keplerPeriodDays } from './kepler.js'
 import { chooseFrameUnitM, SUN_FRAME_ID, solarSystemFrames } from './solarSystem.js'
 import { M_PER_AU, M_PER_KM, M_PER_MPC } from './units.js'
+import { SCENE_SATELLITE_IDS, sceneSatelliteStateKm } from './sceneSatellites.js'
 
 /**
  * WHAT THIS MEASURES, and what it does not — read this before trusting a
@@ -117,6 +118,25 @@ describe('dwarf-planet frames', () => {
     return tree
   }
 
+  it('keeps scene-only satellites out of the propagated frame tree without hiding their explicit states', () => {
+    const specs = dwarfPlanetFrameSpecs()
+    expect(moonsOf('haumea')).toContain('hiiaka')
+    for (const id of SCENE_SATELLITE_IDS) {
+      expect(specs.some(spec => spec.body === id)).toBe(false)
+    }
+    const state = sceneSatelliteStateKm('hiiaka', 2461286.5)
+    expect(state.centerBodyId).toBe('haumea')
+    expect(state.parentHeliocentricState).toBeDefined()
+    const haumea = specs.find(spec => spec.body === 'haumea')!
+    // Generic parent frames keep their existing time domain and elements;
+    // no source-only child is silently attached to a different primary state.
+    for (const epoch of [2461285.5, 2461286.5, 2461287.5]) {
+      expect(haumea.frame.originInParent(epoch)).toEqual(
+        dwarfPlanetPositionKm('haumea', epoch).map(km => km / (M_PER_AU / M_PER_KM)),
+      )
+    }
+  })
+
   it('is accepted by FrameTree.add, parented directly on the Sun', () => {
     // The invariant this whole file exists to prove: Eris's exit ball, at
     // ~98 au, still fits inside the Sun frame's — `FrameTree.add` enforces
@@ -177,4 +197,3 @@ describe('dwarf-planet frames', () => {
     }
   })
 })
-

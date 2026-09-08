@@ -1,0 +1,258 @@
+{
+  "schema": "cssromulus-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "occultation-approximation",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 60130,
+      "expectedSha256": "5c69e809aa9b9e5c5e91080423fc6f22fbdce4630923efbb94f0331bde192bce",
+      "origin": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+      "credit": "Berthier et al. Sylvia physical/dynamical properties",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 9787.866191310175
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+      "credit": "Berthier et al. Sylvia physical/dynamical properties",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 9787.866191310175
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3945,
+      "expectedSha256": "bc5852755eb9dc9c30af529867823a34c5f8548441f9c86631447f6663e1e5d7",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 3261,
+      "expectedSha256": "a60fb3babea7a0ead408d248225f11234f02803e8c7fd55efc52097623cdbc3d",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "orbit/geocentric-2018.txt",
+      "expectedBytes": 9044,
+      "expectedSha256": "3a532625e0a4436905bed3187d9a4359648d5790bf9c0d20f6cdc9c723d65425",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/geocentric-2026.txt",
+      "expectedBytes": 9044,
+      "expectedSha256": "e8afc90caa7fd06b9ab42e3eb7f2d56704b7eefdb3baecf4ab977c33afc074c2",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/geocentric-astrometry.txt",
+      "expectedBytes": 9845,
+      "expectedSha256": "a6a058d9e1ba7bbb96a474acec1e2d3bb217180eaf8589cafadc47275ce4306a",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/miriade-2018.xml",
+      "expectedBytes": 20658,
+      "expectedSha256": "6e51c7cf84e038ccb32fd443c2b1d493ceb3eac52476d0d52901bd5e6974c242",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/miriade-2026.xml",
+      "expectedBytes": 20657,
+      "expectedSha256": "c17731d2b40b1f80cb593e3f2ec35740afbfe848ee16d99998e6e74e3c87d468",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/miriade-solutions.txt",
+      "expectedBytes": 719,
+      "expectedSha256": "c3c0bd648373e3b47b8849fe68b3b3663b9054496aa560ab6fd7be34e69eb500",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/paper-astrometry-readme.txt",
+      "expectedBytes": 9139,
+      "expectedSha256": "0f1aa8a1b2b56d6bd76b8d272f706358492a38b63799b3e5e34adfff2ea35276",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/paper-astrometry.dat",
+      "expectedBytes": 10530,
+      "expectedSha256": "412aa8442b2784595a3ffc038384f4c007e9253e8f1a7cf35663a600c5df0ecc",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/published-parameters.json",
+      "expectedBytes": 5247,
+      "expectedSha256": "8a1e50f6040b207756bec082d48d03537da1dcc8a466a5b363e184e73b4e6362",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "orbit/sylvia-heliocentric.txt",
+      "expectedBytes": 8489,
+      "expectedSha256": "52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1298,
+      "expectedSha256": "3bf740694c7e6aa1ff8645ab51a38f7354b549465100d331fbd966bf4c080362",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 386,
+      "expectedSha256": "b55a8ca12859975227899193dc35284eeb9741a75a81c710a9cd52ff102d78ce",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2613,
+      "expectedSha256": "945c16fc593f8d8b2e2e0fe0b780530c9398beb92972cccb982021e02a76d1ad",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3673,
+      "expectedSha256": "3a2d675bab41dd663b005ec2688032ede3abc6d1780f92a494117135b9895271",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "d24a32c5afe4bee69cedbf8caffa7b18eb1b3e5283e0d899cddceae1f15de233",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "validation/epoch-state.json",
+      "expectedBytes": 19324,
+      "expectedSha256": "9bf21db63fad290b0ba0a85711a7b811e04e2106307f701ee724f372ddf5936d",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "validation/projection-checks.json",
+      "expectedBytes": 17428,
+      "expectedSha256": "da5c5a662916973a416855c58f16c88b420d5abde411dde1105956091fbb3a7e",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+      "credit": "Berthier et al. Sylvia physical/dynamical properties",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "occultation-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 45821,
+      "expectedSha256": "85feab9c5db07b89f7d097d76d748f4621dfd6bea3866bd7697e60a01b8c22d5"
+    }
+  ]
+}

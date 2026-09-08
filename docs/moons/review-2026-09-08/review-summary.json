@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-moon-source-review@1",
+  "checkedOn": "2026-09-08",
+  "scope": 484,
+  "existingScenes": 69,
+  "missingScenes": 415,
+  "reviewed": 484,
+  "remainingUnreviewed": 0,
+  "dispositions": {
+    "improve-existing": 32,
+    "retain-existing": 37,
+    "observation-candidate": 41,
+    "orbit-context-only": 348,
+    "model-candidate": 26
+  },
+  "bySceneStatus": {
+    "present": {
+      "improve-existing": 32,
+      "retain-existing": 37
+    },
+    "not-started": {
+      "observation-candidate": 41,
+      "orbit-context-only": 348,
+      "model-candidate": 26
+    }
+  },
+  "lanes": {
+    "local": 4,
+    "jupiter": 115,
+    "saturn": 293,
+    "outer_companions": 72
+  },
+  "sourceRecords": 422,
+  "inventorySnapshotSha256": "dde7e55b4f8bff94325a46ad5f30ac455cf97b569fdae09e7ec309f1815e6f4e",
+  "inputOutputMembership": "exact 484-key match",
+  "sourceReferenceCheck": "all row references resolve within their lane",
+  "qualification": "not performed"
+}

@@ -24,6 +24,10 @@ The original Cartesian frame is retained with +Z north and east-positive longitu
 
 Original JPL Horizons elements and independent vectors are pinned at JD 2461286.5 (2026-09-03). Heliocentric ICRF conics serve the existing fixed-date context, not long-term perturbation ephemerides. The independent vectors at ±30 days have measured regression guards in the astronomy package. TDB is approximated as TT within 2 ms.
 
+## Canonical prepared position
+
+The prepared scene now uses the retained [Sylvia heliocentric vector](../romulus/source/orbit/sylvia-heliocentric.txt) at JD 2461286.5 TT, shared with Romulus. Its position, velocity and solar GM define the same conic in every prepared observer and the solar-system overview. The [validated epoch record](../romulus/source/validation/epoch-state.json) retains source identity and time-scale provenance. The original ±30-day conic fixtures above remain evidence for the generic propagated astronomy API, not an accuracy guarantee for Romulus's published orbit or the updated fixed-date snapshot.
+
 ## Reproduction
 
 Source pins live in source/manifest.json; source/preparation/acquisition.json restores the ignored OBJ, original article, ESO sky panorama and Inter font. LAM's ordinary public-site cookie is explicitly recorded. Generated context.png is force-tracked as a pinned intermediate and regenerated/verified by the existing radial snapshot recipe. Run the authored object preparer to rebuild the display, and the existing runtime setup command to install published assets without original source data. Shared sky and title provenance remain in their source directories.

@@ -6,7 +6,7 @@
 // the exact Horizons URL that produced it, so any row can be re-fetched with
 // curl and nothing else. `VEC_CORR='NONE'` matters: the Horizons default is
 // light-time corrected, and an ephemeris is a geometric statement.
-import { writeRecordSections } from './lib/write-record-sections.mjs'
+import { readRecordSections, writeRecordSections } from './lib/write-record-sections.mjs'
 import { horizons, parseVectors, vectorsUrl } from './lib/horizons.mjs'
 import { HEADER } from './lib/sources.mjs'
 
@@ -45,6 +45,29 @@ const targets = [
 ]
 
 const SATELLITES = [
+  ['paaliaq', '620', '500@699', 'daily'],
+  ['tarvos', '621', '500@699', 'daily'],
+  ['ijiraq', '622', '500@699', 'daily'],
+  ['suttungr', '623', '500@699', 'daily'],
+  ['mundilfari', '625', '500@699', 'daily'],
+  ['skathi', '627', '500@699', 'daily'],
+  ['erriapus', '628', '500@699', 'daily'],
+  ['thrymr', '630', '500@699', 'daily'],
+  ['bebhionn', '637', '500@699', 'daily'],
+  ['bergelmir', '638', '500@699', 'daily'],
+  ['bestla', '639', '500@699', 'daily'],
+  ['fornjot', '642', '500@699', 'daily'],
+  ['hati', '643', '500@699', 'daily'],
+  ['hyrrokkin', '644', '500@699', 'daily'],
+  ['loge', '646', '500@699', 'daily'],
+  ['skoll', '647', '500@699', 'daily'],
+  ['greip', '651', '500@699', 'daily'],
+  ['tarqeq', '652', '500@699', 'daily'],
+  ['caliban', '716', '500@799', 'daily'],
+  ['sycorax', '717', '500@799', 'daily'],
+  ['prospero', '718', '500@799', 'daily'],
+  ['setebos', '719', '500@799', 'daily'],
+
   ['siarnaq', '629', '500@699', 'daily'],
   ['ymir', '619', '500@699', 'daily'],
 
@@ -164,11 +187,18 @@ ${rows
   },`
 }
 
+// Selected satellite regeneration preserves every unrelated checked fixture.
+const requested = process.argv.slice(2)
+if (requested.some(arg => !/^--object=[a-z][a-z0-9-]*(?:,[a-z][a-z0-9-]*)*$/.test(arg))) throw new Error('Use --object=id[,id]')
+const selected = new Set(requested.flatMap(arg => arg.slice('--object='.length).split(',')))
+for (const id of selected) if (!SATELLITES.some(row => row[0] === id)) throw new Error(`Unknown satellite ${id}`)
+const destination = new URL('../src/__fixtures__/horizons.ts', import.meta.url)
+const records = selected.size ? readRecordSections(destination, 'HORIZONS') : new Map()
 const blocks = []
-for (const [name, description, command, center, epochs] of targets) {
+for (const [name, description, command, center, epochs] of selected.size ? [] : targets) {
   blocks.push(await collect(name, description, command, center, epochs))
 }
-for (const [id, command, center, range] of SATELLITES) {
+for (const [id, command, center, range] of SATELLITES.filter(([id]) => !selected.size || selected.has(id))) {
   const epochs =
     range === 'daily'
       ? [2458862.25, 2460310.75, 2461041.625, 2461772.25, 2462502.75, 2463219.25]
@@ -183,10 +213,11 @@ for (const [id, command, center, range] of SATELLITES) {
         : SATELLITE_EPOCHS
   blocks.push(await collect(`${id}FromPlanet`, `${id} (${command}) relative to its planet`, command, center, epochs))
 }
-for (const [id, command] of DWARF_PLANETS) {
+for (const [id, command] of selected.size ? [] : DWARF_PLANETS) {
   blocks.push(await collect(`${id}Heliocentric`, `${id} (${command}) relative to the Sun`, command, '500@10', DWARF_EPOCHS))
 }
 
+for (const block of blocks) records.set(/^  (\w+):/.exec(block)[1], block)
 const out = `${HEADER('JPL Horizons vector ephemerides; every entry carries the URL that produced it', 'fetch-fixtures.mjs')}
 import type { Vec3 } from '../vec3.js'
 
@@ -206,7 +237,7 @@ export interface HorizonsFixture {
 
 /** ICRF equatorial (\`REF_PLANE='FRAME'\`), geometric (\`VEC_CORR='NONE'\`), km and km/day. */
 export const HORIZONS: Record<string, HorizonsFixture> = {
-${blocks.join('\n')}
+${[...records.values()].join('\n')}
 }
 
 /**
@@ -236,5 +267,5 @@ export const PLAN_MARS_ECLIPTIC = {
   ],
 } as const
 `
-writeRecordSections(new URL('../src/__fixtures__/horizons.ts', import.meta.url), out, 'horizons')
+writeRecordSections(destination, out, 'horizons')
 process.stdout.write(`wrote ${blocks.length} fixtures\n`)

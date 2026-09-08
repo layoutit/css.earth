@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "paaliaq",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-ellipsoid-context",
+    "path": "presentation/context.png",
+    "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+    "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
+    "license": "MIT display representation from published scientific measurements; retain source citation.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "lightcurve-approximation",
+        "model-surface"
+      ],
+      "size": 512,
+      "longitudeDegrees": 55,
+      "latitudeDegrees": 20,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "model"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 89239,
+    "expectedSha256": "e9e1f3a1d2a4b53f2f572b216feb061dbb858a2b08463193163ad715ed4ce7d4"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

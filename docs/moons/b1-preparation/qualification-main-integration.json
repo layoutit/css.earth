@@ -1,0 +1,252 @@
+{
+  "schema": "cssearth-b1-main-integration-correction@1",
+  "recordedAt": "2026-09-08T22:42:58.343Z",
+  "head": "133339e058fea24da729f187d8a6b17f99e61e54",
+  "mergedMain": "9228eac50d9e38103f80add72d58dfef4c9210c3",
+  "cssCorrectionCommit": "25b317b47cc51a85d34da9c177ba6be949154fd1",
+  "status": "focused-checks-passed",
+  "scope": "CSS ownership correction and the immediately related shell, lens-facts and PDS scalar-map contracts after the main merge. The original full aggregate failure is preserved; this report does not claim an aggregate rerun or final browser/visual acceptance.",
+  "environment": {
+    "cwd": "repository root",
+    "node": "v24.19.0",
+    "nodeExecutable": "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "pnpm": "10.33.0",
+    "pathPrefix": "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin"
+  },
+  "originalAggregate": {
+    "receipt": {
+      "path": "docs/moons/b1-preparation/gate-logs/test.txt",
+      "bytes": 203223,
+      "sha256": "195c7d3553792d6596c7c4fbb8a817aad2b3630311b2ac3bd6b70316b3346c68"
+    },
+    "head": "2900da4f78e21caa2e08064ec191552c9cd78f97",
+    "exitCode": 1,
+    "passed": 3134,
+    "failedTestFiles": 3,
+    "errorCode": "ERR_UNKNOWN_FILE_EXTENSION",
+    "errorPath": "site/minimap/minimap.css",
+    "files": [
+      "site/test/navigation-router.test.mjs",
+      "site/test/planet-shell.test.mjs",
+      "site/test/router-runtime.test.mjs"
+    ],
+    "unchanged": true,
+    "interpretation": "Three shell test files failed during module loading; their test bodies were not executed in that run. The other package, renderer, platform and shell results remain the original historical receipt."
+  },
+  "correction": {
+    "problem": "The Node-importable application world context imported the minimap runtime, which statically imported a CSS file that Node cannot load.",
+    "change": "Moved the unchanged minimap stylesheet import into the common Astro page layout alongside the other global styles. No CSS loader, test bypass, stylesheet-content change or runtime behavior change was introduced.",
+    "baselineProvenance": {
+      "upstreamIntroducingCommit": "c61d1bf979fb76bd60959e95ed0f59e549a5ab03",
+      "filesMatchedMainBeforeCorrection": true,
+      "originalGitBlobs": {
+        "site/minimap/minimap.mjs": "8ef86b211fcc7217890891e6b7b84b655e12b4ad",
+        "site/layouts/PlanetLayout.astro": "6d3404ca80b9d212be70e42a864fc502a8c4edf1"
+      }
+    },
+    "ownershipCheck": {
+      "node": "v24.19.0",
+      "gitHead": "133339e058fea24da729f187d8a6b17f99e61e54",
+      "astroCompilePassed": true,
+      "compiler": "Installed Astro 7.2.9 dependency @astrojs/compiler-rs",
+      "diagnostics": [],
+      "cssRetainedInCompiledLayout": true,
+      "minimapDirectNodeImportPassed": true,
+      "cssBytesUnchangedFromMain": true,
+      "cssSha256": "d34b3e83c180bf988a166bb70c204244989b32f1d795d935c54a1cb1da345a57",
+      "layout": "site/layouts/PlanetLayout.astro",
+      "runtime": "site/minimap/minimap.mjs",
+      "css": "site/minimap/minimap.css",
+      "evidence": {
+        "path": "output/playwright/moons-b1-main-integration-133339e0/css-ownership.json",
+        "bytes": 529,
+        "sha256": "6565e623eb369f8aa1493e6fa303abf387f2b429455a588a7a9ae1ec787bdd29"
+      },
+      "method": "Imported site/minimap/minimap.mjs directly in Node and checked its exported mount function; compiled PlanetLayout.astro using the installed Astro compiler-rs, verified the CSS import survives compilation and zero diagnostics, and compared the unchanged CSS bytes against merged main."
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--max-old-space-size=16384",
+        "--test",
+        "site/test/navigation-router.test.mjs",
+        "site/test/planet-shell.test.mjs",
+        "site/test/router-runtime.test.mjs",
+        "site/test/shell-lifetime.test.mjs",
+        "site/test/surface-minimap.test.mjs",
+        "site/test/prepared-lens-facts.test.mjs",
+        "tools/objects/terrestrial-layers/pds-scalar-map.test.mjs"
+      ],
+      "exitCode": 0,
+      "tests": 64,
+      "passed": 64,
+      "failed": 0,
+      "breakdown": {
+        "previousFiveFileFocus": 57,
+        "preparedLensFacts": 3,
+        "pdsScalarMap": 4
+      },
+      "log": {
+        "path": "output/playwright/moons-b1-main-integration-133339e0/focused.log",
+        "bytes": 6304,
+        "sha256": "8a69955fc8791f88b68406d6b42be02945a1b69a532d188078775fba1d1735fd"
+      }
+    },
+    {
+      "argv": [
+        "pnpm",
+        "typecheck:packages"
+      ],
+      "environment": {
+        "PATHPrefix": "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin"
+      },
+      "exitCode": 0,
+      "workspacePackages": [
+        "astronomy",
+        "catalog",
+        "objects",
+        "engine"
+      ],
+      "log": {
+        "path": "output/playwright/moons-b1-main-integration-133339e0/typecheck-packages.log",
+        "bytes": 526,
+        "sha256": "08d703107195c95358ab2ec85b74c058efd6e351373a381cf195b03df6556346"
+      }
+    },
+    {
+      "argv": [
+        "pnpm",
+        "typecheck:renderer"
+      ],
+      "environment": {
+        "PATHPrefix": "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin"
+      },
+      "exitCode": 0,
+      "log": {
+        "path": "output/playwright/moons-b1-main-integration-133339e0/typecheck-renderer.log",
+        "bytes": 165,
+        "sha256": "4ef775cc8234c6b90d1200f3da65673b1626acba09d1d8f4cd9b70e27292f043"
+      }
+    },
+    {
+      "argv": [
+        "pnpm",
+        "typecheck:preparation"
+      ],
+      "environment": {
+        "PATHPrefix": "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin"
+      },
+      "exitCode": 0,
+      "log": {
+        "path": "output/playwright/moons-b1-main-integration-133339e0/typecheck-preparation.log",
+        "bytes": 164,
+        "sha256": "733aa3c59e91edfc9990953f64168fc663259349d2ed5f2555685e1446359207"
+      }
+    }
+  ],
+  "inputPins": [
+    {
+      "path": "site/test/navigation-router.test.mjs",
+      "bytes": 23503,
+      "sha256": "14bb731a94c6e614a1de80dc02da8ea142cd0152e6c9e506cccfb7302a445028"
+    },
+    {
+      "path": "site/test/planet-shell.test.mjs",
+      "bytes": 11876,
+      "sha256": "6a98a4f33dbe2e5cc1d2eae55d5c10cfb56f6c2c5c388c8a3d396db5fbba7572"
+    },
+    {
+      "path": "site/test/router-runtime.test.mjs",
+      "bytes": 8929,
+      "sha256": "a23ee482afc5cdd1f9dedab8fc5dc01fded9c4eb8dc1e487653fd926141817d1"
+    },
+    {
+      "path": "site/test/shell-lifetime.test.mjs",
+      "bytes": 20996,
+      "sha256": "f935cf4f3fb50eb53632a23340a64eb7af479677de1c3b7c09129bddce99413e"
+    },
+    {
+      "path": "site/test/surface-minimap.test.mjs",
+      "bytes": 5411,
+      "sha256": "e99c3b2781e42ee8f4deee68650f6ddf7417787a22a03b322148a4cfeace16d8"
+    },
+    {
+      "path": "site/test/prepared-lens-facts.test.mjs",
+      "bytes": 2234,
+      "sha256": "f7e6e22cdddfa90b3d729942cb4a711da75e439098d1dfb133b1e0be6992ad0f"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/pds-scalar-map.test.mjs",
+      "bytes": 5422,
+      "sha256": "8bc8e5d465ccdf70779a044de7482a94a623f0af2540931c7287b766b7989a2b"
+    },
+    {
+      "path": "site/layouts/PlanetLayout.astro",
+      "bytes": 5583,
+      "sha256": "6c263e4febdb62bd5958541dcda89148104316d96000326198ccbb71f67b57f7"
+    },
+    {
+      "path": "site/minimap/minimap.mjs",
+      "bytes": 6733,
+      "sha256": "95b0a15b3fc987dbec3c6a6989c5136156092f77a4f9aeafddedeeb662d51ddb"
+    },
+    {
+      "path": "site/minimap/minimap.css",
+      "bytes": 2107,
+      "sha256": "d34b3e83c180bf988a166bb70c204244989b32f1d795d935c54a1cb1da345a57"
+    },
+    {
+      "path": "site/application-world-context.mjs",
+      "bytes": 5925,
+      "sha256": "aa406943b4c1adc01243d867b56efa8b6bab15e77b333c1d29aa75f513f31c9c"
+    },
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "bytes": 13833,
+      "sha256": "d877d1d4dab0159574385cd42ea8ce0f7db157e30f14da72eeeef6bacd8918d0"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "bytes": 2058,
+      "sha256": "7894c1d9505d1fcf2e713ca6eadf987623590c6019091a8c68e3c6ebb65ebbda"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "bytes": 38417,
+      "sha256": "cd77e1a49d3dfcfdd180ec7b4d780ba1e58e6a5b17400466b61480070d8580ca"
+    },
+    {
+      "path": "tools/objects/content/lenses.ts",
+      "bytes": 4481,
+      "sha256": "91a8d9def2798323635e9b91f80a349e8df97b1078b489790e152f608c8d414f"
+    },
+    {
+      "path": "tools/objects/content/prepare.ts",
+      "bytes": 11506,
+      "sha256": "074cfa59fe1d1947a67933d121a00bca85e096ab1ed9a4faec00664649bb6ba4"
+    },
+    {
+      "path": "tools/objects/content/types.ts",
+      "bytes": 5371,
+      "sha256": "48da3ed09c23f085a1ec4ac74b16586c1e2d98e0e98e096311e61df8c899fe70"
+    },
+    {
+      "path": "tools/objects/dist/content/prepare.js",
+      "bytes": 47504,
+      "sha256": "943607700f335dfc1a123597db9f10c30efd5557a93a8de00b43545d868e6da8"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/pds-scalar-map.mjs",
+      "bytes": 8656,
+      "sha256": "fc3a2d7873ab402738c9607814effca850bceb4c23a628a696d2469331e0d215"
+    }
+  ],
+  "limits": [
+    "These checks precede the separate Squannit backface correction and the ensuing production rebuild.",
+    "No source, object runtime or prepared object artifacts were changed by this check.",
+    "The 64 focused passes do not replace a fresh full pnpm test gate after all implementation changes are frozen.",
+    "Earlier 2900da4f browser evidence remains historical; the merged conformance and shell changes require final-head browser qualification."
+  ]
+}

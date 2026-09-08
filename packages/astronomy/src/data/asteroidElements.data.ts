@@ -557,5 +557,9 @@ export const ASTEROID_ELEMENTS = {
   "asteroid-1999-fr33": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2780000%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 445291441.3718939, "eccentricity": 0.08327552386420739, "inclinationRad": 0.24391930069427661, "ascendingNodeRad": 0.14901115556846806, "argumentOfPeriapsisRad": 5.60582781964941, "meanAnomalyAtEpochRad": 6.137792130324953, "meanMotionRadPerDay": 0.003349677820516016 }
+  },
+  "patroclus": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27920000617%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 778830941.4907451, "eccentricity": 0.1389112589266669, "inclinationRad": 0.732645209429436, "ascendingNodeRad": 0.403596824707011, "argumentOfPeriapsisRad": 5.820005685036567, "meanAnomalyAtEpochRad": 1.1480684298769326, "meanMotionRadPerDay": 0.0014481207088576716 }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

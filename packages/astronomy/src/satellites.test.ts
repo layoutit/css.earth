@@ -37,6 +37,28 @@ import {
  * deliberately compact model cannot carry.
  */
 const TOLERANCE_KM: Record<SatelliteId, number> = {
+  paaliaq: 16890,
+  tarvos: 16433,
+  ijiraq: 10752,
+  suttungr: 6368,
+  mundilfari: 12589,
+  skathi: 3606,
+  erriapus: 12926,
+  thrymr: 7277,
+  bebhionn: 40458,
+  bergelmir: 5027,
+  bestla: 15232,
+  fornjot: 11340,
+  hati: 12443,
+  hyrrokkin: 8666,
+  loge: 9984,
+  skoll: 8245,
+  greip: 10379,
+  tarqeq: 5575,
+  caliban: 220,
+  sycorax: 861,
+  prospero: 825,
+  setebos: 2873,
   kiviuq: 32368,
   albiorix: 21245,
 
