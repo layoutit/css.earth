@@ -166,3 +166,81 @@ photosphere/proxy transition, node identity, resource closure and re-entry; this
 PR does not hide visible geometry to claim a frame-rate gain. Evidence is under
 `output/playwright/detail-retirement-probe/` and
 `output/playwright/volume-layer-owners/`.
+
+
+## Context-owned detail lifetime (07cdf107)
+
+The detail scene now consumes the enclosing context's prepared retirement extent.
+It stops drawing only when that context has completely faded out and the selected
+body is unresolved. Its camera, scene nodes, source textures and physical projection
+remain retained and continue receiving camera state. The same scene becomes drawable
+again on re-entry. A nearby resolved object outside the context extent stays visible.
+The generic marker LOD alone still does not hide a visible mesh.
+
+The extent comes from `plan.volume.fullDistanceM` about the prepared focus position;
+there is no Sun-id branch or new distance/quality threshold. This is a late, complete
+context handoff, not a replacement for the missing small-disc proxy. In this context
+the bound is 8.269676e20 metres. It does not change the planetary-band presentation.
+
+Native-wheel tests at DPR 1 and 2 check marker distance, either side of that boundary,
+dragging while retired, and return to a resolved Sun. All detailed nodes, the world
+root and the single scene owner survive. At the retired boundary, enabling the old
+mesh for comparison changes content layers from 63 to 577: the product retires 514
+mesh layers. The DPR 1 scene crop is pixel-identical; the DPR 2 comparison differs
+by at most two channel values. Marker-distance images differ by at most one. These
+are sampled views, not a claim of universal pixel identity. Evidence is in
+`output/playwright/context-retirement-proof/`. Renderer typecheck and 140 focused
+renderer tests pass; the earlier preparation checks still cover the unchanged assets.
+
+### Measured limits
+
+The simultaneous recorder/trace/video route at exact commit `07cdf107` confirms
+retirement at the galaxy endpoint and restoration at the Sun endpoint, with retained
+world/input/document identities and no application errors, HMR or trace data loss.
+Its 5–5,000 AU p95 is still 33.4 ms and its maximum interval is 66.7 ms. This is a
+qualified lifecycle fix, not proof of a material overall frame-rate improvement.
+Style work remains about 4.35 seconds over the movement. Differences among these
+single runs must not be interpreted as a controlled statistical speedup.
+
+A separate, explicitly invalid-appearance diagnostic removes the mesh throughout
+travel to bound its possible benefit. That run reaches 62/569 planetary-band
+intervals over 25 ms, but p95 still stays at 33.3 ms. Style work remains about 4.24
+seconds even with no detailed mesh drawing. Therefore both mesh representation
+and retained world publication/browser style work remain relevant; worker transport
+alone cannot remove the latter. This experiment is not in the product.
+
+| Run | Role | Band intervals >25 ms | Band p95 (ms) | Maximum (ms) |
+| --- | --- | ---: | ---: | ---: |
+| `surface-integrated-repeat` | Earlier integrated candidate | 111/565 | 33.4 | 100.0 |
+| `detail-cost-upper-bound-valid` | Invalid-appearance mesh-cost diagnostic | 62/569 | 33.3 | 33.4 |
+| `context-retirement` | Current product | 104/571 | 33.4 | 66.7 |
+| `body-anchor-candidate` | Excluded body-container experiment | 192/549 | 33.4 | 50.0 |
+
+The additional body-container experiment preserves annotation positions within
+0.000123 CSS px across six DPR/dragged views, unlike the earlier zero-size variant.
+It nevertheless increases planetary-band intervals over 25 ms to 192/549. It was
+rejected and the full-size body groups remain unchanged. An algebraically equivalent
+CSS depth-normalization probe also changed rasterized pixels (up to 109 channel
+values at subpixel size) without removing layers; it was rejected.
+
+The first `detail-cost-upper-bound` capture is excluded because its marker-stage
+selector was not verified and the Sun does not publish that attribute on the stage.
+`detail-cost-upper-bound-valid` instead verifies computed `display:none` throughout.
+A stale descriptive build label in `context-retirement/report.json` was corrected;
+its previous text and the reason remain recorded. Source HEAD/hashes, loaded module
+hashes, trace, video and native recorder bytes were not changed by that correction.
+
+New synchronized capture identities and immutable raw artifact hashes:
+
+- `detail-cost-upper-bound-valid`: recorder `31fecb50-4343-4ad9-a5e1-081df85dd6e4`, clock drift 47 microseconds, video PTS error <0.51 ms.
+  - `cssearth-diagnostics-31fecb50-4343-4ad9-a5e1-081df85dd6e4.json` SHA-256: `d05b4936c1ee7839489ac44d17f3effe2894dd7eff20a9f0921f6b59af5cf421`.
+  - `trace.json.gz` SHA-256: `f82d9d1c58db90696c2f36d14c1f20d12c3f21d81db51163ee4686bb31686ebd`.
+  - `sun-milky-way-sun.mp4` SHA-256: `114ce8d92b0fd739544e00b93142196e6aacbcb99eb94847916d2b7af16d56fd`.
+- `context-retirement`: recorder `36e836cb-3474-492a-99da-c72d4698bb1e`, clock drift 21 microseconds, video PTS error <0.51 ms.
+  - `cssearth-diagnostics-36e836cb-3474-492a-99da-c72d4698bb1e.json` SHA-256: `017a88fbeff5a48cd2f73c066609e15989ad0f09ee37560ca508a423702048f7`.
+  - `trace.json.gz` SHA-256: `c3f1265922711733ef66ac96d8b6066c19087e41a3a90957df5c7abee4b6eb5c`.
+  - `sun-milky-way-sun.mp4` SHA-256: `d132f1481aad2790fb8522a8fce7429154044ab42c99df13d0ef37a1d3e5b035`.
+- `body-anchor-candidate`: recorder `afa57c1e-0f35-4d53-8a79-97ca1d6100ad`, clock drift -6 microseconds, video PTS error <0.51 ms.
+  - `cssearth-diagnostics-afa57c1e-0f35-4d53-8a79-97ca1d6100ad.json` SHA-256: `08b912c3158c3e624a3d608e6733bb5e8b7736c4813f11db6a2ef201a4d973e0`.
+  - `trace.json.gz` SHA-256: `fa3a951e3fd9faafffe9fbadc82b81e4bbac99d576d4b61b89a781178cf042e3`.
+  - `sun-milky-way-sun.mp4` SHA-256: `e9d40476f4642a70c82ea790d7d525ff012712e2285c4c01929616627ed6db82`.
