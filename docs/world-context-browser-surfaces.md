@@ -2,8 +2,9 @@
 
 PR #45 merged on 2026-09-08 as `c6850e2839520e32c3e6526bc1fd8a95866a9eb2`,
 with published head `e6e9f1f968ce1a0ad49e7adddba5f3a4465d347a`.
-The changes below are local follow-up commit `4c2445b9`; they were **not included
-in that merge**. This work has not established consistently smooth playback.
+This follow-up continues in draft PR #50. The measurements below identify their
+exact revisions; later integrations include 227 bodies from main. This work has
+not established consistently smooth playback.
 
 ## Published cssGraphics mechanisms inspected
 
@@ -482,3 +483,27 @@ executes and its only failure is the missing Dike prepared object. Thirteen
 focused minimap, recorder and surface-map checks passed before that move. These
 are local generated-input limits, not a claim of aggregate object readiness;
 there was no bulk asset copy, source substitution or ignored-output cleanup.
+
+
+## Final integrated repeat and GPU correlation
+
+The pushed runtime at `71ac37ae` is captured in `minimap-indexed-shell` with native
+recorder `c16cfd54-da30-473a-ba98-ea315c81ef17`, Chrome trace gzip and video.
+Synchronization passes (68 us clock drift; video PTS error below 0.50 ms), with
+no errors, HMR or retained identity changes. The shared-universe CI check passes
+on that exact runtime revision, including the new minimap range checks.
+
+The 5–5,000 AU band repeats at 155/579 intervals above 25 ms (26.8%), p95 33.4 ms.
+The 116.7 ms return interval aligns with **150.9 ms GPU overlay scheduling** for
+eight overlays. The overlapping main-renderer task is 13.2 ms; video observations
+have a 182.5 ms gap around the same event. The correlation is recorded in
+`minimap-indexed-shell/return-stall-correlation.json`. Whole movement totals are
+5,283 ms style, 1,168 ms layout, 920 ms paint and 4,670 ms layerization.
+
+A disposable-page `covered-sky-residency-probe` kept the six prepared sky faces
+visible beneath the opaque volume matte, without changing repository code. Its
+native recorder is `b2f75c59-4830-48be-ac07-ae9fbe31c126`; the override is explicit
+in its capture manifest. It still has a 166.7 ms movement interval and 183.5 ms
+GPU overlay scheduling. Keeping the covered sky alone is not a demonstrated fix
+and is **not included in the product**. The next unresolved issue is browser
+surface/layer residency and publication cost, not missing image decoding.
