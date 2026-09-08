@@ -30,7 +30,43 @@
     ],
     "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "osiris",
+        "format": "osiris-geo",
+        "consumer": "osiris-observation",
+        "path": "observations/n20140805t194314611id50f22.IMG",
+        "qualityPath": "observations/n20140805t194314611id40f22.IMG",
+        "startTime": "2014-08-05T19:44:22.918",
+        "filter": "FFP-Vis_Orange",
+        "allowLossy": true,
+        "transfer": {
+          "maximumSourceDistanceMeters": 50,
+          "maximumSeparationMeters": 20,
+          "maximumEmissionDegrees": 80,
+          "visibilityToleranceMeters": 0.5,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must be within 20 m of the closest RMOC source point; the same point must be visible in the full RMOC mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3
+        },
+        "displayPercentiles": [
+          1,
+          99
+        ],
+        "metadata": {
+          "label": "OSIRIS observation",
+          "falseColor": false,
+          "coverage": "OSIRIS orange-filter observation, 5 August 2014. Grayscale with approximate illumination correction; residual photographed shadows remain. Gray grid marks missing or rejected imagery. Shadows off shows the corrected image uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map."
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,

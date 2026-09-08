@@ -252,6 +252,10 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
     const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
+    const observation = radial.observationSurfaces?.get(surface.id);
+    const observationTransfer = observation && { interiorTexels: 0, counts: {}, maximumSourceDistanceMeters: 0,
+      maximumPixelSeparationMeters: 0, maximumPhotometricGain: 0,
+      method: 'Closest full-source triangle point; all bilinear GEO contributors checked before disk-normalized interpolation; atlas bleed clamped to retained face.' };
     const transfer = sourceSurface && { sampledTexels: 0, withheldTexels: 0, maximumDistanceMeters: 0,
       includesAtlasBleed: true, triangleInteriorTexels: 0, withheldTriangleInteriorTexels: 0,
       maximumAcceptedDistanceMeters: scientific.surfaceSampling.maximumDistanceMeters,
@@ -276,6 +280,28 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const sx = lon * info.width - .5, sy = Math.max(0, Math.min(info.height - 1, (.5 - lat / Math.PI) * info.height - .5));
         const x0 = (Math.floor(sx) + info.width) % info.width, x1 = (x0 + 1) % info.width, y0 = Math.floor(sy), y1 = Math.min(info.height - 1, y0 + 1), tx = sx - Math.floor(sx), ty = sy - y0;
         const offset = ((rect.y + py) * width + rect.x + px) * 4;
+        if (observation) {
+          const sample = observation.samplePoint(closestTrianglePoint(point, a, ab, ac).point);
+          const interior = u >= 0 && v >= 0 && u + v <= 1;
+          if (interior) {
+            observationTransfer.interiorTexels++;
+            const key = sample.reason ?? 'accepted';
+            observationTransfer.counts[key] = (observationTransfer.counts[key] ?? 0) + 1;
+            if (!sample.reason) {
+              observationTransfer.maximumSourceDistanceMeters = Math.max(observationTransfer.maximumSourceDistanceMeters, sample.distanceMeters);
+              observationTransfer.maximumPixelSeparationMeters = Math.max(observationTransfer.maximumPixelSeparationMeters, sample.separationMeters);
+              observationTransfer.maximumPhotometricGain = Math.max(observationTransfer.maximumPhotometricGain, sample.gain);
+            }
+          }
+          for (let channel = 0; channel < 3; channel++) {
+            // The observation is already disk-normalized. Uniform flood
+            // preserves its measured detail on every side of the source mesh.
+            flood[offset + channel] = sample.color[channel];
+            shadow[offset + channel] = Math.round(sample.color[channel] * illumination);
+          }
+          flood[offset + 3] = shadow[offset + 3] = 255;
+          continue;
+        }
         if (sourceSurface) {
           // Clamp the raster bleed to this retained triangle, never to an
           // unrelated surface beyond its edge. Runtime primitive coverage is
@@ -316,6 +342,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     surface.polesUrl = surface.surface.url;
     surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
     if (transfer) surface.surfaceSampling.transfer = transfer;
+    if (observationTransfer) surface.observation.transfer = observationTransfer;
   }
   if (lighting) await writeFile(resolve(outputDirectory, 'source-lighting.json'), JSON.stringify({ ...lighting.report, recipe: lightingRecipe }) + '\n');
   for (const entry of source.manifest.generatedIntermediates.filter(entry =>
