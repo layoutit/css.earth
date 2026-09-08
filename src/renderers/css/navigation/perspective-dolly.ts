@@ -4,6 +4,7 @@ import type { BodyProjection, HeliocentricProjection } from '../solar-system/hel
 import type { VisibleRect } from '../solar-system/types.js';
 import type { PositionM } from '@cssearth/engine';
 import type { PhysicalProjection } from '../rendering/physical-projection.js';
+import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation, worldCameraSilhouetteDiameter } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import { scaleWorldPosition, validateWorldPosition } from './world-camera-math.js';
@@ -20,7 +21,7 @@ export interface PerspectiveWorldContext {
   readonly sceneRegistration?: string;
   readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 }
-export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; preparedSurface?: PreparedSurfaceHitTest; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; }
+export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; preparedSurface?: PreparedSurfaceHitTest; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport; }
 export type PerspectiveDolly = ReturnType<typeof createPerspectiveDolly>;
 import {
   distanceForSilhouetteRadius,
@@ -186,6 +187,7 @@ export function createPerspectiveDolly({
   sceneElement,
   skyElement,
   stage,
+  viewport,
 }: PerspectiveDollyOptions) {
   const cameraPlan = validatePerspectiveCameraPlan(unvalidatedCameraPlan);
   const plan = heliocentric?.plan;
@@ -261,6 +263,20 @@ export function createPerspectiveDolly({
   let transformWrites = 0;
 
   const measure = () => {
+    if (viewport) {
+      const snapshot = viewport.read(cameraPlan.projection.cssPerspective);
+      focal = snapshot.focalPixels;
+      viewportWidth = snapshot.bounds.width;
+      viewportHeight = snapshot.bounds.height;
+      principalOffset = Object.freeze([0, 0]);
+      stageViewport = Object.freeze({ focalPixels: focal, widthPixels: viewportWidth,
+        heightPixels: viewportHeight, principalOffsetPixels: [0, 0] as const });
+      visibleRect = Object.freeze({ left: -viewportWidth / 2, right: viewportWidth / 2,
+        top: -viewportHeight / 2, bottom: viewportHeight / 2 });
+      cameraElement.style.perspectiveOrigin = '50% 50%';
+      if (heliocentric) heliocentric.sunRoot.style.perspectiveOrigin = '50% 50%';
+      return;
+    }
     const view = cameraElement.ownerDocument.defaultView;
     if (!view) throw new Error("Perspective camera document has no window.");
     const nextFocal = parseFloat(view.getComputedStyle(cameraElement).perspective);
@@ -554,8 +570,9 @@ export function createPerspectiveDolly({
     // comfortably: the trackball never shrinks below a fifth of the
     // viewport's short side, and the sphere the drag rides is that disc.
     trackball() {
-      const bounds = cameraElement.getBoundingClientRect();
-      const stageBounds = stage.getBoundingClientRect();
+      const sharedBounds = viewport?.read(cameraPlan.projection.cssPerspective).bounds;
+      const bounds = sharedBounds ?? cameraElement.getBoundingClientRect();
+      const stageBounds = sharedBounds ?? stage.getBoundingClientRect();
       const silhouette = projectedBody?.silhouette;
       const centerX = bounds.x + bounds.width / 2 + (silhouette?.centre[0] ?? 0);
       const centerY = bounds.y + bounds.height / 2 + (silhouette?.centre[1] ?? 0);

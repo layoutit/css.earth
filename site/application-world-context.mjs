@@ -1,7 +1,9 @@
+import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
+import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { OBJECTS } from './objects.mjs';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
@@ -67,8 +69,9 @@ export function createApplicationWorldContext() {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
         const layer = prepared.mount(stage);
+        const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
         const target = stage.ownerDocument.defaultView;
-        const diagnostics = import.meta.env?.DEV === true ? Object.freeze({ inspect: layer.inspect }) : null;
+        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect }) : null;
         if (diagnostics) target.__cssEarthUniverse = diagnostics;
         let heliosphereEnabled = false, publication = null, destroyed = false;
         const publish = (world, viewport) => {
@@ -76,7 +79,7 @@ export function createApplicationWorldContext() {
           publication = { world, viewport };
           layer.publish(world, viewport, { heliosphere: heliosphereEnabled });
         };
-        return { ...layer, publish,
+        return { ...layer, viewport, publish,
           setAsteroidOrbitsEnabled(enabled) {
             if (!destroyed) layer.setHiddenOrbits(enabled === true ? [] : asteroidIds);
           },
@@ -88,7 +91,7 @@ export function createApplicationWorldContext() {
           destroy() {
             destroyed = true; publication = null;
             if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
-            layer.destroy(); resources.destroy();
+            viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };
       } catch (error) { resources.destroy(); throw error; }

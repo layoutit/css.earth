@@ -9,6 +9,8 @@ export function createNavigationTiming(windowTarget, from, to) {
     if (seen.has(phase)) return;
     seen.add(phase);
     const name = `cssEarth:navigation:${phase}`, detail = { id, from, to, phase };
+    const recordingId = windowTarget.__cssEarthRecorder?.id;
+    if (recordingId) detail.recordingId = recordingId;
     clock.clearMarks(name);
     clock.mark(name, { detail });
     if (phase !== 'requested') {

@@ -40,7 +40,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit", "observationSurface"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit", "observationSurface"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -53,7 +53,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   const resource = (key, nullable = false) => { if (!(nullable && key === null) && !resources.has(key)) fail(`undeclared resource ${key}`); };
   const resourceList = (list, label) => { array(list, label).forEach(key => resource(key)); unique(list, label); };
   const tree = plan.tree;
-  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses"]);
+  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses", "activationGroups"]);
   for (const property of array(tree.properties,"prepared style properties")) {
     record(property,"prepared style property",["name","value","custom"]);string(property.name,"prepared property name");
     if(typeof property.value!=="string"||typeof property.custom!=="boolean")fail("prepared property assignment is invalid");
@@ -87,12 +87,60 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       !/(?:^|\s)polycss-camera(?:\s|$)/.test(tree.nodes[tree.camera].className)) fail("tree requires exactly one camera");
   if (tree.nodes.filter(entry => /(?:^|\s)polycss-scene(?:\s|$)/.test(entry.className)).length !== 1) fail("tree requires exactly one scene");
   array(tree.stageClasses, "stage classes").forEach(value => string(value, "stage class"));
+  if (tree.activationGroups !== undefined) {
+    const containers = new Set(tree.nodes.map(node => node.parent)), activated = new Set();
+    for (const group of array(tree.activationGroups, 'activation groups')) {
+      array(group, 'activation group');
+      if (!group.length || group.length > 64) fail('activation group must contain 1 to 64 leaves');
+      for (const target of group) {
+        node(target);
+        if (containers.has(target) || target === tree.camera || target === tree.scene || activated.has(target)) fail('activation target must be a unique retained leaf');
+        activated.add(target);
+      }
+    }
+  }
   function ancestor(child, parent) { for (let id = tree.nodes[child]?.parent; id >= 0; id = tree.nodes[id].parent) if (id === parent) return true; return false; }
+  const partitionScenes = new Set();
+  if (plan.depthPartitions !== undefined) {
+    const partition = plan.depthPartitions;
+    record(partition, 'depth partitions', ['groups', 'order']);
+    const roots = new Set(), ordered = new Set();
+    const groups = array(partition.groups, 'depth groups');
+    if (groups.length < 2 || groups.length > 128) fail('depth partitions require 2 to 128 retained groups');
+    for (const group of groups) {
+      record(group, 'depth group', ['root', 'scene']); node(group.root); node(group.scene);
+      if (tree.nodes[group.root].parent !== tree.camera || !ancestor(group.scene, group.root) ||
+          roots.has(group.root) || partitionScenes.has(group.scene) || [tree.scene, tree.camera].includes(group.scene)) fail('depth group must own an independent projected carrier');
+      roots.add(group.root); partitionScenes.add(group.scene);
+    }
+    function order(entry, depth = 0) {
+      if (depth > 64) fail('depth order exceeds prepared traversal bound');
+      if (Object.hasOwn(entry, 'group')) {
+        record(entry, 'depth leaf', ['group']); integer(entry.group, 'depth group index');
+        if (entry.group >= groups.length || ordered.has(entry.group)) fail('depth order requires each group exactly once');
+        ordered.add(entry.group);
+      } else if (Object.hasOwn(entry, 'sequence')) {
+        record(entry, 'depth sequence', ['sequence']);
+        const sequence = array(entry.sequence, 'depth sequence');
+        if (sequence.length < 2 || sequence.length > groups.length) fail('depth sequence requires 2 to group-count entries');
+        for (const child of sequence) order(child, depth + 1);
+      } else {
+        record(entry, 'depth split', ['plane', 'back', 'front']);
+        if (array(entry.plane, 'depth plane').length !== 4 || !entry.plane.every(Number.isFinite) ||
+            Math.abs(Math.hypot(...entry.plane.slice(0, 3)) - 1) > 1e-6) fail('depth split requires a normalized finite plane');
+        order(entry.back, depth + 1); order(entry.front, depth + 1);
+      }
+    }
+    order(partition.order);
+    if (ordered.size !== groups.length) fail('depth order must cover every group');
+  }
   function attribute(name) { if (!/^(?:data-[a-z0-9-]+|aria-[a-z0-9-]+)$/.test(name)) fail(`unsupported attribute ${name}`); }
   const forbiddenProperty = /^(?:transform|scale|rotate|perspective)$/;
+  const activationTargets = new Set(tree.activationGroups?.flat() ?? []);
   function write(binding) {
     record(binding, "selection binding", ["kind", "target", "name", "value", "resource", "quoted"]);
     node(binding.target, true); string(binding.name, "binding name");
+    if (binding.kind === 'style' && binding.name === 'display' && activationTargets.has(binding.target)) fail('selection display cannot race prepared activation');
     choice(binding.kind, new Set(["style", "texture", "attribute", "class"]), "selection binding");
     if (binding.kind === "texture") { resource(binding.resource, true); if (typeof binding.quoted !== "boolean") fail("texture quote mode is required"); }
     else if (binding.kind === "class") { if (typeof binding.value !== "boolean") fail("class binding must be boolean"); }
@@ -379,7 +427,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       record(face, 'facing plane', ['target', 'plane', 'tolerance']); node(face.target);
       if (!(Number.isFinite(face.tolerance) && face.tolerance > 0)) fail('native backface tolerance must be positive');
       if ([tree.camera, tree.scene].includes(face.target) || targets.has(face.target) || tree.nodes.some(node => node.parent === face.target)) fail('facing target must be a unique prepared leaf');
-      if (!ancestor(face.target, tree.scene)) fail('facing target must belong to scene');
+      if (!ancestor(face.target, tree.scene) && ![...partitionScenes].some(scene => ancestor(face.target, scene))) fail('facing target must belong to scene');
       targets.add(face.target);
       if (array(face.plane, 'facing plane coordinates').length !== 4) fail('facing plane needs four coordinates');
       face.plane.forEach(value => finite(value, 'facing plane coordinate'));

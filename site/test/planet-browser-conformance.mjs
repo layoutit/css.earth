@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { stripTypeScriptTypes } from "node:module";
 import { chromium } from "playwright";
 
 import { OBJECTS } from "../objects.mjs";
@@ -19,6 +20,11 @@ const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;
 const densityOnly = process.env.CSSEARTH_DENSITY_ONLY === "1";
 const requestedCases = new Set((process.env.CSSEARTH_CONFORMANCE_CASES ?? "").split(",").filter(Boolean));
+// The coordinate oracle is the current source picker, also when the tested
+// server is an immutable production build without Vite's /src module routes.
+const surfaceHitModuleUrl = `data:text/javascript;base64,${Buffer.from(stripTypeScriptTypes(
+  await readFile(resolve('src/renderers/css/navigation/prepared-surface-hit.ts'), 'utf8'),
+)).toString('base64')}`;
 const CASE_TIMEOUT_MS = 120_000;
 const REQUEST_START_TIMEOUT_MS = 30_000;
 const evidenceDirectory = process.env.CSSEARTH_CONFORMANCE_OUTPUT
@@ -417,7 +423,9 @@ async function proveDesktop(browser, planet, profile) {
     await enableMotion(page, planet.id);
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
-        const leaves = [...stage.querySelectorAll(".polycss-scene :is(s,u)")]
+        // All detail leaves belong to the one object camera. Prepared paint
+        // groups need not descend from its reference transform node.
+        const leaves = [...stage.querySelectorAll(":scope > .polycss-camera :is(s,u)")]
           .filter(leaf => getComputedStyle(leaf).backgroundImage !== "none");
         return {
           texturedLeafCount: leaves.length,
@@ -678,8 +686,8 @@ async function surfaceFlyCoordinates(page) {
   if (surfacePlan) {
     // An irregular silhouette can leave the old fixed disc sample in empty
     // space. Use the same prepared-triangle picker as native input.
-    coordinates.surface = await page.evaluate(async ({ id, hit, targetPath, preferred }) => {
-      const { bindPreparedSurfaceHit } = await import('/src/renderers/css/navigation/prepared-surface-hit.ts');
+    coordinates.surface = await page.evaluate(async ({ id, hit, targetPath, preferred, moduleUrl }) => {
+      const { bindPreparedSurfaceHit } = await import(moduleUrl);
       const camera = document.querySelector('.polycss-camera');
       if (document.querySelectorAll('.polycss-camera').length !== 1 || document.querySelectorAll('.polycss-scene').length !== 1) {
         throw new Error('Surface qualification requires one retained camera and scene');
@@ -705,7 +713,7 @@ async function surfaceFlyCoordinates(page) {
         [[0, 0], [-4, 0], [4, 0], [0, -4], [0, 4]].every(([x, y]) => pick(p.x + x, p.y + y)));
       if (!point) throw new Error(`No visible prepared surface point for ${id}`);
       return point;
-    }, { id, ...surfacePlan, preferred: coordinates.surface });
+    }, { id, ...surfacePlan, preferred: coordinates.surface, moduleUrl: surfaceHitModuleUrl });
   }
   return Object.freeze(coordinates);
 }

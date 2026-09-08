@@ -8,6 +8,14 @@ import Camera from '@cesium/engine/Source/Scene/Camera.js';
 import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import Rectangle from '@cesium/engine/Source/Core/Rectangle.js';
 import { minimapCamera, rectangleOnMap, surfaceViewRectangle } from '../surface-minimap-rectangle.mjs';
+import { surfaceMapViewport } from '../surface-map-context.mjs';
+
+test('surface consumers use the published clipped viewport without measuring the scene', () => {
+  const scene = { closest() { throw new Error('Unexpected layout read'); } };
+  assert.deepEqual(surfaceMapViewport(scene, { focalPixels: 800, principalOffsetPixels: [40, -20],
+    visibleRect: { left: -600, right: 400, top: -300, bottom: 300 } }),
+  { left: -.8, right: .45, top: -.35, bottom: .4 });
+});
 
 // Independently specified CSS surface axes: the first map column is +Y,
 // quarter-turn east is +X, and north is +Z. A mirrored map must fail these.

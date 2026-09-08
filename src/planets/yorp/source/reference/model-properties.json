@@ -1,0 +1,79 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf",
+  "diameterKm": 0.1128,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 0.20290068129070193,
+  "poleEclipticJ2000Degrees": [
+    180,
+    -85
+  ],
+  "limitations": "The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj",
+    "vertices": 288,
+    "faces": 572,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.037439
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      0.149285,
+      0.133513,
+      0.09566300000000001
+    ],
+    "volumeCubicKm": 0.0007510349289428538,
+    "volumeEquivalentRadiusKm": 0.05638849568179659,
+    "radialRangeKm": [
+      0.03366679824396731,
+      0.07987460901312758
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 572,
+    "ambiguous": 0,
+    "maxErrorMeters": 2.842170943040401e-14,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 572,
+    "sourceVertices": 288,
+    "weldedVertices": 288,
+    "targetFaces": 572,
+    "outputFaces": 572,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 288,
+      "edges": 858,
+      "faces": 572,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 751034.9289428538
+    }
+  },
+  "surfaceSampling": {
+    "method": "closest-source-point",
+    "maximumDistanceMeters": 0.001
+  },
+  "rotationReference": {
+    "epoch": "2001-07-27T00:00:00Z",
+    "degreesPerDay": 42582.41,
+    "accelerationDegreesPerDaySquared": 0.0002,
+    "display": "fixed reference rate; acceleration not integrated"
+  }
+}

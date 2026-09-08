@@ -1,5 +1,5 @@
 import type { CameraPlan, TrackballMetrics } from './types.js';
-export interface ResponsiveZoomOptions { stage: HTMLElement; cameraElement: HTMLElement; plan: CameraPlan; mobile: boolean; mobilePreviewElement?: HTMLElement | null; framingReferenceZoom?: number; }
+export interface ResponsiveZoomOptions { stage: HTMLElement; cameraElement: HTMLElement; plan: CameraPlan; mobile: boolean; mobilePreviewElement?: HTMLElement | null; framingReferenceZoom?: number; viewport?: import('./camera-viewport.js').CameraViewport; }
 export interface TrackballLayoutOptions { stage: HTMLElement; cameraElement: HTMLElement; logicalBodyDiameter: number; sceneScale?: number; }
 import { preparedCameraZoomScale } from "../rendering/prepared-camera-runtime.js";
 import { BASE_TILE } from "@layoutit/polycss";
@@ -12,6 +12,7 @@ export function selectPreparedResponsiveZoom({
   mobile,
   mobilePreviewElement,
   framingReferenceZoom = plan.defaultZoom,
+  viewport,
 }: ResponsiveZoomOptions) {
   const fit = plan.responsiveFit;
   const numericFields = [
@@ -36,12 +37,13 @@ export function selectPreparedResponsiveZoom({
       fit.maximumMobilePreviewShare > 1) {
     throw new TypeError("Continuous responsive planet fit is invalid.");
   }
-  const stageBounds = stage?.getBoundingClientRect();
-  const cameraBounds = cameraElement?.getBoundingClientRect();
+  const measured = viewport && plan.projection ? viewport.read(plan.projection.cssPerspective) : null;
+  const stageBounds = measured?.bounds ?? stage?.getBoundingClientRect();
+  const cameraBounds = measured?.bounds ?? cameraElement?.getBoundingClientRect();
   if (!stageBounds?.width || !stageBounds.height || !cameraBounds.width) {
     throw new TypeError("Responsive planet viewport bounds are invalid.");
   }
-  const shellScale = cameraBounds.width / stageBounds.width /
+  const shellScale = measured ? 1 : cameraBounds.width / stageBounds.width /
     preparedCameraZoomScale(cameraElement);
   const aspectRatio = stageBounds.width / stageBounds.height;
   const narrowPortraitProgress = smoothstep(
@@ -58,7 +60,7 @@ export function selectPreparedResponsiveZoom({
     fit.narrowPortraitWidthShareGain * (1 - narrowPortraitProgress) +
     fit.landscapeWidthShareGain * landscapeProgress;
   const mobilePreviewBounds = mobile
-    ? mobilePreviewElement?.getBoundingClientRect()
+    ? measured ? { top: measured.previewTop ?? 0 } : mobilePreviewElement?.getBoundingClientRect()
     : null;
   const maximumMobileDiameter = mobile && mobilePreviewBounds && mobilePreviewBounds.top > 0
     ? mobilePreviewBounds.top * fit.maximumMobilePreviewShare

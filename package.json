@@ -87,7 +87,12 @@
     "prepare:earth-coarse": "node tools/objects/geographic-pages/operations/prepare-global-coarse.mjs --object=earth",
     "publish:earth-coarse": "node tools/objects/geographic-pages/operations/publish-global-coarse.mjs --object=earth",
     "integrate:earth-coarse": "node tools/objects/geographic-pages/operations/integrate-global-coarse.mjs --object=earth",
-    "test:browser:earth-entities": "node tests/objects/browser/earth/selection-cards-browser.mjs"
+    "test:browser:earth-entities": "node tests/objects/browser/earth/selection-cards-browser.mjs",
+    "test:browser:flight": "node site/test/flight-registry-browser.mjs",
+    "test:browser:interaction-chain": "node site/test/interaction-chain-browser.mjs",
+    "test:browser:navigation-stress": "node site/test/navigation-stress-browser.mjs",
+    "test:browser:navigation-stress:matrix": "node site/test/navigation-stress-matrix.mjs",
+    "build:performance": "pnpm prebuild && astro build --mode performance && pnpm assemble:planets"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
@@ -107,6 +112,7 @@
     "pixelmatch": "7.2.0",
     "playwright": "1.60.0",
     "pngjs": "7.0.0",
+    "robust-predicates": "3.0.3",
     "sharp": "0.35.3",
     "vite": "7.3.1",
     "@cssearth/engine": "workspace:*",

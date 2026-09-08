@@ -13,7 +13,7 @@ try {
     const page = await browser.newPage({ viewport: { width: 1000, height: 800 }, deviceScaleFactor: dpr });
     page.on('pageerror', error => errors.push(error.message));
     // Load the same runtime modules in a minimal document, without a second application scene.
-    await page.route('**/__point-field-test', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><style>body{margin:0;background:black}#field{position:absolute;inset:0}.prepared-point-field-stars>s{position:absolute;left:50%;top:50%;width:var(--point-tile-size);height:var(--point-tile-size);transform-origin:0 0;background-image:var(--point-atlas);text-decoration:none}</style><div id="field"><span id="end"></span></div>' }));
+    await page.route('**/__point-field-test', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><style>body{margin:0;background:black}#field{position:absolute;inset:0}.prepared-point-field-block>s{position:absolute;left:50%;top:50%;width:var(--point-tile-size);height:var(--point-tile-size);transform-origin:0 0;background-image:var(--point-atlas);text-decoration:none}</style><div id="field"><span id="end"></span></div>' }));
     await page.goto(`${origin}/__point-field-test`);
     await page.evaluate(async () => {
       const api = await import('/src/renderers/css/dist/testing.js');

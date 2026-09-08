@@ -50,6 +50,23 @@ function mount() {
 
 afterEach(() => vi.useRealTimers());
 
+test('camera viewport snapshots drive clipping and resize without reading layout after scene publication', () => {
+  const { host, labels } = mount();
+  Object.defineProperties(host, {
+    clientWidth: { get() { throw new Error('Publication flushed host layout'); } },
+    clientHeight: { get() { throw new Error('Publication flushed host layout'); } },
+  });
+  const publish = (widthPixels: number, heightPixels: number) => labels.publish({
+    world: world([0, 0, 300]), viewport: { ...viewport, widthPixels, heightPixels },
+    shellStats: [stats(.4), stats(.6)],
+  });
+  expect(publish(800, 600)).toHaveLength(3);
+  expect(publish(200, 600)).toHaveLength(1);
+  expect(publish(800, 600)).toHaveLength(3);
+  expect(publish(800, 20)).toHaveLength(0);
+  labels.destroy();
+});
+
 test('retained environment captions keep fixed 3D anchors while visibility, physical opacity and blockers fade reversibly', () => {
   vi.useFakeTimers();
   const { host, labels, nodes, clock } = mount(), retained = [...host.children, ...labels.root.children];

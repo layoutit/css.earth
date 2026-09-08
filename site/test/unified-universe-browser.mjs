@@ -159,7 +159,7 @@ async function snapshot(page) {
       sameDocument: probe.document === document && probe.timeOrigin === performance.timeOrigin,
       retained: probe.selectors.every((selector, i) => document.querySelector(selector) === probe.roots[i]) && probe.universe.every(node => node.isConnected),
       slices: document.querySelectorAll('.css-volume-mesh > s').length,
-      slots: document.querySelectorAll('.prepared-point-field-stars > s').length,
+      slots: document.querySelectorAll('.prepared-point-field-block > s').length,
       volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
       materialReady: diagnostic.runtime.selection().ready,
       pending: diagnostic.renderStats.textureStats.pendingInteractiveImageCount };

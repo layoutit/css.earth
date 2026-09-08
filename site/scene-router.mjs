@@ -1,3 +1,4 @@
+import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { requireSceneLifecycle } from "./scene-contract.mjs";
 import { objectAdapter } from "./object-adapter.mjs";
 import { mountPlanetShell } from "./planet-shell-client.mjs";
@@ -13,7 +14,6 @@ import * as applicationWorldContext from './application-world-context.mjs';
 import { selectionAtCamera, solarSystemFocus, watchOverviewSelection } from './overview-selection.mjs';
 import { createNavigationTiming } from './navigation-timing.mjs';
 
-const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
 export function createSceneRouter({
   stage,
@@ -139,7 +139,7 @@ export function createSceneRouter({
       let mount;
       mount = loaded.value(stage, {
         ...handoff?.mountOptions,
-        ...(worldContextMount ? { externalWorldContext: true } : {}),
+        ...(worldContextMount ? { externalWorldContext: true, viewport: worldContextMount.viewport } : {}),
         onMotionRequest: requestMotion,
         onError(error) {
           if (active === session && session.mount === mount) fail(session, error);
@@ -321,7 +321,9 @@ export function createSceneRouter({
         motionRequested: motionEnabled, reducedMotion: reducedMotionActive,
         targetWorldCamera: request.options.targetWorldCamera,
         preserveView: request.options.preserveView,
+        cameraViewport: worldContextMount?.viewport,
         timing: request.timing,
+        presentWorld: worldContextMount ? (world, viewport) => worldContextMount?.publish(world, viewport) : null,
       });
       const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
       if (loaded.cancelled || pending !== request) return false;
@@ -350,6 +352,7 @@ export function createSceneRouter({
       request.timing.mark(error?.name === 'AbortError' ? 'cancelled' : 'failed');
       if (pending !== request || request.controller.signal.aborted) return false;
       pending = null; request.controller.abort(); request.lifetime.destroy();
+      worldContextMount?.setNavigationIndicatorsVisible?.(true);
       if (active === source && source) {
         if (error?.preserveView === true) {
           const url = captureUrl();
@@ -428,6 +431,7 @@ export function createSceneRouter({
   }
 
   function publishSceneState() {
+    worldContextMount?.setNavigationIndicatorsVisible?.(!pending || pending.options.preserveView === true);
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
@@ -453,7 +457,7 @@ export function createSceneRouter({
       root.dataset.playing = String(sceneState === "ready" && !scenePaused);
     } else delete root.dataset.playing;
     shellOwner?.shell?.setPlaybackState?.(readPlayback());
-    if (DEVELOPMENT_DIAGNOSTICS) {
+    if (DIAGNOSTICS_ENABLED) {
       windowTarget.__cssEarth = Object.freeze({
         activeObjectId: objectId,
         get selectedObjectId() { return readSceneState().selectedObjectId; },

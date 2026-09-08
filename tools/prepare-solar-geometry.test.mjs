@@ -74,10 +74,11 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
 
 test('epoch refresh updates the rendered carrier while preserving source geometry, texture addresses and lens bindings', async () => {
   const { refreshSolidSceneEpoch } = await import('./objects/terrestrial-layers/solid-scene.mjs');
+  const { restoreDepthSource } = await import('./prepared-depth-partitions.mjs');
   const { prepareEclipticPresentationFrame } = await import('../src/platform/solar-presentation-frame.mjs');
   const read = async name => JSON.parse(await readFile(new URL(`../src/planets/mimas/${name}`, import.meta.url), 'utf8'));
   const config = await read('source/preparation/terrestrial.json');
-  const scene = await read('prepared/scene.json'), definition = await read('prepared/runtime.json');
+  const scene = await read('prepared/scene.json'), definition = restoreDepthSource(await read('prepared/runtime.json'));
   // An old surface carrier must actually change; a new descriptor alone cannot fix it.
   const oldTransform = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)';
   scene.systemTransform = oldTransform;
@@ -92,4 +93,20 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   for (const key of ['assets', 'controls', 'variants', 'materials', 'surfaceHit']) assert.equal(result.definition[key], definition[key], key);
   definition.tree.nodes.forEach((node, i) => { if (i !== index) assert.equal(result.definition.tree.nodes[i], node); });
   assert.deepEqual(await refreshSolidSceneEpoch({ config, ...result }), result, 'refresh is idempotent');
+});
+
+test('epoch refresh restores a compiled surface before updating its physical frame', async () => {
+  const { refreshSolidSceneEpoch } = await import('./objects/terrestrial-layers/solid-scene.mjs');
+  const { restoreDepthSource } = await import('./prepared-depth-partitions.mjs');
+  const read = async name => JSON.parse(await readFile(new URL(`../src/planets/phobos/${name}`, import.meta.url), 'utf8'));
+  const config = await read('source/preparation/terrestrial.json'), scene = await read('prepared/scene.json');
+  const definition = await read('prepared/runtime.json');
+  assert.ok(definition.depthPartitions?.groups.length > 1, 'exercise actual compiled source carriers');
+  const original = structuredClone(definition);
+  const expected = await refreshSolidSceneEpoch({ config, scene, definition: restoreDepthSource(definition) });
+  const actual = await refreshSolidSceneEpoch({ config, scene, definition });
+  assert.deepEqual(actual, expected);
+  assert.deepEqual(definition, original, 'refresh does not mutate the retained prepared bank');
+  assert.deepEqual(actual.definition.surfaceHit.triangles, definition.surfaceHit.triangles);
+  assert.deepEqual(actual.definition.assets, definition.assets);
 });

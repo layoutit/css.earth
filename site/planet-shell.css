@@ -169,6 +169,7 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
   height: auto;
   border-radius: 3px;
 }
+.planet-lens-texture:not([src]) { visibility: hidden; }
 
 .planet-surface-minimap {
   position: relative;
@@ -212,6 +213,7 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
 
 .planet-minimap-viewport {
   border: 1px solid rgb(255 255 255 / 50%);
+  background-image: var(--surface-preview-image, none);
   box-shadow: 0 0 0 1px rgb(0 0 0 / 55%);
   background-origin: border-box;
   background-repeat: repeat-x;
@@ -1109,6 +1111,18 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   align-items: center;
   gap: 8px;
 }
+
+.planet-diagnostic-record {
+  flex: 0 0 52px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.planet-diagnostic-record:hover { color: var(--shell-text-primary); }
+.planet-diagnostic-record[aria-pressed="true"] { color: #e98679; }
 
 .planet-view-scale {
   display: inline-flex;

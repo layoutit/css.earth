@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": -28.291007743853203,
+  "declinationDegrees": 8.728166345079066,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 67.5,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy: ecliptic J2000 lambda 337 deg, beta 19 deg, period 67.5 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. This is the archived prograde principal-axis model. The source research also permits a nearly mirrored retrograde solution; the pole and rotational sense are not unique. Near-pole-on observations constrain its unobserved southern shape less strongly. The period is 67.5 ± 6.0 h; a small non-principal-axis component was not excluded. No resolved optical surface map is supplied."
+}

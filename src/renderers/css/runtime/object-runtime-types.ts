@@ -47,7 +47,12 @@ export interface ObjectMountOptions {
   worldContext?: PerspectiveWorldContext;
   /** The application owns the contextual universe layer for this mount. */
   externalWorldContext?: boolean;
+  viewport?: import('../navigation/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;
+  /** The camera can accept the live application pose before surface activation completes. */
+  onNavigationReady?(navigation: import('./world-navigation-types.js').ObjectWorldNavigation): void;
+  /** Caller keeps the destination coarse until ready; direct/restored views stay atomic. */
+  progressiveActivation?: boolean;
   initialProjection?: import('../rendering/physical-projection.js').PhysicalProjection;
 }
 export interface PreparedNavigation { maximumZoom: number; camera?: OrbitStateUpdate; }

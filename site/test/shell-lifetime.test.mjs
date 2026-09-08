@@ -219,3 +219,21 @@ test('place-only search hides the empty Solar System card and restores it for ob
   assert.equal(item.hidden, false);
   shell.destroy();
 });
+
+test('flight completion and overview handoff preserve a newer active search', () => {
+  const f = fixture(), shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  shell.setObject({ id: 'first', name: 'First', apply() {} });
+  f.documentTarget.activeElement = search;
+  search.value = 'second'; search.dispatchEvent(new Event('input'));
+  shell.setObject({ id: 'first', name: 'First', apply() {} });
+  assert.equal(search.value, 'second');
+  assert.equal(f.selectors.get('.planet-information-panel').hidden, true);
+  shell.setOverview(true);
+  assert.equal(search.value, 'second');
+  f.documentTarget.activeElement = null;
+  shell.setOverview(false);
+  assert.equal(search.value, 'second', 'Moving focus to results does not surrender the query');
+  f.selectors.get('.planet-sidebar-view-all').dispatchEvent(new Event('click'));
+  assert.equal(search.value, 'First');
+  shell.destroy();
+});
