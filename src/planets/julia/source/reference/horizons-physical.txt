@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2789%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 89 Julia (A866 PA)            2026-Sep-07 20:32:57
+Rec #:      89 (+COV) Soln.date: 2026-Jun-05_03:08:29   # obs: 4596 (1866-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457808.5 ! 2017-Feb-24.00 (TDB)         Residual RMS= .29672
+   EC= .1843913735272607   QR= 2.079844547117264   TP= 2458032.8337830063
+   OM= 311.5600676473641   W=  45.47947957579336   IN= 16.12800726827992
+   A= 2.550052169153682    MA= 305.703084871794    ADIST= 3.020259791190099
+   PER= 4.07223            N= .242036284           ANGMOM= .026998802
+   DAN= 2.18133            DDN= 2.82912            L= 355.889363
+   B= 11.4235365           MOID= 1.10003996        TP= 2017-Oct-06.3337830063
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 72.7415            ROTPER= 11.387
+   H= 6.39                 G= .150                 B-V= .859
+                           ALBEDO= .189            STYP= K
+
+ASTEROID comments: 
+1: soln ref.= JPL#143, OCC=0
+2: source=ORB
+*******************************************************************************

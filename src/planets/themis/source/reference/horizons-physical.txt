@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2724%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 24 Themis (A853 GA)           2026-Sep-07 20:32:37
+Rec #:      24 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 6577 (1853-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458194.5 ! 2018-Mar-17.00 (TDB)         Residual RMS= .25262
+   EC= .125086008936354    QR= 2.74484878470776    TP= 2458627.2712732889
+   OM= 35.9439563022094    W=  106.8964635513056   IN= .7517800782537345
+   A= 3.137278421357517    MA= 283.2403641820211   ADIST= 3.529708058007273
+   PER= 5.55697            N= .177367678           ANGMOM= .030229678
+   DAN= 3.2047             DDN= 2.97986            L= 142.8417915
+   B= .7193251000000001    MOID= 1.75750995        TP= 2019-May-23.7712732889
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 99.                ROTPER= 8.374
+   H= 7.21                 G= .190                 B-V= .684
+                           ALBEDO= .067            STYP= B
+
+ASTEROID comments: 
+1: soln ref.= JPL#154, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2787%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 87 Sylvia (A866 KA)           2026-Sep-07 20:32:31
+Rec #:      87 (+COV) Soln.date: 2026-Jun-05_03:08:26   # obs: 7387 (1885-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458183.5 ! 2018-Mar-06.00 (TDB)         Residual RMS= .21243
+   EC= .09273906498295156  QR= 3.158964786406858   TP= 2457988.2050619442
+   OM= 73.04709042962104   W=  263.5300135595193   IN= 10.87674391668213
+   A= 3.481870170401967    MA= 29.62621706746326   ADIST= 3.804775554397075
+   PER= 6.49721            N= .151699872           ANGMOM= .03196039
+   DAN= 3.48838            DDN= 3.41622            L= 336.4597779
+   B= -10.806634           MOID= 2.17561007        TP= 2017-Aug-22.7050619442
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 126.5255           ROTPER= 5.184
+   H= 6.93                 G= .150                 B-V= .710
+                           ALBEDO= .046            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#130, OCC=0
+2: source=ORB
+*******************************************************************************

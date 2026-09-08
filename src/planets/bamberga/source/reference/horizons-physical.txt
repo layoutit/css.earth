@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27324%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               324 Bamberga (A892 DA)          2026-Sep-07 20:32:35
+Rec #:     324 (+COV) Soln.date: 2026-Jun-05_03:27:33   # obs: 8794 (1892-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458021.5 ! 2017-Sep-25.00 (TDB)         Residual RMS= .21535
+   EC= .3404683479579585   QR= 1.768472107614467   TP= 2458200.2376208361
+   OM= 327.8600664292788   W=  44.31691539722084   IN= 11.10088660606461
+   A= 2.681405967611903    MA= 319.8785898047012   ADIST= 3.594339827609339
+   PER= 4.39088            N= .224470987           ANGMOM= .02648554
+   DAN= 1.90622            DDN= 3.13403            L= 11.6362006
+   B= 7.730377             MOID= .78524899         TP= 2018-Mar-22.7376208361
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 110.3455           ROTPER= 29.43
+   H= 7.19                 G= .090                 B-V= .695
+                           ALBEDO= .050            STYP= CP
+
+ASTEROID comments: 
+1: soln ref.= JPL#178, OCC=0
+2: source=ORB
+*******************************************************************************
