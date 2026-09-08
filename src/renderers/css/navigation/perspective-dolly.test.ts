@@ -3,6 +3,41 @@ import { createPerspectiveDolly, levelOfDetailFor } from './perspective-dolly.js
 import scene from '../../../planets/mercury/prepared/scene.json';
 import earth from '../../../planets/earth/prepared/runtime.json';
 
+it('conditions close CSS depth without moving projected points or the physical camera', () => {
+  const width=1440,height=1000,focal=1247;
+  const view={getComputedStyle:()=>({perspective:`${focal}px`,perspectiveOrigin:`${width/2}px ${height/2}px`})};
+  const make=(left=0)=>({style:{},ownerDocument:{defaultView:view},getBoundingClientRect:()=>({width,height,x:left,y:0,left,top:0})});
+  const sceneElement={style:{} as {transform:string}};
+  let sampledCssScale=1;
+  const dolly=createPerspectiveDolly({cameraPlan:earth.camera,heliocentric:null,
+    preparedSurface:Object.assign(()=>true,{radialDistance:()=>80/earth.camera.sceneScale,
+      point:(x:number)=>[x*sampledCssScale,0,0],surfacePointRadius:()=>80*sampledCssScale}),
+    worldContext:{frame:{referenceFrame:'test',epochJdTt:1,originM:[0,0,0],presentationToReference:[1,0,0,0,1,0,0,0,1],metersPerUnit:1,bodyRadiusM:100},bodyRadiusUnits:100,kilometersPerUnit:.001,maximumExtentUnits:1e8},
+    cameraElement:make(170),skyElement:make(),stage:make(),sceneElement,
+  } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
+  const identity={m11:1,m21:0,m31:0,m12:0,m22:1,m32:0,m13:0,m23:0,m33:1} as DOMMatrix;
+  dolly.setBodyCenter([54,-4,-72]);
+  const before=dolly.camera.state.distance, published=dolly.publish(identity,'none');
+  expect(dolly.camera.state.distance).toBe(before);
+  expect(dolly.bodyCenter()).toEqual([54,-4,-72]);
+  const translation=sceneElement.style.transform.match(/translate3d\(([^)]+)\)/)![1]!.split(',').map(parseFloat);
+  const scale=sceneElement.style.transform.match(/scale3d\(([^)]+)\)/)![1]!.split(',').map(Number);
+  expect(scale[0]).toBeGreaterThan(earth.camera.sceneScale);
+  expect(scale[1]).toBe(scale[0]);expect(scale[2]).toBe(scale[0]);
+  sampledCssScale=scale[0]!/earth.camera.sceneScale;
+  expect(dolly.surfaceMetrics()!.metersPerPixel).toBeCloseTo(1,10);
+  expect(dolly.trackball().surfacePointRadius!(0,0)).toBeCloseTo(80,10);
+  for(const point of [[0,0,3000],[200,-300,2800],[-100,100,3100]]){
+    const physical=published.projection.eyeFromScene;
+    const eye=[0,1,2].map(axis=>physical[axis]!*point[0]!+physical[axis+4]!*point[1]!+physical[axis+8]!*point[2]!+physical[axis+12]!);
+    const css=point.map((value,axis)=>translation[axis]!+scale[axis]!*value);
+    for(const axis of [0,1]){
+      const origin=published.projection.principalOffsetPixels[axis]!;
+      expect(origin+focal*(css[axis]!-origin)/(focal-css[2]!)).toBeCloseTo(origin+focal*eye[axis]!/-eye[2]!,6);
+    }
+  }
+});
+
 it('prepared clearance follows a changed face inside the enclosing sphere and preserves the world-camera ray', () => {
   const width = 1440, height = 1000, focal = 1247;
   const view = { getComputedStyle: () => ({ perspective: `${focal}px`, perspectiveOrigin: `${width/2}px ${height/2}px` }) };

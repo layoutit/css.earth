@@ -257,6 +257,7 @@ export function createPerspectiveDolly({
   let systemOpacity = 0;
   let sunMarkerOpacityValue = 0;
   let publishedSceneTransform: string | null = null;
+  let publishedCssScale = 1;
   let transformWrites = 0;
 
   const measure = () => {
@@ -409,7 +410,7 @@ export function createPerspectiveDolly({
       const bounds = cameraElement.getBoundingClientRect(), x = bounds.x + bounds.width / 2, y = bounds.y + bounds.height / 2;
       const a = preparedSurface.point(x - .5, y), b = preparedSurface.point(x + .5, y);
       return { altitudeM: Math.max(0, cameraState.distance - surfaceDistanceOrigin) * kilometersPerUnit * 1000,
-        metersPerPixel: a && b ? Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) * kilometersPerUnit * 1000 : null };
+        metersPerPixel: a && b ? Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) / publishedCssScale * kilometersPerUnit * 1000 : null };
     },
     setZoomOutCentering(enabled: boolean) { zoomOutCentering = enabled; },
     setBodyCenter(next: PositionM) {
@@ -482,16 +483,26 @@ export function createPerspectiveDolly({
         });
       }
       const [bodyX, bodyY, bodyZ] = projection?.body.translate ?? genericTranslation ?? [0, 0, focal - distance];
+      // Keep close surface faces out of CSS's tiny eye-space depth range.
+      // Uniformly rescaling XYZ about the perspective eye preserves x/-z and
+      // y/-z, including off-axis framing. Physical input/paging coordinates
+      // below stay unchanged. The existing bounded zoom supplies the scale.
+      const cssScale = surfaceDolly ? Math.max(1, camera.state.zoom) : 1;
+      const cssX = principalOffset[0] + (bodyX - principalOffset[0]) * cssScale;
+      const cssY = principalOffset[1] + (bodyY - principalOffset[1]) * cssScale;
+      const cssZ = focal + (bodyZ - focal) * cssScale;
+      const sceneScale = cameraPlan.sceneScale * cssScale;
       const transform =
-        `translate3d(${formatNumber(bodyX)}px, ${formatNumber(bodyY)}px, ` +
-        `${formatNumber(bodyZ)}px) ` +
-        `scale3d(${cameraPlan.sceneScale}, ${cameraPlan.sceneScale}, ` +
-        `${cameraPlan.sceneScale}) ${scenePresentation}`;
+        `translate3d(${formatNumber(cssX)}px, ${formatNumber(cssY)}px, ` +
+        `${formatNumber(cssZ)}px) ` +
+        `scale3d(${sceneScale}, ${sceneScale}, ` +
+        `${sceneScale}) ${scenePresentation}`;
       if (transform !== publishedSceneTransform) {
         sceneElement.style.transform = transform;
         publishedSceneTransform = transform;
         transformWrites += 1;
       }
+      publishedCssScale = cssScale;
       sceneElement.hidden = projection === null ? false : !projection.body.visible;
       if (projection && heliocentric) {
         heliocentric.setOrbitOpacity(orbitLineOpacity(
@@ -567,7 +578,10 @@ export function createPerspectiveDolly({
         // Pointer samples are re-based to the centre: tumble everywhere.
         tumbleOnly: cameraPlan.drag?.model === "screen-axis-tumble",
         ...(cameraPlan.drag?.model === "surface-grab" && projectedBody ? {
-          ...(preparedSurface ? { surfacePointRadius: preparedSurface.surfacePointRadius } : {}),
+          ...(preparedSurface ? { surfacePointRadius: (x: number, y: number) => {
+            const radius = preparedSurface.surfacePointRadius(x, y);
+            return radius === null ? null : radius / publishedCssScale;
+          } } : {}),
           surfaceSphere: { radius: bodyRadius, center: [projectedBody.translate[0] - principalOffset[0],
             projectedBody.translate[1] - principalOffset[1], projectedBody.translate[2] - focal] },
         } : {}),
