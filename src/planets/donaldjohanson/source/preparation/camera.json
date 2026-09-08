@@ -1,0 +1,50 @@
+{
+  "format": "llorri-camera",
+  "image": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+  "output": "observations/llorri-camera.json",
+  "mesh": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
+  "bodyId": 20052246,
+  "kernels": [
+    "reference/naif0012.tls",
+    "reference/donaldjohanson_v12.tpc"
+  ],
+  "references": [
+    "reference/lor_0798443290_04598_00035_1x1_sci_03.xml",
+    "reference/coordinate-system.pdf"
+  ],
+  "landmarks": [
+    {
+      "name": "Boxgrove Saxon",
+      "pixelOneBased": [
+        588,
+        124
+      ],
+      "latitude": 11.22,
+      "longitude": 337.97,
+      "radiusKm": 3.538,
+      "role": "fit"
+    },
+    {
+      "name": "Mungo",
+      "pixelOneBased": [
+        608,
+        85
+      ],
+      "latitude": 10.78,
+      "longitude": 342.45,
+      "radiusKm": 3.636,
+      "role": "fit"
+    },
+    {
+      "name": "Narmada",
+      "pixelOneBased": [
+        607,
+        351
+      ],
+      "latitude": 22.52,
+      "longitude": 320.65,
+      "radiusKm": 2.532,
+      "role": "holdout"
+    }
+  ]
+}

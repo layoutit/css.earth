@@ -11,7 +11,7 @@ const read=async path=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Donaldjohanson retains original source pins and DSK acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'donaldjohanson',planetName:'Donaldjohanson',sourceRoot:root});await source.verify();
  const plan=await read('preparation/acquisition.json');
- for(const input of source.manifest.inputs)if(!input.path.endsWith('.obj.gz'))assert.ok(plan.operations.some(step=>step.path===input.path));
+ for(const input of source.manifest.inputs)if(!input.path.endsWith('.obj.gz')&&!['preparation/camera.json','observations/llorri-camera.json'].includes(input.path))assert.ok(plan.operations.some(step=>step.path===input.path));
  const dsk=await read('reference/dsk-inspection.json');assert.deepEqual([dsk.center,dsk.frame,dsk.surface,dsk.type],[20052246,20052246,200522461,2]);
 });
 test('Donaldjohanson preserves the Lucy mesh scale and withholds ambiguous radial elevation',async()=>{
