@@ -51,6 +51,10 @@ const SATELLITES = [
   ['europa', '502', '500@599'],
   ['ganymede', '503', '500@599'],
   ['callisto', '504', '500@599'],
+  ['amalthea', '505', '500@599'],
+  ['thebe', '514', '500@599'],
+  ['adrastea', '515', '500@599', 'daily'],
+  ['metis', '516', '500@599', 'daily'],
   ['mimas', '601', '500@699'],
   ['enceladus', '602', '500@699'],
   ['tethys', '603', '500@699'],
@@ -87,7 +91,7 @@ const SATELLITES = [
 const SATELLITE_EPOCHS = [2415033.25, 2433295.75, 2451545.0, 2461041.5, 2469820.25, 2488056.25]
 
 // Six independent epochs inside the 2020-01-01 .. 2032-01-01 current-era fit
-// used for the fast and resonant added Saturn moons. None is on its 5-day grid.
+// used for the fast and resonant added inner moons. None is on its 5-day grid.
 const LIMITED_SATELLITE_EPOCHS = [2458862.25, 2460310.75, 2461041.5, 2461772.25, 2462502.75, 2463219.25]
 
 // Pan's source supports 1949-12-27 .. 2050-01-09 and its simple fit remains
@@ -135,7 +139,9 @@ for (const [name, description, command, center, epochs] of targets) {
 }
 for (const [id, command, center, range] of SATELLITES) {
   const epochs =
-    range === 'cassini-era'
+    range === 'daily'
+      ? [2458862.25, 2460310.75, 2461041.625, 2461772.25, 2462502.75, 2463219.25]
+      : range === 'cassini-era'
       ? [2453383.25, 2454113.75, 2455197.25, 2456658.75, 2457389.25, 2458110.25]
       : range === 'limited'
       ? LIMITED_SATELLITE_EPOCHS

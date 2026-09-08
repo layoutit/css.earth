@@ -205,3 +205,10 @@ residual at the six independent vector epochs is 1.021 km (regression guard
 2 km); this is a sampled residual, not a universal accuracy bound. The
 Pluto-centred child frame uses the same unit/containment rule as other moons.
 Pluto's existing heliocentric elements target its centre, not its barycentre.
+
+The four inner Jovian moons use the same Horizons-fitted precessing ellipse.
+Amalthea and Thebe use the 1900–2100 fit; Metis and Adrastea use daily samples
+over 2020–2032 because their osculating phase cannot be unwrapped at the older
+coarse cadence. Independent fixture maximum residuals are 1,267.43 km
+(Amalthea), 530.07 km (Thebe), 972.87 km (Adrastea), and 946.81 km (Metis).
+These are fit residuals, not measured orbital uncertainties.
