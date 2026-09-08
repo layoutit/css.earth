@@ -90,7 +90,7 @@ test("requires every registered object package file", async () => {
 });
 
 test("validates local editorial identity and provenance", () => {
-  const planet = implemented[0];
+  const planet = implemented.find(object => object.id === "sun");
   const source = planetInformationSource(planet.id);
   const valid = {
     schemaVersion: 1,

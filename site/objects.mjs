@@ -3,6 +3,10 @@ import gaspraDescriptor from "../src/planets/gaspra/object.json" with { type: "j
 import mathildeDescriptor from "../src/planets/mathilde/object.json" with { type: "json" };
 import lutetiaDescriptor from "../src/planets/lutetia/object.json" with { type: "json" };
 import steinsDescriptor from "../src/planets/steins/object.json" with { type: "json" };
+import daphnisDescriptor from "../src/planets/daphnis/object.json" with { type: "json" };
+import calypsoDescriptor from "../src/planets/calypso/object.json" with { type: "json" };
+import telestoDescriptor from "../src/planets/telesto/object.json" with { type: "json" };
+import heleneDescriptor from "../src/planets/helene/object.json" with { type: "json" };
 import panDescriptor from "../src/planets/pan/object.json" with { type: "json" };
 import atlasDescriptor from "../src/planets/atlas/object.json" with { type: "json" };
 import prometheusDescriptor from "../src/planets/prometheus/object.json" with { type: "json" };
@@ -54,6 +58,30 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("daphnis", "Daphnis", "satellite", "#c3bfb7", 9.58,
+    "Explore Daphnis in 3D with Cassini imagery and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(daphnisDescriptor);
+    }, daphnisDescriptor.properties.worldFrame),
+
+  object("calypso", "Calypso", "satellite", "#c3bfb7", 9.58,
+    "Explore Calypso in 3D with Cassini imagery and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(calypsoDescriptor);
+    }, calypsoDescriptor.properties.worldFrame),
+
+  object("telesto", "Telesto", "satellite", "#c3bfb7", 9.58,
+    "Explore Telesto in 3D with Cassini imagery and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(telestoDescriptor);
+    }, telestoDescriptor.properties.worldFrame),
+
+  object("helene", "Helene", "satellite", "#c3bfb7", 9.58,
+    "Explore Helene in 3D with Cassini imagery and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(heleneDescriptor);
+    }, heleneDescriptor.properties.worldFrame),
+
   object("sun", "Sun", "star", "#f5a623", 0,
     "Explore the Sun in 3D with cssEarth. Discover our nearest star, its glowing atmosphere, and the science behind the center of the solar system.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

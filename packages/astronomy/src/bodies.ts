@@ -107,6 +107,11 @@ export const BODIES: Record<BodyId, BodyData> = {
   phoebe: body('phoebe', 'Phoebe', '609', 106.5, 0.55479, 'saturn'),
   janus: body('janus', 'Janus', '610', 89.2, 0.12662, 'saturn'),
   epimetheus: body('epimetheus', 'Epimetheus', '611', 58.2, 0.03514, 'saturn'),
+  helene: body('helene', 'Helene', '612', 18, 0.00048, 'saturn'),
+  // Calypso radius: NASA profile; GM: Horizons target 614 OBJ_DATA.
+  calypso: body('calypso', 'Calypso', '614', 10.7, 0.00024, 'saturn'),
+  // Daphnis: WGCCRE radii 4.6 x 4.5 x 2.8 km; no published Horizons GM.
+  daphnis: body('daphnis', 'Daphnis', '635', 3.8, 0, 'saturn'),
   // Telesto is absent from JPL's consolidated physical-parameters table;
   // Horizons' target 613 OBJ_DATA block gives GM 0.00048 km^3/s^2 and the
   // triaxial radii 16.3 x 11.8 x 9.8 km, whose geometric mean is 12.35 km.
