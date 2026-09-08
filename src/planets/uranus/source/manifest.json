@@ -273,8 +273,8 @@
     {
       "id": "uranus-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 11380,
-      "expectedSha256": "c830b553957323cb06615011f17fb5ba607a9156f1208323431e7c3e570d3c88",
+      "expectedBytes": 14161,
+      "expectedSha256": "9e7314e33567e25fa03580e56926f5767522af3387346c31e687604e39690709",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -438,6 +438,13 @@
       "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
       "expectedBytes": 1271,
       "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1334,
+      "expectedSha256": "18f2299be544ea2387c5e3c6c45575e9f486c2d44c1e377d251ded6aad778c07"
     }
   ]
 }

@@ -371,8 +371,8 @@
     {
       "id": "venus-object-content",
       "path": "content/object.json",
-      "expectedSha256": "ba1bc42dfa81ab7deb06687c45870a4f0354a68cf0851378d01ccd885e0240f3",
-      "expectedBytes": 13571,
+      "expectedSha256": "2c5f2088d7dd94ec9b9dc1eef58249c961a601d2dfe633bb4eb14693d4a0fa6d",
+      "expectedBytes": 16327,
       "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -526,6 +526,13 @@
       "expectedSha256": "8f37dddd6ad631aad027079eecc40b390323dbb2ce99302e6829797646c26f66",
       "expectedBytes": 1570,
       "purpose": "Venera institutional provenance, automatic-camera public-domain basis, and restoration exclusion"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1427,
+      "expectedSha256": "9cc9d8b1cbf9eea41988fe9325b26b0a5feec6b0c5bba8368d9408ec93509216"
     }
   ]
 }

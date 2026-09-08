@@ -1,0 +1,44 @@
+{
+  "modelId": 6218,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6218",
+  "fields": {
+    "ID": "6218",
+    "Asteroid ID": "(666) Desdemona",
+    "Lambda": "10",
+    "Beta": "39",
+    "Period": "14.60796",
+    "YORP": "",
+    "JD0": "2450856",
+    "Phi0": "0",
+    "Light Scattering Model": "H",
+    "LSM Parameter 1": "0.11",
+    "LSM Parameter 2": "-0.341",
+    "LSM Parameter 3": "0.05",
+    "LSM Parameter 4": "1.587",
+    "LSM Parameter 5": "20",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "28.4",
+    "Equivalent Diameter Error": "0.9",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "70",
+    "Visual Albedo": "0.111",
+    "Visual Albedo Error": "0.009",
+    "Craters Angle": "40",
+    "Craters Surface Density": "1",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2022-10-18",
+    "Comment": "",
+    "Created": "2022-10-18 09:25:38",
+    "Modified": "2022-10-18 09:26:59"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/67359/IAUspin",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/67360/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/67361/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/664"
+  ]
+}

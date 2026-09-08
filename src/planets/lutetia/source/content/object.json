@@ -30,8 +30,8 @@
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "2.435 AU (mean)"
+        "label": "Solar semimajor axis",
+        "value": "2.435 AU"
       },
       {
         "id": "orbital-period",
@@ -41,10 +41,22 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "8.168270 hours"
+        "value": "8.168 hours"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.19",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-08",
+          "path": "source/reference/horizons-physical.txt"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -53,7 +65,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Rosetta and Earth-based shape model",
+        "description": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
         "title": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
         "thumbnail": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
         "surface": "lutetia-shape-surface@2x.webp",
@@ -68,7 +80,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
+        "description": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
         "title": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
         "thumbnail": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
         "surface": "lutetia-elevation-surface@2x.webp",

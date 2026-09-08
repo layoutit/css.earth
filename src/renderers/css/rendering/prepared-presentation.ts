@@ -1,6 +1,7 @@
 import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
 import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 import { createPreparedFacing, type PreparedFacingPlane } from './prepared-facing.js';
+import { createPreparedDepthPartitions, type PreparedDepthPartitions } from './prepared-depth-partitions.js';
 import type { ObjectSelection } from "../runtime/object-contract.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
 import type { PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
@@ -22,6 +23,8 @@ export type PreparedWrite = { target: number; name: string } & (
 export interface PreparedSelectionNavigation { maximumZoom: number; camera?: { controlPitch: number; controlYaw: number; zoom: number }; }
 export interface PreparedVariant { when: Readonly<Record<string, ObjectSelection[string]>>; required: readonly string[]; materials: readonly PreparedMaterialSelection[]; writes: readonly PreparedWrite[]; navigation?: PreparedSelectionNavigation; }
 export interface PreparedTree {
+  /** Offline first-paint batches. Runtime restores these exact retained leaves. */
+  activationGroups?: readonly (readonly number[])[];
   nodes: readonly { tag: string; parent: number; className: string | null; style: string; properties: readonly number[]; attributes: Readonly<Record<string, string>> }[];
   properties: readonly { name: string; value: string; custom: boolean }[]; camera: number; scene: number; stageClasses: readonly string[];
 }
@@ -43,6 +46,7 @@ export interface PreparedPresentationDefinition {
   /** Authored infinite motion, resolved from source CSS during preparation. */
   motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
   facing?: readonly PreparedFacingPlane[];
+  depthPartitions?: PreparedDepthPartitions;
   surfaceHit?: PreparedSurfaceHit;
 }
 export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; }
@@ -51,6 +55,7 @@ export interface PreparedFramePublication { selection: ObjectSelection; view: Pr
 
 import { preparedScenePitch } from "@cssearth/engine";
 import { createPreparedMaterialPublisher } from "./prepared-material.js";
+import { prepareConnectedActivation } from './prepared-activation.js';
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.js";
 
 const matches = (variant: PreparedVariant, selection: ObjectSelection) => Object.entries(variant.when).every(([name, value]) => selection[name] === value);
@@ -94,7 +99,7 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 
 // No geometry, atlas addressing, band grouping, source conversion, or package
 // callbacks enter this builder. The ordered records are final prepared DOM.
-export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('./physical-projection.js').PhysicalProjection) {
+export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('./physical-projection.js').PhysicalProjection, progressiveActivation = false) {
   const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
     : buildPreparedTree(definition.tree, stage.ownerDocument, context.own);
   const cameraElement = nodes[definition.tree.camera], sceneElement = nodes[definition.tree.scene];
@@ -117,8 +122,13 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     const previous = stage.classList.contains(name);
     context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
   }
+  if (progressiveActivation && !definition.tree.activationGroups) throw new TypeError('Flight activation requires prepared groups.');
+  const activate = prepareConnectedActivation(preparedTree && progressiveActivation
+    ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own);
   const publishFacing = createPreparedFacing(definition.facing ?? [], nodes);
+  const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
   if (initialProjection) publishFacing(initialProjection);
+  if (initialProjection) publishDepth(initialProjection);
   // Disable CSS-owned motion before attachment. Prepared handles below own its
   // clock, pause state and disposal without forcing live style discovery.
   for (const plan of definition.motion ?? []) nodes[plan.target].style.animation = 'none';
@@ -144,7 +154,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const round = (value: number, precision: number | null) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
   const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = (index: number) => index === -1 ? stage : nodes[index];
-  return Object.freeze({ cameraElement, sceneElement,
+  return Object.freeze({ cameraElement, sceneElement, activate,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
@@ -174,6 +184,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       selectionPublications++;
     },
     publishFrame({ selection, view, resources, plan }: PreparedFramePublication) {
+      publishDepth(view.projection);
       publishFacing(view.projection);
       // The camera's published level of detail (a perspective dolly, see
       // perspective-dolly.mjs); before its first publication the geometry

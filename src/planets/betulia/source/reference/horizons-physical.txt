@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271580%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               1580 Betulia (1950 KA)          2026-Sep-07 22:14:11
+Rec #:    1580 (+COV) Soln.date: 2026-Aug-04_06:19:35   # obs: 2255 (1952-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458437.5 ! 2018-Nov-15.00 (TDB)         Residual RMS= .28689
+   EC= .4876450363920464   QR= 1.125550138404973   TP= 2458355.9976530364
+   OM= 62.29282211204634   W=  159.5053229444916   IN= 52.09841110261239
+   A= 2.196817086495969    MA= 24.67080622740538   ADIST= 3.268084034586965
+   PER= 3.25611            N= .302700562           ANGMOM= .022259404
+   DAN= 3.08239            DDN= 1.1494             L= 229.3610121
+   B= 16.0376191           MOID= .135144           TP= 2018-Aug-25.4976530364
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 2.9                ROTPER= 6.1324
+   H= 14.54                G= 0.                   B-V= .656
+                           ALBEDO= .080            STYP= C
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -2.942167895981E-15 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#403, OCC=0           radar( 5 delay, 7 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************

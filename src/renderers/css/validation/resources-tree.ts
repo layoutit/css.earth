@@ -39,7 +39,7 @@ export function ancestor(child: number, parent: number, tree: PreparedTree): boo
 }
 const unsupportedStyle = /\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:|(?:linear|radial|conic)-gradient\s*\(/i;
 export function requireTree(value: unknown): asserts value is PreparedTree {
-  const tree = record(value, 'tree', ['nodes', 'properties', 'camera', 'scene', 'stageClasses']);
+  const tree = record(value, 'tree', ['nodes', 'properties', 'camera', 'scene', 'stageClasses', 'activationGroups']);
   const properties = array(tree.properties, 'prepared style properties');
   for (const input of properties) {
     const property = record(input, 'prepared property', ['name', 'value', 'custom']);
@@ -75,6 +75,18 @@ export function requireTree(value: unknown): asserts value is PreparedTree {
   if (!owned || cameraCount !== 1 || sceneCount !== 1 || !/(?:^|\s)polycss-camera(?:\s|$)/.test(classes[camera]) ||
       !/(?:^|\s)polycss-scene(?:\s|$)/.test(classes[scene])) fail('one camera root must own the unique scene');
   array(tree.stageClasses, 'stage classes').forEach(item => text(item, 'stage class'));
+  if (tree.activationGroups !== undefined) {
+    const containers = new Set(parents), activated = new Set<number>();
+    for (const input of array(tree.activationGroups, 'activation groups')) {
+      const group = array(input, 'activation group');
+      if (!group.length || group.length > 64) fail('activation group must contain 1 to 64 leaves');
+      for (const input of group) {
+        const target = integer(input, 'activation target');
+        if (target >= nodes.length || containers.has(target) || target === camera || target === scene || activated.has(target)) fail('activation target must be a unique retained leaf');
+        activated.add(target);
+      }
+    }
+  }
 }
 export function requireWrite(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>): asserts value is PreparedWrite {
   const binding = record(value, 'selection binding', ['kind', 'target', 'name', 'value', 'resource', 'quoted']);

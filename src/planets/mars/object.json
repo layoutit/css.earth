@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3d3d17b682277acc367f88d50a108b6abf49d3dda72b768e9aa745efca524a78"
+    "sha256": "28c4f88e874fb861805a3aca4667133cfdedc5e0c5af61c6af2b4740234b86ff"
   },
   "id": "mars",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "dfde182e10762c6304bc054bcd653aae99947a81b4cb66c1d1465ed122485769"
+          "sha256": "d5bbb1f85e50f6fd5ced773093faa5d369179e553df255dd3e659febaa6c2712"
         },
         {
           "id": "ellipsoid",
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "fdfd85a044740c892885f2eed15ef969282c08cf3137680862ffd4b2bbf86529"
+          "sha256": "fc92417953152dfee46e3ac129ace24800b259b8fe69d67e1be5021eb2f31d8b"
         },
         {
           "id": "charts",

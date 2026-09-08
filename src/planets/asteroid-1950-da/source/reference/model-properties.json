@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/29075_1950DA/busch.etal.2007.1950da.pdf",
+  "diameterKm": 1.3,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 2.1216,
+  "poleEclipticJ2000Degrees": [
+    187.4,
+    -89.5
+  ],
+  "limitations": "This view uses the published 2007 retrograde reconstruction. The 2014 Yarkovsky analysis rules out the prograde alternative. About 30% of the retrograde model surface was unseen or seen at incidence angles above 75 degrees in the original observations, so that region depends on the model assumptions. No optical surface map is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/1950DA_RetrogradeModel.wf",
+    "vertices": 510,
+    "faces": 1016,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.589121
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      1.449683,
+      1.597741,
+      1.197445
+    ],
+    "volumeCubicKm": 1.1456495421769999,
+    "volumeEquivalentRadiusKm": 0.6491141237975618,
+    "radialRangeKm": [
+      0.5273988108414731,
+      0.8257535625160813
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 1016,
+    "ambiguous": 0,
+    "maxErrorMeters": 3.410605131648481e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1016,
+    "sourceVertices": 510,
+    "weldedVertices": 510,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 11,
+    "estimatedErrorMeters": 10.565597534179688,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1145855170.31827
+    }
+  }
+}

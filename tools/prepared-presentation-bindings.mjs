@@ -1,10 +1,14 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { chromium } from 'playwright';
+import { prepareActivationGroups } from './prepared-activation-groups.mjs';
+import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mjs';
+import { verifyDepthStyles } from './prepared-depth-styles.mjs';
 
 /** Resolve authored motion and immutable leaf facing offline. Runtime receives
  * explicit animation handles and planes, never a live style discovery pass. */
-export async function preparePresentationBindings(definition, root) {
+export async function preparePresentationBindings(definition, root, { onDepthResult } = {}) {
+  definition = restoreDepthSource(definition);
   const pagePath = resolve(root, 'site/pages', `${definition.id}.astro`);
   const page = await readFile(pagePath, 'utf8');
   const styles = await Promise.all([...page.matchAll(/import\s+["']([^"']+\.css)["']/g)]
@@ -89,10 +93,75 @@ export async function preparePresentationBindings(definition, root) {
         return length > 0 && plane.every(Number.isFinite) && Number.isFinite(tolerance)
           ? { plane: plane.map(value => value / length), tolerance } : null;
       }
+      let depthReason;
+      const rejectDepth = reason => { depthReason = reason; return null; };
+      function depthSurface() {
+        depthReason = null;
+        const source = definition.surfaceHit;
+        if (!source) return rejectDepth('no triangle surface contract');
+        if (definition.pageLayers?.length || definition.motionFrame?.length) return rejectDepth('layered or moving surface');
+        const body = nodes[source.target], leaves = [...body.children].map(node => index.get(node));
+        if (leaves.length <= 64 || leaves.length !== source.triangles.length) return rejectDepth('leaf count or topology');
+        const chain = new Set();
+        let matrix = new DOMMatrix();
+        for (let cursor = source.target; cursor !== definition.tree.scene;) {
+          if (cursor < 0 || dynamic.has(cursor)) return rejectDepth('dynamic ancestry');
+          chain.add(cursor);
+          const style = getComputedStyle(nodes[cursor]);
+          if (style.opacity !== '1' || style.perspective !== 'none' || style.translate !== 'none' || style.rotate !== 'none' || style.scale !== 'none') return rejectDepth('unsupported ancestor projection');
+          const origin = style.transformOrigin.split(' ').map(parseFloat);
+          matrix = new DOMMatrix().translate(origin[0], origin[1], origin[2] ?? 0)
+            .multiply(new DOMMatrix(style.transform === 'none' ? undefined : style.transform))
+            .translate(-origin[0], -origin[1], -(origin[2] ?? 0)).multiply(matrix);
+          cursor = definition.tree.nodes[cursor].parent;
+        }
+        const affected = new Set([definition.tree.scene, ...chain, ...leaves]);
+        // Frame-owned attributes/properties can alter cloned ancestor selectors
+        // or material variables. Only the common stage/camera publishers may
+        // affect these static groups; unsupported local owners keep native depth.
+        if (definition.viewBindings.some(binding => affected.has(binding.target))) return rejectDepth('frame-owned local binding');
+        // A static surface must be one independent presentation. Siblings,
+        // animated shells and layered geometry keep their original depth space.
+        for (const node of nodes[definition.tree.scene].querySelectorAll('*')) {
+          const id = index.get(node);
+          if (!chain.has(id) && !leaves.includes(id)) return rejectDepth('other scene descendants');
+          for (const pseudo of ['::before', '::after']) if (!['none', 'normal'].includes(getComputedStyle(node, pseudo).content)) return rejectDepth('generated scene content');
+        }
+        const frontSigns = [];
+        for (const [face, target] of leaves.entries()) {
+          if (!facingPlane(target)) return rejectDepth('unresolved static facing');
+          const style = getComputedStyle(nodes[target]);
+          if (!style.transformOrigin.split(' ').every(value => parseFloat(value) === 0)) return rejectDepth('offset leaf origin');
+          if (style.cornerTopLeftShape !== 'bevel' || style.cornerTopRightShape !== 'bevel' ||
+              style.borderTopLeftRadius !== '50% 100%' || style.borderTopRightRadius !== '50% 100%') return rejectDepth('non-triangle leaf');
+          const width = parseFloat(style.width), height = parseFloat(style.height);
+          const inverse = new DOMMatrix(style.transform).inverse();
+          const [a, b, c] = source.triangles[face];
+          const u = b.map((v, axis) => v - a[axis]), v = c.map((value, axis) => value - a[axis]);
+          const normal = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]];
+          const facing = [inverse.m13, inverse.m23, inverse.m33];
+          const alignment = normal.reduce((sum, value, axis) => sum + value * facing[axis], 0) / (Math.hypot(...normal) * Math.hypot(...facing));
+          if (!Number.isFinite(alignment) || Math.abs(alignment) < 0.999999) return rejectDepth('source and rendered facing differ');
+          frontSigns.push(alignment > 0 ? 1 : -1);
+          // Prove that source face i is carried by leaf i, rather than assuming
+          // that a hit-test mesh happens to share the renderer's ordering.
+          for (const vertex of source.triangles[face]) {
+            const p = inverse.transformPoint(new DOMPoint(...vertex));
+            const u = p.x / width, v = p.y / height;
+            // CSSOM matrix serialization rounds to six significant digits.
+            // Bound the plane check relative to the source coordinate scale;
+            // the in-triangle check remains in normalized texture coordinates.
+            const planeTolerance = 1e-5 * Math.max(1, ...vertex.map(Math.abs));
+            if (![u, v, p.z].every(Number.isFinite) || Math.abs(p.z) > planeTolerance ||
+                v < -1e-4 || v > 1.0001 || Math.abs(u - 0.5) > v * 0.5 + 1e-4) return rejectDepth('source face is outside its rendered leaf');
+          }
+        }
+        return { target: source.target, leaves, frontSigns, bodyFromScene: Array.from(matrix.inverse().toFloat64Array()) };
+      }
       // Preserve the default CSS animation order for existing saved playback
       // times. Hidden variants may expose additional prepared motion handles.
       const selections = [null, ...definition.variants];
-      let motionIdentities;
+      let motionIdentities, surface, variableSurface = false;
       for (const variant of selections) {
         if (variant) for (const binding of variant.writes) {
           const node = binding.target < 0 ? stage : nodes[binding.target];
@@ -141,11 +210,22 @@ export async function preparePresentationBindings(definition, root) {
             planes.delete(target); variablePlanes.add(target);
           } else planes.set(target, plane);
         }
+        const nextSurface = depthSurface();
+        if (surface !== undefined && JSON.stringify(surface) !== JSON.stringify(nextSurface)) variableSurface = true;
+        surface = nextSurface;
       }
       // Recheck after every variant has declared its motion targets.
-      return { motion: [...tracks.values()], facing: [...planes].filter(([target, plane]) => plane && facingPlane(target))
+      const finalSurface = variableSurface ? null : depthSurface();
+      return { surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()], facing: [...planes].filter(([target, plane]) => plane && facingPlane(target))
         .map(([target, binding]) => ({ target, ...binding })) };
     }, definition);
-    return { ...definition, ...prepared };
+    const { surface, depthReason, ...bindings } = prepared;
+    const source = { ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } };
+    let compiled = prepareDepthPartitions(source, surface);
+    let reason = depthReason;
+    if (!await verifyDepthStyles(page, source, compiled, surface)) { compiled = source; reason = 'changed CSS cascade'; }
+    if (!compiled.depthPartitions) reason ??= 'no decomposition within carrier budget';
+    onDepthResult?.({ id: source.id, source, compiled, surface, reason });
+    return { ...compiled, tree: { ...compiled.tree, activationGroups: prepareActivationGroups(compiled) } };
   } finally { await browser.close(); }
 }

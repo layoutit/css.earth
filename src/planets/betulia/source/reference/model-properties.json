@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/1580_Betulia/magri.etal.2007.betulia.pdf",
+  "diameterKm": 5.39,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 6.13836,
+  "poleEclipticJ2000Degrees": [
+    136,
+    22
+  ],
+  "limitations": "The southern depression and overall irregular form are resolved unevenly. Fine surface material and photographic reflectance are not supplied by this model.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/betulia.obj",
+    "vertices": 1148,
+    "faces": 2292,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      2.077743
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      6.58792,
+      5.847659999999999,
+      4.189877
+    ],
+    "volumeCubicKm": 81.9824803165423,
+    "volumeEquivalentRadiusKm": 2.6949092684022062,
+    "radialRangeKm": [
+      2.0324439183861873,
+      3.578764873150652
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 2292,
+    "ambiguous": 0,
+    "maxErrorMeters": 1.8189894035458565e-12,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2292,
+    "sourceVertices": 1148,
+    "weldedVertices": 1148,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 46,
+    "estimatedErrorMeters": 45.25281524658203,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 81767656285.5521
+    }
+  }
+}

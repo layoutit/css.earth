@@ -23,7 +23,7 @@ The source model spacing is about 1.5 km. The producer estimates typical global 
 
 ## Geometry, delivery and scope
 
-The astronomy package provides the Saturn-relative orbit and IAU orientation. The rendered sphere uses its 536.3 km radius, also used by the [2012 Tethys atlas](https://science.nasa.gov/resource/the-tethys-atlas/). This is distinct from the 531 km elevation datum and NASA's rounded 533 km mean radius in the factsheet. [NASA](https://science.nasa.gov/saturn/moons/tethys/) describes a mildly nonspherical body; its exact silhouette and crater depth are not modeled here.
+The astronomy package provides the Saturn-relative orbit and IAU orientation. The rendered sphere uses the 536.3 km reference radius of the [2012 Tethys atlas](https://science.nasa.gov/resource/the-tethys-atlas/). This display approximation is named in the visible introduction and is distinct from the 531 km elevation datum and JPL's 531.1 km physical mean radius in the factsheet. [NASA](https://science.nasa.gov/saturn/moons/tethys/) describes a mildly nonspherical body; its exact silhouette and crater depth are not modeled here.
 
 All three lenses use the shared 8192 × 4096 map layout, 16 projective bands and 1024-pixel pole caps. Terminal surface and pole atlases use WebP quality 90 with lossless alpha. Sources and intermediate maps retain their original detail; only prepared files reach runtime. No visible atmosphere or cutaway is added.
 

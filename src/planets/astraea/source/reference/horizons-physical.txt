@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%275%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 5 Astraea (A845 XA)           2026-Sep-07 21:00:20
+Rec #:       5 (+COV) Soln.date: 2026-Mar-11_21:13:05   # obs: 4395 (1845-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457813.5 ! 2017-Mar-01.00 (TDB)         Residual RMS= .25371
+   EC= .1915131708755997   QR= 2.08058519938499    TP= 2457418.2014363874
+   OM= 141.5841078069443   W=  358.7833712962976   IN= 5.367907899033111
+   A= 2.573431161071956    MA= 94.37576326679746   ADIST= 3.066277122758923
+   PER= 4.12835            N= .238745525           ANGMOM= .027084674
+   DAN= 2.08066            DDN= 3.06611            L= 140.372813
+   B= -.113808             MOID= 1.09363997        TP= 2016-Jan-30.7014363874
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 53.3495            ROTPER= 16.806
+   H= 6.95                 G= .150                 B-V= .826
+                           ALBEDO= .274            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#147, OCC=0
+2: source=ORB
+*******************************************************************************

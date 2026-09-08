@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://arxiv.org/abs/2401.04634",
+  "citation": "French et al. (2024), Table 3, reproducing Karkoschka (2001), Voyager paper Table V. Adopted axes also appear in the companion HST paper, Table IV.",
+  "semiAxesKm": [
+    32,
+    23,
+    23
+  ],
+  "referenceRadiusKm": 25.67646409198381,
+  "projectedRadiusKm": {
+    "value": 27,
+    "uncertainty": 2,
+    "definition": "sqrt(A B), distinct from volume-equivalent radius"
+  },
+  "minorMajorRatio": {
+    "value": 0.7,
+    "uncertainty": 0.2
+  },
+  "derivedVolumeEquivalentRadiusKm": 25.67646409198381,
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/32)^2+(cos(lat)*sin(lon)/23)^2+(sin(lat)/23)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "orientation": "IAU BODY708; the published prolate interpretation assumes the long axis toward Uranus and repeats B on the third axis.",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Published 64 × 46 × 46 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo. Reported uncertainties belong to projected radius and axis ratio; no independent axis uncertainties are invented."
+}

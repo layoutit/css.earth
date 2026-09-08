@@ -1,0 +1,24 @@
+{
+  "query": "https://opus.pds-rings.seti.org/opus/api/data.json?planet=Uranus&mission=Voyager&cols=opusid%2CSURFACEGEOrosalind_centerresolution1&order=SURFACEGEOrosalind_centerresolution1&limit=10&SURFACEGEOrosalind_centerresolution1=0&SURFACEGEOrosalind_planetocentriclatitude1=-90",
+  "result": {
+    "start_obs": 1,
+    "limit": 10,
+    "count": 1,
+    "available": 1,
+    "order": "SURFACEGEOrosalind_centerresolution1,opusid",
+    "labels": [
+      "OPUS ID",
+      "Body Center Resolution (Min) [Rosalind] (km/pixel)"
+    ],
+    "columns": [
+      "OPUS ID",
+      "Body Center Resolution (Min) [Rosalind] (km/pixel)"
+    ],
+    "page": [
+      [
+        "vg-iss-2-u-c2625958",
+        "231.75687"
+      ]
+    ]
+  }
+}

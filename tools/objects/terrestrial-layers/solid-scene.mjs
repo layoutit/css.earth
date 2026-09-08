@@ -21,8 +21,11 @@ import { renderMarker } from '../../../src/navigation/marker-recipe.mjs';
 import { prepareMaterialTracks } from '../../prepare-materials.mjs';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mjs';
 import { requirePreparedResourceCatalog } from '../../object-runtime-contract.mjs';
+import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mjs';
+import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mjs';
+import { restoreDepthSource } from '../../prepared-depth-partitions.mjs';
 
-export async function prepareSolidScene({ config, celestial, outputDirectory, radial = null }) {
+async function prepareSolidEpochFrame({ config, celestial }) {
   const { namespace: id, geometry } = config;
   const { BODIES } = await loadAstronomyPackage();
   const radiusKm = BODIES[id].meanRadiusKm, radius = geometry.radius;
@@ -31,24 +34,64 @@ export async function prepareSolidScene({ config, celestial, outputDirectory, ra
   const sky = { ...celestial.sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
     sceneRegistration: registration.cssTransform, sceneRegistrationModel: registration.model,
     sceneRegistrationChain: registration.chain, sceneRegistrationEpoch: registration.epoch };
-  const sun = celestial.sun;
-  const scene = {
-    camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera }), sky, sun,
-    ...(radial ? { surfaceTriangles: radial.faces.map(face => face.vertices.map(v => [v[1] * BASE_TILE, v[0] * BASE_TILE, v[2] * BASE_TILE])) } : {}),
+  const source = BODY_POSITION_PROVENANCE[id];
+  const sun = source ? { ...celestial.sun, localDirection: frame.sunDirection,
+    referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: id, ...config.geometry.camera, sceneDirection: frame.sunDirection }),
+    provenance: { source: source.model, sourcePath: source.sourcePath,
+      qualification: `Computed Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL} from a retained parent-centered Horizons state plus the parent's heliocentric model. The surface attitude uses its separately authored rotation model.` } } : celestial.sun;
+  return { camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera }), sky, sun,
     systemTransform: frame.cssTransform,
-    bodyLeaves: radial?.leaves ?? prepareSolidBodySurface({ id, radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
-      sourceWidth: config.raster.width, sourceHeight: config.raster.height,
-      latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
-      poleTileSize: config.raster.poleSize }),
     heliocentricView: prepareHeliocentricView({ bodyId: id, presentationFrame: frame,
       bodyRadiusUnits: radius, bodyRadiusKilometers: radiusKm,
       sunSprite: { imagePixels: sun.asset.density1.width,
         opaqueCoreDiameterShare: sun.distanceScaling.spriteOpaqueCoreDiameterShare },
       system: await preparePlanetarySystem({ bodyId: id, presentationFrame: frame, kilometersPerUnit: radiusKm / radius }),
-    }),
-  };
+    }) };
+}
+
+export async function prepareSolidScene({ config, celestial, outputDirectory, radial = null }) {
+  const { namespace: id, geometry } = config;
+  const epoch = await prepareSolidEpochFrame({ config, celestial });
+  const scene = { camera: epoch.camera, sky: epoch.sky, sun: epoch.sun,
+    ...(radial ? { surfaceTriangles: radial.faces.map(face => face.vertices.map(v => [v[1] * BASE_TILE, v[0] * BASE_TILE, v[2] * BASE_TILE])) } : {}),
+    systemTransform: epoch.systemTransform,
+    bodyLeaves: radial?.leaves ?? prepareSolidBodySurface({ id, radius: geometry.radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
+      sourceWidth: config.raster.width, sourceHeight: config.raster.height,
+      latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
+      poleTileSize: config.raster.poleSize }),
+    heliocentricView: epoch.heliocentricView };
   await writeFile(resolve(outputDirectory, 'scene.json'), `${JSON.stringify(scene)}\n`);
+  if (BODY_POSITION_PROVENANCE[id]) {
+    await writeFile(resolve(outputDirectory, 'sky.json'), `${JSON.stringify(epoch.sky)}\n`);
+    await writeFile(resolve(outputDirectory, 'sun.json'), `${JSON.stringify(epoch.sun)}\n`);
+  }
   return scene;
+}
+
+/** Refresh a changed ephemeris without rebuilding source geometry or image banks.
+ * The same numeric owner as full preparation updates the actual retained carrier,
+ * so the physical world frame never names a basis absent from the rendered scene. */
+export async function refreshSolidSceneEpoch({ config, scene, definition }) {
+  // Refresh the canonical preparation branch. Generated projection carriers
+  // are rebuilt by prepareObjectJson after its physical frame has changed.
+  definition = restoreDepthSource(definition);
+  const id = config.namespace;
+  if (config.kind !== 'solid-observation-body' || definition.id !== id || !Array.isArray(scene.bodyLeaves)) {
+    throw new TypeError('Epoch refresh requires its prepared solid-observation scene.');
+  }
+  const epoch = await prepareSolidEpochFrame({ config, celestial: { sky: scene.sky, sun: scene.sun } });
+  const nodes = definition.tree.nodes;
+  const carriers = nodes.map((node, index) => node.className?.split(' ').includes(`${id}-system`) ? index : -1).filter(index => index >= 0);
+  if (carriers.length !== 1) throw new TypeError('Epoch refresh needs one retained physical surface carrier.');
+  const carrier = nodes[carriers[0]];
+  if (carrier.style !== `transform:${scene.systemTransform}` || carrier.properties.some(index => definition.tree.properties[index].name === 'transform')) {
+    throw new TypeError('Epoch refresh cannot bind a carrier that differs from its prepared source scene.');
+  }
+  const nextScene = { ...scene, ...epoch };
+  const nextDefinition = { ...definition, camera: { ...definition.camera, ...epoch.camera }, sky: epoch.sky, sun: epoch.sun,
+    tree: { ...definition.tree, nodes: nodes.map((node, index) => index === carriers[0] ? { ...node, style: `transform:${epoch.systemTransform}` } : node) },
+    heliocentricView: { ...definition.heliocentricView, plan: epoch.heliocentricView } };
+  return { scene: nextScene, definition: nextDefinition };
 }
 
 export async function prepareSolidPresentation({ config, scene: plan, material: { surfaces, lighting }, controls, source, sourceDirectory, publicDirectory, outputDirectory }) {

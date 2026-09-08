@@ -1,0 +1,79 @@
+{
+  "sources": {
+    "viewingGeometry": "OPUS PDS target-centered geometry",
+    "roll": "PDS Voyager Uranus ISS SEDR CK and NAIF pck00011; exposure end",
+    "imageScale": "GEOMED detached PDS label corrected-pixel FOV"
+  },
+  "method": "Camera roll, sun/observer body coordinates, distance and reference radius fixed from sources. Center translation fitted to sunlit limb gradients. Background measured from empty local sky. Two-pixel inset and incidence/emission bounds exclude unreliable limb samples.",
+  "limitations": "Approximate reference sphere and uncorrected SEDR pointing, not a photogrammetric terrain model. Effective resolution is coarser than detector sample spacing.",
+  "frames": [
+    {
+      "id": "c2683716",
+      "path": "observations/C2683716_GEOMED.IMG",
+      "labelPath": "observations/C2683716_GEOMED.LBL",
+      "observerLatitude": -56.091,
+      "observerWestLongitude": 53.645,
+      "sunLatitude": -82.109,
+      "sunWestLongitude": 137.517,
+      "rangeKm": 515621.4,
+      "northAzimuthDegrees": 83.29067463820111,
+      "center": [
+        426.9,
+        700.2
+      ],
+      "pixelAngleMicroradians": 7.841764329210524,
+      "backgroundOffset": -0.0005000000237487257,
+      "backgroundMaximum": 0.002965199761092663,
+      "coverageInsetPixels": 2,
+      "registration": {
+        "center": [
+          426.9,
+          700.2
+        ],
+        "radiusPixels": 20.03273744026522,
+        "skyRegion": [
+          375,
+          650,
+          100,
+          30
+        ],
+        "skyMedianIF": -0.0005000000237487257,
+        "skyRobustSigmaIF": 0.0014825998805463314,
+        "sunlitLimbGradientIF": 0.020688324352937357,
+        "fit": "Center-only sunlit limb-gradient fit with radius, roll and geometry held fixed; approximate spherical source shape."
+      },
+      "rollEvidence": {
+        "time": "1986-01-24T09:31:09.000",
+        "tick": 4433388734.067502,
+        "ckTick": 4433388784.0,
+        "poleIcrf": [
+          -0.21737974268073612,
+          -0.9401774835086602,
+          -0.26232107611737926
+        ],
+        "poleCamera": [
+          0.5541263065712149,
+          -0.0651863153664777,
+          0.8298763646801165
+        ],
+        "cameraMatrix": [
+          [
+            -0.9148881153242816,
+            -0.3036122343761442,
+            -0.26608146792948373
+          ],
+          [
+            0.1769746753725165,
+            0.29076641470957987,
+            -0.940284455020782
+          ],
+          [
+            0.3628494187885327,
+            -0.9073447543321457,
+            -0.21228706053540347
+          ]
+        ]
+      }
+    }
+  ]
+}

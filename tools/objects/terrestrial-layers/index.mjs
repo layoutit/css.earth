@@ -57,7 +57,7 @@ export function parseTerrestrialProfile(value) {
         !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
   }
   for (const lens of value.raster.scientific ?? []) {
-    const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
+    const meshGrid = ['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
@@ -69,7 +69,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -88,6 +88,15 @@ export function parseTerrestrialProfile(value) {
         !Number.isSafeInteger(lens.grid.expectedFaces) || lens.grid.expectedFaces < 4 ||
         (lens.coverage && [lens.coverage.path,lens.coverage.member].some(p => typeof p !== 'string' || p.startsWith('/') || p.split('/').includes('..'))))) {
       throw new TypeError('Invalid sourced mesh grid.');
+    }
+    if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
+        !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||
+        lens.path !== value.geometry.radialTerrain?.path ||
+        lens.format !== value.geometry.radialTerrain?.format ||
+        JSON.stringify(lens.grid) !== JSON.stringify(value.geometry.radialTerrain?.grid) ||
+        value.geometry.radialTerrain?.simplification?.method !== 'source-meshoptimizer' ||
+        lens.surfaceSampling.maximumDistanceMeters > value.geometry.radialTerrain.simplification.maximumErrorMeters)) {
+      throw new TypeError('Source surface sampling must match the retained mesh and its simplification-distance bound.');
     }
   }
   const observationIds = new Set();
@@ -219,7 +228,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   const context = { sourceDirectory, publicDirectory, outputDirectory, config, source };
   if (config.kind === 'affine-photographic-atmosphere') return prepareAffineLayers({...context,prepareContent});
   const radial = await loadRadialTerrain(context);
-  const surfaces = await prepareSolidRasters(context);
+  const surfaces = await prepareSolidRasters({ ...context, radial });
   const raster = await prepareSolidMaterial({ ...context, surfaces });
   if (radial) {
     await prepareRadialMaterials({ ...context, radial, surfaces, sunDirection: requireBodyFixedSunDirection(config.namespace) });

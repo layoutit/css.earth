@@ -52,6 +52,20 @@ async function drainFrames(fixture, { task, stepMs = 1000 / 60 } = {}) {
 }
 const range = (pose, origin) => Math.hypot(...pose.positionM.map((value, axis) => value - origin[axis]));
 
+test('a terminal extreme-range pose finishes without a tail of identical publications', async () => {
+  const f = fixture();
+  f.navigation.frame.bodyRadiusM = 695700000;
+  f.navigation.apply({ referenceFrame: 'world', epochJdTt: 1,
+    pose: { positionM: [0, 0, 2.4809028e21], orientationXyzw: [0, 0, 0, 1] } });
+  const from = f.navigation.capture();
+  const target = createWorldSelectionTarget(from, f.navigation.frame, f.navigation.optics());
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal }) });
+  assert.deepEqual(f.paints.at(-1).pose, target.pose);
+  const terminal = f.paints.filter(world => JSON.stringify(world.pose) === JSON.stringify(target.pose));
+  assert.equal(terminal.length, 1, 'one terminal publication, with no dead flight tail');
+  assert.equal(f.pending, 0);
+});
+
 test('the exact final camera demand finishes before the old scene is handed off', async () => {
   const f = fixture(), viewReady = deferred();
   let readView, finalView, resolved = false;
@@ -328,6 +342,38 @@ test('refocusing the selected object paints one existing owner without reloading
   for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
 });
 
+test('the application keeps flying while destination groups activate, then transfers the live pose without a reset', async () => {
+  const f = fixture(), context = [];
+  const task = f.start({ presentWorld: world => context.push(world) });
+  const handoff = await drainFrames(f, { task });
+  const checkpoint = handoff.mountOptions.initialWorldCamera;
+  for (let i=0; i<12; i++) f.step();
+  assert.ok(context.length > 5, 'The universe still presents frames while no detail owner is ready');
+  assert.notDeepEqual(context.at(-1), checkpoint, 'Mounting must not freeze the camera at handoff');
+  const mount = f.mounted();
+  handoff.mountOptions.onNavigationReady(mount.navigation);
+  assert.deepEqual(mount.navigation.capture(), context.at(-1));
+  for (let i=0; i<12; i++) f.step();
+  assert.deepEqual(mount.navigation.capture(), context.at(-1), 'The incoming camera tracks the live world before full readiness');
+  const incoming = mount.navigation.capture(), count = context.length;
+  const finished = handoff.afterMount(mount, {signal:f.controller.signal});
+  assert.deepEqual(mount.navigation.capture(), incoming, 'Full readiness does not reset to the initial checkpoint');
+  await drainFrames(f, {task:finished});
+  assert.equal(context.length,count, 'The mounted owner takes over publication without duplicate universe writes');
+  assert.equal(f.pending,0);
+});
+
+test('cancellation during connected activation stops the application flight and releases its resources', async () => {
+  const f = fixture(), context=[];
+  const handoff = await drainFrames(f,{task:f.start({presentWorld:world=>context.push(world)})});
+  f.step(); const count=context.length;
+  f.controller.abort(); f.step();
+  assert.equal(context.length,count);
+  assert.equal(f.pending,0);
+  assert.equal(f.resources.destroyed,1);
+  for (const name of ['pointerdown','wheel','keydown']) assert.equal(getEventListeners(f.documentTarget,name).length,0);
+});
+
 test('real input interrupts a same-object focus at the last painted camera', async () => {
   const f = fixture();
   const task = f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal });
@@ -338,4 +384,32 @@ test('real input interrupts a same-object focus at the last painted camera', asy
   f.tick(10000);
   assert.deepEqual(f.navigation.capture(), drawn);
   assert.equal(f.pending, 0);
+});
+
+test('replacement departure uses the retained world while its previous detail owner is retired', async () => {
+  const f = fixture(), context = [];
+  f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
+  const handoff = await drainFrames(f, { task: f.start({ presentWorld: world => context.push(world) }) });
+  handoff.mountOptions.onNavigationReady(f.mounted().navigation);
+  for (let frame = 0; frame < 12; frame++) f.step();
+  const drawn = context.at(-1);
+  f.controller.abort();
+  const retiredPaintCount = f.paints.length, beforeReplacement = context.length;
+  const replacement = new AbortController(), factory = deferred(), phases = [];
+  const task = f.start({ fromId: '1', toId: '0', fromMount: null, toFactory: factory.promise,
+    signal: replacement.signal, presentWorld: world => context.push(world), timing: { mark: phase => phases.push(phase) } });
+  f.step(); f.step();
+  assert.deepEqual(context[beforeReplacement], drawn, 'Replacement starts from the last drawn world pose');
+  assert.notDeepEqual(context.at(-1), drawn, 'Retiring detail must not make motion wait for the next factory');
+  assert.deepEqual(phases, ['first-motion']);
+  assert.equal(f.paints.length, retiredPaintCount, 'The disposed detail owner receives no camera writes');
+  factory.resolve(f.factory);
+  const nextHandoff = await drainFrames(f, { task });
+  const target = createWorldSelectionTarget(drawn, f.navigation.frame, f.navigation.optics());
+  const mount = { navigation: f.navigation };
+  nextHandoff.mountOptions.onNavigationReady(mount.navigation);
+  await drainFrames(f, { task: nextHandoff.afterMount(mount, { signal: replacement.signal }) });
+  closePose(f.navigation.capture().pose, target.pose);
+  assert.equal(f.pending, 0);
+  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
 });

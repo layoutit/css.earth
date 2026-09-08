@@ -1,0 +1,7 @@
+import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mjs';
+import objectControls from '../../../../src/planets/desdemona/prepared/controls.json' with {type:'json'};
+export const browserProfile=createObjectBrowserProfile({id:'desdemona',controls:objectControls,audit:{
+  preparedAssetPairs:[{one:'/scenes/desdemona/desdemona-directional-sun.webp',two:'/scenes/desdemona/desdemona-directional-sun@2x.webp'}],
+  canonicalPreparedAssets:['/scenes/desdemona/desdemona-model-surface@2x.webp','/scenes/desdemona/desdemona-lighting.webp'],
+  retained:{lensIds:objectControls.lenses.controls.map(lens=>lens.id),speedClicks:5,allowedMountSelectors:[]},
+}});

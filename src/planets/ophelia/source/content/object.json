@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ophelia",
+  "displayName": "Ophelia",
+  "panel": {
+    "introduction": "Ophelia is the outer shepherd of Uranus’s epsilon ring. Together with Cordelia, it helps confine the narrow ring through gravitational resonances.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Equivalent radius",
+        "value": "About 21.4 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Modeled dimensions",
+        "value": "About 54 × 38 × 38 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Uranus",
+        "value": "About 9.0 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Uranus",
+        "value": "About 53,764 km"
+      },
+      {
+        "id": "mass",
+        "label": "Ring-derived mass",
+        "value": "(3.57 ± 0.32) × 10¹⁶ kg"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 · January 1986"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+        "title": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+        "detail": "Published shape",
+        "thumbnail": "/scenes/ophelia/ophelia-model-thumbnail.webp",
+        "surface": "ophelia-model-surface@2x.webp",
+        "poles": "ophelia-model-poles@2x.webp",
+        "source": {
+          "id": "measured-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1006/icar.2001.6596"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Ophelia discovery and naming",
+      "href": "https://science.nasa.gov/uranus/moons/ophelia/"
+    },
+    {
+      "label": "Karkoschka (2001)",
+      "role": "surface",
+      "description": "Adopted prolate dimensions and photometry",
+      "href": "https://doi.org/10.1006/icar.2001.6596"
+    },
+    {
+      "label": "French et al. (2024)",
+      "role": "physical",
+      "description": "Shape uncertainty and mass inferred from ring forcing",
+      "href": "https://arxiv.org/abs/2401.04634"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Voyager ISS archive",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/uranus/moons/ophelia/",
+      "credit": "NASA Science; discovery and naming only"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2001); French et al. (2024)"
+    }
+  }
+}

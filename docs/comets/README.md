@@ -26,4 +26,5 @@ A discarded intake experiment removed all PDS faces touching a poorly constraine
 
 Follow-up evidence: [Halley](HALLEY.md), [Wild 2 completion](WILD2-COMPLETION.md),
 [Wild 2 grid](WILD2-GRID.md), and [Hartley/Tempel grids](CONSTRAINT-GRIDS.md).
+[Main integration](MAIN-INTEGRATION.md) records the combined registry checks.
 Earlier evidence retains its original revision and scope.

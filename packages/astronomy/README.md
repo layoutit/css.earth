@@ -227,3 +227,42 @@ regression guard and the common 10,000 km nearby-placement budget. This conic
 does not model perturbations or outgassing and has no qualified long-term range.
 Halley's 4.579 km registry radius describes the volume of the historical Stooke
 grid mesh, not a precise observed mean radius. Its display attitude is object-owned.
+
+Nix, Hydra, Kerberos and Styx use daily 2020–2032 element fits about the
+Pluto-system barycentre. Their public position/state APIs still return vectors
+relative to Pluto's physical centre: the generic `barycentreCompanion` record
+adds Charon's mass-weighted displacement to both position and velocity. Frame
+bounds include that offset. Independent Pluto-centred fixture maximum residuals
+are 94.36 km (Nix), 47.05 km (Hydra), 125.18 km (Kerberos), and 388.06 km
+(Styx); regression guards add 15 percent. These describe the compact fit, not observed uncertainties.
+Shape orientation is separately authored by each object; no synchronous spin
+or current pole/prime-meridian ephemeris is inferred for these moons.
+
+
+Puck, Portia, Juliet, Belinda, Cordelia and Ophelia use daily 2020–2032
+Horizons element fits. Their maximum residuals at six independent epochs are
+46.43, 92.47, 119.87, 28.49, 0.46 and 2.02 km, respectively. The displayed
+shape radii for the five prolate bodies are volume-equivalent, not the
+projected radii reported by the imaging fits. Cordelia and Ophelia use the
+ring-dynamics GM estimates from [French et al. (2024), Table 3 footnote b](https://arxiv.org/abs/2401.04634).
+A GM of zero for the other four means no mass contribution is modeled; it is
+not a measurement of zero mass.
+
+Methone and Pallene use daily 2005–2018 Cassini-era Horizons fits because the
+available SAT415 ephemerides stop in January 2018. Maximum residuals at six
+independent epochs inside that window are 17,510.67 km and 27.65 km. Their
+positions at the application's 2026 epoch are unqualified extrapolations;
+those in-window residuals do not bound the later error. Their source-image
+camera registration uses the archived acquisition epochs, independently of
+the illustrative frozen surface orientation used by the scene.
+
+### Slow longitude libration
+
+Polydeuces, Anthe and Aegaeon retain the shared precessing-ellipse model with
+three prepared harmonic terms in mean longitude. `tools/lib/fit-libration.mjs`
+fits those terms jointly with the linear longitude trend to daily JPL Horizons
+samples over 2020–2032. The compact model represents slow resonant motion; it
+is not an N-body integration or a qualified extrapolation outside that interval.
+Position and velocity evaluate the same phase correction and its derivative.
+Worst residuals at the six independent fixture epochs are 940 km, 2030 km and
+307 km respectively. These are sampled fit errors, not universal error bounds.

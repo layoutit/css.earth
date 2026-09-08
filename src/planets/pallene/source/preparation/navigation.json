@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "pallene",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-cassini-context",
+    "path": "presentation/context.png",
+    "origin": "https://doi.org/10.1016/j.icarus.2013.07.022",
+    "credit": "NASA/JPL-Caltech/Space Science Institute; Thomas et al.; cssEarth preparation",
+    "license": "NASA/PDS data; MIT preparation",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "pallene-ellipsoid",
+        "cassini-n1496910582",
+        "cassini-n1496910582-label"
+      ],
+      "size": 512,
+      "longitudeDegrees": 105,
+      "latitudeDegrees": -7,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "normal"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 67251,
+    "expectedSha256": "1a7909939de1601a25f41d8b09c6ef918f47cb7b127ebee8076a6552a2bee33e"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

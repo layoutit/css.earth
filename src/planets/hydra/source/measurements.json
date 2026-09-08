@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-released-shape-measurements@1",
+  "source": "https://doi.org/10.6084/m9.figshare.12779975.v1",
+  "citation": "Porter, Simon (2021). Shape Model of Hydra. figshare. Version 1. CC BY 4.0.",
+  "sourcePath": "shape/hydra_shf1k3_hipoly.stl.gz",
+  "units": "kilometres",
+  "sourceVertices": 26246,
+  "sourceFaces": 52488,
+  "boundsKm": [
+    [
+      -28.11989974976,
+      23.86957740784
+    ],
+    [
+      -18.09058952332,
+      18.40810775757
+    ],
+    [
+      -13.52357387543,
+      15.75284862518
+    ]
+  ],
+  "sourceVolumeKm3": 24898.419778742787,
+  "referenceRadiusKm": 18.11455731342771,
+  "referenceRadiusFormula": "cbrt(abs(sum(dot(a,cross(b,c))/6))*3/(4*pi)) from the released oriented triangles",
+  "coordinateSystem": "Released model XYZ retained without rotation, recentering or invented topography. Spherical map longitude = atan2(y,x), north latitude = asin(z/r).",
+  "orientationQualification": "Source download omits the fitted pole/prime-meridian solution. Pole/spin and epoch presentation are approximate; model longitude zero is a display convention, not a controlled IAU cartographic meridian.",
+  "material": {
+    "width": 64,
+    "height": 32,
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "noData": 160,
+    "qualification": "All source texels are unavailable; constant raster is entirely marked no-data before the shared gray-grid preparation."
+  },
+  "coverage": "New Horizons saw predominantly the northern hemisphere. Southern model radii and the short axis are poorly constrained; geometric interpolation does not create observed terrain."
+}

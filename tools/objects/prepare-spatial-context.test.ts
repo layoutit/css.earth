@@ -73,8 +73,18 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     const result = JSON.parse(await readFile(outputPath, 'utf8'));
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
     assert.deepEqual(result.bodies.map((body: { id: string }) => body.id), source.bodies.map((body: { id: string }) => body.id));
-    // Independently call the astronomy models, bypassing solar-geometry.mjs and
-    // descriptor frames. The epoch adapter currently places Earth at the EMB.
+    // Independently parse the retained Horizons output, bypassing the snapshot
+    // loader, solar-geometry.mjs and descriptor frames. Other bodies retain
+    // their compact astronomy models; Earth adds its source-owned EMB offset.
+    const manifestPath = resolve(root, 'packages/astronomy/source/scene-epoch');
+    const manifest = JSON.parse(await readFile(resolve(manifestPath, 'manifest.json'), 'utf8'));
+    assert.equal(manifest.epochJdTt, source.frame.epochJdTt);
+    const sourcePositions = new Map<string, number[]>();
+    for (const record of manifest.records) {
+      const response = await readFile(resolve(manifestPath, record.path), 'utf8');
+      const row = response.split('$$SOE')[1]!.split('$$EOE')[0]!.trim().split(',');
+      sourcePositions.set(record.id, row.slice(2, 5).map(Number));
+    }
     const modelPositionM = (id: BodyId): readonly number[] => {
       const parent = BODIES[id].parent;
       if (parent === null) return [0, 0, 0];
@@ -83,9 +93,10 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       if (DWARF_PLANET_IDS.includes(id as DwarfPlanetId)) return dwarfPlanetPositionKm(id as DwarfPlanetId, source.frame.epochJdTt).map(value => value * 1000);
       if (parent !== 'sun') {
         const parentPosition = modelPositionM(parent);
-        return moonPositionRelativeToPlanetKm(id, source.frame.epochJdTt).map((value, axis) => parentPosition[axis]! + value * 1000);
+        return (sourcePositions.get(id) ?? moonPositionRelativeToPlanetKm(id, source.frame.epochJdTt)).map((value, axis) => parentPosition[axis]! + value * 1000);
       }
-      return systemBarycentreHeliocentricAu((id === 'earth' ? 'emb' : id) as Vsop87BodyKey, source.frame.epochJdTt).map(value => value * M_PER_AU);
+      return systemBarycentreHeliocentricAu((id === 'earth' ? 'emb' : id) as Vsop87BodyKey, source.frame.epochJdTt)
+        .map((value, axis) => value * M_PER_AU + (id === 'earth' ? sourcePositions.get('earth')![axis]! * 1000 : 0));
     };
     for (const body of result.bodies) {
       const id = body.id as BodyId, parent = BODIES[id].parent!;

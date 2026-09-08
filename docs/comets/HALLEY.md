@@ -189,9 +189,9 @@ checked in under `docs/comets/evidence/halley-*`.
 
 ## Integration limits
 
-This remains the existing draft PR #37, unmerged. Its original integration base
-is 1398bd9025940b6fb0d0188dfa518cdfacba782e; GitHub reports conflicts with newer
-main. Current-head CI and integration with that newer base are not qualified by
-these local checks. The seven independently reproduced baseline preparation-suite
-failures remain documented in [QUALIFICATION.md](QUALIFICATION.md); that separate
-full preparation suite was not rerun for this addition.
+The evidence above was captured on the original comet branch, based on
+1398bd9025940b6fb0d0188dfa518cdfacba782e. Subsequent integration checks against
+newer main are recorded separately in [MAIN-INTEGRATION.md](MAIN-INTEGRATION.md).
+The seven independently reproduced baseline preparation-suite failures remain
+documented in [QUALIFICATION.md](QUALIFICATION.md); that separate full preparation
+suite was not rerun for the Halley addition. PR #37 remains for the user to merge.

@@ -1,0 +1,228 @@
+{
+  "schema": "cssophelia-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "measured-shape",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 14147,
+      "expectedSha256": "67ff26d49e7921af41e37d85a1f5e9cea7f9235b88a94381b40f4d526d1812da",
+      "origin": "https://doi.org/10.1006/icar.2001.6596",
+      "credit": "Karkoschka (2001) adopted dimensions; cssEarth analytic prolate spheroid",
+      "license": "MIT representation of published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1006/icar.2001.6596"
+      ],
+      "acquisition": "Checked-in analytic radius table; formula and axes in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 21361.10207670598
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://doi.org/10.1006/icar.2001.6596",
+      "credit": "cssEarth standard no-coverage grid",
+      "license": "MIT representation of published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1006/icar.2001.6596"
+      ],
+      "acquisition": "Checked in; radius formula, dimensions and material bytes are specified in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 21361.10207670598
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3891,
+      "expectedSha256": "8c66e32fe3afede0eb2f1d283f5bcd8deec6a8845263232984914c1858371e36",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1098,
+      "expectedSha256": "9e0a6d9b5d87f2ecc65068d5c8206000defed3c90d4ccb1e0847d43f6106e2c3",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1266,
+      "expectedSha256": "353f2eacc620b4613f116c33fa9b75dd1b4bd2c4a3c89ff5a114dd993e688dca",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2391,
+      "expectedSha256": "dd78880106fe6926b2fc9a643c722d27fb04bc80ec360ad279086b4b844e2454",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4108,
+      "expectedSha256": "eb0b1708d1877de774aad04486d671e92119af218a42dd542fd7c87f44622f3e",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "shape/publication.json",
+      "expectedBytes": 1973,
+      "expectedSha256": "8acfab82b22b9407a314b4aaa09cb12f97ea76be4f3860059466fdcbecfca6a6",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "shape/rotation.json",
+      "expectedBytes": 1155,
+      "expectedSha256": "243b48ed7b11a42fdc22ff19af41d66eb2b6ff500d6a7f79c89ad815e4a87fc6",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "76d153d632e7f8b579a33483c4136b9bc3b0ae4872b2807364f0bdbf66fe4e41",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/native-inspection.json",
+      "expectedBytes": 1325,
+      "expectedSha256": "dc833487e1b2176e3ec63c243524ce5c07e610259003b83d420ef7c8bd6f4209",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/voyager-best-metadata.json",
+      "expectedBytes": 11622,
+      "expectedSha256": "a0d0c2b905a2407950f3c4192e2502fc995cf16e4f951962a4647c9ed4d148c5",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/voyager-best.lbl",
+      "expectedBytes": 3352,
+      "expectedSha256": "0b2edc3f1976361c2ae713345720a5a0d0e899e628505ee9cfdf85a26a1e21c1",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/voyager-low-phase-metadata.json",
+      "expectedBytes": 17545,
+      "expectedSha256": "372544a8fa11474dade7dc0b05e4777ca97dae015f37d9816c0d0a896544f1bc",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    },
+    {
+      "path": "survey/voyager-search.json",
+      "expectedBytes": 667,
+      "expectedSha256": "49aa804381406c0ec3218c6036cdc2fca46b6cf212b5fe9895bbca2d9fcd6943",
+      "purpose": "Ophelia source evidence or authored preparation data."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1006/icar.2001.6596",
+      "credit": "Karkoschka (2001) prolate dimensions; cssEarth shape visualization",
+      "license": "MIT representation of scientific dimensions; retain attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "measured-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 40,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 67255,
+      "expectedSha256": "d147f44341b120d5a2f3d8fd840ca3567291324947a648bfbad5e5acd242bc04"
+    }
+  ]
+}

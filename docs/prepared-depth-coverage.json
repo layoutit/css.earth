@@ -1,0 +1,2524 @@
+{
+  "main": "1a5c9968",
+  "registry": 155,
+  "triangleSurfaces": 123,
+  "compiled": 85,
+  "fullyBounded": 27,
+  "rays": 427632,
+  "overlaps": 8932,
+  "objects": [
+    {
+      "id": "aegaeon",
+      "faces": 480,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "ac2baff5b85fdce99dfb400f3533875a52f2591bf731ebf89cc703188c22c83c"
+    },
+    {
+      "id": "anthe",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 7
+      },
+      "sha256": "c66f4bdf82be3302a1cd8e67464d156e9148d1ae63d60f6773a6afc87021d356"
+    },
+    {
+      "id": "polydeuces",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 8
+      },
+      "sha256": "2d8ace4cf60abf3ac1dc0886b2e220f342f2b3a810d15362b3e0a03613fdf5ca"
+    },
+    {
+      "id": "rosalind",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 5
+      },
+      "sha256": "dba365faf2b3efa750c8fcc638856af952852df8a4b1e699729fe81bff435a29"
+    },
+    {
+      "id": "desdemona",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        62,
+        64,
+        64,
+        34
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 20
+      },
+      "sha256": "2344403c502da838051e9c346bf251f6aee2cec45b641a33fb89ce2c69e2b877"
+    },
+    {
+      "id": "cressida",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        63,
+        64,
+        64,
+        64,
+        60,
+        64,
+        37
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 2
+      },
+      "sha256": "09e420ac0330b722ba4f22301a037a46b4339ff2ceb3e4a8f4a47ee474ca660d"
+    },
+    {
+      "id": "bianca",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 8
+      },
+      "sha256": "15d6fd3ef676b08db26004be9c2b0e1281135128e625deed7fe258e9e9077f24"
+    },
+    {
+      "id": "ophelia",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 40,
+      "groups": [
+        64,
+        35,
+        64,
+        64,
+        11,
+        64,
+        63,
+        40,
+        64,
+        11
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 10
+      },
+      "sha256": "ed515f654182f1ff623d94abc8d619072f626dcf32b225790ef954ec563a043f"
+    },
+    {
+      "id": "cordelia",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 7
+      },
+      "sha256": "48442ad8f7c9a5f025b9b0142b7bf4cc194b2fdb8b5b618f051629696dd068dc"
+    },
+    {
+      "id": "belinda",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        61,
+        40,
+        64,
+        64,
+        59
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 11
+      },
+      "sha256": "e99c31e6b490bd6796c675a15e06aaa76eaf6b5137842a221b609b53eff042fb"
+    },
+    {
+      "id": "juliet",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 44,
+      "groups": [
+        64,
+        55,
+        1,
+        1,
+        64,
+        53,
+        44,
+        64,
+        64,
+        64,
+        6
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 11
+      },
+      "sha256": "fe0fb4227bdbb352658feaf90f55ad79794113cb46e19778d81329ef2ce5984b"
+    },
+    {
+      "id": "portia",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 8
+      },
+      "sha256": "8806ffed942ab8478b339261da851c6c24456a314bdfb4f01359f13dee3a8cf0"
+    },
+    {
+      "id": "pallene",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 5
+      },
+      "sha256": "e68e811a7e4b5cb067e2d2841b124c7ed19a2f857301cccb1b36458e4dab6181"
+    },
+    {
+      "id": "methone",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 10
+      },
+      "sha256": "94507a10c7782601f798bce1aba13d72c13a084a1b6ba45fb1c52ea6c7b377b9"
+    },
+    {
+      "id": "puck",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        60,
+        64,
+        64,
+        64,
+        36
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 6
+      },
+      "sha256": "46d60269d2aa7166c8ea4675a8453db1e3c700e3d733bc043c24588a100d831a"
+    },
+    {
+      "id": "amalthea",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "52a5a62b4e4a6c8ac9ff4840b268237efed2e55a21ccd971e15f0c03cfd894e4"
+    },
+    {
+      "id": "thebe",
+      "faces": 700,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 24,
+      "groups": [
+        417,
+        64,
+        64,
+        64,
+        64,
+        27
+      ],
+      "oracle": {
+        "rays": 4800,
+        "overlaps": 178
+      },
+      "sha256": "3e5e9f14d02ccecc43b22c3e0de6693beffd1c9bb710c82913ac1e318ae7d2c6"
+    },
+    {
+      "id": "metis",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 3
+      },
+      "sha256": "3ddb442350d7d470929ad07e149afe67153ad4efa0c1d9ae189cf4d6666cebcc"
+    },
+    {
+      "id": "adrastea",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        52,
+        64,
+        56,
+        64,
+        64,
+        64,
+        52
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 9
+      },
+      "sha256": "8a115cac8e975b04c451b466c609be9ef6eb58b3bec9ae85074d11e5fbd0fde5"
+    },
+    {
+      "id": "naiad",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 40,
+      "groups": [
+        18,
+        53,
+        64,
+        64,
+        39,
+        49,
+        64,
+        36,
+        64,
+        29
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 13
+      },
+      "sha256": "11bb95953021fc7b94bf6ead7f4e01d0072b33ba6d918761a09d082a202ff11f"
+    },
+    {
+      "id": "thalassa",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 36,
+      "groups": [
+        64,
+        51,
+        64,
+        59,
+        59,
+        64,
+        44,
+        64,
+        11
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 0
+      },
+      "sha256": "75bf952eebf3845e9ca4a576ac82780fbcf3299bc7b7a3ea0322ad908c57f0dc"
+    },
+    {
+      "id": "despina",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 36,
+      "groups": [
+        64,
+        54,
+        64,
+        58,
+        41,
+        64,
+        64,
+        64,
+        7
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 3
+      },
+      "sha256": "f1491582ba0248f27ad223ae1a87b2c943744043d5e8184c7d15dc5b962e4bfc"
+    },
+    {
+      "id": "galatea",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        62,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        34
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 8
+      },
+      "sha256": "3adc985172267d7b9c50e1f68ac8fbc4820b7aabad6ce0569f7bbe26aadeee53"
+    },
+    {
+      "id": "proteus",
+      "faces": 1100,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "8dfb70c7b8a468affa0f08ad4ba653865aed5e1440e18c6ffffdbf4fcac03893"
+    },
+    {
+      "id": "larissa",
+      "faces": 600,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "1b192412790c43a7cb5d666b0ddd044d27452707e85568e2633d784bdaf3719a"
+    },
+    {
+      "id": "daphnis",
+      "faces": 400,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "bd356e92e04e88b7d97497a3a5c7d00058a85c01a44091d48ff29ebb6c2f7c12"
+    },
+    {
+      "id": "calypso",
+      "faces": 600,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "1a5372fe6c6420460e3ad8fb1a04dc0341b5848d3794c314842479ca4c1ccd53"
+    },
+    {
+      "id": "telesto",
+      "faces": 600,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "c6ee20d595a77b302c9d45f7514c2503b6b59897b7b1bf20eafe54bf52e2e91e"
+    },
+    {
+      "id": "helene",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "06182ccd3558e0c73723bf8703644b2ddace221207693ba0ddfdb2181c8392e1"
+    },
+    {
+      "id": "sun",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "6f89f9ca668d38132970492b8ce2a637c3a73df0e1c3e917a340649513f12406"
+    },
+    {
+      "id": "mercury",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "194f716c2e6d2a24c7470bb0e3d86b78220948ba220c9a56d6e7c6221c843fac"
+    },
+    {
+      "id": "venus",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "c86c35b10c191450c505a38636b43566f4324bd9f0868607393e642ed686c760"
+    },
+    {
+      "id": "earth",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "cf37965b2c032a410f28e2a121d6c98718788db8d3af5b7aba7ce35ed3d8a1b9"
+    },
+    {
+      "id": "moon",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "cf20e08fccca3595fc723df9578c9db82f65daba5641f90809e6e89f23895d38"
+    },
+    {
+      "id": "mars",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "28c4f88e874fb861805a3aca4667133cfdedc5e0c5af61c6af2b4740234b86ff"
+    },
+    {
+      "id": "ryugu",
+      "faces": 790,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 12,
+      "groups": [
+        718,
+        64,
+        8
+      ],
+      "oracle": {
+        "rays": 5424,
+        "overlaps": 496
+      },
+      "sha256": "01944544e8618e45a6f987d8de9c312c6a6d6194dc777cad0bed7362c958462c"
+    },
+    {
+      "id": "bennu",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 16,
+      "groups": [
+        658,
+        64,
+        64,
+        14
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 263
+      },
+      "sha256": "8e622cc981813883733b6cc8368ac468b96509913223b4913b927714ed3572b5"
+    },
+    {
+      "id": "itokawa",
+      "faces": 794,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 12,
+      "groups": [
+        711,
+        64,
+        19
+      ],
+      "oracle": {
+        "rays": 5472,
+        "overlaps": 443
+      },
+      "sha256": "aabc1d0822e9957e6e1cdaaf7a9bf16edd0fc978332b673b529065ec6d5df4f3"
+    },
+    {
+      "id": "eros",
+      "faces": 796,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 16,
+      "groups": [
+        645,
+        64,
+        64,
+        23
+      ],
+      "oracle": {
+        "rays": 5472,
+        "overlaps": 346
+      },
+      "sha256": "aed7d912f23b562ad651da5da23a846e3f670154c8a3ac51bc29dce9a86aba19"
+    },
+    {
+      "id": "ida",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "4d7571be74d9a85dafdfd4dbe48bc3ebc2181eda94691cfb068a55e8896a005d"
+    },
+    {
+      "id": "gaspra",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 20,
+      "groups": [
+        595,
+        64,
+        64,
+        64,
+        13
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 230
+      },
+      "sha256": "f93277fc121d309f30513b9de9dfda59ac6459e302129671dc35e2676f6699c3"
+    },
+    {
+      "id": "mathilde",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 12,
+      "groups": [
+        695,
+        64,
+        41
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 676
+      },
+      "sha256": "a1a19972dbad7f0c040abaf7d0f5502e94e2c09b81008df2cf17019616cce0a0"
+    },
+    {
+      "id": "lutetia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 24,
+      "groups": [
+        2,
+        603,
+        64,
+        64,
+        64,
+        3
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 327
+      },
+      "sha256": "d92e5e6f750bbf49d06a12300d68924a259c8c169373e9003b6bd7c03d2f1c2c"
+    },
+    {
+      "id": "steins",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "52ad7475d084ba2bd2f30d02054556fb4a75b38f9a8eb150943bc374bff3d7c9"
+    },
+    {
+      "id": "didymos",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "f34ea0909400d06ab71cbe641183a0f9af0e9913b6f3f75330d01bb44df19a13"
+    },
+    {
+      "id": "dimorphos",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 28,
+      "groups": [
+        478,
+        64,
+        64,
+        64,
+        64,
+        64,
+        2
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 353
+      },
+      "sha256": "cd823658f6e02705ffa21de302460afbd8559d66d118414a947df5110c6b160e"
+    },
+    {
+      "id": "kleopatra",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 20,
+      "groups": [
+        594,
+        64,
+        64,
+        64,
+        14
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 271
+      },
+      "sha256": "dadc453d697601dfbaf63aac9ec910269b65e5ddbf91098812f7204a1b858ed3"
+    },
+    {
+      "id": "toutatis",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "ffac7725e1dd4333bcf5fbd05bc4d6bc4b5380f348707947e57e570ee7552010"
+    },
+    {
+      "id": "pallas",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 36,
+      "groups": [
+        29,
+        363,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        24
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 85
+      },
+      "sha256": "e72a2a8376670a05cfeb4fbf5a8307d2159389cd5e538c602fdba303902676ae"
+    },
+    {
+      "id": "hygiea",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 52,
+      "groups": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 17
+      },
+      "sha256": "6a43f81457b46e20248cd6d3354096233d4a4a2c07c9d7658eb7f40e72ff4927"
+    },
+    {
+      "id": "juno",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 16,
+      "groups": [
+        617,
+        64,
+        64,
+        55
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 209
+      },
+      "sha256": "50d83b9674f644560ea01d898e61cab801d0964dbfd00e24167459aea3a4e761"
+    },
+    {
+      "id": "psyche",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        14,
+        425,
+        64,
+        64,
+        64,
+        64,
+        64,
+        41
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 66
+      },
+      "sha256": "2d7d81002af5ff550992b31fe7f0500f38c2c6a86c5db7c1e6a000c5304186bb"
+    },
+    {
+      "id": "interamnia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 48,
+      "groups": [
+        30,
+        165,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        30,
+        64,
+        64,
+        63
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 21
+      },
+      "sha256": "c5deca56a057eecfbdb73ff010a4dcdbc2e91f377c5760ffa69eec72f5b6f6c0"
+    },
+    {
+      "id": "davida",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 36,
+      "groups": [
+        6,
+        406,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        4
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 51
+      },
+      "sha256": "f2a19b2e2c8179873a344f34ae167e51057758b63c0edcfbc240856d2626cb44"
+    },
+    {
+      "id": "sylvia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        9,
+        417,
+        64,
+        64,
+        64,
+        64,
+        64,
+        54
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 69
+      },
+      "sha256": "c4d05feeef0fec5fbc4b2d0a5e4435b8deb33661a8c6d181a5fe33479cfa1efd"
+    },
+    {
+      "id": "eunomia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 36,
+      "groups": [
+        60,
+        311,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        45
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 55
+      },
+      "sha256": "a5dfd22c4ed2c5f3a2322e016a6a0d2eaf19092b18144d282abe6599d72b25f9"
+    },
+    {
+      "id": "euphrosyne",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 52,
+      "groups": [
+        64,
+        31,
+        64,
+        58,
+        120,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        15
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 16
+      },
+      "sha256": "b68e77bc5f6e6fdd5a0918f0c1b65641eab91bb2055c3e8c549887dea6857ca5"
+    },
+    {
+      "id": "bamberga",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 60,
+      "groups": [
+        61,
+        64,
+        64,
+        45,
+        2,
+        64,
+        3,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        49
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 34
+      },
+      "sha256": "5c95b7fe77e0398fa7c038fb52f44e80758f39f69ad1d2caac6dee80d587d065"
+    },
+    {
+      "id": "fortuna",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 28,
+      "groups": [
+        1,
+        481,
+        64,
+        64,
+        64,
+        64,
+        62
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 72
+      },
+      "sha256": "0a21878217d6d5857b0c1fc363fa274b806eb16e593be1ab343bc1c70603ca67"
+    },
+    {
+      "id": "themis",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 56,
+      "groups": [
+        64,
+        8,
+        1,
+        80,
+        1,
+        64,
+        64,
+        63,
+        176,
+        64,
+        64,
+        64,
+        64,
+        23
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 36
+      },
+      "sha256": "8ed6c80add0d0747f272f61def697cd0271e062aacf126eb4ad697277907d002"
+    },
+    {
+      "id": "amphitrite",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 44,
+      "groups": [
+        5,
+        259,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        24
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 28
+      },
+      "sha256": "1e7d2bafd5c4b59eff08ff40331c9825ec2e6938f40050147841e18d90c2aafb"
+    },
+    {
+      "id": "egeria",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "06138a938ed0c24359e9b04572fbedcd6b165dc961fd474edf366863b57e63de"
+    },
+    {
+      "id": "elektra",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        366,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        50
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 60
+      },
+      "sha256": "a9574f864c368129e52787ba96341057f14b8b4c320316fd4e77c8a74b940858"
+    },
+    {
+      "id": "iris",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "fb814ae9eca3963e118259105536f7ea67cd6026b32372b01debbf283ea19356"
+    },
+    {
+      "id": "hebe",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 24,
+      "groups": [
+        1,
+        606,
+        64,
+        64,
+        64,
+        1
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 163
+      },
+      "sha256": "0e8a00676642048ac4ccafd2ed31314fda9284c6480b3d1609658cf33b58f2b7"
+    },
+    {
+      "id": "eugenia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        1,
+        454,
+        64,
+        64,
+        64,
+        64,
+        64,
+        25
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 47
+      },
+      "sha256": "a926c5005b4824f5079309daa98fbff7447bbcab0f14590e70f0559135d5ad4d"
+    },
+    {
+      "id": "daphne",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 28,
+      "groups": [
+        429,
+        64,
+        64,
+        64,
+        64,
+        64,
+        51
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 88
+      },
+      "sha256": "c1422b95b012276004e8faba31feb9ca92d73c6b4bcb3892d94bcccfcba43f92"
+    },
+    {
+      "id": "eleonora",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        381,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        35
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 63
+      },
+      "sha256": "56ee26a3e86d44eaa77feef55f1309a9939dd8d118e23f3b6c361624a9dfbca5"
+    },
+    {
+      "id": "nemesis",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 20,
+      "groups": [
+        555,
+        64,
+        64,
+        64,
+        53
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 89
+      },
+      "sha256": "374afab6aac774816b335dbd2203129f691a2fc9a9ac172d70363042935c04f2"
+    },
+    {
+      "id": "kalliope",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 20,
+      "groups": [
+        572,
+        64,
+        64,
+        64,
+        36
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 196
+      },
+      "sha256": "8f6b44d257f5d092a496413d2e96e6ad389161bf491f8b9f825c6f398063f8ba"
+    },
+    {
+      "id": "nemausa",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "2de8df1b31c3b9420709735cee1068f9cfd11bcb71fe2ff2cbbb2a34ebcec0a0"
+    },
+    {
+      "id": "parthenope",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 28,
+      "groups": [
+        9,
+        524,
+        64,
+        64,
+        64,
+        64,
+        11
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 139
+      },
+      "sha256": "d4769bcc7622979efa0f1c4989df5525ca831c51365c6ed54729d5fe7ddb8616"
+    },
+    {
+      "id": "melpomene",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        1,
+        468,
+        64,
+        64,
+        64,
+        64,
+        64,
+        11
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 72
+      },
+      "sha256": "3d1aeaeeda4225dbe032f7499c01340dddb15f024fce68060f5686684d98934e"
+    },
+    {
+      "id": "julia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 28,
+      "groups": [
+        440,
+        64,
+        64,
+        64,
+        64,
+        64,
+        40
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 93
+      },
+      "sha256": "bae08ec0e1e8627eaa3677a2ff6e2c09a742642644a1f892678f97c5f8c369e2"
+    },
+    {
+      "id": "victoria",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 20,
+      "groups": [
+        563,
+        64,
+        64,
+        64,
+        45
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 186
+      },
+      "sha256": "a8df56cd2f7bcdb0123d3031f3d63cc1443a05882754db130eb7cfade01701bc"
+    },
+    {
+      "id": "urania",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 28,
+      "groups": [
+        2,
+        529,
+        64,
+        64,
+        64,
+        64,
+        13
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 226
+      },
+      "sha256": "94dd5d36f80b101aa9533b5ea6e8b09fd3bd82917619a3eb26ba7a5dda0de14d"
+    },
+    {
+      "id": "flora",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 28,
+      "groups": [
+        1,
+        531,
+        64,
+        64,
+        64,
+        64,
+        12
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 116
+      },
+      "sha256": "fd8530f10537db50fce68e5c4831ec84366afac84945ffd2a4c7a18e19d810bf"
+    },
+    {
+      "id": "europa-52",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 76,
+      "groups": [
+        64,
+        64,
+        64,
+        21,
+        17,
+        1,
+        1,
+        87,
+        1,
+        2,
+        25,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        5
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 38
+      },
+      "sha256": "9fb04d7d3a6e1ec200bb5cdc8887833d31aa97ed508a58ee0c4ce8279e19609c"
+    },
+    {
+      "id": "metis-9",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 20,
+      "groups": [
+        564,
+        64,
+        64,
+        64,
+        44
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 88
+      },
+      "sha256": "3c37cf866bc9549bf09f9e33ef85d9681b43ebf8ece5d2d8a1f98cd4386ba037"
+    },
+    {
+      "id": "camilla",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 44,
+      "groups": [
+        64,
+        64,
+        64,
+        50,
+        206,
+        64,
+        56,
+        64,
+        64,
+        64,
+        40
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 16
+      },
+      "sha256": "b5cb0fb3bd61c6926c9eaf587a4ad0f6c55116591c789aea00b007e3b98c4606"
+    },
+    {
+      "id": "thisbe",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 52,
+      "groups": [
+        62,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        34
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 20
+      },
+      "sha256": "408823965ac4fbefee2b12813a3a205be62e781529f34665b4f61b44c8a2b238"
+    },
+    {
+      "id": "doris",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        28,
+        425,
+        64,
+        64,
+        64,
+        64,
+        64,
+        27
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 33
+      },
+      "sha256": "be6cf0508417ac71cb092fc3760a91b38fc5460ccd0427a5d51d2ddeef7972b6"
+    },
+    {
+      "id": "hermione",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 44,
+      "groups": [
+        64,
+        64,
+        64,
+        36,
+        238,
+        64,
+        56,
+        64,
+        64,
+        64,
+        22
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 12
+      },
+      "sha256": "4ced4b070973aa9b2568b38b1a08fbaf3d54864002fb103ab934a234b6dc7b28"
+    },
+    {
+      "id": "diotima",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 36,
+      "groups": [
+        343,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        9
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 26
+      },
+      "sha256": "33f074d7088046cf73a4766d184a79ae50a4557aa00d4d123825edadd5c8dcc5"
+    },
+    {
+      "id": "herculina",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 40,
+      "groups": [
+        64,
+        14,
+        332,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        6
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 39
+      },
+      "sha256": "2c3c2026d5791a18f2d436f3574e5cf69108041525ce547f22500351499c7cde"
+    },
+    {
+      "id": "nausikaa",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "c87ff39cb75716f387b8f6dc3742ebf4a06494d0bde584405a09bfc2b2e3253c"
+    },
+    {
+      "id": "astraea",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        10,
+        411,
+        64,
+        64,
+        64,
+        64,
+        64,
+        59
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 70
+      },
+      "sha256": "4feef73127216718f83db373290b50f498748fa9f298c4913fd6c80201df084f"
+    },
+    {
+      "id": "irene",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        401,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        15
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 46
+      },
+      "sha256": "bd33f596131904ef0b01090a45d91cbd0acf32c46069a9e2777fc7ab0e26b684"
+    },
+    {
+      "id": "nysa",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 24,
+      "groups": [
+        546,
+        52,
+        64,
+        64,
+        64,
+        10
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 293
+      },
+      "sha256": "a995b6fff6f9658d3b06bac5727a3c20291002c3b86a1f5a6e693e476b749ae9"
+    },
+    {
+      "id": "sappho",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 24,
+      "groups": [
+        495,
+        64,
+        64,
+        64,
+        64,
+        49
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 40
+      },
+      "sha256": "b8975880f432bae3b3102a824174ad6338fea473a2681a2a25373b81c13c8d2b"
+    },
+    {
+      "id": "betulia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        12,
+        456,
+        64,
+        64,
+        64,
+        64,
+        64,
+        12
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 68
+      },
+      "sha256": "d2aa24feecc43d4762836c8e99cb4e21ee091a4d906259f547fa65b0d7e969b1"
+    },
+    {
+      "id": "castalia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 24,
+      "groups": [
+        508,
+        64,
+        64,
+        64,
+        64,
+        36
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 227
+      },
+      "sha256": "3d7c0aef824a5450bb33905a8332a47d7fdb0bc33610988867bcce9ab654d693"
+    },
+    {
+      "id": "asteroid-1998-wt24",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 24,
+      "groups": [
+        3,
+        552,
+        64,
+        64,
+        64,
+        53
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 109
+      },
+      "sha256": "83ed225f9629b95c8f7d82bb4de07b90da11ad97d43ce51d29684ca607591e1e"
+    },
+    {
+      "id": "asteroid-1994-cc",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 24,
+      "groups": [
+        1,
+        594,
+        64,
+        64,
+        64,
+        13
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 160
+      },
+      "sha256": "97389b55a7db5a80f6ecac80424d7ca04d6e8cea8b46e171fcb450f891b10dc9"
+    },
+    {
+      "id": "fides",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "7f173af02a3fa2a910babc259b2a66bfdc7cc4d7bd5f963f9d3345686a927e75"
+    },
+    {
+      "id": "penelope",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "0cb69b50e9e299032afaaff0657a5d8a4626f6b9b88f3963d20962b127c63f85"
+    },
+    {
+      "id": "alphonsina",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "eac63706e6403b6750cf692d163311074e1f5ddc62ba6096a11408ed72b5f0c1"
+    },
+    {
+      "id": "angelina",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "a81f84dcf8b24ffeac270447392ca60746227412164d6460c405a20de8caf32d"
+    },
+    {
+      "id": "ganymed",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 60,
+      "groups": [
+        9,
+        135,
+        64,
+        64,
+        64,
+        64,
+        28,
+        97,
+        4,
+        14,
+        16,
+        64,
+        64,
+        64,
+        49
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 11
+      },
+      "sha256": "e010ad5ded163568919d8c829d46959d63dda4cbed28b71508ee72a6e882ca1e"
+    },
+    {
+      "id": "moshup",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "8064070df15a355abc75bd8628f8bb400401a574e93b50479d2c1e37d390b210"
+    },
+    {
+      "id": "cybele",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 52,
+      "groups": [
+        129,
+        64,
+        64,
+        25,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        32,
+        64,
+        38
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 21
+      },
+      "sha256": "0c7e6a9806dcc2880d741509c0063af9230e51f90e2bc33037d0ce6908d44d7a"
+    },
+    {
+      "id": "aurora",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        396,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        20
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 80
+      },
+      "sha256": "916802578a3ec84ba03fd780417d3241a088eb934ae2471b5a01e308e001f45d"
+    },
+    {
+      "id": "palma",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "de373c12da8ebd5ab7b514d8a52e5718aea8613dd9063eaea12cbdfdc395a8c4"
+    },
+    {
+      "id": "thule",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "e8694777c67288053737ca0cd4a41d735ecf302e65db4ebb825f962eae0e5a1f"
+    },
+    {
+      "id": "hektor",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "7ac4fccce3a4644743ac2ad9c3e14cb97452286f45864e747b741429e0b0bba8"
+    },
+    {
+      "id": "hekate",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "6bc0f8b587e958d742817f1f75b39f5bac9fb3be72dfaeb4b236f103a8ed7003"
+    },
+    {
+      "id": "phaethon",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "2c4159f9d42982a5fddd3600bfefee34345ca505b020a17ebe94fe4a34a84594"
+    },
+    {
+      "id": "harmonia",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 36,
+      "groups": [
+        346,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        6
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 22
+      },
+      "sha256": "f9b9bc8fcd967538e8b2861ef8367f05890a0d2f34d0f263ac44a8ac65ad5967"
+    },
+    {
+      "id": "panopaea",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "5f0610c054f66aa140a64886f9f1a2913595983c58e0b14a749786bd0e2f6644"
+    },
+    {
+      "id": "desdemona-666",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "541acb2eec3015fdc704c24fcc541198b3109787c6df3dbc11346b76a068e062"
+    },
+    {
+      "id": "asteroid-1950-da",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 44,
+      "groups": [
+        3,
+        152,
+        1,
+        6,
+        1,
+        1,
+        166,
+        64,
+        2,
+        345,
+        59
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 56
+      },
+      "sha256": "6120de4819b06643b1a6a3d73e3f0174fd1133846967116648e41995b34c4ba4"
+    },
+    {
+      "id": "apophis",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 16,
+      "groups": [
+        626,
+        64,
+        64,
+        46
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 325
+      },
+      "sha256": "2c4d712b7ea9c8de4dd6b764a023333987f0626c28869082ab32611276c4d6d9"
+    },
+    {
+      "id": "donaldjohanson",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "296068d16bb4b94154642bd483e930663eb35d605d0867ce6b764e9df9837995"
+    },
+    {
+      "id": "vesta",
+      "faces": 800,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 20,
+      "groups": [
+        557,
+        64,
+        64,
+        64,
+        51
+      ],
+      "oracle": {
+        "rays": 5520,
+        "overlaps": 155
+      },
+      "sha256": "96e79cf88cb25bc1a43516e9b61e69e0fd4a76b2ee2c957e920b511d4e0de3c1"
+    },
+    {
+      "id": "phobos",
+      "faces": 1216,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 128,
+      "groups": [
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38
+      ],
+      "oracle": {
+        "rays": 8352,
+        "overlaps": 408
+      },
+      "sha256": "214b96157b5de938074c311db57f92ff7f97cbecfe4b72c7a0883af2901626aa"
+    },
+    {
+      "id": "deimos",
+      "faces": 1216,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 128,
+      "groups": [
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38
+      ],
+      "oracle": {
+        "rays": 8352,
+        "overlaps": 218
+      },
+      "sha256": "a41fa8c5fd91d3935afd689a1b81ca64153f33e74ca1f7341563d9b8aa5ff7ae"
+    },
+    {
+      "id": "ceres",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "ed1957dd58720a922e8cab345e86a0a7c21e531cfe19f6badc4b98fc78f10eda"
+    },
+    {
+      "id": "jupiter",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "c477c85cef4d00514d961c4aafc056db43d085a58f7198ede40d2b5d269de885"
+    },
+    {
+      "id": "io",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "d3a6eff1282efcd2edd14d996b461d91793ed7886a9ea155f0e2ee0396114d5b"
+    },
+    {
+      "id": "europa",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "528986494bddb3dab096e71e04fd85d83e4c51550ab5048f787cac5ed4e24dc8"
+    },
+    {
+      "id": "ganymede",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "ed1cb605578e7166daa7bcadbb0492a60e7cf43862d709ef4f1ec887131d8de9"
+    },
+    {
+      "id": "callisto",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "bd8014d93d8f836a7853510e02558e7bd9bced4c57b032b7f78d93c0d2c158fd"
+    },
+    {
+      "id": "saturn",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "35f55fb9ebb212e9b15feae4d5a2338120572964e203329a84da099f7a01d32a"
+    },
+    {
+      "id": "pan",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "da66013e64cf1543b066288a1f7d3b2ae181ff566eb2a8e30180fada6bf09f3b"
+    },
+    {
+      "id": "atlas",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "1a0c32024c9cac5e46befc2e65e78184f906cc4e7f7c200430feb2cda62333e6"
+    },
+    {
+      "id": "prometheus",
+      "faces": 720,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "060548720c71652cd7f490c07176f79657a06ba8e067852c18acb13d6f79685c"
+    },
+    {
+      "id": "pandora",
+      "faces": 640,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "5b69ff3ba45b459f05507f3e1ce2ac3a96ec129a9d135928eae7e5185a9edc9d"
+    },
+    {
+      "id": "janus",
+      "faces": 720,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "4913cc8525f747518f399f9d18cfd02eeb6ae154e11c48d777c281735dccd789"
+    },
+    {
+      "id": "epimetheus",
+      "faces": 720,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "ef2eaa191801e3a6d9a027571d803f1717603e9648fff89650acaf78ff5a45f2"
+    },
+    {
+      "id": "hyperion",
+      "faces": 1200,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "7a86cabc05e0283778cf114fd853548ebb5b0b22b478ab0f02839a335c4ddebb"
+    },
+    {
+      "id": "mimas",
+      "faces": 720,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 36,
+      "groups": [
+        264,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        8
+      ],
+      "oracle": {
+        "rays": 4944,
+        "overlaps": 61
+      },
+      "sha256": "8e62e5405a8345a593db43096395865b3604ef8640edcf9eda937623286a9fdf"
+    },
+    {
+      "id": "enceladus",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "86b26c1b79e0cf73a727320706b7d7b3ffdef1bcd1e4b52c39ac9b61773579ce"
+    },
+    {
+      "id": "tethys",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "5ba1d2343ca44d6efef944c4178249f72cc9f5c61b821da219d5b2a1f7a16d4c"
+    },
+    {
+      "id": "dione",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "0f8fd97f6efd03605bc0c0c6f62d0c666fc4b91bd7ba4ad43f2ed9875f186d66"
+    },
+    {
+      "id": "rhea",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "873ff3a1bac808c783d31976284084b68110c09e39042332ffa3a99ec91b2b2e"
+    },
+    {
+      "id": "titan",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "03a9258f8f4be5685ff8bb20f9ca0f3abadad1d7d4565735f02b09f921c0a3a0"
+    },
+    {
+      "id": "iapetus",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "3314995390073259e82122662c447ef515349fdc1c08a2614e17fc0973d5d567"
+    },
+    {
+      "id": "phoebe",
+      "faces": 1216,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 128,
+      "groups": [
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38
+      ],
+      "oracle": {
+        "rays": 8352,
+        "overlaps": 240
+      },
+      "sha256": "ec4ab7d06136305562bf6370c258b8362d26f6b562db5a7bd24470cf1c99487e"
+    },
+    {
+      "id": "uranus",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "451e66ea6788fc18be9eb7b45c37e35d7d9af751cba9e81b268b28149f25cfc3"
+    },
+    {
+      "id": "miranda",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "ed86883324161ecacbcd4f70e143109ece984b7b688e4241481c45171cb15073"
+    },
+    {
+      "id": "ariel",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "eb91b17f0cc4043482509f7c69c6a8e8be38185ea16804c50c67a6499a322170"
+    },
+    {
+      "id": "umbriel",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "b12535072f59845bf6d7e39c2176d2c2d52366f63c730a74d40c3348f7bf4bae"
+    },
+    {
+      "id": "titania",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "2df2a8de2d77dec9ece5b6522f6c5bec38bae805031c9715f194ff18e25c7682"
+    },
+    {
+      "id": "oberon",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "b71ecb8bb6371c4581d4cbce8c3c964c6c6d501894315f8c2557c5de05519a2c"
+    },
+    {
+      "id": "neptune",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "1301a874cca54d3e6cd3aa5159f75924f7d197519fc776b462cc9ce004d3dc91"
+    },
+    {
+      "id": "triton",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "76164e31585e4b155e567ccec64faa88e688c15e25059acf63b8e83d9294a3f2"
+    },
+    {
+      "id": "pluto",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "c3f123e5425d49ef2d4a933f21322d20828da2871bee192a2c682b822c294b4f"
+    },
+    {
+      "id": "charon",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "d895715a6856f3912e9e85674f5c8700e9e3ea8e80120a88698ae30e7de33996"
+    },
+    {
+      "id": "styx",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 40,
+      "groups": [
+        64,
+        45,
+        64,
+        64,
+        1,
+        48,
+        64,
+        54,
+        64,
+        12
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 8
+      },
+      "sha256": "fd4b19ebbd8a4cf5bbb231b0256c6238e40fef97ba126b8e4b0c26e405b056b2"
+    },
+    {
+      "id": "nix",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "86084a604b14e76f4bf0bbd0fc7d8baf415f98afc8b4335d986c727cebc4e9d4"
+    },
+    {
+      "id": "kerberos",
+      "faces": 480,
+      "reason": null,
+      "compiled": true,
+      "addedNodes": 32,
+      "groups": [
+        64,
+        67,
+        64,
+        64,
+        64,
+        64,
+        64,
+        29
+      ],
+      "oracle": {
+        "rays": 3312,
+        "overlaps": 8
+      },
+      "sha256": "c9e732c43e1ded0f75f7c03d784a1676951f6dd81c5c27ffbedb7e2c46e4f0b6"
+    },
+    {
+      "id": "hydra",
+      "faces": 800,
+      "reason": "source face is outside its rendered leaf",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "55f92d52a6ba63b3eb943bd230f9b36a2356c8ba51d78b284839d86951c4ec74"
+    },
+    {
+      "id": "haumea",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "c1173ac8b4d7fe4203020ba86470bb00284a82b1fbc636ab68242622d245e16e"
+    },
+    {
+      "id": "makemake",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "98199a9a6d54057572ac436c68f8f563ea995886179ec40ba39350702c30d838"
+    },
+    {
+      "id": "eris",
+      "faces": null,
+      "reason": "no triangle surface contract",
+      "compiled": false,
+      "addedNodes": 0,
+      "sha256": "f9479d3725fd64fc6fdc13019255d77c740d8fe483fa9ba2930d1781dad9f366"
+    }
+  ]
+}

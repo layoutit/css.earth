@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27511%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                511 Davida (A903 KB)           2026-Sep-07 20:32:30
+Rec #:     511 (+COV) Soln.date: 2026-Jun-05_03:41:36   # obs: 5110 (1903-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457897.5 ! 2017-May-24.00 (TDB)         Residual RMS= .22053
+   EC= .1881510201647112   QR= 2.567902876073004   TP= 2458749.6694223331
+   OM= 107.6071776831559   W=  337.6125129653269   IN= 15.94046073352377
+   A= 3.16303024312969     MA= 210.6947757952626   ADIST= 3.758157610186375
+   PER= 5.62553            N= .175206033           ANGMOM= .030047377
+   DAN= 2.59892            DDN= 3.69364            L= 85.99986389999999
+   B= -6.0041828           MOID= 1.58960998        TP= 2019-Sep-23.1694223331
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 135.1635           ROTPER= 5.1297
+   H= 6.42                 G= .160                 B-V= .717
+                           ALBEDO= .076            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#128, OCC=0
+2: source=ORB
+*******************************************************************************

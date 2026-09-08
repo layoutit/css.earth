@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2764%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                64 Angelina (A861 EA)          2026-Sep-07 22:24:43
+Rec #:      64 (+COV) Soln.date: 2026-Jun-05_03:06:38   # obs: 6443 (1861-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457982.5 ! 2017-Aug-17.00 (TDB)         Residual RMS= .30079
+   EC= .125922607924351    QR= 2.344329505785358   TP= 2458427.9919585199
+   OM= 309.1385259689476   W=  178.7597049263703   IN= 1.309428810960462
+   A= 2.682061711055516    MA= 260.0366519011777   ADIST= 3.019793916325674
+   PER= 4.3925             N= .22438867            ANGMOM= .027947633
+   DAN= 3.01969            DDN= 2.34439            L= 127.8985547
+   B= .0283408             MOID= 1.35852003        TP= 2018-Nov-05.4919585199
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 29.146             ROTPER= 8.752
+   H= 7.72                 G= .480                 B-V= .734
+                           ALBEDO= .483            STYP= Xe
+
+ASTEROID comments: 
+1: soln ref.= JPL#161, OCC=0
+2: source=ORB
+*******************************************************************************
