@@ -7,7 +7,8 @@ const gestures = new WeakMap<HTMLElement, PickingGesture>();
 const DOUBLE_CLICK_MILLISECONDS = 500;
 const CLICK_SLOP_PIXELS = 5;
 
-export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElement) {
+export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElement,
+  surfaceHitTest: ((clientX: number, clientY: number) => boolean) | null = null) {
   const document = inputSurface.ownerDocument;
   const windowTarget = document.defaultView;
   if (!windowTarget) throw new Error('World picking requires a mounted window.');
@@ -20,12 +21,22 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   const pick = (event: MouseEvent) => {
     const hits = document.elementsFromPoint(event.clientX, event.clientY)
       .filter((element): element is HTMLElement => element instanceof HTMLElement && host.contains(element));
+    let surfaceHit: boolean | undefined;
+    const visible = (element: HTMLElement) => {
+      // Detailed CSS faces intentionally ignore pointer events, so the DOM hit
+      // stack omits them. Respect the context renderer's existing paint order:
+      // negative layers sit behind detail; foreground bodies stay selectable.
+      const group = element.closest<HTMLElement>('[data-context-group]');
+      if (!group || !(Number(group.style.zIndex) < 0) || !surfaceHitTest) return true;
+      surfaceHit ??= surfaceHitTest(event.clientX, event.clientY);
+      return !surfaceHit;
+    };
     return hits.find(element => Boolean(element.dataset.objectNavigate) &&
-      element.style.pointerEvents === 'auto' && element.ariaDisabled !== 'true') ??
+      element.style.pointerEvents === 'auto' && element.ariaDisabled !== 'true' && visible(element)) ??
       hits.find(element => {
         const orbit = element.parentElement;
         return orbit?.dataset.contextOrbit && orbit.dataset.objectNavigate && orbit.ariaDisabled !== 'true' &&
-          parseFloat(element.style.opacity || '1') > 0.1;
+          parseFloat(element.style.opacity || '1') > 0.1 && visible(element);
       })?.parentElement ?? null;
   };
   let hoveredGroup: HTMLElement | null = null;

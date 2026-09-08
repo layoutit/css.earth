@@ -483,7 +483,8 @@ finally{
   // Preserve completed observations even if Chrome stalls during teardown.
   // Only the final write below may claim that cleanup completed.
   report.closed=false;
-  await writeFile(resolve(output,'report.json'),JSON.stringify(report,null,2));
+  try{await writeFile(resolve(output,'report.json'),JSON.stringify(report,null,2))}
+  catch(error){report.interimWriteError=String(error)}
   cleanup('close-context');await context.close();report.video=await page.video()?.path();
   cleanup('close-browser');await browser.close();
   cleanup('close-fixture');await fixture.close();report.closed=true;report.elapsed=relative();cleanup('complete');

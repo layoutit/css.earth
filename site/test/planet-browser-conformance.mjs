@@ -24,6 +24,7 @@ const REQUEST_START_TIMEOUT_MS = 30_000;
 const evidenceDirectory = process.env.CSSEARTH_CONFORMANCE_OUTPUT
   ? resolve(process.env.CSSEARTH_CONFORMANCE_OUTPUT)
   : null;
+const recordEvidence = Boolean(evidenceDirectory) && process.env.CSSEARTH_CONFORMANCE_RECORD !== "0";
 if (evidenceDirectory) {
   assert.ok(evidenceDirectory.startsWith(resolve("output/playwright") + "/"),
     "Browser evidence must stay under output/playwright.");
@@ -725,7 +726,22 @@ async function exerciseRetainedInteractions(page, planet, profile) {
   await assertRenderedObjectControls(page, profile);
   const lensIds = (retained.lensIds ?? []).filter(id => profile.rootLensIds.includes(id));
   for (const id of lensIds) {
-    await page.locator(`button[name="lens"][value="${id}"]`).click();
+    const button = page.locator(`button[name="lens"][value="${id}"]`);
+    if (!await button.isVisible()) {
+      const context = await button.evaluate(node => {
+        const ancestors = [];
+        for (let current = node; current; current = current.parentElement) ancestors.push({
+          tag: current.tagName, className: current.className, hidden: current.hidden,
+          display: getComputedStyle(current).display, visibility: getComputedStyle(current).visibility,
+          ...(current.tagName === 'DETAILS' ? { open: current.open } : {}),
+        });
+        return { ancestors, selectedObjectId: window.__cssEarth?.selectedObjectId,
+          root: { ...document.documentElement.dataset }, url: location.href };
+      });
+      if (evidenceDirectory) await page.screenshot({ path: resolve(evidenceDirectory, `${planet.id}-hidden-lens.png`) });
+      throw new Error(`${planet.id}: lens ${id} is unavailable in the current UI: ${JSON.stringify(context)}`);
+    }
+    await button.click();
     await page.waitForFunction(() => {
       const root = document.querySelector(".planet-lenses");
       return root?.getAttribute("aria-busy") !== "true" && !root?.classList.contains("is-loading");
@@ -856,7 +872,7 @@ async function provePreparedDensity(browser, planet, profile, density) {
   const context = await browser.newContext({
     viewport: { width: 1200, height: 800 },
     deviceScaleFactor: density,
-    ...(evidenceDirectory ? { recordVideo: {
+    ...(recordEvidence ? { recordVideo: {
       dir: evidenceDirectory, size: { width: 1200, height: 800 },
     } } : {}),
   });
@@ -869,7 +885,7 @@ async function provePreparedDensity(browser, planet, profile, density) {
   try {
     await loadPlanet(page, planet, profile);
     await profile.pause(page);
-    if (evidenceDirectory) await page.evaluate(() => {
+    if (recordEvidence) await page.evaluate(() => {
       const label = document.createElement("div");
       label.id = "camera-conformance-label";
       label.style.cssText = "position:fixed;right:20px;bottom:48px;padding:10px 16px;" +
@@ -947,11 +963,14 @@ async function provePreparedDensity(browser, planet, profile, density) {
       interactionInterruptions,
       wheelTakeover,
       releasePosition,
-      ...(evidenceDirectory ? { video: `${planet.id}-dpr-${density}.webm` } : {}),
+      ...(recordEvidence ? { video: `${planet.id}-dpr-${density}.webm` } : {}),
       ...(densityOnly
         ? { browserProblemsOutsideDensityProof: evidence.problems }
         : {}),
     };
+  } catch (error) {
+    if (evidenceDirectory) await page.screenshot({ path: resolve(evidenceDirectory, `${planet.id}-dpr-${density}-failure.png`) });
+    throw error;
   } finally {
     const video = page.video();
     await context.close();
@@ -1398,15 +1417,18 @@ async function proveInteractionInterruptions(page, planet, profile) {
 }
 
 function showInteractionPhase(page, label) {
-  if (!evidenceDirectory) return;
+  if (!recordEvidence) return;
   return page.evaluate(text => {
     document.querySelector("#camera-conformance-label").textContent = text;
   }, label);
 }
 
 function interactionStats(page, objectId) {
-  return page.evaluate((id) =>
-    globalThis[`__${id}`].camera.stats().dragInertia, objectId);
+  return page.evaluate((id) => {
+    const runtime = globalThis[`__${id}`];
+    if (!runtime) throw new Error(`Expected ${id} runtime; active=${window.__cssEarth?.activeObjectId}, selected=${window.__cssEarth?.selectedObjectId}, url=${location.href}`);
+    return runtime.camera.stats().dragInertia;
+  }, objectId);
 }
 
 // The object's prepared wheel dolly when its camera is the shared
@@ -1583,6 +1605,10 @@ async function enableMotion(page, id) {
   assert.equal(await motion.isChecked(), true,
     `${id}: motion setting must resume the scene`);
   await page.locator(".explorer-rail-explore").click();
+  // Explore opens the object browser in the current shell. Return to the
+  // selected card before later checks use that card's lens controls.
+  const objectBrowserToggle = page.locator(".planet-sidebar-view-all");
+  if (await objectBrowserToggle.getAttribute("aria-pressed") === "true") await objectBrowserToggle.click();
 }
 
 async function sceneState(page, profile) {

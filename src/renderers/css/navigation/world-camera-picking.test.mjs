@@ -63,7 +63,7 @@ function fixture(hitTest = () => false) {
       sceneMatrix: [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),
     surfaceFlyToState: () => ({ zoom: 1, minimumZoom: .5, maximumZoom: 4 }), surfaceFlyToHitTest: hitTest,
     rotate: value => publications.push(value) });
-  let unbind = bindWorldCameraPicking(surface, host), selections = 0, interrupted = 0;
+  let unbind = bindWorldCameraPicking(surface, host, hitTest), selections = 0, interrupted = 0;
   const target = new Surface();
   target.dataset.objectNavigate = 'venus'; target.style.pointerEvents = 'auto';
   target.click = () => { selections++; document.addEventListener('pointerdown', () => interrupted++); };
@@ -71,7 +71,7 @@ function fixture(hitTest = () => false) {
     get selections() { return selections; }, get interrupted() { return interrupted; },
     fire(type, time, data = {}) { now = time; surface.dispatchEvent(new Pointer(type, data)); },
     tick(time) { now = time; const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback(time)); },
-    handoff() { unbind(); unbind = bindWorldCameraPicking(surface, host); },
+    handoff() { unbind(); unbind = bindWorldCameraPicking(surface, host, hitTest); },
     destroy() { controls.destroy(); unbind(); },
   };
 }
@@ -261,4 +261,32 @@ test('faded orbit chords and empty orbit groups cannot select a body', () => {
     assert.equal(f.selections, 0);
   }
   f.destroy();
+});
+
+
+test('a background body cannot take hover or clicks through the prepared foreground surface', () => {
+  const f = fixture(() => true);
+  const group = new f.target.constructor();
+  group.dataset.contextGroup = 'venus'; group.style.zIndex = '-1';
+  f.target.parentElement = group; f.document.targets = [f.target];
+  f.fire('pointermove', 0, { buttons: 0 });
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  firstClick(f); secondClick(f);
+  assert.equal(f.selections, 0);
+  assert.equal(f.controls.stats().surfaceFlyTo.starts, 1);
+  f.destroy();
+});
+
+test('background targets outside the prepared silhouette and foreground targets remain selectable', () => {
+  for (const [surfaceHit, zIndex] of [[false, '-1'], [true, '4']]) {
+    const f = fixture(() => surfaceHit);
+    const group = new f.target.constructor();
+    group.dataset.contextGroup = 'venus'; group.style.zIndex = zIndex;
+    f.target.parentElement = group; f.document.targets = [f.target];
+    f.fire('pointermove', 0, { buttons: 0 });
+    assert.equal(f.target.dataset.objectHovered, 'true');
+    firstClick(f);
+    assert.equal(f.selections, 1);
+    f.destroy();
+  }
 });
