@@ -61,7 +61,20 @@ query; choosing a result or dismissing search relinquishes that ownership.
 
 ## Verification
 
-After the normal package/renderer build and `pnpm prepare:object-json`:
+Use an immutable build for sustained recording; repeated preparation and HMR
+can inflate the development server's compiler heap and interrupt navigation:
+
+```sh
+pnpm build:performance
+pnpm preview --port 4221
+HOPS=30 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:navigation-stress:matrix
+```
+
+This mode retains production bundling and static serving while explicitly
+enabling the existing diagnostic APIs and recorder. Ordinary production
+builds disable them. Keep the built assets unchanged throughout the matrix.
+
+Additional focused checks after the package/renderer build and preparation:
 
 ```sh
 node --test tools/prepared-activation-registry.test.mjs

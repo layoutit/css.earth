@@ -1,3 +1,4 @@
+import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mjs";
 import { createDestinationBrowser } from "./destination-browser.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
@@ -39,7 +40,7 @@ export function mountPlanetShell({
     return controller;
   }
   try {
-    if (import.meta.env?.DEV === true) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
+    if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget, {
