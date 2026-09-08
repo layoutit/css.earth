@@ -30,7 +30,7 @@ Elevation is radius relative to the stated reference sphere, coloured with the s
 - [Stooke PDS release](https://sbn.psi.edu/pds/resource/stkshape.html), Stooke (2025), DOI **10.26033/yt84-5y91**; underlying research: Stooke (1994), DOI 10.1007/BF00572198.
 - [PDS Voyager processing](https://pds-rings.seti.org/voyager/iss/calib_images.html) and [ISS pointing kernels](https://pds-rings.seti.org/voyager/ck/).
 - Geometry files preserve the original OPUS responses, PDS CK and NAIF clock/frame/leap-second kernels. `source/shape/pck00011.tpc` owns pole/spin conventions. Display ephemerides use the vendored astronomy package; Larissa's fitted precessing orbit has a measured maximum position residual of 472 km over the checked 1900–2100 Horizons fixture epochs. Do not claim navigation ephemeris precision beyond the recorded model budget.
-- `source/manifest.json` pins the original inputs and authored documents; `source/preparation/acquisition.json` restores missing image, radius-table, font and starfield inputs. Required small geometry documents are checked in.
+- `source/manifest.json` pins the original inputs and authored documents; `source/preparation/acquisition.json` restores missing image, radius-table, font and starfield inputs. Required small geometry documents and the pinned navigation portrait are checked in, so a fresh source restore does not depend on an ignored generated image.
 
 Runtime install: `pnpm setup:assets --object=proteus`.
 Source restore: `node tools/objects/dist/operations.js acquire proteus`.
