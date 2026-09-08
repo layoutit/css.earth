@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  3 Juno (A804 RA)             2026-Sep-07 19:56:20
+Rec #:       3 (+COV) Soln.date: 2026-Jun-05_03:03:21   # obs: 8343 (1804-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457994.5 ! 2017-Aug-29.00 (TDB)         Residual RMS= .29201
+   EC= .2568515931129983   QR= 1.983113707867091   TP= 2458446.1727731572
+   OM= 169.858274446681    W=  248.2066852787921   IN= 12.98996271067357
+   A= 2.668529851492544    MA= 257.8778644979886   ADIST= 3.353945995117997
+   PER= 4.3593             N= .226097612           ANGMOM= .027157967
+   DAN= 2.75521            DDN= 2.27549            L= 57.5481238
+   B= -12.0470653          MOID= 1.03459001        TP= 2018-Nov-23.6727731572
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 123.298            ROTPER= 7.21
+   H= 5.19                 G= .320                 B-V= .824
+                           ALBEDO= .214            STYP= Sk
+
+ASTEROID comments: 
+1: soln ref.= JPL#144, OCC=0
+2: source=ORB
+*******************************************************************************

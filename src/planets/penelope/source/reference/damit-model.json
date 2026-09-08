@@ -1,0 +1,47 @@
+{
+  "modelId": 180,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/180",
+  "fields": {
+    "ID": "180",
+    "Asteroid ID": "(201) Penelope",
+    "Lambda": "84",
+    "Beta": "-15",
+    "Period": "3.747455",
+    "YORP": "",
+    "JD0": "2444540.2",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "85",
+    "Equivalent Diameter Error": "8",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2007-02-27",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2013-07-24 14:29:26"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/499/AO.eps",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/500/3D.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/501/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/502/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/503/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/106",
+    "https://damit.cuni.cz/projects/damit/references/view/149"
+  ]
+}

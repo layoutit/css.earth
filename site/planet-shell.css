@@ -592,6 +592,7 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
 
 .planet-title-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   min-height: 30.13px;

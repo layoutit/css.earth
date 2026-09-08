@@ -1,0 +1,46 @@
+{
+  "modelId": 1813,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1813",
+  "fields": {
+    "ID": "1813",
+    "Asteroid ID": "(107) Camilla",
+    "Lambda": "76",
+    "Beta": "55",
+    "Period": "4.843928",
+    "YORP": "",
+    "JD0": "2444636.8",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "260",
+    "Equivalent Diameter Error": "6",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-14",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:38",
+    "Modified": "2017-06-19 13:25:14"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/353/AO.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/354/occ.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/355/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/356/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/357/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/169"
+  ]
+}

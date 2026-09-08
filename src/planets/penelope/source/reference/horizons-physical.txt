@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27201%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               201 Penelope (A879 PA)          2026-Sep-07 22:24:41
+Rec #:     201 (+COV) Soln.date: 2026-Jun-05_03:16:32  # obs: 13059 (1879-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458437.5 ! 2018-Nov-15.00 (TDB)         Residual RMS= .21859
+   EC= .1801506359085489   QR= 2.196842276965544   TP= 2458847.4886558047
+   OM= 156.9917934867609   W=  180.6272884370624   IN= 5.754549963180892
+   A= 2.67956819043223     MA= 267.8747469696398   ADIST= 3.162294103898916
+   PER= 4.38637            N= .224701956           ANGMOM= .027698076
+   DAN= 3.16225            DDN= 2.19686            L= 337.615921
+   B= -.0628951            MOID= 1.18657994        TP= 2019-Dec-29.9886558047
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 42.9385            ROTPER= 3.7474
+   H= 8.55                 G= .240                 B-V= .720
+                           ALBEDO= .040            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#139, OCC=0
+2: source=ORB
+*******************************************************************************

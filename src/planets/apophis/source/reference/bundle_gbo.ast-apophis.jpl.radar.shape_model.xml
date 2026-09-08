@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Bundle xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:gbo.ast-apophis.jpl.radar.shape_model</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>Radar shape model of asteroid (99942) Apophis</title>
+    <information_model_version>1.23.0.0</information_model_version>
+    <product_class>Product_Bundle</product_class>
+    <Citation_Information>
+      <publication_year>2026</publication_year>
+      <doi>10.26033/ydyq-5756</doi>
+        <keyword>radar shape model</keyword> 
+        <description>This data set contains a preliminary three-dimensional shape model and spin state of near-Earth asteroid (99942) Apophis based on ground-based radar images as reported by Brozovic et al. (2018).</description>             
+      <List_Author>
+        <Person>
+          <given_name>Kenneth</given_name>
+          <family_name>Lawrence</family_name>
+          <person_orcid>0000-0002-9108-825X</person_orcid>      
+        </Person>
+        <Person>
+          <given_name>Lance</given_name>
+          <family_name>Benner</family_name>
+          <person_orcid>0000-0001-7164-9120</person_orcid>
+        </Person>
+      </List_Author>  
+    </Citation_Information>
+  </Identification_Area>
+  <Context_Area>
+    <Time_Coordinates>
+      <start_date_time>2012-12-21Z</start_date_time>
+      <stop_date_time>2013-03-16Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <wavelength_range>Radio</wavelength_range>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>No Specific Investigation</name>
+      <type>Individual Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>bundle_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>Monostatic Arecibo Radar</name>
+      <Observing_System_Component>
+      <name>Arecibo Observatory</name>
+      <type>Host</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+        <reference_type>is_facility</reference_type>
+      </Internal_Reference>
+    </Observing_System_Component>
+    <Observing_System_Component>
+      <name>305-m fixed spherical reflecting antenna</name>
+      <type>Telescope</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+        <reference_type>is_telescope</reference_type>
+      </Internal_Reference>
+    </Observing_System_Component>
+    <Observing_System_Component>
+      <name>Arecibo Planetary Radar Transmitter</name>
+      <type>Instrument</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.trans_s</lid_reference>
+        <reference_type>is_instrument</reference_type>
+      </Internal_Reference>
+    </Observing_System_Component>
+    <Observing_System_Component>
+      <name>Arecibo 2380 MHz Radar Receiver</name>
+      <type>Instrument</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.recv_s</lid_reference>
+        <reference_type>is_instrument</reference_type>
+      </Internal_Reference>
+    </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <name>Goldstone Solar System Radar</name>
+      <Observing_System_Component>
+        <name>Goldstone Deep Space Communications Complex</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.goldstone</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>DSS-14 70-m Radio Telescope</name>
+        <type>Telescope</type>
+        <description>Transmit Station</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:goldstone.dss14_70m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>DSS-14 X-band Goldstone Solar System Radar Transmitter</name>
+        <type>Instrument</type>
+        <description>2-250kW klystrons</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:goldstone.dss14_70m.trans_x</lid_reference>
+           <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>  
+      <Observing_System_Component>
+        <name>DSS-14 X-band Goldstone Solar System Radar Receiver</name>
+        <type>Instrument</type>
+        <description>GSSR X-band HEMT LNA</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:goldstone.dss14_70m.recv_x</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>        
+    <Target_Identification>
+      <name>(99942) Apophis</name>
+      <type>Asteroid</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:asteroid.99942_apophis</lid_reference>
+        <reference_type>bundle_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+  </Context_Area>
+  <Reference_List>
+    <External_Reference>
+      <doi>10.1016/j.icarus.2017.08.032</doi>
+      <reference_text>Brozovic, M., Benner, L., McMichael, J., Giorgini, J., Pravec, P., Scheirich, P., Magri, M., Busch, M., Jao, J., Lee. C., Snedecker, L., Silva, M., Slade, M., Semenov, B., Nolan, M., Taylor, P., Howell, E., Lawrence, K., 2018. Goldstone and Arecibo radar observations of (99942) Apophis in 2012-2013. Icarus 300, 115-128.</reference_text>
+    </External_Reference>   
+  </Reference_List>            
+  <Bundle>
+    <bundle_type>Archive</bundle_type>
+    <description>This data set contains a preliminary three-dimensional shape model and spin state of near-Earth asteroid (99942) Apophis based on ground-based radar images as reported by Brozovic et al. (2018).
+    </description>
+  </Bundle>
+  <Bundle_Member_Entry>
+    <lidvid_reference>urn:nasa:pds:gbo.ast-apophis.jpl.radar.shape_model:data::1.0</lidvid_reference>
+    <member_status>Primary</member_status>
+    <reference_type>bundle_has_data_collection</reference_type>
+  </Bundle_Member_Entry>
+  <Bundle_Member_Entry>
+    <lidvid_reference>urn:nasa:pds:gbo.ast-apophis.jpl.radar.shape_model:document::1.0</lidvid_reference>
+    <member_status>Primary</member_status>
+    <reference_type>bundle_has_document_collection</reference_type>
+  </Bundle_Member_Entry>
+</Product_Bundle>
