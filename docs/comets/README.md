@@ -32,3 +32,6 @@ Earlier evidence retains its original revision and scope.
 [67P OSIRIS application lens](67P-OSIRIS-INTEGRATION.md) records the optional
 photographic dataset, source qualification, lighting behavior and browser gates.
 The [original trial](67P-OSIRIS-TRIAL.md) preserves its separate camera comparison.
+
+[67P OSIRIS coverage](67P-OSIRIS-COVERAGE.md) records the four-observation mosaic,
+the MiARD candidate disposition and source-selection evidence.
