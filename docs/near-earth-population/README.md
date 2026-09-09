@@ -32,6 +32,8 @@ node tools/objects/dist/prepare-authored.js ivar --write
 node tools/objects/dist/prepare-authored.js toro --write
 node tools/objects/dist/prepare-authored.js cerberus --write
 node tools/objects/dist/prepare-authored.js tantalus --write
+node docs/near-earth-population/refresh-transports.mjs
+node site/minimap/prepare.mjs
 ```
 
 The committed Horizons elements and vector fixtures are reproducible through the existing generator using the same four `--object` arguments. Retain the pinned epoch when comparing fixtures.
@@ -69,3 +71,5 @@ The representative Tantalus Shape drag at DPR2 ran three 60-step vertical cycles
 ![Tantalus elevation](images/tantalus-elevation-dpr1.png)
 
 Main PR #50 replaced per-body Astro wrappers with the generic `[id]` and navigation routes. These four packages declare their own stylesheet paths in the existing descriptor contract. Marker refresh emits page metadata from the exact refreshed scene SHA through `preparePageMetadata`; it does not recompile source geometry or imagery. Current-main page/router tests pass (46 tests), all source/package closures pass, and all410 object transports plus startup preload sets were verified.
+
+The prepared spatial minimap is regenerated after world-context refresh, so its body list and X-sorted point index include all four additions. The five focused minimap ownership, range and coverage tests pass. The browser evidence above precedes this additive four-point index refresh; body presentation and transport bytes are unchanged.
