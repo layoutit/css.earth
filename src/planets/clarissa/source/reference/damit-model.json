@@ -1,0 +1,342 @@
+{
+  "number": 302,
+  "name": "Clarissa",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/223",
+  "modelId": 296,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/296",
+  "catalog": "View model 28 -72 14.4767 3D.pdf | IAUspin.txt | occ_2004-06-24.pdf | shape.png | shape.txt | spin.txt | shape.obj preferred",
+  "fields": {
+    "ID": "296",
+    "Asteroid": "(302) Clarissa",
+    "λ": "28",
+    "β": "-72",
+    "P": "14.4767",
+    "YORP": "",
+    "t0": "2442097",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "12.68",
+    "p3": "0.7",
+    "p4": "-2.62",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "43",
+    "σD": "4",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-02-17",
+    "Comment": "preferred",
+    "Created": "",
+    "Modified": "2011-05-02 13:54:15",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1028/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1029/IAUspin.txt",
+    "occ_2004-06-24.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1030/occ_2004-06-24.pdf",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1031/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1032/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/139",
+      "file": "reference-139.html",
+      "links": [
+        {
+          "label": "2011icar..214..652d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011icar..214..652d"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4227",
+          "url": "http://arxiv.org/abs/1104.4227\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011Icar..214..652D",
+          "url": "http://adsabs.harvard.edu/abs/2011Icar..214..652D"
+        }
+      ]
+    },
+    {
+      "label": "Hanuš (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/141",
+      "file": "reference-141.html",
+      "links": [
+        {
+          "label": "2011a&a...530a.134h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011a&a...530a.134h"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4114",
+          "url": "http://arxiv.org/abs/1104.4114\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H",
+          "url": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H"
+        }
+      ]
+    }
+  ],
+  "id": "clarissa",
+  "displayName": "Clarissa",
+  "lambda": 28.0,
+  "beta": -72.0,
+  "periodHours": 14.4767,
+  "version": "2011-02-17",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 43.0,
+  "uncertaintyKm": 4.0,
+  "akari": {
+    "number": 302,
+    "name": "Clarissa",
+    "diameterKm": 34.44,
+    "uncertaintyKm": 0.48,
+    "detections": 7,
+    "originalRow": "302    Clarissa                      10.89  0.15  7   34.44  0.48 0.068 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1032/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1029/IAUspin.txt",
+  "shapeSha256": "5953c0a8528106a185d0da899f40a1ef7bfe63457888c10ffa3062affe29eaa7",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 41629.77705097848,
+  "independentSignedVolume": 41629.77705097848,
+  "originalVolumeEquivalentDiameter": 43.00000316742742,
+  "firstVertex": [
+    3.738434,
+    17.618347,
+    12.069276
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    14.372266651810946,
+    35.86496249422998
+  ],
+  "extentsSourceUnits": [
+    [
+      -35.09431,
+      35.62412
+    ],
+    [
+      -24.650893,
+      20.009564
+    ],
+    [
+      -16.44857,
+      12.508599
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9999999263389026,
+  "alternatives": [
+    {
+      "modelId": 297,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/297",
+      "pole": [
+        "190",
+        "-72"
+      ],
+      "version": "2011-02-17",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "43",
+      "comment": "",
+      "references": [
+        {
+          "label": "Ďurech et al. (2011)",
+          "url": "/projects/damit/references/view/139"
+        },
+        {
+          "label": "Hanuš (2011)",
+          "url": "/projects/damit/references/view/141"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Ďurech2011 describes this as a very elongated convex model. Both poles fit the2004 occultation; selected pole(28,−72) fits particularly well and is preferred in DAMIT, but its rival is not rejected. Three video chords have reported timing errors of tenths of a second. Table3 gives volume-equivalent43±4 km for this pole; local surface relief is unresolved.",
+  "selectedPoleStatus": "preferred occultation fit; rival remains",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "durech-occultations-2011.pdf",
+      "url": "https://arxiv.org/pdf/1104.4227",
+      "label": "Ďurech et al. (2011), Icarus 214, 652–670"
+    },
+    {
+      "file": "hanus-2011.pdf",
+      "url": "https://arxiv.org/pdf/1104.4114",
+      "label": "Hanuš et al. (2011), A&A 530, A134"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 43.0,
+    "uncertaintyKm": 4.0,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/296",
+    "sourceLabel": "DAMIT model 296",
+    "reference": "DAMIT model 296",
+    "limitations": "Ďurech2011 describes this as a very elongated convex model. Both poles fit the2004 occultation; selected pole(28,−72) fits particularly well and is preferred in DAMIT, but its rival is not rejected. Three video chords have reported timing errors of tenths of a second. Table3 gives volume-equivalent43±4 km for this pole; local surface relief is unresolved.",
+    "visibleDescription": "Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9999999263389026,
+    "metersPerSourceUnit": 999.9999263389026
+  },
+  "independentCenteredSignedVolume": 41629.77705097848,
+  "surfaceAreaSourceUnitsSquared": 7093.961666957728,
+  "surfaceEquivalentDiameterSourceUnits": 47.519239585682435,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        3.738434,
+        17.618347,
+        12.069276
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 6,
+      "sourcePoint": [
+        0.641168,
+        16.255081,
+        12.508599
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 339,
+      "sourcePoint": [
+        -2.740188,
+        -24.650893,
+        3.885073
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 461,
+      "sourcePoint": [
+        35.62412,
+        0.391951,
+        4.066576
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 488,
+      "sourcePoint": [
+        19.229755,
+        20.009564,
+        2.969101
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "sourcePoint": [
+        -34.590281,
+        5.256212,
+        -1.104961
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 517,
+      "sourcePoint": [
+        -35.09431,
+        3.015376,
+        -0.548321
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1011,
+      "sourcePoint": [
+        -11.311624,
+        4.322218,
+        -16.44857
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "sourcePoint": [
+        4.602904,
+        8.928521,
+        -15.334806
+      ]
+    }
+  ],
+  "distanceAu": 2.405392127505063,
+  "orbitalPeriodYears": 3.7306716780270994,
+  "sourceFields": {
+    "ID": "296",
+    "Asteroid": "(302) Clarissa",
+    "λ": "28",
+    "β": "-72",
+    "P": "14.4767",
+    "YORP": "",
+    "t0": "2442097",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "12.68",
+    "p3": "0.7",
+    "p4": "-2.62",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "43",
+    "σD": "4",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-02-17",
+    "Comment": "preferred",
+    "Created": "",
+    "Modified": "2011-05-02 13:54:15",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

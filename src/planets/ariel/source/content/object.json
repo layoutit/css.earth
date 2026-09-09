@@ -75,7 +75,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
-        "title": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
+        "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
         "thumbnail": "/scenes/ariel/ariel-normal-thumbnail.webp",
         "surface": "ariel-normal-surface@2x.webp",
@@ -84,13 +84,14 @@
           "id": "schenk-2020-ariel-normal",
           "path": "../manifest.json",
           "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
-        }
+        },
+        "summary": "Brightness correction reduces broad shading, while local shadows and seams remain. The gray grid marks missing observations."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
-        "title": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
+        "title": "Stereo, shading and limb terrain model",
         "detail": "Shaded relief",
         "thumbnail": "/scenes/ariel/ariel-elevation-thumbnail.webp",
         "surface": "ariel-elevation-surface@2x.webp",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
           "image": "/scenes/ariel/ariel-elevation-legend.webp"
-        }
+        },
+        "summary": "Height from stereo images, shading and limb measurements. Detail varies; the gray grid marks missing elevation data."
       }
     ]
   },

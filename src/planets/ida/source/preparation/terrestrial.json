@@ -71,7 +71,81 @@
       }
     ],
     "observedColors": [],
-    "surfaceQuality": 90
+    "surfaceQuality": 90,
+    "mosaics": [
+      {
+        "id": "calibrated",
+        "format": "controlled-shape-camera",
+        "consumer": "galileo-calibrated",
+        "frames": [
+          {
+            "id": "202561278",
+            "path": "observations/0202561278rcal_gre.fit",
+            "labelPath": "observations/0202561278rcal_gre.xml",
+            "encoding": "fits-ssi-iof",
+            "cameraCatalog": {
+              "path": "reference/243idaimg.tab",
+              "labelPath": "reference/243idaimg.xml",
+              "imageNumber": 202561278,
+              "longitudeDirection": "east",
+              "pixelOrigin": "one-based",
+              "instrumentPath": "reference/gll36001.ti"
+            },
+            "quality": {
+              "rawPath": "observations/i1278.fit",
+              "rawLabelPath": "observations/i1278.lbl",
+              "badDataPath": "observations/idabad.tab",
+              "badDataLabelPath": "observations/idabad.lbl",
+              "imageId": "i1278",
+              "target": "IDA",
+              "startTime": "1993-08-28T16:37:43.324Z",
+              "filter": "GREEN"
+            },
+            "coverageInsetPixels": 5
+          },
+          {
+            "id": "202560500",
+            "path": "observations/0202560500rcal_gre.fit",
+            "labelPath": "observations/0202560500rcal_gre.xml",
+            "encoding": "fits-ssi-iof",
+            "cameraCatalog": {
+              "path": "reference/243idaimg.tab",
+              "labelPath": "reference/243idaimg.xml",
+              "imageNumber": 202560500,
+              "longitudeDirection": "east",
+              "pixelOrigin": "one-based",
+              "instrumentPath": "reference/gll36001.ti"
+            },
+            "quality": {
+              "rawPath": "observations/i0500.fit",
+              "rawLabelPath": "observations/i0500.lbl",
+              "badDataPath": "observations/idabad.tab",
+              "badDataLabelPath": "observations/idabad.lbl",
+              "imageId": "i0500",
+              "target": "IDA",
+              "startTime": "1993-08-28T16:29:48.324Z",
+              "filter": "GREEN"
+            },
+            "coverageInsetPixels": 5
+          }
+        ],
+        "photometry": {
+          "model": "observed",
+          "weight": 1,
+          "maximumGain": 1,
+          "displayMaximum": 0.12,
+          "gamma": 2.2,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
+          "minimumLevel": 1,
+          "maximumLevel": 1
+        },
+        "metadata": {
+          "label": "SSI reflectance",
+          "coverage": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,

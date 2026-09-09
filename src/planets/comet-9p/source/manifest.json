@@ -135,6 +135,567 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "iv05070405-9000632-001-r-path",
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.fit",
+      "expectedBytes": 2436480,
+      "expectedSha256": "53884c4e586680b1d7d286c253bb1f220c03208edb88a8481963781947659c81",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000632_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000632-001-r-labelPath",
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "fb1f2818491dc9044faedc2be1088d6400b13ff8e8549a9c905a610ceb5f5a90",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000632_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000632-001-r-controlPath",
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.json",
+      "expectedBytes": 22719,
+      "expectedSha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000639-001-r-path",
+      "path": "photography/deep-impact/iv05070405_9000639_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "acacb9588329abd83d742ba0f558fafd84c0aad554c7c0ead1ead2f913345599",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000639_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000639-001-r-labelPath",
+      "path": "photography/deep-impact/iv05070405_9000639_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "00474e4d21fded4b78524f21f7b4e25b34c9496cf1d413e2dbf27de1d8538cc5",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000639_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000639-001-r-controlPath",
+      "path": "photography/deep-impact/iv05070405_9000639_001_r.json",
+      "expectedBytes": 17827,
+      "expectedSha256": "f43b5c3747b1b2fbc55c696067dc5fdea036a0ae6286c64e32a495967fd41628",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000654-001-r-path",
+      "path": "photography/deep-impact/iv05070405_9000654_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "fc64a20ea7c923e0c208fb3597632182ceaa44a6d2a0f4656968a4e6e1b48afb",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000654_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000654-001-r-labelPath",
+      "path": "photography/deep-impact/iv05070405_9000654_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "981707f100e66c0cb36c555ad2a9d269e18e19ddbf9a654fa0d2873c08dc98e1",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000654_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000654-001-r-controlPath",
+      "path": "photography/deep-impact/iv05070405_9000654_001_r.json",
+      "expectedBytes": 14834,
+      "expectedSha256": "3f7535c22735e89e43f77f77b32ee423ea0fb8a18bfeba6b2a43c137bdb4234d",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "n30036te02-rr-path",
+      "path": "photography/next/n30036te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "3bad06293d092e0be85d473086dc7babdb5a00040fc449649d9603b2188fbe24",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30036te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30036te02-rr-labelPath",
+      "path": "photography/next/n30036te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "fa2b468b95fe75d16c432b42343168938f61f4b5785dbf9594579a7940373e92",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30036te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30036te02-rr-controlPath",
+      "path": "photography/next/n30036te02_rr.json",
+      "expectedBytes": 23080,
+      "expectedSha256": "0cf2cdb79d4e5a10173125aa102e628820ec61f31b15793490133dcea8c886e4",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30039te02-rr-path",
+      "path": "photography/next/n30039te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "7991991b7dbbb8c84b1f5777feb22d1687eb55453c719af64d533d466c1ce68a",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30039te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30039te02-rr-labelPath",
+      "path": "photography/next/n30039te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "99fb4fa6678e66610566b1137fbd62e120d5c6f58f6601066367191e1ba1a92c",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30039te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30039te02-rr-controlPath",
+      "path": "photography/next/n30039te02_rr.json",
+      "expectedBytes": 16354,
+      "expectedSha256": "90c0459b6a86faab62a1ca22e4bd3c079e3bae88e786d82260bb32925f577691",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30042te02-rr-path",
+      "path": "photography/next/n30042te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "d2c82af5395924f21660bf3466f22b63173c3adf1ac23b0b533b54bbf2eb1a95",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30042te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30042te02-rr-labelPath",
+      "path": "photography/next/n30042te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "bef821e9f2d607ed4ccf45722f0a5c854f73c9247e644bd6f2285f41ab7d7822",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30042te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30042te02-rr-controlPath",
+      "path": "photography/next/n30042te02_rr.json",
+      "expectedBytes": 17694,
+      "expectedSha256": "9e799a22bcfe3363817a606f77a5a9dbb60eaad94d1836221e65337d2e84447e",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "iv05070405-9000644-001-r-path",
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "2f9aa28cc08a216e56884e950fc83fcb79f6480e695d0c4dc5e3f9933cfbd087",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000644-001-r-labelPath",
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "454beb14950398f963f0b7db0595cbc259993420296ed81fee65bd79f80a60cb",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000644-001-r-controlPath",
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.json",
+      "expectedBytes": 17997,
+      "expectedSha256": "696ffa2a70e8f1eb26b135d786af0789c6b7943f47f68bbaf1a111d63b8c8452",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000673-001-r-path",
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000673-001-r-labelPath",
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "c07fa63ecc2bdb86466e5927419c94a966f5d2defaf79576d735db1b217b9d1c",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405-9000673-001-r-controlPath",
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.json",
+      "expectedBytes": 13379,
+      "expectedSha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "n30033te02-rr-path",
+      "path": "photography/next/n30033te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "7b6b3ea7dc38f0c00430538caa172037ecfdb8a87aaf3bbd548c71102bd087bc",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30033te02-rr-labelPath",
+      "path": "photography/next/n30033te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "99e77ed612f4323d72076ddbf82fde723dd5093f779acd33183eb63c1f2bd97a",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30033te02-rr-controlPath",
+      "path": "photography/next/n30033te02_rr.json",
+      "expectedBytes": 17740,
+      "expectedSha256": "ff0de3863638c44954eec125b8ecedf6228d13a127913e575ea11ebf269bbd15",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30045te02-rr-path",
+      "path": "photography/next/n30045te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "40012e16420e8a54f1528b8281cc7547a80243ee7693b7ab0684261ff3bba2b4",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30045te02-rr-labelPath",
+      "path": "photography/next/n30045te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "73f982e326d08c0aa3b4c0921ad187ec5259187899eab514080534a5536ba408",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30045te02-rr-controlPath",
+      "path": "photography/next/n30045te02_rr.json",
+      "expectedBytes": 17370,
+      "expectedSha256": "3c0ce1af03d4a374b68c6cde5ae4fba4f8f9e8182272e8f2baffdd95a88ec781",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30048te02-rr-path",
+      "path": "photography/next/n30048te02_rr.fit",
+      "expectedBytes": 13665600,
+      "expectedSha256": "fe0f92dd79880c4e39d646277e06e957844de800b15747e9b92a7685f7e03506",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30048te02-rr-labelPath",
+      "path": "photography/next/n30048te02_rr.lbl",
+      "expectedBytes": 17520,
+      "expectedSha256": "8bbcfa09263bf4109e3fcb9e44557451ca64a5c6ef4a419b0aca10f860c19aa2",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
+    },
+    {
+      "id": "n30048te02-rr-controlPath",
+      "path": "photography/next/n30048te02_rr.json",
+      "expectedBytes": 17360,
+      "expectedSha256": "1c07ba7d6547cb8e51d959fb38c6ba9bb3a4b020eb1b8b6020ab4f2d6bac9904",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-next"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -173,14 +734,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5798,
-      "expectedSha256": "8599bdaf5632fd9ccc6aa0d61ef3c2e5b7c664bb2e41096221f687395079a90b",
+      "expectedBytes": 6943,
+      "expectedSha256": "371a9b1b35e34b3f31ff17034d78e8c2d1fd677c729567a8d3122a3c106d1c04",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 737,
-      "expectedSha256": "513ceb65e401f32b408149aa3f568dd18627826b5387c4fd990547ff158de110",
+      "expectedBytes": 6813,
+      "expectedSha256": "9eee30544d619fef5749ccc8a40ac4d87ed71e43f22d8895c631235c09acf284",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {
@@ -197,8 +758,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4649,
-      "expectedSha256": "22220e8df3b1bd565b853c9e3c21a4daa38259308ffd9b3cdf5aeff8349eed46",
+      "expectedBytes": 9768,
+      "expectedSha256": "bea0cfd4dfda09a4706f9e101fe59e47ab1122dcbbcedc28524b8b90273867fd",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {
@@ -242,6 +803,42 @@
       "expectedBytes": 851,
       "expectedSha256": "d3d973560809865e2a94fd5f50fedabbbbb65f6b39d3f9df13bff887a41d18a8",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/encounter-photography.md",
+      "expectedBytes": 6154,
+      "expectedSha256": "7c844decbdbc51bf1a8bf03b58dd257a451060a941c76730bc0f158f1d212d56",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/its-dataset.cat",
+      "expectedBytes": 46560,
+      "expectedSha256": "578f0d61df8566c6aa7d52827c0466fa6d773ab2bc52a748b232729e3a33ee15",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/next-dataset.cat",
+      "expectedBytes": 49440,
+      "expectedSha256": "6966339e8ae56bcc51dff297e6a45927c73c3dbad33eeb75c969a019b54fc3b3",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/epoxi-sis.pdf",
+      "expectedBytes": 6311705,
+      "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/navcam-fits-sis.htm",
+      "expectedBytes": 107680,
+      "expectedSha256": "44deb300bf207502263b41f9761d25af2c19873b9f0b79185fd5dbfd12c3d15b",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/tempel1_2012_cart.wrl",
+      "expectedBytes": 3871120,
+      "expectedSha256": "0a2baed9f6c3f6c243968310b949b07c57b5a249925903b6926a84be2b168d35",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
     }
   ]
 }

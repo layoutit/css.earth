@@ -1,0 +1,116 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27214%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+
+
+*******************************************************************************
+Ephemeris / API_USER Wed Sep  9 04:24:54 2026 Pasadena, USA      / Horizons
+*******************************************************************************
+Target body name: 214 Aschera (A880 DB)           {source: JPL#78}
+Center body name: Sun (10)                        {source: DE441}
+Center-site name: BODY CENTER
+*******************************************************************************
+Start time      : A.D. 2026-Sep-03 00:00:00.0000 TDB
+Stop  time      : A.D. 2026-Sep-04 00:00:00.0000 TDB
+Step-size       : 1440 minutes
+*******************************************************************************
+Center geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
+Center radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}
+Keplerian GM    : 9.9069305641054896E+20 km^3/d^2
+Small perturbers: Yes                             {source: SB441-N16}
+Output units    : KM-D, deg, Julian Day Number (Tp)
+Calendar mode   : Mixed Julian/Gregorian
+Output type     : GEOMETRIC osculating elements
+Output format   : 10
+Reference frame : ICRF
+*******************************************************************************
+Initial IAU76/J2000 heliocentric ecliptic osculating elements (au, days, deg.):
+  EPOCH=  2457776.5 ! 2017-Jan-23.00 (TDB)         Residual RMS= .26788        
+   EC= .0316508688318939   QR= 2.528481577098314   TP= 2458426.2530243569      
+   OM= 341.9990545147049   W=  131.5377462060634   IN= 3.436302277582038       
+  Equivalent ICRF heliocentric cartesian coordinates (au, au/d):
+   X= 2.060051366607465E+00  Y=-1.554402970870368E+00  Z=-7.393241109556331E-01
+  VX= 6.517404483082780E-03 VY= 7.127896388469990E-03 VZ= 3.721332424311636E-03
+Asteroid physical parameters (km, seconds, rotational period in hours):        
+   GM= n.a.                RAD= 12.4785            ROTPER= 6.835               
+   H= 9.31                 G= .510                 B-V= .700                   
+                           ALBEDO= 1.              STYP= Xc                    
+*******************************************************************************
+            JDTDB,            Calendar Date (TDB),                     EC,                     QR,                     IN,                     OM,                      W,                     Tp,                      N,                     MA,                     TA,                      A,                     AD,                     PR,
+**************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+$$SOE
+2461286.500000000, A.D. 2026-Sep-03 00:00:00.0000,  3.119131489066718E-02,  3.783390594200363E+08,  2.672650186140591E+01,  3.576266616427532E+02,  1.212681532117845E+02,  2.461533320601710E+06,  2.336831818860056E-01,  3.023221764373108E+02,  2.992389710408735E+02,  3.905198882247217E+08,  4.027007170294072E+08,  1.540547321782077E+03,
+2461287.500000000, A.D. 2026-Sep-04 00:00:00.0000,  3.119198891147235E-02,  3.783390078917670E+08,  2.672650161578856E+01,  3.576266606724533E+02,  1.212677433466632E+02,  2.461533318824383E+06,  2.336829857585419E-01,  3.025563231624855E+02,  2.994806189172862E+02,  3.905201067306154E+08,  4.027012055694637E+08,  1.540548614745867E+03,
+$$EOE
+**************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+ 
+TIME
+
+  Barycentric Dynamical Time ("TDB" or T_eph) output was requested. This
+continuous coordinate time is equivalent to the relativistic proper time
+of a clock at rest in a reference frame co-moving with the solar system
+barycenter but outside the system's gravity well. It is the independent
+variable in the solar system relativistic equations of motion.
+
+  TDB runs at a uniform rate of one SI second per second and is independent
+of irregularities in Earth's rotation.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+REFERENCE FRAME AND COORDINATES
+
+  International Celestial Reference Frame (ICRF)
+
+    The ICRF is an adopted reference frame whose axes are defined relative to 
+    fixed extragalactic radio sources distributed across the sky.
+
+    The ICRF was aligned with the prior FK5/J2000 dynamical system at the ~0.02 
+    arcsecond level but is not identical and has no associated standard epoch.
+
+  Symbol meaning [1 day=86400.0 s]:
+
+    JDTDB    Julian Day Number, Barycentric Dynamical Time
+      EC     Eccentricity, e
+      QR     Periapsis distance, q (km)
+      IN     Inclination w.r.t X-Y plane, i (degrees)
+      OM     Longitude of Ascending Node, OMEGA, (degrees)
+      W      Argument of Perifocus, w (degrees)
+      Tp     Time of periapsis (Julian Day Number)
+      N      Mean motion, n (degrees/day)
+      MA     Mean anomaly, M (degrees)
+      TA     True anomaly, nu (degrees)
+      A      Semi-major axis, a (km)
+      AD     Apoapsis distance (km)
+      PR     Sidereal orbit period (day)
+
+ABERRATIONS AND CORRECTIONS
+
+ Geometric osculating elements have NO corrections or aberrations applied.
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov
+*******************************************************************************

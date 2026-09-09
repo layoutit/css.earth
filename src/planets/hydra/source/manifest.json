@@ -59,6 +59,12 @@
         "metersPerUnit": 1000,
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 18114.55731342771
+      },
+      "capture": {
+        "spacecraftIds": [
+          "new-horizons"
+        ],
+        "evidence": "https://ndownloader.figshare.com/files/24176603"
       }
     },
     {
@@ -93,8 +99,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3990,
-      "expectedSha256": "0a52a8fe447a84f17fdd8186a8435d2acd940eae72a7a7dbd8ceb16cc35de243",
+      "expectedBytes": 3883,
+      "expectedSha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
       "purpose": "Hydra source identity, survey evidence or authored preparation and content."
     },
     {

@@ -43,6 +43,237 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_128_o.obj",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_128_o.obj",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_128_o.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_128_o.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_512_o.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_512_o.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_sigma_c.cub",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_sigma_c.cub",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_sigma_c.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_sigma_c.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_numimg_c.cub",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_numimg_c.cub",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_numimg_c.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_numimg_c.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_albedo_g.tif",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_albedo_g.tif",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rhea_albedo_g.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_albedo_g.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/bundle_description.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/document/bundle_description.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rheakernellist.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/document/rheakernellist.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rheaimagelist.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/document/rheaimagelist.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/rheashapeassessment.pdf",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/document/rheashapeassessment.pdf",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf",
+      "path": "vims/document/information_file.pdf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
+      "path": "vims/document/information_file.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",
+      "path": "vims/data/vims_wavelengths_ir.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.xml",
+      "path": "vims/data/vims_wavelengths_ir.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_notnorm_pc_modified_2.xml",
+      "path": "vims/data/rhea/rhea_notnorm_pc_modified_2.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_notnorm_pc_modified_2.hdr",
+      "path": "vims/data/rhea/rhea_notnorm_pc_modified_2.hdr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_notnorm_pc_modified_2.img",
+      "path": "vims/data/rhea/rhea_notnorm_pc_modified_2.img",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_phase_function_parameters.tab",
+      "path": "vims/data/rhea/rhea_phase_function_parameters.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_phase_function_parameters.xml",
+      "path": "vims/data/rhea/rhea_phase_function_parameters.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_vims_cubes_list.tab",
+      "path": "vims/data/rhea/rhea_vims_cubes_list.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_vims_cubes_list.xml",
+      "path": "vims/data/rhea/rhea_vims_cubes_list.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
     }
   ]
 }

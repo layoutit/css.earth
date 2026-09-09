@@ -54,7 +54,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Calibrated DAMIT shape",
-        "title": "Published convex DAMIT model 289, version 2011-02-11, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase.",
+        "title": "DAMIT model 289",
         "thumbnail": "/scenes/angelina/angelina-shape-thumbnail.webp",
         "surface": "angelina-shape-surface@2x.webp",
         "poles": "angelina-shape-surface@2x.webp",
@@ -63,13 +63,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Source shape · radial height",
-        "title": "Color shows the original model radius minus a 26 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/angelina/angelina-elevation-thumbnail.webp",
         "surface": "angelina-elevation-surface@2x.webp",
         "poles": "angelina-elevation-surface@2x.webp",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/289",
           "image": "/scenes/angelina/angelina-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
       }
     ]
   },

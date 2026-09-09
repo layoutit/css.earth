@@ -2,7 +2,9 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
+import { orientLatitudeBands } from './objects/static-surface/projection.mjs';
 import { observationRaster } from './objects/static-surface/raster.mjs';
+import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.mjs';
 import { OBJECTS } from '../site/objects.mjs';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
@@ -10,6 +12,18 @@ async function optionalJson(path) {
   try { return JSON.parse(await readFile(path, 'utf8')); }
   catch (error) { if (error.code === 'ENOENT') return null; throw error; }
 }
+
+// Preserve categorical/numeric cells only where the source contract requests it.
+// Ordinary images retain the established resize and WebP presentation.
+const nearestDisplay = (...records) => records.some(record => record && (
+  record.displaySampling === 'nearest' || record.categorical === true ||
+  (Array.isArray(record.categories) && record.categories.length > 0) ||
+  record.format === 'facet-scalars' || record.scalarMap?.sourceFormat === 'facet-scalars'
+));
+const minimapEncoding = nearest => nearest ? { lossless: true, effort: 4 }
+  : { quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true };
+const minimapResize = nearest => ({ width: 640, withoutEnlargement: true,
+  ...(nearest ? { kernel: 'nearest' } : {}) });
 
 // A dedicated sidebar asset: never transport a globe-resolution map for a minimap.
 export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory }) {
@@ -29,14 +43,23 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     for (const plan of raster.lenses) {
       if (excluded.includes(plan.id)) continue;
       const density = Math.max(...raster.densities);
-      const { data, info } = await observationRaster({
-        input: resolve(objectDirectory, 'source', plan.input), plan,
-        width: raster.width * density, height: raster.height * density,
-      });
+      let data, info;
+      if (raster.surfaceProjection === 'oriented-bands') {
+        ({ data, info } = await sharp(resolve(publicDirectory, `${plan.output}${density === 2 ? '@2x' : ''}.webp`))
+          .raw().toBuffer({ resolveWithObject: true }));
+        if (info.width !== raster.width * density || info.height !== raster.height * density) throw new Error('Observation preview dimensions drifted.');
+        data = orientLatitudeBands(data, { ...info, bandCount: raster.latitudeSegments });
+      } else {
+        ({ data, info } = await observationRaster({
+          input: resolve(objectDirectory, 'source', plan.input), plan,
+          width: raster.width * density, height: raster.height * density,
+        }));
+      }
       const path = `minimaps/${plan.id}.webp`;
       await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-      const result = await sharp(data, { raw: info }).resize({ width: 640, withoutEnlargement: true })
-        .webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true })
+      const nearest = nearestDisplay(plan.scientific, plan);
+      const result = await sharp(data, { raw: info }).resize(minimapResize(nearest))
+        .webp(minimapEncoding(nearest))
         .toFile(resolve(outputDirectory, path));
       images.push({ id: plan.id, path, width: result.width, height: result.height });
     }
@@ -48,7 +71,8 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     if (!input) continue;
     const path = `minimaps/${surface.id}.webp`;
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-    let pipeline = sharp(input).resize({ width: 640, withoutEnlargement: true });
+    const nearest = nearestDisplay(surface);
+    let pipeline = sharp(input).resize(minimapResize(nearest));
     if (framing?.centerLongitudeDegrees !== undefined) {
       if (!Number.isFinite(framing.centerLongitudeDegrees)) throw new Error('Invalid minimap framing');
       const { data, info } = await pipeline.raw().toBuffer({ resolveWithObject: true });
@@ -61,11 +85,28 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       }
       pipeline = sharp(shifted, { raw: info });
     }
-    const result = await pipeline.webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true })
+    const result = await pipeline.webp(minimapEncoding(nearest))
       .toFile(resolve(outputDirectory, path));
     images.push({ id: surface.id, path, width: result.width, height: result.height,
       ...(surface.attribution ? { attribution: surface.attribution } : {}) });
   }
+  for await (const preview of recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory })) {
+    if (images.some(image => image.id === preview.id)) continue;
+    const path = `minimaps/${preview.id}.webp`;
+    await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
+    const result = await sharp(preview.raster.data, { raw: preview.raster.info })
+      .resize({ width: 640, withoutEnlargement: true })
+      .webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true })
+      .toFile(resolve(outputDirectory, path));
+    images.push({ id: preview.id, path, width: result.width, height: result.height });
+  }
+  const [controls, lenses, bindings] = await Promise.all([
+    optionalJson(resolve(outputDirectory, 'controls.json')),
+    optionalJson(resolve(outputDirectory, 'lenses.json')),
+    optionalJson(resolve(objectDirectory, 'source/content/lens-bindings.json')),
+  ]);
+  assertSurfacePreviewCoverage((controls?.lenses?.controls ?? []).filter(lens => !excluded.includes(lens.id)), images,
+    [...(lenses?.controls ?? []), ...(bindings?.controls ?? [])]);
   await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
   return images;
 }

@@ -20,7 +20,7 @@ export type PreparedWrite = { target: number; name: string } & (
   { kind: "attribute"; value: string | null } | { kind: "class"; value: boolean } |
   { kind: "style"; value: string } | { kind: "texture"; resource: string | null; quoted: boolean }
 );
-export interface PreparedSelectionNavigation { maximumZoom: number; camera?: { controlPitch: number; controlYaw: number; zoom: number }; }
+export interface PreparedSelectionNavigation { maximumZoom: number; camera?: { controlPitch: number; controlYaw: number; controlRoll?: number; zoom: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } }; }
 export interface PreparedVariant { when: Readonly<Record<string, ObjectSelection[string]>>; required: readonly string[]; materials: readonly PreparedMaterialSelection[]; writes: readonly PreparedWrite[]; navigation?: PreparedSelectionNavigation; }
 export interface PreparedTree {
   /** Offline first-paint batches. Runtime restores these exact retained leaves. */
@@ -155,7 +155,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = (index: number) => index === -1 ? stage : nodes[index];
   return Object.freeze({ cameraElement, sceneElement, activate,
-    ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement) } : {}),
+    ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
       carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),

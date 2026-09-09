@@ -61,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "f4d5d509ebc47cbd051909ce34a48427949db92004ce029f93d7d24fd5234655"
+          "sha256": "c01eecdaeb1c542b719bbc2dad89b127d3727be9bfd0f8311085ffadfef33139"
         },
         {
           "id": "title",
@@ -113,6 +113,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "48da41a31a72d98f270f1387bdd438563b8602090db2d8ca72a4760645eb019e"
+    "sha256": "1a59b829118185bd556e782bccef6d49237bc16810c5426045afbdade7768691"
   }
 }

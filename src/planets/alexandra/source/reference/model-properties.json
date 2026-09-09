@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1817",
+  "modelId": 1817,
+  "modelVersion": "2017-06-07",
+  "diameterKm": 143,
+  "diameterInterpretation": "Nonconvex model constrained by resolved imaging, 143 ± 5 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 143,
+    "uncertaintyKm": 5,
+    "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1817",
+    "reference": "DAMIT model 1817, version 2017-06-07",
+    "sourceLabel": "DAMIT model 1817",
+    "scaleKmPerSourceUnit": 0.9989808248194602,
+    "metersPerSourceUnit": 998.9808248194602,
+    "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred.",
+    "visibleDescription": "Nonconvex model constrained by resolved imaging, 143 ± 5 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 7.02264,
+  "poleEclipticJ2000Degrees": [
+    154,
+    17
+  ],
+  "modelLimitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/284/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 998.9808248194602,
+    "firstVertexKm": [
+      -6.960870415878903,
+      12.956488596526725,
+      63.44303147029384
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      149.055930909662,
+      182.8234807502094,
+      127.17425492281656
+    ],
+    "volumeCubicKm": 1531111.2047959757,
+    "volumeEquivalentRadiusKm": 71.5,
+    "radialRangeKm": [
+      54.95627091632881,
+      95.73591325963721
+    ]
+  },
+  "elevation": [
+    -30,
+    30
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1430,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1531111204795974.8
+    }
+  }
+}

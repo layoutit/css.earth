@@ -14,9 +14,10 @@ describe('comet positions against independent JPL Horizons vectors', () => {
   })
   // +/-30-day conics are only a placement approximation: 10,000 km accuracy budget.
   // Observed maxima: 67P 329.06 km; 103P 390.29 km; 9P 5181.10 km;
-  // 81P 480.81 km; 1P 557.99 km.
+  // 81P 480.81 km; 1P 557.99 km; 8P 437.44 km; 19P 356.11 km.
+  // New maxima: comet-137p: 344.50 km; comet-143p: 1489.08 km; comet-162p: 695.09 km.
   // The per-body regression guards add approximately 15% headroom.
-  const regressionGuardKm = { 'comet-67p': 380, 'comet-103p': 450, 'comet-9p': 6000, 'comet-81p': 555, 'comet-1p': 642 }
+  const regressionGuardKm = { 'comet-67p': 380, 'comet-103p': 450, 'comet-9p': 6000, 'comet-81p': 555, 'comet-1p': 642, 'comet-8p': 505, 'comet-19p': 410, 'comet-137p': 397, 'comet-143p': 1713, 'comet-162p': 800 }
   it('bounds nearby conic error without claiming a perturbation or outgassing model', () => {
     for (const id of COMET_IDS) for (const row of [COMET_FIXTURES[id].rows[0], COMET_FIXTURES[id].rows[2]]) {
       const actual = cometPositionKm(id, row.jd)

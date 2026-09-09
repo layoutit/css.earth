@@ -65,6 +65,281 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_128_o.obj",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_128_o.obj",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_128_o.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_128_o.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_512_o.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_512_o.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_sigma_c.cub",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_sigma_c.cub",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_sigma_c.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_sigma_c.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_numimg_c.cub",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_numimg_c.cub",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_numimg_c.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_numimg_c.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_eqalbedo_g.tif",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqalbedo_g.tif",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_eqalbedo_g.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqalbedo_g.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_npalbedo_g.tif",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npalbedo_g.tif",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_npalbedo_g.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npalbedo_g.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_spalbedo_g.tif",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spalbedo_g.tif",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dione_spalbedo_g.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spalbedo_g.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/bundle_description.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/bundle_description.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dionekernellist.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dionekernellist.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dioneimagelist.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dioneimagelist.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dioneshapeassessment.pdf",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dioneshapeassessment.pdf",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf",
+      "path": "vims/document/information_file.pdf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
+      "path": "vims/document/information_file.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",
+      "path": "vims/data/vims_wavelengths_ir.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.xml",
+      "path": "vims/data/vims_wavelengths_ir.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.xml",
+      "path": "vims/data/dione/dione_notnorm_pc_modified_2.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.hdr",
+      "path": "vims/data/dione/dione_notnorm_pc_modified_2.hdr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.img",
+      "path": "vims/data/dione/dione_notnorm_pc_modified_2.img",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_phase_function_parameters.tab",
+      "path": "vims/data/dione/dione_phase_function_parameters.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_phase_function_parameters.xml",
+      "path": "vims/data/dione/dione_phase_function_parameters.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_vims_cubes_list.tab",
+      "path": "vims/data/dione/dione_vims_cubes_list.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_vims_cubes_list.xml",
+      "path": "vims/data/dione/dione_vims_cubes_list.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
     }
   ]
 }

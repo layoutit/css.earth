@@ -32,6 +32,23 @@
           "noData": null,
           "centerLongitude": 180
         }
+      },
+      {
+        "id": "infrared",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-nearest"
+        },
+        "textureScale": 0.125,
+        "focus": {
+          "longitudeDegrees": 280,
+          "latitudeDegrees": 15,
+          "zoom": 1.1
+        }
       }
     ],
     "scientific": [
@@ -41,7 +58,7 @@
         "format": "geotiff",
         "path": "observations/dione_eqradius_g.tif",
         "description": "Cassini terrain model · shaded relief",
-        "title": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
+        "title": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
         "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
         "minimum": -7.5,
         "maximum": 7.5,
@@ -146,9 +163,163 @@
             }
           }
         ]
+      },
+      {
+        "id": "relative-albedo",
+        "label": "Relative albedo",
+        "format": "geotiff",
+        "path": "science/b2-intake/dione_eqalbedo_g.tif",
+        "description": "Cassini SPC relative albedo · dimensionless",
+        "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+        "minimum": 0.5,
+        "maximum": 1.5,
+        "colors": [
+          "#403362",
+          "#aba0be",
+          "#f4f1e8",
+          "#c0a257",
+          "#755013"
+        ],
+        "labels": [
+          "0.5",
+          "1",
+          "≥ 1.5"
+        ],
+        "units": "relative to mean ≈ 1",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 2222,
+          "height": 679,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 561400,
+          "noData": -3.4028226550889045e+38,
+          "specialValueMagnitude": 1e+30,
+          "origin": [
+            -1763690.11572531,
+            538905.313138289
+          ],
+          "resolution": [
+            1587.4798521379928,
+            -1587.3499650612343
+          ],
+          "latitudeRange": [
+            -55,
+            55
+          ]
+        },
+        "additionalGrids": [
+          {
+            "path": "science/b2-intake/dione_npalbedo_g.tif",
+            "grid": {
+              "width": 444,
+              "height": 444,
+              "centerLongitude": 0,
+              "referenceRadiusMeters": 561400,
+              "noData": -3.4028226550889045e+38,
+              "specialValueMagnitude": 1e+30,
+              "origin": [
+                -352738.023145062,
+                352738.023145062
+              ],
+              "resolution": [
+                1588.9100141669458,
+                -1588.9100141669458
+              ],
+              "latitudeRange": [
+                55,
+                90
+              ],
+              "projection": "polar-stereographic",
+              "poleLatitude": 90
+            }
+          },
+          {
+            "path": "science/b2-intake/dione_spalbedo_g.tif",
+            "grid": {
+              "width": 444,
+              "height": 444,
+              "centerLongitude": 0,
+              "referenceRadiusMeters": 561400,
+              "noData": -3.4028226550889045e+38,
+              "specialValueMagnitude": 1e+30,
+              "origin": [
+                -352738.023145062,
+                352738.023145062
+              ],
+              "resolution": [
+                1588.9100141669458,
+                -1588.9100141669458
+              ],
+              "latitudeRange": [
+                -90,
+                -55
+              ],
+              "projection": "polar-stereographic",
+              "poleLatitude": -90
+            }
+          }
+        ],
+        "displaySampling": "nearest"
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "format": "geotiff",
+        "path": "vims/dione-water-ice.tif",
+        "consumer": "ice-absorption",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "description": "2.02 µm water-ice band depth",
+        "title": "Continuum-relative water-ice absorption; not ice abundance",
+        "sourceUrl": "https://doi.org/10.17189/ctqe-ta30",
+        "minimum": 0.3,
+        "maximum": 0.75,
+        "colors": [
+          "#332f68",
+          "#2c7fb8",
+          "#7fcdbb",
+          "#edf8b1"
+        ],
+        "labels": [
+          "≤ 0.30",
+          "0.525",
+          "≥ 0.75"
+        ],
+        "units": "band depth · dimensionless",
+        "grid": {
+          "width": 360,
+          "height": 180,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 561400.0,
+          "noData": -9999,
+          "origin": [
+            -1763690.1157253098,
+            881845.0578626549
+          ],
+          "resolution": [
+            9798.278420696166,
+            -9798.278420696166
+          ],
+          "wrapLongitude": true
+        },
+        "textureScale": 0.125,
+        "focus": {
+          "longitudeDegrees": 280,
+          "latitudeDegrees": 15,
+          "zoom": 1.1
+        }
       }
     ],
-    "observedColors": []
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -169,7 +340,26 @@
       "defaultControlYawDegrees": 0
     },
     "mapUrl": "/scenes/dione/dione-normal-surface@2x.webp",
-    "polesUrl": "/scenes/dione/dione-normal-poles@2x.webp"
+    "polesUrl": "/scenes/dione/dione-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "science/b2-intake/dione_128_o.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 98306,
+        "expectedFaces": 196608
+      },
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 2000,
+        "maximumErrorMeters": 5614,
+        "regularize": false
+      }
+    }
   },
   "celestial": {
     "sunSource": "JPL Dione orbit plus VSOP87 Saturn position and IAU/WGCCRE Dione rotation"

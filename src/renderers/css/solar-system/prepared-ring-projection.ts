@@ -33,13 +33,15 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   clipX: number;
   clipY: number;
 }) {
-  return (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[]): readonly OrbitSegment[] => {
-    const eyes = activeChords ? null : vertices.map(toEye);
+  return (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[], fullOrbit = false): readonly OrbitSegment[] => {
+    // Full orbits include prepared chords omitted by the trail fade.
+    const chords = fullOrbit ? undefined : activeChords;
+    const eyes = chords ? null : vertices.map(toEye);
     const segments: OrbitSegment[] = [];
     let lastEndIndex = -1, lastEnd: Vector3 | null = null;
-    for (let ordinal = 0; ordinal < (activeChords?.length ?? vertices.length); ordinal++) {
-      const index = activeChords?.[ordinal] ?? ordinal;
-      const weight = trail[index];
+    for (let ordinal = 0; ordinal < (chords?.length ?? vertices.length); ordinal++) {
+      const index = chords?.[ordinal] ?? ordinal;
+      const weight = fullOrbit ? 1 : trail[index];
       if (!(weight > 0)) continue;
       const next = (index + 1) % vertices.length;
       let start = eyes ? eyes[index] : lastEndIndex === index ? lastEnd! : toEye(vertices[index]);

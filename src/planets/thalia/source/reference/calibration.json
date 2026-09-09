@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 114.0,
+  "uncertaintyKm": 8.0,
+  "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+  "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1858",
+  "reference": "DAMIT model 1858, version 2017-09-21",
+  "sourceLabel": "DAMIT model 1858",
+  "scaleKmPerSourceUnit": 0.9972228542918805,
+  "metersPerSourceUnit": 997.2228542918805,
+  "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The second pole is selected because Viikinkoski et al. (2017), section 3, find its AO fit more likely; the competing pole is not ruled out.",
+  "visibleDescription": "Nonconvex model constrained by resolved imaging, 114 ± 8 km volume-equivalent diameter in the selected archive record. An alternative pole solution remains in the archive. Grid marks unavailable imagery; rotational phase is illustrative."
+}

@@ -20,7 +20,13 @@
       "falseColor": false,
       "coverage": "Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
       "expectedBytes": 103721158,
-      "expectedSha256": "59c2a4133472869afddc42c00b5a9becd7c0dda028ac646490af933ac0ce2fac"
+      "expectedSha256": "59c2a4133472869afddc42c00b5a9becd7c0dda028ac646490af933ac0ce2fac",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594"
+      }
     },
     {
       "credit": "NASA/JPL; Paul Schenk, Lunar and Planetary Institute",
@@ -58,7 +64,13 @@
       },
       "coverage": "Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
       "expectedBytes": 12442504,
-      "expectedSha256": "ff533af3163f53cc5560cd983cfe0f06b1c2cd0f3db36518d4c5cc5f5ddfeabb"
+      "expectedSha256": "ff533af3163f53cc5560cd983cfe0f06b1c2cd0f3db36518d4c5cc5f5ddfeabb",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -132,8 +144,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7626,
-      "expectedSha256": "7a2cf1f2dcc340ad18e9372cef9f032d1249b7844d55d37d3fd7b7c7e5e32881",
+      "expectedBytes": 7586,
+      "expectedSha256": "fb3b4056001a0384a0c9077ac8b64e05d86f85a6ba65a9c43da83a91f60c2a2c",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {

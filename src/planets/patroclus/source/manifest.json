@@ -1,0 +1,186 @@
+{
+  "schema": "csspatroclus-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "occultation-approximation",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 62404,
+      "expectedSha256": "d42d1b58ea65d003fb1b31f8b32bc0c79e833c5bcb7aa060fd395039ae0ee9c4",
+      "origin": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+      "credit": "Buie et al. (2015), The Astronomical Journal 149, 113; existing JPL#82 Patroclus-Menoetius source closure",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 56672.872253886206
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+      "credit": "Buie et al. (2015), The Astronomical Journal 149, 113; existing JPL#82 Patroclus-Menoetius source closure",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 56672.872253886206
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3999,
+      "expectedSha256": "191e0628a0ca040390a8b886792d31ba79b4a42b6b0ce191635aa616b1247779",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2941,
+      "expectedSha256": "8f1263df9445613fd178b41f554015d190f6053ef32eddd10da48dea74f69260",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1336,
+      "expectedSha256": "4d242eca55f08dbb1c72bafd98d7274585ed8e941fc11028d22cccff1d517934",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 521,
+      "expectedSha256": "605bc6cb34a858ade7334de5a6f15755ebae43f07c9c85232160c8de4d05dcc9",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2848,
+      "expectedSha256": "38b7e5803fea0edcdfd61625dbdd067b0b8e380fda65da46dbce4f72b0bdd247",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4979,
+      "expectedSha256": "883ca3633b43f1b3da1af6a162fadc1b6d1558d8f8fe74fc81e316c5593571f6",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 852,
+      "expectedSha256": "6483eaaa681c649480710d6988d756b1ac387af6dc24ef48a8ecd1f667986078",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+      "credit": "Buie et al. (2015), The Astronomical Journal 149, 113; existing JPL#82 Patroclus-Menoetius source closure",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "occultation-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 76739,
+      "expectedSha256": "99e9cc16ae282cdb8d4ea8766849759ff7b3693562f6ed797719ac0c1041cb39"
+    }
+  ]
+}

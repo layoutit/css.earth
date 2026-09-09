@@ -40,6 +40,551 @@
       ],
       "path": "radar/MIBEF00N270_T126S00_V01.IMG.gz",
       "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/titan_topo_corlies.zip",
+      "url": "https://data.astro.cornell.edu/titan_topo_corlies/titan_topo_corlies.zip",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/topo_4PPD.cub",
+      "url": "https://data.astro.cornell.edu/titan_topo_corlies/full_dataset/topo_4PPD.cub",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/topo_4PPD_interp.cub",
+      "url": "https://data.astro.cornell.edu/titan_topo_corlies/full_dataset/topo_4PPD_interp.cub",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTBED00N090_T126_V01.LBL",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N090_T126_V01.LBL",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTBED00N090_T126_V01.IMG.gz",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N090_T126_V01.IMG.gz",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTBED00N270_T126_V01.LBL",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N270_T126_V01.LBL",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTBED00N270_T126_V01.IMG.gz",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N270_T126_V01.IMG.gz",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTIED00N090_T126_V01.LBL",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.LBL",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.IMG.gz",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTIED00N270_T126_V01.LBL",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N270_T126_V01.LBL",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N270_T126_V01.IMG.gz",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTDED00N090_T126_V01.LBL",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.LBL",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.IMG.gz",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTDED00N270_T126_V01.LBL",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N270_T126_V01.LBL",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N270_T126_V01.IMG.gz",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTFED00N090_T126_V01.LBL",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.LBL",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.IMG.gz",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTFED00N270_T126_V01.LBL",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N270_T126_V01.LBL",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N270_T126_V01.IMG.gz",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/d09e5eac-2d61-4ff7-acd8-44a56f88b416/file_downloaded",
+      "path": "geology/Basins.cpg",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/03f4ae5c-fe8b-47d3-add3-b8ff1f6aea7a/file_downloaded",
+      "path": "geology/Basins.dbf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/7e33341a-4218-4ba8-8b5d-f4789d212171/file_downloaded",
+      "path": "geology/Basins.lyr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/8f69ee44-75fa-42d2-8216-1f134f882a6d/file_downloaded",
+      "path": "geology/Basins.prj",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/6904cb58-5032-4ae0-8b9c-961c3d5d363c/file_downloaded",
+      "path": "geology/Basins.shp",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/e2d84a57-6b52-48b4-b5e0-0df9661c5bd9/file_downloaded",
+      "path": "geology/Basins.shp.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/e0a9d719-1156-46da-826e-e0857ae6075b/file_downloaded",
+      "path": "geology/Basins.shx",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/dcec9fde-5839-4740-8ca1-dd830bedc594/file_downloaded",
+      "path": "geology/Craters.cpg",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/e4f40ffa-b769-4e1c-bc45-1035eb5e7b75/file_downloaded",
+      "path": "geology/Craters.dbf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/43b75cb8-4885-4e52-b055-b4630e51ecfb/file_downloaded",
+      "path": "geology/Craters.lyr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/d7b8af2c-34b6-4ef2-b68f-38a9a60e803b/file_downloaded",
+      "path": "geology/Craters.prj",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/9333aa1c-2b7f-440d-88f1-b1a8a0d962e7/file_downloaded",
+      "path": "geology/Craters.shp",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/41cd4ae0-961e-46ce-94bb-87cf5801d67d/file_downloaded",
+      "path": "geology/Craters.shp.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/67f31f03-fcbb-4070-9593-0e5b828a61b0/file_downloaded",
+      "path": "geology/Craters.shx",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/2e594fe5-6294-490c-8d06-ab896683ba6c/file_downloaded",
+      "path": "geology/Dunes.cpg",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/855c6529-02d8-4bf3-add6-2f6ac0c6ddfe/file_downloaded",
+      "path": "geology/Dunes.dbf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/f66f8a92-e96f-40f4-8960-e29a78219735/file_downloaded",
+      "path": "geology/Dunes.lyr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/5f45d94c-45cb-4e4d-b0cc-2278f5ba0cc0/file_downloaded",
+      "path": "geology/Dunes.prj",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/675e1cd5-93c1-4677-8dec-c137b5faf59d/file_downloaded",
+      "path": "geology/Dunes.shp",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/26431bb3-1f48-4096-8e75-ab65389b6476/file_downloaded",
+      "path": "geology/Dunes.shp.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/3cfe7617-db1c-4bdf-afa3-b50528678731/file_downloaded",
+      "path": "geology/Dunes.shx",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/46dfb73b-109f-4a89-b1fe-8f65a7b8785b/file_downloaded",
+      "path": "geology/Labyrinth.cpg",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/70c41ef9-7db3-46ca-943b-6c75bd7ecf5e/file_downloaded",
+      "path": "geology/Labyrinth.dbf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/e121350e-8bb2-41ee-a891-2467c095219c/file_downloaded",
+      "path": "geology/Labyrinth.lyr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/b2e5b228-62e2-4728-b58d-8a00f7e0ac44/file_downloaded",
+      "path": "geology/Labyrinth.prj",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/52590549-8788-4b27-881c-481c4db14064/file_downloaded",
+      "path": "geology/Labyrinth.shp",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/ed9fcb9a-2fb1-4e9c-b903-38847bd70031/file_downloaded",
+      "path": "geology/Labyrinth.shp.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/2b04b3cc-c5ad-43dd-b5f8-8a7b15c4555c/file_downloaded",
+      "path": "geology/Labyrinth.shx",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/aee0b88b-817f-4ed9-9974-f6228799d7dd/file_downloaded",
+      "path": "geology/Mountains.cpg",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/7f32a524-89b3-434b-b4c8-f40d02b694ab/file_downloaded",
+      "path": "geology/Mountains.dbf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/48a5d71a-6bb0-45bd-a500-7dff4fee1c70/file_downloaded",
+      "path": "geology/Mountains.lyr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/80a83a32-c94a-468a-8d6f-71feda93f6f2/file_downloaded",
+      "path": "geology/Mountains.prj",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/7385d31f-3d0c-4e6e-9ee0-c71689043e77/file_downloaded",
+      "path": "geology/Mountains.shp",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/80d59d4c-e7d0-4102-aee6-9d99ba66f8ce/file_downloaded",
+      "path": "geology/Mountains.shp.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/28b6de37-243f-470d-a3fa-2e8561afa288/file_downloaded",
+      "path": "geology/Mountains.shx",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/9d02a253-ac4e-4ecd-a14f-9a8b55aa32cf/file_downloaded",
+      "path": "geology/Plains_3.cpg",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/827c6cdc-a23f-4e3f-97c2-cffc95f4a8ad/file_downloaded",
+      "path": "geology/Plains_3.dbf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/4de3c710-fb38-4287-996c-7ceab2e86147/file_downloaded",
+      "path": "geology/Plains_3.lyr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/6c0ece97-01a1-411b-bd35-cf6f4ec8e2f0/file_downloaded",
+      "path": "geology/Plains_3.prj",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/6fb8f934-8de2-4cb1-afbd-8e17ec245386/file_downloaded",
+      "path": "geology/Plains_3.shp",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/32376b8e-4968-466f-8006-55259f0aa69c/file_downloaded",
+      "path": "geology/Plains_3.shp.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/178ca2a3-db16-426c-bfab-d74d893036c4/file_downloaded",
+      "path": "geology/Plains_3.shx",
+      "groups": [
+        "cassini-atlas"
+      ]
     }
   ]
 }

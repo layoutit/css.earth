@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
-        "title": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "title": "Approximate shape model",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/kerberos/kerberos-model-thumbnail.webp",
         "surface": "kerberos-model-surface@2x.webp",
@@ -59,7 +59,8 @@
           "id": "measured-ellipsoid",
           "path": "../manifest.json",
           "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
-        }
+        },
+        "summary": "New Horizons shape estimate. A two-lobed form remains possible; the pole is uncertain. No imagery is mapped."
       }
     ]
   },

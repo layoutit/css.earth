@@ -8,7 +8,7 @@ import { requireObjectControls } from "../scene-contract.mjs";
 import { sceneSources } from "../scene-sources.mjs";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
-import SearchCategoryIcon from "./SearchCategoryIcon.astro";
+import ExplorerRail from "./ExplorerRail.astro";
 import CssEarthWordmark from "./CssEarthWordmark.astro";
 import PlanetCard from './PlanetCard.astro';
 import PlanetCardHeader from './PlanetCardHeader.astro';
@@ -48,7 +48,6 @@ const speedValues: Readonly<Record<string, number>> = Object.freeze({
 });
 const initialSpeedState = speedSetting?.state ?? "normal";
 const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
-const planetCount = PLANET_SEARCH_OBJECTS.length;
 const activeObject = OBJECTS.find((object) => object.id === objectId);
 const systemStar = OBJECTS.find(object => object.classification === 'star' && object.distanceAu === 0);
 const unavailableSystems = planetarySystems.unavailable.map(system => ({
@@ -60,60 +59,42 @@ const hasResources = sources.length > 0;
 ---
 
 <header class="explorer-shell-header">
-  <div class="explorer-shell-wordmark">
-    <CssEarthWordmark />
-  </div>
-  <div class="planet-sidebar-search-card" role="search" aria-label="Object search">
-    <input
-      class="planet-sidebar-search"
-      type="search"
-      placeholder={destinations?.searchLabel ?? `Search (${planetCount})`}
-      aria-label={destinations?.searchLabel ?? `Search ${planetCount} objects`}
-      autocomplete="off"
-      value={activeObject?.name ?? ""}
-    />
-    <button
-      class="planet-sidebar-view-all"
-      type="button"
-      aria-controls={`${objectId}-object-browser`}
-      aria-label="Search"
-      title="Search"
-    >
-      <span class="planet-sidebar-search-icon" aria-hidden="true">
-        <MaterialSymbol name="travel_explore" />
-      </span>
-    </button>
+  <div class="explorer-brand-row">
+    <div class="explorer-shell-wordmark">
+      <CssEarthWordmark />
+    </div>
+    <div class="planet-project-links" role="group" aria-label="App and project actions">
+      <button class="planet-toolbar-action planet-settings-action" type="button" hidden
+        aria-label="Settings" title="Settings" aria-controls={`${objectId}-settings`} aria-pressed="false">
+        <MaterialSymbol name="settings" />
+      </button>
+      <a class="planet-github-link" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">
+        <span>v{__CSSEARTH_VERSION__}</span>
+      </a>
+    </div>
   </div>
   <div class="planet-search-toolbar">
-
-    <div class="planet-search-categories" role="group" aria-label="Search categories">
-      {[
-        { label: "Planets", classification: "planet" },
-        { label: "Moons", classification: "satellite" },
-        { label: "Asteroids", classification: "asteroid" },
-      ].map(category => <button
-        class="planet-search-category"
+    <ExplorerRail objectId={objectId} />
+    <div class="planet-sidebar-search-card" role="search" aria-label="Object search">
+      <input
+        class="planet-sidebar-search"
+        type="search"
+        placeholder={`Search celestial bodies (${PLANET_SEARCH_OBJECTS.length})`}
+        aria-label={`Search celestial bodies (${PLANET_SEARCH_OBJECTS.length})`}
+        autocomplete="off"
+      />
+      <button
+        class="planet-sidebar-view-all"
         type="button"
-        data-search-query={category.label}
-        data-search-classification={category.classification}
-        aria-pressed="false"
+        aria-controls={`${objectId}-object-browser`}
+        aria-label="Search"
+        title="Search"
       >
-        <SearchCategoryIcon kind={category.classification} />
-        <span>{category.label}</span>
-      </button>)}
+        <span class="planet-sidebar-search-icon" aria-hidden="true">
+          <MaterialSymbol name="search" />
+        </span>
+      </button>
     </div>
-
-    <button
-      class="planet-sidebar-collapse"
-      type="button"
-      aria-controls={`${objectId}-sidebar`}
-      aria-expanded="true"
-      aria-label="Collapse sidebar"
-      title="Collapse sidebar"
-    >
-      <MaterialSymbol name="left_panel_close" />
-      <MaterialSymbol name="left_panel_open" />
-    </button>
   </div>
 </header>
 <div class="planet-sidebar-frame">
@@ -214,7 +195,6 @@ const hasResources = sources.length > 0;
           </li>)}
         </ul>
       </section>}
-      <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
     </nav>
     {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
       <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>

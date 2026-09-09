@@ -31,7 +31,15 @@
       },
       "coverage": "USGS May 2008 Cassini/Voyager mosaic. Exactly zero is GeoTIFF no-data; preserve all other values, including dark terrain. Voyager covers poles and some areas were acquired in Saturnshine. Photographed shading and resolution vary.",
       "expectedBytes": 16612487,
-      "expectedSha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e"
+      "expectedSha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
+      "capture": {
+        "spacecraftIds": [
+          "cassini",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
+      }
     },
     {
       "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
@@ -62,7 +70,13 @@
       },
       "coverage": "Published global rectangular mosaic without a separate validity mask. Preserve every supplied pixel: the dark leading hemisphere is real surface albedo. Coarse polar coverage, patch seams and residual photographed shading remain.",
       "expectedBytes": 4989080,
-      "expectedSha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b"
+      "expectedSha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -144,8 +158,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 10223,
-      "expectedSha256": "234898f125979cee8bf8a3ac4b05c5ca02495699416c14ad21b9d7cc70580c5f",
+      "expectedBytes": 9747,
+      "expectedSha256": "40c45d5876be92934c3e6e31286c21866ce3dd47d8aa619a94ea4c2a1ec8fe85",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {

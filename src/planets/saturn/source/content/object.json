@@ -143,7 +143,7 @@
         "id": "normal",
         "label": "Visible color",
         "description": "Visible-light appearance from the prepared OpenSpace Saturn mosaic. This is a presentation texture assembled from observations, not a live image of the scene date.",
-        "title": "Visible color",
+        "title": "Visible-light mosaic",
         "thumbnail": "/scenes/saturn/saturn-lens-normal.webp",
         "surface": "/scenes/saturn/saturn-surface-body.jpg",
         "poles": "/scenes/saturn/saturn-poles.webp",
@@ -152,13 +152,14 @@
           "id": "normal",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         },
-        "detail": "Visible light"
+        "detail": "Visible light",
+        "summary": "Cloud bands are assembled from archival visible-light observations. The mosaic does not depict conditions at the scene date."
       },
       {
         "id": "ultraviolet",
         "label": "Ultraviolet",
         "description": "Hubble OPAL F225W (225 nm), August 2025, shown in false color. Broad ultraviolet structure is measured; missing polar/ring-occluded rows are filled along longitude and fine detail comes from a bounded visible-light transfer. This composite is not pure ultraviolet imagery.",
-        "title": "Ultraviolet, F225W false color",
+        "title": "OPAL F225W map",
         "thumbnail": "/scenes/saturn/saturn-lens-ultraviolet.webp",
         "surface": "/scenes/saturn/saturn-surface-ultraviolet.webp",
         "poles": "/scenes/saturn/saturn-poles-ultraviolet.webp",
@@ -196,13 +197,14 @@
           "id": "ultraviolet",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         },
-        "detail": "225 nm"
+        "detail": "225 nm",
+        "summary": "The 225 nm observations date to August 2025. Filled rows and added visible-light detail are not ultraviolet measurements."
       },
       {
         "id": "methane",
         "label": "Methane",
         "description": "Hubble OPAL FQ889N (889 nm), August 2025, shown in false color. This methane-absorption band traces atmospheric structure, not a methane concentration map. Missing rows and fine visible-light detail are filled as described for ultraviolet.",
-        "title": "Methane, FQ889N false color",
+        "title": "OPAL FQ889N map",
         "thumbnail": "/scenes/saturn/saturn-lens-methane.webp",
         "surface": "/scenes/saturn/saturn-surface-methane.webp",
         "poles": "/scenes/saturn/saturn-poles-methane.webp",
@@ -240,13 +242,14 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         },
-        "detail": "889 nm"
+        "detail": "889 nm",
+        "summary": "The 889 nm observations include filled rows and added visible detail. Brightness does not measure methane concentration."
       },
       {
         "id": "thermal",
         "label": "Thermal illustration",
         "description": "Schematic illustration from visible-light morphology and authored patterns. Colors do not measure infrared brightness or temperature; this is not a Cassini observation.",
-        "title": "Thermal-style schematic illustration, without measured infrared data",
+        "title": "Thermal-style cloud illustration",
         "thumbnail": "/scenes/saturn/saturn-lens-thermal.webp",
         "surface": "/scenes/saturn/saturn-surface-thermal.webp",
         "poles": "/scenes/saturn/saturn-poles-thermal.webp",
@@ -283,13 +286,14 @@
           "id": "thermal",
           "url": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/"
         },
-        "detail": "Schematic"
+        "detail": "Schematic",
+        "summary": "Visible cloud patterns are recolored to suggest a thermal view. The colors do not measure temperature or infrared brightness."
       },
       {
         "id": "cross-section",
         "label": "Cross section",
         "description": "Schematic interior layers based on models of Saturn. Boundaries, colors and exposed structure illustrate inferred composition; they are not photographs or a measured interior map.",
-        "title": "Cross section",
+        "title": "Interior structure model",
         "thumbnail": "/scenes/saturn/saturn-view-interior.webp",
         "view": "interior",
         "legend": {
@@ -340,7 +344,8 @@
           "id": "cross-section",
           "url": "https://science.nasa.gov/resource/saturn-interior-cutaway-illustration/"
         },
-        "detail": "Structure"
+        "detail": "Structure",
+        "summary": "Colored layers distinguish the inferred interior structure. Their boundaries illustrate a model, not a measured interior map."
       }
     ]
   },

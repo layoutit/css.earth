@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain.",
-        "title": "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain.",
+        "title": "Approximate shape model",
         "detail": "Published shape",
         "thumbnail": "/scenes/juliet/juliet-model-thumbnail.webp",
         "surface": "juliet-model-surface@2x.webp",
@@ -59,7 +59,8 @@
           "id": "measured-shape",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1006/icar.2001.6596"
-        }
+        },
+        "summary": "A 150 × 74 × 74 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
       }
     ]
   },

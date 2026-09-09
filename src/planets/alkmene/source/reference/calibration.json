@@ -1,0 +1,19 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 58.6,
+  "uncertaintyKm": 1.2,
+  "uncertaintyKind": "Reported VS-TPM uncertainty; not a bound on local shape accuracy.",
+  "diameterSemantics": "Volume-equivalent diameter from Hanuš et al. (2018), Table A.3, for the selected Hanuš (2011) pole family.",
+  "scaleKmPerSourceUnit": 47.2313661885516,
+  "metersPerSourceUnit": 47231.3661885516,
+  "sourceUrl": "https://arxiv.org/pdf/1803.06116",
+  "reference": "Hanuš et al. (2018), Icarus 309, 297–337, Table A.3; doi:10.1016/j.icarus.2018.03.016",
+  "sourceLabel": "Hanuš et al. (2018), Table A.3",
+  "publishedPoleEclipticDegrees": [
+    164.0,
+    -28.0
+  ],
+  "publishedPeriodHours": 13.0008,
+  "limitations": "Only a uniform scale from the published thermophysical fit is transferred to the archived nominal mesh. The varied-model ensemble does not establish identical mesh bytes or local surface accuracy. The alternative pole remains possible. No thermal or reflectance map is inferred.",
+  "visibleDescription": "Convex light-curve shape with thermophysical volume-equivalent diameter 58.6 ± 1.2 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative."
+}

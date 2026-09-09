@@ -6,11 +6,11 @@ const PREPARED_PRESENTATION = {...presentation, schema:PREPARED_PRESENTATION_SCH
 import { requirePreparedPresentation, PREPARED_PRESENTATION_SCHEMA } from "../../../../src/platform/prepared-presentation-contract.mjs";
 import { ASTRONOMICAL_UNIT_KILOMETERS } from "../../../../src/platform/solar-geometry.mjs";
 
-test("Callisto uses one shared scene, one authentic lens and shared shadows", () => {
+test("Callisto uses one shared scene, sourced lenses and shared shadows", () => {
   requirePreparedPresentation(PREPARED_PRESENTATION, {controls:runtimeDefinition.controls});
   assert.equal(runtimeDefinition.id,"callisto");
   assert.equal(runtimeDefinition.tree.nodes.filter(node => node.className?.includes("polycss-camera")).length,1);
-  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id),["normal"]);
+  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id),["normal","enhanced","infrared"]);
   for (const variant of runtimeDefinition.variants) {
     const lighting = variant.materials.find(material => material.track === "lighting");
     assert.equal(lighting.enabled,true);

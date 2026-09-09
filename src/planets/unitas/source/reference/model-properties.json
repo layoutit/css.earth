@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/197",
+  "modelId": 197,
+  "modelVersion": "2009-02-26",
+  "diameterKm": 49,
+  "diameterInterpretation": "Convex light-curve reconstruction, 49 ± 5 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 49,
+    "uncertaintyKm": 5,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://arxiv.org/pdf/1104.4227",
+    "sourceLabel": "Ďurech et al. (2011), Icarus 214, 652–670",
+    "reference": "Ďurech et al. (2011), Icarus 214, 652–670",
+    "limitations": "The pole(79,−35) is preferred by both IRAS thermal fits and the2004 occultation negative chord. Delbo and Tanga2009 obtain a volume-equivalent thermal size range55–57 km, represented in DAMIT as56±1 km. The later Ďurech2011 Table3 fits the same pole family to five occultation chords at49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
+    "visibleDescription": "Convex light-curve reconstruction, 49 ± 5 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.8750000078752326,
+    "metersPerSourceUnit": 875.0000078752325
+  },
+  "periodHours": 8.73875,
+  "poleEclipticJ2000Degrees": [
+    79,
+    -35
+  ],
+  "modelLimitations": "The pole(79,−35) is preferred by both IRAS thermal fits and the2004 occultation negative chord. Delbo and Tanga2009 obtain a volume-equivalent thermal size range55–57 km, represented in DAMIT as56±1 km. The later Ďurech2011 Table3 fits the same pole family to five occultation chords at49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/578/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "Original archive coordinates flagged as km, with mesh volume-equivalent diameter 55.9999995 km and archive-declared diameter 56 km. The unchanged coordinates are uniformly rescaled by 0.87500000787523258 km per source unit to the explicitly selected published volume-equivalent diameter 49 km (Ďurech et al. (2011), Icarus 214, 652–670); the original archive diameter is not the adopted physical scale.",
+    "metersPerUnit": 875.0000078752325,
+    "firstVertexKm": [
+      -1.1325247601930237,
+      7.80452844524283,
+      21.06710131460951
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      58.41093965071398,
+      49.45496982010787,
+      43.83618614453732
+    ],
+    "volumeCubicKm": 61600.87235036431,
+    "volumeEquivalentRadiusKm": 24.5,
+    "radialRangeKm": [
+      19.941850587112548,
+      30.43423659270829
+    ]
+  },
+  "elevation": [
+    -6,
+    6
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 490,
+    "estimatedErrorMeters": 260.0830383300781,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 61431487058786.72
+    }
+  }
+}

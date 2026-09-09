@@ -1,0 +1,28 @@
+import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mjs';
+import controls from '../../../../src/planets/velleda/prepared/controls.json' with {type:'json'};
+export const browserProfile=createObjectBrowserProfile({id:'velleda',controls,audit:{
+  "preparedAssetPairs": [
+    {
+      "one": "/scenes/velleda/velleda-directional-sun.webp",
+      "two": "/scenes/velleda/velleda-directional-sun@2x.webp"
+    }
+  ],
+  "canonicalPreparedAssets": [
+    "/scenes/velleda/velleda-shape-surface@2x.webp"
+  ],
+  "retained": {
+    "lensIds": [
+      "shape",
+      "elevation"
+    ],
+    "speedClicks": 5,
+    "allowedMountSelectors": []
+  },
+  "lensRace": {
+    "defaultId": "shape",
+    "slowId": "elevation",
+    "winnerId": "shape",
+    "slowAsset": "/scenes/velleda/velleda-elevation-surface@2x.webp",
+    "preReadyDisabled": true
+  }
+}});

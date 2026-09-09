@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "eurybates",
+  "displayName": "Eurybates",
+  "panel": {
+    "introduction": "Eurybates is a Jupiter Trojan and the largest remnant of a collisional family. This approximate ellipsoid preserves the published model's overall extents, while its irregular outline remains unresolved. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate ellipsoid"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "77.5 × 71.3 × 61.8 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "8.7027283 ± 0.0000029 h"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Jupiter Trojan"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Authored ellipsoid approximation constrained to the published convex model's maximum extents. These are not independently measured ellipsoid axes; the irregular convex outline and model volume are not reproduced. Full approximation dimensions: 77.5 × 71.3 × 61.8 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+        "title": "Convex-model ellipsoid approximation",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/eurybates/eurybates-model-thumbnail.webp",
+        "surface": "eurybates-model-surface@2x.webp",
+        "poles": "eurybates-model-poles@2x.webp",
+        "source": {
+          "id": "occultation-approximation",
+          "path": "../manifest.json",
+          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape and dimensions",
+      "role": "surface",
+      "description": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+      "href": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://doi.org/10.3847/PSJ/acaf79"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://doi.org/10.1007/s11214-025-01173-7"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3"
+    }
+  }
+}

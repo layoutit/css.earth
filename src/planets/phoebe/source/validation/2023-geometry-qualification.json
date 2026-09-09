@@ -1,0 +1,850 @@
+{
+  "schema": "cssearth-phoebe-2023-accepted-geometry@1",
+  "qualification": "Source-preserving geometric candidate accepted for preparation, subject to final prepared/browser visual qualification. Independent distance sampling is one-way, not a full Hausdorff bound or scientific uncertainty.",
+  "source": {
+    "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
+    "bytes": 17787240,
+    "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+    "units": "km",
+    "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
+    "boundsMeters": [
+      [
+        -108553.543091,
+        -111886.520386,
+        -104769.020081
+      ],
+      [
+        117222.267151,
+        116179.023743,
+        107886.817932
+      ]
+    ],
+    "axisRayRadiiMeters": [
+      {
+        "longitudeEastDegrees": 0,
+        "latitudeDegrees": 0,
+        "radiusMeters": 114881.85011256102
+      },
+      {
+        "longitudeEastDegrees": 90,
+        "latitudeDegrees": 0,
+        "radiusMeters": 112780.11626379035
+      },
+      {
+        "longitudeEastDegrees": 180,
+        "latitudeDegrees": 0,
+        "radiusMeters": 106964.39946010047
+      },
+      {
+        "longitudeEastDegrees": 270,
+        "latitudeDegrees": 0,
+        "radiusMeters": 109293.8587616883
+      },
+      {
+        "longitudeEastDegrees": 0,
+        "latitudeDegrees": 90,
+        "radiusMeters": 107272.46128023363
+      },
+      {
+        "longitudeEastDegrees": 0,
+        "latitudeDegrees": -90,
+        "radiusMeters": 101239.43042137215
+      }
+    ]
+  },
+  "toolchain": [
+    {
+      "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
+      "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+      "sha256": "d52121152411f7c2beed3d0d857b6c628be549584ed2cd47dcb955575ba9a0b1"
+    }
+  ],
+  "acceptedTrial": {
+    "method": "source-meshoptimizer",
+    "targetFaces": 3500,
+    "maximumErrorMeters": 1065,
+    "regularize": true,
+    "simplification": {
+      "method": "source-meshoptimizer",
+      "version": "1.2.0",
+      "flags": [
+        "ErrorAbsolute",
+        "RegularizeLight"
+      ],
+      "sourceFaces": 196608,
+      "sourceVertices": 99846,
+      "weldedVertices": 98306,
+      "targetFaces": 3500,
+      "outputFaces": 3500,
+      "removedOppositeFaces": 0,
+      "maximumErrorMeters": 1065,
+      "estimatedErrorMeters": 889.7947387695312,
+      "topology": {
+        "vertices": 1752,
+        "edges": 5250,
+        "faces": 3500,
+        "components": 1,
+        "eulerCharacteristic": 2,
+        "signedVolumeCubicMeters": 5084230854864893
+      }
+    },
+    "independentSamples": {
+      "method": "Four barycentric points per retained face, closest point against the complete source triangle BVH; one-way sampled approximation, not source uncertainty or a full Hausdorff bound.",
+      "count": 14000,
+      "maximumMeters": 1178.2819380522692,
+      "p95Meters": 468.86879558113924,
+      "rmsMeters": 240.81111924356912,
+      "worst": {
+        "face": 1731,
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "pointMeters": [
+          -19919.706662666664,
+          108448.60585533334,
+          -21368.80366033333
+        ],
+        "sourceFace": 103844,
+        "distanceMeters": 1178.2819380522692
+      }
+    },
+    "facesSha256": "93f6530fbd33b88a036832ba9b1d3be33f70b8203a1c5599026619927cf3ab5f",
+    "ok": true
+  },
+  "independentMaximumAcceptedMeters": 1195,
+  "decision": "3500 is the smallest tested passing regularized candidate. 4000 has identical maximum sampled residual; preserve the measured 3500 candidate pending browser quality.",
+  "trialReceipts": [
+    {
+      "path": "shape-trial.json",
+      "bytes": 4524,
+      "sha256": "922b9cd4c4d2d0dea007e5d4f9f1fc999881d86da8d342a505e79aec3013850d",
+      "report": {
+        "schema": "cssearth-phoebe-2023-shape-trial@1",
+        "source": {
+          "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
+          "bytes": 17787240,
+          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+          "units": "km",
+          "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
+          "boundsMeters": [
+            [
+              -108553.543091,
+              -111886.520386,
+              -104769.020081
+            ],
+            [
+              117222.267151,
+              116179.023743,
+              107886.817932
+            ]
+          ],
+          "axisRayRadiiMeters": [
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": 0,
+              "radiusMeters": 114881.85011256102
+            },
+            {
+              "longitudeEastDegrees": 90,
+              "latitudeDegrees": 0,
+              "radiusMeters": 112780.11626379035
+            },
+            {
+              "longitudeEastDegrees": 180,
+              "latitudeDegrees": 0,
+              "radiusMeters": 106964.39946010047
+            },
+            {
+              "longitudeEastDegrees": 270,
+              "latitudeDegrees": 0,
+              "radiusMeters": 109293.8587616883
+            },
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": 90,
+              "radiusMeters": 107272.46128023363
+            },
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": -90,
+              "radiusMeters": 101239.43042137215
+            }
+          ]
+        },
+        "trials": [
+          {
+            "method": "source-meshoptimizer",
+            "targetFaces": 2000,
+            "maximumErrorMeters": 1065,
+            "regularize": true,
+            "ok": false,
+            "error": "Source mesh reached 2574 faces at 1064.65185546875 m estimated error; requested 2000 within 1065 m."
+          },
+          {
+            "method": "source-meshoptimizer",
+            "targetFaces": 2000,
+            "maximumErrorMeters": 1065,
+            "regularize": false,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "version": "1.2.0",
+              "flags": [
+                "ErrorAbsolute"
+              ],
+              "sourceFaces": 196608,
+              "sourceVertices": 99846,
+              "weldedVertices": 98306,
+              "targetFaces": 2000,
+              "outputFaces": 2000,
+              "removedOppositeFaces": 0,
+              "maximumErrorMeters": 1065,
+              "estimatedErrorMeters": 787.4058837890625,
+              "topology": {
+                "vertices": 1002,
+                "edges": 3000,
+                "faces": 2000,
+                "components": 1,
+                "eulerCharacteristic": 2,
+                "signedVolumeCubicMeters": 5082610251527868
+              }
+            },
+            "independentSamples": {
+              "method": "Four barycentric points per retained face, closest point against the complete source triangle BVH; one-way sampled approximation, not source uncertainty or a full Hausdorff bound.",
+              "count": 8000,
+              "maximumMeters": 1423.4696255118486,
+              "p95Meters": 603.6332967518548,
+              "rmsMeters": 308.5640023537919,
+              "worst": {
+                "face": 79,
+                "weights": [
+                  0.6,
+                  0.2,
+                  0.2
+                ],
+                "pointMeters": [
+                  -35376.6231538,
+                  4716.910112,
+                  98235.9848022
+                ],
+                "sourceFace": 11606,
+                "distanceMeters": 1423.4696255118486
+              }
+            },
+            "facesSha256": "3723a8ab750706a7f8e1ac6bc0a5704b0438a3ce419c747a3040863ca9a16d4f",
+            "ok": false
+          }
+        ],
+        "node": "v24.19.0",
+        "toolchain": [
+          {
+            "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
+            "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+          },
+          {
+            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+            "sha256": "c1235063c390c69e9a20765e9d560e8381ff813ca59cda7847861e615205715b"
+          }
+        ],
+        "elapsedMs": 1195,
+        "resources": {
+          "userCPUTime": 1608169,
+          "systemCPUTime": 117659,
+          "maxRSS": 513008,
+          "sharedMemorySize": 0,
+          "unsharedDataSize": 0,
+          "unsharedStackSize": 0,
+          "minorPageFault": 37031,
+          "majorPageFault": 409,
+          "swappedOut": 0,
+          "fsRead": 0,
+          "fsWrite": 0,
+          "ipcSent": 0,
+          "ipcReceived": 0,
+          "signalsCount": 0,
+          "voluntaryContextSwitches": 272,
+          "involuntaryContextSwitches": 4797
+        },
+        "processMemory": {
+          "rss": 489324544,
+          "heapTotal": 328794112,
+          "heapUsed": 216794280,
+          "external": 53287767,
+          "arrayBuffers": 25935851
+        },
+        "qualification": "Only a source geometry candidate until prepared visual review. 1065m is the displayed approximation ceiling (1% of the 106.5km reference radius), separate from the published 1.195km Q128 GSD and its spatially varying scientific uncertainty."
+      }
+    },
+    {
+      "path": "shape-trial-regularized.json",
+      "bytes": 4401,
+      "sha256": "e5d7548e98a6f01027fadee7970968813f59dab10d05ef5a8ec386f1bb33f93e",
+      "report": {
+        "schema": "cssearth-phoebe-2023-shape-trial@1",
+        "source": {
+          "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
+          "bytes": 17787240,
+          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+          "units": "km",
+          "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
+          "boundsMeters": [
+            [
+              -108553.543091,
+              -111886.520386,
+              -104769.020081
+            ],
+            [
+              117222.267151,
+              116179.023743,
+              107886.817932
+            ]
+          ],
+          "axisRayRadiiMeters": [
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": 0,
+              "radiusMeters": 114881.85011256102
+            },
+            {
+              "longitudeEastDegrees": 90,
+              "latitudeDegrees": 0,
+              "radiusMeters": 112780.11626379035
+            },
+            {
+              "longitudeEastDegrees": 180,
+              "latitudeDegrees": 0,
+              "radiusMeters": 106964.39946010047
+            },
+            {
+              "longitudeEastDegrees": 270,
+              "latitudeDegrees": 0,
+              "radiusMeters": 109293.8587616883
+            },
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": 90,
+              "radiusMeters": 107272.46128023363
+            },
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": -90,
+              "radiusMeters": 101239.43042137215
+            }
+          ]
+        },
+        "trials": [
+          {
+            "method": "source-meshoptimizer",
+            "targetFaces": 2000,
+            "maximumErrorMeters": 1500,
+            "regularize": true,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "version": "1.2.0",
+              "flags": [
+                "ErrorAbsolute",
+                "RegularizeLight"
+              ],
+              "sourceFaces": 196608,
+              "sourceVertices": 99846,
+              "weldedVertices": 98306,
+              "targetFaces": 2000,
+              "outputFaces": 2000,
+              "removedOppositeFaces": 0,
+              "maximumErrorMeters": 1500,
+              "estimatedErrorMeters": 1250.8203125,
+              "topology": {
+                "vertices": 1002,
+                "edges": 3000,
+                "faces": 2000,
+                "components": 1,
+                "eulerCharacteristic": 2,
+                "signedVolumeCubicMeters": 5078488770213794
+              }
+            },
+            "independentSamples": {
+              "method": "Four barycentric points per retained face, closest point against the complete source triangle BVH; one-way sampled approximation, not source uncertainty or a full Hausdorff bound.",
+              "count": 8000,
+              "maximumMeters": 1734.5214818322954,
+              "p95Meters": 698.5745720631567,
+              "rmsMeters": 355.5685739790211,
+              "worst": {
+                "face": 1580,
+                "weights": [
+                  0.3333333333333333,
+                  0.3333333333333333,
+                  0.3333333333333333
+                ],
+                "pointMeters": [
+                  42842.82302833333,
+                  80410.58858233332,
+                  58688.55285666666
+                ],
+                "sourceFace": 155161,
+                "distanceMeters": 1734.5214818322954
+              }
+            },
+            "facesSha256": "e74a0fb8bf93417e2b0705c9627face315b3132e789450fb9b0f58e593c415e1",
+            "ok": false
+          }
+        ],
+        "node": "v24.19.0",
+        "toolchain": [
+          {
+            "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
+            "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+          },
+          {
+            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+            "sha256": "c1235063c390c69e9a20765e9d560e8381ff813ca59cda7847861e615205715b"
+          }
+        ],
+        "elapsedMs": 1330,
+        "resources": {
+          "userCPUTime": 1705489,
+          "systemCPUTime": 131223,
+          "maxRSS": 470432,
+          "sharedMemorySize": 0,
+          "unsharedDataSize": 0,
+          "unsharedStackSize": 0,
+          "minorPageFault": 34396,
+          "majorPageFault": 331,
+          "swappedOut": 0,
+          "fsRead": 0,
+          "fsWrite": 0,
+          "ipcSent": 0,
+          "ipcReceived": 0,
+          "signalsCount": 0,
+          "voluntaryContextSwitches": 287,
+          "involuntaryContextSwitches": 7433
+        },
+        "processMemory": {
+          "rss": 477429760,
+          "heapTotal": 318980096,
+          "heapUsed": 205188288,
+          "external": 52077203,
+          "arrayBuffers": 24725287
+        },
+        "qualification": "Only a source geometry candidate until prepared visual review. 1500m is the solver allowance including its regularization penalty; actual sampled geometric acceptance remains 1195m (one published Q128 source cell), separate from the published 1.195km Q128 GSD and its spatially varying scientific uncertainty."
+      }
+    },
+    {
+      "path": "shape-trial-expanded.json",
+      "bytes": 6149,
+      "sha256": "c6f8e79ef4a8c75e94aea31ad9b40c6f5de0a55a91bc4c8d188ec0b64c847dff",
+      "report": {
+        "schema": "cssearth-phoebe-2023-shape-trial@1",
+        "source": {
+          "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
+          "bytes": 17787240,
+          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+          "units": "km",
+          "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
+          "boundsMeters": [
+            [
+              -108553.543091,
+              -111886.520386,
+              -104769.020081
+            ],
+            [
+              117222.267151,
+              116179.023743,
+              107886.817932
+            ]
+          ],
+          "axisRayRadiiMeters": [
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": 0,
+              "radiusMeters": 114881.85011256102
+            },
+            {
+              "longitudeEastDegrees": 90,
+              "latitudeDegrees": 0,
+              "radiusMeters": 112780.11626379035
+            },
+            {
+              "longitudeEastDegrees": 180,
+              "latitudeDegrees": 0,
+              "radiusMeters": 106964.39946010047
+            },
+            {
+              "longitudeEastDegrees": 270,
+              "latitudeDegrees": 0,
+              "radiusMeters": 109293.8587616883
+            },
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": 90,
+              "radiusMeters": 107272.46128023363
+            },
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": -90,
+              "radiusMeters": 101239.43042137215
+            }
+          ]
+        },
+        "trials": [
+          {
+            "method": "source-meshoptimizer",
+            "targetFaces": 2600,
+            "maximumErrorMeters": 1065,
+            "regularize": true,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "version": "1.2.0",
+              "flags": [
+                "ErrorAbsolute",
+                "RegularizeLight"
+              ],
+              "sourceFaces": 196608,
+              "sourceVertices": 99846,
+              "weldedVertices": 98306,
+              "targetFaces": 2600,
+              "outputFaces": 2600,
+              "removedOppositeFaces": 0,
+              "maximumErrorMeters": 1065,
+              "estimatedErrorMeters": 1063.6419677734375,
+              "topology": {
+                "vertices": 1302,
+                "edges": 3900,
+                "faces": 2600,
+                "components": 1,
+                "eulerCharacteristic": 2,
+                "signedVolumeCubicMeters": 5082223034177828
+              }
+            },
+            "independentSamples": {
+              "method": "Four barycentric points per retained face, closest point against the complete source triangle BVH; one-way sampled approximation, not source uncertainty or a full Hausdorff bound.",
+              "count": 10400,
+              "maximumMeters": 1614.4526735908328,
+              "p95Meters": 566.656745132037,
+              "rmsMeters": 294.6770952955335,
+              "worst": {
+                "face": 1326,
+                "weights": [
+                  0.3333333333333333,
+                  0.3333333333333333,
+                  0.3333333333333333
+                ],
+                "pointMeters": [
+                  -26329.22744733333,
+                  83092.72766133334,
+                  -63143.093108999994
+                ],
+                "sourceFace": 106479,
+                "distanceMeters": 1614.4526735908328
+              }
+            },
+            "facesSha256": "347d17eb5b60528de6a5f80cf7c9aba676733fbb4f6b9d212a261753e1867fd2",
+            "ok": false
+          },
+          {
+            "method": "source-meshoptimizer",
+            "targetFaces": 3000,
+            "maximumErrorMeters": 1065,
+            "regularize": true,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "version": "1.2.0",
+              "flags": [
+                "ErrorAbsolute",
+                "RegularizeLight"
+              ],
+              "sourceFaces": 196608,
+              "sourceVertices": 99846,
+              "weldedVertices": 98306,
+              "targetFaces": 3000,
+              "outputFaces": 3000,
+              "removedOppositeFaces": 0,
+              "maximumErrorMeters": 1065,
+              "estimatedErrorMeters": 995.0751342773438,
+              "topology": {
+                "vertices": 1502,
+                "edges": 4500,
+                "faces": 3000,
+                "components": 1,
+                "eulerCharacteristic": 2,
+                "signedVolumeCubicMeters": 5081732539437517
+              }
+            },
+            "independentSamples": {
+              "method": "Four barycentric points per retained face, closest point against the complete source triangle BVH; one-way sampled approximation, not source uncertainty or a full Hausdorff bound.",
+              "count": 12000,
+              "maximumMeters": 1457.4662155943915,
+              "p95Meters": 530.4702889004244,
+              "rmsMeters": 269.35714572351276,
+              "worst": {
+                "face": 1567,
+                "weights": [
+                  0.3333333333333333,
+                  0.3333333333333333,
+                  0.3333333333333333
+                ],
+                "pointMeters": [
+                  -41337.266286,
+                  98265.70892333332,
+                  27116.72337866667
+                ],
+                "sourceFace": 108370,
+                "distanceMeters": 1457.4662155943915
+              }
+            },
+            "facesSha256": "65df9e2951c32c7cc3211b17b7b79ae02b43709cac933c2509e70119029e2021",
+            "ok": false
+          }
+        ],
+        "node": "v24.19.0",
+        "toolchain": [
+          {
+            "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
+            "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+          },
+          {
+            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+            "sha256": "d52121152411f7c2beed3d0d857b6c628be549584ed2cd47dcb955575ba9a0b1"
+          }
+        ],
+        "elapsedMs": 1416,
+        "resources": {
+          "userCPUTime": 1834470,
+          "systemCPUTime": 122157,
+          "maxRSS": 524208,
+          "sharedMemorySize": 0,
+          "unsharedDataSize": 0,
+          "unsharedStackSize": 0,
+          "minorPageFault": 37959,
+          "majorPageFault": 327,
+          "swappedOut": 0,
+          "fsRead": 0,
+          "fsWrite": 0,
+          "ipcSent": 0,
+          "ipcReceived": 0,
+          "signalsCount": 0,
+          "voluntaryContextSwitches": 195,
+          "involuntaryContextSwitches": 6308
+        },
+        "processMemory": {
+          "rss": 499089408,
+          "heapTotal": 330219520,
+          "heapUsed": 229139504,
+          "external": 53288079,
+          "arrayBuffers": 25936163
+        },
+        "qualification": "Only a source geometry candidate until prepared visual review. 1065m is the solver ceiling (1% of the 106.5km reference radius); the separately measured sampled geometric acceptance ceiling is1195m (one published Q128 source cell), separate from the published 1.195km Q128 GSD and its spatially varying scientific uncertainty."
+      }
+    },
+    {
+      "path": "shape-trial-4000.json",
+      "bytes": 6160,
+      "sha256": "ea1a820952ec94ed72664f9944304aadccd06069a0730b34a76792d61aa0801c",
+      "report": {
+        "schema": "cssearth-phoebe-2023-shape-trial@1",
+        "source": {
+          "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
+          "bytes": 17787240,
+          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+          "units": "km",
+          "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
+          "boundsMeters": [
+            [
+              -108553.543091,
+              -111886.520386,
+              -104769.020081
+            ],
+            [
+              117222.267151,
+              116179.023743,
+              107886.817932
+            ]
+          ],
+          "axisRayRadiiMeters": [
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": 0,
+              "radiusMeters": 114881.85011256102
+            },
+            {
+              "longitudeEastDegrees": 90,
+              "latitudeDegrees": 0,
+              "radiusMeters": 112780.11626379035
+            },
+            {
+              "longitudeEastDegrees": 180,
+              "latitudeDegrees": 0,
+              "radiusMeters": 106964.39946010047
+            },
+            {
+              "longitudeEastDegrees": 270,
+              "latitudeDegrees": 0,
+              "radiusMeters": 109293.8587616883
+            },
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": 90,
+              "radiusMeters": 107272.46128023363
+            },
+            {
+              "longitudeEastDegrees": 0,
+              "latitudeDegrees": -90,
+              "radiusMeters": 101239.43042137215
+            }
+          ]
+        },
+        "trials": [
+          {
+            "method": "source-meshoptimizer",
+            "targetFaces": 3500,
+            "maximumErrorMeters": 1065,
+            "regularize": true,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "version": "1.2.0",
+              "flags": [
+                "ErrorAbsolute",
+                "RegularizeLight"
+              ],
+              "sourceFaces": 196608,
+              "sourceVertices": 99846,
+              "weldedVertices": 98306,
+              "targetFaces": 3500,
+              "outputFaces": 3500,
+              "removedOppositeFaces": 0,
+              "maximumErrorMeters": 1065,
+              "estimatedErrorMeters": 889.7947387695312,
+              "topology": {
+                "vertices": 1752,
+                "edges": 5250,
+                "faces": 3500,
+                "components": 1,
+                "eulerCharacteristic": 2,
+                "signedVolumeCubicMeters": 5084230854864893
+              }
+            },
+            "independentSamples": {
+              "method": "Four barycentric points per retained face, closest point against the complete source triangle BVH; one-way sampled approximation, not source uncertainty or a full Hausdorff bound.",
+              "count": 14000,
+              "maximumMeters": 1178.2819380522692,
+              "p95Meters": 468.86879558113924,
+              "rmsMeters": 240.81111924356912,
+              "worst": {
+                "face": 1731,
+                "weights": [
+                  0.3333333333333333,
+                  0.3333333333333333,
+                  0.3333333333333333
+                ],
+                "pointMeters": [
+                  -19919.706662666664,
+                  108448.60585533334,
+                  -21368.80366033333
+                ],
+                "sourceFace": 103844,
+                "distanceMeters": 1178.2819380522692
+              }
+            },
+            "facesSha256": "93f6530fbd33b88a036832ba9b1d3be33f70b8203a1c5599026619927cf3ab5f",
+            "ok": true
+          },
+          {
+            "method": "source-meshoptimizer",
+            "targetFaces": 4000,
+            "maximumErrorMeters": 1065,
+            "regularize": true,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "version": "1.2.0",
+              "flags": [
+                "ErrorAbsolute",
+                "RegularizeLight"
+              ],
+              "sourceFaces": 196608,
+              "sourceVertices": 99846,
+              "weldedVertices": 98306,
+              "targetFaces": 4000,
+              "outputFaces": 4000,
+              "removedOppositeFaces": 0,
+              "maximumErrorMeters": 1065,
+              "estimatedErrorMeters": 862.1866455078125,
+              "topology": {
+                "vertices": 2002,
+                "edges": 6000,
+                "faces": 4000,
+                "components": 1,
+                "eulerCharacteristic": 2,
+                "signedVolumeCubicMeters": 5084448021760538
+              }
+            },
+            "independentSamples": {
+              "method": "Four barycentric points per retained face, closest point against the complete source triangle BVH; one-way sampled approximation, not source uncertainty or a full Hausdorff bound.",
+              "count": 16000,
+              "maximumMeters": 1178.2819380522692,
+              "p95Meters": 427.02350345592134,
+              "rmsMeters": 220.01860954519148,
+              "worst": {
+                "face": 2004,
+                "weights": [
+                  0.3333333333333333,
+                  0.3333333333333333,
+                  0.3333333333333333
+                ],
+                "pointMeters": [
+                  -19919.706662666664,
+                  108448.60585533334,
+                  -21368.80366033333
+                ],
+                "sourceFace": 103844,
+                "distanceMeters": 1178.2819380522692
+              }
+            },
+            "facesSha256": "22c2e01ebb64273edf4de49e0a238189ed947dd47efbadee5c008e30f6b59151",
+            "ok": true
+          }
+        ],
+        "node": "v24.19.0",
+        "toolchain": [
+          {
+            "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
+            "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+          },
+          {
+            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+            "sha256": "d52121152411f7c2beed3d0d857b6c628be549584ed2cd47dcb955575ba9a0b1"
+          }
+        ],
+        "elapsedMs": 1687,
+        "resources": {
+          "userCPUTime": 2044194,
+          "systemCPUTime": 163417,
+          "maxRSS": 521184,
+          "sharedMemorySize": 0,
+          "unsharedDataSize": 0,
+          "unsharedStackSize": 0,
+          "minorPageFault": 37631,
+          "majorPageFault": 410,
+          "swappedOut": 0,
+          "fsRead": 0,
+          "fsWrite": 0,
+          "ipcSent": 0,
+          "ipcReceived": 0,
+          "signalsCount": 0,
+          "voluntaryContextSwitches": 175,
+          "involuntaryContextSwitches": 10058
+        },
+        "processMemory": {
+          "rss": 495812608,
+          "heapTotal": 330317824,
+          "heapUsed": 192760120,
+          "external": 53298879,
+          "arrayBuffers": 25946963
+        },
+        "qualification": "Only a source geometry candidate until prepared visual review. 1065m is the solver ceiling (1% of the 106.5km reference radius); the separately measured sampled geometric acceptance ceiling is1195m (one published Q128 source cell), separate from the published 1.195km Q128 GSD and its spatially varying scientific uncertainty."
+      }
+    }
+  ]
+}

@@ -36,7 +36,13 @@
         ]
       },
       "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
-      "units": "Published display DN"
+      "units": "Published display DN",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif"
+      }
     },
     {
       "id": "cassini-schenk-2024-elevation",
@@ -72,7 +78,13 @@
         ]
       },
       "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
-      "units": "km above the Thomas et al. (2016) reference ellipsoid: 256.2 × 251.4 × 248.6 km."
+      "units": "km above the Thomas et al. (2016) reference ellipsoid: 256.2 × 251.4 × 248.6 km.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -107,14 +119,360 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "credit": "JPL Solar System Dynamics; Cassini mission",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "catalog": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
+      "id": "jpl-spc-enceladus-v2-dsk",
+      "consumers": [
+        "dsk-conversion"
+      ],
+      "units": "Cartesian plate model kilometres in IAU_ENCELADUS, target 602/frame 10040/surface 20122.",
+      "coverage": "Corrected v2 global Q256 DSK, 396,294 source vertices and 786,432 plates. Nominal model-family 500 m resolution is not a uniform accuracy claim for this Q256 member.",
+      "expectedBytes": 30258176,
+      "expectedSha256": "49913bbc117503f894bc7d127a582e1e8e4ac903e348a7021992f5aba7a18c98"
+    },
+    {
+      "path": "shape/enceladus-v2-q256.obj.zip",
+      "credit": "JPL SSD/Cassini; exact CSPICE extraction",
+      "license": "Public PDS archive; cite source authors and SPICE",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
+      ],
+      "catalog": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
+      "acquisition": "Pinned dsk-mesh acquisition operation; explicit Python environment in tools/objects/acquisition/DSK-RESTORATION.md.",
+      "redistribution": "Retain source model and SPICE credits with deterministic conversion provenance.",
+      "id": "jpl-spc-enceladus-v2-q256",
+      "consumers": [
+        "shape"
+      ],
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "units": "Exact source Cartesian kilometres with exact duplicate vertices welded; original plate winding and complete mapping retained.",
+      "coverage": "Global corrected v2 Q256 shape. Exact source coordinate conversion and welding; 393,218 output vertices and 786,432 triangles. The simplified displayed mesh is a separately qualified approximation.",
+      "expectedBytes": 10207923,
+      "expectedSha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c"
+    },
+    {
+      "id": "enceladus-vims-original-c1487299582_1_ir",
+      "path": "vims-chemistry/native/C1487299582_1_ir.cub",
+      "expectedBytes": 757411,
+      "expectedSha256": "0ae941db5fb7d2cdcad92232fd6db09863bedeac37d98c7f3e3784021acac8c6",
+      "origin": "https://vims.univ-nantes.fr/cube/C1487299582_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-n1487299582_1_ir",
+      "path": "vims-chemistry/native/N1487299582_1_ir.cub",
+      "expectedBytes": 213344,
+      "expectedSha256": "5a6e920af9d083a2e33d04a9b087a353a633e291fc04a55472c6c72de5d077ba",
+      "origin": "https://vims.univ-nantes.fr/cube/N1487299582_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-c1489049741_1_ir",
+      "path": "vims-chemistry/native/C1489049741_1_ir.cub",
+      "expectedBytes": 1107563,
+      "expectedSha256": "df1b0ddb11694cde200398d4d153f180450a697606111a21a9d6aab3b7b2eb74",
+      "origin": "https://vims.univ-nantes.fr/cube/C1489049741_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-n1489049741_1_ir",
+      "path": "vims-chemistry/native/N1489049741_1_ir.cub",
+      "expectedBytes": 243496,
+      "expectedSha256": "ba88b03a3b4581b928cfab37dc7f9615c7e3ad2db821abd4577be9d34cda0ee6",
+      "origin": "https://vims.univ-nantes.fr/cube/N1489049741_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-c1702362997_1_ir",
+      "path": "vims-chemistry/native/C1702362997_1_ir.cub",
+      "expectedBytes": 1170945,
+      "expectedSha256": "8d4c78ee7c7e4710965b21f971e68b5c801eaa31275f13a4b3cd6888b6e429cc",
+      "origin": "https://vims.univ-nantes.fr/cube/C1702362997_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-n1702362997_1_ir",
+      "path": "vims-chemistry/native/N1702362997_1_ir.cub",
+      "expectedBytes": 360878,
+      "expectedSha256": "7f40c09a40dfc1bfa27ace7ef930ad1038b862d68ee04b9c3af569d7d3a7dc23",
+      "origin": "https://vims.univ-nantes.fr/cube/N1702362997_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-c1702361128_1_ir",
+      "path": "vims-chemistry/native/C1702361128_1_ir.cub",
+      "expectedBytes": 299893,
+      "expectedSha256": "765fb230fac501fcedc4d892825b3342383abdc90fdecb97d0f754397baefc84",
+      "origin": "https://vims.univ-nantes.fr/cube/C1702361128_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-n1702361128_1_ir",
+      "path": "vims-chemistry/native/N1702361128_1_ir.cub",
+      "expectedBytes": 155826,
+      "expectedSha256": "2ab80161634205a0b8cb191a6d57a3b84a947fe6a2f173784947eac3db6ecd4b",
+      "origin": "https://vims.univ-nantes.fr/cube/N1702361128_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-c1500061929_1_ir",
+      "path": "vims-chemistry/native/C1500061929_1_ir.cub",
+      "expectedBytes": 562059,
+      "expectedSha256": "cb800f624fbb67db7b49c7d9410372e1b08ae988718ca12e40636e8b6c306266",
+      "origin": "https://vims.univ-nantes.fr/cube/C1500061929_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-n1500061929_1_ir",
+      "path": "vims-chemistry/native/N1500061929_1_ir.cub",
+      "expectedBytes": 169992,
+      "expectedSha256": "74bb3f1b9b266fb04aea6c2f94d13994197b3e48726f3565479a59aebc5625a1",
+      "origin": "https://vims.univ-nantes.fr/cube/N1500061929_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-c1500061170_1_ir",
+      "path": "vims-chemistry/native/C1500061170_1_ir.cub",
+      "expectedBytes": 446859,
+      "expectedSha256": "eecba704d3ec11c14a1278f2ba96ac460d3ad4badb58a114044dcf5c41989d41",
+      "origin": "https://vims.univ-nantes.fr/cube/C1500061170_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-original-n1500061170_1_ir",
+      "path": "vims-chemistry/native/N1500061170_1_ir.cub",
+      "expectedBytes": 158792,
+      "expectedSha256": "b2431342079d460b5111262868a33bb753be16fef3f160ece425500015a90b24",
+      "origin": "https://vims.univ-nantes.fr/cube/N1500061170_1_ir.cub",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Nantes calibrated C cube or matched navigation N cube; exact bytes retained in Git and restorable by the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original data with full attribution; archive processing is retained.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "enceladus-vims-ice-absorption",
+      "path": "vims-chemistry/enceladus-vims-depth.tif",
+      "expectedBytes": 101934,
+      "expectedSha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
+      "origin": "https://vims.univ-nantes.fr/cube/1487299582_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline index and partial mapping",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from the checked-in original C/N cubes with tools/objects/acquisition/enceladus-vims-spectral.py and vims-chemistry/prepare.json.",
+      "redistribution": "Small derived float32 GeoTIFF retained with original attribution and processing notice.",
+      "consumers": [
+        "ice-absorption"
+      ],
+      "lensId": "ice-absorption",
+      "label": "Ice absorption",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 252100
+      },
+      "coverage": "Only supported interior source-center cells. Approximate union covers 23.8% of the reference sphere; output grid density is not native resolution. Absolute pointing remains unqualified."
+    },
+    {
+      "id": "enceladus-vims-infrared-ratio",
+      "path": "vims-chemistry/enceladus-vims-ratio.tif",
+      "expectedBytes": 109752,
+      "expectedSha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
+      "origin": "https://vims.univ-nantes.fr/cube/1487299582_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline index and partial mapping",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from the checked-in original C/N cubes with tools/objects/acquisition/enceladus-vims-spectral.py and vims-chemistry/prepare.json.",
+      "redistribution": "Small derived float32 GeoTIFF retained with original attribution and processing notice.",
+      "consumers": [
+        "infrared-ratio"
+      ],
+      "lensId": "infrared-ratio",
+      "label": "Infrared ratio",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 252100
+      },
+      "coverage": "Only supported interior source-center cells. Approximate union covers 23.8% of the reference sphere; output grid density is not native resolution. Absolute pointing remains unqualified."
     }
   ],
   "generatedIntermediates": [],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11260,
-      "expectedSha256": "56f13a4125b84fcdb77eaef50e5d875222f0a0924815429dbcbc65754f07e50f",
+      "expectedBytes": 15752,
+      "expectedSha256": "7427b79e3ae0f58d3c9b158cb5887655be993ef72299a48193a85bfe91632a6f",
       "purpose": "Original source metadata, licensing, or authored preparation and content."
     },
     {
@@ -155,8 +513,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1084,
-      "expectedSha256": "7b73ecc941f3a189e382e1455cc3e8bb13dacf84c555a43f49809d8d7e5830e0",
+      "expectedBytes": 6267,
+      "expectedSha256": "e9cecdb23b82d24073b8a26f21ed9ca957b5b78c98571c474004d19e09ebad2a",
       "purpose": "Original source metadata, licensing, or authored preparation and content."
     },
     {
@@ -167,8 +525,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3380,
-      "expectedSha256": "9e783c4db4c96e7ddcccdcfe9f3a27ac42372453525226832b14ba90a6312ead",
+      "expectedBytes": 6910,
+      "expectedSha256": "b88628b2b19d84eb9920adbaaee9c47c6839359682daab4a13fbb765d17c0e1a",
       "purpose": "Original source metadata, licensing, or authored preparation and content."
     },
     {
@@ -201,6 +559,212 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1091,
       "expectedSha256": "bda700b0cbc4204e62df9c64377db7a32bcc44ccd002d3d08a36204da3db25d8"
+    },
+    {
+      "path": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.lbl",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.lbl",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 1380,
+      "expectedSha256": "e6e62bf2520e17fa37663733f60f4fcae35f9aadd70b34f6f478eeacf4c5757f"
+    },
+    {
+      "path": "science/b2-intake/dskinfo.txt",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 5084,
+      "expectedSha256": "a99a281bc40c26ba49d0f9d010c5d19cb4fd95f24323f69ecffae02264ee28e3"
+    },
+    {
+      "path": "science/b2-intake/enceladus_ssd_250728_v2.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/pck/enceladus_ssd_250728_v2.tpc",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 8701,
+      "expectedSha256": "21577baf51ef428b77eeda488c03ca6df90fa764da8c6ba7d3ca7a4d879e6c04"
+    },
+    {
+      "path": "science/b2-intake/cas_v44.tf",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/fk/cas_v44.tf",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 199768,
+      "expectedSha256": "c1e49749bec168e05c82e7c8b77455cd446c0bb8aafd31aeb1975d07ba6de02d"
+    },
+    {
+      "path": "validation/b2-dsk-conversion.json",
+      "purpose": "Exact v2 DSK extraction provenance, source coordinates, frame, duplicate mapping and mesh hashes. Root reproduced the identical archive in the formal pinned environment; prepared geometry qualification remains pending.",
+      "expectedBytes": 1635,
+      "expectedSha256": "22e1908f955ba3c29f64d0ff388bb858285a56dbc201c84fcde29877db598771"
+    },
+    {
+      "path": "vims-chemistry/native/1487299582_1.html",
+      "expectedBytes": 18997,
+      "expectedSha256": "7b350b283fc23c8884537d65e94cd8707b2d3705cfb956356aa35f561a2f1914",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1487299582_1"
+    },
+    {
+      "path": "vims-chemistry/native/1487299582_1.lbl",
+      "expectedBytes": 6206,
+      "expectedSha256": "cdbddab943c834a0fcf55ff2783e1286ebb5bd8c977eabb2b50323296ec4c7c6",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1487299582_1.lbl"
+    },
+    {
+      "path": "vims-chemistry/native/1489049741_1.html",
+      "expectedBytes": 18994,
+      "expectedSha256": "b391767129697c4a916a0c7bba5ada158405ef5598c40fde5bbda14ce061d602",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1489049741_1"
+    },
+    {
+      "path": "vims-chemistry/native/1489049741_1.lbl",
+      "expectedBytes": 6198,
+      "expectedSha256": "d0903b848679a76983c0c4e126471742de6f4935ac7fa2f0c11406443d947952",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1489049741_1.lbl"
+    },
+    {
+      "path": "vims-chemistry/native/1702362997_1.html",
+      "expectedBytes": 18772,
+      "expectedSha256": "8229ed3f0a62b32942949e333d103ac6e906c43429f651b8baa019d61cbbf876",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1702362997_1"
+    },
+    {
+      "path": "vims-chemistry/native/1702362997_1.lbl",
+      "expectedBytes": 6220,
+      "expectedSha256": "7a54549a49e9c8f2e45a3f357b88cf18cc4db3ae57be72fe80493fdfa303f3f7",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1702362997_1.lbl"
+    },
+    {
+      "path": "vims-chemistry/native/1702361128_1.html",
+      "expectedBytes": 18769,
+      "expectedSha256": "13f0f3b1393a26b6f16731b29b87b40b3ad951ab0cd75932fbfb480ca6295656",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1702361128_1"
+    },
+    {
+      "path": "vims-chemistry/native/1702361128_1.lbl",
+      "expectedBytes": 6219,
+      "expectedSha256": "43ef062443da80362723fa905969073d8ec8ff8c427d67f530d933530ce6f53b",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1702361128_1.lbl"
+    },
+    {
+      "path": "vims-chemistry/native/1500061929_1.html",
+      "expectedBytes": 19017,
+      "expectedSha256": "33b4fdc01b6013da059ef642c42bca1669d1f55a8f4812ed4419bf7f5467861d",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1500061929_1"
+    },
+    {
+      "path": "vims-chemistry/native/1500061929_1.lbl",
+      "expectedBytes": 6199,
+      "expectedSha256": "3fd20260e07750bce93b6bac0e3726c0a1b076a8b0358dd6f0fbf40fb31819d0",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1500061929_1.lbl"
+    },
+    {
+      "path": "vims-chemistry/native/1500061170_1.html",
+      "expectedBytes": 18998,
+      "expectedSha256": "ef5ddae8b1d3aaaa4e90cfe5e74bab701138ff0c25cf1a3f73c87c52924e6e19",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1500061170_1"
+    },
+    {
+      "path": "vims-chemistry/native/1500061170_1.lbl",
+      "expectedBytes": 6198,
+      "expectedSha256": "7ff7de7ecb48df36a07af592654ad6dd1fc7f935e1cfe806b759a77c1edb6bbe",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/cube/1500061170_1.lbl"
+    },
+    {
+      "path": "vims-chemistry/enceladus-vims-depth-observation.tif",
+      "expectedBytes": 11826,
+      "expectedSha256": "6de961347e1c3d7f585053a159f758375d718e7540d9b8fba3459d1c5c5dfa36",
+      "purpose": "Offline audit plane binds each displayed value to its source observation and native detector sample; not a runtime layer."
+    },
+    {
+      "path": "vims-chemistry/enceladus-vims-depth-source-pixel.tif",
+      "expectedBytes": 26264,
+      "expectedSha256": "d402e563883f33d0aae324a64d95530b92b4c07145255bb2d6e0eed7275a706b",
+      "purpose": "Offline audit plane binds each displayed value to its source observation and native detector sample; not a runtime layer."
+    },
+    {
+      "path": "vims-chemistry/enceladus-vims-ratio-observation.tif",
+      "expectedBytes": 11826,
+      "expectedSha256": "6de961347e1c3d7f585053a159f758375d718e7540d9b8fba3459d1c5c5dfa36",
+      "purpose": "Offline audit plane binds each displayed value to its source observation and native detector sample; not a runtime layer."
+    },
+    {
+      "path": "vims-chemistry/enceladus-vims-ratio-source-pixel.tif",
+      "expectedBytes": 26264,
+      "expectedSha256": "d402e563883f33d0aae324a64d95530b92b4c07145255bb2d6e0eed7275a706b",
+      "purpose": "Offline audit plane binds each displayed value to its source observation and native detector sample; not a runtime layer."
+    },
+    {
+      "path": "vims-chemistry/INTERPRETATION.md",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 4310,
+      "expectedSha256": "3b22183e74c2a30a8a31aa94f9bcba144409983cec9975749c567425dfcc7f0c"
+    },
+    {
+      "path": "vims-chemistry/prepare.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 4286,
+      "expectedSha256": "38e6a95373ed32b5d5acacc1fdc2691d735bddc6b5b3c0139eb3cc039999d9e1"
+    },
+    {
+      "path": "vims-chemistry/source-receipt.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 9690,
+      "expectedSha256": "eec4322c8528377a4292cba015e3b6305b03fe41d56f3f97da0cadd847c546dd"
+    },
+    {
+      "path": "vims-chemistry/preparation-receipt.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 22675,
+      "expectedSha256": "e4279cf9c5200b62967404735e85e7990f8a57fc20e828b74bce3793e3bfb072"
+    },
+    {
+      "path": "vims-chemistry/evidence/calibration.html",
+      "expectedBytes": 25098,
+      "expectedSha256": "8153795a6107d8f15a462c3dbdf9ff8b3fb2327d0e825b09e8ce8b2957cd8b8f",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/info/isis-calibration"
+    },
+    {
+      "path": "vims-chemistry/evidence/phocube.html",
+      "expectedBytes": 87956,
+      "expectedSha256": "6cbe5d29c102cad8ddb90030e0efeec6412d321b57f238c0b95ef5304ab6df6c",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://isis.astrogeology.usgs.gov/3.5.0/Application/presentation/Tabbed/phocube/phocube.html"
+    },
+    {
+      "path": "vims-chemistry/evidence/license-about.html",
+      "expectedBytes": 22564,
+      "expectedSha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://vims.univ-nantes.fr/about"
+    },
+    {
+      "path": "vims-chemistry/evidence/corrigendum.json",
+      "expectedBytes": 589,
+      "expectedSha256": "92bd5b8f8545efc5cf1aae7b303f86fdf4522b14555ee8217aa88bf1049debb2",
+      "purpose": "Pinned source calibration, geometry, license or corrigendum evidence.",
+      "origin": "https://api.archives-ouvertes.fr/search/?q=halId_s:insu-03590082&fl=title_s,uri_s,abstract_s&wt=json"
+    },
+    {
+      "path": "vims-chemistry/SOURCE-QUALIFICATION.md",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 11868,
+      "expectedSha256": "dc8e15bad67574d1fa82e32ceb3e7cde005ed04f645d4e3b9914cbf10dcde286"
+    },
+    {
+      "path": "vims-chemistry/qualification-receipt.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 35903,
+      "expectedSha256": "c4be07768f9de0d107fd60a38c0d52a887ae1232fa1d7473c8be64aba899cea2"
     }
   ]
 }

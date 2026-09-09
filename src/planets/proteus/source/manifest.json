@@ -24,6 +24,12 @@
         "type": "camera-perspective",
         "coordinates": "geometry/registration.json",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG"
       }
     },
     {
@@ -42,7 +48,13 @@
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "consumers": [
         "voyager-clear-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL"
+      }
     },
     {
       "id": "c1138920",
@@ -67,6 +79,12 @@
         "type": "camera-perspective",
         "coordinates": "geometry/registration.json",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG"
       }
     },
     {
@@ -85,7 +103,13 @@
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "consumers": [
         "voyager-clear-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL"
+      }
     },
     {
       "id": "stooke-shape",
@@ -147,6 +171,171 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "c1137328-color",
+      "path": "observations/C1137328_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137328",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG"
+      },
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/color-registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c1137328-color-label",
+      "path": "observations/C1137328_GEOMED.LBL",
+      "expectedBytes": 3296,
+      "expectedSha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137328",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL"
+      }
+    },
+    {
+      "id": "c1137339-color",
+      "path": "observations/C1137339_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137339",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG"
+      },
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/color-registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c1137339-color-label",
+      "path": "observations/C1137339_GEOMED.LBL",
+      "expectedBytes": 3310,
+      "expectedSha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137339",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL"
+      }
+    },
+    {
+      "id": "c1137350-color",
+      "path": "observations/C1137350_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137350",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG"
+      },
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/color-registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c1137350-color-label",
+      "path": "observations/C1137350_GEOMED.LBL",
+      "expectedBytes": 3311,
+      "expectedSha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137350",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL"
+      }
     }
   ],
   "generatedIntermediates": [
@@ -181,8 +370,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5551,
-      "expectedSha256": "b7df3e6f593276fcf4a07ff90347efe5f72a47075ad3d9d189aa779fa6ed83ce",
+      "expectedBytes": 6415,
+      "expectedSha256": "5efb6760a5f50e233be36cdb24d6b3ecbb39910eabf674910348b0d131eb74b0",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
@@ -235,8 +424,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1736,
-      "expectedSha256": "5d4c099b47720c6e0b3b038cca47d185247f39a293101a900f1019fd87f888ed",
+      "expectedBytes": 4156,
+      "expectedSha256": "39f3c5ae68d597577d860871e61f989f24ad09750932991b6840f1f6dd582628",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
@@ -247,8 +436,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5301,
-      "expectedSha256": "1babd88327cbad72a5b08ae076cded690d419b1b728f0925f32aea76c2747674",
+      "expectedBytes": 9373,
+      "expectedSha256": "f9c7b352f33c4d4ee6613952d34732ea08c4393dc5494dedd2985648b65054ef",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
@@ -305,6 +494,48 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1089,
       "expectedSha256": "dc1991bce819ba1b50ac5aa0b86f0f4c211f90872197cff914f915e01c4505fc"
+    },
+    {
+      "path": "geometry/c1137328-opus.json",
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
+      "expectedBytes": 11716,
+      "expectedSha256": "55f6021bc89b524cb4c1783d273a651cde563acbd3ddb80e09a1787b58e36b94"
+    },
+    {
+      "path": "geometry/c1137339-opus.json",
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
+      "expectedBytes": 11743,
+      "expectedSha256": "f3f4271a94c03c1bc26cd1af287cd7926a93c21621065b107d3560cd2b981e16"
+    },
+    {
+      "path": "geometry/c1137350-opus.json",
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
+      "expectedBytes": 11728,
+      "expectedSha256": "fc4cdb9829c78e933f815afde5aea1486f98f6105034680850690483451c8d59"
+    },
+    {
+      "path": "geometry/color-background.json",
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
+      "expectedBytes": 1750,
+      "expectedSha256": "89404347728a5e47cd3fb06c4f8cb9670289e036533baa39a60b497e33f67f53"
+    },
+    {
+      "path": "observations/PROCESSING.TXT",
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
+      "expectedBytes": 28054,
+      "expectedSha256": "2b56645227270a0d81bca988a776a8a175211351984d5fdeba225e69f2a6d945"
+    },
+    {
+      "path": "preparation/register-voyager-color.py",
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
+      "expectedBytes": 11432,
+      "expectedSha256": "b7f136cef203ce1aefd9ce2687fdd1f30c98b83318ced8a242adda3594766aca"
+    },
+    {
+      "path": "geometry/color-registration.json",
+      "purpose": "Reproducible full-source-mesh camera registration with reserved image sectors and initialization sensitivity.",
+      "expectedBytes": 83989,
+      "expectedSha256": "fda7547cb70e8464119219afe492a633a5aff77c4287816200f3c6ed42343bd0"
     }
   ]
 }

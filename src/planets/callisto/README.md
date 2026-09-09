@@ -1,6 +1,6 @@
 # Callisto
 
-Standalone Callisto scene at `/callisto/`: USGS Voyager/Galileo Monochrome,
+Standalone Callisto scene at `/callisto/`: USGS Voyager/Galileo Monochrome and partial PIA03456 Galileo color,
 shared Shadows and Orbit controls, and Jupiter context.
 
 See [SOURCE.md](SOURCE.md) for coverage, coordinates, limitations and preparation,

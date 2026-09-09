@@ -32,6 +32,32 @@
           ],
           "specialValueMagnitude": 256
         }
+      },
+      {
+        "id": "enhanced-color",
+        "validity": {
+          "kind": "pds4-float-rgb",
+          "labelPath": "observations/nh_charon_color_mosaic.lblx",
+          "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0",
+          "bands": [
+            2,
+            3,
+            4
+          ],
+          "wavelengthsNm": [
+            870,
+            625,
+            475
+          ],
+          "displayRange": [
+            0,
+            0.6
+          ]
+        },
+        "metadata": {
+          "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
+          "title": "Enhanced color combines MVIC near-infrared, red and blue bands with panchromatic detail. Colors are not natural color or measured albedo. Missing coverage remains a gray grid."
+        }
       }
     ],
     "scientific": [
@@ -80,6 +106,53 @@
           ],
           "ambient": 0.25
         }
+      },
+      {
+        "id": "albedo",
+        "label": "Bond albedo",
+        "format": "geotiff",
+        "path": "science/nh-charon-bond-georeferenced.tif",
+        "consumer": "bond-albedo",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 0.1,
+        "maximum": 0.5,
+        "colors": [
+          "#263e63",
+          "#468e9c",
+          "#b4cebd",
+          "#f5ecc5"
+        ],
+        "labels": [
+          "0.1",
+          "0.3",
+          "0.5"
+        ],
+        "units": "fraction",
+        "description": "Modeled reflected sunlight",
+        "title": "New Horizons modeled Bond albedo",
+        "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx",
+        "valueTransform": {
+          "scale": 0.00392156862745,
+          "offset": 0
+        },
+        "grid": {
+          "width": 1518,
+          "height": 700,
+          "noData": 0,
+          "origin": [
+            -1903805.1,
+            951902.6
+          ],
+          "resolution": [
+            2508.307177965,
+            -2508.307177965
+          ],
+          "referenceRadiusMeters": 606000.0,
+          "centerLongitude": 0,
+          "wrapLongitude": true
+        },
+        "textureScale": 0.25
       }
     ],
     "observedColors": []

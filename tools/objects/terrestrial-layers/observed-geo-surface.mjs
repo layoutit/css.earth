@@ -1,3 +1,5 @@
+import { validateEncounterRecipe, loadEncounterSurface } from './encounter-surface.mjs';
+import { validateOrthographicObservation, loadOrthographicObservation } from './image-dem-observation.mjs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, fitCamera, project, sampleGeo, diskGain } from './osiris-geo.mjs';
@@ -14,16 +16,18 @@ const framePaths = recipe => recipe.format === 'amica-gaskell'
   ? [recipe.path, recipe.labelPath, recipe.originalPath, recipe.flatPath]
   : archivedCamera(recipe) ? [recipe.path, recipe.cameraPath] : [recipe.path, recipe.qualityPath];
 export function validateGeoSurfaceRecipe(recipe, geometry) {
+  if (recipe.format === 'isis2-orthographic') return validateOrthographicObservation(recipe, geometry);
+  if (recipe.format === 'encounter-fits') return validateEncounterRecipe(recipe, geometry);
   if (recipe.frames !== undefined) {
     const frames = recipe.frames, levels = recipe.levelMatching;
     const ownedPaths = Array.isArray(frames) ? frames.flatMap(frame => framePaths({ ...recipe, ...frame })
       .filter(path => recipe.format !== 'amica-gaskell' || path !== recipe.flatPath)) : [];
     if (!Array.isArray(frames) || frames.length < 2 || frames.length > 8 || recipe.path !== undefined ||
-        recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.startTime !== undefined || recipe.selection !== 'lowest-emission' ||
+        recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.cameraPath !== undefined || recipe.startTime !== undefined || recipe.selection !== 'lowest-emission' ||
         !levels || !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64 ||
         !Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
         !positive(levels.maximumLogMad) || levels.maximumLogMad > .3 || !positive(levels.maximumGain) || levels.maximumGain < 1 || levels.maximumGain > 1.5 ||
-        frames.some(frame => !frame || !/^[a-z][a-z0-9-]*$/.test(frame.id) || Object.keys(frame).some(key => !['id', 'path', 'qualityPath', 'labelPath', 'originalPath', 'startTime'].includes(key))) ||
+        frames.some(frame => !frame || !/^[a-z][a-z0-9-]*$/.test(frame.id) || Object.keys(frame).some(key => !['id', 'path', 'qualityPath', 'labelPath', 'originalPath', 'cameraPath', 'startTime'].includes(key))) ||
         new Set(frames.map(frame => frame.id)).size !== frames.length || new Set(ownedPaths).size !== ownedPaths.length) {
       throw new TypeError('Invalid source-bound georeferenced observation mosaic.');
     }
@@ -37,7 +41,7 @@ export function validateGeoSurfaceRecipe(recipe, geometry) {
     (recipe.format === 'osiris-camera' && photometry.model === 'minnaert' &&
       Number.isFinite(photometry.coefficient) && photometry.coefficient >= .5 && photometry.coefficient <= 1 &&
       Number.isFinite(photometry.phaseCoefficientPerDegree) && photometry.phaseCoefficientPerDegree >= 0 && photometry.phaseCoefficientPerDegree <= .01) ||
-    (recipe.format === 'llorri-camera' && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
+    (controlled && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
   if (!['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera'].includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
@@ -176,6 +180,8 @@ function previewGeoSurface(samplePoint, radial, config, width, height) {
 }
 
 export async function loadGeoObservationSurface(options) {
+  if (options.recipe.format === 'isis2-orthographic') return loadOrthographicObservation(options);
+  if (options.recipe.format === 'encounter-fits') return loadEncounterSurface(options);
   const { sourceDirectory, source, recipe, radial, config } = options;
   validateGeoSurfaceRecipe(recipe, config.geometry.radialTerrain);
   if (!recipe.frames) return loadSingleGeoObservationSurface(options);
@@ -185,7 +191,7 @@ export async function loadGeoObservationSurface(options) {
   for (const frame of recipe.frames) {
     observations.push(await loadSingleGeoObservationSurface({ sourceDirectory, radial, config,
       recipe: { ...recipe, ...frame, id: recipe.id, frames: undefined, selection: undefined, levelMatching: undefined },
-      source: { validateGroup: async () => entries.filter(entry => framePaths({ ...recipe, ...frame }).includes(entry.path)) } }));
+      source: { ...source, validateGroup: async () => entries.filter(entry => framePaths({ ...recipe, ...frame }).includes(entry.path)) } }));
   }
   const points = sampleTrianglePoints(radial.faces, recipe.levelMatching.samplesPerTriangle);
   const samples = observations.map(observation => points.map(point => observation.samplePoint(point)));

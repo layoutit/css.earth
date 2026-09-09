@@ -42,7 +42,13 @@
       "lensId": "normal",
       "label": "Monochrome",
       "falseColor": false,
-      "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations."
+      "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/1fe08644-1988-43d4-9f32-1267246f99a4/download"
+      }
     },
     {
       "id": "schenk-2020-titania-elevation",
@@ -84,7 +90,13 @@
       "lensId": "elevation",
       "label": "Elevation",
       "falseColor": true,
-      "coverage": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution."
+      "coverage": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/e17f88cd-db20-4208-912b-7f30074054cc/download"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -119,14 +131,178 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "geology-2026-source-1",
+      "path": "science/geology-2026/Titania surface.lyrx",
+      "expectedBytes": 32660,
+      "expectedSha256": "95c0a72b009403ee138407c775c4adcd33931a40d24b9d9ea2bd53f8697a749e",
+      "origin": "https://zenodo.org/api/records/20819132/files/Titania%20surface.lyrx/content",
+      "catalog": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
+      "license": "CC BY 4.0",
+      "consumers": [
+        "geology-source-review"
+      ],
+      "acquisition": "Checked-in original release bytes; publisher MD5 verified in acquisition-receipt.json.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
+    },
+    {
+      "id": "geology-2026-source-2",
+      "path": "science/geology-2026/Crater Materials .lyrx",
+      "expectedBytes": 149715,
+      "expectedSha256": "b3fa92f23f03b61629cbbacf9632fddef4cad3c651fc1f63475ba5936e19f9e2",
+      "origin": "https://zenodo.org/api/records/20819132/files/Crater%20Materials%20.lyrx/content",
+      "catalog": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
+      "license": "CC BY 4.0",
+      "consumers": [
+        "geology-source-review"
+      ],
+      "acquisition": "Checked-in original release bytes; publisher MD5 verified in acquisition-receipt.json.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
+    },
+    {
+      "id": "geology-2026-source-3",
+      "path": "science/geology-2026/Plains Materials .lyrx",
+      "expectedBytes": 74125,
+      "expectedSha256": "6abdeb1388377c3c858c604c935c802cd13d17c5d6c78fd70968953f3241b597",
+      "origin": "https://zenodo.org/api/records/20819132/files/Plains%20Materials%20.lyrx/content",
+      "catalog": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
+      "license": "CC BY 4.0",
+      "consumers": [
+        "geology-source-review"
+      ],
+      "acquisition": "Checked-in original release bytes; publisher MD5 verified in acquisition-receipt.json.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
+    },
+    {
+      "id": "geology-2026-source-4",
+      "path": "science/geology-2026/Titania Linework.lyrx",
+      "expectedBytes": 11867,
+      "expectedSha256": "43073f18b71601f52ba8c83e988f47bf985c45abe1b64b167139e5f6142cbae0",
+      "origin": "https://zenodo.org/api/records/20819132/files/Titania%20Linework.lyrx/content",
+      "catalog": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
+      "license": "CC BY 4.0",
+      "consumers": [
+        "geology-source-review"
+      ],
+      "acquisition": "Checked-in original release bytes; publisher MD5 verified in acquisition-receipt.json.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
+    },
+    {
+      "id": "geology-2026-source-5",
+      "path": "science/geology-2026/Titania geologic map .lyrx",
+      "expectedBytes": 33323,
+      "expectedSha256": "bd57952e22b1f479d8aa50c4f6060e6653ffbcc970b9648cd6cb37123969b5af",
+      "origin": "https://zenodo.org/api/records/20819132/files/Titania%20geologic%20map%20.lyrx/content",
+      "catalog": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
+      "license": "CC BY 4.0",
+      "consumers": [
+        "geology-source-review"
+      ],
+      "acquisition": "Checked-in original release bytes; publisher MD5 verified in acquisition-receipt.json.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
+    },
+    {
+      "id": "geology-2026-source-6",
+      "path": "science/geology-2026/Titania Map 2.gdb.zip",
+      "expectedBytes": 126593,
+      "expectedSha256": "6a2a2020440a3def8b9d014b95588badf9ac26d16a45251e4a93fd2da8632bbf",
+      "origin": "https://zenodo.org/api/records/20819132/files/Titania%20Map%202.gdb.zip/content",
+      "catalog": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
+      "license": "CC BY 4.0",
+      "consumers": [
+        "geology-source-review"
+      ],
+      "acquisition": "Checked-in original release bytes; publisher MD5 verified in acquisition-receipt.json.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
+    },
+    {
+      "id": "geology-2026-source-7",
+      "path": "science/geology-2026/Screenshot 2026-06-23 151155.png",
+      "expectedBytes": 383332,
+      "expectedSha256": "a98427ba99cd0e55440512f527daca2e7f1745229e22f7aca7f31f8b78a65319",
+      "origin": "https://zenodo.org/api/records/20819132/files/Screenshot%202026-06-23%20151155.png/content",
+      "catalog": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
+      "license": "CC BY 4.0",
+      "consumers": [
+        "geology-source-review"
+      ],
+      "acquisition": "Checked-in original release bytes; publisher MD5 verified in acquisition-receipt.json.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
+    },
+    {
+      "id": "geology-2026-source-8",
+      "path": "science/geology-2026/Additional Tectonic symbols.lyrx",
+      "expectedBytes": 15530,
+      "expectedSha256": "17e64bfef68ce942aafdda19c0636b291ef84e28c26111eaa2d1ddce25173028",
+      "origin": "https://zenodo.org/api/records/20819132/files/Additional%20Tectonic%20symbols.lyrx/content",
+      "catalog": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
+      "license": "CC BY 4.0",
+      "consumers": [
+        "geology-source-review"
+      ],
+      "acquisition": "Checked-in original release bytes; publisher MD5 verified in acquisition-receipt.json.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
+    },
+    {
+      "id": "geology-2026-categories",
+      "path": "science/geology-2026/categories.tif",
+      "expectedBytes": 25962,
+      "expectedSha256": "fae52df10d453d09be1c98f7d000ff12ae56d0ffa3304190cb45f4fb838f038e",
+      "width": 1440,
+      "height": 720,
+      "origin": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026), after Croft and Soderblom (1991); cssEarth reconstructed registration and categorical conversion",
+      "license": "CC BY 4.0; preserve source credit and identify transformations.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "acquisition": "Checked-in derived categorical grid. Reproduce with tools/objects/prepare-geologic-categories.py source/preparation/geology-conversion.json using the pinned original GIS and registration.",
+      "coverage": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ]
     }
   ],
   "generatedIntermediates": [],
   "documents": [
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3642,
-      "expectedSha256": "1ebfe0a4bf61ef7791f2365b91a561dcf4f79664592406fff6c854e1310081ad",
+      "expectedBytes": 6435,
+      "expectedSha256": "66af3b3720282972302367646b5d22f5f84790c4319c8d7a2da3a112788f5c6f",
       "purpose": "Source metadata, original release evidence, or authored preparation and content."
     },
     {
@@ -137,14 +313,14 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1057,
-      "expectedSha256": "41f1cca42b1e367da95ef14601bad322d7b896c66b4cc46ea8180aa616b11284",
+      "expectedBytes": 3023,
+      "expectedSha256": "6e81dbbc6d1e0f9712a6c81dd7940a6387ca2b299037207c0601f226780a2830",
       "purpose": "Source metadata, original release evidence, or authored preparation and content."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 9517,
-      "expectedSha256": "ea57a3457746e91294f7634767b33d4f6fcdfaa5206303e71b65942a7c52e0ee",
+      "expectedBytes": 12640,
+      "expectedSha256": "ef0c34fe4624419d59eca6d0d1d748c6755cf53d02b688125ceedd7575431f70",
       "purpose": "Source metadata, original release evidence, or authored preparation and content."
     },
     {
@@ -195,6 +371,60 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1078,
       "expectedSha256": "57ecaabe18cb3d09abded31c579a7c35b4a80ef2e1f3cf1d67893c4d38555fc9"
+    },
+    {
+      "path": "preparation/geology-conversion.json",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 6105,
+      "expectedSha256": "63f281e6d5472dbe303b2f687f1338c67803c6a13df8b878d28306fb89ca0943"
+    },
+    {
+      "path": "science/geology-2026/preview-overlap-evidence.json",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 2440,
+      "expectedSha256": "e18502516f75a95b1013419a128370eb11c2d13cd1f995475205e0059b84e8e4"
+    },
+    {
+      "path": "science/geology-2026/nomenclature.json",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 10589,
+      "expectedSha256": "7bbecba44adbe75155f3acc4fea477aee16939011ef451c8e712381e56397554"
+    },
+    {
+      "path": "science/geology-2026/categories.receipt.json",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 2755,
+      "expectedSha256": "8d55006e28bc6a4127e4e8db9c2215e48dae33875ceba881d7e36c5d2e36bd27"
+    },
+    {
+      "path": "science/geology-2026/registration.json",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 4004,
+      "expectedSha256": "49de4d090ca39167189fd4e9f74f2553a53b1030f0b2bf8968358dcadd3e4d07"
+    },
+    {
+      "path": "science/geology-2026/release-metadata.json",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 6777,
+      "expectedSha256": "c9cd9f54a5397bd7c432fb1e1fe5f2edca0ad6fdf1ebb69e0a4459ac540bf437"
+    },
+    {
+      "path": "science/geology-2026/acquisition-receipt.json",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 2888,
+      "expectedSha256": "7be47d4d17d200ca1c2bee6746af46635d82a25e72b1d1f9354388cf89146022"
+    },
+    {
+      "path": "science/geology-2026/nomenclature.pdf",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 2446389,
+      "expectedSha256": "c139389b02627f54bdd416afce3dfdce84bfa59d21efa8fd745da31082e3ef9f"
+    },
+    {
+      "path": "science/geology-2026/nomenclature.zip",
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
+      "expectedBytes": 84339,
+      "expectedSha256": "3a17713bc5527b46fe23685ebeee3bc4461f3f7ea2a21c3035c14702ca14b0cc"
     }
   ]
 }

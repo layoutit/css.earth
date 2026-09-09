@@ -54,7 +54,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Published radar shape model",
-        "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The archive explicitly identifies this mesh as Alpha, the primary; Beta and Gamma are not modeled here. The adopted nominal solution is model 17, with ecliptic pole (336°, 22°). Many radar pole solutions remain plausible, so the nominal orientation does not establish a unique spin pole. Lighting uses the selected pole and an arbitrary display phase.",
+        "title": "Radar shape model",
         "thumbnail": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-thumbnail.webp",
         "surface": "asteroid-1994-cc-shape-surface@2x.webp",
         "poles": "asteroid-1994-cc-shape-surface@2x.webp",
@@ -63,13 +63,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Source shape · radial height",
-        "title": "Color shows original model radius minus a 0.31 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-thumbnail.webp",
         "surface": "asteroid-1994-cc-elevation-surface@2x.webp",
         "poles": "asteroid-1994-cc-elevation-surface@2x.webp",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/1994CC_nominal.mod.wf",
           "image": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
       }
     ]
   },

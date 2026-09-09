@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 79.0,
+  "uncertaintyKm": 2.0,
+  "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
+  "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1799",
+  "reference": "DAMIT model 1799",
+  "sourceLabel": "DAMIT model 1799",
+  "limitations": "Hanuš2017 fits optical light curves, two disk-resolved AO images and one18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.",
+  "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations, 79 ± 2 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "scaleKmPerSourceUnit": 0.9984548643441234,
+  "metersPerSourceUnit": 998.4548643441234
+}

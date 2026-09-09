@@ -1,0 +1,340 @@
+{
+  "number": 165,
+  "name": "Loreley",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/222",
+  "modelId": 1809,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1809",
+  "catalog": "View model 180 31 7.22439 AO.png | occ.png | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1809",
+    "Asteroid": "(165) Loreley",
+    "λ": "180",
+    "β": "31",
+    "P": "7.22439",
+    "YORP": "",
+    "t0": "2444808",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "177",
+    "σD": "5",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-16",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:38",
+    "Modified": "2017-06-19 13:26:37",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1016/AO.png",
+    "occ.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1017/occ.png",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1018/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1019/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1020/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2017)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/169",
+      "file": "reference-169.html",
+      "links": [
+        {
+          "label": "2017a&a...601a.114h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2017a&a...601a.114h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2017A%26A...601A.114H",
+          "url": "http://adsabs.harvard.edu/abs/2017A%26A...601A.114H\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1702.01996",
+          "url": "https://arxiv.org/abs/1702.01996"
+        }
+      ]
+    }
+  ],
+  "id": "loreley",
+  "displayName": "Loreley",
+  "lambda": 180.0,
+  "beta": 31.0,
+  "periodHours": 7.22439,
+  "version": "2017-06-16",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 177.0,
+  "uncertaintyKm": 5.0,
+  "akari": {
+    "number": 165,
+    "name": "Loreley",
+    "diameterKm": 173.66,
+    "uncertaintyKm": 2.65,
+    "detections": 6,
+    "originalRow": "165    Loreley                        7.65  0.15  6  173.66  2.65 0.051 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1020/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1018/IAUspin.txt",
+  "shapeSha256": "0da05739bf0a1b246d7930dbcc5e8d8a7198a16b02fb97ea8ff9d3f38703c9d6",
+  "shapeBytes": 32486,
+  "vertices": 402,
+  "faces": 800,
+  "signedVolume": 2901776.996502301,
+  "independentSignedVolume": 2901776.996502301,
+  "originalVolumeEquivalentDiameter": 176.96544414541088,
+  "firstVertex": [
+    -0.839559,
+    0.645044,
+    92.826037
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    72.11150230840144,
+    107.48382176596711
+  ],
+  "extentsSourceUnits": [
+    [
+      -91.269159,
+      102.906141
+    ],
+    [
+      -88.248456,
+      102.662644
+    ],
+    [
+      -88.895063,
+      94.936137
+    ]
+  ],
+  "scaleKmPerSourceUnit": 1.0001952689394022,
+  "topology": {
+    "edges": 1200,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 80.35771415065122
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        -0.839559,
+        0.645044,
+        92.826037
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 4,
+      "coordinates": [
+        -0.839559,
+        -14.187456,
+        94.936137
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 134,
+      "coordinates": [
+        -48.165259,
+        -63.439656,
+        25.837437
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 145,
+      "coordinates": [
+        102.906141,
+        0.645044,
+        9.775137
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 173,
+      "coordinates": [
+        15.804141,
+        -88.248456,
+        11.607437
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 192,
+      "coordinates": [
+        -15.658159,
+        102.662644,
+        -3.920663
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 201,
+      "coordinates": [
+        -88.923659,
+        0.645044,
+        -3.920663
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 203,
+      "coordinates": [
+        -91.269159,
+        -26.684256,
+        -3.920663
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 393,
+      "coordinates": [
+        -27.308559,
+        0.645044,
+        -88.895063
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 401,
+      "coordinates": [
+        -0.839559,
+        0.645044,
+        -82.105363
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 295,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/295",
+      "pole": [
+        "174",
+        "29"
+      ],
+      "version": "2011-02-17",
+      "periodHours": "7.22439",
+      "comment": "size from AO is 169+/-21 km",
+      "calibrated": "1 (Yes)",
+      "diameterKm": "171",
+      "uncertaintyKm": "8",
+      "nonconvex": "0 (No)"
+    }
+  ],
+  "selectionNotes": "Select the 2017 ADAM nonconvex model 1809 over convex 295. Hanuš et al. (2017) reports 30 light curves, four AO images, and one occultation; the earlier pole ambiguity was removed by occultations and confirmed by AO. The publication ensemble gives 173 ±5 km and (178±3,31±3); the selected archive release gives 177 ±5 km and (180,31), with raw volume diameter 176.965. Keep the exact archived solution distinct from the ensemble estimate. No mass or density inference is adopted.",
+  "shapeKind": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select the 2017 ADAM nonconvex model 1809 over convex 295. Hanuš et al. (2017) reports 30 light curves, four AO images, and one occultation; the earlier pole ambiguity was removed by occultations and confirmed by AO. The publication ensemble gives 173 ±5 km and (178±3,31±3); the selected archive release gives 177 ±5 km and (180,31), with raw volume diameter 176.965. Keep the exact archived solution distinct from the ensemble estimate. No mass or density inference is adopted.",
+  "calibrationSelection": "Selected archive volume-equivalent diameter, independently reconciled against the unmodified source mesh volume.",
+  "archiveVolumeDiameterMismatchFraction": 0.0001952308168876593,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1809",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "Select the 2017 ADAM nonconvex model 1809 over convex 295. Hanuš et al. (2017) reports 30 light curves, four AO images, and one occultation; the earlier pole ambiguity was removed by occultations and confirmed by AO. The publication ensemble gives 173 ±5 km and (178±3,31±3); the selected archive release gives 177 ±5 km and (180,31), with raw volume diameter 176.965. Keep the exact archived solution distinct from the ensemble estimate. No mass or density inference is adopted."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "comparison",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Selected archive volume-equivalent diameter, independently reconciled against the unmodified source mesh volume."
+    }
+  ],
+  "visibleShapeDescription": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images. Selected archive volume-equivalent diameter: 177 ±5 km. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "papers": [
+    {
+      "file": "hanus-2017.pdf",
+      "url": "https://arxiv.org/pdf/1702.01996",
+      "label": "Hanuš et al. (2017), ADAM models"
+    }
+  ],
+  "selectedPoleStatus": "selected resolved-imaging model supersedes older convex release",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 177.0,
+    "uncertaintyKm": 5.0,
+    "uncertaintyKind": "Archive estimate of volume-equivalent diameter error; not a bound on local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record; actual source publications and release differences are documented in selectionNotes.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1809",
+    "reference": "DAMIT model 1809, version 2017-06-16",
+    "sourceLabel": "DAMIT model 1809",
+    "scaleKmPerSourceUnit": 1.0001952689394022,
+    "metersPerSourceUnit": 1000.1952689394022,
+    "limitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select the 2017 ADAM nonconvex model 1809 over convex 295. Hanuš et al. (2017) reports 30 light curves, four AO images, and one occultation; the earlier pole ambiguity was removed by occultations and confirmed by AO. The publication ensemble gives 173 ±5 km and (178±3,31±3); the selected archive release gives 177 ±5 km and (180,31), with raw volume diameter 176.965. Keep the exact archived solution distinct from the ensemble estimate. No mass or density inference is adopted.",
+    "visibleDescription": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images. Selected archive volume-equivalent diameter: 177 ±5 km. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 3.126208058670846,
+  "orbitalPeriodYears": 5.527579782045002,
+  "sourceFields": {
+    "ID": "1809",
+    "Asteroid": "(165) Loreley",
+    "λ": "180",
+    "β": "31",
+    "P": "7.22439",
+    "YORP": "",
+    "t0": "2444808",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "177",
+    "σD": "5",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-16",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:38",
+    "Modified": "2017-06-19 13:26:37",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

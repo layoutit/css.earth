@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "leucus",
+  "source": {
+    "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+    "papers": [
+      "https://doi.org/10.3847/PSJ/abb942",
+      "https://doi.org/10.1007/s11214-025-01173-7"
+    ],
+    "credit": "Mottola et al. (2020), The Planetary Science Journal 1, 73; Levison et al. (2025), Space Science Reviews 221, 70",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "fullAxesKm": [
+      60.8,
+      39.1,
+      27.8
+    ],
+    "semiAxesKm": [
+      30.4,
+      19.55,
+      13.9
+    ],
+    "fullAxesUncertaintyKm": null,
+    "referenceRadiusKm": 20.215215801007133,
+    "axisConvention": "Full axes are halved exactly. +Z is the adopted pole; +X is the arbitrary display meridian.",
+    "qualification": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes.",
+    "scale": "The reference radius is the geometric mean of the approximation semiaxes. It is a rendering scale, not an independent measured mean radius or convex-model volume."
+  },
+  "approximation": {
+    "semiAxesKm": [
+      30.4,
+      19.55,
+      13.9
+    ],
+    "assumptions": [
+      "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes.",
+      "Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
+    ],
+    "qualification": "Observation-constrained ellipsoid; no invented local terrain or albedo."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km",
+    "formula": "r = 1 / sqrt((cos(lat)*cos(lon)/a)^2 + (cos(lat)*sin(lon)/b)^2 + (sin(lat)/c)^2)"
+  },
+  "spin": {
+    "periodHours": 445.683,
+    "periodText": "445.683 ± 0.007 h",
+    "poleEclipticDegrees": [
+      208,
+      77
+    ],
+    "poleIcrfRaDecDegrees": [
+      247.70789456821117,
+      58.425336194327535
+    ],
+    "eclipticToIcrfObliquityDegrees": 23.439291111,
+    "meridianDegrees": 0,
+    "meaning": "Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
+  },
+  "unresolved": [
+    "The original Mottola 2020 convex mesh was not located in the checked paper's supporting release.",
+    "DAMIT models 6692 and 6693 have different poles and no matched absolute scale; their geometry is not mixed with this solution."
+  ],
+  "horizonsCommand": "11351;"
+}

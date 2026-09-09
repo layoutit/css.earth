@@ -1,0 +1,975 @@
+{
+  "oracle": "Astropy FITS reader; original stored row order; no display stretch or quality interpolation",
+  "products": [
+    {
+      "body": "comet-81p",
+      "lens": "navcam",
+      "path": "photography/navcam/n2075we02_rr.fit",
+      "sha256": "49729e94642129eccf402c03241a21717c31150725cc48826ecf31afa03d6fb0",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 2.1451247445014587e-09,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 9.020638458423491e-09,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 6.699441890134494e-09,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 2.6082311865849306e-09,
+          "quality": 0
+        },
+        {
+          "x": 987,
+          "y": 274,
+          "radiance": -1.8673311508177193e-10,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-81p",
+      "lens": "navcam",
+      "path": "photography/navcam/n2073we02_rr.fit",
+      "sha256": "f6944a7e778a556afd929e365585bbd0919ccdd573e1422b4b2c0379b33c035f",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 6.782309824870936e-09,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 5.578214654633484e-07,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 5.234842319623567e-07,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": -2.607312421520902e-10,
+          "quality": 0
+        },
+        {
+          "x": 1018,
+          "y": 354,
+          "radiance": -2.1922011428365806e-10,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-81p",
+      "lens": "navcam",
+      "path": "photography/navcam/n2077we02_rr.fit",
+      "sha256": "9973470135bcc89507adceaba79f4bd2d499893277f62eabebee353d96b2b575",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 4.547396681431337e-09,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 2.294512801981341e-09,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 923,
+          "y": 616,
+          "radiance": -2.3028285944803883e-09,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.fit",
+      "sha256": "53884c4e586680b1d7d286c253bb1f220c03208edb88a8481963781947659c81",
+      "width": 512,
+      "height": 512,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "radiance": 0.009165750816464424,
+          "quality": 0
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 1.3766487836837769,
+          "quality": 0
+        },
+        {
+          "x": 259,
+          "y": 249,
+          "radiance": 1.3809497356414795,
+          "quality": 0
+        },
+        {
+          "x": 503,
+          "y": 503,
+          "radiance": 0.00436952942982316,
+          "quality": 0
+        },
+        {
+          "x": 510,
+          "y": 353,
+          "radiance": -24761808.0,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000639_001_r.fit",
+      "sha256": "acacb9588329abd83d742ba0f558fafd84c0aad554c7c0ead1ead2f913345599",
+      "width": 256,
+      "height": 256,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 4.974209520842987e-13,
+          "quality": 0
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "radiance": 0.026368198916316032,
+          "quality": 0
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "radiance": 1.374196171760559,
+          "quality": 0
+        },
+        {
+          "x": 131,
+          "y": 121,
+          "radiance": 1.2729934453964233,
+          "quality": 0
+        },
+        {
+          "x": 247,
+          "y": 247,
+          "radiance": 0.011154432781040668,
+          "quality": 0
+        },
+        {
+          "x": 252,
+          "y": 130,
+          "radiance": -1942.601806640625,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000654_001_r.fit",
+      "sha256": "fc64a20ea7c923e0c208fb3597632182ceaa44a6d2a0f4656968a4e6e1b48afb",
+      "width": 256,
+      "height": 256,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": -2.899146258667015e+28,
+          "quality": 0
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "radiance": 0.06173466518521309,
+          "quality": 0
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "radiance": 1.277302861213684,
+          "quality": 0
+        },
+        {
+          "x": 131,
+          "y": 121,
+          "radiance": 1.224787712097168,
+          "quality": 0
+        },
+        {
+          "x": 247,
+          "y": 247,
+          "radiance": 1.4291682243347168,
+          "quality": 0
+        },
+        {
+          "x": 254,
+          "y": 123,
+          "radiance": -10832748.0,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30039te02_rr.fit",
+      "sha256": "7991991b7dbbb8c84b1f5777feb22d1687eb55453c719af64d533d466c1ce68a",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 8.15243783591768e-09,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 3.0593091082664614e-07,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 2.8486459768828354e-07,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": -2.9953546309968715e-09,
+          "quality": 0
+        },
+        {
+          "x": 927,
+          "y": 900,
+          "radiance": -2.5879314247134744e-09,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30036te02_rr.fit",
+      "sha256": "3bad06293d092e0be85d473086dc7babdb5a00040fc449649d9603b2188fbe24",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 1.1872199223716962e-08,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 2.6825816235032107e-07,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 2.704568657918571e-07,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 1.7113142014579807e-09,
+          "quality": 0
+        },
+        {
+          "x": 911,
+          "y": 286,
+          "radiance": -2.227641182628304e-09,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30042te02_rr.fit",
+      "sha256": "d2c82af5395924f21660bf3466f22b63173c3adf1ac23b0b533b54bbf2eb1a95",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 2.3754547218146627e-09,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 1.1595529514352165e-07,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 1.216837546280658e-07,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 3.3587002068458105e-09,
+          "quality": 0
+        },
+        {
+          "x": 85,
+          "y": 593,
+          "radiance": -1.121310599927483e-09,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-103p",
+      "lens": "mri",
+      "path": "photography/mri/mv10110413_6000001_001_r.fit",
+      "sha256": "b08f4ce6206f6d96778cdaa444cf618a8366a0b27d310760d7f28bb50422781d",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 0.21211929619312286,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 0.012951306998729706,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 0.012157831341028214,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 0.015106260776519775,
+          "quality": 11
+        }
+      ]
+    },
+    {
+      "body": "comet-103p",
+      "lens": "mri",
+      "path": "photography/mri/mv10110413_6000002_001_r.fit",
+      "sha256": "f97b508d325bce5d158a138c912d09bad7ebb97413569019b45b8601fe1c9271",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 0.0927850604057312,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": -0.003302385099232197,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 0.006156790070235729,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 0.03255341574549675,
+          "quality": 11
+        },
+        {
+          "x": 997,
+          "y": 930,
+          "radiance": -0.00036143281613476574,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-103p",
+      "lens": "mri",
+      "path": "photography/mri/mv10110414_6000003_001_r.fit",
+      "sha256": "72c6dd3d9111eb4d2dfd26d136bf70190e313bc6f64297cc3dde935d28f5fa85",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 0.3896743357181549,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 0.0008193234098143876,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 0.008016685955226421,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 0.03295436128973961,
+          "quality": 11
+        },
+        {
+          "x": 867,
+          "y": 897,
+          "radiance": -0.0004370832466520369,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-103p",
+      "lens": "mri",
+      "path": "photography/hri/hv10110413_5004004_001_d050.fit",
+      "sha256": "0c237b12aad0fa29e5427c2cc5c46bbf5b48059071912f278a731840cdbd07b3",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.017871644347906113,
+          "quality": 0
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 0.13921642303466797,
+          "quality": 1
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 0.0344158373773098,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 0.03650039806962013,
+          "quality": 1
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 0.01082596369087696,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-103p",
+      "lens": "mri",
+      "path": "photography/hri/hv10110413_5004008_001_d050.fit",
+      "sha256": "eec139c05808fa441b327d2905c5fa9cef45fc917d56d33b8edffe04f797d36f",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.019160544499754906,
+          "quality": 0
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 0.27206698060035706,
+          "quality": 1
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 0.03468342497944832,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 0.03830079734325409,
+          "quality": 1
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 0.018616875633597374,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-81p",
+      "lens": "navcam",
+      "path": "photography/navcam/n2079we02_rr.fit",
+      "sha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 905,
+          "y": 617,
+          "radiance": -2.352870343003133e-09,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 2
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
+      "sha256": "2f9aa28cc08a216e56884e950fc83fcb79f6480e695d0c4dc5e3f9933cfbd087",
+      "width": 256,
+      "height": 256,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": -6.1853709206184784e-27,
+          "quality": 0
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "radiance": 0.027584711089730263,
+          "quality": 0
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "radiance": 1.3407166004180908,
+          "quality": 0
+        },
+        {
+          "x": 131,
+          "y": 121,
+          "radiance": 1.377724528312683,
+          "quality": 0
+        },
+        {
+          "x": 247,
+          "y": 247,
+          "radiance": 0.02522076666355133,
+          "quality": 0
+        },
+        {
+          "x": 252,
+          "y": 130,
+          "radiance": -2.900757975835e-13,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 220,
+          "radiance": null,
+          "quality": 0
+        },
+        {
+          "x": 4,
+          "y": 116,
+          "radiance": 0.0,
+          "quality": 9
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+      "sha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026",
+      "width": 256,
+      "height": 256,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 3.412441332478338e+21,
+          "quality": 0
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "radiance": 0.9140347242355347,
+          "quality": 0
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "radiance": 1.4375663995742798,
+          "quality": 0
+        },
+        {
+          "x": 131,
+          "y": 121,
+          "radiance": 1.4284571409225464,
+          "quality": 0
+        },
+        {
+          "x": 247,
+          "y": 247,
+          "radiance": 1.5793297290802002,
+          "quality": 0
+        },
+        {
+          "x": 254,
+          "y": 128,
+          "radiance": -1.0054671505110857e-11,
+          "quality": 0
+        },
+        {
+          "x": 252,
+          "y": 108,
+          "radiance": null,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 131,
+          "radiance": -1.1487578082460003e+30,
+          "quality": 64
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30033te02_rr.fit",
+      "sha256": "7b6b3ea7dc38f0c00430538caa172037ecfdb8a87aaf3bbd548c71102bd087bc",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 2.9879940743882116e-09,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 1.1594612914223035e-07,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 1.0563385899331479e-07,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": -7.360004272705112e-11,
+          "quality": 0
+        },
+        {
+          "x": 1000,
+          "y": 728,
+          "radiance": -6.387641804384003e-11,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 2
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30045te02_rr.fit",
+      "sha256": "40012e16420e8a54f1528b8281cc7547a80243ee7693b7ab0684261ff3bba2b4",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": -7.31870730685813e-10,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 1.0232545477606436e-08,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 1.0326774990687682e-08,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 1.787328729463411e-09,
+          "quality": 0
+        },
+        {
+          "x": 207,
+          "y": 570,
+          "radiance": -7.383582634190589e-10,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 2
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30048te02_rr.fit",
+      "sha256": "fe0f92dd79880c4e39d646277e06e957844de800b15747e9b92a7685f7e03506",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 3.48223283541671e-10,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 1.936542926017637e-09,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 1.9539505569099447e-09,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 4.332715297650225e-10,
+          "quality": 0
+        },
+        {
+          "x": 369,
+          "y": 623,
+          "radiance": -1.8377230293076252e-10,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 2
+        }
+      ]
+    }
+  ]
+}

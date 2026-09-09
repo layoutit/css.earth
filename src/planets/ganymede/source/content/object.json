@@ -88,7 +88,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
-        "title": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
+        "title": "Global image mosaic",
         "thumbnail": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
         "surface": "ganymede-normal-surface@2x.webp",
         "poles": "ganymede-normal-poles@2x.webp",
@@ -96,13 +96,14 @@
           "id": "usgs-voyager-galileo-mono",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic"
+        "detail": "Global mosaic",
+        "summary": "Source detail ranges from 400 m to 20 km per pixel. Photographed shadows remain; the gray grid marks missing imagery."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
-        "title": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
+        "title": "Color mosaic",
         "thumbnail": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
         "surface": "ganymede-enhanced-surface@2x.webp",
         "poles": "ganymede-enhanced-poles@2x.webp",
@@ -110,9 +111,205 @@
           "id": "usgs-voyager-galileo-color",
           "path": "../manifest.json"
         },
-        "detail": "Infrared color"
+        "detail": "Infrared color",
+        "summary": "Infrared, green and violet bands add color to monochrome detail. Missing or synthesized color is left monochrome."
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "detail": "Interpreted units",
+        "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+        "title": "Global geologic map",
+        "thumbnail": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
+        "surface": "ganymede-geology-surface@2x.webp",
+        "poles": "ganymede-geology-poles@2x.webp",
+        "falseColor": true,
+        "source": {
+          "id": "usgs-sim3237-geologic-units",
+          "path": "../manifest.json",
+          "url": "https://pubs.usgs.gov/sim/3237/"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Interpreted geologic category"
+          },
+          {
+            "id": "mapping-scale",
+            "label": "Map scale",
+            "value": "1:15,000,000"
+          },
+          {
+            "id": "epoch",
+            "label": "Publication",
+            "value": "USGS SIM3237 · 2013"
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Mapped polygons; uncovered areas retained"
+          }
+        ],
+        "legend": {
+          "kind": "categories",
+          "title": "Geologic units",
+          "meta": "Symbols identify archived categories. Colors are chosen for this display.",
+          "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
+          "items": [
+            {
+              "label": "dc",
+              "description": "Dark cratered terrain",
+              "color": "#79574a"
+            },
+            {
+              "label": "dl",
+              "description": "Dark lineated terrain",
+              "color": "#98705b"
+            },
+            {
+              "label": "d",
+              "description": "Dark terrain, undivided",
+              "color": "#b38e78"
+            },
+            {
+              "label": "r",
+              "description": "Reticulate terrain",
+              "color": "#998781"
+            },
+            {
+              "label": "lg1",
+              "description": "Light grooved terrain 1",
+              "color": "#729e83"
+            },
+            {
+              "label": "lg2",
+              "description": "Light grooved terrain 2",
+              "color": "#98bd94"
+            },
+            {
+              "label": "lg3",
+              "description": "Light grooved terrain 3",
+              "color": "#c4d9a1"
+            },
+            {
+              "label": "ls1",
+              "description": "Light subdued terrain 1",
+              "color": "#77aeb2"
+            },
+            {
+              "label": "ls2",
+              "description": "Light subdued terrain 2",
+              "color": "#9bc9c6"
+            },
+            {
+              "label": "ls3",
+              "description": "Light subdued terrain 3",
+              "color": "#c3e4d9"
+            },
+            {
+              "label": "li1",
+              "description": "Light irregular terrain 1",
+              "color": "#8079a9"
+            },
+            {
+              "label": "li2",
+              "description": "Light irregular terrain 2",
+              "color": "#aaa0c6"
+            },
+            {
+              "label": "li3",
+              "description": "Light irregular terrain 3",
+              "color": "#d3c4e0"
+            },
+            {
+              "label": "l",
+              "description": "Light terrain, undivided",
+              "color": "#d0d0bd"
+            },
+            {
+              "label": "p",
+              "description": "Palimpsest material",
+              "color": "#daac75"
+            },
+            {
+              "label": "pi",
+              "description": "Palimpsest interior",
+              "color": "#b88957"
+            },
+            {
+              "label": "bi",
+              "description": "Basin interior",
+              "color": "#c87770"
+            },
+            {
+              "label": "br",
+              "description": "Rugged basin material",
+              "color": "#a34f51"
+            },
+            {
+              "label": "bs",
+              "description": "Smooth basin material",
+              "color": "#dea398"
+            },
+            {
+              "label": "c1",
+              "description": "Crater material 1",
+              "color": "#ad8c27"
+            },
+            {
+              "label": "c2",
+              "description": "Crater material 2",
+              "color": "#dbbc42"
+            },
+            {
+              "label": "c3",
+              "description": "Crater material 3",
+              "color": "#f4df86"
+            },
+            {
+              "label": "cu",
+              "description": "Crater material, undivided",
+              "color": "#d1c59f"
+            }
+          ]
+        }
+      },
+      {
+        "id": "oxygen-signature",
+        "label": "Oxygen signature",
+        "description": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
+        "title": "Oxygen-sensitive visible reflectance ratio",
+        "summary": "A 565/577.3 nm surface-ice oxygen signature, not oxygen concentration. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
+        "thumbnail": "/scenes/ganymede/ganymede-oxygen-signature-thumbnail.webp",
+        "surface": "ganymede-oxygen-signature-surface@2x.webp",
+        "poles": "ganymede-oxygen-signature-poles@2x.webp",
+        "source": {
+          "id": "ganymede-muse-oxygen-signature-night-1",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.11402374"
+        },
+        "detail": "2019 MUSE",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Oxygen signature",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.98",
+            "1.00",
+            "1.02"
+          ],
+          "meta": "reflectance ratio",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+          "image": "/scenes/ganymede/ganymede-oxygen-signature-legend.webp"
+        }
       }
-    ]
+    ],
+    "labels": {
+      "oxygen-signature": "Oxygen signature"
+    }
   },
   "settings": {
     "titleKey": "settings",
@@ -150,6 +347,24 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "USGS geology",
+      "role": "surface",
+      "description": "Interpreted geologic map and GIS · SIM3237",
+      "href": "https://pubs.usgs.gov/sim/3237/"
+    },
+    {
+      "label": "VLT / MUSE",
+      "role": "surface",
+      "description": "King et al. (2025), visible spectral mapping and interpretation",
+      "href": "https://doi.org/10.1029/2024JE008511"
+    },
+    {
+      "label": "MUSE data",
+      "role": "surface",
+      "description": "July 2019 spectral observations; released 2024; CC BY 4.0",
+      "href": "https://doi.org/10.5281/zenodo.11402374"
     }
   ],
   "provenance": {

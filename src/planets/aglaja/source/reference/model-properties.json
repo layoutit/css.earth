@@ -1,0 +1,94 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3233",
+  "modelId": 3233,
+  "modelVersion": "2019-05-07",
+  "diameterKm": 147.05,
+  "diameterInterpretation": "Convex light-curve reconstruction with approximate thermal size: 147.05 km effective diameter (catalog ±3.58 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 147.05,
+    "uncertaintyKm": 3.58,
+    "reportedUncertaintyKm": 3.58,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 47,
+      "name": "Aglaja",
+      "diameterKm": 147.05,
+      "uncertaintyKm": 3.58,
+      "detections": 3,
+      "originalRow": "47     Aglaja                         7.84  0.16  3  147.05  3.58 0.060 0.004"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 118.52171309272273,
+    "metersPerSourceUnit": 118521.71309272274,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 147.05 km effective diameter (catalog ±3.58 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery."
+  },
+  "periodHours": 13.1771,
+  "poleEclipticJ2000Degrees": [
+    150,
+    17
+  ],
+  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/10219/shape.txt",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates",
+    "metersPerUnit": 118521.71309272274,
+    "firstVertexKm": [
+      -4.8719535383894605,
+      3.6636246734091524,
+      89.35458619602151
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      166.9226621118241,
+      143.65507200602624,
+      153.5515165275555
+    ],
+    "volumeCubicKm": 1664921.2976842206,
+    "volumeEquivalentRadiusKm": 73.525,
+    "radialRangeKm": [
+      61.88674419684151,
+      97.18616650043624
+    ]
+  },
+  "elevation": [
+    -30,
+    30
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1470.5,
+    "estimatedErrorMeters": 257.1666259765625,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1664679591113861
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4f733662bc02451176df8178d7cf58f49b161ee658917fe8573b1e2c12c2043f"
+    "sha256": "91ae3d8a4e3399be7766420ec92c6d3f43c519f83cddac9e030f43061edd0f69"
   },
   "id": "io",
   "properties": {
@@ -63,6 +63,21 @@
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "spectral-slope",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "visible-absorption",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -83,17 +98,17 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "176f9e0088a7ff3cae586fbce861477d62ed69b22deaba3d064dd3666d443b2a"
+          "sha256": "a2ca8a5abc1cbb507b93a10f8898661c5ce400ddacdb8687b083b47565c1152a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1f914878677afdbd0ce81e0cba0e732276ad876ce0b1345db6a3d8f60ed0461c"
+          "sha256": "84b59a67cc9970f2728c781d8d7a4254d9ac39f96273a3b8598f46171689ade4"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "b5013944c360617b03bc43bc0c7d2a68ddd5c1ea11da30eebba653488ac9e8f9"
+          "sha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235"
         },
         {
           "id": "navigation",
@@ -103,7 +118,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c44281a1f6e284ad0f6bdc5b6a0092ab5380f7ba58fe2b01eb5826e265d96528"
+          "sha256": "82875a6372ffe28a99fc83459e264922953eaf236233ec0a916e6a19fabcbe55"
         }
       ]
     }

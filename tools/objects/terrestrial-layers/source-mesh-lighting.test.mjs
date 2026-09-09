@@ -26,3 +26,11 @@ test('a missing nearby hit is reported and uses the supplied coarse normal', () 
     assert.throws(() => createSourceMeshLighting(mesh(), { ...recipe, ...change }, 1, [0,0,1]));
   }
 });
+
+test('uniform flood preserves the unshaded surface while the opt-in bank keeps source shadows', () => {
+  const lighting = createSourceMeshLighting(mesh(true), { ...recipe, uniformFlood: true }, 1, [0,0,1]);
+  assert.deepEqual(lighting.sample([0,0,.1], [0,0,1]), { flood: 1, shadow: .2 });
+  assert.deepEqual(lighting.sample([30,30,0], [1,0,0]), { flood: 1, shadow: .2 });
+  assert.deepEqual(lighting.sample([30,30,0], [0,0,1]), { flood: 1, shadow: 1 });
+  assert.throws(() => createSourceMeshLighting(mesh(), { ...recipe, uniformFlood: 'true' }, 1, [0,0,1]));
+});

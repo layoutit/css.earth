@@ -539,6 +539,198 @@
       "consumers": [
         "virtis-science"
       ]
+    },
+    {
+      "id": "shap7-region-cells",
+      "path": "geology/shap7-regions.vtk",
+      "expectedBytes": 6309622,
+      "expectedSha256": "9af9fbedcdc04046786a1c3cb614938245f39cacba69639ba1847fa50fb1e963",
+      "origin": "https://data.mendeley.com/public-files/datasets/2845znt54k/files/d6036dad-ade7-4645-afc1-6f8e86c36a4e/file_downloaded",
+      "credit": "Thomas et al. (2018); Rosetta/OSIRIS; SHAP7 by Preusker et al.",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://data.mendeley.com/datasets/2845znt54k/1"
+      ],
+      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "redistribution": "Retain authors, dataset DOI and CC BY 4.0 attribution.",
+      "consumers": [
+        "surface-geology"
+      ],
+      "projection": {
+        "type": "cartesian-triangle-cells",
+        "frame": "Cheops",
+        "units": "km"
+      },
+      "coverage": "Regional definitions on SHAP7, registered to RMOC MTP019 with a 50 m surface-to-surface acceptance bound. Categories preserve original source cell identity."
+    },
+    {
+      "id": "sbmt-geological-paths",
+      "path": "geology/paths.xml",
+      "expectedBytes": 874755,
+      "expectedSha256": "1ff8eda969bf57780ae2901bf6c355f0da4e06f1bf996f59f2ae84f59ae5526e",
+      "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/00_All/Complete_Paths",
+      "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
+      "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
+      "licenseEvidence": [
+        "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
+      ],
+      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
+      "consumers": [
+        "surface-geology"
+      ]
+    },
+    {
+      "id": "sbmt-geological-locations",
+      "path": "geology/locations.tsv",
+      "expectedBytes": 627156,
+      "expectedSha256": "48665f88d4c902f0aca35552488a015b6532b1eed2efb268c918fee20427c8ae",
+      "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/00_All/Complete_Ellipses",
+      "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
+      "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
+      "licenseEvidence": [
+        "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
+      ],
+      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
+      "consumers": [
+        "surface-geology"
+      ]
+    },
+    {
+      "id": "sbmt-regional-boundaries",
+      "path": "geology/region-boundaries.xml",
+      "expectedBytes": 263077,
+      "expectedSha256": "f176f1b042c9fa1f3f056f3befba1184b9e6f96cda8e875421a472d799c7c945",
+      "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/Regions_50k/Regions_50k_facets",
+      "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
+      "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
+      "licenseEvidence": [
+        "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
+      ],
+      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
+      "consumers": [
+        "surface-geology"
+      ]
+    },
+    {
+      "id": "sbmt-region-order",
+      "path": "geology/region_order.mat",
+      "expectedBytes": 404,
+      "expectedSha256": "ebdee4cf10bd0ac8a35025da4f2a7999e583d414bb1526ddf0620f658c8c6f05",
+      "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Code/Create_maps/region_order.mat",
+      "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
+      "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
+      "licenseEvidence": [
+        "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
+      ],
+      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
+      "consumers": [
+        "surface-geology"
+      ]
+    },
+    {
+      "id": "geomap-guide",
+      "path": "geology/product-user-guide.pdf",
+      "expectedBytes": 921816,
+      "expectedSha256": "a7d60974c15ce47cd30f0da3fa6e2c9abfc7855e3517c26764755497894c0dfd",
+      "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf",
+      "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
+      "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
+      "licenseEvidence": [
+        "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
+      ],
+      "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
+      "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
+      "consumers": [
+        "surface-geology"
+      ]
+    },
+    {
+      "id": "n20140913-200612-path",
+      "path": "observations/n20140913t200612355id50f22.img",
+      "expectedBytes": 151028224,
+      "expectedSha256": "21c2b39b4ec5c62e7c04f224b049d96381dc5f4f40c9314fd265da638c7ddf72",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140913t200612355id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2014-08-05T19:44:22.918",
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+    },
+    {
+      "id": "n20140913-200612-qualityPath",
+      "path": "observations/n20140913t200612355id40f22.img",
+      "expectedBytes": 37775872,
+      "expectedSha256": "daecb61e3df87336d16daf475548330c588d3d2e9be03f118d5ccab8cdba43d0",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140913t200612355id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2014-08-05T19:44:22.918",
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+    },
+    {
+      "id": "n20140920-133916-path",
+      "path": "observations/n20140920t133916351id50f22.img",
+      "expectedBytes": 151028224,
+      "expectedSha256": "a2c7f5ee9deca995c96561a449432b43de6830b4843c9b5b08b5a8a307e519e1",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140920t133916351id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2014-08-05T19:44:22.918",
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+    },
+    {
+      "id": "n20140920-133916-qualityPath",
+      "path": "observations/n20140920t133916351id40f22.img",
+      "expectedBytes": 37775872,
+      "expectedSha256": "2024e8c6b98662137b211c8e045e74b085fb09b25518e4f755dd9eedaaf63f55",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140920t133916351id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2014-08-05T19:44:22.918",
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
     }
   ],
   "generatedIntermediates": [
@@ -577,14 +769,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12568,
-      "expectedSha256": "e33972e37428e6cf6ff97dc627e1ce187e221d5fa5c3d1fa2652cc9aa0305612",
+      "expectedBytes": 18900,
+      "expectedSha256": "3626c396dcbee2c7ef9e71873af5573407066c3e8b47309c7a1613801d2edb41",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 6749,
-      "expectedSha256": "10c5270efc55d3a588b761ad1af26f340196efd0f95825c37a73cf0b6ab732ea",
+      "expectedBytes": 9504,
+      "expectedSha256": "d39ae777df7504252f6120b1e0f17a2ae0588bc7affafb43a6f4faece2d90693",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
@@ -601,8 +793,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 11848,
-      "expectedSha256": "afe13551de45e19607f48a60f7bffa25ecc93d1cceab1bbf02ebe89741aa6d93",
+      "expectedBytes": 20217,
+      "expectedSha256": "94c222df3f33d7bb1b13a9b1827d47c65c69c5e4983ad39571bc3f2d2869f902",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
@@ -650,8 +842,8 @@
     {
       "path": "reference/osiris-georeference.json",
       "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 4057,
-      "expectedSha256": "9c3f048bae05dd158cf19d42b8e9d5b8030d348c39723a1e7d3d4af065269133"
+      "expectedBytes": 4507,
+      "expectedSha256": "fa9e544eadd6dfddddab617a955f631c3b992c584e93f82605791c2b997f9b18"
     },
     {
       "path": "reference/osiris-20140805-geo.lbl",
@@ -700,6 +892,50 @@
       "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte.",
       "expectedBytes": 28160,
       "expectedSha256": "cd1586a932de008940e1bff0b59fec1132a7d851ff6ab0cf3f525849a04cee9b"
+    },
+    {
+      "path": "reference/osiris-trial.json",
+      "expectedBytes": 1965,
+      "expectedSha256": "e4692ad79d705fef757c77f964abe30ed605c5ef9a221f8e5b4074485ab1f25d",
+      "purpose": "Preserved historical OSIRIS trial policy and credits; not a runtime input."
+    },
+    {
+      "path": "reference/OSIRIS-TRIAL-NOTICE.md",
+      "expectedBytes": 1116,
+      "expectedSha256": "4c700a22a98131fff3093fa55d3c3b7d14e01b883e5cddb275fc945712187ebf",
+      "purpose": "Preserved historical OSIRIS trial policy and credits; not a runtime input."
+    },
+    {
+      "path": "reference/n20140913-200612-geo.lbl",
+      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
+      "expectedBytes": 29696,
+      "expectedSha256": "43f6d167ab7d0932c84e3a44ce1eed7584ce9d6dae37d84eef1d81b505844609",
+      "id": "n20140913-200612-path-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140913t200612355id50f22.img"
+    },
+    {
+      "path": "reference/n20140913-200612-quality.lbl",
+      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
+      "expectedBytes": 23552,
+      "expectedSha256": "659ff0e798b94deb7eb67f2c19f3cdac7236b3aea484f5b8feb531b270baa2f1",
+      "id": "n20140913-200612-qualityPath-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140913t200612355id40f22.img"
+    },
+    {
+      "path": "reference/n20140920-133916-geo.lbl",
+      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
+      "expectedBytes": 29696,
+      "expectedSha256": "ba48fca94499f1be5b338ab8a0ac9624cd4d309971cc3dcae0bd13919e28dfd9",
+      "id": "n20140920-133916-path-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140920t133916351id50f22.img"
+    },
+    {
+      "path": "reference/n20140920-133916-quality.lbl",
+      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
+      "expectedBytes": 23552,
+      "expectedSha256": "517ce88eaf0cd01425d86e538a299f7319ed7907178cc37424749010a13bd52a",
+      "id": "n20140920-133916-qualityPath-label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140920t133916351id40f22.img"
     }
   ]
 }

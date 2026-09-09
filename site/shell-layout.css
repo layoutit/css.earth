@@ -2,32 +2,34 @@
 body[data-object-shell] {
   --explorer-rail-left: 16px;
   --explorer-rail-item-gap: 0px;
-  --explorer-panel-left: 16px;
+  --explorer-panel-left: 12px;
   --explorer-panel-width: 340px;
   --explorer-logo-size: 36px;
   --explorer-wordmark-size: 38px;
   --explorer-content-inset: 20px;
-  --explorer-content-right-inset: 12px;
   --explorer-categories-sidebar-gap: 12px;
   --explorer-panel-padding: 0px;
   --explorer-status-height: 18px;
+  --explorer-readout-top: 0px;
   --explorer-header-top: 8px;
   --explorer-panel-block-padding: 0px;
   --explorer-search-height: 44px;
+  --explorer-header-width: var(--explorer-panel-width);
+  --explorer-header-row-gap: 7px;
+  --explorer-header-height: calc(2 * var(--explorer-search-height) + var(--explorer-header-row-gap));
   --explorer-github-width: 100px;
-  --explorer-codepen-width: var(--explorer-search-height);
   --explorer-report-issue-width: 112px;
-  --explorer-project-links-width: calc(var(--explorer-report-issue-width) + var(--explorer-github-width) + var(--explorer-codepen-width) + 2 * var(--explorer-search-height) + 4 * var(--explorer-header-control-gap));
   --explorer-header-control-gap: 8px;
   --explorer-panel-bottom-gap: 16px;
-  --explorer-header-panel-gap: 12px;
+  --explorer-header-panel-gap: 8px;
   --explorer-panel-gap: 8px;
-  --explorer-controls-top: calc(var(--explorer-header-top) + var(--explorer-search-height) + var(--explorer-header-panel-gap));
+  --explorer-controls-top: calc(var(--explorer-header-top) + var(--explorer-header-height) + var(--explorer-header-panel-gap));
   --explorer-dock-width: calc(var(--explorer-panel-left) + var(--explorer-panel-width));
   --explorer-surface-background: var(--shell-surface);
   --explorer-rail-background: var(--explorer-surface-background);
   --explorer-panel-background: var(--explorer-surface-background);
-  --explorer-divider: var(--shell-divider);
+  --explorer-divider: #000;
+  --explorer-divider-width: 2px;
   --explorer-control-border: var(--shell-border);
   --explorer-control-text: var(--shell-text-secondary);
 }
@@ -38,7 +40,7 @@ body[data-object-shell] {
   .planet-sidebar > .explorer-settings-panel
 ) {
   --explorer-card-padding-inline-start: var(--explorer-card-padding-left, 20px);
-  --explorer-card-padding-inline-end: var(--explorer-content-right-inset);
+  --explorer-card-padding-inline-end: var(--explorer-card-padding-inline-start);
   box-sizing: border-box;
   flex: 0 0 auto;
   width: 100%;
@@ -56,6 +58,14 @@ body[data-object-shell] {
 
 .planet-card:has(> .planet-selected-panel > .planet-breadcrumbs) {
   padding-block-start: 16px;
+}
+
+.planet-card > .planet-selected-panel:has(+ :is(.planet-card-tabs, .planet-object-tabs))::after {
+  content: "";
+  display: block;
+  margin-top: 12px;
+  margin-inline: calc(-1 * var(--explorer-card-padding-inline-start)) calc(-1 * var(--explorer-card-padding-inline-end));
+  border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
 
 .planet-ui-layer,
@@ -78,52 +88,55 @@ body[data-object-shell] {
 
 body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
-body[data-object-shell] .planet-attribution-footer {
-  display: none;
-}
-
 .explorer-shell-header {
+  --explorer-header-control-gap: 4px;
   --explorer-wordmark-size: 38px;
   position: fixed;
   z-index: 220;
-  inset: var(--explorer-header-top) auto auto var(--explorer-rail-left);
-  display: flex;
+  inset: var(--explorer-header-top) auto auto var(--explorer-panel-left);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: repeat(2, var(--explorer-search-height));
   align-items: center;
   justify-content: flex-start;
-  gap: var(--explorer-header-control-gap);
+  gap: var(--explorer-header-row-gap);
   width: min(
-    var(--explorer-panel-width),
+    var(--explorer-header-width),
     calc(100vw - var(--explorer-rail-left) - 8px)
   );
+  height: var(--explorer-header-height);
+}
+
+.explorer-brand-row {
+  /* Preserve the wordmark's position using its prepared 16.27/22 em ink height. */
+  box-sizing: border-box;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 8px;
   height: var(--explorer-search-height);
+  padding-top: calc((var(--explorer-search-height) - 16.27 * var(--explorer-wordmark-size) / 22) / 2 - 1px);
 }
 
 .explorer-shell-wordmark {
-  display: flex;
+  display: block;
   flex: 0 0 auto;
-  align-items: center;
   width: max-content;
-  height: var(--explorer-search-height);
-  margin-inline-start: 0;
-  margin-inline-end: 16px;
+  /* Let the rounded leading c slightly overhang the card's text edge. */
+  margin-inline-start: calc(var(--explorer-content-inset) - 4px);
+  margin-inline-end: 0;
 }
 
 .explorer-shell-wordmark .maps-brand-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.explorer-shell-wordmark .planet-wordmark-svg {
-  transform: translateY(-1px);
+  display: block;
 }
 
 .explorer-shell-header .planet-sidebar-search-card {
-  flex: 0 1 188px;
+  flex: 1 1 auto;
   width: 100%;
   min-width: 0;
   max-width: 100%;
+  background: var(--explorer-panel-background);
 }
 
 .explorer-shell-header .planet-sidebar-search-icon {
@@ -133,14 +146,14 @@ body[data-object-shell] .planet-attribution-footer {
 }
 
 .explorer-shell-header .planet-sidebar-search {
-  padding-block: 11px;
-  padding-inline: 41px 16px;
+  padding-block: 12px;
+  padding-inline: var(--explorer-content-inset) 40px;
   line-height: 20px;
   font-weight: 400;
-  border: 1px solid var(--explorer-control-border);
+  border: 0;
   border-radius: 0;
-  background: var(--shell-background);
-  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+  background: transparent;
+  box-shadow: none;
   color: var(--explorer-control-text);
   transition: border-color 120ms ease, color 120ms ease;
 }
@@ -154,13 +167,15 @@ body[data-object-shell] .planet-attribution-footer {
 }
 
 .explorer-shell-header .planet-sidebar-view-all {
-  top: 2px;
-  left: 4px;
-  right: auto;
-  width: 40px;
-  height: 40px;
+  top: 0;
+  left: auto;
+  right: 8px;
+  width: 32px;
+  height: var(--explorer-search-height);
   border-radius: 0;
 }
+
+.explorer-shell-header .planet-toolbar-action { width: 32px; }
 
 .explorer-shell-header .planet-sidebar-view-all:hover {
   background: transparent;
@@ -173,6 +188,7 @@ body[data-object-shell] .planet-attribution-footer {
 .planet-search-toolbar {
   display: flex;
   align-items: center;
+  transform: none;
   gap: var(--explorer-header-control-gap);
   width: 100%;
   min-width: 0;
@@ -191,7 +207,6 @@ body[data-object-shell] .planet-attribution-footer {
 .planet-search-category,
 .planet-report-issue-link,
 .planet-github-link,
-.planet-codepen-link,
 .planet-sidebar-collapse,
 .planet-toolbar-action {
   appearance: none;
@@ -203,10 +218,10 @@ body[data-object-shell] .planet-attribution-footer {
   height: var(--explorer-search-height);
   margin: 0;
   padding: 0 12px;
-  border: 1px solid var(--explorer-control-border);
+  border: 0;
   border-radius: 0;
-  background: var(--shell-background);
-  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+  background: transparent;
+  box-shadow: none;
   color: var(--explorer-control-text);
   font: 400 15px/20px var(--shell-ui-font);
   white-space: nowrap;
@@ -216,13 +231,21 @@ body[data-object-shell] .planet-attribution-footer {
 }
 
 .explorer-shell-header .material-symbol,
-.planet-project-links .material-symbol,
-.planet-github-icon,
-.planet-codepen-icon {
+.planet-project-links .material-symbol {
   display: block;
   flex: 0 0 20px;
   width: 20px;
   height: 20px;
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Standard GitHub mark at the shared compact icon size. */
+.planet-github-icon {
+  display: block;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
   stroke: none;
 }
@@ -234,26 +257,18 @@ body[data-object-shell] .planet-attribution-footer {
 }
 
 .explorer-shell-header .planet-sidebar-search,
+.explorer-shell-header .planet-toolbar-action,
 .planet-search-category,
 .planet-sidebar-collapse {
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-left-color: transparent;
+  border: 0;
 }
 
 .planet-project-links :is(
   .planet-report-issue-link,
   .planet-github-link,
-  .planet-codepen-link,
   .planet-toolbar-action
 ) {
-  border-top-color: transparent;
-  border-left-color: transparent;
-  border-right-color: transparent;
-}
-
-.planet-codepen-link:disabled:hover {
-  border-bottom-color: var(--shell-border-hover);
+  border: 0;
 }
 
 .explorer-shell-header .planet-sidebar-search-card:hover .planet-sidebar-search,
@@ -277,29 +292,31 @@ body[data-object-shell] .planet-attribution-footer {
 }
 
 .planet-project-links {
-  position: absolute;
-  top: var(--explorer-header-top);
-  right: 12px;
+  position: static;
   display: flex;
-  gap: var(--explorer-header-control-gap);
-  width: var(--explorer-project-links-width);
+  align-items: baseline;
+  gap: 2px;
+  width: max-content;
   max-width: calc(100% - 24px);
-  overflow-x: auto;
-  scrollbar-width: none;
   pointer-events: auto;
 }
 
 .planet-github-link,
-.planet-report-issue-link,
-.planet-codepen-link {
+.planet-report-issue-link {
   box-sizing: border-box;
   text-decoration: none;
   pointer-events: auto;
 }
-.planet-github-link { width: var(--explorer-github-width); }
-.planet-codepen-link { width: var(--explorer-codepen-width); padding-inline: 0; }
+.planet-github-link {
+  align-items: baseline;
+  transform: translateY(-1px);
+  width: auto;
+  height: auto;
+  padding: 0;
+  color: var(--shell-text-muted);
+  font: 400 13px/18px var(--shell-ui-font);
+}
 .planet-report-issue-link { width: var(--explorer-report-issue-width); }
-.planet-codepen-link:disabled { opacity: var(--shell-disabled-opacity); cursor: default; }
 
 .explorer-rail {
   gap: var(--explorer-header-control-gap);
@@ -338,6 +355,10 @@ body[data-object-shell] .planet-attribution-footer {
 .planet-sidebar::-webkit-scrollbar { display: none; }
 
 @media (min-width: 821px) and (orientation: landscape) {
+  body[data-object-shell] {
+    --explorer-readout-top: var(--explorer-header-top);
+  }
+
   .planet-ui-layer {
     position: fixed;
     z-index: 160;
@@ -373,18 +394,11 @@ body[data-object-shell] .planet-attribution-footer {
     margin: var(--explorer-header-top) 0 var(--explorer-header-panel-gap);
     pointer-events: auto;
     display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     box-sizing: border-box;
     padding-inline-end: 0;
-    width: var(--explorer-panel-width);
+    width: var(--explorer-header-width);
     max-width: calc(100vw - var(--explorer-rail-left) - 12px);
-  }
-
-  .planet-search-toolbar {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: calc(100% + var(--explorer-header-control-gap));
-    width: calc(100vw - var(--explorer-panel-left) - 100% - 2 * var(--explorer-header-control-gap) - 12px - var(--explorer-project-links-width));
   }
 
   .planet-sidebar {
@@ -404,12 +418,11 @@ body[data-object-shell] .planet-attribution-footer {
   }
 
   .planet-viewport {
-    inset: 0 0 var(--explorer-status-height) 0;
+    inset: 0;
   }
 
-  body[data-object-shell] .planet-view-readout,
-  body[data-object-shell] .planet-attribution-footer {
-    left: 0;
+  body[data-object-shell] .planet-view-readout {
+    left: calc(var(--explorer-dock-width) + 12px);
   }
 }
 
@@ -423,18 +436,14 @@ body[data-object-shell] .planet-attribution-footer {
 
 /* Preserve the scene-above-information flow on phones and portrait tablets. */
 @media (max-width: 820px), (orientation: portrait) {
-  body[data-object-shell] {
-    --explorer-controls-top: calc(var(--explorer-header-top) + 2 * var(--explorer-search-height) + var(--explorer-header-control-gap) + var(--explorer-header-panel-gap));
-  }
-
   .explorer-shell-header {
     position: absolute;
     display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: repeat(2, var(--explorer-search-height));
     width: calc(100vw - var(--explorer-panel-left) - 8px);
-    gap: var(--explorer-header-control-gap);
-    height: calc(2 * var(--explorer-search-height) + var(--explorer-header-control-gap));
+    gap: var(--explorer-header-row-gap);
+    height: var(--explorer-header-height);
   }
 
   .planet-search-toolbar {
@@ -451,7 +460,7 @@ body[data-object-shell] .planet-attribution-footer {
   body[data-object-shell] {
     display: flex;
     flex-direction: column;
-    padding-bottom: var(--explorer-status-height);
+    padding-bottom: 0;
   }
 
   .planet-viewport {
@@ -484,7 +493,7 @@ body[data-object-shell] .planet-attribution-footer {
 @media (max-width: 820px), (orientation: portrait) {
   body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   body[data-sidebar-collapsed="true"] .planet-viewport {
-    flex-basis: calc(100svh - var(--explorer-controls-top) - var(--explorer-status-height));
-    height: calc(100svh - var(--explorer-controls-top) - var(--explorer-status-height));
+    flex-basis: calc(100svh - var(--explorer-controls-top));
+    height: calc(100svh - var(--explorer-controls-top));
   }
 }

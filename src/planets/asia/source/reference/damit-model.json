@@ -1,0 +1,194 @@
+{
+  "number": 67,
+  "name": "Asia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/3276",
+  "modelId": 5668,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5668",
+  "catalog": "View model 117 42 15.8504 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "5668",
+    "Asteroid": "(67) Asia",
+    "λ": "117",
+    "β": "42",
+    "P": "15.8504",
+    "YORP": "",
+    "t0": "2457531",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.52",
+    "p3": "0.15",
+    "p4": "-0.54",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:13:17",
+    "Modified": "2020-10-05 13:13:17",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/60968/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/60969/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/60970/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2020)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/658",
+      "file": "reference-658.html",
+      "links": [
+        {
+          "label": "2020a&a...643a..59d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2020a&a...643a..59d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D",
+          "url": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D"
+        }
+      ]
+    }
+  ],
+  "id": "asia",
+  "displayName": "Asia",
+  "lambda": 117.0,
+  "beta": 42.0,
+  "periodHours": 15.8504,
+  "version": "2019-10-23",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 61.63,
+  "uncertaintyKm": 0.65,
+  "akari": {
+    "number": 67,
+    "name": "Asia",
+    "diameterKm": 61.63,
+    "uncertaintyKm": 0.65,
+    "detections": 10,
+    "originalRow": "67     Asia                           8.28  0.15 10   61.63  0.65 0.230 0.006"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/60970/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/60968/IAUspin",
+  "shapeSha256": "784a802ce9b6fe162194a958f5f66d20f06b591d3b50733fc93aa4e7bc50a453",
+  "shapeBytes": 46419,
+  "vertices": 574,
+  "faces": 1144,
+  "signedVolume": 0.999999884659112,
+  "independentSignedVolume": 0.999999884659112,
+  "originalVolumeEquivalentDiameter": 1.2407009340976138,
+  "firstVertex": [
+    0.328608,
+    0.094218,
+    0.445501
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.4760815361311548,
+    0.9285778626464234
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.64474,
+      0.659266
+    ],
+    [
+      -0.813051,
+      0.849095
+    ],
+    [
+      -0.494474,
+      0.509831
+    ]
+  ],
+  "scaleKmPerSourceUnit": 49.67353397281409,
+  "alternatives": [
+    {
+      "modelId": 5669,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5669",
+      "pole": [
+        "286",
+        "50"
+      ],
+      "version": "2019-10-23"
+    }
+  ],
+  "distanceAu": 2.4209257475173156,
+  "orbitalPeriodYears": 3.7668680393104306,
+  "sourceFields": {
+    "ID": "5668",
+    "Asteroid": "(67) Asia",
+    "λ": "117",
+    "β": "42",
+    "P": "15.8504",
+    "YORP": "",
+    "t0": "2457531",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.52",
+    "p3": "0.15",
+    "p4": "-0.54",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:13:17",
+    "Modified": "2020-10-05 13:13:17",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates"
+}

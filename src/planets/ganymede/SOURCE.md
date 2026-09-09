@@ -27,6 +27,12 @@ TIFFs. Source byte counts and SHA-256 identities are recorded in the manifest.
   east-positive. No horizontal mirror is applied. Output longitude runs
   0–360° east. The map sphere is 2632.345 km in radius.
 
+Preparation maps canonical output pixel centres through each GeoTIFF's actual
+metric origin and increments using native bilinear interpolation. The monochrome
+outer longitude is −0.017414018° and its width spans 360.013060514°; the enhanced
+map also retains its own source bounds. Neither grid is stretched to an assumed
+360° extent or rounded to an integer column shift.
+
 ## Appearance and coverage
 
 **Monochrome** preserves the USGS observation mosaic. **Enhanced color** shows
@@ -51,9 +57,10 @@ monochrome. No terrain is painted or extrapolated.
 
 Both GeoTIFFs declare GDAL_NODATA=0. The monochrome zero value, or a missing
 color band, supplies the validity mask. Very dark nonzero terrain remains
-valid. Resizing uses premultiplied alpha and withholds partially covered edge
-pixels, avoiding black bleed into observations. Missing/withheld color uses
-co-located observed monochrome. The shared neutral cartographic grid appears
+valid. Every native contributor with nonzero bilinear weight must be valid;
+incomplete or masked interpolation footprints are withheld. This replaces the
+earlier whole-image resize and roll, so prepared image bytes change while source
+values remain unchanged. Missing/withheld color uses co-located observed monochrome. The shared neutral cartographic grid appears
 only where no valid surface observation remains.
 
 ## Preparation and geometry
@@ -88,3 +95,34 @@ preparer or runtime is required. Run `pnpm build:preparation` before the command
 above. Omit `--write` from preparation to generate an isolated comparison stage.
 
 Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+
+## Interpreted geology
+
+The Geology view uses [USGS SIM3237](https://pubs.usgs.gov/sim/3237/), Collins
+et al. (2013), at 1:15,000,000. The original `GeologyUnits` SHP/DBF/PRJ files
+retain 3,046 records and 23 `Unit` symbols. The archive combines palimpsest age
+subdivisions under `p`; no finer age interpretation is invented. Colors are
+authored categorical display choices, not measured brightness, composition or
+relief. Structure lines and ejecta point symbols are outside this base-unit view.
+
+`source/science/geology-sim3237/` retains raw members, readme/metadata, archive
+member integrity receipts, and independent label-point anchors. Coordinates are
+signed east-positive planetocentric degrees in `GCS_Ganymede_2000`, on the
+2,632,345 m source sphere and RAND November 1999 control. Mapping those angles
+onto the existing 2,631,200 m displayed sphere adds no 1,145 m elevation offset.
+Only unambiguous polygons are colored; uncovered polar areas remain missing.
+
+Record 3,023 contains one degenerate one-point ring and 90 valid rings. The
+decoder explicitly excludes that pinned zero-area ring while preserving the
+valid multipart region, and rejects any undeclared degeneracy. The separate
+point labels disagree with final polygon categories at 124 of 3,042 comparable
+locations; 870 ejecta labels are outside that comparison. The audit retains those
+disagreements. Six distributed point anchors, exact input hashes, and decoder
+failure cases are tested. Prepared visual qualification belongs to the B2 record.
+
+## Visible spectral surface views
+
+The VLT/MUSE views use original July 2019 measured maps from King et al.
+The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate
+evidence, first-valid-night coverage, registration limits and residual night
+differences. Every conversion is offline; the scene geometry remains unchanged.

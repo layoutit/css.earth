@@ -228,6 +228,13 @@ does not model perturbations or outgassing and has no qualified long-term range.
 Halley's 4.579 km registry radius describes the volume of the historical Stooke
 grid mesh, not a precise observed mean radius. Its display attitude is object-owned.
 
+Borrelly (19P) uses the same epoch and conic API. Independent Horizons vectors
+differ by less than 1 mm at the epoch and by 356.11/337.54 km at minus/plus
+30 days, below its 410 km regression guard. Its 4 km navigation reference is
+half the approximate observed length, not a measured mean radius or volume.
+The encounter DEM frame and the estimated gridded completion belong to the
+object package; they do not establish a current spin solution.
+
 Nix, Hydra, Kerberos and Styx use daily 2020–2032 element fits about the
 Pluto-system barycentre. Their public position/state APIs still return vectors
 relative to Pluto's physical centre: the generic `barycentreCompanion` record
@@ -392,3 +399,14 @@ Its JPL primary osculating conic has ±30-day vector residuals of 7,244.47 / 0 /
 6,180.29 km and an 8,332 km regression guard. This local conic is not a long-term
 binary ephemeris. Regenerate it with `node tools/generate-asteroids.mjs
 --object=patroclus`; selected generation preserves other checked records.
+
+The 41 additional main-belt models (Thetis through Ianthe) use the same
+2026-09-03 fixed-epoch JPL conics. Independent ICRF vectors agree within
+0.00000214 km at the queried epoch. That is numerical agreement, not physical
+accuracy at the displayed TT instant: the existing preparation approximates
+TDB as TT (under 2 ms). At the two retained ±30-day endpoints the largest
+residual is 2789.65 km; per-body regression guards are the observed maximum
+plus 15%, rounded upward in kilometres (largest 3209 km). These measurements
+do not bound intervening dates or establish a long-term perturbation theory.
+The new bodies' physical radii are source-owned volume reference radii; the
+thermal sphere-to-volume approximations are disclosed beside each model.

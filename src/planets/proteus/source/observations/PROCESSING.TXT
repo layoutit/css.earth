@@ -1,0 +1,558 @@
+PDS_VERSION_ID                  = PDS3
+RECORD_TYPE                     = STREAM
+
+DATA_SET_ID                     = "VG2-N-ISS-2/3/4/6-PROCESSED-V1.0"
+
+OBJECT                          = TEXT
+  PUBLICATION_DATE              = 2013-10-24
+  NOTE                          = "Description of the processing steps behind
+the data files on this volume."
+END_OBJECT                      = TEXT
+END
+
+                          IMAGE PROCESSING OVERVIEW
+                          -------------------------
+
+All of the images were processed according to standard procedures using
+version 5C/16C of the VICAR software package, as distributed by the
+Multimission Instrument Processing Laboratory (MIPL) at JPL. See
+    http://www-mipl.jpl.nasa.gov/
+for more information about the software. Processing was carried out on a
+Compaq workstation using the OpenVMS operating system; this was used for
+maximum compatibility with Voyager image processing procedures c. 1990.
+
+Every binary data file on this volume (files ending in .IMG or .DAT) is in
+VICAR format. See DOCUMENT/VICAR.ASC and .HTM for details of this file
+format. Note that VICAR files have an ASCII header that can be viewed
+relatively easily.
+
+The sections of this document are as follows:
+    (1) VGRCDCOPY
+    (2) Label Corrections
+    (3) VGRFILLIN
+    (4) RESLOC
+    (5) RESSAR77
+    (6) DESPIKE
+    (7) FICOR77
+    (8) GEOMA
+    (9) File Name Translations
+    (10) Coadded Dark Current Files
+    (11) Dark Current Exposure Time Dependence
+    (12) Quality Control
+    (13) Metadata
+
+(1) VGRCDCOPY
+
+Images were extracted from the source CDROMs (VG_00xx), decompressed and
+converted to VICAR format using procedure VGRCDCOPY. The input files were
+named Cnnnnnnn.IMQ and the decompressed files are archived under the name
+Cnnnnnnn_RAW.IMG.
+
+Note that each VICAR header contains details such as the exposure time, filter
+name, etc. This information is used by subsequent programs in the image
+processing.
+
+(2) Label Corrections
+
+A small number of images contained corrupted headers. Those headers were
+corrected based on information found in the index files (INDEX/IMGINDEX.TAB)
+and from other sources.
+
+A few headers could not be corrected, and those images do not appear in this
+data set in calibrated form. Any corrupted files are listed in ERRATA.TXT
+
+(3) VGRFILLIN
+
+Many Voyager images from Neptune contain incomplete lines due to limits on the
+downlink data rate. VGRFILLIN fills in these lines by interpolating between
+the adjacent lines.
+
+(4) RESLOC
+
+Each Voyager image has a grid of reseau markings, which record the intrinsic
+(and variable) geometric distortion of each Voyager image. The RESLOC routine
+determines the centroid location of each reseau. It writes this information
+into two different output files. These files are archived (primarily for
+documentation purposes) as Cnnnnnnn_RESLOC.DAT and Cnnnnnnn_GEOMA.DAT. The
+former is nothing more than a tabulation of reseau coordinates; it is used as
+an input file to VICAR routine RESSAR77. The latter also tabulates the
+geometrically correct positions for the reseau markings and is used as an
+input file to VICAR routine GEOMA.
+
+(5) RESSAR77
+
+This routine hides the reseau markings in an image by replacing them with the
+average of the nearest pixels. It uses the image and the *RESLOC.DAT file as
+inputs. This routine also removes a set of standard blemishes that appear
+repeatedly at the same location in every image. The files with standard
+blemishes are archived in the CALIB/MIPL subdirectory on volume VGISS_8210:
+    BLEMLOC_VG2_NA.DAT: Voyager 2, narrow-angle camera.
+    BLEMLOC_VG2_WA.DAT: Voyager 2, wide-angle camera.
+
+Note that artifacts can arise when a reseau marking lands atop a sharp
+brightness transition, such as a limb or ring boundary. The reseau marking
+remains visible as a blurry spot atop the sharp edge. Such artifacts should be
+carefully avoided when analyzing images.
+
+RESSAR77 also attempts to interpolate smoothly across missing data. Missing
+data can be recognized by sets of horizontal lines that contain nothing but
+zeros in the raw images. When the interpolation is applied over a narrow strip
+of lost pixels, the results of the interpolation are usually reasonable.
+However, interpolations across larger bands of lost pixels, or those involving
+large changes in brightness, can introduce distracting artifacts.
+
+Regardless of the outcome, it should be noted that RESSAR77 does not modify a
+pixel unless there is good reason to think that it contains invalid data.
+Valid pixels are generally not modified.
+
+(6) DESPIKE
+
+This routine erases spikes from the data. It does so by identifying pixels
+that differ by too much from their neighbors; such pixels are replaced by the
+average of the nearest neighbors. In general, we have found that DESPIKE does
+a good job of removing corrupted pixels while leaving valid pixels unchanged.
+
+At this stage in the processing, the resulting images are archived as
+Cnnnnnnn_CLEANED.IMG. Such images are much simpler to analyze than the
+corresponding RAW images, although most changes are cosmetic.
+
+If a user needs to identify the specific pixels that have been changed, this
+information can be obtained by subtracting the raw image from the cleaned
+image. The reseau markings are easily identified as a nearly regular grid of
+circles a few pixels in diameter. Any isolated individual pixels that have
+changed are generally the result of DESPIKE.
+
+(7) FICOR77
+
+This step converts the raw pixel values (DNs or "data numbers") to quantities
+that are directly proportional to reflectivity, I/F. It does so as follows.
+
+First, it subtracts a "dark current" image, which was obtained by reading out
+the vidicon using the same readout mode as the image in question, but without
+having opened the shutter (or, in some cases, by having pointed the camera at
+dark sky). See (10) and (11) below for a discussion of the dark current files
+used in this data set. Each dark current was selected to match the camera and
+readout rate or "scan rate" of the image being calibrated, in addition to a
+few other considerations as noted below.
+
+FICOR77 then converts the values to a quantity proportional to I/F. In this
+step the single-byte, unsigned pixels are converted to two-byte signed
+integers, which have an intrinsic range from -32768 to 32767. Most commonly,
+the nominal proportionality constant is such that a calibrated DN = 10,000
+corresponds to I/F = 1. However, for some longer exposures of fainter targets,
+DN = 10,000 corresponds to I/F = 0.1 or even 0.01. These scalings were chosen
+to ensure that none of a raw image's dynamic range was lost in the calibration
+step. See DOCUMENT/TUTORIAL.TXT for further details about the absolute
+calibration of Voyager images.
+
+This conversion employs a calibration file that records the responsivity of
+each individual pixel in the Voyager vidicon. The calibration files are
+archived in VICAR format in the MIPL subdirectory on volume VGISS_8210.
+The files are named:
+    FICOR77_VG2_cc_fff.DAT
+where
+    cc  = NA for the narrow-angle camera or WA for the wide-angle camera;
+    fff = the filter name, one of CLEAR, ORANGE, GREEN, BLUE, VIOLET,
+          UV, CH4_U, CH4_JS, or SODIUM (sometimes called NAD).
+However, they are in "IBIS-1" format, which is not well documented. See:
+    http://www-mipl.jpl.nasa.gov/ibis/i2pg.html
+for more information. They have been provided on these volumes exclusively for
+current users of the VICAR software.
+
+The calibration files for two of the more obscure filters, CH4_U and SODIUM,
+are not available for the Voyager 1 wide angle camera. We calibrated the
+images taken through these filters using the GREEN calibration file instead.
+GREEN was chosen because its bandpass overlaps that of these two narrow
+filters. We then re-scaled all values upward by a factor of 12.5 in
+CH4_U-filtered images, and by a factor of 40 in SODIUM-filtered images. These
+factors were based on comparisons of the throughput of the same pairs of
+filters on Voyager 2. These images are probably not calibrated accurately in
+absolute terms, although their pixel-to-pixel relative variations should be
+reasonable.
+
+FICOR77 employs a final step that is intended to refine the absolute
+calibration. This involves a straightforward multiplication by a scale factor
+found in input file VGRSCF.DAT, also found in the CALIB/MIPL subdirectory on
+volume VGISS_8210. However, see TUTORIAL.TXT for further information about
+calibration accuracy.
+
+During this step, we discovered an error in the VGRSCR.DAT file used on
+previous volumes--this file did not correct for the different Sun-planet
+distances at the Uranus and Neptune encounters! Instead, it contained the same
+scale factors for both planets. We updated the file by scaling every Neptune
+factor relative to the associated Uranus factor by:
+
+((Sun-Neptune distance at encounter) / (Sun-Uranus-distance at encounter))**2
+
+This ratio is (2.8607e+09 km/4.5291e+09 km)**2 = 2.506566. We updated the
+scale factors for Neptune accordingly, and used this version of VGRSCF.DAT for
+calibrating the Neptune images. This updated file is found on the last volume
+of this data set, VGISS_8210, in the subdirectory CALIB/MIPL.
+
+The calibrated images are archived on this volume under the names
+Cnnnnnnn_CALIB.IMG.
+
+Note that we have calibrated every image in this data set, including those
+identified as dark currents. This ensures that any images mis-identified as
+dark currents would be provided in calibrated form. The calibrated dark
+currents may also be useful as indicators of the level of background
+uncertainty among similar images that are not empty.
+
+(8) GEOMA
+
+The final processing step is a geometric correction, in which the calibrated
+image is reprojected onto a new 1000x1000 pixel grid such that the reseau
+markings fall at their proper locations. This program takes the RESLOC output
+file Cnnnnnnn_GEOMA.DAT as one of its input file, in addition to the
+calibrated image file Cnnnnnnn_CALIB.IMG.
+
+(9) File Name Translations
+
+As discussed above, four image files are associated with each individual
+Voyager image. Those files are:
+    Cnnnnnnn_RAW.IMG            raw image.
+    Cnnnnnnn_CLEANED.IMG        reseau markings, known blemishes and spikes
+                                removed.
+    Cnnnnnnn_CALIB.IMG          calibrated.
+    Cnnnnnnn_GEOMED.IMG         calibrated and geometrically corrected.
+In addition, we have archived the two critical intermediate data files
+generated by VICAR routine RESLOC:
+    Cnnnnnnn_RESLOC.DAT         reseau location table.
+    Cnnnnnnn_GEOMA.DAT          geometric reprojection model.
+These files are provided just in case someone with access to VICAR chooses to
+reprocess one or more Voyager images. Nevertheless, these files contain useful
+information about the geometry of the images. For that reason, these files
+have been converted to easy-to-read ASCII tables. They can be found in this
+archive under the names Cnnnnnnn_RESLOC.TAB and Cnnnnnnn_GEOMA.TAB.
+
+(10) Coadded Dark Current Files
+
+A critical component of the calibration of Voyager images is to identify a
+reliable dark current frame to use for each image. The effective dark current
+underlying each Voyager image varies depending on a number of parameters:
+
+    Camera:             narrow-angle or wide-angle.
+
+    Scan rate:          The readout speed or "scan rate" of the vidicon, which
+                        can be 1:1, 2:1, 3:1, 5:1 or 10:1.
+
+    Shutter mode:       In BOTSIM and BSIMAN modes, the cameras are shuttered
+                        simultaneously but the narrow-angle camera is read
+                        out first. During this delay, the wide-angle can
+                        continue to build up dark current signal.
+
+    Exposure time:      Images with very long exposure times also show an
+                        increase in dark current. The Neptune images required
+                        extremely long exposure times compared to the images
+                        from the other planets, so the exposure-time
+                        dependence of the dark currents received special
+                        attention. This is discussed further below.
+
+    Other factors:      The dark current can also be time-variable and
+                        temperature dependent. However, we have found these
+                        variations to have been negligible during each flyby.
+
+Because a typical dark current frame contains noise, the subtraction step
+increases the noise in the image being calibrated. Particularly for images
+with low signal-to-noise, this is undesirable. Our solution is to coadd
+multiple dark current images prior to the subtraction.
+
+During the time that an image is being exposed, dark current is also building
+up in the vidicon, so longer exposures have higher dark currents than do short
+exposures. For the Voyager images from Jupiter, Saturn and Uranus, the
+exposure times were generally short enough that this dependence on exposure
+time could be ignored. However, many of the Neptune images have much longer
+exposure times, so it became necessary to address this dependence.
+
+We therefore proceeded in two steps. First, we assembled nearly every dark
+current and sky frame obtained around each flyby, as well as a few images of
+distant targets (for which the target only occupies a few pixels). These
+images were then grouped by camera, spacecraft, scan rate, and exposure time.
+Wide-angle images taken in BOTSIM and BSIMAN mode were handled separately
+because of their unique properties. This procedure was identical to that
+employed for the Jupiter, Saturn and Uranus images, except that the images
+were also grouped by exposure time before coadding.
+
+We processed each candidate dark current image to the "CLEANED" level and then
+examined it visually. In most cases, images with corrupted pixels, visible
+stars or background objects were rejected from further consideration. However,
+for images taken in a few modes, the number of available dark current images
+was quite small. In these cases, we had to include imperfect images in the
+coadding. Our procedure was to "stack" all N images with the same properties
+into a 3-D array with dimensions N x 800 x 800. We then sorted the N pixels
+that fell in the same location in each image, such that the brightest pixels
+rose to the top of the stack and the faintest pixels fell to the bottom. At
+this point, we could throw away the top and bottom few layers, thereby
+removing all the corrupted pixels and retaining just clean ones. The clean
+layers were then coadded for the final products.
+
+Before saving the coadded dark currents, each image was converted from
+floating-point values to two-byte integers and then scaled by a factor of 100.
+This reduced the size of the files and makes them more compatible with VICAR.
+During the FICOR77 step discussed above, the dark current images were scaled
+back down by this factor of 100.
+
+For a few combinations of image modes, the data set contained too few images
+for us to generate a reliable, clean dark current based on the procedure
+above. We could combine the images according to the procedure above, but even
+the middle layers, left behind after the top and bottom were removed,
+contained scattered, visible artifacts. Our solution was to apply one final
+step, taking advantage of the fact that all dark currents from the same camera
+and spacecraft had generally similar appearances---they differ primarily in
+absolute amplitudes and in their broad, underlying slopes. We could therefore
+apply a simple model to make one of the clean dark currents an almost exact
+replica of the flawed dark current. Our model was as follows:
+
+    flawed_dark_current[x,y] = scale_factor[x,y] * clean_dark_current[x,y]
+                             + background_offset[x,y]
+
+where the scale_factor and background_offset were defined by 2-D polynomials
+in pixel coordinates [x,y]. This becomes a straightforward problem in linear
+least-squares fitting. We derived the needed 2-D polynomials and then used our
+re-scaled version of the clean dark current to interpolate across the flawed
+pixels. Using third-order polynomials, we found this procedure to yield
+replicas of the flawed dark currents that were visibly indistinguishable from
+the originals, but without the flaws.
+
+The Neptune coadded dark currents are found on the final volume, VGISS_8210 in the
+subdirectory CALIB/COADDS. The dark current files are named as follows:
+    CALIB/DARKS/DC2_cc_ss_{BS_}X100_ttt_SUMn.IMG
+where
+    cc = "WA" for the wide-angle camera; "NA" for the narrow-angle camera.
+    ss = "11", "21", "31", "51" or "101" to indicate a scan rate of 1:1, 2:1,
+         3:1, 5:1 or 10:1, respectively.
+    "BS" appears in the file name to indicate wide-angle images taken in
+         BOTSIM or BSIMAN mode.
+    "X100" serves as a reminder that the pixel values have all been scaled
+         upward by a factor of 100.
+    ttt = the exposure time in seconds, truncated to the nearest integer.
+         Values appear in the file naming using from one to four digits.
+    n = the number of individual images that were combined.
+
+Within the PDS label of each dark current file, the SOURCE_PRODUCT_ID contains
+a list of the images that have been combined.
+
+(11) Dark Current Exposure Time Dependence
+
+Once we constructed a set of coadded dark currents at a subset of scan rates
+and exposure times, we proceeded to model the dark current buildup vs.
+exposure time. This then enabled us to generate model dark currents for other
+exposures.
+
+First, one can calculate the elapsed wait time in seconds from the beginning
+of an exposure to the moment that a pixel in the image was read out. The wait
+time is a function of the line number (1-800) as follows:
+    wait_time(line) = texp + ((line-1)/800 + botsim) * 48 * scanrate
+where:
+    texp = the exposure time in seconds.
+    line = the line number, 1-800.
+    botsim = 1 for a wide-angle image taken in BOTSIM or BSIMAN mode;
+             0 otherwise.
+    scanrate = 1, 2, 3, 5, or 10, indicating the scan rate used.
+
+For any given pixel in either the wide- or narrow-angle vidicon, the dark
+current will increase as the above-calculated wait time increases. However,
+the growth is not linear. In practice, we found that a polynomial model of up
+to third order in wait time generally produced reliable results. In other
+words, we fitted up to four 800x800 arrays of coefficients using the following
+model:
+    model[line,sample] = a[line,sample] * wait_time(line)**3
+                       + b[line,sample] * wait_time(line)**2
+                       + c[line,sample] * wait_time(line)
+                       + d[line,sample]
+Via linear least-squares fitting, we solved for the arrays of coefficients
+that best described the dependence of each pixel on the value of the wait time.
+We then evaluated the above polynomial to create a model image for the dark
+current obtained using any arbitrary combination of values for texp, botsim
+and scanrate.
+
+Although the above procedure worked reasonably well, after some trial and
+error, we customized our procedure for generating the model dark currents on a
+case by case basis as follows:
+
+Narrow angle, 1:1 scan rate:
+- We used a linear interpolation model on the wait time from these two coadded
+  images:
+    DC2_NA_11_X100_15_SUM15.IMG
+    DC2_NA_11_X100_61_SUM12.IMG
+
+Narrow angle, 3:1 scan rate:
+- Because we did not have any coadded 3:1 dark currents, we had to employ
+  images taken with other scan rates. We used a cubic polynomial fitted to all
+  of these coadded images:
+    DC2_NA_11_X100_15_SUM15.IMG
+    DC2_NA_11_X100_61_SUM12.IMG
+    DC2_NA_51_X100_0_SUM141.IMG
+    DC2_NA_51_X100_30_SUM37.IMG
+    DC2_NA_51_X100_46_SUM50.IMG
+    DC2_NA_51_X100_61_SUM15.IMG
+    DC2_NA_101_X100_0_SUM89.IMG
+    DC2_NA_101_X100_30_SUM3.IMG
+
+Narrow angle, 5:1 scan rate:
+- For most exposure times, we used a cubic fit to these 5:1 coadded dark
+  currents:
+    DC2_NA_51_X100_0_SUM141.IMG
+    DC2_NA_51_X100_30_SUM37.IMG
+    DC2_NA_51_X100_46_SUM50.IMG
+    DC2_NA_51_X100_61_SUM15.IMG
+    DC2_NA_51_X100_480_SUM25.IMG
+    DC2_NA_51_X100_1215_SUM4.IMG
+- However, for the two longest exposure times (1215 and 2016 seconds), we used
+  the coadded dark currents generated for those specific exposure times.
+
+Narrow angle, 10:1 scan rate:
+- We used a cubic fit to these 10:1 coadded dark currents:
+    DC2_NA_101_X100_0_SUM89.IMG
+    DC2_NA_101_X100_30_SUM3.IMG
+    DC2_NA_101_X100_96_SUM2.IMG
+    DC2_NA_101_X100_288_SUM1.IMG
+    DC2_NA_101_X100_384_SUM1.IMG
+    DC2_NA_101_X100_480_SUM4.IMG
+    DC2_NA_101_X100_960_SUM1.IMG
+
+Wide-angle, 1:1 scan rate:
+- We used a cubic fit to these 1:1 coadded dark currents:
+    DC2_WA_11_X100_15_SUM1.IMG
+    DC2_WA_11_X100_288_SUM2.IMG
+    DC2_WA_11_BS_X100_11_SUM4.IMG
+    DC2_WA_11_BS_X100_61_SUM4.IMG
+    DC2_WA_11_BS_X100_144_SUM2.IMG
+
+Wide-angle, 2:1 scan rate:
+- Because the longest exposure time using the 3:1 scan rate was 61 seconds, we
+  neglected the exposure time dependence and used a single coadded dark
+  current for all of the 2:1 images:
+    DC2_WA_21_X100_0_SUM138.IMG
+
+Wide-angle, 3:1 scan rate:
+- Because the longest exposure time using the 3:1 scan rate was 30 seconds, we
+  neglected the exposure time dependence and used a single coadded dark
+  current for all of the 3:1 images:
+    DC2_WA_31_X100_0_SUM7.IMG
+
+Wide-angle, 5:1 scan rate:
+- For most exposure times, we used a cubic fit to these 5:1 coadded dark
+  currents:
+    DC2_WA_51_X100_0_SUM57.IMG
+    DC2_WA_51_X100_1_SUM12.IMG
+    DC2_WA_51_X100_7_SUM6.IMG
+    DC2_WA_51_X100_15_SUM83.IMG
+    DC2_WA_51_X100_23_SUM7.IMG
+    DC2_WA_51_X100_30_SUM7.IMG
+    DC2_WA_51_X100_61_SUM38.IMG
+    DC2_WA_51_X100_144_SUM7.IMG
+    DC2_WA_51_X100_192_SUM8.IMG
+    DC2_WA_51_X100_240_SUM1.IMG
+    DC2_WA_51_X100_384_SUM1.IMG
+    DC2_WA_51_X100_480_SUM2.IMG
+    DC2_WA_51_X100_591_SUM3.IMG
+    DC2_WA_51_BS_X100_1_SUM5.IMG
+    DC2_WA_51_BS_X100_111_SUM11.IMG
+- However, for the two longest exposure times (591 and 1008 seconds), we used
+  the coadded dark currents generated for those specific exposure times.
+
+Wide-angle, 10:1 scan rate:
+- For most exposure times, we used a cubic fit to these 10:1 coadded dark
+  currents:
+    DC2_WA_101_X100_0_SUM20.IMG
+    DC2_WA_101_X100_7_SUM7.IMG
+    DC2_WA_101_X100_15_SUM9.IMG
+    DC2_WA_101_X100_46_SUM5.IMG
+    DC2_WA_101_X100_207_SUM1.IMG
+    DC2_WA_101_X100_255_SUM3.IMG
+    DC2_WA_101_X100_288_SUM1.IMG
+    DC2_WA_101_X100_384_SUM1.IMG
+    DC2_WA_101_X100_480_SUM1.IMG
+    DC2_WA_101_X100_960_SUM1.IMG
+    DC2_WA_101_BS_X100_0_SUM3.IMG
+    DC2_WA_101_BS_X100_30_SUM3.IMG
+    DC2_WA_101_BS_X100_61_SUM2.IMG
+- However, for the two longest exposure times (960 and 1920 seconds), we used
+  the coadded dark currents generated for those specific exposure times.
+
+The Neptune model dark currents are found on the final volume, VGISS_8210 in
+the subdirectory CALIB/DARKS. The dark current files are named as follows:
+    CALIB/DARKS/DC2_cc_ss_{BS_}X100_ttt.IMG
+where
+    cc = "WA" for the wide-angle camera; "NA" for the narrow-angle camera.
+    ss = "11", "21", "31", "51" or "101" to indicate a scan rate of 1:1, 2:1,
+         3:1, 5:1 or 10:1, respectively.
+    "BS" appears in the file name to indicate wide-angle images taken in
+         BOTSIM or BSIMAN mode.
+    "X100" serves as a reminder that the pixel values have all been scaled
+           upward by a factor of 100.
+    ttt = the exposure time in seconds, truncated to the nearest integer.
+          Values appear in the file naming using from one to four digits.
+
+Within the PDS label of each dark current file, the SOURCE_PRODUCT_ID contains
+a list of the images from the COADDS subdirectory that have been used in the
+modeling that produced the corresponding image.
+
+(12) Quality Control
+
+FICOR77 converts one-byte unsigned integers (with values 0-255) to two-byte
+signed integers (with values -32768 to 32767). These integer values must be
+scaled by a constant factor to obtain dimensionless values of reflectivity or
+"I/F". The default scaling is for values of 10,000 in the file to correspond
+to unit reflectivity. This is indicated in the VICAR header by a line that
+says, typically,
+    LABEL3='FOR (I/F)*10000., MULTIPLY DN VALUE BY               1.00000'
+
+FICOR77 offers an input parameter "IOF" to modify the default scaling. This is
+the value that appears on the right in the above expression. For example, if
+the user specifies "IOF=0.1", then the calibrated DN values will be larger by
+a factor of ten. In the resulting file, a value of 100,000 would
+(theoretically) correspond to unit reflectivity. Of course, this exceeds the
+limit of 32767 for two-byte values, so in such an image any features with I/F
+> ~0.3 would be saturated.
+
+Nevertheless, for some long-exposure images of faint objects, the default
+scaling must be adjusted to prevent a loss of dynamic range. Consider a long
+exposure in which the brightest feature has I/F = 0.001. Using the default
+scaling, that feature will appear in the calibrated image with DN = 10,
+meaning that the calibrated image will have a substantially fewer shades of
+gray than the raw. In our calibration procedure, we have specified IOF = 1,
+0.1 or 0.01 based on our best initial prediction of the dynamic range of an
+image, based on information such as filter and exposure time.
+
+Because of the potential for lost information if IOF is chosen incorrectly, we
+have performed an automated analysis of each calibrated image. This analysis
+flags the following conditions:
+  - Raw images in which >= 80% of the pixels have values of zero.
+  - Calibrated images in which > 0.1% of the pixels are saturated.
+  - Calibrated images in which the range of DN values is smaller than the
+    range of DN in the raw image.
+Flagged images were inspected by eye and, if necessary, were re-calibrated
+with a different value of IOF in order to obtain better results.
+
+During this analysis, we also derived the correlation coefficient between the
+values in the raw and calibrated images, and flagged images where that
+coefficient was less than 40%. This was found to be an effective way of
+finding images for which the calibration procedure failed. These images were
+then re-calibrated, sometimes after correcting information in the Vicar
+header.
+
+(13) Metadata
+
+Two sources of metadata were available to us. Key instrument parameters are
+listed in the index files of the original PDS releases, VG_0001-VG_0038. Note
+that images released twice appear in two different indices. In addition, most
+of the key observing parameters are embedded in the VICAR headers of the image
+files.
+
+We performed an image-by-image comparison of the metadata from both sources,
+and from both index entries for duplicated images. In the vast majority of
+cases, all available information was in exact agreement. When we encountered
+discrepancies or corrupted information, we did our best to identify the
+correct information.
+
+Image times and Earth received times, where missing, could often be filled in
+based on the obvious cadence of the Flight Data System clock, where one tick
+is equal to 48 seconds. Discrepant target bodies could often be recognized by
+examining the image. The correct values for some parameters, such as filter
+and exposure time would sometimes become apparent by studying what Voyager was
+doing in the adjacent frames.
+
+In the index files on this volume, we have indicated any changes applied in
+the NOTE field; a search on "PDS" should reveal these updates.

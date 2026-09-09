@@ -65,7 +65,13 @@
         "lenses"
       ],
       "expectedBytes": 6720450,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png"
+      }
     },
     {
       "id": "nasa-juno-jupiter-north-pole-detail-pia24239",
@@ -83,7 +89,13 @@
         "body"
       ],
       "expectedBytes": 193959,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "capture": {
+        "spacecraftIds": [
+          "juno"
+        ],
+        "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif"
+      }
     },
     {
       "id": "nasa-juno-jupiter-north-polar-projection-pia23808",
@@ -101,7 +113,13 @@
         "body"
       ],
       "expectedBytes": 633958,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "capture": {
+        "spacecraftIds": [
+          "juno"
+        ],
+        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg"
+      }
     },
     {
       "id": "nasa-juno-jupiter-south-polar-cyclones-pia23556",
@@ -119,7 +137,13 @@
         "body"
       ],
       "expectedBytes": 909084,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "capture": {
+        "spacecraftIds": [
+          "juno"
+        ],
+        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg"
+      }
     },
     {
       "id": "nasa-juno-jupiter-south-pole-visible-pia21382",
@@ -137,7 +161,13 @@
         "body"
       ],
       "expectedBytes": 154800,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "capture": {
+        "spacecraftIds": [
+          "juno"
+        ],
+        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg"
+      }
     },
     {
       "id": "hyg-v41-jupiter-representative-field",
@@ -183,7 +213,13 @@
         "lenses"
       ],
       "expectedBytes": 25925760,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-jupiter-fq889n",
@@ -198,7 +234,13 @@
         "lenses"
       ],
       "expectedBytes": 25925760,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits"
+      }
     },
     {
       "id": "jpl-satellite-physical-parameters",
@@ -456,8 +498,8 @@
     {
       "id": "jupiter-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 15253,
-      "expectedSha256": "353dceefd91c1f8f0984ec95c1b450f3d5fd15f3c92c7894bcc06f9b7084b456",
+      "expectedBytes": 15136,
+      "expectedSha256": "167cd1b7d0031ca5b1199ad63da3722be04bf27cd65bdb65b907f1f8e602433e",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",

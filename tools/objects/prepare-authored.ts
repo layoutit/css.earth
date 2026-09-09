@@ -60,6 +60,8 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
+  const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mjs')).href);
+  await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'prepared' });
   return Object.freeze({ ...result, definition: prepared.definition, scene });
 }
 

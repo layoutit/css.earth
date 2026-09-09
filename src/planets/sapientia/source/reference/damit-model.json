@@ -1,0 +1,323 @@
+{
+  "number": 275,
+  "name": "Sapientia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/10856",
+  "modelId": 16284,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16284",
+  "catalog": "View model 264 -2 14.93046 IAUspin | shape.png | shape.txt | occ_1985-04-15.png | occ_2003-02-08.png | occ_2003-04-12.png | occ_2014-09-02.png | occ_2015-09-30.png | occ_2016-12-03.png | occ_2018-08-06.png | occ_2020-11-14.png | occ_2021-04-26.png | spin.txt | shape.obj preferred",
+  "fields": {
+    "ID": "16284",
+    "Asteroid": "(275) Sapientia",
+    "λ": "264",
+    "β": "-2",
+    "P": "14.93046",
+    "YORP": "",
+    "t0": "2450815",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "103",
+    "σD": "7",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2023-10-03",
+    "Comment": "preferred",
+    "Created": "2023-10-03 11:28:28",
+    "Modified": "2023-10-12 08:46:14",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/126587/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/126588/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/126589/shape.txt",
+    "occ_1985-04-15.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128758/occ_1985-04-15.png",
+    "occ_2003-02-08.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128759/occ_2003-02-08.png",
+    "occ_2003-04-12.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128760/occ_2003-04-12.png",
+    "occ_2014-09-02.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128761/occ_2014-09-02.png",
+    "occ_2015-09-30.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128762/occ_2015-09-30.png",
+    "occ_2016-12-03.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128763/occ_2016-12-03.png",
+    "occ_2018-08-06.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128764/occ_2018-08-06.png",
+    "occ_2020-11-14.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128765/occ_2020-11-14.png",
+    "occ_2021-04-26.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128766/occ_2021-04-26.png"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2023)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/667",
+      "file": "reference-667.html",
+      "links": [
+        {
+          "label": "2023a&a...679a..60m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2023a&a...679a..60m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2023A&A...679A..60M",
+          "url": "http://adsabs.harvard.edu/abs/2023A&A...679A..60M"
+        }
+      ]
+    }
+  ],
+  "id": "sapientia",
+  "displayName": "Sapientia",
+  "lambda": 264.0,
+  "beta": -2.0,
+  "periodHours": 14.93046,
+  "version": "2023-10-03",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 103.0,
+  "uncertaintyKm": 7.0,
+  "akari": {
+    "number": 275,
+    "name": "Sapientia",
+    "diameterKm": 118.86,
+    "uncertaintyKm": 1.76,
+    "detections": 7,
+    "originalRow": "275    Sapientia                      8.85  0.15  7  118.86  1.76 0.036 0.001"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/126589/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/126587/IAUspin",
+  "shapeSha256": "420f22693cd4653eaae4ff9229b13793ead35898a874f4ab8738a779e91bc0c4",
+  "shapeBytes": 82546,
+  "vertices": 1020,
+  "faces": 2036,
+  "signedVolume": 572150.5235493955,
+  "independentSignedVolume": 572150.5235493955,
+  "originalVolumeEquivalentDiameter": 103.0000002572038,
+  "firstVertex": [
+    12.46698,
+    8.141599,
+    49.83691
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    43.110120379248784,
+    60.72075542345141
+  ],
+  "extentsSourceUnits": [
+    [
+      -59.02743,
+      49.87031
+    ],
+    [
+      -54.75172,
+      57.9106
+    ],
+    [
+      -56.69432,
+      50.5785
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9999999975028758,
+  "alternatives": [
+    {
+      "modelId": 16283,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16283",
+      "pole": [
+        "85",
+        "-10"
+      ],
+      "version": "2023-10-03",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "98",
+      "comment": "",
+      "references": [
+        {
+          "label": "Marciniak et al. (2023)",
+          "url": "/projects/damit/references/view/667"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "The selected convex pole2 is preferred by nine occultation epochs in Marciniak2023 §5.2. Table1 gives103 km with asymmetric size interval96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole2 shape at100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
+  "selectedPoleStatus": "preferred by nine occultation epochs",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "marciniak-2023.pdf",
+      "url": "https://winstars.net/wp-content/uploads/2023/09/Marciniak-et-al-2023-AA-Scaling-slowly-rotating-asteroids-stellar-occultations-accepted.pdf",
+      "label": "Marciniak et al. (2023), A&A 679, A60, accepted author manuscript"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 103.0,
+    "uncertaintyKm": 7.0,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16284",
+    "sourceLabel": "DAMIT model 16284",
+    "reference": "DAMIT model 16284",
+    "limitations": "The selected convex pole2 is preferred by nine occultation epochs in Marciniak2023 §5.2. Table1 gives103 km with asymmetric size interval96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole2 shape at100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
+    "visibleDescription": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "publishedUncertainty": {
+      "lowerKm": 7,
+      "upperKm": 6,
+      "confidence": "Envelope of acceptable vertically varied models, not a Gaussian sigma interval",
+      "source": "Marciniak2023 Table1 and section4"
+    },
+    "scaleKmPerSourceUnit": 0.9999999975028758,
+    "metersPerSourceUnit": 999.9999975028758
+  },
+  "independentCenteredSignedVolume": 572150.5235493955,
+  "surfaceAreaSourceUnitsSquared": 34801.04322394176,
+  "surfaceEquivalentDiameterSourceUnits": 105.24977960874826,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        12.46698,
+        8.141599,
+        49.83691
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 4,
+      "sourcePoint": [
+        11.31619,
+        -0.53865,
+        50.5785
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 443,
+      "sourcePoint": [
+        49.87031,
+        -10.86187,
+        18.29007
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 472,
+      "sourcePoint": [
+        13.21233,
+        57.9106,
+        -1.032351
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 499,
+      "sourcePoint": [
+        -59.02743,
+        6.331775,
+        5.925771
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 510,
+      "sourcePoint": [
+        -48.65432,
+        -34.22045,
+        3.265613
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 529,
+      "sourcePoint": [
+        -3.386289,
+        -54.75172,
+        3.710131
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1014,
+      "sourcePoint": [
+        13.71153,
+        -2.971237,
+        -56.69432
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1019,
+      "sourcePoint": [
+        16.14575,
+        -5.004014,
+        -56.25741
+      ]
+    }
+  ],
+  "distanceAu": 2.771802925757048,
+  "orbitalPeriodYears": 4.614787690662356,
+  "sourceFields": {
+    "ID": "16284",
+    "Asteroid": "(275) Sapientia",
+    "λ": "264",
+    "β": "-2",
+    "P": "14.93046",
+    "YORP": "",
+    "t0": "2450815",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "103",
+    "σD": "7",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2023-10-03",
+    "Comment": "preferred",
+    "Created": "2023-10-03 11:28:28",
+    "Modified": "2023-10-12 08:46:14",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

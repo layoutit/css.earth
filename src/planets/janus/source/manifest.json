@@ -24,6 +24,12 @@
         "type": "camera-perspective",
         "coordinates": "shape/janus_document.pdf",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2062/data/1649318622_1649462686/N1649342285_1_CALIB.IMG"
       }
     },
     {
@@ -42,7 +48,13 @@
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "consumers": [
         "cassini-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2062/data/1649318622_1649462686/N1649342285_1_CALIB.LBL"
+      }
     },
     {
       "id": "n1711586834_1",
@@ -67,6 +79,12 @@
         "type": "camera-perspective",
         "coordinates": "shape/janus_document.pdf",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2073/data/1711549692_1711606746/N1711586834_1_CALIB.IMG"
       }
     },
     {
@@ -85,7 +103,13 @@
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "consumers": [
         "cassini-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2073/data/1711549692_1711606746/N1711586834_1_CALIB.LBL"
+      }
     },
     {
       "id": "n1627319581_1",
@@ -110,6 +134,12 @@
         "type": "camera-perspective",
         "coordinates": "shape/janus_document.pdf",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2056/data/1627319215_1627453306/N1627319581_1_CALIB.IMG"
       }
     },
     {
@@ -128,7 +158,13 @@
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "consumers": [
         "cassini-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2056/data/1627319215_1627453306/N1627319581_1_CALIB.LBL"
+      }
     },
     {
       "id": "n1582238183_1",
@@ -153,6 +189,12 @@
         "type": "camera-perspective",
         "coordinates": "shape/janus_document.pdf",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2042/data/1582034353_1582239032/N1582238183_1_CALIB.IMG"
       }
     },
     {
@@ -171,7 +213,13 @@
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "consumers": [
         "cassini-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2042/data/1582034353_1582239032/N1582238183_1_CALIB.LBL"
+      }
     },
     {
       "id": "n1590458717_1",
@@ -196,6 +244,12 @@
         "type": "camera-perspective",
         "coordinates": "shape/janus_document.pdf",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2045/data/1590404382_1590682678/N1590458717_1_CALIB.IMG"
       }
     },
     {
@@ -214,7 +268,13 @@
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "consumers": [
         "cassini-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2045/data/1590404382_1590682678/N1590458717_1_CALIB.LBL"
+      }
     },
     {
       "id": "n1594708747_1",
@@ -239,6 +299,12 @@
         "type": "camera-perspective",
         "coordinates": "shape/janus_document.pdf",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2047/data/1594201799_1594708835/N1594708747_1_CALIB.IMG"
       }
     },
     {
@@ -257,7 +323,13 @@
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "consumers": [
         "cassini-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2047/data/1594201799_1594708835/N1594708747_1_CALIB.LBL"
+      }
     },
     {
       "id": "n1630068448_1",
@@ -282,6 +354,12 @@
         "type": "camera-perspective",
         "coordinates": "shape/janus_document.pdf",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2057/data/1629783492_1630072138/N1630068448_1_CALIB.IMG"
       }
     },
     {
@@ -300,7 +378,13 @@
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "consumers": [
         "cassini-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2057/data/1629783492_1630072138/N1630068448_1_CALIB.LBL"
+      }
     },
     {
       "id": "thomas-2018-shape",
@@ -328,7 +412,13 @@
         "type": "body-fixed-mesh",
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Radial height above a 89.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
+      "coverage": "Radial height above a 89.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/janus_30k_plt.tab"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -402,8 +492,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5830,
-      "expectedSha256": "feb666092496b234c90380fae6104e65e4d167fedd9067d5d2180814214322dc",
+      "expectedBytes": 5618,
+      "expectedSha256": "e194e8876a71b2cb17e7a2417d116408184c7ab3b7fea0d650e4f0b8e17ef2dd",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {

@@ -54,7 +54,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "VLT/SPHERE shape model",
-        "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+        "title": "SPHERE shape reconstruction",
         "thumbnail": "/scenes/melpomene/melpomene-shape-thumbnail.webp",
         "surface": "melpomene-shape-surface@2x.webp",
         "poles": "melpomene-shape-surface@2x.webp",
@@ -63,13 +63,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Source shape · radial height",
-        "title": "Color shows source radius minus a 70.5 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/melpomene/melpomene-elevation-thumbnail.webp",
         "surface": "melpomene-elevation-surface@2x.webp",
         "poles": "melpomene-elevation-surface@2x.webp",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://observations.lam.fr/astero/3Dshape/18_Melpomene_mpcd.obj",
           "image": "/scenes/melpomene/melpomene-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
       }
     ]
   },

@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "pandora-55",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/289/shape.txt",
+    "credit": "DAMIT, Astronomical Institute of Charles University; Torppa et al. (2003), Ďurech et al. (2011); model 139, version 2011-03-28.",
+    "license": "CC-BY-4.0",
+    "consumers": [
+      "navigation"
+    ],
+    "expectedBytes": 81805,
+    "expectedSha256": "9bdd6e5a619dd35b961ba6e8cbc52801f8c8c37207d79e2c344f5c221ea285c0",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "pandora-55-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 35,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "shape"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

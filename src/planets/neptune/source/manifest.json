@@ -19,7 +19,13 @@
         "navigation"
       ],
       "expectedBytes": 789926,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
+      }
     },
     {
       "id": "hubble-opal-neptune-fq619n",
@@ -37,7 +43,13 @@
         "lenses"
       ],
       "expectedBytes": 1045440,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-neptune-f845m",
@@ -55,7 +67,13 @@
         "lenses"
       ],
       "expectedBytes": 1045440,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-neptune-readme",
@@ -345,8 +363,8 @@
     {
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14631,
-      "expectedSha256": "9ef85e32e9285bad639a0891ac9c4e46279da100e32b6d806001424d89495dac",
+      "expectedBytes": 14981,
+      "expectedSha256": "307ae52c4a437cb9b0704ff349613c867439b4382bd431fc77c7c759621bc122",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",

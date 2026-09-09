@@ -1,0 +1,156 @@
+{
+  "method": "Archived Thomas camera, no local fitting; DoG and bounded zero-mean normalized cross-correlation against the published Thomas mosaic.",
+  "interpretation": "Checks of the archived image-to-shape registration; the mosaic shares these Galileo observations and is not independent absolute ground truth.",
+  "fitCount": 0,
+  "checkCount": 4,
+  "rmsResidualPixels": 2.23606797749979,
+  "maximumResidualPixels": 3.605551275463989,
+  "limits": {
+    "dogSigmaPixels": [
+      1,
+      10
+    ],
+    "searchRadiusPixels": 24,
+    "minimumCorrelation": 0.7,
+    "maximumResidualPixels": 4,
+    "checkRectangles": [
+      [
+        500,
+        150,
+        532,
+        182
+      ],
+      [
+        540,
+        210,
+        572,
+        242
+      ],
+      [
+        580,
+        180,
+        612,
+        212
+      ],
+      [
+        600,
+        220,
+        632,
+        252
+      ]
+    ],
+    "notes": "No local fitting. Four spatially separated surface patches check the archived Thomas camera. Four pixels correspond to about 444 m at Ida or 215 m at Gaspra; use a five-pixel source-boundary inset and retain the existing simplified mesh."
+  },
+  "checks": [
+    {
+      "rectangle": [
+        500,
+        150,
+        532,
+        182
+      ],
+      "offsetPixels": [
+        1,
+        0
+      ],
+      "correlation": 0.7337107014129683,
+      "residualPixels": 1.0
+    },
+    {
+      "rectangle": [
+        540,
+        210,
+        572,
+        242
+      ],
+      "offsetPixels": [
+        2,
+        1
+      ],
+      "correlation": 0.7338243952928145,
+      "residualPixels": 2.23606797749979
+    },
+    {
+      "rectangle": [
+        580,
+        180,
+        612,
+        212
+      ],
+      "offsetPixels": [
+        2,
+        3
+      ],
+      "correlation": 0.7480413243723466,
+      "residualPixels": 3.605551275463989
+    },
+    {
+      "rectangle": [
+        600,
+        220,
+        632,
+        252
+      ],
+      "offsetPixels": [
+        1,
+        0
+      ],
+      "correlation": 0.8002449527020549,
+      "residualPixels": 1.0
+    }
+  ],
+  "provenance": [
+    {
+      "path": "observations/0202561278rcal_gre.fit",
+      "sha256": "172489ebbefee3c7c1a1630d7c72fc7269b7de5c38459eedc2450e5c2dbd0d8f"
+    },
+    {
+      "path": "observations/0202561278rcal_gre.xml",
+      "sha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed"
+    },
+    {
+      "path": "observations/i1278.fit",
+      "sha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16"
+    },
+    {
+      "path": "observations/i1278.lbl",
+      "sha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750"
+    },
+    {
+      "path": "observations/idabad.tab",
+      "sha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47"
+    },
+    {
+      "path": "observations/idabad.lbl",
+      "sha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441"
+    },
+    {
+      "path": "reference/243idaimg.tab",
+      "sha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a"
+    },
+    {
+      "path": "reference/243idaimg.xml",
+      "sha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13"
+    },
+    {
+      "path": "reference/gll36001.ti",
+      "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+    },
+    {
+      "path": "shape/243ida.tab",
+      "sha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "sha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c"
+    },
+    {
+      "path": "reference/calibrated-registration.json",
+      "sha256": "0dcdb41d248be6b4f35e6b8985e7965792f19b2c23af0606a06e7f430707c7f0"
+    },
+    {
+      "path": "maps/243idam.fit",
+      "sha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7"
+    }
+  ]
+}

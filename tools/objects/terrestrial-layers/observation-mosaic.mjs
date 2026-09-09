@@ -45,7 +45,7 @@ export function fitObservationLevels(samples, policy) {
       for (let j = k; j <= n; j++) augmented[i][j] -= factor * augmented[k][j]; }
   }
   const logGains = [0, ...augmented.map(row => row[n])], gains = logGains.map(Math.exp);
-  if (gains.some(gain => !Number.isFinite(gain) || gain < 1 / policy.maximumGain || gain > policy.maximumGain)) throw new Error('Observation level fit exceeds its authored gain budget.');
+  if (gains.some(gain => !Number.isFinite(gain) || gain < 1 / policy.maximumGain || gain > policy.maximumGain)) throw new Error('Observation level fit exceeds its authored gain budget.', { cause: { gains, pairs } });
   for (const pair of pairs) if (pair.accepted) pair.residualLogRatio = pair.medianLogRatio + logGains[pair.a] - logGains[pair.b];
   return { gains, pairs, referenceIndex: 0, interpretation: 'Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.' };
 }

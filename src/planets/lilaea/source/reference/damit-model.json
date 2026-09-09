@@ -1,0 +1,347 @@
+{
+  "number": 213,
+  "name": "Lilaea",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/5582",
+  "modelId": 9003,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9003",
+  "catalog": "View model 173 76 12.0395 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "9003",
+    "Asteroid": "(213) Lilaea",
+    "λ": "173",
+    "β": "76",
+    "P": "12.0395",
+    "YORP": "",
+    "t0": "2456959",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.5",
+    "p3": "0.1",
+    "p4": "-1.03",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2022-11-29",
+    "Comment": "",
+    "Created": "2023-05-23 07:48:27",
+    "Modified": "2023-05-23 07:48:27",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/84842/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/84843/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/84844/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech & Hanuš (2023)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/665",
+      "file": "reference-665.html",
+      "links": [
+        {
+          "label": "2023a&a...675a..24d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2023a&a...675a..24d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2023A&A...675A..24D",
+          "url": "http://adsabs.harvard.edu/abs/2023A&A...675A..24D"
+        }
+      ]
+    }
+  ],
+  "id": "lilaea",
+  "displayName": "Lilaea",
+  "lambda": 173.0,
+  "beta": 76.0,
+  "periodHours": 12.0395,
+  "version": "2022-11-29",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 76.31,
+  "uncertaintyKm": 0.97,
+  "akari": {
+    "number": 213,
+    "name": "Lilaea",
+    "diameterKm": 76.31,
+    "uncertaintyKm": 0.97,
+    "detections": 8,
+    "originalRow": "213    Lilaea                         8.64  0.15  8   76.31  0.97 0.107 0.003"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/84844/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/84842/IAUspin",
+  "shapeSha256": "0086f2f76f18239a5345be68633ff70bec9e91ef0e30318c0157c07c72bfd27d",
+  "shapeBytes": 46419,
+  "vertices": 574,
+  "faces": 1144,
+  "signedVolume": 1.0000001088520782,
+  "independentSignedVolume": 1.0000001088520782,
+  "translatedSignedVolume": 1.0000001088520785,
+  "originalVolumeEquivalentDiameter": 1.2407010268164251,
+  "firstVertex": [
+    0.073786,
+    0.00655,
+    0.559807
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5465713810857645,
+    0.7572315362668145
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.686262,
+      0.652636
+    ],
+    [
+      -0.631074,
+      0.711424
+    ],
+    [
+      -0.591627,
+      0.589799
+    ]
+  ],
+  "scaleKmPerSourceUnit": 61.505550773829476,
+  "topology": {
+    "edges": 1716,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 1144,
+    "minDoubleTriangleAreaSourceUnits2": 7.67278995411852e-07
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.073786,
+        0.00655,
+        0.559807
+      ],
+      "radiusSourceUnits": 0.5646867747211723
+    },
+    {
+      "vertexIndex1": 5,
+      "pointSourceUnits": [
+        -0.120527,
+        -0.026949,
+        0.589799
+      ],
+      "radiusSourceUnits": 0.6025909613751271
+    },
+    {
+      "vertexIndex1": 192,
+      "pointSourceUnits": [
+        -0.548012,
+        0.241574,
+        0.128796
+      ],
+      "radiusSourceUnits": 0.6125875931130177
+    },
+    {
+      "vertexIndex1": 238,
+      "pointSourceUnits": [
+        0.652636,
+        -0.11119,
+        -0.01987
+      ],
+      "radiusSourceUnits": 0.6623381171999692
+    },
+    {
+      "vertexIndex1": 257,
+      "pointSourceUnits": [
+        0.199208,
+        0.711424,
+        0.079304
+      ],
+      "radiusSourceUnits": 0.743032340787398
+    },
+    {
+      "vertexIndex1": 282,
+      "pointSourceUnits": [
+        -0.686262,
+        -0.014854,
+        -0.05769
+      ],
+      "radiusSourceUnits": 0.6888427324578521
+    },
+    {
+      "vertexIndex1": 288,
+      "pointSourceUnits": [
+        -0.633542,
+        -0.189951,
+        0.10077
+      ],
+      "radiusSourceUnits": 0.6690376977906403
+    },
+    {
+      "vertexIndex1": 304,
+      "pointSourceUnits": [
+        0.210523,
+        -0.631074,
+        0.056069
+      ],
+      "radiusSourceUnits": 0.6676211948148442
+    },
+    {
+      "vertexIndex1": 573,
+      "pointSourceUnits": [
+        -0.089825,
+        -0.112883,
+        -0.591627
+      ],
+      "radiusSourceUnits": 0.6089610902537206
+    },
+    {
+      "vertexIndex1": 574,
+      "pointSourceUnits": [
+        -0.175734,
+        -0.026974,
+        -0.591627
+      ],
+      "radiusSourceUnits": 0.6177641480055313
+    }
+  ],
+  "alternatives": [],
+  "originalSurfaceAreaSourceUnits2": 4.999528619820211,
+  "originalSurfaceEquivalentDiameter": 1.2615067918753253,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Gaia DR3 inversion provides a low-resolution convex shape from sparse disk-integrated observations. The linked CDS release provides spin parameters and observation counts, not an imagery product or independent size calibration. The selected DAMIT release has one pole solution.",
+  "papers": [
+    {
+      "file": "paper-durech-2023.pdf",
+      "url": "https://arxiv.org/pdf/2305.10798",
+      "label": "Ďurech & Hanuš (2023), A&A 675, A24",
+      "sha256": "f5ac5d9d9df67ff483cdab21806722bcf777d545694843e3aeab9f70fe462123"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 76.31,
+    "uncertaintyKm": 0.97,
+    "reportedUncertaintyKm": 0.97,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 213,
+      "name": "Lilaea",
+      "diameterKm": 76.31,
+      "uncertaintyKm": 0.97,
+      "detections": 8,
+      "originalRow": "213    Lilaea                         8.64  0.15  8   76.31  0.97 0.107 0.003"
+    },
+    "limitations": "Gaia DR3 inversion provides a low-resolution convex shape from sparse disk-integrated observations. The linked CDS release provides spin parameters and observation counts, not an imagery product or independent size calibration. The selected DAMIT release has one pole solution. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 76.31 km effective diameter (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 61.505550773829476,
+    "metersPerSourceUnit": 61505.55077382948,
+    "sourceSignedVolume": 1.0000001088520782,
+    "sourceVolumeEquivalentDiameter": 1.2407010268164251,
+    "sourceSurfaceArea": 4.999528619820211,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 232671.38925452827,
+    "derivedVolumeEquivalentDiameterKm": 76.30999999999999,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2456959.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 2.752207905556241,
+  "orbitalPeriodYears": 4.565938518067484,
+  "sourceFields": {
+    "ID": "9003",
+    "Asteroid": "(213) Lilaea",
+    "λ": "173",
+    "β": "76",
+    "P": "12.0395",
+    "YORP": "",
+    "t0": "2456959",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.5",
+    "p3": "0.1",
+    "p4": "-1.03",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2022-11-29",
+    "Comment": "",
+    "Created": "2023-05-23 07:48:27",
+    "Modified": "2023-05-23 07:48:27",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

@@ -12,15 +12,16 @@ export const browserProfile=createObjectBrowserProfile({id:'gaspra',controls,aud
   ],
   "lensRace": {
     "defaultId": "normal",
-    "slowId": "elevation",
+    "slowId": "calibrated",
     "winnerId": "normal",
-    "slowAsset": "/scenes/gaspra/gaspra-elevation-surface@2x.webp",
+    "slowAsset": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
     "preReadyDisabled": true
   },
   "retained": {
     "lensIds": [
       "normal",
-      "elevation"
+      "elevation",
+      "calibrated"
     ],
     "speedClicks": 5,
     "allowedMountSelectors": []

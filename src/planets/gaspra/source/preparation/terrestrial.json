@@ -71,7 +71,81 @@
       }
     ],
     "observedColors": [],
-    "surfaceQuality": 90
+    "surfaceQuality": 90,
+    "mosaics": [
+      {
+        "id": "calibrated",
+        "format": "controlled-shape-camera",
+        "consumer": "galileo-calibrated",
+        "frames": [
+          {
+            "id": "107318326",
+            "path": "observations/107318326rcal_clr.fit",
+            "labelPath": "observations/107318326rcal_clr.xml",
+            "encoding": "fits-ssi-iof",
+            "cameraCatalog": {
+              "path": "reference/951gaspimg.tab",
+              "labelPath": "reference/951gaspimg.xml",
+              "imageNumber": 107318326,
+              "longitudeDirection": "west",
+              "pixelOrigin": "one-based",
+              "instrumentPath": "reference/gll36001.ti"
+            },
+            "quality": {
+              "rawPath": "observations/e8326.fit",
+              "rawLabelPath": "observations/e8326.lbl",
+              "badDataPath": "observations/gaspbad.tab",
+              "badDataLabelPath": "observations/gaspbad.lbl",
+              "imageId": "e8326",
+              "target": "GASPRA",
+              "startTime": "1991-10-29T22:26:15.149Z",
+              "filter": "CLEAR"
+            },
+            "coverageInsetPixels": 5
+          },
+          {
+            "id": "107318313",
+            "path": "observations/107318313rcal_clr.fit",
+            "labelPath": "observations/107318313rcal_clr.xml",
+            "encoding": "fits-ssi-iof",
+            "cameraCatalog": {
+              "path": "reference/951gaspimg.tab",
+              "labelPath": "reference/951gaspimg.xml",
+              "imageNumber": 107318313,
+              "longitudeDirection": "west",
+              "pixelOrigin": "one-based",
+              "instrumentPath": "reference/gll36001.ti"
+            },
+            "quality": {
+              "rawPath": "observations/e8313.fit",
+              "rawLabelPath": "observations/e8313.lbl",
+              "badDataPath": "observations/gaspbad.tab",
+              "badDataLabelPath": "observations/gaspbad.lbl",
+              "imageId": "e8313",
+              "target": "GASPRA",
+              "startTime": "1991-10-29T22:26:06.482Z",
+              "filter": "CLEAR"
+            },
+            "coverageInsetPixels": 5
+          }
+        ],
+        "photometry": {
+          "model": "observed",
+          "weight": 1,
+          "maximumGain": 1,
+          "displayMaximum": 0.12,
+          "gamma": 2.2,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
+          "minimumLevel": 1,
+          "maximumLevel": 1
+        },
+        "metadata": {
+          "label": "SSI reflectance",
+          "coverage": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,

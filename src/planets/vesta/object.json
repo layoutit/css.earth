@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9437c71bff8248b705bc08eb67ccb934e5ac9aed22dcee2158ca9177200898de"
+    "sha256": "91ccf29dcbbab232c3dd3ed49d3eb8a5693491b67aeb5141eaf79884da3317d8"
   },
   "id": "vesta",
   "properties": {
@@ -33,6 +33,11 @@
               "material": "lighting"
             },
             {
+              "id": "ratios",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "elevation",
               "source": "content",
               "material": "lighting"
@@ -56,7 +61,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "8753bde9d25036ef1701f3bac7288de432eaa8f3ae678754f877e707e88a3b0e"
+          "sha256": "64d768d3e600631fe01c6b32e517ce1efc719fad24c9b283cbc582f70339dca9"
         },
         {
           "id": "rotation",
@@ -66,7 +71,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2f03d4eb80483e5e3acb69cddc0a3cac3193985dc02925c2b6a663ce926056de"
+          "sha256": "bf7a7271fd02c86f841b3dae2c2bb9d3c967c863633444a119d17112e2261bde"
         },
         {
           "id": "title",
@@ -81,7 +86,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b2aee1a460321be695c5fc0ed9cf4c1de79c22d518dcebe14ac681af80956f42"
+          "sha256": "2404f692eb9c5c31eb34186683fca69b26b0a23ccba6b144dc811b7816173f99"
         }
       ]
     },

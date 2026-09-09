@@ -38,7 +38,6 @@
     "CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES": 89,
     "CAMERA_DEFAULT_CONTROL_PITCH_DEGREES": 34.230769230769226,
     "CAMERA_MILLISECONDS_PER_CONTROL_DEGREE": 1000,
-    "INTERIOR_REFERENCE_CONTROL_YAW_DEGREES": -105,
     "INTERIOR_LATITUDE_SEGMENTS": 8,
     "INTERIOR_LONGITUDE_SEGMENTS": 16,
     "interiorCutaway": {
@@ -98,20 +97,303 @@
     },
     "maps": [
       {
-        "path": "blue-marble-december.jpg",
+        "path": "blue-marble-july.jpg",
         "name": "earth-surface",
+        "compositeClouds": false,
+        "thumbnail": "earth-lens-normal.webp",
+        "displayGamma": 1.25
+      },
+      {
+        "path": "blue-marble-july.jpg",
+        "name": "earth-clouds",
         "compositeClouds": true,
-        "thumbnail": "earth-lens-normal.webp"
+        "thumbnail": "earth-lens-clouds.webp",
+        "thumbnailRegion": {
+          "longitude": -145,
+          "latitude": -40,
+          "spanDegrees": 50
+        },
+        "primarySource": "blue-marble-clouds.tif",
+        "displayGamma": 1.25
       },
       {
-        "path": "blue-marble-topography.jpg",
+        "path": "science/gebco-2026/latitude-00.dods.gz",
         "name": "earth-topography",
-        "thumbnail": "earth-lens-topography.webp"
+        "thumbnail": "earth-lens-topography.webp",
+        "scientific": {
+          "kind": "gebco-elevation",
+          "metadata": "science/gebco-2026.das",
+          "grid": {
+            "width": 8640,
+            "height": 4320,
+            "firstIndex": 4,
+            "stride": 10,
+            "nativeCellDegrees": 0.004166666666666667
+          },
+          "palette": [
+            {
+              "meters": -10000,
+              "color": "#091d46"
+            },
+            {
+              "meters": -6000,
+              "color": "#164579"
+            },
+            {
+              "meters": -4000,
+              "color": "#2678ad"
+            },
+            {
+              "meters": -2000,
+              "color": "#62b5ca"
+            },
+            {
+              "meters": -200,
+              "color": "#b2d8d5"
+            },
+            {
+              "meters": -1,
+              "color": "#d5e9dd"
+            },
+            {
+              "meters": 0,
+              "color": "#628c49"
+            },
+            {
+              "meters": 500,
+              "color": "#a1ae65"
+            },
+            {
+              "meters": 1000,
+              "color": "#cfbd82"
+            },
+            {
+              "meters": 2000,
+              "color": "#c5a078"
+            },
+            {
+              "meters": 4000,
+              "color": "#a57d69"
+            },
+            {
+              "meters": 6000,
+              "color": "#bab2a6"
+            },
+            {
+              "meters": 8000,
+              "color": "#eeeae2"
+            },
+            {
+              "meters": 10000,
+              "color": "#ffffff"
+            }
+          ],
+          "relief": {
+            "referenceRadiusMeters": 6371008.8,
+            "heightToMeters": 4,
+            "lightDirection": [
+              -0.5,
+              0.5,
+              0.7071067811865476
+            ],
+            "ambient": 0.6
+          },
+          "legend": {
+            "image": "earth-topography-legend.png",
+            "width": 620,
+            "height": 16,
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "blocks": [
+            {
+              "path": "science/gebco-2026/latitude-00.dods.gz",
+              "rowOffset": 0,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-01.dods.gz",
+              "rowOffset": 240,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-02.dods.gz",
+              "rowOffset": 480,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-03.dods.gz",
+              "rowOffset": 720,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-04.dods.gz",
+              "rowOffset": 960,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-05.dods.gz",
+              "rowOffset": 1200,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-06.dods.gz",
+              "rowOffset": 1440,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-07.dods.gz",
+              "rowOffset": 1680,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-08.dods.gz",
+              "rowOffset": 1920,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-09.dods.gz",
+              "rowOffset": 2160,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-10.dods.gz",
+              "rowOffset": 2400,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-11.dods.gz",
+              "rowOffset": 2640,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-12.dods.gz",
+              "rowOffset": 2880,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-13.dods.gz",
+              "rowOffset": 3120,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/rows-3360.dods.gz",
+              "rowOffset": 3360,
+              "rows": 120
+            },
+            {
+              "path": "science/gebco-2026/rows-3480.dods.gz",
+              "rowOffset": 3480,
+              "rows": 120
+            },
+            {
+              "path": "science/gebco-2026/latitude-15.dods.gz",
+              "rowOffset": 3600,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-16.dods.gz",
+              "rowOffset": 3840,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/rows-4080.dods.gz",
+              "rowOffset": 4080,
+              "rows": 120
+            },
+            {
+              "path": "science/gebco-2026/rows-4200.dods.gz",
+              "rowOffset": 4200,
+              "rows": 120
+            }
+          ]
+        },
+        "webp": {
+          "quality": 75,
+          "effort": 6
+        },
+        "thumbnailRegion": {
+          "longitude": -72,
+          "latitude": -20,
+          "spanDegrees": 40
+        }
       },
       {
-        "path": "black-marble-2016.jpg",
+        "path": "science/night-lights-2025/radiance.zip",
         "name": "earth-night-lights",
-        "thumbnail": "earth-lens-night-lights.webp"
+        "thumbnail": "earth-lens-night-lights.webp",
+        "webp": {
+          "quality": 90,
+          "effort": 6
+        },
+        "scientific": {
+          "kind": "black-marble-radiance",
+          "year": 2025,
+          "product": "VJ146A4.002",
+          "band": "AllAngle_Composite_Snow_Free",
+          "units": "nW/cm2/sr",
+          "member": "viirs_2025_raw.tif",
+          "archiveSha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480",
+          "archiveBytes": 973526576,
+          "grid": {
+            "width": 86400,
+            "height": 33600,
+            "cellDegrees": 0.004166666666666667,
+            "bounds": [
+              -180,
+              -65,
+              180,
+              75
+            ]
+          },
+          "display": {
+            "maximum": 100,
+            "softening": 0.25,
+            "missing": [
+              38,
+              42,
+              49
+            ]
+          },
+          "legend": {
+            "kind": "scale",
+            "title": "Annual radiance · nW/cm²/sr",
+            "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+            "image": "earth-night-lights-legend.png",
+            "width": 620,
+            "height": 16,
+            "labels": [
+              "0",
+              "≥ 100 nW/cm²/sr"
+            ]
+          },
+          "provenancePath": "science/night-lights-2025/provenance.json"
+        },
+        "thumbnailRegion": {
+          "longitude": -74,
+          "latitude": 40.7,
+          "spanDegrees": 3
+        }
+      },
+      {
+        "path": "science/mur-gibs.png",
+        "name": "earth-enso",
+        "thumbnail": "earth-lens-enso.webp",
+        "scientific": {
+          "kind": "gibs-mur-imagery",
+          "date": "2026-09-07",
+          "baseline": "2003–2014",
+          "checked": "2026-09-09T03:53:28.313Z",
+          "advisory": {
+            "date": "13 August 2026",
+            "status": "El Niño Advisory",
+            "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+          }
+        },
+        "webp": {
+          "quality": 60,
+          "effort": 6
+        }
       }
     ]
   },
@@ -126,9 +408,9 @@
     "initialScenePitchDegrees": 40,
     "maximumScenePitchDegrees": 65,
     "minimumZoom": 0.42,
-    "maximumZoom": 4096,
+    "maximumZoom": 4,
     "defaultZoom": 1.1,
-    "sceneScale": 0.022,
+    "sceneScale": 0.02,
     "logicalBodyDiameter": 460,
     "pitchBounded": false,
     "yawBounded": false,

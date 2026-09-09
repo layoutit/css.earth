@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
-        "title": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
+        "title": "Approximate shape model",
         "detail": "Estimated size",
         "thumbnail": "/scenes/anthe/anthe-model-thumbnail.webp",
         "surface": "anthe-model-surface@2x.webp",
@@ -59,7 +59,8 @@
           "id": "measured-ellipsoid",
           "path": "../manifest.json",
           "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
-        }
+        },
+        "summary": "A 1 km sphere represents the estimated size. The actual shape is unresolved; gray grid: no surface imagery."
       }
     ]
   },

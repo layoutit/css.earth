@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "sapientia",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/126589/shape.txt",
+    "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2023); model 16284, version 2023-10-03.",
+    "license": "CC-BY-4.0",
+    "consumers": [
+      "navigation"
+    ],
+    "expectedBytes": 82861,
+    "expectedSha256": "858bb24a2b45b744a22887e0e5a3cb8fcc2b8f97ff73db772a6590c686cd3235",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "sapientia-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 35,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "shape"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

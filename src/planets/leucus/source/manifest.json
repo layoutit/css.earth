@@ -1,0 +1,186 @@
+{
+  "schema": "cssleucus-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "occultation-approximation",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 62404,
+      "expectedSha256": "113b8dbb6c6b971a1acec8b926afdb7df7ba40e5d2a63b45565766fd2438284c",
+      "origin": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+      "credit": "Mottola et al. (2020), The Planetary Science Journal 1, 73; Levison et al. (2025), Space Science Reviews 221, 70",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 20215.215801007133
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+      "credit": "Mottola et al. (2020), The Planetary Science Journal 1, 73; Levison et al. (2025), Space Science Reviews 221, 70",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 20215.215801007133
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3734,
+      "expectedSha256": "7c2b3b7523728a8c4fe2e9ad3d7d0b60978a3a5bfa42a679d438bbfa25085d3d",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2740,
+      "expectedSha256": "cd1fd6ab496029d242329f6651aba043b0371bc9c1315b97ab43e28caf76fa52",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1352,
+      "expectedSha256": "dc3ff289804e8029318313fe6d1a51b47e6ac62f184456a0f2a0e36f329f9768",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 561,
+      "expectedSha256": "2263f6efa2795a4ac2fe39c86aaa346901c9a77de98f715432c72913155438c7",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2754,
+      "expectedSha256": "e68088180d392d5de0ae73c708c103b1ed3cda2688fb7b7c5a8cb1604f2796f7",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3422,
+      "expectedSha256": "cb8b46e5626a12005cb2a3320197958c64815d0f61790ec536922674c818ee59",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "467484061ddae5714f7eddc08254fc6cfc4851db0fd41d7939eca3a8bd827f6f",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+      "credit": "Mottola et al. (2020), The Planetary Science Journal 1, 73; Levison et al. (2025), Space Science Reviews 221, 70",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "occultation-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 53710,
+      "expectedSha256": "04dd998b7293911e8da6e2e6085a48df9f2145af2e6a683f3cdf0dcafe83199d"
+    }
+  ]
+}

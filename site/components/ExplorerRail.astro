@@ -8,7 +8,7 @@ interface Props {
 const { objectId } = Astro.props;
 ---
 
-<nav class="explorer-rail" aria-label="Explorer">
+<nav class="explorer-rail" aria-label="Explorer" hidden>
   <button
     class="explorer-rail-explore"
     hidden
@@ -20,25 +20,5 @@ const { objectId } = Astro.props;
     <span class="explorer-rail-icon">
       <MaterialSymbol name="planet" />
     </span>
-  </button>
-  <button
-    class="planet-toolbar-action explorer-rail-about"
-    type="button"
-    aria-label="About"
-    title="About"
-    aria-controls={`${objectId}-about`}
-    aria-pressed="false"
-  >
-    <MaterialSymbol name="help" />
-  </button>
-  <button
-    class="planet-toolbar-action planet-settings-action"
-    type="button"
-    aria-label="Settings"
-    title="Settings"
-    aria-controls={`${objectId}-settings`}
-    aria-pressed="false"
-  >
-    <MaterialSymbol name="settings" />
   </button>
 </nav>

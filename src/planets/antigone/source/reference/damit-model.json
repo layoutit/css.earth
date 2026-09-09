@@ -1,0 +1,335 @@
+{
+  "number": 129,
+  "name": "Antigone",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/139",
+  "modelId": 1810,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1810",
+  "catalog": "View model 205 63 4.95716 AO.png | occ.png | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1810",
+    "Asteroid": "(129) Antigone",
+    "λ": "205",
+    "β": "63",
+    "P": "4.95716",
+    "YORP": "",
+    "t0": "2441100.7",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "126",
+    "σD": "3",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-14",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:38",
+    "Modified": "2026-06-24 11:11:36",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.png": "https://damit.cuni.cz/projects/damit/stored_files/open/397/AO.png",
+    "occ.png": "https://damit.cuni.cz/projects/damit/stored_files/open/398/occ.png",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/399/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/400/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/401/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2017)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/169",
+      "file": "reference-169.html",
+      "links": [
+        {
+          "label": "2017a&a...601a.114h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2017a&a...601a.114h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2017A%26A...601A.114H",
+          "url": "http://adsabs.harvard.edu/abs/2017A%26A...601A.114H\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1702.01996",
+          "url": "https://arxiv.org/abs/1702.01996"
+        }
+      ]
+    }
+  ],
+  "id": "antigone",
+  "displayName": "Antigone",
+  "lambda": 205.0,
+  "beta": 63.0,
+  "periodHours": 4.95716,
+  "version": "2017-06-14",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 126.0,
+  "uncertaintyKm": 3.0,
+  "akari": {
+    "number": 129,
+    "name": "Antigone",
+    "diameterKm": 119.55,
+    "uncertaintyKm": 1.42,
+    "detections": 8,
+    "originalRow": "129    Antigone                       7.07  0.33  8  119.55  1.42 0.185 0.005"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/401/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/399/IAUspin.txt",
+  "shapeSha256": "e011dbcecac18acc61b6cb82327ee948983b348ccc3b7c20b2c4ba11078318cf",
+  "shapeBytes": 32486,
+  "vertices": 402,
+  "faces": 800,
+  "signedVolume": 1052275.475911973,
+  "independentSignedVolume": 1052275.475911973,
+  "originalVolumeEquivalentDiameter": 126.19542450380722,
+  "firstVertex": [
+    2.93744,
+    -5.257798,
+    43.316337
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    43.733031505487624,
+    87.45245310414553
+  ],
+  "extentsSourceUnits": [
+    [
+      -59.53536,
+      66.00714
+    ],
+    [
+      -86.859598,
+      83.569602
+    ],
+    [
+      -54.688863,
+      45.821037
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9984514137134876,
+  "topology": {
+    "edges": 1200,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 126.19542450380722,
+    "declaredDiameterKm": 126.0,
+    "relativeDifference": 0.001550988125454067,
+    "scaledDiameterKm": 126.0
+  },
+  "alternatives": [
+    {
+      "modelId": 159,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/159",
+      "pole": [
+        "207",
+        "58"
+      ],
+      "version": "2011-03-28",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "118",
+      "comment": "size from AO is 124+/-12 km",
+      "references": [
+        {
+          "label": "Torppa et al. (2003)",
+          "url": "/projects/damit/references/view/106"
+        },
+        {
+          "label": "Ďurech et al. (2011)",
+          "url": "/projects/damit/references/view/139"
+        },
+        {
+          "label": "Hanuš et al. (2013)",
+          "url": "/projects/damit/references/view/149"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations",
+  "selectionNotes": "Hanuš2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "confirmed imaging and occultation pole family",
+  "independentCenteredSignedVolume": 1052275.475911973,
+  "surfaceAreaSourceUnitsSquared": 52719.0141709103,
+  "surfaceEquivalentDiameterSourceUnits": 129.54143507181053,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        2.93744,
+        -5.257798,
+        43.316337
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 20,
+      "sourcePoint": [
+        -24.46096,
+        -22.120898,
+        45.821037
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 128,
+      "sourcePoint": [
+        -59.53536,
+        9.898602,
+        14.969837
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 155,
+      "sourcePoint": [
+        -9.15136,
+        83.569602,
+        7.565437
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 171,
+      "sourcePoint": [
+        -8.57476,
+        -86.859598,
+        5.460337
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 201,
+      "sourcePoint": [
+        -57.10026,
+        -5.257798,
+        -2.513263
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 220,
+      "sourcePoint": [
+        66.00714,
+        -14.721798,
+        -2.513263
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 398,
+      "sourcePoint": [
+        2.93744,
+        3.833102,
+        -54.688863
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 401,
+      "sourcePoint": [
+        2.93744,
+        -5.257798,
+        -54.270463
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "hanus-2017.pdf",
+      "url": "https://arxiv.org/pdf/1702.01996",
+      "label": "Hanuš et al. (2017), A&A 601, A114"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 126.0,
+    "uncertaintyKm": 3.0,
+    "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
+    "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1810",
+    "reference": "DAMIT model 1810",
+    "sourceLabel": "DAMIT model 1810",
+    "limitations": "Hanuš2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.",
+    "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 126 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9984514137134876,
+    "metersPerSourceUnit": 998.4514137134876
+  },
+  "distanceAu": 2.8676091430240436,
+  "orbitalPeriodYears": 4.856105763499849,
+  "sourceFields": {
+    "ID": "1810",
+    "Asteroid": "(129) Antigone",
+    "λ": "205",
+    "β": "63",
+    "P": "4.95716",
+    "YORP": "",
+    "t0": "2441100.7",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "126",
+    "σD": "3",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-14",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:38",
+    "Modified": "2026-06-24 11:11:36",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

@@ -1,0 +1,133 @@
+{
+  "schema": "cssearth-geology-registration-audit@1",
+  "pointSource": "science/geology-sim3237/GeologyUnitPoints",
+  "comparison": "Independent released point labels compared with the final polygon Unit attribute. The separate point and polygon classifications are not identical. Mismatches are retained as source discrepancies; point labels do not replace polygon categories.",
+  "matches": 2918,
+  "mismatch": 124,
+  "ignored": 870,
+  "representativeDiscrepancies": [
+    {
+      "record": 1,
+      "lon": 97.0831298828125,
+      "lat": -89.73980712890625,
+      "value": "l",
+      "actual": null
+    },
+    {
+      "record": 2,
+      "lon": 103.6737060546875,
+      "lat": -87.8480224609375,
+      "value": "c1",
+      "actual": "cu"
+    },
+    {
+      "record": 106,
+      "lon": 169.64910888671875,
+      "lat": -71.15020751953125,
+      "value": "d",
+      "actual": "dl"
+    },
+    {
+      "record": 110,
+      "lon": 156.71368408203125,
+      "lat": -71.4957275390625,
+      "value": "d",
+      "actual": "dl"
+    },
+    {
+      "record": 112,
+      "lon": -72.25970458984375,
+      "lat": -69.8052978515625,
+      "value": "c2",
+      "actual": "cu"
+    },
+    {
+      "record": 117,
+      "lon": -179.47650146484375,
+      "lat": -69.41650390625,
+      "value": "d",
+      "actual": "dl"
+    },
+    {
+      "record": 125,
+      "lon": -147.7958984375,
+      "lat": -68.323974609375,
+      "value": "c2",
+      "actual": "c1"
+    },
+    {
+      "record": 130,
+      "lon": -47.07427978515625,
+      "lat": -67.447998046875,
+      "value": "c2",
+      "actual": "c1"
+    }
+  ],
+  "anchors": [
+    {
+      "record": 4,
+      "longitude": 132.28070068359375,
+      "latitude": -85.82318115234375,
+      "value": "c1",
+      "pointAttributes": {
+        "TERRAIN": "Crater materials C1",
+        "UNITNAME": "Crater materials C1"
+      }
+    },
+    {
+      "record": 797,
+      "longitude": 141.029296875,
+      "latitude": -32.68341064453125,
+      "value": "c1",
+      "pointAttributes": {
+        "TERRAIN": "Crater materials C1",
+        "UNITNAME": "Crater materials C1"
+      }
+    },
+    {
+      "record": 1539,
+      "longitude": 165.52789306640625,
+      "latitude": -12.7548828125,
+      "value": "c3",
+      "pointAttributes": {
+        "TERRAIN": "Crater materials C3",
+        "UNITNAME": "Crater materials C3"
+      }
+    },
+    {
+      "record": 2318,
+      "longitude": -87.4412841796875,
+      "latitude": 4.77252197265625,
+      "value": "ls1",
+      "pointAttributes": {
+        "TERRAIN": "Bright Subdued 1",
+        "UNITNAME": "Bright Subdued 1"
+      }
+    },
+    {
+      "record": 3104,
+      "longitude": 146.7113037109375,
+      "latitude": 30.0286865234375,
+      "value": "d",
+      "pointAttributes": {
+        "TERRAIN": "Dark Undivided",
+        "UNITNAME": "Dark Undivided"
+      }
+    },
+    {
+      "record": 3912,
+      "longitude": -37.79742431640625,
+      "latitude": 63.67547607421875,
+      "value": "l",
+      "pointAttributes": {
+        "TERRAIN": "Bright Undivided",
+        "UNITNAME": "Bright Undivided"
+      }
+    }
+  ],
+  "aliases": {
+    "Palimpsests P1": "p",
+    "Palimpsests P2": "p",
+    "Palimpsests PU": "p"
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "schema": "cssearth-callisto-camera-registration@1",
+  "status": "accepted fixed camera for partial processed color",
+  "camera": {
+    "observerLatitudeDegrees": -0.14956761378453695,
+    "observerEastLongitudeDegrees": 145.20094678888793,
+    "northAzimuthDegrees": 355.3222696772947,
+    "centerSample": 323.2245440873881,
+    "centerLine": 325.9541756735663,
+    "projectedRadiusPixels": 319.874174604298,
+    "radiusMeters": 2410300,
+    "distanceMeters": 739976300
+  },
+  "coordinates": "East-positive geographic longitude; image samples and lines are zero-based pixel-center coordinates, lines increase downward. Radius defines perspective geometry; it is distinct from the controlled reference map radius.",
+  "distanceSource": {
+    "path": "observations/C0605271600R.LBL",
+    "bytes": 5039,
+    "sha256": "6c101f7e030d1431ca905f5a207ab62eef91f9c80ca4965fe9a5ed57dc10dddc",
+    "keyword": "TARGET_CENTER_DISTANCE",
+    "valueKm": 739976.3,
+    "qualification": "The contemporaneous C30 GREEN frame provides distance and initial sub-spacecraft latitude/longitude. The processed plate has a different crop, scale and north rotation; those were registered independently, not copied from raw camera coordinates.",
+    "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/C30/CALLISTO/C0605271600R.LBL"
+  },
+  "fit": {
+    "method": "Low-pass brightness NCC: photo sigma=2 pixels; reference map resampled to 3072x1536 then sigma=3; 2-degree coarse roll search followed by bounded Powell. Opposite quadrants are training; upper-right and lower-left are disjoint held-out regions. No color values transferred.",
+    "trainingCorrelation": 0.8374308769465191,
+    "holdouts": [
+      {
+        "region": "upper-right",
+        "samples": 5524,
+        "unshiftedCorrelation": 0.8322815354799907,
+        "bestDiagnosticCorrelation": 0.8322815354799907,
+        "diagnosticOffsetPixels": [
+          0,
+          0
+        ],
+        "searchBoundary": false
+      },
+      {
+        "region": "lower-left",
+        "samples": 5464,
+        "unshiftedCorrelation": 0.6830660611628557,
+        "bestDiagnosticCorrelation": 0.6830660611628557,
+        "diagnosticOffsetPixels": [
+          0,
+          0
+        ],
+        "searchBoundary": false
+      }
+    ],
+    "reference": {
+      "path": "callisto-global-1km.tif",
+      "bytes": 114640717,
+      "sha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
+      "radiusMeters": 2409300.0488
+    },
+    "archivedDiagnostic": "validation/registration-fit-original.py",
+    "qualification": "The exploratory fit approximates the reference extent during low-resolution fitting. The independent fixed-camera review resamples the original 15138x7569 mosaic at its exact GeoTIFF pixel centers; no fit is changed by that review."
+  },
+  "independentReview": {
+    "path": "validation/registration-independent-review.json",
+    "bytes": 9690,
+    "sha256": "c886e039ff30aeb81992e76748ab37f92db3ea8c810507da8be11e59647754ba",
+    "namedFeatures": [
+      {
+        "name": "Grimr",
+        "latitudeDegrees": 41.5,
+        "eastLongitudeDegrees": 145.4,
+        "diameterKm": 103.2,
+        "gazetteerUrl": "https://planetarynames.wr.usgs.gov/Feature/2254",
+        "expectedPhotoPixel": [
+          306.6776856186616,
+          113.49757000809834
+        ],
+        "heldOutQuadrant": false,
+        "unshiftedLocalNcc": 0.6840732528522877,
+        "bestDiagnosticNcc": 0.6969373816373119,
+        "diagnosticMapOffsetPixels": [
+          1,
+          1
+        ],
+        "diagnosticSearchBoundary": false
+      },
+      {
+        "name": "Egres",
+        "latitudeDegrees": 42.5,
+        "eastLongitudeDegrees": 183.4,
+        "diameterKm": 45.5,
+        "gazetteerUrl": "https://planetarynames.wr.usgs.gov/Feature/1732",
+        "expectedPhotoPixel": [
+          451.1564585704688,
+          97.76591242269612
+        ],
+        "heldOutQuadrant": true,
+        "unshiftedLocalNcc": 0.8047197632020943,
+        "bestDiagnosticNcc": 0.8422640463994476,
+        "diagnosticMapOffsetPixels": [
+          1,
+          0
+        ],
+        "diagnosticSearchBoundary": false
+      },
+      {
+        "name": "Bran",
+        "latitudeDegrees": -24.2,
+        "eastLongitudeDegrees": 154.4,
+        "diameterKm": 78.0,
+        "gazetteerUrl": "https://planetarynames.wr.usgs.gov/Feature/862",
+        "expectedPhotoPixel": [
+          380.5121035161871,
+          452.459121236193
+        ],
+        "heldOutQuadrant": false,
+        "unshiftedLocalNcc": 0.8185312117797843,
+        "bestDiagnosticNcc": 0.8185312117797843,
+        "diagnosticMapOffsetPixels": [
+          0,
+          0
+        ],
+        "diagnosticSearchBoundary": false
+      },
+      {
+        "name": "Vidarr",
+        "latitudeDegrees": 12.1,
+        "eastLongitudeDegrees": 166.6,
+        "diameterKm": 78.0,
+        "gazetteerUrl": "https://planetarynames.wr.usgs.gov/Feature/6381",
+        "expectedPhotoPixel": [
+          431.7527883165745,
+          248.83362514617403
+        ],
+        "heldOutQuadrant": true,
+        "unshiftedLocalNcc": 0.66651761544993,
+        "bestDiagnosticNcc": 0.66651761544993,
+        "diagnosticMapOffsetPixels": [
+          0,
+          0
+        ],
+        "diagnosticSearchBoundary": false
+      },
+      {
+        "name": "Loni",
+        "latitudeDegrees": -3.6,
+        "eastLongitudeDegrees": 145.7,
+        "diameterKm": 85.0,
+        "gazetteerUrl": "https://planetarynames.wr.usgs.gov/Feature/3466",
+        "expectedPhotoPixel": [
+          327.5800479635476,
+          344.97679941290426
+        ],
+        "heldOutQuadrant": false,
+        "unshiftedLocalNcc": 0.6196603876786987,
+        "bestDiagnosticNcc": 0.6196603876786987,
+        "diagnosticMapOffsetPixels": [
+          0,
+          0
+        ],
+        "diagnosticSearchBoundary": false
+      },
+      {
+        "name": "Alfr",
+        "latitudeDegrees": -9.9,
+        "eastLongitudeDegrees": 137.3,
+        "diameterKm": 96.0,
+        "gazetteerUrl": "https://planetarynames.wr.usgs.gov/Feature/180",
+        "expectedPhotoPixel": [
+          284.34825239601963,
+          383.670376054459
+        ],
+        "heldOutQuadrant": true,
+        "unshiftedLocalNcc": 0.7769659782187632,
+        "bestDiagnosticNcc": 0.7769659782187632,
+        "diagnosticMapOffsetPixels": [
+          0,
+          0
+        ],
+        "diagnosticSearchBoundary": false
+      },
+      {
+        "name": "Valfodr",
+        "latitudeDegrees": -1.3,
+        "eastLongitudeDegrees": 113.0,
+        "diameterKm": 101.5,
+        "gazetteerUrl": "https://planetarynames.wr.usgs.gov/Feature/6282",
+        "expectedPhotoPixel": [
+          153.44455672517694,
+          346.4369257098719
+        ],
+        "heldOutQuadrant": true,
+        "unshiftedLocalNcc": 0.875143483103922,
+        "bestDiagnosticNcc": 0.875143483103922,
+        "diagnosticMapOffsetPixels": [
+          0,
+          0
+        ],
+        "diagnosticSearchBoundary": false
+      },
+      {
+        "name": "Vili",
+        "latitudeDegrees": 32.6,
+        "eastLongitudeDegrees": 144.1,
+        "diameterKm": 42.0,
+        "gazetteerUrl": "https://planetarynames.wr.usgs.gov/Feature/15814",
+        "expectedPhotoPixel": [
+          303.8993652691588,
+          153.4386799933491
+        ],
+        "heldOutQuadrant": false,
+        "unshiftedLocalNcc": 0.8392668835631106,
+        "bestDiagnosticNcc": 0.8392668835631106,
+        "diagnosticMapOffsetPixels": [
+          0,
+          0
+        ],
+        "diagnosticSearchBoundary": false
+      }
+    ],
+    "unblurredQuadrants": [
+      {
+        "region": "upper-left",
+        "heldOutByRoot": false,
+        "pixels": 50107,
+        "unblurredNcc": 0.6860397452771033,
+        "highPassSigma6Ncc": 0.5271451780564893
+      },
+      {
+        "region": "upper-right",
+        "heldOutByRoot": true,
+        "pixels": 50473,
+        "unblurredNcc": 0.7131736795216416,
+        "highPassSigma6Ncc": 0.6084047575467076
+      },
+      {
+        "region": "lower-left",
+        "heldOutByRoot": true,
+        "pixels": 49834,
+        "unblurredNcc": 0.5727420903175885,
+        "highPassSigma6Ncc": 0.5482850551354539
+      },
+      {
+        "region": "lower-right",
+        "heldOutByRoot": false,
+        "pixels": 50198,
+        "unblurredNcc": 0.7766243291917431,
+        "highPassSigma6Ncc": 0.6959747782969354
+      }
+    ]
+  },
+  "delivery": {
+    "maximumEmissionDegrees": 65,
+    "sourceAlpha": 255,
+    "explanation": "The independent report initially suggested 60 degrees. Delivery uses the explicitly accepted 65-degree limit and exact opaque-contributor mask; no full-limb, global-map or absolute geodetic-accuracy claim is made. Diagnostic 0-1 pixel matches are local comparisons, not a camera covariance."
+  },
+  "radiometry": "Published processed RGB display codes, not I/F, reflectance, calibrated color ratios or measured albedo. No new photometric correction."
+}

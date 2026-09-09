@@ -1,0 +1,33 @@
+{
+  "method": "thermal-effective-diameter-as-volume-approximation",
+  "diameterKm": 63.91,
+  "uncertaintyKm": 1.0,
+  "reportedUncertaintyKm": 1.0,
+  "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+  "systematicUncertaintyFraction": null,
+  "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+  "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+  "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+  "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+  "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+  "catalog": {
+    "number": 207,
+    "name": "Hedda",
+    "diameterKm": 63.91,
+    "uncertaintyKm": 1.0,
+    "detections": 6,
+    "originalRow": "207    Hedda                          9.92  0.15  6   63.91  1.00 0.047 0.002"
+  },
+  "limitations": "ATLAS2015–2018 photometry gives 310 orange and 144 cyan measurements; period search with convex models. Both mirror poles remain; model 4799 is selected as a representative, not a unique orientation. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+  "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 63.91 km effective diameter (catalog ±1 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "scaleKmPerSourceUnit": 51.51120297206088,
+  "metersPerSourceUnit": 51511.20297206088,
+  "sourceSignedVolume": 0.9999999952555217,
+  "sourceVolumeEquivalentDiameter": 1.2407009798366404,
+  "sourceSurfaceArea": 5.0968628806213285,
+  "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+  "scaledSignedVolumeKm3": 136680.03299164306,
+  "derivedVolumeEquivalentDiameterKm": 63.90999999999998,
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null
+}

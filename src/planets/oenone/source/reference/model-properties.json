@@ -1,0 +1,92 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16312",
+  "modelId": 16312,
+  "modelVersion": "2025-07-15",
+  "diameterKm": 37,
+  "diameterInterpretation": "Convex CITPM shape; 37±2 km volume-equivalent thermal size. Occultations give46±1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 37,
+    "uncertaintyKm": 2,
+    "reportedUncertaintyKm": 2,
+    "uncertaintyKind": "Published size-model uncertainty; not local terrain accuracy or automatically a one-sigma interval.",
+    "diameterSemantics": "Published volume-equivalent diameter of the selected shape solution; isotropic transfer retains source shape and connectivity.",
+    "sourceUrl": "https://arxiv.org/pdf/2505.09437",
+    "reference": "Choukroun et al. (2025), A&A 698, A298",
+    "sourceLabel": "Choukroun et al. (2025), A&A 698, A298",
+    "limitations": "Choukroun2025 Table4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table4 pole1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model16312 as pole1 without rejecting4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
+    "visibleDescription": "Convex CITPM shape; 37±2 km volume-equivalent thermal size. Occultations give46±1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 1.0000000108130913,
+    "metersPerSourceUnit": 1000.0000108130913,
+    "sourceSignedVolume": 26521.847920031152,
+    "sourceVolumeEquivalentDiameter": 36.999999599915625,
+    "sourceSurfaceArea": 4482.780225254776,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 26521.848780380653,
+    "derivedVolumeEquivalentDiameterKm": 37,
+    "archiveDeclaredDiameterKm": 37,
+    "archiveDeclaredUncertaintyKm": 2
+  },
+  "periodHours": 27.9077,
+  "poleEclipticJ2000Degrees": [
+    45,
+    85
+  ],
+  "modelLimitations": "Choukroun2025 Table4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table4 pole1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model16312 as pole1 without rejecting4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/129887/shape.txt",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 1000.0000108130913,
+    "firstVertexKm": [
+      -3.597496038900053,
+      4.693375050749892,
+      16.294010176188618
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      43.71080047264887,
+      39.14784042330917,
+      32.484260351255266
+    ],
+    "volumeCubicKm": 26521.848780380653,
+    "volumeEquivalentRadiusKm": 18.5,
+    "radialRangeKm": [
+      14.950238380678513,
+      22.541925949601627
+    ]
+  },
+  "elevation": [
+    -5,
+    5
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 370,
+    "estimatedErrorMeters": 91.02156066894531,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 26507392466010.25
+    }
+  }
+}

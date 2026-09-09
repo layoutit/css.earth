@@ -4,7 +4,7 @@
   "id": "comet-103p",
   "displayName": "Hartley 2",
   "panel": {
-    "introduction": "103P/Hartley 2 is the elongated, two-lobed comet visited by EPOXI in 2010. In Source constraints, solid gray marks stereo control and blue marks limb silhouettes. The gray grid identifies poorly constrained regions in both views.",
+    "introduction": "EPOXI passed Hartley 2 in 2010. A smooth waist joins its two rough lobes, while jets carry gas, dust and icy particles away from the nucleus.",
     "facts": [
       {
         "id": "diameter",
@@ -20,35 +20,25 @@
         "id": "source-epoch",
         "label": "Shape observations",
         "value": "4 November 2010"
-      },
-      {
-        "id": "coverage",
-        "label": "Stereo coverage",
-        "value": "244 stereo control points on about half the nucleus"
       }
     ],
-    "moreFacts": [
-      {
-        "id": "rendering",
-        "label": "Presentation",
-        "value": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",
     "defaultLens": "constraints",
     "labels": {
       "model": "Shape model",
-      "constraints": "Source constraints"
+      "constraints": "Source constraints",
+      "mri": "EPOXI photographs"
     },
     "controls": [
       {
         "id": "constraints",
         "label": "Source constraints",
-        "description": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
-        "title": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.",
-        "detail": "Grid = poorly constrained",
+        "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+        "title": "Shape-constraint map",
+        "detail": "PDS",
         "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
         "surface": "comet-103p-constraints-surface@2x.webp",
         "poles": "comet-103p-constraints-poles@2x.webp",
@@ -56,14 +46,26 @@
           "id": "pds-shape",
           "path": "../manifest.json",
           "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab"
-        }
+        },
+        "facts": [
+          {
+            "id": "stereo",
+            "label": "Gray",
+            "value": "Stereo measurements"
+          },
+          {
+            "id": "limb",
+            "label": "Blue",
+            "value": "Limb outlines"
+          }
+        ]
       },
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Complete published PDS shape, simplified for display. The gray grid identifies source-flagged poorly constrained regions; solid gray covers stereo-controlled and limb-constrained regions. These are model materials, not observed albedo. Source constraints distinguishes the two better-constrained categories.",
-        "title": "Complete published PDS shape, simplified for display. The gray grid identifies source-flagged poorly constrained regions; solid gray covers stereo-controlled and limb-constrained regions. These are model materials, not observed albedo. Source constraints distinguishes the two better-constrained categories.",
-        "detail": "Grid = poorly constrained",
+        "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+        "title": "Nucleus shape reconstruction",
+        "detail": "PDS",
         "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
         "surface": "comet-103p-model-surface@2x.webp",
         "poles": "comet-103p-model-poles@2x.webp",
@@ -71,7 +73,47 @@
           "id": "pds-shape",
           "path": "../manifest.json",
           "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab"
-        }
+        },
+        "facts": [
+          {
+            "id": "diameter",
+            "label": "Equivalent diameter",
+            "value": "1.16 ± 0.036 km"
+          },
+          {
+            "id": "source-epoch",
+            "label": "Shape observations",
+            "value": "4 November 2010"
+          }
+        ]
+      },
+      {
+        "id": "mri",
+        "label": "EPOXI photographs",
+        "description": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
+        "title": "EPOXI mosaic",
+        "detail": "EPOXI",
+        "thumbnail": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
+        "surface": "comet-103p-mri-surface@2x.webp",
+        "poles": "comet-103p-mri-poles@2x.webp",
+        "source": {
+          "id": "mv10110413-6000001-001-r-path",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+        },
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "4 Nov 2010"
+          },
+          {
+            "id": "scale",
+            "label": "Image sampling",
+            "value": "3.9–8 m/pixel"
+          }
+        ],
+        "summary": "MRI views and restored HRI close-ups show the smooth waist and rough lobes. The photographs retain their shadows; the grid marks gaps or uncertain shape."
       }
     ]
   },
@@ -82,7 +124,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",
@@ -99,6 +141,18 @@
       "role": "surface",
       "description": "Farnham & Thomas 2013 shape model and constraint codes",
       "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/dataset.shtml"
+    },
+    {
+      "label": "HRI",
+      "role": "surface",
+      "description": "Restored HRI photographs archived encounter images",
+      "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
+    },
+    {
+      "label": "MRI",
+      "role": "surface",
+      "description": "EPOXI photographs archived encounter images",
+      "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
     },
     {
       "label": "ESO",

@@ -1,0 +1,791 @@
+{
+  "schema": "cssearth-enceladus-vims-spectral@1",
+  "recipeSha256": "38e6a95373ed32b5d5acacc1fdc2691d735bddc6b5b3c0139eb3cc039999d9e1",
+  "preparerSha256": "25d2a53eaf5d8373d14a85a373588ad662d1e65af427fb36fc64d4575ae27914",
+  "sourceLicense": "CC-BY-4.0",
+  "policy": {
+    "minimumPhaseDegrees": 10,
+    "maximumPhaseDegrees": 120,
+    "maximumIncidenceEmissionDegrees": 80,
+    "maximumResolutionMeters": 20000,
+    "maximumHoldoutPixels": 0.25
+  },
+  "sourceLicenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "sourceLicenseEvidenceUrl": "https://vims.univ-nantes.fr/about",
+  "sourceCredit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
+  "sourceProcessingUrl": "https://vims.univ-nantes.fr/info/isis-calibration",
+  "observations": [
+    {
+      "id": "1487299582_1",
+      "dimensions": [
+        34,
+        16
+      ],
+      "time": [
+        "2005-048T02:19:57.709",
+        "2005-048T02:21:32.081"
+      ],
+      "geometryAcceptedNativeCenters": 214,
+      "holdoutCount": 150,
+      "holdoutPixelsBeforeSelection": {
+        "count": 150,
+        "minimum": 0.008322064227976857,
+        "maximum": 0.15899983263134387,
+        "percentiles": {
+          "5": 0.03235603969894375,
+          "50": 0.0683731951369839,
+          "95": 0.12040598059009157
+        }
+      },
+      "eligibleNativeCenters": 150,
+      "acceptedHoldoutPixels": {
+        "count": 150,
+        "minimum": 0.008322064227976857,
+        "maximum": 0.15899983263134387,
+        "percentiles": {
+          "5": 0.03235603969894375,
+          "50": 0.0683731951369839,
+          "95": 0.12040598059009157
+        }
+      },
+      "geographicBoundsOfEligibleCenters": {
+        "latitude": {
+          "count": 150,
+          "minimum": -12.799384117126465,
+          "maximum": 31.38815689086914,
+          "percentiles": {
+            "5": -6.645716714859009,
+            "50": 9.290993690490723,
+            "95": 25.829912853240955
+          }
+        },
+        "eastLongitude": {
+          "count": 150,
+          "minimum": 59.61640548706055,
+          "maximum": 102.95772552490234,
+          "percentiles": {
+            "5": 64.69116554260253,
+            "50": 81.23755645751953,
+            "95": 97.51115493774414
+          }
+        }
+      },
+      "nativeResolutionMeters": {
+        "count": 150,
+        "minimum": 13089.8974609375,
+        "maximum": 13286.4306640625,
+        "percentiles": {
+          "5": 13111.498583984376,
+          "50": 13197.39013671875,
+          "95": 13269.3658203125
+        }
+      },
+      "nativePhaseDegrees": {
+        "count": 150,
+        "minimum": 26.35926628112793,
+        "maximum": 26.694459915161133,
+        "percentiles": {
+          "5": 26.402064895629884,
+          "50": 26.54161262512207,
+          "95": 26.653612041473387
+        }
+      },
+      "nativeWavelengthsMicrometers": {
+        "48": 1.65586,
+        "58": 1.82062,
+        "70": 2.01829,
+        "81": 2.2001,
+        "134": 3.08163,
+        "135": 3.09833,
+        "136": 3.11501
+      },
+      "continuumRightWeight": 0.5208970169705913,
+      "indices": {
+        "depth": {
+          "count": 150,
+          "minimum": 0.5968744158744812,
+          "maximum": 0.6633983850479126,
+          "percentiles": {
+            "5": 0.6229623138904572,
+            "50": 0.6367888748645782,
+            "95": 0.6445116013288498
+          }
+        },
+        "ratio": {
+          "count": 150,
+          "minimum": 0.032034631818532944,
+          "maximum": 0.08064814656972885,
+          "percentiles": {
+            "5": 0.03354557938873768,
+            "50": 0.040257930755615234,
+            "95": 0.050190411694347854
+          }
+        }
+      }
+    },
+    {
+      "id": "1489049741_1",
+      "dimensions": [
+        36,
+        24
+      ],
+      "time": [
+        "2005-068T08:29:05.458",
+        "2005-068T08:30:20.458"
+      ],
+      "geometryAcceptedNativeCenters": 596,
+      "holdoutCount": 498,
+      "holdoutPixelsBeforeSelection": {
+        "count": 498,
+        "minimum": 0.007005260929498223,
+        "maximum": 0.19189275944916107,
+        "percentiles": {
+          "5": 0.012590475529837329,
+          "50": 0.03858987973282095,
+          "95": 0.09773372267780389
+        }
+      },
+      "eligibleNativeCenters": 498,
+      "acceptedHoldoutPixels": {
+        "count": 498,
+        "minimum": 0.007005260929498223,
+        "maximum": 0.19189275944916107,
+        "percentiles": {
+          "5": 0.012590475529837329,
+          "50": 0.03858987973282095,
+          "95": 0.09773372267780389
+        }
+      },
+      "geographicBoundsOfEligibleCenters": {
+        "latitude": {
+          "count": 498,
+          "minimum": 2.9141499996185303,
+          "maximum": 52.30851364135742,
+          "percentiles": {
+            "5": 4.688423323631286,
+            "50": 22.421226501464844,
+            "95": 46.52588729858398
+          }
+        },
+        "eastLongitude": {
+          "count": 498,
+          "minimum": 83.52342987060547,
+          "maximum": 141.4146728515625,
+          "percentiles": {
+            "5": 95.06395149230957,
+            "50": 119.7796859741211,
+            "95": 138.82105560302733
+          }
+        }
+      },
+      "nativeResolutionMeters": {
+        "count": 498,
+        "minimum": 6933.025390625,
+        "maximum": 7212.99169921875,
+        "percentiles": {
+          "5": 6948.851953125,
+          "50": 7053.137451171875,
+          "95": 7178.873315429688
+        }
+      },
+      "nativePhaseDegrees": {
+        "count": 498,
+        "minimum": 44.0588493347168,
+        "maximum": 44.98374938964844,
+        "percentiles": {
+          "5": 44.17562484741211,
+          "50": 44.49762153625488,
+          "95": 44.86330795288086
+        }
+      },
+      "nativeWavelengthsMicrometers": {
+        "48": 1.65586,
+        "58": 1.82062,
+        "70": 2.01829,
+        "81": 2.2001,
+        "134": 3.08163,
+        "135": 3.09833,
+        "136": 3.11501
+      },
+      "continuumRightWeight": 0.5208970169705913,
+      "indices": {
+        "depth": {
+          "count": 498,
+          "minimum": 0.6165262460708618,
+          "maximum": 0.6835938096046448,
+          "percentiles": {
+            "5": 0.6482859402894974,
+            "50": 0.663398027420044,
+            "95": 0.6728393375873566
+          }
+        },
+        "ratio": {
+          "count": 498,
+          "minimum": 0.023067334666848183,
+          "maximum": 0.052641380578279495,
+          "percentiles": {
+            "5": 0.02880850890651345,
+            "50": 0.03644205629825592,
+            "95": 0.0433814937248826
+          }
+        }
+      }
+    },
+    {
+      "id": "1702362997_1",
+      "dimensions": [
+        27,
+        30
+      ],
+      "time": [
+        "2011-346T05:46:11.750",
+        "2011-346T05:53:23.654"
+      ],
+      "geometryAcceptedNativeCenters": 406,
+      "holdoutCount": 322,
+      "holdoutPixelsBeforeSelection": {
+        "count": 322,
+        "minimum": 0.005065104754739367,
+        "maximum": 0.26501897609373926,
+        "percentiles": {
+          "5": 0.0175356639852272,
+          "50": 0.06899941662732922,
+          "95": 0.19845470057515857
+        }
+      },
+      "eligibleNativeCenters": 321,
+      "acceptedHoldoutPixels": {
+        "count": 321,
+        "minimum": 0.005065104754739367,
+        "maximum": 0.2456841409409123,
+        "percentiles": {
+          "5": 0.01753118356246956,
+          "50": 0.06882896007363859,
+          "95": 0.19364907361356176
+        }
+      },
+      "geographicBoundsOfEligibleCenters": {
+        "latitude": {
+          "count": 321,
+          "minimum": -55.7650146484375,
+          "maximum": 59.38656234741211,
+          "percentiles": {
+            "5": -44.84408950805664,
+            "50": -4.006043910980225,
+            "95": 44.31816864013672
+          }
+        },
+        "eastLongitude": {
+          "count": 321,
+          "minimum": 203.57777404785156,
+          "maximum": 294.1793518066406,
+          "percentiles": {
+            "5": 214.83697509765625,
+            "50": 246.0158233642578,
+            "95": 285.7003173828125
+          }
+        }
+      },
+      "nativeResolutionMeters": {
+        "count": 321,
+        "minimum": 17181.513671875,
+        "maximum": 17996.9296875,
+        "percentiles": {
+          "5": 17236.34765625,
+          "50": 17535.904296875,
+          "95": 17907.373046875
+        }
+      },
+      "nativePhaseDegrees": {
+        "count": 321,
+        "minimum": 22.89846420288086,
+        "maximum": 24.845808029174805,
+        "percentiles": {
+          "5": 23.069719314575195,
+          "50": 23.913917541503906,
+          "95": 24.679903030395508
+        }
+      },
+      "nativeWavelengthsMicrometers": {
+        "48": 1.66246,
+        "58": 1.82722,
+        "70": 2.02488,
+        "81": 2.20671,
+        "134": 3.08823,
+        "135": 3.10492,
+        "136": 3.12161
+      },
+      "continuumRightWeight": 0.5208569395768001,
+      "indices": {
+        "depth": {
+          "count": 321,
+          "minimum": 0.5553554892539978,
+          "maximum": 0.6695030927658081,
+          "percentiles": {
+            "5": 0.5946931838989258,
+            "50": 0.6254098415374756,
+            "95": 0.6573696136474609
+          }
+        },
+        "ratio": {
+          "count": 321,
+          "minimum": 0.03872567415237427,
+          "maximum": 0.08796779066324234,
+          "percentiles": {
+            "5": 0.04094111546874046,
+            "50": 0.05186491087079048,
+            "95": 0.06670638918876648
+          }
+        }
+      }
+    },
+    {
+      "id": "1702361128_1",
+      "dimensions": [
+        12,
+        12
+      ],
+      "time": [
+        "2011-346T05:15:02.770",
+        "2011-346T05:16:26.893"
+      ],
+      "geometryAcceptedNativeCenters": 144,
+      "holdoutCount": 100,
+      "holdoutPixelsBeforeSelection": {
+        "count": 100,
+        "minimum": 0.0015295076326307003,
+        "maximum": 0.20969784141610073,
+        "percentiles": {
+          "5": 0.007466550030640383,
+          "50": 0.036841861294384326,
+          "95": 0.08626601560768293
+        }
+      },
+      "eligibleNativeCenters": 100,
+      "acceptedHoldoutPixels": {
+        "count": 100,
+        "minimum": 0.0015295076326307003,
+        "maximum": 0.20969784141610073,
+        "percentiles": {
+          "5": 0.007466550030640383,
+          "50": 0.036841861294384326,
+          "95": 0.08626601560768293
+        }
+      },
+      "geographicBoundsOfEligibleCenters": {
+        "latitude": {
+          "count": 100,
+          "minimum": -19.426992416381836,
+          "maximum": 18.013216018676758,
+          "percentiles": {
+            "5": -15.198106813430787,
+            "50": -0.7680561244487762,
+            "95": 13.721055841445922
+          }
+        },
+        "eastLongitude": {
+          "count": 100,
+          "minimum": 230.95468139648438,
+          "maximum": 269.5308837890625,
+          "percentiles": {
+            "5": 235.47697067260742,
+            "50": 250.37623596191406,
+            "95": 265.0994018554687
+          }
+        }
+      },
+      "nativeResolutionMeters": {
+        "count": 100,
+        "minimum": 12768.66015625,
+        "maximum": 12910.3974609375,
+        "percentiles": {
+          "5": 12771.469140625,
+          "50": 12835.8271484375,
+          "95": 12900.873779296875
+        }
+      },
+      "nativePhaseDegrees": {
+        "count": 100,
+        "minimum": 14.176610946655273,
+        "maximum": 14.713712692260742,
+        "percentiles": {
+          "5": 14.233002376556396,
+          "50": 14.44234037399292,
+          "95": 14.653363704681396
+        }
+      },
+      "nativeWavelengthsMicrometers": {
+        "48": 1.66246,
+        "58": 1.82722,
+        "70": 2.02488,
+        "81": 2.20671,
+        "134": 3.08823,
+        "135": 3.10492,
+        "136": 3.12161
+      },
+      "continuumRightWeight": 0.5208569395768001,
+      "indices": {
+        "depth": {
+          "count": 100,
+          "minimum": 0.6034492254257202,
+          "maximum": 0.6532121300697327,
+          "percentiles": {
+            "5": 0.608669301867485,
+            "50": 0.6213145852088928,
+            "95": 0.646477746963501
+          }
+        },
+        "ratio": {
+          "count": 100,
+          "minimum": 0.04542173817753792,
+          "maximum": 0.0672285333275795,
+          "percentiles": {
+            "5": 0.0462405065074563,
+            "50": 0.05200928635895252,
+            "95": 0.05958410426974296
+          }
+        }
+      }
+    },
+    {
+      "id": "1500061929_1",
+      "dimensions": [
+        28,
+        14
+      ],
+      "time": [
+        "2005-195T19:24:22.293",
+        "2005-195T19:25:34.192"
+      ],
+      "geometryAcceptedNativeCenters": 392,
+      "holdoutCount": 312,
+      "holdoutPixelsBeforeSelection": {
+        "count": 312,
+        "minimum": 0.0013867675791872011,
+        "maximum": 0.3217334145190024,
+        "percentiles": {
+          "5": 0.010829280878589025,
+          "50": 0.06042076674428261,
+          "95": 0.2635829787389531
+        }
+      },
+      "eligibleNativeCenters": 292,
+      "acceptedHoldoutPixels": {
+        "count": 292,
+        "minimum": 0.0013867675791872011,
+        "maximum": 0.2495387102377597,
+        "percentiles": {
+          "5": 0.010414393056254394,
+          "50": 0.05894660033770977,
+          "95": 0.17916554810175078
+        }
+      },
+      "geographicBoundsOfEligibleCenters": {
+        "latitude": {
+          "count": 292,
+          "minimum": -60.54758071899414,
+          "maximum": -31.214479446411133,
+          "percentiles": {
+            "5": -56.00004425048828,
+            "50": -44.665531158447266,
+            "95": -34.97829265594483
+          }
+        },
+        "eastLongitude": {
+          "count": 292,
+          "minimum": 105.1624526977539,
+          "maximum": 155.61839294433594,
+          "percentiles": {
+            "5": 111.39904441833497,
+            "50": 127.05840682983398,
+            "95": 148.39135971069337
+          }
+        }
+      },
+      "nativeResolutionMeters": {
+        "count": 292,
+        "minimum": 6768.54833984375,
+        "maximum": 7012.2236328125,
+        "percentiles": {
+          "5": 6778.050708007812,
+          "50": 6893.811279296875,
+          "95": 6997.0511474609375
+        }
+      },
+      "nativePhaseDegrees": {
+        "count": 292,
+        "minimum": 45.785789489746094,
+        "maximum": 46.26236343383789,
+        "percentiles": {
+          "5": 45.822675704956055,
+          "50": 46.09040832519531,
+          "95": 46.24748783111572
+        }
+      },
+      "nativeWavelengthsMicrometers": {
+        "48": 1.65586,
+        "58": 1.82062,
+        "70": 2.01829,
+        "81": 2.2001,
+        "134": 3.08163,
+        "135": 3.09833,
+        "136": 3.11501
+      },
+      "continuumRightWeight": 0.5208970169705913,
+      "indices": {
+        "depth": {
+          "count": 292,
+          "minimum": 0.6412068605422974,
+          "maximum": 0.6990525126457214,
+          "percentiles": {
+            "5": 0.6472844451665878,
+            "50": 0.6635656356811523,
+            "95": 0.6815992712974548
+          }
+        },
+        "ratio": {
+          "count": 292,
+          "minimum": 0.047471784055233,
+          "maximum": 0.08902548998594284,
+          "percentiles": {
+            "5": 0.053811001032590865,
+            "50": 0.06105197034776211,
+            "95": 0.07156675979495049
+          }
+        }
+      }
+    },
+    {
+      "id": "1500061170_1",
+      "dimensions": [
+        24,
+        12
+      ],
+      "time": [
+        "2005-195T19:11:43.633",
+        "2005-195T19:12:42.541"
+      ],
+      "geometryAcceptedNativeCenters": 205,
+      "holdoutCount": 143,
+      "holdoutPixelsBeforeSelection": {
+        "count": 143,
+        "minimum": 0.004738973102794024,
+        "maximum": 0.1428895549004803,
+        "percentiles": {
+          "5": 0.02660943698009598,
+          "50": 0.06643600104682133,
+          "95": 0.13658929052890584
+        }
+      },
+      "eligibleNativeCenters": 143,
+      "acceptedHoldoutPixels": {
+        "count": 143,
+        "minimum": 0.004738973102794024,
+        "maximum": 0.1428895549004803,
+        "percentiles": {
+          "5": 0.02660943698009598,
+          "50": 0.06643600104682133,
+          "95": 0.13658929052890584
+        }
+      },
+      "geographicBoundsOfEligibleCenters": {
+        "latitude": {
+          "count": 143,
+          "minimum": -78.13670349121094,
+          "maximum": -50.555118560791016,
+          "percentiles": {
+            "5": -75.86032180786133,
+            "50": -62.793338775634766,
+            "95": -51.89361152648925
+          }
+        },
+        "eastLongitude": {
+          "count": 143,
+          "minimum": 173.92620849609375,
+          "maximum": 223.49127197265625,
+          "percentiles": {
+            "5": 175.39308013916016,
+            "50": 191.86239624023438,
+            "95": 211.74402465820313
+          }
+        }
+      },
+      "nativeResolutionMeters": {
+        "count": 143,
+        "minimum": 9805.609375,
+        "maximum": 9923.955078125,
+        "percentiles": {
+          "5": 9811.851953125,
+          "50": 9866.6396484375,
+          "95": 9912.20810546875
+        }
+      },
+      "nativePhaseDegrees": {
+        "count": 143,
+        "minimum": 45.76261520385742,
+        "maximum": 45.96397399902344,
+        "percentiles": {
+          "5": 45.770498275756836,
+          "50": 45.871185302734375,
+          "95": 45.95596580505371
+        }
+      },
+      "nativeWavelengthsMicrometers": {
+        "48": 1.65586,
+        "58": 1.82062,
+        "70": 2.01829,
+        "81": 2.2001,
+        "134": 3.08163,
+        "135": 3.09833,
+        "136": 3.11501
+      },
+      "continuumRightWeight": 0.5208970169705913,
+      "indices": {
+        "depth": {
+          "count": 143,
+          "minimum": 0.6515226364135742,
+          "maximum": 0.8077796101570129,
+          "percentiles": {
+            "5": 0.6655157148838043,
+            "50": 0.6908819079399109,
+            "95": 0.7688224971294403
+          }
+        },
+        "ratio": {
+          "count": 143,
+          "minimum": 0.014575288631021976,
+          "maximum": 0.09818810969591141,
+          "percentiles": {
+            "5": 0.023288817331194877,
+            "50": 0.05307965353131294,
+            "95": 0.07339073941111565
+          }
+        }
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "depth",
+      "output": "enceladus-vims-depth.tif",
+      "sha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
+      "bytes": 101934,
+      "dimensions": [
+        1024,
+        512
+      ],
+      "noData": -9999.0,
+      "acceptedDisplayPixels": 94916,
+      "missingDisplayPixels": 429372,
+      "acceptedSphereAreaEstimateFraction": 0.23774101224513416,
+      "acceptedNativeCenterCells": {
+        "1487299582_1": 121,
+        "1489049741_1": 452,
+        "1702362997_1": 282,
+        "1702361128_1": 81,
+        "1500061929_1": 233,
+        "1500061170_1": 115
+      },
+      "statistics": {
+        "count": 94916,
+        "minimum": 0.5553554892539978,
+        "maximum": 0.8077796101570129,
+        "percentiles": {
+          "5": 0.6059719920158386,
+          "50": 0.6381316184997559,
+          "95": 0.6888459920883179
+        }
+      },
+      "sourceOwnerCounts": {
+        "1487299582_1": 6867,
+        "1489049741_1": 17497,
+        "1702362997_1": 51683,
+        "1702361128_1": 6474,
+        "1500061929_1": 5180,
+        "1500061170_1": 7215
+      },
+      "audit": [
+        {
+          "file": "enceladus-vims-depth-observation.tif",
+          "sha256": "6de961347e1c3d7f585053a159f758375d718e7540d9b8fba3459d1c5c5dfa36",
+          "bytes": 11826
+        },
+        {
+          "file": "enceladus-vims-depth-source-pixel.tif",
+          "sha256": "d402e563883f33d0aae324a64d95530b92b4c07145255bb2d6e0eed7275a706b",
+          "bytes": 26264
+        }
+      ]
+    },
+    {
+      "kind": "ratio",
+      "output": "enceladus-vims-ratio.tif",
+      "sha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
+      "bytes": 109752,
+      "dimensions": [
+        1024,
+        512
+      ],
+      "noData": -9999.0,
+      "acceptedDisplayPixels": 94916,
+      "missingDisplayPixels": 429372,
+      "acceptedSphereAreaEstimateFraction": 0.23774101224513416,
+      "acceptedNativeCenterCells": {
+        "1487299582_1": 121,
+        "1489049741_1": 452,
+        "1702362997_1": 282,
+        "1702361128_1": 81,
+        "1500061929_1": 233,
+        "1500061170_1": 115
+      },
+      "statistics": {
+        "count": 94916,
+        "minimum": 0.014575288631021976,
+        "maximum": 0.09818810969591141,
+        "percentiles": {
+          "5": 0.032616082578897476,
+          "50": 0.04913773387670517,
+          "95": 0.0667581707239151
+        }
+      },
+      "sourceOwnerCounts": {
+        "1487299582_1": 6867,
+        "1489049741_1": 17497,
+        "1702362997_1": 51683,
+        "1702361128_1": 6474,
+        "1500061929_1": 5180,
+        "1500061170_1": 7215
+      },
+      "audit": [
+        {
+          "file": "enceladus-vims-ratio-observation.tif",
+          "sha256": "6de961347e1c3d7f585053a159f758375d718e7540d9b8fba3459d1c5c5dfa36",
+          "bytes": 11826
+        },
+        {
+          "file": "enceladus-vims-ratio-source-pixel.tif",
+          "sha256": "d402e563883f33d0aae324a64d95530b92b4c07145255bb2d6e0eed7275a706b",
+          "bytes": 26264
+        }
+      ]
+    }
+  ],
+  "interpretation": {
+    "registration": "native planetocentric east-positive centers, interior spherical cells",
+    "transfer": "nearest archive-native vertex inside a supported four-center cell; no further spatial spectral interpolation",
+    "depth": "fixed native channels 58/70/81; 1-R70/linear continuum using native wavelengths",
+    "ratio": "median(R134,R135,R136)/R48; near-3.1/1.66 micrometer spectral ratio",
+    "photometricCorrection": "none; illumination, wavelength drift, noise and grain size affect the indices",
+    "sourceProcessing": "Nantes RC19 calibration, noise filter and local lowpass replacement are retained",
+    "absolutePointingAccuracy": "unresolved; holdouts prove local interpolation consistency only",
+    "overlapPolicy": "native cell worst resolution, then worst emission, then fixed recipe observation and cell order",
+    "referenceRadius": "252100 m sets only angular raster coordinates; it does not replace body geometry or source ellipsoid navigation",
+    "grid": "display sampling density, not native instrument resolution; partial footprints only",
+    "notInferred": [
+      "ice abundance",
+      "crystallinity percentage",
+      "temperature",
+      "terrain age"
+    ]
+  }
+}

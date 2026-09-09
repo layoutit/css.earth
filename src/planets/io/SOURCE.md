@@ -51,17 +51,21 @@ The GeoTIFF georeference, rather than the catalog's positive-west coordinate
 labels, defines raster sampling. Both products use a simple cylindrical sphere
 of radius 1821460 m, center longitude 0°, origin (-5723000, 2862000) m and
 pixel increments (+1000, -1000) m. East increases to the right, north is up.
-Preparation rolls the resampled raster by 180° into the shared surface's
-0–360° positive-east longitude range, without horizontal reflection. [Pele's](https://planetarynames.wr.usgs.gov/Feature/4638)
+Preparation maps each canonical output pixel centre through the actual metric
+origin and increments, using native bilinear interpolation. The outer longitude
+is −180.022479853° and the map spans 360.013503743°; those fractional bounds are
+preserved rather than rounded to an integer roll or stretched to a full globe.
+Output longitude remains 0–360° positive-east, without horizontal reflection. [Pele's](https://planetarynames.wr.usgs.gov/Feature/4638)
 large red deposit at 18.71° S, 104.72° E (255.28° W) is an independent orientation
 landmark. The 30 m difference from the current astronomical mean radius is not
 interpreted as terrain.
 
 `GDAL_NODATA=0` marks missing raster data. Monochrome uses exact zero; enhanced
 color requires the complete RGB tuple to be zero. Low but nonzero observed dark
-terrain is retained. Validity is attached before Lanczos resampling, which
-premultiplies alpha; partially covered output pixels are withheld to avoid black
-bleeding into observed pixels.
+terrain is retained. Every native contributor with nonzero bilinear weight must
+be valid; incomplete or masked interpolation footprints are withheld. This
+coordinate correction replaces the earlier whole-image resize and roll, so
+prepared image bytes change while the original source values remain unchanged.
 
 USGS explicitly states that color lacks coverage within approximately 5° of
 both poles and that merged polar color was interpolated. We therefore withhold
@@ -107,3 +111,36 @@ preparer or runtime is required. Run `pnpm build:preparation` before the command
 above. Omit `--write` from preparation to generate an isolated comparison stage.
 
 Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+
+## Interpreted geology
+
+The Geology view uses the original `Io_GeoUnits` polygon/attribute/projection
+members from [USGS SIM3168](https://pubs.usgs.gov/sim/3168/), Williams et al.
+(2011), at 1:15,000,000. Fourteen base-unit categories distinguish plains, flows,
+patera floors and mountains. Five diffuse-deposit classes belong to a separate
+overlay and are not rendered here. Colors are authored categorical choices,
+not measured color, chemical abundance or elevation. No terrain displacement is
+derived from these polygons.
+
+Exact raw members and archive/member CRC32/SHA-256 receipts are retained in
+`source/science/geology-sim3168/`. The actual SHP is signed east-positive
+planetocentric degrees on a 1,821,460 m sphere. West-longitude point attributes
+independently verify the sign: the same first point is −97.1448317468° in SHP X
+and +97.144831747° in `Long_W`. The displayed 1,821,490 m radius retains those
+angular positions; the 30 m radius difference is not height. `NoData` polygons,
+unmapped polar areas and conflicting overlapping categories remain missing.
+
+The separate label-point layer differs from final polygon classifications at
+43 of 1,498 comparable points. These source discrepancies and the explicit
+`Pb/Pby`, `Pw/Pbw`, `T/Tb` aliases are retained in the registration audit, rather
+than forcing label points to replace the polygon `Unit` attribute. Six distributed
+anchors, exact source hashes, hole/seam behavior, and categorical exclusion rules
+are exercised by the focused geology/source tests. B2 preparation and browser
+qualification are recorded separately in `docs/moons/b2-preparation/`.
+
+## Visible spectral surface views
+
+The VLT/MUSE views use original July 2019 measured maps from King et al.
+The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate
+evidence, first-valid-night coverage, registration limits and residual night
+differences. Every conversion is offline; the scene geometry remains unchanged.

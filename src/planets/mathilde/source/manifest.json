@@ -40,7 +40,13 @@
       },
       "coverage": "Published visualization shape: Thomas nominal model resampled to 5 degrees; Stooke smoothed unobserved areas and aesthetically modified shadowed crater floors. Not wholly measured terrain.",
       "expectedBytes": 70226,
-      "expectedSha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720"
+      "expectedSha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab"
+      }
     },
     {
       "id": "mathilde-observed-shape",
@@ -65,7 +71,13 @@
       },
       "coverage": "Incomplete Thomas measured-region radius model; exact 26.5 km unobserved placeholders are masked before interpolation. The coordinate axes and prime meridian are arbitrary.",
       "expectedBytes": 236192,
-      "expectedSha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66"
+      "expectedSha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab"
+      }
     },
     {
       "id": "mathilde-normal",
@@ -95,7 +107,13 @@
         "reference/stooke-map-guide.html"
       ],
       "expectedBytes": 330486,
-      "expectedSha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e"
+      "expectedSha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg"
+      }
     },
     {
       "id": "inter-title-font",
@@ -147,8 +165,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source label, survey evidence or authored package input.",
-      "expectedBytes": 10780,
-      "expectedSha256": "27062640fd4612582c93f250daf79408bd198e04a979d16f7b77c2031cdadb5b"
+      "expectedBytes": 10219,
+      "expectedSha256": "ba9e7d83d9c64f66293d66b313d91da0184c346a1b1876c9b0538fb997ad4642"
     },
     {
       "path": "maps/253mathm.fit",

@@ -121,15 +121,16 @@
           "label": "Visible color",
           "thumbnailUrl": "/scenes/pluto/pluto-surface-thumbnail.webp",
           "description": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-          "title": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-          "detail": "Color mosaic"
+          "title": "MVIC color mosaic",
+          "detail": "Color mosaic",
+          "summary": "Color observations cover only part of the surface, with detail varying by region. The gray grid marks missing imagery."
         },
         {
           "id": "topography",
           "label": "Elevation",
           "thumbnailUrl": "/scenes/pluto/pluto-topography-thumbnail.webp",
           "description": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
-          "title": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+          "title": "Stereo elevation map",
           "detail": "Stereo relief",
           "legend": {
             "kind": "scale",
@@ -144,15 +145,17 @@
               "+8"
             ],
             "sourceUrl": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
-          }
+          },
+          "summary": "Colors span heights from −8 to +8 km, with shading to reveal slopes. The gray grid marks areas without elevation data."
         },
         {
           "id": "monochrome",
           "label": "Monochrome",
           "thumbnailUrl": "/scenes/pluto/pluto-monochrome-thumbnail.webp",
           "description": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
-          "title": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
-          "detail": "Photo mosaic"
+          "title": "LORRI/MVIC mosaic",
+          "detail": "Photo mosaic",
+          "summary": "Images from LORRI and MVIC provide varying surface detail. The gray grid marks regions without imagery in this mosaic."
         }
       ]
     },

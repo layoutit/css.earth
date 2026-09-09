@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "ed36804c6ceebfea535edfc871a42efe419e23ce18afdc5c3cceb9caa183ada9"
+          "sha256": "e519d1d09e231870e01487791f1a12b2afd6ec7ad8bbb53efa9f19742da38948"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "77d6548c5f9977fdde53403ff14831ff77336bede3d5a009a71d9f81a35a5584"
+          "sha256": "6c12a4d0db5673c3e19296f78675617625d26d0cf1808e60b37a6d1927916c80"
         },
         {
           "id": "title",
@@ -43,11 +43,11 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "d7c05b93f19a8339614bc5b214df6446cd4fcd3c99c9cef48d54fab5654a7d8c"
+          "sha256": "4d334c6aacb886dc42665d16ee88da2e9e3abfaa6f0c367b10487169b883014a"
         }
       ],
       "shape": {
-        "kind": "sphere",
+        "kind": "radial-terrain",
         "radiusKm": 764.5
       },
       "surfaces": [
@@ -68,6 +68,26 @@
             },
             {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "relative-albedo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "infrared",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ice-absorption",
               "source": "content",
               "material": "lighting"
             }
@@ -113,6 +133,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "26c8e07697aa949b7503cf49e238c10c1ff0d4a5f0a0f3a849cbdbb6d9e3be68"
+    "sha256": "34239cd10d4d3b50b77b812764944204e8ba0d03f83145eaeae385d492849f85"
   }
 }

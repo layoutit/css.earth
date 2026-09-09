@@ -39,7 +39,13 @@
       "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
       "catalog": "https://science.nasa.gov/resource/mimas-global-map-june-2017/",
       "expectedBytes": 6959979,
-      "expectedSha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b"
+      "expectedSha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_unlabeled.png"
+      }
     },
     {
       "id": "cassini-iss-2014-mimas-color",
@@ -78,7 +84,13 @@
       "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
       "catalog": "https://www.jpl.nasa.gov/images/pia18437-color-maps-of-mimas-2014/",
       "expectedBytes": 1848860,
-      "expectedSha256": "303d5653875d507e8859a26d0afdedd0173c7d4e691f27c3266ca63d1aa4f97f"
+      "expectedSha256": "303d5653875d507e8859a26d0afdedd0173c7d4e691f27c3266ca63d1aa4f97f",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18437.jpg"
+      }
     },
     {
       "id": "cassini-spc-2025-elevation",
@@ -115,7 +127,13 @@
         ]
       },
       "coverage": "All 2,468,642 raster cells are finite and valid. The geotransform covers less than the global bounding box advertised in the label; preserve the eastern and southern edge gaps.",
-      "units": "Radius from center in meters; height relative to 198.2 km sphere is derived during preparation."
+      "units": "Radius from center in meters; height relative to 198.2 km sphere is derived during preparation.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif"
+      }
     },
     {
       "id": "cassini-spc-2025-shape",
@@ -139,7 +157,13 @@
         "longitudeDirection": "east-positive"
       },
       "coverage": "Complete released Q128 OBJ model: 98,306 vertices and 196,608 triangular faces, approximately 2.2 km source spacing. Regional accuracy varies. Runtime geometry is sampled from this model, without height exaggeration or terrain filling.",
-      "units": "Cartesian coordinates in kilometers; preparation converts to meters."
+      "units": "Cartesian coordinates in kilometers; preparation converts to meters.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.obj"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -221,8 +245,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 11120,
-      "expectedSha256": "647738122e552ac88b90daa6fd918bb44348ef8308f4e68db6cc031bd19e0509",
+      "expectedBytes": 10641,
+      "expectedSha256": "70dc83fe97e2c4f964556e8478803dee03e7d5c749a03e2393a1f92e2179db70",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {

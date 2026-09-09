@@ -321,3 +321,23 @@ test('hover coalesces pointer events and follows the latest published targets wh
   assert.equal(f.target.dataset.objectHovered, undefined);
   f.destroy();
 });
+
+test('empty-space clicks never deselect, while body hits still select', () => {
+  const f = fixture(); let deselections = 0;
+  f.host.addEventListener('objectdeselect', () => deselections++);
+  firstClick(f); assert.equal(deselections, 0);
+  f.fire('pointerdown', 600);
+  f.fire('pointermove', 610, { clientX: 580 });
+  f.fire('pointerup', 620, { clientX: 580 });
+  f.fire('click', 620, { clientX: 580 });
+  assert.equal(deselections, 0);
+  f.fire('click', 900, { ctrlKey: true }); assert.equal(deselections, 0);
+  f.document.targets = [f.target];
+  f.fire('pointerdown', 1100); f.fire('pointerup', 1120); f.fire('click', 1120);
+  assert.equal(f.selections, 1); assert.equal(deselections, 0);
+  f.destroy();
+  const detail = fixture(() => true, () => true);
+  detail.host.addEventListener('objectdeselect', () => deselections++);
+  firstClick(detail); assert.equal(deselections, 0);
+  detail.destroy();
+});

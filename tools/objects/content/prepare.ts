@@ -1,6 +1,6 @@
 // Shared object-content preparation. Source JSON owns facts, labels, recipes,
 // and provenance; this module owns the derived shell payload.
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
 import { prepareLensLabels } from "../../../site/prepare-lens-labels.mjs";
@@ -158,12 +158,13 @@ export async function prepareObjectContentAssets({
   const shellLenses = {
     title: preparedWithAssets.lenses.title,
     defaultLens: preparedWithAssets.lenses.defaultLens,
-    controls: preparedWithAssets.lenses.controls.map(({ id, label, detail, thumbnailUrl, description, facts, legend, legendNote, title }) => ({
+    controls: preparedWithAssets.lenses.controls.map(({ id, label, detail, thumbnailUrl, description, summary, facts, legend, legendNote, title }) => ({
       id,
       label,
       ...(detail ? { detail } : {}),
       thumbnailUrl,
       description,
+      ...(summary ? { summary } : {}),
       ...(facts?.length ? { facts } : {}),
       ...(legend ? { legend } : {}),
       ...(legendNote ? { legendNote } : {}),
@@ -259,7 +260,11 @@ async function deriveLensBillboardColors(
       : control.surface2xUrl;
     if (typeof candidate !== "string") continue;
     try {
-      const { channels } = await sharp(resolve(publicDirectory, basename(new URL(candidate, "https://cssearth.invalid").pathname)))
+      const path = resolve(publicDirectory, basename(new URL(candidate, "https://cssearth.invalid").pathname));
+      // sharp's missing-file error does not carry Node's ENOENT code.
+      // Keep this optional probe's existing absence policy explicit.
+      await access(path);
+      const { channels } = await sharp(path)
         .removeAlpha()
         .stats();
       colors.set(controlId, `#${channels.slice(0, 3).map(({ mean }) => Math.round(mean).toString(16).padStart(2, "0")).join("")}`);

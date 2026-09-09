@@ -4,6 +4,10 @@ export const MATERIAL_SYMBOLS_OUTLINED = Object.freeze({
   sourceCommit: "0cbb08816df07faaae3dca060d4ebb10b66c214f",
   viewBox: "0 -960 960 960",
   icons: Object.freeze({
+    open_in_new: Object.freeze({
+      path: "M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z",
+      sourceSha256: "8b464b3779cc1d22fe0a84d722d6bc0f7fb425e7dafa46298636d376a3808458",
+    }),
     left_panel_close: Object.freeze({
       path: "M660-320v-320L500-480l160 160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm120-80v-560H200v560h120Zm80 0h360v-560H400v560Zm-80 0H200h120Z",
       sourceSha256: "5fdc881396f531dc3aaf44af75425b43f0df0b0935682cf43bd9e2138afb8d48",

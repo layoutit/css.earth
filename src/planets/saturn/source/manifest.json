@@ -72,7 +72,13 @@
       "consumers": [
         "scene"
       ],
-      "expectedBytes": 105281
+      "expectedBytes": 105281,
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
+      }
     },
     {
       "id": "saturn-approved-fixed-material",
@@ -310,7 +316,13 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880
+      "expectedBytes": 6482880,
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-2025b-f225w",
@@ -324,7 +336,13 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880
+      "expectedBytes": 6482880,
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-2025a-fq889n",
@@ -338,7 +356,13 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880
+      "expectedBytes": 6482880,
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-2025b-fq889n",
@@ -352,7 +376,13 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880
+      "expectedBytes": 6482880,
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
+      }
     },
     {
       "id": "eso-saturn-milky-way-panorama",
@@ -464,8 +494,8 @@
     {
       "id": "saturn-authored-content",
       "path": "content/object.json",
-      "expectedBytes": 17487,
-      "expectedSha256": "5f193a898d67f65fd9a4e3c8bbdb1168003f70a33afab63a2c123a050236a677",
+      "expectedBytes": 18171,
+      "expectedSha256": "35d71bad2dba37f7c4fb26a62f0c197103a2dcc22f748ee2a487e2a477c77d52",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",

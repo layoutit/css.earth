@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-contact-ellipsoids@1",
+  "source": "https://arxiv.org/abs/1911.04897",
+  "sourceSection": "Table 3 and Section 5.3",
+  "family": "HST contact spheres, scaled with Spitzer MIPS",
+  "origin": "equal-density-volume-centroid",
+  "axes": "X joins the two centres; Z is perpendicular to X and follows the model pole. Body meridian is arbitrary.",
+  "lobes": [
+    {
+      "semiaxesKm": [
+        2.8,
+        2.8,
+        2.8
+      ]
+    },
+    {
+      "semiaxesKm": [
+        1.2,
+        1.2,
+        1.2
+      ]
+    }
+  ],
+  "fluxScale": 0.9,
+  "fluxScaleUncertainty": 0.09,
+  "dimensionScale": "sqrt(fluxScale)",
+  "publishedRoundedRadiiKm": [
+    2.7,
+    1.1
+  ],
+  "publishedRadiusUncertaintyKm": 0.1,
+  "subdivisions": 4,
+  "qualification": "Inferred smooth shape. No resolved topography. The origin assumes equal lobe densities and is not a measured centre of mass."
+}

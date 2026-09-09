@@ -1,0 +1,371 @@
+{
+  "number": 159,
+  "name": "Aemilia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1049",
+  "modelId": 1869,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1869",
+  "catalog": "View model 139 68 24.47869 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1869",
+    "Asteroid": "(159) Aemilia",
+    "λ": "139",
+    "β": "68",
+    "P": "24.47869",
+    "YORP": "",
+    "t0": "2444636",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "140",
+    "σD": "7",
+    "Γ": "50",
+    "Γmin": "0",
+    "Γmax": "100",
+    "pV": "0.052",
+    "σpV": "0.015",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-03-22",
+    "Comment": "",
+    "Created": "2018-03-16 10:22:26",
+    "Modified": "2018-03-22 12:12:29",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6140/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/6141/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6142/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2018)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/174",
+      "file": "reference-174.html",
+      "links": [
+        {
+          "label": "2018a&a...610a...7m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2018a&a...610a...7m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2018A%26A...610A...7M",
+          "url": "http://adsabs.harvard.edu/abs/2018A%26A...610A...7M\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1711.01893",
+          "url": "https://arxiv.org/abs/1711.01893"
+        }
+      ]
+    }
+  ],
+  "id": "aemilia",
+  "displayName": "Aemilia",
+  "lambda": 139.0,
+  "beta": 68.0,
+  "periodHours": 24.47869,
+  "version": "2018-03-22",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 130,
+  "uncertaintyKm": 7,
+  "akari": {
+    "number": 159,
+    "name": "Aemilia",
+    "diameterKm": 130.04,
+    "uncertaintyKm": 2.29,
+    "detections": 5,
+    "originalRow": "159    Aemilia                        8.12  0.15  5  130.04  2.29 0.059 0.003"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6142/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6140/IAUspin.txt",
+  "shapeSha256": "213c1c87869165ef623c8875cf4a9fbf258fd5aeedb6677316e93e75d57d1eff",
+  "shapeBytes": 81169,
+  "vertices": 1003,
+  "faces": 2002,
+  "signedVolume": 1436755.1349888674,
+  "independentSignedVolume": 1436755.134988867,
+  "originalVolumeEquivalentDiameter": 140.00000307744375,
+  "firstVertex": [
+    -16.57984,
+    -2.210641,
+    59.589491
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    61.67983089596836,
+    84.7016058620937
+  ],
+  "extentsSourceUnits": [
+    [
+      -73.15302,
+      83.608716
+    ],
+    [
+      -70.385859,
+      72.423845
+    ],
+    [
+      -64.150348,
+      61.26211
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9285714081598123,
+  "topology": {
+    "edges": 3003,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 0.0007148767367577063
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        -16.57984,
+        -2.210641,
+        59.589491
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1,
+      "coordinates": [
+        -16.57984,
+        -19.192525,
+        61.26211
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 334,
+      "coordinates": [
+        82.423112,
+        2.81376,
+        17.357978
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 447,
+      "coordinates": [
+        83.608716,
+        7.410049,
+        9.965076
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 472,
+      "coordinates": [
+        -18.421492,
+        72.423845,
+        17.673138
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 494,
+      "coordinates": [
+        -73.15302,
+        -3.90628,
+        9.01226
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 501,
+      "coordinates": [
+        -68.502568,
+        -29.120139,
+        -14.464549
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 527,
+      "coordinates": [
+        4.628896,
+        -70.385859,
+        -11.698177
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 993,
+      "coordinates": [
+        1.222274,
+        31.464032,
+        -64.150348
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1002,
+      "coordinates": [
+        -25.388763,
+        -0.258068,
+        -63.646971
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 1870,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1870",
+      "pole": [
+        "348",
+        "59"
+      ],
+      "version": "2018-03-22",
+      "periodHours": "24.47866",
+      "comment": "",
+      "calibrated": "1 (Yes)",
+      "diameterKm": "141",
+      "uncertaintyKm": "7",
+      "nonconvex": "0 (No)"
+    }
+  ],
+  "selectionNotes": "Select convex pole 1 (139,68), retaining convex pole 2 (348,59). Marciniak et al. (2018), published Table 4, explicitly reports volume-equivalent occultation diameter 130 ±7 km for this convex pole, whereas archive model 1869 declares 140 ±7 km. Use a named publication-scale override to 130 ±7 km and preserve the raw 140-km mesh bytes. The paper says all four convex/SAGE solutions fit the four-chord occultation and thermal data similarly well; the photometry-only nonconvex SAGE pole1 fit is marginally preferred overall. SAGE does not imply resolved imaging. ISAM release follow-up is recorded separately.",
+  "shapeKind": "Convex light-curve reconstruction",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select convex pole 1 (139,68), retaining convex pole 2 (348,59). Marciniak et al. (2018), published Table 4, explicitly reports volume-equivalent occultation diameter 130 ±7 km for this convex pole, whereas archive model 1869 declares 140 ±7 km. Use a named publication-scale override to 130 ±7 km and preserve the raw 140-km mesh bytes. The paper says all four convex/SAGE solutions fit the four-chord occultation and thermal data similarly well; the photometry-only nonconvex SAGE pole1 fit is marginally preferred overall. SAGE does not imply resolved imaging. ISAM release follow-up is recorded separately.",
+  "calibrationSelection": "Volume-equivalent diameter from a four-chord 2009-05-02 occultation fit to convex pole1 in Marciniak et al. (2018), Table4. A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select convex pole 1 (139,68), retaining convex pole 2 (348,59). Marciniak et al. (2018), published Table 4, explicitly reports volume-equivalent occultation diameter 130 ±7 km for this convex pole, whereas archive model 1869 declares 140 ±7 km. Use a named publication-scale override to 130 ±7 km and preserve the raw 140-km mesh bytes. The paper says all four convex/SAGE solutions fit the four-chord occultation and thermal data similarly well; the photometry-only nonconvex SAGE pole1 fit is marginally preferred overall. SAGE does not imply resolved imaging. ISAM release follow-up is recorded separately.",
+  "archiveVolumeDiameterMismatchFraction": 2.1981741094023732e-08,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1869",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "Select convex pole 1 (139,68), retaining convex pole 2 (348,59). Marciniak et al. (2018), published Table 4, explicitly reports volume-equivalent occultation diameter 130 ±7 km for this convex pole, whereas archive model 1869 declares 140 ±7 km. Use a named publication-scale override to 130 ±7 km and preserve the raw 140-km mesh bytes. The paper says all four convex/SAGE solutions fit the four-chord occultation and thermal data similarly well; the photometry-only nonconvex SAGE pole1 fit is marginally preferred overall. SAGE does not imply resolved imaging. ISAM release follow-up is recorded separately."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "comparison",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Selected archive volume-equivalent diameter, independently reconciled against the unmodified source mesh volume."
+    },
+    {
+      "url": "http://isam.astro.amu.edu.pl/",
+      "status": "unresolved",
+      "adds": "Paper-linked SAGE nonconvex shape alternative from photometry",
+      "decision": "HTTP catalog retrieved; direct model release follow-up still pending in release-probes. Convex and SAGE models both fit the sparse occultation chords; no resolved-imaging claim follows from SAGE."
+    }
+  ],
+  "calibrationOverride": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 130,
+    "uncertaintyKm": 7,
+    "uncertaintyKind": "Reported publication uncertainty for the fitted diameter; not a bound on local shape error.",
+    "diameterSemantics": "Volume-equivalent diameter from a four-chord 2009-05-02 occultation fit to convex pole1 in Marciniak et al. (2018), Table4.",
+    "sourceUrl": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+    "reference": "Marciniak et al. (2018), published paper, Table 4",
+    "sourceLabel": "Marciniak et al. (2018), published paper, Table 4",
+    "sourceFile": "marciniak-2018-published.pdf",
+    "publishedPoleEclipticDegrees": [
+      139.0,
+      68.0
+    ],
+    "publishedPeriodHours": 24.4787,
+    "scaleKmPerSourceUnit": 0.9285714081598123,
+    "metersPerSourceUnit": 928.5714081598123,
+    "limitations": "A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select convex pole 1 (139,68), retaining convex pole 2 (348,59). Marciniak et al. (2018), published Table 4, explicitly reports volume-equivalent occultation diameter 130 ±7 km for this convex pole, whereas archive model 1869 declares 140 ±7 km. Use a named publication-scale override to 130 ±7 km and preserve the raw 140-km mesh bytes. The paper says all four convex/SAGE solutions fit the four-chord occultation and thermal data similarly well; the photometry-only nonconvex SAGE pole1 fit is marginally preferred overall. SAGE does not imply resolved imaging. ISAM release follow-up is recorded separately.",
+    "visibleDescription": "Convex light-curve reconstruction. Published occultation scale: 130 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "visibleShapeDescription": "Convex light-curve reconstruction. Published occultation scale: 130 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "papers": [
+    {
+      "file": "marciniak-2018-published.pdf",
+      "url": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+      "label": "Marciniak et al. (2018), published paper, Table 4"
+    }
+  ],
+  "selectedPoleStatus": "one of competing archived solutions",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 130,
+    "uncertaintyKm": 7,
+    "uncertaintyKind": "Reported publication uncertainty for the fitted diameter; not a bound on local shape error.",
+    "diameterSemantics": "Volume-equivalent diameter from a four-chord 2009-05-02 occultation fit to convex pole1 in Marciniak et al. (2018), Table4.",
+    "sourceUrl": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+    "reference": "Marciniak et al. (2018), published paper, Table 4",
+    "sourceLabel": "Marciniak et al. (2018), published paper, Table 4",
+    "sourceFile": "marciniak-2018-published.pdf",
+    "publishedPoleEclipticDegrees": [
+      139.0,
+      68.0
+    ],
+    "publishedPeriodHours": 24.4787,
+    "scaleKmPerSourceUnit": 0.9285714081598123,
+    "metersPerSourceUnit": 928.5714081598123,
+    "limitations": "A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select convex pole 1 (139,68), retaining convex pole 2 (348,59). Marciniak et al. (2018), published Table 4, explicitly reports volume-equivalent occultation diameter 130 ±7 km for this convex pole, whereas archive model 1869 declares 140 ±7 km. Use a named publication-scale override to 130 ±7 km and preserve the raw 140-km mesh bytes. The paper says all four convex/SAGE solutions fit the four-chord occultation and thermal data similarly well; the photometry-only nonconvex SAGE pole1 fit is marginally preferred overall. SAGE does not imply resolved imaging. ISAM release follow-up is recorded separately.",
+    "visibleDescription": "Convex light-curve reconstruction. Published occultation scale: 130 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 3.10892633182096,
+  "orbitalPeriodYears": 5.481808363708463,
+  "sourceFields": {
+    "ID": "1869",
+    "Asteroid": "(159) Aemilia",
+    "λ": "139",
+    "β": "68",
+    "P": "24.47869",
+    "YORP": "",
+    "t0": "2444636",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "140",
+    "σD": "7",
+    "Γ": "50",
+    "Γmin": "0",
+    "Γmax": "100",
+    "pV": "0.052",
+    "σpV": "0.015",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-03-22",
+    "Comment": "",
+    "Created": "2018-03-16 10:22:26",
+    "Modified": "2018-03-22 12:12:29",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+  "selectionStatus": "Superseded convex comparison; not the source consumed by this package"
+}

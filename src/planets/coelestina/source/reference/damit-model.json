@@ -1,0 +1,360 @@
+{
+  "number": 237,
+  "name": "Coelestina",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/729",
+  "modelId": 1218,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1218",
+  "catalog": "View model 230 30 29.1753 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1218",
+    "Asteroid": "(237) Coelestina",
+    "λ": "230",
+    "β": "30",
+    "P": "29.1753",
+    "YORP": "",
+    "t0": "2450875",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.79",
+    "p3": "0.03",
+    "p4": "-0.97",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4403/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/4404/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4405/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2016)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/161",
+      "file": "reference-161.html",
+      "links": [
+        {
+          "label": "2016a&a...586a.108h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2016a&a...586a.108h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H",
+          "url": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H"
+        }
+      ]
+    }
+  ],
+  "id": "coelestina",
+  "displayName": "Coelestina",
+  "lambda": 230.0,
+  "beta": 30.0,
+  "periodHours": 29.1753,
+  "version": "2016-01-04",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 39.51,
+  "uncertaintyKm": 0.69,
+  "akari": {
+    "number": 237,
+    "name": "Coelestina",
+    "diameterKm": 39.51,
+    "uncertaintyKm": 0.69,
+    "detections": 5,
+    "originalRow": "237    Coelestina                     9.24  0.15  5   39.51  0.69 0.230 0.010"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4405/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4403/IAUspin.txt",
+  "shapeSha256": "427b7e385d125ecccedc0cbf7129a960bf32bcb5f793e1fb0c8464d464d6a784",
+  "shapeBytes": 80926,
+  "vertices": 1000,
+  "faces": 1996,
+  "signedVolume": 0.9999998600536072,
+  "independentSignedVolume": 0.999999860053607,
+  "translatedSignedVolume": 0.9999998600536074,
+  "originalVolumeEquivalentDiameter": 1.2407009239215883,
+  "firstVertex": [
+    -0.147239,
+    -0.040674,
+    0.602354
+  ],
+  "firstFace": [
+    2,
+    3,
+    4
+  ],
+  "radialRangeSourceUnits": [
+    0.5076271567223329,
+    0.8919272515211093
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.820351,
+      0.781449
+    ],
+    [
+      -0.595655,
+      0.697024
+    ],
+    [
+      -0.678868,
+      0.608911
+    ]
+  ],
+  "scaleKmPerSourceUnit": 31.84490253712184,
+  "topology": {
+    "edges": 2994,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 1996,
+    "minDoubleTriangleAreaSourceUnits2": 5.0503188384628714e-08
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        -0.147239,
+        -0.040674,
+        0.602354
+      ],
+      "radiusSourceUnits": 0.6214209834830169
+    },
+    {
+      "vertexIndex1": 23,
+      "pointSourceUnits": [
+        -0.291899,
+        -0.093261,
+        0.608911
+      ],
+      "radiusSourceUnits": 0.6816709222513455
+    },
+    {
+      "vertexIndex1": 259,
+      "pointSourceUnits": [
+        0.781449,
+        0.014428,
+        0.096548
+      ],
+      "radiusSourceUnits": 0.7875228397252996
+    },
+    {
+      "vertexIndex1": 334,
+      "pointSourceUnits": [
+        0.223772,
+        -0.587828,
+        0.054591
+      ],
+      "radiusSourceUnits": 0.63134447241502
+    },
+    {
+      "vertexIndex1": 385,
+      "pointSourceUnits": [
+        0.203712,
+        0.697024,
+        -0.108008
+      ],
+      "radiusSourceUnits": 0.7341708000077366
+    },
+    {
+      "vertexIndex1": 422,
+      "pointSourceUnits": [
+        -0.820351,
+        -0.242133,
+        0.113827
+      ],
+      "radiusSourceUnits": 0.8628793303927265
+    },
+    {
+      "vertexIndex1": 501,
+      "pointSourceUnits": [
+        0.270067,
+        0.693128,
+        -0.081215
+      ],
+      "radiusSourceUnits": 0.748303738530017
+    },
+    {
+      "vertexIndex1": 554,
+      "pointSourceUnits": [
+        0.235401,
+        -0.595655,
+        -0.013246
+      ],
+      "radiusSourceUnits": 0.6406199859058411
+    },
+    {
+      "vertexIndex1": 999,
+      "pointSourceUnits": [
+        0.169928,
+        0.135181,
+        -0.678868
+      ],
+      "radiusSourceUnits": 0.7127490367366343
+    },
+    {
+      "vertexIndex1": 1000,
+      "pointSourceUnits": [
+        0.151838,
+        0.153271,
+        -0.678868
+      ],
+      "radiusSourceUnits": 0.7123261465852563
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 1219,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1219",
+      "pole": [
+        "42",
+        "14"
+      ],
+      "version": "2016-01-04",
+      "diameterKm": "",
+      "calibratedSize": "0 (No)",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 5.335693041248167,
+  "originalSurfaceEquivalentDiameter": 1.3032282396692254,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2016 Table2 reports10 dense lightcurves from one apparition and366 sparse points. Two poles remain; model1218 is representative. Limited dense apparition coverage is a model limitation and no high-resolution terrain is claimed.",
+  "papers": [
+    {
+      "file": "paper-hanus-2016.pdf",
+      "url": "https://arxiv.org/pdf/1510.07422",
+      "label": "Hanuš et al. (2016), A&A 586, A108",
+      "sha256": "f1d036a9b14443c85b74cd745f32c76064ad9b982992a0766abf2f1b72d02d81"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 39.51,
+    "uncertaintyKm": 0.69,
+    "reportedUncertaintyKm": 0.69,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 237,
+      "name": "Coelestina",
+      "diameterKm": 39.51,
+      "uncertaintyKm": 0.69,
+      "detections": 5,
+      "originalRow": "237    Coelestina                     9.24  0.15  5   39.51  0.69 0.230 0.010"
+    },
+    "limitations": "Hanuš2016 Table2 reports10 dense lightcurves from one apparition and366 sparse points. Two poles remain; model1218 is representative. Limited dense apparition coverage is a model limitation and no high-resolution terrain is claimed. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 39.51 km effective diameter (catalog ±0.69 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 31.84490253712184,
+    "metersPerSourceUnit": 31844.90253712184,
+    "sourceSignedVolume": 0.9999998600536072,
+    "sourceVolumeEquivalentDiameter": 1.2407009239215883,
+    "sourceSurfaceArea": 5.335693041248167,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 32293.841645134115,
+    "derivedVolumeEquivalentDiameterKm": 39.50999999999999,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2450875.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 2.7617393088127553,
+  "orbitalPeriodYears": 4.589678072077197,
+  "sourceFields": {
+    "ID": "1218",
+    "Asteroid": "(237) Coelestina",
+    "λ": "230",
+    "β": "30",
+    "P": "29.1753",
+    "YORP": "",
+    "t0": "2450875",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.79",
+    "p3": "0.03",
+    "p4": "-0.97",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

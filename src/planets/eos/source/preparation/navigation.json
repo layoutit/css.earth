@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "eos",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/5968/shape.txt",
+    "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2018); model 1743, version 2017-03-31.",
+    "license": "CC-BY-4.0",
+    "consumers": [
+      "navigation"
+    ],
+    "expectedBytes": 89477,
+    "expectedSha256": "14fe21a2aeff326da87e1997081350144adca717f259c485505c4e943efeb1fc",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "eos-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 35,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "shape"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

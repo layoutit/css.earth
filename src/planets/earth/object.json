@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cf37965b2c032a410f28e2a121d6c98718788db8d3af5b7aba7ce35ed3d8a1b9"
+    "sha256": "55f17dbe9de5ea08e626b0ccb195e2390398c679dd97331c8fa04c1027c5fe43"
   },
   "id": "earth",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "d7942782e6b46ec8618179f21e78f2b827e4dcc81ec9e1c590f9a664068edb55"
+          "sha256": "a40ce5743610ca243b4f70e9de7c4e86b2bc6832adea8bdb1fd898d6d9f2d5d0"
         },
         {
           "id": "celestial",
@@ -36,12 +36,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "90d8c8d7e6a84a9e955f432464cee71c9b4154c1b6167ef1d4bb1c6466badb0d"
+          "sha256": "5fff010f61535248c8795144eed23cb29d3eedb4b5e7844e2996f81fb88d0157"
         },
         {
           "id": "lens-bindings",
           "path": "source/content/lens-bindings.json",
-          "sha256": "3f92243f419cb28dbc9539459547114a237f0800862feabd557a127dd1009618"
+          "sha256": "56897b899d614f9a36c5eb834123eb7188b374ea008774d0cf80c8cad8dd1f0a"
         },
         {
           "id": "charts",
@@ -61,7 +61,12 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "23257f353d3af2e8c445a00e160b59add4a9b3266206b031d01e4646d7b3ac8d"
+          "sha256": "249bb925d410e70c18e4cf267eeba6564ec6acc01ea808d7e39b44936bd3941d"
+        },
+        {
+          "id": "mantle-tomography",
+          "path": "source/interior/tomography.json",
+          "sha256": "b0b06aae3a042ca407a554fe0d6b0e6433bab0c3195d8bec1531171eb3175288"
         }
       ],
       "shape": {
@@ -81,7 +86,7 @@
               "material": "lighting"
             },
             {
-              "id": "buenos-aires-noise",
+              "id": "clouds",
               "source": "content",
               "material": "lighting"
             },
@@ -96,7 +101,17 @@
               "material": "lighting"
             },
             {
+              "id": "enso",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "cross-section",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "mantle-tomography",
               "source": "content",
               "material": "lighting"
             }
@@ -123,17 +138,6 @@
       "atmosphere": {
         "source": "paged-ellipsoid",
         "material": "atmosphere"
-      },
-      "paging": {
-        "source": "paged-ellipsoid",
-        "surface": "body",
-        "maxResidentPages": 512,
-        "maxResidentBytes": 134217728,
-        "maxConcurrentLoads": 4
-      },
-      "destinations": {
-        "source": "paged-ellipsoid",
-        "maxEntries": 34135
       }
     },
     "worldFrame": {
@@ -160,7 +164,7 @@
         -0.3977771559319137,
         0.9174820620691819
       ],
-      "metersPerUnit": 25210.02766798419,
+      "metersPerUnit": 27731.03043478261,
       "bodyRadiusM": 6378137
     }
   },

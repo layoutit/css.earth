@@ -88,32 +88,172 @@
         "id": "normal",
         "label": "Near-infrared",
         "description": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
-        "title": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
+        "title": "Controlled infrared mosaic",
         "thumbnail": "/scenes/titan/titan-normal-thumbnail.webp",
         "surface": "titan-normal-surface@2x.webp",
         "poles": "titan-normal-poles@2x.webp",
         "source": {
           "id": "usgs-cassini-iss-2026-938nm",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Surface features show through the haze, along with clouds and seams. Detail varies; the gray grid marks missing observations."
       },
       {
         "id": "radar",
         "label": "Radar",
         "description": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
-        "title": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
+        "title": "RADAR global mosaic through T126",
         "thumbnail": "/scenes/titan/titan-radar-thumbnail.webp",
         "surface": "titan-radar-surface@2x.webp",
         "poles": "titan-radar-poles@2x.webp",
         "source": {
           "id": "cassini-radar-midr",
           "path": "../manifest.json"
+        },
+        "summary": "Brightness shows radar backscatter rather than elevation or visible color. The gray grid marks areas without measurements."
+      },
+      {
+        "id": "topography",
+        "label": "Measured height",
+        "description": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+        "title": "GTDR measured heights",
+        "thumbnail": "/scenes/titan/titan-topography-thumbnail.webp",
+        "surface": "titan-topography-surface@2x.webp",
+        "poles": "titan-topography-poles@2x.webp",
+        "source": {
+          "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Measured height",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−2500",
+            "0",
+            "+2500"
+          ],
+          "meta": "m",
+          "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+          "image": "/scenes/titan/titan-topography-legend.webp"
+        }
+      },
+      {
+        "id": "interpolated",
+        "label": "Interpolated height",
+        "description": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+        "title": "GTDR interpolated topography",
+        "thumbnail": "/scenes/titan/titan-interpolated-thumbnail.webp",
+        "surface": "titan-interpolated-surface@2x.webp",
+        "poles": "titan-interpolated-poles@2x.webp",
+        "source": {
+          "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Interpolated height",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−2500",
+            "0",
+            "+2500"
+          ],
+          "meta": "m",
+          "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+          "image": "/scenes/titan/titan-interpolated-legend.webp"
+        }
+      },
+      {
+        "id": "coverage-distance",
+        "label": "Distance to data",
+        "description": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+        "title": "GTDR distance to measurements",
+        "thumbnail": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
+        "surface": "titan-coverage-distance-surface@2x.webp",
+        "poles": "titan-coverage-distance-poles@2x.webp",
+        "source": {
+          "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Distance to data",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "500",
+            "1000"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+          "image": "/scenes/titan/titan-coverage-distance-legend.webp"
+        }
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "description": "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons.",
+        "summary": "Explore Titan’s dunes, plains, highlands and lake basins in the global Cassini interpretation.",
+        "title": "Cassini global geomorphology · Lopes et al. (2020)",
+        "thumbnail": "/scenes/titan/titan-geology-thumbnail.webp",
+        "surface": "titan-geology-surface@2x.webp",
+        "poles": "titan-geology-poles@2x.webp",
+        "source": {
+          "id": "titan-global-geomorphology-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.17632/f6jrtyfp66.2"
+        },
+        "detail": "Mapped terrains",
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Terrain units",
+          "items": [
+            {
+              "label": "Plains",
+              "color": "#66f0cc",
+              "description": "Broad plains"
+            },
+            {
+              "label": "Dunes",
+              "color": "#b665cb",
+              "description": "Wind-shaped dune fields"
+            },
+            {
+              "label": "Hummocky terrain",
+              "color": "#ffcc66",
+              "description": "Hilly and mountainous terrain"
+            },
+            {
+              "label": "Lakes and basins",
+              "color": "#6699ff",
+              "description": "Areas now or formerly occupied by liquids"
+            },
+            {
+              "label": "Labyrinth terrain",
+              "color": "#ff66e0",
+              "description": "Dissected labyrinth terrain"
+            },
+            {
+              "label": "Craters",
+              "color": "#ff6666",
+              "description": "Impact crater terrain"
+            }
+          ],
+          "sourceUrl": "https://doi.org/10.17632/f6jrtyfp66.2"
         }
       }
     ],
     "labels": {
       "normal": "Near infrared",
-      "radar": "Radar"
+      "radar": "Radar",
+      "topography": "Measured height",
+      "interpolated": "Interpolated height",
+      "coverage-distance": "Distance to data"
     }
   },
   "settings": {
@@ -158,6 +298,24 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "Cassini RADAR",
+      "role": "topography",
+      "description": "Formal GTDR measured, interpolated and distance products (2019)",
+      "href": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+    },
+    {
+      "label": "Titan geology data",
+      "role": "surface",
+      "description": "Schoenfeld (2026), global unit shapefiles, version 2; CC BY 4.0",
+      "href": "https://doi.org/10.17632/f6jrtyfp66.2"
+    },
+    {
+      "label": "Titan geology paper",
+      "role": "surface",
+      "description": "Lopes et al. (2020), global geomorphological interpretation",
+      "href": "https://doi.org/10.1038/s41550-019-0917-6"
     }
   ],
   "provenance": {

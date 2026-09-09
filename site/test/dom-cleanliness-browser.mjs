@@ -3,6 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../objects.mjs';
+import { conformanceBrowserLaunch } from './conformance-browser-launch.mjs';
 // Reuse an already-running server. Optionally select one body after the URL.
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const requestedId = process.argv[3];
@@ -10,7 +11,8 @@ const selected = requestedId ? OBJECTS.filter(object => object.id === requestedI
 assert.ok(selected.length, `Unknown object: ${requestedId}`);
 const output = resolve('output/dom-cleanliness');
 await mkdir(output, { recursive: true });
-const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const launch = await conformanceBrowserLaunch({ channel: 'chrome', evidenceDirectory: output });
+const browser = await chromium.launch(launch.options);
 const reports = [], navigation = [], problems = [];
 try {
   for (const density of [1, 2]) {
@@ -106,7 +108,7 @@ try {
   }
   assert.deepEqual(problems, []);
 } finally {
-  await writeFile(resolve(output, 'report.json'), JSON.stringify({ browser: browser.version(), reports, navigation, problems }, null, 2) + '\n');
+  await writeFile(resolve(output, 'report.json'), JSON.stringify({ browser: browser.version(), chromeLaunch: launch.diagnostics, reports, navigation, problems }, null, 2) + '\n');
   await browser.close();
 }
 

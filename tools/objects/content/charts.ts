@@ -1,6 +1,7 @@
 import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
+import { readSpectrumData } from './spectrum-data.mjs';
 import { renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.js';
 import type { ChartIdentity } from './chart-svg.js';
 type JsonMap=Record<string,unknown>;
@@ -12,7 +13,6 @@ export interface ChartAssetRecipe {schema:'cssearth-chart-assets@1';publicBase:s
 function record(value:unknown,label:string):JsonMap {if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError(`${label} must be an object.`);return value as JsonMap;}
 function string(value:unknown,label:string):asserts value is string {if(typeof value!=='string'||!value.trim())throw new TypeError(`${label} must be text.`);}
 function path(root:string,value:string):string {if(value.startsWith('/')||value.includes('\\')||value.split('/').includes('..'))throw new TypeError('Unsafe chart source path.');return resolve(root,value);}
-function field(value:unknown,reference:string):unknown {let result:unknown=value;for(const key of reference.split('.'))result=record(result,reference)[key];return result;}
 function numericArray(value:unknown,label:string):number[]{if(!Array.isArray(value)||value.some(item=>typeof item!=='number'||!Number.isFinite(item)))throw new TypeError(`${label} must contain finite samples.`);return value;}
 export function parseChartAssetRecipe(value:unknown):ChartAssetRecipe {
  const recipe=record(value,'charts');if(recipe.schema!=='cssearth-chart-assets@1'||!Array.isArray(recipe.charts))throw new TypeError('Unknown chart recipe schema.');string(recipe.publicBase,'publicBase');if(!recipe.publicBase.startsWith('/')||!recipe.publicBase.endsWith('/'))throw new TypeError('Chart asset base must be an absolute URL prefix.');
@@ -28,16 +28,8 @@ export async function prepareChartAssets({sourceDirectory,publicDirectory,config
  const recipe=parseChartAssetRecipe(config);await mkdir(publicDirectory,{recursive:true});const urls:string[]=[];
  for(const chart of recipe.charts){const identity:ChartIdentity={id:chart.id,title:chart.title,description:chart.description,metadata:{...chart.metadata}};let svg:string;
   if(chart.kind==='spectrum'){
-   const text=await readFile(path(sourceDirectory,chart.source),'utf8');let points:{wavelength:number;total:number}[];
-   if(chart.format==='json-columns'){
-    const source=record(JSON.parse(text) as unknown,'spectrum source');const xs=numericArray(field(source,chart.xField??''),'wavelengths'),ys=numericArray(field(source,chart.yField??''),'reflectances');
-    if(xs.length!==chart.pointCount||ys.length!==chart.pointCount||(chart.minimumX!==undefined&&xs[0]!==chart.minimumX)||(chart.maximumX!==undefined&&xs[xs.length-1]!==chart.maximumX))throw new TypeError('Spectrum source sampling drifted.');
-    if(chart.countField&&numericArray(field(source,chart.countField),'counts').some(count=>count!==chart.countValue))throw new TypeError('Spectrum source coverage drifted.');
-    for(const [name,reference] of Object.entries(chart.metadataFields??{}))identity.metadata[name]=field(source,reference);
-    points=ys.map((total,index)=>({wavelength:xs[index]/(chart.xScale??1),total}));
-   }else{if(chart.requiredHeader&&!text.includes(chart.requiredHeader))throw new TypeError('Spectrum units differ.');points=text.split('\n').filter(line=>/^\d/.test(line)).map(line=>{const [wavelength,total]=line.trim().split(/\s+/).map(Number);return {wavelength,total};});}
-   if(points.length!==chart.pointCount)throw new TypeError('Spectrum sample count drifted.');
-   const maximum=chart.maximumRoundingScale===undefined?chart.maximum:Math.ceil(Math.max(...points.map(point=>point.total))*chart.maximumRoundingScale)/chart.maximumRoundingScale;
+   const {points,maximum,metadata}=await readSpectrumData(sourceDirectory,chart);
+   identity.metadata=metadata;
    svg=renderReflectanceChart({...identity,points,maximum});
   }else if(chart.kind==='pressure'){
    const text=await readFile(path(sourceDirectory,chart.source),'utf8');const layers=[...text.matchAll(/<ATMOSPHERE-LAYER-(\d+)>([^\n]+)/g)].map(([,index,row])=>{const [pressure,temperature]=row.split(',').map(Number);return {index:Number(index),pressure,temperature};});

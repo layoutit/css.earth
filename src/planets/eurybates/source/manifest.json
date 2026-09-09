@@ -1,0 +1,186 @@
+{
+  "schema": "csseurybates-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "occultation-approximation",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 62404,
+      "expectedSha256": "2edc96d2951372989e6e8ae6f959f4d7a916b1247cd0728fb024e3aeff77f0f4",
+      "origin": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Authored ellipsoid approximation constrained to the published convex model's maximum extents. These are not independently measured ellipsoid axes; the irregular convex outline and model volume are not reproduced. Full approximation dimensions: 77.5 × 71.3 × 61.8 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 34948.60995574688
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Authored ellipsoid approximation constrained to the published convex model's maximum extents. These are not independently measured ellipsoid axes; the irregular convex outline and model volume are not reproduced. Full approximation dimensions: 77.5 × 71.3 × 61.8 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 34948.60995574688
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3712,
+      "expectedSha256": "d87880682f5f24f9cc35afa9e5bee3b43a56cd5ddee61564abd530ac118110fe",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2825,
+      "expectedSha256": "f39298e9bb457c39e22da37bfbfed27510a33c98c181f8c8896393eec6c83939",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1338,
+      "expectedSha256": "b42f3a7d59ba55e6dde527622ead4754907b2cbd1124b9402645d2ed8c09c68d",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 592,
+      "expectedSha256": "96f0fc54a79fe7bbf1769b08904cb11696487b1a8cde62fadb8b6ce2ab09efde",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2786,
+      "expectedSha256": "bca0d1d176317961961b810b99bbbac6db0a52d63f54e28667a43d1b69b5cb0c",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5237,
+      "expectedSha256": "15e565b0cd1cd81993c2a7afb45d8e95f18d5be0aad2131febb381f0d2d97bcb",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 852,
+      "expectedSha256": "0e331a2022db3398777f788601b7a8485924ee04ca6c9cbc328c11ed59c3c439",
+      "purpose": "Pinned body-specific source interpretation or preparation input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "occultation-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 78710,
+      "expectedSha256": "73164f5229efe655de68c93c5d508416d30bba08236d839f9fe5004e9536c4d5"
+    }
+  ]
+}

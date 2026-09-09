@@ -14,8 +14,8 @@
       "groups": [
         "refresh"
       ],
-      "path": "lenses/lola-topography-print.jpg",
-      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/LDEM_16.0centered.0centered_print.jpg"
+      "path": "science/ldem_16.img",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img"
     },
     {
       "kind": "download",
@@ -32,6 +32,71 @@
       ],
       "path": "stars/eso0932a.tif",
       "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/dgdr_ra_avg_cyl_032_img.img",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.img"
+    },
+    {
+      "kind": "zip-member",
+      "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
+      "archiveSha256": "f3ec29803c1ad3b8c41a7fff3e9339bd66f9fbb8f63e30f13c52561b8d5559a1",
+      "archiveBytes": 224413040,
+      "member": "Unified_Geologic_Map_of_the_Moon_GIS/Lunar_GIS/Shapefiles/GeoUnits.shp",
+      "path": "geology/GeoUnits.shp",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "zip-member",
+      "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
+      "archiveSha256": "f3ec29803c1ad3b8c41a7fff3e9339bd66f9fbb8f63e30f13c52561b8d5559a1",
+      "archiveBytes": 224413040,
+      "member": "Unified_Geologic_Map_of_the_Moon_GIS/Lunar_GIS/Shapefiles/GeoUnits.dbf",
+      "path": "geology/GeoUnits.dbf",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "zip-member",
+      "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
+      "archiveSha256": "f3ec29803c1ad3b8c41a7fff3e9339bd66f9fbb8f63e30f13c52561b8d5559a1",
+      "archiveBytes": 224413040,
+      "member": "Unified_Geologic_Map_of_the_Moon_GIS/Lunar_GIS/Shapefiles/GeoUnits.prj",
+      "path": "geology/GeoUnits.prj",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://zenodo.org/api/records/4558194/files/diviner_CF_space_weathering_corrected.tiff/content",
+      "path": "science/diviner_CF_space_weathering_corrected.tiff",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://zenodo.org/api/records/4558194/files/diviner_MI_latitude.tiff/content",
+      "path": "science/diviner_MI_latitude.tiff",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://zenodo.org/api/records/4558194/files/diviner_MI_longitude.tiff/content",
+      "path": "science/diviner_MI_longitude.tiff",
+      "groups": [
+        "mapped-science"
+      ]
     }
   ]
 }

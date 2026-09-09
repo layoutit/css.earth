@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "465b7479c548553eda4212376574dba9e5cc68736c19aa5b30cd7c441bc8fc69"
+    "sha256": "cfa3c6808ec7b26f86d2e3276c5760f75e7c2610a9f5f726ae3dbd8e1872b68f"
   },
   "id": "ganymede",
   "properties": {
@@ -63,6 +63,16 @@
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "oxygen-signature",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -83,17 +93,17 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "4d76bbd1db574ecbd3a2d0fb42c7beb562990e3eb710963150d5fcab01206237"
+          "sha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "37bdd3c09a74d154190329604a544c4d731b4f649fb07171bb9f46577752faa8"
+          "sha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "0d5f9bd6ce07b0d083656b62b8c5b0f250a2e7ef08386cc822b8dbd821387026"
+          "sha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76"
         },
         {
           "id": "navigation",
@@ -103,7 +113,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "caffd4d082b2300947b87d0a38e4ee9613d9813c187872f6e9e16bf970d7d438"
+          "sha256": "2ff31beb903ee65c63b4d741196b45b918b05380c51138478e1d817fa87a36ee"
         }
       ]
     }

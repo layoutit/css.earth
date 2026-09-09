@@ -5,9 +5,11 @@
 :where(.planet-stage[data-object-id="dione"]) .dione-sun-camera, :where(.planet-stage[data-object-id="dione"]) .dione-camera { z-index: 1; transform-style: preserve-3d; }
 :where(.planet-stage[data-object-id="dione"]) .dione-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
 :where(.planet-stage[data-object-id="dione"]) .dione-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="dione"]) .dione-body > s {
+:where(.planet-stage[data-object-id="dione"]) .dione-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
-  margin: 0; padding: 0; transform-origin: 0 0; backface-visibility: hidden;
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: visible;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--dione-surface-image); background-repeat: no-repeat;
 }
 :where(.planet-stage[data-object-id="dione"]) .dione-body > .dione-polar { background-image: var(--dione-poles-image); }

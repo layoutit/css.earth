@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-phoebe-independent-source-geometry@1",
+  "source": {
+    "path": "phoebe_128_o.obj",
+    "bytes": 17787240,
+    "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9"
+  },
+  "method": "Independent Python/NumPy ray-triangle intersections against every original OBJ triangle. No shared loader or prepared mesh used.",
+  "vertices": 99846,
+  "faces": 196608,
+  "boundsMeters": [
+    [
+      -108553.543091,
+      -111886.520386,
+      -104769.020081
+    ],
+    [
+      117222.267151,
+      116179.023743,
+      107886.817932
+    ]
+  ],
+  "radiusExtremaMeters": [
+    93868.38664919643,
+    121068.30219171246
+  ],
+  "axisRayRadiiMeters": [
+    {
+      "longitudeEastDegrees": 0,
+      "latitudeDegrees": 0,
+      "radiusMeters": 114881.85011256102,
+      "sourceFace": 132990
+    },
+    {
+      "longitudeEastDegrees": 90,
+      "latitudeDegrees": 0,
+      "radiusMeters": 112780.11626379032,
+      "sourceFace": 99966
+    },
+    {
+      "longitudeEastDegrees": 180,
+      "latitudeDegrees": 0,
+      "radiusMeters": 106964.39946010047,
+      "sourceFace": 67197
+    },
+    {
+      "longitudeEastDegrees": 270,
+      "latitudeDegrees": 0,
+      "radiusMeters": 109293.8587616883,
+      "sourceFace": 34430
+    },
+    {
+      "longitudeEastDegrees": 0,
+      "latitudeDegrees": 90,
+      "radiusMeters": 107272.46128023363,
+      "sourceFace": 16511
+    },
+    {
+      "longitudeEastDegrees": 0,
+      "latitudeDegrees": -90,
+      "radiusMeters": 101239.43042137215,
+      "sourceFace": 180352
+    }
+  ]
+}

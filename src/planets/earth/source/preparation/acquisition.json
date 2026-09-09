@@ -141,8 +141,8 @@
       "groups": [
         "refresh"
       ],
-      "path": "blue-marble-topography.jpg",
-      "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x21600x10800.jpg",
+      "path": "blue-marble-july.jpg",
+      "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
       "headers": {
         "accept": "*/*",
         "user-agent": "cssEarth Earth source acquisition"
@@ -441,6 +441,341 @@
         "credit": "NASA Science",
         "recordApiUrl": "https://science.nasa.gov/wp-json/wp/v2/topic/48583",
         "blocksApiUrl": "https://science.nasa.gov/wp-json/vip-block-data-api/v1/posts/48583/blocks"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026.das",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.das"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-00.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4:10:2394][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-01.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[2404:10:4794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-02.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4804:10:7194][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-03.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[7204:10:9594][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-04.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[9604:10:11994][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-05.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[12004:10:14394][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-06.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[14404:10:16794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-07.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[16804:10:19194][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-08.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[19204:10:21594][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-09.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[21604:10:23994][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-10.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[24004:10:26394][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-11.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[26404:10:28794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-12.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[28804:10:31194][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-13.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[31204:10:33594][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/rows-3360.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[33604:10:34794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/rows-3480.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[34804:10:35994][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-15.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[36004:10:38394][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-16.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[38404:10:40794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/rows-4080.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[40804:10:41994][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/rows-4200.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[42004:10:43194][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/night-lights-2025/radiance.zip",
+      "url": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip"
+    },
+    {
+      "kind": "json-document",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/night-lights-2025/provenance.json",
+      "value": {
+        "schema": "cssearth-nighttime-radiance-source@1",
+        "checked": "2026-09-09",
+        "product": "VJ146A4.002",
+        "platform": "NOAA-20 / JPSS-1 VIIRS",
+        "year": 2025,
+        "band": "AllAngle_Composite_Snow_Free",
+        "units": "nW/cm2/sr",
+        "productUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+        "publisher": "NASA Black Marble science team",
+        "mirror": {
+          "publisher": "Jurij Stare, www.lightpollutionmap.info",
+          "documentation": "https://www.lightpollutionmap.info/help.html",
+          "url": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip",
+          "httpLastModified": "Sun, 29 Mar 2026 22:55:59 GMT",
+          "bytes": 973526576,
+          "sha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480"
+        },
+        "member": {
+          "filename": "viirs_2025_raw.tif",
+          "bytes": 1034233344,
+          "sha256": "1d085195298ddb12c30d2f13e5799cf02f34845719cf14ff3807bca7b05102c3",
+          "width": 86400,
+          "height": 33600,
+          "bands": 1,
+          "sampleFormat": "Float32",
+          "crs": "EPSG:4326",
+          "rasterType": "PixelIsArea",
+          "bounds": [
+            -180,
+            -65,
+            180,
+            75
+          ],
+          "cellDegrees": 0.004166666666666667,
+          "noData": -999.9000244140625,
+          "scaleFactor": 1,
+          "addOffset": 0
+        },
+        "anchors": [
+          {
+            "name": "Manhattan",
+            "longitude": -73.9857,
+            "latitude": 40.7484,
+            "column": 25443,
+            "row": 8220,
+            "radiance": 212.74862670898438
+          },
+          {
+            "name": "Tokyo",
+            "longitude": 139.7671,
+            "latitude": 35.6812,
+            "column": 76744,
+            "row": 9436,
+            "radiance": 153.54086303710938
+          },
+          {
+            "name": "Paris",
+            "longitude": 2.3522,
+            "latitude": 48.8566,
+            "column": 43764,
+            "row": 6274,
+            "radiance": 73.14937591552734
+          },
+          {
+            "name": "Buenos Aires",
+            "longitude": -58.3816,
+            "latitude": -34.6037,
+            "column": 29188,
+            "row": 26304,
+            "radiance": 188.12364196777344
+          },
+          {
+            "name": "Sahara",
+            "longitude": 15,
+            "latitude": 25,
+            "column": 46800,
+            "row": 12000,
+            "radiance": 0
+          },
+          {
+            "name": "Pacific",
+            "longitude": -130,
+            "latitude": 0,
+            "column": 12000,
+            "row": 18000,
+            "radiance": 0
+          },
+          {
+            "name": "Antarctic limit",
+            "longitude": 0,
+            "latitude": -64.99,
+            "column": 43200,
+            "row": 33597,
+            "radiance": 0
+          }
+        ],
+        "interpretation": {
+          "aggregation": "Native-pixel overlaps weighted by spherical area; numeric mean before false color.",
+          "minimumValidAreaFraction": 0.5,
+          "missing": "Gray; native missing value and uncovered polar regions.",
+          "zero": "Valid thresholded source background; never treated as missing.",
+          "display": "Warm false color. log1p(radiance/0.25) / log1p(100/0.25), saturated at 100 nW/cm2/sr.",
+          "quality": "The public mosaic contains no QA or observation-count bands. Aurora and transient lights remain, especially at high latitudes.",
+          "notMeasured": [
+            "live lighting",
+            "visual sky brightness",
+            "light-source color"
+          ]
+        }
       }
     }
   ]

@@ -26,7 +26,7 @@ export interface LensLegendRecipe {
   height?: number;
   labels?: string[];
   recipe?: { palette: number[][]; labels: string[] };
-  items?: Array<{ label: string; description: string; color: string | number[] }>;
+  items?: Array<{ label: string; description?: string; color: string | number[] }>;
   sourceUrl?: string;
   sourcePath?: string;
   rasterRecipe?: {
@@ -49,6 +49,7 @@ export interface LensRecipe {
   detail?: string;
   shortLabel?: string;
   description: string;
+  summary?: string;
   facts?: Array<{ id: string; label: string; value: string }>;
   title: string;
   filter?: string;

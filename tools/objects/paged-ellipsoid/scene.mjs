@@ -16,13 +16,15 @@ import {
 
 
 export function preparePagedEllipsoidScene({ config: profile, interiorSource, citySource, noise, atmosphereModel, atmosphere, raster }) {
-const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, POLAR_INNER_OVERLAP, POLAR_INNER_INSET, OBLIQUITY_DEGREES, PRESENTATION_NODE_DEGREES, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_SCENE_PITCH_DEGREES, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_DEFAULT_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_REFERENCE_CONTROL_YAW_DEGREES, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
+const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, POLAR_INNER_OVERLAP, POLAR_INNER_INSET, OBLIQUITY_DEGREES, PRESENTATION_NODE_DEGREES, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_SCENE_PITCH_DEGREES, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_DEFAULT_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
 const { MATERIAL_FRAMES_PER_SHARD, MATERIAL_PRESENTATION_SIZE, MATERIAL_TILE_SIZE, ATMOSPHERE_ILLUMINATION, ATMOSPHERE_DEFAULT_FRAME, atmosphereProfile } = atmosphere;
 const { atlas: SURFACE_ATLAS, createSurfaceRasterPlan, surfacePageUrls } = raster;
 const ATMOSPHERE_MODEL = atmosphereModel;
 const POLAR_RADIUS = EQUATORIAL_RADIUS * profile.polarRadiusKm / profile.equatorialRadiusKm;
 const SURFACE_RASTER_OVERSCAN = 64 * SURFACE_OVERLAP;
-const CAMERA_MAXIMUM_ZOOM = citySource.presentation.maximumZoom;
+const CAMERA_MAXIMUM_ZOOM = profile.camera.maximumZoom;
+const cityPageLeafCount = citySource?.presentation.poolSize ?? 0;
+const noisePageLeafCount = noise?.poolSize ?? 0;
 const CAMERA_DURATION_MILLISECONDS = CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES * CAMERA_MILLISECONDS_PER_CONTROL_DEGREE;
 const INTERIOR_CUTAWAY = { ...profile.geometry.interiorCutaway, qualification: interiorSource.qualification };
 const PLAN_OPTIONS = Object.freeze({
@@ -190,10 +192,10 @@ const scene = Object.freeze({
     atmosphereLeafCount: 1,
     directionalSunLeafCount: 1,
     interiorLeafCount: interior.leafCount,
-    cityPageLeafCount: citySource.presentation.poolSize,
-    noisePageLeafCount: noise.poolSize,
-    retainedLeafCount: surfaceLeafCount + 3 + citySource.presentation.poolSize + noise.poolSize,
-    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount + citySource.presentation.poolSize + noise.poolSize,
+    cityPageLeafCount,
+    noisePageLeafCount,
+    retainedLeafCount: surfaceLeafCount + 3 + cityPageLeafCount + noisePageLeafCount,
+    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount + cityPageLeafCount + noisePageLeafCount,
     runtimeGeometryPreparation: false,
     runtimeRasterization: false,
   }),
@@ -454,7 +456,7 @@ function prepareInteriorPlan() {
   const shellLayers = interiorSource.layers.slice(1);
   const shells = Object.freeze(shellLayers.map((layer, index) => {
     const radiusScale = layer.outerRadiusKm / interiorSource[profile.interiorRadiusKey];
-    const cutaway = index < shellLayers.length - 1;
+    const cutaway = interiorSource.presentation?.cutThroughCenter || index < shellLayers.length - 1;
     const id = layer.id;
     const config = Object.freeze({
       latitudeSegments: INTERIOR_LATITUDE_SEGMENTS,
@@ -526,20 +528,17 @@ function prepareInteriorPlan() {
         one: `${profile.publicBase}${profile.namespace}-interior-outer-poles.webp`,
         two: `${profile.publicBase}${profile.namespace}-interior-outer-poles@2x.webp`,
       }),
+      litSurface: Object.freeze({
+        urls: surfacePageUrls(`${profile.namespace}-interior-outer-lit`, surfaceRasterPlan.pages.length, "@2x"),
+      }),
+      litPoles: Object.freeze({
+        one: `${profile.publicBase}${profile.namespace}-interior-outer-lit-poles.webp`,
+        two: `${profile.publicBase}${profile.namespace}-interior-outer-lit-poles@2x.webp`,
+      }),
     }),
     shells,
     sectionLeaves,
     leafCount,
-    presentationLock: Object.freeze({
-      schema: `cssearth-prepared-interior-presentation-lock@1`,
-      referenceControlPitchDegrees: CAMERA_DEFAULT_CONTROL_PITCH_DEGREES,
-      referenceControlYawDegrees: INTERIOR_REFERENCE_CONTROL_YAW_DEGREES,
-      transform:
-        `transform:rotateY(${INTERIOR_REFERENCE_CONTROL_YAW_DEGREES}deg)`,
-      model: "prepared-view-locked-cutaway-legibility-presentation",
-      changesPhysicalAxialTiltClaim: false,
-      runtimeTransformConstruction: false,
-    }),
     runtimeGeometry: false,
     runtimeRasterization: false,
   });

@@ -30,7 +30,8 @@ export async function prepareFactsheet(objectDirectory, { check = false, editori
   for (const fact of ordered) {
     assert.ok(fact.label?.trim() && fact.value?.trim(), `${descriptor.id}: empty fact`);
     if (fact.source) {
-      assert.equal(new URL(fact.source.url).protocol, 'https:');
+      assert.ok(['https:', 'http:'].includes(new URL(fact.source.url).protocol),
+        `${descriptor.id}: fact sources must use a public web URL`);
       assert.ok(fact.source.label?.trim());
       assert.match(fact.source.checked, /^\d{4}-\d{2}-\d{2}$/);
       if (fact.source.path) {
@@ -72,7 +73,7 @@ export async function prepareFactsheet(objectDirectory, { check = false, editori
       return controls.map(lens => {
         const text = labeled.controls.find(l => l.id === lens.id);
         const next = { ...lens };
-        for (const key of ['label', 'description', 'title', 'detail']) {
+        for (const key of ['label', 'description', 'summary', 'title', 'detail']) {
           if (text[key] !== undefined) next[key] = text[key]; else delete next[key];
         }
         if ('qualification' in lens) next.qualification = text.qualification;

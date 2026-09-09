@@ -1,6 +1,6 @@
 .space-minimap {
   position: absolute;
-  bottom: 0;
+  top: calc(var(--explorer-readout-top, 0px) + var(--explorer-status-height, 18px) + 8px);
   right: 10px;
   width: 190px;
   height: 190px;
@@ -53,14 +53,14 @@
   box-sizing: border-box;
 }
 .space-minimap-ring {
-  border: 1px solid rgb(223 223 223 / 30%);
+  border: 1px solid rgb(223 223 223 / 40%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 .space-minimap-ring[hidden] { display: none; }
 .space-minimap-spoke {
   height: 1px;
-  background: rgb(223 223 223 / 30%);
+  background: rgb(223 223 223 / 40%);
 }
 .space-minimap-points { position: absolute; left: 88px; top: 88px; }
 .space-minimap-dot {

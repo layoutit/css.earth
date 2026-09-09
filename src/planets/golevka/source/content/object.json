@@ -54,7 +54,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
-        "title": "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
+        "title": "Radar shape model",
         "thumbnail": "/scenes/golevka/golevka-shape-thumbnail.webp",
         "surface": "golevka-shape-surface@2x.webp",
         "poles": "golevka-shape-surface@2x.webp",
@@ -63,13 +63,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Radar shape resolved at tens of metres. Its angular edges are modeled; no optical texture is mapped."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows the original radar-model radius minus a 0.265 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. The reconstruction resolves global shape at tens of meters; display pixels add no measured detail. Cartographic relief and optional Sun lighting are display treatments.",
-        "title": "Color shows the original radar-model radius minus a 0.265 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. The reconstruction resolves global shape at tens of meters; display pixels add no measured detail. Cartographic relief and optional Sun lighting are display treatments.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/golevka/golevka-elevation-thumbnail.webp",
         "surface": "golevka-elevation-surface@2x.webp",
         "poles": "golevka-elevation-surface@2x.webp",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/golevka.obj",
           "image": "/scenes/golevka/golevka-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Radar height relative to a 265 m sphere. Colors include the overall form; pixels add no measured detail."
       }
     ]
   },

@@ -138,7 +138,7 @@
         "id": "normal",
         "label": "750 nm",
         "description": "MESSENGER at 750 nm",
-        "title": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
+        "title": "MDIS Global Basemap BDR",
         "thumbnail": "mercury-lens-normal.webp",
         "surface": "mercury-surface-normal.webp",
         "source": {
@@ -149,13 +149,14 @@
         "falseColor": false,
         "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
         "view": "exterior",
-        "detail": "750 nm"
+        "detail": "750 nm",
+        "summary": "Brightness at 750 nm varies with the surface and the lighting when each image was taken. The mosaic is grayscale."
       },
       {
         "id": "enhanced",
         "label": "Enhanced",
         "description": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage.",
-        "title": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color",
+        "title": "MDIS Enhanced Color Mosaic",
         "thumbnail": "mercury-lens-enhanced.webp",
         "surface": "mercury-surface-enhanced.webp",
         "source": {
@@ -166,13 +167,36 @@
         "falseColor": true,
         "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
         "view": "exterior",
-        "detail": "False color"
+        "detail": "False color",
+        "summary": "Colors distinguish surface materials. Missing polar color is reconstructed from nearby imagery and terrain, not observed.",
+        "legend": {
+          "kind": "categories",
+          "title": "Enhanced-color terrain",
+          "items": [
+            {
+              "label": "Dark material",
+              "description": "Low-reflectance material",
+              "color": "#4265aa"
+            },
+            {
+              "label": "Lava plains",
+              "description": "Volcanic plains",
+              "color": "#ba985e"
+            },
+            {
+              "label": "Young rays",
+              "description": "Young crater rays",
+              "color": "#c5deef"
+            }
+          ],
+          "sourceUrl": "https://science.nasa.gov/resource/mercury-false-color-rotation-movie/"
+        }
       },
       {
         "id": "topography",
         "label": "Topography",
         "description": "MESSENGER shaded relief",
-        "title": "Topography, USGS MESSENGER global color shaded relief false color",
+        "title": "MDIS Color Shaded Relief",
         "thumbnail": "mercury-lens-topography.webp",
         "surface": "mercury-surface-topography.webp",
         "source": {
@@ -213,13 +237,14 @@
         "falseColor": true,
         "filter": "USGS MESSENGER global color shaded relief",
         "view": "exterior",
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "summary": "Colors show elevation, while shading makes slopes visible. Both describe the terrain; they do not depict its visible color."
       },
       {
         "id": "interior",
         "label": "Interior",
         "description": "Interior structure",
-        "title": "NASA-dimensioned retained 3D metallic-core cutaway",
+        "title": "Interior structure model",
         "thumbnail": "mercury-lens-interior.webp",
         "surface": "mercury-interior-section.webp",
         "source": {
@@ -257,7 +282,8 @@
         "falseColor": false,
         "filter": "NASA-dimensioned retained 3D metallic-core cutaway",
         "view": "interior",
-        "detail": "Structure"
+        "detail": "Structure",
+        "summary": "A large metallic core sits inside a rocky outer shell. Layer sizes follow the structural model; colors identify each layer."
       }
     ],
     "labels": {

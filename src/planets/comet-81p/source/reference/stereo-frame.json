@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-stereo-grid-binding@1",
+  "gridSpacingMeters": 50,
+  "gridDirectionsBody": [
+    [
+      0.3681451977187696,
+      -0.8412562703065583,
+      0.3959254993890986
+    ],
+    [
+      0.589134897000506,
+      0.5405357456278304,
+      0.6006173331121645
+    ]
+  ],
+  "latticeCoherence": [
+    0.9434550619128195,
+    0.7710819442005631
+  ],
+  "bodyToJ2000": [
+    [
+      -0.806996430203223,
+      -0.5075434846866711,
+      -0.3019211367085215
+    ],
+    [
+      -0.3238079707660089,
+      -0.04725904802139589,
+      0.9449417868040926
+    ],
+    [
+      -0.49386755279898087,
+      0.8603291193097108,
+      -0.1262087428038308
+    ]
+  ],
+  "trajectoryFrames": [
+    "reference/n2069we02_rr.fit",
+    "photography/navcam/n2077we02_rr.fit"
+  ],
+  "closestApproachPlaneFrame": "photography/navcam/n2073we02_rr.fit",
+  "method": "Direction of flight is the difference of observer vectors; closest approach is the component of the middle observer perpendicular to flight. Grid X is recovered direction 2; grid Y is negative recovered direction 1. Orthogonalize Y to X, then Z=X cross Y. Transform body grid axes to that encounter frame."
+}

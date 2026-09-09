@@ -42,7 +42,13 @@
       "lensId": "normal",
       "label": "Monochrome",
       "falseColor": false,
-      "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo."
+      "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/33526bf8-69e4-4246-b995-0b238a8b31d0/download"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -101,8 +107,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 7887,
-      "expectedSha256": "0ff9c23f30349ecf84ca94daf914868360f0d1f691be3a4e3502cb0ac0499561",
+      "expectedBytes": 7830,
+      "expectedSha256": "cfb19d2257c3227c07b80a2ba24c7c42490aba86bec4ca546dad72641bfe0d97",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {

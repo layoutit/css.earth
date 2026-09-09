@@ -20,6 +20,23 @@ test('external transport cannot silently omit prepared activation ownership', ()
   assert.throws(() => parsePreparedObjectRuntime(missing), /activation groups must be prepared/);
 });
 
+test('Tuttle transport preserves selection ranges and rejects incomplete or invalid picking banks', async () => {
+  const original = JSON.parse(await readFile(new URL('../../../planets/comet-8p/prepared/runtime.json', import.meta.url), 'utf8'));
+  const parsed = parsePreparedObjectRuntime(original);
+  assert.deepEqual(parsed.surfaceHit?.lensRanges, [
+    {lensId: 'model', start: 0, count: 1000}, {lensId: 'arecibo', start: 1000, count: 1000},
+  ]);
+  for (const mutate of [
+    (ranges: {lensId: string; start: number; count: number}[]) => ranges.pop(),
+    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[1]!.lensId = 'model'; },
+    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[1]!.count = 1001; },
+    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[0]!.start = -1; },
+  ]) {
+    const input = structuredClone(original); mutate(input.surfaceHit.lensRanges);
+    assert.throws(() => parsePreparedObjectRuntime(input), /surface|duplicate/);
+  }
+});
+
 test('actual prepared Mercury and Venus documents preserve every JSON value and reference', () => {
   for (const original of originals) {
     const parsed = parsePreparedObjectRuntime(original);
@@ -130,4 +147,36 @@ test('a body without lenses validates both fixed and toggle-selected presentatio
   parsePreparedObjectRuntime(input);
   input.variants.pop();
   assert.throws(() => parsePreparedObjectRuntime(input), /exactly once/);
+});
+
+
+test('prepared destination roll is optional and rejects non-finite or nonnumeric values', () => {
+  const input = copy(), camera = child(input, 'camera');
+  const navigation = { maximumZoom: camera.maximumZoom, camera: {
+    controlPitch: camera.defaultControlPitchDegrees, controlYaw: camera.defaultControlYawDegrees,
+    zoom: camera.defaultZoom, controlRoll: -60 as unknown,
+  } };
+  item(input.variants).navigation = navigation;
+  assert.equal(parsePreparedObjectRuntime(input), input);
+  for (const invalid of [NaN, Infinity, -Infinity, 'north-up', null]) {
+    navigation.camera.controlRoll = invalid;
+    assert.throws(() => parsePreparedObjectRuntime(input), /(?:navigation roll|controlRoll) must be finite/);
+  }
+  delete (navigation.camera as { controlRoll?: unknown }).controlRoll;
+  assert.equal(parsePreparedObjectRuntime(input), input);
+});
+
+
+test('prepared lens transitions require bounded duration and an explicit zoom policy', () => {
+  const input = copy(), camera = child(input, 'camera');
+  const destination = { controlPitch: camera.defaultControlPitchDegrees,
+    controlYaw: camera.defaultControlYawDegrees, zoom: camera.defaultZoom,
+    transition: { durationMilliseconds: 650, preserveZoom: true } as unknown };
+  item(input.variants).navigation = { maximumZoom: camera.maximumZoom, camera: destination };
+  assert.equal(parsePreparedObjectRuntime(input), input);
+  for (const transition of [null, {}, { durationMilliseconds: 0, preserveZoom: true },
+    { durationMilliseconds: 10001, preserveZoom: true }, { durationMilliseconds: 650, preserveZoom: 'true' }]) {
+    destination.transition = transition;
+    assert.throws(() => parsePreparedObjectRuntime(input), /camera transition/);
+  }
 });

@@ -32,7 +32,7 @@ describe('universal selection flight', () => {
     }
   });
 
-  it('preserves actual camera endpoints and the oracle one-second orientation turn', () => {
+  it('preserves camera endpoints and turns with the same progress as the approach', () => {
     const focusPositionM: PositionM = [1.1e11, 2e10, -3e10];
     const from = pose([-5e10, 2e10, -3e10]);
     const to = pose([1.1e11, 2e10, -3e10 + 1.2e7], quarterTurn);
@@ -41,9 +41,27 @@ describe('universal selection flight', () => {
     expectPose(sampleSelectionFlight(flight, flight.durationS), to);
     expect(sampleSelectionFlight(flight, flight.durationS).complete).toBe(true);
     const middle = sampleSelectionFlight(flight, .5);
-    expect(middle.orientationXyzw[1]).toBeCloseTo(Math.sin(Math.PI / 8), 12);
-    expectPose({ ...sampleSelectionFlight(flight, 1), positionM: to.positionM }, to);
+    expect(middle.orientationXyzw[1]).toBeCloseTo(Math.sin(Math.PI / 4 * middle.progress), 12);
+    expect(flight.orientationDurationS).toBe(flight.positionDurationS);
     expect(sampleSelectionFlight(flight, 1).complete).toBe(false);
+  });
+
+  it('keeps an anchored target centered through a short oblique zoom and completes the turn on arrival', () => {
+    const from = pose([0, 0, 1e13]);
+    const to = pose([1e7, 0, 0], quarterTurn);
+    const flight = createSelectionFlight({ from, to, focusPositionM: [0, 0, 0], durationS: .35 });
+    expect(flight.durationS).toBe(.35);
+    for (let step = 0; step <= 60; step++) {
+      const sample = sampleSelectionFlight(flight, flight.durationS * step / 60);
+      const local = cameraPoseFromReferenceFrame(pose([0, 0, 0]), {
+        originM: sample.positionM, localToReferenceXyzw: sample.orientationXyzw,
+      });
+      const range = Math.hypot(...local.positionM);
+      expect(Math.abs(local.positionM[0]) / range).toBeLessThan(1e-12);
+      expect(Math.abs(local.positionM[1]) / range).toBeLessThan(1e-12);
+      expect(local.positionM[2]).toBeLessThan(0);
+    }
+    expectPose(sampleSelectionFlight(flight, .35), to);
   });
 
   it('uses range interpolation and the shortest great-circle approach in metres', () => {

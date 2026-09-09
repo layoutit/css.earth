@@ -6,6 +6,7 @@ import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { OBJECTS } from './objects.mjs';
+import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mjs';
 
 import galaxyCatalog from '../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
@@ -14,6 +15,9 @@ import clusterPresentation from '../src/objects/galaxy-clusters/source/presentat
 import { createPreparedContextNavigation } from './prepared-context-navigation.mjs';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
+const cometIds = OBJECTS.filter(object => object.classification === 'comet').map(object => object.id);
+const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
+  [object.id, CONTEXT_ANNOTATION_PRIORITY[object.classification] ?? 0]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 let universePromise = null;
@@ -56,7 +60,7 @@ function loadApplicationUniverse() {
       }));
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, contextMarkerSprite(sprite)]));
-    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells, imageLayers,
+    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells, imageLayers, annotationPriorities,
       catalog: { payload: galaxyCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
         fullDistanceM: galaxyPresentation.fullDistanceM,
         clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },
@@ -89,6 +93,7 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage, { onSelectGalaxy: object => { void contextNavigation.select(object); } });
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
           sources: [...galaxyCatalog.sources, ...clusterCatalog.sources], windowTarget });
+        layer.setHiddenOrbits(cometIds);
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
         const minimap = mountSpaceMinimap(stage.ownerDocument);
         const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect }) : null;
@@ -103,12 +108,16 @@ export function createApplicationWorldContext() {
         return { ...layer, viewport, publish,
           connectNavigation: contextNavigation.connect,
           suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
+          previewSelection(id) {
+            layer.previewSelection(id);
+            if (publication) publish(publication.world, publication.viewport);
+          },
           selectObject(id, frame) {
             layer.selectObject(id, frame);
             minimap.selectObject(frame);
           },
           setAsteroidOrbitsEnabled(enabled) {
-            if (!destroyed) layer.setHiddenOrbits(enabled === true ? [] : asteroidIds);
+            if (!destroyed) layer.setHiddenOrbits(enabled === true ? cometIds : [...cometIds, ...asteroidIds]);
           },
           setAsteroidLabelsEnabled(enabled) {
             if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);

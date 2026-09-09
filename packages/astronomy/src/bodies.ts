@@ -1,7 +1,6 @@
 import type { SceneSatelliteId } from './sceneSatellites.js'
 import type { SatelliteId } from './data/satelliteElements.data.js'
 import { SATELLITE_ELEMENTS } from './data/satelliteElements.data.js'
-
 /**
  * Physical data for the bodies this package places.
  *
@@ -32,14 +31,12 @@ export interface BodyData {
   /** Gravitational parent — the body this one orbits. `null` for the Sun. */
   readonly parent: BodyId | null
 }
-
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
-export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche' | 'interamnia' | 'davida' | 'sylvia' | 'eunomia' | 'euphrosyne' | 'bamberga' | 'fortuna' | 'themis' | 'amphitrite' | 'egeria' | 'elektra' | 'iris' | 'hebe' | 'eugenia' | 'daphne' | 'eleonora' | 'nemesis' | 'kalliope' | 'nemausa' | 'parthenope' | 'melpomene' | 'julia' | 'victoria' | 'urania' | 'flora' | 'europa-52' | 'metis-9' | 'camilla' | 'thisbe' | 'doris' | 'hermione' | 'diotima' | 'herculina' | 'nausikaa' | 'astraea' | 'irene' | 'nysa' | 'sappho' | 'betulia' | 'castalia' | 'asteroid-1998-wt24' | 'asteroid-1994-cc' | 'fides' | 'penelope' | 'alphonsina' | 'angelina' | 'ganymed' | 'moshup' | 'cybele' | 'aurora' | 'palma' | 'thule' | 'hektor' | 'hekate' | 'phaethon' | 'harmonia' | 'panopaea' | 'desdemona-666' | 'asteroid-1950-da' | 'apophis' | 'donaldjohanson' | 'geographos' | 'bacchus' | 'mithra' | 'nereus' | 'golevka' | 'yorp' | 'asteroid-1996-hw1' | 'asteroid-2008-ev5' | 'ra-shalom' | 'asteroid-1992-sk' | 'asteroid-1998-ml14' | 'asteroid-2002-ce26' | 'dike' | 'massalia' | 'proserpina' | 'polyhymnia' | 'leukothea' | 'virginia' | 'echo' | 'maja' | 'juewa' | 'bertha' | 'lucia' | 'brucia' | 'badenia' | 'ducrosa' | 'gyptis' | 'petrina' | 'veritas' | 'gryphia' | 'selinur' | 'achilles' | 'musa' | 'auravictrix' | 'transvaalia' | 'moskva' | 'kressmannia' | 'parysatis' | 'rosalinde' | 'susi' | 'hidalgo' | 'zachia' | 'piazzia' | 'tulipa' | 'reinmuthia' | 'china' | 'crimea' | 'rusthawelia' | 'schorria' | 'silvretta' | 'virtanen' | 'mr-spock' | 'educatio' | 'hopi' | 'schaber' | 'iau' | 'united-nations' | 'tartaglia' | 'raup' | 'asteroid-2001-qw16' | 'asteroid-1999-fr33' | 'patroclus'
+export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche' | 'interamnia' | 'davida' | 'sylvia' | 'eunomia' | 'euphrosyne' | 'bamberga' | 'fortuna' | 'themis' | 'amphitrite' | 'egeria' | 'elektra' | 'iris' | 'hebe' | 'eugenia' | 'daphne' | 'eleonora' | 'nemesis' | 'kalliope' | 'nemausa' | 'parthenope' | 'melpomene' | 'julia' | 'victoria' | 'urania' | 'flora' | 'europa-52' | 'metis-9' | 'camilla' | 'thisbe' | 'doris' | 'hermione' | 'diotima' | 'herculina' | 'nausikaa' | 'astraea' | 'irene' | 'nysa' | 'sappho' | 'betulia' | 'castalia' | 'asteroid-1998-wt24' | 'asteroid-1994-cc' | 'fides' | 'penelope' | 'alphonsina' | 'angelina' | 'ganymed' | 'moshup' | 'cybele' | 'aurora' | 'palma' | 'thule' | 'hektor' | 'hekate' | 'phaethon' | 'harmonia' | 'panopaea' | 'desdemona-666' | 'asteroid-1950-da' | 'apophis' | 'donaldjohanson' | 'geographos' | 'bacchus' | 'mithra' | 'nereus' | 'golevka' | 'yorp' | 'asteroid-1996-hw1' | 'asteroid-2008-ev5' | 'ra-shalom' | 'asteroid-1992-sk' | 'asteroid-1998-ml14' | 'asteroid-2002-ce26' | 'dike' | 'massalia' | 'proserpina' | 'polyhymnia' | 'leukothea' | 'virginia' | 'echo' | 'maja' | 'juewa' | 'bertha' | 'lucia' | 'brucia' | 'badenia' | 'ducrosa' | 'gyptis' | 'petrina' | 'veritas' | 'gryphia' | 'selinur' | 'achilles' | 'musa' | 'auravictrix' | 'transvaalia' | 'moskva' | 'kressmannia' | 'parysatis' | 'rosalinde' | 'susi' | 'hidalgo' | 'zachia' | 'piazzia' | 'tulipa' | 'reinmuthia' | 'china' | 'crimea' | 'rusthawelia' | 'schorria' | 'silvretta' | 'virtanen' | 'mr-spock' | 'educatio' | 'hopi' | 'schaber' | 'iau' | 'united-nations' | 'tartaglia' | 'raup' | 'asteroid-2001-qw16' | 'asteroid-1999-fr33' | 'patroclus' | 'polymele' | 'leucus' | 'orus' | 'eurybates' | 'thetis' | 'thalia' | 'phocaea' | 'euterpe' | 'bellona' | 'pomona' | 'circe' | 'atalante' | 'leda-38' | 'laetitia' | 'isis' | 'ariadne' | 'hestia' | 'aglaja' | 'pales' | 'kalypso' | 'alexandra' | 'pandora-55' | 'melete' | 'elpis' | 'erato' | 'ausonia' | 'asia' | 'leto' | 'hesperia' | 'niobe' | 'feronia' | 'klytia' | 'galatea-74' | 'freia' | 'eurynome' | 'alkmene' | 'beatrix' | 'klio' | 'io-85' | 'semele' | 'aegina' | 'minerva' | 'arethusa' | 'klotho' | 'ianthe' | 'hertha' | 'hera' | 'klymene' | 'artemis' | 'dione-106' | 'felicitas' | 'lydia' | 'iphigenia' | 'thyra' | 'lomia' | 'peitho' | 'althaea' | 'lachesis' | 'gerda' | 'brunhild' | 'alkeste' | 'liberatrix' | 'velleda' | 'johanna' | 'antigone' | 'cyrene' | 'sophrosyne' | 'meliboea' | 'siwa' | 'vibilia' | 'lucina' | 'protogeneia' | 'gallia' | 'medusa' | 'nuwa' | 'abundantia' | 'scylla' | 'xanthippe' | 'dejanira' | 'aemilia' | 'una' | 'athor' | 'laurentia' | 'erigone' | 'eva' | 'loreley' | 'rhodope' | 'urda' | 'sibylla' | 'baucis' | 'ino' | 'phaedra' | 'dejopeja' | 'lamberta' | 'menippe' | 'kolga' | 'ambrosia' | 'eurykleia' | 'byblis' | 'kallisto' | 'hersilia' | 'hedda' | 'dido' | 'isabella' | 'medea' | 'lilaea' | 'aschera' | 'oenone' | 'eudora' | 'stephania' | 'eos' | 'henrietta' | 'weringia' | 'philosophia' | 'athamantis' | 'vindobona' | 'asterope' | 'coelestina' | 'hypatia' | 'vanadis' | 'kriemhild' | 'vera' | 'asporina' | 'eukrate' | 'ilse' | 'bettina' | 'clementina' | 'augusta' | 'silesia' | 'tyche' | 'huberta' | 'dresda' | 'libussa' | 'anna' | 'anahita' | 'penthesilea' | 'antonia' | 'philagoria' | 'sapientia' | 'adelheid' | 'emma' | 'iclea' | 'bavaria' | 'clarissa' | 'unitas' | 'annefrank' | 'braille'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | SceneSatelliteId | DwarfPlanetId | AsteroidId | CometId
-export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p' | 'comet-1p'
-
+export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p' | 'comet-1p' | 'comet-8p' | 'comet-19p' | 'comet-137p' | 'comet-143p' | 'comet-162p'
 export const PLANET_IDS: readonly PlanetId[] = [
   'mercury',
   'venus',
@@ -52,9 +49,8 @@ export const PLANET_IDS: readonly PlanetId[] = [
 ]
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
-export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche', 'interamnia', 'davida', 'sylvia', 'eunomia', 'euphrosyne', 'bamberga', 'fortuna', 'themis', 'amphitrite', 'egeria', 'elektra', 'iris', 'hebe', 'eugenia', 'daphne', 'eleonora', 'nemesis', 'kalliope', 'nemausa', 'parthenope', 'melpomene', 'julia', 'victoria', 'urania', 'flora', 'europa-52', 'metis-9', 'camilla', 'thisbe', 'doris', 'hermione', 'diotima', 'herculina', 'nausikaa', 'astraea', 'irene', 'nysa', 'sappho', 'betulia', 'castalia', 'asteroid-1998-wt24', 'asteroid-1994-cc', 'fides', 'penelope', 'alphonsina', 'angelina', 'ganymed', 'moshup', 'cybele', 'aurora', 'palma', 'thule', 'hektor', 'hekate', 'phaethon', 'harmonia', 'panopaea', 'desdemona-666', 'asteroid-1950-da', 'apophis', 'donaldjohanson', 'geographos', 'bacchus', 'mithra', 'nereus', 'golevka', 'yorp', 'asteroid-1996-hw1', 'asteroid-2008-ev5', 'ra-shalom', 'asteroid-1992-sk', 'asteroid-1998-ml14', 'asteroid-2002-ce26', 'dike', 'massalia', 'proserpina', 'polyhymnia', 'leukothea', 'virginia', 'echo', 'maja', 'juewa', 'bertha', 'lucia', 'brucia', 'badenia', 'ducrosa', 'gyptis', 'petrina', 'veritas', 'gryphia', 'selinur', 'achilles', 'musa', 'auravictrix', 'transvaalia', 'moskva', 'kressmannia', 'parysatis', 'rosalinde', 'susi', 'hidalgo', 'zachia', 'piazzia', 'tulipa', 'reinmuthia', 'china', 'crimea', 'rusthawelia', 'schorria', 'silvretta', 'virtanen', 'mr-spock', 'educatio', 'hopi', 'schaber', 'iau', 'united-nations', 'tartaglia', 'raup', 'asteroid-2001-qw16', 'asteroid-1999-fr33', 'patroclus']
-export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p', 'comet-1p']
-
+export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche', 'interamnia', 'davida', 'sylvia', 'eunomia', 'euphrosyne', 'bamberga', 'fortuna', 'themis', 'amphitrite', 'egeria', 'elektra', 'iris', 'hebe', 'eugenia', 'daphne', 'eleonora', 'nemesis', 'kalliope', 'nemausa', 'parthenope', 'melpomene', 'julia', 'victoria', 'urania', 'flora', 'europa-52', 'metis-9', 'camilla', 'thisbe', 'doris', 'hermione', 'diotima', 'herculina', 'nausikaa', 'astraea', 'irene', 'nysa', 'sappho', 'betulia', 'castalia', 'asteroid-1998-wt24', 'asteroid-1994-cc', 'fides', 'penelope', 'alphonsina', 'angelina', 'ganymed', 'moshup', 'cybele', 'aurora', 'palma', 'thule', 'hektor', 'hekate', 'phaethon', 'harmonia', 'panopaea', 'desdemona-666', 'asteroid-1950-da', 'apophis', 'donaldjohanson', 'geographos', 'bacchus', 'mithra', 'nereus', 'golevka', 'yorp', 'asteroid-1996-hw1', 'asteroid-2008-ev5', 'ra-shalom', 'asteroid-1992-sk', 'asteroid-1998-ml14', 'asteroid-2002-ce26', 'dike', 'massalia', 'proserpina', 'polyhymnia', 'leukothea', 'virginia', 'echo', 'maja', 'juewa', 'bertha', 'lucia', 'brucia', 'badenia', 'ducrosa', 'gyptis', 'petrina', 'veritas', 'gryphia', 'selinur', 'achilles', 'musa', 'auravictrix', 'transvaalia', 'moskva', 'kressmannia', 'parysatis', 'rosalinde', 'susi', 'hidalgo', 'zachia', 'piazzia', 'tulipa', 'reinmuthia', 'china', 'crimea', 'rusthawelia', 'schorria', 'silvretta', 'virtanen', 'mr-spock', 'educatio', 'hopi', 'schaber', 'iau', 'united-nations', 'tartaglia', 'raup', 'asteroid-2001-qw16', 'asteroid-1999-fr33', 'patroclus', 'polymele', 'leucus', 'orus', 'eurybates', 'thetis', 'thalia', 'phocaea', 'euterpe', 'bellona', 'pomona', 'circe', 'atalante', 'leda-38', 'laetitia', 'isis', 'ariadne', 'hestia', 'aglaja', 'pales', 'kalypso', 'alexandra', 'pandora-55', 'melete', 'elpis', 'erato', 'ausonia', 'asia', 'leto', 'hesperia', 'niobe', 'feronia', 'klytia', 'galatea-74', 'freia', 'eurynome', 'alkmene', 'beatrix', 'klio', 'io-85', 'semele', 'aegina', 'minerva', 'arethusa', 'klotho', 'ianthe', 'hertha', 'hera', 'klymene', 'artemis', 'dione-106', 'felicitas', 'lydia', 'iphigenia', 'thyra', 'lomia', 'peitho', 'althaea', 'lachesis', 'gerda', 'brunhild', 'alkeste', 'liberatrix', 'velleda', 'johanna', 'antigone', 'cyrene', 'sophrosyne', 'meliboea', 'siwa', 'vibilia', 'lucina', 'protogeneia', 'gallia', 'medusa', 'nuwa', 'abundantia', 'scylla', 'xanthippe', 'dejanira', 'aemilia', 'una', 'athor', 'laurentia', 'erigone', 'eva', 'loreley', 'rhodope', 'urda', 'sibylla', 'baucis', 'ino', 'phaedra', 'dejopeja', 'lamberta', 'menippe', 'kolga', 'ambrosia', 'eurykleia', 'byblis', 'kallisto', 'hersilia', 'hedda', 'dido', 'isabella', 'medea', 'lilaea', 'aschera', 'oenone', 'eudora', 'stephania', 'eos', 'henrietta', 'weringia', 'philosophia', 'athamantis', 'vindobona', 'asterope', 'coelestina', 'hypatia', 'vanadis', 'kriemhild', 'vera', 'asporina', 'eukrate', 'ilse', 'bettina', 'clementina', 'augusta', 'silesia', 'tyche', 'huberta', 'dresda', 'libussa', 'anna', 'anahita', 'penthesilea', 'antonia', 'philagoria', 'sapientia', 'adelheid', 'emma', 'iclea', 'bavaria', 'clarissa', 'unitas', 'annefrank', 'braille']
+export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p', 'comet-1p', 'comet-8p', 'comet-19p', 'comet-137p', 'comet-143p', 'comet-162p']
 const body = (
   id: BodyId,
   name: string,
@@ -95,7 +91,7 @@ export const BODIES: Record<BodyId, BodyData> = {
   hiiaka: body('hiiaka', 'Hiʻiaka', '120136108', 183.4875470120756, 1.151, 'haumea'),
   menoetius: body('menoetius', 'Menoetius', '120000617', 52.19000997884097, 0.020917, 'patroclus'),
   // Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.
-  patroclus: body('patroclus', 'Patroclus', '920000617', 56.67287225388619, 0.0740606, 'sun'),
+  patroclus: body('patroclus', 'Patroclus', '920000617', 56.672872253886204, 0.0740606, 'sun'),
   siarnaq: body('siarnaq', 'Siarnaq', '629', 19.5, 0, 'saturn'),
   ymir: body('ymir', 'Ymir', '619', 9.6, 0, 'saturn'),
 
@@ -109,6 +105,13 @@ export const BODIES: Record<BodyId, BodyData> = {
   desdemona: body('desdemona', 'Desdemona', '710', 32.01203974041056, 0, 'uranus'),
   rosalind: body('rosalind', 'Rosalind', '713', 35.99999999999999, 0, 'uranus'),
   sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
+  // Equivalent-volume radius of the Hubble contact model scaled by Spitzer.
+  // Borrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.
+  'comet-137p': body('comet-137p', '137P/Shoemaker-Levy 2', 'DES=137P;CAP;', 4.04, 0, 'sun'),
+  'comet-143p': body('comet-143p', '143P/Kowal-Mrkos', 'DES=143P;CAP;', 4.79, 0, 'sun'),
+  'comet-162p': body('comet-162p', '162P/Siding Spring', 'DES=162P;CAP;', 7.03, 0, 'sun'),
+  'comet-19p': body('comet-19p', '19P/Borrelly', 'DES=19P;CAP;', 4, 0, 'sun'),
+  'comet-8p': body('comet-8p', '8P/Tuttle', 'DES=8P;CAP;', 2.724259583841626, 0, 'sun'),
   // Equivalent-volume radius of the triangulated PDS Stooke historical model.
   // Approximate model scale, not a measured mean radius; no known GM is asserted.
   'comet-1p': body('comet-1p', '1P/Halley', 'DES=1P;CAP;', 4.57906433330178, 0, 'sun'),
@@ -359,6 +362,149 @@ export const BODIES: Record<BodyId, BodyData> = {
   makemake: body('makemake', 'Makemake', '136472;', 738.8, 278, 'sun'),
 
   // Published shape models with documented physical size calibration.
+  'thetis': body('thetis', 'Thetis', '17;', 38.5, 0, 'sun'),
+  'thalia': body('thalia', 'Thalia', '23;', 57.0, 0, 'sun'),
+  'phocaea': body('phocaea', 'Phocaea', '25;', 41.605, 0, 'sun'),
+  'euterpe': body('euterpe', 'Euterpe', '27;', 54.895, 0, 'sun'),
+  'bellona': body('bellona', 'Bellona', '28;', 66.5, 0, 'sun'),
+  'pomona': body('pomona', 'Pomona', '32;', 44.5, 0, 'sun'),
+  'circe': body('circe', 'Circe', '34;', 53.5, 0, 'sun'),
+  'atalante': body('atalante', 'Atalante', '36;', 55.27, 0, 'sun'),
+  'leda-38': body('leda-38', '38 Leda', '38;', 57.11, 0, 'sun'),
+  'laetitia': body('laetitia', 'Laetitia', '39;', 82.0, 0, 'sun'),
+  'isis': body('isis', 'Isis', '42;', 52.0, 0, 'sun'),
+  'ariadne': body('ariadne', 'Ariadne', '43;', 30.0, 0, 'sun'),
+  'hestia': body('hestia', 'Hestia', '46;', 60.31, 0, 'sun'),
+  'aglaja': body('aglaja', 'Aglaja', '47;', 73.525, 0, 'sun'),
+  'pales': body('pales', 'Pales', '49;', 74.01, 0, 'sun'),
+  'kalypso': body('kalypso', 'Kalypso', '53;', 50.95, 0, 'sun'),
+  'alexandra': body('alexandra', 'Alexandra', '54;', 71.5, 0, 'sun'),
+  'pandora-55': body('pandora-55', '55 Pandora', '55;', 35.0, 0, 'sun'),
+  'melete': body('melete', 'Melete', '56;', 58.0, 0, 'sun'),
+  'elpis': body('elpis', 'Elpis', '59;', 78.09, 0, 'sun'),
+  'erato': body('erato', 'Erato', '62;', 39.31, 0, 'sun'),
+  'ausonia': body('ausonia', 'Ausonia', '63;', 46.5, 0, 'sun'),
+  'asia': body('asia', 'Asia', '67;', 30.815, 0, 'sun'),
+  'leto': body('leto', 'Leto', '68;', 74.0, 0, 'sun'),
+  'hesperia': body('hesperia', 'Hesperia', '69;', 54.5, 0, 'sun'),
+  'niobe': body('niobe', 'Niobe', '71;', 40.43, 0, 'sun'),
+  'feronia': body('feronia', 'Feronia', '72;', 46.5, 0, 'sun'),
+  'klytia': body('klytia', 'Klytia', '73;', 22.7, 0, 'sun'),
+  'galatea-74': body('galatea-74', '74 Galatea', '74;', 56.545, 0, 'sun'),
+  'freia': body('freia', 'Freia', '76;', 84.18, 0, 'sun'),
+  'eurynome': body('eurynome', 'Eurynome', '79;', 37.375, 0, 'sun'),
+  'alkmene': body('alkmene', 'Alkmene', '82;', 29.3, 0, 'sun'),
+  'beatrix': body('beatrix', 'Beatrix', '83;', 43.71, 0, 'sun'),
+  'klio': body('klio', 'Klio', '84;', 39.16, 0, 'sun'),
+  'io-85': body('io-85', '85 Io', '85;', 83.5, 0, 'sun'),
+  'semele': body('semele', 'Semele', '86;', 58.66, 0, 'sun'),
+  'aegina': body('aegina', 'Aegina', '91;', 50.085, 0, 'sun'),
+  'minerva': body('minerva', 'Minerva', '93;', 80.0, 0, 'sun'),
+  'arethusa': body('arethusa', 'Arethusa', '95;', 73.5, 0, 'sun'),
+  'klotho': body('klotho', 'Klotho', '97;', 42.5, 0, 'sun'),
+  'ianthe': body('ianthe', 'Ianthe', '98;', 52.12, 0, 'sun'),
+  'hertha': body('hertha', 'Hertha', '135;', 39.5, 0, 'sun'),
+  'hera': body('hera', 'Hera', '103;', 41.615, 0, 'sun'),
+  'klymene': body('klymene', 'Klymene', '104;', 63.25, 0, 'sun'),
+  'artemis': body('artemis', 'Artemis', '105;', 61.765, 0, 'sun'),
+  'dione-106': body('dione-106', '106 Dione', '106;', 76.71, 0, 'sun'),
+  'felicitas': body('felicitas', 'Felicitas', '109;', 42.5, 0, 'sun'),
+  'lydia': body('lydia', 'Lydia', '110;', 45.5, 0, 'sun'),
+  'iphigenia': body('iphigenia', 'Iphigenia', '112;', 35.53, 0, 'sun'),
+  'thyra': body('thyra', 'Thyra', '115;', 46.0, 0, 'sun'),
+  'lomia': body('lomia', 'Lomia', '117;', 72.46, 0, 'sun'),
+  'peitho': body('peitho', 'Peitho', '118;', 21.995, 0, 'sun'),
+  'althaea': body('althaea', 'Althaea', '119;', 29.395, 0, 'sun'),
+  'lachesis': body('lachesis', 'Lachesis', '120;', 78.265, 0, 'sun'),
+  'gerda': body('gerda', 'Gerda', '122;', 42.705, 0, 'sun'),
+  'brunhild': body('brunhild', 'Brunhild', '123;', 24.11, 0, 'sun'),
+  'alkeste': body('alkeste', 'Alkeste', '124;', 40.695, 0, 'sun'),
+  'liberatrix': body('liberatrix', 'Liberatrix', '125;', 25.55, 0, 'sun'),
+  'velleda': body('velleda', 'Velleda', '126;', 21.97, 0, 'sun'),
+  'johanna': body('johanna', 'Johanna', '127;', 57.095, 0, 'sun'),
+  'antigone': body('antigone', 'Antigone', '129;', 63.0, 0, 'sun'),
+  'cyrene': body('cyrene', 'Cyrene', '133;', 35.46, 0, 'sun'),
+  'sophrosyne': body('sophrosyne', 'Sophrosyne', '134;', 50.21, 0, 'sun'),
+  'meliboea': body('meliboea', 'Meliboea', '137;', 71.885, 0, 'sun'),
+  'siwa': body('siwa', 'Siwa', '140;', 55.305, 0, 'sun'),
+  'vibilia': body('vibilia', 'Vibilia', '144;', 71.5, 0, 'sun'),
+  'lucina': body('lucina', 'Lucina', '146;', 77.0, 0, 'sun'),
+  'protogeneia': body('protogeneia', 'Protogeneia', '147;', 54.205, 0, 'sun'),
+  'gallia': body('gallia', 'Gallia', '148;', 40.435, 0, 'sun'),
+  'medusa': body('medusa', 'Medusa', '149;', 10.705, 0, 'sun'),
+  'nuwa': body('nuwa', 'Nuwa', '150;', 69.825, 0, 'sun'),
+  'abundantia': body('abundantia', 'Abundantia', '151;', 21.09, 0, 'sun'),
+  'scylla': body('scylla', 'Scylla', '155;', 19.605, 0, 'sun'),
+  'xanthippe': body('xanthippe', 'Xanthippe', '156;', 57.745, 0, 'sun'),
+  'dejanira': body('dejanira', 'Dejanira', '157;', 11.235, 0, 'sun'),
+  'aemilia': body('aemilia', 'Aemilia', '159;', 67.5, 0, 'sun'),
+  'una': body('una', 'Una', '160;', 38.86, 0, 'sun'),
+  'athor': body('athor', 'Athor', '161;', 20.42, 0, 'sun'),
+  'laurentia': body('laurentia', 'Laurentia', '162;', 42.67, 0, 'sun'),
+  'erigone': body('erigone', 'Erigone', '163;', 36.07, 0, 'sun'),
+  'eva': body('eva', 'Eva', '164;', 48.85, 0, 'sun'),
+  'loreley': body('loreley', 'Loreley', '165;', 88.5, 0, 'sun'),
+  'rhodope': body('rhodope', 'Rhodope', '166;', 26.63, 0, 'sun'),
+  'urda': body('urda', 'Urda', '167;', 22.0, 0, 'sun'),
+  'sibylla': body('sibylla', 'Sibylla', '168;', 73.24, 0, 'sun'),
+  'baucis': body('baucis', 'Baucis', '172;', 33.445, 0, 'sun'),
+  'ino': body('ino', 'Ino', '173;', 72.0, 0, 'sun'),
+  'phaedra': body('phaedra', 'Phaedra', '174;', 32.04, 0, 'sun'),
+  'dejopeja': body('dejopeja', 'Dejopeja', '184;', 46.5, 0, 'sun'),
+  'lamberta': body('lamberta', 'Lamberta', '187;', 70.5, 0, 'sun'),
+  'menippe': body('menippe', 'Menippe', '188;', 17.65, 0, 'sun'),
+  'kolga': body('kolga', 'Kolga', '191;', 50.465, 0, 'sun'),
+  'ambrosia': body('ambrosia', 'Ambrosia', '193;', 18.945, 0, 'sun'),
+  'eurykleia': body('eurykleia', 'Eurykleia', '195;', 43.5, 0, 'sun'),
+  'byblis': body('byblis', 'Byblis', '199;', 27.325, 0, 'sun'),
+  'kallisto': body('kallisto', 'Kallisto', '204;', 25.515, 0, 'sun'),
+  'hersilia': body('hersilia', 'Hersilia', '206;', 46.965, 0, 'sun'),
+  'hedda': body('hedda', 'Hedda', '207;', 31.955, 0, 'sun'),
+  'dido': body('dido', 'Dido', '209;', 66.715, 0, 'sun'),
+  'isabella': body('isabella', 'Isabella', '210;', 34.79, 0, 'sun'),
+  'medea': body('medea', 'Medea', '212;', 76.86, 0, 'sun'),
+  'lilaea': body('lilaea', 'Lilaea', '213;', 38.155, 0, 'sun'),
+  'aschera': body('aschera', 'Aschera', '214;', 13.035, 0, 'sun'),
+  'oenone': body('oenone', 'Oenone', '215;', 18.5, 0, 'sun'),
+  'eudora': body('eudora', 'Eudora', '217;', 33.9, 0, 'sun'),
+  'stephania': body('stephania', 'Stephania', '220;', 16.145, 0, 'sun'),
+  'eos': body('eos', 'Eos', '221;', 53.87, 0, 'sun'),
+  'henrietta': body('henrietta', 'Henrietta', '225;', 53.785, 0, 'sun'),
+  'weringia': body('weringia', 'Weringia', '226;', 16.13, 0, 'sun'),
+  'philosophia': body('philosophia', 'Philosophia', '227;', 50.5, 0, 'sun'),
+  'athamantis': body('athamantis', 'Athamantis', '230;', 57.5, 0, 'sun'),
+  'vindobona': body('vindobona', 'Vindobona', '231;', 40.035, 0, 'sun'),
+  'asterope': body('asterope', 'Asterope', '233;', 53.5, 0, 'sun'),
+  'coelestina': body('coelestina', 'Coelestina', '237;', 19.755, 0, 'sun'),
+  'hypatia': body('hypatia', 'Hypatia', '238;', 71.985, 0, 'sun'),
+  'vanadis': body('vanadis', 'Vanadis', '240;', 45.065, 0, 'sun'),
+  'kriemhild': body('kriemhild', 'Kriemhild', '242;', 22.57, 0, 'sun'),
+  'vera': body('vera', 'Vera', '245;', 36.44, 0, 'sun'),
+  'asporina': body('asporina', 'Asporina', '246;', 29.965, 0, 'sun'),
+  'eukrate': body('eukrate', 'Eukrate', '247;', 75.12, 0, 'sun'),
+  'ilse': body('ilse', 'Ilse', '249;', 18.515, 0, 'sun'),
+  'bettina': body('bettina', 'Bettina', '250;', 55.0, 0, 'sun'),
+  'clementina': body('clementina', 'Clementina', '252;', 33.835, 0, 'sun'),
+  'augusta': body('augusta', 'Augusta', '254;', 6.085, 0, 'sun'),
+  'silesia': body('silesia', 'Silesia', '257;', 39.6, 0, 'sun'),
+  'tyche': body('tyche', 'Tyche', '258;', 32.185, 0, 'sun'),
+  'huberta': body('huberta', 'Huberta', '260;', 47.6, 0, 'sun'),
+  'dresda': body('dresda', 'Dresda', '263;', 12.87, 0, 'sun'),
+  'libussa': body('libussa', 'Libussa', '264;', 28.785, 0, 'sun'),
+  'anna': body('anna', 'Anna', '265;', 13.27, 0, 'sun'),
+  'anahita': body('anahita', 'Anahita', '270;', 23.465, 0, 'sun'),
+  'penthesilea': body('penthesilea', 'Penthesilea', '271;', 32.0, 0, 'sun'),
+  'antonia': body('antonia', 'Antonia', '272;', 11.945, 0, 'sun'),
+  'philagoria': body('philagoria', 'Philagoria', '274;', 13.66, 0, 'sun'),
+  'sapientia': body('sapientia', 'Sapientia', '275;', 51.5, 0, 'sun'),
+  'adelheid': body('adelheid', 'Adelheid', '276;', 52.0, 0, 'sun'),
+  'emma': body('emma', 'Emma', '283;', 73.5, 0, 'sun'),
+  'iclea': body('iclea', 'Iclea', '286;', 43.0, 0, 'sun'),
+  'bavaria': body('bavaria', 'Bavaria', '301;', 27.5, 0, 'sun'),
+  'clarissa': body('clarissa', 'Clarissa', '302;', 21.5, 0, 'sun'),
+  'unitas': body('unitas', 'Unitas', '306;', 24.5, 0, 'sun'),
+  'annefrank': body('annefrank', 'Annefrank', '5535;', 2.4115760195783342, 0, 'sun'),
+  'braille': body('braille', 'Braille', '9969;', 0.6402895824937471, 0, 'sun'),
   'dike': body('dike', 'Dike', '99;', 33.25, 0, 'sun'),
   'massalia': body('massalia', 'Massalia', '20;', 73.5, 0, 'sun'),
   'proserpina': body('proserpina', 'Proserpina', '26;', 43.725, 0, 'sun'),
@@ -378,6 +524,10 @@ export const BODIES: Record<BodyId, BodyData> = {
   'veritas': body('veritas', 'Veritas', '490;', 59.4015, 0, 'sun'),
   'gryphia': body('gryphia', 'Gryphia', '496;', 7.2015, 0, 'sun'),
   'selinur': body('selinur', 'Selinur', '500;', 20.414, 0, 'sun'),
+  'polymele': body('polymele', 'Polymele', '15094;', 9.496545373627304, 0, 'sun'),
+  'leucus': body('leucus', 'Leucus', '11351;', 20.215215801007133, 0, 'sun'),
+  'orus': body('orus', 'Orus', '21900;', 30.5875269554397, 0, 'sun'),
+  'eurybates': body('eurybates', 'Eurybates', '3548;', 34.948609955746875, 0, 'sun'),
   'achilles': body('achilles', 'Achilles', '588;', 65.5, 0, 'sun'),
   'musa': body('musa', 'Musa', '600;', 12.5575, 0, 'sun'),
   'auravictrix': body('auravictrix', 'Auravictrix', '700;', 8.2105, 0, 'sun'),

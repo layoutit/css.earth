@@ -59,7 +59,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Published radar shape model",
-        "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The weak 2012–2013 radar data admit multiple shapes; the 2026 PDS release preserves the 2018 Model B rather than a new reconstruction. Apophis tumbles: the archived precession and rotation periods are 27.45 and 265.7 hours. This view uses a fixed illustrative frame, without propagating its tumbling attitude. No optical surface map is supplied. Lighting is illustrative in a fixed model frame.",
+        "title": "Radar shape model",
         "thumbnail": "/scenes/apophis/apophis-shape-thumbnail.webp",
         "surface": "apophis-shape-surface@2x.webp",
         "poles": "apophis-shape-surface@2x.webp",
@@ -68,13 +68,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Source shape · radial height",
-        "title": "Color shows original model radius minus a 0.17 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/apophis/apophis-elevation-thumbnail.webp",
         "surface": "apophis-elevation-surface@2x.webp",
         "poles": "apophis-elevation-surface@2x.webp",
@@ -96,7 +97,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-apophis.jpl.radar.shape_model_v1.0/data/apophis_v233s7.obj",
           "image": "/scenes/apophis/apophis-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
       }
     ]
   },
