@@ -1,3 +1,13 @@
+import diomedesDescriptor from "../src/planets/diomedes/object.json" with { type: "json" };
+import ajaxDescriptor from "../src/planets/ajax/object.json" with { type: "json" };
+import ilioneusDescriptor from "../src/planets/ilioneus/object.json" with { type: "json" };
+import pyrrhusDescriptor from "../src/planets/pyrrhus/object.json" with { type: "json" };
+import eumelosDescriptor from "../src/planets/eumelos/object.json" with { type: "json" };
+import lycomedesDescriptor from "../src/planets/lycomedes/object.json" with { type: "json" };
+import demodokusDescriptor from "../src/planets/demodokus/object.json" with { type: "json" };
+import menelausDescriptor from "../src/planets/menelaus/object.json" with { type: "json" };
+import agenorDescriptor from "../src/planets/agenor/object.json" with { type: "json" };
+import mentorDescriptor from "../src/planets/mentor/object.json" with { type: "json" };
 import annefrankDescriptor from "../src/planets/annefrank/object.json" with { type: "json" };
 import brailleDescriptor from "../src/planets/braille/object.json" with { type: "json" };
 import heraDescriptor from "../src/planets/hera/object.json" with { type: "json" };
@@ -2218,6 +2228,66 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(brailleDescriptor);
     }, brailleDescriptor.properties.worldFrame),
+
+  object("diomedes", "Diomedes", "asteroid", "#aaaaaa", 5.229240298100407,
+    "Explore Diomedes in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(diomedesDescriptor);
+    }, diomedesDescriptor.properties.worldFrame),
+
+  object("ajax", "Ajax", "asteroid", "#aaaaaa", 5.281571123923134,
+    "Explore Ajax in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ajaxDescriptor);
+    }, ajaxDescriptor.properties.worldFrame),
+
+  object("ilioneus", "Ilioneus", "asteroid", "#aaaaaa", 5.182702514637422,
+    "Explore Ilioneus in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ilioneusDescriptor);
+    }, ilioneusDescriptor.properties.worldFrame),
+
+  object("pyrrhus", "Pyrrhus", "asteroid", "#aaaaaa", 5.198966960927357,
+    "Explore Pyrrhus in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(pyrrhusDescriptor);
+    }, pyrrhusDescriptor.properties.worldFrame),
+
+  object("eumelos", "Eumelos", "asteroid", "#aaaaaa", 5.201650929201143,
+    "Explore Eumelos in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eumelosDescriptor);
+    }, eumelosDescriptor.properties.worldFrame),
+
+  object("lycomedes", "Lycomedes", "asteroid", "#aaaaaa", 5.0677482891717345,
+    "Explore Lycomedes in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lycomedesDescriptor);
+    }, lycomedesDescriptor.properties.worldFrame),
+
+  object("demodokus", "Demodokus", "asteroid", "#aaaaaa", 5.199474785432278,
+    "Explore Demodokus in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(demodokusDescriptor);
+    }, demodokusDescriptor.properties.worldFrame),
+
+  object("menelaus", "Menelaus", "asteroid", "#aaaaaa", 5.197053008241417,
+    "Explore Menelaus in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(menelausDescriptor);
+    }, menelausDescriptor.properties.worldFrame),
+
+  object("agenor", "Agenor", "asteroid", "#aaaaaa", 5.217218141628041,
+    "Explore Agenor in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(agenorDescriptor);
+    }, agenorDescriptor.properties.worldFrame),
+
+  object("mentor", "Mentor", "asteroid", "#aaaaaa", 5.197909787831412,
+    "Explore Mentor in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mentorDescriptor);
+    }, mentorDescriptor.properties.worldFrame),
 
   object("dike", "Dike", "asteroid", "#aaaaaa", 2.662672838262387,
     "Explore Dike in 3D with its published shape model and documented physical size scale.", async () => {

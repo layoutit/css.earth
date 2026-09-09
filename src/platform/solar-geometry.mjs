@@ -2204,6 +2204,66 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.3943597618100994,
     -0.3220967902726001,
   ]),
+  // subsolar latitude -16.647°, longitude 131.302°
+  diomedes: Object.freeze([
+    -0.6323647775265604,
+    0.719755363337664,
+    -0.28647339333776056,
+  ]),
+  // subsolar latitude 24.781°, longitude -2.614°
+  ajax: Object.freeze([
+    0.9069736435362227,
+    -0.0414066711097975,
+    0.41914710725261395,
+  ]),
+  // subsolar latitude 5.799°, longitude -156.857°
+  ilioneus: Object.freeze([
+    -0.9148211847119077,
+    -0.3910162061324736,
+    0.1010372532488314,
+  ]),
+  // subsolar latitude 43.579°, longitude 14.476°
+  pyrrhus: Object.freeze([
+    0.7014309274551926,
+    0.1810893220168171,
+    0.6893484688173592,
+  ]),
+  // subsolar latitude -9.600°, longitude 11.736°
+  eumelos: Object.freeze([
+    0.9653832764113944,
+    0.20055167303004307,
+    -0.16677576583560297,
+  ]),
+  // subsolar latitude -23.270°, longitude 100.083°
+  lycomedes: Object.freeze([
+    -0.16083302927561163,
+    0.9044631153788848,
+    -0.39506861380417496,
+  ]),
+  // subsolar latitude -39.233°, longitude 178.953°
+  demodokus: Object.freeze([
+    -0.7744515192806561,
+    0.014157827122222855,
+    -0.6324748218032564,
+  ]),
+  // subsolar latitude 25.589°, longitude -26.350°
+  menelaus: Object.freeze([
+    0.8082042177058023,
+    -0.4003169055504283,
+    0.4319170263060734,
+  ]),
+  // subsolar latitude -8.207°, longitude -175.339°
+  agenor: Object.freeze([
+    -0.9864861652946827,
+    -0.08043255519763451,
+    -0.14274330018102968,
+  ]),
+  // subsolar latitude 48.326°, longitude -51.237°
+  mentor: Object.freeze([
+    0.4162944347203218,
+    -0.5184436647571792,
+    0.7469371527069955,
+  ]),
   // subsolar latitude 38.224°, longitude -143.035°
   dike: Object.freeze([
     -0.6276942749533061,
@@ -4636,6 +4696,66 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     -0.3977771559319137,
     -2.4356826039297786e-17,
     0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 77.310°, Sun ecliptic latitude 20.369°
+  diomedes: Object.freeze([
+    0.37509734367453884,
+    0.9005800713902069,
+    0.21967593810682756,
+  ]),
+  // pole tilt to the ecliptic 48.000°, Sun ecliptic latitude 7.702°
+  ajax: Object.freeze([
+    -0.12804195723474054,
+    0.7320310709386326,
+    0.669130606360175,
+  ]),
+  // pole tilt to the ecliptic 116.000°, Sun ecliptic latitude -6.024°
+  ilioneus: Object.freeze([
+    -0.2963766282645865,
+    0.8485232064490428,
+    -0.4383711467876853,
+  ]),
+  // pole tilt to the ecliptic 102.000°, Sun ecliptic latitude -13.836°
+  pyrrhus: Object.freeze([
+    -0.3703301863489131,
+    0.9053332435630816,
+    -0.2079116908168687,
+  ]),
+  // pole tilt to the ecliptic 68.000°, Sun ecliptic latitude 6.374°
+  eumelos: Object.freeze([
+    -0.012875362425320032,
+    0.9270944532303038,
+    0.37460659341770897,
+  ]),
+  // pole tilt to the ecliptic 36.000°, Sun ecliptic latitude 0.805°
+  lycomedes: Object.freeze([
+    0.391410282518874,
+    0.4385082593889996,
+    0.8090169943741139,
+  ]),
+  // pole tilt to the ecliptic 93.000°, Sun ecliptic latitude -5.723°
+  demodokus: Object.freeze([
+    0.1894208641735348,
+    0.9805002212644868,
+    -0.0523359562446692,
+  ]),
+  // pole tilt to the ecliptic 24.000°, Sun ecliptic latitude 5.059°
+  menelaus: Object.freeze([
+    -0.20515795704973772,
+    0.3512049394284822,
+    0.9135454576430306,
+  ]),
+  // pole tilt to the ecliptic 62.000°, Sun ecliptic latitude 9.755°
+  agenor: Object.freeze([
+    -0.30718047059587406,
+    0.8277901969817103,
+    0.4694715627867983,
+  ]),
+  // pole tilt to the ecliptic 33.000°, Sun ecliptic latitude 24.525°
+  mentor: Object.freeze([
+    0.1458459379829421,
+    0.5247481689672577,
+    0.83867056794631,
   ]),
   // pole tilt to the ecliptic 40.000°, Sun ecliptic latitude 4.055°
   dike: Object.freeze([
@@ -7071,6 +7191,66 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.13819011173278295,
     0.42792830336778187,
     0.8931857926523757,
+  ]),
+  // orbital inclination to the ecliptic 20.453°, obliquity to the orbit 71.885°
+  diomedes: Object.freeze([
+    0.6492163928498387,
+    0.6941462499526148,
+    0.3109325633184243,
+  ]),
+  // orbital inclination to the ecliptic 18.033°, obliquity to the orbit 38.679°
+  ajax: Object.freeze([
+    -0.33673703285645906,
+    0.5264774164524049,
+    0.7806597854818893,
+  ]),
+  // orbital inclination to the ecliptic 15.761°, obliquity to the orbit 129.961°
+  ilioneus: Object.freeze([
+    -0.360134080198453,
+    0.6766109656499212,
+    -0.6422624428081525,
+  ]),
+  // orbital inclination to the ecliptic 17.478°, obliquity to the orbit 84.736°
+  pyrrhus: Object.freeze([
+    -0.3324910563166691,
+    0.9386335235135815,
+    0.09174315236519841,
+  ]),
+  // orbital inclination to the ecliptic 7.433°, obliquity to the orbit 70.468°
+  eumelos: Object.freeze([
+    -0.13598325762523691,
+    0.9325953913931235,
+    0.33432677068690614,
+  ]),
+  // orbital inclination to the ecliptic 4.954°, obliquity to the orbit 39.149°
+  lycomedes: Object.freeze([
+    0.46940167457653387,
+    0.4222080057201025,
+    0.7755014299216989,
+  ]),
+  // orbital inclination to the ecliptic 17.126°, obliquity to the orbit 108.945°
+  demodokus: Object.freeze([
+    0.28164976035460565,
+    0.9029218470668638,
+    -0.32466220996838585,
+  ]),
+  // orbital inclination to the ecliptic 5.653°, obliquity to the orbit 29.646°
+  menelaus: Object.freeze([
+    -0.254328104461902,
+    0.4242404900273787,
+    0.8691013875849846,
+  ]),
+  // orbital inclination to the ecliptic 21.911°, obliquity to the orbit 79.424°
+  agenor: Object.freeze([
+    -0.10623882341852978,
+    0.97725311866238,
+    0.18354741747924042,
+  ]),
+  // orbital inclination to the ecliptic 24.577°, obliquity to the orbit 55.143°
+  mentor: Object.freeze([
+    -0.003545942232293224,
+    0.8205733196590417,
+    0.5715302733516621,
   ]),
   // orbital inclination to the ecliptic 13.865°, obliquity to the orbit 39.221°
   dike: Object.freeze([
@@ -9508,6 +9688,66 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.8557141182780277,
     -0.3511778346498588,
   ]),
+  // flight-path angle 1.968°
+  diomedes: Object.freeze([
+    0.44412199183558565,
+    -0.014090146487313323,
+    -0.8958555263768583,
+  ]),
+  // flight-path angle 4.133°
+  ajax: Object.freeze([
+    -0.3177109559595582,
+    -0.8439869574743134,
+    0.43214090766382596,
+  ]),
+  // flight-path angle 0.416°
+  ilioneus: Object.freeze([
+    0.18941694523436958,
+    -0.6210835402647612,
+    -0.7605106553298715,
+  ]),
+  // flight-path angle 7.246°
+  pyrrhus: Object.freeze([
+    -0.7138675859724768,
+    -0.3140498553770654,
+    0.6259119411190947,
+  ]),
+  // flight-path angle 4.312°
+  eumelos: Object.freeze([
+    0.14936706409406142,
+    -0.3143047587830589,
+    0.9374977326747215,
+  ]),
+  // flight-path angle 1.563°
+  lycomedes: Object.freeze([
+    0.8722763537420007,
+    -0.08536011340926485,
+    -0.4815055697926218,
+  ]),
+  // flight-path angle 1.335°
+  demodokus: Object.freeze([
+    0.5843689136023225,
+    -0.4297847756731961,
+    -0.6883298768866434,
+  ]),
+  // flight-path angle -0.091°
+  menelaus: Object.freeze([
+    -0.529865401454565,
+    -0.8128962879476842,
+    0.24174838444603625,
+  ]),
+  // flight-path angle -2.847°
+  agenor: Object.freeze([
+    0.07558370605181092,
+    0.19199486968704826,
+    -0.9784810030824956,
+  ]),
+  // flight-path angle 2.948°
+  mentor: Object.freeze([
+    -0.9294319963541955,
+    -0.21358824700357643,
+    0.30089238091881565,
+  ]),
   // flight-path angle 7.279°
   dike: Object.freeze([
     -0.5900477305763794,
@@ -11943,6 +12183,66 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     6.123233995736766e-17, -1, 0,
     1, 6.123233995736766e-17, 0,
     0, 0, 1,
+  ]),
+  // pole RA 160.559°, Dec 21.920°, prime meridian W 0.000°
+  diomedes: Object.freeze([
+    -0.33283913024868933, 0.3520205314482933, -0.8748140709968931,
+    -0.9429836230684476, -0.12425052212007152, 0.30877774268491825,
+    0, 0.9277086574953102, 0.37330503185498215,
+  ]),
+  // pole RA -71.223°, Dec 20.113°, prime meridian W 0.000°
+  ajax: Object.freeze([
+    0.9467758188623225, -0.11068822472327981, 0.30226423163382626,
+    0.32189369179525507, 0.3255638034294178, -0.8890403034053028,
+    0, 0.9390188106764317, 0.3438657778782586,
+  ]),
+  // pole RA -41.834°, Dec -43.450°, prime meridian W 0.000°
+  ilioneus: Object.freeze([
+    0.6669727904905869, 0.5124120335748611, 0.5409077597824561,
+    0.7450820738316013, -0.458694278010002, -0.48420270814575506,
+    0, 0.7259707068253914, -0.6877256232186216,
+  ]),
+  // pole RA -21.409°, Dec -21.927°, prime meridian W 0.000°
+  pyrrhus: Object.freeze([
+    0.3650213949954711, 0.34765321325899423, 0.8636530695286485,
+    0.9309991306094546, -0.13630610030256818, -0.33861669454524235,
+    0, 0.9276625950910182, -0.37341948217654297,
+  ]),
+  // pole RA -88.145°, Dec -1.426°, prime meridian W 0.000°
+  eumelos: Object.freeze([
+    0.9994760099368781, 0.0008057454190236831, 0.03235824987506602,
+    0.03236828016218173, -0.024880012543008933, -0.9991662921732309,
+    0, 0.9996901198622399, -0.024893056257128402,
+  ]),
+  // pole RA 169.735°, Dec 65.959°, prime meridian W 0.000°
+  lycomedes: Object.freeze([
+    -0.17820231899347008, 0.8986369214379446, -0.4008685781323886,
+    -0.9839938686319898, -0.16274408656227715, 0.07259771885989606,
+    0, 0.4073893048639635, 0.9132545944491364,
+  ]),
+  // pole RA 118.437°, Dec 17.813°, prime meridian W 0.000°
+  demodokus: Object.freeze([
+    -0.8793378408986363, 0.14567816099069836, -0.4533683215379001,
+    -0.4761984476704272, -0.26900616786617865, 0.8371802195980437,
+    0, 0.9520575376836851, 0.3059190169631148,
+  ]),
+  // pole RA -58.952°, Dec 48.594°, prime meridian W 0.000°
+  menelaus: Object.freeze([
+    0.8567324881861712, -0.3868435325290005, 0.34111805145259655,
+    0.5157610335090584, 0.6425871685331145, -0.5666324091951173,
+    0, 0.6613877925824448, 0.750044123917334,
+  ]),
+  // pole RA -39.444°, Dec 14.159°, prime meridian W 0.000°
+  agenor: Object.freeze([
+    0.6353277465007594, -0.18890244405145934, 0.748782025129912,
+    0.7722426137725545, 0.1554109575764061, -0.616026606356347,
+    0, 0.9696201838331181, 0.24461541060086592,
+  ]),
+  // pole RA -111.509°, Dec 35.999°, prime meridian W 0.000°
+  mentor: Object.freeze([
+    0.9303580158611344, 0.2155077948838288, -0.2966316784621,
+    -0.36665237258598654, 0.546837875442103, -0.7526847784159275,
+    0, 0.8090270257082124, 0.5877714450989632,
   ]),
   // pole RA -116.505°, Dec 29.910°, prime meridian W 0.000°
   dike: Object.freeze([
@@ -17336,6 +17636,156 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 29.019954044162514,
     perihelionAu: 1.324099876714038,
     aphelionAu: 3.355003696174871,
+  }),
+  // a 5.2292 AU, e 0.045770, perihelion 4.9899 AU, aphelion 5.4686 AU
+  diomedes: Object.freeze({
+    semiMajorAxisAu: 5.229240298075933,
+    eccentricity: 0.045769581516220396,
+    heliocentricDistanceAu: 5.38750818757955,
+    perihelionDirection: Object.freeze([
+      -0.7413852306866594,
+      0.48620544952902894,
+      0.46254967362215693,
+    ]),
+    trueAnomalyDegrees: 133.33530846276324,
+    inclinationDegrees: 20.453184386177416,
+    perihelionAu: 4.989900157985242,
+    aphelionAu: 5.468580438166624,
+  }),
+  // a 5.2816 AU, e 0.11223, perihelion 4.6888 AU, aphelion 5.8743 AU
+  ajax: Object.freeze({
+    semiMajorAxisAu: 5.281571123901044,
+    eccentricity: 0.11223286456193875,
+    heliocentricDistanceAu: 5.73712324947458,
+    perihelionDirection: Object.freeze([
+      0.883468075450331,
+      0.46345188431801765,
+      0.06853109208357361,
+    ]),
+    trueAnomalyDegrees: 144.17581863142462,
+    inclinationDegrees: 18.03313440367397,
+    perihelionAu: 4.688805267278012,
+    aphelionAu: 5.874336980524077,
+  }),
+  // a 5.1827 AU, e 0.010282, perihelion 5.1294 AU, aphelion 5.2360 AU
+  ilioneus: Object.freeze({
+    semiMajorAxisAu: 5.182702514611272,
+    eccentricity: 0.010282357993728604,
+    heliocentricDistanceAu: 5.145009603181703,
+    perihelionDirection: Object.freeze([
+      0.5121868668801082,
+      0.7188202692457651,
+      0.4700659888962232,
+    ]),
+    trueAnomalyDegrees: 45.40140483976498,
+    inclinationDegrees: 15.760652328927048,
+    perihelionAu: 5.129412111981042,
+    aphelionAu: 5.235992917241502,
+  }),
+  // a 5.1990 AU, e 0.14949, perihelion 4.4218 AU, aphelion 5.9762 AU
+  pyrrhus: Object.freeze({
+    semiMajorAxisAu: 5.198966960905372,
+    eccentricity: 0.14949361625762572,
+    heliocentricDistanceAu: 5.619539396777216,
+    perihelionDirection: Object.freeze([
+      0.9331354322087902,
+      0.34152356399551576,
+      -0.11233841903959253,
+    ]),
+    trueAnomalyDegrees: 129.71252576332225,
+    inclinationDegrees: 17.47784927246496,
+    perihelionAu: 4.42175458911571,
+    aphelionAu: 5.976179332695033,
+  }),
+  // a 5.2017 AU, e 0.078084, perihelion 4.7955 AU, aphelion 5.6078 AU
+  eumelos: Object.freeze({
+    semiMajorAxisAu: 5.201650929174159,
+    eccentricity: 0.0780843798450122,
+    heliocentricDistanceAu: 5.091775411261193,
+    perihelionDirection: Object.freeze([
+      -0.4080213488172265,
+      0.2547936881325675,
+      -0.8766976419479953,
+    ]),
+    trueAnomalyDegrees: 78.66262549316855,
+    inclinationDegrees: 7.433423446409811,
+    perihelionAu: 4.795483242199364,
+    aphelionAu: 5.607818616148954,
+  }),
+  // a 5.0677 AU, e 0.034995, perihelion 4.8904 AU, aphelion 5.2451 AU
+  lycomedes: Object.freeze({
+    semiMajorAxisAu: 5.067748289147612,
+    eccentricity: 0.034995353926041355,
+    heliocentricDistanceAu: 5.178948004134996,
+    perihelionDirection: Object.freeze([
+      -0.7656038528624872,
+      0.6321650283758629,
+      0.11923974748656396,
+    ]),
+    trueAnomalyDegrees: 130.3756694025763,
+    inclinationDegrees: 4.9541157255587285,
+    perihelionAu: 4.890400644160801,
+    aphelionAu: 5.245095934134423,
+  }),
+  // a 5.1995 AU, e 0.026945, perihelion 5.0594 AU, aphelion 5.3396 AU
+  demodokus: Object.freeze({
+    semiMajorAxisAu: 5.199474785405706,
+    eccentricity: 0.02694537058399786,
+    heliocentricDistanceAu: 5.129077279205951,
+    perihelionDirection: Object.freeze([
+      -0.1229866415364637,
+      0.36954025561965104,
+      0.9210397849605327,
+    ]),
+    trueAnomalyDegrees: 61.18027061128982,
+    inclinationDegrees: 17.126499274340503,
+    perihelionAu: 5.059373010470797,
+    aphelionAu: 5.339576560340616,
+  }),
+  // a 5.1971 AU, e 0.022756, perihelion 5.0788 AU, aphelion 5.3153 AU
+  menelaus: Object.freeze({
+    semiMajorAxisAu: 5.197053008214374,
+    eccentricity: 0.02275583996308835,
+    heliocentricDistanceAu: 5.079079291732618,
+    perihelionDirection: Object.freeze([
+      -0.8441341112551,
+      0.3411784275875439,
+      -0.41356363810718866,
+    ]),
+    trueAnomalyDegrees: 355.8973044622341,
+    inclinationDegrees: 5.653170327796808,
+    perihelionAu: 5.078789701679761,
+    aphelionAu: 5.315316314748987,
+  }),
+  // a 5.2172 AU, e 0.092498, perihelion 4.7346 AU, aphelion 5.6998 AU
+  agenor: Object.freeze({
+    semiMajorAxisAu: 5.21721814160585,
+    eccentricity: 0.09249792894917888,
+    heliocentricDistanceAu: 5.624834303981324,
+    perihelionDirection: Object.freeze([
+      -0.7958286810351248,
+      0.027099132947532314,
+      -0.6049151572207343,
+    ]),
+    trueAnomalyDegrees: 209.629335458079,
+    inclinationDegrees: 21.910891291346925,
+    perihelionAu: 4.734636268631225,
+    aphelionAu: 5.699800014580475,
+  }),
+  // a 5.1979 AU, e 0.073739, perihelion 4.8146 AU, aphelion 5.5812 AU
+  mentor: Object.freeze({
+    semiMajorAxisAu: 5.197909787808164,
+    eccentricity: 0.07373947310291798,
+    heliocentricDistanceAu: 5.472919673002569,
+    perihelionDirection: Object.freeze([
+      0.9127042266737811,
+      -0.23087759191971546,
+      0.337144675415716,
+    ]),
+    trueAnomalyDegrees: 138.71844783332656,
+    inclinationDegrees: 24.577046414860952,
+    perihelionAu: 4.81461865881869,
+    aphelionAu: 5.581200916797638,
   }),
   // a 2.6627 AU, e 0.19785, perihelion 2.1359 AU, aphelion 3.1895 AU
   dike: Object.freeze({
