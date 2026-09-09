@@ -20,7 +20,7 @@ The radius-table formula and pole conversion are in source/measurements.json. Re
 
 ## Orbit
 
-JPL Horizons target 920000617; osculating ICRF elements and independent vector fixtures use the existing astronomy generator at 2026-09-03 TT (TDB approximated as TT, below 2 ms). This is a fixed-date context, not a real-time trajectory or surface attitude. The existing Menoetius primary-specific JPL#82 state overrides the conic at this epoch for a consistent binary origin.
+JPL Horizons command "920000617"; osculating ICRF elements and independent vector fixtures use the existing astronomy generator at 2026-09-03 TT (TDB approximated as TT, below 2 ms). This is a fixed-date context, not a real-time trajectory or surface attitude. The existing Menoetius primary-specific JPL#82 state overrides the conic at this epoch for a consistent binary origin.
 
 ## Reproduction
 

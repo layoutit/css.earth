@@ -21,7 +21,7 @@ The radius-table formula and pole conversion are in source/measurements.json. Re
 
 ## Orbit
 
-JPL Horizons target 3548;; osculating ICRF elements and independent vector fixtures use the existing astronomy generator at 2026-09-03 TT (TDB approximated as TT, below 2 ms). This is a fixed-date context, not a real-time trajectory or surface attitude. 
+JPL Horizons command "3548;"; osculating ICRF elements and independent vector fixtures use the existing astronomy generator at 2026-09-03 TT (TDB approximated as TT, below 2 ms). This is a fixed-date context, not a real-time trajectory or surface attitude.
 
 ## Reproduction
 

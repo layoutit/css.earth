@@ -2,6 +2,8 @@
 
 The five Trojan primaries in this change use the existing observation-body recipe: source-constrained radial tables, meshoptimizer, 480 native raster triangles, prepared lighting and the normal missing-data grid. Shadows and orbit lines start off.
 
+[Visual checks, drag measurements and validation limits](VALIDATION.md).
+
 | Body | Full approximation dimensions (km) | Meaning |
 | --- | --- | --- |
 | Polymele | 27 × 24.4 × 10.4 | Published occultation ellipsoid; the pole assumes a circular, equatorial satellite orbit. |
