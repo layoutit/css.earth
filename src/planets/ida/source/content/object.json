@@ -81,7 +81,7 @@
       {
         "id": "calibrated",
         "label": "SSI reflectance",
-        "description": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+        "description": "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs.",
         "title": "Calibrated Galileo photographs",
         "thumbnail": "/scenes/ida/ida-calibrated-thumbnail.webp",
         "surface": "ida-calibrated-surface@2x.webp",
@@ -92,7 +92,7 @@
         },
         "falseColor": false,
         "detail": "Galileo SSI",
-        "summary": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+        "summary": "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs.",
         "facts": [
           {
             "id": "images",

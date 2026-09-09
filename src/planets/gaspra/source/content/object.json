@@ -81,7 +81,7 @@
       {
         "id": "calibrated",
         "label": "SSI reflectance",
-        "description": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+        "description": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
         "title": "Calibrated Galileo photographs",
         "thumbnail": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
         "surface": "gaspra-calibrated-surface@2x.webp",
@@ -92,7 +92,7 @@
         },
         "falseColor": false,
         "detail": "Galileo SSI",
-        "summary": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+        "summary": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
         "facts": [
           {
             "id": "images",

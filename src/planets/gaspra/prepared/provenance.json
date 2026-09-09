@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3394695ed7405db71df78d4b38b206ccd5c9d405336dceb4df7e185b48a7833e"
+    "sha256": "e144f1c5ad98d9e28192e0cf371d345b8a0aee5e563b5f41ac0a3988dddfff65"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -226,7 +226,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8a347f8b652358b2b65fe6c52f7fd54e48d645ad85e8128a5831462e629a1f7d",
+      "sha256": "f5037d4c08c36da7e12cae23aecd3b8e8899fb1044332cc6840b61f7e3772dd8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -310,7 +310,7 @@
             {
               "id": "calibrated",
               "label": "SSI reflectance",
-              "description": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+              "description": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
               "title": "Calibrated Galileo photographs",
               "thumbnail": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
               "surface": "gaspra-calibrated-surface@2x.webp",
@@ -321,7 +321,7 @@
               },
               "falseColor": false,
               "detail": "Galileo SSI",
-              "summary": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+              "summary": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
               "facts": [
                 {
                   "id": "images",
@@ -884,8 +884,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8a347f8b652358b2b65fe6c52f7fd54e48d645ad85e8128a5831462e629a1f7d",
-      "bytes": 11195,
+      "sha256": "f5037d4c08c36da7e12cae23aecd3b8e8899fb1044332cc6840b61f7e3772dd8",
+      "bytes": 11221,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -995,7 +995,7 @@
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
+        "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs."
       ],
       "lensIds": [
         "calibrated"

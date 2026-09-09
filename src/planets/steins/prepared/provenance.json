@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "steins",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79152140b248c4130056c40b3b5af04e3ec960f7b6ec9fb3c80780300f4620b5"
+    "sha256": "2f6ecc3342e37d7cb29dc9237344755e62079d943c7f36de14523f881acd964b"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -203,7 +203,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "225adbf49e4545f7d2a08ac06583313d2e7589e5602e0067ed9d2e86b0f24825",
+      "sha256": "39fcebc1eb16f4c5906bc3f3aae53422abac0b859011e1a24da920fe0fcc34a0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -272,7 +272,7 @@
               "id": "osiris",
               "label": "OSIRIS",
               "detail": "OSIRIS",
-              "description": "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map.",
+              "description": "Two Rosetta photographs show Šteins during the 2008 approach. The asteroid is only a few dozen pixels wide in each original image, so small surface details aren’t resolved. The grid marks gaps.",
               "title": "OSIRIS photographs",
               "thumbnail": "/scenes/steins/steins-osiris-thumbnail.webp",
               "surface": "steins-osiris-surface@2x.webp",
@@ -281,7 +281,7 @@
                 "id": "steins-observations-w20080905t183606461id4df17-img",
                 "path": "../manifest.json"
               },
-              "summary": "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map.",
+              "summary": "Two Rosetta photographs show Šteins during the 2008 approach. The asteroid is only a few dozen pixels wide in each original image, so small surface details aren’t resolved. The grid marks gaps.",
               "facts": [
                 {
                   "id": "images",
@@ -585,8 +585,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "225adbf49e4545f7d2a08ac06583313d2e7589e5602e0067ed9d2e86b0f24825",
-      "bytes": 10454,
+      "sha256": "39fcebc1eb16f4c5906bc3f3aae53422abac0b859011e1a24da920fe0fcc34a0",
+      "bytes": 10442,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -694,7 +694,7 @@
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map."
+        "Two Rosetta photographs show Šteins during the 2008 approach. The asteroid is only a few dozen pixels wide in each original image, so small surface details aren’t resolved. The grid marks gaps."
       ],
       "lensIds": [
         "osiris"

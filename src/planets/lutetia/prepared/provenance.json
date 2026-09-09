@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "lutetia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1351cf179c9a9caf87df5a85b91b4fc9f2eea8e412ba714fc7af10f057d29600"
+    "sha256": "3917ecdeff68bd69d8e1dfffd6adc383b64b3b8315dd504387289ed7486326bb"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -198,7 +198,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9a838ec9bb76b3e525471c60a52c5077914d5c23593620bb152a53292aa9ad23",
+      "sha256": "8e1e2637ce07eb7f672c0270b747831c3bd371ea786e32ef38ff40849fab7c89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -267,7 +267,7 @@
               "id": "osiris",
               "label": "OSIRIS",
               "detail": "OSIRIS",
-              "description": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
+              "description": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
               "title": "OSIRIS photographs",
               "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
               "surface": "lutetia-osiris-surface@2x.webp",
@@ -276,7 +276,7 @@
                 "id": "lutetia-observations-n20100710t154047674id4df22-img",
                 "path": "../manifest.json"
               },
-              "summary": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
+              "summary": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
               "facts": [
                 {
                   "id": "images",
@@ -536,8 +536,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9a838ec9bb76b3e525471c60a52c5077914d5c23593620bb152a53292aa9ad23",
-      "bytes": 10202,
+      "sha256": "8e1e2637ce07eb7f672c0270b747831c3bd371ea786e32ef38ff40849fab7c89",
+      "bytes": 10094,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -635,7 +635,7 @@
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps."
+        "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs."
       ],
       "lensIds": [
         "osiris"
