@@ -97,3 +97,20 @@ test('unsupported numeric display sampling and interpolating atlas routes fail c
   await assert.rejects(prepareObservationLenses({...f,publicDirectory:join(f.root,'bad'),config:{...f.config,lenses:[bad]}}),/Unsupported scientific display sampling/);
   await assert.rejects(prepareObservationLenses({...f,publicDirectory:join(f.root,'inverse'),geometry:{rasterAtlas:{}},surfaceRasterCells:[{}],config:{...f.config,surfaceProjection:'inverse-homography',lenses:[f.numeric]}}),/requires oriented bands/);
 });
+
+test('categorical static-map legend contains discrete units without requiring a numeric scale',async()=>{
+  const f=await fixture(),publicDirectory=join(f.root,'categories');
+  const scientific={...f.numeric.scientific,categories:[
+    {value:'A',label:'Unit A',color:'#f00000'}, {value:'B',label:'Unit B',color:'#00f000'},
+  ]};
+  delete scientific.minimum;delete scientific.maximum;delete scientific.colors;
+  const plan={...f.numeric,scientific};
+  await prepareObservationLenses({...f,publicDirectory,config:{...f.config,lenses:[plan]}});
+  const legend=await sharp(join(publicDirectory,'numeric-legend.webp')).raw().toBuffer();
+  for(let y=0;y<16;y++)for(let x=0;x<256;x++)
+    assert.deepEqual([...legend.subarray((y*256+x)*3,(y*256+x)*3+3)],x<128?[240,0,0]:[0,240,0]);
+  const map=await observationRaster({input:join(f.sourceDirectory,'grid.img'),plan,width:32,height:16});
+  const allowed=rgbSet(map.data,3);
+  for(const color of rgbSet(await sharp(join(publicDirectory,'numeric.webp')).raw().toBuffer(),3))
+    assert.ok(allowed.has(color),`Unexpected interpolated category: ${color}`);
+});

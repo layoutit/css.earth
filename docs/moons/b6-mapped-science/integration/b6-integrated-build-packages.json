@@ -1,0 +1,84 @@
+{
+  "command": [
+    "pnpm",
+    "-r",
+    "--workspace-concurrency=1",
+    "--filter",
+    "./packages/**",
+    "build"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 702398464,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 704512,
+      "freePercent": 73
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 182681600,
+      "freePercent": 73
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 420691968,
+      "freePercent": 73
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 548028416,
+      "freePercent": 73
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 631799808,
+      "freePercent": 73
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 702398464,
+      "freePercent": 73
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 329777152,
+      "freePercent": 73
+    },
+    {
+      "seconds": 2.0,
+      "rssBytes": 451526656,
+      "freePercent": 73
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 246874112,
+      "freePercent": 73
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 398163968,
+      "freePercent": 73
+    },
+    {
+      "seconds": 2.8,
+      "rssBytes": 128352256,
+      "freePercent": 73
+    },
+    {
+      "seconds": 3.1,
+      "rssBytes": 356106240,
+      "freePercent": 73
+    },
+    {
+      "seconds": 3.3,
+      "rssBytes": 430915584,
+      "freePercent": 73
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 3.6
+}

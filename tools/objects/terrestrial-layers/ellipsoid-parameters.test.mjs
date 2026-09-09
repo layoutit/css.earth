@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { ellipsoidParameterMesh, subdividedOctahedron } from './ellipsoid-parameters.mjs';
+import { contactEllipsoidMesh } from './contact-ellipsoids.mjs';
+
+test('ellipsoid scaling preserves axis ratios and the explicit volume convention', () => {
+  const model={schema:'cssearth-ellipsoid-parameters@1',scaleConvention:'thermal-radius-as-volume-equivalent',axisRatioAB:2,axisRatioBC:3,thermalRadiusKm:6,subdivisions:3};
+  const mesh=ellipsoidParameterMesh(model),[a,b,c]=mesh.axesMeters;
+  assert.ok(Math.abs(a/b-2)<1e-12);assert.ok(Math.abs(b/c-3)<1e-12);
+  assert.ok(Math.abs(Math.cbrt(a*b*c)-6000)<1e-9);
+  for(const p of mesh.positions)assert.ok(Math.abs(p.reduce((s,n,i)=>s+(n/mesh.axesMeters[i])**2,0)-1)<1e-12);
+  const edges=new Map();
+  for(const f of mesh.indices)for(let i=0;i<3;i++){const a=f[i],b=f[(i+1)%3],key=[a,b].sort((a,b)=>a-b).join(',');edges.set(key,(edges.get(key)??0)+(a<b?1:-1));}
+  assert.ok([...edges.values()].every(n=>n===0));
+  assert.equal(mesh.positions.length-edges.size+mesh.indices.length,2);
+});
+
+test('unsupported scales, invalid axes and unbounded subdivisions are rejected', () => {
+  const model={schema:'cssearth-ellipsoid-parameters@1',scaleConvention:'thermal-radius-as-volume-equivalent',axisRatioAB:2,axisRatioBC:3,thermalRadiusKm:6,subdivisions:3};
+  for(const patch of [{scaleConvention:'measured-volume'},{axisRatioAB:0},{axisRatioBC:NaN},{thermalRadiusKm:-1},{subdivisions:6}])assert.throws(()=>ellipsoidParameterMesh({...model,...patch}));
+  assert.throws(()=>subdividedOctahedron(1.5));
+});
+
+test('the common tessellation preserves the established contact-body topology', () => {
+  const m=contactEllipsoidMesh({schema:'cssearth-contact-ellipsoids@1',origin:'equal-density-volume-centroid',lobes:[{semiaxesKm:[2.8,2.8,2.8]},{semiaxesKm:[1.2,1.2,1.2]}],fluxScale:.9,subdivisions:4});
+  assert.equal(m.positions.length,2052);assert.equal(m.indices.length,4096);
+  assert.ok(Math.abs(m.centersMeters[1]-m.centersMeters[0]-4000*Math.sqrt(.9))<1e-9);
+});

@@ -1,4 +1,5 @@
 import context from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
 import { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mjs';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 
@@ -26,6 +27,24 @@ export function systemFramingRadii(plan) {
 
 export const SYSTEM_FRAMING_RADII = systemFramingRadii(context);
 export const SYSTEM_VIEWS = new Map([context.focus, ...context.bodies].filter(body => body.systemView).map(body => [body.id, body.systemView]));
+export const GALACTIC_VOLUME = galaxy.properties.volume;
+
+/** Zoom along the current viewing ray, keeping its anchor and orientation. */
+export function volumeZoomTarget(from, volume, optics, rect, referencePositionM) {
+  const range = Math.hypot(...from.pose.positionM.map((value, axis) => value - referencePositionM[axis]));
+  const [ox, oy] = optics.principalOffsetPixels, focal = optics.focalPixels;
+  const ray = [ox / focal, oy / focal, 1];
+  const depth = range / Math.hypot(...ray);
+  const offset = rotateWorldPosition(worldRotationFromQuaternion(from.pose.orientationXyzw), ray.map(value => value * depth));
+  const focusPositionM = from.pose.positionM.map((value, axis) => value - offset[axis]);
+  const world = systemViewTarget(from, { ...volume, originM: focusPositionM, bodyRadiusM: 0 }, optics, { candidates: [{
+    originM: volume.originM,
+    minimumM: volume.boundsUnits.min.map(value => value * volume.metersPerUnit),
+    maximumM: volume.boundsUnits.max.map(value => value * volume.metersPerUnit),
+    cameraToReference: worldRotationFromQuaternion(volume.localToReferenceXyzw),
+  }] }, rect, range);
+  return { world, focusPositionM };
+}
 
 /** The same scale boundary governs both the system arrival and the card handoff. */
 export function systemOverviewDistance(bodyRadiusM, systemRadiusM, optics) {
@@ -86,8 +105,9 @@ function fitSystemDepth(frame, optics, view, rect, minimumRangeM, referenceToCam
   for (const bx of [view.minimumM[0], view.maximumM[0]])
     for (const by of [view.minimumM[1], view.maximumM[1]])
       for (const bz of [view.minimumM[2], view.maximumM[2]]) {
-        const [x, y, z] = rotateWorldPosition(referenceToCamera,
-          rotateWorldPosition(view.cameraToReference, [bx, by, bz]));
+        const corner = rotateWorldPosition(view.cameraToReference, [bx, by, bz]);
+        const [x, y, z] = rotateWorldPosition(referenceToCamera, view.originM
+          ? corner.map((value, axis) => value + view.originM[axis] - frame.originM[axis]) : corner);
         const nx = focal * x - ox * z, ny = focal * y - oy * z;
         depth = Math.max(depth, z + Math.abs(frame.bodyRadiusM),
           z + nx / (nx < 0 ? rect.left : rect.right), z + ny / (ny < 0 ? rect.top : rect.bottom));

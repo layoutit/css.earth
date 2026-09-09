@@ -1,13 +1,15 @@
 ---
 import { OBJECTS } from '../objects.mjs';
 import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
+import { solarSystemFocus } from '../overview-selection.mjs';
 
 const { objectId, scope } = Astro.props;
 const object = OBJECTS.find(object => object.id === objectId);
-const crumbs: { label: string; href?: string; query?: string }[] = [
-  { label: 'Milky Way', query: 'Milky Way' },
+const systemRoute = solarSystemFocus(OBJECTS).route;
+const crumbs: { label: string; href: string }[] = [
+  { label: 'Milky Way', href: `${systemRoute}?overview=milky-way` },
 ];
-if (scope !== 'milky-way') crumbs.push({ label: object?.systemName ?? 'Solar System', query: object?.systemName ?? 'Solar System' });
+if (scope !== 'milky-way') crumbs.push({ label: object?.systemName ?? 'Solar System', href: `${systemRoute}?overview=solar-system` });
 if (object && !scope) {
   // Use the same prepared orbit parents as the moon result rows.
   const parentId = preparedWorld.bodies.find(body => body.id === object.id)?.orbit?.centerBodyId;
@@ -22,8 +24,7 @@ const visibleCrumbs = crumbs.slice(-2);
     {visibleCrumbs.map((crumb, index) => <li>
       {index > 0 && <span class="planet-breadcrumb-separator" aria-hidden="true">&raquo;</span>}
       {scope && index === visibleCrumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
-        : crumb.href ? <a href={crumb.href}>{crumb.label}</a>
-        : <button type="button" data-object-query={crumb.query}>{crumb.label}</button>}
+        : <a href={crumb.href}>{crumb.label}</a>}
     </li>)}
   </ol>
 </nav>

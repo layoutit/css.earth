@@ -21,7 +21,7 @@ const majorBodyLabelStyles = OBJECTS
   .join('\n');
 const minorBodyOrbitStyles = OBJECTS
   .filter(({ classification }) => ['satellite', 'dwarf-planet', 'asteroid', 'comet'].includes(classification))
-  .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-line-opacity: .3; }`)
+  .map(({ id, classification }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-line-opacity: ${classification === 'asteroid' ? .35 : .5}; }`)
   .join('\n');
 const minorBodyLabelStyles = OBJECTS
   .filter(({ classification }) => classification === 'dwarf-planet' || classification === 'comet')

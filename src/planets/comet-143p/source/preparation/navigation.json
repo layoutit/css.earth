@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "comet-143p",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "expectedBytes": 40966,
+    "expectedSha256": "6caf4c9aba554ac33fa3f6c654482c6b4da2537c479639ab91a56cfb6a5eb0b0",
+    "origin": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+    "credit": "Abbie L. Donaldson (2025); Fernández et al. (2013); cssEarth approximation",
+    "license": "Published scientific parameters; cssEarth implementation MIT",
+    "licenseEvidence": [
+      "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+      "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+    ],
+    "acquisition": "Reproduced from the shape approximation and shared missing-imagery grid.",
+    "redistribution": "Preserve attribution and the distinction from the original convex mesh.",
+    "consumers": [
+      "navigation"
+    ],
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "shape-parameters"
+      ],
+      "size": 512,
+      "longitudeDegrees": 70,
+      "latitudeDegrees": 20,
+      "ambient": 1,
+      "diffuse": 0,
+      "lensId": "model"
+    }
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

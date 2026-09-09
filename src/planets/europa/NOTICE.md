@@ -27,3 +27,7 @@ transfer, observation-specific Lunar–Lambert disk normalization, level matchin
 prepared here; they are not natural color or a calibrated albedo product.
 Capture geometry uses NASA/JPL Horizons and the USGS controlled ISIS labels;
 see `SOURCE.md` for the model and its limits.
+
+## B6 sources
+
+The added views derive from credited public USGS/NASA scientific products. Preserve the source authors, PDS citation and processing qualifications recorded in SOURCE.md and the source manifest. No endorsement is implied.

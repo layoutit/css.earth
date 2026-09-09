@@ -12,6 +12,7 @@ import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mjs';
 import * as applicationWorldContext from './application-world-context.mjs';
 import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mjs';
+import { overviewScopeFromUrl } from './navigation-scope.mjs';
 import { createNavigationTiming } from './navigation-timing.mjs';
 
 
@@ -43,7 +44,7 @@ export function createSceneRouter({
   let nextGeneration = 0;
   let shellOwner = null, pending = null, historyOwner = null, unbindLinks = null;
   let centeredObjectId = null;
-  let overview = new URL(windowTarget.location?.href ?? 'https://example.test').searchParams.get('overview') === 'solar-system';
+  let overview = Boolean(overviewScopeFromUrl(windowTarget.location?.href ?? 'https://example.test'));
   const worldContextOwner = persistentWorldContext;
   let worldContextMount = null;
   let worldContextMountTask = null;
@@ -132,7 +133,7 @@ export function createSceneRouter({
       const shell = shellOwner.shell;
       session.shell = shell;
       if (content) shell.setObject(content);
-      shell.setOverview?.(request ? new URL(request.url).searchParams.get('overview') === 'solar-system' : overview);
+      shell.setOverview?.(request ? Boolean(overviewScopeFromUrl(request.url)) : overview);
       if (active !== session) return;
       publishSceneState();
       if (worldContextOwner) {
@@ -167,6 +168,18 @@ export function createSceneRouter({
       const result = await session.lifetime.wait(ready);
       if (result.cancelled || active !== session) return;
       connectWorldContext(session, mount, objectId);
+      const initialScope = !request && session.url && overviewScopeFromUrl(session.url);
+      if (initialScope && !new URL(session.url).searchParams.has('v')) {
+        const target = navigation?.overviewTarget?.({ scope: initialScope, objectId, fromId: objectId, mount });
+        if (target) {
+          const controller = new AbortController();
+          session.lifetime.onDispose(() => controller.abort());
+          const framed = await session.lifetime.wait(navigation.focus({ objectId, mount,
+            signal: controller.signal, reducedMotion: true,
+            targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM }));
+          if (framed.cancelled || active !== session) return;
+        }
+      }
       let interrupted = false;
       if (handoff?.afterMount) {
         try {
@@ -207,7 +220,7 @@ export function createSceneRouter({
       sceneState = "ready";
       hasPresented = true;
       if (pending === request) pending = null;
-      setOverview(new URL(session.url ?? windowTarget.location?.href ?? 'https://example.test').searchParams.get('overview') === 'solar-system');
+      setOverview(Boolean(overviewScopeFromUrl(session.url ?? windowTarget.location?.href ?? 'https://example.test')));
       syncPlayback();
       connectOverviewSelection(session);
       if (request && (request.options.history !== 'pop' || interrupted)) session.viewUrl?.flush();
@@ -238,14 +251,17 @@ export function createSceneRouter({
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
-    const centerTarget = options.recenter
+    const overviewTarget = options.overviewScope
+      ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount }) : null;
+    const centerTarget = overviewTarget?.world ?? (options.recenter
       ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount, force: true })
-      : options.sceneSelection && id !== centeredObjectId && !pending && sceneState === 'ready'
+      : options.sceneSelection && id !== centeredObjectId && hasPresented
         ? (navigation.systemTarget?.({ objectId: id, fromId: objectId, mount: active?.mount })
-          ?? navigation.centerTarget?.({ objectId: id, mount: active?.mount })) : null;
+          ?? navigation.centerTarget?.({ objectId: id, mount: active?.mount })) : null);
     // First selection frames the object's system; a repeat opens its close-up.
     centeredObjectId = centerTarget && !options.overview ? id : null;
-    if (centerTarget) options = { ...options, targetWorldCamera: centerTarget, centerSelection: true };
+    if (centerTarget) options = { ...options, targetWorldCamera: centerTarget,
+      targetFocusPositionM: overviewTarget?.focusPositionM, centerSelection: true };
     if (centerTarget && options.sceneSelection && id === solarSystemFocus(objects)?.id) {
       options = { ...options, overview: true };
     }
@@ -263,7 +279,7 @@ export function createSceneRouter({
     const url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) {
       url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview');
-      if (options.overview) url.searchParams.set('overview', 'solar-system');
+      if (options.overview) url.searchParams.set('overview', options.overviewScope ?? 'solar-system');
     }
     const request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
       url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) };
@@ -274,12 +290,14 @@ export function createSceneRouter({
       if (!pending || pending === request) worldContextMount?.previewSelection?.();
     });
     if ((options.recenter || options.centerSelection) && options.overview) {
-      const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.();
+      const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.(options.overviewScope ?? 'solar-system');
       if (restoreSelection) request.lifetime.onDispose(restoreSelection);
-    } else if (object.id !== objectId && !options.overview) {
+    } else if (!options.overview) {
+      const releaseCard = shellOwner?.shell?.beginCardNavigation?.(object, options.targetWorldCamera);
       const restoreSelection = shellOwner?.shell?.beginObjectSelection?.(object);
       if (restoreSelection) request.lifetime.onDispose(restoreSelection);
-    } else if (object.id === objectId && !options.overview) shellOwner?.shell?.setOverview?.(false);
+      if (releaseCard) request.lifetime.onDispose(releaseCard);
+    }
     mountTask = transition(request, object);
     return mountTask;
   }
@@ -297,16 +315,17 @@ export function createSceneRouter({
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
             mount: source.mount, signal: request.controller.signal, reducedMotion: reducedMotionActive,
-            targetWorldCamera: request.options.targetWorldCamera, centerSelection: request.options.centerSelection, timing: request.timing }));
+            targetWorldCamera: request.options.targetWorldCamera, targetFocusPositionM: request.options.targetFocusPositionM, centerSelection: request.options.centerSelection, timing: request.timing }));
           if (focused.cancelled || pending !== request) return false;
         }
         if (!restore) {
           source.url = request.url;
-          const changesSelection = overview !== (new URL(request.url).searchParams.get('overview') === 'solar-system');
+          const changesSelection = overview !== Boolean(overviewScopeFromUrl(request.url)) ||
+            overviewScopeFromUrl(windowTarget.location.href) !== overviewScopeFromUrl(request.url);
           historyOwner?.commit(request.url, { ...request.options,
             history: changesSelection ? request.options.history : 'replace' });
         }
-        setOverview(new URL(request.url).searchParams.get('overview') === 'solar-system');
+        setOverview(Boolean(overviewScopeFromUrl(request.url)));
         await bindSessionView(source, { restore });
         if (pending !== request) return false;
         pending = null; request.lifetime.destroy(); syncPlayback();
@@ -328,6 +347,7 @@ export function createSceneRouter({
         signal: request.controller.signal, history: request.options.history, url: request.url,
         motionRequested: motionEnabled, reducedMotion: reducedMotionActive,
         targetWorldCamera: request.options.targetWorldCamera,
+        targetFocusPositionM: request.options.targetFocusPositionM,
         centerSelection: request.options.centerSelection,
         preserveView: request.options.preserveView,
         cameraViewport: worldContextMount?.viewport,
@@ -392,7 +412,7 @@ export function createSceneRouter({
   }
 
   function readSceneState() {
-    const selected = pending ? new URL(pending.url).searchParams.get('overview') !== 'solar-system' : !overview;
+    const selected = pending ? !overviewScopeFromUrl(pending.url) : !overview;
     return Object.freeze({
       activeObjectId: objectId,
       selectedObjectId: selected ? pending?.id ?? objectId : null,

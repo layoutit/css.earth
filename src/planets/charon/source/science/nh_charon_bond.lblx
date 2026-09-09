@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1L00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1L00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1L00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+    xmlns:cart="http://pds.nasa.gov/pds4/cart/v1"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1L00.xsd
+    http://pds.nasa.gov/pds4/disp/v1        http://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1L00_1510.xsd
+    http://pds.nasa.gov/pds4/cart/v1        http://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1L00_1970.xsd">
+    
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:nh_derived:plutosystem_geophysics:nh_charon_bond</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>Bond Albedo Map of (134340) Pluto I (Charon) from New Horizons LORRI Observations</title>
+        <information_model_version>1.21.0.0</information_model_version>
+        <product_class>Product_Observational</product_class>
+        
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2025-05-05</modification_date>
+                <version_id>1.0</version_id>
+                <description>
+                    ACR: Minimal effort migration from PDS3
+                </description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+    
+    <Observation_Area>
+        <Time_Coordinates>
+            <start_date_time xsi:nil="true" nilReason="inapplicable"/>
+            <stop_date_time xsi:nil="true" nilReason="inapplicable"/>
+        </Time_Coordinates>
+        
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Derived</processing_level>
+            <description>
+                This product contains the bolometric bond albedo map for Pluto.          
+            </description>
+        </Primary_Result_Summary>
+        
+        <Investigation_Area>
+            <name>New Horizons</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.new_horizons</lid_reference>
+                <reference_type>data_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+
+        <Observing_System>
+            <Observing_System_Component>
+                <name>New Horizons</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.nh</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>Long Range Reconnaissance Imager</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:nh.lorri</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+
+        <Target_Identification>
+            <name>(134340) Pluto I (Charon)</name>
+            <type>Satellite</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:satellite.134340_pluto.charon</lid_reference>
+                <reference_type>data_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+        
+        <Discipline_Area>
+            <disp:Display_Settings>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>AlbedoMap</local_identifier_reference>
+                    <local_reference_type>display_settings_to_array</local_reference_type>
+                </Local_Internal_Reference>
+                <disp:Display_Direction>
+                    <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+                    <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+                    <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+                    <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+                </disp:Display_Direction>
+            </disp:Display_Settings>
+
+            <cart:Cartography>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>AlbedoMap</local_identifier_reference>
+                    <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+                </Local_Internal_Reference>
+                <cart:Spatial_Reference_Information>
+                    <cart:Horizontal_Coordinate_System_Definition>
+                        <cart:Planar>
+                            <cart:Map_Projection>
+                                <cart:map_projection_name>Equirectangular</cart:map_projection_name>
+                                <cart:Equirectangular>
+                                    <cart:latitude_of_projection_origin unit="deg">0</cart:latitude_of_projection_origin>
+                                    <cart:standard_parallel_1 unit="deg">0.0</cart:standard_parallel_1>
+                                    <cart:longitude_of_central_meridian unit="deg">0.0</cart:longitude_of_central_meridian>
+                                </cart:Equirectangular>
+                            </cart:Map_Projection>
+                            <cart:Planar_Coordinate_Information>
+                                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                                <cart:Coordinate_Representation>
+                                    <cart:pixel_resolution_x unit="m/pixel">2508.307177965</cart:pixel_resolution_x>
+                                    <cart:pixel_resolution_y unit="m/pixel">2508.307177965</cart:pixel_resolution_y>
+                                    <cart:pixel_scale_x unit="pixel/deg">4.2166666666667</cart:pixel_scale_x>
+                                    <cart:pixel_scale_y unit="pixel/deg">4.2166666666667</cart:pixel_scale_y>
+                                </cart:Coordinate_Representation>
+                            </cart:Planar_Coordinate_Information>
+                            <cart:Geo_Transformation>
+                                <cart:upperleft_corner_x unit="m">-1903805.1</cart:upperleft_corner_x>
+                                <cart:upperleft_corner_y unit="m">951902.6</cart:upperleft_corner_y>
+                            </cart:Geo_Transformation>
+                        </cart:Planar>
+                        <cart:Geodetic_Model>
+                            <cart:latitude_type>Planetocentric</cart:latitude_type>
+                            <cart:a_axis_radius unit="m">606000</cart:a_axis_radius>
+                            <cart:b_axis_radius unit="m">606000</cart:b_axis_radius>
+                            <cart:c_axis_radius unit="m">606000</cart:c_axis_radius>
+                            <cart:longitude_direction>Positive East</cart:longitude_direction>
+                        </cart:Geodetic_Model>
+                    </cart:Horizontal_Coordinate_System_Definition>
+                </cart:Spatial_Reference_Information>
+            </cart:Cartography>
+            
+        </Discipline_Area>
+    </Observation_Area>
+    
+    <Reference_List>
+        <Internal_Reference>
+            <lidvid_reference>urn:nasa:pds:nh_derived:plutosystem_geophysics:overview::1.0</lidvid_reference>
+            <reference_type>data_to_document</reference_type>
+            <comment>
+                The overview document for this collection provides details of and references for the 
+                production of each of the products in the collection.
+            </comment>
+        </Internal_Reference>
+        <Internal_Reference>
+            <lidvid_reference>urn:nasa:pds:nh_derived:plutosystem_geophysics:nh_charon_bond_browse::1.0</lidvid_reference>
+            <reference_type>data_to_browse</reference_type>
+            <comment>A JPEG version of the map</comment>
+        </Internal_Reference>
+    </Reference_List>
+    
+    <File_Area_Observational>
+        <File>
+            <file_name>nh_charon_bond.img</file_name>
+        </File>
+        
+        <Array_2D_Map>
+            <local_identifier>AlbedoMap</local_identifier>
+            <offset unit="byte">0</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <description>
+                This product contains the bolometric bond albedo maps for Charon.          
+                Images of the entire illuminated surface of Pluto and Charon were          
+                obtained by the Long Range Reconnaissance Imager (LORRI) camera            
+                and provide a global map of surface albedo. Charon exhibits                
+                a much blander surface than Pluto with normal reflectances ranging         
+                from 0.20-0.53.
+                
+                This map was scaled using the equation albedo = DN/255 where DN            
+                is Data Number. It is non-dimensional.
+                
+                Note that the DERIVED_MAXIMUM and DERIVED_MINIMUM in the PDS3 label
+                were non-sensical (they were integer values, where the scaling 
+                factor was about 4e-3). They have been omitted in this label.
+            </description>
+            <Element_Array>
+                <data_type>UnsignedByte</data_type>
+                <scaling_factor>0.00392156862745</scaling_factor>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>700</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>1518</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+            <Special_Constants>
+                <missing_constant>0</missing_constant>
+            </Special_Constants>
+        </Array_2D_Map>
+    </File_Area_Observational>
+</Product_Observational>

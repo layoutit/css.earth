@@ -99,3 +99,19 @@ provides the mutual tidal locking, discovery and geological introduction.
 Run shared acquisition for `charon`, then `pnpm prepare:planets -- --object=charon`.
 The source manifest pins original inputs and authored recipes. Runtime installation
 uses `pnpm setup:assets --object=charon` and does not require source GeoTIFFs.
+
+## B6 mapped science
+
+The Bond-albedo view uses [New Horizons derived PDS4 product nh_charon_bond](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx),
+LIDVID `urn:nasa:pds:nh_derived:plutosystem_geophysics:nh_charon_bond::1.0`.
+It is a modeled approximation to Bond albedo from LORRI photometry and scattering
+assumptions, not a direct bolometric measurement. The wrapper retains every
+original byte without resampling. The lens applies the label's scale
+0.00392156862745; DN zero remains missing. The 1518×700 map uses a 606 km sphere,
+east-positive planetocentric coordinates and 2508.307177965 m pixels. Coverage
+ends before the south pole and retains unobserved sectors. Display endpoints
+are 0.1–0.5. The migrated label's summary mentions Pluto in error; its title,
+target, LIDVID and data object identify Charon. The source label is retained.
+
+Exact bytes, coordinates and validity rules are in the intake plans and receipts.
+Reproduction: `tools/objects/acquisition/MAPPED-SCIENCE.md`.

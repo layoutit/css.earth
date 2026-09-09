@@ -42,7 +42,7 @@ async function checkContrast(page, id, dpr, view, expectedVolumeOpacity) {
   await page.waitForTimeout(1000);
   assert.equal(await page.locator('.planet-sky-contrast-setting').isChecked(), false);
   const before = await read(page);
-  assert.equal(before.mode, 'standard'); assert.equal(before.emphasis, .35);
+  assert.equal(before.mode, 'standard'); assert.equal(before.emphasis, .5);
   assert.ok(Math.abs(before.volumeOpacity - expectedVolumeOpacity) < 1e-6);
   assert.ok(Math.abs(before.volumeCompositeOpacity - before.volumeOpacity * before.preparedGlow) < 1e-6,
     'Standard composition uses the prepared distance gain');

@@ -111,3 +111,23 @@ license; this package does not invent one or relicense a journal article.
 The standalone Moon is a source-backed retained-DOM presentation. Its mean
 heliocentric distance is catalogued as 1 AU for navigation. It is not an
 epoch-specific ephemeris and does not claim native camera parity.
+
+## B6 mapped science
+
+The geology view samples the 49 original units in Fortezzo, Spudis and Harrel's
+[Unified Geologic Map v2 (2020)](https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020), scale 1:5 million.
+It preserves holes and withholds conflicting units. Its distinguishable palette
+is authored for this display; colors are interpretations, not observed color.
+
+The silicate-signature view uses the space-weathering-corrected Christiansen
+feature from [Lucey et al. (2021)](https://zenodo.org/records/4558194), DOI
+10.5281/zenodo.4558194, CC-BY-4.0. Measurements span July 2009–May 2016.
+The published latitude and longitude TIFFs explicitly locate the samples; the
+intake verifies every coordinate cell before nearest sampling. Coverage is
+±70 degrees. Values are wavelengths in micrometers, not mineral abundances.
+The fixed 8.0–8.5 µm display clips source outliers; gaps remain unavailable.
+Residual viewing/topographic effects remain, especially above 50 degrees.
+The older 2011 PDS noon map was inspected and rejected for its sparse coverage.
+
+Exact bytes, coordinates and validity rules are in the intake plans and receipts.
+Reproduction: `tools/objects/acquisition/MAPPED-SCIENCE.md`.
