@@ -13,6 +13,7 @@ import { createStarRemovalJobs, starRemovalJobsHandler } from '../utils/processi
 import type { RemovalProgress } from '../star-removal/star-removal-types.js';
 import type { LabSubjectRecord } from '../viewer/viewer.js';
 import type { ReconstructionRequest, ReconstructionCatalogue, PreparedReconstruction, ReconstructionWork } from './reconstruction-types.js';
+import { parseCloudAppearance } from './cloud-appearance.js';
 
 const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const cache = '.local/nebula-lab/reconstructions';
@@ -32,13 +33,14 @@ async function pinned(root: string, path: string, expected?: string) {
 }
 const json = async (root: string, path: string, expected?: string) => parseLabModelJson((await pinned(root, path, expected)).toString());
 export function parseReconstructionRequest(input: unknown): ReconstructionRequest {
-  if (!record(input) || Object.keys(input).some(key => !['action', 'subjectId', 'imageId', 'removalResultId', 'placement'].includes(key)) ||
+  if (!record(input) || Object.keys(input).some(key => !['action', 'subjectId', 'imageId', 'removalResultId', 'placement', 'appearance'].includes(key)) ||
       input.action !== 'apply' || typeof input.subjectId !== 'string' || !/^[a-z0-9-]+$/.test(input.subjectId) ||
       typeof input.imageId !== 'string' || !/^[a-z0-9-]+$/.test(input.imageId) ||
       typeof input.removalResultId !== 'string' || !/^[a-f0-9]{64}\.[a-f0-9]{64}$/.test(input.removalResultId) || !record(input.placement))
     throw new TypeError('Choose an image with completed star removal before processing.');
   const placement = updateOverlayPlacement(defaultOverlayPlacement(), input.placement);
-  return { action: 'apply', subjectId: input.subjectId, imageId: input.imageId, removalResultId: input.removalResultId, placement };
+  return { action: 'apply', subjectId: input.subjectId, imageId: input.imageId, removalResultId: input.removalResultId, placement,
+    ...(input.appearance !== undefined ? { appearance: parseCloudAppearance(input.appearance) } : {}) };
 }
 
 export async function readPreparedReconstruction(root: string, resultId: string): Promise<PreparedReconstruction> {
@@ -188,7 +190,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
             placement:referenceOverlay.initialPlacement??defaultOverlayPlacement()},
           provenancePin:{path:subject.density!.overlays!,sha256:hash(await pinned(root,subject.density!.overlays!))}}}:{})};
       const pins = Object.fromEntries(await Promise.all(['reconstruction/reconstruction-worker.ts', 'reconstruction/reconstruction-geometry.ts', 'reconstruction/filled-components.ts',
-        'reconstruction/cloud-material.ts', 'reconstruction/density-projection.ts', 'reconstruction/registered-image.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'alignment/overlay-wcs.ts', 'cli/prepare-lmc-stars.ts', 'stars/star-photometry.ts'].map(async name =>
+        'reconstruction/cloud-material.ts', 'reconstruction/cloud-appearance.ts', 'reconstruction/cloud-detail.ts', 'reconstruction/density-projection.ts', 'reconstruction/registered-image.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'alignment/overlay-wcs.ts', 'cli/prepare-lmc-stars.ts', 'stars/star-photometry.ts'].map(async name =>
         [name, hash(await pinned(root, `labs/nebula/src/${name}`))])));
       const identity = { version: 4, request, stars, cloud, sourceSha256: image.sha256, frame, stellarPrior: densityRecipe,
         overlay: { widthPx: overlay.widthPx, heightPx: overlay.heightPx, transform: overlay.style.transform, pivotCssPx: overlay.pivotCssPx }, pins };
@@ -199,7 +201,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
       await rm(temporary, { recursive: true, force: true }); await mkdir(temporary, { recursive: true });
       try {
         const work: ReconstructionWork = { schema: 'cssearth-nebula-reconstruction-work@1', id: `reconstruction-${resultId}`,
-          imageId: image.id, name: image.label, outputDirectory: temporary,
+          imageId: image.id, name: image.label, outputDirectory: temporary, appearance: parseCloudAppearance(request.appearance),
           source: { path: nativePath, sha256: removal.artifactSha256[removal.applied.images.diffuse], width: removal.nativeDimensions[0], height: removal.nativeDimensions[1] },
           original: { path: image.path, sha256: image.sha256, removalResultId: request.removalResultId },
           overlay: { ...identity.overlay, placement: request.placement }, frame, stellarPrior: densityRecipe, stars, cloud,
@@ -211,7 +213,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
           throw new TypeError('Reconstruction worker produced no prepared volume.');
         for (const resource of manifest.data.resources) await pinned(root, relative(root, resolve(temporary, 'prepared', resource.path)), resource.sha256);
         const result: PreparedReconstruction = { schema: 'cssearth-nebula-reconstruction@1', resultId,
-          imageId: image.id, removalResultId: request.removalResultId, placement: request.placement,
+          imageId: image.id, removalResultId: request.removalResultId, placement: request.placement, appearance: work.appearance,
           subject: { ...subject, id: work.id, name: `${image.label} · reconstruction`, directory,
             sourceSubjectId: subject.id, imagePath: `${directory}/source/target.png`, comparisonImages: [],
             sourcePageUrl: image.sourcePageUrl, credit: image.credit, stars: finished.stars ? `${directory}/${finished.stars}` : undefined,
@@ -240,7 +242,7 @@ export function reconstructionPlugin(root: string): Plugin {
     server.httpServer?.once('close', () => { void jobs.shutdown().catch(() => {}); });
     server.middlewares.use('/__nebula/reconstruction', async (request, response) => {
       try {
-        if (request.method !== 'GET') throw new TypeError('Use Process to start a reconstruction.');
+        if (request.method !== 'GET') throw new TypeError('Use Preview to start a reconstruction.');
         const url = new URL(request.url ?? '/', 'http://localhost');
         const match = /\/result\/([a-f0-9]{64})$/.exec(url.pathname);
         const value = match ? await readPreparedReconstruction(root, match[1]) : await reconstructionCatalogue(root, url.searchParams.get('subjectId') ?? 'lmc-clouds');

@@ -10,7 +10,7 @@ pnpm lab:nebula
 Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127.0.0.1:4331/reconstruction). Choose the object in the header; camera/density controls are on the left and image/cloud controls on the right.
 
 - **Alignment:** inspect the full density field and registered image footprint. Adjust the saved fit, run automatic NOX removal, and compare Original / Without stars / Residual.
-- **Reconstruction:** choose a completed starless source and press **Process**. Progress and Cancel are explicit; refresh reconnects to the job. Switching completed sources loads their saved banks at the retained camera pose.
+- **Reconstruction:** choose a completed starless source, adjust brightness/gamma/color/detail, then press **Preview**. Settings persist per image. Progress and Cancel are explicit; refresh reconnects to the job. Switching completed sources loads their saved banks at the retained camera pose.
 - **Current LMC variants:** ESO VISTA, NASA/IPAC WISE and Horálek optical. They use separate color treatments and an approximate stellar-density depth prior. SMC has prepared density/image models; extending this new reconstruction flow requires its own registered sources and recipe.
 - Large originals, native removal products and newly processed volumes stay in the ignored local cache. Processing does not publish or replace production assets.
 

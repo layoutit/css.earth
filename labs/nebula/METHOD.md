@@ -2,7 +2,7 @@
 
 This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches.
 
-**Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Process** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
+**Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
 
 ## Order of operations
 
@@ -82,11 +82,12 @@ NOX predicts the background under stars. It is an image-processing model, not me
 
 ## 5. Paint the Alignment density cloud
 
-In **Reconstruction**, choose a completed source and press **Process**. The source of shape is the exact density object already visible in Alignment. The older photo-derived benchmark is a historical experiment, not this reference.
+In **Reconstruction**, choose a completed source and press **Preview**. The source of shape is the exact density object already visible in Alignment. The older photo-derived benchmark is a historical experiment, not this reference.
 
 - Pin `subject.density.directory`’s descriptor, existing slices, density recipe/grid and frame. Reuse all 144 LMC density quads and every decoded alpha byte. Do not regenerate a smoother volume or infer geometry from image light.
 - Preserve the selected image’s complete saved Alignment placement, including scale, all rotations, pivot and offsets. Never strip its shared authored fit. The fit remains an explicit model-placement assumption, not measured sky geometry.
 - Sample the full-native NOX diffuse image through the same fitted observer rays as Alignment. A 1024px registered color plane provides chromaticity; no second star-removal pass runs.
+- Optional material controls are saved in the job/result identity and provenance. Defaults preserve the previous RGB: saturation 1, detail 0, scale 24, brightness 1, gamma 1. For detail, compute luminance on the registered starless plane and smooth signal and valid-coverage weight separately with three separable box passes. Divide the two to avoid a false photo-edge halo. Radius is scaled from 1024px reference width. The local signal/mean ratio (with a noise floor) raised to Detail strength supplies a bounded 0.2–1 RGB multiplier. It deepens dark lanes without overexposing bright knots; it never alters density. Saturation changes normalized chromaticity, followed by `brightness * RGB ** (1 / gamma)` and bounded output. Whole-cloud tone includes neutral uncovered material. One registered field supplies every XYZ bank; no per-layer sharpening or runtime CSS filters.
 - Candidate brightness cannot redefine density. Missing/zero-RGB samples retain the density bank’s neutral color, with explicit coverage counts. Switching material changes colors while the volume stays fixed.
 - Use one configured SMASH sky-to-model reference and the pinned full-density field to assign deterministic model depths to the existing 943 observed stars. Preserve their IDs, measured coordinates and photometry. All candidate images use the same resulting star positions; the candidate image cannot select or move stars.
 - Prepare point brightness from the catalogue’s V magnitude, independently of the candidate image. Relative flux is `10 ** (-0.4 * (V - 10))`; see the [observatory magnitude reference](https://lco.global/spacebook/distance/comparing-magnitudes-different-objects/). Split that display-light budget between point area and opacity, compensating the encoded RGB luminance. Do not add a faint-star opacity floor or boost size and opacity independently. Current prepared diameters stay within 0.65–4 px; the measured 943-star sample does not clip its flux budget. This is a bounded display approximation, not radiometrically calibrated output. The Exposure control scales all star light together; Size scales all diameters together.

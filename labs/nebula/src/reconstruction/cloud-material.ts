@@ -6,8 +6,9 @@ import { encodeVolumeRaster } from '../../../../src/preparation/volume/raster.js
 import { containedPath, sha256 } from '../../../../src/preparation/volume/source.js';
 import type { VolumeImageEncoding, Vector3 } from '../../../../src/preparation/volume/config.js';
 import type { VolumeSlices, VolumeSliceQuad } from '../../../../src/preparation/volume/slices.js';
+import { parseCloudAppearance, type CloudAppearance } from './cloud-appearance.js';
 
-export const CLOUD_MATERIAL_METHOD = 'density-opacity-image-chromaticity@1';
+export const CLOUD_MATERIAL_METHOD = 'density-opacity-image-material@2';
 export interface CloudMaterialCoverage {
   positiveAlphaTexels: number;
   recoloredTexels: number;
@@ -20,6 +21,9 @@ export interface CloudMaterialOptions {
   loadResource(path: string): Promise<Uint8Array>;
   /** Physical coordinates in the unchanged quad units. RGB is [0,255]; false means outside image coverage. */
   sampleImageRgb(x: number, y: number, z: number, out: Vector3): boolean;
+  appearance?: CloudAppearance;
+  /** Prepared local-contrast multiplier, sampled in the same physical frame as image color. */
+  sampleDetailGain?(x: number, y: number, z: number): number;
   outputDirectory: string;
   encoding?: VolumeImageEncoding;
   onProgress?(progress: { completed: number; total: number }): void;
@@ -33,6 +37,10 @@ export interface CloudMaterialOptions {
 export async function recolorCloudSlices(options: CloudMaterialOptions): Promise<{
   slices: VolumeSlices; coverage: CloudMaterialCoverage;
 }> {
+  const appearance = parseCloudAppearance(options.appearance);
+  const tone = (value: number) => Math.round(Math.min(1, appearance.brightness * value ** (1 / appearance.gamma)) * 255);
+  if (appearance.detailStrength > 0 && !options.sampleDetailGain)
+    throw new TypeError('Cloud detail requires a prepared registered contrast field.');
   const encoding = options.encoding ?? { format: 'webp' as const, quality: 92 };
   if (!['png', 'webp'].includes(encoding.format) || (encoding.quality !== undefined &&
       (!Number.isInteger(encoding.quality) || encoding.quality < 1 || encoding.quality > 100)))
@@ -54,6 +62,8 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       const offset = (row * info.width + column) * 4;
       if (!source[offset + 3]) continue;
       coverage.positiveAlphaTexels++;
+      // Whole-cloud tone also applies to neutral material beyond photographic coverage.
+      for (let channel = 0; channel < 3; channel++) rgba[offset + channel] = tone(source[offset + channel] / 255);
       const u = (column + .5) / info.width, v = (row + .5) / info.height;
       const x = origin[0] + u * (horizontal[0] - origin[0]) + v * (vertical[0] - origin[0]);
       const y = origin[1] + u * (horizontal[1] - origin[1]) + v * (vertical[1] - origin[1]);
@@ -64,7 +74,16 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
         throw new TypeError('Cloud image samples must be finite RGB in [0,255].');
       const peak = Math.max(...rgb);
       if (peak === 0) { coverage.blackImageTexels++; continue; }
-      for (let channel = 0; channel < 3; channel++) rgba[offset + channel] = Math.round(rgb[channel]! / peak * 255);
+      const gain = appearance.detailStrength > 0 ? options.sampleDetailGain!(x, y, z) : 1;
+      if (!Number.isFinite(gain) || gain < 0 || gain > 1) throw new TypeError('Cloud detail must be a finite material multiplier in [0,1].');
+      const luminance = (.2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2]) / peak;
+      const color = appearance.saturation === 1 ? rgb.map(value => value / peak) :
+        rgb.map(value => Math.max(0, luminance + (value / peak - luminance) * appearance.saturation));
+      const colorPeak = Math.max(...color);
+      for (let channel = 0; channel < 3; channel++) {
+        const material = color[channel]! / colorPeak * gain;
+        rgba[offset + channel] = tone(material);
+      }
       coverage.recoloredTexels++;
     }
     const texturePath = quad.texturePath.replace(/\.[^/.]+$/, '') + '.' + encoding.format;
@@ -86,10 +105,10 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
   coverage.preservedReferenceTexels = coverage.outsideImageTexels + coverage.blackImageTexels;
   const slices: VolumeSlices = { ...structuredClone(options.slices), quads,
     provenance: { schema: 'cssearth-cloud-material@1', method: CLOUD_MATERIAL_METHOD,
-      reference: options.slices.provenance, coverage,
+      reference: options.slices.provenance, coverage, appearance,
       opacity: 'Every decoded reference alpha byte is preserved exactly; no geometry, crop, extent or depth change.',
-      color: 'Candidate RGB divided by its maximum channel supplies chromaticity only. Image brightness does not define density.',
-      fallback: 'Uncovered or zero-RGB pixels retain decoded neutral density RGB. Lossy delivery may re-encode RGB; alpha remains exact.' },
+      color: 'Normalized candidate chromaticity with authored saturation, registered local contrast, then RGB gamma and brightness. Image brightness never changes alpha or density.',
+      fallback: 'Uncovered or zero-RGB pixels retain neutral reference material with the same whole-cloud brightness/gamma. Lossy delivery may re-encode RGB; alpha remains exact.' },
     approximation: { ...structuredClone(options.slices.approximation),
       method: `${options.slices.approximation.method} Material: ${CLOUD_MATERIAL_METHOD}.`,
       limitations: [...options.slices.approximation.limitations,

@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { readOverlaySessions, resolveSavedPlacement } from '../alignment/overlay-store';
 import { defaultOverlayPlacement } from '../alignment/overlay-placement';
 import type { PreparedReconstruction, ReconstructionCandidate, ReconstructionCatalogue, ReconstructionRequest } from '../reconstruction/reconstruction-types';
+import { parseCloudAppearance, sameCloudAppearance, type CloudAppearance } from '../reconstruction/cloud-appearance';
+import { readCloudAppearance, saveCloudAppearance } from '../reconstruction/cloud-appearance-store';
+import { CloudAppearanceControls } from './cloud-appearance-controls';
 
 interface Job {
   id: string; status: 'queued' | 'running' | 'cancelling' | 'completed' | 'failed' | 'cancelled' | 'interrupted';
@@ -27,17 +30,20 @@ interface Props { context: string | null; viewerBusy: boolean;
   onSelect(prepared: PreparedReconstruction | null, subjectId: string, isCurrent: () => boolean): Promise<boolean>;
 }
 interface View { imageId: string; candidates: ReconstructionCandidate[]; selectDisabled: boolean; processDisabled: boolean;
+  appearance: CloudAppearance; appearanceDirty: boolean;
   running: boolean; cancelling: boolean; job: Job | null; text: string; error: boolean; credit: string; sourcePageUrl?: string; displayedResultId?: string; }
 const initialView: View = { imageId: 'benchmark', candidates: [], selectDisabled: true, processDisabled: true,
+  appearance: parseCloudAppearance(), appearanceDirty: false,
   running: false, cancelling: false, job: null, text: '', error: false, credit: 'Historical photo-based LMC experiment.' };
 export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: Props) {
   const [view, setView] = useState<View>(initialView);
-  const actions = useRef<{ choose?(value: string): void; process?(): void; cancel?(): void; busy?(value: boolean): void }>({});
+  const actions = useRef<{ choose?(value: string): void; appearance?(value: CloudAppearance): void; process?(): void; cancel?(): void; busy?(value: boolean): void }>({});
   useEffect(() => {
   let messageText = '', messageError = false;
   let subjectId: string | null = null, catalogue: ReconstructionCatalogue | null = null, selection: Selection = { imageId: 'benchmark' };
   let version = 0, controller: AbortController | null = null, job: Job | null = null, loading = false, mounting = false, viewerBusy = false;
   let starting: Promise<void> | null = null;
+  let appearance = parseCloudAppearance(), displayedAppearance = parseCloudAppearance();
   const candidate = () => catalogue?.candidates.find(item => item.imageId === selection.imageId);
   function message(value: string, error = false) { messageText = value; messageError = error; render(); }
   function saveSelection() {
@@ -48,6 +54,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
     setView({ imageId: selection.imageId, candidates: catalogue?.candidates ?? [],
       selectDisabled: loading || mounting || viewerBusy || !subjectId,
       processDisabled: !row?.ready || loading || mounting || viewerBusy || running,
+      appearance: { ...appearance }, appearanceDirty: Boolean(row) && !sameCloudAppearance(appearance, displayedAppearance),
       running, cancelling: job?.status === 'cancelling', job, text: messageText, error: messageError,
       credit: row?.credit ?? 'Historical photo-based LMC experiment.', sourcePageUrl: row?.sourcePageUrl,
       displayedResultId: selection.displayedResultId });
@@ -74,6 +81,8 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
     mounting = true; render();
     try {
       if (await onSelect(prepared, subjectId, current) && current()) {
+        displayedAppearance = parseCloudAppearance(prepared?.appearance);
+        appearance = readCloudAppearance(subjectId, selection.imageId, displayedAppearance);
         selection.displayedResultId = prepared?.resultId; saveSelection();
         message(prepared ? 'Reconstruction loaded.' : 'Historical benchmark.');
       }
@@ -89,7 +98,8 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
   function accept(value: Job, saved: SavedJob) {
     if (!value || value.id !== saved.id || !['queued', 'running', 'cancelling', 'completed', 'failed', 'cancelled', 'interrupted'].includes(value.status))
       throw new TypeError('Invalid reconstruction job identity.');
-    if (value.result && (value.result.imageId !== saved.request.imageId || value.result.removalResultId !== saved.request.removalResultId))
+    if (value.result && (value.result.imageId !== saved.request.imageId || value.result.removalResultId !== saved.request.removalResultId ||
+        !sameCloudAppearance(value.result.appearance, saved.request.appearance)))
       throw new TypeError('Reconstruction result differs from the requested source.');
     job = value; saved.status = value.status; saveJob(saved);
     message(value.error ?? (active(value) ? value.progress?.message ?? `Reconstruction ${value.status}…` : value.status === 'completed' ? 'Reconstruction ready.' : `Reconstruction ${value.status}.`), Boolean(value.error));
@@ -127,6 +137,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
     render();
     try {
       const row = candidate(), saved = readJob();
+      appearance = readCloudAppearance(subjectId!, selection.imageId, row?.prepared?.appearance); render();
       if (saved && active(saved)) {
         job = { id: saved.id, status: saved.status }; message('Reattaching to reconstruction…'); render(); void watch(saved);
       }
@@ -140,13 +151,18 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
     } catch (error) { if (current()) { mounting = false; message(error instanceof Error ? error.message : String(error), true); render(); } }
   }
   actions.current.choose = value => { selection.imageId = value; saveSelection(); void activateSelection(); };
+  actions.current.appearance = value => {
+    if (!subjectId || !candidate() || loading || mounting || viewerBusy || active(job)) return;
+    appearance = parseCloudAppearance(value); saveCloudAppearance(subjectId, selection.imageId, appearance); render();
+  };
   actions.current.process = () => {
     const row = candidate(); if (!row?.ready || !row.removalResultId || !catalogue || !subjectId || loading || mounting || active(job)) return;
     const previous = readJob(); if (previous && active(previous)) { void activateSelection(); return; }
     const savedPlacement = readOverlaySessions().get(catalogue.overlayCatalogue)?.find(item => item.id === row.imageId);
     const placement = savedPlacement?.basis === row.placementBasis ?
       resolveSavedPlacement(savedPlacement.placement, savedPlacement.defaultPlacement ?? defaultOverlayPlacement(), row.placement) : row.placement;
-    const request: ReconstructionRequest = { action: 'apply', subjectId, imageId: row.imageId, removalResultId: row.removalResultId, placement };
+    const request: ReconstructionRequest = { action: 'apply', subjectId, imageId: row.imageId, removalResultId: row.removalResultId, placement,
+      appearance: { ...appearance } };
     const saved: SavedJob = { id: crypto.randomUUID(), request, status: 'queued' };
     try { saveJob(saved); } catch { message('Enable local storage before processing.', true); return; }
     stopObserver(); controller = new AbortController(); const owner = version;
@@ -215,12 +231,15 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
       <option value="benchmark">Historical benchmark</option>
       {view.candidates.map(row => <option key={row.imageId} value={row.imageId}>{row.label}{row.prepared ? ' · saved' : ''}</option>)}
     </select>
+    {view.imageId !== 'benchmark' && <CloudAppearanceControls value={view.appearance} disabled={view.processDisabled}
+      onChange={value => actions.current.appearance?.(value)} />}
     <div className="reconstruction-actions">
       <button id="reconstruction-process" type="button" disabled={view.processDisabled} onClick={() => actions.current.process?.()}
-        title="Prepare a 3D cloud from this saved NOX image and its current Alignment placement.">Process</button>
+        title="Save and display a local preview with these settings and the current Alignment placement. Reuses saved starless pixels; never runs star removal.">Preview</button>
       <button id="reconstruction-cancel" type="button" hidden={!view.running} disabled={view.cancelling} onClick={() => actions.current.cancel?.()}>Cancel</button>
     </div>
-    <p id="reconstruction-image-status" className="reconstruction-image-detail" role="status" aria-live="polite" data-error={view.error}>{view.text}</p>
+    <p id="reconstruction-image-status" className="reconstruction-image-detail" role="status" aria-live="polite" data-error={view.error}>
+      {view.appearanceDirty && !view.running && !view.error && !view.processDisabled ? 'Changes ready · Preview to apply.' : view.text}</p>
     <progress id="reconstruction-progress" aria-label="Reconstruction progress" hidden={!view.running}
       max={total && Number.isFinite(current) ? total : undefined} value={total && Number.isFinite(current) ? current : undefined} />
     <button className="text-button" type="button" popoverTarget="reconstruction-source-info">ⓘ Source</button>

@@ -87,3 +87,55 @@ test('changed reference bytes fail before recoloring', async t => {
   await assert.rejects(recolorCloudSlices({ slices: source.slices, loadResource: async () => changed,
     outputDirectory, sampleImageRgb: (_x, _y, _z, out) => { out.fill(255); return true; } }), /Accepted cloud texture changed/);
 });
+
+test('saturation and registered detail change only RGB, including identical dark lanes on all slice axes', async t => {
+  const directory = await temporary(t), source = await fixture();
+  for (const saturation of [0, 1, 2]) {
+    const outputDirectory = resolve(directory, String(saturation));
+    const result = await recolorCloudSlices({ slices: source.slices, loadResource: async () => source.bytes,
+      outputDirectory, encoding: { format: 'png' }, appearance: { brightness: 1, gamma: 1, saturation, detailStrength: 1, detailScale: 24 },
+      sampleImageRgb: (_x, _y, _z, out) => { out[0] = 40; out[1] = 60; out[2] = 80; return true; },
+      sampleDetailGain: x => x < 14 ? .4 : 1 });
+    const banks = [];
+    for (const quad of result.slices.quads) {
+      const rgba = await sharp(await readFile(resolve(outputDirectory, quad.texturePath))).ensureAlpha().raw().toBuffer();
+      for (let p = 3; p < rgba.length; p += 4) assert.equal(rgba[p], source.pixels[p]);
+      const dark = [...rgba.subarray(4, 7)], bright = [...rgba.subarray(8, 11)];
+      assert.equal(Math.max(...dark), 102); assert.equal(Math.max(...bright), 255);
+      if (saturation === 0) assert.deepEqual(bright, [255, 255, 255]);
+      if (saturation === 1) assert.deepEqual(bright, [128, 191, 255]);
+      if (saturation === 2) assert.ok(bright[0] < 128 && bright[2] === 255);
+      banks.push(rgba);
+    }
+    assert.deepEqual(banks[0], banks[1]); assert.deepEqual(banks[1], banks[2]);
+    assert.deepEqual(result.slices.quads.map(shape), source.slices.quads.map(shape));
+  }
+});
+
+test('material brightness and gamma affect real midtone pixels while opacity stays exact', async t => {
+  const directory = await temporary(t), source = await fixture();
+  for (const [brightness, gamma, expected] of [[1, 1, [64, 128, 255]], [.5, 1, [32, 64, 128]],
+    [1, 2, [128, 180, 255]], [0, 1, [0, 0, 0]]] as const) {
+    const outputDirectory = resolve(directory, `${brightness}-${gamma}`);
+    const result = await recolorCloudSlices({ slices: source.slices, loadResource: async () => source.bytes,
+      outputDirectory, encoding: { format: 'png' },
+      appearance: { saturation: 1, detailStrength: 0, detailScale: 24, brightness, gamma },
+      sampleImageRgb: (_x, _y, _z, out) => { out[0] = 20; out[1] = 40; out[2] = 80; return true; } });
+    const rgba = await sharp(await readFile(resolve(outputDirectory, result.slices.quads[0].texturePath))).ensureAlpha().raw().toBuffer();
+    assert.deepEqual([...rgba.subarray(4, 7)], [...expected]);
+    for (let p = 3; p < rgba.length; p += 4) assert.equal(rgba[p], source.pixels[p]);
+  }
+});
+
+test('whole-cloud tone also reaches uncovered and black-image neutral material', async t => {
+  const outputDirectory = await temporary(t), source = await fixture();
+  const result = await recolorCloudSlices({ slices: source.slices, loadResource: async () => source.bytes,
+    outputDirectory, encoding: { format: 'png' },
+    appearance: { saturation: 1, detailStrength: 0, detailScale: 24, brightness: .5, gamma: 1 },
+    sampleImageRgb: (x, _y, _z, out) => { out.fill(0); return x >= 14; } });
+  const rgba = await sharp(await readFile(resolve(outputDirectory, result.slices.quads[0].texturePath))).ensureAlpha().raw().toBuffer();
+  for (let p = 1; p < 6; p++) {
+    assert.deepEqual([...rgba.subarray(p * 4, p * 4 + 3)], [25, 50, 100]);
+    assert.equal(rgba[p * 4 + 3], source.pixels[p * 4 + 3]);
+  }
+});

@@ -35,7 +35,7 @@ Refresh reconnects to a running job. A completed result restores without inferen
 ## 3. Reconstruct and compare
 
 1. Open [Reconstruction](http://127.0.0.1:4331/reconstruction) and choose a source. VISTA, Horálek and WISE are the approved LMC comparison candidates.
-2. A completed variant loads directly. For a new placement/removal result, press **Process** explicitly. Merely selecting an image does not bake it.
+2. A completed variant loads directly. Adjust the five visible cloud material sliders and press **Preview** for a new appearance, placement or removal result. Draft settings persist per image; previewing reuses starless pixels. Merely selecting an image does not bake it.
 3. Follow progress, or **Cancel**. The previous cloud remains visible until the new bank is fully prepared and decoded.
 4. Compare saved variants at the same camera and brightness. Inspect front, oblique and edge views for sheet-like depth, repeated details, seams, disappearing layers and whitening.
 5. Use **Earth view** to restore the painter’s observer and **Original image** plus opacity to compare image features with the cloud and catalogue.
@@ -54,7 +54,7 @@ Current processing repaints the Alignment density cloud’s exact 144 prepared q
 | Completed reconstruction banks | `.local/nebula-lab/reconstructions/`; descriptors, XYZ textures, provenance and manifest |
 | Versioned recipes/evidence | `models/lmc/`, `models/smc/`, shared recipe files and `sources/` |
 
-An image-to-density placement change requires **Process** again to produce a matching bank. Browsing a result does not rewrite it. Promotion into a checked-in model or production object is a separate explicit task, with source credits and replay instructions retained.
+An image-to-density placement change requires **Preview** again to produce a matching bank. Browsing a result does not rewrite it. Promotion into a checked-in model or production object is a separate explicit task, with source credits and replay instructions retained.
 
 ## Development checks
 

@@ -7,7 +7,7 @@ Local development tooling, separate from the production website. Current objects
 From the repository root: `pnpm install --frozen-lockfile`, then `pnpm lab:nebula`. The default server is `http://127.0.0.1:4331`.
 
 - `/alignment`: inspect the complete density field, choose an image, adjust placement/tone, compare Original / Without stars / Residual, and run optional Quick preview or full Remove stars.
-- `/reconstruction`: choose the saved starless source and press Process. Completed variants load without processing when selected. Show progress and Cancel; refresh reconnects to the same job.
+- `/reconstruction`: choose the saved starless source and press Preview. Completed variants load without processing when selected. Show progress and Cancel; refresh reconnects to the same job.
 - Preserve existing local storage, source originals and completed processing caches during development. Keep the user's running lab alive; never restart it merely to clear state.
 - For the full current workflow, read [docs/workflows.md](docs/workflows.md). For source and depth interpretation, read [METHOD.md](METHOD.md).
 
@@ -38,7 +38,7 @@ models/
 
 ## Processing boundaries
 
-- Browsing/importing/alignment does not authorize expensive processing. A user's instruction for named candidates, or their explicit Quick preview / Remove stars / Process click, authorizes that operation. Do not ask again for work already authorized.
+- Browsing/importing/alignment does not authorize expensive processing. A user's instruction for named candidates, or their explicit Quick preview / Remove stars / Preview click, authorizes that operation. Do not ask again for work already authorized.
 - Source registration and the user's image-to-density fit are different. Preserve both. The visual fit is not measured distance, size, or correspondence between simulated and observed stars.
 - Remove stars on the full native pixel grid. Use the completed NOX native diffuse result for reconstruction, not an older separation preview or the small browser texture. RGB8 working copies must be separate from higher-depth originals.
 - Never remove stars again while reconstructing. Images supply color to the existing volume; they must not create support, thickness or an extruded photographic background.
@@ -48,7 +48,7 @@ models/
 - Prepare stellar size and opacity together from catalogue magnitudes, preserving relative display light across colors and image variants. Avoid a faint-star opacity floor; keep exposure global.
 - Bake XYZ image banks offline. Runtime only loads prepared geometry/textures; keep scene rendering within the existing PolyCSS rules.
 - Preserve the full saved Alignment placement: scale, pivot, offsets and every rotation. Earth view must use one shared observer and framing across both tabs. Compare actual image landmarks across Alignment and Reconstruction; internal consistency within only one tab cannot prove registration.
-- Candidate chromaticity changes material only. Image brightness must not redefine density. Missing coverage/black color retains neutral density color with explicit coverage accounting. Validate bank handoffs at the same camera; report failed visual gates honestly.
+- Candidate color, local contrast, brightness and gamma change RGB material only. Save these controls per image and include them in job/cache identities; moving a slider never starts a bake. Image brightness must not redefine density. Missing coverage/black color retains neutral density color with explicit coverage accounting. Validate bank handoffs at the same camera; report failed visual gates honestly.
 - Processing is server-owned and atomically publishes complete results. Refresh/navigation detach an observer, not the job. Explicit Cancel stops it. A server restart must report an interrupted job honestly.
 
 ## Validation

@@ -2,14 +2,17 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { ReconstructionStarsInput } from './reconstruction-stars';
 import type { OverlayPlacement } from '../alignment/overlay-placement';
 import type { LabSubjectRecord } from '../viewer/viewer';
+import type { CloudAppearance } from './cloud-appearance';
 
 export interface ReconstructionRequest {
   action: 'apply'; subjectId: string; imageId: string;
   removalResultId: string; placement: OverlayPlacement;
+  appearance?: CloudAppearance;
 }
 export interface PreparedReconstruction {
   schema: 'cssearth-nebula-reconstruction@1'; resultId: string;
   imageId: string; removalResultId: string; placement: OverlayPlacement;
+  appearance?: CloudAppearance;
   subject: LabSubjectRecord;
 }
 export interface ReconstructionCandidate {
@@ -24,6 +27,7 @@ export interface ReconstructionCatalogue {
 export interface ReconstructionWork {
   schema: 'cssearth-nebula-reconstruction-work@1';
   id: string; imageId: string; name: string; outputDirectory: string;
+  appearance?: CloudAppearance;
   source: { path: string; sha256: string; width: number; height: number };
   original: { path: string; sha256: string; removalResultId: string };
   overlay: { widthPx: number; heightPx: number; transform: string; pivotCssPx: number[]; placement: OverlayPlacement };

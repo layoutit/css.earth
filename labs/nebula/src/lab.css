@@ -159,6 +159,9 @@ a.reconstruction-image-detail { display: inline-block; }
 }
 
 .reconstruction-actions { display: flex; gap: 6px; margin-top: 10px; }
+.cloud-appearance-controls { border: 0; padding: 0; margin: 14px 0 0; min-width: 0; }
+.cloud-appearance-controls legend { font-size: 12px; margin-bottom: 2px; }
+.cloud-appearance-controls .cloud-brightness-control { grid-template-columns: 82px minmax(30px, 1fr) 42px; }
 .reconstruction-actions button { flex: 1; font-size: 12px; padding: 7px 10px; }
 #reconstruction-progress { width: 100%; height: 9px; margin: 9px 0; accent-color: #c2ccd8; }
 #reconstruction-processing > .text-button { margin-top: 8px; }

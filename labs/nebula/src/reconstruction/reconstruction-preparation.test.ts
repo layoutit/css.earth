@@ -45,6 +45,9 @@ test('the catalogue restores the newest completed placement, independent of hash
 });
 test('reconstruction requires an explicit operation, a completed removal identity and finite alignment', () => {
   assert.deepEqual(parseReconstructionRequest(request), request);
+  const appearance = { brightness: 1, gamma: 1, saturation: 1.3, detailStrength: 1, detailScale: 24 };
+  assert.deepEqual(parseReconstructionRequest({ ...request, appearance }).appearance, appearance);
+  assert.throws(() => parseReconstructionRequest({ ...request, appearance: { ...appearance, detailScale: NaN } }));
   for (const invalid of [{ ...request, action: 'overview' }, { ...request, removalResultId: '' },
     { ...request, placement: { ...request.placement, scale: 0 } }, { ...request, source: '/arbitrary/photo.png' }])
     assert.throws(() => parseReconstructionRequest(invalid), TypeError);

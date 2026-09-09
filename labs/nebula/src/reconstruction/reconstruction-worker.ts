@@ -7,8 +7,10 @@ import type { ReconstructionWork } from './reconstruction-types.js';
 import { parseLabModelJson } from '../utils/model-paths.js';
 import { createAlignedObservationMapping } from './reconstruction-geometry.js';
 import { rectifyObservation, writeObservationPanel } from './filled-products.js';
-import { registeredImageSampler, writeOriginalOverlay } from './registered-image.js';
+import { registeredImageSampler, registeredScalarSampler, writeOriginalOverlay } from './registered-image.js';
 import { recolorCloudSlices } from './cloud-material.js';
+import { parseCloudAppearance } from './cloud-appearance.js';
+import { prepareCloudDetail, CLOUD_DETAIL_METHOD } from './cloud-detail.js';
 import { prepareDensityProjection } from './density-projection.js';
 import { parseVolumeRecipe } from '../../../../src/preparation/volume/config.js';
 import { prepareReconstructionStars } from './reconstruction-stars.js';
@@ -19,7 +21,7 @@ import { compileCssVolume } from '../../../../src/renderers/css/preparation/volu
 type Progress = { type:'progress'; stage:string; current:number; total:number; message:string };
 export const RECONSTRUCTION_SETTINGS = { analysisWidth:1024,originalWidth:2048,quality:92 };
 const implementationFiles=['reconstruction-worker.ts','reconstruction-geometry.ts','registered-image.ts','cloud-material.ts',
-  'reconstruction-stars.ts','filled-products.ts','density-projection.ts'].map(name=>'labs/nebula/src/reconstruction/'+name)
+  'cloud-appearance.ts','cloud-detail.ts','reconstruction-stars.ts','filled-products.ts','density-projection.ts'].map(name=>'labs/nebula/src/reconstruction/'+name)
   .concat(['labs/nebula/src/stars/star-photometry.ts','labs/nebula/src/cli/prepare-lmc-stars.ts','labs/nebula/src/alignment/overlay-wcs.ts','labs/nebula/src/alignment/overlay-geometry.ts','src/preparation/volume/raster.ts','src/renderers/css/preparation/volume.ts']);
 const json=async(path:string,value:unknown)=>{const bytes=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,bytes);return sha256(bytes);};
 async function pinned(root:string,pin:{path:string;sha256:string}) {
@@ -31,6 +33,7 @@ async function pinned(root:string,pin:{path:string;sha256:string}) {
 export async function prepareReconstruction(work:ReconstructionWork,options:{root?:string;onProgress?:(progress:Progress)=>void;
   settings?:typeof RECONSTRUCTION_SETTINGS}={}) {
   const started=performance.now(),root=resolve(options.root??process.cwd()),settings=options.settings??RECONSTRUCTION_SETTINGS;
+  const appearance=parseCloudAppearance(work.appearance);
   const progress=(stage:string,current:number,total:number,message:string)=>options.onProgress?.({type:'progress',stage,current,total,message});
   if(work.schema!=='cssearth-nebula-reconstruction-work@1'||!/^reconstruction-[a-f0-9]{64}$/.test(work.id)||
     !work.imageId||!work.name||!isAbsolute(work.outputDirectory)||!work.cloud)throw new TypeError('A reconstruction requires its pinned canonical cloud.');
@@ -62,6 +65,8 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   if(!photo.coveredPixels||!photo.intensity.some(v=>v>0))throw new TypeError('Aligned source has no positive covered light.');
   await writeObservationPanel(resolve(output,'source/registered-image.png'),photo,undefined,false);
   await writeObservationPanel(resolve(output,'source/target.png'),photo);
+  progress('detail',0,1,'Preparing saturation and local image detail in the shared cloud frame');
+  const detailGain=prepareCloudDetail(photo,mapping,appearance);
   const aspect=(mapping.boundsUnits.max[1]-mapping.boundsUnits.min[1])/(mapping.boundsUnits.max[0]-mapping.boundsUnits.min[0]);
   let referenceWidth=Math.min(settings.originalWidth,Math.floor(Math.sqrt(4_194_304/aspect)));
   while(referenceWidth*Math.ceil(referenceWidth*aspect)>4_194_304)referenceWidth--;
@@ -87,11 +92,14 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   progress('material',0,sourceSlices.quads.length,'Painting the existing cloud; preserving every slice and alpha byte');
   const sourceDirectory=dirname(resolve(root,work.cloud.slices.path));
   const painted=await recolorCloudSlices({slices:sourceSlices,loadResource:path=>readFile(containedPath(sourceDirectory,path)),
-    sampleImageRgb:registeredImageSampler(photo,mapping),outputDirectory:resolve(output,'prepared'),encoding:{format:'webp',quality:settings.quality},
+    sampleImageRgb:registeredImageSampler(photo,mapping),appearance,sampleDetailGain:registeredScalarSampler(photo,detailGain,mapping),
+    outputDirectory:resolve(output,'prepared'),encoding:{format:'webp',quality:settings.quality},
     onProgress:p=>{if(p.completed%16===0||p.completed===p.total)progress('material',p.completed,p.total,`Painted ${p.completed}/${p.total} fixed cloud slices`);}});
   const validation={sameGeometry:true,sameAlpha:true,sameStars:true,coverage:painted.coverage};
   const provenance={schema:'cssearth-nebula-reconstruction-provenance@1',method:'alignment-density-material-v1',request:work,settings,implementation,
-    canonicalCloud:work.cloud,source:work.source,original:work.original,alignment:{...work.overlay,
+    canonicalCloud:work.cloud,source:work.source,original:work.original,
+    material:{appearance,detailMethod:CLOUD_DETAIL_METHOD,scale:'Radius in pixels at 1024px registered width.',
+      contrast:'Three coverage-normalized box passes; bounded local luminance ratio deepens dark structure, preserving highlight headroom. Authored RGB material only; no inferred depth.'},alignment:{...work.overlay,
       convention:'Use the exact saved Alignment placement, including scale, pivot, all rotations and offsets.'},
     geometry:{tangentBoundsKpc:mapping.boundsUnits,physicalBoundsKpc:sourceSlices.boundsUnits,observerDistanceKpc:mapping.distanceUnits,originalImageLandmarks:[0,.5,1].flatMap(v=>[0,.5,1].map(u=>{
       const [x,y]=mapping.tangentAtUv(u,v),{min,max}=mapping.boundsUnits;
@@ -101,7 +109,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
       tangentBoundsKpc:densityProjection.boundsUnits,observerDistanceKpc:densityProjection.distanceUnits,
       meaning:'Integrated signal of the untouched Alignment density source; identical cutoff for all materials.'},
     validation,limitations:['The Alignment cloud is simulated stellar density, not measured gas depth.',
-      'Candidate chromaticity paints the fixed cloud. Image brightness never changes geometry or alpha.',
+      'Candidate color and optional local contrast paint the fixed cloud. Image brightness never changes geometry or alpha.',
       'Uncovered or black image samples retain neutral density colors; coverage counts record this mixed-source material.',
       'Catalogue astrometry is preserved; one common Alignment mapping and density-conditioned model supplies the same stellar positions for every material.']};
   painted.slices.provenance=provenance;

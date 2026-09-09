@@ -46,11 +46,11 @@ Importing and aligning a candidate does not authorize processing. A user instruc
 
 ## 5. Process the volume explicitly
 
-1. Open `/reconstruction`, choose the completed starless source, and press **Process**. Selecting a candidate alone must not start a bake.
+1. Open `/reconstruction`, choose the completed starless source, and press **Preview**. Selecting a candidate alone must not start a bake.
 2. Pin the Alignment density descriptor, prepared slices, source textures, reference projection and catalogue alongside the native starless image and registration. A new object needs an explicitly selected density cloud before it can use this material workflow.
 3. Keep the cloud’s exact geometry, bounds, crops, depth and decoded alpha. Use the exact same prepared density bank shown in Alignment; do not substitute a historical photo-derived benchmark or resample a new volume for each image.
 4. Preserve the entire saved Alignment placement, including its scale, rotation, pivot and offsets. Use one shared Earth observer/framing across both tabs. Compare actual image landmarks across tabs, not only against reconstruction’s own mapping.
-5. Sample registered candidate chromaticity at each existing slice texel’s physical position. Image brightness cannot redefine density. Missing/zero-RGB samples retain explicitly counted neutral density color; report this mixed-source coverage.
+5. Sample registered candidate chromaticity at each existing slice texel’s physical position. Optional saturation, local detail, brightness and gamma are authored RGB material controls; use one coverage-normalized registered detail field for all axes, preserve alpha, and pin settings in the result. Preview explicitly; do not process on slider movement. Image brightness cannot redefine density. Missing/zero-RGB samples retain explicitly counted neutral density color; report this mixed-source coverage.
 6. Preserve observed IDs, astrometry and photometry. One configured sky-to-density fit conditions model depths on the real density field, independently of candidate image. All materials share the same resulting positions and encoded cutoff signal; no per-image selection or repositioning.
 7. Current LMC comparison uses the existing 144 Alignment slices and 943 stars, a 1024px registered color plane, and an original comparison plane up to 2048px within four million pixels. It preserves Alignment density detail, not all native image detail. Prepare original-image geometry through exactly the same mapping.
 8. Verify exact geometry, every decoded alpha byte, catalogue records and resource hashes. Finalize only a complete local result atomically. Decode the next bank before swapping the retained scene; never host or deploy as part of processing.
