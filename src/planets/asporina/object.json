@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 130.2826086956522,
       "bodyRadiusM": 29965
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asporina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "bf6a93b77a780c043864e48eeb324c6755453c5b2199c0383c789bc9326b3a96"
+      }
     }
   },
   "schema": "cssearth-object@1",

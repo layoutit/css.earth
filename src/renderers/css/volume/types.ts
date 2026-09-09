@@ -1,3 +1,4 @@
+import type { PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { PhysicalCameraPose, PositionM } from '@cssearth/engine';
 import type { WorldCameraViewport, WorldCameraPose } from '../navigation/world-camera.js';
@@ -21,6 +22,7 @@ export interface PreparedVolumeLeaf {
   readonly widthPx: number;
   readonly heightPx: number;
   readonly style: PreparedVolumeLeafStyle;
+  readonly boundsCssPixels?: PreparedLeafBounds;
 }
 
 export interface PreparedVolumeStack {

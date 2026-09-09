@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 127.3913043478261,
       "bodyRadiusM": 29300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/alkmene-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c16739a150d7d8d807c20025ad518e3eab84b513f308bcbadf6b07dd7391fcb1"
+      }
     }
   },
   "schema": "cssearth-object@1",

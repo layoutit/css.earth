@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 84.78260869565217,
       "bodyRadiusM": 19500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/siarnaq-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e2fc7259ca9dfd89d5f977f48884db7cf08add2316bedb83637684c8d10b1fa8"
+      }
     }
   },
   "prepared": {

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 236.95652173913044,
       "bodyRadiusM": 54500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hesperia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4887a24117a6c60bb367c1b1dd40b0fe88d9902a5625588d9336786378d16926"
+      }
     }
   },
   "schema": "cssearth-object@1",

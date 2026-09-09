@@ -2,6 +2,27 @@ import { clipSegmentToRectangle, eyeFraction, lerp, splitVisible } from './helio
 import type { Vector3 } from './types.js';
 import type { OrbitSegment } from './heliocentric-view.js';
 
+/** A mounted line pool owns one live projection, with the same bounded capacity
+ * as its drawing leaves. Consumers finish reading it before the next publish.
+ * Prepared vertices remain immutable; only these screen coordinates change. */
+export function createRetainedRingProjection(capacity: number) {
+  if (!Number.isSafeInteger(capacity) || capacity < 0) throw new TypeError('Invalid retained orbit capacity.');
+  const slots = Array.from({ length: capacity }, () => [0, 0, 0, 0, 0] as [number, number, number, number, number]);
+  const segments: OrbitSegment[] = [];
+  let count = 0;
+  return {
+    reset() { count = 0; },
+    write(x0: number, y0: number, x1: number, y1: number, weight: number) {
+      const slot = slots[count];
+      if (!slot) throw new RangeError('Prepared orbit projection capacity exceeded.');
+      slot[0] = x0; slot[1] = y0; slot[2] = x1; slot[3] = y1; slot[4] = weight;
+      segments[count++] = slot;
+      return true;
+    },
+    finish(): readonly OrbitSegment[] { segments.length = count; return segments; },
+  };
+}
+
 /** Conservative projected bounds for a prepared sphere. A near-plane crossing
  * requires the exact chord path. Otherwise its enclosing eye-space cube bounds
  * every projected chord, including viewport clipping and the existing fade. */
@@ -33,22 +54,42 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   clipX: number;
   clipY: number;
 }) {
-  return (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[], fullOrbit = false): readonly OrbitSegment[] => {
-    // Full orbits include prepared chords omitted by the trail fade.
+  // Painting and presentation measurement share the exact clipping path. A
+  // measurement may stop once its consumer's existing fade is fully saturated.
+  const visit = (vertices: readonly Vector3[], trail: readonly number[], activeChords: readonly number[] | undefined,
+    segment: (x0: number, y0: number, x1: number, y1: number, weight: number) => boolean, fullOrbit = false) => {
+    // Hover reveals the complete prepared ring, including zero-weight trail chords.
     const chords = fullOrbit ? undefined : activeChords;
-    const eyes = chords ? null : vertices.map(toEye);
-    const segments: OrbitSegment[] = [];
-    let lastEndIndex = -1, lastEnd: Vector3 | null = null;
+    const eyes: (Vector3 | undefined)[] = [];
+    const screens: (readonly number[] | undefined)[] = [];
+    const eyeAt = (index: number) => eyes[index] ??= toEye(vertices[index]);
+    // A prepared polyline shares vertices between neighbouring chords. Project
+    // each endpoint once for this camera; only clipped/occluded endpoints need
+    // new projections. These caches belong to one visit, never a stale view.
+    const screenAt = (index: number) => screens[index] ??= project(eyeAt(index));
+    const inside = (p: readonly number[]) => Math.abs(p[0]) <= clipX && Math.abs(p[1]) <= clipY;
     for (let ordinal = 0; ordinal < (chords?.length ?? vertices.length); ordinal++) {
       const index = chords?.[ordinal] ?? ordinal;
       const weight = fullOrbit ? 1 : trail[index];
       if (!(weight > 0)) continue;
       const next = (index + 1) % vertices.length;
-      let start = eyes ? eyes[index] : lastEndIndex === index ? lastEnd! : toEye(vertices[index]);
-      let end = eyes ? eyes[next] : toEye(vertices[next]);
-      lastEndIndex = next; lastEnd = end;
+      let start = eyeAt(index), end = eyeAt(next);
       let startDepth = -start[2], endDepth = -end[2];
       if (startDepth <= near && endDepth <= near) continue;
+      // Interior chords outside every occluder's conservative shadow already
+      // are their final screen segment. Do not run clipping, perspective lerps,
+      // visibility splitting and endpoint projection again for the common case.
+      if (startDepth > near && endDepth > near && mayOcclude) {
+        const a = screenAt(index), b = screenAt(next);
+        if (inside(a) && inside(b) && !mayOcclude(a, b)) {
+          // Preserve the detailed path's endpoint arithmetic exactly, even
+          // where a + (b - a) rounds differently from b at astronomical scales.
+          const endPoint = lerp(start, end, 1);
+          const last = endPoint[0] === end[0] && endPoint[1] === end[1] && endPoint[2] === end[2] ? b : project(endPoint);
+          if (Math.hypot(last[0] - a[0], last[1] - a[1]) >= 0.05 && !segment(a[0], a[1], last[0], last[1], weight)) return;
+          continue;
+        }
+      }
       if (startDepth <= near) {
         start = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
         startDepth = near;
@@ -56,7 +97,8 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
         end = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
         endDepth = near;
       }
-      const startScreen = project(start), endScreen = project(end);
+      const startScreen = start === eyes[index] ? screenAt(index) : project(start);
+      const endScreen = end === eyes[next] ? screenAt(next) : project(end);
       const window = clipSegmentToRectangle(startScreen, endScreen, clipX, clipY);
       if (window === null) continue;
       const t0 = eyeFraction(window[0], startDepth, endDepth);
@@ -67,11 +109,40 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
       for (const [pieceStart, pieceEnd] of pieces) {
         const [x0, y0] = project(pieceStart), [x1, y1] = project(pieceEnd);
         if (![x0, y0, x1, y1].every(Number.isFinite) || Math.hypot(x1 - x0, y1 - y0) < 0.05) continue;
-        segments.push(Object.freeze([x0, y0, x1, y1, weight]));
+        if (!segment(x0, y0, x1, y1, weight)) return;
       }
     }
+  };
+  const projectRing = (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[], fullOrbit = false,
+    retained?: ReturnType<typeof createRetainedRingProjection>): readonly OrbitSegment[] => {
+    if (retained) {
+      retained.reset();
+      visit(vertices, trail, activeChords, retained.write, fullOrbit);
+      return retained.finish();
+    }
+    const segments: OrbitSegment[] = [];
+    visit(vertices, trail, activeChords, (x0, y0, x1, y1, weight) => {
+      segments.push(Object.freeze([x0, y0, x1, y1, weight]));
+      return true;
+    }, fullOrbit);
     return Object.freeze(segments);
   };
+  return Object.assign(projectRing, {
+    /** Exact projected extent, capped only at the caller's saturation point.
+     * No partial geometry escapes this measurement-only operation. */
+    measureExtent(vertices: readonly Vector3[], trail: readonly number[], saturation: number, activeChords?: readonly number[]): number {
+      if (!(saturation >= 1) || !Number.isFinite(saturation)) throw new TypeError('Orbit extent saturation must be finite and at least one pixel.');
+      let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
+      let extent = 1;
+      visit(vertices, trail, activeChords, (x0, y0, x1, y1) => {
+        left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
+        top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
+        extent = Math.max(1, right - left, bottom - top);
+        return extent < saturation;
+      });
+      return Math.min(extent, saturation);
+    },
+  });
 }
 
 /** The perspective projection of a sphere lies inside its enclosing cube's

@@ -32,6 +32,7 @@ const {
   lenses,
   settings,
   destinations,
+  navigation = false,
 } = Astro.props;
 requireObjectControls({ lenses, settings }, objectId);
 const speedSetting = settings?.controls.find((setting) =>
@@ -131,7 +132,7 @@ const hasResources = sources.length > 0;
       aria-label="Planets"
       hidden
     >
-      <PlanetCard data-prepared-focus-card hidden>
+      {!navigation && <><PlanetCard data-prepared-focus-card hidden>
         <section class="planet-selected-panel">
           <div class="planet-title-row">
             <h1 class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></h1>
@@ -196,7 +197,7 @@ const hasResources = sources.length > 0;
             </button>
           </li>)}
         </ul>
-      </section>}
+      </section>}</>}
     </nav>
     {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
       <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>

@@ -74,6 +74,42 @@ function fixture(options = {}) {
     mount: () => mountPlanetShell({ objectId: "fixture", documentTarget, windowTarget, onMotionChange: (value) => changes.push(value), ...options }) };
 }
 
+test('retained catalogue groups follow filters and release their visibility observer', () => {
+  const f = fixture(), browser = f.selectors.get('.planet-object-browser');
+  const items = ['earth', 'mars'].map(objectName => {
+    const item = new Element(); item.dataset = { objectName, objectSystemName: 'solar system', objectClassification: 'planet' };
+    return item;
+  });
+  const groups = items.map(item => {
+    const group = new Element(); group.selectors.set('.planet-object-item', [item]); return group;
+  });
+  browser.selectors.set('.planet-object-item', items);
+  browser.selectors.set('.planet-object-chunk', groups);
+  let observer;
+  f.windowTarget.IntersectionObserver = class {
+    observed = []; disconnected = false;
+    constructor(callback, options) { observer = this; this.options = options; }
+    observe(node) { this.observed.push(node); }
+    disconnect() { this.disconnected = true; }
+  };
+  const shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  assert.equal(browser.inert, true);
+  assert.deepEqual(observer.observed, groups);
+  assert.equal(observer.options.root, browser.querySelector('#object-category-results'));
+  search.value = 'mars'; search.dispatchEvent(new Event('input'));
+  assert.deepEqual(groups.map(group => group.hidden), [true, false]);
+  assert.deepEqual(groups.map(group => group.style.containIntrinsicBlockSize), ['0px', '20px']);
+  assert.equal(browser.inert, false);
+  assert.equal(f.selectors.get('.planet-information-panel').inert, true);
+  search.value = 'Solar System'; search.dispatchEvent(new Event('input'));
+  assert.deepEqual(groups.map(group => group.hidden), [false, false]);
+  search.dispatchEvent(Object.assign(new Event('keydown'), { key: 'Escape' }));
+  assert.equal(browser.inert, true);
+  assert.equal(f.selectors.get('.planet-information-panel').inert, false);
+  shell.destroy();
+  assert.equal(observer.disconnected, true);
+});
+
 test('Asteroids Orbits starts off and retains its independent preference across body navigation', () => {
   const changes = [], f = fixture({ onAsteroidOrbitsChange: value => changes.push(value) }), shell = f.mount();
   const toggle = f.selectors.get('.planet-asteroid-orbits-setting');
@@ -158,7 +194,7 @@ test("failed shell construction cleans earlier controllers and their scheduled w
 });
 
 test('object content replacement retains shell controls and input state without accumulating listeners', () => {
-  const f = fixture(), shell = f.mount();
+  const skyChanges = [], f = fixture({ onSkyContrastChange: value => skyChanges.push(value) }), shell = f.mount();
   const search = f.selectors.get('.planet-sidebar-search');
   const drawer = f.selectors.get('.planet-drawer-content');
   const motion = f.selectors.get('.planet-motion-setting');
@@ -180,6 +216,7 @@ test('object content replacement retains shell controls and input state without 
     assert.equal(heliosphere.checked, true);
     assert.equal(f.documentTarget.body.dataset.skyContrast, 'high');
   }
+  assert.deepEqual(skyChanges, [true], 'Content replacement preserves contrast without replaying intent');
   assert.deepEqual(f.changes, [true]);
   shell.destroy();
   assert.ok(f.elements.every(element => element.listeners.size === 0));

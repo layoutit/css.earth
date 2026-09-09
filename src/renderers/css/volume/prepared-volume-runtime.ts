@@ -1,3 +1,4 @@
+import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { worldRotationFromQuaternion, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, PreparedCssVolume, VolumeCameraPublication, VolumeLocalCamera, VolumeVector, PreparedVolumeCameraTransform } from './types.js';
@@ -17,6 +18,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   const roots: HTMLElement[] = [];
   const cameras: HTMLElement[] = [];
   const scenes: HTMLElement[] = [];
+  const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean }[] = [];
+  const opticalCopies: { nodes: HTMLElement[][]; alpha: number[] }[] = [];
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
     if (!stack) throw new TypeError(`Prepared CSS volume has no ${axis} stack.`);
@@ -31,11 +34,20 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     root.style.opacity = '0';
     root.style.display = 'block';
     root.style.visibility = 'hidden';
+    const copies = { nodes: [[], []] as HTMLElement[][], alpha: [0, 0] };
+    opticalCopies.push(copies);
     for (const leaf of stack.leaves) {
       const textureUrl = options.resolveResource(leaf.texturePath);
+      const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels, shown: true };
+      boundedLeaves.push(bounded);
       // Coincident copies reuse the same prepared pixels and transform. They
       // increase optical length without intersecting another axis's planes.
-      for (let copy = 0; copy < 3; copy++) mesh.append(createLeaf(document, leaf, textureUrl, copy));
+      for (let copy = 0; copy < 3; copy++) {
+        const node = createLeaf(document, leaf, textureUrl, copy);
+        mesh.append(node);
+        bounded.nodes.push(node);
+        if (copy > 0) copies.nodes[copy - 1]!.push(node);
+      }
     }
     scene.append(mesh);
     camera.append(scene);
@@ -45,6 +57,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   }
   let destroyed = false;
   let previousPerspective = '', previousOrigin = '', previousTransform = '';
+  let previousClipView = '';
   let previousOrientation: readonly number[] | null = null;
   const publish = ({ world, viewport }: VolumeCameraPublication) => {
     if (destroyed) return;
@@ -70,8 +83,20 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       for (const scene of scenes) scene.style.transform = cssTransform;
       previousTransform = cssTransform;
     }
+    const clipView = `${cssTransform}|${perspective}|${perspectiveOrigin}|${viewport.widthPixels}|${viewport.heightPixels}`;
+    if (clipView !== previousClipView) {
+      previousClipView = clipView;
+      const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, viewport);
+      for (const leaf of boundedLeaves) {
+        const shown = preparedLeafMayContribute(leaf.bounds, planes);
+        if (shown === leaf.shown) continue;
+        leaf.shown = shown;
+        for (const node of leaf.nodes) node.style.visibility = shown ? '' : 'hidden';
+      }
+    }
     // Optical length and stack mixing depend on direction, not observer
-    // translation. Updating inherited coefficients dirties every slice copy.
+    // translation. Publish changed coefficients directly to their retained
+    // optical copies; base slices and ancestors do not inherit animated state.
     if (previousOrientation && previousOrientation.every((value, axis) => value === world.pose.orientationXyzw[axis])) return;
     previousOrientation = [...world.pose.orientationXyzw];
     const local = presentPhysicalPoseInVolume(world.pose, payload.frame);
@@ -83,11 +108,17 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       total += weight;
       root.style.visibility = weight > 0 ? 'visible' : 'hidden';
       root.style.opacity = total > 0 ? String(weight / total) : '0';
-      // Variables affect atomic images, never mesh opacity (which flattens 3D).
+      // Opacity belongs to atomic images, never the mesh (which flattens 3D).
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
       // Integer gains are exact; the fractional step linearly approximates alpha.
-      root.style.setProperty('--volume-optical-copy-1', String(Math.min(1, Math.max(0, opticalGain - 1))));
-      root.style.setProperty('--volume-optical-copy-2', String(Math.min(1, Math.max(0, opticalGain - 2))));
+      const copies = opticalCopies[index]!;
+      for (let copy = 1; copy < 3; copy++) {
+        const alpha = Math.min(1, Math.max(0, opticalGain - copy));
+        if (alpha === copies.alpha[copy - 1]) continue;
+        copies.alpha[copy - 1] = alpha;
+        const value = String(alpha);
+        for (const node of copies.nodes[copy - 1]!) node.style.opacity = value;
+      }
     }
   };
   return Object.freeze({ publish, roots: Object.freeze(roots), destroy() {
@@ -121,7 +152,7 @@ export function preparedVolumeCameraTransform(publication: VolumeCameraPublicati
 
 function createLeaf(document: Document, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], textureUrl: string, copy: number): HTMLElement {
   const node = document.createElement('s');
-  if (copy > 0) node.style.opacity = `var(--volume-optical-copy-${copy}, 0)`;
+  if (copy > 0) node.style.opacity = '0';
   node.style.width = leaf.style.width;
   node.style.height = leaf.style.height;
   node.style.transform = leaf.style.transform;
