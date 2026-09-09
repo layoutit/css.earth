@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "20171f232586044aa61feae87f67d20c3531529581a8d04d7ab89d81ba171b77"
+    "sha256": "9a140ea0f48d575a0effa6025e88f3849cebea712df26f0cb695f3b5bfe43e9f"
   },
   "id": "io",
   "properties": {
@@ -63,6 +63,11 @@
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -83,17 +88,17 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "176f9e0088a7ff3cae586fbce861477d62ed69b22deaba3d064dd3666d443b2a"
+          "sha256": "62e0de8d49db3bc47a78b3736f670364a5b2352f3f3414b5b4f4e0ef8a1ea33e"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "f19b72e17ec7d16c549942b10ad358f302efab485d963b9b8d869a9e2f0b9fb8"
+          "sha256": "108710dc7c7c1566fa236cc3654a6b6afcd86fb203a701f049b1b7a4e0d372f9"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "b5013944c360617b03bc43bc0c7d2a68ddd5c1ea11da30eebba653488ac9e8f9"
+          "sha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235"
         },
         {
           "id": "navigation",

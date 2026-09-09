@@ -219,6 +219,101 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/tethys_128_o.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_128_o.obj",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "id": "cassini-spc-2025-tethys-q128-shape",
+      "consumers": [
+        "shape"
+      ],
+      "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
+      "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
+      "expectedBytes": 17694840,
+      "expectedSha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/tethys_eqalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "id": "cassini-spc-2025-tethys-tethys_eqalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 2222,
+      "height": 679,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 6044029,
+      "expectedSha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/tethys_npalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "id": "cassini-spc-2025-tethys-tethys_npalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 790789,
+      "expectedSha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/tethys_spalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "id": "cassini-spc-2025-tethys-tethys_spalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 790789,
+      "expectedSha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808"
     }
   ],
   "documents": [
@@ -272,8 +367,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5143,
-      "expectedSha256": "f356f7507d417d2717098fd2681bb4992fc4d33da694fee2ca7a5c54bf6cdfb7",
+      "expectedBytes": 8981,
+      "expectedSha256": "2017e62d3c0886001a529d72cfd2f39775ef32dde2e66c134a0430be6370165e",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -284,14 +379,14 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1940,
-      "expectedSha256": "18f7ac40950e4dcb6434b91bb62edc2ba10562cd1f1287954ec609a232827253",
+      "expectedBytes": 8206,
+      "expectedSha256": "a9d39082cca78d14e95cbfcded3371d2eb7118053fb70616176d6020b9484f91",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 10162,
-      "expectedSha256": "eac51e264318266b58dee1e9e9fe8071a1b2576d1d347c7d9f3960b409b11045",
+      "expectedBytes": 13563,
+      "expectedSha256": "2af95782ce8ddf2b923ae7b66a470cceb4375f492cc3ac4932f8d070ad801ab5",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -306,6 +401,103 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1086,
       "expectedSha256": "fa3c920f3b9d68eabc74fb1c1f048021f7e79e3f705e7c1e47b698127e01698f"
+    },
+    {
+      "path": "science/b2-intake/tethys_128_o.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_128_o.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9398,
+      "expectedSha256": "f4c61f4dc76e12f9b155d7aea41335b462041713a73e5c57309474dd974ff1b7"
+    },
+    {
+      "path": "science/b2-intake/tethys_512_o.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_512_o.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9404,
+      "expectedSha256": "953842f282fc399253a7e2dfa8c9cc062c20366180e0081dc536e843f423d575"
+    },
+    {
+      "path": "science/b2-intake/tethys_sigma_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_sigma_c.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 326142,
+      "expectedSha256": "6c517f07d3db2778022bbf0b67891951b751b7058863a3354c12d61046b7819f"
+    },
+    {
+      "path": "science/b2-intake/tethys_sigma_c.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_sigma_c.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 7257,
+      "expectedSha256": "6910aed066e1c31ab523b0e90e3bd648abbc36dc17ef67a5bf4e1c3548ef0359"
+    },
+    {
+      "path": "science/b2-intake/tethys_numimg_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_numimg_c.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 326361,
+      "expectedSha256": "5b04811cfd5af475721b2259df6c443f85e0c14155510fc32f8c15b6c7a53395"
+    },
+    {
+      "path": "science/b2-intake/tethys_numimg_c.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_numimg_c.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 7314,
+      "expectedSha256": "e2769a6341887bf98a6f7f6e0ab3f85683b46dc54989b8e0f2ff5fb90b890108"
+    },
+    {
+      "path": "science/b2-intake/tethys_eqalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9218,
+      "expectedSha256": "24cb5b3bfac749f6a3f691cad484a0a0a76dac74c738823fdc10f17ae9df2f32"
+    },
+    {
+      "path": "science/b2-intake/tethys_npalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9258,
+      "expectedSha256": "c9201bbc370acd5c0ac2287228f3090a5997cb30ffd4e8a875e908ed7a15d56f"
+    },
+    {
+      "path": "science/b2-intake/tethys_spalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9261,
+      "expectedSha256": "67f912f8459cec5504d76d87d7f1232bab88349a9807f5315c752772cc808d3a"
+    },
+    {
+      "path": "science/b2-intake/bundle_description.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/bundle_description.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 5767,
+      "expectedSha256": "d8b44f242e4adec72f9449ef84f5c4c5aeef101e825aa75511c3bf1b566cbd59"
+    },
+    {
+      "path": "science/b2-intake/tethyskernellist.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethyskernellist.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 22949,
+      "expectedSha256": "68c07a665d2211a87965f1c25cea0c8ab449eaed00886a125404fb01528ab697"
+    },
+    {
+      "path": "science/b2-intake/tethysimagelist.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysimagelist.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 31070,
+      "expectedSha256": "4120269663e920e577f76403bfb9941ada9129c533ef99d13fd26e9d18ca9abf"
+    },
+    {
+      "path": "science/b2-intake/tethysshapeassessment.pdf",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysshapeassessment.pdf",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 14224166,
+      "expectedSha256": "34dd9e83930f96c7e6b76025acd9bab6de25713439a4f87a981c6dc3a99595e4"
+    },
+    {
+      "path": "validation/b2-scalar-anchors.json",
+      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
+      "expectedBytes": 3160,
+      "expectedSha256": "539a080366a26bba704c14b305a889dcf4dbc90c853bbf9ba34fb6187e33aa02"
     }
   ],
   "generatedIntermediates": []

@@ -1,0 +1,93 @@
+PDS_VERSION_ID                 = PDS3
+
+/* FILE FORMAT AND LENGTH */
+
+RECORD_TYPE                    = FIXED_LENGTH
+RECORD_BYTES                   = 5760
+FILE_RECORDS                   = 1441
+
+/* POINTERS TO START RECORDS OF OBJECTS IN FILE */
+
+^IMAGE                         = ("GTDED00N090_T126_V01.IMG",2)
+
+/* IMAGE DESCRIPTION */
+
+DATA_SET_ID                    = "CO-SSA-RADAR-5-GTDR-V1.0"
+DATA_SET_NAME                  = "CASSINI ORBITER SSA RADAR 5 GTDR V1.0"
+PRODUCER_INSTITUTION_NAME      = "CORNELL UNIVERSITY"
+PRODUCER_ID                    = CORNELL
+PRODUCER_FULL_NAME             = "PAUL CORLIES"
+PRODUCT_ID                     = "GTDED00N090_T126_V01"
+PRODUCT_VERSION_ID             = 01
+INSTRUMENT_HOST_NAME           = "CASSINI ORBITER"
+INSTRUMENT_HOST_ID             = CO
+INSTRUMENT_NAME                = "CASSINI RADAR"
+INSTRUMENT_ID                  = RADAR
+TARGET_NAME                    = TITAN
+START_TIME                     = "NULL"
+STOP_TIME                      = "NULL"
+SPACECRAFT_CLOCK_START_COUNT   = "NULL"
+SPACECRAFT_CLOCK_STOP_COUNT    = "NULL"
+PRODUCT_CREATION_TIME          = 2019-190T11:33:22.000
+SOURCE_PRODUCT_ID              = "NULL"
+MISSION_PHASE_NAME             = TOUR
+MISSION_NAME                   = "CASSINI-HUYGENS"
+SOFTWARE_VERSION_ID            = "V1.0"
+
+/* DESCRIPTION OF OBJECTS CONTAINED IN FILE */
+
+OBJECT                         = IMAGE
+  LINES                        = 1440
+  LINE_SAMPLES                 = 1440
+  SAMPLE_TYPE                  = PC_REAL
+  SAMPLE_BITS                  = 32
+  CHECKSUM                     = 853519781
+  SCALING_FACTOR               = 1.0
+  OFFSET                       = 0.0
+  MISSING_CONSTANT             = 16#FF7FFFFB#
+  NOTE                         = "The data values in this file are the
+    distance in kilometers  to the nearest measurement in the set on which the
+    interpolated  elevation model was based."
+END_OBJECT                     = IMAGE
+
+OBJECT                         = IMAGE_MAP_PROJECTION
+  ^DATA_SET_MAP_PROJECTION     = "DSMAP.CAT"
+  MAP_PROJECTION_TYPE          = "EQUIRECTANGULAR"
+  A_AXIS_RADIUS                = 2575.0<KM>
+  B_AXIS_RADIUS                = 2575.0<KM>
+  C_AXIS_RADIUS                = 2575.0<KM>
+  FIRST_STANDARD_PARALLEL      = "N/A"
+  SECOND_STANDARD_PARALLEL     = "N/A"
+  POSITIVE_LONGITUDE_DIRECTION = WEST
+/* NOTE: CENTER_LATITUDE and CENTER_LONGITUDE describe    */
+/* the location of the center of projection, which is not */
+/* necessarily equal to the location of the center point  */
+/* of the file.                                           */
+  CENTER_LATITUDE              = 0.0<DEG>
+  CENTER_LONGITUDE             = 180.0<DEG>
+  REFERENCE_LATITUDE           = "N/A"
+  REFERENCE_LONGITUDE          = "N/A"
+  LINE_FIRST_PIXEL             = 1
+  LINE_LAST_PIXEL              = 1440
+  SAMPLE_FIRST_PIXEL           = 1
+  SAMPLE_LAST_PIXEL            = 1440
+  MAP_PROJECTION_ROTATION      = "NULL"
+  MAP_RESOLUTION               = 8.0<PIX/DEG>
+  MAP_SCALE                    = 5.61777852985675<KM/PIX>
+  MAXIMUM_LATITUDE             = 90.0<DEG>
+  MINIMUM_LATITUDE             = -90.0<DEG>
+  EASTERNMOST_LONGITUDE        = 0.0<DEG>
+  WESTERNMOST_LONGITUDE        = 180.0<DEG>
+  LINE_PROJECTION_OFFSET       = 719.5
+  SAMPLE_PROJECTION_OFFSET     = -0.5
+  OBLIQUE_PROJ_POLE_LATITUDE   = "N/A"
+  OBLIQUE_PROJ_POLE_LONGITUDE  = "N/A"
+  OBLIQUE_PROJ_POLE_ROTATION   = "N/A"
+  OBLIQUE_PROJ_X_AXIS_VECTOR   = "N/A"
+  OBLIQUE_PROJ_Y_AXIS_VECTOR   = "N/A"
+  OBLIQUE_PROJ_Z_AXIS_VECTOR   = "N/A"
+  LOOK_DIRECTION               = "NULL"
+  COORDINATE_SYSTEM_NAME       = "PLANETOGRAPHIC"
+  COORDINATE_SYSTEM_TYPE       = "BODY-FIXED ROTATING"
+END_OBJECT                     = IMAGE_MAP_PROJECTION
+END

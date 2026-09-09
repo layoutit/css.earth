@@ -85,10 +85,75 @@ export function observationPixelMissing(rgb,longitude,latitude,policy) {
     (policy.withholdLongitudeDegrees!==undefined&&longitude>=policy.withholdLongitudeDegrees[0]&&longitude<=policy.withholdLongitudeDegrees[1]);
 }
 
+/** Map canonical output centres through the actual projected source grid.
+ * Bilinear interpolation requires every nonzero-weight native contributor;
+ * there is no image-wide stretch, integer roll, or extrapolation past centres. */
+export function resampleGeoreferencedObservation(source, entry, policy, {origin, resolution}, width, height) {
+  const {data, info} = source, channels = info.channels;
+  const radius = entry.projection.referenceRadiusMeters;
+  if (![width,height,info.width,info.height].every(n => Number.isSafeInteger(n) && n > 0) ||
+      info.width !== entry.width || info.height !== entry.height || ![1,3].includes(channels) ||
+      data.length !== info.width * info.height * channels || !(radius > 0) || !Number.isFinite(radius) ||
+      !Number.isFinite(policy.centerLongitude) || !Array.isArray(origin) || origin.length < 2 || !origin.slice(0,2).every(Number.isFinite) ||
+      !Array.isArray(resolution) || resolution.length < 2 || !resolution.slice(0,2).every(Number.isFinite) || !(resolution[0] > 0) || !(resolution[1] < 0)) {
+    throw new TypeError('Georeferenced observation requires finite source pixel-area geometry.');
+  }
+  const radiansToMeters = radius * Math.PI / 180;
+  const valid = new Uint8Array(info.width * info.height), pixel = [0,0,0];
+  let withheldSyntheticPixels = 0;
+  for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) {
+    const i = y * info.width + x, offset = i * channels;
+    const longitude = policy.centerLongitude + (origin[0] + (x + .5) * resolution[0]) / radiansToMeters;
+    const latitude = (origin[1] + (y + .5) * resolution[1]) / radiansToMeters;
+    pixel[0] = data[offset]; pixel[1] = data[offset + (channels === 1 ? 0 : 1)]; pixel[2] = data[offset + (channels === 1 ? 0 : 2)];
+    valid[i] = observationPixelMissing(pixel, longitude, latitude, policy) ? 0 : 1;
+    if (policy.withholdLongitudeDegrees && longitude >= policy.withholdLongitudeDegrees[0] && longitude <= policy.withholdLongitudeDegrees[1]) withheldSyntheticPixels++;
+  }
+  // The tolerance only removes arithmetic roundoff at an exact source centre;
+  // it scales with IEEE-754 precision, not any fraction of an output pixel.
+  const tolerance = 32 * Number.EPSILON * Math.max(info.width, info.height);
+  const stable = n => Math.abs(n - Math.round(n)) <= tolerance ? Math.round(n) : n;
+  const sourceMiddleLongitude = policy.centerLongitude + (origin[0] + info.width * resolution[0] / 2) / radiansToMeters;
+  const sourceX = Float64Array.from({length: width}, (_, x) => {
+    const longitude = (x + .5) / width * 360;
+    const equivalent = longitude + 360 * Math.round((sourceMiddleLongitude - longitude) / 360);
+    return stable(((equivalent - policy.centerLongitude) * radiansToMeters - origin[0]) / resolution[0] - .5);
+  });
+  const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height).fill(1);
+  for (let y = 0; y < height; y++) {
+    const latitude = 90 - (y + .5) / height * 180;
+    const sy = stable((latitude * radiansToMeters - origin[1]) / resolution[1] - .5);
+    if (sy < 0 || sy > info.height - 1) continue;
+    const y0 = Math.floor(sy), fy = sy - y0;
+    for (let x = 0; x < width; x++) {
+      const sx = sourceX[x];
+      if (sx < 0 || sx > info.width - 1) continue;
+      const x0 = Math.floor(sx), fx = sx - x0, index = y * width + x;
+      let red = 0, green = 0, blue = 0, supported = true;
+      for (let dy = 0; dy < 2 && supported; dy++) for (let dx = 0; dx < 2; dx++) {
+        const weight = (dx ? fx : 1 - fx) * (dy ? fy : 1 - fy);
+        if (weight === 0) continue;
+        const cell = (y0 + dy) * info.width + x0 + dx;
+        if (!valid[cell]) { supported = false; break; }
+        const offset = cell * channels;
+        red += data[offset] * weight;
+        green += data[offset + (channels === 1 ? 0 : 1)] * weight;
+        blue += data[offset + (channels === 1 ? 0 : 2)] * weight;
+      }
+      if (supported) {
+        rgb[index * 3] = Math.round(red); rgb[index * 3 + 1] = Math.round(green); rgb[index * 3 + 2] = Math.round(blue);
+        missing[index] = 0;
+      }
+    }
+  }
+  return {rgb, missing, sourceGeoreference: {origin,resolution}, withheldSyntheticPixels};
+}
+
 export async function prepareMaskedObservation(path,entry,policy,width,height) {
   const tiff=await fromFile(path);let origin,resolution;
   try {
     const image=await tiff.getImage(),keys=image.getGeoKeys();origin=image.getOrigin();resolution=image.getResolution();
+    if (policy.resampling === 'source-georeferenced-bilinear' && keys.GTRasterTypeGeoKey !== 1) throw new Error('Georeferenced observations require PixelIsArea coordinates.');
     if(image.getWidth()!==entry.width||image.getHeight()!==entry.height||image.getGDALNoData()!==policy.noData||
        resolution[0]<=0||resolution[1]>=0||keys.ProjCenterLongGeoKey!==policy.centerLongitude||
        Math.abs(keys.GeogSemiMajorAxisGeoKey-entry.projection.referenceRadiusMeters)>0.01||
@@ -99,6 +164,7 @@ export async function prepareMaskedObservation(path,entry,policy,width,height) {
   if(policy.colorSpace)pipeline.toColourspace(policy.colorSpace);
   const source=await pipeline.raw().toBuffer({resolveWithObject:true}),channels=source.info.channels;
   if(channels!==(policy.channels==='monochrome'?1:3))throw new Error(`Observed band count drifted: ${entry.id}`);
+  if (policy.resampling === 'source-georeferenced-bilinear') return resampleGeoreferencedObservation(source,entry,policy,{origin,resolution},width,height);
   const rgba=Buffer.alloc(entry.width*entry.height*4),radius=entry.projection.referenceRadiusMeters;
   let withheldSyntheticPixels=0;
   for(let y=0;y<entry.height;y++)for(let x=0;x<entry.width;x++){

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "635637213228bc944ec7e2498fff410758ac96dc7c202ad5e5723cb7efabd13a"
+    "sha256": "f62cec28cbc39f8a3025402efef0aaeefe4eb225a85e97c9c2f014d6fe9a776f"
   },
   "id": "europa",
   "properties": {
@@ -63,6 +63,11 @@
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -83,17 +88,17 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "b7b5d725fa904fbd761bbc59daedd48e392eb7b83977bf25b0ae3986bf520dee"
+          "sha256": "4191287fe4c69d4d8af75d177e6569b1f67d9ebbdf9785e5f0ce3ca073d4e272"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "766621cd9e8ccabe87f6d513dbb69239e4742d6e938d8abdda27fcd64a52a525"
+          "sha256": "79f6e2fdc0ea83e3e253b33a88d30117560f289fdf9f57b89051e73a7e457e96"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "fdd009d83cb3440824c59ded7526e65d757614e0fa16e13f920c5f4b2ad26dc7"
+          "sha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a"
         },
         {
           "id": "navigation",
@@ -103,7 +108,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "620ecbe8332f0771caa3d6e1a202cacb0aa2c5135d039813b16df8358302e3c3"
+          "sha256": "2ab34145b03410298cddacd91b549e97ac977e9337d3706f3f4fcb43abbdf247"
         }
       ]
     }

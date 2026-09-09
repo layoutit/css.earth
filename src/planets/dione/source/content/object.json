@@ -21,7 +21,7 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "An icy moon of Saturn with bright ice cliffs and long fractures crossing ancient cratered plains and smoother terrain.",
+    "introduction": "An icy moon of Saturn with bright ice cliffs and long fractures crossing ancient cratered plains and smoother terrain. The shape view reveals a simplified Cassini SPC model. Relative albedo shows the model’s brightness variation; elevation uses its own stated reference sphere.",
     "facts": [
       {
         "id": "radius",
@@ -86,14 +86,16 @@
     "labels": {
       "normal": "Monochrome",
       "enhanced": "Enhanced color",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "relative-albedo": "Relative albedo",
+      "shape": "Shape"
     },
     "controls": [
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
-        "title": "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
+        "description": "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "title": "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
         "thumbnail": "/scenes/dione/dione-normal-thumbnail.webp",
         "surface": "dione-normal-surface@2x.webp",
         "poles": "dione-normal-poles@2x.webp",
@@ -106,8 +108,8 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Spherical shape approximation.",
-        "title": "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Spherical shape approximation.",
+        "description": "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "title": "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
         "thumbnail": "/scenes/dione/dione-enhanced-thumbnail.webp",
         "surface": "dione-enhanced-surface@2x.webp",
         "poles": "dione-enhanced-poles@2x.webp",
@@ -120,8 +122,8 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
-        "title": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
+        "description": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
+        "title": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
         "thumbnail": "/scenes/dione/dione-elevation-thumbnail.webp",
         "surface": "dione-elevation-surface@2x.webp",
         "poles": "dione-elevation-poles@2x.webp",
@@ -142,8 +144,47 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
           "image": "/scenes/dione/dione-elevation-legend.webp"
+        }
+      },
+      {
+        "id": "relative-albedo",
+        "label": "Relative albedo",
+        "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "thumbnail": "/scenes/dione/dione-relative-albedo-thumbnail.webp",
+        "surface": "dione-relative-albedo-surface@2x.webp",
+        "poles": "dione-relative-albedo-poles@2x.webp",
+        "source": {
+          "id": "cassini-spc-2025-dione-dione_eqalbedo_g",
+          "path": "../manifest.json"
         },
-        "summary": "Cassini-model height relative to a 561.4 km sphere. Shading shows slopes; the display remains spherical."
+        "legend": {
+          "kind": "scale",
+          "title": "Relative albedo",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.5",
+            "1",
+            "≥ 1.5"
+          ],
+          "meta": "relative to mean ≈ 1",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+          "image": "/scenes/dione/dione-relative-albedo-legend.webp"
+        }
+      },
+      {
+        "id": "shape",
+        "label": "Shape",
+        "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+        "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+        "thumbnail": "/scenes/dione/dione-shape-thumbnail.webp",
+        "surface": "dione-shape-surface@2x.webp",
+        "poles": "dione-shape-poles@2x.webp",
+        "source": {
+          "id": "cassini-spc-2025-dione-q128-shape",
+          "path": "../manifest.json"
+        }
       }
     ]
   },
@@ -195,6 +236,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "PDS",
+      "role": "shape",
+      "description": "2025 SPC shape and relative albedo products",
+      "href": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
     }
   ],
   "provenance": {

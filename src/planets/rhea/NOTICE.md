@@ -4,3 +4,5 @@ Monochrome: NASA/JPL/Space Science Institute, Cassini and Voyager; USGS Astrogeo
 Elevation: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS, DOI 10.26033/tqxb-q714.
 Sky: ESO/S. Brunier, CC BY 4.0. Font: Rasmus Andersson, Inter, SIL OFL 1.1.
 Retain source credits with derivatives. See SOURCE.md.
+
+B2 additions: Native Q128 shape and relative albedo: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS. Relative albedo is not calibrated reflectance.

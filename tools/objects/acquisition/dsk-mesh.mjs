@@ -1,0 +1,46 @@
+import {readFile, mkdtemp, rm} from 'node:fs/promises';
+import {resolve, isAbsolute, sep} from 'node:path';
+import {tmpdir} from 'node:os';
+import {createHash} from 'node:crypto';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {fileURLToPath} from 'node:url';
+
+export function validateDskMeshRecipe(recipe) {
+  if (!recipe || typeof recipe !== 'object' || Array.isArray(recipe) ||
+      typeof recipe.inputPath !== 'string' || !recipe.inputPath || isAbsolute(recipe.inputPath) ||
+      recipe.inputPath.includes('\\') || recipe.inputPath.split('/').some(p => !p || p === '.' || p === '..') ||
+      typeof recipe.inputSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(recipe.inputSha256) ||
+      !/^[a-z0-9][a-z0-9_-]*\.obj$/.test(recipe.member) ||
+      recipe.spiceypyVersion !== '6.0.3' || recipe.cspiceVersion !== 'CSPICE_N0067') {
+    throw new TypeError('Invalid pinned DSK mesh conversion recipe.');
+  }
+  for (const key of ['inputBytes', 'targetId', 'frameId', 'surfaceId', 'sourceVertices', 'sourceFaces', 'weldedVertices']) {
+    if (!Number.isSafeInteger(recipe[key]) || recipe[key] <= 0) throw new TypeError(`Invalid DSK ${key}.`);
+  }
+  if (recipe.weldedVertices > recipe.sourceVertices) throw new TypeError('DSK welding cannot add vertices.');
+  return recipe;
+}
+
+/** Source restoration only: CSPICE reads the pinned type-2 DSK, then a fixed
+ * archive retains original triangles and an exact duplicate-vertex map. */
+export async function prepareDskMesh({sourceRoot, recipe}) {
+  validateDskMeshRecipe(recipe);
+  const root = resolve(sourceRoot), path = resolve(root, recipe.inputPath);
+  if (!path.startsWith(root + sep)) throw new TypeError('DSK source escapes source root.');
+  const source = await readFile(path);
+  if (source.length !== recipe.inputBytes || createHash('sha256').update(source).digest('hex') !== recipe.inputSha256) {
+    throw new Error('Pinned DSK source bytes differ.');
+  }
+  const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-dsk-mesh-'));
+  try {
+    const destination = resolve(directory, 'mesh.zip');
+    const {stdout} = await promisify(execFile)(process.env.CSSEARTH_SPICE_PYTHON ?? 'python3',
+      [fileURLToPath(new URL('../acquisition/dsk-mesh.py', import.meta.url)), path, JSON.stringify(recipe), destination],
+      {maxBuffer: 1024 * 1024, timeout: 300000});
+    const report = JSON.parse(stdout), bytes = await readFile(destination);
+    if (report.schema !== 'cssearth-dsk-mesh-conversion@1' || report.bytes !== bytes.length ||
+        report.sha256 !== createHash('sha256').update(bytes).digest('hex')) throw new Error('DSK conversion receipt differs.');
+    return bytes;
+  } finally {await rm(directory, {recursive:true, force:true});}
+}

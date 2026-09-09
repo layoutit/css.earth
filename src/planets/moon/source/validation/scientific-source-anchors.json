@@ -1,0 +1,289 @@
+{
+  "schema": "cssearth-lunar-numeric-source-anchors@1",
+  "method": "Independent NumPy little-endian signed-int16 source reads; row=floor((north-latitude)*pixelsPerDegree), column=floor(wrapped-east-longitude*pixelsPerDegree). Full-grid source statistics were computed independently of the JavaScript decoder. Values are raw DN times the explicit display scale, with missing and physical-range exclusions first. Percentiles use 1,50,95,99 percent and are descriptive only.",
+  "products": {
+    "ldem_16": {
+      "bytes": 33177600,
+      "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+      "sourcePixels": 16588800,
+      "missingPixels": 0,
+      "rejectedRangePixels": 0,
+      "validPixels": 16588800,
+      "zeroPixels": 2869,
+      "minimum": -8981.5,
+      "maximum": 10685.5,
+      "percentiles": [
+        -5326.0,
+        -794.0,
+        3586.0,
+        5692.5
+      ],
+      "anchors": [
+        {
+          "longitude": 0,
+          "latitude": 0,
+          "sample": 0,
+          "line": 1440,
+          "raw": -1437,
+          "value": -718.5
+        },
+        {
+          "longitude": 90,
+          "latitude": 0,
+          "sample": 1440,
+          "line": 1440,
+          "raw": -7613,
+          "value": -3806.5
+        },
+        {
+          "longitude": 180,
+          "latitude": 0,
+          "sample": 2880,
+          "line": 1440,
+          "raw": 5541,
+          "value": 2770.5
+        },
+        {
+          "longitude": 270,
+          "latitude": 0,
+          "sample": 4320,
+          "line": 1440,
+          "raw": 660,
+          "value": 330.0
+        },
+        {
+          "longitude": 30,
+          "latitude": 30,
+          "sample": 480,
+          "line": 960,
+          "raw": -2853,
+          "value": -1426.5
+        },
+        {
+          "longitude": 30,
+          "latitude": -30,
+          "sample": 480,
+          "line": 1920,
+          "raw": 3915,
+          "value": 1957.5
+        },
+        {
+          "longitude": 359.99,
+          "latitude": 59.99,
+          "sample": 5759,
+          "line": 480,
+          "raw": -5004,
+          "value": -2502.0
+        },
+        {
+          "longitude": 0,
+          "latitude": -59.99,
+          "sample": 0,
+          "line": 2399,
+          "raw": -2948,
+          "value": -1474.0
+        }
+      ],
+      "alignmentAnchors": [
+        {
+          "feature": "Copernicus",
+          "outputSample": 454,
+          "outputLine": 228,
+          "sourceSample": 5436,
+          "sourceLine": 1285,
+          "raw": -7006,
+          "value": -3503.0
+        },
+        {
+          "feature": "Tycho",
+          "outputSample": 480,
+          "outputLine": 379,
+          "sourceSample": 5582,
+          "sourceLine": 2134,
+          "raw": -5934,
+          "value": -2967.0
+        },
+        {
+          "feature": "Tsiolkovskiy",
+          "outputSample": 878,
+          "outputLine": 313,
+          "sourceSample": 2061,
+          "sourceLine": 1763,
+          "raw": 1073,
+          "value": 536.5
+        }
+      ]
+    },
+    "dgdr_ra_avg_cyl_032_img": {
+      "bytes": 88473600,
+      "sha256": "ee0ff6ddfcc9cb4bb2fe83992f3951471c468a169804f1fdb582dc2df99540e1",
+      "sourcePixels": 44236800,
+      "missingPixels": 4119083,
+      "rejectedRangePixels": 1,
+      "validPixels": 40117716,
+      "zeroPixels": 1359422,
+      "minimum": 0.0,
+      "maximum": 61.3,
+      "percentiles": [
+        0,
+        0.3,
+        0.7,
+        1.6
+      ],
+      "anchors": [
+        {
+          "longitude": 0,
+          "latitude": 0,
+          "sample": 0,
+          "line": 1920,
+          "raw": 4,
+          "value": 0.4
+        },
+        {
+          "longitude": 90,
+          "latitude": 0,
+          "sample": 2880,
+          "line": 1920,
+          "raw": 3,
+          "value": 0.30000000000000004
+        },
+        {
+          "longitude": 180,
+          "latitude": 0,
+          "sample": 5760,
+          "line": 1920,
+          "raw": 4,
+          "value": 0.4
+        },
+        {
+          "longitude": 270,
+          "latitude": 0,
+          "sample": 8640,
+          "line": 1920,
+          "raw": 5,
+          "value": 0.5
+        },
+        {
+          "longitude": 30,
+          "latitude": 30,
+          "sample": 960,
+          "line": 960,
+          "raw": -32768,
+          "value": null
+        },
+        {
+          "longitude": 30,
+          "latitude": -30,
+          "sample": 960,
+          "line": 2880,
+          "raw": 4,
+          "value": 0.4
+        },
+        {
+          "longitude": 359.99,
+          "latitude": 59.99,
+          "sample": 11519,
+          "line": 0,
+          "raw": 6,
+          "value": 0.6000000000000001
+        },
+        {
+          "longitude": 0,
+          "latitude": -59.99,
+          "sample": 0,
+          "line": 3839,
+          "raw": 3,
+          "value": 0.30000000000000004
+        },
+        {
+          "case": "over-range",
+          "longitude": 126.890625,
+          "latitude": -59.421875,
+          "sample": 4060,
+          "line": 3821,
+          "raw": 1062,
+          "value": null
+        },
+        {
+          "case": "zero",
+          "longitude": 1.890625,
+          "latitude": 59.984375,
+          "sample": 60,
+          "line": 0,
+          "raw": 0,
+          "value": 0
+        }
+      ],
+      "alignmentAnchors": [
+        {
+          "feature": "Copernicus",
+          "outputSample": 454,
+          "outputLine": 228,
+          "sourceSample": 10873,
+          "sourceLine": 1610,
+          "raw": 12,
+          "value": 1.2000000000000002
+        },
+        {
+          "feature": "Tycho",
+          "outputSample": 480,
+          "outputLine": 379,
+          "sourceSample": 11165,
+          "sourceLine": 3309,
+          "raw": 148,
+          "value": 14.8
+        },
+        {
+          "feature": "Tsiolkovskiy",
+          "outputSample": 878,
+          "outputLine": 313,
+          "sourceSample": 4123,
+          "sourceLine": 2566,
+          "raw": 84,
+          "value": 8.4
+        }
+      ]
+    }
+  },
+  "crossLensRegistration": {
+    "reference": "NASA SVS CGI Moon Kit explicitly centers both the 2019 and 2025 color maps on 0 degrees longitude. Retained surface and crust textures therefore use -180 degrees at the left edge.",
+    "referenceUrl": "https://svs.gsfc.nasa.gov/4720/",
+    "outputLongitudeOrigin": -180,
+    "outputWidth": 1024,
+    "outputHeight": 512,
+    "coordinateQualification": "USGS/IAU centers are rounded to0.01degrees and locate named landforms for cross-lens alignment; they are not independent subpixel survey-control accuracy estimates. Planetographic and planetocentric latitude coincide on this source reference sphere.",
+    "method": "At each named center, independently select its output cell, compute that cell center longitude/latitude and read the original numeric source DN with NumPy. Color-output tests use these fixed source values. The input PDS grid remains east-positive0..360.",
+    "features": [
+      {
+        "name": "Copernicus",
+        "longitude": -20.08,
+        "latitude": 9.62,
+        "sourceUrl": "https://planetarynames.wr.usgs.gov/Feature/1296",
+        "outputSample": 454,
+        "outputLine": 228,
+        "outputCellLongitude": -20.21484375,
+        "outputCellLatitude": 9.66796875
+      },
+      {
+        "name": "Tycho",
+        "longitude": -11.22,
+        "latitude": -43.3,
+        "sourceUrl": "https://planetarynames.wr.usgs.gov/Feature/6163",
+        "outputSample": 480,
+        "outputLine": 379,
+        "outputCellLongitude": -11.07421875,
+        "outputCellLatitude": -43.41796875
+      },
+      {
+        "name": "Tsiolkovskiy",
+        "longitude": 128.97,
+        "latitude": -20.38,
+        "sourceUrl": "https://planetarynames.wr.usgs.gov/Feature/6108",
+        "outputSample": 878,
+        "outputLine": 313,
+        "outputCellLongitude": 128.84765625,
+        "outputCellLatitude": -20.21484375
+      }
+    ]
+  }
+}

@@ -1,0 +1,265 @@
+Identification_Information:
+  Citation:
+    Citation_Information:
+      Originator: Geoffrey C. Collins
+      Originator: G. Wesley Patterson
+      Originator: James W. Head
+      Originator: Robert T. Pappalardo
+      Originator: Louise M. Prockter
+      Originator: Baerbel K. Lucchitta
+      Originator: Jonathan P. Kay
+      Publication_Date: 2013
+      Title: Global Geologic Map of Ganymede, SIM-3237
+      Edition: 1
+      Geospatial_Data_Presentation_Form: vector digital data
+      Publication_Information:
+        Publication_Place: Denver, CO
+        Publisher: U.S. Geological Survey
+      Online_Linkage: http://pubs.usgs.gov/sim/3237/
+      Online_Linkage: http://www.usgs.gov/pubprod/
+  Description:
+    Abstract:
+      Ganymede is the largest satellite of Jupiter, and its icy surface has been formed through a variety of of impact cratering, tectonic, and possibly cryovolcanic processes.  The history of Ganymede can be divided into three distinct phases: an early phase dominated by impact cratering and mixing of non-ice materials in the icy crust, a phase in the middle of its history marked by great tectonic upheaval, and a late quiescent phase characterized by a gradual drop in heat flow and further impact cratering.  Images of Ganymede suitable for geologic mapping were collected during the flybys of Voyager 1 and Voyager 2 (1979), as well as during the Galileo mission in orbit around Jupiter (1995-2003).  This map represents a synthesis of our understanding of Ganymede geology after the conclusion of the Galileo mission.
+
+      The two fundamental classes of material units on Ganymede are dark materials and light materials.  The dark/light distinction is based on sharp relative albedo contrasts at terrain boundaries, rather than on absolute albedo, as several other types of surface modification (e.g., crater rays, polar caps) change the absolute albedo within these terrain classes.  Dark materials cover 35% of Ganymede’s surface, with almost the entire remainder of the surface covered by light materials.
+
+      Dark materials are heavily cratered, though not as heavily cratered as the surface of the neighboring satellite Callisto, suggesting that dark materials cannot be a primordial surface.  At high resolution, dark materials are dominated by the downslope movement of loose dark regolith within impact craters and on the sides of bright ridges and hummocks.  These observations suggest that dark materials are covered by a thin lag deposit of dark regolith derived by sublimation of a more ice-rich crust below.  Dark materials commonly exhibit sets of concentric arcuate structures known as furrows.  Furrows may be the remnants of ancient multi-ring impact basins, similar to intact impact basins on Callisto such as Valhalla and Asgard.
+
+      Light materials crosscut dark materials and exhibit a lower impact crater density, demonstrating that they were formed later.  Light materials are subdivided into an intricate patchwork of crosscutting lineaments called grooves, mixed with areas of relatively smooth terrain.  At high resolution, most light materials are dominated by extensional faulting.  Even light materials that appear to be smooth at low resolution are marked at high resolution by sets of parallel lineaments of apparent tectonic origin.  There is an open question on the extent to which light terrain is formed by cryovolcanic flooding of dark material with brighter ice, versus tectonic destruction of preexisting surface features and exposure of brighter subsurface ice in fault scarps; it is certainly possible that both of these processes play important roles in the formation of light materials.  Not all tectonic activity on Ganymede has led to the formation of light material – some dark material is cut by extensional faults without exhibiting a major change in albedo, while reticulate material is cut by two sets of tectonic lineaments and is transitional in albedo between adjacent light and dark materials.
+
+      The other material units found on Ganymede were created by several types of impact features, ranging from impact craters, to viscously relaxed impact features called palimpsests, to the large impact basin Gilgamesh in the southern hemisphere.
+
+    Purpose: 
+       Much has been learned about Ganymede's impact cratering, tectonic, and possibly cryovolcanic processes since the Voyager flybys, primarily during and following the Galileo Mission at Jupiter (December 1995-September 2003). Our mapping incorporates this new understanding to assist in map unit definition and provide a global synthesis of Ganymede's geology.
+
+    Supplemental_Information:
+      > Patterson, G.W., Collins, G.C., Head, J.W., and 4 others, 2010, Global geological mapping of Ganymede: Icarus, v. 207, p. 845-867.
+      > Shoemaker, E.M., Lucchitta, B.K., Wilhelms, D.E., and 2 others, 1982, The geology of Ganymede, in: Satellites of Jupiter (Morrison, D., ed.), Univ. of Arizona Press, p. 435-520.
+      > Pappalardo, R.T., Collins, G.C., Head, J.W., and 6 others, 2004, Geology of Ganymede, in: Jupiter (Bagenal, F., Dowling, T., McKinnon, W., eds.), Cambridge Univ. Press, p. 363-396.
+
+  Time_Period_of_Content:
+    Time_Period_Information:
+      Multiple_Dates/Times:
+        Single_Date/Time:
+          Calendar_Date: 2006
+        Single_Date/Time:
+          Calendar_Date: 2013
+    Currentness_Reference: publication date
+  Status:
+    Progress: Complete
+    Maintenance_and_Update_Frequency: None planned
+  Spatial_Domain:
+    Bounding_Coordinates:
+      West_Bounding_Coordinate: 0
+      East_Bounding_Coordinate: 360
+      North_Bounding_Coordinate: 90
+      South_Bounding_Coordinate: -90
+  Keywords:
+    Theme:
+      Theme_Keyword_Thesaurus: NASA
+      Theme_Keyword: Geologic Map
+      Theme_Keyword: Ganymede
+      Theme_Keyword: Galilean satellites
+      Theme_Keyword: Jupiter
+      Theme_Keyword: Voyager 1
+      Theme_Keyword: Voyager 2
+      Theme_Keyword: Galileo
+      Theme_Keyword: Cassini
+      Theme_Keyword: New Horizons
+    Place:
+      Place_Keyword_Thesaurus: Gazatteer of Planetary Nomenclature (http://planetarynames.wr.usgs.gov)
+      Place_Keyword: Ganymede
+      Place_Keyword: Jupiter
+  Access_Constraints: None
+  Use_Constraints: None
+  Point_of_Contact:
+    Contact_Information:
+      Contact_Person_Primary:
+        Contact_Person: Jim Skinner
+        Contact_Organization: USGS
+      Contact_Address:
+        Address_Type: mailing address
+        Address: 2255 North Gemini Drive
+        City: Flagstaff
+        State_or_Province: AZ
+        Postal_Code: 86001
+        Country: USA
+      Contact_Voice_Telephone: 928-556-7100
+      Contact_Electronic_Mail_Address: jskinner@usgs.gov
+  Security_Information:
+    Security_Classification: Unclassified
+  Native_Data_Set_Environment: Esri ArcMap 10.0
+Data_Quality_Information:
+  Attribute_Accuracy:
+    Attribute_Accuracy_Report: All attributes were verified by displaying the lines in both the database and the spatial coverage and they are believed to be logically consistent.
+  Logical_Consistency_Report: These data are believed to be logically consistent. Line geometry is topologically clean.
+  Completeness_Report: Competed at the given scale for publication by USGS
+  Positional_Accuracy:
+    Horizontal_Positional_Accuracy:
+      Horizontal_Positional_Accuracy_Report: The final map was generalized and scaled to be commensurate with a 1:15,000,000 map scale, although map component compilation was at a larger scale.   Overall, the geologic map product is only as accurate as the 2005 basemap created by the USGS which contains kilometer errors.
+      Quantitative_Horizontal_Positional_Accuracy_Assessment:
+        Horizontal_Positional_Accuracy_Explanation: Becker, T. et al., 2001. Final Digital Global Maps of Ganymede, Europa, and Callisto, In Lunar and Planetary Science XXXII, Abstract #2009, Lunar and Planetary Institute, Houston (CD-ROM).
+      Quantitative_Horizontal_Positional_Accuracy_Assessment:
+        Horizontal_Positional_Accuracy_Explanation: http://www.lpi.usra.edu/meetings/lpsc2001/pdf/2009.pdf
+  Lineage:
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: Tammy Becker
+          Originator: Brent Archinal
+          Originator: Timothy R. Colvin
+          Originator: Mert Davies
+          Originator: A. Gitlin
+          Originator: Randy L. Kirk
+          Originator: Lynn Weller
+          Publication_Date: 2001
+          Title: Final Digital Global Maps of Ganymede, Europa, and Callisto
+          Edition: 1
+          Geospatial_Data_Presentation_Form: remote-sensing image
+          Publication_Information:
+            Publication_Place: Houston, TX
+            Publisher: Lunar and Planetary Science XXXII
+          Online_Linkage: http://www.lpi.usra.edu/meetings/lpsc2001/pdf/2009.pdf
+    Process_Step:
+      Process_Description: Relative age relationships of mapped units were determined based on crosscutting relationships and differences in crater density.  Dark cratered material (dc) is crosscut by grooves to form dark lineated material (dl).  Dark materials and reticulate material are crosscut by light materials.  Light materials are divided into three broad age categories based on crosscutting relationships.  The youngest (lg3, ls3, li3) light material units are not crosscut by any other light units, while the oldest (lg1, ls1, li1) are crosscut by all adjacent light units.  Intermediate age light material units (lg2, ls2, li2) are crosscut by the youngest units, and intermediate units in turn crosscut the oldest units.  Dark lineated (dl) and reticulate (r) material sometimes share common groove spacing, morphology, and orientation with adjacent old light materials (lg1, ls1, li1), indicating that they may have formed contemporaneously.  Palimpsests are divided into ancient palimpsests (p1), which are crosscut by light material, young palimpsests (p2), which overlie light material, and undivided palimpsests (pu), which do not come in contact with light material and thus crosscutting relationships cannot be used for relative age determination.  The p2 palimpsests Epigeous and Zakar overlie all ages of light materials, Teshub overlies undivided light materials (l) and is cut by young light grooved material (lg3), and Hathor overlies undivided light material (l) while its secondary craters overlie old light subdued material (ls1) and intermediate light grooved material (lg2).  All basin materials (br, bs, bi) overlie all ages of light materials.  Some degraded crater materials (c1) are crosscut by dark lineated (dl) and light materials, while other degraded crater materials overlie light materials.  Partially degraded and fresh crater materials (c2 and c3) overlie all other material units.
+Spatial_Data_Organization_Information:
+  Direct_Spatial_Reference_Method: Vector
+  Point_and_Vector_Object_Information:
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: G-polygon
+      Point_and_Vector_Object_Count: 3046
+Spatial_Reference_Information:
+  Horizontal_Coordinate_System_Definition:
+    Geographic:
+      Latitude_Resolution: 0.01
+      Longitude_Resolution: 0.01
+      Geographic_Coordinate_Units: Decimal degrees
+    Geodetic_Model:
+      Horizontal_Datum_Name: D_Ganymede_2000
+      Ellipsoid_Name: Ganymede_2000_IAU_IAG
+      Semi-major_Axis: 2632345.0
+      Denominator_of_Flattening_Ratio: infinity
+  Vertical_Coordinate_System_Definition:
+    Altitude_System_Definition:
+      Altitude_Resolution: 0.000003
+      Altitude_Encoding_Method: Explicit elevation coordinate included with horizontal coordinates
+Entity_and_Attribute_Information:
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: CraterRims
+    Entity_Type_Definition: Crater rims
+    Attribute:
+      Attribute_Label: Shape_Length
+      Attribute_Definition: Length of crater rim perimeter in meters
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Depressions
+    Entity_Type_Definition: Known depressions
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: depression
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Domes
+    Entity_Type_Definition: Known domes
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: dome
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Secondary Craters
+    Entity_Type_Definition: Known secondary craters
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: secondary craters
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Furrows
+    Entity_Type_Definition: Known furrows
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: furrow
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: GroovesRepresentative
+    Entity_Type_Definition: Known representative grooves
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: groove
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: GeologyUnits
+    Entity_Type_Definition: Geologic unit type
+    Attribute:
+      Attribute_Label: UnitName
+      Attribute_Definition: Basins, Bright Materials, Crater Materials, Dark Materials, Palimpsests, Reticulate
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: GeologicContacts
+    Entity_Type_Definition: Geologic contact type
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: certain, approximate, interior
+Distribution_Information:
+  Distributor:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: U.S. Geological Survey
+      Contact_Address:
+        Address_Type: mailing address
+        Address: Box 25286 Federal Center
+        City: Denver
+        State_or_Province: CO
+        Postal_Code: 80225
+        Country: USA
+      Contact_Electronic_Mail_Address: ktanaka@usgs.gov
+  Resource_Description: Downloadable Data
+  Standard_Order_Process:
+    Digital_Form:
+      Digital_Transfer_Information:
+        Format_Name: Esri File GeoDatabase
+        Format_Version_Number: ArcGIS 9.3
+        Format_Specification: GIS
+        File_Decompression_Technique: zip
+        Transfer_Size: 200
+      Digital_Transfer_Option:
+        Online_Option:
+          Computer_Contact_Information:
+            Network_Address:
+              Network_Resource_Name: http://www.usgs.gov/pubprod/
+              Network_Resource_Name: http://pubs.usgs.gov/sim/3237
+          Access_Instructions: Web browser
+    Fees: n/a
+    Ordering_Instructions: Digital download using a web browser.
+  Technical_Prerequisites: GIS software
+  Available_Time_Period:
+    Time_Period_Information:
+      Single_Date/Time:
+        Calendar_Date: 2012
+Metadata_Reference_Information:
+  Metadata_Date: 20120229
+  Metadata_Review_Date: 2012
+  Metadata_Contact:
+    Contact_Information:
+      Contact_Person_Primary:
+        Contact_Person: Trent Hare
+        Contact_Organization: USGS
+      Contact_Address:
+        Address_Type: mailing address
+        Address: 2255 North Gemini Drive
+        City: Flagstaff
+        State_or_Province: AZ
+        Postal_Code: 86001
+        Country: USA
+      Contact_Voice_Telephone: 928-556-7126
+      Contact_Electronic_Mail_Address: thare@usgs.gov
+  Metadata_Standard_Name: FGDC Content Standards for Digital Geospatial Metadata
+  Metadata_Standard_Version: FGDC-STD-001-1998
+  Metadata_Time_Convention: local time
+  Metadata_Access_Constraints: None
+  Metadata_Use_Constraints: None
+  Metadata_Security_Information:
+    Metadata_Security_Classification: Unclassified
+  Metadata_Extensions:
+    Online_Linkage: http://www.esri.com/metadata/esriprof80.html
+    Profile_Name: Esri Metadata Profile
