@@ -119,6 +119,10 @@ export function parseTerrestrialProfile(value) {
   const observationIds = new Set();
   for (const observation of value.raster.observations) {
     const policy = observation.validity;
+    if (policy?.resampling !== undefined && (policy.resampling !== 'source-georeferenced-bilinear' ||
+        !['geotiff-rgb-alpha','geotiff-monochrome-alpha'].includes(policy.kind))) {
+      throw new TypeError('Source-georeferenced observation resampling requires a masked GeoTIFF.');
+    }
     if (!/^[a-z][a-z0-9-]*$/.test(observation.id) || observationIds.has(observation.id) ||
         (observation.monochromeBase && !observationIds.has(observation.monochromeBase)) ||
         !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome', 'pds3-byte-monochrome', 'fits-byte-monochrome', 'pds4-float-rgb'].includes(policy?.kind)) {

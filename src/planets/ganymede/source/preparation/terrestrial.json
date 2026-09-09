@@ -20,7 +20,8 @@
           "noData": 0,
           "centerLongitude": 180,
           "channels": "monochrome",
-          "zeroValidity": "any-channel"
+          "zeroValidity": "any-channel",
+          "resampling": "source-georeferenced-bilinear"
         },
         "reportComposition": true
       },
@@ -35,7 +36,8 @@
           "withholdLongitudeDegrees": [
             110,
             150
-          ]
+          ],
+          "resampling": "source-georeferenced-bilinear"
         },
         "monochromeBase": "normal",
         "reportComposition": true
@@ -73,7 +75,16 @@
             89.5970728515625
           ],
           "unknownValues": [],
-          "withheldDegenerateRings": [{"record": 3023, "ring": 0, "point": [-179.9998779296875, 72.97808837890625]}]
+          "withheldDegenerateRings": [
+            {
+              "record": 3023,
+              "ring": 0,
+              "point": [
+                -179.9998779296875,
+                72.97808837890625
+              ]
+            }
+          ]
         },
         "categories": [
           {

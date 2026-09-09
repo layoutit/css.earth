@@ -18,7 +18,8 @@
         "validity": {
           "kind": "geotiff-monochrome-alpha",
           "noData": 0,
-          "centerLongitude": 180
+          "centerLongitude": 180,
+          "resampling": "source-georeferenced-bilinear"
         }
       }
     ],

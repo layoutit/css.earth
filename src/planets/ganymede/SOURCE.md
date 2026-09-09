@@ -27,6 +27,12 @@ TIFFs. Source byte counts and SHA-256 identities are recorded in the manifest.
   east-positive. No horizontal mirror is applied. Output longitude runs
   0–360° east. The map sphere is 2632.345 km in radius.
 
+Preparation maps canonical output pixel centres through each GeoTIFF's actual
+metric origin and increments using native bilinear interpolation. The monochrome
+outer longitude is −0.017414018° and its width spans 360.013060514°; the enhanced
+map also retains its own source bounds. Neither grid is stretched to an assumed
+360° extent or rounded to an integer column shift.
+
 ## Appearance and coverage
 
 **Monochrome** preserves the USGS observation mosaic. **Enhanced color** shows
@@ -51,9 +57,10 @@ monochrome. No terrain is painted or extrapolated.
 
 Both GeoTIFFs declare GDAL_NODATA=0. The monochrome zero value, or a missing
 color band, supplies the validity mask. Very dark nonzero terrain remains
-valid. Resizing uses premultiplied alpha and withholds partially covered edge
-pixels, avoiding black bleed into observations. Missing/withheld color uses
-co-located observed monochrome. The shared neutral cartographic grid appears
+valid. Every native contributor with nonzero bilinear weight must be valid;
+incomplete or masked interpolation footprints are withheld. This replaces the
+earlier whole-image resize and roll, so prepared image bytes change while source
+values remain unchanged. Missing/withheld color uses co-located observed monochrome. The shared neutral cartographic grid appears
 only where no valid surface observation remains.
 
 ## Preparation and geometry

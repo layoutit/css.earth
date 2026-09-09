@@ -19,13 +19,19 @@ resolution, seams, and observed illumination remain visible. No color,
 elevation, ocean, or thermal map is inferred from this image.
 
 The GeoTIFF's cylindrical coordinates increase eastward, with a central
-longitude of 180° and a left edge at 0°. Rows run north to south. Its projection
-uses a 1,562,089.9658 m sphere; the rendered mean-radius sphere uses the
-astronomy catalogue's 1,560.8 km physical radius. It is not a resolved shape model.
+longitude of 180°. The actual outer left edge is −0.011003118° and the map spans
+360.003667706°, with rows running north to south. Native bilinear preparation
+back-projects each canonical output pixel centre through the GeoTIFF's actual
+origin and resolution; it does not stretch those bounds to exactly 0–360°.
+Its projection uses a 1,562,089.9658 m sphere; the rendered mean-radius sphere
+uses the astronomy catalogue's 1,560.8 km physical radius. It is not a resolved
+shape model.
 
-The explicit no-data value is zero. Preparation separates validity before
-resampling to 4096 × 2048, uses alpha-aware resampling to keep missing black
-from darkening adjacent observations, and withholds mixed boundary pixels.
+The explicit no-data value is zero. Preparation samples to 4096 × 2048 only
+where every nonzero-weight native bilinear contributor is valid, retaining dark
+nonzero observations and withholding incomplete or masked footprints. The
+corrected registration changes prepared monochrome pixels and their co-located
+color fallback; the original mosaic and controlled I/F source values are unchanged.
 The shared gray cartographic grid marks missing data. It is not invented terrain.
 Band textures are reprojected for the shared projective surface geometry;
 polar textures use the same map and hemisphere-specific longitude mapping.

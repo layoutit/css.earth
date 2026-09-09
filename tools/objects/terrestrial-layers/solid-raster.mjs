@@ -45,6 +45,9 @@ export async function readObservation(sourceDirectory, entry, validity, width, h
   if (metadata.width !== entry.width || metadata.height !== entry.height) throw new Error(`Observation source dimensions changed: ${entry.path}`);
   if (['image-monochrome-no-data', 'image-rgb-no-data'].includes(validity.kind)) return prepareByteObservation(path, entry, validity, width, height);
   if(validity.kind==='geotiff-rgb-alpha')return prepareMaskedObservation(path,entry,validity,width,height);
+  if (validity.kind === 'geotiff-monochrome-alpha' && validity.resampling === 'source-georeferenced-bilinear') {
+    return prepareMaskedObservation(path, entry, {...validity, channels:'monochrome', zeroValidity:validity.zeroValidity ?? 'all-channels'}, width, height);
+  }
   if (validity.kind === 'south-connected-black') {
     const source = await sharp(path).removeAlpha().raw().toBuffer({ resolveWithObject: true });
     const sourceMissing = blackFillCoverage(source.data, source.info, { southConnected: true });

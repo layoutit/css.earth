@@ -51,17 +51,21 @@ The GeoTIFF georeference, rather than the catalog's positive-west coordinate
 labels, defines raster sampling. Both products use a simple cylindrical sphere
 of radius 1821460 m, center longitude 0°, origin (-5723000, 2862000) m and
 pixel increments (+1000, -1000) m. East increases to the right, north is up.
-Preparation rolls the resampled raster by 180° into the shared surface's
-0–360° positive-east longitude range, without horizontal reflection. [Pele's](https://planetarynames.wr.usgs.gov/Feature/4638)
+Preparation maps each canonical output pixel centre through the actual metric
+origin and increments, using native bilinear interpolation. The outer longitude
+is −180.022479853° and the map spans 360.013503743°; those fractional bounds are
+preserved rather than rounded to an integer roll or stretched to a full globe.
+Output longitude remains 0–360° positive-east, without horizontal reflection. [Pele's](https://planetarynames.wr.usgs.gov/Feature/4638)
 large red deposit at 18.71° S, 104.72° E (255.28° W) is an independent orientation
 landmark. The 30 m difference from the current astronomical mean radius is not
 interpreted as terrain.
 
 `GDAL_NODATA=0` marks missing raster data. Monochrome uses exact zero; enhanced
 color requires the complete RGB tuple to be zero. Low but nonzero observed dark
-terrain is retained. Validity is attached before Lanczos resampling, which
-premultiplies alpha; partially covered output pixels are withheld to avoid black
-bleeding into observed pixels.
+terrain is retained. Every native contributor with nonzero bilinear weight must
+be valid; incomplete or masked interpolation footprints are withheld. This
+coordinate correction replaces the earlier whole-image resize and roll, so
+prepared image bytes change while the original source values remain unchanged.
 
 USGS explicitly states that color lacks coverage within approximately 5° of
 both poles and that merged polar color was interpolated. We therefore withhold

@@ -22,7 +22,8 @@
           "channels": "rgb",
           "zeroValidity": "all-channels",
           "colorSpace": "srgb",
-          "resolutionMeters": 1000
+          "resolutionMeters": 1000,
+          "resampling": "source-georeferenced-bilinear"
         },
         "projection": {
           "longitudeDegrees": [
@@ -41,7 +42,8 @@
           "zeroValidity": "all-channels",
           "colorSpace": "srgb",
           "resolutionMeters": 1000,
-          "withholdLatitudeDegrees": 85
+          "withholdLatitudeDegrees": 85,
+          "resampling": "source-georeferenced-bilinear"
         },
         "monochromeBase": "normal",
         "projection": {
