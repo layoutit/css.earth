@@ -101,7 +101,7 @@
 .context-orbit s { cursor: pointer; }
 
 [data-context-group] {
-  --context-line-opacity: var(--context-base-line-opacity, .5);
+  --context-line-opacity: var(--context-base-line-opacity, .65);
   --context-label-opacity: var(--context-base-label-opacity, .65);
 }
 
@@ -123,7 +123,7 @@
 
 /* Dim only projected leaves; their containing layer remains unflattened. */
 [data-context-group][data-context-selected="false"] {
-  --context-line-opacity: calc(var(--context-base-line-opacity, .5) * .75);
+  --context-line-opacity: calc(var(--context-base-line-opacity, .65) * .75);
   --context-label-opacity: calc(var(--context-base-label-opacity, .65) * .75);
 }
 [data-context-group]:is([data-object-hovered="true"], :focus-within) {
