@@ -59,7 +59,8 @@
           "id": "measured-ellipsoid",
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/1912.09192"
-        }
+        },
+        "summary": "Shape based on Cassini's measured dimensions. Gray grid: no imagery; the model does not resolve local terrain."
       }
     ]
   },

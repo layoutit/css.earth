@@ -63,7 +63,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "A radar model based on half a rotation. Its shape and pole are uncertain; gray grid: no surface imagery."
       },
       {
         "id": "elevation",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
           "image": "/scenes/bacchus/bacchus-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Radar-model height relative to a 315 m sphere. Half a rotation was observed; the shape is uncertain."
       }
     ]
   },

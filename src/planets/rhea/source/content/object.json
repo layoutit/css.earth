@@ -100,7 +100,8 @@
         "source": {
           "id": "cassini-voyager-2012-rhea",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini and Voyager mosaic with uneven detail and shadows. Gray grid: gaps. The display is spherical."
       },
       {
         "id": "enhanced",
@@ -113,7 +114,8 @@
         "source": {
           "id": "cassini-iss-2014-rhea-color",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini enhanced color from 2014. Hemisphere differences, shadows and seams remain in the composite."
       },
       {
         "id": "elevation",
@@ -140,7 +142,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
           "image": "/scenes/rhea/rhea-elevation-legend.webp"
-        }
+        },
+        "summary": "Cassini height relative to a 763.5 km sphere. Typical height errors are 2.15–4.3 km; raster gaps are marked."
       }
     ]
   },

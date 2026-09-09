@@ -142,7 +142,8 @@
         "source": {
           "id": "surface-observation"
         },
-        "detail": "Global mosaic"
+        "detail": "Global mosaic",
+        "summary": "NASA Blue Marble 2004 with ESA WorldCover 2021 detail. The surface and clouds are archival, not live."
       },
       {
         "id": "topography",
@@ -153,7 +154,8 @@
         "source": {
           "id": "surface-observation"
         },
-        "detail": "Land + seafloor"
+        "detail": "Land + seafloor",
+        "summary": "NASA Blue Marble topography from 2004. Colors and shading show land and seafloor elevation, not photos."
       },
       {
         "id": "night-lights",
@@ -164,7 +166,8 @@
         "source": {
           "id": "surface-observation"
         },
-        "detail": "Nighttime"
+        "detail": "Nighttime",
+        "summary": "NASA Black Marble's 2016 night-light composite. It combines dates and does not show current lighting."
       },
       {
         "id": "cross-section",
@@ -203,7 +206,8 @@
         "source": {
           "id": "surface-observation"
         },
-        "detail": "Structure"
+        "detail": "Structure",
+        "summary": "Earth's interior based on NASA models. Colors mark layers; the boundaries are inferred, not photographed."
       }
     ]
   },

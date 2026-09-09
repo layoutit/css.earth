@@ -75,7 +75,24 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "NEAR MSI · corrected 550 nm albedo"
+        "detail": "MSI · 550 nm",
+        "summary": "NEAR's corrected 550 nm reflectance, stretched from 0.05 to 0.40. Monochrome imagery; some shading remains."
+      },
+      {
+        "id": "infrared",
+        "label": "Near infrared",
+        "description": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+        "title": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+        "thumbnail": "/scenes/eros/eros-infrared-thumbnail.webp",
+        "surface": "eros-infrared-surface@2x.webp",
+        "poles": "eros-infrared-surface@2x.webp",
+        "source": {
+          "id": "eros-infrared",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "detail": "MSI · 950 nm",
+        "summary": "Corrected 950 nm reflectance, using the same brightness scale as the 550 nm view. Near-infrared imagery shown in grayscale."
       },
       {
         "id": "elevation",
@@ -103,7 +120,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab",
           "image": "/scenes/eros/eros-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Model height relative to an 8,420 m sphere. Colors include Eros's broad shape; the outline is simplified."
       }
     ]
   },

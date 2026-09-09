@@ -149,7 +149,8 @@
         "falseColor": false,
         "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
         "view": "exterior",
-        "detail": "750 nm"
+        "detail": "750 nm",
+        "summary": "MESSENGER's 750 nm mosaic. Brightness shows surface differences and image shading, not visible color."
       },
       {
         "id": "enhanced",
@@ -166,7 +167,30 @@
         "falseColor": true,
         "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
         "view": "exterior",
-        "detail": "False color"
+        "detail": "False color",
+        "summary": "MESSENGER enhanced color. Missing polar color is reconstructed from nearby images and terrain, not observed.",
+        "legend": {
+          "kind": "categories",
+          "title": "Enhanced-color terrain",
+          "items": [
+            {
+              "label": "Dark material",
+              "description": "Low-reflectance material",
+              "color": "#4265aa"
+            },
+            {
+              "label": "Lava plains",
+              "description": "Volcanic plains",
+              "color": "#ba985e"
+            },
+            {
+              "label": "Young rays",
+              "description": "Young crater rays",
+              "color": "#c5deef"
+            }
+          ],
+          "sourceUrl": "https://science.nasa.gov/resource/mercury-false-color-rotation-movie/"
+        }
       },
       {
         "id": "topography",
@@ -213,7 +237,8 @@
         "falseColor": true,
         "filter": "USGS MESSENGER global color shaded relief",
         "view": "exterior",
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "summary": "MESSENGER topography in color and shaded relief. Colors show elevation; shading makes slopes visible."
       },
       {
         "id": "interior",
@@ -257,7 +282,8 @@
         "falseColor": false,
         "filter": "NASA-dimensioned retained 3D metallic-core cutaway",
         "view": "interior",
-        "detail": "Structure"
+        "detail": "Structure",
+        "summary": "Mercury's metallic core and rocky shell, shown as a model. Colors mark layers; the interior is not imaged."
       }
     ],
     "labels": {

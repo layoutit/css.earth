@@ -95,7 +95,8 @@
         "source": {
           "id": "usgs-cassini-iss-2026-938nm",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Infrared images show Titan's surface through haze. Clouds, seams and uneven detail remain; gray grid: no observations."
       },
       {
         "id": "radar",
@@ -108,7 +109,8 @@
         "source": {
           "id": "cassini-radar-midr",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini radar mosaic through flyby T126. Brightness shows radar backscatter, not elevation; gray grid: no measurements."
       }
     ],
     "labels": {

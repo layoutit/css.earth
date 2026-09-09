@@ -72,7 +72,8 @@
           "id": "c1138148",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/voyager/iss/"
-        }
+        },
+        "summary": "Voyager 2 images mapped onto the shape. Gray grid: withheld shadows, the unseen side and unreliable samples."
       },
       {
         "id": "elevation",
@@ -101,7 +102,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
           "image": "/scenes/larissa/larissa-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to a 96 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain."
       }
     ]
   },

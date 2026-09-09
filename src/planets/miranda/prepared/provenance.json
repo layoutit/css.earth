@@ -1,0 +1,682 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "miranda",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "f0bfd2759e2a4290414d65c4d0d40244e528016eb7675861c5205578ca349e5a"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "8cc5a1cf0c7ebf7e742d52286c968805804dc842e636c868aae98b61f71fb43d",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "miranda",
+        "displayName": "Miranda",
+        "publicBase": "/scenes/miranda/",
+        "distanceAu": 19.2,
+        "raster": {
+          "width": 6400,
+          "height": 3200,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 1024,
+          "surfaceQuality": 95,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "isis3-float-monochrome",
+                "grid": {
+                  "width": 6294,
+                  "height": 3147,
+                  "targetName": "Miranda",
+                  "centerLongitude": 180,
+                  "referenceRadiusMeters": 240400,
+                  "polarRadiusMeters": 232900,
+                  "origin": [
+                    -1510560,
+                    377760
+                  ],
+                  "resolutionMeters": 240,
+                  "specialValueMagnitude": 1e+30,
+                  "longitudeRange": [
+                    -180,
+                    180
+                  ]
+                },
+                "displayRange": [
+                  0,
+                  2400
+                ]
+              }
+            }
+          ],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "format": "isis3",
+              "path": "science/mudem-ZT-cyl.cub.gz",
+              "description": "Voyager terrain model · shaded relief",
+              "title": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
+              "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+              "minimum": -6,
+              "maximum": 7,
+              "colors": [
+                "#1c5599",
+                "#bbab80",
+                "#aa3e24"
+              ],
+              "labels": [
+                "−6",
+                "0.5",
+                "7"
+              ],
+              "units": "km",
+              "consumer": "scientific-surfaces",
+              "sampling": "bilinear",
+              "grid": {
+                "width": 6294,
+                "height": 3147,
+                "targetName": "Miranda",
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 240400,
+                "polarRadiusMeters": 232900,
+                "origin": [
+                  -755280,
+                  377760
+                ],
+                "resolutionMeters": 240,
+                "specialValueMagnitude": 1e+30,
+                "longitudeRange": [
+                  0,
+                  360
+                ]
+              },
+              "relief": {
+                "referenceRadiusMeters": 240400,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.25
+              }
+            }
+          ],
+          "observedColors": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 235.7,
+          "camera": {
+            "initialScenePitchDegrees": 23.022753656808817,
+            "defaultControlYawDegrees": -48.195796262497225
+          },
+          "mapUrl": "/scenes/miranda/miranda-normal-surface@2x.webp",
+          "polesUrl": "/scenes/miranda/miranda-normal-poles@2x.webp"
+        },
+        "celestial": {
+          "sunSource": "Vendored JPL Horizons Uranus satellite elements and IAU/NAIF Miranda rotation at the shared epoch."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            170,
+            168,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "31bff645f9e541ae85fc3f0e8c92348dcafb1b4c939a1b82786213235ab310da",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "miranda",
+        "displayName": "Miranda",
+        "panel": {
+          "introduction": "Miranda is Uranus’s smallest major moon. Voyager 2 revealed huge fault scarps and three striking regions of ridges and grooves called coronae.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "235.8 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "19.189 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Uranus",
+              "value": "About 1.41 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 1.41 days (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Uranus",
+              "value": "About 129,900 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Gerard Kuiper · 1948"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.18 ± 0.05 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "elevation": "Elevation"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
+              "title": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
+              "detail": "Corrected mosaic",
+              "thumbnail": "/scenes/miranda/miranda-normal-thumbnail.webp",
+              "surface": "miranda-normal-surface@2x.webp",
+              "poles": "miranda-normal-poles@2x.webp",
+              "source": {
+                "id": "schenk-2020-miranda-normal",
+                "path": "../manifest.json",
+                "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+              },
+              "summary": "Voyager 2 images with corrected illumination. Detail varies; cast shadows and seams remain, and gray grid: no data."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
+              "title": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
+              "detail": "Shaded relief",
+              "thumbnail": "/scenes/miranda/miranda-elevation-thumbnail.webp",
+              "surface": "miranda-elevation-surface@2x.webp",
+              "poles": "miranda-elevation-poles@2x.webp",
+              "source": {
+                "id": "schenk-2020-miranda-elevation",
+                "path": "../manifest.json",
+                "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−6",
+                  "0.5",
+                  "7"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+                "image": "/scenes/miranda/miranda-elevation-legend.webp"
+              },
+              "summary": "Height from stereo images and shading, relative to the source ellipsoid. Detail varies; gray grid: no measurements."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Miranda overview",
+            "href": "https://science.nasa.gov/uranus/moons/miranda/"
+          },
+          {
+            "label": "Schenk/LPI; NASA/JPL",
+            "role": "surface",
+            "description": "Voyager 2 mosaic and terrain model",
+            "href": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/uranus/moons/miranda/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        },
+        "title": {
+          "label": "Miranda",
+          "viewBox": "0 0 98.632 35",
+          "width": 98.632,
+          "height": 35,
+          "path": "M0 29L0 8.63L4.35 8.63L8.89 20.51Q9.08 21.02 9.34 21.76Q9.6 22.51 9.86 23.35Q10.13 24.19 10.36 24.95Q10.6 25.71 10.76 26.22L10.05 26.22Q10.2 25.73 10.43 24.97Q10.66 24.2 10.94 23.37Q11.21 22.53 11.46 21.77Q11.72 21.02 11.89 20.51L16.37 8.63L20.74 8.63L20.74 29L17.73 29L17.73 17.93Q17.73 17.27 17.75 16.44Q17.76 15.62 17.78 14.7Q17.8 13.78 17.82 12.87Q17.84 11.95 17.86 11.09L18.21 11.09Q17.88 12.09 17.55 13.09Q17.23 14.1 16.93 15Q16.63 15.9 16.36 16.65Q16.09 17.41 15.9 17.93L11.62 29L9.11 29L4.8 17.93Q4.59 17.41 4.33 16.65Q4.06 15.9 3.75 15Q3.45 14.1 3.11 13.1Q2.78 12.1 2.41 11.09L2.88 11.09Q2.91 11.92 2.93 12.85Q2.94 13.77 2.97 14.69Q2.99 15.6 3.01 16.44Q3.02 17.27 3.02 17.93L3.02 29ZM24.28 29L24.28 14.37L27.2 14.37L27.2 29ZM25.76 11.91Q24.98 11.91 24.45 11.4Q23.92 10.9 23.92 10.16Q23.92 9.39 24.45 8.88Q24.98 8.37 25.75 8.37Q26.53 8.37 27.06 8.88Q27.59 9.39 27.59 10.16Q27.59 10.9 27.06 11.4Q26.53 11.91 25.76 11.91ZM30.53 29L30.53 14.37L33.34 14.37L33.34 16.75L33.41 16.75Q33.81 15.53 34.71 14.86Q35.61 14.18 36.99 14.18Q37.31 14.18 37.59 14.21Q37.88 14.23 38.09 14.26L38.09 17Q37.91 16.94 37.48 16.89Q37.05 16.85 36.56 16.85Q35.69 16.85 34.98 17.23Q34.27 17.61 33.85 18.38Q33.44 19.16 33.44 20.3L33.44 29ZM44.3 29.26Q42.86 29.26 41.72 28.75Q40.57 28.25 39.9 27.26Q39.24 26.28 39.24 24.83Q39.24 23.59 39.72 22.78Q40.2 21.97 41.02 21.51Q41.84 21.04 42.87 20.8Q43.9 20.56 45 20.44Q46.35 20.26 47.16 20.16Q47.96 20.06 48.31 19.83Q48.66 19.59 48.66 19.07L48.66 18.96Q48.66 18.21 48.32 17.67Q47.98 17.13 47.33 16.81Q46.68 16.49 45.73 16.49Q44.8 16.49 44.09 16.8Q43.38 17.11 42.97 17.63Q42.56 18.14 42.45 18.76L39.61 18.6Q39.8 17.23 40.61 16.22Q41.41 15.22 42.74 14.67Q44.07 14.11 45.75 14.11Q47.01 14.11 48.07 14.42Q49.13 14.73 49.9 15.36Q50.68 15.98 51.11 16.9Q51.55 17.82 51.55 19.05L51.55 29L48.69 29L48.69 26.95L48.62 26.95Q48.32 27.52 47.78 28.06Q47.24 28.59 46.39 28.92Q45.54 29.26 44.3 29.26ZM44.91 26.91Q46.17 26.91 47.01 26.45Q47.85 25.99 48.26 25.23Q48.67 24.46 48.67 23.57L48.67 21.82Q48.52 21.96 48.15 22.06Q47.79 22.16 47.28 22.26Q46.77 22.36 46.23 22.44Q45.68 22.53 45.16 22.6Q44.35 22.71 43.66 22.96Q42.97 23.22 42.56 23.67Q42.14 24.13 42.14 24.88Q42.14 25.53 42.48 25.98Q42.82 26.43 43.44 26.67Q44.07 26.91 44.91 26.91ZM57.78 20.52L57.78 29L54.87 29L54.87 14.37L57.73 14.37L57.73 18.01L57.13 18.01Q57.84 16.04 59.1 15.08Q60.37 14.11 62.17 14.11Q63.66 14.11 64.84 14.76Q66.01 15.41 66.7 16.68Q67.38 17.95 67.38 19.85L67.38 29L64.47 29L64.47 20.21Q64.47 18.49 63.64 17.6Q62.8 16.71 61.28 16.71Q60.31 16.71 59.51 17.12Q58.71 17.53 58.25 18.37Q57.78 19.21 57.78 20.52ZM76.29 29.29Q74.42 29.29 72.99 28.34Q71.56 27.39 70.78 25.68Q69.99 23.97 69.99 21.7Q69.99 19.42 70.79 17.71Q71.59 16 73.01 15.05Q74.42 14.11 76.29 14.11Q77.33 14.11 78.17 14.42Q79 14.73 79.64 15.27Q80.29 15.82 80.7 16.54L80.75 16.54L80.75 8.63L83.66 8.63L83.66 29L80.81 29L80.81 26.76L80.74 26.76Q80.31 27.51 79.66 28.08Q79.02 28.66 78.17 28.97Q77.33 29.29 76.29 29.29ZM76.9 26.79Q78.14 26.79 79.04 26.15Q79.95 25.51 80.43 24.36Q80.92 23.2 80.92 21.69Q80.92 20.14 80.43 19Q79.95 17.86 79.04 17.23Q78.14 16.6 76.9 16.6Q75.69 16.6 74.81 17.2Q73.93 17.8 73.44 18.94Q72.96 20.07 72.96 21.69Q72.96 23.3 73.45 24.43Q73.94 25.57 74.82 26.18Q75.71 26.79 76.9 26.79ZM91.39 29.26Q89.95 29.26 88.8 28.75Q87.65 28.25 86.99 27.26Q86.33 26.28 86.33 24.83Q86.33 23.59 86.81 22.78Q87.28 21.97 88.1 21.51Q88.92 21.04 89.96 20.8Q90.99 20.56 92.08 20.44Q93.44 20.26 94.24 20.16Q95.05 20.06 95.4 19.83Q95.75 19.59 95.75 19.07L95.75 18.96Q95.75 18.21 95.41 17.67Q95.06 17.13 94.41 16.81Q93.76 16.49 92.82 16.49Q91.89 16.49 91.18 16.8Q90.47 17.11 90.06 17.63Q89.65 18.14 89.54 18.76L86.7 18.6Q86.89 17.23 87.69 16.22Q88.5 15.22 89.83 14.67Q91.15 14.11 92.84 14.11Q94.09 14.11 95.15 14.42Q96.21 14.73 96.99 15.36Q97.77 15.98 98.2 16.9Q98.63 17.82 98.63 19.05L98.63 29L95.77 29L95.77 26.95L95.71 26.95Q95.41 27.52 94.87 28.06Q94.33 28.59 93.48 28.92Q92.63 29.26 91.39 29.26ZM92 26.91Q93.26 26.91 94.1 26.45Q94.94 25.99 95.35 25.23Q95.76 24.46 95.76 23.57L95.76 21.82Q95.61 21.96 95.24 22.06Q94.87 22.16 94.37 22.26Q93.86 22.36 93.31 22.44Q92.77 22.53 92.25 22.6Q91.44 22.71 90.75 22.96Q90.06 23.22 89.64 23.67Q89.23 24.13 89.23 24.88Q89.23 25.53 89.57 25.98Q89.91 26.43 90.53 26.67Q91.15 26.91 92 26.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "schenk-2020-miranda-normal",
+      "path": "observations/mumap-cyl-180180.cub.gz",
+      "origin": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download",
+      "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+      "mirror": "https://earth-assets.lowpoly.cc/source-assets/70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c/mumap-cyl-180180.cub.gz",
+      "upstreamSha256": "6333d213b902704c0c27ff9a605ceb8823661ad5de32b5245d1ef6000a26a0a8",
+      "upstreamBytes": 82012695,
+      "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
+      "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+      "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+      "licenseEvidence": [
+        "observations/aaReadMe_uranian_MAP_DEM.txt",
+        "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+      ],
+      "acquisition": "Restore the byte-preserving compressed source mirror using preparation/acquisition.json.",
+      "redistribution": "Original cube retained byte-for-byte inside gzip; author, release reference and caveats accompany the prepared visualization.",
+      "width": 6294,
+      "height": 3147,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 240400
+      },
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download"
+      },
+      "sha256": "70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c",
+      "bytes": 33170078,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/mumap-cyl-180180.cub.gz",
+        "url": "https://earth-assets.lowpoly.cc/source-assets/70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c/mumap-cyl-180180.cub.gz"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "schenk-2020-miranda-elevation",
+      "path": "science/mudem-ZT-cyl.cub.gz",
+      "origin": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download",
+      "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+      "mirror": "https://earth-assets.lowpoly.cc/source-assets/45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570/mudem-ZT-cyl.cub.gz",
+      "upstreamSha256": "1173b7f87ee2818e23b72ac07f0fafe964fbe3c71c8bda0930537fac4510923c",
+      "upstreamBytes": 82006980,
+      "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
+      "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+      "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+      "licenseEvidence": [
+        "observations/aaReadMe_uranian_MAP_DEM.txt",
+        "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+      ],
+      "acquisition": "Restore the byte-preserving compressed source mirror using preparation/acquisition.json.",
+      "redistribution": "Original cube retained byte-for-byte inside gzip; author, release reference and caveats accompany the prepared visualization.",
+      "width": 6294,
+      "height": 3147,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 240400
+      },
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "coverage": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download"
+      },
+      "sha256": "45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570",
+      "bytes": 31117604,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/mudem-ZT-cyl.cub.gz",
+        "url": "https://earth-assets.lowpoly.cc/source-assets/45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570/mudem-ZT-cyl.cub.gz"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source metadata, license evidence, or authored preparation and content.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "10ceda01821a91ce0387d89d45da178bba6b99f23f414126f7e39e7e427811f5",
+      "bytes": 10354,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 6294,
+            "height": 3147,
+            "targetName": "Miranda",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 240400,
+            "polarRadiusMeters": 232900,
+            "origin": [
+              -1510560,
+              377760
+            ],
+            "resolutionMeters": 240,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [
+              -180,
+              180
+            ]
+          },
+          "displayRange": [
+            0,
+            2400
+          ]
+        }
+      },
+      "inputs": [
+        "schenk-2020-miranda-normal"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/miranda/miranda-normal-thumbnail.webp",
+          "bytes": 2732,
+          "sha256": "5ad3ad0c4f2633a4ea648e34a702be25e4782d3b97de558d2593e2d60d2b7c5d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/miranda/miranda-normal-surface@2x.webp",
+          "bytes": 2683924,
+          "sha256": "7d497d404ae0b876d14547f382681cfd6bdaf0898cb0168ef6a88ebfef0fc711",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/miranda/miranda-normal-poles@2x.webp",
+          "bytes": 101248,
+          "sha256": "aa0122ac2e363919a43ad59922c9fa7a46e072c79f58b2e5e71380e5111d5f2e",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution."
+      },
+      "inputs": [
+        "schenk-2020-miranda-elevation"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/miranda/miranda-elevation-thumbnail.webp",
+          "bytes": 4690,
+          "sha256": "8142242bde81c47cb0e0f841fc05b55d3fda3d1bbafa5251748deca610316dc9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/miranda/miranda-elevation-legend.webp",
+          "bytes": 180,
+          "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/miranda/miranda-elevation-surface@2x.webp",
+          "bytes": 3374940,
+          "sha256": "c275fb7465b05d6e71767521d9d75b40e76eca4bc45cd724a02916e56d926ba4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/miranda/miranda-elevation-poles@2x.webp",
+          "bytes": 268828,
+          "sha256": "ceb1348181eeb52e2e2c3147a90212064ad429cce957d2498619662d6ffacf2b",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6852,
+          "sha256": "e2186c64ed33e48cbfaec3a1c938ccd9941d80ae46ac6366aa9d48fbf8b55ebd",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 31750,
+          "sha256": "a85beb19e3e3f05076d25be090e96b6b647bf9a883f376d0416a646403373c5b",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 35470,
+          "sha256": "76c2d481e2af4ab4be19fe634518a50367644be682bd54588357bf5f85c038e0",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -48,6 +48,31 @@
           ],
           "specialValueMagnitude": 1e+30
         }
+      },
+      {
+        "id": "spectral",
+        "validity": {
+          "kind": "geotiff-rgb-bands",
+          "samples": [
+            0,
+            1,
+            2
+          ],
+          "alphaBand": 3,
+          "sampleBytes": 2,
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 0.25,
+          "origin": [
+            -785.5,
+            283.5
+          ],
+          "grid": {
+            "pixelsPerDegree": 17.453292519943293,
+            "sampleOffset": 3141.5,
+            "lineOffset": 1133.5
+          }
+        }
       }
     ],
     "scientific": [

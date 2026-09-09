@@ -19,7 +19,13 @@
         "navigation"
       ],
       "expectedBytes": 789926,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
+      }
     },
     {
       "id": "hubble-opal-neptune-fq619n",
@@ -37,7 +43,13 @@
         "lenses"
       ],
       "expectedBytes": 1045440,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-neptune-f845m",
@@ -55,7 +67,13 @@
         "lenses"
       ],
       "expectedBytes": 1045440,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-neptune-readme",

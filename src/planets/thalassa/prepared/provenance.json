@@ -1,0 +1,411 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "thalassa",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "c84787e76f6c44f9aa8efc2ff6d16ad03f95f7cc3c1b6d6effd7b234da05f689"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "6e29cba25803b5779a8b23d740f8f26c7a513a7b4f7a6ff1a11cdafd06b9c148",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "thalassa",
+        "displayName": "Thalassa",
+        "publicBase": "/scenes/thalassa/",
+        "distanceAu": 30.07,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Measured flattened ellipsoid; standard gray cartographic grid marks the absence of usable resolved surface imagery."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 40,
+          "camera": {
+            "initialScenePitchDegrees": 7.8863261706119285,
+            "defaultControlYawDegrees": -123.49616775538027
+          },
+          "mapUrl": "/scenes/thalassa/thalassa-model-surface@2x.webp",
+          "polesUrl": "/scenes/thalassa/thalassa-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 614,
+              "expectedFaces": 1224,
+              "stepDegrees": 10,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 800,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; Karkoschka2003 measured ellipsoid dimensions."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "fbb2ad88f1b4d8da36ba11264a898fb7a696d8b7b846de8632a14f5869907005",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "thalassa",
+        "displayName": "Thalassa",
+        "panel": {
+          "introduction": "Thalassa is a small, unusually flattened moon close to Neptune. Voyager 2 barely resolved its disk; this view shows its measured shape with a grid where surface imagery is unavailable.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Reference radius",
+              "value": "40 km"
+            },
+            {
+              "id": "dimensions",
+              "label": "Dimensions",
+              "value": "About 108 × 100 × 52 km"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Neptune",
+              "value": "About 7.48 hours"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Neptune",
+              "value": "About 50,074 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous reference model"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Voyager 2 imaging team · August 1989"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "description": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+              "title": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+              "detail": "Measured axes",
+              "thumbnail": "/scenes/thalassa/thalassa-model-thumbnail.webp",
+              "surface": "thalassa-model-surface@2x.webp",
+              "poles": "thalassa-model-poles@2x.webp",
+              "source": {
+                "id": "measured-shape",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
+              },
+              "summary": "Shape estimated from Voyager images with motion blur. No reliable surface map is available; gray grid: no imagery."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Thalassa overview",
+            "href": "https://science.nasa.gov/neptune/moons/thalassa/"
+          },
+          {
+            "label": "Karkoschka (2003)",
+            "role": "surface",
+            "description": "Voyager measurements of Neptune’s inner moon shapes",
+            "href": "https://doi.org/10.1016/S0019-1035(03)00002-2"
+          },
+          {
+            "label": "NASA/JPL; PDS",
+            "role": "observations",
+            "description": "Voyager ISS archive",
+            "href": "https://pds-rings.seti.org/voyager/iss/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/neptune/moons/thalassa/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Karkoschka (2003); IAU/WGCCRE; JPL Horizons"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003); cssEarth measured-axes model",
+      "license": "Scientific measurements attributed to Karkoschka (2003); cssEarth model representation under MIT.",
+      "licenseEvidence": [
+        "https://doi.org/10.1016/S0019-1035(03)00002-2"
+      ],
+      "acquisition": "Checked in; dimensions, radius formula and no-data material bytes are recorded in measurements.json.",
+      "redistribution": "Retain source citation and modeled status.",
+      "coverage": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 40000
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
+      "bytes": 135,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "measured-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003); cssEarth measured-axes model",
+      "license": "Scientific measurements attributed to Karkoschka (2003); cssEarth model representation under MIT.",
+      "licenseEvidence": [
+        "https://doi.org/10.1016/S0019-1035(03)00002-2"
+      ],
+      "acquisition": "Checked in; dimensions, radius formula and no-data material bytes are recorded in measurements.json.",
+      "redistribution": "Retain source citation and modeled status.",
+      "coverage": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 40000
+      },
+      "sha256": "f22264ce2d158afd700f19ef0e7dcb56df5cdedac9629d428f069eca2e20101e",
+      "bytes": 14147,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Thalassa source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Thalassa source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "31a8575f283fec724ee418fe6017910e28ac47d08fe5fc9e5b646fc418c1f397",
+      "bytes": 3989,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "measured-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/thalassa/thalassa-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/thalassa/thalassa-model-surface@2x.webp",
+          "bytes": 45126,
+          "sha256": "ecb4f801a198c7efc0d6444f4b84643919a443c312e0f763502ecbc066d28986",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 7251,
+          "sha256": "c01962f59477224a53543c02282af4b768a8fef849a3092e8bec455c97999976",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -5,6 +5,7 @@ export const MOBILE_VIEWPORT_QUERY =
 export const MOBILE_TOUCH_ACTION = "pan-y";
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from "../src/platform/prepared-object-assets.mjs";
 export const SKYBOX_DRAG_ENABLED = true;
+export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
