@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 290.0652173913044,
       "bodyRadiusM": 66715
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dido-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2942885482216b14f584de00b43f3904ee211271a04fba5989e8667f0cfd3abf"
+      }
     }
   },
   "schema": "cssearth-object@1",

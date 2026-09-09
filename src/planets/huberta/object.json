@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 206.95652173913044,
       "bodyRadiusM": 47600
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/huberta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "58054cb1cd457906a84f3280da601a13b6421b854386a5fde03c476182d3721b"
+      }
     }
   },
   "schema": "cssearth-object@1",

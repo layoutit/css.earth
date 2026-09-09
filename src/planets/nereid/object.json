@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 739.1304347826087,
       "bodyRadiusM": 170000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nereid-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3ef9a474ea411720fe3f651297d42ea6790499155a80053d6aaada4f0f595f8f"
+      }
     }
   },
   "prepared": {

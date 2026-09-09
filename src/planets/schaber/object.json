@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 57.69130434782609,
       "bodyRadiusM": 13269
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/schaber-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8b4f4cc6fee0ee06c4df2bb40d25777d384cd8238c0425049efa5fb69a68dac9"
+      }
     }
   },
   "schema": "cssearth-object@1",

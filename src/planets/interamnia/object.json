@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 721.7391304347826,
       "bodyRadiusM": 166000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/interamnia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e4c2e18f9e1aebaffa4d31780f30c04ef375332178125400b3c7ee10fa160d6a"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 11.217391304347826,
       "bodyRadiusM": 2580
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/steins-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "46873e6a74f32fdc909b9dca274a75e061b07a05bbba99a8f740ee4870e9bf9b"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 65.65217391304348,
       "bodyRadiusM": 15100
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/atlas-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b3d14b122302449518249c8abf5271c98c46333394ff8ee97824057dba0a0ff6"
+      }
     }
   },
   "prepared": {

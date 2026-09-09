@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 284.7826086956522,
       "bodyRadiusM": 65500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/achilles-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ebc5e9886a453b84bffad2a7df26546bba5fe70021c1d3b3a268ad8fd8fd6d06"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -97,7 +97,6 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   }
 
   function assign(selection: PreparedPointFieldSelection) {
-    pointRevision++;
     const next = new Map(selection.representatives.map(reference => [key(reference), reference]));
     const survivors = new Set<string>();
     let removed = 0;
@@ -117,6 +116,9 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
       const slot = free[added++]; slot.reference = reference; slot.entering = initialized;
       if (initialized) fader.set(slot.element, 0, 0);
     }
+    // Worker diagnostics may change without changing any retained identity.
+    // Only membership changes invalidate the already projected point image.
+    if (!initialized || removed > 0 || added > 0) pointRevision++;
     selected = selection;
     if (initialized && (removed > 0 || added > 0)) {
       // Surviving identities stay opaque. Only replaced hierarchy members fade.

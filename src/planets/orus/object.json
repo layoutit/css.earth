@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 132.98924763234652,
       "bodyRadiusM": 30587.5269554397
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/orus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b8d4d86f052d84504dec6d0460ea523ba6ff59b5072c4e4bd2287ca129a92cd1"
+      }
     }
   },
   "prepared": {

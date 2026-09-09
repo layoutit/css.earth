@@ -118,6 +118,15 @@
       ],
       "metersPerUnit": 1096.9565217391305,
       "bodyRadiusM": 252300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/enceladus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "29f89dc7e01776b0c40e15c3cce612c19ab07b06c9482c7c47604ba919c2fbfb"
+      }
     }
   },
   "prepared": {

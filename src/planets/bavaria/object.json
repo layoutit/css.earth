@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 119.56521739130434,
       "bodyRadiusM": 27500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bavaria-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "83df47985f8d182c819ff0da1215bffd4a2b15f5b6ea1299e27d95f5fb9c71ea"
+      }
     }
   },
   "schema": "cssearth-object@1",

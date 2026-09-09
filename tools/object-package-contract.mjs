@@ -1,6 +1,7 @@
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { authoredObject } from './authored-object.mjs';
+import { objectPageStyles } from '../site/object-page-contract.mjs';
 
 import {
   validateRuntimeAssetManifest,
@@ -33,7 +34,8 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd(), au
       resolve(root, "tools", "verify-source-manifest.mjs"),
       resolve(root, "tools", "compact-production-assets.mjs"),
       ]),
-      resolve(projectRoot, "site", "pages", `${objectRecord.id}.astro`),
+      resolve(root, 'prepared/page.json'),
+      resolve(projectRoot, 'site/pages/[id].astro'),
     ]),
     runtimeAssets: resolve(root, "runtime-assets.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
@@ -47,6 +49,8 @@ export async function validateObjectPackageFiles(
   { projectRoot = process.cwd(), accessFile = access } = {},
 ) {
   const paths = objectPackagePaths(objectRecord, projectRoot, Boolean(await authoredObject(objectRecord.id, projectRoot)));
+  const descriptor = JSON.parse(await readFile(resolve(paths.root, 'object.json'), 'utf8'));
+  for (const path of objectPageStyles(descriptor)) await accessFile(resolve(projectRoot, path));
   for (const file of paths.requiredFiles) {
     try {
       await accessFile(file);

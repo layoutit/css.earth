@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 3430,
       "bodyRadiusM": 788900
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/titania-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f77aa02c4fb0113dc563b0fde45bb874f95f3532bb7adf8c3b5fa34b0bf4d707"
+      }
     }
   },
   "prepared": {

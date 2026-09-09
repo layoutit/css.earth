@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 62.17391304347826,
       "bodyRadiusM": 14300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/albiorix-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f577cf765e23705d2e8a4384cd948d76cc72017e9c4b351342c22951a7e6fe33"
+      }
     }
   },
   "prepared": {

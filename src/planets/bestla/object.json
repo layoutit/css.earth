@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 14.347826086956522,
       "bodyRadiusM": 3300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bestla-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "75c0c486d7affa2ecf34cf81692a4008a39d68a49520a2bfa81fdac165ff56a8"
+      }
     }
   },
   "prepared": {

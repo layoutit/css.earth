@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 85.8913043478261,
       "bodyRadiusM": 19755
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/coelestina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c66da2bfd50b9d48faef37428090f45faced30712df27ead91d17c4faa8fe9f4"
+      }
     }
   },
   "schema": "cssearth-object@1",

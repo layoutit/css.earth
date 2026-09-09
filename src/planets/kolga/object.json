@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 219.41304347826087,
       "bodyRadiusM": 50465
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kolga-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "16851efb76881d77ae87fc04f6180da2ffe44ccdc14ecd80659b8ec5ca1da217"
+      }
     }
   },
   "schema": "cssearth-object@1",

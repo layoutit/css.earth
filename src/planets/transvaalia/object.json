@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 55.34347826086957,
       "bodyRadiusM": 12729
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/transvaalia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "dacc418303cdc7c19cca214e41ff11cae53a782225f51265bd6454f9968ad516"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 941.304347826087,
       "bodyRadiusM": 216500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hygiea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "aafa5f54f1b647a5bbb7d41ff5867e9c385e0144442a6e455c84d61075c2f3a2"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 184.7826086956522,
       "bodyRadiusM": 42500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/felicitas-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ccf69560b8ff2345a3028ef84db9ac8481d54d87c52499e5067c95cb6e79f5cf"
+      }
     }
   },
   "schema": "cssearth-object@1",

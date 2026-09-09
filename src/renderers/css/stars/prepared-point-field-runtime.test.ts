@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { afterEach, expect, test, vi } from 'vitest';
 import { mountPreparedCssPointField, pointPhotometry, projectPreparedPoint } from './prepared-point-field-runtime.js';
+import { createPointFieldSelection } from './point-field-selection.js';
 import { parsePreparedCssPointField } from './validation.js';
 import type { PreparedCssPointField } from './types.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
@@ -248,4 +249,32 @@ test('publication suppresses floating-point noise but bounds actual parallax rou
   expect(Math.abs(actual[0] - expected.x)).toBeLessThan(.001);
   expect(Math.abs(actual[1] - expected.y)).toBeLessThan(.001);
   layer.destroy();
+});
+
+test('an unchanged worker cut updates diagnostics without projecting the same image twice', () => {
+  let worker: { onmessage: ((event: { data: unknown }) => void) | null; sent: unknown[] };
+  class Worker {
+    onmessage = null; onerror = null; sent: unknown[] = [];
+    constructor() { worker = this; }
+    postMessage(value: unknown) { this.sent.push(value); }
+    terminate() {}
+  }
+  vi.stubGlobal('Worker', Worker);
+  const { layer, document } = mount(fixture(), false);
+  try {
+    layer.publish(world(), viewport, 1);
+    const before = layer.inspect();
+    worker!.onmessage!({ data: { ready: true } });
+    const request = worker!.sent.at(-1) as { id: number; view: Parameters<ReturnType<typeof createPointFieldSelection>>[0] };
+    const selection = createPointFieldSelection(fixture())(request.view);
+    worker!.onmessage!({ data: { id: request.id, selection: { ...selection, consideredCount: 123 } } });
+    document.frame();
+    const after = layer.inspect();
+    expect(after.consideredCount).toBe(123);
+    expect(after.renderPasses).toBe(before.renderPasses);
+    expect(after.projectedPoints).toBe(before.projectedPoints);
+    expect(after.points).toEqual(before.points);
+    layer.publish(world(1), viewport, 1);
+    expect(layer.inspect().projectedPoints).toBeGreaterThan(after.projectedPoints);
+  } finally { layer.destroy(); vi.unstubAllGlobals(); }
 });

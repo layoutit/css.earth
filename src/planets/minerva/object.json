@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 347.82608695652175,
       "bodyRadiusM": 80000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/minerva-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2ffdb3b9df9b8435ba63c2cb67b82465748d4acc2e78a125a58ad1765fb4271d"
+      }
     }
   },
   "schema": "cssearth-object@1",

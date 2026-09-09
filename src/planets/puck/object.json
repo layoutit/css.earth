@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 352.17391304347825,
       "bodyRadiusM": 81000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/puck-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fc4200c06baf3d443322057f960776c68a72cbdad70c51bc9fb95a4dfdc737bb"
+      }
     }
   },
   "prepared": {

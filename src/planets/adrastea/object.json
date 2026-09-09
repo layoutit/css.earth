@@ -98,6 +98,15 @@
       ],
       "metersPerUnit": 35.65217391304348,
       "bodyRadiusM": 8200
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/adrastea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6092b1fc48efd67623801f34b2e203b5c40376fc03312374e4dfa6cdca29ede6"
+      }
     }
   },
   "prepared": {

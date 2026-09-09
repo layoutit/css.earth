@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 332.60869565217394,
       "bodyRadiusM": 76500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/irene-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "eccbc4dabfe0da66f3f1d0f2a81627d5fea82d87d29d93eae502c9609d27efe6"
+      }
     }
   },
   "schema": "cssearth-object@1",

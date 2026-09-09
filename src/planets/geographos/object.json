@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 5.5827913043478254,
       "bodyRadiusM": 1284.042
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/geographos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d3ccbfad09c4b859d89c1e722f9eeb79ea0401b81cb803f2eac5ce424f844646"
+      }
     }
   },
   "schema": "cssearth-object@1",
