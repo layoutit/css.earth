@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5913",
+  "modelId": 5913,
+  "modelVersion": "2021-11-12",
+  "diameterKm": 144,
+  "diameterInterpretation": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 144 ±3 km. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 144,
+    "uncertaintyKm": 3,
+    "uncertaintyKind": "Archive estimate of volume-equivalent diameter error; not a bound on local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record; actual source publications and release differences are documented in selectionNotes.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5913",
+    "reference": "DAMIT model 5913, version 2021-11-12",
+    "sourceLabel": "DAMIT model 5913",
+    "scaleKmPerSourceUnit": 0.9977199313796815,
+    "metersPerSourceUnit": 997.7199313796815,
+    "limitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329. Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images.",
+    "visibleDescription": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 144 ±3 km. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 6.110939,
+  "poleEclipticJ2000Degrees": [
+    28,
+    -17
+  ],
+  "modelLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329. Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/63475/shape.txt",
+    "vertices": 1766,
+    "faces": 3528,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 997.7199313796815,
+    "firstVertexKm": [
+      -3.303853771650403,
+      9.232599931288227,
+      58.98182306575919
+    ],
+    "firstFaceZeroBased": [
+      590,
+      198,
+      595
+    ],
+    "extentsKm": [
+      156.30857127114427,
+      168.3892136302723,
+      117.96066693980329
+    ],
+    "volumeCubicKm": 1563457.5663561122,
+    "volumeEquivalentRadiusKm": 72,
+    "radialRangeKm": [
+      52.58876269760108,
+      90.88817648174131
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3528,
+    "sourceVertices": 1766,
+    "weldedVertices": 1766,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1440,
+    "estimatedErrorMeters": 1271.3656005859375,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1547506679766415.5
+    }
+  }
+}

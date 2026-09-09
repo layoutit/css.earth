@@ -1,0 +1,15 @@
+---
+import PlanetLayout from "../layouts/PlanetLayout.astro";
+import PreparedObjectHead from "../components/PreparedObjectHead.astro";
+import PreparedObjectPanel from "../components/PreparedObjectPanel.astro";
+import preparedContent from "../../src/planets/meliboea/prepared/content.json";
+import preparedObject from "../../src/planets/meliboea/prepared/object.json";
+import type { PreparedObjectContentDocument } from "../../tools/objects/content/types";
+import "../../src/renderers/css/styles/meliboea-surfaces.css";
+import "../planet-shell.css";
+---
+
+<PlanetLayout objectId="meliboea">
+  <PreparedObjectHead slot="planet-head" preparedAssets={preparedObject.data.assets} />
+  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent as PreparedObjectContentDocument} preparedControls={preparedObject.data.controls} />
+</PlanetLayout>

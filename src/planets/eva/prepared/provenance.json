@@ -1,0 +1,548 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "eva",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "92ba368b3eaab656269eb27b046be6e0560fa082d1142fb42a462e3ef4526701"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "1f9f7f4c9c26feffc3754a9a31a420b67c9684e93e3e1f693aff7bb602b15c8c",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "eva",
+        "displayName": "Eva",
+        "publicBase": "/scenes/eva/",
+        "distanceAu": 2.6327474235794797,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-1021.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 78745.80591487438,
+                "expectedVertices": 1022,
+                "expectedFaces": 2040,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -48.85
+              },
+              "minimum": -20,
+              "maximum": 20,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 48850,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 977
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 48.85,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/eva/eva-shape-surface@2x.webp",
+          "polesUrl": "/scenes/eva/eva-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-1021.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 78745.80591487438,
+              "expectedVertices": 1022,
+              "expectedFaces": 2040,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 977,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "DAMIT model 1021 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "60c3d802b34b39911292890427519d2e9519c3199a56adef218765b5f60646d9",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "eva",
+        "displayName": "Eva",
+        "panel": {
+          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "48.85 km (approximate thermal scale)",
+              "source": {
+                "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+                "label": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+                "checked": "2026-09-09",
+                "path": "source/reference/calibration.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.633 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27164%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.27 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27164%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "13.6638 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1021",
+                "label": "DAMIT model 1021",
+                "checked": "2026-09-09",
+                "path": "source/reference/damit-model.json"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Convex light-curve reconstruction with approximate thermal size: 97.7 km (catalog ±1.56 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
+              "title": "Convex light-curve reconstruction with approximate thermal size: 97.7 km (catalog ±1.56 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
+              "thumbnail": "/scenes/eva/eva-shape-thumbnail.webp",
+              "surface": "eva-shape-surface@2x.webp",
+              "poles": "eva-shape-surface@2x.webp",
+              "source": {
+                "id": "eva-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape · grid marks missing imagery"
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radius on the shape model minus a 48.85 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Radius on the shape model minus a 48.85 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "thumbnail": "/scenes/eva/eva-elevation-thumbnail.webp",
+              "surface": "eva-elevation-surface@2x.webp",
+              "poles": "eva-elevation-surface@2x.webp",
+              "source": {
+                "id": "eva-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "0",
+                  "20"
+                ],
+                "meta": "km · 48.85 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1021",
+                "image": "/scenes/eva/eva-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 1021, version 2016-01-04",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1021"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+            "href": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1021"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1021",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1021, version 2016-01-04."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        },
+        "title": {
+          "label": "Eva",
+          "viewBox": "0 0 42.429 35",
+          "width": 42.429,
+          "height": 35,
+          "path": "M0 29L0 8.63L13.52 8.63L13.52 11.29L3.05 11.29L3.05 17.32L12.74 17.32L12.74 19.95L3.05 19.95L3.05 26.33L13.54 26.33L13.54 29ZM20.5 29L14.92 14.37L18.05 14.37L20.95 22.45Q21.37 23.64 21.74 24.84Q22.11 26.03 22.48 27.22L21.73 27.22Q22.09 26.03 22.44 24.84Q22.8 23.64 23.21 22.45L26.09 14.37L29.17 14.37L23.6 29ZM35.18 29.26Q33.75 29.26 32.6 28.75Q31.45 28.25 30.79 27.26Q30.12 26.28 30.12 24.83Q30.12 23.59 30.6 22.78Q31.08 21.97 31.9 21.51Q32.72 21.04 33.75 20.8Q34.79 20.56 35.88 20.44Q37.23 20.26 38.04 20.16Q38.85 20.06 39.2 19.83Q39.54 19.59 39.54 19.07L39.54 18.96Q39.54 18.21 39.2 17.67Q38.86 17.13 38.21 16.81Q37.56 16.49 36.62 16.49Q35.69 16.49 34.98 16.8Q34.27 17.11 33.86 17.63Q33.45 18.14 33.34 18.76L30.49 18.6Q30.68 17.23 31.49 16.22Q32.3 15.22 33.62 14.67Q34.95 14.11 36.63 14.11Q37.89 14.11 38.95 14.42Q40.01 14.73 40.79 15.36Q41.57 15.98 42 16.9Q42.43 17.82 42.43 19.05L42.43 29L39.57 29L39.57 26.95L39.5 26.95Q39.2 27.52 38.66 28.06Q38.12 28.59 37.27 28.92Q36.43 29.26 35.18 29.26ZM35.8 26.91Q37.06 26.91 37.9 26.45Q38.74 25.99 39.15 25.23Q39.56 24.46 39.56 23.57L39.56 21.82Q39.41 21.96 39.04 22.06Q38.67 22.16 38.16 22.26Q37.66 22.36 37.11 22.44Q36.56 22.53 36.04 22.6Q35.24 22.71 34.55 22.96Q33.86 23.22 33.44 23.67Q33.02 24.13 33.02 24.88Q33.02 25.53 33.36 25.98Q33.71 26.43 34.33 26.67Q34.95 26.91 35.8 26.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "eva-shape",
+      "path": "shape/model-1021.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/3796/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 1021, version 2016-01-04.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore the original published shape bytes, preserving coordinates, vertex order and connectivity through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+        "metersPerUnit": 78745.80591487438,
+        "referenceRadiusMeters": 48850
+      },
+      "coverage": "Convex light-curve reconstruction with approximate thermal size: 97.7 km (catalog ±1.56 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. The 2016 archive supplies one convex solution (54,-10). The 2021 ASAS-SN (54,-15) estimate agrees at broad-pole level; retain selected nominal coordinates/spin and an explicit AKARI size approximation.",
+      "sha256": "c9f55273db249c8adb0a08784259e0967e93a8f1876f48dd6afe7d7f634ad87d",
+      "bytes": 82708,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-1021.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3796/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned original source record or authored scientific preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "60c3d802b34b39911292890427519d2e9519c3199a56adef218765b5f60646d9",
+      "bytes": 8144,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radius on the shape model minus a 48.85 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "eva-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/eva/eva-elevation-thumbnail.webp",
+          "bytes": 5314,
+          "sha256": "b45b37b2acfc4114f06f431b9ebc719e46a5a68ddc9623f91da08710fe2ade98",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/eva/eva-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/eva/eva-elevation-surface@2x.webp",
+          "bytes": 268338,
+          "sha256": "a7b95e46b3c66e953b939e98de456286965690c057614534036b8faf0a23390a",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Convex light-curve reconstruction with approximate thermal size: 97.7 km (catalog ±1.56 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "eva-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/eva/eva-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/eva/eva-shape-surface@2x.webp",
+          "bytes": 227314,
+          "sha256": "1432a8b8143afeb23d3413d71febfe46c3b3442292d45d4bc2d8c7a84cc7ea15",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4836,
+          "sha256": "3725e492d23e2f0e638668a694d25e1ecd5d6d700d5c7df2e30e392c11747d66",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10618,
+          "sha256": "89a851c0f3f870ba9a902556aaa1d888511e53a89b1b8f278e2401b4f1ac7104",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

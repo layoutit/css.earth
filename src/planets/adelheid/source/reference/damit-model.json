@@ -1,0 +1,352 @@
+{
+  "number": 276,
+  "name": "Adelheid",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/157",
+  "modelId": 189,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/189",
+  "catalog": "View model 9 -4 6.3192 AO.eps | 3D.pdf | IAUspin.txt | occ_2002-03-09.pdf | shape.png | shape.txt | spin.txt | shape.obj size from AO is 104+/-11 km",
+  "fields": {
+    "ID": "189",
+    "Asteroid": "(276) Adelheid",
+    "λ": "9",
+    "β": "-4",
+    "P": "6.3192",
+    "YORP": "",
+    "t0": "2445975",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "125",
+    "σD": "15",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-03-28",
+    "Comment": "size from AO is 104+/-11 km",
+    "Created": "",
+    "Modified": "2013-07-23 14:05:28",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.eps": "https://damit.cuni.cz/projects/damit/stored_files/open/535/AO.eps",
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/536/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/537/IAUspin.txt",
+    "occ_2002-03-09.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/538/occ_2002-03-09.pdf",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/539/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt"
+  },
+  "references": [
+    {
+      "label": "A. Marciniak (2007)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/117",
+      "file": "reference-117.html",
+      "links": [
+        {
+          "label": "2007a&a...473..633m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2007a&a...473..633m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2007A%26A...473..633M",
+          "url": "http://adsabs.harvard.edu/abs/2007A%26A...473..633M"
+        }
+      ]
+    },
+    {
+      "label": "Ďurech et al. (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/139",
+      "file": "reference-139.html",
+      "links": [
+        {
+          "label": "2011icar..214..652d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011icar..214..652d"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4227",
+          "url": "http://arxiv.org/abs/1104.4227\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011Icar..214..652D",
+          "url": "http://adsabs.harvard.edu/abs/2011Icar..214..652D"
+        }
+      ]
+    },
+    {
+      "label": "Hanuš et al. (2013)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/149",
+      "file": "reference-149.html",
+      "links": [
+        {
+          "label": "2013icar..226.1045h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2013icar..226.1045h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2013Icar..226.1045H",
+          "url": "http://adsabs.harvard.edu/abs/2013Icar..226.1045H"
+        }
+      ]
+    }
+  ],
+  "id": "adelheid",
+  "displayName": "Adelheid",
+  "lambda": 9.0,
+  "beta": -4.0,
+  "periodHours": 6.3192,
+  "version": "2011-03-28",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 104.0,
+  "uncertaintyKm": 11.0,
+  "akari": {
+    "number": 276,
+    "name": "Adelheid",
+    "diameterKm": 135.3,
+    "uncertaintyKm": 2.09,
+    "detections": 8,
+    "originalRow": "276    Adelheid                       8.56  0.15  8  135.30  2.09 0.036 0.001"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/537/IAUspin.txt",
+  "shapeSha256": "10aace4ab515e08cf5ecbfe77fd3a7fc9f559519d9202ef6a2edd7b106ffe187",
+  "shapeBytes": 129364,
+  "vertices": 1598,
+  "faces": 3192,
+  "signedVolume": 1022653.8517369278,
+  "independentSignedVolume": 1022653.8517369275,
+  "originalVolumeEquivalentDiameter": 124.99999972076327,
+  "firstVertex": [
+    10.096305,
+    -1.454118,
+    60.893704
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    55.36947364051126,
+    73.20504237814647
+  ],
+  "extentsSourceUnits": [
+    [
+      -66.082506,
+      61.714604
+    ],
+    [
+      -68.72355,
+      70.76161
+    ],
+    [
+      -59.730948,
+      60.893704
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.8320000018585997,
+  "alternatives": [
+    {
+      "modelId": 190,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/190",
+      "pole": [
+        "199",
+        "-20"
+      ],
+      "version": "2011-03-28",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "117",
+      "comment": "size from AO is 104+/-12 km",
+      "references": [
+        {
+          "label": "A. Marciniak (2007)",
+          "url": "/projects/damit/references/view/117"
+        },
+        {
+          "label": "Ďurech et al. (2011)",
+          "url": "/projects/damit/references/view/139"
+        },
+        {
+          "label": "Hanuš et al. (2013)",
+          "url": "/projects/damit/references/view/149"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "The selected convex pole(9,−4) remains one of two possible orientations. Ďurech2011 fits three occultation chords (two close together) at125±15 km and cannot distinguish the poles. Hanuš2013 Table3 obtains volume-equivalent104±11 km for this pole from one Keck AO observation, matching the later archive comment. This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "sizeCalibratedByPublishedTransfer": true,
+  "papers": [
+    {
+      "file": "hanus-2013-ao.pdf",
+      "url": "https://arxiv.org/pdf/1308.0446",
+      "label": "Hanuš et al. (2013), Icarus 226, 1045–1057"
+    },
+    {
+      "file": "durech-occultations-2011.pdf",
+      "url": "https://arxiv.org/pdf/1104.4227",
+      "label": "Ďurech et al. (2011), Icarus 214, 652–670"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 104.0,
+    "uncertaintyKm": 11.0,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://arxiv.org/pdf/1308.0446",
+    "sourceLabel": "Hanuš et al. (2013), Icarus 226, 1045–1057",
+    "reference": "Hanuš et al. (2013), Icarus 226, 1045–1057",
+    "limitations": "The selected convex pole(9,−4) remains one of two possible orientations. Ďurech2011 fits three occultation chords (two close together) at125±15 km and cannot distinguish the poles. Hanuš2013 Table3 obtains volume-equivalent104±11 km for this pole from one Keck AO observation, matching the later archive comment. This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.",
+    "visibleDescription": "Convex light-curve reconstruction, 104 ± 11 km volume-equivalent diameter. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.8320000018585997,
+    "metersPerSourceUnit": 832.0000018585997
+  },
+  "independentCenteredSignedVolume": 1022653.8517369275,
+  "surfaceAreaSourceUnitsSquared": 50159.25566301176,
+  "surfaceEquivalentDiameterSourceUnits": 126.35737794508452,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        10.096305,
+        -1.454118,
+        60.893704
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 715,
+      "sourcePoint": [
+        61.714604,
+        -1.524341,
+        -4.940954
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 754,
+      "sourcePoint": [
+        -10.731034,
+        70.76161,
+        3.959458
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 792,
+      "sourcePoint": [
+        -66.082506,
+        3.557766,
+        -4.906296
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 799,
+      "sourcePoint": [
+        -63.369826,
+        -18.044941,
+        1.237408
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 829,
+      "sourcePoint": [
+        11.750813,
+        -68.72355,
+        4.434996
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1596,
+      "sourcePoint": [
+        2.109388,
+        -10.330754,
+        -59.730948
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1597,
+      "sourcePoint": [
+        -1.101901,
+        -7.119464,
+        -59.730948
+      ]
+    }
+  ],
+  "distanceAu": 3.118003623819272,
+  "orbitalPeriodYears": 5.505834156175801,
+  "sourceFields": {
+    "ID": "189",
+    "Asteroid": "(276) Adelheid",
+    "λ": "9",
+    "β": "-4",
+    "P": "6.3192",
+    "YORP": "",
+    "t0": "2445975",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "125",
+    "σD": "15",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-03-28",
+    "Comment": "size from AO is 104+/-11 km",
+    "Created": "",
+    "Modified": "2013-07-23 14:05:28",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "Original archive coordinates flagged as km, with mesh volume-equivalent diameter 125 km and archive-declared diameter 125 km. The unchanged coordinates are uniformly rescaled by 0.83200000185859968 km per source unit to the explicitly selected published volume-equivalent diameter 104 km (Hanuš et al. (2013), Icarus 226, 1045–1057); the original archive diameter is not the adopted physical scale.",
+  "sourceUnitsDescription": "Original archive coordinates flagged as km, with mesh volume-equivalent diameter 125 km and archive-declared diameter 125 km. The unchanged coordinates are uniformly rescaled by 0.83200000185859968 km per source unit to the explicitly selected published volume-equivalent diameter 104 km (Hanuš et al. (2013), Icarus 226, 1045–1057); the original archive diameter is not the adopted physical scale."
+}

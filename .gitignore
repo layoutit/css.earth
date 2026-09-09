@@ -73,3 +73,6 @@ src/planets/*/source/**/*.bpc
 # Pinned thermophysical paper originals are restored through the body acquisition plans.
 /src/planets/klytia/source/reference/hanus-2018.pdf
 /src/planets/alkmene/source/reference/hanus-2018.pdf
+
+# New reference-paper originals are reacquired from their manifest-pinned URLs.
+/src/planets/*/source/reference/*.pdf

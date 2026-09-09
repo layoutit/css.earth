@@ -1,0 +1,365 @@
+{
+  "number": 220,
+  "name": "Stephania",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/380",
+  "modelId": 588,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/588",
+  "catalog": "View model 26 -50 18.2087 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "588",
+    "Asteroid": "(220) Stephania",
+    "λ": "26",
+    "β": "-50",
+    "P": "18.2087",
+    "YORP": "",
+    "t0": "2449217",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "1.42",
+    "p3": "0.16",
+    "p4": "-0.41",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-11",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/2317/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/2318/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/2319/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/2320/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2013)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/148",
+      "file": "reference-148.html",
+      "links": [
+        {
+          "label": "2013a&a...551a..67h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2013a&a...551a..67h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H",
+          "url": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H"
+        },
+        {
+          "label": "http://arxiv.org/abs/1301.6943",
+          "url": "http://arxiv.org/abs/1301.6943"
+        }
+      ]
+    }
+  ],
+  "id": "stephania",
+  "displayName": "Stephania",
+  "lambda": 26.0,
+  "beta": -50.0,
+  "periodHours": 18.2087,
+  "version": "2013-02-11",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 32.29,
+  "uncertaintyKm": 0.33,
+  "akari": {
+    "number": 220,
+    "name": "Stephania",
+    "diameterKm": 32.29,
+    "uncertaintyKm": 0.33,
+    "detections": 13,
+    "originalRow": "220    Stephania                     11.00  0.15 13   32.29  0.33 0.069 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2320/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2318/IAUspin.txt",
+  "shapeSha256": "1d751e789d79cdd53abcc6fdc6a78c1e78b560175824f814a41c5c41e8d28fc4",
+  "shapeBytes": 81898,
+  "vertices": 1012,
+  "faces": 2020,
+  "signedVolume": 1.0000000378801934,
+  "independentSignedVolume": 1.0000000378801932,
+  "translatedSignedVolume": 1.000000037880194,
+  "originalVolumeEquivalentDiameter": 1.2407009974647976,
+  "firstVertex": [
+    0.104137,
+    0.095704,
+    0.508339
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.4807230875888946,
+    0.9002226845070057
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.676801,
+      0.897936
+    ],
+    [
+      -0.742914,
+      0.718875
+    ],
+    [
+      -0.481381,
+      0.508611
+    ]
+  ],
+  "scaleKmPerSourceUnit": 26.025609768977528,
+  "topology": {
+    "edges": 3030,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 2020,
+    "minDoubleTriangleAreaSourceUnits2": 7.884136833542406e-08
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.104137,
+        0.095704,
+        0.508339
+      ],
+      "radiusSourceUnits": 0.5276479027779793
+    },
+    {
+      "vertexIndex1": 2,
+      "pointSourceUnits": [
+        0.102815,
+        0.094258,
+        0.508611
+      ],
+      "radiusSourceUnits": 0.5273904095734013
+    },
+    {
+      "vertexIndex1": 338,
+      "pointSourceUnits": [
+        0.829767,
+        0.22749,
+        0.000989
+      ],
+      "radiusSourceUnits": 0.8603870945742967
+    },
+    {
+      "vertexIndex1": 358,
+      "pointSourceUnits": [
+        0.152157,
+        0.718875,
+        -0.071633
+      ],
+      "radiusSourceUnits": 0.7382847045435792
+    },
+    {
+      "vertexIndex1": 463,
+      "pointSourceUnits": [
+        0.897936,
+        0.006167,
+        -0.055017
+      ],
+      "radiusSourceUnits": 0.8996410185590694
+    },
+    {
+      "vertexIndex1": 507,
+      "pointSourceUnits": [
+        -0.528287,
+        0.441572,
+        -0.097684
+      ],
+      "radiusSourceUnits": 0.6954244383173487
+    },
+    {
+      "vertexIndex1": 525,
+      "pointSourceUnits": [
+        -0.676801,
+        -0.083047,
+        -0.147896
+      ],
+      "radiusSourceUnits": 0.6977317712602745
+    },
+    {
+      "vertexIndex1": 556,
+      "pointSourceUnits": [
+        -0.448188,
+        -0.742914,
+        0.066468
+      ],
+      "radiusSourceUnits": 0.8701791136105255
+    },
+    {
+      "vertexIndex1": 1009,
+      "pointSourceUnits": [
+        -0.312493,
+        -0.265596,
+        -0.481381
+      ],
+      "radiusSourceUnits": 0.632392897988268
+    },
+    {
+      "vertexIndex1": 1012,
+      "pointSourceUnits": [
+        -0.245715,
+        -0.198818,
+        -0.481381
+      ],
+      "radiusSourceUnits": 0.5758750954069815
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 589,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/589",
+      "pole": [
+        "223",
+        "-62"
+      ],
+      "version": "2013-02-11",
+      "diameterKm": "",
+      "calibratedSize": "0 (No)",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 5.32222241098528,
+  "originalSurfaceEquivalentDiameter": 1.3015821179954588,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2013 table reports nine dense lightcurves from two apparitions plus216 sparse points. Both poles remain; model588 is the representative first solution, with no resolved small-scale concavities.",
+  "papers": [
+    {
+      "file": "paper-hanus-2013.pdf",
+      "url": "https://arxiv.org/pdf/1301.6943",
+      "label": "Hanuš et al. (2013), A&A 551, A67",
+      "sha256": "2714111e6c73ffa42f93a2f40dab5628383855ce05f483050aff51b6050bea03"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 32.29,
+    "uncertaintyKm": 0.33,
+    "reportedUncertaintyKm": 0.33,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 220,
+      "name": "Stephania",
+      "diameterKm": 32.29,
+      "uncertaintyKm": 0.33,
+      "detections": 13,
+      "originalRow": "220    Stephania                     11.00  0.15 13   32.29  0.33 0.069 0.002"
+    },
+    "limitations": "Hanuš2013 table reports nine dense lightcurves from two apparitions plus216 sparse points. Both poles remain; model588 is the representative first solution, with no resolved small-scale concavities. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 32.29 km effective diameter (catalog ±0.33 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 26.025609768977528,
+    "metersPerSourceUnit": 26025.609768977527,
+    "sourceSignedVolume": 1.0000000378801934,
+    "sourceVolumeEquivalentDiameter": 1.2407009974647976,
+    "sourceSurfaceArea": 5.32222241098528,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 17627.988453135276,
+    "derivedVolumeEquivalentDiameterKm": 32.28999999999999,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2449217.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 2.348271490890079,
+  "orbitalPeriodYears": 3.5985758465088464,
+  "sourceFields": {
+    "ID": "588",
+    "Asteroid": "(220) Stephania",
+    "λ": "26",
+    "β": "-50",
+    "P": "18.2087",
+    "YORP": "",
+    "t0": "2449217",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "1.42",
+    "p3": "0.16",
+    "p4": "-0.41",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-11",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

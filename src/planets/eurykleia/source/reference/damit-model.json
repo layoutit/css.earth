@@ -1,0 +1,341 @@
+{
+  "number": 195,
+  "name": "Eurykleia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1724",
+  "modelId": 3102,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3102",
+  "catalog": "View model 101 71 16.52178 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "3102",
+    "Asteroid": "(195) Eurykleia",
+    "λ": "101",
+    "β": "71",
+    "P": "16.52178",
+    "YORP": "",
+    "t0": "2452000",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "87",
+    "σD": "6",
+    "Γ": "15",
+    "Γmin": "0",
+    "Γmax": "50",
+    "pV": "0.06",
+    "σpV": "0.02",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-06-24",
+    "Comment": "",
+    "Created": "2019-06-24 15:55:36",
+    "Modified": "2019-06-25 11:29:51",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/9827/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/9828/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/9829/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2019)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/179",
+      "file": "reference-179.html",
+      "links": [
+        {
+          "label": "2019a&a...625a.139m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2019a&a...625a.139m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2019A%26A...625A.139M",
+          "url": "http://adsabs.harvard.edu/abs/2019A%26A...625A.139M"
+        }
+      ]
+    }
+  ],
+  "id": "eurykleia",
+  "displayName": "Eurykleia",
+  "lambda": 101.0,
+  "beta": 71.0,
+  "periodHours": 16.52178,
+  "version": "2019-06-24",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 87.0,
+  "uncertaintyKm": 11.0,
+  "akari": {
+    "number": 195,
+    "name": "Eurykleia",
+    "diameterKm": 89.38,
+    "uncertaintyKm": 1.1,
+    "detections": 9,
+    "originalRow": "195    Eurykleia                      9.01  0.15  9   89.38  1.10 0.055 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/9829/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/9827/IAUspin.txt",
+  "shapeSha256": "f357504dd44ea1e679c796b0878da27943b23109fd4c576ae8e8673abaee1eb9",
+  "shapeBytes": 82384,
+  "vertices": 1018,
+  "faces": 2032,
+  "signedVolume": 344791.40013818286,
+  "independentSignedVolume": 344791.40013818286,
+  "translatedSignedVolume": 344791.40013818286,
+  "originalVolumeEquivalentDiameter": 87.00000299514714,
+  "firstVertex": [
+    0.775896,
+    -3.588127,
+    43.168289
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    35.986978687481624,
+    51.38309644077224
+  ],
+  "extentsSourceUnits": [
+    [
+      -45.883821,
+      50.003538
+    ],
+    [
+      -43.877503,
+      44.083656
+    ],
+    [
+      -40.387196,
+      43.168289
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9999999655730225,
+  "topology": {
+    "edges": 3048,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 2032,
+    "minDoubleTriangleAreaSourceUnits2": 0.0024008335356547976
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.775896,
+        -3.588127,
+        43.168289
+      ],
+      "radiusSourceUnits": 43.324102358369366
+    },
+    {
+      "vertexIndex1": 340,
+      "pointSourceUnits": [
+        49.225889,
+        6.130033,
+        9.205078
+      ],
+      "radiusSourceUnits": 50.452937609295795
+    },
+    {
+      "vertexIndex1": 434,
+      "pointSourceUnits": [
+        50.003538,
+        -0.695469,
+        10.330391
+      ],
+      "radiusSourceUnits": 51.06421905659858
+    },
+    {
+      "vertexIndex1": 468,
+      "pointSourceUnits": [
+        -18.115998,
+        44.083656,
+        5.871705
+      ],
+      "radiusSourceUnits": 48.021193544823156
+    },
+    {
+      "vertexIndex1": 501,
+      "pointSourceUnits": [
+        -45.883821,
+        -0.844758,
+        3.674654
+      ],
+      "radiusSourceUnits": 46.03848094429616
+    },
+    {
+      "vertexIndex1": 510,
+      "pointSourceUnits": [
+        -42.21134,
+        -19.206112,
+        -6.177017
+      ],
+      "radiusSourceUnits": 46.784906773129656
+    },
+    {
+      "vertexIndex1": 532,
+      "pointSourceUnits": [
+        1.111498,
+        -43.877503,
+        -3.824927
+      ],
+      "radiusSourceUnits": 44.05792509724376
+    },
+    {
+      "vertexIndex1": 1017,
+      "pointSourceUnits": [
+        14.610547,
+        15.054205,
+        -40.387196
+      ],
+      "radiusSourceUnits": 45.5106885529504
+    },
+    {
+      "vertexIndex1": 1018,
+      "pointSourceUnits": [
+        14.589651,
+        15.033379,
+        -40.387196
+      ],
+      "radiusSourceUnits": 45.49709882181344
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 3103,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3103",
+      "pole": [
+        "352",
+        "83"
+      ],
+      "version": "2019-06-24",
+      "diameterKm": "91",
+      "calibratedSize": "1 (Yes)",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 24736.055240875678,
+  "originalSurfaceEquivalentDiameter": 88.73404604974968,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Marciniak2019 Table1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
+  "papers": [
+    {
+      "file": "paper-marciniak-2019.pdf",
+      "url": "https://arxiv.org/pdf/1905.06056",
+      "label": "Marciniak et al. (2019), A&A 625, A139",
+      "sha256": "ce09969d483e45a7e289b075ce36bf1158f39920631e4beec8b60707e1a4fc9c"
+    }
+  ],
+  "archiveDeclaredDiameterKm": 87.0,
+  "archiveDeclaredUncertaintyKm": 6.0,
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 87.0,
+    "uncertaintyKm": 11.0,
+    "reportedUncertaintyKm": 11.0,
+    "uncertaintyKind": "The publication has asymmetric3-sigma errors -9/+11 km. uncertaintyKm=11 is a conservative envelope for consumers requiring one symmetric field; the visible description retains the published78–98 km range.",
+    "diameterSemantics": "Published volume-equivalent diameter of the selected shape solution; isotropic transfer retains source shape and connectivity.",
+    "sourceUrl": "https://arxiv.org/pdf/1905.06056",
+    "reference": "Marciniak et al. (2019), A&A 625, A139",
+    "sourceLabel": "Marciniak et al. (2019), A&A 625, A139",
+    "limitations": "Marciniak2019 Table1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
+    "publishedUncertainty": {
+      "lowerKm": 9,
+      "upperKm": 11,
+      "confidence": "3 sigma",
+      "source": "Marciniak2019 section4.3 and Table2"
+    },
+    "visibleDescription": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range 78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9999999655730225,
+    "metersPerSourceUnit": 999.9999655730226,
+    "sourceSignedVolume": 344791.40013818286,
+    "sourceVolumeEquivalentDiameter": 87.00000299514714,
+    "sourceSurfaceArea": 24736.055240875678,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 344791.36452780676,
+    "derivedVolumeEquivalentDiameterKm": 87.0,
+    "archiveDeclaredDiameterKm": 87.0,
+    "archiveDeclaredUncertaintyKm": 6.0
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2452000.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Archive km coordinates; uniform diameter reconciliation only.",
+  "distanceAu": 2.878679745406444,
+  "orbitalPeriodYears": 4.884253882406974,
+  "sourceFields": {
+    "ID": "3102",
+    "Asteroid": "(195) Eurykleia",
+    "λ": "101",
+    "β": "71",
+    "P": "16.52178",
+    "YORP": "",
+    "t0": "2452000",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "87",
+    "σD": "6",
+    "Γ": "15",
+    "Γmin": "0",
+    "Γmax": "50",
+    "pV": "0.06",
+    "σpV": "0.02",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-06-24",
+    "Comment": "",
+    "Created": "2019-06-24 15:55:36",
+    "Modified": "2019-06-25 11:29:51",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

@@ -1,0 +1,86 @@
+{
+  "id": "sibylla",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sibylla",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 73.24
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "6db5128f12f4eab8a70302312347fff5d735d0efb9f706c195956ce4648297bb"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "30f511344f2e86e5ae2944fca712dbc974924b11205aa5d155816a8f4b8037c6"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "7578be1234e97ec0a33e467d74a98f22b860b2b20b3ccb7c68668d077301c7f4"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "783e42a674be789d1f3c0fc81d28a781cc1445f9e0c8fe5d5af1f373ffcb3bbe"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "bcbccbb09f525b0002d8dc9d2f9e6b5032ab6e1ac3420125a9506d9047ee1b6a"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "2aad847913aeb5d1af4cdf23bbd15cfca2ff7adf753cfa384d0f33da290b55a9"
+        }
+      ]
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
+}

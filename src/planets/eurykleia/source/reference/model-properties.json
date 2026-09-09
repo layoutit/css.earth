@@ -1,0 +1,98 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3102",
+  "modelId": 3102,
+  "modelVersion": "2019-06-24",
+  "diameterKm": 87,
+  "diameterInterpretation": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 87,
+    "uncertaintyKm": 11,
+    "reportedUncertaintyKm": 11,
+    "uncertaintyKind": "The publication has asymmetric3-sigma errors -9/+11 km. uncertaintyKm=11 is a conservative envelope for consumers requiring one symmetric field; the visible description retains the published78–98 km range.",
+    "diameterSemantics": "Published volume-equivalent diameter of the selected shape solution; isotropic transfer retains source shape and connectivity.",
+    "sourceUrl": "https://arxiv.org/pdf/1905.06056",
+    "reference": "Marciniak et al. (2019), A&A 625, A139",
+    "sourceLabel": "Marciniak et al. (2019), A&A 625, A139",
+    "limitations": "Marciniak2019 Table1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
+    "publishedUncertainty": {
+      "lowerKm": 9,
+      "upperKm": 11,
+      "confidence": "3 sigma",
+      "source": "Marciniak2019 section4.3 and Table2"
+    },
+    "visibleDescription": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range78–98 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9999999655730225,
+    "metersPerSourceUnit": 999.9999655730226,
+    "sourceSignedVolume": 344791.40013818286,
+    "sourceVolumeEquivalentDiameter": 87.00000299514714,
+    "sourceSurfaceArea": 24736.055240875678,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 344791.36452780676,
+    "derivedVolumeEquivalentDiameterKm": 87,
+    "archiveDeclaredDiameterKm": 87,
+    "archiveDeclaredUncertaintyKm": 6
+  },
+  "periodHours": 16.52178,
+  "poleEclipticJ2000Degrees": [
+    101,
+    71
+  ],
+  "modelLimitations": "Marciniak2019 Table1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/9829/shape.txt",
+    "vertices": 1018,
+    "faces": 2032,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 999.9999655730226,
+    "firstVertexKm": [
+      0.7758959732882459,
+      -3.5881268764716325,
+      43.16828751384629
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      95.88735569888806,
+      87.96115597176315,
+      83.5554821234372
+    ],
+    "volumeCubicKm": 344791.36452780676,
+    "volumeEquivalentRadiusKm": 43.5,
+    "radialRangeKm": [
+      35.98697744855872,
+      51.383094671807534
+    ]
+  },
+  "elevation": [
+    -8,
+    8
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2032,
+    "sourceVertices": 1018,
+    "weldedVertices": 1018,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 870,
+    "estimatedErrorMeters": 382.168212890625,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 344165178167408.9
+    }
+  }
+}

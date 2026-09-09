@@ -1,0 +1,86 @@
+{
+  "id": "dresda",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dresda",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 12.87
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "f857e1a56744e6d13758d26dc373ff07c2379d1d63c09eba81b5487178fc7ee2"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "ef7836cead71d2339b9f4869ddc9138e526f5ac02359eeccc1626fd4df0e545b"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "694b9c2038db68bc98966054fd57eea9229c554e8bd7879b612ab24614af2b6a"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "98fdee07256acc7c67004e499fbe5da39c3d7c6b489970eff9393d1d76eca484"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "7a2a005a82338558e4a7de3f99af88b1e1fda00891ccbcbd25e7ffd552316716"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "e58c477fcd87dbf22fc5c0704e8f3a10bc8124a4c301677c40380a466ea8fed0"
+        }
+      ]
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
+}

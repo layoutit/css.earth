@@ -1,0 +1,365 @@
+{
+  "number": 199,
+  "name": "Byblis",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/337",
+  "modelId": 506,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/506",
+  "catalog": "View model 165 9 5.22063 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "506",
+    "Asteroid": "(199) Byblis",
+    "λ": "165",
+    "β": "9",
+    "P": "5.22063",
+    "YORP": "",
+    "t0": "2450965",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.39",
+    "p3": "0.06",
+    "p4": "-0.89",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-26",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1987/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1988/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1989/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1990/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2013)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/148",
+      "file": "reference-148.html",
+      "links": [
+        {
+          "label": "2013a&a...551a..67h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2013a&a...551a..67h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H",
+          "url": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H"
+        },
+        {
+          "label": "http://arxiv.org/abs/1301.6943",
+          "url": "http://arxiv.org/abs/1301.6943"
+        }
+      ]
+    }
+  ],
+  "id": "byblis",
+  "displayName": "Byblis",
+  "lambda": 165.0,
+  "beta": 9.0,
+  "periodHours": 5.22063,
+  "version": "2013-02-26",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 54.65,
+  "uncertaintyKm": 1.33,
+  "akari": {
+    "number": 199,
+    "name": "Byblis",
+    "diameterKm": 54.65,
+    "uncertaintyKm": 1.33,
+    "detections": 3,
+    "originalRow": "199    Byblis                         8.30  0.15  3   54.65  1.33 0.285 0.017"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1990/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1988/IAUspin.txt",
+  "shapeSha256": "3482d76fa479e2335f9e524abeaa2a38a9f0d974298a2520006bfa807d2cd056",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.000000080119383,
+  "independentSignedVolume": 1.000000080119383,
+  "translatedSignedVolume": 1.0000000801193851,
+  "originalVolumeEquivalentDiameter": 1.2407010149335316,
+  "firstVertex": [
+    0.178419,
+    0.236949,
+    0.446121
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.48633650115532145,
+    0.769419743265014
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.644092,
+      0.668955
+    ],
+    [
+      -0.721692,
+      0.751668
+    ],
+    [
+      -0.480895,
+      0.47333
+    ]
+  ],
+  "scaleKmPerSourceUnit": 44.04767896714244,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 2040,
+    "minDoubleTriangleAreaSourceUnits2": 1.33976369787398e-06
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.178419,
+        0.236949,
+        0.446121
+      ],
+      "radiusSourceUnits": 0.5357257832165632
+    },
+    {
+      "vertexIndex1": 6,
+      "pointSourceUnits": [
+        -0.097148,
+        0.236264,
+        0.47333
+      ],
+      "radiusSourceUnits": 0.537865875939346
+    },
+    {
+      "vertexIndex1": 341,
+      "pointSourceUnits": [
+        0.64049,
+        0.184509,
+        0.200117
+      ],
+      "radiusSourceUnits": 0.6959294683155758
+    },
+    {
+      "vertexIndex1": 445,
+      "pointSourceUnits": [
+        0.668955,
+        0.027389,
+        0.112948
+      ],
+      "radiusSourceUnits": 0.6789758464407993
+    },
+    {
+      "vertexIndex1": 469,
+      "pointSourceUnits": [
+        -0.055746,
+        0.751668,
+        -0.099229
+      ],
+      "radiusSourceUnits": 0.7602360114997184
+    },
+    {
+      "vertexIndex1": 500,
+      "pointSourceUnits": [
+        -0.644092,
+        -0.10999,
+        0.036788
+      ],
+      "radiusSourceUnits": 0.6544506562820455
+    },
+    {
+      "vertexIndex1": 512,
+      "pointSourceUnits": [
+        -0.571604,
+        -0.427721,
+        -0.014155
+      ],
+      "radiusSourceUnits": 0.7140565458575392
+    },
+    {
+      "vertexIndex1": 525,
+      "pointSourceUnits": [
+        -0.018095,
+        -0.721692,
+        0.166494
+      ],
+      "radiusSourceUnits": 0.7408691003983093
+    },
+    {
+      "vertexIndex1": 1021,
+      "pointSourceUnits": [
+        0.113281,
+        0.161776,
+        -0.480895
+      ],
+      "radiusSourceUnits": 0.5198692721848446
+    },
+    {
+      "vertexIndex1": 1022,
+      "pointSourceUnits": [
+        0.063437,
+        0.111932,
+        -0.480895
+      ],
+      "radiusSourceUnits": 0.4978082227304005
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 507,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/507",
+      "pole": [
+        "344",
+        "-24"
+      ],
+      "version": "2013-02-26",
+      "diameterKm": "",
+      "calibratedSize": "0 (No)",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 5.082119344643866,
+  "originalSurfaceEquivalentDiameter": 1.2718839688297159,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2013 table reports 22 dense lightcurves from five apparitions plus 292 sparse measurements. Both published poles remain; model 506 is a reproducible representative.",
+  "papers": [
+    {
+      "file": "paper-hanus-2013.pdf",
+      "url": "https://arxiv.org/pdf/1301.6943",
+      "label": "Hanuš et al. (2013), A&A 551, A67",
+      "sha256": "2714111e6c73ffa42f93a2f40dab5628383855ce05f483050aff51b6050bea03"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 54.65,
+    "uncertaintyKm": 1.33,
+    "reportedUncertaintyKm": 1.33,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 199,
+      "name": "Byblis",
+      "diameterKm": 54.65,
+      "uncertaintyKm": 1.33,
+      "detections": 3,
+      "originalRow": "199    Byblis                         8.30  0.15  3   54.65  1.33 0.285 0.017"
+    },
+    "limitations": "Hanuš2013 table reports 22 dense lightcurves from five apparitions plus 292 sparse measurements. Both published poles remain; model 506 is a reproducible representative. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 54.65 km effective diameter (catalog ±1.33 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 44.04767896714244,
+    "metersPerSourceUnit": 44047.67896714244,
+    "sourceSignedVolume": 1.000000080119383,
+    "sourceVolumeEquivalentDiameter": 1.2407010149335316,
+    "sourceSurfaceArea": 5.082119344643866,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 85461.2264701271,
+    "derivedVolumeEquivalentDiameterKm": 54.64999999999998,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2450965.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 3.1628105645290394,
+  "orbitalPeriodYears": 5.6249410250187495,
+  "sourceFields": {
+    "ID": "506",
+    "Asteroid": "(199) Byblis",
+    "λ": "165",
+    "β": "9",
+    "P": "5.22063",
+    "YORP": "",
+    "t0": "2450965",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.39",
+    "p3": "0.06",
+    "p4": "-0.89",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-26",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

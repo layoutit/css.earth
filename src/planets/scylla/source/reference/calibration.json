@@ -1,0 +1,25 @@
+{
+  "method": "thermal-effective-diameter-as-volume-approximation",
+  "diameterKm": 39.21,
+  "uncertaintyKm": 0.97,
+  "reportedUncertaintyKm": 0.97,
+  "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+  "systematicUncertaintyFraction": null,
+  "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+  "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+  "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+  "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+  "catalog": {
+    "number": 155,
+    "name": "Scylla",
+    "diameterKm": 39.21,
+    "uncertaintyKm": 0.97,
+    "detections": 6,
+    "originalRow": "155    Scylla                        11.39  0.15  6   39.21  0.97 0.035 0.002"
+  },
+  "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select second archive pole 920 (356,53). Hanuš et al. (2018), Table A.3, rejects the revised (190,65) family and favors revised (346,41), corresponding to the selected broad family rather than archive 919 (201,69). The publication revised the nominal shape; its exact revised mesh is not located in the surveyed DAMIT listing, so the 39.0 ±0.8 km VS-TPM size is not silently assigned to the old mesh. AKARI 39.21 ±0.97 km is retained only as an explicit display-scale approximation.",
+  "scaleKmPerSourceUnit": 31.603103183248958,
+  "metersPerSourceUnit": 31603.103183248957,
+  "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+  "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 39.21 km (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery."
+}

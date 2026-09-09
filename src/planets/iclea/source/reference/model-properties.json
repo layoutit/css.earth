@@ -1,0 +1,89 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5017",
+  "modelId": 5017,
+  "modelVersion": "2023-10-03",
+  "diameterKm": 86,
+  "diameterInterpretation": "Convex light-curve reconstruction scaled by stellar occultations: 86 km volume-equivalent diameter (model range79–99 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 86,
+    "uncertaintyKm": 13,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5017",
+    "sourceLabel": "DAMIT model 5017",
+    "reference": "DAMIT model 5017",
+    "limitations": "Marciniak2023 §5.3 prefers pole1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole2. Table1 gives volume-equivalent86 km with asymmetric interval79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error. The archive keeps the larger13 km side as a symmetric error field; the actual asymmetric range is preserved here.",
+    "visibleDescription": "Convex light-curve reconstruction scaled by stellar occultations: 86 km volume-equivalent diameter (model range79–99 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "publishedUncertainty": {
+      "lowerKm": 7,
+      "upperKm": 13,
+      "confidence": "Envelope of acceptable vertically varied models, not a Gaussian sigma interval",
+      "source": "Marciniak2023 Table1 and section4"
+    },
+    "scaleKmPerSourceUnit": 1.0000000026378641,
+    "metersPerSourceUnit": 1000.0000026378641
+  },
+  "periodHours": 15.3612,
+  "poleEclipticJ2000Degrees": [
+    31,
+    13
+  ],
+  "modelLimitations": "Marciniak2023 §5.3 prefers pole1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole2. Table1 gives volume-equivalent86 km with asymmetric interval79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error. The archive keeps the larger13 km side as a symmetric error field; the actual asymmetric range is preserved here.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/127591/shape.txt",
+    "vertices": 994,
+    "faces": 1984,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 1000.0000026378641,
+    "firstVertexKm": [
+      -0.8591480022663157,
+      10.308570027192607,
+      39.71942110477443
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      100.66584026554281,
+      97.68051025766792,
+      84.40141022263946
+    ],
+    "volumeCubicKm": 333038.14281195175,
+    "volumeEquivalentRadiusKm": 43,
+    "radialRangeKm": [
+      36.8176597177502,
+      52.36536920094957
+    ]
+  },
+  "elevation": [
+    -10,
+    10
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1984,
+    "sourceVertices": 994,
+    "weldedVertices": 994,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 860,
+    "estimatedErrorMeters": 338.2494812011719,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 332465651960993.5
+    }
+  }
+}

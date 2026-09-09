@@ -1,0 +1,86 @@
+{
+  "id": "weringia",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Weringia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 16.13
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "625b4c923b14e4e3286e835e164472aba02164819f8ba02fa27050c9f0f13a20"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "3e42b23b2852ea129e0be08fcc5efad256b8c235c0f68018f682e430d79e6a8c"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "dae8b3240a4d6443d8cc7048e5e6c6d53567a00f1b2d7b4298cf1bcc96d91e02"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "fce8df82a8fc1165b0d8682aa1fa574bc20ec79656c906e586c543071d4573bf"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "06ea6c6cf48a4dc45097b75cb4fd65612c484098b71e7d6aa0a1666fbf200643"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "f6f3252253e7247e2c4ca010d815c64bd7e9fb0fcc90a860f5a5b7928f26a3bd"
+        }
+      ]
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
+}

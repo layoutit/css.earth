@@ -1,0 +1,364 @@
+{
+  "number": 221,
+  "name": "Eos",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1017",
+  "modelId": 1743,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1743",
+  "catalog": "View model 289 -23 10.44212 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1743",
+    "Asteroid": "(221) Eos",
+    "λ": "289",
+    "β": "-23",
+    "P": "10.44212",
+    "YORP": "",
+    "t0": "2443716",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.9",
+    "p3": "0.04",
+    "p4": "-0.83",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2017-03-31",
+    "Comment": "",
+    "Created": "2017-03-31 09:37:55",
+    "Modified": "2017-04-03 10:33:30",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/5966/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/5967/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/5968/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2018)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/167",
+      "file": "reference-167.html",
+      "links": [
+        {
+          "label": "2018icar..299...84h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2018icar..299...84h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2018Icar..299...84H",
+          "url": "http://adsabs.harvard.edu/abs/2018Icar..299...84H"
+        },
+        {
+          "label": "https://arxiv.org/abs/1707.05507",
+          "url": "https://arxiv.org/abs/1707.05507"
+        }
+      ]
+    }
+  ],
+  "id": "eos",
+  "displayName": "Eos",
+  "lambda": 289.0,
+  "beta": -23.0,
+  "periodHours": 10.44212,
+  "version": "2017-03-31",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 107.74,
+  "uncertaintyKm": 1.51,
+  "akari": {
+    "number": 221,
+    "name": "Eos",
+    "diameterKm": 107.74,
+    "uncertaintyKm": 1.51,
+    "detections": 6,
+    "originalRow": "221    Eos                            7.67  0.13  6  107.74  1.51 0.131 0.005"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/5968/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/5966/IAUspin.txt",
+  "shapeSha256": "83fdebb219ce6f345437cd87e7009a4f15a93682e9e825ebe135f7579ba3c9d4",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.00000002482977,
+  "independentSignedVolume": 1.0000000248297698,
+  "translatedSignedVolume": 1.0000000248297687,
+  "originalVolumeEquivalentDiameter": 1.2407009920675733,
+  "firstVertex": [
+    0.222672,
+    0.109761,
+    0.530011
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5374015621144025,
+    0.727021452593388
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.665337,
+      0.668439
+    ],
+    [
+      -0.67687,
+      0.698475
+    ],
+    [
+      -0.536863,
+      0.567333
+    ]
+  ],
+  "scaleKmPerSourceUnit": 86.83800584414465,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 2040,
+    "minDoubleTriangleAreaSourceUnits2": 2.3716436732587054e-07
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.222672,
+        0.109761,
+        0.530011
+      ],
+      "radiusSourceUnits": 0.585270840573832
+    },
+    {
+      "vertexIndex1": 4,
+      "pointSourceUnits": [
+        0.107891,
+        -0.154388,
+        0.567333
+      ],
+      "radiusSourceUnits": 0.5977816117228766
+    },
+    {
+      "vertexIndex1": 341,
+      "pointSourceUnits": [
+        0.648981,
+        0.156015,
+        0.075998
+      ],
+      "radiusSourceUnits": 0.6717832348235553
+    },
+    {
+      "vertexIndex1": 468,
+      "pointSourceUnits": [
+        -0.020757,
+        0.698475,
+        -0.095696
+      ],
+      "radiusSourceUnits": 0.705305538819879
+    },
+    {
+      "vertexIndex1": 498,
+      "pointSourceUnits": [
+        -0.665337,
+        0.133347,
+        -0.059329
+      ],
+      "radiusSourceUnits": 0.681156866088128
+    },
+    {
+      "vertexIndex1": 512,
+      "pointSourceUnits": [
+        -0.387055,
+        -0.528862,
+        0.087687
+      ],
+      "radiusSourceUnits": 0.6612076814723193
+    },
+    {
+      "vertexIndex1": 526,
+      "pointSourceUnits": [
+        0.082473,
+        -0.67687,
+        0.126646
+      ],
+      "radiusSourceUnits": 0.6935373111412247
+    },
+    {
+      "vertexIndex1": 558,
+      "pointSourceUnits": [
+        0.668439,
+        0.133235,
+        -0.07021
+      ],
+      "radiusSourceUnits": 0.6851946482905423
+    },
+    {
+      "vertexIndex1": 1021,
+      "pointSourceUnits": [
+        0.012814,
+        0.022263,
+        -0.536863
+      ],
+      "radiusSourceUnits": 0.5374771814077319
+    },
+    {
+      "vertexIndex1": 1022,
+      "pointSourceUnits": [
+        0.011615,
+        0.021063,
+        -0.536863
+      ],
+      "radiusSourceUnits": 0.5374015621144025
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 1744,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1744",
+      "pole": [
+        "119",
+        "-37"
+      ],
+      "version": "2017-03-31",
+      "diameterKm": "",
+      "calibratedSize": "0 (No)",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 4.959746162215649,
+  "originalSurfaceEquivalentDiameter": 1.256477710266026,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2018 Eos-family study TableB.1 reports27 dense lightcurves across six apparitions and304 sparse measurements, model quality3. Both poles remain; model1743 is selected without rejecting1744. That paper’s91.2±2.2 km column is WISE radiometry rather than a shape calibration; it is retained as a competing thermal estimate against AKARI107.74±1.51 km. The disagreement is an additional systematic limit, not grounds for averaging the catalogs.",
+  "papers": [
+    {
+      "file": "paper-hanus-2018.pdf",
+      "url": "https://arxiv.org/pdf/1707.05507",
+      "label": "Hanuš et al. (2018), Icarus 299, 84–96",
+      "sha256": "b0d28b4c134aac265eb1684101f70e152984287199ee6991e3703eea14ac66ea"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 107.74,
+    "uncertaintyKm": 1.51,
+    "reportedUncertaintyKm": 1.51,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 221,
+      "name": "Eos",
+      "diameterKm": 107.74,
+      "uncertaintyKm": 1.51,
+      "detections": 6,
+      "originalRow": "221    Eos                            7.67  0.13  6  107.74  1.51 0.131 0.005"
+    },
+    "limitations": "Hanuš2018 Eos-family study TableB.1 reports27 dense lightcurves across six apparitions and304 sparse measurements, model quality3. Both poles remain; model1743 is selected without rejecting1744. That paper’s91.2±2.2 km column is WISE radiometry rather than a shape calibration; it is retained as a competing thermal estimate against AKARI107.74±1.51 km. The disagreement is an additional systematic limit, not grounds for averaging the catalogs. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 107.74 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 86.83800584414465,
+    "metersPerSourceUnit": 86838.00584414465,
+    "sourceSignedVolume": 1.00000002482977,
+    "sourceVolumeEquivalentDiameter": 1.2407009920675733,
+    "sourceSurfaceArea": 4.959746162215649,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 654831.4599010434,
+    "derivedVolumeEquivalentDiameterKm": 107.73999999999997,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2443716.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 3.011699855683851,
+  "orbitalPeriodYears": 5.226677869283836,
+  "sourceFields": {
+    "ID": "1743",
+    "Asteroid": "(221) Eos",
+    "λ": "289",
+    "β": "-23",
+    "P": "10.44212",
+    "YORP": "",
+    "t0": "2443716",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.9",
+    "p3": "0.04",
+    "p4": "-0.83",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2017-03-31",
+    "Comment": "",
+    "Created": "2017-03-31 09:37:55",
+    "Modified": "2017-04-03 10:33:30",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}
