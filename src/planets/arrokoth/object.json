@@ -85,12 +85,43 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/arrokoth-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ab97246c43f840a01bca086b8b23a9158a81eb9a57653aabd06ba02253b6ee2b"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2825689377771.6777,
+        -5381877859225.271,
+        -2128517993934.0159
+      ],
+      "presentationToReference": [
+        0.43892614272844166,
+        -2.7755575615628914e-17,
+        0.8985231445152271,
+        -0.8243788674467161,
+        0.3977771559319137,
+        0.4027068625265626,
+        -0.3574119809642669,
+        -0.9174820620691817,
+        0.17459479271868478
+      ],
+      "orbitUpReference": [
+        2.7755575615628914e-17,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 43.25217391304348,
+      "bodyRadiusM": 9948
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    "sha256": "d5f17b8677cf84d4ebc96c82c14cc69a611c41f34e7f4b3df71fce21c29f088f"
   }
 }

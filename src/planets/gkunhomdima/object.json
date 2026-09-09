@@ -80,12 +80,43 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/gkunhomdima-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "85d2b4f662f50af6c97e7a94945a0bda9af92d96606af592b3df0304eb558ddc"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        579291211626.7227,
+        5931437384936.034,
+        605514914765.7139
+      ],
+      "presentationToReference": [
+        0.10141126205085166,
+        0,
+        -0.9948445888324735,
+        0.9127520648003854,
+        0.39777715593191365,
+        0.09304301382345356,
+        0.3957264511400353,
+        -0.9174820620691818,
+        0.04033908339805381
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191365,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1377.7969089408398,
+      "bodyRadiusM": 316893.28905639314
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    "sha256": "1a0ac37b25d121af7adcdf6d9d911c2d7d209fc8272cf3addd20dabc3aadf344"
   }
 }

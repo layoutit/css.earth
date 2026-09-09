@@ -83,12 +83,43 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/quaoar-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6268942da690e00c4c6b165c44b5b7ab6d4cb70924429a796b3ca8964b9d890d"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1261604705477.711,
+        -6026286814972.977,
+        -1647890743893.166
+      ],
+      "presentationToReference": [
+        0.19987805621908952,
+        0,
+        0.9798207808788699,
+        -0.8989679904989817,
+        0.39777715593191376,
+        0.1833845311822701,
+        -0.3897503235409837,
+        -0.9174820620691819,
+        0.07950692473602858
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 2379.018845256929,
+      "bodyRadiusM": 547174.3344090937
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    "sha256": "9335f2812d4f58e70e6ce56e7fdd1515dd4d13c0708244b7c45f1b5a1ff018c1"
   }
 }

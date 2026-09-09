@@ -1,0 +1,22 @@
+{
+  "base": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
+  "added": [
+    "arrokoth",
+    "quaoar",
+    "gkunhomdima"
+  ],
+  "atlases": [
+    {
+      "filename": "planet-markers.webp",
+      "baseSha256": "980779234321d5b257f222126667acdc40a43d3435ce059011c6864300bb435e",
+      "outputSha256": "42152e723b5954940a76b69c63204fe72e26475287d4016179fc7da9b8a22d51",
+      "preservedMarkers": 406
+    },
+    {
+      "filename": "planet-markers@2x.webp",
+      "baseSha256": "6f87b64657e4b90352684877d3e80a8799c1c45c83132cdd57e275901feb9bbb",
+      "outputSha256": "830614b5b50f43503f8312e60e6bd6e1d7e32a02966c2ef18026ff9acec67e72",
+      "preservedMarkers": 406
+    }
+  ]
+}

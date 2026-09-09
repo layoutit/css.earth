@@ -152,6 +152,7 @@ export async function preparePlanetarySystem({
     dwarfPlanetElements,
     dwarfPlanetPositionKm,
     SMALL_BODY_IDS,
+    TRANS_NEPTUNIAN_IDS = [],
     asteroidElements,
     asteroidPositionKm,
     COMET_IDS = [],
@@ -303,7 +304,7 @@ export async function preparePlanetarySystem({
       const { semiMajorAxisKm, eccentricity, normalIcrf, perihelionIcrf } =
         heliocentricOrbitFromState(BODY_HELIOCENTRIC_STATES[id], BODIES.sun.gravitationalParameterKm3PerS2);
       return {
-        kind: COMET_IDS.includes(id) ? 'comet' : smallBodies.includes(id) ? 'asteroid' : dwarfPlanets.includes(id) ? 'dwarf-planet' : 'planet',
+        kind: COMET_IDS.includes(id) ? 'comet' : TRANS_NEPTUNIAN_IDS.includes(id) ? 'trans-neptunian' : smallBodies.includes(id) ? 'asteroid' : dwarfPlanets.includes(id) ? 'dwarf-planet' : 'planet',
         semiMajorAxisAu: semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity,
         inclinationDegrees: Math.acos(Math.max(-1, Math.min(1, normalIcrf[2]))) * 180 / Math.PI,
@@ -318,7 +319,7 @@ export async function preparePlanetarySystem({
       const elements = (smallBodies.includes(id) ? smallBodyElements : dwarfPlanetElements)(id);
       const { normalIcrf, perihelionIcrf } = keplerOrientation(elements);
       return {
-        kind: COMET_IDS.includes(id) ? 'comet' : smallBodies.includes(id) ? 'asteroid' : 'dwarf-planet',
+        kind: COMET_IDS.includes(id) ? 'comet' : TRANS_NEPTUNIAN_IDS.includes(id) ? 'trans-neptunian' : smallBodies.includes(id) ? 'asteroid' : 'dwarf-planet',
         semiMajorAxisAu: elements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity: elements.eccentricity,
         inclinationDegrees: elements.inclinationRad * 180 / Math.PI,

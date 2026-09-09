@@ -129,11 +129,14 @@ for body in INPUTS['bodies']:
     write(source / 'measurements.json', dict(schema='cssearth-trans-neptunian-source@1', **body, checkedOn=INPUTS['checkedOn']))
     write(source / 'preparation/acquisition.json', acquisition)
     for file in ['stars/ESO-IMAGE-LICENSE.md', 'stars/LICENSE.md', 'stars/hyg-v41-field.json', 'presentation/minimap.json']:
-        write(source / file, original('src/planets/annefrank/source/' + file))
+        write(source / file, original('src/planets/annefrank/source/' + file).replace('cssannefrank-prepared-star-source', f'css{ident}-prepared-star-source'))
     # Common inputs must be restored from their pinned acquisition records.
     for file in ['material/neutral.png','stars/eso0932a.tif','presentation/InterVariable.ttf']:
         restored(BASE / 'source' / file, source / file)
     manifest['inputs'].append(dict(id='model-surface', path='material/neutral.png', **pin(source/'material/neutral.png'), origin='https://github.com/layoutit/cssEarth', credit='cssEarth missing-coverage grid', license='MIT', consumers=['surfaces'], width=64,height=32,lensId='model',label='Shape model',falseColor=False,coverage='Authored neutral material; no observed imagery.',projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
+    for entry in manifest['inputs']:
+        entry.setdefault('acquisition', 'Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.')
+        entry.setdefault('redistribution', 'Retain source attribution and model qualifications; upstream papers are not relicensed.')
     write(source / 'manifest.json', manifest)
     descriptor = template('object.json', body)
     descriptor['properties'].pop('worldFrame', None)

@@ -54,7 +54,9 @@
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 316893.28905639314
-      }
+      },
+      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     },
     {
       "id": "model-surface",
@@ -77,7 +79,9 @@
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 316893.28905639314
-      }
+      },
+      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     }
   ],
   "documents": [
@@ -161,8 +165,8 @@
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 852,
-      "expectedSha256": "8bb8f5f9e2413966ae1891c33bd2bc3917fed810b160607950398394e60bb854",
+      "expectedBytes": 854,
+      "expectedSha256": "7d737d8796e4eb749592d8a6f92f78e2d090f990fb6f038b731fc8b807c350f4",
       "purpose": "Pinned source observation, interpretation or preparation input."
     }
   ],

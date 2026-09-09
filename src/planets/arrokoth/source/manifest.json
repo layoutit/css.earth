@@ -54,7 +54,9 @@
         "type": "body-fixed-cartesian-mesh",
         "units": "km",
         "metersPerUnit": 1000
-      }
+      },
+      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     },
     {
       "path": "science/albedo_arrokoth4_fp36h2_masked1.fits",
@@ -76,7 +78,9 @@
         "description": "Two south polar azimuthal equidistant projections; source UVs identify each lobe."
       },
       "expectedBytes": 2882880,
-      "expectedSha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39"
+      "expectedSha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
+      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     },
     {
       "id": "model-surface",
@@ -99,7 +103,9 @@
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 9948
-      }
+      },
+      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     }
   ],
   "documents": [
@@ -213,8 +219,8 @@
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 852,
-      "expectedSha256": "8bb8f5f9e2413966ae1891c33bd2bc3917fed810b160607950398394e60bb854",
+      "expectedBytes": 851,
+      "expectedSha256": "a4ec0576d6ea4a95dd78d0aa2e87e0ee9e2a9f31564a5bf5553be82a5dac1f20",
       "purpose": "Pinned source observation, interpretation or preparation input."
     }
   ],
