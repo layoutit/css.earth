@@ -10,9 +10,11 @@ Chariklo and Bienor use published global shape constraints. These smooth ellipso
 | Source/package closure | Chariklo verifies 17 source records; Bienor 16. Both prepared transport SHA-256 pins and asset inventories pass existing validators. Shadows and Orbit default off. |
 | Orbit context | Existing JPL Horizons generator and independent vector fixtures at the repository epoch and ±30 days. Maximum epoch error is 0.000002055 km; maximum endpoint error is 820.390 km. The latter qualifies a bounded two-body approximation, not an encounter ephemeris. |
 | Delivery | All 63 content-addressed image assets published, then independently downloaded through the standard setup implementation into an empty directory with one transfer at a time. Zero files reused; all 14,047,134 bytes match manifest sizes and SHA-256 hashes. |
-| Shared navigation | Both densities preserve visible pixels of all 406 previous markers. The existing marker binding and object serializer refresh 408 transports without presentation recompilation; all non-marker runtime fields are asserted unchanged. |
+| Static build | Final shared-context integration builds 410 pages with the existing renderer. Both new body transports and the updated Sun transport match their descriptor SHA-256 pins in the built output. |
+| Browser | Headless Chrome, 1440×900 CSS pixels, DPR 1 and 2: both body routes pass native triangle, normal-grid, off-default, close-view, optional-shadow and fresh-asset checks. Both names appear in the 289-asteroid category and search; route handoffs keep exactly one scene and camera. |
+| Shared navigation | Both densities preserve visible pixels of all 406 previous markers. The existing marker binding and object serializer refresh 408 transports without presentation recompilation; all non-marker runtime fields are asserted unchanged. Both new records are also present in the Sun's authored world context, with matching manifest and recipe source pins. |
 
-Production build and browser evidence are pending. No complete all-body test-suite or physical-device performance claim is made. The browser qualification must inspect Chariklo's initial framing, zoomed physical ring/body scale, optional shadows and drag. Ring triangles are not included in the body's surface-picking structure; no separate ring-picking capability is claimed.
+No complete all-body test-suite or physical-device performance claim is made. Both default views, Chariklo's optional shadows and rotated ring plane, and both close views were visually inspected. Ring dimensions remain fixed relative to the body during zoom. The default Chariklo view contains the full rings; the measured drag begins near their projected extent and rotates the same retained carrier. Ring triangles are not included in the body's surface-picking structure; no separate ring-picking capability is claimed.
 
 ## Reproduce focused checks
 
@@ -21,7 +23,27 @@ node --test --test-concurrency=1 tools/objects/terrestrial-layers/rings.test.mjs
 node docs/centaur-population/verify.mjs
 node docs/centaur-population/fresh-install.mjs
 node docs/centaur-population/browser-check.mjs
-CSSEARTH_CHROME_LOG_STDIO=1 node docs/lucy-targets/drag-trace.mjs http://127.0.0.1:4278 1 output/playwright/centaur-population/chariklo-drag chariklo
+CSSEARTH_CHROME_LOG_STDIO=1 node docs/lucy-targets/drag-trace.mjs http://127.0.0.1:4278 2 output/playwright/centaur-population/chariklo-drag chariklo
 ```
 
 The fresh installer needs an empty destination. Browser checks use the coordinated production server at port 4278, one headless browser at a time. Preparation runs one body at a time with a 4 GiB Node heap limit and one image-processing worker.
+
+## Drag and visual evidence
+
+Chariklo was measured at DPR 2 with Shadows off using the existing three-cycle, 60-step-per-leg Lucy/Saturn-derived drag. All 110,013 stage nodes retain identity, asset banks stay fixed, interaction requests are zero and browser errors are empty. The body has 480 `u` leaves; the rings add 16 image tiles. The shared stage node count has a different scope.
+
+| Metric | Result |
+| --- | --- |
+| rAF interval median / p95 | 16.7 / 16.8 ms |
+| DirectRenderer draw p95 | 5.114 ms |
+| Pipeline sequences dropped without presentation | 0 / 655 |
+
+This is one recorded local workload, not a physical-device or every-pose performance guarantee. [The trace report](evidence/chariklo-drag.json) binds served script/document hashes, canonical assets, screenshots, viewport, camera and raw trace hash. Raw trace bytes remain under `output/playwright/centaur-population/chariklo-drag/`.
+
+![Chariklo actual default, Shadows off](evidence/chariklo-default.png)
+
+![Bienor actual default, Shadows off](evidence/bienor-default.png)
+
+[Chariklo rotated toward edge-on](evidence/chariklo-rotated.png) · [Chariklo optional Shadows on](evidence/chariklo-shadows.png) · [Bienor close view](evidence/bienor-close.png)
+
+Main hides the Settings action. Optional shadows were exercised through its existing bound checkbox change event; a visible Settings-button workflow is not claimed. The prepared ring image has fixed schematic opacity; it does not calculate illumination, scattering or ring cast shadows. No source imagery or unresolved terrain is fabricated.
