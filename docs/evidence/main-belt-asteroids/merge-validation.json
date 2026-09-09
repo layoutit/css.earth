@@ -192,7 +192,14 @@
       "pass": 14,
       "fail": 0
     },
-    "spatialContextRegeneration": "unchanged"
+    "spatialContextRegeneration": "unchanged",
+    "preparationTypecheck": "pass after restoring the DSK importer declaration missing from main"
   },
-  "scope": "Focused merge verification. The original asteroid captures and numerical qualification were not repeated; all 41 body packages are unchanged. GitHub CI status is reported separately."
+  "scope": "Focused merge verification. The original asteroid captures and numerical qualification were not repeated; all 41 body packages are unchanged. GitHub CI status is reported separately.",
+  "ciFollowup": {
+    "runId": 34341897027,
+    "failure": "TS7016: missing dsk-mesh.mjs declaration",
+    "baselineRunId": 34341048526,
+    "fix": "tools/objects/acquisition/dsk-mesh.d.mts; no runtime change"
+  }
 }
