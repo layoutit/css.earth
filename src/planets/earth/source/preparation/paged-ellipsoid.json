@@ -12,7 +12,7 @@
     "searchLabel": "Search planets and cities",
     "descriptionSuffix": " cities worldwide.",
     "statuses": {
-      "detail": "WorldCover imagery · 2021. Source gaps retain the Earth base map.",
+      "detail": "WorldCover imagery \u00b7 2021. Source gaps retain the Earth base map.",
       "overview": "Earth overview. WorldCover detail is unavailable at this location."
     }
   },
@@ -112,6 +112,26 @@
         "path": "black-marble-2016.jpg",
         "name": "earth-night-lights",
         "thumbnail": "earth-lens-night-lights.webp"
+      },
+      {
+        "path": "science/mur-gibs.png",
+        "name": "earth-enso",
+        "thumbnail": "earth-lens-enso.webp",
+        "scientific": {
+          "kind": "gibs-mur-imagery",
+          "date": "2026-09-07",
+          "baseline": "2003\u20132014",
+          "checked": "2026-09-09T03:53:28.313Z",
+          "advisory": {
+            "date": "13 August 2026",
+            "status": "El Ni\u00f1o Advisory",
+            "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+          }
+        },
+        "webp": {
+          "quality": 60,
+          "effort": 6
+        }
       }
     ]
   },

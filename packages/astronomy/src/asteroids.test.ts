@@ -42,7 +42,9 @@ describe('asteroid positions against JPL Horizons', () => {
       auravictrix: 251, transvaalia: 241, moskva: 2173, kressmannia: 103, parysatis: 271, rosalinde: 259, susi: 222,
       hidalgo: 467, zachia: 3018, piazzia: 327, tulipa: 251, reinmuthia: 263, china: 309, crimea: 751,
       rusthawelia: 328, schorria: 272, silvretta: 263, virtanen: 568, 'mr-spock': 1297, educatio: 320, hopi: 2074,
-      schaber: 2811, iau: 267, 'united-nations': 2239, tartaglia: 281, raup: 144, 'asteroid-2001-qw16': 2946, 'asteroid-1999-fr33': 236, patroclus: 8332, polymele: 416, leucus: 453, orus: 600, eurybates: 413}
+      schaber: 2811, iau: 267, 'united-nations': 2239, tartaglia: 281, raup: 144, 'asteroid-2001-qw16': 2946, 'asteroid-1999-fr33': 236, patroclus: 8332, polymele: 416, leucus: 453, orus: 600, eurybates: 413,
+      // New main-belt additions: ceil(measured endpoint maximum * 1.15) km.
+      'thetis': 1718, 'thalia': 302, 'phocaea': 2066, 'euterpe': 675, 'bellona': 284, 'pomona': 1937, 'circe': 1123, 'atalante': 353, 'leda-38': 290, 'laetitia': 1391, 'isis': 3051, 'ariadne': 2078, 'hestia': 277, 'aglaja': 866, 'pales': 384, 'kalypso': 398, 'alexandra': 1216, 'pandora-55': 294, 'melete': 2378, 'elpis': 508, 'erato': 350, 'ausonia': 484, 'asia': 559, 'leto': 3209, 'hesperia': 288, 'niobe': 317, 'feronia': 300, 'klytia': 1860, 'galatea-74': 2252, 'freia': 798, 'eurynome': 266, 'alkmene': 598, 'beatrix': 358, 'klio': 2521, 'io-85': 1596, 'semele': 1339, 'aegina': 791, 'minerva': 235, 'arethusa': 306, 'klotho': 303, 'ianthe': 1049 }
     for (const id of ASTEROID_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])

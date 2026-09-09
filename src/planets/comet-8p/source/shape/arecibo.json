@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-contact-ellipsoids@1",
+  "source": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
+  "sourceSection": "Section 3; published full lobe dimensions divided by two",
+  "family": "Arecibo radar contact prolate spheroids",
+  "origin": "equal-density-volume-centroid",
+  "axes": "X joins the long axes; Z is perpendicular. Axes are aligned with the default model for shape comparison; no radar pole or observed rotation phase is reproduced.",
+  "lobes": [
+    {
+      "semiaxesKm": [
+        2.875,
+        2.055,
+        2.055
+      ]
+    },
+    {
+      "semiaxesKm": [
+        2.125,
+        1.635,
+        1.635
+      ]
+    }
+  ],
+  "fluxScale": 1,
+  "dimensionScale": "No thermal rescaling; published radar dimensions",
+  "totalLengthKm": 10,
+  "totalLengthUncertaintyKm": 0.9,
+  "synodicPeriodHours": 11.385,
+  "synodicPeriodUncertaintyHours": 0.004,
+  "rangeResolutionMeters": 300,
+  "subdivisions": 4,
+  "qualification": "Smooth inferred shape from limited radar aspect coverage. The orientation is illustrative and aligned with the default model; no measured surface detail or unique spin pole is claimed."
+}

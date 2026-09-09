@@ -1,0 +1,548 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "asia",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "18793be1102e02a5a25d5d4187f89ab36ef207600637d771b759a6c0c1fb3b55"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "cac561cb2103e28efd5a35f968ac7bf47700e2dced94172e56aad743e0aaae5c",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "asia",
+        "displayName": "Asia",
+        "publicBase": "/scenes/asia/",
+        "distanceAu": 2.4209257475173156,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-5668.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 49673.53397281409,
+                "expectedVertices": 574,
+                "expectedFaces": 1144,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -30.815
+              },
+              "minimum": -20,
+              "maximum": 20,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 30815,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 616.3000000000001
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 30.815,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/asia/asia-shape-surface@2x.webp",
+          "polesUrl": "/scenes/asia/asia-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-5668.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 49673.53397281409,
+              "expectedVertices": 574,
+              "expectedFaces": 1144,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 616.3000000000001,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "DAMIT model 5668 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "2d288ed1b479ce64d7ef666abd43ebade88fcb6e52d3369c423a0e75e13baf70",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "asia",
+        "displayName": "Asia",
+        "panel": {
+          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "30.815 km (approximate thermal scale)",
+              "source": {
+                "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+                "label": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+                "checked": "2026-09-09",
+                "path": "source/reference/calibration.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.421 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2767%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "3.77 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2767%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "15.8504 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5668",
+                "label": "DAMIT model 5668",
+                "checked": "2026-09-09",
+                "path": "source/reference/damit-model.json"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Convex light-curve reconstruction with approximate thermal size: 61.63 km effective diameter (catalog ±0.65 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "Convex light-curve reconstruction with approximate thermal size: 61.63 km effective diameter (catalog ±0.65 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "thumbnail": "/scenes/asia/asia-shape-thumbnail.webp",
+              "surface": "asia-shape-surface@2x.webp",
+              "poles": "asia-shape-surface@2x.webp",
+              "source": {
+                "id": "asia-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape · grid marks missing imagery"
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radius on the shape model minus a 30.815 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Radius on the shape model minus a 30.815 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "thumbnail": "/scenes/asia/asia-elevation-thumbnail.webp",
+              "surface": "asia-elevation-surface@2x.webp",
+              "poles": "asia-elevation-surface@2x.webp",
+              "source": {
+                "id": "asia-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "0",
+                  "20"
+                ],
+                "meta": "km · 30.815 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5668",
+                "image": "/scenes/asia/asia-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 5668, version 2019-10-23",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5668"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+            "href": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5668"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5668",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 5668, version 2019-10-23."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        },
+        "title": {
+          "label": "Asia",
+          "viewBox": "0 0 52.0409 35",
+          "width": 52.0409,
+          "height": 35,
+          "path": "M0 29L7.36 8.63L11.07 8.63L18.43 29L15.09 29L11.17 17.54Q10.69 16.11 10.14 14.34Q9.58 12.57 8.8 9.98L9.61 9.98Q8.86 12.58 8.3 14.35Q7.74 16.12 7.25 17.54L3.25 29ZM4.05 23.68L4.05 21.11L14.34 21.11L14.34 23.68ZM25.63 29.33Q23.98 29.33 22.66 28.82Q21.34 28.3 20.53 27.27Q19.71 26.24 19.56 24.72L22.42 24.6Q22.57 25.76 23.39 26.38Q24.21 27 25.59 27Q26.99 27 27.79 26.44Q28.59 25.87 28.59 25.01Q28.59 24.27 28.04 23.81Q27.49 23.35 26.51 23.15L24.09 22.62Q22.03 22.15 20.97 21.1Q19.91 20.06 19.91 18.46Q19.91 17.16 20.62 16.17Q21.34 15.18 22.6 14.62Q23.86 14.07 25.54 14.07Q27.17 14.07 28.41 14.62Q29.65 15.18 30.39 16.2Q31.13 17.21 31.23 18.61L28.48 18.73Q28.4 17.73 27.64 17.06Q26.88 16.39 25.57 16.39Q24.35 16.39 23.6 16.97Q22.85 17.54 22.85 18.36Q22.85 19.12 23.39 19.57Q23.94 20.03 24.98 20.26L27.45 20.81Q29.56 21.28 30.56 22.26Q31.55 23.24 31.55 24.83Q31.55 26.2 30.79 27.22Q30.02 28.23 28.69 28.78Q27.36 29.33 25.63 29.33ZM34.16 29L34.16 14.37L37.08 14.37L37.08 29ZM35.64 11.91Q34.86 11.91 34.33 11.4Q33.8 10.9 33.8 10.16Q33.8 9.39 34.33 8.88Q34.86 8.37 35.63 8.37Q36.41 8.37 36.94 8.88Q37.47 9.39 37.47 10.16Q37.47 10.9 36.94 11.4Q36.41 11.91 35.64 11.91ZM44.79 29.26Q43.36 29.26 42.21 28.75Q41.06 28.25 40.4 27.26Q39.74 26.28 39.74 24.83Q39.74 23.59 40.21 22.78Q40.69 21.97 41.51 21.51Q42.33 21.04 43.37 20.8Q44.4 20.56 45.49 20.44Q46.85 20.26 47.65 20.16Q48.46 20.06 48.81 19.83Q49.16 19.59 49.16 19.07L49.16 18.96Q49.16 18.21 48.81 17.67Q48.47 17.13 47.82 16.81Q47.17 16.49 46.23 16.49Q45.3 16.49 44.59 16.8Q43.88 17.11 43.47 17.63Q43.06 18.14 42.95 18.76L40.11 18.6Q40.3 17.23 41.1 16.22Q41.91 15.22 43.24 14.67Q44.56 14.11 46.24 14.11Q47.5 14.11 48.56 14.42Q49.62 14.73 50.4 15.36Q51.18 15.98 51.61 16.9Q52.04 17.82 52.04 19.05L52.04 29L49.18 29L49.18 26.95L49.12 26.95Q48.81 27.52 48.27 28.06Q47.73 28.59 46.89 28.92Q46.04 29.26 44.79 29.26ZM45.41 26.91Q46.67 26.91 47.51 26.45Q48.35 25.99 48.76 25.23Q49.17 24.46 49.17 23.57L49.17 21.82Q49.02 21.96 48.65 22.06Q48.28 22.16 47.78 22.26Q47.27 22.36 46.72 22.44Q46.18 22.53 45.66 22.6Q44.85 22.71 44.16 22.96Q43.47 23.22 43.05 23.67Q42.63 24.13 42.63 24.88Q42.63 25.53 42.98 25.98Q43.32 26.43 43.94 26.67Q44.56 26.91 45.41 26.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "asia-shape",
+      "path": "shape/model-5668.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/60970/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 5668, version 2019-10-23.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original unit-volume counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "dimensionless uncalibrated DAMIT coordinates",
+        "metersPerUnit": 49673.53397281409,
+        "referenceRadiusMeters": 30815
+      },
+      "coverage": "Convex light-curve reconstruction with approximate thermal size: 61.63 km effective diameter (catalog ±0.65 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative.",
+      "sha256": "784a802ce9b6fe162194a958f5f66d20f06b591d3b50733fc93aa4e7bc50a453",
+      "bytes": 46419,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-5668.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/60970/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned original source record or authored scientific preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "2d288ed1b479ce64d7ef666abd43ebade88fcb6e52d3369c423a0e75e13baf70",
+      "bytes": 9167,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radius on the shape model minus a 30.815 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "asia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/asia/asia-elevation-thumbnail.webp",
+          "bytes": 5020,
+          "sha256": "8e08e6bd077177cab42b00dcbc072a2bc50a416fc23ec297fc3e6cb980288b34",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/asia/asia-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/asia/asia-elevation-surface@2x.webp",
+          "bytes": 270070,
+          "sha256": "977e3301c417e8169abd20a331ba89a189725af650ca9bf17d016a5635aba740",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Convex light-curve reconstruction with approximate thermal size: 61.63 km effective diameter (catalog ±0.65 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "asia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/asia/asia-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/asia/asia-shape-surface@2x.webp",
+          "bytes": 218286,
+          "sha256": "34352f7a025135ab4909a08335a9568872199c7ff63686449d26d8dbe68967a5",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5698,
+          "sha256": "1ef3dfb55c412c80747ab0ed397cf10c881c4c04b0cfb1cf963ba2f0786a5410",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 9962,
+          "sha256": "a9761bd83ad4689fdbff30a802a55e1f2b4d1c074107b87e6f560eba0945d165",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}
