@@ -1,4 +1,5 @@
 /** Actual PolyCSS preparation of static image geometry; no runtime image or mesh generation. */
+import { balanceVolumeSlices } from './volume-order.js';
 import { compileLeafBounds } from './leaf-bounds.js';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -46,7 +47,8 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
   const axes: Axis[] = ['x', 'y', 'z'];
   return { schema: 'cssearth-css-volume@1' as const, id, frame,
     anchors: recipe.anchors.map(anchor => ({ id: anchor.id, positionUnits: referencePositionToUnits(anchor.referencePositionM, frame) })),
-    stacks: axes.map(axis => ({ axis, leaves: leaves.filter(leaf => leaf.axis === axis).map(({ axis: _axis, ...leaf }) => leaf) })),
+    stacks: axes.map(axis => ({ axis, leaves: balanceVolumeSlices(
+      leaves.filter(leaf => leaf.axis === axis).map(({ axis: _axis, ...leaf }) => leaf), axis) })),
     resources: slices.quads.filter(quad => quad.alphaCoverage !== 0).map(quad => ({ path: quad.texturePath, sha256: quad.sha256, bytes: quad.bytes,
       width: quad.widthPx, height: quad.heightPx })), provenance: slices.provenance, approximation: slices.approximation };
 }

@@ -160,8 +160,41 @@ test('volume compilation omits only lossless-alpha empty slabs, preserving every
   const complete = compileCssVolume({ ...options, slices: { ...slices, quads: slices.quads.map(quad => ({ ...quad, alphaCoverage: 1 })) } });
   const sparse = compileCssVolume(options);
   const omittedIds = new Set(empty.map(quad => quad.id)), omittedPaths = new Set(empty.map(quad => quad.texturePath));
-  assert.deepEqual(sparse.stacks, complete.stacks.map(stack => ({ ...stack, leaves: stack.leaves.filter(leaf => !omittedIds.has(leaf.id)) })));
+  // Removing empty planes may change the balanced traversal, but never any
+  // surviving geometry. Compare the retained leaves independently of ordering.
+  const byId = (stack: (typeof sparse.stacks)[number]) => ({ ...stack,
+    leaves: [...stack.leaves].sort((a, b) => a.id.localeCompare(b.id)) });
+  assert.deepEqual(sparse.stacks.map(byId), complete.stacks.map(stack => byId({ ...stack,
+    leaves: stack.leaves.filter(leaf => !omittedIds.has(leaf.id)) })));
   assert.deepEqual(sparse.resources, complete.resources.filter(resource => !omittedPaths.has(resource.path)));
   const faint = compileCssVolume({ ...options, slices: { ...slices, quads: slices.quads.map(quad => ({ ...quad, alphaCoverage: Number.MIN_VALUE })) } });
   assert.deepEqual(faint, complete, 'no nonzero coverage threshold may remove a faint slab');
+});
+
+test('prepared volume plane order bounds first-pivot depth without changing coplanar order', async () => {
+  const { balanceVolumeSlices } = await import('./volume-order.js');
+  for (const axis of ['x', 'y', 'z'] as const) {
+    const component = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
+    const input = Array.from({ length: 214 }, (_,index) => {
+      const centerUnits: [number, number, number] = [17, 23, 29];
+      centerUnits[component] = index - 107;
+      return [{ id: `${index}-first`, centerUnits }, { id: `${index}-second`, centerUnits }];
+    }).reverse().flat();
+    const before = [...input], ordered = balanceVolumeSlices(input, axis);
+    assert.deepEqual(input, before, 'preparation must not mutate source order');
+    assert.deepEqual([...ordered].sort((a,b)=>a.id.localeCompare(b.id)), [...input].sort((a,b)=>a.id.localeCompare(b.id)));
+    for (let index = 0; index < ordered.length; index += 2) {
+      assert(ordered[index]!.id.endsWith('-first'));
+      assert.equal(ordered[index]!.centerUnits, ordered[index + 1]!.centerUnits, 'coplanar source siblings stay adjacent and ordered');
+    }
+    // Model Chromium's first-plane partition, not the preparation traversal.
+    const depth = (values: readonly number[]): number => {
+      if (values.length === 0) return 0;
+      const pivot = values[0]!;
+      return 1 + Math.max(depth(values.filter(value => value < pivot)), depth(values.filter(value => value > pivot)));
+    };
+    assert.equal(depth(input.map(leaf => leaf.centerUnits[component])), 214);
+    assert.equal(depth(ordered.map(leaf => leaf.centerUnits[component])), 8);
+    assert.deepEqual(balanceVolumeSlices([], axis), []);
+  }
 });

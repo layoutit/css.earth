@@ -24,7 +24,11 @@ test('loads the checked-in density artifact with its complete fixed asset bank',
   expect(baked.quads).toHaveLength(count);
   const nonempty = baked.quads.filter(quad => quad.alphaCoverage !== 0);
   expect(payload.resources).toHaveLength(nonempty.length + sky.length);
-  expect(slices.map(leaf => leaf.id)).toEqual(nonempty.map(quad => quad.id));
+  expect(slices.map(leaf => leaf.id).sort()).toEqual(nonempty.map(quad => quad.id).sort());
+  // The prepared traversal owns presentation order; source depth order is not
+  // a loader instruction. Keep every leaf and transport the authored ordering.
+  const prepared = JSON.parse(new TextDecoder().decode(bytes));
+  expect(payload.stacks).toEqual(prepared.data.stacks);
   const used = [...slices, ...sky].map(image => image.texturePath).sort();
   expect(payload.resources.map(resource => resource.path).sort()).toEqual(used);
   const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u, ''), base);
