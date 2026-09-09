@@ -2,7 +2,7 @@
 
 The approved cohort is Moon, Phobos, Deimos, Dimorphos, Io, Europa, Ganymede, Enceladus, Tethys, Dione, Rhea, Titan and Charon. Titania and Miranda carry into B3 because their selected GIS releases remain inaccessible. These are upgrades to existing worlds; the moon roster remains 95.
 
-The implementation includes numeric LOLA topography and Diviner rock abundance; exact-mesh relative albedo and modeled slopes; Io/Ganymede geologic units; Europa's controlled Agenor terrain; corrected Enceladus and native Saturnian shape models; Titan's separately labeled measured/interpolated heights and coverage distance; and Charon's enhanced MVIC color. Scientific units, datums, source-defined gaps and model limits accompany the actual views. Main's new cards and Dimorphos albedo are retained.
+The implementation includes numeric LOLA topography and Diviner rock abundance; exact-mesh relative albedo and modeled slopes; Io/Ganymede geologic units; Europa's controlled Agenor terrain; corrected Enceladus and native Saturnian shape models; Titan's separately labeled measured/interpolated heights and coverage distance; and Charon's enhanced MVIC color. Scientific units, datums, source-defined gaps and model limits accompany the actual views. Main's new cards and Dimorphos albedo are retained. The subsequent PR #61 asteroid spectral decoders are integrated additively at `1d372e045`, preserving the B2 source-processing paths.
 
 ## Reproducibility and delivery
 
@@ -21,7 +21,19 @@ Manual review found and corrected the new card's fixed-height legend overlap and
 
 ## Required gates
 
-The integrated aggregate source gate failed on missing starfield/font inputs outside B2. Packages passed 761 tests; renderer tests passed 339 and failed 11 across Mercury/Venus loading and Earth paging/navigation/depth tests. Platform tests were not reached. The focused body attempt found stale title-source hashes in four physical-frame receipts; those references are corrected with unchanged numerical frames and await the affected rerun. Shell, browser and build outcomes are still being collected. This is a draft delivery, not an aggregate-readiness or deployment claim.
+[PR #62](https://github.com/layoutit/cssEarth/pull/62) remains **draft**. The final checks use integration commit `1d372e045` with main `4848897ee` (PR #61). Aggregate readiness is **not established**.
+
+| Check | Result |
+| --- | --- |
+| B2 source verification and body tests | All 13 source packages verified; 59/59 body tests passed. |
+| Shared scientific preparation | 66/66 tests passed, including the merged GeoTIFF/PDS dispatch and independent scientific cases. |
+| `pnpm acquire:planets -- --verify-only` | Failed at the first registry body, Polymele: missing starfield and Inter font inputs. B2's separate source checks passed. |
+| `pnpm test` | Packages: 761 passed. Renderer: 339 passed, 11 failed across Mercury/Venus loading and Earth paging/navigation/depth checks. Platform and shell not reached. |
+| Focused shared-shell checks | 47/53 passed. Failures identify Itokawa's lens-race profile and missing Polymele prepared object; complete B2 card/browser profiles are separately checked. |
+| `pnpm test:browser` | Failed before completing a case: Polymele returned HTTP 500, then readiness timed out. [Browser receipt](global-browser-before-build.json). |
+| `pnpm build` | Failed with exit 134 during Astro production build at the heap limit. Package, renderer, preparation, all 258 object payloads, minimaps, provenance and spacecraft preparation completed; assembly was not reached. |
+
+The four stale B2 title-source hashes in physical-frame receipts were repaired with unchanged numerical frames; the subsequent 59-test body run passes. Earlier failed and interrupted attempts are retained in `pre-integration-gates/`. Locations outside B2 are not a clean-baseline proof that every aggregate failure is pre-existing. The completed [build attempt and gate logs](release-gates/report.json) remain preserved. [Post-build fingerprint comparison](post-build-fingerprints.json) verifies all 808 captured files: only the already reviewed card CSS differs from the initial capture; B2 sources, payloads, images and body CSS are unchanged. Relevant post-build reruns are recorded separately below.
 
 ## Representative captures
 
@@ -30,3 +42,7 @@ The integrated aggregate source gate failed on missing starfield/font inputs out
 ![Lunar numeric LOLA topography](images/moon-topography.png)
 
 ![Charon enhanced MVIC color](images/charon-enhanced-color.png)
+
+## Checks after the build attempt
+
+Regeneration resolved the Mercury/Venus loader failures and missing Polymele prepared-object failures. Renderer rerun: 341/350 passed; the remaining nine failures concern Earth paging, depth partitions and Buenos Aires targeting. Focused shell rerun: 50/53 passed; the remaining failures concern Itokawa's lens-race profile. Four projected-image tests also passed. The [global browser rerun](post-build-checks/global-browser-report.json) again stopped at Polymele HTTP 500 before completing a case. The [final B2 route check](post-build-checks/b2-route-report.json) passed all 13 moons and 19 selected scientific views, verifying 172 actual scene-image responses from the fresh installation. These checks preserve a draft PR with explicit aggregate failures; no production deployment or merge-readiness claim is made.

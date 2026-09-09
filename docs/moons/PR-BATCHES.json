@@ -114,11 +114,11 @@
         "Saturn|VI",
         "Pluto|I"
       ],
-      "state": "implementation",
+      "state": "draft-pr",
       "owner": "Moons",
       "branch": "feat/moons-scientific-surfaces",
       "baseCommit": "55bda12f012e77e2206d41661a886c84fb01362d",
-      "integrationCommit": "93dcb4fe32d956549fbed9c62e1e3e836cc18393",
+      "integrationCommit": "1d372e04592214349fff56cdbfca41c6a4fb99f4",
       "progress": {
         "sourceReadyBodies": 13,
         "sourceBlockedBodies": [],
@@ -166,14 +166,27 @@
         "publishedRuntimeImages": 551,
         "freshInstalledRuntimeImages": 551,
         "freshRuntimeReuse": 0,
-        "finalReport": "b2-preparation/final/DELIVERY.md"
+        "finalReport": "b2-preparation/final/DELIVERY.md",
+        "visuallyReviewedBodies": 13,
+        "bodyTestsPassed": 59,
+        "scientificPreparationTestsPassed": 66,
+        "finalB2RoutesPassed": 13,
+        "aggregateReady": false,
+        "aggregateFailures": [
+          "Polymele source inputs and HTTP 500 route",
+          "Earth paging/depth/targeting renderer checks",
+          "Itokawa lens-race browser profile",
+          "Astro production build exited 134 before assembly"
+        ]
       },
       "scopeDecision": {
         "originalCohort": 15,
         "approvedCohort": 13,
         "decision": "User approved shipping the 13 prepared upgrades after review and carrying Titania and Miranda into the next substantial batch. Their exact GIS releases remain inaccessible, not absent.",
         "carriedTo": "B3"
-      }
+      },
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/62",
+      "draft": true
     },
     {
       "id": "B3",

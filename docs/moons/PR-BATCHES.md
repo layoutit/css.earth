@@ -4,7 +4,7 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**B1 is merged; B2 has completed implementation and is in final qualification.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B2–B4 counts remain planning targets until their selected sources and implementations qualify.
+**B1 is merged; B2 is [draft PR #62](https://github.com/layoutit/cssEarth/pull/62).** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B2–B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
@@ -41,7 +41,7 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 The user approved the 13-body delivery, carrying Titania and Miranda into B3.
 
-See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [delivery evidence](b2-preparation/final/DELIVERY.md). Main `e23a357b` is integrated; all 13 preparations and fresh source restorations passed. All 551 published runtime images installed without cache reuse. Final browser reviews and aggregate gate outcomes remain separate from implementation completion.
+See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [delivery evidence](b2-preparation/final/DELIVERY.md). Main `4848897ee` is integrated; all 13 preparations and fresh source restorations passed. All 551 published runtime images installed without cache reuse. Final browser reviews and aggregate gate outcomes remain separate from implementation completion.
 
 **Bodies:** Moon, Phobos, Deimos, Dimorphos, Io, Europa, Ganymede, Enceladus, Tethys, Dione, Rhea, Titan, Charon.
 
