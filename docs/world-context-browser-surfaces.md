@@ -1120,3 +1120,80 @@ loss occurred; the world, input surface, document and single camera survive.
 The trace buffer is 512 MiB; its categories are unchanged. This result precedes
 the subsequent main integration and uses the earlier catalog, so it must not be
 presented as qualification of the newer catalog or UI.
+
+
+### Main integration and selection publication (`c59611d56` → `72719ccd`)
+
+Main through `4848897ee` is integrated with its updated selection UI, orbit-center
+contract and 258-body registry. All 258 local object descriptors were prepared;
+minimap preparation includes 258 bodies plus the same 2,048 catalog stars. The
+prepared galaxy texture and balanced volume artifact remain byte-identical.
+Renderer and preparation typechecks/builds pass, as do 86 focused renderer tests
+and 60 shell/router/minimap tests. This is not an aggregate object-readiness claim.
+
+On the expanded catalog, 62 static minimap comparisons preserve camera state,
+logical counts, every drawn marker style and all 2,412 descendants. Maximum pixel
+difference is 1/255. One development reload was observed without a phase timestamp
+in that visual script, so it supplies static comparisons, not timing evidence.
+An earlier preparation-overlapped attempt was invalidated and retained separately.
+The completed static comparisons are in
+`output/playwright/minimap-covered-main-settled/`.
+
+The integrated main selection feature assigned `data-context-selected` on every
+camera publication. Each retained entry now remembers its published emphasis;
+selection/overview changes update the attribute, and retired entries adopt current
+selection when they re-enter. Camera motion alone does not republish selection
+styling. No CSS variables, source geometry, opacity policy or rendered topology
+change in this additional fix.
+
+A real-app comparison at 12 AU performs 24 camera samples and then uses native
+stage picking to select Mercury. Redundant selection-attribute mutations fall from
+5,934 to zero; the full DPR 2 viewport is pixel-identical, all group styles and
+camera state match, and Mercury/Sun receive the correct selected/unselected
+attributes after the click. Reports, before/after compiled source, hashes and
+images are in `output/playwright/selection-publication-settled/`. The broader
+interception attempt failed during worker-route teardown and is not qualified.
+
+| Measurement | Integrated main `c59611d56` | Selection publication `72719ccd` |
+| --- | ---: | ---: |
+| Whole-route rAF intervals >25 ms | 80/3463 | 58/3464 |
+| Galaxy drag intervals >25 ms | 0/242 | 0/242 |
+| Galaxy drag maximum | 16.8 ms | 16.8 ms |
+| Planetary-band intervals >25 ms | 75/727 | 54/734 |
+| Planetary-band p95 | 33.3 ms | 33.3 ms |
+| Planetary-band RAF callback elapsed | 4631.802 ms | 4481.972 ms |
+| Planetary-band UpdateLayoutTree elapsed | 1788.676 ms | 1725.284 ms |
+| Planetary-band Layerize elapsed | 2180.329 ms | 2031.854 ms |
+| Whole-route maximum | 50 ms | 50 ms |
+
+Both use the original native route at 1995×1236, DPR 2, motion off. The repeat has
+lower host load (galaxy-drag start about 4.7 versus 8.5), so the difference in
+long intervals is not independently attributable to this cache. The verified
+benefit is elimination of redundant selection mutations with identical output.
+**The performance target remains unmet:** the planetary band still exceeds the
+frame budget. Galaxy drag is improved, but it is not a substitute for smooth
+zooming through the planetary view.
+
+The complete synchronized captures are
+`output/world-context-zoom/minimap-covered-main-dpr2/` (recorder
+`c5529dbc-0639-4ddf-914e-b7220f04c684`) and
+`output/world-context-zoom/selection-publication-dpr2/` (recorder
+`ec9cc7f8-d957-4817-aa73-4b85138b10f5`). Each includes 26 matching source hashes,
+630 loaded receipts, stable world/input/document identities, one camera, and no
+application/resource errors, HMR or trace loss. All 2,951/2,931 video observations
+are encoded; clock drift is -29/-32 microseconds and maximum PTS error is
+1.478/1.470 ms. Neither capture claims to observe every display refresh.
+
+
+A further trace comparison finds **0 / 3,137 / 3,113** CSS animation starts in
+`6b6de1207` / integrated `c59611d56` / `72719ccd`. The new starts are opacity
+animations on `S` elements. Main introduced
+`[data-context-body] { transition: opacity 120ms ease; }`, although camera samples
+also publish opacity on those same retained markers. A separate read-only native
+wheel probe at 30 AU resolves the active transition targets to actual
+`data-context-body` markers (including Makemake, Orus, Leucus and several
+asteroids); its 14 observations have no application errors. That owner probe is
+in `output/playwright/marker-animation-owner-settled/` and is not a timing capture.
+This newly integrated opacity-owner conflict remains unresolved; the selection
+attribute cache does not remove it. It is the next concrete issue to address,
+while preserving selection feedback and direct camera-driven marker alpha.
