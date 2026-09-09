@@ -645,9 +645,9 @@ test('selection emphasis previews immediately before the next detailed owner is 
   h.router.destroy();
 });
 
-test('empty-space clicks leave a close body selection, camera and card unchanged', async () => {
+for (const wide of [false, true]) test(`empty-space clicks leave selection, camera and card unchanged (wide=${wide})`, async () => {
   const centers = [], previews = [];
-  const h = harness({ withSun: true, centerTarget(options) { centers.push(options); return null; },
+  const h = harness({ withSun: true, centerTarget(options) { centers.push(options); return wide ? { pose: 'wide-view' } : null; },
     persistentWorldContext: { async mount() {
       return { selectObject() {}, publish() {}, destroy() {}, previewSelection: id => previews.push(id) };
     } } });
@@ -666,36 +666,8 @@ test('empty-space clicks leave a close body selection, camera and card unchanged
   assert.equal(mount.value, savedView);
   assert.equal(h.windowTarget.location.href, url);
   assert.equal(h.writes.length, writes);
-  assert.equal(centers.length, 1);
-  assert.equal(centers[0].objectId, 'mercury');
-  assert.equal(centers[0].force, undefined);
+  assert.equal(centers.length, 0);
   assert.deepEqual(h.errors, []);
-  h.router.destroy();
-});
-
-test('wide-view empty-space deselection previews the overview and recenters the Sun through the normal router', async () => {
-  const previews = [], centers = [], target = { pose: 'centered-sun' };
-  const h = harness({ withSun: true, centerTarget(options) { centers.push(options); return target; },
-    persistentWorldContext: { async mount() {
-      return { selectObject() {}, publish() {}, destroy() {}, previewSelection: id => previews.push(id) };
-    } } });
-  await h.router.settled;
-  let cardChanged = false;
-  h.shells[0].beginOverviewSelection = () => { cardChanged = true; };
-  const event = new Event('objectdeselect', { cancelable: true });
-  h.documentTarget.dispatchEvent(event);
-  assert.equal(event.defaultPrevented, true);
-  assert.equal(cardChanged, true);
-  assert.equal(previews.at(-1), null);
-  assert.equal(centers[0].objectId, 'mercury');
-  assert.equal(centers[0].force, undefined);
-  assert.equal(centers[1].force, true);
-  assert.equal(centers[1].objectId, 'sun');
-  await h.router.settled;
-  assert.equal(h.router.state().activeObjectId, 'sun');
-  assert.equal(h.preparations[0].targetWorldCamera, target);
-  assert.equal(h.preparations[0].centerSelection, true);
-  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
   h.router.destroy();
 });
 
