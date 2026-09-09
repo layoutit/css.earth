@@ -1,0 +1,27 @@
+# Encounter photography
+
+These views contain spacecraft photographs, not albedo maps. Calibrated radiance is projected through the archived detector camera onto the original PDS mesh; it is then transferred to the unchanged simplified display mesh. The original acquisition shading is retained. A single bounded gain per image reduces display seams; it is not a physical phase correction. Gray grid regions have no accepted photograph/shape correspondence.
+
+## Detector and surface validity
+
+The reader verifies dimensions, instrument, target, time, filter, units and extension layout. NAVCAM QUALITY_MAP=0 and Deep Impact FLAGS=0 are accepted. The eight-pixel EPOXI/ITS overclock border is excluded separately: a zero quality byte does not make those detector bookkeeping pixels science data. Valid zero and negative radiance are retained. HRI uses MASK=1; RESIDUAL is recorded as a convergence diagnostic, not a new validity mask. Its values are not a license to accept saturated or rejected detector pixels.
+
+Every one of the four bilinear contributors must be valid and intersect the same nearby original-mesh patch. Projection uses the closest source point in three dimensions; it does not assume a unique radial surface. Rays test visibility against the full source mesh. Estimated Wild 2 faces and source-flagged poorly constrained Tempel/Hartley faces are excluded. Source-distance, emission and footprint-separation bounds are in the recipe. Their values do not enlarge or alter the display geometry budget. Valid photographed shadows remain eligible; there is no sunlight-incidence cutoff because radiance is not divided by illumination.
+
+Among qualifying observations, the finest nominal image scale wins, with source order breaking exact ties. This fixed priority avoids fine-scale source switching driven by the coarse mesh's facet normals. Emission and footprint limits still apply independently. No brightness threshold determines coverage or source choice. Overlap fits use positive radiance only because logarithmic ratios require it; that condition does not mask valid dark pixels in the displayed image.
+
+## Registration checks
+
+The JSON beside each photograph contains its body-to-J2000 matrix, a two-component detector pointing correction and the actual fit/holdout coordinates. Preparation reprojects all controls and recomputes residuals; declarations of RMS cannot approve a changed camera. Residual budgets are expressed at the source image scale, separately from the simplified-mesh distance bound. These are registration checks, not a claim of subpixel absolute cartography.
+
+For Tempel and Hartley, 48 angular bins partition the projected limb. An outward normal comes from adjacent background pixels; the boundary is estimated half a pixel beyond the last model pixel center. Three parallel profiles search +/-12 pixels for the outward intensity drop. Measurable controls require an interior peak, positive contrast, positive inside radiance, and outside radiance below one quarter of the inside value. Unmeasurable controls are retained in the excluded list. Even bins fit the two translations; odd bins are withheld. The published orientation is held fixed. No residual-based outlier removal is used. Source-estimated faces are excluded before measurement.
+
+Coverage reports use 32 equal-weight barycentric samples per retained triangle, weighted by triangle area in square metres. They are estimates of displayed surface-area coverage, not counts of atlas pixels or global image completeness. The lossless source-index raster records the chosen input for each atlas texel, including bleed. The report explicitly separates these two measurements.
+
+## Tempel 1 source selection and frame
+
+Included: pre-impact ITS images 9000632, 9000639 and 9000654 (2005), and NAVCAM N30036, N30039 and N30042 (2011). The separate encounter lenses are never merged into a single change map. The ITS sequence supplies a wider nucleus image plus closer views of the impact region. MRI 9000909 was evaluated but is much coarser (88 m/pixel). Later 2005 MRI frames can contain the impact plume: spacecraft impact time is about 05:44:34 UTC, distinct from the later Earth reception time. ITS 9000680 crops into terrain without a measurable nucleus limb and is not included. HRI 2005 and the later published SPC model were surveyed; neither replaces the current qualified source shape. SBMT camera files require access not available here and were not used.
+
+The 2012 PDS model's pole is RA 255 degrees, Dec +64.5 degrees. Its original VRML gives encounter Sun longitudes 332.770 degrees (2005) and 34.951 degrees (2011). Those directions bind the model to the FITS J2000 Sun vector; pointing alone is fitted. The original source table has two-degree sampling and weaker regions are explicitly flagged. The registration budgets are 100 m RMS / 200 m maximum; source image scale is reported separately. These tolerances do not turn the model into a precise impact-site survey.
+
+NExT's selected phase angles span 25.591 to 67.094 degrees. Robust overlap display gains are bounded to [1/3,3]; the close ITS sequence retains the tighter [2/3,1.5] bound. Li et al. (2013), doi:10.1016/j.icarus.2012.02.011, discusses Tempel's photometry and the limitations imposed by shape uncertainty. No physical phase function or albedo is recovered here. The original photographic shading is retained because normalization against the coarse mesh added facet artifacts.

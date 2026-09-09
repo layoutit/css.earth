@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "96f1230ee45a0476ef3cdbda77594f8ad31486994e4728667b75ad56733f4b7c"
+          "sha256": "bfd911ebda82fa674137698dd8e6d2bdf1a3063c8e0f339f5b1bdd3babae5a06"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8c49053f7fe3dbf0c7cb158afa0d5129d65d41ce30760cda4d4795d3dd433a35"
+          "sha256": "e6e018bf574934a3a27cf4cf9105fb445d194b28110c79265529f902b4884660"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "84c66c54d4853ca9ce8e91cc88ff09e55b674421341ae56031efcf72ff096a7e"
+          "sha256": "c4974fbc229a727fe348ea21994baa5a257047ead48a638067e6acc141a3ba10"
         },
         {
           "id": "rotation",
@@ -68,6 +68,16 @@
             },
             {
               "id": "constraints",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "mri",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "hri",
               "source": "content",
               "material": "lighting"
             }
@@ -113,6 +123,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fe2c176c5bf0df79a6c2001a59a9745c47c2263842feffcad158f051f1964f77"
+    "sha256": "717a0f412c211991eea41884be3a069416d9ad8c0a0a24dd264d87649fec0d1d"
   }
 }

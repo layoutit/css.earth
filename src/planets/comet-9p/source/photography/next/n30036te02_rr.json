@@ -1,0 +1,928 @@
+{
+  "schema": "cssearth-encounter-control@1",
+  "observation": {
+    "instrument": "stardust-navcam",
+    "width": 1024,
+    "height": 1024,
+    "startTime": "2011-02-15T04:39:02.906",
+    "filter": "OPNAV",
+    "target": "9P/TEMPEL 1 (1867 G1)",
+    "detectorBorderPixels": 0
+  },
+  "camera": {
+    "bodyToJ2000": [
+      [
+        0.5833633161611854,
+        -0.8045320556844298,
+        -0.11142447098196179
+      ],
+      [
+        0.7079177748661183,
+        0.5709010704904416,
+        -0.4158417869111657
+      ],
+      [
+        0.39817039742555993,
+        0.1637074802477059,
+        0.9025852843498605
+      ]
+    ],
+    "offsetPixels": [
+      -82.09697707734055,
+      11.059937834228617
+    ],
+    "maximumOffsetPixels": 256
+  },
+  "registration": {
+    "method": "disjoint-limb-normal-translation",
+    "seedOffsetPixels": [
+      -81,
+      13
+    ],
+    "offsetPixels": [
+      -82.09697707734055,
+      11.059937834228617
+    ],
+    "fit": {
+      "count": 15,
+      "rmsPixels": 2.0373320195850817,
+      "maximumPixels": 3.7553387096423956
+    },
+    "holdout": {
+      "count": 13,
+      "rmsPixels": 2.2178582117580525,
+      "maximumPixels": 5.346151183146697
+    },
+    "normalConditionNumber": 1.0492872280638097,
+    "controls": [
+      {
+        "id": "limb-18",
+        "bin": 18,
+        "partition": "fit",
+        "modelPixel": [
+          156.64644660940672,
+          666.3535533905932
+        ],
+        "sourcePixel": [
+          156.29289321881345,
+          666.7071067811864
+        ],
+        "normal": [
+          -0.7071067811865475,
+          0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          -748.515008563525,
+          2329.650000994254,
+          -1491.7802702587069
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          0.35355339059327373
+        ],
+        "normalOffsetPixels": 0.5,
+        "gradient": 1.1924711884603312e-07,
+        "inside": 3.112516537839838e-07,
+        "outside": 5.557903648423235e-08
+      },
+      {
+        "id": "limb-19",
+        "bin": 19,
+        "partition": "holdout",
+        "modelPixel": [
+          146.64644660940672,
+          655.3535533905932
+        ],
+        "sourcePixel": [
+          147.53033008588991,
+          654.46966991411
+        ],
+        "normal": [
+          -0.7071067811865475,
+          0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          -835.3093082356208,
+          2368.386143281081,
+          -1287.3142831821751
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          0.35355339059327373
+        ],
+        "normalOffsetPixels": -1.25,
+        "gradient": 1.2902188473162823e-07,
+        "inside": 3.079298664943053e-07,
+        "outside": 6.630241244920398e-08
+      },
+      {
+        "id": "limb-20",
+        "bin": 20,
+        "partition": "fit",
+        "modelPixel": [
+          131.64644660940672,
+          629.3535533905932
+        ],
+        "sourcePixel": [
+          130.5857864376269,
+          630.414213562373
+        ],
+        "normal": [
+          -0.7071067811865475,
+          0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          -1012.8490672239568,
+          2356.953310638026,
+          -825.0755917765491
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          0.35355339059327373
+        ],
+        "normalOffsetPixels": 1.5,
+        "gradient": 1.5386274299089564e-07,
+        "inside": 3.2084275858323963e-07,
+        "outside": 5.3767738705801094e-08
+      },
+      {
+        "id": "limb-21",
+        "bin": 21,
+        "partition": "holdout",
+        "modelPixel": [
+          118.5,
+          594.0
+        ],
+        "sourcePixel": [
+          116.0,
+          594.0
+        ],
+        "normal": [
+          -1.0,
+          0.0
+        ],
+        "sourcePointMeters": [
+          -746.4180411327106,
+          2548.77366019864,
+          -459.7391528478038
+        ],
+        "projectionOffsetPixels": [
+          -0.5,
+          0.0
+        ],
+        "normalOffsetPixels": 2.5,
+        "gradient": 1.856098776897852e-07,
+        "inside": 3.605208291901363e-07,
+        "outside": 5.839720529365877e-08
+      },
+      {
+        "id": "limb-22",
+        "bin": 22,
+        "partition": "fit",
+        "modelPixel": [
+          113.5,
+          569.0
+        ],
+        "sourcePixel": [
+          111.0,
+          569.0
+        ],
+        "normal": [
+          -1.0,
+          0.0
+        ],
+        "sourcePointMeters": [
+          -777.5959514066053,
+          2491.561069696225,
+          -92.24498949186818
+        ],
+        "projectionOffsetPixels": [
+          -0.5,
+          0.0
+        ],
+        "normalOffsetPixels": 2.5,
+        "gradient": 2.086671173628929e-07,
+        "inside": 4.085577813839336e-07,
+        "outside": 7.029837689742635e-08
+      },
+      {
+        "id": "limb-23",
+        "bin": 23,
+        "partition": "holdout",
+        "modelPixel": [
+          109.52565835097474,
+          540.1581138830085
+        ],
+        "sourcePixel": [
+          106.44243763231057,
+          541.1858541225632
+        ],
+        "normal": [
+          -0.9486832980505138,
+          0.31622776601683794
+        ],
+        "sourcePointMeters": [
+          -1181.4661200997361,
+          2176.3736903367535,
+          518.3225324347877
+        ],
+        "projectionOffsetPixels": [
+          -0.4743416490252569,
+          0.15811388300841897
+        ],
+        "normalOffsetPixels": 3.25,
+        "gradient": 1.90638260733067e-07,
+        "inside": 4.1255202631873544e-07,
+        "outside": 6.99242193036298e-08
+      },
+      {
+        "id": "limb-24",
+        "bin": 24,
+        "partition": "fit",
+        "modelPixel": [
+          112.64644660940672,
+          507.6464466094067
+        ],
+        "sourcePixel": [
+          109.6412427893639,
+          504.6412427893639
+        ],
+        "normal": [
+          -0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          -624.5611718103755,
+          2334.8591253872873,
+          681.2847947715345
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": 4.25,
+        "gradient": 1.9072213319759612e-07,
+        "inside": 4.5314439489629876e-07,
+        "outside": 8.296964182363809e-08
+      },
+      {
+        "id": "limb-25",
+        "bin": 25,
+        "partition": "holdout",
+        "modelPixel": [
+          119.5,
+          479.0
+        ],
+        "sourcePixel": [
+          117.0,
+          479.0
+        ],
+        "normal": [
+          -1.0,
+          0.0
+        ],
+        "sourcePointMeters": [
+          -742.2176081490179,
+          2039.475285457651,
+          1140.0134321609512
+        ],
+        "projectionOffsetPixels": [
+          -0.5,
+          0.0
+        ],
+        "normalOffsetPixels": 2.5,
+        "gradient": 2.337962712317676e-07,
+        "inside": 4.271745410733274e-07,
+        "outside": 7.862346507181428e-08
+      },
+      {
+        "id": "limb-26",
+        "bin": 26,
+        "partition": "fit",
+        "modelPixel": [
+          131.55278640450004,
+          451.77639320225
+        ],
+        "sourcePixel": [
+          128.86950483150028,
+          450.43475241575015
+        ],
+        "normal": [
+          -0.8944271909999159,
+          -0.4472135954999579
+        ],
+        "sourcePointMeters": [
+          -517.924036951561,
+          1891.239174670729,
+          1393.2670604313607
+        ],
+        "projectionOffsetPixels": [
+          -0.4472135954999579,
+          -0.22360679774997896
+        ],
+        "normalOffsetPixels": 3.0,
+        "gradient": 2.3844029328756733e-07,
+        "inside": 4.527742305526772e-07,
+        "outside": 8.211924296119832e-08
+      },
+      {
+        "id": "limb-27",
+        "bin": 27,
+        "partition": "holdout",
+        "modelPixel": [
+          146.64644660940672,
+          429.6464466094067
+        ],
+        "sourcePixel": [
+          144.87867965644037,
+          427.87867965644034
+        ],
+        "normal": [
+          -0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          -518.2351075543847,
+          1584.881291953483,
+          1688.9480963799288
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": 2.5,
+        "gradient": 2.5024786509675323e-07,
+        "inside": 4.725165752006433e-07,
+        "outside": 8.9186414697906e-08
+      },
+      {
+        "id": "limb-28",
+        "bin": 28,
+        "partition": "fit",
+        "modelPixel": [
+          158.64644660940672,
+          415.6464466094067
+        ],
+        "sourcePixel": [
+          157.5857864376269,
+          414.5857864376269
+        ],
+        "normal": [
+          -0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          -245.98016311199171,
+          1522.8012342614238,
+          1735.4549716402107
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": 1.5,
+        "gradient": 2.6847371259464126e-07,
+        "inside": 4.866442964157613e-07,
+        "outside": 8.330781753329575e-08
+      },
+      {
+        "id": "limb-29",
+        "bin": 29,
+        "partition": "holdout",
+        "modelPixel": [
+          191.64644660940672,
+          381.6464466094067
+        ],
+        "sourcePixel": [
+          191.82322330470336,
+          381.82322330470333
+        ],
+        "normal": [
+          -0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          -73.91574330365984,
+          1016.5117879922764,
+          2096.541479430598
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": -0.25,
+        "gradient": 2.883838874367939e-07,
+        "inside": 5.497440724866465e-07,
+        "outside": 8.996830302976377e-08
+      },
+      {
+        "id": "limb-30",
+        "bin": 30,
+        "partition": "fit",
+        "modelPixel": [
+          206.64644660940672,
+          368.6464466094067
+        ],
+        "sourcePixel": [
+          205.93933982822017,
+          367.93933982822017
+        ],
+        "normal": [
+          -0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          214.30729128289386,
+          927.1609688049211,
+          2117.806535200245
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": 1.0,
+        "gradient": 2.727143169067858e-07,
+        "inside": 5.350324840946996e-07,
+        "outside": 8.809288232214385e-08
+      },
+      {
+        "id": "limb-31",
+        "bin": 31,
+        "partition": "holdout",
+        "modelPixel": [
+          225.64644660940672,
+          349.6464466094067
+        ],
+        "sourcePixel": [
+          224.5857864376269,
+          348.5857864376269
+        ],
+        "normal": [
+          -0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          399.7402174329909,
+          691.4503437216044,
+          2273.1863458222942
+        ],
+        "projectionOffsetPixels": [
+          -0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": 1.5,
+        "gradient": 2.8231838200554193e-07,
+        "inside": 5.285989459480334e-07,
+        "outside": 8.056606048967296e-08
+      },
+      {
+        "id": "limb-32",
+        "bin": 32,
+        "partition": "fit",
+        "modelPixel": [
+          246.77639320225003,
+          331.55278640450007
+        ],
+        "sourcePixel": [
+          246.21737620787508,
+          330.43475241575015
+        ],
+        "normal": [
+          -0.4472135954999579,
+          -0.8944271909999159
+        ],
+        "sourcePointMeters": [
+          547.7680266950629,
+          408.5178524313378,
+          2432.3874420864886
+        ],
+        "projectionOffsetPixels": [
+          -0.22360679774997896,
+          -0.4472135954999579
+        ],
+        "normalOffsetPixels": 1.25,
+        "gradient": 2.6577924927551067e-07,
+        "inside": 5.28217242390383e-07,
+        "outside": 8.413000074369847e-08
+      },
+      {
+        "id": "limb-33",
+        "bin": 33,
+        "partition": "holdout",
+        "modelPixel": [
+          269.8418861169916,
+          315.52565835097477
+        ],
+        "sourcePixel": [
+          269.60471529247894,
+          314.8141458774369
+        ],
+        "normal": [
+          -0.31622776601683794,
+          -0.9486832980505138
+        ],
+        "sourcePointMeters": [
+          800.1130151795805,
+          171.49894126375148,
+          2507.530945198261
+        ],
+        "projectionOffsetPixels": [
+          -0.15811388300841897,
+          -0.4743416490252569
+        ],
+        "normalOffsetPixels": 0.75,
+        "gradient": 2.7571550731408934e-07,
+        "inside": 5.261277919998975e-07,
+        "outside": 7.596592155323378e-08
+      },
+      {
+        "id": "limb-34",
+        "bin": 34,
+        "partition": "fit",
+        "modelPixel": [
+          285.8418861169916,
+          307.52565835097477
+        ],
+        "sourcePixel": [
+          286.07905694150423,
+          308.23717082451265
+        ],
+        "normal": [
+          -0.31622776601683794,
+          -0.9486832980505138
+        ],
+        "sourcePointMeters": [
+          936.1599367803428,
+          -4.16046571181505,
+          2536.2596434876323
+        ],
+        "projectionOffsetPixels": [
+          -0.15811388300841897,
+          -0.4743416490252569
+        ],
+        "normalOffsetPixels": -0.75,
+        "gradient": 2.9179017246860894e-07,
+        "inside": 5.436913284029288e-07,
+        "outside": 7.809853741491679e-08
+      },
+      {
+        "id": "limb-35",
+        "bin": 35,
+        "partition": "holdout",
+        "modelPixel": [
+          339.22360679775,
+          298.55278640450007
+        ],
+        "sourcePixel": [
+          340.2298373876249,
+          296.54032522475023
+        ],
+        "normal": [
+          0.4472135954999579,
+          -0.8944271909999159
+        ],
+        "sourcePointMeters": [
+          1339.9187359436473,
+          -536.9936899010936,
+          2409.2051611398056
+        ],
+        "projectionOffsetPixels": [
+          0.22360679774997896,
+          -0.4472135954999579
+        ],
+        "normalOffsetPixels": 2.25,
+        "gradient": 2.2417320622025727e-07,
+        "inside": 4.886825877292722e-07,
+        "outside": 8.487393188261194e-08
+      },
+      {
+        "id": "limb-36",
+        "bin": 36,
+        "partition": "fit",
+        "modelPixel": [
+          355.22360679775,
+          300.55278640450007
+        ],
+        "sourcePixel": [
+          357.45967477524977,
+          296.08065044950047
+        ],
+        "normal": [
+          0.4472135954999579,
+          -0.8944271909999159
+        ],
+        "sourcePointMeters": [
+          1555.158912732324,
+          -617.1255524593289,
+          2255.598366842358
+        ],
+        "projectionOffsetPixels": [
+          0.22360679774997896,
+          -0.4472135954999579
+        ],
+        "normalOffsetPixels": 5.0,
+        "gradient": 2.252934052648925e-07,
+        "inside": 4.6879259230081516e-07,
+        "outside": 7.665901335940362e-08
+      },
+      {
+        "id": "limb-37",
+        "bin": 37,
+        "partition": "holdout",
+        "modelPixel": [
+          386.0,
+          304.5
+        ],
+        "sourcePixel": [
+          386.0,
+          300.0
+        ],
+        "normal": [
+          0.0,
+          -1.0
+        ],
+        "sourcePointMeters": [
+          1740.0712313519616,
+          -918.8827184830734,
+          2077.620920541216
+        ],
+        "projectionOffsetPixels": [
+          0.0,
+          -0.5
+        ],
+        "normalOffsetPixels": 4.5,
+        "gradient": 2.4567557943555585e-07,
+        "inside": 4.943227054354793e-07,
+        "outside": 8.220683156423547e-08
+      },
+      {
+        "id": "limb-38",
+        "bin": 38,
+        "partition": "fit",
+        "modelPixel": [
+          407.0,
+          309.5
+        ],
+        "sourcePixel": [
+          407.0,
+          305.0
+        ],
+        "normal": [
+          0.0,
+          -1.0
+        ],
+        "sourcePointMeters": [
+          2314.926620229904,
+          -825.0414803811145,
+          1690.3945382752427
+        ],
+        "projectionOffsetPixels": [
+          0.0,
+          -0.5
+        ],
+        "normalOffsetPixels": 4.5,
+        "gradient": 2.492084263394645e-07,
+        "inside": 4.7641205469517445e-07,
+        "outside": 8.011640062477454e-08
+      },
+      {
+        "id": "limb-39",
+        "bin": 39,
+        "partition": "holdout",
+        "modelPixel": [
+          454.3535533905933,
+          325.6464466094067
+        ],
+        "sourcePixel": [
+          456.47487373415294,
+          323.52512626584706
+        ],
+        "normal": [
+          0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          2476.0500303026347,
+          -1311.7379080433602,
+          1343.8936742316291
+        ],
+        "projectionOffsetPixels": [
+          0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": 3.0,
+        "gradient": 1.973875356497956e-07,
+        "inside": 4.135375490932347e-07,
+        "outside": 8.581403676544141e-08
+      },
+      {
+        "id": "limb-40",
+        "bin": 40,
+        "partition": "fit",
+        "modelPixel": [
+          471.3535533905933,
+          333.6464466094067
+        ],
+        "sourcePixel": [
+          473.29809703885627,
+          331.70190296114373
+        ],
+        "normal": [
+          0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          2617.7631006005104,
+          -1423.8990713747917,
+          1144.2687611821893
+        ],
+        "projectionOffsetPixels": [
+          0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": 2.75,
+        "gradient": 2.0988072435557115e-07,
+        "inside": 4.391542631765333e-07,
+        "outside": 8.412107632693733e-08
+      },
+      {
+        "id": "limb-41",
+        "bin": 41,
+        "partition": "holdout",
+        "modelPixel": [
+          494.3535533905933,
+          343.6464466094067
+        ],
+        "sourcePixel": [
+          495.5909902576697,
+          342.4090097423303
+        ],
+        "normal": [
+          0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          2683.6662289314845,
+          -1660.3466979410005,
+          951.1513374449714
+        ],
+        "projectionOffsetPixels": [
+          0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": 1.75,
+        "gradient": 1.7504281402125343e-07,
+        "inside": 3.5916141882808006e-07,
+        "outside": 7.321521167114042e-08
+      },
+      {
+        "id": "limb-42",
+        "bin": 42,
+        "partition": "fit",
+        "modelPixel": [
+          530.3535533905932,
+          376.6464466094067
+        ],
+        "sourcePixel": [
+          530.0,
+          377.0
+        ],
+        "normal": [
+          0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          2464.2353394580423,
+          -2160.684604885595,
+          572.6621575623576
+        ],
+        "projectionOffsetPixels": [
+          0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": -0.5,
+        "gradient": 1.1729047599828846e-07,
+        "inside": 2.737819215781201e-07,
+        "outside": 6.381301886904112e-08
+      },
+      {
+        "id": "limb-43",
+        "bin": 43,
+        "partition": "holdout",
+        "modelPixel": [
+          540.3535533905932,
+          389.6464466094067
+        ],
+        "sourcePixel": [
+          536.9947961799571,
+          393.0052038200428
+        ],
+        "normal": [
+          0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          2387.6188560547016,
+          -2292.4973150284786,
+          421.7210138596856
+        ],
+        "projectionOffsetPixels": [
+          0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": -4.75,
+        "gradient": 1.612974642739573e-07,
+        "inside": 3.6565174355018826e-07,
+        "outside": 7.741935093008578e-08
+      },
+      {
+        "id": "limb-44",
+        "bin": 44,
+        "partition": "fit",
+        "modelPixel": [
+          550.3535533905932,
+          407.6464466094067
+        ],
+        "sourcePixel": [
+          549.2928932188134,
+          408.70710678118655
+        ],
+        "normal": [
+          0.7071067811865475,
+          -0.7071067811865475
+        ],
+        "sourcePointMeters": [
+          2393.7973523073306,
+          -2347.7074865913164,
+          158.32508580722788
+        ],
+        "projectionOffsetPixels": [
+          0.35355339059327373,
+          -0.35355339059327373
+        ],
+        "normalOffsetPixels": -1.5,
+        "gradient": 1.6452811735234718e-07,
+        "inside": 3.400056982627575e-07,
+        "outside": 6.656807727267733e-08
+      },
+      {
+        "id": "limb-46",
+        "bin": 46,
+        "partition": "fit",
+        "modelPixel": [
+          568.5,
+          469.0
+        ],
+        "sourcePixel": [
+          570.0,
+          469.0
+        ],
+        "normal": [
+          1.0,
+          0.0
+        ],
+        "sourcePointMeters": [
+          2027.350843552762,
+          -2561.7572907884605,
+          -522.3789311649743
+        ],
+        "projectionOffsetPixels": [
+          0.5,
+          0.0
+        ],
+        "normalOffsetPixels": 1.5,
+        "gradient": 1.1533050781054044e-07,
+        "inside": 2.4712929302950215e-07,
+        "outside": 5.1370964371244554e-08
+      }
+    ],
+    "excluded": [
+      {
+        "bin": 1,
+        "reason": "unmeasurable-outward-limb",
+        "offset": -1.25
+      },
+      {
+        "bin": 2,
+        "reason": "unmeasurable-outward-limb",
+        "offset": -1.5
+      },
+      {
+        "bin": 4,
+        "reason": "unmeasurable-outward-limb",
+        "offset": -0.5
+      },
+      {
+        "bin": 45,
+        "reason": "unmeasurable-outward-limb",
+        "offset": 2.0
+      }
+    ],
+    "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain.",
+    "sourceShapeSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
+    "nominalPixelScaleMeters": 12.499635680760747,
+    "maximumRmsMeters": 100,
+    "maximumResidualMeters": 200
+  },
+  "frameBinding": "Published 2012 shape pole and encounter Sun longitude from the source VRML; only detector pointing is fitted."
+}
