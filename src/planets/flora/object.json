@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 317.39130434782606,
       "bodyRadiusM": 73000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/flora-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "07f1d7c3c4a544dfab092f8637173e0d1eb2b88c0a18ac423934a17a964e0a95"
+      }
     }
   },
   "schema": "cssearth-object@1",

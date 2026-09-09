@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 79.41566907724967,
       "bodyRadiusM": 18265.603887767425
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nix-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "154b416c003f18da6adb7d0248ae07dce6eba873eeeac3359b4d7ef2ffc7f2d2"
+      }
     }
   },
   "prepared": {

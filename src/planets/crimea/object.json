@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 63.43260869565217,
       "bodyRadiusM": 14589.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/crimea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "78f784c9a1daafb40e9282d18332d33b5870d6b3d81b7c33676988ff6d82e1cf"
+      }
     }
   },
   "schema": "cssearth-object@1",

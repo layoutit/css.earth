@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 204.34782608695653,
       "bodyRadiusM": 47000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nausikaa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "24112036ec9cf30e5ca01e255144783518583de4dc7c6aba18b1639d1d573eef"
+      }
     }
   },
   "schema": "cssearth-object@1",

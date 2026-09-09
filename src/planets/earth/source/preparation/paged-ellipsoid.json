@@ -46,6 +46,11 @@
     },
     "rotationSeconds": 72
   },
+  "textureLevels": {
+    "widths": [512, 1024, 2048, 4096],
+    "hysteresis": 0.2,
+    "texelsPerCssPixel": 2
+  },
   "atlas": {
     "pageSize": 4096,
     "density": 8,

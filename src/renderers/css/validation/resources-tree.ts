@@ -13,11 +13,17 @@ export function requireAssets(value: unknown): asserts value is PreparedAssets {
     if (pool.decoding !== undefined) choice(pool.decoding, ['auto', 'sync', 'async'], 'pool decoding');
     if (pool.eviction !== undefined) choice(pool.eviction, ['unused', 'capacity'], 'pool eviction');
     if (pool.stabilityMilliseconds !== undefined && finite(pool.stabilityMilliseconds, 'resource stability') < 0) fail('resource stability must be nonnegative');
+    if (pool.maximumDecodedBytes !== undefined) integer(pool.maximumDecodedBytes, 'decoded byte budget', 1);
   }
   unique(poolIds, 'resource pools');
   for (const input of array(assets.entries, 'resource entries')) {
     const entry = record(input, 'resource entry'); resourceIds.push(text(entry.key, 'resource key'));
     if (!text(entry.url, 'resource URL').startsWith('/scenes/') || !poolIds.includes(text(entry.pool, 'resource pool'))) fail('resource identity is invalid');
+    const pool = (assets.pools as PreparedAssets['pools']).find(pool => pool.id === entry.pool)!;
+    if (entry.decodedBytes !== undefined || pool.maximumDecodedBytes !== undefined) {
+      const bytes = integer(entry.decodedBytes, 'decoded image bytes', 1);
+      if (pool.maximumDecodedBytes !== undefined && bytes > pool.maximumDecodedBytes) fail('image exceeds decoded byte budget');
+    }
   }
   unique(resourceIds, 'resource identities');
   resourceList(assets.startup, new Set(resourceIds), 'startup resources');

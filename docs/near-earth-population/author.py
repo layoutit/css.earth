@@ -14,7 +14,7 @@ for part in Path('packages/astronomy/src/data').glob('asteroidElements-*.data.ts
 for b in bodies:
  id=b['id'];name=b['displayName'];num=b['number'];mid=b['modelId'];url=b['modelUrl']; diameter=b['diameterKm'];radius=diameter/2;scale=b['scaleKmPerSourceUnit'];shape=f'shape/model-{mid}.txt';root=Path('src/planets')/id;s=root/'source'
  assert id not in source_ids and not root.exists(),f'{id}: refusing to overwrite an existing or registered object'
- for target in [Path('site/pages')/(id+'.astro'),Path('src/renderers/css/styles')/(id+'-surfaces.css'),Path('tests/objects/unit')/id,Path('tests/objects/browser')/id]:
+ for target in [Path('src/renderers/css/styles')/(id+'-surfaces.css'),Path('tests/objects/unit')/id,Path('tests/objects/browser')/id]:
   assert not target.exists(),f'{target}: refusing to overwrite existing files'
  assert b.get('shapeKind') and isinstance(b.get('calibration'),dict) and b.get('selectionNotes'),f'{id}: missing qualified shape/calibration/selection metadata'
  assert b['calibration']['diameterKm']==diameter and b['calibration']['scaleKmPerSourceUnit']==scale,f'{id}: calibration and intake disagree'
@@ -89,7 +89,6 @@ for b in bodies:
  write(s/'preparation/acquisition.json',acquisition);write(s/'manifest.json',manifest)
  # Title/context pins are finalized through their existing owners in finalize-sources.mjs.
  descriptor=replace(read(BASE/'object.json'),id,name);descriptor['properties']['recipe']['shape']['radiusKm']=radius;descriptor['properties'].pop('worldFrame',None);descriptor.pop('prepared',None);write(root/'object.json',descriptor)
- copyto(Path('site/pages/dike.astro'),Path('site/pages')/(id+'.astro'));page=Path('site/pages')/(id+'.astro');page.write_text(page.read_text().replace('dike',id))
  css=Path('src/renderers/css/styles')/(id+'-surfaces.css');css.write_text(Path('src/renderers/css/styles/dike-surfaces.css').read_text().replace('dike',id))
  test=Path('tests/objects/unit')/id/'source.test.mjs';expected={k:b[k] for k in ['modelId','shapeSha256','vertices','faces','firstVertex','firstFace','signedVolume','diameterKm','uncertaintyKm','lambda','beta','periodHours']};expected.update(name=name,modelVersion=b['version'])
  test.parent.mkdir(parents=True,exist_ok=True);test.write_text("import {test} from 'node:test';\nimport {assertCalibratedAsteroidSource} from '../asteroid-calibration-contract.mjs';\n\n// Original publisher-coordinate anchors and independent signed-volume intake.\nconst independentExpected = "+json.dumps(expected,indent=2)+f';\n\ntest("{name} preserves its source model and calibrated raster triangles", () => assertCalibratedAsteroidSource("{id}", independentExpected));\n')

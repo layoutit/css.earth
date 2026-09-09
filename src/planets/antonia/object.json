@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 51.93478260869565,
       "bodyRadiusM": 11945
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/antonia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f972300d1d35833c051cd95aa4ebf1f0c3413292f19bb78cd3c12001dcca2fee"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -1,0 +1,29 @@
+---
+import PlanetLayout from '../layouts/PlanetLayout.astro';
+import PreparedObjectHead from './PreparedObjectHead.astro';
+import PreparedObjectPanel from './PreparedObjectPanel.astro';
+import { loadObjectPageData } from '../object-page-data.mjs';
+import { objectPageStyles } from '../object-page-contract.mjs';
+import shellCss from '../planet-shell.css?inline';
+
+interface Props { objectId: string; navigation?: boolean; }
+const { objectId, navigation = false } = Astro.props;
+const preparedPage = await loadObjectPageData(objectId);
+const contentFiles = import.meta.glob('../../src/planets/*/prepared/content.json', { import: 'default' });
+const descriptors = import.meta.glob('../../src/planets/*/object.json', { import: 'default' });
+// ?inline processes CSS assets without importing every object's rules into the
+// shared cascade. Only the selected package's authored CSS is emitted.
+const cssFiles = import.meta.glob<string>('../../src/**/*.css', { query: '?inline', import: 'default' });
+const descriptor = await descriptors[`../../src/planets/${objectId}/object.json`]();
+const preparedContent = await contentFiles[`../../src/planets/${objectId}/prepared/content.json`]();
+const styles = await Promise.all(objectPageStyles(descriptor)
+  .map(async path => ({ path, css: path === 'site/planet-shell.css' ? shellCss : await cssFiles[`../../${path}`]() })));
+---
+
+<PlanetLayout objectId={objectId} navigation={navigation}>
+  <Fragment slot="planet-head">
+    {styles.map(({ path, css }) => <style is:inline data-object-style={path} set:html={css} />)}
+    {!navigation && <PreparedObjectHead preparedAssets={preparedPage.assets} />}
+  </Fragment>
+  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent} preparedControls={preparedPage.controls} navigation={navigation} />
+</PlanetLayout>

@@ -141,6 +141,15 @@
       ],
       "metersPerUnit": 6867.193675889329,
       "bodyRadiusM": 1737400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/moon-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d0d351eba94c8dbd1c9828a18c8e954a36a249888cd24c90c3c7af4258a20762"
+      }
     }
   },
   "schema": "cssearth-object@1",

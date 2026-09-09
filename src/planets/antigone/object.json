@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 273.9130434782609,
       "bodyRadiusM": 63000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/antigone-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0527e7c80d73b78981a9fe5c9282e759d998d879715f10a79fd8d2259ee216e5"
+      }
     }
   },
   "schema": "cssearth-object@1",

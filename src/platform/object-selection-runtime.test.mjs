@@ -14,7 +14,7 @@ const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve()
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 // The actual Earth plan provides independent lighting and atmosphere row demand.
 // Only native image completion and DOM setters are controlled by these tests.
-function harness({ onTicket } = {}) {
+function harness({ onTicket, onChange, deferTextureRefinement } = {}) {
   const definition = earthDefinition, f = retainedPresentationFixture(definition);
   const jobs = [], commits = [], changes = [], fatal = [], materialErrors = [], created = [];
   const createElement = f.document.createElement;
@@ -23,13 +23,17 @@ function harness({ onTicket } = {}) {
   const resources = createPreparedResidency({ assets: definition.assets,
     schedule(callback) { timers.set(++nextTimer, callback); return nextTimer; }, unschedule(id) { timers.delete(id); },
     createImage() { return { naturalWidth: 1, naturalHeight: 1, src: "",
-      decode() { return new Promise((resolve, reject) => jobs.push({ url: this.src, image: this, resolve, reject, done: false })); },
+      decode() {
+        this.naturalWidth = (definition.assets.entries.find(entry => entry.url === this.src)?.decodedBytes ?? 4) / 4;
+        return new Promise((resolve, reject) => jobs.push({ url: this.src, image: this, resolve, reject, done: false }));
+      },
       removeAttribute(name) { if (name === "src") this.src = ""; } }; } });
   f.lifetime.onDispose(() => resources.destroy());
   const residency = { ...resources, request(...args) { const ticket = resources.request(...args); onTicket?.(ticket); return ticket; } };
   const presentation = mountPreparedPresentation(f.stage, { ...f.context, resources: resources.resources }, definition);
   const coordinator = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime,
-    onChange: state => changes.push(state), onCommit: (selection, plan) => commits.push({ selection, plan }),
+    deferTextureRefinement,
+    onChange: state => { changes.push(state); onChange?.(state); }, onCommit: (selection, plan) => commits.push({ selection, plan }),
     onFatalError(error) { fatal.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => coordinator.destroy());
   let revision = 0, currentView;
@@ -38,6 +42,7 @@ function harness({ onTicket } = {}) {
     const z = frame / (track.frame.count - 1) * 2 - 1;
     const direction = [Math.sqrt(1 - z * z), 0, z];
     const next = { controlPitch: 37, controlYaw: 10, zoom: definition.camera.defaultZoom,
+      levelOfDetail: { stage: 'geometry', silhouetteDiameter: 100, billboardOpacity: 0, markerOpacity: 0 },
       revision: ++revision, sceneMatrix: matrix, counterRotation: matrix, counterRotationFor: () => matrix,
       sunViewDirection: direction, skySunViewDirection: viewSunDirectionToPreparedLightDirection(direction) };
     next.reference = currentView?.reference ?? next; currentView = next; coordinator.setView(next); return next;
@@ -60,6 +65,29 @@ function harness({ onTicket } = {}) {
     atmosphereTarget: () => created[definition.materials[1].target],
   };
 }
+
+test('initial coarse commit remains successful when its publication immediately requests refinement', async t => {
+  let h, requested = false;
+  h = harness({ onChange(state) {
+    if (!state.committed || requested) return;
+    requested = true;
+    h.coordinator.setView({ ...h.currentView(), levelOfDetail: { stage: 'geometry', silhouetteDiameter: 1000, billboardOpacity: 0, markerOpacity: 0 } });
+  } });
+  t.after(h.restore); await h.ready();
+  assert.equal(h.commits[0].plan.textureLevel, 0);
+  assert.equal(h.commits.at(-1).plan.textureLevel, 3);
+  assert.deepEqual(h.fatal, []);
+});
+test('URL restoration admits no default-camera detail before the router releases refinement', async t => {
+  const h = harness({ deferTextureRefinement: true }); t.after(h.restore); await h.ready();
+  h.coordinator.setView({ ...h.currentView(), levelOfDetail: { stage: 'geometry', silhouetteDiameter: 1000, billboardOpacity: 0, markerOpacity: 0 } });
+  await h.resolveJobs();
+  assert.equal(h.coordinator.state().plan.textureLevel, 0);
+  assert(!h.jobs.some(job => /-level-(1024|2048)\.webp/.test(job.url)));
+  h.coordinator.setView(h.currentView()); // saved distant view
+  h.coordinator.refineTextures(); await h.resolveJobs();
+  assert.equal(h.coordinator.state().plan.textureLevel, 0);
+});
 
 test("camera movement cancels the old resource pass while startup waits for its current atmosphere row", async t => {
   const h = harness(); t.after(h.restore); await flush();

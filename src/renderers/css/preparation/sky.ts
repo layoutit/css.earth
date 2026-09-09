@@ -1,4 +1,5 @@
 /** Static PolyCSS cube geometry in physical ICRF axes; the renderer owns its one axis reflection. */
+import { compileLeafBounds } from './leaf-bounds.js';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { BakedSky } from '../../../preparation/sky/bake.js';
@@ -19,6 +20,7 @@ export function compileCssSky(baked: BakedSky, frame: DensityVolumeFrame) {
       if (!geometry) throw new TypeError(`PolyCSS could not prepare sky face ${face.id}.`);
       return { id: face.id, texturePath: face.texturePath, widthPx: face.widthPx, heightPx: face.heightPx,
         forwardIcrf: face.forwardIcrf, rightIcrf: face.rightIcrf, upIcrf: face.upIcrf,
+        boundsCssPixels: compileLeafBounds(geometry.matrix, geometry.leafWidth, geometry.leafHeight),
         style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`, transform: `matrix3d(${geometry.matrix})`,
           backgroundSize: geometry.backgroundSize.map(n => `${n}px`).join(' '), backgroundPosition: geometry.backgroundPosition.map(n => `${n}px`).join(' ') } };
     }), provenance: baked.provenance, approximation: baked.approximation };

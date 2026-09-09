@@ -98,6 +98,15 @@
       ],
       "metersPerUnit": 321.7391304347826,
       "bodyRadiusM": 74000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/despina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b6f61da772009aae84a310bb00753976009b50fc93b2c64149a1034a28b42b78"
+      }
     }
   },
   "prepared": {

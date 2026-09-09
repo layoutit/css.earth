@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 158.43478260869566,
       "bodyRadiusM": 36440
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/vera-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "427cd33c46464196310a24402e2028d80090f1788d20e7c8f558dd838f5def33"
+      }
     }
   },
   "schema": "cssearth-object@1",

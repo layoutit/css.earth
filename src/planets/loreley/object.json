@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 384.7826086956522,
       "bodyRadiusM": 88500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/loreley-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "206df5a3d9b28d6c8513d7dbd7829c1b0c9d803820633d66ff72901b8147fabe"
+      }
     }
   },
   "schema": "cssearth-object@1",

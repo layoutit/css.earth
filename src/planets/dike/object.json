@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 144.56521739130434,
       "bodyRadiusM": 33250
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dike-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4263fcd86677b5209650d690cb2812d709c38124804f8226a59e5164962414d3"
+      }
     }
   },
   "schema": "cssearth-object@1",

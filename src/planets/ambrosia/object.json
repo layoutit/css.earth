@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 82.3695652173913,
       "bodyRadiusM": 18945
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ambrosia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4e39c08ca72c25d671a05a5fb9d447debf52964fe7530473ed2747adf54b3387"
+      }
     }
   },
   "schema": "cssearth-object@1",

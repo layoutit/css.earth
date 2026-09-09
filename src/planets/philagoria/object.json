@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 59.391304347826086,
       "bodyRadiusM": 13660
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/philagoria-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "849084eaeb8be5b9bec7f196fbd8d03440912f560cfae6b9ce924f628976ee2b"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -205,14 +205,12 @@ export function mountRetainedCubicSky({
       }
       if (matrix !== publishedMatrix) {
         orientation.style.transform = matrix;
-        cube.style.setProperty(`--${objectId}-skybox-orientation`, matrix);
         publishedMatrix = matrix;
       }
       const zoomScale = 1 + plan.cameraZoomResponse *
         (zoom / defaultZoom - 1);
       if (zoomScale !== publishedZoomScale) {
         root.style.setProperty("--planet-cubic-sky-zoom", String(zoomScale));
-        root.style.setProperty(`--${objectId}-skybox-zoom`, String(zoomScale));
         publishedZoomScale = zoomScale;
       }
     },

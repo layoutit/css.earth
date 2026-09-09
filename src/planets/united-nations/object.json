@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 23.91304347826087,
       "bodyRadiusM": 5500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/united-nations-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4306f6cce810090db9bfa031c6fcc22b9318ec395e1c8d56ae845eb3670f8c25"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 29.530434782608694,
       "bodyRadiusM": 6792
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/tartaglia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "02afe4d5e475fb43422a77c79703c54b5e9a0ed523258d0781a83e6bc695e9c8"
+      }
     }
   },
   "schema": "cssearth-object@1",
