@@ -33,7 +33,8 @@ Other completed checks:
 - 668 astronomy tests, including independent Horizons vectors for the three additions.
 - 12 focused geometry and lighting tests; 30 source and runtime-asset closure checks across all ten comets.
 - 73 shared shell, router, overview and framing checks after integration of main `6c8169e95`.
-- Clean source restoration with 17 byte-verified entries per new package; package, renderer and preparation typechecks.
+- Source restoration verified all 17 entries per package. A separate clean staging check regenerated each context snapshot exactly from tracked shape and grid recipes, reusing the earlier byte-verified sky and font downloads. The small pinned context PNGs are checked in, matching the existing comet packages.
+- Package, renderer and preparation typechecks passed.
 - All 304 pinned JSON transports reproduced; the 305-route production build and complete runtime-asset assembly passed.
 - A semantic audit against main preserved the geometry, materials and camera fields of all 301 existing packages. Their descriptor/runtime changes are shared marker bindings and payload hashes; the Sun also receives the three world-context source entries.
 

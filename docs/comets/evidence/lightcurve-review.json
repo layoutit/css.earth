@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-lightcurve-review@1",
-  "at": "2026-09-09T17:40:34.598Z",
+  "at": "2026-09-09T17:51:48.327Z",
   "integratedMain": "6c8169e95b27027c83b92ef50e73d74d4fb7b033",
   "browser": "152.0.7977.84",
   "objects": [
@@ -640,25 +640,49 @@
   "sourceRestoration": [
     {
       "id": "comet-137p",
+      "networkAcquiredAt": "2026-09-09T17:05:33.349Z",
       "restoredFromNetwork": [
         "stars/eso0932a.tif",
         "presentation/InterVariable.ttf"
+      ],
+      "regeneratedIntermediates": [
+        {
+          "path": "presentation/context.png",
+          "bytes": 43504,
+          "sha256": "ae51f55322a8f5c7a75cba4b1a3862a72ce722338541f4084c9517d4f61a7033"
+        }
       ],
       "verifiedCount": 17
     },
     {
       "id": "comet-143p",
+      "networkAcquiredAt": "2026-09-09T17:05:33.349Z",
       "restoredFromNetwork": [
         "stars/eso0932a.tif",
         "presentation/InterVariable.ttf"
+      ],
+      "regeneratedIntermediates": [
+        {
+          "path": "presentation/context.png",
+          "bytes": 40966,
+          "sha256": "6caf4c9aba554ac33fa3f6c654482c6b4da2537c479639ab91a56cfb6a5eb0b0"
+        }
       ],
       "verifiedCount": 17
     },
     {
       "id": "comet-162p",
+      "networkAcquiredAt": "2026-09-09T17:05:33.349Z",
       "restoredFromNetwork": [
         "stars/eso0932a.tif",
         "presentation/InterVariable.ttf"
+      ],
+      "regeneratedIntermediates": [
+        {
+          "path": "presentation/context.png",
+          "bytes": 25872,
+          "sha256": "3596a97ef6973569b2aa603d8701384b0df3526ca43988af9ec9d7430ac07eaf"
+        }
       ],
       "verifiedCount": 17
     }
