@@ -1,0 +1,332 @@
+{
+  "number": 124,
+  "name": "Alkeste",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2584",
+  "modelId": 4511,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4511",
+  "catalog": "View model 136 16 9.907 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "4511",
+    "Asteroid": "(124) Alkeste",
+    "λ": "136",
+    "β": "16",
+    "P": "9.907",
+    "YORP": "",
+    "t0": "2457359",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.53",
+    "p3": "0.05",
+    "p4": "-0.9",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:04:29",
+    "Modified": "2020-10-05 13:04:29",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/52177/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/52178/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/52179/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2020)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/658",
+      "file": "reference-658.html",
+      "links": [
+        {
+          "label": "2020a&a...643a..59d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2020a&a...643a..59d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D",
+          "url": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D"
+        }
+      ]
+    }
+  ],
+  "id": "alkeste",
+  "displayName": "Alkeste",
+  "lambda": 136.0,
+  "beta": 16.0,
+  "periodHours": 9.907,
+  "version": "2019-10-23",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 81.39,
+  "uncertaintyKm": 0.93,
+  "akari": {
+    "number": 124,
+    "name": "Alkeste",
+    "diameterKm": 81.39,
+    "uncertaintyKm": 0.93,
+    "detections": 8,
+    "originalRow": "124    Alkeste                        8.11  0.19  8   81.39  0.93 0.153 0.004"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/52179/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/52177/IAUspin",
+  "shapeSha256": "6b1581ba2bde44e3dbd3c799e1e2bea6562f10dcfd5b83ee8d07481ae37f1ed6",
+  "shapeBytes": 45447,
+  "vertices": 562,
+  "faces": 1120,
+  "signedVolume": 0.9999997189230792,
+  "independentSignedVolume": 0.9999997189230792,
+  "originalVolumeEquivalentDiameter": 1.2407008655546519,
+  "firstVertex": [
+    0.505462,
+    0.262454,
+    0.554141
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5112288588890498,
+    0.8436239430990564
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.731339,
+      0.663439
+    ],
+    [
+      -0.787849,
+      0.718237
+    ],
+    [
+      -0.564683,
+      0.558862
+    ]
+  ],
+  "scaleKmPerSourceUnit": 65.6000187149179,
+  "topology": {
+    "edges": 1680,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 1.2407008655546519,
+    "declaredDiameterKm": null,
+    "relativeDifference": null,
+    "scaledDiameterKm": 81.38999999999999
+  },
+  "alternatives": [
+    {
+      "modelId": 4512,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4512",
+      "pole": [
+        "313",
+        "11"
+      ],
+      "version": "2019-10-23",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Ďurech et al. (2020)",
+          "url": "/projects/damit/references/view/658"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Ďurech2020 TableA.2 reports203 cyan plus122 orange ATLAS observations and two poles. The table marks period recovery E (ellipsoid search); that is not evidence of high shape accuracy. The archived convex mesh is retained only as a coarse inverse model.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "independentCenteredSignedVolume": 0.9999997189230792,
+  "surfaceAreaSourceUnitsSquared": 5.2583631866066884,
+  "surfaceEquivalentDiameterSourceUnits": 1.2937499709920035,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.505462,
+        0.262454,
+        0.554141
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 7,
+      "sourcePoint": [
+        0.371832,
+        0.121827,
+        0.558862
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 177,
+      "sourcePoint": [
+        0.663439,
+        0.278542,
+        0.379946
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 232,
+      "sourcePoint": [
+        -0.188239,
+        -0.787849,
+        -0.039735
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 272,
+      "sourcePoint": [
+        0.089811,
+        0.718237,
+        -0.253861
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 281,
+      "sourcePoint": [
+        -0.160193,
+        0.627315,
+        -0.359857
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 302,
+      "sourcePoint": [
+        -0.731339,
+        -0.227057,
+        0.12395
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 555,
+      "sourcePoint": [
+        0.083566,
+        0.339922,
+        -0.564683
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 561,
+      "sourcePoint": [
+        0.127154,
+        0.38351,
+        -0.564683
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "durech-2020.pdf",
+      "url": "https://arxiv.org/pdf/2010.01820",
+      "label": "Ďurech et al. (2020), A&A 643, A59"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 81.39,
+    "uncertaintyKm": 0.93,
+    "reportedUncertaintyKm": 0.93,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 124,
+      "name": "Alkeste",
+      "diameterKm": 81.39,
+      "uncertaintyKm": 0.93,
+      "detections": 8,
+      "originalRow": "124    Alkeste                        8.11  0.19  8   81.39  0.93 0.153 0.004"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Ďurech2020 TableA.2 reports203 cyan plus122 orange ATLAS observations and two poles. The table marks period recovery E (ellipsoid search); that is not evidence of high shape accuracy. The archived convex mesh is retained only as a coarse inverse model.",
+    "scaleKmPerSourceUnit": 65.6000187149179,
+    "metersPerSourceUnit": 65600.0187149179,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 81.39 km effective diameter (catalog ±0.93 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 2.629388047968044,
+  "orbitalPeriodYears": 4.263735240043857,
+  "sourceFields": {
+    "ID": "4511",
+    "Asteroid": "(124) Alkeste",
+    "λ": "136",
+    "β": "16",
+    "P": "9.907",
+    "YORP": "",
+    "t0": "2457359",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.53",
+    "p3": "0.05",
+    "p4": "-0.9",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:04:29",
+    "Modified": "2020-10-05 13:04:29",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

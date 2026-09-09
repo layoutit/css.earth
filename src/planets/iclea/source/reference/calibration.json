@@ -1,0 +1,20 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 86.0,
+  "uncertaintyKm": 13.0,
+  "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+  "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5017",
+  "sourceLabel": "DAMIT model 5017",
+  "reference": "DAMIT model 5017",
+  "limitations": "Marciniak2023 §5.3 prefers pole1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole2. Table1 gives volume-equivalent86 km with asymmetric interval79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error. The archive keeps the larger13 km side as a symmetric error field; the actual asymmetric range is preserved here.",
+  "visibleDescription": "Convex light-curve reconstruction scaled by stellar occultations: 86 km volume-equivalent diameter (model range79–99 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+  "publishedUncertainty": {
+    "lowerKm": 7,
+    "upperKm": 13,
+    "confidence": "Envelope of acceptable vertically varied models, not a Gaussian sigma interval",
+    "source": "Marciniak2023 Table1 and section4"
+  },
+  "scaleKmPerSourceUnit": 1.0000000026378641,
+  "metersPerSourceUnit": 1000.0000026378641
+}

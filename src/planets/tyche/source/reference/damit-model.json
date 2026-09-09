@@ -1,0 +1,324 @@
+{
+  "number": 258,
+  "name": "Tyche",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/241",
+  "modelId": 329,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/329",
+  "catalog": "View model 224 -4 10.04008 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "329",
+    "Asteroid": "(258) Tyche",
+    "λ": "224",
+    "β": "-4",
+    "P": "10.04008",
+    "YORP": "",
+    "t0": "2444439",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.67",
+    "p3": "0.15",
+    "p4": "-0.44",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:27:34",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1210/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1211/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1212/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1213/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/141",
+      "file": "reference-141.html",
+      "links": [
+        {
+          "label": "2011a&a...530a.134h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011a&a...530a.134h"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4114",
+          "url": "http://arxiv.org/abs/1104.4114\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H",
+          "url": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H"
+        }
+      ]
+    }
+  ],
+  "id": "tyche",
+  "displayName": "Tyche",
+  "lambda": 224.0,
+  "beta": -4.0,
+  "periodHours": 10.04008,
+  "version": "2011-04-21",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 64.37,
+  "uncertaintyKm": 0.89,
+  "akari": {
+    "number": 258,
+    "name": "Tyche",
+    "diameterKm": 64.37,
+    "uncertaintyKm": 0.89,
+    "detections": 6,
+    "originalRow": "258    Tyche                          8.50  0.23  6   64.37  0.89 0.173 0.006"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1213/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1211/IAUspin.txt",
+  "shapeSha256": "0490bad5885c440c58b587c2bf6d2dd5b342afc976fb35ffbbe3dc0eac00f090",
+  "shapeBytes": 82222,
+  "vertices": 1016,
+  "faces": 2028,
+  "signedVolume": 0.9999999645722949,
+  "independentSignedVolume": 0.9999999645722949,
+  "originalVolumeEquivalentDiameter": 1.2407009671470703,
+  "firstVertex": [
+    0.239889,
+    0.266705,
+    0.470147
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5165533962534754,
+    0.7986928708014113
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.696917,
+      0.747781
+    ],
+    [
+      -0.76258,
+      0.720921
+    ],
+    [
+      -0.518881,
+      0.526498
+    ]
+  ],
+  "scaleKmPerSourceUnit": 51.881961652706366,
+  "alternatives": [
+    {
+      "modelId": 330,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/330",
+      "pole": [
+        "40",
+        "-9"
+      ],
+      "version": "2011-04-21",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Hanuš (2011)",
+          "url": "/projects/damit/references/view/141"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Published convex inversion from Hanuš (2011). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "hanus-2011.pdf",
+      "url": "https://arxiv.org/pdf/1104.4114",
+      "label": "Hanuš et al. (2011), A&A 530, A134"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 64.37,
+    "uncertaintyKm": 0.89,
+    "reportedUncertaintyKm": 0.89,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 258,
+      "name": "Tyche",
+      "diameterKm": 64.37,
+      "uncertaintyKm": 0.89,
+      "detections": 6,
+      "originalRow": "258    Tyche                          8.50  0.23  6   64.37  0.89 0.173 0.006"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Published convex inversion from Hanuš (2011). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+    "scaleKmPerSourceUnit": 51.881961652706366,
+    "metersPerSourceUnit": 51881.96165270636,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 64.37 km effective diameter (catalog ±0.89 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "independentCenteredSignedVolume": 0.9999999645722951,
+  "surfaceAreaSourceUnitsSquared": 5.135800916651895,
+  "surfaceEquivalentDiameterSourceUnits": 1.2785836715843326,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.239889,
+        0.266705,
+        0.470147
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 2,
+      "sourcePoint": [
+        0.103685,
+        -0.169232,
+        0.526498
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 357,
+      "sourcePoint": [
+        0.747781,
+        0.192752,
+        0.036267
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 486,
+      "sourcePoint": [
+        -0.057144,
+        0.720921,
+        0.002786
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 508,
+      "sourcePoint": [
+        -0.652866,
+        -0.011135,
+        0.121077
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 513,
+      "sourcePoint": [
+        -0.696917,
+        -0.183696,
+        0.028963
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 547,
+      "sourcePoint": [
+        -0.179417,
+        -0.76258,
+        0.00154
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1014,
+      "sourcePoint": [
+        0.007684,
+        0.227249,
+        -0.518881
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1015,
+      "sourcePoint": [
+        -0.033841,
+        0.268774,
+        -0.518881
+      ]
+    }
+  ],
+  "distanceAu": 2.61507505241983,
+  "orbitalPeriodYears": 4.2289683869929915,
+  "sourceFields": {
+    "ID": "329",
+    "Asteroid": "(258) Tyche",
+    "λ": "224",
+    "β": "-4",
+    "P": "10.04008",
+    "YORP": "",
+    "t0": "2444439",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.67",
+    "p3": "0.15",
+    "p4": "-0.44",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:27:34",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

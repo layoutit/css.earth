@@ -1,0 +1,368 @@
+{
+  "number": 163,
+  "name": "Erigone",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/828",
+  "modelId": 1399,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1399",
+  "catalog": "View model 191 -75 16.14032 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1399",
+    "Asteroid": "(163) Erigone",
+    "λ": "191",
+    "β": "-75",
+    "P": "16.14032",
+    "YORP": "",
+    "t0": "2444603",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "1.6",
+    "p3": "0.18",
+    "p4": "-0.05",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2017-05-11",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2017-05-12 09:48:57",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4946/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/4947/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4948/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2018)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/168",
+      "file": "reference-168.html",
+      "links": [
+        {
+          "label": "2018icar..304..101d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2018icar..304..101d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2018Icar..304..101D",
+          "url": "http://adsabs.harvard.edu/abs/2018Icar..304..101D\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1707.03637",
+          "url": "https://arxiv.org/abs/1707.03637"
+        }
+      ]
+    },
+    {
+      "label": "Ďurech et al. (2016)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/162",
+      "file": "reference-162.html",
+      "links": [
+        {
+          "label": "2016a&a...587a..48d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2016a&a...587a..48d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2016A%26A...587A..48D",
+          "url": "http://adsabs.harvard.edu/abs/2016A%26A...587A..48D\n"
+        },
+        {
+          "label": "http://arxiv.org/abs/1601.02909",
+          "url": "http://arxiv.org/abs/1601.02909"
+        }
+      ]
+    }
+  ],
+  "id": "erigone",
+  "displayName": "Erigone",
+  "lambda": 191.0,
+  "beta": -75.0,
+  "periodHours": 16.14032,
+  "version": "2017-05-11",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 72.14,
+  "uncertaintyKm": 0.95,
+  "akari": {
+    "number": 163,
+    "name": "Erigone",
+    "diameterKm": 72.14,
+    "uncertaintyKm": 0.95,
+    "detections": 7,
+    "originalRow": "163    Erigone                        9.47 -0.04  7   72.14  0.95 0.056 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4948/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4946/IAUspin.txt",
+  "shapeSha256": "6aad46d87b3e7994de886e34871bc6c1d2979208ffaeeb345945cae43f2f778a",
+  "shapeBytes": 81331,
+  "vertices": 1005,
+  "faces": 2006,
+  "signedVolume": 1.0000000484983402,
+  "independentSignedVolume": 1.0000000484983402,
+  "originalVolumeEquivalentDiameter": 1.2407010018561124,
+  "firstVertex": [
+    0.439359,
+    -0.055689,
+    0.433499
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.46847243090815915,
+    0.9912853924602137
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.989923,
+      0.89593
+    ],
+    [
+      -0.672691,
+      0.744278
+    ],
+    [
+      -0.416513,
+      0.462857
+    ]
+  ],
+  "scaleKmPerSourceUnit": 58.14454884140271,
+  "topology": {
+    "edges": 3009,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 3.6274440037076054e-10
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        0.439359,
+        -0.055689,
+        0.433499
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 7,
+      "coordinates": [
+        0.110322,
+        -0.137972,
+        0.462857
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 335,
+      "coordinates": [
+        0.874609,
+        -0.088683,
+        0.160954
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 456,
+      "coordinates": [
+        0.89593,
+        -0.092098,
+        0.078375
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 484,
+      "coordinates": [
+        -0.462831,
+        0.744278,
+        -0.048512
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 502,
+      "coordinates": [
+        -0.749488,
+        0.512171,
+        -0.109039
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 513,
+      "coordinates": [
+        -0.989923,
+        0.0183,
+        -0.048624
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 543,
+      "coordinates": [
+        0.102613,
+        -0.672691,
+        -0.048862
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1000,
+      "coordinates": [
+        0.265156,
+        -0.262661,
+        -0.416513
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1004,
+      "coordinates": [
+        0.363621,
+        -0.164195,
+        -0.416513
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 1783,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1783",
+      "pole": [
+        "359",
+        "-74"
+      ],
+      "version": "2017-05-11",
+      "periodHours": "16.14033",
+      "comment": "",
+      "calibrated": "0 (No)",
+      "diameterKm": "",
+      "uncertaintyKm": "",
+      "nonconvex": "0 (No)"
+    }
+  ],
+  "selectionNotes": "Select BlueEye600 model 1399 (191,-75), supported by Ďurech et al. (2018), Table 1, with five dense light curves, two apparitions, and Lowell sparse data. Alternative 1783 (359,-74) remains; publication nominal second pole is (358,-73). An occultation event or special background star is not itself a global shape calibration.",
+  "shapeKind": "Convex light-curve reconstruction",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select BlueEye600 model 1399 (191,-75), supported by Ďurech et al. (2018), Table 1, with five dense light curves, two apparitions, and Lowell sparse data. Alternative 1783 (359,-74) remains; publication nominal second pole is (358,-73). An occultation event or special background star is not itself a global shape calibration.",
+  "calibrationSelection": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics.",
+  "archiveVolumeDiameterMismatchFraction": null,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1399",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "Select BlueEye600 model 1399 (191,-75), supported by Ďurech et al. (2018), Table 1, with five dense light curves, two apparitions, and Lowell sparse data. Alternative 1783 (359,-74) remains; publication nominal second pole is (358,-73). An occultation event or special background star is not itself a global shape calibration."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "included",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics."
+    }
+  ],
+  "visibleShapeDescription": "Convex light-curve reconstruction with approximate thermal size: 72.14 km (catalog ±0.95 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+  "papers": [
+    {
+      "file": "durech-blueeye-2018.pdf",
+      "url": "https://arxiv.org/pdf/1707.03637",
+      "label": "Ďurech et al. (2018), BlueEye600 shape models"
+    }
+  ],
+  "selectedPoleStatus": "one of competing archived solutions",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 72.14,
+    "uncertaintyKm": 0.95,
+    "reportedUncertaintyKm": 0.95,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 163,
+      "name": "Erigone",
+      "diameterKm": 72.14,
+      "uncertaintyKm": 0.95,
+      "detections": 7,
+      "originalRow": "163    Erigone                        9.47 -0.04  7   72.14  0.95 0.056 0.002"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select BlueEye600 model 1399 (191,-75), supported by Ďurech et al. (2018), Table 1, with five dense light curves, two apparitions, and Lowell sparse data. Alternative 1783 (359,-74) remains; publication nominal second pole is (358,-73). An occultation event or special background star is not itself a global shape calibration.",
+    "scaleKmPerSourceUnit": 58.14454884140271,
+    "metersPerSourceUnit": 58144.54884140271,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 72.14 km (catalog ±0.95 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery."
+  },
+  "distanceAu": 2.367053015804557,
+  "orbitalPeriodYears": 3.6418342831653887,
+  "sourceFields": {
+    "ID": "1399",
+    "Asteroid": "(163) Erigone",
+    "λ": "191",
+    "β": "-75",
+    "P": "16.14032",
+    "YORP": "",
+    "t0": "2444603",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "1.6",
+    "p3": "0.18",
+    "p4": "-0.05",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2017-05-11",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2017-05-12 09:48:57",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

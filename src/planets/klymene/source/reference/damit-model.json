@@ -1,0 +1,337 @@
+{
+  "number": 104,
+  "name": "Klymene",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/490",
+  "modelId": 797,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/797",
+  "catalog": "View model 112 2 8.98059 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "797",
+    "Asteroid": "(104) Klymene",
+    "λ": "112",
+    "β": "2",
+    "P": "8.98059",
+    "YORP": "",
+    "t0": "2443244",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.47",
+    "p3": "0.07",
+    "p4": "-1.05",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/3104/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/3105/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/3106/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2016)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/161",
+      "file": "reference-161.html",
+      "links": [
+        {
+          "label": "2016a&a...586a.108h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2016a&a...586a.108h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H",
+          "url": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H"
+        }
+      ]
+    }
+  ],
+  "id": "klymene",
+  "displayName": "Klymene",
+  "lambda": 112.0,
+  "beta": 2.0,
+  "periodHours": 8.98059,
+  "version": "2016-01-04",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 126.5,
+  "uncertaintyKm": 1.86,
+  "akari": {
+    "number": 104,
+    "name": "Klymene",
+    "diameterKm": 126.5,
+    "uncertaintyKm": 1.86,
+    "detections": 7,
+    "originalRow": "104    Klymene                        8.27  0.15  7  126.50  1.86 0.055 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3106/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3104/IAUspin.txt",
+  "shapeSha256": "f1d26036f42cd12a1a45edb1d953d4b064b85c83474b898368bfde1a6b5ac7cc",
+  "shapeBytes": 80439,
+  "vertices": 994,
+  "faces": 1984,
+  "signedVolume": 0.9999998167029801,
+  "independentSignedVolume": 0.9999998167029801,
+  "originalVolumeEquivalentDiameter": 1.240700905993198,
+  "firstVertex": [
+    0.431942,
+    0.379222,
+    0.462676
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5128410843857968,
+    0.8191992139748426
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.603851,
+      0.597729
+    ],
+    [
+      -0.694281,
+      0.669301
+    ],
+    [
+      -0.615171,
+      0.526289
+    ]
+  ],
+  "scaleKmPerSourceUnit": 101.95849732110499,
+  "topology": {
+    "edges": 2976,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 1.240700905993198,
+    "declaredDiameterKm": null,
+    "relativeDifference": null,
+    "scaledDiameterKm": 126.5
+  },
+  "alternatives": [
+    {
+      "modelId": 798,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/798",
+      "pole": [
+        "292",
+        "-4"
+      ],
+      "version": "2016-01-04",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Hanuš et al. (2016)",
+          "url": "/projects/damit/references/view/161"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2016 Table2 reports 12 dense light curves across three apparitions plus 519 sparse measurements. Both low-latitude poles remain; no imagery or unique pole is inferred.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "independentCenteredSignedVolume": 0.9999998167029799,
+  "surfaceAreaSourceUnitsSquared": 5.269473334550122,
+  "surfaceEquivalentDiameterSourceUnits": 1.2951160015107408,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.431942,
+        0.379222,
+        0.462676
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 8,
+      "sourcePoint": [
+        0.10405,
+        0.061236,
+        0.526289
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 397,
+      "sourcePoint": [
+        -0.603851,
+        -0.130496,
+        0.042452
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 468,
+      "sourcePoint": [
+        0.103016,
+        0.669301,
+        0.253233
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 497,
+      "sourcePoint": [
+        -0.594482,
+        -0.312145,
+        0.124943
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 519,
+      "sourcePoint": [
+        0.061861,
+        -0.694281,
+        0.361253
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 537,
+      "sourcePoint": [
+        0.597729,
+        -0.169519,
+        -0.106435
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 992,
+      "sourcePoint": [
+        0.045439,
+        0.045724,
+        -0.615171
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 993,
+      "sourcePoint": [
+        -0.105687,
+        0.196849,
+        -0.615171
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "hanus-2016.pdf",
+      "url": "https://arxiv.org/pdf/1510.07422",
+      "label": "Hanuš et al. (2016), A&A 586, A108"
+    },
+    {
+      "file": "hanus-2021.pdf",
+      "url": "https://arxiv.org/pdf/2107.10027",
+      "label": "Hanuš et al. (2021), A&A 654, A48"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 126.5,
+    "uncertaintyKm": 1.86,
+    "reportedUncertaintyKm": 1.86,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 104,
+      "name": "Klymene",
+      "diameterKm": 126.5,
+      "uncertaintyKm": 1.86,
+      "detections": 7,
+      "originalRow": "104    Klymene                        8.27  0.15  7  126.50  1.86 0.055 0.002"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2016 Table2 reports 12 dense light curves across three apparitions plus 519 sparse measurements. Both low-latitude poles remain; no imagery or unique pole is inferred.",
+    "scaleKmPerSourceUnit": 101.95849732110499,
+    "metersPerSourceUnit": 101958.49732110498,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 126.5 km effective diameter (catalog ±1.86 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 3.1462660059874397,
+  "orbitalPeriodYears": 5.580862970111027,
+  "sourceFields": {
+    "ID": "797",
+    "Asteroid": "(104) Klymene",
+    "λ": "112",
+    "β": "2",
+    "P": "8.98059",
+    "YORP": "",
+    "t0": "2443244",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.47",
+    "p3": "0.07",
+    "p4": "-1.05",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 154.0,
+  "uncertaintyKm": 15.0,
+  "uncertaintyKind": "Archive estimate of volume-equivalent diameter error; not a bound on local shape accuracy.",
+  "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record; actual source publications and release differences are documented in selectionNotes.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1837",
+  "reference": "DAMIT model 1837, version 2017-09-21",
+  "sourceLabel": "DAMIT model 1837",
+  "scaleKmPerSourceUnit": 1.000557489892541,
+  "metersPerSourceUnit": 1000.5574898925408,
+  "limitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select the 2017 ADAM nonconvex model over older convex 164. Viikinkoski et al. (2017), Table 1, uses 22 light curves and two Keck AO images. Its publication-level diameter is 131 ±15 km; Table 4 lists a 128–159 km range for model variants. The selected archive mesh has diameter 153.914 source units and declares 154 ±15 km, so this release uses the archive solution rather than silently substituting the ensemble value. No resolved reflectance mosaic is supplied.",
+  "visibleDescription": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images. Selected archive volume-equivalent diameter: 154 ±15 km. The grid marks unavailable imagery; rotational phase is illustrative."
+}

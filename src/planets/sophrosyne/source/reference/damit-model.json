@@ -1,0 +1,332 @@
+{
+  "number": 134,
+  "name": "Sophrosyne",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/3442",
+  "modelId": 5976,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5976",
+  "catalog": "View model 100 35 17.1893 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "5976",
+    "Asteroid": "(134) Sophrosyne",
+    "λ": "100",
+    "β": "35",
+    "P": "17.1893",
+    "YORP": "",
+    "t0": "2456457",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.77",
+    "p3": "0.05",
+    "p4": "-1.08",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2022-02-14",
+    "Comment": "",
+    "Created": "2022-02-17 14:38:45",
+    "Modified": "2022-02-17 14:38:45",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/65256/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/65257/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/65258/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2021)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/662",
+      "file": "reference-662.html",
+      "links": [
+        {
+          "label": "2021a&a...654a..48h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2021a&a...654a..48h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2021A&A...654A..48H",
+          "url": "http://adsabs.harvard.edu/abs/2021A&A...654A..48H"
+        }
+      ]
+    }
+  ],
+  "id": "sophrosyne",
+  "displayName": "Sophrosyne",
+  "lambda": 100.0,
+  "beta": 35.0,
+  "periodHours": 17.1893,
+  "version": "2022-02-14",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 100.42,
+  "uncertaintyKm": 1.33,
+  "akari": {
+    "number": 134,
+    "name": "Sophrosyne",
+    "diameterKm": 100.42,
+    "uncertaintyKm": 1.33,
+    "detections": 7,
+    "originalRow": "134    Sophrosyne                     8.76  0.28  7  100.42  1.33 0.055 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/65258/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/65256/IAUspin",
+  "shapeSha256": "3878aec42eda2f64254bc260a3c0497632f037da3e447fd65082822521883492",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.0000000688872217,
+  "independentSignedVolume": 1.000000068887222,
+  "originalVolumeEquivalentDiameter": 1.2407010102882805,
+  "firstVertex": [
+    -0.018006,
+    0.269113,
+    0.468353
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.49291442077301817,
+    0.7751118198453691
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.760053,
+      0.759022
+    ],
+    [
+      -0.681988,
+      0.691246
+    ],
+    [
+      -0.492028,
+      0.491123
+    ]
+  ],
+  "scaleKmPerSourceUnit": 80.93811415263305,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 1.2407010102882805,
+    "declaredDiameterKm": null,
+    "relativeDifference": null,
+    "scaledDiameterKm": 100.42
+  },
+  "alternatives": [
+    {
+      "modelId": 5977,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5977",
+      "pole": [
+        "276",
+        "7"
+      ],
+      "version": "2022-02-14",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Hanuš et al. (2021)",
+          "url": "/projects/damit/references/view/662"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2021 TableA.2 reports293 ASAS-SN observations and both poles(100,35)/(276,7). The paper catalog diameter112.2 km is not a calibrated volume for this shape; AKARI100.42 km is consistently retained as an explicit alternative thermal-scale approximation.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "independentCenteredSignedVolume": 1.0000000688872217,
+  "surfaceAreaSourceUnitsSquared": 5.08022745630875,
+  "surfaceEquivalentDiameterSourceUnits": 1.2716472087042878,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        -0.018006,
+        0.269113,
+        0.468353
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1,
+      "sourcePoint": [
+        -0.018006,
+        0.037929,
+        0.491123
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 458,
+      "sourcePoint": [
+        0.759022,
+        0.081254,
+        0.065747
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 485,
+      "sourcePoint": [
+        0.196038,
+        0.691246,
+        -0.016456
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "sourcePoint": [
+        -0.719563,
+        0.098227,
+        -0.064448
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 518,
+      "sourcePoint": [
+        -0.760053,
+        -0.101237,
+        -0.067236
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 550,
+      "sourcePoint": [
+        -0.208653,
+        -0.681988,
+        0.033389
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1020,
+      "sourcePoint": [
+        0.015667,
+        -0.049122,
+        -0.492028
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "sourcePoint": [
+        -0.05601,
+        0.022555,
+        -0.492028
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "hanus-2021.pdf",
+      "url": "https://arxiv.org/pdf/2107.10027",
+      "label": "Hanuš et al. (2021), A&A 654, A48"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 100.42,
+    "uncertaintyKm": 1.33,
+    "reportedUncertaintyKm": 1.33,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 134,
+      "name": "Sophrosyne",
+      "diameterKm": 100.42,
+      "uncertaintyKm": 1.33,
+      "detections": 7,
+      "originalRow": "134    Sophrosyne                     8.76  0.28  7  100.42  1.33 0.055 0.002"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2021 TableA.2 reports293 ASAS-SN observations and both poles(100,35)/(276,7). The paper catalog diameter112.2 km is not a calibrated volume for this shape; AKARI100.42 km is consistently retained as an explicit alternative thermal-scale approximation.",
+    "scaleKmPerSourceUnit": 80.93811415263305,
+    "metersPerSourceUnit": 80938.11415263305,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 100.42 km effective diameter (catalog ±1.33 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 2.564014163529194,
+  "orbitalPeriodYears": 4.1057153095872065,
+  "sourceFields": {
+    "ID": "5976",
+    "Asteroid": "(134) Sophrosyne",
+    "λ": "100",
+    "β": "35",
+    "P": "17.1893",
+    "YORP": "",
+    "t0": "2456457",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.77",
+    "p3": "0.05",
+    "p4": "-1.08",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2022-02-14",
+    "Comment": "",
+    "Created": "2022-02-17 14:38:45",
+    "Modified": "2022-02-17 14:38:45",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

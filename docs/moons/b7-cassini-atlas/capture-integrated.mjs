@@ -119,6 +119,7 @@ async function captureBody(id, dpr, inputs) {
   entry.httpCacheDisabled = true;
   let responseQueue = Promise.resolve(), expectedNavigations = 0;
   const objectPin = inputs.records.find(file => file.path.endsWith('/prepared/object.json'));
+  const preparedObjectPath = `/objects/${id}/${objectPin.sha256}.json`;
   const scenePins = new Map(inputs.records.filter(file => file.path.startsWith('public/scenes/')).map(file => [basename(file.path), file]));
   page.on('pageerror', error => entry.errors.push({kind:'pageerror', message:error.message, stack:error.stack}));
   page.on('console', message => { if (message.type() === 'error') entry.errors.push({kind:'console', message:message.text()}); });
@@ -140,8 +141,9 @@ async function captureBody(id, dpr, inputs) {
         } catch(error){entry.errors.push({kind:'stylesheet-response-read',url:response.url(),message:error.message});}
       })()]);return;
     }
-    if (path !== `/src/planets/${id}/prepared/object.json` && !scenePins.has(basename(path))) return;
-    if (path !== `/src/planets/${id}/prepared/object.json` && !path.startsWith(`/scenes/${id}/`)) return;
+    const isObjectResponse=path===preparedObjectPath || path===`/src/planets/${id}/prepared/object.json`;
+    if (!isObjectResponse && !scenePins.has(basename(path))) return;
+    if (!isObjectResponse && !path.startsWith(`/scenes/${id}/`)) return;
     if (response.status() >= 300 && response.status() < 400) {
       entry.loadedResponses.push({url:response.url(),status:response.status(),bodyUnavailable:true}); return;
     }

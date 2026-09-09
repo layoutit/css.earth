@@ -242,11 +242,15 @@ export function createSceneRouter({
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
+    // The Solar System overview is already the system-level selection for its
+    // central body. Clicking that body drills in instead of fitting it again.
+    const opensOverviewFocus = overview && id === objectId && id === solarSystemFocus(objects)?.id
+      && overviewScopeFromUrl(active?.url ?? windowTarget.location.href) === 'solar-system';
     const overviewTarget = options.overviewScope
       ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount }) : null;
     const centerTarget = overviewTarget?.world ?? (options.recenter
       ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount, force: true })
-      : options.sceneSelection && id !== centeredObjectId && hasPresented
+      : options.sceneSelection && !opensOverviewFocus && id !== centeredObjectId && hasPresented
         ? (navigation.systemTarget?.({ objectId: id, fromId: objectId, mount: active?.mount })
           ?? navigation.centerTarget?.({ objectId: id, mount: active?.mount })) : null);
     // First selection frames the object's system; a repeat opens its close-up.

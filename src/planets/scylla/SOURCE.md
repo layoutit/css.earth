@@ -1,0 +1,30 @@
+# (155) Scylla: source and interpretation
+
+Checked 2026-09-09. Selected DAMIT model **920**, version **2016-01-04**. DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2016); model 920, version 2016-01-04.
+
+## Shape, scale and orientation
+
+Convex light-curve reconstruction with approximate thermal size: 39.21 km (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.
+
+The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select second archive pole 920 (356,53). Hanuš et al. (2018), Table A.3, rejects the revised (190,65) family and favors revised (346,41), corresponding to the selected broad family rather than archive 919 (201,69). The publication revised the nominal shape; its exact revised mesh is not located in the surveyed DAMIT listing, so the 39.0 ±0.8 km VS-TPM size is not silently assigned to the old mesh. AKARI 39.21 ±0.97 km is retained only as an explicit display-scale approximation.
+
+The unmodified source has 1022 vertices and 2040 triangles. Its signed tetrahedral volume is 0.99999991221532536 source units³; an independent triangle-centroid divergence sum gives 0.99999991221532536. The existing recipe applies one uniform scale of 31.603103183248958 km per source unit so its volume-equivalent diameter is 39.21 km. No unit-volume assumption is made. Radius above a 19.605 km sphere is a shape-derived scalar, not gravitational height or measured geology.
+
+The original +Z spin axis and +X reference meridian are retained. The source pole is ecliptic J2000 (356°, 53°), with sidereal period 7.95879 h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Absolute phase is arbitrary; accelerated display spin is illustrative. Position uses JPL Horizons heliocentric ICRF elements at 2026-09-03 TT (TDB approximated as TT, under 2 ms).
+
+## Source survey
+
+- [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/920) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/3479/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
+- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
+- [Hanuš et al. (2016)](https://damit.cuni.cz/projects/damit/references/view/161) — original model publication record.
+- [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 39.21 ± 0.97 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
+- [Hanuš et al. (2016), new and updated convex models](https://arxiv.org/pdf/1510.07422) — retained primary publication; see the body-specific selection and calibration above.
+- [Hanuš et al. (2018), VS-TPM size study, Table A.3](https://arxiv.org/pdf/1803.06116) — retained primary publication; see the body-specific selection and calibration above.
+
+Select second archive pole 920 (356,53). Hanuš et al. (2018), Table A.3, rejects the revised (190,65) family and favors revised (346,41), corresponding to the selected broad family rather than archive 919 (201,69). The publication revised the nominal shape; its exact revised mesh is not located in the surveyed DAMIT listing, so the 39.0 ±0.8 km VS-TPM size is not silently assigned to the old mesh. AKARI 39.21 ±0.97 km is retained only as an explicit display-scale approximation.
+
+No registered global image texture is supplied by the selected release. Shape diagrams, disk-integrated thermal estimates and AO comparison images cannot provide a regolith or albedo map; the shared gray grid is used. Alternative archive solutions: model 919, pole ['201', '69'], https://damit.cuni.cz/projects/damit/asteroid_models/view/919
+
+## Preparation and qualification
+
+The established source-meshoptimizer path retains source connectivity, reduces to at most 800 faces, and emits native PolyCSS `u` triangles with 128 px raster cells. The error allowance is 392.1 m; sampled source-fit error is qualified separately from source accuracy. Elevation uses closest-source-surface sampling with the same physical scale. Shadows are off by default. Shared runtime, camera, navigation and shell remain generic. Delivery and browser evidence are recorded in the PR’s validation report.

@@ -1,0 +1,345 @@
+{
+  "number": 227,
+  "name": "Philosophia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1051",
+  "modelId": 1873,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1873",
+  "catalog": "View model 95 19 26.4614 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1873",
+    "Asteroid": "(227) Philosophia",
+    "λ": "95",
+    "β": "19",
+    "P": "26.4614",
+    "YORP": "",
+    "t0": "2454048",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.1",
+    "p3": "0.1",
+    "p4": "-0.5",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "107",
+    "σD": "5",
+    "Γ": "125",
+    "Γmin": "35",
+    "Γmax": "215",
+    "pV": "0.036",
+    "σpV": "0.005",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-03-22",
+    "Comment": "",
+    "Created": "2018-03-16 10:22:26",
+    "Modified": "2018-03-22 12:14:12",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6152/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/6153/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6154/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2018)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/174",
+      "file": "reference-174.html",
+      "links": [
+        {
+          "label": "2018a&a...610a...7m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2018a&a...610a...7m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2018A%26A...610A...7M",
+          "url": "http://adsabs.harvard.edu/abs/2018A%26A...610A...7M"
+        },
+        {
+          "label": "https://arxiv.org/abs/1711.01893",
+          "url": "https://arxiv.org/abs/1711.01893"
+        }
+      ]
+    }
+  ],
+  "id": "philosophia",
+  "displayName": "Philosophia",
+  "lambda": 95.0,
+  "beta": 19.0,
+  "periodHours": 26.4614,
+  "version": "2018-03-22",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 101.0,
+  "uncertaintyKm": 5.0,
+  "akari": {
+    "number": 227,
+    "name": "Philosophia",
+    "diameterKm": 95.61,
+    "uncertaintyKm": 1.56,
+    "detections": 6,
+    "originalRow": "227    Philosophia                    8.70  0.15  6   95.61  1.56 0.064 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6154/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6152/IAUspin.txt",
+  "shapeSha256": "e21f6191a0e78785b81cf603e3e0f86281aca58b705fc1cadfebb5a043afef6f",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 641431.0428382676,
+  "independentSignedVolume": 641431.0428382676,
+  "translatedSignedVolume": 641431.0428382676,
+  "originalVolumeEquivalentDiameter": 107.00000155599014,
+  "firstVertex": [
+    16.739489,
+    20.274099,
+    50.812326
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    45.11292502449525,
+    64.7465428463066
+  ],
+  "extentsSourceUnits": [
+    [
+      -56.478224,
+      61.99734
+    ],
+    [
+      -53.104195,
+      53.917712
+    ],
+    [
+      -55.803469,
+      50.812326
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9439252199183333,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 2040,
+    "minDoubleTriangleAreaSourceUnits2": 0.0005632328505246311
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        16.739489,
+        20.274099,
+        50.812326
+      ],
+      "radiusSourceUnits": 57.21138047428324
+    },
+    {
+      "vertexIndex1": 341,
+      "pointSourceUnits": [
+        46.090168,
+        27.845592,
+        29.284447
+      ],
+      "radiusSourceUnits": 61.29648779656545
+    },
+    {
+      "vertexIndex1": 461,
+      "pointSourceUnits": [
+        -15.081494,
+        53.917712,
+        -13.116221
+      ],
+      "radiusSourceUnits": 57.50309888960613
+    },
+    {
+      "vertexIndex1": 493,
+      "pointSourceUnits": [
+        -56.478224,
+        -10.002383,
+        -11.087646
+      ],
+      "radiusSourceUnits": 58.41894680404792
+    },
+    {
+      "vertexIndex1": 512,
+      "pointSourceUnits": [
+        -30.976506,
+        -45.193342,
+        -1.320444
+      ],
+      "radiusSourceUnits": 54.80625564161573
+    },
+    {
+      "vertexIndex1": 528,
+      "pointSourceUnits": [
+        -3.112544,
+        -53.104195,
+        -0.456044
+      ],
+      "radiusSourceUnits": 53.197287833872664
+    },
+    {
+      "vertexIndex1": 561,
+      "pointSourceUnits": [
+        61.99734,
+        3.383257,
+        3.065285
+      ],
+      "radiusSourceUnits": 62.16520382927152
+    },
+    {
+      "vertexIndex1": 1011,
+      "pointSourceUnits": [
+        -8.254008,
+        13.086037,
+        -55.803469
+      ],
+      "radiusSourceUnits": 57.90855001520409
+    },
+    {
+      "vertexIndex1": 1022,
+      "pointSourceUnits": [
+        11.257716,
+        -3.127033,
+        -52.642457
+      ],
+      "radiusSourceUnits": 53.92349009398959
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 1874,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1874",
+      "pole": [
+        "272",
+        "-1"
+      ],
+      "version": "2018-03-22",
+      "diameterKm": "108",
+      "calibratedSize": "1 (Yes)",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 37622.81974405444,
+  "originalSurfaceEquivalentDiameter": 109.43361216117853,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Marciniak2018 section5.2 and Table7 select the convex pole(95,+19) as the best thermal fit (chi-square1.2). Table7 reports101±5 km equivalent-volume diameter, with errors spanning the full3-sigma range. This primary publication scale supersedes DAMIT’s107±5 km field. The paper also presents SAGE nonconvex alternatives, but the selected convex solution gives the best thermal fit; no multichord occultation supports those concavities. Shape and thermal fit are explicitly the least constrained of the five studied targets; neither is a resolved terrain map.",
+  "papers": [
+    {
+      "file": "paper-marciniak-2018.pdf",
+      "url": "https://arxiv.org/pdf/1711.01893",
+      "label": "Marciniak et al. (2018), A&A 610, A7",
+      "sha256": "b0c6db251c7ecaf128e9f1c57c99a7d1a8b58dda0fbf5aab10fb5e7c12b7e6d2"
+    }
+  ],
+  "archiveDeclaredDiameterKm": 107.0,
+  "archiveDeclaredUncertaintyKm": 5.0,
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 101.0,
+    "uncertaintyKm": 5.0,
+    "reportedUncertaintyKm": 5.0,
+    "uncertaintyKind": "Published size-model uncertainty; not local terrain accuracy or automatically a one-sigma interval.",
+    "diameterSemantics": "Published volume-equivalent diameter of the selected shape solution; isotropic transfer retains source shape and connectivity.",
+    "sourceUrl": "https://arxiv.org/pdf/1711.01893",
+    "reference": "Marciniak et al. (2018), A&A 610, A7",
+    "sourceLabel": "Marciniak et al. (2018), A&A 610, A7",
+    "limitations": "Marciniak2018 section5.2 and Table7 select the convex pole(95,+19) as the best thermal fit (chi-square1.2). Table7 reports101±5 km equivalent-volume diameter, with errors spanning the full3-sigma range. This primary publication scale supersedes DAMIT’s107±5 km field. The paper also presents SAGE nonconvex alternatives, but the selected convex solution gives the best thermal fit; no multichord occultation supports those concavities. Shape and thermal fit are explicitly the least constrained of the five studied targets; neither is a resolved terrain map.",
+    "publishedUncertainty": {
+      "lowerKm": 5,
+      "upperKm": 5,
+      "confidence": "full 3-sigma range",
+      "source": "Marciniak2018 Table7"
+    },
+    "visibleDescription": "Convex light-curve reconstruction; 101 km volume-equivalent diameter (±5 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9439252199183333,
+    "metersPerSourceUnit": 943.9252199183334,
+    "sourceSignedVolume": 641431.0428382676,
+    "sourceVolumeEquivalentDiameter": 107.00000155599014,
+    "sourceSurfaceArea": 37622.81974405444,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 539464.3420977033,
+    "derivedVolumeEquivalentDiameterKm": 101.0,
+    "archiveDeclaredDiameterKm": 107.0,
+    "archiveDeclaredUncertaintyKm": 5.0
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2454048.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Archive km coordinates; uniform diameter reconciliation only.",
+  "distanceAu": 3.152308355019594,
+  "orbitalPeriodYears": 5.596947611614069,
+  "sourceFields": {
+    "ID": "1873",
+    "Asteroid": "(227) Philosophia",
+    "λ": "95",
+    "β": "19",
+    "P": "26.4614",
+    "YORP": "",
+    "t0": "2454048",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.1",
+    "p3": "0.1",
+    "p4": "-0.5",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "107",
+    "σD": "5",
+    "Γ": "125",
+    "Γmin": "35",
+    "Γmax": "215",
+    "pV": "0.036",
+    "σpV": "0.005",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-03-22",
+    "Comment": "",
+    "Created": "2018-03-16 10:22:26",
+    "Modified": "2018-03-22 12:14:12",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "Original km coordinates according to DAMIT calibrated-size flag. The archive declares107 km; this package preserves those coordinates and uniformly rescales to the primary publication’s101 km volume-equivalent diameter."
+}

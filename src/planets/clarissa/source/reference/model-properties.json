@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/296",
+  "modelId": 296,
+  "modelVersion": "2011-02-17",
+  "diameterKm": 43,
+  "diameterInterpretation": "Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 43,
+    "uncertaintyKm": 4,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/296",
+    "sourceLabel": "DAMIT model 296",
+    "reference": "DAMIT model 296",
+    "limitations": "Ďurech2011 describes this as a very elongated convex model. Both poles fit the2004 occultation; selected pole(28,−72) fits particularly well and is preferred in DAMIT, but its rival is not rejected. Three video chords have reported timing errors of tenths of a second. Table3 gives volume-equivalent43±4 km for this pole; local surface relief is unresolved.",
+    "visibleDescription": "Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9999999263389026,
+    "metersPerSourceUnit": 999.9999263389026
+  },
+  "periodHours": 14.4767,
+  "poleEclipticJ2000Degrees": [
+    28,
+    -72
+  ],
+  "modelLimitations": "Ďurech2011 describes this as a very elongated convex model. Both poles fit the2004 occultation; selected pole(28,−72) fits particularly well and is preferred in DAMIT, but its rival is not rejected. Three video chords have reported timing errors of tenths of a second. Table3 gives volume-equivalent43±4 km for this pole; local surface relief is unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/1032/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 999.9999263389026,
+    "firstVertexKm": [
+      3.7384337246228485,
+      17.618345702213226,
+      12.069275110963885
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      70.71842479080283,
+      44.66045371026173,
+      28.957166866983155
+    ],
+    "volumeCubicKm": 41629.76785149397,
+    "volumeEquivalentRadiusKm": 21.5,
+    "radialRangeKm": [
+      14.372265593134012,
+      35.86495985237748
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 430,
+    "estimatedErrorMeters": 132.84861755371094,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 41583705933881.87
+    }
+  }
+}

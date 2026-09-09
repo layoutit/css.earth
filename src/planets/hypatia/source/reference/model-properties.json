@@ -1,0 +1,102 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3844",
+  "modelId": 3844,
+  "modelVersion": "2019-05-07",
+  "diameterKm": 143.97,
+  "diameterInterpretation": "Convex light-curve reconstruction with approximate thermal size: 143.97 km effective diameter (catalog ±1.55 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 143.97,
+    "uncertaintyKm": 1.55,
+    "reportedUncertaintyKm": 1.55,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 238,
+      "name": "Hypatia",
+      "diameterKm": 143.97,
+      "uncertaintyKm": 1.55,
+      "detections": 11,
+      "originalRow": "238    Hypatia                        8.18  0.15 11  143.97  1.55 0.046 0.001"
+    },
+    "limitations": "Gaia DR2 plus Lowell inversion; publication table gives334 Lowell and20 Gaia points. Both poles remain; model3844 is representative. This is a coarse convex inverse model with an approximate thermal size. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 143.97 km effective diameter (catalog ±1.55 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 116.03925226942087,
+    "metersPerSourceUnit": 116039.25226942087,
+    "sourceSignedVolume": 0.9999997037327296,
+    "sourceVolumeEquivalentDiameter": 1.2407008592724236,
+    "sourceSurfaceArea": 5.1733728955643015,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 1562480.608938205,
+    "derivedVolumeEquivalentDiameterKm": 143.96999999999997,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "periodHours": 8.87273,
+  "poleEclipticJ2000Degrees": [
+    261,
+    45
+  ],
+  "modelLimitations": "Gaia DR2 plus Lowell inversion; publication table gives334 Lowell and20 Gaia points. Both poles remain; model3844 is representative. This is a coarse convex inverse model with an approximate thermal size. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/12046/shape.txt",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+    "metersPerUnit": 116039.25226942087,
+    "firstVertexKm": [
+      33.30639846113506,
+      36.68267654516613,
+      56.983975808205855
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      170.15462172227436,
+      161.83147427474563,
+      126.93557013602403
+    ],
+    "volumeCubicKm": 1562480.608938205,
+    "volumeEquivalentRadiusKm": 71.985,
+    "radialRangeKm": [
+      56.83542882792254,
+      90.57718175063732
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1439.7,
+    "estimatedErrorMeters": 255.7755889892578,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1562059908507092.2
+    }
+  }
+}

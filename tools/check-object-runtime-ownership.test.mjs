@@ -161,6 +161,21 @@ test("Astro server builtins do not hide the same imports in browser scripts", as
     "<script>import '../shared-client.mjs';</script>",
     'site/shared-client.mjs': "import { resolve } from 'node:path';" })), /(?:Unclosed runtime source|Runtime import escapes the source root:) node:path/);
 });
+test("transitive Astro server helpers cannot hide Node imports on a client path", async () => {
+  const shell = 'site/components/PlanetShell.astro';
+  const files = {
+    [shell]: "---\nimport { label } from '../server-helper.mjs';\n---\n<aside>{label}</aside>",
+    'site/server-helper.mjs': "export { label } from './source-reader.mjs';",
+    'site/source-reader.mjs': "import { readFile } from 'node:fs/promises'; export const label = 'Source';",
+  };
+  assert.equal((await auditObjectRuntimeOwnership(fixture(files))).complete, true);
+  for (const client of ["<script>import '../server-helper.mjs';</script>",
+    "<script>import '../other-client.mjs';</script>"]) {
+    await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files,
+      [shell]: files[shell] + client, 'site/other-client.mjs': "import './server-helper.mjs';" })),
+      /(?:Unclosed runtime source|Runtime import escapes the source root:) node:fs/);
+  }
+});
 test("literal navigation content is allowed only through the shell closure, not runtime dispatch", async () => {
   const file = "site/navigation-content.mjs";
   const content = `export const MARKERS = Object.freeze(${JSON.stringify({moon:{label:"Moon"},saturn:{label:"Saturn"}})});`;
@@ -206,6 +221,9 @@ test("the actual OBJECTS registry has only normalized packages and one shared so
   for (const file of ["src/platform/prepared-presentation-contract.mjs", "src/platform/cubic-sky-contract.mjs", "src/platform/directional-sun-contract.mjs", "tools/object-runtime-contract.mjs", "src/platform/latest-selection.mjs"])
     assert.ok(!report.sharedClosure.includes(file), `${file} must stay outside the browser`);
   assert.deepEqual(report.entries.map(entry => entry.id), OBJECTS.map(object => object.id));
+  for (const entry of report.entries) {
+    assert.match(report.sourceHashes[entry.presentation.file], /^[a-f0-9]{64}$/, 'Completed body keeps its source receipt');
+  }
   assert.ok(report.entries.every(entry => entry.factoryCalls === 1 && entry.owners.length === 0 && entry.orphanExecutors.length === 0));
   assert.ok(report.sharedClosure.includes("site/components/PlanetShell.astro"));
   assert.ok(report.sharedClosure.includes("site/prepared-shell-titles.mjs"));
@@ -287,8 +305,10 @@ test('authored JSON transport rejects mismatched bytes, controls, source pins an
 test('descriptor binding cannot bypass the shared factory or redirect the prepared inventory', async () => {
   const file = 'site/packaged-object-runtime.mjs', source = await readFile(file, 'utf8');
   for (const changed of [source.replace('return createNavigableObjectMount(', 'return differentFactory('),
-    source.replace('../src/planets/*/prepared/object.json', '../src/planets/other/*.json'),
-    source.replace('`../src/planets/${descriptorInput.id}/${reference}`', '`../src/planets/${otherDescriptor.id}/${reference}`'),
+    source.replace('`/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`', '`/elsewhere/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`'),
+    source.replace('`/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`', '`/objects/${otherDescriptor.id}/${descriptorInput.prepared.sha256}.json`'),
+    source.replace('${descriptorInput.prepared.sha256}.json', '${otherDescriptor.prepared.sha256}.json'),
+    source.replace("reference !== 'prepared/object.json'", "reference === 'prepared/object.json'"),
     source.replace('createNavigableObjectMount(descriptorInput,', 'createNavigableObjectMount(otherDescriptor,'),
     source.replace('bindContextualObject(definition, applicationContext,', 'bindContextualObject(definition, otherContext,'),
     source.replace('definition => descriptorInput.properties.worldFrame', 'definition => true'),

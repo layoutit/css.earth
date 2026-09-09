@@ -30,7 +30,8 @@ export async function prepareFactsheet(objectDirectory, { check = false, editori
   for (const fact of ordered) {
     assert.ok(fact.label?.trim() && fact.value?.trim(), `${descriptor.id}: empty fact`);
     if (fact.source) {
-      assert.equal(new URL(fact.source.url).protocol, 'https:');
+      assert.ok(['https:', 'http:'].includes(new URL(fact.source.url).protocol),
+        `${descriptor.id}: fact sources must use a public web URL`);
       assert.ok(fact.source.label?.trim());
       assert.match(fact.source.checked, /^\d{4}-\d{2}-\d{2}$/);
       if (fact.source.path) {

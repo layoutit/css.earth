@@ -1,0 +1,337 @@
+{
+  "number": 150,
+  "name": "Nuwa",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/711",
+  "modelId": 1185,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1185",
+  "catalog": "View model 359 25 8.13456 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1185",
+    "Asteroid": "(150) Nuwa",
+    "λ": "359",
+    "β": "25",
+    "P": "8.13456",
+    "YORP": "",
+    "t0": "2445590",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.3",
+    "p3": "0.07",
+    "p4": "-1.01",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4294/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/4295/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4296/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2016)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/161",
+      "file": "reference-161.html",
+      "links": [
+        {
+          "label": "2016a&a...586a.108h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2016a&a...586a.108h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H",
+          "url": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H"
+        }
+      ]
+    }
+  ],
+  "id": "nuwa",
+  "displayName": "Nuwa",
+  "lambda": 359.0,
+  "beta": 25.0,
+  "periodHours": 8.13456,
+  "version": "2016-01-04",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 139.65,
+  "uncertaintyKm": 2.09,
+  "akari": {
+    "number": 150,
+    "name": "Nuwa",
+    "diameterKm": 139.65,
+    "uncertaintyKm": 2.09,
+    "detections": 6,
+    "originalRow": "150    Nuwa                           8.23  0.15  6  139.65  2.09 0.046 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4296/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4294/IAUspin.txt",
+  "shapeSha256": "b576ef6ed10c1950eb578412561c1829d8d537c14ad28ac7ff30cb5ceb14135a",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 0.9999999175479006,
+  "independentSignedVolume": 0.9999999175479006,
+  "originalVolumeEquivalentDiameter": 1.2407009476993323,
+  "firstVertex": [
+    0.329663,
+    0.175362,
+    0.551068
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5016225927816649,
+    0.7919022130124401
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.722911,
+      0.663485
+    ],
+    [
+      -0.655189,
+      0.649058
+    ],
+    [
+      -0.541736,
+      0.557535
+    ]
+  ],
+  "scaleKmPerSourceUnit": 112.55734128272978,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 6.976424154606103e-08
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        0.329663,
+        0.175362,
+        0.551068
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1,
+      "coordinates": [
+        0.329663,
+        0.109706,
+        0.557535
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 340,
+      "coordinates": [
+        0.574577,
+        0.210238,
+        0.32313
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 418,
+      "coordinates": [
+        0.032023,
+        -0.655189,
+        -0.032036
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 447,
+      "coordinates": [
+        0.663485,
+        -0.11045,
+        0.170816
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 469,
+      "coordinates": [
+        -0.046454,
+        0.649058,
+        0.047587
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "coordinates": [
+        -0.722911,
+        -0.116708,
+        0.107393
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1008,
+      "coordinates": [
+        0.213131,
+        0.157842,
+        -0.541736
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "coordinates": [
+        0.283589,
+        0.087384,
+        -0.541736
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 1186,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1186",
+      "pole": [
+        "177",
+        "22"
+      ],
+      "version": "2016-01-04",
+      "periodHours": "8.13456",
+      "comment": "",
+      "calibrated": "0 (No)",
+      "diameterKm": "",
+      "uncertaintyKm": "",
+      "nonconvex": "0 (No)"
+    }
+  ],
+  "selectionNotes": "Select nominal 2016 convex model 1185 (359,25), with 1186 (177,22) retained as an unresolved mirror pole. Hanuš et al. (2016), table of new models, gives 33 dense light curves across five apparitions and sparse data. No calibrated size is in the selected release; AKARI remains an explicit separate thermal-volume approximation.",
+  "shapeKind": "Convex light-curve reconstruction",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select nominal 2016 convex model 1185 (359,25), with 1186 (177,22) retained as an unresolved mirror pole. Hanuš et al. (2016), table of new models, gives 33 dense light curves across five apparitions and sparse data. No calibrated size is in the selected release; AKARI remains an explicit separate thermal-volume approximation.",
+  "calibrationSelection": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics.",
+  "archiveVolumeDiameterMismatchFraction": null,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1185",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "Select nominal 2016 convex model 1185 (359,25), with 1186 (177,22) retained as an unresolved mirror pole. Hanuš et al. (2016), table of new models, gives 33 dense light curves across five apparitions and sparse data. No calibrated size is in the selected release; AKARI remains an explicit separate thermal-volume approximation."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "included",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics."
+    }
+  ],
+  "visibleShapeDescription": "Convex light-curve reconstruction with approximate thermal size: 139.65 km (catalog ±2.09 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+  "papers": [
+    {
+      "file": "hanus-2016.pdf",
+      "url": "https://arxiv.org/pdf/1510.07422",
+      "label": "Hanuš et al. (2016), new and updated convex models"
+    }
+  ],
+  "selectedPoleStatus": "one of competing archived solutions",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 139.65,
+    "uncertaintyKm": 2.09,
+    "reportedUncertaintyKm": 2.09,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 150,
+      "name": "Nuwa",
+      "diameterKm": 139.65,
+      "uncertaintyKm": 2.09,
+      "detections": 6,
+      "originalRow": "150    Nuwa                           8.23  0.15  6  139.65  2.09 0.046 0.002"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select nominal 2016 convex model 1185 (359,25), with 1186 (177,22) retained as an unresolved mirror pole. Hanuš et al. (2016), table of new models, gives 33 dense light curves across five apparitions and sparse data. No calibrated size is in the selected release; AKARI remains an explicit separate thermal-volume approximation.",
+    "scaleKmPerSourceUnit": 112.55734128272978,
+    "metersPerSourceUnit": 112557.34128272979,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 139.65 km (catalog ±2.09 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery."
+  },
+  "distanceAu": 2.9879264955692397,
+  "orbitalPeriodYears": 5.164913665050682,
+  "sourceFields": {
+    "ID": "1185",
+    "Asteroid": "(150) Nuwa",
+    "λ": "359",
+    "β": "25",
+    "P": "8.13456",
+    "YORP": "",
+    "t0": "2445590",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.3",
+    "p3": "0.07",
+    "p4": "-1.01",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

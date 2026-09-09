@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1850",
+  "modelId": 1850,
+  "modelVersion": "2017-09-21",
+  "diameterKm": 110,
+  "diameterInterpretation": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 110,
+    "uncertaintyKm": 5,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1850",
+    "sourceLabel": "DAMIT model 1850",
+    "reference": "DAMIT model 1850",
+    "limitations": "The 2017 ADAM reconstruction combines optical light curves with one resolved adaptive-optics observation. With only one AO observation, jackknife image resampling is impossible; size uncertainty comes from different shape supports. The selected archive solution has volume-equivalent diameter110±5 km, while the paper ensemble reports109±5 km. Its source-scale adjustment preserves the archived surface and does not add image texture.",
+    "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9991357383488412,
+    "metersPerSourceUnit": 999.1357383488412
+  },
+  "periodHours": 5.05441,
+  "poleEclipticJ2000Degrees": [
+    99,
+    10
+  ],
+  "modelLimitations": "The 2017 ADAM reconstruction combines optical light curves with one resolved adaptive-optics observation. With only one AO observation, jackknife image resampling is impossible; size uncertainty comes from different shape supports. The selected archive solution has volume-equivalent diameter110±5 km, while the paper ensemble reports109±5 km. Its source-scale adjustment preserves the archived surface and does not add image texture.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/528/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 999.1357383488412,
+    "firstVertexKm": [
+      14.5197542783072,
+      -6.872526201296092,
+      44.555567022587965
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      123.62436378236198,
+      121.92493380500443,
+      108.07431471856978
+    ],
+    "volumeCubicKm": 696909.9703213363,
+    "volumeEquivalentRadiusKm": 55,
+    "radialRangeKm": [
+      41.21204834247943,
+      75.16346909801197
+    ]
+  },
+  "elevation": [
+    -30,
+    30
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1100,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 696909970321336.5
+    }
+  }
+}

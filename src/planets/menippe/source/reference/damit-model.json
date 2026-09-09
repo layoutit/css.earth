@@ -1,0 +1,370 @@
+{
+  "number": 188,
+  "name": "Menippe",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/240",
+  "modelId": 327,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/327",
+  "catalog": "View model 32 48 11.97647 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "327",
+    "Asteroid": "(188) Menippe",
+    "λ": "32",
+    "β": "48",
+    "P": "11.97647",
+    "YORP": "",
+    "t0": "2448677",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.68",
+    "p3": "0.06",
+    "p4": "-0.72",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:27:07",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1201/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1202/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1203/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1204/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/141",
+      "file": "reference-141.html",
+      "links": [
+        {
+          "label": "2011a&a...530a.134h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011a&a...530a.134h"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4114",
+          "url": "http://arxiv.org/abs/1104.4114\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H",
+          "url": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H"
+        }
+      ]
+    }
+  ],
+  "id": "menippe",
+  "displayName": "Menippe",
+  "lambda": 32.0,
+  "beta": 48.0,
+  "periodHours": 11.97647,
+  "version": "2011-04-21",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 35.3,
+  "uncertaintyKm": 0.9,
+  "akari": {
+    "number": 188,
+    "name": "Menippe",
+    "diameterKm": 39.33,
+    "uncertaintyKm": 0.44,
+    "detections": 9,
+    "originalRow": "188    Menippe                        9.22  0.15  9   39.33  0.44 0.238 0.007"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1204/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1202/IAUspin.txt",
+  "shapeSha256": "6edbc9d49a54ef72199ed7da9d5827c133f1aa1c2170e2ee8c65e747454c8077",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.0000000121974248,
+  "independentSignedVolume": 1.000000012197425,
+  "originalVolumeEquivalentDiameter": 1.2407009868432524,
+  "firstVertex": [
+    0.054842,
+    0.217722,
+    0.570278
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.520512222743136,
+    0.8661467017503443
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.809774,
+      0.809876
+    ],
+    [
+      -0.634091,
+      0.700677
+    ],
+    [
+      -0.550407,
+      0.572407
+    ]
+  ],
+  "scaleKmPerSourceUnit": 28.4516578727117,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 4.1517675753590085e-09
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        0.054842,
+        0.217722,
+        0.570278
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 6,
+      "coordinates": [
+        0.042875,
+        0.203013,
+        0.572407
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 318,
+      "coordinates": [
+        -0.174117,
+        -0.634091,
+        0.220457
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 340,
+      "coordinates": [
+        0.727445,
+        -0.330855,
+        0.072604
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 461,
+      "coordinates": [
+        0.809876,
+        -0.247093,
+        -0.160092
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 487,
+      "coordinates": [
+        -0.291473,
+        0.700677,
+        0.142038
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "coordinates": [
+        -0.788202,
+        0.230434,
+        -0.051583
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 516,
+      "coordinates": [
+        -0.809774,
+        0.124851,
+        -0.053579
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1015,
+      "coordinates": [
+        0.219903,
+        -0.134694,
+        -0.550407
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "coordinates": [
+        0.313648,
+        -0.193543,
+        -0.544335
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 328,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/328",
+      "pole": [
+        "198",
+        "25"
+      ],
+      "version": "2011-04-21",
+      "periodHours": "11.97648",
+      "comment": "",
+      "calibrated": "0 (No)",
+      "diameterKm": "",
+      "uncertaintyKm": "",
+      "nonconvex": "0 (No)"
+    }
+  ],
+  "selectionNotes": "Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible.",
+  "shapeKind": "Convex light-curve reconstruction",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible.",
+  "calibrationSelection": "Volume-equivalent diameter from Hanuš et al. (2018), TableA.3, VS-TPM fit for the selected nominal pole family. A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible.",
+  "archiveVolumeDiameterMismatchFraction": null,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/327",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "comparison",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics."
+    }
+  ],
+  "calibrationOverride": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 35.3,
+    "uncertaintyKm": 0.9,
+    "uncertaintyKind": "Reported publication uncertainty for the fitted diameter; not a bound on local shape error.",
+    "diameterSemantics": "Volume-equivalent diameter from Hanuš et al. (2018), TableA.3, VS-TPM fit for the selected nominal pole family.",
+    "sourceUrl": "https://arxiv.org/pdf/1803.06116",
+    "reference": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
+    "sourceLabel": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
+    "sourceFile": "hanus-2018.pdf",
+    "publishedPoleEclipticDegrees": [
+      32.0,
+      48.0
+    ],
+    "publishedPeriodHours": 11.9765,
+    "scaleKmPerSourceUnit": 28.4516578727117,
+    "metersPerSourceUnit": 28451.657872711698,
+    "limitations": "A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible.",
+    "visibleDescription": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "visibleShapeDescription": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "papers": [
+    {
+      "file": "hanus-2011.pdf",
+      "url": "https://arxiv.org/pdf/1104.4114",
+      "label": "Hanuš et al. (2011), original light-curve inversion study"
+    },
+    {
+      "file": "hanus-2018.pdf",
+      "url": "https://arxiv.org/pdf/1803.06116",
+      "label": "Hanuš et al. (2018), VS-TPM size study, Table A.3"
+    }
+  ],
+  "selectedPoleStatus": "one of competing archived solutions",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 35.3,
+    "uncertaintyKm": 0.9,
+    "uncertaintyKind": "Reported publication uncertainty for the fitted diameter; not a bound on local shape error.",
+    "diameterSemantics": "Volume-equivalent diameter from Hanuš et al. (2018), TableA.3, VS-TPM fit for the selected nominal pole family.",
+    "sourceUrl": "https://arxiv.org/pdf/1803.06116",
+    "reference": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
+    "sourceLabel": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
+    "sourceFile": "hanus-2018.pdf",
+    "publishedPoleEclipticDegrees": [
+      32.0,
+      48.0
+    ],
+    "publishedPeriodHours": 11.9765,
+    "scaleKmPerSourceUnit": 28.4516578727117,
+    "metersPerSourceUnit": 28451.657872711698,
+    "limitations": "A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible.",
+    "visibleDescription": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 2.761609095120294,
+  "orbitalPeriodYears": 4.589353476694967,
+  "sourceFields": {
+    "ID": "327",
+    "Asteroid": "(188) Menippe",
+    "λ": "32",
+    "β": "48",
+    "P": "11.97647",
+    "YORP": "",
+    "t0": "2448677",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.68",
+    "p3": "0.06",
+    "p4": "-0.72",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:27:07",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

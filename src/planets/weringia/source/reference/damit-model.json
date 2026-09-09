@@ -1,0 +1,347 @@
+{
+  "number": 226,
+  "name": "Weringia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/648",
+  "modelId": 1074,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1074",
+  "catalog": "View model 284 -14 11.14849 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1074",
+    "Asteroid": "(226) Weringia",
+    "λ": "284",
+    "β": "-14",
+    "P": "11.14849",
+    "YORP": "",
+    "t0": "2444424",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.7",
+    "p3": "0.04",
+    "p4": "-0.66",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/3955/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/3956/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/3957/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2016)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/161",
+      "file": "reference-161.html",
+      "links": [
+        {
+          "label": "2016a&a...586a.108h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2016a&a...586a.108h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H",
+          "url": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H"
+        }
+      ]
+    }
+  ],
+  "id": "weringia",
+  "displayName": "Weringia",
+  "lambda": 284.0,
+  "beta": -14.0,
+  "periodHours": 11.14849,
+  "version": "2016-01-04",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 32.26,
+  "uncertaintyKm": 0.36,
+  "akari": {
+    "number": 226,
+    "name": "Weringia",
+    "diameterKm": 32.26,
+    "uncertaintyKm": 0.36,
+    "detections": 10,
+    "originalRow": "226    Weringia                       9.70  0.15 10   32.26  0.36 0.226 0.006"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3957/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3955/IAUspin.txt",
+  "shapeSha256": "b5ea3c7a8dacc9eb8d62f5ea85376eeeec1d1d521461ea669a201a5f7d97646b",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.0000001234059464,
+  "independentSignedVolume": 1.0000001234059466,
+  "translatedSignedVolume": 1.0000001234059444,
+  "originalVolumeEquivalentDiameter": 1.2407010328354242,
+  "firstVertex": [
+    0.36171,
+    0.030309,
+    0.533042
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.4642308419751966,
+    0.866158414228021
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.746279,
+      0.810929
+    ],
+    [
+      -0.672326,
+      0.756385
+    ],
+    [
+      -0.50095,
+      0.533438
+    ]
+  ],
+  "scaleKmPerSourceUnit": 26.001429148708706,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 2040,
+    "minDoubleTriangleAreaSourceUnits2": 1.5457764528229033e-07
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.36171,
+        0.030309,
+        0.533042
+      ],
+      "radiusSourceUnits": 0.6448926525748296
+    },
+    {
+      "vertexIndex1": 4,
+      "pointSourceUnits": [
+        0.352621,
+        0.035378,
+        0.533438
+      ],
+      "radiusSourceUnits": 0.6404289752728245
+    },
+    {
+      "vertexIndex1": 341,
+      "pointSourceUnits": [
+        0.762539,
+        -0.059553,
+        0.326754
+      ],
+      "radiusSourceUnits": 0.831733408518619
+    },
+    {
+      "vertexIndex1": 391,
+      "pointSourceUnits": [
+        -0.746279,
+        -0.079812,
+        0.121555
+      ],
+      "radiusSourceUnits": 0.7603143555201362
+    },
+    {
+      "vertexIndex1": 422,
+      "pointSourceUnits": [
+        -0.09997,
+        -0.672326,
+        -0.043921
+      ],
+      "radiusSourceUnits": 0.6811353062475913
+    },
+    {
+      "vertexIndex1": 453,
+      "pointSourceUnits": [
+        0.810929,
+        -0.199279,
+        0.200721
+      ],
+      "radiusSourceUnits": 0.8588404291386148
+    },
+    {
+      "vertexIndex1": 478,
+      "pointSourceUnits": [
+        -0.173413,
+        0.756385,
+        -0.152231
+      ],
+      "radiusSourceUnits": 0.7907999836589528
+    },
+    {
+      "vertexIndex1": 512,
+      "pointSourceUnits": [
+        -0.731849,
+        -0.230326,
+        0.132834
+      ],
+      "radiusSourceUnits": 0.7786513318764695
+    },
+    {
+      "vertexIndex1": 1021,
+      "pointSourceUnits": [
+        0.091634,
+        0.105269,
+        -0.50095
+      ],
+      "radiusSourceUnits": 0.5200281288709294
+    },
+    {
+      "vertexIndex1": 1022,
+      "pointSourceUnits": [
+        0.032111,
+        0.164793,
+        -0.50095
+      ],
+      "radiusSourceUnits": 0.5283358322790533
+    }
+  ],
+  "alternatives": [],
+  "originalSurfaceAreaSourceUnits2": 5.281808362693759,
+  "originalSurfaceEquivalentDiameter": 1.2966309493351007,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2016 Table2 reports24 dense lightcurves across four apparitions plus485 sparse points and one pole. This published shape is selected; no independent physical-volume calibration is in its archive record.",
+  "papers": [
+    {
+      "file": "paper-hanus-2016.pdf",
+      "url": "https://arxiv.org/pdf/1510.07422",
+      "label": "Hanuš et al. (2016), A&A 586, A108",
+      "sha256": "f1d036a9b14443c85b74cd745f32c76064ad9b982992a0766abf2f1b72d02d81"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 32.26,
+    "uncertaintyKm": 0.36,
+    "reportedUncertaintyKm": 0.36,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 226,
+      "name": "Weringia",
+      "diameterKm": 32.26,
+      "uncertaintyKm": 0.36,
+      "detections": 10,
+      "originalRow": "226    Weringia                       9.70  0.15 10   32.26  0.36 0.226 0.006"
+    },
+    "limitations": "Hanuš2016 Table2 reports24 dense lightcurves across four apparitions plus485 sparse points and one pole. This published shape is selected; no independent physical-volume calibration is in its archive record. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 32.26 km effective diameter (catalog ±0.36 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 26.001429148708706,
+    "metersPerSourceUnit": 26001.429148708707,
+    "sourceSignedVolume": 1.0000001234059464,
+    "sourceVolumeEquivalentDiameter": 1.2407010328354242,
+    "sourceSurfaceArea": 5.281808362693759,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 17578.900642237128,
+    "derivedVolumeEquivalentDiameterKm": 32.25999999999999,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2444424.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 2.7118191273654264,
+  "orbitalPeriodYears": 4.465800126862641,
+  "sourceFields": {
+    "ID": "1074",
+    "Asteroid": "(226) Weringia",
+    "λ": "284",
+    "β": "-14",
+    "P": "11.14849",
+    "YORP": "",
+    "t0": "2444424",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.7",
+    "p3": "0.04",
+    "p4": "-0.66",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

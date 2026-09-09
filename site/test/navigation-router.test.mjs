@@ -556,6 +556,39 @@ test('a first Sun click frames the Solar System card, and a repeat opens the Sun
   h.router.destroy();
 });
 
+test('clicking the Sun from the Solar System overview opens its body instead of refitting the outer planets', async () => {
+  const focuses = [], systems = [];
+  const h = harness({ withSun: true,
+    systemTarget: options => { systems.push(options); return { pose: 'outer-planets' }; },
+    focus: async options => { focuses.push(options); },
+  });
+  await h.router.settled;
+  await h.router.navigate('sun', { overview: true, preserveView: true });
+  assert.equal(h.router.state().overview, true);
+  await h.router.navigate('sun', { sceneSelection: true });
+  assert.equal(systems.length, 0, 'The visible system is not fitted a second time');
+  assert.equal(focuses.length, 1);
+  assert.equal(focuses[0].targetWorldCamera, undefined, 'Use the normal Sun close-up');
+  assert.equal(h.router.state().selectedObjectId, 'sun');
+  assert.equal(h.windowTarget.location.searchParams.has('overview'), false);
+  assert.equal(h.mounts.length, 2, 'The mounted Sun scene is retained');
+  h.router.destroy();
+});
+
+test('clicking the Sun from a galactic overview still frames its Solar System first', async () => {
+  const target = { pose: 'solar-system-framing' }, focuses = [];
+  const h = harness({ withSun: true, systemTarget: () => target,
+    focus: async options => { focuses.push(options); },
+  });
+  await h.router.settled;
+  await h.router.navigate('sun', { overview: true, overviewScope: 'milky-way', preserveView: true });
+  await h.router.navigate('sun', { sceneSelection: true });
+  assert.equal(focuses[0].targetWorldCamera, target);
+  assert.equal(h.router.state().overview, true);
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
+  h.router.destroy();
+});
+
 test('a second scene click can zoom while centering the current object is still in progress', async () => {
   const gate = deferred(), focuses = [];
   const h = harness({ centerTarget: () => ({ pose: 'centered' }), focus: options => {
