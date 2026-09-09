@@ -1,0 +1,339 @@
+{
+  "number": 110,
+  "name": "Lydia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/135",
+  "modelId": 152,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/152",
+  "catalog": "View model 149 -55 10.9258 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "152",
+    "Asteroid": "(110) Lydia",
+    "λ": "149",
+    "β": "-55",
+    "P": "10.9258",
+    "YORP": "",
+    "t0": "2436494",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "91",
+    "σD": "1",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2009-02-26",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2010-05-27 10:31:17",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/358/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/359/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/360/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/361/shape.txt"
+  },
+  "references": [
+    {
+      "label": "J. Ďurech (2007)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/113",
+      "file": "reference-113.html",
+      "links": [
+        {
+          "label": "2007a&a...465..331d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2007a&a...465..331d"
+        },
+        {
+          "label": "https://ui.adsabs.harvard.edu/#abs/2007A&A...465..331D/abstract",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2007A&A...465..331D/abstract"
+        }
+      ]
+    },
+    {
+      "label": "M. Delbo and P. Tanga (2009)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/126",
+      "file": "reference-126.html",
+      "links": [
+        {
+          "label": "2009p&ss...57..259d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2009p&ss...57..259d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2009P%26SS...57..259D",
+          "url": "http://adsabs.harvard.edu/abs/2009P%26SS...57..259D"
+        }
+      ]
+    }
+  ],
+  "id": "lydia",
+  "displayName": "Lydia",
+  "lambda": 149.0,
+  "beta": -55.0,
+  "periodHours": 10.9258,
+  "version": "2009-02-26",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 91.0,
+  "uncertaintyKm": 1.0,
+  "akari": {
+    "number": 110,
+    "name": "Lydia",
+    "diameterKm": 82.97,
+    "uncertaintyKm": 0.81,
+    "detections": 11,
+    "originalRow": "110    Lydia                          7.80  0.20 11   82.97  0.81 0.195 0.005"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/361/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/359/IAUspin.txt",
+  "shapeSha256": "ce4560318a58f130ddd60a01038a7fdb3bcc30554d3507ade899cda740975004",
+  "shapeBytes": 129283,
+  "vertices": 1597,
+  "faces": 3190,
+  "signedVolume": 394568.75938298897,
+  "independentSignedVolume": 394568.75938298897,
+  "originalVolumeEquivalentDiameter": 90.99999280864861,
+  "firstVertex": [
+    8.329645,
+    -0.477627,
+    36.725626
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    33.46193456471037,
+    59.006650085268745
+  ],
+  "extentsSourceUnits": [
+    [
+      -50.812167,
+      50.614796
+    ],
+    [
+      -50.327134,
+      58.068105
+    ],
+    [
+      -35.710522,
+      36.725626
+    ]
+  ],
+  "scaleKmPerSourceUnit": 1.0000000790258456,
+  "topology": {
+    "edges": 4785,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 90.99999280864861,
+    "declaredDiameterKm": 91.0,
+    "relativeDifference": -7.902583942787089e-08,
+    "scaledDiameterKm": 91.0
+  },
+  "alternatives": [
+    {
+      "modelId": 153,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/153",
+      "pole": [
+        "331",
+        "-61"
+      ],
+      "version": "2009-02-26",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "95.5",
+      "comment": "",
+      "references": [
+        {
+          "label": "J. Ďurech (2007)",
+          "url": "/projects/damit/references/view/113"
+        },
+        {
+          "label": "M. Delbo and P. Tanga (2009)",
+          "url": "/projects/damit/references/view/126"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Delbo and Tanga2009 supplementary section on Lydia explicitly choose pole1 (149.3,-55), matching model152, because it fits slightly better (reduced chi-square0.7 versus0.76). The second pole remains possible. Its IRAS thermophysical diameter range is90–92 km versus94–97 km for pole2; the archive stores91±1 km.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "preferred by thermophysical paper; alternative remains",
+  "independentCenteredSignedVolume": 394568.75938298885,
+  "surfaceAreaSourceUnitsSquared": 27679.565700983352,
+  "surfaceEquivalentDiameterSourceUnits": 93.86521937276217,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        8.329645,
+        -0.477627,
+        36.725626
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 714,
+      "sourcePoint": [
+        50.614796,
+        -8.121635,
+        1.171256
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 752,
+      "sourcePoint": [
+        1.016498,
+        58.068105,
+        -5.72404
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 792,
+      "sourcePoint": [
+        -50.812167,
+        3.255446,
+        4.662949
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 798,
+      "sourcePoint": [
+        -48.451025,
+        -14.199861,
+        5.563853
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 829,
+      "sourcePoint": [
+        -11.840551,
+        -50.327134,
+        -2.274888
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1595,
+      "sourcePoint": [
+        3.837738,
+        -14.503732,
+        -35.710522
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1596,
+      "sourcePoint": [
+        1.28663,
+        -17.054914,
+        -35.710522
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "delbo-tanga-2009.pdf",
+      "url": "https://arxiv.org/pdf/0808.0869",
+      "label": "Delbo and Tanga (2009), Planetary and Space Science 57, 259–265"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 91.0,
+    "uncertaintyKm": 1.0,
+    "uncertaintyKind": "DAMIT represents the published 90–92 km thermophysical fit range as 91±1 km. This is a fit range, not an independently stated one-sigma Gaussian confidence interval or a local shape-accuracy bound.",
+    "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/152",
+    "reference": "DAMIT model 152",
+    "sourceLabel": "DAMIT model 152",
+    "limitations": "Delbo and Tanga2009 supplementary section on Lydia explicitly choose pole1 (149.3,-55), matching model152, because it fits slightly better (reduced chi-square0.7 versus0.76). The second pole remains possible. Its IRAS thermophysical diameter range is90–92 km versus94–97 km for pole2; the archive stores91±1 km.",
+    "visibleDescription": "Convex light-curve reconstruction with the thermally preferred pole and a published 90–92 km diameter fit range. The archive mesh uses 91 km; another pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 1.0000000790258456,
+    "metersPerSourceUnit": 1000.0000790258456,
+    "publishedSizeInterval": {
+      "minimumKm": 90,
+      "maximumKm": 92,
+      "interpretation": "Thermophysical fit range for selected pole; publication does not label it one-sigma",
+      "source": "Delbo and Tanga2009 supplementary results for110 Lydia"
+    }
+  },
+  "distanceAu": 2.732268290476554,
+  "orbitalPeriodYears": 4.516408490175691,
+  "sourceFields": {
+    "ID": "152",
+    "Asteroid": "(110) Lydia",
+    "λ": "149",
+    "β": "-55",
+    "P": "10.9258",
+    "YORP": "",
+    "t0": "2436494",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "91",
+    "σD": "1",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2009-02-26",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2010-05-27 10:31:17",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

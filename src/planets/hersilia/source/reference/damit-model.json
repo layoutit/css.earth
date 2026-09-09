@@ -1,0 +1,347 @@
+{
+  "number": 206,
+  "name": "Hersilia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1794",
+  "modelId": 3217,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3217",
+  "catalog": "View model 250 43 11.11129 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "3217",
+    "Asteroid": "(206) Hersilia",
+    "λ": "250",
+    "β": "43",
+    "P": "11.11129",
+    "YORP": "",
+    "t0": "2451087",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.51",
+    "p3": "0.07",
+    "p4": "-0.98",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:43:15",
+    "Modified": "2019-09-26 09:43:15",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/10169/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/10170/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/10171/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2019)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/182",
+      "file": "reference-182.html",
+      "links": [
+        {
+          "label": "2019a&a...631a...2d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2019a&a...631a...2d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2019A&A...631A...2D",
+          "url": "http://adsabs.harvard.edu/abs/2019A&A...631A...2D"
+        }
+      ]
+    }
+  ],
+  "id": "hersilia",
+  "displayName": "Hersilia",
+  "lambda": 250.0,
+  "beta": 43.0,
+  "periodHours": 11.11129,
+  "version": "2019-05-07",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 93.93,
+  "uncertaintyKm": 0.94,
+  "akari": {
+    "number": 206,
+    "name": "Hersilia",
+    "diameterKm": 93.93,
+    "uncertaintyKm": 0.94,
+    "detections": 12,
+    "originalRow": "206    Hersilia                       8.68  0.15 12   93.93  0.94 0.068 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/10171/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/10169/IAUspin.txt",
+  "shapeSha256": "8e2c5f76b6378e942e105825b60568612becb8902a67d2c7c4dfc34d92b31b2f",
+  "shapeBytes": 46419,
+  "vertices": 574,
+  "faces": 1144,
+  "signedVolume": 1.0000000803716926,
+  "independentSignedVolume": 1.0000000803716926,
+  "translatedSignedVolume": 1.000000080371691,
+  "originalVolumeEquivalentDiameter": 1.2407010150378786,
+  "firstVertex": [
+    -0.024505,
+    0.059226,
+    0.61116
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5588051331018712,
+    0.7890585491013958
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.65444,
+      0.652046
+    ],
+    [
+      -0.724893,
+      0.713138
+    ],
+    [
+      -0.66052,
+      0.632816
+    ]
+  ],
+  "scaleKmPerSourceUnit": 75.70720009214494,
+  "topology": {
+    "edges": 1716,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 1144,
+    "minDoubleTriangleAreaSourceUnits2": 7.065968960624186e-07
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        -0.024505,
+        0.059226,
+        0.61116
+      ],
+      "radiusSourceUnits": 0.6145118059899256
+    },
+    {
+      "vertexIndex1": 4,
+      "pointSourceUnits": [
+        -0.138153,
+        0.008385,
+        0.632816
+      ],
+      "radiusSourceUnits": 0.647775153498496
+    },
+    {
+      "vertexIndex1": 192,
+      "pointSourceUnits": [
+        -0.211153,
+        0.524141,
+        0.328205
+      ],
+      "radiusSourceUnits": 0.6534737173865526
+    },
+    {
+      "vertexIndex1": 202,
+      "pointSourceUnits": [
+        -0.65444,
+        -0.103494,
+        0.132685
+      ],
+      "radiusSourceUnits": 0.6757277786660838
+    },
+    {
+      "vertexIndex1": 239,
+      "pointSourceUnits": [
+        0.652046,
+        -0.014488,
+        0.032453
+      ],
+      "radiusSourceUnits": 0.6530138478386197
+    },
+    {
+      "vertexIndex1": 263,
+      "pointSourceUnits": [
+        0.001712,
+        0.713138,
+        -0.013961
+      ],
+      "radiusSourceUnits": 0.7132766977190549
+    },
+    {
+      "vertexIndex1": 288,
+      "pointSourceUnits": [
+        -0.651406,
+        -0.144295,
+        0.150446
+      ],
+      "radiusSourceUnits": 0.6839479678871778
+    },
+    {
+      "vertexIndex1": 303,
+      "pointSourceUnits": [
+        0.14526,
+        -0.724893,
+        -0.089155
+      ],
+      "radiusSourceUnits": 0.7446602870262385
+    },
+    {
+      "vertexIndex1": 560,
+      "pointSourceUnits": [
+        -0.021195,
+        0.145036,
+        -0.66052
+      ],
+      "radiusSourceUnits": 0.6765880132850419
+    },
+    {
+      "vertexIndex1": 574,
+      "pointSourceUnits": [
+        0.023592,
+        0.10025,
+        -0.66052
+      ],
+      "radiusSourceUnits": 0.6685007968312379
+    }
+  ],
+  "alternatives": [],
+  "originalSurfaceAreaSourceUnits2": 5.059128732375143,
+  "originalSurfaceEquivalentDiameter": 1.2690038183518113,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Gaia DR2 plus Lowell inversion; publication table gives 502 Lowell and 17 Gaia points. One pole is released. This is a coarse convex reconstruction, not a resolved surface.",
+  "papers": [
+    {
+      "file": "paper-durech-2019.pdf",
+      "url": "https://arxiv.org/pdf/1909.09395",
+      "label": "Ďurech et al. (2019), A&A 631, A2",
+      "sha256": "485d95cc7dbe0932f982f1721f583c8c1c647275dd28d954989dd917a619768e"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 93.93,
+    "uncertaintyKm": 0.94,
+    "reportedUncertaintyKm": 0.94,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 206,
+      "name": "Hersilia",
+      "diameterKm": 93.93,
+      "uncertaintyKm": 0.94,
+      "detections": 12,
+      "originalRow": "206    Hersilia                       8.68  0.15 12   93.93  0.94 0.068 0.002"
+    },
+    "limitations": "Gaia DR2 plus Lowell inversion; publication table gives 502 Lowell and 17 Gaia points. One pole is released. This is a coarse convex reconstruction, not a resolved surface. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 93.93 km effective diameter (catalog ±0.94 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 75.70720009214494,
+    "metersPerSourceUnit": 75707.20009214495,
+    "sourceSignedVolume": 1.0000000803716926,
+    "sourceVolumeEquivalentDiameter": 1.2407010150378786,
+    "sourceSurfaceArea": 5.059128732375143,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 433921.91981668206,
+    "derivedVolumeEquivalentDiameterKm": 93.92999999999998,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2451087.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 2.741003699475706,
+  "orbitalPeriodYears": 4.5380850908200046,
+  "sourceFields": {
+    "ID": "3217",
+    "Asteroid": "(206) Hersilia",
+    "λ": "250",
+    "β": "43",
+    "P": "11.11129",
+    "YORP": "",
+    "t0": "2451087",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.51",
+    "p3": "0.07",
+    "p4": "-0.98",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:43:15",
+    "Modified": "2019-09-26 09:43:15",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

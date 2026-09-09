@@ -1,0 +1,319 @@
+{
+  "number": 109,
+  "name": "Felicitas",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1721",
+  "modelId": 3097,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3097",
+  "catalog": "View model 77 -26 13.19055 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "3097",
+    "Asteroid": "(109) Felicitas",
+    "λ": "77",
+    "β": "-26",
+    "P": "13.19055",
+    "YORP": "",
+    "t0": "2444586",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "85",
+    "σD": "6",
+    "Γ": "40",
+    "Γmin": "0",
+    "Γmax": "140",
+    "pV": "0.065",
+    "σpV": "0.01",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-06-24",
+    "Comment": "",
+    "Created": "2019-06-24 15:55:36",
+    "Modified": "2019-06-25 11:27:47",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/9812/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/9813/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/9814/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2019)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/179",
+      "file": "reference-179.html",
+      "links": [
+        {
+          "label": "2019a&a...625a.139m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2019a&a...625a.139m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2019A%26A...625A.139M",
+          "url": "http://adsabs.harvard.edu/abs/2019A%26A...625A.139M"
+        }
+      ]
+    }
+  ],
+  "id": "felicitas",
+  "displayName": "Felicitas",
+  "lambda": 77.0,
+  "beta": -26.0,
+  "periodHours": 13.19055,
+  "version": "2019-06-24",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 85.0,
+  "uncertaintyKm": 6.0,
+  "akari": {
+    "number": 109,
+    "name": "Felicitas",
+    "diameterKm": 80.81,
+    "uncertaintyKm": 1.24,
+    "detections": 5,
+    "originalRow": "109    Felicitas                      8.75  0.04  5   80.81  1.24 0.086 0.003"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/9814/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/9812/IAUspin.txt",
+  "shapeSha256": "7c4aa5b44d5ef71a8caa8719f647e29ac0d4dc23d64f50ca30c682718df9a9e0",
+  "shapeBytes": 79953,
+  "vertices": 988,
+  "faces": 1972,
+  "signedVolume": 321555.12813677243,
+  "independentSignedVolume": 321555.12813677243,
+  "originalVolumeEquivalentDiameter": 85.00000264978912,
+  "firstVertex": [
+    -11.224484,
+    -5.81428,
+    43.18301
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    37.28945379970507,
+    51.23381025159282
+  ],
+  "extentsSourceUnits": [
+    [
+      -44.532578,
+      45.186642
+    ],
+    [
+      -49.990677,
+      43.933118
+    ],
+    [
+      -44.651853,
+      43.18301
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9999999688260113,
+  "topology": {
+    "edges": 2958,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 85.00000264978912,
+    "declaredDiameterKm": 85.0,
+    "relativeDifference": 3.11739896119434e-08,
+    "scaledDiameterKm": 85.0
+  },
+  "alternatives": [
+    {
+      "modelId": 3096,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3096",
+      "pole": [
+        "252",
+        "-49"
+      ],
+      "version": "2019-06-24",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "81",
+      "comment": "",
+      "references": [
+        {
+          "label": "Marciniak et al. (2019)",
+          "url": "/projects/damit/references/view/179"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Marciniak2019 section4.2 and TableB.2 prefer AM1 (77,-26), matching model3097: reduced chi-square1.1 versus2.0 for AM2/model3096. The latter is a bad thermal fit. The published diameter is85 km with asymmetric3-sigma interval80–92 km; DAMIT rounds its equivalent-diameter error to6 km. WISE W3/W4 residual offsets remain and roughness is unconstrained. Marciniak2019 section4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "preferred by thermophysical paper; opposite solution bad fit",
+  "independentCenteredSignedVolume": 321555.12813677243,
+  "surfaceAreaSourceUnitsSquared": 23705.435984809556,
+  "surfaceEquivalentDiameterSourceUnits": 86.86584271312785,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        -11.224484,
+        -5.81428,
+        43.18301
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 428,
+      "sourcePoint": [
+        45.186642,
+        -4.654891,
+        -1.016955
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 460,
+      "sourcePoint": [
+        7.641842,
+        43.933118,
+        3.008056
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 493,
+      "sourcePoint": [
+        -44.532578,
+        -2.21766,
+        -9.038957
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 494,
+      "sourcePoint": [
+        -44.532578,
+        -2.916801,
+        -8.339816
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 523,
+      "sourcePoint": [
+        -4.609329,
+        -49.990677,
+        0.883982
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 971,
+      "sourcePoint": [
+        -3.079645,
+        -4.652835,
+        -44.651853
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 987,
+      "sourcePoint": [
+        -4.098863,
+        -3.236604,
+        -44.350273
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "marciniak-2019.pdf",
+      "url": "https://hebe.astro.amu.edu.pl/docs/aa35129-19.pdf",
+      "label": "Marciniak et al. (2019), A&A 625, A139"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 85.0,
+    "uncertaintyKm": 6.0,
+    "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
+    "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3097",
+    "reference": "DAMIT model 3097",
+    "sourceLabel": "DAMIT model 3097",
+    "limitations": "Marciniak2019 section4.2 and TableB.2 prefer AM1 (77,-26), matching model3097: reduced chi-square1.1 versus2.0 for AM2/model3096. The latter is a bad thermal fit. The published diameter is85 km with asymmetric3-sigma interval80–92 km; DAMIT rounds its equivalent-diameter error to6 km. WISE W3/W4 residual offsets remain and roughness is unconstrained. Marciniak2019 section4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.",
+    "visibleDescription": "Convex light-curve reconstruction with the thermally preferred pole. The selected archive mesh has an 85 km equivalent-volume size; the paper reports a thermal-size 3-sigma interval of 80–92 km. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "publishedUncertainty": {
+      "lowerKm": 5,
+      "upperKm": 7,
+      "confidence": "3 sigma",
+      "source": "Marciniak2019 TableB.2"
+    },
+    "scaleKmPerSourceUnit": 0.9999999688260113,
+    "metersPerSourceUnit": 999.9999688260112
+  },
+  "distanceAu": 2.6925655976731475,
+  "orbitalPeriodYears": 4.418324826422044,
+  "sourceFields": {
+    "ID": "3097",
+    "Asteroid": "(109) Felicitas",
+    "λ": "77",
+    "β": "-26",
+    "P": "13.19055",
+    "YORP": "",
+    "t0": "2444586",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "85",
+    "σD": "6",
+    "Γ": "40",
+    "Γmin": "0",
+    "Γmax": "140",
+    "pV": "0.065",
+    "σpV": "0.01",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-06-24",
+    "Comment": "",
+    "Created": "2019-06-24 15:55:36",
+    "Modified": "2019-06-25 11:27:47",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

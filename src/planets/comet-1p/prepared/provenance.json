@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "comet-1p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "3b272ff89b08baa13de67b8d85cca73a6282aa123e5ed9d785c85a41c1cb1b9d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -285,7 +285,7 @@
       "sha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
       "bytes": 174,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -304,7 +304,7 @@
       "sha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -328,7 +328,7 @@
       "sha256": "02da4652868e0da43bf05fa7f962e6439d05871501ce8b3fc641c65ded48484a",
       "bytes": 3950,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -366,13 +366,13 @@
           "url": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
           "bytes": 44,
           "sha256": "72f6226f692921f3f9dd3a49250631234f64ef64995d7688732ee6b797b0e192",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
           "bytes": 82802,
           "sha256": "8d950b8eb503d9a46884f5862d2cc7265b677d9f8f81b62205b8046d3bf9b3a0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

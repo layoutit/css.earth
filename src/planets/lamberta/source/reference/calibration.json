@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 141.0,
+  "uncertaintyKm": 2.0,
+  "uncertaintyKind": "Archive estimate of volume-equivalent diameter error; not a bound on local shape accuracy.",
+  "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record; actual source publications and release differences are documented in selectionNotes.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5914",
+  "reference": "DAMIT model 5914, version 2021-11-12",
+  "sourceLabel": "DAMIT model 5914",
+  "scaleKmPerSourceUnit": 0.9993353237024318,
+  "metersPerSourceUnit": 999.3353237024319,
+  "limitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Vernazza et al. (2021) ADAM model5914 over older convex1086. The VLT/SPHERE imaging study reports volume-equivalent141 ±2 km, agreeing with the selected archive diameter and raw volume141.094. MPCD is a promising refinement documented in the paper; its linked LAM release could not be retrieved during this survey. The mounted source is the pinned ADAM mesh, not an unverified MPCD or reflectance product.",
+  "visibleDescription": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 141 ±2 km. The grid marks unavailable imagery; rotational phase is illustrative."
+}

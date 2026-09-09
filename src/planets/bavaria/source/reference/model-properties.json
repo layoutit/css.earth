@@ -1,0 +1,89 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3090",
+  "modelId": 3090,
+  "modelVersion": "2019-06-24",
+  "diameterKm": 55,
+  "diameterInterpretation": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 55,
+    "uncertaintyKm": 2,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Equivalent-volume size of the archived physical mesh; the thermal paper does not independently define volume semantics.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3090",
+    "sourceLabel": "DAMIT model 3090",
+    "reference": "DAMIT model 3090",
+    "limitations": "Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
+    "visibleDescription": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "publishedUncertainty": {
+      "lowerKm": 2,
+      "upperKm": 2,
+      "confidence": "3 sigma thermal-model fit",
+      "source": "Marciniak2019 Table2 and AppendixB"
+    },
+    "scaleKmPerSourceUnit": 0.9999999987755731,
+    "metersPerSourceUnit": 999.9999987755731
+  },
+  "periodHours": 12.2409,
+  "poleEclipticJ2000Degrees": [
+    226,
+    70
+  ],
+  "modelLimitations": "Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/9793/shape.txt",
+    "vertices": 1010,
+    "faces": 2016,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 999.9999987755731,
+    "firstVertexKm": [
+      1.7092229979071814,
+      7.3146809910437085,
+      26.496572967556887
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      63.346632922436676,
+      61.47658192472642,
+      53.638056934324126
+    ],
+    "volumeCubicKm": 87113.74629016702,
+    "volumeEquivalentRadiusKm": 27.5,
+    "radialRangeKm": [
+      24.001852284968685,
+      34.87834067787677
+    ]
+  },
+  "elevation": [
+    -8,
+    8
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2016,
+    "sourceVertices": 1010,
+    "weldedVertices": 1010,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 550,
+    "estimatedErrorMeters": 245.6292266845703,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 86928032377087.61
+    }
+  }
+}

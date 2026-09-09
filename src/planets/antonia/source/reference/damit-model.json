@@ -1,0 +1,304 @@
+{
+  "number": 272,
+  "name": "Antonia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/406",
+  "modelId": 637,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/637",
+  "catalog": "View model 293 -90 3.854798 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "637",
+    "Asteroid": "(272) Antonia",
+    "λ": "293",
+    "β": "-90",
+    "P": "3.854798",
+    "YORP": "",
+    "t0": "2450761",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.41",
+    "p3": "0.06",
+    "p4": "-1.02",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-11",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/2511/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/2512/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/2513/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/2514/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2013)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/148",
+      "file": "reference-148.html",
+      "links": [
+        {
+          "label": "2013a&a...551a..67h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2013a&a...551a..67h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H",
+          "url": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H\n"
+        },
+        {
+          "label": "http://arxiv.org/abs/1301.6943",
+          "url": "http://arxiv.org/abs/1301.6943"
+        }
+      ]
+    }
+  ],
+  "id": "antonia",
+  "displayName": "Antonia",
+  "lambda": 293.0,
+  "beta": -90.0,
+  "periodHours": 3.854798,
+  "version": "2013-02-11",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 23.89,
+  "uncertaintyKm": 0.49,
+  "akari": {
+    "number": 272,
+    "name": "Antonia",
+    "diameterKm": 23.89,
+    "uncertaintyKm": 0.49,
+    "detections": 7,
+    "originalRow": "272    Antonia                       10.70  0.15  7   23.89  0.49 0.167 0.008"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2514/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2512/IAUspin.txt",
+  "shapeSha256": "536fd7168d0691b0111d6362045134cacaa1f1bf92f9f767e949357d5fe04adf",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.0000000079085254,
+  "independentSignedVolume": 1.0000000079085254,
+  "originalVolumeEquivalentDiameter": 1.2407009850695052,
+  "firstVertex": [
+    0.363739,
+    0.20017,
+    0.459702
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.4508628001376916,
+    0.9333745702605144
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.770095,
+      0.743916
+    ],
+    [
+      -0.790241,
+      0.778905
+    ],
+    [
+      -0.441924,
+      0.476147
+    ]
+  ],
+  "scaleKmPerSourceUnit": 19.255243839966532,
+  "alternatives": [],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Published convex inversion from Hanuš et al. (2013). The selected archive solution is retained as a reproducible coarse model. The archive lists one solution, without establishing local shape accuracy. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+  "selectedPoleStatus": "single archived solution; morphology remains model-dependent",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "hanus-2013.pdf",
+      "url": "https://arxiv.org/pdf/1301.6943",
+      "label": "Hanuš et al. (2013), A&A 551, A67"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 23.89,
+    "uncertaintyKm": 0.49,
+    "reportedUncertaintyKm": 0.49,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 272,
+      "name": "Antonia",
+      "diameterKm": 23.89,
+      "uncertaintyKm": 0.49,
+      "detections": 7,
+      "originalRow": "272    Antonia                       10.70  0.15  7   23.89  0.49 0.167 0.008"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Published convex inversion from Hanuš et al. (2013). The selected archive solution is retained as a reproducible coarse model. The archive lists one solution, without establishing local shape accuracy. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+    "scaleKmPerSourceUnit": 19.255243839966532,
+    "metersPerSourceUnit": 19255.243839966533,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 23.89 km effective diameter (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "independentCenteredSignedVolume": 1.0000000079085252,
+  "surfaceAreaSourceUnitsSquared": 5.449898178770589,
+  "surfaceEquivalentDiameterSourceUnits": 1.3171015408835092,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.363739,
+        0.20017,
+        0.459702
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 4,
+      "sourcePoint": [
+        0.267947,
+        0.126461,
+        0.476147
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 464,
+      "sourcePoint": [
+        0.743916,
+        0.278677,
+        0.083856
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 491,
+      "sourcePoint": [
+        0.358003,
+        0.778905,
+        -0.010363
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "sourcePoint": [
+        -0.660257,
+        0.432232,
+        -0.001689
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 517,
+      "sourcePoint": [
+        -0.770095,
+        -0.194013,
+        -0.028365
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 543,
+      "sourcePoint": [
+        -0.451732,
+        -0.790241,
+        -0.038574
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1017,
+      "sourcePoint": [
+        0.073624,
+        -0.365078,
+        -0.441924
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "sourcePoint": [
+        0.164505,
+        -0.274198,
+        -0.441924
+      ]
+    }
+  ],
+  "distanceAu": 2.7790127024022557,
+  "orbitalPeriodYears": 4.632804780534105,
+  "sourceFields": {
+    "ID": "637",
+    "Asteroid": "(272) Antonia",
+    "λ": "293",
+    "β": "-90",
+    "P": "3.854798",
+    "YORP": "",
+    "t0": "2450761",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.41",
+    "p3": "0.06",
+    "p4": "-1.02",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-11",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

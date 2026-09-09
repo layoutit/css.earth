@@ -1,0 +1,347 @@
+{
+  "number": 225,
+  "name": "Henrietta",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2794",
+  "modelId": 4859,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4859",
+  "catalog": "View model 184 54 7.3561 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "4859",
+    "Asteroid": "(225) Henrietta",
+    "λ": "184",
+    "β": "54",
+    "P": "7.3561",
+    "YORP": "",
+    "t0": "2457278",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "2.32",
+    "p3": "0.26",
+    "p4": "-0.03",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:09:10",
+    "Modified": "2020-10-05 13:09:10",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/54823/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/54824/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/54825/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2020)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/658",
+      "file": "reference-658.html",
+      "links": [
+        {
+          "label": "2020a&a...643a..59d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2020a&a...643a..59d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D",
+          "url": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D"
+        }
+      ]
+    }
+  ],
+  "id": "henrietta",
+  "displayName": "Henrietta",
+  "lambda": 184.0,
+  "beta": 54.0,
+  "periodHours": 7.3561,
+  "version": "2019-10-23",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 107.57,
+  "uncertaintyKm": 1.5,
+  "akari": {
+    "number": 225,
+    "name": "Henrietta",
+    "diameterKm": 107.57,
+    "uncertaintyKm": 1.5,
+    "detections": 8,
+    "originalRow": "225    Henrietta                      8.72  0.15  8  107.57  1.50 0.051 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/54825/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/54823/IAUspin",
+  "shapeSha256": "02061f1763d9d4005b8cf226e8abace734b5796a9ee5d651bf1e767ce8ab04f3",
+  "shapeBytes": 46419,
+  "vertices": 574,
+  "faces": 1144,
+  "signedVolume": 0.9999998728846586,
+  "independentSignedVolume": 0.9999998728846586,
+  "translatedSignedVolume": 0.9999998728846605,
+  "originalVolumeEquivalentDiameter": 1.2407009292280882,
+  "firstVertex": [
+    0.214628,
+    0.05516,
+    0.396533
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.43158763536853095,
+    0.8933439152045534
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.726443,
+      0.759041
+    ],
+    [
+      -0.776661,
+      0.836841
+    ],
+    [
+      -0.446772,
+      0.46043
+    ]
+  ],
+  "scaleKmPerSourceUnit": 86.70099092045132,
+  "topology": {
+    "edges": 1716,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 1144,
+    "minDoubleTriangleAreaSourceUnits2": 8.674898077820568e-07
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.214628,
+        0.05516,
+        0.396533
+      ],
+      "radiusSourceUnits": 0.4542534799789651
+    },
+    {
+      "vertexIndex1": 5,
+      "pointSourceUnits": [
+        -0.145717,
+        -0.069839,
+        0.46043
+      ],
+      "radiusSourceUnits": 0.487961796568133
+    },
+    {
+      "vertexIndex1": 175,
+      "pointSourceUnits": [
+        0.759041,
+        0.121257,
+        -0.083209
+      ],
+      "radiusSourceUnits": 0.7731560239764028
+    },
+    {
+      "vertexIndex1": 192,
+      "pointSourceUnits": [
+        0.35915,
+        0.809979,
+        0.066882
+      ],
+      "radiusSourceUnits": 0.8885538277814126
+    },
+    {
+      "vertexIndex1": 213,
+      "pointSourceUnits": [
+        -0.726443,
+        -0.246703,
+        -0.034615
+      ],
+      "radiusSourceUnits": 0.7679713540770905
+    },
+    {
+      "vertexIndex1": 237,
+      "pointSourceUnits": [
+        -0.132517,
+        -0.776661,
+        -0.011025
+      ],
+      "radiusSourceUnits": 0.7879623181567759
+    },
+    {
+      "vertexIndex1": 269,
+      "pointSourceUnits": [
+        0.287524,
+        0.836841,
+        -0.013803
+      ],
+      "radiusSourceUnits": 0.8849652155118866
+    },
+    {
+      "vertexIndex1": 288,
+      "pointSourceUnits": [
+        -0.726443,
+        -0.236146,
+        -0.045173
+      ],
+      "radiusSourceUnits": 0.7651960307620524
+    },
+    {
+      "vertexIndex1": 567,
+      "pointSourceUnits": [
+        -0.329215,
+        -0.1485,
+        -0.446772
+      ],
+      "radiusSourceUnits": 0.5744910671272444
+    },
+    {
+      "vertexIndex1": 574,
+      "pointSourceUnits": [
+        -0.159492,
+        0.021223,
+        -0.446772
+      ],
+      "radiusSourceUnits": 0.47486138375003706
+    }
+  ],
+  "alternatives": [],
+  "originalSurfaceAreaSourceUnits2": 5.31751347354967,
+  "originalSurfaceEquivalentDiameter": 1.3010061908178487,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "ATLAS2015–2018 photometry gives448 orange and151 cyan measurements; convex and ellipsoid period searches agree. The selected release supplies one pole and an uncalibrated convex shape.",
+  "papers": [
+    {
+      "file": "paper-durech-2020.pdf",
+      "url": "https://arxiv.org/pdf/2010.01820",
+      "label": "Ďurech et al. (2020), A&A 643, A59",
+      "sha256": "c053b1ec5469a4b01df1d452633b49a22bdeadcbd6367e6ba8458903905ac169"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 107.57,
+    "uncertaintyKm": 1.5,
+    "reportedUncertaintyKm": 1.5,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 225,
+      "name": "Henrietta",
+      "diameterKm": 107.57,
+      "uncertaintyKm": 1.5,
+      "detections": 8,
+      "originalRow": "225    Henrietta                      8.72  0.15  8  107.57  1.50 0.051 0.002"
+    },
+    "limitations": "ATLAS2015–2018 photometry gives448 orange and151 cyan measurements; convex and ellipsoid period searches agree. The selected release supplies one pole and an uncalibrated convex shape. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 107.57 km effective diameter (catalog ±1.5 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 86.70099092045132,
+    "metersPerSourceUnit": 86700.99092045132,
+    "sourceSignedVolume": 0.9999998728846586,
+    "sourceVolumeEquivalentDiameter": 1.2407009292280882,
+    "sourceSurfaceArea": 5.31751347354967,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 651736.6263297588,
+    "derivedVolumeEquivalentDiameterKm": 107.56999999999995,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2457278.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 3.397844277767737,
+  "orbitalPeriodYears": 6.263447035997014,
+  "sourceFields": {
+    "ID": "4859",
+    "Asteroid": "(225) Henrietta",
+    "λ": "184",
+    "β": "54",
+    "P": "7.3561",
+    "YORP": "",
+    "t0": "2457278",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "2.32",
+    "p3": "0.26",
+    "p4": "-0.03",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:09:10",
+    "Modified": "2020-10-05 13:09:10",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

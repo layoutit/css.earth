@@ -1,0 +1,232 @@
+{
+  "schema": "cssphilosophia-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "philosophia-shape",
+      "path": "shape/model-1873.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/6154/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2018); model 1873, version 2018-03-22.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore the original counted triangle table through the pinned acquisition recipe; physical scale is specified separately by the calibration.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "Original km coordinates according to DAMIT calibrated-size flag. The archive declares107 km; this package preserves those coordinates and uniformly rescales to the primary publication’s101 km volume-equivalent diameter.",
+        "metersPerUnit": 943.9252199183334,
+        "referenceRadiusMeters": 50500
+      },
+      "coverage": "Convex light-curve reconstruction; 101 km volume-equivalent diameter (±5 km). The grid marks unavailable imagery; rotational phase is illustrative. Marciniak2018 section5.2 and Table7 select the convex pole(95,+19) as the best thermal fit (chi-square1.2). Table7 reports101±5 km equivalent-volume diameter, with errors spanning the full3-sigma range. This primary publication scale supersedes DAMIT’s107±5 km field. The paper also presents SAGE nonconvex alternatives, but the selected convex solution gives the best thermal fit; no multichord occultation supports those concavities. Shape and thermal fit are explicitly the least constrained of the five studied targets; neither is a resolved terrain map.",
+      "expectedBytes": 82708,
+      "expectedSha256": "e21f6191a0e78785b81cf603e3e0f86281aca58b705fc1cadfebb5a043afef6f"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/6154/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2018); model 1873, version 2018-03-22.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 83142,
+      "expectedSha256": "1907f596fa193ad898c08ad33a83c0ad979a94e5e36e062134ea1cb56bf2c4cc",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "philosophia-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 11540,
+      "expectedSha256": "3cffed9b75f3b22374720d925ebddff2346d0fd1120582d7bdaeab8930b52ae5"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 2363,
+      "expectedSha256": "d32166d83a9bf4b7d48343e380d43feaa5dbcccc553be68fe8c7f9261ebe4c7d"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 1263,
+      "expectedSha256": "b7c3de6324c7ee7c590ae858fba23e1d740b388e6729d0721925d1df56925639"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 592,
+      "expectedSha256": "b1f68d342d71132924224828184f674b993685ea1e562480a1ffe47ffe988503"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 3199,
+      "expectedSha256": "6ef52042b63155775c860f9721628609fba682b863e4c980e9956a5879347b97"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 5868,
+      "expectedSha256": "ad8a5f4e67a8dd8e0bc654b117b574a44c37028962dd6ac1a5968a52714f6221"
+    },
+    {
+      "path": "reference/1873-IAUspin.txt",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 33,
+      "expectedSha256": "ea4ca2e297845bc7387aedbcdb2917850a679c92d0baa80e8de25c5ac39608fc"
+    },
+    {
+      "path": "reference/AcuA_V1.txt.gz",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 120256,
+      "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
+    },
+    {
+      "path": "reference/ReadMe.AcuA.txt",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 3836,
+      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+    },
+    {
+      "path": "reference/calibration.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 2006,
+      "expectedSha256": "9bd63b1454c26cab9f6166b95c5b78cd89020ac1cdc12e8e2ea05a55405d9bdf"
+    },
+    {
+      "path": "reference/damit-model.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 11320,
+      "expectedSha256": "3953d1d8c0caeb8ce6bd99c9a204c40aed3820e26a2de1537c5d970566fc9cbb"
+    },
+    {
+      "path": "reference/documentation.html",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 40661,
+      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 7353,
+      "expectedSha256": "ae18155d64846b60da4b22e84304ed1edeb27e1660b710ce17b668edf71208ae"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 6643,
+      "expectedSha256": "ca49c28c53395c2232e0c8ac4f6edb7701e59eba05d544167a42756966c1fb75"
+    },
+    {
+      "path": "reference/jaxa-data-policy.html",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 15999,
+      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
+    },
+    {
+      "path": "reference/model-1873.html",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 134176,
+      "expectedSha256": "42f89a525d1a7809087824886f8f10b29bd57b7f69ef2ad6392da949d9c5115d"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 4418,
+      "expectedSha256": "cfa0a0a3480bb4725909763c1a785e7e0436187665f9bec02deb65156915732d"
+    },
+    {
+      "path": "reference/paper-marciniak-2018.pdf",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 10820210,
+      "expectedSha256": "b0c6db251c7ecaf128e9f1c57c99a7d1a8b58dda0fbf5aab10fb5e7c12b7e6d2"
+    },
+    {
+      "path": "reference/reference-174.html",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 36636,
+      "expectedSha256": "822059fa20b3a7cdddf0c852e9beb68d63644cfcfedaff11959e8bc98c70d398"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 144980,
+      "expectedSha256": "5def84e6af916ba0beb8c7423987867a6ecadb955d993fdb11b7c561824268a4"
+    }
+  ]
+}

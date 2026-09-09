@@ -1,0 +1,80 @@
+{
+  "parts": [
+    {
+      "path": "docs/main-belt-asteroids-expansion-evidence-bodies-1.tar.gz",
+      "stagedPath": "output/main-belt-asteroids-expansion/publication/docs/main-belt-asteroids-expansion-evidence-bodies-1.tar.gz",
+      "group": "bodies-1",
+      "files": 966,
+      "bytes": 36328691,
+      "sha256": "9bb8c2089621297c824e37b1f88b85a7970ae0cdbe06ba59ac89d149e57ba680"
+    },
+    {
+      "path": "docs/main-belt-asteroids-expansion-evidence-bodies-2.tar.gz",
+      "stagedPath": "output/main-belt-asteroids-expansion/publication/docs/main-belt-asteroids-expansion-evidence-bodies-2.tar.gz",
+      "group": "bodies-2",
+      "files": 990,
+      "bytes": 36078072,
+      "sha256": "92728add1e5b5a65f2804d5390749832230283d37793e94a8abb3297424b4a4e"
+    },
+    {
+      "path": "docs/main-belt-asteroids-expansion-evidence-shared.tar.gz",
+      "stagedPath": "output/main-belt-asteroids-expansion/publication/docs/main-belt-asteroids-expansion-evidence-shared.tar.gz",
+      "group": "shared",
+      "files": 1036,
+      "bytes": 33685611,
+      "sha256": "c0b892d46a00cf690a7410e73f6f59f4d51e9277b8f1b299bde046c66579c5e1"
+    }
+  ],
+  "files": 2992,
+  "bytes": 106092374,
+  "fullCaptureInventory": "browser-capture-inventory.json",
+  "models": 100,
+  "registry": {
+    "objects": 404,
+    "asteroids": 285,
+    "source": "site/objects.mjs",
+    "sourceSha256": "55e631a67fe459ae096bd8d68c6085d913b048c6e5adbc4b53ccfd7e1cb1a27a",
+    "scope": "Current checkout; regenerate after integration, never predict a merge count."
+  },
+  "representatives": [
+    "antigone",
+    "hera",
+    "aemilia",
+    "felicitas"
+  ],
+  "contactSheets": 24,
+  "supplementalReceipts": [
+    {
+      "path": "output/playwright/main-belt-asteroids-expansion/hertha-drag/report.json",
+      "id": null,
+      "scope": "Read receipt; no batch-wide pass inferred from a representative case"
+    },
+    {
+      "path": "output/playwright/main-belt-asteroids-expansion/load-cost/report.json",
+      "id": null,
+      "scope": "Read receipt; no batch-wide pass inferred from a representative case"
+    },
+    {
+      "path": "output/playwright/main-belt-asteroids-expansion/mobile-layout/report.json",
+      "id": "hertha",
+      "scope": "Mobile layout and retained lens switch only; full mobile interaction conformance is not claimed."
+    },
+    {
+      "path": "output/playwright/main-belt-asteroids-expansion/navigation/report.json",
+      "id": null,
+      "scope": "Read receipt; no batch-wide pass inferred from a representative case"
+    },
+    {
+      "path": "output/playwright/main-belt-asteroids-expansion/production-smoke/report.json",
+      "id": null,
+      "scope": "Representative public DOM checks against the normal production build: direct mount, Shadows off, 800 native raster triangles and retained Shape-to-Elevation switching. No development diagnostics."
+    },
+    {
+      "path": "output/playwright/main-belt-asteroids-expansion/thalia-drag-reference/report.json",
+      "id": null,
+      "scope": "Read receipt; no batch-wide pass inferred from a representative case"
+    }
+  ],
+  "missingOptionalEvidence": [],
+  "scope": "Compact evidence staging only; missing optional records and representative receipts do not imply passes. Parent owns final review/publication."
+}

@@ -1,0 +1,332 @@
+{
+  "number": 137,
+  "name": "Meliboea",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/3446",
+  "modelId": 5983,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5983",
+  "catalog": "View model 173 -7 25.6733 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "5983",
+    "Asteroid": "(137) Meliboea",
+    "λ": "173",
+    "β": "-7",
+    "P": "25.6733",
+    "YORP": "",
+    "t0": "2456407",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.51",
+    "p3": "0.08",
+    "p4": "-1.02",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2022-02-14",
+    "Comment": "",
+    "Created": "2022-02-17 14:38:46",
+    "Modified": "2022-02-17 14:38:46",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/65295/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/65296/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/65297/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2021)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/662",
+      "file": "reference-662.html",
+      "links": [
+        {
+          "label": "2021a&a...654a..48h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2021a&a...654a..48h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2021A&A...654A..48H",
+          "url": "http://adsabs.harvard.edu/abs/2021A&A...654A..48H"
+        }
+      ]
+    }
+  ],
+  "id": "meliboea",
+  "displayName": "Meliboea",
+  "lambda": 173.0,
+  "beta": -7.0,
+  "periodHours": 25.6733,
+  "version": "2022-02-14",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 143.77,
+  "uncertaintyKm": 2.51,
+  "akari": {
+    "number": 137,
+    "name": "Meliboea",
+    "diameterKm": 143.77,
+    "uncertaintyKm": 2.51,
+    "detections": 5,
+    "originalRow": "137    Meliboea                       8.05  0.15  5  143.77  2.51 0.052 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/65297/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/65295/IAUspin",
+  "shapeSha256": "a692afa2b908756462c3ecacb063c11f0c5ebed62afcab6936510f7b92421240",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.0000000000471554,
+  "independentSignedVolume": 1.0000000000471554,
+  "originalVolumeEquivalentDiameter": 1.240700981818302,
+  "firstVertex": [
+    0.252814,
+    0.086849,
+    0.54473
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5648389043594643,
+    0.7151839239139818
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.618891,
+      0.610057
+    ],
+    [
+      -0.659882,
+      0.654781
+    ],
+    [
+      -0.553486,
+      0.576526
+    ]
+  ],
+  "scaleKmPerSourceUnit": 115.87804161265251,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 1.240700981818302,
+    "declaredDiameterKm": null,
+    "relativeDifference": null,
+    "scaledDiameterKm": 143.77
+  },
+  "alternatives": [
+    {
+      "modelId": 5984,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5984",
+      "pole": [
+        "355",
+        "13"
+      ],
+      "version": "2022-02-14",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Hanuš et al. (2021)",
+          "url": "/projects/damit/references/view/662"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2021 TableA.2 reports316 ASAS-SN observations and both poles(173,-7)/(355,13). Its catalog diameter128.7 km differs from AKARI143.77 km; neither number is established as this mesh physical volume. The pinned AKARI effective diameter is used only as a stated scale approximation.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "independentCenteredSignedVolume": 1.0000000000471554,
+  "surfaceAreaSourceUnitsSquared": 4.974794174961513,
+  "surfaceEquivalentDiameterSourceUnits": 1.258382361454492,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.252814,
+        0.086849,
+        0.54473
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 4,
+      "sourcePoint": [
+        -0.044648,
+        0.061477,
+        0.576526
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 424,
+      "sourcePoint": [
+        -0.055947,
+        -0.659882,
+        0.109995
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 452,
+      "sourcePoint": [
+        0.610057,
+        -0.091688,
+        -0.101931
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 487,
+      "sourcePoint": [
+        0.038077,
+        0.654781,
+        -0.128213
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "sourcePoint": [
+        -0.597058,
+        0.351846,
+        0.133986
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 516,
+      "sourcePoint": [
+        -0.618891,
+        0.161882,
+        0.112898
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1020,
+      "sourcePoint": [
+        0.125753,
+        -0.033247,
+        -0.553486
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "sourcePoint": [
+        0.074221,
+        -0.084779,
+        -0.553486
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "hanus-2021.pdf",
+      "url": "https://arxiv.org/pdf/2107.10027",
+      "label": "Hanuš et al. (2021), A&A 654, A48"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 143.77,
+    "uncertaintyKm": 2.51,
+    "reportedUncertaintyKm": 2.51,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 137,
+      "name": "Meliboea",
+      "diameterKm": 143.77,
+      "uncertaintyKm": 2.51,
+      "detections": 5,
+      "originalRow": "137    Meliboea                       8.05  0.15  5  143.77  2.51 0.052 0.002"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2021 TableA.2 reports316 ASAS-SN observations and both poles(173,-7)/(355,13). Its catalog diameter128.7 km differs from AKARI143.77 km; neither number is established as this mesh physical volume. The pinned AKARI effective diameter is used only as a stated scale approximation.",
+    "scaleKmPerSourceUnit": 115.87804161265251,
+    "metersPerSourceUnit": 115878.04161265251,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 143.77 km effective diameter (catalog ±2.51 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 3.1311603864437165,
+  "orbitalPeriodYears": 5.540719610550062,
+  "sourceFields": {
+    "ID": "5983",
+    "Asteroid": "(137) Meliboea",
+    "λ": "173",
+    "β": "-7",
+    "P": "25.6733",
+    "YORP": "",
+    "t0": "2456407",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.51",
+    "p3": "0.08",
+    "p4": "-1.02",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2022-02-14",
+    "Comment": "",
+    "Created": "2022-02-17 14:38:46",
+    "Modified": "2022-02-17 14:38:46",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

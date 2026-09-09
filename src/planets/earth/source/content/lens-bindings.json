@@ -11,8 +11,19 @@
       "thumbnailUrl": "/scenes/earth/earth-lens-normal.webp",
       "surfaceUrl": "/scenes/earth/earth-surface.webp",
       "polesUrl": "/scenes/earth/earth-surface-poles.webp",
-      "qualification": "NASA Blue Marble Next Generation December 2004 with a prepared archival cloud composite",
+      "qualification": "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic",
       "surfacePagePrefix": "earth-surface",
+      "maximumZoom": 4
+    },
+    {
+      "id": "clouds",
+      "label": "Cloud coverage",
+      "shortLabel": "Clouds",
+      "thumbnailUrl": "/scenes/earth/earth-lens-clouds.webp",
+      "surfaceUrl": "/scenes/earth/earth-clouds.webp",
+      "polesUrl": "/scenes/earth/earth-clouds-poles.webp",
+      "qualification": "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather",
+      "surfacePagePrefix": "earth-clouds",
       "maximumZoom": 4
     },
     {
@@ -108,10 +119,11 @@
     }
   ],
   "provenance": {
-    "normal": "NASA Blue Marble Next Generation December 2004 and Blue Marble clouds",
+    "normal": "NASA Blue Marble Next Generation July 2004",
     "topography": "GEBCO_2026 terrain model: signed heights relative to mean sea level, with prepared hypsometric color and cartographic relief",
     "nightLights": "NASA Black Marble VJ146A4 Collection 2 · 2025 AllAngle_Composite_Snow_Free radiance; public GeoTIFF mosaic by Jurij Stare, lightpollutionmap.info",
     "interior": "NASA Science schematic layer geometry",
-    "mantleTomography": "Cui et al. (2024), GLAD-M35 r0.1 via EarthScope EMC"
+    "mantleTomography": "Cui et al. (2024), GLAD-M35 r0.1 via EarthScope EMC",
+    "clouds": "NASA Blue Marble archival clouds over the July 2004 visible-color mosaic"
   }
 }

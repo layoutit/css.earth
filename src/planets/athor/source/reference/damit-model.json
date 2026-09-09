@@ -1,0 +1,340 @@
+{
+  "number": 161,
+  "name": "Athor",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/313",
+  "modelId": 461,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/461",
+  "catalog": "View model 350 -6 7.280086 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "461",
+    "Asteroid": "(161) Athor",
+    "λ": "350",
+    "β": "-6",
+    "P": "7.280086",
+    "YORP": "",
+    "t0": "2443993",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.69",
+    "p3": "0.13",
+    "p4": "-0.49",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2012-09-25",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2012-09-26 08:56:25",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1798/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1799/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1800/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1801/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Franco et al. (2012)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/146",
+      "file": "reference-146.html",
+      "links": [
+        {
+          "label": "2012mpbu...39..234f",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2012mpbu...39..234f"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2012MPBu...39..234F",
+          "url": "http://adsabs.harvard.edu/abs/2012MPBu...39..234F"
+        }
+      ]
+    }
+  ],
+  "id": "athor",
+  "displayName": "Athor",
+  "lambda": 350.0,
+  "beta": -6.0,
+  "periodHours": 7.280086,
+  "version": "2012-09-25",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 40.84,
+  "uncertaintyKm": 0.52,
+  "akari": {
+    "number": 161,
+    "name": "Athor",
+    "diameterKm": 40.84,
+    "uncertaintyKm": 0.52,
+    "detections": 7,
+    "originalRow": "161    Athor                          9.15  0.13  7   40.84  0.52 0.233 0.007"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1801/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1799/IAUspin.txt",
+  "shapeSha256": "bb13c3b5a03f3f095adfface5145e8780cf80bc7e1ad0d48172c367cb669c4fd",
+  "shapeBytes": 81574,
+  "vertices": 1008,
+  "faces": 2012,
+  "signedVolume": 1.000000064037925,
+  "independentSignedVolume": 1.000000064037925,
+  "originalVolumeEquivalentDiameter": 1.2407010082827716,
+  "firstVertex": [
+    0.179,
+    0.349342,
+    0.490586
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.4772427704973644,
+    0.8473250751754016
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.64178,
+      0.624706
+    ],
+    [
+      -0.770556,
+      0.784699
+    ],
+    [
+      -0.679206,
+      0.501272
+    ]
+  ],
+  "scaleKmPerSourceUnit": 32.91687499837354,
+  "topology": {
+    "edges": 3018,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 1.9566539065429504e-08
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        0.179,
+        0.349342,
+        0.490586
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 2,
+      "coordinates": [
+        -0.068032,
+        0.487878,
+        0.501272
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 336,
+      "coordinates": [
+        0.482729,
+        -0.606802,
+        0.083368
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 355,
+      "coordinates": [
+        0.624706,
+        -0.185168,
+        0.034959
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 413,
+      "coordinates": [
+        -0.64178,
+        -0.179328,
+        -0.024575
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 440,
+      "coordinates": [
+        0.049012,
+        -0.770556,
+        0.036185
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 496,
+      "coordinates": [
+        -0.058779,
+        0.784699,
+        0.194413
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 504,
+      "coordinates": [
+        -0.086721,
+        0.781193,
+        0.245603
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1005,
+      "coordinates": [
+        -0.014863,
+        0.067344,
+        -0.679206
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1007,
+      "coordinates": [
+        -0.020255,
+        0.061952,
+        -0.679206
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 462,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/462",
+      "pole": [
+        "170",
+        "4"
+      ],
+      "version": "2012-09-25",
+      "periodHours": "7.280086",
+      "comment": "",
+      "calibrated": "0 (No)",
+      "diameterKm": "",
+      "uncertaintyKm": "",
+      "nonconvex": "0 (No)"
+    }
+  ],
+  "selectionNotes": "Select Franco et al. (2012) model 461 (350,-6), retaining 462 (170,4). The archive and linked Minor Planet Bulletin reference support a convex light-curve shape and two poles, with no physical-size calibration. No preference is inferred from model ordering.",
+  "shapeKind": "Convex light-curve reconstruction",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Franco et al. (2012) model 461 (350,-6), retaining 462 (170,4). The archive and linked Minor Planet Bulletin reference support a convex light-curve shape and two poles, with no physical-size calibration. No preference is inferred from model ordering.",
+  "calibrationSelection": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics.",
+  "archiveVolumeDiameterMismatchFraction": null,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/461",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "Select Franco et al. (2012) model 461 (350,-6), retaining 462 (170,4). The archive and linked Minor Planet Bulletin reference support a convex light-curve shape and two poles, with no physical-size calibration. No preference is inferred from model ordering."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "included",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics."
+    }
+  ],
+  "visibleShapeDescription": "Convex light-curve reconstruction with approximate thermal size: 40.84 km (catalog ±0.52 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+  "papers": [],
+  "selectedPoleStatus": "one of competing archived solutions",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 40.84,
+    "uncertaintyKm": 0.52,
+    "reportedUncertaintyKm": 0.52,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 161,
+      "name": "Athor",
+      "diameterKm": 40.84,
+      "uncertaintyKm": 0.52,
+      "detections": 7,
+      "originalRow": "161    Athor                          9.15  0.13  7   40.84  0.52 0.233 0.007"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select Franco et al. (2012) model 461 (350,-6), retaining 462 (170,4). The archive and linked Minor Planet Bulletin reference support a convex light-curve shape and two poles, with no physical-size calibration. No preference is inferred from model ordering.",
+    "scaleKmPerSourceUnit": 32.91687499837354,
+    "metersPerSourceUnit": 32916.87499837354,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 40.84 km (catalog ±0.52 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery."
+  },
+  "distanceAu": 2.3789454823297382,
+  "orbitalPeriodYears": 3.6693144956025683,
+  "sourceFields": {
+    "ID": "461",
+    "Asteroid": "(161) Athor",
+    "λ": "350",
+    "β": "-6",
+    "P": "7.280086",
+    "YORP": "",
+    "t0": "2443993",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.69",
+    "p3": "0.13",
+    "p4": "-0.49",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2012-09-25",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2012-09-26 08:56:25",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

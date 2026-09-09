@@ -1,0 +1,548 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "gallia",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "ef56e7890012109b8f1fddfa21916a0abf88c0edc5b7b38de0c9c65623223d32"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "ab656f083093b4bb73e33e65b1f7ec5009c67dc2dec44e4cd23d67ee33834ecd",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "gallia",
+        "displayName": "Gallia",
+        "publicBase": "/scenes/gallia/",
+        "distanceAu": 2.7707071057503048,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-4618.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 65180.89032841746,
+                "expectedVertices": 572,
+                "expectedFaces": 1140,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -40.435
+              },
+              "minimum": -20,
+              "maximum": 20,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 40435,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 808.7
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 40.435,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/gallia/gallia-shape-surface@2x.webp",
+          "polesUrl": "/scenes/gallia/gallia-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-4618.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 65180.89032841746,
+              "expectedVertices": 572,
+              "expectedFaces": 1140,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 808.7,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "DAMIT model 4618 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "289ccf5cdb4cd332a216f5bfcf61cdc63c25f02db41ae3db98700dbfb47bdba5",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "gallia",
+        "displayName": "Gallia",
+        "panel": {
+          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "40.435 km (approximate thermal scale)",
+              "source": {
+                "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+                "label": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+                "checked": "2026-09-09",
+                "path": "source/reference/calibration.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.771 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27148%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.61 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27148%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "20.6636 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4618",
+                "label": "DAMIT model 4618",
+                "checked": "2026-09-09",
+                "path": "source/reference/damit-model.json"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Convex light-curve reconstruction with approximate thermal size: 80.87 km (catalog ±1.04 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
+              "title": "DAMIT 4618 shape model",
+              "thumbnail": "/scenes/gallia/gallia-shape-thumbnail.webp",
+              "surface": "gallia-shape-surface@2x.webp",
+              "poles": "gallia-shape-surface@2x.webp",
+              "source": {
+                "id": "gallia-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape"
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radius on the shape model minus a 40.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 4618 radial height",
+              "thumbnail": "/scenes/gallia/gallia-elevation-thumbnail.webp",
+              "surface": "gallia-elevation-surface@2x.webp",
+              "poles": "gallia-elevation-surface@2x.webp",
+              "source": {
+                "id": "gallia-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "0",
+                  "20"
+                ],
+                "meta": "km · 40.435 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4618",
+                "image": "/scenes/gallia/gallia-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 4618, version 2019-10-23",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4618"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+            "href": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4618"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4618",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4618, version 2019-10-23."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        },
+        "title": {
+          "label": "Gallia",
+          "viewBox": "0 0 66.3248 35",
+          "width": 66.3248,
+          "height": 35,
+          "path": "M9.41 29.31Q6.64 29.31 4.53 28Q2.41 26.68 1.2 24.3Q0 21.93 0 18.83Q0 15.67 1.22 13.3Q2.43 10.93 4.55 9.62Q6.66 8.31 9.35 8.31Q11.02 8.31 12.47 8.82Q13.92 9.33 15.07 10.25Q16.21 11.17 16.96 12.44Q17.71 13.71 17.95 15.25L14.83 15.25Q14.62 14.32 14.13 13.55Q13.64 12.79 12.93 12.24Q12.22 11.69 11.33 11.4Q10.43 11.1 9.39 11.1Q7.51 11.1 6.08 12.05Q4.65 13 3.86 14.74Q3.06 16.48 3.06 18.83Q3.06 21.18 3.86 22.9Q4.65 24.63 6.09 25.58Q7.53 26.53 9.43 26.53Q11.06 26.53 12.33 25.84Q13.6 25.16 14.34 23.93Q15.08 22.7 15.08 21.06L15.93 21.13L10.06 21.13L10.06 18.58L18.1 18.58L18.1 20.93Q18.1 23.38 16.96 25.27Q15.82 27.17 13.86 28.24Q11.89 29.31 9.41 29.31ZM25.39 29.26Q23.96 29.26 22.81 28.75Q21.66 28.25 21 27.26Q20.33 26.28 20.33 24.83Q20.33 23.59 20.81 22.78Q21.29 21.97 22.11 21.51Q22.93 21.04 23.96 20.8Q25 20.56 26.09 20.44Q27.44 20.26 28.25 20.16Q29.06 20.06 29.41 19.83Q29.75 19.59 29.75 19.07L29.75 18.96Q29.75 18.21 29.41 17.67Q29.07 17.13 28.42 16.81Q27.77 16.49 26.83 16.49Q25.9 16.49 25.19 16.8Q24.48 17.11 24.07 17.63Q23.66 18.14 23.55 18.76L20.7 18.6Q20.89 17.23 21.7 16.22Q22.51 15.22 23.83 14.67Q25.16 14.11 26.84 14.11Q28.1 14.11 29.16 14.42Q30.22 14.73 31 15.36Q31.78 15.98 32.21 16.9Q32.64 17.82 32.64 19.05L32.64 29L29.78 29L29.78 26.95L29.71 26.95Q29.41 27.52 28.87 28.06Q28.33 28.59 27.48 28.92Q26.64 29.26 25.39 29.26ZM26.01 26.91Q27.27 26.91 28.11 26.45Q28.95 25.99 29.36 25.23Q29.77 24.46 29.77 23.57L29.77 21.82Q29.62 21.96 29.25 22.06Q28.88 22.16 28.37 22.26Q27.87 22.36 27.32 22.44Q26.77 22.53 26.25 22.6Q25.45 22.71 24.76 22.96Q24.07 23.22 23.65 23.67Q23.23 24.13 23.23 24.88Q23.23 25.53 23.57 25.98Q23.92 26.43 24.54 26.67Q25.16 26.91 26.01 26.91ZM38.88 8.63L38.88 29L35.97 29L35.97 8.63ZM45.12 8.63L45.12 29L42.21 29L42.21 8.63ZM48.45 29L48.45 14.37L51.36 14.37L51.36 29ZM49.92 11.91Q49.15 11.91 48.61 11.4Q48.08 10.9 48.08 10.16Q48.08 9.39 48.61 8.88Q49.15 8.37 49.91 8.37Q50.69 8.37 51.22 8.88Q51.76 9.39 51.76 10.16Q51.76 10.9 51.22 11.4Q50.69 11.91 49.92 11.91ZM59.08 29.26Q57.64 29.26 56.49 28.75Q55.35 28.25 54.68 27.26Q54.02 26.28 54.02 24.83Q54.02 23.59 54.5 22.78Q54.98 21.97 55.8 21.51Q56.62 21.04 57.65 20.8Q58.68 20.56 59.78 20.44Q61.13 20.26 61.94 20.16Q62.74 20.06 63.09 19.83Q63.44 19.59 63.44 19.07L63.44 18.96Q63.44 18.21 63.1 17.67Q62.76 17.13 62.11 16.81Q61.46 16.49 60.51 16.49Q59.58 16.49 58.87 16.8Q58.16 17.11 57.75 17.63Q57.34 18.14 57.23 18.76L54.39 18.6Q54.58 17.23 55.39 16.22Q56.19 15.22 57.52 14.67Q58.85 14.11 60.53 14.11Q61.79 14.11 62.85 14.42Q63.9 14.73 64.68 15.36Q65.46 15.98 65.89 16.9Q66.32 17.82 66.32 19.05L66.32 29L63.47 29L63.47 26.95L63.4 26.95Q63.1 27.52 62.56 28.06Q62.02 28.59 61.17 28.92Q60.32 29.26 59.08 29.26ZM59.69 26.91Q60.95 26.91 61.79 26.45Q62.63 25.99 63.04 25.23Q63.45 24.46 63.45 23.57L63.45 21.82Q63.3 21.96 62.93 22.06Q62.56 22.16 62.06 22.26Q61.55 22.36 61.01 22.44Q60.46 22.53 59.94 22.6Q59.13 22.71 58.44 22.96Q57.75 23.22 57.34 23.67Q56.92 24.13 56.92 24.88Q56.92 25.53 57.26 25.98Q57.6 26.43 58.22 26.67Q58.85 26.91 59.69 26.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "gallia-shape",
+      "path": "shape/model-4618.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/52991/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 4618, version 2019-10-23.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore the original published shape bytes, preserving coordinates, vertex order and connectivity through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+        "metersPerUnit": 65180.89032841746,
+        "referenceRadiusMeters": 40435
+      },
+      "coverage": "Convex light-curve reconstruction with approximate thermal size: 80.87 km (catalog ±1.04 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. The 2020 ATLAS model has one archived pole (140,-17). The 2021 ASAS-SN paper reports a revised pole (147,-37), but the selected DAMIT record is still the ATLAS release and no corresponding new counted mesh is present on the surveyed catalog page. Keep the exact archive identity and acknowledge the later pole estimate; neither supplies resolved imagery.",
+      "sha256": "dfae149a3e1dd7938f6bb711488c8d230804ca7efe942f776479be14f138ab0a",
+      "bytes": 46257,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-4618.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/52991/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned original source record or authored scientific preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "289ccf5cdb4cd332a216f5bfcf61cdc63c25f02db41ae3db98700dbfb47bdba5",
+      "bytes": 9493,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radius on the shape model minus a 40.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "gallia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/gallia/gallia-elevation-thumbnail.webp",
+          "bytes": 5432,
+          "sha256": "d44c359f62a8735e00e213d22d141538013048570e77770ed23cf12c2a0c2938",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/gallia/gallia-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/gallia/gallia-elevation-surface@2x.webp",
+          "bytes": 283780,
+          "sha256": "b5e86d0ddd69ad159989db1f2af8bdd231e3e1c3a297b58260429c3c5a5f8890",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Convex light-curve reconstruction with approximate thermal size: 80.87 km (catalog ±1.04 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "gallia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/gallia/gallia-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/gallia/gallia-shape-surface@2x.webp",
+          "bytes": 238000,
+          "sha256": "4f124055493682b6ebd98501b8f6ca0471228b00924ef995175d3ac4e15046b2",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6533,
+          "sha256": "99af6f55d9e6416d3553d220f0aacb72cbba7b9091b1997a71773d45a4867874",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 11118,
+          "sha256": "7c488e915edf33648547285ebcf2bd53410fad99c0e8418544f9f3063e25a827",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

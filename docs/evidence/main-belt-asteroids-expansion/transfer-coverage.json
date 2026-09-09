@@ -1,0 +1,807 @@
+{
+  "method": "64 deterministic interior barycentric points per retained triangle using the existing full-source closest-point sampler. Additional coverage probes, not an exhaustive texel bound or independent sampler parity proof.",
+  "queries": 5120000,
+  "withheld": 0,
+  "reports": [
+    {
+      "id": "hera",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 296.52142463049665,
+      "limitMeters": 832.3000000000001,
+      "withheld": 0
+    },
+    {
+      "id": "klymene",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 185.07788370552,
+      "limitMeters": 1265,
+      "withheld": 0
+    },
+    {
+      "id": "artemis",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 555.4455222458957,
+      "limitMeters": 1235.3,
+      "withheld": 0
+    },
+    {
+      "id": "dione-106",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 543.4345775735617,
+      "limitMeters": 1534.1999999999998,
+      "withheld": 0
+    },
+    {
+      "id": "felicitas",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 345.2670967598642,
+      "limitMeters": 850,
+      "withheld": 0
+    },
+    {
+      "id": "lydia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 678.4882385722394,
+      "limitMeters": 910,
+      "withheld": 0
+    },
+    {
+      "id": "iphigenia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 48.03975869461567,
+      "limitMeters": 710.6,
+      "withheld": 0
+    },
+    {
+      "id": "thyra",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 353.40336363634964,
+      "limitMeters": 920,
+      "withheld": 0
+    },
+    {
+      "id": "lomia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 493.7930050267104,
+      "limitMeters": 1449.1999999999998,
+      "withheld": 0
+    },
+    {
+      "id": "peitho",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 175.62086305807074,
+      "limitMeters": 439.90000000000003,
+      "withheld": 0
+    },
+    {
+      "id": "althaea",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 173.21784572853014,
+      "limitMeters": 587.9,
+      "withheld": 0
+    },
+    {
+      "id": "lachesis",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 407.5105159486824,
+      "limitMeters": 1565.3,
+      "withheld": 0
+    },
+    {
+      "id": "gerda",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 284.6495626028753,
+      "limitMeters": 854.0999999999999,
+      "withheld": 0
+    },
+    {
+      "id": "brunhild",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 82.26027302745021,
+      "limitMeters": 482.2,
+      "withheld": 0
+    },
+    {
+      "id": "alkeste",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 71.36016863414919,
+      "limitMeters": 813.9,
+      "withheld": 0
+    },
+    {
+      "id": "liberatrix",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 289.55362814102864,
+      "limitMeters": 511,
+      "withheld": 0
+    },
+    {
+      "id": "velleda",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 175.77354615536896,
+      "limitMeters": 439.4,
+      "withheld": 0
+    },
+    {
+      "id": "johanna",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 498.30622257796546,
+      "limitMeters": 1141.9,
+      "withheld": 0
+    },
+    {
+      "id": "antigone",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 3.2741809263825417e-11,
+      "limitMeters": 1260,
+      "withheld": 0
+    },
+    {
+      "id": "cyrene",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 295.5969664885594,
+      "limitMeters": 709.2,
+      "withheld": 0
+    },
+    {
+      "id": "sophrosyne",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 394.9145272187054,
+      "limitMeters": 1004.2,
+      "withheld": 0
+    },
+    {
+      "id": "hertha",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 2.329443027495599e-11,
+      "limitMeters": 790,
+      "withheld": 0
+    },
+    {
+      "id": "meliboea",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 545.7751284412296,
+      "limitMeters": 1437.7,
+      "withheld": 0
+    },
+    {
+      "id": "siwa",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 470.3703076665176,
+      "limitMeters": 1106.1,
+      "withheld": 0
+    },
+    {
+      "id": "vibilia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 3.192313447431706e-11,
+      "limitMeters": 1430,
+      "withheld": 0
+    },
+    {
+      "id": "lucina",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 3.710024985479529e-11,
+      "limitMeters": 1540,
+      "withheld": 0
+    },
+    {
+      "id": "protogeneia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 429.36686031423267,
+      "limitMeters": 1084.1,
+      "withheld": 0
+    },
+    {
+      "id": "gallia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 88.99838239139652,
+      "limitMeters": 808.7,
+      "withheld": 0
+    },
+    {
+      "id": "medusa",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 62.42990188157119,
+      "limitMeters": 214.1,
+      "withheld": 0
+    },
+    {
+      "id": "nuwa",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 472.15065574764367,
+      "limitMeters": 1396.5,
+      "withheld": 0
+    },
+    {
+      "id": "abundantia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 65.34113721754707,
+      "limitMeters": 421.8,
+      "withheld": 0
+    },
+    {
+      "id": "scylla",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 110.43244241391368,
+      "limitMeters": 392.1,
+      "withheld": 0
+    },
+    {
+      "id": "xanthippe",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 182.32552960226184,
+      "limitMeters": 1154.8999999999999,
+      "withheld": 0
+    },
+    {
+      "id": "dejanira",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 23.669590455253317,
+      "limitMeters": 224.7,
+      "withheld": 0
+    },
+    {
+      "id": "aemilia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 972.4484745530741,
+      "limitMeters": 1350,
+      "withheld": 0
+    },
+    {
+      "id": "una",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 292.60457287595204,
+      "limitMeters": 777.2,
+      "withheld": 0
+    },
+    {
+      "id": "athor",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 117.11440638142507,
+      "limitMeters": 408.40000000000003,
+      "withheld": 0
+    },
+    {
+      "id": "laurentia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 289.093789049495,
+      "limitMeters": 853.4000000000001,
+      "withheld": 0
+    },
+    {
+      "id": "erigone",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 199.60111510702842,
+      "limitMeters": 721.4,
+      "withheld": 0
+    },
+    {
+      "id": "eva",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 389.1425350072475,
+      "limitMeters": 977,
+      "withheld": 0
+    },
+    {
+      "id": "loreley",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 3.2741809263825417e-11,
+      "limitMeters": 1770,
+      "withheld": 0
+    },
+    {
+      "id": "rhodope",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 220.73680168700355,
+      "limitMeters": 532.6,
+      "withheld": 0
+    },
+    {
+      "id": "urda",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 172.54447073114835,
+      "limitMeters": 440,
+      "withheld": 0
+    },
+    {
+      "id": "sibylla",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 620.6100642791745,
+      "limitMeters": 1464.8,
+      "withheld": 0
+    },
+    {
+      "id": "baucis",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 79.04614611822583,
+      "limitMeters": 668.9,
+      "withheld": 0
+    },
+    {
+      "id": "ino",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 988.6487517327603,
+      "limitMeters": 1440,
+      "withheld": 0
+    },
+    {
+      "id": "phaedra",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 200.74529901092123,
+      "limitMeters": 640.8,
+      "withheld": 0
+    },
+    {
+      "id": "dejopeja",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 419.12031072268553,
+      "limitMeters": 930,
+      "withheld": 0
+    },
+    {
+      "id": "lamberta",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 1030.710195865683,
+      "limitMeters": 1410,
+      "withheld": 0
+    },
+    {
+      "id": "menippe",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 118.68389735357908,
+      "limitMeters": 353,
+      "withheld": 0
+    },
+    {
+      "id": "kolga",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 153.84550139018145,
+      "limitMeters": 1009.3000000000001,
+      "withheld": 0
+    },
+    {
+      "id": "ambrosia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 132.99038345442972,
+      "limitMeters": 378.9,
+      "withheld": 0
+    },
+    {
+      "id": "eurykleia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 345.91255119719176,
+      "limitMeters": 870,
+      "withheld": 0
+    },
+    {
+      "id": "byblis",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 258.4939250099221,
+      "limitMeters": 546.5,
+      "withheld": 0
+    },
+    {
+      "id": "kallisto",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 51.578991373288666,
+      "limitMeters": 510.3,
+      "withheld": 0
+    },
+    {
+      "id": "hersilia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 169.34152002313988,
+      "limitMeters": 939.3000000000001,
+      "withheld": 0
+    },
+    {
+      "id": "hedda",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 81.30050859559077,
+      "limitMeters": 639.0999999999999,
+      "withheld": 0
+    },
+    {
+      "id": "dido",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 175.57234788170283,
+      "limitMeters": 1334.3000000000002,
+      "withheld": 0
+    },
+    {
+      "id": "isabella",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 208.50174048304805,
+      "limitMeters": 695.8,
+      "withheld": 0
+    },
+    {
+      "id": "medea",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 592.6824786068875,
+      "limitMeters": 1537.2,
+      "withheld": 0
+    },
+    {
+      "id": "lilaea",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 138.36457753225676,
+      "limitMeters": 763.1,
+      "withheld": 0
+    },
+    {
+      "id": "aschera",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 121.5295668966438,
+      "limitMeters": 260.7,
+      "withheld": 0
+    },
+    {
+      "id": "oenone",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 73.17548038638294,
+      "limitMeters": 370,
+      "withheld": 0
+    },
+    {
+      "id": "eudora",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 65.35751305595605,
+      "limitMeters": 678,
+      "withheld": 0
+    },
+    {
+      "id": "stephania",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 93.39115721448744,
+      "limitMeters": 322.9,
+      "withheld": 0
+    },
+    {
+      "id": "eos",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 465.3271611314059,
+      "limitMeters": 1077.3999999999999,
+      "withheld": 0
+    },
+    {
+      "id": "henrietta",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 258.17415845232654,
+      "limitMeters": 1075.6999999999998,
+      "withheld": 0
+    },
+    {
+      "id": "weringia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 115.24114637907282,
+      "limitMeters": 322.59999999999997,
+      "withheld": 0
+    },
+    {
+      "id": "philosophia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 438.0589284352318,
+      "limitMeters": 1010,
+      "withheld": 0
+    },
+    {
+      "id": "athamantis",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 447.3880821148967,
+      "limitMeters": 1150,
+      "withheld": 0
+    },
+    {
+      "id": "vindobona",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 123.72977569034141,
+      "limitMeters": 800.6999999999999,
+      "withheld": 0
+    },
+    {
+      "id": "asterope",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 3.0219321571778255e-11,
+      "limitMeters": 1070,
+      "withheld": 0
+    },
+    {
+      "id": "coelestina",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 94.21976850780585,
+      "limitMeters": 395.09999999999997,
+      "withheld": 0
+    },
+    {
+      "id": "hypatia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 271.0545352779979,
+      "limitMeters": 1439.7,
+      "withheld": 0
+    },
+    {
+      "id": "vanadis",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 361.3167695175923,
+      "limitMeters": 901.3,
+      "withheld": 0
+    },
+    {
+      "id": "kriemhild",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 176.69111792212595,
+      "limitMeters": 451.4,
+      "withheld": 0
+    },
+    {
+      "id": "vera",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 273.47971754820657,
+      "limitMeters": 728.8,
+      "withheld": 0
+    },
+    {
+      "id": "asporina",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 157.8677559868342,
+      "limitMeters": 599.3,
+      "withheld": 0
+    },
+    {
+      "id": "eukrate",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 556.0398524112838,
+      "limitMeters": 1502.4,
+      "withheld": 0
+    },
+    {
+      "id": "ilse",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 101.26688554267939,
+      "limitMeters": 370.3,
+      "withheld": 0
+    },
+    {
+      "id": "bettina",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 3.016795433836157e-11,
+      "limitMeters": 1100,
+      "withheld": 0
+    },
+    {
+      "id": "clementina",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 63.440759655864646,
+      "limitMeters": 676.7,
+      "withheld": 0
+    },
+    {
+      "id": "augusta",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 44.270999839081924,
+      "limitMeters": 121.7,
+      "withheld": 0
+    },
+    {
+      "id": "silesia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 232.81569320694933,
+      "limitMeters": 792,
+      "withheld": 0
+    },
+    {
+      "id": "tyche",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 204.9388681576775,
+      "limitMeters": 643.7,
+      "withheld": 0
+    },
+    {
+      "id": "huberta",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 350.3162156333108,
+      "limitMeters": 952,
+      "withheld": 0
+    },
+    {
+      "id": "dresda",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 90.07994767816258,
+      "limitMeters": 257.4,
+      "withheld": 0
+    },
+    {
+      "id": "libussa",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 208.39175317812578,
+      "limitMeters": 575.7,
+      "withheld": 0
+    },
+    {
+      "id": "anna",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 41.663995394301146,
+      "limitMeters": 265.4,
+      "withheld": 0
+    },
+    {
+      "id": "anahita",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 117.07175926688782,
+      "limitMeters": 469.3,
+      "withheld": 0
+    },
+    {
+      "id": "penthesilea",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 187.44813362536246,
+      "limitMeters": 640,
+      "withheld": 0
+    },
+    {
+      "id": "antonia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 75.4819178826385,
+      "limitMeters": 238.9,
+      "withheld": 0
+    },
+    {
+      "id": "philagoria",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 58.14771555076215,
+      "limitMeters": 273.2,
+      "withheld": 0
+    },
+    {
+      "id": "sapientia",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 557.456665706886,
+      "limitMeters": 1030,
+      "withheld": 0
+    },
+    {
+      "id": "adelheid",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 631.3186430395054,
+      "limitMeters": 1040,
+      "withheld": 0
+    },
+    {
+      "id": "emma",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 3.294329922259719e-11,
+      "limitMeters": 1470,
+      "withheld": 0
+    },
+    {
+      "id": "iclea",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 317.29741915812275,
+      "limitMeters": 860,
+      "withheld": 0
+    },
+    {
+      "id": "bavaria",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 238.19924037020058,
+      "limitMeters": 550,
+      "withheld": 0
+    },
+    {
+      "id": "clarissa",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 136.48276044151902,
+      "limitMeters": 430,
+      "withheld": 0
+    },
+    {
+      "id": "unitas",
+      "faces": 800,
+      "queries": 51200,
+      "maximumDistanceMeters": 226.24468614377773,
+      "limitMeters": 490,
+      "withheld": 0
+    }
+  ]
+}

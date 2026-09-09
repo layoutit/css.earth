@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "charon",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "00096da025be1265e80fd7cbecf2f9ada06ca20ff5e701966c8e0b6c765f76eb"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "7f2bc1e031212dbf5abf739fe10e29c008615162f1f4b9a0a6f2e5b2715e7c46"
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -501,7 +501,7 @@
       "sha256": "4a874809e0a33a851cd026b8e4647f5875ed15807e677d413812367509564b00",
       "bytes": 80613890,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -548,7 +548,7 @@
       "sha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a",
       "bytes": 116006912,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -600,7 +600,7 @@
       "sha256": "4496de98a9b682fd3440da616ef7f5adfbc315b438e4d18833ae3a843eb41bcc",
       "bytes": 161176369,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -635,7 +635,7 @@
       "sha256": "bb936d47510a45c1bb99b143c2cc25b6e677a344dc9eff579d1ff06d07057dfc",
       "bytes": 107840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -652,7 +652,7 @@
       "sha256": "d52c3e5617fbff1e26d1703e8035af4f72f0c6d9e3a718baa21856d3546e9d91",
       "bytes": 12035,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -700,19 +700,19 @@
           "url": "/scenes/charon/charon-normal-thumbnail.webp",
           "bytes": 3452,
           "sha256": "c9fd5a93cfd90fba665e2a0f2494bb2408c639f9c83805eecef7f523a09e2f27",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-normal-surface@2x.webp",
           "bytes": 5592554,
           "sha256": "dc310910d19b395f1fbac788045bf58acc423e82c35f41487149f15f1a73d91c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-normal-poles@2x.webp",
           "bytes": 68758,
           "sha256": "63a60ac73881606ba0870cbd59da34eb99f3d3b31c0787a6b3b6348807d42630",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -762,19 +762,19 @@
           "url": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
           "bytes": 4270,
           "sha256": "2ddc21438bea327353ead88f43e91309ece5d4f6d8b88905e539dfdf81dfa7ff",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-enhanced-color-surface@2x.webp",
           "bytes": 2203286,
           "sha256": "27c5ae040df6a7c649b98a1592179cb4ac71288b0c5bc37ad6d63ade7e215824",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-enhanced-color-poles@2x.webp",
           "bytes": 36788,
           "sha256": "0899084045985bd7d5868f4e3baad691f936eb737dbcde1041afbbb796cc666c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -807,25 +807,25 @@
           "url": "/scenes/charon/charon-elevation-thumbnail.webp",
           "bytes": 4394,
           "sha256": "4c9d95b24093e7c0a5937068624ba30a046b6bf7a1fcf8a5ad521c73ff803fa0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-surface@2x.webp",
           "bytes": 2559100,
           "sha256": "c7329a7ddbd484799b9388c4e7357759424e5db7bbd1b14abfe23434280501a3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-poles@2x.webp",
           "bytes": 55022,
           "sha256": "33c65356e5d342fa5ac3d14ddc45a5e26b888b751cd466f15c7c9073203d2052",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -858,25 +858,25 @@
           "url": "/scenes/charon/charon-albedo-thumbnail.webp",
           "bytes": 1518,
           "sha256": "62d79f826284d5f1826ca11c80479ab2f84427908a2d73fdd177278b60ca8771",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-albedo-legend.webp",
           "bytes": 196,
           "sha256": "736d11631a7c54a437a74430333a43dad33a9a63bb88261be3064ffdf93f2435",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-albedo-surface@2x.webp",
           "bytes": 132016,
           "sha256": "f488fe48dedf328dee7bd9f09533e80ed9c13a732351cc5c7456cba36a630648",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-albedo-poles@2x.webp",
           "bytes": 6626,
           "sha256": "99e24392167a3790fcbf0f3693e1dbf5aaef867264f20e2692214fd521d1180e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

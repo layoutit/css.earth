@@ -1,0 +1,94 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/169",
+  "modelId": 169,
+  "modelVersion": "2009-05-29",
+  "diameterKm": 77.72,
+  "diameterInterpretation": "Convex light-curve reconstruction with approximate thermal size: 77.72 km (catalog ±1.23 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 77.72,
+    "uncertaintyKm": 1.23,
+    "reportedUncertaintyKm": 1.23,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 160,
+      "name": "Una",
+      "diameterKm": 77.72,
+      "uncertaintyKm": 1.23,
+      "detections": 6,
+      "originalRow": "160    Una                            9.08  0.15  6   77.72  1.23 0.069 0.003"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select Marciniak et al. (2009) convex model 169 (125,-33); alternate 170 (308,-41) remains. The publication concerns light-curve-derived spin/shape. The selected record has no calibrated size and supplies no registered imagery; retain explicitly approximate AKARI scaling.",
+    "scaleKmPerSourceUnit": 62.64200906727548,
+    "metersPerSourceUnit": 62642.00906727548,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 77.72 km (catalog ±1.23 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery."
+  },
+  "periodHours": 11.03318,
+  "poleEclipticJ2000Degrees": [
+    125,
+    -33
+  ],
+  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select Marciniak et al. (2009) convex model 169 (125,-33); alternate 170 (308,-41) remains. The publication concerns light-curve-derived spin/shape. The selected record has no calibrated size and supplies no registered imagery; retain explicitly approximate AKARI scaling.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/453/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+    "metersPerUnit": 62642.00906727548,
+    "firstVertexKm": [
+      3.3998950421263765,
+      2.6564596785159513,
+      38.8139284482199
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      83.4040139105242,
+      89.68431381358204,
+      77.29723237258271
+    ],
+    "volumeCubicKm": 245808.55743875966,
+    "volumeEquivalentRadiusKm": 38.86,
+    "radialRangeKm": [
+      34.15844996136179,
+      46.91651426106561
+    ]
+  },
+  "elevation": [
+    -9,
+    9
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 777.2,
+    "estimatedErrorMeters": 338.3565979003906,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 245255155049559.66
+    }
+  }
+}

@@ -52,6 +52,7 @@ jobs:
           node --test site/test/shell-lifetime.test.mjs
           site/test/navigation-router.test.mjs site/test/planet-shell.test.mjs
           site/test/router-runtime.test.mjs
+          site/test/object-page-data.test.mjs
       - name: Enforce activation preparation for every registered object
         run: node --test tools/prepared-activation-groups.test.mjs tools/prepared-activation-registry.test.mjs
       - name: Test shared environment rendering and camera
