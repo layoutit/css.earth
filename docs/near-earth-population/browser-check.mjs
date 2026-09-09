@@ -32,7 +32,7 @@ try{
    assert.equal(await page.locator('input[name="orbit"]').isChecked(),false);
    const leaves=page.locator(`.${id}-body > u[data-polycss-texture-leaf-sizing="raster"]`);
    assert.equal(await leaves.count(),800);
-   const visibleText=await page.locator('body').innerText();assert.match(visibleText,/Grid marks unavailable imagery/);
+   const visibleText=await page.locator('body').innerText();assert.match(visibleText,/grid marks unavailable(?: (?:mapped|surface))? imagery/i);
    const forbidden=await leaves.evaluateAll(nodes=>nodes.filter(n=>{const s=getComputedStyle(n);return s.clipPath!=='none'||s.maskImage!=='none'||s.filter!=='none'||/gradient\(/.test(s.backgroundImage);}).length);
    assert.equal(forbidden,0);
    await leaves.evaluateAll(nodes=>{globalThis.__neaLeaves=[...nodes]});

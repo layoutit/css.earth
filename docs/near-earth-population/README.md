@@ -52,3 +52,18 @@ All four models use 800 retained native `u` raster triangles. Numerical sampling
 | Tantalus |5.98 m|16.79 m|1,842 / 5,738,316 (0.0321%)|
 
 Distances use 8,192 deterministic area-weighted samples in each direction, not an exhaustive Hausdorff bound. Tantalus has a 14.5 m meshoptimizer estimate budget and a separate 14.5 m source-transfer cutoff. The measured sampled geometry distance exceeds that estimate in a small region; the existing atlas preparation withholds texels beyond the cutoff. No cutoff was loosened or missing value extrapolated. These numerical deviations do not measure the physical accuracy of the source reconstruction. Full identities, source-fit results and transfer counts are in [qualification.json](qualification.json).
+
+Ivar and Cerberus use the existing `framingScale` camera setting, with the reference radius divided by the maximum original source radius. This keeps their complete elongated silhouettes in the default view. The camera-only refresh reused the solid-scene owner and verified unchanged terrain bytes and runtime image inventories; see [framing evidence](framing-refresh.json). Full preparation consumes the same checked-in setting.
+
+## Production browser evidence
+
+The integrated Astro build emits 412 pages. All 410 object transports and prepared startup preload sets are byte-verified against their descriptor pins. The four new routes passed at DPR1 and DPR2 with one retained scene/camera, 800 native raster triangles, true default framing, Shadows/Orbit off, source limitations visible, optional lighting, both lenses and a close view. Shared asteroid category, search and body handoff passed. The new scene images were supplied from the independently downloaded installation. The settings action is hidden by current main; optional Shadows was exercised through its existing bound control event.
+
+The representative Tantalus Shape drag at DPR2 ran three60-step vertical cycles: 578 pipeline sequences, zero dropped without presentation, rAFp95 16.7ms, drawp95 8.372ms and 110,832 retained stage nodes. No interaction-time requests or browser errors occurred. This measures this workload on the recorded M3 Max/Chrome152, not a universal performance guarantee.
+
+[Browser checks](browser-validation.json), [built transports](built-transports.json), [drag report](tantalus-drag-report.json), [image identities](images.json).
+
+![Ivar default view](images/ivar-dpr1.png)
+![Toro default view](images/toro-dpr1.png)
+![Cerberus default view](images/cerberus-dpr1.png)
+![Tantalus elevation](images/tantalus-elevation-dpr1.png)

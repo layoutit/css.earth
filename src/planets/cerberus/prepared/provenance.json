@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "cerberus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7d60bd7fe50c5047df82bab69a3b2dab041a177591b4fb35758e7cb5824fd8b9"
+    "sha256": "3697bcabf08b1ded2ad5ea79ae13b273cad455a013311c5438c4112af73ccd9b"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2a6251a6a4331ff3100181b37d1bbbf917a37590d5154b0d92109dd480a20e52",
+      "sha256": "0e330d0e54e8e5195639a93f4c73169133cd9326ef1e4563fbc748898020ae30",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 0.6,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.4875773583294588
           },
           "mapUrl": "/scenes/cerberus/cerberus-shape-surface@2x.webp",
           "polesUrl": "/scenes/cerberus/cerberus-shape-surface@2x.webp",

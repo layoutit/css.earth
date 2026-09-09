@@ -23,7 +23,7 @@
           "faces": 800,
           "logicalUnitsToMeters": 16.08695652173913
         },
-        "configurationSha256": "2160fdeb7c5024bb558113ce6e4682ced761120f9873092ffb6ca6ec5bbc8a3a",
+        "configurationSha256": "3d5d15af505bd84c4e95f80b5c54b6ff9de661eb0cf1cd9ef2e0de03ef23d23b",
         "sourceToOutput": {
           "count": 8192,
           "mean": 1.258744175260593,
@@ -42,7 +42,7 @@
           "multipleIntersectionDirections": 0,
           "sampledDirections": 8192
         },
-        "elapsedSeconds": 0.2971825
+        "elapsedSeconds": 0.331339875
       },
       "scalarComparison": {
         "id": "ivar",
@@ -58,8 +58,8 @@
         "id": "ivar",
         "sourceSha256": "6838a5ad71d37ea2d341cb2b4aa37a66d698bf84202b49cbb7084c4dc4095c24",
         "terrainSha256": "41725326047b71977166e2d0e65312b0ce8a969f00f29e6073262b98b0a6e470",
-        "sceneSha256": "c419ef881899c36e61d86d88dd12c10b20bf3b62e2a1929b97090eb3445a56b8",
-        "configurationSha256": "2160fdeb7c5024bb558113ce6e4682ced761120f9873092ffb6ca6ec5bbc8a3a",
+        "sceneSha256": "58fa7cb29ac35ef752abe776c2575c49839f1a6975ae5d20abe751407a8e6bbe",
+        "configurationSha256": "3d5d15af505bd84c4e95f80b5c54b6ff9de661eb0cf1cd9ef2e0de03ef23d23b",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
           "ivar-elevation-surface@2x.webp": "126644c33c4ae41f120c44a44409d4efef2e5c0e1341016bb9be7b107e69efe8",
@@ -187,7 +187,7 @@
           "faces": 800,
           "logicalUnitsToMeters": 2.608695652173913
         },
-        "configurationSha256": "2a6251a6a4331ff3100181b37d1bbbf917a37590d5154b0d92109dd480a20e52",
+        "configurationSha256": "0e330d0e54e8e5195639a93f4c73169133cd9326ef1e4563fbc748898020ae30",
         "sourceToOutput": {
           "count": 8192,
           "mean": 0.15412088255452594,
@@ -206,7 +206,7 @@
           "multipleIntersectionDirections": 0,
           "sampledDirections": 8192
         },
-        "elapsedSeconds": 0.324372083
+        "elapsedSeconds": 0.337669041
       },
       "scalarComparison": {
         "id": "cerberus",
@@ -222,8 +222,8 @@
         "id": "cerberus",
         "sourceSha256": "b573cb3c0b661359cab8c0bdedc9fdeadea2d2178fc7ffe783dc3b9b2db5915a",
         "terrainSha256": "8731ade26f1511b8e131496f449c6984aaade43b30cd51aa3c4b37d080493f41",
-        "sceneSha256": "3702e02e6acc1ce2d660a82291ffec8a3e719c77dfb75d190e3a2dfb8f190c65",
-        "configurationSha256": "2a6251a6a4331ff3100181b37d1bbbf917a37590d5154b0d92109dd480a20e52",
+        "sceneSha256": "6fefda198701394a099a02a22228bfb1c8e447927059a5532805acf309c05099",
+        "configurationSha256": "0e330d0e54e8e5195639a93f4c73169133cd9326ef1e4563fbc748898020ae30",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
           "cerberus-elevation-surface@2x.webp": "c1355533a2f42e18f6228bd2e3df25da42125f3d5ee5c176fd0cec68b06afea2",

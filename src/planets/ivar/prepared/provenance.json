@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "ivar",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4b2ef25631190c8d6f314538bc391b1f42f9e7d43f02cdd26979433a155fd1d6"
+    "sha256": "7731f856667648a6151bfb7bebf5a0b3d9cc8909b3613cc4df010221ca7a76b7"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2160fdeb7c5024bb558113ce6e4682ced761120f9873092ffb6ca6ec5bbc8a3a",
+      "sha256": "3d5d15af505bd84c4e95f80b5c54b6ff9de661eb0cf1cd9ef2e0de03ef23d23b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 3.7,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.5417359824601038
           },
           "mapUrl": "/scenes/ivar/ivar-shape-surface@2x.webp",
           "polesUrl": "/scenes/ivar/ivar-shape-surface@2x.webp",
