@@ -1,0 +1,276 @@
+{
+  "date": "2026-09-07",
+  "method": "Independent Python Pillow decoding of the archived NASA native tile at geographic cell centers; interval labels from NASA colormap XML.",
+  "records": [
+    {
+      "name": "Galapagos",
+      "longitude": -90.999755859375,
+      "latitude": -0.604248046875,
+      "outputPixel": [
+        4050,
+        4123
+      ],
+      "nativePixel": [
+        10126,
+        10308
+      ],
+      "tile": [
+        20,
+        19
+      ],
+      "tileSha256": "b63196a88f416c4535f92a59422ff661bb4c2b089b685576fd2174d9e7c90471",
+      "rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "intervalCelsius": null,
+      "expectedMosaicRgb": [
+        62,
+        68,
+        73
+      ]
+    },
+    {
+      "name": "Peru coast",
+      "longitude": -79.991455078125,
+      "latitude": -8.009033203125,
+      "outputPixel": [
+        4551,
+        4460
+      ],
+      "nativePixel": [
+        11378,
+        11151
+      ],
+      "tile": [
+        21,
+        22
+      ],
+      "tileSha256": "000c0ca60260f7a4a822239c3878ad9de08422dabf4e20928c0b4cd7a0f2d83f",
+      "rgba": [
+        128,
+        0,
+        0,
+        255
+      ],
+      "intervalCelsius": "[3.0,+INF)",
+      "expectedMosaicRgb": [
+        128,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Baja ocean",
+      "longitude": -116.993408203125,
+      "latitude": 26.004638671875,
+      "outputPixel": [
+        2867,
+        2912
+      ],
+      "nativePixel": [
+        7168,
+        7281
+      ],
+      "tile": [
+        14,
+        14
+      ],
+      "tileSha256": "7d2f2a70a94aaaa32f2e85f8bc81cfd3e35e44a5b4b4c9beec9ef3d8636bad8b",
+      "rgba": [
+        128,
+        0,
+        0,
+        255
+      ],
+      "intervalCelsius": "[3.0,+INF)",
+      "expectedMosaicRgb": [
+        128,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Equatorial Pacific",
+      "longitude": -149.996337890625,
+      "latitude": -0.010986328125,
+      "outputPixel": [
+        1365,
+        4096
+      ],
+      "nativePixel": [
+        3413,
+        10241
+      ],
+      "tile": [
+        20,
+        6
+      ],
+      "tileSha256": "d4212b8038bc717fb9d0f2f8807ab118c93be0f434f59b15738ea21f5032d4bd",
+      "rgba": [
+        128,
+        0,
+        0,
+        255
+      ],
+      "intervalCelsius": "[3.0,+INF)",
+      "expectedMosaicRgb": [
+        128,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "South Pacific",
+      "longitude": -130.001220703125,
+      "latitude": -30.003662109375,
+      "outputPixel": [
+        2275,
+        5461
+      ],
+      "nativePixel": [
+        5688,
+        13653
+      ],
+      "tile": [
+        26,
+        11
+      ],
+      "tileSha256": "be30ac5ab937208542cc8a26a2258f5d9329db6d576199a7212e8edd46b544ab",
+      "rgba": [
+        194,
+        202,
+        184,
+        255
+      ],
+      "intervalCelsius": "[-0.1,0.0)",
+      "expectedMosaicRgb": [
+        194,
+        202,
+        184
+      ]
+    },
+    {
+      "name": "Atlantic",
+      "longitude": -40.001220703125,
+      "latitude": 40.001220703125,
+      "outputPixel": [
+        6371,
+        2275
+      ],
+      "nativePixel": [
+        15928,
+        5688
+      ],
+      "tile": [
+        11,
+        31
+      ],
+      "tileSha256": "db9bef6e353f60ea72f248201540ae3cf12b2cb08f44d57d4bfff509fd4f8c31",
+      "rgba": [
+        202,
+        202,
+        183,
+        255
+      ],
+      "intervalCelsius": "[0.0,0.1)",
+      "expectedMosaicRgb": [
+        202,
+        202,
+        183
+      ]
+    },
+    {
+      "name": "Sahara",
+      "longitude": 10.008544921875,
+      "latitude": 24.993896484375,
+      "outputPixel": [
+        8647,
+        2958
+      ],
+      "nativePixel": [
+        21618,
+        7396
+      ],
+      "tile": [
+        14,
+        42
+      ],
+      "tileSha256": "8ca6e61e6a8ec23c86bca3f5b0accfe6b7aa2142cf38048665d58c55f834456c",
+      "rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "intervalCelsius": null,
+      "expectedMosaicRgb": [
+        62,
+        68,
+        73
+      ]
+    },
+    {
+      "name": "North pole",
+      "longitude": 0.010986328125,
+      "latitude": 89.000244140625,
+      "outputPixel": [
+        8192,
+        45
+      ],
+      "nativePixel": [
+        20481,
+        113
+      ],
+      "tile": [
+        0,
+        40
+      ],
+      "tileSha256": "8ca6e61e6a8ec23c86bca3f5b0accfe6b7aa2142cf38048665d58c55f834456c",
+      "rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "intervalCelsius": null,
+      "expectedMosaicRgb": [
+        62,
+        68,
+        73
+      ]
+    },
+    {
+      "name": "Antarctica",
+      "longitude": -79.991455078125,
+      "latitude": -79.991455078125,
+      "outputPixel": [
+        4551,
+        7736
+      ],
+      "nativePixel": [
+        11378,
+        19341
+      ],
+      "tile": [
+        37,
+        22
+      ],
+      "tileSha256": "8ca6e61e6a8ec23c86bca3f5b0accfe6b7aa2142cf38048665d58c55f834456c",
+      "rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "intervalCelsius": null,
+      "expectedMosaicRgb": [
+        62,
+        68,
+        73
+      ]
+    }
+  ]
+}

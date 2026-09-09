@@ -462,6 +462,159 @@
       "consumers": [
         "city-wmts"
       ]
+    },
+    {
+      "id": "noaa-enso-advisory",
+      "path": "science/enso-advisory.html",
+      "origin": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml",
+      "expectedSha256": "8647a3804260856f979bba518475d63ffb69c2716d10e4f730658df530c3cc2d",
+      "expectedBytes": 13382,
+      "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
+      "license": "US government public domain",
+      "licenseEvidence": [
+        "https://www.ncei.noaa.gov/archive"
+      ],
+      "acquisition": "Snapshot checked 2026-09-09; raw analysis, publisher checksum, product description and advisory retained for reproducible preparation.",
+      "redistribution": "Retained NOAA data with attribution",
+      "consumers": [
+        "enso"
+      ]
+    },
+    {
+      "id": "noaa-coraltemp-anomaly",
+      "path": "science/coraltemp-latest.nc",
+      "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc",
+      "expectedSha256": "d663209d4ded73de5824c47d6ed517f8272ef37cb082790cd71dfcd419f8d183",
+      "expectedBytes": 10739979,
+      "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
+      "license": "US government public domain",
+      "licenseEvidence": [
+        "https://www.ncei.noaa.gov/archive"
+      ],
+      "acquisition": "Snapshot checked 2026-09-09; raw analysis, publisher checksum, product description and advisory retained for reproducible preparation.",
+      "redistribution": "Retained NOAA data with attribution",
+      "consumers": [
+        "enso"
+      ]
+    },
+    {
+      "id": "noaa-coraltemp-checksum",
+      "path": "science/coraltemp-latest.nc.md5",
+      "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc.md5",
+      "expectedSha256": "4d1c024c5f28f4680f745f1302ec5f45e10011f3e7bdde4df58bde2ffa88f86c",
+      "expectedBytes": 78,
+      "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
+      "license": "US government public domain",
+      "licenseEvidence": [
+        "https://www.ncei.noaa.gov/archive"
+      ],
+      "acquisition": "Snapshot checked 2026-09-09; raw analysis, publisher checksum, product description and advisory retained for reproducible preparation.",
+      "redistribution": "Retained NOAA data with attribution",
+      "consumers": [
+        "enso"
+      ]
+    },
+    {
+      "id": "noaa-coraltemp-product",
+      "path": "science/coraltemp-product.html",
+      "origin": "https://www.coralreefwatch.noaa.gov/product/5km/index_5km_ssta_clim19912020.php",
+      "expectedSha256": "114a52e9e07a40d9501dde9181153c30178b1185250c68df84b3c8c3f0930806",
+      "expectedBytes": 47868,
+      "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
+      "license": "US government public domain",
+      "licenseEvidence": [
+        "https://www.ncei.noaa.gov/archive"
+      ],
+      "acquisition": "Snapshot checked 2026-09-09; raw analysis, publisher checksum, product description and advisory retained for reproducible preparation.",
+      "redistribution": "Retained NOAA data with attribution",
+      "consumers": [
+        "enso"
+      ]
+    },
+    {
+      "id": "nasa-mur-gibs-tiles",
+      "path": "science/mur-gibs-tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-07/1km/6/{row}/{col}.png",
+      "expectedSha256": "56089aa7cca9172954a471034eee31d6e7ccf0292effd92f6704eeabb8e1d4e7",
+      "expectedBytes": 45833893,
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-09-09T03:53:28.313Z; all populated tiles attest 2026-09-07. See per-tile dates and hashes in mur-gibs-receipt.json.",
+      "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
+      "consumers": [
+        "enso"
+      ]
+    },
+    {
+      "id": "nasa-mur-gibs-receipt",
+      "path": "science/mur-gibs-receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "expectedSha256": "c5cafbea0d3627a3e0cf3956de4b0450141877212021de809c390fe615fb5d2d",
+      "expectedBytes": 1376974,
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-09-09T03:53:28.313Z; all populated tiles attest 2026-09-07. See per-tile dates and hashes in mur-gibs-receipt.json.",
+      "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
+      "consumers": [
+        "enso"
+      ]
+    },
+    {
+      "id": "nasa-mur-gibs-layer",
+      "path": "science/mur-gibs-layer.xml",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "expectedSha256": "146e5b0fd98cd5e701d70338955dbaaf40148bc1dec500a37f7b03dbb94bc206",
+      "expectedBytes": 6094,
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-09-09T03:53:28.313Z; all populated tiles attest 2026-09-07. See per-tile dates and hashes in mur-gibs-receipt.json.",
+      "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
+      "consumers": [
+        "enso"
+      ]
+    },
+    {
+      "id": "nasa-mur-gibs-colormap",
+      "path": "science/mur-gibs-colormap.xml",
+      "origin": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+      "expectedSha256": "89389ec4066571f3134e85859b9c9e322112837dba3c9d11cdbee8f5dcc76081",
+      "expectedBytes": 12191,
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-09-09T03:53:28.313Z; all populated tiles attest 2026-09-07. See per-tile dates and hashes in mur-gibs-receipt.json.",
+      "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
+      "consumers": [
+        "enso"
+      ]
+    },
+    {
+      "id": "nasa-mur-gibs-description",
+      "path": "science/mur-gibs-description.md",
+      "origin": "https://raw.githubusercontent.com/nasa-gibs/worldview/main/config/default/common/config/metadata/layers/multi-mission/ghrsst/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies.md",
+      "expectedSha256": "30391647ed0ff3ed60750b29a638e3d135271473a522c03ac8afcbb8fb55eddd",
+      "expectedBytes": 1096,
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-09-09T03:53:28.313Z; all populated tiles attest 2026-09-07. See per-tile dates and hashes in mur-gibs-receipt.json.",
+      "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
+      "consumers": [
+        "enso"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -470,6 +623,18 @@
       "expectedSha256": "3c0097bcf6b166cb0ba2d03c3cc290902983e448baf82eb64e60d25257cd6d4f",
       "expectedBytes": 745,
       "generator": "src/planets/earth/tools/prepare-source-intermediates.mjs"
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic",
+      "path": "science/mur-gibs.png",
+      "origin": "tools/objects/paged-ellipsoid/mur-imagery.mjs",
+      "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
+      "expectedSha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0",
+      "expectedBytes": 22564700,
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso"
+      ]
     }
   ],
   "documents": [
@@ -547,8 +712,8 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 5832,
-      "expectedSha256": "0a7a5812e30473533294696ce30e3ad362300bdfbec1b34fbfeffc53ad383933",
+      "expectedBytes": 6467,
+      "expectedSha256": "e216aea3074293e5eb187c0b3899a8ec991d74204b347636990638acf11094ea",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -559,14 +724,14 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 11236,
-      "expectedSha256": "837bc6899102fa54a0badc9710791b2aabf498898549a8ebe542151c93011394",
+      "expectedBytes": 13550,
+      "expectedSha256": "40bf7e53cf11d2504cebe61e0df20d17a93f09f5ceaf945c2133ebac76b731d4",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 2082,
-      "expectedSha256": "f33c39cc2344ef29882a4d22587bc473c02ecd4407ea45669b4fe90563c17717",
+      "expectedBytes": 2852,
+      "expectedSha256": "b1f6baace20e284f144357fd214e12360e5cd33a12a2f901454c475af127a393",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {

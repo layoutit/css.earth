@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "earth",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "363d96e9547fd3738a0b4d8df32df5aabcf31080a4940476db57a9992b51aafe"
+    "sha256": "f43cac4348fd6a0f1114b70b59807c9bf94170a552e1c97a551b254d6cadfbdc"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "0a7a5812e30473533294696ce30e3ad362300bdfbec1b34fbfeffc53ad383933",
+      "sha256": "e216aea3074293e5eb187c0b3899a8ec991d74204b347636990638acf11094ea",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -130,6 +130,26 @@
               "path": "black-marble-2016.jpg",
               "name": "earth-night-lights",
               "thumbnail": "earth-lens-night-lights.webp"
+            },
+            {
+              "path": "science/mur-gibs.png",
+              "name": "earth-enso",
+              "thumbnail": "earth-lens-enso.webp",
+              "scientific": {
+                "kind": "gibs-mur-imagery",
+                "date": "2026-09-07",
+                "baseline": "2003–2014",
+                "checked": "2026-09-09T03:53:28.313Z",
+                "advisory": {
+                  "date": "13 August 2026",
+                  "status": "El Niño Advisory",
+                  "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+                }
+              },
+              "webp": {
+                "quality": 60,
+                "effort": 6
+              }
             }
           ]
         },
@@ -232,7 +252,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5802836ab095cd407d5d5962cb3d90166407aff7f53427e417cf0929301d9279",
+      "sha256": "40bf7e53cf11d2504cebe61e0df20d17a93f09f5ceaf945c2133ebac76b731d4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -405,6 +425,50 @@
               "summary": "NASA Black Marble's 2016 night-light composite. It combines dates and does not show current lighting."
             },
             {
+              "id": "enso",
+              "label": "ENSO",
+              "detail": "7 Sept 2026",
+              "title": "ENSO: sea-surface temperature anomalies · 7 Sept 2026",
+              "description": "NASA MUR · 1 km source imagery · 7 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery.",
+              "thumbnail": "/scenes/earth/earth-lens-enso.webp",
+              "falseColor": true,
+              "source": {
+                "id": "nasa-mur-gibs-tiles",
+                "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+              },
+              "facts": [
+                {
+                  "id": "enso-status",
+                  "label": "NOAA status",
+                  "value": "El Niño Advisory"
+                },
+                {
+                  "id": "enso-advisory-date",
+                  "label": "Advisory issued",
+                  "value": "13 August 2026"
+                },
+                {
+                  "id": "enso-checked",
+                  "label": "Source checked",
+                  "value": "2026-09-09"
+                }
+              ],
+              "legend": {
+                "kind": "scale",
+                "title": "Temperature anomaly · °C",
+                "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+                "image": "earth-enso-legend.png",
+                "width": 620,
+                "height": 16,
+                "labels": [
+                  "< −3",
+                  "0",
+                  "≥ +3"
+                ]
+              },
+              "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state."
+            },
+            {
               "id": "cross-section",
               "label": "Cross section",
               "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
@@ -537,6 +601,12 @@
             "role": "stars",
             "description": "Background star field",
             "href": "https://github.com/astronexus/HYG-Database"
+          },
+          {
+            "label": "NOAA",
+            "role": "climate",
+            "description": "ENSO advisory",
+            "href": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
           }
         ],
         "galleries": [],
@@ -683,7 +753,7 @@
       "sha256": "b0ffc9d12205689aeaec66116bbae2c4c263fcd98a0cbadba8d5488567b53278",
       "bytes": 23931114,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -713,7 +783,7 @@
       "sha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
       "bytes": 35870468,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -743,7 +813,7 @@
       "sha256": "3006c58b1272362db0a8c2df02dc07cea4b12dfe820b7dc4a159a075caf5d4d4",
       "bytes": 29868040,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -779,7 +849,7 @@
       "sha256": "230aac448ae68c358be433dd518888cccb3a85ccf66f7b44326441c324ad6725",
       "bytes": 8106233,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -795,6 +865,24 @@
       "verificationOperations": []
     },
     {
+      "id": "nasa-mur-gibs-mosaic",
+      "path": "science/mur-gibs.png",
+      "origin": "tools/objects/paged-ellipsoid/mur-imagery.mjs",
+      "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "kind": "generated-intermediate",
+      "title": "science/mur-gibs.png",
+      "credit": "cssEarth contributors",
+      "acquisition": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
+      "upstreamLineage": "not-recorded",
+      "sha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0",
+      "bytes": 22564700,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "interior/earth-interior.json",
       "purpose": "Source-qualified schematic Earth interior presentation specification",
       "id": "authored-document:interior/earth-interior.json",
@@ -807,7 +895,7 @@
       "sha256": "c0578b8e31058dd4949fff1f9d6ab8017a03a1d3a78ce976674a40661a57a81a",
       "bytes": 731,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -821,10 +909,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "837bc6899102fa54a0badc9710791b2aabf498898549a8ebe542151c93011394",
-      "bytes": 11236,
+      "sha256": "40bf7e53cf11d2504cebe61e0df20d17a93f09f5ceaf945c2133ebac76b731d4",
+      "bytes": 13550,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -840,7 +928,7 @@
       "sha256": "f658cc3471595caddbe04ae5fbfde6523f3ef160ec0bd5ba3074635f3561834e",
       "bytes": 27346,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -887,7 +975,7 @@
       "dependencies": [
         "nasa-psg-earth-configuration"
       ],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -950,55 +1038,55 @@
           "url": "/scenes/earth/earth-lens-normal.webp",
           "bytes": 1856,
           "sha256": "cdb6847ab318076644561f2a15bb1c1fdc26afa3b56d2ae79f2d88658d52c690",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface.webp",
           "bytes": 347334,
           "sha256": "680ee28468760eea2d4d026542ff2d444651be73822f2d593c05afdc0172bd01",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-poles.webp",
           "bytes": 80780,
           "sha256": "49449e5d8d44d69472b120afbc5074e367d897a1a226affa35ef5272dd8eb713",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-1.webp",
           "bytes": 747098,
           "sha256": "1c6db53f52188c6c43a6803a80217e3418f90b3f4e5fefb398ee3706645b928e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-2.webp",
           "bytes": 1661344,
           "sha256": "57e6d57d51deb753408c3ac16db46ad2927a917686e2b8b018eefab7ad9c5091",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-3.webp",
           "bytes": 1743912,
           "sha256": "d46555363a8c94636e4b96859bccb0801c36d97692228ebfe0cffd0e1dc041a9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-4.webp",
           "bytes": 1366738,
           "sha256": "6949f4e16ed94432f6ef5f40e146d73996260e7cce5fd88dcda5a5176cad7cc8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-5.webp",
           "bytes": 528104,
           "sha256": "dd2d87a692a19ef2fed496b3a18be37110c0e4719f0055dc6a6caa470edc7153",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-6.webp",
           "bytes": 81570,
           "sha256": "0364529f6aedebd6e772e413881bf2176cacb2a673ef77f5838304fc9c470464",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1027,55 +1115,55 @@
           "url": "/scenes/earth/earth-lens-topography.webp",
           "bytes": 2478,
           "sha256": "fa071a539e59db88d50f44c7494edcf5cd49ce55918f94a57f369fd8a8486c24",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography.webp",
           "bytes": 336578,
           "sha256": "fc6076f6636b51255d91a6710a40ec638e46f6ae609df588011736673fb5b333",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-poles.webp",
           "bytes": 77188,
           "sha256": "d417539b87b9234aa8c6b59620a73409040d181beba9eeaff779d5c2ee684112",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-1.webp",
           "bytes": 334510,
           "sha256": "58d896a5bc5cfc29c5c83f0a0e4fea021e51f204a79ddc984e0dad550c4d2551",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-2.webp",
           "bytes": 569138,
           "sha256": "80291c49fd5d8f39c0a197f005e9d118f5180b6671c904a5cdbee979634434b1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-3.webp",
           "bytes": 1003076,
           "sha256": "02b5d2caeaf47610e7852aee8bdecd74e17e9874aed3ad1a37871037694631f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-4.webp",
           "bytes": 1309226,
           "sha256": "19c6783cdcaf46f8ce73999c7bf8b8166d3ebeaef50f2ee6806e7aa9fd0c7c1d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-5.webp",
           "bytes": 536550,
           "sha256": "381f0d05ebb5a4ced9b480defff6fc4afc3d003c73a68adbdfa9a2be5ab1e23b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-topography-page-6.webp",
           "bytes": 87228,
           "sha256": "4ce6bcd53a3bb97e8f39a797d25b560853572ebf5311ba9662b84cf2ea14ec74",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1104,55 +1192,132 @@
           "url": "/scenes/earth/earth-lens-night-lights.webp",
           "bytes": 818,
           "sha256": "4d255f6e8aab4fc9570fdfbaceec6f41b7ea7c8ede313988382d350726b7cb4c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights.webp",
           "bytes": 85926,
           "sha256": "c41ffa75726dba49d7f91dba8566179b8cb92be4bf821e9e52bfb44b2ee6c3d7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-poles.webp",
           "bytes": 18704,
           "sha256": "ebb37d6ac2830151950ecb9e2aac353a21ceb7e3428b9f0da0eb48821695e89f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-1.webp",
           "bytes": 81902,
           "sha256": "51942d1ebfff17fa55de5581e94946b0f3c15e86279b3d31410fe37610ebcd9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-2.webp",
           "bytes": 180998,
           "sha256": "c9f6c4e97c9bd7f1a8f87eef37545c1fe00d663a8354e683435c6f92659cd10e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-3.webp",
           "bytes": 565910,
           "sha256": "d794a1e695e6460a5057eb3fd8728b1b630ea9c0bc7117ec8890fea593ed2c45",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-4.webp",
           "bytes": 466980,
           "sha256": "5174666e03e728a89eb05801b4cc7a93d9a74809f8a0f0c6d63910fe09afda08",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-5.webp",
           "bytes": 237338,
           "sha256": "6fde9f2f66d5c336bfae57d29ae80cafae67da9ff3df34bd51fb608e68a4031a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-6.webp",
           "bytes": 40258,
           "sha256": "092ff1f715f9df369410ef5749e56e4f847f33c22d9e71d680d404383efb9621",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "enso",
+      "label": "ENSO",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/3",
+      "parents": [],
+      "process": "Prepare the global reference map and its declared cloud composite.",
+      "limitations": [
+        "NASA MUR · 1 km source imagery · 7 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      ],
+      "lensIds": [
+        "enso"
+      ],
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [
+        "nasa-mur-gibs-mosaic"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-lens-enso.webp",
+          "bytes": 4414,
+          "sha256": "354f1bf436b4791fb792020a931a79d2d504e33e982c2ddb9fa820bc70afa8de",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-enso.webp",
+          "bytes": 40376,
+          "sha256": "bb7b6f6f3ea628e00c87a130674881b0bf1e527e531ac9ef362b6babfdf4e725",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-enso-poles.webp",
+          "bytes": 24716,
+          "sha256": "3b53c8ba2e3abe4cf07905acc4731c71073120b06691104c58d7b214bc6e92f6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-enso-page-1.webp",
+          "bytes": 379154,
+          "sha256": "220cfbcdf0677be0bbc81cccac11944ba98bc26abd9409acda3be37381e35eed",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-enso-page-2.webp",
+          "bytes": 1161284,
+          "sha256": "29e0278606eb9433ecca0f5ac6f30482480d65c56fe6ac4f0459799741a89045",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-enso-page-3.webp",
+          "bytes": 1150010,
+          "sha256": "8d55ce81ee52c407de6bc6914e9d617c119ecf03a286c33ca683ef51494eac0c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-enso-page-4.webp",
+          "bytes": 598496,
+          "sha256": "4465a38042a9883f1558388429157e9a2029195bd29a8f8b3b03837e464c5c4d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-enso-page-5.webp",
+          "bytes": 347406,
+          "sha256": "d770c0d989e034fca8412d8dcf434d47c73d1ff839f25eb800af1c5204647913",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-enso-page-6.webp",
+          "bytes": 60254,
+          "sha256": "de645f8970fe365e3c8fb2aed8f2f90006416dabf3126ddb41ee4afd3f0aadd3",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1184,7 +1349,7 @@
           "url": "/scenes/earth/earth-view-interior.webp",
           "bytes": 1302,
           "sha256": "4e8ee2c852e0799d4dd36fdfdf0c29eaa52e89e7c5033a5777d5147ba39db8a4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1207,8 +1372,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7388,
-          "sha256": "d8ea46179e842b56427eab5d6fc9c79fe567f3a158197aff82680dd59299a352",
+          "bytes": 7549,
+          "sha256": "a4bf274ecd6ecf94ed2afd646614a4908d46af7aad144bb4a98f693faae52895",
           "verification": "bytes-verified"
         }
       ],
@@ -1237,7 +1402,7 @@
           "url": "/scenes/earth/earth-atmosphere-spectrum.svg",
           "bytes": 4019,
           "sha256": "618392880a079fe55e93904b4f6648d1c15f737e79b3d4b7aa46ce44994d6a80",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1265,7 +1430,7 @@
           "url": "/scenes/earth/earth-temperature-pressure-profile.svg",
           "bytes": 2530,
           "sha256": "24b5c28e0c8ae1a9c82787d345ad27d391e2a3b0289263388fdaf583b73b829d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1292,7 +1457,7 @@
           "url": "/scenes/earth/earth-photometric-phase-curve.svg",
           "bytes": 4360,
           "sha256": "f2c02091dcfe4343299fff3bd96b6fd8d542fc2ef4d6aeb1fbe7acef77ff2b98",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"
@@ -1365,6 +1530,30 @@
           "url": "object:prepared/minimaps/night-lights.webp",
           "bytes": 16454,
           "sha256": "4a367cabff60d545dad46dfd6a72e1690b699230f3638e85a204592e3a25b654",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:enso",
+      "label": "ENSO preview",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/3",
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [],
+      "parents": [
+        "enso"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/enso.webp",
+          "bytes": 80814,
+          "sha256": "ebe5ef2520f2164ce4e314022703e995fc3e371a48ef42f31f9f5679d4e252a2",
           "verification": "bytes-verified"
         }
       ]
