@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "proteus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d4159e19605dbca95ca671a9da0aaba6de531b1bd762a36bb6678a090439a6f2"
+    "sha256": "f5decb51973c2820303288e56672eeada39430b929ba1b878205f95770b0d277"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1babd88327cbad72a5b08ae076cded690d419b1b728f0925f32aea76c2747674",
+      "sha256": "f9c7b352f33c4d4ee6613952d34732ea08c4393dc5494dedd2985648b65054ef",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -141,6 +141,116 @@
                   "url": "https://pds-rings.seti.org/voyager/iss/"
                 }
               }
+            },
+            {
+              "id": "filter-color",
+              "format": "controlled-shape-color",
+              "consumer": "voyager-color-frames",
+              "channels": [
+                {
+                  "channel": "red",
+                  "filter": "GREEN",
+                  "frames": [
+                    {
+                      "id": "c1137350",
+                      "observerLatitude": -27.148,
+                      "observerWestLongitude": 99.3,
+                      "sunLatitude": -23.66,
+                      "sunWestLongitude": 122.857,
+                      "rangeKm": 830648.272,
+                      "northAzimuthDegrees": 12.96074677895093,
+                      "center": [
+                        392.7015186610059,
+                        375.5350675293314
+                      ],
+                      "path": "observations/C1137350_GEOMED.IMG",
+                      "labelPath": "observations/C1137350_GEOMED.LBL",
+                      "pixelAngleMicroradians": 7.841764329210524,
+                      "backgroundOffset": -0.0037,
+                      "backgroundMaximum": 0.00622692,
+                      "coverageInsetPixels": 9,
+                      "allowFiniteSigned": true
+                    }
+                  ]
+                },
+                {
+                  "channel": "green",
+                  "filter": "BLUE",
+                  "frames": [
+                    {
+                      "id": "c1137339",
+                      "observerLatitude": -27.05,
+                      "observerWestLongitude": 97.385,
+                      "sunLatitude": -23.66,
+                      "sunWestLongitude": 120.904,
+                      "rangeKm": 843163.326,
+                      "northAzimuthDegrees": 12.960728432154356,
+                      "center": [
+                        466.5813375784345,
+                        591.0689911870909
+                      ],
+                      "path": "observations/C1137339_GEOMED.IMG",
+                      "labelPath": "observations/C1137339_GEOMED.LBL",
+                      "pixelAngleMicroradians": 7.841764329210524,
+                      "backgroundOffset": -0.0011,
+                      "backgroundMaximum": 0.0048925800000000005,
+                      "coverageInsetPixels": 9,
+                      "allowFiniteSigned": true
+                    }
+                  ]
+                },
+                {
+                  "channel": "blue",
+                  "filter": "VIOLET",
+                  "frames": [
+                    {
+                      "id": "c1137328",
+                      "observerLatitude": -26.955,
+                      "observerWestLongitude": 95.465,
+                      "sunLatitude": -23.66,
+                      "sunWestLongitude": 118.937,
+                      "rangeKm": 855785.645,
+                      "northAzimuthDegrees": 13.455111379559261,
+                      "center": [
+                        473.69993148676184,
+                        499.6632419233105
+                      ],
+                      "path": "observations/C1137328_GEOMED.IMG",
+                      "labelPath": "observations/C1137328_GEOMED.LBL",
+                      "pixelAngleMicroradians": 7.841764329210524,
+                      "backgroundOffset": -0.0017000000000000001,
+                      "backgroundMaximum": 0.00533736,
+                      "coverageInsetPixels": 9,
+                      "allowFiniteSigned": true
+                    }
+                  ]
+                }
+              ],
+              "photometry": {
+                "weight": 0.5,
+                "maximumGain": 2.5,
+                "maximumIncidenceDegrees": 60,
+                "maximumEmissionDegrees": 60,
+                "displayMaximum": 0.1,
+                "gamma": 1,
+                "minimumLevel": 1,
+                "maximumLevel": 1,
+                "backgroundMaximum": 0.001
+              },
+              "metadata": {
+                "label": "Filter color",
+                "falseColor": true,
+                "coverage": "Voyager green, blue and violet filters displayed as red, green and blue. Only the common reliable interior is shown. Registration and blur limit interpretation to broad patterns at roughly 40 km or coarser; small colored details are noise or uncertain. This is not true color or a calibrated albedo map.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/voyager/iss/"
+                }
+              },
+              "focus": {
+                "longitudeDegrees": 261,
+                "latitudeDegrees": -27,
+                "zoom": 1.1
+              }
             }
           ]
         },
@@ -202,7 +312,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4516ef4c44689c0ba530d5c083166a18f53647dca03da9e340ad52619adc4937",
+      "sha256": "e13b5cbfe39ee3c63615c6a1eb8ca5c9af6980fb3c2f8d0081249558b6aa0344",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -261,7 +371,8 @@
           "defaultLens": "normal",
           "labels": {
             "normal": "Monochrome",
-            "elevation": "Elevation"
+            "elevation": "Elevation",
+            "filter-color": "Filter color"
           },
           "controls": [
             {
@@ -279,6 +390,22 @@
                 "url": "https://pds-rings.seti.org/voyager/iss/"
               },
               "summary": "Voyager 2 images mapped onto the shape with adjusted brightness. Gray grid: missing or unreliable data."
+            },
+            {
+              "id": "filter-color",
+              "label": "Filter color",
+              "description": "Voyager green, blue and violet filters are displayed as red, green and blue. Only their common reliable interior is mapped; the gray grid marks unknown samples. Blur and registration uncertainty limit interpretation to broad patterns at roughly 40 km or coarser near the image centre. Small colored details can be image noise or registration error. This is not true color or a calibrated albedo map.",
+              "title": "Voyager green / blue / violet filter color",
+              "detail": "G / B / V",
+              "summary": "Three Voyager filters, shown as RGB. Broad color only; gray grid marks unknown coverage.",
+              "thumbnail": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
+              "surface": "proteus-filter-color-surface@2x.webp",
+              "poles": "proteus-filter-color-surface@2x.webp",
+              "source": {
+                "id": "c1137350-color",
+                "path": "../manifest.json",
+                "url": "https://pds-rings.seti.org/voyager/iss/"
+              }
             },
             {
               "id": "elevation",
@@ -391,7 +518,7 @@
       "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -431,7 +558,7 @@
       "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -464,7 +591,7 @@
       "sha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -504,7 +631,7 @@
       "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -537,7 +664,7 @@
       "sha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257",
       "bytes": 3337,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -545,6 +672,225 @@
         ],
         "path": "observations/C1138920_GEOMED.LBL",
         "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1137350-color",
+      "path": "observations/C1137350_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137350",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG"
+      },
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/color-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
+      "bytes": 2002000,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1137350_GEOMED.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1137350-color-label",
+      "path": "observations/C1137350_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137350",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL"
+      },
+      "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9",
+      "bytes": 3311,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1137350_GEOMED.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1137339-color",
+      "path": "observations/C1137339_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137339",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG"
+      },
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/color-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
+      "bytes": 2002000,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1137339_GEOMED.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1137339-color-label",
+      "path": "observations/C1137339_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137339",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL"
+      },
+      "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497",
+      "bytes": 3310,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1137339_GEOMED.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1137328-color",
+      "path": "observations/C1137328_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137328",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG"
+      },
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/color-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
+      "bytes": 2002000,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1137328_GEOMED.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1137328-color-label",
+      "path": "observations/C1137328_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137328",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL"
+      },
+      "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
+      "bytes": 3296,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1137328_GEOMED.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL"
       },
       "verificationOperations": []
     },
@@ -558,10 +904,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b7df3e6f593276fcf4a07ff90347efe5f72a47075ad3d9d189aa779fa6ed83ce",
-      "bytes": 5551,
+      "sha256": "e13b5cbfe39ee3c63615c6a1eb8ca5c9af6980fb3c2f8d0081249558b6aa0344",
+      "bytes": 6943,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -594,19 +940,19 @@
           "url": "/scenes/proteus/proteus-elevation-thumbnail.webp",
           "bytes": 7376,
           "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
           "bytes": 376918,
           "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -642,13 +988,57 @@
           "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
           "bytes": 3420,
           "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
           "bytes": 426212,
           "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "filter-color",
+      "label": "Filter color",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/1",
+      "parents": [],
+      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Voyager green, blue and violet filters are displayed as red, green and blue. Only their common reliable interior is mapped; the gray grid marks unknown samples. Blur and registration uncertainty limit interpretation to broad patterns at roughly 40 km or coarser near the image centre. Small colored details can be image noise or registration error. This is not true color or a calibrated albedo map."
+      ],
+      "lensIds": [
+        "filter-color"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "mosaics"
+      },
+      "inputs": [
+        "c1137350-color",
+        "c1137350-color-label",
+        "c1137339-color",
+        "c1137339-color-label",
+        "c1137328-color",
+        "c1137328-color-label",
+        "stooke-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
+          "bytes": 2584,
+          "sha256": "2053e1e0086f86217939322a359aadde5b42edaa76ed8df0f72a681480a2f22f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
+          "bytes": 185760,
+          "sha256": "8f7546054163722d68ed54f322bbaf48cf447c858c238da9d8ed460c0348cb00",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -698,6 +1088,30 @@
           "url": "object:prepared/minimaps/normal.webp",
           "bytes": 22918,
           "sha256": "bdedc167a33d261e3c4bf62daad7d4ef33051e885b356eba76423a73111f0db5",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:filter-color",
+      "label": "Filter color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "filter-color"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/filter-color.webp",
+          "bytes": 6006,
+          "sha256": "42613be2a6546aa55e718718faa47ef2a54a95aeef79e64c3fdee31b011e43ec",
           "verification": "bytes-verified"
         }
       ]

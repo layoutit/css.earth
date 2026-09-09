@@ -1,4 +1,5 @@
 import { validateFacetScalarProfile } from './facet-scalars.mjs';
+import { validateScienceQualityMasks } from './scientific-raster.mjs';
 import { validateGeologyProfile } from './categorical-geology.mjs';
 import { validatePds4ObservationPolicy } from './observed-pds4.mjs';
 import { validateScalarMapProfile } from './pds-scalar-map.mjs';
@@ -65,9 +66,19 @@ export function parseTerrestrialProfile(value) {
         !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
   }
   for (const lens of value.raster.scientific ?? []) {
+    validateScienceQualityMasks(lens);
     scientificPreviewGrid(lens, value.raster);
     if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
     if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
+    if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
+        lens.relief || lens.valueTransform || !Array.isArray(lens.categories) || lens.categories.length < 2 ||
+        lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||
+        lens.categories.some(category => typeof category.value !== 'string' || !category.value ||
+          typeof category.label !== 'string' || !category.label || !/^#[0-9a-f]{6}$/i.test(category.color)) ||
+        new Set(lens.categories.map(category => category.value)).size !== lens.categories.length ||
+        !Number.isFinite(lens.grid?.noData) || lens.grid.noData >= 0 && lens.grid.noData < lens.categories.length)) {
+      throw new TypeError('Categorical scientific grids require discrete units, nearest sampling and separate missing data.');
+    }
     const facetTable = lens.format === 'facet-scalars';
     const meshGrid = ['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';
@@ -189,7 +200,7 @@ export function parseTerrestrialProfile(value) {
     observationIds.add(observation.id);
   }
   for (const mosaic of value.raster.mosaics ?? []) {
-    if (!['pds3-byte-equirectangular', 'controlled-orthographic', 'controlled-shape-camera'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
+    if (!['pds3-byte-equirectangular', 'controlled-orthographic', 'controlled-shape-camera', 'controlled-shape-color'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
         observationIds.has(mosaic.id) || !/^[a-z][a-z0-9-]*$/.test(mosaic.consumer)) {
       throw new TypeError('Invalid PDS byte mosaic identity or format.');
     }

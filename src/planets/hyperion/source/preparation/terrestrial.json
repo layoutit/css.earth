@@ -240,6 +240,23 @@
               223
             ],
             "pixelAngleMicroradians": 5.9896977199
+          },
+          {
+            "id": "n1506391424",
+            "observerLatitude": 10.62,
+            "observerWestLongitude": 204.06,
+            "sunLatitude": 11.11,
+            "sunWestLongitude": 255.22,
+            "rangeKm": 16782.2,
+            "northAzimuthDegrees": 329.3949554495464,
+            "center": [
+              72.10596576651524,
+              374.01763246187295
+            ],
+            "pixelAngleMicroradians": 5.9896977199,
+            "path": "observations/N1506391424_2_CALIB.IMG",
+            "labelPath": "observations/N1506391424_2_CALIB.LBL",
+            "coverageInsetPixels": 16
           }
         ],
         "photometry": {
@@ -256,7 +273,7 @@
         "metadata": {
           "label": "Monochrome",
           "falseColor": false,
-          "coverage": "CISSCAL clear-filter observations registered to the Thomas shape using the PDS controlled camera solutions. Approximate disk correction and overlap levels reduce baked illumination. Unobserved and unstable regions remain marked.",
+          "coverage": "Twelve CISSCAL clear-filter observations in the Thomas controlled shape frame, including a regional ~100 m/pixel close frame with independently checked camera correction. Approximate disk correction and overlap levels reduce photographed illumination; shadows, variable resolution and marked gaps remain.",
           "projection": {
             "type": "equirectangular",
             "longitudeDegrees": [
@@ -319,7 +336,7 @@
   },
   "celestial": {
     "sunSource": "JPL Saturn-system orbital data; the shape uses the controlled Cassini September 2005 frame. Its displayed orientation is arbitrary because Hyperion rotates chaotically.",
-    "qualification": "The ephemeris locates the Sun, but Hyperion’s body attitude is an explicitly arbitrary display orientation. Its directional lighting is a display convention, not a prediction of the current tumbling surface phase."
+    "qualification": "The ephemeris locates the Sun, but Hyperion\u2019s body attitude is an explicitly arbitrary display orientation. Its directional lighting is a display convention, not a prediction of the current tumbling surface phase."
   },
   "presentation": {
     "defaultLens": "normal",

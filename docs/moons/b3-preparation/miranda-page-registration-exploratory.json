@@ -1,0 +1,37 @@
+{
+  "body": "miranda",
+  "transform": [
+    123.27501517603716,
+    123.32845152174913,
+    -0.06416359676502076,
+    714.1551165764048
+  ],
+  "samples": 5958,
+  "rms": 2.339895539800898,
+  "median": 1.3528501776787956,
+  "p90": 2.372084247803865,
+  "max": 19.487673280996702,
+  "units": {
+    "heavilymantledcrateredterrain": [
+      205,
+      170,
+      102
+    ],
+    "darkmaterial": [
+      0,
+      92,
+      230
+    ],
+    "lightlymantledcrateredterrain": [
+      255,
+      170,
+      0
+    ],
+    "northernridgedplains": [
+      76,
+      0,
+      115
+    ]
+  },
+  "interpretation": "Exploratory polygon-to-release-screenshot affine fit, not yet geographic registration."
+}

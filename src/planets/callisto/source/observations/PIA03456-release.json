@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-source-release-receipt@1",
+  "productId": "PIA03456",
+  "title": "Global Callisto in Color",
+  "releaseDate": "2001-08-22",
+  "observationMonth": "2001-05",
+  "target": "Callisto",
+  "spacecraft": "Galileo",
+  "instrument": "Solid-State Imaging",
+  "credit": "NASA/JPL/DLR",
+  "license": "Public Domain (USGS Sources/Usage field)",
+  "releasePage": "https://science.nasa.gov/photojournal/global-callisto-in-color/",
+  "downloadPage": "https://www.usgs.gov/media/images/callisto-galileo-ssi-color-mosaic",
+  "downloadUrl": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
+  "retainedFile": {
+    "path": "observations/PIA03456-usgs.png",
+    "bytes": 821031,
+    "sha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638",
+    "width": 646,
+    "height": 653,
+    "channels": "RGBA uint8"
+  },
+  "qualification": "USGS redistributes the published processed plate with a transparent limb cutout. NASA calls it a global image meaning a full visible disk; this does not establish whole-sphere coverage. The RGB values are not calibrated I/F. Alpha antialiasing and color fringing persist in the source.",
+  "independentCatalog": {
+    "url": "https://rgcps.asu.edu/urn-nasa-pds-asurgcps_slides_jovian_system/document_database/callisto_photo_database.pdf",
+    "path": "observations/callisto-photo-database.pdf",
+    "entry": "callisto_a_004_pht",
+    "subSpacecraftLongitudeWestDegrees": 215,
+    "eastDegrees": 145
+  },
+  "pixelScale": "The retained approximately 640-pixel diameter corresponds to about 7.5 km per pixel near the center of the projected disk, approximately 8 km class. Surface sampling worsens toward the emission boundary. The 0.25-degree derived map and 8192-pixel display atlas do not add resolution.",
+  "accessed": "2026-09-09"
+}

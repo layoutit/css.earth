@@ -1,5 +1,5 @@
 {
-  "checkedOn": "2026-09-08",
+  "checkedOn": "2026-09-09",
   "preference": "Substantial end-to-end PR batches with named cohorts and measurable outcomes.",
   "firstBatch": "B1",
   "batches": [
@@ -114,7 +114,7 @@
         "Saturn|VI",
         "Pluto|I"
       ],
-      "state": "draft-pr",
+      "state": "merged",
       "owner": "Moons",
       "branch": "feat/moons-scientific-surfaces",
       "baseCommit": "55bda12f012e77e2206d41661a886c84fb01362d",
@@ -186,47 +186,136 @@
         "carriedTo": "B3"
       },
       "pullRequest": "https://github.com/layoutit/cssEarth/pull/62",
-      "draft": true
+      "draft": false,
+      "mergedAt": "2026-09-09T10:35:37Z",
+      "mergeCommit": "ef07fac2d3208e201dafc626374b30ed4644f561"
     },
     {
       "id": "B3",
-      "title": "Complete spacecraft imagery and geologic mapping",
+      "title": "Add spacecraft color and scientific maps to six moons",
       "anchor": "b3",
       "names": [
-        "Dactyl",
-        "Selam",
         "Callisto",
-        "Thebe",
         "Hyperion",
         "Phoebe",
-        "Aegaeon",
         "Proteus",
-        "Nix",
-        "Hydra",
         "Titania",
         "Miranda"
       ],
-      "outcome": "Two prospective new imaged moons, eight existing observation/registration improvements, and the Titania/Miranda geologic maps carried forward from B2.",
-      "scope": "Dactyl/Selam source reconstruction; Nix/Hydra mesh-camera registration; source-specific observation, color or mapping work for the other six existing bodies.; Titania and Miranda digitized geologic maps, pending release access and registration.",
+      "outcome": "Six new selectable views and three improved existing views across six existing moons; no roster increase.",
+      "scope": "Callisto Galileo color; Hyperion close-image mosaic; Phoebe paired shape, relative albedo, radial height and coverage maps; Proteus filter color; Titania and Miranda registered geology.",
       "delivery": "Deliver the observed views and all required camera/attitude, photometric, visibility and coverage preparation. Include source-frame comparisons and holdout registration evidence across the cohort. Any necessary shared registration improvements ship with these complete uses.",
-      "closure": "This batch carries substantial research risk: several fitted attitudes, original calibrated frames or numeric mapping releases remain unresolved. Resolve the target-specific blocker in the review before opening the implementation PR. A new full-disk photograph may support a dated observation view without becoming a global texture. Titania and Miranda require the exact identified GIS releases; archive-access failures remain unresolved.",
-      "acceptance": "Two new scene claims require qualified geometry as well as real images. Each existing body gains a defensible observation improvement; photographed lighting, unseen terrain, source sampling and temporal differences remain clear. The full cohort is the planning target, with any scope change recorded explicitly.",
+      "closure": "All twelve original targets have source dispositions. The six delivered bodies have pinned source and runtime closure; the exact Uranus GIS archives are retained. Unresolved registration and source limitations for the other six remain in the carry-forward queue.",
+      "acceptance": "Source-specific imagery and numeric/category maps retain honest coverage, units and registration limits. The six bodies have unit, source-closure, fresh-runtime and actual Chrome DPR1/2 evidence; full application gates remain explicitly incomplete.",
       "keys": [
-        "Ida|Dactyl",
-        "Dinkinesh|Selam",
         "Jupiter|IV",
-        "Jupiter|XIV",
         "Saturn|VII",
         "Saturn|IX",
-        "Saturn|LIII",
         "Neptune|VIII",
-        "Pluto|II",
-        "Pluto|III",
         "Uranus|III",
         "Uranus|V"
       ],
-      "state": "planned",
-      "owner": "Moons"
+      "state": "draft",
+      "owner": "Moons",
+      "branch": "feat/moons-spacecraft-mapping",
+      "baseCommit": "ef07fac2d3208e201dafc626374b30ed4644f561",
+      "report": "B3-SPACECRAFT-MAPPING.md",
+      "progress": {
+        "sourceReviewedBodies": 12,
+        "preparedBodies": [
+          "Callisto",
+          "Hyperion",
+          "Phoebe",
+          "Proteus",
+          "Titania",
+          "Miranda"
+        ],
+        "implementationBodies": [],
+        "qualifiedBodies": 0,
+        "report": "B3-SPACECRAFT-MAPPING.md",
+        "sourceOnlyBodies": [
+          "Dactyl",
+          "Selam",
+          "Thebe",
+          "Aegaeon",
+          "Nix",
+          "Hydra"
+        ],
+        "deliveryScopeDecision": "approved-six",
+        "sourceClosureTestsPassed": 18,
+        "bodyTestsPassed": 23,
+        "sourceRestoredRecords": 264,
+        "freshInstalledRuntimeImages": 228,
+        "freshRuntimeReuse": 0,
+        "browserIsolatedRunsPassed": 34,
+        "browserLightingStatesPassed": 68,
+        "browserDragsPassed": 34,
+        "visuallyReviewedBodies": 6,
+        "browserQualifiedBodies": 6,
+        "aggregateReady": false,
+        "finalReport": "b3-preparation/final/DELIVERY.md",
+        "aggregateLimits": [
+          "Whole-application production build stopped by resource guard",
+          "Nine renderer fixture failures reproduced on unchanged main inputs; full renderer run stopped by resource guard",
+          "Full platform/shell and physical mobile qualification not completed in the resumed run"
+        ],
+        "carriedForwardBodies": [
+          "Dactyl",
+          "Selam",
+          "Thebe",
+          "Aegaeon",
+          "Nix",
+          "Hydra"
+        ],
+        "testedIntegrationBase": "b60f5d588e109add53d80ec0660b8811b097cb59",
+        "laterMainObserved": "e018ba39227631ab86e752b8aa81e06dfab00823"
+      },
+      "scopeDecision": {
+        "originalCohort": 12,
+        "originalNames": [
+          "Dactyl",
+          "Selam",
+          "Callisto",
+          "Thebe",
+          "Hyperion",
+          "Phoebe",
+          "Aegaeon",
+          "Proteus",
+          "Nix",
+          "Hydra",
+          "Titania",
+          "Miranda"
+        ],
+        "approvedCohort": 6,
+        "approvedNames": [
+          "Callisto",
+          "Hyperion",
+          "Phoebe",
+          "Proteus",
+          "Titania",
+          "Miranda"
+        ],
+        "decision": "User agreed to open one draft PR for the six completed upgrades and carry the other six source dispositions forward.",
+        "carriedForwardNames": [
+          "Dactyl",
+          "Selam",
+          "Thebe",
+          "Aegaeon",
+          "Nix",
+          "Hydra"
+        ],
+        "carriedForwardKeys": [
+          "Ida|Dactyl",
+          "Dinkinesh|Selam",
+          "Jupiter|XIV",
+          "Saturn|LIII",
+          "Pluto|II",
+          "Pluto|III"
+        ],
+        "carriedTo": "Unscheduled B3 source-research carry-forward queue; no new scene or mapped coverage promised."
+      },
+      "draft": true,
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/67"
     },
     {
       "id": "B4",

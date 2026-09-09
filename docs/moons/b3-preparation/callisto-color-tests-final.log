@@ -1,0 +1,17 @@
+✔ the actual retained Galileo-color atlas preserves original color landmarks and partial coverage (407.810625ms)
+✔ Callisto color source, frozen camera, generator and declared derivative have exact closure (103.862334ms)
+✔ independent Gazetteer landmarks constrain the accepted photo orientation without refitting (0.252209ms)
+✔ every derived texel obeys the 65-degree camera footprint and original opaque RGB contributors (269.4095ms)
+✔ the shared observation decoder honors this actual GeoTIFF footprint and geographic pixel centers (38.406917ms)
+✔ Callisto uses one shared scene, two sourced lenses and shared shadows (179.670792ms)
+✔ Callisto's prepared orbit surrounds Jupiter at its physical distance (0.141458ms)
+✔ source coordinates and explicit no-data agree with the actual retained atlas (649.589125ms)
+✔ runtime closure includes Callisto's parent image and canonical surface geometry (32.436166ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2217.98575

@@ -1710,3 +1710,14 @@ Capture `cbc3f422-2027-42a4-b11a-6100efc1d502` has all three synchronized artifa
 54 verified source/transport identities, both exact response patches, and no
 camera coherence errors. Full local assessment:
 `output/playwright/pipelined-world-frame/ASSESSMENT.md`.
+
+Main subsequently advanced to `c016fd31d` (#67: six moons' spacecraft/scientific
+maps), and is integrated as well. Six pinned object transports were restored;
+asset setup installed 32 new prepared files and verified/reused 196 others.
+All six objects pass initial-shell and dataset-race browser checks after setup
+(12 cases). The first Callisto race failure, caused by its missing local enhanced
+texture, is retained in the evidence. Universe preparation still passes 356
+tests, with four additional scientific-raster checks passing. Generated world
+context and minimap data did not change. The earlier nine aggregate renderer
+fixture failures remain explicitly unqualified. Details:
+`output/validation/main67-integration/report.json`.

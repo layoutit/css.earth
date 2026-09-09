@@ -1,0 +1,138 @@
+{
+  "bodies": [
+    {
+      "id": "phobos",
+      "recipeSha256": "958ce3a840ec70b894208a83420f821b2cbc97bff5f42acad92f787016845a7c",
+      "recipeEqualsMain": true,
+      "source": {
+        "sha256": "c3f24ea5e2437825cadf13e531ee41579abf1c3f8320de2f297fe441e8151a34",
+        "bytes": 142252,
+        "pinValid": true,
+        "equalsMain": true
+      },
+      "old": {
+        "bytes": 26412,
+        "sha256": "a8011766a5f4aea1731122f974f037cf2a2c5acc26f83bda775f49da84bd32ff",
+        "info": {
+          "format": "raw",
+          "width": 512,
+          "height": 512,
+          "channels": 4,
+          "depth": "uchar",
+          "premultiplied": false,
+          "hasAlpha": true,
+          "size": 1048576
+        }
+      },
+      "current": {
+        "bytes": 25260,
+        "sha256": "3550351f38b1aea2117b149cc1462b26fbd913641bdaba31d02fbafca523b089",
+        "info": {
+          "format": "raw",
+          "width": 512,
+          "height": 512,
+          "channels": 4,
+          "depth": "uchar",
+          "premultiplied": false,
+          "hasAlpha": true,
+          "size": 1048576
+        }
+      },
+      "changedPixels": 122248,
+      "maxRgbDifference": 255,
+      "meanAbsoluteRgbDifference": 7.0258026123046875,
+      "changedOpaqueChannels": 319692,
+      "alphaChangedPixels": 9385,
+      "againstPinnedSource": {
+        "old": {
+          "alphaDifferentPixels": 9385,
+          "opaqueMeanAbsoluteRgbDifference": 12.292156756626738
+        },
+        "current": {
+          "alphaDifferentPixels": 0,
+          "opaqueMeanAbsoluteRgbDifference": 2.6347114742861266
+        }
+      }
+    },
+    {
+      "id": "deimos",
+      "recipeSha256": "0afd8ee9c571cba3ae2ce4c145acf5e1c780a480f61700ecef4b8d039c5557c5",
+      "recipeEqualsMain": true,
+      "source": {
+        "sha256": "c087dddad132508d31b892a771b2e7d4c69eb13679d7cdbdec9ccbf14c3067d5",
+        "bytes": 90860,
+        "pinValid": true,
+        "equalsMain": true
+      },
+      "old": {
+        "bytes": 10874,
+        "sha256": "ec91e52a39c50780b24a7c299149f84cb89babb16e516a0e484408109081fb76",
+        "info": {
+          "format": "raw",
+          "width": 512,
+          "height": 512,
+          "channels": 4,
+          "depth": "uchar",
+          "premultiplied": false,
+          "hasAlpha": true,
+          "size": 1048576
+        }
+      },
+      "current": {
+        "bytes": 10780,
+        "sha256": "bc018e92359524501a8834c095ed31f43aed151b45015a5a568482148ea9450c",
+        "info": {
+          "format": "raw",
+          "width": 512,
+          "height": 512,
+          "channels": 4,
+          "depth": "uchar",
+          "premultiplied": false,
+          "hasAlpha": true,
+          "size": 1048576
+        }
+      },
+      "changedPixels": 75176,
+      "maxRgbDifference": 255,
+      "meanAbsoluteRgbDifference": 1.5275065104166667,
+      "changedOpaqueChannels": 196245,
+      "alphaChangedPixels": 4368,
+      "againstPinnedSource": {
+        "old": {
+          "alphaDifferentPixels": 4368,
+          "opaqueMeanAbsoluteRgbDifference": 2.518490015961432
+        },
+        "current": {
+          "alphaDifferentPixels": 0,
+          "opaqueMeanAbsoluteRgbDifference": 1.6769872719267418
+        }
+      }
+    }
+  ],
+  "schema": "cssearth-b3-context-regeneration-review@1",
+  "reviewedAt": "2026-09-09T12:35:03.338848+00:00",
+  "incomingMain": "b60f5d588e109add53d80ec0660b8811b097cb59",
+  "disposition": "Retain canonical regenerated public/navigation/phobos-context.webp and deimos-context.webp.",
+  "cause": "Both public context WebPs last changed at 0d1b7b1bb. Their body-owned pinned presentation/context.png source images changed subsequently in ef07fac2d (PR 62), leaving navigation context images stale. Current recipes and source PNGs equal incoming main.",
+  "method": "Read source recipe and current generator; retrieve index WebP blobs read-only; decode old/current/source images and compare RGBA; inspect all four old/current images. No image generation, recipe edits, body preparation or browser run.",
+  "visualInspection": [
+    "/tmp/b3-context-image-review/phobos-old.webp",
+    "public/navigation/phobos-context.webp",
+    "/tmp/b3-context-image-review/deimos-old.webp",
+    "public/navigation/deimos-context.webp"
+  ],
+  "generatorPolicy": "tools/prepare-navigation.mjs prepareContextMarkers uses the pinned PNG, canonical 512 px marker recipe, WebP quality 85, alphaQuality 100, effort 6. It does not derive source geometry.",
+  "boundary": "This verifies navigation image reconciliation only, not whole-body or browser qualification.",
+  "codePins": [
+    {
+      "path": "tools/prepare-navigation.mjs",
+      "bytes": 20772,
+      "sha256": "e0a4fc8db34afad492e7e1a85bb17337ec4975f5d585d5800054785bcf8d7b00"
+    },
+    {
+      "path": "src/navigation/marker-recipe.mjs",
+      "bytes": 8732,
+      "sha256": "7c07fa3631f42774942106781d79ad79298e0b5ef146f4c64be72ee92ad13093"
+    }
+  ]
+}
