@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 319.67391304347825,
       "bodyRadiusM": 73525
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aglaja-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ba85eaa5d514c452def256cec21f6e9224e26ee34ec769732047275ad30f5e5e"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 167.3913043478261,
       "bodyRadiusM": 38500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thetis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1aae59d26c347174806b742d746ada713b84e1dbb19cdacaf65e8f7ea3d88700"
+      }
     }
   },
   "schema": "cssearth-object@1",

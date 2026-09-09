@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 147.79565217391306,
       "bodyRadiusM": 33993
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/rusthawelia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5df75e5c09bc40ba75afcb8a4be7dcf3264edbdc42afe3c04ba1351984bdafbf"
+      }
     }
   },
   "schema": "cssearth-object@1",

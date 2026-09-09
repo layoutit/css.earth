@@ -203,6 +203,15 @@
       ],
       "metersPerUnit": 282577.07509881427,
       "bodyRadiusM": 71492000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/jupiter-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a789bb9decfa530729a07f4d11ee939676f9f406bbbd3187047e8d27f51eacd9"
+      }
     }
   },
   "schema": "cssearth-object@1",

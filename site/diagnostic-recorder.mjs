@@ -85,25 +85,34 @@ export function createDiagnosticRecorder({ windowTarget: w, button, capture, dow
 export function mountDiagnosticRecorder({ documentTarget: d, windowTarget: w, readCamera }) {
   const button = d.querySelector('[data-diagnostic-record]');
   if (!button) return { destroy() {} };
-  let owner = null, leaves = [], retained = 0;
+  let owner = null;
+  let geometry = () => ({ retainedNodes: 0, retainedLeaves: 0, directlyHiddenLeaves: 0 });
   const capture = () => {
     const app = w.__cssEarth, id = app?.activeObjectId, runtime = w[`__${id}`];
     if (runtime !== owner) {
       owner = runtime;
-      // Cache the retained identity once per mount; no layout/style measurement.
-      leaves = (runtime?.stableNodes ?? []).filter(node => node.tagName === 'S');
-      retained = runtime?.stableNodes?.length ?? 0;
+      // Prefer the renderer's retained membership snapshot. Keep compatibility
+      // with owners that do not publish pool counters. Neither path measures layout.
+      if (runtime?.runtime.geometry) geometry = runtime.runtime.geometry;
+      else {
+        const leaves = (runtime?.stableNodes ?? []).filter(node => node.tagName === 'S');
+        const retainedNodes = runtime?.stableNodes?.length ?? 0;
+        geometry = () => ({ retainedNodes, retainedLeaves: leaves.length,
+          directlyHiddenLeaves: leaves.reduce((sum, leaf) => sum + Number(leaf.style.visibility === 'hidden'), 0) });
+      }
     }
     const camera = readCamera();
+    const view = runtime?.runtime.view() ?? null;
+    const requestedCamera = camera?.navigation?.capture() ?? null;
     return {
       active: id ?? null, selected: app?.selectedObjectId ?? null, overview: app?.overview ?? null,
       mountedObjects: app?.mountedObjectCount ?? null, lifecycle: app?.lifecycle ?? null,
       playback: app?.playback ?? null, documentVisibility: d.visibilityState,
-      camera: camera?.navigation?.capture() ?? null, optics: camera?.navigation?.optics() ?? null,
-      view: runtime?.runtime.view() ?? null, selection: runtime?.runtime.selection() ?? null,
+      camera: view?.worldCamera ?? requestedCamera, requestedCamera, optics: camera?.navigation?.optics() ?? null,
+      framePublication: runtime?.camera?.publication?.() ?? null, worldFrames: w.__cssEarthUniverse?.frames?.() ?? null,
+      view, selection: runtime?.runtime.selection() ?? null,
       resources: runtime?.runtime.resources() ?? null, materials: runtime?.material.state() ?? null,
-      geometry: { retainedNodes: retained, retainedLeaves: leaves.length,
-        directlyHiddenLeaves: leaves.reduce((sum, leaf) => sum + (leaf.style.visibility === 'hidden' ? 1 : 0), 0) },
+      geometry: geometry(),
     };
   };
   const api = createDiagnosticRecorder({ windowTarget: w, button, capture,

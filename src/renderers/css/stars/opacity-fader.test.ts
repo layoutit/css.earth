@@ -10,18 +10,20 @@ class Clock {
   frame(milliseconds:number){this.now+=milliseconds;const callbacks=[...this.pending.values()];this.pending.clear();for(const callback of callbacks)callback(this.now);}
 }
 
-test('a separate alpha property preserves the shared hover opacity and reverses continuously', () => {
-  const clock = new Clock(), values = new Map([['--label-alpha', '0']]);
-  const element = { style: { opacity: 'calc(var(--label-alpha) * var(--hover-opacity))',
-    getPropertyValue: (key: string) => values.get(key) ?? '',
-    setProperty: (key: string, value: string) => values.set(key, value) } } as unknown as HTMLElement;
-  const fader = createOpacityFader(clock, '--label-alpha');
+test('direct alpha preserves CSS hover policy, reverses continuously, and can be readopted after cancellation', () => {
+  const clock = new Clock();
+  const element = { style: { opacity: '0', setProperty() { throw new Error('No custom-property publication'); } } } as unknown as HTMLElement;
+  const fader = createOpacityFader(clock, 'var(--hover-opacity)');
   fader.set(element, 1, 200); clock.frame(100);
-  expect(values.get('--label-alpha')).toBe('0.5');
+  expect(element.style.opacity).toBe('calc(0.5 * var(--hover-opacity))');
+  expect(fader.current(element)).toBe(.5);
   fader.set(element, 0, 200); clock.frame(100);
-  expect(values.get('--label-alpha')).toBe('0.25');
-  expect(element.style.opacity).toBe('calc(var(--label-alpha) * var(--hover-opacity))');
-  clock.frame(100); expect(values.get('--label-alpha')).toBe('0');
+  expect(element.style.opacity).toBe('calc(0.25 * var(--hover-opacity))');
+  fader.cancel(element);
+  fader.set(element, 1, 200); clock.frame(100);
+  expect(fader.current(element)).toBe(.625);
+  clock.frame(100); expect(fader.current(element)).toBe(1);
+  fader.set(element, 0); expect(element.style.opacity).toBe('calc(0 * var(--hover-opacity))');
   expect(clock.pending.size).toBe(0); fader.destroy();
 });
 
@@ -32,6 +34,23 @@ test('interpolates on wall time, retargets from the current value, and avoids We
   fader.set(element as unknown as HTMLElement,0,100);expect(clock.pending.size).toBe(1);
   clock.frame(25);expect(Number(element.style.opacity)).toBeCloseTo(.375);
   clock.frame(75);expect(element.style.opacity).toBe('0');
+  fader.destroy();
+});
+
+test('suppression preserves a running fade and resumes its current value without restarting', () => {
+  const clock = new Clock(), element = new Element(), fader = createOpacityFader(clock);
+  const target = element as unknown as HTMLElement;
+  fader.set(target, 1, 200); clock.frame(50);
+  fader.suppress(target, true);
+  expect(element.style.opacity).toBe('0');
+  clock.frame(50);
+  expect(element.style.opacity).toBe('0');
+  expect(fader.current(target)).toBe(.5);
+  fader.suppress(target, false);
+  expect(element.style.opacity).toBe('0.5');
+  clock.frame(100);
+  expect(element.style.opacity).toBe('1');
+  expect(clock.pending.size).toBe(0);
   fader.destroy();
 });
 

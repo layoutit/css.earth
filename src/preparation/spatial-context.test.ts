@@ -124,6 +124,8 @@ test('satellite ellipses are translated to their parent with exact prepared cent
   assert.deepEqual(orbit.verticesM[0], [1007, 0, 0]);
   assert(orbit.bounds.radiusM > 0);
   assert.deepEqual(orbit.activeChords, orbit.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+  assert.deepEqual([...orbit.extentChords].sort((a, b) => a - b), orbit.activeChords);
+  assert(Object.isFrozen(orbit.extentChords));
   for (const index of orbit.activeChords) for (const vertex of [orbit.verticesM[index]!, orbit.verticesM[(index + 1) % orbit.verticesM.length]!]) {
     assert(Math.hypot(...vertex.map((value, axis) => value - orbit.bounds.centerM[axis]!)) <= orbit.bounds.radiusM,
       'prepared bound includes every active endpoint and therefore its convex chords');
@@ -158,6 +160,24 @@ test('satellite ellipses are translated to their parent with exact prepared cent
     { parent: { ...centers.parent, positionM: [NaN, 0, 0] } }), /finite/);
   assert.throws(() => prepareWorldContext(visible, facts, visibleStates,
     { ...centers, unused: { positionM: [0, 0, 0], centerBodyId: 'unused' } }), /hierarchy/);
+});
+
+test('extent traversal covers each active chord once for sparse trails and uneven bank sizes', async () => {
+  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  const body = source.bodies[0]!;
+  const state: OrbitalState = { positionM: [7, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM,
+    normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 };
+  for (const segments of [8, 9, 16, 127, 128]) for (const orbitStyle of ['closed', 'trail'] as const) {
+    const context = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments } },
+      { [body.id]: { radiusM: 1, orbitStyle } }, { [body.id]: state });
+    const orbit = context.bodies[0]!.orbit;
+    assert.deepEqual([...orbit.extentChords].sort((a, b) => a - b), orbit.activeChords);
+    assert.equal(new Set(orbit.extentChords).size, orbit.activeChords.length);
+    assert(orbit.extentChords.every(index => orbit.trail[index]! > 0));
+    assert(Object.isFrozen(orbit.extentChords));
+    assert(Math.abs(orbit.extentChords[0]! - orbit.extentChords[1]!) >= Math.floor(orbit.activeChords.length / 2),
+      'initial probes span the trail so a saturated fade need not walk consecutive chords');
+  }
 });
 
 test('prepared sky registration preserves the legacy default sky and rejects a missing baseline', async () => {

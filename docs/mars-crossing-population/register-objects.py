@@ -7,10 +7,7 @@ for b in bodies:
  if f'object("{id}",' in s:continue
  s=f'import {id}Descriptor from "../src/planets/{id}/object.json" with {{ type: "json" }};\n'+s
  entry=f'''  object("{id}", "{name}", "asteroid", "#aaaaaa", {b['distanceAu']},
-    "Explore {name}, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", async () => {{
-      const {{ loadPackagedObject }} = await import("./packaged-object-runtime.mjs");
-      return loadPackagedObject({id}Descriptor);
-    }}, {id}Descriptor.properties.worldFrame),
+    "Explore {name}, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", packaged({id}Descriptor), {id}Descriptor.properties.worldFrame),
 '''
  s=s.replace(']);\n\nexport function requireObject',entry+']);\n\nexport function requireObject',1)
 p.write_text(s)

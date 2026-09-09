@@ -79,6 +79,11 @@
           "sha256": "954ce08f509f36dbecae01f06d916ac82ac0b04efe89464fab1ccdbc58ef891e"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hela-surfaces.css"
+      ]
     }
   },
   "schema": "cssearth-object@1",

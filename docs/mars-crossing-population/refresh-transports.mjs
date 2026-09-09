@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {OBJECTS} from '../../site/objects.mjs';
 import {prepareMarkerBindings} from '../../tools/prepare-marker-bindings.mjs';
 import {serializeObjectJson,prepareObjectJson} from '../../tools/prepare-object-json.mjs';
+import {preparePageMetadata} from '../../tools/prepared-page-metadata.mjs';
 import {writePreparedText} from '../../tools/write-prepared-text.mjs';
 const results=[];
 for(const {id} of OBJECTS){
@@ -16,7 +17,9 @@ for(const {id} of OBJECTS){
  const sha256=createHash('sha256').update(payload).digest('hex');
  await writePreparedText(`${root}/prepared/runtime.json`,JSON.stringify(definition)+'\n');
  await writePreparedText(`${root}/prepared/object.json`,payload);
- await writePreparedText(`${root}/object.json`,JSON.stringify({...descriptor,prepared:{...descriptor.prepared,sha256}},null,2)+'\n');
+ const page=preparePageMetadata(id,sha256,definition);
+ await writePreparedText(`${root}/prepared/page.json`,page.text);
+ await writePreparedText(`${root}/object.json`,JSON.stringify({...descriptor,prepared:{...descriptor.prepared,sha256},properties:{...descriptor.properties,page:{...descriptor.properties.page,metadata:page.reference}}},null,2)+'\n');
  results.push({id,bytes:Buffer.byteLength(payload),sha256,scope:'Existing marker binding and object serializer; all non-marker runtime fields retained exactly.'});
 }
 // Empty selection skips presentation compilation and refreshes contexts from

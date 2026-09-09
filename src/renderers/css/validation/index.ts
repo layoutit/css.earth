@@ -5,7 +5,7 @@ import { requireCamera, requireControls } from './camera-controls.js';
 import { requireSky, requireSun } from './sky.js';
 import { requireHeliocentric } from './heliocentric.js';
 import { requireMaterials } from './materials.js';
-import { requireAnimations, requireFacing, requireOptionalPresentation, requireVariants, requireViewBindings } from './presentation.js';
+import { requireAnimations, requireFacing, requireOptionalPresentation, requireVariants, requireViewBindings, requireTextureLevels } from './presentation.js';
 import { requireDepthPartitions } from './depth-partitions.js';
 
 /** Validate external prepared JSON before any DOM, image, or animation is created. */
@@ -16,7 +16,7 @@ export function parsePreparedObjectRuntime(value: unknown): ObjectRuntimeDefinit
 function requireDefinition(value: unknown): asserts value is ObjectRuntimeDefinition {
   requireJsonData(value);
   const plan = record(value, 'runtime plan', ['schema', 'id', 'controls', 'camera', 'sky', 'sun', 'assets', 'tree', 'variants', 'materials',
-    'viewBindings', 'animations', 'motion', 'facing', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'pageLayers', 'heliocentricView', 'surfaceHit']);
+    'viewBindings', 'animations', 'motion', 'facing', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'pageLayers', 'heliocentricView', 'surfaceHit', 'textureLevels']);
   if (plan.schema !== 'cssearth-object-runtime@4') fail('runtime schema is incompatible');
   const id = text(plan.id, 'object id'); if (!/^[a-z][a-z0-9-]*$/.test(id)) fail('object identity is invalid');
   requireControls(plan.controls); requireCamera(plan.camera); requireSky(plan.sky);
@@ -28,6 +28,7 @@ function requireDefinition(value: unknown): asserts value is ObjectRuntimeDefini
   const resources = new Set(plan.assets.entries.map(entry => entry.key));
   requireMaterials(plan.materials, plan.tree, resources);
   requireVariants(plan.variants, plan.tree, resources, plan.materials, plan.controls, plan.camera);
+  if (plan.textureLevels !== undefined) requireTextureLevels(plan.textureLevels, plan.variants, resources);
   requireViewBindings(plan.viewBindings, plan.tree, plan.camera); requireAnimations(plan.animations, plan.tree);
   if (plan.motion !== undefined) requireAnimations(plan.motion, plan.tree, true);
   const partitionScenes = requireDepthPartitions(plan.depthPartitions, plan.tree);
