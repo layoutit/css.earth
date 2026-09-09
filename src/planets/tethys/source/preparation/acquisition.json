@@ -65,6 +65,193 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_128_o.obj",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_128_o.obj",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_128_o.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_128_o.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_512_o.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_512_o.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_sigma_c.cub",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_sigma_c.cub",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_sigma_c.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_sigma_c.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_numimg_c.cub",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_numimg_c.cub",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_numimg_c.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_numimg_c.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_eqalbedo_g.tif",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqalbedo_g.tif",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_eqalbedo_g.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqalbedo_g.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_npalbedo_g.tif",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npalbedo_g.tif",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_npalbedo_g.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npalbedo_g.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_spalbedo_g.tif",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spalbedo_g.tif",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethys_spalbedo_g.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spalbedo_g.xml",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/bundle_description.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/bundle_description.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethyskernellist.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethyskernellist.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethysimagelist.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysimagelist.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/tethysshapeassessment.pdf",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysshapeassessment.pdf",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
     }
   ]
 }

@@ -61,3 +61,20 @@ test('missing surface previews fail preparation while explicit non-surface views
   assert.throws(() => assertSurfacePreviewCoverage(controls, [{ id: 'visible' }], bindings), /Missing prepared surface previews: infrared/);
   assert.doesNotThrow(() => assertSurfacePreviewCoverage(controls, [{ id: 'visible' }, { id: 'infrared' }], bindings));
 });
+
+// Native scientific recipes provide their own source-derived minimaps. They
+// share the schema with affine recipes but have no affine ellipsoid packing.
+test('solid scientific recipes do not enter the affine-only preview fallback', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-solid-preview-'));
+  try {
+    await mkdir(join(directory, 'source/preparation'), { recursive: true });
+    await writeFile(join(directory, 'source/preparation/terrestrial.json'), JSON.stringify({
+      schema: 'cssearth-terrestrial-preparation@1', kind: 'solid-observation-body',
+      raster: { width: 640, height: 320 },
+    }));
+    const images = [];
+    for await (const image of recipeSurfacePreviews({ objectDirectory: directory,
+      publicDirectory: join(directory, 'public'), outputDirectory: join(directory, 'prepared') })) images.push(image);
+    assert.deepEqual(images, []);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});

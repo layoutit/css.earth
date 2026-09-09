@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-b2-shape-trial@1",
+  "id": "dione",
+  "source": {
+    "path": "science/b2-intake/dione_128_o.obj",
+    "bytes": 17694840,
+    "sha256": "6fa66be6d8065fccb55bda4f9b272aefddbd2ddb1402ff284c00ca21e15df9ad",
+    "vertices": 98306,
+    "faces": 196608
+  },
+  "trials": [
+    {
+      "targetFaces": 1600,
+      "maximumErrorMeters": 1600,
+      "ok": false,
+      "error": "Source mesh reached 22716 faces at 1556.37841796875 m estimated error; requested 1600 within 1600 m."
+    },
+    {
+      "targetFaces": 2000,
+      "maximumErrorMeters": 1600,
+      "ok": false,
+      "error": "Source mesh reached 22716 faces at 1556.37841796875 m estimated error; requested 2000 within 1600 m."
+    }
+  ],
+  "elapsedMs": 969,
+  "node": "v24.19.0",
+  "heapLimitMiB": 2048,
+  "resources": {
+    "userCPUTime": 1241098,
+    "systemCPUTime": 75105,
+    "maxRSS": 497136,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 37555,
+    "majorPageFault": 88,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 0,
+    "ipcSent": 0,
+    "ipcReceived": 0,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 10,
+    "involuntaryContextSwitches": 1272
+  },
+  "processMemory": {
+    "rss": 509083648,
+    "heapTotal": 354533376,
+    "heapUsed": 272982248,
+    "external": 56976215,
+    "arrayBuffers": 29624339
+  },
+  "qualification": "Source-only simplification trial; no preparation, rendered silhouette or scientific absolute accuracy is established."
+}

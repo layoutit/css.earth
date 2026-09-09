@@ -122,8 +122,40 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
           "image": "/scenes/dimorphos/dimorphos-albedo-legend.webp"
         }
+      },
+      {
+        "id": "slope",
+        "label": "Slope",
+        "description": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+        "title": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+        "detail": "Released facet values",
+        "thumbnail": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
+        "surface": "dimorphos-slope-surface@2x.webp",
+        "poles": "dimorphos-slope-surface@2x.webp",
+        "source": {
+          "id": "dimorphos-facet-science",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Slope",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "35",
+            "70"
+          ],
+          "meta": "deg",
+          "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+          "image": "/scenes/dimorphos/dimorphos-slope-legend.webp"
+        }
       }
-    ]
+    ],
+    "labels": {
+      "slope": "Slope"
+    }
   },
   "settings": {
     "titleKey": "settings",

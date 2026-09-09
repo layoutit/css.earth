@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "e3ab6bec60b1e6c21b370c92aea7d5be45a0d20caa619e32ca5fc1fb7c71851e"
+          "sha256": "2558b5d647fe5b8a0e391519361d5129c7dbd5089c93b9f33f6aa2315d6bee72"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8b4e060d77fb16b50348f4fbfc9c150010da58290d8a7c14b2548a6dbc422b6f"
+          "sha256": "c8682309658501ed6b2a650720b273a3fccbc1c4c40ff55c1a68441994e8ebb1"
         },
         {
           "id": "title",
@@ -38,12 +38,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "d89162ae9fe91d57a24d9a69bb0e96d6f3448fbff2f2e1b57be6b6bc68b7fb6c"
+          "sha256": "958ce3a840ec70b894208a83420f821b2cbc97bff5f42acad92f787016845a7c"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "cffa49b9f971806a30bcd20ef338fb20b05323cd4ba4aad36ca0a7b98aa436fb"
+          "sha256": "890ba5324fedbfe217240001c9e98727fbc70e76c3a1cc1d564d5c0d077d7595"
         }
       ],
       "shape": {
@@ -63,6 +63,16 @@
             },
             {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "albedo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "slope",
               "source": "content",
               "material": "lighting"
             }
@@ -108,6 +118,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "577f1e6b7bae42e9ef50e8f3781135a9d986017c785d05cf4c1ed42683dd0944"
+    "sha256": "c3c39cd93e15d0b7bbf4289fd1dbd528d2eaa03a33934ff64a802b5e598cb6e1"
   }
 }

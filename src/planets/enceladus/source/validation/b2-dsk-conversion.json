@@ -1,0 +1,58 @@
+{
+  "descriptor": {
+    "coordinateSystem": 1,
+    "dataClass": 1,
+    "frameId": 10040,
+    "frameName": "IAU_ENCELADUS",
+    "latitudeRadians": [
+      -1.5707963267948966,
+      1.5707963267948966
+    ],
+    "longitudeRadians": [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    "radiusKm": [
+      247.68912735585084,
+      257.59813481361255
+    ],
+    "surfaceId": 20122,
+    "targetId": 602,
+    "timeSecondsPastJ2000": [
+      -1577879958.8160586,
+      1577880069.1839132
+    ],
+    "type": 2
+  },
+  "duplicateVertices": 3076,
+  "geometry": {
+    "facesUint32LeSha256": "b63c51cfd818976df487f5958e9265d01ec09c50b309d705a5cf5083c5b363ae",
+    "verticesFloat64LeSha256": "1bde956fda0b06d22b925d316c7922d68c66edfa33c5fb29ac5a9452a151f2c5"
+  },
+  "mapping": {
+    "encoding": "little-endian uint32",
+    "entries": 396294,
+    "indexBase": 0,
+    "member": "source-vertex-to-output-vertex.u32le",
+    "sha256": "76d59142d5f76fd8cd4cdb08b29550d7d7d8d0982988f921e2fbdbfe875c568f"
+  },
+  "mesh": {
+    "bytes": 37702026,
+    "member": "enceladus-v2-q256.obj",
+    "sha256": "5eb931df5277e7da0d7a95bfbeec29003877a67b1980520ac28c049dde5f0021"
+  },
+  "schema": "cssearth-dsk-mesh-provenance@1",
+  "source": {
+    "bytes": 30258176,
+    "sha256": "49913bbc117503f894bc7d127a582e1e8e4ac903e348a7021992f5aba7a18c98"
+  },
+  "sourceFaces": 786432,
+  "sourceVertices": 396294,
+  "toolchain": {
+    "cspice": "CSPICE_N0067",
+    "spiceypy": "6.0.3"
+  },
+  "transform": "None; exact duplicate XYZ vertices welded in first-occurrence order; original triangle winding retained.",
+  "units": "kilometres",
+  "weldedVertices": 393218
+}

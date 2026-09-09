@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-b2-four-body-visual-receipt@1",
+  "recordedAt": "2026-09-09T04:12:25.170665+00:00",
+  "method": "Read-only manual view_image review of enumerated existing PNGs; SHA-256 comparison against capture receipts; no new browser, bake, test or source decoding.",
+  "root": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "capturePath": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/report.json",
+  "captureReportSnapshot": {
+    "path": "capture-report-snapshot.json",
+    "bytes": 4451366,
+    "sha256": "60b68c31b6285f574ce4bc09894005981e247066b9a6b8a4ac675725a0b1980e"
+  },
+  "captureStatusAtSnapshot": "INVALID",
+  "captureShutdownAtSnapshot": {
+    "browserClose": "COMPLETE"
+  },
+  "captureHead": "93dcb4fe32d956549fbed9c62e1e3e836cc18393",
+  "browserVersion": "152.0.7977.76",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "dprs": [
+    1,
+    2
+  ],
+  "script": {
+    "path": "../../../../tmp/b2-visual-capture-proposal/capture-b2-integrated.mjs",
+    "bytes": 33259,
+    "sha256": "2753d81db2aebf11235591eebb4f242e02f0f5a3966d88a2a0ec3adb8725ff84"
+  },
+  "scope": [
+    "moon",
+    "phobos",
+    "deimos",
+    "dimorphos"
+  ],
+  "caseCount": 8,
+  "captureViewCount": 54,
+  "inspectedPngCount": 57,
+  "inspectedPngCountsByBody": {
+    "moon": 9,
+    "phobos": 15,
+    "deimos": 13,
+    "dimorphos": 20
+  },
+  "inspectedPngTotalBytes": 70833769,
+  "allInspectedPngHashesMatchCaptureReceipt": true,
+  "currentBodyFileCount": 243,
+  "currentBodyFileTotalBytes": 137602049,
+  "currentBodyFilesMatchCaptureReceipt": true,
+  "currentBodyFileMismatches": [],
+  "caseRuntimeErrorCount": 0,
+  "completedContextCloses": 8,
+  "retainedDragReceiptCount": 30,
+  "allDragReceiptsRetained": true,
+  "allObservedViewsActiveBodyMatches": true,
+  "allObservedViewsReady": true,
+  "allObservedViewsPreparedDensity2": true,
+  "qualification": "Bounded review with residual edge and framing limits; capture completion and retained-DOM receipts are not visual acceptance, source fidelity, physical lighting validation, native parity or a whole-cohort gate."
+}

@@ -65,9 +65,7 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
       yield { id: lens.id, raster: unpackSurfacePreview(image, { width, height, bandCount, gutter }) };
     }
   }
-  // Irregular bodies publish unwarped maps in surfaces.json. Their triangle
-  // atlases have no ellipsoid band layout to reverse here.
-  if (terrestrial?.schema === 'cssearth-terrestrial-preparation@1' && !terrestrial.geometry?.radialTerrain) {
+  if (terrestrial?.schema === 'cssearth-terrestrial-preparation@1' && terrestrial.kind === 'affine-photographic-atmosphere') {
     const shape = createEllipsoidGeometry(await config('ellipsoid'));
     const width = terrestrial.width * 2, height = terrestrial.height * 2;
     for (const lens of lenses.controls) {

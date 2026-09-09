@@ -1,0 +1,364 @@
+{
+  "schema": "cssearth-b2-saved-image-review@1",
+  "reviewedAt": "2026-09-09T03:12:29.504080+00:00",
+  "reviewer": "saturn_review",
+  "method": "All listed raw saved PNGs inspected with view_image. DPR2 tool display resized; original bytes unchanged. No new browser/captures/preparation/checkout writes by reviewer.",
+  "capture": {
+    "directory": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z",
+    "report": {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/report.json",
+      "bytes": 1785679,
+      "sha256": "0d47ecf2680a050936af21a88d5c10b1d1b321456f16e29b76684e70e6673c4c"
+    },
+    "statusAtReview": "CAPTURED_UNREVIEWED",
+    "head": "bbcec2636f0d40d77a215c49332d51918882fb3a"
+  },
+  "inspectedImages": [
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr1/normal-shadows-false-details-1.png",
+      "bytes": 697071,
+      "sha256": "fa4fa9b06cadc8465b6ff5bac76ade1c9102de72dd47df61ce84a722d92583c9"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr1/normal-shadows-true-drag.png",
+      "bytes": 652824,
+      "sha256": "1ea3457b4b810204ddbd040102ad13ed1d487113395d4791e803ad2ea9a14e03"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr1/elevation-shadows-false-details-1.png",
+      "bytes": 1089680,
+      "sha256": "dc64fd61389c52426457e923d1b01690695b75d9aa63df3986a380de6a1a890d"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr1/elevation-shadows-true-drag.png",
+      "bytes": 1032357,
+      "sha256": "86d2ea418449ec322d4e7ddaa59a2927dabb4ede6578b69f9350d0205c0d2cfd"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr1/shape-shadows-false-details-1.png",
+      "bytes": 483328,
+      "sha256": "e5368e636d34d7a158c90c853e4f7dec11bbcc2dfabdc5d1db4c7e438bd7f276"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr1/shape-shadows-true-drag.png",
+      "bytes": 559519,
+      "sha256": "22c3b40b96615d1940f0d0d31267f7d502d62ba6d8ed5311e09d03ecfd6729e4"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr2/normal-shadows-false-details-1.png",
+      "bytes": 2010199,
+      "sha256": "9dadf006b4546d1688f5b0e757521e1c5a3eb1df071580ddb554ef40fbb83378"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr2/normal-shadows-true-drag.png",
+      "bytes": 1812130,
+      "sha256": "a1b82d04a94d55778f1d23455670b473f257daf8b259157ff64d82ca5e4c0a53"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr2/elevation-shadows-false-details-1.png",
+      "bytes": 3403451,
+      "sha256": "321ccd27429b6b8c5f7dc5d743cda758790af2bced8574d1aa2ccfef5c6919a5"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr2/elevation-shadows-true-drag.png",
+      "bytes": 3164004,
+      "sha256": "35cb7be41fbbdcd64b639cfc740d49be3d08f015dd85131caf8a931e207d1342"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr2/shape-shadows-false-details-1.png",
+      "bytes": 1152333,
+      "sha256": "51f1459134eb3e75f8da3ad0069b95f8b8dae1aa035f80ba6c9b26a7640e4f16"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/enceladus-dpr2/shape-shadows-true-drag.png",
+      "bytes": 1354061,
+      "sha256": "08eee58f89a292b408daa5a36990b5e0826b718b2c0b832c366c3f9ff2923d4d"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr1/normal-shadows-false-details-1.png",
+      "bytes": 673384,
+      "sha256": "cc312ce2fb4a8d0e4b8d77cba0be005c7c54e7b6b9f34c75dd795f8ca977608e"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr1/normal-shadows-true-drag.png",
+      "bytes": 571773,
+      "sha256": "745c9b8cebb348ccdc044114500d0c21dd1c7ba23db4510f7ad15089b53b8fd0"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr1/elevation-shadows-false-details-1.png",
+      "bytes": 811529,
+      "sha256": "23ab31d8c72fe3489f51dab7af923d53631665c40fcec6d4f9f9e103a2fcd463"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr1/elevation-shadows-true-drag.png",
+      "bytes": 645438,
+      "sha256": "edfe246c76cdc33fed6c347da3700956b48bb4dfc0b9a41bce5b78d00f201ef4"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr1/relative-albedo-shadows-false-details-1.png",
+      "bytes": 635388,
+      "sha256": "34278122b429fe5a6ac293c97fd72247320ff1b0db8b9c71691f7e2b0e151f7a"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr1/relative-albedo-shadows-true-drag.png",
+      "bytes": 537709,
+      "sha256": "5b1c1e693206ba5a46191267f23a1e17992b2387ab6bed1372c3fb136d8edb37"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr1/shape-shadows-false-details-1.png",
+      "bytes": 367767,
+      "sha256": "be88fa73acb081d6d3538e77633d260c6f0ad598cea32e534dbe882bab3de2bf"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr1/shape-shadows-true-drag.png",
+      "bytes": 359920,
+      "sha256": "8546cff948d0aef93efe826ea470b95768655f7a3927ec92dd3681e980709cc3"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr2/normal-shadows-false-details-1.png",
+      "bytes": 1994041,
+      "sha256": "3f85413dafc7b2e6384bbd34a5a3fee26fecba65094be1487b4df38d2486b75a"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr2/normal-shadows-true-drag.png",
+      "bytes": 1616241,
+      "sha256": "0e8c6f7ebbf9c805fead36d99d27a590065c09bc29407ce73c46a9c6f91631c1"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr2/elevation-shadows-false-details-1.png",
+      "bytes": 2386214,
+      "sha256": "4eac0222d4515e589f2d63d6511e4cb7adf65d6ed14ad6a038fae8186e75a1de"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr2/elevation-shadows-true-drag.png",
+      "bytes": 1782510,
+      "sha256": "67b529b21ca6bd583b910a09847cd2cfb77566b4291aa4f251ae1f82011336f9"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr2/relative-albedo-shadows-false-details-1.png",
+      "bytes": 1799768,
+      "sha256": "059760bc54a4d3dd21752c6e49609492f4b19c5452f6b47135b1d0df31e573cd"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr2/relative-albedo-shadows-true-drag.png",
+      "bytes": 1442953,
+      "sha256": "2f6f6fe1c6e3753bfc0660a1c0ed268fd8a6f66276aa0044b86496216466f038"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr2/shape-shadows-false-details-1.png",
+      "bytes": 907311,
+      "sha256": "ed1b34cf6eae27410ebec72bb45de1b2d0a87e7c0555a792ede0b43a9590aeed"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/tethys-dpr2/shape-shadows-true-drag.png",
+      "bytes": 868591,
+      "sha256": "c8845259faa541bb0e913b9084ab04da8151037995b891fe3586e27c683bd830"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr1/normal-shadows-false-details-1.png",
+      "bytes": 716018,
+      "sha256": "76d46c9d975452e6f28b5b193e4b30ad6691f91a1781c7a1c8e91253911e8b91"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr1/normal-shadows-true-drag.png",
+      "bytes": 633104,
+      "sha256": "d9a059214d0d8bdda4b0fc18a35196fe7456238b6a01c6d0370f8b459c8c470e"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr1/elevation-shadows-false-details-1.png",
+      "bytes": 806210,
+      "sha256": "4153b3b440e939c84f8235dc865ca3debd98241f70a4605581bdb5b9e4ff9347"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr1/elevation-shadows-true-drag.png",
+      "bytes": 655558,
+      "sha256": "d7e01e58c412692dbf2d857b60706ac800af4dd8ad723b07ee3df2eef6e7c133"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr1/relative-albedo-shadows-false-details-1.png",
+      "bytes": 647247,
+      "sha256": "e9e224332a689e2eb8597b8f454e164e4fefe1463cec88e89172c97ddf77e0d2"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr1/relative-albedo-shadows-true-drag.png",
+      "bytes": 569693,
+      "sha256": "c86c8546505c853d41dcc0bf3e3a4bd725b1023cd968934b6b51be80db210128"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr1/shape-shadows-false-details-1.png",
+      "bytes": 370406,
+      "sha256": "bec2ff44cf29610d1d95a134b98078feacdb7a1bf1712a8b8c4e5b50a2b5ca15"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr1/shape-shadows-true-drag.png",
+      "bytes": 386086,
+      "sha256": "65974bdef8facdb8e9bc3329b64dcd8b28aa9cf6698ad176a096ea9b5cc7275c"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr2/normal-shadows-false-details-1.png",
+      "bytes": 2205825,
+      "sha256": "af43caee459e20d55365f1749cfc87af206b27be74252e69bd551769595901f2"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr2/normal-shadows-true-drag.png",
+      "bytes": 1875734,
+      "sha256": "28e34c4a5f97fcbc06d1d191d9071063b3e9db93a96c066fbe7d79c8263e87e0"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr2/elevation-shadows-false-details-1.png",
+      "bytes": 2361815,
+      "sha256": "736442ffbac9a1994ffb3d0be69c77da420f2b419f81cb26e84ed65d1548749f"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr2/elevation-shadows-true-drag.png",
+      "bytes": 1817771,
+      "sha256": "b9a210fc2141e1388bc4d3cbbd1232f3610b6c09c8f1bfe681846af7dd7e873b"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr2/relative-albedo-shadows-false-details-1.png",
+      "bytes": 1855742,
+      "sha256": "3fa1601970f089ead8dba36715d356fdbc9d3c524afbf63af9af747a2cf0839c"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr2/relative-albedo-shadows-true-drag.png",
+      "bytes": 1554243,
+      "sha256": "45a77eca5f9bdc0be7e14d7e3d454a44e389202ad27abf6dccb4dc2bcc91a9aa"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr2/shape-shadows-false-details-1.png",
+      "bytes": 911885,
+      "sha256": "a89d777112f2e0f48ef49ab7e7ba1f10b10de146ed7389e79ee3d4dcc12b4d51"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/dione-dpr2/shape-shadows-true-drag.png",
+      "bytes": 940777,
+      "sha256": "25e248e98f02aed4a5dfad6792e53a7acbaa7755c1df0d390994ab934bfc076e"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr1/normal-shadows-false-details-1.png",
+      "bytes": 617926,
+      "sha256": "8d868a107f6a322b4e84e90eb2d64b552ed92c985df7bd480dba4f260503480b"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr1/normal-shadows-true-drag.png",
+      "bytes": 551804,
+      "sha256": "0bc6434c81bbf5b0a78781303f4d3f9f3c610974526af37cb4d79464403e122b"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr1/elevation-shadows-false-details-1.png",
+      "bytes": 824485,
+      "sha256": "ac2e5899188e963e379a07f1447d853de567600e160c9d6601ebf90c9107f565"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr1/elevation-shadows-true-drag.png",
+      "bytes": 711889,
+      "sha256": "d10c3164b50af19ec8191018a4277f75e0e95771b6fa37057e9f02017101d9e5"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr1/relative-albedo-shadows-false-details-1.png",
+      "bytes": 701675,
+      "sha256": "935df9abb2c6adfc880fd4be95d3edc7e83a2d1f76e7481fe8b8ecb9fb7d2296"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr1/relative-albedo-shadows-true-drag.png",
+      "bytes": 617611,
+      "sha256": "e86a97a81f7f7b263ec89e81937b118ce22a1ae19a8668542cf5a56593284048"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr1/shape-shadows-false-details-1.png",
+      "bytes": 366406,
+      "sha256": "bcf740df2e2cf2477fcf4befd72e388dec4eb1e9951bb00e3edb3cb1963f8675"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr1/shape-shadows-true-drag.png",
+      "bytes": 403191,
+      "sha256": "6f6175f660d020e9ed518c9d213b370303c0011d9cfb6b3ca85e47596337c20c"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr2/normal-shadows-false-details-1.png",
+      "bytes": 1818582,
+      "sha256": "b73052077a29937c1e0fc285006e45b6e6af54d7ad059a3075c7e5ff3ac97d27"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr2/normal-shadows-true-drag.png",
+      "bytes": 1533195,
+      "sha256": "ee0822882fb2870e426721ee2ab7d06f0bf36445170f96df351480330d864df1"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr2/elevation-shadows-false-details-1.png",
+      "bytes": 2433074,
+      "sha256": "0158500ec3156c02f85472d86c55ea419ef54fe9bf8d5a5232087397c3711020"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr2/elevation-shadows-true-drag.png",
+      "bytes": 2008138,
+      "sha256": "e360e47232f9451c5c664afc6cb02af839bc295631f8c5cee004af46a0260d9c"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr2/relative-albedo-shadows-false-details-1.png",
+      "bytes": 2022120,
+      "sha256": "ba57f0dd89600c6b4d62399c24de2c93b9849ed8e22c336cfd94ab0b76c26f2f"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr2/relative-albedo-shadows-true-drag.png",
+      "bytes": 1713343,
+      "sha256": "13f8ee202282b7cb1ccbd0b2e39eec186a9429d1d5e9b52a07be3aaf22a09a57"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr2/shape-shadows-false-details-1.png",
+      "bytes": 905798,
+      "sha256": "0d3e996795632ca51bcee12e54d0e1c0e5ffe497632f6963c10e27185b6c7505"
+    },
+    {
+      "path": "/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/capture-2026-09-09T03-04-30.918Z/rhea-dpr2/shape-shadows-true-drag.png",
+      "bytes": 997927,
+      "sha256": "bbec0357e1fa5ce2d8db0086a72c08784dea810e7eb553e5a3bd3e79216d661a"
+    }
+  ],
+  "imageCount": 60,
+  "overall": "MISSING_GLOBE_FIXED; THREE_FINE_CONTOUR_ARTIFACTS_OPEN",
+  "findings": [
+    {
+      "body": "enceladus",
+      "status": "BOUNDED_NO_BLOCKER",
+      "images": 12,
+      "details": [
+        "The previously missing native surface is restored in monochrome, elevation and neutral shape at both DPRs, unlit and lit after drag. Silhouette is closed at these poses and grid continuous.",
+        "Full saturated -1/0/+1 km legend and ellipsoid semi-axis datum visible. Independent Schenk control and corrected JPL v2 shape are explicitly distinguished; invalid v1 excluded. No broad holes found."
+      ]
+    },
+    {
+      "body": "tethys",
+      "status": "FINE_CONTOUR_ARTIFACT_OPEN",
+      "images": 16,
+      "details": [
+        "Globe, full elevation -12.5/0/+12.5 km and relative-albedo 0.5/1/1.5 saturation legends are visible. Relative albedo is qualified as secondary normalized model brightness, not visible color/calibrated reflectance. Simplified Q128 shape and omitted small detail are visible.",
+        "Fine dark dotted contours occur in DPR2 unlit neutral shape, relative albedo and height views, mostly upper hemisphere and lower center. They cannot be observed texture in neutral shape. No broad missing faces or silhouette failure. Lit smooth albedo reveals polygonal shading around terminator."
+      ]
+    },
+    {
+      "body": "dione",
+      "status": "FINE_CONTOUR_ARTIFACT_OPEN",
+      "images": 16,
+      "details": [
+        "Globe and correct -7.5/0/+7.5 km, relative-albedo legends and caveats are visible. Lighting/drag states preserve source features.",
+        "Smaller fine dark contour appears near upper limb in DPR2 unlit shape and relative albedo; sparse pixels near lower limb at DPR1. No broad hole. Smooth albedo exposes polygonal shading near terminator."
+      ]
+    },
+    {
+      "body": "rhea",
+      "status": "FINE_CONTOUR_ARTIFACT_OPEN",
+      "images": 16,
+      "details": [
+        "Restored globe, full -10/0/+10 km and relative-albedo legends, and revised producer-simulation accuracy wording visible at both DPRs. The text explicitly excludes an independent Rhea uncertainty measurement.",
+        "DPR2 unlit shape reveals long fine dark angular loops through the central hemisphere, also visible in albedo and elevation; weaker at DPR1. This is the strongest representative for a temporary two-sided rendering probe. No broad surface loss or open silhouette found."
+      ]
+    }
+  ],
+  "limits": [
+    "Default scientific framing plus one captured lit drag pose per lens only. No explicit pole closeups, high zoom, full-longitude sweep, mobile, source/native pixel parity or smooth-motion qualification.",
+    "Tethys/Dione/Rhea enhanced-color lens was not in this captured selection and was not reviewed.",
+    "Image comparison suggests the prior one-sided concave-edge artifact category; cause remains unproven pending a temporary backface probe. No production fix proposed on image resemblance alone."
+  ],
+  "retainedOtherBodiesReview": "/tmp/moons-b2-saturn-visual-review-initial.json"
+}

@@ -1,0 +1,110 @@
+{
+  "cropScan": {
+    "rectangle": [
+      300,
+      125,
+      500,
+      185
+    ],
+    "description": "Entire scan rectangle is within the visible body in the inspected original-pixel crop.",
+    "pixelsBelowUnlitAtlasGlobalChannelMinimum": 6,
+    "samples": [
+      {
+        "cropPixel": [
+          637,
+          183
+        ],
+        "originalPixel": [
+          1487,
+          663
+        ],
+        "rgb": [
+          58,
+          76,
+          78
+        ]
+      },
+      {
+        "cropPixel": [
+          603,
+          193
+        ],
+        "originalPixel": [
+          1453,
+          673
+        ],
+        "rgb": [
+          55,
+          71,
+          74
+        ]
+      },
+      {
+        "cropPixel": [
+          536,
+          211
+        ],
+        "originalPixel": [
+          1386,
+          691
+        ],
+        "rgb": [
+          59,
+          77,
+          79
+        ]
+      },
+      {
+        "cropPixel": [
+          499,
+          220
+        ],
+        "originalPixel": [
+          1349,
+          700
+        ],
+        "rgb": [
+          59,
+          76,
+          78
+        ]
+      },
+      {
+        "cropPixel": [
+          495,
+          221
+        ],
+        "originalPixel": [
+          1345,
+          701
+        ],
+        "rgb": [
+          58,
+          75,
+          77
+        ]
+      },
+      {
+        "cropPixel": [
+          311,
+          269
+        ],
+        "originalPixel": [
+          1161,
+          749
+        ],
+        "rgb": [
+          58,
+          75,
+          77
+        ]
+      }
+    ]
+  },
+  "geometry": {
+    "faces": 1600,
+    "exactCoordinateUniqueEdges": 2400,
+    "nonPairedOrInconsistentEdges": 0
+  },
+  "conclusion": "The dark dotted line includes colors below at least one corresponding channel minimum of the opaque unlit albedo atlas. It cannot be a black line already encoded in that unlit atlas. Exact retained source-face edges are paired. This narrows the line to mounted composition, primitive coverage or depth/facing behavior, without isolating which; it does not establish missing source coverage."
+}

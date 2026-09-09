@@ -1,0 +1,110 @@
+Preparing 10 objects with 1 parallel workers.
+[prepare deimos] started (1/10).
+Prepared 24 Deimos starfield cubemap images.
+{"id":"deimos","runtime":true}
+[prepare deimos] succeeded in 541.0s.
+[prepare io] started (2/10).
+file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/terrestrial-layers/observed-geotiff.mjs:80
+  if(Math.abs(exactRoll-roll)>1e-6)throw new Error('Observed longitude roll must align with prepared texels.');
+                                         ^
+
+Error: Observed longitude roll must align with prepared texels.
+    at prepareMaskedObservation (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/terrestrial-layers/observed-geotiff.mjs:80:42)
+    at async prepareSolidRasters (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/terrestrial-layers/solid-raster.mjs:114:25)
+    at async prepareTerrestrialLayers (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/terrestrial-layers/index.mjs:249:20)
+    at async prepareAuthoredStages (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js:6128:22)
+    at async prepareAuthoredObject (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js:6035:18)
+    at async prepareAuthoredStages (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js:6051:21)
+    at async prepareAuthoredObject (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js:6035:18)
+    at async file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js:6180:18
+
+Node.js v24.19.0
+[prepare io] failed in 2.3s: io preparation failed with exit 1.
+Preparation finished in 543.3s: 1 succeeded, 1 failed, 8 not started.
+file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/run-implemented-planets.mjs:193
+    const error = new AggregateError(failures, "Object preparation failed; all started commands have settled.");
+                  ^
+
+AggregateError: Object preparation failed; all started commands have settled.
+    at runPreparationObjects (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/run-implemented-planets.mjs:193:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///private/tmp/b2-prepare-remaining.mjs:5:15 {
+  report: {
+    mode: 'prepare',
+    startedAt: '2026-09-09T01:51:43.036Z',
+    requestedConcurrency: 1,
+    concurrency: 1,
+    elapsedMilliseconds: 543337.333916,
+    results: [
+      {
+        id: 'deimos',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'succeeded',
+        startedAt: '2026-09-09T01:51:43.037Z',
+        exitCode: 0,
+        signal: null,
+        elapsedMilliseconds: 540995.6852920001
+      },
+      {
+        id: 'io',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'failed',
+        startedAt: '2026-09-09T02:00:44.033Z',
+        exitCode: 1,
+        signal: null,
+        error: 'io preparation failed with exit 1.',
+        elapsedMilliseconds: 2340.792374999961
+      },
+      {
+        id: 'europa',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'not-started'
+      },
+      {
+        id: 'ganymede',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'not-started'
+      },
+      {
+        id: 'enceladus',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'not-started'
+      },
+      {
+        id: 'tethys',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'not-started'
+      },
+      {
+        id: 'dione',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'not-started'
+      },
+      {
+        id: 'rhea',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'not-started'
+      },
+      {
+        id: 'titan',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'not-started'
+      },
+      {
+        id: 'charon',
+        script: '/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js',
+        status: 'not-started'
+      }
+    ]
+  },
+  [errors]: [
+    Error: io preparation failed with exit 1.
+        at worker (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/run-implemented-planets.mjs:174:17)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async Promise.all (index 0)
+        at async runPreparationObjects (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/run-implemented-planets.mjs:189:3)
+        at async file:///private/tmp/b2-prepare-remaining.mjs:5:15
+  ]
+}
+
+Node.js v24.19.0

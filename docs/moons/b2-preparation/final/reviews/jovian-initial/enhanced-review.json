@@ -1,0 +1,481 @@
+{
+  "schema": "cssearth-b2-static-visual-review@1",
+  "createdAt": "2026-09-09T04:23:37.885657+00:00",
+  "captureRun": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z",
+  "captureHead": "57d5f12bea735bbf4ee6e1ec00ea14827e0e7923",
+  "status": "REVIEWED_WITH_COVERAGE_LIMIT",
+  "scope": "Twelve directly viewed PNGs, unlit details and lit drag for each of Io/Europa/Ganymede at both DPRs. No new browser or image preparation.",
+  "capturedImageCount": 30,
+  "directlyReviewedImageCount": 12,
+  "captureCaseStatus": [
+    {
+      "id": "io",
+      "dpr": 1,
+      "status": "CAPTURED_UNREVIEWED",
+      "errors": [],
+      "contextClose": "COMPLETE"
+    },
+    {
+      "id": "io",
+      "dpr": 2,
+      "status": "CAPTURED_UNREVIEWED",
+      "errors": [],
+      "contextClose": "COMPLETE"
+    },
+    {
+      "id": "europa",
+      "dpr": 1,
+      "status": "CAPTURED_UNREVIEWED",
+      "errors": [],
+      "contextClose": "COMPLETE"
+    },
+    {
+      "id": "europa",
+      "dpr": 2,
+      "status": "CAPTURED_UNREVIEWED",
+      "errors": [],
+      "contextClose": "COMPLETE"
+    },
+    {
+      "id": "ganymede",
+      "dpr": 1,
+      "status": "CAPTURED_UNREVIEWED",
+      "errors": [],
+      "contextClose": "COMPLETE"
+    },
+    {
+      "id": "ganymede",
+      "dpr": 2,
+      "status": "CAPTURED_UNREVIEWED",
+      "errors": [],
+      "contextClose": "COMPLETE"
+    }
+  ],
+  "bodyStatus": {
+    "io": "ENHANCED_REVIEWED_POSES_ACCEPTABLE_WITH_FINE_BAND_BOUNDARY_LIMIT",
+    "europa": "MONOCHROME_FALLBACK_REVIEWED_COLOR_FOOTPRINT_CAPTURE_PENDING",
+    "ganymede": "ENHANCED_REVIEWED_POSES_ACCEPTABLE_WITH_DISCLOSED_COLOR_EXCLUSIONS"
+  },
+  "findings": [
+    {
+      "id": "EUROPA-COLOR-POSE-COVERAGE",
+      "type": "visual-coverage-gap",
+      "blockingFor": "Claim that the enhanced color footprint itself was visually inspected",
+      "detail": "Current Europa poses show almost entirely monochrome fallback. The supported source-footprint pose has been sent to root for a focused capture.",
+      "cameraReceipt": "/tmp/b2-jovian-final-review/europa-enhanced-focus.json"
+    }
+  ],
+  "reviewedImages": [
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr1/enhanced-shadows-false-details-1.png",
+      "bytes": 889829,
+      "sha256": "b288e8f72ea04093c69dcfcb91629e149eb3a18d132139c5a53d73ce53a833fb",
+      "body": "io",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false,
+      "hashReverifiedAtReview": true,
+      "note": "Enhanced yellow/brown terrain, red volcanic patches and dark observations are visible; polar gray exclusion is retained. Infrared/green/violet and withheld polar-color caveats fit. Fine dark band boundaries remain visible on the lower hemisphere, particularly DPR1; not qualified as seam-free."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr1/enhanced-shadows-true-drag.png",
+      "bytes": 761066,
+      "sha256": "41066615065b9a03cca6022532f330442b5cba914e231e7c46f4c3bd8582908a",
+      "body": "io",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true,
+      "hashReverifiedAtReview": true,
+      "note": "After drag, the enhanced globe and lit terminator remain coherent. Readable source caveats; no gross missing face or broken silhouette in this pose."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr2/enhanced-shadows-false-details-1.png",
+      "bytes": 2530568,
+      "sha256": "0b25acd972178dc17e9b7ba8d423244ede049610c03ebe692b34aa80b5ab4ae3",
+      "body": "io",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false,
+      "hashReverifiedAtReview": true,
+      "note": "Enhanced yellow/brown terrain, red volcanic patches and dark observations are visible; polar gray exclusion is retained. Infrared/green/violet and withheld polar-color caveats fit. Fine dark band boundaries remain visible on the lower hemisphere, particularly DPR1; not qualified as seam-free."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr2/enhanced-shadows-true-drag.png",
+      "bytes": 2079655,
+      "sha256": "081be9e544f117ff7cd9ce0c080d17a93db945ab4f03ff941fd562b0fa22e92b",
+      "body": "io",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true,
+      "hashReverifiedAtReview": true,
+      "note": "After drag, the enhanced globe and lit terminator remain coherent. Readable source caveats; no gross missing face or broken silhouette in this pose."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr1/enhanced-shadows-false-details-1.png",
+      "bytes": 735542,
+      "sha256": "597163cf2546aacb93f09df26d9ccc0b257d43a0e3cbfa7fcbf76828bfcc627d",
+      "body": "europa",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false,
+      "hashReverifiedAtReview": true,
+      "note": "The visible hemisphere is almost entirely monochrome fallback with southern gray no-data and mosaic contrast transitions. The thumbnail shows the separate limited tan color footprint. Color/fallback description fits. This pose does not visually qualify the actual enhanced-color footprint."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr1/enhanced-shadows-true-drag.png",
+      "bytes": 676627,
+      "sha256": "4051edb9bf28f3be046f644823337c2d4cf0ea9b79449c764f08728e5cf5ec1e",
+      "body": "europa",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true,
+      "hashReverifiedAtReview": true,
+      "note": "After drag, coherent fractured monochrome fallback remains under the lit terminator. The actual limited color footprint is still not exposed; a focused footprint-facing capture is pending."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr2/enhanced-shadows-false-details-1.png",
+      "bytes": 2177376,
+      "sha256": "ad623bdf8586169d5b63620f27cf27e01844ad8c9d674da3d3b562211588590d",
+      "body": "europa",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false,
+      "hashReverifiedAtReview": true,
+      "note": "The visible hemisphere is almost entirely monochrome fallback with southern gray no-data and mosaic contrast transitions. The thumbnail shows the separate limited tan color footprint. Color/fallback description fits. This pose does not visually qualify the actual enhanced-color footprint."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr2/enhanced-shadows-true-drag.png",
+      "bytes": 1927664,
+      "sha256": "2361142a88b2ec241d063c292af24ecbdbc6a77bbb8276bf1c5039a3b8aca228",
+      "body": "europa",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true,
+      "hashReverifiedAtReview": true,
+      "note": "After drag, coherent fractured monochrome fallback remains under the lit terminator. The actual limited color footprint is still not exposed; a focused footprint-facing capture is pending."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr1/enhanced-shadows-false-details-1.png",
+      "bytes": 854995,
+      "sha256": "3b885a5dd2b64abb3d4bdf809f3e42b44f878b30be196557761cecd5c5d9a509",
+      "body": "ganymede",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false,
+      "hashReverifiedAtReview": true,
+      "note": "Muted brown enhanced colors flank a conspicuous vertical monochrome fallback strip; this strip also appears in the thumbnail and the missing/synthesized-color exclusion is explicitly disclosed. Southern gray no-data remains visible. No gross registration mismatch at color/fallback transitions is apparent."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr1/enhanced-shadows-true-drag.png",
+      "bytes": 753311,
+      "sha256": "6571c81e60dc6455b451706047fe68ef06ea37c6c1a8c00e9f30b8aa8aca2ad7",
+      "body": "ganymede",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true,
+      "hashReverifiedAtReview": true,
+      "note": "After drag, muted enhanced colors and the monochrome fallback strip remain coherent under the terminator. Source caveats are readable; no gross silhouette failure."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr2/enhanced-shadows-false-details-1.png",
+      "bytes": 2553688,
+      "sha256": "5e385ca8712fdab3f4869f16d3399c2366503625060363e4fadbf9cb6a240165",
+      "body": "ganymede",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false,
+      "hashReverifiedAtReview": true,
+      "note": "Muted brown enhanced colors flank a conspicuous vertical monochrome fallback strip; this strip also appears in the thumbnail and the missing/synthesized-color exclusion is explicitly disclosed. Southern gray no-data remains visible. No gross registration mismatch at color/fallback transitions is apparent."
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr2/enhanced-shadows-true-drag.png",
+      "bytes": 2154981,
+      "sha256": "831a98f50a6789fa3d61d3070cb047be313e3b306d866693796f372646535376",
+      "body": "ganymede",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true,
+      "hashReverifiedAtReview": true,
+      "note": "After drag, muted enhanced colors and the monochrome fallback strip remain coherent under the terminator. Source caveats are readable; no gross silhouette failure."
+    }
+  ],
+  "allJovianCaptureImageInventory": [
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr1/enhanced-shadows-false-scene.png",
+      "bytes": 890589,
+      "sha256": "7029a3ceabcccb400f28b3a33fc7ef16bfc32689a71bf4904af506e9f1ee5261",
+      "body": "io",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr1/enhanced-shadows-false-details-1.png",
+      "bytes": 889829,
+      "sha256": "b288e8f72ea04093c69dcfcb91629e149eb3a18d132139c5a53d73ce53a833fb",
+      "body": "io",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr1/enhanced-shadows-true-scene.png",
+      "bytes": 738750,
+      "sha256": "56c18bb49335284087724fd60e5333ab59ea7a0c0acc59b716678bd68b0ed2fd",
+      "body": "io",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr1/enhanced-shadows-true-details-1.png",
+      "bytes": 737533,
+      "sha256": "0d87a7854ef0c8805f5da493604beb0758bacd72242c1ab145909869743ecac4",
+      "body": "io",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr1/enhanced-shadows-true-drag.png",
+      "bytes": 761066,
+      "sha256": "41066615065b9a03cca6022532f330442b5cba914e231e7c46f4c3bd8582908a",
+      "body": "io",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr2/enhanced-shadows-false-scene.png",
+      "bytes": 2535634,
+      "sha256": "5508bcc31234cc09e5c64ed1a268f85a50e2fe2932a504cf34a79f8d660035fc",
+      "body": "io",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr2/enhanced-shadows-false-details-1.png",
+      "bytes": 2530568,
+      "sha256": "0b25acd972178dc17e9b7ba8d423244ede049610c03ebe692b34aa80b5ab4ae3",
+      "body": "io",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr2/enhanced-shadows-true-scene.png",
+      "bytes": 2019481,
+      "sha256": "36b6b578995875aed2b62403ee0124739b3b25084b21ff054b9aae1c39ddc1f9",
+      "body": "io",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr2/enhanced-shadows-true-details-1.png",
+      "bytes": 2014317,
+      "sha256": "604864cfad70420bc0dcf0f5e5195943c5ad2945fef88f53c849be3313dcb01c",
+      "body": "io",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/io-dpr2/enhanced-shadows-true-drag.png",
+      "bytes": 2079655,
+      "sha256": "081be9e544f117ff7cd9ce0c080d17a93db945ab4f03ff941fd562b0fa22e92b",
+      "body": "io",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr1/enhanced-shadows-false-scene.png",
+      "bytes": 736665,
+      "sha256": "6ee4e55589159831cb03bc7c76b72508c29fbb44d679bacde3dd5441fca95b56",
+      "body": "europa",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr1/enhanced-shadows-false-details-1.png",
+      "bytes": 735542,
+      "sha256": "597163cf2546aacb93f09df26d9ccc0b257d43a0e3cbfa7fcbf76828bfcc627d",
+      "body": "europa",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr1/enhanced-shadows-true-scene.png",
+      "bytes": 657617,
+      "sha256": "8d95edf19f55a59f15eaddd3f9a7b5a9e3e83e63180b83585bbf9a5a6cf7cd9f",
+      "body": "europa",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr1/enhanced-shadows-true-details-1.png",
+      "bytes": 656887,
+      "sha256": "15a156ff0789615c85a31f474eb6d5de36f9c8ffbbbc58770ec453c4438e1391",
+      "body": "europa",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr1/enhanced-shadows-true-drag.png",
+      "bytes": 676627,
+      "sha256": "4051edb9bf28f3be046f644823337c2d4cf0ea9b79449c764f08728e5cf5ec1e",
+      "body": "europa",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr2/enhanced-shadows-false-scene.png",
+      "bytes": 2182056,
+      "sha256": "2cb614b136cd85bd4d742201fbae92f9d7ea7ca08ead86ac22755bb5b6d498e8",
+      "body": "europa",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr2/enhanced-shadows-false-details-1.png",
+      "bytes": 2177376,
+      "sha256": "ad623bdf8586169d5b63620f27cf27e01844ad8c9d674da3d3b562211588590d",
+      "body": "europa",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr2/enhanced-shadows-true-scene.png",
+      "bytes": 1874161,
+      "sha256": "530938fed840b2a7ed7b93c2a009b7c0d84828f5093bd5bb0bbd74f988abdab1",
+      "body": "europa",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr2/enhanced-shadows-true-details-1.png",
+      "bytes": 1870587,
+      "sha256": "af8e4f9879eb127de80da1bd149ecc6d788ac9659b669a090f3cb5d427ec52a4",
+      "body": "europa",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/europa-dpr2/enhanced-shadows-true-drag.png",
+      "bytes": 1927664,
+      "sha256": "2361142a88b2ec241d063c292af24ecbdbc6a77bbb8276bf1c5039a3b8aca228",
+      "body": "europa",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr1/enhanced-shadows-false-scene.png",
+      "bytes": 856232,
+      "sha256": "93e0667a84f230418d783ed56aa232e62445a58ea339050a872c71eaabdc83c7",
+      "body": "ganymede",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr1/enhanced-shadows-false-details-1.png",
+      "bytes": 854995,
+      "sha256": "3b885a5dd2b64abb3d4bdf809f3e42b44f878b30be196557761cecd5c5d9a509",
+      "body": "ganymede",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr1/enhanced-shadows-true-scene.png",
+      "bytes": 733714,
+      "sha256": "81011b673fb8b4ddfe7ed13113381a02078b409ee006c183b5f5b1dc7ad9c7d2",
+      "body": "ganymede",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr1/enhanced-shadows-true-details-1.png",
+      "bytes": 733361,
+      "sha256": "aac1c2209012e1808a961db819586b9bfa3087aebbdfb8140758dd75253a23e6",
+      "body": "ganymede",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr1/enhanced-shadows-true-drag.png",
+      "bytes": 753311,
+      "sha256": "6571c81e60dc6455b451706047fe68ef06ea37c6c1a8c00e9f30b8aa8aca2ad7",
+      "body": "ganymede",
+      "dpr": 1,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr2/enhanced-shadows-false-scene.png",
+      "bytes": 2561443,
+      "sha256": "7675c3c6ed7b1609659ad34f8a71e1af3c14bb307eaea8d6ac0fd707569c0d3d",
+      "body": "ganymede",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr2/enhanced-shadows-false-details-1.png",
+      "bytes": 2553688,
+      "sha256": "5e385ca8712fdab3f4869f16d3399c2366503625060363e4fadbf9cb6a240165",
+      "body": "ganymede",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": false
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr2/enhanced-shadows-true-scene.png",
+      "bytes": 2108375,
+      "sha256": "88ccff9e7c4c3136bcb2aff561ea0ebfd83bd935804bcd97319b457192685835",
+      "body": "ganymede",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr2/enhanced-shadows-true-details-1.png",
+      "bytes": 2103139,
+      "sha256": "974fc18d82c4694b1eba063a801737cf6352aaab42595e197f4b46abf5e8c417",
+      "body": "ganymede",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/enhanced-supplement-2026-09-09T04-17-24.802Z/ganymede-dpr2/enhanced-shadows-true-drag.png",
+      "bytes": 2154981,
+      "sha256": "831a98f50a6789fa3d61d3070cb047be313e3b306d866693796f372646535376",
+      "body": "ganymede",
+      "dpr": 2,
+      "lens": "enhanced",
+      "shadows": true
+    }
+  ],
+  "limits": [
+    "This supplement does not inspect or clear the categorical legend blocker from the earlier integrated capture.",
+    "Fine dark projection/band boundaries are visible on Io lower hemisphere, especially DPR1; no seam-free or native-pixel parity claim.",
+    "Ganymede has intentionally conspicuous monochrome color-exclusion bands; Europa fallback and no-data are also retained. Their visibility is not proof of source measurement accuracy.",
+    "DPR2 images were displayed resized to1889x1312 from2880x2000. DPR1 images were viewed at1440x1000.",
+    "Only the twelve listed images were directly visually inspected; all30 Jovian image hashes were verified."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "baseHead": "7030be3b",
+  "scope": "Read-only patch proposal; no tests/build/bake executed",
+  "fileCount": 9,
+  "files": [
+    {
+      "path": "tests/objects/unit/io/runtime-contract.test.mjs",
+      "baseSha256": "804a63f48995636d6c7f474c1461277a09736b1b975475a639e4982339de7aec",
+      "proposedSha256": "aa1282fd9ca3e68d1a5f90aeccb2b1d25c61f16056985a5430a1b8ed3677da5a"
+    },
+    {
+      "path": "tests/objects/unit/europa/runtime-contract.test.mjs",
+      "baseSha256": "ee1ae9fed520600af3022ea4b01a9d8450b84bec6ec563a60d40fdde215c35c9",
+      "proposedSha256": "150c168e05b73877c4b259d7a352786b1e2cbe7f6d041c7dc4eb9eda3a6374de"
+    },
+    {
+      "path": "tests/objects/unit/ganymede/runtime-contract.test.mjs",
+      "baseSha256": "a1a9bf4c58b715df412fa57a6be7f71347a2b09905e834aa34e6bdd7037a011f",
+      "proposedSha256": "251d382cf3c0469dedca352439d80b0c9b6d2b8e57e562253594e74491d6b92b"
+    },
+    {
+      "path": "tests/objects/unit/dimorphos/prepared.test.mjs",
+      "baseSha256": "f676fca65cd573ef6d1ca5faf65b1b57358d9e6df29a3919139b2293f48e7d15",
+      "proposedSha256": "283915f550cb64b07f8932464dbc3aa22872a617542540ddfc23560d6e9312e7"
+    },
+    {
+      "path": "tests/objects/unit/io/surface.test.mjs",
+      "baseSha256": "a933b0c0b10eedae1e833a9ac6a03b0e69a01ebd823269ae5561156be6283ca8",
+      "proposedSha256": "e6aa8a64e0abe8c6a1c9da081e8d7e45334249d3bc9ef5ab98870afe627af128"
+    },
+    {
+      "path": "src/planets/rhea/source/content/object.json",
+      "baseSha256": "838b183b26e376c61f1c147db307abf3857ccf92a34207a764502d5bc61b8519",
+      "proposedSha256": "7735bdcf35bc60e00aef9980ad543d2052dec3e03d174f985a31ed7e379202fa"
+    },
+    {
+      "path": "src/planets/rhea/source/preparation/terrestrial.json",
+      "baseSha256": "bc3a94513ef0fc1a6eeb3fae5bd4c3d7d0afaf2a8eac4b7a4e831bb281b0dec7",
+      "proposedSha256": "32a257ed0ce51beff0716842cd39983c4bb2ce22c8e35e0cf43192ed32d2406f"
+    },
+    {
+      "path": "src/planets/rhea/source/manifest.json",
+      "baseSha256": "10d7cff86d4643c1228288572592570fabcba547626cb88e71966f4e0e1f2a2f",
+      "proposedSha256": "ee9881e89fad599d1a5a20994e06b36a3454e5ab3913895fb4a8bfd94c7fcffe"
+    },
+    {
+      "path": "src/planets/rhea/object.json",
+      "baseSha256": "ffb213715bb782dcb7b77d09a4d1ffd9d36f9de87bf6d4588072d705b86da961",
+      "proposedSha256": "06eec50af1d23ca8d7a906cfe2880c1149fc9b235e83dd76d45274c72e2a1347"
+    }
+  ],
+  "rheaIndependentPinChecks": [
+    {
+      "path": "src/planets/rhea/source/preparation/terrestrial.json",
+      "bytes": 5750,
+      "sha256": "32a257ed0ce51beff0716842cd39983c4bb2ce22c8e35e0cf43192ed32d2406f"
+    },
+    {
+      "path": "src/planets/rhea/source/content/object.json",
+      "bytes": 13419,
+      "sha256": "7735bdcf35bc60e00aef9980ad543d2052dec3e03d174f985a31ed7e379202fa"
+    }
+  ],
+  "evidence": "Lens arrays independently match current authored source controls. Io current source count9: six prior inputs including minimap plus SHP/DBF/PRJ geology. Moon counts already match and were left unchanged. Dimorphos geometry remains800faces and75m; only new slope lens expectation changes."
+}

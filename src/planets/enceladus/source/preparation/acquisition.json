@@ -32,6 +32,82 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.lbl",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.lbl",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/dskinfo.txt",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/enceladus_ssd_250728_v2.tpc",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/pck/enceladus_ssd_250728_v2.tpc",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/b2-intake/cas_v44.tf",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/fk/cas_v44.tf",
+      "headers": {
+        "User-Agent": "cssEarth source verification (public PDS data)"
+      }
+    },
+    {
+      "kind": "dsk-mesh",
+      "groups": [
+        "refresh"
+      ],
+      "path": "shape/enceladus-v2-q256.obj.zip",
+      "recipe": {
+        "inputPath": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.bds",
+        "inputBytes": 30258176,
+        "inputSha256": "49913bbc117503f894bc7d127a582e1e8e4ac903e348a7021992f5aba7a18c98",
+        "member": "enceladus-v2-q256.obj",
+        "targetId": 602,
+        "frameId": 10040,
+        "surfaceId": 20122,
+        "sourceVertices": 396294,
+        "sourceFaces": 786432,
+        "weldedVertices": 393218,
+        "spiceypyVersion": "6.0.3",
+        "cspiceVersion": "CSPICE_N0067"
+      }
     }
   ]
 }

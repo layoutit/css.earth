@@ -128,8 +128,13 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
         assert(distance < initialDistance * 1.2 && distance > initialDistance * .8, `${id} ellipse left its parent centre`);
       }
     }
-    assert.equal(result.bodies.some((body: { id: string }) => body.id === 'patroclus'), false, 'the primary coordinate is not an added scene or marker');
-    assert.deepEqual(result.orbitCenters.patroclus, { centerBodyId: 'sun', positionM: sourcePrimaries.get('patroclus')!.map(value => value * 1000) });
+    const patroclus = result.bodies.find((body: { id: string }) => body.id === 'patroclus');
+    assert.ok(patroclus, 'an explicitly authored primary remains a visible body');
+    const menoetius = result.bodies.find((body: { id: string }) => body.id === 'menoetius');
+    assert.ok(menoetius, 'the authored satellite remains a visible body');
+    assert.equal(menoetius.orbit.centerBodyId, patroclus.id);
+    assert.deepEqual(menoetius.orbit.centerPositionM, patroclus.positionM);
+    assert.equal(result.orbitCenters?.patroclus, undefined, 'a visible primary does not need a hidden coordinate entry');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

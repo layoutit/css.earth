@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "35bf1c59e9bab26f283e9a88837312150d676c7b7d547c925e26aa87a3135107"
+          "sha256": "e48d463a58538e1712e13851faedbc6bc32cc075f16c2064e1c7c03e7b34b01a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "9331e9ed1556db642ecdbe289162c11c418789d6ce3345293f34e0c253226c29"
+          "sha256": "08906ab469e9548e1a2e5725cf3585a023a21eebbd9d347c69441d5556053df2"
         },
         {
           "id": "title",
@@ -43,11 +43,11 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "af021aeb1e25499e57e87bb5c67b6e00bbee61edc251ceae9c7a5d136d564bd7"
+          "sha256": "f1dc6f61fbbdc42d3340bf531baf3992f6a23ad0c3b2439d3ec0f63fe67b3b90"
         }
       ],
       "shape": {
-        "kind": "sphere",
+        "kind": "radial-terrain",
         "radiusKm": 562.5
       },
       "surfaces": [
@@ -68,6 +68,16 @@
             },
             {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "relative-albedo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "shape",
               "source": "content",
               "material": "lighting"
             }
@@ -113,6 +123,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "14823836d3fce7e641edd37acbc94b7360cd8d3915e81fffef0f0b65386c9719"
+    "sha256": "2712d4ed07ef54c64da3dcd9c763e3ecf2ead5f973309b71847a510ecdc4b8f8"
   }
 }

@@ -147,3 +147,9 @@ node output/main-belt-asteroids/prepare-navigation.mjs
 ```
 
 Fresh-delivery replay uses `verify-runtime-install.mjs` to create an empty destination, followed by `browser-check.mjs` with `CSSEARTH_FRESH_RUNTIME_ROOT` pointing there and the existing preview on port 4278. No source preparation is needed for runtime installation. Runtime publication uses the existing publisher and is a separate write action.
+
+## Main integration
+
+Merged main `ef07fac2d3208e201dafc626374b30ed4644f561` (the 13-moon scientific upgrade) into this branch. The incoming moon scene and source files are preserved byte for byte; the existing preparation writer refreshes navigation marker indices and payload hashes for the expanded catalog. All 41 new asteroid packages remain unchanged. The [merge receipt](evidence/main-belt-asteroids/merge-validation.json) records the incoming and refreshed hashes.
+
+The minimap resolution retains main’s affine-only fallback and both solid-scientific and irregular-surface regressions. The outdated spatial-context assertion now checks explicitly authored Patroclus as a visible primary with Menoetius orbiting it; the separate hidden-primary regression remains intact. Preparation build, 8 minimap tests, 4 spatial-context tests and 14 focused marker/activation tests pass. Canonical world-context regeneration produces no diff. These focused checks supplement the original qualification; they do not represent a rerun of the entire browser suite.

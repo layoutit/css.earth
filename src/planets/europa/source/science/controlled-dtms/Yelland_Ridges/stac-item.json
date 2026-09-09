@@ -1,0 +1,564 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "Yelland_Ridges",
+  "properties": {
+    "start_datetime": "1995-12-07T00:00:00.000000Z",
+    "end_datetime": "2003-08-21T00:00:00.000000Z",
+    "title": "DTM: Yelland_Ridges",
+    "description": "Knowledge of a planetary surface's topography is necessary to understand its geology and enable landed mission operations. NASA's Solid State Imager (SSI) on board the Galileo spacecraft acquired more than 500 images of Jupiter's moon, Europa. Although moderate- and high-resolution coverage is extremely limited, repeat coverage of a small number of sites enables the creation of digital terrain models (DTMs) via stereophotogrammetry. Here we provide stereo-derived DTMs of five sites on Europa. The sites are the bright band Agenor Linea, Cilix crater, Pwyll crater, a site that includes numerous pits and chaos adjacent to Rhadamanthys Linea, and a site near Yelland Linea that includes ridged plains at high-resolution. We generated the DTMs using BAE's SOCET SET software and each was manually edited to correct identifiable errors from the automated stereo matching process. Additionally, we utilized the recently updated image pointing information provided by the U. S. Geological Survey [Bland et al. 2021], which enables the DTMs to easily be used in coordination with that globally controlled image set. The purpose of these products is to provide to the planetary community high-fidelity topographic models of Europa's surface that are aligned to the USGS geodetically controlled image data [Bland et al. 2021]. The DTMs were derived from stereophotogrammetry techniques using BAE's SOCET SET\u00ae software and utilized Galileo SSI images with updated SPICE pointing information (CKs) provided by the photogrammetric control solution of Bland et al. [2021]. That solution constrained the location of Europa's prime meridian (Cilix crater at 178o E) and therefore tied that dataset, and by extension these DTMs, to Europa's global coordinate system. All elevations are relative (not tied to a global elevation reference). Each DTM was manually edited to remove artifacts and correct other identifiable errors that result from the automated matching process. For each DTM, we include both a Figure of Merit and a Confidence Map that provides the user additional information on where the DTMs were edited and the relative quality of each pixel (see Process section for more information).\n\nThe DTMs were generated with a post spacing of 3 times the root-mean square (RMS) of the ground sample distance (pixel scale) of the image pair. We find that the horizontal \"resolution\"\ufffd(i.e., the smallest identifiable features) is typically 2-3 times the DTM post spacing, or ~10 times the RMS GSD of the images. Manual editing typically results in matching accuracy of ~0.2 pixels; however, Galileo images are challenging to work with, and in some cases post height adjustment was uncertain. For Galileo DTMs, the stereo-matching accuracy is approximately 0.5 pixels [Bland et al. 2022], resulting in effective vertical precisions (EP) that range from 36-100 m, depending on the DTM. We emphasize that the EP is the RMS uncertainty in a point elevation sampled from the DTM. Because DTM uncertainty follows a quasi-normal distribution, the 95% percentile error is ~1.645*EP, or 60-165 m. A few larger errors may exist in the DTMs and users are cautioned that care should be used when investigating localized or small-scale features.",
+    "missions": "Galileo",
+    "instruments": [
+      "Solid State Imager (SSI)"
+    ],
+    "gsd": 61.814749332840975,
+    "license": "CC0-1.0",
+    "proj:epsg": null,
+    "proj:wkt2": "\"PROJCS[\\\"Europa (2015) - Sphere / Ocentric / Equirectangular, clon = 180\\\",GEOGCS[\\\"Europa (2015) - Sphere / Ocentric\\\",DATUM[\\\"Europa (2015) - Sphere\\\",SPHEROID[\\\"Europa (2015) - Sphere\\\",1560800,0]],PRIMEM[\\\"Reference Meridian\\\",0],UNIT[\\\"degree\\\",0.0174532925199433,AUTHORITY[\\\"EPSG\\\",\\\"9122\\\"]]],PROJECTION[\\\"Equirectangular\\\"],PARAMETER[\\\"standard_parallel_1\\\",0],PARAMETER[\\\"central_meridian\\\",180],PARAMETER[\\\"false_easting\\\",0],PARAMETER[\\\"false_northing\\\",0],UNIT[\\\"metre\\\",1,AUTHORITY[\\\"EPSG\\\",\\\"9001\\\"]],AXIS[\\\"Easting\\\",EAST],AXIS[\\\"Northing\\\",NORTH]]\"",
+    "proj:projjson": {
+      "$schema": "https://proj.org/schemas/v0.6/projjson.schema.json",
+      "type": "ProjectedCRS",
+      "name": "Europa (2015) - Sphere / Ocentric / Equirectangular, clon = 180",
+      "base_crs": {
+        "name": "Europa (2015) - Sphere / Ocentric",
+        "datum": {
+          "type": "GeodeticReferenceFrame",
+          "name": "Europa (2015) - Sphere",
+          "ellipsoid": {
+            "name": "Europa (2015) - Sphere",
+            "radius": 1560800
+          },
+          "prime_meridian": {
+            "name": "Reference Meridian",
+            "longitude": 0
+          }
+        },
+        "coordinate_system": {
+          "subtype": "ellipsoidal",
+          "axis": [
+            {
+              "name": "Latitude",
+              "abbreviation": "lat",
+              "direction": "north",
+              "unit": "degree"
+            },
+            {
+              "name": "Longitude",
+              "abbreviation": "lon",
+              "direction": "east",
+              "unit": "degree"
+            }
+          ]
+        }
+      },
+      "conversion": {
+        "name": "Equidistant Cylindrical",
+        "method": {
+          "name": "Equidistant Cylindrical",
+          "id": {
+            "authority": "EPSG",
+            "code": 1028
+          }
+        },
+        "parameters": [
+          {
+            "name": "Latitude of 1st standard parallel",
+            "value": 0,
+            "unit": "degree",
+            "id": {
+              "authority": "EPSG",
+              "code": 8823
+            }
+          },
+          {
+            "name": "Latitude of natural origin",
+            "value": 0,
+            "unit": {
+              "type": "Unit",
+              "name": "",
+              "conversion_factor": 1
+            },
+            "id": {
+              "authority": "EPSG",
+              "code": 8801
+            }
+          },
+          {
+            "name": "Longitude of natural origin",
+            "value": 180,
+            "unit": "degree",
+            "id": {
+              "authority": "EPSG",
+              "code": 8802
+            }
+          },
+          {
+            "name": "False easting",
+            "value": 0,
+            "unit": "metre",
+            "id": {
+              "authority": "EPSG",
+              "code": 8806
+            }
+          },
+          {
+            "name": "False northing",
+            "value": 0,
+            "unit": "metre",
+            "id": {
+              "authority": "EPSG",
+              "code": 8807
+            }
+          }
+        ]
+      },
+      "coordinate_system": {
+        "subtype": "Cartesian",
+        "axis": [
+          {
+            "name": "Easting",
+            "abbreviation": "",
+            "direction": "east",
+            "unit": "metre"
+          },
+          {
+            "name": "Northing",
+            "abbreviation": "",
+            "direction": "north",
+            "unit": "metre"
+          }
+        ]
+      }
+    },
+    "proj:bbox": [
+      162.84282498762622,
+      -16.97949118932632,
+      163.28241822012188,
+      -16.685670444055866
+    ],
+    "proj:centroid": {
+      "lat": -16.831355874322018,
+      "lon": 163.05686824260732
+    },
+    "proj:shape": [
+      132,
+      196
+    ],
+    "proj:transform": [
+      -467411.6506488282,
+      61.814749332840975,
+      0,
+      -454409.99986603,
+      0,
+      -61.814749332840975
+    ],
+    "cube:dimensions": {
+      "x": {
+        "type": "spatial",
+        "axis": "x",
+        "extent": [
+          162.84282498762622,
+          163.28241822012188
+        ]
+      },
+      "y": {
+        "type": "spatial",
+        "axis": "y",
+        "extent": [
+          -16.97949118932632,
+          -16.685670444055866
+        ]
+      }
+    },
+    "ssys:targets": [
+      "Europa"
+    ],
+    "datetime": null,
+    "created": "2023-06-05T04:32:09.386Z",
+    "updated": "2023-06-05T04:32:09.386Z"
+  },
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            162.84282498762622,
+            -16.796679181399426
+          ],
+          [
+            162.8451265228749,
+            -16.774653638275705
+          ],
+          [
+            162.8451265228749,
+            -16.752628095151984
+          ],
+          [
+            162.84972959337225,
+            -16.748222986527242
+          ],
+          [
+            162.87044341061025,
+            -16.746020432214866
+          ],
+          [
+            162.89345876309693,
+            -16.739412769277752
+          ],
+          [
+            162.91417258033496,
+            -16.732805106340635
+          ],
+          [
+            162.93488639757294,
+            -16.726197443403517
+          ],
+          [
+            162.9532986795623,
+            -16.721792334778772
+          ],
+          [
+            162.9740124968003,
+            -16.715184671841655
+          ],
+          [
+            162.99012324354098,
+            -16.710779563216914
+          ],
+          [
+            163.00853552553033,
+            -16.706374454592165
+          ],
+          [
+            163.0223447370223,
+            -16.701969345967424
+          ],
+          [
+            163.04305855426037,
+            -16.69756423734268
+          ],
+          [
+            163.06377237149837,
+            -16.69095657440556
+          ],
+          [
+            163.06837544199573,
+            -16.710779563216914
+          ],
+          [
+            163.07067697724437,
+            -16.730969644413655
+          ],
+          [
+            163.09139079448238,
+            -16.737210214965376
+          ],
+          [
+            163.11210461172038,
+            -16.728399997715886
+          ],
+          [
+            163.13051689370974,
+            -16.723994889091145
+          ],
+          [
+            163.14662764045045,
+            -16.719589780466404
+          ],
+          [
+            163.16503992243977,
+            -16.715184671841655
+          ],
+          [
+            163.1834522044291,
+            -16.710779563216914
+          ],
+          [
+            163.20186448641846,
+            -16.706374454592165
+          ],
+          [
+            163.2202767684078,
+            -16.701969345967424
+          ],
+          [
+            163.24099058564582,
+            -16.695361683030306
+          ],
+          [
+            163.25249826188917,
+            -16.69095657440556
+          ],
+          [
+            163.27091054387853,
+            -16.686551465780816
+          ],
+          [
+            163.28241822012188,
+            -16.685670444055866
+          ],
+          [
+            163.28241822012188,
+            -16.708577008904538
+          ],
+          [
+            163.28241822012188,
+            -16.73060255202826
+          ],
+          [
+            163.28241822012188,
+            -16.752958478298837
+          ],
+          [
+            163.27551361437585,
+            -16.77509414913818
+          ],
+          [
+            163.27321207912715,
+            -16.7971196922619
+          ],
+          [
+            163.26630747338118,
+            -16.81936549081686
+          ],
+          [
+            163.25940286763517,
+            -16.841280906224966
+          ],
+          [
+            163.25479979713782,
+            -16.86319632163307
+          ],
+          [
+            163.25019672664052,
+            -16.88522186475679
+          ],
+          [
+            163.24559365614317,
+            -16.907850212218637
+          ],
+          [
+            163.2288059872705,
+            -16.92883244014176
+          ],
+          [
+            163.204805337014,
+            -16.935440103078875
+          ],
+          [
+            163.18639305502464,
+            -16.939845211703624
+          ],
+          [
+            163.16342884776572,
+            -16.94645287464074
+          ],
+          [
+            163.14049021312064,
+            -16.95306053757786
+          ],
+          [
+            163.12882910119407,
+            -16.9574656462026
+          ],
+          [
+            163.10577538978657,
+            -16.961870754827345
+          ],
+          [
+            163.0828751140623,
+            -16.968478417764462
+          ],
+          [
+            163.05979699243247,
+            -16.97508608070158
+          ],
+          [
+            163.05686776575237,
+            -16.972883526389204
+          ],
+          [
+            163.05686776575237,
+            -16.950857983265482
+          ],
+          [
+            163.05686776575237,
+            -16.92883244014176
+          ],
+          [
+            163.03419764355297,
+            -16.92883244014176
+          ],
+          [
+            163.01164936733736,
+            -16.93764265739125
+          ],
+          [
+            162.99538389553794,
+            -16.942047766015996
+          ],
+          [
+            162.9792293100306,
+            -16.94645287464074
+          ],
+          [
+            162.96081702804128,
+            -16.950857983265482
+          ],
+          [
+            162.94466792237978,
+            -16.95526309189023
+          ],
+          [
+            162.92401803667647,
+            -16.959668200514972
+          ],
+          [
+            162.90339170469645,
+            -16.966275863452086
+          ],
+          [
+            162.88034001217952,
+            -16.972883526389204
+          ],
+          [
+            162.85645715794524,
+            -16.97949118932632
+          ],
+          [
+            162.84972959337225,
+            -16.968478417764462
+          ],
+          [
+            162.84972959337225,
+            -16.94645287464074
+          ],
+          [
+            162.84742805812354,
+            -16.939845211703624
+          ],
+          [
+            162.84742805812354,
+            -16.917819668579902
+          ],
+          [
+            162.8451265228749,
+            -16.909009451330412
+          ],
+          [
+            162.8451265228749,
+            -16.88698390820669
+          ],
+          [
+            162.8451265228749,
+            -16.864958365082966
+          ],
+          [
+            162.8451265228749,
+            -16.842932821959245
+          ],
+          [
+            162.8451265228749,
+            -16.820907278835524
+          ],
+          [
+            162.84282498762622,
+            -16.796679181399426
+          ]
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/geo+json",
+      "href": "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod/collections/galileo_usgs_photogrammetrically_controlled_dtms/items/Yelland_Ridges"
+    },
+    {
+      "rel": "parent",
+      "type": "application/json",
+      "href": "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod/collections/galileo_usgs_photogrammetrically_controlled_dtms"
+    },
+    {
+      "rel": "collection",
+      "type": "application/json",
+      "href": "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod/collections/galileo_usgs_photogrammetrically_controlled_dtms"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod"
+    }
+  ],
+  "assets": {
+    "thumbnail": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/Yelland_Ridges_hillshade.jpg",
+      "type": "image/jpeg",
+      "title": "Image Thumbnail",
+      "key": "thumbnail",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "hillshade": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/Yelland_Ridges_hillshade.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Hillshade",
+      "key": "hillshade",
+      "roles": [
+        "data",
+        "overview"
+      ]
+    },
+    "dtm": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/Yelland_Ridges.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Digital Terrain Model: Yelland_Ridges",
+      "key": "dtm",
+      "roles": [
+        "data"
+      ]
+    },
+    "provenance": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/provenance.txt",
+      "type": "text/plain",
+      "title": "Provenance",
+      "key": "provenance",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "fom": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/Yelland_Ridges_FOM.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Figure of Merit",
+      "key": "fom",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "confidence": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/Yelland_Ridges_ClrConf.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Confidence Map",
+      "key": "confidence",
+      "roles": [
+        "metadata"
+      ]
+    }
+  },
+  "bbox": [
+    162.84282498762622,
+    -16.97949118932632,
+    163.28241822012188,
+    -16.685670444055866
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/datacube/v1.0.0/schema.json",
+    "https://raw.githubusercontent.com/thareUSGS/ssys/main/json-schema/schema.json"
+  ],
+  "collection": "galileo_usgs_photogrammetrically_controlled_dtms"
+}

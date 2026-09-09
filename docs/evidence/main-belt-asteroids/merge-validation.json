@@ -1,0 +1,198 @@
+{
+  "schema": "cssearth-main-belt-merge-validation@1",
+  "asteroidEvidenceHead": "1807965655e7e4a1e26bf73da4acc1723f00c71c",
+  "mergedMain": "ef07fac2d3208e201dafc626374b30ed4644f561",
+  "resolvedConflictFiles": 26,
+  "newAsteroidPackagesUnchanged": [
+    "thetis",
+    "thalia",
+    "phocaea",
+    "euterpe",
+    "bellona",
+    "pomona",
+    "circe",
+    "atalante",
+    "leda-38",
+    "laetitia",
+    "isis",
+    "ariadne",
+    "hestia",
+    "aglaja",
+    "pales",
+    "kalypso",
+    "alexandra",
+    "pandora-55",
+    "melete",
+    "elpis",
+    "erato",
+    "ausonia",
+    "asia",
+    "leto",
+    "hesperia",
+    "niobe",
+    "feronia",
+    "klytia",
+    "galatea-74",
+    "freia",
+    "eurynome",
+    "alkmene",
+    "beatrix",
+    "klio",
+    "io-85",
+    "semele",
+    "aegina",
+    "minerva",
+    "arethusa",
+    "klotho",
+    "ianthe"
+  ],
+  "moonBindings": [
+    {
+      "id": "charon",
+      "mainRuntimeSha256": "518091d893ca5b60b3226a34c09391f5738fdbc92b42cd652e59f01b8a09de9b",
+      "runtimeSha256": "46432cdc79932f16adf6cb93f9c33722d5d3a1470d6f00e7ede4864ee62d3fa5",
+      "sceneSha256": "5187ae429210d785b6a2bb8e00933b43443c7cc6518b91569b90f8e0f9720caa",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "44c695e5bc5566948391c7093dfc03774b7807f389f0ee66cf4926e642e9bfcf"
+    },
+    {
+      "id": "deimos",
+      "mainRuntimeSha256": "504bfebd3ace908ce520f5a5932eb9e855604db01243746459ab176ad2f058cd",
+      "runtimeSha256": "407114ef33e0ae607e2217b803dc9b2072cd301ab0d91c36b7300af6bf7e6316",
+      "sceneSha256": "5c7ca1002fc17fb628dfc0d5a2033e89800b0ba4d03cc26166a2f861d0c346f4",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "f8e289802f2a4e0720d55d1282e90ee76a2c1cae3c45943ccdfebea3978800e6"
+    },
+    {
+      "id": "dimorphos",
+      "mainRuntimeSha256": "fefbb6616d3b742e5e6da0cf0fb824bac082ea5a4d3962f3ff02eefc973b08d9",
+      "runtimeSha256": "ab52de10b19794c093efe9a0543ed01a2d89eac994f3f2925d5352ac5fbcc9b4",
+      "sceneSha256": "c5623fa287fbf150632a16574259436892fa4596f0c93077aefbd19092ff2b6b",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "40f5ef1f9a33faedc50afe04ded6189c41be7b813d1eeb2463b9ebd7e874480e"
+    },
+    {
+      "id": "dione",
+      "mainRuntimeSha256": "aa8d8fed881745c8c8e9b21a23f16a900f77004415685a4466386fe9cabdf28d",
+      "runtimeSha256": "09fd0855341b4a67a7ea564368afab4632047d8f02c3726c9fd1ea1dac067704",
+      "sceneSha256": "4bae26ccf6670938bad68c5c18a4a112bb8a94adf2567ab59f0b479159f2fdeb",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "2712d4ed07ef54c64da3dcd9c763e3ecf2ead5f973309b71847a510ecdc4b8f8"
+    },
+    {
+      "id": "enceladus",
+      "mainRuntimeSha256": "6658f9a262864e9c09ac2cd5d977b4694820541fac39fdaaaa8373b574865f61",
+      "runtimeSha256": "ae5184bba22f1661b8941400707052081b50151cfbb50cf4a82f3e300054493f",
+      "sceneSha256": "160b6f421a1d85813c91bc13ce7fd087d242c155cf039eeb9d8d6c8a6ab198db",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "55123950106f2e07824bd23bb46c1fd469b7e54cb39afd95bb50faebf849b9da"
+    },
+    {
+      "id": "europa",
+      "mainRuntimeSha256": "ff464104533b17f5c5875fdc97f7f854ecca078b9f873c153aa434dc3bce75c9",
+      "runtimeSha256": "dd0fbe6509b5edd0801226f5274c8ec175adb03e7180c35d9be58e9a3791135b",
+      "sceneSha256": "458b5e61ff45e7c1c1f717306eb0d915bac87edad928a1ea6add63dd2d46ce52",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "eeb6f35bf4adc3e6bd7a244326e187284973b3395485b6671e6f6e6b64494411"
+    },
+    {
+      "id": "ganymede",
+      "mainRuntimeSha256": "5500266e883986249157a35d842edc31f7f72fea154a9cbe1943045b492db79a",
+      "runtimeSha256": "fc61d67181ee64c91df3164557d3a426dd1bbcd0261fff2bf1a7e65b44f8c2b2",
+      "sceneSha256": "752b1a705b9205708983661b88b6858f3bde489d32df2156d84abd71bc1de81f",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "a359326192d277efe100f44b71a832595ea5788572ae227e4a7118a2bb753ab0"
+    },
+    {
+      "id": "io",
+      "mainRuntimeSha256": "5a91c6022362395a54f79e12ae95d1d26bc56cb84ed4f8d32eb31efa875ebc71",
+      "runtimeSha256": "7a455e665abeb171e47f05fc19a69ba81c8a4a6a5d5607fb0e645de1467e3348",
+      "sceneSha256": "5c147055abbdeb59b05a031f59116bbe2e32cdc10a54cf95c0e68bae0f12cb58",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "dff004a4a2d1237131e5a56998cd7059ac4ffbdaeb32aac68b0b1e5154c18ee0"
+    },
+    {
+      "id": "phobos",
+      "mainRuntimeSha256": "f44c22934a90cc71ea33827b2e73faedad3ce5f7da0196ad12d3985821586bc5",
+      "runtimeSha256": "f1a18f933cfb20f8ebc63145018efd8960d6a7bbefb164116f592bb8771d6a21",
+      "sceneSha256": "42ae07e5d1dadab3d716db56e1e0de4c610fafefd39179bf86e80251c053d036",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "c3c39cd93e15d0b7bbf4289fd1dbd528d2eaa03a33934ff64a802b5e598cb6e1"
+    },
+    {
+      "id": "rhea",
+      "mainRuntimeSha256": "41bd62ffd6b590dbc7e4ceaac80d9ffdf26cb1f46e559b0abc7c698d2baad519",
+      "runtimeSha256": "b896335f60989f7bfc057feac784f22352fe1b70c7369999efb4d82e8b0f92e5",
+      "sceneSha256": "c7430f10c4acdf5acb09f4b44a1b8f046d90eb11bd143695ca7db5dec933a93f",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "cfd8b89c7c213299a5be05bb1ed665fd48be14782413859a0b08599489a9656f"
+    },
+    {
+      "id": "tethys",
+      "mainRuntimeSha256": "b6e74e3a36e89056ad150966b17eef0cbb0be51e8bb0fa0528029f59d54a05fa",
+      "runtimeSha256": "30e02fd389666335759bb0fbe792118c9c0e7276c1985d7837ba468fe0a24541",
+      "sceneSha256": "b7046e9658cc47abe79a4a20cf13796c0de8876bd31a319dd367d590a48c590d",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "bda2108ff9df1dfd88d21ad1260303034a734ae6033ce068c0b6113911b22fb0"
+    },
+    {
+      "id": "titan",
+      "mainRuntimeSha256": "ab9a802c61001a10b18b3c7d392ef2acee7a332b5952c8837a42e729660fbad0",
+      "runtimeSha256": "bc50cb1db379673f737ff7d920d977fe76ed1647cee232b78b8211117ba4f675",
+      "sceneSha256": "7e8e1515bc5b772bf8a53b4b0193b7636aa6f8308c05d93225ec951478111db2",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "689d50fc9703a6035b83c7ccd5fe970f47c60c7929f9d97f7ac9283b047a728b"
+    },
+    {
+      "id": "moon",
+      "mainRuntimeSha256": "79af3ee73503497e9a2bbc8c22bf91808f7e69900f2461d9bff06dc0140008ec",
+      "runtimeSha256": "79af3ee73503497e9a2bbc8c22bf91808f7e69900f2461d9bff06dc0140008ec",
+      "sceneSha256": "481c9a8a8890622aad619460bfa108ea01698ae4836369ad3ec701c52b591277",
+      "markerBindingsOnly": true,
+      "incomingScenePreserved": true,
+      "incomingDescriptorPreserved": true,
+      "preparedObjectSha256": "6ad1fef826b448deb2a86a9093224fcbe1dab283459944ad89cb3d8be852f0fe"
+    }
+  ],
+  "checks": {
+    "preparationBuild": "pass",
+    "minimapTests": {
+      "pass": 8,
+      "fail": 0
+    },
+    "spatialContextTests": {
+      "pass": 4,
+      "fail": 0
+    },
+    "markerAndAffectedActivationTests": {
+      "pass": 14,
+      "fail": 0
+    },
+    "spatialContextRegeneration": "unchanged"
+  },
+  "scope": "Focused merge verification. The original asteroid captures and numerical qualification were not repeated; all 41 body packages are unchanged. GitHub CI status is reported separately."
+}

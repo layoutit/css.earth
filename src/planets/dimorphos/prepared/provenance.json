@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "dimorphos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dbcfa3167b93dd732b63096fe6642d27610123dbb04a84bd86c2a46a139df08a"
+    "sha256": "8e073fcd7c4d3cbb4c57140bf2e03123e827ecb36e0dd6fd57e752d9e163f9aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a7cdc1b2f77c21bf64d25991fc827f335fce4263417777c8bb05cac05fe7802b",
+      "sha256": "02535109d6f9ee4ad87707f89db30843eb0da3c1e1ebd326e34aeef119d1c335",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -110,6 +110,49 @@
                 "validity": "positive-sigma",
                 "facetOrder": "centroid-bijection"
               }
+            },
+            {
+              "id": "slope",
+              "label": "Slope",
+              "consumer": "facet-science",
+              "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+              "format": "facet-scalars",
+              "meshPath": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "table": {
+                "format": "pds4-fits",
+                "field": "SLOPE",
+                "units": "DEGREES",
+                "expectedRows": 196608,
+                "maximumCentroidErrorMeters": 0.001,
+                "labelPath": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+                "meshFile": "dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+                "target": "DIMORPHOS",
+                "registration": "centroid-bijection"
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 2
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "previewGrid": {
+                "width": 640,
+                "height": 320
+              },
+              "minimum": 0,
+              "maximum": 70,
+              "colors": [
+                "#20204b",
+                "#2d75b9",
+                "#4ebba7",
+                "#f1c45c",
+                "#cc543d"
+              ]
             }
           ],
           "observedColors": [],
@@ -181,7 +224,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1188b3703676e6183777e6e52841e759fbdecf83b485bb5e641074b7b5c1dfbf",
+      "sha256": "492fa98d6a47cf7aeff7ac5101faeab2e53f72544709de07ebaab83067f06013",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -306,8 +349,40 @@
                 "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
                 "image": "/scenes/dimorphos/dimorphos-albedo-legend.webp"
               }
+            },
+            {
+              "id": "slope",
+              "label": "Slope",
+              "description": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+              "title": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+              "detail": "Released facet values",
+              "thumbnail": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
+              "surface": "dimorphos-slope-surface@2x.webp",
+              "poles": "dimorphos-slope-surface@2x.webp",
+              "source": {
+                "id": "dimorphos-facet-science",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Slope",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "35",
+                  "70"
+                ],
+                "meta": "deg",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+                "image": "/scenes/dimorphos/dimorphos-slope-legend.webp"
+              }
             }
-          ]
+          ],
+          "labels": {
+            "slope": "Slope"
+          }
         },
         "settings": {
           "titleKey": "settings",
@@ -397,7 +472,7 @@
       "sha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e",
       "bytes": 14454228,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -428,7 +503,7 @@
       "sha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
       "bytes": 4728960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -453,7 +528,7 @@
       "sha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
       "bytes": 6781,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -462,6 +537,55 @@
         ],
         "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
         "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "id": "dimorphos-facet-science",
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "coverage": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+      "sha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
+      "bytes": 4726080,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "purpose": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "id": "authored-document:science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "kind": "authored-document",
+      "title": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
+      "bytes": 7093,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml"
       },
       "verificationOperations": []
     },
@@ -475,10 +599,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1aa6ab46a8870548543efe60560153696f235af794f4b2631b6dab24f1cbb78a",
-      "bytes": 12713,
+      "sha256": "492fa98d6a47cf7aeff7ac5101faeab2e53f72544709de07ebaab83067f06013",
+      "bytes": 14437,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -511,19 +635,19 @@
           "url": "/scenes/dimorphos/dimorphos-elevation-thumbnail.webp",
           "bytes": 4926,
           "sha256": "23fa84b1ad4607a2f9febe182e90a7daaefab0c0905b3377c11d6e78ff2cf82e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-elevation-surface@2x.webp",
           "bytes": 454484,
           "sha256": "c19c0941aa42da697721d9e4aee0290ed8601b68cd0c53b520d2850d870b1239",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -557,19 +681,65 @@
           "url": "/scenes/dimorphos/dimorphos-albedo-thumbnail.webp",
           "bytes": 2054,
           "sha256": "40ae515de84bda9cc14eca9c251833fb6ee7088e35ce956339aa5f74a27c4f7b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-albedo-legend.webp",
           "bytes": 64,
           "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-albedo-surface@2x.webp",
           "bytes": 349196,
           "sha256": "49a700dff7bf86a76887498f08548872d157697cde70c7a688a8f303f6cda7e5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "slope",
+      "label": "Slope",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change."
+      ],
+      "lensIds": [
+        "slope"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "dimorphos-facet-science",
+        "dimorphos-shape",
+        "authored-document:science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
+          "bytes": 1122,
+          "sha256": "80d0174445c6f14e65521f6926e39e75e663c34f92d710677e4b6999e1d9d9ab",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-slope-legend.webp",
+          "bytes": 232,
+          "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-slope-surface@2x.webp",
+          "bytes": 2380766,
+          "sha256": "631da1b8ad9eab19cde87f260b6ac14e0a8364e08f3e8bd7df696af0c54b8f1c",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -601,13 +771,13 @@
           "url": "/scenes/dimorphos/dimorphos-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
           "bytes": 210436,
           "sha256": "768556dbc2cc8e3d6c2b967044ad6977bfdef2fd955e00bc030d8dde1d311bf2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -705,6 +875,30 @@
           "url": "object:prepared/minimaps/albedo.webp",
           "bytes": 8124,
           "sha256": "e7ccb5233be78eff69cde9b2321c4d0a80cb0ca8d8318dd035c8ba271e48345a",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:slope",
+      "label": "Slope preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "slope"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/slope.webp",
+          "bytes": 168022,
+          "sha256": "ea9c3bdced0a6cf38fd73a6cf5f99e88584e037bc5c5eb4496bb9c91613f1fdf",
           "verification": "bytes-verified"
         }
       ]

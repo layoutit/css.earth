@@ -1,0 +1,113 @@
+PDS_VERSION_ID          = PDS3
+RECORD_TYPE             = STREAM
+
+OBJECT                  = TEXT
+   INTERCHANGE_FORMAT   = ASCII
+   PUBLICATION_DATE     = 2026-06-15 
+   NOTE                 = "CASSINI DS-Kernel Information"
+END_OBJECT              = TEXT
+                                                                     
+END 
+
+
+General Information About SPICE DS-Kernels
+==========================================
+
+   The purpose of the DS-kernel -- which stands for Digital Shape
+   Kernel (DSK) -- is to allow various digital shape representations,
+   such as triangular plate models or digital elevation models, to be
+   combined under a common file format and accessed by a common set of
+   subroutines.
+ 
+   Starting with the SPICE Toolkit version N0066, DSKs can be accessed
+   by subroutines that are part of the SPICE library, the major
+   component of the SPICE Toolkit. For earlier Toolkits, before N0066,
+   DSKs can be accessed by subroutines from a special library called
+   DSKLIB. These subroutines can be integrated into user application
+   programs.  The SPICE system toolkit for a number of computer
+   platforms or information regarding how it can be obtained is located
+   in the ``/software'' subdirectory of the main directory of this data
+   set.
+ 
+   To use DS-kernels, Leapseconds (LSK), a Frame Definitions Kernel
+   (FK), Planetary Constants Kernel (PcK), and possibly even C-Kernel
+   (CK) files may also be required.
+ 
+   Refer to the ``dsk.req'' document provided with the Toolkit to get
+   more information on how to access DS-kernel data.
+
+
+CASSINI DS-kernels Contained in This Data Set
+==========================================
+
+   The following CASSINI DS-kernels are provided in this data set (only name
+   portion of the file name is shown; the extension of all file names
+   is ``.bds''):
+
+   Enceladus Shape DSK Files:
+
+      cas_enceladus_ssd_spc_[res]icq_v[version].bds
+                                     Global coverage DSKs contining shape
+                                     models created using the 
+                                     stereophotoclinometry (SPC) technique 
+                                     developed at the Jet Propulsion 
+                                     Laboratory by processing Cassini's 
+                                     imaging data during Enceladus encounters.
+                                     The [res] token indictaes ICQ model's 
+                                     ``Q'' number determining the number of plates
+                                     (0128 - ~200K plates, 0256 - ~800K
+                                     plates, 0512 - ~3M plates, 1024 -
+                                     ~12M plates). 
+
+      cas_enceladus_ssd_spc_eq035m_v[version].bds    
+                                     Local DSK containing data for a 
+                                     small area in the equatorial region of 
+                                     Enceladus at 35 m resolution.
+                                     The shape model was created using the
+                                     stereophotoclinometry (SPC) technique
+                                     developed at the Jet Propulsion
+                                     Laboratory by processing Cassini's
+                                     imaging data during Enceladus encounters.
+
+      cas_enceladus_ssd_spc_south[res]m_v[version].bds
+                                     Local DSKs that comprise the South Pole 
+                                     at meter resolution indicated by the [res] 
+                                     token (25 m, 50 m, 100 m).
+                                     The shape model was created using the
+                                     stereophotoclinometry (SPC) technique
+                                     developed at the Jet Propulsion
+                                     Laboratory by processing Cassini's
+                                     imaging data during Enceladus encounters. 
+
+
+Kernel File Details
+===================
+
+   The most detailed description of the data in a binary DSK file is
+   provided in metadata included inside the comment area of the file.
+   This information can be viewed using utility programs COMMNT and
+   SPACIT included into the NAIF Toolkit.
+
+   The shape model released by Park et al. (2023) contained errors, mainly 
+   due to a process step in the early model development. The Cassini 
+   imaging data have been reprocessed, and an updated shape model has been 
+   released (version 2).
+
+Contact Information
+===================
+
+   Regarding CASSINI project specific information provided in this data set
+   and for general information about SPICE system:
+   
+      Boris Semenov 
+      (818)-354-8136 
+      Boris.Semenov@jpl.nasa.gov
+      
+   address:
+   
+      Navigation and Ancillary Information Facility (NAIF)
+      Jet Propulsion Laboratory
+      MS 301-125L
+      4800 Oak Grove Drive
+      Pasadena CA 91109 USA 
+

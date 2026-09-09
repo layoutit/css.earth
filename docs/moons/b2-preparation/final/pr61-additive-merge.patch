@@ -1,0 +1,96 @@
+--- a/tools/objects/terrestrial-layers/index.mjs
++++ b/tools/objects/terrestrial-layers/index.mjs
+@@ -125,11 +125,26 @@
+     }
+     if (!/^[a-z][a-z0-9-]*$/.test(observation.id) || observationIds.has(observation.id) ||
+         (observation.monochromeBase && !observationIds.has(observation.monochromeBase)) ||
+-        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome', 'pds3-byte-monochrome', 'fits-byte-monochrome', 'pds4-float-rgb'].includes(policy?.kind)) {
++        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'geotiff-rgb-bands', 'pds3-rgb-zip', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome', 'pds3-byte-monochrome', 'fits-byte-monochrome', 'pds4-float-rgb'].includes(policy?.kind)) {
+       throw new TypeError('Invalid observation identity, validity policy, or fallback ordering.');
+     }
+     const byteImage = ['image-monochrome-no-data', 'image-rgb-no-data'].includes(policy.kind);
+     if (policy.kind === 'pds4-float-rgb') validatePds4ObservationPolicy(policy);
++    if (['pds3-rgb-zip', 'geotiff-rgb-bands'].includes(policy.kind) &&
++        (policy.noData !== 0 || !Number.isFinite(policy.centerLongitude) || policy.centerLongitude < 0 || policy.centerLongitude > 360 ||
++         !(policy.grid?.pixelsPerDegree > 0) || ![policy.grid.sampleOffset, policy.grid.lineOffset].every(Number.isFinite))) {
++      throw new TypeError('Mapped RGB observations require an explicit source grid and fill code.');
++    }
++    if (policy.kind === 'pds3-rgb-zip' &&
++        (typeof policy.member !== 'string' || !/^[A-Za-z0-9_./-]+$/.test(policy.member) || policy.member.startsWith('-') ||
++         typeof policy.targetName !== 'string' || !policy.targetName.trim())) throw new TypeError('Invalid PDS RGB member or target.');
++    if (policy.kind === 'geotiff-rgb-bands' &&
++        (!Array.isArray(policy.samples) || policy.samples.length !== 3 || ![1, 2].includes(policy.sampleBytes) ||
++         new Set([...policy.samples, policy.alphaBand]).size !== 4 ||
++         [...policy.samples, policy.alphaBand].some(b => !Number.isInteger(b) || b < 0 || b > 3) ||
++         !(policy.resolutionMeters > 0) || !Array.isArray(policy.origin) || policy.origin.length !== 2 || !policy.origin.every(Number.isFinite))) {
++      throw new TypeError('Invalid source-owned RGB band order or storage.');
++    }
+     if (policy.kind === 'fits-byte-monochrome') validateFitsObservationPolicy(policy);
+     if ((policy.kind.startsWith('geotiff-') || byteImage) && (!(byteImage && policy.noData === null) && !Number.isFinite(policy.noData) ||
+         !Number.isFinite(policy.centerLongitude) || policy.centerLongitude < 0 || policy.centerLongitude > 360)) {
+--- a/tools/objects/terrestrial-layers/observed-geotiff.mjs
++++ b/tools/objects/terrestrial-layers/observed-geotiff.mjs
+@@ -1,6 +1,42 @@
+ import sharp from 'sharp';
+ import {fromFile} from 'geotiff';
+ import {sampleColorBand, loadScienceSurface} from './scientific-raster.mjs';
++import { prepareProjectedByteObservation } from './observed-image.mjs';
++
++/** Some published color products retain scientific band tags instead of RGB tags.
++ * The authored band order and alpha bind the decoder to the original composite.
++ */
++export async function prepareRgbBandObservation(path, entry, policy, width, height) {
++  const file = await fromFile(path);
++  try {
++    const image = await file.getImage(), keys = image.getGeoKeys();
++    const origin = image.getOrigin(), resolution = image.getResolution();
++    const { samples, alphaBand, sampleBytes, grid } = policy;
++    if (image.getWidth() !== entry.width || image.getHeight() !== entry.height ||
++        image.getSamplesPerPixel() !== 4 || image.getGDALNoData() !== policy.noData ||
++        [0, 1, 2, 3].some(b => image.getSampleFormat(b) !== 1 || image.getSampleByteSize(b) !== sampleBytes) ||
++        keys.GTRasterTypeGeoKey !== 1 || keys.ProjCoordTransGeoKey !== 17 ||
++        keys.ProjCenterLongGeoKey !== policy.centerLongitude || keys.ProjCenterLatGeoKey !== 0 || keys.ProjStdParallel1GeoKey !== 0 ||
++        keys.GeogSemiMajorAxisGeoKey !== entry.projection.referenceRadiusMeters ||
++        keys.GeogSemiMinorAxisGeoKey !== entry.projection.referenceRadiusMeters ||
++        resolution[0] !== policy.resolutionMeters || resolution[1] !== -policy.resolutionMeters ||
++        origin[0] !== policy.origin[0] || origin[1] !== policy.origin[1] ||
++        Math.abs(grid.pixelsPerDegree - entry.projection.referenceRadiusMeters * Math.PI / 180 / resolution[0]) > 1e-10 ||
++        grid.sampleOffset !== -origin[0] / resolution[0] - .5 || grid.lineOffset !== origin[1] / resolution[0] - .5) {
++      throw new Error(`RGB band observation grid changed: ${entry.id}`);
++    }
++    const bands = await image.readRasters({ samples: [...samples, alphaBand] });
++    const count = entry.width * entry.height, maximum = 2 ** (8 * sampleBytes) - 1;
++    const rgb = Buffer.alloc(count * 3), alpha = Buffer.alloc(count);
++    for (let i = 0; i < count; i++) {
++      // Source validity is evaluated before reducing 16-bit display codes to bytes.
++      alpha[i] = bands[3][i] === maximum && samples.some((_, c) => bands[c][i] !== policy.noData) ? 255 : 0;
++      for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.round(bands[c][i] * 255 / maximum);
++    }
++    return await prepareProjectedByteObservation(rgb, entry, policy, width, height,
++      { raw: { width: entry.width, height: entry.height, channels: 3 } }, alpha);
++  } finally { await file.close(); }
++}
+ 
+ /** Scalar observations keep native georeferencing, validity and display range. */
+ export async function prepareFloatObservation(path, entry, policy, width, height) {
+--- a/tools/objects/terrestrial-layers/solid-raster.mjs
++++ b/tools/objects/terrestrial-layers/solid-raster.mjs
+@@ -7,7 +7,8 @@
+ import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
+ import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mjs';
+ import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mjs';
+-import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation} from './observed-geotiff.mjs';
++import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation, prepareRgbBandObservation} from './observed-geotiff.mjs';
++import { preparePdsRgbObservation } from './observed-pds-rgb.mjs';
+ import { prepareByteObservation } from './observed-image.mjs';
+ import { preparePds4Observation } from './observed-pds4.mjs';
+ import { prepareFitsObservation } from './observed-fits.mjs';
+@@ -37,6 +38,8 @@
+ export async function readObservation(sourceDirectory, entry, validity, width, height) {
+   const path = resolve(sourceDirectory, entry.path);
+   if (validity.kind === 'pds4-float-rgb') return preparePds4Observation(sourceDirectory, entry, validity, width, height);
++  if (validity.kind === 'pds3-rgb-zip') return preparePdsRgbObservation(path, entry, validity, width, height);
++  if (validity.kind === 'geotiff-rgb-bands') return prepareRgbBandObservation(path, entry, validity, width, height);
+   if (validity.kind === 'fits-byte-monochrome') return prepareFitsObservation(path, entry, validity, width, height);
+   if (validity.kind === 'pds3-byte-monochrome') return preparePdsByteMosaic(sourceDirectory, [entry], width, height, validity);
+   if (validity.kind === 'isis3-float-monochrome') return prepareIsisObservation(path, entry, validity, width, height);

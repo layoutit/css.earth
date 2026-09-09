@@ -41,7 +41,7 @@
         "format": "geotiff",
         "path": "observations/rhea_radius_g.tif",
         "description": "Cassini terrain model · shaded relief",
-        "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing and 2.15–4.3 km typical estimated height uncertainty. Gray grid marks uncovered raster edges. The globe remains spherical.",
+        "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
         "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
         "minimum": -10,
         "maximum": 10,
@@ -90,9 +90,59 @@
           ],
           "ambient": 0.25
         }
+      },
+      {
+        "id": "relative-albedo",
+        "label": "Relative albedo",
+        "format": "geotiff",
+        "path": "science/b2-intake/rhea_albedo_g.tif",
+        "description": "Cassini SPC relative albedo · dimensionless",
+        "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
+        "minimum": 0.5,
+        "maximum": 1.5,
+        "colors": [
+          "#403362",
+          "#aba0be",
+          "#f4f1e8",
+          "#c0a257",
+          "#755013"
+        ],
+        "labels": [
+          "0.5",
+          "1",
+          "≥ 1.5"
+        ],
+        "units": "relative to mean ≈ 1",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 2222,
+          "height": 1111,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 763500,
+          "noData": -3.4028226550889045e+38,
+          "specialValueMagnitude": 1e+30,
+          "origin": [
+            -2398605.9910158,
+            1199302.9955079
+          ],
+          "resolution": [
+            2153.874190046,
+            -2153.874190046
+          ]
+        },
+        "displaySampling": "nearest"
       }
     ],
-    "observedColors": []
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -113,7 +163,26 @@
       "defaultControlYawDegrees": 0
     },
     "mapUrl": "/scenes/rhea/rhea-normal-surface@2x.webp",
-    "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp"
+    "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "science/b2-intake/rhea_128_o.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 98306,
+        "expectedFaces": 196608
+      },
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 2000,
+        "maximumErrorMeters": 7635,
+        "regularize": false
+      }
+    }
   },
   "celestial": {
     "sunSource": "JPL Rhea orbit plus VSOP87 Saturn position and IAU/WGCCRE Rhea rotation"

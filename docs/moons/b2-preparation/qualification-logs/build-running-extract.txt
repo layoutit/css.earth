@@ -1,0 +1,21 @@
+
+> cssearth@0.1.0 prebuild /Users/ekrof/fed/cssEarth-pluto-small-moons
+> pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:object-json && pnpm prepare:minimap
+
+[intermediate compiler output omitted]
+
+ generating static routes 
+00:28:13   ├─ /achilles/index.html (+338ms) 
+00:28:14   ├─ /adrastea/index.html (+286ms) 
+00:28:14   ├─ /aegaeon/index.html (+87ms) 
+00:28:14   ├─ /albiorix/index.html (+84ms) 
+00:28:14   ├─ /alphonsina/index.html (+96ms) 
+00:28:14   ├─ /amalthea/index.html (+87ms) 
+00:28:14   ├─ /amphitrite/index.html (+87ms) 
+00:28:14   ├─ /angelina/index.html (+96ms) 
+00:28:14   ├─ /anthe/index.html (+83ms) 
+00:28:15   ├─ /apophis/index.html (+89ms) 
+00:28:15   ├─ /ariel/index.html (+87ms) 
+00:28:15   ├─ /asteroid-1950-da/index.html (+103ms) 
+00:28:15   ├─ /asteroid-1992-sk/index.html (+82ms) 
+00:28:15   ├─ /asteroid-1994-cc/index.html
