@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1797",
+  "modelId": 1797,
+  "modelVersion": "2017-06-13",
+  "diameterKm": 160,
+  "diameterInterpretation": "Nonconvex model constrained by resolved imaging, 160 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 160,
+    "uncertaintyKm": 3,
+    "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1797",
+    "reference": "DAMIT model 1797, version 2017-06-13",
+    "sourceLabel": "DAMIT model 1797",
+    "scaleKmPerSourceUnit": 0.9977404965451073,
+    "metersPerSourceUnit": 997.7404965451074,
+    "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. This scene contains the primary only; Minerva’s small satellites are not part of this shape table.",
+    "visibleDescription": "Nonconvex model constrained by resolved imaging, 160 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 5.981768,
+  "poleEclipticJ2000Degrees": [
+    19,
+    21
+  ],
+  "modelLimitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. This scene contains the primary only; Minerva’s small satellites are not part of this shape table.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/2822/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 997.7404965451074,
+    "firstVertexKm": [
+      -10.303840712408219,
+      -1.502506393411746,
+      56.987104841409305
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      181.23497159113464,
+      176.2367905736919,
+      126.8607086547173
+    ],
+    "volumeCubicKm": 2144660.5848506335,
+    "volumeEquivalentRadiusKm": 80,
+    "radialRangeKm": [
+      57.92684748573209,
+      98.61645889037878
+    ]
+  },
+  "elevation": [
+    -30,
+    30
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1600,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 2144660584850634.5
+    }
+  }
+}

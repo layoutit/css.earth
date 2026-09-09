@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16306",
+  "modelId": 16306,
+  "modelVersion": "2024-10-11",
+  "diameterKm": 89,
+  "diameterInterpretation": "Convex light-curve reconstruction, 89 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 89,
+    "uncertaintyKm": 7,
+    "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16306",
+    "reference": "DAMIT model 16306, version 2024-10-11",
+    "sourceLabel": "DAMIT model 16306",
+    "scaleKmPerSourceUnit": 0.9999999947085977,
+    "metersPerSourceUnit": 999.9999947085977,
+    "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The 2024 archive update includes four occultation comparisons but has no linked publication; it is attributed to the archive, not an invented paper.",
+    "visibleDescription": "Convex light-curve reconstruction, 89 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 9.447662,
+  "poleEclipticJ2000Degrees": [
+    102,
+    47
+  ],
+  "modelLimitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The 2024 archive update includes four occultation comparisons but has no linked publication; it is attributed to the archive, not an invented paper.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/129497/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 999.9999947085977,
+    "firstVertexKm": [
+      19.389569897401984,
+      -7.700914959251361,
+      42.5737607747251
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      103.5007094523361,
+      97.57976948366617,
+      81.5043295687278
+    ],
+    "volumeCubicKm": 369120.90523475746,
+    "volumeEquivalentRadiusKm": 44.5,
+    "radialRangeKm": [
+      37.1283706136088,
+      59.539089939781434
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 890,
+    "estimatedErrorMeters": 403.2115783691406,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 368332346331615.1
+    }
+  }
+}

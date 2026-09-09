@@ -43,6 +43,10 @@ jobs:
         run: node --test site/test/scene-sources.test.mjs
       - name: Test prepared minimap point ownership, range and coverage
         run: node --test site/test/minimap-point-range.test.mjs site/test/minimap-point-coverage.test.mjs
+      - name: Restore pinned JSON transports for shell tests
+        run: |
+          node --test tools/restore-object-json.test.mjs
+          node tools/restore-object-json.mjs
       - name: Test shared shell and search ownership
         run: >-
           node --test site/test/shell-lifetime.test.mjs

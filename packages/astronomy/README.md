@@ -392,3 +392,14 @@ Its JPL primary osculating conic has ±30-day vector residuals of 7,244.47 / 0 /
 6,180.29 km and an 8,332 km regression guard. This local conic is not a long-term
 binary ephemeris. Regenerate it with `node tools/generate-asteroids.mjs
 --object=patroclus`; selected generation preserves other checked records.
+
+The 41 additional main-belt models (Thetis through Ianthe) use the same
+2026-09-03 fixed-epoch JPL conics. Independent ICRF vectors agree within
+0.00000214 km at the queried epoch. That is numerical agreement, not physical
+accuracy at the displayed TT instant: the existing preparation approximates
+TDB as TT (under 2 ms). At the two retained ±30-day endpoints the largest
+residual is 2789.65 km; per-body regression guards are the observed maximum
+plus 15%, rounded upward in kilometres (largest 3209 km). These measurements
+do not bound intervening dates or establish a long-term perturbation theory.
+The new bodies' physical radii are source-owned volume reference radii; the
+thermal sphere-to-volume approximations are disclosed beside each model.

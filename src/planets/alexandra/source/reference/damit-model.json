@@ -1,0 +1,200 @@
+{
+  "number": 54,
+  "name": "Alexandra",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/126",
+  "modelId": 1817,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1817",
+  "catalog": "View model 154 17 7.02264 AO.png | occ.png | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1817",
+    "Asteroid": "(54) Alexandra",
+    "λ": "154",
+    "β": "17",
+    "P": "7.02264",
+    "YORP": "",
+    "t0": "2438949",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "143",
+    "σD": "5",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-07",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:39",
+    "Modified": "2017-06-19 13:14:05",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.png": "https://damit.cuni.cz/projects/damit/stored_files/open/280/AO.png",
+    "occ.png": "https://damit.cuni.cz/projects/damit/stored_files/open/281/occ.png",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/282/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/283/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/284/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2017)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/169",
+      "file": "reference-169.html",
+      "links": [
+        {
+          "label": "2017a&a...601a.114h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2017a&a...601a.114h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2017A%26A...601A.114H",
+          "url": "http://adsabs.harvard.edu/abs/2017A%26A...601A.114H\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1702.01996",
+          "url": "https://arxiv.org/abs/1702.01996"
+        }
+      ]
+    }
+  ],
+  "id": "alexandra",
+  "displayName": "Alexandra",
+  "lambda": 154.0,
+  "beta": 17.0,
+  "periodHours": 7.02264,
+  "version": "2017-06-07",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 143.0,
+  "uncertaintyKm": 5.0,
+  "akari": {
+    "number": 54,
+    "name": "Alexandra",
+    "diameterKm": 144.46,
+    "uncertaintyKm": 1.8,
+    "detections": 8,
+    "originalRow": "54     Alexandra                      7.66  0.15  8  144.46  1.80 0.074 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/284/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/282/IAUspin.txt",
+  "shapeSha256": "aac6326c6087972265e999ec6778be6f932abf27a7643fc745dc055b3b79c643",
+  "shapeBytes": 32486,
+  "vertices": 402,
+  "faces": 800,
+  "signedVolume": 1535802.1750024606,
+  "independentSignedVolume": 1535802.1750024606,
+  "originalVolumeEquivalentDiameter": 143.1458907390375,
+  "firstVertex": [
+    -6.967972,
+    12.969707,
+    63.507757
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    55.01233812597027,
+    95.8335844703916
+  ],
+  "extentsSourceUnits": [
+    [
+      -71.437872,
+      77.770128
+    ],
+    [
+      -91.085293,
+      91.924707
+    ],
+    [
+      -60.263843,
+      67.040157
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9989808248194602,
+  "alternatives": [
+    {
+      "modelId": 136,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/136",
+      "pole": [
+        "156",
+        "13"
+      ],
+      "version": "2011-03-28"
+    }
+  ],
+  "distanceAu": 2.7095146915447392,
+  "orbitalPeriodYears": 4.460108949079091,
+  "sourceFields": {
+    "ID": "1817",
+    "Asteroid": "(54) Alexandra",
+    "λ": "154",
+    "β": "17",
+    "P": "7.02264",
+    "YORP": "",
+    "t0": "2438949",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "143",
+    "σD": "5",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-07",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:39",
+    "Modified": "2017-06-19 13:14:05",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

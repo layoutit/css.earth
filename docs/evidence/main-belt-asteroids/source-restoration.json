@@ -1,0 +1,1236 @@
+{
+  "root": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko",
+  "distinctNetworkDownloads": 43,
+  "reports": [
+    {
+      "id": "thetis",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 23,
+        "verifiedCount": 27
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/thetis",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-116.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "4ab3bb84cf020ea326fe445362fbb7105effa1754ce56fccccc83f4eb861f8d3"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "thalia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/thalia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1858.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "667be44f59441cbb117e91d5153cc6b6547810348ff58a7dc946a4d1dad4bf21"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "phocaea",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/phocaea",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-697.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "508b7c0d7855f6aa60a8aa63d9ed3f2f7226718ca88d3eb72b0427228b69804e"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "euterpe",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/euterpe",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-441.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "0805b6f32ecb1e5e05c9c5a2f79c4cfa521a2370860b4930a728613d2e9bbc9a"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "bellona",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/bellona",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1839.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "ff1d83697f66dfc11511783c70c93f8cc5c44e88373e91d68b5103f19bfa5644"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "pomona",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 21,
+        "verifiedCount": 25
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/pomona",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-16306.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "348c1281cc6d9a359f9dfa7efa783ca0500239edfa49473380627394b9fcfb4e"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "circe",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 24,
+        "verifiedCount": 28
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/circe",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-129.txt",
+          "expectedBytes": 72825,
+          "expectedSha256": "8f88f8efb84bd02178b61f335fd11196ed53786ddc60ec281bd834b9a3f1152f"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "atalante",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/atalante",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-823.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "8e623150e9c87568b82037ea5fae18d26f649948b9f7bb1a765c54d0c56abe03"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "leda-38",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/leda-38",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-720.txt",
+          "expectedBytes": 82627,
+          "expectedSha256": "109763528dc5541c8d5ee603522994a0c754eb2f8220a8b3fcef950ccd5f9f4c"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "laetitia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/laetitia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1835.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "399e10e28457f6fe4aa93cb322ddd5d262681eeb9638ac092e55bbf138b5f747"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "isis",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/isis",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1841.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "69468466831b229d880e8d0f58a4046ae973653da5d1155733fbbf8185ac9611"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "ariadne",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/ariadne",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1825.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "c51298a00d557411c88c4d49eafcb6afc80fd1906891e9eb6c23829820f0c76f"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "hestia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/hestia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-4383.txt",
+          "expectedBytes": 82546,
+          "expectedSha256": "3c9b6ec13ef63607aaa3b4b2419bcf7b94232652d260b9b4f1a8e0eb5b49350a"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "aglaja",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/aglaja",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-3233.txt",
+          "expectedBytes": 46419,
+          "expectedSha256": "5d85d9ffc8185618d1fb1a32c0b452dc7d5f1efcfc0008f25dd00f2a54d738e5"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "pales",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/pales",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-16309.txt",
+          "expectedBytes": 82627,
+          "expectedSha256": "eb435f1eed2b7bdab2a018e10e761e55375947842b4627375cab9e9380a55e78"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "kalypso",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/kalypso",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1732.txt",
+          "expectedBytes": 82060,
+          "expectedSha256": "c93cad2380849e859383f912f5f1ef6042c6be167151571b7dc9a27f261165b6"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "alexandra",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/alexandra",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1817.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "aac6326c6087972265e999ec6778be6f932abf27a7643fc745dc055b3b79c643"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "pandora-55",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 23,
+        "verifiedCount": 27
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/pandora-55",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-139.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "2f8825e7125544f7cbcf50fa479dc601268d3add0960b3acb46f0696c90eabb4"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "melete",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/melete",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1851.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "45131587f308d1c0ec3565e7bd74c6bb7b0875bca028d847bc2a57c8a338648e"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "elpis",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/elpis",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-6156.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "6a4303f1791e988fba36d8524815aa00799d0268b7f81d4d263da431f15b331f"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "erato",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/erato",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-317.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "c4ea27f6c40f983f44fd05f49f21a60e1d4a90a303a795361f109d13cf8c7bfb"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "ausonia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/ausonia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-5924.txt",
+          "expectedBytes": 46743,
+          "expectedSha256": "aa9daa8b781ee63a11e7a9efe3519ced4c1582ba90c9be3fd366ebaa6e177e76"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "asia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/asia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-5668.txt",
+          "expectedBytes": 46419,
+          "expectedSha256": "784a802ce9b6fe162194a958f5f66d20f06b591d3b50733fc93aa4e7bc50a453"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "leto",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 24,
+        "verifiedCount": 28
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/leto",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-290.txt",
+          "expectedBytes": 82222,
+          "expectedSha256": "22c388028d5da32840503e4aaa9a0985447afaf34909ca834b26e941a313f019"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "hesperia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 23,
+        "verifiedCount": 27
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/hesperia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-319.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "cbe8efe6448bf2e9ba29a52ca5f60b47f50d301f8f77c9610cf3d8ea63cf01c9"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "niobe",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/niobe",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1014.txt",
+          "expectedBytes": 82384,
+          "expectedSha256": "8b8480da8e3b48bf4e1a93f8e3ae2de0a69315a13dc947a105fe05a0c169338d"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "feronia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/feronia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1853.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "d8096c0152a3739961254f1d3b305b3c6da0ad42d80ce7fc073cb63702a40bcc"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "klytia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 24,
+        "verifiedCount": 28
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/klytia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-142.txt",
+          "expectedBytes": 81574,
+          "expectedSha256": "32e8a509863ce93032e7d97e906d1b7413d1c5db35b9229bee8953d0a8af54f7"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "galatea-74",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/galatea-74",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-6181.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "6ddcee1db0ceec15c3dfae6c178336914650b00826fba507d8cd6dd3dab41087"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "freia",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/freia",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-442.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "3762ea95ed2846b90e9df6c81300e467a7419b09236b6de8d9bf60209eeea848"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "eurynome",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/eurynome",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-496.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "36b740ae2cab2874d468ab7340d77f5783abe3782285b88fe453547f82205661"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "alkmene",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 24,
+        "verifiedCount": 28
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/alkmene",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-146.txt",
+          "expectedBytes": 82546,
+          "expectedSha256": "b1248125111cb430f90a711830816a8132f7fed1682bbebab7e10ee127af24d5"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "beatrix",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/beatrix",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-6195.txt",
+          "expectedBytes": 82546,
+          "expectedSha256": "b6849947b8a92ca5438a2e91740256fc20bef247cdadb94b6ad8bdda723e4d4a"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "klio",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/klio",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-5792.txt",
+          "expectedBytes": 46095,
+          "expectedSha256": "470fb94f84bd323b2b698252ff223a2bf7cd2cd4b30c7c996141135c18ec8cfb"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "io-85",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/io-85",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1822.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "e36362e161a587298ba736fb964698d4ae4c01a846ce7cfb79c493eff6ddcc0f"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "semele",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/semele",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-5799.txt",
+          "expectedBytes": 46419,
+          "expectedSha256": "1f263e11028e2a01358e54a68391c8cc9ccd70f4d4e7eae4fbcf09489d26c765"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "aegina",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/aegina",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-5831.txt",
+          "expectedBytes": 46095,
+          "expectedSha256": "8f40507e4c1c4fcf4858c89d9490e22ed2cbbea81363305f993f8f5a9cf7a5de"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "minerva",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 23,
+        "verifiedCount": 27
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/minerva",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1797.txt",
+          "expectedBytes": 32486,
+          "expectedSha256": "e8db727155bfaf5ccc6d996a603ed712b472a2585f75fc3c5ea9472039bbe434"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "arethusa",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/arethusa",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-294.txt",
+          "expectedBytes": 82546,
+          "expectedSha256": "d0e611cbfa92edf2dc21d0d4efae8ce2b4efb7460e63d038e63f61e115b11429"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "klotho",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 23,
+        "verifiedCount": 27
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/klotho",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-321.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "11db1e440c1fdbe9f28f96d0750381d4238645ba651903e586b56fb08c1c7ccd"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    },
+    {
+      "id": "ianthe",
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 26
+      },
+      "restored": {
+        "operationCount": 3
+      },
+      "sourceRoot": "/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-main-belt-sources-SUsRko/ianthe",
+      "inputs": [
+        {
+          "path": "stars/eso0932a.tif",
+          "expectedBytes": 29082084,
+          "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+        },
+        {
+          "path": "shape/model-1088.txt",
+          "expectedBytes": 82708,
+          "expectedSha256": "0b7c71c3ad49bdc31f45d662a68f4f4a29a637c6399b280eeb74a8eee9377d94"
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "expectedBytes": 862936,
+          "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+        }
+      ]
+    }
+  ]
+}

@@ -69,3 +69,7 @@ src/planets/*/source/**/*.bpc
 
 # Published SHAP5 reference mesh, restored from its pinned archive.
 /src/planets/comet-67p/source/science/*.wrl
+
+# Pinned thermophysical paper originals are restored through the body acquisition plans.
+/src/planets/klytia/source/reference/hanus-2018.pdf
+/src/planets/alkmene/source/reference/hanus-2018.pdf

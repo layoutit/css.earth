@@ -137,6 +137,13 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
         assert.deepEqual(result.orbitCenters[id], { centerBodyId: 'sun', positionM: positionKm.map(value => value * 1000) });
       }
     }
+    const patroclus = result.bodies.find((body: { id: string }) => body.id === 'patroclus');
+    assert.ok(patroclus, 'an explicitly authored primary remains a visible body');
+    const menoetius = result.bodies.find((body: { id: string }) => body.id === 'menoetius');
+    assert.ok(menoetius, 'the authored satellite remains a visible body');
+    assert.equal(menoetius.orbit.centerBodyId, patroclus.id);
+    assert.deepEqual(menoetius.orbit.centerPositionM, patroclus.positionM);
+    assert.equal(result.orbitCenters?.patroclus, undefined, 'a visible primary does not need a hidden coordinate entry');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

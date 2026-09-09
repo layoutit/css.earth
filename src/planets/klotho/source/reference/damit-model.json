@@ -1,0 +1,205 @@
+{
+  "number": 97,
+  "name": "Klotho",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/237",
+  "modelId": 321,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/321",
+  "catalog": "View model 359 30 35.251 AO.eps | 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "321",
+    "Asteroid": "(97) Klotho",
+    "λ": "359",
+    "β": "30",
+    "P": "35.251",
+    "YORP": "",
+    "t0": "2433224",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.56",
+    "p3": "0.06",
+    "p4": "-0.93",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "85",
+    "σD": "9",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2013-07-24 14:24:21",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.eps": "https://damit.cuni.cz/projects/damit/stored_files/open/1177/AO.eps",
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1178/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1179/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1180/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1181/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/141",
+      "file": "reference-141.html",
+      "links": [
+        {
+          "label": "2011a&a...530a.134h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011a&a...530a.134h"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4114",
+          "url": "http://arxiv.org/abs/1104.4114\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H",
+          "url": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H"
+        }
+      ]
+    },
+    {
+      "label": "Hanuš et al. (2013)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/149",
+      "file": "reference-149.html",
+      "links": [
+        {
+          "label": "2013icar..226.1045h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2013icar..226.1045h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2013Icar..226.1045H",
+          "url": "http://adsabs.harvard.edu/abs/2013Icar..226.1045H"
+        }
+      ]
+    }
+  ],
+  "id": "klotho",
+  "displayName": "Klotho",
+  "lambda": 359.0,
+  "beta": 30.0,
+  "periodHours": 35.251,
+  "version": "2011-04-21",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 85.0,
+  "uncertaintyKm": 9.0,
+  "akari": {
+    "number": 97,
+    "name": "Klotho",
+    "diameterKm": 87.84,
+    "uncertaintyKm": 0.97,
+    "detections": 9,
+    "originalRow": "97     Klotho                         7.63  0.15  9   87.84  0.97 0.204 0.006"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1181/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1179/IAUspin.txt",
+  "shapeSha256": "11db1e440c1fdbe9f28f96d0750381d4238645ba651903e586b56fb08c1c7ccd",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 321555.1345665133,
+  "independentSignedVolume": 321555.1345665133,
+  "originalVolumeEquivalentDiameter": 85.00000321633583,
+  "firstVertex": [
+    2.699555,
+    4.363997,
+    42.891431
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    35.8354495301882,
+    57.65523662335021
+  ],
+  "extentsSourceUnits": [
+    [
+      -55.909499,
+      57.174667
+    ],
+    [
+      -51.641484,
+      44.902121
+    ],
+    [
+      -40.236476,
+      42.998237
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9999999621607564,
+  "alternatives": [],
+  "distanceAu": 2.6688807426668064,
+  "orbitalPeriodYears": 4.360155260547301,
+  "sourceFields": {
+    "ID": "321",
+    "Asteroid": "(97) Klotho",
+    "λ": "359",
+    "β": "30",
+    "P": "35.251",
+    "YORP": "",
+    "t0": "2433224",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.56",
+    "p3": "0.06",
+    "p4": "-0.93",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "85",
+    "σD": "9",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2013-07-24 14:24:21",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}
