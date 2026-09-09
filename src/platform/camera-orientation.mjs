@@ -112,6 +112,12 @@ export function createCubicSkyCameraOrientation({
     prepareFlight(target) {
       const from = [sceneMatrix, skyboxMatrix, sunViewMatrix];
       reset(target);
+      if (target.controlRoll) {
+        const roll = new DOMMatrix().rotateAxisAngle(0, 0, 1, target.controlRoll);
+        sceneMatrix = roll.multiply(sceneMatrix);
+        skyboxMatrix = roll.multiply(skyboxMatrix);
+        sunViewMatrix = roll.multiply(sunViewMatrix);
+      }
       const to = [sceneMatrix, skyboxMatrix, sunViewMatrix];
       [sceneMatrix, skyboxMatrix, sunViewMatrix] = from;
       invalidatePresentations();

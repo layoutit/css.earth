@@ -170,6 +170,50 @@
         "summary": "NASA Black Marble's 2016 night-light composite. It combines dates and does not show current lighting."
       },
       {
+        "id": "enso",
+        "label": "ENSO",
+        "detail": "7 Sept 2026",
+        "title": "ENSO: sea-surface temperature anomalies · 7 Sept 2026",
+        "description": "NASA MUR · 1 km source imagery · 7 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery.",
+        "thumbnail": "/scenes/earth/earth-lens-enso.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "13 August 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-09-09"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state."
+      },
+      {
         "id": "cross-section",
         "label": "Cross section",
         "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
@@ -302,6 +346,12 @@
       "role": "stars",
       "description": "Background star field",
       "href": "https://github.com/astronexus/HYG-Database"
+    },
+    {
+      "label": "NOAA",
+      "role": "climate",
+      "description": "ENSO advisory",
+      "href": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
     }
   ],
   "galleries": [],
