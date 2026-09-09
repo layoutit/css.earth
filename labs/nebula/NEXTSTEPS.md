@@ -24,6 +24,8 @@ This is proposed research, not an implemented feature or an instruction to launc
 
 ## Separate follow-ups
 
+- **LMC registration and sky handoff (first):** [the scale audit](docs/lmc-scale-audit.md) identifies the inherited 2.8 kpc simulation offset, orientation differences, unmatched display brightness and panorama depth. Projection math passes. Register against observations before changing physical size.
+
 - **Slice stability:** address sampling/compositing at its owning layer. Keep measured handoff thresholds fixed; global dimming or per-image color tuning must not disguise geometry artifacts.
 - **Tarantula detail:** use a registered local high-resolution observation and investigate a connected depth model. Preserve LMC-scale context; avoid replicating the same knot across every depth slice.
 - **Orion/irregular dust:** check independent distance/extinction and spectral constraints first. Symmetry-based planetary-nebula assumptions are not automatically appropriate.
