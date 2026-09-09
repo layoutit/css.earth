@@ -67,6 +67,6 @@ followed by `node tools/objects/dist/prepare-authored.js sun --write` after
 building the shared preparation tools. A fresh reproduction check needs an
 isolated destination and comparison against the pinned outputs; simply running
 preparation in a populated checkout does not prove it. The former private Sun
-verification script is no longer an executable owner. Dated checks and open
-qualification claims are indexed in [README.md](README.md). Runtime performs no source derivation, image processing,
+verification script no longer exists. Test results and remaining problems are
+linked in the [evidence report](../../../docs/objects/sun/EVIDENCE.md). Runtime performs no source derivation, image processing,
 geometry construction, canvas, SVG scene rendering, or WebGL work.

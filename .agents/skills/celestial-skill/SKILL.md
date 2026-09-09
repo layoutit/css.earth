@@ -5,13 +5,12 @@ description: "Create, repair, and qualify source-backed celestial body packages 
 
 # Celestial Skill
 
-This repository owns the maintained skill. Read the selected checkout's
+Maintain this skill in the repository. Read the selected checkout's
 [provenance and documentation contract](../../../docs/provenance/CONTRACT.md)
 and the target body's `README.md`, `SOURCE.md`, `NOTICE.md` and manifests.
-The contract owns documentation locations, evidence identity and reuse rules;
-this skill owns the scientific preparation workflow. Extend the repository
-copy through the same PR as a changed shared capability. Machine installations
-are copies or entry points, not a separate source of policy.
+The contract explains where docs go and what evidence to save. This skill
+explains how to prepare and check a body. Update it in the same PR when shared
+preparation changes. Installed copies should follow this version.
 
 Build a body whose appearance is supported by its sources and whose behavior
 comes from cssEarth's shared application. Follow this workflow for a new body;
@@ -149,9 +148,10 @@ Reuse passing evidence until changes or unresolved failures invalidate it.
 Keep project-required checks; do not add a new dashboard, gate framework,
 Burnlist or exhaustive test matrix to implement an ordinary body.
 
-Update the body README evidence links and the affected source/notice sections
-in the same change. Promote cited working captures into portable evidence under
-the repository contract; a local output path alone is not delivered evidence.
+Update the affected source notes, credits and test reports in the same change.
+Keep body READMEs to a brief introduction and links. Put results and open work
+in the linked reports. Save screenshots you cite in Git or agreed storage and
+link them; a local output path alone cannot be reviewed by someone else.
 
 Finish with the working location/URL, supported views, checked outcomes and
 remaining limitations, including useful unresolved dataset candidates. A working

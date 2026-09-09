@@ -1,9 +1,9 @@
 # cssEarth implementation map
 
-Paths are relative to the selected repository. Documentation ownership refreshed against main
-`2f6f8614add9a5a22ef03b86a47edef631950ade` on 2026-09-09.
-Individual capability examples retain their original revision bounds below.
-Use the current checkout's owners when they differ from this snapshot.
+Paths are relative to the selected repository. The documentation links were
+checked against main `2f6f8614add9a5a22ef03b86a47edef631950ade` on 2026-09-09.
+Code examples below name the revisions where they were checked. Inspect the
+current checkout before using them.
 
 ## Start from authored data
 
@@ -16,7 +16,7 @@ or shell for each new body.
 ```text
 src/planets/<id>/
   object.json                         authored recipe and prepared reference
-  README.md                           entry point and scoped evidence links
+  README.md                           brief introduction and document links
   SOURCE.md, NOTICE.md                 interpretation and credits
   source/manifest.json                 exact source closure
   source/preparation/*.json            acquisition and capability inputs
@@ -31,9 +31,9 @@ tests/objects/unit/<id>/               focused body tests
 tests/objects/browser/<id>/browser-profile.mjs
 ```
 
-The [documentation contract](../../../../docs/provenance/CONTRACT.md) owns
-evidence storage and body documentation. `source/` remains a fully pinned
-closure; keep run logs and browser captures outside it.
+The [documentation contract](../../../../docs/provenance/CONTRACT.md) explains
+where body docs and evidence go. Every file under `source/` needs a manifest
+entry. Keep test logs and browser screenshots outside it.
 
 Use `tools/object-package-contract.mjs` for actual required files. Its authored
 branch is selected through `tools/authored-object.mjs`; the legacy branch still

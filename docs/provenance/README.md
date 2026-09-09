@@ -1,36 +1,16 @@
 # Provenance and documentation
 
-Owner: **PROVENANCE DOCUMENTATION** (assigned by the project maintainer, 2026-09-09).
+The maintainer assigned **PROVENANCE DOCUMENTATION** on 2026-09-09 to keep shared
+instructions clear, fix contradictions and make results traceable to their sources.
+Body contributors update the source notes and evidence for their changes.
 
-This owner maintains the documentation contract, checks that claims lead to
-reviewable evidence, and resolves duplicate or stale documentation ownership.
-Body contributors remain responsible for their scientific interpretation and
-the evidence produced by their changes. This role does not grant publication
-or merge authority, or certify every body's scientific accuracy.
+The [contract](CONTRACT.md), proposed in PR #83, uses the existing manifests,
+[prepared provenance](../object-provenance.md) and test reports.
 
-## Proposal for review
+- [Documentation examples](TEMPLATES.md): a short README, source update and test note.
+- [Audit](audits/2026-09-09/AUDIT.md) and [inventory](audits/2026-09-09/inventory.json): what was in GitHub main and the local checkout at the recorded revisions.
+- [Adversarial review](audits/2026-09-09/ADVERSARIAL-REVIEW.md): what two reviewers challenged and what changed.
 
-The [contract](CONTRACT.md) is **proposed v1**, not an adopted repository gate.
-It builds on the existing source manifests and
-[compiled lineage contract](../object-provenance.md). It introduces pilot body entry
-points and proposes one portable evidence-run format, without changing the renderer,
-registry, source schema, or prepared provenance schema.
-
-- [Audit and findings](audits/2026-09-09/AUDIT.md): GitHub main, local HEAD and
-  the captured index, with exact snapshot boundaries.
-- [Measured inventory](audits/2026-09-09/inventory.json): file counts, logical
-  Git blob sizes, source metadata and documentation organization.
-- [Contributor templates](TEMPLATES.md): body README, source sections and a
-  proposed evidence receipt. These examples are not qualification evidence.
-
-## How agents would use this
-
-Read the repository contract, this contract, and the target body's `README.md`,
-`SOURCE.md`, `NOTICE.md` and manifests. Follow the README to current evidence and
-open limitations. Update the affected source explanation and evidence pointers
-in the same change. Reuse existing source IDs, product IDs and check runners.
-Add a shared-contract rule only when a demonstrated new capability requires it.
-
-This PR corrects onboarding, commits the celestial skill and adds four body
-entry-point pilots. Remaining adoption work is described in the contract. Historical evidence remains at its existing paths while it is
-indexed. This proposal creates no publication job or recurring automation.
+This PR corrects contributor instructions, commits the celestial skill and adds
+four examples: Earth, Sun, Rhea and 67P. It does not finish the other bodies' docs
+or rerun their tests. Existing evidence stays at its current paths.

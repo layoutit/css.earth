@@ -8,14 +8,14 @@ Navigation selects one active scene; it does not embed child scenes.
 Read [AGENTS.md](../../AGENTS.md), the
 [provenance and documentation contract](../../docs/provenance/CONTRACT.md) and
 [celestial skill](../../.agents/skills/celestial-skill/SKILL.md) before body work.
-The skill contains source-selection and preparation guidance; the contract owns
-source documentation, credits, evidence storage and qualification claims.
+The skill explains source selection and preparation. The contract explains
+source notes, credits, test reports and where to save them.
 
 ## Package layout
 
 ```text
 src/planets/<id>/
-  README.md                    entry point, evidence links and open limitations
+  README.md                    brief introduction, route and document links
   SOURCE.md                    source decisions and scientific interpretation
   NOTICE.md, LICENSE*          attribution and applicable terms
   object.json                  authored recipe and prepared transport reference
@@ -40,16 +40,16 @@ the shared renderer and shell. Do not copy private `runtime/`, `site/` or
 `tools/` directories from old documentation or historical packages.
 
 Scientific inputs determine geometry, appearance, supported views and physical
-facts. Existing bodies illustrate capabilities, not universal source parameters.
-A new recipe operation needs a real shared implementation, provenance binding
-and behavioral tests. Keep source interpretation and static processing out of
+facts. Reuse existing preparation code with the new body's own source parameters.
+A new recipe operation needs shared code, records of its inputs and outputs,
+and tests of its behavior. Keep source interpretation and static processing out of
 runtime. Preserve pinned original bytes and reproducible preparation.
 
 ## Sources and delivery
 
 The source manifest owns exact input IDs, sizes, hashes, credits and terms.
 Necessary source files must be checked in or restored by the existing acquisition
-recipe. The source closure also accounts for documents and generated intermediates.
+recipe. The manifest also lists documents and generated intermediate files.
 Every new source note inside `source/` needs its own manifest entry.
 
 `prepared/provenance.json` is generated product lineage; see its
@@ -81,11 +81,11 @@ pass. Tests requiring sources/assets need those dependencies installed.
 ## Update documentation with the change
 
 Use the [body/source/evidence templates](../../docs/provenance/TEMPLATES.md).
-Keep a short body README linking source interpretation, attribution, generated
-lineage, delivery inventory and the evidence supporting each scoped claim.
-Historical runs keep their original candidate and limitations. Do not replace
-raw failures with summaries or claim visual acceptance without inspecting images.
-
-The [evidence index](../../docs/evidence/README.md) explains new run locations
-and the incremental treatment of legacy records. No new documentation format
-changes the one-scene, shared-camera or prepared-data runtime contract.
+Keep a short body README linking source interpretation, attribution and a
+dedicated evidence note. Put results, open work and detailed payload references
+in that note; use an existing body/batch report or add an index when several
+reports need connecting.
+Keep earlier test results and their limits. Do not replace original failure
+reports with summaries or claim a visual check without inspecting the images.
+The [evidence index](../../docs/evidence/README.md) explains where new reports go
+and when to update older records.

@@ -1,31 +1,28 @@
 # Documentation map
 
-Start with the [project contract](../AGENTS.md),
-[body contributor guide](../src/planets/README.md),
-[provenance/documentation contract](provenance/CONTRACT.md) and
+Start with [AGENTS.md](../AGENTS.md), the
+[body contributor guide](../src/planets/README.md), the
+[provenance contract](provenance/CONTRACT.md) and the
 [celestial skill](../.agents/skills/celestial-skill/SKILL.md).
 
-| Need | Maintained owner |
+| Looking for | Read |
 | --- | --- |
-| Source choices, interpretation and candidate datasets | Each body's `SOURCE.md` and linked source notes |
-| Credits and reuse terms | Body `NOTICE.md`, license files and source-manifest entries |
-| Exact product lineage and Sources UI | [Prepared object provenance](object-provenance.md) |
-| Evidence organization and current limitations | [Evidence index](evidence/README.md), then the body's README |
-| Extending a preparation capability | [Celestial implementation map](../.agents/skills/celestial-skill/references/implementation-map.md) and actual shared code |
-| Documentation audit and rollout | [Provenance owner](provenance/README.md) |
+| Data choices, meaning and alternatives | The body's `SOURCE.md` and linked notes |
+| Credits and reuse terms | Body `NOTICE.md`, license files and source manifest |
+| How outputs trace back to inputs, including the Sources UI | [Prepared object provenance](object-provenance.md) |
+| Test results, screenshots and known problems | [Evidence](evidence/README.md), then the body or batch report |
+| Code to prepare a new kind of data | [Celestial implementation map](../.agents/skills/celestial-skill/references/implementation-map.md) |
+| Documentation audit and proposal | [Provenance and documentation](provenance/README.md) |
 
-The rest of `docs/` includes subject guides, proposed architectures and historical
-batch/review records. Their date, tested commit and stated scope matter. A file
-called `final`, a merged PR, or an old passing report does not certify today's
-checkout. Preserve original evidence; link and qualify it instead of copying it.
+Reports elsewhere in `docs/` keep their original dates, tested versions and limits.
+A filename containing `final` or an old passing result does not show that today's
+checkout passes. Link the original report rather than copying it.
 
-Body entry-point pilots: [Earth](../src/planets/earth/README.md),
-[Sun](../src/planets/sun/README.md), [Rhea](../src/planets/rhea/README.md),
-[67P](../src/planets/comet-67p/README.md). Other packages migrate as they are
-next touched; absence of a new entry point is documentation debt, not a new
-decision about whether the body can render.
+The first four short body guides are [Earth](../src/planets/earth/README.md),
+[Sun](../src/planets/sun/README.md), [Rhea](../src/planets/rhea/README.md) and
+[67P](../src/planets/comet-67p/README.md). Update other guides as work reaches them.
 
-Validate changed local links with
+Check changed local links with
 `python3 tools/audits/check-documentation-links.py --base <review-base>`.
-The checker works with sparse checkouts and checks repository paths and heading
-anchors; it does not verify external URLs or scientific claims.
+It supports sparse checkouts and checks file paths and heading anchors.
+It does not check external URLs or scientific claims.

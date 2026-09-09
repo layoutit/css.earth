@@ -1,11 +1,10 @@
 # Qualification and delivery
 
-Use the current repository contracts and existing checks. The
-[documentation contract](../../../../docs/provenance/CONTRACT.md) owns portable
-run records, candidate identity, outcome/freshness and evidence reuse. A focused repair
-needs evidence for the defect and affected behavior; a new body also needs its
-package, source and delivery closure. Do not restart completed work merely
-because this reference was opened.
+Use the current repository contracts and existing checks. Follow the
+[documentation contract](../../../../docs/provenance/CONTRACT.md) to identify the
+tested version, save results and explain any reused evidence. For a repair,
+check the defect and affected behavior. For a new body, also check its package,
+required sources and installable assets. Reuse completed checks that still apply.
 
 ## Check what changed
 
@@ -98,11 +97,17 @@ when reporting a scene total, including worker requests. Development traffic
 and calculated gzip/Brotli sizes are not measured production transfer. Keep
 matched framing and workloads when comparing quality or cost.
 
-Link delivered receipts and visual artifacts from the body README. Keep
-`SOURCE.md` focused on interpretation; move dated qualification claims to the
-evidence entry point instead of accumulating contradictory status paragraphs.
-Preserve the compiler distinction between recovered lineage and fresh execution.
+Link test reports and inspected screenshots from the body's evidence note.
+Keep the README short and `SOURCE.md` about the data's meaning and processing.
+Put dated test results in the evidence report. A recovered provenance record
+does not prove the preparation was rerun.
 
 Report concise outcomes and useful visual links, source/processing limitations
 and any outstanding failure. Do not equate skill validation, registry presence,
 cached assets or a unit-test pass with a visually accepted, installable body.
+
+For reproduction, name the expected inventory before running and compare the
+regenerated files against it. An inventory made only from the new output does
+not prove reproduction of the old result. Link existing manifests. Keep old
+reports tied to their tested versions; explain any reuse for a new version in
+the maintained evidence note.

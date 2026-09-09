@@ -1,263 +1,143 @@
-# Celestial provenance, evidence and documentation contract
+# Celestial provenance and documentation contract
 
-Status: **PROPOSED v1 — 2026-09-09**. Owner: **PROVENANCE DOCUMENTATION**.
-The PR proposes adoption for new or changed work when merged; legacy packages
-migrate incrementally, with the four entry-point pilots included here.
+Proposed in PR #83. Maintained by **PROVENANCE DOCUMENTATION**.
 
-This document specifies the proposed contributor contract. “Must” describes
-behavior after adoption; it does not claim that existing packages comply today.
-See the [audit](audits/2026-09-09/AUDIT.md) and [templates](TEMPLATES.md).
+For every detailed body in `OBJECTS`, a contributor should be able to answer:
+**Where did this come from? What does it mean? What did we do to it? What did we check?**
 
-## 1. One traceable chain
+Use the existing [source and prepared records](../object-provenance.md).
+Follow [AGENTS.md](../../AGENTS.md) for application rules and the
+[celestial skill](../../.agents/skills/celestial-skill/SKILL.md) for preparation.
 
-For every delivered view or scientific claim, a contributor must be able to
-follow the chain from original authority to the interpretation, preparation,
-delivered bytes and the evidence supporting the stated result.
+## Where things go
 
-```mermaid
-flowchart LR
-  A[Authority and exact inputs] --> B[Source manifest and interpretation]
-  B --> C[Authored recipe and shared preparer]
-  C --> D[Prepared products and lineage]
-  D --> E[Installed and served bytes]
-  E --> F[Scoped checks and visual review]
-  F --> G[Body README points to current evidence]
-```
-
-This applies to the Sun, planets, moons, dwarf planets, asteroids, comets and
-future detailed bodies in `OBJECTS`. Classification does not create another
-registry or documentation contract. Catalog-only entries use their catalog's
-source owner until they acquire an object package. Shared astronomy, sky,
-spacecraft artwork and catalog facts retain their existing owners and are
-linked as dependencies rather than copied into every body.
-
-The application contract remains unchanged: one shared shell, camera, generic
-adapter and active retained scene; body data owns scientific interpretation;
-preparation owns static work. Documentation must describe the actual authored
-package and shared preparer. It must not scaffold a private runtime or shell.
-Saturn remains the accepted visual-quality reference under `AGENTS.md`; each
-body's scientific facts, shape and appearance come from that body's sources.
-
-## 2. Give each fact one owner
-
-| Location | Owns | Must not become |
-| --- | --- | --- |
-| `src/planets/<id>/README.md` | Small entry point: capabilities, links, current evidence and unresolved work | A copied source manifest or chronological task diary |
-| `SOURCE.md` | Source choices, claim-to-source map, interpretation, transformations, limitations and candidate decisions | An unqualified “ready” badge or a dump of commands |
-| `NOTICE.md`, applicable `LICENSE*` | Human-readable attribution, reuse obligations and authoritative terms references | An assumption that the repository license covers upstream material |
-| `source/manifest.json` | Existing input/document/intermediate IDs, paths and byte pins; credits, rights and consumers | A manually copied evidence report |
-| `source/preparation/`, authored `object.json` | Executable acquisition and preparation configuration | A parallel recipe described only in prose |
-| `source/reference/` or existing source subdirectory | Necessary original labels, source interpretation details, papers/metadata when retained | Browser logs or a second generic contract |
-| `prepared/provenance.json` | Generated `cssearth-object-provenance@1` product lineage | Proof that fresh acquisition, reproduction or browser review happened |
-| Other `prepared/` files and `runtime-assets.json` | Existing generated payload and delivery identities | Hand-edited scientific authority |
-| `docs/evidence/runs/<run-id>/` | Portable, immutable check receipts and selected review artifacts | A mutable directory named only `final` or `latest` |
-| `tools/`, `tests/` | Reusable acquisition, preparation, capture and verification code under current ownership | Scripts hidden in a report directory and imported by production |
-| `docs/architecture/` and subject guides | Shared methods, design decisions and reusable explanations | A second list of body facts or completion status |
-| Ignored `output/`, `.local/`, `captures/`, `traces/` | Working captures, temporary logs, caches and experiments | The sole location of evidence cited as delivered |
-
-New body documentation uses `README.md`, which is already allowed by the
-source-closure test. Do not add a root `EVIDENCE.md` or executable tools inside
-the data-only package. New files inside `source/` must enter the existing
-manifest's appropriate collection and retain exact pins.
-
-Batch documents can explain an outcome across many bodies. Each participating
-body README links to that shared run and its applicable case IDs. Store the
-receipt once. Historical batch names remain valid links, not future API names.
-
-## 3. Source records explain the science
-
-Keep existing schema and IDs. `SOURCE.md` must map each delivered dataset and
-changed scientific fact to its manifest source IDs, recipe operation and
-independent check. This includes geometry, orientation, epoch, orbit, charts,
-factsheet values and navigation scale where relevant. Field-level facts whose
-lineage is outside the compiled provenance scope need their actual source
-field/table and derivation recorded; a bibliography alone is insufficient.
-
-For each selected source, preserve:
-
-- Authority, exact product/release/version or commit, product page and byte
-  location, retrieval date or existing acquisition receipt, credit and terms
-  evidence. Pin required labels and metadata alongside the data they interpret.
-- Meaning: observed quantity, derived measurement, model or illustration;
-  instrument/band, observation dates, resolution, units and meaningful uncertainty.
-- Coordinate and coverage conventions that affect the result: frame, axes,
-  positive longitude, latitude type, projection, pixel centers, datum/reference
-  radius, epoch, spin/phase assumptions, no-data and validity rules.
-- Processing: calibration already applied upstream; our resampling, correction,
-  selection, simplification, color transfer, interpolation and lighting choices.
-  Distinguish source resolution, displayed resolution and scientific accuracy.
-- Reuse basis for the exact input and derivatives. Use existing `licenseEvidence`
-  for new or changed upstream inputs, or explicitly record unresolved terms.
-  Missing terms evidence is a documentation gap, not proof of permission or
-  prohibition. Unresolved material must not gain an unsupported redistribution claim.
-
-Applicable fields belong near their source or recipe. Do not populate irrelevant
-fields for a body or invent a temperature, surface, terrain, mission or oracle.
-User-facing labels must disclose interpretation that changes what a view means,
-including false color, models, significant gaps and date limits.
-
-Maintain a short candidate table: source link, benefit, included/excluded/
-unresolved, reason, and last checked date. Preserve useful unresolved candidates.
-A failed download does not establish that a dataset does not exist. Revisit the
-survey when expanding affected capabilities, not for every unrelated edit.
-
-## 4. Git contains the reviewable record
-
-| Material | Default disposition |
+| File | What belongs there |
 | --- | --- |
-| Authored docs, recipes, manifests, required attribution and small original labels/metadata | Commit with the change |
-| Prepared metadata already required by clean-checkout installation | Keep the existing generated-file policy; do not hand-edit or relocate it |
-| Large reacquirable raw inputs | Keep outside Git with exact pins and a tested acquisition path |
-| Unique, authored or non-reacquirable required inputs | Preserve a distributable authoritative copy and explain its storage exception |
-| Served assets | Use existing immutable runtime delivery and inventories; honor existing intentional checked-in assets |
-| Evidence | Commit compact receipts, interpretation and selected useful visuals; retain raw originals in Git or approved durable artifact storage |
-| Cache, exploratory captures, repeated logs and obsolete working copies | Keep ignored unless explicitly promoted as historical evidence |
+| Body `README.md` | A short introduction, route and links. |
+| Body `SOURCE.md` and linked source notes | Why we chose the data, what it means, how we changed it and its limits. |
+| Body `NOTICE.md`, license files and manifest credits | Attribution, reuse terms and links supporting them. |
+| `source/manifest.json`, recipes, `prepared/provenance.json`, `runtime-assets.json` | Exact inputs, processing steps and generated files, using the existing formats. |
+| Evidence reports under `docs/` | What was tested, results, screenshots and remaining problems. Reuse an existing body or batch report. |
+| `docs/objects/<id>/EVIDENCE.md`, if needed | Links to results when a body's evidence spans several reports. |
+| `docs/objects/<id>/USAGE.md`, if needed | Detailed instructions for using that body's views. |
 
-Proposed review thresholds: explain any **new evidence file over 1 MiB** or
-**evidence run over 10 MiB** in its receipt. These are review triggers, not
-scientific-quality limits or deletion rules. Broad capture matrices and traces
-normally need an archive with a manifest. A large selected visual can be justified.
-Do not lower original capture fidelity just to meet a size target.
+Keep results and detailed instructions out of body READMEs. Do not create an
+empty index or a new document for every edit. One report can cover several
+bodies. Keep shared methods in the skill or shared guides.
 
-An external evidence object must have a stable locator, exact byte count and
-SHA-256, archive-member inventory when applicable, and a tested retrieval path
-available to repository reviewers. State access requirements and retention owner.
-Expiring CI artifacts or local paths alone do not qualify as durable delivery.
-The durable evidence store is an adoption decision; until it exists, justified
-tracked archives remain valid. No upload or storage migration is authorized by
-this document itself.
+Every file under `source/` must be recorded in its manifest. Put test logs and
+screenshots under `docs/`, not among source data. The package test also forbids
+a root `EVIDENCE.md` and private executable tools inside a body package.
 
-Original records retain their exact bytes. Upstream pinned text must not be
-reformatted; extend `.gitattributes` where byte-preservation requires it.
-Generated review metadata may be marked generated without suppressing the
-human interpretation. Do not publish credentials, personal browser state or
-unrelated machine data. When a shareable derivative is needed, retain its own
-hash and transformation receipt; do not silently rewrite a raw result.
+## Identify and explain the sources
 
-## 5. A run binds claims to a candidate
+For new or changed inputs, record the provider, product and release, URL, file
+size, hash, credits and terms in the existing manifest and acquisition recipe.
+Required files must be checked in or downloadable through that recipe. Keep the
+labels and metadata needed to interpret them.
 
-Use `docs/evidence/runs/<UTC>-<scope>-<short-id>/index.json` with a concise
-`REVIEW.md`. The UTC timestamp and unique suffix identify one capture/check
-attempt, not a claim of acceptance. The proposed envelope is
-`cssearth-evidence-run@1`; it references existing tool reports without changing
-their schemas. It is documentation-only until the validator is implemented.
+Say which bytes the hash identifies. If we converted an image, normalized a
+response or assembled a mosaic before saving it, explain that step. If the
+original download's identity is unknown, say so. There is no requirement to keep
+every temporary response.
 
-The envelope must identify:
+In SOURCE or a linked note, explain details that affect the displayed meaning:
 
-1. **Scope and producer:** body IDs, dataset/product IDs or shared capability,
-   run time, contributor/task reference if useful, harness and command.
-2. **Candidate:** code commit; exact dependency paths and hashes; dirty source,
-   recipe, prepared output and ignored assets actually used. Include shared
-   renderer/shell/astronomy and lockfile dependencies relevant to the claim.
-   Record the candidate before and after checks. Commit identity alone does not
-   identify a dirty checkout or served assets.
-3. **Environment:** tool versions and execution mode. Browser evidence also
-   records browser, viewport, DPR, route/body, camera, selected lens/settings,
-   epoch and served response identities. Map localhost capture URLs to portable
-   paths; a port number alone does not bind the server to the checkout.
-4. **Checks and claims:** exact command, selected cases, actual outcome, exit
-   code/signal when applicable, evidence reference, omissions and limitations.
-   Keep source integrity, scientific fidelity, reproduction, installation,
-   browser behavior, visual acceptance and aggregate readiness separate.
-5. **Artifacts:** role, repository-relative path or durable URI, bytes and hash.
-   Link original reports, relevant failure logs and original captures as well
-   as review composites. A copied report needs a source-to-delivery mapping.
-6. **Review and relationships:** reviewer and findings for visual/interpretive
-   judgments; prior run superseded or reused, with the exact scope and reason.
+- Whether the data is observed, derived or modeled.
+- Units, coordinate frame, datum, epoch, resolution and coverage, where relevant.
+- Rules for valid or missing data, corrections made upstream and our processing.
+- Source uncertainty, display simplification and visual enhancement.
 
-Outcome and freshness are separate. Outcomes are `PASS`, `FAIL`, `BLOCKED`,
-`NOT_RUN` and `NOT_APPLICABLE` (with a reason). Freshness is `CURRENT`, `STALE`
-or `UNBOUND`. A prior pass stays a historical pass if its dependencies change;
-it cannot support a current claim until rebound or rerun. An unbound comparison
-is **INVALID** for acceptance even when its image looks good.
+Keep limits that affect a viewer's interpretation in the product's dataset
+description too. Link generated processing records instead of rewriting them.
+For facts outside those records, such as a factsheet value or orbital assumption,
+name the source field or table and show the calculation. Shared astronomy,
+artwork and sky sources stay in their existing records.
 
-Avoid a single `complete: true` for a body. The README lists which claims the
-evidence supports and which remain open. A failed aggregate suite stays visible
-beside successful focused results. Hidden-input automation can prove bindings
-but cannot prove public control reachability.
+Keep useful alternative datasets and the reasons for using, rejecting or leaving
+them unresolved in source notes. A failed download does not show that a dataset
+does not exist. Update NOTICE when credits or terms change. Link the provider's
+terms, or say what remains unresolved; a publisher name or repository license
+alone does not establish the input's reuse terms.
 
-`basis: recovered` in existing prepared provenance binds declared identities.
-`basis: prepared` means preparation checked bound bytes. Neither value proves
-a fresh source download, clean runtime installation, scientific correctness or
-visual acceptance. Preserve the existing compiler's explicit coverage boundary.
+## Save enough evidence to check the result
 
-## 6. Reproduction, visual review and reuse
+A short Markdown note linking existing reports is usually enough. Use the
+existing report location. For a new independent run, use a descriptive dated
+folder under `docs/evidence/`. No extra JSON format or fixed set of files is required.
 
-Record what was actually reproduced: original-source restoration into an empty
-destination, verification of cached bytes, conversion of an upstream derived
-product, preparation of this package, or installation of published assets.
-List copied/reused inputs. Conversion of an archive mosaic is not reproduction
-of the mission's original reduction pipeline.
+Make three things clear:
 
-For affected scientific meaning, use independent source/numerical anchors.
-For presentation, inspect useful framing and the relevant seam/pole/limb,
-coverage and lighting cases. For matched comparisons, retain the reference,
-current result and absolute diff, original capture identities and matching
-conditions. Label the reference as native/source, prior product, or diagnostic
-reconstruction. Do not call a prior atlas on today's renderer a native capture.
-If comparison framing differs, disclose the limit and omit a false parity claim.
+- **What was tested:** the bodies and views, code revision, and relevant source,
+  prepared and runtime records. Link existing manifests rather than copying them.
+  Save any uncommitted changes and identify ignored files used by the test.
+  Include relevant shared code and the files actually served to the browser;
+  a port number or Git commit alone cannot identify those differences. For files
+  not fixed by the recorded revision or an existing manifest, record size and hash.
+- **What happened:** the command or method, selected cases, results, failures and
+  checks left out. Record environment details that affect the result. Browser
+  reports need the browser, viewport, DPR, camera, view and settings.
+- **Where to inspect it:** links to original reports and the screenshots needed
+  to assess the result. If a report names a working path, show where that file
+  was saved for review. A Git path at a recorded revision is enough. Files stored
+  elsewhere need a stable download location, byte count and hash. An ignored
+  local path alone is not evidence another reviewer can retrieve.
 
-Reuse passing evidence when the relevant source, recipe, delivered bytes and
-shared dependencies are unchanged. Record a machine-checkable identity comparison
-and name what it covers. An unchanged body texture does not carry forward shell,
-navigation or camera qualification after those owners change. A documentation
-link correction ordinarily needs link/diff review, not a new browser matrix.
+For a small correction, add a dated result to the existing report. Keep earlier
+outcomes intact. Do not overwrite a failure or label an old screenshot as new.
 
-Evidence metadata must not create a self-referential commit requirement. Bind
-the tested code and data separately from the evidence commit; exclude only
-evidence/docs that cannot affect the claim. When a report changes, create a new
-run or append a separately identified correction. Do not overwrite historical
-failures or relabel old screenshots as a fresh capture.
+## Say what the checks prove
 
-## 7. Contributor workflow and extension
+**Reproduction needs a comparison.** State which inputs were downloaded, copied
+or verified. Before a reproduction run, name the expected output inventory.
+Compare regenerated files against that fixed target, exactly by default. If a
+numerical or visual tolerance is needed, state its limit and where it applies
+before comparing, then report the differences. Creating an inventory from the
+new output alone does not prove reproduction of a previous result.
 
-1. Read `AGENTS.md`, this contract and the body's README/source/notice. Resolve
-   actual executable owners and the current candidate before changing files.
-2. Update selected source decisions and exact pins as work changes. Keep source
-   interpretation with the data and processing parameters in the real recipe.
-3. Run existing checks appropriate to the change and project requirements.
-   `pnpm test` does not include `test:planets` or `test:preparation`;
-   `test:browser` and `test:browser:conformance` are different runners.
-4. Promote the necessary evidence from ignored work output into one portable
-   run, preserving failure and coverage limits. Review images before claiming
-   visual acceptance. Refresh the body README and source/notice links together.
-5. Review the staged candidate: exact allowlist, source/asset pins, added binary
-   sizes, retrievable artifacts, changed capabilities, attribution and stale claims.
-   Publication and merge use the project's existing authorization and gates.
+**Scientific checks need an independent reference.** Check changed scientific
+meaning against source values or an independent calculation. Matching hashes or
+calling the same sampler twice cannot detect a shared interpretation error.
+The existing `recovered` and `prepared` labels describe how the provenance
+record was made; neither proves scientific accuracy, fresh acquisition or a
+passing browser check.
 
-Agents may extend body source notes, candidate tables and evidence links in the
-same change without a separate documentation approval ceremony. A genuinely new
-shared preparation operation must add its executable provenance binding and
-behavioral coverage. A new evidence field must document its meaning and update
-the shared envelope/schema once; it must not fork a moon/comet/planet format.
+**Visual checks need inspected images.** Identify the reference: a source or
+native capture, an earlier product image, or a reconstructed diagnostic. For a
+matched comparison, save the reference, new image and diff with matching capture
+settings. If the source or framing differs, explain the limit and do not claim pixel
+matching. Inspect the
+affected views, boundaries and lighting. Use the existing browser checks.
 
-PROVENANCE DOCUMENTATION owns shared-contract revisions and de-duplication.
-Additive compatible fields retain the envelope version; incompatible meanings
-require a new version with a migration note. Body-specific units, thresholds,
-coverage and source limitations remain body data. Do not turn them into global
-defaults. Do not write declaration-only tests to make documentation appear proven.
+**An old pass describes an old version.** Keep its original revision and outcome.
+To reuse it, name the new version in the maintained evidence note and show that
+the dependencies relevant to the result still match. Do not add a permanent
+`CURRENT` flag to an old report. Unchanged textures do not prove camera or shell
+behavior after that code changes.
 
-## 8. Adoption without losing evidence
+A passing body test is not a passing full suite. Installing runtime images does
+not prove source restoration, complete Earth paging or availability of every
+remote file. Report the checks actually performed and what they leave unknown.
 
-1. Correct the stale root/package onboarding and add links from root `AGENTS.md`,
-   the main README and `src/planets/README.md`. Keep this proposal marked as such
-   until the maintainer accepts it; then record the adoption revision here.
-2. Pilot the format with **Rhea, comet-67p and Earth**, using current sources and
-   honest historical evidence links. Exercise shared batches and remote assets.
-   Add the Sun as a check that the structure does not assume a solid surface.
-3. Add a small schema/link/hash check to the existing tool/test ownership for
-   the new envelope. Derive registered IDs from `OBJECTS`; reject unknown IDs,
-   unsafe paths, missing delivered artifacts and inconsistent claim references.
-   Validate actual bytes where present. Report unavailable remote verification
-   separately; syntax validation must never award a scientific/browser pass.
-4. Select durable evidence storage and a retention policy before moving large
-   archives. Verify replacement downloads and hashes before any authorized
-   removal. Preserve existing links or explicit redirects. Do not rewrite Git
-   history as part of adoption.
-5. Index existing evidence as bodies are next touched. Track unindexed legacy
-   runs as legacy, rather than fabricating retrospective receipts. Generate any
-   portfolio overview from `OBJECTS` and body/run references; no second registry.
+## Update the docs with the change
 
-This PR updates onboarding, versions the celestial skill and pilots four body
-documentation entry points. It does not implement an evidence-envelope validator,
-relocate historical evidence, change scientific data, or qualify any body.
+Update the affected source records, explanation and credits. Run the relevant
+checks, save their evidence and link it from the existing report or index.
+Change README links only when needed. Fix older records needed for this work;
+an unrelated edit does not require documenting a body's entire history.
+
+Commit useful docs, source records and evidence needed for review. Keep scratch
+output and repetitive logs ignored. Explain unusually large additions once in
+the PR; use agreed storage when appropriate. Keep the originals needed to assess
+the result, including relevant failures and partial runs. Do not remove historical
+evidence until its replacement is authorized and verified. This contract does
+not authorize uploads or moving stored evidence.
+
+Write plainly. Name the dataset, processing step, test and limitation. Prefer
+concrete statements over process jargon or repeated disclaimers.
+
+The documentation owner fixes shared guidance and contradictions. Contributors
+update their body notes and any shared instructions affected by their change;
+there is no extra approval step. A new preparation operation still needs to
+record its sources and outputs and have tests in the existing tools. Add new
+infrastructure only when a specific tool needs it.

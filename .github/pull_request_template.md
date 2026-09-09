@@ -1,20 +1,12 @@
 ## Change
 
-Describe the user-visible result or corrected contributor behavior.
+Describe what changed and why.
 
-## Sources and documentation
+## Checks and evidence
 
-For body/data changes, link the affected body README, SOURCE/NOTICE updates and
-manifest/product IDs. Record source decisions and meaningful limitations using
-the provenance contract at `docs/provenance/CONTRACT.md` in this branch.
-For other changes, state the applicable documentation or why no source change applies.
+Link the relevant source notes, credits, test reports and inspected screenshots.
+State which version was tested, what passed or failed, and what was not checked.
+If reusing an old result, explain why it still applies. For a docs-only change,
+report link and diff checks here.
 
-## Evidence
-
-Link actual receipts and useful visuals. State tested code/data identity,
-commands and scope, including failed, blocked or unrun checks. Distinguish
-scientific fidelity, browser behavior, visual review and fresh installation.
-Identify reused evidence and the identity comparison supporting reuse.
-
-Explain new evidence files over 1 MiB or runs over 10 MiB. Preserve original
-captures and supply portable paths or durable artifact references.
+Explain unusually large evidence additions. See `docs/provenance/CONTRACT.md`.

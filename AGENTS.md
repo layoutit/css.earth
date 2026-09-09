@@ -14,6 +14,6 @@
 
 ## Provenance and documentation
 
-- Follow [the provenance and documentation contract](docs/provenance/CONTRACT.md) for source records, attribution, portable evidence and claims. The PROVENANCE DOCUMENTATION owner maintains that shared contract; contributors update their affected records in the same change.
-- For body work, use the repository-owned [celestial skill](.agents/skills/celestial-skill/SKILL.md). Start at the body README when present; otherwise use SOURCE.md, NOTICE.md and manifests and add an entry point as the body is next touched.
-- Keep historical evidence scoped to its tested candidate. Link existing runs without relabeling them as current qualification.
+- Follow [the provenance and documentation contract](docs/provenance/CONTRACT.md) for source records, credits and test evidence. PROVENANCE DOCUMENTATION maintains the shared instructions; contributors update the records affected by their change.
+- For body work, use the checked-in [celestial skill](.agents/skills/celestial-skill/SKILL.md). Read the body README, SOURCE.md, NOTICE.md and manifests. Add a short README if missing and useful. Keep test tables and open work in linked evidence reports.
+- Keep each report tied to the version it tested. When reusing an old result, explain why it still applies to the new version.
