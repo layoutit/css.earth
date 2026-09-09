@@ -56,6 +56,14 @@ test("rejects invalid scale palettes", () => {
   );
 });
 
+test('named categories can omit a redundant description while supplied descriptions stay validated', () => {
+  const input={title:'Regions',items:[{label:'Ash',color:'#aabbcc'},{label:'Hapi',color:'#112233'}]};
+  const legend=prepareLensCategoryLegend(input);
+  assert.deepEqual(legend.items.map(({label})=>label),['Ash','Hapi']);
+  assert.ok(legend.items.every(item=>!Object.hasOwn(item,'description')));
+  assert.throws(()=>prepareLensCategoryLegend({...input,items:input.items.map(item=>({...item,description:''}))}),/description must be/);
+});
+
 test("every object forwards its object-owned legend through the shared shell", async () => {
   await Promise.all(OBJECTS.map(async ({ id }) => {
     const loaded = await loadObjectContent(id);

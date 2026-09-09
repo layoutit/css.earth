@@ -1,0 +1,240 @@
+{
+  "capturedAt": "2026-09-09T16:03:12.904Z",
+  "origin": "http://127.0.0.1:53135",
+  "browser": "152.0.7977.84",
+  "reports": [
+    {
+      "id": "comet-19p",
+      "defaultShadows": false,
+      "lenses": [
+        {
+          "lens": "micas",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-19p/comet-19p-micas-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "usgs",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-19p/comet-19p-usgs-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "dlr",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-19p/comet-19p-dlr-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "height",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-19p/comet-19p-height-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "difference",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-19p/comet-19p-difference-surface@2x.webp\")"
+          ]
+        }
+      ],
+      "optInWorks": true,
+      "retained": true,
+      "preparedSha256": "fccce17bb62867f60723f7250b1a8a9c08aeacaf2b31b6d28590d2fca80b15e7",
+      "screenshot": "/Users/ekrof/fed/cssEarth-comets/output/playwright/comet-shadows-default/comet-19p.png",
+      "errors": []
+    },
+    {
+      "id": "comet-8p",
+      "defaultShadows": false,
+      "lenses": [
+        {
+          "lens": "model",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "arecibo",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-8p/comet-8p-arecibo-surface@2x.webp\")"
+          ]
+        }
+      ],
+      "optInWorks": true,
+      "retained": true,
+      "preparedSha256": "174c590458f3fecea81fb1ed36462d17445e87a606968d36d3df4e8e6eaf9efd",
+      "screenshot": "/Users/ekrof/fed/cssEarth-comets/output/playwright/comet-shadows-default/comet-8p.png",
+      "errors": []
+    },
+    {
+      "id": "comet-1p",
+      "defaultShadows": false,
+      "lenses": [
+        {
+          "lens": "model",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-1p/comet-1p-model-surface@2x.webp\")"
+          ]
+        }
+      ],
+      "optInWorks": true,
+      "retained": true,
+      "preparedSha256": "62842d60ce5093cac55c99f86a7334c8fbc293d31fb612a802ad7cf912f88131",
+      "screenshot": "/Users/ekrof/fed/cssEarth-comets/output/playwright/comet-shadows-default/comet-1p.png",
+      "errors": []
+    },
+    {
+      "id": "comet-81p",
+      "defaultShadows": false,
+      "lenses": [
+        {
+          "lens": "model",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-81p/comet-81p-model-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "navcam",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-81p/comet-81p-navcam-surface@2x.webp\")"
+          ]
+        }
+      ],
+      "optInWorks": true,
+      "retained": true,
+      "preparedSha256": "eb4d1a511947ffac8e1c85aa7f5795f0d8a0c919efaa429f9a1f902c69721258",
+      "screenshot": "/Users/ekrof/fed/cssEarth-comets/output/playwright/comet-shadows-default/comet-81p.png",
+      "errors": []
+    },
+    {
+      "id": "comet-103p",
+      "defaultShadows": false,
+      "lenses": [
+        {
+          "lens": "constraints",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-103p/comet-103p-constraints-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "model",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-103p/comet-103p-model-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "mri",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-103p/comet-103p-mri-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "hri",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-103p/comet-103p-hri-surface@2x.webp\")"
+          ]
+        }
+      ],
+      "optInWorks": true,
+      "retained": true,
+      "preparedSha256": "96f30cb8441ee42d0944bfff29f868edadc7b076fed5bfee06ee3d7ec318fd07",
+      "screenshot": "/Users/ekrof/fed/cssEarth-comets/output/playwright/comet-shadows-default/comet-103p.png",
+      "errors": []
+    },
+    {
+      "id": "comet-9p",
+      "defaultShadows": false,
+      "lenses": [
+        {
+          "lens": "constraints",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-9p/comet-9p-constraints-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "model",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-9p/comet-9p-model-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "deep-impact",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-9p/comet-9p-deep-impact-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "next",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-9p/comet-9p-next-surface@2x.webp\")"
+          ]
+        }
+      ],
+      "optInWorks": true,
+      "retained": true,
+      "preparedSha256": "f3e64317557c1e9ba8681ba1b5ceebf3107f8f6c35fce9a94b510a61433c949d",
+      "screenshot": "/Users/ekrof/fed/cssEarth-comets/output/playwright/comet-shadows-default/comet-9p.png",
+      "errors": []
+    },
+    {
+      "id": "comet-67p",
+      "defaultShadows": false,
+      "lenses": [
+        {
+          "lens": "model",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-67p/comet-67p-model-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "osiris",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-67p/comet-67p-osiris-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "albedo",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-67p/comet-67p-albedo-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "slope",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-67p/comet-67p-slope-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "absorption",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-67p/comet-67p-absorption-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "ice",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-67p/comet-67p-ice-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "regions",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-67p/comet-67p-regions-surface@2x.webp\")"
+          ]
+        },
+        {
+          "lens": "geology",
+          "atlases": [
+            "url(\"http://127.0.0.1:53135/scenes/comet-67p/comet-67p-geology-surface@2x.webp\")"
+          ]
+        }
+      ],
+      "optInWorks": true,
+      "retained": true,
+      "preparedSha256": "3b526b083a5a0da4971ae58c39b46707d30c28c9ca28b51f7a7145f9abd886c2",
+      "screenshot": "/Users/ekrof/fed/cssEarth-comets/output/playwright/comet-shadows-default/comet-67p.png",
+      "errors": []
+    }
+  ]
+}

@@ -184,7 +184,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
       return {id: input.id, sha256: input.expectedSha256, width: input.width, height: input.height};
     });
-    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && (lens.format === 'facet-scalars' ? lens.meshPath : lens.path) !== config.geometry.radialTerrain.path))) {
+    const renderedMeshPath = lens.format === 'vtk-cell-categories' ? lens.surfaceSampling.renderedMeshPath : lens.format === 'facet-scalars' ? lens.meshPath : lens.path;
+    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && renderedMeshPath !== config.geometry.radialTerrain.path))) {
       throw new Error('Source-surface science requires the actual rendered source mesh.');
     }
     if (lens.format === 'pds3-scalar-map') {
@@ -193,6 +194,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       }
     }
     const dependencies = lens.format === 'facet-scalars' ? [lens.meshPath, lens.table.labelPath].filter(Boolean)
+      : lens.format === 'vtk-cell-categories' ? [lens.surfaceSampling.renderedMeshPath, lens.symbols?.paths, lens.symbols?.locations].filter(Boolean)
       : lens.format === 'image-plane-dem' ? [lens.comparison?.path].filter(Boolean)
       : lens.format === 'geologic-shapefile' ? [lens.grid.attributePath, lens.grid.projectionPath]
       : lens.format === 'pds-image' ? [lens.labelPath] : [];

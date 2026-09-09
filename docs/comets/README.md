@@ -1,6 +1,6 @@
 # Comet scenes
 
-Seven independently selectable nucleus packages use the generic object registry. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. Tuttle retains two separate 1,000-triangle models and displays only the selected one. Borrelly retains 994 USGS and 1,862 DLR triangles, including explicitly gridded estimated closures, with only the selected terrain bank displayed. All geometry, maps, normals and shadows are prepared before runtime.
+Seven independently selectable nucleus packages use the generic object registry. **Shadows defaults off for every comet** and remains available in Settings. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. Tuttle retains two separate 1,000-triangle models and displays only the selected one. Borrelly retains 994 USGS and 1,862 DLR triangles, including explicitly gridded estimated closures, with only the selected terrain bank displayed. All geometry, maps, normals and shadows are prepared before runtime.
 
 | Object | Geometry source | What the default view represents |
 | --- | --- | --- |
@@ -37,6 +37,10 @@ The [original trial](67P-OSIRIS-TRIAL.md) preserves its separate camera comparis
 
 [67P OSIRIS coverage](67P-OSIRIS-COVERAGE.md) records the four-observation mosaic,
 the MiARD candidate disposition and source-selection evidence.
+
+[67P Regions and Geology](67P-GEOLOGY.md) records the 26 SHAP7 regional
+definitions and the ESA geological feature inventory, registered in 3D onto the
+same nucleus scene. These use the existing dataset selector and shared legend.
 
 [67P VIRTIS scientific views](67P-VIRTIS.md) documents the four MTP006 datasets, numerical units, source-to-shape transfer, concise lens factsheets and validation evidence.
 

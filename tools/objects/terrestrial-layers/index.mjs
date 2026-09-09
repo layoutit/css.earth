@@ -1,4 +1,5 @@
 import { validateFacetScalarProfile } from './facet-scalars.mjs';
+import {validateVtkCategories} from './vtk-categories.mjs';
 import { validateImageDemScience } from './image-dem-science.mjs';
 import { validateScienceQualityMasks } from './scientific-raster.mjs';
 import { validateGeologyProfile } from './categorical-geology.mjs';
@@ -71,6 +72,7 @@ export function parseTerrestrialProfile(value) {
     scientificPreviewGrid(lens, value.raster);
     if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
     if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
+    if (lens.format === 'vtk-cell-categories') {validateVtkCategories(lens, value.geometry.radialTerrain); continue;}
     if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
         lens.relief || lens.valueTransform || !Array.isArray(lens.categories) || lens.categories.length < 2 ||
         lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||

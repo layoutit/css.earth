@@ -13,6 +13,6 @@ CC BY-SA 4.0. Changes: grayscale radiance stretch, standard NAC display
 orientation, measured-camera projection, conservative coverage withholding,
 prepared texture packing and browser/difference captures.
 
-The existing RMOC shape retains its [separate credits and license](../NOTICE.md).
+The existing RMOC shape retains its [separate credits and license](../../NOTICE.md).
 The repository code license does not replace these data licenses. No endorsement
 by ESA, MPS, DLR or NASA is implied.

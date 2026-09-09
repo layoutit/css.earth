@@ -7,7 +7,7 @@ export interface PreparedLensLegend {
   readonly labels?: readonly string[];
   readonly items?: ReadonlyArray<{
     readonly label: string;
-    readonly description: string;
+    readonly description?: string;
     readonly color: string;
   }>;
   readonly sourceUrl?: string;
@@ -25,7 +25,7 @@ export function prepareLensCategoryLegend(input: {
   title: string;
   items: ReadonlyArray<{
     readonly label: string;
-    readonly description: string;
+    readonly description?: string;
     readonly color: string | readonly number[];
   }>;
   meta?: string;
