@@ -25,9 +25,10 @@ export function datasetCaption(provenance, lens) {
     recipe = recipe?.[key.replaceAll('~1', '/').replaceAll('~0', '~')];
   }
   // The preparation recipe identifies the main map separately from coverage or lighting inputs.
-  const path = typeof recipe === 'string' ? recipe : recipe?.facetField?.path ?? recipe?.source ?? recipe?.mapFile ?? recipe?.path;
+  const path = typeof recipe === 'string' ? recipe : recipe?.primarySource ?? recipe?.facetField?.path ?? recipe?.source ?? recipe?.mapFile ?? recipe?.path;
   const inputs = product.inputs.map(id => provenance.sources.find(source => source.id === id)).filter(Boolean);
-  const primary = inputs.find(source => source.path === path) ?? (inputs.length === 1 ? inputs[0] : undefined);
+  const primary = inputs.find(source => source.path === path)
+    ?? (!recipe?.primarySource && inputs.length === 1 ? inputs[0] : undefined);
   if (!primary || primary.kind !== 'source-input') return fallback;
   return {
     title,
