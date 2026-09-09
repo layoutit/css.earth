@@ -1,116 +1,62 @@
-# Nebula Lab workflows
+# Current workflow
 
-A local inspection workspace for galaxy image layers and particle density volumes. It uses the actual CSS renderer and retained camera controls, separate from the application shell.
+## Start the local app
 
-From the repository root. The extraction steps create local LMC/SMC comparison candidates; omit those steps if you only want to inspect the existing prepared banks.
-
-```sh
-pnpm install --frozen-lockfile
-pnpm lab:nebula:extract src/objects/lmc/source/source.jpg .local/nebula-lab lmc
-pnpm lab:nebula:extract src/objects/smc/source/source.jpg .local/nebula-lab smc
-pnpm lab:nebula
-```
-
-Open <http://127.0.0.1:4331/>. A dedicated Vite configuration serves only the lab entry, with filesystem access to the repository's prepared banks. The lab has no production route or publishing step. The local source images and prepared image banks must already be present; `pnpm lab:nebula` does not acquire or bake assets.
-
-- Choose a prepared subject, then drag to orbit and scroll or pinch to zoom.
-- Inspect the whole object, diffuse component, or compact detail.
-- Use Auto for normal axis selection, or isolate X, Y, or Z. Diffuse and compact-detail inspection uses Z; choosing another axis restores Whole object because the side banks combine both components. A subject without a separate detail bank disables Compact detail.
-- Depth selects all layers or one prepared layer. Selecting a layer in Auto freezes the currently dominant axis so the layer remains identifiable while orbiting.
-- Alignment shows the neutral density field with registered image overlays and visible adjustment panels. Reconstruction shows the prepared colored 3D result. Original photographs and processing panels remain in the source and model directories.
-- Reset camera restores the subject's initial view.
-
-The subjects include M31, M33, LMC and SMC image layers, separate LMC and SMC particle volumes, and the Milky Way volume reference. The selector is populated from the viewer's subject catalogue; further prepared subjects can use the same controls. Modeled image depth is an interpretation of a two-dimensional image, not a measured reconstruction.
-
-Each subject names a prepared object directory. Its comparison image can be relative to that directory (`image`) or to the repository (`imagePath`); these source references remain research metadata; registered image inspection uses the Alignment tab's overlay catalogue. Density models use the existing prepared-volume loader and renderer, with an explicit model description and no compact-detail control when no separate detail bank exists.
-
-Extraction writes `{id}-{cutout,diffuse,residual,mask,comparison}.png` and `{id}-receipt.json` to the local output directory. The comparison panels show source, diffuse, compact residual, alpha mask, and final cutout. Open those saved panels directly to inspect extraction results. These offline experiments do not replace the prepared 3D banks or modify production assets.
-
-`src/viewer.ts` owns the actual renderer and camera. `src/main.ts` only connects retained controls to its API. All images and geometry are prepared before inspection.
-
-## Magellanic particle experiment
-
-The particle subjects use the 2.2 Gyr snapshot from [Garver et al.'s simulation dataset](https://doi.org/10.5061/dryad.1vhhmgr82), described in [their paper](https://doi.org/10.1093/mnras/stag1287). The dataset is CC0. NOIRLab/SMASH photographs supply approximate fixed colors under CC BY 4.0; their original credits and links are preserved in each model and the source comparison.
-
-- The importer selects 1,620,000 LMC and 225,000 SMC stellar particles from the Tipsy star family; dark matter does not become luminous material.
-- Centering and rigid display rotation preserve physical distances. Mass deposition and smoothing create a real XYZ density grid, then the existing volume baker prepares 64 slabs on each axis.
-- Colors are sampled into the volume once. The camera never reprojects the photograph. The authored alignment is not an astrometric fit, and brightness is not calibrated photometry.
-- The LMC experiment constrains projected brightness as well as color. It distributes photo emission along the simulated conditional depth profile, with an authored narrower depth for positive local detail. A shared-opacity bake preserves constant column hue through ordinary CSS alpha composition. No foreground-star depth or gas tomography is inferred.
-- This collisionless simulation supplies stellar mass density, not gas, dust extinction, or emission-line structure. These are initial morphology experiments, not final optical reconstructions.
-- LMC's higher-resolution grid covers the photographed core and retains 78.64% of the simulation's stellar mass; the full imported particles are preserved. The SMC density experiment retains 99.55%. Receipts record exact retained mass, units, transformation, source hashes and output hashes.
-- The saved LMC source evidence includes a physical-scale photo / stellar mass / contour comparison. It exposes mismatches; the independently measured centroids and display contours are not a fit score. The photo footprint follows published sky coordinates and distance; its central-bar placement remains authored.
-
-The prepared candidates are checked in. Rebuilding requires Python 3 and a manual download of `lsmcmodelA2020_2500Myr.zip` from the linked dataset. From a clean checkout, after placing the archive in Downloads:
+From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm build:preparation
-pnpm lab:nebula:images
-pnpm lab:nebula:particles labs/nebula/models/magellanic-particles.json "$HOME/Downloads/lsmcmodelA2020_2500Myr.zip"
-pnpm test:lab:nebula
 pnpm lab:nebula
 ```
 
-The archive and imported particles stay in the ignored local cache. The shared experiment recipe pins the archive and decompressed snapshot; per-model source receipts, compressed density grid and prepared CSS banks live under `models/`. The full archive is never a browser dependency. Pass an optional final target id such as `lmc-particles` to rebuild just that experiment.
+Open [Alignment](http://127.0.0.1:4331/alignment). Existing prepared LMC/SMC assets can be inspected immediately. Processing additionally needs the pinned native source, the local NOX environment/model for star removal, and the existing density prior. Missing inputs produce an actionable error; starting the viewer does not download or bake them. See [star-removal dependencies](star-removal.md#model-and-dependencies).
 
-## Independent density and image overlays
+Do not restart an already running server to switch views. Legacy `?subject=…&tab=alignment|reconstruction` links normalize to the corresponding path. Object selection remains in the URL; camera and per-image adjustments are retained locally.
 
-The floating **Image overlay** panel on the right selects one reference at a time. Position, rotation, size, X/Y tilt, opacity, and visibility are directly visible. Each image keeps its own adjustments, saved in this browser across reloads and subject/tab switches. **Copy positioning** exports the selected fit as JSON. **Reset fit** restores the supplied starting alignment; **Calibrated sky** restores the publisher/star-registered sky placement. Neither action moves the density or camera.
+## 1. Align an image
 
-Shared subject, camera, axis, and layer controls live in the header. The floating **Density adjustments** panel is on the left, and **Image adjustments** is on the right. Both offer independent brightness, gamma, black/white levels, and Reset. Image tone changes RGB while preserving transparency; density tone changes display opacity while keeping empty pixels empty. These are inspection adjustments, not changes to simulated mass or calibrated photometry.
+1. Choose **LMC** or **SMC** in the header, then **Alignment**.
+2. Use **Reference view** to return to the approximate solar observer. **Fit cloud** changes inspection framing; drag or scroll to explore the actual density volume.
+3. Choose the reference image on the right. Its publisher/star-registered projection is the starting point. Keep the entire image footprint and full density field visible while comparing them.
+4. Adjust position, rotation, size and opacity. Density and image brightness/gamma/levels are independent inspection controls. **Copy positioning** exports the fit; the browser also saves it per image.
+5. Verify direction, angular scale, matched-star coverage and missing edges before processing a new source. An authored fit to simulated density is not astrometric evidence. [Registration](registration.md) · [Candidate evidence](image-candidates.md).
 
-Tone controls call the lab's local Node preparation service, which reads hash-verified prepared textures and writes cached PNG previews. The browser decodes the completed bank before replacing image URLs on retained leaves. No browser image filters or geometry processing are used. Reset restores the original prepared textures; source files and production assets remain unchanged. Per-image and per-density settings are stored locally, and copied image alignment JSON includes its tone.
+The full neutral fields contain all imported LMC/SMC stellar particles. They are simulated stellar mass, not observed gas or dust. A photograph's boundary is its coverage limit, not the density cloud's boundary.
 
-LMC has six choices: full SMASH, VISTA infrared, the previous SMASH extraction, Gaia EDR3 with foreground stars removed, Horálek's optical wide field, and the ESO VST Tarantula detail patch. SMC has SMASH and VISTA. Only enabled images load. New LMC previews retain up to 4096 pixels; full native sources remain hash-pinned for later processing.
+## 2. Remove stars
 
-**Alignment opens from the solar observer**, equivalent to Earth's location at this scale, with optical magnification. **Reference view** and **Reset camera** return there; **Fit cloud** shows the full bounds from a nearer or farther inspection camera. Camera adjustments are retained when revisiting the same density field. Dragging and dollying explore the actual 3D cloud and fixed photographic planes, changing the comparison projection.
+1. Optionally run **Quick preview** for native crops.
+2. Press **Remove stars** for the selected original. This runs automatic NOX inference with actual progress and **Cancel**; no manual samples or calibration step is required.
+3. Compare **Original / Without stars / Residual** and inspect bright cores, halos and compact nebular details. The strength slider blends the completed removal; it does not rerun detection.
+4. Keep the native diffuse/residual/mask products. Reconstruction uses the complete native diffuse image at full removal, not a small display preview or the preview-strength blend.
 
-The supplied LMC starting fit preserves the manually chosen SMASH offset (−1.2, −1.7, 0 kpc), Z rotation 39°, size 3, and opacity 0.29. Its common affine transform transfers to every registered image around each image's own centre. This is an authored alignment against the simulation, kept separate from the sky calibration. It does not validate the model's morphology or alter its viewing direction.
+Refresh reconnects to a running job. A completed result restores without inference. A server restart can interrupt unfinished processing; completed images remain stored. [Full details](star-removal.md).
 
-The neutral grid contains **all 1,620,000 LMC and 225,000 SMC stellar particles**, including the former crop's outer material. Source-to-grid mass is conserved; empty padding covers the smoothing kernel and all six outer faces are zero. The grid is an overview at bounded resolution, with normalized display opacity. Inclusion in the density grid does not imply every faint particle is individually visible after raster quantization. It is simulated stellar mass, not measured gas, dust or luminosity.
+## 3. Reconstruct and compare
 
-The new density uses the paper's observer-coordinate procedure reconstructed from the released snapshot and rounded model centres. The former eye-chosen bar rotation/offset is not used. The paper does not publish its exact numeric transform, so this reconstruction remains approximate. The model/observation centre mismatch is intentionally preserved. See [registration evidence](registration.md).
+1. Open [Reconstruction](http://127.0.0.1:4331/reconstruction) and choose a source. VISTA, Horálek and WISE are the approved LMC comparison candidates.
+2. A completed variant loads directly. For a new placement/removal result, press **Process** explicitly. Merely selecting an image does not bake it.
+3. Follow progress, or **Cancel**. The previous cloud remains visible until the new bank is fully prepared and decoded.
+4. Compare saved variants at the same camera and brightness. Inspect front, oblique and edge views for sheet-like depth, repeated details, seams, disappearing layers and whitening.
+5. Use brightness/axis calibration and integrated-signal cutoff to inspect the cloud. These controls do not establish physical depth or justify clipping unobserved data.
 
-SMASH, VISTA, and Tarantula use publisher ICRS TAN WCS. Gaia and Horálek use measured shared-star homographies into full-resolution SMASH, then its sky coordinates. Full image edges compile offline into fixed PolyCSS geometry. No density-driven crop or mask is applied. The two new star fits include held-out residuals; Gaia's outer field remains extrapolated beyond matched coverage. See [image registration evidence](image-registration.md).
-The intended order is full distribution, observer placement, WCS overlays, visual validation, then image processing and any delivery crop. These inspection assets do not approve a later crop or modify production galaxy imagery.
+Current processing retains all light from the native starless image and bakes a 512px comparison model with XYZ banks. It is an approximate reconstruction baseline, not native-resolution geometry or a final production model. See [the exact method and limits](reconstruction.md).
 
-Rebuild inspection textures from the checked-in scalar grids and pinned photographs, without the simulation archive:
+## Saved data
 
-```sh
-pnpm install --frozen-lockfile
-pnpm prepare:volume labs/nebula/models/lmc-full-density
-pnpm prepare:volume labs/nebula/models/smc-full-density
-pnpm lab:nebula:overlays
-pnpm test:lab:nebula
-pnpm lab:nebula
-```
+| Data | Location / lifetime |
+|---|---|
+| Camera, selected source, placement, inspection controls | Browser local storage; do not clear during development |
+| Native originals | Ignored local cache, source-hash pinned |
+| Native NOX outputs | `.local/nebula-lab/star-removal-nox-applied/`; diffuse, residual, mask and receipts |
+| Running/saved job records | Separate star-removal and reconstruction job directories in the local cache |
+| Completed reconstruction banks | `.local/nebula-lab/reconstructions/`; descriptors, XYZ textures, provenance and manifest |
+| Versioned recipes/evidence | `models/lmc/`, `models/smc/`, shared recipe files and `sources/` |
 
-To regenerate the full scalar grids themselves, first run the complete Magellanic particle workflow above with the downloaded archive, then run `pnpm lab:nebula:density`. The full-density recipe verifies the original centred particle bytes and applies the observer transform once, before deriving bounds from every particle. The old photographic candidates remain available in Reconstruction for comparison; they are not the neutral density source.
+An image-to-density placement change requires **Process** again to produce a matching bank. Browsing a result does not rewrite it. Promotion into a checked-in model or production object is a separate explicit task, with source credits and replay instructions retained.
 
-## Full-resolution photographs
+## Development checks
 
-The lab includes full-spatial-resolution working references from the publisher's SMASH TIFFs: LMC 6737×6536 and SMC 3827×3190. `sources/reference-images.json` pins the original URLs, bytes, hashes, dimensions, credits and deterministic conversion. `pnpm lab:nebula:images` verifies or downloads the originals into the ignored cache, then recreates the checked-in 8-bit sRGB WebP references. These are lossy display derivatives with no crop or spatial resize, not scientific FITS data. Large reference images load only for source inspection and are not part of the prepared CSS texture banks.
+For UI/backend changes, run the lab typecheck and only the affected colocated tests during iteration. At the final lab boundary, run its suite and affected browser flow. No unrelated production build is needed for a lab-only change.
 
-ESO/VISTA offers larger infrared mosaics ([LMC](https://www.eso.org/public/images/eso1914a/), [SMC](https://www.eso.org/public/images/eso1714a/)), but their Y/J/Ks emission and colors differ from the optical/near-infrared SMASH composite. They are alternative observational views, not replacements silently mixed into the current optical appearance. The ESO Tarantula reference also uses a different display grade and enhanced H-alpha; its WCS footprint needs matched-star verification before a detail patch is composed.
-
-## High-resolution LMC master experiment
-
-The **LMC · master 1024** and **LMC · master 512** subjects bypass the old 384-cell RGB grid. They extract directly from the pinned 6737×6536 TIFF at native spatial resolution, sample that photograph independently of the coarse simulated depth field, and bake 2048-pixel lossless PNG masters. The 1024- and 512-pixel delivery banks are then area-downsampled from the verified PNG bytes with premultiplied alpha and encoded as WebP. Both use the same 192 prepared slabs and existing CSS renderer; their image payloads are 2.60 MB and 0.69 MB respectively (42.9 MB and 10.3 MB decoded).
-
-The selected native 7-pixel median retains more filaments than the 19-pixel kernel that approximately matches the old filter's angular scale. It also retains more stellar contamination: this is frequency separation, not membership-based foreground-star subtraction. Native TIFF input does not imply 16-bit scientific radiometry throughout; extraction and slab masters contain 8-bit display RGB/alpha.
-
-The experiment retains the baseline physical bounds, alignment, exposure and depth-model parameters. Higher resolution does not recover measured gas/dust depth. Spreading photographic features through stellar depth still causes perspective streaking, and two integration samples per slab can alias fine features in side banks. These candidates demonstrate the resolution pipeline; they are not final optical reconstructions.
-
-From a clean checkout, with the manually downloaded simulation archive in Downloads:
-
-```sh
-pnpm install --frozen-lockfile
-pnpm build:preparation
-pnpm lab:nebula:images
-pnpm lab:nebula:particles labs/nebula/models/magellanic-particles.json "$HOME/Downloads/lsmcmodelA2020_2500Myr.zip" lmc-particles
-pnpm lab:nebula:master labs/nebula/models/lmc-highres.json
-pnpm test:lab:nebula
-pnpm lab:nebula
-```
-
-Open <http://127.0.0.1:4331/?subject=lmc-highres-1024>. The original particle bake remains in the Subject chooser. Large originals, full-resolution extractions, density intermediates and lossless masters stay in the ignored local cache; only the small delivery banks, recipes and provenance are checked in. Re-running the master command verifies cached PNGs and derives delivery again. A changed source, master setting or pipeline implementation creates a new master cache; changing only delivery width or quality reuses the same master.
+Read [AGENTS.md](../AGENTS.md) for module ownership and development rules. Historical decomposition experiments are under [research](research/README.md); their former tabs and removed objects are not part of this workflow.

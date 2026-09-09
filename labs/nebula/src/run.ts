@@ -1,7 +1,7 @@
 /** Run offline lab TypeScript through the repository's existing build toolchain. */
 import { createRequire } from 'node:module';
 import { mkdir, readdir } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
@@ -11,6 +11,7 @@ const packageRequire = createRequire(resolve(root, 'packages/engine/package.json
 const { build } = createRequire(packageRequire.resolve('tsup'))('esbuild');
 const output = resolve(root, '.local/nebula-lab/compiled');
 const [command, ...args] = process.argv.slice(2);
+const files = await readdir(directory, { recursive: true });
 await mkdir(output, { recursive: true });
 
 async function compile(name: string) {
@@ -22,13 +23,15 @@ async function compile(name: string) {
 
 let execution: string[];
 if (command === 'test') {
-  const names = (await readdir(directory)).filter(name => name.endsWith('.test.ts') &&
-    (args.length === 0 || args.includes(name.replace(/\.test\.ts$/, '')))).sort();
+  const names = files.filter(name => name.endsWith('.test.ts') &&
+    (args.length === 0 || args.includes(basename(name).replace(/\.test\.ts$/, '')))).sort();
   if (!names.length) throw new TypeError('No matching lab tests.');
   execution = ['--test', ...await Promise.all(names.map(compile))];
 } else if (['browser-removal-strength', 'prepare-overlay-variants', 'browser-overlay-variants', 'prepare-lmc-stars', 'browser-cloud-density', 'browser-cloud-controls', 'prepare-parts', 'browser-filled', 'prepare-filled', 'browser-overlays', 'prepare-overlays', 'prepare-full-density', 'browser-density', 'prepare-particles', 'prepare-master', 'prepare-coherent', 'prepare-prior-window',
   'prepare-structures', 'getsf-run', 'getsf-install', 'extract', 'acquire-images', 'browser-coherent'].includes(command ?? '')) {
-  execution = [await compile(`${command}.ts`), ...args];
+  const entry = files.filter(name => basename(name) === `${command}.ts`);
+  if (entry.length !== 1) throw new TypeError(`Expected one lab command entry: ${command}`);
+  execution = [await compile(entry[0]!), ...args];
 } else {
   throw new TypeError('Usage: run.ts prepare-full-density <recipe.json> | prepare-overlays <recipe.json> | browser-density [base-url] | test [test-name ...] | extract <image> <out> [id] | prepare-particles <recipe.json> <archive.zip> [target-id] | prepare-master <recipe.json> | prepare-coherent <recipe.json> [variant-id] | prepare-prior-window <recipe.json> | prepare-structures <recipe.json> [options] | getsf-install <local-directory> | getsf-run <recipe.json> <installed-getsf> <work-directory> [negative-policy] | acquire-images <recipe.json> | browser-coherent [base-url]');
 }

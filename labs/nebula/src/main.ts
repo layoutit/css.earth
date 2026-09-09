@@ -1,15 +1,31 @@
-import { readAppliedImage, writeAppliedImage, rememberAppliedLayer, verifyRestoredImage, type RestoredAppliedImage } from './applied-image-state';
-import { createNebulaLabViewer, subjects } from './viewer';
-import { defaultOverlayPlacement } from './overlay-placement';
-import { createOverlayPlacementControls } from './overlay-placement-controls';
-import { createToneControls } from './tone-controls';
-import { createCloudControls } from './cloud-controls';
-import { createCloudDensityControls } from './cloud-density-controls';
-import { createCloudStarControls } from './cloud-star-controls';
-import type { ImageLayer } from './overlay-variants';
-import { createRemovalStrengthStore, validateRemovalStrength } from './removal-strength';
-import { createStarRemovalControls } from './star-removal-controls';
+import { readAppliedImage, writeAppliedImage, rememberAppliedLayer, verifyRestoredImage, type RestoredAppliedImage } from './star-removal/applied-image-state';
+import { createNebulaLabViewer, subjects, registerReconstructionSubject } from './viewer/viewer';
+import { createReconstructionControls } from './components/reconstruction-controls';
+import { labView, labViewUrl } from './viewer/lab-routing';
+import type { PreparedReconstruction } from './reconstruction/reconstruction-types';
+import { defaultOverlayPlacement } from './alignment/overlay-placement';
+import { createOverlayPlacementControls } from './components/overlay-placement-controls';
+import { createToneControls } from './components/tone-controls';
+import { createCloudControls } from './components/cloud-controls';
+import { createCloudDensityControls } from './components/cloud-density-controls';
+import { createCloudStarControls } from './components/cloud-star-controls';
+import type { ImageLayer } from './viewer/overlay-variants';
+import { createRemovalStrengthStore, validateRemovalStrength } from './star-removal/removal-strength';
+import { createStarRemovalControls } from './components/star-removal-controls';
 
+export const labObjects = [
+  { id: 'lmc-clouds', name: 'LMC' },
+  { id: 'smc-particles', name: 'SMC' },
+] as const;
+export interface AlignmentState {
+  images: { id: string; label: string }[]; imageId: string; layer: ImageLayer; layers: ImageLayer[];
+  enabled: boolean; opacity: number; removalStrength: number;
+  registrationNote: string; credit: string; sourcePageUrl: string; status: string;
+}
+export interface LabShellState { objectId: string; view: 'alignment' | 'reconstruction'; busy: boolean; alignmentAvailable: boolean;
+  pose: string; alignment?: AlignmentState; }
+
+export async function mountNebulaLab(options: { onShellState(state: LabShellState): void }) {
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
 const controls = element<HTMLFieldSetElement>('render-controls');
@@ -22,11 +38,6 @@ const densityToneFieldset = element<HTMLFieldSetElement>('density-tone-fieldset'
 const overlayPanel = element<HTMLElement>('image-overlay-panel');
 const cloudPanel = element<HTMLElement>('cloud-adjustment-panel');
 const reconstructionImages = element<HTMLFieldSetElement>('reconstruction-image-controls');
-const reconstructionImage = element<HTMLSelectElement>('reconstruction-image');
-const reconstructionImageNote = element('reconstruction-image-note');
-const reconstructionImageCredit = element('reconstruction-image-credit');
-const reconstructionImageSource = element<HTMLAnchorElement>('reconstruction-image-source');
-const reconstructionImageStatus = element('reconstruction-image-status');
 const cloudDensityPanel = element<HTMLElement>('cloud-density-panel');
 const overlayControls = element<HTMLFieldSetElement>('overlay-controls');
 const overlayOptions = element('overlay-options');
@@ -34,10 +45,6 @@ const overlayChoice = element<HTMLSelectElement>('overlay-choice');
 const overlayLayerControl = element('overlay-layer-control');
 const overlayLayer = element('overlay-layer');
 const layerButtons = [...overlayLayer.querySelectorAll<HTMLButtonElement>('[data-image-layer]')];
-function selectLayerButton(layer: ImageLayer) {
-  overlayLayer.dataset.value = layer;
-  layerButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.imageLayer === layer)));
-}
 const overlayLayerNote = element('overlay-layer-note');
 const removalControls = element('star-removal-controls');
 const removalRange = element<HTMLInputElement>('star-removal-range');
@@ -71,26 +78,35 @@ const overlayRegistration = element('overlay-registration');
 const overlayCredit = element('overlay-credit');
 const overlaySource = element<HTMLAnchorElement>('overlay-source');
 const tabs = ['density-tab', 'render-tab'].map(id => element<HTMLButtonElement>(id));
-const tabNames = ['alignment', 'reconstruction'];
+const tabNames = ['alignment', 'reconstruction'] as const;
 type Viewer = Awaited<ReturnType<typeof createNebulaLabViewer>>;
 let viewer: Viewer | null = null;
 let busy = false, disposed = false;
 let sourceSubject: string | null = null;
 let currentTab = 0;
 let currentMode: 'photo' | 'density' = 'density';
+let activePose = 'front', alignmentState: AlignmentState | undefined;
 let modeRequest = 0;
 let requestedMode: 'photo' | 'density' = 'photo';
 let modePending = false;
 let pendingSubject: string | null = null;
 let reconstructionImageError = '';
-let reconstructionImageGroup: string | null = null;
 type Overlay = Awaited<ReturnType<Viewer['loadOverlayCatalogue']>>[number];
 let currentOverlays: Overlay[] = [];
 let selectedOverlayId: string | null = null;
 let overlayActivation = 0;
 let layerActivation = 0;
 let pendingLayerActivation: number | null = null;
+let placementControls: ReturnType<typeof createOverlayPlacementControls> | null = null;
 const restoringImages = new Map<string, AbortController>(), restorationAttempts = new Set<string>(), restorationMessages = new Map<string, string>();
+const reconstruction = createReconstructionControls(element('reconstruction-processing'), {
+  async onSelect(prepared, baseSubjectId, current) {
+    if (!viewer || currentTab !== 1 || !current()) return false;
+    const id = prepared ? registerReconstructionSubject(prepared.subject) : baseSubjectId;
+    if (sourceSubject !== id) await changeSubject(id);
+    return current() && sourceSubject === id;
+  },
+});
 const cloudStarControls = createCloudStarControls({ host: element('cloud-star-controls'), onChange(options) { viewer?.setStars(options); } });
 const cloudDensityControls = createCloudDensityControls({ host: element('cloud-density-controls'),
   async onApply(context, resources, isCurrent) {
@@ -124,43 +140,36 @@ const imageTone = createToneControls({ host: element('image-tone-controls'), tar
   } });
 function invalidateToneContexts() { layerActivation++; pendingLayerActivation = null; densityTone.setContext(null); imageTone.setContext(null); starRemoval.setContext(null); }
 
-const visibleObjects = [
-  { id: 'lmc-clouds', name: 'LMC' },
-  { id: 'smc-particles', name: 'SMC' },
-  { id: 'milky-way', name: 'Milky Way' },
-];
-for (const value of visibleObjects) subject.add(new Option(value.name, value.id));
+const visibleObjects = labObjects;
+function objectId(id: string | null) {
+  const item = subjects.find(value => value.id === id);
+  const source = item?.sourceSubjectId ?? id ?? '';
+  return visibleObjects.find(value => value.id === source ||
+    (value.id === 'lmc-clouds' && source.startsWith('lmc')) ||
+    (value.id === 'smc-particles' && source.startsWith('smc')))?.id ?? visibleObjects[0]!.id;
+}
 
-function selectTab(index: number, updateUrl = true) {
+
+function publishShell() {
+  options.onShellState({ objectId: objectId(sourceSubject), view: tabNames[currentTab]!, busy,
+    alignmentAvailable: Boolean(!sourceSubject || subjects.find(item => item.id === sourceSubject)?.density), pose: activePose, alignment: alignmentState });
+}
+function selectTab(index: number, updateUrl = true): Promise<void> {
   currentTab = index;
-  tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1; });
-  element('render-panel').setAttribute('aria-labelledby', tabs[index]!.id);
-  if (index === 0) void switchMode('density');
-  if (index === 1) void switchMode('photo');
+  const switching = switchMode(index === 0 ? 'density' : 'photo');
   setBusy(busy);
   void refreshOverlayControls();
   if (updateUrl) {
-    const url = new URL(location.href);
-    url.searchParams.set('tab', tabNames[index]!);
-    history.replaceState(history.state, '', url);
+    const url = labViewUrl(new URL(location.href), tabNames[index]!);
+    if (url.href !== location.href) history.pushState(history.state, '', url);
   }
   updateCredit();
+  return switching;
 }
-tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => selectTab(index));
-  tab.addEventListener('keydown', event => {
-    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-    event.preventDefault();
-    const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
-      (index + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
-    if (tabs[next]!.disabled) return;
-    selectTab(next); tabs[next].focus();
-  });
-});
 
 function setBusy(value: boolean) {
   busy = value; subject.disabled = value; controls.disabled = value;
-  reconstructionImage.disabled = value;
+  reconstruction.setBusy(value);
   tabs.forEach((tab, index) => { tab.disabled = value || (index === 0 && Boolean(sourceSubject) && !subjects.find(item => item.id === sourceSubject)?.density); });
   cloudControls.setBusy(value);
   const density = currentMode === 'density';
@@ -175,6 +184,7 @@ function setBusy(value: boolean) {
   element('viewer').setAttribute('aria-busy', String(value));
   element('viewer').inert = value;
   refreshReconstructionImages();
+  publishShell();
 }
 function fail(error: unknown) {
   const message = error instanceof Error ? error.message : String(error);
@@ -191,25 +201,15 @@ function updateSubject(id: string) {
   sourceSubject = id;
   updateCredit();
   refreshReconstructionImages();
+  publishShell();
 }
 function refreshReconstructionImages() {
-  const item = subjects.find(value => value.id === (pendingSubject ?? sourceSubject));
-  const metadata = item?.reconstructionImage;
-  const visible = currentTab === 1 && Boolean(metadata);
+  const base = objectId(pendingSubject ?? sourceSubject);
+  const visible = currentTab === 1 && base === 'lmc-clouds';
   reconstructionImages.hidden = !visible;
   if (visible) cloudPanel.hidden = false;
-  if (!metadata || !item) return;
-  if (reconstructionImageGroup !== metadata.group) {
-    reconstructionImageGroup = metadata.group;
-    reconstructionImage.replaceChildren(...subjects.filter(value => value.reconstructionImage?.group === metadata.group)
-      .map(value => new Option(value.reconstructionImage!.label, value.id)));
-  }
-  reconstructionImage.value = item.id;
-  reconstructionImageNote.textContent = metadata.note;
-  reconstructionImageCredit.textContent = item.credit ?? '';
-  reconstructionImageSource.href = item.sourcePageUrl!;
-  reconstructionImageStatus.textContent = reconstructionImageError || (busy ? `Loading ${metadata.label} prepared layers…` : '');
-  reconstructionImageStatus.dataset.error = String(Boolean(reconstructionImageError));
+  reconstruction.setContext(visible && viewer ? base : null);
+  reconstruction.setBusy(busy);
 }
 function updateCredit() {
   const item = subjects.find(value => value.id === sourceSubject);
@@ -219,7 +219,10 @@ function updateCredit() {
   sourceLink.title = density?.credit ?? item?.credit ?? '';
 }
 let overlayRequest = 0;
-function overlaySelectionKey(catalogue: string) { return `cssearth-nebula-selected-overlay:${catalogue}`; }
+function overlaySelectionKey(catalogue: string) {
+  const stable = catalogue.replace('labs/nebula/models/lmc/', 'labs/nebula/models/lmc-').replace('labs/nebula/models/smc/', 'labs/nebula/models/smc-');
+  return `cssearth-nebula-selected-overlay:${stable}`;
+}
 function storedOverlayId(catalogue: string) {
   try { return localStorage.getItem(overlaySelectionKey(catalogue)); } catch { return null; }
 }
@@ -283,22 +286,18 @@ function renderSelectedOverlay() {
   if (!item?.density?.overlays || !overlay) return;
   void restoreAppliedOverlay(overlay);
   const prior = viewer.getOverlayState().find(value => value.id === overlay.id);
-  overlayChoice.value = overlay.id;
+
   overlayLayerControl.hidden = !overlay.variants?.length;
-  layerButtons.forEach(button => { button.disabled = button.dataset.imageLayer !== 'original' && !overlay.variants?.some(layer => layer.id === button.dataset.imageLayer); });
-  selectLayerButton(viewer.getOverlayLayer(overlay.id));
+
   removalControls.hidden = !overlay.variants?.some(layer => layer.id === 'diffuse');
   removalRange.max = removalNumber.max = '100';
   removalRange.value = removalNumber.value = String(currentRemovalStrength(overlay));
   removalNote.textContent = '0% Original · 100% Prepared removal';
   overlayLayerNote.textContent = '';
   overlayLayer.title = 'NOX estimates the background from the image. The residual is predicted compact light, not a measured star catalogue.';
-  overlayEnabled.id = `overlay-${overlay.id}`; overlayEnabledLabel.htmlFor = overlayEnabled.id;
-  overlayEnabled.checked = prior?.enabled ?? false;
-  overlayOpacity.value = String(Math.round((prior?.opacity ?? overlay.initialOpacity ?? .55) * 100));
-  overlayOpacity.setAttribute('aria-label', `${overlay.label} opacity`);
+
   const identity = defaultOverlayPlacement(), fitted = overlay.initialPlacement ?? identity;
-  const placement = createOverlayPlacementControls({ id: overlay.id, label: overlay.label,
+  const placementSpec = { id: overlay.id, label: overlay.label,
     placement: prior?.placement ?? fitted, defaults: fitted, ...(overlay.initialPlacement ? { original: identity } : {}),
     savedLocally: element('viewer').dataset.overlayStorage === 'saved',
     async onCopy() {
@@ -313,11 +312,15 @@ function renderSelectedOverlay() {
         ...(overlay.variants?.length ? { imageLayer: viewer!.getOverlayLayer(overlay.id), removalStrength: currentRemovalStrength(overlay) } : {}),
       }, null, 2));
     },
-    onChange: partial => { try { viewer!.setOverlayPlacement(overlay.id, partial); } catch (error) { fail(error); } } });
-  overlayOptions.replaceChildren(placement);
-  overlayRegistration.textContent = overlay.registrationNote; overlayCredit.textContent = overlay.credit;
-  overlaySource.href = overlay.sourcePageUrl;
-  overlayStatus.textContent = restorationMessages.get(overlay.id) ?? `${currentOverlays.indexOf(overlay) + 1} of ${currentOverlays.length} images`;
+    onChange: (partial: Parameters<Viewer['setOverlayPlacement']>[1]) => { try { viewer!.setOverlayPlacement(overlay.id, partial); } catch (error) { fail(error); } } };
+  if (placementControls) placementControls.update(placementSpec);
+  else { placementControls = createOverlayPlacementControls(placementSpec); overlayOptions.replaceChildren(placementControls); }
+  alignmentState = { images: currentOverlays.map(value => ({ id: value.id, label: value.label })), imageId: overlay.id,
+    layer: viewer.getOverlayLayer(overlay.id), layers: ['original', ...(overlay.variants?.map(value => value.id) ?? [])],
+    enabled: prior?.enabled ?? false, opacity: Math.round((prior?.opacity ?? overlay.initialOpacity ?? .55) * 100),
+    removalStrength: currentRemovalStrength(overlay), registrationNote: overlay.registrationNote, credit: overlay.credit,
+    sourcePageUrl: overlay.sourcePageUrl, status: restorationMessages.get(overlay.id) ?? `${currentOverlays.indexOf(overlay) + 1} of ${currentOverlays.length} images` };
+  publishShell();
   overlayPanel.dataset.selectedOverlay = overlay.id;
   refreshImageTone();
   refreshStarRemoval();
@@ -340,7 +343,7 @@ async function refreshOverlayControls() {
   const densityVisible = currentTab === 0 && currentMode === 'density' && Boolean(item?.density);
   const visible = densityVisible && Boolean(catalogue);
   const cloud = currentTab === 1 && currentMode === 'photo' && !busy && !modePending ? viewer?.getCloudParts() : null;
-  cloudPanel.hidden = !(currentTab === 1 && item?.reconstructionImage) && !cloud;
+  cloudPanel.hidden = !(currentTab === 1 && objectId(sourceSubject) === 'lmc-clouds') && !cloud;
   cloudDensityPanel.hidden = !cloud;
   cloudControls.setContext(cloud ? { id: cloud.id, parts: cloud.parts } : null);
   cloudDensityControls.setContext(cloud ? { subjectId: cloud.id } : null);
@@ -350,30 +353,28 @@ async function refreshOverlayControls() {
   densityTone.setContext(densityVisible && item && toneReadyFor(item.id) ? { subjectId: item.id } : null);
   if (!visible) imageTone.setContext(null);
   starRemoval.setContext(null);
-  currentOverlays = []; selectedOverlayId = null; overlayOptions.replaceChildren();
-  overlayStatus.textContent = ''; overlayRegistration.textContent = ''; overlayCredit.textContent = ''; overlaySource.removeAttribute('href');
+  currentOverlays = []; selectedOverlayId = null; placementControls?.destroy(); placementControls = null; overlayOptions.replaceChildren();
   if (!visible || !viewer || !catalogue) return;
   const request = ++overlayRequest;
   try {
     const overlays = await viewer.loadOverlayCatalogue();
     if (request !== overlayRequest || currentTab !== 0 || currentMode !== 'density') return;
     currentOverlays = overlays;
-    overlayChoice.replaceChildren(...overlays.map(overlay => new Option(overlay.label, overlay.id)));
     const stored = storedOverlayId(catalogue), enabled = viewer.getOverlayState().find(value => value.enabled)?.id;
     selectedOverlayId = overlays.some(overlay => overlay.id === stored) ? stored :
       overlays.some(overlay => overlay.id === enabled) ? enabled! : overlays[0]?.id ?? null;
     if (selectedOverlayId) renderSelectedOverlay();
-  } catch (error) { if (request === overlayRequest) overlayStatus.textContent = error instanceof Error ? error.message : String(error); }
+  } catch (error) { if (request === overlayRequest) { if (alignmentState) { alignmentState = { ...alignmentState, status: error instanceof Error ? error.message : String(error) }; publishShell(); } else fail(error); } }
   setBusy(busy);
 }
-overlayChoice.addEventListener('change', () => {
+function changeOverlayChoice(id: string) {
   layerActivation++; pendingLayerActivation = null;
   for (const controller of restoringImages.values()) controller.abort();
   const item = subjects.find(value => value.id === sourceSubject);
   if (!item?.density?.overlays) return;
-  selectedOverlayId = overlayChoice.value; rememberOverlayId(item.density.overlays, selectedOverlayId);
-  renderSelectedOverlay(); overlayEnabled.checked = true; void run(() => activateOverlay(selectedOverlayId!));
-});
+  selectedOverlayId = id; rememberOverlayId(item.density.overlays, selectedOverlayId);
+  renderSelectedOverlay(); void run(() => activateOverlay(selectedOverlayId!));
+}
 function changeOverlayLayer(layer: ImageLayer) {
   if (!viewer || !selectedOverlayId || busy) return;
   const id = selectedOverlayId, request = ++layerActivation;
@@ -390,13 +391,12 @@ function changeOverlayLayer(layer: ImageLayer) {
     } finally { if (current()) { pendingLayerActivation = null; renderSelectedOverlay(); } }
   });
 }
-layerButtons.forEach(button => button.addEventListener('click', () => changeOverlayLayer(button.dataset.imageLayer as ImageLayer)));
 function changeRemovalStrength(value: number) {
   if (!viewer || !selectedOverlayId || busy || removalControls.hidden) return;
   try {
     const id = selectedOverlayId, strength = validateRemovalStrength(value);
     removalStrengths.set(id, strength); removalRange.value = removalNumber.value = String(strength);
-    selectLayerButton('diffuse'); overlayEnabled.checked = true;
+    if (alignmentState) { alignmentState = { ...alignmentState, layer: 'diffuse', enabled: true, removalStrength: strength }; publishShell(); }
     const active = viewer.getOverlayState().find(overlay => overlay.id === id)?.enabled;
     if (active && viewer.getOverlayLayer(id) === 'diffuse' && pendingLayerActivation === null) refreshImageTone();
     else changeOverlayLayer('diffuse');
@@ -405,20 +405,18 @@ function changeRemovalStrength(value: number) {
     overlayLayerNote.textContent = error instanceof Error ? error.message : String(error);
   }
 }
-removalRange.addEventListener('input', () => changeRemovalStrength(Number(removalRange.value)));
-removalNumber.addEventListener('change', () => {
-  changeRemovalStrength(removalNumber.valueAsNumber);
-});
-overlayEnabled.addEventListener('change', () => {
+function changeOverlayVisibility(enabled: boolean) {
   if (!selectedOverlayId) return;
-  void run(() => overlayEnabled.checked ? activateOverlay(selectedOverlayId!) :
-    viewer!.setOverlay(selectedOverlayId!, false, Number(overlayOpacity.value) / 100));
-});
-overlayOpacity.addEventListener('input', () => {
+  void run(async () => {
+    if (enabled) await activateOverlay(selectedOverlayId!);
+    else { await viewer!.setOverlay(selectedOverlayId!, false, (alignmentState?.opacity ?? 55) / 100); renderSelectedOverlay(); }
+  });
+}
+function changeOverlayOpacity(percent: number) {
   if (!selectedOverlayId) return;
-  void run(() => viewer!.setOverlay(selectedOverlayId!, overlayEnabled.checked, Number(overlayOpacity.value) / 100));
-});
-async function changeSubject(id: string) {
+  void run(async () => { await viewer!.setOverlay(selectedOverlayId!, alignmentState?.enabled ?? false, percent / 100); renderSelectedOverlay(); });
+}
+async function changeSubject(id: string, updateUrl = true) {
   if (!viewer || busy) return;
   pendingSubject = id; reconstructionImageError = '';
   invalidateToneContexts();
@@ -432,20 +430,13 @@ async function changeSubject(id: string) {
     if (currentTab === 0 && !subjects.find(item => item.id === id)?.density) {
       await viewer.setMode('photo'); selectTab(1);
     }
-    const url = new URL(location.href); url.searchParams.set('subject', id);
-    history.replaceState(history.state, '', url);
+    if (updateUrl) { const url = new URL(location.href); url.searchParams.set('subject', id);
+      history.replaceState(history.state, '', url); }
   }
   catch (error) { reconstructionImageError = error instanceof Error ? error.message : String(error); fail(error); }
-  finally { pendingSubject = null; if (!disposed) { subject.value = sourceSubject ?? subject.value; setBusy(false); void refreshOverlayControls(); } }
+  finally { pendingSubject = null; if (!disposed) { subject.value = objectId(sourceSubject); setBusy(false); void refreshOverlayControls(); } }
 }
-subject.addEventListener('change', () => void changeSubject(subject.value));
-reconstructionImage.addEventListener('change', () => void changeSubject(reconstructionImage.value));
-cameraPose.addEventListener('change', () => void run(() => viewer!.setPose(cameraPose.value as Parameters<Viewer['setPose']>[0])));
-element('reset').addEventListener('click', () => void run(() => viewer!.reset()));
-element('reference-view').addEventListener('click', () => void run(() => viewer!.referenceView()));
-element('fit-cloud').addEventListener('click', () => void run(() => viewer!.fitCloud()));
-
-async function switchMode(next: 'photo' | 'density') {
+async function switchMode(next: 'photo' | 'density'): Promise<void> {
   if (disposed) return;
   const repeatedPendingRequest = modePending && requestedMode === next;
   requestedMode = next;
@@ -466,32 +457,38 @@ async function switchMode(next: 'photo' | 'density') {
     if (request !== modeRequest || disposed) return;
     modePending = false;
     currentMode = element('viewer').dataset.mode === 'density' ? 'density' : 'photo';
-    updateSubject(subject.value); updateCredit(); setBusy(false);
+    updateSubject(element('viewer').dataset.subject ?? subject.value); updateCredit(); setBusy(false);
     if (failed) selectTab(currentMode === 'density' ? 0 : 1);
     else void refreshOverlayControls();
   }
 }
 
 setBusy(true);
-const requestedTab = new URL(location.href).searchParams.get('tab');
-const initialTab = requestedTab === 'reconstruction' || requestedTab === 'render' ? 1 : 0;
-selectTab(initialTab);
+const initialUrl = new URL(location.href);
+const initialTab = labView(initialUrl) === 'reconstruction' ? 1 : 0;
+history.replaceState(history.state, '', labViewUrl(initialUrl, tabNames[initialTab]));
+void selectTab(initialTab, false);
 try {
   if (!subjects.length) throw new Error('No prepared subjects are available.');
   const requestedSubject = new URL(location.href).searchParams.get('subject');
-  const requestedObject = visibleObjects.find(item => item.id === requestedSubject ||
-    (item.id === 'lmc-clouds' && requestedSubject?.startsWith('lmc')) ||
-    (item.id === 'smc-particles' && requestedSubject?.startsWith('smc'))) ?? visibleObjects[0]!;
-  const initialSubject = subjects.find(item => item.id === requestedObject.id)!;
+  if (initialTab === 1 && requestedSubject && /^reconstruction-[a-f0-9]{64}$/.test(requestedSubject)) {
+    try {
+      const response = await fetch(`/__nebula/reconstruction/result/${requestedSubject.slice('reconstruction-'.length)}`);
+      const prepared = await response.json() as PreparedReconstruction;
+      if (!response.ok || prepared.subject?.id !== requestedSubject) throw new Error('Saved reconstruction is unavailable.');
+      registerReconstructionSubject(prepared.subject);
+    } catch (error) { reconstructionImageError = error instanceof Error ? error.message : String(error); }
+  }
+  const initialSubject = subjects.find(item => item.id === requestedSubject && (item.id.startsWith('lmc') || item.id.startsWith('smc') || item.sourceSubjectId === 'lmc-clouds')) ?? subjects.find(item => item.id === objectId(requestedSubject))!;
   const mountTab = initialSubject.density ? initialTab : 1;
   selectTab(mountTab);
   viewer = await createNebulaLabViewer({ host: element('viewer'), subjectId: initialSubject.id,
     mode: mountTab === 0 ? 'density' : 'photo', onState(state) {
     if (disposed) return;
     currentMode = state.mode;
-    subject.value = state.subjectId;
+    subject.value = objectId(state.subjectId);
     updateSubject(state.subjectId);
-    cameraPose.value = state.pose;
+    activePose = state.pose; cameraPose.value = state.pose; publishShell();
     status.textContent = state.status ?? '';
     status.hidden = element('viewer').dataset.ready === 'true' && !state.error;
     delete status.dataset.error;
@@ -505,6 +502,19 @@ try {
   }
 } catch (error) { fail(error); }
 
-function destroy() { if (!disposed) { disposed = true; for (const controller of restoringImages.values()) controller.abort(); densityTone.destroy(); imageTone.destroy(); starRemoval.destroy(); cloudControls.destroy(); cloudDensityControls.destroy(); cloudStarControls.destroy(); viewer?.destroy(); } }
-window.addEventListener('pagehide', destroy, { once: true });
-if (import.meta.hot) import.meta.hot.dispose(destroy);
+function onHistoryChange() {
+  const url = new URL(location.href), requested = url.searchParams.get('subject');
+  void (async () => {
+    await selectTab(labView(url) === 'reconstruction' ? 1 : 0, false);
+    if (requested && subjects.some(item => item.id === requested) && requested !== sourceSubject) await changeSubject(requested, false);
+  })();
+}
+window.addEventListener('popstate', onHistoryChange);
+
+function destroy() { if (!disposed) { disposed = true; window.removeEventListener('popstate', onHistoryChange); for (const controller of restoringImages.values()) controller.abort(); densityTone.destroy(); imageTone.destroy(); starRemoval.destroy(); reconstruction.destroy(); placementControls?.destroy(); cloudControls.destroy(); cloudDensityControls.destroy(); cloudStarControls.destroy(); viewer?.destroy(); } }
+return { destroy, selectView: (view: 'alignment' | 'reconstruction') => selectTab(view === 'alignment' ? 0 : 1), changeObject: changeSubject,
+  chooseImage: changeOverlayChoice, chooseLayer: changeOverlayLayer, setRemovalStrength: changeRemovalStrength,
+  showImage: changeOverlayVisibility, setImageOpacity: changeOverlayOpacity,
+  setPose: (pose: Parameters<Viewer['setPose']>[0]) => run(() => viewer!.setPose(pose)),
+  resetCamera: () => run(() => viewer!.reset()), referenceView: () => run(() => viewer!.referenceView()), fitCloud: () => run(() => viewer!.fitCloud()) };
+}

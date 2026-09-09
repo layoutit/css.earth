@@ -1,8 +1,8 @@
 [
   {
     "id": "lmc-particles",
-    "name": "LMC \u00b7 particle volume",
-    "directory": "labs/nebula/models/lmc-particles",
+    "name": "LMC · particle volume",
+    "directory": "labs/nebula/models/lmc/particles",
     "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
     "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
@@ -14,20 +14,20 @@
       {
         "id": "lmc-volume-diffuse",
         "name": "Diffuse image used by this volume",
-        "imagePath": "labs/nebula/models/lmc-particles/source/photo-diffuse.png"
+        "imagePath": "labs/nebula/models/lmc/particles/source/photo-diffuse.png"
       },
       {
         "id": "lmc-density-alignment",
         "name": "Alignment: photo / stellar density / overlay",
-        "imagePath": "labs/nebula/models/lmc-particles/source/alignment-comparison.png"
+        "imagePath": "labs/nebula/models/lmc/particles/source/alignment-comparison.png"
       }
     ],
     "density": {
-      "directory": "labs/nebula/models/lmc-full-density",
+      "directory": "labs/nebula/models/lmc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc-candidates/overlays.json",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
       "candidateImageIds": [
         "smash-original",
         "vista-infrared",
@@ -42,8 +42,8 @@
   },
   {
     "id": "lmc-highres-1024",
-    "name": "LMC \u00b7 master 1024",
-    "directory": "labs/nebula/models/lmc-highres-1024",
+    "name": "LMC · master 1024",
+    "directory": "labs/nebula/models/lmc/highres-1024",
     "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
     "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
@@ -55,15 +55,15 @@
       {
         "id": "lmc-density-alignment",
         "name": "Baseline alignment: photo / density / overlay",
-        "imagePath": "labs/nebula/models/lmc-particles/source/alignment-comparison.png"
+        "imagePath": "labs/nebula/models/lmc/particles/source/alignment-comparison.png"
       }
     ],
     "density": {
-      "directory": "labs/nebula/models/lmc-full-density",
+      "directory": "labs/nebula/models/lmc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc-candidates/overlays.json",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
       "candidateImageIds": [
         "smash-original",
         "vista-infrared",
@@ -78,8 +78,8 @@
   },
   {
     "id": "lmc-highres-512",
-    "name": "LMC \u00b7 master 512",
-    "directory": "labs/nebula/models/lmc-highres-512",
+    "name": "LMC · master 512",
+    "directory": "labs/nebula/models/lmc/highres-512",
     "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
     "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
@@ -91,15 +91,15 @@
       {
         "id": "lmc-density-alignment",
         "name": "Baseline alignment: photo / density / overlay",
-        "imagePath": "labs/nebula/models/lmc-particles/source/alignment-comparison.png"
+        "imagePath": "labs/nebula/models/lmc/particles/source/alignment-comparison.png"
       }
     ],
     "density": {
-      "directory": "labs/nebula/models/lmc-full-density",
+      "directory": "labs/nebula/models/lmc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc-candidates/overlays.json",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
       "candidateImageIds": [
         "smash-original",
         "vista-infrared",
@@ -114,8 +114,8 @@
   },
   {
     "id": "smc-particles",
-    "name": "SMC \u00b7 particle volume",
-    "directory": "labs/nebula/models/smc-particles",
+    "name": "SMC · particle volume",
+    "directory": "labs/nebula/models/smc/particles",
     "imagePath": "labs/nebula/sources/smc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
     "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
@@ -124,55 +124,32 @@
     "hasDetail": false,
     "sourceSubjectId": "smc",
     "density": {
-      "directory": "labs/nebula/models/smc-full-density",
+      "directory": "labs/nebula/models/smc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/smc-overlays/overlays.json"
+      "overlays": "labs/nebula/models/smc/overlays/overlays.json"
     }
   },
   {
     "id": "lmc",
-    "name": "Large Magellanic Cloud \u00b7 image layers",
+    "name": "Large Magellanic Cloud · image layers",
     "directory": "src/objects/lmc",
     "image": "source/source.jpg",
     "framingRadiusUnits": 4
   },
   {
     "id": "smc",
-    "name": "Small Magellanic Cloud \u00b7 image layers",
+    "name": "Small Magellanic Cloud · image layers",
     "directory": "src/objects/smc",
     "image": "source/source.jpg",
     "framingRadiusUnits": 3
   },
   {
-    "id": "m31",
-    "name": "Andromeda \u00b7 M31",
-    "directory": "src/objects/m31",
-    "image": "source/source.jpg",
-    "framingRadiusUnits": 25
-  },
-  {
-    "id": "m33",
-    "name": "Triangulum \u00b7 M33",
-    "directory": "src/objects/m33",
-    "image": "source/source.jpg",
-    "framingRadiusUnits": 9
-  },
-  {
-    "id": "milky-way",
-    "name": "Milky Way \u00b7 volume reference",
-    "directory": "src/objects/milky-way",
-    "image": "source/sky/nasa-preview.jpg",
-    "sourcePageUrl": "https://svs.gsfc.nasa.gov/4851/",
-    "credit": "NASA interior-sky comparison; the 3D volume uses OpenSpace density data.",
-    "modelNote": "Prepared emission and extinction slices from the OpenSpace Milky Way density model. The source tab shows its NASA interior-sky comparison."
-  },
-  {
     "id": "tarantula-broad",
-    "name": "Tarantula \u00b7 A \u00b7 broad depth",
-    "directory": "labs/nebula/models/tarantula-broad",
-    "imagePath": "labs/nebula/models/tarantula-core-benchmark/source.png",
+    "name": "Tarantula · A · broad depth",
+    "directory": "labs/nebula/models/lmc/research/tarantula-broad",
+    "imagePath": "labs/nebula/models/lmc/research/tarantula-core-benchmark/source.png",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
     "modelNote": "Diagnostic: same frozen photograph and exposure. Broad finite depth control. Depth is modeled, not measured gas geometry.",
@@ -183,9 +160,9 @@
   },
   {
     "id": "tarantula-localized",
-    "name": "Tarantula \u00b7 B \u00b7 localized depth",
-    "directory": "labs/nebula/models/tarantula-localized",
-    "imagePath": "labs/nebula/models/tarantula-core-benchmark/source.png",
+    "name": "Tarantula · B · localized depth",
+    "directory": "labs/nebula/models/lmc/research/tarantula-localized",
+    "imagePath": "labs/nebula/models/lmc/research/tarantula-core-benchmark/source.png",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
     "modelNote": "Diagnostic: same frozen photograph and exposure. One localized depth control. Depth is modeled, not measured gas geometry.",
@@ -196,9 +173,9 @@
   },
   {
     "id": "tarantula-coherent",
-    "name": "Tarantula \u00b7 C \u00b7 automatic structures",
-    "directory": "labs/nebula/models/tarantula-coherent",
-    "imagePath": "labs/nebula/models/tarantula-core-benchmark/source.png",
+    "name": "Tarantula · C · automatic structures",
+    "directory": "labs/nebula/models/lmc/research/tarantula-coherent",
+    "imagePath": "labs/nebula/models/lmc/research/tarantula-core-benchmark/source.png",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
     "modelNote": "Diagnostic: same frozen photograph and exposure. Automatically detected supports get finite depth. Unsupported light remains broad; stars are still included. Depth is modeled, not measured gas geometry.",
@@ -208,49 +185,10 @@
     "referenceProjectionScale": 100
   },
   {
-    "id": "orion-broad",
-    "name": "Orion \u00b7 A \u00b7 broad depth",
-    "directory": "labs/nebula/models/orion-broad",
-    "imagePath": "labs/nebula/models/orion-structure-benchmark/source.png",
-    "sourcePageUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
-    "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
-    "modelNote": "Diagnostic: same frozen photograph and exposure. Broad finite depth control. Depth is modeled, not measured gas geometry.",
-    "framingRadiusUnits": 0.6,
-    "hasDetail": false,
-    "comparisonGroup": "orion-core",
-    "referenceProjectionScale": 100
-  },
-  {
-    "id": "orion-localized",
-    "name": "Orion \u00b7 B \u00b7 localized depth",
-    "directory": "labs/nebula/models/orion-localized",
-    "imagePath": "labs/nebula/models/orion-structure-benchmark/source.png",
-    "sourcePageUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
-    "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
-    "modelNote": "Diagnostic: same frozen photograph and exposure. One localized depth control. Depth is modeled, not measured gas geometry.",
-    "framingRadiusUnits": 0.6,
-    "hasDetail": false,
-    "comparisonGroup": "orion-core",
-    "referenceProjectionScale": 100
-  },
-  {
-    "id": "orion-coherent",
-    "name": "Orion \u00b7 C \u00b7 automatic structures",
-    "directory": "labs/nebula/models/orion-coherent",
-    "imagePath": "labs/nebula/models/orion-structure-benchmark/source.png",
-    "sourcePageUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
-    "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
-    "modelNote": "Diagnostic: same frozen photograph and exposure. Automatically detected supports get finite depth. Unsupported light remains broad; stars are still included. Depth is modeled, not measured gas geometry.",
-    "framingRadiusUnits": 0.6,
-    "hasDetail": false,
-    "comparisonGroup": "orion-core",
-    "referenceProjectionScale": 100
-  },
-  {
     "id": "lmc-filled-broad",
-    "name": "LMC \u00b7 full-photo broad diagnostic",
-    "directory": "labs/nebula/models/lmc-filled-broad",
-    "imagePath": "labs/nebula/models/lmc-filled-observation/source/target.png",
+    "name": "LMC · full-photo broad diagnostic",
+    "directory": "labs/nebula/models/lmc/filled-broad",
+    "imagePath": "labs/nebula/models/lmc/filled-observation/source/target.png",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
     "modelNote": "Calibrated photo-constrained experiment. Same image distributed through the broad stellar depth prior. Depth is modeled; the image footprint is incomplete and compact candidates are excluded.",
@@ -263,35 +201,35 @@
       {
         "id": "registered-photo",
         "name": "Registered original photograph",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/registered-photo.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/registered-photo.png"
       },
       {
         "id": "target",
         "name": "Cloud target used by both volumes",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/target.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/target.png"
       },
       {
         "id": "compact",
         "name": "Excluded compact-source candidates",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/compact.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/compact.png"
       },
       {
         "id": "extended",
         "name": "Filled extended structures",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/extended.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/extended.png"
       },
       {
         "id": "diffuse",
         "name": "Diffuse remainder",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/diffuse.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/diffuse.png"
       }
     ],
     "density": {
-      "directory": "labs/nebula/models/lmc-full-density",
+      "directory": "labs/nebula/models/lmc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc-candidates/overlays.json",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
       "candidateImageIds": [
         "smash-original",
         "vista-infrared",
@@ -306,9 +244,9 @@
   },
   {
     "id": "lmc-filled",
-    "name": "LMC \u00b7 full-photo diagnostic",
-    "directory": "labs/nebula/models/lmc-filled",
-    "imagePath": "labs/nebula/models/lmc-filled-observation/source/target.png",
+    "name": "LMC · full-photo diagnostic",
+    "directory": "labs/nebula/models/lmc/filled",
+    "imagePath": "labs/nebula/models/lmc/filled-observation/source/target.png",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
     "modelNote": "Rejected full-photo diagnostic: preserves the diffuse photographic background, including its rectangular crop and side-view banding. Select LMC clouds for the separately reconstructed extended channel.",
@@ -321,35 +259,35 @@
       {
         "id": "registered-photo",
         "name": "Registered original photograph",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/registered-photo.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/registered-photo.png"
       },
       {
         "id": "target",
         "name": "Cloud target used by both volumes",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/target.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/target.png"
       },
       {
         "id": "compact",
         "name": "Excluded compact-source candidates",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/compact.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/compact.png"
       },
       {
         "id": "extended",
         "name": "Filled extended structures",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/extended.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/extended.png"
       },
       {
         "id": "diffuse",
         "name": "Diffuse remainder",
-        "imagePath": "labs/nebula/models/lmc-filled-observation/source/diffuse.png"
+        "imagePath": "labs/nebula/models/lmc/filled-observation/source/diffuse.png"
       }
     ],
     "density": {
-      "directory": "labs/nebula/models/lmc-full-density",
+      "directory": "labs/nebula/models/lmc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc-candidates/overlays.json",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
       "candidateImageIds": [
         "smash-original",
         "vista-infrared",
@@ -364,9 +302,9 @@
   },
   {
     "id": "lmc-clouds-broad",
-    "name": "LMC clouds \u00b7 broad depth control",
-    "directory": "labs/nebula/models/lmc-clouds-broad",
-    "imagePath": "labs/nebula/models/lmc-clouds-observation/source/target.png",
+    "name": "LMC clouds · broad depth control",
+    "directory": "labs/nebula/models/lmc/clouds-broad",
+    "imagePath": "labs/nebula/models/lmc/clouds-observation/source/target.png",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
     "modelNote": "Broad-depth control of the same extended-light target. Compact candidates and diffuse light are shown separately. Unknown gas depth is modeled, not measured.",
@@ -379,35 +317,35 @@
       {
         "id": "registered-photo",
         "name": "Registered original photograph",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/registered-photo.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/registered-photo.png"
       },
       {
         "id": "target",
         "name": "Extended-light target used by both cloud volumes",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/target.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/target.png"
       },
       {
         "id": "compact",
         "name": "Excluded compact-source candidates",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/compact.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/compact.png"
       },
       {
         "id": "extended",
         "name": "Filled extended structures",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/extended.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/extended.png"
       },
       {
         "id": "diffuse",
         "name": "Excluded diffuse remainder",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/diffuse.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/diffuse.png"
       }
     ],
     "density": {
-      "directory": "labs/nebula/models/lmc-full-density",
+      "directory": "labs/nebula/models/lmc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc-candidates/overlays.json",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
       "candidateImageIds": [
         "smash-original",
         "vista-infrared",
@@ -422,14 +360,14 @@
   },
   {
     "id": "lmc-clouds",
-    "name": "LMC clouds \u00b7 reconstructed",
-    "directory": "labs/nebula/models/lmc-clouds",
-    "stars": "labs/nebula/models/lmc-stars/prepared/stars.json",
+    "name": "LMC clouds · reconstructed",
+    "directory": "labs/nebula/models/lmc/clouds",
+    "stars": "labs/nebula/models/lmc/stars/prepared/stars.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"
     },
-    "imagePath": "labs/nebula/models/lmc-clouds-observation/source/target.png",
+    "imagePath": "labs/nebula/models/lmc/clouds-observation/source/target.png",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
     "modelNote": "Experimental extended-light reconstruction at the calibrated sky scale. Stellar-prior depth is modeled; the photo boundary and flat appearance in oblique views remain unresolved. Not accepted for production.",
@@ -442,35 +380,35 @@
       {
         "id": "registered-photo",
         "name": "Registered original photograph",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/registered-photo.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/registered-photo.png"
       },
       {
         "id": "target",
         "name": "Extended-light target used by both cloud volumes",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/target.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/target.png"
       },
       {
         "id": "compact",
         "name": "Excluded compact-source candidates",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/compact.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/compact.png"
       },
       {
         "id": "extended",
         "name": "Filled extended structures",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/extended.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/extended.png"
       },
       {
         "id": "diffuse",
         "name": "Excluded diffuse remainder",
-        "imagePath": "labs/nebula/models/lmc-clouds-observation/source/diffuse.png"
+        "imagePath": "labs/nebula/models/lmc/clouds-observation/source/diffuse.png"
       }
     ],
     "density": {
-      "directory": "labs/nebula/models/lmc-full-density",
+      "directory": "labs/nebula/models/lmc/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc-candidates/overlays.json",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
       "candidateImageIds": [
         "smash-original",
         "vista-infrared",

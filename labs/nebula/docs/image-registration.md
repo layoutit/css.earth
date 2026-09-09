@@ -26,7 +26,7 @@ Every third final correspondence was excluded from the final homography fit. Thi
 
 SMASH's scale is about 4.996 arcseconds per pixel. Gaia's wider outer field is extrapolated beyond the measured footprint. These homographies are starting registrations for visual inspection, not precision calibration across the entire raster.
 
-The checked-in `models/lmc-overlays/source/registration-receipts.json` preserves native source/reference coordinates, fit masks, matrices, residuals, image hashes and limitations. `models/image-overlays.json` pins the exact source bytes and fitted matrices. Preparation maps native image edges through these matrices, then through SMASH WCS into the shared observation plane. Rebuilding the fixed delivery geometry requires no rerunning of feature detection.
+The checked-in `models/lmc/overlays/source/registration-receipts.json` preserves native source/reference coordinates, fit masks, matrices, residuals, image hashes and limitations. `models/image-overlays.json` pins the exact source bytes and fitted matrices. Preparation maps native image edges through these matrices, then through SMASH WCS into the shared observation plane. Rebuilding the fixed delivery geometry requires no rerunning of feature detection.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -40,7 +40,7 @@ Missing originals download into the ignored cache and must match their recorded 
 
 At the LMC descriptor distance (49.5907 kpc), one arcsecond spans 0.24042 pc. Full SMASH is 9.3293° × 9.0521° between the central edge rays, with a tangent-plane width of 8.1001 kpc. Its native reference-plane scale is 4.99625 arcseconds per pixel; multiplying that plate scale by image width is a tangent-plane approximation, not the exact wide-field angle.
 
-The model's median heliocentric distance is 49.899 kpc. Its projected mass-enclosing diameters are 6.315° (50%), 19.248° (90%), and 28.944° (99%). The original SMASH footprint contains 54.75% of model particles at their reconstructed sky positions. The pinned density transform has unit singular values: no factor-three unit conversion is present. These values are reproducible in `models/lmc-overlays/source/angular-size-receipt.json`.
+The model's median heliocentric distance is 49.899 kpc. Its projected mass-enclosing diameters are 6.315° (50%), 19.248° (90%), and 28.944° (99%). The original SMASH footprint contains 54.75% of model particles at their reconstructed sky positions. The pinned density transform has unit singular values: no factor-three unit conversion is present. These values are reproducible in `models/lmc/overlays/source/angular-size-receipt.json`.
 
 A wider modeled stellar envelope does not justify stretching a photograph, and it does not explain a particular bright-bar mismatch by itself. Simulation particles are not individually identified observed stars, and displayed density opacity is not photographic surface brightness. Image-to-image star registration supplies angular calibration; image-to-simulation morphology remains a separate comparison.
 

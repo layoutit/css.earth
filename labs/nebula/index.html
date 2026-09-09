@@ -5,103 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Nebula Lab · css.earth</title>
-    <link rel="stylesheet" href="./src/lab.css" />
+    <link rel="stylesheet" href="/src/lab.css" />
   </head>
   <body>
-    <header class="lab-header">
-      <h1>Nebula Lab</h1>
-      <div class="subject-field"><label for="subject">Object</label><select id="subject" disabled></select></div>
-      <div role="tablist" aria-label="View">
-        <button id="density-tab" type="button" role="tab" aria-selected="true" aria-controls="render-panel">Alignment</button>
-        <button id="render-tab" type="button" role="tab" aria-selected="false" aria-controls="render-panel" tabindex="-1">Reconstruction</button>
-      </div>
-    </header>
-    <main class="lab-layout">
-      <section class="lab-workspace" aria-label="Object inspection">
-        <div class="workspace-content">
-          <div id="render-panel" role="tabpanel" aria-labelledby="density-tab">
-            <div id="viewer" aria-label="Interactive prepared object" tabindex="0"></div>
-          </div>
-          <aside id="inspection-panel" class="floating-panel density-adjustment-panel" aria-label="Camera and density adjustments">
-            <fieldset id="render-controls" disabled>
-              <legend>Camera</legend>
-              <label class="field-label" for="camera-pose">View</label>
-              <select id="camera-pose" aria-label="Fixed camera pose">
-                <option value="front">Front</option><option value="x-minus-60">X −60°</option><option value="x-minus-30">X −30°</option>
-                <option value="x-plus-30">X +30°</option><option value="x-plus-60">X +60°</option><option value="y-minus-60">Y −60°</option>
-                <option value="y-minus-30">Y −30°</option><option value="y-plus-30">Y +30°</option><option value="y-plus-60">Y +60°</option>
-                <option value="edge-x">Edge X</option><option value="edge-y">Edge Y</option><option value="manual">Manual</option>
-              </select>
-              <div class="camera-actions"><button id="reset" type="button">Reset camera</button></div>
-              <div id="density-view-controls" class="camera-actions" hidden>
-                <button id="reference-view" type="button">Earth view</button><button id="fit-cloud" type="button">Fit cloud</button>
-              </div>
-              <p class="interaction-hint">Drag to orbit. Scroll to zoom.</p>
-            </fieldset>
-            <section id="density-adjustment-panel" class="inspection-section" hidden>
-              <fieldset id="density-tone-fieldset" disabled><legend>Density adjustments</legend><div id="density-tone-controls"></div></fieldset>
-            </section>
-            <section id="cloud-density-panel" class="inspection-section" aria-label="Reconstruction density filter" hidden>
-              <div id="cloud-density-controls"></div>
-            </section>
-            <p id="status" role="status" aria-live="polite">Loading…</p>
-            <a id="source-link" class="model-source" hidden target="_blank" rel="noreferrer">Model source ↗</a>
-          </aside>
-          <aside id="image-overlay-panel" class="image-overlay-panel" aria-label="Image placement" hidden>
-            <fieldset id="overlay-controls" disabled>
-              <legend>Image adjustments</legend>
-              <label class="field-label" for="overlay-choice">Image</label>
-              <select id="overlay-choice"></select>
-              <div id="overlay-layer-control" hidden>
-                <div id="overlay-layer" class="image-layer-buttons" role="group" aria-label="Image layer">
-                  <button type="button" data-image-layer="original" aria-label="Original" aria-pressed="true" title="Original"><span aria-hidden="true">▧</span><span>Original</span></button>
-                  <button type="button" data-image-layer="diffuse" aria-label="Without stars" aria-pressed="false" title="Without stars"><span aria-hidden="true">☁</span><span>Without stars</span></button>
-                  <button type="button" data-image-layer="stars" aria-label="Residual" aria-pressed="false" title="Residual"><span aria-hidden="true">✧</span><span>Residual</span></button>
-                </div>
-                <p id="overlay-layer-note" class="overlay-detail"></p>
-                <div id="star-removal-controls">
-                  <div class="tone-control">
-                    <label for="star-removal-range">Star removal</label>
-                    <input id="star-removal-range" title="0% shows the original image; 100% shows the prepared removal. Remove stars prepares a new NOX result." type="range" min="0" max="100" step="1" value="100" aria-describedby="star-removal-note" />
-                    <input id="star-removal" type="number" min="0" max="100" step="1" value="100" aria-label="Star removal percent" />
-                  </div>
-                  <p id="star-removal-note" class="visually-hidden">0% Original · 100% Prepared removal</p>
-                </div>
-              </div>
-              <div id="automatic-star-removal"></div>
-              <div class="overlay-visibility">
-                <label id="overlay-enabled-label" for="overlay-enabled"><input id="overlay-enabled" type="checkbox" /> Show image</label>
-                <label for="overlay-opacity">Opacity</label>
-                <input id="overlay-opacity" type="range" min="0" max="100" value="55" />
-              </div>
-              <div id="image-tone-controls"></div>
-              <div id="overlay-options"></div>
-              <p id="overlay-status" class="overlay-status" role="status"></p>
-              <button class="text-button" type="button" popovertarget="image-source-info" aria-label="Image source and alignment information">ⓘ Source and alignment</button>
-              <div id="image-source-info" class="lab-info-popover" popover>
-                <button type="button" popovertarget="image-source-info" popovertargetaction="hide" aria-label="Close image information">×</button>
-                <p id="overlay-registration" class="overlay-detail"></p>
-                <p id="overlay-credit" class="overlay-detail"></p>
-                <a id="overlay-source" class="overlay-detail" target="_blank" rel="noreferrer">Image source ↗</a>
-              </div>
-            </fieldset>
-          </aside>
-          <aside id="cloud-adjustment-panel" class="floating-panel cloud-adjustment-panel" aria-label="Reconstruction adjustments" hidden>
-            <fieldset id="reconstruction-image-controls" hidden>
-              <legend>Reconstruction</legend>
-              <label class="field-label" for="reconstruction-image">Source image</label>
-              <select id="reconstruction-image" aria-describedby="reconstruction-image-note reconstruction-image-status" disabled></select>
-              <p id="reconstruction-image-note" class="reconstruction-image-detail"></p>
-              <p id="reconstruction-image-credit" class="reconstruction-image-detail"></p>
-              <a id="reconstruction-image-source" class="reconstruction-image-detail" target="_blank" rel="noreferrer">Publisher source ↗</a>
-              <p id="reconstruction-image-status" class="reconstruction-image-detail" role="status" aria-live="polite"></p>
-            </fieldset>
-            <div id="cloud-star-controls" hidden></div>
-            <div id="cloud-controls"></div>
-          </aside>
-        </div>
-      </section>
-    </main>
-    <script type="module" src="./src/main.ts"></script>
+    <div id="app"></div>
+    <script type="module" src="/src/entry.tsx"></script>
   </body>
 </html>

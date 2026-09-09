@@ -1,8 +1,8 @@
 # Nebula image processing method
 
-This is the repeatable workflow for bringing observed images into the lab, separating compact light, and eventually coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches.
+This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches.
 
-**Current stage:** VISTA, Horálek and WISE are selected for aligned, full-footprint **2D separation trials**. Other catalogue images remain comparison previews. A new volume and replacement of the current reconstruction require a separate decision after inspecting those trials.
+**Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Process** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The current 512px volume comparison is an approximation, not a production-quality recovery of gas depth.
 
 ## Order of operations
 
@@ -25,12 +25,12 @@ Star detections → verified image registration → full-density overlay
                                   ▼
                     Structure ownership + depth prior
                                   │
-                    high-resolution volume masters
+                    lossless comparison masters
                                   │
                     delivery slices → rotation review
 ```
 
-Image import and registration do not themselves authorize separation or a volume bake. Never skip the alignment stage because an image looks approximately right.
+Image import and registration do not themselves authorize separation or a volume bake. An explicit user instruction for named candidates or a processing-button click authorizes that operation; do not request the same approval again. Never skip alignment because an image looks approximately right.
 
 ## 1. Acquire and preserve the observation
 
@@ -38,7 +38,7 @@ Image import and registration do not themselves authorize separation or a volume
 - Prefer scientific survey/observatory sources. Author photographs are useful with explicit credits and registration; appearing on APOD does not make them NASA-owned or calibrated photometry.
 - Process the native grid of the **pinned source**, then reduce delivery previews. A publisher's 10K derivative is not its larger original. Upscaling does not supply missing detail.
 - Keep the entire footprint and actual no-data regions. A black display pixel alone is not a measured absence of emission. Do not crop to a central connected component, subtract the outskirts, or cut against simulation density before comparing coverage.
-- Preserve integer depth during separation. Do not silently apply EXIF rotation, mirroring, resizing, rectification or a color-profile conversion that invalidates the registered pixels or changes their values.
+- Preserve the original bit depth and orientation in the source archive. NOX currently uses a separate full-size RGB8 working copy where needed; record that conversion explicitly. Do not silently rotate, mirror, resize or rectify the registered source pixels.
 
 Large originals and lossless intermediates stay in the ignored `.local/nebula-lab/` cache. Recipes, source receipts, registration evidence and bounded inspection textures are versioned.
 
@@ -80,18 +80,23 @@ NOX predicts the background under stars. It is an image-processing model, not me
 - Infrared and optical composites are separate candidate color treatments. Do not average their colors as if they measured the same band. WISE W4/W2/W1 dust structure, VISTA Y/J/Ks stars and optical emission can differ legitimately.
 - A larger density field does not authorize inventing color beyond the image. Solve the footprint gap with verified observations, or retain explicit missing coverage.
 
-## 5. Later: assign structure and depth, then bake
+## 5. Assign structure and depth, then bake
 
-This stage follows selection of a useful 2D result; it is not part of the current three-image separation run.
+In **Reconstruction**, choose the completed source and press **Process**. The request binds the native NOX result and saved Alignment placement; source selection alone loads only an existing result. Server-owned progress, cancellation and refresh reconnection follow the same lifecycle as removal.
+
+The current worker maps the exact Alignment transform/pivot into physical observer rays, samples the native starless image into a **512px analysis plane**, and uses the existing filled-component coherent-depth model. Compact, extended and diffuse morphology all remain in the final light field; there is no second star-removal pass. This baseline uses all-light inspection, not individually identified nebulae.
+
+Independent ray/XYZ checks choose the minimum convergent integration sampling from 8, 16 or 32 samples per slab before baking. The actual bake uses that same count. Lossless masters produce 48 X, 48 Y and 96 Z delivery slabs. All resources and provenance must verify before atomic publication and browser decoding. Current comparison resolution does not preserve all native photographic detail; increase analysis/master resolution deliberately for a later detail experiment.
+
 
 - Decompose extended light into **filled structures plus a retained remainder**, with accounting back to the selected image. Sparse wavelet coefficients alone are not cloud footprints. Preserve related fine detail with its parent structure instead of spreading every feature across every depth layer.
 - Map registered pixels onto observer rays at the declared distance. A stellar density field supplies an uncertain depth prior; it does not measure gas geometry. Angular coverage becomes physical coverage through the projection and distance, not arbitrary percentage scaling.
 - Give connected structures explicit finite depth/thickness assumptions. Compare localized and broad-depth controls at fixed registration, target and exposure. Keep residual light and uncertainty visible.
 - Fit the selected Earth-facing projection before trimming empty volume bounds. Never cut the input density first to force the photograph to fit. Do not normalize layers independently or increase brightness to hide missing structure.
-- Bake lossless masters at sufficient spatial/integration resolution; only then derive bounded compressed XYZ slice banks. Check all axis banks, oblique views and close views for repeated silhouettes, gaps, disappearing structure, whitening and brightness changes.
+- Bake lossless masters at the declared spatial/integration resolution; only then derive bounded compressed XYZ slice banks. Check all axis banks, oblique views and close views for repeated silhouettes, gaps, disappearing structure, whitening and brightness changes.
 - Keep observed stars separate from diffuse light. Use actual catalogue positions where available; inferred depth placement must be documented and constrained by the model, not a flat background plane.
 
-The earlier [coherent-depth](docs/coherent-depth.md) and [filled-observation](docs/filled-observation.md) experiments remain **rejected for production morphology**. Their numerical checks do not establish a successful general 3D reconstruction. The [research plan](docs/research-plan.md) records the remaining structure/depth work and rotation acceptance gates.
+The earlier [coherent-depth](docs/research/coherent-depth.md) and [filled-observation](docs/research/filled-observation.md) experiments remain **rejected for production morphology**. Their numerical checks do not establish a successful general 3D reconstruction. The [research plan](docs/research/research-plan.md) records the remaining structure/depth work and rotation acceptance gates.
 
 ## Selected LMC inputs
 
@@ -109,4 +114,4 @@ For each new object, retain one record linking source → alignment gate → sep
 
 At each experiment's start, state the hypothesis, fixed controls and success threshold. Allow at most three fix/review rounds and two final cleanup rounds. Stop if evidence is missing or improving one view breaks another. Validate the actual produced files and visual result; a successful process exit is insufficient.
 
-The source-specific replay commands and current trial results are recorded in [the separation experiment](models/lmc-star-separation/README.md). Use that complete sequence from a clean checkout/cache; do not process a new unapproved catalogue entry merely because it is selectable in Alignment.
+The active UI workflow is recorded in [workflows](docs/workflows.md) and [reconstruction](docs/reconstruction.md). Earlier source-specific separation trials remain in their model evidence. Newly processed banks live in the ignored local reconstruction cache until deliberately promoted with their recipes and provenance. Do not process an unapproved catalogue entry merely because it is selectable in Alignment.

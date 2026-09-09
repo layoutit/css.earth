@@ -1,6 +1,54 @@
-# Image catalogue and reconstruction
+# Nebula Lab
 
-- Importing source images, assembling 2D mosaic previews, detecting stars for registration, and aligning previews are catalogue work. They do not authorize cloud processing.
-- Keep source credits, hashes, registration evidence and real no-data regions with each candidate. Apply the accepted shared image-to-density inspection fit without presenting it as measured physical registration.
-- Wait for explicit user sign-off on the chosen source before removing stars from its image, decomposing diffuse structure, mapping its colors into a volume, or baking new cloud layers.
-- Keep the current reconstruction unchanged while comparing candidates. Image tone and placement controls remain available for inspection.
+Local development tooling, separate from the production website. Current objects: LMC and SMC. Keep cleanup and UI work within this lab unless a task explicitly requires a shared dependency or another location.
+
+## Usage
+
+From the repository root: `pnpm install --frozen-lockfile`, then `pnpm lab:nebula`. The default server is `http://127.0.0.1:4331`.
+
+- `/alignment`: inspect the complete density field, choose an image, adjust placement/tone, compare Original / Without stars / Residual, and run optional Quick preview or full Remove stars.
+- `/reconstruction`: choose the saved starless source and press Process. Completed variants load without processing when selected. Show progress and Cancel; refresh reconnects to the same job.
+- Preserve existing local storage, source originals and completed processing caches during development. Keep the user's running lab alive; never restart it merely to clear state.
+- For the full current workflow, read [docs/workflows.md](docs/workflows.md). For source and depth interpretation, read [METHOD.md](METHOD.md).
+
+## Organization
+
+```text
+src/
+  components/       React panels and reusable controls
+  alignment/        source registration, placement and saved fits
+  star-removal/     NOX processing, residuals and saved removal state
+  reconstruction/   structure/depth model, bake worker and saved variants
+  density/          unchanged prior and integrated-signal inspection
+  stars/            particle/catalogue preparation and stellar overlays
+  viewer/           retained plain-TypeScript PolyCSS scene
+  utils/            shared stores, local jobs and path resolution
+  cli/              offline preparation commands
+  browser/          real browser checks
+models/
+  lmc/              LMC inputs, recipes and prepared models
+  smc/              SMC inputs, recipes and prepared models
+```
+
+- React owns UI markup, control state and interaction. The PolyCSS renderer remains a plain TypeScript library mounted through a stable element/ref. UI rerenders must not recreate the cloud scene.
+- Reuse css.earth's existing visual language and input policy. Keep the lab a compact tool: visible controls, brief status, longer interpretation in tooltips/popovers or docs.
+- Keep image/object choices in data. Shared algorithms must not gain per-image branches. Tests live beside the module; browser checks live in `browser/`.
+- Source originals and large native/intermediate outputs stay in the ignored local cache. Keep credits, source hashes, registration evidence and reproducible recipes with the model. No copies of large assets just to rearrange folders.
+- Historical receipts retain their original bytes and hashes. Resolve relocated historical paths at explicit loading boundaries; do not fabricate replacement provenance.
+
+## Processing boundaries
+
+- Browsing/importing/alignment does not authorize expensive processing. A user's instruction for named candidates, or their explicit Quick preview / Remove stars / Process click, authorizes that operation. Do not ask again for work already authorized.
+- Source registration and the user's image-to-density fit are different. Preserve both. The visual fit is not measured distance, size, or correspondence between simulated and observed stars.
+- Remove stars on the full native pixel grid. Use the completed NOX native diffuse result for reconstruction, not an older separation preview or the small browser texture. RGB8 working copies must be separate from higher-depth originals.
+- Never remove stars again while reconstructing. Include the retained diffuse-image signal; do not silently discard its morphological compact/remainder channels.
+- Keep original source footprint/no-data and the unchanged full density prior. Do not crop either to force a match or invent color beyond observed coverage.
+- The current depth assignment is a visualization approximation guided by simulated stellar density; it is not recovered gas or dust geometry. Optical/infrared images remain separately labeled variants.
+- Bake XYZ image banks offline. Runtime only loads prepared geometry/textures; keep scene rendering within the existing PolyCSS rules.
+- Processing is server-owned and atomically publishes complete results. Refresh/navigation detach an observer, not the job. Explicit Cancel stops it. A server restart must report an interrupted job honestly.
+
+## Validation
+
+Use targeted lab typechecking/tests and the affected browser flow. Verify actual output hashes, source identity, full extent, geometry/handedness, all three slice axes, and source-switch/refresh behavior. Keep numerical convergence thresholds fixed; increase sampling at its owning layer when needed. Inspect front and oblique views before claiming visual quality.
+
+Do not infer completion from process launch or exit code alone. Do not run unrelated production suites during lab iteration. No review council or external-agent review is required for routine lab changes.
