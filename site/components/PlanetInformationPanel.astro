@@ -1,19 +1,16 @@
 ---
 import type { Props } from "../planet-shell-types";
 import PlanetBreadcrumbs from "./PlanetBreadcrumbs.astro";
-import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
-import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
-import { sceneSources } from "../scene-sources.mjs";
-import MaterialSymbol from "./MaterialSymbol.astro";
-import SearchIcon from "./SearchIcon.astro";
 import PlanetCard from "./PlanetCard.astro";
 import PlanetCardHeader from "./PlanetCardHeader.astro";
 import PlanetFactsheet from "./PlanetFactsheet.astro";
-const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], resources = [], lenses, destinations } = Astro.props;
+import { objectSources } from "../object-sources.mjs";
+import DatasetSpacecraft from "./DatasetSpacecraft.astro";
+import DatasetLegend from "./DatasetLegend.astro";
+const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], provenance, lenses, destinations } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
-const sources = sceneSources(resources);
-const hasResources = sources.length > 0;
+const sources = objectSources(provenance);
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
 ---
@@ -26,7 +23,18 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       <PlanetCardHeader {title} {introduction}>
           <PlanetBreadcrumbs {objectId} />
       </PlanetCardHeader>
-      <PlanetFactsheet id={objectId} {facts} {moreFacts} />
+      <div class="planet-card-tabs" role="tablist" aria-label="Object information">
+        <button type="button" role="tab" id={`${objectId}-dataset-tab`} data-information-tab="dataset"
+          aria-controls={`${objectId}-dataset-content`} aria-selected="true" tabindex="0">
+          <span>Dataset</span>{" "}<span class="planet-object-tab-count">({lenses?.controls.length ?? 0})</span>
+        </button>
+        <button type="button" role="tab" id={`${objectId}-factsheet-tab`} data-information-tab="factsheet"
+          aria-controls={`${objectId}-factsheet-content`} aria-selected="false" tabindex="-1">Factsheet</button>
+        <button type="button" role="tab" id={`${objectId}-sources-tab`} data-information-tab="sources"
+          aria-controls={`${objectId}-sources-content`} aria-selected="false" tabindex="-1">Sources</button>
+      </div>
+      <div class="planet-card-tabpanel" id={`${objectId}-dataset-content`} data-information-panel="dataset"
+        role="tabpanel" aria-labelledby={`${objectId}-dataset-tab`} tabindex="0">
       {defaultChart && <details
         id={`${objectId}-charts`}
         class="planet-chart-switcher"
@@ -88,19 +96,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
           ))}
         </div>
       </details>}
-      {hasLenses && lenses && <details id={`${objectId}-lenses`} class="planet-lenses" open>
-        <summary class="planet-panel-summary planet-lens-browser-header">
-          <h2 class="planet-panel-heading">Dataset <span class="planet-panel-heading-count">({lenses.controls.length})</span></h2>
-          <label class="planet-lens-search-field">
-            <input
-              class="planet-lens-search"
-              type="search"
-              aria-label="Search datasets"
-              autocomplete="off"
-            />
-            <span class="planet-lens-search-icon"><SearchIcon /></span>
-          </label>
-        </summary>
+      {hasLenses && lenses && <section id={`${objectId}-lenses`} class="planet-lenses">
         <div id={`${objectId}-layers-menu`} class="planet-layers-menu">
           <nav class="planet-observation-controls" aria-label="Datasets">
             {lenses.controls.map((lens) => (
@@ -121,20 +117,12 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
               </div>
             ))}
           </nav>
-          <p class="planet-lens-empty" aria-live="polite" hidden>No matching datasets</p>
         </div>
-      </details>}
-      {hasLenses && lenses && <details
+      </section>}
+      {hasLenses && lenses && <section
         id={`${objectId}-surface-lens`}
         class="planet-lens-details"
-        open
       >
-        <summary class="planet-panel-summary">
-          <h2 class="planet-panel-heading">Surface Lens</h2>
-          <span class="planet-panel-icon" aria-hidden="true">
-            <MaterialSymbol name="info" />
-          </span>
-        </summary>
         <div class="planet-lens-details-body" aria-live="polite" aria-atomic="true">
           {lenses.controls.map((lens) => (
             <div
@@ -167,7 +155,8 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                   ></span>)}
                 </>}
               </div>}
-              <p class="planet-lens-details-copy">{lens.description}</p>
+              <DatasetLegend {objectId} {lens} />
+              <p class="planet-lens-details-copy" title={lens.description}>{lens.summary ?? lens.description}</p>
               {lens.facts?.length > 0 && <ul class="planet-facts" aria-label={`${lens.label} facts`}>
                 {lens.facts.map((fact) => <li>
                   <span class="planet-fact-label">{fact.label}</span>{" "}
@@ -179,72 +168,11 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                   ? <a href={lens.texture.attribution.url} target="_blank" rel="noreferrer">{lens.texture.attribution.label}</a>
                   : lens.texture.attribution.label}
               </p>}
-              {lens.legend && <section
-                id={`${objectId}-${lens.id}-legend`}
-                class="planet-lens-legend-panel"
-                data-lens-legend={lens.id}
-                aria-label={`${lens.label} legend`}
-              >
-                {(lens.legend.title !== lens.label ||
-                  (lens.legend.kind === "categories" && lens.legend.meta)) &&
-                  <p class="planet-lens-legend-title">
-                    <span>{lens.legend.title}</span>
-                    {lens.legend.kind === "categories" && lens.legend.meta &&
-                      <span>{lens.legend.meta}</span>}
-                  </p>}
-                {lens.legend.kind === "scale" && lens.legend.labels &&
-                  (lens.legend.src || lens.legend.colors) && <>
-                  <div class="planet-lens-legend-scale-row">
-                    {lens.legend.src
-                      ? <img
-                          class="planet-lens-legend-scale"
-                          src={lens.legend.src}
-                          width={lens.legend.width}
-                          height={lens.legend.height}
-                          alt={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
-                        />
-                      : <span
-                          class="planet-lens-legend-scale planet-lens-legend-segments"
-                          role="img"
-                          aria-label={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
-                        >
-                          {lens.legend.colors?.map((color) => (
-                            <span
-                              class="planet-lens-legend-segment"
-                              style={`--planet-lens-legend-color: ${color}`}
-                              aria-hidden="true"
-                            ></span>
-                          ))}
-                        </span>}
-                  </div>
-                  <div class="planet-lens-legend-labels" aria-hidden="true">
-                    {lens.legend.labels.map((label, index) => (
-                      <span>{label}{index === lens.legend.labels.length - 1 && lens.legend.meta
-                        ? ` ${lens.legend.meta}`
-                        : ""}</span>
-                    ))}
-                  </div>
-                </>}
-                {lens.legend.kind === "categories" && lens.legend.items && (
-                  <ul class="planet-lens-legend-categories">
-                    {lens.legend.items.map((item) => (
-                      <li>
-                        <span
-                          class="planet-lens-legend-swatch"
-                          style={`--planet-lens-legend-color: ${item.color}`}
-                          aria-hidden="true"
-                        ></span>
-                        <span class="planet-lens-legend-category-label">{item.label}</span>
-                        <span class="planet-lens-legend-category-description">{item.description}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </section>}
+              <DatasetSpacecraft {provenance} lensId={lens.id} />
             </div>
           ))}
         </div>
-      </details>}
+      </section>}
       {galleries.map((gallery) => (
       <details id={`${objectId}-${gallery.id}`} class="planet-gallery-panel" hidden={gallery.hidden}>
         <summary class="planet-panel-summary">
@@ -274,32 +202,23 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         </div>
       </details>
       ))}
-      {hasResources && <details id={`${objectId}-resources`} class="planet-resources-panel">
-        <summary class="planet-panel-summary">
-          <h2 class="planet-panel-heading">{PREPARED_SHELL_TITLES.resources.label}</h2>
-          <img
-            class="planet-panel-icon"
-            data-panel-icon="resources"
-            src={PREPARED_SHELL_ICONS.resources.src}
-            width={PREPARED_SHELL_ICONS.resources.width}
-            height={PREPARED_SHELL_ICONS.resources.height}
-            alt=""
-          />
-        </summary>
-        <div class="planet-resources-links">
+      </div>
+      <div class="planet-card-tabpanel" id={`${objectId}-factsheet-content`} data-information-panel="factsheet"
+        role="tabpanel" aria-labelledby={`${objectId}-factsheet-tab`} tabindex="0" hidden>
+        <PlanetFactsheet id={objectId} {facts} {moreFacts} embedded />
+      </div>
+      <div class="planet-card-tabpanel" id={`${objectId}-sources-content`} data-information-panel="sources"
+        role="tabpanel" aria-labelledby={`${objectId}-sources-tab`} tabindex="0" hidden>
+        <ul class="planet-resources-links" role="list">
           {sources.map((resource) => (
-            <a
-              class="planet-resource-row"
-              href={resource.href}
-              title={resource.description}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span class="planet-resource-description">{resource.description}</span>
-              <span class="planet-resource-label">{resource.label}</span>
-            </a>
+            <li>
+              <div class="planet-resource-row">
+                {resource.links.map(link => <a class="planet-resource-label" href={link.href} target="_blank" rel="noreferrer">{link.label}</a>)}
+                <span class="planet-resource-description">{resource.description}</span>
+              </div>
+            </li>
           ))}
-        </div>
-      </details>}
-
+        </ul>
+        {!provenance && <p>Preparation provenance has not been recorded for this object.</p>}
+      </div>
     </PlanetCard>

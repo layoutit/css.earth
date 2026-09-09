@@ -84,7 +84,8 @@
           "id": "stooke-mosaic",
           "path": "../manifest.json",
           "url": "https://sbn.psi.edu/pds/resource/stookemaps.html"
-        }
+        },
+        "summary": "Viking and MRO mosaic with uneven detail. Shadows, seams and interpolated poles remain; gaps are unmasked."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
           "image": "/scenes/deimos/deimos-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to a 6.2 km sphere, from the 2023 shape model. Areas without a solved surface brightness are withheld."
       }
     ]
   },

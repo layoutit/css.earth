@@ -84,7 +84,8 @@
           "id": "c0532888100",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/galileo/ssi/"
-        }
+        },
+        "summary": "Galileo images mapped onto the moon's shape. Brightness has been adjusted; gray grid: missing or unreliable imagery."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
           "image": "/scenes/amalthea/amalthea-elevation-legend.webp"
-        }
+        },
+        "summary": "Height from a Voyager model, relative to an 83.5 km sphere. Unseen terrain and small features are uncertain."
       }
     ]
   },

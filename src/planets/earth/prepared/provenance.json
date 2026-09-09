@@ -1,0 +1,1377 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "earth",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "363d96e9547fd3738a0b4d8df32df5aabcf31080a4940476db57a9992b51aafe"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "paged-ellipsoid",
+      "path": "source/preparation/paged-ellipsoid.json",
+      "sha256": "0a7a5812e30473533294696ce30e3ad362300bdfbec1b34fbfeffc53ad383933",
+      "parameters": {
+        "schema": "cssearth-paged-ellipsoid@1",
+        "namespace": "earth",
+        "displayName": "Earth",
+        "publicBase": "/scenes/earth/",
+        "sceneBodyKey": "earth",
+        "interiorRadiusKey": "earthRadiusKm",
+        "interiorSchema": "cssearth-earth-interior-source@1",
+        "equatorialRadiusKm": 6378.137,
+        "polarRadiusKm": 6356.752,
+        "destinations": {
+          "searchLabel": "Search planets and cities",
+          "descriptionSuffix": " cities worldwide.",
+          "statuses": {
+            "detail": "WorldCover imagery · 2021. Source gaps retain the Earth base map.",
+            "overview": "Earth overview. WorldCover detail is unavailable at this location."
+          }
+        },
+        "geometry": {
+          "BODY_LATITUDE_SEGMENTS": 16,
+          "BODY_LONGITUDE_SEGMENTS": 32,
+          "EQUATORIAL_RADIUS": 230,
+          "TILE_SIZE": 50,
+          "SEAM_BLEED": 0.15,
+          "PLANET_SEAM_BLEED": 0,
+          "INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE": 4,
+          "SURFACE_OVERLAP": 0.008,
+          "POLAR_CAP_BAND_SPAN": 1,
+          "POLAR_SURFACE_OVERLAP": 1.035,
+          "POLAR_INNER_OVERLAP": 1.05,
+          "POLAR_INNER_INSET": 2.4,
+          "OBLIQUITY_DEGREES": 23.4,
+          "PRESENTATION_NODE_DEGREES": -60,
+          "MESH_ROTATION_Z": 128,
+          "CAMERA_ZOOM": 1.1,
+          "CAMERA_SCENE_PITCH_DEGREES": 40,
+          "CAMERA_MINIMUM_CONTROL_PITCH_DEGREES": 0,
+          "CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES": 89,
+          "CAMERA_DEFAULT_CONTROL_PITCH_DEGREES": 34.230769230769226,
+          "CAMERA_MILLISECONDS_PER_CONTROL_DEGREE": 1000,
+          "INTERIOR_REFERENCE_CONTROL_YAW_DEGREES": 45,
+          "INTERIOR_LATITUDE_SEGMENTS": 8,
+          "INTERIOR_LONGITUDE_SEGMENTS": 16,
+          "interiorCutaway": {
+            "centerLongitudeDegrees": -56.25,
+            "widthDegrees": 112.5
+          },
+          "rotationSeconds": 72
+        },
+        "atlas": {
+          "pageSize": 4096,
+          "density": 8,
+          "gutter": 4,
+          "sourceWidth": 2048,
+          "sourceHeight": 1024
+        },
+        "material": {
+          "tileSize": 504,
+          "presentationSize": 720,
+          "framesPerShard": 4,
+          "frameCount": 128,
+          "discRadius": 0.468,
+          "illumination": {
+            "frameCount": 128,
+            "minimumLightViewZ": -1,
+            "maximumLightViewZ": 1,
+            "baseLightAzimuthDegrees": 0
+          },
+          "worldLight": [
+            0.883835,
+            -0.385595,
+            0.264864
+          ],
+          "solarTint": "#fff1ea"
+        },
+        "atmosphere": {
+          "sourcePath": "openspace/earth-atmosphere.asset",
+          "sourceId": "openspace-earth-atmosphere-config",
+          "responsePath": "atmosphere/google-earth-pro-presentation-response.json",
+          "maximumOpacityKey": "earthMaximumOpacity"
+        },
+        "interiorPath": "interior/earth-interior.json",
+        "cityPath": "city/manifest.json",
+        "surface": {
+          "width": 8192,
+          "height": 4096,
+          "quality": 84,
+          "clouds": {
+            "path": "blue-marble-clouds.tif",
+            "maximumAlpha": 0.76,
+            "threshold": 12,
+            "scale": 0.8,
+            "color": [
+              245,
+              250,
+              255
+            ]
+          },
+          "maps": [
+            {
+              "path": "blue-marble-december.jpg",
+              "name": "earth-surface",
+              "compositeClouds": true,
+              "thumbnail": "earth-lens-normal.webp"
+            },
+            {
+              "path": "blue-marble-topography.jpg",
+              "name": "earth-topography",
+              "thumbnail": "earth-lens-topography.webp"
+            },
+            {
+              "path": "black-marble-2016.jpg",
+              "name": "earth-night-lights",
+              "thumbnail": "earth-lens-night-lights.webp"
+            }
+          ]
+        },
+        "camera": {
+          "cameraModel": "accumulated-matrix3d",
+          "minimumControlPitchDegrees": 0,
+          "maximumControlPitchDegrees": 89,
+          "defaultControlPitchDegrees": 34.230769230769226,
+          "defaultControlYawDegrees": 0,
+          "materialReferenceControlPitchDegrees": 34.230769230769226,
+          "materialReferenceControlYawDegrees": 0,
+          "initialScenePitchDegrees": 40,
+          "maximumScenePitchDegrees": 65,
+          "minimumZoom": 0.42,
+          "maximumZoom": 4,
+          "defaultZoom": 1.1,
+          "sceneScale": 0.02,
+          "logicalBodyDiameter": 460,
+          "pitchBounded": false,
+          "yawBounded": false,
+          "responsiveFit": {
+            "model": "continuous-aspect-smoothstep",
+            "portraitBaseWidthShare": 0.34,
+            "narrowPortraitWidthShareGain": 0.08,
+            "landscapeWidthShareGain": 0.02,
+            "narrowPortraitAspectRatio": 0.46,
+            "portraitAspectRatio": 0.75,
+            "squareAspectRatio": 1,
+            "maximumHeightShare": 0.61,
+            "maximumMobilePreviewShare": 0.925,
+            "minimumZoom": 0.42,
+            "maximumZoom": 2
+          }
+        },
+        "geographic": {
+          "kind": "segmented-16x32-polar-caps",
+          "pages": {
+            "schema": "cssearth-earth-city-pages@1",
+            "initialAddress": {
+              "longitude": -58.38,
+              "latitude": -34.6,
+              "zoom": 14
+            },
+            "presentation": {
+              "rasterScale": 8,
+              "pageTemplate": "clipped-projective",
+              "poolSize": 512,
+              "decodedPageBytes": 262144,
+              "maximumDecodedBytes": 134217728,
+              "maximumConcurrentLoads": 4,
+              "minimumZoom": 8,
+              "maximumZoom": 4096,
+              "targetCssPixels": 384,
+              "index": {
+                "maximumDirectories": 96,
+                "maximumBytes": 12582912,
+                "maximumDirectoryBytes": 2097152,
+                "maximumConcurrentLoads": 3
+              }
+            }
+          },
+          "noise": {
+            "poolSize": 32,
+            "directory": "noise",
+            "dataset": "buenos-aires-noise-2025",
+            "assetOrigin": "https://earth-assets.lowpoly.cc",
+            "credit": "Buenos Aires APrA",
+            "period": "Diurno",
+            "bounds": {
+              "west": -59,
+              "east": -58,
+              "south": -35,
+              "north": -34
+            },
+            "coarse": {
+              "level": 0,
+              "x": 26,
+              "y": 4
+            },
+            "camera": {
+              "longitude": -58.44,
+              "latitude": -34.61,
+              "zoom": 1024
+            },
+            "size": 4096,
+            "side": 1024,
+            "columns": 4,
+            "opacity": 0.66
+          },
+          "places": {
+            "directory": "places",
+            "coverageDirectory": "city",
+            "coverageLevel": 14,
+            "detailZoom": 1024,
+            "overviewZoom": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "5802836ab095cd407d5d5962cb3d90166407aff7f53427e417cf0929301d9279",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "earth",
+        "displayName": "Earth",
+        "title": {
+          "label": "Earth",
+          "viewBox": "0 0 63.1016 35",
+          "width": 63.1016,
+          "height": 35,
+          "path": "M0 29L0 8.63L13.52 8.63L13.52 11.29L3.05 11.29L3.05 17.32L12.74 17.32L12.74 19.95L3.05 19.95L3.05 26.33L13.54 26.33L13.54 29ZM20.64 29.26Q19.2 29.26 18.05 28.75Q16.9 28.25 16.24 27.26Q15.58 26.28 15.58 24.83Q15.58 23.59 16.06 22.78Q16.53 21.97 17.36 21.51Q18.18 21.04 19.21 20.8Q20.24 20.56 21.33 20.44Q22.69 20.26 23.49 20.16Q24.3 20.06 24.65 19.83Q25 19.59 25 19.07L25 18.96Q25 18.21 24.66 17.67Q24.31 17.13 23.66 16.81Q23.02 16.49 22.07 16.49Q21.14 16.49 20.43 16.8Q19.72 17.11 19.31 17.63Q18.9 18.14 18.79 18.76L15.95 18.6Q16.14 17.23 16.94 16.22Q17.75 15.22 19.08 14.67Q20.4 14.11 22.09 14.11Q23.34 14.11 24.4 14.42Q25.46 14.73 26.24 15.36Q27.02 15.98 27.45 16.9Q27.88 17.82 27.88 19.05L27.88 29L25.03 29L25.03 26.95L24.96 26.95Q24.66 27.52 24.12 28.06Q23.58 28.59 22.73 28.92Q21.88 29.26 20.64 29.26ZM21.25 26.91Q22.51 26.91 23.35 26.45Q24.19 25.99 24.6 25.23Q25.01 24.46 25.01 23.57L25.01 21.82Q24.86 21.96 24.49 22.06Q24.12 22.16 23.62 22.26Q23.11 22.36 22.56 22.44Q22.02 22.53 21.5 22.6Q20.69 22.71 20 22.96Q19.31 23.22 18.89 23.67Q18.48 24.13 18.48 24.88Q18.48 25.53 18.82 25.98Q19.16 26.43 19.78 26.67Q20.4 26.91 21.25 26.91ZM31.21 29L31.21 14.37L34.03 14.37L34.03 16.75L34.09 16.75Q34.49 15.53 35.39 14.86Q36.3 14.18 37.68 14.18Q37.99 14.18 38.28 14.21Q38.56 14.23 38.77 14.26L38.77 17Q38.59 16.94 38.16 16.89Q37.73 16.85 37.24 16.85Q36.38 16.85 35.67 17.23Q34.96 17.61 34.54 18.38Q34.12 19.16 34.12 20.3L34.12 29ZM48.24 14.37L48.24 16.78L39.9 16.78L39.9 14.37ZM42.38 10.5L45.29 10.5L45.29 25.1Q45.29 25.94 45.64 26.28Q45.98 26.62 46.85 26.62Q47.15 26.62 47.54 26.61Q47.94 26.59 48.23 26.58L48.34 28.97Q47.97 29.01 47.45 29.03Q46.94 29.05 46.46 29.05Q44.43 29.05 43.4 28.15Q42.38 27.25 42.38 25.47ZM53.5 20.52L53.5 29L50.59 29L50.59 8.63L53.5 8.63L53.5 18.01L52.85 18.01Q53.56 16.04 54.82 15.08Q56.09 14.11 57.89 14.11Q59.38 14.11 60.56 14.76Q61.73 15.41 62.42 16.68Q63.1 17.95 63.1 19.85L63.1 29L60.19 29L60.19 20.21Q60.19 18.49 59.36 17.6Q58.52 16.71 57 16.71Q56.03 16.71 55.23 17.12Q54.43 17.53 53.97 18.37Q53.5 19.21 53.5 20.52Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Earth (our home planet) is the third planet from the Sun, and the fifth largest planet. It’s the only place we know of inhabited by living things.",
+          "facts": [
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "1.000 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "6,371 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "365.26 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "23.93 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "axial-tilt",
+              "label": "Axial tilt",
+              "value": "23.4°"
+            },
+            {
+              "id": "moon-count",
+              "label": "Moons",
+              "value": "1"
+            },
+            {
+              "id": "ring-system",
+              "label": "Rings",
+              "value": "None"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "ocean-coverage",
+              "label": "Ocean coverage",
+              "value": "71%"
+            },
+            {
+              "id": "atmosphere-composition",
+              "label": "Atmosphere",
+              "value": "78% N₂, 21% O₂"
+            },
+            {
+              "id": "mass",
+              "label": "Mass",
+              "value": "5.972 × 10²⁴ kg",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "5.513 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "gravity",
+              "label": "Equatorial gravity",
+              "value": "9.80 m/s²",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Visible color",
+              "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
+              "title": "Visible color: NASA Blue Marble Next Generation with archival clouds",
+              "thumbnail": "/scenes/earth/earth-lens-normal.webp",
+              "source": {
+                "id": "surface-observation"
+              },
+              "detail": "Global mosaic",
+              "summary": "NASA Blue Marble 2004 with ESA WorldCover 2021 detail. The surface and clouds are archival, not live."
+            },
+            {
+              "id": "topography",
+              "label": "Elevation",
+              "description": "NASA Blue Marble topography and bathymetry, December 2004. Color and relief show land and seafloor elevation, not a photograph.",
+              "title": "Elevation: NASA Blue Marble topography and bathymetry",
+              "thumbnail": "/scenes/earth/earth-lens-topography.webp",
+              "source": {
+                "id": "surface-observation"
+              },
+              "detail": "Land + seafloor",
+              "summary": "NASA Blue Marble topography from 2004. Colors and shading show land and seafloor elevation, not photos."
+            },
+            {
+              "id": "night-lights",
+              "label": "Night lights",
+              "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
+              "title": "Night lights: NASA Black Marble 2016 global composite",
+              "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
+              "source": {
+                "id": "surface-observation"
+              },
+              "detail": "Nighttime",
+              "summary": "NASA Black Marble's 2016 night-light composite. It combines dates and does not show current lighting."
+            },
+            {
+              "id": "cross-section",
+              "label": "Cross section",
+              "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
+              "title": "Cross section: Schematic NASA Science source-backed interior",
+              "thumbnail": "/scenes/earth/earth-view-interior.webp",
+              "legend": {
+                "kind": "categories",
+                "title": "Structure",
+                "items": [
+                  {
+                    "label": "Crust",
+                    "description": "6,348 km inner radius",
+                    "color": "#8b795e"
+                  },
+                  {
+                    "label": "Mantle",
+                    "description": "3,478 km inner radius",
+                    "color": "#cf5d35"
+                  },
+                  {
+                    "label": "Outer core",
+                    "description": "1,221 km inner radius",
+                    "color": "#ef9c3b"
+                  },
+                  {
+                    "label": "Inner core",
+                    "description": "to the center",
+                    "color": "#f5d580"
+                  }
+                ],
+                "meta": "Schematic",
+                "sourceUrl": "https://science.nasa.gov/earth/facts/"
+              },
+              "source": {
+                "id": "surface-observation"
+              },
+              "detail": "Structure",
+              "summary": "Earth's interior based on NASA models. Colors mark layers; the boundaries are inferred, not photographed."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "cycle",
+              "name": "speed",
+              "label": "Speed",
+              "state": "normal"
+            },
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "atmosphere",
+              "label": "Atmosphere",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [
+          {
+            "id": "reflectance",
+            "open": true,
+            "src": "/scenes/earth/earth-atmosphere-spectrum.svg",
+            "width": 306,
+            "height": 141,
+            "alt": "NASA PSG modeled disk reflectance of Earth from 350 to 1000 nanometers.",
+            "titleKey": "reflectance",
+            "source": {
+              "id": "reflectance"
+            }
+          },
+          {
+            "id": "photometric-phase",
+            "open": false,
+            "src": "/scenes/earth/earth-photometric-phase-curve.svg",
+            "width": 306,
+            "height": 141,
+            "alt": "Earth V-band brightness change across phase angles from zero to 180 degrees.",
+            "titleKey": "photometricPhase",
+            "source": {
+              "id": "photometric-phase"
+            }
+          },
+          {
+            "id": "temperature-pressure",
+            "open": false,
+            "src": "/scenes/earth/earth-temperature-pressure-profile.svg",
+            "width": 306,
+            "height": 141,
+            "alt": "NASA PSG standard Earth atmospheric temperature and pressure profile.",
+            "titleKey": "temperaturePressure",
+            "source": {
+              "id": "temperature-pressure"
+            }
+          }
+        ],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "imagery",
+            "description": "Surface & clouds",
+            "href": "https://science.nasa.gov/earth/"
+          },
+          {
+            "label": "JPL",
+            "role": "facts",
+            "description": "Earth-Moon facts",
+            "href": "https://ssd.jpl.nasa.gov/sats/"
+          },
+          {
+            "label": "OpenSpace",
+            "role": "scene",
+            "description": "Globe & atmosphere",
+            "href": "https://github.com/OpenSpace/OpenSpace"
+          },
+          {
+            "label": "PSG",
+            "role": "spectra",
+            "description": "Spectrum & profile",
+            "href": "https://psg.gsfc.nasa.gov/"
+          },
+          {
+            "label": "HYG",
+            "role": "stars",
+            "description": "Background star field",
+            "href": "https://github.com/astronexus/HYG-Database"
+          }
+        ],
+        "galleries": [],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "path": "../editorial/earth.json",
+            "url": "https://science.nasa.gov/earth/facts/"
+          }
+        }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/earth/",
+        "charts": [
+          {
+            "kind": "spectrum",
+            "id": "earth",
+            "source": "atmosphere/psg-earth-r120-rif.txt",
+            "format": "numeric-lines",
+            "pointCount": 127,
+            "maximum": 0.5,
+            "requiredHeader": "# Radiance unit: I/F [apparent albedo]",
+            "output": "earth-atmosphere-spectrum.svg",
+            "title": "Earth modeled disk reflectance",
+            "description": "Complete 127-point NASA PSG Earth spectrum from 350 to 1000 nanometers at resolving power 120.",
+            "metadata": {
+              "source": "NASA GSFC Planetary Spectrum Generator",
+              "sourceUrl": "https://psg.gsfc.nasa.gov/api.php",
+              "measurement": "I/F apparent albedo",
+              "resolution": "R 120",
+              "points": 127,
+              "rangeMicrometers": [
+                0.35,
+                1
+              ],
+              "modeled": "2026-08-30"
+            }
+          },
+          {
+            "kind": "pressure",
+            "id": "earth",
+            "source": "atmosphere/psg-earth-20260830.cfg",
+            "layerCount": 70,
+            "temperatureMinimum": 180,
+            "temperatureMaximum": 310,
+            "pressureTicks": [
+              {
+                "pressure": 0.0001,
+                "label": "10⁻⁴"
+              },
+              {
+                "pressure": 0.01,
+                "label": "10⁻²"
+              },
+              {
+                "pressure": 0.1,
+                "label": "10⁻¹"
+              }
+            ],
+            "output": "earth-temperature-pressure-profile.svg",
+            "title": "Earth temperature-pressure profile",
+            "description": "NASA PSG standard Earth atmosphere profile. Pressure decreases upward on a logarithmic scale.",
+            "metadata": {
+              "source": "NASA GSFC Planetary Spectrum Generator",
+              "sourceUrl": "https://psg.gsfc.nasa.gov/api.php",
+              "atmosphere": "PSG standard Earth atmosphere",
+              "layers": 70,
+              "pressureRangeBar": null,
+              "temperatureRangeKelvin": null,
+              "modeled": "2026-08-30"
+            }
+          },
+          {
+            "kind": "phase",
+            "id": "earth",
+            "output": "earth-photometric-phase-curve.svg",
+            "title": "Earth photometric phase curve",
+            "description": "V-band dimming of Earth as phase angle increases from zero to 180 degrees.",
+            "metadata": {
+              "source": {
+                "title": "Computing Apparent Planetary Magnitudes for The Astronomical Almanac",
+                "authors": [
+                  "Anthony Mallama",
+                  "James L. Hilton"
+                ],
+                "journal": "Astronomy and Computing",
+                "arxiv": "1808.01973",
+                "url": "https://arxiv.org/abs/1808.01973",
+                "sourcePdfSha256": "805e53ab8f921c55e1c5e3dd64bbd567f806cdba56148625afcddfc650b6f9a7",
+                "retrievedAt": "2026-09-01",
+                "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
+              },
+              "planetId": "earth",
+              "samples": 181,
+              "maximumAngleDegrees": 180,
+              "qualification": null,
+              "measurement": "V-band magnitude change relative to zero-degree phase"
+            },
+            "sampleCount": 181,
+            "maximumAngleDegrees": 180,
+            "segments": [
+              {
+                "maximumAngleDegrees": 180,
+                "kind": "polynomialMagnitude",
+                "coefficients": [
+                  -3.99,
+                  -0.00106,
+                  0.0002054
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "nasa-blue-marble-december",
+      "path": "blue-marble-december.jpg",
+      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg",
+      "credit": "NASA Earth Observatory",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "checked Blue Marble Next Generation December 2004 snapshot",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "capture": {
+        "spacecraftIds": [
+          "terra"
+        ],
+        "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg"
+      },
+      "sha256": "b0ffc9d12205689aeaec66116bbae2c4c263fcd98a0cbadba8d5488567b53278",
+      "bytes": 23931114,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "blue-marble-december.jpg",
+        "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg",
+        "headers": {
+          "accept": "*/*",
+          "user-agent": "cssEarth Earth source acquisition"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nasa-blue-marble-clouds",
+      "path": "blue-marble-clouds.tif",
+      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif",
+      "credit": "NASA Visible Earth",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "checked Blue Marble Clouds global TIFF",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "sha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
+      "bytes": 35870468,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "blue-marble-clouds.tif",
+        "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif",
+        "headers": {
+          "accept": "*/*",
+          "user-agent": "cssEarth Earth source acquisition"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nasa-blue-marble-topography",
+      "path": "blue-marble-topography.jpg",
+      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x21600x10800.jpg",
+      "credit": "NASA Earth Observatory",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "checked Blue Marble topography and bathymetry snapshot",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "sha256": "3006c58b1272362db0a8c2df02dc07cea4b12dfe820b7dc4a159a075caf5d4d4",
+      "bytes": 29868040,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "blue-marble-topography.jpg",
+        "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x21600x10800.jpg",
+        "headers": {
+          "accept": "*/*",
+          "user-agent": "cssEarth Earth source acquisition"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nasa-black-marble-2016",
+      "path": "black-marble-2016.jpg",
+      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg",
+      "credit": "NASA Earth Observatory",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "checked Black Marble 2016 global 3 km image at 13500 by 6750 pixels",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "capture": {
+        "spacecraftIds": [
+          "suomi-npp"
+        ],
+        "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg"
+      },
+      "sha256": "230aac448ae68c358be433dd518888cccb3a85ccf66f7b44326441c324ad6725",
+      "bytes": 8106233,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "black-marble-2016.jpg",
+        "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg",
+        "headers": {
+          "accept": "*/*",
+          "user-agent": "cssEarth Earth source acquisition"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "interior/earth-interior.json",
+      "purpose": "Source-qualified schematic Earth interior presentation specification",
+      "id": "authored-document:interior/earth-interior.json",
+      "kind": "authored-document",
+      "origin": "object:source/interior/earth-interior.json",
+      "title": "Source-qualified schematic Earth interior presentation specification",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "c0578b8e31058dd4949fff1f9d6ab8017a03a1d3a78ce976674a40661a57a81a",
+      "bytes": 731,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored source recipe and retained scientific evidence for shared preparation.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "837bc6899102fa54a0badc9710791b2aabf498898549a8ebe542151c93011394",
+      "bytes": 11236,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nasa-psg-earth-configuration",
+      "path": "atmosphere/psg-earth-20260830.cfg",
+      "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, Earth, 2026-08-30 12:00",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government scientific model response",
+      "acquisition": "expanded Earth configuration with the leading non-configuration warning removed and declared R=120 generator block appended",
+      "redistribution": "checked text configuration with NASA attribution",
+      "sha256": "f658cc3471595caddbe04ae5fbfde6523f3ef160ec0bd5ba3074635f3561834e",
+      "bytes": 27346,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "request-download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "atmosphere/psg-earth-20260830.cfg",
+        "url": "https://psg.gsfc.nasa.gov/api.php",
+        "headers": {
+          "user-agent": "cssEarth Earth source acquisition"
+        },
+        "form": {
+          "type": "cfg",
+          "wephm": "y",
+          "watm": "y",
+          "file": "<OBJECT-DATE>2026/08/30 12:00\n<OBJECT-NAME>Earth\n<GEOMETRY-REF>User"
+        },
+        "requiredPrefix": "# WARNING | ATMOSPHERE |",
+        "requiredText": [
+          "<ATMOSPHERE-LAYERS>70"
+        ],
+        "replacements": [
+          {
+            "pattern": "^# WARNING[^\\n]*\\n",
+            "flags": "u",
+            "replacement": ""
+          }
+        ],
+        "trimEnd": true,
+        "appendText": "\n<GENERATOR-RANGE1>0.35\n<GENERATOR-RANGE2>1.0\n<GENERATOR-RANGEUNIT>um\n<GENERATOR-RESOLUTION>120\n<GENERATOR-RESOLUTIONUNIT>RP\n<GENERATOR-RADUNITS>rif\n<GENERATOR-GAS-MODEL>Y\n<GENERATOR-CONT-MODEL>Y\n<GENERATOR-CONT-STELLAR>Y\n<GENERATOR-TRANS-SHOW>N\n<GENERATOR-TRANS-APPLY>N\n<GENERATOR-LOGRAD>N\n<GENERATOR-TELESCOPE>SINGLE\n<GENERATOR-BEAM>1\n<GENERATOR-BEAM-UNIT>diameter\n<GENERATOR-DIAMTELE>1\n"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nasa-psg-earth-spectrum",
+      "path": "atmosphere/psg-earth-r120-rif.txt",
+      "origin": "https://psg.gsfc.nasa.gov/api.php, type=rad, pinned Earth configuration, 0.35 to 1.0 um, R=120, I/F",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government scientific model response",
+      "acquisition": "checked response with only volatile synthesis-clock comments normalized",
+      "redistribution": "checked numerical model response with NASA attribution",
+      "sha256": "0dab314d53880a46cf05f0a60dc535b386fa57ef5d980dceb20bbcc00a35f08a",
+      "bytes": 6404,
+      "dependencies": [
+        "nasa-psg-earth-configuration"
+      ],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "request-download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "atmosphere/psg-earth-r120-rif.txt",
+        "url": "https://psg.gsfc.nasa.gov/api.php",
+        "headers": {
+          "user-agent": "cssEarth Earth source acquisition"
+        },
+        "form": {
+          "type": "rad",
+          "wephm": "n",
+          "watm": "n"
+        },
+        "fileSource": "atmosphere/psg-earth-20260830.cfg",
+        "requiredText": [
+          "# Radiance unit: I/F [apparent albedo]"
+        ],
+        "numericLineCount": 127,
+        "replacements": [
+          {
+            "pattern": "^# Synthesized on .*$",
+            "flags": "mu",
+            "replacement": "# Synthesized for pinned Earth configuration 2026-08-30"
+          },
+          {
+            "pattern": "^# Radiative transfer took .*$",
+            "flags": "mu",
+            "replacement": "# Radiative transfer timing omitted from deterministic snapshot"
+          }
+        ]
+      },
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Normal",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/0",
+      "parents": [],
+      "process": "Prepare the global reference map and its declared cloud composite.",
+      "limitations": [
+        "NASA Blue Marble Next Generation December 2004 with a prepared archival cloud composite"
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [
+        "nasa-blue-marble-december",
+        "nasa-blue-marble-clouds"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-lens-normal.webp",
+          "bytes": 1856,
+          "sha256": "cdb6847ab318076644561f2a15bb1c1fdc26afa3b56d2ae79f2d88658d52c690",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-surface.webp",
+          "bytes": 347334,
+          "sha256": "680ee28468760eea2d4d026542ff2d444651be73822f2d593c05afdc0172bd01",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-poles.webp",
+          "bytes": 80780,
+          "sha256": "49449e5d8d44d69472b120afbc5074e367d897a1a226affa35ef5272dd8eb713",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-1.webp",
+          "bytes": 747098,
+          "sha256": "1c6db53f52188c6c43a6803a80217e3418f90b3f4e5fefb398ee3706645b928e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-2.webp",
+          "bytes": 1661344,
+          "sha256": "57e6d57d51deb753408c3ac16db46ad2927a917686e2b8b018eefab7ad9c5091",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-3.webp",
+          "bytes": 1743912,
+          "sha256": "d46555363a8c94636e4b96859bccb0801c36d97692228ebfe0cffd0e1dc041a9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-4.webp",
+          "bytes": 1366738,
+          "sha256": "6949f4e16ed94432f6ef5f40e146d73996260e7cce5fd88dcda5a5176cad7cc8",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-5.webp",
+          "bytes": 528104,
+          "sha256": "dd2d87a692a19ef2fed496b3a18be37110c0e4719f0055dc6a6caa470edc7153",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-6.webp",
+          "bytes": 81570,
+          "sha256": "0364529f6aedebd6e772e413881bf2176cacb2a673ef77f5838304fc9c470464",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "topography",
+      "label": "Topography",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/1",
+      "parents": [],
+      "process": "Prepare the global reference map and its declared cloud composite.",
+      "limitations": [
+        "NASA Blue Marble topography and bathymetry"
+      ],
+      "lensIds": [
+        "topography"
+      ],
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [
+        "nasa-blue-marble-topography"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-lens-topography.webp",
+          "bytes": 2478,
+          "sha256": "fa071a539e59db88d50f44c7494edcf5cd49ce55918f94a57f369fd8a8486c24",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-topography.webp",
+          "bytes": 336578,
+          "sha256": "fc6076f6636b51255d91a6710a40ec638e46f6ae609df588011736673fb5b333",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-topography-poles.webp",
+          "bytes": 77188,
+          "sha256": "d417539b87b9234aa8c6b59620a73409040d181beba9eeaff779d5c2ee684112",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-topography-page-1.webp",
+          "bytes": 334510,
+          "sha256": "58d896a5bc5cfc29c5c83f0a0e4fea021e51f204a79ddc984e0dad550c4d2551",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-topography-page-2.webp",
+          "bytes": 569138,
+          "sha256": "80291c49fd5d8f39c0a197f005e9d118f5180b6671c904a5cdbee979634434b1",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-topography-page-3.webp",
+          "bytes": 1003076,
+          "sha256": "02b5d2caeaf47610e7852aee8bdecd74e17e9874aed3ad1a37871037694631f5",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-topography-page-4.webp",
+          "bytes": 1309226,
+          "sha256": "19c6783cdcaf46f8ce73999c7bf8b8166d3ebeaef50f2ee6806e7aa9fd0c7c1d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-topography-page-5.webp",
+          "bytes": 536550,
+          "sha256": "381f0d05ebb5a4ced9b480defff6fc4afc3d003c73a68adbdfa9a2be5ab1e23b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-topography-page-6.webp",
+          "bytes": 87228,
+          "sha256": "4ce6bcd53a3bb97e8f39a797d25b560853572ebf5311ba9662b84cf2ea14ec74",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "night-lights",
+      "label": "Night lights",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/2",
+      "parents": [],
+      "process": "Prepare the global reference map and its declared cloud composite.",
+      "limitations": [
+        "NASA Black Marble 2016 global composite"
+      ],
+      "lensIds": [
+        "night-lights"
+      ],
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [
+        "nasa-black-marble-2016"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-lens-night-lights.webp",
+          "bytes": 818,
+          "sha256": "4d255f6e8aab4fc9570fdfbaceec6f41b7ea7c8ede313988382d350726b7cb4c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-night-lights.webp",
+          "bytes": 85926,
+          "sha256": "c41ffa75726dba49d7f91dba8566179b8cb92be4bf821e9e52bfb44b2ee6c3d7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-night-lights-poles.webp",
+          "bytes": 18704,
+          "sha256": "ebb37d6ac2830151950ecb9e2aac353a21ceb7e3428b9f0da0eb48821695e89f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-night-lights-page-1.webp",
+          "bytes": 81902,
+          "sha256": "51942d1ebfff17fa55de5581e94946b0f3c15e86279b3d31410fe37610ebcd9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-night-lights-page-2.webp",
+          "bytes": 180998,
+          "sha256": "c9f6c4e97c9bd7f1a8f87eef37545c1fe00d663a8354e683435c6f92659cd10e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-night-lights-page-3.webp",
+          "bytes": 565910,
+          "sha256": "d794a1e695e6460a5057eb3fd8728b1b630ea9c0bc7117ec8890fea593ed2c45",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-night-lights-page-4.webp",
+          "bytes": 466980,
+          "sha256": "5174666e03e728a89eb05801b4cc7a93d9a74809f8a0f0c6d63910fe09afda08",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-night-lights-page-5.webp",
+          "bytes": 237338,
+          "sha256": "6fde9f2f66d5c336bfae57d29ae80cafae67da9ff3df34bd51fb608e68a4031a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/earth/earth-night-lights-page-6.webp",
+          "bytes": 40258,
+          "sha256": "092ff1f715f9df369410ef5749e56e4f847f33c22d9e71d680d404383efb9621",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "cross-section",
+      "label": "Cross section",
+      "recipe": "paged-ellipsoid",
+      "selector": "/interiorPath",
+      "parents": [],
+      "process": "Prepare the source-defined schematic interior.",
+      "limitations": [
+        "Schematic NASA Science source-backed interior"
+      ],
+      "lensIds": [
+        "cross-section"
+      ],
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "interpretation": {
+        "kind": "schematic-interior"
+      },
+      "inputs": [
+        "authored-document:interior/earth-interior.json"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-view-interior.webp",
+          "bytes": 1302,
+          "sha256": "4e8ee2c852e0799d4dd36fdfdf0c29eaa52e89e7c5033a5777d5147ba39db8a4",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 7388,
+          "sha256": "d8ea46179e842b56427eab5d6fc9c79fe567f3a158197aff82680dd59299a352",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Earth modeled disk reflectance",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "spectrum"
+      },
+      "inputs": [
+        "nasa-psg-earth-spectrum"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-atmosphere-spectrum.svg",
+          "bytes": 4019,
+          "sha256": "618392880a079fe55e93904b4f6648d1c15f737e79b3d4b7aa46ce44994d6a80",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:1",
+      "label": "Earth temperature-pressure profile",
+      "recipe": "charts",
+      "selector": "/charts/1",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "pressure"
+      },
+      "inputs": [
+        "nasa-psg-earth-configuration"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-temperature-pressure-profile.svg",
+          "bytes": 2530,
+          "sha256": "24b5c28e0c8ae1a9c82787d345ad27d391e2a3b0289263388fdaf583b73b829d",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:2",
+      "label": "Earth photometric phase curve",
+      "recipe": "charts",
+      "selector": "/charts/2",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "phase",
+        "qualification": null
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-photometric-phase-curve.svg",
+          "bytes": 4360,
+          "sha256": "f2c02091dcfe4343299fff3bd96b6fd8d542fc2ef4d6aeb1fbe7acef77ff2b98",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "authored-recipe"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Normal preview",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/0",
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 76290,
+          "sha256": "8d215052e78fd1d0cf8dc9059521ee392a1d77cf1e91b4c1e174616885628f13",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:topography",
+      "label": "Topography preview",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/1",
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [],
+      "parents": [
+        "topography"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/topography.webp",
+          "bytes": 53470,
+          "sha256": "d8e3a80e6b7d2e8c11cb2501822a22bbec250846e96faf0e9a30f7fcf2c8e202",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:night-lights",
+      "label": "Night lights preview",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/2",
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [],
+      "parents": [
+        "night-lights"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/night-lights.webp",
+          "bytes": 16454,
+          "sha256": "4a367cabff60d545dad46dfd6a72e1690b699230f3638e85a204592e3a25b654",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

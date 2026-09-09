@@ -1,0 +1,521 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "doris",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "83eac3752ea0e9c7f87ef987f7f96f01bfaa8e0702fbde510a2b3e5d54d5ea06"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "8f09ceb74b5ba0265b21777c9e4b4a25e73de2a79912de29d411e219fe9b27f5",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "doris",
+        "displayName": "Doris",
+        "publicBase": "/scenes/doris/",
+        "distanceAu": 3.11379567922407,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-1845.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 402,
+                "expectedFaces": 800,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -105
+              },
+              "minimum": -30,
+              "maximum": 30,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 105000,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 105,
+          "camera": {
+            "initialScenePitchDegrees": 46.741573033707866,
+            "defaultControlYawDegrees": 90
+          },
+          "mapUrl": "/scenes/doris/doris-shape-surface@2x.webp",
+          "polesUrl": "/scenes/doris/doris-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-1845.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 402,
+              "expectedFaces": 800,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 1,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Pinned JPL Horizons elements and DAMIT model 1845 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "12c8d745361a7ab015f36f3b5242c11e84fc372daecb5bf92c99f4d5864ca42e",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "doris",
+        "displayName": "Doris",
+        "title": {
+          "label": "Doris",
+          "viewBox": "0 0 62.4577 35",
+          "width": 62.4577,
+          "height": 35,
+          "path": "M6.59 29L1.59 29L1.59 26.33L6.41 26.33Q8.78 26.33 10.32 25.45Q11.87 24.56 12.63 22.86Q13.4 21.17 13.4 18.79Q13.4 16.42 12.65 14.75Q11.89 13.07 10.38 12.18Q8.86 11.29 6.6 11.29L1.48 11.29L1.48 8.63L6.81 8.63Q9.8 8.63 11.97 9.85Q14.14 11.08 15.3 13.35Q16.46 15.63 16.46 18.79Q16.46 21.96 15.29 24.24Q14.11 26.53 11.91 27.76Q9.71 29 6.59 29ZM3.05 8.63L3.05 29L0 29L0 8.63ZM25.51 29.33Q23.44 29.33 21.87 28.36Q20.3 27.4 19.42 25.68Q18.55 23.97 18.55 21.71Q18.55 19.46 19.42 17.73Q20.3 16.01 21.87 15.04Q23.44 14.07 25.51 14.07Q27.61 14.07 29.17 15.04Q30.73 16.01 31.6 17.73Q32.48 19.46 32.48 21.71Q32.48 23.97 31.6 25.68Q30.73 27.4 29.17 28.36Q27.61 29.33 25.51 29.33ZM25.51 26.81Q26.79 26.81 27.69 26.17Q28.58 25.53 29.06 24.38Q29.54 23.23 29.54 21.73Q29.54 20.18 29.06 19.03Q28.58 17.88 27.69 17.24Q26.79 16.59 25.51 16.59Q24.25 16.59 23.35 17.23Q22.46 17.87 21.99 19.03Q21.51 20.18 21.51 21.73Q21.51 23.24 21.99 24.39Q22.46 25.53 23.36 26.17Q24.26 26.81 25.51 26.81ZM35.1 29L35.1 14.37L37.92 14.37L37.92 16.75L37.98 16.75Q38.38 15.53 39.28 14.86Q40.19 14.18 41.57 14.18Q41.88 14.18 42.17 14.21Q42.45 14.23 42.66 14.26L42.66 17Q42.48 16.94 42.05 16.89Q41.62 16.85 41.13 16.85Q40.27 16.85 39.56 17.23Q38.85 17.61 38.43 18.38Q38.01 19.16 38.01 20.3L38.01 29ZM44.91 29L44.91 14.37L47.82 14.37L47.82 29ZM46.39 11.91Q45.61 11.91 45.07 11.4Q44.54 10.9 44.54 10.16Q44.54 9.39 45.07 8.88Q45.61 8.37 46.37 8.37Q47.15 8.37 47.68 8.88Q48.22 9.39 48.22 10.16Q48.22 10.9 47.68 11.4Q47.15 11.91 46.39 11.91ZM56.54 29.33Q54.88 29.33 53.56 28.82Q52.24 28.3 51.43 27.27Q50.62 26.24 50.47 24.72L53.32 24.6Q53.48 25.76 54.3 26.38Q55.12 27 56.5 27Q57.89 27 58.69 26.44Q59.49 25.87 59.49 25.01Q59.49 24.27 58.94 23.81Q58.4 23.35 57.41 23.15L54.99 22.62Q52.93 22.15 51.87 21.1Q50.81 20.06 50.81 18.46Q50.81 17.16 51.53 16.17Q52.24 15.18 53.5 14.62Q54.76 14.07 56.44 14.07Q58.07 14.07 59.31 14.62Q60.56 15.18 61.3 16.2Q62.03 17.21 62.13 18.61L59.38 18.73Q59.3 17.73 58.54 17.06Q57.78 16.39 56.47 16.39Q55.25 16.39 54.5 16.97Q53.75 17.54 53.75 18.36Q53.75 19.12 54.3 19.57Q54.84 20.03 55.88 20.26L58.36 20.81Q60.46 21.28 61.46 22.26Q62.46 23.24 62.46 24.83Q62.46 26.2 61.69 27.22Q60.93 28.23 59.59 28.78Q58.26 29.33 56.54 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Doris is a main-belt asteroid. Explore its calibrated nonconvex reconstruction from DAMIT, version 2017-09-21. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Model volume-equivalent radius",
+              "value": "105 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Distance from Sun",
+              "value": "3.114 AU (mean)"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "5.49 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "11.8901 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Calibrated DAMIT shape",
+              "title": "Published nonconvex DAMIT model 1845, version 2017-09-21, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "thumbnail": "/scenes/doris/doris-shape-thumbnail.webp",
+              "surface": "doris-shape-surface@2x.webp",
+              "poles": "doris-shape-surface@2x.webp",
+              "source": {
+                "id": "doris-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape",
+              "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Source shape · radial height",
+              "title": "Color shows the original model radius minus a 105 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "thumbnail": "/scenes/doris/doris-elevation-thumbnail.webp",
+              "surface": "doris-elevation-surface@2x.webp",
+              "poles": "doris-elevation-surface@2x.webp",
+              "source": {
+                "id": "doris-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-30",
+                  "0",
+                  "30"
+                ],
+                "meta": "km · 105 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845",
+                "image": "/scenes/doris/doris-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height",
+              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "facts",
+            "description": "DAMIT model 1845, version 2017-09-21",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Original calibrated vertex and triangle table",
+            "href": "https://damit.cuni.cz/projects/damit/stored_files/open/3525/shape.txt"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Doris model 1845, version 2017-09-21; source authors listed in the pinned model record."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "doris-shape",
+      "path": "shape/model-1845.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/3525/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Doris model 1845, version 2017-09-21; source authors listed in the pinned model record.",
+      "license": "CC-BY-4.0; DAMIT site license, retained with author and model attribution.",
+      "acquisition": "Restore the original counted triangle table through source/preparation/acquisition.json.",
+      "redistribution": "CC-BY-4.0 with author/model attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 105000
+      },
+      "coverage": "Calibrated nonconvex ground-based reconstruction. The grid is an explicit no-imagery treatment; no small-scale surface detail is inferred.",
+      "sha256": "f0adb78ace9a78951e51b9ab2a9b2618d4c09faca0b886d5ed798a00cdf6f671",
+      "bytes": 32486,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-1845.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3525/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned original model record, source documentation, or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "1bc0e13cbdcbcc904d4cddc04004f33685593f4fc4155843b4eefdff2f641af6",
+      "bytes": 7354,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Source shape · radial height"
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "doris-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/doris/doris-elevation-thumbnail.webp",
+          "bytes": 5694,
+          "sha256": "b51fbb202d69b17a9452936e3515e152ec57b54a33defedd00a6e7c9d0923c36",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/doris/doris-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/doris/doris-elevation-surface@2x.webp",
+          "bytes": 313680,
+          "sha256": "ae3223fce187c8525fc2a5d28cdbd558432aba35c2a23dc0795fc33b4c852f04",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Calibrated DAMIT shape"
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "doris-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/doris/doris-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/doris/doris-shape-surface@2x.webp",
+          "bytes": 203728,
+          "sha256": "df72830003dadffdbb63216f7e984cab5b41cb3d60242cfaa8c311fbeb9e0e38",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4445,
+          "sha256": "cba989b3e59b2c3836dcad3741a555e49d590508f32d7d8512fb2ca76fff7063",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 12320,
+          "sha256": "a0be849254ed1943016b2adea343c6375918927c3bcd3f8d334f4719d81d2034",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

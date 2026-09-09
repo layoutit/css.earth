@@ -84,7 +84,8 @@
           "id": "cassini-mosaic",
           "path": "../manifest.json",
           "url": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
-        }
+        },
+        "summary": "Cassini monochrome mosaic with varying detail. Shadows remain; the unobserved northern region is marked."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
           "image": "/scenes/phoebe/phoebe-elevation-legend.webp"
-        }
+        },
+        "summary": "Gaskell-model height relative to a 106.8 km sphere. Terrain outside Cassini coverage is less certain."
       }
     ]
   },

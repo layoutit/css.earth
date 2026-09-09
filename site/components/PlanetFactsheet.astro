@@ -5,24 +5,23 @@ import { orderFacts } from "../fact-order.mjs";
 
 interface Props {
   id: string;
+  embedded?: boolean;
   facts?: PlanetProps["facts"];
   moreFacts?: PlanetProps["moreFacts"];
 }
-const { id, facts = [], moreFacts = [] } = Astro.props;
+const { id, facts = [], moreFacts = [], embedded = false } = Astro.props;
+const Container = embedded ? "section" : "details";
 const allFacts = orderFacts(facts, moreFacts);
 const hasFacts = allFacts.length > 0;
-const factsheetPreviewCount = 4;
-const initialFacts = allFacts.slice(0, factsheetPreviewCount);
-const remainingFacts = allFacts.slice(factsheetPreviewCount);
-const hasRemainingFacts = remainingFacts.length > 0;
 ---
 
-<details
+<Container
   id={`${id}-factsheet-panel`}
   class="planet-factsheet-section"
-  aria-labelledby={`${id}-factsheet-title`}
+  aria-label={embedded ? "Factsheet" : undefined}
+  aria-labelledby={embedded ? undefined : `${id}-factsheet-title`}
 >
-  <summary class="planet-factsheet-header planet-panel-summary">
+  {!embedded && <summary class="planet-factsheet-header planet-panel-summary">
     <h2 id={`${id}-factsheet-title`} class="planet-panel-heading">Factsheet</h2>
     <img
       class="planet-panel-icon"
@@ -32,31 +31,18 @@ const hasRemainingFacts = remainingFacts.length > 0;
       height={PREPARED_SHELL_ICONS.facts.height}
       alt=""
     />
-  </summary>
+  </summary>}
   {hasFacts && <div class="planet-factsheet-body">
     <div class="planet-facts">
       <ul class="planet-primary-facts">
-        {initialFacts.map((fact) => (
+        {allFacts.map((fact) => (
           <li data-fact-id={fact.id}>
             <span class="planet-fact-label">{fact.label}</span>
             <span class="planet-fact-value">{fact.value}</span>
           </li>
         ))}
       </ul>
-      {hasRemainingFacts && <details class="planet-facts-overflow">
-        <summary class="planet-facts-toggle">
-          <span class="planet-facts-more">View more</span>
-          <span class="planet-facts-less">View less</span>
-        </summary>
-        <ul class="planet-additional-facts">
-          {remainingFacts.map((fact) => (
-            <li data-fact-id={fact.id}>
-              <span class="planet-fact-label">{fact.label}</span>
-              <span class="planet-fact-value">{fact.value}</span>
-            </li>
-          ))}
-        </ul>
-      </details>}
+
     </div>
   </div>}
-</details>
+</Container>

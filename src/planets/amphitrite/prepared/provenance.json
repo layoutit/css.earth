@@ -1,0 +1,522 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "amphitrite",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "85c7dde4cb62238d1108aed3f69a8b9ea0c9dfd77aa7c44c51f70618b2c8a7bd"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "d89341a5565509628c671054700db84fbe9fe4c5ecf91eefe8a21f39fa7e4eb1",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "amphitrite",
+        "displayName": "Amphitrite",
+        "publicBase": "/scenes/amphitrite/",
+        "distanceAu": 2.5547309956514517,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/29_Amphitrite_mpcd.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 682,
+                "expectedFaces": 1360
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -102
+              },
+              "minimum": -20,
+              "maximum": 20,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 102000,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 102,
+          "camera": {
+            "initialScenePitchDegrees": -44.5505617977528,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/amphitrite/amphitrite-shape-surface@2x.webp",
+          "polesUrl": "/scenes/amphitrite/amphitrite-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/29_Amphitrite_mpcd.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 682,
+              "expectedFaces": 1360
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 1800,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "8742bfc1f3b5f519e8d206a5bd286d230eebaeb2a6cafecda972dbbcf49a4032",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "amphitrite",
+        "displayName": "Amphitrite",
+        "title": {
+          "label": "Amphitrite",
+          "viewBox": "0 0 130.1841 35",
+          "width": 130.1841,
+          "height": 35,
+          "path": "M0 29L7.36 8.63L11.07 8.63L18.43 29L15.09 29L11.17 17.54Q10.69 16.11 10.14 14.34Q9.58 12.57 8.8 9.98L9.61 9.98Q8.86 12.58 8.3 14.35Q7.74 16.12 7.25 17.54L3.25 29ZM4.05 23.68L4.05 21.11L14.34 21.11L14.34 23.68ZM20.35 29L20.35 14.37L23.17 14.37L23.18 17.53L22.92 17.53Q23.32 16.39 24.01 15.64Q24.7 14.88 25.6 14.49Q26.49 14.1 27.49 14.1Q29.19 14.1 30.34 15.07Q31.5 16.04 31.78 17.56L31.35 17.56Q31.65 16.53 32.34 15.75Q33.03 14.97 34.03 14.54Q35.04 14.1 36.21 14.1Q37.57 14.1 38.67 14.68Q39.77 15.26 40.41 16.42Q41.05 17.58 41.05 19.32L41.05 29L38.13 29L38.13 19.57Q38.13 18.04 37.27 17.34Q36.4 16.65 35.24 16.65Q34.29 16.65 33.59 17.06Q32.9 17.46 32.53 18.17Q32.15 18.88 32.15 19.8L32.15 29L29.27 29L29.27 19.38Q29.27 18.14 28.47 17.4Q27.67 16.65 26.45 16.65Q25.6 16.65 24.88 17.05Q24.15 17.45 23.71 18.21Q23.27 18.98 23.27 20.11L23.27 29ZM44.37 34.71L44.37 14.37L47.23 14.37L47.23 16.53L47.31 16.53Q47.74 15.82 48.38 15.27Q49.02 14.73 49.88 14.42Q50.73 14.11 51.78 14.11Q53.63 14.11 55.05 15.05Q56.47 16 57.26 17.71Q58.05 19.42 58.05 21.7Q58.05 23.97 57.26 25.68Q56.47 27.39 55.06 28.34Q53.64 29.29 51.77 29.29Q50.73 29.29 49.9 28.97Q49.06 28.66 48.43 28.09Q47.79 27.52 47.35 26.77L47.29 26.77L47.29 34.71ZM51.17 26.79Q52.37 26.79 53.25 26.18Q54.14 25.57 54.61 24.43Q55.09 23.3 55.09 21.69Q55.09 20.07 54.61 18.94Q54.12 17.8 53.25 17.2Q52.37 16.6 51.17 16.6Q49.92 16.6 49.01 17.23Q48.09 17.86 47.61 19Q47.12 20.14 47.12 21.69Q47.12 23.2 47.61 24.36Q48.11 25.51 49.02 26.15Q49.92 26.79 51.17 26.79ZM63.58 20.52L63.58 29L60.67 29L60.67 8.63L63.58 8.63L63.58 18.01L62.92 18.01Q63.63 16.04 64.9 15.08Q66.16 14.11 67.97 14.11Q69.46 14.11 70.63 14.76Q71.81 15.41 72.49 16.68Q73.18 17.95 73.18 19.85L73.18 29L70.27 29L70.27 20.21Q70.27 18.49 69.43 17.6Q68.6 16.71 67.08 16.71Q66.11 16.71 65.31 17.12Q64.51 17.53 64.05 18.37Q63.58 19.21 63.58 20.52ZM76.5 29L76.5 14.37L79.41 14.37L79.41 29ZM77.98 11.91Q77.2 11.91 76.67 11.4Q76.13 10.9 76.13 10.16Q76.13 9.39 76.67 8.88Q77.2 8.37 77.96 8.37Q78.74 8.37 79.28 8.88Q79.81 9.39 79.81 10.16Q79.81 10.9 79.28 11.4Q78.74 11.91 77.98 11.91ZM89.8 14.37L89.8 16.78L81.46 16.78L81.46 14.37ZM83.93 10.5L86.85 10.5L86.85 25.1Q86.85 25.94 87.2 26.28Q87.54 26.62 88.41 26.62Q88.71 26.62 89.1 26.61Q89.5 26.59 89.79 26.58L89.9 28.97Q89.53 29.01 89.01 29.03Q88.5 29.05 88.02 29.05Q85.99 29.05 84.96 28.15Q83.93 27.25 83.93 25.47ZM92.15 29L92.15 14.37L94.96 14.37L94.96 16.75L95.03 16.75Q95.43 15.53 96.33 14.86Q97.23 14.18 98.61 14.18Q98.93 14.18 99.21 14.21Q99.5 14.23 99.71 14.26L99.71 17Q99.53 16.94 99.1 16.89Q98.67 16.85 98.18 16.85Q97.31 16.85 96.6 17.23Q95.89 17.61 95.48 18.38Q95.06 19.16 95.06 20.3L95.06 29ZM101.96 29L101.96 14.37L104.87 14.37L104.87 29ZM103.43 11.91Q102.65 11.91 102.12 11.4Q101.59 10.9 101.59 10.16Q101.59 9.39 102.12 8.88Q102.65 8.37 103.42 8.37Q104.2 8.37 104.73 8.88Q105.26 9.39 105.26 10.16Q105.26 10.9 104.73 11.4Q104.2 11.91 103.43 11.91ZM115.25 14.37L115.25 16.78L106.91 16.78L106.91 14.37ZM109.39 10.5L112.3 10.5L112.3 25.1Q112.3 25.94 112.65 26.28Q113 26.62 113.86 26.62Q114.16 26.62 114.56 26.61Q114.95 26.59 115.24 26.58L115.35 28.97Q114.98 29.01 114.47 29.03Q113.96 29.05 113.48 29.05Q111.44 29.05 110.41 28.15Q109.39 27.25 109.39 25.47ZM123.62 29.33Q121.45 29.33 119.88 28.36Q118.32 27.4 117.48 25.68Q116.64 23.97 116.64 21.74Q116.64 19.5 117.5 17.77Q118.37 16.04 119.9 15.05Q121.43 14.07 123.44 14.07Q124.92 14.07 126.15 14.6Q127.38 15.12 128.29 16.11Q129.2 17.09 129.69 18.49Q130.18 19.88 130.18 21.66L130.18 22.51L118.03 22.51L118.03 20.3L128.68 20.3L127.37 20.99Q127.37 19.62 126.9 18.61Q126.42 17.6 125.55 17.05Q124.67 16.5 123.46 16.5Q122.24 16.5 121.36 17.06Q120.48 17.61 120 18.6Q119.52 19.59 119.52 20.91L119.52 22.23Q119.52 23.64 120.02 24.69Q120.52 25.75 121.43 26.32Q122.35 26.89 123.65 26.89Q124.58 26.89 125.3 26.62Q126.01 26.35 126.49 25.83Q126.97 25.31 127.19 24.63L129.98 24.78Q129.69 26.12 128.8 27.14Q127.9 28.17 126.57 28.75Q125.25 29.33 123.62 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Amphitrite is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "102 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Distance from Sun",
+              "value": "2.555 AU (mean)"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.08 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.390119 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "VLT/SPHERE shape model",
+              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "thumbnail": "/scenes/amphitrite/amphitrite-shape-thumbnail.webp",
+              "surface": "amphitrite-shape-surface@2x.webp",
+              "poles": "amphitrite-shape-surface@2x.webp",
+              "source": {
+                "id": "amphitrite-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape",
+              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Source shape · radial height",
+              "title": "Color shows source radius minus a 102 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "thumbnail": "/scenes/amphitrite/amphitrite-elevation-thumbnail.webp",
+              "surface": "amphitrite-elevation-surface@2x.webp",
+              "poles": "amphitrite-elevation-surface@2x.webp",
+              "source": {
+                "id": "amphitrite-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "0",
+                  "20"
+                ],
+                "meta": "km · 102 km reference sphere",
+                "sourceUrl": "https://observations.lam.fr/astero/3Dshape/29_Amphitrite_mpcd.obj",
+                "image": "/scenes/amphitrite/amphitrite-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height",
+              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "VLT/SPHERE survey and physical properties",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Released MPCD shape model",
+            "href": "https://observations.lam.fr/astero/3Dshape/29_Amphitrite_mpcd.obj"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Observed pole and period; arbitrary display phase",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1051/0004-6361/202141781",
+            "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "amphitrite-shape",
+      "path": "shape/29_Amphitrite_mpcd.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/29_Amphitrite_mpcd.obj",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+      "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 102000
+      },
+      "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sha256": "2f5544aa2a2d416094b1367d833a44077f83ed2fa9a0d64ab13154f2a843c18b",
+      "bytes": 81979,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/29_Amphitrite_mpcd.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/29_Amphitrite_mpcd.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "0f59593d76508f92c547a78798c536646f9369dc4f745f01b91c3d097378aee3",
+      "bytes": 9203,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Source shape · radial height"
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "amphitrite-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/amphitrite/amphitrite-elevation-thumbnail.webp",
+          "bytes": 5974,
+          "sha256": "a8a320075b3def059de09d7576ec5bfdab4b7d65b0ced603d18826099adfc1e0",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/amphitrite/amphitrite-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/amphitrite/amphitrite-elevation-surface@2x.webp",
+          "bytes": 315570,
+          "sha256": "98e6f6c0798e747a5e4fc9d12b86e0cf49c2d81b9496b1306b272cff03d009be",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "VLT/SPHERE shape model"
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "amphitrite-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/amphitrite/amphitrite-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/amphitrite/amphitrite-shape-surface@2x.webp",
+          "bytes": 224540,
+          "sha256": "f96c1014bd1bcca8e3a6aaacdd63fe493e9897e48f5440930ade8faca70a6eef",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6161,
+          "sha256": "dea83e483a5c45772ea2d7e21b2f1c869db9fc046cdb22f0d2ef9d0930fa4691",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 13178,
+          "sha256": "1fbc3c2ebb42cecf2fd5267e7b4b11ea32dae5ac162b1bb1c07d3871f3c6b6e8",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

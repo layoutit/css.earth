@@ -63,7 +63,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Radar shape with north–south ambiguity. Local latitudes depend on the model; no surface imagery is mapped."
       },
       {
         "id": "elevation",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj",
           "image": "/scenes/geographos/geographos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Radar height relative to a 1.284 km sphere. North–south ambiguity leaves heights and latitudes uncertain."
       }
     ]
   },

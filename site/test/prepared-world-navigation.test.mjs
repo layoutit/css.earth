@@ -413,3 +413,22 @@ test('replacement departure uses the retained world while its previous detail ow
   assert.equal(f.pending, 0);
   for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
 });
+
+
+test('centering changes the focus at the same range and orientation, then focus zooms in', async () => {
+  const f = fixture();
+  assert.equal(f.service.centerTarget({ objectId: '0', mount: { navigation: f.navigation } }), null);
+  f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
+  const target = f.service.centerTarget({ objectId: '1', mount: { navigation: f.navigation } });
+  assert.deepEqual(target.pose.positionM, [1e8, 0, 2e8]);
+  assert.deepEqual(target.pose.orientationXyzw, [0, 0, 0, 1]);
+  const handoff = await drainFrames(f, { task: f.start({ targetWorldCamera: target, centerSelection: true }) });
+  const mount = f.mounted();
+  handoff.mountOptions.onNavigationReady?.(mount.navigation);
+  await drainFrames(f, { task: handoff.afterMount(mount, { signal: f.controller.signal }) });
+  const projection = presentWorldCamera(mount.navigation.capture(), mount.navigation.frame, mount.navigation.optics());
+  projection.centerPixels.forEach(value => assert.ok(Math.abs(value) < 1e-6));
+  assert.ok(Math.abs(projection.distanceM / 2e8 - 1) < 1e-12);
+  await drainFrames(f, { task: f.service.focus({ objectId: '1', mount, signal: f.controller.signal }) });
+  assert.ok(range(mount.navigation.capture().pose, mount.navigation.frame.originM) < 2e6);
+});

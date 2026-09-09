@@ -12,7 +12,7 @@ function deferred() {
 const saved = distance => ({ camera: { distanceKilometers: distance,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
-function harness({ prepare = async () => ({}), focus = undefined, factoryGate = null, contentGate = null, persistentWorldContext = null } = {}) {
+function harness({ prepare = async () => ({}), focus = undefined, centerTarget = undefined, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false } = {}) {
   const documentTarget = new EventTarget(), windowTarget = new EventTarget(), media = new EventTarget();
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
   documentTarget.body = { classList: { add() {}, remove() {} } };
@@ -28,6 +28,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     back() { if (index) { const entry = entries[--index]; location = new URL(entry.url); const event = new Event('popstate'); event.state = entry.state; windowTarget.dispatchEvent(event); } },
   };
   const objects = ['mercury', 'venus', 'earth'].map(id => ({ id, name: id, route: `/${id}/` }));
+  if (withSun) objects.push({ id: 'sun', name: 'Sun', route: '/sun/', classification: 'star', distanceAu: 0 });
   const stage = { dataset: { objectId: 'mercury' } }, input = {}, renders = new Set(), mounts = [], errors = [], shells = [], preparations = [], disposedContent = [];
   let maxRendered = 0;
   const factory = id => (nativeStage, options) => {
@@ -77,7 +78,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
       return { id: object.id, apply() { assert.equal(signal.aborted, false); }, dispose() { disposedContent.push(object.id); } };
     },
     navigation: {
-      focus,
+      focus, centerTarget,
       supports: (from, to) => from !== 'earth' && to !== 'earth',
       prepare(options) { preparations.push(options); return prepare(options); },
     },
@@ -427,5 +428,77 @@ test('plain current-object anchors focus but saved-view links restore their spec
   assert.equal(focuses.length, 1);
   assert.equal(h.mounts[0].value.camera.distanceKilometers, 77777);
   assert.equal(h.mounts.length, 1);
+  h.router.destroy();
+});
+
+
+test('a coarse selection changes the card and scene at the current scale, then the next click focuses', async () => {
+  const centered = { pose: 'centered' }, focuses = [];
+  const h = harness({ centerTarget: () => centered, focus: async options => { focuses.push(options); } });
+  await h.router.settled;
+  assert.equal(await h.router.navigate('venus', { sceneSelection: true }), true);
+  assert.equal(h.preparations[0].targetWorldCamera, centered);
+  assert.equal(h.router.state().activeObjectId, 'venus');
+  assert.equal(h.shells[0].selected, 'venus');
+  assert.equal(h.mounts.length, 2);
+  assert.equal(focuses.length, 0);
+  assert.equal(await h.router.navigate('venus', { sceneSelection: true }), true);
+  assert.equal(focuses.length, 1);
+  assert.equal(focuses[0].targetWorldCamera, undefined);
+  assert.equal(h.mounts.length, 2);
+  h.router.destroy();
+});
+
+test('a second scene click can zoom while centering the current object is still in progress', async () => {
+  const gate = deferred(), focuses = [];
+  const h = harness({ centerTarget: () => ({ pose: 'centered' }), focus: options => {
+    focuses.push(options); return focuses.length === 1 ? gate.promise : Promise.resolve();
+  } });
+  await h.router.settled;
+  const centering = h.router.navigate('mercury', { sceneSelection: true });
+  assert.equal(await h.router.navigate('mercury', { sceneSelection: true }), true);
+  assert.equal(focuses[0].signal.aborted, true);
+  assert.equal(focuses[1].targetWorldCamera, undefined);
+  gate.resolve();
+  assert.equal(await centering, false);
+  h.router.destroy();
+});
+
+test('selection emphasis previews immediately before the next detailed owner is ready', async () => {
+  const gate = deferred(), previews = [];
+  const h = harness({ factoryGate: gate, persistentWorldContext: { async mount() {
+    return { selectObject() {}, publish() {}, destroy() {}, previewSelection: id => previews.push(id) };
+  } } });
+  await h.router.settled;
+  const selecting = h.router.navigate('venus', { sceneSelection: true });
+  assert.equal(previews.at(-1), 'venus');
+  assert.equal(h.router.state().activeObjectId, 'mercury');
+  gate.resolve(); await selecting;
+  assert.equal(h.router.state().activeObjectId, 'venus');
+  assert.equal(previews.at(-1), undefined);
+  h.router.destroy();
+});
+
+test('empty-space deselection previews the overview and recenters the Sun through the normal router', async () => {
+  const previews = [], centers = [], target = { pose: 'centered-sun' };
+  const h = harness({ withSun: true, centerTarget(options) { centers.push(options); return target; },
+    persistentWorldContext: { async mount() {
+      return { selectObject() {}, publish() {}, destroy() {}, previewSelection: id => previews.push(id) };
+    } } });
+  await h.router.settled;
+  let cardChanged = false;
+  h.shells[0].beginOverviewSelection = () => { cardChanged = true; };
+  const event = new Event('objectdeselect', { cancelable: true });
+  h.documentTarget.dispatchEvent(event);
+  assert.equal(event.defaultPrevented, true);
+  assert.equal(cardChanged, true);
+  assert.equal(previews.at(-1), null);
+  assert.equal(centers[0].force, true);
+  assert.equal(centers[0].objectId, 'sun');
+  await h.router.settled;
+  assert.equal(h.router.state().activeObjectId, 'sun');
+  assert.equal(h.preparations[0].targetWorldCamera, target);
+  assert.equal(h.preparations[0].centerSelection, true);
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
   h.router.destroy();
 });

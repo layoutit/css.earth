@@ -84,7 +84,8 @@
           "id": "schenk-2020-miranda-normal",
           "path": "../manifest.json",
           "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
-        }
+        },
+        "summary": "Voyager 2 images with corrected illumination. Detail varies; cast shadows and seams remain, and gray grid: no data."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
           "image": "/scenes/miranda/miranda-elevation-legend.webp"
-        }
+        },
+        "summary": "Height from stereo images and shading, relative to the source ellipsoid. Detail varies; gray grid: no measurements."
       }
     ]
   },

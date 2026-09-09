@@ -75,7 +75,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "ONC v-band · corrected reflectance"
+        "detail": "ONC v-band · corrected reflectance",
+        "summary": "Hayabusa2's corrected 548.9 nm reflectance from July 2018. Display brightness is stretched; poles stay empty."
       },
       {
         "id": "enhanced",
@@ -90,7 +91,8 @@
           "path": "../manifest.json"
         },
         "falseColor": true,
-        "detail": "Controlled ONC color mosaic"
+        "detail": "Controlled ONC color mosaic",
+        "summary": "Hayabusa2 false color. Brightness was matched across images, so mosaic values are not measured reflectance."
       },
       {
         "id": "elevation",
@@ -118,7 +120,8 @@
           "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
           "image": "/scenes/ryugu/ryugu-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Height relative to a 448 m sphere, from the shape model. Colors include Ryugu's broad form; the outline is simplified."
       }
     ]
   },

@@ -1,5 +1,6 @@
+import { CENTER_SELECTION_DURATION_SECONDS } from './runtime-policy.mjs';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
-import { createWorldSelectionTarget, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
+import { createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
 export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document }) {
@@ -10,12 +11,28 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
     return Boolean(a && b && a.referenceFrame === b.referenceFrame && a.epochJdTt === b.epochJdTt);
   };
   return Object.freeze({ supports,
-    async focus({ objectId, mount, signal, reducedMotion = false, targetWorldCamera = null, timing = { mark() {} } }) {
+    centerTarget({ objectId, fromId, mount, force = false }) {
+      const owner = mount?.navigation, frame = frames.get(objectId);
+      const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
+      const sourceFrame = owner?.frame ?? frames.get(fromId);
+      if (!from || !optics || !frame || !sourceFrame) return null;
+      const projection = presentWorldCamera(from, frame, optics);
+      const current = presentWorldCamera(from, sourceFrame, optics);
+      const silhouette = projection.silhouette ?? current.silhouette;
+      if (!force && (!silhouette || 2 * silhouette.tangentialSemiAxis > optics.detailHandoffDiameterPixels
+        || current.distanceM <= frame.bodyRadiusM)) return null;
+      // A reset from a small body's close-up must remain outside the Sun.
+      const minimumDistance = force ? frame.bodyRadiusM * 2 : 0;
+      return worldCameraFromCenteredPresentation({ rotation: projection.rotation,
+        distanceUnits: Math.max(current.distanceM, minimumDistance) / frame.metersPerUnit }, frame, optics);
+    },
+    async focus({ objectId, mount, signal, reducedMotion = false, targetWorldCamera = null, centerSelection = false, timing = { mark() {} } }) {
       const owner = mount?.navigation, frame = frames.get(objectId);
       if (!owner || !frame) throw new TypeError('Object focus requires its mounted prepared camera.');
       const from = owner.capture(), optics = owner.optics();
       const target = targetWorldCamera ?? createWorldSelectionTarget(from, frame, optics);
-      const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: frame.originM });
+      const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: frame.originM,
+        durationS: centerSelection ? CENTER_SELECTION_DURATION_SECONDS : undefined });
       await animateWorldFlight({ owner, from, flight,
         anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
         windowTarget, documentTarget, onPaint(world) {
@@ -25,7 +42,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         } });
       lastCamera = owner.capture(); lastOptics = owner.optics();
     },
-    async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url, targetWorldCamera = null, preserveView = false, presentWorld = null, cameraViewport, timing = { mark() {} } }) {
+    async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url, targetWorldCamera = null, centerSelection = false, preserveView = false, presentWorld = null, cameraViewport, timing = { mark() {} } }) {
       if (!supports(fromId, toId)) throw new TypeError('Objects do not share a prepared world frame.');
       const targetFrame = frames.get(toId);
       const source = fromMount?.navigation;
@@ -61,7 +78,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         : createWorldSelectionTarget(from, targetFrame, optics));
       // One numeric flight survives the change of detailed object owner.
       const flight = createSelectionFlight({ from: from.pose, to: target.pose,
-        focusPositionM: targetFrame.originM });
+        focusPositionM: targetFrame.originM, durationS: centerSelection ? CENTER_SELECTION_DURATION_SECONDS : undefined });
       const anchors = [frames.get(fromId), targetFrame].map(frame => ({
         positionM: frame.originM, radiusM: frame.bodyRadiusM,
       }));

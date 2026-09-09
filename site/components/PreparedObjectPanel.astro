@@ -1,6 +1,7 @@
 ---
 import PlanetShell from "./PlanetShell.astro";
 import PlanetInformationPanel from "./PlanetInformationPanel.astro";
+import { validateObjectProvenance } from "../../src/platform/object-provenance.mjs";
 import type {
   PreparedObjectContent,
   PreparedObjectContentDocument,
@@ -26,7 +27,10 @@ const imageFiles = import.meta.glob<string>(
   { query: "?url", import: "default" },
 );
 const minimapFiles = import.meta.glob("../../src/planets/*/source/presentation/surface-map.json", { import: "default" });
+const provenanceFiles = import.meta.glob("../../src/planets/*/prepared/provenance.json", { import: "default" });
 const objectRoot = `../../src/planets/${content.objectId}`;
+const provenanceData = await provenanceFiles[`${objectRoot}/prepared/provenance.json`]?.();
+const provenance = provenanceData && validateObjectProvenance(provenanceData, content.objectId);
 const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
 const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
 const lenses = controls.lenses && {
@@ -49,6 +53,7 @@ const lenses = controls.lenses && {
   charts={content.charts}
   galleries={content.galleries}
   resources={content.resources}
+  provenance={provenance}
   lenses={lenses}
   settings={controls.settings}
   destinations={content.destinations}

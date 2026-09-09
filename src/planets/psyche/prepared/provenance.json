@@ -1,0 +1,522 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "psyche",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "077399caa59cde1600b30606f66d7932865c9d13cef28a3c989b88d6301d91c1"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "a1f0130cd16e6a0c69f00df8d8923656a6fec68f79ef1eae42e630230f0b6b48",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "psyche",
+        "displayName": "Psyche",
+        "publicBase": "/scenes/psyche/",
+        "distanceAu": 2.9261360015644122,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/16_Psyche_mpcd.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 3234,
+                "expectedFaces": 6464
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -111.5
+              },
+              "minimum": -40,
+              "maximum": 40,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 111500,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 111.5,
+          "camera": {
+            "initialScenePitchDegrees": 46.741573033707866,
+            "defaultControlYawDegrees": 90
+          },
+          "mapUrl": "/scenes/psyche/psyche-shape-surface@2x.webp",
+          "polesUrl": "/scenes/psyche/psyche-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/16_Psyche_mpcd.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 3234,
+              "expectedFaces": 6464
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 2100,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "297293e89d05c8e6ad62731197f16ab4b4104d4441fbd2f37f8b81fbd7b25fbd",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "psyche",
+        "displayName": "Psyche",
+        "title": {
+          "label": "Psyche",
+          "viewBox": "0 0 88.9271 35",
+          "width": 88.9271,
+          "height": 35,
+          "path": "M0 29L0 8.63L7.51 8.63Q9.72 8.63 11.31 9.43Q12.89 10.23 13.73 11.66Q14.57 13.1 14.57 15.04Q14.57 16.98 13.71 18.42Q12.85 19.85 11.25 20.65Q9.64 21.44 7.42 21.44L1.75 21.44L1.75 18.81L7.3 18.81Q8.67 18.81 9.61 18.34Q10.55 17.87 11.05 17.02Q11.55 16.16 11.55 15.04Q11.55 13.89 11.05 13.04Q10.55 12.2 9.61 11.73Q8.67 11.27 7.3 11.27L3.05 11.27L3.05 29ZM22.51 29.33Q20.86 29.33 19.54 28.82Q18.22 28.3 17.41 27.27Q16.59 26.24 16.44 24.72L19.3 24.6Q19.45 25.76 20.27 26.38Q21.09 27 22.47 27Q23.87 27 24.67 26.44Q25.47 25.87 25.47 25.01Q25.47 24.27 24.92 23.81Q24.37 23.35 23.39 23.15L20.97 22.62Q18.9 22.15 17.84 21.1Q16.79 20.06 16.79 18.46Q16.79 17.16 17.5 16.17Q18.22 15.18 19.48 14.62Q20.74 14.07 22.42 14.07Q24.04 14.07 25.29 14.62Q26.53 15.18 27.27 16.2Q28.01 17.21 28.11 18.61L25.36 18.73Q25.28 17.73 24.52 17.06Q23.76 16.39 22.45 16.39Q21.23 16.39 20.48 16.97Q19.72 17.54 19.72 18.36Q19.72 19.12 20.27 19.57Q20.82 20.03 21.86 20.26L24.33 20.81Q26.44 21.28 27.44 22.26Q28.43 23.24 28.43 24.83Q28.43 26.2 27.67 27.22Q26.9 28.23 25.57 28.78Q24.24 29.33 22.51 29.33ZM30.84 34.66L31.02 32.24L32.32 32.25Q32.85 32.29 33.24 32.14Q33.63 31.98 33.94 31.59Q34.24 31.2 34.48 30.53L35.05 28.93L29.42 14.37L32.55 14.37L35.46 22.45Q35.88 23.65 36.25 24.84Q36.62 26.03 36.99 27.22L36.16 27.22Q36.51 26.03 36.89 24.84Q37.27 23.64 37.69 22.45L40.59 14.37L43.68 14.37L37.1 31.43Q36.66 32.54 36.05 33.27Q35.43 33.99 34.61 34.37Q33.78 34.74 32.75 34.74Q32.25 34.74 31.76 34.72Q31.26 34.7 30.84 34.66ZM51.38 29.33Q49.3 29.33 47.73 28.36Q46.17 27.39 45.3 25.68Q44.43 23.97 44.43 21.71Q44.43 19.46 45.3 17.73Q46.17 16.01 47.73 15.04Q49.3 14.07 51.38 14.07Q52.65 14.07 53.73 14.45Q54.81 14.82 55.65 15.5Q56.49 16.18 57.02 17.11Q57.54 18.05 57.72 19.17L54.85 19.32Q54.73 18.72 54.45 18.21Q54.16 17.71 53.73 17.34Q53.29 16.98 52.71 16.78Q52.13 16.57 51.39 16.57Q50.12 16.57 49.22 17.23Q48.33 17.88 47.86 19.04Q47.4 20.2 47.4 21.73Q47.4 23.24 47.86 24.39Q48.33 25.53 49.23 26.17Q50.13 26.81 51.39 26.81Q52.14 26.81 52.71 26.61Q53.28 26.42 53.7 26.06Q54.12 25.71 54.41 25.19Q54.7 24.68 54.83 24.04L57.72 24.2Q57.57 25.31 57.04 26.25Q56.52 27.2 55.68 27.88Q54.83 28.56 53.74 28.95Q52.65 29.33 51.38 29.33ZM63.17 20.52L63.17 29L60.26 29L60.26 8.63L63.17 8.63L63.17 18.01L62.51 18.01Q63.22 16.04 64.49 15.08Q65.75 14.11 67.56 14.11Q69.05 14.11 70.22 14.76Q71.4 15.41 72.08 16.68Q72.77 17.95 72.77 19.85L72.77 29L69.85 29L69.85 20.21Q69.85 18.49 69.02 17.6Q68.19 16.71 66.67 16.71Q65.7 16.71 64.9 17.12Q64.1 17.53 63.63 18.37Q63.17 19.21 63.17 20.52ZM82.36 29.33Q80.19 29.33 78.63 28.36Q77.06 27.4 76.22 25.68Q75.38 23.97 75.38 21.74Q75.38 19.5 76.25 17.77Q77.11 16.04 78.65 15.05Q80.18 14.07 82.19 14.07Q83.66 14.07 84.89 14.6Q86.12 15.12 87.03 16.11Q87.94 17.09 88.43 18.49Q88.93 19.88 88.93 21.66L88.93 22.51L76.77 22.51L76.77 20.3L87.42 20.3L86.11 20.99Q86.11 19.62 85.64 18.61Q85.17 17.6 84.29 17.05Q83.42 16.5 82.2 16.5Q80.98 16.5 80.1 17.06Q79.22 17.61 78.74 18.6Q78.26 19.59 78.26 20.91L78.26 22.23Q78.26 23.64 78.76 24.69Q79.26 25.75 80.18 26.32Q81.09 26.89 82.39 26.89Q83.32 26.89 84.04 26.62Q84.76 26.35 85.24 25.83Q85.71 25.31 85.93 24.63L88.72 24.78Q88.43 26.12 87.54 27.14Q86.64 28.17 85.32 28.75Q83.99 29.33 82.36 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Psyche is a main-belt asteroid whose observations suggest a mixture of metal and rock. Its flattened, irregular shape is reconstructed from ground-based observations; the grid conveys no surface composition. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "111.5 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Distance from Sun",
+              "value": "2.926 AU (mean)"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "5.01 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "4.195948 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "VLT/SPHERE shape model",
+              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "thumbnail": "/scenes/psyche/psyche-shape-thumbnail.webp",
+              "surface": "psyche-shape-surface@2x.webp",
+              "poles": "psyche-shape-surface@2x.webp",
+              "source": {
+                "id": "psyche-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape",
+              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Source shape · radial height",
+              "title": "Color shows source radius minus a 111.5 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "thumbnail": "/scenes/psyche/psyche-elevation-thumbnail.webp",
+              "surface": "psyche-elevation-surface@2x.webp",
+              "poles": "psyche-elevation-surface@2x.webp",
+              "source": {
+                "id": "psyche-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-40",
+                  "0",
+                  "40"
+                ],
+                "meta": "km · 111.5 km reference sphere",
+                "sourceUrl": "https://observations.lam.fr/astero/3Dshape/16_Psyche_mpcd.obj",
+                "image": "/scenes/psyche/psyche-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height",
+              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "VLT/SPHERE survey and physical properties",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Released MPCD shape model",
+            "href": "https://observations.lam.fr/astero/3Dshape/16_Psyche_mpcd.obj"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Observed pole and period; arbitrary display phase",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1051/0004-6361/202141781",
+            "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "psyche-shape",
+      "path": "shape/16_Psyche_mpcd.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/16_Psyche_mpcd.obj",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+      "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 111500
+      },
+      "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sha256": "e49a5d2d92974c283f9ee36bea08568265af80d9f700c20e11cd0b371d23067b",
+      "bytes": 388219,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/16_Psyche_mpcd.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/16_Psyche_mpcd.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "394f605c7bf7054262fdc2a22b45d31adb6765c16d7fe99005f2e08b6c538e19",
+      "bytes": 8447,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Source shape · radial height"
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "psyche-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/psyche/psyche-elevation-thumbnail.webp",
+          "bytes": 4964,
+          "sha256": "c0adb2532a873e8a227aeccfb1e2643ca2f5829f91c9294455e18644aeefa996",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/psyche/psyche-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/psyche/psyche-elevation-surface@2x.webp",
+          "bytes": 306596,
+          "sha256": "d8a54e06f75763547a0a44b656b6977596609cd0f8b5c3495289566f7bdeb378",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "VLT/SPHERE shape model"
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "psyche-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/psyche/psyche-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/psyche/psyche-shape-surface@2x.webp",
+          "bytes": 215594,
+          "sha256": "217e8389db29cd1fea0e367ff70095936916a1b9441bb244ba091c27612ae32c",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5456,
+          "sha256": "1d025c3030646033351b12679bfcd96263dc80d254344f85f2256ae2ac6445f7",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10276,
+          "sha256": "acab088ef9a5379b6e4219f0ffc465dd230c718e4c7ecda2b77223d2ca61bff5",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

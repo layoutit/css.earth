@@ -40,7 +40,13 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "expectedBytes": 16897935,
-      "expectedSha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458"
+      "expectedSha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
+      }
     },
     {
       "id": "eros-normal",
@@ -66,7 +72,13 @@
       },
       "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
       "expectedBytes": 228242957,
-      "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761"
+      "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+      }
     }
   ],
   "generatedIntermediates": [
