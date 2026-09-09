@@ -116,6 +116,30 @@ test('semantic changes invalidate worker snapshots without synchronously republi
   layer.destroy();
 });
 
+test('inactive annotations retain emphasis until their reveal publication', () => {
+  const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
+  const nodes = all(root), groups = ['sun', 'mercury', 'venus'].map(id => find(root, 'contextGroup', id));
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
+  layer.setNavigationIndicatorsVisible(false);
+  clock.advance(1000);
+  layer.publish(world, viewport);
+  const retained = groups.map(group => group.dataset.contextSelected);
+  layer.setOverview(true);
+  clock.advance(1000);
+  layer.publish(world, viewport);
+  expect(groups.map(group => group.dataset.contextSelected)).toEqual(retained);
+  layer.setNavigationIndicatorsVisible(true);
+  clock.advance(1000);
+  layer.publish(world, viewport);
+  const shown = layer.inspect().filter(body => body.indicator.style.visibility !== 'hidden');
+  expect(shown.length).toBeGreaterThan(0);
+  for (const body of shown) expect(find(root, 'contextGroup', body.id).dataset.contextSelected).toBe('overview');
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
 test('a resolved background sprite does not pick through its transparent square corners', () => {
   const root = mount(1), layer = mounted.get(root)!;
   layer.selectObject('mercury');

@@ -549,9 +549,18 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
         entry.indicatorShown = projected.indicatorShown;
         entry.orbitAppearance = projected.orbitAppearance;
         if (navigationIndicatorsVisible && entry.orbit) entry.orbitClip = projected.orbitClip;
+        // Inactive annotation trees retain their last presentation. Publish
+        // current emphasis before their next reveal, and while an outgoing
+        // fade can still draw; selection need not restyle every dormant orbit.
         if (entry.publishedEmphasis !== emphasizedId) {
-          entry.group.dataset.contextSelected = emphasizedId === null ? "overview" : String(entry.body.id === emphasizedId);
-          entry.publishedEmphasis = emphasizedId;
+          const drawsAnnotations = (navigationIndicatorsVisible &&
+            (projected.labelShown || projected.indicatorShown || projected.orbitVisibility > 0))
+            || fader.current(entry.label) > 0 || lineFader.current(entry.indicator) > 0
+            || (entry.orbitRoot && lineFader.current(entry.orbitRoot) > 0);
+          if (drawsAnnotations) {
+            entry.group.dataset.contextSelected = emphasizedId === null ? "overview" : String(entry.body.id === emphasizedId);
+            entry.publishedEmphasis = emphasizedId;
+          }
         }
         return { ...projected, entry };
       });

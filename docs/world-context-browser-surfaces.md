@@ -1793,3 +1793,83 @@ retained layout work; the final variant preserved scroll geometry but added
 the large style pass. Their captures and proofs remain under
 `output/playwright/main69-frame-cost/` and the corresponding `catalogue-skipping`
 and `retained-sidebar-panels` capture directories. No such CSS is in product code.
+
+## Bound selection invalidation and retained catalogue layout
+
+The next transition investigation uses Canary 155.0.8048.0, DPR 2 and 301 bodies,
+with main integrated through `b3a0410f7` (#72). Scoped preparation restored the
+updated comet descriptors; the source-derived legend check passes for all objects.
+Borrelly's prepared orbit traversal and minimap ordering were regenerated after
+#71. These integrations do not change the rendering contract.
+
+The extra-invalidation recording in
+`output/world-context-zoom/catalogue-invalidation-dpr2/` attributes each overview
+switch to 301 `data-context-selected` writes on world groups, as well as sidebar
+visibility changes. Its recorder, trace and video are synchronized, but its
+additional instrumentation makes it an attribution run, not a timing control.
+The earlier sidebar-only experiments therefore did not isolate all transition
+style work. Their improvements are insufficient on their own.
+
+The implementation now:
+
+- Publishes selection emphasis when a group's annotations draw or are still
+  fading. Dormant groups keep their styles and receive current emphasis before
+  reveal. Marker opacity, geometry, picking, source colors and hover policy are
+  unchanged. Flight fades remain active consumers until their alpha reaches zero.
+- Retains inactive cards above the scrollable area, using native `inert` for
+  pointer, focus and accessibility exclusion. Normal CSS flow owns active card
+  sizing; there is no measured card-stack layout or resize-driven height writer.
+  Busy selection previews remain inert until their existing commit releases them.
+- Prepares groups of 16 catalogue rows and lets the browser skip offscreen group
+  layout. All 301 original rows remain available to native find, accessibility,
+  focus, search and navigation. This adds 38 list containers, not scene objects.
+  Visible and focused groups use their original painting behavior; there is no
+  virtual row remapping or runtime creation of source content.
+- Uses explicit row visibility for arrow-key navigation, avoiding geometry reads
+  across every offscreen result. Other controls retain their existing visibility
+  check. Filtering updates group bounds and the observer disconnects on disposal.
+
+The native short Sun–overview–Sun diagnostic isolates the transition; it is not
+substituted for the full Sun–Milky Way–Sun target. Before integration:
+
+| Trial | Opening style | Opening main frame | Return style | Return main frame |
+| --- | ---: | ---: | ---: | ---: |
+| Retained grouped catalogue only | 11.561 ms / 4,885 elements | 18.687 ms | 12.185 ms / 4,744 elements | 20.044 ms |
+| Plus dormant-world emphasis retention | 4.093 ms / 1,641 elements | 10.158 ms | 7.534 ms / 2,638 elements | 14.777 ms |
+| Normal card flow, grouped catalogue and emphasis retention | 3.802 ms / 1,564 elements | 9.678 ms | 7.790 ms / 2,624 elements | 16.537 ms |
+
+The normal-flow run also contains 1.761 ms style plus 1.872 ms layout before the
+opening main frame, and 0.799 ms style plus 0.530 ms layout before the return
+main frame. Main-frame duration alone is not total input latency. Host load and
+input delivery vary. The remaining 50.1 ms rAF interval means the full target is
+still unproven.
+
+Source receipts and synchronized artifacts are in `output/world-context-zoom/`:
+
+| Capture | Recorder ID | Captured/encoded frames | Clock drift | Maximum PTS error |
+| --- | --- | ---: | ---: | ---: |
+| `catalogue-retained-groups-dpr2` | `a499aaa8-742f-4fb1-8a53-0972475cc148` | 585/585 | -39 µs | 0.286 ms |
+| `visible-world-emphasis-dpr2` | `4a600160-4f81-407c-81f1-f5edd7eb25fa` | 593/593 | -46 µs | 0.284 ms |
+| `retained-catalogue-simple-dpr2` | `f7659341-ede2-40df-807d-8cf547534653` | 534/534 | +27 µs | 0.266 ms |
+
+The latter two runs share the merged head and preserve world/input/document
+identity and one camera, without page errors, HMR during recording or trace loss.
+The grouped-only run precedes #72 and is contextual evidence, not an identical
+revision benchmark. Response-patch hashes and loaded bytes are recorded.
+
+The integrated implementation matches all 12 desktop/mobile catalogue snapshots
+and their scrolling geometry exactly, including middle/bottom positions, tabs,
+filtered search and focus on the last result. Native catalogue navigation still
+immediately selects Makemake with its complete card and one camera. These checks
+are in `output/playwright/retained-catalogue-integrated/`. Focused renderer tests
+also cover emphasis retirement and re-entry; shell tests cover filtering, native
+inert state and observer lifetime. Full-route validation follows this integration;
+these focused results do not establish the overall smoothness target.
+
+The first landing checks were invalidated by stale local prepared payloads after
+main integration: Ceres failed its descriptor SHA-256 check, and 198 cached body
+payloads differed from their current descriptors. All 198 were restored from
+local worktree copies only after matching the expected SHA-256; no source files
+or descriptors were changed. A complete descriptor scan now matches all 301
+prepared payloads. The receipt is
+`output/playwright/retained-catalogue-integrated/cache-restoration.json`.

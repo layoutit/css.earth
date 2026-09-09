@@ -8,7 +8,7 @@ const marker = PREPARED_NAVIGATION_MARKERS[object.id].presentation;
 const thumbnailScale = 14 / (marker.size + (marker.ringExtra ?? 0));
 ---
 
-<li class="planet-object-item" data-object-name={object.name.toLocaleLowerCase("en")}
+<li class="planet-object-item" role="listitem" data-object-name={object.name.toLocaleLowerCase("en")}
   data-object-system-name={object.systemName.toLocaleLowerCase("en")}
   data-object-classification={object.classification}
   data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase("en")}>
