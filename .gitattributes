@@ -20,3 +20,7 @@ src/planets/kleopatra/source/reference/** -whitespace
 src/planets/toutatis/source/reference/** -whitespace
 src/planets/toutatis/source/shape/4179toutatis2.tab -whitespace
 src/planets/comet-67p/source/reference/osiris-2014080[56]-*.lbl -text -whitespace
+src/planets/comet-19p/source/reference/*.cat -text -whitespace
+src/planets/comet-19p/source/reference/*.lbl -text -whitespace
+src/planets/comet-19p/source/reference/*.txt -text -whitespace
+src/planets/comet-19p/source/reference/*.htm -text -whitespace

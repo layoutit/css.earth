@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mjs';
 
 const dot = (a, b) => a.reduce((sum, v, i) => sum + v * b[i], 0);
 
@@ -33,7 +34,9 @@ export async function renderRadialSnapshot({ faces, map, sampleSurface, size, lo
         if (z <= depth[index]) continue;
         depth[index] = z;
         const point = face.vertices[0].map((n, i) => n * u + face.vertices[1][i] * v + face.vertices[2][i] * w);
-        const sample = sampleSurface?.(point);
+        const sample = face.estimated ? { color: missingCoverageColor(
+          Math.atan2(point[1], point[0]) * 180 / Math.PI,
+          Math.atan2(point[2], Math.hypot(point[0], point[1])) * 180 / Math.PI, 180 / size) } : sampleSurface?.(point);
         const normal = sample?.normal ?? face.vertexNormals[0].map((n, i) => n * u + face.vertexNormals[1][i] * v + face.vertexNormals[2][i] * w);
         const illumination = ambient + diffuse * Math.max(0, dot(normal, eye) / Math.hypot(...normal));
         let color = sample?.color;

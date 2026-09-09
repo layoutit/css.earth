@@ -1,0 +1,376 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "comet-19p",
+  "displayName": "Borrelly",
+  "publicBase": "/scenes/comet-19p/",
+  "distanceAu": 3.608969333559339,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 100,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "usgs",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "USGS",
+          "modeled": true,
+          "coverage": "Stereo terrain from the Deep Space 1 encounter. Gray shows measured shape; the grid marks an estimated completion of the unmeasured side."
+        }
+      },
+      {
+        "id": "dlr",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "DLR",
+          "modeled": true,
+          "coverage": "Stereo terrain from the Deep Space 1 encounter. Gray shows measured shape; the grid marks an estimated completion of the unmeasured side."
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "height",
+        "consumer": "height",
+        "path": "shape/usgsdem.tab",
+        "format": "image-plane-dem",
+        "grid": {
+          "columns": 6,
+          "step": 16,
+          "xyTransform": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "zOffsetMeters": -2200,
+          "expectedVertices": 62879,
+          "expectedFaces": 124485,
+          "metersPerUnit": 1
+        },
+        "quantity": "height",
+        "label": "Height",
+        "units": "km",
+        "minimum": -0.2,
+        "maximum": 4.5,
+        "colors": [
+          "#26345d",
+          "#307a8a",
+          "#b4d29b",
+          "#f5de88"
+        ],
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": 0
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 85
+        }
+      },
+      {
+        "id": "difference",
+        "consumer": "difference",
+        "path": "shape/usgsdem.tab",
+        "format": "image-plane-dem",
+        "grid": {
+          "columns": 6,
+          "step": 16,
+          "xyTransform": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "zOffsetMeters": -2200,
+          "expectedVertices": 62879,
+          "expectedFaces": 124485,
+          "metersPerUnit": 1
+        },
+        "quantity": "difference",
+        "label": "Difference",
+        "units": "km",
+        "minimum": -0.6,
+        "maximum": 0.6,
+        "colors": [
+          "#314c9c",
+          "#8bafcf",
+          "#e6e7df",
+          "#d29877",
+          "#a33135"
+        ],
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": 0
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 85
+        },
+        "comparison": {
+          "path": "shape/dlrdem.tab",
+          "grid": {
+            "columns": 3,
+            "step": 1,
+            "xyTransform": [
+              56.463808305668586,
+              -0.2915158022045819,
+              -6518.899478463577,
+              -0.2915158022045819,
+              -56.463808305668586,
+              5904.119398638064
+            ],
+            "zOffsetMeters": -2237.4799505431793,
+            "expectedVertices": 3765,
+            "expectedFaces": 7161,
+            "metersPerUnit": 1
+          },
+          "heightOffsetMeters": -37.479950543179214
+        }
+      }
+    ],
+    "observedColors": [],
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "micas",
+        "format": "isis2-orthographic",
+        "consumer": "micas",
+        "path": "micas/ccd_near_1_ortho.cub",
+        "coordinatePaths": [
+          "micas/dem_x_component.cub",
+          "micas/dem_y_component.cub",
+          "micas/dem_z_component.cub"
+        ],
+        "grid": {
+          "width": 356,
+          "height": 478,
+          "pixelToSource": [
+            16,
+            -3144,
+            -16,
+            3448
+          ]
+        },
+        "maximumCoordinateErrorMeters": 0.000001,
+        "maximumSourceDistanceMeters": 85,
+        "displayRange": [
+          0,
+          0.018
+        ],
+        "metadata": {
+          "label": "MICAS",
+          "coverage": "Mission orthophoto registered to USGS terrain, retaining its original lighting. The grid marks missing imagery and an estimated completion of the unmeasured side."
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 4,
+    "camera": {
+      "initialScenePitchDegrees": -50.59056116452812,
+      "defaultControlYawDegrees": -112.29187662235131,
+      "framingScale": 1
+    },
+    "mapUrl": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
+    "polesUrl": "/scenes/comet-19p/comet-19p-micas-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/usgsdem.tab",
+      "format": "image-plane-dem",
+      "grid": {
+        "columns": 6,
+        "step": 16,
+        "xyTransform": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "zOffsetMeters": -2200,
+        "expectedVertices": 62879,
+        "expectedFaces": 124485,
+        "metersPerUnit": 1
+      },
+      "faceBudget": 2000,
+      "tileSize": 32,
+      "atlasColumns": 16,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 2000,
+        "maximumErrorMeters": 85
+      },
+      "primitive": "u",
+      "sourceLighting": {
+        "maximumDistanceMeters": 85,
+        "rayOffsetMeters": 0.25,
+        "ambient": 0.16,
+        "diffuse": 0.84,
+        "floodLights": [
+          {
+            "direction": [
+              0,
+              0,
+              1
+            ],
+            "weight": 0.36
+          },
+          {
+            "direction": [
+              0,
+              1,
+              0
+            ],
+            "weight": 0.24
+          },
+          {
+            "direction": [
+              1,
+              0,
+              0
+            ],
+            "weight": 0.24
+          }
+        ]
+      },
+      "thumbnail": {
+        "size": 96,
+        "longitudeDegrees": -90,
+        "latitudeDegrees": 80,
+        "ambient": 0.4,
+        "diffuse": 0.6
+      },
+      "sourceTopology": "open",
+      "completion": {
+        "method": "outline-depth-envelope",
+        "depthMeters": 3150,
+        "faceBudget": 3200,
+        "reduction": {
+          "targetFaces": 2000,
+          "maximumErrorMeters": 40
+        }
+      }
+    },
+    "radialTerrainAlternatives": [
+      {
+        "path": "shape/dlrdem.tab",
+        "format": "image-plane-dem",
+        "grid": {
+          "columns": 3,
+          "step": 1,
+          "xyTransform": [
+            56.463808305668586,
+            -0.2915158022045819,
+            -6518.899478463577,
+            -0.2915158022045819,
+            -56.463808305668586,
+            5904.119398638064
+          ],
+          "zOffsetMeters": -2237.4799505431793,
+          "expectedVertices": 3765,
+          "expectedFaces": 7161,
+          "metersPerUnit": 1
+        },
+        "faceBudget": 2000,
+        "tileSize": 32,
+        "atlasColumns": 16,
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 1400,
+          "maximumErrorMeters": 85
+        },
+        "primitive": "u",
+        "sourceLighting": {
+          "maximumDistanceMeters": 85,
+          "rayOffsetMeters": 0.25,
+          "ambient": 0.16,
+          "diffuse": 0.84,
+          "floodLights": [
+            {
+              "direction": [
+                0,
+                0,
+                1
+              ],
+              "weight": 0.36
+            },
+            {
+              "direction": [
+                0,
+                1,
+                0
+              ],
+              "weight": 0.24
+            },
+            {
+              "direction": [
+                1,
+                0,
+                0
+              ],
+              "weight": 0.24
+            }
+          ]
+        },
+        "thumbnail": {
+          "size": 96,
+          "longitudeDegrees": -90,
+          "latitudeDegrees": 80,
+          "ambient": 0.4,
+          "diffuse": 0.6
+        },
+        "sourceTopology": "open",
+        "lensId": "dlr",
+        "completion": {
+          "method": "outline-depth-envelope",
+          "depthMeters": 3150,
+          "faceBudget": 1800
+        }
+      }
+    ]
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; explicitly illustrative fixed attitude.",
+    "sunQualification": "The DEM image axes are displayed at an arbitrary fixed attitude. Shadows are a lighting aid, not reconstructed encounter illumination.",
+    "qualification": "Measured terrain covers the encounter-facing side. The grid marks an illustrative closed surface fitted to each observed outline with an assumed depth; it carries no measured imagery or scalar values."
+  },
+  "presentation": {
+    "defaultLens": "micas",
+    "pointColor": [
+      184,
+      182,
+      178
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

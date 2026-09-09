@@ -1,0 +1,86 @@
+PDS_VERSION_ID      = PDS3                                                    
+                                                                              
+RECORD_TYPE  = FIXED_LENGTH                                                   
+RECORD_BYTES = 18                                                             
+FILE_RECORDS = 3765                                                           
+                                                                              
+^TABLE  = "DLRDEM.TAB"                                                        
+                                                                              
+DATA_SET_ID           = "DS1-C-MICAS-5-BORRELLY-DEM-V1.0"                     
+PRODUCT_ID            = "DS1-DLR-DEM-V1.0"                                    
+PRODUCT_NAME          = "DLR DIGITAL ELEVATION MODEL PRODUCED FROM            
+                         THE DS1 MICAS IMAGES "                               
+PRODUCT_CREATION_TIME = 2004-04-15T12:00:00                                   
+                                                                              
+TARGET_NAME           = "19P/BORRELLY 1 (1904 Y2)"                            
+INSTRUMENT_HOST_NAME  = "DEEP SPACE 1"                                        
+INSTRUMENT_NAME       = "MINIATURE INTEGRATED CAMERA-SPECTROMETER"            
+START_TIME            = "N/A"                                                 
+STOP_TIME             = "N/A"                                                 
+SPACECRAFT_CLOCK_START_COUNT = "N/A"                                          
+SPACECRAFT_CLOCK_STOP_COUNT  = "N/A"                                          
+                                                                              
+DESCRIPTION           = "                                                     
+  The German Aerospace Center (Deutschen Zentrum fur Luft- und Raumfahrt --   
+  DLR) digital elevation map (DEM) of the nucleus of comet 19P/Borrelly (1904 
+  Y2) was created using the MICAS image data.  The axes represent an          
+  arbitrary coordinate system based on the images used to generate the map.   
+  The X and Y axes form a grid in the plane of the sky.  The Z direction      
+  represents the elevation of the nucleus at each corresponding grid          
+  position.  Z increases toward the observer, with its zero point in the      
+  plane that intersects the most distant visible point on the limb.           
+                                                                              
+  The data listed here are the X and Y coordinates, with the corresponding    
+  elevation at that point.  For X and Y positions that do not fall on the     
+  nucleus, no data are included."                                             
+                                                                              
+OBJECT        = TABLE                                                         
+  INTERCHANGE_FORMAT = ASCII                                                  
+  COLUMNS     = 3                                                             
+  ROW_BYTES   = 18                                                            
+  ROWS        = 3765                                                          
+  DESCRIPTION = "DLR Digital elevation map for the nucleus of Comet           
+                 19P/Borrelly"                                                
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "X"                                                       
+    BYTES         = 3                                                         
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 2                                                         
+    FORMAT        = "I3"                                                      
+    UNIT          = "PIXEL"                                                   
+    MINIMUM       = 64                                                        
+    MAXIMUM       = 150                                                       
+    DESCRIPTION   = "Pixel location along the X-axis"                         
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "Y"                                                       
+    BYTES         = 3                                                         
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 7                                                         
+    FORMAT        = "I3"                                                      
+    UNIT          = "PIXEL"                                                   
+    MINIMUM       =  52                                                       
+    MAXIMUM       =  170                                                      
+    DESCRIPTION   = "Pixel location along the Y-axis"                         
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 3                                                         
+    NAME          = "Z"                                                       
+    BYTES         = 4                                                         
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 13                                                        
+    FORMAT        = "I4"                                                      
+    UNIT          = "METER"                                                   
+    MINIMUM       = 0                                                         
+    MAXIMUM       = 4187                                                      
+    DESCRIPTION   = "Perpendicular distance above the (X,Y) plane"            
+  END_OBJECT                                                                  
+                                                                              
+END_OBJECT    = TABLE                                                         
+                                                                              
+END                                                                           

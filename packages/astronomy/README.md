@@ -228,6 +228,13 @@ does not model perturbations or outgassing and has no qualified long-term range.
 Halley's 4.579 km registry radius describes the volume of the historical Stooke
 grid mesh, not a precise observed mean radius. Its display attitude is object-owned.
 
+Borrelly (19P) uses the same epoch and conic API. Independent Horizons vectors
+differ by less than 1 mm at the epoch and by 356.11/337.54 km at minus/plus
+30 days, below its 410 km regression guard. Its 4 km navigation reference is
+half the approximate observed length, not a measured mean radius or volume.
+The encounter DEM frame and the estimated gridded completion belong to the
+object package; they do not establish a current spin solution.
+
 Nix, Hydra, Kerberos and Styx use daily 2020–2032 element fits about the
 Pluto-system barycentre. Their public position/state APIs still return vectors
 relative to Pluto's physical centre: the generic `barycentreCompanion` record

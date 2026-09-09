@@ -54,6 +54,7 @@ test('two surfaces on a ray keep different source heights, while a flat preview 
   assert.equal(sampler.samplePoint([1.1,0,0]).value,0);
   assert.equal(sampler.samplePoint([4.9,0,0]).value,4);
   assert.equal(mesh.closestPoint([2,0,0],1.1),null,'Equidistant distinct source surfaces do not establish correspondence');
+  assert.equal(mesh.closestPoint([2,0,0],1.1,false).distanceMeters,1,'Distance-only audits can measure an ambiguous nearest surface');
   assert.ok(mesh.hit(180,0,true),'Coincident triangles at a source edge are one surface, not an ambiguity');
 });
 const vrmlOctahedron = `#VRML V2.0 utf8

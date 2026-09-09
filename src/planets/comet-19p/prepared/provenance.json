@@ -1,0 +1,1151 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-19p",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "6cbdbaf4b1d8ce51bbdca36c2b8a3b21698d16eef9a8724293aa5acc73e09b4f"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "f4c66c81f922934bd1d94898e6ea63b5fa06d33b5985391dd1979cbe36eb8769",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-19p",
+        "displayName": "Borrelly",
+        "publicBase": "/scenes/comet-19p/",
+        "distanceAu": 3.608969333559339,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "usgs",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": null,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "USGS",
+                "modeled": true,
+                "coverage": "Stereo terrain from the Deep Space 1 encounter. Gray shows measured shape; the grid marks an estimated completion of the unmeasured side."
+              }
+            },
+            {
+              "id": "dlr",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": null,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "DLR",
+                "modeled": true,
+                "coverage": "Stereo terrain from the Deep Space 1 encounter. Gray shows measured shape; the grid marks an estimated completion of the unmeasured side."
+              }
+            }
+          ],
+          "scientific": [
+            {
+              "id": "height",
+              "consumer": "height",
+              "path": "shape/usgsdem.tab",
+              "format": "image-plane-dem",
+              "grid": {
+                "columns": 6,
+                "step": 16,
+                "xyTransform": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0
+                ],
+                "zOffsetMeters": -2200,
+                "expectedVertices": 62879,
+                "expectedFaces": 124485,
+                "metersPerUnit": 1
+              },
+              "quantity": "height",
+              "label": "Height",
+              "units": "km",
+              "minimum": -0.2,
+              "maximum": 4.5,
+              "colors": [
+                "#26345d",
+                "#307a8a",
+                "#b4d29b",
+                "#f5de88"
+              ],
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": 0
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 85
+              }
+            },
+            {
+              "id": "difference",
+              "consumer": "difference",
+              "path": "shape/usgsdem.tab",
+              "format": "image-plane-dem",
+              "grid": {
+                "columns": 6,
+                "step": 16,
+                "xyTransform": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0
+                ],
+                "zOffsetMeters": -2200,
+                "expectedVertices": 62879,
+                "expectedFaces": 124485,
+                "metersPerUnit": 1
+              },
+              "quantity": "difference",
+              "label": "Difference",
+              "units": "km",
+              "minimum": -0.6,
+              "maximum": 0.6,
+              "colors": [
+                "#314c9c",
+                "#8bafcf",
+                "#e6e7df",
+                "#d29877",
+                "#a33135"
+              ],
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": 0
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 85
+              },
+              "comparison": {
+                "path": "shape/dlrdem.tab",
+                "grid": {
+                  "columns": 3,
+                  "step": 1,
+                  "xyTransform": [
+                    56.463808305668586,
+                    -0.2915158022045819,
+                    -6518.899478463577,
+                    -0.2915158022045819,
+                    -56.463808305668586,
+                    5904.119398638064
+                  ],
+                  "zOffsetMeters": -2237.4799505431793,
+                  "expectedVertices": 3765,
+                  "expectedFaces": 7161,
+                  "metersPerUnit": 1
+                },
+                "heightOffsetMeters": -37.479950543179214
+              }
+            }
+          ],
+          "observedColors": [],
+          "mosaics": [],
+          "surfaceObservations": [
+            {
+              "id": "micas",
+              "format": "isis2-orthographic",
+              "consumer": "micas",
+              "path": "micas/ccd_near_1_ortho.cub",
+              "coordinatePaths": [
+                "micas/dem_x_component.cub",
+                "micas/dem_y_component.cub",
+                "micas/dem_z_component.cub"
+              ],
+              "grid": {
+                "width": 356,
+                "height": 478,
+                "pixelToSource": [
+                  16,
+                  -3144,
+                  -16,
+                  3448
+                ]
+              },
+              "maximumCoordinateErrorMeters": 0.000001,
+              "maximumSourceDistanceMeters": 85,
+              "displayRange": [
+                0,
+                0.018
+              ],
+              "metadata": {
+                "label": "MICAS",
+                "coverage": "Mission orthophoto registered to USGS terrain, retaining its original lighting. The grid marks missing imagery and an estimated completion of the unmeasured side."
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 4,
+          "camera": {
+            "initialScenePitchDegrees": -50.59056116452812,
+            "defaultControlYawDegrees": -112.29187662235131,
+            "framingScale": 1
+          },
+          "mapUrl": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
+          "polesUrl": "/scenes/comet-19p/comet-19p-micas-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/usgsdem.tab",
+            "format": "image-plane-dem",
+            "grid": {
+              "columns": 6,
+              "step": 16,
+              "xyTransform": [
+                1,
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              "zOffsetMeters": -2200,
+              "expectedVertices": 62879,
+              "expectedFaces": 124485,
+              "metersPerUnit": 1
+            },
+            "faceBudget": 2000,
+            "tileSize": 32,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 2000,
+              "maximumErrorMeters": 85
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 85,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ]
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": -90,
+              "latitudeDegrees": 80,
+              "ambient": 0.4,
+              "diffuse": 0.6
+            },
+            "sourceTopology": "open",
+            "completion": {
+              "method": "outline-depth-envelope",
+              "depthMeters": 3150,
+              "faceBudget": 3200,
+              "reduction": {
+                "targetFaces": 2000,
+                "maximumErrorMeters": 40
+              }
+            }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "path": "shape/dlrdem.tab",
+              "format": "image-plane-dem",
+              "grid": {
+                "columns": 3,
+                "step": 1,
+                "xyTransform": [
+                  56.463808305668586,
+                  -0.2915158022045819,
+                  -6518.899478463577,
+                  -0.2915158022045819,
+                  -56.463808305668586,
+                  5904.119398638064
+                ],
+                "zOffsetMeters": -2237.4799505431793,
+                "expectedVertices": 3765,
+                "expectedFaces": 7161,
+                "metersPerUnit": 1
+              },
+              "faceBudget": 2000,
+              "tileSize": 32,
+              "atlasColumns": 16,
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 1400,
+                "maximumErrorMeters": 85
+              },
+              "primitive": "u",
+              "sourceLighting": {
+                "maximumDistanceMeters": 85,
+                "rayOffsetMeters": 0.25,
+                "ambient": 0.16,
+                "diffuse": 0.84,
+                "floodLights": [
+                  {
+                    "direction": [
+                      0,
+                      0,
+                      1
+                    ],
+                    "weight": 0.36
+                  },
+                  {
+                    "direction": [
+                      0,
+                      1,
+                      0
+                    ],
+                    "weight": 0.24
+                  },
+                  {
+                    "direction": [
+                      1,
+                      0,
+                      0
+                    ],
+                    "weight": 0.24
+                  }
+                ]
+              },
+              "thumbnail": {
+                "size": 96,
+                "longitudeDegrees": -90,
+                "latitudeDegrees": 80,
+                "ambient": 0.4,
+                "diffuse": 0.6
+              },
+              "sourceTopology": "open",
+              "lensId": "dlr",
+              "completion": {
+                "method": "outline-depth-envelope",
+                "depthMeters": 3150,
+                "faceBudget": 1800
+              }
+            }
+          ]
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; explicitly illustrative fixed attitude.",
+          "sunQualification": "The DEM image axes are displayed at an arbitrary fixed attitude. Shadows are a lighting aid, not reconstructed encounter illumination.",
+          "qualification": "Measured terrain covers the encounter-facing side. The grid marks an illustrative closed surface fitted to each observed outline with an assumed depth; it carries no measured imagery or scalar values."
+        },
+        "presentation": {
+          "defaultLens": "micas",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "5ef27a3447c24da3e270fef0a3e4f2c91bd73d62aa5f7a6cf0570d89350be628",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-19p",
+        "displayName": "Borrelly",
+        "panel": {
+          "introduction": "Deep Space 1 flew past Borrelly in September 2001. Its images revealed an elongated nucleus with smooth terrain, rough slopes and a narrow waist. The grid marks an estimated shape where terrain was not measured.",
+          "facts": [
+            {
+              "id": "length",
+              "label": "Nucleus length",
+              "value": "About 8 km"
+            },
+            {
+              "id": "encounter",
+              "label": "Spacecraft",
+              "value": "Deep Space 1 · 2001"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "micas",
+          "labels": {
+            "micas": "MICAS",
+            "usgs": "USGS",
+            "dlr": "DLR",
+            "height": "Height",
+            "difference": "Difference"
+          },
+          "controls": [
+            {
+              "id": "micas",
+              "label": "MICAS",
+              "detail": "Encounter photograph",
+              "description": "The mission team’s orthophoto laid onto USGS terrain, keeping the lighting seen by Deep Space 1. The grid covers missing imagery and the estimated far side.",
+              "title": "Encounter photograph",
+              "thumbnail": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
+              "surface": "comet-19p-micas-surface@2x.webp",
+              "poles": "comet-19p-micas-poles@2x.webp",
+              "source": {
+                "id": "micas-orthophoto",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/topo.htm"
+              },
+              "facts": [
+                {
+                  "id": "mission",
+                  "label": "Mission",
+                  "value": "Deep Space 1"
+                },
+                {
+                  "id": "method",
+                  "label": "Source",
+                  "value": "MICAS orthophoto"
+                }
+              ]
+            },
+            {
+              "id": "usgs",
+              "label": "USGS",
+              "detail": "Stereo terrain",
+              "description": "Terrain reconstructed from overlapping MICAS images, with manual stereo checks. Gray shows measured terrain; the grid fills the far side with an estimated shape.",
+              "title": "Stereo terrain",
+              "thumbnail": "/scenes/comet-19p/comet-19p-usgs-thumbnail.webp",
+              "surface": "comet-19p-usgs-surface@2x.webp",
+              "poles": "comet-19p-usgs-poles@2x.webp",
+              "source": {
+                "id": "usgs-dem",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/"
+              },
+              "facts": [
+                {
+                  "id": "mission",
+                  "label": "Mission",
+                  "value": "Deep Space 1"
+                },
+                {
+                  "id": "method",
+                  "label": "Source",
+                  "value": "Stereo + manual editing"
+                }
+              ]
+            },
+            {
+              "id": "dlr",
+              "label": "DLR",
+              "detail": "Stereo terrain",
+              "description": "An independent reconstruction of the encounter images, aligned with USGS at the same scale. The grid marks gaps and the estimated far side.",
+              "title": "Stereo terrain",
+              "thumbnail": "/scenes/comet-19p/comet-19p-dlr-thumbnail.webp",
+              "surface": "comet-19p-dlr-surface@2x.webp",
+              "poles": "comet-19p-dlr-poles@2x.webp",
+              "source": {
+                "id": "dlr-dem",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/"
+              },
+              "facts": [
+                {
+                  "id": "mission",
+                  "label": "Mission",
+                  "value": "Deep Space 1"
+                },
+                {
+                  "id": "method",
+                  "label": "Source",
+                  "value": "Stereo image matching"
+                }
+              ]
+            },
+            {
+              "id": "height",
+              "label": "Height",
+              "detail": "Above the image plane",
+              "description": "Height toward the spacecraft from the source’s reference plane. This is not distance from the comet’s centre. Turn Shadows off to read the scale.",
+              "title": "Above the image plane",
+              "thumbnail": "/scenes/comet-19p/comet-19p-height-thumbnail.webp",
+              "surface": "comet-19p-height-surface@2x.webp",
+              "poles": "comet-19p-height-poles@2x.webp",
+              "source": {
+                "id": "usgs-dem",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/"
+              },
+              "facts": [
+                {
+                  "id": "range",
+                  "label": "Released heights",
+                  "value": "−0.10 to 4.44 km"
+                },
+                {
+                  "id": "direction",
+                  "label": "Positive direction",
+                  "value": "Toward the spacecraft"
+                }
+              ],
+              "legend": {
+                "kind": "scale",
+                "title": "Height above the reference plane",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−0.2",
+                  "2.15",
+                  "4.5"
+                ],
+                "meta": "km · false color",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/",
+                "image": "/scenes/comet-19p/comet-19p-height-legend.webp"
+              }
+            },
+            {
+              "id": "difference",
+              "label": "Difference",
+              "detail": "USGS minus DLR",
+              "description": "USGS height minus DLR height after alignment. Colors show model disagreement, not change over time; gray marks missing overlap. Turn Shadows off to read the scale.",
+              "title": "USGS minus DLR",
+              "thumbnail": "/scenes/comet-19p/comet-19p-difference-thumbnail.webp",
+              "surface": "comet-19p-difference-surface@2x.webp",
+              "poles": "comet-19p-difference-poles@2x.webp",
+              "source": {
+                "id": "usgs-dem",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/"
+              },
+              "facts": [
+                {
+                  "id": "units",
+                  "label": "Units",
+                  "value": "Kilometres"
+                },
+                {
+                  "id": "alignment",
+                  "label": "Alignment sensitivity",
+                  "value": "Up to 0.22 km"
+                }
+              ],
+              "legend": {
+                "kind": "scale",
+                "title": "USGS minus DLR",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "≤−0.6",
+                  "0",
+                  "≥0.6"
+                ],
+                "meta": "km · false color",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/",
+                "image": "/scenes/comet-19p/comet-19p-difference-legend.webp"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "PDS · USGS and DLR",
+            "role": "surface",
+            "description": "Released Borrelly terrain models",
+            "href": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/"
+          },
+          {
+            "label": "MICAS",
+            "role": "observations",
+            "description": "Mission orthophoto and its XYZ coordinates",
+            "href": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/topo.htm"
+          },
+          {
+            "label": "Howington-Kraus et al.",
+            "role": "observations",
+            "description": "How the terrain models were made and compared",
+            "href": "https://www.isprs.org/proceedings/xxxiv/part4/pdfpapers/277.pdf"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/solar-system/comets/19p-borrelly/",
+            "credit": "NASA"
+          },
+          "physical": {
+            "path": "../reference/dem-dataset.cat",
+            "credit": "USGS / DLR"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "usgs-surface",
+      "path": "material/neutral.png",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral terrain material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in neutral RGB material.",
+      "redistribution": "MIT",
+      "coverage": "Stereo terrain from the Deep Space 1 encounter. Gray shows shape; it is not a photograph. The unobserved side remains open.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4000
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "usgs",
+      "label": "USGS",
+      "falseColor": false,
+      "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
+      "bytes": 137,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-dem",
+      "path": "shape/usgsdem.tab",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/usgsdem.tab",
+      "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
+      "license": "Scientific archive data; preserve source attribution",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/readmeTopoModel.txt",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
+      "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
+      "sha256": "88643dbc92765eae3ca00e87166e25b33ad18b268f43e28537bd7c6ed5c387ef",
+      "bytes": 3521224,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/usgsdem.tab",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/usgsdem.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dlr-surface",
+      "path": "material/dlr-neutral.png",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral terrain material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in neutral RGB material.",
+      "redistribution": "MIT",
+      "coverage": "Stereo terrain from the Deep Space 1 encounter. Gray shows shape; it is not a photograph. The unobserved side remains open.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 4000
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "dlr",
+      "label": "DLR",
+      "falseColor": false,
+      "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
+      "bytes": 137,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dlr-dem",
+      "path": "shape/dlrdem.tab",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/dlrdem.tab",
+      "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
+      "license": "Scientific archive data; preserve source attribution",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/readmeTopoModel.txt"
+      ],
+      "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
+      "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
+      "sha256": "e2e6ebc47dcff737d830391e4f8457d809c2e85c5fd8aff7e514dc089e002091",
+      "bytes": 67770,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/dlrdem.tab",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/dlrdem.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "micas-orthophoto",
+      "path": "micas/ccd_near_1_ortho.cub",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/ccd_near_1_ortho.cub",
+      "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
+      "license": "Scientific archive data; preserve source attribution",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/readmeTopoModel.txt",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
+      "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
+      "sha256": "19912df4bac7177bafe5556bebbcd4dd178dd1ea57d94c5f3ecfd2f60c8cccd1",
+      "bytes": 704512,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "micas/ccd_near_1_ortho.cub",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/ccd_near_1_ortho.cub"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "micas-x",
+      "path": "micas/dem_x_component.cub",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_x_component.cub",
+      "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
+      "license": "Scientific archive data; preserve source attribution",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/readmeTopoModel.txt",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
+      "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
+      "sha256": "3c415666d9ca641371c8579f659171273e36abfc4d1407a150f3900f67e8bf1e",
+      "bytes": 704000,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "micas/dem_x_component.cub",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_x_component.cub"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "micas-y",
+      "path": "micas/dem_y_component.cub",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_y_component.cub",
+      "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
+      "license": "Scientific archive data; preserve source attribution",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/readmeTopoModel.txt",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
+      "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
+      "sha256": "237a7f02e7ea4b64a92640abc2e69054218f4eb44b0710cce4ca6f81bd9f7e54",
+      "bytes": 704000,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "micas/dem_y_component.cub",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_y_component.cub"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "micas-z",
+      "path": "micas/dem_z_component.cub",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_z_component.cub",
+      "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
+      "license": "Scientific archive data; preserve source attribution",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat",
+        "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/readmeTopoModel.txt",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
+      "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
+      "sha256": "ebda490e2e50e974406cda51fdba84859894e5d232a3a66ef4e0e14684705bc6",
+      "bytes": 704000,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "micas/dem_z_component.cub",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_z_component.cub"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Borrelly source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Borrelly source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "5ef27a3447c24da3e270fef0a3e4f2c91bd73d62aa5f7a6cf0570d89350be628",
+      "bytes": 8236,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "usgs",
+      "label": "USGS",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Terrain reconstructed from overlapping MICAS images, with manual stereo checks. Gray shows measured terrain; the grid fills the far side with an estimated shape."
+      ],
+      "lensIds": [
+        "usgs"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "usgs-surface",
+        "usgs-dem"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-19p/comet-19p-usgs-thumbnail.webp",
+          "bytes": 1126,
+          "sha256": "6fb1913830626c24c2509b96a751709ac44f222ad97f88161ea3a32b00ddc43b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-19p/comet-19p-usgs-surface@2x.webp",
+          "bytes": 221018,
+          "sha256": "666b4e35c0d880d27434e56f42b92fd2c110b63ede62ad38a429d1e6b4cafe90",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "dlr",
+      "label": "DLR",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "An independent reconstruction of the encounter images, aligned with USGS at the same scale. The grid marks gaps and the estimated far side."
+      ],
+      "lensIds": [
+        "dlr"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "dlr-surface",
+        "dlr-dem"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-19p/comet-19p-dlr-thumbnail.webp",
+          "bytes": 986,
+          "sha256": "dc356e4e31653751a445ee6ea249a0c5f93adca91d2d4da21a840211d644ce47",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-19p/comet-19p-dlr-surface@2x.webp",
+          "bytes": 314062,
+          "sha256": "4800dcbec04fe88516958004aa020ac7712a7b1ec3519cfc3653d1e3116cccf7",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "height",
+      "label": "Height",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Height toward the spacecraft from the source’s reference plane. This is not distance from the comet’s centre. Turn Shadows off to read the scale."
+      ],
+      "lensIds": [
+        "height"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "usgs-dem"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-19p/comet-19p-height-thumbnail.webp",
+          "bytes": 1602,
+          "sha256": "bde3cf8688e97e3dc9d931538684c4001fa8eac13443c0638e6aa5a0ced2f6c4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-19p/comet-19p-height-legend.webp",
+          "bytes": 178,
+          "sha256": "1c9f1f7c6d50ff53a25ed4ac6ac04d71c1b89bff2acba269a8a6ece9e2e2bac3",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-19p/comet-19p-height-surface@2x.webp",
+          "bytes": 363356,
+          "sha256": "86d1a0d6fc58be24ca8475c969c5bbcd6d8b5c7299d014a4112e1fae640e1d72",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "difference",
+      "label": "Difference",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "USGS height minus DLR height after alignment. Colors show model disagreement, not change over time; gray marks missing overlap. Turn Shadows off to read the scale."
+      ],
+      "lensIds": [
+        "difference"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "usgs-dem",
+        "dlr-dem"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-19p/comet-19p-difference-thumbnail.webp",
+          "bytes": 1544,
+          "sha256": "bfe3151aa1d832da3da520129f348f751279d92c4deb1094d4df752daf613ea4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-19p/comet-19p-difference-legend.webp",
+          "bytes": 272,
+          "sha256": "84e84bed22545a2801117c6ca377766cc4462285a03ddbf33e0af9088e26d450",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-19p/comet-19p-difference-surface@2x.webp",
+          "bytes": 560934,
+          "sha256": "f23f1d0563a7aec9764b0c948dc69ffc5c27f180ec5b0573e3fdef82d1a130c7",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "micas",
+      "label": "MICAS",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "The mission team’s orthophoto laid onto USGS terrain, keeping the lighting seen by Deep Space 1. The grid covers missing imagery and the estimated far side."
+      ],
+      "lensIds": [
+        "micas"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "micas-orthophoto",
+        "micas-x",
+        "micas-y",
+        "micas-z",
+        "usgs-dem"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
+          "bytes": 1006,
+          "sha256": "d0ccabb0382324ba313af28a8d2caca0ff02af892ab593bee200c3cc66f3baf6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
+          "bytes": 220302,
+          "sha256": "09f651a2b20e49e0929c1a422855218ba8072a87e4d6f27ec0032cf06eb754f0",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4960,
+          "sha256": "e738d3abffea2d544aa517d02d3352117ccc5e61d9bead364be2f0a02d1fb6d2",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}
