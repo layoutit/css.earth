@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d68a81ce477d86647f83dfe3e4a16a1cd8bbad5d9387181faa43e47ccea9d3c3"
+    "sha256": "e4bf7c2a467f5cae88d4d462ab6e5deebefbb7fe993f7f084b86a37c8609dd22"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "67bf7ecb5138f95ddee18fb9ebe8eda2f73cb7efd1e0e04af6b37a6d5bf97f3c",
+      "sha256": "449e777a60b31fbeaa21b6608cd284db06059b1650fc94ef356612372659774d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,6 +71,43 @@
               "sampleGrid": {
                 "width": 721,
                 "height": 361
+              }
+            },
+            {
+              "id": "albedo",
+              "label": "Relative albedo",
+              "consumer": "albedo",
+              "path": "shape/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 24578,
+                "expectedFaces": 49152
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "minimum": 0.75,
+              "maximum": 1.4,
+              "colors": [
+                "#404040",
+                "#f2f2f2"
+              ],
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 8
+              },
+              "facetField": {
+                "format": "fits-spc-facet-table",
+                "path": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.fits",
+                "labelPath": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
+                "field": "RELATIVE ALBEDO",
+                "target": "DIDYMOS",
+                "sourceVersion": "Palmer-didymos-v003",
+                "mapVersion": "003",
+                "maximumCentroidResidualMeters": 0.001,
+                "validity": "positive-sigma"
               }
             }
           ],
@@ -143,14 +180,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fb0884615230d7cf3ef8de014a24f4010326c3859fae43fe1e888e456d00adac",
+      "sha256": "320d751d9297790bcc7db53f9042fe129ecbb25b039706fc7107567b3e757212",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "didymos",
         "displayName": "Didymos",
         "panel": {
-          "introduction": "Didymos is the rapidly rotating primary of the near-Earth binary visited by DART and LICIACube in 2022. Its broad equatorial ridge and flattened poles are reconstructed from their images. Its moon Dimorphos was the target of DART’s asteroid-deflection experiment. Explore the published shape and radial heights.",
+          "introduction": "Didymos is the rapidly rotating primary of the near-Earth binary visited by DART and LICIACube in 2022. Its broad equatorial ridge and flattened poles are reconstructed from their images. Its moon Dimorphos was the target of DART’s asteroid-deflection experiment. Explore the published shape, radial heights and derived relative surface brightness.",
           "facts": [
             {
               "id": "radius",
@@ -223,6 +260,34 @@
               },
               "detail": "Shape-derived radial height",
               "summary": "Height relative to a 365 m sphere, including the ridge. Smooth regions have weaker image constraints."
+            },
+            {
+              "id": "albedo",
+              "label": "Relative albedo",
+              "detail": "DART surface brightness",
+              "description": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
+              "title": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
+              "thumbnail": "/scenes/didymos/didymos-albedo-thumbnail.webp",
+              "surface": "didymos-albedo-surface@2x.webp",
+              "poles": "didymos-albedo-surface@2x.webp",
+              "source": {
+                "id": "didymos-relative-albedo",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Relative albedo",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.75",
+                  "1.075",
+                  "1.4"
+                ],
+                "meta": "unitless · SPC relative brightness",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
+                "image": "/scenes/didymos/didymos-albedo-legend.webp"
+              }
             }
           ]
         },
@@ -233,7 +298,7 @@
               "kind": "toggle",
               "name": "shadows",
               "label": "Shadows",
-              "checked": true
+              "checked": false
             },
             {
               "kind": "toggle",
@@ -256,6 +321,12 @@
             "role": "terrain",
             "description": "DART Didymos v003 archive",
             "href": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/SUPPORT/dataset.shtml"
+          },
+          {
+            "label": "Albedo data",
+            "role": "albedo",
+            "description": "DART source-facet relative albedo",
+            "href": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml"
           },
           {
             "label": "Coordinates",
@@ -338,6 +409,61 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "didymos-relative-albedo",
+      "path": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.fits",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "lensId": "albedo",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "relative albedo",
+        "facetNumberBase": 0
+      },
+      "coverage": "Sigma-positive source facets only, covering 58.2072% of the original mesh area. Sigma-zero rows mean one or no contributing images and are withheld.",
+      "sha256": "eeaaefa6031372e2ade0be010ff77bd85f0402a845ce1c8125f1b135ca7b7b69",
+      "bytes": 1189440,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.fits",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "didymos-relative-albedo-label",
+      "path": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "sha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5",
+      "bytes": 6724,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "science/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
       "id": "authored-document:content/object.json",
@@ -347,8 +473,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b7b747b290c044021f827855e9a8cf871f177999e6116d0df2a6927a3be06997",
-      "bytes": 9726,
+      "sha256": "d435be10cf0ff0d24c5babb8649e155e94e9758237cb4f47ace5ae55e0f0c3d1",
+      "bytes": 11728,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -395,6 +521,52 @@
           "url": "/scenes/didymos/didymos-elevation-surface@2x.webp",
           "bytes": 266414,
           "sha256": "8e9557aa0ad081585ab38030268ddffa34ccaec7088d55a5f506c8f08bd5a7c6",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "albedo",
+      "label": "Relative albedo",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph."
+      ],
+      "lensIds": [
+        "albedo"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "didymos-shape",
+        "didymos-relative-albedo",
+        "didymos-relative-albedo-label"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/didymos/didymos-albedo-thumbnail.webp",
+          "bytes": 2558,
+          "sha256": "713c5a1e83de5145eb85c02ac447aa6bf452e74b9ba66308ad8a6853baecf041",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/didymos/didymos-albedo-legend.webp",
+          "bytes": 64,
+          "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/didymos/didymos-albedo-surface@2x.webp",
+          "bytes": 220476,
+          "sha256": "cb356d725517464cba58633a62e9937d879bb38be31aca73ccc5430b70d9fdd6",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -456,8 +628,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6064,
-          "sha256": "720c3c5ae9a776b2e193a4e168a02387e0bf75977dea3ad5c4758582cdb610cc",
+          "bytes": 6341,
+          "sha256": "d915e5e913d4a5b7a6d26ef4721bd9b90908d6d336e468ad98b26eba6e21d16d",
           "verification": "bytes-verified"
         }
       ],
@@ -507,6 +679,30 @@
           "url": "object:prepared/minimaps/elevation.webp",
           "bytes": 8730,
           "sha256": "ece2e28b1480019990a53f5506089c63476ed66054601aafbc58b60ff26bb0ef",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:albedo",
+      "label": "Relative albedo preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "albedo"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/albedo.webp",
+          "bytes": 6390,
+          "sha256": "23ed50b625d72a69dfc1ea8fb1a705217678e76b6c19b645c49e6064bc8952af",
           "verification": "bytes-verified"
         }
       ]

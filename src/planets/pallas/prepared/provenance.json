@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "99596550430ff848020bd6fbef0d9839ce022d55257d9a1134f5d324ec21514b"
+    "sha256": "470f7ea53821bd0222237a4f19db7e82fc4b912e4740f1de5ab898c2f1558c4c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "03530baeb36fe70ee8b8c3f768f35f1c896f0c6aefc07a236b40305d6a2f96b8",
+      "sha256": "0a79aa9797ec21530b94575e65d3d9acef9ab9959bb4ea98907ab3cbcf88343e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -250,7 +250,7 @@
               "kind": "toggle",
               "name": "shadows",
               "label": "Shadows",
-              "checked": true
+              "checked": false
             },
             {
               "kind": "toggle",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5cc3ba03632f570682648731df6fac9fdbf63a36d6c79b9a1d67d7f297c27715",
-      "bytes": 8346,
+      "sha256": "b7c9f151129deb9846726d686ff6f05990e4365d96f197fb4c8217cfb20a19bb",
+      "bytes": 8347,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

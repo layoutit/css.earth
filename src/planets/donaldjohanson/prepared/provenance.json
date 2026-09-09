@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "88f6f151df7bb16d0b516da540c721e3ea253b20bc1620d4963445edaed596fc"
+    "sha256": "5b82fc500211c551dbe014020dc157974ec681e44c0a6331a242e89f0c6fb2d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "191ee2168a81e40bc7737b282efaf589cf3e833145a7f435f4ef53f72568a693",
+      "sha256": "67f8aac95c694d927968a12a22f9f131689774a060ec322d34bd589cf92c396e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -40,6 +40,41 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "llorri",
+              "format": "llorri-camera",
+              "consumer": "llorri-observation",
+              "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+              "cameraPath": "observations/llorri-camera.json",
+              "startTime": "2025-04-20T17:50:14.018",
+              "filter": "PANCHROMATIC",
+              "allowLossy": false,
+              "transfer": {
+                "maximumSourceDistanceMeters": 56,
+                "maximumSeparationMeters": 30,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "displayPercentiles": [
+                1,
+                99
+              ],
+              "metadata": {
+                "label": "L’LORRI observation",
+                "coverage": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+                "falseColor": false
+              }
+            }
           ]
         },
         "lighting": {
@@ -61,8 +96,8 @@
             "defaultControlYawDegrees": 240,
             "framingScale": 0.8
           },
-          "mapUrl": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
-          "polesUrl": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
+          "mapUrl": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
+          "polesUrl": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
           "radialTerrain": {
             "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
             "format": "wavefront-obj",
@@ -90,7 +125,7 @@
           "sunSource": "Pinned JPL Horizons elements and a fixed illustrative source-model frame; no tumbling attitude propagation"
         },
         "presentation": {
-          "defaultLens": "shape",
+          "defaultLens": "llorri",
           "pointColor": [
             170,
             170,
@@ -103,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5a9e454ccba4b1127773321ed215c2f23c09e35afa18143618cec83e2594a78e",
+      "sha256": "ba7f9b013cb8438b6ded35cd5b3e0092f37995bca16eef9c92f6fd0684ee6687",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -159,8 +194,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "llorri",
           "controls": [
+            {
+              "id": "llorri",
+              "label": "L’LORRI observation",
+              "detail": "Spacecraft observation",
+              "description": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+              "title": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+              "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
+              "surface": "donaldjohanson-llorri-surface@2x.webp",
+              "poles": "donaldjohanson-llorri-surface@2x.webp",
+              "source": {
+                "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
+                "path": "../manifest.json"
+              }
+            },
             {
               "id": "shape",
               "label": "Shape",
@@ -186,7 +235,7 @@
               "kind": "toggle",
               "name": "shadows",
               "label": "Shadows",
-              "checked": true
+              "checked": false
             },
             {
               "kind": "toggle",
@@ -198,6 +247,12 @@
         },
         "charts": [],
         "resources": [
+          {
+            "label": "Imagery",
+            "role": "surface",
+            "description": "L’LORRI observation original archive",
+            "href": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.fit"
+          },
           {
             "label": "Research",
             "role": "facts",
@@ -265,6 +320,46 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
+      "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.fit",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557",
+      "bytes": 10526400,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "donaldjohanson-observations-llorri-camera-json",
+      "path": "observations/llorri-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac",
+      "bytes": 9023,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "id": "authored-document:content/object.json",
@@ -274,8 +369,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1d974eaeaf6f46174b6a8a8b76f453b74b2897b59597bbef7c4536630e93bda0",
-      "bytes": 12528,
+      "sha256": "e0a5c596673c540c150a9593916184623d17bbf4edef8bde5b83d112bf511a29",
+      "bytes": 14193,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -322,6 +417,46 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "llorri",
+      "label": "L’LORRI observation",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction."
+      ],
+      "lensIds": [
+        "llorri"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
+        "donaldjohanson-observations-llorri-camera-json",
+        "donaldjohanson-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
+          "bytes": 1404,
+          "sha256": "04819d89aada26cfc41338c4eda34be652c50440eb5e78d3ca8d7ae68d3f185f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
+          "bytes": 588884,
+          "sha256": "1e6511e38006f9be67994da3cab08c4313b115757349ebe91904a96eaf8ca4c9",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -339,8 +474,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10391,
-          "sha256": "ecdc5a8432faddeed9b7c35bb0a58ac8c69e20395350c1edbd82dbdc950e0bd1",
+          "bytes": 10643,
+          "sha256": "d0e010b202c885cf4ae587f477098325081a15f7160bf615a21bfe69ae72af5f",
           "verification": "bytes-verified"
         }
       ],
@@ -366,6 +501,30 @@
           "url": "object:prepared/minimaps/shape.webp",
           "bytes": 2964,
           "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:llorri",
+      "label": "L’LORRI observation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "llorri"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/llorri.webp",
+          "bytes": 18896,
+          "sha256": "f8bd9ae818cffed78beae7210ae9c9d78dd80b370f7b852a05fe7c89a3e55635",
           "verification": "bytes-verified"
         }
       ]

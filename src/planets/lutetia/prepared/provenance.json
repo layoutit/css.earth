@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5402335fe0c7b5354ae2d068748a1b20f0345e3695955fb3ef84ffadf5971e0c"
+    "sha256": "5d25a788f5d825b447f01acb0b0593a74902d99a08429480ac5c9f6e30752acc"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "654784a3dea9403dac555a7aebff9e16f5fbaf313fd4a4cc77377a78caa56cd9",
+      "sha256": "f8fa382b781f86ec40f30e1f70c8c9b8f36ca5395bc6a44a006f3d822081e913",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,6 +82,43 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "osiris",
+              "format": "osiris-camera",
+              "consumer": "osiris-observation",
+              "path": "observations/n20100710t154047674id4df22.img",
+              "cameraPath": "observations/osiris-camera.json",
+              "startTime": "2010-07-10T15:41:06.632",
+              "filter": "FFP-Vis_Orange",
+              "allowLossy": true,
+              "transfer": {
+                "maximumSourceDistanceMeters": 1200,
+                "maximumSeparationMeters": 600,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "minnaert",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 2.5,
+                "coefficient": 0.5505,
+                "phaseCoefficientPerDegree": 0.005
+              },
+              "displayPercentiles": [
+                1,
+                99
+              ],
+              "metadata": {
+                "label": "OSIRIS reflectance",
+                "coverage": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+                "falseColor": false
+              }
+            }
           ]
         },
         "lighting": {
@@ -102,8 +139,8 @@
             "initialScenePitchDegrees": 25,
             "defaultControlYawDegrees": 0
           },
-          "mapUrl": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
-          "polesUrl": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
+          "mapUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+          "polesUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "radialTerrain": {
             "path": "shape/lutetia_025k_cart.wrl",
             "format": "vrml-mesh",
@@ -130,7 +167,7 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and the Jorda–Vincent rotation model released with the PDS Lutetia shape"
         },
         "presentation": {
-          "defaultLens": "shape",
+          "defaultLens": "osiris",
           "pointColor": [
             170,
             170,
@@ -143,7 +180,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f245541f9275747a55dbe64f8186c72c1698f1ea4922d43cf6c48170c1834b9f",
+      "sha256": "b6977f6f8fa831295b4973f3df53974adcebce61f169714edcbfa12398212066",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -206,8 +243,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "osiris",
           "controls": [
+            {
+              "id": "osiris",
+              "label": "OSIRIS reflectance",
+              "detail": "Spacecraft observation",
+              "description": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+              "title": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+              "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
+              "surface": "lutetia-osiris-surface@2x.webp",
+              "poles": "lutetia-osiris-surface@2x.webp",
+              "source": {
+                "id": "lutetia-observations-n20100710t154047674id4df22-img",
+                "path": "../manifest.json"
+              }
+            },
             {
               "id": "shape",
               "label": "Shape",
@@ -262,7 +313,7 @@
               "kind": "toggle",
               "name": "shadows",
               "label": "Shadows",
-              "checked": true
+              "checked": false
             },
             {
               "kind": "toggle",
@@ -274,6 +325,12 @@
         },
         "charts": [],
         "resources": [
+          {
+            "label": "Imagery",
+            "role": "surface",
+            "description": "OSIRIS reflectance original archive",
+            "href": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img"
+          },
           {
             "label": "Mission",
             "role": "facts",
@@ -356,6 +413,46 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "lutetia-observations-n20100710t154047674id4df22-img",
+      "path": "observations/n20100710t154047674id4df22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
+      "bytes": 37775872,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/n20100710t154047674id4df22.img",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lutetia-observations-osiris-camera-json",
+      "path": "observations/osiris-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
+      "bytes": 5070,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
       "id": "authored-document:content/object.json",
@@ -365,8 +462,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1e464fdeeb0d6e71ea1dbf65c23282446f94afa149063509d6f9bc16a045fc03",
-      "bytes": 9409,
+      "sha256": "5eb092317540fdd65b8e87ed2a8e49edfb1d64d050cb2a7bcd9cacf387ef296f",
+      "bytes": 10795,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -457,6 +554,46 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "osiris",
+      "label": "OSIRIS reflectance",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage."
+      ],
+      "lensIds": [
+        "osiris"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "lutetia-observations-n20100710t154047674id4df22-img",
+        "lutetia-observations-osiris-camera-json",
+        "lutetia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
+          "bytes": 2346,
+          "sha256": "197414ed5ee51ae6264ce5fa28d40bb647efdea76d286f22c74360a4224a92b2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+          "bytes": 768322,
+          "sha256": "c0423065ce889f96a2ef76c1d0e7cbf8809f0ea3aa94b12499e21d4d7766bc59",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -474,8 +611,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5520,
-          "sha256": "faa3b95e877241a622bb41638b0f222f283e03c1e8f2920335af28604883db5b",
+          "bytes": 5746,
+          "sha256": "2e5ee17639787856376fab9daea104ad37062a8a945b856c38f47f7566a713bc",
           "verification": "bytes-verified"
         }
       ],
@@ -501,6 +638,30 @@
           "url": "object:prepared/minimaps/shape.webp",
           "bytes": 2964,
           "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:osiris",
+      "label": "OSIRIS reflectance preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "osiris"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/osiris.webp",
+          "bytes": 28920,
+          "sha256": "a73699c2f08a968bd70c055cb07684abb906685ec6b82d17929b2c1b951ca6d5",
           "verification": "bytes-verified"
         }
       ]

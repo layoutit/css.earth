@@ -128,14 +128,37 @@ test('Saturn binds its actual base material and all contributing recipe identiti
   assert.ok(document.recipes.some(recipe => recipe.id === 'rings'));
 });
 
-test('Earth’s noise pages bind their own GeoJSON rather than the globe texture', async () => {
+test('Earth globe provenance excludes the retired local noise dataset', async () => {
   const document = await prepareObjectProvenance({ objectDirectory: resolve('src/planets/earth'),
     publicDirectory: resolve('public/scenes/earth'), basis: 'recovered', write: false });
-  const product = document.products.find(product => product.id === 'buenos-aires-noise');
-  assert.ok(product);
-  assert.deepEqual(new Set(product.inputs), new Set(['buenos-aires-noise-pin', 'buenos-aires-noise-source']));
-  assert.equal(product.interpretation.kind, 'modeled-noise');
-  assert.equal(product.outputs.filter(output => output.url.includes('-noise-day-')).length, 16);
+  assert.ok(document.products.some(product => product.id === 'normal'));
+  assert.ok(!document.products.some(product => product.id === 'buenos-aires-noise'));
+  assert.ok(!document.sources.some(source => source.id.startsWith('buenos-aires-noise')));
+});
+
+test('spacecraft photographs bind their image, registration, and source-shape dependencies', async () => {
+  for (const id of ['itokawa', 'donaldjohanson', 'comet-81p', 'comet-103p', 'comet-9p']) {
+    const objectDirectory = resolve('src/planets', id);
+    const descriptor = await read(resolve(objectDirectory, 'object.json'));
+    const reference = descriptor.properties.recipe.sources.find(source => source.id === 'terrestrial');
+    const recipe = await read(resolve(objectDirectory, reference.path));
+    const document = await prepareObjectProvenance({ objectDirectory,
+      publicDirectory: resolve('public/scenes', id), basis: 'recovered', write: false });
+    for (const observation of recipe.raster.surfaceObservations) {
+      const product = document.products.find(product => product.id === observation.id);
+      assert.ok(product, id + '/' + observation.id);
+      const sourceIds = new Set(productSourceIds(document, product.id));
+      const paths = new Set(document.sources.filter(source => sourceIds.has(source.id)).map(source => source.path));
+      const frames = observation.frames ?? [observation];
+      for (const frame of frames) {
+        for (const key of ['path', 'labelPath', 'controlPath', 'cameraPath', 'originalPath']) {
+          if (frame[key]) assert.ok(paths.has(frame[key]), id + ': ' + frame[key]);
+        }
+      }
+      assert.ok(paths.has(recipe.geometry.radialTerrain.path), id + ': source shape');
+      assert.ok(!document.coverage.unresolved.some(gap => gap.product === observation.id));
+    }
+  }
 });
 
 test('Mercury coverage completion binds all three maps; previews retain their parent lineage', async () => {

@@ -95,7 +95,7 @@ export function provenanceProducts({ id, recipes, manifest, lenses, assets, geog
           parents: plan.monochromeBase ? [plan.monochromeBase] : [], interpretation: { validity: plan.validity },
         });
     });
-    for (const kind of ['scientific', 'mosaics', 'observedColors', 'shapeViews']) {
+    for (const kind of ['scientific', 'mosaics', 'observedColors', 'shapeViews', 'surfaceObservations']) {
       (plans[kind] ?? []).forEach((plan, index) => {
         const used = paths(plan);
         if (plan.consumer) used.push(...group(plan.consumer));

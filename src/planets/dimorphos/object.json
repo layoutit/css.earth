@@ -31,6 +31,11 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "albedo",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -51,7 +56,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "b4e27a4501e22063a3d957ab0e7c4a737c30f4d97a0dd313e742222665e63b99"
+          "sha256": "a7cdc1b2f77c21bf64d25991fc827f335fce4263417777c8bb05cac05fe7802b"
         },
         {
           "id": "rotation",
@@ -61,7 +66,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "41a9a28da150c2da032d169066cd80e25a4229c077be1cba8b0c0acd137e123a"
+          "sha256": "1188b3703676e6183777e6e52841e759fbdecf83b485bb5e641074b7b5c1dfbf"
         },
         {
           "id": "title",
@@ -76,7 +81,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ebd4039d1be7fbdbf0fde58c1943a02ea507e65ee2351c0fc216b0007609ba46"
+          "sha256": "33ee724e4af0fe61b1ebc247c0c3d634f90adb55f28cda99fe48794a66a17abd"
         }
       ]
     },
@@ -113,6 +118,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3f431b3cfdd2a6294c156694f95f6f8764753c9398a244f4261b764d06c76420"
+    "sha256": "6e28a0222ed13e0e07dc1d130a204bcd3ff31ba6819796ada100d265676a5067"
   }
 }

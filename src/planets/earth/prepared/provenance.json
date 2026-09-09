@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "edfc789ca0b7a1739cabfd2ce1ba4263f8590e939c341528c3c23889c3886d30"
+    "sha256": "363d96e9547fd3738a0b4d8df32df5aabcf31080a4940476db57a9992b51aafe"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
   },
   "recipes": [
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "d7942782e6b46ec8618179f21e78f2b827e4dcc81ec9e1c590f9a664068edb55",
+      "sha256": "0a7a5812e30473533294696ce30e3ad362300bdfbec1b34fbfeffc53ad383933",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -56,7 +56,7 @@
           "CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES": 89,
           "CAMERA_DEFAULT_CONTROL_PITCH_DEGREES": 34.230769230769226,
           "CAMERA_MILLISECONDS_PER_CONTROL_DEGREE": 1000,
-          "INTERIOR_REFERENCE_CONTROL_YAW_DEGREES": -105,
+          "INTERIOR_REFERENCE_CONTROL_YAW_DEGREES": 45,
           "INTERIOR_LATITUDE_SEGMENTS": 8,
           "INTERIOR_LONGITUDE_SEGMENTS": 16,
           "interiorCutaway": {
@@ -144,9 +144,9 @@
           "initialScenePitchDegrees": 40,
           "maximumScenePitchDegrees": 65,
           "minimumZoom": 0.42,
-          "maximumZoom": 4096,
+          "maximumZoom": 4,
           "defaultZoom": 1.1,
-          "sceneScale": 0.022,
+          "sceneScale": 0.02,
           "logicalBodyDiameter": 460,
           "pitchBounded": false,
           "yawBounded": false,
@@ -232,7 +232,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d47e107192571c82520079718e72e611faf7d3825e4ebe26c9520aae34fee39f",
+      "sha256": "5802836ab095cd407d5d5962cb3d90166407aff7f53427e417cf0929301d9279",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -371,98 +371,14 @@
             {
               "id": "normal",
               "label": "Visible color",
-              "description": "NASA Blue Marble, December 2004, with ESA WorldCover 2021 detail where available. These archival composites and the cloud layer are not live observations.",
-              "title": "Visible color: NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
+              "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
+              "title": "Visible color: NASA Blue Marble Next Generation with archival clouds",
               "thumbnail": "/scenes/earth/earth-lens-normal.webp",
               "source": {
                 "id": "surface-observation"
               },
               "detail": "Global mosaic",
               "summary": "NASA Blue Marble 2004 with ESA WorldCover 2021 detail. The surface and clouds are archival, not live."
-            },
-            {
-              "id": "buenos-aires-noise",
-              "label": "Buenos Aires noise",
-              "description": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
-              "title": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
-              "legendNote": "APrA · 2025 daytime estimates. Uncolored areas have no estimate.",
-              "thumbnail": "/scenes/earth/earth-lens-noise.webp",
-              "legend": {
-                "kind": "ranges",
-                "title": "Noise level",
-                "ranges": [
-                  {
-                    "label": "30-35 dBA",
-                    "color": "rgb(169,255,115)",
-                    "low": 30
-                  },
-                  {
-                    "label": "35-40 dBA",
-                    "color": "rgb(76,230,0)",
-                    "low": 35
-                  },
-                  {
-                    "label": "40-45 dBA",
-                    "color": "rgb(38,115,0)",
-                    "low": 40
-                  },
-                  {
-                    "label": "45-50 dBA",
-                    "color": "rgb(255,255,0)",
-                    "low": 45
-                  },
-                  {
-                    "label": "50-55 dBA",
-                    "color": "rgb(254,204,92)",
-                    "low": 50
-                  },
-                  {
-                    "label": "55-60 dBA",
-                    "color": "rgb(230,152,0)",
-                    "low": 55
-                  },
-                  {
-                    "label": "60-65 dBA",
-                    "color": "rgb(255,0,0)",
-                    "low": 60
-                  },
-                  {
-                    "label": "65-70 dBA",
-                    "color": "rgb(115,0,0)",
-                    "low": 65
-                  },
-                  {
-                    "label": "70-75 dBA",
-                    "color": "rgb(132,0,168)",
-                    "low": 70
-                  },
-                  {
-                    "label": "75-80 dBA",
-                    "color": "rgb(0,38,255)",
-                    "low": 75
-                  },
-                  {
-                    "label": "80-85 dBA",
-                    "color": "rgb(0,38,115)",
-                    "low": 80
-                  },
-                  {
-                    "label": "85-90 dBA",
-                    "color": "rgb(0,38,115)",
-                    "low": 85
-                  },
-                  {
-                    "label": "90-95 dBA",
-                    "color": "rgb(0,38,115)",
-                    "low": 90
-                  }
-                ]
-              },
-              "source": {
-                "id": "noise-daytime"
-              },
-              "detail": "Daytime · dBA",
-              "summary": "Buenos Aires daytime noise estimates. Transparent areas have no estimate; these are not live measurements."
             },
             {
               "id": "topography",
@@ -593,28 +509,10 @@
         ],
         "resources": [
           {
-            "label": "Buenos Aires APrA",
-            "role": "noise",
-            "description": "2025 daytime noise estimates, CC-BY-2.5-AR",
-            "href": "https://data.buenosaires.gob.ar/dataset/mapa-ruido"
-          },
-          {
-            "label": "GeoNames",
-            "role": "places",
-            "description": "City names and locations, CC-BY-4.0",
-            "href": "https://www.geonames.org/export/"
-          },
-          {
             "label": "NASA",
             "role": "imagery",
             "description": "Surface & clouds",
             "href": "https://science.nasa.gov/earth/"
-          },
-          {
-            "label": "ESA WorldCover",
-            "role": "imagery",
-            "description": "2021 WorldCover satellite composite via Terrascope, CC-BY-4.0",
-            "href": "https://esa-worldcover.org/en/data-access"
           },
           {
             "label": "JPL",
@@ -897,58 +795,6 @@
       "verificationOperations": []
     },
     {
-      "kind": "source-input",
-      "id": "buenos-aires-noise-pin",
-      "path": "noise/manifest.json",
-      "origin": "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-      "credit": "Buenos Aires APrA",
-      "license": "CC-BY-2.5-AR",
-      "licenseEvidence": [
-        "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-        "https://creativecommons.org/licenses/by/2.5/ar/"
-      ],
-      "acquisition": "Pinned 2025 daytime noise GeoJSON, retrieved 2026-09-05; archive preserves exact source bytes",
-      "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
-      "sha256": "6bbfdee5d1c9213b8916034c98136e69f41b1078839a2452e23a2cb62e86155e",
-      "bytes": 1165,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "buenos-aires-noise-source",
-      "path": "noise/buenos-aires-day-2025.geojson.gz",
-      "origin": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/agencia-de-proteccion-ambiental/mapa-ruido/medicion_de_ruido_diurno.geojson",
-      "credit": "Buenos Aires APrA",
-      "license": "CC-BY-2.5-AR",
-      "licenseEvidence": [
-        "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-        "https://creativecommons.org/licenses/by/2.5/ar/"
-      ],
-      "acquisition": "Pinned 2025 daytime noise GeoJSON, retrieved 2026-09-05; archive preserves exact source bytes",
-      "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
-      "sha256": "eb58201a66c8c531155035eb57e574a790db4830d6309cc8dff4262ba44c3370",
-      "bytes": 33858376,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "noise/buenos-aires-day-2025.geojson.gz",
-        "url": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/agencia-de-proteccion-ambiental/mapa-ruido/medicion_de_ruido_diurno.geojson",
-        "headers": {
-          "accept": "*/*",
-          "user-agent": "cssEarth Earth source acquisition"
-        },
-        "encoding": "gzip"
-      },
-      "verificationOperations": []
-    },
-    {
       "path": "interior/earth-interior.json",
       "purpose": "Source-qualified schematic Earth interior presentation specification",
       "id": "authored-document:interior/earth-interior.json",
@@ -975,8 +821,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "90d8c8d7e6a84a9e955f432464cee71c9b4154c1b6167ef1d4bb1c6466badb0d",
-      "bytes": 14422,
+      "sha256": "837bc6899102fa54a0badc9710791b2aabf498898549a8ebe542151c93011394",
+      "bytes": 11236,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1081,13 +927,13 @@
   "products": [
     {
       "id": "normal",
-      "label": "Visible color",
+      "label": "Normal",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/0",
       "parents": [],
       "process": "Prepare the global reference map and its declared cloud composite.",
       "limitations": [
-        "NASA Blue Marble, December 2004, with ESA WorldCover 2021 detail where available. These archival composites and the cloud layer are not live observations."
+        "NASA Blue Marble Next Generation December 2004 with a prepared archival cloud composite"
       ],
       "lensIds": [
         "normal"
@@ -1159,13 +1005,13 @@
     },
     {
       "id": "topography",
-      "label": "Elevation",
+      "label": "Topography",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/1",
       "parents": [],
       "process": "Prepare the global reference map and its declared cloud composite.",
       "limitations": [
-        "NASA Blue Marble topography and bathymetry, December 2004. Color and relief show land and seafloor elevation, not a photograph."
+        "NASA Blue Marble topography and bathymetry"
       ],
       "lensIds": [
         "topography"
@@ -1242,7 +1088,7 @@
       "parents": [],
       "process": "Prepare the global reference map and its declared cloud composite.",
       "limitations": [
-        "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting."
+        "NASA Black Marble 2016 global composite"
       ],
       "lensIds": [
         "night-lights"
@@ -1312,140 +1158,6 @@
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "buenos-aires-noise",
-      "label": "Buenos Aires noise",
-      "recipe": "paged-ellipsoid",
-      "selector": "/geographic/noise",
-      "parents": [],
-      "process": "Decode the pinned GeoJSON, validate coordinates and period, rasterize source-colored polygons, then prepare geographic texture pages.",
-      "limitations": [
-        "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate."
-      ],
-      "lensIds": [
-        "buenos-aires-noise"
-      ],
-      "recipeDependencies": [
-        "paged-ellipsoid"
-      ],
-      "interpretation": {
-        "kind": "modeled-noise",
-        "year": 2025,
-        "period": "Diurno",
-        "units": "dBA",
-        "decodedSourceSha256": "73c0a28f53edac5c04a05954789ef211128c781ffa111af2ebaf6fda766edb3a",
-        "qualification": "Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate."
-      },
-      "inputs": [
-        "buenos-aires-noise-pin",
-        "buenos-aires-noise-source"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/earth/earth-noise-day-0-0-fc01caa3b3c536a9.webp",
-          "sha256": "fc01caa3b3c536a9b2c2d3b0963184155b9ed5ebb1a17f3966fcfc20d954f9da",
-          "bytes": 141054,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-1-0-01b6f7f9ad8d3caf.webp",
-          "sha256": "01b6f7f9ad8d3caf4109ec4e90bdc9c835f9379f970002df1f07d559d1951538",
-          "bytes": 382846,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-2-0-d0986322a4c1ccce.webp",
-          "sha256": "d0986322a4c1cccedfc1b53e95695d3a253b635086c4ba82eaaa5bc1ea332297",
-          "bytes": 94128,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-3-0-a25114043d754c59.webp",
-          "sha256": "a25114043d754c595e6f22a4b0f88cd9f32c60fc9bb098351ce9220854c1753e",
-          "bytes": 3598,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-0-1-dc3961b36854186f.webp",
-          "sha256": "dc3961b36854186f12d13fbaf34a7f97fb7c4ade67032d556b0aee72d8389009",
-          "bytes": 407734,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-1-1-8eb675082842bc45.webp",
-          "sha256": "8eb675082842bc4587600400575e374277bc9c8882ba78493361287b01d710bc",
-          "bytes": 453222,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-2-1-726b6ad832a6a330.webp",
-          "sha256": "726b6ad832a6a33087f40f6556b774a49920d0c15727bbe480d733042da097c2",
-          "bytes": 391256,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-3-1-ce3081e1304853fb.webp",
-          "sha256": "ce3081e1304853fbe04e2d5b831f532a45148ebcf6cb006159bb5583ee13ec7b",
-          "bytes": 20486,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-0-2-4b0b43209dc3b8b0.webp",
-          "sha256": "4b0b43209dc3b8b03e9366b37bda3411273b398d58fdc2b22163200cb8282420",
-          "bytes": 447114,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-1-2-ce94b560d553f60b.webp",
-          "sha256": "ce94b560d553f60b3f0bcd740a7185f6daff81471b660261c49e4009a7672f3d",
-          "bytes": 422764,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-2-2-8a0a263be7e666c9.webp",
-          "sha256": "8a0a263be7e666c933ca6fcdac04c7fad99c6ee218cc50877fa0364c22e17d28",
-          "bytes": 383644,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-3-2-1e6152040b4b2cab.webp",
-          "sha256": "1e6152040b4b2cab21d3d74d36a2e1e1219d86aeaf322548b3965b53a66657be",
-          "bytes": 190164,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-0-3-8d0feb9f03db3ebb.webp",
-          "sha256": "8d0feb9f03db3ebb1065f1b603f8297afffad86ad354ccb56c848fdab2842952",
-          "bytes": 94608,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-1-3-44f0ca9a2c6bf643.webp",
-          "sha256": "44f0ca9a2c6bf643cd9cc8d00011f00396ef85fdcc29f6d136cd3fb4d27c8fd9",
-          "bytes": 210214,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-2-3-7c665536a5ac6080.webp",
-          "sha256": "7c665536a5ac6080381100f493562f2f382e3375d3cde92af8a6e1f1b04b1ef6",
-          "bytes": 16372,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-noise-day-3-3-1f9883c4642bcb87.webp",
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
-          "bytes": 84,
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/earth/earth-lens-noise.webp",
-          "bytes": 10720,
-          "sha256": "b128e076b6216dbb269e41c68eaba1c4a84b2666fe3de6c8f715646f55a170c1",
-          "verification": "asset-manifest-pin"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
       "id": "cross-section",
       "label": "Cross section",
       "recipe": "paged-ellipsoid",
@@ -1453,7 +1165,7 @@
       "parents": [],
       "process": "Prepare the source-defined schematic interior.",
       "limitations": [
-        "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging."
+        "Schematic NASA Science source-backed interior"
       ],
       "lensIds": [
         "cross-section"
@@ -1495,8 +1207,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7956,
-          "sha256": "ac440f156075a6bc1f1739f33591ef00f7248595e45602ca8cf17fa1a1637ae0",
+          "bytes": 7388,
+          "sha256": "d8ea46179e842b56427eab5d6fc9c79fe567f3a158197aff82680dd59299a352",
           "verification": "bytes-verified"
         }
       ],
@@ -1587,7 +1299,7 @@
     },
     {
       "id": "preview:normal",
-      "label": "Visible color preview",
+      "label": "Normal preview",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/0",
       "recipeDependencies": [
@@ -1611,7 +1323,7 @@
     },
     {
       "id": "preview:topography",
-      "label": "Elevation preview",
+      "label": "Topography preview",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/1",
       "recipeDependencies": [

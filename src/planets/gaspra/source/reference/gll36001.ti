@@ -1,0 +1,277 @@
+     DATA_OBJECT_TYPE = SPICE_I-KERNEL
+ 
+     MISSION_ID = 1
+ 
+     SPACECRAFT_NAME = GALILEO
+ 
+     SPACECRAFT_NUMBER = 77
+ 
+     INSTRUMENT_ID = 36
+ 
+     PROCESS_TIME = 1990-11-12T12:00:00
+ 
+ 
+SSI I-kernel
+===========================================================================
+ 
+     This file contains solid state imaging (SSI) subsystem instrument data
+     for Earth I.
+ 
+     The purpose of the SSI data contained in this file is to describe the
+     geometric relationship between the SSI coordinate system (``line and
+     sample'' coordinates) and the coordinate system of the GLL spacecraft
+     structure on which the SSI instrument is mounted (scan platform x-y-z
+     coordinates).
+ 
+     In addition to this coordinate conversion information, a ``distortion
+     model'' is supplied. This model is required in order to associate
+     features in an image with their actual geometric direction vectors.
+     Although this type of information is not required for Earth I, it is
+     typical of the sort of information that is appropriate for the
+     I-kernel.
+ 
+     The data contained in this file, as well as the description of the SSI
+     coordinate system, are from reference [1].
+ 
+ 
+References
+--------------------------------------------------------
+ 
+         1.   ``SSI Distortion and Twist Models for NAIF,'' JPL IOM, by Ken
+              Klaasen, 7/2/90.
+ 
+         2.   ``Formula for SSI Geometric Distortion Correction,'' JPL IOM,
+              by Ken Klaasen, 7/21/88.
+ 
+              The two documents [1] and [2] comprise NAIF document number
+              202.0.
+ 
+         3.   ``Preliminary I-kernel Specification,'' (NAIF document number
+              177.0), by Ian Underwood, 1/19/90.
+ 
+         4.   KERNEL ``Required Reading'' file, released by NAIF.
+ 
+         5.   Galileo document GLL-1-100.
+ 
+         6.   ``Gallileo Attitude and Camera Models,'' JPL IOM 314-323
+              (NAIF document number 201.0), by W. M. Owen, 11/14/1983.
+ 
+         7.   ``SSI Focal Length,'' JPL IOM by Ken Klaasen, 08/04/90.
+ 
+ 
+Implementation Notes
+--------------------------------------------------------
+ 
+     This file is used by the SPICE system as follows: programs that make
+     use of the I-kernel must `load' the kernel, normally during program
+     initialization. Loading the kernel associates data items with their
+     names in a data structure called the `kernel pool'. The SPICELIB
+     routine LDPOOL loads a kernel file into the pool as shown below.
+ 
+                  CALL LDPOOL ( 'GLL360001.TI' )
+ 
+     In order for a program or subroutine to extract data from the pool,
+     the SPICELIB routine RTPOOL is used. See [4] for more details.
+ 
+ 
+Naming Conventions
+--------------------------------------------------------
+ 
+     All names referencing values in this I kernel start with the
+     characters `INS' followed by the NAIF SSI instrument number ('-77'
+     followed by the instrument subsystem reference number). This naming
+     scheme is standard for all I-kernel files and was instituted to
+     distinguish I-kernel data from other types of data that may also be
+     loaded in the kernel pool.
+ 
+     The remainder of the name is an underscore character, followed by the
+     unique name of the data item. For example, the twist offset for the
+     SSI camera is specified by
+ 
+                INS-77036_TWIST_OFFSET
+ 
+     The upper bound on the length of the name of any data item is 32
+     characters.
+ 
+     If the same item is included in more then one file, or if the same
+     item appears more than once within a single file, the latest value
+     supersedes any earlier values.
+ 
+ 
+Definition of the SSI Coordinate System
+--------------------------------------------------------
+ 
+     The following discussion is from [1].
+ 
+ 
+        The SSI boresight is by definition parallel to the scan
+        platform +L vector.  The remaining angle needed to specify the SSI
+        CCD raster orientation with respect to the scan platform coordinate
+        system is usually denoted ``twist.'' The AACS group defines twist
+        by a positive rotation about the +L vector.  The twist angle is
+        then defined as the angle from the platform +M vector to the SSI
+        image line, where the positive image line direction is toward
+        increasing sample number.  The sketch below shows the scan platform
+        coordinate system translated to the center of an SSI image.  The +L
+        vector is into the paper [or screen]. SSI image coordinates are
+        defined in terms of line and sample coordinates with the origin
+        (line 1, sample 1) in the upper left corner of an image, line
+        number increasing downward, and sample number increasing on the
+        right. The +L vector is placed at coordinate (400,400).  Positive
+        twist then indicates a clockwise rotation of the SSI CCD raster
+        with respect to the scan platform coordinates.  The platform +M
+        vector lies nearly in the direction of increasing image sample
+        number and fixed line number while the +N vector completes the
+        platform right-handed coordinate system and lies nearly in the
+        direction of increasing image line number and fixed sample number.
+        [The actual twist angle is much smaller than that indicated in the
+        sketch, in which the magnitude of the angle is exaggerated for
+        clarity.] The current best estimate of SSI twist defined in this
+        way is -0.002797905 rad based on a SCALPS run using data from the
+        December, 1989, minical sequence.
+ 
+ 
+ 
+            line 1, sample 1                              line 1, sample 80
+                        ------------------------------------
+                        |                                  |
+                        |                                  |
+                        |                                  . M
+                        |                               .  |
+                        |                            .     |
+                        |                         . \      |
+                        | line 400, sample 400 .     | twist offset angle
+                        |                   .        V     | (not to scale)
+                        |                o-----------------|
+                        |             +L  .                |
+                        |       (into the page)            |
+                        |                    .             |
+                        |                                  |
+                        |                       .          |
+                        |                                  |
+                        |                          .       |
+                        |                                  |
+                        ------------------------------------
+            line 800, sample 1                       N    line 800, sample
+ 
+ 
+ 
+Data
+--------------------------------------------------------
+ 
+ 
+        Mounting alignment twist offset angle, in radians:
+ 
+        \begindata
+ 
+        INS-77036_TWIST_OFFSET      = ( -0.0022797905 )
+ 
+        \begintext
+ 
+        Line and sample bounds:
+ 
+        \begindata
+ 
+        INS-77036_MIN_LINE           = (   1.D0 )
+        INS-77036_MAX_LINE           = ( 800.D0 )
+ 
+        INS-77036_MIN_SAMPLE         = (   1.D0 )
+        INS-77036_MAX_SAMPLE         = ( 800.D0 )
+ 
+        \begintext
+ 
+        Field of view center location (note that this item is a vector):
+ 
+        \begindata
+ 
+        INS-77036_FOV_CENTER         = ( 400.D0   400.D0 )
+ 
+        \begintext
+ 
+ 
+ 
+Definition of the SSI Distortion Model
+--------------------------------------------------------
+ 
+     We quote from [2]:
+ 
+ 
+        The theoretical distortion can be modeled to an accuracy of
+        about 0.01 pixel using the following equation:
+ 
+                         3
+               R - r = Ar
+ 
+        where
+ 
+               R   =   actual image distance from the center of the field
+                       in pixels
+ 
+               r   =   ideal image distance from the center of the field in
+                       pixels
+ 
+                               -9
+               A   =  6.58 x 10    for the theoretical distortion
+ 
+ 
+               1 pixel =  0.0006 in
+                       = 15.24   um  in the horizontal or vertical directio
+                                     in the focal plane
+ 
+ 
+ 
+Data
+--------------------------------------------------------
+ 
+ 
+        The pixel size is given in millimeters.
+ 
+        \begindata
+ 
+        INS-77036_DISTORTION_COEFF  =  (  6.58D-9 )
+ 
+        INS-77036_PIXEL_SIZE        =  ( 15.24D-3 )
+ 
+        \begintext
+ 
+        Cameral focal length, in millimeters.
+ 
+        This is an estimate taken from reference [7]. The estimate is based
+        data from the December, 1990 minical sequence.
+ 
+        The original estimate, from reference [6], was 1500 mm.
+ 
+        \begindata
+ 
+        INS-77036_FOCAL_LENGTH      =  ( 1501.039D0 )
+ 
+        \begintext
+ 
+        Date on which the above data was entered into this I-kernel:
+ 
+        \begindata
+ 
+        INS-77036_DATA_ENTRY_DATE    = ( @8-AUG-1990 )
+ 
+        \begintext
+ 
+        Version
+ 
+        The version number is always positive and given in the form V.X.
+        V and X are incremented by following these rules:
+ 
+          --  V is incremented by 1 when there is a structural change to an
+              I-kernel.  A structural change to an instrument kernel would
+              be adding or deleting data items or changing the number of
+              values associated with an existing data item.  A structural
+              change would also be assigning different units to values or
+              changing the name of a data item.
+ 
+          --  X is incremented by 1 only if pre-existing values are
+              changed.
+ 
+        \begindata
+ 
+        INS-77036_VERSION            = ( 1.0 )
+ 
+ 

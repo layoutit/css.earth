@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "31c23eac594a1ab19e68f2944b230939a2426b97bc232b554286c89aa4698504"
+    "sha256": "245dc7c4b9d1f3abc1489c4243b08f537b01a2278e5fe804eec6e8504bdc15fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "be4ad9616171869ae427b82a8fdee9a9afadf0f01e7d3c26d61083243b2d67e7",
+      "sha256": "3fda09b292444c3995018427bd5d947fa2de9dfd592bcdf8885fcba760cfb612",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -89,7 +89,44 @@
             }
           ],
           "observedColors": [],
-          "surfaceQuality": 90
+          "surfaceQuality": 90,
+          "surfaceObservations": [
+            {
+              "id": "osiris",
+              "format": "osiris-camera",
+              "consumer": "osiris-observation",
+              "path": "observations/w20080905t183606461id4df17.img",
+              "cameraPath": "observations/osiris-camera.json",
+              "startTime": "2008-09-05T18:36:22.008",
+              "filter": "Empty_OI",
+              "allowLossy": true,
+              "transfer": {
+                "maximumSourceDistanceMeters": 100,
+                "maximumSeparationMeters": 450,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "minnaert",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 2.5,
+                "coefficient": 0.54,
+                "phaseCoefficientPerDegree": 0
+              },
+              "displayPercentiles": [
+                1,
+                99
+              ],
+              "metadata": {
+                "label": "OSIRIS reflectance",
+                "coverage": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+                "falseColor": false
+              }
+            }
+          ]
         },
         "lighting": {
           "frameSize": 512,
@@ -109,8 +146,8 @@
             "initialScenePitchDegrees": 10,
             "defaultControlYawDegrees": 180
           },
-          "mapUrl": "/scenes/steins/steins-normal-surface@2x.webp",
-          "polesUrl": "/scenes/steins/steins-normal-surface@2x.webp",
+          "mapUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
+          "polesUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
           "radialTerrain": {
             "path": "shape/steins_cart.wrl",
             "format": "vrml-mesh",
@@ -137,7 +174,7 @@
           "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
         },
         "presentation": {
-          "defaultLens": "normal",
+          "defaultLens": "osiris",
           "pointColor": [
             180,
             180,
@@ -150,7 +187,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "13b66afcec97238b71f077a06799afa61ce0fe31cf6182565217ad29560da91a",
+      "sha256": "228412b4a3a9dd01ec891d9e511ba779fd1e83348c137a60353a437c8a5edec4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,8 +250,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "normal",
+          "defaultLens": "osiris",
           "controls": [
+            {
+              "id": "osiris",
+              "label": "OSIRIS reflectance",
+              "detail": "Spacecraft observation",
+              "description": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+              "title": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+              "thumbnail": "/scenes/steins/steins-osiris-thumbnail.webp",
+              "surface": "steins-osiris-surface@2x.webp",
+              "poles": "steins-osiris-surface@2x.webp",
+              "source": {
+                "id": "steins-observations-w20080905t183606461id4df17-img",
+                "path": "../manifest.json"
+              }
+            },
             {
               "id": "normal",
               "label": "Monochrome",
@@ -281,6 +332,12 @@
         },
         "charts": [],
         "resources": [
+          {
+            "label": "Imagery",
+            "role": "surface",
+            "description": "OSIRIS reflectance original archive",
+            "href": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img"
+          },
           {
             "label": "Mission",
             "role": "facts",
@@ -407,6 +464,46 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "steins-observations-w20080905t183606461id4df17-img",
+      "path": "observations/w20080905t183606461id4df17.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6",
+      "bytes": 615424,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/w20080905t183606461id4df17.img",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "steins-observations-osiris-camera-json",
+      "path": "observations/osiris-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9",
+      "bytes": 2899,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Source evidence or authored preparation input.",
       "id": "authored-document:content/object.json",
@@ -416,8 +513,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6bc2542c035193831976feba06851d7040849815463a0abd7b665bcbb1b5874e",
-      "bytes": 9765,
+      "sha256": "fae15ecf0a9f7c2f0dcc77e1141836777049a1f1a7645244d8007d868b408316",
+      "bytes": 11211,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -518,6 +615,46 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "osiris",
+      "label": "OSIRIS reflectance",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage."
+      ],
+      "lensIds": [
+        "osiris"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "steins-observations-w20080905t183606461id4df17-img",
+        "steins-observations-osiris-camera-json",
+        "steins-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/steins/steins-osiris-thumbnail.webp",
+          "bytes": 1646,
+          "sha256": "677408eca6420c402c07a3e8a3ac69973a44f19df105dccc74c812096f37c877",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/steins/steins-osiris-surface@2x.webp",
+          "bytes": 248846,
+          "sha256": "28b91e1c0905e4cc7a920d1f4d9c1ed66227821ac8eca419dd5af693a6640418",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -535,8 +672,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5613,
-          "sha256": "9c8280a553c7288e88e6e7cdf4c31c51905217be28c644f06bdd0c2ff087ac0b",
+          "bytes": 5838,
+          "sha256": "6aff4568ec8d065f50ff82dfac37e7775c8f1ac6fe033e8e3e3bfe6a18f2be90",
           "verification": "bytes-verified"
         }
       ],
@@ -562,6 +699,30 @@
           "url": "object:prepared/minimaps/normal.webp",
           "bytes": 13144,
           "sha256": "83c9574cafcbf0e46a1607dc205ef8e31f28fed16220697a313989c22b861738",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:osiris",
+      "label": "OSIRIS reflectance preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "osiris"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/osiris.webp",
+          "bytes": 6872,
+          "sha256": "1577e0cb57b18a41d0ce48f9d763b8109f4cfec326b51d7799b7ba757980654d",
           "verification": "bytes-verified"
         }
       ]

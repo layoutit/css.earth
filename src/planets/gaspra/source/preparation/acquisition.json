@@ -33,6 +33,114 @@
       ],
       "path": "stars/eso0932a.tif",
       "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/107318326rcal_clr.fit",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318326rcal_clr.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/107318326rcal_clr.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318326rcal_clr.xml",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/e8326.fit",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8326.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/e8326.lbl",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8326.lbl",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/gaspbad.tab",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspbad.tab",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/gaspbad.lbl",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspbad.lbl",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/gll36001.ti",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/ik/gll36001.ti",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/951gaspimg.tab",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspimg.tab",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/951gaspimg.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspimg.xml",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
     }
   ]
 }
