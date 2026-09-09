@@ -34,6 +34,14 @@ Native removal images, reconstruction jobs and completed volume banks are separa
 
 A new source/removal result or changed placement requires Preview again. Results are local artifacts until deliberately promoted into a checked-in prepared model. Promotion is separate from pressing Preview.
 
+## Local app handoff
+
+**Save lens settings** exports this browser's stored per-image choices and the active cloud/star controls. The receipt separates the visible density filter from an unapplied cutoff draft. Select completed result IDs from that receipt and its saved jobs, not from the newest cache entry (another browser or an automated check may have created it).
+
+The offline `promote-volume-lenses` command consumes an explicit `cssearth-volume-lens-promotion@1` recipe and writes to a staging object directory. The recipe pins the settings receipt and each reconstruction result, selected contributions, density cutoff, cloud axis/overall attenuation and star exposure/size. It reuses the lab's density filter, keeps exactly the selected reference or contribution leaves, and stores image/source/catalogue provenance. No image registration, star removal or new volume inference runs during promotion. A material draft must first receive its own Preview result.
+
+Verify the staged artifact's hashes, shared geometry/stars and actual app views before installing it. Keep the source recipe and a replayable copy of the pinned lab inputs; a settings receipt alone does not contain image pixels. Runtime receives only fixed volume-lens resources and prepared catalogue-point presentation.
+
 ## Method limits and next experiment
 
 The Alignment cloud is simulated stellar density. Earlier implementations substituted either a freshly sampled volume or the older photo-derived benchmark, and stripped the Alignment fit. Both broke the user-visible correspondence. Current processing retains Alignment’s actual prepared density bank and placement. VISTA, WISE and optical images share nearly the same observing direction and trace different signals; they are not multiview triangulation inputs.
