@@ -1900,3 +1900,44 @@ screenshots are identical; return differs in 429 channels, maximum 9/255, scatte
 across faint background points. This fifth screenshot does not satisfy the earlier
 1/255 image comparison bound; the whole-scene visual comparison remains qualified
 only for the four exact states. It is not counted as full visual parity.
+
+### Refined full-route result
+
+Main #73 (`3eeb7a414`, Earth 2025 Black Marble) is integrated at `6ff4fa833`.
+Earth's updated compiled payload was restored by its descriptor hash and its
+170 runtime assets verified (13 installed, 157 reused). The implementation at
+that head is captured as `retained-catalogue-refined-dpr2`, recorder
+`e0bb0680-51fd-4918-bc4a-9c17f5ee8569`: 2,867 captured/encoded video frames,
+-73 µs clock drift, maximum PTS error 1.444 ms. All 61 source identities match.
+There are no response patches, errors, HMR during recording, trace loss, camera
+identity changes or sampled camera/publication mismatches; the queue finishes empty.
+
+- Opening main frame: 15.378 ms, including 4.121 ms style over 1,562 elements.
+- Return main frame: 13.546 ms, including 7.866 ms style over 1,359 elements;
+  another 0.753 ms style and 0.637 ms layout precede that main frame.
+- 5–5,000 AU: 0/742 rAF intervals over 25 ms; main-frame p95 10.706 ms,
+  maximum 14.571 ms; main-thread task occupancy 69.06%.
+- Whole route: 1/3,404 rAF intervals over 25 ms (33.3 ms). Every inward and galaxy
+  drag interval is at most 16.8 ms in this recording.
+
+The remaining long rAF interval is at the initial Sun zoom: a 46.087 ms
+main-frame span contains only 5.599 ms of thread CPU. Its off-CPU time is not yet
+attributed. Pipeline grouping also includes one planetary-band frame sequence
+with both dropped and presented-all states, despite no long rAF interval there.
+These are separate observations: neither rAF timing nor grouped pipeline states
+alone establishes physical display cadence. **The overall target remains open.**
+
+The repeated world visual comparison at the same head records the exact baseline
+response patch twice. Both unchanged-control runs exhibit the same scattered
+9/255 background-point variation (771 channels) seen against the candidate.
+All five captured camera poses and drawn annotation styles match. Overview,
+rotated and distant candidate images are exact; the close/return variation is
+within this observed control-repeat variation. This calibrates those particular
+views, not every camera or object. Evidence:
+`output/playwright/retained-catalogue-integrated/world-visual-refined/`.
+
+Validation now includes the renderer build and typecheck, 72 focused renderer
+checks and 25 shell/lens/Earth-night-light checks. The Ceres delayed-load and
+interrupted-flight browser checks pass at DPR 1 and 2: one complete immediate
+card replacement, retained through landing, with controls released on commit and
+one mounted detail scene. Earlier aggregate-gate limitations remain in force.
