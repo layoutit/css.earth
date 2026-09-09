@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "independentRawAnchorCount": 10,
+  "bandValuesChecked": 40,
+  "sourceMissingPixels": 3145121,
+  "output": {
+    "width": 360,
+    "height": 180,
+    "missingPixels": 28136
+  },
+  "rss": 298188800,
+  "schema": "cssearth-b2-charon-decoder-proposal-proof@1",
+  "scope": "Temporary proposed decoder and authored body patch; no persistent implementation or prepared runtime qualification",
+  "codeBaseline": "98ef3269a6f965cbf7d1434d6484876953f24eba",
+  "sourceSha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a",
+  "focusedDecoderTests": {
+    "tests": 6,
+    "pass": 6,
+    "fail": 0,
+    "durationMs": 41.303542
+  },
+  "gitApplyCheck": "passed",
+  "proposalHashes": {
+    "observed-pds4.mjs": "d5c5fe4fa680a3081b50473e81bc2796798b8d310b0d81773042b6e12d2eef31",
+    "observed-pds4.test.mjs": "318d294f46d883d35eb740249c0670516941b4cea07fc9e69c0beba14575ca6d",
+    "charon-body.patch": "45195c75a33b6c438ab5d7d0fb7188566d080ed1f61cdec94279fb2d2e41faa4"
+  }
+}

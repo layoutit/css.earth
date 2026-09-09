@@ -11,6 +11,15 @@ import { prepareMarkerBindings } from './prepare-marker-bindings.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = 'cssearth-css-object@4';
 
+export function serializeObjectJson(descriptor, definition) {
+  if (descriptor.schema !== 'cssearth-object@1' || typeof descriptor.type !== 'string' ||
+      definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@4') {
+    throw new TypeError('Prepared object identity does not match its descriptor.');
+  }
+  return JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id,
+    type: descriptor.type, format, data: definition });
+}
+
 export async function writeObjectJson(id, definition, options) {
   if (!OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
     throw new TypeError('Prepared object identity does not match the application registry.');
@@ -29,8 +38,7 @@ export async function writeObjectJson(id, definition, options) {
   const scene = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(resolve(objectDirectory, 'prepared'), { ...preparedNavigation, definition }, scene);
   descriptor = { ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } };
-  const payload = JSON.stringify({ schema: 'cssearth-prepared-object@1', id,
-    type: descriptor.type, format, data: definition });
+  const payload = serializeObjectJson(descriptor, definition);
   const asset = resolve(root, 'src/planets', id, 'prepared/object.json');
   await mkdir(resolve(root, 'src/planets', id, 'prepared'), { recursive: true });
   await writePreparedText(asset, payload);

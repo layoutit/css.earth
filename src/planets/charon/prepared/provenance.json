@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "514cb3b1679498328be4743af2d10441133b8493917cde57375b0ac630ac6b1e"
+    "sha256": "fbe7d00584019a58184b413e4aaf632f71d12da80b33265bff1e78e9df98f068"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7328d671d50b98f41c0d8cf144cfb823cf29d81ae5d73993d1733a75764322db",
+      "sha256": "3932ef460c88f7d8592f3fffd6a1f51025ba683f411b13426b06f7b5eb0a38cd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -49,6 +49,32 @@
                   255
                 ],
                 "specialValueMagnitude": 256
+              }
+            },
+            {
+              "id": "enhanced-color",
+              "validity": {
+                "kind": "pds4-float-rgb",
+                "labelPath": "observations/nh_charon_color_mosaic.lblx",
+                "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0",
+                "bands": [
+                  2,
+                  3,
+                  4
+                ],
+                "wavelengthsNm": [
+                  870,
+                  625,
+                  475
+                ],
+                "displayRange": [
+                  0,
+                  0.6
+                ]
+              },
+              "metadata": {
+                "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
+                "title": "Enhanced color combines MVIC near-infrared, red and blue bands with panchromatic detail. Colors are not natural color or measured albedo. Missing coverage remains a gray grid."
               }
             }
           ],
@@ -140,7 +166,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "545cfbd3412e4d63c668456e6a377a970dcb5d7c8ce1d71d20c8d931137d24df",
+      "sha256": "a6b9f97c28fcb07c0a97dd89b8462db30ba250cafce45a5aa0f4e9afe413fc45",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -211,7 +237,8 @@
           "defaultLens": "normal",
           "labels": {
             "normal": "Monochrome",
-            "elevation": "Elevation"
+            "elevation": "Elevation",
+            "enhanced-color": "Enhanced color"
           },
           "controls": [
             {
@@ -231,6 +258,21 @@
               "summary": "New Horizons images with corrected lighting. Shadows remain; the unobserved south is left unavailable."
             },
             {
+              "id": "enhanced-color",
+              "label": "Enhanced color",
+              "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
+              "title": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
+              "thumbnail": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
+              "surface": "charon-enhanced-color-surface@2x.webp",
+              "poles": "charon-enhanced-color-poles@2x.webp",
+              "source": {
+                "id": "new-horizons-charon-mvic-color",
+                "path": "../manifest.json",
+                "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
+              },
+              "detail": "MVIC color bands"
+            },
+            {
               "id": "elevation",
               "label": "Elevation",
               "description": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
@@ -244,6 +286,20 @@
                 "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m"
               },
               "detail": "Shaded relief",
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−15",
+                  "0",
+                  "15"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m",
+                "image": "/scenes/charon/charon-elevation-legend.webp"
+              },
               "summary": "Stereo and shading height relative to a 606 km sphere. Detail varies; the gray grid marks missing data."
             }
           ]
@@ -278,6 +334,12 @@
             "role": "surface",
             "description": "New Horizons mosaic and terrain model · Schenk et al.",
             "href": "https://fdp.astrogeology.usgs.gov/fdp/pluto/"
+          },
+          {
+            "label": "PDS",
+            "role": "surface",
+            "description": "MVIC enhanced-color mosaic · New Horizons team",
+            "href": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
           },
           {
             "label": "ESO",
@@ -374,6 +436,53 @@
     },
     {
       "kind": "source-input",
+      "id": "new-horizons-charon-mvic-color",
+      "path": "observations/nh_charon_color_mosaic.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.img",
+      "catalog": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx",
+      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "observations/nh-plutosystem-composition-overview.pdf"
+      ],
+      "acquisition": "Restore the exact pinned binary through source/preparation/acquisition.json.",
+      "redistribution": "Retain NASA/JHUAPL/SwRI, Paul Schenk/LPI, New Horizons team and archive LIDVID attribution.",
+      "width": 3808,
+      "height": 1904,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 606000
+      },
+      "lensId": "enhanced-color",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "coverage": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map. Pan-sharpened mosaic, 1 km grid spacing; approximately 60% of source surface area has all selected bands. Values are no longer strictly I/F.",
+      "sha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a",
+      "bytes": 116006912,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/nh_charon_color_mosaic.img",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; USGS Astrogeology",
       "license": "Public domain US mission imagery; cite the map authors",
       "licenseEvidence": [
@@ -434,8 +543,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "944f562cdfe2da209091fa5581100d93037e3b8c18aca245bfc3c9fbfc573e8e",
-      "bytes": 8999,
+      "sha256": "a6b9f97c28fcb07c0a97dd89b8462db30ba250cafce45a5aa0f4e9afe413fc45",
+      "bytes": 11058,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -503,6 +612,68 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "enhanced-color",
+      "label": "Enhanced color",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map."
+      ],
+      "lensIds": [
+        "enhanced-color"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "pds4-float-rgb",
+          "labelPath": "observations/nh_charon_color_mosaic.lblx",
+          "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0",
+          "bands": [
+            2,
+            3,
+            4
+          ],
+          "wavelengthsNm": [
+            870,
+            625,
+            475
+          ],
+          "displayRange": [
+            0,
+            0.6
+          ]
+        }
+      },
+      "inputs": [
+        "new-horizons-charon-mvic-color"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
+          "bytes": 4270,
+          "sha256": "2ddc21438bea327353ead88f43e91309ece5d4f6d8b88905e539dfdf81dfa7ff",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/charon/charon-enhanced-color-surface@2x.webp",
+          "bytes": 2203286,
+          "sha256": "27c5ae040df6a7c649b98a1592179cb4ac71288b0c5bc37ad6d63ade7e215824",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/charon/charon-enhanced-color-poles@2x.webp",
+          "bytes": 36788,
+          "sha256": "0899084045985bd7d5868f4e3baad691f936eb737dbcde1041afbbb796cc666c",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "elevation",
       "label": "Elevation",
       "recipe": "terrestrial",
@@ -530,6 +701,12 @@
           "url": "/scenes/charon/charon-elevation-thumbnail.webp",
           "bytes": 4394,
           "sha256": "4c9d95b24093e7c0a5937068624ba30a046b6bf7a1fcf8a5ad521c73ff803fa0",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/charon/charon-elevation-legend.webp",
+          "bytes": 180,
+          "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
           "verification": "asset-manifest-pin"
         },
         {
@@ -565,8 +742,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5824,
-          "sha256": "bd21fd7f140e9e056bd30215bb4665bbe153a04d827a23501e12658d5bf2477e",
+          "bytes": 6057,
+          "sha256": "265c863281d2cf7054de228072f031dfb81d113cf75460e564a0283c0a5c83d2",
           "verification": "bytes-verified"
         }
       ],
@@ -592,6 +769,30 @@
           "url": "object:prepared/minimaps/normal.webp",
           "bytes": 34262,
           "sha256": "fdea6456f38a62d78b0b37de1a4f661090c9e954e66d55f884aad499b4a95367",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:enhanced-color",
+      "label": "Enhanced color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "enhanced-color"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/enhanced-color.webp",
+          "bytes": 20766,
+          "sha256": "aa6497bab5dfe509ec37cd6cb8bfaf73c67168d07d3397dc7586cce852e78eaf",
           "verification": "bytes-verified"
         }
       ]

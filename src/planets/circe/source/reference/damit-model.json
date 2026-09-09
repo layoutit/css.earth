@@ -1,0 +1,231 @@
+{
+  "number": 34,
+  "name": "Circe",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/119",
+  "modelId": 129,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/129",
+  "catalog": "View model 275 51 12.17458 AO.eps | 3D.pdf | IAUspin.txt | occ_2004-02-10.pdf | shape.png | shape.txt | spin.txt | shape.obj size from AO is 116+/-11 km",
+  "fields": {
+    "ID": "129",
+    "Asteroid": "(34) Circe",
+    "λ": "275",
+    "β": "51",
+    "P": "12.17458",
+    "YORP": "",
+    "t0": "2443602",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.56",
+    "p3": "0.06",
+    "p4": "-1.14",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "107",
+    "σD": "10",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-03-28",
+    "Comment": "size from AO is 116+/-11 km",
+    "Created": "",
+    "Modified": "2013-07-23 13:15:58",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.eps": "https://damit.cuni.cz/projects/damit/stored_files/open/202/AO.eps",
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/203/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/204/IAUspin.txt",
+    "occ_2004-02-10.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/205/occ_2004-02-10.pdf",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/206/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/207/shape.txt"
+  },
+  "references": [
+    {
+      "label": "J. Ďurech et al. (2009)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/123",
+      "file": "reference-123.html",
+      "links": [
+        {
+          "label": "2009a&a...493..291a",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2009a&a...493..291a"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2009A%26A...493..291A",
+          "url": "http://adsabs.harvard.edu/abs/2009A%26A...493..291A"
+        }
+      ]
+    },
+    {
+      "label": "Ďurech et al. (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/139",
+      "file": "reference-139.html",
+      "links": [
+        {
+          "label": "2011icar..214..652d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011icar..214..652d"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4227",
+          "url": "http://arxiv.org/abs/1104.4227\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011Icar..214..652D",
+          "url": "http://adsabs.harvard.edu/abs/2011Icar..214..652D"
+        }
+      ]
+    },
+    {
+      "label": "Hanuš et al. (2013)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/149",
+      "file": "reference-149.html",
+      "links": [
+        {
+          "label": "2013icar..226.1045h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2013icar..226.1045h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2013Icar..226.1045H",
+          "url": "http://adsabs.harvard.edu/abs/2013Icar..226.1045H"
+        }
+      ]
+    }
+  ],
+  "id": "circe",
+  "displayName": "Circe",
+  "lambda": 275.0,
+  "beta": 51.0,
+  "periodHours": 12.17458,
+  "version": "2011-03-28",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 107.0,
+  "uncertaintyKm": 10.0,
+  "akari": {
+    "number": 34,
+    "name": "Circe",
+    "diameterKm": 116.46,
+    "uncertaintyKm": 1.14,
+    "detections": 13,
+    "originalRow": "34     Circe                          8.51  0.15 13  116.46  1.14 0.052 0.001"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/207/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/204/IAUspin.txt",
+  "shapeSha256": "8f88f8efb84bd02178b61f335fd11196ed53786ddc60ec281bd834b9a3f1152f",
+  "shapeBytes": 72825,
+  "vertices": 900,
+  "faces": 1796,
+  "signedVolume": 641430.9567539276,
+  "independentSignedVolume": 641430.9567539276,
+  "originalVolumeEquivalentDiameter": 106.99999676928441,
+  "firstVertex": [
+    -9.75142,
+    12.329097,
+    46.888594
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    44.54686292325666,
+    65.56110936789747
+  ],
+  "extentsSourceUnits": [
+    [
+      -54.696731,
+      54.840411
+    ],
+    [
+      -63.156252,
+      61.667554
+    ],
+    [
+      -48.425072,
+      48.135561
+    ]
+  ],
+  "scaleKmPerSourceUnit": 1.0000000301936045,
+  "alternatives": [
+    {
+      "modelId": 128,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/128",
+      "pole": [
+        "94",
+        "35"
+      ],
+      "version": "2011-03-28"
+    }
+  ],
+  "distanceAu": 2.6871357085881864,
+  "orbitalPeriodYears": 4.404966425147585,
+  "sourceFields": {
+    "ID": "129",
+    "Asteroid": "(34) Circe",
+    "λ": "275",
+    "β": "51",
+    "P": "12.17458",
+    "YORP": "",
+    "t0": "2443602",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.56",
+    "p3": "0.06",
+    "p4": "-1.14",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "107",
+    "σD": "10",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-03-28",
+    "Comment": "size from AO is 116+/-11 km",
+    "Created": "",
+    "Modified": "2013-07-23 13:15:58",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

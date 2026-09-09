@@ -1,0 +1,27 @@
+{
+  "path": "public/scenes/phobos/phobos-albedo-surface@2x.webp",
+  "bytes": 2460704,
+  "sha256": "d33bb32fc9a10d308e4a7cf015d6cda46d5823cbd675a0f97f6408f71c8e39ea",
+  "width": 2048,
+  "height": 12800,
+  "channels": 3,
+  "hasAlpha": false,
+  "channelStats": [
+    {
+      "min": 54,
+      "max": 185,
+      "mean": 114.50562179565429
+    },
+    {
+      "min": 74,
+      "max": 195,
+      "mean": 148.68796627044676
+    },
+    {
+      "min": 82,
+      "max": 182,
+      "mean": 152.85826335906984
+    }
+  ],
+  "opaque": true
+}

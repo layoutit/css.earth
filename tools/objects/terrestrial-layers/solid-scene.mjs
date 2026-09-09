@@ -1,3 +1,4 @@
+import {prepareScientificNavigation} from './scientific-focus.mjs';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -147,6 +148,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     rotation: { kind: 'angle', source: 'view-sun', reference: 'prepared', baseDegrees: 0,
       zeroAtPole: false, property: `--${id}-light-roll` }, frameAttribute: null, modeAttribute: null, quoted: true };
   const variants = surfaces.flatMap(s => [false, true].flatMap(shadows => [false, true].map(orbit => ({
+    ...(config.raster.scientific?.find(lens => lens.id === s.id)?.focus ? {navigation: prepareScientificNavigation(id, config.raster.scientific.find(lens => lens.id === s.id).focus, plan.camera)} : {}),
     when: { lensId: s.id, shadows, orbit }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, 'lighting'],
     writes: [
       { kind: 'texture', target: index(body), name: `--${id}-surface-image`, resource: s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, quoted: true },

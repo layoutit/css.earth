@@ -307,7 +307,6 @@ body[data-object-shell] .planet-attribution-footer {
   text-decoration: none;
   pointer-events: auto;
 }
-.planet-project-links .planet-settings-action { display: none; }
 .planet-github-link {
   align-items: baseline;
   width: auto;

@@ -1,0 +1,8 @@
+gdalwarp -r cubic -t_srs IAU_2015:50215 /Users/jlaura/europa_dtms/DTMs/Agenor/Agenor.cub Agenor.vrt
+  gdal_translate Agenor.vrt Agenor.tif -of COG -co COMPRESS=DEFLATE -co PREDICTOR=3 -a_srs "IAU_2015:50215"
+gdalwarp -r cubic -t_srs IAU_2015:50215 /Users/jlaura/europa_dtms/DTMs/Agenor/Agenor_FOM.cub Agenor_FOM.vrt
+ gdal_translate Agenor_FOM.vrt Agenor_FOM.tif -of COG -co COMPRESS=DEFLATE -co PREDICTOR=3 -a_srs "IAU_2015:50215"
+gdalwarp -r cubic -t_srs IAU_2015:50215 /Users/jlaura/europa_dtms/DTMs/Agenor/Agenor_ClrConf.tif Agenor_ClrConf.vrt
+ gdal_translate Agenor_FOM.vrt Agenor_ClrConf.tif -of COG -co COMPRESS=DEFLATE -co PREDICTOR=3 -a_srs "IAU_2015:50215"
+gdaldem hillshade Agenor.tif Agenor_hillshade_vrt.tif
+gdal_translate Agenor_hillshade.tif Agenor_hillshade.jpg -scale -ot Byte -of JPEG -outsize 100% 0 -co QUALITY=95 -a_nodata 0 -a_srs IAU_2015:50215

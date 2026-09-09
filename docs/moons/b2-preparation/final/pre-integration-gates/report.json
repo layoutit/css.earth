@@ -1,0 +1,60 @@
+{
+  "status": "INTERRUPTED_FOR_MAIN_INTEGRATION",
+  "head": "57d5f12bea735bbf4ee6e1ec00ea14827e0e7923",
+  "root": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "startedAt": "2026-09-09T04:25:36Z",
+  "commands": [
+    {
+      "name": "focused-bodies",
+      "command": [
+        "zsh",
+        "/tmp/b2-body-validation.sh"
+      ],
+      "status": "FAIL",
+      "startedAt": "2026-09-09T04:25:36Z",
+      "log": "/tmp/b2-final-gates/focused-bodies.log",
+      "exitCode": 1,
+      "finishedAt": "2026-09-09T04:25:39Z"
+    },
+    {
+      "name": "acquire",
+      "command": [
+        "pnpm",
+        "acquire:planets",
+        "--",
+        "--verify-only"
+      ],
+      "status": "FAIL",
+      "startedAt": "2026-09-09T04:25:39Z",
+      "log": "/tmp/b2-final-gates/acquire.log",
+      "exitCode": 1,
+      "finishedAt": "2026-09-09T04:25:39Z"
+    },
+    {
+      "name": "test",
+      "command": [
+        "pnpm",
+        "test"
+      ],
+      "status": "FAIL",
+      "startedAt": "2026-09-09T04:25:39Z",
+      "log": "/tmp/b2-final-gates/test.log",
+      "exitCode": 1,
+      "finishedAt": "2026-09-09T04:25:57Z"
+    },
+    {
+      "name": "shell",
+      "command": [
+        "pnpm",
+        "test:shell"
+      ],
+      "status": "INTERRUPTED",
+      "startedAt": "2026-09-09T04:25:57Z",
+      "log": "/tmp/b2-final-gates/shell.log"
+    }
+  ],
+  "interruption": {
+    "reason": "New main PR61 introduces shared source-decoder conflicts. Preserve completed failed gates and stop the owned shell attempt before integration; no passing shell/browser/build result implied.",
+    "at": "2026-09-09T04:33:42.864432+00:00"
+  }
+}

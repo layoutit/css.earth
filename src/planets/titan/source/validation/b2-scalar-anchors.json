@@ -1,0 +1,338 @@
+{
+  "schema": "cssearth-independent-scientific-anchors@1",
+  "sources": [
+    {
+      "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+      "expectedBytes": 550734,
+      "expectedSha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad",
+      "heightDatum": "metres above 2575.0 km sphere",
+      "sourceCells": 2073600,
+      "validCells": 136649,
+      "validAreaFractionOfHemisphere": 0.061242891395009165,
+      "minimum": -1838.0,
+      "maximum": 1348.0,
+      "anchors": [
+        {
+          "row": 31,
+          "column": 939,
+          "longitudeEastDegrees": 297.4375,
+          "latitudeDegrees": 86.0625,
+          "value": -533.0
+        },
+        {
+          "row": 245,
+          "column": 1327,
+          "longitudeEastDegrees": 345.9375,
+          "latitudeDegrees": 59.3125,
+          "value": -487.3466796875
+        },
+        {
+          "row": 640,
+          "column": 1244,
+          "longitudeEastDegrees": 335.5625,
+          "latitudeDegrees": 9.9375,
+          "value": 105.91564178466797
+        },
+        {
+          "row": 1032,
+          "column": 143,
+          "longitudeEastDegrees": 197.9375,
+          "latitudeDegrees": -39.0625,
+          "value": -125.75788116455078
+        },
+        {
+          "row": 1439,
+          "column": 951,
+          "longitudeEastDegrees": 298.9375,
+          "latitudeDegrees": -89.9375,
+          "value": -400.79876708984375
+        },
+        {
+          "row": 725,
+          "column": 1418,
+          "longitudeEastDegrees": 357.3125,
+          "latitudeDegrees": -0.6875,
+          "value": null
+        }
+      ],
+      "independentDecoder": "Python gzip + attached PDS record pointer + NumPy little-endian float32; exact FF7FFFFB mask; spherical row-area weights"
+    },
+    {
+      "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+      "expectedBytes": 532494,
+      "expectedSha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af",
+      "heightDatum": "metres above 2575.0 km sphere",
+      "sourceCells": 2073600,
+      "validCells": 134308,
+      "validAreaFractionOfHemisphere": 0.05875638793918688,
+      "minimum": -2017.75,
+      "maximum": 1936.0,
+      "anchors": [
+        {
+          "row": 41,
+          "column": 508,
+          "longitudeEastDegrees": 63.5625,
+          "latitudeDegrees": 84.8125,
+          "value": -897.0
+        },
+        {
+          "row": 276,
+          "column": 27,
+          "longitudeEastDegrees": 3.4375,
+          "latitudeDegrees": 55.4375,
+          "value": -360.33453369140625
+        },
+        {
+          "row": 602,
+          "column": 1193,
+          "longitudeEastDegrees": 149.1875,
+          "latitudeDegrees": 14.6875,
+          "value": -88.0
+        },
+        {
+          "row": 1179,
+          "column": 154,
+          "longitudeEastDegrees": 19.3125,
+          "latitudeDegrees": -57.4375,
+          "value": -1045.9910888671875
+        },
+        {
+          "row": 1438,
+          "column": 1439,
+          "longitudeEastDegrees": 179.9375,
+          "latitudeDegrees": -89.8125,
+          "value": -372.19525146484375
+        },
+        {
+          "row": 725,
+          "column": 1313,
+          "longitudeEastDegrees": 164.1875,
+          "latitudeDegrees": -0.6875,
+          "value": null
+        }
+      ],
+      "independentDecoder": "Python gzip + attached PDS record pointer + NumPy little-endian float32; exact FF7FFFFB mask; spherical row-area weights"
+    },
+    {
+      "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+      "expectedBytes": 7422253,
+      "expectedSha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546",
+      "heightDatum": "metres above 2575.0 km sphere",
+      "sourceCells": 2073600,
+      "validCells": 2070176,
+      "validAreaFractionOfHemisphere": 0.9993039161221756,
+      "minimum": -1177.21875,
+      "maximum": 564.1474609375,
+      "anchors": [
+        {
+          "row": 1,
+          "column": 1,
+          "longitudeEastDegrees": 180.1875,
+          "latitudeDegrees": 89.8125,
+          "value": -633.322509765625
+        },
+        {
+          "row": 360,
+          "column": 943,
+          "longitudeEastDegrees": 297.9375,
+          "latitudeDegrees": 44.9375,
+          "value": -881.7957763671875
+        },
+        {
+          "row": 720,
+          "column": 447,
+          "longitudeEastDegrees": 235.9375,
+          "latitudeDegrees": -0.0625,
+          "value": -220.61285400390625
+        },
+        {
+          "row": 1079,
+          "column": 1390,
+          "longitudeEastDegrees": 353.8125,
+          "latitudeDegrees": -44.9375,
+          "value": 189.00331115722656
+        },
+        {
+          "row": 1439,
+          "column": 894,
+          "longitudeEastDegrees": 291.8125,
+          "latitudeDegrees": -89.9375,
+          "value": -201.15158081054688
+        },
+        {
+          "row": 273,
+          "column": 0,
+          "longitudeEastDegrees": 180.0625,
+          "latitudeDegrees": 55.8125,
+          "value": null
+        }
+      ],
+      "independentDecoder": "Python gzip + attached PDS record pointer + NumPy little-endian float32; exact FF7FFFFB mask; spherical row-area weights"
+    },
+    {
+      "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+      "expectedBytes": 7393466,
+      "expectedSha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034",
+      "heightDatum": "metres above 2575.0 km sphere",
+      "sourceCells": 2073600,
+      "validCells": 2073600,
+      "validAreaFractionOfHemisphere": 1.0,
+      "minimum": -1478.8348388671875,
+      "maximum": 545.9393920898438,
+      "anchors": [
+        {
+          "row": 0,
+          "column": 0,
+          "longitudeEastDegrees": 0.0625,
+          "latitudeDegrees": 89.9375,
+          "value": -647.7454833984375
+        },
+        {
+          "row": 359,
+          "column": 1439,
+          "longitudeEastDegrees": 179.9375,
+          "latitudeDegrees": 45.0625,
+          "value": 57.407779693603516
+        },
+        {
+          "row": 719,
+          "column": 1439,
+          "longitudeEastDegrees": 179.9375,
+          "latitudeDegrees": 0.0625,
+          "value": 69.45023345947266
+        },
+        {
+          "row": 1079,
+          "column": 1439,
+          "longitudeEastDegrees": 179.9375,
+          "latitudeDegrees": -44.9375,
+          "value": -174.45977783203125
+        },
+        {
+          "row": 1439,
+          "column": 1439,
+          "longitudeEastDegrees": 179.9375,
+          "latitudeDegrees": -89.9375,
+          "value": -549.6240234375
+        }
+      ],
+      "independentDecoder": "Python gzip + attached PDS record pointer + NumPy little-endian float32; exact FF7FFFFB mask; spherical row-area weights"
+    },
+    {
+      "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+      "expectedBytes": 6386495,
+      "expectedSha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34",
+      "heightDatum": "distance to nearest measurement, kilometres",
+      "sourceCells": 2073600,
+      "validCells": 2069282,
+      "validAreaFractionOfHemisphere": 0.999303177385562,
+      "minimum": 0.0,
+      "maximum": 719.486328125,
+      "anchors": [
+        {
+          "row": 1,
+          "column": 0,
+          "longitudeEastDegrees": 180.0625,
+          "latitudeDegrees": 89.8125,
+          "value": 181.36587524414062
+        },
+        {
+          "row": 360,
+          "column": 719,
+          "longitudeEastDegrees": 269.9375,
+          "latitudeDegrees": 44.9375,
+          "value": 120.92062377929688
+        },
+        {
+          "row": 719,
+          "column": 1438,
+          "longitudeEastDegrees": 359.8125,
+          "latitudeDegrees": 0.0625,
+          "value": 73.29564666748047
+        },
+        {
+          "row": 1079,
+          "column": 718,
+          "longitudeEastDegrees": 269.8125,
+          "latitudeDegrees": -44.9375,
+          "value": 407.3382568359375
+        },
+        {
+          "row": 1438,
+          "column": 1438,
+          "longitudeEastDegrees": 359.8125,
+          "latitudeDegrees": -89.8125,
+          "value": 0.7725720405578613
+        },
+        {
+          "row": 720,
+          "column": 1439,
+          "longitudeEastDegrees": 359.9375,
+          "latitudeDegrees": -0.0625,
+          "value": null
+        }
+      ],
+      "independentDecoder": "Python gzip + attached PDS record pointer + NumPy little-endian float32; exact FF7FFFFB mask; spherical row-area weights"
+    },
+    {
+      "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+      "expectedBytes": 6529382,
+      "expectedSha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b",
+      "heightDatum": "distance to nearest measurement, kilometres",
+      "sourceCells": 2073600,
+      "validCells": 2070176,
+      "validAreaFractionOfHemisphere": 0.9993039161221756,
+      "minimum": -4.3091752388590976e-11,
+      "maximum": 965.7994995117188,
+      "anchors": [
+        {
+          "row": 1,
+          "column": 1,
+          "longitudeEastDegrees": 0.1875,
+          "latitudeDegrees": 89.8125,
+          "value": 175.6211395263672
+        },
+        {
+          "row": 360,
+          "column": 943,
+          "longitudeEastDegrees": 117.9375,
+          "latitudeDegrees": 44.9375,
+          "value": 0.0
+        },
+        {
+          "row": 720,
+          "column": 447,
+          "longitudeEastDegrees": 55.9375,
+          "latitudeDegrees": -0.0625,
+          "value": 4.7489447593688965
+        },
+        {
+          "row": 1079,
+          "column": 1390,
+          "longitudeEastDegrees": 173.8125,
+          "latitudeDegrees": -44.9375,
+          "value": 68.7155990600586
+        },
+        {
+          "row": 1439,
+          "column": 894,
+          "longitudeEastDegrees": 111.8125,
+          "latitudeDegrees": -89.9375,
+          "value": 1.2402826975090736e-13
+        },
+        {
+          "row": 273,
+          "column": 0,
+          "longitudeEastDegrees": 0.0625,
+          "latitudeDegrees": 55.8125,
+          "value": null
+        }
+      ],
+      "independentDecoder": "Python gzip + attached PDS record pointer + NumPy little-endian float32; exact FF7FFFFB mask; spherical row-area weights"
+    }
+  ],
+  "qualifications": [
+    "Source values and coordinate anchors only. No prepared display or browser result is claimed.",
+    "Formal 2019 GTDR measured product lists adjusted altimetry and SARtopo; the 2017 paper’s stereo-DTM counts and coverage are not substituted."
+  ]
+}

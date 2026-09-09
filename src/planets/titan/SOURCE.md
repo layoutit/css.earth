@@ -64,3 +64,13 @@ Exact input identities, acquisition URLs, credits and consumers are in
 `source/manifest.json`; preparation is authored in `object.json` and source JSON.
 
 Delivery uses full-resolution WebP quality 90 for the surface and pole atlases, with lossless alpha. Source observations and preparation maps remain lossless; the latter are excluded from runtime installation.
+
+## B2 quantitative GTDR views
+
+Formal `CO-SSA-RADAR-5-GTDR-V1.0` float products through T126 add three views: measured height (`GTF`), interpolated height (`GTI`) and distance to input data (`GTD`). All six original gzip IMG products and detached labels are retained. Attached labels identify little-endian PC_REAL 32-bit values and exact `FF7FFFFB` missing bits. No byte-browse quantization is used. Heights are metres above the 2575.0 km sphere, distance is kilometres. Two 1440 × 1440 west-positive planetographic hemispheres are independently decoded from source offsets. The spherical reference makes geographic and centric latitude equivalent. Posting is 8 pixels/degree, about 5.62 km at the equator; it is not a footprint or accuracy claim.
+
+Independent source-cell decoding gives measured spherical area coverage 6.0000%. The 2019 labels list adjusted altimetry and SARtopo. The 2017 Corlies paper also discusses stereo DTMs; its approximate 9% total coverage is not assigned to this different delivered product. Interpolated grids have small missing regions and those remain missing. Distance is not uncertainty; the tiny negative GTD roundoff minimum −4.31e−11 km is preserved in source sampling and clamped by the visible zero endpoint. Source extrema and coordinate anchors are in `source/validation/b2-scalar-anchors.json`.
+
+Height colors use a common −2500 to +2500 m scale across measured and interpolated views. Distance uses 0–1000 km. Terrain geometry remains the existing sphere; these maps do not invent global physical relief. The superseded Cornell cube ZIP/cubes and byte-browse products remain research evidence and are not rendered.
+
+Qualification status: source intake and recipe proposal. Final mesh selection (where applicable), restored-source and prepared browser/visual gates remain pending. No readiness is claimed.

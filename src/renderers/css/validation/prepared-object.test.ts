@@ -148,3 +148,35 @@ test('a body without lenses validates both fixed and toggle-selected presentatio
   input.variants.pop();
   assert.throws(() => parsePreparedObjectRuntime(input), /exactly once/);
 });
+
+
+test('prepared destination roll is optional and rejects non-finite or nonnumeric values', () => {
+  const input = copy(), camera = child(input, 'camera');
+  const navigation = { maximumZoom: camera.maximumZoom, camera: {
+    controlPitch: camera.defaultControlPitchDegrees, controlYaw: camera.defaultControlYawDegrees,
+    zoom: camera.defaultZoom, controlRoll: -60 as unknown,
+  } };
+  item(input.variants).navigation = navigation;
+  assert.equal(parsePreparedObjectRuntime(input), input);
+  for (const invalid of [NaN, Infinity, -Infinity, 'north-up', null]) {
+    navigation.camera.controlRoll = invalid;
+    assert.throws(() => parsePreparedObjectRuntime(input), /(?:navigation roll|controlRoll) must be finite/);
+  }
+  delete (navigation.camera as { controlRoll?: unknown }).controlRoll;
+  assert.equal(parsePreparedObjectRuntime(input), input);
+});
+
+
+test('prepared lens transitions require bounded duration and an explicit zoom policy', () => {
+  const input = copy(), camera = child(input, 'camera');
+  const destination = { controlPitch: camera.defaultControlPitchDegrees,
+    controlYaw: camera.defaultControlYawDegrees, zoom: camera.defaultZoom,
+    transition: { durationMilliseconds: 650, preserveZoom: true } as unknown };
+  item(input.variants).navigation = { maximumZoom: camera.maximumZoom, camera: destination };
+  assert.equal(parsePreparedObjectRuntime(input), input);
+  for (const transition of [null, {}, { durationMilliseconds: 0, preserveZoom: true },
+    { durationMilliseconds: 10001, preserveZoom: true }, { durationMilliseconds: 650, preserveZoom: 'true' }]) {
+    destination.transition = transition;
+    assert.throws(() => parsePreparedObjectRuntime(input), /camera transition/);
+  }
+});

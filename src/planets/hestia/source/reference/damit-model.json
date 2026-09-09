@@ -1,0 +1,194 @@
+{
+  "number": 46,
+  "name": "Hestia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2505",
+  "modelId": 4383,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4383",
+  "catalog": "View model 291 12 21.0401 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "4383",
+    "Asteroid": "(46) Hestia",
+    "λ": "291",
+    "β": "12",
+    "P": "21.0401",
+    "YORP": "",
+    "t0": "2443823",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.47",
+    "p3": "0.11",
+    "p4": "-0.97",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-07-19",
+    "Comment": "",
+    "Created": "2019-10-03 15:37:34",
+    "Modified": "2019-10-03 15:37:34",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/13637/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/13638/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/13639/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Franco & Pilcher (2019)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/183",
+      "file": "reference-183.html",
+      "links": [
+        {
+          "label": "2019mpbu...46..140f",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2019mpbu...46..140f"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2019MPBu...46..140F",
+          "url": "http://adsabs.harvard.edu/abs/2019MPBu...46..140F"
+        }
+      ]
+    }
+  ],
+  "id": "hestia",
+  "displayName": "Hestia",
+  "lambda": 291.0,
+  "beta": 12.0,
+  "periodHours": 21.0401,
+  "version": "2019-07-19",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 120.62,
+  "uncertaintyKm": 1.53,
+  "akari": {
+    "number": 46,
+    "name": "Hestia",
+    "diameterKm": 120.62,
+    "uncertaintyKm": 1.53,
+    "detections": 8,
+    "originalRow": "46     Hestia                         8.36  0.06  8  120.62  1.53 0.055 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/13639/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/13637/IAUspin.txt",
+  "shapeSha256": "3c9b6ec13ef63607aaa3b4b2419bcf7b94232652d260b9b4f1a8e0eb5b49350a",
+  "shapeBytes": 82546,
+  "vertices": 1020,
+  "faces": 2036,
+  "signedVolume": 0.9999999016560848,
+  "independentSignedVolume": 0.9999999016560848,
+  "originalVolumeEquivalentDiameter": 1.2407009411270014,
+  "firstVertex": [
+    0.018887,
+    0.029107,
+    0.581514
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5505100024241157,
+    0.7413906842933758
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.670717,
+      0.724755
+    ],
+    [
+      -0.714938,
+      0.636479
+    ],
+    [
+      -0.661047,
+      0.597872
+    ]
+  ],
+  "scaleKmPerSourceUnit": 97.21923793370689,
+  "alternatives": [
+    {
+      "modelId": 4384,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4384",
+      "pole": [
+        "110",
+        "7"
+      ],
+      "version": "2019-07-19"
+    }
+  ],
+  "distanceAu": 2.5255592116593393,
+  "orbitalPeriodYears": 4.013696546223099,
+  "sourceFields": {
+    "ID": "4383",
+    "Asteroid": "(46) Hestia",
+    "λ": "291",
+    "β": "12",
+    "P": "21.0401",
+    "YORP": "",
+    "t0": "2443823",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.47",
+    "p3": "0.11",
+    "p4": "-0.97",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-07-19",
+    "Comment": "",
+    "Created": "2019-10-03 15:37:34",
+    "Modified": "2019-10-03 15:37:34",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates"
+}

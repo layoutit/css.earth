@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "df0ff235ffbc4836bcdb60d3931f7bc34bb29284b206d9b14c7236bf727d5b0c"
+          "sha256": "2d739c1689a556fe6cef9fba75c23653fb885908e7799f4c05a1795453462d3a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8f11c4b5c7c85dacc001b6730f4b3c06ce3d9bcae5385f9a271433fd4f1d4827"
+          "sha256": "e8782016d20253b69fc2badb860b0ecad10678eeb2f707421c05d25612904561"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2a541c1c03ffab4df5f04302801b2f84525bd6a3b0526ae009a1381b8a4a9bf6"
+          "sha256": "876ff1a80eddf0db76bf7d86d7870edc45e768f96976e58476f36f372b98110e"
         }
       ],
       "shape": {
@@ -63,6 +63,21 @@
             },
             {
               "id": "radar",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "topography",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "interpolated",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "coverage-distance",
               "source": "content",
               "material": "lighting"
             }
@@ -108,6 +123,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7c72284bb3831783bac371c9a3037679c00f761525dc696488e6f4e39bc6e8b7"
+    "sha256": "f882604d8906592595e065a60eacf2e0c03b4c7a86410320424f9208222fdfa2"
   }
 }

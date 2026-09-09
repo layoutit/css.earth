@@ -1,0 +1,1057 @@
+
+> cssearth@0.1.0 prebuild /Users/ekrof/fed/cssEarth-pluto-small-moons
+> pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:object-json && pnpm prepare:minimap && pnpm prepare:provenance && pnpm prepare:spacecraft
+
+
+> cssearth@0.1.0 build:packages /Users/ekrof/fed/cssEarth-pluto-small-moons
+> pnpm -r --filter "./packages/**" build
+
+Scope: 4 of 5 workspace projects
+packages/astronomy build$ tsup
+packages/catalog build$ tsup
+packages/objects build$ tsup
+packages/catalog build: CLI Building entry: src/index.ts
+packages/catalog build: CLI Using tsconfig: tsconfig.json
+packages/catalog build: CLI tsup v8.5.1
+packages/catalog build: CLI Using tsup config: /Users/ekrof/fed/cssEarth-pluto-small-moons/packages/catalog/tsup.config.ts
+packages/objects build: CLI Building entry: src/index.ts
+packages/objects build: CLI Using tsconfig: tsconfig.json
+packages/objects build: CLI tsup v8.5.1
+packages/objects build: CLI Using tsup config: /Users/ekrof/fed/cssEarth-pluto-small-moons/packages/objects/tsup.config.ts
+packages/astronomy build: CLI Building entry: src/index.ts
+packages/astronomy build: CLI Using tsconfig: tsconfig.json
+packages/astronomy build: CLI tsup v8.5.1
+packages/astronomy build: CLI Using tsup config: /Users/ekrof/fed/cssEarth-pluto-small-moons/packages/astronomy/tsup.config.ts
+packages/objects build: CLI Target: es2022
+packages/catalog build: CLI Target: es2022
+packages/astronomy build: CLI Target: es2022
+packages/catalog build: CLI Cleaning output folder
+packages/objects build: CLI Cleaning output folder
+packages/astronomy build: CLI Cleaning output folder
+packages/objects build: ESM Build start
+packages/objects build: CJS Build start
+packages/catalog build: ESM Build start
+packages/catalog build: CJS Build start
+packages/astronomy build: ESM Build start
+packages/astronomy build: CJS Build start
+packages/catalog build: CJS dist/index.cjs 7.02 KB
+packages/catalog build: CJS ⚡️ Build success in 10ms
+packages/catalog build: ESM dist/index.js 5.78 KB
+packages/catalog build: ESM ⚡️ Build success in 11ms
+packages/objects build: ESM dist/index.js 62.80 KB
+packages/objects build: ESM ⚡️ Build success in 19ms
+packages/objects build: CJS dist/index.cjs 65.15 KB
+packages/objects build: CJS ⚡️ Build success in 19ms
+packages/astronomy build: CJS dist/index.cjs 1.52 MB
+packages/astronomy build: CJS ⚡️ Build success in 54ms
+packages/astronomy build: ESM dist/index.js 1.52 MB
+packages/astronomy build: ESM ⚡️ Build success in 55ms
+packages/objects build: DTS Build start
+packages/catalog build: DTS Build start
+packages/astronomy build: DTS Build start
+packages/catalog build: DTS ⚡️ Build success in 302ms
+packages/catalog build: DTS dist/index.d.ts  3.95 KB
+packages/catalog build: DTS dist/index.d.cts 3.95 KB
+packages/objects build: DTS ⚡️ Build success in 313ms
+packages/objects build: DTS dist/index.d.ts  15.41 KB
+packages/objects build: DTS dist/index.d.cts 15.41 KB
+packages/catalog build: Done
+packages/objects build: Done
+packages/astronomy build: DTS ⚡️ Build success in 673ms
+packages/astronomy build: DTS dist/index.d.ts  62.67 KB
+packages/astronomy build: DTS dist/index.d.cts 62.67 KB
+packages/astronomy build: Done
+packages/engine build$ tsup
+packages/engine build: CLI Building entry: src/index.ts
+packages/engine build: CLI Using tsconfig: tsconfig.json
+packages/engine build: CLI tsup v8.5.1
+packages/engine build: CLI Using tsup config: /Users/ekrof/fed/cssEarth-pluto-small-moons/packages/engine/tsup.config.ts
+packages/engine build: CLI Target: es2022
+packages/engine build: CLI Cleaning output folder
+packages/engine build: ESM Build start
+packages/engine build: CJS Build start
+packages/engine build: CJS dist/index.cjs 65.18 KB
+packages/engine build: CJS ⚡️ Build success in 10ms
+packages/engine build: ESM dist/index.js 60.35 KB
+packages/engine build: ESM ⚡️ Build success in 10ms
+packages/engine build: DTS Build start
+packages/engine build: DTS ⚡️ Build success in 330ms
+packages/engine build: DTS dist/index.d.ts  24.62 KB
+packages/engine build: DTS dist/index.d.cts 24.62 KB
+packages/engine build: Done
+
+> cssearth@0.1.0 build:renderer /Users/ekrof/fed/cssEarth-pluto-small-moons
+> pnpm --filter @cssearth/engine exec tsup --config ../../src/renderers/css/tsup.config.ts
+
+CLI Building entry: {"index":"/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/index.ts","universe":"/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/universe/index.ts","navigation":"/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/navigation/index.ts","testing":"/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/testing.ts","point-field-selection-worker":"/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/stars/point-field-selection-worker.ts","prepared-object-worker":"/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/prepared-object-worker.ts"}
+CLI Using tsconfig: ../../src/renderers/css/tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/tsup.config.ts
+CLI Target: es2022
+CLI Cleaning output folder
+ESM Build start
+CJS Build start
+
+ WARN  [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1m"import.meta" is not available with the "cjs" output format and will be empty[0m [empty-import-meta]
+
+    ../../src/renderers/css/prepared-object-worker-client.ts:7:97:
+[37m      7 │ ...w Worker(new URL('./prepared-object-worker.js', [32mimport.meta[37m.url), {
+        ╵                                                    [32m~~~~~~~~~~~[0m
+
+  You need to set the output format to "esm" for "import.meta" to work correctly.
+
+
+
+
+ WARN  [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1m"import.meta" is not available with the "cjs" output format and will be empty[0m [empty-import-meta]
+
+    ../../src/renderers/css/stars/point-field-selection-client.ts:22:103:
+[37m      22 │ ...ker(new URL('./point-field-selection-worker.js', [32mimport.meta[37m.url),
+         ╵                                                     [32m~~~~~~~~~~~[0m
+
+  You need to set the output format to "esm" for "import.meta" to work correctly.
+
+
+
+ESM ../../src/renderers/css/dist/navigation.js                   3.99 KB
+ESM ../../src/renderers/css/dist/chunk-72UHM2PU.js               22.73 KB
+ESM ../../src/renderers/css/dist/chunk-QGIXLWCG.js               132.23 KB
+ESM ../../src/renderers/css/dist/universe.js                     1.73 KB
+ESM ../../src/renderers/css/dist/chunk-FYAUJ7OO.js               686.00 B
+ESM ../../src/renderers/css/dist/chunk-SO6BCJLQ.js               68.83 KB
+ESM ../../src/renderers/css/dist/chunk-GELTBGHK.js               7.26 KB
+ESM ../../src/renderers/css/dist/index.js                        182.41 KB
+ESM ../../src/renderers/css/dist/point-field-selection-worker.js 901.00 B
+ESM ../../src/renderers/css/dist/testing.js                      3.05 KB
+ESM ../../src/renderers/css/dist/prepared-object-worker.js       648.00 B
+ESM ../../src/renderers/css/dist/chunk-VVNCEQYF.js               57.89 KB
+ESM ../../src/renderers/css/dist/chunk-4H6PHH2Y.js               4.15 KB
+ESM ../../src/renderers/css/dist/chunk-C57Q5HPX.js               75.61 KB
+ESM ../../src/renderers/css/dist/chunk-HM5B4R4I.js               19.25 KB
+ESM ../../src/renderers/css/dist/chunk-ZQMQUVRT.js               3.55 KB
+ESM ../../src/renderers/css/dist/chunk-TLSO4G42.js               6.94 KB
+ESM ../../src/renderers/css/dist/chunk-LYBBZXIA.js               78.93 KB
+ESM ⚡️ Build success in 46ms
+CJS ../../src/renderers/css/dist/navigation.cjs                   41.50 KB
+CJS ../../src/renderers/css/dist/point-field-selection-worker.cjs 1.46 KB
+CJS ../../src/renderers/css/dist/prepared-object-worker.cjs       127.00 KB
+CJS ../../src/renderers/css/dist/universe.cjs                     204.29 KB
+CJS ../../src/renderers/css/dist/testing.cjs                      186.19 KB
+CJS ../../src/renderers/css/dist/index.cjs                        656.96 KB
+CJS ⚡️ Build success in 45ms
+DTS Build start
+DTS ⚡️ Build success in 3729ms
+DTS ../../src/renderers/css/dist/prepared-object-worker.d.ts               13.00 B
+DTS ../../src/renderers/css/dist/navigation.d.ts                           1.57 KB
+DTS ../../src/renderers/css/dist/universe.d.ts                             713.00 B
+DTS ../../src/renderers/css/dist/testing.d.ts                              11.86 KB
+DTS ../../src/renderers/css/dist/index.d.ts                                14.52 KB
+DTS ../../src/renderers/css/dist/point-field-selection-worker.d.ts         13.00 B
+DTS ../../src/renderers/css/dist/saved-world-camera-X8AiiOTq.d.ts          913.00 B
+DTS ../../src/renderers/css/dist/prepared-object-navigation-CKTULKgv.d.ts  4.55 KB
+DTS ../../src/renderers/css/dist/prepared-universe-runtime-DnZQ2qot.d.ts   8.76 KB
+DTS ../../src/renderers/css/dist/view-url-CZQczjYq.d.ts                    25.64 KB
+DTS ../../src/renderers/css/dist/screen-label-layout-C8qax-jI.d.ts         56.10 KB
+DTS ../../src/renderers/css/dist/prepared-object-worker.d.cts              13.00 B
+DTS ../../src/renderers/css/dist/navigation.d.cts                          1.57 KB
+DTS ../../src/renderers/css/dist/universe.d.cts                            717.00 B
+DTS ../../src/renderers/css/dist/testing.d.cts                             11.87 KB
+DTS ../../src/renderers/css/dist/index.d.cts                               14.53 KB
+DTS ../../src/renderers/css/dist/point-field-selection-worker.d.cts        13.00 B
+DTS ../../src/renderers/css/dist/saved-world-camera-CuDMrLpD.d.cts         914.00 B
+DTS ../../src/renderers/css/dist/prepared-object-navigation-McPRtx1w.d.cts 4.56 KB
+DTS ../../src/renderers/css/dist/prepared-universe-runtime-DL-6zBaR.d.cts  8.76 KB
+DTS ../../src/renderers/css/dist/view-url-CZQczjYq.d.cts                   25.64 KB
+DTS ../../src/renderers/css/dist/screen-label-layout-bfGX7TOQ.d.cts        56.10 KB
+
+> cssearth@0.1.0 build:preparation /Users/ekrof/fed/cssEarth-pluto-small-moons
+> pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts
+
+CLI Building entry: ../../tools/objects/operations.ts, ../../tools/objects/prepare-authored.ts, ../../tools/objects/prepare-shell.ts, ../../tools/objects/prepare-spatial-context.ts, ../../tools/objects/prepare-stars.ts, ../../tools/objects/prepare-volume.ts, ../../tools/objects/prepare-world-navigation.ts, ../../tools/objects/celestial/prepare.ts, ../../tools/objects/content/prepare.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/tsup.config.ts
+CLI Target: node22
+CLI Cleaning output folder
+ESM Build start
+ESM ../../tools/objects/dist/prepare-authored.js         363.14 KB
+ESM ../../tools/objects/dist/prepare-shell.js            25.54 KB
+ESM ../../tools/objects/dist/prepare-stars.js            22.30 KB
+ESM ../../tools/objects/dist/prepare-volume.js           64.97 KB
+ESM ../../tools/objects/dist/prepare-world-navigation.js 39.65 KB
+ESM ../../tools/objects/dist/operations.js               47.64 KB
+ESM ../../tools/objects/dist/prepare-spatial-context.js  32.83 KB
+ESM ../../tools/objects/dist/celestial/prepare.js        7.76 KB
+ESM ../../tools/objects/dist/content/prepare.js          46.50 KB
+ESM ⚡️ Build success in 24ms
+
+> cssearth@0.1.0 prepare:object-json /Users/ekrof/fed/cssEarth-pluto-small-moons
+> node tools/prepare-object-json.mjs
+
+{"id":"polymele","bytes":6332562,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c3f41aa20f1a101d187bc94db58982585a2130682b5453bc87717f6440390b72"}
+{"id":"leucus","bytes":6330285,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"63e3f2d1db1d8a2eaf4eb656741b92f484a75ebd6a2cddc016108074a4c8610e"}
+{"id":"orus","bytes":6328583,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c7c36313269f7bb242c1f12f7bacb0bd8bee5111e067dc1dd41a193c22ac2ce8"}
+{"id":"eurybates","bytes":6330692,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"76becc7178194d788c984e2dc052168b9aae0e7466116d25d742425f49d8c2fd"}
+{"id":"patroclus","bytes":6330077,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"aeab0f79351ffe26b0bd5004e253cdb8e347cd2060dca64a788b2f09db5eaa52"}
+{"id":"hiiaka","bytes":6319899,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c7b59849a5adc03640edc5b3c238ca83b7b268b7c8664a0d41d16fc7d4c65832"}
+{"id":"squannit","bytes":6902156,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"1bc41b345effebde4a7ce8744cac38ea55e39698fd98f91e177aed82c14274ed"}
+{"id":"romulus","bytes":6722547,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"14280425fc00ea2d9b2b93040177633c45f92fd24d2f56f2abb78eef2c64c869"}
+{"id":"menoetius","bytes":6718372,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"597dbd29fce91beb3145d6b422c5ab4fa7b9b9a22b9d76fb4d109f6bca80a925"}
+{"id":"caliban","bytes":6327688,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"23045483d7e43799eba2e1c034633cd140e8ecbadd8b89b6aa12017eedf12ca0"}
+{"id":"sycorax","bytes":6323897,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"9553a82122d788bf3cff44410cddd434ca63e95e0b66b54e7fe57e20a86de4bd"}
+{"id":"prospero","bytes":6326966,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b3da6500f074709d91cfabe517a347b34ff04743a0e5c76e816576b723c99bf0"}
+{"id":"setebos","bytes":6328118,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"46aecb2511f4cec8aac41e922d53795de937980bf9ded8cf7b65a6c114f26078"}
+{"id":"paaliaq","bytes":6330121,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e1593731ac639f00ae55e739c299ad5b57859ef34ef775cc63eaccf9749e4037"}
+{"id":"tarvos","bytes":6330114,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"050378f3f8d8723758e711aafcc626f1678aba760365228c60d16dab450f36e7"}
+{"id":"ijiraq","bytes":6330963,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"9d99496fe62e9d5cd17c5522a43a622fe919c4ca3860ab908de2dceea05dbbc3"}
+{"id":"suttungr","bytes":6333519,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b3420ae1a888383411200e175ee8a9d2d5701f201f76f5074d22bff02f142835"}
+{"id":"mundilfari","bytes":6333997,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e471d846dbb5e21ba10567d86d6935e4e308f713d9dd906d293a7a9338252cbd"}
+{"id":"skathi","bytes":6331824,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"58dfe4ef875e7be83ec4e79eb42c10eaa0e7866c0b9d9b98999bf6e03da5a245"}
+{"id":"erriapus","bytes":6332280,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"11ddcc3e9b8a3d0fc1f98ce08291328b47ee56d7810b8385edbfe662da110b2d"}
+{"id":"thrymr","bytes":6331621,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"097fd53fc2fd27d822c90fd003fb8f4c9b3e70396be8608c9e31481659510432"}
+{"id":"bebhionn","bytes":6333306,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"53df2e1f48566d070a8227926a3be908f2c1bc7d75cfed625eed4e68c9671b6c"}
+{"id":"bergelmir","bytes":6335388,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d7838a21d6a6414aecb9fa887bdb063d5ca0c5357346edb2ca2b61c3cbdd5d7b"}
+{"id":"bestla","bytes":6332694,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"81ccbf8a386e403b7809513096b010f8f462c4715a081411c30356dafc4a0058"}
+{"id":"fornjot","bytes":6333644,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6c881b301b3a68aa787ffda515f15bad7dd7c55ae3c44dc04e324d40b1fa6816"}
+{"id":"hati","bytes":6331803,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"99a2534f67b9528c7578bcbba94d7777d21942374e08012ff6e9a73a5643e642"}
+{"id":"hyrrokkin","bytes":6334423,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"41474c7dd0c5444a0f922636582f96a91863639b9f3a44bbef3df6e22a3be3cc"}
+{"id":"loge","bytes":6332601,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4ae57e1dd192cfe47eb5a2bb05dfc8856703938047470151823008907b484708"}
+{"id":"skoll","bytes":6333144,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a9b5a4d976302cdd83d28ece63f318388f5bf1878aacfbbcfc4bd677daa5201e"}
+{"id":"greip","bytes":6333081,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"055fe701b757633cd87f53b09309bb4542b68885274f90ae5e5616d92fc25714"}
+{"id":"tarqeq","bytes":6333780,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"dbb1ac37d4a19753c8f13e744b306fd8a803da9def6fee9d26e15f68499075d9"}
+{"id":"albiorix","bytes":6330288,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5f6955f71c7b05da0fa86ff520a04dae2d58dbb67a17644feebe700d1ef95ebd"}
+{"id":"kiviuq","bytes":6314427,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7c164efcd352b8aa9a8ee4208e0f3b841765465d8531b85ed759b8d324ec1d3e"}
+{"id":"comet-1p","bytes":6786860,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6f8b19759f40a9fd1972393d7f6730518ac22c3211e000a0382588d24ba5af5d"}
+{"id":"comet-81p","bytes":6783841,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6c2b12015c26ed184ca74e884762295475eefa6cc126473bdb3932cf910b9a02"}
+{"id":"comet-103p","bytes":6800939,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7842b6a611025e7f239d70dd0528b610045eaf805a40cd6b79bc1e2f04103fc9"}
+{"id":"comet-9p","bytes":6793957,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2a8cd5dac4c1cb18f17e543bab124e6396ceb93088798d51f394bfbe8f9fc1cf"}
+{"id":"comet-67p","bytes":6804406,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d249f5607b3736244677de0cff39362c51086243258f690bb46f2a7232d6c40f"}
+{"id":"ymir","bytes":6313391,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"dd6a1c1ed6040e1886776d3a98ed5389e38b0d3a014eb0748cc45c198d150a0c"}
+{"id":"siarnaq","bytes":6326413,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5cdf41c9c5c01b2cefb8d2279c4f584759fd29ea4c2387d8f9ae8419b27877c1"}
+{"id":"himalia","bytes":6321448,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8a91b6042626ff5ecc326f19cb683d6668acc1288ac63b548c57204f9ea29740"}
+{"id":"nereid","bytes":6320130,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"df8a27632d989e1af76fe7337435317b36bde71d7efa6fd39d40513f6d0857e0"}
+{"id":"aegaeon","bytes":6320195,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ca462279ffddb6455f5016e97f1225e08928f9d3c8bc0ca2e2542f10d9bcf41b"}
+{"id":"anthe","bytes":6332044,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"28cfdf06f33a1861e648a5f94fdeabea75c2eccda1a34272aa2a3d6ad0629d29"}
+{"id":"polydeuces","bytes":6333527,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8beb35b5341388b1c69511a6ee615bd565f05b3687d0534f2679c3b85a8599c0"}
+{"id":"rosalind","bytes":6321768,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c04e37015692f0aa580513a519ed0728d8650de4ee6273bb94454895cdfd563a"}
+{"id":"desdemona","bytes":6322668,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ae8698eb6ff416499077a0c63ea26a0969b7475d53e3247e2d95b1f8c3b3ebee"}
+{"id":"cressida","bytes":6322287,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"1a0134d629c3fde8a4a252b8ce1d0422138376dc4ee18935d44341054337f74c"}
+{"id":"bianca","bytes":6320933,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b11f9b07c3d2956443c233377af1fcb00b2b2a9e185e42e8d883bde7e6460b93"}
+{"id":"ophelia","bytes":6324695,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d7b7b356a2485e6f0124ef6595e1275cb7ea831971364043bde632575d4a5416"}
+{"id":"cordelia","bytes":6323645,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5c9191cf5654e85534238a202362327e34c5996913fb820232fa49dd53faceaf"}
+{"id":"belinda","bytes":6319524,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2bcbbb03b125c6c53feadbbb18633942923a71c1d1b1346ac734322b2f72fb1d"}
+{"id":"juliet","bytes":6323789,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"3d36342d02f1cbade33d0e71e2ed20109959bd8441f7527bbb09fd45e4eb7625"}
+{"id":"portia","bytes":6319513,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"65df044505daf8b6fcf06e325523be0d13a58deae309448fa9c02a2e984f6c8b"}
+{"id":"pallene","bytes":6329424,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"fc7a0f7947b961fda69a244d6ebe87e57035ba6bbff141e33fa29f5ec63963b3"}
+{"id":"methone","bytes":6330183,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"3ba9cc5439a6c325c683fd93aed18a5c7938ace08db20f77c69974901091610f"}
+{"id":"puck","bytes":6316658,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b052eca34f189aad5e8872c55224c88ff6579dd44fef43e2f5988ceb908e5f83"}
+{"id":"amalthea","bytes":6592338,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a870ecfc5073e7f48fa7f4d7947cdfa5c0664bb6062adaf4c61252919f3238f3"}
+{"id":"thebe","bytes":6518174,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d7d30a2064941df3e45119e6f5a7f0dddbce8f256ef7efdd4c4caaf0533305bc"}
+{"id":"metis","bytes":6316588,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"213dc9dfb0bf0a4916c6395dbde437d75b82ea9c6bf94dc6807d1199cbabad33"}
+{"id":"adrastea","bytes":6323456,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"00bd0e5237d64ee279de0fdd12ea87e2f607ca9429628abd5bd30b421e172e68"}
+{"id":"naiad","bytes":6323292,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8af1c71008f42e258e0dcb0c89ddd14f31c3e1668e738e3a5f532059129e66f4"}
+{"id":"thalassa","bytes":6322070,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"bb84bb83938d9f6169d99e59cd4b9d6c32206358dcfbf3461d0b4a7fa1255be5"}
+{"id":"despina","bytes":6321378,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8dccbbfd849857a4147498547fb54f5bb74ded4863f3ec9ee1be20b00954c89f"}
+{"id":"galatea","bytes":6321626,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b545e4ba386a5b7b5d86d4bef427420558e453751068c3ec34225b1920e7347e"}
+{"id":"proteus","bytes":6857565,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4d0223412f917fcb66ef495d5966f644621e1484865dc443de5657206575650c"}
+{"id":"larissa","bytes":6417402,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7c12b868a3f1e2b51b1ff88d69a34ca9bebc5be05b84651c9267584e4cb74e70"}
+{"id":"daphnis","bytes":6249454,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"1a7f36e8f283b70a3089f53d25da89a29bd511e0b0b7b60dd4fe60d928175baa"}
+{"id":"calypso","bytes":6425752,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c947740107d3f820aed57d2fa6bcbc5df1530cb216997926f919deac012a8d3f"}
+{"id":"telesto","bytes":6426096,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"df2a11fded3da412e01459f73dd5450a2b5b92f6c2b8fbf15eaf2a99f07cd4ee"}
+{"id":"helene","bytes":6601518,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"3b71a0ec723b4663b76120773f925fb3d2a1556cd0dca405af423985028eb930"}
+{"id":"sun","bytes":411875,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b6732e0a1b489f6632f58625f5b10ad5f795ae7cb30153e29748a83097e1a01a"}
+{"id":"mercury","bytes":6196704,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"96bcdc2063965e9109d464eb838e4f95ef50cd4ddb20c47e9d0366bf4595d67b"}
+{"id":"venus","bytes":5850686,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"799a39e0861b31406d3532bfeecb3b6b16c94a87fed4d827169f7f0a6b7b9b34"}
+{"id":"earth","bytes":874064,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"421d6fbee21ca004b4b420840e8df6886162f961497c74d013808cba03ee3666"}
+{"id":"moon","bytes":356226,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6ad1fef826b448deb2a86a9093224fcbe1dab283459944ad89cb3d8be852f0fe"}
+{"id":"mars","bytes":546235,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"3e38e7a58de2dcf32efe716e354ef1f01af4266c535f4e635c4f6dd44b2c72bb"}
+{"id":"ryugu","bytes":6618710,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"00143517bd019ce5303ecab9745a19c81ce470e4922732b7fb36acacd74f0935"}
+{"id":"bennu","bytes":6644057,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2fd95259ebdb63f61e7c7b0bcbbc4d1b271dd02879a8900c502dda1b7e3ac385"}
+{"id":"itokawa","bytes":6621509,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"422a6b083d79c4711f86815369ba1d4ddea3aa40377778e732bef5e8daafdd83"}
+{"id":"eros","bytes":6624876,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"0c4f69006ead15c747185228eedc61fdea49dd8f9cffe0bf35080d8e12cf6335"}
+{"id":"ida","bytes":6608695,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4d60efe24739c8edadc55b32d7a07f3d93f9d3456b146accffc123086b9cdbc6"}
+{"id":"gaspra","bytes":6632667,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"93e496a2dc6d1ec70e34efee923fca0bb25aeb38b45b76650666dbd2a85a7d71"}
+{"id":"mathilde","bytes":6611962,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"86dc4199e991ee4d46f08c3734448ad1e52eda232d37118fe27dde9954ad482d"}
+{"id":"lutetia","bytes":6631461,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"43e7711d036ababd69482597cb2cfbdba57fd2ae7729470a7b7c23245dfb29e6"}
+{"id":"steins","bytes":6617833,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"34d9a14e743d90e1d16b25b92339a06f4db93706b6ab226d93ccc37bdd59a2a9"}
+{"id":"didymos","bytes":6623608,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"dbe956b95959c12768186c9cba9c14dc0168cf208e5c5f99453b2877186e5fae"}
+{"id":"dimorphos","bytes":6901472,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"93aa1d306f869cd845413efd35df1cbbb7aabdc86c5ba6f1c939aba8bd806b00"}
+{"id":"kleopatra","bytes":6608143,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"862b5a287aa1e97cd62f3ccd95d386b66a5234632827e0660dd82e70d2f950d7"}
+{"id":"toutatis","bytes":6609722,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5e7fba5cad3f1b494c5108fcc93da35eae5528ce9c007b26f3c4983874e61bfb"}
+{"id":"pallas","bytes":6624004,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6e576df581e7d2d621be90f33e6dc869d41725c331c06a207417e52937b27443"}
+{"id":"hygiea","bytes":6633137,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"609147c776292524b3eb8c34fb347a52d62915d511720f497baecd055bc61418"}
+{"id":"juno","bytes":6609545,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ad20b1389a73a906d3f380bb7ca738332e9bd331309c20c4c8a96508745420a3"}
+{"id":"psyche","bytes":6622947,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e0ce52c7d1868b5d388581151d954ece01e2fb9d9ed1b1f296e0bea647b640e3"}
+{"id":"interamnia","bytes":6636895,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"70cff84ba980179164014fd51b6d278cd78758671872ec2649dd90c66b74b462"}
+{"id":"davida","bytes":6624686,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"90c844b4f3a598325917f5feb304fa27913638a3e610f4b7e5837d5451910a9c"}
+{"id":"sylvia","bytes":6624304,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"1d7fc36b2d82ef937b01936896a062a302bfa9a740eb8aa30d536338afdd90df"}
+{"id":"eunomia","bytes":6625850,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b2e158c6edd200e234f8c87b1f19090896d91d300e2847be0c3943248a9d7786"}
+{"id":"euphrosyne","bytes":6641264,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7e8004f07bafca372a1bf0c711e989dc4eac4e75da66a4f744e4c5a1ccd97b16"}
+{"id":"bamberga","bytes":6641219,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"9b7016e6b8f0a399973c304dac06ab908fb41e28f8f478ba4f6dbabb3c56223d"}
+{"id":"fortuna","bytes":6621175,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a5161c0689149c8560c3338379ac7993528726365557593cfe1086a5eca59931"}
+{"id":"themis","bytes":6635564,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"aba9877b30a8e322abf448128b1c85c650a42bed38823a2358b1348ad750619b"}
+{"id":"amphitrite","bytes":6634702,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"cc36502dd88e8342716a44261b75158290bedf8df29be3309231f092e5f53625"}
+{"id":"egeria","bytes":6602841,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8d32239518259f68586d04f98482407463084c036f0fa9c0b6096f3104637252"}
+{"id":"elektra","bytes":6625100,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"902774a508d00b8b5168b33c637ec7cbdf06d6f7179248a5d0015903ccdc8df8"}
+{"id":"iris","bytes":6601654,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"34d8b758f7d8930b895d9bca5cd45aeabbc8aa61788c4c08842965525b9e1eee"}
+{"id":"hebe","bytes":6616480,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e57d0bef9c39776766acefa5b8511bf092fe867a64f3a930b4130953e62b0a9e"}
+{"id":"eugenia","bytes":6624427,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4a0f0552b51c2f2c592209662cf5c2108dbdd4fc8044a7b3bd2fd94d5f8952d4"}
+{"id":"daphne","bytes":6619706,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"92887f80508dd4148185d574f0ad5002059b93c6cd8a4fafa8bbc754c964ba2b"}
+{"id":"eleonora","bytes":6626169,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b9f3b189e49bfc9ff28b7a76164e048f9337d2eec00277ccad589994aa5ba529"}
+{"id":"nemesis","bytes":6617431,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"170c0456dc43715faefc792de169acf768c762da1b57c4645a5cf48df2ea3193"}
+{"id":"kalliope","bytes":6607421,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"0faf24e1029a508b1879865e57535fcd46429538ea431bb17e43105c9eb41e5a"}
+{"id":"nemausa","bytes":6595078,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"73b51d79d5888e5f4a5a1d61e7e6fa89c1cf9915e6016b791f44d2b937cab7ed"}
+{"id":"parthenope","bytes":6625575,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"9910a3139ae04f3fdede47b3895622277a5e35b01ba371a29d23ca6cf336fa1a"}
+{"id":"melpomene","bytes":6626973,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f6f455a6baeba691b242f4e49f68afe1e8b3068e146f7b1620a7bf494e4f0a2e"}
+{"id":"julia","bytes":6615441,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d2c59b1bb09dde3c0d7b32df6e5a62d086b9dd175273b11c7d0914a9637743da"}
+{"id":"victoria","bytes":6619194,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6d9fdcf5e605bfef35b1d7b2b668270a338c689fabadcaee0c72b74f1f39de7d"}
+{"id":"urania","bytes":6620278,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"9f2b7c7c63009656501d6603a03acd7cab5e38526a28c7b18e5a8d8e215e9123"}
+{"id":"flora","bytes":6619714,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7d8ab5708686dbd5652cb8aa07e6728f36d4d273d50701dd96c603f5e60a6eca"}
+{"id":"europa-52","bytes":6652663,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"380ae22b43075f0cd507968671fd3ec818ac3a67386b543b0f2ff97b8e81f62b"}
+{"id":"metis-9","bytes":6616582,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e37f7858cf4854ba3d2331adb876e0d49d67a36b8506f5d9b578c953bba6779d"}
+{"id":"camilla","bytes":6628509,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"de556380ec62f31434889938cbf65e897e96f571c6d08e24ed414d5bd6a426e1"}
+{"id":"thisbe","bytes":6635509,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2724d3168b0817666015b07bdf95bee9f6394fa167d495d4a1b6e1494674f6b9"}
+{"id":"doris","bytes":6621542,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"63adcc69f5bc0246c092e3ab1f82111ca43d35288e86d6fc6127c45c06d85d61"}
+{"id":"hermione","bytes":6600844,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d88793c0e5f6cde9e39949ac41a9848be781282b9d30217fc8ad0a955f8e30d4"}
+{"id":"diotima","bytes":6626409,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"80b60c8a37dc1b2fba9a63bc8657ab87f9093878d03fbea275148f87c1629d92"}
+{"id":"herculina","bytes":6633643,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b959fa0204bacd807a5cc9b5fde94df4ea21306a35b06c8443c311b26ee5779f"}
+{"id":"nausikaa","bytes":6605632,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"dc1a9e81bf914ca79bdd2dbd4bdbc5ad8933c7277685daa67ef3a2ce5f907d71"}
+{"id":"astraea","bytes":6624114,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"0801ecafd4ee7a8603869dfde2fa635c2d8b1e804296db9d9be893ed97afed3a"}
+{"id":"irene","bytes":6622751,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7e02b3dc1b6a7c08d206d2ba128d201514176d0603a23c49742cf4aedbf98a73"}
+{"id":"nysa","bytes":6608945,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"42c999b8b63a834c9f0722b1961705c5fe6b10f7b672b1c589eaba065afd8d85"}
+{"id":"sappho","bytes":6620926,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"35676e2e49bdb5346bc0df028eae1508ae57d43ffa439bdd812a42bcbf971cbd"}
+{"id":"betulia","bytes":6629742,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a0ddd8d42042fc9b8b08c6a78f9bbb20b7dac015f66f0e981568bfd341e5a55e"}
+{"id":"castalia","bytes":6630125,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"48b503b30df3de4077fa9af9810faed169c5a8c68b0fcb9347e3622931be2f4c"}
+{"id":"asteroid-1998-wt24","bytes":6642548,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e3a96bd685b578f66fe63e9fbd75263244a0f84cea9548737975deab13817681"}
+{"id":"asteroid-1994-cc","bytes":6634982,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8b178897f4664e0eb8083af752142b2647fbc8a07d072f15000a428e43d4313d"}
+{"id":"fides","bytes":6602912,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5ca3ee7ea8778cdb9c3a567f735349d3bc5e99ab6fa36b9f00da9edfbef20c82"}
+{"id":"penelope","bytes":6604699,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"bd17f4b356aeaf6920b30d120cd591abbae7e2946fea33b2e09eb6e3272ef71f"}
+{"id":"alphonsina","bytes":6609996,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8ca15adeccdefd74d7f6e52c4152dd9c7e448e8668ef5558310a5fce9c6e0735"}
+{"id":"angelina","bytes":6605490,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7cf5acf1cab07f07bbd20720feb917ca3daf6b606a031922ffd8ddf7b3be8083"}
+{"id":"ganymed","bytes":6647103,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2a01dc8689d8bec76dd8cbe2c75df2ca516dbe67cca9ee2faa8f5dab70ee315a"}
+{"id":"moshup","bytes":6611970,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"772b33ce6212abda7163a19be05bf4da69682cbb224087e956b8086935625582"}
+{"id":"cybele","bytes":6633456,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ae70f8ea421a1f7a645dcc5d4961c4ee37fcabe41fcb566f15ae645c29eb8ffd"}
+{"id":"aurora","bytes":6623924,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d5a48e06317a07e8cb42c417313e8322c8c4c1e99e081737265400886b87915d"}
+{"id":"palma","bytes":6604081,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6b554141c78ff76b9a3120d24752b4eb6e2c67fcedf3e42e78f9ebe2b07abc34"}
+{"id":"thule","bytes":6601962,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"bfe1c678c18e0b311a46d01c29c5a9c456151abf786f6f26eeda8fac2672c53f"}
+{"id":"hektor","bytes":6603621,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7061e2234cb222a9bc544ca30d1348d4555a9d4ec96f90acdf992a5f15a0934e"}
+{"id":"hekate","bytes":6605483,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a9adc5e1d949f403bff929c433af37d63107b931d6aedba5feab6723b2d56691"}
+{"id":"phaethon","bytes":6612437,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"cdc025d93bbcb04b8a9a57c146db8ee30e9d824ffbd97e38491628cb610dd04d"}
+{"id":"harmonia","bytes":6628989,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f2c580e80bb6e11023f35a9bf2a5b37c540e07b22fbf71774dec3e62e665222a"}
+{"id":"panopaea","bytes":6592959,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4f0acaf864a9ba81a71b5f8e7d59d36fcbde68af62efc77203556d33f9d52090"}
+{"id":"desdemona-666","bytes":6615412,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2bffa177fd282d8b93e14252b2262bfed7c5f36ad4f035f064a601938014580e"}
+{"id":"asteroid-1950-da","bytes":6644111,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"60865c2a7b6fe049fc4ce5eab89ae15366da5596a4127bd872a9dbcdc3805261"}
+{"id":"apophis","bytes":6622294,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"cc76134a6a8e8a30566a5c044b8b6417877cd31357e87b00bf2c72d5663aefa2"}
+{"id":"donaldjohanson","bytes":6621808,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"eb5417be360eea99a62d03c4f16ba80bb0e2bade7e8fc4a4fb235853a6b31e80"}
+{"id":"geographos","bytes":6620709,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4dbe0745e3e4158ec9589f80212f445299fd2b703b77e2a733623a096a79ae20"}
+{"id":"bacchus","bytes":6360950,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6d43c27e0d17c43fe7ad0f0ef2677f1874491aeec71c59ad7b1bf1cfe47236f7"}
+{"id":"mithra","bytes":6621141,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c958a8aa2f1c9d7fb45ed71ce348851ded527742347b217b27c47b7104fe50f4"}
+{"id":"nereus","bytes":6630035,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2131636db23641d02653e83d67300e70f2b852e34ebb749a1a0deda3814c3fae"}
+{"id":"golevka","bytes":6614669,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7b2df62326d6d0127189d6d96f555553e3b807d9f1f8381736780b1674613149"}
+{"id":"yorp","bytes":6417684,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"045328a516acf9a730a9ad540d4db870dc6d26ce99143c5d816f8596d9a557b1"}
+{"id":"asteroid-1996-hw1","bytes":6637400,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4120c3d3349524af36034491bdf4fa8f0e137a119270bedb48fb966fd46604a6"}
+{"id":"asteroid-2008-ev5","bytes":6608058,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"9777952279659e88834a4378f18826247fb661062528ef3bdb56be1c528a2113"}
+{"id":"ra-shalom","bytes":6581915,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ba452482b27289ab13f655d3967e2b15cbc0a491421349fa7423107b8d9f0022"}
+{"id":"asteroid-1992-sk","bytes":6598863,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"6e341510aa9155a13e7a5e9d1803d9403411843f637d8d47bd84ccedf2034e67"}
+{"id":"asteroid-1998-ml14","bytes":6596027,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"adbf66fbe28ade69860e34bc4168fcbaf1c5ed09cc3ff88c3e834128bfd12409"}
+{"id":"asteroid-2002-ce26","bytes":6644742,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b9d7b4fb4c05ef24a82c61c271ee64b4a5d28c0bec9903147a9b61911605473e"}
+{"id":"dike","bytes":6605731,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"3c9fac63264e0f54f5cf67d4e98b75da40736c95744499bff64ebb672923f3bc"}
+{"id":"massalia","bytes":6606874,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e9807f86159f8a0e31b05d0c6d83dc80ab3883464e2ceb30e0091f30491121e6"}
+{"id":"proserpina","bytes":6610653,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2659b2ac057f61bc08b1e15cbcce95d93793da9068b786ce199ec379a50fdc43"}
+{"id":"polyhymnia","bytes":6611462,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4acfdc89ecf7fcf1188cf3ef01a926527accd619f49811828bb12b4e2df8bafd"}
+{"id":"leukothea","bytes":6610070,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f043d93fa67cb86b174ca58afcb5310330d57d6e2e430bd36bc180fc25c8566d"}
+{"id":"virginia","bytes":6609546,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ee5f1fb440d90cc2b6b875e59bf0637f7465412e2c53f9d474d284c2160cc000"}
+{"id":"echo","bytes":6605996,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8a713524c064c1ab7e51ba9868a1c5597445baf14a35512ca7d04504f764e9db"}
+{"id":"maja","bytes":6606430,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ed8567f95efe7445bbbc5b57864674d84df7a3f9a65a4c48830e20a55cbaea21"}
+{"id":"juewa","bytes":6605746,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c0cc89ca9ed3d47b216696f40d7bf9003d34625297ae71268f97a5dc1497ae5b"}
+{"id":"bertha","bytes":6606574,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f789251b0251f9731680e442069b75e895f1c3a42f0f708d51ab5c64077eb7a3"}
+{"id":"lucia","bytes":6606459,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7afc9117d1058d58c2f19eb5046009cda91a3e6cfa3b772791d8f182042ab18f"}
+{"id":"brucia","bytes":6609457,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8e9608e4a383fabe40ab059c83c1ddaab010345c23d1f681cfc3b2d5c9b6c8fd"}
+{"id":"badenia","bytes":6607976,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"adbf5891d941d9cd3f792a61fbd04b049e1650a006fc1f4a8e46ffb36f86ebd8"}
+{"id":"ducrosa","bytes":6610502,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a9402bb96fead0a25ea19bba2ae5bc4a24a5e7b8109417cb811fa99babb4a6cc"}
+{"id":"gyptis","bytes":6607109,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"358a4a80fa296fd1372a4c1379a3ec07cb6be8398e03115332db7d27e10e26c4"}
+{"id":"petrina","bytes":6610180,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b37637931416bd4cc007357612cc008d6e3b4aa19d41b53e3b0a4cbb1633257b"}
+{"id":"veritas","bytes":6607626,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a0bcd70827ef5aed4455cb0029cb0864316e31aeb3037bd907109b5a1cd2966a"}
+{"id":"gryphia","bytes":6612929,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8453ec63c7f369c27da75afad3f6b3b3ccbfbb73641d6cf0aaa4f3b4c9ce9aa8"}
+{"id":"selinur","bytes":6610363,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ffe67a219e032fb9ff24129d88973394af842bfef0b3ebc09323de8abc9f3168"}
+{"id":"achilles","bytes":6609904,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"098e5af090fe5b533e8aa9d0844f55f40d951aef1f356cc974890136327cf877"}
+{"id":"musa","bytes":6608105,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"fb6e7c021e1ff41f19744ffe16dbaed4c460e61eec5b0b9adba7e5fec568bba2"}
+{"id":"auravictrix","bytes":6614987,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d5ccf6983c09b7fd0f0c7dae2bace2f59e1527864f5fe9f8380a1c954c0467f4"}
+{"id":"transvaalia","bytes":6615421,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e7015cd2396820f403eb2baf2d0b5ffbf91f1e1c2f4ff0aaf5185c786bb40c64"}
+{"id":"moskva","bytes":6610754,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c462a8a216af0151b5897ae822c075e2d2fd378f927e857068661ef4c3786380"}
+{"id":"kressmannia","bytes":6614968,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f72bab3311b0bedf7051c3f5b3e967eec62c722c078b8c5a69f01be6ec6a6a3b"}
+{"id":"parysatis","bytes":6611623,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5ac100c82d39fbac23a2bfa1cafce8af945bd6a6d39631bfb553ba93eb81ce38"}
+{"id":"rosalinde","bytes":6612921,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"0205c83d8557810d9514fdf10078d1aa4f6a3e7b9f836bbad6cc19fe772d8bf9"}
+{"id":"susi","bytes":6607765,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"423026a62cacaded2602d0b0ac7e5768ac0bfafa36cc8f47b01469e9f52c2824"}
+{"id":"hidalgo","bytes":6611620,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"2087321e51201a6132a96630db61bb17b0243d682df3331232b38d7ef39a47f8"}
+{"id":"zachia","bytes":6612520,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"c083c6895a360af80963f9b8cf9b295b31cdb1aa802d0a18273c0c080d28d362"}
+{"id":"piazzia","bytes":6609914,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"fe8b8ada4ff77de5ff0ad983f75c43bbff69d3a1adcb572f16771131f3f98765"}
+{"id":"tulipa","bytes":6610462,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"280ae920dc56569ea4dced6fa8ec2206e11e578deb6e6551d03cffcab1acb393"}
+{"id":"reinmuthia","bytes":6614379,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"309c7cdd31edc5d45ca048b56320dad61564233784a79f2c9b45719b87610864"}
+{"id":"china","bytes":6608792,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f0d73c92b70940fa5cc1254aa6cc06974c6c33256bfe3161d0fd7b1b4cc46edc"}
+{"id":"crimea","bytes":6609539,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f27419c936be68289b61e451f5e34226c7c9b4cd34b5737411101d5153a44e16"}
+{"id":"rusthawelia","bytes":6612860,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"13dbbcdc51e17f5660e26a137deedabe571e65b2a2eed8deb9169f3f2a247324"}
+{"id":"schorria","bytes":6616668,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b11449a5ce524980c404a342a6c080c24c7e02f4e44c3dae1fa65ed5089bec89"}
+{"id":"silvretta","bytes":6612491,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"83e5ef61c0f7b604a3c0e26eae4e0f88022f2abe2db15f92668e7260a04e781c"}
+{"id":"virtanen","bytes":6616275,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5c9458f4757478803f9b3c944343a624bd743a20d8c08e63a7221c5e59f69b2b"}
+{"id":"mr-spock","bytes":6612161,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"82b9b10ec8349fb1daa5e86590c5c1e29aecbf8e96b0bdfaeb7c7fe8f897a464"}
+{"id":"educatio","bytes":6615169,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5a89407d2d9b0c80a5bcf7b8c56fbc0eef48047b797dbd0cb8659d5ec00784c5"}
+{"id":"hopi","bytes":6609851,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"61c0207cb7eb9efc9e96cd24d82c90f27e81b227eeaf02fdbcdde0e744671f05"}
+{"id":"schaber","bytes":6612907,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"3de995060faad362e32d8291403eaac4798b079ab6bea1f0892ac2ef4c193598"}
+{"id":"iau","bytes":6612012,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"60261d71be9275ac2fc691a1c36fa6f4899825b5a476e165d879b6c57a51c51f"}
+{"id":"united-nations","bytes":6619950,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b351b101480196448313cbbb63eadbe87653c302ff0e950ac07079fe02ea01f8"}
+{"id":"tartaglia","bytes":6615804,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5fde6107f6d4a06a8c873df011d195831cd70728350ca51ada84972133ba0ddd"}
+{"id":"raup","bytes":6613162,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"0f407ebbee9144b3fc7022a3b427dc9d815b4fad720c5d9bc2e592e26e5dda42"}
+{"id":"asteroid-2001-qw16","bytes":6624268,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"0812228cb7521e80f2b762509df24f7c45eb82a1d5b52c28d082809990258647"}
+{"id":"asteroid-1999-fr33","bytes":6624277,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"ccc3ad9c50be1e7764eb3302bca023bb62e23d9d0ee0d74869d6e862eaa47e32"}
+{"id":"vesta","bytes":6621942,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"47c83260531c8ed979193cbf63278e05c87b674816ea4cecf5ce6e7bfb1bf3ca"}
+{"id":"phobos","bytes":7105707,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f4142ff15289de3217e425df8b046b57fd23b9ec675a5aa0cb3600605116a92e"}
+{"id":"deimos","bytes":7108961,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"3839eee6f3f8a9b25492c0c098f297e177f15ef6c933c052506521d6603286c2"}
+{"id":"ceres","bytes":5858032,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7d805bf36897edc7eb3e479b407655b3ada0d223ace104922a2050bd5a381d47"}
+{"id":"jupiter","bytes":605950,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"fe827ac285f27e58b75715670865afe7971a68be3f27c29686879195463acde9"}
+{"id":"io","bytes":6311155,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"9a140ea0f48d575a0effa6025e88f3849cebea712df26f0cb695f3b5bfe43e9f"}
+{"id":"europa","bytes":6317924,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f62cec28cbc39f8a3025402efef0aaeefe4eb225a85e97c9c2f014d6fe9a776f"}
+{"id":"ganymede","bytes":6319830,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"1f6265f9599e91ac49b08ca4d5fd13a68d7fdb794a8889a2b6f7f49b5d980d7d"}
+{"id":"callisto","bytes":6307080,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"33bd1a332833f068b6e9ec226580ce0ec5d8043b118a2df8a24c1db4845b34e4"}
+{"id":"saturn","bytes":1736014,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"3ac5b5a9a2e0a530ce0f89dcdfb85a6e5cccbc560d1341de9605fe5406c7bcc3"}
+{"id":"pan","bytes":6594760,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4eae5b55280e74c94d8bf9493bb77516df9b6c81595ca69c83c7ee3d4174bde2"}
+{"id":"atlas","bytes":6598626,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f7e3b5c17622d5ca2114a30495f1b3a6bcbb158cb79ab3199a4d2f41ec35a6c5"}
+{"id":"prometheus","bytes":6531147,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4a7f9630a6557d92967a2a85d5c94c11b663adfa0cc9cea21308a6fd9448d6d2"}
+{"id":"pandora","bytes":6456488,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"e9cd0f4d7c25858316399e5766811686476fb817402f952f037008593fa0335b"}
+{"id":"janus","bytes":6526619,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"675b82f1d24e937ec72f932f46ff5283b3b23ad6ad4a6a6b27112c8029434eb5"}
+{"id":"epimetheus","bytes":6531507,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"5eb8d8f4547970365633a0712e811e5ce4131aaedde285c98f28e0ebc1440b44"}
+{"id":"hyperion","bytes":6957532,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b3f606f8b718141619238fec78384ac8a5b4f7a930a705eff9ac4703b93b038e"}
+{"id":"mimas","bytes":6562462,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"0c2ca31fd45dc3a9fbe5e889a90c9d5ab51e805efd3ea572283041ccbaea645d"}
+{"id":"enceladus","bytes":7407647,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"fc5403d4ecbba5563e52771d9e5549c5d4eeecc38d7068e84aee57db519ed7eb"}
+{"id":"tethys","bytes":7405969,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"113eda79c8c5a45a7eb0007bc71aa093b685eda522ea1bb8cf12b78abe08dd1e"}
+{"id":"dione","bytes":7401567,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"7aca1d7f27b7e0a34f212705183179e216aff383100421d63bd0cc59ab909459"}
+{"id":"rhea","bytes":7402201,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"39b47f3b2e2ae361d104e2b588edab47b98a2254d16bf317d58967f3386195b5"}
+{"id":"titan","bytes":6324242,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"96564ae40d1a56fceef4b754b8d307edbce719099e0f22670523178507d05791"}
+{"id":"iapetus","bytes":6315905,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f28ed3ebec49d1d5e79436647120d4a5234d0619ec83c1f3151266867340ec55"}
+{"id":"phoebe","bytes":7052844,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"4b336c3d22e739b886e66a6467fbab2a4087d6e6c74415970241e5fda1835953"}
+{"id":"uranus","bytes":1007229,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f1889363f78c61249a9cd2297c2c18acc9b802dfe454c9d0028536964c1d89ae"}
+{"id":"miranda","bytes":6329976,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"98fd0409765c687a1ae9aba6b62354f1ec6ed86aa9f1e5e5aa63ffef93a0eef9"}
+{"id":"ariel","bytes":6333057,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"eefa775beee63c115431b76959d7a9763a524eb071c11827d1b54614b4438a91"}
+{"id":"umbriel","bytes":6331745,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d5b4f616eb2943cba04ed06c84f0ed0891ce3e74229ed7f9c7607ae5cb76aa78"}
+{"id":"titania","bytes":6327553,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a9d64f00a2bcf63536d402c7ccdbfda73427097c3943e5225256da6d10774855"}
+{"id":"oberon","bytes":6329508,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"8b2326da8a3d1a97c10e4b21ca5d6296dd088f83ce75408608bf2a567bef5588"}
+{"id":"neptune","bytes":711573,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d64fadc18aa17cd7c8029f47abc4f2d9a5401f87233d0f6cfd020de536cd4125"}
+{"id":"triton","bytes":6320762,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"660376e8d163ffd5d55321bd6567b6e712b3af43d708d119efba1116132ed41f"}
+{"id":"pluto","bytes":361019,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"63e49bc24aaf32dd13c6c0271aa596a6dfa63cad512c96aff4756d09b5d45031"}
+{"id":"charon","bytes":6330789,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"73176f58e633859e4b51d0daba54df6c856877923f553146087452d233c98ab2"}
+{"id":"styx","bytes":6329501,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"b44a9f3fe1d965c18c86b85975a097bfb69f7822e15779ae5eeced2f1f08cf8b"}
+{"id":"nix","bytes":6593275,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"fc07bf807f6450d04d52199ffe0365c16dbbd7d1f73276f0e0a296479c6962cf"}
+{"id":"kerberos","bytes":6328742,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"d558d35ccccc094c0a43ff65413a1c93abe5dc6b44cea178973d0965a183e53b"}
+{"id":"hydra","bytes":6595707,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"a621fc0f928cf71c536534221d11093f2b3a24b21876bf7851b8aa242e184994"}
+{"id":"haumea","bytes":6762179,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"02d33f2487de5eb8e2fe45d1a3b696a64f743b24a73fa1bd8429093eed8f7a32"}
+{"id":"makemake","bytes":5847157,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"116fdaba98df9520b04e4c6bdf94f8ec0c0816874da31a473c0746d34d9152c1"}
+{"id":"eris","bytes":5840647,"format":"cssearth-css-object@4","url":"prepared/object.json","sha256":"f2b4645844d5c1914c6f78842613ac3c948390af4d64bb32c27ee0a25b483041"}
+
+> cssearth@0.1.0 prepare:minimap /Users/ekrof/fed/cssEarth-pluto-small-moons
+> node site/minimap/prepare.mjs
+
+Prepared minimap: 258 bodies, 2048 catalog stars, galaxy density projection.
+
+> cssearth@0.1.0 prepare:provenance /Users/ekrof/fed/cssEarth-pluto-small-moons
+> node tools/prepare-provenance.mjs
+
+{"id":"polymele","products":3,"sources":3,"unresolved":[]}
+{"id":"leucus","products":3,"sources":3,"unresolved":[]}
+{"id":"orus","products":3,"sources":3,"unresolved":[]}
+{"id":"eurybates","products":3,"sources":3,"unresolved":[]}
+{"id":"patroclus","products":3,"sources":3,"unresolved":[]}
+{"id":"hiiaka","products":3,"sources":3,"unresolved":[]}
+{"id":"squannit","products":3,"sources":3,"unresolved":[]}
+{"id":"romulus","products":3,"sources":3,"unresolved":[]}
+{"id":"menoetius","products":3,"sources":3,"unresolved":[]}
+{"id":"caliban","products":3,"sources":3,"unresolved":[]}
+{"id":"sycorax","products":3,"sources":3,"unresolved":[]}
+{"id":"prospero","products":3,"sources":3,"unresolved":[]}
+{"id":"setebos","products":3,"sources":3,"unresolved":[]}
+{"id":"paaliaq","products":3,"sources":3,"unresolved":[]}
+{"id":"tarvos","products":3,"sources":3,"unresolved":[]}
+{"id":"ijiraq","products":3,"sources":3,"unresolved":[]}
+{"id":"suttungr","products":3,"sources":3,"unresolved":[]}
+{"id":"mundilfari","products":3,"sources":3,"unresolved":[]}
+{"id":"skathi","products":3,"sources":3,"unresolved":[]}
+{"id":"erriapus","products":3,"sources":3,"unresolved":[]}
+{"id":"thrymr","products":3,"sources":3,"unresolved":[]}
+{"id":"bebhionn","products":3,"sources":3,"unresolved":[]}
+{"id":"bergelmir","products":3,"sources":3,"unresolved":[]}
+{"id":"bestla","products":3,"sources":3,"unresolved":[]}
+{"id":"fornjot","products":3,"sources":3,"unresolved":[]}
+{"id":"hati","products":3,"sources":3,"unresolved":[]}
+{"id":"hyrrokkin","products":3,"sources":3,"unresolved":[]}
+{"id":"loge","products":3,"sources":3,"unresolved":[]}
+{"id":"skoll","products":3,"sources":3,"unresolved":[]}
+{"id":"greip","products":3,"sources":3,"unresolved":[]}
+{"id":"tarqeq","products":3,"sources":3,"unresolved":[]}
+{"id":"albiorix","products":3,"sources":3,"unresolved":[]}
+{"id":"kiviuq","products":3,"sources":3,"unresolved":[]}
+{"id":"comet-1p","products":2,"sources":3,"unresolved":[]}
+{"id":"comet-81p","products":4,"sources":12,"unresolved":[]}
+{"id":"comet-103p","products":8,"sources":19,"unresolved":[]}
+{"id":"comet-9p","products":8,"sources":22,"unresolved":[]}
+{"id":"comet-67p","products":12,"sources":24,"unresolved":[]}
+{"id":"ymir","products":3,"sources":3,"unresolved":[]}
+{"id":"siarnaq","products":3,"sources":3,"unresolved":[]}
+{"id":"himalia","products":3,"sources":3,"unresolved":[]}
+{"id":"nereid","products":3,"sources":3,"unresolved":[]}
+{"id":"aegaeon","products":3,"sources":3,"unresolved":[]}
+{"id":"anthe","products":3,"sources":3,"unresolved":[]}
+{"id":"polydeuces","products":3,"sources":4,"unresolved":[]}
+{"id":"rosalind","products":3,"sources":3,"unresolved":[]}
+{"id":"desdemona","products":3,"sources":3,"unresolved":[]}
+{"id":"cressida","products":3,"sources":3,"unresolved":[]}
+{"id":"bianca","products":3,"sources":3,"unresolved":[]}
+{"id":"ophelia","products":3,"sources":3,"unresolved":[]}
+{"id":"cordelia","products":3,"sources":3,"unresolved":[]}
+{"id":"belinda","products":3,"sources":3,"unresolved":[]}
+{"id":"juliet","products":3,"sources":3,"unresolved":[]}
+{"id":"portia","products":3,"sources":3,"unresolved":[]}
+{"id":"pallene","products":3,"sources":4,"unresolved":[]}
+{"id":"methone","products":3,"sources":4,"unresolved":[]}
+{"id":"puck","products":3,"sources":4,"unresolved":[]}
+{"id":"amalthea","products":5,"sources":12,"unresolved":[]}
+{"id":"thebe","products":5,"sources":12,"unresolved":[]}
+{"id":"metis","products":3,"sources":12,"unresolved":[]}
+{"id":"adrastea","products":3,"sources":3,"unresolved":[]}
+{"id":"naiad","products":3,"sources":3,"unresolved":[]}
+{"id":"thalassa","products":3,"sources":3,"unresolved":[]}
+{"id":"despina","products":3,"sources":3,"unresolved":[]}
+{"id":"galatea","products":3,"sources":3,"unresolved":[]}
+{"id":"proteus","products":5,"sources":6,"unresolved":[]}
+{"id":"larissa","products":5,"sources":4,"unresolved":[]}
+{"id":"daphnis","products":5,"sources":8,"unresolved":[]}
+{"id":"calypso","products":5,"sources":10,"unresolved":[]}
+{"id":"telesto","products":5,"sources":12,"unresolved":[]}
+{"id":"helene","products":5,"sources":16,"unresolved":[]}
+{"id":"sun","products":9,"sources":33,"unresolved":[]}
+{"id":"mercury","products":12,"sources":7,"unresolved":[]}
+{"id":"venus","products":11,"sources":7,"unresolved":[]}
+{"id":"earth","products":11,"sources":8,"unresolved":[]}
+{"id":"moon","products":9,"sources":5,"unresolved":[]}
+{"id":"mars","products":10,"sources":8,"unresolved":[]}
+{"id":"ryugu","products":7,"sources":4,"unresolved":[]}
+{"id":"bennu","products":9,"sources":5,"unresolved":[]}
+{"id":"itokawa","products":5,"sources":12,"unresolved":[]}
+{"id":"eros","products":7,"sources":4,"unresolved":[]}
+{"id":"ida","products":7,"sources":12,"unresolved":[]}
+{"id":"gaspra","products":7,"sources":12,"unresolved":[]}
+{"id":"mathilde","products":5,"sources":4,"unresolved":[]}
+{"id":"lutetia","products":7,"sources":4,"unresolved":[]}
+{"id":"steins","products":7,"sources":5,"unresolved":[]}
+{"id":"didymos","products":7,"sources":4,"unresolved":[]}
+{"id":"dimorphos","products":9,"sources":6,"unresolved":[]}
+{"id":"kleopatra","products":3,"sources":2,"unresolved":[]}
+{"id":"toutatis","products":3,"sources":2,"unresolved":[]}
+{"id":"pallas","products":5,"sources":2,"unresolved":[]}
+{"id":"hygiea","products":5,"sources":2,"unresolved":[]}
+{"id":"juno","products":5,"sources":2,"unresolved":[]}
+{"id":"psyche","products":5,"sources":2,"unresolved":[]}
+{"id":"interamnia","products":5,"sources":2,"unresolved":[]}
+{"id":"davida","products":5,"sources":2,"unresolved":[]}
+{"id":"sylvia","products":5,"sources":2,"unresolved":[]}
+{"id":"eunomia","products":5,"sources":2,"unresolved":[]}
+{"id":"euphrosyne","products":5,"sources":2,"unresolved":[]}
+{"id":"bamberga","products":5,"sources":2,"unresolved":[]}
+{"id":"fortuna","products":5,"sources":2,"unresolved":[]}
+{"id":"themis","products":5,"sources":2,"unresolved":[]}
+{"id":"amphitrite","products":5,"sources":2,"unresolved":[]}
+{"id":"egeria","products":5,"sources":2,"unresolved":[]}
+{"id":"elektra","products":5,"sources":2,"unresolved":[]}
+{"id":"iris","products":5,"sources":2,"unresolved":[]}
+{"id":"hebe","products":5,"sources":2,"unresolved":[]}
+{"id":"eugenia","products":5,"sources":2,"unresolved":[]}
+{"id":"daphne","products":5,"sources":2,"unresolved":[]}
+{"id":"eleonora","products":5,"sources":2,"unresolved":[]}
+{"id":"nemesis","products":5,"sources":2,"unresolved":[]}
+{"id":"kalliope","products":5,"sources":2,"unresolved":[]}
+{"id":"nemausa","products":5,"sources":2,"unresolved":[]}
+{"id":"parthenope","products":5,"sources":2,"unresolved":[]}
+{"id":"melpomene","products":5,"sources":2,"unresolved":[]}
+{"id":"julia","products":5,"sources":2,"unresolved":[]}
+{"id":"victoria","products":5,"sources":2,"unresolved":[]}
+{"id":"urania","products":5,"sources":2,"unresolved":[]}
+{"id":"flora","products":5,"sources":2,"unresolved":[]}
+{"id":"europa-52","products":5,"sources":2,"unresolved":[]}
+{"id":"metis-9","products":5,"sources":2,"unresolved":[]}
+{"id":"camilla","products":5,"sources":2,"unresolved":[]}
+{"id":"thisbe","products":5,"sources":2,"unresolved":[]}
+{"id":"doris","products":5,"sources":2,"unresolved":[]}
+{"id":"hermione","products":5,"sources":2,"unresolved":[]}
+{"id":"diotima","products":5,"sources":2,"unresolved":[]}
+{"id":"herculina","products":5,"sources":2,"unresolved":[]}
+{"id":"nausikaa","products":5,"sources":2,"unresolved":[]}
+{"id":"astraea","products":5,"sources":2,"unresolved":[]}
+{"id":"irene","products":5,"sources":2,"unresolved":[]}
+{"id":"nysa","products":5,"sources":2,"unresolved":[]}
+{"id":"sappho","products":5,"sources":2,"unresolved":[]}
+{"id":"betulia","products":5,"sources":2,"unresolved":[]}
+{"id":"castalia","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-1998-wt24","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-1994-cc","products":5,"sources":2,"unresolved":[]}
+{"id":"fides","products":5,"sources":2,"unresolved":[]}
+{"id":"penelope","products":5,"sources":2,"unresolved":[]}
+{"id":"alphonsina","products":5,"sources":2,"unresolved":[]}
+{"id":"angelina","products":5,"sources":2,"unresolved":[]}
+{"id":"ganymed","products":5,"sources":2,"unresolved":[]}
+{"id":"moshup","products":5,"sources":2,"unresolved":[]}
+{"id":"cybele","products":5,"sources":2,"unresolved":[]}
+{"id":"aurora","products":5,"sources":2,"unresolved":[]}
+{"id":"palma","products":5,"sources":2,"unresolved":[]}
+{"id":"thule","products":5,"sources":2,"unresolved":[]}
+{"id":"hektor","products":5,"sources":2,"unresolved":[]}
+{"id":"hekate","products":5,"sources":2,"unresolved":[]}
+{"id":"phaethon","products":5,"sources":2,"unresolved":[]}
+{"id":"harmonia","products":5,"sources":2,"unresolved":[]}
+{"id":"panopaea","products":5,"sources":2,"unresolved":[]}
+{"id":"desdemona-666","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-1950-da","products":5,"sources":2,"unresolved":[]}
+{"id":"apophis","products":5,"sources":2,"unresolved":[]}
+{"id":"donaldjohanson","products":5,"sources":4,"unresolved":[]}
+{"id":"geographos","products":5,"sources":2,"unresolved":[]}
+{"id":"bacchus","products":5,"sources":2,"unresolved":[]}
+{"id":"mithra","products":5,"sources":2,"unresolved":[]}
+{"id":"nereus","products":5,"sources":2,"unresolved":[]}
+{"id":"golevka","products":5,"sources":2,"unresolved":[]}
+{"id":"yorp","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-1996-hw1","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-2008-ev5","products":5,"sources":2,"unresolved":[]}
+{"id":"ra-shalom","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-1992-sk","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-1998-ml14","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-2002-ce26","products":5,"sources":2,"unresolved":[]}
+{"id":"dike","products":5,"sources":2,"unresolved":[]}
+{"id":"massalia","products":5,"sources":2,"unresolved":[]}
+{"id":"proserpina","products":5,"sources":2,"unresolved":[]}
+{"id":"polyhymnia","products":5,"sources":2,"unresolved":[]}
+{"id":"leukothea","products":5,"sources":2,"unresolved":[]}
+{"id":"virginia","products":5,"sources":2,"unresolved":[]}
+{"id":"echo","products":5,"sources":2,"unresolved":[]}
+{"id":"maja","products":5,"sources":2,"unresolved":[]}
+{"id":"juewa","products":5,"sources":2,"unresolved":[]}
+{"id":"bertha","products":5,"sources":2,"unresolved":[]}
+{"id":"lucia","products":5,"sources":2,"unresolved":[]}
+{"id":"brucia","products":5,"sources":2,"unresolved":[]}
+{"id":"badenia","products":5,"sources":2,"unresolved":[]}
+{"id":"ducrosa","products":5,"sources":2,"unresolved":[]}
+{"id":"gyptis","products":5,"sources":2,"unresolved":[]}
+{"id":"petrina","products":5,"sources":2,"unresolved":[]}
+{"id":"veritas","products":5,"sources":2,"unresolved":[]}
+{"id":"gryphia","products":5,"sources":2,"unresolved":[]}
+{"id":"selinur","products":5,"sources":2,"unresolved":[]}
+{"id":"achilles","products":5,"sources":2,"unresolved":[]}
+{"id":"musa","products":5,"sources":2,"unresolved":[]}
+{"id":"auravictrix","products":5,"sources":2,"unresolved":[]}
+{"id":"transvaalia","products":5,"sources":2,"unresolved":[]}
+{"id":"moskva","products":5,"sources":2,"unresolved":[]}
+{"id":"kressmannia","products":5,"sources":2,"unresolved":[]}
+{"id":"parysatis","products":5,"sources":2,"unresolved":[]}
+{"id":"rosalinde","products":5,"sources":2,"unresolved":[]}
+{"id":"susi","products":5,"sources":2,"unresolved":[]}
+{"id":"hidalgo","products":5,"sources":2,"unresolved":[]}
+{"id":"zachia","products":5,"sources":2,"unresolved":[]}
+{"id":"piazzia","products":5,"sources":2,"unresolved":[]}
+{"id":"tulipa","products":5,"sources":2,"unresolved":[]}
+{"id":"reinmuthia","products":5,"sources":2,"unresolved":[]}
+{"id":"china","products":5,"sources":2,"unresolved":[]}
+{"id":"crimea","products":5,"sources":2,"unresolved":[]}
+{"id":"rusthawelia","products":5,"sources":2,"unresolved":[]}
+{"id":"schorria","products":5,"sources":2,"unresolved":[]}
+{"id":"silvretta","products":5,"sources":2,"unresolved":[]}
+{"id":"virtanen","products":5,"sources":2,"unresolved":[]}
+{"id":"mr-spock","products":5,"sources":2,"unresolved":[]}
+{"id":"educatio","products":5,"sources":2,"unresolved":[]}
+{"id":"hopi","products":5,"sources":2,"unresolved":[]}
+{"id":"schaber","products":5,"sources":2,"unresolved":[]}
+{"id":"iau","products":5,"sources":2,"unresolved":[]}
+{"id":"united-nations","products":5,"sources":2,"unresolved":[]}
+{"id":"tartaglia","products":5,"sources":2,"unresolved":[]}
+{"id":"raup","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-2001-qw16","products":5,"sources":2,"unresolved":[]}
+{"id":"asteroid-1999-fr33","products":5,"sources":2,"unresolved":[]}
+{"id":"vesta","products":7,"sources":4,"unresolved":[]}
+{"id":"phobos","products":9,"sources":4,"unresolved":[]}
+{"id":"deimos","products":9,"sources":4,"unresolved":[]}
+{"id":"ceres","products":7,"sources":4,"unresolved":[]}
+{"id":"jupiter","products":10,"sources":10,"unresolved":[]}
+{"id":"io","products":7,"sources":6,"unresolved":[]}
+{"id":"europa","products":7,"sources":25,"unresolved":[]}
+{"id":"ganymede","products":7,"sources":6,"unresolved":[]}
+{"id":"callisto","products":3,"sources":2,"unresolved":[]}
+{"id":"saturn","products":13,"sources":14,"unresolved":[]}
+{"id":"pan","products":5,"sources":12,"unresolved":[]}
+{"id":"atlas","products":5,"sources":12,"unresolved":[]}
+{"id":"prometheus","products":5,"sources":16,"unresolved":[]}
+{"id":"pandora","products":5,"sources":24,"unresolved":[]}
+{"id":"janus","products":5,"sources":16,"unresolved":[]}
+{"id":"epimetheus","products":5,"sources":12,"unresolved":[]}
+{"id":"hyperion","products":5,"sources":24,"unresolved":[]}
+{"id":"mimas","products":7,"sources":5,"unresolved":[]}
+{"id":"enceladus","products":7,"sources":4,"unresolved":[]}
+{"id":"tethys","products":11,"sources":10,"unresolved":[]}
+{"id":"dione","products":11,"sources":10,"unresolved":[]}
+{"id":"rhea","products":11,"sources":6,"unresolved":[]}
+{"id":"titan","products":11,"sources":10,"unresolved":[]}
+{"id":"iapetus","products":5,"sources":3,"unresolved":[]}
+{"id":"phoebe","products":5,"sources":3,"unresolved":[]}
+{"id":"uranus","products":10,"sources":6,"unresolved":[]}
+{"id":"miranda","products":5,"sources":3,"unresolved":[]}
+{"id":"ariel","products":5,"sources":3,"unresolved":[]}
+{"id":"umbriel","products":3,"sources":2,"unresolved":[]}
+{"id":"titania","products":5,"sources":3,"unresolved":[]}
+{"id":"oberon","products":3,"sources":2,"unresolved":[]}
+{"id":"neptune","products":10,"sources":7,"unresolved":[]}
+{"id":"triton","products":5,"sources":5,"unresolved":[]}
+{"id":"pluto","products":7,"sources":4,"unresolved":[]}
+{"id":"charon","products":7,"sources":4,"unresolved":[]}
+{"id":"styx","products":3,"sources":3,"unresolved":[]}
+{"id":"nix","products":3,"sources":3,"unresolved":[]}
+{"id":"kerberos","products":3,"sources":3,"unresolved":[]}
+{"id":"hydra","products":3,"sources":3,"unresolved":[]}
+{"id":"haumea","products":3,"sources":2,"unresolved":[]}
+{"id":"makemake","products":3,"sources":2,"unresolved":[]}
+{"id":"eris","products":3,"sources":2,"unresolved":[]}
+
+> cssearth@0.1.0 prepare:spacecraft /Users/ekrof/fed/cssEarth-pluto-small-moons
+> node tools/prepare-spacecraft.mjs
+
+Prepared 24 mission images (447788 bytes).
+
+> cssearth@0.1.0 build /Users/ekrof/fed/cssEarth-pluto-small-moons
+> astro build && pnpm assemble:planets
+
+01:56:11 [vite] Re-optimizing dependencies because vite config has changed
+01:56:11 [types] Generated 131ms
+01:56:11 [build] output: "static"
+01:56:11 [build] mode: "static"
+01:56:11 [build] directory: /Users/ekrof/fed/cssEarth-pluto-small-moons/dist/
+01:56:11 [build] Collecting build info...
+01:56:11 [build] ✓ Completed in 169ms.
+01:56:13 [build] Building static entrypoints...
+01:56:36 [vite] ✓ built in 23.40s
+01:56:53 [WARN] [vite] [plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+01:56:53 [vite] ✓ built in 15.27s
+01:56:53 [build] Rearranging server assets...
+
+ generating static routes 
+01:56:53   ├─ /achilles/index.html (+617ms) 
+01:56:54   ├─ /adrastea/index.html (+363ms) 
+01:56:54   ├─ /aegaeon/index.html (+192ms) 
+01:56:54   ├─ /albiorix/index.html (+131ms) 
+01:56:54   ├─ /alphonsina/index.html (+163ms) 
+01:56:55   ├─ /amalthea/index.html (+161ms) 
+01:56:55   ├─ /amphitrite/index.html (+133ms) 
+01:56:55   ├─ /angelina/index.html (+186ms) 
+01:56:55   ├─ /anthe/index.html (+193ms) 
+01:56:55   ├─ /apophis/index.html (+130ms) 
+01:56:55   ├─ /ariel/index.html (+132ms) 
+01:56:55   ├─ /asteroid-1950-da/index.html (+137ms) 
+01:56:56   ├─ /asteroid-1992-sk/index.html (+148ms) 
+01:56:56   ├─ /asteroid-1994-cc/index.html (+132ms) 
+01:56:56   ├─ /asteroid-1996-hw1/index.html (+131ms) 
+01:56:56   ├─ /asteroid-1998-ml14/index.html (+123ms) 
+01:56:56   ├─ /asteroid-1998-wt24/index.html (+134ms) 
+01:56:56   ├─ /asteroid-1999-fr33/index.html (+143ms) 
+01:56:56   ├─ /asteroid-2001-qw16/index.html (+133ms) 
+01:56:57   ├─ /asteroid-2002-ce26/index.html (+127ms) 
+01:56:57   ├─ /asteroid-2008-ev5/index.html (+146ms) 
+01:56:57   ├─ /astraea/index.html (+116ms) 
+01:56:57   ├─ /atlas/index.html (+177ms) 
+01:56:57   ├─ /auravictrix/index.html (+159ms) 
+01:56:57   ├─ /aurora/index.html (+100ms) 
+01:56:57   ├─ /bacchus/index.html (+106ms) 
+01:56:57   ├─ /badenia/index.html (+114ms) 
+01:56:58   ├─ /bamberga/index.html (+106ms) 
+01:56:58   ├─ /bebhionn/index.html (+107ms) 
+01:56:58   ├─ /belinda/index.html (+105ms) 
+01:56:58   ├─ /bennu/index.html (+102ms) 
+01:56:58   ├─ /bergelmir/index.html (+100ms) 
+01:56:58   ├─ /bertha/index.html (+107ms) 
+01:56:58   ├─ /bestla/index.html (+102ms) 
+01:56:58   ├─ /betulia/index.html (+103ms) 
+01:56:58   ├─ /bianca/index.html (+110ms) 
+01:56:59   ├─ /brucia/index.html (+105ms) 
+01:56:59   ├─ /caliban/index.html (+107ms) 
+01:56:59   ├─ /callisto/index.html (+102ms) 
+01:56:59   ├─ /calypso/index.html (+100ms) 
+01:56:59   ├─ /camilla/index.html (+96ms) 
+01:56:59   ├─ /castalia/index.html (+106ms) 
+01:56:59   ├─ /ceres/index.html (+96ms) 
+01:56:59   ├─ /charon/index.html (+101ms) 
+01:56:59   ├─ /china/index.html (+101ms) 
+01:56:59   ├─ /comet-103p/index.html (+105ms) 
+01:57:00   ├─ /comet-1p/index.html (+108ms) 
+01:57:00   ├─ /comet-67p/index.html (+113ms) 
+01:57:00   ├─ /comet-81p/index.html (+114ms) 
+01:57:00   ├─ /comet-9p/index.html (+111ms) 
+01:57:00   ├─ /cordelia/index.html (+112ms) 
+01:57:00   ├─ /cressida/index.html (+105ms) 
+01:57:00   ├─ /crimea/index.html (+118ms) 
+01:57:00   ├─ /cybele/index.html (+106ms) 
+01:57:00   ├─ /daphne/index.html (+100ms) 
+01:57:01   ├─ /daphnis/index.html (+103ms) 
+01:57:01   ├─ /davida/index.html (+101ms) 
+01:57:01   ├─ /deimos/index.html (+103ms) 
+01:57:01   ├─ /desdemona/index.html (+103ms) 
+01:57:01   ├─ /desdemona-666/index.html (+101ms) 
+01:57:01   ├─ /despina/index.html (+100ms) 
+01:57:01   ├─ /didymos/index.html (+105ms) 
+01:57:01   ├─ /dike/index.html (+105ms) 
+01:57:01   ├─ /dimorphos/index.html (+106ms) 
+01:57:01   ├─ /dione/index.html (+123ms) 
+01:57:02   ├─ /diotima/index.html (+101ms) 
+01:57:02   ├─ /donaldjohanson/index.html (+104ms) 
+01:57:02   ├─ /doris/index.html (+109ms) 
+01:57:02   ├─ /ducrosa/index.html (+108ms) 
+01:57:02   ├─ /earth/index.html (+73ms) 
+01:57:02   ├─ /echo/index.html (+110ms) 
+01:57:02   ├─ /educatio/index.html (+106ms) 
+01:57:02   ├─ /egeria/index.html (+103ms) 
+01:57:02   ├─ /elektra/index.html (+112ms) 
+01:57:03   ├─ /eleonora/index.html (+101ms) 
+01:57:03   ├─ /enceladus/index.html (+108ms) 
+01:57:03   ├─ /epimetheus/index.html (+109ms) 
+01:57:03   ├─ /eris/index.html (+100ms) 
+01:57:03   ├─ /eros/index.html (+105ms) 
+01:57:03   ├─ /erriapus/index.html (+118ms) 
+01:57:03   ├─ /eugenia/index.html (+99ms) 
+01:57:03   ├─ /eunomia/index.html (+103ms) 
+01:57:03   ├─ /euphrosyne/index.html (+118ms) 
+01:57:03   ├─ /europa/index.html (+104ms) 
+01:57:04   ├─ /europa-52/index.html (+105ms) 
+01:57:04   ├─ /eurybates/index.html (+122ms) 
+01:57:04   ├─ /fides/index.html (+103ms) 
+01:57:04   ├─ /flora/index.html (+104ms) 
+01:57:04   ├─ /fornjot/index.html (+122ms) 
+01:57:04   ├─ /fortuna/index.html (+110ms) 
+01:57:04   ├─ /galatea/index.html (+106ms) 
+01:57:04   ├─ /ganymed/index.html (+114ms) 
+01:57:04   ├─ /ganymede/index.html (+100ms) 
+01:57:05   ├─ /gaspra/index.html (+110ms) 
+01:57:05   ├─ /geographos/index.html (+115ms) 
+01:57:05   ├─ /golevka/index.html (+102ms) 
+01:57:05   ├─ /greip/index.html (+105ms) 
+01:57:05   ├─ /gryphia/index.html (+114ms) 
+01:57:05   ├─ /gyptis/index.html (+102ms) 
+01:57:05   ├─ /harmonia/index.html (+102ms) 
+01:57:05   ├─ /hati/index.html (+124ms) 
+01:57:05   ├─ /haumea/index.html (+109ms) 
+01:57:06   ├─ /hebe/index.html (+108ms) 
+01:57:06   ├─ /hekate/index.html (+129ms) 
+01:57:06   ├─ /hektor/index.html (+107ms) 
+01:57:06   ├─ /helene/index.html (+111ms) 
+01:57:06   ├─ /herculina/index.html (+124ms) 
+01:57:06   ├─ /hermione/index.html (+111ms) 
+01:57:06   ├─ /hidalgo/index.html (+115ms) 
+01:57:06   ├─ /hiiaka/index.html (+128ms) 
+01:57:06   ├─ /himalia/index.html (+104ms) 
+01:57:07   ├─ /hopi/index.html (+118ms) 
+01:57:07   ├─ /hydra/index.html (+137ms) 
+01:57:07   ├─ /hygiea/index.html (+103ms) 
+01:57:07   ├─ /hyperion/index.html (+118ms) 
+01:57:07   ├─ /hyrrokkin/index.html (+127ms) 
+01:57:07   ├─ /iapetus/index.html (+103ms) 
+01:57:07   ├─ /iau/index.html (+112ms) 
+01:57:07   ├─ /ida/index.html (+127ms) 
+01:57:08   ├─ /ijiraq/index.html (+106ms) 
+01:57:08   ├─ /interamnia/index.html (+118ms) 
+01:57:08   ├─ /io/index.html (+144ms) 
+01:57:08   ├─ /irene/index.html (+104ms) 
+01:57:08   ├─ /iris/index.html (+104ms) 
+01:57:08   ├─ /itokawa/index.html (+129ms) 
+01:57:08   ├─ /janus/index.html (+115ms) 
+01:57:08   ├─ /juewa/index.html (+107ms) 
+01:57:08   ├─ /julia/index.html (+134ms) 
+01:57:09   ├─ /juliet/index.html (+99ms) 
+01:57:09   ├─ /juno/index.html (+103ms) 
+01:57:09   ├─ /jupiter/index.html (+65ms) 
+01:57:09   ├─ /kalliope/index.html (+116ms) 
+01:57:09   ├─ /kerberos/index.html (+100ms) 
+01:57:09   ├─ /kiviuq/index.html (+116ms) 
+01:57:09   ├─ /kleopatra/index.html (+127ms) 
+01:57:09   ├─ /kressmannia/index.html (+105ms) 
+01:57:09   ├─ /larissa/index.html (+105ms) 
+01:57:10   ├─ /leucus/index.html (+121ms) 
+01:57:10   ├─ /leukothea/index.html (+115ms) 
+01:57:10   ├─ /loge/index.html (+100ms) 
+01:57:10   ├─ /lucia/index.html (+132ms) 
+01:57:10   ├─ /lutetia/index.html (+112ms) 
+01:57:10   ├─ /maja/index.html (+118ms) 
+01:57:10   ├─ /makemake/index.html (+107ms) 
+01:57:10   ├─ /mars/index.html (+100ms) 
+01:57:10   ├─ /massalia/index.html (+123ms) 
+01:57:11   ├─ /mathilde/index.html (+102ms) 
+01:57:11   ├─ /melpomene/index.html (+119ms) 
+01:57:11   ├─ /menoetius/index.html (+116ms) 
+01:57:11   ├─ /mercury/index.html (+105ms) 
+01:57:11   ├─ /methone/index.html (+121ms) 
+01:57:11   ├─ /metis/index.html (+105ms) 
+01:57:11   ├─ /metis-9/index.html (+98ms) 
+01:57:11   ├─ /mimas/index.html (+135ms) 
+01:57:11   ├─ /miranda/index.html (+101ms) 
+01:57:12   ├─ /mithra/index.html (+104ms) 
+01:57:12   ├─ /moon/index.html (+69ms) 
+01:57:12   ├─ /moshup/index.html (+130ms) 
+01:57:12   ├─ /moskva/index.html (+129ms) 
+01:57:12   ├─ /mr-spock/index.html (+104ms) 
+01:57:12   ├─ /mundilfari/index.html (+138ms) 
+01:57:12   ├─ /musa/index.html (+108ms) 
+01:57:12   ├─ /naiad/index.html (+95ms) 
+01:57:12   ├─ /nausikaa/index.html (+129ms) 
+01:57:13   ├─ /nemausa/index.html (+118ms) 
+01:57:13   ├─ /nemesis/index.html (+100ms) 
+01:57:13   ├─ /neptune/index.html (+69ms) 
+01:57:13   ├─ /nereid/index.html (+133ms) 
+01:57:13   ├─ /nereus/index.html (+93ms) 
+01:57:13   ├─ /nix/index.html (+118ms) 
+01:57:13   ├─ /nysa/index.html (+130ms) 
+01:57:13   ├─ /oberon/index.html (+98ms) 
+01:57:13   ├─ /ophelia/index.html (+110ms) 
+01:57:14   ├─ /orus/index.html (+139ms) 
+01:57:14   ├─ /paaliaq/index.html (+98ms) 
+01:57:14   ├─ /pallas/index.html (+98ms) 
+01:57:14   ├─ /pallene/index.html (+121ms) 
+01:57:14   ├─ /palma/index.html (+122ms) 
+01:57:14   ├─ /pan/index.html (+96ms) 
+01:57:14   ├─ /pandora/index.html (+131ms) 
+01:57:14   ├─ /panopaea/index.html (+108ms) 
+01:57:14   ├─ /parthenope/index.html (+99ms) 
+01:57:15   ├─ /parysatis/index.html (+125ms) 
+01:57:15   ├─ /patroclus/index.html (+106ms) 
+01:57:15   ├─ /penelope/index.html (+96ms) 
+01:57:15   ├─ /petrina/index.html (+126ms) 
+01:57:15   ├─ /phaethon/index.html (+110ms) 
+01:57:15   ├─ /phobos/index.html (+107ms) 
+01:57:15   ├─ /phoebe/index.html (+121ms) 
+01:57:15   ├─ /piazzia/index.html (+102ms) 
+01:57:15   ├─ /pluto/index.html (+68ms) 
+01:57:15   ├─ /polydeuces/index.html (+129ms) 
+01:57:16   ├─ /polyhymnia/index.html (+104ms) 
+01:57:16   ├─ /polymele/index.html (+98ms) 
+01:57:16   ├─ /portia/index.html (+124ms) 
+01:57:16   ├─ /prometheus/index.html (+106ms) 
+01:57:16   ├─ /proserpina/index.html (+104ms) 
+01:57:16   ├─ /prospero/index.html (+126ms) 
+01:57:16   ├─ /proteus/index.html (+108ms) 
+01:57:16   ├─ /psyche/index.html (+101ms) 
+01:57:16   ├─ /puck/index.html (+118ms) 
+01:57:17   ├─ /ra-shalom/index.html (+100ms) 
+01:57:17   ├─ /raup/index.html (+103ms) 
+01:57:17   ├─ /reinmuthia/index.html (+148ms) 
+01:57:17   ├─ /rhea/index.html (+115ms) 
+01:57:17   ├─ /robots.txt (+4ms) 
+01:57:17   ├─ /romulus/index.html (+106ms) 
+01:57:17   ├─ /rosalind/index.html (+124ms) 
+01:57:17   ├─ /rosalinde/index.html (+108ms) 
+01:57:17   ├─ /rusthawelia/index.html (+139ms) 
+01:57:18   ├─ /ryugu/index.html (+171ms) 
+01:57:18   ├─ /sappho/index.html (+115ms) 
+01:57:18   ├─ /saturn/index.html (+87ms) 
+01:57:18   ├─ /schaber/index.html (+186ms) 
+01:57:18   ├─ /schorria/index.html (+135ms) 
+01:57:18   ├─ /selinur/index.html (+132ms) 
+01:57:18   ├─ /setebos/index.html (+161ms) 
+01:57:19   ├─ /siarnaq/index.html (+107ms) 
+01:57:19   ├─ /silvretta/index.html (+125ms) 
+01:57:19   ├─ /sitemap.xml (+3ms) 
+01:57:19   ├─ /skathi/index.html (+154ms) 
+01:57:19   ├─ /skoll/index.html (+109ms) 
+01:57:19   ├─ /squannit/index.html (+191ms) 
+01:57:19   ├─ /steins/index.html (+123ms) 
+01:57:19   ├─ /styx/index.html (+142ms) 
+01:57:20   ├─ /sun/index.html (+136ms) 
+01:57:20   ├─ /susi/index.html (+127ms) 
+01:57:20   ├─ /suttungr/index.html (+159ms) 
+01:57:20   ├─ /sycorax/index.html (+111ms) 
+01:57:20   ├─ /sylvia/index.html (+176ms) 
+01:57:20   ├─ /tarqeq/index.html (+110ms) 
+01:57:20   ├─ /tartaglia/index.html (+173ms) 
+01:57:20   ├─ /tarvos/index.html (+211ms) 
+01:57:21   ├─ /telesto/index.html (+222ms) 
+01:57:21   ├─ /tethys/index.html (+185ms) 
+01:57:21   ├─ /thalassa/index.html (+179ms) 
+01:57:21   ├─ /thebe/index.html (+200ms) 
+01:57:21   ├─ /themis/index.html (+252ms) 
+01:57:22   ├─ /thisbe/index.html (+204ms) 
+01:57:22   ├─ /thrymr/index.html (+278ms) 
+01:57:22   ├─ /thule/index.html (+391ms) 
+01:57:23   ├─ /titan/index.html
+<--- Last few GCs --->
+
+[92544:0x138008000]    72713 ms: Scavenge (interleaved) 4078.6 (4126.1) -> 4076.4 (4134.1) MB, pooled: 0 MB, 3.00 / 0.00 ms  (average mu = 0.336, current mu = 0.308) allocation failure; 
+[92544:0x138008000]    72794 ms: Mark-Compact (reduce) 4084.6 (4135.3) -> 4077.5 (4112.1) MB, pooled: 0 MB, 71.00 / 0.00 ms  (+ 2.0 ms in 61 steps since start of marking, biggest step 1.3 ms, walltime since start of marking 78 ms) (average mu = 0.320, cur
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0x1021699f4 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 2: 0x1023e4000 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 3: 0x1026434b4 v8::internal::Heap::stack() [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 4: 0x102646888 v8::internal::Heap::HasLowYoungGenerationAllocationRate() [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 5: 0x102657a7c v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags)::$_1::operator()() const [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 6: 0x102657350 void heap::base::Stack::SetMarkerAndCallbackImpl<v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags)::$_1>(heap::base::Stack*, void*, void const*) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 7: 0x10300bbe0 PushAllRegistersAndIterateStack [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 8: 0x1026411b8 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+ 9: 0x102635ec4 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+10: 0x1026175a4 v8::internal::Factory::NewFillerObject(int, v8::internal::AllocationAlignment, v8::internal::AllocationType, v8::internal::AllocationOrigin) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+11: 0x102aa6d9c v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+12: 0x1030fe234 Builtins_CEntry_Return1_ArgvOnStack_NoBuiltinExit [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+13: 0x103149e1c Builtins_StringConstructor [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+14: 0x10305db8c Builtins_JSBuiltinsConstructStub [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+15: 0x14828a914 
+16: 0x148287714 
+17: 0x148289380 
+18: 0x1483ee6c4 
+19: 0x1483ee7d0 
+20: 0x14828b4c4 
+21: 0x148287714 
+22: 0x1486373e4 
+23: 0x14828b120 
+24: 0x148287714 
+25: 0x1486afacc 
+26: 0x148459e74 
+27: 0x14828baf4 
+28: 0x148287714 
+29: 0x148482fb4 
+30: 0x14828b4c4 
+31: 0x148287714 
+32: 0x148289380 
+33: 0x1483ee6c4 
+34: 0x1483ee7d0 
+35: 0x14828b4c4 
+36: 0x148287714 
+37: 0x148289380 
+38: 0x1483ee6c4 
+39: 0x1483ee7d0 
+40: 0x14828b4c4 
+41: 0x148287714 
+42: 0x148289380 
+43: 0x1483fc914 
+44: 0x103174e58 Builtins_PromiseFulfillReactionJob [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+45: 0x10308ebd0 Builtins_RunMicrotasks [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+46: 0x10305e7b0 Builtins_JSRunMicrotasksEntry [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+47: 0x102587690 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+48: 0x102587f04 v8::internal::(anonymous namespace)::InvokeWithTryCatch(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+49: 0x102588040 v8::internal::Execution::TryRunMicrotasks(v8::internal::Isolate*, v8::internal::MicrotaskQueue*) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+50: 0x1025b6de4 v8::internal::MicrotaskQueue::RunMicrotasks(v8::internal::Isolate*) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+51: 0x1025b7744 v8::internal::MicrotaskQueue::PerformCheckpoint(v8::Isolate*) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+52: 0x1020470b8 node::InternalCallbackScope::Close() [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+53: 0x102046a90 node::InternalCallbackScope::~InternalCallbackScope() [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+54: 0x10216f118 node::fs::FileHandle::CloseReq::Resolve() [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+55: 0x10218a8c4 node::fs::FileHandle::ClosePromise()::$_0::__invoke(uv_fs_s*) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+56: 0x10215f444 node::MakeLibuvRequestCallback<uv_fs_s, void (*)(uv_fs_s*)>::Wrapper(uv_fs_s*) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+57: 0x103037af8 uv__work_done [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+58: 0x10303b548 uv__async_io [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+59: 0x10304fe40 uv__io_poll [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+60: 0x10303be9c uv_run [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+61: 0x1020486a8 node::SpinEventLoopInternal(node::Environment*) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+62: 0x1021c47d8 node::NodeMainInstance::Run() [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+63: 0x1021167e0 node::Start(int, char**) [/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node]
+64: 0x193cdeb98 start [/usr/lib/dyld]
+sh: line 1: 92544 Abort trap: 6           astro build
+ ELIFECYCLE  Command failed with exit code 134.

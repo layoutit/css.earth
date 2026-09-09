@@ -1,0 +1,25 @@
+{
+  "method": "thermal-effective-diameter-as-volume-approximation",
+  "diameterKm": 109.79,
+  "uncertaintyKm": 1.54,
+  "reportedUncertaintyKm": 1.54,
+  "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+  "systematicUncertaintyFraction": null,
+  "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+  "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+  "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+  "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+  "catalog": {
+    "number": 27,
+    "name": "Euterpe",
+    "diameterKm": 109.79,
+    "uncertaintyKm": 1.54,
+    "detections": 6,
+    "originalRow": "27     Euterpe                        7.00  0.15  6  109.79  1.54 0.234 0.008"
+  },
+  "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative. The archived model comment identifies this pole as consistent with the 1993-10-09 occultation.",
+  "scaleKmPerSourceUnit": 88.49030041821443,
+  "metersPerSourceUnit": 88490.30041821444,
+  "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+  "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 109.79 km effective diameter (catalog ±1.54 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery."
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-b2-facet-source-audit@1",
+  "reports": [
+    {
+      "id": "dimorphos",
+      "fields": [
+        {
+          "field": "RELATIVE ALBEDO",
+          "rows": 196608,
+          "validRows": 196608,
+          "withheldRows": 0,
+          "zeroSigmaRows": 136144,
+          "remappedRows": 131072,
+          "minimum": 0.45134079456329346,
+          "maximum": 1.290671944618225,
+          "maximumCentroidErrorMeters": 0.00002392649139513563
+        },
+        {
+          "field": "SLOPE",
+          "rows": 196608,
+          "validRows": 196608,
+          "withheldRows": 0,
+          "zeroSigmaRows": 536,
+          "remappedRows": 131072,
+          "minimum": 0.013517413288354874,
+          "maximum": 67.80928802490234,
+          "maximumCentroidErrorMeters": 0.00002392649139513563
+        }
+      ],
+      "simplifications": []
+    }
+  ]
+}

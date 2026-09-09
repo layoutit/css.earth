@@ -1,0 +1,267 @@
+Identification_Information:
+  Citation:
+    Citation_Information:
+      Originator: David A. Williams
+      Originator: Laszlo P. Keszthelyi
+      Originator: David A. Crown
+      Originator: Jessica A. Yff
+      Originator: Windy L. Jaeger
+      Originator: Paul M. Schenk
+      Originator: Paul E. Geissler
+      Originator: Tammy L. Becker
+      Publication_Date: 2011
+      Title: Geologic Map of Io, SIM-3168
+      Edition: 1
+      Geospatial_Data_Presentation_Form: vector digital data
+      Publication_Information:
+        Publication_Place: Denver, CO
+        Publisher: U.S. Geological Survey
+      Online_Linkage: http://pubs.usgs.gov/sim/3168/
+      Online_Linkage: http://www.usgs.gov/pubprod/
+  Description:
+    Abstract: Io, discovered by Galileo Galilei on January 7-13, 1610, is the innermost of the four Galilean satellites of the planet Jupiter. It is the most volcanically active object in the Solar System, as recognized by observations from six U.S. National Aeronautics and Space Administration (NASA) spacecraft: Voyager 1 (March 1979), Voyager 2 (July 1979), Hubble Space Telescope (1990-Present), Galileo (1996-2001), Cassini (December 2000), and New Horizons (February 2007). The lack of impact craters on Io in any spacecraft images at any resolution attests to the high resurfacing rate (~1 cm/yr) and the dominant role of active volcanism in shaping its surface (Johnson et al., 1979). High-temperature hot spots detected by the Galileo Solid-State Imager (SSI), Near-Infrared Mapping Spectrometer (NIMS) and Photopolarimeter-Radiometer (PPR) usually correlate with darkest materials on the surface, suggestive of active volcanism. The Voyager flybys obtained complete coverage of Io's subjovian hemisphere at ~500 m/pixel to 2 km/pixel, and most of the rest of the satellite at 5-20 km/pixe. Repeated Galileo flybys obtained complementary coverage of Io's antijovian hemisphere at 5 m/pixel to 1.4 km/pixel. Thus, the Voyager and Galileo data sets were merged to enable the characterization of the whole surface of the satellite at a consistent resolution. The United States Geological Survey (USGS) produced a set of four global mosaics of Io in visible wavelengths at a spatial resolution of 1 km/pixel, released in February 2006, which we have used as basemaps for this new global geologic map.
+    Purpose: Much has been learned about Io's volcanism, tectonics, degradation, and interior since the Voyager flybys, primarily during and following the Galileo Mission at Jupiter (December 1995-September 2003). Our mapping incorporates this new understanding to assist in map unit definition and provide a global synthesis of Io's geology.
+    Supplemental_Information:
+      > Bagenal, F., W. McKinnon, and T. Dowling, Jupiter: Planet, Satellites and Magnetosphere, Cambridge University Press, New York, 719 pp., 2004.
+      > Davies, A.G., Volcanism on Io, Cambridge University Press, London, 355 pp., 2007.
+      > Lopes, R.M.C., and J.R. Spencer, Io After Galileo, Springer/Praxis Publishers, Chichester, UK, 342 pp., 2007.
+      > Becker, T. and P. Geissler, 2005. Galileo global color mosaics of Io, In Lunar and Planetary Science XXXVI, Abstract #1862, Lunar and Planetary Institute, Houston (CD-ROM).
+  Time_Period_of_Content:
+    Time_Period_Information:
+      Multiple_Dates/Times:
+        Single_Date/Time:
+          Calendar_Date: 2006
+        Single_Date/Time:
+          Calendar_Date: 2011
+    Currentness_Reference: publication date
+  Status:
+    Progress: Complete
+    Maintenance_and_Update_Frequency: None planned
+  Spatial_Domain:
+    Bounding_Coordinates:
+      West_Bounding_Coordinate: -180
+      East_Bounding_Coordinate: 180
+      North_Bounding_Coordinate: 90
+      South_Bounding_Coordinate: -90
+  Keywords:
+    Theme:
+      Theme_Keyword_Thesaurus: NASA
+      Theme_Keyword: Geologic Map
+      Theme_Keyword: Io
+      Theme_Keyword: Galilean satellites
+      Theme_Keyword: Jupiter
+      Theme_Keyword: Voyager 1
+      Theme_Keyword: Voyager 2
+      Theme_Keyword: Galileo
+      Theme_Keyword: Cassini
+      Theme_Keyword: New Horizons
+    Place:
+      Place_Keyword_Thesaurus: Gazatteer of Planetary Nomenclature (http://planetarynames.wr.usgs.gov)
+      Place_Keyword: Io
+      Place_Keyword: Jupiter
+  Access_Constraints: None
+  Use_Constraints: None
+  Point_of_Contact:
+    Contact_Information:
+      Contact_Person_Primary:
+        Contact_Person: Ken Tanaka
+        Contact_Organization: USGS
+      Contact_Address:
+        Address_Type: mailing address
+        Address: 2255 North Gemini Drive
+        City: Flagstaff
+        State_or_Province: AZ
+        Postal_Code: 86001
+        Country: USA
+      Contact_Voice_Telephone: 928-556-7100
+      Contact_Electronic_Mail_Address: ktanaka@usgs.gov
+  Security_Information:
+    Security_Classification: Unclassified
+  Native_Data_Set_Environment: ESRI ArcMap 10.0
+Data_Quality_Information:
+  Attribute_Accuracy:
+    Attribute_Accuracy_Report: All attributes were verified by displaying the lines in both the database and the spatial coverage and they are believed to be logically consistent.
+  Logical_Consistency_Report: These data are believed to be logically consistent. Line geometry is topologically clean.
+  Completeness_Report: Competed at the given scale for publication by USGS
+  Positional_Accuracy:
+    Horizontal_Positional_Accuracy:
+      Horizontal_Positional_Accuracy_Report: The final map was generalized and scaled to be commensurate with a 1:15,000,000 map scale, although map component compilation was at a larger scale.   Overall, the geologic map product is only as accurate as the 2005 basemap created by the USGS which contains kilometer errors.
+      Quantitative_Horizontal_Positional_Accuracy_Assessment:
+        Horizontal_Positional_Accuracy_Explanation: Becker, T. and P. Geissler, 2005. Galileo global color mosaics of Io, In Lunar and Planetary Science XXXVI, Abstract #1862, Lunar and Planetary Institute, Houston (CD-ROM).
+      Quantitative_Horizontal_Positional_Accuracy_Assessment:
+        Horizontal_Positional_Accuracy_Explanation: http://www.lpi.usra.edu/meetings/lpsc2001/pdf/1746.pdf
+  Lineage:
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: Tammy Becker
+          Originator: Paul Geissler
+          Publication_Date: 2005
+          Title: Galileo global color mosaics of Io
+          Edition: 1
+          Geospatial_Data_Presentation_Form: remote-sensing image
+          Publication_Information:
+            Publication_Place: Houston, TX
+            Publisher: Lunar and Planetary Science XXXVI
+          Online_Linkage: http://www.lpi.usra.edu/meetings/lpsc2005/pdf/1862.pdf
+          Online_Linkage: http://www.lpi.usra.edu/meetings/lpsc2001/pdf/1746.pdf
+    Process_Step:
+      Process_Description: Geologic mapping of Io has focused on specific types of geologic material units and structural features, as first recognized by Schaber (1980, 1982). The reasons for this are (1) the quantity of concurrent volcanic activity on Io, and (2) the variable quality of the global spacecraft data. These constraints mean that it is not practical to separate map units based on both age and lithology. The mapping strategy developed for the global map was initially tested through mapping of the polar regions with ArcGIS software (by ESRI) and then applied to the equatorial region.
+Spatial_Data_Organization_Information:
+  Direct_Spatial_Reference_Method: Vector
+  Point_and_Vector_Object_Information:
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: G-polygon
+      Point_and_Vector_Object_Count: 339
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: Entity point
+      Point_and_Vector_Object_Count: 172
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: Entity point
+      Point_and_Vector_Object_Count: 140
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: String
+      Point_and_Vector_Object_Count: 1108
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: G-polygon
+      Point_and_Vector_Object_Count: 16
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: Entity point
+      Point_and_Vector_Object_Count: 60
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: Entity point
+      Point_and_Vector_Object_Count: 1500
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: G-polygon
+      Point_and_Vector_Object_Count: 1503
+    SDTS_Terms_Description:
+      SDTS_Point_and_Vector_Object_Type: String
+      Point_and_Vector_Object_Count: 3374
+Spatial_Reference_Information:
+  Horizontal_Coordinate_System_Definition:
+    Geographic:
+      Latitude_Resolution: 0.01
+      Longitude_Resolution: 0.01
+      Geographic_Coordinate_Units: Decimal degrees
+    Geodetic_Model:
+      Horizontal_Datum_Name: D_Io_2000
+      Ellipsoid_Name: Io_2000_IAU_IAG
+      Semi-major_Axis: 1821460.0
+      Denominator_of_Flattening_Ratio: infinity
+  Vertical_Coordinate_System_Definition:
+    Altitude_System_Definition:
+      Altitude_Resolution: 0.000003
+      Altitude_Encoding_Method: Explicit elevation coordinate included with horizontal coordinates
+Entity_and_Attribute_Information:
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Io_DiffuseDeposits
+    Entity_Type_Definition: Diffuse deposits are superposed on all other materials, and cover ~18% of Io’s surface
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: Bright or bright yellow, Dark or black, Green, Red or orange, White
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Io_HotSpots_Locations
+    Entity_Type_Definition: Known hotspot locations
+    Attribute:
+      Attribute_Label: Volcanic_C
+      Attribute_Definition: display name of feature if known
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Io_Mountains
+    Entity_Type_Definition: Known Io mountain locations
+    Attribute:
+      Attribute_Label: HeightKm
+      Attribute_Definition: Approximate height of Io mountain
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Io_Structure
+    Entity_Type_Definition: Structure classification
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: Closed topographic high, Groove or furrow, Lineament, Pit or closed depression, Ridge, Scarp
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Io_PointFeatures
+    Entity_Type_Definition: Point feature locations
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: small patera floor dark, small patera floor bright, small mountain, plume point source, small closed depression, small cone, volcanic vent
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Io_GeoUnits
+    Entity_Type_Definition: Geologic unit type
+    Attribute:
+      Attribute_Label: UnitName
+      Attribute_Definition: Bright plains, Flows bright, Flows dark, Flows undivided, Layered plains, Mountain lineated, Mountain mottled or hummocky, Mountain undivided, NoData, Patera Floor bright, Patera Floor dark, Patera Floor undivided, Red-brown plains, Tholi, White plains
+  Detailed_Description:
+    Entity_Type:
+      Entity_Type_Label: Io_GeoContacts
+    Entity_Type_Definition: Geologic contact type
+    Attribute:
+      Attribute_Label: Type
+      Attribute_Definition: certain, approximate, gradational
+Distribution_Information:
+  Distributor:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: U.S. Geological Survey
+      Contact_Address:
+        Address_Type: mailing address
+        Address: Box 25286 Federal Center
+        City: Denver
+        State_or_Province: CO
+        Postal_Code: 80225
+        Country: USA
+      Contact_Electronic_Mail_Address: ktanaka@usgs.gov
+  Resource_Description: Downloadable Data
+  Standard_Order_Process:
+    Digital_Form:
+      Digital_Transfer_Information:
+        Format_Name: ESRI File GeoDatabase
+        Format_Version_Number: ArcGIS 9.3
+        Format_Specification: GIS
+        File_Decompression_Technique: zip
+        Transfer_Size: 200
+      Digital_Transfer_Option:
+        Online_Option:
+          Computer_Contact_Information:
+            Network_Address:
+              Network_Resource_Name: http://www.usgs.gov/pubprod/
+              Network_Resource_Name: http://pubs.usgs.gov/sim/3168
+          Access_Instructions: Web browser
+    Fees: n/a
+    Ordering_Instructions: Digital download using a web browser.
+  Technical_Prerequisites: GIS software
+  Available_Time_Period:
+    Time_Period_Information:
+      Single_Date/Time:
+        Calendar_Date: 2011
+Metadata_Reference_Information:
+  Metadata_Date: 20120229
+  Metadata_Review_Date: 2012
+  Metadata_Contact:
+    Contact_Information:
+      Contact_Person_Primary:
+        Contact_Person: Trent Hare
+        Contact_Organization: USGS
+      Contact_Address:
+        Address_Type: mailing address
+        Address: 2255 North Gemini Drive
+        City: Flagstaff
+        State_or_Province: AZ
+        Postal_Code: 86001
+        Country: USA
+      Contact_Voice_Telephone: 928-556-7126
+      Contact_Electronic_Mail_Address: thare@usgs.gov
+  Metadata_Standard_Name: FGDC Content Standards for Digital Geospatial Metadata
+  Metadata_Standard_Version: FGDC-STD-001-1998
+  Metadata_Time_Convention: local time
+  Metadata_Access_Constraints: None
+  Metadata_Use_Constraints: None
+  Metadata_Security_Information:
+    Metadata_Security_Classification: Unclassified
+  Metadata_Extensions:
+    Online_Linkage: http://www.esri.com/metadata/esriprof80.html
+    Profile_Name: ESRI Metadata Profile

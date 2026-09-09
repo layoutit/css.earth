@@ -1,0 +1,123 @@
+{
+  "status": "FAIL",
+  "head": "1d372e04592214349fff56cdbfca41c6a4fb99f4",
+  "root": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "startedAt": "2026-09-09T04:36:33Z",
+  "commands": [
+    {
+      "name": "focused-bodies",
+      "command": [
+        "zsh",
+        "/tmp/b2-body-validation.sh"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-09-09T04:36:33Z",
+      "log": "/tmp/b2-release-gates/focused-bodies.log",
+      "exitCode": 0,
+      "finishedAt": "2026-09-09T04:37:59Z"
+    },
+    {
+      "name": "shared-science",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "tools/objects/terrestrial-layers/georeferenced-observation.test.mjs",
+        "tools/objects/terrestrial-layers/observed-geotiff.test.mjs",
+        "tools/objects/terrestrial-layers/observed-pds-rgb.test.mjs",
+        "tools/objects/terrestrial-layers/observed-pds4.test.mjs",
+        "tools/objects/terrestrial-layers/scientific-raster.test.mjs",
+        "tools/objects/terrestrial-layers/categorical-geology.test.mjs",
+        "tools/objects/terrestrial-layers/categorical-solid-raster.test.mjs",
+        "tools/objects/terrestrial-layers/facet-scalars.test.mjs",
+        "tools/objects/terrestrial-layers/facet-preview.test.mjs",
+        "tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs",
+        "tools/objects/terrestrial-layers/pds-float-map.test.mjs",
+        "tools/objects/terrestrial-layers/pds-image.test.mjs",
+        "tools/objects/terrestrial-layers/radial-snapshot.test.mjs",
+        "tools/objects/terrestrial-layers/scientific-focus.test.mjs",
+        "tools/objects/terrestrial-layers/source-surface.test.mjs"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-09-09T04:37:59Z",
+      "log": "/tmp/b2-release-gates/shared-science.log",
+      "exitCode": 0,
+      "finishedAt": "2026-09-09T04:38:01Z"
+    },
+    {
+      "name": "acquire",
+      "command": [
+        "pnpm",
+        "acquire:planets",
+        "--",
+        "--verify-only"
+      ],
+      "status": "FAIL",
+      "startedAt": "2026-09-09T04:38:01Z",
+      "log": "/tmp/b2-release-gates/acquire.log",
+      "exitCode": 1,
+      "finishedAt": "2026-09-09T04:38:02Z"
+    },
+    {
+      "name": "test",
+      "command": [
+        "pnpm",
+        "test"
+      ],
+      "status": "FAIL",
+      "startedAt": "2026-09-09T04:38:02Z",
+      "log": "/tmp/b2-release-gates/test.log",
+      "exitCode": 1,
+      "finishedAt": "2026-09-09T04:38:21Z"
+    },
+    {
+      "name": "focused-shell",
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "site/test/explorer-rail.test.mjs",
+        "site/test/prepared-lens-legends.test.mjs",
+        "site/test/prepared-lens-labels.test.mjs",
+        "site/test/prepared-lens-facts.test.mjs",
+        "site/test/planet-shell.test.mjs",
+        "site/test/object-browser-profile.test.mjs",
+        "site/test/load-browser-profile.test.mjs",
+        "site/test/runtime-policy.test.mjs",
+        "site/test/scene-contract.test.mjs",
+        "site/test/conformance-browser-launch.test.mjs"
+      ],
+      "status": "FAIL",
+      "startedAt": "2026-09-09T04:38:21Z",
+      "log": "/tmp/b2-release-gates/focused-shell.log",
+      "exitCode": 1,
+      "finishedAt": "2026-09-09T04:38:28Z"
+    },
+    {
+      "name": "browser",
+      "command": [
+        "pnpm",
+        "test:browser",
+        "http://127.0.0.1:4291"
+      ],
+      "status": "FAIL",
+      "startedAt": "2026-09-09T04:38:28Z",
+      "log": "/tmp/b2-release-gates/browser.log",
+      "exitCode": 1,
+      "finishedAt": "2026-09-09T04:39:30Z"
+    },
+    {
+      "name": "build",
+      "command": [
+        "pnpm",
+        "build"
+      ],
+      "status": "FAIL",
+      "startedAt": "2026-09-09T04:39:30Z",
+      "log": "/tmp/b2-release-gates/build.log",
+      "exitCode": 134,
+      "finishedAt": "2026-09-09T04:57:23Z"
+    }
+  ],
+  "finishedAt": "2026-09-09T04:57:23Z"
+}

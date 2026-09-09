@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "81ab024909ad17566adb06ae0c935c1cdcaf68a23b911488885fd2db95f4a890"
+          "sha256": "c55768b273de837e73cfbd6c0845dafd8ffaf1ff859d51b14ae9be82d0a4f3db"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "06f75fe239033714e2a8ea697f96d4cc574c0712e65089e5ccf856a5d97871ae"
+          "sha256": "b9e52feb8f7d416ec6aeb98d7a5927d6e01675f0e1e577c0aa344e93a480470d"
         },
         {
           "id": "title",
@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "e97ef97178c0ae9a11292eabe10034a5d21d2c83ec89febb6d92b5896e96b661"
+          "sha256": "0afd8ee9c571cba3ae2ce4c145acf5e1c780a480f61700ecef4b8d039c5557c5"
         },
         {
           "id": "acquisition",
@@ -63,6 +63,16 @@
             },
             {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "albedo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "slope",
               "source": "content",
               "material": "lighting"
             }
@@ -108,6 +118,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "602b29d1d0514102db4db5a4eb2a0d2bacbfbbc803af25004d150dfe9c9e663d"
+    "sha256": "09c0d1c6b72932274d65d9990de3a35f335c87d315a01b10e6ce74e47df359ec"
   }
 }

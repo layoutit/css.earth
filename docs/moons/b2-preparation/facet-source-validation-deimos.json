@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-b2-facet-source-audit@1",
+  "reports": [
+    {
+      "id": "deimos",
+      "fields": [
+        {
+          "field": "Albedo",
+          "rows": 196608,
+          "validRows": 124012,
+          "withheldRows": 72596,
+          "zeroSigmaRows": 0,
+          "remappedRows": 0,
+          "minimum": 0.05762307,
+          "maximum": 0.08751947,
+          "maximumCentroidErrorMeters": 9.41355163017715e-13
+        },
+        {
+          "field": "Slope",
+          "rows": 196608,
+          "validRows": 124012,
+          "withheldRows": 72596,
+          "zeroSigmaRows": 0,
+          "remappedRows": 0,
+          "minimum": 0.044329497202218,
+          "maximum": 35.20179836894457,
+          "maximumCentroidErrorMeters": 9.41355163017715e-13
+        }
+      ],
+      "simplifications": [
+        {
+          "method": "source-meshoptimizer",
+          "version": "1.2.0",
+          "flags": [
+            "ErrorAbsolute",
+            "RegularizeLight"
+          ],
+          "sourceFaces": 196608,
+          "sourceVertices": 98306,
+          "weldedVertices": 98306,
+          "targetFaces": 1600,
+          "outputFaces": 1600,
+          "removedOppositeFaces": 0,
+          "maximumErrorMeters": 100,
+          "estimatedErrorMeters": 74.43278503417969,
+          "topology": {
+            "vertices": 802,
+            "edges": 2400,
+            "faces": 1600,
+            "components": 1,
+            "eulerCharacteristic": 2,
+            "signedVolumeCubicMeters": 1025236279180.3257
+          },
+          "sampledError": {
+            "method": "four barycentric positions on every retained triangle to full source BVH",
+            "samples": 6400,
+            "mean": 18.789487381903832,
+            "p95": 39.634705561777665,
+            "maximum": 69.39566043396515
+          }
+        }
+      ]
+    }
+  ]
+}

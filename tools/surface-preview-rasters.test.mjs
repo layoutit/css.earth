@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { unpackSurfacePreview, assertSurfacePreviewCoverage } from './surface-preview-rasters.mjs';
+import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mjs';
 import { preparePagedSurfaceMap } from './objects/paged-ellipsoid/assets.mjs';
 
 // Two reversed bands with conspicuous padding: the preview must recover
@@ -28,6 +28,20 @@ test('preview rejects a changed prepared image layout', () => {
     { width: 2,height: 2,bandCount: 1,gutter: 1 }), /packing does not match/);
 });
 
+test('irregular surfaces do not require an ellipsoid or unpack triangle atlases', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-irregular-preview-'));
+  try {
+    await mkdir(join(directory, 'source/preparation'), { recursive: true });
+    await writeFile(join(directory, 'source/preparation/terrestrial.json'), JSON.stringify({
+      schema: 'cssearth-terrestrial-preparation@1', geometry: { radialTerrain: { path: 'shape.txt' } },
+    }));
+    const images = [];
+    for await (const image of recipeSurfacePreviews({ objectDirectory: directory,
+      publicDirectory: directory, outputDirectory: directory })) images.push(image);
+    assert.deepEqual(images, []);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
 test('paged previews keep the shared cloud composition and raw scientific maps distinct', async () => {
   const directory = await mkdtemp(join(tmpdir(),'cssearth-preview-'));
   try {
@@ -46,4 +60,21 @@ test('missing surface previews fail preparation while explicit non-surface views
   const bindings = [{ id: 'cutaway', view: 'interior' }, { id: 'local-overlay', overlayId: 'noise' }];
   assert.throws(() => assertSurfacePreviewCoverage(controls, [{ id: 'visible' }], bindings), /Missing prepared surface previews: infrared/);
   assert.doesNotThrow(() => assertSurfacePreviewCoverage(controls, [{ id: 'visible' }, { id: 'infrared' }], bindings));
+});
+
+// Native scientific recipes provide their own source-derived minimaps. They
+// share the schema with affine recipes but have no affine ellipsoid packing.
+test('solid scientific recipes do not enter the affine-only preview fallback', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-solid-preview-'));
+  try {
+    await mkdir(join(directory, 'source/preparation'), { recursive: true });
+    await writeFile(join(directory, 'source/preparation/terrestrial.json'), JSON.stringify({
+      schema: 'cssearth-terrestrial-preparation@1', kind: 'solid-observation-body',
+      raster: { width: 640, height: 320 },
+    }));
+    const images = [];
+    for await (const image of recipeSurfacePreviews({ objectDirectory: directory,
+      publicDirectory: join(directory, 'public'), outputDirectory: join(directory, 'prepared') })) images.push(image);
+    assert.deepEqual(images, []);
+  } finally { await rm(directory, { recursive: true, force: true }); }
 });

@@ -444,14 +444,15 @@
   border-top: 1px solid var(--shell-divider);
 }
 .planet-card-tabpanel :is(.planet-surface-minimap, .planet-lens-legend-panel) + .planet-lens-details-copy { margin-top: 12px; }
-.planet-card-tabpanel .planet-lens-legend-panel { width: calc(100% - 4px); height: 28px; }
+.planet-card-tabpanel .planet-lens-legend-panel { width: calc(100% - 4px); min-height: 28px; }
 .planet-card-tabpanel .planet-lens-legend-labels {
   display: grid;
   grid-template-columns: repeat(var(--legend-label-count), minmax(0, 1fr));
-  height: 16px;
-  white-space: nowrap;
+  min-height: 16px;
+  align-items: start;
+  white-space: normal;
 }
-.planet-card-tabpanel .planet-lens-legend-labels > span { overflow: hidden; text-overflow: ellipsis; text-align: center; }
+.planet-card-tabpanel .planet-lens-legend-labels > span { overflow-wrap: anywhere; text-align: center; }
 .planet-card-tabpanel .planet-lens-legend-labels > span:first-child { text-align: left; }
 .planet-card-tabpanel .planet-lens-legend-labels > span:last-child:not(:first-child) { text-align: right; }
 .planet-card-tabpanel .planet-lens-legend-panel:first-child { margin-top: 0; }

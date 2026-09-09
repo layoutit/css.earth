@@ -38,6 +38,27 @@
       "surfacePagePrefix": "earth-night-lights"
     },
     {
+      "id": "enso",
+      "label": "ENSO",
+      "shortLabel": "ENSO",
+      "thumbnailUrl": "/scenes/earth/earth-lens-enso.webp",
+      "surfaceUrl": "/scenes/earth/earth-enso.webp",
+      "polesUrl": "/scenes/earth/earth-enso-poles.webp",
+      "maximumZoom": 4,
+      "surfacePagePrefix": "earth-enso",
+      "focus": {
+        "longitude": -110,
+        "latitude": 0,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "qualification": "NASA MUR · 1 km source imagery · 7 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    {
       "id": "cross-section",
       "label": "Cross section",
       "shortLabel": "CUT",

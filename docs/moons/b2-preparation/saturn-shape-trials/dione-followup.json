@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-b2-shape-trial@1",
+  "id": "dione",
+  "context": {
+    "sourceReferenceMeters": 561400,
+    "ceilingRationale": "A 1 percent reference radius candidate is a display approximation ceiling, not source model uncertainty. Final acceptance requires measured source distances and visual detail.",
+    "sixteenSegmentSagittaMeters": 10787.143581626437
+  },
+  "source": {
+    "path": "science/b2-intake/dione_128_o.obj",
+    "bytes": 17694840,
+    "sha256": "6fa66be6d8065fccb55bda4f9b272aefddbd2ddb1402ff284c00ca21e15df9ad",
+    "vertices": 98306,
+    "faces": 196608
+  },
+  "trials": [
+    {
+      "targetFaces": 2000,
+      "regularize": false,
+      "maximumErrorMeters": 1600,
+      "ok": false,
+      "error": "Source mesh reached 5838 faces at 1593.8778076171875 m estimated error; requested 2000 within 1600 m."
+    },
+    {
+      "targetFaces": 2000,
+      "regularize": true,
+      "maximumErrorMeters": 5614,
+      "ok": false,
+      "error": "Source mesh reached 2020 faces at 5610.8291015625 m estimated error; requested 2000 within 5614 m."
+    },
+    {
+      "targetFaces": 2000,
+      "regularize": false,
+      "maximumErrorMeters": 5614,
+      "ok": true,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 196608,
+        "sourceVertices": 98306,
+        "weldedVertices": 98306,
+        "targetFaces": 2000,
+        "outputFaces": 2000,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 5614,
+        "estimatedErrorMeters": 3461.188720703125,
+        "topology": {
+          "vertices": 1002,
+          "edges": 3000,
+          "faces": 2000,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 735806100528619500
+        }
+      },
+      "independentGeometricSamples": {
+        "method": "Four barycentric points per retained face projected against the complete original mesh using closest-triangle BVH; one-way sampled surface deviation, not a full Hausdorff bound",
+        "count": 8000,
+        "missing": 0,
+        "maximumMeters": 4851.621491889381,
+        "p95Meters": 2463.149087703749,
+        "rmsMeters": 1298.4141970210794,
+        "worst": {
+          "fi": 322,
+          "weights": [
+            0.2,
+            0.2,
+            0.6
+          ],
+          "point": [
+            -306952.9663083999,
+            -332366.95556619996,
+            -323681.738281
+          ],
+          "sourcePoint": [
+            -309625.03050798055,
+            -335259.3831438115,
+            -326515.8460280969
+          ],
+          "sourceFace": 34044,
+          "distanceMeters": 4851.621491889381
+        }
+      },
+      "facesSha256": "a920ba88f9d6d796c3066f8971f00f6326ab5bce9a48b2bcce3d93efef20fd21"
+    }
+  ],
+  "elapsedMs": 1115,
+  "node": "v24.19.0",
+  "heapLimitMiB": 2048,
+  "resources": {
+    "userCPUTime": 1436100,
+    "systemCPUTime": 97345,
+    "maxRSS": 506672,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 40337,
+    "majorPageFault": 88,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 0,
+    "ipcSent": 0,
+    "ipcReceived": 0,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 3,
+    "involuntaryContextSwitches": 2336
+  },
+  "processMemory": {
+    "rss": 473579520,
+    "heapTotal": 310722560,
+    "heapUsed": 227581544,
+    "external": 45662163,
+    "arrayBuffers": 18310287
+  },
+  "qualification": "Source-only simplification trial; no preparation, rendered silhouette or scientific absolute accuracy is established."
+}

@@ -1,6 +1,6 @@
 # Tethys sources and preparation
 
-Tethys uses the shared object adapter, application shell, spherical scene and lighting. All image resampling and source projection happen during preparation.
+Tethys uses the shared object adapter, application shell, source-mesh scene and lighting. All image resampling and source projection happen during preparation.
 
 ## Photographic lenses
 
@@ -19,12 +19,22 @@ The global model is supplied as three grids: a 2222 × 679 equirectangular map s
 
 Global values are center-relative radius in meters, unlike the archive's regional height products. The displayed quantity is `radius * 0.001 - 531`, height in kilometers above the source's 531 km reference sphere. Color spans −12.5 to +12.5 km. Brightness shows northwest cartographic relief at true height scale. The shared curvature overlay and optional directional Shadows remain active on this lens too.
 
-The source model spacing is about 1.5 km. The producer estimates typical global DTM accuracy at one to two grid spacings (1.5–3 km), worse where source imagery is coarser. A larger prepared texture adds no measured terrain detail. Elevation colors include broad departures from the reference sphere; rendered geometry remains spherical.
+The source model spacing is about 1.5 km. The product description’s one-to-two-grid-spacing error estimate is extrapolated from simulation experience; it is not an independent per-cell uncertainty measurement for Tethys. A larger prepared texture adds no measured terrain detail. Elevation colors include broad departures from the reference sphere; rendered geometry follows the simplified source mesh.
 
 ## Geometry, delivery and scope
 
-The astronomy package provides the Saturn-relative orbit and IAU orientation. The rendered sphere uses the 536.3 km reference radius of the [2012 Tethys atlas](https://science.nasa.gov/resource/the-tethys-atlas/). This display approximation is named in the visible introduction and is distinct from the 531 km elevation datum and JPL's 531.1 km physical mean radius in the factsheet. [NASA](https://science.nasa.gov/saturn/moons/tethys/) describes a mildly nonspherical body; its exact silhouette and crater depth are not modeled here.
+The astronomy package provides the Saturn-relative orbit and IAU orientation. The old spherical display reference is retained only as the package’s scale normalization; the native model now supplies vertex positions. Numeric height datums and factsheet mean radii remain independent quantities. [NASA](https://science.nasa.gov/saturn/moons/tethys/) describes a mildly nonspherical body; the newly selected source model supplies a finite-resolution approximation to silhouette and topography.
 
-All three lenses use the shared 8192 × 4096 map layout, 16 projective bands and 1024-pixel pole caps. Terminal surface and pole atlases use WebP quality 90 with lossless alpha. Sources and intermediate maps retain their original detail; only prepared files reach runtime. No visible atmosphere or cutaway is added.
+Map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products. The final source-mesh scene samples these maps into prepared per-triangle atlases. Terminal surface and pole atlases use WebP quality 90 with lossless alpha. Sources and intermediate maps retain their original detail; only prepared files reach runtime. No visible atmosphere or cutaway is added.
 
 Pinned files, URLs and hashes are in `source/manifest.json`; acquisition and preparation use the shared authored-object pipeline.
+
+## B2 source shape and relative albedo
+
+The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 5,310 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 3974.44 m, 95th percentile 2023.05 m and RMS 1036.86 m. These samples do not establish a full Hausdorff bound. Geographic registration, silhouette and feature review remain pending. The original photographic-map projection radii remain separate from shape geometry and the numeric elevation datum.
+
+New relative albedo uses the published 2025 GeoTIFFs and their original equatorial/polar projections. Values are dimensionless and normalized around 1; the archive gives a nominal 0–2 domain. The visible 0.5–1.5 scale saturates above 1.5. No height conversion or relief shading is applied to this quantity. It is a secondary SPC brightness product, less validated than topography, and is neither geometric albedo nor calibrated reflectance. Tethys used uncalibrated ISS inputs; Dione and Rhea used calibrated frames. Source sigma is internal maplet agreement, not absolute height uncertainty.
+
+The Shape lens uses the shared neutral grid over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 5.96 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
+
+Qualification status: source intake and recipe proposal. Final mesh selection (where applicable), restored-source and prepared browser/visual gates remain pending. No readiness is claimed.

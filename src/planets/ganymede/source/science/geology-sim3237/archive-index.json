@@ -1,0 +1,2637 @@
+{
+  "archiveUrl": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+  "entries": [
+    {
+      "name": "Ganymede_SIM3237_Database/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 0
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 56
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000001.freelist",
+      "method": 8,
+      "crc": 1715110257,
+      "compressed": 58,
+      "bytes": 4440,
+      "offset": 141
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000001.gdbindexes",
+      "method": 8,
+      "crc": 2529943236,
+      "compressed": 82,
+      "bytes": 110,
+      "offset": 302
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000001.gdbtable",
+      "method": 8,
+      "crc": 402627717,
+      "compressed": 469,
+      "bytes": 1067,
+      "offset": 489
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000001.gdbtablx",
+      "method": 8,
+      "crc": 1810795429,
+      "compressed": 128,
+      "bytes": 5152,
+      "offset": 1061
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000001.TablesByName.atx",
+      "method": 8,
+      "crc": 3306464400,
+      "compressed": 572,
+      "bytes": 12310,
+      "offset": 1292
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000002.gdbtable",
+      "method": 8,
+      "crc": 4091931696,
+      "compressed": 528,
+      "bytes": 1456,
+      "offset": 1975
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000002.gdbtablx",
+      "method": 8,
+      "crc": 2101417850,
+      "compressed": 111,
+      "bytes": 5152,
+      "offset": 2606
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000003.gdbindexes",
+      "method": 8,
+      "crc": 279189289,
+      "compressed": 40,
+      "bytes": 42,
+      "offset": 2820
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000003.gdbtable",
+      "method": 8,
+      "crc": 761097536,
+      "compressed": 810,
+      "bytes": 4670,
+      "offset": 2965
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000003.gdbtablx",
+      "method": 8,
+      "crc": 3757500302,
+      "compressed": 82,
+      "bytes": 5152,
+      "offset": 3878
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000004.CatItemsByPhysicalName.atx",
+      "method": 8,
+      "crc": 3315618211,
+      "compressed": 518,
+      "bytes": 12310,
+      "offset": 4063
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000004.CatItemsByType.atx",
+      "method": 8,
+      "crc": 2564321075,
+      "compressed": 212,
+      "bytes": 4118,
+      "offset": 4702
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000004.FDO_UUID.atx",
+      "method": 8,
+      "crc": 3496753596,
+      "compressed": 701,
+      "bytes": 4118,
+      "offset": 5027
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000004.freelist",
+      "method": 8,
+      "crc": 1751080553,
+      "compressed": 330,
+      "bytes": 37208,
+      "offset": 5835
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000004.gdbindexes",
+      "method": 8,
+      "crc": 548459433,
+      "compressed": 132,
+      "bytes": 310,
+      "offset": 6268
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000004.gdbtable",
+      "method": 8,
+      "crc": 624422047,
+      "compressed": 24536,
+      "bytes": 362407,
+      "offset": 6505
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000004.gdbtablx",
+      "method": 8,
+      "crc": 2594545748,
+      "compressed": 161,
+      "bytes": 5152,
+      "offset": 31144
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000004.spx",
+      "method": 8,
+      "crc": 2891046296,
+      "compressed": 2905,
+      "bytes": 151574,
+      "offset": 31408
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000005.CatRelsByDestinationID.atx",
+      "method": 8,
+      "crc": 112477069,
+      "compressed": 655,
+      "bytes": 4118,
+      "offset": 34411
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000005.CatRelsByOriginID.atx",
+      "method": 8,
+      "crc": 748969770,
+      "compressed": 186,
+      "bytes": 4118,
+      "offset": 35187
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000005.CatRelsByType.atx",
+      "method": 8,
+      "crc": 2001560357,
+      "compressed": 160,
+      "bytes": 4118,
+      "offset": 35489
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000005.FDO_UUID.atx",
+      "method": 8,
+      "crc": 1799083069,
+      "compressed": 658,
+      "bytes": 4118,
+      "offset": 35761
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000005.freelist",
+      "method": 8,
+      "crc": 1025977422,
+      "compressed": 57,
+      "bytes": 4440,
+      "offset": 36526
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000005.gdbindexes",
+      "method": 8,
+      "crc": 297724318,
+      "compressed": 129,
+      "bytes": 318,
+      "offset": 36686
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000005.gdbtable",
+      "method": 8,
+      "crc": 4197324642,
+      "compressed": 1256,
+      "bytes": 2234,
+      "offset": 36920
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000005.gdbtablx",
+      "method": 8,
+      "crc": 1192516597,
+      "compressed": 108,
+      "bytes": 5152,
+      "offset": 38279
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.CatRelTypesByBackwardLabel.atx",
+      "method": 8,
+      "crc": 148813544,
+      "compressed": 333,
+      "bytes": 4118,
+      "offset": 38490
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.CatRelTypesByDestItemTypeID.atx",
+      "method": 8,
+      "crc": 2407541870,
+      "compressed": 298,
+      "bytes": 4118,
+      "offset": 38948
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.CatRelTypesByForwardLabel.atx",
+      "method": 8,
+      "crc": 1971775252,
+      "compressed": 265,
+      "bytes": 4118,
+      "offset": 39372
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.CatRelTypesByName.atx",
+      "method": 8,
+      "crc": 1820727300,
+      "compressed": 338,
+      "bytes": 4118,
+      "offset": 39761
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.CatRelTypesByOriginItemTypeID.atx",
+      "method": 8,
+      "crc": 8454936,
+      "compressed": 383,
+      "bytes": 4118,
+      "offset": 40215
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.CatRelTypesByUUID.atx",
+      "method": 8,
+      "crc": 3162154132,
+      "compressed": 483,
+      "bytes": 4118,
+      "offset": 40726
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.gdbindexes",
+      "method": 8,
+      "crc": 3251437668,
+      "compressed": 172,
+      "bytes": 602,
+      "offset": 41325
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.gdbtable",
+      "method": 8,
+      "crc": 671252180,
+      "compressed": 1310,
+      "bytes": 2504,
+      "offset": 41602
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000006.gdbtablx",
+      "method": 8,
+      "crc": 1452557446,
+      "compressed": 94,
+      "bytes": 5152,
+      "offset": 43015
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000007.CatItemTypesByName.atx",
+      "method": 8,
+      "crc": 3170323777,
+      "compressed": 534,
+      "bytes": 12310,
+      "offset": 43212
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000007.CatItemTypesByParentTypeID.atx",
+      "method": 8,
+      "crc": 2863008796,
+      "compressed": 279,
+      "bytes": 4118,
+      "offset": 43863
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000007.CatItemTypesByUUID.atx",
+      "method": 8,
+      "crc": 663910576,
+      "compressed": 864,
+      "bytes": 4118,
+      "offset": 44267
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000007.gdbindexes",
+      "method": 8,
+      "crc": 2175196442,
+      "compressed": 119,
+      "bytes": 296,
+      "offset": 45248
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000007.gdbtable",
+      "method": 8,
+      "crc": 2830765326,
+      "compressed": 1122,
+      "bytes": 1803,
+      "offset": 45472
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000007.gdbtablx",
+      "method": 8,
+      "crc": 256418023,
+      "compressed": 126,
+      "bytes": 5152,
+      "offset": 46697
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000009.freelist",
+      "method": 8,
+      "crc": 3134414999,
+      "compressed": 4749,
+      "bytes": 41304,
+      "offset": 46926
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000009.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 51778
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000009.gdbtable",
+      "method": 8,
+      "crc": 1474140449,
+      "compressed": 625959,
+      "bytes": 914068,
+      "offset": 51953
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000009.gdbtablx",
+      "method": 8,
+      "crc": 3756727416,
+      "compressed": 17786,
+      "bytes": 51232,
+      "offset": 678015
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000009.spx",
+      "method": 8,
+      "crc": 1924093824,
+      "compressed": 22836,
+      "bytes": 167958,
+      "offset": 695904
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000011.freelist",
+      "method": 8,
+      "crc": 3431475667,
+      "compressed": 9334,
+      "bytes": 69976,
+      "offset": 718838
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000011.gdbindexes",
+      "method": 8,
+      "crc": 3802267963,
+      "compressed": 75,
+      "bytes": 124,
+      "offset": 728275
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000011.gdbtable",
+      "method": 8,
+      "crc": 1724172537,
+      "compressed": 898174,
+      "bytes": 1255001,
+      "offset": 728455
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000011.gdbtablx",
+      "method": 8,
+      "crc": 3378029335,
+      "compressed": 10901,
+      "bytes": 20512,
+      "offset": 1626732
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000011.spx",
+      "method": 8,
+      "crc": 2265506759,
+      "compressed": 7721,
+      "bytes": 94230,
+      "offset": 1637736
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000012.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 1645555
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000012.gdbtable",
+      "method": 8,
+      "crc": 2128925944,
+      "compressed": 2985,
+      "bytes": 10520,
+      "offset": 1645730
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000012.gdbtablx",
+      "method": 8,
+      "crc": 3872534980,
+      "compressed": 34,
+      "bytes": 5152,
+      "offset": 1648818
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000012.spx",
+      "method": 8,
+      "crc": 3282533200,
+      "compressed": 63,
+      "bytes": 4118,
+      "offset": 1648955
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000013.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 1649116
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000013.gdbtable",
+      "method": 8,
+      "crc": 1247447383,
+      "compressed": 2718,
+      "bytes": 6083,
+      "offset": 1649291
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000013.gdbtablx",
+      "method": 8,
+      "crc": 2972071646,
+      "compressed": 34,
+      "bytes": 5152,
+      "offset": 1652112
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000013.spx",
+      "method": 8,
+      "crc": 3282533200,
+      "compressed": 63,
+      "bytes": 4118,
+      "offset": 1652249
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000014.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 1652410
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000014.gdbtable",
+      "method": 8,
+      "crc": 2287489985,
+      "compressed": 2723,
+      "bytes": 6085,
+      "offset": 1652585
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000014.gdbtablx",
+      "method": 8,
+      "crc": 877618527,
+      "compressed": 34,
+      "bytes": 5152,
+      "offset": 1655411
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000014.spx",
+      "method": 8,
+      "crc": 3282533200,
+      "compressed": 63,
+      "bytes": 4118,
+      "offset": 1655548
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001a.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 1655709
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001a.gdbtable",
+      "method": 8,
+      "crc": 3806897964,
+      "compressed": 2389681,
+      "bytes": 18220354,
+      "offset": 1655884
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001a.gdbtablx",
+      "method": 8,
+      "crc": 3989158761,
+      "compressed": 250773,
+      "bytes": 655392,
+      "offset": 4045668
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001a.spx",
+      "method": 8,
+      "crc": 192267276,
+      "compressed": 557953,
+      "bytes": 3006486,
+      "offset": 4296544
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001b.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 4854595
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001b.gdbtable",
+      "method": 8,
+      "crc": 4111784948,
+      "compressed": 447229,
+      "bytes": 515493,
+      "offset": 4854770
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001b.gdbtablx",
+      "method": 8,
+      "crc": 2616647495,
+      "compressed": 4963,
+      "bytes": 10272,
+      "offset": 5302102
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001b.spx",
+      "method": 8,
+      "crc": 389579398,
+      "compressed": 3396,
+      "bytes": 32790,
+      "offset": 5307168
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001c.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5310662
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001c.gdbtable",
+      "method": 8,
+      "crc": 2512992964,
+      "compressed": 9936,
+      "bytes": 12614,
+      "offset": 5310837
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001c.gdbtablx",
+      "method": 8,
+      "crc": 2942812395,
+      "compressed": 214,
+      "bytes": 5152,
+      "offset": 5320876
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001c.spx",
+      "method": 8,
+      "crc": 1334155672,
+      "compressed": 154,
+      "bytes": 4118,
+      "offset": 5321193
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001d.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5321445
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001d.gdbtable",
+      "method": 8,
+      "crc": 1565177754,
+      "compressed": 2183,
+      "bytes": 3484,
+      "offset": 5321620
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001d.gdbtablx",
+      "method": 8,
+      "crc": 4097222404,
+      "compressed": 91,
+      "bytes": 5152,
+      "offset": 5323906
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001d.spx",
+      "method": 8,
+      "crc": 112839677,
+      "compressed": 92,
+      "bytes": 4118,
+      "offset": 5324100
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001e.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5324290
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001e.gdbtable",
+      "method": 8,
+      "crc": 679501313,
+      "compressed": 123567,
+      "bytes": 163932,
+      "offset": 5324465
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001e.gdbtablx",
+      "method": 8,
+      "crc": 1060217636,
+      "compressed": 2222,
+      "bytes": 5152,
+      "offset": 5448135
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001e.spx",
+      "method": 8,
+      "crc": 2622452247,
+      "compressed": 1538,
+      "bytes": 16406,
+      "offset": 5450460
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001f.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5452096
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001f.gdbtable",
+      "method": 8,
+      "crc": 1670633010,
+      "compressed": 1635,
+      "bytes": 2062,
+      "offset": 5452271
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001f.gdbtablx",
+      "method": 8,
+      "crc": 952679103,
+      "compressed": 40,
+      "bytes": 5152,
+      "offset": 5454009
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000001f.spx",
+      "method": 8,
+      "crc": 3465359412,
+      "compressed": 56,
+      "bytes": 4118,
+      "offset": 5454152
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000020.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5454306
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000020.gdbtable",
+      "method": 8,
+      "crc": 2852030012,
+      "compressed": 548,
+      "bytes": 826,
+      "offset": 5454481
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000020.gdbtablx",
+      "method": 8,
+      "crc": 237246114,
+      "compressed": 33,
+      "bytes": 5152,
+      "offset": 5455132
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000020.spx",
+      "method": 8,
+      "crc": 2702034476,
+      "compressed": 61,
+      "bytes": 4118,
+      "offset": 5455268
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000021.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5455427
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000021.gdbtable",
+      "method": 8,
+      "crc": 3176813291,
+      "compressed": 142901,
+      "bytes": 188715,
+      "offset": 5455602
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000021.gdbtablx",
+      "method": 8,
+      "crc": 2519780151,
+      "compressed": 2299,
+      "bytes": 5152,
+      "offset": 5598606
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000021.spx",
+      "method": 8,
+      "crc": 2787117598,
+      "compressed": 4986,
+      "bytes": 24598,
+      "offset": 5601008
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000022.gdbindexes",
+      "method": 8,
+      "crc": 3802267963,
+      "compressed": 75,
+      "bytes": 124,
+      "offset": 5606092
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000022.gdbtable",
+      "method": 8,
+      "crc": 1258324077,
+      "compressed": 40103,
+      "bytes": 213393,
+      "offset": 5606272
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000022.gdbtablx",
+      "method": 8,
+      "crc": 1032656731,
+      "compressed": 7135,
+      "bytes": 20512,
+      "offset": 5646478
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000022.spx",
+      "method": 8,
+      "crc": 3879401465,
+      "compressed": 6819,
+      "bytes": 65558,
+      "offset": 5653716
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000023.freelist",
+      "method": 8,
+      "crc": 3216380221,
+      "compressed": 118,
+      "bytes": 8536,
+      "offset": 5660633
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000023.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5660854
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000023.gdbtable",
+      "method": 8,
+      "crc": 2068740397,
+      "compressed": 38392,
+      "bytes": 243937,
+      "offset": 5661029
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000023.gdbtablx",
+      "method": 8,
+      "crc": 788489944,
+      "compressed": 8605,
+      "bytes": 30752,
+      "offset": 5699524
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000023.spx",
+      "method": 8,
+      "crc": 3516090739,
+      "compressed": 11661,
+      "bytes": 94230,
+      "offset": 5708232
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000024.freelist",
+      "method": 8,
+      "crc": 181877849,
+      "compressed": 31,
+      "bytes": 4440,
+      "offset": 5719991
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000024.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5720125
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000024.gdbtable",
+      "method": 8,
+      "crc": 283480980,
+      "compressed": 1384,
+      "bytes": 3901,
+      "offset": 5720300
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000024.gdbtablx",
+      "method": 8,
+      "crc": 2964862554,
+      "compressed": 290,
+      "bytes": 5152,
+      "offset": 5721787
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000024.spx",
+      "method": 8,
+      "crc": 1439112092,
+      "compressed": 435,
+      "bytes": 4118,
+      "offset": 5722180
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000025.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5722713
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000025.gdbtable",
+      "method": 8,
+      "crc": 2278171605,
+      "compressed": 668,
+      "bytes": 1658,
+      "offset": 5722888
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000025.gdbtablx",
+      "method": 8,
+      "crc": 1897064353,
+      "compressed": 127,
+      "bytes": 5152,
+      "offset": 5723659
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000025.spx",
+      "method": 8,
+      "crc": 4069723367,
+      "compressed": 145,
+      "bytes": 4118,
+      "offset": 5723889
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000026.freelist",
+      "method": 8,
+      "crc": 2913594575,
+      "compressed": 6045,
+      "bytes": 29016,
+      "offset": 5724132
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000026.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5730280
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000026.gdbtable",
+      "method": 8,
+      "crc": 147998256,
+      "compressed": 205084,
+      "bytes": 350962,
+      "offset": 5730455
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000026.gdbtablx",
+      "method": 8,
+      "crc": 2456567475,
+      "compressed": 4704,
+      "bytes": 15392,
+      "offset": 5935642
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000026.spx",
+      "method": 8,
+      "crc": 4098043255,
+      "compressed": 3601,
+      "bytes": 32790,
+      "offset": 5940449
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000027.freelist",
+      "method": 8,
+      "crc": 1540549488,
+      "compressed": 85,
+      "bytes": 12632,
+      "offset": 5944148
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000027.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 5944336
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000027.gdbtable",
+      "method": 8,
+      "crc": 2111498685,
+      "compressed": 43791,
+      "bytes": 84848,
+      "offset": 5944511
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000027.gdbtablx",
+      "method": 8,
+      "crc": 3658927486,
+      "compressed": 1945,
+      "bytes": 5152,
+      "offset": 5988405
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000027.spx",
+      "method": 8,
+      "crc": 3454710750,
+      "compressed": 3450,
+      "bytes": 24598,
+      "offset": 5990453
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000028.gdbindexes",
+      "method": 8,
+      "crc": 4286214332,
+      "compressed": 67,
+      "bytes": 116,
+      "offset": 5994001
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000028.gdbtable",
+      "method": 8,
+      "crc": 3536398224,
+      "compressed": 113319,
+      "bytes": 138797,
+      "offset": 5994173
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000028.gdbtablx",
+      "method": 8,
+      "crc": 3547032673,
+      "compressed": 2139,
+      "bytes": 5152,
+      "offset": 6107595
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000028.spx",
+      "method": 8,
+      "crc": 3175022549,
+      "compressed": 6247,
+      "bytes": 36886,
+      "offset": 6109837
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000029.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 6116182
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000029.gdbtable",
+      "method": 8,
+      "crc": 1333696936,
+      "compressed": 73869,
+      "bytes": 123912,
+      "offset": 6116357
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000029.gdbtablx",
+      "method": 8,
+      "crc": 3744780780,
+      "compressed": 3960,
+      "bytes": 15392,
+      "offset": 6190329
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a00000029.spx",
+      "method": 8,
+      "crc": 2394099811,
+      "compressed": 3664,
+      "bytes": 40982,
+      "offset": 6194392
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000002d.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 6198154
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000002d.gdbtable",
+      "method": 8,
+      "crc": 532158011,
+      "compressed": 9527,
+      "bytes": 13380,
+      "offset": 6198329
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000002d.gdbtablx",
+      "method": 8,
+      "crc": 3878279097,
+      "compressed": 530,
+      "bytes": 5152,
+      "offset": 6207959
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000002d.spx",
+      "method": 8,
+      "crc": 4108800797,
+      "compressed": 1025,
+      "bytes": 4118,
+      "offset": 6208592
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000002e.gdbindexes",
+      "method": 8,
+      "crc": 1731915611,
+      "compressed": 70,
+      "bytes": 116,
+      "offset": 6209715
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000002e.gdbtable",
+      "method": 8,
+      "crc": 172013687,
+      "compressed": 6637,
+      "bytes": 9385,
+      "offset": 6209890
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000002e.gdbtablx",
+      "method": 8,
+      "crc": 2477147034,
+      "compressed": 392,
+      "bytes": 5152,
+      "offset": 6216630
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/a0000002e.spx",
+      "method": 8,
+      "crc": 3054509118,
+      "compressed": 706,
+      "bytes": 4118,
+      "offset": 6217125
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/gdb",
+      "method": 0,
+      "crc": 379203374,
+      "compressed": 4,
+      "bytes": 4,
+      "offset": 6217929
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237.gdb/timestamps",
+      "method": 8,
+      "crc": 2685640350,
+      "compressed": 38,
+      "bytes": 400,
+      "offset": 6218021
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_ArcMap10.2.pmf",
+      "method": 8,
+      "crc": 2759713738,
+      "compressed": 118363,
+      "bytes": 603648,
+      "offset": 6218154
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_ArcMap10.mxd",
+      "method": 8,
+      "crc": 2198035649,
+      "compressed": 118745,
+      "bytes": 743424,
+      "offset": 6336612
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 6455450
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 6455542
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/CraterRims.dbf",
+      "method": 8,
+      "crc": 2082225154,
+      "compressed": 6458,
+      "bytes": 17506,
+      "offset": 6455661
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/CraterRims.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 6462252
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/CraterRims.sbn",
+      "method": 8,
+      "crc": 153199654,
+      "compressed": 6017,
+      "bytes": 8900,
+      "offset": 6462514
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/CraterRims.sbx",
+      "method": 8,
+      "crc": 1618792383,
+      "compressed": 420,
+      "bytes": 908,
+      "offset": 6468664
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/CraterRims.shp",
+      "method": 8,
+      "crc": 924885719,
+      "compressed": 163353,
+      "bytes": 436584,
+      "offset": 6469217
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/CraterRims.shp.xml",
+      "method": 8,
+      "crc": 2357253268,
+      "compressed": 1780,
+      "bytes": 5187,
+      "offset": 6632703
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/CraterRims.shx",
+      "method": 8,
+      "crc": 3819072878,
+      "compressed": 3429,
+      "bytes": 7076,
+      "offset": 6634620
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Depressions.dbf",
+      "method": 8,
+      "crc": 2549819780,
+      "compressed": 68,
+      "bytes": 495,
+      "offset": 6638182
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Depressions.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 6638384
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Depressions.sbn",
+      "method": 8,
+      "crc": 2937322595,
+      "compressed": 308,
+      "bytes": 460,
+      "offset": 6638647
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Depressions.sbx",
+      "method": 8,
+      "crc": 542199977,
+      "compressed": 81,
+      "bytes": 140,
+      "offset": 6639089
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Depressions.shp",
+      "method": 8,
+      "crc": 2963558463,
+      "compressed": 429,
+      "bytes": 1024,
+      "offset": 6639304
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Depressions.shp.xml",
+      "method": 8,
+      "crc": 2545266916,
+      "compressed": 3512,
+      "bytes": 10640,
+      "offset": 6639867
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Depressions.shx",
+      "method": 8,
+      "crc": 2746233446,
+      "compressed": 136,
+      "bytes": 364,
+      "offset": 6643517
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Domes.dbf",
+      "method": 8,
+      "crc": 2804329063,
+      "compressed": 65,
+      "bytes": 1613,
+      "offset": 6643787
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Domes.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 6643980
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Domes.sbn",
+      "method": 8,
+      "crc": 3757114744,
+      "compressed": 889,
+      "bytes": 1268,
+      "offset": 6644237
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Domes.sbx",
+      "method": 8,
+      "crc": 2484086611,
+      "compressed": 114,
+      "bytes": 196,
+      "offset": 6645254
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Domes.shp",
+      "method": 8,
+      "crc": 2261234038,
+      "compressed": 1368,
+      "bytes": 3432,
+      "offset": 6645496
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Domes.shp.xml",
+      "method": 8,
+      "crc": 2100836180,
+      "compressed": 3558,
+      "bytes": 10716,
+      "offset": 6646992
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Domes.shx",
+      "method": 8,
+      "crc": 4254409598,
+      "compressed": 298,
+      "bytes": 1052,
+      "offset": 6650682
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Furrows.dbf",
+      "method": 8,
+      "crc": 3905370835,
+      "compressed": 6890,
+      "bytes": 29186,
+      "offset": 6651108
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Furrows.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 6658128
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Furrows.sbn",
+      "method": 8,
+      "crc": 2411261920,
+      "compressed": 5758,
+      "bytes": 8836,
+      "offset": 6658387
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Furrows.sbx",
+      "method": 8,
+      "crc": 2010925340,
+      "compressed": 311,
+      "bytes": 548,
+      "offset": 6664275
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Furrows.shp",
+      "method": 8,
+      "crc": 2185673328,
+      "compressed": 72669,
+      "bytes": 183340,
+      "offset": 6664716
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Furrows.shp.xml",
+      "method": 8,
+      "crc": 2154650944,
+      "compressed": 3546,
+      "bytes": 10816,
+      "offset": 6737515
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/Furrows.shx",
+      "method": 8,
+      "crc": 19183886,
+      "compressed": 3131,
+      "bytes": 7372,
+      "offset": 6741195
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologicContacts.dbf",
+      "method": 8,
+      "crc": 98444472,
+      "compressed": 64441,
+      "bytes": 416670,
+      "offset": 6744456
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologicContacts.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 6809036
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologicContacts.sbn",
+      "method": 8,
+      "crc": 3483944435,
+      "compressed": 50218,
+      "bytes": 77788,
+      "offset": 6809304
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologicContacts.sbx",
+      "method": 8,
+      "crc": 1385411991,
+      "compressed": 2425,
+      "bytes": 5532,
+      "offset": 6859661
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologicContacts.shp",
+      "method": 8,
+      "crc": 3761047515,
+      "compressed": 634669,
+      "bytes": 1601592,
+      "offset": 6862225
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologicContacts.shp.xml",
+      "method": 8,
+      "crc": 1404550838,
+      "compressed": 2429,
+      "bytes": 17116,
+      "offset": 7497033
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologicContacts.shx",
+      "method": 8,
+      "crc": 4234190728,
+      "compressed": 26977,
+      "bytes": 64188,
+      "offset": 7499605
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf",
+      "method": 8,
+      "crc": 3914016364,
+      "compressed": 13179,
+      "bytes": 324794,
+      "offset": 7526721
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 7540040
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.sbn",
+      "method": 8,
+      "crc": 2755375371,
+      "compressed": 24514,
+      "bytes": 38348,
+      "offset": 7540309
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.sbx",
+      "method": 8,
+      "crc": 1885409979,
+      "compressed": 1272,
+      "bytes": 2964,
+      "offset": 7564963
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp",
+      "method": 8,
+      "crc": 1444943279,
+      "compressed": 39356,
+      "bytes": 109636,
+      "offset": 7566375
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml",
+      "method": 8,
+      "crc": 1883658601,
+      "compressed": 1800,
+      "bytes": 5467,
+      "offset": 7605871
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx",
+      "method": 8,
+      "crc": 903487539,
+      "compressed": 5892,
+      "bytes": 31396,
+      "offset": 7607815
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf",
+      "method": 8,
+      "crc": 653643152,
+      "compressed": 58360,
+      "bytes": 387036,
+      "offset": 7613847
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 7672342
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.sbn",
+      "method": 8,
+      "crc": 705757872,
+      "compressed": 20064,
+      "bytes": 31348,
+      "offset": 7672606
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.sbx",
+      "method": 8,
+      "crc": 4145425969,
+      "compressed": 1235,
+      "bytes": 2892,
+      "offset": 7692805
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp",
+      "method": 8,
+      "crc": 2202359649,
+      "compressed": 802305,
+      "bytes": 2282348,
+      "offset": 7694175
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml",
+      "method": 8,
+      "crc": 2559734367,
+      "compressed": 2409,
+      "bytes": 8992,
+      "offset": 8496615
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx",
+      "method": 8,
+      "crc": 2179727759,
+      "compressed": 13004,
+      "bytes": 24468,
+      "offset": 8499163
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentative.dbf",
+      "method": 8,
+      "crc": 3679797334,
+      "compressed": 68768,
+      "bytes": 203381,
+      "offset": 8512302
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentative.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 8581214
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentative.sbn",
+      "method": 8,
+      "crc": 1163031490,
+      "compressed": 15393,
+      "bytes": 24660,
+      "offset": 8581487
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentative.sbx",
+      "method": 8,
+      "crc": 324520226,
+      "compressed": 968,
+      "bytes": 2308,
+      "offset": 8597024
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentative.shp",
+      "method": 8,
+      "crc": 4258695607,
+      "compressed": 76194,
+      "bytes": 201092,
+      "offset": 8598136
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentative.shp.xml",
+      "method": 8,
+      "crc": 3709317336,
+      "compressed": 3580,
+      "bytes": 11674,
+      "offset": 8674474
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentative.shx",
+      "method": 8,
+      "crc": 2748843463,
+      "compressed": 3770,
+      "bytes": 18364,
+      "offset": 8678202
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentativePoints.dbf",
+      "method": 8,
+      "crc": 2059235744,
+      "compressed": 51981,
+      "bytes": 159972,
+      "offset": 8682116
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentativePoints.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 8734247
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentativePoints.sbn",
+      "method": 8,
+      "crc": 3532883693,
+      "compressed": 15017,
+      "bytes": 24436,
+      "offset": 8734526
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentativePoints.sbx",
+      "method": 8,
+      "crc": 2979697143,
+      "compressed": 882,
+      "bytes": 2084,
+      "offset": 8749693
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentativePoints.shp",
+      "method": 8,
+      "crc": 4041188066,
+      "compressed": 22883,
+      "bytes": 64024,
+      "offset": 8750725
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentativePoints.shp.xml",
+      "method": 8,
+      "crc": 3088207856,
+      "compressed": 1836,
+      "bytes": 6007,
+      "offset": 8773758
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GroovesRepresentativePoints.shx",
+      "method": 8,
+      "crc": 187162324,
+      "compressed": 3493,
+      "bytes": 18364,
+      "offset": 8775748
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/SecondaryCraters.dbf",
+      "method": 8,
+      "crc": 2690305400,
+      "compressed": 415,
+      "bytes": 128691,
+      "offset": 8779391
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/SecondaryCraters.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 8779945
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/SecondaryCraters.sbn",
+      "method": 8,
+      "crc": 1327027211,
+      "compressed": 22388,
+      "bytes": 58564,
+      "offset": 8780213
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/SecondaryCraters.sbx",
+      "method": 8,
+      "crc": 4245836877,
+      "compressed": 733,
+      "bytes": 1388,
+      "offset": 8802740
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/SecondaryCraters.shp",
+      "method": 8,
+      "crc": 2816556096,
+      "compressed": 51883,
+      "bytes": 171600,
+      "offset": 8803612
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/SecondaryCraters.shp.xml",
+      "method": 8,
+      "crc": 727900644,
+      "compressed": 3530,
+      "bytes": 10884,
+      "offset": 8855634
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/SecondaryCraters.shx",
+      "method": 8,
+      "crc": 4202873127,
+      "compressed": 9234,
+      "bytes": 49100,
+      "offset": 8859307
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 8868680
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh.dbf",
+      "method": 8,
+      "crc": 1173939905,
+      "compressed": 209,
+      "bytes": 482,
+      "offset": 8868798
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 8869138
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh.sbn",
+      "method": 8,
+      "crc": 647293354,
+      "compressed": 91,
+      "bytes": 140,
+      "offset": 8869398
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh.sbx",
+      "method": 8,
+      "crc": 1189545894,
+      "compressed": 80,
+      "bytes": 116,
+      "offset": 8869620
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh.shp",
+      "method": 8,
+      "crc": 3689416836,
+      "compressed": 1479,
+      "bytes": 4424,
+      "offset": 8869831
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh.shp.xml",
+      "method": 8,
+      "crc": 1182611419,
+      "compressed": 3806,
+      "bytes": 12448,
+      "offset": 8871441
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh.shx",
+      "method": 8,
+      "crc": 2116959224,
+      "compressed": 80,
+      "bytes": 116,
+      "offset": 8875382
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh_interior_plains.dbf",
+      "method": 8,
+      "crc": 1697546532,
+      "compressed": 133,
+      "bytes": 260,
+      "offset": 8875593
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh_interior_plains.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 8875873
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh_interior_plains.sbn",
+      "method": 8,
+      "crc": 1516080869,
+      "compressed": 85,
+      "bytes": 132,
+      "offset": 8876149
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh_interior_plains.sbx",
+      "method": 8,
+      "crc": 1155145245,
+      "compressed": 81,
+      "bytes": 116,
+      "offset": 8876381
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh_interior_plains.shp",
+      "method": 8,
+      "crc": 862249878,
+      "compressed": 257,
+      "bytes": 556,
+      "offset": 8876609
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh_interior_plains.shp.xml",
+      "method": 8,
+      "crc": 2340437773,
+      "compressed": 3627,
+      "bytes": 11458,
+      "offset": 8877013
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/Gilgamesh_interior_plains.shx",
+      "method": 8,
+      "crc": 3651505979,
+      "compressed": 75,
+      "bytes": 108,
+      "offset": 8880791
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_crater_materials.dbf",
+      "method": 8,
+      "crc": 910717647,
+      "compressed": 31197,
+      "bytes": 241003,
+      "offset": 8881013
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_crater_materials.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 8912355
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_crater_materials.sbn",
+      "method": 8,
+      "crc": 525088622,
+      "compressed": 6067,
+      "bytes": 8876,
+      "offset": 8912629
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_crater_materials.sbx",
+      "method": 8,
+      "crc": 2692720955,
+      "compressed": 427,
+      "bytes": 908,
+      "offset": 8918841
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_crater_materials.shp",
+      "method": 8,
+      "crc": 177255265,
+      "compressed": 168172,
+      "bytes": 447844,
+      "offset": 8919413
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_crater_materials.shp.xml",
+      "method": 8,
+      "crc": 2170967930,
+      "compressed": 4154,
+      "bytes": 15634,
+      "offset": 9087730
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_crater_materials.shx",
+      "method": 8,
+      "crc": 1157603045,
+      "compressed": 3389,
+      "bytes": 7052,
+      "offset": 9092033
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_ejecta.dbf",
+      "method": 8,
+      "crc": 3718955728,
+      "compressed": 15277,
+      "bytes": 86193,
+      "offset": 9095567
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_ejecta.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 9110979
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_ejecta.sbn",
+      "method": 8,
+      "crc": 140954197,
+      "compressed": 6133,
+      "bytes": 8892,
+      "offset": 9111243
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_ejecta.sbx",
+      "method": 8,
+      "crc": 2340990563,
+      "compressed": 440,
+      "bytes": 924,
+      "offset": 9117511
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_ejecta.shp",
+      "method": 8,
+      "crc": 2133300357,
+      "compressed": 163167,
+      "bytes": 435072,
+      "offset": 9118086
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_ejecta.shp.xml",
+      "method": 8,
+      "crc": 3375929420,
+      "compressed": 3867,
+      "bytes": 12361,
+      "offset": 9281388
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_ejecta.shx",
+      "method": 8,
+      "crc": 2402677678,
+      "compressed": 3338,
+      "bytes": 7052,
+      "offset": 9285394
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests.dbf",
+      "method": 8,
+      "crc": 1656475437,
+      "compressed": 2046,
+      "bytes": 10874,
+      "offset": 9288867
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 9291053
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests.sbn",
+      "method": 8,
+      "crc": 2332478480,
+      "compressed": 472,
+      "bytes": 652,
+      "offset": 9291322
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests.sbx",
+      "method": 8,
+      "crc": 2519899253,
+      "compressed": 100,
+      "bytes": 164,
+      "offset": 9291934
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests.shp",
+      "method": 8,
+      "crc": 365444133,
+      "compressed": 11448,
+      "bytes": 27896,
+      "offset": 9292174
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests.shp.xml",
+      "method": 8,
+      "crc": 998811432,
+      "compressed": 3651,
+      "bytes": 12315,
+      "offset": 9303762
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests.shx",
+      "method": 8,
+      "crc": 1031555802,
+      "compressed": 324,
+      "bytes": 532,
+      "offset": 9307557
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests_interior_plains.dbf",
+      "method": 8,
+      "crc": 743176079,
+      "compressed": 468,
+      "bytes": 2610,
+      "offset": 9308021
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests_interior_plains.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 9308645
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests_interior_plains.sbn",
+      "method": 8,
+      "crc": 3851801733,
+      "compressed": 197,
+      "bytes": 284,
+      "offset": 9308930
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests_interior_plains.sbx",
+      "method": 8,
+      "crc": 2199385333,
+      "compressed": 85,
+      "bytes": 132,
+      "offset": 9309283
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests_interior_plains.shp",
+      "method": 8,
+      "crc": 3214034970,
+      "compressed": 2219,
+      "bytes": 5432,
+      "offset": 9309524
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests_interior_plains.shp.xml",
+      "method": 8,
+      "crc": 571803761,
+      "compressed": 3957,
+      "bytes": 13743,
+      "offset": 9311899
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_palimpsests_interior_plains.shx",
+      "method": 8,
+      "crc": 1033325772,
+      "compressed": 140,
+      "bytes": 228,
+      "offset": 9316016
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_terrain.dbf",
+      "method": 8,
+      "crc": 279338912,
+      "compressed": 76790,
+      "bytes": 279524,
+      "offset": 9316312
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_terrain.prj",
+      "method": 8,
+      "crc": 907751357,
+      "compressed": 129,
+      "bytes": 167,
+      "offset": 9393238
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_terrain.sbn",
+      "method": 8,
+      "crc": 3041429661,
+      "compressed": 12776,
+      "bytes": 18796,
+      "offset": 9393503
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_terrain.sbx",
+      "method": 8,
+      "crc": 629035896,
+      "compressed": 687,
+      "bytes": 1452,
+      "offset": 9406415
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_terrain.shp",
+      "method": 8,
+      "crc": 2573561489,
+      "compressed": 480708,
+      "bytes": 1369916,
+      "offset": 9407238
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_terrain.shp.xml",
+      "method": 8,
+      "crc": 2982496987,
+      "compressed": 3555,
+      "bytes": 11617,
+      "offset": 9888082
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Mapped_Separates/mapped_terrain.shx",
+      "method": 8,
+      "crc": 2500798478,
+      "compressed": 8340,
+      "bytes": 15404,
+      "offset": 9891777
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 9900253
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/Merc0Clip_lat55.dbf",
+      "method": 8,
+      "crc": 1669874313,
+      "compressed": 104,
+      "bytes": 178,
+      "offset": 9900359
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/Merc0Clip_lat55.prj",
+      "method": 8,
+      "crc": 425557934,
+      "compressed": 220,
+      "bytes": 367,
+      "offset": 9900588
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/Merc0Clip_lat55.sbn",
+      "method": 8,
+      "crc": 179299237,
+      "compressed": 79,
+      "bytes": 132,
+      "offset": 9900933
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/Merc0Clip_lat55.sbx",
+      "method": 8,
+      "crc": 366366227,
+      "compressed": 74,
+      "bytes": 116,
+      "offset": 9901137
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/Merc0Clip_lat55.shp",
+      "method": 8,
+      "crc": 2249185276,
+      "compressed": 5535,
+      "bytes": 19020,
+      "offset": 9901336
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/Merc0Clip_lat55.shp.xml",
+      "method": 8,
+      "crc": 2079072146,
+      "compressed": 2213,
+      "bytes": 6876,
+      "offset": 9906996
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/Merc0Clip_lat55.shx",
+      "method": 8,
+      "crc": 1883386111,
+      "compressed": 71,
+      "bytes": 108,
+      "offset": 9909338
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPole90Clip_lat57.dbf",
+      "method": 8,
+      "crc": 3680685297,
+      "compressed": 104,
+      "bytes": 178,
+      "offset": 9909534
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPole90Clip_lat57.prj",
+      "method": 8,
+      "crc": 2938248153,
+      "compressed": 234,
+      "bytes": 388,
+      "offset": 9909765
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPole90Clip_lat57.sbn",
+      "method": 8,
+      "crc": 2209974710,
+      "compressed": 63,
+      "bytes": 132,
+      "offset": 9910126
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPole90Clip_lat57.sbx",
+      "method": 8,
+      "crc": 4220677222,
+      "compressed": 59,
+      "bytes": 116,
+      "offset": 9910316
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPole90Clip_lat57.shp",
+      "method": 8,
+      "crc": 2953111961,
+      "compressed": 2257,
+      "bytes": 5932,
+      "offset": 9910502
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPole90Clip_lat57.shp.xml",
+      "method": 8,
+      "crc": 1017752429,
+      "compressed": 2190,
+      "bytes": 6831,
+      "offset": 9912886
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPole90Clip_lat57.shx",
+      "method": 8,
+      "crc": 2650946757,
+      "compressed": 57,
+      "bytes": 108,
+      "offset": 9915207
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPoleAzimuth_GroovesRepresentativePoints.dbf",
+      "method": 8,
+      "crc": 2712218256,
+      "compressed": 3562,
+      "bytes": 10786,
+      "offset": 9915391
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPoleAzimuth_GroovesRepresentativePoints.prj",
+      "method": 8,
+      "crc": 2938248153,
+      "compressed": 234,
+      "bytes": 388,
+      "offset": 9919103
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPoleAzimuth_GroovesRepresentativePoints.sbn",
+      "method": 8,
+      "crc": 2170027455,
+      "compressed": 1209,
+      "bytes": 1804,
+      "offset": 9919487
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPoleAzimuth_GroovesRepresentativePoints.sbx",
+      "method": 8,
+      "crc": 1746756110,
+      "compressed": 147,
+      "bytes": 228,
+      "offset": 9920846
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPoleAzimuth_GroovesRepresentativePoints.shp",
+      "method": 8,
+      "crc": 2773181325,
+      "compressed": 3091,
+      "bytes": 4748,
+      "offset": 9921143
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPoleAzimuth_GroovesRepresentativePoints.shp.xml",
+      "method": 8,
+      "crc": 3461355146,
+      "compressed": 1993,
+      "bytes": 6755,
+      "offset": 9924384
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/NPoleAzimuth_GroovesRepresentativePoints.shx",
+      "method": 8,
+      "crc": 749019259,
+      "compressed": 382,
+      "bytes": 1428,
+      "offset": 9926531
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPole90Clip_lat57.dbf",
+      "method": 8,
+      "crc": 3680685297,
+      "compressed": 104,
+      "bytes": 178,
+      "offset": 9927063
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPole90Clip_lat57.prj",
+      "method": 8,
+      "crc": 1545603854,
+      "compressed": 238,
+      "bytes": 389,
+      "offset": 9927294
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPole90Clip_lat57.sbn",
+      "method": 8,
+      "crc": 2209974710,
+      "compressed": 63,
+      "bytes": 132,
+      "offset": 9927659
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPole90Clip_lat57.sbx",
+      "method": 8,
+      "crc": 4220677222,
+      "compressed": 59,
+      "bytes": 116,
+      "offset": 9927849
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPole90Clip_lat57.shp",
+      "method": 8,
+      "crc": 2953111961,
+      "compressed": 2257,
+      "bytes": 5932,
+      "offset": 9928035
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPole90Clip_lat57.shp.xml",
+      "method": 8,
+      "crc": 2067599658,
+      "compressed": 2303,
+      "bytes": 7481,
+      "offset": 9930419
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPole90Clip_lat57.shx",
+      "method": 8,
+      "crc": 2650946757,
+      "compressed": 57,
+      "bytes": 108,
+      "offset": 9932853
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPoleAzimuth_GroovesRepresentativePoints.dbf",
+      "method": 8,
+      "crc": 530961734,
+      "compressed": 5064,
+      "bytes": 15906,
+      "offset": 9933037
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPoleAzimuth_GroovesRepresentativePoints.prj",
+      "method": 8,
+      "crc": 1545603854,
+      "compressed": 238,
+      "bytes": 389,
+      "offset": 9938251
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPoleAzimuth_GroovesRepresentativePoints.sbn",
+      "method": 8,
+      "crc": 1779772658,
+      "compressed": 1686,
+      "bytes": 2452,
+      "offset": 9938639
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPoleAzimuth_GroovesRepresentativePoints.sbx",
+      "method": 8,
+      "crc": 804915025,
+      "compressed": 150,
+      "bytes": 236,
+      "offset": 9940475
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPoleAzimuth_GroovesRepresentativePoints.shp",
+      "method": 8,
+      "crc": 2402351634,
+      "compressed": 4526,
+      "bytes": 6988,
+      "offset": 9940775
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPoleAzimuth_GroovesRepresentativePoints.shp.xml",
+      "method": 8,
+      "crc": 2916426461,
+      "compressed": 1993,
+      "bytes": 6756,
+      "offset": 9945451
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_Misc/SPoleAzimuth_GroovesRepresentativePoints.shx",
+      "method": 8,
+      "crc": 3963759844,
+      "compressed": 500,
+      "bytes": 2068,
+      "offset": 9947598
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 9948248
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/GanymedeContacts.lyr",
+      "method": 8,
+      "crc": 2992136802,
+      "compressed": 2421,
+      "bytes": 9728,
+      "offset": 9948319
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/GanymedeDepressions.lyr",
+      "method": 8,
+      "crc": 2709970496,
+      "compressed": 2096,
+      "bytes": 8192,
+      "offset": 9950831
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/GanymedeDomes.lyr",
+      "method": 8,
+      "crc": 3707044380,
+      "compressed": 2057,
+      "bytes": 8192,
+      "offset": 9953021
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/GanymedeFurrows.lyr",
+      "method": 8,
+      "crc": 428683794,
+      "compressed": 2030,
+      "bytes": 8192,
+      "offset": 9955166
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/GanymedeGroovesRepresentative2.lyr",
+      "method": 8,
+      "crc": 747859223,
+      "compressed": 2237,
+      "bytes": 9216,
+      "offset": 9957286
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/GanymedeSecondaryCraters.lyr",
+      "method": 8,
+      "crc": 1110014599,
+      "compressed": 2069,
+      "bytes": 8704,
+      "offset": 9959628
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/GanymedeUnits.lyr",
+      "method": 8,
+      "crc": 2609358814,
+      "compressed": 4181,
+      "bytes": 20480,
+      "offset": 9961796
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/Global_GroovesRepresentativePoints.lyr",
+      "method": 8,
+      "crc": 1517099844,
+      "compressed": 2565,
+      "bytes": 10240,
+      "offset": 9966065
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/NPoleAzimuth_GroovesRepresentativePoints.lyr",
+      "method": 8,
+      "crc": 4233757500,
+      "compressed": 2592,
+      "bytes": 10240,
+      "offset": 9968739
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/layerSymbology/SPoleAzimuth_GroovesRepresentativePoints.lyr",
+      "method": 8,
+      "crc": 4281831971,
+      "compressed": 2596,
+      "bytes": 10240,
+      "offset": 9971446
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Nomenclature/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 9974157
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Nomenclature/GANYMEDE_nomenclature.cpg",
+      "method": 0,
+      "crc": 243350608,
+      "compressed": 5,
+      "bytes": 5,
+      "offset": 9974226
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Nomenclature/GANYMEDE_nomenclature.dbf",
+      "method": 8,
+      "crc": 3619641952,
+      "compressed": 19283,
+      "bytes": 484177,
+      "offset": 9974325
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Nomenclature/GANYMEDE_nomenclature.prj",
+      "method": 8,
+      "crc": 3994574363,
+      "compressed": 133,
+      "bytes": 169,
+      "offset": 9993702
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Nomenclature/GANYMEDE_nomenclature.shp",
+      "method": 8,
+      "crc": 2848232955,
+      "compressed": 2220,
+      "bytes": 5364,
+      "offset": 9993929
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Nomenclature/GANYMEDE_nomenclature.shp.xml",
+      "method": 8,
+      "crc": 1984697871,
+      "compressed": 7323,
+      "bytes": 34171,
+      "offset": 9996243
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Nomenclature/GANYMEDE_nomenclature.shx",
+      "method": 8,
+      "crc": 1689508895,
+      "compressed": 402,
+      "bytes": 1604,
+      "offset": 10003664
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Raster_Basemap/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 10004160
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Raster_Basemap/Gamymede_glo_G29.tfw",
+      "method": 8,
+      "crc": 2660235616,
+      "compressed": 42,
+      "bytes": 83,
+      "offset": 10004231
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Raster_Basemap/Gamymede_glo_G29.tif",
+      "method": 8,
+      "crc": 1335094896,
+      "compressed": 67778446,
+      "bytes": 68355931,
+      "offset": 10004364
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Raster_Basemap/Gamymede_glo_G29.tif.aux.xml",
+      "method": 8,
+      "crc": 1827841977,
+      "compressed": 1164,
+      "bytes": 2308,
+      "offset": 77782901
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/Raster_Basemap/Gamymede_glo_G29.tif.ovr",
+      "method": 8,
+      "crc": 2176802190,
+      "compressed": 29437358,
+      "bytes": 29897736,
+      "offset": 77784164
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt",
+      "method": 8,
+      "crc": 3086016464,
+      "compressed": 5112,
+      "bytes": 15950,
+      "offset": 107221617
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.xml",
+      "method": 8,
+      "crc": 3330983995,
+      "compressed": 5326,
+      "bytes": 16348,
+      "offset": 107226814
+    },
+    {
+      "name": "Ganymede_SIM3237_Database/sim3237_Ganymede_readme.txt",
+      "method": 8,
+      "crc": 1096571830,
+      "compressed": 2299,
+      "bytes": 5871,
+      "offset": 107232225
+    }
+  ]
+}

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE metadata SYSTEM "http://www.fgdc.gov/metadata/fgdc-std-001-1998.dtd">
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>David A. Williams</origin>
+        <origin>Laszlo P. Keszthelyi</origin>
+        <origin>David A. Crown</origin>
+        <origin>Jessica A. Yff</origin>
+        <origin>Windy L. Jaeger</origin>
+        <origin>Paul M. Schenk</origin>
+        <origin>Paul E. Geissler</origin>
+        <origin>Tammy L. Becker</origin>
+        <pubdate>2011</pubdate>
+        <title>Geologic Map of Io, SIM-3168</title>
+        <edition>1</edition>
+        <geoform>vector digital data</geoform>
+        <pubinfo>
+          <pubplace>Denver, CO</pubplace>
+          <publish>U.S. Geological Survey</publish>
+        </pubinfo>
+        <onlink>http://pubs.usgs.gov/sim/3168/</onlink>
+        <onlink>http://www.usgs.gov/pubprod/</onlink>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>Io, discovered by Galileo Galilei on January 7-13, 1610, is the innermost of the four Galilean satellites of the planet Jupiter. It is the most volcanically active object in the Solar System, as recognized by observations from six U.S. National Aeronautics and Space Administration (NASA) spacecraft: Voyager 1 (March 1979), Voyager 2 (July 1979), Hubble Space Telescope (1990-Present), Galileo (1996-2001), Cassini (December 2000), and New Horizons (February 2007). The lack of impact craters on Io in any spacecraft images at any resolution attests to the high resurfacing rate (~1 cm/yr) and the dominant role of active volcanism in shaping its surface (Johnson et al., 1979). High-temperature hot spots detected by the Galileo Solid-State Imager (SSI), Near-Infrared Mapping Spectrometer (NIMS) and Photopolarimeter-Radiometer (PPR) usually correlate with darkest materials on the surface, suggestive of active volcanism. The Voyager flybys obtained complete coverage of Io's subjovian hemisphere at ~500 m/pixel to 2 km/pixel, and most of the rest of the satellite at 5-20 km/pixe. Repeated Galileo flybys obtained complementary coverage of Io's antijovian hemisphere at 5 m/pixel to 1.4 km/pixel. Thus, the Voyager and Galileo data sets were merged to enable the characterization of the whole surface of the satellite at a consistent resolution. The United States Geological Survey (USGS) produced a set of four global mosaics of Io in visible wavelengths at a spatial resolution of 1 km/pixel, released in February 2006, which we have used as basemaps for this new global geologic map.</abstract>
+      <purpose>Much has been learned about Io's volcanism, tectonics, degradation, and interior since the Voyager flybys, primarily during and following the Galileo Mission at Jupiter (December 1995-September 2003). Our mapping incorporates this new understanding to assist in map unit definition and provide a global synthesis of Io's geology.</purpose>
+      <supplinf>
+> Bagenal, F., W. McKinnon, and T. Dowling, Jupiter: Planet, Satellites and Magnetosphere, Cambridge University Press, New York, 719 pp., 2004.
+> Davies, A.G., Volcanism on Io, Cambridge University Press, London, 355 pp., 2007.
+> Lopes, R.M.C., and J.R. Spencer, Io After Galileo, Springer/Praxis Publishers, Chichester, UK, 342 pp., 2007.
+> Becker, T. and P. Geissler, 2005. Galileo global color mosaics of Io, In Lunar and Planetary Science XXXVI, Abstract #1862, Lunar and Planetary Institute, Houston (CD-ROM).</supplinf>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <mdattim>
+          <sngdate>
+            <caldate>2006</caldate>
+          </sngdate>
+          <sngdate>
+            <caldate>2011</caldate>
+          </sngdate>
+        </mdattim>
+      </timeinfo>
+      <current>publication date</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+    <spdom>
+      <bounding>
+        <westbc>-180</westbc>
+        <eastbc>180</eastbc>
+        <northbc>90</northbc>
+        <southbc>-90</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>NASA</themekt>
+        <themekey>Geologic Map</themekey>
+        <themekey>Io</themekey>
+        <themekey>Galilean satellites</themekey>
+        <themekey>Jupiter</themekey>
+        <themekey>Voyager 1</themekey>
+        <themekey>Voyager 2</themekey>
+        <themekey>Galileo</themekey>
+        <themekey>Cassini</themekey>
+        <themekey>New Horizons</themekey>
+      </theme>
+      <place>
+        <placekt>Gazatteer of Planetary Nomenclature (http://planetarynames.wr.usgs.gov)</placekt>
+        <placekey>Io</placekey>
+        <placekey>Jupiter</placekey>
+      </place>
+    </keywords>
+    <accconst>None</accconst>
+    <useconst>None</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>Ken Tanaka</cntper>
+          <cntorg>USGS</cntorg>
+        </cntperp>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>2255 North Gemini Drive</address>
+          <city>Flagstaff</city>
+          <state>AZ</state>
+          <postal>86001</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>928-556-7100</cntvoice>
+        <cntemail>ktanaka@usgs.gov</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <secinfo>
+      <secclass>Unclassified</secclass>
+    </secinfo>
+    <native>ESRI ArcMap 10.0</native>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>All attributes were verified by displaying the lines in both the database and the spatial coverage and they are believed to be logically consistent.</attraccr>
+    </attracc>
+    <logic>These data are believed to be logically consistent. Line geometry is topologically clean.</logic>
+    <complete>Competed at the given scale for publication by USGS</complete>
+    <posacc>
+      <horizpa>
+        <horizpar>The final map was generalized and scaled to be commensurate with a 1:15,000,000 map scale, although map component compilation was at a larger scale.   Overall, the geologic map product is only as accurate as the 2005 basemap created by the USGS which contains kilometer errors.</horizpar>
+        <qhorizpa>
+          <horizpae>Becker, T. and P. Geissler, 2005. Galileo global color mosaics of Io, In Lunar and Planetary Science XXXVI, Abstract #1862, Lunar and Planetary Institute, Houston (CD-ROM).</horizpae>
+        </qhorizpa>
+        <qhorizpa>
+          <horizpae>http://www.lpi.usra.edu/meetings/lpsc2001/pdf/1746.pdf</horizpae>
+        </qhorizpa>
+      </horizpa>
+    </posacc>
+    <lineage>
+      <srcinfo>
+        <srccite>
+          <citeinfo>
+            <origin>Tammy Becker</origin>
+            <origin>Paul Geissler</origin>
+            <pubdate>2005</pubdate>
+            <title>Galileo global color mosaics of Io</title>
+            <edition>1</edition>
+            <geoform>remote-sensing image</geoform>
+            <pubinfo>
+              <pubplace>Houston, TX</pubplace>
+              <publish>Lunar and Planetary Science XXXVI</publish>
+            </pubinfo>
+            <onlink>http://www.lpi.usra.edu/meetings/lpsc2005/pdf/1862.pdf</onlink>
+            <onlink>http://www.lpi.usra.edu/meetings/lpsc2001/pdf/1746.pdf</onlink>
+          </citeinfo>
+        </srccite>
+      </srcinfo>
+      <procstep>
+        <procdesc>Geologic mapping of Io has focused on specific types of geologic material units and structural features, as first recognized by Schaber (1980, 1982). The reasons for this are (1) the quantity of concurrent volcanic activity on Io, and (2) the variable quality of the global spacecraft data. These constraints mean that it is not practical to separate map units based on both age and lithology. The mapping strategy developed for the global map was initially tested through mapping of the polar regions with ArcGIS software (by ESRI) and then applied to the equatorial region.</procdesc>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <spdoinfo>
+    <direct>Vector</direct>
+    <ptvctinf>
+      <sdtsterm>
+        <sdtstype>G-polygon</sdtstype>
+        <ptvctcnt>339</ptvctcnt>
+      </sdtsterm>
+      <sdtsterm>
+        <sdtstype>Entity point</sdtstype>
+        <ptvctcnt>172</ptvctcnt>
+      </sdtsterm>
+      <sdtsterm>
+        <sdtstype>Entity point</sdtstype>
+        <ptvctcnt>140</ptvctcnt>
+      </sdtsterm>
+      <sdtsterm>
+        <sdtstype>String</sdtstype>
+        <ptvctcnt>1108</ptvctcnt>
+      </sdtsterm>
+      <sdtsterm>
+        <sdtstype>G-polygon</sdtstype>
+        <ptvctcnt>16</ptvctcnt>
+      </sdtsterm>
+      <sdtsterm>
+        <sdtstype>Entity point</sdtstype>
+        <ptvctcnt>60</ptvctcnt>
+      </sdtsterm>
+      <sdtsterm>
+        <sdtstype>Entity point</sdtstype>
+        <ptvctcnt>1500</ptvctcnt>
+      </sdtsterm>
+      <sdtsterm>
+        <sdtstype>G-polygon</sdtstype>
+        <ptvctcnt>1503</ptvctcnt>
+      </sdtsterm>
+      <sdtsterm>
+        <sdtstype>String</sdtstype>
+        <ptvctcnt>3374</ptvctcnt>
+      </sdtsterm>
+    </ptvctinf>
+  </spdoinfo>
+  <spref>
+    <horizsys>
+      <geograph>
+        <latres>0.01</latres>
+        <longres>0.01</longres>
+        <geogunit>Decimal degrees</geogunit>
+      </geograph>
+      <geodetic>
+        <horizdn>D_Io_2000</horizdn>
+        <ellips>Io_2000_IAU_IAG</ellips>
+        <semiaxis>1821460.000000</semiaxis>
+        <denflat>infinity</denflat>
+      </geodetic>
+    </horizsys>
+    <vertdef>
+      <altsys>
+        <altres>0.000003</altres>
+        <altenc>Explicit elevation coordinate included with horizontal coordinates</altenc>
+      </altsys>
+    </vertdef>
+  </spref>
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>Io_DiffuseDeposits</enttypl>
+      </enttyp>
+      <enttypd>
+         Diffuse deposits are superposed on all other materials, and cover ~18% of Io’s surface
+       </enttypd>
+     <attr>
+       <attrlabl>
+         Type
+       </attrlabl>
+       <attrdef>
+         Bright or bright yellow, Dark or black, Green, Red or orange, White
+       </attrdef>
+     </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>Io_HotSpots_Locations</enttypl>
+      </enttyp>
+      <enttypd>
+         Known hotspot locations
+       </enttypd>
+     <attr>
+       <attrlabl>
+         Volcanic_C
+       </attrlabl>
+       <attrdef>
+         display name of feature if known
+       </attrdef>
+     </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>Io_Mountains</enttypl>
+      </enttyp>
+      <enttypd>
+         Known Io mountain locations
+       </enttypd>
+     <attr>
+       <attrlabl>
+         HeightKm
+       </attrlabl>
+       <attrdef>
+         Approximate height of Io mountain
+       </attrdef>
+     </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>Io_Structure</enttypl>
+      </enttyp>
+      <enttypd>
+         Structure classification
+       </enttypd>
+     <attr>
+       <attrlabl>
+         Type
+       </attrlabl>
+       <attrdef>
+         Closed topographic high, Groove or furrow, Lineament, Pit or closed depression, Ridge, Scarp
+       </attrdef>
+     </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>Io_PointFeatures</enttypl>
+      </enttyp>
+      <enttypd>
+         Point feature locations
+       </enttypd>
+     <attr>
+       <attrlabl>
+         Type
+       </attrlabl>
+       <attrdef>
+         small patera floor dark, small patera floor bright, small mountain, plume point source, small closed depression, small cone, volcanic vent
+       </attrdef>
+     </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>Io_GeoUnits</enttypl>
+      </enttyp>
+      <enttypd>
+         Geologic unit type
+       </enttypd>
+     <attr>
+       <attrlabl>
+         UnitName
+       </attrlabl>
+       <attrdef>
+         Bright plains, Flows bright, Flows dark, Flows undivided, Layered plains, Mountain lineated, Mountain mottled or hummocky, Mountain undivided, NoData, Patera Floor bright, Patera Floor dark, Patera Floor undivided, Red-brown plains, Tholi, White plains
+       </attrdef>
+     </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>Io_GeoContacts</enttypl>
+      </enttyp>
+      <enttypd>
+         Geologic contact type
+       </enttypd>
+     <attr>
+       <attrlabl>
+         Type
+       </attrlabl>
+       <attrdef>
+         certain, approximate, gradational
+       </attrdef>
+     </attr>
+    </detailed>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>Box 25286 Federal Center</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80225</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntemail>ktanaka@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <resdesc>Downloadable Data</resdesc>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname>ESRI File GeoDatabase</formname>
+          <formvern>ArcGIS 9.3</formvern>
+          <formspec>GIS</formspec>
+          <filedec>zip</filedec>
+          <transize>200</transize>
+        </digtinfo>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>http://www.usgs.gov/pubprod/</networkr>
+                <networkr>http://pubs.usgs.gov/sim/3168</networkr>
+              </networka>
+            </computer>
+            <accinstr>Web browser</accinstr>
+          </onlinopt>
+        </digtopt>
+      </digform>
+      <fees>n/a</fees>
+      <ordering>Digital download using a web browser.</ordering>
+    </stdorder>
+    <techpreq>GIS software</techpreq>
+    <availabl>
+      <timeinfo>
+        <sngdate>
+          <caldate>2011</caldate>
+        </sngdate>
+      </timeinfo>
+    </availabl>
+  </distinfo>
+  <metainfo>
+    <metd>20120229</metd>
+    <metrd>2012</metrd>
+    <metc>
+      <cntinfo>
+        <cntperp>
+          <cntper>Trent Hare</cntper>
+          <cntorg>USGS</cntorg>
+        </cntperp>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>2255 North Gemini Drive</address>
+          <city>Flagstaff</city>
+          <state>AZ</state>
+          <postal>86001</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>928-556-7126</cntvoice>
+        <cntemail>thare@usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Content Standards for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001-1998</metstdv>
+    <mettc>local time</mettc>
+    <metac>None</metac>
+    <metuc>None</metuc>
+    <metsi>
+      <metsc>Unclassified</metsc>
+    </metsi>
+    <metextns>
+      <onlink>http://www.esri.com/metadata/esriprof80.html</onlink>
+      <metprof>ESRI Metadata Profile</metprof>
+    </metextns>
+  </metainfo>
+</metadata>

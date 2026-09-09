@@ -95,84 +95,23 @@
           "id": "topography",
           "label": "Elevation",
           "thumbnailUrl": "/scenes/moon/moon-topography-thumbnail.webp",
-          "description": "LOLA elevation relative to a 1,737.4 km reference sphere, shown with color and cartographic shaded relief. This archival map does not share the orbital scene epoch.",
+          "description": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination.",
           "legend": {
             "kind": "scale",
-            "title": "Relative elevation",
-            "colors": [
-              "rgb(45 70 174)",
-              "rgb(45 77 176)",
-              "rgb(45 83 178)",
-              "rgb(45 90 180)",
-              "rgb(44 96 183)",
-              "rgb(44 103 185)",
-              "rgb(44 110 187)",
-              "rgb(44 116 189)",
-              "rgb(44 123 191)",
-              "rgb(44 129 193)",
-              "rgb(44 136 196)",
-              "rgb(44 143 198)",
-              "rgb(43 149 200)",
-              "rgb(43 156 202)",
-              "rgb(43 162 204)",
-              "rgb(43 169 206)",
-              "rgb(43 174 207)",
-              "rgb(43 175 201)",
-              "rgb(43 175 195)",
-              "rgb(43 176 189)",
-              "rgb(44 176 183)",
-              "rgb(44 177 177)",
-              "rgb(44 178 171)",
-              "rgb(44 178 165)",
-              "rgb(44 179 159)",
-              "rgb(44 179 153)",
-              "rgb(44 180 147)",
-              "rgb(44 180 141)",
-              "rgb(45 181 135)",
-              "rgb(45 182 129)",
-              "rgb(45 182 123)",
-              "rgb(45 183 117)",
-              "rgb(51 185 113)",
-              "rgb(62 188 110)",
-              "rgb(73 191 108)",
-              "rgb(84 194 105)",
-              "rgb(96 198 103)",
-              "rgb(107 201 100)",
-              "rgb(118 204 97)",
-              "rgb(129 207 95)",
-              "rgb(141 211 92)",
-              "rgb(152 214 90)",
-              "rgb(163 217 87)",
-              "rgb(174 220 85)",
-              "rgb(185 223 82)",
-              "rgb(197 227 80)",
-              "rgb(208 230 77)",
-              "rgb(219 233 75)",
-              "rgb(222 227 73)",
-              "rgb(221 217 72)",
-              "rgb(221 207 71)",
-              "rgb(220 197 69)",
-              "rgb(220 187 68)",
-              "rgb(219 177 67)",
-              "rgb(219 167 66)",
-              "rgb(218 157 65)",
-              "rgb(218 147 63)",
-              "rgb(217 137 62)",
-              "rgb(217 127 61)",
-              "rgb(216 117 60)",
-              "rgb(216 107 59)",
-              "rgb(215 97 57)",
-              "rgb(215 87 56)",
-              "rgb(214 77 55)"
-            ],
+            "title": "Elevation above reference sphere",
+            "src": "/scenes/moon/moon-topography-legend.webp",
+            "width": 256,
+            "height": 16,
             "labels": [
-              "Lower",
-              "Higher"
+              "−12",
+              "0",
+              "12"
             ],
-            "sourceUrl": "https://svs.gsfc.nasa.gov/4014/"
+            "meta": "km",
+            "sourceUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
           },
-          "title": "Elevation: NASA LRO/LOLA elevation map with shaded relief",
-          "detail": "Shaded relief",
+          "title": "Elevation: LRO LOLA LDEM16 numeric heights",
+          "detail": "Numeric elevation",
           "summary": "LOLA elevation relative to a 1,737.4 km sphere. Color and shading show relief from archival measurements."
         },
         {
@@ -258,6 +197,28 @@
           "title": "Crust: NASA GRAIL crustal-thickness map with shaded relief",
           "detail": "Thickness",
           "summary": "Crust thickness from GRAIL gravity and topography. It depends on assumed densities; this is a model."
+        },
+        {
+          "id": "rock-abundance",
+          "label": "Rock abundance",
+          "thumbnailUrl": "/scenes/moon/moon-rock-abundance-thumbnail.webp",
+          "description": "Surface area covered by rocks, inferred from nighttime Diviner thermal measurements in 2009–2010. Color spans 0–2%; values above 2% share the brightest color. Patterned areas are outside ±60° coverage, missing, or physically invalid. This is a thermal model, not a photograph or a count of individual boulders.",
+          "title": "Rock abundance: LRO Diviner modeled rock-area fraction",
+          "detail": "Modeled area fraction",
+          "legend": {
+            "kind": "scale",
+            "title": "Surface rock area",
+            "src": "/scenes/moon/moon-rock-abundance-legend.webp",
+            "width": 256,
+            "height": 16,
+            "labels": [
+              "0",
+              "1",
+              "2+"
+            ],
+            "meta": "%",
+            "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml"
+          }
         }
       ]
     },
@@ -317,8 +278,8 @@
         "surface2xUrl": "/scenes/moon/moon-topography@2x.webp",
         "polesUrl": "/scenes/moon/moon-topography-poles.webp",
         "poles2xUrl": "/scenes/moon/moon-topography-poles@2x.webp",
-        "qualification": "NASA LRO/LOLA elevation map with shaded relief",
-        "detail": "Shaded relief"
+        "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
+        "detail": "Numeric elevation"
       },
       {
         "id": "crust",
@@ -330,6 +291,17 @@
         "poles2xUrl": "/scenes/moon/moon-crustal-thickness-poles@2x.webp",
         "qualification": "NASA GRAIL crustal-thickness map with shaded relief",
         "detail": "Thickness"
+      },
+      {
+        "id": "rock-abundance",
+        "label": "Rock abundance",
+        "thumbnailUrl": "/scenes/moon/moon-rock-abundance-thumbnail.webp",
+        "surfaceUrl": "/scenes/moon/moon-rock-abundance.webp",
+        "surface2xUrl": "/scenes/moon/moon-rock-abundance@2x.webp",
+        "polesUrl": "/scenes/moon/moon-rock-abundance-poles.webp",
+        "poles2xUrl": "/scenes/moon/moon-rock-abundance-poles@2x.webp",
+        "qualification": "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south",
+        "detail": "Modeled area fraction"
       }
     ],
     "material": {
@@ -345,8 +317,9 @@
     },
     "provenance": {
       "surface": "NASA SVS CGI Moon Kit; LRO/LROC and LOLA",
-      "topography": "NASA GSFC SVS; LRO Lunar Orbiter Laser Altimeter",
-      "crust": "NASA GSFC SVS; Gravity Recovery and Interior Laboratory"
+      "topography": "David E. Smith and LRO LOLA team; NASA PDS Geosciences Node; LDEM_16 V3.1",
+      "crust": "NASA GSFC SVS; Gravity Recovery and Interior Laboratory",
+      "rock-abundance": "Joshua Bandfield and LRO Diviner team, UCLA; NASA PDS Geosciences Node; DGDR_RA_AVG_CYL_032_IMG V4.0"
     }
   },
   "resources": [
@@ -379,11 +352,23 @@
       "role": "stars",
       "description": "Background star field",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "NASA PDS / LOLA",
+      "role": "science",
+      "description": "Numeric lunar elevation grid",
+      "href": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+    },
+    {
+      "label": "NASA PDS / Diviner",
+      "role": "science",
+      "description": "Modeled surface rock abundance",
+      "href": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml"
     }
   ],
   "provenance": {
     "sourceRecord": "../SOURCE.md",
     "editorial": "source/orbit/moon.json",
-    "qualification": "Accepted source-backed facts, labels and observation interpretation; no scientific values changed during JSON migration."
+    "qualification": "LROC visible-color presentation, numeric LOLA elevation, modeled Diviner rock area and the retained GRAIL crust interpretation each preserve their own source epoch and limits."
   }
 }

@@ -12,7 +12,9 @@ import { containedPath, publishPinnedSource } from './operations.js';
 import type { SourceManifest } from './operations.js';
 import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mjs';
 import {prepareProjectedCatalog} from './acquisition/projected-catalog.mjs';
+import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mjs';
 import {csvRow} from './acquisition/csv.mjs';
+interface DskMesh extends OperationBase {kind:'dsk-mesh';path:string;recipe:Record<string,unknown>;}
 interface OperationBase { groups:string[]; }
 interface Download extends OperationBase {kind:'download';path:string;url:string;headers?:Record<string,string>;encoding?:'gzip'|'pretty-json';expectedJsonFields?:Record<string,unknown>;}
 interface RequestDownload extends OperationBase {kind:'request-download';path:string;url:string;form:Record<string,string>;fileSource?:string;trimEnd?:boolean;appendText?:string;headers?:Record<string,string>;replacements?:{pattern:string;flags?:string;replacement:string}[];requiredPrefix?:string;requiredText?:string[];numericLineCount?:number;}
@@ -24,16 +26,16 @@ interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:strin
 interface RequestCheck extends OperationBase {kind:'verify-request';url:string;form:Record<string,string>;fileSource?:string;expectedPath:string;selector:'trim'|'numeric-lines'|'before-marker';marker?:string;rowCount?:number;headers?:Record<string,string>;}
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
 interface Catalog extends OperationBase {kind:'catalog-field';path:string;url:string;sha256:string;catalogRows:number;selectedCount:number;selection?:{model:'gnomonic';centerRaDegrees:number;centerDecDegrees:number;horizontalFovDegrees:number;aspectRatio:number};template:{schema:string;source:Record<string,unknown>;projection:Record<string,unknown>;presentation:Record<string,unknown>;starColumns?:string[]};}
-export type AcquisitionOperation=Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|Catalog;
+export type AcquisitionOperation=DskMesh|Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|Catalog;
 export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operations:AcquisitionOperation[];}
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
 export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations)||!plan.operations.length)throw new TypeError('Invalid acquisition plan.');
- for(const value of plan.operations){const step=record(value);if(!['json-document','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
-  if(!['download','request-download','json-document','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','catalog-field'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
+ for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
+  if(!['download','request-download','json-document','dsk-mesh','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','catalog-field'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
-  if(['download','request-download','json-document','zip-member','satellite-catalog','tile-mosaic','catalog-field'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+  if(['download','request-download','json-document','dsk-mesh','zip-member','satellite-catalog','tile-mosaic','catalog-field'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
   if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.archiveSha256!=='string'||!/^[a-f0-9]{64}$/.test(step.archiveSha256)||!Number.isSafeInteger(step.archiveBytes)||Number(step.archiveBytes)<=0||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
   if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
   if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
@@ -43,6 +45,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
   if(step.kind==='request-download'&&(step.requiredPrefix!==undefined&&typeof step.requiredPrefix!=='string'||step.requiredText!==undefined&&(!Array.isArray(step.requiredText)||step.requiredText.some(value=>typeof value!=='string'))||step.numericLineCount!==undefined&&(!Number.isSafeInteger(step.numericLineCount)||Number(step.numericLineCount)<1)))throw new TypeError('Invalid source response checks.');
   if(step.kind==='request-download'&&step.replacements!==undefined){if(!Array.isArray(step.replacements))throw new TypeError('Response replacements must be an array.');for(const value of step.replacements){const replacement=record(value);if(typeof replacement.pattern!=='string'||typeof replacement.replacement!=='string'||replacement.flags!==undefined&&(typeof replacement.flags!=='string'||!/^[gimu]*$/.test(replacement.flags)))throw new TypeError('Invalid response text replacement.');new RegExp(replacement.pattern,replacement.flags as string|undefined);}}
   if(step.kind==='json-document')record(step.value);
+  if(step.kind==='dsk-mesh')validateDskMeshRecipe(step.recipe);
   if(step.kind==='satellite-catalog'&&typeof step.recipePath!=='string')throw new TypeError('Satellite catalog recipe is missing.');
   if(step.kind==='verify-download'||step.kind==='catalog-field')if(typeof step.sha256!=='string'||!/^[a-f0-9]{64}$/.test(step.sha256))throw new TypeError('Acquisition integrity hash is missing.');
   if(step.kind==='tile-mosaic')for(const key of ['tileSize','columns','rows','dataWidth','dataHeight','width','height','concurrency'])if(typeof step[key]!=='number'||!Number.isSafeInteger(step[key])||step[key]<=0)throw new TypeError(`Invalid mosaic ${key}.`);
@@ -87,6 +90,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    const {stdout}=await promisify(execFile)('unzip',['-p',archivePath,step.member],{encoding:'buffer',maxBuffer:512*1024*1024});
    await publish(step.path,stdout);
   }
+  else if(step.kind==='dsk-mesh')await publish(step.path,await prepareDskMesh({sourceRoot,recipe:step.recipe}));
   else if(step.kind==='json-document')await publish(step.path,new TextEncoder().encode(JSON.stringify(step.value,null,2)+'\n'));
   else if(step.kind==='satellite-catalog'){
    const recipe=JSON.parse(await readFile(containedPath(sourceRoot,step.recipePath),'utf8')) as unknown,config=validateSatelliteCatalogRecipe(recipe),documents:Record<string,string>={};

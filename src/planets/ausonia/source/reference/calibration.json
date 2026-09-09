@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 93.0,
+  "uncertaintyKm": 3.0,
+  "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+  "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5924",
+  "reference": "DAMIT model 5924, version 2021-11-12",
+  "sourceLabel": "DAMIT model 5924",
+  "scaleKmPerSourceUnit": 0.9984408632995786,
+  "metersPerSourceUnit": 998.4408632995786,
+  "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred.",
+  "visibleDescription": "Nonconvex model constrained by resolved imaging, 93 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative."
+}

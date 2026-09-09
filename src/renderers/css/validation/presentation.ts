@@ -32,7 +32,14 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
       const maximum = finite(navigation.maximumZoom, 'navigation maximum zoom');
       if (maximum < camera.minimumZoom || maximum > camera.maximumZoom) fail('navigation zoom must be bounded');
       if (navigation.camera !== null) {
-        const pose = record(navigation.camera, 'navigation camera', ['controlPitch', 'controlYaw', 'zoom']);
+        const pose = record(navigation.camera, 'navigation camera', ['controlPitch', 'controlYaw', 'controlRoll', 'zoom', 'transition']);
+        if (pose.transition !== undefined) {
+          const transition = record(pose.transition, 'camera transition', ['durationMilliseconds', 'preserveZoom']);
+          const duration = positive(transition.durationMilliseconds, 'camera transition duration');
+          if (duration > 10000) fail('camera transition exceeds 10 seconds');
+          boolean(transition.preserveZoom, 'camera transition preserve zoom');
+        }
+        if (pose.controlRoll !== undefined) finite(pose.controlRoll, 'navigation roll');
         finite(pose.controlPitch, 'navigation pitch'); finite(pose.controlYaw, 'navigation yaw');
         const zoom = finite(pose.zoom, 'navigation zoom'); if (zoom < camera.minimumZoom || zoom > maximum) fail('navigation camera must be bounded');
       }

@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c0037191f2051263640f37c6281a82db43d64f34b94df4790afacd7d3dedd1d5"
+    "sha256": "e3abfabb6e236990d551386902d3876c3a4abca43629f567e2b69910ced4252e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "81ab024909ad17566adb06ae0c935c1cdcaf68a23b911488885fd2db95f4a890",
+      "sha256": "c55768b273de837e73cfbd6c0845dafd8ffaf1ff859d51b14ae9be82d0a4f3db",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -88,6 +88,88 @@
                 ],
                 "ambient": 0.45
               }
+            },
+            {
+              "id": "albedo",
+              "label": "Relative albedo",
+              "consumer": "facet-science",
+              "path": "shape/deimos_g_083m_spc_obj_0000n00000_v002.csv.zip",
+              "format": "facet-scalars",
+              "meshPath": "shape/deimos_g_083m_spc_obj_0000n00000_v002.obj.zip",
+              "grid": {
+                "member": "deimos_g_083m_spc_obj_0000n00000_v002.obj",
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "table": {
+                "format": "sbmt-csv-zip",
+                "field": "Albedo",
+                "units": "",
+                "expectedRows": 196608,
+                "maximumCentroidErrorMeters": 0.001,
+                "member": "deimos_g_083m_spc_obj_0000n00000_v002.csv",
+                "validityField": "Albedo"
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 100
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "previewGrid": {
+                "width": 640,
+                "height": 320
+              },
+              "minimum": 0.04,
+              "maximum": 0.1,
+              "colors": [
+                "#202e44",
+                "#789c9f",
+                "#f1e4c9"
+              ]
+            },
+            {
+              "id": "slope",
+              "label": "Slope",
+              "consumer": "facet-science",
+              "path": "shape/deimos_g_083m_spc_obj_0000n00000_v002.csv.zip",
+              "format": "facet-scalars",
+              "meshPath": "shape/deimos_g_083m_spc_obj_0000n00000_v002.obj.zip",
+              "grid": {
+                "member": "deimos_g_083m_spc_obj_0000n00000_v002.obj",
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "table": {
+                "format": "sbmt-csv-zip",
+                "field": "Slope",
+                "units": "degrees",
+                "expectedRows": 196608,
+                "maximumCentroidErrorMeters": 0.001,
+                "member": "deimos_g_083m_spc_obj_0000n00000_v002.csv",
+                "validityField": "Albedo"
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 100
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "previewGrid": {
+                "width": 640,
+                "height": 320
+              },
+              "minimum": 0,
+              "maximum": 50,
+              "colors": [
+                "#20204b",
+                "#2d75b9",
+                "#4ebba7",
+                "#f1c45c",
+                "#cc543d"
+              ]
             }
           ],
           "observedColors": []
@@ -123,9 +205,16 @@
             },
             "latitudeSegments": 20,
             "longitudeSegments": 32,
-            "faceBudget": 2000,
+            "faceBudget": 1600,
             "tileSize": 128,
-            "atlasColumns": 16
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 1600,
+              "maximumErrorMeters": 100,
+              "regularize": true
+            }
           }
         },
         "celestial": {
@@ -145,7 +234,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "06f75fe239033714e2a8ea697f96d4cc574c0712e65089e5ccf856a5d97871ae",
+      "sha256": "b9e52feb8f7d416ec6aeb98d7a5927d6e01675f0e1e577c0aa344e93a480470d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -216,7 +305,9 @@
           "defaultLens": "normal",
           "labels": {
             "normal": "Monochrome",
-            "elevation": "Elevation"
+            "elevation": "Elevation",
+            "albedo": "Relative albedo",
+            "slope": "Slope"
           },
           "controls": [
             {
@@ -264,6 +355,64 @@
                 "image": "/scenes/deimos/deimos-elevation-legend.webp"
               },
               "summary": "Height relative to a 6.2 km sphere, from the 2023 shape model. Areas without a solved surface brightness are withheld."
+            },
+            {
+              "id": "albedo",
+              "label": "Relative albedo",
+              "description": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+              "title": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+              "detail": "Released facet values",
+              "thumbnail": "/scenes/deimos/deimos-albedo-thumbnail.webp",
+              "surface": "deimos-albedo-surface@2x.webp",
+              "poles": "deimos-albedo-surface@2x.webp",
+              "source": {
+                "id": "ernst-2023-facet-support",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1186/s40623-023-01814-7"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Relative albedo",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.04",
+                  "0.07",
+                  "0.1"
+                ],
+                "meta": "SPC relative scale",
+                "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
+                "image": "/scenes/deimos/deimos-albedo-legend.webp"
+              }
+            },
+            {
+              "id": "slope",
+              "label": "Slope",
+              "description": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+              "title": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+              "detail": "Released facet values",
+              "thumbnail": "/scenes/deimos/deimos-slope-thumbnail.webp",
+              "surface": "deimos-slope-surface@2x.webp",
+              "poles": "deimos-slope-surface@2x.webp",
+              "source": {
+                "id": "ernst-2023-facet-support",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1186/s40623-023-01814-7"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Slope",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "25",
+                  "50"
+                ],
+                "meta": "deg",
+                "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
+                "image": "/scenes/deimos/deimos-slope-legend.webp"
+              }
             }
           ]
         },
@@ -440,6 +589,7 @@
       ],
       "acquisition": "Download the matching published facet attributes.",
       "redistribution": "Retain the research and archive attribution.",
+      "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement.",
       "sha256": "ddb6fdcca05fab3ce471999ded12b0f532d28274ad983e261d85e5d1f8a4c4f1",
       "bytes": 26366556,
       "dependencies": [],
@@ -464,8 +614,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2bc0a45fc3c39b40908f2a8624beeebff93fc77111456462cd730d90321be7d8",
-      "bytes": 9228,
+      "sha256": "b9e52feb8f7d416ec6aeb98d7a5927d6e01675f0e1e577c0aa344e93a480470d",
+      "bytes": 12455,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -509,8 +659,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-normal-surface@2x.webp",
-          "bytes": 1338064,
-          "sha256": "b48f30c60b8ae94583f3e6284549213adc7e60f804e0feed9cf535932b7f9525",
+          "bytes": 1669392,
+          "sha256": "6ad790e385e9701c2d39de34c5c577b8fc69f5210b0413006901651d8f46e033",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -554,8 +704,98 @@
         },
         {
           "url": "/scenes/deimos/deimos-elevation-surface@2x.webp",
-          "bytes": 713472,
-          "sha256": "a4e65d739936f79f8b557b0dad8743bd72519bc8a55b3066ff2122b466317037",
+          "bytes": 785732,
+          "sha256": "613db32f3dc4761d77932d1466ebd808e9dd7c82e7ac329e4aa7cf569961a4f5",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "albedo",
+      "label": "Relative albedo",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement."
+      ],
+      "lensIds": [
+        "albedo"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "ernst-2023-facet-support",
+        "ernst-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/deimos/deimos-albedo-thumbnail.webp",
+          "bytes": 666,
+          "sha256": "63b57ea31454100e8ebe65c595d0551fa5dd65f48850d009270afd9ef5a23ffd",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/deimos/deimos-albedo-legend.webp",
+          "bytes": 192,
+          "sha256": "84c28272b31f82773de272bfd6760dd36f6633203510f00fd80df0defb229c44",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/deimos/deimos-albedo-surface@2x.webp",
+          "bytes": 1809984,
+          "sha256": "4f0f6883ed631ad3366c5f506a191e0f2b13e58a3f157f51ff12e8fae366c550",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "slope",
+      "label": "Slope",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement."
+      ],
+      "lensIds": [
+        "slope"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "ernst-2023-facet-support",
+        "ernst-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/deimos/deimos-slope-thumbnail.webp",
+          "bytes": 790,
+          "sha256": "a593fd3f599edf0a54948423a53816e8c77596f063b19cb5f73190071826d331",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/deimos/deimos-slope-legend.webp",
+          "bytes": 232,
+          "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/deimos/deimos-slope-surface@2x.webp",
+          "bytes": 2377332,
+          "sha256": "489d9c879f4b96f744ee80f4f1ee87ad8454f52c09dff3e3982ee3b94dad3b27",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -630,6 +870,54 @@
           "url": "object:prepared/minimaps/elevation.webp",
           "bytes": 11268,
           "sha256": "ca5388c0d3c35e3809fc24a330b6cdb5e30aeb13acfe214be57e945d660049d0",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:albedo",
+      "label": "Relative albedo preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "albedo"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/albedo.webp",
+          "bytes": 63174,
+          "sha256": "5dfabb35358f0cead571055ca3b845d70d54476b72f21c710bd4f212ed160022",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:slope",
+      "label": "Slope preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "slope"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/slope.webp",
+          "bytes": 96454,
+          "sha256": "c42a072a5d8925893ef0222568d2fed8322f1ef6b9d64123ca67da66babce3bb",
           "verification": "bytes-verified"
         }
       ]

@@ -158,6 +158,78 @@
         "lenses",
         "presentation"
       ]
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-dbf",
+      "path": "science/geology-sim3168/Io_GeoUnits.dbf",
+      "expectedBytes": 178964,
+      "expectedSha256": "ac09efc6635cf3d9d81fb5596a050393bf358ea5f204b79d4039952b369c53a3",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4029951286 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf"
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-prj",
+      "path": "science/geology-sim3168/Io_GeoUnits.prj",
+      "expectedBytes": 149,
+      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj"
+    },
+    {
+      "id": "usgs-sim3168-geologic-units",
+      "path": "science/geology-sim3168/Io_GeoUnits.shp",
+      "expectedBytes": 2798948,
+      "expectedSha256": "6a02334eee7af7518f90c5f97b1468552499de89b05d17656d627556e71aa64f",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2264103816 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp",
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "projection": {
+        "type": "geographic-vector",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821460
+      },
+      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps."
     }
   ],
   "generatedIntermediates": [],
@@ -182,20 +254,20 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3072,
-      "expectedSha256": "176f9e0088a7ff3cae586fbce861477d62ed69b22deaba3d064dd3666d443b2a",
+      "expectedBytes": 6272,
+      "expectedSha256": "62e0de8d49db3bc47a78b3736f670364a5b2352f3f3414b5b4f4e0ef8a1ea33e",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 7156,
-      "expectedSha256": "1f914878677afdbd0ce81e0cba0e732276ad876ce0b1345db6a3d8f60ed0461c",
+      "expectedBytes": 11577,
+      "expectedSha256": "108710dc7c7c1566fa236cc3654a6b6afcd86fb203a701f049b1b7a4e0d372f9",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "presentation/title-mark.json",
-      "expectedBytes": 1150,
-      "expectedSha256": "b5013944c360617b03bc43bc0c7d2a68ddd5c1ea11da30eebba653488ac9e8f9",
+      "expectedBytes": 1189,
+      "expectedSha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -216,6 +288,370 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1413,
       "expectedSha256": "1a514750d68e2db4d3a778a3d4ce8ea56e1d7faceedde77643282b5b46d03d1c"
+    },
+    {
+      "id": "usgs-sim3168-io-geology-metadata-txt",
+      "path": "science/geology-sim3168/Io_geology_metadata.txt",
+      "expectedBytes": 13879,
+      "expectedSha256": "82ccc4b03c378f5923cc559eb223c147b34dea2ad1b792d309fe6c5c7c0d8d3f",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_geology_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3956181196 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_geology_metadata.txt",
+      "purpose": "Exact member Io_SIM3168_Database/Io_geology_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3956181196 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-dbf",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.dbf",
+      "expectedBytes": 36774,
+      "expectedSha256": "612e1954802f7e63a9b899f28424451eae2f8431ac1621eac7ef492eb30f2eb4",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3589708142 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3589708142 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-prj",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.prj",
+      "expectedBytes": 149,
+      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-shp",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.shp",
+      "expectedBytes": 208672,
+      "expectedSha256": "bba9d25bf947e074ecbad2394832b07d669bdb84c2788a12272888552791022f",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2431391025 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2431391025 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-shp-xml",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.shp.xml",
+      "expectedBytes": 15229,
+      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-shx",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.shx",
+      "expectedBytes": 2812,
+      "expectedSha256": "db4be3599357c56488cd71bae1d8e3a431b0f13336eb06d32c6a52fe61a32966",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1713454006 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1713454006 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geology-metadata-xml",
+      "path": "science/geology-sim3168/Io_geology_metadata.xml",
+      "expectedBytes": 15229,
+      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-shp-xml",
+      "path": "science/geology-sim3168/Io_GeoUnits.shp.xml",
+      "expectedBytes": 15229,
+      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-shx",
+      "path": "science/geology-sim3168/Io_GeoUnits.shx",
+      "expectedBytes": 12116,
+      "expectedSha256": "d7a25a6c6a53bc66025dd920922babc2b4fcefb0b5ffb29d896a4f7d3e7ced64",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2928892254 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2928892254 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-dbf",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.dbf",
+      "expectedBytes": 121662,
+      "expectedSha256": "2037f44e54a96092a61f28298f455b0e5824257e64c0a1c97cbf438359459c12",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 971230000 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 971230000 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-prj",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.prj",
+      "expectedBytes": 149,
+      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-shp",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.shp",
+      "expectedBytes": 42100,
+      "expectedSha256": "7e7c9117de8c61ee6aa6af3501e2b290ed278d30dc71ae32518467e7f6c4789a",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 124509718 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 124509718 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-shp-xml",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.shp.xml",
+      "expectedBytes": 15229,
+      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-shx",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.shx",
+      "expectedBytes": 12100,
+      "expectedSha256": "31848764354273ec382a463229a746f2a9a78d699348fe6f2f8a67a4e3905e02",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3829378934 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3829378934 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-lyr",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.lyr",
+      "expectedBytes": 10752,
+      "expectedSha256": "4ae1dfcc5151fd8ea90987fb061a976717586e5d5f7e335f89eff89e941d0929",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4155375624 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr",
+      "purpose": "Exact member Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4155375624 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-lyr",
+      "path": "science/geology-sim3168/Io_GeoUnits.lyr",
+      "expectedBytes": 11776,
+      "expectedSha256": "68fb956b941c08c4a638dac9c55a258178936b5e90a613b69df74a1b7f82f5a2",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 585117473 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr",
+      "purpose": "Exact member Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 585117473 and SHA-256 verified."
+    },
+    {
+      "id": "sim3168-archive-index-json",
+      "path": "science/geology-sim3168/archive-index.json",
+      "expectedBytes": 66757,
+      "expectedSha256": "2e8c8515b68c2e09dc690bee4b783d05b831268c459d02a74cd3a090c317e5b9",
+      "origin": "https://pubs.usgs.gov/sim/3168/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3168-intake-downloads-json",
+      "path": "science/geology-sim3168/intake-downloads.json",
+      "expectedBytes": 10763,
+      "expectedSha256": "d3c06ea5a067784ecaf38e28d4bdafd975b982ddae6663f1cfa5fa58116b0112",
+      "origin": "https://pubs.usgs.gov/sim/3168/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3168-display-categories-json",
+      "path": "science/geology-sim3168/display-categories.json",
+      "expectedBytes": 1545,
+      "expectedSha256": "00ab4b24f2d97f365316c03bc8834e865bcf25c54a9327dbd68f25bd42e8215f",
+      "origin": "https://pubs.usgs.gov/sim/3168/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3168-registration-anchors",
+      "path": "science/geology-sim3168/registration-anchors.json",
+      "expectedBytes": 3542,
+      "expectedSha256": "0a38893d6bda62544ac8a05541d51a28d3de1e6787cb8a37754a6635566c4daf",
+      "origin": "https://pubs.usgs.gov/sim/3168/",
+      "credit": "USGS point and polygon layers; cssEarth comparison",
+      "license": "Repository-authored validation metadata of public domain GIS data",
+      "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained.",
+      "redistribution": "Small source-validation metadata.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained."
     }
   ]
 }

@@ -11,6 +11,7 @@ import { createPagedSurfaceRaster } from './surface-raster.mjs';
 import { preparePagedEllipsoidScene } from './scene.mjs';
 import { preparePagedEllipsoidAssets } from './assets.mjs';
 import { preparePagedEllipsoidPresentation } from './presentation.mjs';
+import { prepareLocationPoint, prepareLocationCamera } from '../geographic-pages/prepare-location.mjs';
 import { prepareVectorOverlay } from '../geographic-pages/vector-overlay.mjs';
 import { preparePlaces } from '../geographic-pages/places.mjs';
 import { preparePinnedGlobalWmts } from '../geographic-pages/pinned-hierarchy.mjs';
@@ -62,8 +63,9 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     if (catalog.count > destinations.maxEntries)
       throw new TypeError('Prepared places exceed the authored destination capability.');
   }
-  const lenses = { ...bindingSource, controls: bindingSource.controls.map(({ surfacePagePrefix, cityZoom, overlayId, ...lens }) => ({ ...lens,
+  const lenses = { ...bindingSource, controls: bindingSource.controls.map(({ surfacePagePrefix, cityZoom, overlayId, focus, ...lens }) => ({ ...lens,
     ...(surfacePagePrefix ? { surfaceUrls: raster.surfacePageUrls(surfacePagePrefix, surfaceRasterPlan.pages.length) } : {}),
+    ...(focus ? { camera: { ...prepareLocationCamera(scene, prepareLocationPoint(scene, focus.longitude, focus.latitude), focus.zoom, { body: scene[config.sceneBodyKey], camera: config.camera, northUp: focus.northUp }), ...(focus.transition ? { transition: focus.transition } : {}) } } : {}),
     ...(cityZoom ? { maximumZoom: citySource.presentation.maximumZoom } : {}),
     ...(overlayId === 'noise' ? { camera: noise.camera, legend: noise.legend, qualification: noise.qualification } : {}),
   })) };
