@@ -18,11 +18,72 @@
         "validity": {
           "kind": "geotiff-monochrome-alpha",
           "noData": 0,
-          "centerLongitude": 180
+          "centerLongitude": 180,
+          "resampling": "source-georeferenced-bilinear"
         }
       }
     ],
-    "scientific": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "science/controlled-dtms/Agenor/Agenor.tif",
+        "consumer": "agenor-elevation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "description": "Agenor Linea · relative height",
+        "title": "Released relative heights of Agenor Linea; independent local stereo datum, not elevation above a global reference sphere.",
+        "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+        "minimum": -700,
+        "maximum": 300,
+        "colors": [
+          "#254c89",
+          "#6c9cac",
+          "#d3c88f",
+          "#9b4f32"
+        ],
+        "labels": [
+          "−700",
+          "−200",
+          "300"
+        ],
+        "units": "m",
+        "grid": {
+          "width": 642,
+          "height": 133,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 1560800,
+          "noData": -3.4028226550889045e+38,
+          "origin": [
+            -1236786.1079616144,
+            -1146374.9999678
+          ],
+          "resolution": [
+            614.0078951699215,
+            -614.0078951699215
+          ],
+          "longitudeRange": [
+            0,
+            360
+          ]
+        },
+        "relief": {
+          "referenceRadiusMeters": 1560800,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.35
+        },
+        "focus": {
+          "longitudeDegrees": 142,
+          "latitudeDegrees": -43.7,
+          "zoom": 4
+        }
+      }
+    ],
     "observedColors": [
       {
         "id": "enhanced",

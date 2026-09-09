@@ -36,9 +36,56 @@
     {
       "id": "topography",
       "label": "Topography",
-      "input": "lenses/lola-topography-print.jpg",
+      "input": "science/ldem_16.img",
       "output": "moon-topography",
-      "qualification": "NASA LRO/LOLA elevation map with shaded relief"
+      "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
+      "scientific": {
+        "schema": "cssearth-pds-int16-cylindrical@1",
+        "format": "pds-image",
+        "path": "ldem_16.img",
+        "labelPath": "ldem_16.lbl",
+        "datasetId": "LRO-L-LOLA-4-GDR-V1.0",
+        "productId": "LDEM_16",
+        "productVersion": "V3.1",
+        "lidvid": "urn:nasa:pds:lro_lola_rdr:data_gridded:ldem_16::1.0",
+        "target": "MOON",
+        "sourceUnit": "METER",
+        "sampling": "nearest",
+        "grid": {
+          "width": 5760,
+          "height": 2880,
+          "pixelsPerDegree": 16,
+          "latitudeRange": [
+            -90,
+            90
+          ],
+          "longitudeRange": [
+            0,
+            360
+          ],
+          "referenceRadiusMeters": 1737400,
+          "frame": "MEAN EARTH/POLAR AXIS OF DE421",
+          "scalingFactor": 0.5,
+          "offset": 1737400,
+          "noData": null
+        },
+        "valueTransform": {
+          "scale": 0.5,
+          "offset": 0
+        },
+        "minimum": -12000,
+        "maximum": 12000,
+        "colors": [
+          "#243b85",
+          "#40a0c4",
+          "#dddac4",
+          "#ce9449",
+          "#89382d"
+        ],
+        "units": "m above 1737.4 km sphere",
+        "outputLongitudeOrigin": -180,
+        "displaySampling": "nearest"
+      }
     },
     {
       "id": "crust",
@@ -46,6 +93,64 @@
       "input": "lenses/grail-crustal-thickness-print.jpg",
       "output": "moon-crustal-thickness",
       "qualification": "NASA GRAIL crustal-thickness map with shaded relief"
+    },
+    {
+      "id": "rock-abundance",
+      "label": "Rock abundance",
+      "input": "science/dgdr_ra_avg_cyl_032_img.img",
+      "output": "moon-rock-abundance",
+      "qualification": "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south",
+      "scientific": {
+        "schema": "cssearth-pds-int16-cylindrical@1",
+        "format": "pds-image",
+        "path": "dgdr_ra_avg_cyl_032_img.img",
+        "labelPath": "dgdr_ra_avg_cyl_032_img.lbl",
+        "datasetId": "LRO-L-DLRE-5-GDR-V1.0",
+        "productId": "DGDR_RA_AVG_CYL_032_IMG.IMG",
+        "productVersion": "V4.0",
+        "lidvid": "urn:nasa:pds:lro_diviner_derived1:data_derived_gdr_level3:dgdr_ra_avg_cyl_032_img::1.0",
+        "target": "MOON",
+        "sourceUnit": "NONE",
+        "sampling": "nearest",
+        "grid": {
+          "width": 11520,
+          "height": 3840,
+          "pixelsPerDegree": 32,
+          "latitudeRange": [
+            -60,
+            60
+          ],
+          "longitudeRange": [
+            0,
+            360
+          ],
+          "referenceRadiusMeters": 1737400,
+          "frame": "MEAN EARTH/POLAR AXIS OF DE421",
+          "scalingFactor": 0.001,
+          "offset": 0,
+          "noData": -32768
+        },
+        "valueTransform": {
+          "scale": 0.1,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 2,
+        "colors": [
+          "#292544",
+          "#456582",
+          "#5b9e95",
+          "#b7c85c",
+          "#fff0a0"
+        ],
+        "units": "percent surface area",
+        "validRange": [
+          0,
+          100
+        ],
+        "outputLongitudeOrigin": -180,
+        "displaySampling": "nearest"
+      }
     }
   ]
 }

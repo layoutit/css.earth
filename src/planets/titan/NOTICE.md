@@ -14,3 +14,5 @@
 - Title outlines: Inter by Rasmus Andersson, SIL Open Font License 1.1.
 - Physical and orbital context: NASA/JPL and IAU/WGCCRE through the vendored
   astronomy package. Editorial information: NASA Science.
+
+B2 additions: Cassini RADAR GTDR, Paul Corlies/Cornell University, NASA PDS. Derived measured/interpolated topography and distance maps retain original missing values.

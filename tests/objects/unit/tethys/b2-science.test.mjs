@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+const sourceRoot=new URL('../../../../src/planets/tethys/source/',import.meta.url).pathname;
+test('Tethys B2 scalar coordinates retain independent source values and exact missing cells',async()=>{
+ const config=JSON.parse(await readFile(sourceRoot+'preparation/terrestrial.json'));
+ const receipt=JSON.parse(await readFile(sourceRoot+'validation/b2-scalar-anchors.json'));
+ for(const row of receipt.sources){const bytes=await readFile(sourceRoot+row.path);assert.equal(bytes.length,row.expectedBytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),row.expectedSha256);}
+ for(const lens of config.raster.scientific.filter(l=>l.id!=='elevation')){
+  const surface=await loadScienceSurface(sourceRoot,lens),paths=[lens.path,...(lens.additionalGrids??[]).map(g=>g.path)];
+  for(const source of receipt.sources.filter(s=>paths.includes(s.path)))for(const anchor of source.anchors){
+   const actual=surface.sample(anchor.longitudeEastDegrees,anchor.latitudeDegrees);
+   if(anchor.value===null)assert.equal(actual,null,'Do not fill a missing source cell');
+   else assert.ok(actual!==null&&Math.abs(actual-anchor.value)<1e-7,`${source.path} cell ${anchor.column},${anchor.row}: ${actual} differs from ${anchor.value}`);
+  }
+ }
+});
+
+test('Tethys relative albedo retains narrow source projection join gaps',async()=>{const config=JSON.parse(await readFile(sourceRoot+'preparation/terrestrial.json'));const source=await loadScienceSurface(sourceRoot,config.raster.scientific.find(l=>l.id==='relative-albedo'));for(const latitude of [-55.05,55.05])assert.equal(source.sample(90,latitude),null);});

@@ -76,6 +76,88 @@
           "width": 721,
           "height": 361
         }
+      },
+      {
+        "id": "albedo",
+        "label": "Relative albedo",
+        "consumer": "facet-science",
+        "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+        "format": "facet-scalars",
+        "meshPath": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+        "grid": {
+          "member": "phobos_g_148m_spc_obj_0000n00000_v004.obj",
+          "metersPerUnit": 1000,
+          "expectedVertices": 98306,
+          "expectedFaces": 196608
+        },
+        "table": {
+          "format": "sbmt-csv-zip",
+          "field": "Albedo",
+          "units": "",
+          "expectedRows": 196608,
+          "maximumCentroidErrorMeters": 0.001,
+          "member": "phobos_g_148m_spc_obj_0000n00000_v004.csv",
+          "validityField": "Albedo"
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 250
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "minimum": 0.04,
+        "maximum": 0.1,
+        "colors": [
+          "#202e44",
+          "#789c9f",
+          "#f1e4c9"
+        ]
+      },
+      {
+        "id": "slope",
+        "label": "Slope",
+        "consumer": "facet-science",
+        "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+        "format": "facet-scalars",
+        "meshPath": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+        "grid": {
+          "member": "phobos_g_148m_spc_obj_0000n00000_v004.obj",
+          "metersPerUnit": 1000,
+          "expectedVertices": 98306,
+          "expectedFaces": 196608
+        },
+        "table": {
+          "format": "sbmt-csv-zip",
+          "field": "Slope",
+          "units": "degrees",
+          "expectedRows": 196608,
+          "maximumCentroidErrorMeters": 0.001,
+          "member": "phobos_g_148m_spc_obj_0000n00000_v004.csv",
+          "validityField": "Albedo"
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 250
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "minimum": 0,
+        "maximum": 50,
+        "colors": [
+          "#20204b",
+          "#2d75b9",
+          "#4ebba7",
+          "#f1c45c",
+          "#cc543d"
+        ]
       }
     ],
     "observedColors": []
@@ -111,9 +193,16 @@
       },
       "latitudeSegments": 20,
       "longitudeSegments": 32,
-      "faceBudget": 2000,
+      "faceBudget": 1600,
       "tileSize": 128,
-      "atlasColumns": 16
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 1600,
+        "maximumErrorMeters": 250,
+        "regularize": true
+      }
     }
   },
   "celestial": {

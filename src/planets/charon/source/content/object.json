@@ -68,7 +68,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "enhanced-color": "Enhanced color"
     },
     "controls": [
       {
@@ -88,6 +89,21 @@
         "summary": "New Horizons images with corrected lighting. Shadows remain; the unobserved south is left unavailable."
       },
       {
+        "id": "enhanced-color",
+        "label": "Enhanced color",
+        "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
+        "title": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
+        "thumbnail": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
+        "surface": "charon-enhanced-color-surface@2x.webp",
+        "poles": "charon-enhanced-color-poles@2x.webp",
+        "source": {
+          "id": "new-horizons-charon-mvic-color",
+          "path": "../manifest.json",
+          "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
+        },
+        "detail": "MVIC color bands"
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
         "description": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
@@ -101,6 +117,20 @@
           "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m"
         },
         "detail": "Shaded relief",
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−15",
+            "0",
+            "15"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m",
+          "image": "/scenes/charon/charon-elevation-legend.webp"
+        },
         "summary": "Stereo and shading height relative to a 606 km sphere. Detail varies; the gray grid marks missing data."
       }
     ]
@@ -135,6 +165,12 @@
       "role": "surface",
       "description": "New Horizons mosaic and terrain model · Schenk et al.",
       "href": "https://fdp.astrogeology.usgs.gov/fdp/pluto/"
+    },
+    {
+      "label": "PDS",
+      "role": "surface",
+      "description": "MVIC enhanced-color mosaic · New Horizons team",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
     },
     {
       "label": "ESO",

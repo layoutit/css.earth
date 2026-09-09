@@ -119,14 +119,54 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "credit": "JPL Solar System Dynamics; Cassini mission",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "catalog": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
+      "id": "jpl-spc-enceladus-v2-dsk",
+      "consumers": [
+        "dsk-conversion"
+      ],
+      "units": "Cartesian plate model kilometres in IAU_ENCELADUS, target 602/frame 10040/surface 20122.",
+      "coverage": "Corrected v2 global Q256 DSK, 396,294 source vertices and 786,432 plates. Nominal model-family 500 m resolution is not a uniform accuracy claim for this Q256 member.",
+      "expectedBytes": 30258176,
+      "expectedSha256": "49913bbc117503f894bc7d127a582e1e8e4ac903e348a7021992f5aba7a18c98"
+    },
+    {
+      "path": "shape/enceladus-v2-q256.obj.zip",
+      "credit": "JPL SSD/Cassini; exact CSPICE extraction",
+      "license": "Public PDS archive; cite source authors and SPICE",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
+      ],
+      "catalog": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
+      "acquisition": "Pinned dsk-mesh acquisition operation; explicit Python environment in tools/objects/acquisition/DSK-RESTORATION.md.",
+      "redistribution": "Retain source model and SPICE credits with deterministic conversion provenance.",
+      "id": "jpl-spc-enceladus-v2-q256",
+      "consumers": [
+        "shape"
+      ],
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "units": "Exact source Cartesian kilometres with exact duplicate vertices welded; original plate winding and complete mapping retained.",
+      "coverage": "Global corrected v2 Q256 shape. Exact source coordinate conversion and welding; 393,218 output vertices and 786,432 triangles. The simplified displayed mesh is a separately qualified approximation.",
+      "expectedBytes": 10207923,
+      "expectedSha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c"
     }
   ],
   "generatedIntermediates": [],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11260,
-      "expectedSha256": "56f13a4125b84fcdb77eaef50e5d875222f0a0924815429dbcbc65754f07e50f",
+      "expectedBytes": 13021,
+      "expectedSha256": "34932fc70bafc3534138d4847d5f6eee6e30abf5a7f1d9b6157cef6778ebcfa5",
       "purpose": "Original source metadata, licensing, or authored preparation and content."
     },
     {
@@ -167,8 +207,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1084,
-      "expectedSha256": "7b73ecc941f3a189e382e1455cc3e8bb13dacf84c555a43f49809d8d7e5830e0",
+      "expectedBytes": 3591,
+      "expectedSha256": "9df1c1eaa7cc703dd976bbeab82eb0e722ed2dbe7073c5a3614436754410c6c5",
       "purpose": "Original source metadata, licensing, or authored preparation and content."
     },
     {
@@ -179,8 +219,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3380,
-      "expectedSha256": "9e783c4db4c96e7ddcccdcfe9f3a27ac42372453525226832b14ba90a6312ead",
+      "expectedBytes": 4197,
+      "expectedSha256": "b85caab6ca861268f7309094e5e5dd4dcf07402e6ab3f1350645347e748949ac",
       "purpose": "Original source metadata, licensing, or authored preparation and content."
     },
     {
@@ -213,6 +253,40 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1091,
       "expectedSha256": "bda700b0cbc4204e62df9c64377db7a32bcc44ccd002d3d08a36204da3db25d8"
+    },
+    {
+      "path": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.lbl",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.lbl",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 1380,
+      "expectedSha256": "e6e62bf2520e17fa37663733f60f4fcae35f9aadd70b34f6f478eeacf4c5757f"
+    },
+    {
+      "path": "science/b2-intake/dskinfo.txt",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 5084,
+      "expectedSha256": "a99a281bc40c26ba49d0f9d010c5d19cb4fd95f24323f69ecffae02264ee28e3"
+    },
+    {
+      "path": "science/b2-intake/enceladus_ssd_250728_v2.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/pck/enceladus_ssd_250728_v2.tpc",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 8701,
+      "expectedSha256": "21577baf51ef428b77eeda488c03ca6df90fa764da8c6ba7d3ca7a4d879e6c04"
+    },
+    {
+      "path": "science/b2-intake/cas_v44.tf",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/fk/cas_v44.tf",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 199768,
+      "expectedSha256": "c1e49749bec168e05c82e7c8b77455cd446c0bb8aafd31aeb1975d07ba6de02d"
+    },
+    {
+      "path": "validation/b2-dsk-conversion.json",
+      "purpose": "Exact v2 DSK extraction provenance, source coordinates, frame, duplicate mapping and mesh hashes. Root reproduced the identical archive in the formal pinned environment; prepared geometry qualification remains pending.",
+      "expectedBytes": 1635,
+      "expectedSha256": "22e1908f955ba3c29f64d0ff388bb858285a56dbc201c84fcde29877db598771"
     }
   ]
 }

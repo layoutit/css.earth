@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "12f7c44029d09a35eec34c686d4b566302efde119b80aa8fb9b511ee3525853b"
+    "sha256": "df489e8a734feb045da8efda37b3538f98e76a087fc814b2e1eef043fa199646"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9e783c4db4c96e7ddcccdcfe9f3a27ac42372453525226832b14ba90a6312ead",
+      "sha256": "b85caab6ca861268f7309094e5e5dd4dcf07402e6ab3f1350645347e748949ac",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -57,7 +57,7 @@
               "format": "geotiff",
               "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
               "description": "Cassini terrain model · shaded relief",
-              "title": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
+              "title": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
               "sourceUrl": "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
               "minimum": -1,
               "maximum": 1,
@@ -101,7 +101,14 @@
             }
           ],
           "observedColors": [],
-          "surfaceQuality": 90
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
         },
         "lighting": {
           "frameSize": 512,
@@ -122,7 +129,27 @@
             "defaultControlYawDegrees": 0
           },
           "mapUrl": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
-          "polesUrl": "/scenes/enceladus/enceladus-normal-poles@2x.webp"
+          "polesUrl": "/scenes/enceladus/enceladus-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/enceladus-v2-q256.obj.zip",
+            "format": "wavefront-obj-zip",
+            "grid": {
+              "member": "enceladus-v2-q256.obj",
+              "metersPerUnit": 1000,
+              "expectedVertices": 393218,
+              "expectedFaces": 786432
+            },
+            "faceBudget": 2000,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 2000,
+              "maximumErrorMeters": 2523,
+              "regularize": true
+            }
+          }
         },
         "celestial": {
           "sunSource": "JPL Enceladus orbit plus VSOP87 Saturn position and IAU/WGCCRE Enceladus rotation"
@@ -141,14 +168,14 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f683aef0a35bc2c975180ce7fedf509d10f8993af979537cd592450a545078ce",
+      "sha256": "34932fc70bafc3534138d4847d5f6eee6e30abf5a7f1d9b6157cef6778ebcfa5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "enceladus",
         "displayName": "Enceladus",
         "panel": {
-          "introduction": "An icy moon with an ocean beneath its crust. Jets escape through fractures near the south pole, feeding Saturn’s E ring.",
+          "introduction": "An icy moon with an ocean beneath its crust. Jets escape through fractures near the south pole, feeding Saturn’s E ring. The Shape view uses JPL’s corrected v2 surface model. The earlier Schenk elevation map retains its separate ellipsoidal height datum.",
           "facts": [
             {
               "id": "radius",
@@ -212,7 +239,8 @@
           "defaultLens": "normal",
           "labels": {
             "normal": "Monochrome",
-            "elevation": "Elevation"
+            "elevation": "Elevation",
+            "shape": "Shape"
           },
           "controls": [
             {
@@ -232,8 +260,8 @@
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
-              "title": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
+              "description": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
+              "title": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
               "thumbnail": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
               "surface": "enceladus-elevation-surface@2x.webp",
               "poles": "enceladus-elevation-poles@2x.webp",
@@ -256,6 +284,19 @@
                 "image": "/scenes/enceladus/enceladus-elevation-legend.webp"
               },
               "summary": "Height relative to the source ellipsoid, clipped at ±1 km. Gray grid: missing stereo and shading data."
+            },
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+              "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+              "thumbnail": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
+              "surface": "enceladus-shape-surface@2x.webp",
+              "poles": "enceladus-shape-poles@2x.webp",
+              "source": {
+                "id": "jpl-spc-enceladus-v2-q256",
+                "path": "../manifest.json"
+              }
             }
           ]
         },
@@ -301,6 +342,12 @@
             "role": "stars",
             "description": "Milky Way panorama",
             "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "JPL/NAIF",
+            "role": "shape",
+            "description": "Corrected Enceladus v2 SPC shape and delivery notes",
+            "href": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
           }
         ],
         "provenance": {
@@ -377,7 +424,7 @@
       "sha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
       "bytes": 518340175,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -385,6 +432,48 @@
         ],
         "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
         "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "path": "shape/enceladus-v2-q256.obj.zip",
+      "credit": "JPL SSD/Cassini; exact CSPICE extraction",
+      "license": "Public PDS archive; cite source authors and SPICE",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
+      ],
+      "catalog": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt",
+      "acquisition": "Pinned dsk-mesh acquisition operation; explicit Python environment in tools/objects/acquisition/DSK-RESTORATION.md.",
+      "redistribution": "Retain source model and SPICE credits with deterministic conversion provenance.",
+      "id": "jpl-spc-enceladus-v2-q256",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
+      "units": "Exact source Cartesian kilometres with exact duplicate vertices welded; original plate winding and complete mapping retained.",
+      "coverage": "Global corrected v2 Q256 shape. Exact source coordinate conversion and welding; 393,218 output vertices and 786,432 triangles. The simplified displayed mesh is a separately qualified approximation.",
+      "sha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
+      "bytes": 10207923,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "dsk-mesh",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/enceladus-v2-q256.obj.zip",
+        "recipe": {
+          "inputPath": "science/b2-intake/cas_enceladus_ssd_spc_0256icq_v2.bds",
+          "inputBytes": 30258176,
+          "inputSha256": "49913bbc117503f894bc7d127a582e1e8e4ac903e348a7021992f5aba7a18c98",
+          "member": "enceladus-v2-q256.obj",
+          "targetId": 602,
+          "frameId": 10040,
+          "surfaceId": 20122,
+          "sourceVertices": 396294,
+          "sourceFaces": 786432,
+          "weldedVertices": 393218,
+          "spiceypyVersion": "6.0.3",
+          "cspiceVersion": "CSPICE_N0067"
+        }
       },
       "verificationOperations": []
     },
@@ -428,7 +517,7 @@
       "sha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
       "bytes": 129613723,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -449,10 +538,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "56f13a4125b84fcdb77eaef50e5d875222f0a0924815429dbcbc65754f07e50f",
-      "bytes": 11260,
+      "sha256": "34932fc70bafc3534138d4847d5f6eee6e30abf5a7f1d9b6157cef6778ebcfa5",
+      "bytes": 13021,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -492,26 +581,21 @@
         }
       },
       "inputs": [
-        "cassini-schenk-2024-normal"
+        "cassini-schenk-2024-normal",
+        "jpl-spc-enceladus-v2-q256"
       ],
       "outputs": [
         {
           "url": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
           "bytes": 1850,
           "sha256": "b1f5ecdd4895028a00197aab2cf9583d37846f0daf3aa171e3f9cfa839c092b5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
-          "bytes": 6921712,
-          "sha256": "603301486bb65989b66cb7a12c32ce6adbfd3b2f17c275de81ea631e42088991",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/enceladus/enceladus-normal-poles@2x.webp",
-          "bytes": 145940,
-          "sha256": "43367587675766318ba3b0ffcfb57d193983b23b33f25229f10e72d1835d5c94",
-          "verification": "asset-manifest-pin"
+          "bytes": 6337990,
+          "sha256": "6c043a2fd0389034fb71739fce4d7a0726575b81b3111007e6bbea854a3ce1c2",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -524,7 +608,7 @@
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies."
+        "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain."
       ],
       "lensIds": [
         "elevation"
@@ -534,35 +618,68 @@
       ],
       "interpretation": {
         "kind": "scientific",
-        "qualification": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies."
+        "qualification": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain."
       },
       "inputs": [
-        "cassini-schenk-2024-elevation"
+        "cassini-schenk-2024-elevation",
+        "jpl-spc-enceladus-v2-q256"
       ],
       "outputs": [
         {
           "url": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
           "bytes": 8066,
           "sha256": "eef7b61cc108d1146a560fb5d5b7dded77dcda4e03e29df0342609a5fc431588",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
-          "bytes": 11542378,
-          "sha256": "b4ec52da7e394d0bd21afe13f2372128d2d2d9c42e552049b0da940f3d80e60c",
-          "verification": "asset-manifest-pin"
+          "bytes": 10574576,
+          "sha256": "90ec8ae36835ca0c5a83d0cf2a83f7182fddf281f4e9a387b73624f9617d1900",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "jpl-spc-enceladus-v2-q256"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
+          "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/enceladus/enceladus-elevation-poles@2x.webp",
-          "bytes": 318460,
-          "sha256": "661b291e352ea3a994892e82505276178de27e095dfd009c620812882db92899",
-          "verification": "asset-manifest-pin"
+          "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
+          "bytes": 460676,
+          "sha256": "8cad6dfddbf10543a581ab03a6737292410e7e9821afd1db57ee2fedf339150f",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -585,8 +702,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7493,
-          "sha256": "cbd12422a2afe80c99dbfa331afb0ea6149017a7218c4fc9312ee712600e2f32",
+          "bytes": 7841,
+          "sha256": "564dc51408adb8882a1632d06bae4a56ea5bdf883442f945bf89e36defd5c600",
           "verification": "bytes-verified"
         }
       ],
@@ -612,6 +729,30 @@
           "url": "object:prepared/minimaps/normal.webp",
           "bytes": 41864,
           "sha256": "cc910d488b97fff04b99f890514a786a720f24cc6439ffb19ab07d884a6eabdc",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 3072,
+          "sha256": "a9cb6cc97276626a14edcd279353d31529dcc61182f6fda4b87a655af951eae7",
           "verification": "bytes-verified"
         }
       ]

@@ -1,0 +1,41 @@
+{
+  "refs": {
+    "base": "e23a357b",
+    "ours": "162ce08f94eae519bf1ca95d5672237fb4757ed0",
+    "theirs": "4848897ee01d37987f837351802ec35ca3cd1871"
+  },
+  "allOverlappingFiles": [
+    "tools/objects/terrestrial-layers/index.mjs",
+    "tools/objects/terrestrial-layers/observed-geotiff.mjs",
+    "tools/objects/terrestrial-layers/solid-raster.mjs"
+  ],
+  "merges": [
+    {
+      "path": "tools/objects/terrestrial-layers/index.mjs",
+      "mergeFileExitCode": 2,
+      "proposal": "/tmp/b2-pr61-merge/proposals/tools/objects/terrestrial-layers/index.mjs",
+      "conflictsResolved": 2,
+      "sha256": "ede458d87f057897ecbaf4e9f4530526ea6f305498cb93194211dd4122991f8e",
+      "bytes": 23815
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/observed-geotiff.mjs",
+      "mergeFileExitCode": 0,
+      "proposal": "/tmp/b2-pr61-merge/proposals/tools/objects/terrestrial-layers/observed-geotiff.mjs",
+      "conflictsResolved": 0,
+      "sha256": "0355cc200ca3b3ca6ca288e8d7fe58aae2ee857d71fe3d3898f367a2b3440635",
+      "bytes": 14431
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/solid-raster.mjs",
+      "mergeFileExitCode": 1,
+      "proposal": "/tmp/b2-pr61-merge/proposals/tools/objects/terrestrial-layers/solid-raster.mjs",
+      "conflictsResolved": 1,
+      "sha256": "b45c50117c290911ed9c1d94c8afd6340d52ffe28a5ae185f37931b33c70fc18",
+      "bytes": 22992
+    }
+  ],
+  "b2LogicPreservation": "All three proposals reduce byte-for-byte to original B2 files when only exact incoming additions are removed.",
+  "testsRun": [],
+  "patchSha256": "7f60554720e92333c942d3ed8c5c33ff11da082cd82b4c5d75b35b4f8a9f933c"
+}

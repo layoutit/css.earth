@@ -4,11 +4,12 @@ const dot = (a, b) => a.reduce((sum, v, i) => sum + v * b[i], 0);
 
 /** An orthographic, full-phase context image from the same prepared surface
  * and mesh. This CPU rasterization runs only during source preparation. */
-export async function renderRadialSnapshot({ faces, map, sampleSurface, size, longitudeDegrees, latitudeDegrees, ambient, diffuse }) {
+export async function renderRadialSnapshot({ faces, map, sampleSurface, size, longitudeDegrees, latitudeDegrees, ambient, diffuse, displaySampling }) {
   if (!Number.isInteger(size) || size < 16 || size > 1024 ||
       ![longitudeDegrees, latitudeDegrees, ambient, diffuse].every(Number.isFinite) ||
       Math.abs(latitudeDegrees) > 90 || ambient < 0 || diffuse < 0 || ambient + diffuse > 1 ||
-      (sampleSurface !== undefined && typeof sampleSurface !== 'function')) throw new TypeError('Invalid radial snapshot.');
+      (sampleSurface !== undefined && typeof sampleSurface !== 'function') ||
+      ![undefined, 'nearest'].includes(displaySampling)) throw new TypeError('Invalid radial snapshot.');
   const { data, info } = sampleSurface ? {} : await sharp(map).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   const width = size * 2, pixels = Buffer.alloc(width * width * 4), depth = new Float64Array(width * width).fill(-Infinity);
   const lon = longitudeDegrees * Math.PI / 180, lat = latitudeDegrees * Math.PI / 180;
@@ -47,5 +48,5 @@ export async function renderRadialSnapshot({ faces, map, sampleSurface, size, lo
       }
     }
   }
-  return sharp(pixels, { raw: { width, height: width, channels: 4 } }).resize(size, size).png().toBuffer();
+  return sharp(pixels, { raw: { width, height: width, channels: 4 } }).resize(size, size, { kernel: displaySampling === 'nearest' ? 'nearest' : 'lanczos3' }).png().toBuffer();
 }

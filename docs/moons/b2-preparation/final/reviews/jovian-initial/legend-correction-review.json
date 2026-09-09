@@ -1,0 +1,215 @@
+{
+  "schema": "cssearth-b2-static-visual-review@1",
+  "createdAt": "2026-09-09T04:25:13.739054+00:00",
+  "captureRun": "output/playwright/b2-surfaces/legend-correction-2026-09-09T04-19-50.904Z",
+  "captureHead": "57d5f12bea735bbf4ee6e1ec00ea14827e0e7923",
+  "captureReportSha256": "fc5a38b3497fce68ee1a54f88695b2399105795da0ebce711913d3fe64495c6f",
+  "status": "CATEGORICAL_FLOW_FIX_VISUALLY_CONFIRMED",
+  "resolvedFinding": {
+    "id": "JOVIAN-CATEGORY-FLOW",
+    "oldReview": "/tmp/b2-jovian-final-review/review.json",
+    "result": "The old Io/Ganymede parent-flow overlap is absent in all six directly viewed corrected category PNGs, covering both DPRs and the complete category/description/facts sequence."
+  },
+  "scope": "Focused categorical card flow only for Io and Ganymede at DPR1 and DPR2. No new browser; no lighting/drag rerun claimed by this review.",
+  "directlyReviewedImageCount": 6,
+  "captureContracts": [
+    {
+      "body": "io",
+      "dpr": 1,
+      "rowCount": 14,
+      "flow": {
+        "height": 360,
+        "copyGap": 12,
+        "contained": true,
+        "labels": [
+          "PbyBright plains",
+          "PbwWhite plains",
+          "PrbRed-brown plains",
+          "PlLayered plains",
+          "FbBright flows",
+          "FdDark flows",
+          "FuUndivided flows",
+          "PFbBright patera floors",
+          "PFdDark patera floors",
+          "PFuUndivided patera floors",
+          "MlLineated mountains",
+          "MmMottled or hummocky mountains",
+          "MuUndivided mountains",
+          "TbTholi"
+        ]
+      },
+      "errors": [],
+      "captureStatus": "CAPTURED_UNREVIEWED"
+    },
+    {
+      "body": "io",
+      "dpr": 2,
+      "rowCount": 14,
+      "flow": {
+        "height": 360,
+        "copyGap": 12,
+        "contained": true,
+        "labels": [
+          "PbyBright plains",
+          "PbwWhite plains",
+          "PrbRed-brown plains",
+          "PlLayered plains",
+          "FbBright flows",
+          "FdDark flows",
+          "FuUndivided flows",
+          "PFbBright patera floors",
+          "PFdDark patera floors",
+          "PFuUndivided patera floors",
+          "MlLineated mountains",
+          "MmMottled or hummocky mountains",
+          "MuUndivided mountains",
+          "TbTholi"
+        ]
+      },
+      "errors": [],
+      "captureStatus": "CAPTURED_UNREVIEWED"
+    },
+    {
+      "body": "ganymede",
+      "dpr": 1,
+      "rowCount": 23,
+      "flow": {
+        "height": 564,
+        "copyGap": 12,
+        "contained": true,
+        "labels": [
+          "dcDark cratered terrain",
+          "dlDark lineated terrain",
+          "dDark terrain, undivided",
+          "rReticulate terrain",
+          "lg1Light grooved terrain 1",
+          "lg2Light grooved terrain 2",
+          "lg3Light grooved terrain 3",
+          "ls1Light subdued terrain 1",
+          "ls2Light subdued terrain 2",
+          "ls3Light subdued terrain 3",
+          "li1Light irregular terrain 1",
+          "li2Light irregular terrain 2",
+          "li3Light irregular terrain 3",
+          "lLight terrain, undivided",
+          "pPalimpsest material",
+          "piPalimpsest interior",
+          "biBasin interior",
+          "brRugged basin material",
+          "bsSmooth basin material",
+          "c1Crater material 1",
+          "c2Crater material 2",
+          "c3Crater material 3",
+          "cuCrater material, undivided"
+        ]
+      },
+      "errors": [],
+      "captureStatus": "CAPTURED_UNREVIEWED"
+    },
+    {
+      "body": "ganymede",
+      "dpr": 2,
+      "rowCount": 23,
+      "flow": {
+        "height": 564,
+        "copyGap": 12,
+        "contained": true,
+        "labels": [
+          "dcDark cratered terrain",
+          "dlDark lineated terrain",
+          "dDark terrain, undivided",
+          "rReticulate terrain",
+          "lg1Light grooved terrain 1",
+          "lg2Light grooved terrain 2",
+          "lg3Light grooved terrain 3",
+          "ls1Light subdued terrain 1",
+          "ls2Light subdued terrain 2",
+          "ls3Light subdued terrain 3",
+          "li1Light irregular terrain 1",
+          "li2Light irregular terrain 2",
+          "li3Light irregular terrain 3",
+          "lLight terrain, undivided",
+          "pPalimpsest material",
+          "piPalimpsest interior",
+          "biBasin interior",
+          "brRugged basin material",
+          "bsSmooth basin material",
+          "c1Crater material 1",
+          "c2Crater material 2",
+          "c3Crater material 3",
+          "cuCrater material, undivided"
+        ]
+      },
+      "errors": [],
+      "captureStatus": "CAPTURED_UNREVIEWED"
+    }
+  ],
+  "reviewedImages": [
+    {
+      "path": "output/playwright/b2-surfaces/legend-correction-2026-09-09T04-19-50.904Z/io-dpr1/geology-shadows-unsupported-details-1.png",
+      "bytes": 684808,
+      "sha256": "24d2eb02c24e3b4c92a02d83ba258f37f46c111c7c3ffeef4b5deb155f079014",
+      "body": "io",
+      "dpr": 1,
+      "note": "All 14 code/name rows, including the wrapped Mm name, are readable. The description begins below the final Tholi row with visible separation. Facts and coverage text fit below the description.",
+      "directlyVisuallyInspected": true,
+      "hashReverifiedAtReview": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/legend-correction-2026-09-09T04-19-50.904Z/io-dpr2/geology-shadows-unsupported-details-1.png",
+      "bytes": 1706339,
+      "sha256": "f774a739f5cde6d438454941b50b0d7c68e86a52cb44b341011e1292b595a083",
+      "body": "io",
+      "dpr": 2,
+      "note": "All 14 code/name rows, including the wrapped Mm name, are readable. The description begins below the final Tholi row with visible separation. Facts and coverage text fit below the description.",
+      "directlyVisuallyInspected": true,
+      "hashReverifiedAtReview": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/legend-correction-2026-09-09T04-19-50.904Z/ganymede-dpr1/geology-shadows-unsupported-details-1.png",
+      "bytes": 664608,
+      "sha256": "05764192895342fbbceedfbe5d1db75734d15a73d8570eefd802bc2b7bfc370a",
+      "body": "ganymede",
+      "dpr": 1,
+      "note": "All 23 category rows are readable across the two scroll positions; prose begins after the final cu row. Second capture reveals the complete coverage text below the facts. No legend/description/fact overlap is visible.",
+      "directlyVisuallyInspected": true,
+      "hashReverifiedAtReview": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/legend-correction-2026-09-09T04-19-50.904Z/ganymede-dpr1/geology-shadows-unsupported-details-2.png",
+      "bytes": 663173,
+      "sha256": "dd3e8644678d32bbdebc49cf2f7b182bb4b10a18ead27ec4471de4ac7b592eb6",
+      "body": "ganymede",
+      "dpr": 1,
+      "note": "All 23 category rows are readable across the two scroll positions; prose begins after the final cu row. Second capture reveals the complete coverage text below the facts. No legend/description/fact overlap is visible.",
+      "directlyVisuallyInspected": true,
+      "hashReverifiedAtReview": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/legend-correction-2026-09-09T04-19-50.904Z/ganymede-dpr2/geology-shadows-unsupported-details-1.png",
+      "bytes": 1672505,
+      "sha256": "237d54427dac438e6f8e73bfc93303d88fa7c1b679c05086f5fdeb20704e6437",
+      "body": "ganymede",
+      "dpr": 2,
+      "note": "All 23 category rows are readable across the two scroll positions; prose begins after the final cu row. Second capture reveals the complete coverage text below the facts. No legend/description/fact overlap is visible.",
+      "directlyVisuallyInspected": true,
+      "hashReverifiedAtReview": true
+    },
+    {
+      "path": "output/playwright/b2-surfaces/legend-correction-2026-09-09T04-19-50.904Z/ganymede-dpr2/geology-shadows-unsupported-details-2.png",
+      "bytes": 1673357,
+      "sha256": "68fe1381ad054fd9dd77f3500091dad7259dc5ae81f2c438b0be75e23e9b2e5f",
+      "body": "ganymede",
+      "dpr": 2,
+      "note": "All 23 category rows are readable across the two scroll positions; prose begins after the final cu row. Second capture reveals the complete coverage text below the facts. No legend/description/fact overlap is visible.",
+      "directlyVisuallyInspected": true,
+      "hashReverifiedAtReview": true
+    }
+  ],
+  "limits": [
+    "The old integrated captures remain a truthful record of the defect; only this later correction evidence clears that specific finding.",
+    "Globe geometry/science/source registration and enhanced views rely on their separately scoped reports; this correction is not a complete object qualification.",
+    "Fine projective face/band boundaries remain visible in the displayed categorical globes, especially DPR1; no seam-free claim.",
+    "Filename shadows-unsupported is the focused harness naming convention; it is not a new claim that the bodies lack lighting capability."
+  ]
+}

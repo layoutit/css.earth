@@ -1,0 +1,14 @@
+Preparing 3 objects with 1 parallel workers.
+[prepare io] started (1/3).
+Prepared 24 Io starfield cubemap images.
+{"id":"io","runtime":true}
+[prepare io] succeeded in 104.4s.
+[prepare europa] started (2/3).
+Prepared 24 Europa starfield cubemap images.
+{"id":"europa","runtime":true}
+[prepare europa] succeeded in 104.7s.
+[prepare ganymede] started (3/3).
+Prepared 24 Ganymede starfield cubemap images.
+{"id":"ganymede","runtime":true}
+[prepare ganymede] succeeded in 166.1s.
+Preparation finished in 375.2s: 3 succeeded, 0 failed, 0 not started.

@@ -10,6 +10,7 @@ import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObserved
 import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation, prepareRgbBandObservation} from './observed-geotiff.mjs';
 import { preparePdsRgbObservation } from './observed-pds-rgb.mjs';
 import { prepareByteObservation } from './observed-image.mjs';
+import { preparePds4Observation } from './observed-pds4.mjs';
 import { prepareFitsObservation } from './observed-fits.mjs';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mjs';
 import { prepareShapeCameraMosaic } from './shape-camera-mosaic.mjs';
@@ -36,6 +37,7 @@ function surfaceEncoding(config) {
 
 export async function readObservation(sourceDirectory, entry, validity, width, height) {
   const path = resolve(sourceDirectory, entry.path);
+  if (validity.kind === 'pds4-float-rgb') return preparePds4Observation(sourceDirectory, entry, validity, width, height);
   if (validity.kind === 'pds3-rgb-zip') return preparePdsRgbObservation(path, entry, validity, width, height);
   if (validity.kind === 'geotiff-rgb-bands') return prepareRgbBandObservation(path, entry, validity, width, height);
   if (validity.kind === 'fits-byte-monochrome') return prepareFitsObservation(path, entry, validity, width, height);
@@ -46,6 +48,9 @@ export async function readObservation(sourceDirectory, entry, validity, width, h
   if (metadata.width !== entry.width || metadata.height !== entry.height) throw new Error(`Observation source dimensions changed: ${entry.path}`);
   if (['image-monochrome-no-data', 'image-rgb-no-data'].includes(validity.kind)) return prepareByteObservation(path, entry, validity, width, height);
   if(validity.kind==='geotiff-rgb-alpha')return prepareMaskedObservation(path,entry,validity,width,height);
+  if (validity.kind === 'geotiff-monochrome-alpha' && validity.resampling === 'source-georeferenced-bilinear') {
+    return prepareMaskedObservation(path, entry, {...validity, channels:'monochrome', zeroValidity:validity.zeroValidity ?? 'all-channels'}, width, height);
+  }
   if (validity.kind === 'south-connected-black') {
     const source = await sharp(path).removeAlpha().raw().toBuffer({ resolveWithObject: true });
     const sourceMissing = blackFillCoverage(source.data, source.info, { southConnected: true });
@@ -82,6 +87,21 @@ export async function readObservation(sourceDirectory, entry, validity, width, h
   return { rgb, missing, sourceGeoreference: { origin, resolution } };
 }
 
+/** Only facet-table previews may use a smaller flat map. Native triangle
+ * materials still sample the complete source table and have their own atlas. */
+export function scientificPreviewGrid(lens, raster) {
+  const grid = lens.previewGrid;
+  if (grid === undefined) return { width: raster.width, height: raster.height };
+  if (lens.format !== 'facet-scalars' || !grid ||
+      Object.keys(grid).some(key => !['width', 'height'].includes(key)) ||
+      ![grid.width, grid.height].every(n => Number.isSafeInteger(n) && n > 0) ||
+      grid.width !== grid.height * 2 || grid.width > raster.width || grid.height > raster.height ||
+      grid.height % raster.bandCount !== 0) {
+    throw new TypeError('Facet preview grid must be a bounded 2:1 integer raster compatible with its latitude bands.');
+  }
+  return { width: grid.width, height: grid.height };
+}
+
 /** Surface composition is source-dependent; the projection/packing is shared. */
 export async function prepareSolidRasters({ sourceDirectory, publicDirectory, outputDirectory, config, source, radial }) {
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
@@ -96,6 +116,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   for (const recipe of config.raster.observations) {
     const entry=entries.find(item=>item.lensId===recipe.id);
     if (!entry) throw new Error(`Observation ${recipe.id} has no pinned source.`);
+    if (recipe.validity.labelPath && ![...source.manifest.inputs, ...source.manifest.documents].some(input => input.path === recipe.validity.labelPath)) throw new Error('Observation label has no source pin.');
     const observation = await readObservation(sourceDirectory, entry, recipe.validity, width, height);
     let monochromePixels=0;
     if(recipe.monochromeBase){const base=observations.get(recipe.monochromeBase);if(!base)throw new Error('Observed fallback ordering is invalid.');
@@ -149,8 +170,9 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   for (const lens of config.raster.scientific ?? []) {
     await source.validateGroup(lens.consumer);
-    const entry = source.manifest.inputs.find(input => input.lensId === lens.id);
-    if (!entry || entry.path !== (lens.facetField?.path ?? lens.path)) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
+    const sourcePath = lens.facetField?.path ?? lens.path;
+    const entry = source.manifest.inputs.find(input => input.path === sourcePath && input.consumers.includes(lens.consumer));
+    if (!entry) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
     if (lens.facetField && ![lens.path, lens.facetField.labelPath].every(path => source.manifest.inputs.some(input =>
       input.path === path && input.consumers.includes(lens.consumer)))) throw new Error('Facet field lacks its pinned source mesh or label.');
     const additionalSources = (lens.additionalGrids ?? []).map(grid => {
@@ -158,7 +180,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
       return {id: input.id, sha256: input.expectedSha256, width: input.width, height: input.height};
     });
-    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && lens.path !== config.geometry.radialTerrain.path))) {
+    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && (lens.format === 'facet-scalars' ? lens.meshPath : lens.path) !== config.geometry.radialTerrain.path))) {
       throw new Error('Source-surface science requires the actual rendered source mesh.');
     }
     if (lens.format === 'pds3-scalar-map') {
@@ -166,25 +188,33 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
         if (!source.manifest.inputs.some(input => input.path === path && input.consumers.includes(lens.consumer))) throw new Error(`Unpinned scalar-map dependency: ${path}`);
       }
     }
+    const dependencies = lens.format === 'facet-scalars' ? [lens.meshPath, lens.table.labelPath].filter(Boolean)
+      : lens.format === 'geologic-shapefile' ? [lens.grid.attributePath, lens.grid.projectionPath]
+      : lens.format === 'pds-image' ? [lens.labelPath] : [];
+    for (const path of dependencies) {
+      if (![...source.manifest.inputs, ...source.manifest.documents].some(input => input.path === path)) throw new Error(`Unpinned scientific dependency: ${path}`);
+    }
     // Reuse the already loaded geometry BVH, especially for large OLA meshes.
     const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling ? radial.grid : undefined);
     if (lens.surfaceSampling) {
       radial.scientificSurfaces ??= new Map();
       radial.scientificSurfaces.set(lens.id, raster);
     }
-    const { rgb, missing } = paintScienceSurface(raster, lens, width, height);
+    const preview = scientificPreviewGrid(lens, config.raster);
+    const { rgb, missing } = paintScienceSurface(raster, lens, preview.width, preview.height);
     const scale = Buffer.alloc(256 * 3);
-    for (let x = 0; x < 256; x++) scale.set(colorForValue(lens.minimum + x / 255 * (lens.maximum - lens.minimum), lens), x * 3);
-    const legend = await emit(`${config.namespace}-${lens.id}-legend.webp`, sharp(scale, { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill' }));
+    for (let x = 0; x < 256; x++) scale.set(colorForValue(lens.categories ? Math.min(lens.categories.length - 1, Math.floor(x * lens.categories.length / 256)) : lens.minimum + x / 255 * (lens.maximum - lens.minimum), lens), x * 3);
+    const legend = await emit(`${config.namespace}-${lens.id}-legend.webp`, sharp(scale, { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: lens.categories ? 'nearest' : 'lanczos3' }));
     surfaces.push(await packSurface(lens.id, rgb, null, { label: lens.label, falseColor: true,
       source: { id: entry.id, sha256: entry.expectedSha256, width: entry.width, height: entry.height },
       ...(additionalSources.length ? {additionalSources} : {}),
       projection: entry.projection, coverage: entry.coverage, scientific: true, legend,
+      ...(lens.previewGrid ? { previewGrid: preview } : {}),
       ...(raster.fieldReport ? { facetField: raster.fieldReport } : {}),
       ...(raster.report ? { scalarMap: raster.report } : {}),
       ...(lens.surfaceSampling ? { surfaceSampling: { ...lens.surfaceSampling,
         previewPolicy: 'Radial rays with more than one distinct source intersection are withheld; the triangle atlas samples the source surface in 3D.' } } : {}),
-      missingPixels: missing.reduce((sum, value) => sum + value, 0) }));
+      missingPixels: missing.reduce((sum, value) => sum + value, 0) }, { categorical: Boolean(lens.categories), displaySampling: lens.displaySampling, ...preview }));
   }
   for (const recipe of config.raster.observedColors ?? []) {
     const photometry=recipe.photometry?{profile:recipe.photometry.profile,geometry:await loadControlledObservationGeometry({sourceDirectory,entries:await source.validateGroup(recipe.photometry.consumer),vectors:recipe.photometry.vectors})}:null;
@@ -202,17 +232,19 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       ...(photometry?{photometry:color.photometry,levels}:{}),
     }));
   }
-  async function packSurface(id, rgb, missing, metadata) {
+  async function packSurface(id, rgb, missing, metadata, { categorical = false, displaySampling,
+    width = config.raster.width, height = config.raster.height } = {}) {
+    const nearest = categorical || displaySampling === 'nearest';
     const display = missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing) : rgb;
     const rgba = await sharp(display, { raw: { width, height, channels: 3 } }).ensureAlpha().raw().toBuffer();
-    const projected = reprojectSolidBodySurfaceRaster(rgba, { width, height, latitudeSegments: bandCount });
+    const projected = reprojectSolidBodySurfaceRaster(rgba, { width, height, latitudeSegments: bandCount, sampling: nearest ? 'nearest' : 'bilinear' });
     const packed = packProjectiveSurfaceRaster(projected, { width, height, bandCount, gutter });
     const { data, ...layout } = packed, stem = `${config.namespace}-${id}`;
     const normalized = sharp(rgba, { raw: { width, height, channels: 4 } });
     const map = await emit(`${stem}-map.webp`, normalized.clone());
-    const surface = await emit(`${stem}-surface@2x.webp`, sharp(data, { raw: { width: packed.packedWidth, height: packed.packedHeight, channels: 4 } }), surfaceEncoding(config));
-    const thumbnail = await emit(`${stem}-thumbnail.webp`, normalized.clone().resize(96, 48));
-    return { id, ...metadata, map, surface, thumbnail, layout,
+    const surface = await emit(`${stem}-surface@2x.webp`, sharp(data, { raw: { width: packed.packedWidth, height: packed.packedHeight, channels: 4 } }), nearest ? { lossless: true, effort: 4 } : surfaceEncoding(config));
+    const thumbnail = await emit(`${stem}-thumbnail.webp`, normalized.clone().resize(96, 48, { kernel: nearest ? 'nearest' : 'lanczos3' }));
+    return { id, ...metadata, ...(categorical ? { categorical: true } : {}), ...(nearest ? { displaySampling: 'nearest' } : {}), map, surface, thumbnail, layout,
       ...(missing && config.raster.reportMissingPixels ? { missingPixels: missing.reduce((sum, value) => sum + value, 0) } : {}) };
   }
   await writeFile(resolve(outputDirectory, 'surfaces.json'), `${JSON.stringify({ objectId: config.namespace, surfaces })}\n`);
@@ -241,10 +273,10 @@ export async function prepareSolidMaterial({ surfaces, publicDirectory, outputDi
   const { poleSize } = config.raster;
   for (const surface of surfaces) {
     const { data, info } = await sharp(resolve(publicDirectory, surface.map.url.split('/').at(-1))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-    const atlas = prepareSolidBodyPoleRaster(data, { width: info.width, height: info.height, tileSize: poleSize });
+    const atlas = prepareSolidBodyPoleRaster(data, { width: info.width, height: info.height, tileSize: poleSize, sampling: surface.displaySampling === 'nearest' ? 'nearest' : 'bilinear' });
     const filename = `${config.namespace}-${surface.id}-poles@2x.webp`;
     surface.polesUrl = `${config.publicBase}${filename}`;
-    await sharp(atlas, { raw: { width: poleSize * 2, height: poleSize, channels: 4 } }).webp(surfaceEncoding(config)).toFile(resolve(publicDirectory, filename));
+    await sharp(atlas, { raw: { width: poleSize * 2, height: poleSize, channels: 4 } }).webp(surface.displaySampling === 'nearest' ? { lossless: true, effort: 4 } : surfaceEncoding(config)).toFile(resolve(publicDirectory, filename));
     const mean = await sharp(data, { raw: info }).resize(1, 1).removeAlpha().raw().toBuffer();
     surface.billboardColor = `#${mean.subarray(0, 3).toString('hex')}`;
   }

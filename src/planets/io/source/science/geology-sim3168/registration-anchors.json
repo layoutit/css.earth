@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-geology-registration-audit@1",
+  "pointSource": "science/geology-sim3168/Io_GeoUnitsPoints",
+  "comparison": "Independent released point labels compared with the final polygon Unit attribute. The separate point and polygon classifications are not identical. Mismatches are retained as source discrepancies; point labels do not replace polygon categories.",
+  "matches": 1455,
+  "mismatch": 43,
+  "ignored": 2,
+  "representativeDiscrepancies": [
+    {
+      "record": 17,
+      "lon": 0.6472691912204027,
+      "lat": -76.52544187568128,
+      "value": "Pl",
+      "actual": "Prb"
+    },
+    {
+      "record": 18,
+      "lon": 33.243559347465634,
+      "lat": -76.32741482183337,
+      "value": "Pl",
+      "actual": "Prb"
+    },
+    {
+      "record": 19,
+      "lon": -0.10477951727807522,
+      "lat": -76.25356414914131,
+      "value": "Prb",
+      "actual": "Pl"
+    },
+    {
+      "record": 46,
+      "lon": 42.51021897792816,
+      "lat": -72.00410609133542,
+      "value": "Pl",
+      "actual": "Prb"
+    },
+    {
+      "record": 50,
+      "lon": 35.89782868884504,
+      "lat": -71.81242117844522,
+      "value": "Pl",
+      "actual": "Prb"
+    },
+    {
+      "record": 56,
+      "lon": 38.46362238563597,
+      "lat": -71.73714267835021,
+      "value": "Pl",
+      "actual": "Prb"
+    },
+    {
+      "record": 68,
+      "lon": 78.59896879456937,
+      "lat": -70.13355701975524,
+      "value": "PFd",
+      "actual": "PFu"
+    },
+    {
+      "record": 69,
+      "lon": -27.711503244936466,
+      "lat": -71.86767214164138,
+      "value": "PFb",
+      "actual": "PFd"
+    }
+  ],
+  "anchors": [
+    {
+      "record": 1,
+      "longitude": -97.14483174681664,
+      "latitude": -88.55184526182711,
+      "value": "Mu",
+      "pointAttributes": {
+        "Unit": "Mu",
+        "UnitName": "Mountain, undivided",
+        "Long_W": "9.71448317470e+001",
+        "Lat": "-8.85518452615e+001"
+      }
+    },
+    {
+      "record": 306,
+      "longitude": 92.26612759754062,
+      "latitude": -33.72352308779955,
+      "value": "Pl",
+      "pointAttributes": {
+        "Unit": "Pl",
+        "UnitName": "'Layered' plains",
+        "Long_W": "2.67733872403e+002",
+        "Lat": "-3.37235230869e+001"
+      }
+    },
+    {
+      "record": 605,
+      "longitude": 81.80737506970763,
+      "latitude": -7.092021415010095,
+      "value": "Mm",
+      "pointAttributes": {
+        "Unit": "Mm",
+        "UnitName": "Mountain, mottled or hummocky",
+        "Long_W": "2.78192624931e+002",
+        "Lat": "-7.09202141466e+000"
+      }
+    },
+    {
+      "record": 906,
+      "longitude": 38.440339321270585,
+      "latitude": 22.61639265716076,
+      "value": "Pby",
+      "pointAttributes": {
+        "Unit": "Pb",
+        "UnitName": "Bright plains",
+        "Long_W": "3.21559660678e+002",
+        "Lat": "2.26163926579e+001"
+      }
+    },
+    {
+      "record": 1198,
+      "longitude": -75.5162910670042,
+      "latitude": 51.41594557464123,
+      "value": "Prb",
+      "pointAttributes": {
+        "Unit": "Prb",
+        "UnitName": "Red-brown plains",
+        "Long_W": "7.55162910672e+001",
+        "Lat": "5.14159455740e+001"
+      }
+    },
+    {
+      "record": 1499,
+      "longitude": 90.00107788108289,
+      "latitude": 33.76200720667839,
+      "value": "Prb",
+      "pointAttributes": {
+        "Unit": "Prb",
+        "UnitName": "Red-brown plains",
+        "Long_W": "2.69998922118e+002",
+        "Lat": "3.37620072070e+001"
+      }
+    }
+  ],
+  "aliases": {
+    "Pb": "Pby",
+    "Pw": "Pbw",
+    "T": "Tb"
+  }
+}

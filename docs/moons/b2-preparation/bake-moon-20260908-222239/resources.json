@@ -1,0 +1,96 @@
+{
+  "body": "moon",
+  "mode": "bake",
+  "pid": 95903,
+  "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "command": [
+    "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--max-old-space-size=4096",
+    "tools/objects/dist/prepare-authored.js",
+    "moon",
+    "--write"
+  ],
+  "heapMiB": 4096,
+  "before": {
+    "time": 1788916959.13396,
+    "pressureLevel": 1,
+    "swapBytes": 9624029757.44,
+    "compressorBytes": 2617032704
+  },
+  "samples": [
+    {
+      "time": 1788916959.141385,
+      "pressureLevel": 1,
+      "swapBytes": 9624029757.44,
+      "compressorBytes": 2617032704,
+      "process": "95903 95839 95839   1136   2.0 R    /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --max-old-space-size=4096 tools/objects/dist/prepare-authored.js moon --write",
+      "paused": false
+    },
+    {
+      "time": 1788916964.159542,
+      "pressureLevel": 1,
+      "swapBytes": 9624029757.44,
+      "compressorBytes": 2611724288,
+      "process": "95903 95839 95839 832640 168.1 R    /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --max-old-space-size=4096 tools/objects/dist/prepare-authored.js moon --write",
+      "paused": false
+    },
+    {
+      "time": 1788916969.1698382,
+      "pressureLevel": 1,
+      "swapBytes": 9624029757.44,
+      "compressorBytes": 2611642368,
+      "process": "95903 95839 95839 845072 101.4 R    /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --max-old-space-size=4096 tools/objects/dist/prepare-authored.js moon --write",
+      "paused": false
+    },
+    {
+      "time": 1788916974.191995,
+      "pressureLevel": 1,
+      "swapBytes": 9624029757.44,
+      "compressorBytes": 2595438592,
+      "process": "95903 95839 95839 973840  99.9 R    /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --max-old-space-size=4096 tools/objects/dist/prepare-authored.js moon --write",
+      "paused": false
+    },
+    {
+      "time": 1788916979.2042491,
+      "pressureLevel": 1,
+      "swapBytes": 9624029757.44,
+      "compressorBytes": 2594062336,
+      "process": "95903 95839 95839 1050368  99.1 R    /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --max-old-space-size=4096 tools/objects/dist/prepare-authored.js moon --write",
+      "paused": false
+    },
+    {
+      "time": 1788916984.219973,
+      "pressureLevel": 1,
+      "swapBytes": 9624029757.44,
+      "compressorBytes": 2592718848,
+      "process": "95903 95839 95839 1129360 100.4 R    /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --max-old-space-size=4096 tools/objects/dist/prepare-authored.js moon --write",
+      "paused": false
+    },
+    {
+      "time": 1788916989.235204,
+      "pressureLevel": 1,
+      "swapBytes": 9624029757.44,
+      "compressorBytes": 2591391744,
+      "process": "95903 95839 95839 1233136  98.8 R    /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --max-old-space-size=4096 tools/objects/dist/prepare-authored.js moon --write",
+      "paused": false
+    },
+    {
+      "time": 1788916994.250636,
+      "pressureLevel": 1,
+      "swapBytes": 9624029757.44,
+      "compressorBytes": 2588131328,
+      "process": "95903 95839 95839 1316480  85.4 S    /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --max-old-space-size=4096 tools/objects/dist/prepare-authored.js moon --write",
+      "paused": false
+    }
+  ],
+  "events": [],
+  "after": {
+    "time": 1788916999.263426,
+    "pressureLevel": 1,
+    "swapBytes": 9615641149.44,
+    "compressorBytes": 2573320192
+  },
+  "exitCode": 0,
+  "stoppedReason": null,
+  "policy": "Pause only owned worker on elevated pressure or sharp swap/compressor growth. Resume after six consecutive five-second normal-pressure samples with bounded growth. Never signal unrelated processes."
+}

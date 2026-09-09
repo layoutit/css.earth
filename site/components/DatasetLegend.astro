@@ -23,7 +23,13 @@ const labels = categories?.map(item => ({ text: item.label, detail: item.descrip
             style={`--planet-lens-legend-color: ${color}`} aria-hidden="true"></span>)}
         </span>}
   </div>
-  <div class="planet-lens-legend-labels" style={`--legend-label-count: ${labels.length}`}>
-    {labels.map(label => <span title={label.detail ? `${label.text}: ${label.detail}` : label.text}>{label.text}</span>)}
-  </div>
+  {categories ? <ul class="planet-lens-legend-categories">
+    {categories.map(item => <li>
+      <span class="planet-lens-legend-swatch" style={`--planet-lens-legend-color: ${item.color}`} aria-hidden="true"></span>
+      <span class="planet-lens-legend-category-label">{item.label}</span>
+      <span class="planet-lens-legend-category-description">{item.description}</span>
+    </li>)}
+  </ul> : <div class="planet-lens-legend-labels" style={`--legend-label-count: ${labels.length}`}>
+    {labels.map(label => <span>{label.text}</span>)}
+  </div>}
 </section>

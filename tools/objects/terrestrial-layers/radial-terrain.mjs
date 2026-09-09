@@ -252,13 +252,19 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     config.geometry.radiusKm * 1000 / config.geometry.radius, sunDirection) : null;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
-    const { data: map, info } = await sharp(resolve(publicDirectory, surface.map.url.split('/').at(-1))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     const flood = Buffer.alloc(width * height * 4), shadow = Buffer.alloc(width * height * 4);
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
     const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
-    const scalarSources = scientific?.format === 'pds3-scalar-map' && Buffer.alloc(width * height * 4);
+    const scalarSources = ['pds3-scalar-map', 'facet-scalars'].includes(scientific?.format) && Buffer.alloc(width * height * 4);
     const observation = radial.observationSurfaces?.get(surface.id);
+    // Direct source samplers never consume the flat preview, including its
+    // withheld radial directions. Keep that map only for previews/minimaps.
+    let map, info;
+    if (!sourceSurface && !observation) {
+      ({ data: map, info } = await sharp(resolve(publicDirectory, surface.map.url.split('/').at(-1)))
+        .ensureAlpha().raw().toBuffer({ resolveWithObject: true }));
+    }
     const sampleSources = observation?.report.frames && Buffer.alloc(width * height);
     const observationTransfer = observation && { interiorTexels: 0, counts: {}, maximumSourceDistanceMeters: 0,
       maximumPixelSeparationMeters: 0, maximumPhotometricGain: 0,
@@ -282,10 +288,6 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         // Fixed-epoch directional illumination is baked in the body's frame.
         const light = lighting?.sample(point, normal);
         let illumination = light?.shadow ?? (.12 + .88 * Math.max(0, dot(normal, sunDirection)));
-        const lon = (Math.atan2(point[1], point[0]) / (2 * Math.PI) + 1) % 1;
-        const lat = Math.atan2(point[2], Math.hypot(point[0], point[1]));
-        const sx = lon * info.width - .5, sy = Math.max(0, Math.min(info.height - 1, (.5 - lat / Math.PI) * info.height - .5));
-        const x0 = (Math.floor(sx) + info.width) % info.width, x1 = (x0 + 1) % info.width, y0 = Math.floor(sy), y1 = Math.min(info.height - 1, y0 + 1), tx = sx - Math.floor(sx), ty = sy - y0;
         const offset = ((rect.y + py) * width + rect.x + px) * 4;
         if (observation) {
           const sample = observation.samplePoint(closestTrianglePoint(point, a, ab, ac).point);
@@ -326,7 +328,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
           if (interior) transfer.triangleInteriorTexels++;
           const color = sample.color;
           if (sample.radius !== undefined) {
-            if (!scalarSources) illumination = .12 + .88 * Math.max(0, dot(sample.normal, sunDirection));
+            if (scientific.format !== 'pds3-scalar-map') illumination = .12 + .88 * Math.max(0, dot(sample.normal, sunDirection));
             transfer.maximumDistanceMeters = Math.max(transfer.maximumDistanceMeters, sample.distanceMeters);
           } else {
             transfer.withheldTexels++;
@@ -339,6 +341,10 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
           flood[offset + 3] = shadow[offset + 3] = 255;
           continue;
         }
+        const lon = (Math.atan2(point[1], point[0]) / (2 * Math.PI) + 1) % 1;
+        const lat = Math.atan2(point[2], Math.hypot(point[0], point[1]));
+        const sx = lon * info.width - .5, sy = Math.max(0, Math.min(info.height - 1, (.5 - lat / Math.PI) * info.height - .5));
+        const x0 = (Math.floor(sx) + info.width) % info.width, x1 = (x0 + 1) % info.width, y0 = Math.floor(sy), y1 = Math.min(info.height - 1, y0 + 1), tx = sx - Math.floor(sx), ty = sy - y0;
         for (let channel = 0; channel < 3; channel++) {
           const top = map[(y0 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y0 * info.width + x1) * 4 + channel] * tx;
           const bottom = map[(y1 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y1 * info.width + x1) * 4 + channel] * tx;
@@ -363,9 +369,12 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       const file = `${surface.id}-source-index.json`;
       await writeFile(resolve(outputDirectory, file), bytes);
       surface.scalarMap.sampleSources = { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), width, height };
+      const nearest = scientific.format === 'facet-scalars' || scientific.displaySampling === 'nearest';
       const snapshot = await renderRadialSnapshot({ faces: radial.faces, sampleSurface: sampleScience, size: 96,
-        longitudeDegrees: 30, latitudeDegrees: 30, ambient: 1, diffuse: 0 });
-      surface.thumbnail = await emit(`${config.namespace}-${surface.id}-thumbnail.webp`, sharp(snapshot).resize(48, 48)
+        longitudeDegrees: 30, latitudeDegrees: 30, ambient: 1, diffuse: 0,
+        ...(nearest ? { displaySampling: 'nearest' } : {}) });
+      surface.thumbnail = await emit(`${config.namespace}-${surface.id}-thumbnail.webp`, sharp(snapshot).resize(48, 48,
+        { kernel: nearest ? 'nearest' : 'lanczos3' })
         .extend({ left: 24, right: 24, top: 0, bottom: 0, background: { r: 0, g: 0, b: 0, alpha: 0 } }));
     }
     if (observationTransfer) surface.observation.transfer = observationTransfer;
@@ -388,7 +397,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const science = radial.scientificSurfaces?.get(surface.id);
     const lens = science && config.raster.scientific.find(lens => lens.id === surface.id);
     const png = await renderRadialSnapshot({ ...entry.recipe, faces: radial.faces,
-      ...(science ? { sampleSurface: createRadialScienceColorSampler(science, lens, config) } : {}),
+      ...(science ? { sampleSurface: createRadialScienceColorSampler(science, lens, config),
+        ...((lens.format === 'facet-scalars' || lens.displaySampling === 'nearest') ? { displaySampling: 'nearest' } : {}) } : {}),
       map: resolve(publicDirectory, surface.map.url.split('/').at(-1)) });
     source.assertBytes(entry, png);
   }

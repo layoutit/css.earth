@@ -1052,6 +1052,36 @@
         "lenses",
         "presentation"
       ]
+    },
+    {
+      "id": "usgs-agenor-controlled-dtm",
+      "path": "science/controlled-dtms/Agenor/Agenor.tif",
+      "expectedBytes": 168472,
+      "expectedSha256": "335c16fcb53c5e278f5660f3df5f42f58cd65d0ce78722c9a055ee2e7a053d62",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor.tif",
+      "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://registry.opendata.aws/nasa-usgs-europa-dtms/"
+      ],
+      "acquisition": "Download the exact released COG or provenance file and verify pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; metadata and prepared display retain attribution.",
+      "consumers": [
+        "agenor-elevation"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "width": 642,
+      "height": 133,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1560800,
+        "centerLongitudeDegrees": 180
+      },
+      "coverage": "Agenor regional DTM only. Source bilinear sampling requires a complete four-sample footprint; nearest, lossless display packing preserves that sampled validity boundary. No global datum or quality classes inferred."
     }
   ],
   "generatedIntermediates": [],
@@ -1100,20 +1130,20 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4103,
-      "expectedSha256": "b7b5d725fa904fbd761bbc59daedd48e392eb7b83977bf25b0ae3986bf520dee",
+      "expectedBytes": 5825,
+      "expectedSha256": "4191287fe4c69d4d8af75d177e6569b1f67d9ebbdf9785e5f0ce3ca073d4e272",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 9623,
-      "expectedSha256": "a05d532da9cb84cca788a5e0020a5e9cbe057d577bdf72417eabd1069f715966",
+      "expectedBytes": 12902,
+      "expectedSha256": "79f6e2fdc0ea83e3e253b33a88d30117560f289fdf9f57b89051e73a7e457e96",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3581,
-      "expectedSha256": "fdd009d83cb3440824c59ded7526e65d757614e0fa16e13f920c5f4b2ad26dc7",
+      "expectedBytes": 3620,
+      "expectedSha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -1124,8 +1154,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 12905,
-      "expectedSha256": "620ecbe8332f0771caa3d6e1a202cacb0aa2c5135d039813b16df8358302e3c3",
+      "expectedBytes": 15289,
+      "expectedSha256": "2ab34145b03410298cddacd91b549e97ac977e9337d3706f3f4fcb43abbdf247",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -1134,6 +1164,222 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1418,
       "expectedSha256": "d1cd1a95dc286994f9541c09b8d5eaf611650126bcbbcc944d8489cd9734346c"
+    },
+    {
+      "id": "usgs-europa-yelland-ridges-yelland-ridges-tif",
+      "path": "science/controlled-dtms/Yelland_Ridges/Yelland_Ridges.tif",
+      "expectedBytes": 54052,
+      "expectedSha256": "608ed235e9c62abff00fec2da68d4b6c74ddb3e0dfcac039d4a9d0bb74ce8f37",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/Yelland_Ridges.tif",
+      "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://registry.opendata.aws/nasa-usgs-europa-dtms/"
+      ],
+      "acquisition": "Download the exact released COG or provenance file and verify pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; metadata and prepared display retain attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Download the exact released COG or provenance file and verify pinned bytes."
+    },
+    {
+      "id": "usgs-europa-yelland-ridges-yelland-ridges-fom-tif",
+      "path": "science/controlled-dtms/Yelland_Ridges/Yelland_Ridges_FOM.tif",
+      "expectedBytes": 16998,
+      "expectedSha256": "e8d8601312da89877ca714a43551d899bb56dbbfb182a9200298b374077070e4",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/Yelland_Ridges_FOM.tif",
+      "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://registry.opendata.aws/nasa-usgs-europa-dtms/"
+      ],
+      "acquisition": "Download the exact released COG or provenance file and verify pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; metadata and prepared display retain attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Download the exact released COG or provenance file and verify pinned bytes."
+    },
+    {
+      "id": "usgs-europa-yelland-ridges-yelland-ridges-clrconf-tif",
+      "path": "science/controlled-dtms/Yelland_Ridges/Yelland_Ridges_ClrConf.tif",
+      "expectedBytes": 16998,
+      "expectedSha256": "e8d8601312da89877ca714a43551d899bb56dbbfb182a9200298b374077070e4",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/Yelland_Ridges_ClrConf.tif",
+      "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://registry.opendata.aws/nasa-usgs-europa-dtms/"
+      ],
+      "acquisition": "Download the exact released COG or provenance file and verify pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; metadata and prepared display retain attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Download the exact released COG or provenance file and verify pinned bytes."
+    },
+    {
+      "id": "usgs-europa-yelland-ridges-provenance-txt",
+      "path": "science/controlled-dtms/Yelland_Ridges/provenance.txt",
+      "expectedBytes": 1019,
+      "expectedSha256": "054f51ad0af834e13c06f8b31431c2c41ddfdc13135b3b1d9f944ac29594ae4a",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/provenance.txt",
+      "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://registry.opendata.aws/nasa-usgs-europa-dtms/"
+      ],
+      "acquisition": "Download the exact released COG or provenance file and verify pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; metadata and prepared display retain attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Download the exact released COG or provenance file and verify pinned bytes."
+    },
+    {
+      "id": "usgs-europa-agenor-agenor-fom-tif",
+      "path": "science/controlled-dtms/Agenor/Agenor_FOM.tif",
+      "expectedBytes": 29461,
+      "expectedSha256": "c16870068b5a60cfbd5fe6a8113233ab806221bfdcb1d2b7dfda6bfb179d9e0c",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor_FOM.tif",
+      "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://registry.opendata.aws/nasa-usgs-europa-dtms/"
+      ],
+      "acquisition": "Download the exact released COG or provenance file and verify pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; metadata and prepared display retain attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Download the exact released COG or provenance file and verify pinned bytes."
+    },
+    {
+      "id": "usgs-europa-agenor-agenor-clrconf-tif",
+      "path": "science/controlled-dtms/Agenor/Agenor_ClrConf.tif",
+      "expectedBytes": 29461,
+      "expectedSha256": "c16870068b5a60cfbd5fe6a8113233ab806221bfdcb1d2b7dfda6bfb179d9e0c",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor_ClrConf.tif",
+      "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://registry.opendata.aws/nasa-usgs-europa-dtms/"
+      ],
+      "acquisition": "Download the exact released COG or provenance file and verify pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; metadata and prepared display retain attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Download the exact released COG or provenance file and verify pinned bytes."
+    },
+    {
+      "id": "usgs-europa-agenor-provenance-txt",
+      "path": "science/controlled-dtms/Agenor/provenance.txt",
+      "expectedBytes": 867,
+      "expectedSha256": "cec5d5607a2cdeb5d953252ab20c728c3b1f35dc32d839da8fa157ce131d47b9",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/provenance.txt",
+      "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://registry.opendata.aws/nasa-usgs-europa-dtms/"
+      ],
+      "acquisition": "Download the exact released COG or provenance file and verify pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; metadata and prepared display retain attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Download the exact released COG or provenance file and verify pinned bytes."
+    },
+    {
+      "id": "europa-dtm-controlled-dtms-stac-items-json",
+      "path": "science/controlled-dtms/stac-items.json",
+      "expectedBytes": 62800,
+      "expectedSha256": "c310d5c7266dd8b329e4eddfe201e60bb23a0eacb3eadb71288e5b839fc0a702",
+      "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+      "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
+      "license": "CC0-1.0 source and repository-authored validation metadata",
+      "acquisition": "Checked-in source metadata snapshot or independent source-value validation record.",
+      "redistribution": "Source documentation and numeric anchors retained with attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+    },
+    {
+      "id": "europa-dtm-controlled-dtms-documentation-html",
+      "path": "science/controlled-dtms/documentation.html",
+      "expectedBytes": 160474,
+      "expectedSha256": "b0112464132a2471b4d7b4e5216cefc740ac6848ea5b7a922092a18fa7f29fd3",
+      "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+      "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
+      "license": "CC0-1.0 source and repository-authored validation metadata",
+      "acquisition": "Checked-in source metadata snapshot or independent source-value validation record.",
+      "redistribution": "Source documentation and numeric anchors retained with attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+    },
+    {
+      "id": "europa-dtm-controlled-dtms-intake-downloads-json",
+      "path": "science/controlled-dtms/intake-downloads.json",
+      "expectedBytes": 2777,
+      "expectedSha256": "bfb826fe5ff7a6b47519a3925065fcb202a91dbee561784505965d83fc58bdc9",
+      "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+      "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
+      "license": "CC0-1.0 source and repository-authored validation metadata",
+      "acquisition": "Checked-in source metadata snapshot or independent source-value validation record.",
+      "redistribution": "Source documentation and numeric anchors retained with attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+    },
+    {
+      "id": "europa-dtm-Agenor-stac-item-json",
+      "path": "science/controlled-dtms/Agenor/stac-item.json",
+      "expectedBytes": 24543,
+      "expectedSha256": "9068d301438798ba37b621856b6f3a63366053865ae4a0d3540e2cbc437afc89",
+      "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+      "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
+      "license": "CC0-1.0 source and repository-authored validation metadata",
+      "acquisition": "Checked-in source metadata snapshot or independent source-value validation record.",
+      "redistribution": "Source documentation and numeric anchors retained with attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+    },
+    {
+      "id": "europa-dtm-Yelland_Ridges-stac-item-json",
+      "path": "science/controlled-dtms/Yelland_Ridges/stac-item.json",
+      "expectedBytes": 17931,
+      "expectedSha256": "d81288e39040220c52958dc6d5a99e5322e899c104174e5d0e120961ec6deec8",
+      "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+      "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
+      "license": "CC0-1.0 source and repository-authored validation metadata",
+      "acquisition": "Checked-in source metadata snapshot or independent source-value validation record.",
+      "redistribution": "Source documentation and numeric anchors retained with attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+    },
+    {
+      "id": "europa-dtm-Agenor-value-anchors-json",
+      "path": "science/controlled-dtms/Agenor/value-anchors.json",
+      "expectedBytes": 2003,
+      "expectedSha256": "4602a9b33a153269eb819e826c2b5ef7ad3bd662c9e0f47514a3c05f0843c3a4",
+      "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+      "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
+      "license": "CC0-1.0 source and repository-authored validation metadata",
+      "acquisition": "Checked-in source metadata snapshot or independent source-value validation record.",
+      "redistribution": "Source documentation and numeric anchors retained with attribution.",
+      "consumers": [
+        "controlled-dtm-audit"
+      ],
+      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
     }
   ]
 }

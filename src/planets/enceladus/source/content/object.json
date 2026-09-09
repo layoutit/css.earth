@@ -4,7 +4,7 @@
   "id": "enceladus",
   "displayName": "Enceladus",
   "panel": {
-    "introduction": "An icy moon with an ocean beneath its crust. Jets escape through fractures near the south pole, feeding Saturn’s E ring.",
+    "introduction": "An icy moon with an ocean beneath its crust. Jets escape through fractures near the south pole, feeding Saturn’s E ring. The Shape view uses JPL’s corrected v2 surface model. The earlier Schenk elevation map retains its separate ellipsoidal height datum.",
     "facts": [
       {
         "id": "radius",
@@ -68,7 +68,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "shape": "Shape"
     },
     "controls": [
       {
@@ -88,8 +89,8 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
-        "title": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
+        "description": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
+        "title": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
         "thumbnail": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
         "surface": "enceladus-elevation-surface@2x.webp",
         "poles": "enceladus-elevation-poles@2x.webp",
@@ -112,6 +113,19 @@
           "image": "/scenes/enceladus/enceladus-elevation-legend.webp"
         },
         "summary": "Height relative to the source ellipsoid, clipped at ±1 km. Gray grid: missing stereo and shading data."
+      },
+      {
+        "id": "shape",
+        "label": "Shape",
+        "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+        "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+        "thumbnail": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
+        "surface": "enceladus-shape-surface@2x.webp",
+        "poles": "enceladus-shape-poles@2x.webp",
+        "source": {
+          "id": "jpl-spc-enceladus-v2-q256",
+          "path": "../manifest.json"
+        }
       }
     ]
   },
@@ -157,6 +171,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "JPL/NAIF",
+      "role": "shape",
+      "description": "Corrected Enceladus v2 SPC shape and delivery notes",
+      "href": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
     }
   ],
   "provenance": {

@@ -32,6 +32,32 @@
           ],
           "specialValueMagnitude": 256
         }
+      },
+      {
+        "id": "enhanced-color",
+        "validity": {
+          "kind": "pds4-float-rgb",
+          "labelPath": "observations/nh_charon_color_mosaic.lblx",
+          "lidvid": "urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0",
+          "bands": [
+            2,
+            3,
+            4
+          ],
+          "wavelengthsNm": [
+            870,
+            625,
+            475
+          ],
+          "displayRange": [
+            0,
+            0.6
+          ]
+        },
+        "metadata": {
+          "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
+          "title": "Enhanced color combines MVIC near-infrared, red and blue bands with panchromatic detail. Colors are not natural color or measured albedo. Missing coverage remains a gray grid."
+        }
       }
     ],
     "scientific": [
