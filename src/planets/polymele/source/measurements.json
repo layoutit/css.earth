@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "polymele",
+  "source": {
+    "url": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
+    "papers": [
+      "https://doi.org/10.1007/s11214-025-01173-7",
+      "https://baas.aas.org/pub/2023n8i107p05"
+    ],
+    "credit": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "fullAxesKm": [
+      27,
+      24.4,
+      10.4
+    ],
+    "semiAxesKm": [
+      13.5,
+      12.2,
+      5.2
+    ],
+    "fullAxesUncertaintyKm": [
+      2,
+      1.6,
+      1.6
+    ],
+    "referenceRadiusKm": 9.496545373627304,
+    "axisConvention": "Full axes are halved exactly. +Z is the adopted pole; +X is the arbitrary display meridian.",
+    "qualification": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial.",
+    "scale": "The reference radius is the geometric mean of the approximation semiaxes. It is a rendering scale, not an independent measured mean radius or convex-model volume."
+  },
+  "approximation": {
+    "semiAxesKm": [
+      13.5,
+      12.2,
+      5.2
+    ],
+    "assumptions": [
+      "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial.",
+      "The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary."
+    ],
+    "qualification": "Observation-constrained ellipsoid; no invented local terrain or albedo."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km",
+    "formula": "r = 1 / sqrt((cos(lat)*cos(lon)/a)^2 + (cos(lat)*sin(lon)/b)^2 + (sin(lat)/c)^2)"
+  },
+  "spin": {
+    "periodHours": null,
+    "periodText": "Unresolved in this model",
+    "poleEclipticDegrees": [
+      231.8,
+      -80.9
+    ],
+    "poleIcrfRaDecDegrees": [
+      109.33549681020781,
+      -72.81854456731517
+    ],
+    "eclipticToIcrfObliquityDegrees": 23.439291111,
+    "meridianDegrees": 0,
+    "meaning": "The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary."
+  },
+  "unresolved": [
+    "The selected model does not establish a current rotational phase or an unambiguous period.",
+    "The satellite is outside this standalone asteroid package."
+  ],
+  "horizonsCommand": "15094;"
+}

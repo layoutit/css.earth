@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "leucus",
+  "displayName": "Leucus",
+  "panel": {
+    "introduction": "Leucus is an elongated Jupiter Trojan with an unusually slow rotation. This ellipsoid approximates the dimensions of the published light-curve and occultation model; its irregular outline is unresolved here. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate ellipsoid"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "60.8 × 39.1 × 27.8 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "445.683 ± 0.007 h"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Jupiter Trojan"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+        "title": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/leucus/leucus-model-thumbnail.webp",
+        "surface": "leucus-model-surface@2x.webp",
+        "poles": "leucus-model-poles@2x.webp",
+        "source": {
+          "id": "occultation-approximation",
+          "path": "../manifest.json",
+          "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape and dimensions",
+      "role": "surface",
+      "description": "Mottola et al. (2020), The Planetary Science Journal 1, 73; Levison et al. (2025), Space Science Reviews 221, 70",
+      "href": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://doi.org/10.3847/PSJ/abb942"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://doi.org/10.1007/s11214-025-01173-7"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+      "credit": "Mottola et al. (2020), The Planetary Science Journal 1, 73; Levison et al. (2025), Space Science Reviews 221, 70"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Mottola et al. (2020), The Planetary Science Journal 1, 73; Levison et al. (2025), Space Science Reviews 221, 70"
+    }
+  }
+}
