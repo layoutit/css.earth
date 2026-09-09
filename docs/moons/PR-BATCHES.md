@@ -37,9 +37,9 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 ## B2 — Add scientific surfaces and terrain to 15 moons
 
-**State:** implementation; 13 source-ready bodies, two source-access blockers · **Owner:** Moons
+**State:** implementation; 13 source-ready bodies, Moon, Phobos and Dimorphos preparation complete, two source-access blockers · **Owner:** Moons
 
-See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md). No B2 body is yet marked browser-qualified.
+See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md). PR #56 is integrated at `7030be3b`; the final Moon bake passed after the display corrections. No B2 body is yet marked browser-qualified.
 
 **Bodies:** Moon, Phobos, Deimos, Dimorphos, Io, Europa, Ganymede, Enceladus, Tethys, Dione, Rhea, Titan, Titania, Miranda, Charon.
 

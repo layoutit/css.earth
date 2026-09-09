@@ -84,7 +84,7 @@
         "scientific-surfaces",
         "facet-science"
       ],
-      "coverage": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement."
+      "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement."
     },
     {
       "id": "eso-milky-way-panorama",
@@ -145,8 +145,8 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 91108,
-      "expectedSha256": "456d9a56fb8815dfe48a52dc68ccc540824fffc36a7295365197fd0fda83eeeb"
+      "expectedBytes": 90860,
+      "expectedSha256": "c087dddad132508d31b892a771b2e7d4c69eb13679d7cdbdec9ccbf14c3067d5"
     }
   ],
   "documents": [
@@ -171,7 +171,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1262,
-      "expectedSha256": "e97ef97178c0ae9a11292eabe10034a5d21d2c83ec89febb6d92b5896e96b661",
+      "expectedSha256": "0afd8ee9c571cba3ae2ce4c145acf5e1c780a480f61700ecef4b8d039c5557c5",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

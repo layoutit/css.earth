@@ -12,7 +12,7 @@ const root=new URL('../../../../public/scenes/io/',import.meta.url);
 async function pixels(id){return sharp(new URL(`io-${id}-map.webp`,root).pathname).removeAlpha().raw().toBuffer({resolveWithObject:true});}
 
 test('Io binds its independent source and prepared runtime closure',async()=>{
- assert.equal((await verifyIoSourceManifest()).inputCount,5);
+ assert.equal((await verifyIoSourceManifest()).inputCount,9);
  const manifest=JSON.parse(await readFile(new URL('../../../../src/planets/io/runtime-assets.json',import.meta.url)));
  await verifyRuntimeAssetClosure({planetId:'io',manifest,root:root.pathname});
  assert.ok(manifest.assets.some(a=>a.filename==='io-parent-jupiter.webp'));

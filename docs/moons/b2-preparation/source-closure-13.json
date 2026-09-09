@@ -1,5 +1,5 @@
 {
-  "checkedAtEpoch": 1788914513.441505,
+  "checkedAtEpoch": 1788917645.738152,
   "method": "Streaming SHA-256 and byte counts for every manifest entry; complete actual versus declared file inventory; 1 MiB buffer. Does not establish acquisition restoration or renderer readiness.",
   "bodies": [
     {
@@ -11,19 +11,19 @@
     {
       "body": "phobos",
       "entries": 18,
-      "bytes": 171443765,
+      "bytes": 171438101,
       "errors": []
     },
     {
       "body": "deimos",
       "entries": 18,
-      "bytes": 64967876,
+      "bytes": 64967872,
       "errors": []
     },
     {
       "body": "dimorphos",
       "entries": 23,
-      "bytes": 55289775,
+      "bytes": 55289897,
       "errors": []
     },
     {
@@ -35,7 +35,7 @@
     {
       "body": "europa",
       "entries": 72,
-      "bytes": 323842432,
+      "bytes": 323842436,
       "errors": []
     },
     {

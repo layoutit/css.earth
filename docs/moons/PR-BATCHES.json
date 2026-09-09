@@ -30,12 +30,12 @@
         "Sycorax",
         "Prospero",
         "Setebos",
-        "Hiʻiaka",
+        "Hi\u02bbiaka",
         "Squannit",
         "Romulus",
         "Menoetius"
       ],
-      "outcome": "26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461.",
+      "outcome": "26 new standalone moons merged; roster 69 \u2192 95, benchmark coverage 90/461.",
       "scope": "18 Saturn irregulars, four Uranus irregulars, and four asteroid/dwarf-planet companions.",
       "delivery": "A complete source-backed body package for every selected target: physical-model interpretation, parent-relative orbit, orientation limits, preparation, retained rendering, navigation, content, thumbnails, source restoration and qualification evidence.",
       "closure": "Resolve actual source identities, scale, axes, frame, orbit window and any selected ancillary-file terms for all 26 before expensive preparation. Use the reviewed mesh or explicitly observation-constrained approximation. Published minimum elongation, assumed polar dimension and tentative spin must remain visible; this batch does not promise 26 measured terrain surfaces.",
@@ -63,7 +63,7 @@
         "Uranus|XVII",
         "Uranus|XVIII",
         "Uranus|XIX",
-        "Haumea|Hiʻiaka",
+        "Haumea|Hi\u02bbiaka",
         "Moshup|Squannit",
         "Sylvia|Romulus",
         "Patroclus|Menoetius"
@@ -122,12 +122,27 @@
       "owner": "Moons",
       "branch": "feat/moons-scientific-surfaces",
       "baseCommit": "55bda12f012e77e2206d41661a886c84fb01362d",
+      "integrationCommit": "7030be3b850734d73688cff595f12983234f42b2",
       "progress": {
         "sourceReadyBodies": 13,
         "sourceBlockedBodies": [
           "Titania",
           "Miranda"
         ],
+        "preparedBodies": [
+          "Moon",
+          "Phobos",
+          "Dimorphos"
+        ],
+        "preparationReceipts": {
+          "Moon": "b2-preparation/bake-moon-20260908-222239/resources.json",
+          "Phobos": "b2-preparation/phobos-post-bake-check.json",
+          "Dimorphos": "b2-preparation/dimorphos-preparation.log"
+        },
+        "browserSmokeReceipts": {
+          "Moon": "b2-preparation/moon-post-bake-check.json",
+          "Phobos": "b2-preparation/phobos-post-bake-check.json"
+        },
         "qualifiedBodies": 0,
         "report": "B2-SCIENTIFIC-SURFACES.md"
       }

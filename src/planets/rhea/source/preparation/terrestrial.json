@@ -41,7 +41,7 @@
         "format": "geotiff",
         "path": "observations/rhea_radius_g.tif",
         "description": "Cassini terrain model · shaded relief",
-        "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing and 2.15–4.3 km typical estimated height uncertainty. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
+        "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
         "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
         "minimum": -10,
         "maximum": 10,

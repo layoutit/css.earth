@@ -1,0 +1,49 @@
+{
+  "prepared": true,
+  "runtimeAssetCount": 43,
+  "runtimeAssetBytes": 31528556,
+  "scientificTransfer": {
+    "albedo": {
+      "sampledTexels": 26214400,
+      "withheldTexels": 58,
+      "maximumDistanceMeters": 249.9844061431317,
+      "includesAtlasBleed": true,
+      "triangleInteriorTexels": 10873987,
+      "withheldTriangleInteriorTexels": 3,
+      "maximumAcceptedDistanceMeters": 250,
+      "method": "Every original table centroid verified against its exact source face; closest full-source triangle transfer bounded in metres. No cross-facet interpolation."
+    },
+    "slope": {
+      "sampledTexels": 26214400,
+      "withheldTexels": 58,
+      "maximumDistanceMeters": 249.9844061431317,
+      "includesAtlasBleed": true,
+      "triangleInteriorTexels": 10873987,
+      "withheldTriangleInteriorTexels": 3,
+      "maximumAcceptedDistanceMeters": 250,
+      "method": "Every original table centroid verified against its exact source face; closest full-source triangle transfer bounded in metres. No cross-facet interpolation."
+    }
+  },
+  "chrome": {
+    "desktop": "passed",
+    "dpr1": "interaction cases passed on stable rerun",
+    "dpr2": "interaction cases passed on stable rerun",
+    "smokeViews": [
+      "normal",
+      "albedo",
+      "slope"
+    ],
+    "consoleErrors": 0,
+    "captures": [
+      "output/playwright/b2-phobos-normal.png",
+      "output/playwright/b2-phobos-albedo.png",
+      "output/playwright/b2-phobos-slope-with-legend.png"
+    ],
+    "runnerCompletion": "Both cases passed and videos saved. Browser had exited; idle runner was terminated after shutdown stalled. Command exit143 is not counted as an aggregate pass.",
+    "videos": [
+      "output/playwright/b2-phobos-density-stable/phobos-dpr-1.webm",
+      "output/playwright/b2-phobos-density-stable/phobos-dpr-2.webm"
+    ]
+  },
+  "qualification": "Partial focused evidence; not ready"
+}

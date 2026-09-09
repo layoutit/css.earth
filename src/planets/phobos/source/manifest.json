@@ -118,7 +118,7 @@
       ],
       "expectedBytes": 34508570,
       "expectedSha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
-      "coverage": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table."
+      "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement."
     }
   ],
   "generatedIntermediates": [
@@ -145,8 +145,8 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 148160,
-      "expectedSha256": "c00f33a022cf0b70a66c888aed7e2f86fa846db946e2af89396e1de1940f74dc"
+      "expectedBytes": 142252,
+      "expectedSha256": "c3f24ea5e2437825cadf13e531ee41579abf1c3f8320de2f297fe441e8151a34"
     }
   ],
   "documents": [
@@ -171,7 +171,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1287,
-      "expectedSha256": "d89162ae9fe91d57a24d9a69bb0e96d6f3448fbff2f2e1b57be6b6bc68b7fb6c",
+      "expectedSha256": "958ce3a840ec70b894208a83420f821b2cbc97bff5f42acad92f787016845a7c",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

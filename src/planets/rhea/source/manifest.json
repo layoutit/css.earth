@@ -220,8 +220,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5662,
-      "expectedSha256": "bc3a94513ef0fc1a6eeb3fae5bd4c3d7d0afaf2a8eac4b7a4e831bb281b0dec7",
+      "expectedBytes": 5750,
+      "expectedSha256": "32a257ed0ce51beff0716842cd39983c4bb2ce22c8e35e0cf43192ed32d2406f",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -238,8 +238,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13243,
-      "expectedSha256": "838b183b26e376c61f1c147db307abf3857ccf92a34207a764502d5bc61b8519",
+      "expectedBytes": 13419,
+      "expectedSha256": "7735bdcf35bc60e00aef9980ad543d2052dec3e03d174f985a31ed7e379202fa",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
