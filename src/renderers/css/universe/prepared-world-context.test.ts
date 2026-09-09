@@ -4,6 +4,7 @@ import { expect, test, vi } from 'vitest';
 import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
+import { createWorldContextPlanner } from './world-context-planner.js';
 import { OBJECTS } from '../../../../site/objects.mjs';
 
 class FakeElement extends EventTarget {
@@ -76,14 +77,44 @@ function find(root: FakeElement, key: string, value: string): FakeElement {
   if (!found) throw new Error(`Missing ${key}=${value}`); return found;
 }
 function all(root: FakeElement): FakeElement[] { return root.children.flatMap(child => [child, ...all(child)]); }
-function mount(scale: number) {
+function mount(scale: number, requestPublication?: () => boolean) {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite }, requestPublication });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1_000].map(value => value * scale), orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
   mounted.set(layer.root as unknown as FakeElement, layer);
   return layer.root as unknown as FakeElement;
 }
+
+test('semantic changes invalidate worker snapshots without synchronously republishing geometry', () => {
+  const request = vi.fn(() => true), root = mount(1, request), layer = mounted.get(root)!;
+  const clock = root.ownerDocument.defaultView;
+  clock.advance(1000);
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
+  const planner = createWorldContextPlanner(plan(1));
+  const drawing = () => JSON.stringify(all(root).map(node => node.style));
+  for (const change of [() => layer.setOverview(true), () => layer.setHiddenOrbits(['mercury']),
+    () => layer.setHiddenLabels(['venus']), () => layer.previewSelection('mercury')]) {
+    const stale = layer.captureFrame(world, viewport), before = drawing(), calls = request.mock.calls.length;
+    change();
+    expect(stale.current()).toBe(false);
+    expect(request.mock.calls.length).toBe(calls + 1);
+    expect(drawing()).toBe(before);
+    const fresh = layer.captureFrame(world, viewport);
+    layer.publish(world, viewport, planner(fresh.view));
+    clock.advance(1000);
+  }
+  const before = drawing(), stale = layer.captureFrame(world, viewport);
+  find(root, 'contextGroup', 'mercury').dataset.objectHovered = 'true';
+  root.parentNode!.dispatchEvent(new Event('objecthoverchange'));
+  clock.advance(16);
+  expect(stale.current()).toBe(false);
+  expect(drawing()).toBe(before);
+  expect(layer.captureFrame(world, viewport).view.bodies[1].hovered).toBe(true);
+  layer.destroy();
+});
 
 test('a resolved background sprite does not pick through its transparent square corners', () => {
   const root = mount(1), layer = mounted.get(root)!;

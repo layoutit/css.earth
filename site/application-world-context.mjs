@@ -72,7 +72,8 @@ export function createApplicationWorldContext() {
       try {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
-        layer = prepared.mount(stage);
+        let refreshWorld = () => false;
+        layer = prepared.mount(stage, () => refreshWorld());
         layer.setHiddenOrbits(cometIds);
         framePlanner = prepared.createFramePlanner();
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
@@ -102,6 +103,7 @@ export function createApplicationWorldContext() {
             } finally { stagedFrame = null; }
           } };
         });
+        refreshWorld = () => frameQueue.refresh();
         const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats }) : null;
         if (diagnostics) target.__cssEarthUniverse = diagnostics;
         return { ...layer, viewport, publish,
@@ -110,13 +112,13 @@ export function createApplicationWorldContext() {
             return { enable() { enabled = true; }, destroy() { disposed = true; },
               present(request) {
                 if (disposed || destroyed || !request.current()) return;
-                if (!enabled) { request.commit(); return; }
-                frameQueue.present({ ...request, current: () => !disposed && !destroyed && request.current() });
+                const owned = { ...request, current: () => !disposed && !destroyed && request.current() };
+                if (!enabled) { frameQueue.remember(owned); request.commit(); return; }
+                frameQueue.present(owned);
               } };
           },
           previewSelection(id) {
             layer.previewSelection(id);
-            if (publication) publish(publication.world, publication.viewport);
           },
           selectObject(id, frame) {
             layer.selectObject(id, frame);
@@ -131,7 +133,7 @@ export function createApplicationWorldContext() {
           setHeliosphereEnabled(enabled) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;
             heliosphereEnabled = enabled === true;
-            if (publication) publish(publication.world, publication.viewport);
+            if (publication && !refreshWorld()) publish(publication.world, publication.viewport);
           },
           destroy() {
             destroyed = true; publication = null;

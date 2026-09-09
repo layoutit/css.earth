@@ -55,3 +55,48 @@ test('worker failure is delivered to the live owner and does not strand a later 
   expect(f.events).toEqual(['plan:1', 'error:1', 'plan:2']);
   await f.finish(); expect(f.events.slice(-2)).toEqual(['camera:2', 'drawing:2']);
 });
+
+test('idle semantic changes replan the retained initial camera through the worker', async () => {
+  const f = fixture();
+  expect(f.queue.refresh()).toBe(false);
+  f.queue.remember(f.request(1));
+  expect(f.events).toEqual([]);
+  expect(f.queue.refresh()).toBe(true);
+  expect(f.events).toEqual(['plan:1']);
+  await f.finish();
+  expect(f.events).toEqual(['plan:1', 'camera:1', 'drawing:1']);
+  f.queue.refresh();
+  await f.finish();
+  expect(f.events.slice(-3)).toEqual(['plan:1', 'camera:1', 'drawing:1']);
+});
+
+test('semantic refresh preserves newer pending input and coalesces during planning', async () => {
+  const f = fixture();
+  f.queue.present(f.request(1));
+  f.queue.present(f.request(2));
+  f.queue.refresh(); f.queue.refresh();
+  expect(f.queue.stats()).toMatchObject({ requested: 2, superseded: 0 });
+  await f.finish(() => false);
+  expect(f.events).toEqual(['plan:1', 'plan:2']);
+  f.queue.refresh();
+  await f.finish(() => false);
+  expect(f.events).toEqual(['plan:1', 'plan:2', 'plan:2']);
+  await f.finish();
+  expect(f.events.slice(-2)).toEqual(['camera:2', 'drawing:2']);
+});
+
+test('a new idle owner can refresh while a disposed owner still has worker work', async () => {
+  const f = fixture(); let oldCurrent = true, newCurrent = true;
+  f.queue.present(f.request(1, () => oldCurrent));
+  oldCurrent = false;
+  f.queue.remember(f.request(2, () => newCurrent));
+  expect(f.queue.refresh()).toBe(true);
+  await f.finish();
+  expect(f.events).toEqual(['plan:1', 'plan:2']);
+  await f.finish();
+  expect(f.events.slice(-2)).toEqual(['camera:2', 'drawing:2']);
+  newCurrent = false;
+  expect(f.queue.refresh()).toBe(false);
+  f.queue.destroy();
+  expect(f.queue.refresh()).toBe(false);
+});

@@ -48,7 +48,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
   };
   return Object.freeze({ assets,
     createFramePlanner: () => createWorldContextPlannerClient(plan),
-    mount(stage: HTMLElement) {
+    mount(stage: HTMLElement, requestPublication?: () => boolean) {
       const document = stage.ownerDocument;
       const root = document.createElement('div');
       root.className = 'prepared-universe';
@@ -104,7 +104,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Billboards share the detail stage, so a nearer body can cover the selected detail.
-        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites });
+        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites, requestPublication });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,

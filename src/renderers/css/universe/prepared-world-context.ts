@@ -249,8 +249,9 @@ export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolum
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, before, plan, sprites }: {
+export function mountPreparedWorldContext({ host, before, plan, sprites, requestPublication }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
+  requestPublication?: () => boolean;
 }) {
   const root = host.ownerDocument.createElement('div');
   root.className = 'prepared-world-context';
@@ -377,6 +378,9 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let selectionPreview: string | null | undefined;
   let navigationIndicatorsVisible = true;
   let latest: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
+  const refresh = () => {
+    if (latest && !requestPublication?.()) layer.publish(latest.world, latest.viewport);
+  };
   const invalidateLabelSizes = () => { presentationRevision++; for (const entry of bodies) entry.labelSize.width = 0; };
   const fonts = host.ownerDocument.fonts;
   fonts?.addEventListener('loadingdone', invalidateLabelSizes);
@@ -388,7 +392,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     if (destroyed || annotationFrame !== null) return;
     annotationFrame = windowTarget.requestAnimationFrame(() => {
       annotationFrame = null;
-      if (!destroyed && latest) layer.publish(latest.world, latest.viewport);
+      if (!destroyed) refresh();
     });
   };
   const readView = (world: WorldCameraPose, viewport: WorldCameraViewport): WorldContextView => {
@@ -456,20 +460,20 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         // Every resumed camera sample shares this one deadline. It may update
         // the target alpha, but must not restart another full-length transition.
         annotationResumeDeadline = windowTarget.performance.now() + FLIGHT_FADE_MS;
-        if (latest) this.publish(latest.world, latest.viewport);
+        refresh();
       }
     },
     previewSelection(id?: string | null) {
       if (destroyed) return;
       presentationRevision++;
       selectionPreview = id;
-      if (latest) this.publish(latest.world, latest.viewport);
+      refresh();
     },
     setOverview(enabled: boolean) {
       if (overview === enabled || destroyed) return;
       presentationRevision++;
       overview = enabled;
-      if (latest) this.publish(latest.world, latest.viewport);
+      refresh();
     },
     setHiddenOrbits(ids: readonly string[]) {
       if (destroyed) return;
@@ -479,7 +483,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const next = hidden.has(entry.body.id);
         if (entry.orbitHidden !== next) { entry.orbitHidden = next; changed = true; }
       }
-      if (changed && latest) this.publish(latest.world, latest.viewport);
+      if (changed) { presentationRevision++; refresh(); }
     },
     setHiddenLabels(ids: readonly string[]) {
       if (destroyed) return;
@@ -489,7 +493,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const next = hidden.has(entry.body.id);
         if (entry.labelHidden !== next) { entry.labelHidden = next; changed = true; }
       }
-      if (changed && latest) this.publish(latest.world, latest.viewport);
+      if (changed) { presentationRevision++; refresh(); }
     },
     inspect() {
       return Object.freeze(bodies.map(({ body, marker, indicator, label, pieces }) => Object.freeze({
