@@ -1,8 +1,22 @@
 import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFile } from "node:fs/promises";
 
 import { requireObjectControls } from "../scene-contract.mjs";
+import { OBJECTS } from "../objects.mjs";
+
+test("asteroid Shadows default off in authored content and prepared runtime", async () => {
+  for (const { id } of OBJECTS.filter(object => object.classification === "asteroid")) {
+    const source = JSON.parse(await readFile(new URL(`../../src/planets/${id}/source/content/object.json`, import.meta.url), "utf8"));
+    const prepared = (await loadObjectTestDefinition(id)).controls;
+    for (const [stage, settings] of [["authored", source.settings], ["prepared", prepared.settings]]) {
+      assert.deepEqual(settings.controls.filter(control => control.name === "shadows"),
+        [{ kind: "toggle", name: "shadows", label: "Shadows", checked: false }],
+        `${id}: ${stage} Shadows must be opt-in`);
+    }
+  }
+});
 
 test("publishes one off-by-default Shadows control for every planet", async () => {
   const planets = [

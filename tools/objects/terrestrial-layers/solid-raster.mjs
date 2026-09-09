@@ -164,8 +164,11 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   for (const lens of config.raster.scientific ?? []) {
     await source.validateGroup(lens.consumer);
-    const entry = source.manifest.inputs.find(input => input.path === lens.path && input.consumers.includes(lens.consumer));
-    if (!entry || entry.path !== lens.path) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
+    const sourcePath = lens.facetField?.path ?? lens.path;
+    const entry = source.manifest.inputs.find(input => input.path === sourcePath && input.consumers.includes(lens.consumer));
+    if (!entry) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
+    if (lens.facetField && ![lens.path, lens.facetField.labelPath].every(path => source.manifest.inputs.some(input =>
+      input.path === path && input.consumers.includes(lens.consumer)))) throw new Error('Facet field lacks its pinned source mesh or label.');
     const additionalSources = (lens.additionalGrids ?? []).map(grid => {
       const input = source.manifest.inputs.find(input => input.path === grid.path && input.consumers.includes(lens.consumer));
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
@@ -201,6 +204,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       ...(additionalSources.length ? {additionalSources} : {}),
       projection: entry.projection, coverage: entry.coverage, scientific: true, legend,
       ...(lens.previewGrid ? { previewGrid: preview } : {}),
+      ...(raster.fieldReport ? { facetField: raster.fieldReport } : {}),
       ...(raster.report ? { scalarMap: raster.report } : {}),
       ...(lens.surfaceSampling ? { surfaceSampling: { ...lens.surfaceSampling,
         previewPolicy: 'Radial rays with more than one distinct source intersection are withheld; the triangle atlas samples the source surface in 3D.' } } : {}),

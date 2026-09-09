@@ -71,7 +71,44 @@
       }
     ],
     "observedColors": [],
-    "surfaceQuality": 90
+    "surfaceQuality": 90,
+    "surfaceObservations": [
+      {
+        "id": "osiris",
+        "format": "osiris-camera",
+        "consumer": "osiris-observation",
+        "path": "observations/w20080905t183606461id4df17.img",
+        "cameraPath": "observations/osiris-camera.json",
+        "startTime": "2008-09-05T18:36:22.008",
+        "filter": "Empty_OI",
+        "allowLossy": true,
+        "transfer": {
+          "maximumSourceDistanceMeters": 100,
+          "maximumSeparationMeters": 450,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "minnaert",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 2.5,
+          "coefficient": 0.54,
+          "phaseCoefficientPerDegree": 0
+        },
+        "displayPercentiles": [
+          1,
+          99
+        ],
+        "metadata": {
+          "label": "OSIRIS reflectance",
+          "coverage": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+          "falseColor": false
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -91,8 +128,8 @@
       "initialScenePitchDegrees": 10,
       "defaultControlYawDegrees": 180
     },
-    "mapUrl": "/scenes/steins/steins-normal-surface@2x.webp",
-    "polesUrl": "/scenes/steins/steins-normal-surface@2x.webp",
+    "mapUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
+    "polesUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
     "radialTerrain": {
       "path": "shape/steins_cart.wrl",
       "format": "vrml-mesh",
@@ -119,7 +156,7 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
   },
   "presentation": {
-    "defaultLens": "normal",
+    "defaultLens": "osiris",
     "pointColor": [
       180,
       180,
