@@ -58,6 +58,7 @@ interface Lens {
   thumbnailUrl: string;
   texture?: { url: string; width: number; height: number; minimap?: unknown; attribution?: { label: string; url?: string } };
   description: string;
+  summary?: string;
   facts?: Fact[];
   title: string;
   legend?: {
@@ -103,6 +104,7 @@ export interface Props {
   galleries?: Gallery[];
   charts?: Chart[];
   resources?: Resource[];
+  provenance?: ReturnType<typeof import("../src/platform/object-provenance.mjs").validateObjectProvenance>;
   lenses?: {
     title: PreparedTitle;
     controls: Lens[];
@@ -113,4 +115,3 @@ export interface Props {
     controls: Setting[];
   };
 }
-

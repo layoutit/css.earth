@@ -1,0 +1,1046 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "moon",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "a9a4d3ddfd7d37504bbb6a478bd08ce26439ef29201e82b2fce9356dfcb8b493"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "b0ec475cd7d21c58e606b7eea3e0a893c25e3d6d64628816a2b59b27ff242b24",
+      "parameters": {
+        "schema": "cssearth-static-surface-raster@1",
+        "kind": "observation-lenses",
+        "width": 1024,
+        "height": 512,
+        "latitudeSegments": 16,
+        "polarTile": 128,
+        "densities": [
+          1,
+          2
+        ],
+        "surfaceProjection": "oriented-bands",
+        "thumbnail": "source-center-crop",
+        "material": {
+          "frameSize": 512,
+          "limbFloor": 0.52,
+          "radiusScale": 0.505,
+          "output": "moon-curvature"
+        },
+        "lenses": [
+          {
+            "id": "surface",
+            "label": "Surface",
+            "input": "surface/lroc-color-2k.jpg",
+            "output": "moon-surface",
+            "qualification": "NASA LRO/LROC visible-colour global surface mosaic",
+            "presentation": {
+              "model": "prepared-neutral-lunar-reflectance-presentation",
+              "saturation": 0.35,
+              "linearGain": 0.9,
+              "linearOffset": -78,
+              "sharpenSigma": 0.65,
+              "qualification": "Prepared tonal presentation preserves the LROC surface structure; brightness and saturation are display choices, not calibrated albedo."
+            }
+          },
+          {
+            "id": "topography",
+            "label": "Topography",
+            "input": "science/ldem_16.img",
+            "output": "moon-topography",
+            "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
+            "scientific": {
+              "schema": "cssearth-pds-int16-cylindrical@1",
+              "format": "pds-image",
+              "path": "ldem_16.img",
+              "labelPath": "ldem_16.lbl",
+              "datasetId": "LRO-L-LOLA-4-GDR-V1.0",
+              "productId": "LDEM_16",
+              "productVersion": "V3.1",
+              "lidvid": "urn:nasa:pds:lro_lola_rdr:data_gridded:ldem_16::1.0",
+              "target": "MOON",
+              "sourceUnit": "METER",
+              "sampling": "nearest",
+              "grid": {
+                "width": 5760,
+                "height": 2880,
+                "pixelsPerDegree": 16,
+                "latitudeRange": [
+                  -90,
+                  90
+                ],
+                "longitudeRange": [
+                  0,
+                  360
+                ],
+                "referenceRadiusMeters": 1737400,
+                "frame": "MEAN EARTH/POLAR AXIS OF DE421",
+                "scalingFactor": 0.5,
+                "offset": 1737400,
+                "noData": null
+              },
+              "valueTransform": {
+                "scale": 0.5,
+                "offset": 0
+              },
+              "minimum": -12000,
+              "maximum": 12000,
+              "colors": [
+                "#243b85",
+                "#40a0c4",
+                "#dddac4",
+                "#ce9449",
+                "#89382d"
+              ],
+              "units": "m above 1737.4 km sphere",
+              "outputLongitudeOrigin": -180,
+              "displaySampling": "nearest"
+            }
+          },
+          {
+            "id": "crust",
+            "label": "Crust",
+            "input": "lenses/grail-crustal-thickness-print.jpg",
+            "output": "moon-crustal-thickness",
+            "qualification": "NASA GRAIL crustal-thickness map with shaded relief"
+          },
+          {
+            "id": "rock-abundance",
+            "label": "Rock abundance",
+            "input": "science/dgdr_ra_avg_cyl_032_img.img",
+            "output": "moon-rock-abundance",
+            "qualification": "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south",
+            "scientific": {
+              "schema": "cssearth-pds-int16-cylindrical@1",
+              "format": "pds-image",
+              "path": "dgdr_ra_avg_cyl_032_img.img",
+              "labelPath": "dgdr_ra_avg_cyl_032_img.lbl",
+              "datasetId": "LRO-L-DLRE-5-GDR-V1.0",
+              "productId": "DGDR_RA_AVG_CYL_032_IMG.IMG",
+              "productVersion": "V4.0",
+              "lidvid": "urn:nasa:pds:lro_diviner_derived1:data_derived_gdr_level3:dgdr_ra_avg_cyl_032_img::1.0",
+              "target": "MOON",
+              "sourceUnit": "NONE",
+              "sampling": "nearest",
+              "grid": {
+                "width": 11520,
+                "height": 3840,
+                "pixelsPerDegree": 32,
+                "latitudeRange": [
+                  -60,
+                  60
+                ],
+                "longitudeRange": [
+                  0,
+                  360
+                ],
+                "referenceRadiusMeters": 1737400,
+                "frame": "MEAN EARTH/POLAR AXIS OF DE421",
+                "scalingFactor": 0.001,
+                "offset": 0,
+                "noData": -32768
+              },
+              "valueTransform": {
+                "scale": 0.1,
+                "offset": 0
+              },
+              "minimum": 0,
+              "maximum": 2,
+              "colors": [
+                "#292544",
+                "#456582",
+                "#5b9e95",
+                "#b7c85c",
+                "#fff0a0"
+              ],
+              "units": "percent surface area",
+              "validRange": [
+                0,
+                100
+              ],
+              "outputLongitudeOrigin": -180,
+              "displaySampling": "nearest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/static.json",
+      "sha256": "975584a72c38c0e8ced47a5c3ce94a6ecc2150a711cf6a83e0b33f3ffb6e87c7",
+      "parameters": {
+        "schema": "cssearth-static-surface-content@1",
+        "id": "moon",
+        "displayName": "Moon",
+        "panel": {
+          "schema": "cssmoon-prepared-panel@1",
+          "sourceId": 108085,
+          "sourceUrl": "https://science.nasa.gov/moon/facts/",
+          "modified": "2026-02-12T14:08:47",
+          "retrievedAt": "2026-09-03",
+          "introduction": "Earth's Moon records evidence of our solar system's history in the form of impact craters, cooled lava landforms, ancient ice deposits, and more.",
+          "facts": [
+            {
+              "id": "distance-from-earth",
+              "label": "Mean distance from Earth",
+              "value": "384,400 km"
+            },
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "1,737.4 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "27.322 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "27.32 days · synchronous",
+              "source": {
+                "url": "https://science.nasa.gov/moon/facts/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-inclination",
+              "label": "Inclination to ecliptic",
+              "value": "5.16°"
+            },
+            {
+              "id": "orbital-eccentricity",
+              "label": "Orbital eccentricity",
+              "value": "0.0554"
+            },
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "3.344 ± 0.001 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "controls": {
+          "lenses": {
+            "title": {
+              "label": "Surface lens",
+              "src": "/shell/title-surface-lens.svg",
+              "width": 100.76,
+              "height": 23,
+              "source": "Inter Variable 4.001 git-9221beed3",
+              "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+              "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+              "fontSize": 17,
+              "inputSha256": "6789af454490004c9b64f37cdf522ed098035575f1cd8d4285d084008f489f7f",
+              "generator": "tools/prepare-shell-titles.mjs"
+            },
+            "defaultLens": "surface",
+            "controls": [
+              {
+                "id": "surface",
+                "label": "Visible color",
+                "thumbnailUrl": "/scenes/moon/moon-surface-thumbnail.webp",
+                "description": "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display.",
+                "title": "Visible color: NASA LRO/LROC visible-colour global surface mosaic",
+                "detail": "Global mosaic",
+                "summary": "LROC imagery from NASA's CGI Moon Kit. Small gaps are filled; monochrome replaces missing polar color."
+              },
+              {
+                "id": "topography",
+                "label": "Elevation",
+                "thumbnailUrl": "/scenes/moon/moon-topography-thumbnail.webp",
+                "description": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination.",
+                "legend": {
+                  "kind": "scale",
+                  "title": "Elevation above reference sphere",
+                  "src": "/scenes/moon/moon-topography-legend.webp",
+                  "width": 256,
+                  "height": 16,
+                  "labels": [
+                    "−12",
+                    "0",
+                    "12"
+                  ],
+                  "meta": "km",
+                  "sourceUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+                },
+                "title": "Elevation: LRO LOLA LDEM16 numeric heights",
+                "detail": "Numeric elevation",
+                "summary": "LOLA elevation relative to a 1,737.4 km sphere. Color and shading show relief from archival measurements."
+              },
+              {
+                "id": "crust",
+                "label": "Crust",
+                "thumbnailUrl": "/scenes/moon/moon-crustal-thickness-thumbnail.webp",
+                "description": "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust.",
+                "legend": {
+                  "kind": "scale",
+                  "title": "Relative crustal thickness",
+                  "colors": [
+                    "rgb(51 47 166)",
+                    "rgb(50 59 171)",
+                    "rgb(49 70 176)",
+                    "rgb(48 82 180)",
+                    "rgb(47 94 185)",
+                    "rgb(45 105 190)",
+                    "rgb(44 117 195)",
+                    "rgb(43 129 199)",
+                    "rgb(42 140 204)",
+                    "rgb(41 152 209)",
+                    "rgb(40 164 214)",
+                    "rgb(39 175 218)",
+                    "rgb(38 187 223)",
+                    "rgb(37 195 222)",
+                    "rgb(36 197 212)",
+                    "rgb(35 200 202)",
+                    "rgb(35 202 192)",
+                    "rgb(34 204 182)",
+                    "rgb(34 206 172)",
+                    "rgb(33 209 161)",
+                    "rgb(32 211 151)",
+                    "rgb(32 213 141)",
+                    "rgb(31 216 131)",
+                    "rgb(30 218 121)",
+                    "rgb(30 220 111)",
+                    "rgb(29 223 101)",
+                    "rgb(42 224 96)",
+                    "rgb(59 224 91)",
+                    "rgb(75 225 87)",
+                    "rgb(92 225 82)",
+                    "rgb(108 226 78)",
+                    "rgb(125 227 74)",
+                    "rgb(141 227 69)",
+                    "rgb(158 228 65)",
+                    "rgb(174 229 61)",
+                    "rgb(191 229 56)",
+                    "rgb(207 230 52)",
+                    "rgb(224 230 47)",
+                    "rgb(237 228 44)",
+                    "rgb(237 214 42)",
+                    "rgb(236 200 41)",
+                    "rgb(236 186 39)",
+                    "rgb(236 172 38)",
+                    "rgb(236 158 36)",
+                    "rgb(236 144 35)",
+                    "rgb(235 130 33)",
+                    "rgb(235 116 32)",
+                    "rgb(235 102 30)",
+                    "rgb(235 89 29)",
+                    "rgb(234 75 27)",
+                    "rgb(234 61 26)",
+                    "rgb(234 64 35)",
+                    "rgb(235 78 52)",
+                    "rgb(235 93 69)",
+                    "rgb(235 108 86)",
+                    "rgb(236 122 103)",
+                    "rgb(236 137 120)",
+                    "rgb(237 151 137)",
+                    "rgb(237 166 154)",
+                    "rgb(237 181 171)",
+                    "rgb(238 195 188)",
+                    "rgb(238 210 205)",
+                    "rgb(239 224 222)",
+                    "rgb(239 239 239)"
+                  ],
+                  "labels": [
+                    "Thinner",
+                    "Thicker"
+                  ],
+                  "sourceUrl": "https://svs.gsfc.nasa.gov/4014/"
+                },
+                "title": "Crust: NASA GRAIL crustal-thickness map with shaded relief",
+                "detail": "Thickness",
+                "summary": "Crust thickness from GRAIL gravity and topography. It depends on assumed densities; this is a model."
+              },
+              {
+                "id": "rock-abundance",
+                "label": "Rock abundance",
+                "thumbnailUrl": "/scenes/moon/moon-rock-abundance-thumbnail.webp",
+                "description": "Surface area covered by rocks, inferred from nighttime Diviner thermal measurements in 2009–2010. Color spans 0–2%; values above 2% share the brightest color. Patterned areas are outside ±60° coverage, missing, or physically invalid. This is a thermal model, not a photograph or a count of individual boulders.",
+                "title": "Rock abundance: LRO Diviner modeled rock-area fraction",
+                "detail": "Modeled area fraction",
+                "legend": {
+                  "kind": "scale",
+                  "title": "Surface rock area",
+                  "src": "/scenes/moon/moon-rock-abundance-legend.webp",
+                  "width": 256,
+                  "height": 16,
+                  "labels": [
+                    "0",
+                    "1",
+                    "2+"
+                  ],
+                  "meta": "%",
+                  "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml"
+                }
+              }
+            ]
+          },
+          "settings": {
+            "title": {
+              "label": "Settings",
+              "src": "/shell/title-settings.svg",
+              "width": 65.55,
+              "height": 23,
+              "source": "Inter Variable 4.001 git-9221beed3",
+              "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+              "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+              "fontSize": 17,
+              "inputSha256": "21dd30a55a11275ab9a2a3da144da7840919f4fbf6fc977a7427bbbfa650b31a",
+              "generator": "tools/prepare-shell-titles.mjs"
+            },
+            "controls": [
+              {
+                "kind": "cycle",
+                "name": "speed",
+                "label": "Speed",
+                "state": "normal"
+              }
+            ]
+          }
+        },
+        "lenses": {
+          "schema": "cssmoon-prepared-lenses@1",
+          "defaultLens": "surface",
+          "runtimeFilters": false,
+          "runtimeRasterization": false,
+          "controls": [
+            {
+              "id": "surface",
+              "label": "Surface",
+              "thumbnailUrl": "/scenes/moon/moon-surface-thumbnail.webp",
+              "surfaceUrl": "/scenes/moon/moon-surface.webp",
+              "surface2xUrl": "/scenes/moon/moon-surface@2x.webp",
+              "polesUrl": "/scenes/moon/moon-surface-poles.webp",
+              "poles2xUrl": "/scenes/moon/moon-surface-poles@2x.webp",
+              "qualification": "NASA LRO/LROC visible-colour global surface mosaic",
+              "presentation": {
+                "model": "prepared-neutral-lunar-reflectance-presentation",
+                "saturation": 0.35,
+                "linearGain": 0.9,
+                "linearOffset": -78,
+                "sharpenSigma": 0.65,
+                "qualification": "Prepared tonal presentation preserves the LROC surface structure; brightness and saturation are display choices, not calibrated albedo."
+              },
+              "detail": "Global mosaic"
+            },
+            {
+              "id": "topography",
+              "label": "Topography",
+              "thumbnailUrl": "/scenes/moon/moon-topography-thumbnail.webp",
+              "surfaceUrl": "/scenes/moon/moon-topography.webp",
+              "surface2xUrl": "/scenes/moon/moon-topography@2x.webp",
+              "polesUrl": "/scenes/moon/moon-topography-poles.webp",
+              "poles2xUrl": "/scenes/moon/moon-topography-poles@2x.webp",
+              "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
+              "detail": "Numeric elevation"
+            },
+            {
+              "id": "crust",
+              "label": "Crust",
+              "thumbnailUrl": "/scenes/moon/moon-crustal-thickness-thumbnail.webp",
+              "surfaceUrl": "/scenes/moon/moon-crustal-thickness.webp",
+              "surface2xUrl": "/scenes/moon/moon-crustal-thickness@2x.webp",
+              "polesUrl": "/scenes/moon/moon-crustal-thickness-poles.webp",
+              "poles2xUrl": "/scenes/moon/moon-crustal-thickness-poles@2x.webp",
+              "qualification": "NASA GRAIL crustal-thickness map with shaded relief",
+              "detail": "Thickness"
+            },
+            {
+              "id": "rock-abundance",
+              "label": "Rock abundance",
+              "thumbnailUrl": "/scenes/moon/moon-rock-abundance-thumbnail.webp",
+              "surfaceUrl": "/scenes/moon/moon-rock-abundance.webp",
+              "surface2xUrl": "/scenes/moon/moon-rock-abundance@2x.webp",
+              "polesUrl": "/scenes/moon/moon-rock-abundance-poles.webp",
+              "poles2xUrl": "/scenes/moon/moon-rock-abundance-poles@2x.webp",
+              "qualification": "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south",
+              "detail": "Modeled area fraction"
+            }
+          ],
+          "material": {
+            "schema": "cssmoon-prepared-curvature-material@1",
+            "model": "prepared-full-phase-spherical-curvature",
+            "one": "/scenes/moon/moon-curvature.webp",
+            "two": "/scenes/moon/moon-curvature@2x.webp",
+            "frameSize": 512,
+            "presentationSize": 512,
+            "limbFloor": 0.52,
+            "runtimeRasterization": false,
+            "qualification": "Prepared black-alpha curvature supplies display depth without claiming an epoch-specific lunar phase or illumination geometry."
+          },
+          "provenance": {
+            "surface": "NASA SVS CGI Moon Kit; LRO/LROC and LOLA",
+            "topography": "David E. Smith and LRO LOLA team; NASA PDS Geosciences Node; LDEM_16 V3.1",
+            "crust": "NASA GSFC SVS; Gravity Recovery and Interior Laboratory",
+            "rock-abundance": "Joshua Bandfield and LRO Diviner team, UCLA; NASA PDS Geosciences Node; DGDR_RA_AVG_CYL_032_IMG V4.0"
+          }
+        },
+        "resources": [
+          {
+            "label": "NASA Science",
+            "role": "facts",
+            "description": "Moon facts",
+            "href": "https://science.nasa.gov/moon/facts/"
+          },
+          {
+            "label": "NASA SVS",
+            "role": "surface",
+            "description": "LRO colour map",
+            "href": "https://svs.gsfc.nasa.gov/4720/"
+          },
+          {
+            "label": "JPL",
+            "role": "orbit",
+            "description": "Physical & orbital data",
+            "href": "https://ssd.jpl.nasa.gov/sats/"
+          },
+          {
+            "label": "OpenSpace",
+            "role": "scene",
+            "description": "Globe configuration",
+            "href": "https://github.com/OpenSpace/OpenSpace"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Background star field",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "NASA PDS / LOLA",
+            "role": "science",
+            "description": "Numeric lunar elevation grid",
+            "href": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+          },
+          {
+            "label": "NASA PDS / Diviner",
+            "role": "science",
+            "description": "Modeled surface rock abundance",
+            "href": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml"
+          }
+        ],
+        "provenance": {
+          "sourceRecord": "../SOURCE.md",
+          "editorial": "source/orbit/moon.json",
+          "qualification": "LROC visible-color presentation, numeric LOLA elevation, modeled Diviner rock area and the retained GRAIL crust interpretation each preserve their own source epoch and limits."
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "nasa-lro-moon-color",
+      "path": "surface/lroc-color-2k.jpg",
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
+      "credit": "NASA SVS, LRO, LROC and LOLA",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": [
+        "https://svs.gsfc.nasa.gov/4720/",
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "checked NASA SVS CGI Moon Kit colour map",
+      "redistribution": "NASA image with mission credit and no endorsement claim",
+      "capture": {
+        "spacecraftIds": [
+          "lro"
+        ],
+        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+      },
+      "sha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
+      "bytes": 457942,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "surface/lroc-color-2k.jpg",
+        "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lro-lola-ldem16-numeric",
+      "path": "science/ldem_16.img",
+      "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+      "credit": "David E. Smith and NASA GSFC LRO LOLA team; NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+      ],
+      "acquisition": "Exact public PDS binary download; original numeric samples, not a rendered press image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+      "bytes": 33177600,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/ldem_16.img",
+        "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nasa-grail-crustal-thickness",
+      "path": "lenses/grail-crustal-thickness-print.jpg",
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg",
+      "credit": "NASA GSFC Scientific Visualization Studio; GRAIL",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": [
+        "https://svs.gsfc.nasa.gov/4014/",
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "checked NASA SVS cylindrical GRAIL crustal-thickness map",
+      "redistribution": "NASA image with mission credit and no endorsement claim",
+      "capture": {
+        "spacecraftIds": [
+          "grail"
+        ],
+        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
+      },
+      "sha256": "d791cb16b0e6ee74bda94ca5bc1577fc9589a9e7d70cdade255ad199f83a5e95",
+      "bytes": 300978,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "lenses/grail-crustal-thickness-print.jpg",
+        "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lro-diviner-rock-abundance-numeric",
+      "path": "science/dgdr_ra_avg_cyl_032_img.img",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.img",
+      "credit": "Joshua Bandfield and UCLA LRO Diviner team; NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml"
+      ],
+      "acquisition": "Exact public PDS binary download; original numeric samples, not a rendered press image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "sha256": "ee0ff6ddfcc9cb4bb2fe83992f3951471c468a169804f1fdb582dc2df99540e1",
+      "bytes": 88473600,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/dgdr_ra_avg_cyl_032_img.img",
+        "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/static.json",
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "id": "authored-document:content/static.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/static.json",
+      "title": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "975584a72c38c0e8ced47a5c3ce94a6ecc2150a711cf6a83e0b33f3ffb6e87c7",
+      "bytes": 14706,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "surface",
+      "label": "Surface",
+      "recipe": "raster",
+      "selector": "/lenses/0",
+      "parents": [],
+      "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
+      "limitations": [
+        "NASA LRO/LROC visible-colour global surface mosaic"
+      ],
+      "lensIds": [
+        "surface"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "qualification": "NASA LRO/LROC visible-colour global surface mosaic"
+      },
+      "inputs": [
+        "nasa-lro-moon-color"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/moon/moon-surface-thumbnail.webp",
+          "bytes": 2752,
+          "sha256": "d781200e2456b17193e6c8f97bacf2fc8b21c095351b524f814cd029c06734b7",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-surface.webp",
+          "bytes": 139914,
+          "sha256": "ba3e8fc8df0eb68c3e35354eceeef55edf09a04bdfd2b0a0341b965b5693ac58",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-surface@2x.webp",
+          "bytes": 468882,
+          "sha256": "46ca2b9b271f4a0bc628a899f710ac065b5c4fdbd01af38570b090f7c53be7cb",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-surface-poles.webp",
+          "bytes": 5624,
+          "sha256": "048cf0d10edddc0ed7babcf4364f03b9c18eaa98858999b3e769c3c80f8190d8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-surface-poles@2x.webp",
+          "bytes": 14032,
+          "sha256": "7a3729490730deab48820f38c4dfd413d33857defb0310775e7308bfaa555c11",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "topography",
+      "label": "Topography",
+      "recipe": "raster",
+      "selector": "/lenses/1",
+      "parents": [],
+      "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
+      "limitations": [
+        "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere"
+      ],
+      "lensIds": [
+        "topography"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere"
+      },
+      "inputs": [
+        "lro-lola-ldem16-numeric"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/moon/moon-topography-thumbnail.webp",
+          "bytes": 8168,
+          "sha256": "c0f707fe1ccaddcd07cb6aec66dcbdc25811c20e5f9d3dccbd63d86a4a45c1e6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-topography.webp",
+          "bytes": 529956,
+          "sha256": "5662a74d505859d319028aed84d58142f6e14552b39f71d47f4031c3f5b5e644",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-topography@2x.webp",
+          "bytes": 1763150,
+          "sha256": "dd10f4675f70a899a5562feba522886acf6bf9323ca0729a39bdc7f2dc81ffdf",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-topography-poles.webp",
+          "bytes": 47866,
+          "sha256": "f460a6375079dec50f7d7d7f5c465c619bc6a6958cd20e7a854ffb88d2f01f32",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-topography-poles@2x.webp",
+          "bytes": 149512,
+          "sha256": "e9f3a061b32a7e394dfed366fc39a4af0366fc1d301863f7fc85e6b6429df1d2",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "crust",
+      "label": "Crust",
+      "recipe": "raster",
+      "selector": "/lenses/2",
+      "parents": [],
+      "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
+      "limitations": [
+        "NASA GRAIL crustal-thickness map with shaded relief"
+      ],
+      "lensIds": [
+        "crust"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "qualification": "NASA GRAIL crustal-thickness map with shaded relief"
+      },
+      "inputs": [
+        "nasa-grail-crustal-thickness"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/moon/moon-crustal-thickness-thumbnail.webp",
+          "bytes": 4676,
+          "sha256": "42dd84a4036d4d996c1c98cbb685f25219bfd212dc01cee5c5f408adc172fb3b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-crustal-thickness.webp",
+          "bytes": 213074,
+          "sha256": "c751f7d4915fca9c2e6f68841318acc39dc9b5794d379519c6373378e9db17ac",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-crustal-thickness@2x.webp",
+          "bytes": 476264,
+          "sha256": "5c2b146fe3c147075fed83797cee3ae2e0e4197ee40229572c7e71de7731abee",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-crustal-thickness-poles.webp",
+          "bytes": 13380,
+          "sha256": "fd4ba671d89e385a596b6459a988262d91a6db407870e0f8925afee0c85a2652",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-crustal-thickness-poles@2x.webp",
+          "bytes": 35532,
+          "sha256": "cd0d657288278f16ce42254b7526f7dacba27a4e45c3b22b862665eed0ff60be",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "rock-abundance",
+      "label": "Rock abundance",
+      "recipe": "raster",
+      "selector": "/lenses/3",
+      "parents": [],
+      "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
+      "limitations": [
+        "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south"
+      ],
+      "lensIds": [
+        "rock-abundance"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "qualification": "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south"
+      },
+      "inputs": [
+        "lro-diviner-rock-abundance-numeric"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/moon/moon-rock-abundance-thumbnail.webp",
+          "bytes": 3018,
+          "sha256": "4c08682c9073d2d80ddaf46a7c5c567e22512c25cc9d4edea799196829039917",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-rock-abundance.webp",
+          "bytes": 148488,
+          "sha256": "ae9cab0075a3b97e9542f00ecde380189165a37b2f72adc701005318d8ab1587",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-rock-abundance@2x.webp",
+          "bytes": 558446,
+          "sha256": "3d736ad2b78f81d01fcaf54574fe8004d4d2f8d2bebbd816df150873c18d37b2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-rock-abundance-poles.webp",
+          "bytes": 2550,
+          "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-rock-abundance-poles@2x.webp",
+          "bytes": 5948,
+          "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/static.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5550,
+          "sha256": "c04164d449ab2e4ab651a425e062753c91a804bc75913906f0128e95bb59af69",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:surface",
+      "label": "Surface preview",
+      "recipe": "raster",
+      "selector": "/lenses/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "surface"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/surface.webp",
+          "bytes": 44688,
+          "sha256": "88ba77b6c93f0e10155a0bba42eacc8cb1cd59a64f8722595d2aadd331a4fe7c",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:topography",
+      "label": "Topography preview",
+      "recipe": "raster",
+      "selector": "/lenses/1",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "topography"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/topography.webp",
+          "bytes": 233096,
+          "sha256": "47175bf0085d6c831cad75382ddb2016aa885014d67e8432980ba66656cb560f",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:crust",
+      "label": "Crust preview",
+      "recipe": "raster",
+      "selector": "/lenses/2",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "crust"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/crust.webp",
+          "bytes": 93594,
+          "sha256": "7e3d5e6137370a3eca0ad5afe8a1833784735cf60f297263342fce761da8ce6e",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:rock-abundance",
+      "label": "Rock abundance preview",
+      "recipe": "raster",
+      "selector": "/lenses/3",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "rock-abundance"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/rock-abundance.webp",
+          "bytes": 58134,
+          "sha256": "6b29eff642dc784d2764a3ca87839bfe0e091e485f3171d018a6379460b92565",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8a5d7813e21a354a1b98b3c396bec0a9000bb88e44bb1bb0b8b6aa3b37874df9"
+    "sha256": "9a140ea0f48d575a0effa6025e88f3849cebea712df26f0cb695f3b5bfe43e9f"
   },
   "id": "io",
   "properties": {
@@ -93,12 +93,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b5ce92041d24613b7fc532f2af0ad3ae596c25134ae5c481142fc1addc7382de"
+          "sha256": "108710dc7c7c1566fa236cc3654a6b6afcd86fb203a701f049b1b7a4e0d372f9"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "b5013944c360617b03bc43bc0c7d2a68ddd5c1ea11da30eebba653488ac9e8f9"
+          "sha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235"
         },
         {
           "id": "navigation",

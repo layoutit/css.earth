@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "patroclus",
+  "source": {
+    "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+    "papers": [
+      "https://www2.boulder.swri.edu/~buie/biblio/pub099.pdf",
+      "https://doi.org/10.1007/s11214-025-01173-7",
+      "https://www.iac.es/es/ciencia-y-tecnologia/publicaciones/orbit-patroclus-menoetius-binary-system-and-predictions-20242025-mutual-events-season"
+    ],
+    "credit": "Buie et al. (2015), The Astronomical Journal 149, 113; existing JPL#82 Patroclus-Menoetius source closure",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "fullAxesKm": [
+      127,
+      117,
+      98
+    ],
+    "semiAxesKm": [
+      63.5,
+      58.5,
+      49
+    ],
+    "fullAxesUncertaintyKm": null,
+    "referenceRadiusKm": 56.672872253886204,
+    "axisConvention": "Full axes are halved exactly. +Z is the adopted pole; +X is the arbitrary display meridian.",
+    "qualification": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter.",
+    "scale": "The reference radius is the geometric mean of the approximation semiaxes. It is a rendering scale, not an independent measured mean radius or convex-model volume."
+  },
+  "approximation": {
+    "semiAxesKm": [
+      63.5,
+      58.5,
+      49
+    ],
+    "assumptions": [
+      "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter.",
+      "Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed."
+    ],
+    "qualification": "Observation-constrained ellipsoid; no invented local terrain or albedo."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km",
+    "formula": "r = 1 / sqrt((cos(lat)*cos(lon)/a)^2 + (cos(lat)*sin(lon)/b)^2 + (sin(lat)/c)^2)"
+  },
+  "spin": {
+    "periodHours": null,
+    "periodText": "4.282753 ± 0.000023 d (mutual orbit)",
+    "poleEclipticDegrees": null,
+    "poleIcrfRaDecDegrees": [
+      178,
+      -74.1
+    ],
+    "eclipticToIcrfObliquityDegrees": null,
+    "meridianDegrees": 0,
+    "meaning": "Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed."
+  },
+  "unresolved": [
+    "Local shape deviations and a physical mutual-event rotational phase remain unqualified.",
+    "The existing Menoetius package supplies the retained primary-specific heliocentric state; the system barycentre is not substituted for Patroclus."
+  ],
+  "horizonsCommand": "920000617"
+}

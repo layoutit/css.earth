@@ -1,0 +1,522 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "pallas",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "470f7ea53821bd0222237a4f19db7e82fc4b912e4740f1de5ab898c2f1558c4c"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "1fe0958eb865833f7447a5f6472dcc2703d554e516485513d9f3b12b12671035",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "pallas",
+        "displayName": "Pallas",
+        "publicBase": "/scenes/pallas/",
+        "distanceAu": 2.769411416140799,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/2_Pallas_mpcd.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 22530,
+                "expectedFaces": 45056
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -255.5
+              },
+              "minimum": -60,
+              "maximum": 40,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 255500,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 255.5,
+          "camera": {
+            "initialScenePitchDegrees": -44.5505617977528,
+            "defaultControlYawDegrees": 90
+          },
+          "mapUrl": "/scenes/pallas/pallas-shape-surface@2x.webp",
+          "polesUrl": "/scenes/pallas/pallas-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/2_Pallas_mpcd.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 22530,
+              "expectedFaces": 45056
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 4500,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "0a79aa9797ec21530b94575e65d3d9acef9ab9959bb4ea98907ab3cbcf88343e",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "pallas",
+        "displayName": "Pallas",
+        "title": {
+          "label": "Pallas",
+          "viewBox": "0 0 70.3002 35",
+          "width": 70.3002,
+          "height": 35,
+          "path": "M0 29L0 8.63L7.51 8.63Q9.72 8.63 11.31 9.43Q12.89 10.23 13.73 11.66Q14.57 13.1 14.57 15.04Q14.57 16.98 13.71 18.42Q12.85 19.85 11.25 20.65Q9.64 21.44 7.42 21.44L1.75 21.44L1.75 18.81L7.3 18.81Q8.67 18.81 9.61 18.34Q10.55 17.87 11.05 17.02Q11.55 16.16 11.55 15.04Q11.55 13.89 11.05 13.04Q10.55 12.2 9.61 11.73Q8.67 11.27 7.3 11.27L3.05 11.27L3.05 29ZM20.98 29.26Q19.54 29.26 18.39 28.75Q17.24 28.25 16.58 27.26Q15.92 26.28 15.92 24.83Q15.92 23.59 16.4 22.78Q16.87 21.97 17.69 21.51Q18.52 21.04 19.55 20.8Q20.58 20.56 21.67 20.44Q23.03 20.26 23.83 20.16Q24.64 20.06 24.99 19.83Q25.34 19.59 25.34 19.07L25.34 18.96Q25.34 18.21 25 17.67Q24.65 17.13 24 16.81Q23.36 16.49 22.41 16.49Q21.48 16.49 20.77 16.8Q20.06 17.11 19.65 17.63Q19.24 18.14 19.13 18.76L16.29 18.6Q16.48 17.23 17.28 16.22Q18.09 15.22 19.42 14.67Q20.74 14.11 22.43 14.11Q23.68 14.11 24.74 14.42Q25.8 14.73 26.58 15.36Q27.36 15.98 27.79 16.9Q28.22 17.82 28.22 19.05L28.22 29L25.36 29L25.36 26.95L25.3 26.95Q25 27.52 24.46 28.06Q23.92 28.59 23.07 28.92Q22.22 29.26 20.98 29.26ZM21.59 26.91Q22.85 26.91 23.69 26.45Q24.53 25.99 24.94 25.23Q25.35 24.46 25.35 23.57L25.35 21.82Q25.2 21.96 24.83 22.06Q24.46 22.16 23.96 22.26Q23.45 22.36 22.9 22.44Q22.36 22.53 21.84 22.6Q21.03 22.71 20.34 22.96Q19.65 23.22 19.23 23.67Q18.82 24.13 18.82 24.88Q18.82 25.53 19.16 25.98Q19.5 26.43 20.12 26.67Q20.74 26.91 21.59 26.91ZM34.46 8.63L34.46 29L31.55 29L31.55 8.63ZM40.7 8.63L40.7 29L37.79 29L37.79 8.63ZM48.42 29.26Q46.99 29.26 45.84 28.75Q44.69 28.25 44.03 27.26Q43.36 26.28 43.36 24.83Q43.36 23.59 43.84 22.78Q44.32 21.97 45.14 21.51Q45.96 21.04 46.99 20.8Q48.02 20.56 49.12 20.44Q50.47 20.26 51.28 20.16Q52.08 20.06 52.43 19.83Q52.78 19.59 52.78 19.07L52.78 18.96Q52.78 18.21 52.44 17.67Q52.1 17.13 51.45 16.81Q50.8 16.49 49.86 16.49Q48.93 16.49 48.22 16.8Q47.5 17.11 47.09 17.63Q46.68 18.14 46.58 18.76L43.73 18.6Q43.92 17.23 44.73 16.22Q45.54 15.22 46.86 14.67Q48.19 14.11 49.87 14.11Q51.13 14.11 52.19 14.42Q53.25 14.73 54.03 15.36Q54.81 15.98 55.24 16.9Q55.67 17.82 55.67 19.05L55.67 29L52.81 29L52.81 26.95L52.74 26.95Q52.44 27.52 51.9 28.06Q51.36 28.59 50.51 28.92Q49.66 29.26 48.42 29.26ZM49.04 26.91Q50.29 26.91 51.13 26.45Q51.98 25.99 52.39 25.23Q52.8 24.46 52.8 23.57L52.8 21.82Q52.65 21.96 52.28 22.06Q51.91 22.16 51.4 22.26Q50.9 22.36 50.35 22.44Q49.8 22.53 49.28 22.6Q48.48 22.71 47.79 22.96Q47.09 23.22 46.68 23.67Q46.26 24.13 46.26 24.88Q46.26 25.53 46.6 25.98Q46.94 26.43 47.57 26.67Q48.19 26.91 49.04 26.91ZM64.38 29.33Q62.73 29.33 61.41 28.82Q60.09 28.3 59.27 27.27Q58.46 26.24 58.31 24.72L61.17 24.6Q61.32 25.76 62.14 26.38Q62.96 27 64.34 27Q65.73 27 66.53 26.44Q67.33 25.87 67.33 25.01Q67.33 24.27 66.79 23.81Q66.24 23.35 65.26 23.15L62.84 22.62Q60.77 22.15 59.71 21.1Q58.65 20.06 58.65 18.46Q58.65 17.16 59.37 16.17Q60.09 15.18 61.35 14.62Q62.6 14.07 64.28 14.07Q65.91 14.07 67.16 14.62Q68.4 15.18 69.14 16.2Q69.88 17.21 69.97 18.61L67.22 18.73Q67.14 17.73 66.38 17.06Q65.62 16.39 64.31 16.39Q63.1 16.39 62.34 16.97Q61.59 17.54 61.59 18.36Q61.59 19.12 62.14 19.57Q62.69 20.03 63.72 20.26L66.2 20.81Q68.3 21.28 69.3 22.26Q70.3 23.24 70.3 24.83Q70.3 26.2 69.53 27.22Q68.77 28.23 67.44 28.78Q66.1 29.33 64.38 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Pallas is a large, heavily cratered main-belt asteroid. Its reconstructed shape preserves broad impact features seen by VLT/SPHERE. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "255.5 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Distance from Sun",
+              "value": "2.769 AU (mean)"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.61 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7.81321 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "VLT/SPHERE shape model",
+              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "thumbnail": "/scenes/pallas/pallas-shape-thumbnail.webp",
+              "surface": "pallas-shape-surface@2x.webp",
+              "poles": "pallas-shape-surface@2x.webp",
+              "source": {
+                "id": "pallas-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape",
+              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Source shape · radial height",
+              "title": "Color shows source radius minus a 255.5 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "thumbnail": "/scenes/pallas/pallas-elevation-thumbnail.webp",
+              "surface": "pallas-elevation-surface@2x.webp",
+              "poles": "pallas-elevation-surface@2x.webp",
+              "source": {
+                "id": "pallas-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-60",
+                  "-10",
+                  "40"
+                ],
+                "meta": "km · 255.5 km reference sphere",
+                "sourceUrl": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj",
+                "image": "/scenes/pallas/pallas-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height",
+              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "VLT/SPHERE survey and physical properties",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Released MPCD shape model",
+            "href": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Observed pole and period; arbitrary display phase",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1051/0004-6361/202141781",
+            "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "pallas-shape",
+      "path": "shape/2_Pallas_mpcd.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+      "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 255500
+      },
+      "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e",
+      "bytes": 2703739,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/2_Pallas_mpcd.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "b7c9f151129deb9846726d686ff6f05990e4365d96f197fb4c8217cfb20a19bb",
+      "bytes": 8347,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Source shape · radial height"
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "pallas-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pallas/pallas-elevation-thumbnail.webp",
+          "bytes": 5258,
+          "sha256": "47250e3b32ad389d3118910ef46cd914bb3ae5773a2966cb542a93ab6937882c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pallas/pallas-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pallas/pallas-elevation-surface@2x.webp",
+          "bytes": 308912,
+          "sha256": "862dec3052332666ef5d697f9f5c1f6b0391e711169475ba022033defaf7e2bd",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "VLT/SPHERE shape model"
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "pallas-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pallas/pallas-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pallas/pallas-shape-surface@2x.webp",
+          "bytes": 214080,
+          "sha256": "e305dce0f49b3f0fed1a8314c557e26c3664c5b6a5979eda5ba8c4ac0c93f7c9",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5355,
+          "sha256": "62bb3a57895585843432aeac6b86615324fa3be764a3917af91d66e3b4ed1b36",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10092,
+          "sha256": "b02425234139738305bf2fc7916901e76256655f904b647b9c428bbf91645fff",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -1,0 +1,1418 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "titan",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "c027b47b87029aed1011a732a7c9a46ac694cabb961d77ded0165d1ef02b423b"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "2d739c1689a556fe6cef9fba75c23653fb885908e7799f4c05a1795453462d3a",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "titan",
+        "displayName": "Titan",
+        "publicBase": "/scenes/titan/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 8192,
+          "height": 4096,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 1024,
+          "surfaceQuality": 90,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "image-monochrome-no-data",
+                "noData": 0,
+                "centerLongitude": 180
+              }
+            }
+          ],
+          "scientific": [
+            {
+              "id": "topography",
+              "label": "Measured height",
+              "format": "pds3-float-map",
+              "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+              "grid": {
+                "projection": "equirectangular",
+                "productId": "GTFED00N090_T126_V01",
+                "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+                "targetName": "TITAN",
+                "width": 1440,
+                "height": 1440,
+                "pixelsPerDegree": 8,
+                "referenceRadiusMeters": 2575000,
+                "centerLongitudeWestDegrees": 180,
+                "sampleProjectionOffset": -0.5,
+                "lineProjectionOffset": 719.5,
+                "projectionRotation": "0.0000000",
+                "missingBits": "FF7FFFFB",
+                "longitudeRangeWest": [
+                  0,
+                  180
+                ]
+              },
+              "description": "Measured height · Cassini GTDR",
+              "title": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+              "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+              "minimum": -2500,
+              "maximum": 2500,
+              "colors": [
+                "#2166ac",
+                "#92c5de",
+                "#f7f7f7",
+                "#f4a582",
+                "#b35806"
+              ],
+              "labels": [
+                "−2500",
+                "0",
+                "+2500"
+              ],
+              "units": "m",
+              "consumer": "scientific-surfaces",
+              "sampling": "nearest",
+              "additionalGrids": [
+                {
+                  "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+                  "grid": {
+                    "projection": "equirectangular",
+                    "productId": "GTFED00N270_T126_V01",
+                    "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+                    "targetName": "TITAN",
+                    "width": 1440,
+                    "height": 1440,
+                    "pixelsPerDegree": 8,
+                    "referenceRadiusMeters": 2575000,
+                    "centerLongitudeWestDegrees": 180,
+                    "sampleProjectionOffset": 1439.5,
+                    "lineProjectionOffset": 719.5,
+                    "projectionRotation": "0.0000000",
+                    "missingBits": "FF7FFFFB",
+                    "longitudeRangeWest": [
+                      180,
+                      360
+                    ]
+                  }
+                }
+              ],
+              "displaySampling": "nearest"
+            },
+            {
+              "id": "interpolated",
+              "label": "Interpolated height",
+              "format": "pds3-float-map",
+              "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+              "grid": {
+                "projection": "equirectangular",
+                "productId": "GTIED00N090_T126_V01",
+                "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+                "targetName": "TITAN",
+                "width": 1440,
+                "height": 1440,
+                "pixelsPerDegree": 8,
+                "referenceRadiusMeters": 2575000,
+                "centerLongitudeWestDegrees": 180,
+                "sampleProjectionOffset": -0.5,
+                "lineProjectionOffset": 719.5,
+                "projectionRotation": "NULL",
+                "missingBits": "FF7FFFFB",
+                "longitudeRangeWest": [
+                  0,
+                  180
+                ]
+              },
+              "description": "Interpolated height · Cassini GTDR",
+              "title": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+              "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+              "minimum": -2500,
+              "maximum": 2500,
+              "colors": [
+                "#2166ac",
+                "#92c5de",
+                "#f7f7f7",
+                "#f4a582",
+                "#b35806"
+              ],
+              "labels": [
+                "−2500",
+                "0",
+                "+2500"
+              ],
+              "units": "m",
+              "consumer": "scientific-surfaces",
+              "sampling": "nearest",
+              "additionalGrids": [
+                {
+                  "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+                  "grid": {
+                    "projection": "equirectangular",
+                    "productId": "GTIED00N270_T126_V01",
+                    "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+                    "targetName": "TITAN",
+                    "width": 1440,
+                    "height": 1440,
+                    "pixelsPerDegree": 8,
+                    "referenceRadiusMeters": 2575000,
+                    "centerLongitudeWestDegrees": 180,
+                    "sampleProjectionOffset": 1439.5,
+                    "lineProjectionOffset": 719.5,
+                    "projectionRotation": "NULL",
+                    "missingBits": "FF7FFFFB",
+                    "longitudeRangeWest": [
+                      180,
+                      360
+                    ]
+                  }
+                }
+              ],
+              "displaySampling": "nearest"
+            },
+            {
+              "id": "coverage-distance",
+              "label": "Distance to data",
+              "format": "pds3-float-map",
+              "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+              "grid": {
+                "projection": "equirectangular",
+                "productId": "GTDED00N090_T126_V01",
+                "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+                "targetName": "TITAN",
+                "width": 1440,
+                "height": 1440,
+                "pixelsPerDegree": 8,
+                "referenceRadiusMeters": 2575000,
+                "centerLongitudeWestDegrees": 180,
+                "sampleProjectionOffset": -0.5,
+                "lineProjectionOffset": 719.5,
+                "projectionRotation": "NULL",
+                "missingBits": "FF7FFFFB",
+                "longitudeRangeWest": [
+                  0,
+                  180
+                ]
+              },
+              "description": "Distance to data · Cassini GTDR",
+              "title": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+              "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+              "minimum": 0,
+              "maximum": 1000,
+              "colors": [
+                "#253494",
+                "#2c7fb8",
+                "#7fcdbb",
+                "#edf8b1",
+                "#ffffd9"
+              ],
+              "labels": [
+                "0",
+                "500",
+                "1000"
+              ],
+              "units": "km",
+              "consumer": "scientific-surfaces",
+              "sampling": "nearest",
+              "additionalGrids": [
+                {
+                  "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+                  "grid": {
+                    "projection": "equirectangular",
+                    "productId": "GTDED00N270_T126_V01",
+                    "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+                    "targetName": "TITAN",
+                    "width": 1440,
+                    "height": 1440,
+                    "pixelsPerDegree": 8,
+                    "referenceRadiusMeters": 2575000,
+                    "centerLongitudeWestDegrees": 180,
+                    "sampleProjectionOffset": 1439.5,
+                    "lineProjectionOffset": 719.5,
+                    "projectionRotation": "NULL",
+                    "missingBits": "FF7FFFFB",
+                    "longitudeRangeWest": [
+                      180,
+                      360
+                    ]
+                  }
+                }
+              ],
+              "displaySampling": "nearest"
+            }
+          ],
+          "observedColors": [],
+          "mosaics": [
+            {
+              "id": "radar",
+              "consumer": "radar",
+              "format": "pds3-byte-equirectangular",
+              "metadata": {
+                "label": "Radar",
+                "falseColor": false,
+                "coverage": "Observed SAR and HiSAR swaths only; gray grid marks exact source no-data.",
+                "projection": {
+                  "type": "Equirectangular",
+                  "longitudeDirection": "east",
+                  "latitudeType": "planetocentric",
+                  "referenceRadiusMeters": 2575000
+                },
+                "interpretation": "Incidence-normalized Ku-band backscatter. Brightness reflects roughness, slopes and material properties; globe lighting is approximate."
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 2575.5,
+          "camera": {
+            "initialScenePitchDegrees": 40,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/titan/titan-normal-surface@2x.webp",
+          "polesUrl": "/scenes/titan/titan-normal-poles@2x.webp"
+        },
+        "celestial": {
+          "sunSource": "JPL Titan orbit and VSOP87 Saturn position, with IAU/WGCCRE rotation"
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            190,
+            160,
+            101
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "e8782016d20253b69fc2badb860b0ecad10678eeb2f707421c05d25612904561",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "titan",
+        "displayName": "Titan",
+        "title": {
+          "label": "Titan",
+          "viewBox": "0 0 61.7909 35",
+          "width": 61.7909,
+          "height": 35,
+          "path": "M0 11.29L0 8.63L15.97 8.63L15.97 11.29L9.53 11.29L9.53 29L6.47 29L6.47 11.29ZM18.36 29L18.36 14.37L21.28 14.37L21.28 29ZM19.84 11.91Q19.06 11.91 18.53 11.4Q17.99 10.9 17.99 10.16Q17.99 9.39 18.53 8.88Q19.06 8.37 19.83 8.37Q20.61 8.37 21.14 8.88Q21.67 9.39 21.67 10.16Q21.67 10.9 21.14 11.4Q20.61 11.91 19.84 11.91ZM31.66 14.37L31.66 16.78L23.32 16.78L23.32 14.37ZM25.8 10.5L28.71 10.5L28.71 25.1Q28.71 25.94 29.06 26.28Q29.41 26.62 30.27 26.62Q30.57 26.62 30.97 26.61Q31.36 26.59 31.65 26.58L31.76 28.97Q31.39 29.01 30.88 29.03Q30.36 29.05 29.89 29.05Q27.85 29.05 26.82 28.15Q25.8 27.25 25.8 25.47ZM38.71 29.26Q37.27 29.26 36.12 28.75Q34.98 28.25 34.31 27.26Q33.65 26.28 33.65 24.83Q33.65 23.59 34.13 22.78Q34.61 21.97 35.43 21.51Q36.25 21.04 37.28 20.8Q38.31 20.56 39.41 20.44Q40.76 20.26 41.57 20.16Q42.37 20.06 42.72 19.83Q43.07 19.59 43.07 19.07L43.07 18.96Q43.07 18.21 42.73 17.67Q42.39 17.13 41.74 16.81Q41.09 16.49 40.14 16.49Q39.21 16.49 38.5 16.8Q37.79 17.11 37.38 17.63Q36.97 18.14 36.86 18.76L34.02 18.6Q34.21 17.23 35.02 16.22Q35.82 15.22 37.15 14.67Q38.48 14.11 40.16 14.11Q41.42 14.11 42.47 14.42Q43.53 14.73 44.31 15.36Q45.09 15.98 45.52 16.9Q45.95 17.82 45.95 19.05L45.95 29L43.1 29L43.1 26.95L43.03 26.95Q42.73 27.52 42.19 28.06Q41.65 28.59 40.8 28.92Q39.95 29.26 38.71 29.26ZM39.32 26.91Q40.58 26.91 41.42 26.45Q42.26 25.99 42.67 25.23Q43.08 24.46 43.08 23.57L43.08 21.82Q42.93 21.96 42.56 22.06Q42.19 22.16 41.69 22.26Q41.18 22.36 40.64 22.44Q40.09 22.53 39.57 22.6Q38.76 22.71 38.07 22.96Q37.38 23.22 36.97 23.67Q36.55 24.13 36.55 24.88Q36.55 25.53 36.89 25.98Q37.23 26.43 37.85 26.67Q38.48 26.91 39.32 26.91ZM52.19 20.52L52.19 29L49.28 29L49.28 14.37L52.14 14.37L52.14 18.01L51.54 18.01Q52.25 16.04 53.51 15.08Q54.78 14.11 56.58 14.11Q58.07 14.11 59.25 14.76Q60.42 15.41 61.11 16.68Q61.79 17.95 61.79 19.85L61.79 29L58.88 29L58.88 20.21Q58.88 18.49 58.04 17.6Q57.21 16.71 55.69 16.71Q54.72 16.71 53.92 17.12Q53.12 17.53 52.66 18.37Q52.19 19.21 52.19 20.52Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Saturn’s largest moon hides beneath thick haze. Methane rain feeds its rivers and lakes, while dark dunes cover the equator.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "2,574.76 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "9.537 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "15.95 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "15.95 days · synchronous"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 1,222,000 km"
+            },
+            {
+              "id": "atmosphere-composition",
+              "label": "Atmosphere",
+              "value": "Dense nitrogen atmosphere with methane and organic haze"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.8814 ± 0.0001 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Near-infrared",
+              "description": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
+              "title": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
+              "thumbnail": "/scenes/titan/titan-normal-thumbnail.webp",
+              "surface": "titan-normal-surface@2x.webp",
+              "poles": "titan-normal-poles@2x.webp",
+              "source": {
+                "id": "usgs-cassini-iss-2026-938nm",
+                "path": "../manifest.json"
+              },
+              "summary": "Infrared images show Titan's surface through haze. Clouds, seams and uneven detail remain; gray grid: no observations."
+            },
+            {
+              "id": "radar",
+              "label": "Radar",
+              "description": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
+              "title": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
+              "thumbnail": "/scenes/titan/titan-radar-thumbnail.webp",
+              "surface": "titan-radar-surface@2x.webp",
+              "poles": "titan-radar-poles@2x.webp",
+              "source": {
+                "id": "cassini-radar-midr",
+                "path": "../manifest.json"
+              },
+              "summary": "Cassini radar mosaic through flyby T126. Brightness shows radar backscatter, not elevation; gray grid: no measurements."
+            },
+            {
+              "id": "topography",
+              "label": "Measured height",
+              "description": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+              "title": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+              "thumbnail": "/scenes/titan/titan-topography-thumbnail.webp",
+              "surface": "titan-topography-surface@2x.webp",
+              "poles": "titan-topography-poles@2x.webp",
+              "source": {
+                "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Measured height",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−2500",
+                  "0",
+                  "+2500"
+                ],
+                "meta": "m",
+                "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+                "image": "/scenes/titan/titan-topography-legend.webp"
+              }
+            },
+            {
+              "id": "interpolated",
+              "label": "Interpolated height",
+              "description": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+              "title": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+              "thumbnail": "/scenes/titan/titan-interpolated-thumbnail.webp",
+              "surface": "titan-interpolated-surface@2x.webp",
+              "poles": "titan-interpolated-poles@2x.webp",
+              "source": {
+                "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Interpolated height",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−2500",
+                  "0",
+                  "+2500"
+                ],
+                "meta": "m",
+                "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+                "image": "/scenes/titan/titan-interpolated-legend.webp"
+              }
+            },
+            {
+              "id": "coverage-distance",
+              "label": "Distance to data",
+              "description": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+              "title": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+              "thumbnail": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
+              "surface": "titan-coverage-distance-surface@2x.webp",
+              "poles": "titan-coverage-distance-poles@2x.webp",
+              "source": {
+                "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Distance to data",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "500",
+                  "1000"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+                "image": "/scenes/titan/titan-coverage-distance-legend.webp"
+              }
+            }
+          ],
+          "labels": {
+            "normal": "Near infrared",
+            "radar": "Radar",
+            "topography": "Measured height",
+            "interpolated": "Interpolated height",
+            "coverage-distance": "Distance to data"
+          }
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Titan facts",
+            "href": "https://science.nasa.gov/saturn/moons/titan/facts/"
+          },
+          {
+            "label": "USGS",
+            "role": "surface",
+            "description": "Cassini ISS controlled global mosaic (2026)",
+            "href": "https://www.usgs.gov/data/geodetically-improved-images-and-mosaics-titan-rigorous-photogrammetric-control-cassini"
+          },
+          {
+            "label": "Cassini RADAR",
+            "role": "surface",
+            "description": "Mission-end SAR and HiSAR mosaic",
+            "href": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "Cassini RADAR",
+            "role": "topography",
+            "description": "Formal GTDR measured, interpolated and distance products (2019)",
+            "href": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/saturn/moons/titan/facts/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "usgs-cassini-iss-2026-938nm",
+      "path": "observations/titan-iss-2026.png",
+      "origin": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f",
+      "credit": "NASA/JPL-Caltech/Space Science Institute/USGS; Weller et al. (2026)",
+      "license": "CC0 1.0 Universal",
+      "licenseEvidence": [
+        "https://www.usgs.gov/data/geodetically-improved-images-and-mosaics-titan-rigorous-photogrammetric-control-cassini",
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "acquisition": "Download the published lossless USGS PNG display export and verify its exact bytes.",
+      "redistribution": "CC0 prepared derivatives retain scientific credits; original is reacquired separately.",
+      "lensId": "normal",
+      "label": "Near-infrared",
+      "falseColor": false,
+      "width": 23048,
+      "height": 11524,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2575000,
+        "pixelResolutionMeters": 702,
+        "centerLongitude": 180,
+        "upperLeftMeters": [
+          -8089848,
+          4044924
+        ]
+      },
+      "coverage": "USGS ISIS display export: exact zero indicates Null and is masked; valid values starting at one remain, including dark lakes and dunes. A small southern gap receives a gray grid. Grid edges extend by less than half a source pixel beyond the poles/meridian.",
+      "photometry": "Published weighted, high-pass-sharpened ISS mosaic at 938 nm. Haze and cloud residuals, variable native resolution and image boundaries remain. This is a display-stretched infrared observation, not visible color or calibrated albedo.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
+      },
+      "sha256": "5b17af4c230f5f2434497d77621dbe6503458ac15d54557a946c1e1ca9562cb2",
+      "bytes": 73480116,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/titan-iss-2026.png",
+        "url": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
+      "lensId": "topography",
+      "label": "Measured height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "sha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad",
+      "bytes": 550734,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.IMG.gz",
+        "headers": {
+          "User-Agent": "cssEarth source verification (public PDS data)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtfed00n270_t126_v01",
+      "lensId": "topography",
+      "label": "Measured height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "sha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af",
+      "bytes": 532494,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N270_T126_V01.IMG.gz",
+        "headers": {
+          "User-Agent": "cssEarth source verification (public PDS data)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
+      "lensId": "interpolated",
+      "label": "Interpolated height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "sha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546",
+      "bytes": 7422253,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.IMG.gz",
+        "headers": {
+          "User-Agent": "cssEarth source verification (public PDS data)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtied00n270_t126_v01",
+      "lensId": "interpolated",
+      "label": "Interpolated height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "sha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034",
+      "bytes": 7393466,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N270_T126_V01.IMG.gz",
+        "headers": {
+          "User-Agent": "cssEarth source verification (public PDS data)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
+      "lensId": "coverage-distance",
+      "label": "Distance to data",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Kilometres to nearest input measurement",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "sha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34",
+      "bytes": 6386495,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.IMG.gz",
+        "headers": {
+          "User-Agent": "cssEarth source verification (public PDS data)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtded00n270_t126_v01",
+      "lensId": "coverage-distance",
+      "label": "Distance to data",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Kilometres to nearest input measurement",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "sha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b",
+      "bytes": 6529382,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N270_T126_V01.IMG.gz",
+        "headers": {
+          "User-Agent": "cssEarth source verification (public PDS data)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "cassini-radar-midr-090",
+      "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
+      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
+      "license": "Public NASA mission data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/citation/policy.shtml"
+      ],
+      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
+      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
+      "width": 5760,
+      "height": 5760,
+      "projection": {
+        "type": "Equirectangular",
+        "referenceRadiusMeters": 2575000,
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+      },
+      "sha256": "23adb939bf8076fae0fcdf98a7c910fcebe36ffd066cfb3c48cdb0324a8bd770",
+      "bytes": 21088532,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "cassini-radar-midr-270",
+      "path": "radar/MIBEF00N270_T126S00_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
+      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
+      "license": "Public NASA mission data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/citation/policy.shtml"
+      ],
+      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
+      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
+      "width": 5760,
+      "height": 5760,
+      "projection": {
+        "type": "Equirectangular",
+        "referenceRadiusMeters": 2575000,
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
+      },
+      "sha256": "d10b9a8b48a7a7c9045b54986412caf03d84319649a436aaefb46c71f8ca2cc6",
+      "bytes": 21369517,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "radar/MIBEF00N270_T126S00_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored preparation, shared source licensing or editorial content.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored preparation, shared source licensing or editorial content.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e8782016d20253b69fc2badb860b0ecad10678eeb2f707421c05d25612904561",
+      "bytes": 13127,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Near infrared",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "usgs-cassini-iss-2026-938nm"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-normal-thumbnail.webp",
+          "bytes": 3350,
+          "sha256": "b5ca1c63585418f45d7c2885cf8403bb378af9f1a957f8e325cbca06d4670a4d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-normal-surface@2x.webp",
+          "bytes": 3697816,
+          "sha256": "48ee934a5939311625fb8c6823d2ca0a51968a3f32fcceaa0570b5cac7f9a8e7",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-normal-poles@2x.webp",
+          "bytes": 131418,
+          "sha256": "58bde3bf90508c1101990cc7a01316c6b4eedb63faf75e7d776fefd7c8bcaf39",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "topography",
+      "label": "Measured height",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere."
+      ],
+      "lensIds": [
+        "topography"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere."
+      },
+      "inputs": [
+        "cassini-gtdr-2019-gtfed00n090_t126_v01",
+        "cassini-gtdr-2019-gtfed00n270_t126_v01",
+        "cassini-gtdr-2019-gtied00n090_t126_v01",
+        "cassini-gtdr-2019-gtied00n270_t126_v01",
+        "cassini-gtdr-2019-gtded00n090_t126_v01",
+        "cassini-gtdr-2019-gtded00n270_t126_v01"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-topography-thumbnail.webp",
+          "bytes": 976,
+          "sha256": "d9ec8bcb3d8b4e03fec330baa7b1a4ef86e82214397e2636de5a560c5584f8e3",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-topography-legend.webp",
+          "bytes": 240,
+          "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-topography-surface@2x.webp",
+          "bytes": 1026758,
+          "sha256": "bd4593a4e39fd462e87bb62800895bd43c7dd124c0931945d6c5f3ddf42944f8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-topography-poles@2x.webp",
+          "bytes": 146774,
+          "sha256": "bc4dc60eb638fa675050cd554a0defc11f3f184bbef3bebd5c61ecd034cc9658",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "interpolated",
+      "label": "Interpolated height",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere."
+      ],
+      "lensIds": [
+        "interpolated"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere."
+      },
+      "inputs": [
+        "cassini-gtdr-2019-gtied00n090_t126_v01",
+        "cassini-gtdr-2019-gtied00n270_t126_v01",
+        "cassini-gtdr-2019-gtded00n090_t126_v01",
+        "cassini-gtdr-2019-gtded00n270_t126_v01",
+        "cassini-gtdr-2019-gtfed00n090_t126_v01",
+        "cassini-gtdr-2019-gtfed00n270_t126_v01"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-interpolated-thumbnail.webp",
+          "bytes": 4142,
+          "sha256": "b0d2ac9fc90349eb08ec41e08694c61143a55e7944a8ce958fad962d8dd5b44e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-interpolated-legend.webp",
+          "bytes": 240,
+          "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-interpolated-surface@2x.webp",
+          "bytes": 3126600,
+          "sha256": "0f82f3c5bd1a75c7237b919e66fc35e0433f441539f31958b6400c83eebe1860",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-interpolated-poles@2x.webp",
+          "bytes": 348004,
+          "sha256": "7c5454efbf874194a81f27e4c4452f537893df64878149e9da84a14cdf3e4e9e",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "coverage-distance",
+      "label": "Distance to data",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero."
+      ],
+      "lensIds": [
+        "coverage-distance"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero."
+      },
+      "inputs": [
+        "cassini-gtdr-2019-gtded00n090_t126_v01",
+        "cassini-gtdr-2019-gtded00n270_t126_v01",
+        "cassini-gtdr-2019-gtied00n090_t126_v01",
+        "cassini-gtdr-2019-gtied00n270_t126_v01",
+        "cassini-gtdr-2019-gtfed00n090_t126_v01",
+        "cassini-gtdr-2019-gtfed00n270_t126_v01"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
+          "bytes": 6046,
+          "sha256": "03b8f86dce22c5c3f9c35b48c6ed30b9b59532db07b0ca6b6c037cd1bf90bffe",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-coverage-distance-legend.webp",
+          "bytes": 210,
+          "sha256": "b2cc45c008b3baecb631091dc59b6f57df3e0c5d6852754337ff1cb0aba6a5ee",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-coverage-distance-surface@2x.webp",
+          "bytes": 3707608,
+          "sha256": "d33c99869f88bc7bd40b84114f286ea75f3bb1a2c393db48c56dd0bf479b3682",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-coverage-distance-poles@2x.webp",
+          "bytes": 232152,
+          "sha256": "6a3f9d35e9fba589141de8a1e3e890994b9bfbd80c95091292a857299715b455",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "radar",
+      "label": "Radar",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "parents": [],
+      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization."
+      ],
+      "lensIds": [
+        "radar"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "mosaics"
+      },
+      "inputs": [
+        "cassini-radar-midr-090",
+        "cassini-radar-midr-270"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-radar-thumbnail.webp",
+          "bytes": 4840,
+          "sha256": "1724a27e59d4503297fb48fc081d249518d1bffdc93c3c1c84e993be15b48f0f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-radar-surface@2x.webp",
+          "bytes": 12715084,
+          "sha256": "4f3c472ed60fb71a7da3e28ebf59b694ca32a9966d3198cb8ae266d20b45ef4d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-radar-poles@2x.webp",
+          "bytes": 533952,
+          "sha256": "2a2b28c423272d1436f49d445e0e0c39209fbd4c31f925f3da6bb8809ddbb5f3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4980,
+          "sha256": "f847e7541fcf9be0d15d0a971197080fb76fb64bc6f1cc15477ce8a6f9b457e2",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Near infrared preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 35326,
+          "sha256": "2d838521ea96a13218193f17cbf4d81cdeb35e68b75c5f899709d6733eb0c17d",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:radar",
+      "label": "Radar preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "radar"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/radar.webp",
+          "bytes": 63060,
+          "sha256": "8c7f1e5df34515bca7f5f8008ed1bed0890ce5190d20091e58e15e8f707af5a8",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:topography",
+      "label": "Measured height preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "topography"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/topography.webp",
+          "bytes": 80772,
+          "sha256": "e42042b63b59d6dda48c6467f49dc5bbe1e980059763fc846be98442b3109eae",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:interpolated",
+      "label": "Interpolated height preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "interpolated"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/interpolated.webp",
+          "bytes": 115488,
+          "sha256": "b703153ea1a9efbe2a8f096abe790010326146d9a7fd699903a04a62b832fd86",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:coverage-distance",
+      "label": "Distance to data preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "coverage-distance"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/coverage-distance.webp",
+          "bytes": 124248,
+          "sha256": "62333318820929f7f7d4a46cf7d7d9d347ba894d95781424942a579ab45506c9",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

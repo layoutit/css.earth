@@ -1,0 +1,1106 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "ganymede",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "c083ec510dbad1ceeeecce617322a9fd846be3fd787d150688015ba43238b603"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "e78ff1444c9db1f44f8e9bdf48018df201a70fabc5189f39032cfc4de07ed220",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "ganymede",
+        "displayName": "Ganymede",
+        "publicBase": "/scenes/ganymede/",
+        "distanceAu": 5.2,
+        "raster": {
+          "width": 8192,
+          "height": 4096,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 1024,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "geotiff-rgb-alpha",
+                "noData": 0,
+                "centerLongitude": 180,
+                "channels": "monochrome",
+                "zeroValidity": "any-channel",
+                "resampling": "source-georeferenced-bilinear"
+              },
+              "reportComposition": true
+            },
+            {
+              "id": "enhanced",
+              "validity": {
+                "kind": "geotiff-rgb-alpha",
+                "noData": 0,
+                "centerLongitude": 180,
+                "channels": "rgb",
+                "zeroValidity": "any-channel",
+                "withholdLongitudeDegrees": [
+                  110,
+                  150
+                ],
+                "resampling": "source-georeferenced-bilinear"
+              },
+              "monochromeBase": "normal",
+              "reportComposition": true
+            }
+          ],
+          "scientific": [
+            {
+              "id": "geology",
+              "label": "Geology",
+              "format": "geologic-shapefile",
+              "path": "science/geology-sim3237/GeologyUnits.shp",
+              "consumer": "geology-surfaces",
+              "sampling": "nearest",
+              "overlapPolicy": "withhold-conflicts",
+              "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
+              "description": "USGS SIM 3237 interpreted geologic units",
+              "title": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height.",
+              "grid": {
+                "attributePath": "science/geology-sim3237/GeologyUnits.dbf",
+                "projectionPath": "science/geology-sim3237/GeologyUnits.prj",
+                "coordinateSystem": "GCS_Ganymede_2000",
+                "referenceRadiusMeters": 2632345,
+                "longitudeDirection": "east-positive",
+                "latitudeType": "planetocentric",
+                "longitudeDomain": [
+                  -180,
+                  180
+                ],
+                "field": "Unit",
+                "expectedRecords": 3046,
+                "expectedBounds": [
+                  -180,
+                  -90,
+                  180.00017138671876,
+                  89.5970728515625
+                ],
+                "unknownValues": [],
+                "withheldDegenerateRings": [
+                  {
+                    "record": 3023,
+                    "ring": 0,
+                    "point": [
+                      -179.9998779296875,
+                      72.97808837890625
+                    ]
+                  }
+                ]
+              },
+              "categories": [
+                {
+                  "value": "dc",
+                  "label": "Dark cratered terrain",
+                  "color": "#79574a"
+                },
+                {
+                  "value": "dl",
+                  "label": "Dark lineated terrain",
+                  "color": "#98705b"
+                },
+                {
+                  "value": "d",
+                  "label": "Dark terrain, undivided",
+                  "color": "#b38e78"
+                },
+                {
+                  "value": "r",
+                  "label": "Reticulate terrain",
+                  "color": "#998781"
+                },
+                {
+                  "value": "lg1",
+                  "label": "Light grooved terrain 1",
+                  "color": "#729e83"
+                },
+                {
+                  "value": "lg2",
+                  "label": "Light grooved terrain 2",
+                  "color": "#98bd94"
+                },
+                {
+                  "value": "lg3",
+                  "label": "Light grooved terrain 3",
+                  "color": "#c4d9a1"
+                },
+                {
+                  "value": "ls1",
+                  "label": "Light subdued terrain 1",
+                  "color": "#77aeb2"
+                },
+                {
+                  "value": "ls2",
+                  "label": "Light subdued terrain 2",
+                  "color": "#9bc9c6"
+                },
+                {
+                  "value": "ls3",
+                  "label": "Light subdued terrain 3",
+                  "color": "#c3e4d9"
+                },
+                {
+                  "value": "li1",
+                  "label": "Light irregular terrain 1",
+                  "color": "#8079a9"
+                },
+                {
+                  "value": "li2",
+                  "label": "Light irregular terrain 2",
+                  "color": "#aaa0c6"
+                },
+                {
+                  "value": "li3",
+                  "label": "Light irregular terrain 3",
+                  "color": "#d3c4e0"
+                },
+                {
+                  "value": "l",
+                  "label": "Light terrain, undivided",
+                  "color": "#d0d0bd"
+                },
+                {
+                  "value": "p",
+                  "label": "Palimpsest material",
+                  "color": "#daac75"
+                },
+                {
+                  "value": "pi",
+                  "label": "Palimpsest interior",
+                  "color": "#b88957"
+                },
+                {
+                  "value": "bi",
+                  "label": "Basin interior",
+                  "color": "#c87770"
+                },
+                {
+                  "value": "br",
+                  "label": "Rugged basin material",
+                  "color": "#a34f51"
+                },
+                {
+                  "value": "bs",
+                  "label": "Smooth basin material",
+                  "color": "#dea398"
+                },
+                {
+                  "value": "c1",
+                  "label": "Crater material 1",
+                  "color": "#ad8c27"
+                },
+                {
+                  "value": "c2",
+                  "label": "Crater material 2",
+                  "color": "#dbbc42"
+                },
+                {
+                  "value": "c3",
+                  "label": "Crater material 3",
+                  "color": "#f4df86"
+                },
+                {
+                  "value": "cu",
+                  "label": "Crater material, undivided",
+                  "color": "#d1c59f"
+                }
+              ]
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 2631.2,
+          "camera": {
+            "initialScenePitchDegrees": 40,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/ganymede/ganymede-normal-surface@2x.webp",
+          "polesUrl": "/scenes/ganymede/ganymede-normal-poles@2x.webp"
+        },
+        "celestial": {
+          "sunSource": "JPL parent-relative satellite orbit plus VSOP87 Jupiter position, with IAU/WGCCRE rotation"
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            180,
+            180,
+            180
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        },
+        "parentMarker": {
+          "consumer": "parent-marker",
+          "tileSize": 1024,
+          "size": 512,
+          "operations": [
+            {
+              "type": "rotate"
+            },
+            {
+              "type": "extract",
+              "left": 122,
+              "top": 150,
+              "width": 1079,
+              "height": 1019
+            },
+            {
+              "type": "resize",
+              "width": "tile",
+              "height": "tile",
+              "fit": "cover",
+              "position": "centre",
+              "kernel": "lanczos3"
+            },
+            {
+              "type": "ensure-alpha"
+            },
+            {
+              "type": "ellipse-mask",
+              "cx": 0.5,
+              "cy": 0.5,
+              "rx": 0.5,
+              "ry": 0.5
+            },
+            {
+              "type": "png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "cd5df99c5c82ad4daa31ae2c16debb941d2dc1611c4965240c1ce52b5638d2de",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "ganymede",
+        "displayName": "Ganymede",
+        "title": {
+          "label": "Ganymede",
+          "viewBox": "0 0 134.6825 35",
+          "width": 134.6825,
+          "height": 35,
+          "path": "M9.41 29.31Q6.64 29.31 4.53 28Q2.41 26.68 1.2 24.3Q0 21.93 0 18.83Q0 15.67 1.22 13.3Q2.43 10.93 4.55 9.62Q6.66 8.31 9.35 8.31Q11.02 8.31 12.47 8.82Q13.92 9.33 15.07 10.25Q16.21 11.17 16.96 12.44Q17.71 13.71 17.95 15.25L14.83 15.25Q14.62 14.32 14.13 13.55Q13.64 12.79 12.93 12.24Q12.22 11.69 11.33 11.4Q10.43 11.1 9.39 11.1Q7.51 11.1 6.08 12.05Q4.65 13 3.86 14.74Q3.06 16.48 3.06 18.83Q3.06 21.18 3.86 22.9Q4.65 24.63 6.09 25.58Q7.53 26.53 9.43 26.53Q11.06 26.53 12.33 25.84Q13.6 25.16 14.34 23.93Q15.08 22.7 15.08 21.06L15.93 21.13L10.06 21.13L10.06 18.58L18.1 18.58L18.1 20.93Q18.1 23.38 16.96 25.27Q15.82 27.17 13.86 28.24Q11.89 29.31 9.41 29.31ZM25.39 29.26Q23.96 29.26 22.81 28.75Q21.66 28.25 21 27.26Q20.33 26.28 20.33 24.83Q20.33 23.59 20.81 22.78Q21.29 21.97 22.11 21.51Q22.93 21.04 23.96 20.8Q25 20.56 26.09 20.44Q27.44 20.26 28.25 20.16Q29.06 20.06 29.41 19.83Q29.75 19.59 29.75 19.07L29.75 18.96Q29.75 18.21 29.41 17.67Q29.07 17.13 28.42 16.81Q27.77 16.49 26.83 16.49Q25.9 16.49 25.19 16.8Q24.48 17.11 24.07 17.63Q23.66 18.14 23.55 18.76L20.7 18.6Q20.89 17.23 21.7 16.22Q22.51 15.22 23.83 14.67Q25.16 14.11 26.84 14.11Q28.1 14.11 29.16 14.42Q30.22 14.73 31 15.36Q31.78 15.98 32.21 16.9Q32.64 17.82 32.64 19.05L32.64 29L29.78 29L29.78 26.95L29.71 26.95Q29.41 27.52 28.87 28.06Q28.33 28.59 27.48 28.92Q26.64 29.26 25.39 29.26ZM26.01 26.91Q27.27 26.91 28.11 26.45Q28.95 25.99 29.36 25.23Q29.77 24.46 29.77 23.57L29.77 21.82Q29.62 21.96 29.25 22.06Q28.88 22.16 28.37 22.26Q27.87 22.36 27.32 22.44Q26.77 22.53 26.25 22.6Q25.45 22.71 24.76 22.96Q24.07 23.22 23.65 23.67Q23.23 24.13 23.23 24.88Q23.23 25.53 23.57 25.98Q23.92 26.43 24.54 26.67Q25.16 26.91 26.01 26.91ZM38.88 20.52L38.88 29L35.97 29L35.97 14.37L38.82 14.37L38.82 18.01L38.22 18.01Q38.93 16.04 40.2 15.08Q41.46 14.11 43.27 14.11Q44.76 14.11 45.93 14.76Q47.11 15.41 47.79 16.68Q48.47 17.95 48.47 19.85L48.47 29L45.56 29L45.56 20.21Q45.56 18.49 44.73 17.6Q43.89 16.71 42.38 16.71Q41.41 16.71 40.61 17.12Q39.81 17.53 39.34 18.37Q38.88 19.21 38.88 20.52ZM51.28 34.66L51.46 32.24L52.76 32.25Q53.29 32.29 53.68 32.14Q54.07 31.98 54.38 31.59Q54.69 31.2 54.92 30.53L55.49 28.93L49.86 14.37L52.99 14.37L55.9 22.45Q56.33 23.65 56.7 24.84Q57.07 26.03 57.44 27.22L56.6 27.22Q56.96 26.03 57.33 24.84Q57.71 23.64 58.13 22.45L61.03 14.37L64.12 14.37L57.54 31.43Q57.11 32.54 56.49 33.27Q55.88 33.99 55.05 34.37Q54.22 34.74 53.2 34.74Q52.69 34.74 52.2 34.72Q51.71 34.7 51.28 34.66ZM66.12 29L66.12 14.37L68.93 14.37L68.95 17.53L68.69 17.53Q69.08 16.39 69.77 15.64Q70.46 14.88 71.36 14.49Q72.26 14.1 73.25 14.1Q74.95 14.1 76.1 15.07Q77.26 16.04 77.55 17.56L77.11 17.56Q77.41 16.53 78.1 15.75Q78.79 14.97 79.8 14.54Q80.8 14.1 81.98 14.1Q83.33 14.1 84.43 14.68Q85.53 15.26 86.17 16.42Q86.82 17.58 86.82 19.32L86.82 29L83.89 29L83.89 19.57Q83.89 18.04 83.03 17.34Q82.17 16.65 81.01 16.65Q80.05 16.65 79.36 17.06Q78.67 17.46 78.29 18.17Q77.92 18.88 77.92 19.8L77.92 29L75.03 29L75.03 19.38Q75.03 18.14 74.23 17.4Q73.43 16.65 72.21 16.65Q71.37 16.65 70.64 17.05Q69.92 17.45 69.47 18.21Q69.03 18.98 69.03 20.11L69.03 29ZM96.41 29.33Q94.24 29.33 92.67 28.36Q91.11 27.4 90.27 25.68Q89.43 23.97 89.43 21.74Q89.43 19.5 90.29 17.77Q91.16 16.04 92.69 15.05Q94.22 14.07 96.23 14.07Q97.71 14.07 98.94 14.6Q100.17 15.12 101.08 16.11Q101.99 17.09 102.48 18.49Q102.97 19.88 102.97 21.66L102.97 22.51L90.82 22.51L90.82 20.3L101.47 20.3L100.16 20.99Q100.16 19.62 99.69 18.61Q99.22 17.6 98.34 17.05Q97.47 16.5 96.25 16.5Q95.03 16.5 94.15 17.06Q93.27 17.61 92.79 18.6Q92.31 19.59 92.31 20.91L92.31 22.23Q92.31 23.64 92.81 24.69Q93.31 25.75 94.22 26.32Q95.14 26.89 96.44 26.89Q97.37 26.89 98.09 26.62Q98.8 26.35 99.28 25.83Q99.76 25.31 99.98 24.63L102.77 24.78Q102.48 26.12 101.59 27.14Q100.69 28.17 99.37 28.75Q98.04 29.33 96.41 29.33ZM111.14 29.29Q109.27 29.29 107.84 28.34Q106.41 27.39 105.63 25.68Q104.84 23.97 104.84 21.7Q104.84 19.42 105.64 17.71Q106.44 16 107.85 15.05Q109.27 14.11 111.14 14.11Q112.18 14.11 113.02 14.42Q113.85 14.73 114.49 15.27Q115.13 15.82 115.54 16.54L115.6 16.54L115.6 8.63L118.51 8.63L118.51 29L115.65 29L115.65 26.76L115.59 26.76Q115.16 27.51 114.51 28.08Q113.86 28.66 113.02 28.97Q112.18 29.29 111.14 29.29ZM111.74 26.79Q112.99 26.79 113.89 26.15Q114.79 25.51 115.28 24.36Q115.76 23.2 115.76 21.69Q115.76 20.14 115.28 19Q114.79 17.86 113.89 17.23Q112.99 16.6 111.74 16.6Q110.54 16.6 109.66 17.2Q108.78 17.8 108.29 18.94Q107.81 20.07 107.81 21.69Q107.81 23.3 108.3 24.43Q108.79 25.57 109.67 26.18Q110.55 26.79 111.74 26.79ZM128.12 29.33Q125.95 29.33 124.38 28.36Q122.82 27.4 121.97 25.68Q121.13 23.97 121.13 21.74Q121.13 19.5 122 17.77Q122.87 16.04 124.4 15.05Q125.93 14.07 127.94 14.07Q129.42 14.07 130.65 14.6Q131.88 15.12 132.79 16.11Q133.7 17.09 134.19 18.49Q134.68 19.88 134.68 21.66L134.68 22.51L122.53 22.51L122.53 20.3L133.18 20.3L131.87 20.99Q131.87 19.62 131.39 18.61Q130.92 17.6 130.05 17.05Q129.17 16.5 127.96 16.5Q126.74 16.5 125.86 17.06Q124.98 17.61 124.5 18.6Q124.02 19.59 124.02 20.91L124.02 22.23Q124.02 23.64 124.52 24.69Q125.02 25.75 125.93 26.32Q126.85 26.89 128.15 26.89Q129.08 26.89 129.79 26.62Q130.51 26.35 130.99 25.83Q131.47 25.31 131.69 24.63L134.48 24.78Q134.19 26.12 133.29 27.14Q132.4 28.17 131.07 28.75Q129.75 29.33 128.12 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Ganymede is the largest moon in the solar system. Bright grooved ice crosses ancient dark terrain, above an ocean thought to lie beneath its crust.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "2,631.2 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "5.203 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Jupiter",
+              "value": "7.16 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7.16 days · synchronous"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Jupiter",
+              "value": "About 1,070,000 km"
+            },
+            {
+              "id": "atmosphere-composition",
+              "label": "Atmosphere",
+              "value": "Tenuous oxygen"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.942 ± 0.004 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
+              "title": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
+              "thumbnail": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
+              "surface": "ganymede-normal-surface@2x.webp",
+              "poles": "ganymede-normal-poles@2x.webp",
+              "source": {
+                "id": "usgs-voyager-galileo-mono",
+                "path": "../manifest.json"
+              },
+              "detail": "Global mosaic",
+              "summary": "Voyager and Galileo images with detail from 400 m to 20 km per pixel. Shadows remain; gray grid: no imagery."
+            },
+            {
+              "id": "enhanced",
+              "label": "Enhanced color",
+              "description": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
+              "title": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
+              "thumbnail": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
+              "surface": "ganymede-enhanced-surface@2x.webp",
+              "poles": "ganymede-enhanced-poles@2x.webp",
+              "source": {
+                "id": "usgs-voyager-galileo-color",
+                "path": "../manifest.json"
+              },
+              "detail": "Infrared color",
+              "summary": "Infrared, green and violet with monochrome detail. Missing or synthesized color stays monochrome."
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "detail": "Interpreted units",
+              "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+              "title": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+              "thumbnail": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
+              "surface": "ganymede-geology-surface@2x.webp",
+              "poles": "ganymede-geology-poles@2x.webp",
+              "falseColor": true,
+              "source": {
+                "id": "usgs-sim3237-geologic-units",
+                "path": "../manifest.json",
+                "url": "https://pubs.usgs.gov/sim/3237/"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Interpreted geologic category"
+                },
+                {
+                  "id": "mapping-scale",
+                  "label": "Map scale",
+                  "value": "1:15,000,000"
+                },
+                {
+                  "id": "epoch",
+                  "label": "Publication",
+                  "value": "USGS SIM3237 · 2013"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Coverage",
+                  "value": "Mapped polygons; uncovered areas retained"
+                }
+              ],
+              "legend": {
+                "kind": "categories",
+                "title": "Geologic units",
+                "meta": "Symbols identify archived categories. Colors are chosen for this display.",
+                "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
+                "items": [
+                  {
+                    "label": "dc",
+                    "description": "Dark cratered terrain",
+                    "color": "#79574a"
+                  },
+                  {
+                    "label": "dl",
+                    "description": "Dark lineated terrain",
+                    "color": "#98705b"
+                  },
+                  {
+                    "label": "d",
+                    "description": "Dark terrain, undivided",
+                    "color": "#b38e78"
+                  },
+                  {
+                    "label": "r",
+                    "description": "Reticulate terrain",
+                    "color": "#998781"
+                  },
+                  {
+                    "label": "lg1",
+                    "description": "Light grooved terrain 1",
+                    "color": "#729e83"
+                  },
+                  {
+                    "label": "lg2",
+                    "description": "Light grooved terrain 2",
+                    "color": "#98bd94"
+                  },
+                  {
+                    "label": "lg3",
+                    "description": "Light grooved terrain 3",
+                    "color": "#c4d9a1"
+                  },
+                  {
+                    "label": "ls1",
+                    "description": "Light subdued terrain 1",
+                    "color": "#77aeb2"
+                  },
+                  {
+                    "label": "ls2",
+                    "description": "Light subdued terrain 2",
+                    "color": "#9bc9c6"
+                  },
+                  {
+                    "label": "ls3",
+                    "description": "Light subdued terrain 3",
+                    "color": "#c3e4d9"
+                  },
+                  {
+                    "label": "li1",
+                    "description": "Light irregular terrain 1",
+                    "color": "#8079a9"
+                  },
+                  {
+                    "label": "li2",
+                    "description": "Light irregular terrain 2",
+                    "color": "#aaa0c6"
+                  },
+                  {
+                    "label": "li3",
+                    "description": "Light irregular terrain 3",
+                    "color": "#d3c4e0"
+                  },
+                  {
+                    "label": "l",
+                    "description": "Light terrain, undivided",
+                    "color": "#d0d0bd"
+                  },
+                  {
+                    "label": "p",
+                    "description": "Palimpsest material",
+                    "color": "#daac75"
+                  },
+                  {
+                    "label": "pi",
+                    "description": "Palimpsest interior",
+                    "color": "#b88957"
+                  },
+                  {
+                    "label": "bi",
+                    "description": "Basin interior",
+                    "color": "#c87770"
+                  },
+                  {
+                    "label": "br",
+                    "description": "Rugged basin material",
+                    "color": "#a34f51"
+                  },
+                  {
+                    "label": "bs",
+                    "description": "Smooth basin material",
+                    "color": "#dea398"
+                  },
+                  {
+                    "label": "c1",
+                    "description": "Crater material 1",
+                    "color": "#ad8c27"
+                  },
+                  {
+                    "label": "c2",
+                    "description": "Crater material 2",
+                    "color": "#dbbc42"
+                  },
+                  {
+                    "label": "c3",
+                    "description": "Crater material 3",
+                    "color": "#f4df86"
+                  },
+                  {
+                    "label": "cu",
+                    "description": "Crater material, undivided",
+                    "color": "#d1c59f"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Ganymede facts",
+            "href": "https://science.nasa.gov/jupiter/jupiter-moons/ganymede/facts/"
+          },
+          {
+            "label": "USGS",
+            "role": "surface",
+            "description": "Voyager/Galileo global mosaic",
+            "href": "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_global_mosaic_1km"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "USGS geology",
+            "role": "surface",
+            "description": "Interpreted geologic map and GIS · SIM3237",
+            "href": "https://pubs.usgs.gov/sim/3237/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/jupiter/jupiter-moons/ganymede/facts/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "usgs-voyager-galileo-mono",
+      "path": "ganymede-mono.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif",
+      "credit": "NASA/JPL/USGS",
+      "license": "Public USGS scientific imagery; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Download the published GeoTIFF and verify the pinned bytes before preparation.",
+      "redistribution": "Reacquirable source TIFF excluded from Git; prepared textures retain credits.",
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 16539,
+      "height": 8270,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2632344.9707
+      },
+      "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif"
+      },
+      "sha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
+      "bytes": 136844537,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "ganymede-mono.tif",
+        "url": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-voyager-galileo-color",
+      "path": "ganymede-color.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif",
+      "credit": "NASA/JPL/USGS",
+      "license": "Public USGS scientific imagery; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Download the published GeoTIFF and verify the pinned bytes before preparation.",
+      "redistribution": "Reacquirable source TIFF excluded from Git; prepared textures retain credits.",
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 11520,
+      "height": 5760,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2632345
+      },
+      "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif"
+      },
+      "sha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
+      "bytes": 199204541,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "ganymede-color.tif",
+        "url": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3237-geologic-units",
+      "path": "science/geology-sim3237/GeologyUnits.shp",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2202359649 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp",
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "projection": {
+        "type": "geographic-vector",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2632345
+      },
+      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps.",
+      "sha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
+      "bytes": 2282348,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3237-geologyunits-dbf",
+      "path": "science/geology-sim3237/GeologyUnits.dbf",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 653643152 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf",
+      "sha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
+      "bytes": 387036,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3237-geologyunits-prj",
+      "path": "science/geology-sim3237/GeologyUnits.prj",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj",
+      "sha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
+      "bytes": 167,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "cd5df99c5c82ad4daa31ae2c16debb941d2dc1611c4965240c1ce52b5638d2de",
+      "bytes": 17028,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "channels": "monochrome",
+          "zeroValidity": "any-channel",
+          "resampling": "source-georeferenced-bilinear"
+        }
+      },
+      "inputs": [
+        "usgs-voyager-galileo-mono"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
+          "bytes": 3172,
+          "sha256": "639999164186b8fe56726b0a0c2d71494212f1f9a9ab0b018987c80e7170b53e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-normal-surface@2x.webp",
+          "bytes": 6411262,
+          "sha256": "eee2ba73dd90d85f32681f6da6d151a60bbfe6dfb7ff2edd373e93d5a2894005",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-normal-poles@2x.webp",
+          "bytes": 176358,
+          "sha256": "2318592ae6bb16349c87e22c8a0910403e9641d2118b8086783d41f9be28e820",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "enhanced",
+      "label": "Enhanced color",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [
+        "normal"
+      ],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary."
+      ],
+      "lensIds": [
+        "enhanced"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "channels": "rgb",
+          "zeroValidity": "any-channel",
+          "withholdLongitudeDegrees": [
+            110,
+            150
+          ],
+          "resampling": "source-georeferenced-bilinear"
+        }
+      },
+      "inputs": [
+        "usgs-voyager-galileo-color"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
+          "bytes": 5628,
+          "sha256": "bb1d5515bc0a443f9208479c9a0e4db9404eb1267edc77490138b8d06959bc4c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-enhanced-surface@2x.webp",
+          "bytes": 7029694,
+          "sha256": "90553d4fd9a4bd0140b4054c5bf002862fa102439617c76a413c9900cfa3dc8c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-enhanced-poles@2x.webp",
+          "bytes": 208766,
+          "sha256": "88bfbe684db157327e55611e9b3764e67714a13a9c391cd3088e3723a576997d",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height."
+      },
+      "inputs": [
+        "usgs-sim3237-geologic-units",
+        "usgs-sim3237-geologyunits-dbf",
+        "usgs-sim3237-geologyunits-prj"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
+          "bytes": 1662,
+          "sha256": "beb8f0d50137dd11ad57ba5fab690c57467dd40fa711933616bb0c43a09b7c29",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-geology-surface@2x.webp",
+          "bytes": 522684,
+          "sha256": "4d8ca3b202ba6ba3ca28c3dc80d69bac45851895ae5bafa4dc2b6220552b8742",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-geology-poles@2x.webp",
+          "bytes": 24730,
+          "sha256": "e602a37e250e60775046ac77bb668649d1edf5c7b700929601faa1b1955af546",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 8002,
+          "sha256": "b723af92d3981ec47e3926d605b7e370a4e0dee2e64fb4ff70eee5b195c888e2",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 37512,
+          "sha256": "6e86ee8c0ea904ed75a25dfae1b56da17b8ec5a3bad66ce35b3ac223cac4b2c3",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:enhanced",
+      "label": "Enhanced color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "enhanced"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/enhanced.webp",
+          "bytes": 44972,
+          "sha256": "b485983c88cc3161ae7d4a9159777bc6a0a6798ebd9bbfb8ca7e42075a114190",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:geology",
+      "label": "Geology preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "geology"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/geology.webp",
+          "bytes": 147512,
+          "sha256": "48161d8d2391267da01e2527ac8ec40525163fb542bfc5dce1c732b81e3bd198",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

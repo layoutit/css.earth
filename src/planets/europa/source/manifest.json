@@ -36,7 +36,15 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 1562089.9658
       },
-      "coverage": "GeoTIFF GDAL_NODATA=0. Missing pixels receive the shared gray cartographic grid. Published observed shading and resolution differences are preserved."
+      "coverage": "GeoTIFF GDAL_NODATA=0. Missing pixels receive the shared gray cartographic grid. Published observed shading and resolution differences are preserved.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -111,7 +119,13 @@
       "wavelengthMicrometers": 0.559,
       "observedAt": "1996-06-28T01:43:39.354000Z",
       "width": 3248,
-      "height": 1317
+      "height": 1317,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0349875178.equi",
@@ -134,7 +148,13 @@
       "wavelengthMicrometers": 0.404,
       "observedAt": "1996-06-28T01:43:56.796000Z",
       "width": 3196,
-      "height": 1321
+      "height": 1321,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875178/s0349875178.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0349875200.equi",
@@ -157,7 +177,13 @@
       "wavelengthMicrometers": 0.756,
       "observedAt": "1996-06-28T01:44:05.463000Z",
       "width": 3356,
-      "height": 1320
+      "height": 1320,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0426234600.equi",
@@ -180,7 +206,13 @@
       "wavelengthMicrometers": 0.559,
       "observedAt": "1997-12-16T05:41:58.839000Z",
       "width": 1766,
-      "height": 1419
+      "height": 1419,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234600/s0426234600.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0426234626.equi",
@@ -203,7 +235,13 @@
       "wavelengthMicrometers": 0.404,
       "observedAt": "1997-12-16T05:42:16.339000Z",
       "width": 1760,
-      "height": 1421
+      "height": 1421,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0426234639.equi",
@@ -226,7 +264,13 @@
       "wavelengthMicrometers": 0.756,
       "observedAt": "1997-12-16T05:42:25.006000Z",
       "width": 1772,
-      "height": 1449
+      "height": 1449,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234639/s0426234639.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0426234678.equi",
@@ -249,7 +293,13 @@
       "wavelengthMicrometers": 0.559,
       "observedAt": "1997-12-16T05:42:50.839000Z",
       "width": 1010,
-      "height": 844
+      "height": 844,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984852.equi",
@@ -272,7 +322,13 @@
       "wavelengthMicrometers": 0.559,
       "observedAt": "1998-03-29T19:23:22.830000Z",
       "width": 3289,
-      "height": 1332
+      "height": 1332,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984865.equi",
@@ -295,7 +351,13 @@
       "wavelengthMicrometers": 0.559,
       "observedAt": "1998-03-29T19:23:31.497000Z",
       "width": 900,
-      "height": 833
+      "height": 833,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984878.equi",
@@ -318,7 +380,13 @@
       "wavelengthMicrometers": 0.559,
       "observedAt": "1998-03-29T19:23:40.164000Z",
       "width": 3324,
-      "height": 1325
+      "height": 1325,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984901_00.equi",
@@ -341,7 +409,13 @@
       "wavelengthMicrometers": 0.559,
       "observedAt": "1998-03-29T19:23:48.830000Z",
       "width": 1186,
-      "height": 994
+      "height": 994,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984914_13.equi",
@@ -364,7 +438,13 @@
       "wavelengthMicrometers": 0.559,
       "observedAt": "1998-03-29T19:23:57.497000Z",
       "width": 1247,
-      "height": 847
+      "height": 847,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984926.equi",
@@ -387,7 +467,13 @@
       "wavelengthMicrometers": 0.404,
       "observedAt": "1998-03-29T19:24:06.230000Z",
       "width": 3305,
-      "height": 1337
+      "height": 1337,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984939.equi",
@@ -410,7 +496,13 @@
       "wavelengthMicrometers": 0.404,
       "observedAt": "1998-03-29T19:24:14.897000Z",
       "width": 903,
-      "height": 834
+      "height": 834,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984952.equi",
@@ -433,7 +525,13 @@
       "wavelengthMicrometers": 0.404,
       "observedAt": "1998-03-29T19:24:23.564000Z",
       "width": 3314,
-      "height": 1324
+      "height": 1324,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984965.equi",
@@ -456,7 +554,13 @@
       "wavelengthMicrometers": 0.404,
       "observedAt": "1998-03-29T19:24:32.230000Z",
       "width": 1153,
-      "height": 977
+      "height": 977,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984978.equi",
@@ -479,7 +583,13 @@
       "wavelengthMicrometers": 0.404,
       "observedAt": "1998-03-29T19:24:40.897000Z",
       "width": 1264,
-      "height": 847
+      "height": 847,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440985113.equi",
@@ -502,7 +612,13 @@
       "wavelengthMicrometers": 0.756,
       "observedAt": "1998-03-29T19:25:58.897000Z",
       "width": 1287,
-      "height": 1082
+      "height": 1082,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440985126.equi",
@@ -525,7 +641,13 @@
       "wavelengthMicrometers": 0.756,
       "observedAt": "1998-03-29T19:26:07.564000Z",
       "width": 910,
-      "height": 839
+      "height": 839,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440985139.equi",
@@ -548,7 +670,13 @@
       "wavelengthMicrometers": 0.756,
       "observedAt": "1998-03-29T19:26:16.230000Z",
       "width": 3316,
-      "height": 1322
+      "height": 1322,
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.photr.tif"
+      }
     },
     {
       "id": "usgs-s0440984852.equi-geometry",
@@ -1008,14 +1136,14 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 12648,
-      "expectedSha256": "7aa4fd0dad8b78ff7b39080dd9fcd135fb20ddd0b2682e9edfd9be8da64f0aac",
+      "expectedBytes": 12902,
+      "expectedSha256": "79f6e2fdc0ea83e3e253b33a88d30117560f289fdf9f57b89051e73a7e457e96",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3581,
-      "expectedSha256": "fdd009d83cb3440824c59ded7526e65d757614e0fa16e13f920c5f4b2ad26dc7",
+      "expectedBytes": 3620,
+      "expectedSha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {

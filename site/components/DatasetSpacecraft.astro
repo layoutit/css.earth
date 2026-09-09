@@ -1,0 +1,23 @@
+---
+import catalog from '../prepared-spacecraft.json';
+import { datasetSpacecraft } from '../dataset-spacecraft.mjs';
+const { provenance, lensId } = Astro.props;
+const spacecraft = datasetSpacecraft(provenance, lensId, catalog);
+---
+{spacecraft.length > 0 && <div class="planet-dataset-spacecraft" aria-label="Source spacecraft">
+  {spacecraft.map(mission => <figure class="planet-spacecraft" data-spacecraft={mission.id}>
+    <a class="planet-spacecraft-image-link" href={mission.image.sourceUrl} target="_blank" rel="noreferrer"
+      aria-label={`${mission.name} ${mission.image.kind === 'emblem' ? 'mission emblem' : 'spacecraft illustration'} — ${mission.image.credit}`}>
+      <img class="planet-spacecraft-image" src={mission.image.src}
+        width={mission.image.width} height={mission.image.height}
+        alt={`${mission.name} ${mission.image.kind === 'emblem' ? 'mission emblem' : 'spacecraft illustration'}`} loading="lazy" decoding="async" />
+    </a>
+    <figcaption>
+      <dl class="planet-spacecraft-facts">
+        {mission.facts.map(fact => <div><dt>{fact.detail ?? fact.label}</dt><dd>
+          {fact.url ? <a href={fact.url} target="_blank" rel="noreferrer">{fact.value}</a> : fact.value}
+        </dd></div>)}
+      </dl>
+    </figcaption>
+  </figure>)}
+</div>}

@@ -75,7 +75,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "NEAR MSI · corrected 550 nm albedo"
+        "detail": "NEAR MSI · corrected 550 nm albedo",
+        "summary": "NEAR's corrected 550 nm reflectance, stretched from 0.05 to 0.40. Monochrome imagery; some shading remains."
       },
       {
         "id": "elevation",
@@ -103,7 +104,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab",
           "image": "/scenes/eros/eros-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Model height relative to an 8,420 m sphere. Colors include Eros's broad shape; the outline is simplified."
       }
     ]
   },

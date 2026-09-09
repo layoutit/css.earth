@@ -65,7 +65,8 @@
           "id": "measured-ellipsoid",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
-        }
+        },
+        "summary": "Shape estimated from blurred Voyager images. Local terrain is unresolved; gray grid: no mapped imagery."
       }
     ]
   },

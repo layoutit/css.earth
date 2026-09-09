@@ -14,7 +14,13 @@
       "consumers": [
         "scene",
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif"
+      }
     },
     {
       "id": "hubble-opal-uranus-2025a-fq727n",
@@ -28,7 +34,13 @@
       "redistribution": "checked scientific archive product with full credit",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-uranus-2025a-f845m",
@@ -42,7 +54,13 @@
       "redistribution": "checked scientific archive product with full credit",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits"
+      }
     },
     {
       "id": "pds-uranus-ring-table",

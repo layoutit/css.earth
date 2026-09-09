@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "357ea92ff77718f074fbc7142ac3578d8a04fecc1b8c6a5466547ba893ca5596"
+    "sha256": "1f6265f9599e91ac49b08ca4d5fd13a68d7fdb794a8889a2b6f7f49b5d980d7d"
   },
   "id": "ganymede",
   "properties": {
@@ -93,12 +93,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "678667b98ab09ee590837f4d28aec274c01f63776a20b8fa636fa75d858ac173"
+          "sha256": "cd5df99c5c82ad4daa31ae2c16debb941d2dc1611c4965240c1ce52b5638d2de"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "0d5f9bd6ce07b0d083656b62b8c5b0f250a2e7ef08386cc822b8dbd821387026"
+          "sha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76"
         },
         {
           "id": "navigation",

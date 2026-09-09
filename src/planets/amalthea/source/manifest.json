@@ -24,6 +24,12 @@
         "type": "camera-perspective",
         "coordinates": "geometry/registration.json",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG"
       }
     },
     {
@@ -42,7 +48,13 @@
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "consumers": [
         "galileo-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL"
+      }
     },
     {
       "id": "c0420626379",
@@ -67,6 +79,12 @@
         "type": "camera-perspective",
         "coordinates": "geometry/registration.json",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG"
       }
     },
     {
@@ -85,7 +103,13 @@
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "consumers": [
         "galileo-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL"
+      }
     },
     {
       "id": "c0420652501",
@@ -110,6 +134,12 @@
         "type": "camera-perspective",
         "coordinates": "geometry/registration.json",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG"
       }
     },
     {
@@ -128,7 +158,13 @@
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "consumers": [
         "galileo-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL"
+      }
     },
     {
       "id": "c0512324200",
@@ -153,6 +189,12 @@
         "type": "camera-perspective",
         "coordinates": "geometry/registration.json",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG"
       }
     },
     {
@@ -171,7 +213,13 @@
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "consumers": [
         "galileo-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL"
+      }
     },
     {
       "id": "c0532888100",
@@ -196,6 +244,12 @@
         "type": "camera-perspective",
         "coordinates": "geometry/registration.json",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG"
       }
     },
     {
@@ -214,7 +268,13 @@
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "consumers": [
         "galileo-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL"
+      }
     },
     {
       "id": "stooke-shape",

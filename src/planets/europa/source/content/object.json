@@ -108,7 +108,8 @@
           "id": "usgs-voyager-galileo-global-500m",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic"
+        "detail": "Global mosaic",
+        "summary": "Voyager and Galileo images with detail from 200 m to 20 km per pixel. Shadows remain; gray grid: no imagery."
       },
       {
         "id": "enhanced",
@@ -122,7 +123,8 @@
           "id": "observed-color",
           "path": "../manifest.json"
         },
-        "detail": "Color mosaic"
+        "detail": "Color mosaic",
+        "summary": "Galileo enhanced color with monochrome where color is unavailable. The gray grid marks gaps in both."
       },
       {
         "id": "elevation",

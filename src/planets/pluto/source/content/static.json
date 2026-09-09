@@ -122,7 +122,8 @@
           "thumbnailUrl": "/scenes/pluto/pluto-surface-thumbnail.webp",
           "description": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
           "title": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-          "detail": "Color mosaic"
+          "detail": "Color mosaic",
+          "summary": "New Horizons MVIC images in visible color. Gray grid: no imagery; detail varies across the observed surface."
         },
         {
           "id": "topography",
@@ -144,7 +145,8 @@
               "+8"
             ],
             "sourceUrl": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
-          }
+          },
+          "summary": "USGS stereo elevation from −8 to +8 km. Color and shading show relief; gray grid: no elevation data."
         },
         {
           "id": "monochrome",
@@ -152,7 +154,8 @@
           "thumbnailUrl": "/scenes/pluto/pluto-monochrome-thumbnail.webp",
           "description": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
           "title": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
-          "detail": "Photo mosaic"
+          "detail": "Photo mosaic",
+          "summary": "New Horizons LORRI and MVIC images in monochrome. Gray grid: no imagery; detail varies across the mosaic."
         }
       ]
     },

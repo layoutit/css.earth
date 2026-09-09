@@ -40,7 +40,13 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "expectedBytes": 16897935,
-      "expectedSha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964"
+      "expectedSha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964",
+      "capture": {
+        "spacecraftIds": [
+          "hayabusa"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab"
+      }
     },
     {
       "id": "amica-sep24-path",

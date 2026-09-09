@@ -36,7 +36,14 @@
       "lensId": "normal",
       "label": "Monochrome",
       "falseColor": false,
-      "coverage": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask."
+      "coverage": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
+      "capture": {
+        "spacecraftIds": [
+          "viking",
+          "mro"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg"
+      }
     },
     {
       "id": "ernst-2023-shape",
@@ -152,8 +159,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12185,
-      "expectedSha256": "fa4003aef2ce456d6f3a0da247579ce968cdf8f305c1ea5404538da4878538db",
+      "expectedBytes": 12455,
+      "expectedSha256": "b9e52feb8f7d416ec6aeb98d7a5927d6e01675f0e1e577c0aa344e93a480470d",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

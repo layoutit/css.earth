@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e44e8d0913308216692ef6a4a5801deaf083fca74b0e31d689f119340c945a9c"
+    "sha256": "f62cec28cbc39f8a3025402efef0aaeefe4eb225a85e97c9c2f014d6fe9a776f"
   },
   "id": "europa",
   "properties": {
@@ -93,12 +93,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7aa4fd0dad8b78ff7b39080dd9fcd135fb20ddd0b2682e9edfd9be8da64f0aac"
+          "sha256": "79f6e2fdc0ea83e3e253b33a88d30117560f289fdf9f57b89051e73a7e457e96"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "fdd009d83cb3440824c59ded7526e65d757614e0fa16e13f920c5f4b2ad26dc7"
+          "sha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a"
         },
         {
           "id": "navigation",

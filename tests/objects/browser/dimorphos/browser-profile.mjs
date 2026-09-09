@@ -12,15 +12,16 @@ export const browserProfile=createObjectBrowserProfile({id:'dimorphos',controls,
   ],
   "lensRace": {
     "defaultId": "shape",
-    "slowId": "elevation",
+    "slowId": "albedo",
     "winnerId": "shape",
-    "slowAsset": "/scenes/dimorphos/dimorphos-elevation-surface@2x.webp",
+    "slowAsset": "/scenes/dimorphos/dimorphos-albedo-surface@2x.webp",
     "preReadyDisabled": true
   },
   "retained": {
     "lensIds": [
       "shape",
       "elevation",
+      "albedo",
       "slope"
     ],
     "speedClicks": 5,

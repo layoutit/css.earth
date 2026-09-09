@@ -75,7 +75,23 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Galileo SSI · processed image mosaic"
+        "detail": "Galileo SSI · processed image mosaic",
+        "summary": "Galileo mosaic with uneven detail and shadows. It is not calibrated reflectance; gray grid: map gaps."
+      },
+      {
+        "id": "calibrated",
+        "label": "Calibrated image",
+        "description": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+        "title": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+        "thumbnail": "/scenes/ida/ida-calibrated-thumbnail.webp",
+        "surface": "ida-calibrated-surface@2x.webp",
+        "poles": "ida-calibrated-surface@2x.webp",
+        "source": {
+          "id": "ida-0202561278rcal_gre-fit",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "detail": "Galileo SSI · I/F"
       },
       {
         "id": "elevation",
@@ -103,7 +119,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab",
           "image": "/scenes/ida/ida-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Height relative to a 16 km sphere, from the shape model. Colors include Ida's broad form; the outline is simplified."
       }
     ]
   },

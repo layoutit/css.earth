@@ -19,7 +19,7 @@ export function readFitsPrimary(bytes) {
       ? bytes.readFloatBE(dataOffset + index * bytesPerValue) : bytes.readDoubleBE(dataOffset + index * bytesPerValue);
     values[index] = value * scale + zero;
   }
-  return { bitpix, width, height, values, scale, zero, header,
+  return { bitpix, width, height, values, scale, zero, header, dataOffset,
     nextOffset: Math.ceil((dataOffset + width * height * bytesPerValue) / 2880) * 2880 };
 }
 

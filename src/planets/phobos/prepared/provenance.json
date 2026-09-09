@@ -1,0 +1,946 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "phobos",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "cb3ca2c8f7345e726edac1c3b7cd4656081f976a8795c31d1a207f909cd56d39"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "2558b5d647fe5b8a0e391519361d5129c7dbd5089c93b9f33f6aa2315d6bee72",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "phobos",
+        "displayName": "Phobos",
+        "publicBase": "/scenes/phobos/",
+        "distanceAu": 1.52,
+        "raster": {
+          "width": 5760,
+          "height": 2880,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "surfaceQuality": 95,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "geotiff-byte-monochrome",
+                "noData": 0,
+                "centerLongitude": 0,
+                "origin": [
+                  -34871.678455,
+                  17435.839227
+                ],
+                "resolutionMeters": 4.84328867,
+                "displayRange": [
+                  0,
+                  255
+                ],
+                "wrapLongitude": true,
+                "specialValueMagnitude": 1e+30
+              }
+            }
+          ],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "scientific-surfaces",
+              "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+              "format": "wavefront-obj-zip",
+              "grid": {
+                "member": "phobos_g_148m_spc_obj_0000n00000_v004.obj",
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -11.1
+              },
+              "minimum": -3.5,
+              "maximum": 3.5,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 11080,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.45
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            },
+            {
+              "id": "albedo",
+              "label": "Relative albedo",
+              "consumer": "facet-science",
+              "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+              "format": "facet-scalars",
+              "meshPath": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+              "grid": {
+                "member": "phobos_g_148m_spc_obj_0000n00000_v004.obj",
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "table": {
+                "format": "sbmt-csv-zip",
+                "field": "Albedo",
+                "units": "",
+                "expectedRows": 196608,
+                "maximumCentroidErrorMeters": 0.001,
+                "member": "phobos_g_148m_spc_obj_0000n00000_v004.csv",
+                "validityField": "Albedo"
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 250
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "previewGrid": {
+                "width": 640,
+                "height": 320
+              },
+              "minimum": 0.04,
+              "maximum": 0.1,
+              "colors": [
+                "#202e44",
+                "#789c9f",
+                "#f1e4c9"
+              ]
+            },
+            {
+              "id": "slope",
+              "label": "Slope",
+              "consumer": "facet-science",
+              "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+              "format": "facet-scalars",
+              "meshPath": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+              "grid": {
+                "member": "phobos_g_148m_spc_obj_0000n00000_v004.obj",
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "table": {
+                "format": "sbmt-csv-zip",
+                "field": "Slope",
+                "units": "degrees",
+                "expectedRows": 196608,
+                "maximumCentroidErrorMeters": 0.001,
+                "member": "phobos_g_148m_spc_obj_0000n00000_v004.csv",
+                "validityField": "Albedo"
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 250
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "previewGrid": {
+                "width": 640,
+                "height": 320
+              },
+              "minimum": 0,
+              "maximum": 50,
+              "colors": [
+                "#20204b",
+                "#2d75b9",
+                "#4ebba7",
+                "#f1c45c",
+                "#cc543d"
+              ]
+            }
+          ],
+          "observedColors": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 11.08,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 45
+          },
+          "mapUrl": "/scenes/phobos/phobos-normal-surface@2x.webp",
+          "polesUrl": "/scenes/phobos/phobos-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+            "format": "wavefront-obj-zip",
+            "grid": {
+              "member": "phobos_g_148m_spc_obj_0000n00000_v004.obj",
+              "metersPerUnit": 1000,
+              "expectedVertices": 98306,
+              "expectedFaces": 196608
+            },
+            "latitudeSegments": 20,
+            "longitudeSegments": 32,
+            "faceBudget": 1600,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 1600,
+              "maximumErrorMeters": 250,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Vendored JPL Horizons Mars satellite elements and IAU/NAIF rotation at the shared epoch."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            154,
+            149,
+            142
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "c8682309658501ed6b2a650720b273a3fccbc1c4c40ff55c1a68441994e8ebb1",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "phobos",
+        "displayName": "Phobos",
+        "panel": {
+          "introduction": "Phobos is the larger, inner moon of Mars. Its irregular surface is crossed by grooves and dominated by Stickney crater. It completes an orbit in less than eight hours.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "11.08 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "1.524 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Mars",
+              "value": "7 hours 39 minutes"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "7 hours 39 minutes (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Mars",
+              "value": "About 9,376 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Asaph Hall · 1877"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.87 ± 0.08 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "elevation": "Elevation",
+            "albedo": "Relative albedo",
+            "slope": "Slope"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
+              "title": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
+              "detail": "Multi-mission mosaic",
+              "thumbnail": "/scenes/phobos/phobos-normal-thumbnail.webp",
+              "surface": "phobos-normal-surface@2x.webp",
+              "poles": "phobos-normal-poles@2x.webp",
+              "source": {
+                "id": "stooke-mosaic",
+                "path": "../manifest.json",
+                "url": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
+              },
+              "summary": "A multi-mission mosaic registered by DLR. Detail varies across the surface; shadows and edited image seams remain."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
+              "title": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
+              "detail": "Shaded relief",
+              "thumbnail": "/scenes/phobos/phobos-elevation-thumbnail.webp",
+              "surface": "phobos-elevation-surface@2x.webp",
+              "poles": "phobos-elevation-poles@2x.webp",
+              "source": {
+                "id": "ernst-2023-shape",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1186/s40623-023-01814-7"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−3.5",
+                  "0",
+                  "3.5"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
+                "image": "/scenes/phobos/phobos-elevation-legend.webp"
+              },
+              "summary": "Height relative to an 11.1 km sphere, from the 2023 model. Shading shows slopes; mesh spacing is about 148 m."
+            },
+            {
+              "id": "albedo",
+              "label": "Relative albedo",
+              "description": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo.",
+              "title": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo.",
+              "detail": "Released facet values",
+              "thumbnail": "/scenes/phobos/phobos-albedo-thumbnail.webp",
+              "surface": "phobos-albedo-surface@2x.webp",
+              "poles": "phobos-albedo-surface@2x.webp",
+              "source": {
+                "id": "phobos-facet-science",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1186/s40623-023-01814-7"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Relative albedo",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.04",
+                  "0.07",
+                  "0.1"
+                ],
+                "meta": "SPC relative scale",
+                "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
+                "image": "/scenes/phobos/phobos-albedo-legend.webp"
+              }
+            },
+            {
+              "id": "slope",
+              "label": "Slope",
+              "description": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table.",
+              "title": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table.",
+              "detail": "Released facet values",
+              "thumbnail": "/scenes/phobos/phobos-slope-thumbnail.webp",
+              "surface": "phobos-slope-surface@2x.webp",
+              "poles": "phobos-slope-surface@2x.webp",
+              "source": {
+                "id": "phobos-facet-science",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1186/s40623-023-01814-7"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Slope",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "25",
+                  "50"
+                ],
+                "meta": "deg",
+                "sourceUrl": "https://doi.org/10.1186/s40623-023-01814-7",
+                "image": "/scenes/phobos/phobos-slope-legend.webp"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Phobos overview",
+            "href": "https://science.nasa.gov/mars/moons/phobos/"
+          },
+          {
+            "label": "NASA/JPL; Stooke/PDS",
+            "role": "surface",
+            "description": "Multi-mission surface mosaic",
+            "href": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/mars/moons/phobos/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        },
+        "title": {
+          "label": "Phobos",
+          "viewBox": "0 0 92.2439 35",
+          "width": 92.2439,
+          "height": 35,
+          "path": "M0 29L0 8.63L7.51 8.63Q9.72 8.63 11.31 9.43Q12.89 10.23 13.73 11.66Q14.57 13.1 14.57 15.04Q14.57 16.98 13.71 18.42Q12.85 19.85 11.25 20.65Q9.64 21.44 7.42 21.44L1.75 21.44L1.75 18.81L7.3 18.81Q8.67 18.81 9.61 18.34Q10.55 17.87 11.05 17.02Q11.55 16.16 11.55 15.04Q11.55 13.89 11.05 13.04Q10.55 12.2 9.61 11.73Q8.67 11.27 7.3 11.27L3.05 11.27L3.05 29ZM20.04 20.52L20.04 29L17.13 29L17.13 8.63L20.04 8.63L20.04 18.01L19.38 18.01Q20.09 16.04 21.36 15.08Q22.62 14.11 24.43 14.11Q25.92 14.11 27.09 14.76Q28.27 15.41 28.95 16.68Q29.64 17.95 29.64 19.85L29.64 29L26.72 29L26.72 20.21Q26.72 18.49 25.89 17.6Q25.06 16.71 23.54 16.71Q22.57 16.71 21.77 17.12Q20.97 17.53 20.5 18.37Q20.04 19.21 20.04 20.52ZM39.21 29.33Q37.14 29.33 35.57 28.36Q34 27.4 33.12 25.68Q32.25 23.97 32.25 21.71Q32.25 19.46 33.12 17.73Q34 16.01 35.57 15.04Q37.14 14.07 39.21 14.07Q41.31 14.07 42.87 15.04Q44.43 16.01 45.31 17.73Q46.18 19.46 46.18 21.71Q46.18 23.97 45.31 25.68Q44.43 27.4 42.87 28.36Q41.31 29.33 39.21 29.33ZM39.21 26.81Q40.49 26.81 41.39 26.17Q42.28 25.53 42.76 24.38Q43.24 23.23 43.24 21.73Q43.24 20.18 42.76 19.03Q42.28 17.88 41.39 17.24Q40.49 16.59 39.21 16.59Q37.95 16.59 37.06 17.23Q36.16 17.87 35.69 19.03Q35.22 20.18 35.22 21.73Q35.22 23.24 35.69 24.39Q36.16 25.53 37.06 26.17Q37.96 26.81 39.21 26.81ZM56.2 29.29Q55.16 29.29 54.31 28.97Q53.46 28.66 52.82 28.08Q52.18 27.51 51.73 26.76L51.66 26.76L51.66 29L48.8 29L48.8 8.63L51.71 8.63L51.71 16.54L51.77 16.54Q52.21 15.82 52.83 15.27Q53.46 14.73 54.31 14.42Q55.16 14.11 56.21 14.11Q58.06 14.11 59.48 15.05Q60.9 16 61.69 17.71Q62.47 19.42 62.47 21.7Q62.47 23.97 61.69 25.68Q60.9 27.39 59.49 28.34Q58.07 29.29 56.2 29.29ZM55.6 26.79Q56.8 26.79 57.68 26.18Q58.56 25.57 59.04 24.43Q59.52 23.3 59.52 21.69Q59.52 20.07 59.03 18.94Q58.55 17.8 57.67 17.2Q56.8 16.6 55.6 16.6Q54.35 16.6 53.44 17.23Q52.52 17.86 52.03 19Q51.55 20.14 51.55 21.69Q51.55 23.2 52.04 24.36Q52.53 25.51 53.44 26.15Q54.35 26.79 55.6 26.79ZM71.34 29.33Q69.28 29.33 67.71 28.36Q66.14 27.4 65.26 25.68Q64.39 23.97 64.39 21.71Q64.39 19.46 65.26 17.73Q66.14 16.01 67.71 15.04Q69.28 14.07 71.34 14.07Q73.45 14.07 75.01 15.04Q76.57 16.01 77.44 17.73Q78.32 19.46 78.32 21.71Q78.32 23.97 77.44 25.68Q76.57 27.4 75.01 28.36Q73.45 29.33 71.34 29.33ZM71.34 26.81Q72.63 26.81 73.52 26.17Q74.42 25.53 74.9 24.38Q75.38 23.23 75.38 21.73Q75.38 20.18 74.9 19.03Q74.42 17.88 73.52 17.24Q72.63 16.59 71.34 16.59Q70.09 16.59 69.19 17.23Q68.3 17.87 67.82 19.03Q67.35 20.18 67.35 21.73Q67.35 23.24 67.82 24.39Q68.3 25.53 69.2 26.17Q70.1 26.81 71.34 26.81ZM86.32 29.33Q84.67 29.33 83.35 28.82Q82.03 28.3 81.22 27.27Q80.4 26.24 80.25 24.72L83.11 24.6Q83.26 25.76 84.08 26.38Q84.9 27 86.28 27Q87.68 27 88.48 26.44Q89.28 25.87 89.28 25.01Q89.28 24.27 88.73 23.81Q88.18 23.35 87.2 23.15L84.78 22.62Q82.71 22.15 81.65 21.1Q80.6 20.06 80.6 18.46Q80.6 17.16 81.31 16.17Q82.03 15.18 83.29 14.62Q84.55 14.07 86.23 14.07Q87.86 14.07 89.1 14.62Q90.34 15.18 91.08 16.2Q91.82 17.21 91.92 18.61L89.17 18.73Q89.09 17.73 88.33 17.06Q87.57 16.39 86.26 16.39Q85.04 16.39 84.29 16.97Q83.53 17.54 83.53 18.36Q83.53 19.12 84.08 19.57Q84.63 20.03 85.67 20.26L88.14 20.81Q90.25 21.28 91.25 22.26Q92.24 23.24 92.24 24.83Q92.24 26.2 91.48 27.22Q90.71 28.23 89.38 28.78Q88.05 29.33 86.32 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "stooke-mosaic",
+      "path": "observations/phobos-mosaic.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m",
+      "credit": "Philip Stooke; NASA/JPL; USGS/PDS",
+      "license": "Public-domain NASA mission data and published PDS cartographic product; cite Stooke.",
+      "licenseEvidence": [
+        "observations/map-guide.html",
+        "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
+      ],
+      "acquisition": "Download the pinned original mosaic.",
+      "redistribution": "Credit the cartographer, contributing missions and archive.",
+      "width": 14400,
+      "height": 7200,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 11100
+      },
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
+      "capture": {
+        "spacecraftIds": [
+          "viking"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+      },
+      "sha256": "d7934d5b209e5f31ed26297e1e85a4713d8d0aa2906111ffe4b3d60d02ae0ccb",
+      "bytes": 103738243,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/phobos-mosaic.tif",
+        "url": "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ernst-2023-shape",
+      "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+      "origin": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+      "catalog": "https://doi.org/10.1186/s40623-023-01814-7",
+      "credit": "Carolyn Ernst and colleagues; JHU/APL Small Body Mapping Tool",
+      "license": "Public scientific data release; cite Ernst et al. (2023).",
+      "licenseEvidence": [
+        "https://sbmt.jhuapl.edu/shared-files/"
+      ],
+      "acquisition": "Download the pinned original OBJ archive.",
+      "redistribution": "Retain the research and archive attribution.",
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-fixed-mesh",
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
+      "sha256": "69fffc77f4fd799767e50fc03631bea43f8d9110edcae8f355fad926136339fa",
+      "bytes": 3018535,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+        "url": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "Carolyn Ernst and colleagues; JHU/APL Small Body Mapping Tool",
+      "license": "Public scientific data release; cite Ernst et al. (2023).",
+      "acquisition": "Download the pinned original OBJ archive.",
+      "redistribution": "Retain the research and archive attribution.",
+      "licenseEvidence": [
+        "https://sbmt.jhuapl.edu/shared-files/"
+      ],
+      "id": "phobos-facet-science",
+      "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+      "origin": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+      "catalog": "https://doi.org/10.1186/s40623-023-01814-7",
+      "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement.",
+      "sha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
+      "bytes": 34508570,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+        "url": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored content, source documentation or preparation metadata.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored content, source documentation or preparation metadata.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "c8682309658501ed6b2a650720b273a3fccbc1c4c40ff55c1a68441994e8ebb1",
+      "bytes": 11886,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-byte-monochrome",
+          "noData": 0,
+          "centerLongitude": 0,
+          "origin": [
+            -34871.678455,
+            17435.839227
+          ],
+          "resolutionMeters": 4.84328867,
+          "displayRange": [
+            0,
+            255
+          ],
+          "wrapLongitude": true,
+          "specialValueMagnitude": 1e+30
+        }
+      },
+      "inputs": [
+        "stooke-mosaic",
+        "ernst-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phobos/phobos-normal-thumbnail.webp",
+          "bytes": 3912,
+          "sha256": "ff13d8503dd179982e01be968017d8b5f430bff7cefd2cf6fc9d4c47b1b5aea0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/phobos/phobos-normal-surface@2x.webp",
+          "bytes": 7235236,
+          "sha256": "568346d149d29f6fd62f750b2d1155c4c7df9a21a48b94287cca297fe24d3b87",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "ernst-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phobos/phobos-elevation-thumbnail.webp",
+          "bytes": 6808,
+          "sha256": "3828184f15417506d2268a3ed4625c926701b6874f51270669b097c608248dc5",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/phobos/phobos-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/phobos/phobos-elevation-surface@2x.webp",
+          "bytes": 1434432,
+          "sha256": "474a121e601cbc39988a7a76e351ca17e060ffab157eb239965f2ad5251464ed",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "albedo",
+      "label": "Relative albedo",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo."
+      ],
+      "lensIds": [
+        "albedo"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "phobos-facet-science",
+        "ernst-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phobos/phobos-albedo-thumbnail.webp",
+          "bytes": 960,
+          "sha256": "a4f9cba4cef4f6ff5db276c24a8a6fc7c5d1da488da40b6afb8d24430b8e2885",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/phobos/phobos-albedo-legend.webp",
+          "bytes": 192,
+          "sha256": "84c28272b31f82773de272bfd6760dd36f6633203510f00fd80df0defb229c44",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/phobos/phobos-albedo-surface@2x.webp",
+          "bytes": 2460704,
+          "sha256": "d33bb32fc9a10d308e4a7cf015d6cda46d5823cbd675a0f97f6408f71c8e39ea",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "slope",
+      "label": "Slope",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table."
+      ],
+      "lensIds": [
+        "slope"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "phobos-facet-science",
+        "ernst-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phobos/phobos-slope-thumbnail.webp",
+          "bytes": 1942,
+          "sha256": "9659dcdc500210a23420a5ff7c262deea44cc1388fec4ffa9f0ce44aeeab20ac",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/phobos/phobos-slope-legend.webp",
+          "bytes": 232,
+          "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/phobos/phobos-slope-surface@2x.webp",
+          "bytes": 3997560,
+          "sha256": "3cd1197cce3ae8d0057be96bc9e1c358d24dfc7ec9f4422e78eff8c921c47fed",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5855,
+          "sha256": "8f8b9251998537e988442fb1b9a597b312c190b065327b11eeb547d608dfcaff",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 59658,
+          "sha256": "5c89d9de0d62035a9d36130558c46a9a1773a10803d843b43af87840401315ce",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 19692,
+          "sha256": "5459f385d307705975f1b7180017950225caca62e66179e81dae27da4673b6b1",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:albedo",
+      "label": "Relative albedo preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "albedo"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/albedo.webp",
+          "bytes": 114526,
+          "sha256": "c4f8fa627b6730783656ef11b2c99787651fc4b06c888e6ebb7366385d78bdbb",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:slope",
+      "label": "Slope preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "slope"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/slope.webp",
+          "bytes": 237718,
+          "sha256": "21285a926abc03921a202891327efed056d307a1d4f4c10c9dfbb306635ad6b6",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

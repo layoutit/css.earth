@@ -40,14 +40,14 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
   });
 }
 
-export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, onError = () => {} }) {
+export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, deselect, onError = () => {} }) {
   const available = id => typeof id === 'string' && objects.some(object => object.id === id) && supports(id);
   const query = event => { if (available(event.detail?.objectId)) event.preventDefault(); };
   const select = event => {
     const id = event.detail?.objectId;
     if (!available(id)) return;
     event.preventDefault();
-    Promise.resolve(navigate(id)).catch(onError);
+    Promise.resolve(navigate(id, { sceneSelection: true })).catch(onError);
   };
   const click = event => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -58,12 +58,19 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
     const object = objects.find(object => object.route === url.pathname);
     if (!object || !supports(object.id)) return;
     event.preventDefault();
-    Promise.resolve(navigate(object.id, url.search || url.hash ? { url: url.href } : undefined)).catch(onError);
+    Promise.resolve(navigate(object.id, url.search || url.hash ? { url: url.href } : { sceneSelection: anchor.dataset?.objectId === object.id })).catch(onError);
   };
+  const clear = event => {
+    if (!deselect || event.defaultPrevented) return;
+    event.preventDefault();
+    Promise.resolve(deselect()).catch(onError);
+  };
+  documentTarget.addEventListener('objectdeselect', clear);
   documentTarget.addEventListener('click', click);
   documentTarget.addEventListener('objectnavigate', select);
   documentTarget.addEventListener('objectnavigationquery', query);
   return () => {
+    documentTarget.removeEventListener('objectdeselect', clear);
     documentTarget.removeEventListener('click', click);
     documentTarget.removeEventListener('objectnavigate', select);
     documentTarget.removeEventListener('objectnavigationquery', query);

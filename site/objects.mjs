@@ -1,3 +1,8 @@
+import polymeleDescriptor from "../src/planets/polymele/object.json" with { type: "json" };
+import leucusDescriptor from "../src/planets/leucus/object.json" with { type: "json" };
+import orusDescriptor from "../src/planets/orus/object.json" with { type: "json" };
+import eurybatesDescriptor from "../src/planets/eurybates/object.json" with { type: "json" };
+import patroclusDescriptor from "../src/planets/patroclus/object.json" with { type: "json" };
 import hiiakaDescriptor from "../src/planets/hiiaka/object.json" with { type: "json" };
 import squannitDescriptor from "../src/planets/squannit/object.json" with { type: "json" };
 import romulusDescriptor from "../src/planets/romulus/object.json" with { type: "json" };
@@ -256,6 +261,31 @@ import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { typ
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("polymele", "Polymele", "asteroid", "#a0a0a0", 5.191974805775306,
+    "Explore Polymele, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(polymeleDescriptor);
+    }, polymeleDescriptor.properties.worldFrame),
+  object("leucus", "Leucus", "asteroid", "#a0a0a0", 5.312733245360807,
+    "Explore Leucus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(leucusDescriptor);
+    }, leucusDescriptor.properties.worldFrame),
+  object("orus", "Orus", "asteroid", "#a0a0a0", 5.1231730197676795,
+    "Explore Orus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(orusDescriptor);
+    }, orusDescriptor.properties.worldFrame),
+  object("eurybates", "Eurybates", "asteroid", "#a0a0a0", 5.21783282489895,
+    "Explore Eurybates, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eurybatesDescriptor);
+    }, eurybatesDescriptor.properties.worldFrame),
+  object("patroclus", "Patroclus", "asteroid", "#a0a0a0", 5.206163281913244,
+    "Explore Patroclus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(patroclusDescriptor);
+    }, patroclusDescriptor.properties.worldFrame),
   object("hiiaka", "Hiʻiaka", "satellite", "#a0a0a0", 43.1,
     "Explore Hiʻiaka, a moon of Haumea, through its occultation-constrained ellipsoid.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

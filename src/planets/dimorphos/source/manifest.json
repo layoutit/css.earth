@@ -30,7 +30,8 @@
         "terrain",
         "shape",
         "elevation",
-        "facet-science"
+        "facet-science",
+        "albedo"
       ],
       "lensId": "elevation",
       "projection": {
@@ -76,6 +77,42 @@
       "expectedBytes": 4726080,
       "expectedSha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
       "coverage": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change."
+    },
+    {
+      "id": "dimorphos-relative-albedo",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "albedo"
+      ],
+      "expectedBytes": 4728960,
+      "expectedSha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
+      "lensId": "albedo",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "relative albedo",
+        "facetNumberBase": 0
+      },
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling."
+    },
+    {
+      "id": "dimorphos-relative-albedo-label",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "albedo"
+      ],
+      "expectedBytes": 6781,
+      "expectedSha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling."
     }
   ],
   "generatedIntermediates": [
@@ -109,14 +146,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 12123,
-      "expectedSha256": "9a008bbcf1677ed8931fc2e0fee6c72c97968aadce8eda951af0f5f5cbd47091"
+      "expectedBytes": 14437,
+      "expectedSha256": "492fa98d6a47cf7aeff7ac5101faeab2e53f72544709de07ebaab83067f06013"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 2127,
-      "expectedSha256": "22f1e68bf72ce32a4eca435bc0e51769b3cea1a78f41ef25e6b29411253fb75c"
+      "expectedBytes": 2165,
+      "expectedSha256": "ff9aae8403b1936cbe7f8ceaef2cdfd3795cf538fe69b872b83261f069088cd8"
     },
     {
       "path": "preparation/navigation.json",
@@ -133,8 +170,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 4369,
-      "expectedSha256": "084588c41e8bda19afdb5bdaf75350f5d39b1e919b914518eaae5828c2c4f4fe"
+      "expectedBytes": 5570,
+      "expectedSha256": "02535109d6f9ee4ad87707f89db30843eb0da3c1e1ebd326e34aeef119d1c335"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -195,20 +232,6 @@
       "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
-      "purpose": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
-      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
-      "expectedBytes": 4728960,
-      "expectedSha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd"
-    },
-    {
-      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
-      "purpose": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
-      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
-      "expectedBytes": 6781,
-      "expectedSha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e"
     },
     {
       "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",

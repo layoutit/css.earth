@@ -152,7 +152,8 @@
           "id": "normal",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         },
-        "detail": "Visible light"
+        "detail": "Visible light",
+        "summary": "OpenSpace's visible-light mosaic of Saturn's clouds. It combines archival observations, not a live view."
       },
       {
         "id": "ultraviolet",
@@ -196,7 +197,8 @@
           "id": "ultraviolet",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         },
-        "detail": "225 nm"
+        "detail": "225 nm",
+        "summary": "Hubble's 225 nm map from August 2025. Filled rows and added visible-light detail are not ultraviolet data."
       },
       {
         "id": "methane",
@@ -240,7 +242,8 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         },
-        "detail": "889 nm"
+        "detail": "889 nm",
+        "summary": "Hubble's 889 nm map from August 2025, with filled rows and visible detail. It is not methane concentration."
       },
       {
         "id": "thermal",
@@ -283,7 +286,8 @@
           "id": "thermal",
           "url": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/"
         },
-        "detail": "Schematic"
+        "detail": "Schematic",
+        "summary": "An illustration based on visible cloud patterns. Colors do not measure temperature or infrared brightness."
       },
       {
         "id": "cross-section",
@@ -340,7 +344,8 @@
           "id": "cross-section",
           "url": "https://science.nasa.gov/resource/saturn-interior-cutaway-illustration/"
         },
-        "detail": "Structure"
+        "detail": "Structure",
+        "summary": "Saturn's inferred interior layers. Colors and boundaries illustrate a model, not a measured interior map."
       }
     ]
   },

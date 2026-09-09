@@ -414,6 +414,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let depthOrder = bodies;
   let pickRanks = new Map<(typeof bodies)[number], number>();
   let overview = false;
+  let selectionPreview: string | null | undefined;
   let navigationIndicatorsVisible = true;
   const suspendedOpacity = new Map<HTMLElement, string>();
   let latest: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
@@ -452,6 +453,11 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         suspendedOpacity.clear();
         if (latest) this.publish(latest.world, latest.viewport);
       }
+    },
+    previewSelection(id?: string | null) {
+      if (destroyed) return;
+      selectionPreview = id;
+      if (latest) this.publish(latest.world, latest.viewport);
     },
     setOverview(enabled: boolean) {
       if (overview === enabled || destroyed) return;
@@ -532,6 +538,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       }
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
+      const emphasizedId = selectionPreview === undefined ? (overview ? null : selectedId) : selectionPreview;
       const [ox, oy] = viewport.principalOffsetPixels;
       const focal = viewport.focalPixels;
       // Publication shares the camera owner's resize snapshot. Reading layout
@@ -568,6 +575,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const [x, y] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isSelected = body.id === selectedId;
+        entry.group.dataset.contextSelected = emphasizedId === null ? "overview" : String(body.id === emphasizedId);
         const isAnchor = body.id === plan.focus.id;
         const inFrame = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2;
         const visible = inFrame && !hidden(eye, body.id) && !parentHidden(eye);
@@ -597,7 +605,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           bodyLod.markerOpacity * (isAnchor ? 1 : entry.orbitHidden ? opacity : entry.closedOrbit
             ? orbitVisibility : opacity * (isSelected ? 1 : appearance.markerOpacity));
         const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
-        const priority = (isAnchor ? 4e6 : 0) + (hovered ? 2e6 : 0) + (isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
+        const priority = (isAnchor ? 4e6 : 0) + (hovered ? 2e6 : 0) + (body.id === emphasizedId ? 6e6 : isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
         if (navigationIndicatorsVisible && annotationVisible && indicatorOpacity > 0) {
           const radius = BODY_INDICATOR_DIAMETER / 2, padding = entry.indicatorShown ? 0 : 2;
           indicators.add({ owner: 0, id: body.id, priority: priority + (entry.indicatorShown ? 100 : 0),
@@ -632,8 +640,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
         const labelOpacity = entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
-        if ((entry.labelHidden && !hovered) || !annotationVisible || labelOpacity <= 0.5 || size.width === 0 ||
-            (!resolvedDisc && body.id !== selectedId &&
+        if ((entry.labelHidden && !hovered && body.id !== emphasizedId) || !annotationVisible || labelOpacity <= 0.5 || size.width === 0 ||
+            (!resolvedDisc && body.id !== emphasizedId &&
               ((satellite && parentDiameter < plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels) ||
                (entry.orbit && !entry.orbitHidden && !hovered && orbitVisibility <= 0.5))) ||
             (indicatorOpacity > 0 && !entry.indicatorShown)) continue;
@@ -657,7 +665,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
               const nearestX = Math.max(lx, Math.min(lx + size.width, other.x));
               const nearestY = Math.max(ly, Math.min(ly + size.height, other.y));
               return Math.hypot(nearestX - other.x, nearestY - other.y) < BODY_INDICATOR_DIAMETER / 2 + 4;
-            }) && (hovered || entry.closedOrbit || satellite || body.id === plan.focus.id ||
+            }) && (hovered || body.id === emphasizedId || entry.closedOrbit || satellite || body.id === plan.focus.id ||
               !orbitOverlapsLabel(projectedBodies, lx, ly, size.width, size.height));
         });
         if (placement === undefined) continue;
@@ -680,7 +688,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         marker.style.visibility = visible && markerOpacity > 0 && !pointSource ? '' : 'hidden';
         entry.navigation.update(visible && markerOpacity > 0.1 && !pointSource ? body.id : null, body.name);
         if (visible) {
-          marker.style.opacity = String(markerOpacity);
+          marker.style.opacity = String(markerOpacity * (emphasizedId !== null && body.id !== emphasizedId && entry.group.dataset.objectHovered !== "true" ? .75 : 1));
           marker.style.transform = `translate(${x}px,${y}px) scale(${Math.max(2.4, diameter) / entry.sprite.size})`;
         }
         if (!navigationIndicatorsVisible) continue;

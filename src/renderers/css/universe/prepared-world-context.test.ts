@@ -666,10 +666,10 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   venus.dispatchEvent(new Event('click')); expect(selections).toEqual([]);
   layer.selectObject('venus'); publish(); expect(shown()).toEqual(['Venus']);
   find(root, 'contextBody', 'mercury').dataset.objectHovered = 'true';
-  publish(); expect(shown()).toEqual(['Mercury']);
+  publish(); expect(shown()).toEqual(['Venus']); // The selected label keeps priority over hover.
   delete find(root, 'contextBody', 'mercury').dataset.objectHovered;
   layer.selectObject('sun');
-  publish(9200); expect(shown()).toEqual(['Mercury']);
+  publish(9200); expect(shown()).toEqual(['Venus']); // Keep the previously visible label until there is clearance.
   publish(10000); expect(shown()).toEqual(['Mercury', 'Venus']);
   publish(9200); expect(shown()).toEqual(['Mercury', 'Venus']);
   publish(8800); expect(shown()).toEqual(['Mercury']);
@@ -1093,6 +1093,20 @@ test('flight overlays fade independently while retained body images keep followi
   layer.destroy();
 });
 
+test('selection emphasis previews immediately without changing the detailed occluder', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const sun = find(root, 'contextGroup', 'sun'), mercury = find(root, 'contextGroup', 'mercury');
+  layer.previewSelection('mercury');
+  expect(mercury.dataset.contextSelected).toBe('true');
+  expect(sun.dataset.contextSelected).toBe('false');
+  layer.previewSelection(null);
+  expect(mercury.dataset.contextSelected).toBe('overview');
+  expect(sun.dataset.contextSelected).toBe('overview');
+  layer.previewSelection();
+  expect(sun.dataset.contextSelected).toBe('true');
+  expect(mercury.dataset.contextSelected).toBe('false');
+  layer.destroy();
+});
 
 test('transports a non-rendered parent coordinate without creating a body or marker', () => {
   const source = structuredClone(plan(1));

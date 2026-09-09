@@ -70,10 +70,10 @@ try {
           wordmarkSlot: box(".explorer-shell-wordmark"),
           wordmark: box(".maps-brand-button"),
           versionCount: document.querySelectorAll(".planet-wordmark-version").length,
-          search: box(".planet-sidebar-search-card"), categories: box(".planet-search-categories"), toolbar: box(".planet-search-toolbar"),
-          github: box(".planet-github-link"), codepen: box(".planet-codepen-link"), reportIssue: box(".planet-report-issue-link"),
+          search: box(".planet-sidebar-search-card"), toolbar: box(".planet-search-toolbar"),
+          github: box(".planet-github-link"), collapse: box(".planet-sidebar-collapse"), reportIssue: box(".planet-report-issue-link"),
           projectLinks: box(".planet-project-links"), explorerActions: box(".explorer-rail"),
-          codepenDisabled: document.querySelector(".planet-codepen-link").disabled,
+          codepenCount: document.querySelectorAll(".planet-codepen-link").length,
           categoryButtons: [...document.querySelectorAll(".planet-search-category")].map(node => node.getBoundingClientRect().toJSON()),
           card: box(".planet-information-panel"),
           inset: parseFloat(bodyStyle.getPropertyValue("--explorer-content-inset")),
@@ -107,27 +107,19 @@ try {
         near(result.wordmarkSlot.height, 44, "wordmark row height");
         assert.equal(result.searchInToolbar, false, "search is separate from the outside pill bar");
         near(result.search.left - result.wordmarkSlot.right, 24, "wordmark to search gap");
-        assert.equal(result.codepenDisabled, true, "CodePen export is disabled for now");
-        near(result.codepen.height, 44, "CodePen pill height");
-        near(result.codepen.top, result.github.top, "project pills share one row");
+        assert.equal(result.codepenCount, 0, "CodePen is removed");
         near(result.github.left - result.reportIssue.right, 8, "Report issue sits before GitHub");
-        near(result.codepen.left - result.github.right, 8, "CodePen follows GitHub");
-        near(result.codepen.width, 44, "CodePen is an icon-only pill");
         near(result.github.height, 44, "GitHub pill height");
         near(result.projectLinks.right, config.width - 12, "right pill bar inset");
         assert.ok(result.projectLinks.left >= 12, "right pill bar stays on screen");
-        if (!mobile) near(result.explorerActions.right, config.width - 12, "About and Settings sit at the right edge");
-        near(result.explorerActions.left - result.codepen.right, 8, "CodePen sits beside About");
+        near(result.explorerActions.left, result.toolbar.left, "About and Settings start the left toolbar");
+        near(result.collapse.left - result.explorerActions.right, 8, "Collapse is last after Settings");
         near(result.github.top, result.viewport.top + 8, "GitHub pill follows the viewport top");
-        assert.equal(result.categoryButtons.length, 3);
-        for (const button of result.categoryButtons) near(button.height, 44, "category pill height");
-        for (let index = 1; index < result.categoryButtons.length; index += 1) {
-          near(result.categoryButtons[index].left - result.categoryButtons[index - 1].right, 8, "gap between category pills");
-        }
+        assert.equal(result.categoryButtons.length, 0, "Category pills are removed");
         assert.ok(result.toolbar.right <= config.width, "pill bar stays on screen");
         if (mobile) {
           near(result.toolbar.left, result.header.left, "pill bar aligns below the wordmark");
-          near(result.toolbar.top, result.search.bottom + 8, "categories occupy the second row");
+          near(result.toolbar.top, result.search.bottom + 8, "toolbar actions occupy the second row");
         } else {
           assert.ok(result.toolbar.right + 8 <= result.projectLinks.left, "pill bar leaves room for the project links");
           near(result.header.width, result.sidebarFrame.width, "header matches the content panel width");
@@ -145,7 +137,7 @@ try {
           near(result.sidebar.y, result.header.bottom + 12, "scrolling content starts below the header");
           assert.ok(result.sidebar.bottom <= config.height - 34 + .1, "panel stays above the footer with space below");
           near(result.stage.top, 0, "scene uses the space from the hidden source strip");
-          near(result.stage.bottom, result.status.top, "scene stops above status");
+          near(result.stage.bottom, config.height, "scene fills the window behind the status overlay");
           assert.equal(result.sourcesHidden, true, "source strip is hidden");
           near(result.status.left, 0, "status uses the viewport width");
         } else {
@@ -166,7 +158,7 @@ try {
       assert.equal(await page.locator('.planet-search-toolbar > :last-child').getAttribute('class'), 'planet-sidebar-collapse');
       assert.deepEqual(await page.locator('.planet-project-links').evaluate(node => {
         return [...node.querySelectorAll('button:not([hidden]), a')].map(action => action.getAttribute('title') || action.textContent.trim().split(' (')[0]);
-      }), ['Report issue', 'GitHub', 'Export scene to CodePen (coming soon)', 'About', 'Settings']);
+      }), ['Report issue', 'GitHub']);
       const searchGeometry = await page.locator('.planet-sidebar-search-card').evaluate(node => {
         const input = node.querySelector('.planet-sidebar-search');
         const icon = node.querySelector('.planet-sidebar-view-all');

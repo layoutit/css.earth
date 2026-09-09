@@ -37,7 +37,13 @@
       "lensId": "normal",
       "label": "Monochrome",
       "falseColor": false,
-      "coverage": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain."
+      "coverage": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
+      "capture": {
+        "spacecraftIds": [
+          "viking"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+      }
     },
     {
       "id": "ernst-2023-shape",
@@ -152,8 +158,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11617,
-      "expectedSha256": "cff545f36d0e7ba78d3547bd88e98cc7cf7bfa6f4bb7e6f11b1268f901b0d6ea",
+      "expectedBytes": 11886,
+      "expectedSha256": "c8682309658501ed6b2a650720b273a3fccbc1c4c40ff55c1a68441994e8ebb1",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

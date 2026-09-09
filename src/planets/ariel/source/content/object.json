@@ -84,7 +84,8 @@
           "id": "schenk-2020-ariel-normal",
           "path": "../manifest.json",
           "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
-        }
+        },
+        "summary": "Voyager 2 mosaic with brightness correction. Shadows and seams remain; the gray grid marks gaps."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
           "image": "/scenes/ariel/ariel-elevation-legend.webp"
-        }
+        },
+        "summary": "Height from stereo images, shading and limb measurements. Detail varies; the gray grid marks missing elevation data."
       }
     ]
   },

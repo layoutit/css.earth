@@ -2,8 +2,7 @@
 import { objectClassificationLabel } from "../planet-search-objects.mjs";
 import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
 
-const { object, activeObjectId, detail } = Astro.props;
-const context = detail ?? (object.classification === "star" && object.distanceAu === 0 ? "Our star" : null);
+const { object, activeObjectId } = Astro.props;
 ---
 
 <li class="planet-object-item" data-object-name={object.name.toLocaleLowerCase("en")}
@@ -14,14 +13,10 @@ const context = detail ?? (object.classification === "star" && object.distanceAu
       href={object.route} data-object-id={object.id}
       aria-current={object.id === activeObjectId ? "page" : undefined}>
       <PlanetNavigationMarker planetId={object.id} color={object.color} />
-      <span class="planet-object-text">
-        <span class="planet-object-name">{object.name}</span>{" "}
-        <span class:list={["planet-object-distance", { "planet-object-context": context !== null }]}>
-          {context ?? <>
-            {"("}<span class="planet-object-distance-value">{Number(object.distanceAu.toFixed(3))}</span>{" "}
-            <span class="planet-object-distance-unit">AU</span>{")"}
-          </>}
-        </span>
+      <span class="planet-object-name">{object.name}</span>
+      <span class="planet-object-distance">
+        <span class="planet-object-distance-value">{Number(object.distanceAu.toFixed(3))}</span>{" "}
+        <span class="planet-object-distance-unit">AU</span>
       </span>
     </a>
 </li>

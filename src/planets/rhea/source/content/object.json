@@ -115,7 +115,8 @@
         "source": {
           "id": "cassini-iss-2014-rhea-color",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini enhanced color from 2014. Hemisphere differences, shadows and seams remain in the composite."
       },
       {
         "id": "elevation",

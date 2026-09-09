@@ -268,7 +268,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const sampleSources = observation?.report.frames && Buffer.alloc(width * height);
     const observationTransfer = observation && { interiorTexels: 0, counts: {}, maximumSourceDistanceMeters: 0,
       maximumPixelSeparationMeters: 0, maximumPhotometricGain: 0,
-      method: 'Closest full-source triangle point; all bilinear GEO contributors checked before disk-normalized interpolation; atlas bleed clamped to retained face.' };
+      method: 'Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.' };
     const transfer = sourceSurface && { sampledTexels: 0, withheldTexels: 0, maximumDistanceMeters: 0,
       includesAtlasBleed: true, triangleInteriorTexels: 0, withheldTriangleInteriorTexels: 0,
       maximumAcceptedDistanceMeters: scientific.surfaceSampling.maximumDistanceMeters,
@@ -308,7 +308,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
             }
           }
           for (let channel = 0; channel < 3; channel++) {
-            // The observation is already disk-normalized. Uniform flood
+            // The observation's authored photometric treatment is already prepared. Uniform flood
             // preserves its measured detail on every side of the source mesh.
             flood[offset + channel] = sample.color[channel];
             shadow[offset + channel] = Math.round(sample.color[channel] * illumination);

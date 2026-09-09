@@ -84,7 +84,8 @@
           "id": "cassini-n1506383441",
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
-        }
+        },
+        "summary": "Cassini images mapped onto the irregular shape. Crater shadows remain; coverage varies and gaps are marked."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/hyperion/hyperion-elevation-legend.webp"
-        }
+        },
+        "summary": "Cassini-model height relative to a 135 km sphere. Shape errors reach 6 km on the less-observed side."
       }
     ]
   },

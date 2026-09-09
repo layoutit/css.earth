@@ -31,7 +31,15 @@
       },
       "coverage": "USGS 2012 Cassini/Voyager mosaic. Its download-link label is wrong; this pinned 11520 by 5760 file matches the 417 m metadata. Preserve nonzero pixels; zero is GeoTIFF no-data. Origin easting zero means left edge 180 E despite projection center 180 E.",
       "expectedBytes": 66401915,
-      "expectedSha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7"
+      "expectedSha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7",
+      "capture": {
+        "spacecraftIds": [
+          "cassini",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif"
+      }
     },
     {
       "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
@@ -61,7 +69,13 @@
       },
       "coverage": "Published global rectangular display mosaic without a separate validity mask. Preserve supplied pixels, including real dark terrain, residual photographed shadows and coarse inserts. The one-pixel departure from 2:1 aspect is retained in source and resampled at preparation.",
       "expectedBytes": 10389170,
-      "expectedSha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4"
+      "expectedSha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18438.jpg"
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -93,7 +107,13 @@
       "coverage": "Global SPC radius model. Sample original geotransform within actual raster bounds. Narrow uncovered east/south edges are not extrapolated.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 763.5 km.",
       "expectedBytes": 9881887,
-      "expectedSha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d"
+      "expectedSha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_radius_g.tif"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -238,8 +258,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13419,
-      "expectedSha256": "7735bdcf35bc60e00aef9980ad543d2052dec3e03d174f985a31ed7e379202fa",
+      "expectedBytes": 13542,
+      "expectedSha256": "0374421d4a090ad629cd13d95a7efe42275c9fe10cccf6adb0df5cc4020d6aef",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {

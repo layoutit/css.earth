@@ -96,7 +96,8 @@
           "id": "usgs-voyager-galileo-mono",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic"
+        "detail": "Global mosaic",
+        "summary": "Voyager and Galileo images with detail from 400 m to 20 km per pixel. Shadows remain; gray grid: no imagery."
       },
       {
         "id": "enhanced",
@@ -110,7 +111,8 @@
           "id": "usgs-voyager-galileo-color",
           "path": "../manifest.json"
         },
-        "detail": "Infrared color"
+        "detail": "Infrared color",
+        "summary": "Infrared, green and violet with monochrome detail. Missing or synthesized color stays monochrome."
       },
       {
         "id": "geology",

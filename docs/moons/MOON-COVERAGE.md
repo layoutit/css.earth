@@ -60,11 +60,11 @@ The user’s delivery direction is **substantial PRs with complete outcomes acro
 | Batch | Planned outcome | Bodies |
 | --- | --- | ---: |
 | [B1 — Expand the moon roster by 26](PR-BATCHES.md#b1) | 26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461. | 26 |
-| [B2 — Add scientific surfaces and terrain to 15 moons](PR-BATCHES.md#b2) | 15 existing worlds gain a substantive scientific layer or source-backed geometry improvement. | 15 |
-| [B3 — Complete a spacecraft-imagery cohort](PR-BATCHES.md#b3) | Two prospective new imaged moons and eight existing observation/registration improvements. | 10 |
+| [B2 — Add scientific surfaces and terrain to 13 moons](PR-BATCHES.md#b2) | 13 prepared upgrades; bounded scientific-view reviews and final qualification in progress. | 13 |
+| [B3 — Complete spacecraft imagery and geologic mapping](PR-BATCHES.md#b3) | Two prospective new imaged moons, eight observation/registration improvements and Titania/Miranda geologic maps. | 12 |
 | [B4 — Add measured light curves and spectra across nine existing moons](PR-BATCHES.md#b4) | A complete prepared observation-chart capability used by nine existing moon packages. | 9 |
 
-**B1 is merged; the next planned batch is B2.** The plan covers every physical-model candidate and all 32 existing improvements across the four batches. Each PR includes source closure, preparation, usable content/assets and full qualification for its cohort. Remaining source blockers and possible scope changes are explicit in the plan.
+**B1 is merged; B2 is prepared and undergoing final qualification.** The user approved 13 B2 bodies and carried Titania and Miranda to B3. Real Chrome scientific captures and bounded manual reviews are documented, with superseded cases, mesh-edge limits and failed/pending aggregate gates kept explicit in the [B2 qualification checkpoint](b2-preparation/qualification-checkpoint.md). The plan covers every physical-model candidate and all 32 existing improvements across the four batches. Each PR includes source closure, preparation, usable content/assets and full qualification for its cohort. Remaining source blockers and possible scope changes are explicit in the plan.
 
 ## Complete planet-and-Pluto inventory
 
@@ -75,7 +75,7 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 
 | Moon | Scene / current lenses | Review result | Supported next work | Effort | Owner / task / PR |
 | --- | --- | --- | --- | --- | --- |
-| Moon · [review](review-2026-09-08/BODY-REVIEWS.md#body-001) | Present · Surface / Topography / Crust | improve-existing | Numeric topography and a carefully labeled Diviner thermal, rock-abundance or composition-proxy lens on the existing standalone Moon; lunar-hour bins and coverage visible in content. | large | Moons · [planned B2](PR-BATCHES.md#b2) |
+| Moon · [review](review-2026-09-08/BODY-REVIEWS.md#body-001) | Present · Surface / Topography / Crust | improve-existing | Numeric topography and a carefully labeled Diviner thermal, rock-abundance or composition-proxy lens on the existing standalone Moon; lunar-hour bins and coverage visible in content. | large | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
 
 </details>
 
@@ -84,8 +84,8 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 
 | Moon | Scene / current lenses | Review result | Supported next work | Effort | Owner / task / PR |
 | --- | --- | --- | --- | --- | --- |
-| Phobos · [review](review-2026-09-08/BODY-REVIEWS.md#body-002) | Present · Monochrome / Elevation | improve-existing | Existing observed mosaic plus separately labeled SPC relative-albedo or modeled gravity/slope lens, preserving source coverage and assumptions. A spectral chart is a later research candidate. | medium | Moons · [planned B2](PR-BATCHES.md#b2) |
-| Deimos · [review](review-2026-09-08/BODY-REVIEWS.md#body-003) | Present · Monochrome / Elevation | improve-existing | Coverage-aware SPC scalar lens on current geometry; later registered EXI regional observation/feature view if calibrated sequences, geometry and data release are obtained. | medium | Moons · [planned B2](PR-BATCHES.md#b2) |
+| Phobos · [review](review-2026-09-08/BODY-REVIEWS.md#body-002) | Present · Monochrome / Elevation | improve-existing | Existing observed mosaic plus separately labeled SPC relative-albedo or modeled gravity/slope lens, preserving source coverage and assumptions. A spectral chart is a later research candidate. | medium | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
+| Deimos · [review](review-2026-09-08/BODY-REVIEWS.md#body-003) | Present · Monochrome / Elevation | improve-existing | Coverage-aware SPC scalar lens on current geometry; later registered EXI regional observation/feature view if calibrated sequences, geometry and data release are obtained. | medium | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
 
 </details>
 
@@ -94,9 +94,9 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 
 | Moon | Scene / current lenses | Review result | Supported next work | Effort | Owner / task / PR |
 | --- | --- | --- | --- | --- | --- |
-| Io · [review](review-2026-09-08/BODY-REVIEWS.md#body-004) | Present · Monochrome / Enhanced color | improve-existing | Existing observed globe with a separately identified geologic-unit overlay and legend, once the released GIS is acquired and registered. | medium | Moons · [planned B2](PR-BATCHES.md#b2) |
-| Europa · [review](review-2026-09-08/BODY-REVIEWS.md#body-005) | Present · Monochrome / Enhanced color | improve-existing | Regional relief and quality masks on observed terrain, plus selectively prepared spectral-band observations with wavelength, footprint and uncertainty disclosures. | large | Moons · [planned B2](PR-BATCHES.md#b2) |
-| Ganymede · [review](review-2026-09-08/BODY-REVIEWS.md#body-006) | Present · Monochrome / Enhanced color | improve-existing | Prepared geologic-unit map and explanations on the existing globe, preserving source registration, scale and interpreted-unit meaning. | medium | Moons · [planned B2](PR-BATCHES.md#b2) |
+| Io · [review](review-2026-09-08/BODY-REVIEWS.md#body-004) | Present · Monochrome / Enhanced color | improve-existing | Existing observed globe with a separately identified geologic-unit overlay and legend, once the released GIS is acquired and registered. | medium | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
+| Europa · [review](review-2026-09-08/BODY-REVIEWS.md#body-005) | Present · Monochrome / Enhanced color | improve-existing | Regional relief and quality masks on observed terrain, plus selectively prepared spectral-band observations with wavelength, footprint and uncertainty disclosures. | large | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
+| Ganymede · [review](review-2026-09-08/BODY-REVIEWS.md#body-006) | Present · Monochrome / Enhanced color | improve-existing | Prepared geologic-unit map and explanations on the existing globe, preserving source registration, scale and interpreted-unit meaning. | medium | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
 | Callisto · [review](review-2026-09-08/BODY-REVIEWS.md#body-007) | Present · Monochrome | improve-existing | A dated spacecraft observation view; partial observed-color surface mapping only after original image/geometry and calibration are recovered. | research | Moons · [planned B3](PR-BATCHES.md#b3) |
 | Amalthea · [review](review-2026-09-08/BODY-REVIEWS.md#body-008) | Present · Monochrome / Elevation | retain-existing | Retain current observed grayscale and broad radial-shape lens with modeled-region limits. | none | — |
 | Himalia · [review](review-2026-09-08/BODY-REVIEWS.md#body-009) | Present · Shape model | improve-existing | Retain the explicitly approximate shape and add an observational spectrum/uncertainty comparison rather than painting inferred minerals onto a globe. | medium | Moons · [planned B4](PR-BATCHES.md#b4) |
@@ -218,11 +218,11 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 | Moon | Scene / current lenses | Review result | Supported next work | Effort | Owner / task / PR |
 | --- | --- | --- | --- | --- | --- |
 | Mimas · [review](review-2026-09-08/BODY-REVIEWS.md#body-119) | Present · Monochrome / Enhanced color / Elevation | retain-existing | Maintain existing source-described lenses and geometry; preserve the documented observational/model limits. | none | — |
-| Enceladus · [review](review-2026-09-08/BODY-REVIEWS.md#body-120) | Present · Monochrome / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Prepare ellipsoid-plus-valid-DEM geometry and test registration; optionally add hemisphere spectral measurements. | large | Moons · [planned B2](PR-BATCHES.md#b2) |
-| Tethys · [review](review-2026-09-08/BODY-REVIEWS.md#body-121) | Present · Monochrome / Enhanced color / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Inspect individual 2025 mesh/assessment labels, then prepare measured shape against current maps. | large | Moons · [planned B2](PR-BATCHES.md#b2) |
-| Dione · [review](review-2026-09-08/BODY-REVIEWS.md#body-122) | Present · Monochrome / Enhanced color / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Identify and pin native global mesh and assessment products; prepare body-specific relief geometry. | large | Moons · [planned B2](PR-BATCHES.md#b2) |
-| Rhea · [review](review-2026-09-08/BODY-REVIEWS.md#body-123) | Present · Monochrome / Enhanced color / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Read mesh labels and uncertainty grids, choose a measured geometry approximation, and preserve projection/datum distinctions. | large | Moons · [planned B2](PR-BATCHES.md#b2) |
-| Titan · [review](review-2026-09-08/BODY-REVIEWS.md#body-124) | Present · Near-infrared / Radar | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Prototype a coverage-aware measured elevation lens; audit units, projection and measured support before using interpolation. | large | Moons · [planned B2](PR-BATCHES.md#b2) |
+| Enceladus · [review](review-2026-09-08/BODY-REVIEWS.md#body-120) | Present · Monochrome / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Prepare ellipsoid-plus-valid-DEM geometry and test registration; optionally add hemisphere spectral measurements. | large | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
+| Tethys · [review](review-2026-09-08/BODY-REVIEWS.md#body-121) | Present · Monochrome / Enhanced color / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Inspect individual 2025 mesh/assessment labels, then prepare measured shape against current maps. | large | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
+| Dione · [review](review-2026-09-08/BODY-REVIEWS.md#body-122) | Present · Monochrome / Enhanced color / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Identify and pin native global mesh and assessment products; prepare body-specific relief geometry. | large | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
+| Rhea · [review](review-2026-09-08/BODY-REVIEWS.md#body-123) | Present · Monochrome / Enhanced color / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Read mesh labels and uncertainty grids, choose a measured geometry approximation, and preserve projection/datum distinctions. | large | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
+| Titan · [review](review-2026-09-08/BODY-REVIEWS.md#body-124) | Present · Near-infrared / Radar | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Prototype a coverage-aware measured elevation lens; audit units, projection and measured support before using interpolation. | large | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
 | Hyperion · [review](review-2026-09-08/BODY-REVIEWS.md#body-125) | Present · Monochrome / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Resolve actual 2025 numeric mesh/DEM/map deposit and compare frame before deciding to replace current products; JWST spectrum is a separate chart… | research | Moons · [planned B3](PR-BATCHES.md#b3) |
 | Iapetus · [review](review-2026-09-08/BODY-REVIEWS.md#body-126) | Present · Monochrome / Enhanced color | retain-existing | Maintain existing source-described lenses and geometry; preserve the documented observational/model limits. | none | — |
 | Phoebe · [review](review-2026-09-08/BODY-REVIEWS.md#body-127) | Present · Monochrome / Elevation | improve-existing | Maintain existing source-described lenses and geometry; new opportunity: Qualify regional color camera/map registration against the existing mesh, or extract released JWST spectrum as a chart. | large | Moons · [planned B3](PR-BATCHES.md#b3) |
@@ -520,9 +520,9 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 | --- | --- | --- | --- | --- | --- |
 | Ariel · [review](review-2026-09-08/BODY-REVIEWS.md#body-412) | Present · Monochrome / Elevation | retain-existing | Retain current Monochrome, Elevation lenses with source-specific limitations. | none | — |
 | Umbriel · [review](review-2026-09-08/BODY-REVIEWS.md#body-413) | Present · Monochrome | retain-existing | Retain current Monochrome lens with source-specific limitations. | none | — |
-| Titania · [review](review-2026-09-08/BODY-REVIEWS.md#body-414) | Present · Monochrome / Elevation | improve-existing | Retain current Monochrome, Elevation lenses with source-specific limitations. | research | Moons · [planned B2](PR-BATCHES.md#b2) |
+| Titania · [review](review-2026-09-08/BODY-REVIEWS.md#body-414) | Present · Monochrome / Elevation | improve-existing | Retain current Monochrome, Elevation lenses with source-specific limitations. | research | Moons · [planned B3](PR-BATCHES.md#b3) |
 | Oberon · [review](review-2026-09-08/BODY-REVIEWS.md#body-415) | Present · Monochrome | retain-existing | Retain current Monochrome lens with source-specific limitations. | none | — |
-| Miranda · [review](review-2026-09-08/BODY-REVIEWS.md#body-416) | Present · Monochrome / Elevation | improve-existing | Retain current Monochrome, Elevation lenses with source-specific limitations. | research | Moons · [planned B2](PR-BATCHES.md#b2) |
+| Miranda · [review](review-2026-09-08/BODY-REVIEWS.md#body-416) | Present · Monochrome / Elevation | improve-existing | Retain current Monochrome, Elevation lenses with source-specific limitations. | research | Moons · [planned B3](PR-BATCHES.md#b3) |
 | Cordelia · [review](review-2026-09-08/BODY-REVIEWS.md#body-417) | Present · Shape model | retain-existing | Retain current Shape model lens with source-specific limitations. | none | — |
 | Ophelia · [review](review-2026-09-08/BODY-REVIEWS.md#body-418) | Present · Shape model | retain-existing | Retain current Shape model lens with source-specific limitations. | none | — |
 | Bianca · [review](review-2026-09-08/BODY-REVIEWS.md#body-419) | Present · Shape model | retain-existing | Retain current Shape model lens with source-specific limitations. | none | — |
@@ -579,7 +579,7 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 
 | Moon | Scene / current lenses | Review result | Supported next work | Effort | Owner / task / PR |
 | --- | --- | --- | --- | --- | --- |
-| Charon · [review](review-2026-09-08/BODY-REVIEWS.md#body-457) | Present · Monochrome / Elevation | improve-existing | Retain current Monochrome, Elevation lenses with source-specific limitations. | research | Moons · [planned B2](PR-BATCHES.md#b2) |
+| Charon · [review](review-2026-09-08/BODY-REVIEWS.md#body-457) | Present · Monochrome / Elevation | improve-existing | Retain current Monochrome, Elevation lenses with source-specific limitations. | research | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
 | Nix · [review](review-2026-09-08/BODY-REVIEWS.md#body-458) | Present · Shape model | improve-existing | Retain current Shape model lens with source-specific limitations. | research | Moons · [planned B3](PR-BATCHES.md#b3) |
 | Hydra · [review](review-2026-09-08/BODY-REVIEWS.md#body-459) | Present · Shape model | improve-existing | Retain current Shape model lens with source-specific limitations. | research | Moons · [planned B3](PR-BATCHES.md#b3) |
 | Kerberos · [review](review-2026-09-08/BODY-REVIEWS.md#body-460) | Present · Shape model | retain-existing | Retain current Shape model lens with source-specific limitations. | none | — |
@@ -591,7 +591,7 @@ Every benchmark body appears once below. Follow **review** for its full geometry
 
 | Moon / parent | Scene / current lenses | Review result | Supported next work | Effort | Owner / task / PR |
 | --- | --- | --- | --- | --- | --- |
-| Dimorphos / Didymos · [review](review-2026-09-08/BODY-REVIEWS.md#body-462) | Present · Shape / Elevation | improve-existing | Encounter-era relative-albedo and separately labeled gravity-relative slope views, retaining mesh-aligned valid/unknown support. Keep encounter shape, post-impact orbital context and arbitrary display phase distinct. | medium | Moons · [planned B2](PR-BATCHES.md#b2) |
+| Dimorphos / Didymos · [review](review-2026-09-08/BODY-REVIEWS.md#body-462) | Present · Shape / Elevation | improve-existing | Encounter-era relative-albedo and separately labeled gravity-relative slope views, retaining mesh-aligned valid/unknown support. Keep encounter shape, post-impact orbital context and arbitrary display phase distinct. | medium | Moons · [B2 qualification in progress](B2-SCIENTIFIC-SURFACES.md) |
 
 ## Selected expansion beyond the benchmark
 
@@ -628,7 +628,7 @@ The [Wikipedia template](https://en.wikipedia.org/wiki/Template:Solar_System_moo
 | --- | --- | --- |
 | Measure actual observation coverage | Prepared validity masks and reproducible area metrics, with source provenance and observed/modelled regions separated | Not started / — |
 | Preserve geometry confidence | Per-body measured, fitted and assumed axes/poles; source uncertainty separate from display simplification error | Reviewed in linked body evidence; implementation audit pending / — |
-| Add scientific layers from released products | Exact product ID, units, frame, coverage, interpretation and preparation closure; independent source-to-display comparison | Candidates reviewed; no implementation started / — |
+| Add scientific layers from released products | Exact product ID, units, frame, coverage, interpretation and preparation closure; independent source-to-display comparison | 13-body B2 prepared; bounded visual review recorded, final qualification incomplete / [checkpoint](b2-preparation/qualification-checkpoint.md) |
 | Revisit unreleased model leads | An actual downloadable release, license/attribution, axes/frame/pole and reproducibility evidence | Specific gaps recorded per body / — |
 | Record release qualification | Exact tested head; source/runtime closure, tests/build and Chrome DPR 1/2; aggregate failures retained | Not reassessed here / — |
 

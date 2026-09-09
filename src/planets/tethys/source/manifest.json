@@ -31,7 +31,13 @@
       },
       "coverage": "GeoTIFF no-data is exactly 0; preserve all other source values. Native image resolution and photographed shading vary.",
       "expectedBytes": 66401923,
-      "expectedSha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640"
+      "expectedSha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
+      }
     },
     {
       "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
@@ -62,7 +68,13 @@
       },
       "coverage": "Published global rectangular display map has no separate validity mask. Preserve original imagery, including dark terrain, photographed shading and source seams.",
       "expectedBytes": 10809057,
-      "expectedSha256": "aa3c249de2432699157638dae11c6f5c5e22c3dda94dd803af8666269f1a3da4"
+      "expectedSha256": "aa3c249de2432699157638dae11c6f5c5e22c3dda94dd803af8666269f1a3da4",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg"
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -94,7 +106,13 @@
       "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
       "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
       "expectedBytes": 6044029,
-      "expectedSha256": "02b967b03598630765ec61545a7886ee8f4abda45fdae500f5af03358ebf5546"
+      "expectedSha256": "02b967b03598630765ec61545a7886ee8f4abda45fdae500f5af03358ebf5546",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqradius_g.tif"
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -124,7 +142,13 @@
       "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
       "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
       "expectedBytes": 790789,
-      "expectedSha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453"
+      "expectedSha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npradius_g.tif"
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -154,7 +178,13 @@
       "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
       "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
       "expectedBytes": 790789,
-      "expectedSha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74"
+      "expectedSha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spradius_g.tif"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -355,8 +385,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13295,
-      "expectedSha256": "6fd28e64f2529c567e50e44fea8c61b2fbdad3a6fb09059db94dc2962a23ab23",
+      "expectedBytes": 13563,
+      "expectedSha256": "2af95782ce8ddf2b923ae7b66a470cceb4375f492cc3ac4932f8d070ad801ab5",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
