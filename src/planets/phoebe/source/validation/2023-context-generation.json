@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-phoebe-2023-context-generation@1",
+  "sourcePins": [
+    {
+      "path": "shape/2023/phoebe_128_o.obj",
+      "bytes": 17787240,
+      "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9"
+    },
+    {
+      "path": "science/2023/phoebe_albedo_c.cub",
+      "bytes": 9941545,
+      "sha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3"
+    },
+    {
+      "path": "science/2023/phoebe_numimg_c.cub",
+      "bytes": 326413,
+      "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d"
+    },
+    {
+      "path": "science/2023/phoebe_bestmap_c.cub",
+      "bytes": 326427,
+      "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15"
+    }
+  ],
+  "recipe": {
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "inputs": [
+      "phoebe-2023-shape",
+      "phoebe-2023-albedo",
+      "phoebe-2023-numimg",
+      "phoebe-2023-bestmap"
+    ],
+    "size": 512,
+    "longitudeDegrees": 0,
+    "latitudeDegrees": -20,
+    "ambient": 0.45,
+    "diffuse": 0.55,
+    "lensId": "normal",
+    "displaySampling": "nearest"
+  },
+  "normalizedMapRgb": {
+    "width": 2880,
+    "height": 1440,
+    "bytes": 12441600,
+    "sha256": "8a417bc03752fe6539eccdbb2e8a3ca6ee67479ce83b04c6cb73b2857cf9971a"
+  },
+  "context": {
+    "path": "presentation/context.png",
+    "bytes": 115290,
+    "sha256": "4a2a1a9cb3c5b5b6b91663897ed302bd78bbed6b09df19fe72f8698af7c275d1"
+  },
+  "repeatExact": true,
+  "method": "The existing numeric source/mask sampler and source-preserving display faces, then existing radial snapshot. The normalized RGB map is losslessly encoded, matching the preparation map pixel values. No previous context pixels or old monochrome source used.",
+  "node": "v24.19.0",
+  "resources": {
+    "userCPUTime": 3305652,
+    "systemCPUTime": 251046,
+    "maxRSS": 583360,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 47216,
+    "majorPageFault": 349,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 0,
+    "ipcSent": 0,
+    "ipcReceived": 0,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 210,
+    "involuntaryContextSwitches": 15606
+  }
+}

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5df319caaa49d982dc8429680ff808b47852a8b2bc52d61d1b64bf6c55d4c401"
+    "sha256": "de530b82fae816e244b0f841885bcc675c1d2f837c41e477f35bf305c45cae66"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -443,7 +443,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b23a1f453de8a9588e5c323a31c8587bfac242b0fdcf1e75cefa66e78696854d",
+      "sha256": "0e0c328857567afd0addeed8485526dc531e6e6626705f713a9e1101e0e70ee5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -583,7 +583,7 @@
               "id": "normal",
               "label": "Visible color",
               "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
-              "title": "Visible color: NASA Blue Marble Next Generation with archival clouds",
+              "title": "Blue Marble Next Generation",
               "thumbnail": "/scenes/earth/earth-lens-normal.webp",
               "source": {
                 "id": "surface-observation"
@@ -595,7 +595,7 @@
               "id": "topography",
               "label": "Elevation",
               "description": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
-              "title": "Elevation: GEBCO_2026 land and seafloor heights",
+              "title": "GEBCO land and seafloor heights",
               "thumbnail": "/scenes/earth/earth-lens-topography.webp",
               "source": {
                 "id": "gebco-2026-elevation",
@@ -623,13 +623,13 @@
               "id": "night-lights",
               "label": "Night lights",
               "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
-              "title": "Night lights: NASA Black Marble 2016 global composite",
+              "title": "Black Marble night-light composite",
               "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
               "source": {
                 "id": "surface-observation"
               },
               "detail": "Nighttime",
-              "summary": "NASA Black Marble's 2016 night-light composite. It combines dates and does not show current lighting."
+              "summary": "Artificial lighting is combined from observations taken in 2016. The composite does not show present-day lighting."
             },
             {
               "id": "enso",
@@ -679,7 +679,7 @@
               "id": "cross-section",
               "label": "Cross section",
               "description": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
-              "title": "Cross section: GLAD-M35 mantle tomography",
+              "title": "GLAD-M35 mantle tomography",
               "thumbnail": "/scenes/earth/earth-view-interior.webp",
               "legend": {
                 "kind": "scale",
@@ -1760,8 +1760,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b23a1f453de8a9588e5c323a31c8587bfac242b0fdcf1e75cefa66e78696854d",
-      "bytes": 14444,
+      "sha256": "0e0c328857567afd0addeed8485526dc531e6e6626705f713a9e1101e0e70ee5",
+      "bytes": 14238,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

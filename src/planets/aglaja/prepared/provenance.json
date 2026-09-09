@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aad0736cbe4accf78bad7b250bc69804b69a8c154ed6ec74aea62a28c3f8db61"
+    "sha256": "9589494ffa9c29e8ce0b37e0813261edf89613029d4c90508c0850f89c6bd55a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5fc3d826dc744c1bedc1422a5da9889d17451a96345e1672650e15f28fe9b77c",
+      "sha256": "8e85c7a5e996337e3a2c2917711a96da187b4f62576d225e8696717247662e30",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 147.05 km effective diameter (catalog ±3.58 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 147.05 km effective diameter (catalog ±3.58 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/aglaja/aglaja-shape-thumbnail.webp",
               "surface": "aglaja-shape-surface@2x.webp",
               "poles": "aglaja-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 73.525 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 73.525 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/aglaja/aglaja-elevation-thumbnail.webp",
               "surface": "aglaja-elevation-surface@2x.webp",
               "poles": "aglaja-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5fc3d826dc744c1bedc1422a5da9889d17451a96345e1672650e15f28fe9b77c",
-      "bytes": 10629,
+      "sha256": "8e85c7a5e996337e3a2c2917711a96da187b4f62576d225e8696717247662e30",
+      "bytes": 10190,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

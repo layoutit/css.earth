@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e811cfbdb5c1399877cb7e888b572c5f4bf2bd22378639a653a3cc920d7ee48f"
+    "sha256": "4edeeeca9554f2110c049bcbcbfcf5037921052f2794ae7befe5aa6f1c891113"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1fd3de0b17a3da3486a8b0536696cc6129939c18eb3f33a398a267fc03b05175",
+      "sha256": "09f4cc39fae0907ef4cd1214292737e8ea6a07d66f5c2df451634cc01b5e0c15",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Published radar shape model",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The archive explicitly identifies this mesh as Alpha, the primary; Beta and Gamma are not modeled here. The adopted nominal solution is model 17, with ecliptic pole (336°, 22°). Many radar pole solutions remain plausible, so the nominal orientation does not establish a unique spin pole. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-thumbnail.webp",
               "surface": "asteroid-1994-cc-shape-surface@2x.webp",
               "poles": "asteroid-1994-cc-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows original model radius minus a 0.31 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-thumbnail.webp",
               "surface": "asteroid-1994-cc-elevation-surface@2x.webp",
               "poles": "asteroid-1994-cc-elevation-surface@2x.webp",
@@ -347,8 +347,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b0714ee28c0697b2c7f7a19eda860911f9b8b24c69aec031abcb8d94ce61bae4",
-      "bytes": 11585,
+      "sha256": "09f4cc39fae0907ef4cd1214292737e8ea6a07d66f5c2df451634cc01b5e0c15",
+      "bytes": 11026,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

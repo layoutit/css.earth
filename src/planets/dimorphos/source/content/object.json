@@ -54,7 +54,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown.",
-        "title": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown.",
+        "title": "SPC shape model v004",
         "thumbnail": "/scenes/dimorphos/dimorphos-shape-thumbnail.webp",
         "surface": "dimorphos-shape-surface@2x.webp",
         "poles": "dimorphos-shape-surface@2x.webp",
@@ -70,7 +70,7 @@
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments.",
-        "title": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/dimorphos/dimorphos-elevation-thumbnail.webp",
         "surface": "dimorphos-elevation-surface@2x.webp",
         "poles": "dimorphos-elevation-surface@2x.webp",
@@ -100,7 +100,7 @@
         "label": "Relative albedo",
         "detail": "DART surface brightness",
         "description": "Grayscale shows relative surface brightness from the DART v004 stereophotoclinometry model of the encounter-facing surface before impact. Values are modeled relative albedo, not absolute geometric albedo or a photograph. Facets with positive multi-image uncertainty cover about 31% of the source model area; the ordinary grid marks withheld coverage. Linear display scale: 0.45–1.30.",
-        "title": "Grayscale shows relative surface brightness from the DART v004 stereophotoclinometry model of the encounter-facing surface before impact. Values are modeled relative albedo, not absolute geometric albedo or a photograph. Facets with positive multi-image uncertainty cover about 31% of the source model area; the ordinary grid marks withheld coverage. Linear display scale: 0.45–1.30.",
+        "title": "SPC relative albedo model",
         "thumbnail": "/scenes/dimorphos/dimorphos-albedo-thumbnail.webp",
         "surface": "dimorphos-albedo-surface@2x.webp",
         "poles": "dimorphos-albedo-surface@2x.webp",
@@ -121,13 +121,14 @@
           "meta": "unitless · SPC relative brightness",
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
           "image": "/scenes/dimorphos/dimorphos-albedo-legend.webp"
-        }
+        },
+        "summary": "Grayscale shows modeled brightness before impact, not absolute albedo. Accepted facets cover about 31%; the grid marks the rest."
       },
       {
         "id": "slope",
         "label": "Slope",
         "description": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
-        "title": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+        "title": "Modeled surface slopes",
         "detail": "Released facet values",
         "thumbnail": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
         "surface": "dimorphos-slope-surface@2x.webp",

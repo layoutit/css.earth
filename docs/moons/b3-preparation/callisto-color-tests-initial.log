@@ -1,0 +1,38 @@
+✖ the actual retained Galileo-color atlas preserves original color landmarks and partial coverage (423.498208ms)
+✔ Callisto color source, frozen camera, generator and declared derivative have exact closure (107.43125ms)
+✔ independent Gazetteer landmarks constrain the accepted photo orientation without refitting (0.23125ms)
+✔ every derived texel obeys the 65-degree camera footprint and original opaque RGB contributors (292.426875ms)
+✔ the shared observation decoder honors this actual GeoTIFF footprint and geographic pixel centers (46.404917ms)
+✔ Callisto uses one shared scene, two sourced lenses and shared shadows (224.238916ms)
+✔ Callisto's prepared orbit surrounds Jupiter at its physical distance (0.249541ms)
+✔ source coordinates and explicit no-data agree with the actual retained atlas (668.913792ms)
+✔ runtime closure includes Callisto's parent image and canonical surface geometry (37.623625ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2344.726292
+
+✖ failing tests:
+
+test at tests/objects/unit/callisto/color-atlas.test.mjs:28:1
+✖ the actual retained Galileo-color atlas preserves original color landmarks and partial coverage (423.498208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - true
+  
+      at TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tests/objects/unit/callisto/color-atlas.test.mjs:48:50)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

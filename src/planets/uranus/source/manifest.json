@@ -291,8 +291,8 @@
     {
       "id": "uranus-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14539,
-      "expectedSha256": "001c0030b253758e06775dd5e07dd7730e0704b30f073dbcddafb580f5179d6a",
+      "expectedBytes": 14483,
+      "expectedSha256": "bc585a6133fb7151c1d5e32a7c06323ed86e9bf0934651f917273be49ab668b7",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",

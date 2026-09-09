@@ -1,0 +1,55 @@
+{
+  "createdAt": "2026-09-09T14:19:40.969320+00:00",
+  "focusedTests": {
+    "passed": 45,
+    "failed": 0,
+    "logs": [
+      {
+        "path": "output/tomography/final-focused.log",
+        "bytes": 4031,
+        "sha256": "f8ae2edd75af37e1f6c8248675442af4d1848e60a9f03df2be26cb926396ee4f"
+      },
+      {
+        "path": "output/tomography/mercury-transaction.log",
+        "bytes": 214,
+        "sha256": "683a8e0d1ebf4cc735b20dad2025e2c301f9a9bbf79b20f2e1885239bbe5e02f"
+      }
+    ]
+  },
+  "typechecks": {
+    "preparation": "pass",
+    "renderer": "pass"
+  },
+  "productionBuild": {
+    "pages": 301,
+    "status": "pass",
+    "nodeOptions": "--max-old-space-size=12288",
+    "log": {
+      "path": "output/tomography/production-build-final.log",
+      "bytes": 15523,
+      "sha256": "0b467c39a13cc1d31b305bb4523e7ac0eb12d8a897faf966acdc03ce3bef0576"
+    }
+  },
+  "sourceClosureAndProductionAssetAssembly": [
+    "mercury",
+    "venus",
+    "earth",
+    "mars",
+    "jupiter",
+    "saturn",
+    "uranus",
+    "neptune"
+  ],
+  "preparedLeafLayouts": "pass for all eight planets",
+  "runtimeOwnership": "pass for all eight planets",
+  "browserDatasetRuns": 58,
+  "browserInitialShellChecks": 8,
+  "productionNativeDrag": [
+    "earth",
+    "mercury",
+    "saturn"
+  ],
+  "physicalMobileTested": false,
+  "aggregateSuiteRerun": false,
+  "aggregateBoundary": "Earlier aggregate failures and default-heap limits are documented separately in ../baseline-failures.json; no claim that the aggregate suite is green."
+}

@@ -14,12 +14,14 @@ if (object && !scope) {
   const parent = object.classification === 'satellite' ? OBJECTS.find(body => body.id === parentId) : null;
   if (parent) crumbs.push({ label: parent.name, href: parent.route });
 }
+const visibleCrumbs = crumbs.slice(-2);
 ---
 
 <nav class="planet-breadcrumbs" aria-label="Breadcrumb">
   <ol>
-    {crumbs.map((crumb, index) => <li>
-      {scope && index === crumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
+    {visibleCrumbs.map((crumb, index) => <li>
+      {index > 0 && <span class="planet-breadcrumb-separator" aria-hidden="true">&raquo;</span>}
+      {scope && index === visibleCrumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
         : crumb.href ? <a href={crumb.href}>{crumb.label}</a>
         : <button type="button" data-object-query={crumb.query}>{crumb.label}</button>}
     </li>)}

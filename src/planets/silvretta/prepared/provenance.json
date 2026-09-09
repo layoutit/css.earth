@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d7275521fc195b0206868b4f5cb741c1f91f8e2de99219ad09af77ef4962c49"
+    "sha256": "800f6d0f96fdb89f91eaadd533a19b3160a36fb7d958e859ed1dfeb4f969321a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ae962a8d0203bd1806b3a760c9a4f72f4e8c4d790ed4e1da6351ab9648ef1c42",
+      "sha256": "b3238ee838a00d04b7aa5c4c48f12cb60e4a39bda0d13c21be9b1a9bf74dd515",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 26.393 ± 0.439 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 17.9 km. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Thermal diameter 26.393 ± 0.439 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 17.9 km. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/silvretta/silvretta-shape-thumbnail.webp",
               "surface": "silvretta-shape-surface@2x.webp",
               "poles": "silvretta-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 13.197 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 13.197 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/silvretta/silvretta-elevation-thumbnail.webp",
               "surface": "silvretta-elevation-surface@2x.webp",
               "poles": "silvretta-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "ae962a8d0203bd1806b3a760c9a4f72f4e8c4d790ed4e1da6351ab9648ef1c42",
+      "sha256": "b3238ee838a00d04b7aa5c4c48f12cb60e4a39bda0d13c21be9b1a9bf74dd515",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9869,
+      "bytes": 9515,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

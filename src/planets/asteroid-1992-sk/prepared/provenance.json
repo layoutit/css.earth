@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "897edaf35e230d8a5d77f194f6ee94a88466592ac1c4bdea9d1023b9586cd819"
+    "sha256": "f4a32c466e82700b2ad8db99d36774a2a51873dd338c72692215b4fcd943855a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "00fafce9af99ba0a3546cd0e90d67f8351a2a749faee7c9fa736a0dbe9ec1e6b",
+      "sha256": "2a9da5aeb9ee98e7efb7eec9687fb492caa56e70805da28d3f95ee2c98bd5f4a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Published radar shape model",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-thumbnail.webp",
               "surface": "asteroid-1992-sk-shape-surface@2x.webp",
               "poles": "asteroid-1992-sk-shape-surface@2x.webp",
@@ -219,7 +219,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows source-model radius minus a 0.5 km reference sphere, transferred from the closest point on the original triangular surface. It includes overall shape and is not gravitational height or an independent topographic measurement. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied. Ambiguous or out-of-range samples retain the shared grid.",
-              "title": "Color shows the radius of the closest point on the original triangular source surface minus a 0.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Colors follow the full source surface within the authored simplification-distance limit; ambiguous or out-of-range samples retain the shared missing-data grid. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-thumbnail.webp",
               "surface": "asteroid-1992-sk-elevation-surface@2x.webp",
               "poles": "asteroid-1992-sk-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "00fafce9af99ba0a3546cd0e90d67f8351a2a749faee7c9fa736a0dbe9ec1e6b",
-      "bytes": 10645,
+      "sha256": "2a9da5aeb9ee98e7efb7eec9687fb492caa56e70805da28d3f95ee2c98bd5f4a",
+      "bytes": 9480,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

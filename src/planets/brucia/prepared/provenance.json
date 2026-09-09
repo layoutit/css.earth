@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4524712c102a2f7494745c94d6edb11cc2f1157d2fe6ef8dab80754d3a34096f"
+    "sha256": "acc333ce8fe255a3ab72d0b1f466c6440cd3eb59cac7250156ec4c9a025d17cd"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "607d85064b692df3db64c6cc2325dd7ce6cb51ea9711557792233e2b63f6c880",
+      "sha256": "e4b029142c8e95bdbd493c07fcbd7f8f35d027d23f819e6399efc5e70268219a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 37.29 ± 0.76 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Thermal diameter 37.29 ± 0.76 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/brucia/brucia-shape-thumbnail.webp",
               "surface": "brucia-shape-surface@2x.webp",
               "poles": "brucia-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 18.645 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 18.645 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/brucia/brucia-elevation-thumbnail.webp",
               "surface": "brucia-elevation-surface@2x.webp",
               "poles": "brucia-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "607d85064b692df3db64c6cc2325dd7ce6cb51ea9711557792233e2b63f6c880",
+      "sha256": "e4b029142c8e95bdbd493c07fcbd7f8f35d027d23f819e6399efc5e70268219a",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9091,
+      "bytes": 8763,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

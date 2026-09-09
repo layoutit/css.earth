@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9a4d3ddfd7d37504bbb6a478bd08ce26439ef29201e82b2fce9356dfcb8b493"
+    "sha256": "9f206fb4a3c1392e77867ab8d8f9fcd90c5f039260db794a0aa9fe70689117b8"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -176,7 +176,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "975584a72c38c0e8ced47a5c3ce94a6ecc2150a711cf6a83e0b33f3ffb6e87c7",
+      "sha256": "90d43458850500f299ecb4b928a5325de1dd3d3cf62eb119f81a9b76b13dcc8f",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "moon",
@@ -266,9 +266,9 @@
                 "label": "Visible color",
                 "thumbnailUrl": "/scenes/moon/moon-surface-thumbnail.webp",
                 "description": "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display.",
-                "title": "Visible color: NASA LRO/LROC visible-colour global surface mosaic",
+                "title": "CGI Moon Kit surface mosaic",
                 "detail": "Global mosaic",
-                "summary": "LROC imagery from NASA's CGI Moon Kit. Small gaps are filled; monochrome replaces missing polar color."
+                "summary": "Surface detail comes from LROC imagery. Small gaps are filled; monochrome replaces unavailable color near the poles."
               },
               {
                 "id": "topography",
@@ -289,9 +289,9 @@
                   "meta": "km",
                   "sourceUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
                 },
-                "title": "Elevation: LRO LOLA LDEM16 numeric heights",
+                "title": "LOLA LDEM16 elevation model",
                 "detail": "Numeric elevation",
-                "summary": "LOLA elevation relative to a 1,737.4 km sphere. Color and shading show relief from archival measurements."
+                "summary": "Colors show height above or below a 1,737.4 km sphere. Shading reveals slopes in the archived laser-altimeter measurements."
               },
               {
                 "id": "crust",
@@ -373,9 +373,9 @@
                   ],
                   "sourceUrl": "https://svs.gsfc.nasa.gov/4014/"
                 },
-                "title": "Crust: NASA GRAIL crustal-thickness map with shaded relief",
+                "title": "Crustal-thickness model",
                 "detail": "Thickness",
-                "summary": "Crust thickness from GRAIL gravity and topography. It depends on assumed densities; this is a model."
+                "summary": "Thickness is inferred from gravity and topography. The result depends on assumed rock densities, not direct underground imaging."
               },
               {
                 "id": "rock-abundance",
@@ -600,6 +600,12 @@
       ],
       "acquisition": "Exact public PDS binary download; original numeric samples, not a rendered press image",
       "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "capture": {
+        "spacecraftIds": [
+          "lro"
+        ],
+        "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+      },
       "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
       "bytes": 33177600,
       "dependencies": [],
@@ -684,8 +690,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "975584a72c38c0e8ced47a5c3ce94a6ecc2150a711cf6a83e0b33f3ffb6e87c7",
-      "bytes": 14706,
+      "sha256": "90d43458850500f299ecb4b928a5325de1dd3d3cf62eb119f81a9b76b13dcc8f",
+      "bytes": 14678,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -701,7 +707,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "NASA LRO/LROC visible-colour global surface mosaic"
+        "NASA LRO/LROC visible-colour global surface mosaic",
+        "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display."
       ],
       "lensIds": [
         "surface"
@@ -757,7 +764,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere"
+        "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
+        "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
       ],
       "lensIds": [
         "topography"
@@ -813,7 +821,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "NASA GRAIL crustal-thickness map with shaded relief"
+        "NASA GRAIL crustal-thickness map with shaded relief",
+        "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust."
       ],
       "lensIds": [
         "crust"
@@ -869,7 +878,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south"
+        "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south",
+        "Surface area covered by rocks, inferred from nighttime Diviner thermal measurements in 2009–2010. Color spans 0–2%; values above 2% share the brightest color. Patterned areas are outside ±60° coverage, missing, or physically invalid. This is a thermal model, not a photograph or a count of individual boulders."
       ],
       "lensIds": [
         "rock-abundance"

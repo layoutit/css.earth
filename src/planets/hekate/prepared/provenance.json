@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2390c6ed8dbb07a502518c3716749120713865bf95eb2e211a2daaa7971d2b6c"
+    "sha256": "f2622c006ab5db4d0081012ddcc3a65a2f449264094f9d145647c95907233369"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3232fd70346e54c0e9e13a4bd03f9667be1353e9bcc429c46498d9ce7d579047",
+      "sha256": "484f8afe4b81a4f0a0f2d3c6f75d26e4c82c39440e0e69cdd2e8a722592e4955",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 3088, version 2019-06-24, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase. The source admits an alternative pole solution; this view uses model 3088.",
+              "title": "DAMIT model 3088",
               "thumbnail": "/scenes/hekate/hekate-shape-thumbnail.webp",
               "surface": "hekate-shape-surface@2x.webp",
               "poles": "hekate-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 43.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/hekate/hekate-elevation-thumbnail.webp",
               "surface": "hekate-elevation-surface@2x.webp",
               "poles": "hekate-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b562615398e84561167faeb1fed81f1e29ea71e5c7c0c34dd65d8aebb094d7a3",
-      "bytes": 8330,
+      "sha256": "484f8afe4b81a4f0a0f2d3c6f75d26e4c82c39440e0e69cdd2e8a722592e4955",
+      "bytes": 7844,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

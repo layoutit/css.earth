@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0e572dc1cc784210cd5ba3500bc767d232b9f35e2144a175e444b1a02832a4a7"
+    "sha256": "16548ca37e44d8904b3d4e023ea0574da7560a20f5d5983e5f931849977fa846"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4e1406b20fbabf422e0403e120dfc3d35087df87398f11b21aaa4b804c217b4f",
+      "sha256": "c5c612ca167572369c08cf101f22949fc435306903c13d7d4b9c1741532c974e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 16313, version 2025-07-17, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase. Two published pole solutions remain; this view uses model 16313.",
+              "title": "DAMIT model 16313",
               "thumbnail": "/scenes/thule/thule-shape-thumbnail.webp",
               "surface": "thule-shape-surface@2x.webp",
               "poles": "thule-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 58 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/thule/thule-elevation-thumbnail.webp",
               "surface": "thule-elevation-surface@2x.webp",
               "poles": "thule-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b2bc725dbcae78205ae9a7ca0cd5e7953d5d6f9a882e2d67022c5e0818f572a3",
-      "bytes": 6832,
+      "sha256": "c5c612ca167572369c08cf101f22949fc435306903c13d7d4b9c1741532c974e",
+      "bytes": 6358,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

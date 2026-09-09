@@ -16,6 +16,49 @@ latitude, reference mean and final texture sampling. Numeric subset extraction
 reproduced byte for byte from the upstream NetCDF. The tests also check missing
 depths, exterior registration, the palette and stale-cut rejection.
 
+## Final tomography validation
+
+This version integrates `main` at `ef2d27b2d`, including the newer dataset cards,
+and preserves the cross-section repairs. The images below come from the final
+301-page production build, after the integration.
+
+![Earth mantle tomography after a native drag](evidence/planet-cross-sections/tomography/earth-production-drag.png)
+
+- **58 dataset interactions across all eight planets at DPR 1 and 2**, plus eight
+  initial-shell checks, passed. Every dataset was selected through its real
+  button and dragged; all three cutaways also passed the Shadows image-change
+  check. [Final matrix](evidence/planet-cross-sections/tomography/planet-matrix.json).
+- **45 focused tests passed**, including independent NetCDF value/texel anchors,
+  exterior coordinate registration, numeric/source lineage, retained camera
+  behavior, polar caps and Mercury's lighting transaction. Both typechecks and
+  the 301-page production build passed.
+- All eight planets passed production asset assembly, source closure, prepared
+  leaf-layout census and runtime-ownership checks.
+  [Contract receipt](evidence/planet-cross-sections/tomography/contracts.json).
+- Native production drags retained every original cutaway geometry leaf for
+  Earth, Mercury and Saturn, with no page errors.
+  [Production receipt](evidence/planet-cross-sections/tomography/production.json),
+  [Earth entry](evidence/planet-cross-sections/tomography/earth-production.png),
+  [Mercury](evidence/planet-cross-sections/tomography/mercury-production.png),
+  [Saturn](evidence/planet-cross-sections/tomography/saturn-production.png).
+- The mantle shell and section use **WebP quality 90**; polar alpha remains
+  lossless. The final section texture is **111,944 bytes**. Tomography adds
+  **151,525 bytes** to the image inventory compared with the earlier repair
+  head (`905cb1064`), not to every page's initial transfer. Five changed files
+  totaling 298,921 bytes were published to immutable URLs; a fresh install
+  downloaded and verified all 161 Earth assets, followed by successful HEAD
+  checks for those five files.
+  [Delivery](evidence/planet-cross-sections/tomography/delivery.json),
+  [compression comparison](evidence/planet-cross-sections/tomography/encoding.json).
+
+[Validation summary](evidence/planet-cross-sections/tomography/validation.json)
+and [final fingerprints](evidence/planet-cross-sections/tomography/fingerprints.json)
+bind these checks to the implementation and prepared data. The browser evidence
+covers desktop Chromium at two pixel densities; physical mobile hardware and a
+new aggregate-suite run are outside this evidence.
+
+## Earlier repair evidence (`905cb1064`)
+
 The earlier eight-planet repair evidence below predates tomography. The final
 tomography validation and integrated screenshots are recorded separately so the
 old schematic images are not presented as evidence of the new data textures.

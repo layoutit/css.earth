@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "55b9eac5ab3f781d23230f97ff004d5992240005b3b12c1a718093ca0e66d74d"
+    "sha256": "dd3fdb4d3f07814e0a687b4beaff1a6c49184fccef9492c9cfd7157a06fc0ed5"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0521854babea86954a3dfa5f548649793d28d889c66a92fe88a8694933b6c1a4",
+      "sha256": "e04b05ef75bc8796084f0dbd322666df052bd094e4f8e403b22c1a444c839a57",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 67.986 ± 1.091 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 82.2 km. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Thermal diameter 67.986 ± 1.091 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. Another thermal fit gives 82.2 km. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/rusthawelia/rusthawelia-shape-thumbnail.webp",
               "surface": "rusthawelia-shape-surface@2x.webp",
               "poles": "rusthawelia-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 33.993 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 33.993 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/rusthawelia/rusthawelia-elevation-thumbnail.webp",
               "surface": "rusthawelia-elevation-surface@2x.webp",
               "poles": "rusthawelia-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "0521854babea86954a3dfa5f548649793d28d889c66a92fe88a8694933b6c1a4",
+      "sha256": "e04b05ef75bc8796084f0dbd322666df052bd094e4f8e403b22c1a444c839a57",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11857,
+      "bytes": 11484,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

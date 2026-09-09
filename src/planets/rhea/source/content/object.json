@@ -95,20 +95,21 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-        "title": "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "title": "Global image mosaic",
         "thumbnail": "/scenes/rhea/rhea-normal-thumbnail.webp",
         "surface": "rhea-normal-surface@2x.webp",
         "poles": "rhea-normal-poles@2x.webp",
         "source": {
           "id": "cassini-voyager-2012-rhea",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Surface detail and photographed shadows vary across the mosaic. Gray grid marks gaps; the map follows a simplified spacecraft shape model."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-        "title": "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "title": "Enhanced-color composite",
         "thumbnail": "/scenes/rhea/rhea-enhanced-thumbnail.webp",
         "surface": "rhea-enhanced-surface@2x.webp",
         "poles": "rhea-enhanced-poles@2x.webp",
@@ -116,13 +117,13 @@
           "id": "cassini-iss-2014-rhea-color",
           "path": "../manifest.json"
         },
-        "summary": "Cassini enhanced color from 2014. Hemisphere differences, shadows and seams remain in the composite."
+        "summary": "Colors extend beyond human vision and show real hemisphere differences. Photographed shading and source seams remain."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
-        "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
+        "title": "SPC terrain model",
         "thumbnail": "/scenes/rhea/rhea-elevation-thumbnail.webp",
         "surface": "rhea-elevation-surface@2x.webp",
         "poles": "rhea-elevation-poles@2x.webp",
@@ -149,7 +150,7 @@
         "id": "relative-albedo",
         "label": "Relative albedo",
         "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
-        "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "title": "SPC relative brightness model",
         "thumbnail": "/scenes/rhea/rhea-relative-albedo-thumbnail.webp",
         "surface": "rhea-relative-albedo-surface@2x.webp",
         "poles": "rhea-relative-albedo-poles@2x.webp",
@@ -176,7 +177,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
-        "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+        "title": "SPC shape model",
         "thumbnail": "/scenes/rhea/rhea-shape-thumbnail.webp",
         "surface": "rhea-shape-surface@2x.webp",
         "poles": "rhea-shape-poles@2x.webp",

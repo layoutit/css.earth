@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82507bc3f81d2a18312f6afeb4bea4ed401e21d02086091c7d99c431c9ce7ec4"
+    "sha256": "1b9ebc0317fad27b3013ad62d4708e308db41bfe41a79836babd4db945acf790"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e9a1b60ed50331d3f6a2ef392a42956112a5e02788507b22cb1fe83a894f3c4e",
+      "sha256": "b01915d60fefb3054340a30b12e2af47acd251c7ce4c440bd893970eea19d578",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -159,7 +159,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
-              "title": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
+              "title": "Convex-model envelope approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/siarnaq/siarnaq-model-thumbnail.webp",
               "surface": "siarnaq-model-surface@2x.webp",
@@ -292,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e9a1b60ed50331d3f6a2ef392a42956112a5e02788507b22cb1fe83a894f3c4e",
-      "bytes": 3258,
+      "sha256": "b01915d60fefb3054340a30b12e2af47acd251c7ce4c440bd893970eea19d578",
+      "bytes": 3092,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7f2c6cf8512a3575ad7430f0a1b48bac7a0686a148e7b801ba5651d0f095d669"
+    "sha256": "b33aeb6a625a4598f57bfd45344f8764c1f9bb4d4efdba4ba01ef6ccf3cf7e80"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9f5d08a2db0d967db279a15bf2abc118d851553a8f696bb1854dee0615cdcdbb",
+      "sha256": "c6935b2d6c3ca294946425f23b4136b6b5aa94d83763e375e39600c9a647d1d7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 14.403 ± 0.394 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. The shape reconstruction assumes rotation around one principal axis; the incomplete tumbling solution is not propagated.",
-              "title": "Thermal diameter 14.403 ± 0.394 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. The shape reconstruction assumes rotation around one principal axis; the incomplete tumbling solution is not propagated.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/gryphia/gryphia-shape-thumbnail.webp",
               "surface": "gryphia-shape-surface@2x.webp",
               "poles": "gryphia-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 7.2015 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height. The orientation is fixed and illustrative.",
-              "title": "Radius on the shape model minus a 7.2015 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height. The orientation is fixed and illustrative.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/gryphia/gryphia-elevation-thumbnail.webp",
               "surface": "gryphia-elevation-surface@2x.webp",
               "poles": "gryphia-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "9f5d08a2db0d967db279a15bf2abc118d851553a8f696bb1854dee0615cdcdbb",
+      "sha256": "c6935b2d6c3ca294946425f23b4136b6b5aa94d83763e375e39600c9a647d1d7",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9623,
+      "bytes": 9210,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

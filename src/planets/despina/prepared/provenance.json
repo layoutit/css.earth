@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "853795efe8389ecba59aaa3a81e5fa6d0bc9ab0648b93698e8b424eaa73ddbce"
+    "sha256": "24a784af001e7225087cf7100852ee56b465ba58f82782cd6a50c304237b0fb5"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ef55c9def5200e09c7aee244a1cdb08564bb750db1c7f89cb636176119e85398",
+      "sha256": "1cc04de92923d2d05d5844d2f62d01affc90f29501fbd2be282fc8b2d1b63431",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
-              "title": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
+              "title": "Approximate shape model",
               "detail": "Measured axes",
               "thumbnail": "/scenes/despina/despina-model-thumbnail.webp",
               "surface": "despina-model-surface@2x.webp",
@@ -302,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "08ba7c446f9e0915340ae8fa081e865104d6fe36b6771ef77206077e0a566415",
-      "bytes": 3930,
+      "sha256": "1cc04de92923d2d05d5844d2f62d01affc90f29501fbd2be282fc8b2d1b63431",
+      "bytes": 3712,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

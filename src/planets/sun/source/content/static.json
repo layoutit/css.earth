@@ -103,9 +103,9 @@
           "label": "Photosphere",
           "thumbnailUrl": "/scenes/sun/sun-lens-photosphere.webp",
           "description": "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments.",
-          "title": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
+          "title": "HMI continuum mosaic CR2311",
           "detail": "Continuum",
-          "summary": "SDO visible-light mosaic, May–June 2026. Color and brightness are adjusted; missing polar coverage is filled."
+          "summary": "Visible-light observations span May–June 2026. Color and brightness are adjusted; missing polar coverage is filled."
         },
         {
           "id": "magnetic",
@@ -189,9 +189,9 @@
             "meta": "G",
             "sourceUrl": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
           },
-          "title": "False-colour NASA SDO/HMI CR2311 full-surface radial magnetic-field map",
+          "title": "HMI radial magnetic field CR2311",
           "detail": "Radial field",
-          "summary": "SDO radial magnetic field, May–June 2026. A nonlinear color scale shows data combined from different dates."
+          "summary": "Colors show the radial field on a nonlinear scale. Measurements span May–June 2026 rather than a single instant."
         },
         {
           "id": "chromosphere",
@@ -274,9 +274,9 @@
             "meta": "304 Å",
             "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
           },
-          "title": "NASA SDO AIA 304 angstrom CR2311 full-surface synoptic map",
+          "title": "AIA 304 Å synoptic map CR2311",
           "detail": "304 Å",
-          "summary": "SDO 304 Å mosaic, May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May."
+          "summary": "The 304 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May."
         },
         {
           "id": "corona",
@@ -359,9 +359,9 @@
             "meta": "171 Å",
             "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
           },
-          "title": "NASA SDO AIA 171 angstrom CR2311 full-surface synoptic map",
+          "title": "AIA 171 Å synoptic map CR2311",
           "detail": "171 Å",
-          "summary": "SDO 171 Å mosaic, May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May."
+          "summary": "The 171 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May."
         }
       ]
     },

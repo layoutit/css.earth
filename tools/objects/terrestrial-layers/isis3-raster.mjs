@@ -16,6 +16,29 @@ export function decodeIsis3Raster(input, grid) {
   const width = number(dimensions, 'Samples'), height = number(dimensions, 'Lines');
   const origin = [number(mapping, 'UpperLeftCornerX'), number(mapping, 'UpperLeftCornerY')];
   const resolution = number(mapping, 'PixelResolution');
+  // Some published global cubes omit both longitude keywords. This explicit
+  // opt-in verifies their native pixel footprint, including sub-pixel padding;
+  // longitudeRange still denotes the geographic sampling domain, not a crop.
+  if (grid.allowMissingLongitudeBounds !== undefined && typeof grid.allowMissingLongitudeBounds !== 'boolean') {
+    throw new TypeError('ISIS3 allowMissingLongitudeBounds must be boolean.');
+  }
+  const minimumLongitude = value(mapping, 'MinimumLongitude');
+  const maximumLongitude = value(mapping, 'MaximumLongitude');
+  let longitudeBoundsMatch = Number(minimumLongitude) === grid.longitudeRange?.[0] &&
+    Number(maximumLongitude) === grid.longitudeRange?.[1];
+  if (grid.allowMissingLongitudeBounds === true && minimumLongitude === undefined && maximumLongitude === undefined) {
+    const degreesPerMeter = 180 / (Math.PI * number(mapping, 'EquatorialRadius'));
+    const left = number(mapping, 'CenterLongitude') + origin[0] * degreesPerMeter;
+    const right = number(mapping, 'CenterLongitude') + (origin[0] + width * resolution) * degreesPerMeter;
+    const pixelDegrees = resolution * degreesPerMeter;
+    // Only demonstrated global 0..360 products: no missing partial-map bounds,
+    // uncovered edge, extra full pixel, or broad inferred longitude convention.
+    const epsilon = 1e-9;
+    longitudeBoundsMatch = grid.longitudeRange?.[0] === 0 && grid.longitudeRange?.[1] === 360 &&
+      Number.isFinite(pixelDegrees) && pixelDegrees > 0 && pixelDegrees <= 1 + epsilon &&
+      left <= epsilon && left > -pixelDegrees - epsilon &&
+      right >= 360 - epsilon && right < 360 + pixelDegrees + epsilon;
+  }
   if (width !== grid.width || height !== grid.height || number(dimensions, 'Bands') !== 1 ||
       value(pixels, 'Type') !== 'Real' || value(pixels, 'ByteOrder') !== 'Lsb' ||
       number(pixels, 'Base') !== 0 || number(pixels, 'Multiplier') !== 1 ||
@@ -23,8 +46,7 @@ export function decodeIsis3Raster(input, grid) {
       value(mapping, 'LatitudeType') !== 'Planetocentric' || value(mapping, 'LongitudeDirection') !== 'PositiveEast' ||
       value(mapping, 'TargetName') !== grid.targetName ||
       number(mapping, 'LongitudeDomain') !== 360 ||
-      number(mapping, 'MinimumLongitude') !== grid.longitudeRange?.[0] ||
-      number(mapping, 'MaximumLongitude') !== grid.longitudeRange?.[1] ||
+      !longitudeBoundsMatch ||
       number(mapping, 'CenterLongitude') !== grid.centerLongitude ||
       number(mapping, 'EquatorialRadius') !== grid.referenceRadiusMeters ||
       number(mapping, 'PolarRadius') !== grid.polarRadiusMeters ||

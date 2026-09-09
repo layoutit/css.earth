@@ -51,7 +51,7 @@
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive\u2019s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
+      "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -328,8 +328,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4601,
-      "expectedSha256": "f80e3fbb9cc8d39f8c42e74bb9a0f60329e84f78db1a56af0f75895edf9d61e9",
+      "expectedBytes": 4470,
+      "expectedSha256": "02007217747b2a1e1af5deee000945cb4189afa427cc2141cc75f8143df57f3c",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2d89ce5f7e46ce193fe177dfdd6e1ee53cd32eb8ffc9bf9432a060f29cabf9af"
+    "sha256": "4543a0a74b07d3d8b3ce597033cb17fb1bc7eeb0ff2ae51ab366ac6023b53524"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -202,7 +202,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bd94c14b7fb9655863ac21153b0131598613d5cd315e5a2b579f3df9b84dc0fb",
+      "sha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -260,20 +260,21 @@
               "label": "AMICA mosaic",
               "detail": "Hayabusa observations",
               "description": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
-              "title": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
+              "title": "AMICA v-band mosaic",
               "thumbnail": "/scenes/itokawa/itokawa-amica-thumbnail.webp",
               "surface": "itokawa-amica-surface@2x.webp",
               "poles": "itokawa-amica-surface@2x.webp",
               "source": {
                 "id": "amica-sep24-path",
                 "path": "../manifest.json"
-              }
+              },
+              "summary": "Brightness is corrected and matched across three images. Shadows and seams remain; the grid marks gaps and rejected coverage."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows radius minus a 165 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
-              "title": "Color shows radius minus a 165 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/itokawa/itokawa-elevation-thumbnail.webp",
               "surface": "itokawa-elevation-surface@2x.webp",
               "poles": "itokawa-elevation-surface@2x.webp",
@@ -656,8 +657,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2fd94e2c803dbffb8545f970f61b4858bfabcf7a7c9734b06bd2b98dbfaa0dc7",
-      "bytes": 10281,
+      "sha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275",
+      "bytes": 9583,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

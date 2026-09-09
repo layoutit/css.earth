@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
-        "title": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+        "title": "Approximate shape model",
         "detail": "Measured axes",
         "thumbnail": "/scenes/thalassa/thalassa-model-thumbnail.webp",
         "surface": "thalassa-model-surface@2x.webp",

@@ -4,18 +4,18 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**B1 is merged; B2 is [draft PR #62](https://github.com/layoutit/cssEarth/pull/62).** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B2–B4 counts remain planning targets until their selected sources and implementations qualify.
+**B1 and [B2 PR #62](https://github.com/layoutit/cssEarth/pull/62) are merged; [B3 draft PR #67](https://github.com/layoutit/cssEarth/pull/67) covers the approved six-moon scope after all 12 source reviews.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B3–B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
 | [B1 — Expand the moon roster by 26](#b1) | 26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461. | 26 bodies |
 | [B2 — Add scientific surfaces and terrain to 13 moons](#b2) | 13 existing worlds gain a substantive scientific layer or source-backed geometry improvement. | 13 bodies |
-| [B3 — Complete spacecraft imagery and geologic mapping](#b3) | Two prospective new imaged moons, eight existing observation/registration improvements, and two carried-forward geologic maps. | 12 bodies |
+| [B3 — Spacecraft color and scientific maps](#b3) | Six new views and three improved views; six researched targets carried forward. | 6 delivered + 6 carried |
 | [B4 — Add measured light curves and spectra across nine existing moons](#b4) | A complete prepared observation-chart capability used by nine existing moon packages. | 9 bodies |
 
-B1 added **22 benchmark moons**: 18 Saturn and four Uranus. Merged benchmark coverage is **90/461 (19.5%)**; four additional companions bring the total standalone moon count to **95**. B3 could subsequently add two further asteroid moons. The 461-body denominator is unchanged.
+B1 added **22 benchmark moons**: 18 Saturn and four Uranus. Merged benchmark coverage is **90/461 (19.5%)**; four additional companions bring the total standalone moon count to **95**. The carried Dactyl/Selam research could support two future scenes, but neither is part of this delivery. The 461-body denominator is unchanged.
 
-These four batches account for **all 32 identified existing-scene improvements**, all **26 physical-model candidates**, and **two spacecraft-imaged observation candidates**. The other 39 observation candidates retain their source-research queue; 348 orbit-context rows and 37 retain-existing rows remain accounted for without a new implementation commitment.
+The four batches and B3 carry-forward queue account for **all 32 identified existing-scene improvements**, all **26 physical-model candidates**, and **two spacecraft-imaged observation candidates**. The other 39 observation candidates retain their source-research queue; 348 orbit-context rows and 37 retain-existing rows remain accounted for without a new implementation commitment.
 
 <a id="b1"></a>
 
@@ -37,7 +37,7 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 ## B2 — Add scientific surfaces and terrain to 13 moons
 
-**State:** implementation; all 13 body preparations complete; browser and aggregate qualification in progress · **Owner:** Moons
+**State:** [merged PR #62](https://github.com/layoutit/cssEarth/pull/62), 2026-09-09 · **Owner:** Moons
 
 The user approved the 13-body delivery, carrying Titania and Miranda into B3.
 
@@ -55,21 +55,19 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 <a id="b3"></a>
 
-## B3 — Complete spacecraft imagery and geologic mapping
+## B3 — Spacecraft color and scientific maps
 
-Titania and Miranda moved here from B2 by explicit user approval. Their exact GIS releases remain inaccessible; release access and georeferencing must close before implementation.
+**State:** [draft PR #67](https://github.com/layoutit/cssEarth/pull/67) · **Owner:** Moons
 
-**State:** planned · **Owner:** Moons
+**Bodies:** Callisto, Hyperion, Phoebe, Proteus, Titania, Miranda.
 
-**Bodies:** Dactyl, Selam, Callisto, Thebe, Hyperion, Phoebe, Aegaeon, Proteus, Nix, Hydra, Titania, Miranda.
+**User-visible outcome.** Six new selectable views and three improved existing views. Titania and Miranda's exact GIS releases were recovered and registered, completing the work carried from B2.
 
-**User-visible outcome.** Two prospective new imaged moons, eight existing observation/registration improvements, and two carried-forward geologic maps.
+**Complete delivery.** Galileo processed color for Callisto; a close-image contribution to Hyperion's controlled mosaic; Phoebe's paired 2023 shape/albedo/height and coverage products; Voyager filter color for Proteus; and categorical geology for Titania and Miranda. Shared preparation preserves source masks, numeric sampling and regional camera focus through the existing object contract.
 
-**Complete delivery.** Deliver the observed views and all required camera/attitude, photometric, visibility and coverage preparation. Include source-frame comparisons and holdout registration evidence across the cohort. Any necessary shared registration improvements ship with these complete uses.
+**Evidence.** All six pass 23 body tests, 18 source/runtime-closure checks, 34 isolated Chrome runs covering 17 views at DPR1/2, and a fresh installation of 228 immutable assets with zero reuse. Full build/renderer qualification remains incomplete under resource limits; the [delivery report](b3-preparation/final/DELIVERY.md) separates these limits from the selected moon results.
 
-**Source closure before implementation.** This batch carries substantial research risk: several fitted attitudes, original calibrated frames or numeric mapping releases remain unresolved. Resolve the target-specific blocker in the review before opening the implementation PR. A new full-disk photograph may support a dated observation view without becoming a global texture.
-
-**Acceptance.** Two new scene claims require qualified geometry as well as real images. Each existing body gains a defensible observation improvement; photographed lighting, unseen terrain, source sampling and temporal differences remain clear. The full cohort is the planning target, with any scope change recorded explicitly.
+**Approved carry-forward.** Dactyl, Selam, Thebe, Aegaeon, Nix and Hydra retain their [source dispositions](B3-SPACECRAFT-MAPPING.md). Their original research is preserved. No new scene, unsupported footprint or unique registration is claimed for them.
 
 <a id="b4"></a>
 

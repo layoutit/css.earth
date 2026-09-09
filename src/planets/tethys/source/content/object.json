@@ -95,7 +95,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-        "title": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "title": "Global image mosaic",
         "thumbnail": "/scenes/tethys/tethys-normal-thumbnail.webp",
         "surface": "tethys-normal-surface@2x.webp",
         "poles": "tethys-normal-poles@2x.webp",
@@ -103,13 +103,13 @@
           "id": "cassini-iss-2012-tethys",
           "path": "../manifest.json"
         },
-        "summary": "Cassini's 2012 mosaic at 293 m per source pixel. Shadows and uneven detail remain; gray grid: no source data."
+        "summary": "Source pixels span 293 m in the 2012 mosaic. Shadows and uneven detail remain; the gray grid marks missing observations."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-        "title": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "title": "Enhanced-color composite",
         "thumbnail": "/scenes/tethys/tethys-enhanced-thumbnail.webp",
         "surface": "tethys-enhanced-surface@2x.webp",
         "poles": "tethys-enhanced-poles@2x.webp",
@@ -117,13 +117,13 @@
           "id": "cassini-iss-2014-tethys-color",
           "path": "../manifest.json"
         },
-        "summary": "Cassini infrared, green and ultraviolet images in enhanced color. Detail varies; shadows and source seams remain."
+        "summary": "Infrared, green and ultraviolet bands reveal colors beyond human vision. Detail varies; photographed shadows and seams remain."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
-        "title": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
+        "title": "SPC terrain model",
         "thumbnail": "/scenes/tethys/tethys-elevation-thumbnail.webp",
         "surface": "tethys-elevation-surface@2x.webp",
         "poles": "tethys-elevation-poles@2x.webp",
@@ -150,7 +150,7 @@
         "id": "relative-albedo",
         "label": "Relative albedo",
         "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
-        "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "title": "SPC relative brightness model",
         "thumbnail": "/scenes/tethys/tethys-relative-albedo-thumbnail.webp",
         "surface": "tethys-relative-albedo-surface@2x.webp",
         "poles": "tethys-relative-albedo-poles@2x.webp",
@@ -177,7 +177,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
-        "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+        "title": "SPC shape model",
         "thumbnail": "/scenes/tethys/tethys-shape-thumbnail.webp",
         "surface": "tethys-shape-surface@2x.webp",
         "poles": "tethys-shape-poles@2x.webp",

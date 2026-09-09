@@ -74,8 +74,8 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
-        "title": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
+        "description": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
+        "title": "ISS calibrated mosaic",
         "detail": "Cassini clear-filter mosaic",
         "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
         "surface": "hyperion-normal-surface@2x.webp",
@@ -85,13 +85,13 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
         },
-        "summary": "Cassini images mapped onto the irregular shape. Crater shadows remain; coverage varies and gaps are marked."
+        "summary": "Twelve Cassini frames, including a regional ~100 m/pixel close view. Shape and registration limit detail; shadows and marked gaps remain."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
-        "title": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
+        "title": "Shape-derived radial height",
         "detail": "Shape-derived radial height",
         "thumbnail": "/scenes/hyperion/hyperion-elevation-thumbnail.webp",
         "surface": "hyperion-elevation-surface@2x.webp",

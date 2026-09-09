@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a88acb5921c46fe3b063eabb5d69bf14f06d13eae2eb983df99544152da02773"
+    "sha256": "a50c875f4fff87cd96d115e06c8f2713ba159494dd5ce6ac844e1e3d36336ea1"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "83acd9ae98f0ff63f8353694bceb6831804c895ef593c30e5bc21885cbf387b4",
+      "sha256": "efa435ecac1fed07bc643139361c033f24b1dca4178a3fdc170af5aa9870c020",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -158,7 +158,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Approximate ellipsoid from brightness variability, using an assumed-albedo 50 km size. Equal short axes and orientation are assumed; the doubled period is one interpretation of an ambiguous light curve. The grid marks unmapped terrain.",
-              "title": "Approximate ellipsoid from brightness variability, using an assumed-albedo 50 km size. Equal short axes and orientation are assumed; the doubled period is one interpretation of an ambiguous light curve. The grid marks unmapped terrain.",
+              "title": "Light-curve shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/prospero/prospero-model-thumbnail.webp",
               "surface": "prospero-model-surface@2x.webp",
@@ -291,8 +291,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "83acd9ae98f0ff63f8353694bceb6831804c895ef593c30e5bc21885cbf387b4",
-      "bytes": 3616,
+      "sha256": "efa435ecac1fed07bc643139361c033f24b1dca4178a3fdc170af5aa9870c020",
+      "bytes": 3412,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

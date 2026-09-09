@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "72e27236493109394efde808568354aa7ddc35ef8da7842c7a517ccebbd2bc2e"
+    "sha256": "dddf9099cd6d8fb5cc24389b8f2859447d282a29d6b324c57536daa7b23779b5"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "75de4f666db96f8501355396fed7d039eb8110de443f48e7286104c69e87646a",
+      "sha256": "634e10a736af743818dfe783529407f35db7b8b5595d8171e2e2e19137601101",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 4394, version 2019-12-03, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase. This is the 2018 convex reconstruction. Later radar work resolves features this model cannot show.",
+              "title": "DAMIT model 4394",
               "thumbnail": "/scenes/phaethon/phaethon-shape-thumbnail.webp",
               "surface": "phaethon-shape-surface@2x.webp",
               "poles": "phaethon-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 2.55 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/phaethon/phaethon-elevation-thumbnail.webp",
               "surface": "phaethon-elevation-surface@2x.webp",
               "poles": "phaethon-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fc6fc587525adb6f39db9ff85c2f2d2b25e855a9a89d0b0282d352cded54e443",
-      "bytes": 9469,
+      "sha256": "634e10a736af743818dfe783529407f35db7b8b5595d8171e2e2e19137601101",
+      "bytes": 8959,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

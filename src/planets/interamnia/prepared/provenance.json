@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aaa0647828123ee0009dd571061db97a9f76efa47429bd43db6808c91620e32a"
+    "sha256": "d83b8a3770af74bebe52c1fdca85726626758c534f8c9aefcfa951c7d9ef39bf"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7c5baaca8ca995843b8c2f471d578a13da1755f455bbddd07adf3041c8212a08",
+      "sha256": "e6b21edc29661ede287a382236bedf4682a810f00146b27c62a71ac50883e1e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/interamnia/interamnia-shape-thumbnail.webp",
               "surface": "interamnia-shape-surface@2x.webp",
               "poles": "interamnia-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 166 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/interamnia/interamnia-elevation-thumbnail.webp",
               "surface": "interamnia-elevation-surface@2x.webp",
               "poles": "interamnia-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0a4f97604074023227998cc58101c4750c4b1270608316aa4f4052a2bd80c044",
-      "bytes": 10267,
+      "sha256": "e6b21edc29661ede287a382236bedf4682a810f00146b27c62a71ac50883e1e7",
+      "bytes": 9871,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

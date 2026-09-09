@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
-        "title": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+        "title": "Approximate shape model",
         "detail": "Published shape",
         "thumbnail": "/scenes/ophelia/ophelia-model-thumbnail.webp",
         "surface": "ophelia-model-surface@2x.webp",
