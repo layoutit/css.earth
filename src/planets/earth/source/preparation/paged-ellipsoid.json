@@ -97,10 +97,22 @@
     },
     "maps": [
       {
-        "path": "blue-marble-december.jpg",
+        "path": "blue-marble-july.jpg",
         "name": "earth-surface",
-        "compositeClouds": true,
+        "compositeClouds": false,
         "thumbnail": "earth-lens-normal.webp"
+      },
+      {
+        "path": "blue-marble-july.jpg",
+        "name": "earth-clouds",
+        "compositeClouds": true,
+        "thumbnail": "earth-lens-clouds.webp",
+        "thumbnailRegion": {
+          "longitude": -145,
+          "latitude": -40,
+          "spanDegrees": 50
+        },
+        "primarySource": "blue-marble-clouds.tif"
       },
       {
         "path": "science/gebco-2026/latitude-00.dods.gz",
@@ -381,7 +393,12 @@
           "effort": 6
         }
       }
-    ]
+    ],
+    "blendPair": {
+      "baseLens": "normal",
+      "overlayLens": "clouds",
+      "durationMilliseconds": 280
+    }
   },
   "camera": {
     "cameraModel": "accumulated-matrix3d",

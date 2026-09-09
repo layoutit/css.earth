@@ -94,3 +94,7 @@
   from { transform: rotateZ(-128deg); }
   to { transform: rotateZ(-488deg); }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .polycss-dataset-overlay > s { transition: none !important; }
+}

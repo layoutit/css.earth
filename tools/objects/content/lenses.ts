@@ -53,7 +53,8 @@ function prepareLegend(objectId: string, legend: LensRecipe["legend"]) {
 
 export function prepareLenses(
   objectId: string,
-  recipe: { title: { label: string; src: string; width: number; height: number }; defaultLens: string; controls: LensRecipe[] },
+  recipe: { title: { label: string; src: string; width: number; height: number }; defaultLens: string; controls: LensRecipe[];
+    zoomSelection?: import('../../../src/renderers/css/runtime/zoom-lens-selection.js').ZoomLensSelection },
   assets: PreparedRasterAssets = {},
 ) {
   if (recipe.controls.length && !recipe.controls.some((control) => control.id === recipe.defaultLens)) {
@@ -62,6 +63,7 @@ export function prepareLenses(
   return {
     title: recipe.title,
     defaultLens: recipe.defaultLens,
+    ...(recipe.zoomSelection ? { zoomSelection: recipe.zoomSelection } : {}),
     controls: recipe.controls.map((control) => {
       validateDatasetText(control);
       const surface = assets.surfaces?.[control.id];

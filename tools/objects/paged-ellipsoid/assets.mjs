@@ -53,7 +53,14 @@ if (mode !== 'materials') {
   }
   if (mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
   else if (mode !== 'maps') await prepareInteriorAssets();
-  for (const map of config.surface.maps) await prepareLensThumbnail(inputs.get(map.name),map.thumbnail,focusByMap.get(map.name)?.longitude ?? null,map.thumbnailRegion);
+  for (const map of config.surface.maps) {
+    let input = inputs.get(map.name);
+    if (map.compositeClouds) {
+      const preview = await preparePagedSurfaceMap({ config: { ...config, surface: { ...config.surface, width: 2048, height: 1024 } }, sourceDirectory, map });
+      input = await sharp(preview.data, { raw: preview.info }).png().toBuffer();
+    }
+    await prepareLensThumbnail(input,map.thumbnail,focusByMap.get(map.name)?.longitude ?? null,map.thumbnailRegion);
+  }
 }
 if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps') await prepareMaterialBanks();
 return { assets: [...produced].sort() };

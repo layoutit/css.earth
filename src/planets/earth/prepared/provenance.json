@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "26f54eb78f94523bfaf0bae575b69b06e1dc62405358bab0e7c034d0eb4eb19e"
+    "sha256": "4ad27121e8dc04835bcb3ef7fa1efc1482d2c5dcd53a2f9a802425855b1ed241"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "db931371818e779e87a3233a049e910f2c980942be962d2cf1be3a31ee9a66b9",
+      "sha256": "ad88e219d4768236310f30a545eaa15f3aeb268e44744fcddee25edb682fc3d4",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -115,10 +115,22 @@
           },
           "maps": [
             {
-              "path": "blue-marble-december.jpg",
+              "path": "blue-marble-july.jpg",
               "name": "earth-surface",
-              "compositeClouds": true,
+              "compositeClouds": false,
               "thumbnail": "earth-lens-normal.webp"
+            },
+            {
+              "path": "blue-marble-july.jpg",
+              "name": "earth-clouds",
+              "compositeClouds": true,
+              "thumbnail": "earth-lens-clouds.webp",
+              "thumbnailRegion": {
+                "longitude": -145,
+                "latitude": -40,
+                "spanDegrees": 50
+              },
+              "primarySource": "blue-marble-clouds.tif"
             },
             {
               "path": "science/gebco-2026/latitude-00.dods.gz",
@@ -399,7 +411,12 @@
                 "effort": 6
               }
             }
-          ]
+          ],
+          "blendPair": {
+            "baseLens": "normal",
+            "overlayLens": "clouds",
+            "durationMilliseconds": 280
+          }
         },
         "camera": {
           "cameraModel": "accumulated-matrix3d",
@@ -500,7 +517,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9d0704025475fa2828dc14d05fab7fb1a4f6a89bb237f8fce4803347f70ec1d0",
+      "sha256": "417fcd80dd0884bce9d6a924da8922b0821303a83c490cb7958874c17b324baf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -639,14 +656,28 @@
             {
               "id": "normal",
               "label": "Visible color",
-              "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
+              "description": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic. Zoom farther out to switch to archival cloud coverage.",
               "title": "Blue Marble Next Generation",
               "thumbnail": "/scenes/earth/earth-lens-normal.webp",
               "source": {
-                "id": "surface-observation"
+                "id": "nasa-blue-marble-july",
+                "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
               },
-              "detail": "Global mosaic",
-              "summary": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery."
+              "detail": "NASA · July 2004",
+              "summary": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic. Zoom farther out to switch to archival cloud coverage."
+            },
+            {
+              "id": "clouds",
+              "label": "Cloud coverage",
+              "detail": "NASA · archival",
+              "title": "Blue Marble cloud composite",
+              "description": "Archival NASA cloud imagery over the July 2004 surface mosaic. Clouds and surface are from different observation periods; this is not live weather. Zoom closer to switch to the cloud-free surface.",
+              "summary": "Archival NASA cloud imagery over the July 2004 surface. This is not live weather. Zoom closer for cloud-free visible color.",
+              "thumbnail": "/scenes/earth/earth-lens-clouds.webp",
+              "source": {
+                "id": "nasa-blue-marble-clouds",
+                "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif"
+              }
             },
             {
               "id": "topography",
@@ -833,7 +864,13 @@
                 }
               ]
             }
-          ]
+          ],
+          "zoomSelection": {
+            "nearLens": "normal",
+            "farLens": "clouds",
+            "farBelowRatio": 0.72,
+            "nearAboveRatio": 0.88
+          }
         },
         "settings": {
           "titleKey": "settings",
@@ -1142,24 +1179,24 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "nasa-blue-marble-december",
-      "path": "blue-marble-december.jpg",
-      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg",
+      "id": "nasa-blue-marble-july",
+      "path": "blue-marble-july.jpg",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
       "credit": "NASA Earth Observatory",
       "license": "NASA media usage guidelines",
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "checked Blue Marble Next Generation December 2004 snapshot",
+      "acquisition": "NASA Blue Marble Next Generation July 2004 cloud-free monthly composite; 21600 x 10800 equirectangular RGB JPEG downloaded 2026-09-09",
       "redistribution": "NASA image with credit and no endorsement claim",
       "capture": {
         "spacecraftIds": [
           "terra"
         ],
-        "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg"
+        "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
       },
-      "sha256": "b0ffc9d12205689aeaec66116bbae2c4c263fcd98a0cbadba8d5488567b53278",
-      "bytes": 23931114,
+      "sha256": "dea8b4dc8a4f93f5f8bce0c8c85a508a178e7901e9ed8e6bf86e6ce7ef6d61e2",
+      "bytes": 21125326,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1167,8 +1204,8 @@
         "groups": [
           "refresh"
         ],
-        "path": "blue-marble-december.jpg",
-        "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg",
+        "path": "blue-marble-july.jpg",
+        "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
         "headers": {
           "accept": "*/*",
           "user-agent": "cssEarth Earth source acquisition"
@@ -2019,8 +2056,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9d0704025475fa2828dc14d05fab7fb1a4f6a89bb237f8fce4803347f70ec1d0",
-      "bytes": 17045,
+      "sha256": "417fcd80dd0884bce9d6a924da8922b0821303a83c490cb7958874c17b324baf",
+      "bytes": 18108,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2131,7 +2168,7 @@
       "parents": [],
       "process": "Prepare the global reference map and its declared cloud composite.",
       "limitations": [
-        "NASA Blue Marble Next Generation December 2004 with a prepared archival cloud composite"
+        "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic"
       ],
       "lensIds": [
         "normal"
@@ -2140,62 +2177,139 @@
         "paged-ellipsoid"
       ],
       "inputs": [
-        "nasa-blue-marble-december",
-        "nasa-blue-marble-clouds"
+        "nasa-blue-marble-july"
       ],
       "outputs": [
         {
           "url": "/scenes/earth/earth-lens-normal.webp",
-          "bytes": 1856,
-          "sha256": "cdb6847ab318076644561f2a15bb1c1fdc26afa3b56d2ae79f2d88658d52c690",
+          "bytes": 1740,
+          "sha256": "cd7e4505078fca9f32cdb3cba9928ce220fc3a4224b229a0ba29dab50ccb0c19",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface.webp",
+          "bytes": 272006,
+          "sha256": "15add0a63e5733fee20723702d36d7c260819780984ce9f159083c0fca2820ea",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-poles.webp",
+          "bytes": 58644,
+          "sha256": "05707b7d63a70815d9da5d1c86e462b2ce889bb4e34bb9684e3d067d6cc35d26",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-1.webp",
+          "bytes": 189894,
+          "sha256": "fc079318fb418cbc209a99dfa53afbce9f778c0124ba0a3c5c29169ce9f6835a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-2.webp",
+          "bytes": 272738,
+          "sha256": "2084e917e8f86956947b786e1611e969d5b603728f9c66ad930fc34e1f0b8e2d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-3.webp",
+          "bytes": 588242,
+          "sha256": "204dd91c9081dca1f4b5b1da24675a0cddf59f1e2d02f769a82560400b390710",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-4.webp",
+          "bytes": 669848,
+          "sha256": "b6f74a4e62d4858905409ca70a83b879bfa686b66e6fa45f29ecbf43a2b68195",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-5.webp",
+          "bytes": 429900,
+          "sha256": "762885c825d8c9a6e93ece288b33ecc7ea311b673530ad56bec71a225447a434",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-surface-page-6.webp",
+          "bytes": 67888,
+          "sha256": "817a096ead9c8a283c2a15565cda1e8edc7c0ffebb6c87bc053998e3609bb70f",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "clouds",
+      "label": "Cloud coverage",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/1",
+      "parents": [],
+      "process": "Prepare the global reference map and its declared cloud composite.",
+      "limitations": [
+        "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather"
+      ],
+      "lensIds": [
+        "clouds"
+      ],
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [
+        "nasa-blue-marble-july",
+        "nasa-blue-marble-clouds"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-lens-clouds.webp",
+          "bytes": 3224,
+          "sha256": "2ec7d03533b1b59e95624f04d2a46d870d2c7a64108867f41d9af848cf7435a1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-clouds.webp",
           "bytes": 347334,
           "sha256": "680ee28468760eea2d4d026542ff2d444651be73822f2d593c05afdc0172bd01",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/earth/earth-surface-poles.webp",
-          "bytes": 80780,
-          "sha256": "49449e5d8d44d69472b120afbc5074e367d897a1a226affa35ef5272dd8eb713",
+          "url": "/scenes/earth/earth-clouds-poles.webp",
+          "bytes": 82390,
+          "sha256": "2a9e33fbab36abb7709c8ec72aeff654808a57693c3aaef10359fcbcb49fe4aa",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/earth/earth-surface-page-1.webp",
-          "bytes": 747098,
-          "sha256": "1c6db53f52188c6c43a6803a80217e3418f90b3f4e5fefb398ee3706645b928e",
+          "url": "/scenes/earth/earth-clouds-page-1.webp",
+          "bytes": 751668,
+          "sha256": "80d2c6a0e36d533658d8ea4feea38090222c1cad794fb58f5c02d1a8317849f4",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/earth/earth-surface-page-2.webp",
-          "bytes": 1661344,
-          "sha256": "57e6d57d51deb753408c3ac16db46ad2927a917686e2b8b018eefab7ad9c5091",
+          "url": "/scenes/earth/earth-clouds-page-2.webp",
+          "bytes": 1660964,
+          "sha256": "2c2c975d5e2e1cdd73165e3511b0b111dabf0527a168a8941f071ef8cf7f0f2b",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/earth/earth-surface-page-3.webp",
-          "bytes": 1743912,
-          "sha256": "d46555363a8c94636e4b96859bccb0801c36d97692228ebfe0cffd0e1dc041a9",
+          "url": "/scenes/earth/earth-clouds-page-3.webp",
+          "bytes": 1669354,
+          "sha256": "9f4c5bda730f26127f71641ece74116e566f0ef85adb724ed5a64dcdc9b5f455",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/earth/earth-surface-page-4.webp",
-          "bytes": 1366738,
-          "sha256": "6949f4e16ed94432f6ef5f40e146d73996260e7cce5fd88dcda5a5176cad7cc8",
+          "url": "/scenes/earth/earth-clouds-page-4.webp",
+          "bytes": 1201072,
+          "sha256": "7215c68a0131e2c1142b5870e48004899c9c3058f356af1f3c47c831595e04df",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/earth/earth-surface-page-5.webp",
-          "bytes": 528104,
-          "sha256": "dd2d87a692a19ef2fed496b3a18be37110c0e4719f0055dc6a6caa470edc7153",
+          "url": "/scenes/earth/earth-clouds-page-5.webp",
+          "bytes": 597824,
+          "sha256": "12d1ca471b6ab1665bbd3645667d89dc284ec5dab4ebef3b73ab729d2357f0d7",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/earth/earth-surface-page-6.webp",
-          "bytes": 81570,
-          "sha256": "0364529f6aedebd6e772e413881bf2176cacb2a673ef77f5838304fc9c470464",
+          "url": "/scenes/earth/earth-clouds-page-6.webp",
+          "bytes": 86022,
+          "sha256": "c0093f854f16d6b4b03760937e71a78ddcc7db41d316ad3b1fbf4f4cbd16cd53",
           "verification": "bytes-verified"
         }
       ],
@@ -2205,7 +2319,7 @@
       "id": "topography",
       "label": "Topography",
       "recipe": "paged-ellipsoid",
-      "selector": "/surface/maps/1",
+      "selector": "/surface/maps/2",
       "parents": [],
       "process": "Decode signed terrain heights and coordinate axes, interpolate elevations, apply the authored palette and cartographic relief, and prepare the globe, minimap and unshaded legend.",
       "limitations": [
@@ -2382,7 +2496,7 @@
       "id": "night-lights",
       "label": "Night lights",
       "recipe": "paged-ellipsoid",
-      "selector": "/surface/maps/2",
+      "selector": "/surface/maps/3",
       "parents": [],
       "process": "Decode pinned annual snow-free radiance, average native cells by spherical area before applying logarithmic false color, and prepare the globe, poles, minimap, thumbnail and legend. Preserve missing coverage separately from valid zero radiance.",
       "limitations": [
@@ -2489,7 +2603,7 @@
       "id": "enso",
       "label": "ENSO",
       "recipe": "paged-ellipsoid",
-      "selector": "/surface/maps/3",
+      "selector": "/surface/maps/4",
       "parents": [],
       "process": "Prepare the global reference map and its declared cloud composite.",
       "limitations": [
@@ -2625,44 +2739,44 @@
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x.webp",
-          "bytes": 174476,
-          "sha256": "aa7475954004b33f8ae658927083ae5160931413c37eb677eea3bc573d3bdc3d",
+          "bytes": 176122,
+          "sha256": "b72d411911c141f1a4072d805de5293be5c9aeb2484c67836f7372761bb85ad7",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x.webp",
-          "bytes": 417014,
-          "sha256": "608b68a54fa6643965c271a3df5b9c0b0e806b0ed89310174a2b349db6e99a2b",
+          "bytes": 416120,
+          "sha256": "cccf42fcaee9f8394eb18a71b525a98b259ed23af041a4e62516ad2e315b0eb0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x.webp",
-          "bytes": 447968,
-          "sha256": "87fa00d276b1db709d28976e6f0ed39c2a321f45a796b94fb3abd12c0bfbbd1e",
+          "bytes": 434206,
+          "sha256": "a0277e95ee3a08d5ab251ffbfc40cb2037a7088919ba215ab22acb9bb7824dfa",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x.webp",
-          "bytes": 310196,
-          "sha256": "4e4c6abfb7c058243f0f51caa369eee97df6cc15c327527638fcf9d85ef58393",
+          "bytes": 286230,
+          "sha256": "1b0ecbc092d459aec9c338227e087d27509d609350868bcce446b073ee1bb25d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x.webp",
-          "bytes": 137490,
-          "sha256": "2662342d6d126e686bb10de66a1ded2539eed14c357207ec467ea5b20961df86",
+          "bytes": 153084,
+          "sha256": "617b081f79a160df305087a4663e27f9d47fe04d31d216e6a9612cb0791351a1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x.webp",
-          "bytes": 22678,
-          "sha256": "61e0174bceeff57e8a1b942dba5a022da86af0550d4136bd5902ca7e928663b5",
+          "bytes": 23204,
+          "sha256": "513fce6cbb0c9dc14e721b5764354dc440904b8b5fe779acf9440a351fcf1ca4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-poles@2x.webp",
-          "bytes": 117038,
-          "sha256": "84e782f5f81cfef6f3e98bc47fc27963d5d60db8f6580175e7b259115783927e",
+          "bytes": 117482,
+          "sha256": "fb7f0f952f0d44e62620e8ed27c51a0e4eb3044abcaad22e4220ad1661910d07",
           "verification": "bytes-verified"
         },
         {
@@ -2673,44 +2787,44 @@
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x.webp",
-          "bytes": 298550,
-          "sha256": "5d72b32ded9bab19b9e7ce50895dad66905049d4188c6986c625446171280a49",
+          "bytes": 295712,
+          "sha256": "e7dbdb7c3b0030c3f2c8675794b7d05228077b7aa4af4a643e16f9d6b787fc1d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x.webp",
-          "bytes": 653024,
-          "sha256": "2fe3d1c0e9c8ac9fa4981b459850a2729c4f80dc04ad5c7faf7c0736c81a730f",
+          "bytes": 652322,
+          "sha256": "81ae0a3762a7dc53af2b140b728ce1b6e562ad4ddd41a3cfd58d5ab80ed7af7f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x.webp",
-          "bytes": 685210,
-          "sha256": "66b0d66376641edd49f34c3928e6613ec5e03de295432dc1a8459eb5f692560c",
+          "bytes": 665618,
+          "sha256": "de61b44963f85f1172708a0a22cf9a47cf9741519bf771ec175124f8aba7faab",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x.webp",
-          "bytes": 492840,
-          "sha256": "014718f481eca632722afdac3b128676f1e9553c5e77c25725d77a7c19cebcc5",
+          "bytes": 456768,
+          "sha256": "ae61fe950644deb163f4ee0535b7af535f6c234e86b202ef20a8b1fbd2caa834",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x.webp",
-          "bytes": 216534,
-          "sha256": "eaeea5a512bb7f3366f5e95c7850689e1b1e1f4720902f7d8498c90a525ad58f",
+          "bytes": 240880,
+          "sha256": "4b83ccac380669c72cf15b05e4808945d6795a14880130c3f1632242066d0ed7",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x.webp",
-          "bytes": 33860,
-          "sha256": "12eabd218c58c6bd270f792add1a1274551f08be1c20c0e44ccaf513422554f4",
+          "bytes": 34916,
+          "sha256": "f612cc2c1b249ee75473eb391b88ec574c8da03574a8c57029dab76c5d2b86f1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-poles@2x.webp",
-          "bytes": 147088,
-          "sha256": "9c08ee340e835dfd554d665c437ebd6be148d43386214dc561900da81a94c4e2",
+          "bytes": 148320,
+          "sha256": "723c2695bc04d79c3307361c4f555edf2393496d96182081cf3334de274efcb2",
           "verification": "bytes-verified"
         },
         {
@@ -2785,44 +2899,44 @@
       "outputs": [
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x.webp",
-          "bytes": 174476,
-          "sha256": "aa7475954004b33f8ae658927083ae5160931413c37eb677eea3bc573d3bdc3d",
+          "bytes": 176122,
+          "sha256": "b72d411911c141f1a4072d805de5293be5c9aeb2484c67836f7372761bb85ad7",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x.webp",
-          "bytes": 417014,
-          "sha256": "608b68a54fa6643965c271a3df5b9c0b0e806b0ed89310174a2b349db6e99a2b",
+          "bytes": 416120,
+          "sha256": "cccf42fcaee9f8394eb18a71b525a98b259ed23af041a4e62516ad2e315b0eb0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x.webp",
-          "bytes": 447968,
-          "sha256": "87fa00d276b1db709d28976e6f0ed39c2a321f45a796b94fb3abd12c0bfbbd1e",
+          "bytes": 434206,
+          "sha256": "a0277e95ee3a08d5ab251ffbfc40cb2037a7088919ba215ab22acb9bb7824dfa",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x.webp",
-          "bytes": 310196,
-          "sha256": "4e4c6abfb7c058243f0f51caa369eee97df6cc15c327527638fcf9d85ef58393",
+          "bytes": 286230,
+          "sha256": "1b0ecbc092d459aec9c338227e087d27509d609350868bcce446b073ee1bb25d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x.webp",
-          "bytes": 137490,
-          "sha256": "2662342d6d126e686bb10de66a1ded2539eed14c357207ec467ea5b20961df86",
+          "bytes": 153084,
+          "sha256": "617b081f79a160df305087a4663e27f9d47fe04d31d216e6a9612cb0791351a1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x.webp",
-          "bytes": 22678,
-          "sha256": "61e0174bceeff57e8a1b942dba5a022da86af0550d4136bd5902ca7e928663b5",
+          "bytes": 23204,
+          "sha256": "513fce6cbb0c9dc14e721b5764354dc440904b8b5fe779acf9440a351fcf1ca4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-lit-poles@2x.webp",
-          "bytes": 117038,
-          "sha256": "84e782f5f81cfef6f3e98bc47fc27963d5d60db8f6580175e7b259115783927e",
+          "bytes": 117482,
+          "sha256": "fb7f0f952f0d44e62620e8ed27c51a0e4eb3044abcaad22e4220ad1661910d07",
           "verification": "bytes-verified"
         },
         {
@@ -2833,44 +2947,44 @@
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-1@2x.webp",
-          "bytes": 298550,
-          "sha256": "5d72b32ded9bab19b9e7ce50895dad66905049d4188c6986c625446171280a49",
+          "bytes": 295712,
+          "sha256": "e7dbdb7c3b0030c3f2c8675794b7d05228077b7aa4af4a643e16f9d6b787fc1d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-2@2x.webp",
-          "bytes": 653024,
-          "sha256": "2fe3d1c0e9c8ac9fa4981b459850a2729c4f80dc04ad5c7faf7c0736c81a730f",
+          "bytes": 652322,
+          "sha256": "81ae0a3762a7dc53af2b140b728ce1b6e562ad4ddd41a3cfd58d5ab80ed7af7f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-3@2x.webp",
-          "bytes": 685210,
-          "sha256": "66b0d66376641edd49f34c3928e6613ec5e03de295432dc1a8459eb5f692560c",
+          "bytes": 665618,
+          "sha256": "de61b44963f85f1172708a0a22cf9a47cf9741519bf771ec175124f8aba7faab",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-4@2x.webp",
-          "bytes": 492840,
-          "sha256": "014718f481eca632722afdac3b128676f1e9553c5e77c25725d77a7c19cebcc5",
+          "bytes": 456768,
+          "sha256": "ae61fe950644deb163f4ee0535b7af535f6c234e86b202ef20a8b1fbd2caa834",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-5@2x.webp",
-          "bytes": 216534,
-          "sha256": "eaeea5a512bb7f3366f5e95c7850689e1b1e1f4720902f7d8498c90a525ad58f",
+          "bytes": 240880,
+          "sha256": "4b83ccac380669c72cf15b05e4808945d6795a14880130c3f1632242066d0ed7",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-page-6@2x.webp",
-          "bytes": 33860,
-          "sha256": "12eabd218c58c6bd270f792add1a1274551f08be1c20c0e44ccaf513422554f4",
+          "bytes": 34916,
+          "sha256": "f612cc2c1b249ee75473eb391b88ec574c8da03574a8c57029dab76c5d2b86f1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-interior-outer-poles@2x.webp",
-          "bytes": 147088,
-          "sha256": "9c08ee340e835dfd554d665c437ebd6be148d43386214dc561900da81a94c4e2",
+          "bytes": 148320,
+          "sha256": "723c2695bc04d79c3307361c4f555edf2393496d96182081cf3334de274efcb2",
           "verification": "bytes-verified"
         },
         {
@@ -3062,8 +3176,32 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 76290,
-          "sha256": "8d215052e78fd1d0cf8dc9059521ee392a1d77cf1e91b4c1e174616885628f13",
+          "bytes": 29668,
+          "sha256": "4b94f8d8ca4e4ba22fd0351b34197bd79bd4ed1a31be51e4860f75adfecd7558",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:clouds",
+      "label": "Cloud coverage preview",
+      "recipe": "paged-ellipsoid",
+      "selector": "/surface/maps/1",
+      "recipeDependencies": [
+        "paged-ellipsoid"
+      ],
+      "inputs": [],
+      "parents": [
+        "clouds"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/clouds.webp",
+          "bytes": 75560,
+          "sha256": "7628095a4ebad95bf5b5c33df53407df859b266aceb88c65828586114e6ef8e2",
           "verification": "bytes-verified"
         }
       ]
@@ -3072,7 +3210,7 @@
       "id": "preview:topography",
       "label": "Topography preview",
       "recipe": "paged-ellipsoid",
-      "selector": "/surface/maps/1",
+      "selector": "/surface/maps/2",
       "recipeDependencies": [
         "paged-ellipsoid"
       ],
@@ -3096,7 +3234,7 @@
       "id": "preview:night-lights",
       "label": "Night lights preview",
       "recipe": "paged-ellipsoid",
-      "selector": "/surface/maps/2",
+      "selector": "/surface/maps/3",
       "recipeDependencies": [
         "paged-ellipsoid"
       ],
@@ -3120,7 +3258,7 @@
       "id": "preview:enso",
       "label": "ENSO preview",
       "recipe": "paged-ellipsoid",
-      "selector": "/surface/maps/3",
+      "selector": "/surface/maps/4",
       "recipeDependencies": [
         "paged-ellipsoid"
       ],

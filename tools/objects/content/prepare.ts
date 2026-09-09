@@ -67,6 +67,7 @@ export function prepareObjectContent(
     lenses: prepareLenses(source.id, {
       title: requiredShellTitle(source.lenses.titleKey),
       defaultLens: source.lenses.defaultLens,
+      ...(source.lenses.zoomSelection ? { zoomSelection: source.lenses.zoomSelection } : {}),
       controls: lensControls,
     }, assets),
     settings: {
@@ -158,6 +159,7 @@ export async function prepareObjectContentAssets({
   const shellLenses = {
     title: preparedWithAssets.lenses.title,
     defaultLens: preparedWithAssets.lenses.defaultLens,
+    ...(preparedWithAssets.lenses.zoomSelection ? { zoomSelection: preparedWithAssets.lenses.zoomSelection } : {}),
     controls: preparedWithAssets.lenses.controls.map(({ id, label, detail, thumbnailUrl, description, summary, facts, legend, legendNote, title }) => ({
       id,
       label,
