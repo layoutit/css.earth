@@ -94,3 +94,21 @@ The final read-only review found no remaining concrete blockers in these
 corrections. It confirmed that Earth follows the checked records and that the
 Rhea and Sun qualifications were preserved. This is a documentation review, not
 new scientific, browser or deployment qualification.
+
+## Readability revision
+
+The maintainer rejected the long uninterrupted READMEs. The four examples now
+show a compact source table, brief results and visible problems before expandable
+methods in the same file. Formulas, decoding steps and source surveys remain
+available without another per-body document.
+
+The reviewer checked which caveats had to remain visible, then reviewed the
+written layout. It caught malformed 67P method headings and an ambiguous
+“slope” label; both were corrected. The final pass found no remaining blockers
+in those corrections. False color, model meaning, coverage gaps and unresolved
+checks remain visible when the methods are closed.
+
+Local Markdown previews were inspected in a browser. The method disclosures open
+correctly; the four overviews fit without horizontal overflow at desktop and
+390-pixel widths in that preview. This was a document-layout check, not a body
+renderer test or an assertion about GitHub's stylesheet.

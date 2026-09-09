@@ -54,16 +54,20 @@ See [prepared provenance](../object-provenance.md) for the machine record format
 
 ### Body README
 
-Use **Sources**, **Evidence** and **Known problems**, with dataset subsections as
-needed. Explain what each view means, why its data was selected, what processing
-changed and what the checks found. Link exact manifests and original reports.
+Show **Sources**, **Evidence** and **Known problems** before technical methods.
+Use a small source table, brief result bullets and short paragraphs. Explain the
+selected data and its meaning without turning table cells into paragraphs.
 Do not add a separate SOURCE summary, EVIDENCE index or USAGE guide.
 
-A long decoding method, field dictionary or calculation can live in a linked
-note beside its data. That note owns the method; the README explains its purpose
-and consequences without copying it. Keep meaningful alternative-source choices
-with the relevant dataset. Split for a substantial method, not merely to shorten
-the README or create the same set of files for every body.
+Put lengthy calculations, decoding steps and source surveys in clearly labeled
+`<details>` sections below that overview, inside the same README. Split expanded
+methods into short paragraphs or steps too. Link existing detailed method notes
+instead of copying them; do not create a second account to shorten the page.
+
+Keep observation dates, measured-versus-modeled meaning, false color, material
+coverage limits, failures and unresolved problems visible without expanding
+anything. The overview states the consequence; the method explains the calculation.
+Check the rendered page with details closed before committing.
 
 Every file under `source/` needs a manifest entry. Reports, screenshots and test
 logs belong under `docs/`. Body packages contain data, not private executables.
@@ -222,7 +226,8 @@ appear unchanged in any body's README.
   an unfamiliar term when it matters. Remove agent-process jargon and descriptions
   of how carefully the work was carried out.
 - State each explanation once. Put a limitation beside the claim it qualifies;
-  avoid repeating a general disclaimer after every paragraph.
+  avoid repeating a general disclaimer after every paragraph. Use short paragraphs
+  with one subject, and bullets for separate results or decisions.
 
 Examples using the 67P records:
 

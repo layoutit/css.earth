@@ -163,6 +163,8 @@ Before committing documentation, edit the changed paragraphs using the
 [plain-language rules](../../../docs/provenance/CONTRACT.md#plain-language).
 Replace vague claims with the actual source, action and result. Remove generic
 praise and repeated explanations; preserve scientific terms and qualifications.
+Inspect the rendered README with methods collapsed: sources, results and material
+limitations must be readable without opening the details.
 
 Finish with the working location/URL, supported views, checked outcomes and
 remaining limitations, including useful unresolved dataset candidates. A working
