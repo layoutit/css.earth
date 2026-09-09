@@ -1979,6 +1979,44 @@ search remained open. Main's source explicitly restores that search state; no
 product change was made to satisfy the obsolete expectation.
 
 Validation includes 102 focused renderer/fader tests, 9 engine flight tests,
-55 shell/router/system-framing tests, renderer typecheck and build. The fresh
-synchronized route after this integration is still pending. Existing aggregate
+55 shell/router/system-framing tests, renderer typecheck and build. The synchronized result below follows this integration. Existing aggregate
 gate limitations remain unresolved; this section is not merge approval.
+
+
+### Presentation-preserving full route (`d41886890`)
+
+The corrected implementation is recorded as
+`output/world-context-zoom/main74-presentation-preserved-dpr2`, recorder
+`c96d1ddf-8159-4fb8-80fb-8ca05c37278b`. The native Sun → Milky Way → reversible
+drag → Sun route uses Canary 155.0.8048.0, 1995×1236 CSS pixels, DPR 2 and motion
+off. The recorder JSON, Chrome trace gzip and contemporaneous video agree:
+3,003 captured/encoded frames, −26 µs clock drift and 1.494 ms maximum video PTS
+error. All 69 source identities match the clean captured commit. There are no
+response patches, page errors, recording-time HMR, trace loss, camera identity
+changes or sampled camera/publication mismatches. The publication queue empties.
+
+**This version does not meet the smoothness target.** Whole-route rAF intervals
+above 25 ms are 123/3,462 (maximum 50.1 ms). In the 5–5,000 AU band they are
+116/767; main-frame p95 is 21.067 ms and maximum 29.193 ms. Main-thread task
+occupancy is 95.27%. Style p95 is 5.583 ms and layerization p95 is 5.101 ms.
+The smaller callback time (0.256 ms p95 per callback) does not mean the browser
+can present smoothly. The earlier faster measurements used different main
+content and presentation behavior; they are not performance evidence for this
+corrected revision.
+
+Presentation-feedback analysis is now bounded to the recorder and native-input
+phases and deduplicates identical feedback timestamps. The recorded interval
+has 231 feedback gaps above 25 ms (72 outward, 109 during galaxy dragging,
+50 inward) and 17 dropped pipeline reporters: 12 forked, 2 backfill and 3
+without an explicit type. These are separately named observations, not a count
+of physical display drops. In particular, the drag has only one long rAF
+interval but 109 long feedback gaps, so rAF alone is not a sufficient gate.
+The video has 257 observed gaps above 25 ms; its longest includes a static hold
+and is not counted as a 1-second animation stall. See `presentation-feedback.json`.
+
+The full renderer suite was rerun at this head: 399 tests pass and nine fail
+across Earth page-layer/city-zoom and Deimos depth-partition fixture checks.
+These match the previously unresolved categories; no independent execution of
+the complete main baseline has established that they can be waived. PR #50
+remains a draft. The next optimization must address the measured browser work
+while retaining the restored presentation.
