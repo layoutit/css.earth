@@ -38,7 +38,7 @@
         "units": "kilometers",
         "referenceRadiusMeters": 6100
       },
-      "coverage": "Published complete radial model at 2° spacing. Observational constraints vary; unseen regions are uncertain.",
+      "coverage": "Published complete radial model at 2\u00b0 spacing. Observational constraints vary; unseen regions are uncertain.",
       "expectedBytes": 527072,
       "expectedSha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
       "capture": {
@@ -212,6 +212,64 @@
       ],
       "expectedBytes": 8616,
       "expectedSha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee"
+    },
+    {
+      "id": "gaspra-107318313rcal_clr-fit",
+      "path": "observations/107318313rcal_clr.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 2563200,
+      "expectedSha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
+      "width": 800,
+      "height": 800
+    },
+    {
+      "id": "gaspra-107318313rcal_clr-xml",
+      "path": "observations/107318313rcal_clr.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.xml",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 9633,
+      "expectedSha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b"
+    },
+    {
+      "id": "gaspra-e8313-fit",
+      "path": "observations/e8313.fit",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 645120,
+      "expectedSha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00"
+    },
+    {
+      "id": "gaspra-e8313-lbl",
+      "path": "observations/e8313.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 10480,
+      "expectedSha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3"
     }
   ],
   "generatedIntermediates": [
@@ -246,14 +304,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored package input.",
-      "expectedBytes": 11170,
-      "expectedSha256": "0acd7b3427ae7a18673bc9b8f97694380e838427738d27a2b81c368e68ec765e"
+      "expectedBytes": 11221,
+      "expectedSha256": "f5037d4c08c36da7e12cae23aecd3b8e8899fb1044332cc6840b61f7e3772dd8"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source evidence or authored package input.",
-      "expectedBytes": 3776,
-      "expectedSha256": "277bbe5aa57971e338aae03c84b67b93c387c4edab48f80908cdb72f35e16d6e"
+      "expectedBytes": 5106,
+      "expectedSha256": "3b35f53dddc60859ca20725d764026dae2a0130e8249da14a2c3639ba2faba90"
     },
     {
       "path": "preparation/navigation.json",
@@ -270,8 +328,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source evidence or authored package input.",
-      "expectedBytes": 5149,
-      "expectedSha256": "89c83775345cfa476912fc143949d5142b3a6d9373adba9d99e3521ce660dcc1"
+      "expectedBytes": 6005,
+      "expectedSha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed"
     },
     {
       "path": "presentation/title-mark.json",
@@ -415,7 +473,19 @@
       "path": "reference/calibrated-registration-results.json",
       "purpose": "Reproducible checks of the archived camera against the pinned Thomas mosaic; no local fit.",
       "expectedBytes": 3865,
-      "expectedSha256": "61f61e64b9e0253f2e5725130f1adb6c3b524e84ac1f20483ccf96386ae142fc"
+      "expectedSha256": "db40e4a3b807f497d06291b5df5edf666876efa2519255337a6b9dbdacdccc34"
+    },
+    {
+      "path": "reference/registration-107318313.json",
+      "purpose": "Independent checks of the archived image-to-shape registration.",
+      "expectedBytes": 611,
+      "expectedSha256": "06cc9dffa163a79f446e48e913b6d56baa9388c55e4358e1ea45dce3c5f88d02"
+    },
+    {
+      "path": "reference/mosaic-registration-results.json",
+      "purpose": "Measured, unfitted registration checks for the added Galileo observation.",
+      "expectedBytes": 3923,
+      "expectedSha256": "b17c41f60285417a984be45d573d5b4fb1b52592ec72590e19fa31e45283a6fc"
     }
   ]
 }

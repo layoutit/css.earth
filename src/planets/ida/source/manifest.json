@@ -246,6 +246,64 @@
       ],
       "expectedBytes": 8830,
       "expectedSha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13"
+    },
+    {
+      "id": "ida-0202560500rcal_gre-fit",
+      "path": "observations/0202560500rcal_gre.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 2563200,
+      "expectedSha256": "1ff454dd43d90c53bb0523dd258f7870e0d1f9cf2d5de41b6002fa6f2bd59886",
+      "width": 800,
+      "height": 800
+    },
+    {
+      "id": "ida-0202560500rcal_gre-xml",
+      "path": "observations/0202560500rcal_gre.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.xml",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 12909,
+      "expectedSha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df"
+    },
+    {
+      "id": "ida-i0500-fit",
+      "path": "observations/i0500.fit",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 645120,
+      "expectedSha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1"
+    },
+    {
+      "id": "ida-i0500-lbl",
+      "path": "observations/i0500.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "galileo-calibrated"
+      ],
+      "expectedBytes": 10480,
+      "expectedSha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c"
     }
   ],
   "generatedIntermediates": [
@@ -280,14 +338,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source label, source documentation or authored package input.",
-      "expectedBytes": 8501,
-      "expectedSha256": "95d190b7bf8b232d723ec314a959cc6e922e073b84abd4d79e7c0956e53cd718"
+      "expectedBytes": 8544,
+      "expectedSha256": "ed181ef75b5ae936b52a0142964ca7c7647f6d150f4a419ca6fad0c6c5859e7a"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source label, source documentation or authored package input.",
-      "expectedBytes": 4366,
-      "expectedSha256": "55c850b9148b55f9427327db9a787caf5e3474f08fb499ee6677d58cf347d3c8"
+      "expectedBytes": 5688,
+      "expectedSha256": "ffcf423e1fa29020819262dd40794339c4de062ae4ee15004ae75f095885fabc"
     },
     {
       "path": "preparation/navigation.json",
@@ -304,8 +362,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source label, source documentation or authored package input.",
-      "expectedBytes": 5118,
-      "expectedSha256": "4f4582ffd5c49cda0130e8d8db319ed94e675c9b9cde3c758dd3947579c16bc7"
+      "expectedBytes": 5975,
+      "expectedSha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -383,7 +441,19 @@
       "path": "reference/calibrated-registration-results.json",
       "purpose": "Reproducible checks of the archived camera against the pinned Thomas mosaic; no local fit.",
       "expectedBytes": 3900,
-      "expectedSha256": "73d455bbfe1ceed336c129d86c06304695a084ce201f70da62f82c296af3ad87"
+      "expectedSha256": "4f36176a42f00e89addec3a68f92a0bf411f776297dfbd7144849f68eb13a444"
+    },
+    {
+      "path": "reference/registration-202560500.json",
+      "purpose": "Independent checks of the archived image-to-shape registration.",
+      "expectedBytes": 611,
+      "expectedSha256": "8fe19fc97c0a2677ddaea051f6ed4cdd174097f9724b789cf7085062f239f4d4"
+    },
+    {
+      "path": "reference/mosaic-registration-results.json",
+      "purpose": "Measured, unfitted registration checks for the added Galileo observation.",
+      "expectedBytes": 3879,
+      "expectedSha256": "bbabb5e40ea58c5c74cb85ed1d8138b4d2b381425756cb9a312b5289ab581b6c"
     }
   ]
 }

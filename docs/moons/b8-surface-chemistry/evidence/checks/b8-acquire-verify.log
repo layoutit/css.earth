@@ -1,0 +1,27 @@
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/manifest.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async runOperations (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/dist/operations.js:712:53)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/dist/operations.js:751:30 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/source/manifest.json'
+}
+
+Node.js v24.19.0
+file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/run-implemented-planets.mjs:253
+    if (exitCode !== 0 || signal !== null) throw new Error(
+                                                 ^
+
+Error: Implemented planet command failed with exit 1.
+    at file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/run-implemented-planets.mjs:253:50
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async main (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/run-implemented-planets.mjs:243:5)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/run-implemented-planets.mjs:260:3
+
+Node.js v24.19.0

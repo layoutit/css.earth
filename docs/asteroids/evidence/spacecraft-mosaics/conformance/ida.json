@@ -1,0 +1,282 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.84",
+  "baseUrl": "http://127.0.0.1:53136",
+  "capturedAt": "2026-09-09T21:28:27.201Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "ida",
+      "viewport": "initial-shell",
+      "speedDisabled": false
+    },
+    {
+      "id": "ida",
+      "viewport": "desktop",
+      "motionActivation": "retained-input",
+      "surfaceFlyTo": {
+        "pitchDelta": -20.548701136320403,
+        "zoomRatio": 2.811031256391234
+      },
+      "zoomPublication": {
+        "skyCube": 0,
+        "skyOrientation": 0
+      },
+      "projectiveTextureReport": {
+        "texturedLeafCount": 800,
+        "nestedProjectiveTextureCount": 0,
+        "finiteTextureBounds": true
+      },
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 109815,
+      "stable": true,
+      "retainedProof": {
+        "initialNodeCount": 109815,
+        "currentNodeCount": 109815,
+        "maximumNodeCount": 109815,
+        "initialNodesIntact": true,
+        "shellTextNodesIntact": true,
+        "undeclaredAddedRoots": [],
+        "undeclaredRemovedRoots": [],
+        "allowedMounts": []
+      }
+    },
+    {
+      "id": "ida",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 109815,
+      "stable": true
+    },
+    {
+      "id": "ida",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 108.44630116736326,
+          "shadowPixels": null
+        },
+        {
+          "id": "calibrated",
+          "interior": false,
+          "geometryDisplacement": 121.38719213559135,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 179.44257069925354,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "ida",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 2,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 108.44630116736326,
+          "shadowPixels": null
+        },
+        {
+          "id": "calibrated",
+          "interior": false,
+          "geometryDisplacement": 121.38719213559135,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 179.44257069925354,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "ida",
+      "viewport": "pre-ready-hidden-motion-off",
+      "animationCount": 0
+    },
+    {
+      "id": "ida",
+      "viewport": "pre-ready-visible-motion-off",
+      "animationCount": 0
+    },
+    {
+      "id": "ida",
+      "viewport": "pre-ready-hidden-motion-on",
+      "animationCount": 0
+    },
+    {
+      "id": "ida",
+      "viewport": "pre-ready-visible-motion-on",
+      "animationCount": 0
+    },
+    {
+      "id": "ida",
+      "viewport": "dpr-1",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/ida/ida-normal-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 1.0330434782608697,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.6714782608695653,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.2908752418181817,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "ida-dpr-1.webm"
+    },
+    {
+      "id": "ida",
+      "viewport": "dpr-2",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/ida/ida-normal-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 1.0330434782608697,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.6714782608695653,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.6839073054545455,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "ida-dpr-2.webm"
+    },
+    {
+      "id": "ida",
+      "viewport": "lens-race",
+      "lens": "normal",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "ida",
+      "viewport": "lens-reacquire",
+      "lens": "calibrated"
+    },
+    {
+      "id": "ida",
+      "viewport": "lens-rejection-retry",
+      "lens": "calibrated"
+    },
+    {
+      "id": "ida",
+      "viewport": "lens-destroy"
+    }
+  ]
+}

@@ -119,3 +119,10 @@ point labels disagree with final polygon categories at 124 of 3,042 comparable
 locations; 870 ejecta labels are outside that comparison. The audit retains those
 disagreements. Six distributed point anchors, exact input hashes, and decoder
 failure cases are tested. Prepared visual qualification belongs to the B2 record.
+
+## Visible spectral surface views
+
+The VLT/MUSE views use original July 2019 measured maps from King et al.
+The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate
+evidence, first-valid-night coverage, registration limits and residual night
+differences. Every conversion is offline; the scene geometry remains unchanged.

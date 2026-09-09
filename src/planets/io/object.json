@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fff0a41f037bb7f676987e4200b73993b7b18fb8113eda6add070241793c99a2"
+    "sha256": "91ae3d8a4e3399be7766420ec92c6d3f43c519f83cddac9e030f43061edd0f69"
   },
   "id": "io",
   "properties": {
@@ -68,6 +68,16 @@
               "id": "geology",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "spectral-slope",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "visible-absorption",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -88,12 +98,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "62e0de8d49db3bc47a78b3736f670364a5b2352f3f3414b5b4f4e0ef8a1ea33e"
+          "sha256": "a2ca8a5abc1cbb507b93a10f8898661c5ce400ddacdb8687b083b47565c1152a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d46bd09d7eb6c79aa2a5b18ee22234284803eb910c00492896c0ca7b4b478b49"
+          "sha256": "84b59a67cc9970f2728c781d8d7a4254d9ac39f96273a3b8598f46171689ade4"
         },
         {
           "id": "title",
@@ -108,7 +118,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c44281a1f6e284ad0f6bdc5b6a0092ab5380f7ba58fe2b01eb5826e265d96528"
+          "sha256": "82875a6372ffe28a99fc83459e264922953eaf236233ec0a916e6a19fabcbe55"
         }
       ]
     },
@@ -118,7 +128,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2ed05c0368bd2934a678849f5b0c1340901794ac47eabc7062ebdd5480c59e30"
+        "sha256": "9b7e1c14d676f56301855ae17a14e02be54bcb68a621ec2f0e0fea337290300e"
       }
     }
   },

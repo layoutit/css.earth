@@ -108,6 +108,102 @@
         "spiceypyVersion": "6.0.3",
         "cspiceVersion": "CSPICE_N0067"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/C1487299582_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1487299582_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/N1487299582_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1487299582_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/C1489049741_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1489049741_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/N1489049741_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1489049741_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/C1702362997_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1702362997_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/N1702362997_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1702362997_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/C1702361128_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1702361128_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/N1702361128_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1702361128_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/C1500061929_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1500061929_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/N1500061929_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1500061929_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/C1500061170_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1500061170_1_ir.cub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "vims-chemistry/native/N1500061170_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1500061170_1_ir.cub"
     }
   ]
 }

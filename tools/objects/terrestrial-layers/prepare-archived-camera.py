@@ -145,9 +145,13 @@ def register_osiris(source, profile, camera, temporary):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('source',type=Path);args=parser.parse_args();source=args.source.resolve()
-    profile=json.loads((source/'preparation/camera.json').read_text());manifest=json.loads((source/'manifest.json').read_text())
-    paths=['preparation/camera.json',profile['image'],*profile['kernels'],*profile['references'],profile['mesh']]
+    parser=argparse.ArgumentParser();parser.add_argument('source',type=Path)
+    parser.add_argument('--profile',default='preparation/camera.json',help='Pinned camera profile relative to the source directory')
+    args=parser.parse_args();source=args.source.resolve()
+    if Path(args.profile).is_absolute() or '..' in Path(args.profile).parts:
+        raise ValueError('Camera profile must be inside its source package')
+    profile=json.loads((source/args.profile).read_text());manifest=json.loads((source/'manifest.json').read_text())
+    paths=[args.profile,profile['image'],*profile['kernels'],*profile['references'],profile['mesh']]
     pins={e['path']:e for e in manifest['inputs']};provenance=[]
     for path in paths:
         expected=pins[path];actual=digest(source/path)
