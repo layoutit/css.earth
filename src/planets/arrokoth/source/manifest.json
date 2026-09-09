@@ -1,0 +1,249 @@
+{
+  "schema": "cssarrokoth-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/arrokoth_porter_2024_v01.obj",
+      "expectedBytes": 3686921,
+      "expectedSha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/arrokoth_porter_2024_v01.obj",
+      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS",
+      "license": "NASA PDS scientific data; retain attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.26007/97r3-1e19"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "body-fixed-cartesian-mesh",
+        "units": "km",
+        "metersPerUnit": 1000
+      }
+    },
+    {
+      "path": "science/albedo_arrokoth4_fp36h2_masked1.fits",
+      "id": "lorri-albedo-model",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/albedo_arrokoth4_fp36h2_masked1.fits",
+      "credit": "Simon Porter / New Horizons science team; NASA PDS2024",
+      "license": "NASA PDS scientific data; retain attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.26007/97r3-1e19"
+      ],
+      "consumers": [
+        "albedo-model"
+      ],
+      "coverage": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph.",
+      "width": 600,
+      "height": 1200,
+      "projection": {
+        "type": "source-obj-uv",
+        "description": "Two south polar azimuthal equidistant projections; source UVs identify each lobe."
+      },
+      "expectedBytes": 2882880,
+      "expectedSha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39"
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 9948
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5582,
+      "expectedSha256": "e67c96c34f4bfd9f028373128ff05a3350e751c4bdb76932e35572e44207f6ef",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2001,
+      "expectedSha256": "9bd7ceb62f67aaf3eabf87c013b7ec89b8a38bbccb191866917d9b5d62de83c6",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 2519,
+      "expectedSha256": "2b21df83f7c97380152f0f298693912336f38cc1bf67adfa31b2e4816f654285",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1256,
+      "expectedSha256": "e7dc0403db56018a9aefb0b02a9594a76c8b3b7d79f31fe04ac4241e9ca0b0dd",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 440,
+      "expectedSha256": "7a8f48363057c21782ce822396c1c75f66e795b981dfb2ee8e55f25dd36489ea",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3515,
+      "expectedSha256": "7a05d1f3799ab6bcc918c5414baa7e49944767c2be3ce22d884c842ec0617220",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3356,
+      "expectedSha256": "e58b93ac7ee5768044b3fc78455aa5c0a393e688533aea3fa890e8a2e49c786a",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/arrokoth_porter_2024.lblx",
+      "expectedBytes": 20227,
+      "expectedSha256": "37da4085415e94d419b0b092dca3b8d527aa6adc1560a9a433d63965aa5172bd",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7355,
+      "expectedSha256": "1119b0da44e266b21b9443210ae42feccfe92904d18b5b77fdb4fc543522a8bb",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6645,
+      "expectedSha256": "24e1c644a36f7fe82ae671cb64d825f6ea5066760c5895f200c428fa82545e94",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/numeric-audit.json",
+      "expectedBytes": 3781,
+      "expectedSha256": "a015b67c3dab173381b3e92fdf9a31fd9c75fb600a6e5f1b37faa9c17f23081f",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/overview.txt",
+      "expectedBytes": 952,
+      "expectedSha256": "d52fbfac22fd740459d80a541be02753d3e82ca274fe90d7ec5eace2c4f5f0bd",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "reference/porteretal2024b.pdf",
+      "expectedBytes": 657187,
+      "expectedSha256": "e6fdeb2acd50283c3a75efe971c389f27cc09e4e31704a74a2b6eb76fb980aa0",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "science/albedo_arrokoth4_fp36h2_masked1.lblx",
+      "expectedBytes": 9529,
+      "expectedSha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "science/albedo_arrokoth4_fp36h2_masked1.png",
+      "expectedBytes": 200809,
+      "expectedSha256": "2b3a1a007c44c91572aba3d433267718340a7e5d322a05ed797ba0e8856eda0f",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 852,
+      "expectedSha256": "8bb8f5f9e2413966ae1891c33bd2bc3917fed810b160607950398394e60bb854",
+      "purpose": "Pinned source observation, interpretation or preparation input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.26007/97r3-1e19",
+      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": -25,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 53076,
+      "expectedSha256": "a9107c3a96dc51dd575d0ca8ee2393d6640b564cb5e40f5ad4ac30db14677922"
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+import arrokothDescriptor from "../src/planets/arrokoth/object.json" with { type: "json" };
+import quaoarDescriptor from "../src/planets/quaoar/object.json" with { type: "json" };
+import gkunhomdimaDescriptor from "../src/planets/gkunhomdima/object.json" with { type: "json" };
 import annefrankDescriptor from "../src/planets/annefrank/object.json" with { type: "json" };
 import brailleDescriptor from "../src/planets/braille/object.json" with { type: "json" };
 import heraDescriptor from "../src/planets/hera/object.json" with { type: "json" };
@@ -2206,6 +2209,24 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(unitasDescriptor);
     }, unitasDescriptor.properties.worldFrame),
+
+  object("arrokoth", "Arrokoth", "trans-neptunian", "#aaaaaa", 44.05655144131418,
+    "Explore its published shape and source constraints.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(arrokothDescriptor);
+    }, arrokothDescriptor.properties.worldFrame),
+
+  object("quaoar", "Quaoar", "trans-neptunian", "#aaaaaa", 43.16573948799057,
+    "Explore its published shape and source constraints.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(quaoarDescriptor);
+    }, quaoarDescriptor.properties.worldFrame),
+
+  object("gkunhomdima", "Gǃkúnǁʼhòmdímà", "trans-neptunian", "#aaaaaa", 74.45925441086162,
+    "Explore its published shape and source constraints.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(gkunhomdimaDescriptor);
+    }, gkunhomdimaDescriptor.properties.worldFrame),
 
   object("annefrank", "Annefrank", "asteroid", "#aaaaaa", 2.2123334934520815,
     "Explore Annefrank with a clearly labelled approximation of its published flyby dimensions.", async () => {

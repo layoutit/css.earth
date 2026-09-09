@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "quaoar",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Quaoar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "342ce2b481e6f55e18445023022f549826b0f56a580ee25eabd8b86c97883dc4"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "ccb4984a3f9c4abf41b9b7b02d50e3c1bb30ec8641b9ea3b59b41427bb83c651"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "f75966f4164ebb6dd509d22c4dc159c437966ca9fa1ad77af54cd4fcf56f0d61"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "ea0d71f861afe44c2d14decb8911afadb5c6146a9109fded42129fde3881ac40"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "2da07b74da3e07ad2f9353e86fc75b1cd3734a2864de31c6799090b0d59e2457"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "fc185925619556f375aaccd95a90ca34e08084be144dc439f4781a9d78f19520"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 547.1743344090937
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "rings": {
+        "source": "terrestrial"
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

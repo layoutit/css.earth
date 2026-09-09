@@ -89,7 +89,7 @@ export async function loadObjUvFits(root, lens, mesh) {
   if (!label.includes(lens.path.split('/').at(-1)) || !label.includes('IEEE754MSBSingle')) throw new Error('PDS label does not identify the selected floating point source map.');
   return { ...createObjUvFitsSampler(mesh, mapping, fits, lens), report: {
     sourceFormat: 'obj-uv-fits', sourceMesh: lens.meshPath, sourceMap: lens.path,
-    registration: 'Released OBJ per-corner UVs; barycentric transfer from the unique closest full-source triangle, bounded in metres. No radial reprojection.',
+    registration: 'Released OBJ per-corner UVs; barycentric transfer from the selected closest full-source triangle, bounded in metres. No radial reprojection.',
     sourceWidth: fits.width, sourceHeight: fits.height, uvCoordinates: mapping.uv.length,
     flipV: lens.grid.flipV, noData: lens.grid.noData ?? null,
     validity: 'Finite released values, with only explicitly authored no-data values withheld. This is not an observational coverage claim.',

@@ -9,7 +9,7 @@ import { OBJECTS } from './objects.mjs';
 import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mjs';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-const cometIds = OBJECTS.filter(object => object.classification === 'comet').map(object => object.id);
+const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian'].includes(object.classification)).map(object => object.id);
 const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
   [object.id, CONTEXT_ANNOTATION_PRIORITY[object.classification] ?? 0]));
 
@@ -75,7 +75,7 @@ export function createApplicationWorldContext() {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
         const layer = prepared.mount(stage);
-        layer.setHiddenOrbits(cometIds);
+        layer.setHiddenOrbits(hiddenOrbitIds);
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
         const minimap = mountSpaceMinimap(stage.ownerDocument);
         const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect }) : null;
@@ -97,7 +97,7 @@ export function createApplicationWorldContext() {
             minimap.selectObject(frame);
           },
           setAsteroidOrbitsEnabled(enabled) {
-            if (!destroyed) layer.setHiddenOrbits(enabled === true ? cometIds : [...cometIds, ...asteroidIds]);
+            if (!destroyed) layer.setHiddenOrbits(enabled === true ? hiddenOrbitIds : [...hiddenOrbitIds, ...asteroidIds]);
           },
           setAsteroidLabelsEnabled(enabled) {
             if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);
