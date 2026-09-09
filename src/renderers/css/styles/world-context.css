@@ -17,8 +17,8 @@
 
 .prepared-world-context s:not([data-context-body]) {
   width: 1px;
-  height: var(--context-line-width, 1px);
-  margin-top: calc(var(--context-line-width, 1px) * -.5);
+  height: calc(var(--context-line-width, 1px) + var(--context-active-stroke, 0px));
+  margin-top: calc((var(--context-line-width, 1px) + var(--context-active-stroke, 0px)) * -.5);
   transform-origin: 0 50%;
   background: var(--shell-text, #dfdfdf);
   pointer-events: var(--context-orbit-pointer-events, none);
@@ -30,7 +30,7 @@
   top: 50%;
   box-sizing: content-box;
   padding: 0;
-  box-shadow: inset 0 0 0 var(--context-line-width, 1px) var(--shell-text, #dfdfdf);
+  box-shadow: inset 0 0 0 calc(var(--context-line-width, 1px) + var(--context-active-stroke, 0px)) var(--shell-text, #dfdfdf);
   border-radius: 50%;
   z-index: 1;
 }
@@ -42,6 +42,55 @@
   border-radius: 50%;
 }
 
+[data-context-group][data-context-selected="true"] {
+  --context-active-stroke: .5px;
+}
+
+/* The selected body uses four open corners at the standard 16px size. */
+.prepared-world-context [data-context-selected="true"] > [data-context-indicator] {
+  box-shadow: none;
+  border-radius: 0;
+}
+.context-anchor-corners {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+[data-context-selected="true"] .context-anchor-corners {
+  display: block;
+}
+.prepared-world-context [data-context-selected="true"] > [data-context-indicator]::before,
+.prepared-world-context [data-context-selected="true"] > [data-context-indicator]::after,
+.context-anchor-corners::before,
+.context-anchor-corners::after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  width: 5px;
+  height: 5px;
+  border: 0 solid var(--shell-text, #dfdfdf);
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+  border-radius: 0;
+  pointer-events: none;
+}
+.prepared-world-context [data-context-selected="true"] > [data-context-indicator]::before {
+  inset: 0 auto auto 0;
+}
+.prepared-world-context [data-context-selected="true"] > [data-context-indicator]::after {
+  inset: 0 0 auto auto;
+  transform: rotate(90deg);
+}
+.context-anchor-corners::before {
+  inset: auto auto 0 0;
+  transform: rotate(270deg);
+}
+.context-anchor-corners::after {
+  inset: auto 0 0 auto;
+  transform: rotate(180deg);
+}
+
 /* A wider hit corridor across the line, without extending its clipped ends. */
 .context-orbit s::before {
   content: '';
@@ -51,18 +100,9 @@
 
 .context-orbit s { cursor: pointer; }
 
-[data-context-group]:is([data-object-hovered="true"], :focus-within) > .context-orbit {
-  --context-line-opacity: 1;
-}
-
 [data-context-group] {
   --context-line-opacity: var(--context-base-line-opacity, .5);
   --context-label-opacity: var(--context-base-label-opacity, .65);
-}
-
-[data-context-group]:is([data-object-hovered="true"], :focus-within) {
-  --context-line-opacity: .75;
-  --context-label-opacity: 1;
 }
 
 .context-orbit,
@@ -87,7 +127,7 @@
   --context-label-opacity: calc(var(--context-base-label-opacity, .65) * .75);
 }
 [data-context-group]:is([data-object-hovered="true"], :focus-within) {
-  --context-line-opacity: .75;
+  --context-line-opacity: 1;
   --context-label-opacity: 1;
 }
 [data-context-body] { transition: opacity 120ms ease; }

@@ -232,11 +232,14 @@ export function createSceneRouter({
     const centerTarget = options.recenter
       ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount, force: true })
       : options.sceneSelection && id !== centeredObjectId && !pending && sceneState === 'ready'
-        ? navigation.centerTarget?.({ objectId: id, mount: active?.mount }) : null;
-    // Centering changes the selected scene/card as well as the camera. Keep the
-    // explicit wide selection until the user chooses another object or zooms in.
+        ? (navigation.systemTarget?.({ objectId: id, fromId: objectId, mount: active?.mount })
+          ?? navigation.centerTarget?.({ objectId: id, mount: active?.mount })) : null;
+    // First selection frames the object's system; a repeat opens its close-up.
     centeredObjectId = centerTarget && !options.overview ? id : null;
     if (centerTarget) options = { ...options, targetWorldCamera: centerTarget, centerSelection: true };
+    if (centerTarget && options.sceneSelection && id === solarSystemFocus(objects)?.id) {
+      options = { ...options, overview: true };
+    }
     const cancelledFlight = pending !== null && !pending.options.centerSelection && !options.centerSelection;
     if (pending) {
       const previous = pending;
@@ -261,7 +264,7 @@ export function createSceneRouter({
     request.lifetime.onDispose(() => {
       if (!pending || pending === request) worldContextMount?.previewSelection?.();
     });
-    if (options.recenter && options.overview) {
+    if ((options.recenter || options.centerSelection) && options.overview) {
       const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.();
       if (restoreSelection) request.lifetime.onDispose(restoreSelection);
     } else if (object.id !== objectId && !options.overview) {
@@ -338,7 +341,7 @@ export function createSceneRouter({
       request.timing.mark(error?.name === 'AbortError' ? 'cancelled' : 'failed');
       if (pending !== request || request.controller.signal.aborted) return false;
       pending = null; request.controller.abort(); request.lifetime.destroy();
-      worldContextMount?.setNavigationIndicatorsVisible?.(true);
+      worldContextMount?.setNavigationInFlight?.(false);
       if (active === source && source) {
         if (error?.preserveView === true) {
           const url = captureUrl();
@@ -416,7 +419,7 @@ export function createSceneRouter({
   }
 
   function publishSceneState() {
-    worldContextMount?.setNavigationIndicatorsVisible?.(!pending || pending.options.preserveView === true || pending.options.centerSelection === true);
+    worldContextMount?.setNavigationInFlight?.(Boolean(pending && pending.options.preserveView !== true));
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
@@ -533,7 +536,9 @@ export function createSceneRouter({
     if (!owner || !navigation || !sun?.worldFrame) return;
     session.lifetime.onDispose(watchOverviewSelection({ navigation: owner, objects, objectId,
       getOverview: () => overview,
-      isAvailable: () => active === session && sceneState === 'ready' && !pending && centeredObjectId !== objectId,
+      // The pending flight owns the camera; repeat-click bookkeeping must not
+      // suppress zoom-out deselection after that flight has finished.
+      isAvailable: () => active === session && sceneState === 'ready' && !pending,
       windowTarget,
       onChange(next) {
         if (!next.overview) {

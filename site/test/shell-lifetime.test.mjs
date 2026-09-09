@@ -197,6 +197,36 @@ test("Motion cannot enable Speed before the shared runtime is ready or after it 
   shell.destroy();
 });
 
+test('camera zoom switches body cards without replacing content or changing the search and detail tab', () => {
+  const f = fixture(), information = f.selectors.get('.planet-information-panel');
+  const datasetTab = new Element(), factsTab = new Element(), dataset = new Element(), facts = new Element();
+  datasetTab.dataset.informationTab = 'dataset'; factsTab.dataset.informationTab = 'factsheet';
+  dataset.dataset.informationPanel = 'dataset'; facts.dataset.informationPanel = 'factsheet';
+  information.selectors.set('[data-information-tab]:not([hidden])', [datasetTab, factsTab]);
+  information.selectors.set('[data-information-panel]', [dataset, facts]);
+  const shell = f.mount(), listeners = new Set(), search = f.selectors.get('.planet-sidebar-search');
+  const children = information.children;
+  let world = { pose: { positionM: [0, 0, 10000] } };
+  shell.setCamera({ navigation: { frame: { originM: [0,0,0], bodyRadiusM: 1000 },
+    optics: () => ({ focalPixels: 1000, detailHandoffDiameterPixels: 14 }), capture: () => world,
+    subscribe(callback) { listeners.add(callback); return () => listeners.delete(callback); },
+  } });
+  assert.equal(information.dataset.cardView, 'detail');
+  factsTab.dispatchEvent(new Event('click'));
+  search.value = 'my search';
+  for (const [range, view] of [[1e8, 'overview'], [10000, 'detail']]) {
+    world = { pose: { positionM: [0,0,range] } };
+    for (const callback of listeners) callback(world);
+    assert.equal(information.dataset.cardView, view);
+    assert.equal(information.children, children, 'Both views stay mounted');
+    assert.equal(facts.hidden, false); assert.equal(dataset.hidden, true);
+    assert.equal(factsTab.getAttribute('aria-selected'), 'true');
+    assert.equal(search.value, 'my search');
+  }
+  shell.destroy();
+  assert.equal(listeners.size, 0);
+});
+
 test('camera scale changes retained overview content without moving the camera and search selects the matching category tab', () => {
   const f = fixture(), browser = f.selectors.get('.planet-object-browser');
   const galaxy = new Element(), system = new Element(), introduction = new Element();

@@ -34,7 +34,7 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   clipY: number;
 }) {
   return (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[], fullOrbit = false): readonly OrbitSegment[] => {
-    // Hover reveals every prepared chord, including those omitted by the trail fade.
+    // Full orbits include prepared chords omitted by the trail fade.
     const chords = fullOrbit ? undefined : activeChords;
     const eyes = chords ? null : vertices.map(toEye);
     const segments: OrbitSegment[] = [];

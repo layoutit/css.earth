@@ -1,9 +1,12 @@
 import { CENTER_SELECTION_DURATION_SECONDS } from './runtime-policy.mjs';
+import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mjs';
+import { bodyCardViewAtCamera } from './overview-context.mjs';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
-export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document }) {
+export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document,
+  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS }) {
   const frames = new Map(objects.map(object => [object.id, object.worldFrame]));
   let lastCamera = null, lastOptics = null;
   const supports = (from, to) => {
@@ -25,6 +28,20 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const minimumDistance = force ? frame.bodyRadiusM * 2 : 0;
       return worldCameraFromCenteredPresentation({ rotation: projection.rotation,
         distanceUnits: Math.max(current.distanceM, minimumDistance) / frame.metersPerUnit }, frame, optics);
+    },
+    systemTarget({ objectId, fromId, mount }) {
+      const owner = mount?.navigation, frame = frames.get(objectId);
+      const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
+      if (!from || !optics || !frame) return null;
+      if (objectId === fromId && bodyCardViewAtCamera(from, frame, optics, objectId) === 'detail') return null;
+      // Frame the larger moons on first selection; a repeat uses normal focus.
+      const view = systemViews.get(objectId);
+      const systemRadius = systemRadii.get(objectId);
+      if (view) return systemViewTarget(from, frame, optics, view, systemFramingRect(optics, documentTarget),
+        systemOverviewDistance(frame.bodyRadiusM, systemRadius ?? frame.bodyRadiusM, optics));
+      return createWorldSelectionTarget(from, { ...frame,
+        bodyRadiusM: systemRadius ?? frame.bodyRadiusM,
+      }, optics);
     },
     async focus({ objectId, mount, signal, reducedMotion = false, targetWorldCamera = null, centerSelection = false, timing = { mark() {} } }) {
       const owner = mount?.navigation, frame = frames.get(objectId);
@@ -296,7 +313,7 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
         // pose after both position and orientation have finished. A detail
         // readiness hold must still be respected.
         if (endElapsedS === flight.durationS && permittedEndS >= endElapsedS &&
-            sample.progress === 1 && elapsedS >= flight.orientationDurationS) elapsedS = endElapsedS;
+            sample.progress === 1) elapsedS = endElapsedS;
         const world = worldSample(flight, from, elapsedS, sample);
         if (publishedElapsed !== elapsedS) { owner.apply(world); onPaint(world); publishedElapsed = elapsedS; }
         if (elapsedS >= endElapsedS || stopWhen(elapsedS)) finish(null, { world, elapsedS, time });
