@@ -29,3 +29,9 @@ Exact products, raw labels, source hashes, measured controls and acquisition ope
 No renderer, shared runtime, adapter, shell, camera or mesh changes are part of this pass. The same source-distance, detector, visibility, registration and photometric acceptance limits apply. All processing occurs during preparation; runtime selects fixed image banks on retained triangle leaves.
 
 The [independent FITS anchors](evidence/encounter-decoder-anchors.json) now cover all 20 encounter products, including their quality maps and negative/nonfinite radiance. The regression gate reprojects the actual camera fit and holdout coordinates against each source-shape hash.
+
+The [final numerical and geometry receipt](evidence/surface-imagery-qualification.json) binds every photographic frame to the prepared result and confirms byte-identical terrain files, unchanged camera/geometry recipes and unchanged acceptance limits against the integrated main branch. The integrated preparation, package, router and runtime suite passes 84 tests; the four source packages pass 12 closure tests. Twelve geometry/science tests also pass.
+
+[Source restoration](evidence/surface-imagery-source-restore.json) downloads the 16 new archive files through their acquisition recipes (433,735,312 bytes) into fresh destinations. Unchanged source inputs were copied from the previously qualified packages; this is a restoration test of the new inputs, not a fresh download of every historical source.
+
+[Runtime delivery](evidence/surface-imagery-delivery.json) verifies 15 changed image URLs by HEAD and downloads all 167 current runtime files into an empty directory, with exact byte lengths and SHA-256 hashes. The changed versions total 4,100,318 bytes. Across these four bodies, the current inventory decreases from 170 files / 45,942,500 bytes to 167 files / 45,663,340 bytes. Older content-addressed releases remain available.

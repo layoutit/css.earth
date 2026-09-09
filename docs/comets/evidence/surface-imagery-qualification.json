@@ -1,5 +1,5 @@
 {
-  "base": "eecf9d5879433ed6398529274670a0ef73d47b04",
+  "base": "83f1b66bb70044fa58c5ec709d9f5d9041a642e8",
   "scope": "No renderer, shared runtime, adapter, shell, camera or mesh changes; source and prepared package data only",
   "records": [
     {
@@ -811,6 +811,19 @@
                 "5": "n20140913-200612",
                 "6": "n20140920-133916"
               }
+            },
+            "areaCoverage": {
+              "samplesPerTriangle": 24,
+              "acceptedFraction": 0.5624818952001741,
+              "sourceFractions": {
+                "aug06-0520": 0.10097977474952158,
+                "aug05-1944": 0.14776858383612404,
+                "aug06-0244": 0.1515745078275691,
+                "aug05-2344": 0.14453151040314863,
+                "n20140913-200612": 0.010096979950681763,
+                "n20140920-133916": 0.00753053843312713
+              },
+              "method": "24 deterministic area-weighted triangle samples; same frame reports and unchanged retained geometry as the final prepared atlas"
             }
           }
         }
