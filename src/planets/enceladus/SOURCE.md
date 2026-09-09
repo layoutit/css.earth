@@ -93,3 +93,10 @@ The existing Schenk elevation grid is retained: kilometres above a reference ell
 Qualification status: source intake and recipe proposal. The formal pinned Python environment reproduced the exact ZIP hash (see docs/moons/b2-preparation/enceladus-dsk-reproduction.json). Mesh error/topology, restored-source and prepared browser/visual gates remain pending. No readiness is claimed.
 
 The visual-trial candidate uses 2,000 source-preserving native triangles with regularization and a 2,523 m rendering error ceiling. Its closed mesh has one component and Euler characteristic two. Four barycentric positions on every retained triangle gave a maximum one-way source distance of 1,822.01 m; source Cartesian extrema differ by at most 533 m. These rendering measurements are not source uncertainty or an exhaustive Hausdorff bound. Browser limb and feature qualification remains pending.
+
+## Cassini spectral surface views
+
+Ice absorption and Infrared ratio use six calibrated VIMS observations with matched
+navigation backplanes. They preserve partial support and archive filtering;
+illumination is not photometrically corrected. The [source interpretation](source/vims-chemistry/INTERPRETATION.md)
+defines every channel, coordinate, mask, overlap rule and scientific limit.

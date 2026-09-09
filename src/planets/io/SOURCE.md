@@ -137,3 +137,10 @@ than forcing label points to replace the polygon `Unit` attribute. Six distribut
 anchors, exact source hashes, hole/seam behavior, and categorical exclusion rules
 are exercised by the focused geology/source tests. B2 preparation and browser
 qualification are recorded separately in `docs/moons/b2-preparation/`.
+
+## Visible spectral surface views
+
+The VLT/MUSE views use original July 2019 measured maps from King et al.
+The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate
+evidence, first-valid-night coverage, registration limits and residual night
+differences. Every conversion is offline; the scene geometry remains unchanged.

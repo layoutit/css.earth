@@ -367,7 +367,7 @@
     {
       "id": "B6",
       "title": "Mapped scientific surfaces across four existing moons",
-      "state": "draft",
+      "state": "merged",
       "owner": "Moons",
       "names": [
         "Moon",
@@ -380,11 +380,53 @@
       "scopeDocument": "B6-MAPPED-SCIENCE.md",
       "contract": "Existing renderer, runtime, camera, shell, navigation, geometry and retained DOM remain unchanged.",
       "coverageAccounting": "Improves already-counted scenes; no new moon or benchmark-coverage claim.",
-      "draft": true,
+      "draft": false,
       "branch": "feat/moons-mapped-science",
       "evidenceDocument": "b6-mapped-science/VISUAL-REVIEW.md",
       "qualification": "Selected-body source, package, browser and fresh-delivery checks passed; repository-wide integration gates remain.",
-      "pullRequest": "https://github.com/layoutit/cssEarth/pull/76"
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/76",
+      "mergeCommit": "34da5b07d96fd53e2d1a9877db470c04a58dea2f"
+    },
+    {
+      "id": "B7",
+      "title": "Cassini surface atlas",
+      "state": "merged",
+      "owner": "Moons",
+      "names": [
+        "Titan",
+        "Dione",
+        "Rhea"
+      ],
+      "newViews": 5,
+      "scopeDocument": "B7-CASSINI-ATLAS.md",
+      "draft": false,
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/81",
+      "mergeCommit": "96d9309304b370958ab0234fbd9c02a473a97ff5",
+      "qualification": "Selected atlas delivered; historical aggregate gaps remain in the batch evidence.",
+      "coverageAccounting": "Deepens existing scenes; fixed moon benchmark unchanged."
+    },
+    {
+      "id": "B8",
+      "title": "Surface chemistry on Io, Ganymede and Enceladus",
+      "state": "draft",
+      "owner": "Moons",
+      "names": [
+        "Io",
+        "Ganymede",
+        "Enceladus"
+      ],
+      "newViews": 5,
+      "scopeDocument": "B8-SURFACE-CHEMISTRY.md",
+      "branch": "feat/moons-surface-chemistry",
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/87",
+      "outcome": "Io spectral slope and visible absorption; Ganymede oxygen-sensitive reflectance ratio; partial Enceladus ice absorption and infrared ratio.",
+      "newImageFiles": 20,
+      "newImageBytes": 585804,
+      "contract": "Body-owned sources and prepared materials; shared renderer, shell, navigation and camera code unchanged; scene geometry and retained trees preserved.",
+      "coverageAccounting": "Deepens existing scenes; fixed moon benchmark unchanged.",
+      "qualification": "Selected source, package, delivery, desktop visual, DOM and mobile/selection checks pass; aggregate tests, full source restoration, production build and all-object browser gates remain open.",
+      "draft": true,
+      "evidenceDocument": "b8-surface-chemistry/VISUAL-REVIEW.md"
     }
   ]
 }

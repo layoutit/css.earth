@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "b85caab6ca861268f7309094e5e5dd4dcf07402e6ab3f1350645347e748949ac"
+          "sha256": "b88628b2b19d84eb9920adbaaee9c47c6839359682daab4a13fbb765d17c0e1a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8939ed6177dc04a3bcb418c0e0c0a9d935f7624559f5ce49c119596497325bd5"
+          "sha256": "7427b79e3ae0f58d3c9b158cb5887655be993ef72299a48193a85bfe91632a6f"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "9df1c1eaa7cc703dd976bbeab82eb0e722ed2dbe7073c5a3614436754410c6c5"
+          "sha256": "e9cecdb23b82d24073b8a26f21ed9ca957b5b78c98571c474004d19e09ebad2a"
         }
       ],
       "shape": {
@@ -68,6 +68,16 @@
             },
             {
               "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ice-absorption",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "infrared-ratio",
               "source": "content",
               "material": "lighting"
             }
@@ -113,6 +123,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bbad21940add50525bb43ebebd81e869805ad88de45e533e6e58f0f07f0e8de4"
+    "sha256": "35047af6c67096e34d52240042351e0bb5bea57051d0e562e0a31a0726a6eb85"
   }
 }

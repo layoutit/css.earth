@@ -131,4 +131,3 @@ The established source-meshoptimizer path retains source connectivity, reduces t
  write(s/'manifest.json',manifest)
  print(id,'authored',flush=True)
 write(ROOT/'inputs.json',all_bodies)
-

@@ -1,0 +1,68 @@
+{
+  "frames": [
+    {
+      "id": "ida",
+      "physicalFrameClosure": true
+    },
+    {
+      "id": "gaspra",
+      "physicalFrameClosure": true
+    },
+    {
+      "id": "steins",
+      "physicalFrameClosure": true
+    },
+    {
+      "id": "lutetia",
+      "physicalFrameClosure": true
+    }
+  ],
+  "layouts": {
+    "schema": "cssearth-prepared-leaf-layout-census@2",
+    "evidence": "validated-source-data",
+    "complete": true,
+    "sharedViolations": [],
+    "objects": [
+      {
+        "id": "ida",
+        "count": 800,
+        "completedByDescriptor": 0,
+        "failures": [],
+        "modules": [
+          "src/planets/ida/prepared/object.json"
+        ],
+        "sourceSha256": "2180e4e15956fb66b6499ecc1ad37c8282d4cdc59a05e7f22dbda7b6f557feeb"
+      },
+      {
+        "id": "gaspra",
+        "count": 800,
+        "completedByDescriptor": 0,
+        "failures": [],
+        "modules": [
+          "src/planets/gaspra/prepared/object.json"
+        ],
+        "sourceSha256": "bcff6affded7574e7632481e7c6ce789f243a16fce49f377bc60e8d25e18b348"
+      },
+      {
+        "id": "lutetia",
+        "count": 800,
+        "completedByDescriptor": 0,
+        "failures": [],
+        "modules": [
+          "src/planets/lutetia/prepared/object.json"
+        ],
+        "sourceSha256": "e862f939cbd3b17448f03cc08ed3ad848de7cbad3085993f9af1524bc279c92f"
+      },
+      {
+        "id": "steins",
+        "count": 800,
+        "completedByDescriptor": 0,
+        "failures": [],
+        "modules": [
+          "src/planets/steins/prepared/object.json"
+        ],
+        "sourceSha256": "bb2281a1ff88d364d3a9bcd3b203caa2db0d5cf05e5d1df9b5eba593341ffe41"
+      }
+    ]
+  }
+}

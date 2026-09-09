@@ -38,4 +38,17 @@ The committed Horizons elements and vector fixtures are reproducible through the
 
 The four body source contracts run with `node --test --test-concurrency=1 tests/objects/unit/{ivar,toro,cerberus,tantalus}/source.test.mjs`. Focused numerical qualification uses `node docs/near-earth-population/qualify.mjs`; its independent source oracle requires Python with NumPy and Pillow (`CSSEARTH_PYTHON` can select that interpreter). The original closest-triangle oracle, source snapshots and atlas-anchor checks are reused with these four targets. Source fit is sampled in both directions; it is not an exhaustive Hausdorff bound.
 
-Original numerical meshes and primary papers have also been restored into an empty destination through the existing acquisition owner, with every byte count and SHA-256 checked. See [source restoration](source-restoration.json). Runtime delivery and browser evidence will be recorded after preparation.
+Original numerical meshes and primary papers have also been restored into an empty destination through the existing acquisition owner, with every byte count and SHA-256 checked. See [source restoration](source-restoration.json). The four bodies publish 140 content-addressed runtime files (31,143,572 bytes). A fresh empty installation downloaded every file and verified its size and SHA-256; no local asset was reused. See [delivery evidence](fresh-install.json).
+
+## Source-to-result checks
+
+All four models use 800 retained native `u` raster triangles. Numerical sampling independently compares every retained face centroid, six original extrema and atlas anchors against the full pinned source mesh. Decoded interior atlas RGB differs by at most 3 channel values; shared-edge/bleed normal identity is reported diagnostically rather than asserted.
+
+| Body | Two-sided sampled distance p95 | Maximum sampled distance | Withheld interior elevation texels |
+| --- | --- | --- | --- |
+| Ivar |7.22 m|33.48 m|0 / 5,324,086|
+| Toro |4.86 m|12.38 m|0 / 5,522,256|
+| Cerberus |0.93 m|3.58 m|0 / 5,206,363|
+| Tantalus |5.98 m|16.79 m|1,842 / 5,738,316 (0.0321%)|
+
+Distances use 8,192 deterministic area-weighted samples in each direction, not an exhaustive Hausdorff bound. Tantalus has a 14.5 m meshoptimizer estimate budget and a separate 14.5 m source-transfer cutoff. The measured sampled geometry distance exceeds that estimate in a small region; the existing atlas preparation withholds texels beyond the cutoff. No cutoff was loosened or missing value extrapolated. These numerical deviations do not measure the physical accuracy of the source reconstruction. Full identities, source-fit results and transfer counts are in [qualification.json](qualification.json).

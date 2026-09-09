@@ -57,3 +57,17 @@ All interpolation contributors must have accepted quality, finite nonnegative si
 ### Reproduction and source closure
 
 `source/preparation/camera.json` selects the exact image, original kernels and control evidence. `source/observations/*-camera.json` is a checked-in preparation input bound by image, mesh and provenance hashes. Reproduce it with `python tools/objects/terrestrial-layers/prepare-archived-camera.py src/planets/lutetia/source` (NumPy, SciPy, Astropy and SpiceyPy), then run the existing authored preparation command. No camera fitting, source mesh queries, photometric correction or atlas construction runs in the application. All atlases, coverage, thumbnails and surface minimaps consume the same qualified sampler. The camera/source tests use original-file samples, rejected quality cases and independent geometric anchors; the PR records separate browser and source-restoration results.
+
+## Spacecraft mosaic update (2026-09-09)
+
+The existing OSIRIS view now combines NAC orange-filter images **N20100710T154047674ID4DF22** and **N20100710T154135529ID4DF22**, acquired at 15:41:06.632 and 15:41:54.488 UTC on 10 July 2010. Their nominal scales are 88 and 78 m/pixel. Each original resampled, stray-light-corrected I/F image retains its sigma and quality arrays and has a separately pinned camera profile.
+
+The added camera reproduces archived boresight RA/Dec to 0.0000043 degrees and the archived surface-intercept point to 0.00535 pixels before adjustment. The same bounded image/model correlation method and disjoint two-fit/two-holdout windows as the first image give a translation of [−31.5,+125] pixels. The maximum withheld residual is 5.408 pixels, below the unchanged 12-pixel limit. These are source-shape registration checks, not absolute cartographic precision. No roll, scale, mesh or local warp is fitted.
+
+The existing phase-dependent Minnaert approximation, incidence/emission limits and source-mesh transfer limits remain. Qualified overlaps fit a 1.09501 relative display gain, within the 1.35 limit. Lowest emission selects the source. The prepared lossless observation-index raster records each contributing original image, including atlas bleed, outside runtime delivery.
+
+The same-filter encounter inventory was surveyed. The 15:43:54 close-up failed the existing image/model correlation checks, and the 15:45:28 image failed the independent archived surface-intercept check. Later high-phase frames remain candidates, not included observations. No tolerance was relaxed to increase coverage and no extra dataset row was added.
+
+This package retains its original 800-triangle geometry, the ordinary prepared grid for missing coverage, and Shadows off. Renderer and shared interaction code are unchanged. Current mosaics supersede the single-photograph descriptions above.
+
+Reproduce the added camera with `python tools/objects/terrestrial-layers/prepare-archived-camera.py src/planets/lutetia/source --profile preparation/n20100710t154135529id4df22-camera.json`, then run `node tools/objects/dist/prepare-authored.js lutetia --write`.
