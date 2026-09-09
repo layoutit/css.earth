@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-ellipsoid-parameters@1",
+  "source": "https://doi.org/10.3847/0004-6256/152/4/89",
+  "sourceSection": "Section 2.2, radar dimensions 3.9 × 2.7 × 2.6 km; sections 1 and 3.2, 10.93 h lightcurve period",
+  "scaleConvention": "published-semiaxes",
+  "semiaxesKm": [
+    1.95,
+    1.35,
+    1.3
+  ],
+  "subdivisions": 4,
+  "periodHours": 10.93,
+  "axisDefinition": "X is the longest model axis; Z is the shortest. These axes do not define a measured present-day attitude.",
+  "qualification": "Smooth approximation of published numeric dimensions, not a recovered surface mesh. No mapped terrain, albedo or rotation phase is claimed.",
+  "assumptions": "Half of the full dimensions reported in Schleicher & Knight (2016) section 2.2. Its cited 2014 conference abstract reports preliminary projected dimensions of about 2.5 × 3 km; the later three-axis dimensions are selected explicitly. A spin pole was not recovered."
+}

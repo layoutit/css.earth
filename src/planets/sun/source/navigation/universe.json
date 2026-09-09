@@ -1292,7 +1292,7 @@
     },
     {
       "id": "hiiaka",
-      "name": "Hiʻiaka",
+      "name": "Hi\u02bbiaka",
       "color": "#a0a0a0"
     },
     {
@@ -1547,12 +1547,12 @@
     },
     {
       "id": "comet-137p",
-      "name": "Shoemaker–Levy 2",
+      "name": "Shoemaker\u2013Levy 2",
       "color": "#b8b6b2"
     },
     {
       "id": "comet-143p",
-      "name": "Kowal–Mrkos",
+      "name": "Kowal\u2013Mrkos",
       "color": "#b8b6b2"
     },
     {
@@ -2071,6 +2071,16 @@
       "color": "#aaaaaa"
     },
     {
+      "id": "comet-2p",
+      "name": "Encke",
+      "color": "#b8b6b2"
+    },
+    {
+      "id": "comet-209p",
+      "name": "LINEAR",
+      "color": "#b8b6b2"
+    },
+    {
       "id": "arrokoth",
       "name": "Arrokoth",
       "color": "#9d9388"
@@ -2082,7 +2092,7 @@
     },
     {
       "id": "gkunhomdima",
-      "name": "Gǃkúnǁʼhòmdímà",
+      "name": "G\u01c3k\u00fan\u01c1\u02bch\u00f2md\u00edm\u00e0",
       "color": "#9d9388"
     }
   ],

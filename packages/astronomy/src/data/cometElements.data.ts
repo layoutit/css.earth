@@ -131,5 +131,31 @@ export const COMET_ELEMENTS = {
       "meanAnomalyAtEpochRad": 0.3422897192159616,
       "meanMotionRadPerDay": 0.003165006490932818
     }
+  },
+  "comet-2p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D2P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 331768659.7433139,
+      "eccentricity": 0.8473122177960886,
+      "inclinationRad": 0.5931421676837539,
+      "ascendingNodeRad": 6.128359966747703,
+      "argumentOfPeriapsisRad": 2.95174829200966,
+      "meanAnomalyAtEpochRad": 5.448623463144994,
+      "meanMotionRadPerDay": 0.005208546215668962
+    }
+  },
+  "comet-209p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D209P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 442328217.0119229,
+      "eccentricity": 0.6743447085462562,
+      "inclinationRad": 0.6621102258688875,
+      "ascendingNodeRad": 0.552762810727286,
+      "argumentOfPeriapsisRad": 3.274046209443695,
+      "meanAnomalyAtEpochRad": 2.640348871465922,
+      "meanMotionRadPerDay": 0.0033833941369661173
+    }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>
