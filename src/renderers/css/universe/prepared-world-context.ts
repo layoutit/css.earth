@@ -12,7 +12,7 @@ import { rotateWorldPosition, transposeWorldRotation, validateWorldRotation, wor
 import { levelOfDetailFor, orbitLineOpacity } from '../navigation/perspective-dolly.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { clipSegmentToRectangle, rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
-import { createPreparedRingProjector, createSphereChordTest, orbitBoundsMayContribute } from '../solar-system/prepared-ring-projection.js';
+import { createPreparedRingProjector, createRetainedRingProjection, createSphereChordTest, orbitBoundsMayContribute } from '../solar-system/prepared-ring-projection.js';
 import { applySprite, writePieces } from '../solar-system/heliocentric-sprites.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
@@ -357,6 +357,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       orbitNavigable: false,
       orbitHidden: false, labelHidden: false,
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
+      orbitProjection: createRetainedRingProjection(pieces.length),
       publishedEmphasis: undefined as string | null | undefined,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, previousCount: 0,
       fade: { element: label, target: 0, hideTimer: null } as LabelFadeState };
@@ -620,7 +621,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             // the exact existing fade, which saturates at 48/128 CSS pixels.
             measuredExtent = projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
               entry.closedOrbit ? 48 : 128, entry.orbit.activeChords);
-          } else segments = projector(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords);
+          } else segments = projector(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords, entry.orbitProjection);
         }
         if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments, entry.closedOrbit);
         const appearance = entry.orbitAppearance;

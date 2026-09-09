@@ -1,10 +1,34 @@
 import { expect, test } from 'vitest';
-import { createPreparedRingProjector, createSphereChordTest, orbitBoundsMayContribute } from './prepared-ring-projection.js';
+import { createPreparedRingProjector, createRetainedRingProjection, createSphereChordTest, orbitBoundsMayContribute } from './prepared-ring-projection.js';
 import { rayHitsSphereBefore } from './heliocentric-geometry.js';
 import type { Vector3 } from './types.js';
 
 const project = ([x, y, z]: Vector3) => [130 + 800 * x / -z, -40 + 800 * y / -z];
 const limits = { toEye: (point: Vector3) => point, project, near: .1, clipX: 1000, clipY: 600 };
+
+test('a retained projection preserves clipped snapshots while reusing bounded slots through retirement and re-entry', () => {
+  const vertices: Vector3[] = Array.from({ length: 128 }, (_, i) => [
+    100 * Math.cos(i * Math.PI / 64), 80 * Math.sin(i * Math.PI / 64), -200]);
+  const trail = vertices.map(() => 1), retained = createRetainedRingProjection(vertices.length * 2);
+  let offset = 0;
+  const projector = createPreparedRingProjector({ ...limits,
+    toEye: p => [p[0] + offset, p[1], p[2]],
+    hidden: p => rayHitsSphereBefore(p, [0, 0, -100], 10),
+    mayOcclude: createSphereChordTest([0, 0, -100], 10, project) });
+  const first = projector(vertices, trail, undefined, retained);
+  const slots = [...first], snapshot = projector(vertices, trail);
+  for (offset of [150, 1000, -500, 0]) {
+    const expected = projector(vertices, trail);
+    const actual = projector(vertices, trail, undefined, retained);
+    expect(actual).toBe(first);
+    expect(actual).toEqual(expected);
+    for (let i = 0; i < Math.min(slots.length, actual.length); i++) expect(actual[i]).toBe(slots[i]);
+  }
+  expect(snapshot).toEqual(first);
+  expect(Object.isFrozen(snapshot)).toBe(true);
+  expect(Object.isFrozen(snapshot[0])).toBe(true);
+  expect(() => projector(vertices, trail, undefined, createRetainedRingProjection(1))).toThrow(/capacity/);
+});
 
 test('prepared orbit bounds reject only offscreen or fully faded chords across camera and physical scales', () => {
   let seed = 23751, rejected = 0, retained = 0;

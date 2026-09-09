@@ -2,6 +2,27 @@ import { clipSegmentToRectangle, eyeFraction, lerp, splitVisible } from './helio
 import type { Vector3 } from './types.js';
 import type { OrbitSegment } from './heliocentric-view.js';
 
+/** A mounted line pool owns one live projection, with the same bounded capacity
+ * as its drawing leaves. Consumers finish reading it before the next publish.
+ * Prepared vertices remain immutable; only these screen coordinates change. */
+export function createRetainedRingProjection(capacity: number) {
+  if (!Number.isSafeInteger(capacity) || capacity < 0) throw new TypeError('Invalid retained orbit capacity.');
+  const slots = Array.from({ length: capacity }, () => [0, 0, 0, 0, 0] as [number, number, number, number, number]);
+  const segments: OrbitSegment[] = [];
+  let count = 0;
+  return {
+    reset() { count = 0; },
+    write(x0: number, y0: number, x1: number, y1: number, weight: number) {
+      const slot = slots[count];
+      if (!slot) throw new RangeError('Prepared orbit projection capacity exceeded.');
+      slot[0] = x0; slot[1] = y0; slot[2] = x1; slot[3] = y1; slot[4] = weight;
+      segments[count++] = slot;
+      return true;
+    },
+    finish(): readonly OrbitSegment[] { segments.length = count; return segments; },
+  };
+}
+
 /** Conservative projected bounds for a prepared sphere. A near-plane crossing
  * requires the exact chord path. Otherwise its enclosing eye-space cube bounds
  * every projected chord, including viewport clipping and the existing fade. */
@@ -90,7 +111,13 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
       }
     }
   };
-  const projectRing = (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[]): readonly OrbitSegment[] => {
+  const projectRing = (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[],
+    retained?: ReturnType<typeof createRetainedRingProjection>): readonly OrbitSegment[] => {
+    if (retained) {
+      retained.reset();
+      visit(vertices, trail, activeChords, retained.write);
+      return retained.finish();
+    }
     const segments: OrbitSegment[] = [];
     visit(vertices, trail, activeChords, (x0, y0, x1, y1, weight) => {
       segments.push(Object.freeze([x0, y0, x1, y1, weight]));

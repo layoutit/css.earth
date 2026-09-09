@@ -1245,3 +1245,61 @@ HMR or trace loss. Generated Sun payload identity is checked against its
 committed descriptor; tracked inputs match the captured Git revision. All
 2,914/2,928 observations are encoded, with +13/-32 microseconds drift and maximum
 PTS error below 1.475 ms. World/input/document identities and one camera survive.
+
+## Retained orbit projection storage
+
+The remaining planetary-band cluster includes frames with about 9 ms of camera
+publication followed by 9–15 ms of browser style, layout and layer work. The
+sampled cluster has one camera callback per frame; duplicate annotation callbacks
+are not its demonstrated cause. A separate native-input mutation census observes
+2,600 drawn orbit segments at 25 AU and 158,508 orbit-node mutation records over
+35 wheel inputs (`output/playwright/orbit-publication-census/`). This is a work
+census, not a timing benchmark.
+
+Each mounted world-context orbit now owns bounded screen-segment storage matching
+its existing retained leaf capacity. Projection reuses those slots instead of
+allocating and freezing every output tuple on every camera publication. Prepared
+vertices, exact clipping/projection arithmetic, line formatting, DOM capacity,
+hit corridors, colors, opacity and label policy stay unchanged. Consumers read
+this live view synchronously before the next publication; existing callers that
+need independent snapshots still receive frozen snapshots. This change does not
+remove the browser's per-segment style and layer work.
+
+Validation:
+
+- 62 focused projection, world-context, line-writer and retained-pool tests pass;
+  renderer typecheck and build pass. Retirement, re-entry, immutable snapshot
+  compatibility and capacity overflow are covered.
+- The replay produces **990,257 exactly matching segments** over 111 recorded
+  views and 13,608 orbit projections. It deliberately disables occlusion to
+  isolate numeric projection; occlusion and picking are covered separately by
+  the focused tests and browser views.
+- 24 browser views at DPR 1/2 retain exact camera, orbit styles, labels and nodes;
+  full-frame differences are at most **1/255**. The baseline's recorded script
+  omits the retained-buffer argument at the compiled call site. It checks the
+  replacement count but did not persist intercepted-request counts. Evidence:
+  `output/playwright/retained-orbit-projection/`.
+
+The synchronized candidate capture is
+`output/world-context-zoom/retained-orbit-projection-dpr2/`, recorder
+`42091814-4452-4165-914d-693e3e533c07`. It records base commit `89eb75ee9` plus its
+exact `source.patch`; all 26 source hashes and the patch match again after the
+capture, with 630 loaded-resource receipts. No HMR, application/resource error or
+trace loss is observed. All 2,907 observed frames are encoded, clock drift is
+−95 µs, and maximum PTS error is 1.439 ms. World, input and document identities
+stay retained, with one camera and Sun selected at the end.
+
+| Measurement | Direct marker alpha | Retained orbit storage |
+| --- | ---: | ---: |
+| Whole-route rAF intervals >25 ms | 25/3478 | 20/3459 |
+| Galaxy drag intervals >25 ms | 0/243 | 0/242 |
+| Planetary-band intervals >25 ms | 23/741 | 17/740 |
+| Planetary-band callback elapsed total | 4483.538 ms | 4173.298 ms |
+| Planetary-band style elapsed total | 1633.713 ms | 1657.646 ms |
+| Planetary-band layer elapsed total | 2012.686 ms | 2025.846 ms |
+| Whole-route maximum | 50 ms | 50 ms |
+
+The allocation/ownership change is verified. The modest timing difference is one
+capture per version and is not an isolated causal frame-rate claim. Browser work
+is essentially unchanged, and **the performance target is still unmet**. rAF
+intervals and video observations do not prove every display refresh.
