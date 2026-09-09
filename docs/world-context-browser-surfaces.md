@@ -1035,3 +1035,38 @@ Clock drift is 14/43 microseconds, maximum PTS error 1.465/1.488 ms. There are n
 application/resource errors, HMR events or trace loss. Per-capture qualification
 files include artifact hashes and analysis scripts; video observations do not
 prove every display refresh.
+
+### Remaining minimap publication cost (`4a75686e`)
+
+A node-attributed Chrome invalidation capture identifies the next owner precisely:
+**54,600 of 59,841 style invalidations** come from `.space-minimap-dot` during 24
+native camera updates (2,275 dots each update). Volume leaves account for 4,932.
+This is separate from the completed grid-variable and prepared point-range work:
+all points fit the large galaxy neighborhood, and their individual 2D transforms
+are still published on every orientation change.
+
+The short diagnostic directly initializes the full-route galaxy distance, then
+performs a reversible native drag. It adds expensive invalidation tracking and
+must not be compared with normal route timings. Recorder
+`5fe76742-d85f-4f76-9aee-9553a1f86a3a`, trace gzip, video, backend-node DOM snapshot,
+analysis and hashes are retained in
+`output/world-context-zoom/volume-drag-invalidation-short-dpr2/`. All 22 source
+hashes match clean `4a75686e`; all 25 observed video frames are encoded, with
+25 microseconds clock drift, <0.013 ms PTS error, stable world/input/document
+identities and no errors, HMR or trace loss. The longer invalidation attempt filled
+its trace buffer and lacks a stop anchor; its preserved fragment is not qualified.
+
+A passive minimap point-batch prototype publishes the same point projection,
+colors, radii, opacity and source order into one CSS shadow list. It removes
+2,274 elements, but **fails visual parity**: changes reach 248/255 despite matching
+camera state and visible counts. The smaller diagnostic also confirms identical
+grid styles and DOM rectangles while its image differs. Explicit point-layer
+stacking and a flat-grid variant do not qualify. These prototypes remain only in
+`output/playwright/minimap-shadow-*`; none changed product code. A separate atomic
+volume-leaf style trial passes 52 visual comparisons but loses trace data, so it
+also provides no qualified performance gain and is not adopted.
+
+The next architectural work must reduce the minimap's per-point publication cost
+while preserving its current grid, symbolic marker sizes, colors, opacity, source
+order and continuous camera tracking. The failed batch is not a substitute for
+that requirement, and the overall performance target remains open.
