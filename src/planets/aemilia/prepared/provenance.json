@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "76798b4c6b14f58c440d4663258a90a84ba3502762bc696bef0936b2d9949b2b"
+    "sha256": "f1d84e045cdadb429a3c62e0a6c7017d20ab667f9612f06fca9e99cb9edb5a4c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "44b385c374e53536d6d671ff261113ab190d2146d6625abbc160e02182f79423",
+      "sha256": "1c2f7477af63e442e6199197ae43510536d27617d8510cc08ee3ec7bc03e7713",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -126,7 +126,7 @@
               "method": "source-meshoptimizer",
               "targetFaces": 800,
               "maximumErrorMeters": 1350,
-              "regularize": true
+              "regularize": false
             }
           }
         },
@@ -420,8 +420,8 @@
         },
         {
           "url": "/scenes/aemilia/aemilia-elevation-surface@2x.webp",
-          "bytes": 331846,
-          "sha256": "26741703d7919349c2d1d7ffaf347109fed9b4e445be48547dd526151c2c05a8",
+          "bytes": 328966,
+          "sha256": "19041771fe239b7f3b8c4d6cff1a2b8e1194d82b37156604edb86e12639161e2",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/aemilia/aemilia-shape-surface@2x.webp",
-          "bytes": 221642,
-          "sha256": "13ecc204d08286b581d3e5866d8a38a6189d054669a62c9c311e730dc7436ce4",
+          "bytes": 238734,
+          "sha256": "55c3b3070059105b00034fa6dd2db87ad871993031c1cd7d18a68e7ea822ada7",
           "verification": "bytes-verified"
         }
       ],
