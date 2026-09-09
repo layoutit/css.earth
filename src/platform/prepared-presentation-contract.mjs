@@ -1,3 +1,4 @@
+import { requireTextureLevels } from './prepared-texture-levels.mjs';
 import { requireObjectControls } from "../../site/scene-contract.mjs";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mjs";
@@ -38,7 +39,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit", "textureLevels"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -48,6 +49,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   if (plan.heliocentricView !== undefined) heliocentricView(plan.heliocentricView, plan);
   if (!Array.isArray(assets?.entries)) fail("resource catalog is missing");
   const resources = new Set(assets.entries.map(entry => entry.key));
+  if (plan.textureLevels !== undefined) requireTextureLevels(plan.textureLevels, plan.variants, resources);
   const resource = (key, nullable = false) => { if (!(nullable && key === null) && !resources.has(key)) fail(`undeclared resource ${key}`); };
   const resourceList = (list, label) => { array(list, label).forEach(key => resource(key)); unique(list, label); };
   const tree = plan.tree;

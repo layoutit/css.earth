@@ -54,6 +54,8 @@ export interface ObjectMountOptions {
   framePresenter?: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
   viewport?: import('../navigation/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;
+  /** The router releases refinement after saved-view restoration or flight. */
+  deferTextureRefinement?: boolean;
   /** The camera can accept the live application pose before surface activation completes. */
   onNavigationReady?(navigation: import('./world-navigation-types.js').ObjectWorldNavigation): void;
   /** Caller keeps the destination coarse until ready; direct/restored views stay atomic. */

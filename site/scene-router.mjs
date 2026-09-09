@@ -149,6 +149,7 @@ export function createSceneRouter({
       if (framePresenter) session.lifetime.onDispose(() => framePresenter.destroy());
       mount = loaded.value(stage, {
         ...handoff?.mountOptions,
+        deferTextureRefinement: true,
         ...(worldContextMount ? { externalWorldContext: true, viewport: worldContextMount.viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
@@ -208,6 +209,9 @@ export function createSceneRouter({
         if (!interrupted) await session.lifetime.wait(session.viewUrl.restore());
         if (active !== session || session.lifetime.disposed) return;
       }
+      // Restore the incoming camera before admitting optional texture detail.
+      // This also keeps refinements out of the flight's critical path.
+      mount.refineTextures?.();
       if (mount.destinations) shell.setDestinations?.({
         ...mount.destinations,
         async select(place) {
