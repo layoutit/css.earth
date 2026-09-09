@@ -57,7 +57,9 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   // Painting and presentation measurement share the exact clipping path. A
   // measurement may stop once its consumer's existing fade is fully saturated.
   const visit = (vertices: readonly Vector3[], trail: readonly number[], activeChords: readonly number[] | undefined,
-    segment: (x0: number, y0: number, x1: number, y1: number, weight: number) => boolean) => {
+    segment: (x0: number, y0: number, x1: number, y1: number, weight: number) => boolean, fullOrbit = false) => {
+    // Hover reveals the complete prepared ring, including zero-weight trail chords.
+    const chords = fullOrbit ? undefined : activeChords;
     const eyes: (Vector3 | undefined)[] = [];
     const screens: (readonly number[] | undefined)[] = [];
     const eyeAt = (index: number) => eyes[index] ??= toEye(vertices[index]);
@@ -66,9 +68,9 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
     // new projections. These caches belong to one visit, never a stale view.
     const screenAt = (index: number) => screens[index] ??= project(eyeAt(index));
     const inside = (p: readonly number[]) => Math.abs(p[0]) <= clipX && Math.abs(p[1]) <= clipY;
-    for (let ordinal = 0; ordinal < (activeChords?.length ?? vertices.length); ordinal++) {
-      const index = activeChords?.[ordinal] ?? ordinal;
-      const weight = trail[index];
+    for (let ordinal = 0; ordinal < (chords?.length ?? vertices.length); ordinal++) {
+      const index = chords?.[ordinal] ?? ordinal;
+      const weight = fullOrbit ? 1 : trail[index];
       if (!(weight > 0)) continue;
       const next = (index + 1) % vertices.length;
       let start = eyeAt(index), end = eyeAt(next);
@@ -111,18 +113,18 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
       }
     }
   };
-  const projectRing = (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[],
+  const projectRing = (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[], fullOrbit = false,
     retained?: ReturnType<typeof createRetainedRingProjection>): readonly OrbitSegment[] => {
     if (retained) {
       retained.reset();
-      visit(vertices, trail, activeChords, retained.write);
+      visit(vertices, trail, activeChords, retained.write, fullOrbit);
       return retained.finish();
     }
     const segments: OrbitSegment[] = [];
     visit(vertices, trail, activeChords, (x0, y0, x1, y1, weight) => {
       segments.push(Object.freeze([x0, y0, x1, y1, weight]));
       return true;
-    });
+    }, fullOrbit);
     return Object.freeze(segments);
   };
   return Object.assign(projectRing, {

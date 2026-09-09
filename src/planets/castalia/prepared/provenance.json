@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "731b58024faba5304bf769f9a64cabc3bb5c1d84e8a49069a5ccda54d7a8ded3"
+    "sha256": "ca2f29126de9d2d0fe209a92d8974349e8c3a53a717d0681544718972bce936d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8bef20b8d7dfd3b4300530322217d02c93bb70e7b5703699e5359c3a9f8bdd7a",
+      "sha256": "e19eb025c52ca060d499fb58ff25eabd140ab6d4acc2eaa97fa69a77d0c99d2c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Published radar shape model",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The 1997 optical analysis statistically prefers the northern spin solution used here: period 4.089 h and ecliptic pole (253°, 56°). The alternative southern solution, period 4.094 h and pole (242°, 7°), was not absolutely excluded. This is the archived JPL shape, not a newly fitted model. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/castalia/castalia-shape-thumbnail.webp",
               "surface": "castalia-shape-surface@2x.webp",
               "poles": "castalia-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows original model radius minus a 0.542238 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/castalia/castalia-elevation-thumbnail.webp",
               "surface": "castalia-elevation-surface@2x.webp",
               "poles": "castalia-elevation-surface@2x.webp",
@@ -347,8 +347,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d8e1fe222bc068c1e8f032cb17a9e6058081e75dfc4e381812bb587df827a97e",
-      "bytes": 10458,
+      "sha256": "e19eb025c52ca060d499fb58ff25eabd140ab6d4acc2eaa97fa69a77d0c99d2c",
+      "bytes": 9891,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

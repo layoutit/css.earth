@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e538bf321e39ff6be79ec7b6c291f8c36a9c255300d3d7701dcebc4c0d731adf"
+    "sha256": "4c675a4fce7aa683eac7720f74e2865b3d6f7c4f8a4964062d4613be8631d9d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b2488d93b30275a24cbca54d3a62b3e0a2d161542964fc9c1ff676d29308849b",
+      "sha256": "6286e50adc9773cb7afec6ee2cb394d14115a9cb7e3ff11d3536a57b9b2c5e92",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 1836, version 2017-07-11, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 1836",
               "thumbnail": "/scenes/diotima/diotima-shape-thumbnail.webp",
               "surface": "diotima-shape-surface@2x.webp",
               "poles": "diotima-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 104.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/diotima/diotima-elevation-thumbnail.webp",
               "surface": "diotima-elevation-surface@2x.webp",
               "poles": "diotima-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b7106f247f45593328acd59c45724f96eaa07ecc697165d806f390044e74f5f3",
-      "bytes": 8563,
+      "sha256": "6286e50adc9773cb7afec6ee2cb394d14115a9cb7e3ff11d3536a57b9b2c5e92",
+      "bytes": 8209,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

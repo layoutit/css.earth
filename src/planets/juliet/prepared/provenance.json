@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "670f64f5719412c541507f2de21df5a24e2da09a4af239e7c7d79c7efd9ffee6"
+    "sha256": "1f9c6437d81108c3214a7672fc877d78d558854a609010cf06131e4b0581c886"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6961d01a6f5514608792fad50eb9dd3881ed639112fd254a217889bb7c106a69",
+      "sha256": "5543b265ba0ec4f7e90fa874aeee45e4634462d54f6db9698fc9bf8476b196aa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain.",
-              "title": "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain.",
+              "title": "Approximate shape model",
               "detail": "Published shape",
               "thumbnail": "/scenes/juliet/juliet-model-thumbnail.webp",
               "surface": "juliet-model-surface@2x.webp",
@@ -308,8 +308,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9ec43529e6a17c4dab390e36b240fc3ce74896e157e4964db0d53b0917e6a917",
-      "bytes": 3797,
+      "sha256": "5543b265ba0ec4f7e90fa874aeee45e4634462d54f6db9698fc9bf8476b196aa",
+      "bytes": 3698,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

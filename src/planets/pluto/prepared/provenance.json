@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "91bd7c4a7b5c0c3d3b26f1bbdb95233cc6fd5778e8613b3674cc3004498b4408"
+    "sha256": "7574afaec8ca697534deff51b3d7bc41c47a09a21fbdd27c37c50b8392889841"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -101,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "330f8e3a8153f914b09e47f0633d1542a909a591594cd6175e9493257a4d33ce",
+      "sha256": "32c83c3f2a19c14838d54ea72afb9f15324664736971c8c5aa7efcb1b5d0dd91",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "pluto",
@@ -225,16 +225,16 @@
                 "label": "Visible color",
                 "thumbnailUrl": "/scenes/pluto/pluto-surface-thumbnail.webp",
                 "description": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-                "title": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+                "title": "MVIC color mosaic",
                 "detail": "Color mosaic",
-                "summary": "New Horizons MVIC images in visible color. Gray grid: no imagery; detail varies across the observed surface."
+                "summary": "Color observations cover only part of the surface, with detail varying by region. The gray grid marks missing imagery."
               },
               {
                 "id": "topography",
                 "label": "Elevation",
                 "thumbnailUrl": "/scenes/pluto/pluto-topography-thumbnail.webp",
                 "description": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
-                "title": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+                "title": "Stereo elevation map",
                 "detail": "Stereo relief",
                 "legend": {
                   "kind": "scale",
@@ -250,16 +250,16 @@
                   ],
                   "sourceUrl": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
                 },
-                "summary": "USGS stereo elevation from −8 to +8 km. Color and shading show relief; gray grid: no elevation data."
+                "summary": "Colors span heights from −8 to +8 km, with shading to reveal slopes. The gray grid marks areas without elevation data."
               },
               {
                 "id": "monochrome",
                 "label": "Monochrome",
                 "thumbnailUrl": "/scenes/pluto/pluto-monochrome-thumbnail.webp",
                 "description": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
-                "title": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+                "title": "LORRI/MVIC mosaic",
                 "detail": "Photo mosaic",
-                "summary": "New Horizons LORRI and MVIC images in monochrome. Gray grid: no imagery; detail varies across the mosaic."
+                "summary": "Images from LORRI and MVIC provide varying surface detail. The gray grid marks regions without imagery in this mosaic."
               }
             ]
           },
@@ -504,8 +504,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "997b0b188ef566701589fb86f7db88137b94728575233725e450e9975ff5d1d0",
-      "bytes": 10589,
+      "sha256": "32c83c3f2a19c14838d54ea72afb9f15324664736971c8c5aa7efcb1b5d0dd91",
+      "bytes": 10753,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -521,7 +521,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+        "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "surface"
@@ -581,7 +582,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
+        "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+        "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
       ],
       "lensIds": [
         "topography"
@@ -673,7 +675,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+        "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+        "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "monochrome"

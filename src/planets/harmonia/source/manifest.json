@@ -92,8 +92,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 9569,
-      "expectedSha256": "c59bd37ca1ec8503fd51722d35724904e3273a2a9c599633f1b2acda8159e5e0"
+      "expectedBytes": 9216,
+      "expectedSha256": "1fdb7627857ce21cc620ef279fb0522bf9d38e3599c69192301156a040bf1821"
     },
     {
       "path": "preparation/acquisition.json",

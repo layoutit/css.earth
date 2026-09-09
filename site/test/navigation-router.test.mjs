@@ -497,7 +497,35 @@ test('selection emphasis previews immediately before the next detailed owner is 
   h.router.destroy();
 });
 
-test('empty-space deselection previews the overview and recenters the Sun through the normal router', async () => {
+test('empty-space clicks leave a close body selection, camera and card unchanged', async () => {
+  const centers = [], previews = [];
+  const h = harness({ withSun: true, centerTarget(options) { centers.push(options); return null; },
+    persistentWorldContext: { async mount() {
+      return { selectObject() {}, publish() {}, destroy() {}, previewSelection: id => previews.push(id) };
+    } } });
+  await h.router.settled;
+  const mount = h.mounts[0], savedView = mount.value, url = h.windowTarget.location.href;
+  const writes = h.writes.length, previewCount = previews.length;
+  let cardChanged = false;
+  h.shells[0].beginOverviewSelection = () => { cardChanged = true; };
+  h.documentTarget.dispatchEvent(new Event('objectdeselect', { cancelable: true }));
+  await flush();
+  assert.equal(h.router.state().selectedObjectId, 'mercury');
+  assert.equal(cardChanged, false);
+  assert.equal(previews.length, previewCount);
+  assert.equal(h.preparations.length, 0);
+  assert.equal(h.mounts.length, 1);
+  assert.equal(mount.value, savedView);
+  assert.equal(h.windowTarget.location.href, url);
+  assert.equal(h.writes.length, writes);
+  assert.equal(centers.length, 1);
+  assert.equal(centers[0].objectId, 'mercury');
+  assert.equal(centers[0].force, undefined);
+  assert.deepEqual(h.errors, []);
+  h.router.destroy();
+});
+
+test('wide-view empty-space deselection previews the overview and recenters the Sun through the normal router', async () => {
   const previews = [], centers = [], target = { pose: 'centered-sun' };
   const h = harness({ withSun: true, centerTarget(options) { centers.push(options); return target; },
     persistentWorldContext: { async mount() {
@@ -511,8 +539,10 @@ test('empty-space deselection previews the overview and recenters the Sun throug
   assert.equal(event.defaultPrevented, true);
   assert.equal(cardChanged, true);
   assert.equal(previews.at(-1), null);
-  assert.equal(centers[0].force, true);
-  assert.equal(centers[0].objectId, 'sun');
+  assert.equal(centers[0].objectId, 'mercury');
+  assert.equal(centers[0].force, undefined);
+  assert.equal(centers[1].force, true);
+  assert.equal(centers[1].objectId, 'sun');
   await h.router.settled;
   assert.equal(h.router.state().activeObjectId, 'sun');
   assert.equal(h.preparations[0].targetWorldCamera, target);

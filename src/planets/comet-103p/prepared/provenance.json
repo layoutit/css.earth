@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aebbe886bf081dbff833721d76c433040fed080a7594d1aa122186cdb46d04aa"
+    "sha256": "9ebb17862cb1ab56fb7634667f8734d5ebba34b04055f029bb48d3523cccba92"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -248,7 +248,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e6e018bf574934a3a27cf4cf9105fb445d194b28110c79265529f902b4884660",
+      "sha256": "92dbc833e912bcf21c4b08b4eec2bd31ce848fec8a3ee083ba8ef587cd8f08a6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,7 +289,7 @@
               "id": "constraints",
               "label": "Source constraints",
               "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-              "title": "Shape measurements and their coverage.",
+              "title": "Shape-constraint map",
               "detail": "PDS",
               "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
               "surface": "comet-103p-constraints-surface@2x.webp",
@@ -316,7 +316,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-              "title": "Published nucleus shape; gray is a model material.",
+              "title": "Nucleus shape reconstruction",
               "detail": "PDS",
               "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
               "surface": "comet-103p-model-surface@2x.webp",
@@ -343,7 +343,7 @@
               "id": "mri",
               "label": "EPOXI photographs",
               "description": "EPOXI photographed Hartley 2 during its 2010 flyby. The smooth waist contrasts with the rough lobes. Original shadows remain; the gray grid marks gaps or poorly constrained shape.",
-              "title": "EPOXI photographed Hartley 2 during its 2010 flyby. The smooth waist contrasts with the rough lobes. Original shadows remain; the gray grid marks gaps or poorly constrained shape.",
+              "title": "MRI mosaic",
               "detail": "MRI",
               "thumbnail": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
               "surface": "comet-103p-mri-surface@2x.webp",
@@ -364,13 +364,14 @@
                   "label": "Image scale",
                   "value": "7–8 m/pixel"
                 }
-              ]
+              ],
+              "summary": "A smooth waist separates two rough lobes in the 2010 flyby images. Shadows remain; the grid marks gaps or uncertain shape."
             },
             {
               "id": "hri",
               "label": "Restored HRI photographs",
               "description": "The mission team restored these HRI images to reduce optical blur. Some grain and ringing remain. Original shadows are preserved; the gray grid marks gaps or poorly constrained shape.",
-              "title": "The mission team restored these HRI images to reduce optical blur. Some grain and ringing remain. Original shadows are preserved; the gray grid marks gaps or poorly constrained shape.",
+              "title": "HRI restored images",
               "detail": "HRI",
               "thumbnail": "/scenes/comet-103p/comet-103p-hri-thumbnail.webp",
               "surface": "comet-103p-hri-surface@2x.webp",
@@ -396,7 +397,8 @@
                   "label": "Restoration",
                   "value": "50 iterations"
                 }
-              ]
+              ],
+              "summary": "Image restoration reduces optical blur but leaves grain and ringing. Shadows remain; the grid marks gaps or uncertain shape."
             }
           ]
         },
@@ -940,8 +942,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e6e018bf574934a3a27cf4cf9105fb445d194b28110c79265529f902b4884660",
-      "bytes": 7167,
+      "sha256": "92dbc833e912bcf21c4b08b4eec2bd31ce848fec8a3ee083ba8ef587cd8f08a6",
+      "bytes": 7072,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

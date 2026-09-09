@@ -40,7 +40,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
-        "title": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
+        "title": "Occultation shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/polymele/polymele-model-thumbnail.webp",
         "surface": "polymele-model-surface@2x.webp",

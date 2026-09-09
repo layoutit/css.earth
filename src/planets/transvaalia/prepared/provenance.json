@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b0fbe6ef072620f8585cf40df02a8b6142d0bbdaefcd8ff69c06a87e0dcb7e13"
+    "sha256": "4db0938ba1a037a59728c462a63de648ecd03c3d5af51a7ef9c49b6f8a423715"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "50dee649b0feb3a0d5bb294e18fc612f32fe842af890339be14a5174cd1fb660",
+      "sha256": "226343e8d47f3a21baf46c1fa9e5355fa5abb3974af3ca320dda6733ce06adc7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 25.458 ± 0.591 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Thermal diameter 25.458 ± 0.591 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/transvaalia/transvaalia-shape-thumbnail.webp",
               "surface": "transvaalia-shape-surface@2x.webp",
               "poles": "transvaalia-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 12.729 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 12.729 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/transvaalia/transvaalia-elevation-thumbnail.webp",
               "surface": "transvaalia-elevation-surface@2x.webp",
               "poles": "transvaalia-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "50dee649b0feb3a0d5bb294e18fc612f32fe842af890339be14a5174cd1fb660",
+      "sha256": "226343e8d47f3a21baf46c1fa9e5355fa5abb3974af3ca320dda6733ce06adc7",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 12089,
+      "bytes": 11751,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

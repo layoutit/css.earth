@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d82d8294ff0352e9559966d5707c5db042eaf0e412faf62534f9d06002e12d44"
+    "sha256": "381019ed57016b392e914a1b86dd042c75b0d93a2b2a3e7cc383eca59da50d8e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -161,7 +161,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "482d8052369ea7acba4d80511e951c89e4e96bf7ffe0688073a74560659a433e",
+      "sha256": "5f5aab004d2dc42d943d638ad40999dec7a4e17cb83fafe58d40068ddd4d3376",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -302,7 +302,7 @@
               "id": "normal",
               "label": "750 nm",
               "description": "MESSENGER at 750 nm",
-              "title": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
+              "title": "MDIS Global Basemap BDR",
               "thumbnail": "mercury-lens-normal.webp",
               "surface": "mercury-surface-normal.webp",
               "source": {
@@ -314,13 +314,13 @@
               "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
               "view": "exterior",
               "detail": "750 nm",
-              "summary": "MESSENGER's 750 nm mosaic. Brightness shows surface differences and image shading, not visible color."
+              "summary": "Brightness at 750 nm varies with the surface and the lighting when each image was taken. The mosaic is grayscale."
             },
             {
               "id": "enhanced",
               "label": "Enhanced",
               "description": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage.",
-              "title": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color",
+              "title": "MDIS Enhanced Color Mosaic",
               "thumbnail": "mercury-lens-enhanced.webp",
               "surface": "mercury-surface-enhanced.webp",
               "source": {
@@ -332,7 +332,7 @@
               "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
               "view": "exterior",
               "detail": "False color",
-              "summary": "MESSENGER enhanced color. Missing polar color is reconstructed from nearby images and terrain, not observed.",
+              "summary": "Colors distinguish surface materials. Missing polar color is reconstructed from nearby imagery and terrain, not observed.",
               "legend": {
                 "kind": "categories",
                 "title": "Enhanced-color terrain",
@@ -360,7 +360,7 @@
               "id": "topography",
               "label": "Topography",
               "description": "MESSENGER shaded relief",
-              "title": "Topography, USGS MESSENGER global color shaded relief false color",
+              "title": "MDIS Color Shaded Relief",
               "thumbnail": "mercury-lens-topography.webp",
               "surface": "mercury-surface-topography.webp",
               "source": {
@@ -402,13 +402,13 @@
               "filter": "USGS MESSENGER global color shaded relief",
               "view": "exterior",
               "detail": "Shaded relief",
-              "summary": "MESSENGER topography in color and shaded relief. Colors show elevation; shading makes slopes visible."
+              "summary": "Colors show elevation, while shading makes slopes visible. Both describe the terrain; they do not depict its visible color."
             },
             {
               "id": "interior",
               "label": "Interior",
               "description": "Interior structure",
-              "title": "NASA-dimensioned retained 3D metallic-core cutaway",
+              "title": "Interior structure model",
               "thumbnail": "mercury-lens-interior.webp",
               "surface": "mercury-interior-section.webp",
               "source": {
@@ -447,7 +447,7 @@
               "filter": "NASA-dimensioned retained 3D metallic-core cutaway",
               "view": "interior",
               "detail": "Structure",
-              "summary": "Mercury's metallic core and rocky shell, shown as a model. Colors mark layers; the interior is not imaged."
+              "summary": "A large metallic core sits inside a rocky outer shell. Layer sizes follow the structural model; colors identify each layer."
             }
           ],
           "labels": {
@@ -860,8 +860,8 @@
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside Mercury inputs.",
       "redistribution": "Prepared shell content with source provenance.",
-      "sha256": "7d1ba284ef62d1037cf1698bf188033887b066fc18715ac768e750c6cf45dc04",
-      "bytes": 15093,
+      "sha256": "5f5aab004d2dc42d943d638ad40999dec7a4e17cb83fafe58d40068ddd4d3376",
+      "bytes": 16176,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

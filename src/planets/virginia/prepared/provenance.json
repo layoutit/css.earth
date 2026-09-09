@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6aa405c57b0daf276d37072f0390e21bebf6a2b7e512ceff62beba26ac7fad72"
+    "sha256": "402bc8e47506817be34a99b3d2e37c330bbf07ab539d78b9404c94790c1fe196"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2d813eedfba1334d0489eba37e8646850ab9781d751bfd6f22be8a8568e076f9",
+      "sha256": "ffd30ae5f4ff218c8ddfdba3a44d78cfab8e93c0939bed4d9e0bc143631838f8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 84.37 ± 0.82 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Thermal diameter 84.37 ± 0.82 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/virginia/virginia-shape-thumbnail.webp",
               "surface": "virginia-shape-surface@2x.webp",
               "poles": "virginia-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 42.185 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 42.185 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/virginia/virginia-elevation-thumbnail.webp",
               "surface": "virginia-elevation-surface@2x.webp",
               "poles": "virginia-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "2d813eedfba1334d0489eba37e8646850ab9781d751bfd6f22be8a8568e076f9",
+      "sha256": "ffd30ae5f4ff218c8ddfdba3a44d78cfab8e93c0939bed4d9e0bc143631838f8",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9357,
+      "bytes": 9048,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

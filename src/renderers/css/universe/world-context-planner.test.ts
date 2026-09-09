@@ -20,7 +20,7 @@ function view(): WorldContextView {
     selectedId: plan.focus.id, overview: true, navigationIndicatorsVisible: true, anchorOnly: false,
     bodies: [plan.focus, ...plan.bodies].map(body => ({ hovered: false, orbitHidden: false, labelHidden: false,
       labelSize: { width: body.name.length * 6, height: 14 }, labelShown: false, labelPlacement: 0,
-      indicatorShown: false, indicatorRadius: 8, orbitAppearance: { width: 1, opacity: 1, markerOpacity: 1 } })) };
+      indicatorShown: false, indicatorRadius: 8, orbitAppearance: { width: 1, opacity: 1 } })) };
 }
 
 test('complete context frames cross a structured-clone boundary without mutating the input owner', () => {

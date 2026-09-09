@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "483303be61e3f53610a7bbab6f772f4f6de41c687844413af227c85e165b423c"
+    "sha256": "786f2b483e5c571b94374927dd07a13732eb71bd8d8cfd863f596c54f438470e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bc5852755eb9dc9c30af529867823a34c5f8548441f9c86631447f6663e1e5d7",
+      "sha256": "3f8715e9595b6883e822a028dfe3bc60cb0ee02ba6583e556930be08d761a9f7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -159,7 +159,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.",
-              "title": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.",
+              "title": "Occultation shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/romulus/romulus-model-thumbnail.webp",
               "surface": "romulus-model-surface@2x.webp",
@@ -298,8 +298,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bc5852755eb9dc9c30af529867823a34c5f8548441f9c86631447f6663e1e5d7",
-      "bytes": 3945,
+      "sha256": "3f8715e9595b6883e822a028dfe3bc60cb0ee02ba6583e556930be08d761a9f7",
+      "bytes": 3756,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

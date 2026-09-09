@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef9cbd5eb6146761631bed56dc9afc906cbb67decaa6411f4c37a539d654c122"
+    "sha256": "b56b0aaaea3c828cd1f572ecbd449ecf0da7bc7e91cb454259210f949993cacb"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -119,7 +119,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8a168172698528814a922753e850a2debae7bb25763adb203d3cde50388e2e65",
+      "sha256": "4c01d5f9dce6f3e557f18d69b7933a403f464902625107f519170addc9dbbdab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,7 +265,7 @@
               "id": "clouds",
               "label": "Clouds",
               "description": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
-              "title": "OpenSpace cloud presentation; observational lineage unresolved",
+              "title": "Cloud illustration",
               "thumbnail": "venus-lens-clouds.webp",
               "surface": "venus-clouds.webp",
               "source": {
@@ -278,13 +278,13 @@
               "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
               "falseColor": false,
               "detail": "Illustration",
-              "summary": "OpenSpace's cloud illustration. Its camera, wavelength and processing are unknown; provenance is incomplete."
+              "summary": "The cloud deck is illustrated with a texture from OpenSpace. Its original camera, wavelength and processing are unknown."
             },
             {
               "id": "radar",
               "label": "Radar",
               "description": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic. Colors represent an archival radar presentation, not visible surface color.",
-              "title": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
+              "title": "C3-MDIR synthetic-color radar mosaic",
               "thumbnail": "venus-lens-radar.webp",
               "surface": "venus-radar.webp",
               "source": {
@@ -297,13 +297,13 @@
               "qualification": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
               "falseColor": true,
               "detail": "Radar mosaic",
-              "summary": "Magellan radar mosaic in synthetic color. The colors belong to the published radar presentation, not Venus's visible surface."
+              "summary": "Radar images map the ground beneath the clouds. The added colors do not represent the surface as a person would see it."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color.",
-              "title": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
+              "title": "C3-MDIR colorized topography",
               "thumbnail": "venus-lens-elevation.webp",
               "surface": "venus-elevation.webp",
               "source": {
@@ -359,7 +359,7 @@
               "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
               "falseColor": true,
               "detail": "Shaded relief",
-              "summary": "Magellan topography in color and shaded relief. Color shows elevation and shading shows slopes, not photos."
+              "summary": "Colors show elevation and shading reveals slopes. The map describes terrain beneath the clouds, not visible surface color."
             }
           ],
           "labels": {
@@ -808,8 +808,8 @@
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside Venus inputs.",
       "redistribution": "Prepared shell content with source provenance.",
-      "sha256": "2c5f2088d7dd94ec9b9dc1eef58249c961a601d2dfe633bb4eb14693d4a0fa6d",
-      "bytes": 16327,
+      "sha256": "4c01d5f9dce6f3e557f18d69b7933a403f464902625107f519170addc9dbbdab",
+      "bytes": 16667,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

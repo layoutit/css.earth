@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1c71e8fa9aed7732d4a558881a04e8a7f0014feab35d8c690624c32a8ef26085"
+    "sha256": "24d175e3eca5a731c3c58af99fd6de06621eb82e594d49503cc4e021cc3f2c3c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bf58f9f0bc2f49c629e6bacbb38b48a122452df4d8748b1e5bb98c4b6e26d5c5",
+      "sha256": "7e489bdf8b33bfc1307e312d8ef569b2c9314b3c085cd7a8bf18b117906b7eff",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 100.17 km effective diameter (catalog ±1.23 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 100.17 km effective diameter (catalog ±1.23 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/aegina/aegina-shape-thumbnail.webp",
               "surface": "aegina-shape-surface@2x.webp",
               "poles": "aegina-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 50.085 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 50.085 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/aegina/aegina-elevation-thumbnail.webp",
               "surface": "aegina-elevation-surface@2x.webp",
               "poles": "aegina-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bf58f9f0bc2f49c629e6bacbb38b48a122452df4d8748b1e5bb98c4b6e26d5c5",
-      "bytes": 10439,
+      "sha256": "7e489bdf8b33bfc1307e312d8ef569b2c9314b3c085cd7a8bf18b117906b7eff",
+      "bytes": 10000,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

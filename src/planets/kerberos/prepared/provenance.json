@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d6ce43a2a3e21b534b8439963aa2eb3858c7870a68310ccd00de44f1cb895f5"
+    "sha256": "e0d1f495ca0f0ce4d0d341f516fdb91061d48ebf2b327885ee12ea89b141d341"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5328bdb6494b54fab2e39c2958b8d6ea77481d69d17c31afbee8313aaeef9e67",
+      "sha256": "c8666c32b1c73e1c636f01936c3a28b71e346e0a4ccdf1c54f49b0dc92046847",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
-              "title": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+              "title": "Approximate shape model",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/kerberos/kerberos-model-thumbnail.webp",
               "surface": "kerberos-model-surface@2x.webp",
@@ -302,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "81788c27a682bf1f2db68a883a169034cd0c1f716b9a169d0a60a05c2c14d6e7",
-      "bytes": 3949,
+      "sha256": "c8666c32b1c73e1c636f01936c3a28b71e346e0a4ccdf1c54f49b0dc92046847",
+      "bytes": 3811,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aa611a8dbf5b1fa3a3f0eb502c2a6f256b560645b7b8abbcf490daf2566c1c10"
+    "sha256": "e620e4444c4defda361c76c340262757842e5b8950f5dc55fc733cb2faabdb8a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "79f91b3ae013d46f8738305b03e99c263a82e49680df018c00bbb1ea45adb55e",
+      "sha256": "7e1ffb27c4d661e7a9197d8d2d12f7861cd76de6dc5944eaf9f47ce65ef7820f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex model constrained by resolved imaging, 93 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex model constrained by resolved imaging, 93 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/ausonia/ausonia-shape-thumbnail.webp",
               "surface": "ausonia-shape-surface@2x.webp",
               "poles": "ausonia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 46.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 46.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/ausonia/ausonia-elevation-thumbnail.webp",
               "surface": "ausonia-elevation-surface@2x.webp",
               "poles": "ausonia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "79f91b3ae013d46f8738305b03e99c263a82e49680df018c00bbb1ea45adb55e",
-      "bytes": 10087,
+      "sha256": "7e1ffb27c4d661e7a9197d8d2d12f7861cd76de6dc5944eaf9f47ce65ef7820f",
+      "bytes": 9771,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cb3ca2c8f7345e726edac1c3b7cd4656081f976a8795c31d1a207f909cd56d39"
+    "sha256": "d676c076b2b51114460f6418acc2b0ecfc68a726dd610192cea44930cfc05d4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -240,7 +240,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c8682309658501ed6b2a650720b273a3fccbc1c4c40ff55c1a68441994e8ebb1",
+      "sha256": "4ab5908b8965c98366e9b82b3e4730c9e2aeac3f4f0e057f260ada1dd47824f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -320,7 +320,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
-              "title": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
+              "title": "Controlled multi-mission mosaic",
               "detail": "Multi-mission mosaic",
               "thumbnail": "/scenes/phobos/phobos-normal-thumbnail.webp",
               "surface": "phobos-normal-surface@2x.webp",
@@ -330,13 +330,13 @@
                 "path": "../manifest.json",
                 "url": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m"
               },
-              "summary": "A multi-mission mosaic registered by DLR. Detail varies across the surface; shadows and edited image seams remain."
+              "summary": "Images from several missions are registered to the same surface. Detail varies; photographed shadows and edited seams remain."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
-              "title": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
+              "title": "Shape-derived radial height",
               "detail": "Shaded relief",
               "thumbnail": "/scenes/phobos/phobos-elevation-thumbnail.webp",
               "surface": "phobos-elevation-surface@2x.webp",
@@ -366,7 +366,7 @@
               "id": "albedo",
               "label": "Relative albedo",
               "description": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo.",
-              "title": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo.",
+              "title": "SPC relative albedo model",
               "detail": "Released facet values",
               "thumbnail": "/scenes/phobos/phobos-albedo-thumbnail.webp",
               "surface": "phobos-albedo-surface@2x.webp",
@@ -395,7 +395,7 @@
               "id": "slope",
               "label": "Slope",
               "description": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table.",
-              "title": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table.",
+              "title": "Modeled surface slopes",
               "detail": "Released facet values",
               "thumbnail": "/scenes/phobos/phobos-slope-thumbnail.webp",
               "surface": "phobos-slope-surface@2x.webp",
@@ -620,8 +620,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c8682309658501ed6b2a650720b273a3fccbc1c4c40ff55c1a68441994e8ebb1",
-      "bytes": 11886,
+      "sha256": "4ab5908b8965c98366e9b82b3e4730c9e2aeac3f4f0e057f260ada1dd47824f5",
+      "bytes": 11394,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

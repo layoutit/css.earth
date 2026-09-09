@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "abca90e41b09346f63a5d70a64b7932f4983b3c06b540059d3b7639e18411f00"
+    "sha256": "badd1d354e77422fc01e2bd734fcd43ce29fa71ae2cdf2855ec5f468d32334e2"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2f275a6804c42c24effd05adc5102b3993bceb1382150ad987f7546b0297beca",
+      "sha256": "25119583aaf4e5ef5c4a2fb74ea773601e4e2ce58a0c761a53ca7856a981d34d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -159,7 +159,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
-              "title": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
+              "title": "Triangular shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/ymir/ymir-model-thumbnail.webp",
               "surface": "ymir-model-surface@2x.webp",
@@ -292,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2f275a6804c42c24effd05adc5102b3993bceb1382150ad987f7546b0297beca",
-      "bytes": 3208,
+      "sha256": "25119583aaf4e5ef5c4a2fb74ea773601e4e2ce58a0c761a53ca7856a981d34d",
+      "bytes": 3040,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

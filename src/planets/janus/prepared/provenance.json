@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14a29c0e89fe2ef00e9b279dcc26773f60cd3681c5cf67b9b584cdc60b3a2b36"
+    "sha256": "44c04335b15ee99c864d8ca7155cc85be5949678071f0a60bed1d124a5d82d65"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -282,7 +282,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "be88a1e6d845e3aef99fe6ad74e30c0903a1cf74fddb712f5a9a27331e381ccd",
+      "sha256": "e194e8876a71b2cb17e7a2417d116408184c7ab3b7fea0d650e4f0b8e17ef2dd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -360,7 +360,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "title": "ISS mosaic",
               "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/janus/janus-normal-thumbnail.webp",
               "surface": "janus-normal-surface@2x.webp",
@@ -370,13 +370,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Cassini images mapped onto the shape with adjusted brightness. Gray grid: gaps and withheld shadows."
+              "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 89.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Radial height above a 89.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+              "title": "Shape-derived radial height",
               "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/janus/janus-elevation-thumbnail.webp",
               "surface": "janus-elevation-surface@2x.webp",
@@ -1022,8 +1022,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "feb666092496b234c90380fae6104e65e4d167fedd9067d5d2180814214322dc",
-      "bytes": 5830,
+      "sha256": "e194e8876a71b2cb17e7a2417d116408184c7ab3b7fea0d650e4f0b8e17ef2dd",
+      "bytes": 5618,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

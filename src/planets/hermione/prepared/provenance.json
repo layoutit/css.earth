@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c9c87737356aeb13b248ae1eb89d60a018f81584c220ff933e3ca30309b9b62c"
+    "sha256": "5f80577a41ba262184debc76d95a1953a14dfd76ed2b17b7cbf67c67df4e476c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8c8893ce53eb3dd7eb41ae8a4a972e74b01c1cd91fa35b4dfe2ab25c9e6d82fb",
+      "sha256": "c9ab3237218bf662af60707cd721db6d83423485855a52c06a2ee8615e37251e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 156, version 2017-09-21, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 156",
               "thumbnail": "/scenes/hermione/hermione-shape-thumbnail.webp",
               "surface": "hermione-shape-surface@2x.webp",
               "poles": "hermione-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 100 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/hermione/hermione-elevation-thumbnail.webp",
               "surface": "hermione-elevation-surface@2x.webp",
               "poles": "hermione-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5d188504a9428b4ed4301fe0454c66b91534930762b84a7aefe4e8c2d772e7eb",
-      "bytes": 8839,
+      "sha256": "c9ab3237218bf662af60707cd721db6d83423485855a52c06a2ee8615e37251e",
+      "bytes": 8487,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

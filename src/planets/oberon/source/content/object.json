@@ -74,7 +74,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
-        "title": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
+        "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
         "thumbnail": "/scenes/oberon/oberon-normal-thumbnail.webp",
         "surface": "oberon-normal-surface@2x.webp",
@@ -84,7 +84,7 @@
           "path": "../manifest.json",
           "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
         },
-        "summary": "Voyager 2 monochrome images with corrected illumination. Shadows and seams remain; gray grid: no observations."
+        "summary": "Illumination is corrected, but photographed terrain shadows and seams remain. The gray grid marks missing observations."
       }
     ]
   },

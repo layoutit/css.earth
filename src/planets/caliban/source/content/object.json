@@ -45,7 +45,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
-        "title": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+        "title": "Light-curve shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/caliban/caliban-model-thumbnail.webp",
         "surface": "caliban-model-surface@2x.webp",

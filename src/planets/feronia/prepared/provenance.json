@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7de0487b51feeb5a4c21c19d73cb18504389aa2909c6bed6fec04d6136b34887"
+    "sha256": "c68815cc8389cdcc4b601b70eff94fea64be816957bed43a55a4987a6b35744f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a3388bd6455bf8e2cfad41264f0ab4221294a7e5fb3ebe900888f89d9af5484d",
+      "sha256": "e65de845d37173f1bf5681cff2a202f3cc7d4a301ec098576d676a7865176e96",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex model constrained by resolved imaging, 93 ± 10 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex model constrained by resolved imaging, 93 ± 10 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/feronia/feronia-shape-thumbnail.webp",
               "surface": "feronia-shape-surface@2x.webp",
               "poles": "feronia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 46.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 46.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/feronia/feronia-elevation-thumbnail.webp",
               "surface": "feronia-elevation-surface@2x.webp",
               "poles": "feronia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a3388bd6455bf8e2cfad41264f0ab4221294a7e5fb3ebe900888f89d9af5484d",
-      "bytes": 9881,
+      "sha256": "e65de845d37173f1bf5681cff2a202f3cc7d4a301ec098576d676a7865176e96",
+      "bytes": 9564,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

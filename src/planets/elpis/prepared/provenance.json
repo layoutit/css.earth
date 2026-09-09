@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2678538baa66445f99f8e03728233d29411c9358bfc1b859f7b5dc3eb06dfba6"
+    "sha256": "0b9cb727433017abf38e3419aecdd1272d696551b2663c08c6551b1e748d5ab9"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dca8a1348acf0091d15c513f6db66ab9f05ce3d7c683daf596665a06b3227529",
+      "sha256": "6d3393f42b7446a4fd99ad94e3da6e4be1eefca66acd63cc6a3395fc164523ef",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 156.18 km effective diameter (catalog ±2.31 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 156.18 km effective diameter (catalog ±2.31 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/elpis/elpis-shape-thumbnail.webp",
               "surface": "elpis-shape-surface@2x.webp",
               "poles": "elpis-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 78.09 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 78.09 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/elpis/elpis-elevation-thumbnail.webp",
               "surface": "elpis-elevation-surface@2x.webp",
               "poles": "elpis-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dca8a1348acf0091d15c513f6db66ab9f05ce3d7c683daf596665a06b3227529",
-      "bytes": 8655,
+      "sha256": "6d3393f42b7446a4fd99ad94e3da6e4be1eefca66acd63cc6a3395fc164523ef",
+      "bytes": 8270,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ed4fb36fdc35c99643c1ed4f4ce070f09297bce5187512d92514abc3b2a95b2"
+    "sha256": "a46b26e5293414e241f4e2e37ff001027e6316920764dee1274bf03c14341acc"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9afc18a12001ec26d44e469fb394f340803ba44cb0cbc0f097d96e5f380e51c9",
+      "sha256": "a891d1e211825349db09f83a11c3584c0bed9478603d61b83a314760ae2ca1b3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 1816, version 2017-05-26, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 1816",
               "thumbnail": "/scenes/astraea/astraea-shape-thumbnail.webp",
               "surface": "astraea-shape-surface@2x.webp",
               "poles": "astraea-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 56 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/astraea/astraea-elevation-thumbnail.webp",
               "surface": "astraea-elevation-surface@2x.webp",
               "poles": "astraea-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82c82ab6b01681e6e99c5e7471bd56d357da207642fbd4edbab9ff82cfa3d7f3",
-      "bytes": 9405,
+      "sha256": "a891d1e211825349db09f83a11c3584c0bed9478603d61b83a314760ae2ca1b3",
+      "bytes": 9054,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

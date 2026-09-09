@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e961f2baafa6be97df625bba57f3d2ca0128d8c36974975d1db759741812b1e3"
+    "sha256": "f849ff9d1c331d4883e7b4d973a06627b9e09e36146b7462bdc99c1efbbb80d2"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c7d08ddeddda06b29b6377a37991414d0c1c65e3d28c2e53e040ffccacca81ce",
+      "sha256": "6b61126f25a3257199a18d2b19201d15783a2daed331f9a65e73956d4d4f4dee",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 289, version 2011-02-11, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 289",
               "thumbnail": "/scenes/angelina/angelina-shape-thumbnail.webp",
               "surface": "angelina-shape-surface@2x.webp",
               "poles": "angelina-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 26 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/angelina/angelina-elevation-thumbnail.webp",
               "surface": "angelina-elevation-surface@2x.webp",
               "poles": "angelina-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "59fceeedc873586032255a6f0f765b6f5634a8f7a3977433c75e07e0f714e577",
-      "bytes": 9127,
+      "sha256": "6b61126f25a3257199a18d2b19201d15783a2daed331f9a65e73956d4d4f4dee",
+      "bytes": 8718,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

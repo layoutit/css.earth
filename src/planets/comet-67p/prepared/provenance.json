@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1e29e927a23e7c96a6a65988f89e4d720336c92fcfad8e31ebb30cf252374fcf"
+    "sha256": "48fd6f70dd3d68b5424d219c6fc2802776d9a712b32c2ece78438a4aa9a2502a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -414,7 +414,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e33972e37428e6cf6ff97dc627e1ce187e221d5fa5c3d1fa2652cc9aa0305612",
+      "sha256": "a5d1275a47c0ed0dd6b1fb3fbf91ae968e00fe5224cfd435a7ac184b6a6c6b9d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -467,7 +467,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material.",
-              "title": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material.",
+              "title": "Nucleus shape reconstruction",
               "detail": "ESA/RMOC",
               "thumbnail": "/scenes/comet-67p/comet-67p-model-thumbnail.webp",
               "surface": "comet-67p-model-surface@2x.webp",
@@ -494,7 +494,7 @@
               "id": "osiris",
               "label": "OSIRIS mosaic",
               "description": "Rosetta photographs fitted to the nucleus. Their brightness has been adjusted, but the original shadows and some seams remain.",
-              "title": "Rosetta photographs fitted to the nucleus. Their brightness has been adjusted, but the original shadows and some seams remain.",
+              "title": "OSIRIS image mosaic",
               "detail": "OSIRIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
               "surface": "comet-67p-osiris-surface@2x.webp",
@@ -515,13 +515,14 @@
                   "label": "Camera filter",
                   "value": "Orange"
                 }
-              ]
+              ],
+              "summary": "Photographs cover parts of the nucleus. Brightness is adjusted to match images; original shadows and some seams remain."
             },
             {
               "id": "albedo",
               "label": "Albedo",
               "description": "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale.",
-              "title": "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale.",
+              "title": "VIRTIS single-scattering albedo",
               "detail": "VIRTIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-albedo-thumbnail.webp",
               "surface": "comet-67p-albedo-surface@2x.webp",
@@ -562,7 +563,7 @@
               "id": "slope",
               "label": "Spectral slope",
               "description": "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale.",
-              "title": "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale.",
+              "title": "VIRTIS visible spectral slope",
               "detail": "VIRTIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-slope-thumbnail.webp",
               "surface": "comet-67p-slope-surface@2x.webp",
@@ -603,7 +604,7 @@
               "id": "absorption",
               "label": "3.2 µm absorption",
               "description": "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale.",
-              "title": "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale.",
+              "title": "VIRTIS 3.2 µm absorption depth",
               "detail": "VIRTIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-absorption-thumbnail.webp",
               "surface": "comet-67p-absorption-surface@2x.webp",
@@ -644,7 +645,7 @@
               "id": "ice",
               "label": "Modeled ice",
               "description": "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale.",
-              "title": "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale.",
+              "title": "VIRTIS surface ice fraction",
               "detail": "VIRTIS",
               "thumbnail": "/scenes/comet-67p/comet-67p-ice-thumbnail.webp",
               "surface": "comet-67p-ice-surface@2x.webp",
@@ -1469,8 +1470,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e33972e37428e6cf6ff97dc627e1ce187e221d5fa5c3d1fa2652cc9aa0305612",
-      "bytes": 12568,
+      "sha256": "a5d1275a47c0ed0dd6b1fb3fbf91ae968e00fe5224cfd435a7ac184b6a6c6b9d",
+      "bytes": 12079,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

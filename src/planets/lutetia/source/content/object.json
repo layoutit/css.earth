@@ -67,20 +67,21 @@
         "label": "OSIRIS reflectance",
         "detail": "Spacecraft observation",
         "description": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
-        "title": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+        "title": "OSIRIS orange-filter reflectance",
         "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
         "surface": "lutetia-osiris-surface@2x.webp",
         "poles": "lutetia-osiris-surface@2x.webp",
         "source": {
           "id": "lutetia-observations-n20100710t154047674id4df22-img",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Orange-filter reflectance is corrected approximately for lighting. Shadows remain; the grid marks gaps and rejected coverage."
       },
       {
         "id": "shape",
         "label": "Shape",
         "description": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
-        "title": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
+        "title": "OSIRIS shape reconstruction",
         "thumbnail": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
         "surface": "lutetia-shape-surface@2x.webp",
         "poles": "lutetia-shape-surface@2x.webp",
@@ -96,7 +97,7 @@
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
-        "title": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
         "surface": "lutetia-elevation-surface@2x.webp",
         "poles": "lutetia-elevation-surface@2x.webp",

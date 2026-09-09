@@ -154,6 +154,7 @@ export function mountPlanetShell({
     const owner = contentLifetime = createSceneLifetime();
     const retain = controller => { owner.onDispose(() => controller.destroy()); return controller; };
     retain(createInformationTabsController(drawer, owner));
+    retain(createMissionAgencyController(drawer, owner));
     retain(createChartSwitcherController(drawer, windowTarget, owner));
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
@@ -174,7 +175,7 @@ export function mountPlanetShell({
 
 function createInformationTabsController(drawer, lifetime) {
   const card = drawer.querySelector('.planet-information-panel');
-  const tabs = [...(card?.querySelectorAll('[data-information-tab]') ?? [])];
+  const tabs = [...(card?.querySelectorAll('[data-information-tab]:not([hidden])') ?? [])];
   const panels = [...(card?.querySelectorAll('[data-information-panel]') ?? [])];
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
@@ -199,6 +200,36 @@ function createInformationTabsController(drawer, lifetime) {
       select(tabs[next], true);
     }, { signal: events.signal });
   }
+  return { destroy() { events.abort(); } };
+}
+
+function createMissionAgencyController(drawer, lifetime) {
+  const panel = drawer.querySelector('[data-information-panel="missions"]');
+  const choices = [...(panel?.querySelectorAll('[data-mission-agency]') ?? [])].map(button => ({
+    button,
+    missionIds: new Set(JSON.parse(button.dataset.agencyMissions)),
+  }));
+  const figures = [...(panel?.querySelectorAll('[data-spacecraft]') ?? [])];
+  const results = panel?.querySelector('[data-mission-results]');
+  const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
+  const select = (choice, focus = false) => {
+    for (const item of choices) item.button.setAttribute('aria-pressed', String(item === choice));
+    for (const figure of figures) figure.hidden = !choice.missionIds.has(figure.dataset.spacecraft);
+    results.setAttribute('aria-label', `${choice.button.dataset.missionAgency} missions`);
+    if (focus) choice.button.focus();
+  };
+  choices.forEach((choice, index) => {
+    choice.button.addEventListener('click', () => select(choice), { signal: events.signal });
+    choice.button.addEventListener('keydown', event => {
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? choices.length - 1
+        : event.key === 'ArrowDown' ? (index + 1) % choices.length
+        : event.key === 'ArrowUp' ? (index - 1 + choices.length) % choices.length : null;
+      if (next === null) return;
+      event.preventDefault();
+      select(choices[next], true);
+    }, { signal: events.signal });
+  });
   return { destroy() { events.abort(); } };
 }
 

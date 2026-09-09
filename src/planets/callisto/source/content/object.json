@@ -88,7 +88,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
-        "title": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
+        "title": "Global image mosaic",
         "thumbnail": "/scenes/callisto/callisto-normal-thumbnail.webp",
         "surface": "callisto-normal-surface@2x.webp",
         "poles": "callisto-normal-poles@2x.webp",
@@ -97,13 +97,13 @@
           "path": "../manifest.json"
         },
         "detail": "Global mosaic",
-        "summary": "USGS images with detail ranging from 400 m to 60 km per pixel. Shadows and seams remain; gray grid: no data."
+        "summary": "Source detail ranges from 400 m to 60 km per pixel. Photographed shadows and seams remain; the gray grid marks missing data."
       },
       {
         "id": "enhanced",
         "label": "Galileo color",
         "description": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
-        "title": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
+        "title": "Processed color mosaic",
         "thumbnail": "/scenes/callisto/callisto-enhanced-thumbnail.webp",
         "surface": "callisto-enhanced-surface@2x.webp",
         "poles": "callisto-enhanced-poles@2x.webp",

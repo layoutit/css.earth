@@ -44,6 +44,10 @@
   border-radius: 50%;
 }
 
+[data-context-group]:is([data-object-hovered="true"], :focus-within) > .context-orbit {
+  --context-line-opacity: 1;
+}
+
 [data-context-group] {
   --context-line-opacity: var(--context-base-line-opacity, .5);
   --context-label-opacity: var(--context-base-label-opacity, .65);

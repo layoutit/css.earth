@@ -760,8 +760,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6280,
-      "expectedSha256": "99883f02f97ddedb7bb0d19bc745d10b257ebfa7244710909dc8758ec6621fce",
+      "expectedBytes": 5858,
+      "expectedSha256": "e8feec52261253013e54e285b48d1d8fe3a19944d6f0ea0886f9d72aba835191",
       "purpose": "Source documentation, controlled camera metadata or authored preparation."
     },
     {

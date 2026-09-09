@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "callisto",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7059f087a11b2457d4e9f029e9c7b9c6b5d27aac895d7599c32aee926302957"
+    "sha256": "77f33c4bc4248cb712730b559a0ba6bf5170d47e83c6c151a4f861f258e5fc27"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -136,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a18e1803468b2ab02cc46fd9fe5a3787d84a7f073e03e0ced8fb073159e40117",
+      "sha256": "dbbe045618046cebabfbd61ac26cfbd1bfe0e6bd15c15ff70cb5efbbd0c0c4aa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -227,7 +227,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
-              "title": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
+              "title": "Global image mosaic",
               "thumbnail": "/scenes/callisto/callisto-normal-thumbnail.webp",
               "surface": "callisto-normal-surface@2x.webp",
               "poles": "callisto-normal-poles@2x.webp",
@@ -236,13 +236,13 @@
                 "path": "../manifest.json"
               },
               "detail": "Global mosaic",
-              "summary": "USGS images with detail ranging from 400 m to 60 km per pixel. Shadows and seams remain; gray grid: no data."
+              "summary": "Source detail ranges from 400 m to 60 km per pixel. Photographed shadows and seams remain; the gray grid marks missing data."
             },
             {
               "id": "enhanced",
               "label": "Galileo color",
               "description": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
-              "title": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
+              "title": "Processed color mosaic",
               "thumbnail": "/scenes/callisto/callisto-enhanced-thumbnail.webp",
               "surface": "callisto-enhanced-surface@2x.webp",
               "poles": "callisto-enhanced-poles@2x.webp",
@@ -394,7 +394,7 @@
       "sha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
       "bytes": 114640717,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -451,7 +451,7 @@
       "sha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32",
       "bytes": 771611,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -465,10 +465,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a18e1803468b2ab02cc46fd9fe5a3787d84a7f073e03e0ced8fb073159e40117",
-      "bytes": 11502,
+      "sha256": "dbbe045618046cebabfbd61ac26cfbd1bfe0e6bd15c15ff70cb5efbbd0c0c4aa",
+      "bytes": 10814,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -505,19 +505,19 @@
           "url": "/scenes/callisto/callisto-normal-thumbnail.webp",
           "bytes": 3134,
           "sha256": "61e32f4d6d753f30b3bbb3ed561f52133f1d0d32ef99c5d3ee47f0d4428342c4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-normal-surface@2x.webp",
           "bytes": 6169044,
           "sha256": "a3426f1dae912070335ede461e32150bf082c6f6203e0db50a158ad143fef367",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-normal-poles@2x.webp",
           "bytes": 163564,
           "sha256": "6781b161a0af4b85676bfba78f75ab0698893c9dfebef5a5514ba6c646a92eba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -556,19 +556,19 @@
           "url": "/scenes/callisto/callisto-enhanced-thumbnail.webp",
           "bytes": 3584,
           "sha256": "64cd37bb4a98fcd073a999a8ca38b4a3eef03f1849b233367d6d3aa01f36cf60",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-enhanced-surface@2x.webp",
           "bytes": 993738,
           "sha256": "1ae112da832085a9c7849db3c9bf2d8cd18f925b2b9f6039f0fe73d79871d40d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/callisto/callisto-enhanced-poles@2x.webp",
           "bytes": 22082,
           "sha256": "946ad57e6dcf0390cdffad9713b8ff1c36f00686b45a17d14026146fbcb94313",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

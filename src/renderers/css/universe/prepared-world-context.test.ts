@@ -147,6 +147,42 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   layer.destroy();
 });
 
+test('hover-only trails reveal the full orbit and keep their circle and label before and after hover', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = parsePreparedWorldContext({ ...source, bodies: source.bodies.map(body => ({ ...body,
+    orbit: { ...body.orbit, trail: [0, 0, 0, .2, .4, .6, .8, 1], activeChords: [3, 4, 5, 6, 7] },
+  })) });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  layer.setHiddenOrbits(['mercury', 'venus']);
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+  const root = layer.root as unknown as FakeElement, nodes = all(root);
+  const circle = find(root, 'contextIndicator', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const orbit = find(root, 'contextOrbit', 'mercury'), other = find(root, 'contextOrbit', 'venus');
+  for (const hovered of [false, true, false]) {
+    circle.dataset.objectHovered = String(hovered);
+    host.dispatchEvent(new Event('objecthoverchange'));
+    document.defaultView.advance(16); document.defaultView.advance(200);
+    expect(circle.style.visibility).toBe('');
+    expect(label.style.visibility).toBe('');
+    expect(orbit.style.opacity === 'calc(0 * var(--context-line-opacity, 1))').toBe(!hovered);
+    if (hovered) {
+      const visiblePieces = layer.inspect().find(body => body.id === 'mercury')!.orbit.filter(piece => piece.style.visibility === '');
+      expect(visiblePieces.length).toBeGreaterThan(5);
+      expect(visiblePieces.every(piece => Number(piece.style.opacity) === 1)).toBe(true);
+    }
+    expect(orbit.dataset.objectNavigate).toBeUndefined();
+    expect(orbit.style.pointerEvents).toBe('none');
+    expect(other.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  }
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
 test('hidden labels keep circles pickable and hover reveals only that label and orbit without camera movement', () => {
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
   const clock = root.ownerDocument.defaultView, host = root.parentNode!;
@@ -755,11 +791,11 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   layer.selectObject('venus'); publish(); expect(shown()).toEqual(['Venus']);
   find(root, 'contextBody', 'mercury').dataset.objectHovered = 'true';
   host.dispatchEvent(new Event('objecthoverchange'));
-  publish(); expect(shown()).toEqual(['Venus']); // The selected label keeps priority over hover.
+  publish(); expect(shown()).toEqual(['Mercury']); // Hover takes priority over selection.
   delete find(root, 'contextBody', 'mercury').dataset.objectHovered;
   host.dispatchEvent(new Event('objecthoverchange'));
   layer.selectObject('sun');
-  publish(9200); expect(shown()).toEqual(['Venus']); // Keep the previously visible label until there is clearance.
+  publish(9200); expect(shown()).toEqual(['Mercury']); // Keep the previously visible label until there is clearance.
   publish(10000); expect(shown()).toEqual(['Mercury', 'Venus']);
   publish(9200); expect(shown()).toEqual(['Mercury', 'Venus']);
   publish(8800); expect(shown()).toEqual(['Mercury']);
@@ -769,6 +805,63 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   layer.destroy();
 });
 
+
+test.each(['pointer', 'keyboard'])('a small moon circle reveals its label on %s interaction', interaction => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = parsePreparedWorldContext({ ...source, bodies: [
+    { ...source.bodies[0], positionM: [400, 0, 0], orbit: orbit([400, 0, 0], 1) },
+    { ...source.bodies[1], positionM: [460, 0, 0], radiusM: .1,
+      orbit: { ...orbit([460, 0, 0], 1), centerBodyId: 'mercury', centerPositionM: [400, 0, 0] } },
+  ] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  layer.setHiddenOrbits(['venus']);
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const root = layer.root as unknown as FakeElement, nodes = all(root);
+  const circle = find(root, 'contextIndicator', 'venus'), label = find(root, 'contextLabel', 'venus');
+  expect(circle.style.visibility).toBe('');
+  expect(label.style.visibility).toBe('hidden');
+  for (const active of [true, false]) {
+    if (interaction === 'pointer') circle.dataset.objectHovered = String(active);
+    else Object.assign(document, { activeElement: active ? circle : null });
+    host.dispatchEvent(new Event(interaction === 'pointer' ? 'objecthoverchange' : active ? 'focusin' : 'focusout'));
+    document.defaultView.advance(16); document.defaultView.advance(200);
+    expect(circle.style.visibility).toBe('');
+    expect(label.style.visibility).toBe(active ? '' : 'hidden');
+    if (active) expect(label.style.opacity).toBe('calc(1 * var(--context-label-opacity, 1))');
+  }
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
+test('hover keeps a circle label inside the viewport when every normal placement is clipped', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = parsePreparedWorldContext({ ...source, bodies: [{ ...source.bodies[0], positionM: [990, 740, 0], orbit: orbit([990, 740, 0], 1) }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite } });
+  layer.setHiddenOrbits(['mercury']);
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const root = layer.root as unknown as FakeElement;
+  const circle = find(root, 'contextIndicator', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  expect(circle.style.visibility).toBe('');
+  expect(label.style.visibility).toBe('hidden');
+  circle.dataset.objectHovered = 'true';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); document.defaultView.advance(200);
+  expect(label.style.visibility).toBe('');
+  const [x, y] = label.style.transform.match(/-?[\d.]+/g)!.map(Number);
+  expect(x).toBeGreaterThanOrEqual(-396); expect(x + label.textContent.length * 6).toBeLessThanOrEqual(396);
+  expect(y).toBeGreaterThanOrEqual(-296); expect(y + 14).toBeLessThanOrEqual(296);
+  layer.destroy();
+});
 
 test('the Sun caption stays below its marker as orbit strokes cross during zoom', () => {
   const root = mount(1), layer = mounted.get(root)!;
@@ -834,7 +927,7 @@ test('switching to the Solar System card immediately reveals the Sun ring withou
 });
 
 
-test.each([true, false])('crowding couples closed orbit visibility to its circle while trails remain independent (closed=%s)', closed => {
+test.each([true, false])('crowding hides an orbit with its circle for both rings and trails (closed=%s)', closed => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
@@ -857,7 +950,7 @@ test.each([true, false])('crowding couples closed orbit visibility to its circle
       expect(element.style.visibility).toBe('hidden');
       expect(element.style.pointerEvents).toBe('none');
     }
-    expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(!closed);
+    expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(false);
   }
   publish(100);
   for (const body of entries.slice(1)) {
@@ -865,6 +958,59 @@ test.each([true, false])('crowding couples closed orbit visibility to its circle
     expect(body.indicator.style.visibility).toBe('');
     expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   }
+  layer.destroy();
+});
+
+test.each([true, false])('rings and trails share their circle fade across zoom in both directions (closed=%s)', closed => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 5000; host.clientHeight = 5000; host.append(before);
+  const source = plan(1);
+  const context = parsePreparedWorldContext({ ...source, bodies: [{ ...source.bodies[0],
+    positionM: [500, 0, 0], radiusM: .1,
+    orbit: { ...source.bodies[0].orbit,
+      verticesM: [[500,0,0], [550,50,0], [600,0,0], [550,-50,0], [500,0,0], [550,50,0], [600,0,0], [550,-50,0]],
+      trail: Array(8).fill(closed ? 1 : .75) },
+  }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: {sun: sprite, mercury: sprite} });
+  layer.setOverview(true);
+  const nodes = all(layer.root as unknown as FakeElement);
+  const body = layer.inspect().find(entry => entry.id === 'mercury')!;
+  const orbitRoot = find(layer.root as unknown as FakeElement, 'contextOrbit', 'mercury');
+  for (const extent of [160, 80, 48, 32, 24, 16, 8, 16, 24, 32, 48, 80, 160]) {
+    layer.publish({referenceFrame: 'sun-icrf', epochJdTt: 1,
+      pose: {positionM: [0, 0, 40000 / extent], orientationXyzw: [0, 0, 0, 1]}},
+      {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 5000, heightPixels: 5000});
+    // Culled indicators retain their last paint values; visible fades still match exactly.
+    if (extent > 12) expect(body.indicator.style.opacity).toBe(orbitRoot.style.opacity);
+    expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(extent > 12);
+    expect(body.indicator.style.visibility).toBe(extent > 12 ? '' : 'hidden');
+    expect(body.indicator.style.pointerEvents).toBe(extent > 12 ? 'auto' : 'none');
+  }
+  expect(all(layer.root as unknown as FakeElement)).toEqual(nodes);
+  layer.destroy();
+});
+
+test('a trail remains visible when its body is outside the viewport', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = parsePreparedWorldContext({ ...source, bodies: [{ ...source.bodies[0],
+    positionM: [2000, 0, 0],
+    orbit: { ...source.bodies[0].orbit,
+      verticesM: [[2000,0,0], [100,100,0], [-100,100,0], [-200,0,0], [-100,-100,0], [100,-100,0], [1000,-50,0], [1500,-20,0]],
+      trail: Array(8).fill(.75) },
+  }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: {sun: sprite, mercury: sprite} });
+  layer.setOverview(true);
+  layer.publish({referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: {positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1]}},
+    {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600});
+  const body = layer.inspect().find(entry => entry.id === 'mercury')!;
+  expect(body.indicator.style.visibility).toBe('hidden');
+  expect(body.marker.style.visibility).toBe('hidden');
+  expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   layer.destroy();
 });
 

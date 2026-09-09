@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e55becddeef44633b165aca32bd1616fed18bb9353e6599f2bc4254e07f9103f"
+    "sha256": "625ad7f2392a609c6e3119d06f9e022970186957058bd5b1b7c9493b32372f9c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ad5151b43540333b3c05d2e2c696d00bb09d7645f703b9451aaf3be06f48992f",
+      "sha256": "5594d1db2cf4d9f2b327034801efd165ce41d4f8663ccf2dcfa57bdabbd04cf3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Single-band thermal diameter 5.55 km, with at least 20% uncertainty (1.11 km). This exceptionally slow rotator has a coarse convex shape and an unresolved alternative pole; rotational phase is illustrative.",
-              "title": "Single-band thermal diameter 5.55 km, with at least 20% uncertainty (1.11 km). This exceptionally slow rotator has a coarse convex shape and an unresolved alternative pole; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/schorria/schorria-shape-thumbnail.webp",
               "surface": "schorria-shape-surface@2x.webp",
               "poles": "schorria-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 2.775 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 2.775 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/schorria/schorria-elevation-thumbnail.webp",
               "surface": "schorria-elevation-surface@2x.webp",
               "poles": "schorria-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "ad5151b43540333b3c05d2e2c696d00bb09d7645f703b9451aaf3be06f48992f",
+      "sha256": "5594d1db2cf4d9f2b327034801efd165ce41d4f8663ccf2dcfa57bdabbd04cf3",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10098,
+      "bytes": 9765,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -22,25 +22,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/messenger.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 8022,
+      "sha256": "e17b17ec7a9897fde0d12d98673b9eca0c30aff9f5d8f80bc44b44d828cd46a8",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER)/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER).glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Orbited Mercury to study its geology, magnetic field, and surface composition. Its measurements also confirmed water ice in deposits near the poles.",
+    "emblem": {
+      "id": "messenger",
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/MESSENGER_mission_emblem.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:MESSENGER_mission_emblem.png",
       "sourceSha256": "f110348ac9deaa7a8e21cb95216da6de6de7613bd9934753164e2b1334bf4ba3",
       "sourceBytes": 4754643,
       "kind": "emblem",
       "credit": "NASA",
-      "src": "/shell/spacecraft/messenger-emblem.webp",
+      "localSource": "originals/messenger.png",
+      "inputSha256": "f110348ac9deaa7a8e21cb95216da6de6de7613bd9934753164e2b1334bf4ba3",
+      "inputBytes": 4754643,
+      "src": "/shell/spacecraft-emblems/messenger.png",
       "width": 288,
-      "height": 261,
-      "bytes": 19756,
-      "sha256": "50b8d29bf25288ea1145c075fa29474b6a8d91ca5550b7461b9615c8f4f0a484",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 114715,
+      "sha256": "2a739cffa5e0a2b591d8594f66e17c8c15b7e49c173ee313d3faa6a1244a93dd"
     }
   },
   "cassini": {
@@ -66,25 +73,35 @@
       }
     ],
     "image": {
-      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/cassini.png",
-      "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-      "credit": "NASA",
-      "kind": "icon",
-      "sourceSha256": "3466f42b90c07ba0271db0686cfd39f6e07536642e1e238516ce124d04c180f3",
-      "sourceBytes": 4243095,
-      "src": "/shell/spacecraft/cassini-icon.webp",
+      "src": "/shell/spacecraft-renders/cassini.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 5306,
+      "sha256": "50328f1e86a645cd9784f36b5a024b31899403688dc1232cdb3530dffa0ada19",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Cassini-Huygens%20(A)/Cassini-Huygens%20(A).glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Explored Saturn, its rings, and its moons from orbit. Observations revealed methane rivers and seas on Titan and jets of ice and gas from Enceladus.",
+    "emblem": {
+      "id": "cassini",
+      "kind": "emblem",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Cassini_logo.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cassini_logo.png",
+      "credit": "Imre Nagy",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "description": "A tudás érdekében",
+      "localSource": "originals/cassini.png",
+      "sourceSha256": "46b9a25e560d5be8b085793484b5c76b7f6356be843e5bcbf149d82e1e46a3b4",
+      "sourceBytes": 724196,
+      "inputSha256": "46b9a25e560d5be8b085793484b5c76b7f6356be843e5bcbf149d82e1e46a3b4",
+      "inputBytes": 724196,
+      "src": "/shell/spacecraft-emblems/cassini.png",
       "width": 288,
-      "height": 277,
-      "bytes": 18854,
-      "sha256": "f4e7b7d641c88142c9e3284b249d3ff169718858f42fe52c269a64175701ff77",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 126628,
+      "sha256": "1c59172393c84f85412e83c566f77c8c07a04b9ca8348c7d36adbdb5299f01d5"
     }
   },
   "dawn": {
@@ -110,25 +127,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/dawn.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 4432,
+      "sha256": "1f2da1c40a9c944722b37b9a6fbd04e53b1045a883d9396a8390e1fcb89e6062",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Dawn/Dawn.glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Visited Vesta and Ceres in the main asteroid belt, spending time in orbit around each. The two worlds offered a comparison between a giant asteroid and a dwarf planet.",
+    "emblem": {
+      "id": "dawn",
       "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Dawn_logo.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dawn_logo.png",
       "sourceSha256": "f23ffa823e1f69ab05d281ec51c41aac0928b5d29ef3dcf0ff4ca96d941f6abb",
       "sourceBytes": 2159257,
       "kind": "emblem",
       "credit": "NASA",
-      "src": "/shell/spacecraft/dawn-emblem.webp",
+      "localSource": "originals/dawn.png",
+      "inputSha256": "f23ffa823e1f69ab05d281ec51c41aac0928b5d29ef3dcf0ff4ca96d941f6abb",
+      "inputBytes": 2159257,
+      "src": "/shell/spacecraft-emblems/dawn.png",
       "width": 288,
-      "height": 281,
-      "bytes": 28190,
-      "sha256": "839edbf9a1c625a1f856eb29fb6afed964b8afcce668e7b02475971aa64a1eb7",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 172837,
+      "sha256": "1e2dd6c3f628342c5c997a861c428d6ce030af7345c17730ae1cf74b35bfb6e0"
     }
   },
   "galileo": {
@@ -154,25 +178,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/galileo.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 6886,
+      "sha256": "40959f00347e14c2e091bad552b7d9eaaffaa201136bb72c20190abbcd8592df",
+      "kind": "model-render",
+      "sourceUrl": "https://eyes.nasa.gov/apps/solar-system/",
+      "credit": "NASA/JPL-Caltech, Eyes on the Solar System"
+    },
+    "description": "Orbited Jupiter for almost eight years and made close passes by its major moons. Its observations provided evidence for an ocean beneath the ice on Europa.",
+    "emblem": {
+      "id": "galileo",
       "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Galileo_mission_patch.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Galileo_mission_patch.png",
       "sourceSha256": "a188f9dffc5f5c4c78cd57dfeaf24e79ead2e651031fa78a2105b18f0557a08a",
       "sourceBytes": 15797,
       "kind": "emblem",
       "credit": "NASA",
-      "src": "/shell/spacecraft/galileo-emblem.webp",
+      "localSource": "originals/galileo.png",
+      "inputSha256": "a188f9dffc5f5c4c78cd57dfeaf24e79ead2e651031fa78a2105b18f0557a08a",
+      "inputBytes": 15797,
+      "src": "/shell/spacecraft-emblems/galileo.png",
       "width": 288,
-      "height": 216,
-      "bytes": 21308,
-      "sha256": "804ec1711cafa13a93f818c1642127c8f36a57e6c25db1259767e37501775f3a",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 84024,
+      "sha256": "aa077ab5ff64b37a77d26352a2b0525c658aad0e8e7284e28b11e6c176f80d90"
     }
   },
   "hubble": {
@@ -198,25 +229,36 @@
       }
     ],
     "image": {
-      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hubble.png",
-      "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+      "src": "/shell/spacecraft-renders/hubble.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 11962,
+      "sha256": "ad78576337ae26e29a60006dff8de8adb9ee8b6f981eabe2aa8b9400676da240",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Observes planets, stars, and galaxies from Earth orbit in ultraviolet, visible, and near-infrared light. Its cameras record images, while its spectrographs measure light to study composition.",
+    "descriptionSourceUrl": "https://science.nasa.gov/mission/hubble/overview/about-hubble/",
+    "emblem": {
+      "id": "hubble",
+      "kind": "emblem",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Hubble25_Gradient_Patch.svg/960px-Hubble25_Gradient_Patch.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hubble25_Gradient_Patch.svg",
       "credit": "NASA",
-      "kind": "icon",
-      "sourceSha256": "a9ef77327e05ad881936c14939401509dc178a2953e5943f184576d6c7bedeb6",
-      "sourceBytes": 5912305,
-      "src": "/shell/spacecraft/hubble-icon.webp",
+      "license": "Public domain",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "description": "NASA Hubble 25th-anniversary emblem (2015)",
+      "localSource": "originals/hubble-commons.png",
+      "sourceSha256": "820301a77e806b34f0ee010b2f1d8c22dfdea8962c50c3f064ba3fa51f7251be",
+      "sourceBytes": 173563,
+      "inputSha256": "820301a77e806b34f0ee010b2f1d8c22dfdea8962c50c3f064ba3fa51f7251be",
+      "inputBytes": 173563,
+      "src": "/shell/spacecraft-emblems/hubble.png",
       "width": 288,
-      "height": 243,
-      "bytes": 19404,
-      "sha256": "ddad372c04bc853b920354f4a2469065d69a69808e2b55c1049f24ab9332b69f",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 58343,
+      "sha256": "f39f8a3e75504b1525fd7b68731e4efdc6d60f27c73be3234bb4de599ce261a1"
     }
   },
   "juno": {
@@ -242,25 +284,34 @@
       }
     ],
     "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Juno_mission_insignia.jpg",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Juno_mission_insignia.jpg",
-      "sourceSha256": "99c404414cecb0d9eeb75697f16b2ad81949ad3e5f39a94f53da11da3bb3902b",
-      "sourceBytes": 53760,
+      "src": "/shell/spacecraft-renders/juno.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 5498,
+      "sha256": "feea10a55946cc103ec91f2180b1b7aa8d1e46d062de24d7507f6531b09c88d2",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Juno%20(A)/Juno%20(A).glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Studies Jupiter beneath its clouds to understand how the planet formed. Close passes revealed polar storms, deep winds, and volcanic activity on its moon Io.",
+    "emblem": {
+      "id": "juno",
       "kind": "emblem",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Juno_mission_insignia.svg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Juno_mission_insignia.svg",
       "credit": "NASA",
-      "src": "/shell/spacecraft/juno-emblem.webp",
+      "license": "Public domain",
+      "description": "Juno mission insignia. The silhouette of Juno is placed in the bottom right of the blue circle, representing Jupiter. The white band and circle represent Jupiter’s Great Red Spot and surrounding jet stream, as well as its moons and magnetic field lines.",
+      "localSource": "originals/juno.svg",
+      "sourceSha256": "96b68220a08acc71864ba45caec0a6f316a8add0f6dd0786cb0c12d21e2b3d8f",
+      "sourceBytes": 5989,
+      "inputSha256": "96b68220a08acc71864ba45caec0a6f316a8add0f6dd0786cb0c12d21e2b3d8f",
+      "inputBytes": 5989,
+      "src": "/shell/spacecraft-emblems/juno.png",
       "width": 288,
       "height": 288,
-      "bytes": 6050,
-      "sha256": "87216d842eacbe260010e5337048ea71d621d1d8fc3099d52a20f7a47a03fcbc",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "bytes": 21831,
+      "sha256": "337af78bef1687d7965ffc34fb68d957452292377af545cfbf0dde552bdafd88"
     }
   },
   "new-horizons": {
@@ -286,25 +337,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/new-horizons.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 10060,
+      "sha256": "742f4d07938227c448ad60884bc3de786c8fc0b1cb2190fc2421c35f12d9873c",
+      "kind": "model-render",
+      "sourceUrl": "https://science.nasa.gov/resource/new-horizons-3d-model/",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+    },
+    "description": "Flew past Pluto and its moons, then continued to the Kuiper Belt object Arrokoth. These encounters provided the first close views of both distant worlds.",
+    "emblem": {
+      "id": "new-horizons",
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/New_Horizons_-_Logo2_big.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:New_Horizons_-_Logo2_big.png",
       "sourceSha256": "8dd95ff0e56bbc1aa6839dc83af20f04555e11557240856f3eaeb6f0d65ad362",
       "sourceBytes": 1069353,
       "kind": "emblem",
       "credit": "NASA/JPL/APL/SwRI",
-      "src": "/shell/spacecraft/new-horizons-emblem.webp",
+      "localSource": "originals/new-horizons.png",
+      "inputSha256": "8dd95ff0e56bbc1aa6839dc83af20f04555e11557240856f3eaeb6f0d65ad362",
+      "inputBytes": 1069353,
+      "src": "/shell/spacecraft-emblems/new-horizons.png",
       "width": 288,
-      "height": 282,
-      "bytes": 26396,
-      "sha256": "3a2516b7be8042aef9a8eab869d078e05bd8c3b632c77ac242e59912ff4ba211",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 158395,
+      "sha256": "fd6b25e26009dff61c77b0c16a78dd91ec4b0c727838665c605b0961c72ebb50"
     }
   },
   "sdo": {
@@ -330,25 +388,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/sdo.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 7220,
+      "sha256": "ea3fb89c81c366e6c4856ce9ddb0cec725456f0bd542780d6f0f58b2eff89c96",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Solar%20Dynamics%20Observatory/Solar%20Dynamics%20Observatory.glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Monitors the Sun’s interior, atmosphere, magnetic field, and energy output. These observations help explain how solar activity develops and how it drives changes in space weather.",
+    "emblem": {
+      "id": "sdo",
       "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Solar_Dynamics_Observatory_insignia.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Solar_Dynamics_Observatory_insignia.png",
       "sourceSha256": "c38e61ee80dbfdfef5875ba3d1bf152c137407e7019bb9e3785b9a657a02ff80",
       "sourceBytes": 2051141,
       "kind": "emblem",
       "credit": "NASA",
-      "src": "/shell/spacecraft/sdo-emblem.webp",
+      "localSource": "originals/sdo.png",
+      "inputSha256": "c38e61ee80dbfdfef5875ba3d1bf152c137407e7019bb9e3785b9a657a02ff80",
+      "inputBytes": 2051141,
+      "src": "/shell/spacecraft-emblems/sdo.png",
       "width": 288,
       "height": 288,
-      "bytes": 27606,
-      "sha256": "2bfcdd5b7d6b9a4594fc9683173eec0b69c6f42f922b9436920047072240c4e0",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "bytes": 124647,
+      "sha256": "deef33c3addfed462e6690283d78ab8a824606b94109e1a3478b6125b63e952b"
     }
   },
   "voyager-1": {
@@ -374,25 +439,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/voyager-1.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 8386,
+      "sha256": "8d7a95dc953819466479834502e1644e065bf19fc686c8529e7cb9adaba3ab1b",
+      "kind": "model-render",
+      "sourceUrl": "https://science.nasa.gov/resource/voyager-3d-model/",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+    },
+    "description": "Flew past Jupiter and Saturn before crossing into interstellar space. Its journey carried it beyond the heliopause, the boundary of the region dominated by the solar wind.",
+    "emblem": {
+      "id": "voyager-1",
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Voyager_-_mission_logo.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voyager_-_mission_logo.png",
       "sourceSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
       "sourceBytes": 108545,
       "kind": "emblem",
       "credit": "NASA",
-      "src": "/shell/spacecraft/voyager-1-emblem.webp",
+      "localSource": "originals/voyager-1.png",
+      "inputSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
+      "inputBytes": 108545,
+      "src": "/shell/spacecraft-emblems/voyager-1.png",
       "width": 288,
-      "height": 193,
-      "bytes": 17148,
-      "sha256": "e5a00051d03e296fb04ed44e163d4e3e79d17541850833ffa6494f2272955189",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 43452,
+      "sha256": "d4ff7a777655e69c8da0a8382ab6f47a012da82261a08f6a84bd95d61a85d08c"
     }
   },
   "voyager-2": {
@@ -418,25 +490,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/voyager-2.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 8386,
+      "sha256": "8d7a95dc953819466479834502e1644e065bf19fc686c8529e7cb9adaba3ab1b",
+      "kind": "model-render",
+      "sourceUrl": "https://science.nasa.gov/resource/voyager-3d-model/",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)"
+    },
+    "description": "Explored Jupiter and Saturn, then continued to Uranus and Neptune. It became the only spacecraft to visit those two planets before entering interstellar space in 2018.",
+    "emblem": {
+      "id": "voyager-2",
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Voyager_-_mission_logo.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voyager_-_mission_logo.png",
       "sourceSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
       "sourceBytes": 108545,
       "kind": "emblem",
       "credit": "NASA",
-      "src": "/shell/spacecraft/voyager-2-emblem.webp",
+      "localSource": "originals/voyager-2.png",
+      "inputSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
+      "inputBytes": 108545,
+      "src": "/shell/spacecraft-emblems/voyager-2.png",
       "width": 288,
-      "height": 193,
-      "bytes": 17148,
-      "sha256": "e5a00051d03e296fb04ed44e163d4e3e79d17541850833ffa6494f2272955189",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 43452,
+      "sha256": "d4ff7a777655e69c8da0a8382ab6f47a012da82261a08f6a84bd95d61a85d08c"
     }
   },
   "lro": {
@@ -462,25 +541,33 @@
       }
     ],
     "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/LRO_mission_logo_%28transparent_background%29_01.png",
+      "src": "/shell/spacecraft-renders/lro.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 13138,
+      "sha256": "be68108b5a6bf1b6486899f50fd5edece3e69ebe1571fa87783647764a48b61f",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Lunar%20Reconnaissance%20Orbiter%20(B)/Lunar%20Reconnaissance%20Orbiter%20(B).glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Maps the Moon’s terrain and measures its temperature, composition, and radiation environment. The observations help identify landing sites and locate resources near the lunar south pole.",
+    "emblem": {
+      "id": "lro",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/LRO_mission_logo_%28transparent_background%29_01.png/960px-LRO_mission_logo_%28transparent_background%29_01.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:LRO_mission_logo_(transparent_background)_01.png",
       "sourceSha256": "26fc61ffad652b18a256d3b91d2425442ac3f9aa5805761801fa988d77c9db8a",
       "sourceBytes": 2028960,
       "kind": "emblem",
-      "credit": "National Aeronautics and Space Administration   http://lro.gsfc.nasa.gov/gallery-media.html >",
-      "src": "/shell/spacecraft/lro-emblem.webp",
+      "credit": "NASA",
+      "localSource": "originals/lro-commons.png",
+      "inputKind": "commons-served-thumbnail",
+      "inputSha256": "3a58ee127e3d2a0b3a1ff69994e441b76765b7abf032411155d6322f219235bc",
+      "inputBytes": 856431,
+      "src": "/shell/spacecraft-emblems/lro.png",
       "width": 288,
-      "height": 277,
-      "bytes": 26536,
-      "sha256": "1b3949fcae14909ad31285ac30f15f59bdc507ce13291f44d1c8bf99b2404c45",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 123377,
+      "sha256": "332a1b90d4fc40515d842474b0ab59471fb907d905e64463759de8789138c975"
     }
   },
   "grail": {
@@ -506,25 +593,33 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/grail.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 11480,
+      "sha256": "47a4438275531df9b17b0db12698e7b36f0ffb76300a8870f8d044384193042e",
+      "kind": "model-render",
+      "sourceUrl": "https://eyes.nasa.gov/apps/solar-system/",
+      "credit": "NASA/JPL-Caltech, Eyes on the Solar System"
+    },
+    "description": "Two probes, Ebb and Flow, flew around the Moon together. Changes in their separation measured variations in lunar gravity, helping scientists determine the Moon’s internal structure.",
+    "emblem": {
+      "id": "grail",
       "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/GRAIL_-_GRAIL-logo-sm.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:GRAIL_-_GRAIL-logo-sm.png",
       "sourceSha256": "dae76b78ac8a15f72b880bb9794fdfacf0f1b167e001f0b6b3654a8a3a2a7841",
       "sourceBytes": 465402,
       "kind": "emblem",
       "credit": "NASA/JPL/Corby Waste",
-      "src": "/shell/spacecraft/grail-emblem.webp",
+      "localSource": "originals/grail-prepared.webp",
+      "inputKind": "previously-prepared-emblem",
+      "inputSha256": "9d2fd1b61a60afa01ccb23390877e71abb5f029a862bff7b7c4c2923015d8d03",
+      "inputBytes": 16398,
+      "src": "/shell/spacecraft-emblems/grail.png",
       "width": 288,
-      "height": 255,
-      "bytes": 16398,
-      "sha256": "9d2fd1b61a60afa01ccb23390877e71abb5f029a862bff7b7c4c2923015d8d03",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 80312,
+      "sha256": "230e95f24a812417abfc5ee04fd803f5a9417cb324c3b07696cacfaaf2b306cd"
     }
   },
   "viking": {
@@ -550,25 +645,33 @@
       }
     ],
     "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg",
+      "src": "/shell/spacecraft-renders/viking.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 12344,
+      "sha256": "14c280a93514dad0cce7934b445444f68bc4fbcc8d94f9173dcb6d6402014f1d",
+      "kind": "official-prerendered-artwork",
+      "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+      "credit": "NASA spacecraft artwork collection"
+    },
+    "description": "Sent two orbiters and two landers to Mars. The landers returned images from the surface, beginning a program of close observation that later Mars missions built on.",
+    "emblem": {
+      "id": "viking",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg/960px-Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg",
       "sourceSha256": "ddc9ba676f17dc2899295a76f0a93015ec972eee156891f0b43bc468e1c10714",
       "sourceBytes": 1924048,
       "kind": "emblem",
-      "credit": "THIS LOGO IS IN THE NASA PUBLIC DOMAIN",
-      "src": "/shell/spacecraft/viking-emblem.webp",
-      "width": 284,
+      "credit": "NASA",
+      "localSource": "originals/viking-commons.jpg",
+      "inputKind": "commons-served-thumbnail",
+      "inputSha256": "141d972c4b427c786ddb628affe22943fa1c9d439791690f387aabbabbd95dfa",
+      "inputBytes": 190112,
+      "src": "/shell/spacecraft-emblems/viking.png",
+      "width": 288,
       "height": 288,
-      "bytes": 19846,
-      "sha256": "35aa8c6b426fa6f79f326ac8b2bf4ba15579c350d58958100f43b62c8856e749",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "bytes": 150681,
+      "sha256": "595f8e1f689cf5b7a8fbb58a4f41c9a0fec711ebeaf629495330854b46e5eb7f"
     }
   },
   "mro": {
@@ -594,25 +697,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/mro.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 12650,
+      "sha256": "b6ebd5a83740dd5a08cafd2d7e4b31fcea5503944bc54efa18aea4ddfb6d0b97",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A)/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A).glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Examines the history of water on Mars using close surface images, mineral measurements, and subsurface observations. It also monitors the atmosphere and helps identify potential landing sites.",
+    "emblem": {
+      "id": "mro",
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Mars_Reconnaissance_Orbiter_insignia.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mars_Reconnaissance_Orbiter_insignia.png",
       "sourceSha256": "05a7052993d547de48731d9ac0cb1e8c1eed48e2bd7d91fac975b5bf28b9b414",
       "sourceBytes": 129628,
       "kind": "emblem",
-      "credit": "National Aeronautics and Space Administration (NASA)  /  Jet Propulsion Laboratory",
-      "src": "/shell/spacecraft/mro-emblem.webp",
-      "width": 193,
+      "credit": "NASA/JPL",
+      "localSource": "originals/mro.png",
+      "inputSha256": "05a7052993d547de48731d9ac0cb1e8c1eed48e2bd7d91fac975b5bf28b9b414",
+      "inputBytes": 129628,
+      "src": "/shell/spacecraft-emblems/mro.png",
+      "width": 288,
       "height": 288,
-      "bytes": 18460,
-      "sha256": "921d9c232bd52a1d6d774734443a2859a8bbb34c0567ff807f3810ac2d1aeef9",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "bytes": 54128,
+      "sha256": "ca181584d258388e4f6f32ae8ac78ed5506d4dbcf04dd32d757b317f80f5d2fe"
     }
   },
   "odyssey": {
@@ -638,25 +748,34 @@
       }
     ],
     "image": {
-      "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Mars_Odyssey-2.png",
-      "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-      "credit": "NASA",
-      "kind": "icon",
-      "sourceSha256": "ccebe04bf13fa1d7c5c8c517cd1a20f7f2d6025a08c5f2d1f8b9092c977c7179",
-      "sourceBytes": 2722477,
-      "src": "/shell/spacecraft/odyssey-icon.webp",
+      "src": "/shell/spacecraft-renders/odyssey.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 6106,
+      "sha256": "b974eaae8997f51738f8b8de1bf13b1b3152b9058aad73b7010bc9ae5175c305",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Odyssey/Mars%20Odyssey.glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Mapped the chemical elements and minerals on the Martian surface. Its observations also record clouds, fog, frost, and surface rocks to support the study and exploration of Mars.",
+    "emblem": {
+      "id": "odyssey",
+      "kind": "emblem",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/2001_Mars_Odyssey_-_mars-odyssey-logo-sm.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2001_Mars_Odyssey_-_mars-odyssey-logo-sm.png",
+      "credit": "NASA/JPL/Corby Waste",
+      "license": "Public domain",
+      "description": "\"The Mars Odyssey patch was designed by Corby Waste. Corby has also produced much of the artwork. of NASA spacecraft. For the Odyssey patch, Corby decided to create a “science logo.” In all the artwork Corby was doing for the Odyssey mission, the spacecraft was just seen hovering over Mars. He wanted to create a logo depicting the Odyssey instruments “in action.” On the right side of Mars, the Thermal Imaging System (THEMIS) instrument is taking infrared data. On the left, the Gamma Ray Spectrometer (GRS) is taking gamma ray data. The shape of the logo was “invented” by Corby. “It was something I just like…not round, not square, it was something new.” Within the border of the logo are all the institutions involved with the Odyssey mission: Arizona State University, the Jet Propulsion Laboratory, Johnson Space Center, NASA, Lockheed Martin and The University of Arizona.\"",
+      "localSource": "originals/odyssey.png",
+      "sourceSha256": "30cfcee5e2342d67883a0fb2a5387a17b71d1d7c8d4445e6d27d20925cdbc31a",
+      "sourceBytes": 277901,
+      "inputSha256": "30cfcee5e2342d67883a0fb2a5387a17b71d1d7c8d4445e6d27d20925cdbc31a",
+      "inputBytes": 277901,
+      "src": "/shell/spacecraft-emblems/odyssey.png",
       "width": 288,
-      "height": 186,
-      "bytes": 17204,
-      "sha256": "2cb09c7bbb6885c0d42b0b1e47ecfac72efba53485475a5f8d368a35a0fd6e33",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 81390,
+      "sha256": "bdd637b832c970b93936477f7732a87970c94dc7b91ca7cdd5a6ffd711cd30c4"
     }
   },
   "near-shoemaker": {
@@ -682,25 +801,34 @@
       }
     ],
     "image": {
-      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/near.png",
-      "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-      "credit": "NASA",
-      "kind": "icon",
-      "sourceSha256": "e7e762caa1a1ee193015542d5b9139702c6d99080ac9edc5eb5bec919b5f3e41",
-      "sourceBytes": 156205,
-      "src": "/shell/spacecraft/near-shoemaker-icon.webp",
+      "src": "/shell/spacecraft-renders/near-shoemaker.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 8578,
+      "sha256": "6e0a5bb99ada3c3d520cffd8ffb2797e27475c311f176d62a9687c24a3ae9f3b",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/NEAR%20Shoemaker/NEAR%20Shoemaker.glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Became the first spacecraft to orbit an asteroid when it reached Eros. After a year of observations, it touched down on the surface, also making the first asteroid landing.",
+    "emblem": {
+      "id": "near-shoemaker",
+      "kind": "emblem",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/NEAR_Shoemaker_insignia.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:NEAR_Shoemaker_insignia.png",
+      "credit": "NASA/JHUAPL",
+      "license": "Public domain",
+      "description": "Official mission insignia of the NEAR Shoemaker mission.",
+      "localSource": "originals/near-shoemaker.png",
+      "sourceSha256": "95bd633622e2308a0ac8080ec66a55343f5140bd462f696eb79fec9c40fbbaad",
+      "sourceBytes": 110248,
+      "inputSha256": "95bd633622e2308a0ac8080ec66a55343f5140bd462f696eb79fec9c40fbbaad",
+      "inputBytes": 110248,
+      "src": "/shell/spacecraft-emblems/near-shoemaker.png",
       "width": 288,
-      "height": 173,
-      "bytes": 17918,
-      "sha256": "96ec7fd728c4443db3bf569d62f6d048989e351a22e9443484add132351118f7",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 98803,
+      "sha256": "d3f6e9faa3dec45b94142a93e83b82fe06b40eab879406dc9bee1674c99e0e97"
     }
   },
   "osiris-rex": {
@@ -726,25 +854,32 @@
       }
     ],
     "image": {
+      "src": "/shell/spacecraft-renders/osiris-rex.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 13170,
+      "sha256": "fc638ce13aa23be3b5648bbce53aaf5d1096ecf21ebe30f8afb574d637931347",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Origins%2C%20Spectral%20Interpretation%2C%20Resource%20Identification%2C%20and%20Security%20-%20Regolith%20Explorer%20(OSIRIS-REx)/OSIRIS-REx.glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Collected rocks and dust from asteroid Bennu and delivered them to Earth in a capsule. The spacecraft then continued toward Apophis under the new mission name OSIRIS-APEX.",
+    "emblem": {
+      "id": "osiris-rex",
       "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/OSIRIS-REx_Mission_Logo.png",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:OSIRIS-REx_Mission_Logo.png",
       "sourceSha256": "027fb2600a23395b4286c8005ce46c97a8ca352dbfa6a7ed5ef5cc0379bc6743",
       "sourceBytes": 447581,
       "kind": "emblem",
       "credit": "NASA",
-      "src": "/shell/spacecraft/osiris-rex-emblem.webp",
-      "width": 225,
+      "localSource": "originals/osiris-rex.png",
+      "inputSha256": "027fb2600a23395b4286c8005ce46c97a8ca352dbfa6a7ed5ef5cc0379bc6743",
+      "inputBytes": 447581,
+      "src": "/shell/spacecraft-emblems/osiris-rex.png",
+      "width": 288,
       "height": 288,
-      "bytes": 18474,
-      "sha256": "5e401dfd49e4e3f04a8995ff0c3adf7434521ab0ff1b34a889d32a4ae74af311",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "bytes": 80651,
+      "sha256": "79a63c11753f9c2da78717cc279afcf01245b6cac9e314af76a09cca0b06bb21"
     }
   },
   "hayabusa2": {
@@ -770,25 +905,34 @@
       }
     ],
     "image": {
-      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_2.png",
+      "src": "/shell/spacecraft-renders/hayabusa2.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 11214,
+      "sha256": "845aa46eeee91142a5e0b15a8a019de6c9c6ed3767226b8eba3c1165f90fe733",
+      "kind": "official-prerendered-artwork",
       "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-      "credit": "NASA",
-      "kind": "icon",
-      "sourceSha256": "b3f9dfce8e1a3ab7f4b9f5ad252ff42ca225d3ef2838c52b99131da4fe080386",
-      "sourceBytes": 1195703,
-      "src": "/shell/spacecraft/hayabusa2-icon.webp",
-      "width": 260,
+      "credit": "NASA spacecraft artwork collection"
+    },
+    "description": "Collected material from the surface and subsurface of asteroid Ryugu. It returned the samples to Earth in a capsule, allowing researchers to study them in laboratories.",
+    "emblem": {
+      "id": "hayabusa2",
+      "kind": "emblem",
+      "url": "https://www.hayabusa2.jaxa.jp/galleries/cg/logo/img/logo3.png",
+      "sourceUrl": "https://www.hayabusa2.jaxa.jp/en/galleries/cg/logo/pages/logo3.html",
+      "credit": "JAXA",
+      "license": "JAXA website terms",
+      "description": "Exploring Ryugu mission logo",
+      "localSource": "originals/hayabusa2.png",
+      "sourceSha256": "5de8e1e4ec8cefd1471432f9b5c5a32688d5374f348ec3381b4c90c317208acd",
+      "sourceBytes": 267948,
+      "inputSha256": "5de8e1e4ec8cefd1471432f9b5c5a32688d5374f348ec3381b4c90c317208acd",
+      "inputBytes": 267948,
+      "src": "/shell/spacecraft-emblems/hayabusa2.png",
+      "width": 288,
       "height": 288,
-      "bytes": 22232,
-      "sha256": "93a1f50a2ea9270943d57309eba073b48fa52b8304dd4035d1179fcc1f3897fa",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "bytes": 78493,
+      "sha256": "4432790095e53640a8fa05c81335a5251278ad73ca0327719f4094483da2db00"
     }
   },
   "hayabusa": {
@@ -814,25 +958,34 @@
       }
     ],
     "image": {
-      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_1.png",
+      "src": "/shell/spacecraft-renders/hayabusa.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 13848,
+      "sha256": "13e162278cdd796bf05bae8ed52cea1bd0a9b9965685069361572b47e64711f9",
+      "kind": "official-prerendered-artwork",
       "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-      "credit": "NASA",
-      "kind": "icon",
-      "sourceSha256": "1f6aed2ace5cc97fc65e3cc091431be85b8564c75bec42dc0c3ea72273f046a1",
-      "sourceBytes": 393166,
-      "src": "/shell/spacecraft/hayabusa-icon.webp",
+      "credit": "NASA spacecraft artwork collection"
+    },
+    "description": "Traveled to asteroid Itokawa to collect material and return it to Earth. The recovered capsule carried rocky grains that could be examined directly in laboratories.",
+    "descriptionSourceUrl": "https://darts.isas.jaxa.jp/en/missions/hayabusa",
+    "emblem": {
+      "id": "hayabusa",
+      "kind": "emblem",
+      "url": "https://www.isas.jaxa.jp/home/nucleus/media/8/20100514-patch.jpg",
+      "sourceUrl": "https://www.isas.jaxa.jp/home/hayabusa-live/?itemid=443",
+      "credit": "JAXA",
+      "license": "JAXA source page: private use only; permission required for commercial or other uses",
+      "localSource": "originals/hayabusa.jpg",
+      "sourceSha256": "14116656107e8904945876d97756e7589b08bfd33f63646b05b69b36f7911fcb",
+      "sourceBytes": 700648,
+      "inputSha256": "14116656107e8904945876d97756e7589b08bfd33f63646b05b69b36f7911fcb",
+      "inputBytes": 700648,
+      "src": "/shell/spacecraft-emblems/hayabusa.png",
       "width": 288,
-      "height": 173,
-      "bytes": 16078,
-      "sha256": "99b11bb9d1995cf019894702e814b69e0f2084bd675b399725e151ff8c061f1a",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 104923,
+      "sha256": "5bbce8b4a8b7e23c2395e3c1604aebf1483f507dc71d44e7fb306aa1544bef05"
     }
   },
   "rosetta": {
@@ -858,25 +1011,33 @@
       }
     ],
     "image": {
-      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/rosetta.png",
-      "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-      "credit": "NASA",
-      "kind": "icon",
-      "sourceSha256": "faa3d7e0c36462f0c997a4dee9b990fd71a6d67944849486e028a5a428c20a5c",
-      "sourceBytes": 3567990,
-      "src": "/shell/spacecraft/rosetta-icon.webp",
+      "src": "/shell/spacecraft-renders/rosetta.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 4258,
+      "sha256": "783007d89940ded7679397859749744d110ea9238231d56bec2ff38ee194202a",
+      "kind": "model-render",
+      "sourceUrl": "https://eyes.nasa.gov/apps/solar-system/",
+      "credit": "NASA/JPL-Caltech, Eyes on the Solar System"
+    },
+    "description": "Followed comet 67P/Churyumov–Gerasimenko to study its nucleus and surrounding environment. It also delivered the Philae probe to the surface during its stay at the comet.",
+    "emblem": {
+      "id": "rosetta",
+      "kind": "emblem",
+      "url": "https://www.cosmos.esa.int/documents/522118/522182/Rosetta_logo.png/cd85878d-2fac-e086-e32a-df0eaee5e505?t=1614026031720",
+      "sourceUrl": "https://www.cosmos.esa.int/web/spice/spice-for-rosetta",
+      "credit": "ESA",
+      "license": "ESA Standard Licence",
+      "localSource": "originals/rosetta-patch.png",
+      "sourceSha256": "916ebac8b3c81f3ea4654b3ce84afbc1e21afa612796f2a4a646b998c1fd4bfb",
+      "sourceBytes": 161297,
+      "inputSha256": "916ebac8b3c81f3ea4654b3ce84afbc1e21afa612796f2a4a646b998c1fd4bfb",
+      "inputBytes": 161297,
+      "src": "/shell/spacecraft-emblems/rosetta.png",
       "width": 288,
-      "height": 149,
-      "bytes": 13078,
-      "sha256": "96007de9eaa85973849c47cfb72fed88f61283a2a2f1b423f8c083219975bed7",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 54550,
+      "sha256": "7559549406985cf8252e326d60c0a03895edc0374a14b345f3d69512c7b83cd3"
     }
   },
   "terra": {
@@ -902,25 +1063,33 @@
       }
     ],
     "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Terra_logo.png",
+      "src": "/shell/spacecraft-renders/terra.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 11432,
+      "sha256": "7cb7ef720bc81d51dabeaf4a51318f2d383eb804bc8a7bea53190cd9f663d6c4",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Terra/Terra.glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Measures interactions between Earth’s land, oceans, atmosphere, and energy balance. Its observations track environmental change and help study natural hazards such as fires and volcanic activity.",
+    "emblem": {
+      "id": "terra",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Terra_logo.png/960px-Terra_logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Terra_logo.png",
       "sourceSha256": "3853ec2ec5cda451b46a2844941de323892324a65794022b0ec6d443d570df85",
       "sourceBytes": 1189300,
       "kind": "emblem",
       "credit": "NASA",
-      "src": "/shell/spacecraft/terra-emblem.webp",
-      "width": 265,
+      "localSource": "originals/terra-commons.png",
+      "inputKind": "commons-served-thumbnail",
+      "inputSha256": "962fb4b9a3e4c68fc9417e9bb27b7ebdb31e9e4131a415307aa2f911a640097c",
+      "inputBytes": 791331,
+      "src": "/shell/spacecraft-emblems/terra.png",
+      "width": 288,
       "height": 288,
-      "bytes": 25158,
-      "sha256": "32a5e201c804222a383793e089ceebcc13a58f6e2db66fec9db1f39a9ccc2ced",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "bytes": 112836,
+      "sha256": "d6320b16c3903793ff95d03f6b407ceeb73190a44ccab0aecc80cab8c3244f96"
     }
   },
   "suomi-npp": {
@@ -946,25 +1115,34 @@
       }
     ],
     "image": {
-      "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Suomi_NPP-2.png",
-      "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-      "credit": "NASA",
-      "kind": "icon",
-      "sourceSha256": "931bba8f7ba9f8136d23e31fcff30be80c0bcc74cc72a36761d84642c80cc204",
-      "sourceBytes": 4114140,
-      "src": "/shell/spacecraft/suomi-npp-icon.webp",
+      "src": "/shell/spacecraft-renders/suomi-npp.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 7812,
+      "sha256": "d8247cd4e8da874bcc1b2569a03c3dd0685294233de876fb2855abe5310ec8b4",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP)/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP).glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Observes clouds, oceans, vegetation, ice, land, and the atmosphere from Earth orbit. The measurements support studies of daily weather conditions and changes in climate over longer periods.",
+    "emblem": {
+      "id": "suomi-npp",
+      "kind": "emblem",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/NPOESS_Preparatory_Project_logo.svg/960px-NPOESS_Preparatory_Project_logo.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:NPOESS_Preparatory_Project_logo.svg",
+      "credit": "NASA/NOAA/DoD",
+      "license": "Public domain",
+      "description": "Logo of the NPOESS Preparatory Project, now Suomi NPP.",
+      "localSource": "originals/suomi-npp-commons.png",
+      "sourceSha256": "d92cd21e0b0b7b85264252aec39b77cfc124dcc922adb732b9124514f9c4f72d",
+      "sourceBytes": 388100,
+      "inputSha256": "d92cd21e0b0b7b85264252aec39b77cfc124dcc922adb732b9124514f9c4f72d",
+      "inputBytes": 388100,
+      "src": "/shell/spacecraft-emblems/suomi-npp.png",
       "width": 288,
-      "height": 218,
-      "bytes": 14734,
-      "sha256": "3dd7077bbe3a0aaafb8ea32e9bc830094f7465acea317ba6d314e1aed34c028f",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 113711,
+      "sha256": "a952763d5e62a57c98d89e96b3503e4fda0765a2f2763358ae07f12dac9f5d4b"
     }
   },
   "magellan": {
@@ -990,25 +1168,34 @@
       }
     ],
     "image": {
-      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia18/pia18175/PIA18175.jpg",
-      "sourceUrl": "https://science.nasa.gov/photojournal/magellan-orbit-artists-concept/",
-      "credit": "NASA/JPL-Caltech",
-      "kind": "illustration",
-      "sourceSha256": "90b9c7a65a85bf05e3bb8f9df5d021908382650ff3ea1facffc97e95dbdfb454",
-      "sourceBytes": 84026,
-      "src": "/shell/spacecraft/magellan-illustration.webp",
+      "src": "/shell/spacecraft-renders/magellan.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 11620,
+      "sha256": "8979695c0bf847e9d5536d1777f2d6c89a6226dc173eac0bb9dc04c1a288b2a8",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Magellan/Magellan.glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Used radar to map the surface of Venus from orbit. Its observations covered almost the entire planet, revealing terrain hidden beneath the thick cloud cover.",
+    "emblem": {
+      "id": "magellan",
+      "kind": "emblem",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Magellan_mission_patch.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Magellan_mission_patch.png",
+      "credit": "NASA",
+      "license": "Public domain",
+      "description": "Magellan Mission Patch",
+      "localSource": "originals/magellan.png",
+      "sourceSha256": "97c89c86bdefb1c23f03eb92cb777c6ccd44ed6dd923e053cc55fdd85d899f68",
+      "sourceBytes": 19691,
+      "inputSha256": "97c89c86bdefb1c23f03eb92cb777c6ccd44ed6dd923e053cc55fdd85d899f68",
+      "inputBytes": 19691,
+      "src": "/shell/spacecraft-emblems/magellan.png",
       "width": 288,
-      "height": 217,
-      "bytes": 10546,
-      "sha256": "ff808c4fa49603e86e8cb94ca58c49459519fe251b319a4c766ad983c405240c",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "height": 288,
+      "bytes": 59106,
+      "sha256": "0426a057195dae563d707c9205296882441ec3b206eb248fd4b6ac98afd25e67"
     }
   },
   "mars-global-surveyor": {
@@ -1034,25 +1221,34 @@
       }
     ],
     "image": {
-      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia17/pia17486/PIA17486.jpg",
-      "sourceUrl": "https://science.nasa.gov/photojournal/mars-global-surveyor-artists-concept/",
-      "credit": "NASA/JPL-Caltech",
-      "kind": "illustration",
-      "sourceSha256": "876add3d1e67c7abca7a38bdcb99b133a655dd31c4318a4e9e9170be11b3de1f",
-      "sourceBytes": 4604289,
-      "src": "/shell/spacecraft/mars-global-surveyor-illustration.webp",
-      "width": 249,
+      "src": "/shell/spacecraft-renders/mars-global-surveyor.webp",
+      "width": 592,
+      "height": 296,
+      "bytes": 12098,
+      "sha256": "dee33e9a4b065ae24958967617c4299ed9bfe44699948c4fe2856f1b0a215705",
+      "kind": "model-render",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/blob/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Global%20Surveyor/Mars%20Global%20Surveyor.glb",
+      "credit": "NASA 3D Resources"
+    },
+    "description": "Mapped Mars and studied its atmosphere, surface, and interior. It also identified potential landing sites and relayed data for later missions operating on the surface.",
+    "emblem": {
+      "id": "mars-global-surveyor",
+      "kind": "emblem",
+      "url": "https://space.jpl.nasa.gov/art/pix/mgspatch640.jpg",
+      "sourceUrl": "https://space.jpl.nasa.gov/art/patches.html",
+      "credit": "NASA/JPL/David Seal",
+      "license": "Public domain",
+      "description": "This is the official Mars Global Surveyor patch, and shows the spacecraft above Mars with stars in the background. A cartoon of the spacecraft trajectory can be seen leaving Earth (blue dot) and travelling around the Sun, Venus and Mercury to reach Mars. MGS launched in late 1996.",
+      "localSource": "originals/mars-global-surveyor-jpl.jpg",
+      "sourceBytes": 64084,
+      "sourceSha256": "ddfc7ad001e5913a9e7081e28a3065561a9a9b4f31b71bf4a2039e6e6f34b779",
+      "inputSha256": "ddfc7ad001e5913a9e7081e28a3065561a9a9b4f31b71bf4a2039e6e6f34b779",
+      "inputBytes": 64084,
+      "src": "/shell/spacecraft-emblems/mars-global-surveyor.png",
+      "width": 288,
       "height": 288,
-      "bytes": 9266,
-      "sha256": "a29a4832d5781b30acfa7a4cb58a7b5c2e504da66714239dfe0b85895a3e16f4",
-      "recipe": {
-        "size": 288,
-        "fit": "inside",
-        "withoutEnlargement": true,
-        "quality": 88,
-        "alphaQuality": 100,
-        "trimTransparentArtwork": true
-      }
+      "bytes": 96861,
+      "sha256": "edba6cc65eeaf13e964aa8d52135c25733d86aa9282350e80e2f12309c226c4e"
     }
   }
 }

@@ -14,21 +14,20 @@ export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
 const ORBIT_FADE_START_PIXELS = 12;
 
-function orbitPresentation(segments: readonly OrbitSegment[] | number, closed: boolean) {
-  if (typeof segments === 'number') return orbitPresentationForExtent(segments, closed);
+function orbitPresentation(segments: readonly OrbitSegment[] | number) {
+  if (typeof segments === 'number') return orbitPresentationForExtent(segments);
   let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
   for (const [x0, y0, x1, y1] of segments) {
     left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
     top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
   }
-  return orbitPresentationForExtent(Math.max(1, right - left, bottom - top), closed);
+  return orbitPresentationForExtent(Math.max(1, right - left, bottom - top));
 }
 
-function orbitPresentationForExtent(extent: number, closed: boolean) {
+function orbitPresentationForExtent(extent: number) {
   const opacity = logarithmicFade(extent, ORBIT_FADE_START_PIXELS, 48);
-  // Closed planetary rings and their circles share one zoom fade.
-  // Fading trails retain their earlier marker-crowding threshold.
-  return { width: CONTEXT_LINE_WIDTH, opacity, markerOpacity: closed ? opacity : logarithmicFade(extent, 48, 128) };
+  // Every orbit and its unresolved body annotation share one zoom fade.
+  return { width: CONTEXT_LINE_WIDTH, opacity };
 }
 
 function orbitOverlapsLabel(orbits: readonly { segments: readonly OrbitSegment[]; orbitVisibility: number; lineWidth: number }[], x: number, y: number, width: number, height: number): boolean {
@@ -78,7 +77,7 @@ export interface WorldBodyPresentation {
   labelPlacement: number;
   indicatorShown: boolean;
   indicatorRadius: number;
-  orbitAppearance: { width: number; opacity: number; markerOpacity: number };
+  orbitAppearance: { width: number; opacity: number };
 }
 export interface WorldContextView {
   world: WorldCameraPose;
@@ -141,7 +140,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext) {
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       let anchorLineWidth = CONTEXT_LINE_WIDTH;
       // Project first, resolve shared body visibility, then place labels and publish once.
-      // Marker decluttering suppresses body proxies, not independently resolved orbit paths.
+      // Crowded in-frame annotations retire with their orbit; offscreen paths remain independent.
       const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; depth: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; hovered: boolean; inFrame: boolean; parentDiameter: number; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
       for (const entry of publishingBodies) {
         const { body } = entry;
@@ -163,7 +162,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext) {
         const parentDiameter = entry.parent && parentDepth > entry.parent.radiusM
           ? 2 * focal * entry.parent.radiusM / Math.sqrt(parentDepth ** 2 - entry.parent.radiusM ** 2) : 0;
         const hovered = entry.hovered;
-        const bounds = entry.orbit?.bounds;
+        // Prepared bounds enclose the faded trail, not necessarily the complete orbit.
+        const bounds = hovered ? undefined : entry.orbit?.bounds;
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
         if (navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 &&
             (!bounds || orbitBoundsMayContribute(toEye(bounds.centerM), bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
@@ -172,24 +172,23 @@ export function createWorldContextPlanner(plan: PreparedWorldContext) {
             near, clipX: width / 2, clipY: height / 2 });
           if (entry.orbitHidden && !hovered) {
             // Hidden paths have no geometry consumer. Their proxies still need
-            // the exact existing fade, which saturates at 48/128 CSS pixels.
+            // the exact existing fade, which saturates at 48 CSS pixels.
             measuredExtent = projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
-              entry.closedOrbit ? 48 : 128, entry.orbit.extentChords ?? entry.orbit.activeChords);
-          } else segments = projector(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords, entry.orbitProjection);
+              48, entry.orbit.extentChords ?? entry.orbit.activeChords);
+          } else segments = projector(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords, hovered, entry.orbitProjection);
         }
-        if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments, entry.closedOrbit);
+        if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments);
         const appearance = entry.orbitAppearance;
         const bodyLod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, diameter);
-        const proxyOpacity = 1 - bodyLod.markerOpacity * (1 - appearance.markerOpacity);
+        const proxyOpacity = 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const markerOpacity = (isSelected ? lod.billboardOpacity : 1) *
           (isAnchor ? 1 : opacity * (isSelected ? 1 : proxyOpacity));
         const orbitVisibility = entry.orbitHidden && !hovered ? 0 : appearance.opacity * orbitOpacity * opacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         const indicatorOpacity = isAnchor && overview ? 1 :
-          bodyLod.markerOpacity * (isAnchor ? 1 : entry.orbitHidden ? opacity : entry.closedOrbit
-            ? orbitVisibility : opacity * (isSelected ? 1 : appearance.markerOpacity));
+          bodyLod.markerOpacity * (isAnchor ? 1 : entry.orbitHidden || !entry.orbit ? opacity : orbitVisibility);
         const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
-        const priority = (isAnchor ? 4e6 : 0) + (hovered ? 2e6 : 0) + (body.id === emphasizedId ? 6e6 : isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
+        const priority = (isAnchor ? 4e6 : 0) + (hovered ? 16e6 : 0) + (body.id === emphasizedId ? 6e6 : isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
         if (navigationIndicatorsVisible && annotationVisible && indicatorOpacity > 0) {
           const radius = BODY_INDICATOR_DIAMETER / 2, padding = entry.indicatorShown ? 0 : 2;
           indicators.add({ owner: 0, id: body.id, priority: priority + (entry.indicatorShown ? 100 : 0),
@@ -208,7 +207,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext) {
         const crowded = projected.annotationVisible && indicatorOpacity > 0 && !entry.indicatorShown;
         if (crowded) {
           projected.markerOpacity = 0;
-          if (entry.closedOrbit) projected.orbitVisibility = 0;
+          projected.orbitVisibility = 0;
         }
         const orbitVisibility = projected.orbitVisibility;
         if (!entry.orbit) continue;
@@ -223,12 +222,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext) {
         const { body, labelSize: size } = entry;
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
-        const labelOpacity = entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
-        if ((entry.labelHidden && !hovered && body.id !== emphasizedId) || !annotationVisible || labelOpacity <= 0.5 || size.width === 0 ||
+        const labelOpacity = hovered ? 1 : entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
+        if (!annotationVisible || size.width === 0 || (!hovered &&
+            ((entry.labelHidden && body.id !== emphasizedId) || labelOpacity <= 0.5 ||
             (!resolvedDisc && body.id !== emphasizedId &&
               ((satellite && parentDiameter < plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels) ||
-               (entry.orbit && !entry.orbitHidden && !hovered && orbitVisibility <= 0.5))) ||
-            (indicatorOpacity > 0 && !entry.indicatorShown)) continue;
+               (entry.orbit && !entry.orbitHidden && orbitVisibility <= 0.5))) ||
+            (indicatorOpacity > 0 && !entry.indicatorShown)))) continue;
         const gap = Math.max(5, diameter / 2, entry.indicatorShown ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
@@ -251,10 +251,14 @@ export function createWorldContextPlanner(plan: PreparedWorldContext) {
               return Math.hypot(nearestX - other.x, nearestY - other.y) < BODY_INDICATOR_DIAMETER / 2 + 4;
             }) && (hovered || body.id === emphasizedId || entry.closedOrbit || satellite || body.id === plan.focus.id ||
               !orbitOverlapsLabel(projectedBodies, lx, ly, size.width, size.height));
-        });
+        }) ?? (hovered ? placements.find(withinViewport) ?? placements[0] : undefined);
         if (placement === undefined) continue;
         entry.labelPlacement = placement;
-        const [labelX, labelY] = positions[placement];
+        let [labelX, labelY] = positions[placement];
+        if (hovered) {
+          labelX = Math.max(-width / 2 + 4, Math.min(labelX, width / 2 - size.width - 4));
+          labelY = Math.max(-height / 2 + 4, Math.min(labelY, height / 2 - size.height - 4));
+        }
         const padding = entry.labelShown ? 0 : 2;
         labels.add({ owner: 0, id: body.id, priority: priority + (entry.labelShown ? 100 : 0),
           anchor: [labelX + size.width / 2, labelY + size.height + padding],

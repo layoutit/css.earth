@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2c4d15489371533d2c5c258f4ff9049c0157229d420be26a65e806c2bfde0773"
+    "sha256": "d64d4f148eecca840b04b1778f9e4049dad30e2cf8b9eeb218553ef4e70f3249"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1c523b4a66342daba96168e243fe64617fb2bf26f093f22076940789ccf60cb9",
+      "sha256": "3cd158fac21b7e49237b3438b21d206eba817b8b13d3ddd3f29ee43526ec20ea",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -153,7 +153,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
-              "title": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
+              "title": "Occultation shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/polymele/polymele-model-thumbnail.webp",
               "surface": "polymele-model-surface@2x.webp",
@@ -292,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1c523b4a66342daba96168e243fe64617fb2bf26f093f22076940789ccf60cb9",
-      "bytes": 3916,
+      "sha256": "3cd158fac21b7e49237b3438b21d206eba817b8b13d3ddd3f29ee43526ec20ea",
+      "bytes": 3591,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

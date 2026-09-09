@@ -8,6 +8,7 @@ import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { OBJECTS } from './objects.mjs';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
+const cometIds = OBJECTS.filter(object => object.classification === 'comet').map(object => object.id);
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 let universePromise = null;
@@ -72,6 +73,7 @@ export function createApplicationWorldContext() {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
         layer = prepared.mount(stage);
+        layer.setHiddenOrbits(cometIds);
         framePlanner = prepared.createFramePlanner();
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
         const minimap = mountSpaceMinimap(stage.ownerDocument);
@@ -121,7 +123,7 @@ export function createApplicationWorldContext() {
             minimap.selectObject(frame);
           },
           setAsteroidOrbitsEnabled(enabled) {
-            if (!destroyed) layer.setHiddenOrbits(enabled === true ? [] : asteroidIds);
+            if (!destroyed) layer.setHiddenOrbits(enabled === true ? cometIds : [...cometIds, ...asteroidIds]);
           },
           setAsteroidLabelsEnabled(enabled) {
             if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);

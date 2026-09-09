@@ -15,11 +15,11 @@ test('a retained projection preserves clipped snapshots while reusing bounded sl
     toEye: p => [p[0] + offset, p[1], p[2]],
     hidden: p => rayHitsSphereBefore(p, [0, 0, -100], 10),
     mayOcclude: createSphereChordTest([0, 0, -100], 10, project) });
-  const first = projector(vertices, trail, undefined, retained);
+  const first = projector(vertices, trail, undefined, false, retained);
   const slots = [...first], snapshot = projector(vertices, trail);
   for (offset of [150, 1000, -500, 0]) {
     const expected = projector(vertices, trail);
-    const actual = projector(vertices, trail, undefined, retained);
+    const actual = projector(vertices, trail, undefined, false, retained);
     expect(actual).toBe(first);
     expect(actual).toEqual(expected);
     for (let i = 0; i < Math.min(slots.length, actual.length); i++) expect(actual[i]).toBe(slots[i]);
@@ -27,7 +27,7 @@ test('a retained projection preserves clipped snapshots while reusing bounded sl
   expect(snapshot).toEqual(first);
   expect(Object.isFrozen(snapshot)).toBe(true);
   expect(Object.isFrozen(snapshot[0])).toBe(true);
-  expect(() => projector(vertices, trail, undefined, createRetainedRingProjection(1))).toThrow(/capacity/);
+  expect(() => projector(vertices, trail, undefined, false, createRetainedRingProjection(1))).toThrow(/capacity/);
 });
 
 test('prepared orbit bounds reject only offscreen or fully faded chords across camera and physical scales', () => {
@@ -64,6 +64,20 @@ test('off-shadow prepared chords bypass the detailed ray test without changing p
   expect(calls).toBeGreaterThan(60); calls = 0;
   const result = createPreparedRingProjector({ ...limits, hidden, mayOcclude: createSphereChordTest(center, radius, project) })(vertices, trail);
   expect(result).toEqual(reference); expect(calls).toBe(0);
+});
+
+test('full orbit reveal includes zero-weight chords at uniform opacity and restores the trail afterwards', () => {
+  const vertices: Vector3[] = [[-50, 30, -200], [50, 30, -200], [50, 40, -200], [-50, 40, -200]];
+  const trail = [0, .2, .6, 1], active = [1, 2, 3];
+  const projector = createPreparedRingProjector({ ...limits, hidden: () => false });
+  const original = projector(vertices, trail, active);
+  const revealed = projector(vertices, trail, active, true);
+  expect(original).toHaveLength(3);
+  expect(revealed).toHaveLength(4);
+  expect(revealed).toEqual(projector(vertices, [1, 1, 1, 1]));
+  expect(revealed.every(segment => segment[4] === 1)).toBe(true);
+  expect(projector(vertices, trail, active)).toEqual(original);
+  expect(trail).toEqual([0, .2, .6, 1]);
 });
 
 test('prepared active chord indices preserve clipping while avoiding zero-weight vertex transforms', () => {

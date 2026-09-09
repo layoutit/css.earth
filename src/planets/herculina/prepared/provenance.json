@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4353fd1ad120f3e0b7898565ad69424da404e2e220b0f169ae55beed1a80fd67"
+    "sha256": "d38daa29c5393a0a698f399960cb4183c127ed2c51bfb8fec0556956fb77e8ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2df4850bf2af09a82670849cc538b9206d8c02bc1e73acbf0830a1fa24390cc9",
+      "sha256": "b3b51b94a80981dcee9bed962cbfc8627b514c5823aa61a0082c696048f75a0e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 1814, version 2017-06-19, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 1814",
               "thumbnail": "/scenes/herculina/herculina-shape-thumbnail.webp",
               "surface": "herculina-shape-surface@2x.webp",
               "poles": "herculina-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 94.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/herculina/herculina-elevation-thumbnail.webp",
               "surface": "herculina-elevation-surface@2x.webp",
               "poles": "herculina-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "35b03db34491edebd032dff2155d8346fac28a002eef325cf727245fc6200d9a",
-      "bytes": 9088,
+      "sha256": "b3b51b94a80981dcee9bed962cbfc8627b514c5823aa61a0082c696048f75a0e",
+      "bytes": 8735,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

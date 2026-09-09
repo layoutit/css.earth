@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "403844a25269c10784946866bfa502d254c06b27b372c60c8e8e2e85ace9bd95"
+    "sha256": "e9607cf4e9f81159166d6ebe55d46f015061249b73d7df50b36a9e3e451b148f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b7f06bb7a4d1fde5d45d2f68ea30978b450f3be8b142ede7ecedfa538db15788",
+      "sha256": "0c483972a6c46c05cbd8bddf81b4a15a07d36a03dee84a0f93965dcb7b46e3ba",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Published prolate shape fit: 156 × 126 × 126 km. The third axis is assumed equal to the shorter measured axis. Voyager images constrain size and elongation but do not resolve a usable surface map. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
-              "title": "Published prolate shape fit: 156 × 126 × 126 km. The third axis is assumed equal to the shorter measured axis. Voyager images constrain size and elongation but do not resolve a usable surface map. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+              "title": "Shape approximation",
               "detail": "Measured shape",
               "thumbnail": "/scenes/portia/portia-model-thumbnail.webp",
               "surface": "portia-model-surface@2x.webp",
@@ -302,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f8ea2eefc85e2ec3799a3dc94376e06dc555e28e61b907af320dc4e5f674bea9",
-      "bytes": 3702,
+      "sha256": "0c483972a6c46c05cbd8bddf81b4a15a07d36a03dee84a0f93965dcb7b46e3ba",
+      "bytes": 3549,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

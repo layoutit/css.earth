@@ -228,6 +228,9 @@ export function createSceneRouter({
   function deselect() {
     const sun = solarSystemFocus(objects);
     if (!sun || !hasPresented) return Promise.resolve(false);
+    // Empty sky resets only the wide view, using the same detail boundary as
+    // first-click centering. Read the camera again so zooming in restores protection.
+    if (!navigation?.centerTarget?.({ objectId, mount: active?.mount })) return Promise.resolve(false);
     return navigate(sun.id, { overview: true, recenter: true });
   }
 

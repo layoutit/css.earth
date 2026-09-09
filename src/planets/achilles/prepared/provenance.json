@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e906677eef11616039aaed49bc482eae96fed4bdaf4dfb1aeff14719b59f84d6"
+    "sha256": "1d5d723dfbe2cf3df78403e6d8c215eeb5fc281b9aeb18cbdf0b59afdf499903"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "26f6728587b3ded3bb01203720730f41316092092e596811606f0d6fa1a84eed",
+      "sha256": "95abc2b242469f6e6da12a63d46d0e85e5c4c81958c2b61d9d062dd4eaaa0c3d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Occultation-constrained volume-equivalent diameter 131 ± 8 km. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Occultation-constrained volume-equivalent diameter 131 ± 8 km. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/achilles/achilles-shape-thumbnail.webp",
               "surface": "achilles-shape-surface@2x.webp",
               "poles": "achilles-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 65.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 65.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/achilles/achilles-elevation-thumbnail.webp",
               "surface": "achilles-elevation-surface@2x.webp",
               "poles": "achilles-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "26f6728587b3ded3bb01203720730f41316092092e596811606f0d6fa1a84eed",
+      "sha256": "95abc2b242469f6e6da12a63d46d0e85e5c4c81958c2b61d9d062dd4eaaa0c3d",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8602,
+      "bytes": 8343,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

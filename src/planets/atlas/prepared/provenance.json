@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6de2b8876d8df454a6bade644f0605af5b22beb1681970292148448f8bf2484f"
+    "sha256": "87419321e693e6ba7e3f12bfb04307bd9c42884a3c0e12debe35d8e6811b9f6f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -238,7 +238,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a975b5793fb2e98d366a0d764f6bb1cb5ddef17616ec1cc5bc4bd7abd628da7e",
+      "sha256": "4fb222d2b7cc89966263a609ccbd98480cbbc3923b133efcb782a045dd8c9d98",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -311,7 +311,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
-              "title": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+              "title": "ISS mosaic",
               "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/atlas/atlas-normal-thumbnail.webp",
               "surface": "atlas-normal-surface@2x.webp",
@@ -321,13 +321,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/access.html"
               },
-              "summary": "Cassini images mapped onto the shape. Shadows and unreliable samples are withheld; gray grid marks gaps."
+              "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
-              "title": "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid.",
+              "title": "Shape-derived radial height",
               "detail": "Shaded relief",
               "thumbnail": "/scenes/atlas/atlas-elevation-thumbnail.webp",
               "surface": "atlas-elevation-surface@2x.webp",
@@ -802,8 +802,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "45a87b729f4eef561f5ce9afd030536e7baabf3f96c82b309895bf4e5c8246f7",
-      "bytes": 5458,
+      "sha256": "4fb222d2b7cc89966263a609ccbd98480cbbc3923b133efcb782a045dd8c9d98",
+      "bytes": 5372,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -40,7 +40,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain.",
-        "title": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain.",
+        "title": "Occultation shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/patroclus/patroclus-model-thumbnail.webp",
         "surface": "patroclus-model-surface@2x.webp",

@@ -303,7 +303,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       orbitPick: null as ScreenPickTarget | null,
       indicatorPick: null as ScreenPickTarget | null,
-      orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1, markerOpacity: 1 },
+      orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1 },
       orbitNavigable: false,
       orbitHidden: false, labelHidden: false,
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
@@ -556,7 +556,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const orbitBounds = { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity };
       const resumeDuration = Math.max(0, annotationResumeDeadline - windowTarget.performance.now());
       // Only the resolved presentation owns DOM visibility and hit targets.
-      for (const { entry, x, y, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, inFrame, lineWidth, orbitVisibility, segments, transforms, labelPosition } of projectedBodies) {
+      for (const { entry, x, y, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, hovered, inFrame, lineWidth, orbitVisibility, segments, transforms, labelPosition } of projectedBodies) {
         const { body, marker, indicator, label } = entry;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         const markerShown = visible && markerOpacity > 0 && !pointSource;
@@ -608,7 +608,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             shape: { kind: 'segments', segments, halfWidth: lineWidth / 2 + 7 } } : null;
           if (entry.orbitPick) pickTargets.push(entry.orbitPick);
         }
-        const labelOpacity = entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
+        const labelOpacity = hovered ? 1 : entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
         fade(entry.fade, entry.labelShown ? labelOpacity : 0, !inFrame || !annotationVisible);
         entry.labelNavigation.update(entry.labelShown ? body.id : null, body.name);
         if (entry.labelShown && labelPosition) {

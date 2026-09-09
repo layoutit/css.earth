@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Porter’s New Horizons shape fit. LORRI and MVIC constrain the broad shape, but the public mesh omits its fitted image registration. Gray grid marks unavailable registered surface imagery; it does not recreate Nix’s photographed reddish crater region.",
-        "title": "Porter’s New Horizons shape fit. LORRI and MVIC constrain the broad shape, but the public mesh omits its fitted image registration. Gray grid marks unavailable registered surface imagery; it does not recreate Nix’s photographed reddish crater region.",
+        "title": "Porter shape reconstruction",
         "detail": "New Horizons shape fit",
         "thumbnail": "/scenes/nix/nix-model-thumbnail.webp",
         "surface": "nix-model-surface@2x.webp",

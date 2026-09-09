@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "65e98355eccb216f7e8565f322d33a3d569e972bbdb1200fe5603c4f7bf451c3"
+    "sha256": "c9687d70f3059eff25b485e02e0eb971e1b28f3ccbb34b411c500751ae6eaaa0"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5643d41e821518371f2f0427b5aac6081d52dd80655864004aa3394362199322",
+      "sha256": "52b5cb871c1c85ffa7d45414fc8e0b2b859dae6c630db6133139ea398de30392",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction, 89 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction, 89 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/pomona/pomona-shape-thumbnail.webp",
               "surface": "pomona-shape-surface@2x.webp",
               "poles": "pomona-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 44.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 44.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/pomona/pomona-elevation-thumbnail.webp",
               "surface": "pomona-elevation-surface@2x.webp",
               "poles": "pomona-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5643d41e821518371f2f0427b5aac6081d52dd80655864004aa3394362199322",
-      "bytes": 10136,
+      "sha256": "52b5cb871c1c85ffa7d45414fc8e0b2b859dae6c630db6133139ea398de30392",
+      "bytes": 9834,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
