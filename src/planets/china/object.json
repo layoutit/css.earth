@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 56.70434782608696,
       "bodyRadiusM": 13042
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/china-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9bf3477f2cf2d56081a5887189961b0ebb47dc63b62e90e347ab49a090d6c8bd"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 184.7826086956522,
       "bodyRadiusM": 42500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/klotho-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c1f4f62e30fd5d0c97079ddc458f8c9cc61d0f75332d07162cf5ae0f1b3a5516"
+      }
     }
   },
   "schema": "cssearth-object@1",

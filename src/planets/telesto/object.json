@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 53.69565217391305,
       "bodyRadiusM": 12350
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/telesto-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "47a81529f08c7b071c7e09b96f7124cb02e51ab4376af8cb56997fa9b6b8f227"
+      }
     }
   },
   "prepared": {

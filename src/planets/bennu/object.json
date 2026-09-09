@@ -121,6 +121,15 @@
       ],
       "metersPerUnit": 1.0478260869565217,
       "bodyRadiusM": 241
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bennu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6055bf3f6a0a9c11fccffa0e4016656f03b84e7424ff975be3defbdf02905635"
+      }
     }
   },
   "schema": "cssearth-object@1",

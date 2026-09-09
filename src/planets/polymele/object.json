@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 41.28932771142306,
       "bodyRadiusM": 9496.545373627305
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/polymele-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ab3a6a3697bafed9ca04775b6081cddc9e5839f03ff88adfa730fa016241e90b"
+      }
     }
   },
   "prepared": {

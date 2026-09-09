@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 303.5869565217391,
       "bodyRadiusM": 69825
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nuwa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "48bb3e5e102856863f7a1eb5b29b0225061910f2a4f27be8f7639f659adc4c46"
+      }
     }
   },
   "schema": "cssearth-object@1",

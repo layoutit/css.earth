@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 5880.869565217391,
       "bodyRadiusM": 1352600
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/triton-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3e6650a20c072ebf741ec785aefdb7b1a001276d036d393c803aa34ad6704bc5"
+      }
     }
   },
   "prepared": {

@@ -7,6 +7,7 @@ import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterial
 import type { PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
+import { selectPreparedTextureLevel, type PreparedTextureLevels } from './prepared-texture-levels.js';
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
   readonly projection?: import('./physical-projection.js').PhysicalProjection;
@@ -40,6 +41,7 @@ export interface PreparedPageLayer {
   className: string; textureClassName: string; lensIds: string[];
 }
 export interface PreparedPresentationDefinition {
+  textureLevels?: PreparedTextureLevels;
   camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
   resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[]; pageLayers?: readonly PreparedPageLayer[];
   animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
@@ -49,7 +51,7 @@ export interface PreparedPresentationDefinition {
   depthPartitions?: PreparedDepthPartitions;
   surfaceHit?: PreparedSurfaceHit;
 }
-export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; }
+export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; textureLevel?: number; textureResources?: Readonly<Record<string, string>>; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
 export interface PreparedFramePublication { selection: ObjectSelection; view: PreparedView; resources: PreparedResources; plan?: PreparedPresentationPlan | null; }
 
@@ -64,9 +66,13 @@ export function selectedPreparedVariant(definition: PreparedPresentationDefiniti
   if (!variant) throw new TypeError("The selected presentation was not prepared.");
   return variant;
 }
-export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null }): PreparedPresentationPlan {
+export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view, previousPlan, initial = false }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null; initial?: boolean }): PreparedPresentationPlan {
   const variant = selectedPreparedVariant(definition, selection);
-  const required = new Set(definition.resourceOrder === "materials-first" ? [] : variant.required);
+  const textureLevel = definition.textureLevels ? selectPreparedTextureLevel(definition.textureLevels,
+    view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel, initial) : undefined;
+  const textureResources = textureLevel === undefined ? undefined : definition.textureLevels!.levels[textureLevel].resources;
+  const content = variant.required.map(key => textureResources?.[key] ?? key);
+  const required = new Set(definition.resourceOrder === "materials-first" ? [] : content);
   const prewarm = new Set<string>(), materials: Record<string, PreparedMaterialDemand> = {};
   for (const selected of variant.materials) {
     if (!view) throw new TypeError('Prepared material demand requires a view.');
@@ -77,8 +83,9 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     for (const key of state.prewarm) prewarm.add(key);
     materials[track.id] = state;
   }
-  if (definition.resourceOrder === "materials-first") for (const key of variant.required) required.add(key);
+  if (definition.resourceOrder === "materials-first") for (const key of content) required.add(key);
   return { required: [...required], prewarm: [...prewarm].filter(key => !required.has(key)), materials, pressedLenses: [selection.lensId],
+    ...(textureLevel === undefined ? {} : { textureLevel, textureResources }),
     ...(variant.navigation ? { navigation: variant.navigation } : {}) };
 }
 const datasetKey = (name: string) => name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
@@ -150,6 +157,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const materials = new Map(definition.materials.map(track => [track.id,
     createPreparedMaterialPublisher(track, nodes[track.target], definition.camera)]));
   let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0;
+  let selectedTextures = new Map<string, { target: number; name: string }>();
+  const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
   const GEOMETRY_LEVEL_OF_DETAIL = Object.freeze({ stage: "geometry", silhouetteDiameter: null, billboardOpacity: 0, markerOpacity: 0 });
   const round = (value: number, precision: number | null) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
   const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
@@ -159,21 +168,29 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
       carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),
-    commitSelection({ selection, resources }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {
+    commitSelection({ selection, resources, plan }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {
       const variant = selectedPreparedVariant(definition, selection);
       // Resolve the complete texture group before publishing any part of it.
       const writes = variant.writes.map(binding => {
         if (binding.kind !== "texture") return binding;
-        const url = binding.resource === null ? null : resources.url(binding.resource);
+        const url = binding.resource === null ? null : resources.url(plan?.textureResources?.[binding.resource] ?? binding.resource);
         if (binding.resource !== null && !url) throw new Error(`Prepared selection texture is not ready: ${binding.resource}`);
         return { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})` };
       });
+      // Texture references belong to the committed dataset. Retire references
+      // absent from its successor in the same publication, without embedding
+      // every inactive dataset's clearing writes in every prepared variant.
+      const nextStyles = new Set(writes.filter(binding => binding.kind === "style").map(styleKey));
+      for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
+        writeStyle(target(binding.target), binding.name, "none"); styleWrites++;
+      }
       for (const binding of writes) {
         const element = target(binding.target);
         if (binding.kind === "attribute") writeAttribute(element, binding.name, binding.value);
         else if (binding.kind === "class") element.classList.toggle(binding.name, binding.value);
         else { writeStyle(element, binding.name, binding.value); styleWrites++; }
       }
+      selectedTextures = new Map(variant.writes.filter(binding => binding.kind === "texture").map(binding => [styleKey(binding), binding]));
       for (const entry of motion) {
         const duration = entry.plan.timings.find(timing => Object.entries(timing.when).every(([name, value]) => selection[name] === value))?.duration ?? entry.plan.duration;
         if (duration !== entry.duration) {

@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 10.434782608695652,
       "bodyRadiusM": 2400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/loge-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8cbdd330d0b19043d4e4e20d700961d341ff1aabbf479336401be6970ea6bcd4"
+      }
     }
   },
   "prepared": {

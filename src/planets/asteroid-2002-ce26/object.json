@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 7.521739130434782,
       "bodyRadiusM": 1730
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-2002-ce26-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0cd85817e04695bd56dcd4cd1f7a745d9ba877ed44b0b180446d6d5d0006677a"
+      }
     }
   },
   "schema": "cssearth-object@1",

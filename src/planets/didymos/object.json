@@ -111,6 +111,15 @@
       ],
       "metersPerUnit": 1.5869565217391304,
       "bodyRadiusM": 365
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/didymos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "94c441342b7e2422c4f60905f048ab06511da994356eb4bbc27b638dc390a162"
+      }
     }
   },
   "schema": "cssearth-object@1",

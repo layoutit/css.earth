@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 10,
       "bodyRadiusM": 2300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/skoll-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "97a7af52b68b456012033bde21501cbb2e1ae9a530a906d07aab3ee9320e1483"
+      }
     }
   },
   "prepared": {

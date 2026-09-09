@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 193.47826086956522,
       "bodyRadiusM": 44500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pomona-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6668c74d7c8a800b4bf014a193039a0141b9d81ba8c6a378f8ee02c6e5d680f3"
+      }
     }
   },
   "schema": "cssearth-object@1",

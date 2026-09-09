@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 139.1827814800459,
       "bodyRadiusM": 32012.039740410557
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/desdemona-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7da19fc1b95be8daa6915d1db19777cc1ca72f1e5997958d17f49493d6cdca53"
+      }
     }
   },
   "prepared": {

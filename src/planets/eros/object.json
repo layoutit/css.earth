@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 36.608695652173914,
       "bodyRadiusM": 8420
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eros-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f3c44298e5f3c759090874cc9cc2ee6c73f425b32d575b5194912dce6482a13e"
+      }
     }
   },
   "schema": "cssearth-object@1",

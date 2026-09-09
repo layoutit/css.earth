@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 313.04347826086956,
       "bodyRadiusM": 72000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ino-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8b47f8632dcd69458c87bd63b87dffc86611e9c2ba71fe8769aacf95b9ea74a5"
+      }
     }
   },
   "schema": "cssearth-object@1",

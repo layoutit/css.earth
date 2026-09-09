@@ -170,6 +170,15 @@
       ],
       "metersPerUnit": 238213.4387351779,
       "bodyRadiusM": 60268000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/saturn-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3ec450216b0ec66b3cfadb93302545a199b9a402ab8121d14978e95aff86b238"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -1,6 +1,6 @@
 import type { PreparedImage, PreparedImageLease, PreparedImagePool } from "./prepared-image-store.js";
-export interface PreparedResourceEntry { key: string; url: string; pool: string; }
-export interface PreparedResourcePool extends PreparedImagePool { id: string; retention: "mount" | "warm" | "selection"; stabilityMilliseconds?: number; eviction?: "capacity" | "unused"; }
+export interface PreparedResourceEntry { key: string; url: string; pool: string; decodedBytes?: number; }
+export interface PreparedResourcePool extends PreparedImagePool { id: string; retention: "mount" | "warm" | "selection"; stabilityMilliseconds?: number; eviction?: "capacity" | "unused"; maximumDecodedBytes?: number; }
 export interface PreparedAssets { entries: readonly PreparedResourceEntry[]; pools: readonly PreparedResourcePool[]; startup: readonly string[]; }
 export interface PreparedResourceDemand { required: readonly string[]; prewarm?: readonly string[]; }
 export interface PreparedResources { has(key: string): boolean; read(key: string): PreparedImage | null; url(key: string): string | null; readyKeys(): readonly string[]; }
@@ -51,9 +51,22 @@ export function createPreparedResidency({
     return new Set([...keys].filter(key => !warmed.has(key) && assetFor(key).pool === poolId).map(key => assetFor(key).url));
   }
   function requireCapacity(keys: Iterable<string>) {
-    for (const pool of policies.values()) if (urls(keys, pool.id).size > pool.capacity) {
+    for (const pool of policies.values()) if (!fits(keys, pool)) {
       throw new RangeError(`Protected prepared resources exceed ${pool.id} capacity ${pool.capacity}.`);
     }
+  }
+  function decodedBytes(keys: Iterable<string>, poolId: string) {
+    const sizes = new Map<string, number>();
+    for (const key of keys) {
+      const asset = assetFor(key);
+      if (asset.pool === poolId && !warmed.has(key)) sizes.set(asset.url, asset.decodedBytes ?? 0);
+    }
+    return [...sizes.values()].reduce((sum, size) => sum + size, 0);
+  }
+  function fits(keys: Iterable<string>, pool: PreparedResourcePool) {
+    const list = [...keys];
+    return urls(list, pool.id).size <= pool.capacity &&
+      (pool.maximumDecodedBytes === undefined || decodedBytes(list, pool.id) <= pool.maximumDecodedBytes);
   }
   function release(key: string, handoff = false) {
     const entry = cache.get(key);
@@ -88,6 +101,8 @@ export function createPreparedResidency({
       entry.lease.load(asset.url, { pool: asset.pool }).then(image => {
         if (entry.retired || destroyed) return;
         if (!image) throw new Error(`Prepared resource retired before readiness: ${key}.`);
+        if (asset.decodedBytes !== undefined && image.naturalWidth * image.naturalHeight * 4 !== asset.decodedBytes)
+          throw new Error(`Prepared image dimensions differ from the byte budget: ${key}.`);
         entry.ready = true;
         decodes++;
         if (policy.retention === "mount") mount.add(key);
@@ -114,16 +129,18 @@ export function createPreparedResidency({
     requireCapacity(protectedSet);
     const desired = new Set([...protectedSet, ...warm]);
     const errors = [];
-    for (const key of cache.keys()) {
-      if (!desired.has(key) && policyFor(assetFor(key).pool).eviction !== "capacity") {
+    for (const [key, entry] of cache) {
+      // Cache completed datasets, not abandoned native decode jobs. A newer
+      // selection must be able to use the freed concurrency immediately.
+      if (!desired.has(key) && (!entry.ready || policyFor(assetFor(key).pool).eviction !== "capacity")) {
         try { release(key); } catch (error) { errors.push(error); }
       }
     }
     for (const key of desired) {
       if (cache.has(key) || warmed.has(key)) continue;
       const asset = assetFor(key), policy = policyFor(asset.pool);
-      let occupied = urls(cache.keys(), asset.pool);
-      if (!occupied.has(asset.url) && occupied.size >= policy.capacity) {
+      const admits = () => fits([...cache.keys(), key], policy);
+      if (!admits()) {
         // Retain the published and requested materials. Optional prewarm is
         // lower priority than required demand, including pending native work.
         const victims = [...cache.values()].filter(entry => assetFor(entry.key).pool === asset.pool &&
@@ -131,12 +148,10 @@ export function createPreparedResidency({
           .sort((a, b) => a.order - b.order);
         for (const victim of victims) {
           try { release(victim.key); } catch (error) { errors.push(error); }
-          occupied = urls(cache.keys(), asset.pool);
-          if (occupied.size < policy.capacity) break;
+          if (admits()) break;
         }
       }
-      occupied = urls(cache.keys(), asset.pool);
-      if (occupied.has(asset.url) || occupied.size < policy.capacity) start(key, stabilize);
+      if (admits()) start(key, stabilize);
       else if (protectedSet.has(key)) throw new Error(`Prepared resource capacity could not admit ${key}.`);
     }
     if (errors.length) throw new AggregateError(errors, "Prepared residency release failed.");
@@ -248,6 +263,7 @@ export function createPreparedResidency({
         pools: Object.freeze([...policies.values()].map(policy => Object.freeze({
           ...policy, keys: Object.freeze([...cache.keys()].filter(key => assetFor(key).pool === policy.id)),
           resident: urls(cache.keys(), policy.id).size,
+          ...(policy.maximumDecodedBytes === undefined ? {} : { decodedBytes: decodedBytes(cache.keys(), policy.id) }),
           ready: urls([...cache.keys()].filter(ready), policy.id).size,
           pending: urls([...cache.keys()].filter(key => !ready(key)), policy.id).size,
           nativeSlots: images.ownershipStats().pools.find(pool => pool.id === policy.id)?.slots ?? 0,

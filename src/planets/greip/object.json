@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 10,
       "bodyRadiusM": 2300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/greip-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "caf705625b1427d49ebe33985875883c2de0c28b5f6942482b72a8628246d965"
+      }
     }
   },
   "prepared": {

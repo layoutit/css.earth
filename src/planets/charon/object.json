@@ -113,6 +113,15 @@
       ],
       "metersPerUnit": 2634.782608695652,
       "bodyRadiusM": 606000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/charon-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c22e11b606e58fdf9224d62763618e67f04b4336e2c0950017ab41698181b7f8"
+      }
     }
   },
   "prepared": {

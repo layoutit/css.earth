@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 454.3478260869565,
       "bodyRadiusM": 104500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/diotima-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "aec4e8ecfac88a5bc2f9603e5c25355afc7d7d76a31d8cab9c9ac736358a5ae2"
+      }
     }
   },
   "schema": "cssearth-object@1",

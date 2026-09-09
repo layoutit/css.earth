@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 387.82608695652175,
       "bodyRadiusM": 89200
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/janus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "98e217a312c4d064c03860a9c8e24b0679d4fffa968239c48521432073717ab8"
+      }
     }
   },
   "prepared": {

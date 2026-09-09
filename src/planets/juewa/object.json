@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 362.3695652173913,
       "bodyRadiusM": 83345
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/juewa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4901570e64b7aeb635943e364ea759572ad08c161feebf55a784ecaf3df3089c"
+      }
     }
   },
   "schema": "cssearth-object@1",

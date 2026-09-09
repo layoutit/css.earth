@@ -1,4 +1,6 @@
 /** Actual PolyCSS preparation of static image geometry; no runtime image or mesh generation. */
+import { balanceVolumeSlices } from './volume-order.js';
+import { compileLeafBounds } from './leaf-bounds.js';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Axis, Vector3, VolumeRecipe } from '../../../preparation/volume/config.js';
@@ -23,24 +25,30 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
       throw new TypeError('Prepared geometry bounds disagree with the authored physical frame.');
     }
   }
-  const leaves = slices.quads.map((quad, index) => {
+  // A lossless-alpha empty slab contributes no light or extinction from any
+  // camera. Exclude it from the portable render graph and resource closure;
+  // retain every nonempty slab, however faint, and keep original plan indices.
+  const leaves = slices.quads.flatMap((quad, index) => {
+    if (quad.alphaCoverage === 0) return [];
     const polygon: Polygon = { vertices: quad.vertices, uvs: quad.uvs, texture: quad.texturePath,
       textureImageSource: { url: quad.texturePath, width: quad.widthPx, height: quad.heightPx },
       texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' }, doubleSided: true };
     const plan = computeTextureAtlasPlanPublic(polygon, index, { tileSize: 50, layerElevation: 50, seamBleed: 0 });
     const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
     if (!geometry) throw new TypeError(`PolyCSS could not prepare volume leaf ${quad.id}.`);
-    return { axis: quad.axis, id: quad.id, centerUnits: quad.center, texturePath: quad.texturePath,
+    return [{ axis: quad.axis, id: quad.id, centerUnits: quad.center, texturePath: quad.texturePath,
       widthPx: quad.widthPx, heightPx: quad.heightPx,
+      boundsCssPixels: compileLeafBounds(geometry.matrix, geometry.leafWidth, geometry.leafHeight),
       style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`,
         transform: `matrix3d(${geometry.matrix})`,
         backgroundSize: geometry.backgroundSize.map(value => `${value}px`).join(' '),
-        backgroundPosition: geometry.backgroundPosition.map(value => `${value}px`).join(' ') } };
+        backgroundPosition: geometry.backgroundPosition.map(value => `${value}px`).join(' ') } }];
   });
   const axes: Axis[] = ['x', 'y', 'z'];
   return { schema: 'cssearth-css-volume@1' as const, id, frame,
     anchors: recipe.anchors.map(anchor => ({ id: anchor.id, positionUnits: referencePositionToUnits(anchor.referencePositionM, frame) })),
-    stacks: axes.map(axis => ({ axis, leaves: leaves.filter(leaf => leaf.axis === axis).map(({ axis: _axis, ...leaf }) => leaf) })),
-    resources: slices.quads.map(quad => ({ path: quad.texturePath, sha256: quad.sha256, bytes: quad.bytes,
+    stacks: axes.map(axis => ({ axis, leaves: balanceVolumeSlices(
+      leaves.filter(leaf => leaf.axis === axis).map(({ axis: _axis, ...leaf }) => leaf), axis) })),
+    resources: slices.quads.filter(quad => quad.alphaCoverage !== 0).map(quad => ({ path: quad.texturePath, sha256: quad.sha256, bytes: quad.bytes,
       width: quad.widthPx, height: quad.heightPx })), provenance: slices.provenance, approximation: slices.approximation };
 }

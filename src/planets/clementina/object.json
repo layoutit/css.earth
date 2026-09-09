@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 147.1086956521739,
       "bodyRadiusM": 33835
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/clementina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "735e37410b53b32c38fa2374f7ff1af636d617ec510485fcbb25eba6a6d18beb"
+      }
     }
   },
   "schema": "cssearth-object@1",

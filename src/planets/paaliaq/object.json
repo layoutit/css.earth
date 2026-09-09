@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 55.21739130434783,
       "bodyRadiusM": 12700
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/paaliaq-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ae31033fa6c6bb66ba5814bd3321d51d27a3ccf32cc42a65fdc5a0162e507f33"
+      }
     }
   },
   "prepared": {

@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 36.52173913043478,
       "bodyRadiusM": 8400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kiviuq-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2af8c11d37f4e1f2f443b24d937513eda5c2b87e139f6196f4647b212e85f481"
+      }
     }
   },
   "prepared": {

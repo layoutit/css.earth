@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 133.97826086956522,
       "bodyRadiusM": 30815
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e9e392b2387be4dbc5bf0364831de7ebb3b875aa780c73926e0be7f76374a335"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 253.04347826086956,
       "bodyRadiusM": 58200
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/epimetheus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0fa43170c6e060f9ea2d86d7dd80412f41d0d1ec029c61dca1909ffdfb7d4fd4"
+      }
     }
   },
   "prepared": {

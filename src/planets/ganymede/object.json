@@ -116,6 +116,15 @@
           "sha256": "2ff31beb903ee65c63b4d741196b45b918b05380c51138478e1d817fa87a36ee"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ganymede-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7f3e1ecfbe0826067b6c6ed340d347033e07b81d6e0faff102be10078356f026"
+      }
     }
   },
   "schema": "cssearth-object@1",

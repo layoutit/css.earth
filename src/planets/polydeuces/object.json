@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 6.634667733942421,
       "bodyRadiusM": 1525.973578806757
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/polydeuces-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1a384d545439505b6bc9960962f8219029bb9beadcbafa0d84310ac71334173d"
+      }
     }
   },
   "prepared": {

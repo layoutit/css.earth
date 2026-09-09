@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 233.84782608695653,
       "bodyRadiusM": 53785
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/henrietta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "cf7d2379909fd6671e846293c722a47d774deb2b455d5230c680d39172ddde63"
+      }
     }
   },
   "schema": "cssearth-object@1",

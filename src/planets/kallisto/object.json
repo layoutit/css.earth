@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 110.93478260869566,
       "bodyRadiusM": 25515
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kallisto-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "92de28df7bcd4bf0b430fc23c38a60d43f35c592bbae0b27ba9aa70c0a7339f8"
+      }
     }
   },
   "schema": "cssearth-object@1",

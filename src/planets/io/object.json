@@ -121,6 +121,15 @@
           "sha256": "82875a6372ffe28a99fc83459e264922953eaf236233ec0a916e6a19fabcbe55"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/io-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "017bc4cbd406ccf0042f802ca85060e88e3a0485e94662a1f68422a40ba4f7a7"
+      }
     }
   },
   "schema": "cssearth-object@1",

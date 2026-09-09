@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 202.17391304347825,
       "bodyRadiusM": 46500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ausonia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "81769cb537794b59e355acf0686317568f203e1e4f6f5323e4839d1ce46acc38"
+      }
     }
   },
   "schema": "cssearth-object@1",

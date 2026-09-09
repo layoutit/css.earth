@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 318.4347826086956,
       "bodyRadiusM": 73240
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/sibylla-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2ade49c0f858e18e39cb327e55e09e9cfffa4a8e360be23c67a5a41cb6a47d52"
+      }
     }
   },
   "schema": "cssearth-object@1",

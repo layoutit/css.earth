@@ -98,6 +98,15 @@
       ],
       "metersPerUnit": 2542.1739130434785,
       "bodyRadiusM": 584700
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/umbriel-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "bf740be95383c376a23c4c8a7e58e4fd2156cb36fd24836b489cd8101fcaa4c7"
+      }
     }
   },
   "prepared": {

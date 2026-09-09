@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 203.5918558216905,
       "bodyRadiusM": 46826.126838988814
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/juliet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e977bdf381d8ece9594086d3a76679bdc5f1738c2a32fe10c1bcfb220e4d89f5"
+      }
     }
   },
   "prepared": {

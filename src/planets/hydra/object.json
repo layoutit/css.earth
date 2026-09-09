@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 78.75894484099005,
       "bodyRadiusM": 18114.55731342771
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hydra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9cab0a9c9681232d2459aa4a9f03bec2edaa3288f0288e945b3628a27bd4df51"
+      }
     }
   },
   "prepared": {

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 234.2173913043478,
       "bodyRadiusM": 53870
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9f3b19b2c6e24db1523477cf345b132700cb43666a332df759b6de49c0b116c3"
+      }
     }
   },
   "schema": "cssearth-object@1",

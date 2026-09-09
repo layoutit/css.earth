@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 434.7826086956522,
       "bodyRadiusM": 100000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hermione-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a3de957bc950041920657b5f40becafaecddd35914bcdf23cec94620401e3b2d"
+      }
     }
   },
   "schema": "cssearth-object@1",

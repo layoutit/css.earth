@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 156.52173913043475,
       "bodyRadiusM": 35999.99999999999
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/rosalind-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b0b4a7296b947c79454b508c86520a922b0aea4701f6f958be9a4ca50169b103"
+      }
     }
   },
   "prepared": {

@@ -110,6 +110,15 @@
       ],
       "metersPerUnit": 2.5217391304347827,
       "bodyRadiusM": 580
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-103p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f7f7886fe1cd9d38273ea181a41c1b4387cdf8126a1c5fc636758d21658e42e3"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 46.52173913043478,
       "bodyRadiusM": 10700
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/calypso-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "40198e819ecccf13a5df9156f23c88016a05dc7d89b903f82b6c9d2be783e3ce"
+      }
     }
   },
   "prepared": {

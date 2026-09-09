@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 151.9504780684647,
       "bodyRadiusM": 34948.60995574688
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eurybates-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c4c91f32049665d18ad905c75b1a768877ca645d24daf6a74202d26320652ee9"
+      }
     }
   },
   "prepared": {

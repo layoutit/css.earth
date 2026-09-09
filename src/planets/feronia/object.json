@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 202.17391304347825,
       "bodyRadiusM": 46500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/feronia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0b30f172e77ff163395bc344275c2eab66e06c379ed106f5ac4fa94809333cf4"
+      }
     }
   },
   "schema": "cssearth-object@1",

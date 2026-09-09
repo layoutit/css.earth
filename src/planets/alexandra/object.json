@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 310.8695652173913,
       "bodyRadiusM": 71500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/alexandra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8ae51fbbc6e94816a5344060a49fb7c9f5df4e4b17b1b99a762a595e3b54c2e9"
+      }
     }
   },
   "schema": "cssearth-object@1",

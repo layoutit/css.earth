@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 27.82608695652174,
       "bodyRadiusM": 6400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ijiraq-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4dba606caec57d5430f230584d2ff119c7ad37feecce87e92ae3cd68393cac9c"
+      }
     }
   },
   "prepared": {

@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 102.17391304347827,
       "bodyRadiusM": 23500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/setebos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ed0f21f7a66d95d79e9a72d382c075eb1ccc081ed76dad167d9542cb34455059"
+      }
     }
   },
   "prepared": {

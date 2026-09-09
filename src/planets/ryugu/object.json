@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 1.9478260869565218,
       "bodyRadiusM": 448
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ryugu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "621d7773b8edd75fcfbeb571ce2f565e00977ecd8a2d32f7aa12d20ac23aad67"
+      }
     }
   },
   "schema": "cssearth-object@1",

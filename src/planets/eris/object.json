@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 5056.521739130435,
       "bodyRadiusM": 1163000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/shape-model.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0d02cff3ccf7815bb71b9bcba7942382fcd17fe57d2555640c6fc0b94bec1458"
+      }
     }
   }
 }

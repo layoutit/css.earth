@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 200,
       "bodyRadiusM": 46000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thyra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2f14c99b899946bd8835d596589ee829f0030eed4da0d659b3f39df08905c646"
+      }
     }
   },
   "schema": "cssearth-object@1",

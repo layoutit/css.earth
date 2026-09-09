@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 41.73913043478261,
       "bodyRadiusM": 9600
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ymir-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3b28857448811fcc65efb1b27e5d7551d7810c0fb31715aa3277b3362b1a549a"
+      }
     }
   },
   "prepared": {

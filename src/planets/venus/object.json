@@ -146,6 +146,15 @@
         "source": "raster",
         "material": "lighting"
       }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b9b3620d89d1a15da35ee9b496d0729ae4d7a9ad23653314817a3b84dce87673"
+      }
     }
   },
   "schema": "cssearth-object@1",

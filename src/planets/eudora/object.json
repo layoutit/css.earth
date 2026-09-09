@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 147.3913043478261,
       "bodyRadiusM": 33900
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eudora-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7ab339aa116f83e60ad5544bb7e6e00afeae60c102e8f9f5f8aa8f94551a7332"
+      }
     }
   },
   "schema": "cssearth-object@1",

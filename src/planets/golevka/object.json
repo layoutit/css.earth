@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 1.1521739130434783,
       "bodyRadiusM": 265
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/golevka-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a274fcdddeb79ef39a1b441b337618e04ea329e7fba603d78bbdd83a696151bc"
+      }
     }
   },
   "schema": "cssearth-object@1",

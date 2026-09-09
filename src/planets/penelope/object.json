@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 184.7826086956522,
       "bodyRadiusM": 42500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/penelope-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e59c0f99fa56f2b1218830f05a8abc91e183f59336cd34e778bbdc3a0ac5d638"
+      }
     }
   },
   "schema": "cssearth-object@1",

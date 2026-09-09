@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 586.9565217391304,
       "bodyRadiusM": 135000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eunomia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d585600b791a4054a04d631662799e644869afe43c3f155a59fca705d1dc8ee1"
+      }
     }
   },
   "schema": "cssearth-object@1",

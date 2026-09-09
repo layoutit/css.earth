@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 15.217391304347826,
       "bodyRadiusM": 3500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/suttungr-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "42dfe81d558f5e705b40db8d5ee5ebc637f0728773fb0f91321dae14fcffb7a6"
+      }
     }
   },
   "prepared": {

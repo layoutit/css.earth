@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 130.43478260869566,
       "bodyRadiusM": 30000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ariadne-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "78b161435fc53e3c2908c60afa992c622f49cd5c8a18e540293bdcb5f7002c18"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -11,6 +11,7 @@ import { createPagedSurfaceRaster } from './surface-raster.mjs';
 import { preparePagedEllipsoidScene } from './scene.mjs';
 import { preparePagedEllipsoidAssets } from './assets.mjs';
 import { preparePagedEllipsoidPresentation } from './presentation.mjs';
+import { prepareTextureLevels } from './texture-levels.mjs';
 import { prepareLocationPoint, prepareLocationCamera } from '../geographic-pages/prepare-location.mjs';
 import { prepareVectorOverlay } from '../geographic-pages/vector-overlay.mjs';
 import { preparePlaces } from '../geographic-pages/places.mjs';
@@ -74,7 +75,9 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   })) };
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const content = { ...preparedContent.content, ...(catalog ? { destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } } : {}) };
-  const definition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, city, noise, controls: preparedContent.controls });
+  const textureLevels = await prepareTextureLevels({ config, plan: scene, lenses, publicDirectory });
+  if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);
+  const definition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, city, noise, textureLevels, controls: preparedContent.controls });
   for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(paging ? { noise, places: catalog, pages: city, 'page-preparation': report } : {}), lenses, content, runtime: definition })) await write(outputDirectory, name, value);
   await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: descriptor.recipe.sources, lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, geographicPages: Boolean(paging) } });
   return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content };

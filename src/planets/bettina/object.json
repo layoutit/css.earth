@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 239.1304347826087,
       "bodyRadiusM": 55000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bettina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5a96f37c16ef73e686a776da201e93f5649c314cefa4df61c115e142480e00f7"
+      }
     }
   },
   "schema": "cssearth-object@1",

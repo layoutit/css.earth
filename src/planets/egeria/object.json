@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 439.1304347826087,
       "bodyRadiusM": 101000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/egeria-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "45ba8a9de90b172e5d3947077f21121792c7111d014c78dd6190c5443990833e"
+      }
     }
   },
   "schema": "cssearth-object@1",

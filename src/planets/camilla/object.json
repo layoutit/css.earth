@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 565.2173913043479,
       "bodyRadiusM": 130000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/camilla-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "139fd9c91daf7cfd2e9c435088dac62ad0a5435e2d8d4e15abe2cc6c7dac9125"
+      }
     }
   },
   "schema": "cssearth-object@1",

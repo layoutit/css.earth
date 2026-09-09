@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 366,
       "bodyRadiusM": 84180
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/freia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e40a41f804285937433be3f9dfe327769d3283c396a38000873de0b342fb15ed"
+      }
     }
   },
   "schema": "cssearth-object@1",

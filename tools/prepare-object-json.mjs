@@ -7,6 +7,7 @@ import { authoredObject } from './authored-object.mjs';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mjs';
 import { writePreparedText } from './write-prepared-text.mjs';
 import { prepareMarkerBindings } from './prepare-marker-bindings.mjs';
+import { preparePageMetadata } from './prepared-page-metadata.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = 'cssearth-css-object@4';
@@ -43,7 +44,10 @@ export async function writeObjectJson(id, definition, options) {
   await mkdir(resolve(root, 'src/planets', id, 'prepared'), { recursive: true });
   await writePreparedText(asset, payload);
   const prepared = { format, url: 'prepared/object.json', sha256: createHash('sha256').update(payload).digest('hex') };
-  await writePreparedText(descriptorPath, `${JSON.stringify({ ...descriptor, prepared }, null, 2)}\n`);
+  const page = preparePageMetadata(id, prepared.sha256, definition);
+  await writePreparedText(resolve(objectDirectory, 'prepared/page.json'), page.text);
+  await writePreparedText(descriptorPath, `${JSON.stringify({ ...descriptor, prepared,
+    properties: { ...descriptor.properties, page: { ...descriptor.properties.page, metadata: page.reference } } }, null, 2)}\n`);
   return { id, bytes: Buffer.byteLength(payload), ...prepared };
 }
 

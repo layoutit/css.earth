@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 14.317391304347826,
       "bodyRadiusM": 3293
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/educatio-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3c8eebb091b4b909365df670aab6831e5c076dbcae9264e25870fc53a7e395c2"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 190.1086956521739,
       "bodyRadiusM": 43725
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/proserpina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8debc4dc9c30c6f56bae66390c032c4498a28c8b4e0eb001c9699a88512343b2"
+      }
     }
   },
   "schema": "cssearth-object@1",

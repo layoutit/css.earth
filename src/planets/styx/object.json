@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 15.217391304347826,
       "bodyRadiusM": 3500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/styx-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e9e1bfb57716b75d963102dc000494d2e0cc6242e28f203ddcc3a119943f952b"
+      }
     }
   },
   "prepared": {

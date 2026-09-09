@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 26.52173913043478,
       "bodyRadiusM": 6100
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/gaspra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b805d2ca777f47b9e93166dcf38423b74f928379ccf5e5558550464ff46745ee"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 69.56521739130434,
       "bodyRadiusM": 16000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ida-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "dc83a45d740009342974cda3dd0738c9e189af4f9a5e9d7e78938c3de0fdf30a"
+      }
     }
   },
   "schema": "cssearth-object@1",

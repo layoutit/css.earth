@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 42.84130434782609,
       "bodyRadiusM": 9853.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mr-spock-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9f4bfca19e97ad2c87c7298434908cb8ef18c6841a31aeb5219da8eae477b9ab"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 111.63680039992961,
       "bodyRadiusM": 25676.46409198381
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bianca-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9f790e3f002f6a72b2f92e60c5ec88ce79de76f30f6234fd14806a682294f260"
+      }
     }
   },
   "prepared": {

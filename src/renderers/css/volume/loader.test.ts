@@ -8,25 +8,34 @@ async function fixture() {
   const base = new URL('../../../objects/milky-way/', import.meta.url);
   const descriptor = JSON.parse(await readFile(new URL('object.json', base), 'utf8'));
   const recipe = JSON.parse(await readFile(new URL('source/volume.json', base), 'utf8'));
+  const baked = JSON.parse(await readFile(new URL('prepared/volume-slices.json', base), 'utf8')) as { quads: { id: string; texturePath: string; alphaCoverage: number }[] };
   const bytes = new Uint8Array(await readFile(new URL(descriptor.prepared.url, base))).buffer;
-  return { base, descriptor, bytes, recipe };
+  return { base, descriptor, bytes, recipe, baked };
 }
 
 test('loads the checked-in density artifact with its complete fixed asset bank', async () => {
-  const { base, descriptor, bytes, recipe } = await fixture();
+  const { base, descriptor, bytes, recipe, baked } = await fixture();
   const read = vi.fn(async () => bytes);
   const payload = await loadPreparedCssVolume(descriptor, { read });
   expect(read).toHaveBeenCalledExactlyOnceWith(descriptor.prepared.url);
   const count = Object.values(recipe.bake.sliceCounts).reduce<number>((sum, count) => sum + Number(count), 0);
   const slices = payload.stacks.flatMap(stack => stack.leaves), sky = payload.sky?.faces ?? [];
   expect(Boolean(payload.sky)).toBe(Boolean(recipe.sky));
-  expect(payload.resources).toHaveLength(count + sky.length);
-  expect(slices).toHaveLength(count);
+  expect(baked.quads).toHaveLength(count);
+  const nonempty = baked.quads.filter(quad => quad.alphaCoverage !== 0);
+  expect(payload.resources).toHaveLength(nonempty.length + sky.length);
+  expect(slices.map(leaf => leaf.id).sort()).toEqual(nonempty.map(quad => quad.id).sort());
+  // The prepared traversal owns presentation order; source depth order is not
+  // a loader instruction. Keep every leaf and transport the authored ordering.
+  const prepared = JSON.parse(new TextDecoder().decode(bytes));
+  expect(payload.stacks).toEqual(prepared.data.stacks);
   const used = [...slices, ...sky].map(image => image.texturePath).sort();
   expect(payload.resources.map(resource => resource.path).sort()).toEqual(used);
   const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u, ''), base);
   const ownedImages = (await readdir(directory, { recursive: true })).filter(path => /\.(?:png|webp)$/iu.test(path)).sort();
-  expect(ownedImages).toEqual(used);
+  // Baked transparent slabs remain reproducible preparation evidence, but
+  // are absent from the runtime resource closure and mounted scene.
+  expect(ownedImages).toEqual([...baked.quads.map(quad => quad.texturePath), ...sky.map(face => face.texturePath)].sort());
   const skyPaths = new Set(sky.map(face => face.texturePath));
   const banks = { volume: { images: slices.length, bytes: 0, decodedRgbaBytes: 0 }, sky: { images: sky.length, bytes: 0, decodedRgbaBytes: 0 } };
   for (const resource of payload.resources) {

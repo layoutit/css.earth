@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 162.5,
       "bodyRadiusM": 37375
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eurynome-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e448c54307089236349154ebcb78853aaba70783d6afac8c4d158d98b51edd09"
+      }
     }
   },
   "schema": "cssearth-object@1",
