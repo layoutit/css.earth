@@ -137,6 +137,7 @@ for body in INPUTS['bodies']:
     write(source / 'manifest.json', manifest)
     descriptor = template('object.json', body)
     descriptor['properties'].pop('worldFrame', None)
+    descriptor['properties']['page'] = dict(stylesheets=[f'src/renderers/css/styles/{ident}-surfaces.css'])
     descriptor['properties']['recipe']['shape']['radiusKm'] = radius
     if ident == 'arrokoth': descriptor['properties']['recipe']['surfaces'][0]['lenses'].append(dict(id='albedo', source='content', material='lighting'))
     if ident == 'quaoar': descriptor['properties']['recipe']['rings'] = dict(source='terrestrial')

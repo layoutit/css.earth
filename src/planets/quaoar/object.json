@@ -79,6 +79,11 @@
       "rings": {
         "source": "terrestrial"
       }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/quaoar-surfaces.css"
+      ]
     }
   },
   "prepared": {

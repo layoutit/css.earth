@@ -76,6 +76,11 @@
           "model": "lit"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/gkunhomdima-surfaces.css"
+      ]
     }
   },
   "prepared": {
