@@ -1698,3 +1698,15 @@ sidebar link pixel in the DPR-2 return image (3/255; all other differences are
 circle growth, immediate selection and one landed camera. This fidelity evidence
 does not override the failed performance experiment. The performance target
 remains unmet.
+
+A second response-only trial separates planning from rAF presentation, allowing
+the worker to continue while one complete view waits to paint. Its queue, 24-view
+fidelity, native interaction and delayed-worker checks pass. It is still not
+accepted: only 31/3129 views are coalesced, while one-revision camera lag appears
+in 413/467 samples (control: 26/439). Style-pass count falls but aggregate style
+time barely changes. The higher host load prevents attributing its worse raw
+frame timings entirely to the trial. Immediate commits remain in product code.
+Capture `cbc3f422-2027-42a4-b11a-6100efc1d502` has all three synchronized artifacts,
+54 verified source/transport identities, both exact response patches, and no
+camera coherence errors. Full local assessment:
+`output/playwright/pipelined-world-frame/ASSESSMENT.md`.
