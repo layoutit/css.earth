@@ -2,6 +2,8 @@
 
 Tuttle now has two selectable datasets in the same object scene. **Hubble · Spitzer** remains the default; **Arecibo** shows the longer radar model. Switching preserves the camera and physical scale. Each dataset has a shape thumbnail, a short explanation and two facts.
 
+The [latest main integration](TUTTLE-MAIN-INTEGRATION.md) preserves both models alongside all 300 objects and records the refreshed build, browser and merge checks. The detailed source-fit and timing receipts below retain their original revision bindings.
+
 ![Arecibo at DPR 1](evidence/tuttle-arecibo-dpr-1-arecibo-shadows.png)
 
 [Hubble/Spitzer at the same camera](evidence/tuttle-arecibo-dpr-1-model-shadows.png), [Arecibo at DPR 2](evidence/tuttle-arecibo-dpr-2-arecibo-shadows.png), [flood lighting](evidence/tuttle-arecibo-dpr-2-arecibo-flood.png), [surface flight and drag](evidence/tuttle-arecibo-dpr-1-turned.png), and [820 px layout](evidence/tuttle-arecibo-dpr-1-mobile.png) show the production build. The small-layout image follows a surface flight and is not its initial framing. Faceting and faint triangle seams remain visible at close zoom.
