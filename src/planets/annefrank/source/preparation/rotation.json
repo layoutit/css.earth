@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 0,
+  "declinationDegrees": 90,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "source": "https://doi.org/10.1029/2003JE002108",
+  "coordinateSystem": "ICRF/J2000; observed or explicitly approximate pole; arbitrary display meridian",
+  "qualification": "Arbitrary display pole and meridian. The flyby did not establish a spin pole or current surface longitude; the display orientation is not a measured attitude."
+}

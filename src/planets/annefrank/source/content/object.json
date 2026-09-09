@@ -1,0 +1,107 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "annefrank",
+  "displayName": "Annefrank",
+  "panel": {
+    "introduction": "Stardust visited Annefrank in 2002. This approximate ellipsoid shows the minimum dimensions inferred from the flyby; its angular outline and local terrain are unresolved. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate ellipsoid"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "6.6 × 5 × 3.4 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "Unresolved in this approximation"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Main-belt asteroid"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published preliminary ellipsoid using minimum full dimensions from Stardust flyby images. It does not reproduce the observed angular outline or establish a complete global shape. Full approximation dimensions: 6.6 × 5 × 3.4 km. Arbitrary display pole and meridian. The flyby did not establish a spin pole or current surface longitude; the display orientation is not a measured attitude. The grid marks unmapped terrain.",
+        "title": "Stardust minimum-size approximation",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/annefrank/annefrank-model-thumbnail.webp",
+        "surface": "annefrank-model-surface@2x.webp",
+        "poles": "annefrank-model-poles@2x.webp",
+        "source": {
+          "id": "occultation-approximation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1029/2003JE002108"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape and dimensions",
+      "role": "surface",
+      "description": "Duxbury et al. (2004), Journal of Geophysical Research: Planets 109, E02002",
+      "href": "https://doi.org/10.1029/2003JE002108"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://ntrs.nasa.gov/citations/20060040031"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1029/2003JE002108",
+      "credit": "Duxbury et al. (2004), Journal of Geophysical Research: Planets 109, E02002"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Duxbury et al. (2004), Journal of Geophysical Research: Planets 109, E02002"
+    }
+  }
+}

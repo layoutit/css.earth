@@ -8,6 +8,7 @@ import { gzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
+import { conformanceBrowserLaunch } from '../../site/test/conformance-browser-launch.mjs';
 import { OBJECTS } from '../../site/objects.mjs';
 import { traceDurationEvents } from '../../tests/objects/browser/comets/trace-events.mjs';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4278';
@@ -22,7 +23,7 @@ if (viewToken) assert.match(viewToken, /^[A-Za-z0-9_-]+$/);
 const output = resolve(process.argv[4] ?? `output/playwright/lucy/${id}-dpr-${dpr}`);
 await mkdir(output, { recursive: true });
 const viewport = { width: 1440, height: 900 };
-const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const browser = await chromium.launch((await conformanceBrowserLaunch({ evidenceDirectory: output })).options);
 try {
   const context = await browser.newContext({ viewport, deviceScaleFactor: dpr });
   const page = await context.newPage(), errors = [], requests = [], loaded = [], responseTasks = [];
