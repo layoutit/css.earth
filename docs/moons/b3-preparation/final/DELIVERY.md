@@ -1,6 +1,6 @@
-# B3 delivery candidate: spacecraft imagery and geologic maps
+# B3: spacecraft imagery and geologic maps for six moons
 
-Six existing moons gain six new selectable views and three improved views. The original twelve targets are all source-reviewed; the user is deciding whether to deliver these six and carry the unresolved work forward. No new moon scene or roster increase is claimed.
+Six existing moons gain six new selectable views and three improved views. The original twelve targets are all source-reviewed; the user approved a six-body draft PR and carrying the other six dispositions forward. No new moon scene or roster increase is claimed.
 
 | Moon | Prepared result | Scientific boundary |
 | --- | --- | --- |
@@ -51,6 +51,8 @@ The fresh installer downloads the same pinned bytes verified in actual browser r
 
 ![Miranda geologic units](images/miranda-geology.png)
 
-## Remaining scope decision
+## Approved delivery scope
 
-All twelve planned targets have a source disposition. The six implemented upgrades above are reviewable as one delivery candidate. Dactyl, Selam, Thebe, Aegaeon, Nix and Hydra remain in the [explicit research dispositions](../../B3-SPACECRAFT-MAPPING.md); no new scene, new supported footprint or unique registration is claimed for them. The earlier question about delivering the six and carrying those dispositions forward is still pending. No B3 PR has been opened.
+All twelve planned targets have a source disposition. The user approved the six implemented upgrades above as one draft PR. Dactyl, Selam, Thebe, Aegaeon, Nix and Hydra remain in the [explicit research dispositions](../../B3-SPACECRAFT-MAPPING.md); no new scene, new supported footprint or unique registration is claimed for them. The source-research carry-forward has no new implementation commitment until its recorded qualification gaps close.
+
+The evidence was captured against integrated base `b60f5d588` with the final B3 prepared files. Main subsequently gained Earth elevation PR #66 (`e018ba392`); it was inspected for scope but was not integrated or rerun locally. The draft does not claim current-main aggregate readiness.
