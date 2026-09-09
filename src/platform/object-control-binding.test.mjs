@@ -27,7 +27,8 @@ function harness(controls = moonControls, mutate = () => {}) {
   const asteroidLabels = new Input({ name: "asteroidLabels" });
   settingInputs.push(motion, contrast, heliosphere, asteroidOrbits, asteroidLabels);
   const lensRoot = root(lensInputs), settingsRoot = root(settingInputs);
-  const stage = { ownerDocument: { querySelector: selector => selector === ".planet-lenses" ? lensRoot : settingsRoot } };
+  const information = { querySelector: selector => selector === ".planet-lenses" ? lensRoot : null };
+  const stage = { ownerDocument: { querySelector: selector => selector === ".planet-information-panel" ? information : selector === ".planet-lenses" ? lensRoot : settingsRoot } };
   const errors = [], actions = []; let state = { committed: null, desired: initial, plan: null, pending: true };
   let actionImplementation = action => {
     state = { ...state, committed: reduceObjectSelection(state.committed ?? initial, action), pending: false };
@@ -147,4 +148,20 @@ test("prepared lens legends follow committed selection through pending work", ()
   h.setState({ committed: desired, desired, pending: false, plan: null });
   assert.deepEqual(legends.map(legend => legend.hidden), [true, false]);
   h.binding.destroy();
+});
+
+
+test("a preceding focused galaxy lens bank cannot replace the mounted body's controls", () => {
+  const focusInput = new Input({ name: "focusLens", value: "vista-infrared", tagName: "BUTTON", type: "button" });
+  const focusRoot = root([focusInput]);
+  const h = harness(moonControls, ({ stage }) => {
+    const query = stage.ownerDocument.querySelector;
+    stage.ownerDocument.querySelector = selector => selector === ".planet-lenses" ? focusRoot : query(selector);
+  });
+  h.ready();
+  assert.deepEqual(h.binding.stats().lensIds, moonControls.lenses.controls.map(lens => lens.id));
+  assert.equal(focusInput.disabled, false);
+  focusInput.emit("click"); assert.equal(h.actions.length, 0);
+  h.lensInputs[0].emit("click"); assert.equal(h.actions.length, 1);
+  h.binding.destroy(); assert.equal(focusInput.disabled, false);
 });

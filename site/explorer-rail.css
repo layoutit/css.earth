@@ -212,7 +212,7 @@
   font: 400 14px/1.3 var(--shell-ui-font);
 }
 
-.explorer-settings-panel .planet-setting-switch {
+:is(.explorer-settings-panel, [data-focus-lens-bank]) .planet-setting-switch {
   display: block;
   position: relative;
   grid-column: 3;
@@ -225,7 +225,7 @@
   background: var(--shell-background);
 }
 
-.explorer-settings-panel .planet-setting-switch::before {
+:is(.explorer-settings-panel, [data-focus-lens-bank]) .planet-setting-switch::before {
   position: absolute;
   top: 2px;
   left: 2px;
@@ -236,21 +236,21 @@
   content: "";
 }
 
-.explorer-settings-panel input[type="checkbox"]:checked ~ .planet-setting-switch {
+:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:checked ~ .planet-setting-switch {
   border-color: var(--shell-focus);
   background: var(--shell-selection);
 }
 
-.explorer-settings-panel input[type="checkbox"]:checked ~ .planet-setting-switch::before {
+:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:checked ~ .planet-setting-switch::before {
   background: var(--shell-text);
   transform: translateX(14px);
 }
 
-.explorer-settings-panel input[type="checkbox"]:indeterminate ~ .planet-setting-switch::before {
+:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:indeterminate ~ .planet-setting-switch::before {
   transform: translateX(7px);
 }
 
-.explorer-settings-panel input[type="checkbox"]:focus-visible ~ .planet-setting-switch {
+:is(.explorer-settings-panel, [data-focus-lens-bank]) input[type="checkbox"]:focus-visible ~ .planet-setting-switch {
   outline: 2px solid var(--shell-focus);
   outline-offset: 2px;
 }

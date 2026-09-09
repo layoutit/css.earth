@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-nebula-reconstruction@1",
+  "resultId": "e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca",
+  "imageId": "horalek-widefield",
+  "removalResultId": "5b508bb10419d1927a4df35c9431aa6104f03dd385f84e5753e6378021f387e1.ec65be265d97e820466d900f3c1632a14d512c588e135b9d167c321a6d061618",
+  "placement": {
+    "x": 0.6184424860783384,
+    "y": 2.3793520276221836,
+    "z": 0,
+    "rotationX": 0,
+    "rotationY": 0,
+    "rotationZ": 39,
+    "scale": 3
+  },
+  "appearance": {
+    "saturation": 2.5,
+    "detailStrength": 1.95,
+    "detailScale": 96,
+    "brightness": 1.3,
+    "gamma": 1.3
+  },
+  "subject": {
+    "id": "reconstruction-e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca",
+    "name": "Horálek · optical wide field · reconstruction",
+    "directory": ".local/nebula-lab/reconstructions/e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca",
+    "stars": ".local/nebula-lab/reconstructions/e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca/prepared/stars.json",
+    "cloudParts": {
+      "descriptor": "inspection-object.json",
+      "catalogue": "source/cloud-parts.json"
+    },
+    "imagePath": ".local/nebula-lab/reconstructions/e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca/source/target.png",
+    "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
+    "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+    "modelNote": "Experimental extended-light reconstruction at the calibrated sky scale. Stellar-prior depth is modeled; the photo boundary and flat appearance in oblique views remain unresolved. Not accepted for production.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "comparisonGroup": "lmc-clouds-observation",
+    "referenceDistanceUnits": 49.59067275049,
+    "referenceEastLeft": true,
+    "comparisonImages": [],
+    "density": {
+      "directory": "labs/nebula/models/lmc/full-density",
+      "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
+      "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
+      "candidateImageIds": [
+        "smash-original",
+        "vista-infrared",
+        "wise-wide-infrared",
+        "dss2-wide-optical",
+        "horalek-widefield",
+        "smash-dr2-wide-mosaic",
+        "ciel-austral-optical",
+        "naztronomy-optical"
+      ],
+      "reconstructionReferenceImageId": "smash-original",
+      "referenceFramingRadiusUnits": 5
+    },
+    "sourceSubjectId": "lmc-clouds",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca/source/original-overlay.json",
+    "reconstructionImage": {
+      "group": "lmc-clouds",
+      "label": "Horálek · optical wide field",
+      "note": "Candidate colors on the unchanged Alignment density cloud; saved placement is preserved."
+    }
+  }
+}

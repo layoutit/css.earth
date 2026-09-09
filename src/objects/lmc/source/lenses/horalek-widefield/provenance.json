@@ -1,0 +1,438 @@
+{
+  "schema": "cssearth-nebula-reconstruction-provenance@1",
+  "method": "alignment-density-material-v1",
+  "request": {
+    "schema": "cssearth-nebula-reconstruction-work@1",
+    "id": "reconstruction-e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca",
+    "imageId": "horalek-widefield",
+    "name": "Horálek · optical wide field",
+    "outputDirectory": "/Users/apresmoi/Documents/cssEarth/.local/nebula-lab/reconstructions/e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca.pending",
+    "appearance": {
+      "saturation": 2.5,
+      "detailStrength": 1.95,
+      "detailScale": 96,
+      "brightness": 1.3,
+      "gamma": 1.3
+    },
+    "source": {
+      "path": ".local/nebula-lab/star-removal-nox-applied/5b508bb10419d1927a4df35c9431aa6104f03dd385f84e5753e6378021f387e1/diffuse.png",
+      "sha256": "fde07f3a937d444e8c03461403ea365998ef4b25195f85f4b7b07b9fc0eafce2",
+      "width": 6582,
+      "height": 4388
+    },
+    "original": {
+      "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+      "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+      "removalResultId": "5b508bb10419d1927a4df35c9431aa6104f03dd385f84e5753e6378021f387e1.ec65be265d97e820466d900f3c1632a14d512c588e135b9d167c321a6d061618"
+    },
+    "overlay": {
+      "widthPx": 4096,
+      "heightPx": 2731,
+      "transform": "matrix3d(0.01575616692084678,0.10526343914580555,0,6.268016950525346e-7,0.10553448347095629,-0.016029371113261956,0,0.0000010695309106364078,0,0,1,0,-184.43151666398347,-174.44831487943384,0,1)",
+      "pivotCssPx": [
+        -8.03350461469553,
+        19.190441087820926,
+        0
+      ],
+      "placement": {
+        "x": 0.6184424860783384,
+        "y": 2.3793520276221836,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      }
+    },
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        105965308676973530000,
+        533209933280955330000,
+        -1.4303831216834226e+21
+      ],
+      "localToReferenceXyzw": [
+        0.09631989992847079,
+        0.9788280334299664,
+        0.17973685917567428,
+        0.01768669847817273
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -34.2494860589516,
+          -39.659852117301206,
+          -14.063476651908141
+        ],
+        "max": [
+          28.24754056340629,
+          21.19251590973147,
+          13.190865784909581
+        ]
+      }
+    },
+    "stellarPrior": {
+      "path": "labs/nebula/models/lmc/full-density/source/volume.json",
+      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+    },
+    "stars": {
+      "path": "labs/nebula/models/lmc/stars/prepared/stars.json",
+      "sha256": "533b2fc01c71ce258e4bb5d5d4d3799ce80bb4ea65dfe7b3d9c9529feda89922"
+    },
+    "cloud": {
+      "descriptor": {
+        "path": "labs/nebula/models/lmc/full-density/object.json",
+        "sha256": "57b1d75e5eea014736768b65b7c85a1d78f6b96878ae545d03e427aaa3e09662"
+      },
+      "slices": {
+        "path": "labs/nebula/models/lmc/full-density/prepared/volume-slices.json",
+        "sha256": "4a39de202c1ba1d926459b08746326162171c25a32d85b583c1eaefc926377c0"
+      },
+      "provenance": {
+        "path": "labs/nebula/models/lmc/full-density/source/volume.json",
+        "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+      },
+      "starAlignment": {
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            6737,
+            6536
+          ],
+          "referencePixel": [
+            3368.5,
+            3268
+          ],
+          "referenceValueDeg": [
+            78.7957840796,
+            -71.566506171
+          ],
+          "scaleDeg": [
+            -0.00138784675876,
+            0.00138784675876
+          ],
+          "rotationDeg": -16.920000000000027
+        },
+        "alignment": {
+          "style": {
+            "width": "4096px",
+            "height": "3974px",
+            "transform": "matrix3d(0.028744135026789873,-0.0943725172371345,0,4.886339059289238e-7,-0.09428671895799808,-0.02876816655884585,0,-0.0000015758506587817015,0,0,1,0,25.831519237460192,250.90636722330362,0,1)",
+            "backgroundSize": "4096px 3974px",
+            "backgroundPosition": "0px 0px"
+          },
+          "pivotCssPx": [
+            -102.8673609917598,
+            0.470106527901659,
+            0
+          ],
+          "placement": {
+            "x": -1.2,
+            "y": -1.7,
+            "z": 0,
+            "rotationX": 0,
+            "rotationY": 0,
+            "rotationZ": 39,
+            "scale": 3
+          }
+        },
+        "provenancePin": {
+          "path": "labs/nebula/models/lmc/candidates/overlays.json",
+          "sha256": "e9dcdf2eff789af04ec5620d203037206bba544593daf7ba44a4953f60fc873a"
+        }
+      }
+    },
+    "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
+    "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)"
+  },
+  "settings": {
+    "analysisWidth": 1024,
+    "originalWidth": 2048,
+    "quality": 92
+  },
+  "implementation": {
+    "labs/nebula/src/reconstruction/reconstruction-worker.ts": "db0e88b06ffaa974549c953cf8408b0f6588c700a39269798c7721e26dffa96f",
+    "labs/nebula/src/reconstruction/reconstruction-geometry.ts": "ba2c453aa885b8d31003c49511541e074bad66b3a37ce105e0003c312e1f23b8",
+    "labs/nebula/src/reconstruction/registered-image.ts": "30c538650cf50e1015397ab8a35051029717aae573e3c0d160ab58a7f0631665",
+    "labs/nebula/src/reconstruction/cloud-material.ts": "988d0a3a2084c3c909d667ce7395eda8691cc3431c7cefa12077b0a2a31a27bd",
+    "labs/nebula/src/reconstruction/cloud-appearance.ts": "702cde2ff38ccce2096eb3562681f0ab8c8a9dec424ef8195c84034f4a856930",
+    "labs/nebula/src/reconstruction/cloud-detail.ts": "c375f51a5dfb7fdc0ccec067b5ae90a8300334e33d79f594af03c8468043c503",
+    "labs/nebula/src/reconstruction/reconstruction-stars.ts": "152db8623371942b3ed9acfa4679d98c2d805f50b2568cd462b8ba85db58ced8",
+    "labs/nebula/src/reconstruction/filled-products.ts": "0acb45c17fd087831c34fd8145c02d6f411b4724ac07200083cc19984b3c3cfd",
+    "labs/nebula/src/reconstruction/density-projection.ts": "19331bf2eeeaa5fda2ba8a19ddadbf1fb5a49783cc27e86e2aaf6052f62974e8",
+    "labs/nebula/src/stars/star-photometry.ts": "e89b6d4b95b5ff9b26af05912053ebb30003ffc78680cfe060da18bf598cc5ea",
+    "labs/nebula/src/cli/prepare-lmc-stars.ts": "034384b77c25b5ddbc6ea883c073fe9466bd721b6a8141024bdf63efa098827a",
+    "labs/nebula/src/alignment/overlay-wcs.ts": "b75d36a18cf51a7150469399abb0aa332fae6601bcc315e26b37fa314c9d7534",
+    "labs/nebula/src/alignment/overlay-geometry.ts": "201d738eee4431eff1b841a779093ea727dcfef0bcab46634b75ad51853eead8",
+    "src/preparation/volume/raster.ts": "35073bf454a04f85c6812421079db6db38bbb43117bf26bcbf1d0d7c4a1b915d",
+    "src/renderers/css/preparation/volume.ts": "079ef548a325ee43ec7c33aaba8a9da188d6379f6b3c301207be67ab719c35fe"
+  },
+  "canonicalCloud": {
+    "descriptor": {
+      "path": "labs/nebula/models/lmc/full-density/object.json",
+      "sha256": "57b1d75e5eea014736768b65b7c85a1d78f6b96878ae545d03e427aaa3e09662"
+    },
+    "slices": {
+      "path": "labs/nebula/models/lmc/full-density/prepared/volume-slices.json",
+      "sha256": "4a39de202c1ba1d926459b08746326162171c25a32d85b583c1eaefc926377c0"
+    },
+    "provenance": {
+      "path": "labs/nebula/models/lmc/full-density/source/volume.json",
+      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+    },
+    "starAlignment": {
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          6737,
+          6536
+        ],
+        "referencePixel": [
+          3368.5,
+          3268
+        ],
+        "referenceValueDeg": [
+          78.7957840796,
+          -71.566506171
+        ],
+        "scaleDeg": [
+          -0.00138784675876,
+          0.00138784675876
+        ],
+        "rotationDeg": -16.920000000000027
+      },
+      "alignment": {
+        "style": {
+          "width": "4096px",
+          "height": "3974px",
+          "transform": "matrix3d(0.028744135026789873,-0.0943725172371345,0,4.886339059289238e-7,-0.09428671895799808,-0.02876816655884585,0,-0.0000015758506587817015,0,0,1,0,25.831519237460192,250.90636722330362,0,1)",
+          "backgroundSize": "4096px 3974px",
+          "backgroundPosition": "0px 0px"
+        },
+        "pivotCssPx": [
+          -102.8673609917598,
+          0.470106527901659,
+          0
+        ],
+        "placement": {
+          "x": -1.2,
+          "y": -1.7,
+          "z": 0,
+          "rotationX": 0,
+          "rotationY": 0,
+          "rotationZ": 39,
+          "scale": 3
+        }
+      },
+      "provenancePin": {
+        "path": "labs/nebula/models/lmc/candidates/overlays.json",
+        "sha256": "e9dcdf2eff789af04ec5620d203037206bba544593daf7ba44a4953f60fc873a"
+      }
+    }
+  },
+  "source": {
+    "path": ".local/nebula-lab/star-removal-nox-applied/5b508bb10419d1927a4df35c9431aa6104f03dd385f84e5753e6378021f387e1/diffuse.png",
+    "sha256": "fde07f3a937d444e8c03461403ea365998ef4b25195f85f4b7b07b9fc0eafce2",
+    "width": 6582,
+    "height": 4388
+  },
+  "original": {
+    "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+    "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+    "removalResultId": "5b508bb10419d1927a4df35c9431aa6104f03dd385f84e5753e6378021f387e1.ec65be265d97e820466d900f3c1632a14d512c588e135b9d167c321a6d061618"
+  },
+  "material": {
+    "appearance": {
+      "saturation": 2.5,
+      "detailStrength": 1.95,
+      "detailScale": 96,
+      "brightness": 1.3,
+      "gamma": 1.3
+    },
+    "detailMethod": "masked-local-material-contrast@1",
+    "scale": "Radius in pixels at 1024px registered width.",
+    "contrast": "Three coverage-normalized box passes; bounded local luminance ratio deepens dark structure, preserving highlight headroom. Authored RGB material only; no inferred depth."
+  },
+  "alignment": {
+    "widthPx": 4096,
+    "heightPx": 2731,
+    "transform": "matrix3d(0.01575616692084678,0.10526343914580555,0,6.268016950525346e-7,0.10553448347095629,-0.016029371113261956,0,0.0000010695309106364078,0,0,1,0,-184.43151666398347,-174.44831487943384,0,1)",
+    "pivotCssPx": [
+      -8.03350461469553,
+      19.190441087820926,
+      0
+    ],
+    "placement": {
+      "x": 0.6184424860783384,
+      "y": 2.3793520276221836,
+      "z": 0,
+      "rotationX": 0,
+      "rotationY": 0,
+      "rotationZ": 39,
+      "scale": 3
+    },
+    "convention": "Use the exact saved Alignment placement, including scale, pivot, all rotations and offsets."
+  },
+  "geometry": {
+    "tangentBoundsKpc": {
+      "min": [
+        -12.926625736907944,
+        -13.68759863355698
+      ],
+      "max": [
+        18.367307685619593,
+        14.59815746611857
+      ]
+    },
+    "physicalBoundsKpc": {
+      "min": [
+        -34.2494860589516,
+        -39.659852117301206,
+        -14.063476651908141
+      ],
+      "max": [
+        28.24754056340629,
+        21.19251590973147,
+        13.190865784909581
+      ]
+    },
+    "observerDistanceKpc": 49.590672750490434,
+    "originalImageLandmarks": [
+      {
+        "uv": [
+          0,
+          0
+        ],
+        "pixel": [
+          0,
+          985.1203122109599
+        ]
+      },
+      {
+        "uv": [
+          0.5,
+          0
+        ],
+        "pixel": [
+          737.9170942727499,
+          1418.615204088568
+        ]
+      },
+      {
+        "uv": [
+          1,
+          0
+        ],
+        "pixel": [
+          1473.9445266254331,
+          1851
+        ]
+      },
+      {
+        "uv": [
+          0,
+          0.5
+        ],
+        "pixel": [
+          290.3316229252489,
+          491.8418484035335
+        ]
+      },
+      {
+        "uv": [
+          0.5,
+          0.5
+        ],
+        "pixel": [
+          1026.8023036561945,
+          925.3368613042211
+        ]
+      },
+      {
+        "uv": [
+          1,
+          0.5
+        ],
+        "pixel": [
+          1761.389769737707,
+          1357.7233926589217
+        ]
+      },
+      {
+        "uv": [
+          0,
+          1
+        ],
+        "pixel": [
+          579.8176892078819,
+          0
+        ]
+      },
+      {
+        "uv": [
+          0.5,
+          1
+        ],
+        "pixel": [
+          1314.8472444089416,
+          433.4932971245959
+        ]
+      },
+      {
+        "uv": [
+          1,
+          1
+        ],
+        "pixel": [
+          2048,
+          865.8797271236119
+        ]
+      }
+    ]
+  },
+  "photo": {
+    "width": 1024,
+    "height": 926,
+    "nativeDimensions": [
+      6582,
+      4388
+    ]
+  },
+  "densityProjection": {
+    "width": 256,
+    "height": 249,
+    "tangentBoundsKpc": {
+      "min": [
+        -47.80717989421432,
+        -55.35924485074724
+      ],
+      "max": [
+        39.42935817954924,
+        29.581594852654117
+      ]
+    },
+    "observerDistanceKpc": 49.590672750490434,
+    "meaning": "Integrated signal of the untouched Alignment density source; identical cutoff for all materials."
+  },
+  "validation": {
+    "sameGeometry": true,
+    "sameAlpha": true,
+    "sameStars": true,
+    "coverage": {
+      "positiveAlphaTexels": 291844,
+      "recoloredTexels": 255365,
+      "outsideImageTexels": 36479,
+      "blackImageTexels": 0,
+      "preservedReferenceTexels": 36479
+    }
+  },
+  "limitations": [
+    "The Alignment cloud is simulated stellar density, not measured gas depth.",
+    "Candidate color and optional local contrast paint the fixed cloud. Image brightness never changes geometry or alpha.",
+    "Uncovered or black image samples retain neutral density colors; coverage counts record this mixed-source material.",
+    "Catalogue astrometry is preserved; one common Alignment mapping and density-conditioned model supplies the same stellar positions for every material."
+  ]
+}

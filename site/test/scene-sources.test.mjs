@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { OBJECTS } from '../objects.mjs';
 import { sceneSources } from '../scene-sources.mjs';
-const sharedLabels = ['NASA SVS', 'OpenSpace', 'HYG', 'IBEX', 'LVDB', 'McConnachie', 'ESA/Hubble', 'ESO', 'NOIRLab', 'NOIRLab', 'MCXC-II'];
+const sharedLabels = ['NASA SVS', 'OpenSpace', 'HYG', 'IBEX', 'LVDB', 'McConnachie', 'ESA/Hubble', 'ESO', 'NOIRLab', 'ESO VISTA', 'NOIRLab Horálek', 'NASA/IPAC WISE', 'Dryad', 'Bonanos', 'NOIRLab', 'MCXC-II'];
 
 test('small shell attribution records match the checked scientific provenance', async () => {
   const read = async path => JSON.parse(await readFile(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8'));
@@ -50,8 +50,8 @@ test('small shell attribution records match the checked scientific provenance', 
   assert.equal(m31Recipe.source.license, m31.license);
   assert.equal(sources[6].description, `${m31.title}. ${m31.credit}. ${m31.license}. ${m31.displayModel}`);
   assert.doesNotMatch(sources[6].description, /NASA|public domain/u);
-  assert.deepEqual(sources.filter(source => source.role.endsWith(' image')).map(source => source.role), ['M31 image', 'M33 image', 'LMC image', 'SMC image']);
-  for (const id of ['m31', 'm33', 'lmc', 'smc']) {
+  assert.deepEqual(sources.filter(source => source.role.endsWith(' image')).map(source => source.role), ['M31 image', 'M33 image', 'LMC VISTA image', 'LMC Horálek image', 'LMC WISE image', 'SMC image']);
+  for (const id of ['m31', 'm33', 'smc']) {
     const provenance = await read(`${id}/source/provenance.json`), recipe = await read(`${id}/source/recipe.json`);
     const source = sources.find(source => source.role === `${id.toUpperCase()} image`);
     assert.equal(source.href, provenance.sourcePage);
@@ -63,6 +63,45 @@ test('small shell attribution records match the checked scientific provenance', 
     const prepared = await readFile(new URL(`../../src/objects/${id}/${descriptor.prepared.url}`, import.meta.url));
     assert.equal(createHash('sha256').update(prepared).digest('hex'), descriptor.prepared.sha256, `${id}: credits require the active prepared bank`);
   }
+  const lmcDescriptor = await read('lmc/object.json');
+  assert.equal(lmcDescriptor.type, 'volume-lens-bank');
+  const lmcBytes = await readFile(new URL(`../../src/objects/lmc/${lmcDescriptor.prepared.url}`, import.meta.url));
+  assert.equal(createHash('sha256').update(lmcBytes).digest('hex'), lmcDescriptor.prepared.sha256);
+  const bank = JSON.parse(lmcBytes).data;
+  const activeLmcImages = sources.filter(source => source.role.startsWith('LMC ') && source.role.endsWith(' image'));
+  assert.deepEqual(activeLmcImages.map(source => source.href), bank.lenses.map(lens => lens.sourceUrl));
+  for (const lens of bank.lenses) {
+    const provenance = await read(`lmc/source/lenses/${lens.id}/provenance.json`);
+    const result = await read(`lmc/source/lenses/${lens.id}/result.json`);
+    const catalogue = await read(`lmc/source/lenses/${lens.id}/catalogue-stars.json`);
+    const image = activeLmcImages.find(source => source.href === lens.sourceUrl);
+    assert.equal(image.href, result.subject.sourcePageUrl);
+    assert.equal(image.href, provenance.request.sourcePageUrl);
+    assert.equal(image.description, `${lens.description} ${provenance.request.credit}.`);
+    assert.deepEqual(lens.volume.provenance, provenance);
+    const model = sources.find(source => source.role === 'LMC density model');
+    assert.equal(model.href, result.subject.density.sourcePageUrl);
+    assert.equal(model.description, `${result.subject.density.credit} ${result.subject.density.modelNote}`);
+    const starSource = sources.find(source => source.role === 'LMC stars');
+    assert.equal(starSource.href, catalogue.sourceUrl);
+    assert.equal(starSource.description, `${catalogue.credit}. ${catalogue.depthAssumption}`);
+    const modelPin = provenance.canonicalCloud.provenance;
+    const modelBytes = await readFile(new URL(`../../${modelPin.path}`, import.meta.url));
+    assert.equal(createHash('sha256').update(modelBytes).digest('hex'), modelPin.sha256);
+    const starsPin = provenance.request.stars;
+    const starBytes = await readFile(new URL(`../../${starsPin.path}`, import.meta.url));
+    assert.equal(createHash('sha256').update(starBytes).digest('hex'), starsPin.sha256);
+  }
+  const registration = sources.find(source => source.role === 'LMC registration');
+  const smash = await read('lmc/source/provenance.json');
+  assert.equal(registration.href, smash.sourcePage);
+  assert.ok(registration.description.includes(smash.credit));
+  assert.match(registration.description, /reference image and sky registration/u);
+  assert.equal(sources.some(source => source.role === 'LMC image'), false);
+  for (const source of sources.filter(source => source.role.startsWith('LMC '))) {
+    assert.doesNotMatch(source.description, /32 normalized parametric slabs|high-frequency midplane residual/u);
+  }
+
 });
 
 test('every shared route retains its object sources and the actual environment credits', async () => {
