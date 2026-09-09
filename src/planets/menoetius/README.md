@@ -12,7 +12,7 @@ Published approximate ellipsoid with full dimensions 117×108×90 km, inferred f
 
 Menoetius uses the JPL#82 system ephemeris and its own matching primary center. Exact target/center IDs, time conversion, vectors, parent GM and independent heliocentric composition checks are in [epoch record](source/validation/epoch-state.json). Runtime extrapolation is not enabled.
 
-[Source checks](../../../tests/objects/unit/menoetius/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/menoetius/source.test.mjs).
 
 ## Known problems
 

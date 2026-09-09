@@ -2,7 +2,7 @@
 
 ## Sources
 
-- Source: NASA PDS `urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004`, Daly/Ernst and the DART shape-model team.
+- Source: [NASA PDS DART shape model v004](https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004), Daly/Ernst and the DART shape-model team.
 
 - The surface is the released DART global SPC v004 encounter model, not a reconstruction of terrain after the impact.
 
@@ -10,7 +10,7 @@
 
 - Elevation uses source radius minus 75 m in meters, with cartographic relief; it is not measured impact displacement or height above an equipotential.
 
-- **Relative albedo:** The original `dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits` and its PDS4 label are pinned in [source/science/](source/science/).
+- **Relative albedo:** The original v004 relative-albedo FITS table and its [PDS4 label](source/science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml) are pinned in [source/science/](source/science/).
 
 ## Evidence
 

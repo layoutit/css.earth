@@ -13,7 +13,7 @@ JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar
 
 The prepared surface displays both sides of its existing 800 native triangles. This prevents rear-face suppression from exposing fine raster edge cracks in Chrome. It adds no faces and changes no source vertex, scale, atlas or texture. The source-mesh simplification remains at an estimated 2.0273 m error within its retained 4 m budget; that estimator is not a guaranteed maximum surface distance. The original 2,292-face OBJ remains pinned and unchanged.
 
-[Source checks](../../../tests/objects/unit/squannit/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/squannit/source.test.mjs).
 
 ## Known problems
 

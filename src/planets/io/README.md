@@ -4,7 +4,7 @@
 
 - **Monochrome:** USGS [Voyager/Galileo global mosaic](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km), `Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif`.
 
-- **Enhanced color:** USGS [Voyager/Galileo false-color global mosaic](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_false_color_global_mosaic_1km), `Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif`.
+- **Enhanced color:** USGS [Voyager/Galileo false-color global mosaic](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_false_color_global_mosaic_1km), the Galileo SSI global false-color mosaic.
 
 - The Geology view uses the original `Io_GeoUnits` polygon/attribute/projection members from [USGS SIM3168](https://pubs.usgs.gov/sim/3168/), Williams et al. (2011), at 1:15,000,000.
 
@@ -34,6 +34,12 @@
 
 <details>
 <summary>Detailed source survey, assumptions and preparation</summary>
+
+Original false-color mosaic filename:
+
+```text
+Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif
+```
 
 <a id="io-sources-and-preparation"></a>
 

@@ -12,7 +12,7 @@ Shape uses the shared missing-imagery grid. Elevation shows original model radiu
 
 Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 1.296750 m and maximum 4.703741 m; display-to-source p95 1.323804 m and maximum 4.488058 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties.
 
-[Source checks](../../../tests/objects/unit/asteroid-1950-da/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/asteroid-1950-da/source.test.mjs).
 
 ## Known problems
 

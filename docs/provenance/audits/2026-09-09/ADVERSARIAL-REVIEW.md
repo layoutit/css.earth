@@ -136,3 +136,46 @@ horizontal overflow at 1,200- and 390-pixel widths with methods closed. The loca
 documentation check passed for 228 links across 27 changed Markdown files; skill
 validation and `git diff --check` also passed. No body tests were rerun for this
 wording and navigation change.
+
+## Complete migration and final review
+
+This revision supersedes the earlier README-or-SOURCE compatibility rule. All
+412 body accounts now use README, including the 408 registered objects in main
+`bd265cf3a091c4ef17e9be76dfeb23410364884f`. The four unregistered source packages
+retain their documentation. The 75 existing README/SOURCE pairs were merged;
+Belinda's nested source account and credits were consolidated too. No body SOURCE
+file or compatibility exception remains. Historical report paths and hashes stay
+attached to the versions they describe.
+
+The adversarial review began at `3264e6146ed5523bae98d819f5c1afb3e768f5e2`.
+Three reviewers checked provenance, wording and the minimum shared rules.
+Corrections made in this revision include:
+
+- Mark 67P coverage percentages as sampled estimates.
+- Correct the shared route/preparation guide and remove duplicated contract rules;
+  the contract fell from 2,422 to 1,705 words.
+- Replace live Sun, Moon and Pluto SOURCE pointers, update authored byte pins, and
+  regenerate the affected metadata through existing tools. A regression test
+  caught the factsheet preparer retaining the old pointer. Provenance recovered
+  from existing files remains labeled `recovered`.
+- Apply Sources, Evidence and Known problems before expandable methods throughout
+  the body accounts. Keep source limits visible, including the first Lutetia
+  frame's skipped stray-light correction and rejected mosaic candidates.
+- Scope main-belt evidence to recorded assets where the tested code revision is
+  missing. Reposition moved heading anchors and replace overlong overview
+  identifiers with descriptive links.
+
+Five focused package/metadata tests pass. Required-file presence passes for all
+408 registry entries, and a missing README is rejected. This sparse-worktree
+check used disk files and the merge index; it did not verify body image bytes.
+The local Markdown check passes for 3,368 links across 480 changed files; the
+skill validator and scoped whitespace check pass. Local rendered previews of all
+412 READMEs were checked at 1,200 and 390 pixels with methods closed. Six narrow
+layout problems were corrected and rechecked; representative screenshots were
+inspected. The preview does not reproduce GitHub's stylesheet exactly.
+
+No observation, geometry, texture, runtime transport or delivery inventory was
+changed by this documentation revision. No full build or body browser suite was
+rerun. Existing scientific and application reports retain their original scope;
+agent review and document-layout checks are not reader testing or an ISO
+conformity assessment.

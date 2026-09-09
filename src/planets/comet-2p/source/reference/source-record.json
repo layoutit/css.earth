@@ -1,0 +1,49 @@
+{
+  "reference": {
+    "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+    "originalUrl": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.2003.comet.encke.pdf",
+    "expectedBytes": 225591,
+    "expectedSha256": "b7b857e1b0fd29d9f14ba1fa40f1748ca801554f22a19358bb9b0fe93bcbcb27",
+    "section": "Table 3: SAM1, P=11.1 h, a=4.58 km, axial ratio 2.60; section 4",
+    "credit": "Harmon & Nolan (2005)"
+  },
+  "candidateSurvey": [
+    {
+      "source": "PDS Stooke and radar model releases; JPL radar publication index",
+      "url": "https://echo.jpl.nasa.gov/publications/pubs.html",
+      "disposition": "No downloadable original mesh for this nucleus identified. Use the cited numeric shape constraints; unresolved mesh access is not evidence of absence."
+    },
+    {
+      "source": "Original radar observations",
+      "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+      "disposition": "Shape constraints only. Delay-Doppler images are not optical surface maps and are not draped as texture."
+    },
+    {
+      "source": "Optical and infrared observations",
+      "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+      "disposition": "Constrain size and rotation; no resolved optical surface texture selected."
+    }
+  ],
+  "selectedModel": {
+    "schema": "cssearth-ellipsoid-parameters@1",
+    "source": "https://doi.org/10.1016/j.icarus.2005.01.012",
+    "sourceSection": "Table 3: SAM1, P=11.1 h, a=4.58 km, axial ratio 2.60; section 4",
+    "scaleConvention": "published-semiaxes",
+    "semiaxesKm": [
+      4.58,
+      1.7615384615384615,
+      1.7615384615384615
+    ],
+    "subdivisions": 4,
+    "periodHours": 11.1,
+    "axisDefinition": "X is the longest model axis; Z is the shortest. These axes do not define a measured present-day attitude.",
+    "qualification": "Smooth approximation of published numeric dimensions, not a recovered surface mesh. No mapped terrain, albedo or rotation phase is claimed.",
+    "alternatives": [
+      {
+        "axisRatioAB": 2.04,
+        "disposition": "Alternative considered in Table 3. The 2.60 case matches the infrared size more closely; no separate dataset is introduced."
+      }
+    ],
+    "assumptions": "SAM1 short-axis-mode solution. Semiminor axes are 4.58/2.60 km. The paper does not establish a unique shape, and its projected-area effective radius is not used as a volume-equivalent radius."
+  }
+}

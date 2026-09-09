@@ -16,7 +16,7 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 The [epoch record](../romulus/source/validation/epoch-state.json) binds the retained heliocentric state. Older ±30-day conic checks apply to the generic astronomy API, not the updated scene snapshot or Romulus orbit.
 
-[Source checks](../../../tests/objects/unit/sylvia/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/sylvia/source.test.mjs).
 
 ## Known problems
 

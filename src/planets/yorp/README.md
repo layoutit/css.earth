@@ -17,7 +17,7 @@ Independent 8,192 area-stratified surface samples in each direction give source-
 
 Source-scalar and decoded-atlas measurements are retained below. They are sampled preparation checks, not browser pixel-parity evidence.
 
-[Source checks](../../../tests/objects/unit/yorp/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/yorp/source.test.mjs).
 
 ## Known problems
 

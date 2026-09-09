@@ -14,7 +14,7 @@ An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equ
 
 The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
-[Source checks](../../../tests/objects/unit/ryugu/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/ryugu/source.test.mjs).
 
 ## Known problems
 

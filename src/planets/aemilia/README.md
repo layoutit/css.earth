@@ -2,7 +2,7 @@
 
 ## Sources
 
-Checked 2026-09-09. Selected **ISAM/SAGE model 102**, [original OBJ](http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102), SHA256`4d412ad36155b974bdc0d1d676d426449c60f883b18f64a7ee609bdc753d08c9`. The archive does not declare a source release date; 2026-09-09 is the retrieval date. ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model 102; Marciniak et al. (2018), A&A 610, A7; Bartczak and collaborators.
+Checked 2026-09-09. Selected **ISAM/SAGE model 102**, [original OBJ](http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102), pinned in the [input manifest](source/manifest.json). The archive does not declare a source release date; 2026-09-09 is the retrieval date. ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model 102; Marciniak et al. (2018), A&A 610, A7; Bartczak and collaborators.
 
 ## Evidence
 
@@ -10,7 +10,7 @@ The shared recipe targets at most 800 native PolyCSS `u` raster triangles with 1
 
 The source-preserving reducer uses `regularize: false`. The optional triangle-quality bias produced one retained face centroid 1366.159 m from the source, beyond the unchanged 1350 m transfer limit. Disabling that option keeps 800 closed faces and gives an independently checked trial maximum of 979.090 m over 8192 samples in each direction. The retained-centroid correspondence check is also enforced in the body test. Trial measurements are separate from final baked-product qualification; they are sampled distances rather than an exhaustive surface-error bound.
 
-[Source checks](../../../tests/objects/unit/aemilia/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/aemilia/source.test.mjs).
 
 ## Known problems
 
@@ -29,6 +29,12 @@ No registered global reflectance mosaic is supplied by these releases. The neutr
 <summary>Methods and source notes</summary>
 
 **Shape and scale**
+
+Original OBJ SHA-256:
+
+```text
+4d412ad36155b974bdc0d1d676d426449c60f883b18f64a7ee609bdc753d08c9
+```
 
 Photometry constrains the broad nonconvex shape; basin depths and fine relief are not directly resolved. A publication volume scale from the matching nominal SAGE pole family is applied uniformly; byte identity with the paper fit is not separately established. Diameter uncertainty does not bound local shape errors. No global reflectance mosaic, craters or regolith texture is inferred. The original body frame and connectivity are retained. Absolute display phase is arbitrary. Select ISAM SAGE model 102, the nonconvex pole 1 family from Marciniak et al. (2018). Its original OBJ pins target 159, method SAGE, pole (138.85848,65.93886) and period 24.478724 h. The published paper finds SAGE pole 1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table 4 explicitly supplies a 135 ±7 km volume-equivalent occultation diameter for SAGE pole 1; Table 7 TPM 137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole 2 remains possible. This source supersedes DAMIT 1869 convex 130 ±7 km in this package; the archive model and its raw 140-km size are retained as an excluded comparison.
 

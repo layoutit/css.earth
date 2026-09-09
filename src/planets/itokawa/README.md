@@ -11,7 +11,7 @@
 
 The controlled-camera holdouts reached maximum residuals of 0.00000842/0.00000876/0.00002017 px, testing agreement with archived Cartesian coordinates rather than absolute navigation. Source-mesh checks and independent image/flat/brightness anchors are retained below. Earlier Chrome 152 DPR 1/2 checks covered the then-selected lenses; that record does not establish qualification of the later three-image mosaic.
 
-[Source checks](../../../tests/objects/unit/itokawa/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/itokawa/source.test.mjs).
 
 ## Known problems
 

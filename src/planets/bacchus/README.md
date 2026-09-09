@@ -14,7 +14,7 @@ An independent nearest-triangle comparison uses 8,192 area-stratified points on 
 
 Source-scalar and decoded-atlas measurements are retained below. They are sampled preparation checks, not browser pixel-parity evidence.
 
-[Source checks](../../../tests/objects/unit/bacchus/source.test.mjs) define the package tests; this link is not a new test result.
+[Source test definitions](../../../tests/objects/unit/bacchus/source.test.mjs).
 
 ## Known problems
 
