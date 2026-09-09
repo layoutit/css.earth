@@ -1,3 +1,4 @@
+import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { worldRotationFromQuaternion, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, PreparedCssVolume, VolumeCameraPublication, VolumeLocalCamera, VolumeVector, PreparedVolumeCameraTransform } from './types.js';
@@ -17,6 +18,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   const roots: HTMLElement[] = [];
   const cameras: HTMLElement[] = [];
   const scenes: HTMLElement[] = [];
+  const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean }[] = [];
   const opticalCopies: { nodes: HTMLElement[][]; alpha: number[] }[] = [];
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
@@ -36,11 +38,14 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     opticalCopies.push(copies);
     for (const leaf of stack.leaves) {
       const textureUrl = options.resolveResource(leaf.texturePath);
+      const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels, shown: true };
+      boundedLeaves.push(bounded);
       // Coincident copies reuse the same prepared pixels and transform. They
       // increase optical length without intersecting another axis's planes.
       for (let copy = 0; copy < 3; copy++) {
         const node = createLeaf(document, leaf, textureUrl, copy);
         mesh.append(node);
+        bounded.nodes.push(node);
         if (copy > 0) copies.nodes[copy - 1]!.push(node);
       }
     }
@@ -52,6 +57,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   }
   let destroyed = false;
   let previousPerspective = '', previousOrigin = '', previousTransform = '';
+  let previousClipView = '';
   let previousOrientation: readonly number[] | null = null;
   const publish = ({ world, viewport }: VolumeCameraPublication) => {
     if (destroyed) return;
@@ -76,6 +82,17 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     if (cssTransform !== previousTransform) {
       for (const scene of scenes) scene.style.transform = cssTransform;
       previousTransform = cssTransform;
+    }
+    const clipView = `${cssTransform}|${perspective}|${perspectiveOrigin}|${viewport.widthPixels}|${viewport.heightPixels}`;
+    if (clipView !== previousClipView) {
+      previousClipView = clipView;
+      const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, viewport);
+      for (const leaf of boundedLeaves) {
+        const shown = preparedLeafMayContribute(leaf.bounds, planes);
+        if (shown === leaf.shown) continue;
+        leaf.shown = shown;
+        for (const node of leaf.nodes) node.style.visibility = shown ? '' : 'hidden';
+      }
     }
     // Optical length and stack mixing depend on direction, not observer
     // translation. Publish changed coefficients directly to their retained

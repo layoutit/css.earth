@@ -1,3 +1,4 @@
+import { compileLeafBounds } from '../preparation/leaf-bounds.js';
 import { readFileSync } from 'node:fs';
 import { afterEach, expect, test, vi } from 'vitest';
 import { bakeSlab } from '../../../preparation/volume/slices.js';
@@ -204,4 +205,24 @@ test('rotation keeps geometry and texture resources stable while publishing leaf
   expect(camera.style.perspectiveOrigin).toBe('calc(50% + 17px) calc(50% + -11px)');
   runtime.destroy(); runtime.destroy(); expect(host.children).toEqual([before]);
   runtime.publish(publication([1, 0, 0])); expect(document.count).toBe(count);
+});
+
+
+test('prepared offscreen bounds retire all optical copies and restore inherited visibility without remounting', () => {
+  const data = payload(3);
+  for (const stack of data.stacks) for (const leaf of stack.leaves) Object.assign(leaf, {
+    boundsCssPixels: compileLeafBounds(leaf.style.transform.slice(9,-1), parseFloat(leaf.style.width), parseFloat(leaf.style.height)),
+  });
+  const { runtime, meshes, document, resolver } = mount(data), nodes = meshes.flatMap(m => m.children), count = document.count;
+  const view = (position: VolumeVector) => ({ ...publication([0,0,1], position), viewport: { focalPixels:600, principalOffsetPixels:[17,-11] as const, widthPixels:1000, heightPixels:800 } });
+  runtime.publish(view([100,0,10]));
+  expect(nodes.every(n => n.style.visibility === 'hidden')).toBe(true);
+  for (const n of nodes) n.propertyWrites.length = 0;
+  runtime.publish(view([100,0,10]));
+  expect(nodes.flatMap(n => n.propertyWrites)).toEqual([]);
+  runtime.publish(view([0,0,10]));
+  expect(nodes.every(n => n.style.visibility === '')).toBe(true);
+  expect(meshes.flatMap(m => m.children)).toEqual(nodes);
+  expect(document.count).toBe(count);
+  expect(resolver).toHaveBeenCalledTimes(9);
 });

@@ -610,3 +610,50 @@ not substituted into the final run. The final capture uses the established
 bounded trace categories and hashes the worker catalog response as delivered.
 A separate disposable Sun backface probe changes visible pixels (up to 118
 channel levels at DPR 2) and is excluded from the product.
+
+### Prepared bounds for offscreen volume and sky images
+
+Both image compilers now emit conservative scene-coordinate bounds from the final
+PolyCSS rectangle, including its compiled edge extension. Runtime transports five
+camera clip planes into that coordinate frame and changes retained leaf visibility
+only when a complete bound leaves the guarded viewport. All optical copies share
+one decision. Re-entry restores inherited visibility, with no remount, image
+replacement, geometry derivation or CSS-variable publication. Legacy payloads or
+viewports without bounds/dimensions conservatively retain their images.
+
+The metadata-only recompile verifies all 462 image resources and exact equality
+of every existing geometry, optics, provenance and resource field. The 456 volume
+slabs and six sky images remain unchanged. Evidence is in
+`output/playwright/prepared-frustum-proof/`, including the original envelope,
+compiler receipt and browser comparisons.
+
+Across 22 static comparisons at DPR 1/2, content-layer savings range from 0 at the
+external galaxy view to 273 at an oblique internal view (884 to 611). Every DPR 1
+image is pixel-identical; DPR 2 differences are at most two channel levels. All
+1,374 image leaves remain mounted, including after return to the Sun. This is a
+content-layer census, not a GPU-memory measurement. Eighty-six focused renderer tests,
+280 universe preparation tests, both typechecks and the renderer build pass.
+
+The full DPR 2 native-wheel/drag route is retained under
+`output/world-context-zoom/prepared-frustum-dpr2/`, recorder
+`503739f8-9528-49f2-be76-ac95e7fc31e1`. It preserves document/world/input identities,
+one detailed scene, the final Sun selection and zero scripted custom-property
+writes. No application errors, recording-time HMR or trace data loss occurred.
+The new clip functions account for about 27.3 ms of sampled self CPU over the
+minute-long recording.
+
+**The frame target remains unmet.** Planetary-band p95 stays 33.4 ms, with 207/625
+intervals over 25 ms versus the preceding capture's 162/647. Whole-route maximum
+is 150 ms; a 172.3 ms GPU `ScheduleOverlays` event still involves eight overlays.
+Different host load and input delivery prevent attributing the timing difference
+to this change. The demonstrated gain is fewer retained offscreen content layers;
+this capture does not establish a smoother route.
+
+Chrome delivered 34 video observations out of timestamp order. The original
+arrival manifest and invalid arrival-order video/export remain preserved. The
+qualified `sun-milky-way-sun-chronological.mp4` orders all 3,041 original images by
+their capture timestamps; `video-chronological-frames.json` retains each arrival
+index. `synchronization-chronological.json` verifies all 3,041 encoded frames,
+-103 microseconds of recorder/trace drift and at most 1.503 ms of video PTS error.
+Use that chronological export for diagnosis. CDP observations still do not prove
+every display refresh.

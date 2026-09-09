@@ -1,3 +1,4 @@
+import { validatePreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedCssVolume, VolumeAxis, VolumeVector } from './types.js';
 import { validatePreparedCssSky } from '../sky/validation.js';
@@ -55,7 +56,8 @@ function validateStack(stack: Record<string, unknown>, resources: Set<string>, l
   }
   for (const leafInput of stack.leaves) {
     const leaf = record(leafInput, 'volume leaf');
-    exactKeys(leaf, ['id', 'centerUnits', 'texturePath', 'widthPx', 'heightPx', 'style'], 'volume leaf');
+    exactKeys(leaf, ['id', 'centerUnits', 'texturePath', 'widthPx', 'heightPx', 'style', ...(Object.hasOwn(leaf, 'boundsCssPixels') ? ['boundsCssPixels'] : [])], 'volume leaf');
+    if (leaf.boundsCssPixels !== undefined) validatePreparedLeafBounds(leaf.boundsCssPixels);
     if (typeof leaf.id !== 'string' || !leaf.id || leafIds.has(leaf.id) || typeof leaf.texturePath !== 'string' ||
         !resources.has(leaf.texturePath) || !positiveInteger(leaf.widthPx) || !positiveInteger(leaf.heightPx) ||
         !finiteVector(leaf.centerUnits)) throw new TypeError('Prepared CSS volume leaf metadata is invalid.');

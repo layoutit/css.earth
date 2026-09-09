@@ -1,4 +1,5 @@
 /** Actual PolyCSS preparation of static image geometry; no runtime image or mesh generation. */
+import { compileLeafBounds } from './leaf-bounds.js';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Axis, Vector3, VolumeRecipe } from '../../../preparation/volume/config.js';
@@ -36,6 +37,7 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
     if (!geometry) throw new TypeError(`PolyCSS could not prepare volume leaf ${quad.id}.`);
     return [{ axis: quad.axis, id: quad.id, centerUnits: quad.center, texturePath: quad.texturePath,
       widthPx: quad.widthPx, heightPx: quad.heightPx,
+      boundsCssPixels: compileLeafBounds(geometry.matrix, geometry.leafWidth, geometry.leafHeight),
       style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`,
         transform: `matrix3d(${geometry.matrix})`,
         backgroundSize: geometry.backgroundSize.map(value => `${value}px`).join(' '),
