@@ -4,6 +4,7 @@ import sharp from "sharp";
 import { readCoraltempAnomaly } from "./sst-anomaly.mjs";
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mjs";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.mjs";
+import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.mjs";
 import { textureTintFactors } from "@layoutit/polycss";
 import { cutInteriorPoles } from "./interior-poles.mjs";
 import { readMantleTomography, tomographyLegend } from "./tomography.mjs";
@@ -38,6 +39,10 @@ if (mode !== 'materials') {
         const decoded = await preparePagedSurfaceMap({ config, sourceDirectory, map });
         input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
         await writeElevationLegend(map.scientific, output(map.scientific.legend.image));
+      } else if (map.scientific.kind === "black-marble-radiance") {
+        const decoded = await preparePagedSurfaceMap({ config, sourceDirectory, map });
+        input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
+        await writeNightLightsLegend(map.scientific, output(map.scientific.legend.image));
       } else if (map.scientific.kind === "gibs-mur-imagery") {
         input = await verifyPreparedMurImage(sourceDirectory, map.scientific);
         await writeMurLegend(sourceDirectory, output("earth-enso-legend.png"));
@@ -46,8 +51,9 @@ if (mode !== 'materials') {
     inputs.set(map.name, input);
     if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,kernel:map.scientific?"nearest":undefined,webp:map.webp});
   }
-  if (mode !== 'thumbnails' && mode !== 'maps') await prepareInteriorAssets();
-  for (const map of config.surface.maps) await prepareLensThumbnail(inputs.get(map.name),map.thumbnail,focusByMap.get(map.name)?.longitude ?? null);
+  if (mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
+  else if (mode !== 'maps') await prepareInteriorAssets();
+  for (const map of config.surface.maps) await prepareLensThumbnail(inputs.get(map.name),map.thumbnail,focusByMap.get(map.name)?.longitude ?? null,map.thumbnailRegion);
 }
 if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps') await prepareMaterialBanks();
 return { assets: [...produced].sort() };
@@ -471,20 +477,21 @@ function applyLinearTint(channel, factor) {
   return Math.max(0, Math.min(255, Math.round(encoded * 255)));
 }
 
-async function prepareInteriorAssets({ exterior = true } = {}) {
+async function prepareInteriorAssets({ exterior = true, thumbnailsOnly = false } = {}) {
   const interior = JSON.parse(await readFile(
     source(config.interiorPath),
     "utf8",
   ));
   validateInteriorSource(interior);
   const tomography = await readMantleTomography(sourceDirectory, interior, config);
-  if (tomography) {
+  if (tomography && !thumbnailsOnly) {
     const legend = tomographyLegend(tomography.recipe);
     await sharp(legend.data, { raw: legend }).png().toFile(output(tomography.recipe.legend.image));
   }
   if (exterior) await prepareInteriorOuterPoles();
   for (const bank of [{ name: 'interior', tomography: null }, ...(tomography ? [{ name: 'tomography', tomography }] : [])]) {
   const tomography = bank.tomography;
+  if (!thumbnailsOnly) {
   for (const layer of interior.layers.slice(1)) {
     if (tomography && layer.id !== 'mantle' && !tomography.recipe.schematicColors?.[layer.id]) continue;
     for (const density of [1, 2]) {
@@ -514,6 +521,7 @@ async function prepareInteriorAssets({ exterior = true } = {}) {
     }).webp(tomography ? { ...tomography.recipe.webp, alphaQuality: 100 } : { lossless: true }).toFile(output(
       `${config.namespace}-${bank.name}-section${suffix}.webp`,
     ));
+  }
   }
   const thumbnail = renderInteriorThumbnail(interior, 96, tomography);
   await sharp(thumbnail, {
@@ -675,6 +683,9 @@ function renderInteriorThumbnail(interior, size, tomography) {
   const rgba = Buffer.alloc(size * size * 4);
   const center = (size - 1) / 2;
   const radiusPixels = size * 0.46;
+  // A wider section makes the data legible in the 14 px list icon without
+  // changing the globe's cut geometry or the source layer proportions.
+  const halfCutawayDegrees = (interior.presentation?.thumbnailCutawayDegrees ?? 90) / 2;
   for (let y = 0; y < size; y += 1) {
     for (let x = 0; x < size; x += 1) {
       const dx = (x - center) / radiusPixels;
@@ -682,7 +693,7 @@ function renderInteriorThumbnail(interior, size, tomography) {
       const radius = Math.hypot(dx, dy);
       if (radius > 1) continue;
       const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-      const inCutaway = angle >= -45 && angle <= 45;
+      const inCutaway = angle >= -halfCutawayDegrees && angle <= halfCutawayDegrees;
       const layer = interior.layers.find(({ innerRadiusKm, outerRadiusKm }) =>
         radius * interior[config.interiorRadiusKey] >= innerRadiusKm &&
         radius * interior[config.interiorRadiusKey] <= outerRadiusKm) ??
@@ -708,14 +719,22 @@ function hexRgb(value) {
   ));
 }
 
-async function prepareLensThumbnail(input, filename, longitude = null) {
+async function prepareLensThumbnail(input, filename, longitude = null, region = {}) {
   const metadata = await sharp(input).metadata();
-  const cropSize = Math.round(metadata.height / 2);
+  const centerLongitude = region.longitude ?? longitude ?? 0;
+  const centerLatitude = region.latitude ?? 0;
+  const spanDegrees = region.spanDegrees ?? 90;
+  if (!Number.isFinite(centerLongitude) || Math.abs(centerLongitude) > 180 ||
+      !Number.isFinite(centerLatitude) || Math.abs(centerLatitude) > 90 ||
+      !Number.isFinite(spanDegrees) || spanDegrees <= 0 || spanDegrees > 180) {
+    throw new TypeError('Invalid dataset thumbnail region.');
+  }
+  const cropSize = Math.max(1, Math.round(metadata.height * spanDegrees / 180));
   const size = 96;
   await sharp(input)
     .extract({
-      left: longitude === null ? Math.round((metadata.width - cropSize) / 2) : Math.max(0, Math.min(metadata.width - cropSize, Math.round((longitude + 180) / 360 * metadata.width - cropSize / 2))),
-      top: Math.round((metadata.height - cropSize) / 2),
+      left: Math.max(0, Math.min(metadata.width - cropSize, Math.round((centerLongitude + 180) / 360 * metadata.width - cropSize / 2))),
+      top: Math.max(0, Math.min(metadata.height - cropSize, Math.round((90 - centerLatitude) / 180 * metadata.height - cropSize / 2))),
       width: cropSize,
       height: cropSize,
     })
@@ -743,6 +762,7 @@ export async function preparePagedSurfaceMap({ config, sourceDirectory, map, ker
   const width = config.surface.width;
   const height = config.surface.height;
   if (map.scientific?.kind === "gebco-elevation") return prepareElevationMap({ sourceDirectory, map, width, height });
+  if (map.scientific?.kind === "black-marble-radiance") return prepareNightLightsMap({ sourceDirectory, map, width, height });
   const { data, info } = await sharp(Buffer.isBuffer(map.path) ? map.path : resolve(sourceDirectory, map.path))
     .resize(width, height, { fit: "fill", kernel })
     .removeAlpha()
