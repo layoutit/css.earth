@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0ec740275c6d0b7b0bfe21be86485df17e9d05c9787d8357072f4c514daaf2e3"
+    "sha256": "ea1a4d9e3467f505e392b77418e57c7ef4654a043fe29fceb98364261625da9b"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4f4582ffd5c49cda0130e8d8db319ed94e675c9b9cde3c758dd3947579c16bc7",
+      "sha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -120,6 +120,31 @@
                     "filter": "GREEN"
                   },
                   "coverageInsetPixels": 5
+                },
+                {
+                  "id": "202560500",
+                  "path": "observations/0202560500rcal_gre.fit",
+                  "labelPath": "observations/0202560500rcal_gre.xml",
+                  "encoding": "fits-ssi-iof",
+                  "cameraCatalog": {
+                    "path": "reference/243idaimg.tab",
+                    "labelPath": "reference/243idaimg.xml",
+                    "imageNumber": 202560500,
+                    "longitudeDirection": "east",
+                    "pixelOrigin": "one-based",
+                    "instrumentPath": "reference/gll36001.ti"
+                  },
+                  "quality": {
+                    "rawPath": "observations/i0500.fit",
+                    "rawLabelPath": "observations/i0500.lbl",
+                    "badDataPath": "observations/idabad.tab",
+                    "badDataLabelPath": "observations/idabad.lbl",
+                    "imageId": "i0500",
+                    "target": "IDA",
+                    "startTime": "1993-08-28T16:29:48.324Z",
+                    "filter": "GREEN"
+                  },
+                  "coverageInsetPixels": 5
                 }
               ],
               "photometry": {
@@ -134,8 +159,8 @@
                 "maximumLevel": 1
               },
               "metadata": {
-                "label": "Calibrated image",
-                "coverage": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid."
+                "label": "SSI reflectance",
+                "coverage": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
               }
             }
           ]
@@ -201,7 +226,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "95d190b7bf8b232d723ec314a959cc6e922e073b84abd4d79e7c0956e53cd718",
+      "sha256": "27f63ed0b55837418962dfae00ef4e946d90b2dd418678df85057c3fb408f31b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -225,7 +250,7 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Ida is an elongated, heavily cratered asteroid in the Koronis family. Galileo flew past in 1993 and discovered its small moon Dactyl. The measured shape and Galileo mosaic reveal Ida’s uneven outline and impact-scarred surface.",
+          "introduction": "Galileo’s 1993 flyby revealed Ida’s cratered surface and its tiny moon Dactyl.",
           "facts": [
             {
               "id": "radius",
@@ -279,14 +304,14 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI · processed image mosaic",
+              "detail": "Galileo SSI",
               "summary": "Photographed shadows remain and detail varies across the mosaic. Brightness is not calibrated reflectance; the grid marks gaps."
             },
             {
               "id": "calibrated",
-              "label": "Calibrated image",
-              "description": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
-              "title": "SSI green-filter reflectance",
+              "label": "SSI reflectance",
+              "description": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+              "title": "Calibrated Galileo photographs",
               "thumbnail": "/scenes/ida/ida-calibrated-thumbnail.webp",
               "surface": "ida-calibrated-surface@2x.webp",
               "poles": "ida-calibrated-surface@2x.webp",
@@ -295,8 +320,20 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI · I/F",
-              "summary": "Calibrated reflectance retains the original lighting, not surface albedo. The grid marks bad pixels, uncertain edges and gaps."
+              "detail": "Galileo SSI",
+              "summary": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+              "facts": [
+                {
+                  "id": "images",
+                  "label": "Images",
+                  "value": "2"
+                },
+                {
+                  "id": "image-scale",
+                  "label": "Image scale",
+                  "value": "111–170 m/pixel"
+                }
+              ]
             },
             {
               "id": "elevation",
@@ -324,7 +361,7 @@
                 "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab",
                 "image": "/scenes/ida/ida-elevation-legend.webp"
               },
-              "detail": "Shape-derived height",
+              "detail": "PDS",
               "summary": "Height relative to a 16 km sphere, from the shape model. Colors include Ida's broad form; the outline is simplified."
             }
           ]
@@ -421,7 +458,7 @@
       "sha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7",
       "bytes": 3179520,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -465,7 +502,7 @@
       "sha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df",
       "bytes": 527072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -496,7 +533,7 @@
       "sha256": "172489ebbefee3c7c1a1630d7c72fc7269b7de5c38459eedc2450e5c2dbd0d8f",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -523,7 +560,7 @@
       "sha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed",
       "bytes": 12912,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -550,7 +587,7 @@
       "sha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a",
       "bytes": 4320,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -577,7 +614,7 @@
       "sha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13",
       "bytes": 8830,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -604,7 +641,7 @@
       "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "bytes": 9964,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -631,7 +668,7 @@
       "sha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -658,7 +695,7 @@
       "sha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -685,7 +722,7 @@
       "sha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47",
       "bytes": 23270,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -712,7 +749,7 @@
       "sha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441",
       "bytes": 9760,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -728,6 +765,116 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "ida-0202560500rcal_gre-fit",
+      "path": "observations/0202560500rcal_gre.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "width": 800,
+      "height": 800,
+      "sha256": "1ff454dd43d90c53bb0523dd258f7870e0d1f9cf2d5de41b6002fa6f2bd59886",
+      "bytes": 2563200,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/0202560500rcal_gre.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.fit",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-0202560500rcal_gre-xml",
+      "path": "observations/0202560500rcal_gre.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.xml",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df",
+      "bytes": 12909,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/0202560500rcal_gre.xml",
+        "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.xml",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-i0500-fit",
+      "path": "observations/i0500.fit",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1",
+      "bytes": 645120,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/i0500.fit",
+        "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.fit",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-i0500-lbl",
+      "path": "observations/i0500.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c",
+      "bytes": 10480,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/i0500.lbl",
+        "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.lbl",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Pinned source label, source documentation or authored package input.",
       "id": "authored-document:content/object.json",
@@ -737,10 +884,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "95d190b7bf8b232d723ec314a959cc6e922e073b84abd4d79e7c0956e53cd718",
-      "bytes": 8501,
+      "sha256": "27f63ed0b55837418962dfae00ef4e946d90b2dd418678df85057c3fb408f31b",
+      "bytes": 8492,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -785,13 +932,13 @@
           "url": "/scenes/ida/ida-normal-thumbnail.webp",
           "bytes": 3264,
           "sha256": "b895e1c40342f4cf5596adea903f2a73ac217a8c463707443d9e8ceabfaadfaf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ida/ida-normal-surface@2x.webp",
           "bytes": 1050172,
           "sha256": "d1f446ce067526b98d3bed50aca3f5ee68fcce6b52733c133a11426ea596abe2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -823,32 +970,32 @@
           "url": "/scenes/ida/ida-elevation-thumbnail.webp",
           "bytes": 5744,
           "sha256": "8599e109b2ab1d6e7e2311c0292eb7dbc229031eb7a0a76a8d0521f7d3181158",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ida/ida-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ida/ida-elevation-surface@2x.webp",
           "bytes": 327638,
           "sha256": "424be56e7d03996a3d92386268b158a50735c842bcf6817cd80d9266364a2736",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
       "id": "calibrated",
-      "label": "Calibrated image",
+      "label": "SSI reflectance",
       "recipe": "terrestrial",
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid."
+        "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
       ],
       "lensIds": [
         "calibrated"
@@ -869,20 +1016,24 @@
         "ida-i1278-lbl",
         "ida-idabad-tab",
         "ida-idabad-lbl",
+        "ida-0202560500rcal_gre-fit",
+        "ida-0202560500rcal_gre-xml",
+        "ida-i0500-fit",
+        "ida-i0500-lbl",
         "ida-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/ida/ida-calibrated-thumbnail.webp",
-          "bytes": 1826,
-          "sha256": "e8f5d4b9b3db51da8cbe887e825a8b7ff0844b18dbf0ff614827b81951d64ae5",
-          "verification": "asset-manifest-pin"
+          "bytes": 1880,
+          "sha256": "cf9fafd617363f81d1061a653b1ae4f45e1ef52e4f4402b4d36415d0ed000002",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ida/ida-calibrated-surface@2x.webp",
-          "bytes": 284372,
-          "sha256": "9bc061bf723f77cc0fb80f12c60a3f295c5fa8bdf0c11a3dc9874e21b1f26fb6",
-          "verification": "asset-manifest-pin"
+          "bytes": 284728,
+          "sha256": "57da5425aca952a853ecd56d2a8cb47d59052f20c2192876f3dfa8a1531404f5",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -905,8 +1056,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4134,
-          "sha256": "f2757ed7e6a0277f0283f5c883f72ec9cfb1966e94e341358ac8c83ab282a186",
+          "bytes": 3987,
+          "sha256": "b1dafe026339f5427509acd5c1da6211a3ea36f17d4b0fa258e905bf6363d52b",
           "verification": "bytes-verified"
         }
       ],
@@ -938,7 +1089,7 @@
     },
     {
       "id": "preview:calibrated",
-      "label": "Calibrated image preview",
+      "label": "SSI reflectance preview",
       "recipe": "terrestrial",
       "selector": "/raster/mosaics/0",
       "recipeDependencies": [
@@ -954,8 +1105,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/calibrated.webp",
-          "bytes": 6822,
-          "sha256": "d2ab166e3948b5afb706464fe05e41b00bb5cdf20bcc783130eb4dec3c7d75f2",
+          "bytes": 6858,
+          "sha256": "73c75c7067058b9a8acbed6174bf347ece399c2231af899bc51ed011418e4103",
           "verification": "bytes-verified"
         }
       ]

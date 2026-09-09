@@ -22,7 +22,7 @@
       "id": "lutetia-shape",
       "path": "shape/lutetia_025k_cart.wrl",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
-      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
+      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Beno\u00eet Carry",
       "license": "Public mission scientific data; retain the dataset citation and source notices.",
       "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -205,6 +205,48 @@
       ],
       "expectedBytes": 5070,
       "expectedSha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac"
+    },
+    {
+      "id": "lutetia-n20100710t154135529id4df22-camera",
+      "path": "observations/n20100710t154135529id4df22-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 5104,
+      "expectedSha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde"
+    },
+    {
+      "id": "lutetia-n20100710t154135529id4df22-img",
+      "path": "observations/n20100710t154135529id4df22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154135529id4df22.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 37775872,
+      "expectedSha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1"
+    },
+    {
+      "id": "lutetia-n20100710t154135529id4df22-camera-json",
+      "path": "preparation/n20100710t154135529id4df22-camera.json",
+      "origin": "Authored source-bound camera profile",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 1260,
+      "expectedSha256": "2cff0cedc5f8f5aa083d50925bc88645b2c24975f022485ed613a202faa84b1c"
     }
   ],
   "generatedIntermediates": [
@@ -212,7 +254,7 @@
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
-      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
+      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Beno\u00eet Carry",
       "license": "Public mission scientific data; retain the dataset citation and source notices.",
       "consumers": [
         "navigation"
@@ -238,14 +280,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 10231,
-      "expectedSha256": "99942f57c9f26d8d813aa2d121ce27ad94d752dc33bb5fc340afb83c199f38e8"
+      "expectedBytes": 10202,
+      "expectedSha256": "9a838ec9bb76b3e525471c60a52c5077914d5c23593620bb152a53292aa9ad23"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 2822,
-      "expectedSha256": "69db1ad3e533ad0cc456d970ed03ca0dab9e119e8ef9750b98b2a3803ab0c277"
+      "expectedBytes": 3193,
+      "expectedSha256": "36dc0e5039804978b7f8356925ea78c011e96d6f60a60d2c3eea7abbea136d31"
     },
     {
       "path": "preparation/navigation.json",
@@ -262,8 +304,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 4407,
-      "expectedSha256": "f8fa382b781f86ec40f30e1f70c8c9b8f36ca5395bc6a44a006f3d822081e913"
+      "expectedBytes": 4867,
+      "expectedSha256": "0e289d02429797207c6067110d1ca4e4390b75cb29ebac48bee9c57ce0703425"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

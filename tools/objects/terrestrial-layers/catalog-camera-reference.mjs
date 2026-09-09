@@ -6,10 +6,13 @@ import {createSourceManifest} from '../../../src/platform/source-manifest.mjs';
 import {loadCameraShape,resolveCatalogCamera,controlledShapeCamera} from './shape-camera-mosaic.mjs';
 import {readFitsPrimary} from '../static-surface/fits-map.mjs';
 
-const [sourceArg,outputArg]=process.argv.slice(2),source=resolve(sourceArg);
+const [sourceArg,outputArg,frameId]=process.argv.slice(2),source=resolve(sourceArg);
 const config=JSON.parse(await readFile(resolve(source,'preparation/terrestrial.json')));
 await (await createSourceManifest({planetId:config.namespace,planetName:config.displayName,sourceRoot:source})).verify();
-const frame=await resolveCatalogCamera(source,config.raster.mosaics.find(lens=>lens.id==='calibrated').frames[0]);
+const frames=config.raster.mosaics.find(lens=>lens.id==='calibrated').frames;
+const selected=frameId===undefined?frames[0]:frames.find(frame=>frame.id===frameId);
+if(!selected)throw new Error('Unknown registered observation frame.');
+const frame=await resolveCatalogCamera(source,selected);
 const camera=controlledShapeCamera(frame),mesh=await loadCameraShape(source,config.geometry.radialTerrain);
 const manifest=JSON.parse(await readFile(resolve(source,'manifest.json'))),entry=manifest.inputs.find(entry=>entry.lensId==='normal');
 const fits=readFitsPrimary(await readFile(resolve(source,entry.path)));

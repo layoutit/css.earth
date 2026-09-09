@@ -21,7 +21,7 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Lutetia is a roughly 100-kilometer main-belt asteroid visited by Rosetta in July 2010. Its northern craters and large depressions were reconstructed from OSIRIS images; the unvisited side is constrained more coarsely by Earth-based observations. Explore that published shape and its radial heights.",
+    "introduction": "Rosetta photographed Lutetia in 2010. Craters and ridges cover this irregular, roughly 100 km asteroid.",
     "facts": [
       {
         "id": "radius",
@@ -64,10 +64,10 @@
     "controls": [
       {
         "id": "osiris",
-        "label": "OSIRIS reflectance",
-        "detail": "Spacecraft observation",
-        "description": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
-        "title": "OSIRIS orange-filter reflectance",
+        "label": "OSIRIS",
+        "detail": "OSIRIS",
+        "description": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
+        "title": "OSIRIS photographs",
         "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
         "surface": "lutetia-osiris-surface@2x.webp",
         "poles": "lutetia-osiris-surface@2x.webp",
@@ -75,7 +75,19 @@
           "id": "lutetia-observations-n20100710t154047674id4df22-img",
           "path": "../manifest.json"
         },
-        "summary": "Orange-filter reflectance is corrected approximately for lighting. Shadows remain; the grid marks gaps and rejected coverage."
+        "summary": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
+        "facts": [
+          {
+            "id": "images",
+            "label": "Images",
+            "value": "2"
+          },
+          {
+            "id": "image-scale",
+            "label": "Image scale",
+            "value": "78–88 m/pixel"
+          }
+        ]
       },
       {
         "id": "shape",
@@ -90,7 +102,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape",
+        "detail": "PDS",
         "summary": "Rosetta shape detail in the north, coarser estimates elsewhere. Source seams remain; no imagery is mapped."
       },
       {
@@ -119,7 +131,7 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.lbl",
           "image": "/scenes/lutetia/lutetia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height",
+        "detail": "PDS",
         "summary": "Height relative to a 49 km sphere. Rosetta resolved the north; the far side is coarser, with source defects."
       }
     ]

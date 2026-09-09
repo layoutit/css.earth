@@ -21,7 +21,7 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Gaspra is a small, angular asteroid photographed by Galileo in October 1991. Its ridges, shallow depressions and craters record a history of impacts. Only part of its surface was imaged in detail.",
+    "introduction": "Galileo photographed Gaspra in 1991, making it the first asteroid visited by a spacecraft.",
     "facts": [
       {
         "id": "radius",
@@ -75,14 +75,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Galileo SSI · 1991 flyby",
+        "detail": "Galileo SSI",
         "summary": "Photographed shadows and seams remain after mapping the images onto the shape. The gray grid marks poor or missing data."
       },
       {
         "id": "calibrated",
-        "label": "Calibrated image",
-        "description": "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
-        "title": "SSI clear-filter reflectance",
+        "label": "SSI reflectance",
+        "description": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+        "title": "Calibrated Galileo photographs",
         "thumbnail": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
         "surface": "gaspra-calibrated-surface@2x.webp",
         "poles": "gaspra-calibrated-surface@2x.webp",
@@ -91,8 +91,20 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Galileo SSI · I/F",
-        "summary": "Calibrated reflectance retains the original lighting, not surface albedo. The grid marks bad pixels, uncertain edges and gaps."
+        "detail": "Galileo SSI",
+        "summary": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels.",
+        "facts": [
+          {
+            "id": "images",
+            "label": "Images",
+            "value": "2"
+          },
+          {
+            "id": "image-scale",
+            "label": "Image scale",
+            "value": "54 m/pixel"
+          }
+        ]
       },
       {
         "id": "elevation",
@@ -120,7 +132,7 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab",
           "image": "/scenes/gaspra/gaspra-elevation-legend.webp"
         },
-        "detail": "Shape-derived height",
+        "detail": "PDS",
         "summary": "Height relative to a 6.1 km sphere, including Gaspra's broad shape. The unseen side is less certain."
       }
     ]
