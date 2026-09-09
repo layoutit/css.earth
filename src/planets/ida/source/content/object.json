@@ -66,7 +66,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting.",
-        "title": "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting.",
+        "title": "SSI monochrome mosaic",
         "thumbnail": "/scenes/ida/ida-normal-thumbnail.webp",
         "surface": "ida-normal-surface@2x.webp",
         "poles": "ida-normal-surface@2x.webp",
@@ -76,13 +76,13 @@
         },
         "falseColor": false,
         "detail": "Galileo SSI · processed image mosaic",
-        "summary": "Galileo mosaic with uneven detail and shadows. It is not calibrated reflectance; gray grid: map gaps."
+        "summary": "Photographed shadows remain and detail varies across the mosaic. Brightness is not calibrated reflectance; the grid marks gaps."
       },
       {
         "id": "calibrated",
         "label": "Calibrated image",
         "description": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
-        "title": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+        "title": "SSI green-filter reflectance",
         "thumbnail": "/scenes/ida/ida-calibrated-thumbnail.webp",
         "surface": "ida-calibrated-surface@2x.webp",
         "poles": "ida-calibrated-surface@2x.webp",
@@ -91,13 +91,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Galileo SSI · I/F"
+        "detail": "Galileo SSI · I/F",
+        "summary": "Calibrated reflectance retains the original lighting, not surface albedo. The grid marks bad pixels, uncertain edges and gaps."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
-        "title": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/ida/ida-elevation-thumbnail.webp",
         "surface": "ida-elevation-surface@2x.webp",
         "poles": "ida-elevation-surface@2x.webp",

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1117807041f2ff59c910d9cc1acaecf9ca1682d39cb6e17347253e194fc485bf"
+    "sha256": "a756594f1a38c22eefcf6fc74835b180627f56cd1e6c9003352eeec5756a0ad6"
   },
   "id": "callisto",
   "properties": {
@@ -58,6 +58,11 @@
               "id": "normal",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "enhanced",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -78,12 +83,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "d437635e5b0f16f5c8f10458f89becb380616a97805a1e7c1ba0b088b408983e"
+          "sha256": "8756e5b7371fa3533f55691b2267c89eb20472a2761280bd31b2693e5b21812a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5cfa9f5a75e3c76285d682507176acdda8a1291dafab3d3417d8ce61d8011c9c"
+          "sha256": "dbbe045618046cebabfbd61ac26cfbd1bfe0e6bd15c15ff70cb5efbbd0c0c4aa"
         },
         {
           "id": "title",
@@ -98,7 +103,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a210414d15be18834f204fd9fcedfa8c71485b6b83f0d0af136b114e1c2767fb"
+          "sha256": "a53d8515ad38074df1e8b91b4ecd5239d9e3de3817cf802dff2c22d77bef8bec"
         }
       ]
     }

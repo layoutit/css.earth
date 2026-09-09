@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6cbdbaf4b1d8ce51bbdca36c2b8a3b21698d16eef9a8724293aa5acc73e09b4f"
+    "sha256": "79935338aee12351517db1571798c80afe3c6f9cb3fb757ed64d9208c0e8b2d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f4c66c81f922934bd1d94898e6ea63b5fa06d33b5985391dd1979cbe36eb8769",
+      "sha256": "59bc50d4d8e791303287442207f0e1dff48d70e9ee2e2d2d8954d812e8ecaaed",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -246,7 +246,7 @@
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 2000,
-              "maximumErrorMeters": 85
+              "maximumErrorMeters": 100
             },
             "primitive": "u",
             "sourceLighting": {
@@ -294,8 +294,8 @@
               "depthMeters": 3150,
               "faceBudget": 3200,
               "reduction": {
-                "targetFaces": 2000,
-                "maximumErrorMeters": 40
+                "targetFaces": 1000,
+                "maximumErrorMeters": 85
               }
             }
           },
@@ -324,8 +324,8 @@
               "atlasColumns": 16,
               "simplification": {
                 "method": "source-meshoptimizer",
-                "targetFaces": 1400,
-                "maximumErrorMeters": 85
+                "targetFaces": 800,
+                "maximumErrorMeters": 110
               },
               "primitive": "u",
               "sourceLighting": {
@@ -931,14 +931,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-19p/comet-19p-usgs-thumbnail.webp",
-          "bytes": 1126,
-          "sha256": "6fb1913830626c24c2509b96a751709ac44f222ad97f88161ea3a32b00ddc43b",
+          "bytes": 1112,
+          "sha256": "8d369fa65143b27eec4ae73c2229caef847361cb74b38adad954e5039d1c639c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-usgs-surface@2x.webp",
-          "bytes": 221018,
-          "sha256": "666b4e35c0d880d27434e56f42b92fd2c110b63ede62ad38a429d1e6b4cafe90",
+          "bytes": 136448,
+          "sha256": "5b6f1d989a60b12a7217ea09c2491399dd8229b7f654c8b6fa1c07268f569a9d",
           "verification": "bytes-verified"
         }
       ],
@@ -974,14 +974,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-19p/comet-19p-dlr-thumbnail.webp",
-          "bytes": 986,
-          "sha256": "dc356e4e31653751a445ee6ea249a0c5f93adca91d2d4da21a840211d644ce47",
+          "bytes": 958,
+          "sha256": "c864e0d89a069a381088cb4778dcb00cacc5ddcb84418a8cde1c2f5f9202761d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-dlr-surface@2x.webp",
-          "bytes": 314062,
-          "sha256": "4800dcbec04fe88516958004aa020ac7712a7b1ec3519cfc3653d1e3116cccf7",
+          "bytes": 239172,
+          "sha256": "400f3a676c5d4f799b318245ca2404eaf81527c24490897ce052d72bce443d8b",
           "verification": "bytes-verified"
         }
       ],
@@ -1012,8 +1012,8 @@
       "outputs": [
         {
           "url": "/scenes/comet-19p/comet-19p-height-thumbnail.webp",
-          "bytes": 1602,
-          "sha256": "bde3cf8688e97e3dc9d931538684c4001fa8eac13443c0638e6aa5a0ced2f6c4",
+          "bytes": 1610,
+          "sha256": "8ff789867ee6aec32e0678f094da4181a4146516d401533de4deba9a5e3e7a92",
           "verification": "bytes-verified"
         },
         {
@@ -1024,8 +1024,8 @@
         },
         {
           "url": "/scenes/comet-19p/comet-19p-height-surface@2x.webp",
-          "bytes": 363356,
-          "sha256": "86d1a0d6fc58be24ca8475c969c5bbcd6d8b5c7299d014a4112e1fae640e1d72",
+          "bytes": 214782,
+          "sha256": "8fcb7ca3f64994ce066e54a0f75e6bb5f296373176edae8da928ab0cab262f56",
           "verification": "bytes-verified"
         }
       ],
@@ -1058,7 +1058,7 @@
         {
           "url": "/scenes/comet-19p/comet-19p-difference-thumbnail.webp",
           "bytes": 1544,
-          "sha256": "bfe3151aa1d832da3da520129f348f751279d92c4deb1094d4df752daf613ea4",
+          "sha256": "6bb076a2d0a892eec5d7be69b0ffdd4e8b7cec1824c211fdaa19b4bf53f374d9",
           "verification": "bytes-verified"
         },
         {
@@ -1069,8 +1069,8 @@
         },
         {
           "url": "/scenes/comet-19p/comet-19p-difference-surface@2x.webp",
-          "bytes": 560934,
-          "sha256": "f23f1d0563a7aec9764b0c948dc69ffc5c27f180ec5b0573e3fdef82d1a130c7",
+          "bytes": 324392,
+          "sha256": "b20f27e952938a1d989d858d4902d3af6c5895717b1e345972c6ab9ac5347be6",
           "verification": "bytes-verified"
         }
       ],
@@ -1105,14 +1105,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
-          "bytes": 1006,
-          "sha256": "d0ccabb0382324ba313af28a8d2caca0ff02af892ab593bee200c3cc66f3baf6",
+          "bytes": 1068,
+          "sha256": "0bb3e78b42695632c669bc7029fed00ca923d874971ffe662293b93d202eb120",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
-          "bytes": 220302,
-          "sha256": "09f651a2b20e49e0929c1a422855218ba8072a87e4d6f27ec0032cf06eb754f0",
+          "bytes": 138054,
+          "sha256": "de05a96041fa15b33f56bdb382b53b0252b9fefd711fd649ac0c07a8f3a673c2",
           "verification": "bytes-verified"
         }
       ],

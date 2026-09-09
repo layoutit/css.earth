@@ -78,8 +78,33 @@ export function scienceMapPoint(longitude, latitude, grid) {
   return [wrapped * radians * radius, latitude * radians * radius];
 }
 
+export function validateScienceQualityMasks(lens) {
+  if(lens.qualityMasks===undefined)return;
+  if(!['isis3','geotiff'].includes(lens.format)||lens.sampling!=='nearest'||lens.additionalGrids||
+      !Array.isArray(lens.qualityMasks)||!lens.qualityMasks.length||lens.qualityMasks.some(mask=>
+        !['isis3','geotiff'].includes(mask.format)||mask.sampling!=='nearest'||mask.qualityMasks||mask.additionalGrids||mask.valueTransform||
+        typeof mask.path!=='string'||!mask.path||mask.path.startsWith('/')||mask.path.split('/').includes('..')||
+        !mask.grid||![mask.grid.width,mask.grid.height].every(n=>Number.isSafeInteger(n)&&n>0)||
+        !Number.isFinite(mask.minimum)&&!Number.isFinite(mask.maximum)||
+        mask.minimum!==undefined&&!Number.isFinite(mask.minimum)||mask.maximum!==undefined&&!Number.isFinite(mask.maximum)||
+        mask.minimum!==undefined&&mask.maximum!==undefined&&mask.minimum>mask.maximum))
+    throw new TypeError('Scientific quality masks require bounded numeric nearest-neighbor grids and nearest source sampling.');
+}
+
 export async function loadScienceSurface(root, lens, sourceMesh) {
   if (lens.format === 'image-plane-dem') return loadImageDemScience(root, lens, sourceMesh);
+  if(lens.qualityMasks!==undefined){
+    validateScienceQualityMasks(lens);
+    const source=await loadScienceSurface(root,{...lens,qualityMasks:undefined},sourceMesh);
+    const masks=await Promise.all(lens.qualityMasks.map(mask=>loadScienceSurface(root,mask)));
+    return {sample(longitude,latitude){
+      for(let i=0;i<masks.length;i++){
+        const value=masks[i].sample(longitude,latitude),limit=lens.qualityMasks[i];
+        if(value===null||!Number.isFinite(value)||value<(limit.minimum??-Infinity)||value>(limit.maximum??Infinity))return null;
+      }
+      return source.sample(longitude,latitude);
+    }};
+  }
   if (lens.format === 'pds-image') return loadPdsImage(root, lens);
   if (lens.format === 'facet-scalars') return loadFacetScalarSurface(root, lens, sourceMesh);
   if (lens.format === 'geologic-shapefile') return loadGeologySurface(root, lens);

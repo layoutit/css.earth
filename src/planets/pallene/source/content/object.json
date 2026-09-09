@@ -45,7 +45,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
-        "title": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
+        "title": "ISS clear-filter image",
         "detail": "Cassini ISS",
         "thumbnail": "/scenes/pallene/pallene-normal-thumbnail.webp",
         "surface": "pallene-normal-surface@2x.webp",
@@ -55,7 +55,7 @@
           "path": "../manifest.json",
           "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582"
         },
-        "summary": "Cassini's 2005 image, only about 8 × 12 pixels across. Brightness shows coarse detail; gray grid: no coverage."
+        "summary": "Only about 8 × 12 source pixels resolve the moon. Brightness shows coarse detail; the gray grid marks unobserved surface."
       }
     ]
   },

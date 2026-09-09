@@ -10,5 +10,5 @@
     "Gap interpolation and every rear face are forced to the shared missing-data grid in all five datasets.",
     "Independent USGS and DLR footprints produce different estimated closures. Measured-surface comparison excludes the estimated faces."
   ],
-  "reduction": "The USGS envelope and front are reduced together to at most 2000 native triangles. Opposite zero-volume face pairs are removed. A face involving any inferred rear vertex is always grid; all photographic and scientific texels must also lie inside the original source footprint. The resulting source-post surface is independently checked within 85 m against the original DEM. DLR retains its source front unchanged and uses its unreduced completion."
+  "reduction": "The USGS envelope and front are reduced together to at most 1000 native triangles. Opposite zero-volume face pairs are removed. A face involving any inferred rear vertex is always grid; all photographic and scientific texels must also lie inside the original source footprint. The resulting source-post surface is checked against the original DEM with a 100 m sampled limit. DLR uses an 800-triangle source reduction checked within 110 m, retains every original boundary and gap, and adds its unreduced estimated closure. Material transfer still requires a source correspondence within 85 m."
 }

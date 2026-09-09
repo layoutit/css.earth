@@ -1,0 +1,29 @@
+---
+import DatasetSpacecraft from './DatasetSpacecraft.astro';
+import { spacecraftAgencies } from '../dataset-spacecraft.mjs';
+import agencyLogos from '../source/agency-logos.json';
+const { objectId, missions } = Astro.props;
+const agencies = spacecraftAgencies(missions);
+const initialMissionIds = agencies[0]?.missions.map(mission => mission.id);
+const resultsId = `${objectId}-mission-results`;
+---
+{agencies.length > 0 ? <>
+  <nav class="planet-observation-controls" aria-label="Mission agencies">
+    {agencies.map((agency, index) => <button
+      type="button"
+      class="planet-observation-control planet-mission-agency-control"
+      data-mission-agency={agency.name}
+      data-agency-missions={JSON.stringify(agency.missions.map(mission => mission.id))}
+      aria-pressed={index === 0 ? 'true' : 'false'}
+      aria-controls={resultsId}
+    >
+      <span class="planet-lens-label">{agency.name}</span>
+      <span class="planet-lens-detail">{agency.missions.length} {agency.missions.length === 1 ? 'mission' : 'missions'}</span>
+      {agencyLogos[agency.name] && <img class="planet-lens-icon planet-agency-logo"
+        src={agencyLogos[agency.name].src} width="14" height="14" alt="" />}
+    </button>)}
+  </nav>
+  <section class="planet-mission-details" id={resultsId} data-mission-results aria-label={`${agencies[0].name} missions`}>
+    <DatasetSpacecraft {missions} visibleMissionIds={initialMissionIds} />
+  </section>
+</> : <p class="planet-missions-empty">No mission data available for these datasets.</p>}

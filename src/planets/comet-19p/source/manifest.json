@@ -212,8 +212,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 58627,
-      "expectedSha256": "8815c587c4fbda883582edd53824be01764d9472f46311d71a4d23b9b9708740",
+      "expectedBytes": 58255,
+      "expectedSha256": "d86c4cd1b6ba6b2f0aa528c7c29493732cc60ac6de58a17e59a0aae589b2c170",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/ccd_near_1_ortho.cub",
       "credit": "NASA/JPL/MICAS; USGS; cssEarth preparation",
       "license": "Source-credited prepared visualization",
@@ -261,7 +261,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1805,
-      "expectedSha256": "42c3c0e3b21a8c1588ddca22c56e1118bd4a9945db9a43b81dc7323ddfbbe063",
+      "expectedSha256": "32c964555e3bcf01ddc490344fbba201574ca8076ec669503f6fc3656e42f19b",
       "purpose": "Borrelly source evidence or authored preparation input."
     },
     {
@@ -272,8 +272,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9663,
-      "expectedSha256": "f4c66c81f922934bd1d94898e6ea63b5fa06d33b5985391dd1979cbe36eb8769",
+      "expectedBytes": 9661,
+      "expectedSha256": "59bc50d4d8e791303287442207f0e1dff48d70e9ee2e2d2d8954d812e8ecaaed",
       "purpose": "Borrelly source evidence or authored preparation input."
     },
     {
@@ -290,8 +290,8 @@
     },
     {
       "path": "reference/completion.json",
-      "expectedBytes": 1643,
-      "expectedSha256": "10941b77cfe1696aa49377292f68114d70c9aaa9d26e6143752cf9757aeac7c8",
+      "expectedBytes": 1787,
+      "expectedSha256": "c9ffbf810924055b739d5590b529b8436490e2f1b0d252150191851e73ece194",
       "purpose": "Borrelly source evidence or authored preparation input."
     },
     {

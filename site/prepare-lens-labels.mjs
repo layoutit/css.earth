@@ -19,11 +19,7 @@ export function prepareLensLabels(lenses, labels) {
     ...lenses,
     controls: lenses.controls.map(lens => {
       const label = labels[lens.id] ?? lens.label;
-      let title = lens.title;
-      if (title === lens.label || title?.startsWith(`${lens.label}: `) || title?.startsWith(`${lens.label}, `)) {
-        title = label + title.slice(lens.label.length);
-      }
-      return { ...lens, label, title };
+      return { ...lens, label };
     }),
   };
 }

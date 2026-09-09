@@ -169,7 +169,7 @@
             3448
           ]
         },
-        "maximumCoordinateErrorMeters": 0.000001,
+        "maximumCoordinateErrorMeters": 1e-06,
         "maximumSourceDistanceMeters": 85,
         "displayRange": [
           0,
@@ -228,7 +228,7 @@
       "simplification": {
         "method": "source-meshoptimizer",
         "targetFaces": 2000,
-        "maximumErrorMeters": 85
+        "maximumErrorMeters": 100
       },
       "primitive": "u",
       "sourceLighting": {
@@ -276,8 +276,8 @@
         "depthMeters": 3150,
         "faceBudget": 3200,
         "reduction": {
-          "targetFaces": 2000,
-          "maximumErrorMeters": 40
+          "targetFaces": 1000,
+          "maximumErrorMeters": 85
         }
       }
     },
@@ -306,8 +306,8 @@
         "atlasColumns": 16,
         "simplification": {
           "method": "source-meshoptimizer",
-          "targetFaces": 1400,
-          "maximumErrorMeters": 85
+          "targetFaces": 800,
+          "maximumErrorMeters": 110
         },
         "primitive": "u",
         "sourceLighting": {

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79e7251505e9db1362ebe6499778b0855b8afae9eaa07cff3aa98e8187b1e70c"
+    "sha256": "29f9430fa1fd4724d5c390e49ea6d7be581c21d878ad6db754b8c3377438dd36"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "96c678f92218c200eb9ba4575f670d20a60de4adcf60e31fe0d510f34a057aac",
+      "sha256": "5ffbb1cef826629890ab876ad8a3e989bf09c3e825448f1ba6bd78f1653fb2c7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 6218, version 2022-10-18, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase. This is asteroid 666 Desdemona, distinct from the moon of Uranus. The source admits two pole solutions; this view uses model 6218.",
+              "title": "DAMIT model 6218",
               "thumbnail": "/scenes/desdemona-666/desdemona-666-shape-thumbnail.webp",
               "surface": "desdemona-666-shape-surface@2x.webp",
               "poles": "desdemona-666-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 14.2 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/desdemona-666/desdemona-666-elevation-thumbnail.webp",
               "surface": "desdemona-666-elevation-surface@2x.webp",
               "poles": "desdemona-666-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e41aa7a28fe64193e268fddbb4e0751c8fe8c23e215156b238d1a1907cfbae9e",
-      "bytes": 14434,
+      "sha256": "5ffbb1cef826629890ab876ad8a3e989bf09c3e825448f1ba6bd78f1653fb2c7",
+      "bytes": 13892,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

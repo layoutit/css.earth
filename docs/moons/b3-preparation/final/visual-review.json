@@ -1,0 +1,97 @@
+{
+  "status": "REVIEWED_WITH_LIMITS",
+  "reviewer": "Primary Moons agent",
+  "scope": "Nine representative DPR1 states across all six delivery candidates. Every listed image was opened and visually inspected. The 34 browser runs provide separate automated DPR1/2 interaction and layout evidence; no all-frame manual, native pixel parity or physical mobile claim.",
+  "images": [
+    {
+      "body": "titania",
+      "lens": "geology",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T12-50-19.296Z/titania-dpr1/geology-shadows-false-scene.png",
+      "artifact": "images/titania-geology.png",
+      "bytes": 504236,
+      "sha256": "aac0a4d4578ffd31e2ae71f682c08c9baf25ef38a41b2bb6519cea3ae92a0e90",
+      "observations": "Ten discrete units, mapped target in view, gray coverage boundary and readable legend. Thin facet seams remain visible at DPR1."
+    },
+    {
+      "body": "miranda",
+      "lens": "geology",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T12-52-37.649Z/miranda-dpr1/geology-shadows-false-scene.png",
+      "artifact": "images/miranda-geology.png",
+      "bytes": 442198,
+      "sha256": "2d26b456f89544824a0269516561b8658df5940f2a12bbdc5d03c06cee1cdc61",
+      "observations": "All eighteen units and source qualification are readable through the scrollable card; mapped target and gray missing region visible. Thin facet seams at DPR1."
+    },
+    {
+      "body": "callisto",
+      "lens": "enhanced",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T12-55-51.264Z/callisto-dpr1/enhanced-shadows-false-scene.png",
+      "artifact": "images/callisto-enhanced.png",
+      "bytes": 724416,
+      "sha256": "63e4ee2f6995c84856305baa0ec76d9ae26a017e04d5fbbec7beffb9be2f8c7e",
+      "observations": "Published processed color faces the camera; craters and bounded gray limb coverage are visible. RGB is labelled as processed color, not albedo."
+    },
+    {
+      "body": "proteus",
+      "lens": "filter-color",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T12-57-09.346Z/proteus-dpr1/filter-color-shadows-false-scene.png",
+      "artifact": "images/proteus-filter-color.png",
+      "bytes": 624200,
+      "sha256": "c066888db1e09acaede769a79092bca73512ab7b5809d3fcc9f84ada7fe33e13",
+      "observations": "The prepared flight faces the broad filter-color patch; gray withheld holes and the three-filter qualification remain visible. Native sampling is coarse."
+    },
+    {
+      "body": "hyperion",
+      "lens": "normal",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T12-59-02.718Z/hyperion-dpr1/normal-shadows-false-scene.png",
+      "artifact": "images/hyperion-normal.png",
+      "bytes": 698625,
+      "sha256": "0b8889450a8d55ed643fd447ced244629640e40f5e1747c481aaed3d18d01433",
+      "observations": "Crater detail is visible within the existing mosaic. Gray unsupported cap remains; caption limits the regional close-image resolution and registration claim."
+    },
+    {
+      "body": "phoebe",
+      "lens": "normal",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T13-00-15.325Z/phoebe-dpr1/normal-shadows-false-scene.png",
+      "artifact": "images/phoebe-normal.png",
+      "bytes": 519879,
+      "sha256": "5651dbfc22b4a855a40705f1e986c3b059d355f0cb3816e34263b6e96e3b750c",
+      "observations": "Paired shape and numeric layers render with their units and coverage treatment. Count legend includes zero; maplet spacing is not labelled height accuracy. Fine aliasing/facet pattern is visible on DPR1 radial height."
+    },
+    {
+      "body": "phoebe",
+      "lens": "elevation",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T13-00-56.877Z/phoebe-dpr1/elevation-shadows-false-scene.png",
+      "artifact": "images/phoebe-elevation.png",
+      "bytes": 857277,
+      "sha256": "b17db73f2285dec58715d6afc904299861684d1a08dad61c7fe4b25ccdc49a51",
+      "observations": "Paired shape and numeric layers render with their units and coverage treatment. Count legend includes zero; maplet spacing is not labelled height accuracy. Fine aliasing/facet pattern is visible on DPR1 radial height."
+    },
+    {
+      "body": "phoebe",
+      "lens": "maplet-resolution",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T13-01-46.673Z/phoebe-dpr1/maplet-resolution-shadows-false-scene.png",
+      "artifact": "images/phoebe-maplet-resolution.png",
+      "bytes": 401007,
+      "sha256": "2ea0e10c67b8894d54b35131e121821a74c6c485bc2d35fd493ed21aa9067872",
+      "observations": "Paired shape and numeric layers render with their units and coverage treatment. Count legend includes zero; maplet spacing is not labelled height accuracy. Fine aliasing/facet pattern is visible on DPR1 radial height."
+    },
+    {
+      "body": "phoebe",
+      "lens": "image-count",
+      "dpr": 1,
+      "original": "output/playwright/b3-surfaces/integrated-2026-09-09T13-02-35.953Z/phoebe-dpr1/image-count-shadows-false-scene.png",
+      "artifact": "images/phoebe-image-count.png",
+      "bytes": 570176,
+      "sha256": "ddb3f244563facc3110c22e4e6bd2c69b14434240be4d1ed9c62824d7fbb7248",
+      "observations": "Paired shape and numeric layers render with their units and coverage treatment. Count legend includes zero; maplet spacing is not labelled height accuracy. Fine aliasing/facet pattern is visible on DPR1 radial height."
+    }
+  ]
+}

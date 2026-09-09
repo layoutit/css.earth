@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-callisto-processed-color@1",
+  "input": {
+    "path": "observations/PIA03456-usgs.png",
+    "bytes": 821031,
+    "sha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638"
+  },
+  "registration": {
+    "path": "validation/galileo-color-registration.json",
+    "bytes": 8943,
+    "sha256": "0cb2e52bb4bd1ab5680be022e80a9b7e14e72fa01da56f665bb5a7b869bcbaf9"
+  },
+  "maximumEmissionDegrees": 65,
+  "output": {
+    "path": "observations/PIA03456-registered-rgba.tif",
+    "width": 1440,
+    "height": 720,
+    "reportPath": "validation/galileo-color-conversion-proof.json"
+  },
+  "sampling": "Native published RGB bilinear; each nonzero-weight contributor alpha=255. Invalid output RGBA is all zero, declared GDAL_NODATA=0. No brightness or terrain quality inference."
+}

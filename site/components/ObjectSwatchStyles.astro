@@ -20,11 +20,11 @@ const majorBodyLabelStyles = OBJECTS
   .map(({ id }) => `.prepared-world-context [data-context-label="${id}"] { text-transform: uppercase; }`)
   .join('\n');
 const minorBodyOrbitStyles = OBJECTS
-  .filter(({ classification }) => ['satellite', 'dwarf-planet', 'asteroid'].includes(classification))
+  .filter(({ classification }) => ['satellite', 'dwarf-planet', 'asteroid', 'comet'].includes(classification))
   .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-line-opacity: .3; }`)
   .join('\n');
-const dwarfLabelStyles = OBJECTS
-  .filter(({ classification }) => classification === 'dwarf-planet')
+const minorBodyLabelStyles = OBJECTS
+  .filter(({ classification }) => classification === 'dwarf-planet' || classification === 'comet')
   .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-label-opacity: .5; }`)
   .join('\n');
 // Keep labels and retained geometry stable. Hidden orbit chords must not
@@ -37,4 +37,4 @@ const asteroidOrbitStyles = OBJECTS
   }).join('\n');
 ---
 
-<style is:inline set:html={[styles, majorBodyLabelStyles, minorBodyOrbitStyles, dwarfLabelStyles, asteroidOrbitStyles].join('\n')}></style>
+<style is:inline set:html={[styles, majorBodyLabelStyles, minorBodyOrbitStyles, minorBodyLabelStyles, asteroidOrbitStyles].join('\n')}></style>

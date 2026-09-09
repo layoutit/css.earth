@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "245dc7c4b9d1f3abc1489c4243b08f537b01a2278e5fe804eec6e8504bdc15fe"
+    "sha256": "df231ecc63a7a32eaf4b93a41e930c36907b3367e880e5d04274cb96c7eb540f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -187,7 +187,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "228412b4a3a9dd01ec891d9e511ba779fd1e83348c137a60353a437c8a5edec4",
+      "sha256": "38e6d811aaac8286ec44f760cb164edcd1463c155ae69602ef43ba613056213b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -257,20 +257,21 @@
               "label": "OSIRIS reflectance",
               "detail": "Spacecraft observation",
               "description": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
-              "title": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+              "title": "OSIRIS OI-filter reflectance",
               "thumbnail": "/scenes/steins/steins-osiris-thumbnail.webp",
               "surface": "steins-osiris-surface@2x.webp",
               "poles": "steins-osiris-surface@2x.webp",
               "source": {
                 "id": "steins-observations-w20080905t183606461id4df17-img",
                 "path": "../manifest.json"
-              }
+              },
+              "summary": "The source image resolves only tens of pixels across the body. Brightness is corrected approximately; the grid marks gaps."
             },
             {
               "id": "normal",
               "label": "Monochrome",
               "description": "A visualization mosaic compiled by Phil Stooke from Rosetta OSIRIS observations, controlled against Leyrat et al. (2010). Extensive processing, photographed shadows and a revised south-pole interpretation remain; this is not calibrated reflectance. The gray grid marks exterior gaps identified in the published map. Camera detail is approximately 80 m/pixel at best, despite the enlarged map. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "A visualization mosaic compiled by Phil Stooke from Rosetta OSIRIS observations, controlled against Leyrat et al. (2010). Extensive processing, photographed shadows and a revised south-pole interpretation remain; this is not calibrated reflectance. The gray grid marks exterior gaps identified in the published map. Camera detail is approximately 80 m/pixel at best, despite the enlarged map. Shadows adds approximate fixed-epoch Sun lighting.",
+              "title": "OSIRIS image mosaic",
               "thumbnail": "/scenes/steins/steins-normal-thumbnail.webp",
               "surface": "steins-normal-surface@2x.webp",
               "poles": "steins-normal-surface@2x.webp",
@@ -280,13 +281,13 @@
               },
               "falseColor": false,
               "detail": "Rosetta OSIRIS · 2008 flyby",
-              "summary": "Rosetta mosaic by Phil Stooke. Shadows, seams and processing edits remain; gray grid: published map gaps."
+              "summary": "Photographed shadows, seams and processing edits remain in the published mosaic. The gray grid marks missing map coverage."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows radius in the published Jorda shape minus a 2.58 km reference sphere. It includes the broad irregular form and is not gravitational elevation. OSIRIS constrains the observed terrain; light-curve inversion supplies the unseen region. The source has a documented artificial elevation jump where those methods meet, retained here. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "Color shows radius in the published Jorda shape minus a 2.58 km reference sphere. It includes the broad irregular form and is not gravitational elevation. OSIRIS constrains the observed terrain; light-curve inversion supplies the unseen region. The source has a documented artificial elevation jump where those methods meet, retained here. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/steins/steins-elevation-thumbnail.webp",
               "surface": "steins-elevation-surface@2x.webp",
               "poles": "steins-elevation-surface@2x.webp",
@@ -513,8 +514,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fae15ecf0a9f7c2f0dcc77e1141836777049a1f1a7645244d8007d868b408316",
-      "bytes": 11211,
+      "sha256": "38e6d811aaac8286ec44f760cb164edcd1463c155ae69602ef43ba613056213b",
+      "bytes": 10486,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

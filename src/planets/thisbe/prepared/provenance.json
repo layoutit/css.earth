@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9176b2466aed525405cbb9ea83590092506dec7ba87125bc3a09d95a96c0ee2b"
+    "sha256": "203f6695a15596fef361ac398230badd2eaa79081706ce294d55495ea7f160dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6fc6dc847a6e8cf3919d772aa4068da675c3bd1cc1b9498574589ec728895eac",
+      "sha256": "c54fcb3596221f809c93ba81be80e97ca647abf58ede677f50b257ed5c05426b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 5926, version 2021-11-12, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 5926",
               "thumbnail": "/scenes/thisbe/thisbe-shape-thumbnail.webp",
               "surface": "thisbe-shape-surface@2x.webp",
               "poles": "thisbe-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 109 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/thisbe/thisbe-elevation-thumbnail.webp",
               "surface": "thisbe-elevation-surface@2x.webp",
               "poles": "thisbe-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f25311c5d515b938093e5dd94582449957fbdec46103ac1923e2223d9d372952",
-      "bytes": 7870,
+      "sha256": "c54fcb3596221f809c93ba81be80e97ca647abf58ede677f50b257ed5c05426b",
+      "bytes": 7518,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

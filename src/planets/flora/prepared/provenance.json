@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43319207dbbe056cf3a81c66fba46b5c0d253d48ede2d5500672ecd94487f698"
+    "sha256": "97d2d743de4c23c53bbb62e46a672fb30cc9c80ccc55ec9fa990f0f0cf005165"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "065f303a604d017b8c665c023a0765333a8718f0eabfc08d1ac3120678c4e597",
+      "sha256": "406164778c4aaf1052a1d53dde5a8853263b936835c0ff99581ace0293d6077a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/flora/flora-shape-thumbnail.webp",
               "surface": "flora-shape-surface@2x.webp",
               "poles": "flora-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 73 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/flora/flora-elevation-thumbnail.webp",
               "surface": "flora-elevation-surface@2x.webp",
               "poles": "flora-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "35f451f1acf5f7acac4c2416e83bac18a8ec8e1c407f866c49ee319d573ab0c9",
-      "bytes": 7207,
+      "sha256": "406164778c4aaf1052a1d53dde5a8853263b936835c0ff99581ace0293d6077a",
+      "bytes": 6812,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

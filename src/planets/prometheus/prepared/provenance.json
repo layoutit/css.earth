@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "456b02db1be46a34ba5acef8d7dab140b4b509d138b2912b7fe7ad411e9356d7"
+    "sha256": "45083db423c01e682402e833dc41506e1892f97d317195c18cd0ee9b4c852863"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -274,7 +274,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1ec682eb116a9f3b35cd60daaf5d63e76b627e9ffae3202e498fcd1c9e27dbf5",
+      "sha256": "b61cdc8877571041718631ead6f8fa5d3e6cad589532974296502d5d052dca1b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -352,7 +352,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "title": "ISS mosaic",
               "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/prometheus/prometheus-normal-thumbnail.webp",
               "surface": "prometheus-normal-surface@2x.webp",
@@ -362,13 +362,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Cassini images mapped onto the shape with adjusted brightness. Gray grid: gaps and withheld shadows."
+              "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+              "title": "Shape-derived radial height",
               "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/prometheus/prometheus-elevation-thumbnail.webp",
               "surface": "prometheus-elevation-surface@2x.webp",
@@ -1014,8 +1014,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a8011268ea52654501fde69bc747e8a303d25b1061e6bcffa3e9ee2a27821358",
-      "bytes": 5883,
+      "sha256": "b61cdc8877571041718631ead6f8fa5d3e6cad589532974296502d5d052dca1b",
+      "bytes": 5670,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6f0d1acc528487b7aa59b99aaa8f4e647822aa135290602c16278f510e69e815"
+    "sha256": "e0bb32876fc9782713e67e455adf1bb6b0404b5a5f3b5aac38c44b30f02a18a6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -129,7 +129,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0ab94367cfd3b745c827c3182b48f1f2d03df9f8d6e2ac0ba6b0fd4e6420f2ae",
+      "sha256": "db7c4c51c376cf2660e70126ed0205b4697898637654804eeebbfd0f77cb7b05",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -214,7 +214,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
-              "title": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+              "title": "FC visible-light mosaic",
               "thumbnail": "/scenes/ceres/ceres-normal-thumbnail.webp",
               "surface": "ceres-normal-surface@2x.webp",
               "poles": "ceres-normal-poles@2x.webp",
@@ -223,13 +223,13 @@
                 "path": "../manifest.json"
               },
               "detail": "Global mosaic",
-              "summary": "Dawn visible-light images with shadows. The gray grid marks known gaps; some dark edges remain uncertain."
+              "summary": "Photographed shadows remain in the visible-light images. The gray grid marks known gaps; some dark edges remain uncertain."
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
               "description": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
-              "title": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+              "title": "False-color mosaic PIA19977",
               "thumbnail": "/scenes/ceres/ceres-enhanced-thumbnail.webp",
               "surface": "ceres-enhanced-surface@2x.webp",
               "poles": "ceres-enhanced-poles@2x.webp",
@@ -238,13 +238,13 @@
                 "path": "../manifest.json"
               },
               "detail": "False color",
-              "summary": "Dawn images at 920, 750 and 440 nm in false color. Shadows remain; the gray grid marks known gaps."
+              "summary": "The 920, 750 and 440 nm bands are assigned false colors. Photographed shadows remain and the gray grid marks known gaps."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
-              "title": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+              "title": "HAMO digital terrain model",
               "thumbnail": "/scenes/ceres/ceres-elevation-thumbnail.webp",
               "surface": "ceres-elevation-surface@2x.webp",
               "poles": "ceres-elevation-poles@2x.webp",
@@ -491,8 +491,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d3054a61b64756703cc216af4b5de3e011f1667f2f0136a9857eeed0f6029e89",
-      "bytes": 9962,
+      "sha256": "db7c4c51c376cf2660e70126ed0205b4697898637654804eeebbfd0f77cb7b05",
+      "bytes": 9815,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

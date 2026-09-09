@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "35f359d39f19aaf444c217f1d96f25a2851d9ee628e0dd8b07067d00d88f5ba5"
+    "sha256": "fce1749f2172c5d2b225c7c237a767354ea2cb4b147ddc9fdba4c3e7ab9a93be"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7a7d761ecefa022ea330336e0a96aee7a81c4b6ed894b5a7194a4567d1b1602c",
+      "sha256": "f88b43d25076204f518401744fff4d0689a2ec06aa7902239af01c773165258c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 114.22 km effective diameter (catalog ±1.52 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 114.22 km effective diameter (catalog ±1.52 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/leda-38/leda-38-shape-thumbnail.webp",
               "surface": "leda-38-shape-surface@2x.webp",
               "poles": "leda-38-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 57.11 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 57.11 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/leda-38/leda-38-elevation-thumbnail.webp",
               "surface": "leda-38-elevation-surface@2x.webp",
               "poles": "leda-38-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7a7d761ecefa022ea330336e0a96aee7a81c4b6ed894b5a7194a4567d1b1602c",
-      "bytes": 11427,
+      "sha256": "f88b43d25076204f518401744fff4d0689a2ec06aa7902239af01c773165258c",
+      "bytes": 10989,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

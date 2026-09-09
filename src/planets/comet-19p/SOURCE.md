@@ -45,16 +45,16 @@ and a maximum XY displacement of about 215 m between fits. This is empirical
 alignment sensitivity, not ground-truth accuracy. The authors' 120 m statistic
 is not claimed for this different comparison.
 
-An intermediate reduction retains 1,999 USGS and 1,399 DLR triangles with
+An intermediate reduction retains 1,999 USGS and 799 DLR triangles with
 all original boundary edges. Sampled source-to-display distances are
-below 85 m, checked independently in both directions. Those finite samples
+below 110 m, checked independently in both directions. Those finite samples
 are not a continuous Hausdorff bound. Each photographic/scientific texel must
 also find a full-source correspondence within 85 m. Invalid contributors and
 non-overlapping comparison regions receive the shared missing-data treatment.
 
-The USGS envelope is reduced as a closed mesh to 1,966 native triangles;
-890 use original source posts and 1,076 contain estimated geometry. DLR
-retains 1,399 source triangles and 1,625 estimated triangles (3,024 total),
+The USGS envelope is reduced as a closed mesh to 994 native triangles;
+452 use original source posts and 542 contain estimated geometry. DLR
+retains 799 source triangles and 1,063 estimated triangles (1,862 total),
 including 62 across three source gaps. The resulting meshes are connected,
 closed and consistently outward wound, with Euler characteristic two.
 

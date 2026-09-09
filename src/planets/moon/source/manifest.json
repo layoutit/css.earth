@@ -185,7 +185,13 @@
       "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "lro"
+        ],
+        "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+      }
     },
     {
       "id": "lro-diviner-rock-abundance-numeric",
@@ -240,8 +246,8 @@
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 14706,
-      "expectedSha256": "975584a72c38c0e8ced47a5c3ce94a6ecc2150a711cf6a83e0b33f3ffb6e87c7",
+      "expectedBytes": 14678,
+      "expectedSha256": "90d43458850500f299ecb4b928a5325de1dd3d3cf62eb119f81a9b76b13dcc8f",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {

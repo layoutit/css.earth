@@ -82,7 +82,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
-        "title": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+        "title": "FC visible-light mosaic",
         "thumbnail": "/scenes/ceres/ceres-normal-thumbnail.webp",
         "surface": "ceres-normal-surface@2x.webp",
         "poles": "ceres-normal-poles@2x.webp",
@@ -91,13 +91,13 @@
           "path": "../manifest.json"
         },
         "detail": "Global mosaic",
-        "summary": "Dawn visible-light images with shadows. The gray grid marks known gaps; some dark edges remain uncertain."
+        "summary": "Photographed shadows remain in the visible-light images. The gray grid marks known gaps; some dark edges remain uncertain."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
-        "title": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+        "title": "False-color mosaic PIA19977",
         "thumbnail": "/scenes/ceres/ceres-enhanced-thumbnail.webp",
         "surface": "ceres-enhanced-surface@2x.webp",
         "poles": "ceres-enhanced-poles@2x.webp",
@@ -106,13 +106,13 @@
           "path": "../manifest.json"
         },
         "detail": "False color",
-        "summary": "Dawn images at 920, 750 and 440 nm in false color. Shadows remain; the gray grid marks known gaps."
+        "summary": "The 920, 750 and 440 nm bands are assigned false colors. Photographed shadows remain and the gray grid marks known gaps."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
-        "title": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+        "title": "HAMO digital terrain model",
         "thumbnail": "/scenes/ceres/ceres-elevation-thumbnail.webp",
         "surface": "ceres-elevation-surface@2x.webp",
         "poles": "ceres-elevation-poles@2x.webp",

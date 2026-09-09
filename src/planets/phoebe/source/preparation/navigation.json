@@ -8,28 +8,31 @@
   "source": {
     "id": "prepared-radial-context",
     "path": "presentation/context.png",
-    "origin": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
-    "credit": "NASA/JPL/Space Science Institute; DLR",
-    "license": "Public NASA mission data, archived in PDS. Retain mission and cartography credits.",
+    "origin": "https://doi.org/10.26033/3k3c-5713",
+    "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+    "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
     "consumers": [
       "navigation"
     ],
     "recipe": {
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
       "inputs": [
-        "cassini-mosaic",
-        "gaskell-2012-shape"
+        "phoebe-2023-shape",
+        "phoebe-2023-albedo",
+        "phoebe-2023-numimg",
+        "phoebe-2023-bestmap"
       ],
       "size": 512,
       "longitudeDegrees": 0,
       "latitudeDegrees": -20,
       "ambient": 0.45,
       "diffuse": 0.55,
-      "lensId": "normal"
+      "lensId": "normal",
+      "displaySampling": "nearest"
     },
     "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 175814,
-    "expectedSha256": "0e9ff01de751738d7dfbc8b3fcacc84948984f19aad8ff5e061e0327e243426f"
+    "expectedBytes": 115290,
+    "expectedSha256": "4a2a1a9cb3c5b5b6b91663897ed302bd78bbed6b09df19fe72f8698af7c275d1"
   },
   "operations": [
     {

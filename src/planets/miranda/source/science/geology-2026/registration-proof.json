@@ -1,0 +1,307 @@
+{
+  "schema": "cssearth-historical-page-registration-proof@1",
+  "body": "miranda",
+  "checkedOn": "2026-09-09",
+  "sourceInputs": [
+    {
+      "path": "Miranda map 1.gdb.zip",
+      "bytes": 224923,
+      "sha256": "ba6f803f8bc7ca2abbd96369390302953ecae405f94f69305ff2aeb071c196a7"
+    },
+    {
+      "path": "Screenshot 2026-06-23 124237.png",
+      "bytes": 461407,
+      "sha256": "d4fcba5a94254fb103d98c2aa58155f313ebff92ff4fe0c551fc9bffc8647035"
+    },
+    {
+      "path": "nomenclature.pdf",
+      "bytes": 2527631,
+      "sha256": "7b50f3ed3e50c6b9647f26023621efecba691744b2b019c0c22c7a50307cd5a8"
+    },
+    {
+      "path": "nomenclature.json",
+      "bytes": 10590,
+      "sha256": "a85c2dcf6446007b6f5f5c34dcd42f416969e254915bd17baa4822505fd45a59"
+    }
+  ],
+  "projection": {
+    "kind": "south-polar-stereographic",
+    "equations": [
+      "rho=tan(pi/4+latitudeRadians/2)",
+      "x=rho*sin(eastLongitudeRadians)",
+      "y=rho*cos(eastLongitudeRadians)"
+    ],
+    "reference": "USGS I-1920 Sheet 1 of 3, 1988; 2M -90/0 map. Retained printed graticule orientation and named locations independently inspected."
+  },
+  "graticule": {
+    "anchors": [
+      {
+        "longitudeEastDegrees": 0,
+        "latitudeDegrees": 0,
+        "pixel": [
+          328.33,
+          78.67
+        ],
+        "role": "fit",
+        "residualPixels": 0.29651681608665065,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 30,
+        "latitudeDegrees": 0,
+        "pixel": [
+          481.0,
+          116.0
+        ],
+        "role": "holdout",
+        "residualPixels": 0.7249024386072457,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 60,
+        "latitudeDegrees": 0,
+        "pixel": [
+          593.0,
+          225.33
+        ],
+        "role": "fit",
+        "residualPixels": 0.5563996365525118,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 90,
+        "latitudeDegrees": 0,
+        "pixel": [
+          637.33,
+          375.33
+        ],
+        "role": "holdout",
+        "residualPixels": 0.9733572780731314,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 120,
+        "latitudeDegrees": 0,
+        "pixel": [
+          599.33,
+          529.0
+        ],
+        "role": "fit",
+        "residualPixels": 0.4768094191835313,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 150,
+        "latitudeDegrees": 0,
+        "pixel": [
+          488.67,
+          640.0
+        ],
+        "role": "holdout",
+        "residualPixels": 2.1775870950655563,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 180,
+        "latitudeDegrees": 0,
+        "pixel": [
+          339.33,
+          684.67
+        ],
+        "role": "fit",
+        "residualPixels": 0.6186454737749638,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 210,
+        "latitudeDegrees": 0,
+        "pixel": [
+          187.33,
+          646.33
+        ],
+        "role": "holdout",
+        "residualPixels": 1.3577188638256799,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 240,
+        "latitudeDegrees": 0,
+        "pixel": [
+          73.0,
+          539.0
+        ],
+        "role": "fit",
+        "residualPixels": 0.6760033694853377,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 270,
+        "latitudeDegrees": 0,
+        "pixel": [
+          30.33,
+          387.0
+        ],
+        "role": "holdout",
+        "residualPixels": 0.792883091320577,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 300,
+        "latitudeDegrees": 0,
+        "pixel": [
+          68.33,
+          235.33
+        ],
+        "role": "fit",
+        "residualPixels": 0.28274939827028894,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      },
+      {
+        "longitudeEastDegrees": 330,
+        "latitudeDegrees": 0,
+        "pixel": [
+          177.33,
+          121.33
+        ],
+        "role": "holdout",
+        "residualPixels": 0.9869156765303625,
+        "digitization": "Manual centre of intersection of printed equator and labelled 30-degree meridian, original 675x737 release preview; approximate 1-pixel reading precision."
+      }
+    ],
+    "pixelMatrix": [
+      [
+        303.39756645914844,
+        -5.499999999999945
+      ],
+      [
+        -5.77350269189616,
+        -303.2233333333333
+      ]
+    ],
+    "pixelTranslation": [
+      333.5533333333334,
+      382.00000000000006
+    ],
+    "fitCount": 6,
+    "holdoutCount": 6,
+    "maximumHoldoutResidualPixels": 2.1775870950655563
+  },
+  "sourcePageToPreview": {
+    "body": "miranda",
+    "transform": [
+      123.27501517603716,
+      123.32845152174913,
+      -0.06416359676502076,
+      714.1551165764048
+    ],
+    "samples": 5958,
+    "rms": 2.339895539800898,
+    "median": 1.3528501776787956,
+    "p90": 2.372084247803865,
+    "max": 19.487673280996702,
+    "units": {
+      "heavilymantledcrateredterrain": [
+        205,
+        170,
+        102
+      ],
+      "darkmaterial": [
+        0,
+        92,
+        230
+      ],
+      "lightlymantledcrateredterrain": [
+        255,
+        170,
+        0
+      ],
+      "northernridgedplains": [
+        76,
+        0,
+        115
+      ]
+    },
+    "interpretation": "Geometric registration of four source polygon classes to their same-publisher preview boundaries; no Gazetteer or fresh-impact centroid was used in this fit.",
+    "equations": [
+      "pixelX=123.27501517603716*pageX-0.06416359676502076",
+      "pixelY=-123.32845152174913*pageY+714.1551165764048"
+    ]
+  },
+  "scienceHoldouts": [
+    {
+      "name": "Alonso",
+      "id": "30",
+      "layer": "freshimpactcraters",
+      "role": "holdout",
+      "sourceXY": [
+        2.530832578825016,
+        3.6788155414862764
+      ],
+      "reference": [
+        352.6,
+        -44.0
+      ],
+      "referenceUrl": "http://planetarynames.wr.usgs.gov/Feature/200",
+      "reconstructed": [
+        350.9556370785001,
+        -45.6943837350925
+      ],
+      "angularResidualDegrees": 2.056616840244419,
+      "arcDistanceAt235_8KmRadius": 8.463978587094806,
+      "identity": "Visually identified in retained USGS named pictorial map and publisher geological preview; not assigned by nearest-coordinate distance."
+    },
+    {
+      "name": "Gonzalo",
+      "id": "21",
+      "layer": "freshimpactcraters",
+      "role": "holdout",
+      "sourceXY": [
+        4.694823457127254,
+        3.0700854584544968
+      ],
+      "reference": [
+        77.0,
+        -11.4
+      ],
+      "referenceUrl": "http://planetarynames.wr.usgs.gov/Feature/2220",
+      "reconstructed": [
+        80.3482470440008,
+        -11.152188062773813
+      ],
+      "angularResidualDegrees": 3.2929307258402893,
+      "arcDistanceAt235_8KmRadius": 13.552011539974746,
+      "identity": "Visually identified in retained USGS named pictorial map and publisher geological preview; not assigned by nearest-coordinate distance."
+    },
+    {
+      "name": "Stephano",
+      "id": "3",
+      "layer": "freshimpactcraters",
+      "role": "holdout",
+      "sourceXY": [
+        1.8266439998505115,
+        2.051295961953393
+      ],
+      "reference": [
+        234.10000000000002,
+        -41.1
+      ],
+      "referenceUrl": "http://planetarynames.wr.usgs.gov/Feature/5699",
+      "reconstructed": [
+        234.9237361358206,
+        -42.274842901325904
+      ],
+      "angularResidualDegrees": 1.326130285713455,
+      "arcDistanceAt235_8KmRadius": 5.457671123923423,
+      "identity": "Visually identified in retained USGS named pictorial map and publisher geological preview; not assigned by nearest-coordinate distance."
+    }
+  ],
+  "limits": [
+    "Only three named crater polygon identities were secure enough to use independently. Prospero, Ferdinand, Francisco and Trinculo were not forced to nearby fresh-impact polygons.",
+    "The graticule fit includes an affine shear/rotation to preserve the actual displayed page; it is not an exact circular screenshot assumption.",
+    "The four-class page fit has 5958 correlated edge samples, median 1.35 pixels, 90th percentile 2.37 pixels, maximum 19.49 pixels. Its all-sample RMS is not independent scientific accuracy.",
+    "Named polygon centroids differ from Gazetteer crater centres by the reported degree-scale amounts, which include map/source/control differences.",
+    "Preserve original polygon coverage and withhold northern hemisphere, polygon holes and unresolved layer conflicts. Do not extend geology into unmapped surface.",
+    "The bogus archived Earth/WGS84 Orthographic CRS is retained as source metadata and is not applied to Miranda coordinates. Source polygon Z is not terrain elevation.",
+    "No runtime, bake or rendered-globe qualification has yet been run."
+  ]
+}

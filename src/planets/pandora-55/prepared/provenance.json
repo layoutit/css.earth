@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "794f7b6d3ea932dac39e788f4bbcb3df19f88908d41c43fb538c3e63558496f6"
+    "sha256": "00660afc84fcff5ab415ddfb008a7e85414ab4f0595daec3eb3e573eaef7d420"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a34e423fbd6265f31f45f7ab98d3ce92bbd5ca2dd2f8dcbff2b652dead85f82e",
+      "sha256": "52d8bce1d78f2053abd42dea9d310743fa8e38ea62f37ff7d79bce7b2d53a9c2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction, 70 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction, 70 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/pandora-55/pandora-55-shape-thumbnail.webp",
               "surface": "pandora-55-shape-surface@2x.webp",
               "poles": "pandora-55-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 35 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 35 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/pandora-55/pandora-55-elevation-thumbnail.webp",
               "surface": "pandora-55-elevation-surface@2x.webp",
               "poles": "pandora-55-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a34e423fbd6265f31f45f7ab98d3ce92bbd5ca2dd2f8dcbff2b652dead85f82e",
-      "bytes": 12347,
+      "sha256": "52d8bce1d78f2053abd42dea9d310743fa8e38ea62f37ff7d79bce7b2d53a9c2",
+      "bytes": 12047,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -90,8 +90,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3566,
-      "expectedSha256": "1f21795e78098c7d11472172ab98ccd2070de2393559df92648ae6d16d2881a4",
+      "expectedBytes": 3378,
+      "expectedSha256": "e56f6ad1cc5fe2cd0f058156b1ed3ce0b09f2a18e0b110c1c7dc943f665ca173",
       "purpose": "Scientific source interpretation and reproducible authored input."
     },
     {

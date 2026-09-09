@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a56c7d4e471fd38f808376dd801446396d243ed4ce3b3846e1cb22d6ef76f02c"
+    "sha256": "c0694281dd2dd753824a0e9d8a16e98dfacf85e1757488238e20ef57ac371ffc"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4517d3742b83e78cccc9ecb09a04f764a89004d63c99112c47ac54b891025a86",
+      "sha256": "2ee775b442c7b5c1ec93a682e7b2ff5f1ae0b15277ca052f95f3a7bff4ea4b4e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
-              "title": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+              "title": "Approximate shape model",
               "detail": "Published shape",
               "thumbnail": "/scenes/ophelia/ophelia-model-thumbnail.webp",
               "surface": "ophelia-model-surface@2x.webp",
@@ -308,8 +308,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8c66e32fe3afede0eb2f1d283f5bcd8deec6a8845263232984914c1858371e36",
-      "bytes": 3891,
+      "sha256": "2ee775b442c7b5c1ec93a682e7b2ff5f1ae0b15277ca052f95f3a7bff4ea4b4e",
+      "bytes": 3764,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -143,7 +143,7 @@
         "id": "normal",
         "label": "Visible color",
         "description": "Hubble OPAL F657N/F547M/F467M composite from October 2025. The northern region is observed; the unobserved southern region fades into a uniform Voyager-derived color baseline with no measured local detail.",
-        "title": "Hubble OPAL F657N/F547M/F467M visible-color composite",
+        "title": "OPAL visible-color map",
         "thumbnail": "/scenes/uranus/uranus-lens-normal.webp",
         "surface": "/scenes/uranus/uranus-surface-normal.webp",
         "poles": "/scenes/uranus/uranus-poles-normal.webp",
@@ -154,13 +154,13 @@
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
         },
         "detail": "Visible light",
-        "summary": "Hubble color, October 2025. The north is observed; the unobserved south fades to a uniform Voyager color."
+        "summary": "The north is observed in October 2025. The unseen south fades to a uniform Voyager-derived color, without measured detail."
       },
       {
         "id": "methane",
         "label": "Methane",
         "description": "Hubble OPAL 727 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail.",
-        "title": "Methane: Hubble OPAL FQ727N single-band false color",
+        "title": "OPAL FQ727N map",
         "thumbnail": "/scenes/uranus/uranus-lens-methane.webp",
         "surface": "/scenes/uranus/uranus-surface-methane.webp",
         "poles": "/scenes/uranus/uranus-poles-methane.webp",
@@ -200,13 +200,13 @@
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
         },
         "detail": "727 nm",
-        "summary": "Hubble 727 nm false color, October 2025. The unobserved south uses uniform color, not measured detail."
+        "summary": "False colors show 727 nm reflectance in the observed north. The unseen south uses uniform color without measured detail."
       },
       {
         "id": "near-infrared",
         "label": "Near infrared",
         "description": "Hubble OPAL 845 nm single-band reflectance, October 2025, in false color. Northern coverage is observed; the unobserved south uses a uniform boundary-band mean and contains no measured spectral detail.",
-        "title": "Near infrared: Hubble OPAL F845M single-band false color",
+        "title": "OPAL F845M map",
         "thumbnail": "/scenes/uranus/uranus-lens-near-infrared.webp",
         "surface": "/scenes/uranus/uranus-surface-near-infrared.webp",
         "poles": "/scenes/uranus/uranus-poles-near-infrared.webp",
@@ -246,7 +246,7 @@
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
         },
         "detail": "845 nm",
-        "summary": "Hubble 845 nm false color, October 2025. The unobserved south uses uniform color, not measured detail."
+        "summary": "False colors show 845 nm reflectance in the observed north. The unseen south uses uniform color without measured detail."
       }
     ]
   },

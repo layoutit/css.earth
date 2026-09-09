@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a64a38d734b33066c630a61aa1e3f122a8ff5ef359830e19db91f62dd932b34"
+    "sha256": "5e6d073b72e3fc06d4435b2f104493aae57b289c1d9d37d32cb198f6511b15aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -184,7 +184,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5de9dc00fdd2c6235fc5146e009a113a8a11bc944642864e2416052daecbac4c",
+      "sha256": "7da96be8bfe605b7f893ffe84eb7ff3fc5fb825509b319f8a9afd8d943d61925",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -250,7 +250,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
-              "title": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+              "title": "Clear-filter mosaic",
               "detail": "Voyager 2",
               "thumbnail": "/scenes/larissa/larissa-normal-thumbnail.webp",
               "surface": "larissa-normal-surface@2x.webp",
@@ -260,13 +260,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/voyager/iss/"
               },
-              "summary": "Voyager 2 images mapped onto the shape. Gray grid: withheld shadows, the unseen side and unreliable samples."
+              "summary": "Brightness is corrected for illumination. The gray grid marks the unseen side, withheld shadows and unreliable samples."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
-              "title": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+              "title": "Shape-derived radial height",
               "detail": "Radial shape",
               "thumbnail": "/scenes/larissa/larissa-elevation-thumbnail.webp",
               "surface": "larissa-elevation-surface@2x.webp",
@@ -455,8 +455,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d0da9ec1210c4a843a7afb9a240e4773db8d8c8170eccaf5c625514e87a346e0",
-      "bytes": 5492,
+      "sha256": "7da96be8bfe605b7f893ffe84eb7ff3fc5fb825509b319f8a9afd8d943d61925",
+      "bytes": 5252,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

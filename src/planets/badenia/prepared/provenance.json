@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "12c768138a87271daa6cac2a02cbeecc48f0f956b3f26ae8da37d85141c6d0f1"
+    "sha256": "fef3ab5823bc4d8bcd1dc949a6f3aecf530b24e5e8b4c9053e1a890616d5de0b"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "acceddc623d4881d551e5cda2f3cc6e9fb1e1989c52f7f9d840a63703d3c3d85",
+      "sha256": "4ac3e99bc710c15764f317c65005eebe7dfd25f8a301b4e4e2c64d1dc4d9b712",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 69.73 ± 2.8 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Thermal diameter 69.73 ± 2.8 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/badenia/badenia-shape-thumbnail.webp",
               "surface": "badenia-shape-surface@2x.webp",
               "poles": "badenia-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 34.865 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 34.865 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/badenia/badenia-elevation-thumbnail.webp",
               "surface": "badenia-elevation-surface@2x.webp",
               "poles": "badenia-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "acceddc623d4881d551e5cda2f3cc6e9fb1e1989c52f7f9d840a63703d3c3d85",
+      "sha256": "4ac3e99bc710c15764f317c65005eebe7dfd25f8a301b4e4e2c64d1dc4d9b712",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10462,
+      "bytes": 10135,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

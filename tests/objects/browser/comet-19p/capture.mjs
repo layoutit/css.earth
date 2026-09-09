@@ -40,7 +40,7 @@ async function capture(base,dpr,{fresh=false}={}){
   p.catch(()=>{});pending.push(p);
  });
  try{
-  await page.goto(base+'/'+id+'/',{waitUntil:'networkidle'});await page.waitForFunction(()=>document.documentElement.dataset.ready==='true' && document.querySelector('.planet-stage')?.dataset.objectId==='comet-19p' && document.querySelectorAll('.comet-19p-body > u').length===4990);
+  await page.goto(base+'/'+id+'/',{waitUntil:'networkidle'});await page.waitForFunction(()=>document.documentElement.dataset.ready==='true' && document.querySelector('.planet-stage')?.dataset.objectId==='comet-19p' && document.querySelectorAll('.comet-19p-body > u').length===2856);
   await page.waitForTimeout(350);await Promise.all(pending);
   const cold=loaded.slice(),coldRequests=requests.length;
   const transported=cold.find(r=>r.decodedSha256===hash(payload));assert.ok(transported,'The browser must load the exact prepared object bytes.');
@@ -53,7 +53,7 @@ async function capture(base,dpr,{fresh=false}={}){
   const initial=await page.locator('.polycss-scene').evaluate(root=>{
    const leaves=[...document.querySelectorAll('.comet-19p-body > u')];window.__borrellyNodes={root,leaves,geometry:leaves.map(n=>['transform','width','height','background-position','background-size'].map(k=>n.style.getPropertyValue(k)))};
    return {leaves:leaves.length,atlas:[...new Set(leaves.map(n=>getComputedStyle(n).backgroundImage))],dimensions:[...new Set(leaves.map(n=>{const s=getComputedStyle(n);return s.width+' × '+s.height}))]};
-  });assert.equal(initial.leaves,4990);
+  });assert.equal(initial.leaves,2856);
   const inspectAtlases=async()=>{
    const urls=await page.locator('.comet-19p-body > u').evaluateAll(nodes=>[...new Set(nodes.filter(n=>getComputedStyle(n).display!=='none').map(n=>getComputedStyle(n).backgroundImage.match(/url\("?([^"\)]+)/)[1]))]);
    const records=[];
@@ -77,7 +77,7 @@ async function capture(base,dpr,{fresh=false}={}){
     const selected=nodes.filter(n=>getComputedStyle(n).display!=='none');
     return {count:selected.length,models:[...new Set(selected.map(n=>n.dataset.surfaceModel))]};
    });
-   assert.deepEqual(visible,{count:lens==='dlr'?3024:1966,models:[lens==='dlr'?'dlr':'micas']});assert.equal(await pose(),initialPose,'A dataset switch must preserve the shared camera.');
+   assert.deepEqual(visible,{count:lens==='dlr'?1862:994,models:[lens==='dlr'?'dlr':'micas']});assert.equal(await pose(),initialPose,'A dataset switch must preserve the shared camera.');
   };
   const views=[];
   for(const lens of ['micas','usgs','dlr','height','difference']){
@@ -88,7 +88,7 @@ async function capture(base,dpr,{fresh=false}={}){
    const shadows=await inspectAtlases();assert.ok(shadows.every(a=>a.filename===`${id}-${lens}-shadow@2x.webp`));
    await page.screenshot({path:resolve(out,`${prefix}-${lens}-shadows.png`)});
    await lighting();await Promise.all(pending);
-   views.push({lens,shadows,flood,visibleLeaves:lens==='dlr'?3024:1966,responses:loaded.slice(offset)});
+   views.push({lens,shadows,flood,visibleLeaves:lens==='dlr'?1862:994,responses:loaded.slice(offset)});
   }
   // Choose a front-facing native triangle interior, away from sidebar controls.
   // The separate surface-hit harness compares all painted faces and background

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a4df9e1bef77985940137cd3d88174a195058f15680c4437217f36998080e201"
+    "sha256": "ddc4f5196e36e66352fb2f61951699bfa6c3aa2c2815fb3019a8b9ddc666c05f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -139,7 +139,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "974695c2694b282c8b1541fda44a47e00712f64b4453988055a07294ff403624",
+      "sha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -187,7 +187,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
-              "title": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
+              "title": "ISS clear-filter image",
               "detail": "Cassini ISS",
               "thumbnail": "/scenes/methone/methone-normal-thumbnail.webp",
               "surface": "methone-normal-surface@2x.webp",
@@ -197,7 +197,7 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1716192103"
               },
-              "summary": "Cassini's 2012 image at about 27 m/pixel. The dark oval remains; gaps are marked and tiny spots may be noise."
+              "summary": "The darker oval is visible at about 27 m per source pixel. Gaps are marked; tiny isolated spots may be detector noise."
             }
           ]
         },
@@ -370,8 +370,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0f5330332377d51551832198922a160311d4d8f94b15c30a9873161805818e5d",
-      "bytes": 3644,
+      "sha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
+      "bytes": 3486,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

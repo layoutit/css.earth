@@ -77,7 +77,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
-        "title": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
+        "title": "Multi-mission image mosaic",
         "detail": "Multi-mission mosaic",
         "thumbnail": "/scenes/deimos/deimos-normal-thumbnail.webp",
         "surface": "deimos-normal-surface@2x.webp",
@@ -87,13 +87,13 @@
           "path": "../manifest.json",
           "url": "https://sbn.psi.edu/pds/resource/stookemaps.html"
         },
-        "summary": "Viking and MRO mosaic with uneven detail. Shadows, seams and interpolated poles remain; gaps are unmasked."
+        "summary": "Photographed shadows, image seams and interpolated poles remain. Detail varies; missing coverage is not masked in this mosaic."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius above a 6.2 km reference sphere, sampled from the Ernst et al. (2023) shape model. Facets without a solved SPC albedo are conservatively withheld; the full shape includes less-constrained terrain.",
-        "title": "Radius above a 6.2 km reference sphere, sampled from the Ernst et al. (2023) shape model. Facets without a solved SPC albedo are conservatively withheld; the full shape includes less-constrained terrain.",
+        "title": "Shape-derived radial height",
         "detail": "Shaded relief",
         "thumbnail": "/scenes/deimos/deimos-elevation-thumbnail.webp",
         "surface": "deimos-elevation-surface@2x.webp",
@@ -123,7 +123,7 @@
         "id": "albedo",
         "label": "Relative albedo",
         "description": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
-        "title": "Relative brightness solved jointly with shape from mission images; this is the released SPC scale, not a natural-color photograph or a calibrated absolute albedo. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+        "title": "SPC relative albedo model",
         "detail": "Released facet values",
         "thumbnail": "/scenes/deimos/deimos-albedo-thumbnail.webp",
         "surface": "deimos-albedo-surface@2x.webp",
@@ -152,7 +152,7 @@
         "id": "slope",
         "label": "Slope",
         "description": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
-        "title": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement.",
+        "title": "Modeled surface slopes",
         "detail": "Released facet values",
         "thumbnail": "/scenes/deimos/deimos-slope-thumbnail.webp",
         "surface": "deimos-slope-surface@2x.webp",

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b342e4be18ba1deed83e880cfb925185719838ae571a2d15d025122eae1f53e2"
+    "sha256": "86399de081016cf9f30c837b938c2cdcfc7e98d511bd614865e70bfbdebeb1ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -155,7 +155,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b77029edadf87d7fbdd300d91980694d6320ce440bf59f9435e3789cc77a9147",
+      "sha256": "3dc55ec1d02b2bec3dd31afdce73fdcefc123164c2017fa6a17f2d172a17063f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -233,7 +233,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
-              "title": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
+              "title": "Monochrome mosaic",
               "detail": "Corrected mosaic",
               "thumbnail": "/scenes/ariel/ariel-normal-thumbnail.webp",
               "surface": "ariel-normal-surface@2x.webp",
@@ -243,13 +243,13 @@
                 "path": "../manifest.json",
                 "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
               },
-              "summary": "Voyager 2 mosaic with brightness correction. Shadows and seams remain; the gray grid marks gaps."
+              "summary": "Brightness correction reduces broad shading, while local shadows and seams remain. The gray grid marks missing observations."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
-              "title": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
+              "title": "Stereo, shading and limb terrain model",
               "detail": "Shaded relief",
               "thumbnail": "/scenes/ariel/ariel-elevation-thumbnail.webp",
               "surface": "ariel-elevation-surface@2x.webp",
@@ -473,8 +473,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "17ac82cb8ec7782badaa5a6f01bd05f563bb821e815694fbe3a471c92ec8f3d8",
-      "bytes": 7652,
+      "sha256": "3dc55ec1d02b2bec3dd31afdce73fdcefc123164c2017fa6a17f2d172a17063f",
+      "bytes": 7569,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

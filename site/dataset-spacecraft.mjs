@@ -23,3 +23,33 @@ export function datasetSpacecraft(provenance, lensId, catalog) {
     return spacecraft;
   });
 }
+
+/** The body's mission tab combines its dataset lineage without repeating missions. */
+export function objectSpacecraft(provenance, catalog) {
+  if (!provenance) return [];
+  validateObjectProvenance(provenance);
+  const lensIds = new Set(provenance.products.flatMap(product => product.lensIds));
+  const missions = new Map();
+  for (const lensId of lensIds) {
+    for (const mission of datasetSpacecraft(provenance, lensId, catalog)) {
+      missions.set(mission.id, mission);
+    }
+  }
+  return [...missions.values()];
+}
+
+/** Group prepared missions by their credited agencies, including joint missions. */
+export function spacecraftAgencies(missions) {
+  const agencies = new Map();
+  for (const mission of missions) {
+    const credit = mission.facts.find(fact => fact.label === 'Mission')?.detail;
+    if (typeof credit !== 'string' || !credit.trim()) {
+      throw new TypeError(`Mission ${mission.id} has no credited agency.`);
+    }
+    for (const agency of credit.split(/\s*\/\s*/)) {
+      if (!agencies.has(agency)) agencies.set(agency, new Map());
+      agencies.get(agency).set(mission.id, mission);
+    }
+  }
+  return [...agencies].map(([name, missions]) => ({ name, missions: [...missions.values()] }));
+}

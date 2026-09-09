@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "48f426617757f9817c868c080a28af1ff737ebebe195fa87221ded72164132fc"
+    "sha256": "9419636683219cb0136c21608cf6c170909bc66e7860ab60cf77a967773fd836"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "37b52cdbe11615741f4551f391f5de94c30b33942bd6ce753f80aeaa6f97c622",
+      "sha256": "65a656bbe9df25651907bcc08e62a5b31b00095cb407962d09b9593a7f815f02",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Approximate 147 km diameter: the original thermophysical fit reports ±2 km, with additional uncertainty from using a different shape. The corrected 2026 pole and period are used; rotational phase is illustrative.",
-              "title": "Approximate 147 km diameter: the original thermophysical fit reports ±2 km, with additional uncertainty from using a different shape. The corrected 2026 pole and period are used; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/massalia/massalia-shape-thumbnail.webp",
               "surface": "massalia-shape-surface@2x.webp",
               "poles": "massalia-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/massalia/massalia-elevation-thumbnail.webp",
               "surface": "massalia-elevation-surface@2x.webp",
               "poles": "massalia-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "37b52cdbe11615741f4551f391f5de94c30b33942bd6ce753f80aeaa6f97c622",
+      "sha256": "65a656bbe9df25651907bcc08e62a5b31b00095cb407962d09b9593a7f815f02",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11515,
+      "bytes": 11176,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

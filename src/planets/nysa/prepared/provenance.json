@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "53f3426164963ad83b92047b5e03878b6ca8e90bacc3b5af78b7845a1b5059e8"
+    "sha256": "07298aed7ef3f7040a04ae8ef655bba207071589cc05a85f6c68bc54b31d40f2"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "badd52c855a662c88f9eedf4c11908dfefc89674215e60b5656d32efebf4575d",
+      "sha256": "714de0d27a735764056bad42f77613c671acabadfa72c8be4549e4fcb73d2b2d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 16324, version 2026-07-28, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 16324",
               "thumbnail": "/scenes/nysa/nysa-shape-thumbnail.webp",
               "surface": "nysa-shape-surface@2x.webp",
               "poles": "nysa-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 37.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/nysa/nysa-elevation-thumbnail.webp",
               "surface": "nysa-elevation-surface@2x.webp",
               "poles": "nysa-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "40e6d1a2a726a2f6edc6c4edc076376ad29c7518a6f63912a77abd4dc18d0462",
-      "bytes": 7686,
+      "sha256": "714de0d27a735764056bad42f77613c671acabadfa72c8be4549e4fcb73d2b2d",
+      "bytes": 7333,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

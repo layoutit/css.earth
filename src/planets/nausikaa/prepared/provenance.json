@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2e2788cf59714c1b1a2cae092afcdaad168b8b028879845960e3a99e3c40e1c4"
+    "sha256": "b5fb1bd56ef7ad8736173279095a061a1a6938764535c760278b516706fdfb5d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f0d223cf8f3dcc2eee6f5325f8205c03c6cd2f22b01814b93511ee6e3665c961",
+      "sha256": "cc5aadc5d3874196f299c6be00cc73acb3df7ea1b4357239dde12a581661a2e6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 1864, version 2018-02-19, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 1864",
               "thumbnail": "/scenes/nausikaa/nausikaa-shape-thumbnail.webp",
               "surface": "nausikaa-shape-surface@2x.webp",
               "poles": "nausikaa-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 47 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/nausikaa/nausikaa-elevation-thumbnail.webp",
               "surface": "nausikaa-elevation-surface@2x.webp",
               "poles": "nausikaa-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f5b2d0eb9d6ef1616010fed4687b0886c1091195d9004c37bc6015b5ca7d6aff",
-      "bytes": 10258,
+      "sha256": "cc5aadc5d3874196f299c6be00cc73acb3df7ea1b4357239dde12a581661a2e6",
+      "bytes": 9849,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

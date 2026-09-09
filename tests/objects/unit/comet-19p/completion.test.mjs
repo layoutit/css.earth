@@ -9,7 +9,7 @@ const root = new URL('../../../../src/planets/comet-19p/', import.meta.url);
 const json = async path => JSON.parse(await readFile(new URL(path, root)));
 
 test('both completed Borrelly banks close around source-backed terrain', async () => {
-  for (const [file, measuredCount, completedCount] of [['terrain',890,1966],['terrain-dlr',1399,3024]]) {
+  for (const [file, measuredCount, completedCount] of [['terrain',452,994],['terrain-dlr',799,1862]]) {
     const terrain = await json(`prepared/${file}.json`), positions = [], lookup = new Map();
     assert.equal(terrain.faces.filter(face => !face.estimated).length, measuredCount);
     assert.equal(terrain.faces.length, completedCount);
@@ -46,5 +46,5 @@ test('every added face is gridded in all datasets and has no MICAS source code',
       }
     }
   }
-  assert.ok(accepted>100000 && withheld>1000000);
+  assert.ok(accepted>100000 && withheld>500000);
 });

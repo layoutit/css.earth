@@ -28,7 +28,8 @@
         "cassini-n1530201013",
         "cassini-n1692997492",
         "cassini-n1694888328",
-        "cassini-n1811772616"
+        "cassini-n1811772616",
+        "cassini-n1506391424"
       ],
       "size": 512,
       "longitudeDegrees": 160,
@@ -38,8 +39,8 @@
       "lensId": "normal"
     },
     "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 168394,
-    "expectedSha256": "97376a7f617f026109c67fed4816e0955b8a1a52362a09fb31b4963aa86a860f"
+    "expectedBytes": 168939,
+    "expectedSha256": "5ce12c03b1f3aae7b8897ddbc4186cedbf79a229968ef2dbff90e34b4084a6de"
   },
   "operations": [
     {

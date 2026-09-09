@@ -32,12 +32,10 @@
         "referenceRadiusMeters": 106800
       },
       "consumers": [
-        "surfaces"
+        "reference"
       ],
-      "lensId": "normal",
-      "label": "Monochrome",
       "falseColor": false,
-      "coverage": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+      "coverage": "Historical source retained for provenance, outside the mounted view roster. Registration of the old monochrome mosaic to the 2023 shifted shape has not been demonstrated.",
       "capture": {
         "spacecraftIds": [
           "cassini"
@@ -61,17 +59,14 @@
       "acquisition": "Download the original PDS4 vertex-facet table.",
       "redistribution": "Retain the model author and archive credit.",
       "consumers": [
-        "shape",
-        "scientific-surfaces"
+        "reference"
       ],
-      "lensId": "elevation",
-      "label": "Elevation",
       "falseColor": true,
       "projection": {
         "type": "body-fixed-mesh",
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained."
+      "coverage": "Historical source retained for provenance, outside the mounted view roster. Registration of the old monochrome mosaic to the 2023 shifted shape has not been demonstrated."
     },
     {
       "id": "eso-milky-way-panorama",
@@ -106,41 +101,232 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "phoebe-2023-shape",
+      "path": "shape/2023/phoebe_128_o.obj",
+      "expectedBytes": 17787240,
+      "expectedSha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_128_o.obj",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
+      "licenseEvidence": [
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "consumers": [
+        "shape"
+      ],
+      "projection": {
+        "type": "body-fixed-mesh",
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Published center-of-figure Q128 model, 1.195 km nominal GSD; poorly imaged terrain is less constrained. Source-preserving simplification is separately measured."
+    },
+    {
+      "id": "phoebe-2023-albedo",
+      "path": "science/2023/phoebe_albedo_c.cub",
+      "expectedBytes": 9941545,
+      "expectedSha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
+      "licenseEvidence": [
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 2222,
+      "height": 1111,
+      "coverage": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
+      "projection": {
+        "type": "simple-cylindrical",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "referenceRadiusMeters": 106500
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub"
+      }
+    },
+    {
+      "id": "phoebe-2023-radius",
+      "path": "science/2023/phoebe_radius_c.cub",
+      "expectedBytes": 9942047,
+      "expectedSha256": "9d30106e1acd7a85ba374b4f6cd8af0da8cf9569efab5ca95439d9975858817d",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
+      "licenseEvidence": [
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Radial height",
+      "falseColor": true,
+      "width": 2222,
+      "height": 1111,
+      "coverage": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
+      "projection": {
+        "type": "simple-cylindrical",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "referenceRadiusMeters": 106500
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub"
+      }
+    },
+    {
+      "id": "phoebe-2023-bestmap",
+      "path": "science/2023/phoebe_bestmap_c.cub",
+      "expectedBytes": 326427,
+      "expectedSha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
+      "licenseEvidence": [
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "maplet-resolution",
+      "label": "Maplet resolution",
+      "falseColor": true,
+      "width": 360,
+      "height": 180,
+      "coverage": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
+      "projection": {
+        "type": "simple-cylindrical",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "referenceRadiusMeters": 106500
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub"
+      }
+    },
+    {
+      "id": "phoebe-2023-numimg",
+      "path": "science/2023/phoebe_numimg_c.cub",
+      "expectedBytes": 326413,
+      "expectedSha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
+      "licenseEvidence": [
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "image-count",
+      "label": "Image count",
+      "falseColor": true,
+      "width": 360,
+      "height": 180,
+      "coverage": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
+      "projection": {
+        "type": "simple-cylindrical",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "referenceRadiusMeters": 106500
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub"
+      }
     }
   ],
   "generatedIntermediates": [
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "origin": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
-      "credit": "NASA/JPL/Space Science Institute; DLR",
-      "license": "Public NASA mission data, archived in PDS. Retain mission and cartography credits.",
+      "origin": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "cassini-mosaic",
-          "gaskell-2012-shape"
+          "phoebe-2023-shape",
+          "phoebe-2023-albedo",
+          "phoebe-2023-numimg",
+          "phoebe-2023-bestmap"
         ],
         "size": 512,
         "longitudeDegrees": 0,
         "latitudeDegrees": -20,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "lensId": "normal",
+        "displaySampling": "nearest"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 175814,
-      "expectedSha256": "0e9ff01de751738d7dfbc8b3fcacc84948984f19aad8ff5e061e0327e243426f"
+      "expectedBytes": 115290,
+      "expectedSha256": "4a2a1a9cb3c5b5b6b91663897ed302bd78bbed6b09df19fe72f8698af7c275d1"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5375,
-      "expectedSha256": "9f53a299a1ee6106b2a55e852c429676e33cbab5d82270968894ea7dd84a3f2e",
+      "expectedBytes": 9452,
+      "expectedSha256": "e48d48ce5f724909c52934209145e077d677172db951b5b89312bcdf8d361938",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -157,26 +343,26 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 982,
-      "expectedSha256": "e1ceb5ea8c2b6a1ac9f1fda2462a87edc546b31ca9bf25e338dd504862eb29f7",
+      "expectedBytes": 2286,
+      "expectedSha256": "bb9c243ce9a33fb04fe6475d3cd82d4a26c4025aa279ded13590e067884ee47d",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1282,
-      "expectedSha256": "dd8eb3b09ef8197239465791b8893c429a2da91bee168bf1d69e227d6afbe521",
+      "expectedBytes": 1436,
+      "expectedSha256": "3078fdf7c44cf8ee205193606d98a114bc9f7a70de92af89e385b699599a4923",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
       "path": "preparation/rotation.json",
-      "expectedBytes": 532,
-      "expectedSha256": "74eeab739921e8b14e05943ab35548a07d6cfc9e04dc283c8b23824296b5d3ad",
+      "expectedBytes": 668,
+      "expectedSha256": "5dba43a0956e9dd4b84819ea83d253431569afb4b5126661ef5a9c28c2a39713",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2847,
-      "expectedSha256": "5e86c9b34ab60d330e317a7cfb97b6f14514e99366f5f8c9cd86085b3d71d88c",
+      "expectedBytes": 9433,
+      "expectedSha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -233,6 +419,102 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1085,
       "expectedSha256": "18382312259d453de290b2017d9d054e0551dcba57c88693b8be1eac2e3bc95a"
+    },
+    {
+      "path": "shape/2023/phoebe_128_o.xml",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 8362,
+      "expectedSha256": "ba1b4e2b48c1ddf3e4ba0f02d9a8f70f24fb0dfbd1ce29b41329cd3df3da08b7"
+    },
+    {
+      "path": "science/2023/phoebe_albedo_c.xml",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 7182,
+      "expectedSha256": "d2edeca7fc28031ef0b1d980d4cedb9a1479a4d5fa9fe5fb68e2bdad04fb0253"
+    },
+    {
+      "path": "science/2023/phoebe_radius_c.xml",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 7137,
+      "expectedSha256": "82159c91ae1218cd0d92c5147f871974f3645085b6f5b3227c5e62e367168ad3"
+    },
+    {
+      "path": "science/2023/phoebe_bestmap_c.xml",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 7108,
+      "expectedSha256": "91cd4e7be8c9fd1ddf51950c125f3f4e307ad77ae2aa4f0c8198fa4d0b7d1c81"
+    },
+    {
+      "path": "science/2023/phoebe_numimg_c.xml",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 7110,
+      "expectedSha256": "7b5056187db70dd6859872225de6fffd2988c354d3284849b59280a1fb951111"
+    },
+    {
+      "path": "science/2023/productdescription.txt",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 16534,
+      "expectedSha256": "b8a24258e4a2f97de3158453a01262571a0061ddfa00c3581b8aad4356b0a3a7"
+    },
+    {
+      "path": "science/2023/phoebekernellist.txt",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 8233,
+      "expectedSha256": "8bcffafa72f3d7d4f2c9711a9478a6ded84b1e48f15e33e1d890c3954ec964f3"
+    },
+    {
+      "path": "science/2023/phoebeimglist.txt",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 3952,
+      "expectedSha256": "d70688edd7b16c7baa6dbe1809be702ef95d3b69a13c3220d7f690368f859ac0"
+    },
+    {
+      "path": "science/2023/phoebeshapeassessment.pdf",
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
+      "expectedBytes": 395600,
+      "expectedSha256": "c84bc74796fa2bd29f9b631ffbfe8c5147cd5af3945e71d25c8453e263bf3c02"
+    },
+    {
+      "path": "validation/2023-geometry-initial-trial.json",
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
+      "expectedBytes": 4524,
+      "expectedSha256": "922b9cd4c4d2d0dea007e5d4f9f1fc999881d86da8d342a505e79aec3013850d"
+    },
+    {
+      "path": "validation/2023-geometry-qualification.json",
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
+      "expectedBytes": 29982,
+      "expectedSha256": "22b7e0291f5cc826250ec335e9b26270549846ab9d289a580ad4b79e6cb85565"
+    },
+    {
+      "path": "validation/2023-geometry-regularized-trial.json",
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
+      "expectedBytes": 4401,
+      "expectedSha256": "e5d7548e98a6f01027fadee7970968813f59dab10d05ef5a8ec386f1bb33f93e"
+    },
+    {
+      "path": "validation/2023-independent-geometry.json",
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
+      "expectedBytes": 1549,
+      "expectedSha256": "496106c374ccebee5ad373898d9f4af9f932c3173fa87aadc16add2a99c342cd"
+    },
+    {
+      "path": "validation/2023-mask-source-check.json",
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
+      "expectedBytes": 608,
+      "expectedSha256": "829386da334c8d6b492d66ebc7cd6f97ec124f6b24d0fe2bc68148f74b5d10b7"
+    },
+    {
+      "path": "validation/2023-source-statistics.json",
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
+      "expectedBytes": 9783,
+      "expectedSha256": "d148c26d174e7defaceb2d795f746069e2595f8227aa1fd01478136cf834c031"
+    },
+    {
+      "path": "validation/2023-context-generation.json",
+      "purpose": "Pinned paired-source context generation and bit-identical repeat receipt.",
+      "expectedBytes": 2239,
+      "expectedSha256": "6a8ab7858925801e7b75e7b43bb7e793d5f1e948d23a76cac07d4e1802b7812a"
     }
   ]
 }
