@@ -244,7 +244,8 @@ test("keeps implemented routes backed by object-owned files", async () => {
       "../../src/planets/" + planet.id + "/prepared/object.json",
       "../../src/planets/" + planet.id + "/prepared/content.json",
       "../../tests/objects/browser/" + planet.id + "/browser-profile.mjs",
-      "../pages/" + planet.id + ".astro",
+      "../pages/[id].astro",
+      "../../src/planets/" + planet.id + "/prepared/page.json",
     ];
     await Promise.all(owned.map((relativePath) =>
       access(new URL(relativePath, import.meta.url))));

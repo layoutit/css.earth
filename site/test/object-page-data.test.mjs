@@ -1,34 +1,59 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
+import {mkdtemp,mkdir,readFile,writeFile,rm,access} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
-import {loadObjectPageData} from '../object-page-data.mjs';
+import {loadObjectPageData,readPreparedObjectBytes} from '../object-page-data.mjs';
+import {objectPageStyles} from '../object-page-contract.mjs';
+import {preparePageMetadata} from '../../tools/prepared-page-metadata.mjs';
 import {OBJECTS} from '../objects.mjs';
 
-test('page data retains the pinned controls and preloads without retaining the scene tree',async t=>{
+test('page metadata stays hash-bound to its scene without needing scene bytes during page emission',async t=>{
  const root=await mkdtemp(resolve(tmpdir(),'cssearth-page-data-'));
  t.after(()=>rm(root,{recursive:true,force:true}));
  const directory=resolve(root,'src/planets/body');await mkdir(resolve(directory,'prepared'),{recursive:true});
- const data={assets:{entries:[{key:'surface',url:'/scenes/body/surface.webp'}],startup:['surface']},
+ const data={id:'body',assets:{entries:[{key:'surface',url:'/scenes/body/surface.webp'}],startup:['surface']},
   controls:{lenses:{defaultLens:'shape'},settings:{controls:[{name:'shadows',checked:false}]}},tree:{nodes:[{tag:'u'}]}};
  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:'body',data});
- const descriptor={id:'body',prepared:{url:'prepared/object.json',sha256:createHash('sha256').update(payload).digest('hex')}};
+ const hash=createHash('sha256').update(payload).digest('hex'), page=preparePageMetadata('body',hash,data);
+ const descriptor={id:'body',prepared:{url:'prepared/object.json',sha256:hash},properties:{page:{metadata:page.reference}}};
  await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
- await writeFile(resolve(directory,'prepared/object.json'),payload);
+ await writeFile(resolve(directory,'prepared/page.json'),page.text);
  assert.deepEqual(await loadObjectPageData('body',root),{assets:data.assets,controls:data.controls});
+ assert.equal('tree' in JSON.parse(page.text),false);
+ await writeFile(resolve(directory,'prepared/object.json'),payload);
+ await readPreparedObjectBytes('body',root);
  await writeFile(resolve(directory,'prepared/object.json'),payload+' ');
+ await assert.rejects(readPreparedObjectBytes('body',root),/descriptor pin/);
+ descriptor.prepared.sha256='a'.repeat(64);
+ await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
+ await assert.rejects(loadObjectPageData('body',root),/incomplete/);
+ await writeFile(resolve(directory,'prepared/page.json'),page.text+' ');
  await assert.rejects(loadObjectPageData('body',root),/descriptor pin/);
  await assert.rejects(loadObjectPageData('../body',root),/identity/);
 });
 
-test('registered routes read page metadata without importing complete scene transports into the build graph',async()=>{
+test('all registry objects own ordered CSS and scene-bound page metadata',async()=>{
  for(const {id} of OBJECTS){
-  const page=await readFile(new URL(`../pages/${id}.astro`,import.meta.url),'utf8');
-  assert.ok(page.includes(`await loadObjectPageData("${id}")`),id);
-  assert.doesNotMatch(page,/import\s+.*from\s+["'][^"']*prepared\/(?:object|runtime)\.json["']/u);
-  assert.ok(page.includes('preparedAssets={preparedPage.assets}'),id);
-  assert.ok(page.includes('preparedControls={preparedPage.controls}'),id);
+  const descriptor=JSON.parse(await readFile(new URL(`../../src/planets/${id}/object.json`,import.meta.url),'utf8'));
+  const page=await loadObjectPageData(id);
+  const styles=objectPageStyles(descriptor);
+  assert.equal(styles.at(-1),'site/planet-shell.css');
+  for(const path of styles) await access(new URL(`../../${path}`,import.meta.url));
+  const transport=await readPreparedObjectBytes(id);
+  const data=JSON.parse(transport.bytes).data;
+  assert.deepEqual(page,{assets:data.assets,controls:data.controls},id);
  }
+});
+
+test('generic routes derive membership from OBJECTS and never import scene transports',async()=>{
+ for(const path of ['../pages/[id].astro','../pages/navigation/[id].astro']){
+  const source=await readFile(new URL(path,import.meta.url),'utf8');
+  assert.match(source,/OBJECTS\.map/); assert.match(source,/getStaticPaths/);
+ }
+ const page=await readFile(new URL('../components/ObjectPage.astro',import.meta.url),'utf8');
+ assert.match(page,/loadObjectPageData\(objectId\)/);
+ assert.doesNotMatch(page,/prepared\/(?:object|runtime)\.json/);
+ assert.throws(()=>objectPageStyles({id:'body',properties:{page:{stylesheets:['src/../escape.css']}}}),/invalid/);
 });

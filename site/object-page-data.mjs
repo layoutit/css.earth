@@ -18,11 +18,21 @@ export async function readPreparedObjectBytes(id, root = process.cwd()) {
 }
 
 export async function loadObjectPageData(id, root = process.cwd()) {
-  const { bytes } = await readPreparedObjectBytes(id, root);
+  if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object page identity.');
+  const directory = resolve(root, 'src/planets', id);
+  const descriptor = JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8'));
+  const reference = descriptor.properties?.page?.metadata;
+  if (descriptor.id !== id || reference?.url !== 'prepared/page.json') {
+    throw new TypeError(`${id}: invalid prepared page reference.`);
+  }
+  const bytes = await readFile(resolve(directory, reference.url));
+  if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) {
+    throw new Error(`${id}: prepared page data differs from its descriptor pin.`);
+  }
   const object = JSON.parse(bytes);
-  if (object.schema !== 'cssearth-prepared-object@1' || object.id !== id ||
-      !object.data?.assets || !object.data.controls) {
+  if (object.schema !== 'cssearth-object-page@1' || object.id !== id ||
+      object.sceneSha256 !== descriptor.prepared?.sha256 || !object.assets || !object.controls) {
     throw new TypeError(`${id}: incomplete prepared page data.`);
   }
-  return { assets: object.data.assets, controls: object.data.controls };
+  return { assets: object.assets, controls: object.controls };
 }

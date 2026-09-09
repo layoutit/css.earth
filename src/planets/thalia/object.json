@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 247.82608695652175,
       "bodyRadiusM": 57000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thalia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7d52e045ba221dbc9e56f01f7de69299fc4b33ae68cd6fbab519976c89ebec8a"
+      }
     }
   },
   "schema": "cssearth-object@1",

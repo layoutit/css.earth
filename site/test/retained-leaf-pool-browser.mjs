@@ -52,7 +52,7 @@ try {
 
     const pick = await page.evaluate(() => {
       const stage = document.querySelector('.planet-stage').getBoundingClientRect();
-      for (const orbit of document.querySelectorAll('[data-context-orbit]')) {
+      for (const orbit of document.querySelectorAll('[data-context-orbit="neptune"]')) {
         const indicator = document.querySelector(`[data-context-indicator="${orbit.dataset.contextOrbit}"]`);
         if (!indicator || orbit.ariaDisabled === 'true' || getComputedStyle(indicator).visibility === 'hidden') continue;
         for (const piece of orbit.querySelectorAll('s')) {
@@ -61,8 +61,10 @@ try {
           // Three pixels beside the visible line, inside its existing hit corridor.
           const x = stage.x + stage.width / 2 + m.m41 + m.m11 / 2 + m.m21 * 3;
           const y = stage.y + stage.height / 2 + m.m42 + m.m12 / 2 + m.m22 * 3;
-          if (x < 460 || x > innerWidth - 40 || y < 60 || y > innerHeight - 60) continue;
-          if (!document.elementsFromPoint(x, y).some(element => element === piece)) continue;
+          if (x < 900 || x > innerWidth - 100 || y < 100 || y > innerHeight - 100) continue;
+          if (Math.hypot(x - innerWidth / 2, y - innerHeight / 2) < 220) continue;
+          if (document.elementFromPoint(x, y) !== document.querySelector('.planet-input-surface')) continue;
+          if (getComputedStyle(piece, '::before').content !== 'none') throw new Error('Redundant orbit hit box');
           return { id: orbit.dataset.contextOrbit, x, y, indicatorWidth: indicator.getBoundingClientRect().width };
         }
       }

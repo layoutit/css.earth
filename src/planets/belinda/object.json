@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 175.2933634636345,
       "bodyRadiusM": 40317.47359663594
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/belinda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "35f2a710563fdb7dd1ed743dfdf07d7146457c27c2d5e77e77791a2b8e6ae33a"
+      }
     }
   },
   "prepared": {

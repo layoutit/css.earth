@@ -12,6 +12,7 @@ export interface ObjectSelectionRuntimeOptions {
   residency: ReturnType<typeof createPreparedResidency>; lifetime: SceneLifetime;
   onChange?: (state: Readonly<ObjectSelectionState>) => void; onCommit?: (selection: ObjectSelection, plan: PreparedPresentationPlan) => void;
   onFatalError: (error: unknown) => void; onMaterialError?: (error: unknown) => void;
+  deferTextureRefinement?: boolean;
 }
 interface SelectionRequest { selection: ObjectSelection; kind: "initial" | "selection" | "frame"; ticket: PreparedResidencyTicket | null; plan: PreparedPresentationPlan | null; previous: SelectionRequest | null; }
 
@@ -22,12 +23,13 @@ const sameKeys = (a: readonly string[], b: readonly string[]) => a.length === b.
 
 export function createObjectSelectionRuntime({
   definition, presentation, residency, lifetime,
-  onChange = () => {}, onCommit = () => {}, onFatalError, onMaterialError = () => {},
+  onChange = () => {}, onCommit = () => {}, onFatalError, onMaterialError = () => {}, deferTextureRefinement = false,
 }: ObjectSelectionRuntimeOptions) {
   const initialSelection = initialObjectSelection(definition.controls);
   let desired = initialSelection, committed: ObjectSelection | null = null, committedPlan: PreparedPresentationPlan | null = null, view: PreparedView | null = null;
   let active: SelectionRequest | null = null, destroyed = false, started = false, busy = false, error: string | null = null;
   let requests = 0, passes = 0, commits = 0, framePublications = 0;
+  let textureRefinement = !deferTextureRefinement;
   const live = () => !destroyed && !lifetime.disposed;
   const state = (): Readonly<ObjectSelectionState> => Object.freeze({ desired, committed, plan: committedPlan,
     pending: busy && active?.kind !== "frame", loadingMaterial: active?.kind === "frame",
@@ -37,7 +39,7 @@ export function createObjectSelectionRuntime({
   function resolve(selection: ObjectSelection) {
     try {
       if (!view) throw new Error("Prepared selection requires a published view.");
-      return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan });
+      return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan, initial: !committed || !textureRefinement });
     } catch (failure) { if (live()) onFatalError(failure); throw failure; }
   }
   function frame(nextSelection: ObjectSelection | null = committed, nextPlan: PreparedPresentationPlan | null = committedPlan) {
@@ -128,7 +130,9 @@ export function createObjectSelectionRuntime({
           active = null;
           busy = false;
           notify();
-          return live() && active === null;
+          // A publication callback may immediately request a finer view. That
+          // successor does not undo this successfully committed selection.
+          return live();
         } catch (failure) {
           if (current()) onFatalError(failure);
           throw failure;
@@ -179,6 +183,11 @@ export function createObjectSelectionRuntime({
         if (prepared) return;
         run(committed, "frame").catch(failure => { if (live()) onMaterialError(failure); });
       } catch (failure) { if (live()) onFatalError(failure); throw failure; }
+    },
+    refineTextures() {
+      if (!live()) return;
+      textureRefinement = true;
+      if (view) this.setView(view);
     },
     state,
     stats: () => Object.freeze({ ...state(), requests, passes, commits, framePublications, destroyed }),

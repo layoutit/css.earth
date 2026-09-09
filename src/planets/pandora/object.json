@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 176.52173913043478,
       "bodyRadiusM": 40600
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pandora-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "637b610868bd4ad62af5f8cd463c86f00a5b5722a5fbe7787b703bfb5db2977b"
+      }
     }
   },
   "prepared": {

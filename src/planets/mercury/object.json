@@ -152,6 +152,15 @@
         "lens": "interior",
         "material": "lighting"
       }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ba1a4781497ccca359fab8996a2bff70ffd191806918b7d0196d846bc41063e3"
+      }
     }
   },
   "schema": "cssearth-object@1",

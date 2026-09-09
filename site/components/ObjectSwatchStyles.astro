@@ -27,17 +27,6 @@ const minorBodyLabelStyles = OBJECTS
   .filter(({ classification }) => classification === 'dwarf-planet' || classification === 'comet' || classification === 'trans-neptunian')
   .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-label-opacity: .5; }`)
   .join('\n');
-// Keep labels and retained geometry stable. Hidden orbit chords must not
-// capture the pointer; circles stay faint and use the existing hover highlight.
-const tnoOrbitStyles = OBJECTS
-  .filter(({ classification }) => classification === 'trans-neptunian')
-  .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] > .context-orbit s { --context-orbit-pointer-events: none; }`).join('\n');
-const asteroidOrbitStyles = OBJECTS
-  .filter(({ classification }) => classification === 'asteroid')
-  .map(({ id }) => {
-    const disabled = `:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="${id}"]`;
-    return `${disabled} > .context-orbit s { --context-orbit-pointer-events: none; }`;
-  }).join('\n');
 ---
 
-<style is:inline set:html={[styles, majorBodyLabelStyles, minorBodyOrbitStyles, minorBodyLabelStyles, asteroidOrbitStyles, tnoOrbitStyles].join('\n')}></style>
+<style is:inline set:html={[styles, majorBodyLabelStyles, minorBodyOrbitStyles, minorBodyLabelStyles].join('\n')}></style>
