@@ -5,6 +5,6 @@
   "referenceEpochJdTt": 2451545,
   "primeMeridianDegrees": 178.58,
   "spinRateDegreesPerDay": 931.639,
-  "source": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
-  "qualification": "Uses the rotation frame documented with the 2012 Gaskell shape. Its pole declination is 77.88 degrees, 0.08 degrees above the later NAIF pck00011 constant. This is the source model orientation, not a modern measured rotation phase."
+  "source": "https://doi.org/10.26033/3k3c-5713",
+  "qualification": "The 2023 paired release documents the same input images/SPICE kernels and a 1.03 km shift to center of figure, not a new pole solution. Retains the Gaskell source-model RA356.90\u00b0, Dec77.88\u00b0, W178.58\u00b0+931.639\u00b0/day orientation. Absolute present-day phase is not independently qualified; the old monochrome map has no demonstrated registration to the shifted model."
 }

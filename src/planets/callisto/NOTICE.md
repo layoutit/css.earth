@@ -5,6 +5,11 @@
   as public domain, with no use restrictions. Prepared maps retain the source's
   photometric normalization and overlap matching; changes here are resampling,
   no-data annotation, projection packing and lighting presentation.
+- Galileo color: NASA/JPL/DLR PIA03456, redistributed by USGS as public domain.
+  The retained published PNG is geometrically reprojected with an explicit
+  coverage cutoff; no new radiometric calibration is claimed. The source camera
+  review uses NASA/JPL/USGS monochrome mapping and IAU/USGS Gazetteer positions
+  only as registration evidence, never as replacement color texture.
 - Jupiter context: NASA, ESA, STScI, and Amy Simon. The pinned Hubble photograph
   is cropped to a prepared disk; see the image URL and NASA media guidance in
   the source manifest.

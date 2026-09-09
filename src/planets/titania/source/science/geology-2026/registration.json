@@ -1,0 +1,199 @@
+{
+  "matrix": [
+    [
+      2.4758892109564683,
+      -0.037956372328799746
+    ],
+    [
+      0.037956372328799746,
+      2.4758892109564683
+    ]
+  ],
+  "translation": [
+    2.6195402506436936,
+    2.702307657961215
+  ],
+  "anchors": [
+    {
+      "name": "Adriana",
+      "id": "23",
+      "role": "fit",
+      "sourceXY": [
+        2.7383739713341924,
+        4.422367031626906
+      ],
+      "reference": [
+        3.9,
+        -20.1
+      ],
+      "reconstructed": [
+        4.8304113918347875,
+        -20.3011606540196
+      ],
+      "angularResidualDegrees": 0.8960514336313798
+    },
+    {
+      "name": "Calphurnia",
+      "id": "15",
+      "role": "fit",
+      "sourceXY": [
+        1.58997388344071,
+        3.088619227827982
+      ],
+      "reference": [
+        291.40000000000003,
+        -42.4
+      ],
+      "reconstructed": [
+        291.4452805727544,
+        -42.108585282903654
+      ],
+      "angularResidualDegrees": 0.29333564196701084
+    },
+    {
+      "name": "Imogen",
+      "id": "5",
+      "role": "fit",
+      "sourceXY": [
+        1.6035852797523256,
+        3.9331164104010443
+      ],
+      "reference": [
+        321.2,
+        -23.8
+      ],
+      "reconstructed": [
+        321.34077530498047,
+        -24.394760061439616
+      ],
+      "angularResidualDegrees": 0.6084844916281982
+    },
+    {
+      "name": "Lucetta",
+      "id": "14",
+      "role": "fit",
+      "sourceXY": [
+        0.6999073792996493,
+        2.9132022362617738
+      ],
+      "reference": [
+        277.1,
+        -14.700000000000001
+      ],
+      "reconstructed": [
+        277.1477807273437,
+        -14.098378887151672
+      ],
+      "angularResidualDegrees": 0.6033985063922574
+    },
+    {
+      "name": "Katherine",
+      "id": "32",
+      "role": "fit",
+      "sourceXY": [
+        2.202474749925923,
+        3.4559711908361894
+      ],
+      "reference": [
+        331.90000000000003,
+        -51.2
+      ],
+      "reconstructed": [
+        331.9188490430758,
+        -51.63841244994198
+      ],
+      "angularResidualDegrees": 0.43856999773121413
+    },
+    {
+      "name": "Ursula",
+      "id": "38",
+      "role": "fit",
+      "sourceXY": [
+        3.990147404559373,
+        4.14821145349488
+      ],
+      "reference": [
+        45.2,
+        -12.4
+      ],
+      "reconstructed": [
+        44.346917044859055,
+        -12.361064455058857
+      ],
+      "angularResidualDegrees": 0.8341534830090759
+    },
+    {
+      "name": "Iras",
+      "id": "17",
+      "role": "holdout",
+      "sourceXY": [
+        1.9742221136699942,
+        4.320932289008311
+      ],
+      "reference": [
+        338.8,
+        -19.2
+      ],
+      "reconstructed": [
+        339.14196852975675,
+        -19.730859583529085
+      ],
+      "angularResidualDegrees": 0.6211015502385112
+    },
+    {
+      "name": "Marina",
+      "id": "2",
+      "role": "holdout",
+      "sourceXY": [
+        1.3026705737684992,
+        4.048992281406086
+      ],
+      "reference": [
+        316.0,
+        -15.5
+      ],
+      "reconstructed": [
+        316.5196216606004,
+        -15.482286448879682
+      ],
+      "angularResidualDegrees": 0.501057796226884
+    },
+    {
+      "name": "Phrynia",
+      "id": "6",
+      "role": "holdout",
+      "sourceXY": [
+        1.3747445604541146,
+        3.6908014291042117
+      ],
+      "reference": [
+        309.2,
+        -24.3
+      ],
+      "reconstructed": [
+        309.33143028988803,
+        -24.604580251004695
+      ],
+      "angularResidualDegrees": 0.327235752800768
+    },
+    {
+      "name": "Valeria",
+      "id": "27",
+      "role": "holdout",
+      "sourceXY": [
+        2.716939104499047,
+        4.009638154257249
+      ],
+      "reference": [
+        4.2,
+        -34.5
+      ],
+      "reconstructed": [
+        5.13908211497752,
+        -34.204200460111515
+      ],
+      "angularResidualDegrees": 0.8298002756148761
+    }
+  ],
+  "model": "Normalized south-polar stereographic sphere, east-positive; planar similarity fit to historical crater centres."
+}

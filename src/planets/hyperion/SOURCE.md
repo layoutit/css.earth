@@ -2,11 +2,11 @@
 
 ## Included views
 
-**Monochrome** uses 11 clear-filter Cassini ISS observations, calibrated to I/F by
+**Monochrome** uses 12 clear-filter Cassini ISS observations, calibrated to I/F by
 CISSCAL 4.0beta and distributed by the [PDS Ring-Moon Systems Node](https://pds-rings.seti.org/cassini/iss/access.html).
 The exact IMG/LBL URLs and byte pins are in `source/manifest.json`. Original
 1024 × 1024 samples remain the preparation inputs; no display-catalog texture
-is substituted. Selected camera resolutions range from approximately 176 m to
+is substituted. Selected camera resolutions range from approximately 100 m to
 1.8 km per pixel. The best 2005 mosaic sector retains finer detail than the
 sparser reverse side. Missing or unstable observation geometry remains visibly
 unavailable rather than filled with invented terrain.
@@ -111,3 +111,11 @@ an equal-area surface fraction. The remaining pixels use the shared missing-data
 presentation.
 
 The initial camera uses the prepared ecliptic presentation basis and the radial mesh’s CSS X/Y transport to face the source portrait direction; geographic longitude/latitude are not copied into scene yaw/pitch.
+
+## B3 close-encounter registration
+
+The additional FULL, 1024×1024 clear I/F observation `N1506391424_2_CALIB` was acquired on 26 September 2005 at 01:35:17.096 UTC, at a controlled range of 16,782.2 km (nominal 100.52 m/pixel). It uses the native 8192-byte VICAR image offset. It is not one of the ambiguous SUM2 controls.
+
+PDS Table 1 gives north azimuth 328.60° and centre (73.0,388.2). Two disjoint image regions against four existing controlled frames constrain a +0.79495545° detector roll and centre change to (72.10596577,374.01763246). Range, focal scale, observer/solar geometry and the original I/F pixels are unchanged. Fresh source-mesh reprojection gives held-out correlations 0.99169 and 0.99276, with displacement magnitudes 1.62 and 5.70 detector pixels. The correction is source-relative; it does not override the mesh's published uncertainty or establish absolute 100 m accuracy. Exact pins, fit regions and independent checks are in `source/validation/n1506391424-registration.json`.
+
+The shared preparer withholds a 16-pixel source border and applies its existing geometric, occlusion, incidence/emission and bounded photometry rules. The new input supplies finer regional observations; it does not create global 100 m coverage or remove photographed crater shadows. The completed twelve-frame preparation retains 6,836,406 valid map pixels (81.5%): the close frame improves detail inside existing coverage rather than expanding the observed footprint. Its accepted contribution is 215,732 corrected pixels, with overlap level 1.2430004332473796, as recorded in `prepared/surfaces.json`.

@@ -20,6 +20,22 @@
           "noData": 0,
           "centerLongitude": 180
         }
+      },
+      {
+        "id": "enhanced",
+        "focus": {
+          "longitudeDegrees": 145.2,
+          "latitudeDegrees": -0.15,
+          "zoom": 1.1
+        },
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        }
       }
     ],
     "scientific": [],

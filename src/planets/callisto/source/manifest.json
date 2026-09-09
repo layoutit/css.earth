@@ -58,7 +58,7 @@
       "licenseEvidence": [
         "stars/ESO-IMAGE-LICENSE.md"
       ],
-      "acquisition": "Run node src/planets/callisto/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "acquisition": "Run node tools/objects/dist/operations.js acquire callisto --refresh to restore and verify the pinned ESO original.",
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
@@ -113,6 +113,71 @@
         "lenses",
         "presentation"
       ]
+    },
+    {
+      "origin": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
+      "credit": "NASA/JPL/DLR",
+      "license": "Public domain as marked by USGS; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/media/images/callisto-galileo-ssi-color-mosaic"
+      ],
+      "redistribution": "Original public-domain published image retained with complete credit; geometric derivative identified separately.",
+      "id": "galileo-pia03456-original",
+      "path": "observations/PIA03456-usgs.png",
+      "expectedBytes": 821031,
+      "expectedSha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638",
+      "consumers": [
+        "registration-source"
+      ],
+      "acquisition": "The acquisition plan restores the exact USGS Original PNG; the release receipt records its source and limits."
+    },
+    {
+      "origin": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
+      "credit": "NASA/JPL/DLR",
+      "license": "Public domain as marked by USGS; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/media/images/callisto-galileo-ssi-color-mosaic"
+      ],
+      "redistribution": "Original public-domain published image retained with complete credit; geometric derivative identified separately.",
+      "id": "galileo-pia03456-registered-color",
+      "path": "observations/PIA03456-registered-rgba.tif",
+      "expectedBytes": 771611,
+      "expectedSha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Galileo color",
+      "falseColor": true,
+      "width": 1440,
+      "height": 720,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2410300
+      },
+      "acquisition": "Checked-in derived RGBA GeoTIFF. Reproduce with python3 src/planets/callisto/source/preparation/prepare-galileo-color.py from the pinned original and fixed camera; no controlled-map texture is sampled.",
+      "generator": "source/preparation/prepare-galileo-color.py",
+      "recipe": "preparation/galileo-color-conversion.json",
+      "derivedFrom": [
+        "galileo-pia03456-original"
+      ],
+      "coverage": "28.735% spherical coverage: fixed perspective projection, emission <=65 degrees and fully opaque original contributors. Gray grid elsewhere; no globally filled color. GDAL_NODATA=0 is reserved for all-zero RGBA, with explicit all-channels RGB validity.",
+      "photometry": "Published processed display colors, not calibrated I/F or albedo. Source photographed shading and color fringing remain. No new radiometric correction.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -137,14 +202,14 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2165,
-      "expectedSha256": "d437635e5b0f16f5c8f10458f89becb380616a97805a1e7c1ba0b088b408983e",
+      "expectedBytes": 2588,
+      "expectedSha256": "8756e5b7371fa3533f55691b2267c89eb20472a2761280bd31b2693e5b21812a",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 8535,
-      "expectedSha256": "a6285857a2d973a976faa33aff4538e4a21416702fb69de48f8ed22b6a0107c7",
+      "expectedBytes": 11502,
+      "expectedSha256": "a18e1803468b2ab02cc46fd9fe5a3787d84a7f073e03e0ced8fb073159e40117",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -161,8 +226,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 971,
-      "expectedSha256": "a210414d15be18834f204fd9fcedfa8c71485b6b83f0d0af136b114e1c2767fb",
+      "expectedBytes": 1264,
+      "expectedSha256": "a53d8515ad38074df1e8b91b4ecd5239d9e3de3817cf802dff2c22d77bef8bec",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -171,6 +236,114 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1094,
       "expectedSha256": "b761a24cc68edbeef6157f0413efab632a7be327379bd054c0ee091e4a966781"
+    },
+    {
+      "path": "observations/C0605271600R.LBL",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 5039,
+      "expectedSha256": "6c101f7e030d1431ca905f5a207ab62eef91f9c80ca4965fe9a5ed57dc10dddc"
+    },
+    {
+      "path": "observations/CALLISTO-nomenclature.kmz",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 211031,
+      "expectedSha256": "620f3aff9dfe5a7ecca7c72358ca2a57ae47879ec7d3ab454893ec75e34a0f09"
+    },
+    {
+      "path": "observations/PIA03456-release.json",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 1891,
+      "expectedSha256": "067f6622f450eba67f98fb134ad443ebc37b1eb21bcb605ec5d80790e0486110"
+    },
+    {
+      "path": "observations/callisto-photo-database.pdf",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 267563,
+      "expectedSha256": "fba3191b10234799c29aa83fa56f1e75114a370f7d0332e7b01122769eebef98"
+    },
+    {
+      "path": "preparation/galileo-color-conversion.json",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 808,
+      "expectedSha256": "a1a33f61bc88425dee17e5da37917a69ca68828f3e9ee533ed372918599e3cb7"
+    },
+    {
+      "path": "preparation/prepare-galileo-color.py",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 7090,
+      "expectedSha256": "9b16349842530308f75826ae398f2f6f721d17ee40d98cead6eb41d67bd6f8ea"
+    },
+    {
+      "path": "validation/agent-feature-patches.png",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 79851,
+      "expectedSha256": "d58014dbeee7c63d2c6726185632d8345aebb4b55a9f7bbc351cc041fad35835"
+    },
+    {
+      "path": "validation/agent-named-fixed-camera.png",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 1126581,
+      "expectedSha256": "47656784b0da6410567c33efe3134ce6da589475793223954703ac93d4cc525f"
+    },
+    {
+      "path": "validation/agent-native-predicted.png",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 223734,
+      "expectedSha256": "5b4c7ee2ef3101598635201bf920aed1b2f899c60110ddb13c3cc24cf98f227f"
+    },
+    {
+      "path": "validation/agent-source-unmodified.png",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 692797,
+      "expectedSha256": "8934889dab1e589cdb491ee93392098e643469ac7bcef1dd44c8341a571545d7"
+    },
+    {
+      "path": "validation/galileo-color-conversion-proof.json",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 1349,
+      "expectedSha256": "47f83e9f581273ee11e94b59936109fdc5fb43e366bafdca6db19d6535f2bbc5"
+    },
+    {
+      "path": "validation/galileo-color-registration.json",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 8943,
+      "expectedSha256": "0cb2e52bb4bd1ab5680be022e80a9b7e14e72fa01da56f665bb5a7b869bcbaf9"
+    },
+    {
+      "path": "validation/registration-fit-original.log",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 680,
+      "expectedSha256": "a4a5ca080540cbd0409f0530870870e87e5d8c5fc94854f105bf8f3d2f0a99ef"
+    },
+    {
+      "path": "validation/registration-fit-original.py",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 3651,
+      "expectedSha256": "b2c70a8271062ef45f6094eacccd3a9510754ebeea38294f44717fe8b2d9f78e"
+    },
+    {
+      "path": "validation/registration-independent-original.py",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 6254,
+      "expectedSha256": "df4d626dbdd028f0dde8b3c658ee654c350974fc33e35267287554c90204cc1a"
+    },
+    {
+      "path": "validation/registration-independent-review.json",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 9690,
+      "expectedSha256": "c886e039ff30aeb81992e76748ab37f92db3ea8c810507da8be11e59647754ba"
+    },
+    {
+      "path": "validation/registration-independent-review.md",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 2878,
+      "expectedSha256": "e8f63a05f816f327fedccadec25b08c084aaa03c3169870d5bdf2000c5e2d3ab"
+    },
+    {
+      "path": "validation/registration-fit-exploratory.json",
+      "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
+      "expectedBytes": 1127,
+      "expectedSha256": "b982b2be31a14e64afd8a00df13554224e302f7503d76ed816d249ccac64c5ec"
     }
   ]
 }
