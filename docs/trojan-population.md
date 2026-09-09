@@ -51,7 +51,7 @@ The independent numerical checks compare the original source with the prepared r
 - The 116 accepted interior atlas anchors differ by at most three RGB channel levels after WebP decoding, within the existing twelve-level tolerance. Shared-edge/bleed RGB remains diagnostic because incident face normals are nonunique.
 - Forty source/result views have been visually inspected at four orientations per model. Source and result have separate normalization by their maximum radius; this proves silhouette comparison, not physical framing or browser pixel parity.
 
-The current registry has 416 objects and 297 asteroids. All 406 original navigation tiles retain their visible RGBA pixels exactly at both densities. Ten new source-owned tiles, the Sun's 415 authored destination records, marker bindings and the minimap point index are updated. Main's generic routes are used: each new package supplies CSS and scene-bound page metadata, without per-body Astro wrappers. Shared page metadata and navigation/router checks are recorded with the evidence.
+At the browser capture revision, the registry had 416 objects and 297 asteroids. All 406 original navigation tiles retain their visible RGBA pixels exactly at both densities. Ten new source-owned tiles, the Sun's 415 authored destination records, marker bindings and the minimap point index are updated. Main's generic routes are used: each new package supplies CSS and scene-bound page metadata, without per-body Astro wrappers. Shared page metadata and navigation/router checks are recorded with the evidence.
 
 All thirty original inputs restored into empty destinations through the existing acquisition operations, using twelve distinct source downloads. All 350 runtime images, totaling 78,053,296 bytes, were published and freshly installed into an empty destination with every hash verified and zero cache reuse.
 
@@ -107,3 +107,9 @@ node output/trojan-population/qualify-body.mjs diomedes
 Fresh delivery can be replayed with `verify-runtime-install.mjs`, then `browser-check.mjs` using its returned `CSSEARTH_FRESH_RUNTIME_ROOT` and an existing preview on port 4278. The final Astro invocation was `pnpm exec astro build --mode performance`, followed by the existing `operations.js assemble` operation for each new body. The final capture did not run the all-object preparation or browser suites.
 
 After catalog navigation changes, `prepare-navigation.mjs` preserves the pinned baseline tiles and prepares only the new source tiles. `refresh-transports.mjs` updates marker bindings and hash-bound page metadata without recompiling presentations. Finish by running `node site/minimap/prepare.mjs` and its point-range/coverage tests before Astro. Full object preparation or raster rebakes are unnecessary for navigation-only changes.
+
+## Latest-main integration
+
+Integrated main `bd265cf3a091c4ef17e9be76dfeb23410364884f` (Encke and LINEAR) after the browser captures. The current catalog has **418 objects**, **297 asteroids** and **417 Sun destinations**. Incoming comet science is preserved. All **408 main marker tiles** retain their visible RGBA pixels at both densities; only the ten Trojan tiles are added. Marker bindings, scene-bound page metadata and the minimap point index are refreshed through their existing writers.
+
+The [integration receipt](evidence/trojan-population/main-integration.json) proves all ten Trojan scenes, terrain and image inventories are byte-identical and every non-marker runtime field is unchanged. The eight focused page/minimap cases and ten package closures pass on this integration. No body bakes or repeat browser matrix were needed. Screenshots and the trace remain explicitly bound to their recorded capture revision; their catalog count predates the two comets.

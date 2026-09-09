@@ -1307,5 +1307,12 @@
   ],
   "buildMode": "performance",
   "browserRevision": "c09191cb2d8dd20b2a0ff218cfdb20251677730d",
-  "staticPages": 834
+  "staticPages": 834,
+  "latestMainIntegration": {
+    "main": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
+    "objects": 418,
+    "asteroids": 297,
+    "bodyScenesTerrainImagesUnchanged": true,
+    "browserCaptureRevisionUnchanged": true
+  }
 }

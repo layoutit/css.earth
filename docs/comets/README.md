@@ -1,6 +1,6 @@
 # Comet scenes
 
-Ten independently selectable nucleus packages use the generic object registry. **Shadows defaults off for every comet** and remains available in Settings. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. Tuttle retains two separate 1,000-triangle models and displays only the selected one. Borrelly retains 994 USGS and 1,862 DLR triangles, including explicitly gridded estimated closures, with only the selected terrain bank displayed. The three lightcurve-based additions each have 800 triangles and the shared missing-imagery grid. All geometry, maps, normals and shadows are prepared before runtime.
+Twelve independently selectable nucleus packages use the generic object registry. **Shadows defaults off for every comet** and remains available in Settings. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. Tuttle retains two separate 1,000-triangle models and displays only the selected one. Borrelly retains 994 USGS and 1,862 DLR triangles, including explicitly gridded estimated closures, with only the selected terrain bank displayed. The three lightcurve-based nuclei and two radar-constrained approximations each have 800 triangles and the shared missing-imagery grid. All geometry, maps, normals and shadows are prepared before runtime.
 
 | Object | Geometry source | What the default view represents |
 | --- | --- | --- |
@@ -11,10 +11,11 @@ Ten independently selectable nucleus packages use the generic object registry. *
 | [103P/Hartley 2](../../src/planets/comet-103p/SOURCE.md) | Farnham & Thomas (2013), EPOXI PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. The cartographic long axis is not treated as a spin axis. |
 | [9P/Tempel 1](../../src/planets/comet-9p/SOURCE.md) | Farnham & Thomas (2013), combined Deep Impact/Stardust-NExT PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. |
 | [81P/Wild 2](../../src/planets/comet-81p/SOURCE.md) | Full PDS v2.1 plate model, 17,518 source triangles | Observed terrain with the published estimated ellipsoid and joining faces marked by grid texels. |
-
 | [137P/Shoemaker–Levy 2](../../src/planets/comet-137p/SOURCE.md) | Donaldson (2025), Model 1 physical axis ratios | Smooth approximation; grid marks absent imagery. The alternative pole remains documented. |
 | [143P/Kowal–Mrkos](../../src/planets/comet-143p/SOURCE.md) | Donaldson (2025), accepted Model 1 physical axis ratios | Smooth approximation with an infrared size estimate; grid marks absent imagery. |
 | [162P/Siding Spring](../../src/planets/comet-162p/SOURCE.md) | Donaldson (2025), physical axis extents | Flattened approximation; grid marks absent imagery. Thickness and local shape remain uncertain. |
+| [2P/Encke](../../src/planets/comet-2p/SOURCE.md) | Harmon & Nolan (2005), radar/infrared SAM1 model | Smooth approximation of the selected elongated solution; grid marks absent imagery. |
+| [209P/LINEAR](../../src/planets/comet-209p/SOURCE.md) | Radar dimensions reported by Schleicher & Knight (2016) | Smooth approximation of the published three-axis dimensions; grid marks absent imagery. |
 
 For Hartley 2 and Tempel 1, gray marks stereo-controlled regions, blue marks limb-silhouette constraints, and grid texels mark poorly constrained source estimates in both views. Those estimates belong to the archived model. The Shape model lens uses gray for the stronger constraints. These are inspection materials, not albedo photographs. Halley has no regional confidence flags, so it uses a visible whole-model uncertainty label.
 
@@ -53,3 +54,5 @@ same nucleus scene. These use the existing dataset selector and shared legend.
 [Tuttle](TUTTLE.md) records the sixth comet and its independent geometry/orbit checks. [The Arecibo comparison](TUTTLE-ARECIBO.md) records both datasets and the current browser, delivery and drag evidence.
 
 [Lightcurve-based additions](LIGHTCURVE-SHAPES.md) records the three approximations, their source limitations and delivery checks.
+
+[Encke and LINEAR](ENCKE-LINEAR.md) records the two radar-constrained approximations, their dimension conventions and delivery evidence.
