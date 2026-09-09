@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5401852ef9528491bcfa050057e491bfc6f4c11d133341b91b9bbb93cc77a244"
+    "sha256": "d419ba3ccc0a2363365b09e2449508d54f17f57b68e85b05002484a59d59b7bd"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -140,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bb60e13f66081a4b2edb68b99b7540ceb38dfaf9a271856a6f9f9534549dc9fd",
+      "sha256": "2b03d68c3bc3f5f211fab0e838614a87295feeefec380353f3594f2a7ec29913",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -152,11 +152,11 @@
             {
               "id": "size",
               "label": "Lobe radii",
-              "value": "2.7 ± 0.1 km · 1.1 ± 0.1 km"
+              "value": "≈2.7 km · ≈1.1 km"
             },
             {
               "id": "rotation",
-              "label": "Observed rotation period",
+              "label": "Rotation period",
               "value": "About 11.4 hours"
             }
           ],
@@ -187,11 +187,11 @@
                 {
                   "id": "size",
                   "label": "Lobe radii",
-                  "value": "2.7 ± 0.1 km · 1.1 ± 0.1 km"
+                  "value": "≈2.7 km · ≈1.1 km"
                 },
                 {
                   "id": "rotation",
-                  "label": "Observed rotation period",
+                  "label": "Rotation period",
                   "value": "About 11.4 hours"
                 }
               ]
@@ -313,8 +313,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bb60e13f66081a4b2edb68b99b7540ceb38dfaf9a271856a6f9f9534549dc9fd",
-      "bytes": 2972,
+      "sha256": "2b03d68c3bc3f5f211fab0e838614a87295feeefec380353f3594f2a7ec29913",
+      "bytes": 2938,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -383,8 +383,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3451,
-          "sha256": "e05777b57e8f16c629d7854a1ebccfee50dc5369b8bae2e3f1cfd45f3184572a",
+          "bytes": 3434,
+          "sha256": "820c318831b98ff768b06be492f5f9f3664f9bda738632e8f7ca1cdb3d467555",
           "verification": "bytes-verified"
         }
       ],

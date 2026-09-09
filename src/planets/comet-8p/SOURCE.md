@@ -14,8 +14,8 @@ Table 3 gives the HST model two touching spheres with radii 2.8 and 1.2 km.
 Section 5.3 gives a thermal flux scale gamma = 0.90 ± 0.09. Since flux scales
 with projected area, lengths are multiplied by **sqrt(gamma)**. The prepared
 radii are therefore 2.6563132345 and 1.1384199577 km, preserving the original
-7:3 ratio. The factsheet uses the paper's rounded final values, 2.7 ± 0.1 and
-1.1 ± 0.1 km. Using those rounded values to build the mesh would change its
+7:3 ratio. The factsheet rounds these to about 2.7 and 1.1 km. The paper reports
+uncertainties of ±0.1 km for each rounded value. Using those rounded values to build the mesh would change its
 proportions.
 
 Body X joins the lobe centres; body Z is perpendicular to X and follows the

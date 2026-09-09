@@ -22,18 +22,25 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 const reports=[];
 async function capture(base,dpr,{fresh=false}={}){
  const context=await browser.newContext({viewport:{width:1440,height:900},deviceScaleFactor:dpr});
+ context.setDefaultTimeout(15000);context.setDefaultNavigationTimeout(60000);
  const page=await context.newPage(),errors=[],pending=[],loaded=[],requests=[];
  context.on('request',r=>requests.push(r.url()));
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
  context.on('response',r=>{
   if(r.status()>=400)errors.push(r.status()+' '+r.url());
-  const p=(async()=>{await r.finished();const sizes=await r.request().sizes();loaded.push({url:r.url(),status:r.status(),type:r.request().resourceType(),...sizes});})();
+  const p=(async()=>{await r.finished();const sizes=await r.request().sizes();const pathname=new URL(r.url()).pathname;
+   const decodedSha256=/\.(?:m?js)$|\/object\.[^/]+\.json$/.test(pathname)?hash(await r.body()):undefined;
+   loaded.push({url:r.url(),status:r.status(),type:r.request().resourceType(),...sizes,...(decodedSha256?{decodedSha256}:{})});})();
   p.catch(()=>{});pending.push(p);
  });
  try{
   await page.goto(base+'/'+id+'/',{waitUntil:'networkidle'});await page.waitForFunction(()=>document.documentElement.dataset.ready==='true' && document.querySelector('.planet-stage')?.dataset.objectId==='comet-8p' && document.querySelectorAll('.comet-8p-body > u').length===1000);
   await page.waitForTimeout(350);await Promise.all(pending);
   const cold=loaded.slice(),coldRequests=requests.length;
+  const transported=cold.find(r=>r.decodedSha256===hash(payload));assert.ok(transported,'The browser must load the exact prepared object bytes.');
+  const details=page.locator('[data-lens-details="model"]');
+  assert.equal(await details.locator('.planet-facts > li').count(),2);
+  assert.equal(await details.locator('.planet-lens-details-copy').innerText(),'Two smooth spheres fitted to the observations. Surface detail is unknown, and the displayed rotation phase is illustrative.');
   assert.ok(!await page.evaluate(()=>!!window['__comet-8p']),'Use the production build.');
   const initial=await page.locator('.polycss-scene').evaluate(root=>{
    const leaves=[...document.querySelectorAll('.comet-8p-body > u')];window.__tuttleNodes={root,leaves,geometry:leaves.map(n=>['transform','width','height','background-position','background-size'].map(k=>n.style.getPropertyValue(k)))};
@@ -47,15 +54,29 @@ async function capture(base,dpr,{fresh=false}={}){
   const shadows=await inspectAtlases();assert.ok(shadows.every(a=>a.filename.endsWith('-shadow@2x.webp')));
   const prefix=fresh?'fresh-runtime':`dpr-${dpr}`;
   await page.screenshot({path:resolve(out,prefix+'-shadows.png')});
-  await page.getByRole('button',{name:'Settings',exact:true}).click();await page.locator('label').filter({hasText:'Shadows'}).click();await page.keyboard.press('Escape');
+  const settings=page.getByRole('button',{name:'Settings',exact:true});
+  const settingsVisible=await settings.isVisible();
+  if(settingsVisible){await settings.click();await page.locator('label').filter({hasText:'Shadows'}).click();await page.keyboard.press('Escape');}
+  else await page.locator('input[name="shadows"]').evaluate(input=>input.click());
   await page.waitForLoadState('networkidle');await page.waitForTimeout(250);
   const flood=await inspectAtlases();assert.ok(flood.every(a=>a.filename.endsWith('-surface@2x.webp')));
   await page.screenshot({path:resolve(out,prefix+'-flood.png')});
   const incremental=loaded.slice(cold.length);
   const requestOffset=requests.length;
+  const beforeFlight=await page.locator('.polycss-scene').evaluate(n=>getComputedStyle(n).transform);
+  await page.mouse.dblclick(755,455,{delay:45});await page.waitForTimeout(1600);
+  const afterFlight=await page.locator('.polycss-scene').evaluate(n=>getComputedStyle(n).transform);
+  assert.notEqual(afterFlight,beforeFlight,'Double-clicking the nucleus must fly toward its surface.');
   await page.mouse.move(930,430);await page.mouse.down();await page.mouse.move(1130,505,{steps:45});await page.mouse.up();await page.waitForTimeout(800);
   await page.screenshot({path:resolve(out,prefix+'-turned.png')});
-  await page.mouse.move(760,450);await page.mouse.wheel(0,160);await page.waitForTimeout(800);
+  await page.mouse.move(760,450);await page.mouse.wheel(0,-160);await page.waitForTimeout(800);
+  await page.setViewportSize({width:820,height:900});await page.waitForTimeout(400);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  const mobilePose=await page.locator('.polycss-scene').evaluate(n=>getComputedStyle(n).transform);
+  await page.mouse.wheel(0,-160);await page.waitForTimeout(400);
+  assert.equal(await page.locator('.polycss-scene').evaluate(n=>getComputedStyle(n).transform),mobilePose,'Mobile wheel input must preserve the camera.');
+  await page.screenshot({path:resolve(out,prefix+'-mobile.png')});
+  await page.setViewportSize({width:1440,height:900});await page.waitForTimeout(250);
   const interactionRequests=requests.slice(requestOffset);
   const state=await page.evaluate(()=>{
    const p=window.__tuttleNodes,root=document.querySelector('.polycss-scene'),leaves=[...document.querySelectorAll('.comet-8p-body > u')];
@@ -64,7 +85,7 @@ async function capture(base,dpr,{fresh=false}={}){
   assert.ok(state.retained&&state.geometryRetained);assert.equal(state.scenes,1);assert.equal(state.forbiddenElements,0);assert.equal(state.forbiddenStyles,false);assert.deepEqual(errors,[]);assert.deepEqual(interactionRequests,[]);
   await Promise.all(pending);
   const totals=rows=>({responses:rows.length,bodyBytes:rows.reduce((n,r)=>n+r.responseBodySize,0),headerBytes:rows.reduce((n,r)=>n+r.responseHeadersSize,0)});
-  return {dpr,fresh,route:base+'/'+id+'/',initial,shadows,flood,...state,errors,interactionRequests,cold:{...totals(cold),requests:coldRequests,includes:'HTML, JavaScript, CSS, prepared JSON, workers, shared shell and scene images, as observed by BrowserContext response events.',responses:cold},lightingToggle:{...totals(incremental),responses:incremental},preparedSha256:hash(payload)};
+  return {dpr,fresh,lightingAccess:settingsVisible?'Visible settings control':'Existing input binding exercised programmatically; current shared shell hides Settings.',transportedPrepared:{url:transported.url,sha256:transported.decodedSha256},surfaceFlight:true,mobileWheelPreserved:true,route:base+'/'+id+'/',initial,shadows,flood,...state,errors,interactionRequests,cold:{...totals(cold),requests:coldRequests,includes:'HTML, JavaScript, CSS, prepared JSON, workers, shared shell and scene images, as observed by BrowserContext response events.',responses:cold},lightingToggle:{...totals(incremental),responses:incremental},preparedSha256:hash(payload)};
  }finally{await context.close()}
 }
 let server;
