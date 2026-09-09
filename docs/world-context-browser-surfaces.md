@@ -1646,3 +1646,55 @@ trace loss. The 641 loaded-resource receipts include the worker response. The
 first attempt at `worker-frame-publication-dpr2/` failed loaded-response readback
 before recording began and is explicitly unqualified. Visual/input and delayed
 transport checks are in `output/playwright/worker-frame-publication/`.
+
+## Main integration and orbit admission trial (2026-09-09)
+
+Main through `e018ba392` (Earth GEBCO terrain #66 and Tuttle #63) is integrated
+at `dc3436925`. The context now contains 300 bodies. Regeneration adds Tuttle's
+prepared extent traversal and repairs the minimap spatial index after insertion
+of its point; the prepared geometry and opacity remain authored. All 300 pinned
+object transports reproduce their descriptor hashes. Package, renderer and
+preparation builds and renderer typecheck pass. Universe preparation passes
+356 tests, and transport/minimap checks pass 15 tests.
+
+The broad renderer gate is **not green**: 371 pass and nine fail, involving Earth
+page-layer/city-zoom and Deimos depth-partition fixture expectations. Those tests
+and their checked-in body data match main. This is not a separate baseline
+execution and is not presented as aggregate readiness. Logs and exact matching
+files are recorded in `output/validation/main66-integration/report.json`.
+
+A new synchronized control at this head and a response-only orbit-transform
+initialization trial use the same Sun → Milky Way → reversible drag → Sun route,
+1995×1236 CSS pixels, DPR 2, motion off, and the 5–5,000 AU band. Initializing
+all retained orbit leaves to an identity matrix before first use is rejected:
+
+| Metric | Current-head control | Initial transform trial |
+| --- | ---: | ---: |
+| Main-frame p95 | 14.987 ms | 16.053 ms |
+| Main-frame maximum | 23.011 ms | 26.560 ms |
+| Main frames >16.667 ms | 16/736 | 28/760 |
+| Band rAF intervals >25 ms | 7/736 | 13/760 |
+| Main-thread occupancy | 86.15% | 86.81% |
+| Layout p95 | 1.308 ms | 1.283 ms |
+| Layerization p95 | 4.585 ms | 5.019 ms |
+
+The slight layout reduction did not improve frame delivery. No trial source
+change is included in the PR. These are paired observations with varying host
+load, not statistical FPS or physical display refresh measurements.
+
+Both captures have recorder JSON, Chrome trace gzip, contemporaneous video and
+verified source/response receipts under
+`output/world-context-zoom/{worker-frame-main66-control-dpr2,orbit-initial-transform-trial-dpr2}`.
+All 54 source/transport identities match the captured head. Synchronization
+passes; world/input/document identity and one camera remain retained, the final
+queue is empty, sampled camera states agree, and no page errors, HMR or trace
+loss occurred. Control has 2738/2738 video observations, +112 µs clock drift and
+1.372 ms maximum PTS error; trial has 2923/2923, −26 µs and 1.478 ms.
+
+The 24-view trial preserves exact projected orbit geometry, camera, labels and
+node identity. Its strict whole-page pixel gate remains failed at one SDO
+sidebar link pixel in the DPR-2 return image (3/255; all other differences are
+≤1/255). Native Saturn orbit hover/click retains Mars keyboard focus, 16→20 px
+circle growth, immediate selection and one landed camera. This fidelity evidence
+does not override the failed performance experiment. The performance target
+remains unmet.
