@@ -73,7 +73,7 @@ const report = {
   contactSheet,
   earthViewContactSheet,
   sourceFingerprints: await fingerprints({
-    earthSource: "src/planets/earth/SOURCE.md",
+    earthSource: "src/planets/earth/README.md",
     earthScene: "src/planets/earth/prepared/scene.json",
     earthAssets: "src/planets/earth/runtime-assets.json",
     earthClient: "src/renderers/css/dist/index.js",

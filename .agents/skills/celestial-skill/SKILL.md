@@ -7,7 +7,7 @@ description: "Create, repair, and qualify source-backed celestial body packages 
 
 Maintain this skill in the repository. Read the selected checkout's
 [provenance and documentation contract](../../../docs/provenance/CONTRACT.md)
-and the target body's `README.md`, `SOURCE.md`, `NOTICE.md` and manifests.
+and the target body's `README.md` (or legacy `SOURCE.md`), `NOTICE.md` and manifests.
 The contract adapts PDS4 documentation requirements to our docs and evidence.
 Use its pinned references; add body-specific facts without another report format.
 This skill explains how to prepare and check a body. Update it in the same PR when shared
@@ -35,8 +35,8 @@ and useful complementary products, such as elevation, geology or composition.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
 
-Explain the selected sources in the body's README. Keep a short candidate list
-in `SOURCE.md` or its linked source notes: source link,
+Explain the selected sources and useful alternatives once in the body's README
+or a linked detailed method: source link,
 what it adds, and whether it is included, excluded or unresolved, with a reason.
 Compare detail, registration, coverage and reuse terms before choosing. A better
 mosaic can replace a weaker one without becoming a duplicate lens. Missing
@@ -154,8 +154,9 @@ Keep project-required checks; do not add a new dashboard, gate framework,
 Burnlist or exhaustive test matrix to implement an ordinary body.
 
 Update the body README with source choices, processing, results and known
-problems. Update affected source notes, credits and original test reports in
-the same change. Keep common usage and commands in the shared repo guides. Save screenshots you cite in Git or agreed storage and
+problems. When substantially rewriting legacy SOURCE documentation, merge it into README
+and remove the duplicate. Update affected method notes, credits and original test reports
+in the same change. Keep common usage and commands in the shared repo guides. Save screenshots you cite in Git or agreed storage and
 link them; a local output path alone cannot be reviewed by someone else.
 
 Finish with the working location/URL, supported views, checked outcomes and

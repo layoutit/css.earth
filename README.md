@@ -102,7 +102,7 @@ src/planets/<id>/
 │   └── object.json              Rebuilt runtime payload (Git-ignored)
 ├── runtime-assets.json          Reproducible asset inventory
 ├── README.md                    Sources, processing, evidence and known problems
-└── SOURCE.md, NOTICE.md, LICENSE.*  Detailed source notes, credits and licences
+└── NOTICE.md, LICENSE.*             Credits and licences
 packages/objects/src/            Generic schema, geometry and pixel operations
 src/preparation/                 Node image/file adapters
 src/renderers/css/preparation/   CSS projection and retained presentation compiler

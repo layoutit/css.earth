@@ -11,14 +11,13 @@ Read [AGENTS.md](../../AGENTS.md), the
 The skill explains source selection and preparation. The contract explains
 source notes, credits, test reports and where to save them. Its
 [standards mapping](../../docs/provenance/CONTRACT.md#standards-basis) adapts PDS4
-without changing the existing package or manifest formats.
+using the existing manifests and generated records.
 
 ## Package layout
 
 ```text
 src/planets/<id>/
   README.md                    sources, processing, evidence and known problems
-  SOURCE.md                    detailed source surveys and calculations
   NOTICE.md, LICENSE*          attribution and applicable terms
   object.json                  authored recipe and prepared transport reference
   source/manifest.json         exact inputs, documents and intermediate pins
@@ -33,6 +32,9 @@ tests/objects/unit/<id>/        body-specific scientific and package checks
 tests/objects/browser/<id>/     profiles for the shared browser harness
 site/pages/<id>.astro           thin shared-layout integration
 ```
+
+New bodies use README for source documentation. Older bodies may still use SOURCE;
+follow the [migration rule](../../docs/provenance/CONTRACT.md#existing-bodies) when updating them.
 
 Use the current authored branch of `tools/object-package-contract.mjs` for
 required files and `tests/objects/source-closure.test.mjs` for source ownership.
@@ -84,12 +86,12 @@ pass. Tests requiring sources/assets need those dependencies installed.
 
 ## Update documentation with the change
 
-Use the [body README examples](../../docs/provenance/TEMPLATES.md).
+Use the [body README examples](../../docs/provenance/CONTRACT.md#existing-bodies).
 The README explains the body’s sources, processing, evidence and known problems.
 Link detailed source notes, exact manifests, credits and original reports from
 that explanation. Keep shared commands and usage here instead of repeating them
 for each body.
 Keep earlier test results and their limits. Do not replace original failure
 reports with summaries or claim a visual check without inspecting the images.
-The [evidence index](../../docs/evidence/README.md) explains where new reports go
-and when to update older records.
+The [evidence rules](../../docs/provenance/CONTRACT.md#save-enough-evidence-to-check-the-result)
+explain where new reports go and when to update older records.

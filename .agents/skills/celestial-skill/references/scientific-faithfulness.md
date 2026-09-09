@@ -9,7 +9,7 @@ as unresolved; a failed source lookup is not proof of a defect or of fidelity.
 For each affected lens, identify the pinned source product, physical quantity,
 units/datum, wavelength, acquisition date or date range, valid coverage, spatial
 resolution and transformations. Read the executing recipe, not just its label or
-SOURCE.md. Check that legends, thumbnails, minimaps, pole tiles and world markers
+README. Check that legends, thumbnails, minimaps, pole tiles and world markers
 describe the same interpretation as the globe.
 
 When a derived image changes, follow its other consumers too: navigation recipes,

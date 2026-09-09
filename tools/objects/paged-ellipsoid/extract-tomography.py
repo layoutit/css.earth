@@ -1,7 +1,7 @@
 """Extract the numeric cut planes and outer mantle surface from a pinned EMC model.
 
 Preparation input maintenance only; the normal JS bake reads the checked-in subset.
-Requires Python 3, numpy and h5py. See Earth's SOURCE.md for the exact invocation.
+Requires Python 3, numpy and h5py. See Earth's README.md for the exact invocation.
 """
 import argparse
 import gzip

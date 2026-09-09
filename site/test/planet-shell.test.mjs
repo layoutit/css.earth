@@ -7,6 +7,7 @@ import { loadObjectContent } from "./load-object-content.mjs";
 import { OBJECTS } from "../objects.mjs";
 import { requireSceneLifecycle } from "../scene-contract.mjs";
 import { createSceneRouter } from "../scene-router.mjs";
+import { validateObjectPackageFiles } from "../../tools/object-package-contract.mjs";
 
 test("keeps every implemented scene in one object registry", () => {
   assert.deepEqual(
@@ -236,18 +237,8 @@ test("shared router cancels a pending adapter before publication", async () => {
 
 test("keeps implemented routes backed by object-owned files", async () => {
   for (const planet of OBJECTS) {
-    const owned = [
-      "../../src/planets/" + planet.id + "/SOURCE.md",
-      "../../src/planets/" + planet.id + "/NOTICE.md",
-      "../../src/planets/" + planet.id + "/object.json",
-      "../../src/planets/" + planet.id + "/source/manifest.json",
-      "../../src/planets/" + planet.id + "/prepared/object.json",
-      "../../src/planets/" + planet.id + "/prepared/content.json",
-      "../../tests/objects/browser/" + planet.id + "/browser-profile.mjs",
-      "../pages/" + planet.id + ".astro",
-    ];
-    await Promise.all(owned.map((relativePath) =>
-      access(new URL(relativePath, import.meta.url))));
+    await validateObjectPackageFiles(planet);
+    await access(new URL(`../../src/planets/${planet.id}/prepared/object.json`, import.meta.url));
   }
 });
 

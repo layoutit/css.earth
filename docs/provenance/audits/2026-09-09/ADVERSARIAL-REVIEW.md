@@ -18,7 +18,7 @@ Both reviewers confirmed that their findings were addressed. After the
 plain-language rewrite, a further check caught two requirements that needed
 clearer wording: exact hashes for otherwise unrecorded files, and no pixel-match
 claim from images with different sources or framing. Both are explicit in the
-[contract](../../CONTRACT.md) and its relevant [examples](../../TEMPLATES.md).
+[contract](../../CONTRACT.md) and its relevant [examples](https://github.com/layoutit/cssEarth/blob/c0e73410e15e8967e757d9edba4457846e2a4884/docs/provenance/TEMPLATES.md).
 
 The reviewers checked the instructions. They did not download sources, build
 the application or run browser tests. Existing body data and results still need
@@ -36,3 +36,61 @@ Standards Reference 1.26.0 and Data Provider’s Handbook 1.26.0. It found no
 remaining issues in the mapping, provenance requirements or document layout.
 The four examples' added dataset identifiers matched the existing source records.
 This review did not run builds, preparation or browser tests.
+
+## Consolidating the body files
+
+A later review found that README and SOURCE still repeated source explanations.
+The revised contract makes README the single account and keeps a separate method
+note only for substantial decoding, field definitions or calculations. Earth,
+Sun, Rhea and 67P now use that layout; their duplicate root SOURCE files and the
+repeated template document have been removed.
+
+Two reviewers checked the consolidation against the earlier documents, active
+code, authored data and reports. Their concrete findings were corrected:
+
+- Package validation and a shell test still required the SOURCE filename. The
+  validator now accepts README or legacy SOURCE; the shell test uses that same
+  validator. A package missing both is rejected.
+- Earth's active audit and tomography instructions, three shared reports and two
+  NOTICE files still pointed to removed documents. Active links now use README;
+  historical paths and hashes remain attached to their original revisions.
+- Earth source notes described discarded automatic cloud switching, treated
+  recorded geometry publication as future work and confused the photographic
+  sky with its registration catalog. README now follows the manual-selection
+  test, dated publication report and ESO/HYG source records.
+- Rhea's obsolete albedo exclusion was removed, while its terrain/shadow
+  contamination warning was retained and checked against page 1 of the pinned
+  producer assessment. Sun's AIA false-color and logarithmic display remain
+  explicit.
+- Earth repeated UI history, frame counts and delivery instructions. The README
+  keeps the scientific methods and links the existing operational documents.
+- The local-link checker missed a target added after the review base and then
+  removed. It now includes working-tree deletions relative to HEAD; a temporary
+  Git fixture proves this case is rejected.
+
+The source-to-output records have distinct consumers. The exception is the
+retained `prepared/runtime-assets.json` copy: all 397 pairs at `c0e73410e`
+matched their root inventory blobs. Preparation writes both, provenance uses
+the prepared copy and delivery uses the root copy. The contract documents that
+relationship without adding another manually maintained record.
+
+Validation for this consolidation:
+
+- Four focused tests in `site/test/object-package-contract.test.mjs` passed,
+  including README-only, SOURCE-only and missing-documentation cases in a complete
+  temporary package. Corrupt assets and undeclared source files still fail.
+- Required-file presence passed for all 406 `OBJECTS` entries. This was a sparse
+  checkout check: materialized files were checked on disk and omitted tracked
+  files against Git. It did not verify their source or runtime bytes.
+- Changed local documentation links, skill validation and `git diff --check`
+  passed. The link check does not verify remote URLs or scientific claims.
+
+No body assets were regenerated and no body browser tests were run for this
+consolidation. Existing scientific reports retain their original scope. The
+67P date/count disagreements and Rhea's older source-catalog exclusion remain
+explicit in their READMEs; their pinned records were not rewritten here.
+
+The final read-only review found no remaining concrete blockers in these
+corrections. It confirmed that Earth follows the checked records and that the
+Rhea and Sun qualifications were preserved. This is a documentation review, not
+new scientific, browser or deployment qualification.

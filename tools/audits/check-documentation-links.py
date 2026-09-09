@@ -27,6 +27,8 @@ untracked = set(git('ls-files', '--others', '--exclude-standard').splitlines())
 changed = set(git('diff', '--name-only', '--diff-filter=ACMR', base).splitlines()) | untracked
 known = set(git('ls-files').splitlines()) | untracked
 deleted = set(git('diff', '--name-only', '--diff-filter=D', base).splitlines())
+# A file added since the review base and removed locally has no net diff to base.
+deleted.update(git('diff', '--name-only', '--diff-filter=D', 'HEAD').splitlines())
 known -= deleted
 cache = {}
 

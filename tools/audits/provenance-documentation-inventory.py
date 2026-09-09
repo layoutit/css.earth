@@ -80,6 +80,8 @@ def summarize(label, entries):
     registry_ids = sorted(set(re.findall(r'\.\./src/planets/([^/]+)/object\.json', content['site/objects.mjs'].decode())))
     # The inventory reports imports as static registry candidates, without executing JS.
     manifests = [p for p in content if p.endswith('/source/manifest.json')]
+    # Historical @1 presence fields; this is not the current package validator.
+    # Legacy SOURCE absence is reported even when a body has consolidated into README.
     required = ['SOURCE.md','NOTICE.md','source/manifest.json','object.json','prepared/provenance.json','runtime-assets.json']
     missing = {suffix:[i for i in registry_ids if f'src/planets/{i}/{suffix}' not in entries] for suffix in required}
     source_counts, rights_counts, bases = collections.Counter(), collections.Counter(), collections.Counter()

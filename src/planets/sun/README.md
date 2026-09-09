@@ -5,44 +5,69 @@ beyond the visible disk.
 
 ## Sources
 
-| What is shown | Source and treatment | Limits |
-| --- | --- | --- |
-| Photosphere | Colorized SDO/HMI continuum images, assembled from central-meridian strips across Carrington Rotation 2311. | Limb normalization and continuation beyond observed polar latitudes are display approximations. |
-| Magnetic field | JSOC `hmi.mrsynop_small_720s[2311]`, a 720 × 360 radial magnetic-field map. Preparation resamples its sine-latitude grid to equal latitude and applies a bipolar color scale. | Colors represent the magnetic quantity, not visible surface color. |
-| Chromosphere | NASA SDO AIA 304 Å CR2311 FITS map, 3,600 × 1,080. | A rotation-spanning map with a false-color display. |
-| Corona | NASA SDO AIA 171 Å CR2311 FITS map, 3,600 × 1,080. | A rotation-spanning map with a false-color display. |
-| Imagery outside the disk | Separate AIA browse observations from 27 May 2026, used only with their matching views. | Stationary image plates behind the globe, not rotating global maps. |
+The [source manifest](source/manifest.json) pins input files and metadata.
+[NOTICE](NOTICE.md) records credits and reuse terms. The [descriptor](object.json)
+and [recipes](source/preparation) specify preparation; [generated provenance](prepared/provenance.json)
+connects outputs to inputs, and the [delivery inventory](runtime-assets.json)
+identifies the shipped images.
 
-The JSOC series selector and rotation number identify the magnetic-field input;
-the other source records identify their FITS maps and browse images. These are
-processed mission products. Strip assembly, grid resampling, polar continuation
-and color mapping are our additional preparation steps; browser textures are
-display outputs, not raw solar observations.
+### Solar maps
 
-CR2311 covers 12 May–9 June 2026. Each global map combines observations across
-one rotation. The views are not simultaneous or live. Missing AIA samples are
-filled from the nearest valid latitude in the same map.
+- Photosphere: colorized SDO/HMI continuum browse images, assembled from
+  central-meridian strips across CR2311. Source-derived limb normalization and
+  continuation beyond the observed polar latitudes are display approximations.
+- Magnetic field: JSOC `hmi.mrsynop_small_720s[2311]`, the 720 x 360 radial
+  magnetic-field map for Carrington Rotation 2311. The FITS grid is equally
+  spaced in sine latitude. Preparation resamples it to equal latitude and uses
+  a declared bipolar blue-to-amber false-colour scale.
+- Chromosphere: NASA SDO AIA 304 Å CR2311 FITS synoptic map, 3,600 × 1,080,
+  displayed in false color with a logarithmic intensity scale.
+- Corona: NASA SDO AIA 171 Å CR2311 FITS synoptic map, 3,600 × 1,080,
+  displayed in false color with a logarithmic intensity scale.
 
-[SOURCE.md](SOURCE.md) explains projection, polar treatment and the preparation
-of the visible disk edge. The [manifest](source/manifest.json) records exact
-files, source URLs, sizes and hashes; [NOTICE.md](NOTICE.md) contains credits
-and terms. The [descriptor](object.json), [prepared provenance](prepared/provenance.json)
-and [runtime inventory](runtime-assets.json) identify the processing and outputs.
+CR2311 covers 2026-05-12 through 2026-06-09. A synoptic map combines central
+meridian observations across one solar rotation; it is a full-surface temporal
+map, not a simultaneous snapshot. Preparation fills only missing AIA samples
+from the nearest valid latitude in the same checked map. The browse images and FITS maps are already processed mission products.
+Strip assembly, resampling, missing-sample filling and color mapping are our
+additional steps; the textures are display outputs.
+
+The pinned 2026-05-27 AIA browse images are separate, Earth-facing
+observations. AIA 304 and 171 contribute prepared off-limb context only to
+their matching lenses. The photosphere off-limb asset is transparent. These
+plates are stationary and sit behind the globe; they are never presented as a
+rotating global surface.
+
+### Mapping the observations to the display
+
+PolyCSS maps the prepared 1024 x 512 global texture onto 448 retained
+longitude-latitude leaves. Each pole adds 32 retained atlas-backed band leaves
+and one retained center cap, for 514 visible surface leaves in total. Camera
+pitch and yaw change the visible source texels, and the body animation rotates
+actual global longitudes around the prepared solar axis.
+Because all longitudes converge at a pole, preparation tapers each source
+sample to the same-latitude longitudinal mean near the cap centre, to reduce the visible seam. This is a display treatment, not another pole observation.
+
+Each lens also has one source-derived, antialiased 512-pixel limb asset. It
+covers only the outer retained-leaf rim to remove transform-raster faceting;
+its transparent center does not replace the globe material. DPR 1 and DPR 2
+surface, polar, limb, and off-limb assets use the canonical highest-density bank,
+selected once per mount independently of device DPR.
+
+The retained cubic starfield is prepared from ESO/S. Brunier's photographic
+`eso0932a` full-sky panorama at DPR 1 and DPR 2. The HYG v4.1 subset remains
+the coordinate-registration audit input. The star panorama is not tied to the solar maps’ observation epoch;
+its background omits the Sun itself.
 
 ## Evidence
 
-This documentation change did not rerun the Sun's scientific, preparation,
-installation or browser tests. It records no new passing result.
+This README does not yet cite a dated scientific, installation or browser run.
+The [unit tests](../../../tests/objects/unit/sun) and
+[browser profile](../../../tests/objects/browser/sun/browser-profile.mjs) define
+checks to run; they are not passing results. No such tests were rerun for this
+documentation change.
 
-| Available record | What it establishes | What it does not establish |
-| --- | --- | --- |
-| [Prepared provenance](prepared/provenance.json) | Recorded sources and processing for generated files. | A fresh source download, independent scientific accuracy or a browser pass. |
-| [Unit tests](../../../tests/objects/unit/sun) | The existing executable checks to run for a relevant change. | Test code alone is not a passing run. |
-| [Browser profile](../../../tests/objects/browser/sun/browser-profile.mjs) | The Sun's cases for the shared browser harness. | A new visual review or successful installation. |
-
-## Known limits
+## Known problems
 
 Polar continuation, missing-sample filling and color choices affect the display.
-Read their definitions before interpreting the view scientifically. No fresh
-installation or inspected visual result is established by this documentation
-work; save and link those results when the relevant checks are run.
+Read their definitions before interpreting the view scientifically.

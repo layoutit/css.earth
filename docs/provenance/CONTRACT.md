@@ -1,6 +1,6 @@
 # Celestial provenance and documentation contract
 
-Proposed in PR #83. Maintained by **PROVENANCE DOCUMENTATION**.
+Maintained by **PROVENANCE DOCUMENTATION**.
 
 For every detailed body in `OBJECTS`, a contributor should be able to answer:
 **Where did this come from? What does it mean? What did we do to it? What did we check?**
@@ -34,27 +34,51 @@ Keep their native identifiers and metadata. Use a supplied PDS4 LIDVID, PDS3
 dataset/product ID, DOI or published release identifier; do not invent a PDS
 identifier for a source that has none.
 
-## Where things go
+## File ownership
 
-| File | What belongs there |
+| File | Maintained content |
 | --- | --- |
-| Body `README.md` | The body’s sources and evidence: selected datasets, processing, meaning, test results and known problems. |
-| Existing `SOURCE.md` and notes beside the data | Detailed source surveys, field definitions and calculations referenced by the README. Keep one detailed account rather than copying it. |
-| Body `NOTICE.md`, license files and manifest credits | Attribution, reuse terms and links supporting them. |
-| `source/manifest.json`, recipes, `prepared/provenance.json`, `runtime-assets.json` | Exact inputs, processing steps and generated files, using the existing formats. |
-| Evidence reports under `docs/` | Original test reports, screenshots and logs. Link them from the body README with their results and limits. |
-| Root README and shared contributor guide | Installation, controls, preparation commands and testing instructions used across bodies. |
+| Body `README.md` | One account of source selection, interpretation, our processing, evidence and known problems. |
+| Body `NOTICE.md` and supplied license files | Required acknowledgments and reuse terms. The README links here instead of repeating a credits section. |
+| `source/manifest.json` | Input identities, locations, byte pins, acquisition records and per-input credits, using its existing fields. |
+| `object.json` and `source/preparation/` | Executable preparation choices and exact parameters. Explain their scientific meaning in the README; do not keep another parameter list. |
+| `prepared/provenance.json` | Generated connections between inputs, processing and outputs. Never edit these connections by hand. |
+| Root `runtime-assets.json` | Generated delivery inventory used by installation and publication. |
+| Reports and images under `docs/` | Original evidence for a dated run and the version tested. The README states the result and links the report. |
+| Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow. |
 
-A body README must explain its sources and evidence without making the reader
-follow a chain of index files. Describe what each view means, why its data was
-chosen, what processing changed and what the checks found. Link exact manifests
-and original reports for detail. Keep installation and common controls in the
-shared guides; do not create per-body USAGE files. One test report can cover
-several bodies. Update the affected README instead of adding another index.
+`prepared/runtime-assets.json`, where present, is a generated copy of the staging
+inventory. Provenance reads it; installation reads the root inventory. The two
+must agree. Preparation writes both; agents must not maintain them independently.
+See [prepared provenance](../object-provenance.md) for the machine record format.
 
-Every file under `source/` must be recorded in its manifest. Put test logs and
-screenshots under `docs/`, not among source data. The package test also forbids
-a root `EVIDENCE.md` and private executable tools inside a body package.
+### Body README
+
+Use **Sources**, **Evidence** and **Known problems**, with dataset subsections as
+needed. Explain what each view means, why its data was selected, what processing
+changed and what the checks found. Link exact manifests and original reports.
+Do not add a separate SOURCE summary, EVIDENCE index or USAGE guide.
+
+A long decoding method, field dictionary or calculation can live in a linked
+note beside its data. That note owns the method; the README explains its purpose
+and consequences without copying it. Keep meaningful alternative-source choices
+with the relevant dataset. Split for a substantial method, not merely to shorten
+the README or create the same set of files for every body.
+
+Every file under `source/` needs a manifest entry. Reports, screenshots and test
+logs belong under `docs/`. Body packages contain data, not private executables.
+
+### Existing bodies
+
+New bodies use README. When substantially updating an older body's documentation,
+merge useful SOURCE content into README and remove the duplicate file. Update
+active links and audit paths; preserve paths and hashes inside historical reports.
+The package check accepts README or legacy SOURCE so other bodies keep working.
+A small unrelated correction does not require migrating the whole body.
+
+The migrated examples are [67P](../../src/planets/comet-67p/README.md),
+[Earth](../../src/planets/earth/README.md), [Sun](../../src/planets/sun/README.md)
+and [Rhea](../../src/planets/rhea/README.md).
 
 ## Identify and explain the sources
 
@@ -89,8 +113,8 @@ For facts outside those records, such as a factsheet value or orbital assumption
 name the source field or table and show the calculation. Shared astronomy,
 artwork and sky sources stay in their existing records.
 
-Keep useful alternative datasets and the reasons for using, rejecting or leaving
-them unresolved in source notes. A failed download does not show that a dataset
+Record useful alternatives and why they were selected, rejected or left unresolved
+with the relevant dataset. A failed download does not show that a dataset
 does not exist. Update NOTICE when credits or terms change. Link the provider's
 terms, or say what remains unresolved; a publisher name or repository license
 alone does not establish the input's reuse terms.
@@ -175,9 +199,8 @@ not authorize uploads or moving stored evidence.
 Write plainly. Name the dataset, processing step, test and limitation. Prefer
 concrete statements over process jargon or repeated disclaimers.
 
-For a new body or dataset, extend the same Sources, Evidence and Known problems
-sections with the relevant facts. Use existing source notes for detailed methods.
-Add a shared rule only when it fills a demonstrated gap; cite its standard and
+Extend the existing sections when adding a dataset. Add a shared rule only when
+it fills a demonstrated gap; cite its standard and
 section, or identify it as a cssEarth requirement. Do not repeat this standards
 table in every body or add a compliance checklist to each PR.
 

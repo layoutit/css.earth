@@ -7,12 +7,12 @@ Start with [AGENTS.md](../AGENTS.md), the
 
 | Looking for | Read |
 | --- | --- |
-| Sources, processing, test results and known problems | The body’s `README.md`, with links to detailed source notes and original reports |
+| Sources, processing, test results and known problems | The body’s `README.md`, with links to substantial methods and original reports |
 | Credits and reuse terms | Body `NOTICE.md`, license files and source manifest |
 | How outputs trace back to inputs, including the Sources UI | [Prepared object provenance](object-provenance.md) |
 | Saving original reports and screenshots | [Evidence](evidence/README.md) |
 | Code to prepare a new kind of data | [Celestial implementation map](../.agents/skills/celestial-skill/references/implementation-map.md) |
-| Documentation audit and proposal | [Provenance and documentation](provenance/README.md) |
+| Documentation audit and reviews | [Provenance and documentation](provenance/README.md) |
 
 Reports elsewhere in `docs/` keep their original dates, tested versions and limits.
 A filename containing `final` or an old passing result does not show that today's

@@ -17,7 +17,7 @@ or shell for each new body.
 src/planets/<id>/
   object.json                         authored recipe and prepared reference
   README.md                           sources, processing, evidence and known problems
-  SOURCE.md, NOTICE.md                 detailed source notes and credits
+  NOTICE.md                           credits and reuse terms
   source/manifest.json                 exact source closure
   source/preparation/*.json            acquisition and capability inputs
   source/content/object.json          content and supported controls
@@ -32,7 +32,7 @@ tests/objects/browser/<id>/browser-profile.mjs
 ```
 
 The [documentation contract](../../../../docs/provenance/CONTRACT.md) explains
-where body docs and evidence go. Every file under `source/` needs a manifest
+where body docs and evidence go, including migration from legacy SOURCE files. Every file under `source/` needs a manifest
 entry. Keep test logs and browser screenshots outside it.
 
 Use `tools/object-package-contract.mjs` for actual required files. Its authored

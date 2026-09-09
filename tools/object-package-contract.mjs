@@ -15,8 +15,11 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd(), au
   const root = resolve(projectRoot, "src", "planets", objectRecord.id);
   return Object.freeze({
     root,
+    documentationFiles: Object.freeze([
+      resolve(root, "README.md"),
+      resolve(root, "SOURCE.md"), // Existing packages may still use this name.
+    ]),
     requiredFiles: Object.freeze([
-      resolve(root, "SOURCE.md"),
       resolve(root, "NOTICE.md"),
       resolve(root, "source", "manifest.json"),
       resolve(root, "runtime-assets.json"),
@@ -47,6 +50,11 @@ export async function validateObjectPackageFiles(
   { projectRoot = process.cwd(), accessFile = access } = {},
 ) {
   const paths = objectPackagePaths(objectRecord, projectRoot, Boolean(await authoredObject(objectRecord.id, projectRoot)));
+  try {
+    await Promise.any(paths.documentationFiles.map(file => accessFile(file)));
+  } catch (cause) {
+    throw new Error(`Implemented object ${objectRecord.id} needs source documentation in ${paths.documentationFiles.join(" or ")}.`, { cause });
+  }
   for (const file of paths.requiredFiles) {
     try {
       await accessFile(file);

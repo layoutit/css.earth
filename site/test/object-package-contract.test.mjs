@@ -23,6 +23,7 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   const object = { id: "local-body", name: "LocalBody" };
   const paths = objectPackagePaths(object, projectRoot, true);
   for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
+  await writeFile(resolve(paths.root, "README.md"), "# Local body\n\nSource and evidence fixture.\n");
   const bytes = Buffer.from("owned prepared bytes");
   const hash = createHash("sha256").update(bytes).digest("hex");
   await writeFile(resolve(paths.root, "object.json"), JSON.stringify(authoredObjectFixture(object.id,
@@ -33,6 +34,13 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   await writeFile(paths.runtimeAssets, JSON.stringify({ schema: "csslocal-body-runtime-assets@1", assets: [{ filename: "surface.webp", bytes: bytes.length, sha256: hash }] }));
   await writeFile(paths.sourceManifest, JSON.stringify({ schema: "csslocal-body-authoritative-sources@1", inputs: [{ id: "local", path: "local-data.bin", expectedSha256: hash, expectedBytes: bytes.length, origin: "Project-authored test fixture", credit: "cssEarth", license: "MIT", acquisition: "Checked local fixture", redistribution: "MIT", consumers: ["scene"] }], generatedIntermediates: [], documents: [] }));
   assert.deepEqual(await validatePlanetData(object, { projectRoot }), { assetCount: 1, sourceInputCount: 1 });
+  // The same package remains valid during migration from SOURCE to README.
+  await rm(resolve(paths.root, "README.md"));
+  await writeFile(resolve(paths.root, "SOURCE.md"), "Legacy source fixture.\n");
+  await validateObjectPackageFiles(object, { projectRoot });
+  await rm(resolve(paths.root, "SOURCE.md"));
+  await assert.rejects(validateObjectPackageFiles(object, { projectRoot }), /needs source documentation in .*README\.md or .*SOURCE\.md/);
+  await writeFile(resolve(paths.root, "README.md"), "# Local body\n\nSource and evidence fixture.\n");
   await writeFile(resolve(paths.publicAssets, "surface.webp"), "corrupt");
   await assert.rejects(validatePlanetData(object, { projectRoot }), /runtime asset drifted/);
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
