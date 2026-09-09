@@ -57,7 +57,7 @@ The [preparation failure inventory](evidence/encounter-preparation-failures.json
 
 ## Runtime delivery
 
-The three runtime inventories contain 114 files totaling 24,416,222 bytes. This change adds 15 immutable images (2,190,882 bytes): five surface atlases, five shadow atlases and five minimaps. All local bytes match the manifests. [Delivery verification](evidence/encounter-runtime-delivery.json) currently records the new remote objects as unavailable; a fresh remote installation remains pending. No source FITS, reconstruction grids or source-index rasters are runtime downloads.
+The three runtime inventories contain 114 files totaling 24,416,222 bytes. This change adds 15 immutable images (2,190,882 bytes): five surface atlases, five shadow atlases and five minimaps. All 15 new images are published to the existing `cssearth-assets` R2 bucket. [Delivery verification](evidence/encounter-runtime-delivery.json) confirms HTTP 200 and the expected length for their canonical public URLs, followed by a fresh download of all 114 runtime files into an empty directory. No files were reused, and every downloaded file matches its manifest byte count and SHA-256. No source FITS, reconstruction grids or source-index rasters are runtime downloads.
 
 ## Production views
 

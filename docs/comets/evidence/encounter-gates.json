@@ -73,14 +73,22 @@
       "exitCode": 0,
       "bodyDprRuns": 6,
       "lightingCaptures": 20
+    },
+    "runtimeDelivery": {
+      "exitCode": 0,
+      "verifiedAt": "2026-09-09T01:58:58.196Z",
+      "bucket": "cssearth-assets",
+      "newFilesPublished": 15,
+      "newBytesPublished": 2190882,
+      "canonicalPublicHeads": 15,
+      "freshDownloads": 114,
+      "reusedFiles": 0,
+      "verifiedBytes": 24416222,
+      "allSha256Verified": true,
+      "evidence": "docs/comets/evidence/encounter-runtime-delivery.json"
     }
   },
   "pending": {
-    "runtimePublication": {
-      "files": 15,
-      "bytes": 2190882,
-      "bucket": "cssearth-assets"
-    },
     "mainIntegration": {
       "commit": "4e465026",
       "objects": 258,
@@ -157,6 +165,16 @@
       "path": "output/encounter-photography/conformance-hartley-stable.log",
       "bytes": 7262,
       "sha256": "5406cd1bf6128a00c2075fb59a4efc0c8369e1ffad893264cd8040f973f27c8f"
+    },
+    {
+      "path": "output/encounter-photography/runtime-publish.log",
+      "bytes": 459,
+      "sha256": "a59581aa61a3406ce6177ae7b3b6a88f457a8d1b04ba4770f46df37f4420fb0c"
+    },
+    {
+      "path": "output/encounter-photography/runtime-delivery-verification.log",
+      "bytes": 324,
+      "sha256": "babdd34b83928b0b2c529beb7782972b650adff58f8cc7fefc34a848bd94914b"
     }
   ]
 }
