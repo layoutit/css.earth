@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "106f66161a6e5b3d02a03f89e668c9b8ce15996db43b35c35dd7cc4547943d01"
+    "sha256": "aa7ea97ce3cce09d895689531697de68358130c11afa5f8bbe41c418d49a3cb8"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3cb8e697b087503d624e09e3baa4ad8c9846a198cd0be7bdf85f879e64c5ca80",
+      "sha256": "307ae52c4a437cb9b0704ff349613c867439b4382bd431fc77c7c759621bc122",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -156,7 +156,7 @@
               "id": "normal",
               "label": "Visible color",
               "description": "Color-adjusted Hubble OPAL composite from 2025, with approximate visible-color calibration. North of about 30° N, missing observations are continued from the boundary and faded to a uniform pole; that cap is illustrative.",
-              "title": "Color-adjusted Hubble composite with an illustrative unobserved cap",
+              "title": "OPAL visible-color map",
               "thumbnail": "/scenes/neptune/neptune-lens-normal.webp",
               "surface": "/scenes/neptune/neptune-surface-normal.webp",
               "poles": "/scenes/neptune/neptune-poles-normal.webp",
@@ -167,13 +167,13 @@
                 "url": "https://science.nasa.gov/neptune/"
               },
               "detail": "Visible light",
-              "summary": "Hubble's 2025 color composite. Coverage north of about 30° N is filled with an illustrative, unobserved cap."
+              "summary": "Colors approximate visible cloud patterns. North of about 30° N, an illustrative cap replaces missing observations."
             },
             {
               "id": "methane",
               "label": "Methane",
               "description": "Hubble OPAL 619 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage.",
-              "title": "Methane, FQ619N false color",
+              "title": "OPAL FQ619N map",
               "thumbnail": "/scenes/neptune/neptune-lens-methane.webp",
               "surface": "/scenes/neptune/neptune-surface-methane.webp",
               "poles": "/scenes/neptune/neptune-poles-methane.webp",
@@ -213,13 +213,13 @@
                 "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
               },
               "detail": "619 nm",
-              "summary": "Hubble's 2025 map at 619 nm, shown in false color. The cap north of about 30° N is filled from its boundary, not measured."
+              "summary": "False colors show 619 nm reflectance. North of about 30° N, missing coverage is filled from its boundary, not measured."
             },
             {
               "id": "near-infrared",
               "label": "Near infrared",
               "description": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 30° N, boundary continuation supplies an illustrative cap, not measured spectral coverage.",
-              "title": "Near infrared, F845M false color",
+              "title": "OPAL F845M map",
               "thumbnail": "/scenes/neptune/neptune-lens-near-infrared.webp",
               "surface": "/scenes/neptune/neptune-surface-near-infrared.webp",
               "poles": "/scenes/neptune/neptune-poles-near-infrared.webp",
@@ -259,7 +259,7 @@
                 "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
               },
               "detail": "845 nm",
-              "summary": "Hubble's 2025 map at 845 nm, shown in false color. The cap north of about 30° N is filled from its boundary, not measured."
+              "summary": "False colors show 845 nm reflectance. North of about 30° N, missing coverage is filled from its boundary, not measured."
             }
           ]
         },
@@ -1154,8 +1154,8 @@
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "9ef85e32e9285bad639a0891ac9c4e46279da100e32b6d806001424d89495dac",
-      "bytes": 14631,
+      "sha256": "307ae52c4a437cb9b0704ff349613c867439b4382bd431fc77c7c759621bc122",
+      "bytes": 14981,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

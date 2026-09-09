@@ -10,7 +10,6 @@ import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import ExplorerRail from "./ExplorerRail.astro";
 import CssEarthWordmark from "./CssEarthWordmark.astro";
-import GitHubIcon from "./GitHubIcon.astro";
 import PlanetCard from './PlanetCard.astro';
 import PlanetCardHeader from './PlanetCardHeader.astro';
 import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
@@ -71,7 +70,6 @@ const hasResources = sources.length > 0;
       </button>
       <a class="planet-github-link" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">
         <span>v{__CSSEARTH_VERSION__}</span>
-        <GitHubIcon />
       </a>
     </div>
   </div>
@@ -81,8 +79,8 @@ const hasResources = sources.length > 0;
       <input
         class="planet-sidebar-search"
         type="search"
-        placeholder={`Search objects (${PLANET_SEARCH_OBJECTS.length})`}
-        aria-label={`Search objects (${PLANET_SEARCH_OBJECTS.length})`}
+        placeholder={`Search celestial bodies (${PLANET_SEARCH_OBJECTS.length})`}
+        aria-label={`Search celestial bodies (${PLANET_SEARCH_OBJECTS.length})`}
         autocomplete="off"
       />
       <button

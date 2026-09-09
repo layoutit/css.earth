@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b45f4120f9f8ea36a13df108f4df5244baae1fa8b130514ae8bb07d4b2dae6db"
+    "sha256": "fd9f3b066982b1bc1675d080bcbf2d3832dd066b789671b5df789601f721edc9"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -254,7 +254,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "126422b7b4646f10825d8b990933dba165195050841575441b943de1ae1b549b",
+      "sha256": "14b06f6ff8254d6f2971c91422cb24481f8155a85c92ea1c03af8ad1e24d6557",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -295,7 +295,7 @@
               "id": "constraints",
               "label": "Source constraints",
               "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-              "title": "Shape measurements and their coverage.",
+              "title": "Shape-constraint map",
               "detail": "PDS",
               "thumbnail": "/scenes/comet-9p/comet-9p-constraints-thumbnail.webp",
               "surface": "comet-9p-constraints-surface@2x.webp",
@@ -322,7 +322,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-              "title": "Published nucleus shape; gray is a model material.",
+              "title": "Nucleus shape reconstruction",
               "detail": "PDS",
               "thumbnail": "/scenes/comet-9p/comet-9p-model-thumbnail.webp",
               "surface": "comet-9p-model-surface@2x.webp",
@@ -349,7 +349,7 @@
               "id": "deep-impact",
               "label": "Deep Impact · 2005",
               "description": "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape.",
-              "title": "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape.",
+              "title": "MRI mosaic",
               "detail": "ITS",
               "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
               "surface": "comet-9p-deep-impact-surface@2x.webp",
@@ -370,13 +370,14 @@
                   "label": "Image scale",
                   "value": "13–34 m/pixel"
                 }
-              ]
+              ],
+              "summary": "These views show the surface just before the 2005 impact, with original shadows. The grid marks gaps or uncertain shape."
             },
             {
               "id": "next",
               "label": "Stardust-NExT · 2011",
               "description": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
-              "title": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
+              "title": "Encounter image mosaic",
               "detail": "NAVCAM",
               "thumbnail": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
               "surface": "comet-9p-next-surface@2x.webp",
@@ -397,7 +398,8 @@
                   "label": "Image scale",
                   "value": "12–20 m/pixel"
                 }
-              ]
+              ],
+              "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."
             }
           ]
         },
@@ -1012,8 +1014,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "126422b7b4646f10825d8b990933dba165195050841575441b943de1ae1b549b",
-      "bytes": 7046,
+      "sha256": "14b06f6ff8254d6f2971c91422cb24481f8155a85c92ea1c03af8ad1e24d6557",
+      "bytes": 6942,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

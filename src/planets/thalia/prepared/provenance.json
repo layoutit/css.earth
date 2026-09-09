@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0d4f7bea6f62632524d9e374bfefd0b2311a39f3737cf4be87c48a1fd29d442"
+    "sha256": "7e6dc96c13e9a5fdeb4db1a00329b730ffb7ceded938b3169cc2dfdd1e05b250"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "09b5152cfbcd1966ec7eaa98a0380da1d22dd3bbbbd0dc17b28c92b0e9e01c66",
+      "sha256": "c4eb75d2244953bd2b410431ffbf517f6fc8f63f661be902ef370cb6699f70c2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex model constrained by resolved imaging, 114 ± 8 km volume-equivalent diameter in the selected archive record. An alternative pole solution remains in the archive. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex model constrained by resolved imaging, 114 ± 8 km volume-equivalent diameter in the selected archive record. An alternative pole solution remains in the archive. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/thalia/thalia-shape-thumbnail.webp",
               "surface": "thalia-shape-surface@2x.webp",
               "poles": "thalia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 57 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 57 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/thalia/thalia-elevation-thumbnail.webp",
               "surface": "thalia-elevation-surface@2x.webp",
               "poles": "thalia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "09b5152cfbcd1966ec7eaa98a0380da1d22dd3bbbbd0dc17b28c92b0e9e01c66",
-      "bytes": 9437,
+      "sha256": "c4eb75d2244953bd2b410431ffbf517f6fc8f63f661be902ef370cb6699f70c2",
+      "bytes": 9069,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

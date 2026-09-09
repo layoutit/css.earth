@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2ed3506c2bf20f5aeed0fc0d5e5fbf8654cfa6c49ec87889577048a94c58aa23"
+    "sha256": "36807dd53a75cb2302abecaaa653efebb159a1c952f119faebd7d43951bd97f7"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "50252fc87e2490955e070e4610d49a19f07c0145864315212379bd580b801dcd",
+      "sha256": "44b170c087d3b680c1daa3000a93f3aa0f2210c997d4b4d6efe3b4cc4bc80f1d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 232, version 2016-06-27, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase. This is the published convex reconstruction of the primary alone; it does not resolve the proposed lobes or its satellite.",
+              "title": "DAMIT model 232",
               "thumbnail": "/scenes/hektor/hektor-shape-thumbnail.webp",
               "surface": "hektor-shape-surface@2x.webp",
               "poles": "hektor-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 87.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/hektor/hektor-elevation-thumbnail.webp",
               "surface": "hektor-elevation-surface@2x.webp",
               "poles": "hektor-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "38aebd5ac021c670144945649f5172ad808e86ff89f042ffe9ca355b074d03cc",
-      "bytes": 7604,
+      "sha256": "44b170c087d3b680c1daa3000a93f3aa0f2210c997d4b4d6efe3b4cc4bc80f1d",
+      "bytes": 7070,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef5b0dba58dbc0dfec374620902a176ea3b886104f71b5a146e4e1473e8b83ad"
+    "sha256": "d1f7eac738b8b2137047d1ff834885815903d3eb3e56949855016bd213514a5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "121af4001284ce061e0c9f235440daf6531805fc78572ea27aad168bf1cbeeee",
+      "sha256": "174e44d97b0b12a0cb1052ed4e9e9485722663766d048a0a347754109ceef971",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -182,7 +182,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
-              "title": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
+              "title": "ISS clear-filter image",
               "detail": "Cassini ISS",
               "thumbnail": "/scenes/pallene/pallene-normal-thumbnail.webp",
               "surface": "pallene-normal-surface@2x.webp",
@@ -192,7 +192,7 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582"
               },
-              "summary": "Cassini's 2005 image, only about 8 × 12 pixels across. Brightness shows coarse detail; gray grid: no coverage."
+              "summary": "Only about 8 × 12 source pixels resolve the moon. Brightness shows coarse detail; the gray grid marks unobserved surface."
             }
           ]
         },
@@ -696,8 +696,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "121af4001284ce061e0c9f235440daf6531805fc78572ea27aad168bf1cbeeee",
-      "bytes": 10413,
+      "sha256": "174e44d97b0b12a0cb1052ed4e9e9485722663766d048a0a347754109ceef971",
+      "bytes": 10081,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

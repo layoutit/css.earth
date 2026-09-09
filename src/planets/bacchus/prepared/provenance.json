@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "462750a738c9aaffda9d261fbb871ebac77e00647d1b8f0ca886a30a6ebfb5cd"
+    "sha256": "cca30f33899973ed7284b151ccbac21139e1b78ac4aee3f82b1af3961f3fbe40"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "54b0295f600fb218114630e0b9d5eb1530916f17c3c77685b87f9886bb34cae1",
+      "sha256": "fa99c3d12d673f06214a4fd73934027af1176253ecd64482c64824bd62b6303c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable surface imagery on this radar model. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/bacchus/bacchus-shape-thumbnail.webp",
               "surface": "bacchus-shape-surface@2x.webp",
               "poles": "bacchus-shape-surface@2x.webp",
@@ -220,7 +220,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "False color shows radius at the nearest source-surface point minus a 0.315 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 1 m is withheld. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied.",
-              "title": "Color shows original model radius minus a 0.315 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/bacchus/bacchus-elevation-thumbnail.webp",
               "surface": "bacchus-elevation-surface@2x.webp",
               "poles": "bacchus-elevation-surface@2x.webp",
@@ -351,8 +351,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d6c6a017ee1b6a91bd77c0b2a4351b4dc4d08225ca30a512af1db75a5dcd522a",
-      "bytes": 11064,
+      "sha256": "fa99c3d12d673f06214a4fd73934027af1176253ecd64482c64824bd62b6303c",
+      "bytes": 10485,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

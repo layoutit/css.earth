@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "25018613ff4705555923345b7f9bf718b3e1768dadb42bbbf231ee65d26fc33b"
+    "sha256": "d1b8143ebb85bd5175c8f09031ac45db0763b25c7b84d30fe63c6a766a2bebce"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -211,7 +211,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "775cede464828b0ea8ccdaa52c7c7d887b556b58cf0135f033b641011e65a9c9",
+      "sha256": "7ea6f4f0add823d00e4a7d04fc203713733a67ed2ae5c4bcd8fab1753157201a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -271,7 +271,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "title": "ISS mosaic",
               "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
               "surface": "daphnis-normal-surface@2x.webp",
@@ -281,13 +281,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
               },
-              "summary": "Cassini clear- and green-filter images mapped onto the shape. Brightness is adjusted; gaps are marked."
+              "summary": "Green-filter detail is combined with clear-filter images. Brightness matching reduces shading; the gray grid marks gaps."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+              "title": "Shape-derived radial height",
               "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/daphnis/daphnis-elevation-thumbnail.webp",
               "surface": "daphnis-elevation-surface@2x.webp",
@@ -641,8 +641,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7fd6ee62db961d4900d969cc88117693cb4aa8d3ac0aa804ed6552dc1d888539",
-      "bytes": 5507,
+      "sha256": "7ea6f4f0add823d00e4a7d04fc203713733a67ed2ae5c4bcd8fab1753157201a",
+      "bytes": 5248,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

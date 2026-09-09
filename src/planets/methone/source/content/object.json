@@ -45,7 +45,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
-        "title": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
+        "title": "ISS clear-filter image",
         "detail": "Cassini ISS",
         "thumbnail": "/scenes/methone/methone-normal-thumbnail.webp",
         "surface": "methone-normal-surface@2x.webp",
@@ -55,7 +55,7 @@
           "path": "../manifest.json",
           "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1716192103"
         },
-        "summary": "Cassini's 2012 image at about 27 m/pixel. The dark oval remains; gaps are marked and tiny spots may be noise."
+        "summary": "The darker oval is visible at about 27 m per source pixel. Gaps are marked; tiny isolated spots may be detector noise."
       }
     ]
   },

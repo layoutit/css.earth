@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "091248200d96a6cbfd48a7f4e11e41bca9ad7390cd36d315e25bcf1d5584a0ed"
+    "sha256": "afa4923da8655c62e1f2989db7377b0d5da7ac7692b9a54155c474db87e625f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "31ecd82cae526195a62407ef62e6ebae52da9d03f243c68f1cb1f1afd5cd4b6b",
+      "sha256": "4f0f3b6ddf5422bf275ffb447dce343399bdb31b47ef4940cf9b242d7a7f0020",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 9.263 ± 0.098 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Thermal diameter 9.263 ± 0.098 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/virtanen/virtanen-shape-thumbnail.webp",
               "surface": "virtanen-shape-surface@2x.webp",
               "poles": "virtanen-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 4.6315 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 4.6315 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/virtanen/virtanen-elevation-thumbnail.webp",
               "surface": "virtanen-elevation-surface@2x.webp",
               "poles": "virtanen-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "31ecd82cae526195a62407ef62e6ebae52da9d03f243c68f1cb1f1afd5cd4b6b",
+      "sha256": "4f0f3b6ddf5422bf275ffb447dce343399bdb31b47ef4940cf9b242d7a7f0020",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9296,
+      "bytes": 8978,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

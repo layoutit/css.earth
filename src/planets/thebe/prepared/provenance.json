@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fae1f48c0572a16cc8fa08c697699f0f08a819351b9753088f40384c3e3b466b"
+    "sha256": "e9fee700b78fcaef48adc77306deff40ef95b66574310a92c87e13b3b7ef79aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -261,7 +261,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b5fc5efc30cf3ac134d90fd911f8711f38a7bad46505d94d05d3a7fbfca36a70",
+      "sha256": "f82feced9a214048db62c7db93c3a31dcf3289d070356694096817dfb4e60107",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -327,7 +327,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Galileo clear-filter observations registered to the PDS shape. Bounded illumination normalization and overlap brightness matching reduce photographed shading. This is relative image brightness, not calibrated albedo. Gray grid marks unobserved or unreliable samples; cast shadows are not reconstructed.",
-              "title": "Galileo clear-filter observations registered to the PDS shape. Bounded illumination normalization and overlap brightness matching reduce photographed shading. This is relative image brightness, not calibrated albedo. Gray grid marks unobserved or unreliable samples; cast shadows are not reconstructed.",
+              "title": "SSI mosaic",
               "detail": "Galileo SSI",
               "thumbnail": "/scenes/thebe/thebe-normal-thumbnail.webp",
               "surface": "thebe-normal-surface@2x.webp",
@@ -337,13 +337,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/galileo/"
               },
-              "summary": "Galileo images mapped onto the shape with adjusted brightness. Gray grid: missing or unreliable data."
+              "summary": "Brightness matching reduces photographed shading without measuring albedo. The gray grid marks missing or unreliable images."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 49.3 km reference sphere from Stooke’s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5° grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
-              "title": "Radial height above a 49.3 km reference sphere from Stooke’s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5° grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
+              "title": "Shape-derived radial height",
               "detail": "Radial shape",
               "thumbnail": "/scenes/thebe/thebe-elevation-thumbnail.webp",
               "surface": "thebe-elevation-surface@2x.webp",
@@ -836,8 +836,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9047624c01df68d9a2d2d3e5026ff373d2680a3ecb4d28c910b349274eab1792",
-      "bytes": 5512,
+      "sha256": "f82feced9a214048db62c7db93c3a31dcf3289d070356694096817dfb4e60107",
+      "bytes": 5238,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

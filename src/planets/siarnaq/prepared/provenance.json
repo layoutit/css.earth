@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e33e214f4754fe07823855802899571c568e2e4eb19b257c86274e3659004925"
+    "sha256": "780bd767804c5e2f9678d675f9b234f7f328f1992d217f23a7704c0390ba9ca6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d0a2070031903927eaaf620de11a763f732d7b1d1356a8e86650c7c89e97bd26",
+      "sha256": "ad7853b647650bd8c721f589a92bcaaa9e5b97616530c5045930737b68170396",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -159,7 +159,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
-              "title": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
+              "title": "Convex-model envelope approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/siarnaq/siarnaq-model-thumbnail.webp",
               "surface": "siarnaq-model-surface@2x.webp",
@@ -391,8 +391,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d0a2070031903927eaaf620de11a763f732d7b1d1356a8e86650c7c89e97bd26",
-      "bytes": 4655,
+      "sha256": "ad7853b647650bd8c721f589a92bcaaa9e5b97616530c5045930737b68170396",
+      "bytes": 4489,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -407,7 +407,7 @@
       "credit": "NASA/ESA/CSA JWST; STScI MAST; program 3716 team",
       "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
       "licenseEvidence": [
-        "https://outerspace.stsci.edu/display/MASTDOCS/Data+Use+and+Credits"
+        "https://archive.stsci.edu/publishing/data-use"
       ],
       "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
       "redistribution": "Public science archive data with mission and observing-program credit.",

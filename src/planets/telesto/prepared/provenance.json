@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a7f0f6ad08dcdea467e00c5a489a6654f75f561a8b0374dc2fef87af5f292094"
+    "sha256": "0432e6582a09747c79facbbeb9b1ffb7bbf2eabbfcadecc9ed71f59e2b9afdf9"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -243,7 +243,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "01a18791e18a8f2404277d73c9319679b6ef99fc2d0fc1746d50172e9ab9832b",
+      "sha256": "aa66fe2f939f64fafa7553ae5494c33ccd23cf2368bb83611dc3b9dfd501d3f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -303,7 +303,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "title": "ISS mosaic",
               "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/telesto/telesto-normal-thumbnail.webp",
               "surface": "telesto-normal-surface@2x.webp",
@@ -313,13 +313,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
               },
-              "summary": "Cassini images mapped onto the shape with adjusted brightness. Gray grid: gaps and withheld shadows."
+              "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 12.35 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Radial height above a 12.35 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+              "title": "Shape-derived radial height",
               "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/telesto/telesto-elevation-thumbnail.webp",
               "surface": "telesto-elevation-surface@2x.webp",
@@ -985,8 +985,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "01a18791e18a8f2404277d73c9319679b6ef99fc2d0fc1746d50172e9ab9832b",
-      "bytes": 8393,
+      "sha256": "aa66fe2f939f64fafa7553ae5494c33ccd23cf2368bb83611dc3b9dfd501d3f5",
+      "bytes": 7937,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

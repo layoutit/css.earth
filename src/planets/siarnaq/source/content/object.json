@@ -46,7 +46,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
-        "title": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
+        "title": "Convex-model envelope approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/siarnaq/siarnaq-model-thumbnail.webp",
         "surface": "siarnaq-model-surface@2x.webp",

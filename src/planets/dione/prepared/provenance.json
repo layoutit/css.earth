@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b5977031ecb1ca6423eb8cd78a78eae5ecb656948dad57e207569e6abde396c3"
+    "sha256": "c56bba235dc3311563fd9e97eee7a39e73fd5087609d81a4cfe03bbd0013f703"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -331,7 +331,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "08906ab469e9548e1a2e5725cf3585a023a21eebbd9d347c69441d5556053df2",
+      "sha256": "f077456e8f2da667752e659bb02f6266a24403b32590b5d2edeea04f5f69d524",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -429,7 +429,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-              "title": "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+              "title": "Global image mosaic",
               "thumbnail": "/scenes/dione/dione-normal-thumbnail.webp",
               "surface": "dione-normal-surface@2x.webp",
               "poles": "dione-normal-poles@2x.webp",
@@ -437,13 +437,13 @@
                 "id": "cassini-voyager-2010-dione",
                 "path": "../manifest.json"
               },
-              "summary": "Cassini and Voyager images at varying resolution. Shadows remain; gray grid: no source data."
+              "summary": "Detail varies across images from two missions. Photographed shadows remain; the gray grid marks missing observations."
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
               "description": "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-              "title": "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+              "title": "Enhanced-color composite",
               "thumbnail": "/scenes/dione/dione-enhanced-thumbnail.webp",
               "surface": "dione-enhanced-surface@2x.webp",
               "poles": "dione-enhanced-poles@2x.webp",
@@ -451,13 +451,13 @@
                 "id": "cassini-iss-2014-dione-color",
                 "path": "../manifest.json"
               },
-              "summary": "Cassini infrared, green and ultraviolet composite from 2014. Colors are enhanced; shadows and seams remain."
+              "summary": "Infrared, green and ultraviolet bands reveal colors beyond human vision. The 2014 composite retains shading and seams."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
-              "title": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
+              "title": "SPC terrain model",
               "thumbnail": "/scenes/dione/dione-elevation-thumbnail.webp",
               "surface": "dione-elevation-surface@2x.webp",
               "poles": "dione-elevation-poles@2x.webp",
@@ -484,7 +484,7 @@
               "id": "relative-albedo",
               "label": "Relative albedo",
               "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
-              "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+              "title": "SPC relative brightness model",
               "thumbnail": "/scenes/dione/dione-relative-albedo-thumbnail.webp",
               "surface": "dione-relative-albedo-surface@2x.webp",
               "poles": "dione-relative-albedo-poles@2x.webp",
@@ -511,7 +511,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
-              "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+              "title": "SPC shape model",
               "thumbnail": "/scenes/dione/dione-shape-thumbnail.webp",
               "surface": "dione-shape-surface@2x.webp",
               "poles": "dione-shape-poles@2x.webp",
@@ -987,8 +987,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "08906ab469e9548e1a2e5725cf3585a023a21eebbd9d347c69441d5556053df2",
-      "bytes": 13269,
+      "sha256": "f077456e8f2da667752e659bb02f6266a24403b32590b5d2edeea04f5f69d524",
+      "bytes": 11802,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

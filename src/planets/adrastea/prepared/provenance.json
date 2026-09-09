@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ba345f10fa2a27c4f124b654e3ac514dc8c1faeec4f4debad177970edc78dfbd"
+    "sha256": "f7e3ec0e9520b792b98464d392c53babe0e95c36211807b10e6d218cee3b50e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "42f054feae4b83f4c4423df1a096fcec19a4e041af474b0ea718d0e5488534b0",
+      "sha256": "a35f062da2dbcbbc6bc9f939c03bcc3fe393d6d427f34dbe690cdbf8f7f8cb94",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,7 +168,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "A triaxial ellipsoid based on the 10 × 8 × 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape.",
-              "title": "A triaxial ellipsoid based on the 10 × 8 × 7 km semi-axes in the IAU/WGCCRE PCK. Galileo resolved Adrastea only a few pixels across, so no craters, relief map or observed surface texture are represented. The standard gray grid marks the absence of surface imagery; shared lighting describes the model shape.",
+              "title": "Approximate shape model",
               "detail": "Measured axes",
               "thumbnail": "/scenes/adrastea/adrastea-model-thumbnail.webp",
               "surface": "adrastea-model-surface@2x.webp",
@@ -308,8 +308,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a64c9bf3c5c7ec75b0aa66466dacd014d03829b831914a227a9c3f49d647dc41",
-      "bytes": 4097,
+      "sha256": "a35f062da2dbcbbc6bc9f939c03bcc3fe393d6d427f34dbe690cdbf8f7f8cb94",
+      "bytes": 3932,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

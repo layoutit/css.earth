@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5657906e016ac15614ee89565871129bd5f0afc24773d2631570eaab6df04b27"
+    "sha256": "60f663acb5e93f4141c855ed9cd758dd018418f7b106b08d289a2aabe5c10204"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8a8b79b971f99dc81fda46b265398621e947ad699fc5c7010c36d507b9ffa620",
+      "sha256": "0f4bb6c4d067248943952b01c56acfed619bebdac9f5afebe2cebe74c4f9518c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 311, version 2011-04-21, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 311",
               "thumbnail": "/scenes/fides/fides-shape-thumbnail.webp",
               "surface": "fides-shape-surface@2x.webp",
               "poles": "fides-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 59 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/fides/fides-elevation-thumbnail.webp",
               "surface": "fides-elevation-surface@2x.webp",
               "poles": "fides-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cc9e35bcd570bc7dea65559331885c2c0c8ad89dc67ad1e75421ba178a696534",
-      "bytes": 7585,
+      "sha256": "0f4bb6c4d067248943952b01c56acfed619bebdac9f5afebe2cebe74c4f9518c",
+      "bytes": 7176,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

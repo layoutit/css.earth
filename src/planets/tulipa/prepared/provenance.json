@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0e021bbf15978f453268ee78e9e489d62755b36cc39aa3859c19d7a85937c33e"
+    "sha256": "6dac324970e94d4d6d37ddd4d5b78bdfbdf23ef594e8d17563ab8b74b28368cf"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d7b8de50d8a086f348b4d57309ce7188afb97127feefbf10de91f149da0ba450",
+      "sha256": "fc95e2a62b3c311028d5890e6b388c9f51478f0f08f3db592c47a2a6d7280b32",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 27.875 ± 0.362 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Thermal diameter 27.875 ± 0.362 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/tulipa/tulipa-shape-thumbnail.webp",
               "surface": "tulipa-shape-surface@2x.webp",
               "poles": "tulipa-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 13.938 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 13.938 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/tulipa/tulipa-elevation-thumbnail.webp",
               "surface": "tulipa-elevation-surface@2x.webp",
               "poles": "tulipa-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "d7b8de50d8a086f348b4d57309ce7188afb97127feefbf10de91f149da0ba450",
+      "sha256": "fc95e2a62b3c311028d5890e6b388c9f51478f0f08f3db592c47a2a6d7280b32",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8175,
+      "bytes": 7856,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

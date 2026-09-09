@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "proteus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f5decb51973c2820303288e56672eeada39430b929ba1b878205f95770b0d277"
+    "sha256": "843a3091b289a85b65f37d845c0a6b5ce9021c3b93f45c1e1071db5be73ce2ad"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e13b5cbfe39ee3c63615c6a1eb8ca5c9af6980fb3c2f8d0081249558b6aa0344",
+      "sha256": "5efb6760a5f50e233be36cdb24d6b3ecbb39910eabf674910348b0d131eb74b0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -379,7 +379,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain.",
-              "title": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+              "title": "Clear-filter mosaic",
               "detail": "Voyager 2",
               "thumbnail": "/scenes/proteus/proteus-normal-thumbnail.webp",
               "surface": "proteus-normal-surface@2x.webp",
@@ -389,7 +389,7 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/voyager/iss/"
               },
-              "summary": "Voyager 2 images mapped onto the shape with adjusted brightness. Gray grid: missing or unreliable data."
+              "summary": "Brightness is corrected for illumination; much of the fine grain is image noise. The gray grid marks unavailable samples."
             },
             {
               "id": "filter-color",
@@ -411,7 +411,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
-              "title": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+              "title": "Shape-derived radial height",
               "detail": "Radial shape",
               "thumbnail": "/scenes/proteus/proteus-elevation-thumbnail.webp",
               "surface": "proteus-elevation-surface@2x.webp",
@@ -518,7 +518,7 @@
       "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -558,7 +558,7 @@
       "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -591,7 +591,7 @@
       "sha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -631,7 +631,7 @@
       "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -664,7 +664,7 @@
       "sha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257",
       "bytes": 3337,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -704,7 +704,7 @@
       "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -737,7 +737,7 @@
       "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9",
       "bytes": 3311,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -777,7 +777,7 @@
       "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -810,7 +810,7 @@
       "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497",
       "bytes": 3310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -850,7 +850,7 @@
       "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -883,7 +883,7 @@
       "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
       "bytes": 3296,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -904,10 +904,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e13b5cbfe39ee3c63615c6a1eb8ca5c9af6980fb3c2f8d0081249558b6aa0344",
-      "bytes": 6943,
+      "sha256": "5efb6760a5f50e233be36cdb24d6b3ecbb39910eabf674910348b0d131eb74b0",
+      "bytes": 6415,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -940,19 +940,19 @@
           "url": "/scenes/proteus/proteus-elevation-thumbnail.webp",
           "bytes": 7376,
           "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
           "bytes": 376918,
           "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -988,13 +988,13 @@
           "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
           "bytes": 3420,
           "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
           "bytes": 426212,
           "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1032,13 +1032,13 @@
           "url": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
           "bytes": 2584,
           "sha256": "2053e1e0086f86217939322a359aadde5b42edaa76ed8df0f72a681480a2f22f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
           "bytes": 185760,
           "sha256": "8f7546054163722d68ed54f322bbaf48cf447c858c238da9d8ed460c0348cb00",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "32259e411a3cc354a79af98799737ce7a27fc6e795753f1007a74539c097f24f"
+    "sha256": "2a21eb10e99085ed85a2b633f0660a32452ad47f7f7418b3595c5f8a139cee58"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "747490dae6d4d5b1e2f1265c30619aa107ad9fbb1fee7eeac78ad98d87875f6b",
+      "sha256": "b787e46acb4a642fc4a20b4d9255eb64835a4710972d8feb001e65cdcb0dc0ba",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
-              "title": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-thumbnail.webp",
               "surface": "asteroid-2002-ce26-shape-surface@2x.webp",
               "poles": "asteroid-2002-ce26-shape-surface@2x.webp",
@@ -219,7 +219,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows the original model radius minus a 1.73 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. Only the primary is included; the north polar region is poorly constrained. Optional Sun lighting uses an approximate pole and arbitrary phase. Cartographic relief is a prepared display treatment.",
-              "title": "Color shows the original model radius minus a 1.73 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. Only the primary is included; the north polar region is poorly constrained. Optional Sun lighting uses an approximate pole and arbitrary phase. Cartographic relief is a prepared display treatment.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-thumbnail.webp",
               "surface": "asteroid-2002-ce26-elevation-surface@2x.webp",
               "poles": "asteroid-2002-ce26-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "747490dae6d4d5b1e2f1265c30619aa107ad9fbb1fee7eeac78ad98d87875f6b",
-      "bytes": 14214,
+      "sha256": "b787e46acb4a642fc4a20b4d9255eb64835a4710972d8feb001e65cdcb0dc0ba",
+      "bytes": 13538,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -66,7 +66,7 @@ test("every object forwards its object-owned legend through the shared shell", a
     }
     const controls = source.schema === "cssearth-static-surface-content@1"
       ? source.controls : prepareObjectContent(source);
-    const legends = lenses => (lenses?.controls ?? []).map(({ id, legend, summary }) => ({ id, legend, summary }));
+    const legends = lenses => (lenses?.controls ?? []).map(({ id, title, description, legend, summary }) => ({ id, title, description, legend, summary }));
     assert.deepEqual(
       JSON.parse(JSON.stringify(legends(loaded.object.data.controls.lenses))),
       JSON.parse(JSON.stringify(legends(controls.lenses))),

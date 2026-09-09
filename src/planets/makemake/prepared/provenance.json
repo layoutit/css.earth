@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "569da50593415df02eac72d44e81c4103639264a4fce1eff49823d2992e84a2e"
+    "sha256": "8802fcca943c9e9356bbb4c6c67f21fb80cb76d9db721c43bfb9902cb4171cd2"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -41,7 +41,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ee4337c2d161dc5aa417e862a7c00501f631a89a610e0d76f5b60e2c864f99b3",
+      "sha256": "2590c1da57f7796eee39b41c930242fd950242c4cdeea89e40748319d139ce51",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -105,7 +105,7 @@
               "id": "illustration",
               "label": "Illustrative model",
               "description": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-              "title": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "title": "Surface illustration",
               "qualification": "Illustration; not an observed surface map.",
               "thumbnail": "illustration-thumbnail.webp",
               "surface": "surface.webp",
@@ -115,7 +115,7 @@
                 "path": "../manifest.json",
                 "url": "https://science.nasa.gov/resource/makemake-3d-model/"
               },
-              "summary": "NASA's illustration of Makemake. Its surface is unresolved; the terrain and coordinates are illustrative."
+              "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
             }
           ]
         },
@@ -200,8 +200,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2f9e6196f89d07dc2b2d6471e008ec7951e7eb84b1d4d3db3ef85aa231f03c01",
-      "bytes": 3423,
+      "sha256": "2590c1da57f7796eee39b41c930242fd950242c4cdeea89e40748319d139ce51",
+      "bytes": 3478,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf0a714e9965a9c6439bc53d85a8323ed928841d19e99e52b5f0fe2cb5734eef"
+    "sha256": "d7f8fc95de2c2f6ad378cf4e5962dc7f703f680fe117b0795ad6721ee6c9d001"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2f2bc5e8e2dde29c18305fee9c6f785495fb63abc91202dfc837015db0c47acc",
+      "sha256": "6b7fcab129cf0df7efb44e41ad7a6ddb981e0b41f9c41a45ada84c5e3fefc464",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -153,7 +153,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
-              "title": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
+              "title": "Outline approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/himalia/himalia-model-thumbnail.webp",
               "surface": "himalia-model-surface@2x.webp",
@@ -478,8 +478,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2f2bc5e8e2dde29c18305fee9c6f785495fb63abc91202dfc837015db0c47acc",
-      "bytes": 6073,
+      "sha256": "6b7fcab129cf0df7efb44e41ad7a6ddb981e0b41f9c41a45ada84c5e3fefc464",
+      "bytes": 5902,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -494,7 +494,7 @@
       "credit": "NASA/ESA/CSA JWST; STScI MAST; program 4028 team",
       "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
       "licenseEvidence": [
-        "https://outerspace.stsci.edu/display/MASTDOCS/Data+Use+and+Credits"
+        "https://archive.stsci.edu/publishing/data-use"
       ],
       "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
       "redistribution": "Public science archive data with mission and observing-program credit.",
@@ -521,7 +521,7 @@
       "credit": "NASA/ESA/CSA JWST; STScI MAST; program 4028 team",
       "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
       "licenseEvidence": [
-        "https://outerspace.stsci.edu/display/MASTDOCS/Data+Use+and+Credits"
+        "https://archive.stsci.edu/publishing/data-use"
       ],
       "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
       "redistribution": "Public science archive data with mission and observing-program credit.",

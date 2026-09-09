@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6fe7d6d844595e402745e3c7fc039f40c37844748673da04895fd4fda82dc5b9"
+    "sha256": "3f5579fe9a15ccf9a859df57637eb7d733c563116236423548357955526cf285"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cec671c16d37752bec04b470ad2959303e42ad6128a74d4f5a4d1e4586115640",
+      "sha256": "640c0356e11f86da7a5f7695fd74aa14164683479b2869d7705b2e899d9f7a21",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
-              "title": "The shared grid marks unavailable imagery over the original Golevka radar reconstruction, shown with prepared lighting. The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/golevka/golevka-shape-thumbnail.webp",
               "surface": "golevka-shape-surface@2x.webp",
               "poles": "golevka-shape-surface@2x.webp",
@@ -220,7 +220,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows the original radar-model radius minus a 0.265 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. The reconstruction resolves global shape at tens of meters; display pixels add no measured detail. Cartographic relief and optional Sun lighting are display treatments.",
-              "title": "Color shows the original radar-model radius minus a 0.265 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. The reconstruction resolves global shape at tens of meters; display pixels add no measured detail. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/golevka/golevka-elevation-thumbnail.webp",
               "surface": "golevka-elevation-surface@2x.webp",
               "poles": "golevka-elevation-surface@2x.webp",
@@ -351,8 +351,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "882a258f0d183738d64592619cb7729141febd56acc19a17cb9d894bc99ef87e",
-      "bytes": 9520,
+      "sha256": "640c0356e11f86da7a5f7695fd74aa14164683479b2869d7705b2e899d9f7a21",
+      "bytes": 8984,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

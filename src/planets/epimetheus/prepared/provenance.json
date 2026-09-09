@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0c26567d510252d1ffd0959a0fca7c01175b1d4be4d66ae5f3faabc30ebee7c8"
+    "sha256": "92ca4587e0c1f48247a6528a81efda12c925c01c755bc95d3e91c59dd603e809"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -250,7 +250,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "59922a1614273502562c31ba903ca267f3a3593acf3e17364af7d24d12ead0a1",
+      "sha256": "7d632cdd4c4f454c7f18248ad5ceb132227a02aa7cac692e761d8f9da0351bc4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -328,7 +328,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "title": "ISS mosaic",
               "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/epimetheus/epimetheus-normal-thumbnail.webp",
               "surface": "epimetheus-normal-surface@2x.webp",
@@ -338,13 +338,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Cassini images mapped onto the shape with adjusted brightness. Gray grid: gaps and withheld shadows."
+              "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+              "title": "Shape-derived radial height",
               "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/epimetheus/epimetheus-elevation-thumbnail.webp",
               "surface": "epimetheus-elevation-surface@2x.webp",
@@ -1008,8 +1008,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "59922a1614273502562c31ba903ca267f3a3593acf3e17364af7d24d12ead0a1",
-      "bytes": 9125,
+      "sha256": "7d632cdd4c4f454c7f18248ad5ceb132227a02aa7cac692e761d8f9da0351bc4",
+      "bytes": 8670,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

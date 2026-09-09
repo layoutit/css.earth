@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0b7641e5a664883e0ad08687dc466fbfeebec04175ee7a770c61286a90d69e5d"
+    "sha256": "bc53cd10ca10d64d5ed2eb296c8eb513bce3c18f151efbeaab253fe252309f90"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -139,7 +139,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "50b22cca996abb67c1dfd36268c71605a236e9c0257f4faebf9ecff22e432bd3",
+      "sha256": "2c873653e5e17f0355a6a1d6ccfebf35de9a52f7c19772572b8dac5b9bb97fc5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -187,7 +187,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
-              "title": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
+              "title": "ISS clear-filter image",
               "detail": "Cassini ISS",
               "thumbnail": "/scenes/methone/methone-normal-thumbnail.webp",
               "surface": "methone-normal-surface@2x.webp",
@@ -197,7 +197,7 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1716192103"
               },
-              "summary": "Cassini's 2012 image at about 27 m/pixel. The dark oval remains; gaps are marked and tiny spots may be noise."
+              "summary": "The darker oval is visible at about 27 m per source pixel. Gaps are marked; tiny isolated spots may be detector noise."
             }
           ]
         },
@@ -477,8 +477,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "50b22cca996abb67c1dfd36268c71605a236e9c0257f4faebf9ecff22e432bd3",
-      "bytes": 5189,
+      "sha256": "2c873653e5e17f0355a6a1d6ccfebf35de9a52f7c19772572b8dac5b9bb97fc5",
+      "bytes": 4899,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "83eac3752ea0e9c7f87ef987f7f96f01bfaa8e0702fbde510a2b3e5d54d5ea06"
+    "sha256": "53c2d26bdf1893a142768c38841f1a60019cbfa5f7296a078788243db8b3d094"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "12c8d745361a7ab015f36f3b5242c11e84fc372daecb5bf92c99f4d5864ca42e",
+      "sha256": "ca3309df13c64c0cb36d2a6daf3016e76015f6b890029541d8b5153b263f6119",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 1845, version 2017-09-21, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 1845",
               "thumbnail": "/scenes/doris/doris-shape-thumbnail.webp",
               "surface": "doris-shape-surface@2x.webp",
               "poles": "doris-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 105 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/doris/doris-elevation-thumbnail.webp",
               "surface": "doris-elevation-surface@2x.webp",
               "poles": "doris-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1bc0e13cbdcbcc904d4cddc04004f33685593f4fc4155843b4eefdff2f641af6",
-      "bytes": 7354,
+      "sha256": "ca3309df13c64c0cb36d2a6daf3016e76015f6b890029541d8b5153b263f6119",
+      "bytes": 7002,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

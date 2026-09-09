@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b3ec366745d72c44725e091b46dd98287043dcac509b129d1431a0a93c7a76f5"
+    "sha256": "2e184453e5f0fa396d4040ef05b90189117a2a4f6768fdf7337ace4affa87938"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bd78b9585c6ad97b52464b06c59688d947b35ecc9b40b43caf9d22bcbf62643a",
+      "sha256": "49b685a1fe5bce4506844eec4fd1e5a5e3cac715aa584470e64b4936dea3adb7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 5.754 ± 0.174 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Thermal diameter 5.754 ± 0.174 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-thumbnail.webp",
               "surface": "asteroid-1999-fr33-shape-surface@2x.webp",
               "poles": "asteroid-1999-fr33-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 2.877 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 2.877 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-elevation-thumbnail.webp",
               "surface": "asteroid-1999-fr33-elevation-surface@2x.webp",
               "poles": "asteroid-1999-fr33-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "bd78b9585c6ad97b52464b06c59688d947b35ecc9b40b43caf9d22bcbf62643a",
+      "sha256": "49b685a1fe5bce4506844eec4fd1e5a5e3cac715aa584470e64b4936dea3adb7",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11508,
+      "bytes": 11172,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

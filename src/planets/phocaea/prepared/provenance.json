@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "41e17a04f9200e3379102fc0c05f0e7d1fc2024f2545f36ee283c515480c3039"
+    "sha256": "ec1bdb1225acbd4eb70a54573a95e401b934bcd76dbdcb831de74f0b773ded12"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1ccf1dc2e3a8a993dd896bf1df758155380934c3b36073ec84625d1aa61137f2",
+      "sha256": "fdd2c117dd6fcebdb9275e57cdcaca5d99f32d24c6036c827fc474514a389c8a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 83.21 km effective diameter (catalog ±0.96 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 83.21 km effective diameter (catalog ±0.96 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/phocaea/phocaea-shape-thumbnail.webp",
               "surface": "phocaea-shape-surface@2x.webp",
               "poles": "phocaea-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 41.605 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 41.605 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/phocaea/phocaea-elevation-thumbnail.webp",
               "surface": "phocaea-elevation-surface@2x.webp",
               "poles": "phocaea-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1ccf1dc2e3a8a993dd896bf1df758155380934c3b36073ec84625d1aa61137f2",
-      "bytes": 11675,
+      "sha256": "fdd2c117dd6fcebdb9275e57cdcaca5d99f32d24c6036c827fc474514a389c8a",
+      "bytes": 11290,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

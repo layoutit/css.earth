@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c4a9307feb8cb0be8e134fca20708f5e16e947398f0789e35a6327d71f58fd46"
+    "sha256": "57d48676b009f27184e2c858d4e1af501ab2ad2d6bd793ff1aea0e5c9aa917fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aed02c3480dfd85b54272aa0e7f8460eb8dc261fc84f1bc17e4d77c5c0094b6e",
+      "sha256": "e84242a1a3fec598bb6446066bfbe6cb732db84e380b4f1a8fa0384784e14b34",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
-              "title": "The shared grid marks unavailable imagery over the original YORP radar reconstruction, shown with prepared lighting. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/yorp/yorp-shape-thumbnail.webp",
               "surface": "yorp-shape-surface@2x.webp",
               "poles": "yorp-shape-surface@2x.webp",
@@ -220,7 +220,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows the original radar-model radius minus a 0.0564 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. About 25% of the model was unseen or observed at high radar incidence; the polar extent is less well constrained. Cartographic relief and optional Sun lighting are display treatments.",
-              "title": "Color shows the original radar-model radius minus a 0.0564 km reference sphere. It includes the asteroid’s global shape and is not height above a gravitational equipotential or independent measured topography. Colors are transferred from the full source surface to the displayed triangles. About 25% of the model was unseen or observed at high radar incidence; the polar extent is less well constrained. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/yorp/yorp-elevation-thumbnail.webp",
               "surface": "yorp-elevation-surface@2x.webp",
               "poles": "yorp-elevation-surface@2x.webp",
@@ -351,8 +351,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e010515155ecb40ff469975ddfae88f69509891aecbb4d46b871131bfdb55ddc",
-      "bytes": 7995,
+      "sha256": "e84242a1a3fec598bb6446066bfbe6cb732db84e380b4f1a8fa0384784e14b34",
+      "bytes": 7303,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

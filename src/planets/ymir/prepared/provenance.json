@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a4c88dc1d02c46bb95a5446c9264c5a3521d4aa6221cbb54928677f4f4da21bf"
+    "sha256": "0fa85c4339434adaea522b40afbe517962a1bb6ad943ffc4ca6a04373285a250"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4c82f8a266519f80244a1b94519c9a2809948ba95fb170b33433e94e7c2e4a8a",
+      "sha256": "26094835cac921fb68a254cf9b56405bb6437b2d7f1f1013434182b07e914f28",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -159,7 +159,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
-              "title": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
+              "title": "Triangular shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/ymir/ymir-model-thumbnail.webp",
               "surface": "ymir-model-surface@2x.webp",
@@ -591,8 +591,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4c82f8a266519f80244a1b94519c9a2809948ba95fb170b33433e94e7c2e4a8a",
-      "bytes": 8234,
+      "sha256": "26094835cac921fb68a254cf9b56405bb6437b2d7f1f1013434182b07e914f28",
+      "bytes": 8066,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -42,6 +42,20 @@ test('off-shadow prepared chords bypass the detailed ray test without changing p
   expect(result).toEqual(reference); expect(calls).toBe(0);
 });
 
+test('full orbit reveal includes zero-weight chords at uniform opacity and restores the trail afterwards', () => {
+  const vertices: Vector3[] = [[-50, 30, -200], [50, 30, -200], [50, 40, -200], [-50, 40, -200]];
+  const trail = [0, .2, .6, 1], active = [1, 2, 3];
+  const projector = createPreparedRingProjector({ ...limits, hidden: () => false });
+  const original = projector(vertices, trail, active);
+  const revealed = projector(vertices, trail, active, true);
+  expect(original).toHaveLength(3);
+  expect(revealed).toHaveLength(4);
+  expect(revealed).toEqual(projector(vertices, [1, 1, 1, 1]));
+  expect(revealed.every(segment => segment[4] === 1)).toBe(true);
+  expect(projector(vertices, trail, active)).toEqual(original);
+  expect(trail).toEqual([0, .2, .6, 1]);
+});
+
 test('prepared active chord indices preserve clipping while avoiding zero-weight vertex transforms', () => {
   let transformed = 0;
   for (const scale of [1, 1e14]) for (const distance of [-200, -30, 0, 30, 200, 1e8]) {
