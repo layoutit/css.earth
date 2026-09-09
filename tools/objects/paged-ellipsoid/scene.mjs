@@ -22,7 +22,9 @@ const { atlas: SURFACE_ATLAS, createSurfaceRasterPlan, surfacePageUrls } = raste
 const ATMOSPHERE_MODEL = atmosphereModel;
 const POLAR_RADIUS = EQUATORIAL_RADIUS * profile.polarRadiusKm / profile.equatorialRadiusKm;
 const SURFACE_RASTER_OVERSCAN = 64 * SURFACE_OVERLAP;
-const CAMERA_MAXIMUM_ZOOM = citySource.presentation.maximumZoom;
+const CAMERA_MAXIMUM_ZOOM = profile.camera.maximumZoom;
+const cityPageLeafCount = citySource?.presentation.poolSize ?? 0;
+const noisePageLeafCount = noise?.poolSize ?? 0;
 const CAMERA_DURATION_MILLISECONDS = CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES * CAMERA_MILLISECONDS_PER_CONTROL_DEGREE;
 const INTERIOR_CUTAWAY = { ...profile.geometry.interiorCutaway, qualification: interiorSource.qualification };
 const PLAN_OPTIONS = Object.freeze({
@@ -190,10 +192,10 @@ const scene = Object.freeze({
     atmosphereLeafCount: 1,
     directionalSunLeafCount: 1,
     interiorLeafCount: interior.leafCount,
-    cityPageLeafCount: citySource.presentation.poolSize,
-    noisePageLeafCount: noise.poolSize,
-    retainedLeafCount: surfaceLeafCount + 3 + citySource.presentation.poolSize + noise.poolSize,
-    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount + citySource.presentation.poolSize + noise.poolSize,
+    cityPageLeafCount,
+    noisePageLeafCount,
+    retainedLeafCount: surfaceLeafCount + 3 + cityPageLeafCount + noisePageLeafCount,
+    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount + cityPageLeafCount + noisePageLeafCount,
     runtimeGeometryPreparation: false,
     runtimeRasterization: false,
   }),
