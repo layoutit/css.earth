@@ -1,0 +1,57 @@
+{
+  "method": "Stock Astro production build with diagnostic hooks disabled. UI selection, native settings clicks, and retained stage-node identity checked in headless Chrome at DPR 1 and 2. Earth assets come from the fresh network installation.",
+  "runs": [
+    {
+      "url": "http://127.0.0.1:4333/earth/?v=MEZA3puvFbeOAUFCxzNAAAAAv8GAizzaCPa_4cw4qnK-xL_XBAiv8nP7AAIAAAAAAAAAAAAAAAAAAAAA",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1
+      },
+      "retained": true,
+      "nodeCount": 72766,
+      "selected": "topography",
+      "shadows": true,
+      "legend": "≤ −10,000 m0 m+10,000 m",
+      "topographyResources": [
+        {
+          "url": "http://127.0.0.1:4333/scenes/earth/earth-lens-topography.webp",
+          "decodedBytes": 2818
+        },
+        {
+          "url": "http://127.0.0.1:4333/scenes/earth/earth-topography-legend.png",
+          "decodedBytes": 2066
+        }
+      ],
+      "diagnosticHooks": false,
+      "errors": [],
+      "failed": []
+    },
+    {
+      "url": "http://127.0.0.1:4333/earth/?v=MEZA3puvFbeOAUFCxzNAAAAAv8GAizzaCPa_4cw4qnK-xL_XBAiv8nP7AAIAAAAAAAAAAAAAAAAAAAAA",
+      "viewport": {
+        "width": 1440,
+        "height": 1000,
+        "dpr": 2
+      },
+      "retained": true,
+      "nodeCount": 72766,
+      "selected": "topography",
+      "shadows": true,
+      "legend": "≤ −10,000 m0 m+10,000 m",
+      "topographyResources": [
+        {
+          "url": "http://127.0.0.1:4333/scenes/earth/earth-lens-topography.webp",
+          "decodedBytes": 2818
+        },
+        {
+          "url": "http://127.0.0.1:4333/scenes/earth/earth-topography-legend.png",
+          "decodedBytes": 2066
+        }
+      ],
+      "diagnosticHooks": false,
+      "errors": [],
+      "failed": []
+    }
+  ]
+}

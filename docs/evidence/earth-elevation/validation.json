@@ -1,0 +1,104 @@
+{
+  "createdAt": "2026-09-09T12:08:43.449Z",
+  "baseline": "be69e2aaa2f636ebcf4e82156fd6de2e25724d73",
+  "latestMainObserved": "430f4e3e0de81711c8f7d2995aaab456c727ea31",
+  "sourceClosure": {
+    "inputs": 56,
+    "generatedIntermediates": 2,
+    "documents": 22,
+    "verified": 80
+  },
+  "scientificAnchors": {
+    "passed": 7,
+    "source": "source-witnesses.json"
+  },
+  "focusedTests": {
+    "passed": 116,
+    "failed": 0,
+    "log": "focused-tests.txt"
+  },
+  "preparation": {
+    "command": "node tools/objects/dist/prepare-authored.js earth --write",
+    "passed": true
+  },
+  "siteBuild": {
+    "command": "pnpm exec astro build",
+    "pages": 259,
+    "passed": true,
+    "scope": "Static site build plus Earth runtime assembly. Unrelated body runtime assets were not installed or qualified."
+  },
+  "earthAssembly": {
+    "command": "node tools/objects/dist/operations.js assemble earth",
+    "files": 152,
+    "passed": true
+  },
+  "runtimeInstallation": {
+    "downloaded": 152,
+    "reused": 0,
+    "sha256Enforced": true,
+    "receipt": "runtime-installation.json"
+  },
+  "unchangedGeometry": {
+    "path": "src/planets/earth/prepared/scene.json",
+    "sha256": "e9dce0b27b6cad44e996f0ab79db9b277824c8150008c563c11a32502909dd4c",
+    "identicalToBaseline": true
+  },
+  "browserConformance": {
+    "server": "http://127.0.0.1:4331",
+    "passed": [
+      "initial-shell",
+      "mobile",
+      "lens-race",
+      "lens-reacquire",
+      "lens-rejection",
+      "lens-destroy"
+    ],
+    "log": "browser-conformance.txt"
+  },
+  "productionBrowser": {
+    "passed": true,
+    "dprs": [
+      1,
+      2
+    ],
+    "retained": true,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "diagnosticHooks": false,
+    "receipt": "production-browser.json"
+  },
+  "aggregateLimits": {
+    "renderer": {
+      "passed": 343,
+      "failed": 9,
+      "baselineReproduction": {
+        "failed": 9,
+        "passed": 1,
+        "suites": [
+          "navigation/surface-target.test.ts",
+          "paging/capabilities.test.ts",
+          "validation/paged-presentation.test.ts",
+          "validation/depth-partitions.test.ts"
+        ]
+      },
+      "description": "Six retired Earth city-paging assertions and three Deimos depth-partition assertions also fail on the baseline."
+    },
+    "desktopBrowser": "This branch failed the outside-body double-click assertion; baseline desktop instead failed the 821px breakpoint wheel-zoom assertion. Full desktop conformance is not claimed.",
+    "densityBrowser": "The sky-double-click state equality assertion failed on this branch and the baseline; see retained failure logs. Full DPR conformance is not claimed.",
+    "productionDiagnosticHarness": "The shared diagnostic harness cannot run against the stock production build because its required hooks are intentionally absent. Production evidence instead uses UI actions and DOM identity without those hooks.",
+    "platformAndShell": "Full platform/shell attempts were not green, including missing unrelated runtime assets/fixtures. Focused shared tests passed; aggregate qualification is not claimed."
+  },
+  "captures": {
+    "before.png": "Baseline Elevation selected through the shared diagnostic lens API, at the serialized camera used by the after view.",
+    "after.png": "Stock production Elevation selected through the visible dataset button, same serialized camera and viewport.",
+    "pacific-dpr-1.png": "Stock production after ENSO focus, cross-section, and return to Elevation; retained DOM verified.",
+    "shadows-dpr-1.png": "Same production view with Shadows checked.",
+    "production-dpr-2.png": "Stock production initial Elevation view at native DPR 2.",
+    "polar.png": "Stock production north-polar view after a native mouse drag; Greenland ice-surface heights and Arctic bathymetry are visible."
+  },
+  "visualLimits": [
+    "Fine cell boundaries remain visible over smooth ocean regions in the Pacific view; seam-free rendering is not claimed.",
+    "No physical mobile-device qualification.",
+    "GEBCO overview samples do not preserve every native-grid summit or trench extremum."
+  ]
+}

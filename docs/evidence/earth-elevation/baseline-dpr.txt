@@ -1,0 +1,143 @@
+(node:56289) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START earth/dpr-1
+[conformance] FAIL earth/dpr-1: earth: sky double-click must remain inert
++ actual - expected
+... Skipped lines
+
+  {
+    controlPitch: 108.11965811967298,
+    controlYaw: -138.05555555558334,
+    distance: 1130.2370968766907,
+    distanceKilometers: 31342.63933200785,
+...
+      markerOpacity: 0,
++     silhouetteDiameter: 431.9999999997867,
+-     silhouetteDiameter: 431.9999999997915,
+      stage: 'geometry'
+    },
+    offAxisDegrees: 0,
+    pitch: 108.11965811967298,
+    pose: {
+      scene: 'matrix3d(-0.48870527071,0.800199299523,0.347632333685,0,0.384639762368,0.555256368586,-0.737389054944,0,-0.783083272447,-0.226652699495,-0.579145182339,0,0,0,0,1)',
+      schema: 'cssearth-camera-pose@1',
++     skybox: 'matrix3d(-0.506107878305,0.151288426316,0.849097425523,0,-0.421208583842,0.815746809299,-0.396409272175,0,-0.752620743777,-0.558272995209,-0.349131978991,0,0,0,0,1)',
+-     skybox: 'matrix3d(-0.506107878306,0.151288426315,0.849097425523,0,-0.421208583842,0.815746809299,-0.396409272175,0,-0.752620743777,-0.558272995209,-0.349131978991,0,0,0,0,1)',
+      sunView: 'matrix3d(-0.48870527071,0.800199299523,-0.347632333685,0,0.798007377446,0.571040602599,0.192605440539,0,0.352634915914,-0.183285872961,-0.917635496726,0,0,0,0,1)'
+    },
+    principalOffset: [
+      0,
+      0
+    ],
++   silhouetteRadius: 215.99999999989336,
+-   silhouetteRadius: 215.99999999989575,
+    visibleRect: {
+      bottom: 400,
+      left: -600,
+      right: 600,
+      top: -400
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: earth: sky double-click must remain inert
++ actual - expected
+... Skipped lines
+
+  {
+    controlPitch: 108.11965811967298,
+    controlYaw: -138.05555555558334,
+    distance: 1130.2370968766907,
+    distanceKilometers: 31342.63933200785,
+...
+      markerOpacity: 0,
++     silhouetteDiameter: 431.9999999997867,
+-     silhouetteDiameter: 431.9999999997915,
+      stage: 'geometry'
+    },
+    offAxisDegrees: 0,
+    pitch: 108.11965811967298,
+    pose: {
+      scene: 'matrix3d(-0.48870527071,0.800199299523,0.347632333685,0,0.384639762368,0.555256368586,-0.737389054944,0,-0.783083272447,-0.226652699495,-0.579145182339,0,0,0,0,1)',
+      schema: 'cssearth-camera-pose@1',
++     skybox: 'matrix3d(-0.506107878305,0.151288426316,0.849097425523,0,-0.421208583842,0.815746809299,-0.396409272175,0,-0.752620743777,-0.558272995209,-0.349131978991,0,0,0,0,1)',
+-     skybox: 'matrix3d(-0.506107878306,0.151288426315,0.849097425523,0,-0.421208583842,0.815746809299,-0.396409272175,0,-0.752620743777,-0.558272995209,-0.349131978991,0,0,0,0,1)',
+      sunView: 'matrix3d(-0.48870527071,0.800199299523,-0.347632333685,0,0.798007377446,0.571040602599,0.192605440539,0,0.352634915914,-0.183285872961,-0.917635496726,0,0,0,0,1)'
+    },
+    principalOffset: [
+      0,
+      0
+    ],
++   silhouetteRadius: 215.99999999989336,
+-   silhouetteRadius: 215.99999999989575,
+    visibleRect: {
+      bottom: 400,
+      left: -600,
+      right: 600,
+      top: -400
+
+    at proveSkyboxPointerBoundary (file:///private/tmp/cssEarth-elevation-baseline/site/test/skybox-pointer-boundary.mjs:65:14)
+    at async provePreparedDensity (file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:910:35)
+    at async within (file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:100:12)
+    at async runCase (file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:88:20)
+    at async file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:69:18 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    pose: {
+      schema: 'cssearth-camera-pose@1',
+      scene: 'matrix3d(-0.48870527071,0.800199299523,0.347632333685,0,0.384639762368,0.555256368586,-0.737389054944,0,-0.783083272447,-0.226652699495,-0.579145182339,0,0,0,0,1)',
+      skybox: 'matrix3d(-0.506107878305,0.151288426316,0.849097425523,0,-0.421208583842,0.815746809299,-0.396409272175,0,-0.752620743777,-0.558272995209,-0.349131978991,0,0,0,0,1)',
+      sunView: 'matrix3d(-0.48870527071,0.800199299523,-0.347632333685,0,0.798007377446,0.571040602599,0.192605440539,0,0.352634915914,-0.183285872961,-0.917635496726,0,0,0,0,1)'
+    },
+    pitch: 108.11965811967298,
+    controlPitch: 108.11965811967298,
+    controlYaw: -138.05555555558334,
+    zoom: 1.0330434782608697,
+    distance: 1130.2370968766907,
+    distanceKilometers: 31342.63933200785,
+    distanceRadii: 4.914074334246481,
+    levelOfDetail: {
+      stage: 'geometry',
+      silhouetteDiameter: 431.9999999997867,
+      billboardOpacity: 0,
+      markerOpacity: 0
+    },
+    focal: 1039.23,
+    principalOffset: [ 0, 0 ],
+    visibleRect: { left: -600, right: 600, top: -400, bottom: 400 },
+    offAxisDegrees: 0,
+    silhouetteRadius: 215.99999999989336
+  },
+  expected: {
+    pose: {
+      schema: 'cssearth-camera-pose@1',
+      scene: 'matrix3d(-0.48870527071,0.800199299523,0.347632333685,0,0.384639762368,0.555256368586,-0.737389054944,0,-0.783083272447,-0.226652699495,-0.579145182339,0,0,0,0,1)',
+      skybox: 'matrix3d(-0.506107878306,0.151288426315,0.849097425523,0,-0.421208583842,0.815746809299,-0.396409272175,0,-0.752620743777,-0.558272995209,-0.349131978991,0,0,0,0,1)',
+      sunView: 'matrix3d(-0.48870527071,0.800199299523,-0.347632333685,0,0.798007377446,0.571040602599,0.192605440539,0,0.352634915914,-0.183285872961,-0.917635496726,0,0,0,0,1)'
+    },
+    pitch: 108.11965811967298,
+    controlPitch: 108.11965811967298,
+    controlYaw: -138.05555555558334,
+    zoom: 1.0330434782608697,
+    distance: 1130.2370968766907,
+    distanceKilometers: 31342.63933200785,
+    distanceRadii: 4.914074334246481,
+    levelOfDetail: {
+      stage: 'geometry',
+      silhouetteDiameter: 431.9999999997915,
+      billboardOpacity: 0,
+      markerOpacity: 0
+    },
+    focal: 1039.23,
+    principalOffset: [ 0, 0 ],
+    visibleRect: { left: -600, right: 600, top: -400, bottom: 400 },
+    offAxisDegrees: 0,
+    silhouetteRadius: 215.99999999989575
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,197 @@
+{
+  "schema": "cssearth-elevation-acquisition@1",
+  "product": "GEBCO_2026 land and ice surface",
+  "checked": "2026-09-09",
+  "complete": true,
+  "grid": {
+    "width": 8640,
+    "height": 4320,
+    "firstIndex": 4,
+    "stride": 10,
+    "nativeCellDegrees": 0.004166666666666667
+  },
+  "blocks": [
+    {
+      "rowOffset": 0,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-00.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4:10:2394][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 2045075,
+      "sha256": "ce96440870f7e94a0506dac9c0e7decf160e133831432caee60f0cbefc5028d2"
+    },
+    {
+      "rowOffset": 240,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-01.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[2404:10:4794][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 3291078,
+      "sha256": "af6343bfe558feade9782bf84d93c8e7ed8bc911ef2fe28a7ea2d9cc6dc1433c"
+    },
+    {
+      "rowOffset": 480,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-02.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4804:10:7194][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 3635991,
+      "sha256": "b340d57f622fa36f59c88178e75b1dc62762d5c6c91073775afdbd6ad1bd3735"
+    },
+    {
+      "rowOffset": 720,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-03.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[7204:10:9594][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 3761066,
+      "sha256": "7ec4e202995fa4f7517c92cfaa1d4f1fd24a202d812c46138b07a0b77c240f71"
+    },
+    {
+      "rowOffset": 960,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-04.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[9604:10:11994][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 3875732,
+      "sha256": "7439d8d3702937040f8975d9df00815de66bb916f2f02e696bedea401ae10633"
+    },
+    {
+      "rowOffset": 1200,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-05.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[12004:10:14394][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 3959519,
+      "sha256": "22f159007cfcf694b88a7069b0ba52d0f8993a6076b6d4b2358aa1539868db30"
+    },
+    {
+      "rowOffset": 1440,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-06.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[14404:10:16794][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 4098728,
+      "sha256": "adf191d03ff1979207e8be77c994ba2df7c5e4f2b5278143ca0c625fc2c0adb1"
+    },
+    {
+      "rowOffset": 1680,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-07.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[16804:10:19194][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 4118826,
+      "sha256": "38a9ab5b65a6d7f0b1a2228cb6a6a3ba1d573049009b20240f84cb118ab15ae9"
+    },
+    {
+      "rowOffset": 1920,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-08.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[19204:10:21594][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 4021765,
+      "sha256": "a83f8a67b524c5fc5302ed7fb4a7d008b410c7dc9fc8d0c86438faefd8abdaef"
+    },
+    {
+      "rowOffset": 2160,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-09.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[21604:10:23994][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 3983376,
+      "sha256": "3f62c2aaeab8ee15b66f2014f44ccbfdc67a5adb06b71dee91e936c5376f9c40"
+    },
+    {
+      "rowOffset": 2400,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-10.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[24004:10:26394][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 4037856,
+      "sha256": "426544acdd9797e1b51c2cc0764a75b8b162908befb93c6da77cadf15b648015"
+    },
+    {
+      "rowOffset": 2640,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-11.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[26404:10:28794][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 4050768,
+      "sha256": "f422cce8de12d254175b3a6ce8433a0d21a0a85591b06f0460a397b7e9508441"
+    },
+    {
+      "rowOffset": 2880,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-12.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[28804:10:31194][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 4237876,
+      "sha256": "0da9842f6463cd0f5cf7e7bc82cff279c155e46190302ed9b906f768968eb81f"
+    },
+    {
+      "rowOffset": 3120,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-13.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[31204:10:33594][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 4033216,
+      "sha256": "74bce9b863f2fa88b06f25adcca51bf192d89b940f2973349e8f73294f958948"
+    },
+    {
+      "rowOffset": 3360,
+      "rows": 120,
+      "path": "science/gebco-2026/rows-3360.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[33604:10:34794][4:10:86394]",
+      "rawBytes": 4217560,
+      "bytes": 1932517,
+      "sha256": "389e187690513bfa6286c222e392f4c7d053ef9fc4ea7d6fb68cce63a5c976e0"
+    },
+    {
+      "rowOffset": 3480,
+      "rows": 120,
+      "path": "science/gebco-2026/rows-3480.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[34804:10:35994][4:10:86394]",
+      "rawBytes": 4217560,
+      "bytes": 1805120,
+      "sha256": "75ee477526af4ee4073fa687924756d3158dc119e09b0ea7ae8ec0abe6edae8b"
+    },
+    {
+      "rowOffset": 3600,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-15.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[36004:10:38394][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 3543843,
+      "sha256": "e7feed36ae4b67e8ef797df29d473690c9ce69fb426097cd2e6f4795e9023e4f"
+    },
+    {
+      "rowOffset": 3840,
+      "rows": 240,
+      "path": "science/gebco-2026/latitude-16.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[38404:10:40794][4:10:86394]",
+      "rawBytes": 8365720,
+      "bytes": 3281192,
+      "sha256": "ef93bb9cc2287914f05516da163ea7a505124628d2358cee50fed4a73501bdc9"
+    },
+    {
+      "rowOffset": 4080,
+      "rows": 120,
+      "path": "science/gebco-2026/rows-4080.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[40804:10:41994][4:10:86394]",
+      "rawBytes": 4217560,
+      "bytes": 1710509,
+      "sha256": "d63d360e180427ce132e8df74f3373ec45f20a9ac9e89da1c1e6f23af8ae18b7"
+    },
+    {
+      "rowOffset": 4200,
+      "rows": 120,
+      "path": "science/gebco-2026/rows-4200.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[42004:10:43194][4:10:86394]",
+      "rawBytes": 4217560,
+      "bytes": 1312150,
+      "sha256": "7138d3b113a94a2eb77ba0c9f53eb9bc3eddf9b7669e389e38304ce4f80f16e4"
+    }
+  ],
+  "sourceTransferBytes": 150721760,
+  "pinnedBytes": 66736203
+}

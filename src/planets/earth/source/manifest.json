@@ -112,23 +112,6 @@
       }
     },
     {
-      "id": "nasa-blue-marble-topography",
-      "path": "blue-marble-topography.jpg",
-      "expectedSha256": "3006c58b1272362db0a8c2df02dc07cea4b12dfe820b7dc4a159a075caf5d4d4",
-      "expectedBytes": 29868040,
-      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x21600x10800.jpg",
-      "credit": "NASA Earth Observatory",
-      "license": "NASA media usage guidelines",
-      "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
-      ],
-      "acquisition": "checked Blue Marble topography and bathymetry snapshot",
-      "redistribution": "NASA image with credit and no endorsement claim",
-      "consumers": [
-        "lenses"
-      ]
-    },
-    {
       "id": "nasa-blue-marble-clouds",
       "path": "blue-marble-clouds.tif",
       "expectedSha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
@@ -615,6 +598,363 @@
       "consumers": [
         "enso"
       ]
+    },
+    {
+      "id": "gebco-2026-elevation",
+      "path": "science/gebco-2026/latitude-00.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4:10:2394][4:10:86394]",
+      "expectedSha256": "ce96440870f7e94a0506dac9c0e7decf160e133831432caee60f0cbefc5028d2",
+      "expectedBytes": 2045075,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-01",
+      "path": "science/gebco-2026/latitude-01.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[2404:10:4794][4:10:86394]",
+      "expectedSha256": "af6343bfe558feade9782bf84d93c8e7ed8bc911ef2fe28a7ea2d9cc6dc1433c",
+      "expectedBytes": 3291078,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-02",
+      "path": "science/gebco-2026/latitude-02.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4804:10:7194][4:10:86394]",
+      "expectedSha256": "b340d57f622fa36f59c88178e75b1dc62762d5c6c91073775afdbd6ad1bd3735",
+      "expectedBytes": 3635991,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-03",
+      "path": "science/gebco-2026/latitude-03.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[7204:10:9594][4:10:86394]",
+      "expectedSha256": "7ec4e202995fa4f7517c92cfaa1d4f1fd24a202d812c46138b07a0b77c240f71",
+      "expectedBytes": 3761066,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-04",
+      "path": "science/gebco-2026/latitude-04.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[9604:10:11994][4:10:86394]",
+      "expectedSha256": "7439d8d3702937040f8975d9df00815de66bb916f2f02e696bedea401ae10633",
+      "expectedBytes": 3875732,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-05",
+      "path": "science/gebco-2026/latitude-05.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[12004:10:14394][4:10:86394]",
+      "expectedSha256": "22f159007cfcf694b88a7069b0ba52d0f8993a6076b6d4b2358aa1539868db30",
+      "expectedBytes": 3959519,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-06",
+      "path": "science/gebco-2026/latitude-06.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[14404:10:16794][4:10:86394]",
+      "expectedSha256": "adf191d03ff1979207e8be77c994ba2df7c5e4f2b5278143ca0c625fc2c0adb1",
+      "expectedBytes": 4098728,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-07",
+      "path": "science/gebco-2026/latitude-07.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[16804:10:19194][4:10:86394]",
+      "expectedSha256": "38a9ab5b65a6d7f0b1a2228cb6a6a3ba1d573049009b20240f84cb118ab15ae9",
+      "expectedBytes": 4118826,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-08",
+      "path": "science/gebco-2026/latitude-08.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[19204:10:21594][4:10:86394]",
+      "expectedSha256": "a83f8a67b524c5fc5302ed7fb4a7d008b410c7dc9fc8d0c86438faefd8abdaef",
+      "expectedBytes": 4021765,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-09",
+      "path": "science/gebco-2026/latitude-09.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[21604:10:23994][4:10:86394]",
+      "expectedSha256": "3f62c2aaeab8ee15b66f2014f44ccbfdc67a5adb06b71dee91e936c5376f9c40",
+      "expectedBytes": 3983376,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-10",
+      "path": "science/gebco-2026/latitude-10.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[24004:10:26394][4:10:86394]",
+      "expectedSha256": "426544acdd9797e1b51c2cc0764a75b8b162908befb93c6da77cadf15b648015",
+      "expectedBytes": 4037856,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-11",
+      "path": "science/gebco-2026/latitude-11.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[26404:10:28794][4:10:86394]",
+      "expectedSha256": "f422cce8de12d254175b3a6ce8433a0d21a0a85591b06f0460a397b7e9508441",
+      "expectedBytes": 4050768,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-12",
+      "path": "science/gebco-2026/latitude-12.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[28804:10:31194][4:10:86394]",
+      "expectedSha256": "0da9842f6463cd0f5cf7e7bc82cff279c155e46190302ed9b906f768968eb81f",
+      "expectedBytes": 4237876,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-13",
+      "path": "science/gebco-2026/latitude-13.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[31204:10:33594][4:10:86394]",
+      "expectedSha256": "74bce9b863f2fa88b06f25adcca51bf192d89b940f2973349e8f73294f958948",
+      "expectedBytes": 4033216,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-14",
+      "path": "science/gebco-2026/rows-3360.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[33604:10:34794][4:10:86394]",
+      "expectedSha256": "389e187690513bfa6286c222e392f4c7d053ef9fc4ea7d6fb68cce63a5c976e0",
+      "expectedBytes": 1932517,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-15",
+      "path": "science/gebco-2026/rows-3480.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[34804:10:35994][4:10:86394]",
+      "expectedSha256": "75ee477526af4ee4073fa687924756d3158dc119e09b0ea7ae8ec0abe6edae8b",
+      "expectedBytes": 1805120,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-16",
+      "path": "science/gebco-2026/latitude-15.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[36004:10:38394][4:10:86394]",
+      "expectedSha256": "e7feed36ae4b67e8ef797df29d473690c9ce69fb426097cd2e6f4795e9023e4f",
+      "expectedBytes": 3543843,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-17",
+      "path": "science/gebco-2026/latitude-16.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[38404:10:40794][4:10:86394]",
+      "expectedSha256": "ef93bb9cc2287914f05516da163ea7a505124628d2358cee50fed4a73501bdc9",
+      "expectedBytes": 3281192,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-18",
+      "path": "science/gebco-2026/rows-4080.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[40804:10:41994][4:10:86394]",
+      "expectedSha256": "d63d360e180427ce132e8df74f3373ec45f20a9ac9e89da1c1e6f23af8ae18b7",
+      "expectedBytes": 1710509,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-latitude-19",
+      "path": "science/gebco-2026/rows-4200.dods.gz",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[42004:10:43194][4:10:86394]",
+      "expectedSha256": "7138d3b113a94a2eb77ba0c9f53eb9bc3eddf9b7669e389e38304ce4f80f16e4",
+      "expectedBytes": 1312150,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
+    },
+    {
+      "id": "gebco-2026-metadata",
+      "path": "science/gebco-2026.das",
+      "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.das",
+      "expectedSha256": "5aa6408d05f1c5847058b91a2f71ac6f654d12bca07bbefb3c513ef69a3ac174",
+      "expectedBytes": 4880,
+      "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
+      "license": "GEBCO public domain with source acknowledgement",
+      "licenseEvidence": [
+        "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
+      ],
+      "acquisition": "CEDA anonymous DAP2 subset, 2026-09-09. Signed heights and provider coordinate axes; complete latitude blocks sampled every 10 native cells. Binary responses are deterministically gzip-compressed at level 9.",
+      "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
+      "consumers": [
+        "topography"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -712,8 +1052,8 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 6467,
-      "expectedSha256": "e216aea3074293e5eb187c0b3899a8ec991d74204b347636990638acf11094ea",
+      "expectedBytes": 11703,
+      "expectedSha256": "aa325bee85ccc3a7c5206a210ccc76357e5ceb35d731947f540f111a7adad8ee",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -724,14 +1064,14 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13550,
-      "expectedSha256": "40bf7e53cf11d2504cebe61e0df20d17a93f09f5ceaf945c2133ebac76b731d4",
+      "expectedBytes": 14302,
+      "expectedSha256": "31774f43fac34265b7908087788a4c3bd82bc66fc1b9d04d9c695867109be0e7",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 2852,
-      "expectedSha256": "b1f6baace20e284f144357fd214e12360e5cd33a12a2f901454c475af127a393",
+      "expectedBytes": 3004,
+      "expectedSha256": "85a2dc6f4a0dd3da0925e358b97e54e93b2797276f774712182cc0b487be2f4f",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -760,8 +1100,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 20651,
-      "expectedSha256": "23257f353d3af2e8c445a00e160b59add4a9b3266206b031d01e4646d7b3ac8d",
+      "expectedBytes": 27625,
+      "expectedSha256": "779c8e99f2b5046b9d543bb38b3c75acd9d0cb402a9758f040dd877792491309",
       "purpose": "Authored source acquisition and exact pinned derived-record restoration."
     },
     {
