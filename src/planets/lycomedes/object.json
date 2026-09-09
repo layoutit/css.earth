@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "68d0e6031a389c4ebc47c238ef38929d04dba7aac3e9f310a078015db0191260"
+          "sha256": "99a4ed4a9141261672570722dd811e2ca6a2e284234637d01eb2865783d29b38"
         },
         {
           "id": "rotation",
@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 68.99130434782609,
       "bodyRadiusM": 15868
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lycomedes-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "60baa599b5d18a99b046af7a1393b1a3d5bc038a31c000f5d758cf4d14adb099"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "edfee2d21cb586477cac3772b1f2dbd6239ae2ed23905b30b1db907f00bfc4db"
+    "sha256": "672f5d8fcfdae993674bb1030d6c4671379ce404e1c6c091a077221e90db0066"
   }
 }

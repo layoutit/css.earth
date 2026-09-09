@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "cba0ebecbad2ada9ace950db5071c2ba5e7909f366c817b32eb157e814f43dd2"
+          "sha256": "d1a178e88ccc78cab90f65a231e0a7ba764588a5f99d992c63f800e58992c6fc"
         },
         {
           "id": "rotation",
@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 110.43260869565218,
       "bodyRadiusM": 25399.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/agenor-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f893e24b90667e8892c013623b5317b822f98ae231fc857bc7669f728770c1f7"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c46a4e03fe4cca3996a8331cf51ae4d5e86345e845e3f0f3de01a066e13eb830"
+    "sha256": "57d9e83b3183c35f563f6a8ddf1e215d424710586ccb9433f627c0f5b5241a55"
   }
 }

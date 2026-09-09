@@ -42,7 +42,7 @@
           "#f8eee1"
         ],
         "relief": {
-          "referenceRadiusMeters": 18848.0,
+          "referenceRadiusMeters": 18848,
           "heightToMeters": 1000,
           "lightDirection": [
             -0.5,
@@ -87,7 +87,8 @@
     "radiusKm": 18.848,
     "camera": {
       "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
+      "defaultControlYawDegrees": 0,
+      "framingScale": 0.6910527530147513
     },
     "mapUrl": "/scenes/eumelos/eumelos-shape-surface@2x.webp",
     "polesUrl": "/scenes/eumelos/eumelos-shape-surface@2x.webp",

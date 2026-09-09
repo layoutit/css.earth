@@ -42,7 +42,7 @@
           "#f8eee1"
         ],
         "relief": {
-          "referenceRadiusMeters": 24178.0,
+          "referenceRadiusMeters": 24178,
           "heightToMeters": 1000,
           "lightDirection": [
             -0.5,
@@ -87,7 +87,8 @@
     "radiusKm": 24.178,
     "camera": {
       "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
+      "defaultControlYawDegrees": 0,
+      "framingScale": 0.7184721145910395
     },
     "mapUrl": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",
     "polesUrl": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",

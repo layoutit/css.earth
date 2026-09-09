@@ -1,0 +1,828 @@
+{
+  "schema": "cssearth-trojan-population-evidence@1",
+  "browserQualified": false,
+  "browserStatus": "Pending coordinated Astro/browser slot",
+  "bodyCount": 10,
+  "bodies": [
+    {
+      "id": "diomedes",
+      "number": 1437,
+      "camp": "L4",
+      "modelId": 4215,
+      "originalMesh": {
+        "vertices": 574,
+        "faces": 1144,
+        "sha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
+        "bytes": 46419
+      },
+      "diameterKm": 118.8,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "diomedes",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-4215.txt",
+          "sha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
+          "bytes": 46419,
+          "vertices": 574,
+          "faces": 1144,
+          "metersPerUnit": 95752.32363210009
+        },
+        "preparedIdentity": {
+          "path": "src/planets/diomedes/prepared/terrain.json",
+          "sha256": "a2dd04c47600543d543a6e41934e8ad4b03c54986f64977986dec658a189ad0a",
+          "bytes": 372523,
+          "faces": 800,
+          "logicalUnitsToMeters": 258.2608695652174
+        },
+        "configurationSha256": "c24b0b979ae7c74bb8b7e2f7005985df6321f8c85cf31e1e2637c44e151f7d5a",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 1.7864113203956806,
+          "p95": 11.560375931938355,
+          "p99": 44.60168616521083,
+          "maximum": 100.6008323808272
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 1.7329949472454327,
+          "p95": 11.528040879655807,
+          "p99": 43.77041013388478,
+          "maximum": 85.10665537492198
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.299415042
+      },
+      "scalarComparison": {
+        "id": "diomedes",
+        "passed": true,
+        "queryCount": 830,
+        "sourceSha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
+        "maxPointDifferenceMeters": 4.942497811332466e-09,
+        "maxValueDifferenceKilometers": 2.8137492336099967e-12,
+        "maxDistanceDifferenceMeters": 4.935914894499775e-09,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "diomedes",
+        "sourceSha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
+        "terrainSha256": "a2dd04c47600543d543a6e41934e8ad4b03c54986f64977986dec658a189ad0a",
+        "sceneSha256": "d67ff4983bcabd919cb0ddd59a092bf8259e6c149065092537bd85750833344f",
+        "configurationSha256": "c24b0b979ae7c74bb8b7e2f7005985df6321f8c85cf31e1e2637c44e151f7d5a",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "diomedes-elevation-surface@2x.webp": "6cf156a55b0921b53cfee8bdc7faf70a1f0750879d9703bd60ca14a7bde26df3",
+          "diomedes-elevation-shadow@2x.webp": "5c7f60bd35c550cd30d95a5a72092a8a5032b911c2c5cdecd6494e7ee06816cd"
+        },
+        "acceptedInteriorAnchors": 12,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 3,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "ajax",
+      "number": 1404,
+      "camp": "L4",
+      "modelId": 3327,
+      "originalMesh": {
+        "vertices": 574,
+        "faces": 1144,
+        "sha256": "6df93884c639520f83f0b0722c09b7f5796a7edd1cb9a9abcfa5990f626a6cde",
+        "bytes": 46419
+      },
+      "diameterKm": 83.99,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "ajax",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-3327.txt",
+          "sha256": "6df93884c639520f83f0b0722c09b7f5796a7edd1cb9a9abcfa5990f626a6cde",
+          "bytes": 46419,
+          "vertices": 574,
+          "faces": 1144,
+          "metersPerUnit": 67695.60082210554
+        },
+        "preparedIdentity": {
+          "path": "src/planets/ajax/prepared/terrain.json",
+          "sha256": "362d84328ea1c2e1c7e4f8b43ffb5e58567aa8951cf51fc7283bdb894082b209",
+          "bytes": 372092,
+          "faces": 800,
+          "logicalUnitsToMeters": 182.58695652173913
+        },
+        "configurationSha256": "aa5675b06bab04e86148ad280c45e96e2be254cb9ddd7f0f815d87b58c5ce4c5",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 1.6631650317570015,
+          "p95": 10.714917527960903,
+          "p99": 39.391033986369635,
+          "maximum": 103.48374351106614
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 1.6891858939934472,
+          "p95": 11.22863728214289,
+          "p99": 40.092915971617145,
+          "maximum": 87.58243969542335
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.23262920799999998
+      },
+      "scalarComparison": {
+        "id": "ajax",
+        "passed": true,
+        "queryCount": 830,
+        "sourceSha256": "6df93884c639520f83f0b0722c09b7f5796a7edd1cb9a9abcfa5990f626a6cde",
+        "maxPointDifferenceMeters": 1.9304277323814393e-09,
+        "maxValueDifferenceKilometers": 1.3500311979441904e-13,
+        "maxDistanceDifferenceMeters": 1.9137474288240493e-09,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "ajax",
+        "sourceSha256": "6df93884c639520f83f0b0722c09b7f5796a7edd1cb9a9abcfa5990f626a6cde",
+        "terrainSha256": "362d84328ea1c2e1c7e4f8b43ffb5e58567aa8951cf51fc7283bdb894082b209",
+        "sceneSha256": "6fb0c65bbe138212c5cd86faad0b933c9befc16e4dfcc7c0133735e725d85ebb",
+        "configurationSha256": "aa5675b06bab04e86148ad280c45e96e2be254cb9ddd7f0f815d87b58c5ce4c5",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "ajax-elevation-surface@2x.webp": "cf6d5b17e9168afe30cf4ceb241ee5dbfe0c7a319b3288f35d5455b2d6873c30",
+          "ajax-elevation-shadow@2x.webp": "b7c57e059281c590190f113f21c015252762ef0a6d068bfe7bb635a2d128851d"
+        },
+        "acceptedInteriorAnchors": 12,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 2,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "ilioneus",
+      "number": 5130,
+      "camp": "L5",
+      "modelId": 4172,
+      "originalMesh": {
+        "vertices": 574,
+        "faces": 1144,
+        "sha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
+        "bytes": 46419
+      },
+      "diameterKm": 60.711,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "ilioneus",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-4172.txt",
+          "sha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
+          "bytes": 46419,
+          "vertices": 574,
+          "faces": 1144,
+          "metersPerUnit": 48932.823982547
+        },
+        "preparedIdentity": {
+          "path": "src/planets/ilioneus/prepared/terrain.json",
+          "sha256": "9078639982014ec618f200767e2534fada48b02c150bf007f8373a61e2712f08",
+          "bytes": 372205,
+          "faces": 800,
+          "logicalUnitsToMeters": 131.98043478260868
+        },
+        "configurationSha256": "74869ac20b4acfd9a27334bbd71362751708afc5ab722a6a032510bd6a500586",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 3.587849992810794,
+          "p95": 25.94242959775913,
+          "p99": 60.137186515459454,
+          "maximum": 147.3072297287373
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 3.5383741879269373,
+          "p95": 26.080253093726373,
+          "p99": 60.551696108199444,
+          "maximum": 127.78875760552573
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.21622249999999998
+      },
+      "scalarComparison": {
+        "id": "ilioneus",
+        "passed": true,
+        "queryCount": 830,
+        "sourceSha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
+        "maxPointDifferenceMeters": 9.118355708269332e-10,
+        "maxValueDifferenceKilometers": 1.4566126083082054e-13,
+        "maxDistanceDifferenceMeters": 3.807090938133131e-10,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "ilioneus",
+        "sourceSha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
+        "terrainSha256": "9078639982014ec618f200767e2534fada48b02c150bf007f8373a61e2712f08",
+        "sceneSha256": "46414878736015e27e376b1ac528ac28f307d38d6a847b758ce0ac5a6bad4bfb",
+        "configurationSha256": "74869ac20b4acfd9a27334bbd71362751708afc5ab722a6a032510bd6a500586",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "ilioneus-elevation-surface@2x.webp": "68af0936b174ea58aee62eae54a26620d23aef8882a5828a7d2a7bba2e7329f9",
+          "ilioneus-elevation-shadow@2x.webp": "f157e773a4763f1909b7fd8be2ccfe9f07bf7ad424940467bac0992acdd500e6"
+        },
+        "acceptedInteriorAnchors": 12,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 2,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "pyrrhus",
+      "number": 5283,
+      "camp": "L4",
+      "modelId": 4373,
+      "originalMesh": {
+        "vertices": 574,
+        "faces": 1144,
+        "sha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
+        "bytes": 46419
+      },
+      "diameterKm": 48.356,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "pyrrhus",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-4373.txt",
+          "sha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
+          "bytes": 46419,
+          "vertices": 574,
+          "faces": 1144,
+          "metersPerUnit": 38974.7394343609
+        },
+        "preparedIdentity": {
+          "path": "src/planets/pyrrhus/prepared/terrain.json",
+          "sha256": "3005c5408f7031f391cd74d847aff222cccc8343c6b5991762e86dd41368cc73",
+          "bytes": 372294,
+          "faces": 800,
+          "logicalUnitsToMeters": 105.12173913043478
+        },
+        "configurationSha256": "e6654dc65438d01d3139a767b89b701ab8445a33c1746a04225708e14f641a80",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 1.6527564299061084,
+          "p95": 11.49811376159264,
+          "p99": 26.509309319421106,
+          "maximum": 69.58737564770313
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 1.643186240268259,
+          "p95": 11.593367672161946,
+          "p99": 25.688813061709713,
+          "maximum": 66.45193478973455
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.422888708
+      },
+      "scalarComparison": {
+        "id": "pyrrhus",
+        "passed": true,
+        "queryCount": 830,
+        "sourceSha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
+        "maxPointDifferenceMeters": 8.869079710691953e-10,
+        "maxValueDifferenceKilometers": 1.4210854715202004e-13,
+        "maxDistanceDifferenceMeters": 8.588386941654651e-10,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "pyrrhus",
+        "sourceSha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
+        "terrainSha256": "3005c5408f7031f391cd74d847aff222cccc8343c6b5991762e86dd41368cc73",
+        "sceneSha256": "fa3b10aa29c749733cf9c74baeec649977d5413754e1dfb79fe1a6d5b7272600",
+        "configurationSha256": "e6654dc65438d01d3139a767b89b701ab8445a33c1746a04225708e14f641a80",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "pyrrhus-elevation-surface@2x.webp": "8b073e6a0a1fc4a3f818c4f6b1cc7f4adaff987fa5701d3e622bba82bc609980",
+          "pyrrhus-elevation-shadow@2x.webp": "5d07cab4ba62039fcfb0a7b0955d2b0911a448023ddca7466a24bc1a86450ca8"
+        },
+        "acceptedInteriorAnchors": 12,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 3,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "eumelos",
+      "number": 5436,
+      "camp": "L4",
+      "modelId": 3920,
+      "originalMesh": {
+        "vertices": 574,
+        "faces": 1144,
+        "sha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
+        "bytes": 46419
+      },
+      "diameterKm": 37.696,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "eumelos",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-3920.txt",
+          "sha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
+          "bytes": 46419,
+          "vertices": 574,
+          "faces": 1144,
+          "metersPerUnit": 30382.824794324355
+        },
+        "preparedIdentity": {
+          "path": "src/planets/eumelos/prepared/terrain.json",
+          "sha256": "82572bd22c6c0773d1bf85d281be385d97a77628ca782945b85a1a5982b1b3da",
+          "bytes": 371569,
+          "faces": 800,
+          "logicalUnitsToMeters": 81.94782608695652
+        },
+        "configurationSha256": "4159c79b64c56e915e9db27dcf7ce68c68d70c7f671ae4eded5fa70516fad295",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 2.249191224590575,
+          "p95": 15.2327168807419,
+          "p99": 35.64589465177066,
+          "maximum": 63.42334676738174
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 2.2345634414803,
+          "p95": 15.116613159018094,
+          "p99": 35.38823153225553,
+          "maximum": 68.55945218499969
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.274054125
+      },
+      "scalarComparison": {
+        "id": "eumelos",
+        "passed": true,
+        "queryCount": 826,
+        "sourceSha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
+        "maxPointDifferenceMeters": 1.5372343913474905e-10,
+        "maxValueDifferenceKilometers": 8.881784197001252e-14,
+        "maxDistanceDifferenceMeters": 1.5280587277193555e-10,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "eumelos",
+        "sourceSha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
+        "terrainSha256": "82572bd22c6c0773d1bf85d281be385d97a77628ca782945b85a1a5982b1b3da",
+        "sceneSha256": "7732284eb31a3611ded3f9b9074e97ebee96be7a28aea5849d38ba98cda9fd7e",
+        "configurationSha256": "4159c79b64c56e915e9db27dcf7ce68c68d70c7f671ae4eded5fa70516fad295",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "eumelos-elevation-surface@2x.webp": "b604313e835cbcecfe3bb73358c29876061f200ac424fda91c22130667d76d58",
+          "eumelos-elevation-shadow@2x.webp": "732adf65cd9b49785516e3a65f28a91b03e716e6fbc74fef3242e451c7356329"
+        },
+        "acceptedInteriorAnchors": 10,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 3,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "lycomedes",
+      "number": 9694,
+      "camp": "L4",
+      "modelId": 4284,
+      "originalMesh": {
+        "vertices": 570,
+        "faces": 1136,
+        "sha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
+        "bytes": 46095
+      },
+      "diameterKm": 31.736,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "lycomedes",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-4284.txt",
+          "sha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
+          "bytes": 46095,
+          "vertices": 570,
+          "faces": 1136,
+          "metersPerUnit": 25579.089580075182
+        },
+        "preparedIdentity": {
+          "path": "src/planets/lycomedes/prepared/terrain.json",
+          "sha256": "fa73020f8382de6f529daec00142f93fa94819ea528807795b48e8a160637f25",
+          "bytes": 372062,
+          "faces": 800,
+          "logicalUnitsToMeters": 68.99130434782609
+        },
+        "configurationSha256": "99a4ed4a9141261672570722dd811e2ca6a2e284234637d01eb2865783d29b38",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 1.1971407930956206,
+          "p95": 8.93575231645249,
+          "p99": 21.007592185571557,
+          "maximum": 47.2613216712015
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 1.1722628803667283,
+          "p95": 8.806626267567617,
+          "p99": 20.62446454652719,
+          "maximum": 46.55337682887712
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.221441916
+      },
+      "scalarComparison": {
+        "id": "lycomedes",
+        "passed": true,
+        "queryCount": 830,
+        "sourceSha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
+        "maxPointDifferenceMeters": 2.0012242086413137e-10,
+        "maxValueDifferenceKilometers": 6.394884621840902e-14,
+        "maxDistanceDifferenceMeters": 1.9758292753646772e-10,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "lycomedes",
+        "sourceSha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
+        "terrainSha256": "fa73020f8382de6f529daec00142f93fa94819ea528807795b48e8a160637f25",
+        "sceneSha256": "1dfc768e22028aba4e039e80f311566d7f79c85cbd560879e1278999d325a94b",
+        "configurationSha256": "99a4ed4a9141261672570722dd811e2ca6a2e284234637d01eb2865783d29b38",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "lycomedes-elevation-surface@2x.webp": "19eb34d02aad84949069c338d22269823970eb9efa31f39f8b6ef1e958bdaa14",
+          "lycomedes-elevation-shadow@2x.webp": "eeb3eefb464cf1001d46df3191326d0cdfa95b005e469a5f8687de9b98ffd474"
+        },
+        "acceptedInteriorAnchors": 12,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 3,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "demodokus",
+      "number": 11429,
+      "camp": "L4",
+      "modelId": 3896,
+      "originalMesh": {
+        "vertices": 574,
+        "faces": 1144,
+        "sha256": "8bccce94993f84b19d6d0944ae3aff994cf00cd0a75b4b8599bad18b7d706855",
+        "bytes": 46419
+      },
+      "diameterKm": 37.63,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "demodokus",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-3896.txt",
+          "sha256": "8bccce94993f84b19d6d0944ae3aff994cf00cd0a75b4b8599bad18b7d706855",
+          "bytes": 46419,
+          "vertices": 574,
+          "faces": 1144,
+          "metersPerUnit": 30329.630453767153
+        },
+        "preparedIdentity": {
+          "path": "src/planets/demodokus/prepared/terrain.json",
+          "sha256": "10d360695f62addd1fdccebdaee57f06b281ad33145da14c4eeef9ac72aee31e",
+          "bytes": 371751,
+          "faces": 800,
+          "logicalUnitsToMeters": 81.80434782608695
+        },
+        "configurationSha256": "69d3975061e8371226df8da238c956f6269f08e802a3e236bab78fd95497aff0",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 0.695907271925229,
+          "p95": 3.6095145551771557,
+          "p99": 17.151980105445464,
+          "maximum": 66.22102013470159
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 0.6775481773260325,
+          "p95": 3.4941645162195156,
+          "p99": 16.68737454318808,
+          "maximum": 49.47855692499837
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.281245792
+      },
+      "scalarComparison": {
+        "id": "demodokus",
+        "passed": true,
+        "queryCount": 828,
+        "sourceSha256": "8bccce94993f84b19d6d0944ae3aff994cf00cd0a75b4b8599bad18b7d706855",
+        "maxPointDifferenceMeters": 1.6484385107131003e-09,
+        "maxValueDifferenceKilometers": 4.263256414560601e-13,
+        "maxDistanceDifferenceMeters": 1.647355134366486e-09,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "demodokus",
+        "sourceSha256": "8bccce94993f84b19d6d0944ae3aff994cf00cd0a75b4b8599bad18b7d706855",
+        "terrainSha256": "10d360695f62addd1fdccebdaee57f06b281ad33145da14c4eeef9ac72aee31e",
+        "sceneSha256": "faba6b553db3cffa7a60030ba80ff7ed76863dbd6e70f079cd2a2328d6d0f21c",
+        "configurationSha256": "69d3975061e8371226df8da238c956f6269f08e802a3e236bab78fd95497aff0",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "demodokus-elevation-surface@2x.webp": "689dea27871052cda0dde5324070f97b45c2ae4ef4db943cc0af574e117b64ee",
+          "demodokus-elevation-shadow@2x.webp": "1dc295025a7b29d56fb4ae582dba7aec89ea7bb0650ef3fb7e2091cf9a26863a"
+        },
+        "acceptedInteriorAnchors": 11,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 2,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "menelaus",
+      "number": 1647,
+      "camp": "L4",
+      "modelId": 8131,
+      "originalMesh": {
+        "vertices": 574,
+        "faces": 1144,
+        "sha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
+        "bytes": 46419
+      },
+      "diameterKm": 42.716,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "menelaus",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-8131.txt",
+          "sha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
+          "bytes": 46419,
+          "vertices": 574,
+          "faces": 1144,
+          "metersPerUnit": 34428.92579757789
+        },
+        "preparedIdentity": {
+          "path": "src/planets/menelaus/prepared/terrain.json",
+          "sha256": "eaa52a694e69328a5fef9c1e2b5d0273ca0e4eabe8297f7dfbcb0c2fc6aa6f38",
+          "bytes": 371844,
+          "faces": 800,
+          "logicalUnitsToMeters": 92.86086956521739
+        },
+        "configurationSha256": "d2d8f70a3df90838e1798d2dcb939658a174e54f5435c5a395073c1cee4f908d",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 0.6445013589449177,
+          "p95": 3.6889050351967487,
+          "p99": 16.85563738479888,
+          "maximum": 46.82678617056236
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 0.6281682788482325,
+          "p95": 3.841636170296264,
+          "p99": 16.01460943000393,
+          "maximum": 53.78336063038277
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.24488812499999998
+      },
+      "scalarComparison": {
+        "id": "menelaus",
+        "passed": true,
+        "queryCount": 828,
+        "sourceSha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
+        "maxPointDifferenceMeters": 1.5196412732075099e-09,
+        "maxValueDifferenceKilometers": 3.943512183468556e-13,
+        "maxDistanceDifferenceMeters": 1.5196412732075099e-09,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "menelaus",
+        "sourceSha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
+        "terrainSha256": "eaa52a694e69328a5fef9c1e2b5d0273ca0e4eabe8297f7dfbcb0c2fc6aa6f38",
+        "sceneSha256": "f0466cdc991d043eea5743d286fc27d0170863b6ba595085cd5e02f78aa85bbf",
+        "configurationSha256": "d2d8f70a3df90838e1798d2dcb939658a174e54f5435c5a395073c1cee4f908d",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "menelaus-elevation-surface@2x.webp": "d7643837e56267dfbd453439e34ccb3ce79670e6825ddc2cdbf6454819341cef",
+          "menelaus-elevation-shadow@2x.webp": "8f1dc81d0ba34e4eca2708b6f1c2991a5f6a3e43ef711d564f7e56befd689331"
+        },
+        "acceptedInteriorAnchors": 11,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 2,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "agenor",
+      "number": 1873,
+      "camp": "L5",
+      "modelId": 4273,
+      "originalMesh": {
+        "vertices": 574,
+        "faces": 1144,
+        "sha256": "b6c5a04a7f568ec3a11326f659040cb0fedf1e06fa0e426e7776b5c4ba35f8a2",
+        "bytes": 46419
+      },
+      "diameterKm": 50.799,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "agenor",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-4273.txt",
+          "sha256": "b6c5a04a7f568ec3a11326f659040cb0fedf1e06fa0e426e7776b5c4ba35f8a2",
+          "bytes": 46419,
+          "vertices": 574,
+          "faces": 1144,
+          "metersPerUnit": 40943.786684785
+        },
+        "preparedIdentity": {
+          "path": "src/planets/agenor/prepared/terrain.json",
+          "sha256": "cba01a20796b931ffa088d91adfb339acafdca88c494e8b33a88f180268f6711",
+          "bytes": 372328,
+          "faces": 800,
+          "logicalUnitsToMeters": 110.43260869565218
+        },
+        "configurationSha256": "d1a178e88ccc78cab90f65a231e0a7ba764588a5f99d992c63f800e58992c6fc",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 1.2046095733550046,
+          "p95": 8.795884402774218,
+          "p99": 23.609214298453022,
+          "maximum": 58.35635513422333
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 1.1921107308941017,
+          "p95": 8.602060622893198,
+          "p99": 24.036333640667795,
+          "maximum": 65.3523468190378
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.22924
+      },
+      "scalarComparison": {
+        "id": "agenor",
+        "passed": true,
+        "queryCount": 830,
+        "sourceSha256": "b6c5a04a7f568ec3a11326f659040cb0fedf1e06fa0e426e7776b5c4ba35f8a2",
+        "maxPointDifferenceMeters": 7.122252254671801e-09,
+        "maxValueDifferenceKilometers": 3.304023721284466e-12,
+        "maxDistanceDifferenceMeters": 7.116464725349485e-09,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "agenor",
+        "sourceSha256": "b6c5a04a7f568ec3a11326f659040cb0fedf1e06fa0e426e7776b5c4ba35f8a2",
+        "terrainSha256": "cba01a20796b931ffa088d91adfb339acafdca88c494e8b33a88f180268f6711",
+        "sceneSha256": "368ed48977b3cefdd4bb9a1c3ea8a12cb63fa12eb500cdb81c7dc464ec70cafc",
+        "configurationSha256": "d1a178e88ccc78cab90f65a231e0a7ba764588a5f99d992c63f800e58992c6fc",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "agenor-elevation-surface@2x.webp": "10c224e988aaa0f731a8c4a7fdcbeeccc9e3c1d4a682a6b0b3195c8fb0b6df04",
+          "agenor-elevation-shadow@2x.webp": "0acbcc0c74980958978b581b45a8059855073416950632e1742e48baf272f124"
+        },
+        "acceptedInteriorAnchors": 12,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 2,
+        "tolerance": 12,
+        "passed": true
+      }
+    },
+    {
+      "id": "mentor",
+      "number": 3451,
+      "camp": "L5",
+      "modelId": 4281,
+      "originalMesh": {
+        "vertices": 572,
+        "faces": 1140,
+        "sha256": "649f240ede7aa6604f30dd9a05ddf905cc9bf0ff53d1765c5265f89082b195ab",
+        "bytes": 46257
+      },
+      "diameterKm": 126.288,
+      "meshFit": {
+        "schema": "cssearth-asteroid-source-fit@1",
+        "id": "mentor",
+        "method": "8192 deterministic area-stratified surface samples in each direction, exact nearest point over target triangles with AABB pruning; sampled distances, not exhaustive Hausdorff bound",
+        "units": "meters",
+        "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+        "sourceIdentity": {
+          "path": "shape/model-4281.txt",
+          "sha256": "649f240ede7aa6604f30dd9a05ddf905cc9bf0ff53d1765c5265f89082b195ab",
+          "bytes": 46257,
+          "vertices": 572,
+          "faces": 1140,
+          "metersPerUnit": 101787.61572588223
+        },
+        "preparedIdentity": {
+          "path": "src/planets/mentor/prepared/terrain.json",
+          "sha256": "755c60aca6d39abf767fc43380890d9e2751267f3af81e703d7a0673006bd9b6",
+          "bytes": 372477,
+          "faces": 800,
+          "logicalUnitsToMeters": 274.53913043478263
+        },
+        "configurationSha256": "c4ff5d03564a14c922ae3f4ae0ad26e63c3c72b3bcc1c78ac17243e586240790",
+        "sourceToOutput": {
+          "count": 8192,
+          "mean": 2.2585255343339727,
+          "p95": 15.798578594556751,
+          "p99": 50.519325157064756,
+          "maximum": 138.07963694240215
+        },
+        "outputToSource": {
+          "count": 8192,
+          "mean": 2.258920377150365,
+          "p95": 16.107365447274177,
+          "p99": 49.29911792241651,
+          "maximum": 141.59829901735455
+        },
+        "radialDiscontinuity": {
+          "multipleIntersectionDirections": 0,
+          "sampledDirections": 8192
+        },
+        "elapsedSeconds": 0.2903875
+      },
+      "scalarComparison": {
+        "id": "mentor",
+        "passed": true,
+        "queryCount": 830,
+        "sourceSha256": "649f240ede7aa6604f30dd9a05ddf905cc9bf0ff53d1765c5265f89082b195ab",
+        "maxPointDifferenceMeters": 2.7381778634230187e-09,
+        "maxValueDifferenceKilometers": 5.258016244624741e-13,
+        "maxDistanceDifferenceMeters": 2.723316588890364e-09,
+        "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+      },
+      "decodedAtlas": {
+        "id": "mentor",
+        "sourceSha256": "649f240ede7aa6604f30dd9a05ddf905cc9bf0ff53d1765c5265f89082b195ab",
+        "terrainSha256": "755c60aca6d39abf767fc43380890d9e2751267f3af81e703d7a0673006bd9b6",
+        "sceneSha256": "2fe8beeb4fa34a26f24ae30ecdbd91ba27379f0e6ea9e02241a17d43d6a4ab22",
+        "configurationSha256": "c4ff5d03564a14c922ae3f4ae0ad26e63c3c72b3bcc1c78ac17243e586240790",
+        "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
+        "atlasSha256": {
+          "mentor-elevation-surface@2x.webp": "3cf597e9d6f300a82c0dfc69164188c638506beddf16c5a3e3510b1daa94a7a2",
+          "mentor-elevation-shadow@2x.webp": "163a6d092c2d0cda85a3c602b4680a470a27c1807dc1c0d88893f603e2c4d54d"
+        },
+        "acceptedInteriorAnchors": 12,
+        "bleedRgbQualification": "Reported diagnostically only: incident facet normals are nonunique at shared source vertices/edges and lossy WebP mixes atlas-boundary colors. Bleed closest coordinates/scalars are checked separately; no single boundary RGB oracle is claimed.",
+        "maximumChannelError": 3,
+        "tolerance": 12,
+        "passed": true
+      }
+    }
+  ]
+}

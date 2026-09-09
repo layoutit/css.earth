@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "a68f44676f3634c01e1e4cd8eeed862416ef24a68a83fa3055bf2d5565fd9a18"
+          "sha256": "69d3975061e8371226df8da238c956f6269f08e802a3e236bab78fd95497aff0"
         },
         {
           "id": "rotation",
@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 81.80434782608695,
       "bodyRadiusM": 18815
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/demodokus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c4fb0df2955ee8ec22d2a1be77156eebc386293a7c9b9fd68cb13b544a694510"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "863484d658770fb2d4f15ea7dc703aef5d3c6352fee349132f93eb5f6f2a6afd"
+    "sha256": "7327a6d35d0d5ebab779505f24f24705ac13faefaeee9841b1409e6943be6f47"
   }
 }

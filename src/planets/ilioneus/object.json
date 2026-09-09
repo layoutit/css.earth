@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "f248a394de59156006fa0abd28217d31e62fb74573990d4760cfba4170057555"
+          "sha256": "74869ac20b4acfd9a27334bbd71362751708afc5ab722a6a032510bd6a500586"
         },
         {
           "id": "rotation",
@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 131.98043478260868,
       "bodyRadiusM": 30355.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ilioneus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ce8976159d1f7f30cc899842f5b1eeedc49a18b07f066352fed8c03937c5e570"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "81de1420b3458fd8f68f43c9811347bb4f97f7402fc8b12f051448a125862422"
+    "sha256": "694f584916b4955b1ba12db911d1f1801fe24514ca01073d35059f80fb8d7bf2"
   }
 }

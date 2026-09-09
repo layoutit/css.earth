@@ -41,4 +41,44 @@ The model's +Z spin axis and +X reference meridian are retained. Alternative pol
 
 The original counted meshes have 570–574 vertices and 1,136–1,144 faces. Intake independently checks coordinate anchors, connectivity, positive volume, closed consistent winding and genus-zero topology. The existing `source-meshoptimizer` recipe targets 800 native PolyCSS `u` triangles with 128 px raster cells, using the source-size-dependent error allowance. Geometry, scalar atlas values and lighting are prepared before runtime.
 
-**Qualification is in progress.** Source intake and Horizons queries are complete. Preparation, source-to-result comparisons, package tests, fresh asset installation and focused browser checks remain to be recorded here before delivery. No full-catalog browser pass is claimed.
+All ten source and package checks pass, including physical scale, spin, original coordinates/connectivity, signed volume, closed topology, runtime hashes, legend ranges and both 640×320 minimaps. Each body retains 800 triangles. Default framing uses the existing camera `framingScale` with the original source's maximum radius, following the Lucy target convention; that metadata update leaves terrain and every image-bank hash unchanged.
+
+The independent numerical checks compare the original source with the prepared result:
+
+- 8,192 area-stratified nearest-surface samples in each direction per body. The largest sampled distance is 147.31 m. These are sampled distances, not exhaustive Hausdorff bounds or source measurement accuracy.
+- 81,920 radial directions have one surface intersection each.
+- 8,292 scalar queries, including every retained triangle centroid, six source extrema and decoded-atlas interior/bleed coordinates, agree with independent NumPy full-source planar/edge projection. Maximum coordinate disagreement is 7.13e-9 m; scalar disagreement is 3.31e-12 km. These measure numerical agreement, not scientific precision.
+- The 116 accepted interior atlas anchors differ by at most three RGB channel levels after WebP decoding, within the existing twelve-level tolerance. Shared-edge/bleed RGB remains diagnostic because incident face normals are nonunique.
+- Forty source/result views have been visually inspected at four orientations per model. Source and result have separate normalization by their maximum radius; this proves silhouette comparison, not physical framing or browser pixel parity.
+
+The current registry has 416 objects and 297 asteroids. All 406 original navigation tiles retain their visible RGBA pixels exactly at both densities. Ten new source-owned tiles, the Sun's 415 authored destination records, marker bindings and the minimap point index are updated. Main's generic routes are used: each new package supplies CSS and scene-bound page metadata, without per-body Astro wrappers. Shared page metadata and navigation/router checks are recorded with the evidence.
+
+All thirty original inputs restored into empty destinations through the existing acquisition operations, using twelve distinct source downloads. All 350 runtime images, totaling 78,053,296 bytes, were published and freshly installed into an empty destination with every hash verified and zero cache reuse.
+
+**Browser qualification is pending.** The final Astro build, default-framing screenshots, lens transitions and representative drag trace will be recorded before PR delivery. No full-catalog browser pass is claimed.
+
+## Source/result comparison
+
+Original mesh is on the left of each pair, prepared 800-face mesh on the right. Four fixed longitude/latitude views are shown for every body. These comparison renders use the existing snapshot renderer; they are not browser captures.
+
+![Source/result comparisons for Diomedes through Eumelos](evidence/trojan-population/source-comparison-1.webp)
+![Source/result comparisons for Lycomedes through Mentor](evidence/trojan-population/source-comparison-2.webp)
+
+## Orbit model
+
+Pinned JPL Horizons osculating elements and vector fixtures use the existing two-body propagation. At the queried epoch, the largest numerical residual is 2.20 mm; the largest selected ±30-day endpoint residual is 1,462.60 km. Each added body has a regression ceiling tied to its sampled endpoint residual. Those checks neither bound the whole interval nor establish long-term accuracy; the existing TDB-as-TT approximation and physical ephemeris limitations remain.
+
+## Reproduction
+
+After normal repository dependency and compiler setup, use the existing body operations. Replace `diomedes` with another table id and prepare one body at a time:
+
+```sh
+node tools/objects/dist/operations.js acquire diomedes
+node tools/objects/dist/prepare-authored.js diomedes --write
+node --test tests/objects/unit/diomedes/source.test.mjs
+pnpm setup:assets --object=diomedes
+```
+
+The qualification helpers are packaged in the evidence archive. They require NumPy and Pillow; the saved runner records this workstation's Python path, which should be adjusted on another machine. `author.py` records initial authoring and intentionally refuses to add existing ids; ordinary reproduction uses the checked-in recipes instead.
+
+After catalog navigation changes, `prepare-navigation.mjs` preserves the pinned baseline tiles and prepares only the new source tiles. `refresh-transports.mjs` updates marker bindings and hash-bound page metadata without recompiling presentations. Finish by running `node site/minimap/prepare.mjs` and its point-range/coverage tests before Astro. Full object preparation or raster rebakes are unnecessary for navigation-only changes.

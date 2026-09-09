@@ -42,7 +42,7 @@
           "#f8eee1"
         ],
         "relief": {
-          "referenceRadiusMeters": 59400.0,
+          "referenceRadiusMeters": 59400,
           "heightToMeters": 1000,
           "lightDirection": [
             -0.5,
@@ -57,7 +57,7 @@
         },
         "surfaceSampling": {
           "method": "closest-source-point",
-          "maximumDistanceMeters": 1188.0
+          "maximumDistanceMeters": 1188
         }
       }
     ],
@@ -87,7 +87,8 @@
     "radiusKm": 59.4,
     "camera": {
       "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
+      "defaultControlYawDegrees": 0,
+      "framingScale": 0.5886314414582466
     },
     "mapUrl": "/scenes/diomedes/diomedes-shape-surface@2x.webp",
     "polesUrl": "/scenes/diomedes/diomedes-shape-surface@2x.webp",
@@ -109,7 +110,7 @@
       "simplification": {
         "method": "source-meshoptimizer",
         "targetFaces": 800,
-        "maximumErrorMeters": 1188.0,
+        "maximumErrorMeters": 1188,
         "regularize": true
       }
     }

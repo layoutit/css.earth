@@ -42,7 +42,7 @@
           "#f8eee1"
         ],
         "relief": {
-          "referenceRadiusMeters": 15868.0,
+          "referenceRadiusMeters": 15868,
           "heightToMeters": 1000,
           "lightDirection": [
             -0.5,
@@ -87,7 +87,8 @@
     "radiusKm": 15.868,
     "camera": {
       "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
+      "defaultControlYawDegrees": 0,
+      "framingScale": 0.7947237720829105
     },
     "mapUrl": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",
     "polesUrl": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",

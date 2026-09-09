@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "48d5e26968de0c0ddb785a512889117b0a40798f1139e3e50c7c33a9ea8009a6"
+          "sha256": "c24b0b979ae7c74bb8b7e2f7005985df6321f8c85cf31e1e2637c44e151f7d5a"
         },
         {
           "id": "rotation",
@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 258.2608695652174,
       "bodyRadiusM": 59400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/diomedes-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8464f8efa416eb8bbe61035f779f3bea726a14500f340136e56188c88f9e812e"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6efed82dec4c9740a8c172ebeeb94315eeca91463635fb6d8f015efa6be52497"
+    "sha256": "b43d6cfd598bc6d0d9734ba72bebe0c2c96803e88f0193ac7eaadf45bf4ba628"
   }
 }

@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "4839a6421837db3fb8cb764f76002ee1d2dfac0ae74387823f86af223ec0ac45"
+          "sha256": "e6654dc65438d01d3139a767b89b701ab8445a33c1746a04225708e14f641a80"
         },
         {
           "id": "rotation",
@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 105.12173913043478,
       "bodyRadiusM": 24178
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pyrrhus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "cd9de1a3c8db77830ec8be2145bf3e2474af5e4089855f086e6cbab79f880c48"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "08f5c299cefcd29f5205d966880bd7e57690e6aec39e17a0dc00804a672aaa47"
+    "sha256": "bec8ff4a191c47dc571586cf3e2319f3623b00ba89aec059ab144d348b0db0c9"
   }
 }

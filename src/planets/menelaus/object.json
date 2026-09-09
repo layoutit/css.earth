@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "85004536ecf5f4ab80e74b421ed4f709872e8499048d782f54f419247863e0cb"
+          "sha256": "d2d8f70a3df90838e1798d2dcb939658a174e54f5435c5a395073c1cee4f908d"
         },
         {
           "id": "rotation",
@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 92.86086956521739,
       "bodyRadiusM": 21358
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/menelaus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c2dd2815a5a2ecc1351dd4ddb9e8911ad70b30861e0a15547e36ba19a7e25780"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b8c06647b2790dfc545d03ee5d14e4bbb5caed7830d1774b2ef61f4fccafd13b"
+    "sha256": "1ce24b57283c25bdeda4ef8d592c824ca4a07697259e4a11e492cbe81e533bf9"
   }
 }

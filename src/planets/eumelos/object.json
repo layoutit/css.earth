@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "5e0c6271ddbe3c895275b6fc59dc0dbdc3d5f59daad74ae0ec71ab31187d7ce2"
+          "sha256": "4159c79b64c56e915e9db27dcf7ce68c68d70c7f671ae4eded5fa70516fad295"
         },
         {
           "id": "rotation",
@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 81.94782608695652,
       "bodyRadiusM": 18848
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eumelos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a45a85024b51518e1539c98777708155c532cf13b1c20c192901ed7b4493b088"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -113,6 +122,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a8f35bc9e4b2b30e0c25bee84fc85b5ab666e9309de056e5e7aee1e4cc715c5f"
+    "sha256": "4aed00d9832d690869f678ef2f25f81f97b324faab7b54c6c6d06714577ce846"
   }
 }

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "diomedes",
+    "sourceMaxMeters": 100.6008323808272,
+    "outputMaxMeters": 85.10665537492198,
+    "sourceP95Meters": 11.560375931938355,
+    "outputP95Meters": 11.528040879655807,
+    "multiRadial": 0,
+    "rgbMax": 3,
+    "rgbAnchors": 12
+  },
+  {
+    "id": "ajax",
+    "sourceMaxMeters": 103.48374351106614,
+    "outputMaxMeters": 87.58243969542335,
+    "sourceP95Meters": 10.714917527960903,
+    "outputP95Meters": 11.22863728214289,
+    "multiRadial": 0,
+    "rgbMax": 2,
+    "rgbAnchors": 12
+  },
+  {
+    "id": "ilioneus",
+    "sourceMaxMeters": 147.3072297287373,
+    "outputMaxMeters": 127.78875760552573,
+    "sourceP95Meters": 25.94242959775913,
+    "outputP95Meters": 26.080253093726373,
+    "multiRadial": 0,
+    "rgbMax": 2,
+    "rgbAnchors": 12
+  },
+  {
+    "id": "pyrrhus",
+    "sourceMaxMeters": 69.58737564770313,
+    "outputMaxMeters": 66.45193478973455,
+    "sourceP95Meters": 11.49811376159264,
+    "outputP95Meters": 11.593367672161946,
+    "multiRadial": 0,
+    "rgbMax": 3,
+    "rgbAnchors": 12
+  },
+  {
+    "id": "eumelos",
+    "sourceMaxMeters": 63.42334676738174,
+    "outputMaxMeters": 68.55945218499969,
+    "sourceP95Meters": 15.2327168807419,
+    "outputP95Meters": 15.116613159018094,
+    "multiRadial": 0,
+    "rgbMax": 3,
+    "rgbAnchors": 10
+  },
+  {
+    "id": "lycomedes",
+    "sourceMaxMeters": 47.2613216712015,
+    "outputMaxMeters": 46.55337682887712,
+    "sourceP95Meters": 8.93575231645249,
+    "outputP95Meters": 8.806626267567617,
+    "multiRadial": 0,
+    "rgbMax": 3,
+    "rgbAnchors": 12
+  },
+  {
+    "id": "demodokus",
+    "sourceMaxMeters": 66.22102013470159,
+    "outputMaxMeters": 49.47855692499837,
+    "sourceP95Meters": 3.6095145551771557,
+    "outputP95Meters": 3.4941645162195156,
+    "multiRadial": 0,
+    "rgbMax": 2,
+    "rgbAnchors": 11
+  },
+  {
+    "id": "menelaus",
+    "sourceMaxMeters": 46.82678617056236,
+    "outputMaxMeters": 53.78336063038277,
+    "sourceP95Meters": 3.6889050351967487,
+    "outputP95Meters": 3.841636170296264,
+    "multiRadial": 0,
+    "rgbMax": 2,
+    "rgbAnchors": 11
+  },
+  {
+    "id": "agenor",
+    "sourceMaxMeters": 58.35635513422333,
+    "outputMaxMeters": 65.3523468190378,
+    "sourceP95Meters": 8.795884402774218,
+    "outputP95Meters": 8.602060622893198,
+    "multiRadial": 0,
+    "rgbMax": 2,
+    "rgbAnchors": 12
+  },
+  {
+    "id": "mentor",
+    "sourceMaxMeters": 138.07963694240215,
+    "outputMaxMeters": 141.59829901735455,
+    "sourceP95Meters": 15.798578594556751,
+    "outputP95Meters": 16.107365447274177,
+    "multiRadial": 0,
+    "rgbMax": 3,
+    "rgbAnchors": 12
+  }
+]

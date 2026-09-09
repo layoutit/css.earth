@@ -42,7 +42,7 @@
           "#f8eee1"
         ],
         "relief": {
-          "referenceRadiusMeters": 18815.0,
+          "referenceRadiusMeters": 18815,
           "heightToMeters": 1000,
           "lightDirection": [
             -0.5,
@@ -87,7 +87,8 @@
     "radiusKm": 18.815,
     "camera": {
       "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
+      "defaultControlYawDegrees": 0,
+      "framingScale": 0.7636087336472297
     },
     "mapUrl": "/scenes/demodokus/demodokus-shape-surface@2x.webp",
     "polesUrl": "/scenes/demodokus/demodokus-shape-surface@2x.webp",
