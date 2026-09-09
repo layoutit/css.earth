@@ -30,12 +30,12 @@
         "Sycorax",
         "Prospero",
         "Setebos",
-        "Hi\u02bbiaka",
+        "Hiʻiaka",
         "Squannit",
         "Romulus",
         "Menoetius"
       ],
-      "outcome": "26 new standalone moons merged; roster 69 \u2192 95, benchmark coverage 90/461.",
+      "outcome": "26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461.",
       "scope": "18 Saturn irregulars, four Uranus irregulars, and four asteroid/dwarf-planet companions.",
       "delivery": "A complete source-backed body package for every selected target: physical-model interpretation, parent-relative orbit, orientation limits, preparation, retained rendering, navigation, content, thumbnails, source restoration and qualification evidence.",
       "closure": "Resolve actual source identities, scale, axes, frame, orbit window and any selected ancillary-file terms for all 26 before expensive preparation. Use the reviewed mesh or explicitly observation-constrained approximation. Published minimum elongation, assumed polar dimension and tentative spin must remain visible; this batch does not promise 26 measured terrain surfaces.",
@@ -63,7 +63,7 @@
         "Uranus|XVII",
         "Uranus|XVIII",
         "Uranus|XIX",
-        "Haumea|Hi\u02bbiaka",
+        "Haumea|Hiʻiaka",
         "Moshup|Squannit",
         "Sylvia|Romulus",
         "Patroclus|Menoetius"
@@ -215,7 +215,7 @@
         "Uranus|III",
         "Uranus|V"
       ],
-      "state": "draft",
+      "state": "merged",
       "owner": "Moons",
       "branch": "feat/moons-spacecraft-mapping",
       "baseCommit": "ef07fac2d3208e201dafc626374b30ed4644f561",
@@ -314,7 +314,7 @@
         ],
         "carriedTo": "Unscheduled B3 source-research carry-forward queue; no new scene or mapped coverage promised."
       },
-      "draft": true,
+      "draft": false,
       "pullRequest": "https://github.com/layoutit/cssEarth/pull/67"
     },
     {
@@ -348,8 +348,11 @@
         "Saturn|XXXII",
         "Saturn|XXXIII"
       ],
-      "state": "planned",
-      "owner": "Moons"
+      "state": "paused-draft",
+      "owner": "Moons",
+      "draft": true,
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/70",
+      "decision": "User requested that observation charts remain in draft rather than surface publicly."
     }
   ],
   "plannedBodies": 60,
@@ -359,5 +362,28 @@
     "observationCandidates": 39,
     "orbitContextOnly": 348,
     "retainExisting": 37
-  }
+  },
+  "followUpBatches": [
+    {
+      "id": "B6",
+      "title": "Mapped scientific surfaces across four existing moons",
+      "state": "draft",
+      "owner": "Moons",
+      "names": [
+        "Moon",
+        "Europa",
+        "Callisto",
+        "Charon"
+      ],
+      "newViews": 6,
+      "outcome": "Moon geology and Diviner silicate signature; Europa geology and NIMS infrared; Callisto NIMS infrared; Charon modeled Bond albedo.",
+      "scopeDocument": "B6-MAPPED-SCIENCE.md",
+      "contract": "Existing renderer, runtime, camera, shell, navigation, geometry and retained DOM remain unchanged.",
+      "coverageAccounting": "Improves already-counted scenes; no new moon or benchmark-coverage claim.",
+      "draft": true,
+      "branch": "feat/moons-mapped-science",
+      "evidenceDocument": "b6-mapped-science/VISUAL-REVIEW.md",
+      "qualification": "Selected-body source, package, browser and fresh-delivery checks passed; repository-wide integration gates remain."
+    }
+  ]
 }

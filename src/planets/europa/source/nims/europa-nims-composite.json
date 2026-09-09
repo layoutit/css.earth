@@ -1,0 +1,67 @@
+{
+  "width": 2048,
+  "height": 1024,
+  "referenceRadiusMeters": 1564130,
+  "origin": [
+    -4913859.317259403,
+    2456929.6586297015
+  ],
+  "resolution": [
+    4798.690739511136,
+    -4798.690739511136
+  ],
+  "noData": 0,
+  "missingPixels": 1275530,
+  "displayRanges": [
+    [
+      0,
+      0.6
+    ],
+    [
+      0,
+      1.2
+    ],
+    [
+      0,
+      1.5
+    ]
+  ],
+  "observations": [
+    {
+      "path": "17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.tif",
+      "bands": [
+        41,
+        31,
+        3
+      ],
+      "wavelengthMicrometers": [
+        1.49601,
+        1.34184,
+        0.732919
+      ],
+      "sourceValidPixels": 7253,
+      "sourcePixels": 12193,
+      "mappedPixels": 564720,
+      "contributedPixels": 564720
+    },
+    {
+      "path": "17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.tif",
+      "bands": [
+        65,
+        55,
+        7
+      ],
+      "wavelengthMicrometers": [
+        1.49601,
+        1.34184,
+        0.740634
+      ],
+      "sourceValidPixels": 4023,
+      "sourcePixels": 6649,
+      "mappedPixels": 301678,
+      "contributedPixels": 256902
+    }
+  ],
+  "output": "europa-nims-composite.tif",
+  "sha256": "01f3ec428dae8907f29701e4bac1aecab8bb800fea488991332e60d65b9d5287"
+}

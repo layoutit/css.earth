@@ -130,3 +130,22 @@ runtime or alternate body preparation path. Run `pnpm build:preparation` before 
 above. Omit `--write` from preparation to generate an isolated comparison stage.
 
 Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+
+## B6 mapped science
+
+The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sq6-x165),
+observations G8CNADLIND01A and G8CNGLOBAL02A, Minnaert-corrected CIOF products.
+Following the archive guide, RGB selects same-parity bands near 0.77, 2.25 and
+3.66 µm. The exact band centers vary slightly between observations and are
+pinned in `source/nims/prepare-composite.json`. Fixed I/F display ranges are
+R 0–0.45, G 0–0.45, B 0–0.2. The regional Asgard/Lindr observation has priority
+in overlap. This is a partial spectral-color view, not natural color or a
+mineral-abundance map. Source geometry follows the USGS 2013 registration grid.
+
+Exact bytes, coordinates and validity rules are in the intake plans and receipts.
+Reproduction: `tools/objects/acquisition/MAPPED-SCIENCE.md`.
+
+The official USGS archive browser maps Individual Investigations to its working
+CloudFront endpoint in [main.js](https://pdsimage2.wr.usgs.gov/index-style/js/main.js).
+The original guides prescribe registered GeoTIFF geometry rather than COC
+backplanes. Unobserved cells remain the shared gray grid; no gap fill is used.
