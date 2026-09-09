@@ -6,7 +6,7 @@ a WebGL or canvas scene renderer. It preprocesses planetary data into
 browser-ready textures, charts, and retained scene plans, then lets you orbit
 and inspect one planet at a time.
 
-Explore the live version: [css.earth](https://css.earth) 🪐
+Available at [css.earth](https://css.earth) 🌎
 
 <img src="docs/css-earth.webp" alt="Saturn, Jupiter, and Mars rendered as retained HTML and CSS geometry in cssEarth" width="960">
 
