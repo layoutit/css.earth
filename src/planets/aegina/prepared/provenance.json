@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "aegina",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1c71e8fa9aed7732d4a558881a04e8a7f0014feab35d8c690624c32a8ef26085"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "8f40507e4c1c4fcf4858c89d9490e22ed2cbbea81363305f993f8f5a9cf7a5de",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "bf58f9f0bc2f49c629e6bacbb38b48a122452df4d8748b1e5bb98c4b6e26d5c5",
       "bytes": 10439,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/aegina/aegina-elevation-thumbnail.webp",
           "bytes": 5552,
           "sha256": "e87b7afcb6ea08329a503b55c64f53dfadae00e29a46fd97b23fde3cf3aab7fe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aegina/aegina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aegina/aegina-elevation-surface@2x.webp",
           "bytes": 282216,
           "sha256": "dead23a76c0c19cc894aabd2f53c4be4f2ef64f4af5c54efacee2b197fcea5d3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/aegina/aegina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aegina/aegina-shape-surface@2x.webp",
           "bytes": 258004,
           "sha256": "aca5784fc6a302b0df8e3f9cc1e1b67a47359086756f15e3325179e2bc4a949b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

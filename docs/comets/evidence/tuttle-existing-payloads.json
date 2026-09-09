@@ -1,0 +1,52 @@
+{
+  "base": "4848897e",
+  "files": 504,
+  "unexpectedChanges": [],
+  "allowedChanges": "Existing object payload hashes and navigation marker indices/counts. Sun source and prepared context add exactly one Tuttle entry, with their source pins updated.",
+  "sunFields": [
+    {
+      "path": "src/planets/sun/object.json",
+      "changes": [
+        "/properties/recipe/sources/8/sha256"
+      ],
+      "sha256": "80303b73a7e7c7ad47eb546ba5357ce86c1f06cea0fd41906ad77471eb789a45"
+    },
+    {
+      "path": "src/planets/sun/prepared/provenance.json",
+      "changes": [
+        "/manifest/sha256"
+      ],
+      "sha256": "323df097211049fbf5e75e5fd03657c84310440b753d63e5ba69b141fa44b3e1"
+    },
+    {
+      "path": "src/planets/sun/prepared/world-context.json",
+      "changes": [
+        "/bodies/length"
+      ],
+      "sha256": "16e71fd19cf26d2f11e5797ee7f09a04c91c2dca9df4c6498fb9f6c2bf2c6548"
+    },
+    {
+      "path": "src/planets/sun/prepared/world-navigation.json",
+      "changes": [
+        "/sources/8/sha256"
+      ],
+      "sha256": "a2ce4b1aaa28937dc97c7ba8bc749837ce625678c1c647d450ef0b40ba5b9149"
+    },
+    {
+      "path": "src/planets/sun/source/manifest.json",
+      "changes": [
+        "/inputs/37/expectedSha256",
+        "/inputs/37/expectedBytes"
+      ],
+      "sha256": "78c3cdaf7bc6d6859cb808aa6735dfc346e41e21a8f36714a2d6c56ad18e7223"
+    },
+    {
+      "path": "src/planets/sun/source/navigation/universe.json",
+      "changes": [
+        "/bodies/length"
+      ],
+      "sha256": "0201400b9230082753091b2ab2f86d12fe605197b60fbbaae40f5cf2272cda9f"
+    }
+  ],
+  "detailSha256": "d4448750f7cabd7c2ebd053ab023d321d8019bce10033bd7f1dc8b25b4bf629a"
+}

@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -423,7 +423,7 @@
       "sha256": "4a874809e0a33a851cd026b8e4647f5875ed15807e677d413812367509564b00",
       "bytes": 80613890,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -470,7 +470,7 @@
       "sha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a",
       "bytes": 116006912,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -522,7 +522,7 @@
       "sha256": "4496de98a9b682fd3440da616ef7f5adfbc315b438e4d18833ae3a843eb41bcc",
       "bytes": 161176369,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -546,7 +546,7 @@
       "sha256": "a6b9f97c28fcb07c0a97dd89b8462db30ba250cafce45a5aa0f4e9afe413fc45",
       "bytes": 11058,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -594,19 +594,19 @@
           "url": "/scenes/charon/charon-normal-thumbnail.webp",
           "bytes": 3452,
           "sha256": "c9fd5a93cfd90fba665e2a0f2494bb2408c639f9c83805eecef7f523a09e2f27",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-normal-surface@2x.webp",
           "bytes": 5592554,
           "sha256": "dc310910d19b395f1fbac788045bf58acc423e82c35f41487149f15f1a73d91c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-normal-poles@2x.webp",
           "bytes": 68758,
           "sha256": "63a60ac73881606ba0870cbd59da34eb99f3d3b31c0787a6b3b6348807d42630",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -656,19 +656,19 @@
           "url": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
           "bytes": 4270,
           "sha256": "2ddc21438bea327353ead88f43e91309ece5d4f6d8b88905e539dfdf81dfa7ff",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-enhanced-color-surface@2x.webp",
           "bytes": 2203286,
           "sha256": "27c5ae040df6a7c649b98a1592179cb4ac71288b0c5bc37ad6d63ade7e215824",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-enhanced-color-poles@2x.webp",
           "bytes": 36788,
           "sha256": "0899084045985bd7d5868f4e3baad691f936eb737dbcde1041afbbb796cc666c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -701,25 +701,25 @@
           "url": "/scenes/charon/charon-elevation-thumbnail.webp",
           "bytes": 4394,
           "sha256": "4c9d95b24093e7c0a5937068624ba30a046b6bf7a1fcf8a5ad521c73ff803fa0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-surface@2x.webp",
           "bytes": 2559100,
           "sha256": "c7329a7ddbd484799b9388c4e7357759424e5db7bbd1b14abfe23434280501a3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-poles@2x.webp",
           "bytes": 55022,
           "sha256": "33c65356e5d342fa5ac3d14ddc45a5e26b888b751cd466f15c7c9073203d2052",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

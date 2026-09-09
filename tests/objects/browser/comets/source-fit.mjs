@@ -8,6 +8,7 @@ import { resolve } from 'node:path';
 import { OBJECTS } from '../../../../site/objects.mjs';
 import { loadObjShape, loadPdsPlanetocentricShape, loadPdsPlateShape, loadPdsRadiusTable, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
 import { surfaceDistanceIndex } from './surface-distance.mjs';
+import { loadContactEllipsoids } from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mjs';
 
 const output = resolve(process.argv[2] ?? 'output/comet-source-fit');
 const selected = OBJECTS.filter(object => object.classification === 'comet' && (!process.argv[3] || object.id === process.argv[3]));
@@ -18,13 +19,18 @@ const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 for (const { id } of selected) {
   const root = resolve('src/planets', id);
   const config = JSON.parse(await readFile(resolve(root, 'source/preparation/terrestrial.json')));
-  const profile = config.geometry.radialTerrain;
+  const lensId = process.argv[4];
+  const alternative = lensId && lensId !== config.presentation.defaultLens
+    ? config.geometry.radialTerrainAlternatives?.find(model => model.lensId === lensId) : null;
+  if (lensId && lensId !== config.presentation.defaultLens) assert.ok(alternative, 'Select a declared surface model.');
+  const profile = alternative ?? config.geometry.radialTerrain;
   const sourcePath = resolve(root, 'source', profile.path);
-  const loader = { 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
+  const loader = { 'contact-ellipsoids': loadContactEllipsoids, 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
     'pds-plate-model': loadPdsPlateShape, 'pds-radius-table': loadPdsRadiusTable }[profile.format];
-  assert.ok(loader, 'Source comparison requires a supported released mesh.');
+  assert.ok(loader, 'Source comparison requires a supported source mesh.');
   const source = await loader(sourcePath, profile.grid);
-  const preparedBytes = await readFile(resolve(root, 'prepared/terrain.json'));
+  const preparedPath = `prepared/terrain${alternative ? `-${lensId}` : ''}.json`;
+  const preparedBytes = await readFile(resolve(root, preparedPath));
   const terrain = JSON.parse(preparedBytes);
   const meters = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const points = terrain.faces.flatMap(face => face.vertices.map(point => point.map(v => v * meters)));
@@ -76,8 +82,8 @@ for (const { id } of selected) {
       rangeDifferenceMeters: stats(localErrors), largestRangeDifference });
   }
   assert.ok(errors.length > 0);
-  const report = { id, source: { path: profile.path, sha256: hash(await readFile(sourcePath)), vertices: source.vertices, faces: source.faces },
-    prepared: { path: 'prepared/terrain.json', sha256: hash(preparedBytes), faces: terrain.faces.length },
+  const report = { id, ...(lensId ? { lensId } : {}), source: { path: profile.path, sha256: hash(await readFile(sourcePath)), vertices: source.vertices, faces: source.faces },
+    prepared: { path: preparedPath, sha256: hash(preparedBytes), faces: terrain.faces.length },
     method: 'Six orthographic +/-XYZ views; first surface intersection from outside the source bounding box; pixel-centered regular grids',
     gridPerView: [grid, grid], boundingBoxPadding: padding, totalRays: grid * grid * 6,
     interpretation: 'Sampled line-of-sight range differences in meters, conditional on both meshes being hit. Silhouette disagreements are reported separately. These are not exhaustive geometric error bounds or observational uncertainties.',

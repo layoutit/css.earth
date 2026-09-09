@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -685,7 +685,7 @@
       "sha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
       "bytes": 136844537,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -738,7 +738,7 @@
       "sha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
       "bytes": 199204541,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -783,7 +783,7 @@
       "sha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
       "bytes": 2282348,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -803,7 +803,7 @@
       "sha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
       "bytes": 387036,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -823,7 +823,7 @@
       "sha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
       "bytes": 167,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -840,7 +840,7 @@
       "sha256": "cd5df99c5c82ad4daa31ae2c16debb941d2dc1611c4965240c1ce52b5638d2de",
       "bytes": 17028,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -880,19 +880,19 @@
           "url": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
           "bytes": 3172,
           "sha256": "639999164186b8fe56726b0a0c2d71494212f1f9a9ab0b018987c80e7170b53e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-surface@2x.webp",
           "bytes": 6411262,
           "sha256": "eee2ba73dd90d85f32681f6da6d151a60bbfe6dfb7ff2edd373e93d5a2894005",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-poles@2x.webp",
           "bytes": 176358,
           "sha256": "2318592ae6bb16349c87e22c8a0910403e9641d2118b8086783d41f9be28e820",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -937,19 +937,19 @@
           "url": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
           "bytes": 5628,
           "sha256": "bb1d5515bc0a443f9208479c9a0e4db9404eb1267edc77490138b8d06959bc4c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-surface@2x.webp",
           "bytes": 7029694,
           "sha256": "90553d4fd9a4bd0140b4054c5bf002862fa102439617c76a413c9900cfa3dc8c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-poles@2x.webp",
           "bytes": 208766,
           "sha256": "88bfbe684db157327e55611e9b3764e67714a13a9c391cd3088e3723a576997d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -984,19 +984,19 @@
           "url": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
           "bytes": 1662,
           "sha256": "beb8f0d50137dd11ad57ba5fab690c57467dd40fa711933616bb0c43a09b7c29",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology-surface@2x.webp",
           "bytes": 522684,
           "sha256": "4d8ca3b202ba6ba3ca28c3dc80d69bac45851895ae5bafa4dc2b6220552b8742",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology-poles@2x.webp",
           "bytes": 24730,
           "sha256": "e602a37e250e60775046ac77bb668649d1edf5c7b700929601faa1b1955af546",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
