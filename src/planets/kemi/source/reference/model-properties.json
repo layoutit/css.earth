@@ -1,0 +1,66 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1202",
+  "modelId": 1202,
+  "modelVersion": "2016-01-04",
+  "diameterKm": 17.98,
+  "diameterInterpretation": "Convex lightcurve reconstruction at approximate thermal scale: 17.98 km effective diameter (catalog ±1.34 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 17.98,
+    "uncertaintyKm": 1.34,
+    "reportedUncertaintyKm": 1.34,
+    "catalog": {
+      "number": 1508,
+      "name": "Kemi",
+      "diameterKm": 17.98,
+      "uncertaintyKm": 1.34,
+      "detections": 1,
+      "originalRow": "1508   Kemi               1938 UP    12.03  0.15  1   17.98  1.34 0.084 0.013"
+    },
+    "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+    "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+    "scaleKmPerSourceUnit": 14.491807726161387,
+    "metersPerSourceUnit": 14491.807726161387,
+    "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred. Kemi has one catalog detection; this limited measurement support remains explicit.",
+    "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 17.98 km effective diameter (catalog ±1.34 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+  },
+  "periodHours": 9.19183,
+  "poleEclipticJ2000Degrees": [
+    166,
+    73
+  ],
+  "modelLimitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred. Kemi has one catalog detection; this limited measurement support remains explicit.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/4357/shape.txt",
+    "vertices": 1021,
+    "faces": 2038,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+    "metersPerUnit": 14491.807726161387,
+    "firstVertexKm": [
+      -0.9177371996823482,
+      1.229224114948461,
+      7.7735505823902304
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      24.15424951119494,
+      16.646898944926573,
+      14.870377219391901
+    ],
+    "volumeCubicKm": 3043.460604636411,
+    "volumeEquivalentRadiusKm": 8.99,
+    "radialRangeKm": [
+      6.328990918149278,
+      12.32004056393029
+    ]
+  },
+  "elevation": [
+    -4,
+    4
+  ]
+}

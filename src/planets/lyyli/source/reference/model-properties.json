@@ -1,0 +1,66 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/2012",
+  "modelId": 2012,
+  "modelVersion": "2018-07-18",
+  "diameterKm": 27.12,
+  "diameterInterpretation": "Convex lightcurve reconstruction at approximate thermal scale: 27.12 km effective diameter (catalog ±1.31 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 27.12,
+    "uncertaintyKm": 1.31,
+    "reportedUncertaintyKm": 1.31,
+    "catalog": {
+      "number": 2204,
+      "name": "Lyyli",
+      "diameterKm": 27.12,
+      "uncertaintyKm": 1.31,
+      "detections": 3,
+      "originalRow": "2204   Lyyli              1943 EQ    12.70  0.15  3   27.12  1.31 0.020 0.002"
+    },
+    "diameterSemantics": "AKARI effective diameter transferred as an explicit approximate volume scale",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+    "sourceLabel": "AKARI AcuA, Usui et al. (2011)",
+    "scaleKmPerSourceUnit": 21.858612161651777,
+    "metersPerSourceUnit": 21858.612161651778,
+    "limitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+    "visibleDescription": "Convex lightcurve reconstruction at approximate thermal scale: 27.12 km effective diameter (catalog ±1.31 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+  },
+  "periodHours": 11.06207,
+  "poleEclipticJ2000Degrees": [
+    64,
+    -66
+  ],
+  "modelLimitations": "AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/6562/shape.txt",
+    "vertices": 572,
+    "faces": 1140,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+    "metersPerUnit": 21858.612161651778,
+    "firstVertexKm": [
+      4.630200521141888,
+      4.059297288703867,
+      12.04118810565263
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      34.51151352864823,
+      27.189818374817836,
+      24.09791768455219
+    ],
+    "volumeCubicKm": 10444.019593159881,
+    "volumeEquivalentRadiusKm": 13.56,
+    "radialRangeKm": [
+      11.785184464523107,
+      19.978978407363332
+    ]
+  },
+  "elevation": [
+    -7,
+    7
+  ]
+}

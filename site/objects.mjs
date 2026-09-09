@@ -1,3 +1,8 @@
+import taurinensisDescriptor from "../src/planets/taurinensis/object.json" with { type: "json" };
+import kemiDescriptor from "../src/planets/kemi/object.json" with { type: "json" };
+import helaDescriptor from "../src/planets/hela/object.json" with { type: "json" };
+import lyyliDescriptor from "../src/planets/lyyli/object.json" with { type: "json" };
+import aethraDescriptor from "../src/planets/aethra/object.json" with { type: "json" };
 import annefrankDescriptor from "../src/planets/annefrank/object.json" with { type: "json" };
 import brailleDescriptor from "../src/planets/braille/object.json" with { type: "json" };
 import heraDescriptor from "../src/planets/hera/object.json" with { type: "json" };
@@ -2723,6 +2728,31 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(erisDescriptor);
     }, erisDescriptor.properties.worldFrame),
+  object("aethra", "Aethra", "asteroid", "#aaaaaa", 2.611974207733697,
+    "Explore Aethra, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(aethraDescriptor);
+    }, aethraDescriptor.properties.worldFrame),
+  object("lyyli", "Lyyli", "asteroid", "#aaaaaa", 2.5890833040625667,
+    "Explore Lyyli, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lyyliDescriptor);
+    }, lyyliDescriptor.properties.worldFrame),
+  object("hela", "Hela", "asteroid", "#aaaaaa", 2.615426166061675,
+    "Explore Hela, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(helaDescriptor);
+    }, helaDescriptor.properties.worldFrame),
+  object("kemi", "Kemi", "asteroid", "#aaaaaa", 2.766954866279291,
+    "Explore Kemi, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(kemiDescriptor);
+    }, kemiDescriptor.properties.worldFrame),
+  object("taurinensis", "Taurinensis", "asteroid", "#aaaaaa", 2.1894142356630333,
+    "Explore Taurinensis, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(taurinensisDescriptor);
+    }, taurinensisDescriptor.properties.worldFrame),
 ]);
 
 export function requireObject(id) {

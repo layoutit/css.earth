@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "taurinensis",
+  "displayName": "Taurinensis",
+  "publicBase": "/scenes/taurinensis/",
+  "distanceAu": 2.1894142356630333,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/model-490.txt",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 16821.136990424864,
+          "expectedVertices": 1016,
+          "expectedFaces": 2028,
+          "indexBase": 1
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -10.435
+        },
+        "minimum": -7,
+        "maximum": 7,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 10435.0,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 208.70000000000002
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 10.435,
+    "camera": {
+      "initialScenePitchDegrees": 25,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/taurinensis/taurinensis-shape-surface@2x.webp",
+    "polesUrl": "/scenes/taurinensis/taurinensis-shape-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/model-490.txt",
+      "format": "pds-plate-model",
+      "grid": {
+        "metersPerUnit": 16821.136990424864,
+        "expectedVertices": 1016,
+        "expectedFaces": 2028,
+        "indexBase": 1
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 208.70000000000002,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "DAMIT model 490 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      170,
+      170,
+      170
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

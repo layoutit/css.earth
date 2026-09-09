@@ -1,0 +1,162 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "taurinensis",
+  "displayName": "Taurinensis",
+  "panel": {
+    "introduction": "Taurinensis is a Mars-crossing asteroid. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "10.435 km (approximate thermal scale)",
+        "source": {
+          "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+          "label": "AKARI AcuA, Usui et al. (2011)",
+          "checked": "2026-09-09",
+          "path": "source/reference/calibration.json"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "2.189 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27512%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-09",
+          "path": "source/reference/horizons-elements.txt"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "3.24 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27512%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-09",
+          "path": "source/reference/horizons-elements.txt"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Model rotation period",
+        "value": "5.58203 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/490",
+          "label": "DAMIT model 490",
+          "checked": "2026-09-09",
+          "path": "source/reference/damit-model.json"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "description": "Convex lightcurve reconstruction at approximate thermal scale: 20.87 km effective diameter (catalog ±0.36 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes.",
+        "title": "Taurinensis · DAMIT shape model 490",
+        "thumbnail": "/scenes/taurinensis/taurinensis-shape-thumbnail.webp",
+        "surface": "taurinensis-shape-surface@2x.webp",
+        "poles": "taurinensis-shape-surface@2x.webp",
+        "source": {
+          "id": "taurinensis-shape",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "detail": "Published shape · grid marks missing imagery"
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radius on the shape model minus a 10.435 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "Taurinensis · radius relative to the 10.435 km reference sphere",
+        "thumbnail": "/scenes/taurinensis/taurinensis-elevation-thumbnail.webp",
+        "surface": "taurinensis-elevation-surface@2x.webp",
+        "poles": "taurinensis-elevation-surface@2x.webp",
+        "source": {
+          "id": "taurinensis-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-7",
+            "0",
+            "7"
+          ],
+          "meta": "km · 10.435 km reference sphere",
+          "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/490",
+          "image": "/scenes/taurinensis/taurinensis-elevation-legend.webp"
+        },
+        "detail": "Shape-derived radial height"
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Model record",
+      "role": "terrain",
+      "description": "DAMIT model 490, version 2013-02-11",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/490"
+    },
+    {
+      "label": "Archive size estimate",
+      "role": "facts",
+      "description": "AKARI AcuA, Usui et al. (2011)",
+      "href": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/490"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/490",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hanuš et al. (2013); model 490, version 2013-02-11."
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}
