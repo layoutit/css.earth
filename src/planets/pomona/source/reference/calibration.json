@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 89.0,
+  "uncertaintyKm": 7.0,
+  "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+  "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16306",
+  "reference": "DAMIT model 16306, version 2024-10-11",
+  "sourceLabel": "DAMIT model 16306",
+  "scaleKmPerSourceUnit": 0.9999999947085977,
+  "metersPerSourceUnit": 999.9999947085977,
+  "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The 2024 archive update includes four occultation comparisons but has no linked publication; it is attributed to the archive, not an invented paper.",
+  "visibleDescription": "Convex light-curve reconstruction, 89 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative."
+}

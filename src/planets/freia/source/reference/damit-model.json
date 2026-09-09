@@ -1,0 +1,195 @@
+{
+  "number": 76,
+  "name": "Freia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/303",
+  "modelId": 442,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/442",
+  "catalog": "View model 140 14 9.97306 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "442",
+    "Asteroid": "(76) Freia",
+    "λ": "140",
+    "β": "14",
+    "P": "9.97306",
+    "YORP": "",
+    "t0": "2444850",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2012-07-30",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1718/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1719/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1720/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1721/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2012)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/143",
+      "file": "reference-143.html",
+      "links": [
+        {
+          "label": "2012a&a...545a.131m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2012a&a...545a.131m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2012A%26A...545A.131M",
+          "url": "http://adsabs.harvard.edu/abs/2012A%26A...545A.131M"
+        }
+      ]
+    }
+  ],
+  "id": "freia",
+  "displayName": "Freia",
+  "lambda": 140.0,
+  "beta": 14.0,
+  "periodHours": 9.97306,
+  "version": "2012-07-30",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 168.36,
+  "uncertaintyKm": 1.95,
+  "akari": {
+    "number": 76,
+    "name": "Freia",
+    "diameterKm": 168.36,
+    "uncertaintyKm": 1.95,
+    "detections": 11,
+    "originalRow": "76     Freia                          7.90  0.15 11  168.36  1.95 0.043 0.001"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1721/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1719/IAUspin.txt",
+  "shapeSha256": "3762ea95ed2846b90e9df6c81300e467a7419b09236b6de8d9bf60209eeea848",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 0.9999998914105835,
+  "independentSignedVolume": 0.9999998914105835,
+  "originalVolumeEquivalentDiameter": 1.2407009368897999,
+  "firstVertex": [
+    0.01469,
+    -0.063002,
+    0.523918
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5138729780373745,
+    0.780184182337094
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.628243,
+      0.707753
+    ],
+    [
+      -0.752306,
+      0.766111
+    ],
+    [
+      -0.5329,
+      0.523918
+    ]
+  ],
+  "scaleKmPerSourceUnit": 135.69748760087694,
+  "alternatives": [
+    {
+      "modelId": 443,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/443",
+      "pole": [
+        "320",
+        "17"
+      ],
+      "version": "2012-07-30"
+    }
+  ],
+  "distanceAu": 3.4087870327567744,
+  "orbitalPeriodYears": 6.293728523547036,
+  "sourceFields": {
+    "ID": "442",
+    "Asteroid": "(76) Freia",
+    "λ": "140",
+    "β": "14",
+    "P": "9.97306",
+    "YORP": "",
+    "t0": "2444850",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2012-07-30",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates"
+}

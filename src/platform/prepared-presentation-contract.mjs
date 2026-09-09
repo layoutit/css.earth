@@ -258,11 +258,20 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   }
   if (plan.surfaceHit !== undefined) {
     const hit = plan.surfaceHit;
-    record(hit, 'surface hit', ['target', 'triangles', 'frontFace']); node(hit.target);
+    record(hit, 'surface hit', ['target', 'triangles', 'frontFace', 'lensRanges']); node(hit.target);
     if (hit.frontFace !== undefined && !['clockwise','counter-clockwise'].includes(hit.frontFace)) fail('invalid surface front face');
     if (!ancestor(hit.target, tree.scene)) fail('surface hit target must belong to scene');
     const triangles = array(hit.triangles, 'surface hit triangles');
     if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
+    if (hit.lensRanges !== undefined) {
+      const ranges = array(hit.lensRanges, 'surface lens ranges');
+      if (ranges.length !== lensIds.length || new Set(ranges.map(range => range.lensId)).size !== ranges.length) fail('surface ranges must cover every lens once');
+      for (const range of ranges) {
+        record(range, 'surface lens range', ['lensId', 'start', 'count']);
+        if (!lensIds.includes(range.lensId) || !Number.isSafeInteger(range.start) || range.start < 0 ||
+            !Number.isSafeInteger(range.count) || range.count < 1 || range.start + range.count > triangles.length) fail('invalid surface lens range');
+      }
+    }
     for (const triangle of triangles) {
       if (!Array.isArray(triangle) || triangle.length !== 3 || triangle.some(point =>
         !Array.isArray(point) || point.length !== 3 || point.some(n => !Number.isFinite(n)))) fail('surface hit requires finite prepared triangles');

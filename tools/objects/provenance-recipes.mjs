@@ -108,8 +108,11 @@ export function provenanceProducts({ id, recipes, manifest, lenses, assets, geog
     }
     // Mesh geometry changes the final sampled surface as well as its silhouette.
     if (terrestrial.geometry.radialTerrain) {
-      const used = paths(terrestrial.geometry.radialTerrain);
-      for (const product of products) product.inputPaths = [...new Set([...product.inputPaths, ...used])];
+      for (const product of products) {
+        const model = terrestrial.geometry.radialTerrainAlternatives?.find(model => model.lensId === product.id)
+          ?? terrestrial.geometry.radialTerrain;
+        product.inputPaths = [...new Set([...product.inputPaths, ...paths(model)])];
+      }
     }
   } else if (terrestrial?.kind === 'affine-photographic-atmosphere') {
     add(terrestrial.lenses.normal.id, 'terrestrial', '/source', [terrestrial.source.path],

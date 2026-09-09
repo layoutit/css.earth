@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "earth",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "ae384e0e5f6e02fe130b656a71408c0cec090f9517019953299f2ca96bf76b0f"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "99bd7367838e9d95e861d61ac326b0a33d6ee9484eb647a188a670fba0d941d5"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {

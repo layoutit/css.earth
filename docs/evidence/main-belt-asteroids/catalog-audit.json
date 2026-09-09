@@ -1,0 +1,416 @@
+{
+  "objects": 299,
+  "asteroids": 185,
+  "reports": [
+    {
+      "id": "thetis",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "thalia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "phocaea",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "euterpe",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "bellona",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "pomona",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "circe",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "atalante",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -9,
+      "maximum": 9,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "leda-38",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "laetitia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -40,
+      "maximum": 40,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "isis",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "ariadne",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "hestia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "aglaja",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "pales",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "kalypso",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "alexandra",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "pandora-55",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -9,
+      "maximum": 9,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "melete",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "elpis",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "erato",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "ausonia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -40,
+      "maximum": 40,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "asia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "leto",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "hesperia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "niobe",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "feronia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "klytia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "galatea-74",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -7,
+      "maximum": 7,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "freia",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "eurynome",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "alkmene",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -10,
+      "maximum": 10,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "beatrix",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -9,
+      "maximum": 9,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "klio",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -10,
+      "maximum": 10,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "io-85",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "semele",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "aegina",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "minerva",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "arethusa",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -30,
+      "maximum": 30,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "klotho",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    },
+    {
+      "id": "ianthe",
+      "assetCount": 35,
+      "sourceInputCount": 3,
+      "minimum": -20,
+      "maximum": 20,
+      "legendMatches": true,
+      "shadowsDefault": false,
+      "minimapCount": 2
+    }
+  ]
+}

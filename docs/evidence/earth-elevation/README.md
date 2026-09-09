@@ -45,7 +45,7 @@ No shared camera, input policy, scene geometry, runtime renderer or city-paging 
 
 Detailed final checks and mounted captures are recorded in `validation.json`.
 
-116 focused tests pass, and the static site builds all 259 routes. The six focused shared browser cases pass in the development build. Stock production captures at DPR 1 and 2 separately verify actual dataset/settings clicks, retained scene nodes, visible meter labels, zero page errors and zero failed requests; production diagnostic hooks remain disabled.
+After integrating main `b60f5d588`, 117 focused tests pass and the static site builds all 301 routes. The six focused shared browser cases pass in the development build. Stock production captures at DPR 1 and 2 separately verify actual dataset/settings clicks, retained scene nodes, visible meter labels, zero page errors and zero failed requests; production diagnostic hooks remain disabled.
 
 The aggregate renderer run has 343 passing and nine failing tests. The same nine failures reproduce on the baseline: six retired Earth city-paging expectations and three Deimos depth-partition expectations. Full desktop/density conformance is not green either; exact assertions and baseline results are retained in the evidence. Fine cell boundaries remain visible in smooth ocean areas. These results qualify the dataset change, not an aggregate all-body or seam-free renderer release.
 
@@ -58,3 +58,5 @@ Before and after use the same serialized camera and 1,440 × 1,000 viewport. The
 ![Pacific and Americas](pacific-dpr-1.png)
 
 ![North polar view](polar.png)
+
+The integration regenerated the provenance record with the shared verifier after main changed an unrelated terrain-model branch in the common provenance recipe. Its basis is explicitly `recovered`; the full Earth rebuild and mounted captures above preceded that merge. Earth image assets and scene geometry retain their captured hashes.

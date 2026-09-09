@@ -100,5 +100,29 @@
     "Fine cell boundaries remain visible over smooth ocean regions in the Pacific view; seam-free rendering is not claimed.",
     "No physical mobile-device qualification.",
     "GEBCO overview samples do not preserve every native-grid summit or trench extremum."
-  ]
+  ],
+  "integration": {
+    "main": "b60f5d588",
+    "captureCommit": "0e8cb23ac309004cdfb3e42d4cfaba1ffbb3f62d",
+    "resolution": "Regenerated only the conflicting provenance record with the shared verifier. The incoming source change selects per-lens terrain models for other bodies; Earth acquisition, interpretation and geometry are unchanged.",
+    "provenance": {
+      "basis": "recovered",
+      "products": 13,
+      "sources": 29,
+      "unresolved": []
+    },
+    "focusedTests": {
+      "passed": 117,
+      "failed": 0,
+      "log": "integration-focused-tests.txt"
+    },
+    "staticBuild": {
+      "pages": 301,
+      "passed": true
+    },
+    "sourceClosure": {
+      "verified": 80
+    },
+    "captureValidity": "Mounted captures precede the main merge. All 152 Earth runtime image assets, prepared scene geometry, and Earth prepared object bytes match those used for the captures."
+  }
 }

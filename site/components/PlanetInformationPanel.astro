@@ -155,7 +155,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                   ></span>)}
                 </>}
               </div>}
-              <DatasetLegend {objectId} {lens} />
+              {lens.legend && <DatasetLegend {objectId} {lens} />}
               <p class="planet-lens-details-copy" title={lens.description}>{lens.summary ?? lens.description}</p>
               {lens.facts?.length > 0 && <ul class="planet-facts" aria-label={`${lens.label} facts`}>
                 {lens.facts.map((fact) => <li>

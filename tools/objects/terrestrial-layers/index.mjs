@@ -16,7 +16,8 @@ import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mjs';
 import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid } from './solid-raster.mjs';
 import { prepareSolidScene, prepareSolidPresentation } from './solid-scene.mjs';
-import { loadRadialTerrain, prepareRadialMaterials } from './radial-terrain.mjs';
+import { prepareRadialMaterials } from './radial-terrain.mjs';
+import { loadRadialModels, combineRadialModels } from './radial-models.mjs';
 import { prepareAffineLayers } from './affine-preparation.mjs';
 import { validateRadialTableProfile } from './pds-radial-table.mjs';
 import { validateFitsObservationPolicy } from './observed-fits.mjs';
@@ -264,11 +265,17 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const context = { sourceDirectory, publicDirectory, outputDirectory, config, source };
   if (config.kind === 'affine-photographic-atmosphere') return prepareAffineLayers({...context,prepareContent});
-  const radial = await loadRadialTerrain(context);
+  const models = await loadRadialModels(context);
+  const radial = models[0]?.radial ?? null;
   const surfaces = await prepareSolidRasters({ ...context, radial });
   const raster = await prepareSolidMaterial({ ...context, surfaces });
   if (radial) {
-    await prepareRadialMaterials({ ...context, radial, surfaces, sunDirection: requireBodyFixedSunDirection(config.namespace) });
+    for (const model of models) await prepareRadialMaterials({ ...context, config: model.config, radial: model.radial,
+      surfaces: surfaces.filter(surface => model.lensIds.includes(surface.id)),
+      artifactId: model === models[0] ? null : model.id,
+      snapshotEntries: models.length === 1 ? source.manifest.generatedIntermediates
+        : source.manifest.generatedIntermediates.filter(entry => model.lensIds.includes(entry.recipe?.lensId)),
+      sunDirection: requireBodyFixedSunDirection(config.namespace) });
     await writeFile(resolve(outputDirectory, 'surfaces.json'), JSON.stringify({ objectId: config.namespace, surfaces }) + '\n');
     await writeFile(resolve(outputDirectory, 'material.json'), JSON.stringify(raster) + '\n');
   }
@@ -279,7 +286,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(assets)}\n`);
   const content = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const celestial = await prepareTerrestrialCelestial(context);
-  const scene = await prepareSolidScene({ ...context, celestial, radial });
+  const scene = await prepareSolidScene({ ...context, celestial, radial: combineRadialModels(models, config.namespace) });
   const definition = await prepareSolidPresentation({ ...context, scene, material: raster, controls: content.controls });
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(definition)}\n`);
   return { raster, celestial, scene, definition, content };
