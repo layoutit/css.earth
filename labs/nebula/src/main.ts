@@ -23,7 +23,8 @@ export interface AlignmentState {
   registrationNote: string; credit: string; sourcePageUrl: string; status: string;
 }
 export interface LabShellState { objectId: string; view: 'alignment' | 'reconstruction'; busy: boolean; alignmentAvailable: boolean;
-  pose: string; alignment?: AlignmentState; }
+  pose: string; alignment?: AlignmentState;
+  originalOverlay?: { available: boolean; enabled: boolean; opacity: number; loading: boolean }; }
 
 export async function mountNebulaLab(options: { onShellState(state: LabShellState): void }) {
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -86,6 +87,7 @@ let sourceSubject: string | null = null;
 let currentTab = 0;
 let currentMode: 'photo' | 'density' = 'density';
 let activePose = 'front', alignmentState: AlignmentState | undefined;
+let originalOverlayState: LabShellState['originalOverlay'];
 let modeRequest = 0;
 let requestedMode: 'photo' | 'density' = 'photo';
 let modePending = false;
@@ -152,7 +154,8 @@ function objectId(id: string | null) {
 
 function publishShell() {
   options.onShellState({ objectId: objectId(sourceSubject), view: tabNames[currentTab]!, busy,
-    alignmentAvailable: Boolean(!sourceSubject || subjects.find(item => item.id === sourceSubject)?.density), pose: activePose, alignment: alignmentState });
+    alignmentAvailable: Boolean(!sourceSubject || subjects.find(item => item.id === sourceSubject)?.density), pose: activePose, alignment: alignmentState,
+    originalOverlay: originalOverlayState });
 }
 function selectTab(index: number, updateUrl = true): Promise<void> {
   currentTab = index;
@@ -179,7 +182,7 @@ function setBusy(value: boolean) {
   element<HTMLButtonElement>('reset').disabled = value || densityMissing;
   densityToneFieldset.disabled = value || currentTab !== 0 || !density;
   overlayControls.disabled = value || currentTab !== 0 || !density;
-  element<HTMLButtonElement>('reference-view').disabled = value || densityMissing;
+  element<HTMLButtonElement>('reference-view').disabled = value || (density ? densityMissing : !currentSubject?.referenceDistanceUnits);
   element<HTMLButtonElement>('fit-cloud').disabled = value || densityMissing;
   element('viewer').setAttribute('aria-busy', String(value));
   element('viewer').inert = value;
@@ -349,7 +352,8 @@ async function refreshOverlayControls() {
   cloudDensityControls.setContext(cloud ? { subjectId: cloud.id } : null);
   cloudStarControls.setContext(cloud ? viewer?.getStars() ?? null : null);
   refreshReconstructionImages();
-  densityViewControls.hidden = !densityVisible; densityAdjustmentPanel.hidden = !densityVisible; overlayPanel.hidden = !visible;
+  densityViewControls.hidden = !(densityVisible || currentTab === 1 && Boolean(item?.referenceDistanceUnits));
+  densityAdjustmentPanel.hidden = !densityVisible; overlayPanel.hidden = !visible;
   densityTone.setContext(densityVisible && item && toneReadyFor(item.id) ? { subjectId: item.id } : null);
   if (!visible) imageTone.setContext(null);
   starRemoval.setContext(null);
@@ -486,6 +490,7 @@ try {
     mode: mountTab === 0 ? 'density' : 'photo', onState(state) {
     if (disposed) return;
     currentMode = state.mode;
+    originalOverlayState = state.originalOverlay;
     subject.value = objectId(state.subjectId);
     updateSubject(state.subjectId);
     activePose = state.pose; cameraPose.value = state.pose; publishShell();
@@ -515,6 +520,8 @@ function destroy() { if (!disposed) { disposed = true; window.removeEventListene
 return { destroy, selectView: (view: 'alignment' | 'reconstruction') => selectTab(view === 'alignment' ? 0 : 1), changeObject: changeSubject,
   chooseImage: changeOverlayChoice, chooseLayer: changeOverlayLayer, setRemovalStrength: changeRemovalStrength,
   showImage: changeOverlayVisibility, setImageOpacity: changeOverlayOpacity,
+  showOriginal: (enabled: boolean) => run(() => viewer!.setOriginalOverlay(enabled)),
+  setOriginalOpacity: (opacity: number) => run(() => viewer!.setOriginalOverlay(originalOverlayState?.enabled ?? false, opacity)),
   setPose: (pose: Parameters<Viewer['setPose']>[0]) => run(() => viewer!.setPose(pose)),
   resetCamera: () => run(() => viewer!.reset()), referenceView: () => run(() => viewer!.referenceView()), fitCloud: () => run(() => viewer!.fitCloud()) };
 }

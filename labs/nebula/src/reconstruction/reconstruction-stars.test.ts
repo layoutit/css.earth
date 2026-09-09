@@ -6,17 +6,17 @@ import { prepareReconstructionStars, type ReconstructionStarsInput } from './rec
 import { parsePreparedLmcStars, mountPreparedLmcStars, type PreparedLmcStars } from '../stars/lmc-stars.js';
 
 const path = 'labs/nebula/models/lmc/stars/prepared/stars.json';
+const cloudPath = 'labs/nebula/models/lmc/clouds/object.json';
 async function fixture() {
-  const bytes = await readFile(path), catalogue = JSON.parse(bytes.toString()) as PreparedLmcStars;
+  const bytes = await readFile(path), catalogue = JSON.parse(bytes.toString()) as PreparedLmcStars, cloudBytes = await readFile(cloudPath);
   const input: ReconstructionStarsInput = {
     frame: catalogue.frame, source: { path, sha256: createHash('sha256').update(bytes).digest('hex') },
-    sampleDensity() { return .2; },
-    sampleProjectedDensitySignal(_x, y) { return y > 0 ? .75 : .25; },
+    canonicalCloud: { path: cloudPath, sha256: createHash('sha256').update(cloudBytes).digest('hex') },
   };
   return { catalogue, input };
 }
 
-test('all 943 density stars retain exact positions and photometry independently of image variants', async () => {
+test('all 943 accepted-cloud stars retain exact XYZ, observed astrometry, photometry and cloudSignal across image variants', async () => {
   const { catalogue, input } = await fixture(), before = structuredClone(catalogue);
   const result = prepareReconstructionStars(catalogue, input)!;
   parsePreparedLmcStars(result, catalogue.frame);
@@ -25,12 +25,14 @@ test('all 943 density stars retain exact positions and photometry independently 
   assert.deepEqual(result.stars.map(star => star.id), expected.map(star => star.id));
   result.stars.forEach((star, index) => {
     const previous = expected[index];
-    assert.deepEqual(star, { ...previous, cloudSignal: previous.positionUnits[1] > 0 ? .75 : .25, cloudPartIds: ['all-light'] });
+    assert.deepEqual(star, { ...previous, cloudPartIds: ['all-light'] });
     assert.notEqual(star.positionUnits, previous.positionUnits);
   });
   assert.deepEqual(catalogue, before);
   assert.deepEqual((result.provenance as any).inheritedCatalogue, input.source);
   assert.deepEqual((result.provenance as any).inheritedProvenance, catalogue.provenance);
+  assert.deepEqual((result.provenance as any).canonicalCloud, input.canonicalCloud);
+  assert.equal((result.provenance as any).excludedStars, 0);
   assert.match(result.depthAssumption, /No new stellar distances/);
   // Neither differing image bytes nor image dimensions enter this API.
   assert.deepEqual(prepareReconstructionStars(catalogue, input), result);
@@ -39,14 +41,18 @@ test('all 943 density stars retain exact positions and photometry independently 
   assert.throws(() => assert.deepEqual(catalogue.stars[0].cloudPartIds, ['all-light']));
 });
 
-test('only missing density support excludes stars; invalid density signals and incompatible frames fail', async () => {
+test('wrong cloud identity and image/resampling inputs reject instead of filtering the accepted catalogue', async () => {
   const { catalogue, input } = await fixture();
-  const supported = prepareReconstructionStars(catalogue, { ...input, sampleDensity: x => x > 0 ? .2 : 0 });
-  assert.deepEqual(supported.stars.map(star => star.id), catalogue.stars.filter(star => star.positionUnits[0] > 0).map(star => star.id));
-  assert.throws(() => prepareReconstructionStars(catalogue, { ...input, sampleDensity: () => 0 }), /No catalogue stars/);
-  for (const value of [NaN, Infinity, -.1, 0, 1.1])
-    assert.throws(() => prepareReconstructionStars(catalogue, { ...input, sampleProjectedDensitySignal: () => value }), /normalized/);
-  assert.throws(() => prepareReconstructionStars(catalogue, { ...input, sampleDensity: () => NaN }), /density/);
+  assert.throws(() => prepareReconstructionStars(catalogue, { ...input,
+    canonicalCloud: { ...input.canonicalCloud, sha256: 'a'.repeat(64) } }), /Canonical cloud differs/);
+  const changed = structuredClone(catalogue); delete (changed.provenance as any).depthModel.cloudObject;
+  assert.throws(() => prepareReconstructionStars(changed, input), /Canonical cloud differs/);
+  // Historical path aliases do not alter the verified object identity.
+  const aliased = prepareReconstructionStars(catalogue, { ...input,
+    canonicalCloud: { ...input.canonicalCloud, path: 'labs/nebula/models/lmc-clouds/object.json' } });
+  assert.deepEqual(aliased.stars, prepareReconstructionStars(catalogue, input).stars);
+  for (const additional of [{ imageId: 'any-image' }, { sampleDensity: () => 0 }, { sampleProjectedDensitySignal: () => .5 }])
+    assert.throws(() => prepareReconstructionStars(catalogue, { ...input, ...additional } as ReconstructionStarsInput), /not image or density resampling/);
   assert.throws(() => prepareReconstructionStars(catalogue, { ...input,
     frame: { ...input.frame, metersPerUnit: input.frame.metersPerUnit * 3 } }), /different physical frames/);
 });

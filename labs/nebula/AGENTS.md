@@ -43,10 +43,11 @@ models/
 - Remove stars on the full native pixel grid. Use the completed NOX native diffuse result for reconstruction, not an older separation preview or the small browser texture. RGB8 working copies must be separate from higher-depth originals.
 - Never remove stars again while reconstructing. Images supply color to the existing volume; they must not create support, thickness or an extruded photographic background.
 - Keep original source footprint/no-data and the unchanged full density prior. Do not crop either to force a match or invent color beyond observed coverage.
-- The shared full-density field owns shape/depth and the common XYZ slice geometry. Image RGB colors occupied points only; zero density stays empty. No per-image depth assignment, per-column normalization or image-dependent slice crop. This is simulated stellar morphology, not recovered gas/dust geometry.
+- Reconstruction uses the accepted benchmark cloud as its fixed shape/depth reference. Repaint its exact prepared quads and preserve every alpha byte; never substitute the smoother raw stellar field or infer new geometry from each image. The untouched full simulation remains available in Alignment.
 - The catalogue belongs to the density cloud: preserve the same star positions and support across image variants. Image coverage/color must not select or reposition stars. Keep the star toggle and use a common density projection for cutoff.
 - Bake XYZ image banks offline. Runtime only loads prepared geometry/textures; keep scene rendering within the existing PolyCSS rules.
-- Derive XYZ counts from physical bounds for comparable slice pitch. Validate bank handoffs at the same camera; successful bakes and conserved optical totals alone do not establish rotation stability. Record any failed visual gate explicitly.
+- Image registration must resolve into the fixed cloud/catalogue frame. Remove the shared raw-simulation preview fit while retaining later per-image corrections. Earth view and the prepared original-image overlay must expose the same mapping used by the painter.
+- Candidate chromaticity changes material only. Image brightness must not redefine density. Missing coverage/black color retains benchmark-source color with explicit coverage accounting. Validate bank handoffs at the same camera; report failed visual gates honestly.
 - Processing is server-owned and atomically publishes complete results. Refresh/navigation detach an observer, not the job. Explicit Cancel stops it. A server restart must report an interrupted job honestly.
 
 ## Validation

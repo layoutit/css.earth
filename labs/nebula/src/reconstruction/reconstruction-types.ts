@@ -25,9 +25,11 @@ export interface ReconstructionWork {
   id: string; imageId: string; name: string; outputDirectory: string;
   source: { path: string; sha256: string; width: number; height: number };
   original: { path: string; sha256: string; removalResultId: string };
-  overlay: { widthPx: number; heightPx: number; transform: string; pivotCssPx: number[]; placement: OverlayPlacement };
+  overlay: { widthPx: number; heightPx: number; transform: string; pivotCssPx: number[]; placement: OverlayPlacement; previewModelFit?:OverlayPlacement };
   frame: DensityVolumeFrame;
   stellarPrior: { path: string; sha256: string };
   stars?: { path: string; sha256: string };
+  cloud?: { descriptor:{path:string;sha256:string}; slices:{path:string;sha256:string};
+    signal:{path:string;sha256:string}; provenance:{path:string;sha256:string} };
   sourcePageUrl: string; credit: string;
 }

@@ -14,7 +14,9 @@ export interface ObservationPhoto {
 export async function rectifyObservation(bytes: Buffer, mapping: ObservationMapping, width: number): Promise<ObservationPhoto> {
   if (!Number.isInteger(width) || width < 16 || width > 2048) throw new TypeError('Observation width must be 16–2048 pixels.');
   // Prefilter from the native source before the projective resampling, avoiding point-sampled stellar aliasing.
-  const source = await sharp(bytes).toColourspace('srgb').removeAlpha()
+  // Pinned observatory TIFFs can contain strips larger than libtiff's default
+  // allocation limit. Match the verified-original decoder used by star removal.
+  const source = await sharp(bytes, { unlimited: true }).toColourspace('srgb').removeAlpha()
     .resize({ width: width * 2, height: width * 2, fit: 'inside', withoutEnlargement: true })
     .raw().toBuffer({ resolveWithObject: true });
   const { min, max } = mapping.boundsUnits;

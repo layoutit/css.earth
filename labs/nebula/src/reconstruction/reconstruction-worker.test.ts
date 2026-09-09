@@ -5,26 +5,12 @@ import { resolve, relative } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { createAlignedObservationMapping } from './reconstruction-geometry.js';
-import { prepareReconstruction, RECONSTRUCTION_SETTINGS, chooseReconstructionSampling, reconstructionSliceCounts } from './reconstruction-worker.js';
-import { validateCoherentAxisSampling } from './coherent-validation.js';
+import { prepareReconstruction } from './reconstruction-worker.js';
 import { defaultOverlayPlacement } from '../alignment/overlay-placement.js';
 import { prepareOverlayGeometry } from '../alignment/overlay-geometry.js';
 import { sha256 } from '../../../../src/preparation/volume/source.js';
 import { parseCloudCatalogue, createCloudInspection } from '../viewer/cloud-inspection.js';
 const close=(a:readonly number[],b:readonly number[])=>a.forEach((n,i)=>assert.ok(Math.abs(n-b[i])<1e-10,`${n} != ${b[i]}`));
-
-test('integration preflight increases real numerical resolution, preserves the gate, and fails at the bound',()=>{
-  const verify=(count:number)=>validateCoherentAxisSampling({sampler:{sample(x,_y,_z,out){
-    const signal=100*Math.exp(-(((x-.0137)/.0015)**2));out[0]=out[1]=out[2]=signal;
-  }},bounds:{min:[-1,-1,-1],max:[1,1,1]},samples:{x:48*count,y:48*count,z:96*count},exposureGain:1});
-  assert.throws(()=>verify(8),/quadrature has not converged/);
-  const selected=chooseReconstructionSampling(8,verify);
-  assert.ok(selected.samplesPerSlab>8);assert.ok(selected.samplesPerSlab<=32);
-  assert.ok(selected.validation.x.maximumDisplayDifference<=.008);
-  assert.equal(selected.attempts.at(-1)!.samplesPerSlab,selected.samplesPerSlab);
-  assert.throws(()=>chooseReconstructionSampling(8,()=>{throw new Error('x quadrature has not converged: .02');}),/within32/);
-  assert.throws(()=>chooseReconstructionSampling(8,()=>{throw new Error('Unrelated source corruption');}),/source corruption/);
-});
 
 test('actual prepared candidate matrices preserve Alignment CSS axes, pivot, all rotations and observer depth',async()=>{
   const catalogue=JSON.parse(await readFile('labs/nebula/models/lmc/candidates/overlays.json','utf8'));
@@ -53,19 +39,21 @@ test('actual prepared candidate matrices preserve Alignment CSS axes, pivot, all
   }
 });
 
-test('default slicing follows physical extent, including rotated elongated clouds',async()=>{
-  const recipe=JSON.parse(await readFile('labs/nebula/models/lmc/full-density/source/volume.json','utf8'));
-  const bounds=recipe.grid.bounds,counts=reconstructionSliceCounts(bounds,RECONSTRUCTION_SETTINGS.longestAxisSlices);
-  const pitches=['x','y','z'].map((axis,i)=>(bounds.max[i]-bounds.min[i])/counts[axis as 'x'|'y'|'z']);
-  assert.ok(Math.max(...pitches)/Math.min(...pitches)<1.02,'Real default bank pitches must agree within2%.');
-  assert.deepEqual(reconstructionSliceCounts({min:[0,0,0],max:[2,8,4]},128),{x:32,y:128,z:64});
-  assert.deepEqual(reconstructionSliceCounts({min:[0,0,0],max:[8,4,2]},128),{x:128,y:64,z:32});
-  assert.throws(()=>reconstructionSliceCounts({min:[0,0,0],max:[0,1,1]},128),/bounds/);
-  assert.throws(()=>reconstructionSliceCounts(bounds,513),/1–512/);
+test('shared preview fit is removed while additional image corrections survive in the cloud frame',async()=>{
+  const catalogue=JSON.parse(await readFile('labs/nebula/models/lmc/candidates/overlays.json','utf8'));
+  for(const id of ['vista-infrared','horalek-widefield','wise-wide-infrared']) {
+    const overlay=catalogue.overlays.find((row:{id:string})=>row.id===id),basis=overlay.initialPlacement;
+    const reference=createAlignedObservationMapping({...overlay,placement:defaultOverlayPlacement()},catalogue.frame);
+    const actual=createAlignedObservationMapping({...overlay,placement:basis},catalogue.frame,basis);
+    const wrong=createAlignedObservationMapping({...overlay,placement:basis},catalogue.frame);
+    for(const [u,v] of [[0,0],[1,0],[1,1],[0,1],[.2,.7]]) close(actual.tangentAtUv(u,v),reference.tangentAtUv(u,v));
+    assert.ok(Math.hypot(...wrong.tangentAtUv(0,0).map((v,i)=>v-reference.tangentAtUv(0,0)[i]))>1);
+    const corrected=createAlignedObservationMapping({...overlay,placement:{...basis,x:basis.x+.6}},catalogue.frame,basis);
+    assert.ok(Math.hypot(...corrected.tangentAtUv(.2,.7).map((v,i)=>v-reference.tangentAtUv(.2,.7)[i]))>.1);
+  }
 });
 
 test('tiny offline bake uses shared density support and writes pinned XYZ resources and cloud inspection',async()=>{
-  assert.deepEqual([RECONSTRUCTION_SETTINGS.analysisWidth,RECONSTRUCTION_SETTINGS.masterWidth,RECONSTRUCTION_SETTINGS.deliveryWidth],[512,512,512]);
   const root=process.cwd(),directory=resolve(root,'.local/nebula-lab/reconstruction-test-'+randomUUID());
   await mkdir(directory,{recursive:true});
   try {
@@ -76,27 +64,36 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     const frame=JSON.parse(await readFile('labs/nebula/models/lmc/particles/object.json','utf8')).properties.volume;
     const geometry=prepareOverlayGeometry([[-2,2,0],[2,2,0],[2,-2,0],[-2,-2,0]],32,32);
     const priorPath='labs/nebula/models/lmc/full-density/source/volume.json',priorBytes=await readFile(priorPath);
+    const descriptorPath='labs/nebula/models/lmc/clouds/object.json',slicesPath='labs/nebula/models/lmc/clouds/prepared/volume-slices.json';
+    const descriptor=JSON.parse(await readFile(descriptorPath,'utf8'));
+    const pin=async(path:string)=>({path,sha256:sha256(await readFile(path))});
+    const cloud={descriptor:await pin(descriptorPath),slices:await pin(slicesPath),
+      signal:await pin('labs/nebula/models/lmc/clouds-observation/source/target.png'),
+      provenance:await pin('labs/nebula/models/lmc/clouds/source/provenance.json')};
     const work={schema:'cssearth-nebula-reconstruction-work@1' as const,id:'reconstruction-'+'a'.repeat(64),imageId:'synthetic',name:'Synthetic native test',
       outputDirectory:resolve(directory,'output'),source:{path:relative(root,resolve(directory,'source.png')),sha256:sha256(photo),width:32,height:32},
       original:{path:relative(root,resolve(directory,'source.png')),sha256:sha256(photo),removalResultId:'synthetic'},
       overlay:{widthPx:32,heightPx:32,transform:`matrix3d(${geometry.matrix})`,pivotCssPx:[0,0,0],placement:defaultOverlayPlacement()},frame,
-      stellarPrior:{path:priorPath,sha256:sha256(priorBytes)},sourcePageUrl:'https://example.invalid/synthetic',credit:'Generated fixture'};
-    const settings={...RECONSTRUCTION_SETTINGS,analysisWidth:16,masterWidth:16,deliveryWidth:16,longestAxisSlices:8,samplesPerSlab:32};
+      stellarPrior:{path:priorPath,sha256:sha256(priorBytes)},cloud,sourcePageUrl:'https://example.invalid/synthetic',credit:'Generated fixture'};
+    const settings={analysisWidth:32,originalWidth:32,quality:92};
     const events:string[]=[];const result=await prepareReconstruction(work,{settings,onProgress:p=>events.push(p.stage)});
-    assert.equal(result.type,'complete');assert.ok(events.includes('slices'));assert.equal(events.at(-1),'complete');
+    assert.equal(result.type,'complete');assert.ok(events.includes('material'));assert.equal(events.at(-1),'complete');
     const provenance=JSON.parse(await readFile(resolve(work.outputDirectory,'source/provenance.json'),'utf8'));
     const slices=JSON.parse(await readFile(resolve(work.outputDirectory,'prepared/volume-slices.json'),'utf8'));
-    assert.equal(slices.approximation.samplesPerSlab,provenance.validation.integrationSelection.samplesPerSlab);
-    assert.equal(slices.approximation.samplesPerSlab,provenance.settings.samplesPerSlab);
-    assert.equal(provenance.volume.noImageDepth,true);assert.equal(provenance.stellarPrior.unchanged,true);
-    assert.deepEqual(slices.boundsUnits,provenance.stellarPrior.grid.bounds);
-    assert.equal(provenance.volume.sharedSliceGeometry,true);
-    const descriptor=JSON.parse(await readFile(resolve(work.outputDirectory,'object.json'),'utf8'));
-    assert.equal(sha256(await readFile(resolve(work.outputDirectory,descriptor.prepared.url))),descriptor.prepared.sha256);
+    const reference=JSON.parse(await readFile(slicesPath,'utf8'));
+    assert.equal(provenance.method,'fixed-cloud-material-v1');
+    assert.deepEqual(slices.boundsUnits,descriptor.properties.volume.boundsUnits);
+    assert.deepEqual(slices.quads.map((q:any)=>q.vertices),reference.quads.map((q:any)=>q.vertices));
+    assert.equal(provenance.validation.sameGeometry,true);assert.equal(provenance.validation.sameAlpha,true);
+    const overlay=JSON.parse(await readFile(resolve(work.outputDirectory,'source/original-overlay.json'),'utf8'));
+    assert.equal(overlay.overlays.length,1);
+    assert.equal(sha256(await readFile(resolve(work.outputDirectory,'source/original-image.png'))),overlay.overlays[0].sha256);
+    const outputDescriptor=JSON.parse(await readFile(resolve(work.outputDirectory,'object.json'),'utf8'));
+    assert.equal(sha256(await readFile(resolve(work.outputDirectory,outputDescriptor.prepared.url))),outputDescriptor.prepared.sha256);
     const prepared=JSON.parse(await readFile(resolve(work.outputDirectory,'prepared/inspection.json'),'utf8'));
     const leaves=prepared.data.stacks.flatMap((s:{leaves:{id:string}[]})=>s.leaves.map(l=>l.id));
     const catalogue=parseCloudCatalogue(JSON.parse(await readFile(resolve(work.outputDirectory,'source/cloud-parts.json'),'utf8')),work.id,leaves);
-    const inspection=createCloudInspection(catalogue);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,19);
+    const inspection=createCloudInspection(catalogue);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,416);
     inspection.setSelection([]);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,0);
     for(const resource of prepared.data.resources){const bytes=await readFile(resolve(work.outputDirectory,'prepared',resource.path));assert.equal(sha256(bytes),resource.sha256);}
     assert.equal(sha256(await readFile(resolve(directory,'source.png'))),sha256(photo));

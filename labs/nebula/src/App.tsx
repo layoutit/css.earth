@@ -50,7 +50,7 @@ export function App() {
               </select>
               <div className="camera-actions"><button id="reset" type="button" onClick={() => void controller.current?.resetCamera()}>Reset camera</button></div>
               <div id="density-view-controls" className="camera-actions" hidden>
-                <button id="reference-view" type="button" onClick={() => void controller.current?.referenceView()}>Earth view</button><button id="fit-cloud" type="button" onClick={() => void controller.current?.fitCloud()}>Fit cloud</button>
+                <button id="reference-view" type="button" title="Reset orientation and distance to the prepared Earth observer." onClick={() => void controller.current?.referenceView()}>Earth view</button><button id="fit-cloud" type="button" hidden={shell.view !== 'alignment'} onClick={() => void controller.current?.fitCloud()}>Fit cloud</button>
               </div>
               <p className="interaction-hint">Drag to orbit. Scroll to zoom.</p>
             </fieldset>
@@ -107,6 +107,20 @@ export function App() {
               <legend>Reconstruction</legend>
               <div id="reconstruction-processing"></div>
             </fieldset>
+            {shell.view === 'reconstruction' && <fieldset className="inspection-section" id="reconstruction-original-controls"
+              disabled={shell.busy || !shell.originalOverlay?.available || shell.originalOverlay.loading}
+              title={shell.originalOverlay?.available ? 'Original photograph in this saved reconstruction’s exact registration.' : 'Select a saved reconstruction prepared with an original-image reference.'}>
+              <legend>Image comparison</legend>
+              <label htmlFor="reconstruction-original-enabled"><input id="reconstruction-original-enabled" type="checkbox"
+                checked={shell.originalOverlay?.enabled ?? false} onChange={event => void controller.current?.showOriginal(event.target.checked)} /> Original image</label>
+              <div className="cloud-brightness-control">
+                <label htmlFor="reconstruction-original-opacity">Opacity</label>
+                <input id="reconstruction-original-opacity" type="range" min="0" max="100" step="1" value={(shell.originalOverlay?.opacity ?? .5) * 100}
+                  disabled={!shell.originalOverlay?.enabled} onChange={event => void controller.current?.setOriginalOpacity(event.currentTarget.valueAsNumber / 100)} />
+                <output htmlFor="reconstruction-original-opacity">{Math.round((shell.originalOverlay?.opacity ?? .5) * 100)}%</output>
+              </div>
+              {shell.originalOverlay?.loading && <span role="status">Loading image…</span>}
+            </fieldset>}
             <div id="cloud-star-controls" hidden></div>
             <div id="cloud-controls"></div>
           </aside>

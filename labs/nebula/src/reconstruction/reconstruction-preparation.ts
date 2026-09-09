@@ -119,7 +119,7 @@ export async function reconstructionCatalogue(root: string, subjectId: string): 
 }
 
 type Runner = (work: ReconstructionWork, signal: AbortSignal, progress: (value: RemovalProgress) => void) => Promise<{
-  cloudParts?: { descriptor: string; catalogue: string }; framingRadiusUnits?: number; stars?: string;
+  cloudParts?: { descriptor: string; catalogue: string }; framingRadiusUnits?: number; stars?: string; reconstructionOverlay?:string;
 }>;
 export function createReconstructor(root: string, options: { runner?: Runner } = {}) {
   let queue = Promise.resolve();
@@ -174,11 +174,21 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
       const frame = parseLabModelJson((await pinned(root, recipe.frame.path, recipe.frame.sha256)).toString()).properties.volume;
       await pinned(root, recipe.stellarPrior.path, recipe.stellarPrior.sha256);
       const stars = subject.stars ? { path: subject.stars, sha256: hash(await pinned(root, subject.stars)) } : undefined;
+      if(!stars)throw new TypeError('The canonical reconstruction needs its aligned star catalogue.');
+      const starCatalogue=await json(root,stars.path,stars.sha256),cloudPath=`${subject.directory}/object.json`;
+      const cloudObject=await json(root,cloudPath),cloudDescriptor={path:cloudPath,sha256:hash(await pinned(root,cloudPath))};
+      if(starCatalogue.provenance?.depthModel?.cloudObject?.sha256!==cloudDescriptor.sha256)
+        throw new TypeError('Stars belong to a different canonical cloud.');
+      const slicesPath=`${subject.directory}/prepared/volume-slices.json`;
+      const cloud={descriptor:cloudDescriptor,slices:{path:slicesPath,sha256:hash(await pinned(root,slicesPath))},
+        signal:starCatalogue.provenance.depthModel.target,
+        provenance:{path:`${subject.directory}/${cloudObject.properties.preparation.source}`,sha256:cloudObject.properties.preparation.sha256}};
       const pins = Object.fromEntries(await Promise.all(['reconstruction/reconstruction-worker.ts', 'reconstruction/reconstruction-geometry.ts', 'reconstruction/filled-components.ts',
-        'reconstruction/density-color-volume.ts', 'reconstruction/density-projection.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'reconstruction/master-slices.ts'].map(async name =>
+        'reconstruction/cloud-material.ts', 'reconstruction/registered-image.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts'].map(async name =>
         [name, hash(await pinned(root, `labs/nebula/src/${name}`))])));
-      const identity = { version: 2, request, stars, sourceSha256: image.sha256, frame, stellarPrior: recipe.stellarPrior,
-        overlay: { widthPx: overlay.widthPx, heightPx: overlay.heightPx, transform: overlay.style.transform, pivotCssPx: overlay.pivotCssPx }, pins };
+      const identity = { version: 3, request, stars, cloud, sourceSha256: image.sha256, frame, stellarPrior: recipe.stellarPrior,
+        overlay: { widthPx: overlay.widthPx, heightPx: overlay.heightPx, transform: overlay.style.transform, pivotCssPx: overlay.pivotCssPx,
+          previewModelFit:overlay.initialPlacement??defaultOverlayPlacement() }, pins };
       const resultId = hash(JSON.stringify(identity)), directory = `${cache}/${resultId}`, temporary = resolve(root, `${directory}.pending`);
       if (await stat(resolve(root, directory, 'result.json')).catch(() => null)) {
         progress({ stage: 'cached', current: 1, total: 1, message: 'Loading saved reconstruction.' }); return readPreparedReconstruction(root, resultId);
@@ -189,7 +199,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
           imageId: image.id, name: image.label, outputDirectory: temporary,
           source: { path: nativePath, sha256: removal.artifactSha256[removal.applied.images.diffuse], width: removal.nativeDimensions[0], height: removal.nativeDimensions[1] },
           original: { path: image.path, sha256: image.sha256, removalResultId: request.removalResultId },
-          overlay: { ...identity.overlay, placement: request.placement }, frame, stellarPrior: recipe.stellarPrior, stars,
+          overlay: { ...identity.overlay, placement: request.placement }, frame, stellarPrior: recipe.stellarPrior, stars, cloud,
           sourcePageUrl: image.sourcePageUrl, credit: image.credit };
         const finished = await run(work, signal, progress); signal.throwIfAborted();
         const descriptor = await json(root, relative(root, resolve(temporary, 'object.json')));
@@ -202,8 +212,9 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
           subject: { ...subject, id: work.id, name: `${image.label} · reconstruction`, directory,
             sourceSubjectId: subject.id, imagePath: `${directory}/source/target.png`, comparisonImages: [],
             sourcePageUrl: image.sourcePageUrl, credit: image.credit, stars: finished.stars ? `${directory}/${finished.stars}` : undefined,
+            reconstructionOverlay:finished.reconstructionOverlay?`${directory}/${finished.reconstructionOverlay}`:undefined,
             cloudParts: finished.cloudParts, framingRadiusUnits: finished.framingRadiusUnits ?? subject.framingRadiusUnits,
-            reconstructionImage: { group: subject.id, label: image.label, note: 'NOX image colors on the shared stellar-density volume; shape and stars are image-independent.' } } };
+            reconstructionImage: { group: subject.id, label: image.label, note: 'Candidate colors on the unchanged benchmark cloud and star catalogue.' } } };
         await writeFile(resolve(temporary, 'request.json'), JSON.stringify(identity, null, 2) + '\n');
         await writeFile(resolve(temporary, 'result.json'), JSON.stringify(result, null, 2) + '\n');
         signal.throwIfAborted(); await rename(temporary, resolve(root, directory));

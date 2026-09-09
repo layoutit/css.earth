@@ -29,7 +29,7 @@ interface Report {
   forbiddenWrites: string[]; expectedComparisons: number; passed: boolean; failure?: string;
 }
 
-const ledgerPath = resolve(process.argv[2] ?? '.local/nebula-lab/density-reconstruction-acceptance.json');
+const ledgerPath = resolve(process.argv[2] ?? '.local/nebula-lab/material-reconstruction-acceptance.json');
 const baseURL = process.argv[3] ?? 'http://127.0.0.1:4331';
 const outputRoot = resolve(process.argv[4] ?? '.local/nebula-lab/reconstruction-stability');
 const screenshots = `${outputRoot}/screenshots`;
@@ -41,7 +41,7 @@ const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex
 const sum = (values: readonly number[]) => values.reduce((a, b) => a + b, 0);
 
 async function bankReceipt(page: Page): Promise<Bank[]> {
-  return page.locator('#viewer .css-volume-projection').evaluateAll(nodes => nodes.map((node, index) => {
+  return page.locator('#viewer .css-volume-projection:not(.reconstruction-original-projection)').evaluateAll(nodes => nodes.map((node, index) => {
     const element = node as HTMLElement;
     return { index, axis: (['x', 'y', 'z'] as const)[index], opacity: Number(element.style.opacity),
       visible: element.style.visibility !== 'hidden',
@@ -88,7 +88,7 @@ async function prepareSeam(page: Page, row: Result, seam: typeof seams[number]) 
     return host?.dataset.cloudOpacity === '1' && host.dataset.cloudBrightness === '{"overall":1,"x":1,"y":1,"z":1}';
   });
   assert.equal(await page.locator('#cloud-density-cutoff').inputValue(), '0', 'Acceptance must use unfiltered saved outputs.');
-  await page.addStyleTag({ content: 'aside,header{visibility:hidden!important} #viewer{background:#000!important} .prepared-lmc-stars{display:none!important}' });
+  await page.addStyleTag({ content: 'aside,header{visibility:hidden!important} #viewer{background:#000!important} .prepared-lmc-stars,.reconstruction-original-projection{display:none!important}' });
   const box = await page.locator('#viewer').boundingBox(); assert.ok(box, 'Viewer has no bounds.');
   const start = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
   const maximum = Math.min(220, Math.floor((seam.direction === 'vertical' ? box.height : box.width) * .45 / 2));
@@ -115,8 +115,8 @@ async function prepareSeam(page: Page, row: Result, seam: typeof seams[number]) 
 }
 async function captureBank(page: Page, row: Result, seam: string, bank: Bank) {
   // Override only whole-bank compositing. Retain native optical-copy correction and exact camera.
-  const isolation = await page.addStyleTag({ content: `#viewer .css-volume-projection{opacity:0!important;visibility:hidden!important}
-    #viewer .css-volume-projection[data-acceptance-bank="${bank.index}"]{opacity:1!important;visibility:visible!important}` });
+  const isolation = await page.addStyleTag({ content: `#viewer .css-volume-projection:not(.reconstruction-original-projection){opacity:0!important;visibility:hidden!important}
+    #viewer .css-volume-projection:not(.reconstruction-original-projection)[data-acceptance-bank="${bank.index}"]{opacity:1!important;visibility:visible!important}` });
   try {
     const path = `${screenshots}/${row.imageId}-${seam}-${bank.axis}.png`;
     const encoded = await page.locator('#viewer').screenshot({ path, timeout: 15000 });
@@ -161,7 +161,7 @@ try {
   for (const row of rows) for (const seam of seams) {
     console.log('RECONSTRUCTION_STABILITY_CHECK', row.imageId, seam.axes.join('/'));
     const banks = await prepareSeam(page, row, seam), camera = await cameraReceipt(page);
-    await page.locator('#viewer .css-volume-projection').evaluateAll(nodes => nodes.forEach((node, index) => {
+    await page.locator('#viewer .css-volume-projection:not(.reconstruction-original-projection)').evaluateAll(nodes => nodes.forEach((node, index) => {
       (node as HTMLElement).dataset.acceptanceBank = String(index);
     }));
     const pair = banks.filter(bank => seam.axes.some(axis => axis === bank.axis));

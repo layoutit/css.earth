@@ -38,9 +38,10 @@ Refresh reconnects to a running job. A completed result restores without inferen
 2. A completed variant loads directly. For a new placement/removal result, press **Process** explicitly. Merely selecting an image does not bake it.
 3. Follow progress, or **Cancel**. The previous cloud remains visible until the new bank is fully prepared and decoded.
 4. Compare saved variants at the same camera and brightness. Inspect front, oblique and edge views for sheet-like depth, repeated details, seams, disappearing layers and whitening.
-5. Use brightness/axis calibration and integrated-signal cutoff to inspect the cloud. These controls do not establish physical depth or justify clipping unobserved data.
+5. Use **Earth view** to restore the painter’s observer and **Original image** plus opacity to compare image features with the cloud and catalogue.
+6. Use brightness/axis calibration and integrated-signal cutoff to inspect the cloud. These controls do not establish physical depth or justify clipping unobserved data.
 
-Current processing colors only occupied density with the native starless image and bakes a 512px comparison model with shared XYZ geometry. The star toggle renders the same catalogue independently of the image. It is an approximate reconstruction baseline, not native-resolution geometry or a final production model. See [the exact method and limits](reconstruction.md).
+Current processing repaints the accepted benchmark’s exact 416 prepared quads and preserves every alpha byte. A 1024px registered plane supplies candidate chromaticity; uncovered areas retain explicitly recorded benchmark color. The star toggle renders the same 943 catalogue stars independently of the image. The complete raw simulation remains in Alignment. This is a material comparison on modeled geometry, not measured gas depth. See [the exact method and limits](reconstruction.md).
 
 ## Saved data
 

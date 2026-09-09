@@ -21,9 +21,12 @@ const project = (m: number[], x: number, y: number): Vec2 => {
   if (!Number.isFinite(d) || Math.abs(d) < 1e-12) throw new TypeError('Aligned image crosses the observer horizon.');
   return [(m[0]*x+m[1]*y+m[2])/d,(m[3]*x+m[4]*y+m[5])/d];
 };
+const multiply = (a:number[],b:number[]) => Array.from({length:9},(_,i)=>
+  [0,1,2].reduce((sum,k)=>sum+a[Math.floor(i/3)*3+k]*b[k*3+i%3],0));
 
 /** UV represents full image edges; CSS translations/rotations use CSS axes, including the physical XY swap. */
-export function createAlignedObservationMapping(alignment: ReconstructionAlignment, frame: OverlayFrame): ObservationMapping {
+export function createAlignedObservationMapping(alignment: ReconstructionAlignment, frame: OverlayFrame,
+  previewModelFit?:OverlayPlacement): ObservationMapping {
   const { style, pivotCssPx: pivot } = alignment;
   const dimension = (s: string) => /^\d+(?:\.\d+)?px$/.test(s) ? Number(s.slice(0,-2)) : NaN;
   const width = dimension(style.width), height = dimension(style.height);
@@ -38,7 +41,8 @@ export function createAlignedObservationMapping(alignment: ReconstructionAlignme
   const away = [2*(qx*qz+qw*qy),2*(qy*qz-qw*qx),1-2*(qx*qx+qy*qy)];
   if (!(distance > 0) || Math.abs(Math.hypot(qx,qy,qz,qw)-1)>1e-10 || away.some((v,i) =>
     Math.abs(v-frame.originM[i]/(distance*frame.metersPerUnit))>1e-10)) throw new TypeError('Density frame must face away from the observer.');
-  const p = updateOverlayPlacement(defaultOverlayPlacement(),alignment.placement);
+  const matrixForPlacement = (placement:OverlayPlacement) => {
+  const p = updateOverlayPlacement(defaultOverlayPlacement(),placement);
   const [ax,ay,az] = [p.rotationX,p.rotationY,p.rotationZ].map(n => n*Math.PI/180);
   // Transform homogeneous columns, preserving the exact prepared projective divisor.
   const transform = (column: number[], weight: number) => {
@@ -53,7 +57,14 @@ export function createAlignedObservationMapping(alignment: ReconstructionAlignme
     const xyz=transform(css.slice(offset,offset+3).map(n=>n*scale),weight);
     return [xyz[1]/50,xyz[0]/50,weight+xyz[2]/(50*distance)];
   });
-  const forward = [0,1,2].flatMap(row => columns.map(col => col[row]));
+  return [0,1,2].flatMap(row => columns.map(col => col[row]));
+  };
+  let forward = matrixForPlacement(alignment.placement);
+  // Alignment's raw-simulation preview has a separate authored model fit. The
+  // accepted cloud/catalogue already owns its sky frame. Remove only that shared
+  // fit, retaining any subsequent user correction to this particular image.
+  if(previewModelFit) forward=multiply(multiply(matrixForPlacement(defaultOverlayPlacement()),
+    invert(matrixForPlacement(previewModelFit))),forward);
   const inverse = invert(forward), uvCorners = [[0,0],[1,0],[1,1],[0,1]];
   if (uvCorners.some(([u,v])=>forward[6]*u+forward[7]*v+forward[8]<=1e-10))
     throw new TypeError('Aligned image is at or behind the observer.');
