@@ -4,8 +4,8 @@ Owner: Moons. Accepted 2026-09-09. Branch: `feat/moons-surface-chemistry`.
 Accepted base: main `2f6f8614add9a5a22ef03b86a47edef631950ade`, after merged B7 PR #81.
 Integration base: `1fb76e44d6bf831e7ebcf0516b83c0b10e1716da`, including PR #82's
 new asteroid marker indices. The incoming marker update is retained.
-Status: five views prepared; original-source reproduction and package closure
-pass; browser/delivery review in progress.
+Status: selected three-moon implementation, source/delivery closure, desktop visual
+review and selected shared interaction checks complete; draft with aggregate gaps.
 
 ## Delivered scope
 
@@ -62,7 +62,7 @@ coordinate evidence, ownership and scientific limitations are documented in
 - Fifteen focused converter tests pass. Independent review found no actionable
   converter defects and retains the registration qualifications above.
 - All 21 original numeric files were downloaded into an empty destination;
-  all 11 derived TIFFs reproduced byte for byte.
+  all 11 scientific map TIFFs reproduced byte for byte.
 - Independent Enceladus calculations match 94,916 supported values and 192
   source-cell containment probes per field. MUSE original-array and manifest
   checks cover every selected FITS/TIFF, night order and configured grid.
@@ -71,6 +71,8 @@ coordinate evidence, ownership and scientific limitations are documented in
 - Package, renderer and preparation builds pass. Heavy jobs run one at a time,
   with resource receipts; broader and browser gates are tracked separately.
 
-Reproduction and capture helpers live in [b8-surface-chemistry](b8-surface-chemistry/).
+See [visual review](b8-surface-chemistry/VISUAL-REVIEW.md),
+[qualification and aggregate gaps](b8-surface-chemistry/QUALIFICATION.md), and
+[reproduction](b8-surface-chemistry/README.md).
 B4 observation charts remain paused in draft PR #70. B8 deepens existing moons;
 the frozen moon roster and benchmark denominator do not change.

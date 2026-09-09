@@ -119,14 +119,14 @@ paused draft at the user's request.
 
 ## B8 — Surface chemistry on Io, Ganymede and Enceladus
 
-**State:** five views prepared; source/package qualification passes; browser and delivery review in progress · **Owner:** Moons
+**State:** selected-body source, package, delivery, visual and interaction review complete; draft with aggregate gaps · **Owner:** Moons
 
 The [B8 scope and intake](B8-SURFACE-CHEMISTRY.md) delivers Io's visible spectral
 slope and absorption, Ganymede's oxygen-sensitive reflectance ratio, and two
 partial Cassini VIMS spectral views for Enceladus. Final releases follow the
 completed numerical source review. The image inventory adds 20 files / 585,804
-bytes. Every transformation is offline; the shared renderer, scene geometry,
-retained tree, camera and shell stay fixed. Unavailable or insufficiently
+bytes. Every transformation is offline; shared renderer, camera, navigation and
+shell code stay fixed, and scene geometry/retained trees are preserved. Unavailable or insufficiently
 qualified JIRAM/model products remain explicitly tracked for later work.
 
 ## Parallel execution

@@ -1,0 +1,12 @@
+18:47:01 [vite] connected.
+18:47:02 [types] Generated 0ms
+18:47:02 [vite] connected.
+ astro  v7.2.9 ready in 1050 ms
+┃ Local    http://127.0.0.1:4291/
+18:47:02 watching for file changes...
+18:47:07 [200] /io/ 1956ms
+18:47:11 [200] /objects/io/91ae3d8a4e3399be7766420ec92c6d3f43c519f83cddac9e030f43061edd0f69.json 5ms
+PASS io DPR 1: 109468 nodes; retained interaction
+18:47:12 [200] /io/ 49ms
+18:47:15 [200] /objects/io/91ae3d8a4e3399be7766420ec92c6d3f43c519f83cddac9e030f43061edd0f69.json 6ms
+PASS io DPR 2: 109468 nodes; retained interaction
