@@ -24,13 +24,11 @@ function matches(response: Response, id: string, strength: number) {
   return request.imageId === id && request.imageLayer === 'diffuse' && request.removalStrength === strength;
 }
 async function select(id: string) {
-  await page.locator('#star-removal-tab').click();
   await page.selectOption('#overlay-choice', id);
   await page.waitForFunction(value => document.querySelector<HTMLElement>('#image-overlay-panel')?.dataset.selectedOverlay === value &&
     document.querySelectorAll(`[data-overlay-leaf="${value}"]`).length === 3, id);
 }
 async function strength(value: number, id = sourceId) {
-  await page.locator('#star-removal-tab').click();
   const response = page.waitForResponse(reply => matches(reply, id, value));
   const start = performance.now();
   await page.locator('#star-removal').fill(String(value)); await page.locator('#star-removal').dispatchEvent('change');
@@ -108,7 +106,6 @@ try {
   assert.equal(await page.locator('#overlay-layer').getAttribute('data-value'), 'diffuse');
   assert.ok(await page.locator(`[data-overlay-leaf="${sourceId}"]`).evaluateAll(nodes => nodes.every(node => (node as HTMLElement).dataset.imageLayer === 'diffuse')),
     'A cancelled layer decode must not change an image after it is reselected.');
-  await page.locator('#image-sidebar-tab').click();
   await page.locator('#copy-image-tone').click();
   await page.waitForFunction(() => document.querySelector('#copy-image-tone')?.textContent === 'Copied!');
   const tone = JSON.parse(await page.evaluate(() => navigator.clipboard.readText())); assert.equal(tone.removalStrength, 50);

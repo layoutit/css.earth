@@ -8,7 +8,7 @@ import { createCloudDensityControls } from './cloud-density-controls';
 import { createCloudStarControls } from './cloud-star-controls';
 import type { ImageLayer } from './overlay-variants';
 import { createRemovalStrengthStore, validateRemovalStrength } from './removal-strength';
-import { createStarSamplingControls } from './star-sampling-controls';
+import { createStarRemovalControls } from './star-removal-controls';
 
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
@@ -44,9 +44,7 @@ const removalRange = element<HTMLInputElement>('star-removal-range');
 const removalNumber = element<HTMLInputElement>('star-removal');
 const removalNote = element('star-removal-note');
 const removalStrengths = createRemovalStrengthStore();
-const sidebarTabs = [element<HTMLButtonElement>('image-sidebar-tab'), element<HTMLButtonElement>('star-removal-tab')];
-const imageAdjustments = element('image-adjustment-panel'), starRemovalPanel = element('star-removal-panel');
-const starSampling = createStarSamplingControls(element('star-sampling-controls'), {
+const starRemoval = createStarRemovalControls(element('automatic-star-removal'), {
   async onApply(result, isCurrent) {
     if (!viewer || selectedOverlayId !== result.imageId || !isCurrent()) return false;
     if (!result.applied || !result.sourcePreviewSha256) throw new TypeError('Removal source proof is missing.');
@@ -54,7 +52,7 @@ const starSampling = createStarSamplingControls(element('star-sampling-controls'
     const request = ++layerActivation;
     const current = () => isCurrent() && request === layerActivation && selectedOverlayId === result.imageId && currentTab === 0 && currentMode === 'density';
     imageTone.setContext(null);
-    await viewer.installSamplingLayers(result.imageId, result.sourcePreviewSha256, result.applied, current);
+    await viewer.installRemovalLayers(result.imageId, result.sourcePreviewSha256, result.applied, current);
     if (!current()) return false;
     removalStrengths.set(result.imageId, 100);
     await activateOverlay(result.imageId, false);
@@ -62,11 +60,9 @@ const starSampling = createStarSamplingControls(element('star-sampling-controls'
     await viewer.setOverlayLayer(result.imageId, 'diffuse', current);
     if (!current()) return false;
     writeAppliedImage(result, 'diffuse'); restorationMessages.delete(result.imageId);
-    element('viewer').dataset.samplingResultId = result.applied.resultId; renderSelectedOverlay(); return true;
+    element('viewer').dataset.removalResultId = result.applied.resultId; renderSelectedOverlay(); return true;
   },
 });
-let sidebarTab: 'image' | 'stars' = 'image';
-try { if (localStorage.getItem('cssearth-image-inspection-tab') === 'stars') sidebarTab = 'stars'; } catch { /* Default tab remains available. */ }
 const overlayEnabled = element<HTMLInputElement>('overlay-enabled');
 const overlayEnabledLabel = element<HTMLLabelElement>('overlay-enabled-label');
 const overlayOpacity = element<HTMLInputElement>('overlay-opacity');
@@ -126,7 +122,7 @@ const imageTone = createToneControls({ host: element('image-tone-controls'), tar
     if (!viewer) throw new Error('Viewer is unavailable.');
     await viewer.applyToneResources('image', context.imageId, resources, isCurrent);
   } });
-function invalidateToneContexts() { layerActivation++; pendingLayerActivation = null; densityTone.setContext(null); imageTone.setContext(null); starSampling.setContext(null); }
+function invalidateToneContexts() { layerActivation++; pendingLayerActivation = null; densityTone.setContext(null); imageTone.setContext(null); starRemoval.setContext(null); }
 
 const visibleObjects = [
   { id: 'lmc-clouds', name: 'LMC' },
@@ -239,36 +235,21 @@ function refreshImageTone() {
   if (overlay && restoringImages.has(overlay.id)) { imageTone.setContext(null); return; }
   imageTone.setContext(viewer && sourceSubject && overlay && toneReadyFor(sourceSubject) ? {
     subjectId: sourceSubject, imageId: overlay.id, imageLayer: viewer.getOverlayLayer(overlay.id),
-    ...(overlay.samplingResultId ? { samplingResultId: overlay.samplingResultId } : {}),
+    ...(overlay.removalResultId ? { removalResultId: overlay.removalResultId } : {}),
     ...(overlay.variants?.length ? { removalStrength: currentRemovalStrength(overlay) } : {}),
   } : null);
 }
 function currentRemovalStrength(overlay: Overlay) {
   return removalStrengths.get(overlay.id);
 }
-function refreshStarSampling() {
+function refreshStarRemoval() {
   const overlay = currentOverlays.find(item => item.id === selectedOverlayId);
-  starSampling.setContext(sidebarTab === 'stars' && currentTab === 0 && currentMode === 'density' && !busy && overlay ? {
+  starRemoval.setContext(currentTab === 0 && currentMode === 'density' && !busy && overlay ? {
     imageId: overlay.id, label: overlay.label, supported: Boolean(overlay.variants?.length),
   } : null);
 }
-function selectSidebarTab(index: number) {
-  sidebarTab = index === 0 ? 'image' : 'stars';
-  try { localStorage.setItem('cssearth-image-inspection-tab', sidebarTab); } catch { /* Tab switching still works. */ }
-  sidebarTabs.forEach((tab, position) => { tab.setAttribute('aria-selected', String(position === index)); tab.tabIndex = position === index ? 0 : -1; });
-  imageAdjustments.hidden = index !== 0; starRemovalPanel.hidden = index !== 1;
-  overlayPanel.dataset.inspectionTab = sidebarTab; refreshStarSampling();
-}
-sidebarTabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => selectSidebarTab(index));
-  tab.addEventListener('keydown', event => {
-    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-    event.preventDefault(); const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1 : 1 - index;
-    selectSidebarTab(next); sidebarTabs[next]!.focus();
-  });
-});
 async function restoreAppliedOverlay(overlay: Overlay) {
-  if (!viewer || overlay.samplingResultId || restoringImages.has(overlay.id)) return;
+  if (!viewer || overlay.removalResultId || restoringImages.has(overlay.id)) return;
   const saved = readAppliedImage(overlay.id, overlay.sha256); if (!saved) return;
   const attempt = `${overlay.id}:${saved.resultId}`, expectedViewer = viewer, expectedOverlay = overlay;
   if (restorationAttempts.has(attempt)) return;
@@ -278,17 +259,17 @@ async function restoreAppliedOverlay(overlay: Overlay) {
   const current = () => restoringImages.get(overlay.id) === controller && !controller.signal.aborted && viewer === expectedViewer && selectedOverlayId === overlay.id &&
     currentOverlays.includes(expectedOverlay) && currentTab === 0 && currentMode === 'density';
   try {
-    const response = await fetch('/__nebula/star-samples/restore', { method: 'POST', signal: controller.signal,
+    const response = await fetch('/__nebula/star-removal/restore', { method: 'POST', signal: controller.signal,
       headers: { 'content-type': 'application/json' }, body: JSON.stringify({ imageId: saved.imageId, resultId: saved.resultId, sourcePreviewSha256: saved.sourcePreviewSha256 }) });
     const result = await response.json() as RestoredAppliedImage & { error?: string };
     if (!response.ok) throw new Error(result.error ?? `Saved removal unavailable (HTTP ${response.status}).`);
     verifyRestoredImage(saved, result); if (!current()) return;
-    await viewer!.installSamplingLayers(overlay.id, result.sourcePreviewSha256, result.applied, current); if (!current()) return;
+    await viewer!.installRemovalLayers(overlay.id, result.sourcePreviewSha256, result.applied, current); if (!current()) return;
     await activateOverlay(overlay.id, false); if (!current()) return;
     await viewer!.setOverlayLayer(overlay.id, saved.layer, current); if (!current()) return;
-    element('viewer').dataset.samplingResultId = result.applied.resultId; restorationMessages.delete(overlay.id);
+    element('viewer').dataset.removalResultId = result.applied.resultId; restorationMessages.delete(overlay.id);
   } catch (error) {
-    if (current()) { restorationMessages.set(overlay.id, 'Saved removal unavailable · references retained.'); overlayStatus.title = error instanceof Error ? error.message : String(error); }
+    if (current()) { restorationMessages.set(overlay.id, 'Saved removal unavailable · run Remove stars again.'); overlayStatus.title = error instanceof Error ? error.message : String(error); }
   } finally {
     const active = current();
     if (restoringImages.get(overlay.id) === controller) restoringImages.delete(overlay.id);
@@ -311,7 +292,7 @@ function renderSelectedOverlay() {
   removalRange.value = removalNumber.value = String(currentRemovalStrength(overlay));
   removalNote.textContent = '0% Original · 100% Prepared removal';
   overlayLayerNote.textContent = '';
-  overlayLayer.title = 'Prepared 2D separation. Residuals may include bright nebula knots; they are not a measured star catalogue.';
+  overlayLayer.title = 'NOX estimates the background from the image. The residual is predicted compact light, not a measured star catalogue.';
   overlayEnabled.id = `overlay-${overlay.id}`; overlayEnabledLabel.htmlFor = overlayEnabled.id;
   overlayEnabled.checked = prior?.enabled ?? false;
   overlayOpacity.value = String(Math.round((prior?.opacity ?? overlay.initialOpacity ?? .55) * 100));
@@ -339,7 +320,7 @@ function renderSelectedOverlay() {
   overlayStatus.textContent = restorationMessages.get(overlay.id) ?? `${currentOverlays.indexOf(overlay) + 1} of ${currentOverlays.length} images`;
   overlayPanel.dataset.selectedOverlay = overlay.id;
   refreshImageTone();
-  refreshStarSampling();
+  refreshStarRemoval();
 }
 async function activateOverlay(id: string, refresh = true) {
   if (!viewer) return;
@@ -368,7 +349,7 @@ async function refreshOverlayControls() {
   densityViewControls.hidden = !densityVisible; densityAdjustmentPanel.hidden = !densityVisible; overlayPanel.hidden = !visible;
   densityTone.setContext(densityVisible && item && toneReadyFor(item.id) ? { subjectId: item.id } : null);
   if (!visible) imageTone.setContext(null);
-  starSampling.setContext(null);
+  starRemoval.setContext(null);
   currentOverlays = []; selectedOverlayId = null; overlayOptions.replaceChildren();
   overlayStatus.textContent = ''; overlayRegistration.textContent = ''; overlayCredit.textContent = ''; overlaySource.removeAttribute('href');
   if (!visible || !viewer || !catalogue) return;
@@ -405,7 +386,7 @@ function changeOverlayLayer(layer: ImageLayer) {
       if (!current()) return;
       imageTone.setContext(null);
       await viewer!.setOverlayLayer(id, layer, current);
-      if (current()) { const overlay = currentOverlays.find(value => value.id === id); if (overlay?.samplingResultId) rememberAppliedLayer(id, overlay.sha256, layer); }
+      if (current()) { const overlay = currentOverlays.find(value => value.id === id); if (overlay?.removalResultId) rememberAppliedLayer(id, overlay.sha256, layer); }
     } finally { if (current()) { pendingLayerActivation = null; renderSelectedOverlay(); } }
   });
 }
@@ -492,7 +473,6 @@ async function switchMode(next: 'photo' | 'density') {
 }
 
 setBusy(true);
-selectSidebarTab(sidebarTab === 'stars' ? 1 : 0);
 const requestedTab = new URL(location.href).searchParams.get('tab');
 const initialTab = requestedTab === 'reconstruction' || requestedTab === 'render' ? 1 : 0;
 selectTab(initialTab);
@@ -525,6 +505,6 @@ try {
   }
 } catch (error) { fail(error); }
 
-function destroy() { if (!disposed) { disposed = true; for (const controller of restoringImages.values()) controller.abort(); densityTone.destroy(); imageTone.destroy(); starSampling.destroy(); cloudControls.destroy(); cloudDensityControls.destroy(); cloudStarControls.destroy(); viewer?.destroy(); } }
+function destroy() { if (!disposed) { disposed = true; for (const controller of restoringImages.values()) controller.abort(); densityTone.destroy(); imageTone.destroy(); starRemoval.destroy(); cloudControls.destroy(); cloudDensityControls.destroy(); cloudStarControls.destroy(); viewer?.destroy(); } }
 window.addEventListener('pagehide', destroy, { once: true });
 if (import.meta.hot) import.meta.hot.dispose(destroy);

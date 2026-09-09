@@ -28,11 +28,11 @@ test('tone formula applies ordered levels, gamma, gain; photograph alpha and den
 test('tone requests reject arbitrary paths, unrecognized/missing fields and non-finite or invalid levels', () => {
   const valid = { subjectId: 'lmc-particles', target: 'image', imageId: 'smash-original', tone: defaultOverlayTone() };
   assert.deepEqual(parseTonePreparationRequest(valid), valid);
-  const samplingResultId = `${'a'.repeat(64)}.${'b'.repeat(64)}`;
-  assert.equal(parseTonePreparationRequest({ ...valid, samplingResultId }).samplingResultId, samplingResultId);
-  for (const invalid of ['', '../result', 'a'.repeat(64), `${samplingResultId}/diffuse.png`])
-    assert.throws(() => parseTonePreparationRequest({ ...valid, samplingResultId: invalid }), TypeError);
-  assert.throws(() => parseTonePreparationRequest({ subjectId: 'test', target: 'density', tone: valid.tone, samplingResultId }), TypeError);
+  const removalResultId = `${'a'.repeat(64)}.${'b'.repeat(64)}`;
+  assert.equal(parseTonePreparationRequest({ ...valid, removalResultId }).removalResultId, removalResultId);
+  for (const invalid of ['', '../result', 'a'.repeat(64), `${removalResultId}/diffuse.png`])
+    assert.throws(() => parseTonePreparationRequest({ ...valid, removalResultId: invalid }), TypeError);
+  assert.throws(() => parseTonePreparationRequest({ subjectId: 'test', target: 'density', tone: valid.tone, removalResultId }), TypeError);
   for (const bad of [{ ...valid, path: '/etc/passwd' }, { ...valid, subjectId: '../x' }, { ...valid, imageId: '../x' },
     { ...valid, target: 'other' }, { ...valid, target: 'density' }, { ...valid, tone: {} },
     { ...valid, tone: { ...valid.tone, gamma: NaN } }, { ...valid, tone: { ...valid.tone, black: .8, white: .7 } },

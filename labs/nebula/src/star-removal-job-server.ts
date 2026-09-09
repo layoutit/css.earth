@@ -2,14 +2,14 @@
 import { mkdir, readFile, readdir, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import type { SamplingProgress, SamplingRequest } from './star-sampling-preparation.js';
+import type { RemovalProgress, RemovalRequest } from './star-removal-types.js';
 
 type Status = 'queued' | 'running' | 'cancelling' | 'completed' | 'cancelled' | 'failed' | 'interrupted';
 export interface RemovalJob {
   id: string; imageId: string; status: Status; createdAt: string; updatedAt: string;
-  progress?: SamplingProgress; result?: unknown; error?: string;
+  progress?: RemovalProgress; result?: unknown; error?: string;
 }
-interface SavedJob extends RemovalJob { schema: 'cssearth-star-removal-job@1'; request: SamplingRequest }
+interface SavedJob extends RemovalJob { schema: 'cssearth-star-removal-job@1'; request: RemovalRequest }
 type Worker = { controller: AbortController; task: Promise<void> };
 const uuid = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(value);
 const object = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -19,11 +19,11 @@ const message = (error: unknown) => error instanceof Error ? error.message : 'St
 class HttpError extends Error { constructor(readonly status: number, text: string) { super(text); } }
 
 export function createStarRemovalJobs(root: string, options: {
-  parseRequest: (input: unknown) => SamplingRequest;
-  sample: (request: SamplingRequest, signal: AbortSignal, progress: (value: SamplingProgress) => void) => Promise<unknown>;
+  parseRequest: (input: unknown) => RemovalRequest;
+  sample: (request: RemovalRequest, signal: AbortSignal, progress: (value: RemovalProgress) => void) => Promise<unknown>;
   validateResult: (result: unknown) => Promise<void>;
 }) {
-  const directory = resolve(root, '.local/nebula-lab/star-removal-jobs');
+  const directory = resolve(root, '.local/nebula-lab/star-removal-nox-jobs');
   const records = new Map<string, SavedJob>(), workers = new Map<string, Worker>();
   let writes = Promise.resolve(), transactions = Promise.resolve(), closed = false;
   function save(job: SavedJob) {

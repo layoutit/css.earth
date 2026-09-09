@@ -1,13 +1,13 @@
-import type { SamplePoint, SamplingControls, SamplingResult } from './star-sampling-types';
+import type { RemovalRequest, StarRemovalResult } from './star-removal-types';
+export type { RemovalRequest } from './star-removal-types';
 
 export interface RemovalJob {
   id: string; imageId: string; status: 'queued' | 'running' | 'cancelling' | 'completed' | 'cancelled' | 'failed' | 'interrupted';
-  progress?: { stage: string; current?: number; total?: number; message: string }; result?: SamplingResult; error?: string;
+  progress?: { stage: string; current?: number; total?: number; message: string }; result?: StarRemovalResult; error?: string;
 }
-export interface RemovalRequest { imageId: string; action: 'apply'; calibrationToken: string; points: SamplePoint[]; controls: SamplingControls; options: { sampleCount: number; maximumRadius: number }; }
-type Source = Pick<SamplingResult, 'imageId' | 'sourceSha256' | 'sourcePreviewSha256' | 'nativeDimensions'>;
+type Source = Pick<StarRemovalResult, 'imageId' | 'sourceSha256' | 'sourcePreviewSha256' | 'nativeDimensions'>;
 interface SavedJob extends Source { request?: RemovalRequest; id: string; status: RemovalJob['status']; installedResultId?: string; }
-const storageKey = (id: string) => `cssearth-star-removal-job-v1:${id}`;
+const storageKey = (id: string) => `cssearth-star-removal-job-nox-v1:${id}`;
 export const removalJobActive = (job: RemovalJob | null) => Boolean(job && ['queued', 'running', 'cancelling'].includes(job.status));
 function sameSource(a: Source, b: Source) { return a.imageId === b.imageId && a.sourceSha256 === b.sourceSha256 && a.sourcePreviewSha256 === b.sourcePreviewSha256 && a.nativeDimensions.join() === b.nativeDimensions.join(); }
 function read(source: Source): SavedJob | null {
@@ -19,7 +19,7 @@ function save(value: SavedJob) { localStorage.setItem(storageKey(value.imageId),
 /** Server owns processing. Losing this observer never cancels or restarts work. */
 export function createStarRemovalJobs(callbacks: {
   onState(job: RemovalJob): void;
-  onComplete(result: SamplingResult, isCurrent: () => boolean): Promise<void | boolean>;
+  onComplete(result: StarRemovalResult, isCurrent: () => boolean): Promise<void | boolean>;
 }) {
   let revision = 0, controller: AbortController | null = null, saved: SavedJob | null = null, starting: Promise<void> | null = null;
   function stop() { revision++; controller?.abort(); controller = null; saved = null; }

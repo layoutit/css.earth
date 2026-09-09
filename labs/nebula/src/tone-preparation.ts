@@ -4,11 +4,11 @@ import { mkdir, readFile, readdir, realpath, rename, rm, stat, utimes, writeFile
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
 import { overlayVariantsPath, parseOverlayVariants, variantsForImage, type ImageLayer } from './overlay-variants.js';
-import { resolveAppliedSamplingLayers } from './star-sampling-preparation.js';
+import { resolveAppliedRemovalLayers } from './star-removal-preparation.js';
 import type { Plugin } from 'vite';
 import { defaultOverlayTone, isNeutralOverlayTone, overlayToneSample, updateOverlayTone, type OverlayTone } from './overlay-tone.js';
 
-export interface TonePreparationRequest { subjectId: string; target: 'image' | 'density'; imageId?: string; imageLayer?: ImageLayer; samplingResultId?: string; removalStrength?: number; tone: OverlayTone }
+export interface TonePreparationRequest { subjectId: string; target: 'image' | 'density'; imageId?: string; imageLayer?: ImageLayer; removalResultId?: string; removalStrength?: number; tone: OverlayTone }
 export interface ToneResource { sourcePath: string; url: string; width: number; height: number }
 interface SourceResource { path: string; sha256: string; width: number; height: number; layer?: Exclude<ImageLayer, 'original'>; original?: SourceResource }
 interface Subject { id: string; density?: { directory: string; overlays?: string } }
@@ -16,11 +16,11 @@ const digest = (bytes: Buffer | string) => createHash('sha256').update(bytes).di
 const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 export function parseTonePreparationRequest(input: unknown): TonePreparationRequest {
   if (!record(input) ||
-      (input.samplingResultId !== undefined && (input.target !== 'image' || typeof input.samplingResultId !== 'string' || !/^[a-f0-9]{64}\.[a-f0-9]{64}$/.test(input.samplingResultId))) ||
+      (input.removalResultId !== undefined && (input.target !== 'image' || typeof input.removalResultId !== 'string' || !/^[a-f0-9]{64}\.[a-f0-9]{64}$/.test(input.removalResultId))) ||
       (input.imageLayer !== undefined && (input.target !== 'image' || !['original', 'diffuse', 'stars'].includes(input.imageLayer as string))) ||
       (input.removalStrength !== undefined && (input.target !== 'image' || typeof input.removalStrength !== 'number' ||
         !Number.isFinite(input.removalStrength) || input.removalStrength < 0 || input.removalStrength > 100)) ||
-      Object.keys(input).some(key => !['subjectId', 'target', 'imageId', 'imageLayer', 'samplingResultId', 'removalStrength', 'tone'].includes(key)) ||
+      Object.keys(input).some(key => !['subjectId', 'target', 'imageId', 'imageLayer', 'removalResultId', 'removalStrength', 'tone'].includes(key)) ||
       typeof input.subjectId !== 'string' || !/^[a-z0-9-]+$/.test(input.subjectId) ||
       !['image', 'density'].includes(input.target as string) || !record(input.tone) ||
       Object.keys(defaultOverlayTone()).some(key => !Object.hasOwn(input.tone as object, key)) ||
@@ -29,7 +29,7 @@ export function parseTonePreparationRequest(input: unknown): TonePreparationRequ
   }
   return { subjectId: input.subjectId, target: input.target as 'image' | 'density',
     ...(input.target === 'image' ? { imageId: input.imageId as string, ...(input.imageLayer ? { imageLayer: input.imageLayer as ImageLayer } : {}),
-      ...(input.samplingResultId ? { samplingResultId: input.samplingResultId as string } : {}),
+      ...(input.removalResultId ? { removalResultId: input.removalResultId as string } : {}),
       ...(input.removalStrength !== undefined ? { removalStrength: input.removalStrength as number } : {}) } : {}),
     tone: updateOverlayTone(defaultOverlayTone(), input.tone) };
 }
@@ -95,8 +95,8 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
       const original = { path: relative(root, resolve(root, dirname(subject.density.overlays), image.texturePath)),
         sha256: image.sha256, width: image.widthPx, height: image.heightPx };
       if (request.imageLayer && request.imageLayer !== 'original') {
-        const layers = request.samplingResultId
-          ? (await resolveAppliedSamplingLayers(root, request.samplingResultId, request.imageId!, image.sha256)).layers
+        const layers = request.removalResultId
+          ? (await resolveAppliedRemovalLayers(root, request.removalResultId, request.imageId!, image.sha256)).layers
           : variantsForImage(parseOverlayVariants(await json(overlayVariantsPath)), image);
         const layer = layers.find(item => item.id === request.imageLayer);
         if (!layer) throw new TypeError('Unknown prepared image layer.');

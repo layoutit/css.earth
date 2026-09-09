@@ -1,4 +1,4 @@
-import type { AppliedSamplingLayers } from './star-sampling-types';
+import type { AppliedStarLayers } from './star-removal-types';
 import records from './subjects.json';
 import { overlayVariantsPath, parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
 import sourceCatalog from '../sources/index.json';
@@ -177,7 +177,7 @@ export interface LabState {
 
 export interface DensityOverlay {
   id: string; label: string; sha256: string; texturePath: string; widthPx: number; heightPx: number;
-  variants?: OverlayVariant[]; samplingResultId?: string;
+  variants?: OverlayVariant[]; removalResultId?: string;
   pivotCssPx: [number, number, number];
   initialPlacement?: OverlayPlacement; initialOpacity?: number;
   legacyPlacementBasis?: string;
@@ -431,7 +431,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     applyOverlayPlacement(item);
     publish();
   }
-  async function installSamplingLayers(id: string, originalPreviewSha256: string, applied: AppliedSamplingLayers, isCurrent = () => true) {
+  async function installRemovalLayers(id: string, originalPreviewSha256: string, applied: AppliedStarLayers, isCurrent = () => true) {
     const item = overlayCatalogue?.overlays.find(value => value.id === id), version = loadVersion;
     if (!item || item.sha256 !== originalPreviewSha256 || !applied.resultId || applied.layers.length !== 2 ||
       new Set(applied.layers.map(layer => layer.id)).size !== 2) throw new TypeError('Removal layers do not match the original aligned image.');
@@ -449,7 +449,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     }
     if (disposed || version !== loadVersion || !isCurrent()) return;
     overlayLayerRequests.set(id, (overlayLayerRequests.get(id) ?? 0) + 1);
-    item.variants = variants; item.samplingResultId = applied.resultId;
+    item.variants = variants; item.removalResultId = applied.resultId;
     for (const layer of variants) toneResources.bind(layer.texturePath, layer.widthPx, layer.heightPx);
   }
   function getOverlayLayer(id: string): ImageLayer { return overlayLayers.get(id) ?? 'original'; }
@@ -672,7 +672,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     }
   }
   await setSubject(subject.id);
-  return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayLayer, getOverlayLayer, installSamplingLayers, setOverlayPlacement, getOverlayState,
+  return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayLayer, getOverlayLayer, installRemovalLayers, setOverlayPlacement, getOverlayState,
     referenceView, fitCloud, applyToneResources, applyCloudDensityResources,
     getStars: () => starInfo,
     setStars(options: CloudStarOptions) {

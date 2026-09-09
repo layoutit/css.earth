@@ -1,12 +1,12 @@
-import type { AppliedSamplingLayers, SamplingResult } from './star-sampling-types';
+import type { AppliedStarLayers, StarRemovalResult } from './star-removal-types';
 import type { ImageLayer } from './overlay-variants';
 
 export interface SavedAppliedImage {
   imageId: string; resultId: string; sourceSha256: string; sourcePreviewSha256: string;
   nativeDimensions: [number, number]; layer: ImageLayer;
 }
-export interface RestoredAppliedImage extends Omit<SavedAppliedImage, 'resultId' | 'layer'> { applied: AppliedSamplingLayers; }
-const storageKey = (imageId: string) => `cssearth-applied-star-image-v1:${imageId}`;
+export interface RestoredAppliedImage extends Omit<SavedAppliedImage, 'resultId' | 'layer'> { applied: AppliedStarLayers; }
+const storageKey = (imageId: string) => `cssearth-applied-star-image-nox-v1:${imageId}`;
 export function readAppliedImage(imageId: string, previewSha: string, storage: Pick<Storage, 'getItem'> = localStorage): SavedAppliedImage | null {
   try {
     const value = JSON.parse(storage.getItem(storageKey(imageId)) ?? 'null') as SavedAppliedImage | null;
@@ -16,7 +16,7 @@ export function readAppliedImage(imageId: string, previewSha: string, storage: P
       ['original', 'diffuse', 'stars'].includes(value.layer) ? value : null;
   } catch { return null; }
 }
-export function writeAppliedImage(result: Pick<SamplingResult, 'imageId' | 'sourceSha256' | 'sourcePreviewSha256' | 'nativeDimensions' | 'applied'>,
+export function writeAppliedImage(result: Pick<StarRemovalResult, 'imageId' | 'sourceSha256' | 'sourcePreviewSha256' | 'nativeDimensions' | 'applied'>,
   layer: ImageLayer, storage: Pick<Storage, 'setItem'> = localStorage) {
   if (!result.applied || !result.sourcePreviewSha256) return;
   const value: SavedAppliedImage = { imageId: result.imageId, resultId: result.applied.resultId, sourceSha256: result.sourceSha256,
