@@ -112,13 +112,31 @@
         "referenceRadiusMeters": 1450
       },
       "coverage": "Measured ellipsoid; no resolved topography is fabricated."
+    },
+    {
+      "id": "measured-observations",
+      "path": "spectroscopy/methonespecplot2_tab_011224.txt",
+      "expectedBytes": 10240,
+      "expectedSha256": "e6d56686af08464a9c9caabc70a442924144611c1fa5d2fb95f361cf175f513e",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/methonespecplot2_tab_011224.txt",
+      "catalog": "https://doi.org/10.5281/zenodo.10552220",
+      "credit": "Hedman et al. (2020, 2024); NASA/JPL/University of Arizona; Cassini VIMS",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the unmodified author numeric release.",
+      "redistribution": "Preserve scientific attribution and source qualifications.",
+      "consumers": [
+        "observation-charts"
+      ]
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3644,
-      "expectedSha256": "0f5330332377d51551832198922a160311d4d8f94b15c30a9873161805818e5d",
+      "expectedBytes": 5189,
+      "expectedSha256": "50b22cca996abb67c1dfd36268c71605a236e9c0257f4faebf9ecff22e432bd3",
       "purpose": "Methone source evidence or authored preparation data."
     },
     {
@@ -129,8 +147,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1044,
-      "expectedSha256": "75e89694f7a99f2fd0663f367d7511fc9a04e542c6fcea98dedbea4c67d80505",
+      "expectedBytes": 1346,
+      "expectedSha256": "f2d467bd60a5b103412ef341b7aee1dd8d9cbc249dcaeb2ef078edca64ffde35",
       "purpose": "Methone source evidence or authored preparation data."
     },
     {
@@ -216,6 +234,18 @@
       "expectedBytes": 3256,
       "expectedSha256": "bfd9c8f5c2436813c3487e4c148e4be1618b18a8866b34d294d30e260a011cd8",
       "purpose": "Methone source evidence or authored preparation data."
+    },
+    {
+      "path": "content/charts.json",
+      "purpose": "Measured observation chart recipe and source interpretation.",
+      "expectedBytes": 2544,
+      "expectedSha256": "322ae68aefbd91c27249e470fa9d0ac6e582962f3d823f6ececabcd4fc55799a"
+    },
+    {
+      "path": "OBSERVATIONS.md",
+      "expectedBytes": 2369,
+      "expectedSha256": "ee9423d7acda1602f3bd680acee9bc0ff5f891f1597f840cb1ff95f963595fc3",
+      "purpose": "Observation quantity, uncertainty, calibration, sampling and display limitations."
     }
   ],
   "generatedIntermediates": [

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a4df9e1bef77985940137cd3d88174a195058f15680c4437217f36998080e201"
+    "sha256": "0b7641e5a664883e0ad08687dc466fbfeebec04175ee7a770c61286a90d69e5d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "71a85da5d8d407ad447b7b0bcd6448156899920febdab6e58197c0c384bbc051"
   },
   "recipes": [
     {
@@ -139,7 +139,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "974695c2694b282c8b1541fda44a47e00712f64b4453988055a07294ff403624",
+      "sha256": "50b22cca996abb67c1dfd36268c71605a236e9c0257f4faebf9ecff22e432bd3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,27 @@
             }
           ]
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "vims-spectrum",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/methone/methone-vims-spectrum.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "Cassini VIMS · 2012-05-20 · about 58° phase angle. Mean disk-integrated spectrum from five cubes, re-normalized by Hedman et al. (2024) to a dimensionless brightness coefficient. Bars show the released 1σ statistical errors. Three channel gaps follow the author notebook; omitted rows remain in the CSV. This model-normalized coefficient is not absolute albedo or a spatial composition map.",
+            "caption": "Cassini VIMS · 2012-05-20 · about 58° phase angle. Mean disk-integrated spectrum from five cubes, re-normalized by Hedman et al. (2024) to a dimensionless brightness coefficient. Bars show the released 1σ statistical errors. Three channel gaps follow the author notebook; omitted rows remain in the CSV. This model-normalized coefficient is not absolute albedo or a spatial composition map.",
+            "data": {
+              "src": "/scenes/methone/methone-vims-spectrum.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "measured-observations",
+              "path": "../manifest.json",
+              "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/methonespecplot2_tab_011224.txt"
+            },
+            "visible": true
+          }
+        ],
         "resources": [
           {
             "label": "NASA",
@@ -258,6 +278,93 @@
             "credit": "Thomas et al. (2013); NAIF PCK00011"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "322ae68aefbd91c27249e470fa9d0ac6e582962f3d823f6ececabcd4fc55799a",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/methone/",
+        "charts": [
+          {
+            "kind": "observations",
+            "id": "vims-spectrum",
+            "title": "Methone · Cassini VIMS",
+            "description": "Cassini VIMS · 2012-05-20 · about 58° phase angle. Mean disk-integrated spectrum from five cubes, re-normalized by Hedman et al. (2024) to a dimensionless brightness coefficient. Bars show the released 1σ statistical errors. Three channel gaps follow the author notebook; omitted rows remain in the CSV. This model-normalized coefficient is not absolute albedo or a spatial composition map.",
+            "output": "methone-vims-spectrum.png",
+            "dataOutput": "methone-vims-spectrum.csv",
+            "metadata": {
+              "instrument": "Cassini VIMS",
+              "date": "2012-05-20",
+              "phaseAngleDegreesApproximate": 58,
+              "productIds": [
+                "V1716191964",
+                "V1716192051",
+                "V1716192374",
+                "V1716192461",
+                "V1716192872"
+              ],
+              "doi": "10.1029/2023JE008236",
+              "parentDoi": "10.3847/1538-3881/ab659d",
+              "normalization": "Brightness coefficient released in 2024, normalized from 2020 relative brightness; not re-fitted by cssEarth."
+            },
+            "source": "spectroscopy/methonespecplot2_tab_011224.txt",
+            "sha256": "e6d56686af08464a9c9caabc70a442924144611c1fa5d2fb95f361cf175f513e",
+            "format": "whitespace",
+            "sampleCount": 256,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "uncertainty": "one-sigma",
+            "exclude": [
+              {
+                "minimum": 1.6116,
+                "maximum": 1.6716,
+                "reason": "Author notebook cell 17: within 0.03 µm of channel index 46"
+              },
+              {
+                "minimum": 2.9472,
+                "maximum": 3.0072,
+                "reason": "Author notebook cell 17: within 0.03 µm of channel index 127"
+              },
+              {
+                "minimum": 3.83184,
+                "maximum": 3.89184,
+                "reason": "Author notebook cell 17: within 0.03 µm of channel index 180"
+              }
+            ],
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 0.8,
+              "maximum": 5.2,
+              "ticks": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "y": {
+              "label": "Brightness coefficient (unitless)",
+              "minimum": -0.5,
+              "maximum": 0.6,
+              "ticks": [
+                -0.4,
+                -0.2,
+                0,
+                0.2,
+                0.4,
+                0.6
+              ]
+            }
+          }
+        ]
       }
     }
   ],
@@ -370,11 +477,38 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0f5330332377d51551832198922a160311d4d8f94b15c30a9873161805818e5d",
-      "bytes": 3644,
+      "sha256": "50b22cca996abb67c1dfd36268c71605a236e9c0257f4faebf9ecff22e432bd3",
+      "bytes": 5189,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "measured-observations",
+      "path": "spectroscopy/methonespecplot2_tab_011224.txt",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/methonespecplot2_tab_011224.txt",
+      "catalog": "https://doi.org/10.5281/zenodo.10552220",
+      "credit": "Hedman et al. (2020, 2024); NASA/JPL/University of Arizona; Cassini VIMS",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the unmodified author numeric release.",
+      "redistribution": "Preserve scientific attribution and source qualifications.",
+      "sha256": "e6d56686af08464a9c9caabc70a442924144611c1fa5d2fb95f361cf175f513e",
+      "bytes": 10240,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/methonespecplot2_tab_011224.txt",
+        "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/methonespecplot2_tab_011224.txt"
+      },
       "verificationOperations": []
     }
   ],
@@ -437,9 +571,92 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5731,
-          "sha256": "471cdd2cafd33c5ca743c70b65c1faa6b2199a5878aeff04e1fdb37eff39a743",
+          "bytes": 7785,
+          "sha256": "ac8a69dad5adb6dce104646dbb3bbd7c683eddb7c52fc053199b5d2e8ce54328",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Methone · Cassini VIMS",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "Cassini VIMS · 2012-05-20 · about 58° phase angle. Mean disk-integrated spectrum from five cubes, re-normalized by Hedman et al. (2024) to a dimensionless brightness coefficient. Bars show the released 1σ statistical errors. Three channel gaps follow the author notebook; omitted rows remain in the CSV. This model-normalized coefficient is not absolute albedo or a spatial composition map."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Brightness coefficient (unitless)",
+        "uncertainty": "one-sigma",
+        "unitScale": 1,
+        "excludedRanges": [
+          {
+            "minimum": 1.6116,
+            "maximum": 1.6716,
+            "reason": "Author notebook cell 17: within 0.03 µm of channel index 46"
+          },
+          {
+            "minimum": 2.9472,
+            "maximum": 3.0072,
+            "reason": "Author notebook cell 17: within 0.03 µm of channel index 127"
+          },
+          {
+            "minimum": 3.83184,
+            "maximum": 3.89184,
+            "reason": "Author notebook cell 17: within 0.03 µm of channel index 180"
+          }
+        ],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 0.8,
+            "maximum": 5.2,
+            "ticks": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "y": {
+            "label": "Brightness coefficient (unitless)",
+            "minimum": -0.5,
+            "maximum": 0.6,
+            "ticks": [
+              -0.4,
+              -0.2,
+              0,
+              0.2,
+              0.4,
+              0.6
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "measured-observations"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/methone/methone-vims-spectrum.png",
+          "bytes": 66644,
+          "sha256": "e02b3b41b36b05d06dd3017a8c313ac586054bb44832f532d5eba804e15442e4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/methone/methone-vims-spectrum.csv",
+          "bytes": 12153,
+          "sha256": "168cf4846bc2a195390eecfe54438bb1fc0422998921201ee037aecd46263aa1",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

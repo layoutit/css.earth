@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/methone/",
+  "charts": [
+    {
+      "kind": "observations",
+      "id": "vims-spectrum",
+      "title": "Methone · Cassini VIMS",
+      "description": "Cassini VIMS · 2012-05-20 · about 58° phase angle. Mean disk-integrated spectrum from five cubes, re-normalized by Hedman et al. (2024) to a dimensionless brightness coefficient. Bars show the released 1σ statistical errors. Three channel gaps follow the author notebook; omitted rows remain in the CSV. This model-normalized coefficient is not absolute albedo or a spatial composition map.",
+      "output": "methone-vims-spectrum.png",
+      "dataOutput": "methone-vims-spectrum.csv",
+      "metadata": {
+        "instrument": "Cassini VIMS",
+        "date": "2012-05-20",
+        "phaseAngleDegreesApproximate": 58,
+        "productIds": [
+          "V1716191964",
+          "V1716192051",
+          "V1716192374",
+          "V1716192461",
+          "V1716192872"
+        ],
+        "doi": "10.1029/2023JE008236",
+        "parentDoi": "10.3847/1538-3881/ab659d",
+        "normalization": "Brightness coefficient released in 2024, normalized from 2020 relative brightness; not re-fitted by cssEarth."
+      },
+      "source": "spectroscopy/methonespecplot2_tab_011224.txt",
+      "sha256": "e6d56686af08464a9c9caabc70a442924144611c1fa5d2fb95f361cf175f513e",
+      "format": "whitespace",
+      "sampleCount": 256,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "uncertainty": "one-sigma",
+      "exclude": [
+        {
+          "minimum": 1.6116,
+          "maximum": 1.6716,
+          "reason": "Author notebook cell 17: within 0.03 µm of channel index 46"
+        },
+        {
+          "minimum": 2.9472,
+          "maximum": 3.0072,
+          "reason": "Author notebook cell 17: within 0.03 µm of channel index 127"
+        },
+        {
+          "minimum": 3.83184,
+          "maximum": 3.89184,
+          "reason": "Author notebook cell 17: within 0.03 µm of channel index 180"
+        }
+      ],
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0.8,
+        "maximum": 5.2,
+        "ticks": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "y": {
+        "label": "Brightness coefficient (unitless)",
+        "minimum": -0.5,
+        "maximum": 0.6,
+        "ticks": [
+          -0.4,
+          -0.2,
+          0,
+          0.2,
+          0.4,
+          0.6
+        ]
+      }
+    }
+  ]
+}

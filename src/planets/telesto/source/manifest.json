@@ -343,6 +343,46 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "nirspec-dither-1",
+      "path": "spectroscopy/JW1247_NIRSpec_Telestoflux_dither1.csv",
+      "expectedBytes": 55317,
+      "expectedSha256": "a96ec148764c959d7603074832979ec2269bbb60fa6f052d528da40ae12a7afa",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Telestoflux_dither1.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "consumers": [
+        "observation-charts"
+      ]
+    },
+    {
+      "id": "nirspec-dither-2",
+      "path": "spectroscopy/JW1247_NIRSpec_Telestoflux_dither2.csv",
+      "expectedBytes": 55342,
+      "expectedSha256": "fd2823d0b6256542c2f5c99138533245b9729b525180247505693957d1f597fd",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Telestoflux_dither2.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "consumers": [
+        "observation-charts"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -380,14 +420,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5256,
-      "expectedSha256": "6c9fea9e47518c5f066705072ded879b54c8024f427d600a38bce246d29c3000",
+      "expectedBytes": 8393,
+      "expectedSha256": "01a18791e18a8f2404277d73c9319679b6ef99fc2d0fc1746d50172e9ab9832b",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3510,
-      "expectedSha256": "909732d0055398b89c5752709c9294b342976e8320d4d7064dbec539313ba870",
+      "expectedBytes": 4142,
+      "expectedSha256": "d213f035e3dd5074f9aca6fc706569d0824deecb53fb65d21b60df168eaf47f3",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
@@ -462,6 +502,18 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 495,
       "expectedSha256": "d9508fe752a30a000204fd2ad54fd9fafbdd1f9e67b5abacf81e222491af695c"
+    },
+    {
+      "path": "content/charts.json",
+      "purpose": "Measured observation chart recipe and provenance.",
+      "expectedBytes": 3927,
+      "expectedSha256": "cdd335873869132e44659d940815091acd7a25aa9a95574472237f2c38bd5648"
+    },
+    {
+      "path": "OBSERVATIONS.md",
+      "expectedBytes": 3278,
+      "expectedSha256": "999a0fcda4e5a61c813639c87d210be79dcf957672a60f4647eab7c3c2b563d2",
+      "purpose": "Observation quantity, uncertainty, calibration, sampling and display limitations."
     }
   ]
 }

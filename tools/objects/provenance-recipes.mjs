@@ -192,8 +192,13 @@ export function provenanceProducts({ id, recipes, manifest, lenses, assets, geog
   }
   (recipe('charts')?.charts ?? []).forEach((plan, index) => add(`chart:${index}`, 'charts', `/charts/${index}`,
     paths(plan.source), 'Prepare the authored scientific chart from its bound data and mathematical recipe.', {
-      label: plan.title ?? plan.kind, urls: [prefix + plan.output], lensIds: [],
-      interpretation: { kind: plan.kind, qualification: plan.metadata?.qualification },
+      label: plan.title ?? plan.kind,
+      urls: [prefix + plan.output, ...(plan.dataOutput ? [prefix + plan.dataOutput] : [])], lensIds: [],
+      interpretation: { kind: plan.kind, qualification: plan.metadata?.qualification,
+        ...(plan.kind === 'observations' ? { quantity: plan.metadata?.quantity ?? plan.y.label,
+          uncertainty: plan.uncertainty, unitScale: plan.yScale ?? 1, excludedRanges: plan.exclude ?? [],
+          plotWindow: { x: plan.x, y: plan.y } } : {}) },
+      ...(plan.kind === 'observations' ? { limitations: [plan.description] } : {}),
     }));
   return { products, unresolved };
 }

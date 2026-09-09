@@ -1,0 +1,120 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/epimetheus/",
+  "charts": [
+    {
+      "kind": "observations",
+      "id": "nirspec-dither-1",
+      "title": "Epimetheus · dither 1",
+      "description": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+      "output": "epimetheus-nirspec-dither-1.png",
+      "dataOutput": "epimetheus-nirspec-dither-1.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2022-11-08",
+        "observingWindow": "22:15–22:29 UT",
+        "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "dither": 1,
+        "sourceUnits": {
+          "x": "µm",
+          "y": "Jy",
+          "error": "Jy"
+        },
+        "doi": "10.1029/2023JE008236"
+      },
+      "source": "spectroscopy/JW1247_NIRSpec_Epimetheusflux_dither1.csv",
+      "sha256": "4265c379087b66a2f889a3196c305230fc2647170b9ee837fb92f649ab047f08",
+      "format": "csv",
+      "header": "Wavelength,Flux (Jy),Error (Jy)",
+      "sampleCount": 730,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1.0,
+        "maximum": 5,
+        "ticks": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "y": {
+        "label": "Flux density (µJy)",
+        "minimum": -2000,
+        "maximum": 3000,
+        "ticks": [
+          -2000,
+          -1000,
+          0,
+          1000,
+          2000,
+          3000
+        ]
+      }
+    },
+    {
+      "kind": "observations",
+      "id": "nirspec-dither-2",
+      "title": "Epimetheus · dither 2",
+      "description": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+      "output": "epimetheus-nirspec-dither-2.png",
+      "dataOutput": "epimetheus-nirspec-dither-2.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2022-11-08",
+        "observingWindow": "22:15–22:29 UT",
+        "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "dither": 2,
+        "sourceUnits": {
+          "x": "µm",
+          "y": "Jy",
+          "error": "Jy"
+        },
+        "doi": "10.1029/2023JE008236"
+      },
+      "source": "spectroscopy/JW1247_NIRSpec_Epimetheusflux_dither2.csv",
+      "sha256": "2ae3266b94c4fc01402b40c695e3c92a89ef34b31b1a1fac09ea9bf57218e95b",
+      "format": "csv",
+      "header": "Wavelength,Flux (Jy),Error (Jy)",
+      "sampleCount": 700,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1.5,
+        "maximum": 5,
+        "ticks": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "y": {
+        "label": "Flux density (µJy)",
+        "minimum": -2000,
+        "maximum": 4000,
+        "ticks": [
+          -2000,
+          0,
+          2000,
+          4000
+        ]
+      }
+    }
+  ]
+}

@@ -68,11 +68,14 @@ export interface LensRecipe {
 export interface ChartRecipe {
   id: string;
   titleKey: string;
+  visible?: boolean;
   open?: boolean;
   src: string;
   width: number;
   height: number;
   alt: string;
+  caption?: string;
+  data?: { src: string; label: string };
   source: LensSource;
 }
 

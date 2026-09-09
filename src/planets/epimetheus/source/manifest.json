@@ -343,6 +343,46 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "nirspec-dither-1",
+      "path": "spectroscopy/JW1247_NIRSpec_Epimetheusflux_dither1.csv",
+      "expectedBytes": 46789,
+      "expectedSha256": "4265c379087b66a2f889a3196c305230fc2647170b9ee837fb92f649ab047f08",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Epimetheusflux_dither1.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "consumers": [
+        "observation-charts"
+      ]
+    },
+    {
+      "id": "nirspec-dither-2",
+      "path": "spectroscopy/JW1247_NIRSpec_Epimetheusflux_dither2.csv",
+      "expectedBytes": 44861,
+      "expectedSha256": "2ae3266b94c4fc01402b40c695e3c92a89ef34b31b1a1fac09ea9bf57218e95b",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Epimetheusflux_dither2.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "consumers": [
+        "observation-charts"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -380,14 +420,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5911,
-      "expectedSha256": "5cfce51ee82ceeca3a66746c72335c0182321f4d38bc9aaa4060676f057d7dd5",
+      "expectedBytes": 9125,
+      "expectedSha256": "59922a1614273502562c31ba903ca267f3a3593acf3e17364af7d24d12ead0a1",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3516,
-      "expectedSha256": "3133a2980cb0b0c2685297d09eb29b8e9569ef1a9185c84e4ae434786a0700e3",
+      "expectedBytes": 4160,
+      "expectedSha256": "1cbf7f96d1e72e7375de2291835e91026d98f05701065c894620c156f27312c8",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
@@ -462,6 +502,18 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1090,
       "expectedSha256": "a8bcf723bc79a0f2f96e7185a6b57222eb000bfa3adde5e0315ce4d3c1d21738"
+    },
+    {
+      "path": "content/charts.json",
+      "purpose": "Measured observation chart recipe and provenance.",
+      "expectedBytes": 3960,
+      "expectedSha256": "6a37d0a1a6cc020c7bc2d8091274d50025c5abfdbbc9754c82b84acdd35c4c5c"
+    },
+    {
+      "path": "OBSERVATIONS.md",
+      "expectedBytes": 3337,
+      "expectedSha256": "ac23fe1da16a6f3e26edfcbb9a559843aecc64883fa9daa18fc4c2fda7c3dd5d",
+      "purpose": "Observation quantity, uncertainty, calibration, sampling and display limitations."
     }
   ]
 }

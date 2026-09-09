@@ -76,7 +76,27 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "nirspec-prism",
+      "titleKey": "measuredSpectrum",
+      "src": "/scenes/siarnaq/siarnaq-nirspec-prism.png",
+      "width": 1080,
+      "height": 696,
+      "alt": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Extraction and background systematics are not included in the plotted error bars.",
+      "caption": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Extraction and background systematics are not included in the plotted error bars.",
+      "data": {
+        "src": "/scenes/siarnaq/siarnaq-nirspec-prism.csv",
+        "label": "Measurements (CSV)"
+      },
+      "source": {
+        "id": "nirspec-prism",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o033_t009_nirspec_prism-clear_x1d.fits"
+      },
+      "visible": true
+    }
+  ],
   "resources": [
     {
       "label": "Denk et al.",

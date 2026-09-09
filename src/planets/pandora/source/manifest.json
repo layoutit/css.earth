@@ -673,6 +673,26 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "nirspec-dither-1",
+      "path": "spectroscopy/JW1247_NIRSpec_Pandoraflux_dither1.csv",
+      "expectedBytes": 44911,
+      "expectedSha256": "1ee81d367d7afa232058b3970af604e7bb309cc130c119d6757c241ff4fa6b8b",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Pandoraflux_dither1.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "consumers": [
+        "observation-charts"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -716,14 +736,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5809,
-      "expectedSha256": "40f6cd49c685807243a4329a732321877a10f8fd8547ddf3a302441e762bfc5d",
+      "expectedBytes": 7579,
+      "expectedSha256": "a7127f28d56c1b6caf3011092d97216414c5a29fad23abbbba9aa68bb73a212b",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 6846,
-      "expectedSha256": "4f77972d63f668250c5ebd36def77b6a8f161a86bb13fa85c6b2d2e50b654862",
+      "expectedBytes": 7162,
+      "expectedSha256": "3c3ad17394e946f1e28dd2cfdbdbc2fc047428d40ff2b7ee7327745ffc9aed4a",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {
@@ -792,6 +812,18 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1084,
       "expectedSha256": "18666eaadfb0ab293ced64740c9943a5ebfa58b1a898623e911ba51cd576cd37"
+    },
+    {
+      "path": "content/charts.json",
+      "purpose": "Measured observation chart recipe and provenance.",
+      "expectedBytes": 2055,
+      "expectedSha256": "cd0c5c26649825cfcf6fd33cc7d55f8ffd11104656ee431abcfab452ba812912"
+    },
+    {
+      "path": "OBSERVATIONS.md",
+      "expectedBytes": 1985,
+      "expectedSha256": "4779cf51d0d1c6031dda779ec1584a85e6a65505283caa8007a798a6773c33f8",
+      "purpose": "Observation quantity, uncertainty, calibration, sampling and display limitations."
     }
   ]
 }

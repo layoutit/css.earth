@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/siarnaq/",
+  "charts": [
+    {
+      "kind": "observations",
+      "id": "nirspec-prism",
+      "title": "Siarnaq · PRISM",
+      "description": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Extraction and background systematics are not included in the plotted error bars.",
+      "output": "siarnaq-nirspec-prism.png",
+      "dataOutput": "siarnaq-nirspec-prism.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2023-11-22",
+        "time": "03:28:46.549",
+        "sourceProduct": "jw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+        "pipeline": "2.0.1",
+        "crdsContext": "jwst_1535.pmap",
+        "archiveTargetName": "SIARNAQ",
+        "targetRaDegrees": 332.59246151976856,
+        "targetDecDegrees": -13.62996704598575,
+        "dataQualityPolicy": "Omit any nonzero DQ from plot; retain all rows and flags in CSV.",
+        "sourceType": "POINT",
+        "extractionCenterPixels": [
+          11,
+          6
+        ],
+        "quantity": "Calibrated extracted flux density; not author-reduced reflectance."
+      },
+      "source": "spectroscopy/jw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+      "sha256": "da3cd8f6c90a7288ff1e22fe049ba6556783c381fbda32b6ea48f003d4d73b70",
+      "format": "jwst-x1d",
+      "fits": {
+        "targetName": "SIARNAQ",
+        "calibrationVersion": "2.0.1",
+        "crdsContext": "jwst_1535.pmap",
+        "observationDate": "2023-11-22"
+      },
+      "sampleCount": 941,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0.6,
+        "maximum": 5.4,
+        "ticks": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ]
+      },
+      "y": {
+        "label": "Aperture flux density (µJy)",
+        "minimum": -2,
+        "maximum": 6,
+        "ticks": [
+          -2,
+          0,
+          2,
+          4,
+          6
+        ]
+      }
+    }
+  ]
+}

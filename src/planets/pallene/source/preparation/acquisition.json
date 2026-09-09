@@ -152,6 +152,22 @@
       ],
       "path": "observations/N1665947247_1_CALIB.LBL",
       "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2066/data/1665902448_1665976443/N1665947247_1_CALIB.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither1.csv",
+      "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither1.csv"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither2.csv",
+      "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither2.csv"
     }
   ]
 }

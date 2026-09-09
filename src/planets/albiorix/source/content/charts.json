@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/albiorix/",
+  "charts": [
+    {
+      "kind": "observations",
+      "id": "nirspec-prism",
+      "title": "Albiorix · PRISM",
+      "description": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. The combined archive product includes a dither reported to contain a background source; its flux may be contaminated.",
+      "output": "albiorix-nirspec-prism.png",
+      "dataOutput": "albiorix-nirspec-prism.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2023-11-22",
+        "time": "02:09:15.912",
+        "sourceProduct": "jw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+        "pipeline": "2.0.1",
+        "crdsContext": "jwst_1535.pmap",
+        "archiveTargetName": "ALBIORIX",
+        "targetRaDegrees": 332.8931337325089,
+        "targetDecDegrees": -13.300640783798169,
+        "dataQualityPolicy": "Omit any nonzero DQ from plot; retain all rows and flags in CSV.",
+        "sourceType": "POINT",
+        "extractionCenterPixels": [
+          23,
+          26
+        ],
+        "quantity": "Calibrated extracted flux density; not author-reduced reflectance."
+      },
+      "source": "spectroscopy/jw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+      "sha256": "3ff215367bf5e9c53c12ffd964b413b2739be281803bb2368c14b320db3cd1f1",
+      "format": "jwst-x1d",
+      "fits": {
+        "targetName": "ALBIORIX",
+        "calibrationVersion": "2.0.1",
+        "crdsContext": "jwst_1535.pmap",
+        "observationDate": "2023-11-22"
+      },
+      "sampleCount": 941,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0.6,
+        "maximum": 5.4,
+        "ticks": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ]
+      },
+      "y": {
+        "label": "Aperture flux density (µJy)",
+        "minimum": 0,
+        "maximum": 50,
+        "ticks": [
+          0,
+          10,
+          20,
+          30,
+          40,
+          50
+        ]
+      }
+    }
+  ]
+}

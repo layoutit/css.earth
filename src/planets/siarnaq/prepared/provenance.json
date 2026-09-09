@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82507bc3f81d2a18312f6afeb4bea4ed401e21d02086091c7d99c431c9ce7ec4"
+    "sha256": "e33e214f4754fe07823855802899571c568e2e4eb19b257c86274e3659004925"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "71a85da5d8d407ad447b7b0bcd6448156899920febdab6e58197c0c384bbc051"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e9a1b60ed50331d3f6a2ef392a42956112a5e02788507b22cb1fe83a894f3c4e",
+      "sha256": "d0a2070031903927eaaf620de11a763f732d7b1d1356a8e86650c7c89e97bd26",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -189,7 +189,27 @@
             }
           ]
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "nirspec-prism",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/siarnaq/siarnaq-nirspec-prism.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Extraction and background systematics are not included in the plotted error bars.",
+            "caption": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Extraction and background systematics are not included in the plotted error bars.",
+            "data": {
+              "src": "/scenes/siarnaq/siarnaq-nirspec-prism.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-prism",
+              "path": "../manifest.json",
+              "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o033_t009_nirspec_prism-clear_x1d.fits"
+            },
+            "visible": true
+          }
+        ],
         "resources": [
           {
             "label": "Denk et al.",
@@ -223,6 +243,85 @@
             "credit": "Denk et al.; Cassini ISS; NEOWISE"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "6bc4dc9899145da6c2d66e60c76a8150b309df19cf3404bcff1329c434dcb3a7",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/siarnaq/",
+        "charts": [
+          {
+            "kind": "observations",
+            "id": "nirspec-prism",
+            "title": "Siarnaq · PRISM",
+            "description": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Extraction and background systematics are not included in the plotted error bars.",
+            "output": "siarnaq-nirspec-prism.png",
+            "dataOutput": "siarnaq-nirspec-prism.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2023-11-22",
+              "time": "03:28:46.549",
+              "sourceProduct": "jw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+              "pipeline": "2.0.1",
+              "crdsContext": "jwst_1535.pmap",
+              "archiveTargetName": "SIARNAQ",
+              "targetRaDegrees": 332.59246151976856,
+              "targetDecDegrees": -13.62996704598575,
+              "dataQualityPolicy": "Omit any nonzero DQ from plot; retain all rows and flags in CSV.",
+              "sourceType": "POINT",
+              "extractionCenterPixels": [
+                11,
+                6
+              ],
+              "quantity": "Calibrated extracted flux density; not author-reduced reflectance."
+            },
+            "source": "spectroscopy/jw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+            "sha256": "da3cd8f6c90a7288ff1e22fe049ba6556783c381fbda32b6ea48f003d4d73b70",
+            "format": "jwst-x1d",
+            "fits": {
+              "targetName": "SIARNAQ",
+              "calibrationVersion": "2.0.1",
+              "crdsContext": "jwst_1535.pmap",
+              "observationDate": "2023-11-22"
+            },
+            "sampleCount": 941,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 0.6,
+              "maximum": 5.4,
+              "ticks": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "y": {
+              "label": "Aperture flux density (µJy)",
+              "minimum": -2,
+              "maximum": 6,
+              "ticks": [
+                -2,
+                0,
+                2,
+                4,
+                6
+              ]
+            }
+          }
+        ]
       }
     }
   ],
@@ -292,11 +391,38 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e9a1b60ed50331d3f6a2ef392a42956112a5e02788507b22cb1fe83a894f3c4e",
-      "bytes": 3258,
+      "sha256": "d0a2070031903927eaaf620de11a763f732d7b1d1356a8e86650c7c89e97bd26",
+      "bytes": 4655,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-prism",
+      "path": "spectroscopy/jw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+      "catalog": "https://doi.org/10.17909/y22z-yt33",
+      "credit": "NASA/ESA/CSA JWST; STScI MAST; program 3716 team",
+      "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
+      "licenseEvidence": [
+        "https://outerspace.stsci.edu/display/MASTDOCS/Data+Use+and+Credits"
+      ],
+      "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
+      "redistribution": "Public science archive data with mission and observing-program credit.",
+      "sha256": "da3cd8f6c90a7288ff1e22fe049ba6556783c381fbda32b6ea48f003d4d73b70",
+      "bytes": 270720,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/jw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o033_t009_nirspec_prism-clear_x1d.fits"
+      },
       "verificationOperations": []
     }
   ],
@@ -362,9 +488,75 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6381,
-          "sha256": "509bd9ec539f0a34333707f2cdbadcaa4540240992da7e8452a3967623f871a9",
+          "bytes": 8380,
+          "sha256": "f8713d8e9184d9fffc11cee676cab7199aa426cb6e578cc686cc02542d845f55",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Siarnaq · PRISM",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Extraction and background systematics are not included in the plotted error bars."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Calibrated extracted flux density; not author-reduced reflectance.",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 0.6,
+            "maximum": 5.4,
+            "ticks": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "y": {
+            "label": "Aperture flux density (µJy)",
+            "minimum": -2,
+            "maximum": 6,
+            "ticks": [
+              -2,
+              0,
+              2,
+              4,
+              6
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-prism"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/siarnaq/siarnaq-nirspec-prism.png",
+          "bytes": 49654,
+          "sha256": "b17b64107880d5b4f72c0ab2e06e5ca002b74a94a539738efce4b1c844df310d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/siarnaq/siarnaq-nirspec-prism.csv",
+          "bytes": 76842,
+          "sha256": "fd3a67f2dacdd4a42672383aa3c11407db2724471d5658395cc8de7ee57acd55",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cbee217e2bd0dadecefe5723169e3ab76118790dd7f40ded46714a1dbdccc336"
+    "sha256": "74e143cda54bccc61449ad24d5358c3e9c91b0ff86f02dc22ffd6ae6261ac630"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "71a85da5d8d407ad447b7b0bcd6448156899920febdab6e58197c0c384bbc051"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ad59b6008b9be596dfbda5e75c104e36ec403d2a000e23125fbf9d6faae7d562",
+      "sha256": "d63b65164603463b2a70848e8ba3814f7088644b68e6356a76a1c54e33ca4855",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,7 +188,27 @@
             }
           ]
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "nirspec-prism",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/albiorix/albiorix-nirspec-prism.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. The combined archive product includes a dither reported to contain a background source; its flux may be contaminated.",
+            "caption": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. The combined archive product includes a dither reported to contain a background source; its flux may be contaminated.",
+            "data": {
+              "src": "/scenes/albiorix/albiorix-nirspec-prism.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-prism",
+              "path": "../manifest.json",
+              "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o032_t008_nirspec_prism-clear_x1d.fits"
+            },
+            "visible": true
+          }
+        ],
         "resources": [
           {
             "label": "Denk et al. (2018)",
@@ -228,6 +248,86 @@
             "credit": "Denk et al. (2018); Denk and Mottola (2019)"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "0bf8eb19064efc34fe829edfe68db6af38f78e52fba827f1b47e991aceafd38f",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/albiorix/",
+        "charts": [
+          {
+            "kind": "observations",
+            "id": "nirspec-prism",
+            "title": "Albiorix · PRISM",
+            "description": "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. The combined archive product includes a dither reported to contain a background source; its flux may be contaminated.",
+            "output": "albiorix-nirspec-prism.png",
+            "dataOutput": "albiorix-nirspec-prism.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2023-11-22",
+              "time": "02:09:15.912",
+              "sourceProduct": "jw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+              "pipeline": "2.0.1",
+              "crdsContext": "jwst_1535.pmap",
+              "archiveTargetName": "ALBIORIX",
+              "targetRaDegrees": 332.8931337325089,
+              "targetDecDegrees": -13.300640783798169,
+              "dataQualityPolicy": "Omit any nonzero DQ from plot; retain all rows and flags in CSV.",
+              "sourceType": "POINT",
+              "extractionCenterPixels": [
+                23,
+                26
+              ],
+              "quantity": "Calibrated extracted flux density; not author-reduced reflectance."
+            },
+            "source": "spectroscopy/jw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+            "sha256": "3ff215367bf5e9c53c12ffd964b413b2739be281803bb2368c14b320db3cd1f1",
+            "format": "jwst-x1d",
+            "fits": {
+              "targetName": "ALBIORIX",
+              "calibrationVersion": "2.0.1",
+              "crdsContext": "jwst_1535.pmap",
+              "observationDate": "2023-11-22"
+            },
+            "sampleCount": 941,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 0.6,
+              "maximum": 5.4,
+              "ticks": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "y": {
+              "label": "Aperture flux density (µJy)",
+              "minimum": 0,
+              "maximum": 50,
+              "ticks": [
+                0,
+                10,
+                20,
+                30,
+                40,
+                50
+              ]
+            }
+          }
+        ]
       }
     }
   ],
@@ -299,11 +399,38 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ad59b6008b9be596dfbda5e75c104e36ec403d2a000e23125fbf9d6faae7d562",
-      "bytes": 3484,
+      "sha256": "d63b65164603463b2a70848e8ba3814f7088644b68e6356a76a1c54e33ca4855",
+      "bytes": 4957,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-prism",
+      "path": "spectroscopy/jw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+      "catalog": "https://doi.org/10.17909/y22z-yt33",
+      "credit": "NASA/ESA/CSA JWST; STScI MAST; program 3716 team",
+      "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
+      "licenseEvidence": [
+        "https://outerspace.stsci.edu/display/MASTDOCS/Data+Use+and+Credits"
+      ],
+      "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
+      "redistribution": "Public science archive data with mission and observing-program credit.",
+      "sha256": "3ff215367bf5e9c53c12ffd964b413b2739be281803bb2368c14b320db3cd1f1",
+      "bytes": 270720,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/jw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o032_t008_nirspec_prism-clear_x1d.fits"
+      },
       "verificationOperations": []
     }
   ],
@@ -369,9 +496,76 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4749,
-          "sha256": "b4918f50d430bfddc68f35c9ba3222f9859273dd7215476c88e527aaca982d76",
+          "bytes": 6863,
+          "sha256": "d0f42a4ed7e0e708327a27852eb20476d71dfdd3e093ad7dd4d03cf2416fd120",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Albiorix · PRISM",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec PRISM · 2023-11-22. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. The combined archive product includes a dither reported to contain a background source; its flux may be contaminated."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Calibrated extracted flux density; not author-reduced reflectance.",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 0.6,
+            "maximum": 5.4,
+            "ticks": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "y": {
+            "label": "Aperture flux density (µJy)",
+            "minimum": 0,
+            "maximum": 50,
+            "ticks": [
+              0,
+              10,
+              20,
+              30,
+              40,
+              50
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-prism"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/albiorix/albiorix-nirspec-prism.png",
+          "bytes": 42694,
+          "sha256": "81812bd6605e984de77048f2471ea866918cff8009e84d854a9dcb4ba8d0dac7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/albiorix/albiorix-nirspec-prism.csv",
+          "bytes": 76334,
+          "sha256": "5d1c0d3c765afd87d9949cd61c97c8a921ebdf67984d57db119e096a63484063",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

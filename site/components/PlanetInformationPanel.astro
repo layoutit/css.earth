@@ -38,7 +38,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       {defaultChart && <details
         id={`${objectId}-charts`}
         class="planet-chart-switcher"
-        style="display: none;"
+        style={orderedCharts.some(chart => chart.visible) ? undefined : "display: none;"}
         data-active-chart={defaultChart.id}
         aria-labelledby={`${objectId}-charts-title`}
       >
@@ -92,6 +92,11 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                 height={chart.height}
                 alt={chart.alt}
               />
+              {chart.caption && <figcaption class="planet-chart-caption">
+                <p>{chart.caption}</p>
+                {chart.source?.url && <a href={chart.source.url} target="_blank" rel="noreferrer">Observation source</a>}
+                {chart.data && <a href={chart.data.src} download>{chart.data.label}</a>}
+              </figcaption>}
             </figure>
           ))}
         </div>

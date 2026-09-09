@@ -742,6 +742,20 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   margin: 0;
 }
 
+.planet-chart-caption {
+  color: var(--shell-text-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.planet-chart-caption p {
+  margin: 8px 0;
+}
+
+.planet-chart-caption a + a {
+  margin-left: 12px;
+}
+
 .planet-gallery {
   display: grid;
   gap: 14px;

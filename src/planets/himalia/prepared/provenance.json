@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aa9c329fc5caab15a0f6a75fe96fbe7fc1c58bd54aa892aad9133e8c67051fdf"
+    "sha256": "bf0a714e9965a9c6439bc53d85a8323ed928841d19e99e52b5f0fe2cb5734eef"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "71a85da5d8d407ad447b7b0bcd6448156899920febdab6e58197c0c384bbc051"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "02f3b52e8acce3bf6cd3cac21cabeca835867aacdffc3c59d3c0b32574b21c54",
+      "sha256": "2f2bc5e8e2dde29c18305fee9c6f785495fb63abc91202dfc837015db0c47acc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,7 +183,46 @@
             }
           ]
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "nirspec-g235m",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/himalia/himalia-nirspec-g235m.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec G235M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+            "caption": "JWST/NIRSpec G235M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+            "data": {
+              "src": "/scenes/himalia/himalia-nirspec-g235m.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-g235m",
+              "path": "../manifest.json",
+              "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits"
+            },
+            "visible": true
+          },
+          {
+            "id": "nirspec-g395m",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/himalia/himalia-nirspec-g395m.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec G395M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+            "caption": "JWST/NIRSpec G395M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+            "data": {
+              "src": "/scenes/himalia/himalia-nirspec-g395m.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-g395m",
+              "path": "../manifest.json",
+              "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits"
+            },
+            "visible": true
+          }
+        ],
         "resources": [
           {
             "label": "Cassini ISS / JPL",
@@ -223,6 +262,151 @@
             "credit": "Cassini ISS / Porco et al. (2003); JPL Solar System Dynamics"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "b9cddaa815a46896da9453d397619d1cda9def3c313f6a1616afb8072c78b4da",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/himalia/",
+        "charts": [
+          {
+            "kind": "observations",
+            "id": "nirspec-g235m",
+            "title": "Himalia · G235M",
+            "description": "JWST/NIRSpec G235M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+            "output": "himalia-nirspec-g235m.png",
+            "dataOutput": "himalia-nirspec-g235m.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec G235M",
+              "date": "2024-01-31",
+              "time": "16:18:49.599",
+              "sourceProduct": "jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+              "pipeline": "2.0.1",
+              "crdsContext": "jwst_1535.pmap",
+              "archiveTargetName": "HIMALIA",
+              "targetRaDegrees": 35.29486267069264,
+              "targetDecDegrees": 13.371665359081087,
+              "dataQualityPolicy": "Omit any nonzero DQ from plot; retain all rows and flags in CSV.",
+              "sourceType": "POINT",
+              "extractionCenterPixels": [
+                25,
+                26
+              ],
+              "quantity": "Calibrated extracted flux density; not author-reduced reflectance."
+            },
+            "source": "spectroscopy/jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+            "sha256": "9ad5cbbdfabd252908847c97984784f18133d22c31ed67feb2bc6c16f14cbc86",
+            "format": "jwst-x1d",
+            "fits": {
+              "targetName": "HIMALIA",
+              "calibrationVersion": "2.0.1",
+              "crdsContext": "jwst_1535.pmap",
+              "observationDate": "2024-01-31"
+            },
+            "sampleCount": 1425,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 1.6,
+              "maximum": 3.2,
+              "ticks": [
+                2,
+                2.5,
+                3
+              ]
+            },
+            "y": {
+              "label": "Aperture flux density (µJy)",
+              "minimum": 500,
+              "maximum": 3000,
+              "ticks": [
+                500,
+                1000,
+                1500,
+                2000,
+                2500,
+                3000
+              ]
+            }
+          },
+          {
+            "kind": "observations",
+            "id": "nirspec-g395m",
+            "title": "Himalia · G395M",
+            "description": "JWST/NIRSpec G395M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+            "output": "himalia-nirspec-g395m.png",
+            "dataOutput": "himalia-nirspec-g395m.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec G395M",
+              "date": "2024-01-31",
+              "time": "15:58:38.656",
+              "sourceProduct": "jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+              "pipeline": "2.0.1",
+              "crdsContext": "jwst_1535.pmap",
+              "archiveTargetName": "HIMALIA",
+              "targetRaDegrees": 35.293584942155164,
+              "targetDecDegrees": 13.371268322964251,
+              "dataQualityPolicy": "Omit any nonzero DQ from plot; retain all rows and flags in CSV.",
+              "sourceType": "POINT",
+              "extractionCenterPixels": [
+                26,
+                26
+              ],
+              "quantity": "Calibrated extracted flux density; not author-reduced reflectance."
+            },
+            "source": "spectroscopy/jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+            "sha256": "965f2f8579c36626509e10487d71b7addf932493c9b148a920b95d81f352c774",
+            "format": "jwst-x1d",
+            "fits": {
+              "targetName": "HIMALIA",
+              "calibrationVersion": "2.0.1",
+              "crdsContext": "jwst_1535.pmap",
+              "observationDate": "2024-01-31"
+            },
+            "sampleCount": 1341,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 2.8,
+              "maximum": 5.3,
+              "ticks": [
+                3,
+                3.5,
+                4,
+                4.5,
+                5
+              ]
+            },
+            "y": {
+              "label": "Aperture flux density (µJy)",
+              "minimum": 500,
+              "maximum": 2000,
+              "ticks": [
+                500,
+                1000,
+                1500,
+                2000
+              ]
+            }
+          }
+        ]
       }
     }
   ],
@@ -294,11 +478,65 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "02f3b52e8acce3bf6cd3cac21cabeca835867aacdffc3c59d3c0b32574b21c54",
-      "bytes": 3271,
+      "sha256": "2f2bc5e8e2dde29c18305fee9c6f785495fb63abc91202dfc837015db0c47acc",
+      "bytes": 6073,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-g235m",
+      "path": "spectroscopy/jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+      "catalog": "https://doi.org/10.17909/pwcf-c575",
+      "credit": "NASA/ESA/CSA JWST; STScI MAST; program 4028 team",
+      "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
+      "licenseEvidence": [
+        "https://outerspace.stsci.edu/display/MASTDOCS/Data+Use+and+Credits"
+      ],
+      "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
+      "redistribution": "Public science archive data with mission and observing-program credit.",
+      "sha256": "9ad5cbbdfabd252908847c97984784f18133d22c31ed67feb2bc6c16f14cbc86",
+      "bytes": 345600,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-g395m",
+      "path": "spectroscopy/jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+      "catalog": "https://doi.org/10.17909/pwcf-c575",
+      "credit": "NASA/ESA/CSA JWST; STScI MAST; program 4028 team",
+      "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
+      "licenseEvidence": [
+        "https://outerspace.stsci.edu/display/MASTDOCS/Data+Use+and+Credits"
+      ],
+      "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
+      "redistribution": "Public science archive data with mission and observing-program credit.",
+      "sha256": "965f2f8579c36626509e10487d71b7addf932493c9b148a920b95d81f352c774",
+      "bytes": 334080,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits"
+      },
       "verificationOperations": []
     }
   ],
@@ -364,9 +602,139 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5321,
-          "sha256": "505c20642b0e4c8e1b7c594addf6d5dccf9d099da902084030c4c9bbb99805bc",
+          "bytes": 8793,
+          "sha256": "768306dda94914d422a0586d73e6a56885019431931b51a08e3f5e56887e5157",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Himalia · G235M",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec G235M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Calibrated extracted flux density; not author-reduced reflectance.",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 1.6,
+            "maximum": 3.2,
+            "ticks": [
+              2,
+              2.5,
+              3
+            ]
+          },
+          "y": {
+            "label": "Aperture flux density (µJy)",
+            "minimum": 500,
+            "maximum": 3000,
+            "ticks": [
+              500,
+              1000,
+              1500,
+              2000,
+              2500,
+              3000
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-g235m"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/himalia/himalia-nirspec-g235m.png",
+          "bytes": 52385,
+          "sha256": "d8782ec4d302b335bb47582b5879fde970178bee41e2cb03e71664aa130196f0",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/himalia/himalia-nirspec-g235m.csv",
+          "bytes": 113450,
+          "sha256": "d04d66846be004200d712565b274c9b2037f8546794a28f6d5dc47dd3bf0a6fc",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:1",
+      "label": "Himalia · G395M",
+      "recipe": "charts",
+      "selector": "/charts/1",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec G395M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Calibrated extracted flux density; not author-reduced reflectance.",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 2.8,
+            "maximum": 5.3,
+            "ticks": [
+              3,
+              3.5,
+              4,
+              4.5,
+              5
+            ]
+          },
+          "y": {
+            "label": "Aperture flux density (µJy)",
+            "minimum": 500,
+            "maximum": 2000,
+            "ticks": [
+              500,
+              1000,
+              1500,
+              2000
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-g395m"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/himalia/himalia-nirspec-g395m.png",
+          "bytes": 46524,
+          "sha256": "854aadba1595049be8fa07b50330276d410a79a87a5d4fb04ea4bf199242efe9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/himalia/himalia-nirspec-g395m.csv",
+          "bytes": 105741,
+          "sha256": "867fefdb4d5a18e772d320f856eab1e172bcced9ed62f9a6ff0405abb7337716",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

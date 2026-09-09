@@ -215,7 +215,7 @@
         "Uranus|III",
         "Uranus|V"
       ],
-      "state": "draft",
+      "state": "merged",
       "owner": "Moons",
       "branch": "feat/moons-spacecraft-mapping",
       "baseCommit": "ef07fac2d3208e201dafc626374b30ed4644f561",
@@ -314,8 +314,10 @@
         ],
         "carriedTo": "Unscheduled B3 source-research carry-forward queue; no new scene or mapped coverage promised."
       },
-      "draft": true,
-      "pullRequest": "https://github.com/layoutit/cssEarth/pull/67"
+      "draft": false,
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/67",
+      "mergedAt": "2026-09-09T13:24:50Z",
+      "mergeCommit": "c016fd31d711e204bab4521c82c7e2e192f6e0df"
     },
     {
       "id": "B4",
@@ -348,8 +350,35 @@
         "Saturn|XXXII",
         "Saturn|XXXIII"
       ],
-      "state": "planned",
-      "owner": "Moons"
+      "state": "in-progress",
+      "owner": "Moons",
+      "branch": "feat/moons-observation-charts",
+      "baseCommit": "c016fd31d711e204bab4521c82c7e2e192f6e0df",
+      "report": "B4-OBSERVATION-CHARTS.md",
+      "progress": {
+        "sourceIntakeReviewedBodies": 9,
+        "authorNumericTablesPinnedBodies": [
+          "Epimetheus",
+          "Telesto",
+          "Pandora",
+          "Ymir",
+          "Methone",
+          "Pallene"
+        ],
+        "archiveExtractionBodies": [
+          "Himalia",
+          "Albiorix",
+          "Siarnaq"
+        ],
+        "preparedBodies": [
+          "Epimetheus",
+          "Telesto",
+          "Pandora",
+          "Pallene"
+        ],
+        "qualifiedBodies": 0,
+        "aggregateReady": false
+      }
     }
   ],
   "plannedBodies": 60,

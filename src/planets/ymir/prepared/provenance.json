@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "abca90e41b09346f63a5d70a64b7932f4983b3c06b540059d3b7639e18411f00"
+    "sha256": "a4c88dc1d02c46bb95a5446c9264c5a3521d4aa6221cbb54928677f4f4da21bf"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "71a85da5d8d407ad447b7b0bcd6448156899920febdab6e58197c0c384bbc051"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2f275a6804c42c24effd05adc5102b3993bceb1382150ad987f7546b0297beca",
+      "sha256": "4c82f8a266519f80244a1b94519c9a2809948ba95fb170b33433e94e7c2e4a8a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -189,7 +189,84 @@
             }
           ]
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "218ot_ymicol029",
+            "titleKey": "measuredLightCurve",
+            "src": "/scenes/ymir/ymir-218ot_ymicol029.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "Cassini ISS clear-filter measurements · 2015-07-11 · Sun–moon–spacecraft angle 29°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_218OT_YMICOL029; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "caption": "Cassini ISS clear-filter measurements · 2015-07-11 · Sun–moon–spacecraft angle 29°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_218OT_YMICOL029; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "data": {
+              "src": "/scenes/ymir/ymir-218ot_ymicol029.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "measured-observations",
+              "path": "../manifest.json",
+              "url": "https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt"
+            },
+            "visible": true
+          },
+          {
+            "id": "165ot_ymirota065",
+            "titleKey": "measuredLightCurve",
+            "src": "/scenes/ymir/ymir-165ot_ymirota065.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "Cassini ISS clear-filter measurements · 2012-05-01 · Sun–moon–spacecraft angle 65°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_165OT_YMIROTA065; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "caption": "Cassini ISS clear-filter measurements · 2012-05-01 · Sun–moon–spacecraft angle 65°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_165OT_YMIROTA065; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "data": {
+              "src": "/scenes/ymir/ymir-165ot_ymirota065.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "measured-observations",
+              "path": "../manifest.json",
+              "url": "https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt"
+            },
+            "visible": true
+          },
+          {
+            "id": "165ot_ymirotb065",
+            "titleKey": "measuredLightCurve",
+            "src": "/scenes/ymir/ymir-165ot_ymirotb065.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "Cassini ISS clear-filter measurements · 2012-05-03 · Sun–moon–spacecraft angle 63°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_165OT_YMIROTB065; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "caption": "Cassini ISS clear-filter measurements · 2012-05-03 · Sun–moon–spacecraft angle 63°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_165OT_YMIROTB065; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "data": {
+              "src": "/scenes/ymir/ymir-165ot_ymirotb065.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "measured-observations",
+              "path": "../manifest.json",
+              "url": "https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt"
+            },
+            "visible": true
+          },
+          {
+            "id": "168ot_ymirot095",
+            "titleKey": "measuredLightCurve",
+            "src": "/scenes/ymir/ymir-168ot_ymirot095.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "Cassini ISS clear-filter measurements · 2012-06-22/23 · Sun–moon–spacecraft angle 95°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_168OT_YMIROT095; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "caption": "Cassini ISS clear-filter measurements · 2012-06-22/23 · Sun–moon–spacecraft angle 95°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_168OT_YMIROT095; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "data": {
+              "src": "/scenes/ymir/ymir-168ot_ymirot095.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "measured-observations",
+              "path": "../manifest.json",
+              "url": "https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt"
+            },
+            "visible": true
+          }
+        ],
         "resources": [
           {
             "label": "Denk et al.",
@@ -223,6 +300,228 @@
             "credit": "Denk et al.; Cassini ISS; NEOWISE"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "4e7421d9ac3d4698d3f6adec69916441102da7c7a231b2337c2b6bb155e5cfc6",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/ymir/",
+        "charts": [
+          {
+            "kind": "observations",
+            "id": "218ot_ymicol029",
+            "title": "Ymir · 29° phase angle",
+            "description": "Cassini ISS clear-filter measurements · 2015-07-11 · Sun–moon–spacecraft angle 29°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_218OT_YMICOL029; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "output": "ymir-218ot_ymicol029.png",
+            "dataOutput": "ymir-218ot_ymicol029.csv",
+            "metadata": {
+              "instrument": "Cassini ISS NAC clear filters",
+              "sequence": "ISS_218OT_YMICOL029",
+              "date": "2015-07-11",
+              "phaseAngleDegrees": 29,
+              "foldingPeriodHours": 11.92,
+              "foldingPeriodUncertaintyHours": 0.03,
+              "sourcePage": "https://tilmanndenk.de/outersaturnianmoons/ymir/#4"
+            },
+            "source": "photometry/619_Ymi_4_LC_Paper1.txt",
+            "sha256": "246f862997171d47ec6e132cd7bf6e024e316fcc289aaa5bbc2b08d66d8ee4d2",
+            "format": "sectioned-csv",
+            "section": "ISS_218OT_YMICOL029",
+            "sampleCount": 20,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "count": 2
+            },
+            "uncertainty": "not-released",
+            "x": {
+              "label": "Rotational phase (cycles)",
+              "minimum": 0,
+              "maximum": 1,
+              "ticks": [
+                0,
+                0.25,
+                0.5,
+                0.75,
+                1
+              ]
+            },
+            "y": {
+              "label": "Relative magnitude (mag)",
+              "minimum": 0,
+              "maximum": 1,
+              "ticks": [
+                0,
+                0.5,
+                1
+              ],
+              "reverse": true
+            }
+          },
+          {
+            "kind": "observations",
+            "id": "165ot_ymirota065",
+            "title": "Ymir · 65° phase angle",
+            "description": "Cassini ISS clear-filter measurements · 2012-05-01 · Sun–moon–spacecraft angle 65°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_165OT_YMIROTA065; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "output": "ymir-165ot_ymirota065.png",
+            "dataOutput": "ymir-165ot_ymirota065.csv",
+            "metadata": {
+              "instrument": "Cassini ISS NAC clear filters",
+              "sequence": "ISS_165OT_YMIROTA065",
+              "date": "2012-05-01",
+              "phaseAngleDegrees": 65,
+              "foldingPeriodHours": 11.92,
+              "foldingPeriodUncertaintyHours": 0.03,
+              "sourcePage": "https://tilmanndenk.de/outersaturnianmoons/ymir/#4"
+            },
+            "source": "photometry/619_Ymi_4_LC_Paper1.txt",
+            "sha256": "246f862997171d47ec6e132cd7bf6e024e316fcc289aaa5bbc2b08d66d8ee4d2",
+            "format": "sectioned-csv",
+            "section": "ISS_165OT_YMIROTA065",
+            "sampleCount": 94,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "count": 2
+            },
+            "uncertainty": "not-released",
+            "x": {
+              "label": "Rotational phase (cycles)",
+              "minimum": 0,
+              "maximum": 1,
+              "ticks": [
+                0,
+                0.25,
+                0.5,
+                0.75,
+                1
+              ]
+            },
+            "y": {
+              "label": "Relative magnitude (mag)",
+              "minimum": 0,
+              "maximum": 2,
+              "ticks": [
+                0,
+                0.5,
+                1,
+                1.5,
+                2
+              ],
+              "reverse": true
+            }
+          },
+          {
+            "kind": "observations",
+            "id": "165ot_ymirotb065",
+            "title": "Ymir · 63° phase angle",
+            "description": "Cassini ISS clear-filter measurements · 2012-05-03 · Sun–moon–spacecraft angle 63°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_165OT_YMIROTB065; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "output": "ymir-165ot_ymirotb065.png",
+            "dataOutput": "ymir-165ot_ymirotb065.csv",
+            "metadata": {
+              "instrument": "Cassini ISS NAC clear filters",
+              "sequence": "ISS_165OT_YMIROTB065",
+              "date": "2012-05-03",
+              "phaseAngleDegrees": 63,
+              "foldingPeriodHours": 11.92,
+              "foldingPeriodUncertaintyHours": 0.03,
+              "sourcePage": "https://tilmanndenk.de/outersaturnianmoons/ymir/#4"
+            },
+            "source": "photometry/619_Ymi_4_LC_Paper1.txt",
+            "sha256": "246f862997171d47ec6e132cd7bf6e024e316fcc289aaa5bbc2b08d66d8ee4d2",
+            "format": "sectioned-csv",
+            "section": "ISS_165OT_YMIROTB065",
+            "sampleCount": 84,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "count": 2
+            },
+            "uncertainty": "not-released",
+            "x": {
+              "label": "Rotational phase (cycles)",
+              "minimum": 0,
+              "maximum": 1,
+              "ticks": [
+                0,
+                0.25,
+                0.5,
+                0.75,
+                1
+              ]
+            },
+            "y": {
+              "label": "Relative magnitude (mag)",
+              "minimum": 0,
+              "maximum": 2,
+              "ticks": [
+                0,
+                0.5,
+                1,
+                1.5,
+                2
+              ],
+              "reverse": true
+            }
+          },
+          {
+            "kind": "observations",
+            "id": "168ot_ymirot095",
+            "title": "Ymir · 95° phase angle",
+            "description": "Cassini ISS clear-filter measurements · 2012-06-22/23 · Sun–moon–spacecraft angle 95°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_168OT_YMIROT095; its magnitude zero point is relative, not an absolute brightness or a surface map.",
+            "output": "ymir-168ot_ymirot095.png",
+            "dataOutput": "ymir-168ot_ymirot095.csv",
+            "metadata": {
+              "instrument": "Cassini ISS NAC clear filters",
+              "sequence": "ISS_168OT_YMIROT095",
+              "date": "2012-06-22/23",
+              "phaseAngleDegrees": 95,
+              "foldingPeriodHours": 11.92,
+              "foldingPeriodUncertaintyHours": 0.03,
+              "sourcePage": "https://tilmanndenk.de/outersaturnianmoons/ymir/#4"
+            },
+            "source": "photometry/619_Ymi_4_LC_Paper1.txt",
+            "sha256": "246f862997171d47ec6e132cd7bf6e024e316fcc289aaa5bbc2b08d66d8ee4d2",
+            "format": "sectioned-csv",
+            "section": "ISS_168OT_YMIROT095",
+            "sampleCount": 299,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "count": 2
+            },
+            "uncertainty": "not-released",
+            "x": {
+              "label": "Rotational phase (cycles)",
+              "minimum": 0,
+              "maximum": 1,
+              "ticks": [
+                0,
+                0.25,
+                0.5,
+                0.75,
+                1
+              ]
+            },
+            "y": {
+              "label": "Relative magnitude (mag)",
+              "minimum": 0,
+              "maximum": 2.5,
+              "ticks": [
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5
+              ],
+              "reverse": true
+            }
+          }
+        ]
       }
     }
   ],
@@ -292,11 +591,38 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2f275a6804c42c24effd05adc5102b3993bceb1382150ad987f7546b0297beca",
-      "bytes": 3208,
+      "sha256": "4c82f8a266519f80244a1b94519c9a2809948ba95fb170b33433e94e7c2e4a8a",
+      "bytes": 8234,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "measured-observations",
+      "path": "photometry/619_Ymi_4_LC_Paper1.txt",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt",
+      "catalog": "https://tilmanndenk.de/outersaturnianmoons/ymir/#4",
+      "credit": "Tilmann Denk; Denk and Mottola (2019); NASA/JPL/SSI",
+      "license": "Author-released numerical scientific observations; retain attribution.",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/ymir/#4"
+      ],
+      "acquisition": "Download the unmodified author numeric release.",
+      "redistribution": "Preserve scientific attribution and source qualifications.",
+      "sha256": "246f862997171d47ec6e132cd7bf6e024e316fcc289aaa5bbc2b08d66d8ee4d2",
+      "bytes": 7244,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photometry/619_Ymi_4_LC_Paper1.txt",
+        "url": "https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt"
+      },
       "verificationOperations": []
     }
   ],
@@ -362,9 +688,276 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3280,
-          "sha256": "be41e799fba39b24226324c60ab936b6336fb08b3ea554f289b054ea07ec8e0f",
+          "bytes": 9109,
+          "sha256": "8d6a46b62a7099603d6d980be06f11a628342d13876e9ea627e546e0b76a598e",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Ymir · 29° phase angle",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "Cassini ISS clear-filter measurements · 2015-07-11 · Sun–moon–spacecraft angle 29°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_218OT_YMICOL029; its magnitude zero point is relative, not an absolute brightness or a surface map."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Relative magnitude (mag)",
+        "uncertainty": "not-released",
+        "unitScale": 1,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Rotational phase (cycles)",
+            "minimum": 0,
+            "maximum": 1,
+            "ticks": [
+              0,
+              0.25,
+              0.5,
+              0.75,
+              1
+            ]
+          },
+          "y": {
+            "label": "Relative magnitude (mag)",
+            "minimum": 0,
+            "maximum": 1,
+            "ticks": [
+              0,
+              0.5,
+              1
+            ],
+            "reverse": true
+          }
+        }
+      },
+      "inputs": [
+        "measured-observations"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ymir/ymir-218ot_ymicol029.png",
+          "bytes": 32087,
+          "sha256": "c065a6611b9985275daa67bac52573863d29c88a9b565d841c45e757bc7532b6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ymir/ymir-218ot_ymicol029.csv",
+          "bytes": 686,
+          "sha256": "07480f2ec4a061a9510f8dbea8d3739c835fa1d1025e8c30eecb1a7b20225127",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:1",
+      "label": "Ymir · 65° phase angle",
+      "recipe": "charts",
+      "selector": "/charts/1",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "Cassini ISS clear-filter measurements · 2012-05-01 · Sun–moon–spacecraft angle 65°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_165OT_YMIROTA065; its magnitude zero point is relative, not an absolute brightness or a surface map."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Relative magnitude (mag)",
+        "uncertainty": "not-released",
+        "unitScale": 1,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Rotational phase (cycles)",
+            "minimum": 0,
+            "maximum": 1,
+            "ticks": [
+              0,
+              0.25,
+              0.5,
+              0.75,
+              1
+            ]
+          },
+          "y": {
+            "label": "Relative magnitude (mag)",
+            "minimum": 0,
+            "maximum": 2,
+            "ticks": [
+              0,
+              0.5,
+              1,
+              1.5,
+              2
+            ],
+            "reverse": true
+          }
+        }
+      },
+      "inputs": [
+        "measured-observations"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ymir/ymir-165ot_ymirota065.png",
+          "bytes": 41661,
+          "sha256": "a543d654f0580aa1c4dbed579efce015ae7f43e74108bf6a4fd42e94a763d131",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ymir/ymir-165ot_ymirota065.csv",
+          "bytes": 2893,
+          "sha256": "6784bf4de3c9a36051d8dd5cf5b8f774b1177075b045521864591555b85a3807",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:2",
+      "label": "Ymir · 63° phase angle",
+      "recipe": "charts",
+      "selector": "/charts/2",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "Cassini ISS clear-filter measurements · 2012-05-03 · Sun–moon–spacecraft angle 63°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_165OT_YMIROTB065; its magnitude zero point is relative, not an absolute brightness or a surface map."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Relative magnitude (mag)",
+        "uncertainty": "not-released",
+        "unitScale": 1,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Rotational phase (cycles)",
+            "minimum": 0,
+            "maximum": 1,
+            "ticks": [
+              0,
+              0.25,
+              0.5,
+              0.75,
+              1
+            ]
+          },
+          "y": {
+            "label": "Relative magnitude (mag)",
+            "minimum": 0,
+            "maximum": 2,
+            "ticks": [
+              0,
+              0.5,
+              1,
+              1.5,
+              2
+            ],
+            "reverse": true
+          }
+        }
+      },
+      "inputs": [
+        "measured-observations"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ymir/ymir-165ot_ymirotb065.png",
+          "bytes": 39830,
+          "sha256": "e4d30d6946a4cb5d5e60be098c3cf7686ace69779e214fd3b3c332b6bf23409b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ymir/ymir-165ot_ymirotb065.csv",
+          "bytes": 2603,
+          "sha256": "9438025952dd1b026550b1855113b646993fe3eccea7633eb051758fa0088aeb",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:3",
+      "label": "Ymir · 95° phase angle",
+      "recipe": "charts",
+      "selector": "/charts/3",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "Cassini ISS clear-filter measurements · 2012-06-22/23 · Sun–moon–spacecraft angle 95°. Relative magnitude versus rotational phase, folded by the authors; smaller magnitudes are brighter. The released table has no per-point uncertainties. Sequence ISS_168OT_YMIROT095; its magnitude zero point is relative, not an absolute brightness or a surface map."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Relative magnitude (mag)",
+        "uncertainty": "not-released",
+        "unitScale": 1,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Rotational phase (cycles)",
+            "minimum": 0,
+            "maximum": 1,
+            "ticks": [
+              0,
+              0.25,
+              0.5,
+              0.75,
+              1
+            ]
+          },
+          "y": {
+            "label": "Relative magnitude (mag)",
+            "minimum": 0,
+            "maximum": 2.5,
+            "ticks": [
+              0,
+              0.5,
+              1,
+              1.5,
+              2,
+              2.5
+            ],
+            "reverse": true
+          }
+        }
+      },
+      "inputs": [
+        "measured-observations"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ymir/ymir-168ot_ymirot095.png",
+          "bytes": 56967,
+          "sha256": "aee72178ead6983aab2c468d9952fe9dd70ab05500191e217bd54deaca5a7bfb",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ymir/ymir-168ot_ymirot095.csv",
+          "bytes": 9197,
+          "sha256": "8f891cda2f76ed32ab5150c21eeed86288d700b7df59b15c163b45bf5f42ef9d",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

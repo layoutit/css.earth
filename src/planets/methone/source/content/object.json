@@ -76,7 +76,27 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "vims-spectrum",
+      "titleKey": "measuredSpectrum",
+      "src": "/scenes/methone/methone-vims-spectrum.png",
+      "width": 1080,
+      "height": 696,
+      "alt": "Cassini VIMS · 2012-05-20 · about 58° phase angle. Mean disk-integrated spectrum from five cubes, re-normalized by Hedman et al. (2024) to a dimensionless brightness coefficient. Bars show the released 1σ statistical errors. Three channel gaps follow the author notebook; omitted rows remain in the CSV. This model-normalized coefficient is not absolute albedo or a spatial composition map.",
+      "caption": "Cassini VIMS · 2012-05-20 · about 58° phase angle. Mean disk-integrated spectrum from five cubes, re-normalized by Hedman et al. (2024) to a dimensionless brightness coefficient. Bars show the released 1σ statistical errors. Three channel gaps follow the author notebook; omitted rows remain in the CSV. This model-normalized coefficient is not absolute albedo or a spatial composition map.",
+      "data": {
+        "src": "/scenes/methone/methone-vims-spectrum.csv",
+        "label": "Measurements (CSV)"
+      },
+      "source": {
+        "id": "measured-observations",
+        "path": "../manifest.json",
+        "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/methonespecplot2_tab_011224.txt"
+      },
+      "visible": true
+    }
+  ],
   "resources": [
     {
       "label": "NASA",

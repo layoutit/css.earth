@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "94647aee6c7334fe012da24dbb2fb3c31b8b78dd2242b752b282f4f970e7510a"
+    "sha256": "a7f0f6ad08dcdea467e00c5a489a6654f75f561a8b0374dc2fef87af5f292094"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "71a85da5d8d407ad447b7b0bcd6448156899920febdab6e58197c0c384bbc051"
   },
   "recipes": [
     {
@@ -243,7 +243,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cd134626d71969be4a809a7d6c30772d843559485ca124d585c5cb6a06ee0c59",
+      "sha256": "01a18791e18a8f2404277d73c9319679b6ef99fc2d0fc1746d50172e9ab9832b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -364,7 +364,46 @@
             }
           ]
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "nirspec-dither-1",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/telesto/telesto-nirspec-dither-1.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec · 2022-11-10, 12:04–12:25 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "caption": "JWST/NIRSpec · 2022-11-10, 12:04–12:25 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "data": {
+              "src": "/scenes/telesto/telesto-nirspec-dither-1.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-dither-1",
+              "path": "../manifest.json",
+              "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Telestoflux_dither1.csv"
+            },
+            "visible": true
+          },
+          {
+            "id": "nirspec-dither-2",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/telesto/telesto-nirspec-dither-2.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec · 2022-11-10, 12:04–12:25 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "caption": "JWST/NIRSpec · 2022-11-10, 12:04–12:25 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "data": {
+              "src": "/scenes/telesto/telesto-nirspec-dither-2.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-dither-2",
+              "path": "../manifest.json",
+              "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Telestoflux_dither2.csv"
+            },
+            "visible": true
+          }
+        ],
         "resources": [
           {
             "label": "NASA",
@@ -398,6 +437,133 @@
             "credit": "Vendored JPL physical and orbital data"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "cdd335873869132e44659d940815091acd7a25aa9a95574472237f2c38bd5648",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/telesto/",
+        "charts": [
+          {
+            "kind": "observations",
+            "id": "nirspec-dither-1",
+            "title": "Telesto · dither 1",
+            "description": "JWST/NIRSpec · 2022-11-10, 12:04–12:25 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "output": "telesto-nirspec-dither-1.png",
+            "dataOutput": "telesto-nirspec-dither-1.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2022-11-10",
+              "observingWindow": "12:04–12:25 UT",
+              "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+              "dither": 1,
+              "sourceUnits": {
+                "x": "µm",
+                "y": "Jy",
+                "error": "Jy"
+              },
+              "doi": "10.1029/2023JE008236"
+            },
+            "source": "spectroscopy/JW1247_NIRSpec_Telestoflux_dither1.csv",
+            "sha256": "a96ec148764c959d7603074832979ec2269bbb60fa6f052d528da40ae12a7afa",
+            "format": "csv",
+            "header": "Wavelength,Flux (Jy),Error (Jy)",
+            "sampleCount": 860,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 0.5,
+              "maximum": 5,
+              "ticks": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "y": {
+              "label": "Flux density (µJy)",
+              "minimum": -1000,
+              "maximum": 1000,
+              "ticks": [
+                -1000,
+                -500,
+                0,
+                500,
+                1000
+              ]
+            }
+          },
+          {
+            "kind": "observations",
+            "id": "nirspec-dither-2",
+            "title": "Telesto · dither 2",
+            "description": "JWST/NIRSpec · 2022-11-10, 12:04–12:25 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "output": "telesto-nirspec-dither-2.png",
+            "dataOutput": "telesto-nirspec-dither-2.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2022-11-10",
+              "observingWindow": "12:04–12:25 UT",
+              "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+              "dither": 2,
+              "sourceUnits": {
+                "x": "µm",
+                "y": "Jy",
+                "error": "Jy"
+              },
+              "doi": "10.1029/2023JE008236"
+            },
+            "source": "spectroscopy/JW1247_NIRSpec_Telestoflux_dither2.csv",
+            "sha256": "fd2823d0b6256542c2f5c99138533245b9729b525180247505693957d1f597fd",
+            "format": "csv",
+            "header": "Wavelength,Flux (Jy),Error (Jy)",
+            "sampleCount": 860,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 0.5,
+              "maximum": 5,
+              "ticks": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "y": {
+              "label": "Flux density (µJy)",
+              "minimum": -100,
+              "maximum": 300,
+              "ticks": [
+                -100,
+                0,
+                100,
+                200,
+                300
+              ]
+            }
+          }
+        ]
       }
     }
   ],
@@ -819,11 +985,69 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6c9fea9e47518c5f066705072ded879b54c8024f427d600a38bce246d29c3000",
-      "bytes": 5256,
+      "sha256": "01a18791e18a8f2404277d73c9319679b6ef99fc2d0fc1746d50172e9ab9832b",
+      "bytes": 8393,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-dither-1",
+      "path": "spectroscopy/JW1247_NIRSpec_Telestoflux_dither1.csv",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Telestoflux_dither1.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "sha256": "a96ec148764c959d7603074832979ec2269bbb60fa6f052d528da40ae12a7afa",
+      "bytes": 55317,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/JW1247_NIRSpec_Telestoflux_dither1.csv",
+        "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Telestoflux_dither1.csv"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-dither-2",
+      "path": "spectroscopy/JW1247_NIRSpec_Telestoflux_dither2.csv",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Telestoflux_dither2.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "sha256": "fd2823d0b6256542c2f5c99138533245b9729b525180247505693957d1f597fd",
+      "bytes": 55342,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/JW1247_NIRSpec_Telestoflux_dither2.csv",
+        "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Telestoflux_dither2.csv"
+      },
       "verificationOperations": []
     }
   ],
@@ -938,9 +1162,141 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5321,
-          "sha256": "1608c36860abb25571ce529c26671a3e155b9aa0249617a1a61eb0bd09c1d94f",
+          "bytes": 8966,
+          "sha256": "f26b799baa1c229a25f005c14a3cf5e803731248f38e9ccb05d0a610563a39d4",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Telesto · dither 1",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec · 2022-11-10, 12:04–12:25 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Flux density (µJy)",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 0.5,
+            "maximum": 5,
+            "ticks": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "y": {
+            "label": "Flux density (µJy)",
+            "minimum": -1000,
+            "maximum": 1000,
+            "ticks": [
+              -1000,
+              -500,
+              0,
+              500,
+              1000
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-dither-1"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/telesto/telesto-nirspec-dither-1.png",
+          "bytes": 38678,
+          "sha256": "ebdd94fb1123a92396579565c417f6c625192ea45f197d8636a05374fb5d8602",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/telesto/telesto-nirspec-dither-1.csv",
+          "bytes": 65621,
+          "sha256": "a8af74b9f792d3fd76fbd77f1af0b7e9a011b8577294425bbfb36033540269e1",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:1",
+      "label": "Telesto · dither 2",
+      "recipe": "charts",
+      "selector": "/charts/1",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec · 2022-11-10, 12:04–12:25 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Flux density (µJy)",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 0.5,
+            "maximum": 5,
+            "ticks": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "y": {
+            "label": "Flux density (µJy)",
+            "minimum": -100,
+            "maximum": 300,
+            "ticks": [
+              -100,
+              0,
+              100,
+              200,
+              300
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-dither-2"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/telesto/telesto-nirspec-dither-2.png",
+          "bytes": 50762,
+          "sha256": "e2eab1122d7d93f308f9fd6e067adeb77b23bad7c1d50474c7d47f6094d540b5",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/telesto/telesto-nirspec-dither-2.csv",
+          "bytes": 65333,
+          "sha256": "46dce4ef0fdae27694f53dc1f426f68d05efcc39835fead8062078f3d37d8981",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

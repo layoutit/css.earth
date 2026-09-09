@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/pandora/",
+  "charts": [
+    {
+      "kind": "observations",
+      "id": "nirspec-dither-1",
+      "title": "Pandora · dither 1",
+      "description": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT, in the Epimetheus pointing. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+      "output": "pandora-nirspec-dither-1.png",
+      "dataOutput": "pandora-nirspec-dither-1.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2022-11-08",
+        "observingWindow": "22:15–22:29 UT, in the Epimetheus pointing",
+        "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "dither": 1,
+        "sourceUnits": {
+          "x": "µm",
+          "y": "Jy",
+          "error": "Jy"
+        },
+        "doi": "10.1029/2023JE008236"
+      },
+      "source": "spectroscopy/JW1247_NIRSpec_Pandoraflux_dither1.csv",
+      "sha256": "1ee81d367d7afa232058b3970af604e7bb309cc130c119d6757c241ff4fa6b8b",
+      "format": "csv",
+      "header": "Wavelength,Flux (Jy),Error (Jy)",
+      "sampleCount": 700,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1.5,
+        "maximum": 5,
+        "ticks": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "y": {
+        "label": "Flux density (µJy)",
+        "minimum": -4000,
+        "maximum": 2000,
+        "ticks": [
+          -4000,
+          -2000,
+          0,
+          2000
+        ]
+      }
+    }
+  ]
+}

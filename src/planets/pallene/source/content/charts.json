@@ -1,0 +1,232 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/pallene/",
+  "charts": [
+    {
+      "kind": "observations",
+      "id": "nirspec-dither-1-detail",
+      "title": "Pallene · dither 1 detail",
+      "description": "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+      "output": "pallene-nirspec-dither-1-detail.png",
+      "dataOutput": "pallene-nirspec-dither-1-detail.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2023-06-20",
+        "observingWindow": "01:14–01:35 UT",
+        "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "dither": 1,
+        "sourceUnits": {
+          "x": "µm",
+          "y": "Jy",
+          "error": "Jy"
+        },
+        "doi": "10.1029/2023JE008236"
+      },
+      "source": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither1.csv",
+      "sha256": "5176fbd8ac45de0e1faa9eb30bd2fa4bf11c7b4edd646be550f691aa82dc1500",
+      "format": "csv",
+      "header": "Wavelength,Flux (Jy),Error (Jy)",
+      "sampleCount": 860,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1.3,
+        "maximum": 2.4,
+        "ticks": [
+          1.5,
+          2,
+          2.4
+        ]
+      },
+      "y": {
+        "label": "Flux density (µJy)",
+        "minimum": -5,
+        "maximum": 10,
+        "ticks": [
+          -5,
+          0,
+          5,
+          10
+        ]
+      }
+    },
+    {
+      "kind": "observations",
+      "id": "nirspec-dither-1",
+      "title": "Pallene · dither 1",
+      "description": "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+      "output": "pallene-nirspec-dither-1.png",
+      "dataOutput": "pallene-nirspec-dither-1.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2023-06-20",
+        "observingWindow": "01:14–01:35 UT",
+        "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "dither": 1,
+        "sourceUnits": {
+          "x": "µm",
+          "y": "Jy",
+          "error": "Jy"
+        },
+        "doi": "10.1029/2023JE008236"
+      },
+      "source": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither1.csv",
+      "sha256": "5176fbd8ac45de0e1faa9eb30bd2fa4bf11c7b4edd646be550f691aa82dc1500",
+      "format": "csv",
+      "header": "Wavelength,Flux (Jy),Error (Jy)",
+      "sampleCount": 860,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0.5,
+        "maximum": 5,
+        "ticks": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "y": {
+        "label": "Flux density (µJy)",
+        "minimum": -600,
+        "maximum": 200,
+        "ticks": [
+          -600,
+          -400,
+          -200,
+          0,
+          200
+        ]
+      }
+    },
+    {
+      "kind": "observations",
+      "id": "nirspec-dither-2-detail",
+      "title": "Pallene · dither 2 detail",
+      "description": "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+      "output": "pallene-nirspec-dither-2-detail.png",
+      "dataOutput": "pallene-nirspec-dither-2-detail.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2023-06-20",
+        "observingWindow": "01:14–01:35 UT",
+        "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "dither": 2,
+        "sourceUnits": {
+          "x": "µm",
+          "y": "Jy",
+          "error": "Jy"
+        },
+        "doi": "10.1029/2023JE008236"
+      },
+      "source": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither2.csv",
+      "sha256": "8d4765ccadec351f5fc17362c035f5e11044db4849b53aa3064e530280486ffe",
+      "format": "csv",
+      "header": "Wavelength,Flux (Jy),Error (Jy)",
+      "sampleCount": 860,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1.3,
+        "maximum": 2.4,
+        "ticks": [
+          1.5,
+          2,
+          2.4
+        ]
+      },
+      "y": {
+        "label": "Flux density (µJy)",
+        "minimum": -5,
+        "maximum": 10,
+        "ticks": [
+          -5,
+          0,
+          5,
+          10
+        ]
+      }
+    },
+    {
+      "kind": "observations",
+      "id": "nirspec-dither-2",
+      "title": "Pallene · dither 2",
+      "description": "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+      "output": "pallene-nirspec-dither-2.png",
+      "dataOutput": "pallene-nirspec-dither-2.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec PRISM",
+        "date": "2023-06-20",
+        "observingWindow": "01:14–01:35 UT",
+        "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "dither": 2,
+        "sourceUnits": {
+          "x": "µm",
+          "y": "Jy",
+          "error": "Jy"
+        },
+        "doi": "10.1029/2023JE008236"
+      },
+      "source": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither2.csv",
+      "sha256": "8d4765ccadec351f5fc17362c035f5e11044db4849b53aa3064e530280486ffe",
+      "format": "csv",
+      "header": "Wavelength,Flux (Jy),Error (Jy)",
+      "sampleCount": 860,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0.5,
+        "maximum": 5,
+        "ticks": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "y": {
+        "label": "Flux density (µJy)",
+        "minimum": -1000,
+        "maximum": 1000,
+        "ticks": [
+          -1000,
+          -500,
+          0,
+          500,
+          1000
+        ]
+      }
+    }
+  ]
+}

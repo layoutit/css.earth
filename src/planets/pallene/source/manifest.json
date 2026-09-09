@@ -123,13 +123,53 @@
         ],
         "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.LBL"
       }
+    },
+    {
+      "id": "nirspec-dither-1",
+      "path": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither1.csv",
+      "expectedBytes": 55504,
+      "expectedSha256": "5176fbd8ac45de0e1faa9eb30bd2fa4bf11c7b4edd646be550f691aa82dc1500",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither1.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "consumers": [
+        "observation-charts"
+      ]
+    },
+    {
+      "id": "nirspec-dither-2",
+      "path": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither2.csv",
+      "expectedBytes": 55798,
+      "expectedSha256": "8d4765ccadec351f5fc17362c035f5e11044db4849b53aa3064e530280486ffe",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither2.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "consumers": [
+        "observation-charts"
+      ]
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3951,
-      "expectedSha256": "c6107419d3942e49df0dd279643d1e51c3884116a7fdfe8e8cf6e4062782abbc",
+      "expectedBytes": 10413,
+      "expectedSha256": "121af4001284ce061e0c9f235440daf6531805fc78572ea27aad168bf1cbeeee",
       "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
     },
     {
@@ -230,8 +270,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4540,
-      "expectedSha256": "1c2b7a84c45f71039240ad66993e3dc34c7da825718baef4bcaa156d90fc9252",
+      "expectedBytes": 5172,
+      "expectedSha256": "fcb4a7a5b3f7527ed9f18f77535fcfd307873abbc3952af8f4d4c5d5f1411739",
       "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
     },
     {
@@ -425,6 +465,18 @@
       "expectedBytes": 300,
       "expectedSha256": "27ffbc964efd12edd5a301b54cb593e5e8f7ed3e5d2447cb382d45d8600da4b1",
       "purpose": "Pallene source identity, observations, camera evidence or authored preparation."
+    },
+    {
+      "path": "content/charts.json",
+      "purpose": "Measured observation chart recipe and provenance.",
+      "expectedBytes": 7975,
+      "expectedSha256": "381f9d4fe4de249041118c8aaedd8b226f482296ec5ee3a43f16bfdc9e2adf0b"
+    },
+    {
+      "path": "OBSERVATIONS.md",
+      "expectedBytes": 6304,
+      "expectedSha256": "87f09f2d4f0bdc1129250b36eba6f9e50652f185b14a73955061d6bf5d203de6",
+      "purpose": "Observation quantity, uncertainty, calibration, sampling and display limitations."
     }
   ],
   "generatedIntermediates": [

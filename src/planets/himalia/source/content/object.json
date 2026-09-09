@@ -70,7 +70,46 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "nirspec-g235m",
+      "titleKey": "measuredSpectrum",
+      "src": "/scenes/himalia/himalia-nirspec-g235m.png",
+      "width": 1080,
+      "height": 696,
+      "alt": "JWST/NIRSpec G235M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+      "caption": "JWST/NIRSpec G235M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+      "data": {
+        "src": "/scenes/himalia/himalia-nirspec-g235m.csv",
+        "label": "Measurements (CSV)"
+      },
+      "source": {
+        "id": "nirspec-g235m",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits"
+      },
+      "visible": true
+    },
+    {
+      "id": "nirspec-g395m",
+      "titleKey": "measuredSpectrum",
+      "src": "/scenes/himalia/himalia-nirspec-g395m.png",
+      "width": 1080,
+      "height": 696,
+      "alt": "JWST/NIRSpec G395M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+      "caption": "JWST/NIRSpec G395M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+      "data": {
+        "src": "/scenes/himalia/himalia-nirspec-g395m.csv",
+        "label": "Measurements (CSV)"
+      },
+      "source": {
+        "id": "nirspec-g395m",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits"
+      },
+      "visible": true
+    }
+  ],
   "resources": [
     {
       "label": "Cassini ISS / JPL",

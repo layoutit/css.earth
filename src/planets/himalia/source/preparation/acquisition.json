@@ -16,6 +16,22 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "spectroscopy/jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "spectroscopy/jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits"
     }
   ]
 }

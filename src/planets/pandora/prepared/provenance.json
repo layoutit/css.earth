@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3889d4f98129d48b0fb0f2e69fe834c300f6cd6dde375d79ffaa99daf8146bdd"
+    "sha256": "09f4756dc16480a052567160e2f5a34cacd9ada21032105bb2354a6bdb523d80"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "71a85da5d8d407ad447b7b0bcd6448156899920febdab6e58197c0c384bbc051"
   },
   "recipes": [
     {
@@ -338,7 +338,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "984659a861c51301159af3e532f03c1df387d99b694601fd223202774ee39620",
+      "sha256": "a7127f28d56c1b6caf3011092d97216414c5a29fad23abbbba9aa68bb73a212b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -477,7 +477,27 @@
             }
           ]
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "nirspec-dither-1",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/pandora/pandora-nirspec-dither-1.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT, in the Epimetheus pointing. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+            "caption": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT, in the Epimetheus pointing. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+            "data": {
+              "src": "/scenes/pandora/pandora-nirspec-dither-1.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-dither-1",
+              "path": "../manifest.json",
+              "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Pandoraflux_dither1.csv"
+            },
+            "visible": true
+          }
+        ],
         "resources": [
           {
             "label": "NASA",
@@ -511,6 +531,73 @@
             "credit": "Vendored JPL physical and orbital data"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "cd0c5c26649825cfcf6fd33cc7d55f8ffd11104656ee431abcfab452ba812912",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/pandora/",
+        "charts": [
+          {
+            "kind": "observations",
+            "id": "nirspec-dither-1",
+            "title": "Pandora · dither 1",
+            "description": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT, in the Epimetheus pointing. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+            "output": "pandora-nirspec-dither-1.png",
+            "dataOutput": "pandora-nirspec-dither-1.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2022-11-08",
+              "observingWindow": "22:15–22:29 UT, in the Epimetheus pointing",
+              "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+              "dither": 1,
+              "sourceUnits": {
+                "x": "µm",
+                "y": "Jy",
+                "error": "Jy"
+              },
+              "doi": "10.1029/2023JE008236"
+            },
+            "source": "spectroscopy/JW1247_NIRSpec_Pandoraflux_dither1.csv",
+            "sha256": "1ee81d367d7afa232058b3970af604e7bb309cc130c119d6757c241ff4fa6b8b",
+            "format": "csv",
+            "header": "Wavelength,Flux (Jy),Error (Jy)",
+            "sampleCount": 700,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 1.5,
+              "maximum": 5,
+              "ticks": [
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "y": {
+              "label": "Flux density (µJy)",
+              "minimum": -4000,
+              "maximum": 2000,
+              "ticks": [
+                -4000,
+                -2000,
+                0,
+                2000
+              ]
+            }
+          }
+        ]
       }
     }
   ],
@@ -1370,11 +1457,40 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "40f6cd49c685807243a4329a732321877a10f8fd8547ddf3a302441e762bfc5d",
-      "bytes": 5809,
+      "sha256": "a7127f28d56c1b6caf3011092d97216414c5a29fad23abbbba9aa68bb73a212b",
+      "bytes": 7579,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-dither-1",
+      "path": "spectroscopy/JW1247_NIRSpec_Pandoraflux_dither1.csv",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Pandoraflux_dither1.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "sha256": "1ee81d367d7afa232058b3970af604e7bb309cc130c119d6757c241ff4fa6b8b",
+      "bytes": 44911,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/JW1247_NIRSpec_Pandoraflux_dither1.csv",
+        "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Pandoraflux_dither1.csv"
+      },
       "verificationOperations": []
     }
   ],
@@ -1501,9 +1617,73 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6916,
-          "sha256": "a5c078e96b18d7c22455b572261c338a836d74572e1d9a2745f9d15077cf908c",
+          "bytes": 9279,
+          "sha256": "782888c0ce5240b40d83479982cf5645af38a3cf20b4a92db4a8c0d45e14dd8a",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Pandora · dither 1",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT, in the Epimetheus pointing. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Flux density (µJy)",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 1.5,
+            "maximum": 5,
+            "ticks": [
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "y": {
+            "label": "Flux density (µJy)",
+            "minimum": -4000,
+            "maximum": 2000,
+            "ticks": [
+              -4000,
+              -2000,
+              0,
+              2000
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-dither-1"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pandora/pandora-nirspec-dither-1.png",
+          "bytes": 46742,
+          "sha256": "3121012614d445677a6b3f2197906f283de58e7d2369110a06e1ccc3f957c433",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pandora/pandora-nirspec-dither-1.csv",
+          "bytes": 52663,
+          "sha256": "c2df16aac22ace2cc522d2ee82162a35ff4ac98a971e7addeccd902aa370e88a",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

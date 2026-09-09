@@ -85,13 +85,31 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false
+    },
+    {
+      "id": "measured-observations",
+      "path": "photometry/619_Ymi_4_LC_Paper1.txt",
+      "expectedBytes": 7244,
+      "expectedSha256": "246f862997171d47ec6e132cd7bf6e024e316fcc289aaa5bbc2b08d66d8ee4d2",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/619_Ymi_4_LC_Paper1.txt",
+      "catalog": "https://tilmanndenk.de/outersaturnianmoons/ymir/#4",
+      "credit": "Tilmann Denk; Denk and Mottola (2019); NASA/JPL/SSI",
+      "license": "Author-released numerical scientific observations; retain attribution.",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/ymir/#4"
+      ],
+      "acquisition": "Download the unmodified author numeric release.",
+      "redistribution": "Preserve scientific attribution and source qualifications.",
+      "consumers": [
+        "observation-charts"
+      ]
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3208,
-      "expectedSha256": "2f275a6804c42c24effd05adc5102b3993bceb1382150ad987f7546b0297beca",
+      "expectedBytes": 8234,
+      "expectedSha256": "4c82f8a266519f80244a1b94519c9a2809948ba95fb170b33433e94e7c2e4a8a",
       "purpose": "Scientific source and authored preparation evidence."
     },
     {
@@ -102,8 +120,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "expectedBytes": 705,
+      "expectedSha256": "369ff9bcb8642246e361c9515d3764b69e8f3d641c91e2ebca82be613d0ab58b",
       "purpose": "Scientific source and authored preparation evidence."
     },
     {
@@ -153,6 +171,18 @@
       "expectedBytes": 847,
       "expectedSha256": "630aea2bc80bfbd65f5abaa78180b0920da07a4163a115ce04e9ca8a6753bfdc",
       "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "content/charts.json",
+      "purpose": "Measured observation chart recipe and source interpretation.",
+      "expectedBytes": 7065,
+      "expectedSha256": "4e7421d9ac3d4698d3f6adec69916441102da7c7a231b2337c2b6bb155e5cfc6"
+    },
+    {
+      "path": "OBSERVATIONS.md",
+      "expectedBytes": 5124,
+      "expectedSha256": "c20135c681133d8534cac92607515d755daa4ac69a2428d6d55999aeebbd2a55",
+      "purpose": "Observation quantity, uncertainty, calibration, sampling and display limitations."
     }
   ],
   "generatedIntermediates": [

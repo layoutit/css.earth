@@ -4,7 +4,7 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**B1 and [B2 PR #62](https://github.com/layoutit/cssEarth/pull/62) are merged; [B3 draft PR #67](https://github.com/layoutit/cssEarth/pull/67) covers the approved six-moon scope after all 12 source reviews.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B3–B4 counts remain planning targets until their selected sources and implementations qualify.
+**B1, [B2 PR #62](https://github.com/layoutit/cssEarth/pull/62) and [B3 PR #67](https://github.com/layoutit/cssEarth/pull/67) are merged. B4 is in progress on the merged B3 base.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
@@ -57,7 +57,7 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 ## B3 — Spacecraft color and scientific maps
 
-**State:** [draft PR #67](https://github.com/layoutit/cssEarth/pull/67) · **Owner:** Moons
+**State:** [merged PR #67](https://github.com/layoutit/cssEarth/pull/67) · **Owner:** Moons
 
 **Bodies:** Callisto, Hyperion, Phoebe, Proteus, Titania, Miranda.
 
@@ -73,7 +73,7 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 ## B4 — Add measured light curves and spectra across nine existing moons
 
-**State:** planned · **Owner:** Moons
+**State:** [in progress](B4-OBSERVATION-CHARTS.md) · **Owner:** Moons
 
 **Bodies:** Himalia, Epimetheus, Telesto, Pandora, Ymir, Albiorix, Siarnaq, Methone, Pallene.
 
@@ -85,9 +85,11 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 **Acceptance.** All nine bodies expose useful measured observations with source/error checks, accessible content and stable retained DOM. Runtime consumes prepared results. The feature is exercised end to end by the full cohort.
 
-## Parallel execution
+## Execution
 
-Use subagents when independent work reduces elapsed time. For B1, divide body-owned source intake and package work into disjoint cohorts while the Moons owner handles shared preparers, registry integration and final qualification. Integrate the complete batch into one PR. Check source closure before preparation. Serialize expensive bakes, builds, tests and browser capture across lanes; honor the shared disk and memory limits.
+B4 runs serially. The user reported repeated workstation freezes during B3. Do not stack bakes, builds, test runners, browsers or agents. Prefer tiny source-table preparation and focused checks; no whole-application build or broad browser suite on this workstation. Browser checks must start and close one body/view/DPR and its server before the next.
+
+Historical B1 guidance: Use subagents when independent work reduces elapsed time. For B1, divide body-owned source intake and package work into disjoint cohorts while the Moons owner handles shared preparers, registry integration and final qualification. Integrate the complete batch into one PR. Check source closure before preparation. Serialize expensive bakes, builds, tests and browser capture across lanes; honor the shared disk and memory limits.
 
 ## Shared completion requirements
 

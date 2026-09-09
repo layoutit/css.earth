@@ -136,7 +136,46 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "nirspec-dither-1",
+      "titleKey": "measuredSpectrum",
+      "src": "/scenes/epimetheus/epimetheus-nirspec-dither-1.png",
+      "width": 1080,
+      "height": 696,
+      "alt": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+      "caption": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+      "data": {
+        "src": "/scenes/epimetheus/epimetheus-nirspec-dither-1.csv",
+        "label": "Measurements (CSV)"
+      },
+      "source": {
+        "id": "nirspec-dither-1",
+        "path": "../manifest.json",
+        "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Epimetheusflux_dither1.csv"
+      },
+      "visible": true
+    },
+    {
+      "id": "nirspec-dither-2",
+      "titleKey": "measuredSpectrum",
+      "src": "/scenes/epimetheus/epimetheus-nirspec-dither-2.png",
+      "width": 1080,
+      "height": 696,
+      "alt": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+      "caption": "JWST/NIRSpec · 2022-11-08, 22:15–22:29 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Shorter wavelengths were excluded by the authors because of ring stray light.",
+      "data": {
+        "src": "/scenes/epimetheus/epimetheus-nirspec-dither-2.csv",
+        "label": "Measurements (CSV)"
+      },
+      "source": {
+        "id": "nirspec-dither-2",
+        "path": "../manifest.json",
+        "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Epimetheusflux_dither2.csv"
+      },
+      "visible": true
+    }
+  ],
   "resources": [
     {
       "label": "NASA",

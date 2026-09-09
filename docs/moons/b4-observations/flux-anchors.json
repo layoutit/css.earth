@@ -1,0 +1,191 @@
+[
+  {
+    "body": "epimetheus",
+    "id": "nirspec-dither-1",
+    "rows": 730,
+    "sha256": "4265c379087b66a2f889a3196c305230fc2647170b9ee837fb92f649ab047f08",
+    "negativeSamples": 29,
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 1.3507282860615375,
+        "fluxJy": 0.002249269269976286,
+        "errorJy": 3.044062642392593e-05
+      },
+      {
+        "row": 365,
+        "wavelength": 3.177607750891862,
+        "fluxJy": 2.1620084639883213e-05,
+        "errorJy": 2.358675247623715e-06
+      },
+      {
+        "row": 729,
+        "wavelength": 4.999482066503473,
+        "fluxJy": 4.655080474380027e-05,
+        "errorJy": 1.2723094041335759e-05
+      }
+    ]
+  },
+  {
+    "body": "epimetheus",
+    "id": "nirspec-dither-2",
+    "rows": 700,
+    "sha256": "2ae3266b94c4fc01402b40c695e3c92a89ef34b31b1a1fac09ea9bf57218e95b",
+    "negativeSamples": 58,
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 1.500882762622934,
+        "fluxJy": 0.0014319220778861712,
+        "errorJy": 3.766254246373343e-05
+      },
+      {
+        "row": 350,
+        "wavelength": 3.25268498917256,
+        "fluxJy": 3.6346358636851635e-05,
+        "errorJy": 2.701880790120171e-06
+      },
+      {
+        "row": 699,
+        "wavelength": 4.999482066503473,
+        "fluxJy": 2.1450329386886788e-05,
+        "errorJy": 7.81991233038156e-06
+      }
+    ]
+  },
+  {
+    "body": "telesto",
+    "id": "nirspec-dither-1",
+    "rows": 860,
+    "sha256": "a96ec148764c959d7603074832979ec2269bbb60fa6f052d528da40ae12a7afa",
+    "negativeSamples": 16,
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 0.7001744038768576,
+        "fluxJy": 0.0001533152393951764,
+        "errorJy": 4.006036430323607e-06
+      },
+      {
+        "row": 430,
+        "wavelength": 2.8523908506164313,
+        "fluxJy": 4.021339438756094e-07,
+        "errorJy": 1.561103256384071e-07
+      },
+      {
+        "row": 859,
+        "wavelength": 4.999602142828704,
+        "fluxJy": 1.63386941757209e-06,
+        "errorJy": 7.62415700135156e-07
+      }
+    ]
+  },
+  {
+    "body": "telesto",
+    "id": "nirspec-dither-2",
+    "rows": 860,
+    "sha256": "fd2823d0b6256542c2f5c99138533245b9729b525180247505693957d1f597fd",
+    "negativeSamples": 30,
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 0.7001744038768576,
+        "fluxJy": 0.00015242856465016934,
+        "errorJy": 5.343202729286523e-06
+      },
+      {
+        "row": 430,
+        "wavelength": 2.8523908506164313,
+        "fluxJy": -1.4462738927558165e-08,
+        "errorJy": 1.4083373245084203e-07
+      },
+      {
+        "row": 859,
+        "wavelength": 4.999602142828704,
+        "fluxJy": 1.1006344069097633e-06,
+        "errorJy": 1.146259039730205e-06
+      }
+    ]
+  },
+  {
+    "body": "pandora",
+    "id": "nirspec-dither-1",
+    "rows": 700,
+    "sha256": "1ee81d367d7afa232058b3970af604e7bb309cc130c119d6757c241ff4fa6b8b",
+    "negativeSamples": 74,
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 1.500882762622934,
+        "fluxJy": 0.0006186631298406664,
+        "errorJy": 9.094978757509803e-05
+      },
+      {
+        "row": 350,
+        "wavelength": 3.25268498917256,
+        "fluxJy": 4.483013932404499e-06,
+        "errorJy": 6.714104146132415e-06
+      },
+      {
+        "row": 699,
+        "wavelength": 4.999482066503473,
+        "fluxJy": 0.00014274101068968025,
+        "errorJy": 3.1503020585900666e-05
+      }
+    ]
+  },
+  {
+    "body": "pallene",
+    "id": "nirspec-dither-1",
+    "rows": 860,
+    "sha256": "5176fbd8ac45de0e1faa9eb30bd2fa4bf11c7b4edd646be550f691aa82dc1500",
+    "negativeSamples": 249,
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 0.7000150909052997,
+        "fluxJy": 5.537376166383477e-06,
+        "errorJy": 5.60203241941996e-06
+      },
+      {
+        "row": 430,
+        "wavelength": 2.8522292549519834,
+        "fluxJy": -3.5436632140519316e-09,
+        "errorJy": 1.2306625007714223e-07
+      },
+      {
+        "row": 859,
+        "wavelength": 4.999438269779954,
+        "fluxJy": -9.3421653614641e-05,
+        "errorJy": 9.154953840476306e-05
+      }
+    ]
+  },
+  {
+    "body": "pallene",
+    "id": "nirspec-dither-2",
+    "rows": 860,
+    "sha256": "8d4765ccadec351f5fc17362c035f5e11044db4849b53aa3064e530280486ffe",
+    "negativeSamples": 406,
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 0.7000150909052997,
+        "fluxJy": -1.4334381931621062e-05,
+        "errorJy": 7.68667648677418e-06
+      },
+      {
+        "row": 430,
+        "wavelength": 2.8522292549519834,
+        "fluxJy": 1.9427140910007946e-07,
+        "errorJy": 2.6201526367921627e-07
+      },
+      {
+        "row": 859,
+        "wavelength": 4.999438269779954,
+        "fluxJy": 3.0116447669782117e-06,
+        "errorJy": 1.0915306820082261e-06
+      }
+    ]
+  }
+]

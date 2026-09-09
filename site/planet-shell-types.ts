@@ -23,12 +23,16 @@ interface Fact {
 
 interface Chart {
   id: string;
+  visible?: boolean;
   title: Pick<PreparedTitle, "label">;
   open?: boolean;
   src: string;
   width: number;
   height: number;
   alt: string;
+  caption?: string;
+  data?: { src: string; label: string };
+  source?: { url?: string };
 }
 
 interface GalleryItem {

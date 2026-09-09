@@ -87,13 +87,31 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false
+    },
+    {
+      "id": "nirspec-prism",
+      "path": "spectroscopy/jw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+      "expectedBytes": 270720,
+      "expectedSha256": "3ff215367bf5e9c53c12ffd964b413b2739be281803bb2368c14b320db3cd1f1",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+      "catalog": "https://doi.org/10.17909/y22z-yt33",
+      "credit": "NASA/ESA/CSA JWST; STScI MAST; program 3716 team",
+      "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
+      "redistribution": "Public science archive data with mission and observing-program credit.",
+      "consumers": [
+        "observation-charts"
+      ]
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3484,
-      "expectedSha256": "ad59b6008b9be596dfbda5e75c104e36ec403d2a000e23125fbf9d6faae7d562",
+      "expectedBytes": 4957,
+      "expectedSha256": "d63b65164603463b2a70848e8ba3814f7088644b68e6356a76a1c54e33ca4855",
       "purpose": "Scientific source interpretation and authored preparation evidence."
     },
     {
@@ -104,8 +122,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "expectedBytes": 785,
+      "expectedSha256": "3d26c984854ef964398476cb38ef0f54607ffec5a5897c34fec122a7921c47f7",
       "purpose": "Scientific source interpretation and authored preparation evidence."
     },
     {
@@ -161,6 +179,18 @@
       "expectedBytes": 38868,
       "expectedSha256": "0f9203fbf655f1ba47aaf8a37aff483815637a43e65f4a56e6fffe10d6ea629d",
       "purpose": "Scientific source interpretation and authored preparation evidence."
+    },
+    {
+      "path": "content/charts.json",
+      "purpose": "Measured observation chart recipe and provenance.",
+      "expectedBytes": 2461,
+      "expectedSha256": "0bf8eb19064efc34fe829edfe68db6af38f78e52fba827f1b47e991aceafd38f"
+    },
+    {
+      "path": "OBSERVATIONS.md",
+      "expectedBytes": 2168,
+      "expectedSha256": "608cd9405addd82e32b76b5f195d06a6cd5ffb787077347d23224bcfac0a7995",
+      "purpose": "Observation quantity, uncertainty, calibration, sampling and display limitations."
     }
   ],
   "generatedIntermediates": [

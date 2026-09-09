@@ -3,12 +3,14 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.js';
 import type { ChartIdentity } from './chart-svg.js';
+import { parseObservations, validateObservationRecipe, renderObservationChart, observationCsv } from './observations.js';
+import type { ObservationRecipe } from './observations.js';
 type JsonMap=Record<string,unknown>;
 interface Identity {id:string;title:string;description:string;output:string;metadata:JsonMap;}
 interface Spectrum extends Identity {kind:'spectrum';source:string;format:'json-columns'|'numeric-lines';pointCount:number;maximum:number;maximumRoundingScale?:number;requiredHeader?:string;xField?:string;yField?:string;countField?:string;countValue?:number;xScale?:number;minimumX?:number;maximumX?:number;metadataFields?:Record<string,string>;}
 interface Pressure extends Identity {kind:'pressure';source:string;layerCount:number;temperatureMinimum:number;temperatureMaximum:number;temperatureRoundingStep?:number;includePressureRangeMetadata?:boolean;pressureTicks:{pressure:number;label:string}[];}
 interface Phase extends Identity {kind:'phase';sampleCount:number;maximumAngleDegrees:number;segments:({maximumAngleDegrees:number;coefficients:number[];kind:'polynomialMagnitude'}|{maximumAngleDegrees:number;coefficients:number[];kind:'albedoPolynomialMagnitude';constant:number})[];}
-export interface ChartAssetRecipe {schema:'cssearth-chart-assets@1';publicBase:string;charts:(Spectrum|Pressure|Phase)[];gallery?:{source:string;schema:string;itemCount:number};}
+export interface ChartAssetRecipe {schema:'cssearth-chart-assets@1';publicBase:string;charts:(Spectrum|Pressure|Phase|ObservationRecipe)[];gallery?:{source:string;schema:string;itemCount:number};}
 function record(value:unknown,label:string):JsonMap {if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError(`${label} must be an object.`);return value as JsonMap;}
 function string(value:unknown,label:string):asserts value is string {if(typeof value!=='string'||!value.trim())throw new TypeError(`${label} must be text.`);}
 function path(root:string,value:string):string {if(value.startsWith('/')||value.includes('\\')||value.split('/').includes('..'))throw new TypeError('Unsafe chart source path.');return resolve(root,value);}
@@ -16,7 +18,10 @@ function field(value:unknown,reference:string):unknown {let result:unknown=value
 function numericArray(value:unknown,label:string):number[]{if(!Array.isArray(value)||value.some(item=>typeof item!=='number'||!Number.isFinite(item)))throw new TypeError(`${label} must contain finite samples.`);return value;}
 export function parseChartAssetRecipe(value:unknown):ChartAssetRecipe {
  const recipe=record(value,'charts');if(recipe.schema!=='cssearth-chart-assets@1'||!Array.isArray(recipe.charts))throw new TypeError('Unknown chart recipe schema.');string(recipe.publicBase,'publicBase');if(!recipe.publicBase.startsWith('/')||!recipe.publicBase.endsWith('/'))throw new TypeError('Chart asset base must be an absolute URL prefix.');
- for(const value of recipe.charts){const chart=record(value,'chart');for(const key of ['id','title','description','output'])string(chart[key],key);path('.',String(chart.output));record(chart.metadata,'metadata');if(!['spectrum','pressure','phase'].includes(String(chart.kind)))throw new TypeError('Unknown chart operator.');
+ const outputs=new Set<string>();
+ for(const value of recipe.charts){const chart=record(value,'chart');for(const key of ['id','title','description','output'])string(chart[key],key);path('.',String(chart.output));record(chart.metadata,'metadata');if(!['spectrum','pressure','phase','observations'].includes(String(chart.kind)))throw new TypeError('Unknown chart operator.');
+  for(const output of [chart.output,...(chart.kind==='observations'?[chart.dataOutput]:[])]){string(output,'chart output');path('.',output);if(outputs.has(output))throw new TypeError('Duplicate chart output.');outputs.add(output);}
+  if(chart.kind==='observations'){string(chart.source,'source');path('.',chart.source);if(!String(chart.output).endsWith('.png')||!String(chart.dataOutput).endsWith('.csv'))throw new TypeError('Measured charts require prepared PNG and CSV outputs.');validateObservationRecipe(chart as unknown as ObservationRecipe);}
   if(chart.kind==='spectrum'){string(chart.source,'source');if(!['json-columns','numeric-lines'].includes(String(chart.format))||typeof chart.pointCount!=='number'||!Number.isSafeInteger(chart.pointCount)||chart.pointCount<2||typeof chart.maximum!=='number'||!Number.isFinite(chart.maximum)||chart.maximum<=0||(chart.maximumRoundingScale!==undefined&&(typeof chart.maximumRoundingScale!=='number'||!Number.isFinite(chart.maximumRoundingScale)||chart.maximumRoundingScale<=0)))throw new TypeError('Invalid spectrum sampling profile.');}
   if(chart.kind==='pressure'){string(chart.source,'source');if(typeof chart.layerCount!=='number'||chart.layerCount<2||typeof chart.temperatureMinimum!=='number'||typeof chart.temperatureMaximum!=='number'||!Array.isArray(chart.pressureTicks)||(chart.temperatureRoundingStep!==undefined&&(typeof chart.temperatureRoundingStep!=='number'||!Number.isFinite(chart.temperatureRoundingStep)||chart.temperatureRoundingStep<=0))||(chart.includePressureRangeMetadata!==undefined&&typeof chart.includePressureRangeMetadata!=='boolean'))throw new TypeError('Invalid pressure profile.');}
   if(chart.kind==='phase'){if(typeof chart.sampleCount!=='number'||!Number.isSafeInteger(chart.sampleCount)||chart.sampleCount<3||typeof chart.maximumAngleDegrees!=='number'||chart.maximumAngleDegrees<=0||chart.maximumAngleDegrees>180||!Array.isArray(chart.segments)||!chart.segments.length)throw new TypeError('Invalid phase model.');let previous=0;for(const value of chart.segments){const segment=record(value,'segment');if(typeof segment.maximumAngleDegrees!=='number'||segment.maximumAngleDegrees<=previous||!['polynomialMagnitude','albedoPolynomialMagnitude'].includes(String(segment.kind)))throw new TypeError('Invalid phase segment.');numericArray(segment.coefficients,'coefficients');if(segment.kind==='albedoPolynomialMagnitude'&&(typeof segment.constant!=='number'||!Number.isFinite(segment.constant)))throw new TypeError('Invalid phase constant.');previous=segment.maximumAngleDegrees;}if(previous!==chart.maximumAngleDegrees)throw new TypeError('Phase segments do not cover the model.');}
@@ -27,7 +32,15 @@ export function parseChartAssetRecipe(value:unknown):ChartAssetRecipe {
 export async function prepareChartAssets({sourceDirectory,publicDirectory,config}:{sourceDirectory:string;publicDirectory:string;config:unknown}) {
  const recipe=parseChartAssetRecipe(config);await mkdir(publicDirectory,{recursive:true});const urls:string[]=[];
  for(const chart of recipe.charts){const identity:ChartIdentity={id:chart.id,title:chart.title,description:chart.description,metadata:{...chart.metadata}};let svg:string;
-  if(chart.kind==='spectrum'){
+  if(chart.kind==='observations'){
+   const points=parseObservations(await readFile(path(sourceDirectory,chart.source)),chart);
+   svg=renderObservationChart(points,chart);
+   // A bounded 1080 x 696 raster covers DPR 1/2 at the panel's CSS size.
+   await sharp(Buffer.from(svg),{density:216}).png().toFile(path(publicDirectory,chart.output));
+   await writeFile(path(publicDirectory,chart.dataOutput),observationCsv(points,chart));
+   urls.push(recipe.publicBase+chart.output,recipe.publicBase+chart.dataOutput);
+   continue;
+  }else if(chart.kind==='spectrum'){
    const text=await readFile(path(sourceDirectory,chart.source),'utf8');let points:{wavelength:number;total:number}[];
    if(chart.format==='json-columns'){
     const source=record(JSON.parse(text) as unknown,'spectrum source');const xs=numericArray(field(source,chart.xField??''),'wavelengths'),ys=numericArray(field(source,chart.yField??''),'reflectances');

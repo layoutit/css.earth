@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "030099d9392fd9540cea3bed67cb9c6304edf2042ea5e3b19fa955b7f918e2ad"
+    "sha256": "ef5b0dba58dbc0dfec374620902a176ea3b886104f71b5a146e4e1473e8b83ad"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "71a85da5d8d407ad447b7b0bcd6448156899920febdab6e58197c0c384bbc051"
   },
   "recipes": [
     {
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c8b7d24f6974a4fb1611362e9a509204d67efdb58a30471701c76126dae39206",
+      "sha256": "121af4001284ce061e0c9f235440daf6531805fc78572ea27aad168bf1cbeeee",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,84 @@
             }
           ]
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "nirspec-dither-1-detail",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/pallene/pallene-nirspec-dither-1-detail.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "caption": "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "data": {
+              "src": "/scenes/pallene/pallene-nirspec-dither-1-detail.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-dither-1",
+              "path": "../manifest.json",
+              "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither1.csv"
+            },
+            "visible": true
+          },
+          {
+            "id": "nirspec-dither-1",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/pallene/pallene-nirspec-dither-1.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "caption": "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "data": {
+              "src": "/scenes/pallene/pallene-nirspec-dither-1.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-dither-1",
+              "path": "../manifest.json",
+              "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither1.csv"
+            },
+            "visible": true
+          },
+          {
+            "id": "nirspec-dither-2-detail",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/pallene/pallene-nirspec-dither-2-detail.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "caption": "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "data": {
+              "src": "/scenes/pallene/pallene-nirspec-dither-2-detail.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-dither-2",
+              "path": "../manifest.json",
+              "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither2.csv"
+            },
+            "visible": true
+          },
+          {
+            "id": "nirspec-dither-2",
+            "titleKey": "measuredSpectrum",
+            "src": "/scenes/pallene/pallene-nirspec-dither-2.png",
+            "width": 1080,
+            "height": 696,
+            "alt": "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "caption": "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "data": {
+              "src": "/scenes/pallene/pallene-nirspec-dither-2.csv",
+              "label": "Measurements (CSV)"
+            },
+            "source": {
+              "id": "nirspec-dither-2",
+              "path": "../manifest.json",
+              "url": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/blob/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither2.csv"
+            },
+            "visible": true
+          }
+        ],
         "resources": [
           {
             "label": "NASA",
@@ -259,6 +336,243 @@
             "credit": "Thomas et al. (2013); NAIF PCK00011; JPL"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "381f9d4fe4de249041118c8aaedd8b226f482296ec5ee3a43f16bfdc9e2adf0b",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/pallene/",
+        "charts": [
+          {
+            "kind": "observations",
+            "id": "nirspec-dither-1-detail",
+            "title": "Pallene · dither 1 detail",
+            "description": "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "output": "pallene-nirspec-dither-1-detail.png",
+            "dataOutput": "pallene-nirspec-dither-1-detail.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2023-06-20",
+              "observingWindow": "01:14–01:35 UT",
+              "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+              "dither": 1,
+              "sourceUnits": {
+                "x": "µm",
+                "y": "Jy",
+                "error": "Jy"
+              },
+              "doi": "10.1029/2023JE008236"
+            },
+            "source": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither1.csv",
+            "sha256": "5176fbd8ac45de0e1faa9eb30bd2fa4bf11c7b4edd646be550f691aa82dc1500",
+            "format": "csv",
+            "header": "Wavelength,Flux (Jy),Error (Jy)",
+            "sampleCount": 860,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 1.3,
+              "maximum": 2.4,
+              "ticks": [
+                1.5,
+                2,
+                2.4
+              ]
+            },
+            "y": {
+              "label": "Flux density (µJy)",
+              "minimum": -5,
+              "maximum": 10,
+              "ticks": [
+                -5,
+                0,
+                5,
+                10
+              ]
+            }
+          },
+          {
+            "kind": "observations",
+            "id": "nirspec-dither-1",
+            "title": "Pallene · dither 1",
+            "description": "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "output": "pallene-nirspec-dither-1.png",
+            "dataOutput": "pallene-nirspec-dither-1.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2023-06-20",
+              "observingWindow": "01:14–01:35 UT",
+              "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+              "dither": 1,
+              "sourceUnits": {
+                "x": "µm",
+                "y": "Jy",
+                "error": "Jy"
+              },
+              "doi": "10.1029/2023JE008236"
+            },
+            "source": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither1.csv",
+            "sha256": "5176fbd8ac45de0e1faa9eb30bd2fa4bf11c7b4edd646be550f691aa82dc1500",
+            "format": "csv",
+            "header": "Wavelength,Flux (Jy),Error (Jy)",
+            "sampleCount": 860,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 0.5,
+              "maximum": 5,
+              "ticks": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "y": {
+              "label": "Flux density (µJy)",
+              "minimum": -600,
+              "maximum": 200,
+              "ticks": [
+                -600,
+                -400,
+                -200,
+                0,
+                200
+              ]
+            }
+          },
+          {
+            "kind": "observations",
+            "id": "nirspec-dither-2-detail",
+            "title": "Pallene · dither 2 detail",
+            "description": "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "output": "pallene-nirspec-dither-2-detail.png",
+            "dataOutput": "pallene-nirspec-dither-2-detail.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2023-06-20",
+              "observingWindow": "01:14–01:35 UT",
+              "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+              "dither": 2,
+              "sourceUnits": {
+                "x": "µm",
+                "y": "Jy",
+                "error": "Jy"
+              },
+              "doi": "10.1029/2023JE008236"
+            },
+            "source": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither2.csv",
+            "sha256": "8d4765ccadec351f5fc17362c035f5e11044db4849b53aa3064e530280486ffe",
+            "format": "csv",
+            "header": "Wavelength,Flux (Jy),Error (Jy)",
+            "sampleCount": 860,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 1.3,
+              "maximum": 2.4,
+              "ticks": [
+                1.5,
+                2,
+                2.4
+              ]
+            },
+            "y": {
+              "label": "Flux density (µJy)",
+              "minimum": -5,
+              "maximum": 10,
+              "ticks": [
+                -5,
+                0,
+                5,
+                10
+              ]
+            }
+          },
+          {
+            "kind": "observations",
+            "id": "nirspec-dither-2",
+            "title": "Pallene · dither 2",
+            "description": "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light.",
+            "output": "pallene-nirspec-dither-2.png",
+            "dataOutput": "pallene-nirspec-dither-2.csv",
+            "metadata": {
+              "instrument": "JWST NIRSpec PRISM",
+              "date": "2023-06-20",
+              "observingWindow": "01:14–01:35 UT",
+              "sourceRelease": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+              "dither": 2,
+              "sourceUnits": {
+                "x": "µm",
+                "y": "Jy",
+                "error": "Jy"
+              },
+              "doi": "10.1029/2023JE008236"
+            },
+            "source": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither2.csv",
+            "sha256": "8d4765ccadec351f5fc17362c035f5e11044db4849b53aa3064e530280486ffe",
+            "format": "csv",
+            "header": "Wavelength,Flux (Jy),Error (Jy)",
+            "sampleCount": 860,
+            "columns": {
+              "x": 0,
+              "y": 1,
+              "error": 2,
+              "count": 3
+            },
+            "yScale": 1000000,
+            "uncertainty": "one-sigma",
+            "x": {
+              "label": "Wavelength (µm)",
+              "minimum": 0.5,
+              "maximum": 5,
+              "ticks": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "y": {
+              "label": "Flux density (µJy)",
+              "minimum": -1000,
+              "maximum": 1000,
+              "ticks": [
+                -1000,
+                -500,
+                0,
+                500,
+                1000
+              ]
+            }
+          }
+        ]
       }
     }
   ],
@@ -382,11 +696,69 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c6107419d3942e49df0dd279643d1e51c3884116a7fdfe8e8cf6e4062782abbc",
-      "bytes": 3951,
+      "sha256": "121af4001284ce061e0c9f235440daf6531805fc78572ea27aad168bf1cbeeee",
+      "bytes": 10413,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-dither-1",
+      "path": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither1.csv",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither1.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "sha256": "5176fbd8ac45de0e1faa9eb30bd2fa4bf11c7b4edd646be550f691aa82dc1500",
+      "bytes": 55504,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither1.csv",
+        "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither1.csv"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nirspec-dither-2",
+      "path": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither2.csv",
+      "origin": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither2.csv",
+      "catalog": "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+      "credit": "Hedman et al. (2024); NASA/ESA/CSA JWST; JWSTGiantPlanets team",
+      "license": "CC BY 4.0; author data release DOI 10.5281/zenodo.10552220.",
+      "licenseEvidence": [
+        "https://doi.org/10.1029/2023JE008236",
+        "https://github.com/JWSTGiantPlanets/SaturnRingsMoons/tree/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab",
+        "https://doi.org/10.5281/zenodo.10552220"
+      ],
+      "acquisition": "Download the immutable author CSV without modifying its bytes.",
+      "redistribution": "Numeric observations reproduced with scientific attribution.",
+      "sha256": "8d4765ccadec351f5fc17362c035f5e11044db4849b53aa3064e530280486ffe",
+      "bytes": 55798,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "spectroscopy/JW1247_NIRSpec_Palleneflux_dither2.csv",
+        "url": "https://raw.githubusercontent.com/JWSTGiantPlanets/SaturnRingsMoons/2d47da90ae6bf78a9dfe74a3e7deea94ae98e8ab/JW1247_NIRSpec_Palleneflux_dither2.csv"
+      },
       "verificationOperations": []
     }
   ],
@@ -449,9 +821,267 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5401,
-          "sha256": "eaa38363f4b863482e67e13387ce71a6da6c64faf673437480dbb48b4926e4c1",
+          "bytes": 12601,
+          "sha256": "3af15d4ed4565446c2b65d2f2acbd4141fbc5de58f741df284a6b62a7663c43f",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "Pallene · dither 1 detail",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Flux density (µJy)",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 1.3,
+            "maximum": 2.4,
+            "ticks": [
+              1.5,
+              2,
+              2.4
+            ]
+          },
+          "y": {
+            "label": "Flux density (µJy)",
+            "minimum": -5,
+            "maximum": 10,
+            "ticks": [
+              -5,
+              0,
+              5,
+              10
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-dither-1"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pallene/pallene-nirspec-dither-1-detail.png",
+          "bytes": 47782,
+          "sha256": "78b9d9a9d12bf0a576dd8ef4bf13c14b7c0287f36fd05899b63d4fe0b3d41935",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pallene/pallene-nirspec-dither-1-detail.csv",
+          "bytes": 65630,
+          "sha256": "e1fa4f1c318faec80806f50f79c5dd17a5fe359d99ada2f5e77c2e2bcb3ff5dc",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:1",
+      "label": "Pallene · dither 1",
+      "recipe": "charts",
+      "selector": "/charts/1",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 1: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Flux density (µJy)",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 0.5,
+            "maximum": 5,
+            "ticks": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "y": {
+            "label": "Flux density (µJy)",
+            "minimum": -600,
+            "maximum": 200,
+            "ticks": [
+              -600,
+              -400,
+              -200,
+              0,
+              200
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-dither-1"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pallene/pallene-nirspec-dither-1.png",
+          "bytes": 44763,
+          "sha256": "313d8155d5642f71121236de3d43dd6aac21ee80e38ddfe4c90ab39af1c30e52",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pallene/pallene-nirspec-dither-1.csv",
+          "bytes": 66270,
+          "sha256": "914101d7466a6dd275f3c31f9970a4b09391848e59fcb9e01bee64583a5faac5",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:2",
+      "label": "Pallene · dither 2 detail",
+      "recipe": "charts",
+      "selector": "/charts/2",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "Detail of the 1.3–2.4 µm interval. The full released range is available as a separate chart; the CSV retains all samples. JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Flux density (µJy)",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 1.3,
+            "maximum": 2.4,
+            "ticks": [
+              1.5,
+              2,
+              2.4
+            ]
+          },
+          "y": {
+            "label": "Flux density (µJy)",
+            "minimum": -5,
+            "maximum": 10,
+            "ticks": [
+              -5,
+              0,
+              5,
+              10
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-dither-2"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pallene/pallene-nirspec-dither-2-detail.png",
+          "bytes": 52647,
+          "sha256": "6c313c674fd9ce2354efdbd0fdbddb5fc814676ea336ec2544545ee850d9514a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pallene/pallene-nirspec-dither-2-detail.csv",
+          "bytes": 65432,
+          "sha256": "73442798a636d0345c15f7db2450020aae98262d25f5cdc4d760578c98dbf3a6",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:3",
+      "label": "Pallene · dither 2",
+      "recipe": "charts",
+      "selector": "/charts/3",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [
+        "JWST/NIRSpec · 2023-06-20, 01:14–01:35 UT. Dither 2: disk-integrated flux density; bars show the released 1σ statistical errors. Negative samples and instrumental outliers are retained. Background and calibration systematics are not included in these errors. This measures light from the whole unresolved moon, not a spatial composition map. Measurements below 1.3 µm may include residual ring stray light."
+      ],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "observations",
+        "quantity": "Flux density (µJy)",
+        "uncertainty": "one-sigma",
+        "unitScale": 1000000,
+        "excludedRanges": [],
+        "plotWindow": {
+          "x": {
+            "label": "Wavelength (µm)",
+            "minimum": 0.5,
+            "maximum": 5,
+            "ticks": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "y": {
+            "label": "Flux density (µJy)",
+            "minimum": -1000,
+            "maximum": 1000,
+            "ticks": [
+              -1000,
+              -500,
+              0,
+              500,
+              1000
+            ]
+          }
+        }
+      },
+      "inputs": [
+        "nirspec-dither-2"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pallene/pallene-nirspec-dither-2.png",
+          "bytes": 37820,
+          "sha256": "049dbd882e98d991a583a03faa1b451ff303babd31a42fe9a4e62a1f16852ae6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pallene/pallene-nirspec-dither-2.csv",
+          "bytes": 66072,
+          "sha256": "e57bf7eefc828266592a1d279c50194cabe8b88bc22b06237bb9f7ec3711cfc3",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

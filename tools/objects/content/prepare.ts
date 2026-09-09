@@ -34,9 +34,7 @@ function requiredShellTitle(key: string) {
 }
 
 function requiredChartTitle(key: string) {
-  const title = key === "photometricPhase"
-    ? SCIENTIFIC_CHART_TITLES.photometricPhase
-    : titleMap[key];
+  const title = (SCIENTIFIC_CHART_TITLES as Record<string, { label: string }>)[key] ?? titleMap[key];
   if (!title) throw new Error(`Unknown shared chart title key: ${key}`);
   return title;
 }
@@ -151,7 +149,8 @@ export async function prepareObjectContentAssets({
     resources: preparedWithAssets.resources,
     provenance: source.provenance,
   };
-  if (chartAssets && content.charts.some((chart) => !chartAssets?.urls.includes(chart.src))) {
+  if (chartAssets && content.charts.some((chart) => !chartAssets?.urls.includes(chart.src) ||
+      chart.data && !chartAssets?.urls.includes(chart.data.src))) {
     throw new Error(`${source.id}: generated chart assets do not match authored chart URLs`);
   }
   const lensesDocument = { schema: "cssearth-prepared-lenses@1", objectId: preparedWithAssets.objectId, ...preparedWithAssets.lenses };

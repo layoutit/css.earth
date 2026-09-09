@@ -28,7 +28,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e9a1b60ed50331d3f6a2ef392a42956112a5e02788507b22cb1fe83a894f3c4e"
+          "sha256": "d0a2070031903927eaaf620de11a763f732d7b1d1356a8e86650c7c89e97bd26"
         },
         {
           "id": "title",
@@ -43,12 +43,17 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+          "sha256": "f9c306f8738d432ab02ebff965e9e93f71a03fe516b7f9b171de63b66aa9033f"
         },
         {
           "id": "rotation",
           "path": "source/preparation/rotation.json",
           "sha256": "4444717028de92d5747cdcb7b02ceebb3d83b0152377e31801eed56f410b6008"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json",
+          "sha256": "6bc4dc9899145da6c2d66e60c76a8150b309df19cf3404bcff1329c434dcb3a7"
         }
       ],
       "shape": {

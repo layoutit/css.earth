@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/himalia/",
+  "charts": [
+    {
+      "kind": "observations",
+      "id": "nirspec-g235m",
+      "title": "Himalia · G235M",
+      "description": "JWST/NIRSpec G235M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+      "output": "himalia-nirspec-g235m.png",
+      "dataOutput": "himalia-nirspec-g235m.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec G235M",
+        "date": "2024-01-31",
+        "time": "16:18:49.599",
+        "sourceProduct": "jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+        "pipeline": "2.0.1",
+        "crdsContext": "jwst_1535.pmap",
+        "archiveTargetName": "HIMALIA",
+        "targetRaDegrees": 35.29486267069264,
+        "targetDecDegrees": 13.371665359081087,
+        "dataQualityPolicy": "Omit any nonzero DQ from plot; retain all rows and flags in CSV.",
+        "sourceType": "POINT",
+        "extractionCenterPixels": [
+          25,
+          26
+        ],
+        "quantity": "Calibrated extracted flux density; not author-reduced reflectance."
+      },
+      "source": "spectroscopy/jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+      "sha256": "9ad5cbbdfabd252908847c97984784f18133d22c31ed67feb2bc6c16f14cbc86",
+      "format": "jwst-x1d",
+      "fits": {
+        "targetName": "HIMALIA",
+        "calibrationVersion": "2.0.1",
+        "crdsContext": "jwst_1535.pmap",
+        "observationDate": "2024-01-31"
+      },
+      "sampleCount": 1425,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1.6,
+        "maximum": 3.2,
+        "ticks": [
+          2.0,
+          2.5,
+          3.0
+        ]
+      },
+      "y": {
+        "label": "Aperture flux density (µJy)",
+        "minimum": 500,
+        "maximum": 3000,
+        "ticks": [
+          500,
+          1000,
+          1500,
+          2000,
+          2500,
+          3000
+        ]
+      }
+    },
+    {
+      "kind": "observations",
+      "id": "nirspec-g395m",
+      "title": "Himalia · G395M",
+      "description": "JWST/NIRSpec G395M · 2024-01-31. Archive point-source extraction, pipeline 2.0.1. Flux density with propagated 1σ errors; flagged samples are omitted from the plot and retained in the CSV. No solar-spectrum division or thermal subtraction has been applied, so this is not the published relative-reflectance spectrum. Reflected sunlight and thermal emission both contribute, particularly beyond 4 µm.",
+      "output": "himalia-nirspec-g395m.png",
+      "dataOutput": "himalia-nirspec-g395m.csv",
+      "metadata": {
+        "instrument": "JWST NIRSpec G395M",
+        "date": "2024-01-31",
+        "time": "15:58:38.656",
+        "sourceProduct": "jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+        "pipeline": "2.0.1",
+        "crdsContext": "jwst_1535.pmap",
+        "archiveTargetName": "HIMALIA",
+        "targetRaDegrees": 35.293584942155164,
+        "targetDecDegrees": 13.371268322964251,
+        "dataQualityPolicy": "Omit any nonzero DQ from plot; retain all rows and flags in CSV.",
+        "sourceType": "POINT",
+        "extractionCenterPixels": [
+          26,
+          26
+        ],
+        "quantity": "Calibrated extracted flux density; not author-reduced reflectance."
+      },
+      "source": "spectroscopy/jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+      "sha256": "965f2f8579c36626509e10487d71b7addf932493c9b148a920b95d81f352c774",
+      "format": "jwst-x1d",
+      "fits": {
+        "targetName": "HIMALIA",
+        "calibrationVersion": "2.0.1",
+        "crdsContext": "jwst_1535.pmap",
+        "observationDate": "2024-01-31"
+      },
+      "sampleCount": 1341,
+      "columns": {
+        "x": 0,
+        "y": 1,
+        "error": 2,
+        "count": 3
+      },
+      "yScale": 1000000.0,
+      "uncertainty": "one-sigma",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 2.8,
+        "maximum": 5.3,
+        "ticks": [
+          3.0,
+          3.5,
+          4.0,
+          4.5,
+          5.0
+        ]
+      },
+      "y": {
+        "label": "Aperture flux density (µJy)",
+        "minimum": 500,
+        "maximum": 2000,
+        "ticks": [
+          500,
+          1000,
+          1500,
+          2000
+        ]
+      }
+    }
+  ]
+}

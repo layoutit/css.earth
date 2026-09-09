@@ -87,13 +87,49 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false
+    },
+    {
+      "id": "nirspec-g235m",
+      "path": "spectroscopy/jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+      "expectedBytes": 345600,
+      "expectedSha256": "9ad5cbbdfabd252908847c97984784f18133d22c31ed67feb2bc6c16f14cbc86",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+      "catalog": "https://doi.org/10.17909/pwcf-c575",
+      "credit": "NASA/ESA/CSA JWST; STScI MAST; program 4028 team",
+      "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
+      "redistribution": "Public science archive data with mission and observing-program credit.",
+      "consumers": [
+        "observation-charts"
+      ]
+    },
+    {
+      "id": "nirspec-g395m",
+      "path": "spectroscopy/jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+      "expectedBytes": 334080,
+      "expectedSha256": "965f2f8579c36626509e10487d71b7addf932493c9b148a920b95d81f352c774",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+      "catalog": "https://doi.org/10.17909/pwcf-c575",
+      "credit": "NASA/ESA/CSA JWST; STScI MAST; program 4028 team",
+      "license": "Public JWST scientific data; retain mission, archive, program and processing attribution.",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Download the reviewed calibrated X1D FITS; the complete small file is retained in this repository.",
+      "redistribution": "Public science archive data with mission and observing-program credit.",
+      "consumers": [
+        "observation-charts"
+      ]
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3271,
-      "expectedSha256": "02f3b52e8acce3bf6cd3cac21cabeca835867aacdffc3c59d3c0b32574b21c54",
+      "expectedBytes": 6073,
+      "expectedSha256": "2f2bc5e8e2dde29c18305fee9c6f785495fb63abc91202dfc837015db0c47acc",
       "purpose": "Scientific source and authored preparation evidence."
     },
     {
@@ -104,8 +140,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "expectedBytes": 1086,
+      "expectedSha256": "af154fd9aee7c6f8b33fa85b3791da763b51b5bdf7ca7103ade7a3cf3846c5ab",
       "purpose": "Scientific source and authored preparation evidence."
     },
     {
@@ -179,6 +215,18 @@
       "expectedBytes": 1537,
       "expectedSha256": "4af11f4c47db1cf5747cc5b7a0bce658688325dfa95365bf877a558f9344b5e3",
       "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "content/charts.json",
+      "purpose": "Measured observation chart recipe and provenance.",
+      "expectedBytes": 4721,
+      "expectedSha256": "b9cddaa815a46896da9453d397619d1cda9def3c313f6a1616afb8072c78b4da"
+    },
+    {
+      "path": "OBSERVATIONS.md",
+      "expectedBytes": 3719,
+      "expectedSha256": "211c0fb265dcd89cc384b1b83a4db02a360b67740392b078709e4201589f2bef",
+      "purpose": "Observation quantity, uncertainty, calibration, sampling and display limitations."
     }
   ],
   "generatedIntermediates": [

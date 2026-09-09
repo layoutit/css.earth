@@ -1,0 +1,150 @@
+[
+  {
+    "body": "albiorix",
+    "id": "nirspec-prism",
+    "rows": 941,
+    "validRows": 940,
+    "sha256": "3ff215367bf5e9c53c12ffd964b413b2739be281803bb2368c14b320db3cd1f1",
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 0.6025000237859786,
+        "fluxJy": 1.9466211531983942e-05,
+        "errorJy": 6.198430990477764e-07,
+        "quality": 0
+      },
+      {
+        "row": 470,
+        "wavelength": 2.9524999712593853,
+        "fluxJy": 1.1028650628001997e-05,
+        "errorJy": 5.2181417236342766e-08,
+        "quality": 0
+      },
+      {
+        "row": 939,
+        "wavelength": 5.297499918844551,
+        "fluxJy": 4.8271607338454904e-05,
+        "errorJy": 1.2480615278880129e-06,
+        "quality": 0
+      },
+      {
+        "row": 940,
+        "wavelength": 5.302499918732792,
+        "fluxJy": 0.0,
+        "errorJy": 0.0,
+        "quality": 1
+      }
+    ]
+  },
+  {
+    "body": "siarnaq",
+    "id": "nirspec-prism",
+    "rows": 941,
+    "validRows": 940,
+    "sha256": "da3cd8f6c90a7288ff1e22fe049ba6556783c381fbda32b6ea48f003d4d73b70",
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 0.6025000237859786,
+        "fluxJy": -4.2352297869571943e-07,
+        "errorJy": 4.0250723865120296e-07,
+        "quality": 0
+      },
+      {
+        "row": 470,
+        "wavelength": 2.9524999712593853,
+        "fluxJy": 2.769614765334567e-07,
+        "errorJy": 3.850614953628014e-08,
+        "quality": 0
+      },
+      {
+        "row": 939,
+        "wavelength": 5.297499918844551,
+        "fluxJy": 6.110074985256041e-07,
+        "errorJy": 1.3741096380183353e-07,
+        "quality": 0
+      },
+      {
+        "row": 940,
+        "wavelength": 5.302499918732792,
+        "fluxJy": 0.0,
+        "errorJy": 0.0,
+        "quality": 1
+      }
+    ]
+  },
+  {
+    "body": "himalia",
+    "id": "nirspec-g235m",
+    "rows": 1425,
+    "validRows": 1425,
+    "sha256": "9ad5cbbdfabd252908847c97984784f18133d22c31ed67feb2bc6c16f14cbc86",
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 1.6605299666407518,
+        "fluxJy": 0.002212385906581705,
+        "errorJy": 2.3875476047630387e-05,
+        "quality": 0
+      },
+      {
+        "row": 712,
+        "wavelength": 2.4152499941992573,
+        "fluxJy": 0.0017504581807588854,
+        "errorJy": 6.2299683604857404e-06,
+        "quality": 0
+      },
+      {
+        "row": 1423,
+        "wavelength": 3.168910021719057,
+        "fluxJy": 0.0010344584911778682,
+        "errorJy": 9.039719786625042e-06,
+        "quality": 0
+      },
+      {
+        "row": 1424,
+        "wavelength": 3.169970021757763,
+        "fluxJy": 0.0010280262375207939,
+        "errorJy": 1.514366402634705e-05,
+        "quality": 0
+      }
+    ]
+  },
+  {
+    "body": "himalia",
+    "id": "nirspec-g395m",
+    "rows": 1341,
+    "validRows": 1341,
+    "sha256": "965f2f8579c36626509e10487d71b7addf932493c9b148a920b95d81f352c774",
+    "anchors": [
+      {
+        "row": 0,
+        "wavelength": 2.8708948855637573,
+        "fluxJy": 0.001263262260691988,
+        "errorJy": 1.161694611322584e-05,
+        "quality": 0
+      },
+      {
+        "row": 670,
+        "wavelength": 4.070194891828578,
+        "fluxJy": 0.0008671242341408983,
+        "errorJy": 4.651429017228444e-06,
+        "quality": 0
+      },
+      {
+        "row": 1339,
+        "wavelength": 5.267704898084048,
+        "fluxJy": 0.0015939614198260726,
+        "errorJy": 1.5014904613908477e-05,
+        "quality": 0
+      },
+      {
+        "row": 1340,
+        "wavelength": 5.269494898093399,
+        "fluxJy": 0.001604893025866657,
+        "errorJy": 4.997730896531513e-05,
+        "quality": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "body": "albiorix",
+    "file": "jw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+    "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o032_t008_nirspec_prism-clear_x1d.fits",
+    "bytes": 270720,
+    "sha256": "3ff215367bf5e9c53c12ffd964b413b2739be281803bb2368c14b320db3cd1f1",
+    "pipeline": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  {
+    "body": "siarnaq",
+    "file": "jw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+    "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw03716-o033_t009_nirspec_prism-clear_x1d.fits",
+    "bytes": 270720,
+    "sha256": "da3cd8f6c90a7288ff1e22fe049ba6556783c381fbda32b6ea48f003d4d73b70",
+    "pipeline": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  {
+    "body": "himalia",
+    "file": "jw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+    "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g235m-f170lp_x1d.fits",
+    "bytes": 345600,
+    "sha256": "9ad5cbbdfabd252908847c97984784f18133d22c31ed67feb2bc6c16f14cbc86",
+    "pipeline": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  {
+    "body": "himalia",
+    "file": "jw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+    "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw04028-o001_t001_nirspec_g395m-f290lp_x1d.fits",
+    "bytes": 334080,
+    "sha256": "965f2f8579c36626509e10487d71b7addf932493c9b148a920b95d81f352c774",
+    "pipeline": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  }
+]
