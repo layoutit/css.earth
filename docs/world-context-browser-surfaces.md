@@ -690,3 +690,36 @@ or trace loss. `qualification.json` includes the three artifact SHA-256 values.
 p95 remains 33.4 ms, and the whole-route maximum is 50 ms. The preceding capture
 had 207/625 and a 150 ms maximum, but input delivery and host load differ. The
 verified improvement is reduced projection work, not a causal smoothness claim.
+
+
+### One owner for annotation opacity animation
+
+The shared context stylesheet applied a 120 ms CSS opacity transition to every
+camera-published orbit and circle, and to labels already driven by the retained
+fader. The preceding synchronized route started 37,570 CSS opacity transitions,
+including 30,907 in the planetary band. The renderer now publishes camera alpha
+directly, retains the existing label visibility fade, and explicitly owns flight
+fade-out/resume through the retained faders. Resume uses a common 120 ms deadline
+that subsequent camera samples cannot extend. Hover brightness now updates
+immediately; pointer feedback and 120 ms ring growth/shrink remain.
+
+The 61 affected tests, renderer typecheck and build pass. Native Mars label-click
+flights at DPR 1/2 have seven/eight intermediate fading samples, reach Mars, retain
+world nodes and one camera, and produce no CSS opacity animations. Across 24
+settled browser views, published orbit geometry and label styles match; screenshot
+differences are at most two channel levels. Evidence:
+`output/playwright/opacity-ownership{,-flight,-visual}/`.
+
+The full synchronized DPR 2 route is
+`output/world-context-zoom/opacity-ownership-dpr2/`, recorder
+`3054df7d-909e-471b-9fc4-ededc1a232ea`. It records zero CSS opacity transitions.
+Planetary-band long intervals fall from 191/634 (30.1%) to 66/712 (9.3%); Chrome
+also records 66 `DroppedFrame` events in that band. P95 is still 33.3 ms, so the
+performance target remains unmet. Host load and input delivery differ; these
+observations do not establish a statistical speedup. Whole-route maximum is
+50.1 ms. Sampling costs about 1 ms, with 1.2 ms p95.
+
+All 2,906 video observations are preserved in timestamp order, with 57 microseconds
+recorder/trace drift and maximum video PTS error 1.439 ms. Source hashes match;
+world/input/document identities are stable; no errors, recording-time HMR or trace
+loss occurred. `qualification.json` records artifact hashes and validation.

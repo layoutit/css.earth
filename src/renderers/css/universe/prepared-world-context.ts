@@ -74,6 +74,7 @@ import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 
 const LABEL_FADE_MS = 200;
+const FLIGHT_FADE_MS = 120;
 interface LabelFadeState { element: HTMLElement; target: number; hideTimer: number | null; }
 
 export interface PreparedContextPoint {
@@ -396,6 +397,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   const indicators = createLabelDeclutter({ capacity: bodies.length, spacingPixels: 2 });
   const windowTarget = host.ownerDocument.defaultView!;
   const fader = createOpacityFader(windowTarget, 'var(--context-label-opacity, 1)');
+  const lineFader = createOpacityFader(windowTarget, 'var(--context-line-opacity, 1)');
+  let annotationResumeDeadline = 0;
   const clearHide = (state: LabelFadeState) => {
     if (state.hideTimer !== null) windowTarget.clearTimeout(state.hideTimer);
     state.hideTimer = null;
@@ -427,7 +430,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let pickRanks = new Map<(typeof bodies)[number], number>();
   let overview = false;
   let navigationIndicatorsVisible = true;
-  const suspendedOpacity = new Map<HTMLElement, string>();
   let latest: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
   const invalidateLabelSizes = () => { for (const entry of bodies) entry.labelSize.width = 0; };
   const fonts = host.ownerDocument.fonts;
@@ -449,20 +451,23 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       systemRetired = false;
       if (!visible) {
         pickTargets = []; picking.publish(root, pickTargets);
+        annotationResumeDeadline = 0;
         for (const entry of bodies) {
-          // The flight override owns opacity until annotations resume.
-          clearHide(entry.fade); fader.cancel(entry.label);
-          for (const node of [entry.label, entry.indicator, entry.orbitRoot]) {
-            suspendedOpacity.set(node, node.style.opacity); node.style.opacity = '0';
-          }
+          // The retained faders own the flight transition. Camera publication
+          // leaves annotations alone while their last image fades away.
+          clearHide(entry.fade);
+          fader.set(entry.label, 0, FLIGHT_FADE_MS);
+          lineFader.set(entry.indicator, 0, FLIGHT_FADE_MS);
+          lineFader.set(entry.orbitRoot, 0, FLIGHT_FADE_MS);
           entry.labelNavigation.update(null, entry.body.name);
           entry.indicatorNavigation.update(null, entry.body.name);
           entry.orbitNavigation?.update(null, entry.body.name);
           entry.orbitNavigable = false;
         }
       } else {
-        for (const [node, opacity] of suspendedOpacity) node.style.opacity = opacity;
-        suspendedOpacity.clear();
+        // Every resumed camera sample shares this one deadline. It may update
+        // the target alpha, but must not restart another full-length transition.
+        annotationResumeDeadline = windowTarget.performance.now() + FLIGHT_FADE_MS;
         if (latest) this.publish(latest.world, latest.viewport);
       }
     },
@@ -695,6 +700,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const acceptedRects: LabelScreenRect[] = [];
       pickTargets = [];
       const orbitBounds = { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity };
+      const resumeDuration = Math.max(0, annotationResumeDeadline - windowTarget.performance.now());
       // Only the resolved presentation owns DOM visibility and hit targets.
       for (const { entry, x, y, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, inFrame, lineWidth, orbitVisibility, segments, labelPosition } of projectedBodies) {
         const { body, marker, indicator, label } = entry;
@@ -722,7 +728,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } } : null;
         if (entry.indicatorPick) pickTargets.push(entry.indicatorPick);
         if (annotationVisible) {
-          indicator.style.opacity = `calc(${indicatorOpacity} * var(--context-line-opacity, 1))`;
+          lineFader.set(indicator, indicatorOpacity, resumeDuration);
           indicator.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
         }
         if (entry.orbit) {
@@ -738,7 +744,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             entry.orbitRoot.style.pointerEvents = 'none';
             entry.orbitRoot.tabIndex = -1;
           }
-          entry.orbitRoot.style.opacity = `calc(${orbitVisibility} * var(--context-line-opacity, 1))`;
+          lineFader.set(entry.orbitRoot, orbitVisibility, resumeDuration);
           const update = writePieces(entry.pieces, segments, entry.previousCount, entry.piecePool.setVisible);
           if (update.overflowed) throw new Error('Prepared context line pool overflowed.');
           entry.previousCount = update.count;
@@ -764,7 +770,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     destroy() { if (!destroyed) { destroyed = true; picking.remove(root);
       if (annotationFrame !== null) windowTarget.cancelAnimationFrame(annotationFrame);
       for (const event of ['objecthoverchange', 'focusin', 'focusout']) host.removeEventListener(event, refreshAnnotations);
-      markerResize?.disconnect(); fader.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); labelExclusions = []; backgroundExclusions = []; for (const entry of bodies) { clearHide(entry.fade); entry.navigation.destroy(); entry.indicatorNavigation.destroy(); entry.labelNavigation.destroy(); entry.orbitNavigation?.destroy(); } root.remove(); } },
+      markerResize?.disconnect(); fader.destroy(); lineFader.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); labelExclusions = []; backgroundExclusions = []; for (const entry of bodies) { clearHide(entry.fade); entry.navigation.destroy(); entry.indicatorNavigation.destroy(); entry.labelNavigation.destroy(); entry.orbitNavigation?.destroy(); } root.remove(); } },
   });
   for (const event of ['objecthoverchange', 'focusin', 'focusout']) host.addEventListener(event, refreshAnnotations);
   return layer;

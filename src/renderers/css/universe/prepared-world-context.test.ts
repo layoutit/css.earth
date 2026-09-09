@@ -8,7 +8,7 @@ import { OBJECTS } from '../../../../site/objects.mjs';
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];
-  readonly style = Object.assign({} as Record<string, string>, {
+  readonly style = Object.assign({ opacity: '' } as Record<string, string>, {
     getPropertyValue: (name: string) => this.style[name] ?? '',
     setProperty: (name: string, value: string) => { this.style[name] = value; },
   });
@@ -136,9 +136,10 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   expect(all(root)).toEqual(nodes);
   layer.setNavigationIndicatorsVisible(false);
   layer.setHiddenOrbits([]);
-  expect(target.style.opacity).toBe('0');
+  expect(Number.parseFloat(target.style.opacity.slice(5))).toBe(0);
   expect(target.dataset.objectNavigate).toBeUndefined();
   layer.setNavigationIndicatorsVisible(true);
+  root.ownerDocument.defaultView.advance(120);
   expect(target.style.opacity).toBe(visibleTarget);
   expect(target.dataset.objectNavigate).toBe('mercury');
   expect(other.style.opacity).toBe(visibleOther);
@@ -982,7 +983,7 @@ test('flight suspension owns opacity even when a label fade is in progress', () 
   layer.setNavigationIndicatorsVisible(false);
   expect(document.defaultView.timers.size).toBe(0);
   document.defaultView.advance(400);
-  expect(label.style.opacity).toBe('0');
+  expect(Number.parseFloat(label.style.opacity.slice(5))).toBe(0);
   layer.setNavigationIndicatorsVisible(true);
   document.defaultView.advance(200);
   expect(Number.parseFloat(label.style.opacity.slice(5))).toBeCloseTo(partialAlpha * 2);
@@ -992,7 +993,7 @@ test('flight suspension owns opacity even when a label fade is in progress', () 
   layer.setNavigationIndicatorsVisible(false);
   expect(document.defaultView.timers.size).toBe(0);
   document.defaultView.advance(400);
-  expect(label.style.opacity).toBe('0');
+  expect(Number.parseFloat(label.style.opacity.slice(5))).toBe(0);
   layer.setNavigationIndicatorsVisible(true);
   document.defaultView.advance(200);
   expect(Number.parseFloat(label.style.opacity.slice(5))).toBe(0);
@@ -1101,13 +1102,20 @@ test('orbit endpoints follow the rendered circle through growth and shrink witho
 test('flight overlays fade independently while retained body images keep following the camera', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const mercury = layer.inspect().find(entry => entry.id === 'mercury')!;
-  const nodes = all(root), orbit = mercury.orbit.map(node => ({ ...node.style }));
+  const nodes = all(root);
   const markerTransform = mercury.marker.style.transform, markerOpacity = mercury.marker.style.opacity;
   const labelTransform = mercury.label.style.transform;
+  const alpha = () => Number.parseFloat(mercury.indicator.style.opacity.slice(5));
+  const initial = alpha();
   layer.setNavigationIndicatorsVisible(false);
+  expect(alpha()).toBe(initial);
+  root.ownerDocument.defaultView.advance(60);
+  expect(alpha()).toBeGreaterThan(0); expect(alpha()).toBeLessThan(initial);
+  root.ownerDocument.defaultView.advance(60);
+  const orbit = mercury.orbit.map(node => ({ ...node.style }));
   const measurements = nodes.reduce((sum, node) => sum + node.measurements, 0);
-  expect(mercury.label.style.opacity).toBe('0');
-  expect(mercury.indicator.style.opacity).toBe('0');
+  expect(mercury.label.style.opacity).toBe('calc(0 * var(--context-label-opacity, 1))');
+  expect(alpha()).toBe(0);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [50, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels: 800, heightPixels: 600 });
@@ -1117,7 +1125,17 @@ test('flight overlays fade independently while retained body images keep followi
   expect(mercury.orbit.map(node => ({ ...node.style }))).toEqual(orbit);
   expect(mercury.label.style.transform).toBe(labelTransform);
   layer.setNavigationIndicatorsVisible(true);
-  expect(mercury.indicator.style.opacity).not.toBe('0');
+  expect(alpha()).toBe(0);
+  root.ownerDocument.defaultView.advance(60);
+  expect(alpha()).toBeGreaterThan(0);
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [50, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels: 800, heightPixels: 600 });
+  root.ownerDocument.defaultView.advance(60);
+  const atDeadline = alpha();
+  expect(atDeadline).toBeCloseTo(initial, 3); // The translated camera has a slightly different target.
+  root.ownerDocument.defaultView.advance(120);
+  expect(alpha()).toBe(atDeadline); // The intervening camera sample did not extend the deadline.
   expect(mercury.indicator.style.transform).toContain('50px');
   expect(mercury.orbit.map(node => ({ ...node.style }))).not.toEqual(orbit);
   expect(all(root)).toEqual(nodes);
