@@ -46,7 +46,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
-        "title": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
+        "title": "Triangular shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/ymir/ymir-model-thumbnail.webp",
         "surface": "ymir-model-surface@2x.webp",

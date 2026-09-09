@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fbe7d00584019a58184b413e4aaf632f71d12da80b33265bff1e78e9df98f068"
+    "sha256": "4546c086196c42803a80891d89b47b4c5c61fab59ada810c2b91c9df32a68001"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -166,7 +166,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a6b9f97c28fcb07c0a97dd89b8462db30ba250cafce45a5aa0f4e9afe413fc45",
+      "sha256": "1d019f22059c1b908384d58fc112fc396c3e78e2676b4d02d6fbb9698fe549a3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -245,7 +245,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
-              "title": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
+              "title": "Monochrome mosaic",
               "thumbnail": "/scenes/charon/charon-normal-thumbnail.webp",
               "surface": "charon-normal-surface@2x.webp",
               "poles": "charon-normal-poles@2x.webp",
@@ -255,13 +255,13 @@
                 "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m"
               },
               "detail": "Corrected mosaic",
-              "summary": "New Horizons images with corrected lighting. Shadows remain; the unobserved south is left unavailable."
+              "summary": "Lighting is corrected, but local photographed shadows remain. Detail varies; the unobserved south is left unavailable."
             },
             {
               "id": "enhanced-color",
               "label": "Enhanced color",
               "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
-              "title": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
+              "title": "MVIC enhanced-color mosaic",
               "thumbnail": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
               "surface": "charon-enhanced-color-surface@2x.webp",
               "poles": "charon-enhanced-color-poles@2x.webp",
@@ -276,7 +276,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
-              "title": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
+              "title": "Stereo and shading terrain model",
               "thumbnail": "/scenes/charon/charon-elevation-thumbnail.webp",
               "surface": "charon-elevation-surface@2x.webp",
               "poles": "charon-elevation-poles@2x.webp",
@@ -543,8 +543,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a6b9f97c28fcb07c0a97dd89b8462db30ba250cafce45a5aa0f4e9afe413fc45",
-      "bytes": 11058,
+      "sha256": "1d019f22059c1b908384d58fc112fc396c3e78e2676b4d02d6fbb9698fe549a3",
+      "bytes": 10544,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,7 +4,7 @@
   "id": "hyperion",
   "displayName": "Hyperion",
   "panel": {
-    "introduction": "Hyperion is Saturn\u2019s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls. The displayed orientation and lighting are illustrative; its chaotic tumbling is not simulated.",
+    "introduction": "Hyperion is Saturn’s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls. The displayed orientation and lighting are illustrative; its chaotic tumbling is not simulated.",
     "facts": [
       {
         "id": "radius",
@@ -46,14 +46,14 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "William Lassell and William and George Bond \u00b7 1848"
+        "value": "William Lassell and William and George Bond · 1848"
       }
     ],
     "moreFacts": [
       {
         "id": "density",
         "label": "Mean density",
-        "value": "0.54 \u00b1 0.05 g/cm\u00b3",
+        "value": "0.54 ± 0.05 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -75,7 +75,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
-        "title": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
+        "title": "ISS calibrated mosaic",
         "detail": "Cassini clear-filter mosaic",
         "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
         "surface": "hyperion-normal-surface@2x.webp",
@@ -91,7 +91,7 @@
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
-        "title": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
+        "title": "Shape-derived radial height",
         "detail": "Shape-derived radial height",
         "thumbnail": "/scenes/hyperion/hyperion-elevation-thumbnail.webp",
         "surface": "hyperion-elevation-surface@2x.webp",
@@ -107,7 +107,7 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "\u221250",
+            "−50",
             "0",
             "60"
           ],

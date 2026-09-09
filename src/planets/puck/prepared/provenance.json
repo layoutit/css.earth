@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3850e18df7f704704155e100fd851a8584851e07737406362f9b605a213b4a9f"
+    "sha256": "32db4df9653a1eb3dad67d146d6bbcdc8cc443b584acd5f9df1a8fb64d7586ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -141,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "389b64cdb9c6dabed0b6919e86609daa8d264f028fe155b23061e29bb2611ca2",
+      "sha256": "9e0ee4df193a7d2e67d39ad24483135c4675478db52e78edeb1cbf147d3c2ce9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -189,7 +189,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
-              "title": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
+              "title": "Image C2683716",
               "detail": "Voyager clear",
               "thumbnail": "/scenes/puck/puck-normal-thumbnail.webp",
               "surface": "puck-normal-surface@2x.webp",
@@ -199,7 +199,7 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716"
               },
-              "summary": "Voyager 2 image at about 4.77 km/pixel. Fine terrain is unresolved; gray grid: unseen or unreliable areas."
+              "summary": "Each source pixel spans about 4.77 km, too coarse for fine terrain. The gray grid marks unseen or unreliable areas."
             }
           ]
         },
@@ -366,8 +366,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "819987fa822ca9b49eac62ace035e6c8add59630cb4c137b6899b67fdb302d61",
-      "bytes": 3345,
+      "sha256": "9e0ee4df193a7d2e67d39ad24483135c4675478db52e78edeb1cbf147d3c2ce9",
+      "bytes": 3209,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

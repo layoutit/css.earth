@@ -30,7 +30,8 @@
         "sourceBytes": 4754643,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Orbited Mercury to study its geology, magnetic field, and surface composition. Its measurements also confirmed water ice in deposits near the poles."
     },
     {
       "id": "cassini",
@@ -61,7 +62,8 @@
         "kind": "icon",
         "sourceSha256": "3466f42b90c07ba0271db0686cfd39f6e07536642e1e238516ce124d04c180f3",
         "sourceBytes": 4243095
-      }
+      },
+      "description": "Explored Saturn, its rings, and its moons from orbit. Observations revealed methane rivers and seas on Titan and jets of ice and gas from Enceladus."
     },
     {
       "id": "dawn",
@@ -92,7 +94,8 @@
         "sourceBytes": 2159257,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Visited Vesta and Ceres in the main asteroid belt, spending time in orbit around each. The two worlds offered a comparison between a giant asteroid and a dwarf planet."
     },
     {
       "id": "galileo",
@@ -123,7 +126,8 @@
         "sourceBytes": 15797,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Orbited Jupiter for almost eight years and made close passes by its major moons. Its observations provided evidence for an ocean beneath the ice on Europa."
     },
     {
       "id": "hubble",
@@ -154,7 +158,9 @@
         "kind": "icon",
         "sourceSha256": "a9ef77327e05ad881936c14939401509dc178a2953e5943f184576d6c7bedeb6",
         "sourceBytes": 5912305
-      }
+      },
+      "description": "Observes planets, stars, and galaxies from Earth orbit in ultraviolet, visible, and near-infrared light. Its cameras record images, while its spectrographs measure light to study composition.",
+      "descriptionSourceUrl": "https://science.nasa.gov/mission/hubble/overview/about-hubble/"
     },
     {
       "id": "juno",
@@ -185,7 +191,8 @@
         "sourceBytes": 53760,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Studies Jupiter beneath its clouds to understand how the planet formed. Close passes revealed polar storms, deep winds, and volcanic activity on its moon Io."
     },
     {
       "id": "new-horizons",
@@ -216,7 +223,8 @@
         "sourceBytes": 1069353,
         "kind": "emblem",
         "credit": "NASA/JPL/APL/SwRI"
-      }
+      },
+      "description": "Flew past Pluto and its moons, then continued to the Kuiper Belt object Arrokoth. These encounters provided the first close views of both distant worlds."
     },
     {
       "id": "sdo",
@@ -247,7 +255,8 @@
         "sourceBytes": 2051141,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Monitors the Sun’s interior, atmosphere, magnetic field, and energy output. These observations help explain how solar activity develops and how it drives changes in space weather."
     },
     {
       "id": "voyager-1",
@@ -278,7 +287,8 @@
         "sourceBytes": 108545,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Flew past Jupiter and Saturn before crossing into interstellar space. Its journey carried it beyond the heliopause, the boundary of the region dominated by the solar wind."
     },
     {
       "id": "voyager-2",
@@ -309,7 +319,8 @@
         "sourceBytes": 108545,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Explored Jupiter and Saturn, then continued to Uranus and Neptune. It became the only spacecraft to visit those two planets before entering interstellar space in 2018."
     },
     {
       "id": "lro",
@@ -340,16 +351,17 @@
         "sourceBytes": 2028960,
         "kind": "emblem",
         "credit": "National Aeronautics and Space Administration   http://lro.gsfc.nasa.gov/gallery-media.html >"
-      }
+      },
+      "description": "Maps the Moon’s terrain and measures its temperature, composition, and radiation environment. The observations help identify landing sites and locate resources near the lunar south pole."
     },
     {
       "id": "grail",
-      "name": "GRAIL \u00b7 Ebb & Flow",
+      "name": "GRAIL · Ebb & Flow",
       "sourceUrl": "https://science.nasa.gov/mission/grail/",
       "facts": [
         {
           "label": "Mission",
-          "value": "GRAIL \u00b7 Ebb & Flow",
+          "value": "GRAIL · Ebb & Flow",
           "url": "https://science.nasa.gov/mission/grail/",
           "detail": "NASA"
         },
@@ -371,7 +383,8 @@
         "sourceBytes": 465402,
         "kind": "emblem",
         "credit": "NASA/JPL/Corby Waste"
-      }
+      },
+      "description": "Two probes, Ebb and Flow, flew around the Moon together. Changes in their separation measured variations in lunar gravity, helping scientists determine the Moon’s internal structure."
     },
     {
       "id": "viking",
@@ -402,7 +415,8 @@
         "sourceBytes": 1924048,
         "kind": "emblem",
         "credit": "THIS LOGO IS IN THE NASA PUBLIC DOMAIN"
-      }
+      },
+      "description": "Sent two orbiters and two landers to Mars. The landers returned images from the surface, beginning a program of close observation that later Mars missions built on."
     },
     {
       "id": "mro",
@@ -433,7 +447,8 @@
         "sourceBytes": 129628,
         "kind": "emblem",
         "credit": "National Aeronautics and Space Administration (NASA)  /  Jet Propulsion Laboratory"
-      }
+      },
+      "description": "Examines the history of water on Mars using close surface images, mineral measurements, and subsurface observations. It also monitors the atmosphere and helps identify potential landing sites."
     },
     {
       "id": "odyssey",
@@ -464,7 +479,8 @@
         "kind": "icon",
         "sourceSha256": "ccebe04bf13fa1d7c5c8c517cd1a20f7f2d6025a08c5f2d1f8b9092c977c7179",
         "sourceBytes": 2722477
-      }
+      },
+      "description": "Mapped the chemical elements and minerals on the Martian surface. Its observations also record clouds, fog, frost, and surface rocks to support the study and exploration of Mars."
     },
     {
       "id": "near-shoemaker",
@@ -495,7 +511,8 @@
         "kind": "icon",
         "sourceSha256": "e7e762caa1a1ee193015542d5b9139702c6d99080ac9edc5eb5bec919b5f3e41",
         "sourceBytes": 156205
-      }
+      },
+      "description": "Became the first spacecraft to orbit an asteroid when it reached Eros. After a year of observations, it touched down on the surface, also making the first asteroid landing."
     },
     {
       "id": "osiris-rex",
@@ -526,7 +543,8 @@
         "sourceBytes": 447581,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Collected rocks and dust from asteroid Bennu and delivered them to Earth in a capsule. The spacecraft then continued toward Apophis under the new mission name OSIRIS-APEX."
     },
     {
       "id": "hayabusa2",
@@ -557,7 +575,8 @@
         "kind": "icon",
         "sourceSha256": "b3f9dfce8e1a3ab7f4b9f5ad252ff42ca225d3ef2838c52b99131da4fe080386",
         "sourceBytes": 1195703
-      }
+      },
+      "description": "Collected material from the surface and subsurface of asteroid Ryugu. It returned the samples to Earth in a capsule, allowing researchers to study them in laboratories."
     },
     {
       "id": "hayabusa",
@@ -588,7 +607,9 @@
         "kind": "icon",
         "sourceSha256": "1f6aed2ace5cc97fc65e3cc091431be85b8564c75bec42dc0c3ea72273f046a1",
         "sourceBytes": 393166
-      }
+      },
+      "description": "Traveled to asteroid Itokawa to collect material and return it to Earth. The recovered capsule carried rocky grains that could be examined directly in laboratories.",
+      "descriptionSourceUrl": "https://darts.isas.jaxa.jp/en/missions/hayabusa"
     },
     {
       "id": "rosetta",
@@ -619,7 +640,8 @@
         "kind": "icon",
         "sourceSha256": "faa3d7e0c36462f0c997a4dee9b990fd71a6d67944849486e028a5a428c20a5c",
         "sourceBytes": 3567990
-      }
+      },
+      "description": "Followed comet 67P/Churyumov–Gerasimenko to study its nucleus and surrounding environment. It also delivered the Philae probe to the surface during its stay at the comet."
     },
     {
       "id": "terra",
@@ -650,7 +672,8 @@
         "sourceBytes": 1189300,
         "kind": "emblem",
         "credit": "NASA"
-      }
+      },
+      "description": "Measures interactions between Earth’s land, oceans, atmosphere, and energy balance. Its observations track environmental change and help study natural hazards such as fires and volcanic activity."
     },
     {
       "id": "suomi-npp",
@@ -681,7 +704,8 @@
         "kind": "icon",
         "sourceSha256": "931bba8f7ba9f8136d23e31fcff30be80c0bcc74cc72a36761d84642c80cc204",
         "sourceBytes": 4114140
-      }
+      },
+      "description": "Observes clouds, oceans, vegetation, ice, land, and the atmosphere from Earth orbit. The measurements support studies of daily weather conditions and changes in climate over longer periods."
     },
     {
       "id": "magellan",
@@ -712,7 +736,8 @@
         "kind": "illustration",
         "sourceSha256": "90b9c7a65a85bf05e3bb8f9df5d021908382650ff3ea1facffc97e95dbdfb454",
         "sourceBytes": 84026
-      }
+      },
+      "description": "Used radar to map the surface of Venus from orbit. Its observations covered almost the entire planet, revealing terrain hidden beneath the thick cloud cover."
     },
     {
       "id": "mars-global-surveyor",
@@ -743,7 +768,8 @@
         "kind": "illustration",
         "sourceSha256": "876add3d1e67c7abca7a38bdcb99b133a655dd31c4318a4e9e9170be11b3de1f",
         "sourceBytes": 4604289
-      }
+      },
+      "description": "Mapped Mars and studied its atmosphere, surface, and interior. It also identified potential landing sites and relayed data for later missions operating on the surface."
     }
   ]
 }

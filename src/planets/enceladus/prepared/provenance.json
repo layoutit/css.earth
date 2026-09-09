@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "df489e8a734feb045da8efda37b3538f98e76a087fc814b2e1eef043fa199646"
+    "sha256": "b00b3b8f80f95e1e564c0a8213f2d5d989cf7eb97b078fc5a93afc0679e1418a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -168,7 +168,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "34932fc70bafc3534138d4847d5f6eee6e30abf5a7f1d9b6157cef6778ebcfa5",
+      "sha256": "8939ed6177dc04a3bcb418c0e0c0a9d935f7624559f5ce49c119596497325bd5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -247,7 +247,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
-              "title": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
+              "title": "Schenk–McKinnon mosaic",
               "thumbnail": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
               "surface": "enceladus-normal-surface@2x.webp",
               "poles": "enceladus-normal-poles@2x.webp",
@@ -255,13 +255,13 @@
                 "id": "cassini-schenk-2024-normal",
                 "path": "../manifest.json"
               },
-              "summary": "A controlled Cassini mosaic with varying image detail. Shadows remain; gray grid: no source data."
+              "summary": "Images are aligned to a common surface model, but source detail varies. Photographed shadows remain; the grid marks gaps."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
-              "title": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
+              "title": "Stereo and shading terrain model",
               "thumbnail": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
               "surface": "enceladus-elevation-surface@2x.webp",
               "poles": "enceladus-elevation-poles@2x.webp",
@@ -289,7 +289,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
-              "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+              "title": "JPL v2 SPC shape model",
               "thumbnail": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
               "surface": "enceladus-shape-surface@2x.webp",
               "poles": "enceladus-shape-poles@2x.webp",
@@ -538,8 +538,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "34932fc70bafc3534138d4847d5f6eee6e30abf5a7f1d9b6157cef6778ebcfa5",
-      "bytes": 13021,
+      "sha256": "8939ed6177dc04a3bcb418c0e0c0a9d935f7624559f5ce49c119596497325bd5",
+      "bytes": 12196,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

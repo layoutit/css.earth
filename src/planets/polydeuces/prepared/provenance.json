@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d7a78e3d3e0d1944b0d8cfec9d9a023b54738d5bdec2a48d8ce81e032f786b6"
+    "sha256": "f199a26ccc2d090f2a47aa205f21d5ca2833e92e84441bd2edba94588546d241"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c98db3898fed14b5d11aa85196bbadacc74de9f2352a24bf9945f25e986f2217",
+      "sha256": "f1d7ece683cb3cfccf8b51cf05521e4bf4cf955049f09fb395f60161b83534bb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -187,7 +187,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
-              "title": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
+              "title": "ISS CL1/IR1 image",
               "detail": "Near infrared · coarse coverage",
               "thumbnail": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
               "surface": "polydeuces-normal-surface@2x.webp",
@@ -197,7 +197,7 @@
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/1912.09192"
               },
-              "summary": "A Cassini near-infrared image, only about 9 × 7 pixels across. Brightness is approximate; gray grid: no coverage."
+              "summary": "Only about 9 × 7 source pixels resolve the moon. Brightness is approximate; the gray grid marks unobserved surface."
             }
           ]
         },
@@ -378,8 +378,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b8b943dd692d115745ebaf75cd5559106c54762baef64f2712b186e6fd6db85b",
-      "bytes": 3809,
+      "sha256": "f1d7ece683cb3cfccf8b51cf05521e4bf4cf955049f09fb395f60161b83534bb",
+      "bytes": 3659,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "59df8768cab6374aa90d4028ce8d46e91136a40f6bd71bba81c95a65cf3e3a3f"
+    "sha256": "1f9a2b8a2ec15d8af7097662ea59f31335ebb63c8c254a0fe515bc675a84b578"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8c54c90439d85cfa807c018768d01be094b0f18b20289c1d932c54da956811fb",
+      "sha256": "bd6462fee2c9a19d0c884862b6a0e7f9f59f6b5a29aff4d1701b1a8ae28efa97",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Published radar shape model",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The southern depression and overall irregular form are resolved unevenly. Fine surface material and photographic reflectance are not supplied by this model. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/betulia/betulia-shape-thumbnail.webp",
               "surface": "betulia-shape-surface@2x.webp",
               "poles": "betulia-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows original model radius minus a 2.695 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/betulia/betulia-elevation-thumbnail.webp",
               "surface": "betulia-elevation-surface@2x.webp",
               "poles": "betulia-elevation-surface@2x.webp",
@@ -347,8 +347,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1f1904f3f5a9dedb5e19bd9b0bd91962b7fe712fa69761885a301bed10cbb538",
-      "bytes": 8455,
+      "sha256": "bd6462fee2c9a19d0c884862b6a0e7f9f59f6b5a29aff4d1701b1a8ae28efa97",
+      "bytes": 8028,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

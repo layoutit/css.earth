@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c84787e76f6c44f9aa8efc2ff6d16ad03f95f7cc3c1b6d6effd7b234da05f689"
+    "sha256": "c57c790e161496f88c2d42fc01fd28571b9992c43d0804f1920ef204f97aebd7"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fbb2ad88f1b4d8da36ba11264a898fb7a696d8b7b846de8632a14f5869907005",
+      "sha256": "0770103ac03758f932bce7f231e9d0d76b9dc47d4c2a6a462e9477f9a4d515fa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
-              "title": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+              "title": "Approximate shape model",
               "detail": "Measured axes",
               "thumbnail": "/scenes/thalassa/thalassa-model-thumbnail.webp",
               "surface": "thalassa-model-surface@2x.webp",
@@ -302,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "31a8575f283fec724ee418fe6017910e28ac47d08fe5fc9e5b646fc418c1f397",
-      "bytes": 3989,
+      "sha256": "0770103ac03758f932bce7f231e9d0d76b9dc47d4c2a6a462e9477f9a4d515fa",
+      "bytes": 3742,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

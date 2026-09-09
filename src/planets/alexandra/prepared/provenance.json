@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e8e8c72dbc9aa3d0a44639a896b006582c7d711dca225219b5057e97e9fa3c26"
+    "sha256": "22133116d809b4adad0dd432a464c7fd643de46464fa187401bb3ec9449f4ca4"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a2d94a5877bb277a5803101aa3d361c17a4ccf29239b3b43479ee9ba237a5779",
+      "sha256": "4fe52324bf0a105a5f62d4b6e4b24c86771733bcc0a9245448ff0e38174827b3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex model constrained by resolved imaging, 143 ± 5 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex model constrained by resolved imaging, 143 ± 5 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/alexandra/alexandra-shape-thumbnail.webp",
               "surface": "alexandra-shape-surface@2x.webp",
               "poles": "alexandra-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 71.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 71.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/alexandra/alexandra-elevation-thumbnail.webp",
               "surface": "alexandra-elevation-surface@2x.webp",
               "poles": "alexandra-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a2d94a5877bb277a5803101aa3d361c17a4ccf29239b3b43479ee9ba237a5779",
-      "bytes": 11394,
+      "sha256": "4fe52324bf0a105a5f62d4b6e4b24c86771733bcc0a9245448ff0e38174827b3",
+      "bytes": 11077,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

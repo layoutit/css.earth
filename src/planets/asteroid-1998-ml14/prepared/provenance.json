@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4b0458e172577ae61fb50a84e2b98602b65bb23f1481474a4ae7e1f5d48c57be"
+    "sha256": "879f16a57258022afd2eb7dd2f9722cb1e5363645a11da453c8036a63abc7601"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -148,7 +148,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "56d8b8537d9e304836bab69f801daa3ba7147595bda491c404d38cff9f568e3a",
+      "sha256": "ca538e7c9579ca1f609a59b9bfa0d202ae8594971c4e31d73a2ffd028c02f0ac",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -211,7 +211,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude.",
-              "title": "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-thumbnail.webp",
               "surface": "asteroid-1998-ml14-shape-surface@2x.webp",
               "poles": "asteroid-1998-ml14-shape-surface@2x.webp",
@@ -226,7 +226,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows the original model radius minus a 0.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. This is a derived view of the historical 1998 radar model, not the later reconstruction announced from 2013 data. Lighting is illustrative. Cartographic relief is a prepared display treatment.",
-              "title": "Color shows the original model radius minus a 0.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential or independent topography. Colors are transferred from the full source surface to the displayed triangles. This is a derived view of the historical 1998 radar model, not the later reconstruction announced from 2013 data. Lighting is illustrative. Cartographic relief is a prepared display treatment.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-thumbnail.webp",
               "surface": "asteroid-1998-ml14-elevation-surface@2x.webp",
               "poles": "asteroid-1998-ml14-elevation-surface@2x.webp",
@@ -356,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "56d8b8537d9e304836bab69f801daa3ba7147595bda491c404d38cff9f568e3a",
-      "bytes": 10659,
+      "sha256": "ca538e7c9579ca1f609a59b9bfa0d202ae8594971c4e31d73a2ffd028c02f0ac",
+      "bytes": 9947,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d604466ef4dd7b1677d14cf6a1307b601ab901adb565255cfc6a10a3fa79eca0"
+    "sha256": "3bd2efc4463adca45b75a2e71b852adf5676233c83025cf4e5fc542106c32ecb"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ebbd77f9781b787d9bb33775fc5ee9ae0dddd5899ee8712905e03c7f46a44741",
+      "sha256": "191e0628a0ca040390a8b886792d31ba79b4a42b6b0ce191635aa616b1247779",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -153,7 +153,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain.",
-              "title": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain.",
+              "title": "Occultation shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/patroclus/patroclus-model-thumbnail.webp",
               "surface": "patroclus-model-surface@2x.webp",
@@ -298,8 +298,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ebbd77f9781b787d9bb33775fc5ee9ae0dddd5899ee8712905e03c7f46a44741",
-      "bytes": 4423,
+      "sha256": "191e0628a0ca040390a8b886792d31ba79b4a42b6b0ce191635aa616b1247779",
+      "bytes": 3999,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

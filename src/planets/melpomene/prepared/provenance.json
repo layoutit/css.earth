@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "73ead3c33298f1d7756d47f2fd69af0d11434e706d2ee696b5d731359fbad31c"
+    "sha256": "20e06a71028d0a3603f783cc7ca00e97d95fcb8d6f2f809cef4075686732118b"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c8e0f5378b3fc4a832e0f7018e000e403a407994094ad7ffd67300ce93f6a616",
+      "sha256": "bd9a3b2c2e0789d07ea2dc151408fb5ca6368117223613fb5094467ca2943edf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/melpomene/melpomene-shape-thumbnail.webp",
               "surface": "melpomene-shape-surface@2x.webp",
               "poles": "melpomene-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 70.5 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/melpomene/melpomene-elevation-thumbnail.webp",
               "surface": "melpomene-elevation-surface@2x.webp",
               "poles": "melpomene-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f67cc6926f56831ffcade0f8cd3996b7246b1d8fe55440373838f93b3bea15d4",
-      "bytes": 10401,
+      "sha256": "bd9a3b2c2e0789d07ea2dc151408fb5ca6368117223613fb5094467ca2943edf",
+      "bytes": 10004,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

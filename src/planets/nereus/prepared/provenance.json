@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "16adf7f536615210040563e3a2b8ab4ffea65454052beb16c469c2ce51036e0f"
+    "sha256": "3565840d526dc8c53f40b3da98798815ca4c3e9a19d9166647def490eb22897d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b81da32ec7d754df2d6f057de836828f9ab6a886d15f6f25ecfd8e5d2def8e3e",
+      "sha256": "d79c6182cb926954b53eeea5b86a5c502b95bb340320d020629e5bd3487347ab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Published radar shape model",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. This is the preferred smaller-volume radar model, with dimensions 0.510 × 0.330 × 0.241 km. Its polar dimension is weakly constrained; a thicker alternative fits comparably. The selected pole is within a 10° uncertainty radius and the period is 15.16 ± 0.04 h. No resolved optical surface map is supplied. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/nereus/nereus-shape-thumbnail.webp",
               "surface": "nereus-shape-surface@2x.webp",
               "poles": "nereus-shape-surface@2x.webp",
@@ -220,7 +220,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows source-model radius minus a 0.165 km reference sphere, transferred from the closest point on the full original triangular surface. This preferred radar reconstruction is not an independent topographic survey or gravitational height map. Its polar dimension is weakly constrained, and a thicker alternative fits comparably. Ambiguous or out-of-range samples retain the shared grid.",
-              "title": "Color shows the radius of the closest point on the original triangular source surface minus a 0.165 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Colors follow the full source surface within the authored simplification-distance limit; ambiguous or out-of-range samples retain the shared missing-data grid. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/nereus/nereus-elevation-thumbnail.webp",
               "surface": "nereus-elevation-surface@2x.webp",
               "poles": "nereus-elevation-surface@2x.webp",
@@ -351,8 +351,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bf2acac000b8a640952db02712b81c698b555347ddd5d52a293b8e2de5552c3d",
-      "bytes": 9212,
+      "sha256": "d79c6182cb926954b53eeea5b86a5c502b95bb340320d020629e5bd3487347ab",
+      "bytes": 8420,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

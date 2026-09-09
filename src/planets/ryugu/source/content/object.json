@@ -66,7 +66,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
-        "title": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
+        "title": "ONC 548.9 nm reflectance map",
         "thumbnail": "/scenes/ryugu/ryugu-normal-thumbnail.webp",
         "surface": "ryugu-normal-surface@2x.webp",
         "poles": "ryugu-normal-surface@2x.webp",
@@ -76,13 +76,13 @@
         },
         "falseColor": false,
         "detail": "ONC v-band · corrected reflectance",
-        "summary": "Hayabusa2's corrected 548.9 nm reflectance from July 2018. Display brightness is stretched; poles stay empty."
+        "summary": "Corrected reflectance at 548.9 nm is stretched for display. The July 2018 observations leave the poles unobserved."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
-        "title": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
+        "title": "ONC false-color composite",
         "thumbnail": "/scenes/ryugu/ryugu-enhanced-thumbnail.webp",
         "surface": "ryugu-enhanced-surface@2x.webp",
         "poles": "ryugu-enhanced-surface@2x.webp",
@@ -92,13 +92,13 @@
         },
         "falseColor": true,
         "detail": "Controlled ONC color mosaic",
-        "summary": "Hayabusa2 false color. Brightness was matched across images, so mosaic values are not measured reflectance."
+        "summary": "False colors show differences between images. Brightness matching changes the mosaic values; they are not measured reflectance."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
-        "title": "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/ryugu/ryugu-elevation-thumbnail.webp",
         "surface": "ryugu-elevation-surface@2x.webp",
         "poles": "ryugu-elevation-surface@2x.webp",

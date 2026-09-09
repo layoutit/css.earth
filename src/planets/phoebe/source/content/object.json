@@ -4,7 +4,7 @@
   "id": "phoebe",
   "displayName": "Phoebe",
   "panel": {
-    "introduction": "Phoebe is a dark, cratered moon on a distant, retrograde orbit around Saturn. Cassini\u2019s 2004 flyby revealed an irregular, ice-bearing surface. It may be a captured object from the outer solar system.",
+    "introduction": "Phoebe is a dark, cratered moon on a distant, retrograde orbit around Saturn. Cassini’s 2004 flyby revealed an irregular, ice-bearing surface. It may be a captured object from the outer solar system.",
     "facts": [
       {
         "id": "radius",
@@ -46,14 +46,14 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "William Henry Pickering \u00b7 1899"
+        "value": "William Henry Pickering · 1899"
       }
     ],
     "moreFacts": [
       {
         "id": "density",
         "label": "Mean density",
-        "value": "1.64 \u00b1 0.03 g/cm\u00b3",
+        "value": "1.64 ± 0.03 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -77,7 +77,7 @@
         "id": "normal",
         "label": "Relative albedo",
         "description": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
-        "title": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
+        "title": "SPC relative brightness model",
         "detail": "Modeled relative brightness",
         "thumbnail": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
         "surface": "phoebe-normal-surface@2x.webp",
@@ -97,7 +97,7 @@
             "1.1",
             "1.7"
           ],
-          "meta": "relative; mean \u2248 1",
+          "meta": "relative; mean ≈ 1",
           "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
           "image": "/scenes/phoebe/phoebe-normal-legend.webp"
         },
@@ -107,7 +107,7 @@
         "id": "elevation",
         "label": "Radial height",
         "description": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
-        "title": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
+        "title": "Q512 radial height model",
         "detail": "Modeled radial height",
         "thumbnail": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
         "surface": "phoebe-elevation-surface@2x.webp",
@@ -123,7 +123,7 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "\u221215",
+            "−15",
             "0",
             "15"
           ],
@@ -136,8 +136,8 @@
       {
         "id": "maplet-resolution",
         "label": "Maplet resolution",
-        "description": "Finest contributing SPC maplet spacing in each 1\u00b0 cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
-        "title": "Finest contributing SPC maplet spacing in each 1\u00b0 cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
+        "description": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
+        "title": "SPC maplet resolution",
         "detail": "Best source maplet",
         "thumbnail": "/scenes/phoebe/phoebe-maplet-resolution-thumbnail.webp",
         "surface": "phoebe-maplet-resolution-surface@2x.webp",
@@ -160,13 +160,13 @@
           "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
           "image": "/scenes/phoebe/phoebe-maplet-resolution-legend.webp"
         },
-        "summary": "Finest contributing SPC maplet spacing in each 1\u00b0 cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing."
+        "summary": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing."
       },
       {
         "id": "image-count",
         "label": "Image count",
-        "description": "Contributing image count in each 1\u00b0 source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
-        "title": "Contributing image count in each 1\u00b0 source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
+        "description": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
+        "title": "SPC image coverage",
         "detail": "Source coverage",
         "thumbnail": "/scenes/phoebe/phoebe-image-count-thumbnail.webp",
         "surface": "phoebe-image-count-surface@2x.webp",
@@ -189,7 +189,7 @@
           "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
           "image": "/scenes/phoebe/phoebe-image-count-legend.webp"
         },
-        "summary": "Contributing image count in each 1\u00b0 source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy."
+        "summary": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy."
       }
     ]
   },

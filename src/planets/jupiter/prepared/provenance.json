@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cc3acb5f700c4ce074b119b37be2780535885d41cd901487e12514f2d4121cfc"
+    "sha256": "b6e4143c9244f2e9b2bd6c51784d9624f8a413a73b84426abca8c2857f7496ba"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "37039356ccc26a89ac5c621fe33bcadaed79c28dadc5f1e6372533dd88a217fd",
+      "sha256": "167cd1b7d0031ca5b1199ad63da3722be04bf27cd65bdb65b907f1f8e602433e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,7 @@
               "id": "normal",
               "label": "Visible color",
               "description": "Hubble visible-color map from 27 June 2019 with Juno-derived polar cloud structure and transferred visible color. Polar sources are not registered to the Hubble longitudes. This multi-source illustration does not depict one observation date or a geodetic polar map.",
-              "title": "Hubble WFC3 visible-color global map. NASA/ESA Hubble WFC3 395, 502, and 631 nm visible-color map",
+              "title": "WFC3 visible-color map",
               "thumbnail": "/scenes/jupiter/jupiter-lens-normal.webp",
               "surface": "/scenes/jupiter/jupiter-surface.webp",
               "poles": "/scenes/jupiter/jupiter-poles.webp",
@@ -177,13 +177,13 @@
                 "url": "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/"
               },
               "detail": "Visible light",
-              "summary": "A 2019 Hubble color map with Juno polar detail. The poles are illustrative and are not registered to the Hubble longitudes."
+              "summary": "Cloud detail combines a 2019 global map with separate polar images. The poles are illustrative and not aligned to its longitudes."
             },
             {
               "id": "ultraviolet",
               "label": "Ultraviolet",
               "description": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
-              "title": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
+              "title": "OPAL F275W map",
               "thumbnail": "/scenes/jupiter/jupiter-lens-ultraviolet-thumbnail.webp",
               "surface": "/scenes/jupiter/jupiter-lens-ultraviolet.webp",
               "poles": "/scenes/jupiter/jupiter-lens-ultraviolet-poles.webp",
@@ -222,13 +222,13 @@
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
               },
               "detail": "275 nm",
-              "summary": "Hubble's 275 nm ultraviolet map from December 2025, shown in false color. The gray grid marks missing observations."
+              "summary": "False colors represent 275 nm reflectance measured in December 2025. The gray grid marks missing observations."
             },
             {
               "id": "methane",
               "label": "Methane",
               "description": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
-              "title": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
+              "title": "OPAL FQ889N map",
               "thumbnail": "/scenes/jupiter/jupiter-lens-methane-thumbnail.webp",
               "surface": "/scenes/jupiter/jupiter-lens-methane.webp",
               "poles": "/scenes/jupiter/jupiter-lens-methane-poles.webp",
@@ -267,7 +267,7 @@
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
               },
               "detail": "889 nm",
-              "summary": "Hubble's 889 nm methane-band map from December 2025, in false color. Gray grid: missing observations."
+              "summary": "False colors represent 889 nm reflectance measured in December 2025. The gray grid marks missing observations."
             }
           ]
         },
@@ -1106,8 +1106,8 @@
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "353dceefd91c1f8f0984ec95c1b450f3d5fd15f3c92c7894bcc06f9b7084b456",
-      "bytes": 15253,
+      "sha256": "167cd1b7d0031ca5b1199ad63da3722be04bf27cd65bdb65b907f1f8e602433e",
+      "bytes": 15136,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

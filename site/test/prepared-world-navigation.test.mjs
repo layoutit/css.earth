@@ -415,6 +415,16 @@ test('replacement departure uses the retained world while its previous detail ow
 });
 
 
+test('the current body accepts wide-view centering only while below its prepared detail threshold', () => {
+  const f = fixture(), mount = { navigation: f.navigation };
+  const close = f.navigation.capture();
+  assert.equal(f.service.centerTarget({ objectId: '0', mount }), null);
+  f.navigation.apply({ ...close, pose: { ...close.pose, positionM: [0, 0, 2e8] } });
+  assert.ok(f.service.centerTarget({ objectId: '0', mount }));
+  f.navigation.apply(close);
+  assert.equal(f.service.centerTarget({ objectId: '0', mount }), null);
+});
+
 test('centering changes the focus at the same range and orientation, then focus zooms in', async () => {
   const f = fixture();
   assert.equal(f.service.centerTarget({ objectId: '0', mount: { navigation: f.navigation } }), null);

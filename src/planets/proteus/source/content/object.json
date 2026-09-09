@@ -4,7 +4,7 @@
   "id": "proteus",
   "displayName": "Proteus",
   "panel": {
-    "introduction": "Proteus is Neptune\u2019s largest inner moon. Voyager 2 revealed an angular, cratered world, dominated on one side by the enormous impact basin Pharos.",
+    "introduction": "Proteus is Neptune’s largest inner moon. Voyager 2 revealed an angular, cratered world, dominated on one side by the enormous impact basin Pharos.",
     "facts": [
       {
         "id": "radius",
@@ -46,7 +46,7 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Voyager 2 imaging team \u00b7 1989"
+        "value": "Voyager 2 imaging team · 1989"
       }
     ],
     "moreFacts": []
@@ -64,7 +64,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain.",
-        "title": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+        "title": "Clear-filter mosaic",
         "detail": "Voyager 2",
         "thumbnail": "/scenes/proteus/proteus-normal-thumbnail.webp",
         "surface": "proteus-normal-surface@2x.webp",
@@ -74,7 +74,7 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/voyager/iss/"
         },
-        "summary": "Voyager 2 images mapped onto the shape with adjusted brightness. Gray grid: missing or unreliable data."
+        "summary": "Brightness is corrected for illumination; much of the fine grain is image noise. The gray grid marks unavailable samples."
       },
       {
         "id": "filter-color",
@@ -95,8 +95,8 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above a 208 km reference sphere from Stooke\u2019s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5\u00b0 radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
-        "title": "Radial height above a 208 km reference sphere from Stooke\u2019s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5\u00b0 radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+        "description": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+        "title": "Shape-derived radial height",
         "detail": "Radial shape",
         "thumbnail": "/scenes/proteus/proteus-elevation-thumbnail.webp",
         "surface": "proteus-elevation-surface@2x.webp",

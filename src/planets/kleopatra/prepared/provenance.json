@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0c977edf849297653712b7bed0d67ada6c8a847642f09aefedf4f7c0a0e0de0a"
+    "sha256": "aa50fb4173cc6bbb7d552caf6122ae550f8be25a1b6662a69ed5053d2840ca16"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0e97eb27b1b1969fe90103fcd0f1c19abdb37c896e8477fa5defa7150a036902",
+      "sha256": "9bac00803721992cd31b42a26fc3a148cc4bb7377816d55896bc2a8653b8b28b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -159,7 +159,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable surface imagery over the released MPCD shape reconstructed from ground-based VLT/SPHERE images. The two lobes and narrow neck are source geometry. This view has no photographic texture and does not represent albedo, color or composition. Lighting uses the observed pole with an arbitrary display phase.",
-              "title": "The shared grid marks unavailable surface imagery over the released MPCD shape reconstructed from ground-based VLT/SPHERE images. The two lobes and narrow neck are source geometry. This view has no photographic texture and does not represent albedo, color or composition. Lighting uses the observed pole with an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/kleopatra/kleopatra-shape-thumbnail.webp",
               "surface": "kleopatra-shape-surface@2x.webp",
               "poles": "kleopatra-shape-surface@2x.webp",
@@ -279,8 +279,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "49f97461d23a2a9b23f7510b96bef0de858590dd5aa6d80698d98cff3cc91dd2",
-      "bytes": 9173,
+      "sha256": "9bac00803721992cd31b42a26fc3a148cc4bb7377816d55896bc2a8653b8b28b",
+      "bytes": 8996,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

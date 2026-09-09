@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "80c21887af201c6d7415d5db379216ec1ef55de95a4c9873fbcd2eb9e3a2be36"
+    "sha256": "a6622f98d91694748ccb0ccc7876d8fdfebb65ed8962b7db5f36b88f4447258a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -177,7 +177,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0669b33ee9da4c675b4f51553915b7974c35ce6e9a2483b2342bf1770c4b1dce",
+      "sha256": "bf7a7271fd02c86f841b3dae2c2bb9d3c967c863633444a119d17112e2261bde",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -246,7 +246,7 @@
               "id": "normal",
               "label": "Natural color",
               "description": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
-              "title": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
+              "title": "FC natural-color composite",
               "thumbnail": "/scenes/vesta/vesta-normal-thumbnail.webp",
               "surface": "vesta-normal-surface@2x.webp",
               "poles": "vesta-normal-surface@2x.webp",
@@ -255,13 +255,13 @@
                 "path": "../manifest.json"
               },
               "detail": "Dawn HAMO",
-              "summary": "Dawn natural color at 650, 550 and 430 nm. Bright terrain clips to white; shadows and color offsets remain."
+              "summary": "The 650, 550 and 430 nm bands approximate visible color. Bright terrain clips to white; shadows and color offsets remain."
             },
             {
               "id": "ratios",
               "label": "Spectral ratios",
               "description": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
-              "title": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+              "title": "Clementine-style color composite",
               "thumbnail": "/scenes/vesta/vesta-ratios-thumbnail.webp",
               "surface": "vesta-ratios-surface@2x.webp",
               "poles": "vesta-ratios-surface@2x.webp",
@@ -277,7 +277,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting.",
+              "title": "HAMO digital terrain model",
               "thumbnail": "/scenes/vesta/vesta-elevation-thumbnail.webp",
               "surface": "vesta-elevation-surface@2x.webp",
               "poles": "vesta-elevation-surface@2x.webp",
@@ -507,8 +507,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0669b33ee9da4c675b4f51553915b7974c35ce6e9a2483b2342bf1770c4b1dce",
-      "bytes": 10523,
+      "sha256": "bf7a7271fd02c86f841b3dae2c2bb9d3c967c863633444a119d17112e2261bde",
+      "bytes": 9591,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

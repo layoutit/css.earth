@@ -87,9 +87,9 @@
           "label": "Visible color",
           "thumbnailUrl": "/scenes/moon/moon-surface-thumbnail.webp",
           "description": "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display.",
-          "title": "Visible color: NASA LRO/LROC visible-colour global surface mosaic",
+          "title": "CGI Moon Kit surface mosaic",
           "detail": "Global mosaic",
-          "summary": "LROC imagery from NASA's CGI Moon Kit. Small gaps are filled; monochrome replaces missing polar color."
+          "summary": "Surface detail comes from LROC imagery. Small gaps are filled; monochrome replaces unavailable color near the poles."
         },
         {
           "id": "topography",
@@ -110,9 +110,9 @@
             "meta": "km",
             "sourceUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
           },
-          "title": "Elevation: LRO LOLA LDEM16 numeric heights",
+          "title": "LOLA LDEM16 elevation model",
           "detail": "Numeric elevation",
-          "summary": "LOLA elevation relative to a 1,737.4 km sphere. Color and shading show relief from archival measurements."
+          "summary": "Colors show height above or below a 1,737.4 km sphere. Shading reveals slopes in the archived laser-altimeter measurements."
         },
         {
           "id": "crust",
@@ -194,9 +194,9 @@
             ],
             "sourceUrl": "https://svs.gsfc.nasa.gov/4014/"
           },
-          "title": "Crust: NASA GRAIL crustal-thickness map with shaded relief",
+          "title": "Crustal-thickness model",
           "detail": "Thickness",
-          "summary": "Crust thickness from GRAIL gravity and topography. It depends on assumed densities; this is a model."
+          "summary": "Thickness is inferred from gravity and topography. The result depends on assumed rock densities, not direct underground imaging."
         },
         {
           "id": "rock-abundance",

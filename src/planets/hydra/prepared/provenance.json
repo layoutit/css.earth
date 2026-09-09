@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "05258790c79e51a82cf9af84222121b4fa7604a764887e49b73c0c57b3e18a85"
+    "sha256": "8fae2b670b2014e120d1058324af805ef790895250911ee1fde9f933f8960f18"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -108,7 +108,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dcd2b56df3d691b2265c6b1cb9c93ea3e1affcac279baf90d98b91a2d5555a1c",
+      "sha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -161,7 +161,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry.",
-              "title": "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry.",
+              "title": "Porter shape reconstruction",
               "detail": "New Horizons shape fit",
               "thumbnail": "/scenes/hydra/hydra-model-thumbnail.webp",
               "surface": "hydra-model-surface@2x.webp",
@@ -323,8 +323,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0a52a8fe447a84f17fdd8186a8435d2acd940eae72a7a7dbd8ceb16cc35de243",
-      "bytes": 3990,
+      "sha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
+      "bytes": 3883,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

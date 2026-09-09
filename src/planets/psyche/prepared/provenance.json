@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "077399caa59cde1600b30606f66d7932865c9d13cef28a3c989b88d6301d91c1"
+    "sha256": "405b8ac27589038cd86a23141b19533060199b59b358d478a57d76a3eb6f6968"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "297293e89d05c8e6ad62731197f16ab4b4104d4441fbd2f37f8b81fbd7b25fbd",
+      "sha256": "55de32cf204af31f27e4f4133896eb17273be65ab29249c5b7ac0f2a9eb85be2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/psyche/psyche-shape-thumbnail.webp",
               "surface": "psyche-shape-surface@2x.webp",
               "poles": "psyche-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 111.5 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/psyche/psyche-elevation-thumbnail.webp",
               "surface": "psyche-elevation-surface@2x.webp",
               "poles": "psyche-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "394f605c7bf7054262fdc2a22b45d31adb6765c16d7fe99005f2e08b6c538e19",
-      "bytes": 8447,
+      "sha256": "55de32cf204af31f27e4f4133896eb17273be65ab29249c5b7ac0f2a9eb85be2",
+      "bytes": 8049,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

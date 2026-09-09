@@ -66,7 +66,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Galileo’s highest-resolution pair, 107318313 and 107318326, mapped onto the Thomas shape. The source is high-pass filtered and retains photographed illumination; it is not calibrated albedo or natural color. Best original detail is approximately 55 m/pixel and varies greatly. The gray grid marks poor or missing coverage. Shadows adds approximate fixed-epoch Sun lighting.",
-        "title": "Galileo’s highest-resolution pair, 107318313 and 107318326, mapped onto the Thomas shape. The source is high-pass filtered and retains photographed illumination; it is not calibrated albedo or natural color. Best original detail is approximately 55 m/pixel and varies greatly. The gray grid marks poor or missing coverage. Shadows adds approximate fixed-epoch Sun lighting.",
+        "title": "SSI monochrome mosaic",
         "thumbnail": "/scenes/gaspra/gaspra-normal-thumbnail.webp",
         "surface": "gaspra-normal-surface@2x.webp",
         "poles": "gaspra-normal-surface@2x.webp",
@@ -76,13 +76,13 @@
         },
         "falseColor": false,
         "detail": "Galileo SSI · 1991 flyby",
-        "summary": "Galileo images mapped onto the shape. Shadows and seams remain; the gray grid marks poor or missing data."
+        "summary": "Photographed shadows and seams remain after mapping the images onto the shape. The gray grid marks poor or missing data."
       },
       {
         "id": "calibrated",
         "label": "Calibrated image",
         "description": "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
-        "title": "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+        "title": "SSI clear-filter reflectance",
         "thumbnail": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
         "surface": "gaspra-calibrated-surface@2x.webp",
         "poles": "gaspra-calibrated-surface@2x.webp",
@@ -91,13 +91,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Galileo SSI · I/F"
+        "detail": "Galileo SSI · I/F",
+        "summary": "Calibrated reflectance retains the original lighting, not surface albedo. The grid marks bad pixels, uncertain edges and gaps."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows the published shape radius minus a 6.1 km reference sphere, including Gaspra’s broad irregular shape. This is shape-derived height, not gravitational elevation or a photographic observation. Shape constraints vary with the flyby coverage; unseen regions are less certain. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
-        "title": "Color shows the published shape radius minus a 6.1 km reference sphere, including Gaspra’s broad irregular shape. This is shape-derived height, not gravitational elevation or a photographic observation. Shape constraints vary with the flyby coverage; unseen regions are less certain. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/gaspra/gaspra-elevation-thumbnail.webp",
         "surface": "gaspra-elevation-surface@2x.webp",
         "poles": "gaspra-elevation-surface@2x.webp",

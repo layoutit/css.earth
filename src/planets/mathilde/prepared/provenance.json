@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "233bc9de7c6b7f5a424703dafcb30f22829c23e910770488dcf0f2668126d598"
+    "sha256": "41389b411179d71eeac7cdfbc83efe8547e673cfa12849ae4c5c957465b1a7e4"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -157,7 +157,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0489511967379f5b5b4e02467100945aa3769d8d515ea16fde3daad3fc2de8ad",
+      "sha256": "ba9e7d83d9c64f66293d66b313d91da0184c346a1b1876c9b0538fb997ad4642",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -226,7 +226,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved.",
-              "title": "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved.",
+              "title": "MSI partial mosaic",
               "thumbnail": "/scenes/mathilde/mathilde-normal-thumbnail.webp",
               "surface": "mathilde-normal-surface@2x.webp",
               "poles": "mathilde-normal-surface@2x.webp",
@@ -236,13 +236,13 @@
               },
               "falseColor": false,
               "detail": "NEAR MSI · partial photomosaic",
-              "summary": "Partial NEAR mosaic with shadows and seams. Unseen shape is modeled; the gray grid marks image gaps."
+              "summary": "Only part of the surface is photographed; shadows and seams remain. The unseen shape is modeled and image gaps are marked."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
-              "title": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/mathilde/mathilde-elevation-thumbnail.webp",
               "surface": "mathilde-elevation-surface@2x.webp",
               "poles": "mathilde-elevation-surface@2x.webp",
@@ -476,8 +476,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "27062640fd4612582c93f250daf79408bd198e04a979d16f7b77c2031cdadb5b",
-      "bytes": 10780,
+      "sha256": "ba9e7d83d9c64f66293d66b313d91da0184c346a1b1876c9b0538fb997ad4642",
+      "bytes": 10219,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

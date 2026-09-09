@@ -10,13 +10,13 @@ const units = [[9460730472580800, 'ly'], [149597870700, 'AU'], [1000, 'km'], [1,
 const number = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
 const compactNumber = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 2 });
 const wholeNumber = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
-const calendarDate = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeZone: 'UTC' });
 const distanceUnit = meters => units.find(([size]) => meters >= size) ?? units.at(-1);
 
 export function formatViewDate(epochJdTt) {
   if (!Number.isFinite(epochJdTt)) return '—';
   // Format the prepared TT calendar date without applying the browser's local timezone.
-  return calendarDate.format(new Date((epochJdTt - 2440587.5) * 86400000));
+  const calendar = new Date((epochJdTt - 2440587.5) * 86400000).toISOString();
+  return `${calendar.slice(0, 16).replace('T', ' ')} TT`;
 }
 
 export function formatViewDistance(meters) {

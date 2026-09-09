@@ -76,7 +76,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
-        "title": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
+        "title": "Monochrome mosaic",
         "thumbnail": "/scenes/charon/charon-normal-thumbnail.webp",
         "surface": "charon-normal-surface@2x.webp",
         "poles": "charon-normal-poles@2x.webp",
@@ -86,13 +86,13 @@
           "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m"
         },
         "detail": "Corrected mosaic",
-        "summary": "New Horizons images with corrected lighting. Shadows remain; the unobserved south is left unavailable."
+        "summary": "Lighting is corrected, but local photographed shadows remain. Detail varies; the unobserved south is left unavailable."
       },
       {
         "id": "enhanced-color",
         "label": "Enhanced color",
         "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
-        "title": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
+        "title": "MVIC enhanced-color mosaic",
         "thumbnail": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
         "surface": "charon-enhanced-color-surface@2x.webp",
         "poles": "charon-enhanced-color-poles@2x.webp",
@@ -107,7 +107,7 @@
         "id": "elevation",
         "label": "Elevation",
         "description": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
-        "title": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
+        "title": "Stereo and shading terrain model",
         "thumbnail": "/scenes/charon/charon-elevation-thumbnail.webp",
         "surface": "charon-elevation-surface@2x.webp",
         "poles": "charon-elevation-poles@2x.webp",

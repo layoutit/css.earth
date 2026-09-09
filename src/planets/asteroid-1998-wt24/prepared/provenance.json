@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2d6ca85e397bc9494269d2085d75bb4ecf92179a6a76b8403dddfa395161b6e7"
+    "sha256": "dd8d0b0f305b902a4e2d39bf869bd28a50f95df6350cf443725e7378ca56ebe0"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "226a40ccbe7ddbd28e5617336589849801d18963826ebc2335d77cebcc1718e6",
+      "sha256": "18378301825528cbe8c2fad7e4f70384c4f53907ebfb026630c237a6ed3cc1a2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Published radar shape model",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The published model has uneven latitude coverage, including an unseen region near the north pole. Its small depressions and rounded outline are radar-derived geometry; no measured optical surface texture is supplied. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-thumbnail.webp",
               "surface": "asteroid-1998-wt24-shape-surface@2x.webp",
               "poles": "asteroid-1998-wt24-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows original model radius minus a 0.2075 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-thumbnail.webp",
               "surface": "asteroid-1998-wt24-elevation-surface@2x.webp",
               "poles": "asteroid-1998-wt24-elevation-surface@2x.webp",
@@ -347,8 +347,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9870f110a039ef83a0fd1dd79cbc8edf494185e8c49a4a4e71b1d6db716e6c58",
-      "bytes": 9934,
+      "sha256": "18378301825528cbe8c2fad7e4f70384c4f53907ebfb026630c237a6ed3cc1a2",
+      "bytes": 9446,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

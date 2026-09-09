@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b5307760aab6761df397a8d394d5fb8ca448c76f522f23f8a65bbcf7eefef43a"
+    "sha256": "0ec740275c6d0b7b0bfe21be86485df17e9d05c9787d8357072f4c514daaf2e3"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -201,7 +201,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4404537454c3841f56d3b2c4ce7cfb17dfeb73410366204b731eb360e5672aa9",
+      "sha256": "95d190b7bf8b232d723ec314a959cc6e922e073b84abd4d79e7c0956e53cd718",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -270,7 +270,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting.",
+              "title": "SSI monochrome mosaic",
               "thumbnail": "/scenes/ida/ida-normal-thumbnail.webp",
               "surface": "ida-normal-surface@2x.webp",
               "poles": "ida-normal-surface@2x.webp",
@@ -280,13 +280,13 @@
               },
               "falseColor": false,
               "detail": "Galileo SSI · processed image mosaic",
-              "summary": "Galileo mosaic with uneven detail and shadows. It is not calibrated reflectance; gray grid: map gaps."
+              "summary": "Photographed shadows remain and detail varies across the mosaic. Brightness is not calibrated reflectance; the grid marks gaps."
             },
             {
               "id": "calibrated",
               "label": "Calibrated image",
               "description": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
-              "title": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+              "title": "SSI green-filter reflectance",
               "thumbnail": "/scenes/ida/ida-calibrated-thumbnail.webp",
               "surface": "ida-calibrated-surface@2x.webp",
               "poles": "ida-calibrated-surface@2x.webp",
@@ -295,13 +295,14 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI · I/F"
+              "detail": "Galileo SSI · I/F",
+              "summary": "Calibrated reflectance retains the original lighting, not surface albedo. The grid marks bad pixels, uncertain edges and gaps."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/ida/ida-elevation-thumbnail.webp",
               "surface": "ida-elevation-surface@2x.webp",
               "poles": "ida-elevation-surface@2x.webp",
@@ -736,8 +737,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0c72598f0202ae7a6641d584867d363d6e8071d292e1fada3f379bf1460223aa",
-      "bytes": 8988,
+      "sha256": "95d190b7bf8b232d723ec314a959cc6e922e073b84abd4d79e7c0956e53cd718",
+      "bytes": 8501,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

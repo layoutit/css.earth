@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e35d9dd7d1414bd6a3f43fca0f94cbda2154fa7dd0636d7bc9f69be49d07378a"
+    "sha256": "f1249dd948e4618b76df4c6f120f3e8f92e49b77c774d64d543d28111e6b895c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c9db9af6c4812710e4d86d9f9c5adad34884b69e255ff0b173a7f11ba65344f0",
+      "sha256": "6477a1f064f9f92bc103e7baa2a3ad4b7fda5ced21d5f35f67377a2f440b6778",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Published 92 × 74 × 74 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-              "title": "Published 92 × 74 × 74 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+              "title": "Approximate shape model",
               "detail": "Measured shape",
               "thumbnail": "/scenes/cressida/cressida-model-thumbnail.webp",
               "surface": "cressida-model-surface@2x.webp",
@@ -302,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5e9ed75ac8a97a8f3c09ff4217cd2e4bc514b1ee8be811640d020f76726b0324",
-      "bytes": 3608,
+      "sha256": "6477a1f064f9f92bc103e7baa2a3ad4b7fda5ced21d5f35f67377a2f440b6778",
+      "bytes": 3509,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

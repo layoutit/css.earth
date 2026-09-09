@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "71ed4d0545dc72176a48dc7d3095de5e9beca1e93a87713160560cf7792b47bb"
+    "sha256": "93298ed7f94e7fdcfde12ac19fc6870091d44320ef391f7c509c61e2f9889d48"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cc741f773eabb9ff40e7dfaffacdad78878f67ac159ce85abf4c4b0c23db62d2",
+      "sha256": "6e602adc0754e2d55a7216070d8771fad4dd6d579f6986a34438ecc763b29f46",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/geographos/geographos-shape-thumbnail.webp",
               "surface": "geographos-shape-surface@2x.webp",
               "poles": "geographos-shape-surface@2x.webp",
@@ -220,7 +220,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "False color shows radius at the nearest source-surface point minus a 1.284042 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 30 m is withheld. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied.",
-              "title": "Color shows original model radius minus a 1.284042 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/geographos/geographos-elevation-thumbnail.webp",
               "surface": "geographos-elevation-surface@2x.webp",
               "poles": "geographos-elevation-surface@2x.webp",
@@ -351,8 +351,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "35ed37128d29a2806177e7f221cb1f1d1128d4723e8ac367b4201561a9e2010a",
-      "bytes": 13446,
+      "sha256": "6e602adc0754e2d55a7216070d8771fad4dd6d579f6986a34438ecc763b29f46",
+      "bytes": 12853,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -56,7 +56,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "A smooth ellipsoid based on the 102 × 92 × 72 km semi-axes measured from Voyager images by Karkoschka (2003). The available images are strongly smeared and do not support a registered surface map. The standard gray grid marks missing imagery; shared lighting shows the model shape. No craters or local elevation are invented.",
-        "title": "A smooth ellipsoid based on the 102 × 92 × 72 km semi-axes measured from Voyager images by Karkoschka (2003). The available images are strongly smeared and do not support a registered surface map. The standard gray grid marks missing imagery; shared lighting shows the model shape. No craters or local elevation are invented.",
+        "title": "Approximate shape model",
         "detail": "Measured axes",
         "thumbnail": "/scenes/galatea/galatea-model-thumbnail.webp",
         "surface": "galatea-model-surface@2x.webp",

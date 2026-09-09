@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "755da85df4e711fec72947dcb478081819d9404292abacdbdc1eef9382b1f407"
+    "sha256": "4ec01440aed942069e51b93497b9d8576b60fc9344b92a4700230efba615d91c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "587d2705186b79902eee8b504111b653af755e87fbd5e6db84202daa29c944c8",
+      "sha256": "2cb37a8c1f1e5a976d338a39f76fda530821aa1b02c5206e04ca6398004b4e4c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex model constrained by resolved imaging, 160 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex model constrained by resolved imaging, 160 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/minerva/minerva-shape-thumbnail.webp",
               "surface": "minerva-shape-surface@2x.webp",
               "poles": "minerva-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 80 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 80 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/minerva/minerva-elevation-thumbnail.webp",
               "surface": "minerva-elevation-surface@2x.webp",
               "poles": "minerva-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "587d2705186b79902eee8b504111b653af755e87fbd5e6db84202daa29c944c8",
-      "bytes": 10081,
+      "sha256": "2cb37a8c1f1e5a976d338a39f76fda530821aa1b02c5206e04ca6398004b4e4c",
+      "bytes": 9766,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
