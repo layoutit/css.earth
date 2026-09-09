@@ -1639,7 +1639,7 @@ camera equals the committed runtime world camera and presentation metadata.
 
 Evidence: `output/world-context-zoom/worker-frame-publication-dpr2-r2/`, recorder
 `d5ecb040-c1fd-44a2-b10b-6d41e59f25bc`, base `d0a452678` plus the recorded 26-file
-source patch. All 49 tracked source hashes and the original patch match after
+source patch. All 49 captured source hashes and the original patch match after
 capture. Recorder JSON, Chrome trace gzip and video contain 2845/2845 observations,
 -44 microseconds clock drift and 1.411 ms maximum PTS error, with no errors, HMR or
 trace loss. The 641 loaded-resource receipts include the worker response. The
