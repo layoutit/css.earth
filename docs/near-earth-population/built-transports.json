@@ -1,6 +1,6 @@
 {
   "objects": 410,
-  "totalBytes": 2644879818,
+  "totalBytes": 2644920525,
   "scope": "Every emitted static JSON file is byte-identical to its descriptor pin; every object page retains the exact prepared startup image URLs.",
   "results": [
     {
@@ -558,9 +558,9 @@
     },
     {
       "id": "earth",
-      "path": "dist/objects/earth/55f17dbe9de5ea08e626b0ccb195e2390398c679dd97331c8fa04c1027c5fe43.json",
-      "bytes": 1150986,
-      "sha256": "55f17dbe9de5ea08e626b0ccb195e2390398c679dd97331c8fa04c1027c5fe43",
+      "path": "dist/objects/earth/5a239b9477fd557c0592a79100148c5b43b2cf56225468a6ea3ceb414a8c190b.json",
+      "bytes": 1191693,
+      "sha256": "5a239b9477fd557c0592a79100148c5b43b2cf56225468a6ea3ceb414a8c190b",
       "preloads": 13
     },
     {

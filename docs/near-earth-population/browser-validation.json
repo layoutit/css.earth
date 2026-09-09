@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-09-09T22:48:23.548Z",
+  "capturedAt": "2026-09-09T23:03:52.551Z",
   "browser": "152.0.7977.84",
   "headless": true,
   "origin": "http://127.0.0.1:4278",
@@ -97,27 +97,27 @@
         },
         {
           "id": "toro",
-          "filename": "toro-shape-thumbnail.webp",
-          "bytes": 764,
-          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f"
-        },
-        {
-          "id": "toro",
           "filename": "toro-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
         },
         {
           "id": "toro",
-          "filename": "toro-elevation-thumbnail.webp",
-          "bytes": 5174,
-          "sha256": "dcd948a40cde773d1926abfe06a4d02fb49e881e62c279e20bbd8caed7b110b2"
-        },
-        {
-          "id": "toro",
           "filename": "toro-shape-surface@2x.webp",
           "bytes": 217542,
           "sha256": "4935ea31afd6dc41b631b4922660a71757a3269e2ec24005f21b87b669b8f522"
+        },
+        {
+          "id": "toro",
+          "filename": "toro-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f"
+        },
+        {
+          "id": "toro",
+          "filename": "toro-elevation-thumbnail.webp",
+          "bytes": 5174,
+          "sha256": "dcd948a40cde773d1926abfe06a4d02fb49e881e62c279e20bbd8caed7b110b2"
         },
         {
           "id": "toro",
@@ -174,15 +174,15 @@
         },
         {
           "id": "cerberus",
-          "filename": "cerberus-shape-surface@2x.webp",
-          "bytes": 176480,
-          "sha256": "78fa8673c1ba97e2872849d6bedc1df5c82f53ff6dd43af7cc75cd5c8d016dda"
-        },
-        {
-          "id": "cerberus",
           "filename": "cerberus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f"
+        },
+        {
+          "id": "cerberus",
+          "filename": "cerberus-shape-surface@2x.webp",
+          "bytes": 176480,
+          "sha256": "78fa8673c1ba97e2872849d6bedc1df5c82f53ff6dd43af7cc75cd5c8d016dda"
         },
         {
           "id": "cerberus",
@@ -227,21 +227,9 @@
         },
         {
           "id": "tantalus",
-          "filename": "tantalus-system-point.webp",
-          "bytes": 96,
-          "sha256": "b54cb3204797eaea901e467475ff0ce5d38ca1586182cf5961c954d3eadb2453"
-        },
-        {
-          "id": "tantalus",
           "filename": "tantalus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f"
-        },
-        {
-          "id": "tantalus",
-          "filename": "tantalus-elevation-legend.webp",
-          "bytes": 298,
-          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
         },
         {
           "id": "tantalus",
@@ -251,9 +239,21 @@
         },
         {
           "id": "tantalus",
+          "filename": "tantalus-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+        },
+        {
+          "id": "tantalus",
           "filename": "tantalus-shape-surface@2x.webp",
           "bytes": 208932,
           "sha256": "b92a8910a0d475ca802a9be83ceecc21fb508c2bdc9bf7a7f4c878f3aa355c2b"
+        },
+        {
+          "id": "tantalus",
+          "filename": "tantalus-system-point.webp",
+          "bytes": 96,
+          "sha256": "b54cb3204797eaea901e467475ff0ce5d38ca1586182cf5961c954d3eadb2453"
         },
         {
           "id": "tantalus",
@@ -459,15 +459,15 @@
         },
         {
           "id": "cerberus",
-          "filename": "cerberus-elevation-legend.webp",
-          "bytes": 298,
-          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-        },
-        {
-          "id": "cerberus",
           "filename": "cerberus-shape-surface@2x.webp",
           "bytes": 176480,
           "sha256": "78fa8673c1ba97e2872849d6bedc1df5c82f53ff6dd43af7cc75cd5c8d016dda"
+        },
+        {
+          "id": "cerberus",
+          "filename": "cerberus-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
         },
         {
           "id": "cerberus",
@@ -518,12 +518,6 @@
         },
         {
           "id": "tantalus",
-          "filename": "tantalus-elevation-thumbnail.webp",
-          "bytes": 7408,
-          "sha256": "dbf540dbac4efa2a7080cd05d94b805b939fcf32ce758848387796080a6e417b"
-        },
-        {
-          "id": "tantalus",
           "filename": "tantalus-shape-surface@2x.webp",
           "bytes": 208932,
           "sha256": "b92a8910a0d475ca802a9be83ceecc21fb508c2bdc9bf7a7f4c878f3aa355c2b"
@@ -533,6 +527,12 @@
           "filename": "tantalus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+        },
+        {
+          "id": "tantalus",
+          "filename": "tantalus-elevation-thumbnail.webp",
+          "bytes": 7408,
+          "sha256": "dbf540dbac4efa2a7080cd05d94b805b939fcf32ce758848387796080a6e417b"
         },
         {
           "id": "tantalus",

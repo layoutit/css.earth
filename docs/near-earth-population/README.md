@@ -57,9 +57,9 @@ Ivar and Cerberus use the existing `framingScale` camera setting, with the refer
 
 ## Production browser evidence
 
-The integrated Astro build emits 412 pages. All 410 object transports and prepared startup preload sets are byte-verified against their descriptor pins. The four new routes passed at DPR1 and DPR2 with one retained scene/camera, 800 native raster triangles, true default framing, Shadows/Orbit off, source limitations visible, optional lighting, both lenses and a close view. Shared asteroid category, search and body handoff passed. The new scene images were supplied from the independently downloaded installation. The settings action is hidden by current main; optional Shadows was exercised through its existing bound control event.
+The integrated Astro build on main `3badfb535` emits 822 pages, including the shared navigation routes. All 410 object transports and prepared startup preload sets are byte-verified against their descriptor pins. The four new routes passed at DPR1 and DPR2 with one retained scene/camera, 800 native raster triangles, true default framing, Shadows/Orbit off, source limitations visible, optional lighting, both lenses and a close view. Shared asteroid category, search and body handoff passed. The new scene images were supplied from the independently downloaded installation. The settings action is hidden by current main; optional Shadows was exercised through its existing bound control event.
 
-The representative Tantalus Shape drag at DPR2 ran three60-step vertical cycles: 578 pipeline sequences, zero dropped without presentation, rAFp95 16.7ms, drawp95 8.372ms and 110,832 retained stage nodes. No interaction-time requests or browser errors occurred. This measures this workload on the recorded M3 Max/Chrome152, not a universal performance guarantee.
+The representative Tantalus Shape drag at DPR2 ran three 60-step vertical cycles: 370 pipeline sequences, one dropped without presentation (0.27%), rAF p95 16.8 ms, draw p95 8.602 ms and 110,568 retained stage nodes. No interaction-time requests or browser errors occurred. This measures this workload on the recorded M3 Max/Chrome152, not a universal performance guarantee.
 
 [Browser checks](browser-validation.json), [built transports](built-transports.json), [drag report](tantalus-drag-report.json), [image identities](images.json).
 
@@ -67,3 +67,5 @@ The representative Tantalus Shape drag at DPR2 ran three60-step vertical cycles:
 ![Toro default view](images/toro-dpr1.png)
 ![Cerberus default view](images/cerberus-dpr1.png)
 ![Tantalus elevation](images/tantalus-elevation-dpr1.png)
+
+Main PR #50 replaced per-body Astro wrappers with the generic `[id]` and navigation routes. These four packages declare their own stylesheet paths in the existing descriptor contract. Marker refresh emits page metadata from the exact refreshed scene SHA through `preparePageMetadata`; it does not recompile source geometry or imagery. Current-main page/router tests pass (46 tests), all source/package closures pass, and all410 object transports plus startup preload sets were verified.
