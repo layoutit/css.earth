@@ -45,3 +45,6 @@ src/planets/comet-19p/source/reference/*.cat -text -whitespace
 src/planets/comet-19p/source/reference/*.lbl -text -whitespace
 src/planets/comet-19p/source/reference/*.txt -text -whitespace
 src/planets/comet-19p/source/reference/*.htm -text -whitespace
+
+# Original 67P categorical geometry and SBMT archive records are hash-pinned.
+src/planets/comet-67p/source/geology/** -text -whitespace

@@ -200,6 +200,54 @@
       ],
       "path": "science/wi01_glb_m006_m006_v01.lbl",
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/wi01_glb_m006_m006_v01.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/shap7-regions.vtk",
+      "url": "https://data.mendeley.com/public-files/datasets/2845znt54k/files/d6036dad-ade7-4645-afc1-6f8e86c36a4e/file_downloaded"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/paths.xml",
+      "url": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/00_All/Complete_Paths"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/locations.tsv",
+      "url": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/00_All/Complete_Ellipses"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/region-boundaries.xml",
+      "url": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/Regions_50k/Regions_50k_facets"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/region_order.mat",
+      "url": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Code/Create_maps/region_order.mat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/product-user-guide.pdf",
+      "url": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf"
     }
   ]
 }
