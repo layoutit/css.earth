@@ -47,23 +47,23 @@ Importing and aligning a candidate does not authorize processing. A user instruc
 ## 5. Process the volume explicitly
 
 1. Open `/reconstruction`, choose the completed starless source, and press **Process**. Selecting a candidate alone must not start a bake.
-2. Bind the source result, exact saved Alignment matrix/pivot/placement, physical frame and unchanged prior. Confirm the worker uses the same observer rays and CSS-to-physical conversion as the overlay.
-3. Use the density field as the common shape/support/depth. Images provide RGB only inside occupied density. Never extrude the whole photograph or turn background light into cloud matter.
-4. Preserve identical full bounds and XYZ slice geometry across image variants. No per-image thickness, per-column normalization or image-dependent delivery cropping. Keep inferred stellar morphology distinct from measured gas/dust geometry.
-5. Keep missing photographic coverage explicit. Do not invent color outside it or crop density to hide an alignment mismatch.
-6. Check reference projection and XYZ integration convergence before baking. Increase integration sampling at its owning layer; never relax gates to make an image pass.
-7. Bake lossless masters, then compressed XYZ banks. Derive counts from physical bounds so all axes have comparable slice pitch; equal counts on unequal dimensions are not equal sampling. Current interactive comparison uses 128 slices on the longest axis, a 512px analysis/delivery plane and adaptive integration sampling; it does not preserve all native detail.
-8. Publish only a complete local result atomically after resource/hash verification. Decode the next bank before swapping the retained scene. Here “publish” means finalize the local cache, never host or deploy.
+2. Pin the accepted cloud descriptor, prepared slices, source textures, reference projection and catalogue alongside the native starless image and registration. A new object needs an explicitly accepted cloud before it can use this material workflow.
+3. Keep the cloud’s exact geometry, bounds, crops, depth and decoded alpha. Do not replace it with the smoother raw simulation or infer a new volume from each image. The full untouched simulation remains an Alignment reference.
+4. Resolve the candidate registration into the cloud/catalogue frame. Remove any separate shared raw-simulation preview fit, retaining later per-image corrections. Never apply that preview fit to the existing catalogue to conceal a mismatch.
+5. Sample registered candidate chromaticity at each existing slice texel’s physical position. Image brightness cannot redefine density. Missing/zero-RGB samples retain explicitly counted benchmark-source color; report this mixed-source coverage.
+6. Preserve catalogue positions, astrometry, photometry and common cutoff signal exactly. Require its canonical cloud hash to match. Image choice cannot select or move stars.
+7. Current LMC comparison uses the existing 416 slices and 943 stars, a 1024px registered color plane, and an original comparison plane up to 2048px within four million pixels. It preserves benchmark detail, not all native image detail. Prepare original-image geometry through exactly the same mapping.
+8. Verify exact geometry, every decoded alpha byte, catalogue records and resource hashes. Finalize only a complete local result atomically. Decode the next bank before swapping the retained scene; never host or deploy as part of processing.
 
 ## 6. Inspect and accept the approximation
 
 - Compare variants at the same camera, scale and brightness. Check front, oblique and edge views plus a continuous orbit.
 - Inspect feature connectivity, parallax, repeated silhouettes, sheet-like depth, slice gaps, disappearing detail, seams, whitening and angle-dependent brightness.
-- Check source identity, placement, full prior extent, resource hashes, XYZ banks, payload and actual job duration. Compare physical-area-weighted optical RGB totals across banks; preserve faint light with the existing optical RGB quantization error carry, not axis gains. Inspect active banks at the same camera pose to isolate handoff defects. A passing front projection does not prove real side geometry.
+- Check source identity, placement, exact canonical geometry/alpha, resource hashes, XYZ banks, payload and actual job duration. Use Earth view and the original-image overlay to inspect mapping. Inspect active banks at the same camera pose to isolate handoff defects. A passing front projection does not prove real side geometry.
 - Test switching saved sources without reprocessing or scene teardown; refresh must reconnect/load the same result.
-- Keep stellar overlays independent of image choice and coverage. Preserve the same catalogue XYZ, validate positive density support, and use a common density projection for cutoff. Keep the star toggle. Inferred member depths need documented constraints, not a flat background plane.
+- Keep stellar overlays independent of image choice and coverage. Preserve the same catalogue XYZ and reference-support signal, validate its canonical cloud identity, and use a common projection for cutoff. Keep the star toggle. Inferred member depths need documented constraints, not a flat background plane.
 - Record accepted/rejected outcomes and limits. If the same defect survives a fix, address the owning image/registration/model/sampling layer rather than hiding it through exposure or cutoff.
-- Run the saved-output `browser-reconstruction-stability` command for both X/Z and Y/Z handoffs. It reports and fails brightness/image disagreement separately from successful processing. The current LMC variants still fail this strict visual gate; see `docs/slice-stability.md`. Do not describe them as fully rotation-stable or promote them on unit-test success alone.
+- Run the saved-output `browser-reconstruction-stability` command for both X/Z and Y/Z handoffs. It reports and fails brightness/image disagreement separately from successful processing. See `docs/slice-stability.md` for the current measured outcome and historical failed experiments. Do not describe them as fully rotation-stable or promote them on unit-test success alone.
 
 ## 7. Preserve and promote deliberately
 
