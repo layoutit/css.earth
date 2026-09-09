@@ -1,0 +1,1 @@
+Tuttle is an inferred contact-body model from published scientific parameters. Credit Lamy et al. and Groussin et al. (2019). The tessellation and neutral material are cssEarth work under MIT. Source papers are cited, not relicensed. Background: ESO/S. Brunier, CC BY 4.0. Title font: Rasmus Andersson, SIL OFL 1.1.

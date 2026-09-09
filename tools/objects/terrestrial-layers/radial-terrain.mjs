@@ -1,4 +1,5 @@
 import { resolve } from 'node:path';
+import { loadContactEllipsoids } from './contact-ellipsoids.mjs';
 import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { writeFile } from 'node:fs/promises';
@@ -28,8 +29,12 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   if (profile.backfaceVisible !== undefined && typeof profile.backfaceVisible !== 'boolean') {
     throw new TypeError('Radial backface visibility must be boolean.');
   }
+  if (profile.format === 'contact-ellipsoids' && profile.simplification?.method !== 'source-meshoptimizer') {
+    throw new TypeError('Contact bodies require full source connectivity.');
+  }
   await source.validatePath(profile.path);
-  const loader = profile.format === 'pds-planetocentric-plate' ? loadPdsPlanetocentricShape
+  const loader = profile.format === 'contact-ellipsoids' ? loadContactEllipsoids
+    : profile.format === 'pds-planetocentric-plate' ? loadPdsPlanetocentricShape
     : profile.format === 'stl' ? loadStlShape : profile.format === 'pds-radius-table' ? loadPdsRadiusTable
     : ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape
     : profile.format === 'vrml-mesh' ? loadVrmlShape
@@ -106,8 +111,19 @@ export async function simplifyRadialShape(mesh, profile, scale) {
   }
   const flags = ['ErrorAbsolute', ...(preserveSource && profile.simplification.regularize ? ['RegularizeLight'] : []),
     ...(preserveSource && profile.simplification.prune ? ['Prune'] : []), ...(open ? ['LockBorder'] : [])];
-  const [simplified, error] = MeshoptSimplifier.simplify(sourceIndices,
-    Float32Array.from(positions.flat()), 3, targetFaces * 3, maximumErrorMeters, flags);
+  // Source-defined junctions must survive reduction. Compare at the same
+  // Float32 precision used by the position weld and meshoptimizer.
+  const positionKey = v => v.map(Math.fround).join(',');
+  const locked = new Set((mesh.lockedPositions ?? []).map(positionKey));
+  if (locked.size && (!preserveSource || [...locked].some(key => !positions.some(v => positionKey(v) === key)))) {
+    throw new TypeError('Source mesh locks must identify retained source positions.');
+  }
+  const locks = locked.size ? Uint8Array.from(positions, v => locked.has(positionKey(v)) ? 1 : 0) : null;
+  const packedPositions = Float32Array.from(positions.flat());
+  const [simplified, error] = locks
+    ? MeshoptSimplifier.simplifyWithAttributes(sourceIndices, packedPositions, 3,
+      new Float32Array(), 0, [], locks, targetFaces * 3, maximumErrorMeters, flags)
+    : MeshoptSimplifier.simplify(sourceIndices, packedPositions, 3, targetFaces * 3, maximumErrorMeters, flags);
   // Edge collapses can leave exactly coincident, oppositely wound face pairs
   // (zero-volume fins). Cancel only those exact pairs, then require closure.
   // No positions are moved and no source feature is approximated in cleanup.
@@ -123,6 +139,7 @@ export async function simplifyRadialShape(mesh, profile, scale) {
     sourceFaces: mesh.indices.length, sourceVertices: mesh.positions.length, weldedVertices: positions.length,
     targetFaces, outputFaces: faces.length, removedOppositeFaces: (simplified.length - indices.length) / 3,
     maximumErrorMeters, estimatedErrorMeters: error, topology,
+    ...(locks ? { lockedVertices: locks.reduce((sum, n) => sum + n, 0) } : {}),
     ...(open ? { sourceTopology: 'open', sourceOrientation: mesh.sourceOrientation } : {}) };
   return faces;
 }

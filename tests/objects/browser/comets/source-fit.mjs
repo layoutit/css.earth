@@ -8,6 +8,7 @@ import { resolve } from 'node:path';
 import { OBJECTS } from '../../../../site/objects.mjs';
 import { loadObjShape, loadPdsPlanetocentricShape, loadPdsPlateShape, loadPdsRadiusTable, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
 import { surfaceDistanceIndex } from './surface-distance.mjs';
+import { loadContactEllipsoids } from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mjs';
 
 const output = resolve(process.argv[2] ?? 'output/comet-source-fit');
 const selected = OBJECTS.filter(object => object.classification === 'comet' && (!process.argv[3] || object.id === process.argv[3]));
@@ -20,9 +21,9 @@ for (const { id } of selected) {
   const config = JSON.parse(await readFile(resolve(root, 'source/preparation/terrestrial.json')));
   const profile = config.geometry.radialTerrain;
   const sourcePath = resolve(root, 'source', profile.path);
-  const loader = { 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
+  const loader = { 'contact-ellipsoids': loadContactEllipsoids, 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
     'pds-plate-model': loadPdsPlateShape, 'pds-radius-table': loadPdsRadiusTable }[profile.format];
-  assert.ok(loader, 'Source comparison requires a supported released mesh.');
+  assert.ok(loader, 'Source comparison requires a supported source mesh.');
   const source = await loader(sourcePath, profile.grid);
   const preparedBytes = await readFile(resolve(root, 'prepared/terrain.json'));
   const terrain = JSON.parse(preparedBytes);

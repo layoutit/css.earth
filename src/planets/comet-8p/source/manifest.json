@@ -1,0 +1,205 @@
+{
+  "schema": "csscomet-8p-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "contact-model",
+      "path": "shape/model.json",
+      "expectedBytes": 896,
+      "expectedSha256": "5e77878847b22470f97526a424915efd34a6feef44d11482b2104b320c33d12e",
+      "origin": "https://arxiv.org/abs/1911.04897",
+      "credit": "Lamy et al.; Groussin et al. (2019); cssEarth tessellation",
+      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://arxiv.org/abs/1911.04897",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in numeric model and uncertainty; no source image is a texture.",
+      "redistribution": "Preserve attribution and inferred-model qualification.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 137,
+      "expectedSha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral model material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Two touching lobes inferred from Hubble brightness changes and sized using Spitzer infrared measurements. The smooth gray surface represents the model. Its rotation phase is illustrative.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2724.259583841626
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Inferred shape",
+      "falseColor": false
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 69474,
+      "expectedSha256": "137994fd40cdebb5510f2b21d1d084d6c36b836891edd982705493694cce869e",
+      "origin": "https://arxiv.org/abs/1911.04897",
+      "credit": "Lamy et al.; Groussin et al. (2019); cssEarth tessellation",
+      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://arxiv.org/abs/1911.04897",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Reproduced by shared model preparation from the pinned parameters and neutral material.",
+      "redistribution": "Preserve attribution and inferred-model qualification.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "contact-model",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 90,
+        "latitudeDegrees": 15,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2972,
+      "expectedSha256": "bb60e13f66081a4b2edb68b99b7540ceb38dfaf9a271856a6f9f9534549dc9fd",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1572,
+      "expectedSha256": "9e5d1077d70cd7603c5a67b91d28145dce064973dd8316107aec3484c13f6b59",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 412,
+      "expectedSha256": "0029e09de66921e2a22c5ec1bd13e26bfe9fefae7f00f2732ea3fb58c1e5671c",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3142,
+      "expectedSha256": "3a9995a118f0351d70fda76d88b88d264f1b783a02ed21cdb542b8b8a0d26d5f",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 41,
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2292,
+      "expectedSha256": "ab49426ea608aa905b692ccd785d7e56eb57836c6cdc8d86e7750f6d8cee3240",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7689,
+      "expectedSha256": "48b5685d301f690ead3cf7121b29487f5fe9d6eed79eb5ad1895007cbdbae76e",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-spitzer.txt",
+      "expectedBytes": 6761,
+      "expectedSha256": "4f07089d5e7b5a8c58091dbae46ff6664c63276e7a29ea38c49facff4efcf65f",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6979,
+      "expectedSha256": "e2ea2bba74157fc495d36637a25bd0d4f79739a9c78f373e1cd4843a92ef5b0c",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/model-alternatives.json",
+      "expectedBytes": 1690,
+      "expectedSha256": "11cc7557019dc30e6f86c65532e26dfa8a5d50693b22a3ab4c818cb69d0e0943",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "17a70cc38cc672029eb89ffae7cb84513d29d09e0c3a6324d288f2d329268436",
+      "purpose": "Tuttle source evidence or authored preparation input."
+    }
+  ]
+}

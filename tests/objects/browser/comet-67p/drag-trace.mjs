@@ -27,6 +27,8 @@ try {
   const context = await browser.newContext({ viewport, deviceScaleFactor: dpr });
   const page = await context.newPage(), errors = [], requests = [], loaded = [], responseTasks = [];
   page.on('response', response => {
+    // Vite can redirect module URLs; only the final successful response owns bytes.
+    if (!response.ok()) return;
     const url = new URL(response.url());
     if (url.origin === new URL(origin).origin && (response.request().resourceType() === 'document' || url.pathname.endsWith('.js') ||
         url.pathname.startsWith(`/scenes/${id}/`) && /-(surface|shadow)@2x\.webp$/.test(url.pathname))) {
