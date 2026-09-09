@@ -140,6 +140,26 @@ test('inactive annotations retain emphasis until their reveal publication', () =
   layer.destroy();
 });
 
+test('a culled indicator with retained alpha is dormant, then gets current emphasis on reveal', () => {
+  const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
+  const mercury = layer.inspect().find(body => body.id === 'mercury')!;
+  const group = find(root, 'contextGroup', 'mercury');
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const,
+    widthPixels: 1, heightPixels: 1 };
+  layer.publish(world, viewport); clock.advance(1000);
+  expect(mercury.indicator.style.visibility).toBe('hidden');
+  expect(Number.parseFloat(mercury.indicator.style.opacity.slice(5))).toBeGreaterThan(0);
+  const retained = group.dataset.contextSelected;
+  layer.setOverview(true); layer.publish(world, viewport);
+  expect(group.dataset.contextSelected).toBe(retained);
+  layer.publish(world, { ...viewport, widthPixels: 800, heightPixels: 600 });
+  expect(mercury.indicator.style.visibility).toBe('');
+  expect(group.dataset.contextSelected).toBe('overview');
+  layer.destroy();
+});
+
 test('a resolved background sprite does not pick through its transparent square corners', () => {
   const root = mount(1), layer = mounted.get(root)!;
   layer.selectObject('mercury');

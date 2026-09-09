@@ -554,9 +554,10 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
         // fade can still draw; selection need not restyle every dormant orbit.
         if (entry.publishedEmphasis !== emphasizedId) {
           const drawsAnnotations = (navigationIndicatorsVisible &&
-            (projected.labelShown || projected.indicatorShown || projected.orbitVisibility > 0))
-            || fader.current(entry.label) > 0 || lineFader.current(entry.indicator) > 0
-            || (entry.orbitRoot && lineFader.current(entry.orbitRoot) > 0);
+            (projected.labelShown || projected.indicatorShown || (projected.orbitVisibility > 0 && projected.segments.length > 0)))
+            || (entry.label.style.visibility !== 'hidden' && fader.current(entry.label) > 0)
+            || (entry.indicator.style.visibility !== 'hidden' && lineFader.current(entry.indicator) > 0)
+            || (entry.previousCount > 0 && lineFader.current(entry.orbitRoot) > 0);
           if (drawsAnnotations) {
             entry.group.dataset.contextSelected = emphasizedId === null ? "overview" : String(entry.body.id === emphasizedId);
             entry.publishedEmphasis = emphasizedId;

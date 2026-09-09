@@ -1873,3 +1873,30 @@ local worktree copies only after matching the expected SHA-256; no source files
 or descriptors were changed. A complete descriptor scan now matches all 301
 prepared payloads. The receipt is
 `output/playwright/retained-catalogue-integrated/cache-restoration.json`.
+
+The integrated full native route at `6001efaa3` is recorded as
+`retained-catalogue-integrated-dpr2`, recorder
+`eeb946ba-8b79-496c-888e-3b774d6e7987`: 2,839 captured/encoded frames, +56 µs clock
+drift and 1.409 ms maximum PTS error. All 61 captured source identities match;
+there are no response patches, HMR during recording, page errors, trace loss or
+camera/publication coherence mismatches. The 5–5,000 AU band has 0/766 rAF intervals
+over 25 ms, main-frame p95 11.467 ms and maximum 16.220 ms. The whole route still
+has six approximately 33 ms intervals. Their locations include the initial Sun
+view and galactic-scale travel/dragging; this is not zero-dropped-frame proof.
+
+Opening the catalogue takes a 13.055 ms main frame plus 1.239 ms style and
+1.417 ms layout before that frame. Returning after the full excursion still
+costs a 19.519 ms main frame, including 13.044 ms style over 3,478 elements.
+Unlike the short route, the full route visits many more annotations: hidden
+indicators can retain positive alpha, and empty orbit roots can retain opacity.
+The visibility gate therefore also checks the retained indicator/label visibility
+and whether an orbit has drawing segments. Regression coverage explicitly culls
+an indicator whose alpha remains positive, changes emphasis while it is dormant,
+and verifies current emphasis on reveal. All 72 focused renderer tests pass.
+
+A separate five-state world comparison preserves the drawn annotation styles
+through close, overview, rotated, distant and return states. The first four
+screenshots are identical; return differs in 429 channels, maximum 9/255, scattered
+across faint background points. This fifth screenshot does not satisfy the earlier
+1/255 image comparison bound; the whole-scene visual comparison remains qualified
+only for the four exact states. It is not counted as full visual parity.
