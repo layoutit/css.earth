@@ -17,7 +17,7 @@ try{
    await page.goto(`${origin}/${id}/`,{waitUntil:'networkidle'});
    await page.waitForFunction(id=>document.documentElement.dataset.ready==='true'&&document.querySelector('.planet-stage')?.dataset.objectId===id,id);
    const shadows=page.locator('input[name="shadows"]');assert.equal(await shadows.isChecked(),false,`${id}: Shadows must start off`);
-   await page.locator(`.${id}-body`).evaluate(body=>window.__cometDefaultNodes=[body,...body.children]);
+   await page.locator(`.${id}-body`).evaluateAll(bodies=>window.__cometDefaultNodes=bodies.flatMap(body=>[body,...body.children]));
    const lensIds=definition.controls.lenses.controls.map(l=>l.id),views=[];
    const atlas=async (lens,lit)=>{
     const suffix=`${id}-${lens}-${lit?'shadow':'surface'}@2x.webp`;
@@ -36,7 +36,7 @@ try{
    await page.getByRole('button',{name:'Settings',exact:true}).click();
    await page.locator('label').filter({hasText:'Shadows'}).click();await page.keyboard.press('Escape');
    assert.equal(await shadows.isChecked(),false);await atlas(lensIds.at(-1),false);
-   const retained=await page.locator(`.${id}-body`).evaluate(body=>[body,...body.children].every((n,i)=>window.__cometDefaultNodes[i]===n));assert.ok(retained);assert.deepEqual(errors,[]);
+   const retained=await page.locator(`.${id}-body`).evaluateAll(bodies=>{const nodes=bodies.flatMap(body=>[body,...body.children]);return nodes.length===window.__cometDefaultNodes.length&&nodes.every((n,i)=>window.__cometDefaultNodes[i]===n)});assert.ok(retained);assert.deepEqual(errors,[]);
    const screenshot=resolve(output,`${id}.png`);await page.screenshot({path:screenshot});
    reports.push({id,defaultShadows:false,lenses:views,optInWorks:true,retained,preparedSha256:createHash('sha256').update(payload).digest('hex'),screenshot,errors});
   }finally{await context.close();}
