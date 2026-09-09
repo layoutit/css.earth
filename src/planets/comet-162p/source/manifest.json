@@ -1,0 +1,170 @@
+{
+  "schema": "csscomet-162p-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "shape-parameters",
+      "path": "shape/model.json",
+      "expectedBytes": 1334,
+      "expectedSha256": "67de482ce30f232038f9c589720c818014aa31422e1c8d73ce3f53559c3b1b9a",
+      "origin": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+      "credit": "Abbie L. Donaldson (2025); Fernández et al. (2013); cssEarth approximation",
+      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in numeric constraints transcribed from the cited tables and sections. The thesis is not redistributed.",
+      "redistribution": "Preserve attribution and the distinction from the original convex mesh.",
+      "consumers": [
+        "shape"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 25872,
+      "expectedSha256": "3596a97ef6973569b2aa603d8701384b0df3526ca43988af9ec9d7430ac07eaf",
+      "origin": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+      "credit": "Abbie L. Donaldson (2025); Fernández et al. (2013); cssEarth approximation",
+      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Reproduced from the shape approximation and shared missing-imagery grid.",
+      "redistribution": "Preserve attribution and the distinction from the original convex mesh.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "shape-parameters"
+        ],
+        "size": 512,
+        "longitudeDegrees": 70,
+        "latitudeDegrees": 20,
+        "ambient": 1,
+        "diffuse": 0,
+        "lensId": "model"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2983,
+      "expectedSha256": "5a72b57374009d2fb879585f6d2390c38cb322577b2bacb854ed50332b18401b",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1627,
+      "expectedSha256": "5507a62bb2c33e4c927d3ea442aeb7e40a120eb2cb9a48ca0113e1a90a31373d",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 406,
+      "expectedSha256": "79495569f713397c2ec1e4c0ca1a7db57bef34ac8a348781f61df35c5592a9ce",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2986,
+      "expectedSha256": "52976487a96ec9b96ed299acc76d00c8757fff4e5e59f3b7b0383bae2c122790",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 41,
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 7360,
+      "expectedSha256": "7990b8c45561dfda4766948bf789b0f25beef10e3682a5f709c5f3fbd4a3d775",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 6976,
+      "expectedSha256": "a45bc9910429d523e9e63365844e7925ce3ca060adc8d06015a16b9dc3be2412",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6263,
+      "expectedSha256": "f51d3fa4ca87dfa2114775a490f46d5e71c152e1dd8b3f32e2079e333313e7d4",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/source-record.json",
+      "expectedBytes": 931,
+      "expectedSha256": "48f24e2c91b6b0b372f19e984e5676e938b6e50e7e9862648bb7259bf6451943",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 853,
+      "expectedSha256": "c7bc8e44d029958a438ad0f397ccc63e885a86fa40d82cb8ca4204950a107e40",
+      "purpose": "Source evidence or authored preparation input."
+    }
+  ]
+}
