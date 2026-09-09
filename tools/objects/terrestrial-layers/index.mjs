@@ -135,7 +135,7 @@ export function parseTerrestrialProfile(value) {
   const observationIds = new Set();
   for (const observation of value.raster.observations) {
     const policy = observation.validity;
-    if (policy?.resampling !== undefined && (policy.resampling !== 'source-georeferenced-bilinear' ||
+    if (policy?.resampling !== undefined && (!['source-georeferenced-bilinear','source-georeferenced-nearest'].includes(policy.resampling) ||
         !['geotiff-rgb-alpha','geotiff-monochrome-alpha'].includes(policy.kind))) {
       throw new TypeError('Source-georeferenced observation resampling requires a masked GeoTIFF.');
     }
@@ -239,7 +239,11 @@ export function parseTerrestrialProfile(value) {
   for (const lens of [...value.raster.observations, ...(value.raster.scientific ?? [])]) {
     if (lens.textureScale !== undefined) {
       lensTextureGrid(lens, value.raster);
-      if (value.geometry.radialTerrain || value.geometry.radialModels) throw new TypeError('Texture scaling requires the fixed sphere atlas.');
+      if (value.geometry.radialModels) throw new TypeError('Texture scaling for radial model families is not supported.');
+      const tile = value.geometry.radialTerrain?.tileSize;
+      if (tile !== undefined && (!Number.isSafeInteger(tile * lens.textureScale) || tile * lens.textureScale < 1)) {
+        throw new TypeError('Scaled radial textures require integral source atlas tiles.');
+      }
     }
   }
   return value;

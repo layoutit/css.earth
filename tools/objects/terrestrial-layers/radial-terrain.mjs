@@ -302,12 +302,19 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   artifactId = null, snapshotEntries = source.manifest.generatedIntermediates }) {
   if (artifactId !== null && !/^[a-z][a-z0-9-]*$/.test(artifactId)) throw new TypeError('Invalid surface model artifact id.');
   const suffix = artifactId ? `-${artifactId}` : '';
-  const { width, height, tileSize } = radial;
+  const { width: canonicalWidth, height: canonicalHeight, tileSize: canonicalTileSize } = radial;
   const lightingRecipe = config.geometry.radialTerrain.sourceLighting;
   const lighting = lightingRecipe ? createSourceMeshLighting(radial.grid, lightingRecipe,
     config.geometry.radiusKm * 1000 / config.geometry.radius, sunDirection) : null;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
+    // The retained CSS background size stays canonical. Only prepared image
+    // pixels and atlas rectangles scale; each normalized UV keeps its owner.
+    const scale = surface.textureScale ?? 1;
+    const width = canonicalWidth * scale, height = canonicalHeight * scale, tileSize = canonicalTileSize * scale;
+    if (![1,.5,.25,.125].includes(scale) || ![width,height,tileSize].every(n=>Number.isSafeInteger(n) && n>0)) {
+      throw new TypeError('Scaled radial atlas dimensions must remain integral.');
+    }
     const flood = Buffer.alloc(width * height * 4), shadow = Buffer.alloc(width * height * 4);
     const nearest = surface.displaySampling === 'nearest';
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
@@ -345,7 +352,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         // Fixed-epoch directional illumination is baked in the body's frame.
         const light = !face.estimated && lighting?.sample(point, normal);
         let illumination = light?.shadow ?? (.12 + .88 * Math.max(0, dot(normal, sunDirection)));
-        const offset = ((rect.y + py) * width + rect.x + px) * 4;
+        const offset = ((rect.y * scale + py) * width + rect.x * scale + px) * 4;
         const clampedPoint = radial.grid?.imageGrid && closestTrianglePoint(point, a, ab, ac).point;
         const sourceMeters = config.geometry.radiusKm * 1000 / config.geometry.radius;
         const outsideSource = clampedPoint && radial.grid.heightAt(clampedPoint[0] * sourceMeters, clampedPoint[1] * sourceMeters) === null;
@@ -501,7 +508,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     source.assertBytes(entry, png);
   }
   await writeFile(resolve(outputDirectory, `terrain${suffix}.json`), JSON.stringify({ schema: 'cssearth-prepared-radial-terrain@1',
-    source: config.geometry.radialTerrain, faces: radial.faces, width, height,
+    source: config.geometry.radialTerrain, faces: radial.faces, width: canonicalWidth, height: canonicalHeight,
     ...(radial.completion ? { completion: radial.completion } : {}),
     ...(radial.coverage ? { coverage: radial.coverage } : {}),
     ...(radial.simplification ? { simplification: radial.simplification } : {}) }) + '\n');

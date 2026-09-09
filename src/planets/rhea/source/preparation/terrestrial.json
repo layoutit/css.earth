@@ -32,6 +32,23 @@
           "noData": null,
           "centerLongitude": 180
         }
+      },
+      {
+        "id": "infrared",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-nearest"
+        },
+        "textureScale": 0.125,
+        "focus": {
+          "longitudeDegrees": 250,
+          "latitudeDegrees": -15,
+          "zoom": 1.1
+        }
       }
     ],
     "scientific": [
@@ -133,6 +150,54 @@
           ]
         },
         "displaySampling": "nearest"
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "format": "geotiff",
+        "path": "vims/rhea-water-ice.tif",
+        "consumer": "ice-absorption",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "description": "2.02 µm water-ice band depth",
+        "title": "Continuum-relative water-ice absorption; not ice abundance",
+        "sourceUrl": "https://doi.org/10.17189/ctqe-ta30",
+        "minimum": 0.3,
+        "maximum": 0.75,
+        "colors": [
+          "#332f68",
+          "#2c7fb8",
+          "#7fcdbb",
+          "#edf8b1"
+        ],
+        "labels": [
+          "≤ 0.30",
+          "0.525",
+          "≥ 0.75"
+        ],
+        "units": "band depth · dimensionless",
+        "grid": {
+          "width": 360,
+          "height": 180,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 764000.0,
+          "noData": -9999,
+          "origin": [
+            -2400176.787342602,
+            1200088.393671301
+          ],
+          "resolution": [
+            13334.315485236677,
+            -13334.315485236677
+          ],
+          "wrapLongitude": true
+        },
+        "textureScale": 0.125,
+        "focus": {
+          "longitudeDegrees": 250,
+          "latitudeDegrees": -15,
+          "zoom": 1.1
+        }
       }
     ],
     "observedColors": [],

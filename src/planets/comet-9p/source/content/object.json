@@ -92,7 +92,7 @@
         "id": "deep-impact",
         "label": "Deep Impact · 2005",
         "description": "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape.",
-        "title": "MRI mosaic",
+        "title": "ITS mosaic",
         "detail": "ITS",
         "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
         "surface": "comet-9p-deep-impact-surface@2x.webp",
@@ -111,7 +111,7 @@
           {
             "id": "scale",
             "label": "Image scale",
-            "value": "13–34 m/pixel"
+            "value": "11–34 m/pixel"
           }
         ],
         "summary": "These views show the surface just before the 2005 impact, with original shadows. The grid marks gaps or uncertain shape."
@@ -139,7 +139,7 @@
           {
             "id": "scale",
             "label": "Image scale",
-            "value": "12–20 m/pixel"
+            "value": "12–42 m/pixel"
           }
         ],
         "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."

@@ -1,0 +1,21 @@
+
+> cssearth@0.1.0 build:preparation /Users/ekrof/fed/cssEarth-moons-cassini-atlas
+> pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts
+
+CLI Building entry: ../../tools/objects/operations.ts, ../../tools/objects/prepare-authored.ts, ../../tools/objects/prepare-shell.ts, ../../tools/objects/prepare-spatial-context.ts, ../../tools/objects/prepare-stars.ts, ../../tools/objects/prepare-volume.ts, ../../tools/objects/prepare-world-navigation.ts, ../../tools/objects/celestial/prepare.ts, ../../tools/objects/content/prepare.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/tsup.config.ts
+CLI Target: node22
+CLI Cleaning output folder
+ESM Build start
+ESM ../../tools/objects/dist/operations.js               47.64 KB
+ESM ../../tools/objects/dist/prepare-stars.js            22.30 KB
+ESM ../../tools/objects/dist/celestial/prepare.js        7.76 KB
+ESM ../../tools/objects/dist/prepare-volume.js           64.97 KB
+ESM ../../tools/objects/dist/prepare-shell.js            25.54 KB
+ESM ../../tools/objects/dist/prepare-world-navigation.js 39.65 KB
+ESM ../../tools/objects/dist/prepare-authored.js         366.84 KB
+ESM ../../tools/objects/dist/prepare-spatial-context.js  37.32 KB
+ESM ../../tools/objects/dist/content/prepare.js          47.94 KB
+ESM ⚡️ Build success in 35ms

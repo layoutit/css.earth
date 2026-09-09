@@ -47,3 +47,22 @@ test('native radial fallback preserves numeric/missing cells through actual loss
    .some(c=>![valid,unknown].some(p=>p.every((v,i)=>v===c[i]))),'Default photographic output still includes interpolated colors');
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('a smaller baked atlas preserves original face plans and normalized CSS addresses',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'cssearth-radial-scaled-atlas-'));
+ try{
+  await sharp(Buffer.from([valid,valid,unknown,unknown,valid,valid,unknown,unknown].flat()),
+    {raw:{width:4,height:2,channels:3}}).webp({lossless:true}).toFile(join(root,'source.webp'));
+  const radial=radialFixture(),before=structuredClone(radial);
+  const surface={id:'scaled',textureScale:.5,displaySampling:'nearest',map:{url:'/scenes/fixture/source.webp'}};
+  const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{path:'fixture.obj'}},raster:{scientific:[]}};
+  await prepareRadialMaterials({radial,surfaces:[surface],config,source:{manifest:{generatedIntermediates:[]}},publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
+  assert.deepEqual(radial,before,'Existing geometry and CSS atlas addresses must not change');
+  for(const asset of [surface.surface,surface.shadowSurface]){
+    assert.equal(asset.width,2);assert.equal(asset.height,1);
+    const pixels=await sharp(join(root,asset.url.split('/').at(-1))).removeAlpha().raw().toBuffer();
+    assert.deepEqual([...pixels],[...valid,...unknown],'Both original face owners survive scaling');
+  }
+  for(const {rect} of radial.plans)assert.equal(rect.x/radial.width,(rect.x*.5)/surface.surface.width);
+ }finally{await rm(root,{recursive:true,force:true});}
+});

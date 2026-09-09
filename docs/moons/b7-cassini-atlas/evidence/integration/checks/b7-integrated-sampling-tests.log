@@ -1,0 +1,19 @@
+✔ fractional source origin maps canonical centres through native coordinates across the meridian (0.916208ms)
+✔ every nonzero interpolation contributor must be valid; no-data cannot bleed into supported terrain (0.134375ms)
+✔ an exact source centre preserves valid dark values and ignores zero-weight invalid neighbours (0.11475ms)
+✔ partial latitude footprint remains missing near both poles and source synthetic sectors stay withheld (0.076792ms)
+✔ a shorter longitude footprint is not stretched or cyclically filled to cover the globe (0.085625ms)
+✔ actual masked and legacy monochrome dispatch preserve the same nonintegral GeoTIFF grid (11.270791ms)
+✔ nearest native cells preserve coarse pixels and missing holes through seam and poles (0.180834ms)
+✔ nearest cell-boundary ties use the same half-open area for both physical moon radii (19.21925ms)
+✔ reduced science textures preserve every normalized band and gutter address (1.072042ms)
+✔ native radial fallback preserves numeric/missing cells through actual lossless flood and shadow encoding (12.125458ms)
+✔ a smaller baked atlas preserves original face plans and normalized CSS addresses (3.786917ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 385.139375

@@ -365,14 +365,16 @@ export function createSceneRouter({
       request.timing.mark(error?.name === 'AbortError' ? 'cancelled' : 'failed');
       if (pending !== request || request.controller.signal.aborted) return false;
       pending = null; request.controller.abort(); request.lifetime.destroy();
+      centeredObjectId = null;
       worldContextMount?.setNavigationInFlight?.(false);
       if (active === source && source) {
-        if (error?.preserveView === true) {
-          const url = captureUrl();
-          if (url && windowTarget.location.pathname !== new URL(source.url).pathname) historyOwner?.commit(url, { history: 'replace' });
-          await bindSessionView(source, { restore: false });
-          source.viewUrl?.flush(); syncPlayback();
-        } else { await bindSessionView(source); syncPlayback(); report(error); }
+        // The source still owns the last drawn camera when destination loading
+        // fails. Rebinding its URL writer must not replay the departure pose.
+        const url = captureUrl();
+        if (url && windowTarget.location.pathname !== new URL(source.url).pathname) historyOwner?.commit(url, { history: 'replace' });
+        await bindSessionView(source, { restore: false });
+        source.viewUrl?.flush(); syncPlayback();
+        if (error?.preserveView !== true) report(error);
       }
       else if (active) fail(active, error);
       else report(error);

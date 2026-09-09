@@ -1,0 +1,71 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b7-cassini-atlas/finalize-one.mjs",
+    "rhea"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 931053568,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 737280,
+      "freePercent": 71
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 147423232,
+      "freePercent": 71
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 404537344,
+      "freePercent": 71
+    },
+    {
+      "seconds": 0.9,
+      "rssBytes": 578863104,
+      "freePercent": 71
+    },
+    {
+      "seconds": 1.2,
+      "rssBytes": 605995008,
+      "freePercent": 71
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 633126912,
+      "freePercent": 71
+    },
+    {
+      "seconds": 1.8,
+      "rssBytes": 661291008,
+      "freePercent": 71
+    },
+    {
+      "seconds": 2.1,
+      "rssBytes": 688619520,
+      "freePercent": 70
+    },
+    {
+      "seconds": 2.3,
+      "rssBytes": 748601344,
+      "freePercent": 70
+    },
+    {
+      "seconds": 2.6,
+      "rssBytes": 931053568,
+      "freePercent": 70
+    },
+    {
+      "seconds": 2.9,
+      "rssBytes": 604520448,
+      "freePercent": 70
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 3.2
+}

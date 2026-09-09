@@ -1,0 +1,1382 @@
+{
+  "status": "PASS",
+  "count": 99,
+  "layers": [
+    {
+      "path": "Plains_3.shp",
+      "records": 4,
+      "bounds": [
+        -180.0,
+        -89.99998887460595,
+        180.0,
+        89.99998887460595
+      ],
+      "fields": [
+        [
+          "Meta_Terra",
+          "C",
+          50,
+          0
+        ],
+        [
+          "Shape_Leng",
+          "F",
+          19,
+          11
+        ],
+        [
+          "Shape_Area",
+          "F",
+          19,
+          11
+        ],
+        [
+          "Meta_Ter_1",
+          "C",
+          10,
+          0
+        ]
+      ]
+    },
+    {
+      "path": "Dunes.shp",
+      "records": 1,
+      "bounds": [
+        -180.0,
+        -59.18530656399996,
+        180.0,
+        50.85516721000004
+      ],
+      "fields": [
+        [
+          "Meta_Terra",
+          "C",
+          50,
+          0
+        ],
+        [
+          "Shape_Leng",
+          "F",
+          19,
+          11
+        ],
+        [
+          "Shape_Area",
+          "F",
+          19,
+          11
+        ]
+      ]
+    },
+    {
+      "path": "Mountains.shp",
+      "records": 1,
+      "bounds": [
+        -180.0,
+        -86.49636114999998,
+        180.0,
+        86.96801396200006
+      ],
+      "fields": [
+        [
+          "Meta_Terra",
+          "C",
+          50,
+          0
+        ],
+        [
+          "Shape_Leng",
+          "F",
+          19,
+          11
+        ],
+        [
+          "Shape_Area",
+          "F",
+          19,
+          11
+        ]
+      ]
+    },
+    {
+      "path": "Basins.shp",
+      "records": 1,
+      "bounds": [
+        -180.0,
+        -86.37171384699995,
+        180.0,
+        89.28624870400007
+      ],
+      "fields": [
+        [
+          "Meta_Terra",
+          "C",
+          50,
+          0
+        ],
+        [
+          "Shape_Leng",
+          "F",
+          19,
+          11
+        ],
+        [
+          "Shape_Area",
+          "F",
+          19,
+          11
+        ]
+      ]
+    },
+    {
+      "path": "Labyrinth.shp",
+      "records": 1,
+      "bounds": [
+        -180.0,
+        -89.99998854499995,
+        180.0,
+        86.47914270400011
+      ],
+      "fields": [
+        [
+          "Meta_Terra",
+          "C",
+          50,
+          0
+        ],
+        [
+          "Shape_Leng",
+          "F",
+          19,
+          11
+        ],
+        [
+          "Shape_Area",
+          "F",
+          19,
+          11
+        ]
+      ]
+    },
+    {
+      "path": "Craters.shp",
+      "records": 1,
+      "bounds": [
+        -175.914602728,
+        -40.19944266599995,
+        166.02966576000009,
+        52.35720697400006
+      ],
+      "fields": [
+        [
+          "Meta_Terra",
+          "C",
+          50,
+          0
+        ],
+        [
+          "Shape_Leng",
+          "F",
+          19,
+          11
+        ],
+        [
+          "Shape_Area",
+          "F",
+          19,
+          11
+        ]
+      ]
+    }
+  ],
+  "probes": [
+    {
+      "pixel": [
+        0,
+        0
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1,
+        0
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        150,
+        0
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        511,
+        0
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        900,
+        0
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1023,
+        0
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1024,
+        0
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1300,
+        0
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1800,
+        0
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2046,
+        0
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2047,
+        0
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": 89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        0,
+        12
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": 87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1,
+        12
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": 87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        150,
+        12
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": 87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        511,
+        12
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": 87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        900,
+        12
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": 87.802734375,
+      "owners": [
+        3
+      ],
+      "value": 3
+    },
+    {
+      "pixel": [
+        1023,
+        12
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": 87.802734375,
+      "owners": [
+        3
+      ],
+      "value": 3
+    },
+    {
+      "pixel": [
+        1024,
+        12
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": 87.802734375,
+      "owners": [
+        3
+      ],
+      "value": 3
+    },
+    {
+      "pixel": [
+        1300,
+        12
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": 87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1800,
+        12
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": 87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2046,
+        12
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": 87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2047,
+        12
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": 87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        0,
+        65
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": 78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1,
+        65
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": 78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        150,
+        65
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": 78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        511,
+        65
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": 78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        900,
+        65
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": 78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1023,
+        65
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": 78.486328125,
+      "owners": [
+        2
+      ],
+      "value": 2
+    },
+    {
+      "pixel": [
+        1024,
+        65
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": 78.486328125,
+      "owners": [
+        2
+      ],
+      "value": 2
+    },
+    {
+      "pixel": [
+        1300,
+        65
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": 78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1800,
+        65
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": 78.486328125,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        2046,
+        65
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": 78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2047,
+        65
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": 78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        0,
+        255
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1,
+        255
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        150,
+        255
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        511,
+        255
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        900,
+        255
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1023,
+        255
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1024,
+        255
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1300,
+        255
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1800,
+        255
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2046,
+        255
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2047,
+        255
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": 45.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        0,
+        512
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": -0.087890625,
+      "owners": [
+        1
+      ],
+      "value": 1
+    },
+    {
+      "pixel": [
+        1,
+        512
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": -0.087890625,
+      "owners": [
+        1
+      ],
+      "value": 1
+    },
+    {
+      "pixel": [
+        150,
+        512
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": -0.087890625,
+      "owners": [
+        1
+      ],
+      "value": 1
+    },
+    {
+      "pixel": [
+        511,
+        512
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": -0.087890625,
+      "owners": [
+        2
+      ],
+      "value": 2
+    },
+    {
+      "pixel": [
+        900,
+        512
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": -0.087890625,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1023,
+        512
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": -0.087890625,
+      "owners": [
+        2
+      ],
+      "value": 2
+    },
+    {
+      "pixel": [
+        1024,
+        512
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": -0.087890625,
+      "owners": [
+        2
+      ],
+      "value": 2
+    },
+    {
+      "pixel": [
+        1300,
+        512
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": -0.087890625,
+      "owners": [
+        1
+      ],
+      "value": 1
+    },
+    {
+      "pixel": [
+        1800,
+        512
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": -0.087890625,
+      "owners": [
+        2
+      ],
+      "value": 2
+    },
+    {
+      "pixel": [
+        2046,
+        512
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": -0.087890625,
+      "owners": [
+        1
+      ],
+      "value": 1
+    },
+    {
+      "pixel": [
+        2047,
+        512
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": -0.087890625,
+      "owners": [
+        1
+      ],
+      "value": 1
+    },
+    {
+      "pixel": [
+        0,
+        767
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1,
+        767
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        150,
+        767
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        511,
+        767
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        900,
+        767
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1023,
+        767
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": -44.912109375,
+      "owners": [
+        2
+      ],
+      "value": 2
+    },
+    {
+      "pixel": [
+        1024,
+        767
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": -44.912109375,
+      "owners": [
+        2
+      ],
+      "value": 2
+    },
+    {
+      "pixel": [
+        1300,
+        767
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1800,
+        767
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2046,
+        767
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2047,
+        767
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": -44.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        0,
+        958
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": -78.486328125,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1,
+        958
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": -78.486328125,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        150,
+        958
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": -78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        511,
+        958
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": -78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        900,
+        958
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": -78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1023,
+        958
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": -78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1024,
+        958
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": -78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1300,
+        958
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": -78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1800,
+        958
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": -78.486328125,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2046,
+        958
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": -78.486328125,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        2047,
+        958
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": -78.486328125,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        0,
+        1011
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": -87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1,
+        1011
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": -87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        150,
+        1011
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": -87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        511,
+        1011
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": -87.802734375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        900,
+        1011
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": -87.802734375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1023,
+        1011
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": -87.802734375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1024,
+        1011
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": -87.802734375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1300,
+        1011
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": -87.802734375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1800,
+        1011
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": -87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2046,
+        1011
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": -87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2047,
+        1011
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": -87.802734375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        0,
+        1023
+      ],
+      "longitudeEast": -179.912109375,
+      "latitude": -89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        1,
+        1023
+      ],
+      "longitudeEast": -179.736328125,
+      "latitude": -89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        150,
+        1023
+      ],
+      "longitudeEast": -153.544921875,
+      "latitude": -89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        511,
+        1023
+      ],
+      "longitudeEast": -90.087890625,
+      "latitude": -89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        900,
+        1023
+      ],
+      "longitudeEast": -21.708984375,
+      "latitude": -89.912109375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1023,
+        1023
+      ],
+      "longitudeEast": -0.087890625,
+      "latitude": -89.912109375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1024,
+        1023
+      ],
+      "longitudeEast": 0.087890625,
+      "latitude": -89.912109375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1300,
+        1023
+      ],
+      "longitudeEast": 48.603515625,
+      "latitude": -89.912109375,
+      "owners": [
+        4
+      ],
+      "value": 4
+    },
+    {
+      "pixel": [
+        1800,
+        1023
+      ],
+      "longitudeEast": 136.494140625,
+      "latitude": -89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2046,
+        1023
+      ],
+      "longitudeEast": 179.736328125,
+      "latitude": -89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    },
+    {
+      "pixel": [
+        2047,
+        1023
+      ],
+      "longitudeEast": 179.912109375,
+      "latitude": -89.912109375,
+      "owners": [
+        0
+      ],
+      "value": 0
+    }
+  ]
+}

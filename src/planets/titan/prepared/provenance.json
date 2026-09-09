@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "titan",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcb4d808a6adc658c833859d64191a01f5cb0f01f41f4360a20e177d55364cd1"
+    "sha256": "d7f1713545bc724f00955d4d5df50e69409f2c3a6558509b3f57c4da2a4e044e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2d739c1689a556fe6cef9fba75c23653fb885908e7799f4c05a1795453462d3a",
+      "sha256": "baad0759b526300aab67e29d536eee12aead0e301e773ef5ca1ad85dad7d771e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -251,6 +251,77 @@
                 }
               ],
               "displaySampling": "nearest"
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "format": "geotiff",
+              "path": "geology/titan-geologic-units.tif",
+              "consumer": "geology",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "categories": [
+                {
+                  "value": "Pl",
+                  "label": "Plains",
+                  "color": "#66f0cc"
+                },
+                {
+                  "value": "Dn",
+                  "label": "Dunes",
+                  "color": "#b665cb"
+                },
+                {
+                  "value": "Mt",
+                  "label": "Hummocky terrain",
+                  "color": "#ffcc66"
+                },
+                {
+                  "value": "Ba",
+                  "label": "Lakes and basins",
+                  "color": "#6699ff"
+                },
+                {
+                  "value": "Lb",
+                  "label": "Labyrinth terrain",
+                  "color": "#ff66e0"
+                },
+                {
+                  "value": "Cr",
+                  "label": "Craters",
+                  "color": "#ff6666"
+                }
+              ],
+              "description": "Interpreted surface terrains",
+              "title": "Cassini global geomorphology · Lopes et al. (2020)",
+              "sourceUrl": "https://doi.org/10.17632/f6jrtyfp66.2",
+              "grid": {
+                "width": 2048,
+                "height": 1024,
+                "centerLongitude": 0,
+                "referenceRadiusMeters": 2575000,
+                "noData": -32768,
+                "origin": [
+                  -8089601.082993717,
+                  4044800.5414968585
+                ],
+                "resolution": [
+                  7900.001057611052,
+                  -7900.001057611052
+                ],
+                "wrapLongitude": true
+              },
+              "textureScale": 0.25,
+              "minimum": 0,
+              "maximum": 5,
+              "colors": [
+                "#66f0cc",
+                "#b665cb",
+                "#ffcc66",
+                "#6699ff",
+                "#ff66e0",
+                "#ff6666"
+              ]
             }
           ],
           "observedColors": [],
@@ -312,7 +383,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4008373e705f57c221071bbf14b2b5ff86ff82b98e37b86cfdb032f25785138e",
+      "sha256": "f37f24e3d98d94c6fd18496b7bbd168a13a4ae5ca8344a607180c24b3dfad287",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -507,6 +578,60 @@
                 "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
                 "image": "/scenes/titan/titan-coverage-distance-legend.webp"
               }
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "description": "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons.",
+              "summary": "Explore Titan’s dunes, plains, highlands and lake basins in the global Cassini interpretation.",
+              "title": "Cassini global geomorphology · Lopes et al. (2020)",
+              "thumbnail": "/scenes/titan/titan-geology-thumbnail.webp",
+              "surface": "titan-geology-surface@2x.webp",
+              "poles": "titan-geology-poles@2x.webp",
+              "source": {
+                "id": "titan-global-geomorphology-grid",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.17632/f6jrtyfp66.2"
+              },
+              "detail": "Mapped terrains",
+              "falseColor": true,
+              "legend": {
+                "kind": "categories",
+                "title": "Terrain units",
+                "items": [
+                  {
+                    "label": "Plains",
+                    "color": "#66f0cc",
+                    "description": "Broad plains"
+                  },
+                  {
+                    "label": "Dunes",
+                    "color": "#b665cb",
+                    "description": "Wind-shaped dune fields"
+                  },
+                  {
+                    "label": "Hummocky terrain",
+                    "color": "#ffcc66",
+                    "description": "Hilly and mountainous terrain"
+                  },
+                  {
+                    "label": "Lakes and basins",
+                    "color": "#6699ff",
+                    "description": "Areas now or formerly occupied by liquids"
+                  },
+                  {
+                    "label": "Labyrinth terrain",
+                    "color": "#ff66e0",
+                    "description": "Dissected labyrinth terrain"
+                  },
+                  {
+                    "label": "Craters",
+                    "color": "#ff6666",
+                    "description": "Impact crater terrain"
+                  }
+                ],
+                "sourceUrl": "https://doi.org/10.17632/f6jrtyfp66.2"
+              }
             }
           ],
           "labels": {
@@ -565,6 +690,18 @@
             "role": "topography",
             "description": "Formal GTDR measured, interpolated and distance products (2019)",
             "href": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+          },
+          {
+            "label": "Titan geology data",
+            "role": "surface",
+            "description": "Schoenfeld (2026), global unit shapefiles, version 2; CC BY 4.0",
+            "href": "https://doi.org/10.17632/f6jrtyfp66.2"
+          },
+          {
+            "label": "Titan geology paper",
+            "role": "surface",
+            "description": "Lopes et al. (2020), global geomorphological interpretation",
+            "href": "https://doi.org/10.1038/s41550-019-0917-6"
           }
         ],
         "provenance": {
@@ -632,7 +769,7 @@
       "sha256": "5b17af4c230f5f2434497d77621dbe6503458ac15d54557a946c1e1ca9562cb2",
       "bytes": 73480116,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -672,7 +809,7 @@
       "sha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad",
       "bytes": 550734,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -715,7 +852,7 @@
       "sha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af",
       "bytes": 532494,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -758,7 +895,7 @@
       "sha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546",
       "bytes": 7422253,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -801,7 +938,7 @@
       "sha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034",
       "bytes": 7393466,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -844,7 +981,7 @@
       "sha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34",
       "bytes": 6386495,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -887,7 +1024,7 @@
       "sha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b",
       "bytes": 6529382,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -899,6 +1036,42 @@
           "User-Agent": "cssEarth source verification (public PDS data)"
         }
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "titan-global-geomorphology-grid",
+      "path": "geology/titan-geologic-units.tif",
+      "origin": "https://doi.org/10.17632/f6jrtyfp66.2",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Checked-in compact lossless grid; reproduce with tools/objects/acquisition/geology-grid.py source/geology/prepare-grid.json.",
+      "redistribution": "Derived pixel-center unit raster; map palette adapted from NASA/JPL PIA23174.",
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2575000
+      },
+      "coverage": "Interpreted global geology; holes and unit conflicts withheld. This is not a direct-observation coverage map.",
+      "sha256": "815d7afab1d8e401714a3a141595d161e962ef98421632c77b8fe6002945fb9b",
+      "bytes": 192457,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -932,7 +1105,7 @@
       "sha256": "23adb939bf8076fae0fcdf98a7c910fcebe36ffd066cfb3c48cdb0324a8bd770",
       "bytes": 21088532,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -974,7 +1147,7 @@
       "sha256": "d10b9a8b48a7a7c9045b54986412caf03d84319649a436aaefb46c71f8ca2cc6",
       "bytes": 21369517,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -995,10 +1168,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4008373e705f57c221071bbf14b2b5ff86ff82b98e37b86cfdb032f25785138e",
-      "bytes": 11752,
+      "sha256": "f37f24e3d98d94c6fd18496b7bbd168a13a4ae5ca8344a607180c24b3dfad287",
+      "bytes": 14398,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1035,19 +1208,19 @@
           "url": "/scenes/titan/titan-normal-thumbnail.webp",
           "bytes": 3350,
           "sha256": "b5ca1c63585418f45d7c2885cf8403bb378af9f1a957f8e325cbca06d4670a4d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-normal-surface@2x.webp",
           "bytes": 3697816,
           "sha256": "48ee934a5939311625fb8c6823d2ca0a51968a3f32fcceaa0570b5cac7f9a8e7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-normal-poles@2x.webp",
           "bytes": 131418,
           "sha256": "58bde3bf90508c1101990cc7a01316c6b4eedb63faf75e7d776fefd7c8bcaf39",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1085,25 +1258,25 @@
           "url": "/scenes/titan/titan-topography-thumbnail.webp",
           "bytes": 976,
           "sha256": "d9ec8bcb3d8b4e03fec330baa7b1a4ef86e82214397e2636de5a560c5584f8e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-topography-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-topography-surface@2x.webp",
           "bytes": 1026758,
           "sha256": "bd4593a4e39fd462e87bb62800895bd43c7dd124c0931945d6c5f3ddf42944f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-topography-poles@2x.webp",
           "bytes": 146774,
           "sha256": "bc4dc60eb638fa675050cd554a0defc11f3f184bbef3bebd5c61ecd034cc9658",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1141,25 +1314,25 @@
           "url": "/scenes/titan/titan-interpolated-thumbnail.webp",
           "bytes": 4142,
           "sha256": "b0d2ac9fc90349eb08ec41e08694c61143a55e7944a8ce958fad962d8dd5b44e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-interpolated-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-interpolated-surface@2x.webp",
           "bytes": 3126600,
           "sha256": "0f82f3c5bd1a75c7237b919e66fc35e0433f441539f31958b6400c83eebe1860",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-interpolated-poles@2x.webp",
           "bytes": 348004,
           "sha256": "7c5454efbf874194a81f27e4c4452f537893df64878149e9da84a14cdf3e4e9e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1197,25 +1370,70 @@
           "url": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
           "bytes": 6046,
           "sha256": "03b8f86dce22c5c3f9c35b48c6ed30b9b59532db07b0ca6b6c037cd1bf90bffe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-legend.webp",
           "bytes": 210,
           "sha256": "b2cc45c008b3baecb631091dc59b6f57df3e0c5d6852754337ff1cb0aba6a5ee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-surface@2x.webp",
           "bytes": 3707608,
           "sha256": "d33c99869f88bc7bd40b84114f286ea75f3bb1a2c393db48c56dd0bf479b3682",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-poles@2x.webp",
           "bytes": 232152,
           "sha256": "6a3f9d35e9fba589141de8a1e3e890994b9bfbd80c95091292a857299715b455",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/3",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Cassini global geomorphology · Lopes et al. (2020)"
+      },
+      "inputs": [
+        "titan-global-geomorphology-grid"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-geology-thumbnail.webp",
+          "bytes": 790,
+          "sha256": "6572f71554e0b7acbc4fc52d3210acc6ccff400af619178926ef436e1cbed7f5",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-geology-surface@2x.webp",
+          "bytes": 107002,
+          "sha256": "ddd22fd59853e2694d28d248578d9e5943882f0e1265957b251abdb33bae1dae",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titan/titan-geology-poles@2x.webp",
+          "bytes": 7042,
+          "sha256": "bd1eda644cb6ca4017b3a078458247c0864f79a75bf7c39f3184507357b82bfa",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1248,19 +1466,19 @@
           "url": "/scenes/titan/titan-radar-thumbnail.webp",
           "bytes": 4840,
           "sha256": "1724a27e59d4503297fb48fc081d249518d1bffdc93c3c1c84e993be15b48f0f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-radar-surface@2x.webp",
           "bytes": 12715084,
           "sha256": "4f3c472ed60fb71a7da3e28ebf59b694ca32a9966d3198cb8ae266d20b45ef4d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titan/titan-radar-poles@2x.webp",
           "bytes": 533952,
           "sha256": "2a2b28c423272d1436f49d445e0e0c39209fbd4c31f925f3da6bb8809ddbb5f3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1283,8 +1501,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4980,
-          "sha256": "f847e7541fcf9be0d15d0a971197080fb76fb64bc6f1cc15477ce8a6f9b457e2",
+          "bytes": 5331,
+          "sha256": "8e7c61a07a273a9fc5c590519e43f5f9ee527d34e1080066efca6efa5e5b851f",
           "verification": "bytes-verified"
         }
       ],
@@ -1406,6 +1624,30 @@
           "url": "object:prepared/minimaps/coverage-distance.webp",
           "bytes": 124248,
           "sha256": "62333318820929f7f7d4a46cf7d7d9d347ba894d95781424942a579ab45506c9",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:geology",
+      "label": "Geology preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/3",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "geology"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/geology.webp",
+          "bytes": 110490,
+          "sha256": "285673926bce187677e93b9149e27dd9168b0762a8a4eb65b33afc7bf61ab871",
           "verification": "bytes-verified"
         }
       ]

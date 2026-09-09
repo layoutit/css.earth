@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "2d739c1689a556fe6cef9fba75c23653fb885908e7799f4c05a1795453462d3a"
+          "sha256": "baad0759b526300aab67e29d536eee12aead0e301e773ef5ca1ad85dad7d771e"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4008373e705f57c221071bbf14b2b5ff86ff82b98e37b86cfdb032f25785138e"
+          "sha256": "f37f24e3d98d94c6fd18496b7bbd168a13a4ae5ca8344a607180c24b3dfad287"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "876ff1a80eddf0db76bf7d86d7870edc45e768f96976e58476f36f372b98110e"
+          "sha256": "8b24b84b948b215263deb57ad0f22dab71d3a62c8cbbb6ccd6540eb653051c18"
         }
       ],
       "shape": {
@@ -78,6 +78,11 @@
             },
             {
               "id": "coverage-distance",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "geology",
               "source": "content",
               "material": "lighting"
             }
@@ -123,6 +128,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "dbb39de3e2aceedc73d673452d51e77639458aa707413178f88fa12a45780357"
+    "sha256": "8dd79f4ee19c7e5d2a0bc1ddcbf94be12cd3c4c6b2acc4986b7e63f1f94b8a7c"
   }
 }

@@ -1,0 +1,22 @@
+16:38:11 [vite] connected.
+16:38:13 [types] Generated 1ms
+16:38:13 [vite] connected.
+ astro  v7.2.9 ready in 3505 ms
+┃ Local    http://127.0.0.1:4291/
+16:38:13 watching for file changes...
+16:38:28 [200] /dione/ 2259ms
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/output/playwright/b7-surfaces/integrated-2026-09-09T19-38-13.691Z/report.json
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.goto: Page crashed
+Call log:
+[2m  - navigating to "http://127.0.0.1:4291/dione/", waiting until "networkidle"[22m
+
+    at captureBody (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/docs/moons/b7-cassini-atlas/capture-integrated.mjs:170:32)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/docs/moons/b7-cassini-atlas/capture-integrated.mjs:91:49 {
+  name: 'Error'
+}
+
+Node.js v24.19.0

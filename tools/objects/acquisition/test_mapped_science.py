@@ -1,6 +1,8 @@
 """Small independent edge cases for offline scientific intake; no archive download."""
 import importlib.util
 from pathlib import Path
+import json
+import tempfile
 import unittest
 
 import numpy as np
@@ -19,6 +21,37 @@ def polygon(w,s,e,n,holes=()):
     return dict(type='Polygon',coordinates=[[(w,s),(w,n),(e,n),(e,s),(w,s)],*holes])
 
 class GeologyTests(unittest.TestCase):
+    def test_separate_unit_layers_share_one_conflict_mask(self):
+        import shapefile
+        import rasterio
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            layers=[]
+            # Two original unit files overlap across one quarter of the map.
+            for name,unit,bounds in [('west','A',(-180,-90,0,90)),
+                                     ('middle','B',(-90,-90,90,90))]:
+                with shapefile.Writer(str(root/name)) as writer:
+                    writer.field('UNIT','C')
+                    writer.poly(polygon(*bounds)['coordinates'])
+                    writer.record(unit)
+                layers.append(dict(shapePath=name+'.shp',attributePath=name+'.dbf',expectedRecords=1))
+            (root/'source.prj').write_text('pinned test projection')
+            plan=dict(pins={},projectionPath='source.prj',projectionWkt='pinned test projection',
+                width=32,height=16,radiusMeters=2575000,coordinateUnits='degrees',
+                field='UNIT',unknownValues=[],categories=[dict(value='A'),dict(value='B')],
+                layers=layers,output='units.tif',receipt='receipt.json')
+            (root/'plan.json').write_text(json.dumps(plan))
+            geo.prepare(root/'plan.json')
+            with rasterio.open(root/'units.tif') as image:
+                actual=image.read(1)
+            np.testing.assert_array_equal(actual[:,:8],0)
+            np.testing.assert_array_equal(actual[:,8:16],-32768)
+            np.testing.assert_array_equal(actual[:,16:24],1)
+            np.testing.assert_array_equal(actual[:,24:],-32768)
+            receipt=json.loads((root/'receipt.json').read_text())
+            self.assertEqual(receipt['sourceRecords'],{'A':1,'B':1})
+            self.assertEqual(receipt['unknownOrConflictingPixels'],128)
+
     def test_holes_clipping_and_conflicts(self):
         grid=np.full((6,6),-1,dtype='int16');transform=from_origin(0,6,1,1)
         hole=[(2,2),(4,2),(4,4),(2,4),(2,2)]

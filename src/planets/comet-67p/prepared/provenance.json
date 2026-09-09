@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "comet-67p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87df8a4332e96ba91fa4121e5ade699fc977dfd4df0bc48daedd18c280f6b9a1"
+    "sha256": "cc8b663b913d6b90134bbc438aae884db399e110b08d78a20f5f62544b1e2222"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "42e851ca7febe81da59706a5e3b20c4c4e51cd05ef28449582600557c15ac140",
+      "sha256": "94c222df3f33d7bb1b13a9b1827d47c65c69c5e4983ad39571bc3f2d2869f902",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -647,6 +647,18 @@
                   "path": "observations/n20140806t051914575id50f22.IMG",
                   "qualityPath": "observations/n20140806t051914575id40f22.IMG",
                   "startTime": "2014-08-06T05:20:22.894"
+                },
+                {
+                  "id": "n20140913-200612",
+                  "path": "observations/n20140913t200612355id50f22.img",
+                  "qualityPath": "observations/n20140913t200612355id40f22.img",
+                  "startTime": "2014-09-13T20:07:21.805"
+                },
+                {
+                  "id": "n20140920-133916",
+                  "path": "observations/n20140920t133916351id50f22.img",
+                  "qualityPath": "observations/n20140920t133916351id40f22.img",
+                  "startTime": "2014-09-20T13:40:25.993"
                 }
               ],
               "selection": "lowest-emission",
@@ -748,7 +760,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cff2da0c3cec3ae220786445548c75d4b48a129e2269fbfb38e5288df6a96e12",
+      "sha256": "3626c396dcbee2c7ef9e71873af5573407066c3e8b47309c7a1613801d2edb41",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -844,7 +856,7 @@
                 {
                   "id": "observed",
                   "label": "Observed",
-                  "value": "5–6 Aug 2014"
+                  "value": "Aug–Sep 2014"
                 },
                 {
                   "id": "filter",
@@ -1273,6 +1285,12 @@
             "href": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/"
           },
           {
+            "label": "OSIRIS",
+            "role": "surface",
+            "description": "September 2014 corrected photographs and geometry",
+            "href": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/"
+          },
+          {
             "label": "ESA/Rosetta/MPS · OSIRIS",
             "role": "observations",
             "description": "Four calibrated orange-filter images, corrected geometry and matching detector-quality companions; CC BY-SA 4.0.",
@@ -1370,7 +1388,7 @@
       "sha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
       "bytes": 174,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1389,7 +1407,7 @@
       "sha256": "e90fd0b7d86bc826cf967e2e0234a945c55be7dfd2f710c00e11ed953b14f801",
       "bytes": 5157570,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1428,7 +1446,7 @@
       "sha256": "e5a4ec5aa28af5210a5746f82f23bf253bd1b6eefd0a36434e462ecc575d2def",
       "bytes": 8035200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1454,7 +1472,7 @@
       "sha256": "f3b349a479810dcb2dfdaafa0c9690b70c0ab0757199c92899e58d6343a2bbfe",
       "bytes": 2712,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1480,7 +1498,7 @@
       "sha256": "330e975fc3f263a15efce021733a7d35388e23c3b5a9c142434802aee2941d76",
       "bytes": 11912468,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1506,7 +1524,7 @@
       "sha256": "a7356044e9fa7223e2a220d1a8e897d32547e4949b6c00b99bf9f25008a34ade",
       "bytes": 27355,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1532,7 +1550,7 @@
       "sha256": "598c5c08fd21f649b7e9a80042a65529d8cde466dee91e1e4fdd479abf4e236a",
       "bytes": 181360,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1558,7 +1576,7 @@
       "sha256": "4de22f4cda1a240a6b4af466189ac6af51f4ad110661db57c60a2abf4b7d2116",
       "bytes": 12960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1584,7 +1602,7 @@
       "sha256": "0818a92b1e10e01af3ff0bf746cad0dc4cb1f999e1c1cfd165eae8d698f8efbf",
       "bytes": 11760,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1623,7 +1641,7 @@
       "sha256": "689efa4371d0b4d9f16ce1bc72b94c8c98aaf99488a7d6ce27e4d946724c11b1",
       "bytes": 8035200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1649,7 +1667,7 @@
       "sha256": "2ab9fa68ed07c78712cffade0cbc11c29a68acaa3e432ce6fd15d6dd01d442d0",
       "bytes": 2741,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1688,7 +1706,7 @@
       "sha256": "00b78b5c28765f16b63999697f3e0f8a3878e21fdbd84d5b47f649681a5e0437",
       "bytes": 8035200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1714,7 +1732,7 @@
       "sha256": "e03cc1ff23f15de2a0c3867a60843f74f7dc0aa7ed87bbb8e13c47241d317041",
       "bytes": 2679,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1753,7 +1771,7 @@
       "sha256": "24236aa2032d17f829d24e2eddf2e628e1ee824beee48b999223d276da7c9965",
       "bytes": 8035200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1779,7 +1797,7 @@
       "sha256": "7c29cb35ee5281d36a10d6970d28a6206ee7a4ffe5f1e121d6dba5daaec2b09a",
       "bytes": 2687,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1811,7 +1829,7 @@
       "sha256": "9af9fbedcdc04046786a1c3cb614938245f39cacba69639ba1847fa50fb1e963",
       "bytes": 6309622,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1837,7 +1855,7 @@
       "sha256": "1ff8eda969bf57780ae2901bf6c355f0da4e06f1bf996f59f2ae84f59ae5526e",
       "bytes": 874755,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1863,7 +1881,7 @@
       "sha256": "48665f88d4c902f0aca35552488a015b6532b1eed2efb268c918fee20427c8ae",
       "bytes": 627156,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1889,7 +1907,7 @@
       "sha256": "f176f1b042c9fa1f3f056f3befba1184b9e6f96cda8e875421a472d799c7c945",
       "bytes": 263077,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1915,7 +1933,7 @@
       "sha256": "ebdee4cf10bd0ac8a35025da4f2a7999e583d414bb1526ddf0620f658c8c6f05",
       "bytes": 404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1941,7 +1959,7 @@
       "sha256": "a7d60974c15ce47cd30f0da3fa6e2c9abfc7855e3517c26764755497894c0dfd",
       "bytes": 921816,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1971,7 +1989,7 @@
       "sha256": "de0884a0d83f972bb7f7025dfa784d2b153763dda035b43afa918c8023fe511b",
       "bytes": 151028736,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2001,7 +2019,7 @@
       "sha256": "e7d60cefabbc04c08c90caf0d281a3c65746f8f08c016e73e93287b0087102b8",
       "bytes": 37776896,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2031,7 +2049,7 @@
       "sha256": "2cbe1a4cef9576331eb52f387e1d2b72897f2605b41f35b579481e41fc557ed1",
       "bytes": 151028736,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2061,7 +2079,7 @@
       "sha256": "92f13a95c7d56f0ee5a4eb62bdb8d8e8a60a5435e5d5cbae9a6c4726318cd239",
       "bytes": 37776896,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2091,7 +2109,7 @@
       "sha256": "c431756b48ec0e00392be8a88d9847a33ec35121c4ca5139edc72ac5a2223d39",
       "bytes": 151028736,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2121,7 +2139,7 @@
       "sha256": "9835bd612a76017a15bcaa815fda197126bf72b3f3918ccd2af0981572b1868a",
       "bytes": 37776896,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2151,7 +2169,7 @@
       "sha256": "0552334b0799c77a0bd9d79a953459e1c28211ef7ff2bb333ef0d6be29d30326",
       "bytes": 151028736,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2181,7 +2199,7 @@
       "sha256": "64fb11ae63cb2e3d7f96e2be63cd9ceae315ae71e4d94bc40c85df3d3fe3d4ce",
       "bytes": 37776896,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2189,6 +2207,126 @@
         ],
         "path": "observations/n20140806t051914575id40f22.IMG",
         "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m06-v2.0/data/img/n20140806t051914575id40f22.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n20140913-200612-path",
+      "path": "observations/n20140913t200612355id50f22.img",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140913t200612355id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2014-08-05T19:44:22.918",
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sha256": "21c2b39b4ec5c62e7c04f224b049d96381dc5f4f40c9314fd265da638c7ddf72",
+      "bytes": 151028224,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/n20140913t200612355id50f22.img",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140913t200612355id50f22.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n20140913-200612-qualityPath",
+      "path": "observations/n20140913t200612355id40f22.img",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140913t200612355id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2014-08-05T19:44:22.918",
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sha256": "daecb61e3df87336d16daf475548330c588d3d2e9be03f118d5ccab8cdba43d0",
+      "bytes": 37775872,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/n20140913t200612355id40f22.img",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140913t200612355id40f22.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n20140920-133916-path",
+      "path": "observations/n20140920t133916351id50f22.img",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140920t133916351id50f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2014-08-05T19:44:22.918",
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sha256": "a2c7f5ee9deca995c96561a449432b43de6830b4843c9b5b08b5a8a307e519e1",
+      "bytes": 151028224,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/n20140920t133916351id50f22.img",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140920t133916351id50f22.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n20140920-133916-qualityPath",
+      "path": "observations/n20140920t133916351id40f22.img",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140920t133916351id40f22.img",
+      "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_image_archive_complete"
+      ],
+      "acquisition": "Restore the original pinned PDS IMG; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Retain the complete OSIRIS credit and CC BY-SA 4.0 notice.",
+      "width": 2048,
+      "height": 2048,
+      "observationDate": "2014-08-05T19:44:22.918",
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sha256": "2024e8c6b98662137b211c8e045e74b085fb09b25518e4f755dd9eedaaf63f55",
+      "bytes": 37775872,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/n20140920t133916351id40f22.img",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140920t133916351id40f22.img"
       },
       "verificationOperations": []
     },
@@ -2202,10 +2340,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cff2da0c3cec3ae220786445548c75d4b48a129e2269fbfb38e5288df6a96e12",
-      "bytes": 18673,
+      "sha256": "3626c396dcbee2c7ef9e71873af5573407066c3e8b47309c7a1613801d2edb41",
+      "bytes": 18900,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -2243,13 +2381,13 @@
           "url": "/scenes/comet-67p/comet-67p-model-thumbnail.webp",
           "bytes": 44,
           "sha256": "72f6226f692921f3f9dd3a49250631234f64ef64995d7688732ee6b797b0e192",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-model-surface@2x.webp",
           "bytes": 175838,
           "sha256": "c3edf6545e061e2443564d1350869a3dee20435591ead1138cbcd2bfb3c332e0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2294,19 +2432,19 @@
           "url": "/scenes/comet-67p/comet-67p-albedo-thumbnail.webp",
           "bytes": 2504,
           "sha256": "d9f3f88596e21e56f42703b55d60a787f8e906c57fe5b9e005e0f979bd5d2faf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-albedo-legend.webp",
           "bytes": 208,
           "sha256": "bf57462a321e2ca29ef669f03d2ef450673aaeeda32c6a7c0db2694eccab12f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-albedo-surface@2x.webp",
           "bytes": 1091110,
           "sha256": "5b5a6210faab9ad3dc83cc4c763346731d358efd548e58950cfa20375664ef79",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2351,19 +2489,19 @@
           "url": "/scenes/comet-67p/comet-67p-slope-thumbnail.webp",
           "bytes": 2528,
           "sha256": "201268133eaad0249a2ea4ba60cc9f4fe893aad1ddd4c96b2b7544e64a61199f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-slope-legend.webp",
           "bytes": 240,
           "sha256": "09eb8e6b705d3e829685e2bd68d7e2c3845c7da879e3710bc289ba0d138cf262",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-slope-surface@2x.webp",
           "bytes": 482840,
           "sha256": "d50d96248cdb0c39d41f10f26645a69839c248b0300164c236642facd1fb2b24",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2408,19 +2546,19 @@
           "url": "/scenes/comet-67p/comet-67p-absorption-thumbnail.webp",
           "bytes": 2518,
           "sha256": "7f633b3cb3f67a65dce60aa82e8e1eec4c120ff867957df737c97fc12205b7cf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-absorption-legend.webp",
           "bytes": 220,
           "sha256": "7f6869cf781947a3360039e40e25b3a8d3f6f14460709001bfd814b183b02af3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-absorption-surface@2x.webp",
           "bytes": 1090616,
           "sha256": "24948ea8f2c2e281b87fa355b57ac352dc9badbb779829a586b9fa680b82fa29",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2465,19 +2603,19 @@
           "url": "/scenes/comet-67p/comet-67p-ice-thumbnail.webp",
           "bytes": 2074,
           "sha256": "98d19234952878261370c9d29cd8a9f764ca3c15ac4c6741448f20b8f79495ff",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-ice-legend.webp",
           "bytes": 200,
           "sha256": "4294d8248b9469a1d72002cc9ceed96741f206863c0b7166e82884741671f1b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-ice-surface@2x.webp",
           "bytes": 437456,
           "sha256": "51a5bccd098bcc3130476ae1f5f812ee0dd5e3a4f2a9f375888e0ffa34efb443",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2515,13 +2653,13 @@
           "url": "/scenes/comet-67p/comet-67p-regions-thumbnail.webp",
           "bytes": 318,
           "sha256": "38ce6e71ea970288a2bb8f933e58f6aec5d5cd01789f6874e8041b6e6d9a1303",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-regions-surface@2x.webp",
           "bytes": 49548,
           "sha256": "94aa45d4d0bae7a63d59a3cc6a0020b7eead3fd84ef846f06a5ee397f1b7c6c8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2559,13 +2697,13 @@
           "url": "/scenes/comet-67p/comet-67p-geology-thumbnail.webp",
           "bytes": 354,
           "sha256": "7f6da551b6c08eb9b8ff71a5e9e232de366becde763a368a2e62f109fb8d004a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-geology-surface@2x.webp",
           "bytes": 259986,
           "sha256": "96e9aecc6881d76a13ef82869879409a6581ccb036c27ee892799a00e31e854b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2598,20 +2736,24 @@
         "osiris-20140806-0244-quality",
         "osiris-20140806-0520-geo",
         "osiris-20140806-0520-quality",
+        "n20140913-200612-path",
+        "n20140913-200612-qualityPath",
+        "n20140920-133916-path",
+        "n20140920-133916-qualityPath",
         "mtp019"
       ],
       "outputs": [
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
           "bytes": 1840,
-          "sha256": "ef1d69276abdfed93abb26fb907c322faf5c6b2edc36afc93808b3896106b07a",
-          "verification": "asset-manifest-pin"
+          "sha256": "5ee9fa8e58fd9247bad2d2905b9be0eda3e5901bd274b927ef3688fe71c6e8aa",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-surface@2x.webp",
-          "bytes": 1284266,
-          "sha256": "90c2d2bd767fe940d1db85a1a7aa3a816ea952fa436bcf9addb704e897f0a4ce",
-          "verification": "asset-manifest-pin"
+          "bytes": 1310086,
+          "sha256": "728f3e81c51c67691dd9bda90a2cb1582d5f92049342c33ccc460afa2b2744fc",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2634,8 +2776,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4777,
-          "sha256": "1f536dbfa879f479d22378cc5f5f5d4b85dea647ad433ea07ea107be3fb9d91a",
+          "bytes": 4962,
+          "sha256": "800a595263ae6cc467864583e56ec37cdef0e5990f3f2e404f561a877ef3da14",
           "verification": "bytes-verified"
         }
       ],
@@ -2659,8 +2801,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 43802,
-          "sha256": "23c80d7bb18380743ec58e80df673e45bb584c09db256dd2206c7c8a16c46eff",
+          "bytes": 43814,
+          "sha256": "cc7b4c86e12a80db36bc4d48ea8554bfd13ca6e564ade57098fee65d3bfd37f6",
           "verification": "bytes-verified"
         }
       ]

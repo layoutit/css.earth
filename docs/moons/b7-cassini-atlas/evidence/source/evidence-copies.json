@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-b7-source-evidence-copies@1",
+  "files": [
+    {
+      "file": "dione-source-proof.json",
+      "copiedFrom": "output/b7-vims/dione-source-proof.json",
+      "bytes": 35338,
+      "sha256": "c77e512d924fc515baa347331c3f1c0beb49a466baae27e25a33ce5133fb3cfe"
+    },
+    {
+      "file": "rhea-source-proof.json",
+      "copiedFrom": "output/b7-vims/rhea-source-proof.json",
+      "bytes": 35652,
+      "sha256": "43a4a24a9bd0c9c243c75217b152abd0926e6a35c7650e9ebaadc97e7b7f9c37"
+    },
+    {
+      "file": "registration-evidence.json",
+      "copiedFrom": "output/b7-vims/registration-evidence.json",
+      "bytes": 1975,
+      "sha256": "0fa584739ed17f746c9791c1a252a2b6de9dbb8e62e188cfe608b9b788390aed"
+    },
+    {
+      "file": "registration-comparison.png",
+      "copiedFrom": "output/b7-vims/registration-comparison.png",
+      "bytes": 487568,
+      "sha256": "127f462c622030be36a40bbff089a5459beffc38e77eeded13af19aeee7cc950"
+    },
+    {
+      "file": "comparison-downloads.json",
+      "copiedFrom": "output/b7-vims/comparison-downloads.json",
+      "bytes": 496,
+      "sha256": "06eb13f3997add4a45e36e8fc1292df75e491dbd5831193bf136aaf1e35e75a7"
+    },
+    {
+      "file": "display-range-evidence.json",
+      "copiedFrom": "output/b7-vims/display-range-evidence.json",
+      "bytes": 364,
+      "sha256": "0e49d438d0eb96e491dd536f9d6ef032403e14515b69bdb40cd6571f8380eae0"
+    },
+    {
+      "file": "titan-source-proof.json",
+      "copiedFrom": "output/b7-review/titan-source-proof.json",
+      "bytes": 21580,
+      "sha256": "b0d41b64cb77661ec1e4ea42cc6489ab740a52fb7281b610a3fc5561d0097b7d"
+    },
+    {
+      "file": "radial-normalized-uv-proof.json",
+      "copiedFrom": "output/b7-review/radial-normalized-uv-proof.json",
+      "bytes": 972,
+      "sha256": "8e8a23310da117189b3d33738b109fb573d00e124e07c6de48653efa028dfa73"
+    }
+  ]
+}
