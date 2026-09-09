@@ -1,0 +1,374 @@
+{
+  "lane": "local",
+  "checkedOn": "2026-09-08",
+  "sources": [
+    {
+      "id": "local-moon-package",
+      "title": "Moon merged package SOURCE and preparation/content",
+      "url": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/planets/moon/SOURCE.md",
+      "kind": "repository",
+      "checkedOn": "2026-09-08",
+      "evidence": "Read SOURCE.md, content and preparation recipes from equivalent implementation commit 7b289887; these establish what is already implemented, not fresh release qualification.",
+      "scope": "Moon",
+      "access": "read"
+    },
+    {
+      "id": "local-phobos-package",
+      "title": "Phobos merged package SOURCE and preparation/content",
+      "url": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/planets/phobos/SOURCE.md",
+      "kind": "repository",
+      "checkedOn": "2026-09-08",
+      "evidence": "Read SOURCE.md, content and preparation recipes from equivalent implementation commit 7b289887; these establish what is already implemented, not fresh release qualification.",
+      "scope": "Phobos",
+      "access": "read"
+    },
+    {
+      "id": "local-deimos-package",
+      "title": "Deimos merged package SOURCE and preparation/content",
+      "url": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/planets/deimos/SOURCE.md",
+      "kind": "repository",
+      "checkedOn": "2026-09-08",
+      "evidence": "Read SOURCE.md, content and preparation recipes from equivalent implementation commit 7b289887; these establish what is already implemented, not fresh release qualification.",
+      "scope": "Deimos",
+      "access": "read"
+    },
+    {
+      "id": "local-dimorphos-package",
+      "title": "Dimorphos merged package SOURCE and preparation/content",
+      "url": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/planets/dimorphos/SOURCE.md",
+      "kind": "repository",
+      "checkedOn": "2026-09-08",
+      "evidence": "Read SOURCE.md, content and preparation recipes from equivalent implementation commit 7b289887; these establish what is already implemented, not fresh release qualification.",
+      "scope": "Dimorphos",
+      "access": "read"
+    },
+    {
+      "id": "local-solar",
+      "title": "Merged shared solar geometry",
+      "url": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/platform/solar-geometry.mjs",
+      "kind": "repository",
+      "checkedOn": "2026-09-08",
+      "evidence": "Shared epoch JD 2461286.5: Moon uses ELP; Phobos uses a retained Horizons state; compact moon orbits and source-defined body orientation are prepared. Source comments distinguish parent barycenters from centers.",
+      "scope": "Moon, Phobos, Deimos; body-specific states and limitations",
+      "access": "read"
+    },
+    {
+      "id": "local-moon-kit",
+      "title": "NASA CGI Moon Kit",
+      "url": "https://svs.gsfc.nasa.gov/4720/",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "The current color release mixes WAC color with monochrome polar information and gap filling. Numeric LOLA displacement products are also linked. The existing recipe uses a 2k image and print-map topography/crust inputs.",
+      "scope": "Moon surface and numeric height; visualization color is not a calibrated albedo map",
+      "access": "read"
+    },
+    {
+      "id": "local-moon-print",
+      "title": "NASA lunar topography and crustal-thickness maps",
+      "url": "https://svs.gsfc.nasa.gov/4014/",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Both flat print maps contain baked shaded relief. GRAIL crustal thickness is a gravity-inferred model with a uniform crust-density assumption, not a direct thickness measurement.",
+      "scope": "Moon existing display-map interpretation",
+      "access": "read"
+    },
+    {
+      "id": "local-lola",
+      "title": "PDS LOLA/SLDEM2015 native float products",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/sldem2015/global/float_img/",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Actual release directory exposes native float images and labels; datum, scale and spatial coverage must be taken from the selected label before preparation. No raster downloaded.",
+      "scope": "Moon numeric elevation",
+      "access": "read"
+    },
+    {
+      "id": "local-diviner",
+      "title": "PDS Diviner derived collection label",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/collection_data_derived_gdr_level3.xml",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Label identifies Moon target and derived thermal, rock-abundance and silicate-mineralogy products, with observation span 2009-07-05 to 2016-10-23. Retained label and hash in local-evidence.",
+      "scope": "Moon Diviner GDR Level 3",
+      "access": "read"
+    },
+    {
+      "id": "local-diviner-guide",
+      "title": "ODE Diviner Level 3 product guide",
+      "url": "https://ode.rsl.wustl.edu/moon/pagehelp/Content/Missions_Instruments/Lunar%20Reconnaissance%20Orbiter%20%28LRO%29/DIVINER/GDR_L3.htm",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "The guide distinguishes Christiansen Feature wavelength, rock abundance and fitted soil temperature/RMS. Thermal products use specified lunar-hour bins; coverage and missing-data handling vary by product.",
+      "scope": "Moon composition proxy, rock abundance and local-time-conditioned thermal views",
+      "access": "read"
+    },
+    {
+      "id": "local-ernst",
+      "title": "Ernst et al. 2023 Phobos and Deimos SPC models",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10290967/",
+      "kind": "paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Released SPC models include relative albedo and modeled gravity/slope attributes. Detailed SPC support is much less complete on Deimos; a closed mesh does not imply uniform measurement. Gravity interpretation includes density and Mars assumptions.",
+      "scope": "Phobos and Deimos geometry and facet attributes",
+      "access": "read"
+    },
+    {
+      "id": "local-sbmt",
+      "title": "SBMT actual shared-file release index",
+      "url": "https://sbmt.jhuapl.edu/shared-files/",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Index read through direct HTTP: Phobos v004 and Deimos v002 OBJ and matching CSV products are individually linked at several spacings. Phobos 18 m CSV is explicitly draft. No large archive downloaded.",
+      "scope": "Phobos v004; Deimos v002",
+      "access": "read"
+    },
+    {
+      "id": "local-phobos-label",
+      "title": "Phobos v004 148 m release label",
+      "url": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.lbl",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Label names the matching OBJ, migration from PCK10 to PCK11, removal of COM/COF offset, density, rotation and assumed Mars position. Retained with hash.",
+      "scope": "Phobos v004 frame and geophysical assumptions",
+      "access": "read"
+    },
+    {
+      "id": "local-deimos-label",
+      "title": "Deimos v002 83 m release label",
+      "url": "https://sbmt.jhuapl.edu/shared-files/files/deimos_g_083m_spc_obj_0000n00000_v002.lbl",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Label names the matching OBJ, 2025-03-10 release, nominal spacing, bulk density, spin and assumed Mars position. Retained with hash.",
+      "scope": "Deimos v002 model identity and geophysical assumptions",
+      "access": "read"
+    },
+    {
+      "id": "local-phobos-map",
+      "title": "USGS Phobos controlled mosaic record",
+      "url": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "DLR-controlled Stooke mosaic already used in cssEarth. Nominal pixel spacing does not establish uniform image resolution; source illumination and artistic seam adjustment remain.",
+      "scope": "Phobos observation mosaic",
+      "access": "read"
+    },
+    {
+      "id": "local-stooke",
+      "title": "PDS Stooke maps archive",
+      "url": "https://sbn.psi.edu/pds/resource/stookemaps.html",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "The retained Deimos cylindrical Viking/MRO mosaic belongs to this release. Current package already records interpolated polar areas and absence of a supplied validity mask.",
+      "scope": "Deimos existing mosaic; broader archive does not imply every map is a measured complete surface",
+      "access": "read"
+    },
+    {
+      "id": "local-exi-paper",
+      "title": "Shimizu et al. 2026 EXI Deimos crater and boulder distribution",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL117346",
+      "kind": "paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Abstract, published 2026-07-18, reports crater and boulder distributions from Hope EXI, including poorly observed areas. Full-text/data-availability endpoint returned 403; a downloadable registered feature catalog was not established.",
+      "scope": "Deimos new morphology lead",
+      "access": "metadata-only"
+    },
+    {
+      "id": "local-emm",
+      "title": "Emirates Mars Mission Science Data Center",
+      "url": "https://sdc.emiratesmarsmission.ae/",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Primary science-data portal identified for EXI/EMIRS/EMUS observations; no specific Deimos calibrated sequence and complete geometry release selected in this review.",
+      "scope": "Deimos mission-data access lead",
+      "access": "metadata-only"
+    },
+    {
+      "id": "local-nomad",
+      "title": "TGO NOMAD-UVIS Mars-moon reflectance study",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2023JE008002",
+      "kind": "paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Paper identifies ultraviolet/visible reflectance observations of both moons; this is a disk-spectrum/chart lead, not a registered global color texture. Exact PSA products remain to be pinned.",
+      "scope": "Phobos and Deimos spectra",
+      "access": "metadata-only"
+    },
+    {
+      "id": "local-dart",
+      "title": "PDS DART Dimorphos v004 collection",
+      "url": "https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Released final pre-impact global SPC collection is already the geometry source. Archive model uncertainty must remain separate from display-mesh simplification error.",
+      "scope": "Dimorphos encounter-era v004 geometry",
+      "access": "read"
+    },
+    {
+      "id": "local-dart-albedo",
+      "title": "Dimorphos v004 relative-albedo table label",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Actual label has 196608 facet records with facet number, latitude, longitude, radius in km, relative albedo and sigma. It is a FITS binary table, not a cylindrical image. Retained with hash.",
+      "scope": "Dimorphos v004 .972 m matching-facet relative albedo",
+      "access": "read"
+    },
+    {
+      "id": "local-dart-slope",
+      "title": "Dimorphos v004 gravity-relative slope label",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Actual 196608-record table supplies slope and sigma in degrees. Label specifies uniform density, rotation and Didymos gravitational influence. This is distinct from radius-derived height.",
+      "scope": "Dimorphos modeled gravity-relative slope",
+      "access": "read"
+    },
+    {
+      "id": "local-dart-sis",
+      "title": "DART shape-model software interface specification",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/document/dart_shapemodel_sis.pdf",
+      "kind": "mission/archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Small PDF read: ancillary values correspond to plates of the matching shape; geophysical products use modeled gravity. Nominal global resolution does not establish useful detail everywhere.",
+      "scope": "DART shape and facet-product format and interpretation",
+      "access": "read"
+    }
+  ],
+  "rows": [
+    {
+      "key": "Earth|I",
+      "parent": "Earth",
+      "name": "Moon",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "confidence": "high",
+      "geometry": "Current 16-band reference sphere, radius 1737.4 km; topography is displayed as a print-map lens. Native LOLA/SLDEM numeric heights are released and could support preparation of actual relief with bounded simplification. SLDEM supports equatorial/midlatitude terrain; polar coverage requires the appropriate separate LOLA product.",
+      "imagery": "Existing 2k NASA visualization color plus LOLA/GRAIL print JPGs with baked shaded relief. GRAIL crustal thickness is gravity-inferred under a uniform crust-density assumption. NASA current color includes polar monochrome substitution and gap filling. Diviner RA/soil-temperature/RMS products cover 60 degrees south to 60 degrees north at 32 ppd in ten local-hour bins from 19:30 through 05:30; they are scientific layers, not photographs or a full-globe instantaneous thermal map.",
+      "orbit": "NAIF 301; merged solar geometry prepares an ELP Moon state at JD 2461286.5. Legacy SOURCE prose describes mean context and needs reconciliation with current code; no orbit implementation rerun.",
+      "supportedRepresentation": "Numeric topography and a carefully labeled Diviner thermal, rock-abundance or composition-proxy lens on the existing standalone Moon; lunar-hour bins and coverage visible in content. Optional genuine prepared relief after error/budget review.",
+      "nextAction": "Pin one Diviner GDR product with label/units/missing-data mask and native LOLA DEM; replace print-based elevation intake, qualify a new scientific layer, and correct stale orbit provenance.",
+      "blocker": "Selected raster labels and validity masks still need full intake; thermal local time is not the shared instantaneous scene date. Global imagery color includes reconstructed regions. No runtime or visual qualification performed.",
+      "effort": "large",
+      "effortReason": "Numeric scalar intake, legend/coverage semantics and relief preparation are broader than swapping an image; start with one well-defined lens.",
+      "sourceIds": [
+        "local-moon-package",
+        "local-solar",
+        "local-moon-kit",
+        "local-moon-print",
+        "local-lola",
+        "local-diviner",
+        "local-diviner-guide"
+      ],
+      "searches": [
+        "Read Moon SOURCE, raster/content and shared solar geometry at 7b289887.",
+        "Checked NASA CGI current products and polar/color caveats against current raster inputs.",
+        "Opened actual SLDEM float-image release directory.",
+        "Read Moon-target Diviner collection XML and GDR L3 product definitions, including spatial/local-hour limits; checked NASA 4014 print-map relief and crust-density caveats. No bulk raster downloaded."
+      ]
+    },
+    {
+      "key": "Mars|I",
+      "parent": "Mars",
+      "name": "Phobos",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "confidence": "high",
+      "geometry": "Ernst/SBMT v004 148 m model already supplies geometry, reduced to 1216 display facets. Higher-density releases exist; useful improvement depends on measured silhouette/relief gain, not file size. Frame label explicitly migrated PCK10 to PCK11 and removed COM/COF offset.",
+      "imagery": "Controlled 40 ppd Stooke multi-mission mosaic already present; nominal ~5 m pixels are not uniform 5 m detail. Companion facet-relative-albedo and geophysical attributes are released. Regional color and disk spectra require their own coverage/registration work.",
+      "orbit": "NAIF 401 relative to Mars 499; merged code retains a Horizons geometric state at shared epoch, alongside IAU rotation. Release model-frame consistency still needs a future visual/coordinate audit.",
+      "supportedRepresentation": "Existing observed mosaic plus separately labeled SPC relative-albedo or modeled gravity/slope lens, preserving source coverage and assumptions. A spectral chart is a later research candidate.",
+      "nextAction": "Use the matching v004 CSV attributes and model label to qualify one facet-scalar layer; compare source support and frame conventions before considering denser geometry.",
+      "blocker": "Facet attributes must preserve mesh identity and validity through preparation. Gravity/slope assumes density, rotation and Mars position; existing lit mosaic cannot be relabeled as albedo. New regional image registration and PSA spectrum product identity remain unresolved.",
+      "effort": "medium",
+      "effortReason": "Matching geometry and attributes already exist; shared facet-scalar preparation and visual checks remain. Regional image or spectral work would be separate research.",
+      "sourceIds": [
+        "local-phobos-package",
+        "local-solar",
+        "local-ernst",
+        "local-sbmt",
+        "local-phobos-label",
+        "local-phobos-map",
+        "local-nomad"
+      ],
+      "searches": [
+        "Read Phobos SOURCE, shape/raster preparation and content at 7b289887.",
+        "Matched exact Phobos v004 148 m OBJ/CSV/label names in SBMT index.",
+        "Read release frame/density/rotation/Mars-position label and Ernst product methods.",
+        "Checked controlled USGS mosaic and NOMAD-UVIS spectrum lead; did not treat paper metadata as released mapped texture."
+      ]
+    },
+    {
+      "key": "Mars|II",
+      "parent": "Mars",
+      "name": "Deimos",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "confidence": "high",
+      "geometry": "Ernst/SBMT v002 83 m model already used with 1216 display facets. Detailed SPC support is limited to part of the body; limb-constrained closure elsewhere is not equal-quality topography.",
+      "imagery": "Existing 20 ppd Viking/MRO mosaic includes coarse coverage, lit terrain, seam/polar interpolation and no source validity mask. The matching v002 facet attributes are released. July 2026 EXI crater/boulder paper is a new lead, but its registered feature-data release could not be verified.",
+      "orbit": "NAIF 402; current package uses prepared Mars-relative compact orbit and IAU orientation at shared date. A fresh reference fit was not performed.",
+      "supportedRepresentation": "Coverage-aware SPC scalar lens on current geometry; later registered EXI regional observation/feature view if calibrated sequences, geometry and data release are obtained. Disk spectra would support a chart, not a fabricated global color map.",
+      "nextAction": "Qualify one matching v002 facet-scalar layer and preserve the existing conservative NaN-albedo support mask; resolve the 2026 EXI paper data availability and exact EMM Deimos sequence before committing to an image/feature layer.",
+      "blocker": "Sparse SPC support and incomplete mosaic validity are material. New EXI paper full text returned 403; actual mapped crater/boulder release and image-to-shape geometry are unverified. A catalog entry or press image does not resolve registration.",
+      "effort": "medium",
+      "effortReason": "Existing matching mesh/CSV permits bounded scalar work; EXI feature/imagery extension remains separate research and may be large.",
+      "sourceIds": [
+        "local-deimos-package",
+        "local-solar",
+        "local-ernst",
+        "local-sbmt",
+        "local-deimos-label",
+        "local-stooke",
+        "local-exi-paper",
+        "local-emm",
+        "local-nomad"
+      ],
+      "searches": [
+        "Read Deimos SOURCE, shape/raster preparation and content at 7b289887.",
+        "Matched exact Deimos v002 83 m mesh, CSV and released label; checked density/spin/Mars assumptions.",
+        "Reviewed SPC hemisphere limits and existing mosaic source lineage.",
+        "Searched Deimos EXI new products; read 2026 Shimizu abstract and attempted full-text/data-availability endpoint (403).",
+        "Identified EMM portal and NOMAD-UVIS paper, leaving exact product delivery/registration unresolved."
+      ]
+    },
+    {
+      "key": "Didymos|Dimorphos",
+      "parent": "Didymos",
+      "name": "Dimorphos",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "confidence": "high",
+      "geometry": "Released DART v004 pre-impact .972 m SPC global mesh is already reduced to 800 display facets. Encounter mesh includes modeled terrain; simplifier error is separate from observational uncertainty. It cannot be presented as a measured post-impact shape.",
+      "imagery": "No photographic map is currently mounted. Actual v004 FITS binary-table release has per-facet relative albedo and sigma; gravity-relative slope is also released on the same 196608 facets. These provide a concrete path without first solving photographic frame projection.",
+      "orbit": "Existing DART s547 post-impact relative-trajectory fit uses a stated 60-day window; SOURCE records prior six-sample fit errors, not rerun here. The shape is pre-impact and display phase about the measured pole is arbitrary; no coupled post-impact attitude prediction is established.",
+      "supportedRepresentation": "Encounter-era relative-albedo and separately labeled gravity-relative slope views, retaining mesh-aligned valid/unknown support. Keep encounter shape, post-impact orbital context and arbitrary display phase distinct.",
+      "nextAction": "Add preparation support for the released v004 FITS facet table, join by FACET_NUM to the exact model, preserve sigma/no-data semantics and qualify a relative-albedo lens; slope follows with explicit density/rotation/Didymos assumptions.",
+      "blocker": "Existing cylindrical FITS path cannot ingest facet tables. A nonempty scalar or sigma alone does not prove observed coverage, and attributes must survive simplification without inventing detail. No future shape, spin or post-impact surface inferred.",
+      "effort": "medium",
+      "effortReason": "The actual registered ancillary products are released; a reusable facet-table preparation path and coverage/visual qualification are the main work.",
+      "sourceIds": [
+        "local-dimorphos-package",
+        "local-dart",
+        "local-dart-albedo",
+        "local-dart-slope",
+        "local-dart-sis"
+      ],
+      "searches": [
+        "Read Dimorphos SOURCE, content, material/shape preparation and source-orbit provenance at 7b289887.",
+        "Read PDS exact v004 collection and directory, not a generic DART landing page.",
+        "Fetched albedo and slope XML: checked target, logical ID, 196608 records, facet IDs, units and sigma.",
+        "Read DART shape SIS format and modeled-gravity interpretation; retained metadata hashes, no science array downloaded."
+      ]
+    }
+  ],
+  "summary": "All four existing local-system scenes have specific evidence-backed depth opportunities. The strongest shared implementation path is matching-mesh scalar preparation for Dimorphos, Phobos and Deimos; the Moon offers native numeric DEM and Diviner products. Deimos EXI 2026 is explicitly an unresolved data-release lead.",
+  "limitations": [
+    "Review establishes feasible source directions, not qualified new assets, runtime correctness or release readiness.",
+    "Only small metadata/labels and the DART SIS were downloaded. Raster/mesh arrays and full ancillary validity have not been recomputed.",
+    "Mixed source epochs, frames, terrain support and visualization color treatments must remain explicit.",
+    "No new PR, implementation, build, tests, large source bake or external publication was performed."
+  ]
+}

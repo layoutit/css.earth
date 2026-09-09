@@ -68,7 +68,139 @@
       },
       "coverage": "Visual-only Stooke mosaic controlled by Leyrat2010, with revised south-pole interpretation and photographed illumination. A north-edge connected0..2sRGB display-code heuristic identifies exterior gaps before resampling; isolated dark terrain is retained. This is not calibrated albedo.",
       "expectedBytes": 725269,
-      "expectedSha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9"
+      "expectedSha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9",
+      "capture": {
+        "spacecraftIds": [
+          "rosetta"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg"
+      }
+    },
+    {
+      "id": "steins-observations-w20080905t183606461id4df17-img",
+      "path": "observations/w20080905t183606461id4df17.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 615424,
+      "expectedSha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6"
+    },
+    {
+      "id": "steins-reference-naif0012-tls",
+      "path": "reference/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+    },
+    {
+      "id": "steins-reference-ROS_V33-TF",
+      "path": "reference/ROS_V33.TF",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/former_versions/ROS_V33.TF",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 237356,
+      "expectedSha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1"
+    },
+    {
+      "id": "steins-reference-ROS_OSIRIS_V15-TI",
+      "path": "reference/ROS_OSIRIS_V15.TI",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/ik/former_versions/ROS_OSIRIS_V15.TI",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 23016,
+      "expectedSha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587"
+    },
+    {
+      "id": "steins-reference-ROS_STEINS_V05-TPC",
+      "path": "reference/ROS_STEINS_V05.TPC",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/pck/ROS_STEINS_V05.TPC",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 6314,
+      "expectedSha256": "cfdc8738633af838008c6f67c23019c5179c4fc7888a5653f06b7a3dfbc846c1"
+    },
+    {
+      "id": "steins-reference-osiris-boresight-pdf",
+      "path": "reference/osiris-boresight.pdf",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSIWAC/RO-C-OSIWAC-5-ESC2-67P-M15-GEO-V2.0/DOCUMENT/CALIB/BORESIGHT_V01.PDF",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 801308,
+      "expectedSha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318"
+    },
+    {
+      "id": "steins-reference-osiris-photometry-pdf",
+      "path": "reference/osiris-photometry.pdf",
+      "origin": "https://arxiv.org/pdf/1702.00184",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 2400378,
+      "expectedSha256": "6b47bcb9c9f810e1a2e8136aa6d0c83e2862edc0619d233de0135fd6fcaa8dac"
+    },
+    {
+      "id": "steins-preparation-camera-json",
+      "path": "preparation/camera.json",
+      "origin": "Authored source-bound camera profile",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 568,
+      "expectedSha256": "e6710af8ae266103c46eec3a9fd47f37c407bcc711f3f15e55c00648a3889c10"
+    },
+    {
+      "id": "steins-observations-osiris-camera-json",
+      "path": "observations/osiris-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 2899,
+      "expectedSha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9"
     }
   ],
   "generatedIntermediates": [
@@ -103,14 +235,14 @@
     {
       "path": "content/object.json",
       "purpose": "Source evidence or authored preparation input.",
-      "expectedBytes": 9765,
-      "expectedSha256": "6bc2542c035193831976feba06851d7040849815463a0abd7b665bcbb1b5874e"
+      "expectedBytes": 11211,
+      "expectedSha256": "fae15ecf0a9f7c2f0dcc77e1141836777049a1f1a7645244d8007d868b408316"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Source evidence or authored preparation input.",
-      "expectedBytes": 1017,
-      "expectedSha256": "e911caa28be1088c5f599f16dbddfee2251338d1d96891817a7b6ded1a2ac7a3"
+      "expectedBytes": 2785,
+      "expectedSha256": "53218f3520a508eaf8e2949c607c1dd581e3cb1fc4731cf193d66a4225e24b05"
     },
     {
       "path": "preparation/navigation.json",
@@ -127,8 +259,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Source evidence or authored preparation input.",
-      "expectedBytes": 3093,
-      "expectedSha256": "be4ad9616171869ae427b82a8fdee9a9afadf0f01e7d3c26d61083243b2d67e7"
+      "expectedBytes": 4556,
+      "expectedSha256": "3fda09b292444c3995018427bd5d947fa2de9dfd592bcdf8885fcba760cfb612"
     },
     {
       "path": "presentation/title-mark.json",

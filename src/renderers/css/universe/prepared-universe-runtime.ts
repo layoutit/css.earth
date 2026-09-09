@@ -69,6 +69,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let pointField: ReturnType<typeof mountPreparedCssPointField> | null = null;
+      let overview = false;
+      let selectionPreview: string | null | undefined;
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
       let environmentLabels: ReturnType<typeof mountEnvironmentLabels> | null = null;
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
@@ -103,7 +105,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
-          setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
+          previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
+          setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },
           setHighContrastSky(enabled: boolean) {
             if (destroyed || highContrastSky === enabled) return;
             highContrastSky = enabled;
@@ -149,7 +152,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             const environmentRects = environmentLabels!.publish({ world, viewport,
               shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects });
             pointField!.publish(world, viewport, 1 - fade, [...foregroundRects, ...environmentRects]);
-            focusPoint?.publish(world, viewport, { opacity: 1 - fade, selectedDetail: selected.id === plan.focus.id,
+            const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
+            focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
             stage.dataset.contextScale = fade > 0 ? 'galactic' : stellarFade > 0 ? 'stellar' : Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis])) > selected.radiusM * 100 ? 'system' : 'object';
           },

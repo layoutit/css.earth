@@ -1,0 +1,2870 @@
+{
+  "lane": "outer_companions",
+  "checkedOn": "2026-09-08",
+  "sourceReference": "7b289887ee03e040b981f6aaff25390d1e17ca9c",
+  "sources": [
+    {
+      "id": "jpl-discovery",
+      "title": "JPL satellite discovery circumstances",
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "kind": "authoritative-catalog",
+      "checkedOn": "2026-09-08",
+      "evidence": "Names, Roman numbers, provisional aliases and discovery notices were individually reconciled for all 50 planetary/Pluto rows.",
+      "scope": "29 Uranus; 16 Neptune; 5 Pluto entries in this lane",
+      "access": "read"
+    },
+    {
+      "id": "jpl-elements",
+      "title": "JPL satellite mean elements",
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "kind": "ephemeris-catalog",
+      "checkedOn": "2026-09-08",
+      "evidence": "Ephemeris and mean-element route checked; live table is dynamic. No new fit or validity interval was qualified.",
+      "scope": "Planetary satellites; exact new-body availability requires query selection",
+      "access": "metadata-only"
+    },
+    {
+      "id": "jpl-physical",
+      "title": "JPL satellite physical parameters",
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "kind": "authoritative-catalog",
+      "checkedOn": "2026-09-08",
+      "evidence": "Physical-parameter catalog checked as a size/reference route; a catalog radius alone does not establish a shape.",
+      "scope": "Planetary satellite parameters",
+      "access": "read"
+    },
+    {
+      "id": "voyager",
+      "title": "PDS Voyager ISS archive",
+      "url": "https://pds-rings.seti.org/voyager/iss/",
+      "kind": "mission-archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Mission archive route checked against package-specific observation records. Nominal target center and actual body intersection differ.",
+      "scope": "Voyager observations; individual frame selection is in each package source record",
+      "access": "read"
+    },
+    {
+      "id": "lpi2020",
+      "title": "Schenk and Moore Uranian satellite maps",
+      "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Repository source records and pinned release README were read; external repository endpoint did not open in this pass. Maps and DEM coverage differ by body.",
+      "scope": "Ariel, Umbriel, Titania, Oberon, Miranda mosaics; selected terrain models",
+      "access": "metadata-only"
+    },
+    {
+      "id": "miranda-geology",
+      "title": "Miranda digitized geology lead",
+      "url": "https://zenodo.org/records/20817533",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Lead is explicitly recorded in the inspected Miranda package. External access unresolved; projection, content and reuse have not been qualified.",
+      "scope": "Miranda only",
+      "access": "unresolved"
+    },
+    {
+      "id": "titania-geology",
+      "title": "Titania geologic investigation",
+      "url": "https://iopscience.iop.org/article/10.3847/PSJ/ad04d6/pdf",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Deblurring and geologic interpretation are a useful research lead. Package records loss of geospatial information; no drop-in registered map was qualified.",
+      "scope": "Titania",
+      "access": "metadata-only"
+    },
+    {
+      "id": "oberon-geology",
+      "title": "Geologic map of Oberon catalog record",
+      "url": "https://planetarymapping.elte.hu/map-catalog/map/6000/geologic-map-of-oberon/",
+      "kind": "map-catalog",
+      "checkedOn": "2026-09-08",
+      "evidence": "Interpretive map lead checked; no reusable registered raster was qualified.",
+      "scope": "Oberon",
+      "access": "metadata-only"
+    },
+    {
+      "id": "uranus-shapes",
+      "title": "Karkoschka 2001 Uranian satellite shapes",
+      "url": "https://doi.org/10.1006/icar.2001.6596",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Published projected/prolate shape fits underpin the individually inspected inner-moon packages; equal minor axes are a model assumption.",
+      "scope": "Cordelia, Ophelia, Bianca, Cressida, Desdemona, Juliet, Portia, Rosalind, Belinda",
+      "access": "metadata-only"
+    },
+    {
+      "id": "french2024",
+      "title": "Uranian ring occultations and inner-moon constraints",
+      "url": "https://arxiv.org/abs/2401.04634",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Revised dynamical/occultation constraints are distinct from measured three-dimensional terrain. Package-specific uncertainty interpretations were checked.",
+      "scope": "Uranian rings and inner satellites",
+      "access": "read"
+    },
+    {
+      "id": "inner-jwst",
+      "title": "Hedman et al. spectral trends across Uranian and Neptunian rings and small moons",
+      "url": "https://arxiv.org/html/2506.18650v2",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "NIRCam disk-integrated photometry and observation tables were read, including Cupid, Perdita, Mab and Hippocamp. These are spectra, not mapped surface textures.",
+      "scope": "Specifically verified missing targets: Cupid, Perdita, Mab, Hippocamp; broader listed inner moons",
+      "access": "read"
+    },
+    {
+      "id": "french2017",
+      "title": "French et al. HST inner Uranian satellite analysis",
+      "url": "https://www.rfrench.org/static/papers/DPS2017-poster.pdf",
+      "kind": "conference-poster",
+      "checkedOn": "2026-09-08",
+      "evidence": "Poster gives individual astrometry and photometry, including Cupid/Puck hemispheric asymmetry. Belinda/Perdita resonance fit is explicitly still in progress.",
+      "scope": "Named table rows: Ophelia, Cressida, Desdemona, Juliet, Portia, Rosalind, Cupid, Belinda, Perdita, Puck, Mab",
+      "access": "read"
+    },
+    {
+      "id": "k2-uranus",
+      "title": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "url": "https://arxiv.org/pdf/1706.06837",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Table 4 supplies measured photometric periods/amplitudes for five detections; thermal constraints differ by target. Stephano and Trinculo yielded no meaningful K2 signal.",
+      "scope": "Detected: Caliban, Sycorax, Prospero, Setebos, Ferdinand; nondetections: Stephano, Trinculo",
+      "access": "read"
+    },
+    {
+      "id": "vlt-uranus",
+      "title": "Maris et al. VLT Uranian irregular photometry",
+      "url": "https://arxiv.org/abs/0704.2187",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Independent colors and variability study; abstract and target membership checked, not a unique shape inversion.",
+      "scope": "Sycorax, Prospero, Stephano, Setebos, Trinculo",
+      "access": "read"
+    },
+    {
+      "id": "uranus-poster",
+      "title": "Uranian irregular satellites physical summary and occultation prospects",
+      "url": "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf",
+      "kind": "conference-poster",
+      "checkedOn": "2026-09-08",
+      "evidence": "Table individually reconciles all nine pre-2023 irregulars. Predicted occultations are prospects, not measured silhouettes.",
+      "scope": "Caliban, Sycorax, Prospero, Setebos, Stephano, Trinculo, Francisco, Margaret, Ferdinand",
+      "access": "read"
+    },
+    {
+      "id": "new-irregulars",
+      "title": "Sheppard 2024 ultra-deep Uranus and Neptune satellite surveys",
+      "url": "https://arxiv.org/abs/2410.00108",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Discovery imaging and astrometry establish three exact new aliases; brightness-derived dimensions depend on assumed albedo.",
+      "scope": "S/2023 U1, S/2002 N5, S/2021 N1",
+      "access": "read"
+    },
+    {
+      "id": "subaru-new",
+      "title": "Subaru three new moons discovery report",
+      "url": "https://subarutelescope.org/en/news/topics/2024/03/05/3373.html",
+      "kind": "observatory-report",
+      "checkedOn": "2026-09-08",
+      "evidence": "Observatory account confirms discovery/recovery epochs for the three survey moons.",
+      "scope": "S/2023 U1, S/2002 N5, S/2021 N1",
+      "access": "read"
+    },
+    {
+      "id": "webb-u1",
+      "title": "Webb discovery of S/2025 U1",
+      "url": "https://science.nasa.gov/blogs/webb/2025/08/19/new-moon-discovered-orbiting-uranus-using-nasas-webb-telescope/",
+      "kind": "mission-report",
+      "checkedOn": "2026-09-08",
+      "evidence": "NIRCam program 6379, February 2025 observations; roughly 10 km is an estimate, not resolved axes.",
+      "scope": "S/2025 U1",
+      "access": "read"
+    },
+    {
+      "id": "uranus-size-table",
+      "title": "PDS Uranian satellite parameters",
+      "url": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
+      "kind": "authoritative-catalog",
+      "checkedOn": "2026-09-08",
+      "evidence": "Perdita, Mab and Cupid size entries individually checked; diameters are not shape products.",
+      "scope": "Perdita, Mab, Cupid",
+      "access": "read"
+    },
+    {
+      "id": "nereid",
+      "title": "Kiss et al. Nereid thermal and rotational properties",
+      "url": "https://doi.org/10.1093/mnras/stw081",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "The package uses one illustrative member of an inferred ellipsoid family, not a uniquely determined mesh/pole.",
+      "scope": "Nereid",
+      "access": "metadata-only"
+    },
+    {
+      "id": "neptune-shapes",
+      "title": "Karkoschka 2003 sizes and shapes of Neptune inner satellites",
+      "url": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Image-derived axes are recorded individually by existing packages; they are analytic approximations, not surface models.",
+      "scope": "Naiad, Thalassa, Despina, Galatea",
+      "access": "metadata-only"
+    },
+    {
+      "id": "stooke",
+      "title": "PDS Stooke small-body shape models",
+      "url": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Actual collection membership checked: Larissa and Proteus included; Dactyl and Puck are not listed. Ida is a different body from Dactyl.",
+      "scope": "Includes Larissa, Proteus, Ida and other explicitly named bodies",
+      "access": "read"
+    },
+    {
+      "id": "triton-map",
+      "title": "USGS Triton controlled mosaic",
+      "url": "https://doi.org/10.5066/P9MGH7FB",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Existing package pins the controlled monochrome product and resolves conflicting meridian prose using file labels.",
+      "scope": "Triton",
+      "access": "metadata-only"
+    },
+    {
+      "id": "triton-color",
+      "title": "LPI Triton color map",
+      "url": "https://www.lpi.usra.edu/icy_moons/neptune/triton/",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Existing package uses the enhanced-color release with explicit coverage/processing limits.",
+      "scope": "Triton",
+      "access": "metadata-only"
+    },
+    {
+      "id": "neptune-orbits",
+      "title": "Brozovic et al. 2011 Neptune outer satellite orbits",
+      "url": "https://carnegiescience.edu/orbits-neptunes-outer-satellites",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Author institution abstract identifies all five targets and state-vector/orbital-fit publication; observations extend arcs to 2009.",
+      "scope": "Halimede, Psamathe, Sao, Laomedeia, Neso",
+      "access": "read"
+    },
+    {
+      "id": "psamathe",
+      "title": "Sheppard et al. Neptune irregular survey",
+      "url": "https://arxiv.org/abs/astro-ph/0604552",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Discovery of Psamathe and comparison with S/2002 N4; size estimates use assumed reflectivity.",
+      "scope": "Psamathe; orbital comparison with Neso",
+      "access": "read"
+    },
+    {
+      "id": "neso",
+      "title": "Maris et al. multicolor photometry of Neso",
+      "url": "https://arxiv.org/abs/1803.07957",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "VRI photometry is reported with large errors; six hours were insufficient for a meaningful rotational period.",
+      "scope": "Neso",
+      "access": "read"
+    },
+    {
+      "id": "hippocamp",
+      "title": "Showalter et al. discovery and analysis of Hippocamp",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6424524/",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "HST discovery, astrometry and conditional radius are reported. Intermediate image archive is linked; no measured three-axis shape.",
+      "scope": "Hippocamp; updated observations of other inner Neptunian moons",
+      "access": "read"
+    },
+    {
+      "id": "hippocamp-release",
+      "title": "Showalter intermediate HST analysis data",
+      "url": "http://dmp.seti.org/mshowalter/neptune_xiv",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Actual data-availability link in the paper; file inventory/bytes were not inspected.",
+      "scope": "Hippocamp HST observations and analysis intermediates",
+      "access": "metadata-only"
+    },
+    {
+      "id": "charon-map",
+      "title": "USGS Charon global mosaic",
+      "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Existing package pins monochrome mosaic and companion topography relative to a 606 km sphere.",
+      "scope": "Charon",
+      "access": "metadata-only"
+    },
+    {
+      "id": "nh-composition",
+      "title": "PDS New Horizons derived global color and absorption maps overview",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/overview.pdf",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Release overview explicitly distinguishes global maps for Pluto/Charon from target image cubes including Nix, Hydra, Kerberos. MVIC bands require calibration.",
+      "scope": "Charon mapped products; Nix, Hydra, Kerberos image cubes",
+      "access": "read"
+    },
+    {
+      "id": "nix-mesh",
+      "title": "Porter Nix shape model v1",
+      "url": "https://doi.org/10.6084/m9.figshare.12779948.v1",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Public fitted mesh, already pinned in package; fitted image registration is not supplied.",
+      "scope": "Nix",
+      "access": "read"
+    },
+    {
+      "id": "hydra-mesh",
+      "title": "Porter Hydra shape model v1",
+      "url": "https://doi.org/10.6084/m9.figshare.12779975.v1",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Public fitted mesh, already pinned in package; poorly seen south and missing camera registration constrain use.",
+      "scope": "Hydra",
+      "access": "read"
+    },
+    {
+      "id": "porter2025",
+      "title": "Porter et al. Pluto small-moon fits",
+      "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+      "kind": "conference-presentation",
+      "checkedOn": "2026-09-08",
+      "evidence": "New fits and initial albedo work were presented; no associated downloadable new mesh plus fitted camera transforms was identified in the checked presentation.",
+      "scope": "Nix, Hydra, Kerberos, Styx",
+      "access": "read"
+    },
+    {
+      "id": "hiiaka",
+      "title": "Hiʻiaka stellar occultations and shape",
+      "url": "https://www.nature.com/articles/s41467-025-65749-1",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Reported semi-axes 240±40, 180±30, 143±7 km are a model from occultations/photometry, not full diameters or a terrain mesh. Article footer CC BY-NC-ND 4.0.",
+      "scope": "Hiʻiaka",
+      "access": "read"
+    },
+    {
+      "id": "hiiaka-data",
+      "title": "Hiʻiaka paper Source Data workbook",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-025-65749-1/MediaObjects/41467_2025_65749_MOESM3_ESM.xlsx",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Workbook is actually linked by the paper; download bytes were inaccessible in this pass. Selection-specific reuse/attribution terms remain to inspect.",
+      "scope": "Hiʻiaka occultation/photometry Source Data",
+      "access": "metadata-only"
+    },
+    {
+      "id": "haumea-orbits",
+      "title": "Non-Keplerian Haumea satellite orbits",
+      "url": "https://doi.org/10.3847/PSJ/ad26e9",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Interacting satellite fit and primary gravity replace an independent two-body interpretation.",
+      "scope": "Hiʻiaka, Namaka",
+      "access": "metadata-only"
+    },
+    {
+      "id": "haumea-thermal",
+      "title": "Haumea system thermal revision",
+      "url": "https://arxiv.org/abs/1811.09476",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "System thermal interpretation includes satellites; estimated sizes/albedos are not individual shapes.",
+      "scope": "Hiʻiaka, Namaka",
+      "access": "read"
+    },
+    {
+      "id": "alma-binaries",
+      "title": "Brown and Butler 2023 ALMA Eris/Orcus satellite study",
+      "url": "https://arxiv.org/abs/2307.04848",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Resolved thermal and astrometric constraints supply component information, not terrain; Dysnomia mass limit and Vanth mass ratio differ.",
+      "scope": "Dysnomia, Vanth",
+      "access": "read"
+    },
+    {
+      "id": "dysnomia-orbit",
+      "title": "Holler et al. Dysnomia orbit",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0019103520304723",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Additional HST epochs break prior orbit-pole degeneracy; moon spin/shape are separate unknowns.",
+      "scope": "Dysnomia",
+      "access": "read"
+    },
+    {
+      "id": "mk2-orbit",
+      "title": "Bamberger et al. preliminary Makemake satellite orbit",
+      "url": "https://arxiv.org/abs/2509.05880",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "2015–2019 HST detections yield preliminary approximately 18-day circular orbit; not a resolved shape.",
+      "scope": "S/2015 (136472) 1, MK2",
+      "access": "read"
+    },
+    {
+      "id": "xiangliu-discovery",
+      "title": "Discovery of the satellite of 2007 OR10",
+      "url": "https://arxiv.org/abs/1703.01407",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "HST observations resolve the pair as sources, not the satellite surface; identity predates Gonggong/Xiangliu names.",
+      "scope": "Xiangliu, satellite of Gonggong = 2007 OR10",
+      "access": "read"
+    },
+    {
+      "id": "xiangliu-orbit",
+      "title": "Mass and density of dwarf planet 2007 OR10",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0019103518304354",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Satellite orbit fit supports system mass; mirror-orbit/size assumptions remain relevant.",
+      "scope": "Xiangliu",
+      "access": "metadata-only"
+    },
+    {
+      "id": "weywot",
+      "title": "Beyond Point Masses V: Weywot orbit",
+      "url": "https://arxiv.org/abs/2511.07351",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Non-Keplerian fit includes Quaoar figure and photocenter effects; inferred low eccentricity differs from older solutions.",
+      "scope": "Weywot",
+      "access": "read"
+    },
+    {
+      "id": "vanth-occ",
+      "title": "Sickafoose et al. Vanth stellar occultation",
+      "url": "https://arxiv.org/abs/1810.08977",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Occultation gives a size constraint with a spherical-limb assumption; chords involve different stars and do not determine a full 3D figure.",
+      "scope": "Vanth",
+      "access": "read"
+    },
+    {
+      "id": "actaea",
+      "title": "Collyer et al. Salacia-Actaea rotation and orbit",
+      "url": "https://arxiv.org/abs/2509.02734",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Long photometry plus resolved HST constrain orbit/synchronous interpretation. Dominant system light-curve variation belongs to Salacia, not a measured Actaea shape.",
+      "scope": "Actaea",
+      "access": "read"
+    },
+    {
+      "id": "ilmare",
+      "title": "Grundy et al. Varda-Ilmarë mutual orbit",
+      "url": "https://arxiv.org/abs/1505.00510",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Resolved astrometry/component photometry determine mutual orbit; thermal area partition and albedo assumptions do not resolve Ilmarë shape.",
+      "scope": "Ilmarë",
+      "access": "read"
+    },
+    {
+      "id": "dactyl",
+      "title": "Veverka et al. Dactyl morphology and photometry",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0019103596900457",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "47 Galileo images at 18 epochs; full dimensions about 1.6×1.4×1.2 km, best monochrome tens of metres/pixel.",
+      "scope": "Dactyl",
+      "access": "read"
+    },
+    {
+      "id": "selam",
+      "title": "Levison et al. a contact binary satellite of Dinkinesh",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11136651/",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Lucy observations establish Selam contact-binary morphology; parent Dinkinesh shape must not be assigned to Selam.",
+      "scope": "Selam",
+      "access": "read"
+    },
+    {
+      "id": "selam-geology",
+      "title": "Lucy Dinkinesh/Selam geology study",
+      "url": "https://ora.ox.ac.uk/objects/uuid%3A4461e3d5-1276-473c-9336-8b991a6a6865/files/r8c97ks594",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Primary institutional manuscript located; full final file retrieval failed. Observed companion mesh release remains unresolved.",
+      "scope": "Dinkinesh and Selam",
+      "access": "metadata-only"
+    },
+    {
+      "id": "selam-release-paper",
+      "title": "Selam formation study data availability",
+      "url": "https://www.nature.com/articles/s41467-025-66484-3",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Paper explicitly links Lucy L’LORRI Dinkinesh partially processed collection; simulation archive is distinct from measured companion geometry.",
+      "scope": "Selam observations; formation simulations",
+      "access": "read"
+    },
+    {
+      "id": "lucy-images",
+      "title": "PDS Lucy L’LORRI Dinkinesh partially processed v1",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/",
+      "kind": "mission-archive",
+      "checkedOn": "2026-09-08",
+      "evidence": "Actual release link identified via data-availability statement (DOI 10.26007/kvc4-2t38); bytes/labels not acquired.",
+      "scope": "Dinkinesh encounter including Selam",
+      "access": "metadata-only"
+    },
+    {
+      "id": "radar-shapes",
+      "title": "PDS JPL radar shape model collection",
+      "url": "https://sbn.psi.edu/pds/resource/jplradarshape.html",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Collection explicitly includes 1999 KW4 Alpha and Beta; Beta is Squannit, not Moshup. DOI 10.26033/xtkf-wz81.",
+      "scope": "Squannit = (66391) 1999 KW4 Beta",
+      "access": "read"
+    },
+    {
+      "id": "squannit-files",
+      "title": "PDS JPL radar shape data directory",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast.jpl.radar.shape_models_V1_0/data/",
+      "kind": "data-release",
+      "checkedOn": "2026-09-08",
+      "evidence": "Inventory explicitly lists a66391_1999kw4_secondary.obj/.xml and a66391_beta_spin_state.csv/.xml. Individual bytes not decoded in this pass.",
+      "scope": "Squannit actual OBJ and spin-state release",
+      "access": "read"
+    },
+    {
+      "id": "linus",
+      "title": "Kalliope-Linus occultations and transits analysis",
+      "url": "https://arxiv.org/abs/2306.04768",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Detailed parent model plus Linus transit/occultation constraints; Linus is modeled as a sphere, not delivered as measured terrain.",
+      "scope": "Linus",
+      "access": "read"
+    },
+    {
+      "id": "peneius",
+      "title": "Daphne internal structure and Peneius orbit",
+      "url": "https://www.aanda.org/articles/aa/pdf/2019/03/aa33898-18.pdf",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Table 3 gives Genoid satellite fit from AO observations; detailed reconstructed shape belongs to Daphne.",
+      "scope": "Peneius",
+      "access": "read"
+    },
+    {
+      "id": "petitprince",
+      "title": "Dynamics of the triple asteroid Eugenia",
+      "url": "https://arxiv.org/abs/1008.2164",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Outer named moon and inner provisional moon are distinguished; resolved positions and brightness estimates do not supply a Petit-Prince terrain mesh.",
+      "scope": "Petit-Prince, outer satellite of Eugenia",
+      "access": "read"
+    },
+    {
+      "id": "romulus-occ",
+      "title": "Berthier et al. Sylvia physical/dynamical properties",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Romulus occultation projected area-equivalent diameter 23.1±0.7 km and projected axis ratio 2.7±0.3; unknown third dimension.",
+      "scope": "Romulus; parent Sylvia model",
+      "access": "read"
+    },
+    {
+      "id": "sylvia2021",
+      "title": "Sylvia system updated shape, occultations and orbits",
+      "url": "https://www.aanda.org/articles/aa/pdf/2021/06/aa40342-21.pdf",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Updated moon astrometry/occultation constraints; released detailed shape is Sylvia, not automatically either moon.",
+      "scope": "Romulus and Remus",
+      "access": "read"
+    },
+    {
+      "id": "kleopatra-moons",
+      "title": "Broz et al. non-Keplerian Kleopatra moon orbits",
+      "url": "https://www.eso.org/public/archives/releases/sciencepapers/eso2113/eso2113b.pdf",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Multipole/N-body orbital solution; detailed primary shape is not a companion mesh.",
+      "scope": "Alexhelios and Cleoselene",
+      "access": "read"
+    },
+    {
+      "id": "queta",
+      "title": "Brown et al. orbit of Queta",
+      "url": "https://arxiv.org/abs/2106.02079",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "HST orbital fit and faint companion photometry; size assumes reflectivity.",
+      "scope": "Queta",
+      "access": "read"
+    },
+    {
+      "id": "skamandrios",
+      "title": "Marchis et al. puzzling mutual orbit of Hektor",
+      "url": "https://arxiv.org/abs/1402.7336",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Satellite orbit is eccentric/inclined; bilobed reconstructed primary is Hektor, not its moon.",
+      "scope": "Skamandrios",
+      "access": "read"
+    },
+    {
+      "id": "menoetius",
+      "title": "Buie et al. Patroclus-Menoetius occultation",
+      "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+      "kind": "research-paper",
+      "checkedOn": "2026-09-08",
+      "evidence": "Six-chord Menoetius projected limb is 117.2×93 km; light-curve combination infers a 3D axis ratio, not directly measured terrain.",
+      "scope": "Menoetius",
+      "access": "read"
+    },
+    {
+      "id": "pkg-ariel",
+      "title": "Ariel source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/ariel/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Ariel",
+      "access": "read"
+    },
+    {
+      "id": "pkg-umbriel",
+      "title": "Umbriel source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/umbriel/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Umbriel",
+      "access": "read"
+    },
+    {
+      "id": "pkg-titania",
+      "title": "Titania source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/titania/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Titania",
+      "access": "read"
+    },
+    {
+      "id": "pkg-oberon",
+      "title": "Oberon source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/oberon/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Oberon",
+      "access": "read"
+    },
+    {
+      "id": "pkg-miranda",
+      "title": "Miranda source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/miranda/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Miranda",
+      "access": "read"
+    },
+    {
+      "id": "pkg-cordelia",
+      "title": "Cordelia source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/cordelia/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Cordelia",
+      "access": "read"
+    },
+    {
+      "id": "pkg-ophelia",
+      "title": "Ophelia source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/ophelia/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Ophelia",
+      "access": "read"
+    },
+    {
+      "id": "pkg-bianca",
+      "title": "Bianca source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/bianca/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Bianca",
+      "access": "read"
+    },
+    {
+      "id": "pkg-cressida",
+      "title": "Cressida source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/cressida/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Cressida",
+      "access": "read"
+    },
+    {
+      "id": "pkg-desdemona",
+      "title": "Desdemona source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/desdemona/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Desdemona",
+      "access": "read"
+    },
+    {
+      "id": "pkg-juliet",
+      "title": "Juliet source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/juliet/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Juliet",
+      "access": "read"
+    },
+    {
+      "id": "pkg-portia",
+      "title": "Portia source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/portia/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Portia",
+      "access": "read"
+    },
+    {
+      "id": "pkg-rosalind",
+      "title": "Rosalind source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/rosalind/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Rosalind",
+      "access": "read"
+    },
+    {
+      "id": "pkg-belinda",
+      "title": "Belinda source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/belinda/source/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Belinda",
+      "access": "read"
+    },
+    {
+      "id": "pkg-puck",
+      "title": "Puck source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/puck/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Puck",
+      "access": "read"
+    },
+    {
+      "id": "pkg-triton",
+      "title": "Triton source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/triton/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Triton",
+      "access": "read"
+    },
+    {
+      "id": "pkg-nereid",
+      "title": "Nereid source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/nereid/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Nereid",
+      "access": "read"
+    },
+    {
+      "id": "pkg-naiad",
+      "title": "Naiad source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/naiad/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Naiad",
+      "access": "read"
+    },
+    {
+      "id": "pkg-thalassa",
+      "title": "Thalassa source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/thalassa/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Thalassa",
+      "access": "read"
+    },
+    {
+      "id": "pkg-despina",
+      "title": "Despina source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/despina/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Despina",
+      "access": "read"
+    },
+    {
+      "id": "pkg-galatea",
+      "title": "Galatea source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/galatea/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Galatea",
+      "access": "read"
+    },
+    {
+      "id": "pkg-larissa",
+      "title": "Larissa source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/larissa/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Larissa",
+      "access": "read"
+    },
+    {
+      "id": "pkg-proteus",
+      "title": "Proteus source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/proteus/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Proteus",
+      "access": "read"
+    },
+    {
+      "id": "pkg-charon",
+      "title": "Charon source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/charon/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Charon",
+      "access": "read"
+    },
+    {
+      "id": "pkg-nix",
+      "title": "Nix source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/nix/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Nix",
+      "access": "read"
+    },
+    {
+      "id": "pkg-hydra",
+      "title": "Hydra source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/hydra/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Hydra",
+      "access": "read"
+    },
+    {
+      "id": "pkg-kerberos",
+      "title": "Kerberos source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/kerberos/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Kerberos",
+      "access": "read"
+    },
+    {
+      "id": "pkg-styx",
+      "title": "Styx source record at merged reference",
+      "url": "https://github.com/layoutit/cssEarth/blob/7b289887ee03e040b981f6aaff25390d1e17ca9c/src/planets/styx/SOURCE.md",
+      "kind": "repository-source-record",
+      "checkedOn": "2026-09-08",
+      "evidence": "SOURCE record, preparation recipe and object content read at the merged reference; this is source feasibility inspection, not execution of package qualification gates.",
+      "scope": "Styx",
+      "access": "read"
+    }
+  ],
+  "rows": [
+    {
+      "key": "Uranus|I",
+      "parent": "Uranus",
+      "name": "Ariel",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "Sphere plus sparse measured terrain relative to a reference ellipsoid.",
+      "imagery": "Corrected Voyager mosaic and 1 km DEM grid; missing hemisphere remains unobserved.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus I checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome, Elevation lenses with source-specific limitations.",
+      "nextAction": "Retain the current lenses and their separate coverage masks.",
+      "blocker": "No newly verified mapped product improves the present source closure.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-ariel",
+        "lpi2020"
+      ],
+      "searches": [
+        "Ariel  individually reconciled in JPL discovery list.",
+        "Read src/planets/ariel/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: lpi2020."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|II",
+      "parent": "Uranus",
+      "name": "Umbriel",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "Reference sphere; old limb/control points are not a continuous DEM.",
+      "imagery": "Corrected Voyager mosaic; recent disk spectra do not provide a geographic raster.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus II checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome lens with source-specific limitations.",
+      "nextAction": "Retain monochrome; require an actual gridded terrain product before elevation.",
+      "blocker": "Sparse limb evidence cannot support an invented full DEM.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-umbriel",
+        "lpi2020"
+      ],
+      "searches": [
+        "Umbriel  individually reconciled in JPL discovery list.",
+        "Read src/planets/umbriel/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: lpi2020."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|III",
+      "parent": "Uranus",
+      "name": "Titania",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "geometry": "Reference sphere with stereo/limb terrain grid.",
+      "imagery": "Voyager mosaic and 2.88 km DEM grid; 2024 deblurred/geologic material needs geographic reconstruction.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus III checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome, Elevation lenses with source-specific limitations.",
+      "nextAction": "Qualify the geologic/deblurred product and its registration before adding a lens.",
+      "blocker": "No drop-in georeferenced release qualified.",
+      "effort": "research",
+      "effortReason": "Source/registration investigation is needed before implementation.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-titania",
+        "lpi2020",
+        "titania-geology"
+      ],
+      "searches": [
+        "Titania  individually reconciled in JPL discovery list.",
+        "Read src/planets/titania/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: lpi2020, titania-geology."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|IV",
+      "parent": "Uranus",
+      "name": "Oberon",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "Reference sphere; sparse limb work does not establish continuous topography.",
+      "imagery": "Corrected Voyager mosaic; interpretive geologic-map lead checked.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus IV checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome lens with source-specific limitations.",
+      "nextAction": "Retain monochrome; keep geological registration as a research lead.",
+      "blocker": "Geologic catalog image is not a qualified geographic source raster.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-oberon",
+        "lpi2020",
+        "oberon-geology"
+      ],
+      "searches": [
+        "Oberon  individually reconciled in JPL discovery list.",
+        "Read src/planets/oberon/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: lpi2020, oberon-geology."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|V",
+      "parent": "Uranus",
+      "name": "Miranda",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "geometry": "Reference sphere with measured stereo/photoclinometry terrain.",
+      "imagery": "Voyager corrected mosaic and 240 m terrain grid; a digitized geology release is a concrete unresolved lead.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus V checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome, Elevation lenses with source-specific limitations.",
+      "nextAction": "Inspect the linked geology files, projection and usage terms.",
+      "blocker": "Zenodo endpoint inaccessible in this pass; content/registration unqualified.",
+      "effort": "research",
+      "effortReason": "Source/registration investigation is needed before implementation.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-miranda",
+        "lpi2020",
+        "miranda-geology"
+      ],
+      "searches": [
+        "Miranda  individually reconciled in JPL discovery list.",
+        "Read src/planets/miranda/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: lpi2020, miranda-geology."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|VI",
+      "parent": "Uranus",
+      "name": "Cordelia",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "50×36×36 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus VI checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-cordelia",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Cordelia S/1986 U7 individually reconciled in JPL discovery list.",
+        "Read src/planets/cordelia/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|VII",
+      "parent": "Uranus",
+      "name": "Ophelia",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "54×38×38 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus VII checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-ophelia",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Ophelia S/1986 U8 individually reconciled in JPL discovery list.",
+        "Read src/planets/ophelia/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|VIII",
+      "parent": "Uranus",
+      "name": "Bianca",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "64×46×46 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus VIII checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-bianca",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Bianca S/1986 U9 individually reconciled in JPL discovery list.",
+        "Read src/planets/bianca/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|IX",
+      "parent": "Uranus",
+      "name": "Cressida",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "92×74×74 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus IX checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-cressida",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Cressida S/1986 U3 individually reconciled in JPL discovery list.",
+        "Read src/planets/cressida/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|X",
+      "parent": "Uranus",
+      "name": "Desdemona",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "90×54×54 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus X checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-desdemona",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Desdemona S/1986 U6 individually reconciled in JPL discovery list.",
+        "Read src/planets/desdemona/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|XI",
+      "parent": "Uranus",
+      "name": "Juliet",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "150×74×74 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus XI checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-juliet",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Juliet S/1986 U2 individually reconciled in JPL discovery list.",
+        "Read src/planets/juliet/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|XII",
+      "parent": "Uranus",
+      "name": "Portia",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "156×126×126 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus XII checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-portia",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Portia S/1986 U1 individually reconciled in JPL discovery list.",
+        "Read src/planets/portia/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|XIII",
+      "parent": "Uranus",
+      "name": "Rosalind",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "72×72×72 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus XIII checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-rosalind",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Rosalind S/1986 U4 individually reconciled in JPL discovery list.",
+        "Read src/planets/rosalind/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|XIV",
+      "parent": "Uranus",
+      "name": "Belinda",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "128×64×64 km full-axis prolate approximation; third axis repeats the minor axis by assumption.",
+      "imagery": "Package-specific Voyager frame survey gives few useful surface samples; nominal-center metadata do not guarantee body intersection.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus XIV checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain measured/prolate model; preserve unobserved-surface treatment.",
+      "blocker": "No mapped texture qualified; independent third-axis/terrain evidence is missing from the checked inputs.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-belinda",
+        "uranus-shapes",
+        "voyager",
+        "french2024"
+      ],
+      "searches": [
+        "Belinda S/1986 U5 individually reconciled in JPL discovery list.",
+        "Read src/planets/belinda/source/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: uranus-shapes, voyager, french2024."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|XV",
+      "parent": "Uranus",
+      "name": "Puck",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "81 km reference sphere is an approximation; no Puck mesh in checked Stooke collection.",
+      "imagery": "C2683716 gives partial Voyager observations; HST poster reports hemispheric photometric asymmetry.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Uranus XV checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome lens with source-specific limitations.",
+      "nextAction": "Retain partial imagery; optional source-backed light-curve explanation needs follow-up data selection.",
+      "blocker": "Disk photometry cannot be painted as resolved surface detail.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-puck",
+        "voyager",
+        "stooke",
+        "french2017"
+      ],
+      "searches": [
+        "Puck S/1985 U1 individually reconciled in JPL discovery list.",
+        "Read src/planets/puck/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: voyager, stooke, french2017."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|XVI",
+      "parent": "Uranus",
+      "name": "Caliban",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "model-candidate",
+      "geometry": "9.948 h double-peaked photometric period; thermal size estimate; 0.16 mag amplitude constrains elongation only under reflectance/aspect assumptions.",
+      "imagery": "K2 disk photometry, not resolved terrain. No unique 3D mesh in checked releases.",
+      "orbit": "JPL mean-element route and named irregular-moon source table checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture.",
+      "nextAction": "Select a justified model family and scale; keep unknown pole/third axis visible.",
+      "blocker": "Light-curve amplitude is degenerate with albedo and viewing aspect.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "k2-uranus",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Caliban S/1997 U1 alias and notice individually matched in JPL discovery table.",
+        "K2 Table 4 detected Caliban; thermal membership and the 2023 poster row checked."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XVII",
+      "parent": "Uranus",
+      "name": "Sycorax",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "model-candidate",
+      "geometry": "6.9162 h double-peaked period; Spitzer/Herschel thermal size; 0.12 mag amplitude constrains elongation only under reflectance/aspect assumptions.",
+      "imagery": "K2 disk photometry, not resolved terrain. No unique 3D mesh in checked releases.",
+      "orbit": "JPL mean-element route and named irregular-moon source table checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture.",
+      "nextAction": "Select a justified model family and scale; keep unknown pole/third axis visible.",
+      "blocker": "Light-curve amplitude is degenerate with albedo and viewing aspect.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "k2-uranus",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Sycorax S/1997 U2 alias and notice individually matched in JPL discovery table.",
+        "K2 Table 4 detected Sycorax; thermal membership and the 2023 poster row checked."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XVIII",
+      "parent": "Uranus",
+      "name": "Prospero",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "model-candidate",
+      "geometry": "7.145 h single-peaked photometric period; doubled shape-period interpretation is ambiguous; 0.41 mag amplitude constrains elongation only under reflectance/aspect assumptions.",
+      "imagery": "K2 disk photometry, not resolved terrain. No unique 3D mesh in checked releases.",
+      "orbit": "JPL mean-element route and named irregular-moon source table checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture.",
+      "nextAction": "Select a justified model family and scale; keep unknown pole/third axis visible.",
+      "blocker": "Light-curve amplitude is degenerate with albedo and viewing aspect.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "k2-uranus",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Prospero S/1999 U3 alias and notice individually matched in JPL discovery table.",
+        "K2 Table 4 detected Prospero; thermal membership and the 2023 poster row checked."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XIX",
+      "parent": "Uranus",
+      "name": "Setebos",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "model-candidate",
+      "geometry": "4.255 h single-peaked photometric period; doubled shape-period interpretation is ambiguous; 0.27 mag amplitude constrains elongation only under reflectance/aspect assumptions.",
+      "imagery": "K2 disk photometry, not resolved terrain. No unique 3D mesh in checked releases.",
+      "orbit": "JPL mean-element route and named irregular-moon source table checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Explicit illustrative ellipsoid-family/rotation model with assumption and uncertainty controls; no texture.",
+      "nextAction": "Select a justified model family and scale; keep unknown pole/third axis visible.",
+      "blocker": "Light-curve amplitude is degenerate with albedo and viewing aspect.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "k2-uranus",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Setebos S/1999 U1 alias and notice individually matched in JPL discovery table.",
+        "K2 Table 4 detected Setebos; thermal membership and the 2023 poster row checked."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XX",
+      "parent": "Uranus",
+      "name": "Stephano",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "VLT variability/color information; no unique axes or shape inversion qualified.",
+      "imagery": "Included in VLT study; K2 analysis explicitly reports no meaningful signal.",
+      "orbit": "JPL route and named Uranian irregular table checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Source photometry/color context with limits, without a fabricated surface.",
+      "nextAction": "Inspect original VLT measurements before adopting a rotation model.",
+      "blocker": "K2 nondetection must not inherit periods from detected neighbors.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "vlt-uranus",
+        "k2-uranus",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Stephano S/1999 U2 alias and notice individually matched in JPL discovery table.",
+        "Stephano individually matched to VLT membership and K2 nondetection discussion."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XXI",
+      "parent": "Uranus",
+      "name": "Trinculo",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "VLT variability/color information; no unique axes or shape inversion qualified.",
+      "imagery": "Included in VLT study; K2 analysis explicitly reports no meaningful signal.",
+      "orbit": "JPL route and named Uranian irregular table checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Source photometry/color context with limits, without a fabricated surface.",
+      "nextAction": "Inspect original VLT measurements before adopting a rotation model.",
+      "blocker": "K2 nondetection must not inherit periods from detected neighbors.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "vlt-uranus",
+        "k2-uranus",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Trinculo S/2001 U1 alias and notice individually matched in JPL discovery table.",
+        "Trinculo individually matched to VLT membership and K2 nondetection discussion."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XXII",
+      "parent": "Uranus",
+      "name": "Francisco",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Brightness-dependent size estimate; no body-specific axes/spin measurement in checked table.",
+      "imagery": "Unresolved discovery/astrometric detections; physical-summary row does not supply a surface product.",
+      "orbit": "Named JPL discovery and mean-element routes checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Orbit/discovery record with assumed-size caveat.",
+      "nextAction": "Qualify an ephemeris interval if selected for system context.",
+      "blocker": "No constrained scene geometry identified in this bounded catalog/physical survey.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Francisco S/2001 U3 alias and notice individually matched in JPL discovery table.",
+        "Francisco individually reconciled in the all-nine irregular physical table; no photometric period assigned there."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|XXIII",
+      "parent": "Uranus",
+      "name": "Margaret",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Brightness-dependent size estimate; no body-specific axes/spin measurement in checked table.",
+      "imagery": "Unresolved discovery/astrometric detections; physical-summary row does not supply a surface product.",
+      "orbit": "Named JPL discovery and mean-element routes checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Orbit/discovery record with assumed-size caveat.",
+      "nextAction": "Qualify an ephemeris interval if selected for system context.",
+      "blocker": "No constrained scene geometry identified in this bounded catalog/physical survey.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Margaret S/2003 U3 alias and notice individually matched in JPL discovery table.",
+        "Margaret individually reconciled in the all-nine irregular physical table; no photometric period assigned there."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|XXIV",
+      "parent": "Uranus",
+      "name": "Ferdinand",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "K2 variability suggests elongation; 11.84 h single-peak fit has low duty cycle and period ambiguity.",
+      "imagery": "Sparse K2 photometry and thermal upper limit; no registered resolved surface in checked sources.",
+      "orbit": "JPL irregular-moon route and named table checked. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Measured light curve and size limits; defer unique rotating shape.",
+      "nextAction": "Inspect time-series sampling and alternative periods before any model.",
+      "blocker": "Sparse observing window prevents treating one fit as unique.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "k2-uranus",
+        "uranus-poster",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Ferdinand S/2001 U2 alias and notice individually matched in JPL discovery table.",
+        "Ferdinand explicitly detected in K2 table with about 7% duty cycle; thermal upper-limit status checked."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XXV",
+      "parent": "Uranus",
+      "name": "Perdita",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Published size estimate only; no measured three-axis figure qualified.",
+      "imagery": "HST astrometry and Belinda resonance; NIRCam flux table. Disk-integrated measurements do not map surface pixels.",
+      "orbit": "HST individual table and JPL discovery checked; Perdita/Belinda resonance matters where applicable. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Measured spectral/photometric context and orbit; no invented terrain.",
+      "nextAction": "Select original photometry and improve size/shape constraints before scene modeling.",
+      "blocker": "Reflectance/shape degeneracy and unmeasured terrain.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "inner-jwst",
+        "french2017",
+        "uranus-size-table"
+      ],
+      "searches": [
+        "Perdita S/1986 U10 alias and notice individually matched in JPL discovery table.",
+        "Perdita explicitly matched in JWST observation/flux tables, HST poster table and PDS size table."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XXVI",
+      "parent": "Uranus",
+      "name": "Mab",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Published size estimate only; no measured three-axis figure qualified.",
+      "imagery": "NIRCam spectral measurements are unusually blue; size remains reflectance-dependent. Disk-integrated measurements do not map surface pixels.",
+      "orbit": "HST individual table and JPL discovery checked; Perdita/Belinda resonance matters where applicable. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Measured spectral/photometric context and orbit; no invented terrain.",
+      "nextAction": "Select original photometry and improve size/shape constraints before scene modeling.",
+      "blocker": "Reflectance/shape degeneracy and unmeasured terrain.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "inner-jwst",
+        "french2017",
+        "uranus-size-table"
+      ],
+      "searches": [
+        "Mab S/2003 U1 alias and notice individually matched in JPL discovery table.",
+        "Mab explicitly matched in JWST observation/flux tables, HST poster table and PDS size table."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XXVII",
+      "parent": "Uranus",
+      "name": "Cupid",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Published size estimate only; no measured three-axis figure qualified.",
+      "imagery": "HST poster reports strong leading/trailing brightness asymmetry, which is albedo evidence rather than a unique elongated shape. Disk-integrated measurements do not map surface pixels.",
+      "orbit": "HST individual table and JPL discovery checked; Perdita/Belinda resonance matters where applicable. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Measured spectral/photometric context and orbit; no invented terrain.",
+      "nextAction": "Select original photometry and improve size/shape constraints before scene modeling.",
+      "blocker": "Reflectance/shape degeneracy and unmeasured terrain.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "inner-jwst",
+        "french2017",
+        "uranus-size-table"
+      ],
+      "searches": [
+        "Cupid S/2003 U2 alias and notice individually matched in JPL discovery table.",
+        "Cupid explicitly matched in JWST observation/flux tables, HST poster table and PDS size table."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Uranus|XXVIII",
+      "parent": "Uranus",
+      "name": "S/2025 U1",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Approximately 10 km brightness-based estimate, not measured axes.",
+      "imagery": "NIRCam discovery images, program 6379, February 2025; unresolved moon.",
+      "orbit": "JPL Uranus XXVIII and CBET 5593 match the Webb discovery alias. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Discovery position/estimated-size context.",
+      "nextAction": "Pin discovery astrometry and future validated ephemeris if selected.",
+      "blocker": "Discovery imaging does not supply a shape or spin; later dynamical experiments are not physical measurements.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "webb-u1"
+      ],
+      "searches": [
+        "S/2025 U1 S/2025 U1 alias and notice individually matched in JPL discovery table.",
+        "S/2025 U1 individually reconciled in NASA discovery report and JPL CBET reference."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Uranus|S/2023 U1",
+      "parent": "Uranus",
+      "name": "S/2023 U1",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Discovery brightness gives an assumed-albedo size, not resolved axes.",
+      "imagery": "Ultra-deep telescope point-source detections and recovery images.",
+      "orbit": "Exact alias matched to 2024 discovery paper and JPL notice. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Discovery/observing-arc and orbit context only.",
+      "nextAction": "Use named discovery astrometry to choose a supported ephemeris interval.",
+      "blocker": "No resolved geometry or unique spin in checked discovery products.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "new-irregulars",
+        "subaru-new",
+        "jpl-elements"
+      ],
+      "searches": [
+        "S/2023 U1 S/2023 U1 alias and notice individually matched in JPL discovery table.",
+        "S/2023 U1 individually appears in Sheppard 2024 and Subaru report; JPL gives its separate MPEC notice."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|I",
+      "parent": "Neptune",
+      "name": "Triton",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "1353 km reference sphere; no new terrain product qualified in this review.",
+      "imagery": "Controlled monochrome and enhanced-color Voyager maps already provide two observation lenses.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Neptune I checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome, Enhanced color lenses with source-specific limitations.",
+      "nextAction": "Retain both maps with measured coverage and enhanced-color wording.",
+      "blocker": "New geology/composition or elevation lens needs a separately registered released product.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-triton",
+        "triton-map",
+        "triton-color"
+      ],
+      "searches": [
+        "Triton  individually reconciled in JPL discovery list.",
+        "Read src/planets/triton/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: triton-map, triton-color."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|II",
+      "parent": "Neptune",
+      "name": "Nereid",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "One illustrative Kiss ellipsoid-family member; pole/meridian not uniquely measured.",
+      "imagery": "Voyager best disc only about eight native pixels across; no usable registered texture qualified.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Neptune II checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain model with its explicit inference and pose caveats.",
+      "blocker": "A low-resolution disc and thermal diameter do not establish a mapped surface.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-nereid",
+        "nereid",
+        "voyager"
+      ],
+      "searches": [
+        "Nereid  individually reconciled in JPL discovery list.",
+        "Read src/planets/nereid/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: nereid, voyager."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|III",
+      "parent": "Neptune",
+      "name": "Naiad",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "96×60×52 km full-axis image-derived ellipsoid; no local terrain mesh.",
+      "imagery": "Voyager observations constrain broad outline but few pixels, smear or unfavorable illumination prevent a useful registered surface map.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Neptune III checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain analytic shape and coverage wording.",
+      "blocker": "No usable mapped texture established in the checked observation survey.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-naiad",
+        "neptune-shapes",
+        "voyager"
+      ],
+      "searches": [
+        "Naiad S/1989 N6 individually reconciled in JPL discovery list.",
+        "Read src/planets/naiad/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: neptune-shapes, voyager."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|IV",
+      "parent": "Neptune",
+      "name": "Thalassa",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "108×100×52 km full-axis image-derived ellipsoid; no local terrain mesh.",
+      "imagery": "Voyager observations constrain broad outline but few pixels, smear or unfavorable illumination prevent a useful registered surface map.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Neptune IV checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain analytic shape and coverage wording.",
+      "blocker": "No usable mapped texture established in the checked observation survey.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-thalassa",
+        "neptune-shapes",
+        "voyager"
+      ],
+      "searches": [
+        "Thalassa S/1989 N5 individually reconciled in JPL discovery list.",
+        "Read src/planets/thalassa/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: neptune-shapes, voyager."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|V",
+      "parent": "Neptune",
+      "name": "Despina",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "180×148×128 km full-axis image-derived ellipsoid; no local terrain mesh.",
+      "imagery": "Voyager observations constrain broad outline but few pixels, smear or unfavorable illumination prevent a useful registered surface map.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Neptune V checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain analytic shape and coverage wording.",
+      "blocker": "No usable mapped texture established in the checked observation survey.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-despina",
+        "neptune-shapes",
+        "voyager"
+      ],
+      "searches": [
+        "Despina S/1989 N3 individually reconciled in JPL discovery list.",
+        "Read src/planets/despina/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: neptune-shapes, voyager."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|VI",
+      "parent": "Neptune",
+      "name": "Galatea",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "204×184×144 km full-axis image-derived ellipsoid; no local terrain mesh.",
+      "imagery": "Voyager observations constrain broad outline but few pixels, smear or unfavorable illumination prevent a useful registered surface map.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Neptune VI checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain analytic shape and coverage wording.",
+      "blocker": "No usable mapped texture established in the checked observation survey.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-galatea",
+        "neptune-shapes",
+        "voyager"
+      ],
+      "searches": [
+        "Galatea S/1989 N4 individually reconciled in JPL discovery list.",
+        "Read src/planets/galatea/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: neptune-shapes, voyager."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|VII",
+      "parent": "Neptune",
+      "name": "Larissa",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "Released Stooke 5-degree radius grid; modeled unseen terrain and radial shape are not local altimetry.",
+      "imagery": "C1138148 partial monochrome registered to shape; about 4.18 km per native pixel.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Neptune VII checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome, Elevation lenses with source-specific limitations.",
+      "nextAction": "Retain observation and broad radial-shape lenses.",
+      "blocker": "Finer visual detail would exceed source resolution/coverage.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-larissa",
+        "stooke",
+        "voyager"
+      ],
+      "searches": [
+        "Larissa S/1989 N2 individually reconciled in JPL discovery list.",
+        "Read src/planets/larissa/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: stooke, voyager."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|VIII",
+      "parent": "Neptune",
+      "name": "Proteus",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "geometry": "Released Stooke 5-degree radius grid relative to 208 km; unseen shape modeled.",
+      "imagery": "Clear Voyager frames support current partial map; violet/blue/green sequence is a coarser registration lead.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Neptune VIII checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome, Elevation lenses with source-specific limitations.",
+      "nextAction": "Correct SOURCE physical-placement paragraph naming Larissa; separately qualify color-frame registration.",
+      "blocker": "Color registration unresolved; documentation contains an apparent copied body name.",
+      "effort": "research",
+      "effortReason": "Source/registration investigation is needed before implementation.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-proteus",
+        "stooke",
+        "voyager"
+      ],
+      "searches": [
+        "Proteus S/1989 N1 individually reconciled in JPL discovery list.",
+        "Read src/planets/proteus/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: stooke, voyager."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Neptune|IX",
+      "parent": "Neptune",
+      "name": "Halimede",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Unresolved optical-size estimate; no measured axes identified in checked observation/orbit publications.",
+      "imagery": "Ground-based astrometry/brightness; no resolved terrain release in checked sources.",
+      "orbit": "Individually named in Brozovic 2011 orbital fits and JPL discovery. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Orbit and discovery context with assumed-reflectivity size caveat.",
+      "nextAction": "Select current ephemeris solution and original component photometry if a context entry is desired.",
+      "blocker": "Physical shape/spin remains unqualified. ",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "neptune-orbits",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Halimede S/2002 N1 alias and notice individually matched in JPL discovery table.",
+        "Halimede explicitly included in five-target 2009 recovery/orbit study; targeted physical/photometry search checked."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|X",
+      "parent": "Neptune",
+      "name": "Psamathe",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Unresolved optical-size estimate; no measured axes identified in checked observation/orbit publications.",
+      "imagery": "Ground-based astrometry/brightness; no resolved terrain release in checked sources.",
+      "orbit": "Individually named in Brozovic 2011 orbital fits and JPL discovery. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Orbit and discovery context with assumed-reflectivity size caveat.",
+      "nextAction": "Select current ephemeris solution and original component photometry if a context entry is desired.",
+      "blocker": "Physical shape/spin remains unqualified. ",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "neptune-orbits",
+        "jpl-elements",
+        "psamathe"
+      ],
+      "searches": [
+        "Psamathe S/2003 N1 alias and notice individually matched in JPL discovery table.",
+        "Psamathe explicitly included in five-target 2009 recovery/orbit study; targeted physical/photometry search checked."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|XI",
+      "parent": "Neptune",
+      "name": "Sao",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Unresolved optical-size estimate; no measured axes identified in checked observation/orbit publications.",
+      "imagery": "Ground-based astrometry/brightness; no resolved terrain release in checked sources.",
+      "orbit": "Individually named in Brozovic 2011 orbital fits and JPL discovery. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Orbit and discovery context with assumed-reflectivity size caveat.",
+      "nextAction": "Select current ephemeris solution and original component photometry if a context entry is desired.",
+      "blocker": "Physical shape/spin remains unqualified. ",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "neptune-orbits",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Sao S/2002 N2 alias and notice individually matched in JPL discovery table.",
+        "Sao explicitly included in five-target 2009 recovery/orbit study; targeted physical/photometry search checked."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|XII",
+      "parent": "Neptune",
+      "name": "Laomedeia",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Unresolved optical-size estimate; no measured axes identified in checked observation/orbit publications.",
+      "imagery": "Ground-based astrometry/brightness; no resolved terrain release in checked sources.",
+      "orbit": "Individually named in Brozovic 2011 orbital fits and JPL discovery. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Orbit and discovery context with assumed-reflectivity size caveat.",
+      "nextAction": "Select current ephemeris solution and original component photometry if a context entry is desired.",
+      "blocker": "Physical shape/spin remains unqualified. ",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "neptune-orbits",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Laomedeia S/2002 N3 alias and notice individually matched in JPL discovery table.",
+        "Laomedeia explicitly included in five-target 2009 recovery/orbit study; targeted physical/photometry search checked."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|XIII",
+      "parent": "Neptune",
+      "name": "Neso",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Brightness-derived size; no meaningful rotation period from the six-hour series.",
+      "imagery": "Published VRI photometry with large uncertainties; no mapped surface.",
+      "orbit": "Individually named in Brozovic orbital fit and JPL catalog. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Measured color/brightness table plus orbit, not a colored terrain model.",
+      "nextAction": "Preserve original errors and acquire tabular observations before chart preparation.",
+      "blocker": "Short time baseline and large color errors.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "neso",
+        "neptune-orbits",
+        "psamathe",
+        "jpl-elements"
+      ],
+      "searches": [
+        "Neso S/2002 N4 alias and notice individually matched in JPL discovery table.",
+        "Neso = S/2002 N4 matched to discovery/orbit and its dedicated 2018 photometry paper."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Neptune|XIV",
+      "parent": "Neptune",
+      "name": "Hippocamp",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "HST radius about 17.4 km assumes albedo like neighbors; no measured axes.",
+      "imagery": "HST shifted/coadded detections and JWST photometry; linked analysis data, no resolved surface.",
+      "orbit": "HST paper gives astrometry/orbit determination; JPL alias S/2004 N1 matched. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Discovery/photometric observations and orbital context.",
+      "nextAction": "Inspect linked intermediate images and JWST tables for a source-backed observation view.",
+      "blocker": "Size assumption cannot stand in for measured shape.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "jpl-discovery",
+        "hippocamp",
+        "hippocamp-release",
+        "inner-jwst"
+      ],
+      "searches": [
+        "Hippocamp S/2004 N1 alias and notice individually matched in JPL discovery table.",
+        "Hippocamp explicitly identified in HST paper/data statement and JWST small-moon discussion; artist concepts excluded."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Neptune|S/2002 N5",
+      "parent": "Neptune",
+      "name": "S/2002 N5",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Discovery brightness gives an assumed-albedo size, not resolved axes.",
+      "imagery": "Ultra-deep telescope point-source detections and recovery images.",
+      "orbit": "Exact alias matched to 2024 discovery paper and JPL notice. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Discovery/observing-arc and orbit context only.",
+      "nextAction": "Use named discovery astrometry to choose a supported ephemeris interval.",
+      "blocker": "No resolved geometry or unique spin in checked discovery products.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "new-irregulars",
+        "subaru-new",
+        "jpl-elements"
+      ],
+      "searches": [
+        "S/2002 N5 S/2002 N5 alias and notice individually matched in JPL discovery table.",
+        "S/2002 N5 individually appears in Sheppard 2024 and Subaru report; JPL gives its separate MPEC notice."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Neptune|S/2021 N1",
+      "parent": "Neptune",
+      "name": "S/2021 N1",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Discovery brightness gives an assumed-albedo size, not resolved axes.",
+      "imagery": "Ultra-deep telescope point-source detections and recovery images.",
+      "orbit": "Exact alias matched to 2024 discovery paper and JPL notice. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Discovery/observing-arc and orbit context only.",
+      "nextAction": "Use named discovery astrometry to choose a supported ephemeris interval.",
+      "blocker": "No resolved geometry or unique spin in checked discovery products.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "jpl-discovery",
+        "new-irregulars",
+        "subaru-new",
+        "jpl-elements"
+      ],
+      "searches": [
+        "S/2021 N1 S/2021 N1 alias and notice individually matched in JPL discovery table.",
+        "S/2021 N1 individually appears in Sheppard 2024 and Subaru report; JPL gives its separate MPEC notice."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Pluto|I",
+      "parent": "Pluto",
+      "name": "Charon",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "geometry": "606 km sphere with measured topography; 300 m output spacing is not uniform effective resolution.",
+      "imagery": "Current monochrome/elevation omit a concrete PDS global color and absorption-map collection. Global is the map-product extent; observed support and photometric corrections must be checked per pixel, rather than assuming uniform global coverage.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Pluto I checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Monochrome, Elevation lenses with source-specific limitations.",
+      "nextAction": "Select actual Charon global color/absorption files, verify projection, units, coverage and calibration.",
+      "blocker": "Release overview read; selected map labels/pixels and preparation are not yet qualified.",
+      "effort": "research",
+      "effortReason": "Source/registration investigation is needed before implementation.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-charon",
+        "charon-map",
+        "nh-composition"
+      ],
+      "searches": [
+        "Charon S/1978 P1 individually reconciled in JPL discovery list.",
+        "Read src/planets/charon/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: charon-map, nh-composition."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Pluto|II",
+      "parent": "Pluto",
+      "name": "Nix",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "geometry": "Released Porter mesh; 40002 vertices/80000 faces; package source units are 0.5 km.",
+      "imagery": "LORRI and MVIC resolve features, but public mesh lacks fitted image registration; 2025 albedo work is presentation-only here.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Pluto II checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Recover or fit camera-to-mesh transforms and validate selected LORRI/MVIC observations.",
+      "blocker": "Body-fixed observation angles unavailable in checked labels; public fit attitude missing.",
+      "effort": "research",
+      "effortReason": "Source/registration investigation is needed before implementation.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-nix",
+        "nix-mesh",
+        "porter2025",
+        "nh-composition"
+      ],
+      "searches": [
+        "Nix S/2005 P2 individually reconciled in JPL discovery list.",
+        "Read src/planets/nix/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: nix-mesh, porter2025, nh-composition."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Pluto|III",
+      "parent": "Pluto",
+      "name": "Hydra",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "improve-existing",
+      "geometry": "Released Porter mesh; north constrained, southern shape poorly observed.",
+      "imagery": "LORRI best about 1.14 km/native pixel; cubes do not supply registered global texture for this mesh.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Pluto III checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Qualify camera-to-mesh orientation and the observed-hemisphere coverage mask.",
+      "blocker": "Missing fitted attitude; 2025 updated shape/albedo release not located.",
+      "effort": "research",
+      "effortReason": "Source/registration investigation is needed before implementation.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-hydra",
+        "hydra-mesh",
+        "porter2025",
+        "nh-composition"
+      ],
+      "searches": [
+        "Hydra S/2005 P1 individually reconciled in JPL discovery list.",
+        "Read src/planets/hydra/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: hydra-mesh, porter2025, nh-composition."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Pluto|IV",
+      "parent": "Pluto",
+      "name": "Kerberos",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "Approximate 14.5×8.2×7.2 km full-axis fit; bilobate alternatives and pole remain uncertain.",
+      "imagery": "Best LORRI only few pixels; a derived cube is not a useful registered terrain map.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Pluto IV checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain approximate model; revisit only with fitted attitude or improved released shape.",
+      "blocker": "Few-pixel sampling and unconverged pole.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-kerberos",
+        "porter2025",
+        "nh-composition"
+      ],
+      "searches": [
+        "Kerberos S/2011 (134340) 1 individually reconciled in JPL discovery list.",
+        "Read src/planets/kerberos/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: porter2025, nh-composition."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Pluto|V",
+      "parent": "Pluto",
+      "name": "Styx",
+      "sceneStatus": "present",
+      "reviewStatus": "reviewed",
+      "disposition": "retain-existing",
+      "geometry": "Approximate 10.6×6.0×5.3 km full-axis ellipsoid from 2025 presentation.",
+      "imagery": "Best LORRI few pixels; no registered useful surface map in checked sources.",
+      "orbit": "Existing package pins parent-relative placement and orientation inputs. JPL identity Pluto V checked; runtime residuals/validity were not re-tested.",
+      "supportedRepresentation": "Retain current Shape model lens with source-specific limitations.",
+      "nextAction": "Retain current model and uncertain-pole wording.",
+      "blocker": "Sampling does not justify detailed topography or albedo.",
+      "effort": "none",
+      "effortReason": "No immediate source-backed replacement justified by this bounded survey.",
+      "sourceIds": [
+        "jpl-discovery",
+        "pkg-styx",
+        "porter2025"
+      ],
+      "searches": [
+        "Styx S/2012 (134340) 1 individually reconciled in JPL discovery list.",
+        "Read src/planets/styx/SOURCE.md, source/preparation/terrestrial.json and source/content/object.json at 7b289887ee03e040b981f6aaff25390d1e17ca9c.",
+        "Followed this package’s body-specific source/release leads: porter2025."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Haumea|Hiʻiaka",
+      "parent": "Haumea",
+      "name": "Hiʻiaka",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "model-candidate",
+      "geometry": "Occultation/photometric model semi-axes 240±40, 180±30, 143±7 km; not full diameters or a measured terrain mesh.",
+      "imagery": "Occultation light curves and disk photometry; Source Data workbook linked, bytes not inspected.",
+      "orbit": "Haumea interacting-satellite solution available; measured 9.68 h photometric spin is separate from orbital motion. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Untextured explicitly inferred triaxial model with uncertainty bounds.",
+      "nextAction": "Inspect linked workbook and its reuse terms, pin axis/spin conventions, then qualify an analytic model.",
+      "blocker": "Data bytes, selection-specific terms and model orientation need qualification; article CC BY-NC-ND 4.0.",
+      "effort": "medium",
+      "effortReason": "A bounded preparation effort remains after source/frame qualification.",
+      "sourceIds": [
+        "hiiaka",
+        "hiiaka-data",
+        "haumea-orbits"
+      ],
+      "searches": [
+        "Hiʻiaka named in 2025 paper; exact Source Data XLSX link followed; reported quantities verified as semi-axes."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Haumea|Namaka",
+      "parent": "Haumea",
+      "name": "Namaka",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Thermal/brightness-derived size depends on partitioning Haumea-system flux; no measured moon axes.",
+      "imagery": "Unresolved component detections; checked thermal work does not deliver a surface map.",
+      "orbit": "Named in interacting Haumea satellite solution; mutual perturbations and primary figure matter. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Mutual-orbit and measurement-limit context.",
+      "nextAction": "Select the full interacting orbital solution; keep assumed radius separate.",
+      "blocker": "No constrained unique geometry in reviewed component studies.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "haumea-orbits",
+        "haumea-thermal"
+      ],
+      "searches": [
+        "Namaka individually matched to Haumea orbit and thermal papers; Hiʻiaka occultation axes explicitly not transferred."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Eris|Dysnomia",
+      "parent": "Eris",
+      "name": "Dysnomia",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Resolved thermal diameter estimate and mass limit; no independent three-axis shape.",
+      "imagery": "ALMA component flux/astrometry and HST detections, not resolved terrain.",
+      "orbit": "Holler HST orbit update reduces pole ambiguity. Eris spin is not measured Dysnomia spin. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Thermal-size/mass-limit and orbital observations.",
+      "nextAction": "Read selected ALMA products and model assumptions before adopting a size representation.",
+      "blocker": "Thermal-model degeneracy and absent measured shape.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "alma-binaries",
+        "dysnomia-orbit"
+      ],
+      "searches": [
+        "Dysnomia explicitly matched in 2023 ALMA study and dedicated HST orbit paper."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Makemake|S/2015 (136472) 1 (MK2)",
+      "parent": "Makemake",
+      "name": "S/2015 (136472) 1 (MK2)",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Brightness-based diameter is albedo-dependent; no axes/mesh.",
+      "imagery": "HST resolved pair detections, not a resolved satellite surface.",
+      "orbit": "2025 preliminary roughly 18-day orbit uses a circular assumption and 2015–2019 observations. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Discovery and preliminary-orbit context.",
+      "nextAction": "Pin the fitted orbital table/uncertainties and require validation before playback.",
+      "blocker": "Preliminary fit and unknown moon size/spin.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "mk2-orbit"
+      ],
+      "searches": [
+        "Exact provisional designation and MK2 alias matched to 2025 preliminary-orbit paper; thermal parent excess is not assigned to moon."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Gonggong|Xiangliu",
+      "parent": "Gonggong",
+      "name": "Xiangliu",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Brightness-based size under reflectivity assumptions; no measured axes.",
+      "imagery": "HST 2009/2010 satellite detections resolve the pair only.",
+      "orbit": "Published orbit of the satellite of 2007 OR10; mirror solutions require explicit selection. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Mutual-orbit and discovery observations.",
+      "nextAction": "Reconcile published ephemeris branches and size assumptions.",
+      "blocker": "Moon figure and spin not constrained by checked discovery/orbit products.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "xiangliu-discovery",
+        "xiangliu-orbit"
+      ],
+      "searches": [
+        "Xiangliu = Gonggong companion = satellite of 2007 OR10 explicitly reconciled across discovery and orbit papers."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Quaoar|Weywot",
+      "parent": "Quaoar",
+      "name": "Weywot",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "System thermal interpretation does not uniquely constrain companion axes.",
+      "imagery": "Resolved component positions; no geographic image product identified in checked study.",
+      "orbit": "2025 non-Keplerian orbit incorporates Quaoar figure and photocenter offsets. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Updated orbit/measurement context.",
+      "nextAction": "Use the revised solution and verify uncertainties rather than copying an older eccentric orbit.",
+      "blocker": "No measured companion shape; orbit model needs qualification.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "weywot"
+      ],
+      "searches": [
+        "Weywot explicitly matched to Beyond Point Masses V; unrelated proposed Quaoar features excluded."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Orcus|Vanth",
+      "parent": "Orcus",
+      "name": "Vanth",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Occultation fitted spherical-limb diameter about 443 km; not a unique triaxial figure.",
+      "imagery": "Occultation timing and resolved ALMA thermal measurements, not surface imagery.",
+      "orbit": "Mutual-orbit/ALMA component astrometry available. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Measured projected-size and thermal constraints with assumptions.",
+      "nextAction": "Reconcile occultation and thermal size models; inspect original chords before geometry choice.",
+      "blocker": "Different-star chord geometry and circular-limb assumption limit 3D inference.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "vanth-occ",
+        "alma-binaries"
+      ],
+      "searches": [
+        "Vanth individually matched to 2017 occultation paper and 2023 ALMA binary study."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Salacia|Actaea",
+      "parent": "Salacia",
+      "name": "Actaea",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Component size remains model/flux-partition dependent; no measured axes.",
+      "imagery": "Resolved HST component photometry; system light-curve amplitude belongs mainly to Salacia.",
+      "orbit": "2025 analysis supports synchronized system interpretation and updated mutual orbit. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Orbit and component photometry context.",
+      "nextAction": "Select component-specific photometry; do not convert parent variability into moon shape.",
+      "blocker": "No independent Actaea figure or resolved terrain in checked source.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "actaea"
+      ],
+      "searches": [
+        "Actaea explicitly matched to 2025 paper; Salacia-driven variation excluded from moon geometry."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Varda|Ilmarë",
+      "parent": "Varda",
+      "name": "Ilmarë",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Combined thermal area and component brightness estimate size; no measured three-axis figure.",
+      "imagery": "HST/Keck/Gemini component astrometry and colors; no resolved surface map.",
+      "orbit": "Published roughly 5.75-day Varda-Ilmarë mutual orbit available. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Orbit, color and size-assumption context.",
+      "nextAction": "Pin component orbital/photometric tables and preserve thermal partition assumptions.",
+      "blocker": "Unresolved figure; parent Varda occultation shape is not Ilmarë shape.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "ilmare"
+      ],
+      "searches": [
+        "Ilmarë name and Varda system membership checked in Grundy et al. paper; no parent shape transferred."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Ida|Dactyl",
+      "parent": "Ida",
+      "name": "Dactyl",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Galileo full dimensions about 1.6×1.4×1.2 km; no Dactyl mesh in checked Stooke collection.",
+      "imagery": "47 Galileo images; best monochrome tens of metres/pixel and coarser color sequence.",
+      "orbit": "Flyby-only orbital inference must be distinguished from a qualified current satellite ephemeris. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Partial observation-backed surface on qualified geometry, or source image view with explicit pose limits.",
+      "nextAction": "Pin actual SSI products, calibrate image/shape pose and investigate published shape reconstruction.",
+      "blocker": "Camera registration and companion mesh release unresolved; spin/orbit phase not simply known.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "dactyl",
+        "stooke"
+      ],
+      "searches": [
+        "Dactyl specifically checked in Veverka 1996; Stooke catalog includes Ida only, not its moon."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Dinkinesh|Selam",
+      "parent": "Dinkinesh",
+      "name": "Selam",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Lucy confirms contact-binary morphology; detailed parent Dinkinesh mesh is not an observed Selam mesh.",
+      "imagery": "Actual L’LORRI encounter release located via primary data-availability statement; labels/bytes not acquired.",
+      "orbit": "Encounter and mutual-orbit observations exist; current phase/attitude solution requires pinning. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Observation-backed contact-binary study; partial surface only after geometry/registration qualification.",
+      "nextAction": "Inspect released Lucy files and supplementary geometry; determine whether a measured Selam mesh is released.",
+      "blocker": "Observed companion model and camera/shape fit unresolved; simulation meshes are not source geometry.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "selam",
+        "selam-geology",
+        "selam-release-paper",
+        "lucy-images"
+      ],
+      "searches": [
+        "Selam explicitly reconciled with Lucy Dinkinesh encounter; actual partially-processed archive link located; formation simulations excluded."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Moshup|Squannit",
+      "parent": "Moshup",
+      "name": "Squannit",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "model-candidate",
+      "geometry": "Actual released radar OBJ for 1999 KW4 Beta; physical full dimensions about 0.57×0.46×0.35 km are distinct from a later scaled Dimorphos proxy.",
+      "imagery": "Radar shape evidence, no photographed mapped terrain.",
+      "orbit": "Released beta spin-state CSV exists; libration prevents treating attitude as exact permanent synchronous lock. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Native source mesh with neutral missing-imagery treatment and qualified spin/orbit.",
+      "nextAction": "Pin OBJ/XML and spin CSV bytes, units, frame, usage terms and libration convention; prepare reproducibly.",
+      "blocker": "Directory inventory read but individual payloads/labels not decoded; attitude interval unqualified.",
+      "effort": "medium",
+      "effortReason": "A bounded preparation effort remains after source/frame qualification.",
+      "sourceIds": [
+        "radar-shapes",
+        "squannit-files"
+      ],
+      "searches": [
+        "Squannit = Moshup companion = (66391) 1999 KW4 Beta; exact a66391_1999kw4_secondary.obj and a66391_beta_spin_state.csv files found."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Kalliope|Linus",
+      "parent": "Kalliope",
+      "name": "Linus",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Occultation/transit size constraints; published detailed simulation uses a spherical Linus, not a measured local-terrain mesh.",
+      "imagery": "Resolved component positions and occultation/transit photometry; parent AO surface is Kalliope.",
+      "orbit": "Kalliope-Linus orbit fits accompany modern occultation/transit study. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Projected-limb/photometric observations and size uncertainty.",
+      "nextAction": "Inspect original occultation chords and fit assumptions before approving a model.",
+      "blocker": "Sparse silhouette constraints; parent shape cannot be assigned to moon.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "linus"
+      ],
+      "searches": [
+        "Linus explicitly matched to 2021-event analysis published in 2023; Kalliope mesh and assumed moon sphere distinguished."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Daphne|Peneius",
+      "parent": "Daphne",
+      "name": "Peneius",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Satellite brightness/diameter estimate; reconstructed mesh belongs to Daphne.",
+      "imagery": "AO detections constrain position, not mapped moon terrain.",
+      "orbit": "Genoid orbit Table 3, 30 AO observations over 3783 days; approximately 1.137-day period. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Mutual-orbit and discovery measurements.",
+      "nextAction": "Pin satellite-specific orbit tables and uncertainty; defer scene shape.",
+      "blocker": "No measured companion figure in checked release.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "peneius"
+      ],
+      "searches": [
+        "Peneius individually matched to Daphne study satellite Table 3; primary shape product excluded."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Eugenia|Petit-Prince",
+      "parent": "Eugenia",
+      "name": "Petit-Prince",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Roughly 7 km photometric size is not measured axes.",
+      "imagery": "AO positions/brightness, no resolved companion terrain.",
+      "orbit": "Published triple-system dynamics distinguish outer Petit-Prince from inner S/2004 (45) 1. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Outer-moon orbit context with brightness-based size caveat.",
+      "nextAction": "Pin correct outer-moon identity and full dynamical solution.",
+      "blocker": "Detailed Eugenia shape is primary-only.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "petitprince"
+      ],
+      "searches": [
+        "Petit-Prince matched to outer Eugenia satellite in Marchis et al.; inner companion not substituted."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Sylvia|Romulus",
+      "parent": "Sylvia",
+      "name": "Romulus",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "model-candidate",
+      "geometry": "Occultation projected equivalent diameter 23.1±0.7 km and axis ratio 2.7±0.3; third axis unknown.",
+      "imagery": "Stellar occultation silhouette plus unresolved AO positions; no terrain map.",
+      "orbit": "2014/2021 Sylvia system solutions and occultation astrometry available. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Measured projected silhouette, or explicitly assumption-dependent ellipsoid family.",
+      "nextAction": "Reconstruct published projected limb with errors; constrain or visibly bracket the unmeasured third axis.",
+      "blocker": "A projected ellipse does not define a unique 3D moon; detailed released mesh is Sylvia.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "romulus-occ",
+        "sylvia2021"
+      ],
+      "searches": [
+        "Romulus explicitly identified in 2013 occultation analysis; 2021 system update checked without transferring Sylvia mesh."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Sylvia|Remus",
+      "parent": "Sylvia",
+      "name": "Remus",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "observation-candidate",
+      "geometry": "Occultation/astrometric constraints located; no unique three-axis moon reconstruction qualified.",
+      "imagery": "2019 occultation constraints are distinct from Romulus’s 2013 elongated silhouette.",
+      "orbit": "Updated Sylvia system orbit study explicitly includes Remus. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Occultation and orbital measurement context pending original chord inspection.",
+      "nextAction": "Inspect Remus-specific 2019 chords before assigning size/shape confidence.",
+      "blocker": "Romulus axial ratio and primary Sylvia mesh do not apply to Remus.",
+      "effort": "research",
+      "effortReason": "Resolve source/model assumptions before any scene selection.",
+      "sourceIds": [
+        "sylvia2021"
+      ],
+      "searches": [
+        "Remus individually matched to 2021 two-moon study; Romulus-only 2013 shape numbers excluded."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Kleopatra|Alexhelios",
+      "parent": "Kleopatra",
+      "name": "Alexhelios",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Photometric moon size; detailed Kleopatra shape belongs to primary.",
+      "imagery": "Resolved AO astrometry, not a companion surface map.",
+      "orbit": "2021 non-Keplerian N-body/multipole solution includes both named satellites. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Moon-specific orbit and measurement context.",
+      "nextAction": "Pin the named moon state and full primary-gravity solution.",
+      "blocker": "No released measured companion mesh in checked study; simple old Kepler orbit is insufficient.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "kleopatra-moons"
+      ],
+      "searches": [
+        "Alexhelios individually reconciled against Kleopatra dynamical study; primary mesh explicitly excluded."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Kleopatra|Cleoselene",
+      "parent": "Kleopatra",
+      "name": "Cleoselene",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Photometric moon size; detailed Kleopatra shape belongs to primary.",
+      "imagery": "Resolved AO astrometry, not a companion surface map.",
+      "orbit": "2021 non-Keplerian N-body/multipole solution includes both named satellites. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Moon-specific orbit and measurement context.",
+      "nextAction": "Pin the named moon state and full primary-gravity solution.",
+      "blocker": "No released measured companion mesh in checked study; simple old Kepler orbit is insufficient.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "kleopatra-moons"
+      ],
+      "searches": [
+        "Cleoselene individually reconciled against Kleopatra dynamical study; primary mesh explicitly excluded."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Eurybates|Queta",
+      "parent": "Eurybates",
+      "name": "Queta",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Approximately kilometre-scale brightness estimate; no measured axes.",
+      "imagery": "HST point-source detections; future Lucy encounter is not present observed terrain.",
+      "orbit": "Published HST fit: about 82.46 days and 2350 km semimajor axis. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Discovery and mutual-orbit record.",
+      "nextAction": "Pin HST orbit solution and uncertainty; await actual resolved observations for a surface scene.",
+      "blocker": "No constrained geometry in reviewed present observations.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "queta"
+      ],
+      "searches": [
+        "Queta individually matched to Brown et al. Eurybates satellite orbit paper."
+      ],
+      "confidence": "high"
+    },
+    {
+      "key": "Hektor|Skamandrios",
+      "parent": "Hektor",
+      "name": "Skamandrios",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "orbit-context-only",
+      "geometry": "Brightness-estimated moon diameter; Hektor bilobate shape is not its satellite geometry.",
+      "imagery": "AO detections resolve the pair, not satellite terrain.",
+      "orbit": "2014 Hektor-system fit gives eccentric inclined companion orbit. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Mutual-orbit context and size-assumption record.",
+      "nextAction": "Pin companion orbital solution and distinguish parent rotation/model.",
+      "blocker": "No measured companion figure in checked study.",
+      "effort": "small",
+      "effortReason": "A bounded data-context record can be prepared without inventing surface geometry.",
+      "sourceIds": [
+        "skamandrios"
+      ],
+      "searches": [
+        "Skamandrios matched to Hektor satellite in Marchis 2014; parent shape excluded."
+      ],
+      "confidence": "medium"
+    },
+    {
+      "key": "Patroclus|Menoetius",
+      "parent": "Patroclus",
+      "name": "Menoetius",
+      "sceneStatus": "not-started",
+      "reviewStatus": "reviewed",
+      "disposition": "model-candidate",
+      "geometry": "Six-chord occultation projected limb 117.2×93 km; combined light curve implies 3D axis ratio 1.3:1.21:1.",
+      "imagery": "Occultation/light curves, no observed terrain texture; NASA artist models are not source maps.",
+      "orbit": "Published binary mutual orbit and Lucy ephemeris route exist; source epoch/frame must be selected. Runtime fit and validity remain untested.",
+      "supportedRepresentation": "Explicit occultation/light-curve ellipsoid model with inference and uncertainty.",
+      "nextAction": "Inspect full chord solution, derive consistent physical axes and pin mutual spin/orbit convention.",
+      "blocker": "Third dimension is inference, not direct occultation measurement; no measured terrain mesh located.",
+      "effort": "medium",
+      "effortReason": "A bounded preparation effort remains after source/frame qualification.",
+      "sourceIds": [
+        "menoetius"
+      ],
+      "searches": [
+        "Menoetius individually matched to Buie author publication and six-chord companion solution; Patroclus primary parameters excluded."
+      ],
+      "confidence": "high"
+    }
+  ],
+  "summary": {
+    "inputRows": 72,
+    "reviewedRows": 72,
+    "existingPackages": 28,
+    "missingPackages": 44,
+    "dispositions": {
+      "retain-existing": 22,
+      "improve-existing": 6,
+      "model-candidate": 8,
+      "observation-candidate": 14,
+      "orbit-context-only": 22
+    },
+    "strongestReleasedCompanionMesh": "Moshup|Squannit",
+    "otherModelCandidates": [
+      "Uranus|XVI",
+      "Uranus|XVII",
+      "Uranus|XVIII",
+      "Uranus|XIX",
+      "Haumea|Hiʻiaka",
+      "Sylvia|Romulus",
+      "Patroclus|Menoetius"
+    ],
+    "observationCandidates": [
+      "Uranus|XX",
+      "Uranus|XXI",
+      "Uranus|XXIV",
+      "Uranus|XXV",
+      "Uranus|XXVI",
+      "Uranus|XXVII",
+      "Neptune|XIII",
+      "Neptune|XIV",
+      "Eris|Dysnomia",
+      "Orcus|Vanth",
+      "Ida|Dactyl",
+      "Dinkinesh|Selam",
+      "Kalliope|Linus",
+      "Sylvia|Remus"
+    ],
+    "scope": "29 Uranus + 16 Neptune + 5 Pluto + 22 selected companions"
+  },
+  "limitations": [
+    "Bounded source-feasibility review only. No source acquisition/preparation, implementation, PR, build, render, browser test or package qualification gates were run.",
+    "All 28 existing SOURCE records, recipes and object content were read at merged reference 7b289887ee03e040b981f6aaff25390d1e17ca9c; working checkout is older and dirty and was preserved.",
+    "Linked release metadata or directory inventory is not equivalent to decoding/validating payloads. Individual inaccessible URLs are marked metadata-only or unresolved.",
+    "Negative findings mean not identified in the stated checked source scope, never proof that data do not exist.",
+    "Period, radius, projected limb, inferred ellipsoid, parent shape and measured companion mesh are intentionally separate. Model-candidate does not mean uniquely known 3D shape or implementation-ready.",
+    "Exact 72-row input scope is preserved. Additional companions/new discoveries outside it were not added. Native aliases remain in row search evidence.",
+    "Orbit-only context does not authorize fabricated body scenes or co-rendering multiple objects; any later product must follow the generic one-scene contract.",
+    "Article/source-data reuse terms, units, frames, orientation epochs and reproducible byte closure require selection-specific qualification. No blanket redistribution clearance is asserted."
+  ]
+}

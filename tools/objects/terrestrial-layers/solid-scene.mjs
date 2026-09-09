@@ -38,7 +38,7 @@ async function prepareSolidEpochFrame({ config, celestial }) {
   const sun = source ? { ...celestial.sun, localDirection: frame.sunDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: id, ...config.geometry.camera, sceneDirection: frame.sunDirection }),
     provenance: { source: source.model, sourcePath: source.sourcePath,
-      qualification: `Computed Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL} from a retained parent-centered Horizons state plus the parent's heliocentric model. The surface attitude uses its separately authored rotation model.` } } : celestial.sun;
+      qualification: `Computed Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL} from its retained source state and canonical heliocentric parent coordinates. The surface attitude uses its separately authored rotation model.` } } : celestial.sun;
   return { camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera }), sky, sun,
     systemTransform: frame.cssTransform,
     heliocentricView: prepareHeliocentricView({ bodyId: id, presentationFrame: frame,

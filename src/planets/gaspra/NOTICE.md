@@ -7,3 +7,5 @@ The Stooke comparison image and model description are credited to Philip J. Stoo
 Physical and orbital data: NASA/JPL Horizons and NAIF. These institutions and authors do not endorse this display.
 
 Sky: ESO/S. Brunier, CC BY 4.0; HYG Stellar Database by David Nash/Astronexus, CC BY-SA 4.0. The full sky notices are preserved in `source/stars/`. Inter title outlines retain the SIL Open Font License and the shared pinned font provenance.
+
+Calibrated Galileo SSI observation: D. L. Domingue / NASA Planetary Data System; raw detector images and bad-data tables: NASA/JPL/Galileo SSI team. Camera controls and shape: P. C. Thomas and colleagues. Galileo SSI instrument geometry: NASA/JPL NAIF. The separate I/F image lens retains observed illumination and does not portray absolute surface albedo.

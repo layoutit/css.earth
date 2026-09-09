@@ -100,7 +100,8 @@
         "source": {
           "id": "cassini-voyager-2010-dione",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini and Voyager images at varying resolution. Shadows remain; gray grid: no source data."
       },
       {
         "id": "enhanced",
@@ -113,7 +114,8 @@
         "source": {
           "id": "cassini-iss-2014-dione-color",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini infrared, green and ultraviolet composite from 2014. Colors are enhanced; shadows and seams remain."
       },
       {
         "id": "elevation",
@@ -140,7 +142,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
           "image": "/scenes/dione/dione-elevation-legend.webp"
-        }
+        },
+        "summary": "Cassini-model height relative to a 561.4 km sphere. Shading shows slopes; the display remains spherical."
       }
     ]
   },

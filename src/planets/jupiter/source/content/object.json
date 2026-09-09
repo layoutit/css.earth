@@ -158,7 +158,8 @@
           "id": "normal",
           "url": "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/"
         },
-        "detail": "Visible light"
+        "detail": "Visible light",
+        "summary": "A 2019 Hubble color map with Juno polar detail. The poles are illustrative and are not registered to the Hubble longitudes."
       },
       {
         "id": "ultraviolet",
@@ -202,7 +203,8 @@
           "id": "ultraviolet",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
         },
-        "detail": "275 nm"
+        "detail": "275 nm",
+        "summary": "Hubble's 275 nm ultraviolet map from December 2025, shown in false color. The gray grid marks missing observations."
       },
       {
         "id": "methane",
@@ -246,7 +248,8 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
         },
-        "detail": "889 nm"
+        "detail": "889 nm",
+        "summary": "Hubble's 889 nm methane-band map from December 2025, in false color. Gray grid: missing observations."
       }
     ]
   },

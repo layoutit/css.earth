@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "46a30d040bdbae22bce989513e267d8bce3bb1f6f1b2fa56d2e7d143149ff592"
+          "sha256": "afe13551de45e19607f48a60f7bffa25ecc93d1cceab1bbf02ebe89741aa6d93"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "362c4d24204b843dd0e4e8d8cc5b6c3ba21d1d5b461d88af78d9bdfa89f53819"
+          "sha256": "e33972e37428e6cf6ff97dc627e1ce187e221d5fa5c3d1fa2652cc9aa0305612"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "fcd7c57b9cc7fcd5e2197e396b2199de229bba0697a01f1e09b5e446f5013340"
+          "sha256": "10c5270efc55d3a588b761ad1af26f340196efd0f95825c37a73cf0b6ab732ea"
         },
         {
           "id": "rotation",
@@ -68,6 +68,26 @@
             },
             {
               "id": "osiris",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "albedo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "slope",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "absorption",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ice",
               "source": "content",
               "material": "lighting"
             }
@@ -113,6 +133,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "76ae47577676e44d6eeb8afe66c2e62c758e44b1922cf638231dd967b9d1150a"
+    "sha256": "d249f5607b3736244677de0cff39362c51086243258f690bb46f2a7232d6c40f"
   }
 }

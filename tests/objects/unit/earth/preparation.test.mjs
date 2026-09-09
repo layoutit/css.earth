@@ -1,4 +1,3 @@
-import { PREPARED_EARTH_NOISE } from "../../unit/earth/prepared-fixture.mjs";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -13,7 +12,6 @@ import {
 } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_LENSES } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
-import { PREPARED_EARTH_CITY_PAGES } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_SKY_SUN } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_TITLE } from "../../unit/earth/prepared-fixture.mjs";
@@ -189,7 +187,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal(Object.keys(PREPARED_EARTH_SCENE.counts).some((key) =>
     /moon|orbitGuide/u.test(key)), false);
   assert.equal(PREPARED_EARTH_SCENE.counts.retainedLeafCount,
-    453 + PREPARED_EARTH_CITY_PAGES.poolSize + PREPARED_EARTH_NOISE.poolSize);
+    453);
   assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 546);
   assert.equal(PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount,
     PREPARED_EARTH_SCENE.counts.retainedLeafCount + PREPARED_EARTH_SCENE.counts.interiorLeafCount);
@@ -263,8 +261,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
     PREPARED_EARTH_SCENE.material.lighting.frames.at(-1).transform,
   );
   assert.equal("interior" in PREPARED_EARTH_SCENE.material, false);
-  assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom,
-    PREPARED_EARTH_CITY_PAGES.maximumZoom);
+  assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom, 4);
   assert.equal(PREPARED_EARTH_SCENE.body.assets.surface.url,
     "/scenes/earth/earth-surface.webp");
   assert.equal(PREPARED_EARTH_SCENE.body.assets.poles.url,
@@ -327,7 +324,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal(
     PREPARED_EARTH_SCENE.interior.presentationLock
       .referenceControlYawDegrees,
-    -105,
+    45,
   );
   assert.equal(
     PREPARED_EARTH_SCENE.interior.presentationLock

@@ -25,6 +25,9 @@ const unit = a => a.map(v => v / Math.hypot(...a));
 export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
+  if (profile.backfaceVisible !== undefined && typeof profile.backfaceVisible !== 'boolean') {
+    throw new TypeError('Radial backface visibility must be boolean.');
+  }
   await source.validatePath(profile.path);
   const loader = profile.format === 'pds-planetocentric-plate' ? loadPdsPlanetocentricShape
     : profile.format === 'stl' ? loadStlShape : profile.format === 'pds-radius-table' ? loadPdsRadiusTable
@@ -72,7 +75,7 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   });
   const leaves = plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
-    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }));
+    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
   return { grid, faces, plans, leaves, width, height, tileSize,
     ...(grid.coverage ? { coverage: grid.coverage } : {}),
     ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };
@@ -254,15 +257,16 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
     const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
+    const scalarSources = scientific?.format === 'pds3-scalar-map' && Buffer.alloc(width * height * 4);
     const observation = radial.observationSurfaces?.get(surface.id);
     const sampleSources = observation?.report.frames && Buffer.alloc(width * height);
     const observationTransfer = observation && { interiorTexels: 0, counts: {}, maximumSourceDistanceMeters: 0,
       maximumPixelSeparationMeters: 0, maximumPhotometricGain: 0,
-      method: 'Closest full-source triangle point; all bilinear GEO contributors checked before disk-normalized interpolation; atlas bleed clamped to retained face.' };
+      method: 'Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.' };
     const transfer = sourceSurface && { sampledTexels: 0, withheldTexels: 0, maximumDistanceMeters: 0,
       includesAtlasBleed: true, triangleInteriorTexels: 0, withheldTriangleInteriorTexels: 0,
       maximumAcceptedDistanceMeters: scientific.surfaceSampling.maximumDistanceMeters,
-      method: 'Closest full-source triangle point in 3D; source barycentric radius and normal. No radial branch selection.' };
+      method: scalarSources ? sourceSurface.report.registration : 'Closest full-source triangle point in 3D; source barycentric radius and normal. No radial branch selection.' };
     for (const { face, rect, geometry, matrix: m } of radial.plans) {
       const [a, b, c] = face.vertices, ab = sub(b, a), ac = sub(c, a), aa = dot(ab, ab), bb = dot(ac, ac), abac = dot(ab, ac);
       const denominator = aa * bb - abac * abac;
@@ -302,7 +306,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
             }
           }
           for (let channel = 0; channel < 3; channel++) {
-            // The observation is already disk-normalized. Uniform flood
+            // The observation's authored photometric treatment is already prepared. Uniform flood
             // preserves its measured detail on every side of the source mesh.
             flood[offset + channel] = sample.color[channel];
             shadow[offset + channel] = Math.round(sample.color[channel] * illumination);
@@ -316,12 +320,13 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
           // unchanged; source projection and color are entirely prepared here.
           const clamped = closestTrianglePoint(point, a, ab, ac).point;
           const sample = sampleScience(clamped);
+          if (scalarSources && sample.sourceCell !== undefined) scalarSources.writeUInt32LE(sample.sourceCell + 1, offset);
           transfer.sampledTexels++;
           const interior = u >= 0 && v >= 0 && u + v <= 1;
           if (interior) transfer.triangleInteriorTexels++;
           const color = sample.color;
           if (sample.radius !== undefined) {
-            illumination = .12 + .88 * Math.max(0, dot(sample.normal, sunDirection));
+            if (!scalarSources) illumination = .12 + .88 * Math.max(0, dot(sample.normal, sunDirection));
             transfer.maximumDistanceMeters = Math.max(transfer.maximumDistanceMeters, sample.distanceMeters);
           } else {
             transfer.withheldTexels++;
@@ -344,12 +349,25 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         flood[offset + 3] = shadow[offset + 3] = 255;
       }
     }
-    const encoding = { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
+    // Scientific colours retain exact palette values; the numeric source index is preparation-only.
+    const encoding = scalarSources ? { lossless: true, effort: 4 } : { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
     surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw: { width, height, channels: 4 } }), encoding);
     surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
     surface.polesUrl = surface.surface.url;
     surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
     if (transfer) surface.surfaceSampling.transfer = transfer;
+    if (scalarSources) {
+      const bytes = Buffer.from(JSON.stringify({ schema: 'cssearth-atlas-scalar-index@1', width, height,
+        encoding: 'gzip-u32le-base64', layout: 'row-major; 0 withheld, otherwise original table row (1-based); includes atlas bleed',
+        source: surface.source, data: gzipSync(scalarSources, { level: 9 }).toString('base64') }) + '\n');
+      const file = `${surface.id}-source-index.json`;
+      await writeFile(resolve(outputDirectory, file), bytes);
+      surface.scalarMap.sampleSources = { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), width, height };
+      const snapshot = await renderRadialSnapshot({ faces: radial.faces, sampleSurface: sampleScience, size: 96,
+        longitudeDegrees: 30, latitudeDegrees: 30, ambient: 1, diffuse: 0 });
+      surface.thumbnail = await emit(`${config.namespace}-${surface.id}-thumbnail.webp`, sharp(snapshot).resize(48, 48)
+        .extend({ left: 24, right: 24, top: 0, bottom: 0, background: { r: 0, g: 0, b: 0, alpha: 0 } }));
+    }
     if (observationTransfer) surface.observation.transfer = observationTransfer;
     if (sampleSources) {
       const codes = { 0: 'no-qualified-observation', ...Object.fromEntries(observation.report.frames.map((frame, i) => [i + 1, frame.id])) };

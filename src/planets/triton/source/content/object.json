@@ -101,7 +101,8 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.5066/P9MGH7FB"
         },
-        "detail": "Corrected Voyager mosaic"
+        "detail": "Corrected Voyager mosaic",
+        "summary": "Voyager images corrected using their capture geometry. Missing coverage and unreliable views stay empty."
       },
       {
         "id": "enhanced",
@@ -116,7 +117,8 @@
           "path": "../manifest.json",
           "url": "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
         },
-        "detail": "Corrected O/G/B color"
+        "detail": "Corrected O/G/B color",
+        "summary": "Voyager orange, green and blue images in enhanced color. Detail varies; the unlit north stays unavailable."
       }
     ]
   },

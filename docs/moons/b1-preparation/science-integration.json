@@ -1,0 +1,340 @@
+{
+  "schema": "cssearth-b1-science-integration-check@1",
+  "checkedAt": "2026-09-08T21:59:49.838Z",
+  "epochJdTt": 2461286.5,
+  "newBodyCount": 26,
+  "referenceRadiusMismatches": 0,
+  "parentIdentityMismatches": 0,
+  "presentationCarrierMismatches": 0,
+  "maxParentRelativePositionDiscrepancyKm": 5.963374150388733e-9,
+  "unchangedExistingSatelliteRecords": 68,
+  "newFittedSatelliteRecords": 22,
+  "sourceStateSatelliteRecords": 4,
+  "focusedTests": {
+    "solarAndPlanetary": {
+      "passed": 28,
+      "failed": 0,
+      "phase": "integrated canonical geometry",
+      "log": "output/playwright/moons-b1-qualification/final-science-preparer-tests.log"
+    },
+    "coreContext": {
+      "passed": 6,
+      "failed": 0,
+      "phase": "before final main integration; retained focused result"
+    },
+    "contextAdapter": {
+      "passed": 4,
+      "failed": 0,
+      "phase": "before final main integration; retained focused result"
+    },
+    "stateGenerator": {
+      "passed": 2,
+      "failed": 0,
+      "phase": "before final main integration; retained focused result"
+    }
+  },
+  "pins": {
+    "src/platform/solar-geometry.mjs": "4b2d992ae9dc48f0350f2ffe9ea175171ea52ca96d096230f2294a41dac2daf9",
+    "tools/prepare-solar-geometry.mjs": "0948a90410125461fc9d911eae296815a493cf30e9bd2279c6811d25223ffa9f",
+    "src/platform/prepare-planetary-system.mjs": "ff179afe5895ba3d5e541c7d7503933d55fc3427ebe88845ef91e033ff454b47",
+    "src/preparation/spatial-context.ts": "dc1e0795f1a8af0ade1aea6c7d345de2fab69ac32223ae55e121a52c1f34afb1",
+    "tools/objects/prepare-spatial-context.ts": "b59f1d31f851d4f34b6e5e8afd8937f092eb95f099ca5a2cef11621233754616"
+  },
+  "chromeDensityStatus": "awaiting final integrated build; four preintegration reports are separate",
+  "report": "docs/moons/b1-preparation/science-integration.md",
+  "numericalDiscrepancyInterpretation": "Agreement between numerical representations of the same adopted model; not physical source accuracy or an uncertainty bound.",
+  "sourceEvidence": [
+    "src/planets/hiiaka/source/validation/epoch-state.json",
+    "src/planets/squannit/source/validation/epoch-state.json",
+    "src/planets/romulus/source/validation/epoch-state.json",
+    "src/planets/menoetius/source/validation/epoch-state.json",
+    "src/planets/romulus/source/validation/projection-checks.json"
+  ],
+  "browserEvidence": {
+    "summaries": [
+      "output/playwright/moons-b1-qualification/final-jupiter-summary.json",
+      "output/playwright/moons-b1-qualification/final-saturn-summary.json"
+    ],
+    "perBodyReport": "output/playwright/moons-b1-final-<id>/attempt-<n>/report.json",
+    "preintegration": "output/playwright/moons-b1-qualification/preintegration-summary.json"
+  },
+  "preparedViewScope": {
+    "canonicalStateConsumers": [
+      "current planetary-system preparer",
+      "shared physical world frames",
+      "authored shared world-context preparation"
+    ],
+    "carrierCheck": "All 26 scene.systemTransform values matched in the integrated check; cached body-local heliocentricView plans were not all revalidated.",
+    "legacyCacheLimit": "prepareObjectJson does not call refreshSolidSceneEpoch. Older body-local heliocentricView.plan caches may retain previous parent conics.",
+    "applicationPath": "With the shared world context mounted, scene-router supplies externalWorldContext and the object renderer does not mount its body-local heliocentricView.",
+    "evidence": [
+      "tools/prepare-object-json.mjs",
+      "tools/objects/terrestrial-layers/solid-scene.mjs",
+      "site/scene-router.mjs",
+      "src/renderers/css/runtime/object-runtime.ts"
+    ]
+  },
+  "integratedBodyChecks": [
+    {
+      "id": "paaliaq",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 12.7,
+      "astronomyRadiusKm": 12.7,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "tarvos",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 7.3,
+      "astronomyRadiusKm": 7.3,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "ijiraq",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 6.4,
+      "astronomyRadiusKm": 6.4,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "suttungr",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 3.5,
+      "astronomyRadiusKm": 3.5,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 9.313225746154785e-10
+    },
+    {
+      "id": "mundilfari",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 3.5,
+      "astronomyRadiusKm": 3.5,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 2.634178031930877e-9
+    },
+    {
+      "id": "skathi",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 3.8,
+      "astronomyRadiusKm": 3.8,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 2.08250058582033e-9
+    },
+    {
+      "id": "erriapus",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 5.1,
+      "astronomyRadiusKm": 5.1,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "thrymr",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 3.8,
+      "astronomyRadiusKm": 3.8,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "bebhionn",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 2.8,
+      "astronomyRadiusKm": 2.8,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 1.862645149230957e-9
+    },
+    {
+      "id": "bergelmir",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 2.5,
+      "astronomyRadiusKm": 2.5,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "bestla",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 3.3,
+      "astronomyRadiusKm": 3.3,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 3.725290298461914e-9
+    },
+    {
+      "id": "fornjot",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 2.9,
+      "astronomyRadiusKm": 2.9,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "hati",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 2.4,
+      "astronomyRadiusKm": 2.4,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 1.862645149230957e-9
+    },
+    {
+      "id": "hyrrokkin",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 3.8,
+      "astronomyRadiusKm": 3.8,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "loge",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 2.4,
+      "astronomyRadiusKm": 2.4,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "skoll",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 2.3,
+      "astronomyRadiusKm": 2.3,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "greip",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 2.3,
+      "astronomyRadiusKm": 2.3,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 9.313225746154785e-10
+    },
+    {
+      "id": "tarqeq",
+      "parent": "saturn",
+      "parentMatches": true,
+      "recipeRadiusKm": 3,
+      "astronomyRadiusKm": 3,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 5.963374150388733e-9
+    },
+    {
+      "id": "caliban",
+      "parent": "uranus",
+      "parentMatches": true,
+      "recipeRadiusKm": 21,
+      "astronomyRadiusKm": 21,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 4.656612873077393e-10
+    },
+    {
+      "id": "sycorax",
+      "parent": "uranus",
+      "parentMatches": true,
+      "recipeRadiusKm": 78.5,
+      "astronomyRadiusKm": 78.5,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 0
+    },
+    {
+      "id": "prospero",
+      "parent": "uranus",
+      "parentMatches": true,
+      "recipeRadiusKm": 25,
+      "astronomyRadiusKm": 25,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 1.862645149230957e-9
+    },
+    {
+      "id": "setebos",
+      "parent": "uranus",
+      "parentMatches": true,
+      "recipeRadiusKm": 23.5,
+      "astronomyRadiusKm": 23.5,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 9.313225746154785e-10
+    },
+    {
+      "id": "hiiaka",
+      "parent": "haumea",
+      "parentMatches": true,
+      "recipeRadiusKm": 183.4875470120756,
+      "astronomyRadiusKm": 183.4875470120756,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 8.134767913360665e-12
+    },
+    {
+      "id": "squannit",
+      "parent": "moshup",
+      "parentMatches": true,
+      "recipeRadiusKm": 0.22550434622701193,
+      "astronomyRadiusKm": 0.22550434622701193,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 5.438959822042073e-16
+    },
+    {
+      "id": "romulus",
+      "parent": "sylvia",
+      "parentMatches": true,
+      "recipeRadiusKm": 9.787866191310176,
+      "astronomyRadiusKm": 9.787866191310176,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 2.842170943040401e-14
+    },
+    {
+      "id": "menoetius",
+      "parent": "patroclus",
+      "parentMatches": true,
+      "recipeRadiusKm": 52.19000997884097,
+      "astronomyRadiusKm": 52.19000997884097,
+      "radiusMatches": true,
+      "carrierMatches": true,
+      "relativePositionDiscrepancyKm": 1.530555893832145e-13
+    }
+  ],
+  "integratedBodyCheckScope": "Astronomy versus authored radius/parent, each body surface carrier, and canonical local relative orbit. Does not qualify all cached heliocentricView plans or source accuracy."
+}

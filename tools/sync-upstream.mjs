@@ -240,6 +240,11 @@ export function locallyMaintainedFile(target, rel) {
     "tools/lib/fit-cosine-series.mjs", "tools/lib/fit-cosine-series.test.mjs",
     "src/periodicCorrection.ts", "src/periodicCorrection.test.ts",
     "tools/scene-ephemeris.mjs", "tools/acquire-scene-ephemeris.mjs",
+    // The local fixed-epoch companion path includes its solar-system integration.
+    // Shared frame transforms and Kepler/VSOP ephemeris math remain mirrored.
+    "tools/body-epoch-ephemeris.mjs", "tools/generate-scene-satellites.mjs",
+    "src/sceneSatellites.ts", "src/sceneSatellites.test.ts", "src/data/sceneSatelliteStates.data.ts",
+    "src/solarSystem.ts",
     "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",
     "src/bodies.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
     "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/satellites.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||

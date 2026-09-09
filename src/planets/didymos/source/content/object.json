@@ -4,7 +4,7 @@
   "id": "didymos",
   "displayName": "Didymos",
   "panel": {
-    "introduction": "Didymos is the rapidly rotating primary of the near-Earth binary visited by DART and LICIACube in 2022. Its broad equatorial ridge and flattened poles are reconstructed from their images. Its moon Dimorphos was the target of DART’s asteroid-deflection experiment. Explore the published shape and radial heights.",
+    "introduction": "Didymos is the rapidly rotating primary of the near-Earth binary visited by DART and LICIACube in 2022. Its broad equatorial ridge and flattened poles are reconstructed from their images. Its moon Dimorphos was the target of DART’s asteroid-deflection experiment. Explore the published shape, radial heights and derived relative surface brightness.",
     "facts": [
       {
         "id": "radius",
@@ -46,7 +46,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "An image-based shape model. Smooth regions lack image coverage; no surface photograph is mapped."
       },
       {
         "id": "elevation",
@@ -74,7 +75,36 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_obj_0000n00000_v003.xml",
           "image": "/scenes/didymos/didymos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Height relative to a 365 m sphere, including the ridge. Smooth regions have weaker image constraints."
+      },
+      {
+        "id": "albedo",
+        "label": "Relative albedo",
+        "detail": "DART surface brightness",
+        "description": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
+        "title": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
+        "thumbnail": "/scenes/didymos/didymos-albedo-thumbnail.webp",
+        "surface": "didymos-albedo-surface@2x.webp",
+        "poles": "didymos-albedo-surface@2x.webp",
+        "source": {
+          "id": "didymos-relative-albedo",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Relative albedo",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.75",
+            "1.075",
+            "1.4"
+          ],
+          "meta": "unitless · SPC relative brightness",
+          "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
+          "image": "/scenes/didymos/didymos-albedo-legend.webp"
+        }
       }
     ]
   },
@@ -85,7 +115,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",
@@ -108,6 +138,12 @@
       "role": "terrain",
       "description": "DART Didymos v003 archive",
       "href": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/SUPPORT/dataset.shtml"
+    },
+    {
+      "label": "Albedo data",
+      "role": "albedo",
+      "description": "DART source-facet relative albedo",
+      "href": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml"
     },
     {
       "label": "Coordinates",

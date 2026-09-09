@@ -60,8 +60,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "normal",
+    "defaultLens": "osiris",
     "controls": [
+      {
+        "id": "osiris",
+        "label": "OSIRIS reflectance",
+        "detail": "Spacecraft observation",
+        "description": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+        "title": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+        "thumbnail": "/scenes/steins/steins-osiris-thumbnail.webp",
+        "surface": "steins-osiris-surface@2x.webp",
+        "poles": "steins-osiris-surface@2x.webp",
+        "source": {
+          "id": "steins-observations-w20080905t183606461id4df17-img",
+          "path": "../manifest.json"
+        }
+      },
       {
         "id": "normal",
         "label": "Monochrome",
@@ -75,7 +89,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Rosetta OSIRIS · 2008 flyby"
+        "detail": "Rosetta OSIRIS · 2008 flyby",
+        "summary": "Rosetta mosaic by Phil Stooke. Shadows, seams and processing edits remain; gray grid: published map gaps."
       },
       {
         "id": "elevation",
@@ -103,7 +118,8 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/data/steins_cart.lbl",
           "image": "/scenes/steins/steins-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Height relative to a 2.58 km sphere. The far side is modeled; a source seam joins it to image-based terrain."
       }
     ]
   },
@@ -126,6 +142,12 @@
   },
   "charts": [],
   "resources": [
+    {
+      "label": "Imagery",
+      "role": "surface",
+      "description": "OSIRIS reflectance original archive",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img"
+    },
     {
       "label": "Mission",
       "role": "facts",

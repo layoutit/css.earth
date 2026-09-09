@@ -44,7 +44,13 @@
         ]
       },
       "coverage": "USGS ISIS display export: exact zero indicates Null and is masked; valid values starting at one remain, including dark lakes and dunes. A small southern gap receives a gray grid. Grid edges extend by less than half a source pixel beyond the poles/meridian.",
-      "photometry": "Published weighted, high-pass-sharpened ISS mosaic at 938 nm. Haze and cloud residuals, variable native resolution and image boundaries remain. This is a display-stretched infrared observation, not visible color or calibrated albedo."
+      "photometry": "Published weighted, high-pass-sharpened ISS mosaic at 938 nm. Haze and cloud residuals, variable native resolution and image boundaries remain. This is a display-stretched infrared observation, not visible color or calibrated albedo.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -105,7 +111,13 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
-      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001."
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+      }
     },
     {
       "id": "cassini-radar-midr-270",
@@ -132,7 +144,13 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
-      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001."
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
+      }
     }
   ],
   "generatedIntermediates": [],

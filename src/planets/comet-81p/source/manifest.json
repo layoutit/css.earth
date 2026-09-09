@@ -51,7 +51,7 @@
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
+      "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive\u2019s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -103,6 +103,193 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "n2073we02-rr-path",
+      "path": "photography/navcam/n2073we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "f6944a7e778a556afd929e365585bbd0919ccdd573e1422b4b2c0379b33c035f",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2073we02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2073we02-rr-labelPath",
+      "path": "photography/navcam/n2073we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "005c37d785b6622598e76ecb528feb07ac82d16f7fb7dbf5bfa35ad7f15c6180",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2073we02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2073we02-rr-controlPath",
+      "path": "photography/navcam/n2073we02_rr.json",
+      "expectedBytes": 10236,
+      "expectedSha256": "0267d6fe1f8a4c779b0821783337227af8b694bbf060848a8f4c0ab805c02239",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2075we02-rr-path",
+      "path": "photography/navcam/n2075we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "49729e94642129eccf402c03241a21717c31150725cc48826ecf31afa03d6fb0",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2075we02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2075we02-rr-labelPath",
+      "path": "photography/navcam/n2075we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "ff61f12cc61b6113de1ebca60526de757fbb1aeb41663267d8833d5684f93e00",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2075we02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2075we02-rr-controlPath",
+      "path": "photography/navcam/n2075we02_rr.json",
+      "expectedBytes": 22375,
+      "expectedSha256": "ee8baf4db4bdddc9606823ead83f6585709b7f04be79b2c2be80fc8c28e39e6a",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2077we02-rr-path",
+      "path": "photography/navcam/n2077we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "9973470135bcc89507adceaba79f4bd2d499893277f62eabebee353d96b2b575",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2077we02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2077we02-rr-labelPath",
+      "path": "photography/navcam/n2077we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "a99e07f4e073b00a448122f111b99660d55f6d172aa516befde9b40dfcfb59d0",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2077we02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2077we02-rr-controlPath",
+      "path": "photography/navcam/n2077we02_rr.json",
+      "expectedBytes": 16501,
+      "expectedSha256": "33930e6c289d2e6325455bd36947806fb80c6bf482ce03cb77449bbcfd131771",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "stereo-trajectory-fit",
+      "path": "reference/n2069we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "6fa36047b1f56f219417cc86fafb39c507c9ee83318b428942228e6f84448f62",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2069we02_rr.fit",
+      "credit": "NASA/JPL-Caltech, Stardust team; NASA PDS",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the original archived product with the acquisition recipe.",
+      "redistribution": "Retain attribution and product identity.",
+      "consumers": [
+        "encounter-frame-reference"
+      ]
+    },
+    {
+      "id": "stereo-trajectory-lbl",
+      "path": "reference/n2069we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "f69421cbe4120114eaffd933799ebc303e40c9a60ecaf115f31205f3b968f8c9",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2069we02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, Stardust team; NASA PDS",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the original archived product with the acquisition recipe.",
+      "redistribution": "Retain attribution and product identity.",
+      "consumers": [
+        "encounter-frame-reference"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -141,14 +328,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4098,
-      "expectedSha256": "a658489cfcea9ceea93a61b9b6827b58c98c0876d99fad3e9338a621d6882798",
+      "expectedBytes": 4601,
+      "expectedSha256": "f80e3fbb9cc8d39f8c42e74bb9a0f60329e84f78db1a56af0f75895edf9d61e9",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 972,
-      "expectedSha256": "152eef487effe0314da841df362766c332ad705dd019a6457486fc8ae36c4b49",
+      "expectedBytes": 3058,
+      "expectedSha256": "debd09a94d205af00c766a2f54b2ccf1a971efe8cb401def01d7ed0ef1521d93",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -165,8 +352,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3387,
-      "expectedSha256": "1d686044de538323756d0a67e05153eaac3b44c0dd398a9bac011b3d1cba37f8",
+      "expectedBytes": 5163,
+      "expectedSha256": "84d4bcbc7b331e095f982b385743b14d02c60af4b6809b4648a7d8e5b6af17df",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -222,6 +409,36 @@
       "purpose": "Wild 2 source evidence or authored preparation input.",
       "expectedBytes": 12800,
       "expectedSha256": "37c79ed2a1d10276168b7de8b9ac38a337af7cb7f1ff217754da2831a3eeb0d2"
+    },
+    {
+      "path": "reference/encounter-photography.md",
+      "expectedBytes": 6211,
+      "expectedSha256": "af3838d3b7fa651b6fd495135b41274ac2d639ddb788f0c42d7adbb2fb5e4c7f",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/navcam-dataset.cat",
+      "expectedBytes": 39280,
+      "expectedSha256": "456f07069e6f9f18b977e78df320d7837cb883f2948baa1bfd845b801ca6cdff",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/navcam-fits-sis.htm",
+      "expectedBytes": 107680,
+      "expectedSha256": "44deb300bf207502263b41f9761d25af2c19873b9f0b79185fd5dbfd12c3d15b",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/wild-stereo-paper.pdf",
+      "expectedBytes": 158277,
+      "expectedSha256": "2928011229554e419a8189dfea88ef4bc92be0a53f703bc939289b03de00e88a",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/stereo-frame.json",
+      "expectedBytes": 1159,
+      "expectedSha256": "780fb4c8245cda9d8da709ebdd8489d9e27989f11dcf7b5c3ae9eb26768b90a6",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
     }
   ]
 }

@@ -1,0 +1,1346 @@
+<html>                                                                        
+<head>                                                                        
+                                                                              
+<style type="text/css">                                                       
+p.in0 {margin-left:0}                                                         
+p.in1 {margin-left:20px}                                                      
+p.in2 {margin-left:40px}                                                      
+p.in3 {margin-left:60px}                                                      
+                                                                              
+ol.uroman {list-style-type:upper-roman}                                       
+                                                                              
+li { margin-bottom:1em; }                                                     
+                                                                              
+pre { font-weight:bold; color:navy; background:yellow                         
+    ;  margin-left:60px}                                                      
+pre.normal { color:black; background:white }                                  
+pre.img { color:gray; background:black }                                      
+                                                                              
+</style>                                                                      
+                                                                              
+</head>                                                                       
+                                                                              
+<body>                                                                        
+                                                                              
+</p><p align="center">                                                        
+                                                                              
+<b>                                                                           
+                                                                              
+STARDUST/NExT Science Data Center (SDC) Pypeline Documentation                
+                                                                              
+</b>                                                                          
+<br>                                                                          
+                                                                              
+Software Interface Specification (SIS) of STARDUST/NExT NAVCAM FITS format    
+                                                                              
+<br>                                                                          
+                                                                              
+<u>                                                                           
+                                                                              
+Brian T. Carcich, Cornell University                                          
+                                                                              
+</u>                                                                          
+</p><hr><p class="in0"><u><h3>                                                
+                                                                              
+SUMMARY                                                                       
+                                                                              
+</h3></u></p><p class="in0">                                                  
+                                                                              
+This document summarizes the content of the FITS headers for the              
+Stardust-NExT NAVCAM FITS files, as well as the data calibration steps        
+applied to convert EDR data to RDR data.                                      
+                                                                              
+</p><p class="in0"><u><h3>                                                    
+                                                                              
+DISCLAIMER                                                                    
+                                                                              
+</h3></u></p><p class="in0">                                                  
+                                                                              
+The PDS labels, and other ancillary data such as the index tables, contain    
+all per-observation information provided by the Stardust-NExT Project to      
+PDS.  The FITS header keywords were created specifically for use by the       
+Stardust-NExT Science Team and were only included in the PDS archive          
+because it was easier to do so than to provide the raw data without them.     
+They are provided as-is with no guarantee to PDS of their relevance or        
+accuracy expressed or implied.  Specifically, keywords created in early       
+versions of the Science Data Center (SDC) data processing pypeline may have   
+become obsolete but were not removed from the FITS headers.                   
+                                                                              
+</p><p class="in0">                                                           
+                                                                              
+In summary, the FITS keywords were developed solely for the use of the        
+Science Team so, although the Project appreciates any feedback on the FITS    
+headers, as such the FITS headers are not the bailiwick of PDS, PDS peer      
+reviewers or PDS users.  Caveat emptor.                                       
+                                                                              
+</p><p class="in0"><u><h3>                                                    
+                                                                              
+ABOUT THE TERMINOLOGY:  pipeline vs. pypeline                                 
+                                                                              
+</h3></u></p><p class="in0">                                                  
+                                                                              
+N.B. The data processing pipeline has been implemented using the Python       
+     programming language.  As such the tradition of using the letters "y"    
+     or "py" in the name of Python-based packages has been followed by        
+     designating the data processing operation a "pypeline" which term will   
+     normally be interchangeable in meaning with "pipeline."                  
+                                                                              
+</p><p class="in0"><u><h3>                                                    
+                                                                              
+ABOUT THE EXAMPLE FITS HEADER KEYWORD CARDS SHOWN HERE                        
+                                                                              
+</h3></u></p><p class="in0">                                                  
+                                                                              
+N.B. The 80-character keyword-value cards from the FITS headers of a mix of   
+     raw and data-calibrated images are used as an example here; all FITS     
+     headers will not use all of these keywords.  Any whitespace at the end   
+     of each card was removed, and some cards were shortened by removing      
+     whitespace or the least-significant digits of numbers with many          
+     digits, or by abbreviating words in the keyword comment.                 
+                                                                              
+</p><hr><p class="in0"><h3><u>                                                
+                                                                              
+Primary Data Unit (PDU):  NAVCAM Image                                        
+                                                                              
+</u></h3></p><hr><p class="in0">                                              
+                                                                              
+FITS-, mission-, spacecraft-, instrument- and image-specific boilerplate      
+keywords:                                                                     
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+BUNIT describes the units of the pixels in the PDU image.                     
+Its value will be one of                                                      
+                                                                   <ul><li>   
+  DATA NUMBER -- data number (DN) from CCD;                                   
+    see calibration keywords also                                             
+                                                                  </li><li>   
+  DN/ms -- bias- and dark-subtracted DATA NUMBER rate (counts/time)           
+                                                                  </li><li>   
+  W/(cm^2*nm*sr) -- radiance                                                  
+                                                                 </li></ul>   
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+PRODTYPE describes the processing level of this file, and was an analog       
+for PDS keyword PRODUCT_TYPE.  Its value will be one of                       
+                                                                              
+                                                                   <ul><li>   
+  EDR -- Engineering Data Record i.e. raw instrument data                     
+                                                                  </li><li>   
+  RDR -- Reduced Data Record i.e. calibrated data                             
+                                                                 </li></ul>   
+</p><pre>                                                                     
+SIMPLE  =                    T / conforms to FITS standard                    
+BITPIX  =                  -32 / 32-bit Floating point data                   
+NAXIS   =                    2 / number of array dimensions                   
+NAXIS1  =                 1024                                                
+NAXIS2  =                 1024                                                
+EXTEND  =                    T                                                
+DATE    = '2011-08-27T00:01:27' / [UTC] Date file calibrated and written      
+BUNIT   = 'W/(cm^2*nm*sr)'     / Calibrated units                             
+MISSION = 'NEXT    '           / NExT=Name of STARDUST Extended mission       
+MSNPHASE= '9P/TEMPEL 1 ENCOUNTER' / Phase of the spacecraft mission           
+ORIGIN  = 'CORNELL SDC'        / Institution that originated this FITS file   
+TIMESYS = 'UTC     '           / Default time system used                     
+OBSERVAT= 'STARDUST'           / Observing platform (e.g. spacecraft)         
+PRODTYPE= 'RDR     '           / PDS PRODUCT_TYPE                             
+INSTRUME= 'NAVCAM  '           / Instrument ID                                
+</pre><hr><p class="in0">                                                     
+                                                                              
+Observation-specific keywords:                                                
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+OBJECT comes from Data Management &amp; Archive (DM&amp;A or DMA) label       
+(initial raw PDS label derived from spacecraft telemetry for Level 1          
+product) keyword TARGET_NAME.                                                 
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+Filenames and PRODCTID come from PDS filename and PRODUCT_ID.                 
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+FRAMENO came from PDS FRAME_SEQUENCE_NUMBER and was also the first decimal    
+numbers in the filenames and PRODCTID; the original source was an image       
+number counter in the software of the NAVCAM instrument that typically        
+changes by incrementing one for each image taken but may also be set to       
+any 16-bit value by command from the ground.                                  
+                                                                              
+</p><pre>                                                                     
+OBJECT  = '9P/TEMPEL 1 (1867 G1)' / Target name (from PDS label)              
+FRAMENO =                30100 / FRAME_SEQUENCE_NUMBER (PDS) (-1=>N/A)        
+FILENAME= 'N30100TE02_RR.FIT'  / FITS base filename                           
+PDSFILEN= 'n30100te02.img'     / Source PDS base filename                     
+PRODCTID= 'N30100TE02.IMG'     / RAW PDS PRODUCT_ID                           
+PDSSOFT = 'DMAPKTDECOM 2.1'    / SOFTWARE_NAME (PDS)                          
+</pre><hr><p class="in0">                                                     
+                                                                              
+Processing-specific keywords:                                                 
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+CALTYPE gives the level of processing in the RDR, and SDCLVL provides         
+similar information in the jargon of the Science Data Center (SDC).           
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+PRODTIME was the PDS PRODUCT_CREATION_TIME, the time the D&amp;MA produced    
+the original file.                                                            
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+SOFTNAME and SOFTVERS provide the name and version of the SDC                 
+software that created this file.                                              
+                                                                              
+</p><pre>                                                                     
+CALTYPE = 'CAL_RADIANCE_REVERSIBLE' / Calibration level or type (RAW, CAL)    
+SDCLVL  = 'CALFIT  '          / SDC level (RAWPDS, RAWFIT, CALFIT)            
+PRODTIME= '2011-07-13T21:09:32' / PDS PRODUCT_CREATION_TIME                   
+SOFTNAME= 'SDUPDS2FIT.PY'     / Name of software that produced this file      
+SOFTVERS= '0.dev   '          / Version of software that produced this file   
+</pre><hr><p class="in0">                                                     
+                                                                              
+Observation times come from DMA keywords:                                     
+                                                                              
+                                                                   <ul><li>   
+    SPACECRAFT_CLOCK_START_COUNT                                              
+                                                                  </li><li>   
+    SPACECRAFT_CLOCK_STOP_COUNT                                               
+                                                                  </li><li>   
+    START_TIME                                                                
+                                                                  </li><li>   
+    STOP_TIME                                                                 
+                                                                 </li></ul>   
+</p><p class="in0">                                                           
+                                                                              
+N.B. Time resolution was about 4ms (1/256th of a spacecraft clock second).    
+                                                                              
+<br>                                                                          
+                                                                              
+N.B. As noted in various data sets, use SCSTART when retrieving attitude      
+     data from SPICE C-Kernels (CKs).                                         
+                                                                              
+</p><pre>                                                                     
+SCSTART = '0982302055:134'     / Spacecraft clock start count                 
+SCSTOP  = '0982302060:134'     / Spacecraft clock stop count                  
+OBSDATE = '2011-02-16T05:34:02.298' / Start time                              
+OBSENDDT= '2011-02-16T05:34:07.298' / Stop time                               
+</pre><hr><p class="in0">                                                     
+                                                                              
+Filter and other photometric quantities derived from DMA keywords:            
+                                                                              
+                                                                   <ul><li>   
+  FILTER_NAME                                                                 
+                                                                  </li><li>   
+  FILTER_NUMBER                                                               
+                                                                  </li><li>   
+  CENTER_FILTER_WAVELENGTH                                                    
+                                                                  </li><li>   
+  LIGHT_FLOOD_STATE_FLAG                                                      
+                                                                  </li><li>   
+  EXPOSURE_DURATION                                                           
+                                                                 </li></ul>   
+</p><pre>                                                                     
+FILTNAME= 'OPNAV   '           / Filter name                                  
+FILTNUM =                    0 / Filter number (-1 => N/A)                    
+FILTCENT=                698.8 / [NM] Center filter wavelength (-1=>N/A)      
+LIGHTFLG= 'OFF     '           / Light Flood State Flag                       
+INTTIME =               5000.0 / [MS] Integration time (-1=>N/A)              
+</pre><hr><p class="in0">                                                     
+                                                                              
+Scan mirror and focal plane state derived from DMA keywords:                  
+                                                                              
+                                                                   <ul><li>   
+  SCAN_MIRROR_ANGLE                                                           
+                                                                  </li><li>   
+  SCAN_MIRROR_RATE,                                                           
+                                                                  </li><li>   
+  SCAN_MIRROR_TEMPERATURE                                                     
+                                                                  </li><li>   
+  FOCAL_PLANE_TEMPERATURE                                                     
+                                                                 </li></ul>   
+                                                                              
+</p><pre>                                                                     
+MIRRANGL=            173.48877 / [DEG] Scan mirror angle (-1E32=>N/A)         
+MIRRRATE=                  0.0 / [DEG/SEC] Scan mirror rate (-1E32=>N/A)      
+FOPLTEMP=               246.89 / [K] Focal plane temperature (-1E32=>N/A)     
+SCMRTEMP=               277.09 / [K] Scan mirror temperature (-1E32=>N/A)     
+</pre><hr><p class="in0">                                                     
+                                                                              
+Orientation of instrument FOV derived from DMA keywords:                      
+                                                                              
+                                                                   <ul><li>   
+  RIGHT_ASCENSION                                                             
+                                                                  </li><li>   
+  DECLINATION                                                                 
+                                                                  </li><li>   
+  TWIST_ANGLE                                                                 
+                                                                 </li></ul>   
+                                                                              
+Boresight was -Z of the SPICE frame SDU_NC_IMAGE_RH_OPNAV, which was          
+coincident with frame SDU_NC_REFLECTION and close to frame                    
+SDU_NC_REFLECTION_IDEAL.  EMENORTH was derived from left-handed DMA           
+keyword TWIST_ANGLE via the following formula:                                
+                                                                              
+</p><pre class="normal">                                                      
+EMENORTH(FITS) = 270 - TWIST_ANGLE(DMA)                                       
+    CW from UP = 270 - CCW from LEFT                                          
+</pre><p class="in0">                                                         
+                                                                              
+See Notes 1 &amp; 2.                                                          
+                                                                              
+</p><pre>                                                                     
+BORE_RA =           32.9498 / [DEG] Boresight right ascension (-1E32=>N/A)    
+BORE_DEC=          -34.6999 / [DEG] Boresight declination (-1E32=>N/A)        
+EMENORTH=          238.1726 / [DEG] EME J2000 North CW from Up (-1E32=>N/A)   
+</pre><hr><p class="in0">                                                     
+                                                                              
+Spacecraft-relative positions of Target &amp; Sun from DMA in the EMEJ2000    
+FRAME, plus other geometry values; based on DMA labels, which in turn were    
+based on SPICE calls with corrections for light time and for stellar          
+aberration.  Value -1E+32 here in FITS was "N/A" in DMA label.                
+                                                                              
+</pre><hr><p class="in0">                                                     
+                                                                              
+Smear is estimated wrt inertial EMEJ2000 FRAME,                               
+                                                                              
+<i>                                                                           
+                                                                              
+  not wrt the Target (9P/Tempel 1),                                           
+                                                                              
+</i>                                                                          
+                                                                              
+assuming fixed mirror scan angle (zero mirror scan rate).  SMEARMAG is the    
+estimated smear in units of pixels; SMEARAZI is the estimated direction of    
+the smear measured in degrees counterclockwise from a horizontal ray          
+pointing to the right in the image.                                           
+                                                                              
+</p><pre>                                                                     
+SMEARMAG=                 2.76 / <PIXEL> Smear magnitude during exposure      
+SMEARAZI=              282.557 / <DEG> Smear Azimuth CCW wrt horiz. rightward 
+HPXLSCAL=       58402.428 / [M/PIXEL] HORIZONTAL_PIXEL_SCALE from PDS label   
+VPXLSCAL=       58402.428 / [M/PIXEL] VERTICAL_PIXEL_SCALE from PDS label     
+PHASEANG=          97.664 / [DEG] Phase angle from PDS label                  
+TARSUNR =     231900283.629799 / [KM] Range from Target to Sun, J2000         
+SCTARGR =    979006.2029891026 / [KM] Range from S/C to Target, J2000         
+SCTARGRX=             668789.2 / [km] EMEJ2k Target wrt S/C, X (-1E32=]N/A)   
+SCTARGRY=             436993.3 / [km]  " Y                                    
+SCTARGRZ=            -565871.9 / [km]  " Z                                    
+SCTARGVX=             7.456506 / [km/s] EMEJ2k Target velocity wrt S/C, %s    
+SCTARGVY=             4.874377 / [km]  " Y (-1E32=>N/A)                       
+SCTARGVZ=            -6.308711 / [km]  " Z                                    
+SCSUNRX =            1053179.6 / [km] EMEJ2k Sun wrt S/C, X (-1E32=>N/A)      
+SCSUNRY =          206603035.0 / [km]  " Y                                    
+SCSUNRZ =          105609252.5 / [km]  " Z                                    
+SCSUNVX =           -21.190727 / [km/s] EMEJ2k Sun velocity wrt S/C, %s       
+SCSUNVY =             6.091128 / [km]  " Y (-1E32=>N/A)                       
+SCSUNVZ =            -0.109067 / [km]  " Z                                    
+</pre><hr><p class="in0">                                                     
+                                                                              
+The elements of the DMA keyword EMEJ2000_SPACECRAFT_QUATERNION are used to    
+fill in the FITS SCQUAT* keywords.  Refer to QUATERNION_DESC.ASC in PDS       
+data set DOCUMENT/ directory for more detail.                                 
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+Attitude of the spacecraft FRAME (SPICE frame SDU_SPACECRAFT),                
+<i>not the instrument FRAME,</i>                                              
+with respect to the EME J2000 inertial frame.                                 
+                                                                              
+</p><pre>                                                                     
+SCQUATX =              0.05629 / EMEJ2k Frame to S/C Frame Quaternion, QX     
+SCQUATY =               0.5413 /  ", QY (-1E32=>N/A)                          
+SCQUATZ =              0.72851 /  ", QZ [MSOP/Engineering convention]         
+SCQUATA =             -0.41605 /  ", QA [scalar i.e. cos(theta/2)]            
+</pre><hr><p class="in0">                                                     
+                                                                              
+Nominal reference frame used for instrument, and the orientation of the       
+image axes (NAXIS1, NAXIS2, and into the viewed image) with respect to that   
+frame and how it was to be viewed.  UP (+Y) cross RIGHT (+X) was the          
+BORESIGHT (-Z), so this was a right-handed frame.  See Note 2.                
+                                                                              
+</p><pre>                                                                     
+SPCFRAME= 'SDU_NC_IMAGE_RH_OPNAV' / Nominal SPICE frame                       
+DNAXIS1 = '+X, RIGHT'          / Axis of +NAXIS1 + display orientation        
+DNAXIS2 = '+Y, UP  '           / Axis of +NAXIS2 + display orientation        
+DINTOIMG= '-Z, BORESIGHT'      / Axis into image + display orientation        
+</pre><hr><p class="in0">                                                     
+                                                                              
+The vector to the sun (see SCSCUNX, SCSUNY, SCSUNZ) expressed as azimuth      
+and elevation in the spacecraft frame (SDU_SPACECRAFT).  Azimuth is           
+rotation from +X toward +Y of the projection of the solar vector in the XY    
+plane.  Altitude is the angle out of the XY plane, positive toward +Z.        
+                                                                              
+</p><pre>                                                                     
+SCAZISUN=    260.1414682458098 / [DEG] Azimuth to Sun in S/C frame            
+SCALTSUN=    61.42777578824665 / [DEG] Altitude to Sun in S/C frame           
+</pre><hr><p class="in0">                                                     
+                                                                              
+<u>                                                                           
+                                                                              
+Note 1                                                                        
+                                                                              
+</u>                                                                          
+  </p><p class="in1">                                                         
+                                                                              
+The DMA data used a left-handed frame, called SDU_NC_IMAGE(_IDEAL), which     
+has axes exactly opposite to the right-handed frame SDU_NC_RH_OPNAV used      
+here (see Note 2).  Exactly opposite means the transformation matrix          
+between these two matrices was -I (I => Identity matrix).  For further        
+details see the Frame and Instrument kernels in PDS data set                  
+SDU-C-SPICE-6-V1.0 (see references).                                          
+                                                                              
+</p><p class="in0">                                                           
+<u>                                                                           
+                                                                              
+Note 2                                                                        
+                                                                              
+</u>                                                                          
+  </p><p class="in1">                                                         
+                                                                              
+The STARDUST prime mission to comet 81P/Wild 2 used a left-handed frame       
+(SDU_NC_IMAGE) and defined the display of the data as left-to-right and       
+top-down, which yielded a mirror image of what an observer on the             
+spacecraft would see.  This has been rectified for STARDUST/NExT by using     
+the frame SDU_NC_RH_OPNAV, of which the other frames are mirror               
+reflections.                                                                  
+                                                                              
+</p><hr><p class="in0">                                                       
+                                                                              
+Raw image statistics derived from DMA keywords:                               
+                                                                              
+                                                                   <ul><li>   
+  MEAN                                                                        
+                                                                  </li><li>   
+  STANDARD_DEVIATION                                                          
+                                                                  </li><li>   
+  MINIMUM                                                                     
+                                                                  </li><li>   
+  MAXIMUM                                                                     
+                                                                  </li><li>   
+  SATURATED_PIXEL_COUNT                                                       
+                                                                 </li></ul>   
+                                                                              
+</p><pre>                                                                     
+PDSMEAN =           6.963585 / [DN] Mean from PDS label                       
+PDSSTDDV=          108.98477 / [DN] Standard deviation from PDS label         
+PDSMIN  =                  0 / [DN] Minimum from PDS label                    
+PDSMAX  =               2042 / [DN] Maximum from PDS label                    
+PDSSATCT=                  0 / [Count] SATURATED_PIXEL_COUNT from PDS label   
+</pre><hr><p class="in0">                                                     
+                                                                              
+Observation attitude geometry using the FITS-standard World Coordinate        
+System convention; see the Calabretta and Greisen reference (included in      
+the FITS header) for details.                                                 
+                                                                              
+</p><pre>                                                                     
+COMMENT WCS values cf. Calabretta and Greisen, Representations of celestial   
+COMMENT       coordinates in FITS, A&A 395, 1077-1122 (2002)                  
+COMMENT                                                                       
+WCS_STAT= 'OK      '           / WCS INSERTION SUCCEEDED                      
+CRPIX1  =                512.5 / WCS pixel reference, NAXIS1                  
+CRPIX2  =                512.5 / WCS pixel reference, NAXIS2                  
+CTYPE1  = 'RA---TAN'           / WCS World coord. 1                           
+CTYPE2  = 'DEC--TAN'           / WCS World coord. 2                           
+CRVAL1  =              32.9498 / [deg] WCS World reference 1, RA              
+CRVAL2  =             -34.6999 / [deg] WCS World reference 1, DEC             
+CUNIT1  = 'deg     '           / WCS World unit 1                             
+CUNIT2  = 'deg     '           / WCS World unit 2                             
+CDELT1  =            -1.0 / WCS World1/Image; RA-DEC on-sky is left-handed    
+CDELT2  =             1.0 / WCS World2/Image                                  
+PC1_1   = -0.001812937600 / [RaDEG/HorizPXL] dWorld1/dNAXIS1 @ 60uRad/pixel   
+PC1_2   = 0.0029208492114 / [RaDEG/VertPXL] dWorld1dNAXIS2; @ 60uRad/pixel    
+PC2_1   = -0.002920849211 / [DecDEG/HorizPXL] dWorld2/dNAXIS1                 
+PC2_2   = -0.001812937600 / [DecDEG/VertPXL] dWorld2/dNAXIS2                  
+</pre><hr><p class="in0">                                                     
+                                                                              
+Resistant Mean of the BaseLine Stabilization (BLS; i.e. serial overclock)     
+pixels.  If present, RESISTM3 will be used by the BIAS removal calibration    
+step.  These keywords are not present if image windowing was used because     
+the BLS pixels were not returned with the telemetry in that case, i.e. if     
+WINDOWCT keyword (below) was present and its value was greater than zero.     
+                                                                              
+</p><pre>                                                                     
+RESISTM3= 403.67075965946 / <DN12> Resistant Mean of last 3 BLS pixel cols    
+RESISTS3=  0.089140247802 / <DN12> Resistant Sigma of last 3 BLS pxl cols     
+RESISTR3=              18 / <COUNT> last 3 BLS pxl rejected by resist. mean   
+</pre><hr><p class="in0">                                                     
+                                                                              
+WINDOWs, derived from WINDOW OBJECTS in DMA labels, indicate which pixels     
+on the detector were intentionally stored on the spacecraft and telemetered   
+to the ground.  Refer to the keywords' comments below for details.            
+                                                                              
+</p><p class="in0">                                                           
+                                                                              
+N.B. the convention used in the FITS header was zero-based and therefore      
+differed from the one-based convention used the DMA labels.                   
+                                                                              
+</p><p class="in0">                                                           
+                                                                              
+N.B. Multiple windows in an image may overlap.                                
+                                                                              
+</p><pre>                                                                     
+COMMENT Window cards give the location of rectangular subareas of the image   
+COMMENT   which contain image data.  WINDOWCT gives the number of windows.    
+COMMENT   WINDOW0 to WINDOWn (n=WINDOWCT-1) describe the location of each     
+COMMENT   window as offsets from the bottom or left edge of the image.        
+COMMENT The four offsets are                                                  
+COMMENT   B   Pixel offset to the bottom edge of the window (0 to NAXIS2-1)   
+COMMENT   T   Pixel offset to the top edge of the window (1 to NAXIS2)        
+COMMENT   L   Pixel offset to the left edge of the window (0 to NAXIS1-1)     
+COMMENT   R   Pixel offset to the right edge of the window (1 to NAXIS1)      
+COMMENT The four values are arranged in a string like this:  [B:T,L:R]        
+COMMENT B and T are offsets from the bottom edge of the image.                
+COMMENT L and R are offsets from the left edge of the image.                  
+COMMENT The size of the window is (R-L) x (T-B) pixels (NAXIS1 x NAXIS2)      
+COMMENT Data outside the windows are set to zeros, including the Sync,        
+COMMENT   Line number, and BLS pixels from the prefix and suffix bytes.       
+COMMENT                                                                       
+WINDOWCT=                    1 / Number of windows in IMAGE                   
+WINDOW0 = '[374:725,456:807]'  / [B:T,L:R] offsets to window edges            
+</pre><hr><p class="in0"><h3><i>                                              
+                                                                              
+START OF CALIBRATION KEYWORDS IN RDR PDU                                      
+                                                                              
+</i></h3></p><p class="in1">                                                  
+                                                                              
+All of the keywords that follow, up until the PDU and EDU offsets, were       
+added by the data calibration process, which comprised a number of steps      
+described below.                                                              
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+The data calibration steps used the SDC calibration database for items such   
+as bias model and dark-current model coefficients, as well as pointers to     
+bad-pixel and flat-field files.  The calibration database has been            
+populated by data derived from extensive analysis of ground-based and         
+in-flight calibration data.  The calibration data and analysis are            
+documented in the Stardust-NExT NAVCAM calibration paper (Klaasen et al.,     
+2011).                                                                        
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+The calibration database was available under the data/calib/ directory of     
+the SDC as well as archived under the /CALIB/ directory of NAVCAM PDS data    
+sets.                                                                         
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+Many of the keywords below store the information retrieved from the           
+calibration database in the FITS header.                                      
+                                                                              
+</pre><hr><p class="in0">                                                     
+                                                                              
+The ORIGDTYP keyword was an SDC convention that kept track of the data type   
+of the RAWFIT file:                                                           
+                                                                              
+                                                                   <ul><li>   
+  uint8 -- for compressed (8-bit) raw data                                    
+                                                                  </li><li>   
+  uint16 -- for uncompressed (12-bit in 16-bit integers) raw data             
+                                                                 </li></ul>   
+</p><p class="in1">                                                           
+                                                                              
+ORIGDTYP was used by the calibration process to determine if the raw data     
+were compressed and therefore needed decompressing.                           
+                                                                              
+</p><pre>                                                                     
+ORIGDTYP= 'uint16  '                                                          
+</pre><hr><p class="in0">                                                     
+                                                                              
+The data calibration keywords log information about the each step of the      
+data calibration, such as the number of pixels meeting certain criteria, or   
+whether a step was performed (e.g. the decompression step was skipped for     
+uncompressed raw data).                                                       
+                                                                              
+</p><p class="in0">                                                           
+                                                                              
+The keywords are each grouped by the step to which they refer, and all        
+start with the four-letter abbreviation for the name of their step:           
+                                                                              
+                                                                   <ul><li>   
+  MASK -- MASK pixels that are outside any window or bad or missing           
+                                                                  </li><li>   
+  SATU -- Flag SATUrated pixels                                               
+                                                                  </li><li>   
+  DCMP -- DeCoMpRess data if it was compressed                                
+                                                                  </li><li>   
+  BIAS -- Remove Analog-to-Digital Converter (ADC) BIAS                       
+                                                                  </li><li>   
+  NOIS -- Calculate NOISe from previous steps                                 
+                                                                  </li><li>   
+  DARK -- Remove DARK current                                                 
+                                                                  </li><li>   
+  BDFX -- BIAS+DARK overcorrection fix                                        
+                                                                  </li><li>   
+  SNRM -- Make Signal to Noise Ratio (SNR) Map                                
+                                                                  </li><li>   
+  FLAT -- Apply FLAT field, inter-pixel, correction                           
+                                                                  </li><li>   
+  RATE -- Convert to DN RATE i.e. to DN/ms                                    
+                                                                  </li><li>   
+  ABSC -- ABSolute Calibration i.e. convert to scientific units               
+                                                                 </li></ul>   
+                                                                              
+Each step's section starts with  the same two keywords:  stepDONE;            
+stepSTAT.  E.g. MASKDONE and MASKSTAT:                                        
+                                                                   <ul><li>   
+  DONE -- was T (True) if a step was DONE, and F (False) if not               
+                                                                  </li><li>   
+  STAT -- indicates the STATus of the step:                                   
+                                                                   <ul><li>   
+            OK indicated success;                                             
+                                                                  </li><li>   
+            SKIPPED indicated the step was skipped (DONE was F);              
+                                                                  </li><li>   
+            other possible values start with WARNING or ERROR                 
+              followed by a brief description.                                
+                                                                 </li></ul>   
+                                                                 </li></ul>   
+</p><hr><p class="in0"><u>                                                    
+                                                                              
+MASKing step                                                                  
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+The MASK step checked for, flagged and counted pixels that were:              
+                                                                   <ul><li>   
+  MASKWNCT -- outside windows (if WINDOWCT greater than 0)                    
+                                                                  </li><li>   
+  MASKBPCT -- "BAD" per calibration database file MASKFILE                    
+                                                                  </li><li>   
+  MASKMSCT -- missing i.e. DN = 0                                             
+                                                                 </li></ul>   
+All pixels that were masked were not processed further                        
+in data calibration.                                                          
+                                                                              
+</p><pre>                                                                     
+MASKDONE=                    T / T if Masking performed                       
+MASKSTAT= 'OK      '           / Masking status                               
+MASKFILE= 'ncbadp.fit'         / Masking:  cal file used                      
+MASKWNCT=               925375 / Outside-of-windows pixel count               
+MASKBPCT=                 2048 / Bad pixel count                              
+MASKMSCT=               118857 / Missing pixel count                          
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+SATUration step                                                               
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+  Checked for and flagged ADC-saturated pixels; also checked for pixels       
+  adjacent to saturated pixels as the ADC-saturated pixels may have "bled"    
+  DN onto these.  Saturation DN values were retrieved from the calibration    
+  database.                                                                   
+                                                                              
+                                                                   <ul><li>   
+    SATUVAL -- ADC-saturated value                                            
+               (255 or 4095 for 8- or 12-bit data, respectively)              
+               N.B. The phrase "full-well" in the comment                     
+                    of the SATUVAL keyword is incorrect:                      
+                    the ADC saturates before a CCD pixel                      
+                    reaches full-well.                                        
+                                                                  </li><li>   
+    SATUNSAT -- Count of saturated pixels                                     
+                                                                  </li><li>   
+    SATUNADJ -- Count of saturation-adjacent pixels                           
+                                                                 </li></ul>   
+</p><p class="in1">                                                           
+</p><pre>                                                                     
+SATUDONE=                    T / T if Saturation check performed              
+SATUSTAT= 'OK      '           / Saturation check status                      
+SATUVAL =                 4095 / [DN] Full-well Saturation value              
+SATUNSAT=                    0 / [COUNT] of saturated pixels at SATVAL        
+SATUNADJ=                    0 / [COUNT] of pixels adjacent to sat. pixels    
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+DeCoMPression (DCMP) step                                                     
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+If raw data were compressed (8-bit), the DCMP step uncompressed them to       
+12-bit values, using the inverse of the compression table on the              
+spacecraft.  For uncompressed data, this step set keywords DCMPDONE = F       
+and DCMPSTAT = 'SKIPPED'.                                                     
+                                                                              
+</p><pre>                                                                     
+DCMPDONE=                    F / T if 8- to 12-bit decompression performed    
+DCMPSTAT= 'SKIPPED '           / 8- to 12-bit decompression status            
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+BIAS removal step                                                             
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+Calculated and subtracted ADC BIAS from DNs.  The first successful            
+of these three BIAS estimation methods was used:                              
+                                                    <ol class="uroman"><li>   
+                                                                              
+  IMMEDIATE -- Used resistant mean of BLS pixels stored in                    
+               the RESISTM3 keyword (above).  This was only                   
+               possible if the image was not windowed (i.e.                   
+               if WINDOWCT was zero).                                         
+               If the image was windowed, or for any other                    
+               reason the RESISTM3 keyword was not found,                     
+               then this method failed, and the pypeline would                
+               try the next method.                                           
+                                                                  </li><li>   
+  INTERPOLATION -- Temperature adjustment and interpolation                   
+                   between two bracketing recent images with                  
+                   BLS pixels and keyword RESISTM3 (i.e. a                    
+                   non-windowed image), both taken within                     
+                   +/-2d.                                                     
+                   If bracketing images with RESISTM3 taken                   
+                   within 2d were not found, then this method                 
+                   failed, and the pypeline would try the next                
+                   method.                                                    
+                                                                  </li><li>   
+  EXTRAPOLATION -- Time-based BIAS estimation since previous                  
+                   heater-off event, with temperature                         
+                   adjustment.                                                
+                   If this method failed, then no bias                        
+                   subtraction was done.                                      
+                                                                 </li></ol>   
+                                                                              
+The temperature- and, for the extrapolation method, the time-dependence       
+coefficients of the BIAS models were retrieved from the calibration           
+database.                                                                     
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+The keywords and comments are self-explanatory; each of the BIASERR1 and      
+BIASERR2 keywords indicates that those methods failed and the next method     
+was tried.                                                                    
+                                                                              
+</p><pre>                                                                     
+BIASDONE=                    T / T if Bias removal performed                  
+BIASSTAT= 'OK      '           / Bias estimation succeeded                    
+BIASBIAS=    373.7990823171153 / [DN] Bias value removed                      
+BIASMETH= 'EXTRAPOLATION'      / Bias source is previous heater-off event     
+BIASDTIM=   0.2048581243058046 / [d] Time since previous heater-off event     
+BIASERR1= 'Method I error:  "Keyword "RESISTM3" not found."'                  
+COMMENT BIAS Method I error:  "Keyword "RESISTM3" not found."                 
+BIASERR2= 'Method II error:  (2, "Bracketing frames not found")'              
+COMMENT BIAS Method II error:  (2, "Bracketing frames not found")             
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+NOISe calculation step                                                        
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+Created noise map, used later in the SNRM step to generate the SNR Map.       
+Root-sum-squared Quantization-, Read- and Shot-noise components.              
+Read noise was constant across the detector; other noise                      
+components were dependent on individual pixel values.                         
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+The quantization and read noise parameters were retrieved from the            
+calibration database.                                                         
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+The noise keywords are self-explanatory:                                      
+                                                                              
+</p><pre>                                                                     
+NOISDONE=                    T / T if Noise calculation performed             
+NOISSTAT= 'OK      '           / Noise calculation status                     
+NOISTMIN=    6.856483795696502 / [DN] Total noise map minimum                 
+NOISTMAX=    8.777890979081976 / [DN] Total noise map maximum                 
+NOISQMIN=                  1.0 / [DN] Quantization noise minimum              
+NOISQMAX=                  1.0 / [DN] Quantization noise maximum              
+NOISREAD=                  3.2 / [DN] Read noise                              
+NOISSMIN=    36.68803670731538 / [DN**2] Shot noise minimum                   
+NOISSMAX=    66.72803670731538 / [DN**2] Shot noise maximum                   
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+DARK current calculation and removal step                                     
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+The DARK calculation step found the last time the CCD was flushed before      
+the current image, and calculated the DARK current that had built up since    
+that Previous Found Flush (PFF) based on a model that used the time since     
+the PFF and the temperature of the focal plane (keyword FOPLTEMP above).      
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+The time- and temperature-dependence coefficients of the dark current model   
+were retrieved from the calibration database.                                 
+                                                                              
+                                                                   <ul><li>   
+  DARKDARK -- the calculated dark current, in DATA NUMBER                     
+              units, removed from the image                                   
+                                                                  </li><li>   
+  DARKDMET -- the dark accumulation time since the end of the                 
+              PFF and the end of the exposure of the current                  
+              image.  When available, the exposure duration                   
+              of the PFF and current image were considered in                 
+              calculating the dark accumulation time.                         
+                                                                  </li><li>   
+                                                                              
+  DARKINFO -- the type of PFF event:                                          
+                                                                   <ul><li>   
+    NAVCAM image -- The previous event was another image in this              
+                    data set; the DARKIMG keyword contained the               
+                    original PDS name of that image.                          
+                                                                  </li><li>   
+    NAVCAM take image command -- The previous event was an image              
+                                 command which did not result in              
+                                 an image in this data set; the               
+                                 reason could be a lost or                    
+                                 corrupted image, or an image                 
+                                 that was never telemetered                   
+                                 back to Earth e.g. an image                  
+                                 intended for use by the                      
+                                 spacecraft auto-navigation                   
+                                 process.                                     
+                                                                  </li><li>   
+    NAVCAM primitive -- the previous event was a zero-exposure                
+                        flush of the CCD initiated by ground                  
+                        command.  These commands were issued                  
+                        after each camera power-on and at                     
+                        regular intervals (every 361s) as                     
+                        a keep-awake device to prevent the                    
+                        NAVCAM instrument from going into a                   
+                        low-power sleep state from which the                  
+                        only recovery possible was to                         
+                        power-cycle the instrument.                           
+                                                                 </li></ul>   
+                                                                  </li><li>   
+  DARKIMG -- Raw DMA PRODUCT_ID of the PFF if it was a NAVCAM                 
+             image (keyword DARKINFO above).                                  
+                                                                  </li><li>   
+  DARKFMET -- The Mission Elapsed Time (MET) of the PFF.                      
+                                                                 </li></ul>   
+</p><pre>                                                                     
+DARKDONE=                    T / T if Dark current removal performed          
+DARKSTAT= 'OK      '           / Dark estimation succeeded                    
+DARKDARK=    38.21030096250584 / [DN] Dark value removed                      
+DARKDMET=    300.0078099966049 / [s] Time since previous CCD flush used       
+DARKINFO= 'NAVCAM image'       / Type of previous found flush (PFF)           
+DARKIMG = 'N30099TE02.IMG'     / Image corresponding to PFF                   
+DARKFMET=      982301760.51562 / [s, SCLK] MET of PFF                         
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+Bias+Dark FiX (BDFX) step                                                     
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+The BDFX step corrected for over-subtraction of DN by the BIAS and DARK       
+steps.  To do this the BDFX step determined the median DN value of bias-      
+and dark-subtracted pixels that should contain only dark sky.  If that        
+median dark-sky DN was negative, the BDFX step adds back enough DN, as        
+noted by positive values in the BDFXBDFX and BDFXCALC keywords, to make       
+that median zero DN.  If that median dark-sky DN was non-negative, then       
+nothing was done to the image DN, the BDFXBDFX keyword will be zero, and      
+the BDFXCALC keyword will contain a non-positive value.                       
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+In determining how many pixels should contain dark sky, the BDFX step         
+ignores stars but eliminates pixels that may be on the comet and/or its       
+coma by excluding the number of brightest pixels that would be on a           
+circular target of a certain radius, using the range to the comet (keyword    
+SCTARGR above) and a square pixel size of 60 microradians.                    
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+With that preamble, the BDFX keywords and comments are self-explanatory:      
+                                                                              
+</p><pre>                                                                     
+BDFXDONE=                 T / T if Bias+Dark fix performed                    
+BDFXSTAT= 'OK      '        / Bias+Dark fix status                            
+BDFXBDFX=               0.0 / [DN] BIAS+DARK correction added back            
+BDFXCALC=-1255.990616720379 / [DN] Calculated correction                      
+BDFXPXCT=              4344 / [COUNT] Total number of valid pixels in image   
+BDFXSMCT=              4344 / [COUNT] Number of low-DN pixels sampled         
+BDFXTRAD=               3.5 / [km] radius of target excluded                  
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+Signal-to-Noise Ratio Map (SNRM) step                                         
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+The SNRM step divides the noise map, from the NOISe step above, into the      
+bias- and dark-subtracted and BDFXed DNs to generate a SNR map.  This map     
+will be appended to this file as a FITS extension (EXTNAME='SNRMAP'), and     
+the PDS label will refer to that extension as the SNRMAP_IMAGE OBJECT.        
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+With that preamble, the SNRM keywords and comments are self-explanatory:      
+                                                                              
+</p><pre>                                                                     
+SNRMDONE=                    T / T if SNR Map calculation performed           
+SNRMSTAT= 'OK      '           / SNR Map calculation status                   
+SNRMMIN =     128.198453159341 / Minimum SNR (may be clamped >= 0)            
+SNRMMAX =    185.6927387916647 / Maximum SNR (may be clamped >= 0)            
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+FLAT-fielding step                                                            
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+The FLAT step removed pixel-to-pixel variations within the image using an     
+externally-derived flat-field image stored in a FITS file.  The FLATFILE      
+keyword gives the name of the file, which was retrieved from the              
+calibration database.                                                         
+                                                                              
+</p><pre>                                                                     
+FLATDONE=                    T / T if Flatfld corr performed                  
+FLATSTAT= 'OK      '           / Flatfld corr status                          
+FLATFILE= 'navcamnormprlslope_testsl1.fit' / Flatfld corr:  cal file used     
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+RATE step                                                                     
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+The RATE step calculated the DN/ms rate of DN accumulation during the image   
+exposure.  It calculated the exposure duration for each pixel using the       
+nominal exposure duration (keyword INTTIME, rounded to the nearest five       
+milliseconds), plus a line-number-dependent offset, which corrects for the    
+unequal performance of the two CCD shutters.  The performance of the          
+shutter blades was dependent on the shutter polarity, which was either        
+forward or backward (FWD or BCK, respectively, as stored in keyword           
+RATEPLRT).  Shutter polarity was defined as which shutter blade was leading   
+and which was following, and the polarity toggled for every non-bias          
+(non-zero exposure) image taken.  A separate process in the pypeline was      
+used to determine the shutter polarity for each image.                        
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+The polynomial coefficients of the line-number-dependent shutter offset       
+model were retrieved from the calibration database.                           
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+N.B. This and the following (ABSC) steps were not done for zero-exposure      
+     images, so some of the following keywords may not be present in those    
+     FITS headers.                                                            
+                                                                              
+</p><pre>                                                                     
+RATEDONE=                    T / T if Conversion to DN/ms performed           
+RATESTAT= 'OK      '           / Conversion to DN/ms status                   
+RATEPLRT= 'FWD     '           / Shutter polarity used                        
+RATEUNIT= 'DN/ms   '           / Rate unit is DN/millisecond                  
+</pre><hr><p class="in0"><u>                                                  
+                                                                              
+ABSolute Calibration (ABSC) step                                              
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+  The ABSC step converted the DN/ms value from the RATE step to radiance.     
+  The calibration constant ("const" in FITS keyword comments) used is taken   
+  from the calibration database and is dependent on the filter (always 0,     
+  i.e.  OPNAV, for Stardust-NExT) and the date of the observation.            
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+  The values for all but the first two and last two of these keywords were    
+  retrieved from the calibration database.                                    
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+  The last two keywords are as follows:                                       
+                                                                   <ul><li>   
+    ABSCA2IF -- This is a multiplication factor to convert                    
+                the radiance values in the image to I/F.                      
+                                                                  </li><li>   
+    ABSCA2IR -- This is the Target-Sun range used to                          
+                calculate the value of the ABSCA2IF keyword                   
+                above.                                                        
+                                                                 </li></ul>   
+                                                                              
+</p><pre>                                                                     
+ABSCDONE=                T / T if Conversion to Absolute Radiance performed   
+ABSCSTAT= 'OK      '       / Conversion to Absolute Radiance status           
+ABSCRADC=         1.93E-09 / [(W/(cm^2*nm*sr))/(DN/ms)] Radiance const used   
+ABSCRADW= '666 nm  '       / Radiance central wavelength                      
+ABSCIOFC=         3.89E-05 / [(I/F)/(DN/ms)] I/F const used @ 1AU             
+ABSCIOFW= '647 nm  '       / I/F central wavelength                           
+ABSCUNIT= 'W/(cm^2*nm*sr)' / Calibrated units                                 
+ABSCA2IF= 48433.2963938834 / Multiplication factor to convert data to I/F     
+ABSCA2IR= 1.55015765049661 / [AU] Target-Sun range used in I/F factor         
+</pre><hr><p class="in0"><h3><i>                                              
+                                                                              
+END OF CALIBRATION KEYWORDS IN RDR PDU                                        
+                                                                              
+</i></h3></pre><hr><p class="in0"><u>                                         
+                                                                              
+PDU and EDU offsets                                                           
+                                                                              
+</u></p><p class="in1">                                                       
+                                                                              
+Offset keywords gave the byte offsets from the beginning of the file for      
+the Primary Header/Data Unit (PHDU) and all Extension Header/Data Units       
+(EHDUs) in the FITS file.                                                     
+                                                                              
+</p><p class="in1">                                                           
+                                                                              
+The O____END keyword gave the offset to just past the end of the file,        
+which was the same as the length of the file.                                 
+                                                                              
+</p><pre>                                                                     
+OHIMAGE =                    0 / [BYTES] Offset to PDU header                 
+ODIMAGE =                17280 / [BYTES] Offset to PDU data                   
+ONIMAGE = 'IMAGE   '           / Name of extension                            
+OHQULMAP=              4213440 / [BYTES] Offset to QUALITY_MAP header         
+ODQULMAP=              4216320 / [BYTES] Offset to QUALITY_MAP data           
+ONQULMAP= 'QUALITY_MAP'        / Name of extension                            
+OHUNCMAP=              5267520 / [BYTES] Offset to UNCERTAINTY_MAP header     
+ODUNCMAP=              5270400 / [BYTES] Offset to UNCERTAINTY_MAP data       
+ONUNCMAP= 'UNCERTAINTY_MAP'    / Name of extension                            
+OHSNRMAP=              9466560 / [BYTES] Offset to SNR_MAP header             
+ODSNRMAP=              9469440 / [BYTES] Offset to SNR_MAP data               
+ONSNRMAP= 'SNR_MAP '           / Name of extension                            
+OHPDSOLD=             13665600 / [BYTES] Offset to ORIGINAL_PDS_LABEL hdr     
+ODPDSOLD=             13668480 / [BYTES] Offset to ORIGINAL_PDS_LABEL data    
+ONPDSOLD= 'ORIGINAL_PDS_LABEL' / Name of extension                            
+O____END=             13674240 / [BYTES] Offset to just past end of file      
+END                                                                           
+</pre><hr><p class="in0"><h3><i>                                              
+                                                                              
+END OF PDU; START OF EDUs                                                     
+                                                                              
+</i></h3></p><p class="in1">                                                  
+                                                                              
+The Extension Data Unit (EDU) headers that follow come from two types of      
+FITS files:  EDR EDUs; RDR EDUs.  The COMMENT strings in the COMMENT cards    
+have been changed to CMT, and some of the comment text has been rearranged,   
+to shorten the lines.                                                         
+                                                                              
+N.B. SOME OF THE FOLLOWING EXTENSIONS, AS INDICATED BY THE PHRASE "(SDC ONLY; 
+NOT IN PDS DATA)," HAVE BEEN REMOVED FROM THE PDS PRODUCTS AND ONLY EXIST IN  
+THE SDC PRODUCTS FOR THE SCIENCE TEAM                                         
+                                                                              
+</p><hr><p class="in0"><h3><u>                                                
+                                                                              
+EDR BLS_IMAGE EDU                                                             
+                                                                              
+</u></h3></p><p class="in1">                                                  
+                                                                              
+  This extension contains the BLS pixels from the raw (EDR) image.            
+  Refer to the sample FITS EDU header below for more detail.                  
+                                                                              
+</p><pre>                                                                     
+XTENSION= 'IMAGE   '           / Image extension                              
+BITPIX  =                   16 / array data type                              
+NAXIS   =                    2 / number of array dimensions                   
+NAXIS1  =                   20                                                
+NAXIS2  =                 1024                                                
+PCOUNT  =                    0 / number of parameters                         
+GCOUNT  =                    1 / number of groups                             
+EXTNAME = 'BLS_IMAGE'          / BaseLine Stabilization pixels                
+CMT PDS_START                                                                 
+CMT This extension contains NAVCAM BaseLine Stablilization (BLS) pixels.      
+CMT The last three columns of BLS pixels, when available and when windowing   
+CMT was not used, are used to estimate the bias (zero level) on the NAVCAM    
+CMT CCD-ADC system.                                                           
+CMT                                                                           
+CMT The BLS pixels are overscan pixels run through the NAVCAM Analog-to-      
+CMT Digital Converter (ADC) before and after each row of actual CCD pixels    
+CMT was shifted off the CCD on its way to being read by the ADC.  BLS         
+CMT pixels were originally downlinked with the CCD pixels in the telemetry,   
+CMT but the Science Data Center data processing pypeline separated them       
+CMT from the pixels in the primary IMAGE and stored them in this extension.   
+CMT There are eight BLS pixels from before each image row and twelve BLS      
+CMT pixels after each image row, for a total of twenty BLS pixels per row.    
+CMT Each BLS pixel is the same size as the image pixels (8 or 16 bits).       
+CMT If windowing was used for the main image, then all BLS pixels in this     
+CMT extension will be zeroes, because no BLS pixels are downlinked with       
+CMT windowed images.                                                          
+CMT PDS_STOP                                                                  
+PFXPIXEL=                    8 / Number of BLS prefix pixels                  
+SFXPIXEL=                   12 / Number of BLS suffix pixels                  
+END                                                                           
+</pre><hr>                                                                    
+<p class="in0"><h1><u><i>                                                     
+<hr><hr>                                                                      
+                                                                              
+<hr><hr>                                                                      
+</i></u><h1></pre><hr>                                                        
+<p class="in0"><h3><u>                                                        
+                                                                              
+EDR PREFIX_TABLE EDU (SDC ONLY; NOT IN PDS DATA)                              
+                                                                              
+</u></h3></p><p class="in1">                                                  
+                                                                              
+  This extension contains the prefix data from the EDR image.                 
+  Refer to the sample FITS EDU header below for more detail.                  
+                                                                              
+</p><pre>                                                                     
+XTENSION= 'BINTABLE'           / binary table extension                       
+BITPIX  =                    8 / array data type                              
+NAXIS   =                    2 / number of array dimensions                   
+NAXIS1  =                    4 / length of dimension 1                        
+NAXIS2  =                 1024 / length of dimension 2                        
+PCOUNT  =                    0 / number of group parameters                   
+GCOUNT  =                    1 / number of groups                             
+TFIELDS =                    2 / number of table fields                       
+EXTNAME = 'PREFIX_TABLE'       / Synchronization & Line Number data           
+TTYPE1  = 'SYNC    '                                                          
+TFORM1  = 'I       '                                                          
+TTYPE2  = 'LINE_NUMBER'                                                       
+TFORM2  = 'I       '                                                          
+CMT PDS_START                                                                 
+CMT This extension contains a table built from the NAVCAM prefix; the         
+CMT intent of the prefix was to allow resynchronization and recovery of the   
+CMT NAVCAM telemetry if individual packets were corrupted or otherwise        
+CMT lost.                                                                     
+CMT                                                                           
+CMT The first row of this table corresponds to the first and bottom row of    
+CMT pixels in the main image; the last row of this table corresponds to the   
+CMT last and top row of pixels in the main image.                             
+CMT                                                                           
+CMT The prefix comprised four bytes downlinked before each row of the image   
+CMT and BLS pixels in non-windowed images.  The first two bytes are           
+CMT synchronization (SYNC) bytes and are normally zeroes; any non-zero SYNC   
+CMT bytes indicate corruption in the data. The last two bytes are the image   
+CMT row number (LINE_NUMBER), starting at 0 and ending at 1023.               
+CMT                                                                           
+CMT If windowing was used for the main image, then all prefix values in       
+CMT this extension will be zeroes because no prefix was downlinked with       
+CMT windowed images.                                                          
+CMT PDS_STOP                                                                  
+END                                                                           
+</pre><hr><p class="in0"><h3><u>                                              
+                                                                              
+EDR IMAGE_HISTOGRAM EDU (SDC ONLY; NOT IN PDS DATA)                           
+                                                                              
+</u></h3></p><p class="in1">                                                  
+                                                                              
+  This extension contains the histogram of the raw (EDR) data.                
+  Refer to the sample FITS EDU header below for more detail.                  
+                                                                              
+</p><pre>                                                                     
+XTENSION= 'IMAGE   '           / Image extension                              
+BITPIX  =                   32 / array data type                              
+NAXIS   =                    1 / number of array dimensions                   
+NAXIS1  =                 4096                                                
+PCOUNT  =                    0 / number of parameters                         
+GCOUNT  =                    1 / number of groups                             
+EXTNAME = 'IMAGE_HISTOGRAM'    / Image histogram data                         
+BZERO   =           2147483648 / Data are Unsigned                            
+CMT PDS_START                                                                 
+CMT This extension contains a histogram of NAVCAM image data.  The purpose    
+CMT of this extension is to provide the distribution of raw pixel values in   
+CMT the primary image extension of this file.                                 
+CMT                                                                           
+CMT This extension comprises a series of 256 or 4096 integers for an image    
+CMT of 8-bit or 16-bit image pixels, respectively.  The 1st integer is the    
+CMT count of image pixels with a value of zero, the second is the count of    
+CMT image pixels with a value of one, and so on, up to the last integer,      
+CMT which is the count of image pixels with a value of 255 or 4095 for 8-     
+CMT or 16-bit main image pixels.  Note that 16-bit pixels in the main image   
+CMT come from 12-bit pixels in the NAVCAM instrument.                         
+CMT                                                                           
+CMT If windowing was used for the main image, then all image values outside   
+CMT the windowed regions will be zero, and that will be reflected in the      
+CMT first entry in this histogram.                                            
+CMT PDS_STOP                                                                  
+END                                                                           
+</pre><hr><p class="in0"><h3><u>                                              
+                                                                              
+EDR and RDR ORIGINAL_PDS_LABEL EDU (SDC ONLY; NOT IN PDS DATA)                
+                                                                              
+</u></h3></p><p class="in1">                                                  
+                                                                              
+  This extension is a copy of the DMA PDS label from the original DMA         
+  image file.  It is present in both EDR and RDR data files.                  
+  Refer to the sample FITS EDU header below for more detail.                  
+                                                                              
+</p><pre>                                                                     
+XTENSION= 'IMAGE   '           / Image extension                              
+BITPIX  =                    8 / array data type                              
+NAXIS   =                    1 / number of array dimensions                   
+NAXIS1  =                 4059                                                
+PCOUNT  =                    0 / number of parameters                         
+GCOUNT  =                    1 / number of groups                             
+EXTNAME = 'ORIGINAL_PDS_LABEL' / Original PDS label                           
+CMT PDS_START                                                                 
+CMT This extension contains the original PDS label from the Data Management   
+CMT and Archive (DMA) Ground Data Sytem (GDS) that processsed the original    
+CMT raw telemetry for this NAVCAM image; that PDS file was then transferred   
+CMT to the Science Data Center (SDC) where the data were converted to this    
+CMT FITS format file with a detached PDS label.  The purpose of this          
+CMT extension is to keep track of the original attached label.  It has been   
+CMT stored in this extension as a stream of bytes.  The line termination      
+CMT character is a linefeed (LF, ASCII decimal 10); carriage returns          
+CMT (CR, ASCII decimal 13) were not in the original attached label and are    
+CMT not present here.                                                         
+CMT PDS_STOP                                                                  
+END                                                                           
+</pre><hr><p class="in0"><h3><u>                                              
+                                                                              
+RDR QUALITY_MAP EDU                                                           
+                                                                              
+</u></h3></p><p class="in1">                                                  
+                                                                              
+  This extension is a quality map.  This is an image of 8-bit data where      
+  the pixels represent the quality for the corresponding pixels in the PDU    
+  image, and each bit of each pixel represents a specific quality.  Refer     
+  to the sample FITS EDU header below for more detail.                        
+                                                                              
+</p><pre>                                                                     
+XTENSION= 'IMAGE   '           / Image extension                              
+BITPIX  =                    8 / array data type                              
+NAXIS   =                    2 / number of array dimensions                   
+NAXIS1  =                 1024                                                
+NAXIS2  =                 1024                                                
+PCOUNT  =                    0 / number of parameters                         
+GCOUNT  =                    1 / number of groups                             
+EXTNAME = 'QUALITY_MAP'        / Quality image map extension                  
+CMT PDS_START                                                                 
+CMT                                                                           
+CMT This IMAGE extension is a Quality map; each quality map pixel             
+CMT corresponds to the image pixel in the same position in the Primary HDU    
+CMT image.  The normal value for a quality map pixel is zero, indicating      
+CMT the corresponding pixel in the HDU image could be properly calibrated;    
+CMT a non-zero value indicates the HDU image pixel was not calibrated.        
+CMT Each pixel comprises several bits.  A set bit (non-zero) indicates        
+CMT either why calibration for the corresponding pixel was not performed      
+CMT (e.g. pixel is missing), and/or any alternate processing performed on     
+CMT the pixel (e.g. despiking).                                               
+CMT                                                                           
+CMT The following table lists the meaning of each bit                         
+CMT                                                                           
+CMT   Hex   Dec  Description                                                  
+CMT   0x01    1  Missing (outside any window(s))                              
+CMT   0x02    2  Known bad pixel (in a window)                                
+CMT   0x04    4  Missing (=Zero and in window and not Bad)                    
+CMT   0x08    8  Saturated                                                    
+CMT   0x10   16  Adjacent to saturated pixel                                  
+CMT   0x20   32  Bad or Missing pixel value interpolated                      
+CMT   0x40   64  Bad or Missing pixel value despiked                          
+CMT                                                                           
+CMT PDS_STOP                                                                  
+END                                                                           
+</pre><hr><p class="in0"><h3><u>                                              
+                                                                              
+RDR UNCERTAINTY_MAP EDU                                                       
+                                                                              
+</u></h3></p><p class="in1">                                                  
+                                                                              
+  This extension is an uncertainty map.  This is an image of 32-bit           
+  floating point data where the pixels represent the combined uncertainties   
+  for the corresponding pixels in the PDU image.  Refer to the sample FITS    
+  EDU header below for more detail.                                           
+                                                                              
+</p><pre>                                                                     
+XTENSION= 'IMAGE   '           / Image extension                              
+BITPIX  =                  -32 / array data type                              
+NAXIS   =                    2 / number of array dimensions                   
+NAXIS1  =                 1024                                                
+NAXIS2  =                 1024                                                
+PCOUNT  =                    0 / number of parameters                         
+GCOUNT  =                    1 / number of groups                             
+EXTNAME = 'UNCERTAINTY_MAP'    / Uncertainty image MAP extension              
+BUNIT   = 'PERCENT '           / Units of uncertainty in extension            
+CMT PDS_START                                                                 
+CMT                                                                           
+CMT This IMAGE extension is an uncertainty map; each uncertainty              
+CMT map pixel corresponds to the image pixel in the same position in          
+CMT the Primary HDU image.  The Uncertainty map is calculated as the          
+CMT RSS of the uncertainties from these data calibration steps:               
+CMT                                                                           
+DARKUNCR=    5.618920177416125 / [DN] Uncertainty from DARK step              
+RATEMAXU=    1.188909253671076 / [PERCENT] Max uncertainty from RATE step     
+BIASUNCR=                  0.0 / [DN] Uncertainty from BIAS step              
+ABSCUNCR=                100.0 / [PERCENT] Uncertainty from ABSC step         
+CMT                                                                           
+CMT ***N.B. When the uncertainty is a Max uncertainty (keyword *MAXU),        
+CMT         then the uncertainty from that step is an image map; when         
+CMT         it is an Uncertainty (keyword *UNCR), then the uncertainty        
+CMT         from that step is a single value for the entire image.            
+CMT                                                                           
+CMT ***N.B. The quality map extension (EXTNAME=QUALITY_MAP) applies to        
+CMT         this extension as it does to the image in the PDU                 
+CMT                                                                           
+CMT For more information about data calibration steps, see the Primary        
+CMT Data Unit header and the calibration documentation for these data.        
+CMT PDS_STOP                                                                  
+END                                                                           
+</pre><hr><p class="in0"><h3><u>                                              
+                                                                              
+RDR SNR_MAP EDU                                                               
+                                                                              
+</u></h3></p><p class="in1">                                                  
+                                                                              
+  This extension is a signal-to-noise ratio map.  It is an image of 32-bit    
+  floating point data where the pixels represent the signal-to-noise ratios   
+  for the corresponding pixels in the PDU image.  Refer to the sample FITS    
+  EDU header below for more detail.                                           
+                                                                              
+</p><pre>                                                                     
+XTENSION= 'IMAGE   '           / Image extension                              
+BITPIX  =                  -32 / array data type                              
+NAXIS   =                    2 / number of array dimensions                   
+NAXIS1  =                 1024                                                
+NAXIS2  =                 1024                                                
+PCOUNT  =                    0 / number of parameters                         
+GCOUNT  =                    1 / number of groups                             
+EXTNAME = 'SNR_MAP '           / Signal to Noise Ratio image MAP extension    
+CMT PDS_START                                                                 
+CMT                                                                           
+CMT This IMAGE extension is a Signal to Noise Ratio (SNR) map; each SNR       
+CMT map pixel corresponds to the image pixel in the same position in          
+CMT the Primary HDU image.  The SNR Map is calculated via the following       
+CMT steps:                                                                    
+CMT                                                                           
+CMT   1) QNOISE = Quantization noise, the greater of                          
+CMT   1.1) (Quant^2)/12; Quant = 1, or                                        
+CMT   1.2) Bin size (DN) map from decompression, squared and divided by 12    
+CMT   2) RNOISE = (Read noise)^2 = 10.24                                      
+CMT   3) SNOISE = Shot noise map, bias-subtracted DNs over the gain           
+CMT        SNOISE = (RawDNs - BiasDN) / GAIN                                  
+CMT   4) TOTALNOISE = the square root of the sum of items 1, 2 and 3:         
+CMT        TOTALNOISE = SQRT(QNOISE + RNOISE + SNOISE)                        
+CMT   5) SNRMap = (Bias- and Dark-subtracted DNs) / TOTALNOISE                
+CMT                                                                           
+CMT ***N.B. The quality map extension (EXTNAME=QUALITY_MAP) applies to        
+CMT         this extension as it does to the image in the PDU                 
+CMT                                                                           
+CMT PDS_STOP                                                                  
+END                                                                           
+</pre><hr><p class="in0">                                                     
+                                                                              
+<u>                                                                           
+                                                                              
+References                                                                    
+                                                                              
+</u>                                                                          
+                                                                              
+<ul><li>                                                                      
+                                                                              
+<a href="http://archive.stsci.edu/fits/fits_standard/">                       
+                                                                              
+Definition of the Flexible Image Transport System <i>(FITS),</i></a>          
+                                                                              
+NOST 100-2.0 (NASA/Science Office of Standards and Technology).               
+                                                                              
+</li><li>                                                                     
+<a href="ftp://naif.jpl.nasa.gov/pub/naif/pds/data/sdu-c-spice-6-v1.0/">      
+                                                                              
+STARDUST SPICE PDS data set </a>                                              
+                                                                              
+Semenov, B.V., L.S. Elson, and C.H. Acton, STARDUST SPICE KERNELS             
+V1.0, SDU-C-SPICE-6-V1.0, NASA Planetary Data System, 2004.                   
+                                                                              
+</li><li>                                                                     
+                                                                              
+Klaasen et al., Stardust-NExT NAVCAM Calibration and Performance, to be       
+submitted to Icarus, 2011.                                                    
+                                                                              
+</li><li>                                                                     
+<a href="http://www.aanda.org/index.php?option=com_article&access=doi         
+&doi=10.1051/0004-6361:20021327&Itemid=129">                                  
+                                                                              
+Calabretta and Greisen, Representations of celestial coordinates in FITS,     
+A&A 395, 1077-1122 (2002).                                                    
+                                                                              
+</li></ul>                                                                    
+                                                                              
+</body></html>                                                                

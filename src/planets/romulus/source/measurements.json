@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "romulus",
+  "targetNaif": null,
+  "parentNaif": null,
+  "source": {
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+    "papers": [
+      "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+      "https://www.aanda.org/articles/aa/pdf/2021/06/aa40342-21.pdf"
+    ],
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "semiAxesKm": [
+      18.978586617554008,
+      7.029106154649631,
+      7.029106154649631
+    ],
+    "fullAxesKm": [
+      37.957173235108016,
+      14.058212309299263,
+      14.058212309299263
+    ],
+    "referenceRadiusKm": 9.787866191310176,
+    "axisConvention": "a,b,c are semiaxes; full axes = 2a,2b,2c",
+    "scale": "Published2013 projected area-equivalent diameter23.1±0.7km and ellipse ratio2.7±0.3.",
+    "qualification": "One published projected-limb family member with assumed equal depth;2020 reanalysis allows different correlated ellipse shapes.",
+    "projectedDiameterKm": {
+      "value": 23.1,
+      "uncertainty": 0.7
+    },
+    "projectedAxisRatio": {
+      "value": 2.7,
+      "uncertainty": 0.3
+    },
+    "formula": "Projected A=D*sqrt(q)/2; B=D/(2*sqrt(q)); select a=A,b=B,c=B; radius=cbrt(a*b*c).",
+    "alternate2020DiameterKm": {
+      "value": 25,
+      "uncertainty": 1
+    }
+  },
+  "approximation": {
+    "semiAxesKm": [
+      18.978586617554008,
+      7.029106154649631,
+      7.029106154649631
+    ],
+    "assumptions": [
+      "Select2014 reported projected ellipse as one admissible illustrative member.",
+      "Choose unseen c=b; viewing along assumed c reproduces adopted projected ellipse.",
+      "Do not call2.7:1 a unique measured3D shape."
+    ],
+    "qualification": "One published projected-limb family member with assumed equal depth;2020 reanalysis allows different correlated ellipse shapes."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "spin": {
+    "periodHours": null,
+    "poleIcrfRaDecDegrees": [
+      0,
+      90
+    ],
+    "meridianDegrees": 0,
+    "meaning": "Illustrative pole and phase; no uniquely measured spin attitude."
+  },
+  "unresolved": [
+    "Herald2020 shows strong covariance between ellipse axes and orientation; preserve this in visible lens description."
+  ],
+  "orbit": {
+    "source": "source/validation/epoch-state.json",
+    "qualification": "The fixed-epoch orbit uses the published 2021 Sylvia-system model retained in source/orbit/published-parameters.json. Independent projections from the newer Miriade 2024 solution differ by about 42 milliarcseconds (140 km in the sky plane) at the scene epoch and 23–63 milliarcseconds over six checks. These checks establish an approximate orbital context; they do not reproduce or claim the paper’s 9.85-milliarcsecond fit RMS. Full source receipts and limits are retained in source/validation/epoch-state.json, source/validation/projection-checks.json, and docs/moons/b1-preparation/romulus-orbit.md. This orbit qualification is separate from the selected 2014 illustrative shape-family member and its 2020 geometric reanalysis caveat.",
+    "runtimeExtrapolation": false
+  }
+}

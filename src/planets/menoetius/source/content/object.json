@@ -1,0 +1,106 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "menoetius",
+  "displayName": "Menoetius",
+  "panel": {
+    "introduction": "Menoetius forms a binary system with Patroclus. This published ellipsoid combines stellar-occultation and light-curve constraints. Local shape deviations are unresolved; no crater or albedo pattern is reconstructed. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Patroclus"
+      },
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate model"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full model dimensions",
+        "value": "117 × 108 × 90 km"
+      },
+      {
+        "id": "scale",
+        "label": "Size evidence",
+        "value": "117 × 108 × 90 km · inferred full axes"
+      },
+      {
+        "id": "rotation",
+        "label": "Mutual orbital period",
+        "value": "4.282753 ± 2.3e-05 d"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published approximate ellipsoid with full dimensions 117×108×90 km, inferred from occultation and photometry. Orbital-pole alignment is a synchronous approximation; the display meridian is arbitrary. The grid marks unmapped terrain.",
+        "title": "Published approximate ellipsoid with full dimensions 117×108×90 km, inferred from occultation and photometry. Orbital-pole alignment is a synchronous approximation; the display meridian is arbitrary. The grid marks unmapped terrain.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/menoetius/menoetius-model-thumbnail.webp",
+        "surface": "menoetius-model-surface@2x.webp",
+        "poles": "menoetius-model-poles@2x.webp",
+        "source": {
+          "id": "occultation-approximation",
+          "path": "../manifest.json",
+          "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Buie et al. Patroclus-Menoetius occultation",
+      "role": "surface",
+      "description": "Source measurements and model interpretation",
+      "href": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+      "credit": "Buie et al. Patroclus-Menoetius occultation"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Buie et al. Patroclus-Menoetius occultation"
+    }
+  }
+}

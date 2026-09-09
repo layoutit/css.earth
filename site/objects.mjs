@@ -1,3 +1,34 @@
+import polymeleDescriptor from "../src/planets/polymele/object.json" with { type: "json" };
+import leucusDescriptor from "../src/planets/leucus/object.json" with { type: "json" };
+import orusDescriptor from "../src/planets/orus/object.json" with { type: "json" };
+import eurybatesDescriptor from "../src/planets/eurybates/object.json" with { type: "json" };
+import patroclusDescriptor from "../src/planets/patroclus/object.json" with { type: "json" };
+import hiiakaDescriptor from "../src/planets/hiiaka/object.json" with { type: "json" };
+import squannitDescriptor from "../src/planets/squannit/object.json" with { type: "json" };
+import romulusDescriptor from "../src/planets/romulus/object.json" with { type: "json" };
+import menoetiusDescriptor from "../src/planets/menoetius/object.json" with { type: "json" };
+import calibanDescriptor from "../src/planets/caliban/object.json" with { type: "json" };
+import sycoraxDescriptor from "../src/planets/sycorax/object.json" with { type: "json" };
+import prosperoDescriptor from "../src/planets/prospero/object.json" with { type: "json" };
+import setebosDescriptor from "../src/planets/setebos/object.json" with { type: "json" };
+import paaliaqDescriptor from "../src/planets/paaliaq/object.json" with { type: "json" };
+import tarvosDescriptor from "../src/planets/tarvos/object.json" with { type: "json" };
+import ijiraqDescriptor from "../src/planets/ijiraq/object.json" with { type: "json" };
+import suttungrDescriptor from "../src/planets/suttungr/object.json" with { type: "json" };
+import mundilfariDescriptor from "../src/planets/mundilfari/object.json" with { type: "json" };
+import skathiDescriptor from "../src/planets/skathi/object.json" with { type: "json" };
+import erriapusDescriptor from "../src/planets/erriapus/object.json" with { type: "json" };
+import thrymrDescriptor from "../src/planets/thrymr/object.json" with { type: "json" };
+import bebhionnDescriptor from "../src/planets/bebhionn/object.json" with { type: "json" };
+import bergelmirDescriptor from "../src/planets/bergelmir/object.json" with { type: "json" };
+import bestlaDescriptor from "../src/planets/bestla/object.json" with { type: "json" };
+import fornjotDescriptor from "../src/planets/fornjot/object.json" with { type: "json" };
+import hatiDescriptor from "../src/planets/hati/object.json" with { type: "json" };
+import hyrrokkinDescriptor from "../src/planets/hyrrokkin/object.json" with { type: "json" };
+import logeDescriptor from "../src/planets/loge/object.json" with { type: "json" };
+import skollDescriptor from "../src/planets/skoll/object.json" with { type: "json" };
+import greipDescriptor from "../src/planets/greip/object.json" with { type: "json" };
+import tarqeqDescriptor from "../src/planets/tarqeq/object.json" with { type: "json" };
 import massaliaDescriptor from "../src/planets/massalia/object.json" with { type: "json" };
 import proserpinaDescriptor from "../src/planets/proserpina/object.json" with { type: "json" };
 import polyhymniaDescriptor from "../src/planets/polyhymnia/object.json" with { type: "json" };
@@ -230,6 +261,164 @@ import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { typ
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("polymele", "Polymele", "asteroid", "#a0a0a0", 5.191974805775306,
+    "Explore Polymele, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(polymeleDescriptor);
+    }, polymeleDescriptor.properties.worldFrame),
+  object("leucus", "Leucus", "asteroid", "#a0a0a0", 5.312733245360807,
+    "Explore Leucus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(leucusDescriptor);
+    }, leucusDescriptor.properties.worldFrame),
+  object("orus", "Orus", "asteroid", "#a0a0a0", 5.1231730197676795,
+    "Explore Orus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(orusDescriptor);
+    }, orusDescriptor.properties.worldFrame),
+  object("eurybates", "Eurybates", "asteroid", "#a0a0a0", 5.21783282489895,
+    "Explore Eurybates, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eurybatesDescriptor);
+    }, eurybatesDescriptor.properties.worldFrame),
+  object("patroclus", "Patroclus", "asteroid", "#a0a0a0", 5.206163281913244,
+    "Explore Patroclus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(patroclusDescriptor);
+    }, patroclusDescriptor.properties.worldFrame),
+  object("hiiaka", "Hiʻiaka", "satellite", "#a0a0a0", 43.1,
+    "Explore Hiʻiaka, a moon of Haumea, through its occultation-constrained ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hiiakaDescriptor);
+    }, hiiakaDescriptor.properties.worldFrame),
+  object("squannit", "Squannit", "satellite", "#a0a0a0", 0.642,
+    "Explore Squannit, the companion of Moshup, through its radar-derived shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(squannitDescriptor);
+    }, squannitDescriptor.properties.worldFrame),
+  object("romulus", "Romulus", "satellite", "#a0a0a0", 3.491,
+    "Explore Romulus, a moon of Sylvia, through its explicitly approximate occultation shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(romulusDescriptor);
+    }, romulusDescriptor.properties.worldFrame),
+  object("menoetius", "Menoetius", "satellite", "#a0a0a0", 5.226,
+    "Explore Menoetius, the companion of Patroclus, through its occultation-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(menoetiusDescriptor);
+    }, menoetiusDescriptor.properties.worldFrame),
+
+  object("caliban", "Caliban", "satellite", "#a0a0a0", 19.2,
+    "Explore Caliban, a moon of Uranus, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(calibanDescriptor);
+    }, calibanDescriptor.properties.worldFrame),
+  object("sycorax", "Sycorax", "satellite", "#a0a0a0", 19.2,
+    "Explore Sycorax, a moon of Uranus, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(sycoraxDescriptor);
+    }, sycoraxDescriptor.properties.worldFrame),
+  object("prospero", "Prospero", "satellite", "#a0a0a0", 19.2,
+    "Explore Prospero, a moon of Uranus, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(prosperoDescriptor);
+    }, prosperoDescriptor.properties.worldFrame),
+  object("setebos", "Setebos", "satellite", "#a0a0a0", 19.2,
+    "Explore Setebos, a moon of Uranus, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(setebosDescriptor);
+    }, setebosDescriptor.properties.worldFrame),
+
+  object("paaliaq", "Paaliaq", "satellite", "#a0a0a0", 9.58,
+    "Explore Paaliaq, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(paaliaqDescriptor);
+    }, paaliaqDescriptor.properties.worldFrame),
+  object("tarvos", "Tarvos", "satellite", "#a0a0a0", 9.58,
+    "Explore Tarvos, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tarvosDescriptor);
+    }, tarvosDescriptor.properties.worldFrame),
+  object("ijiraq", "Ijiraq", "satellite", "#a0a0a0", 9.58,
+    "Explore Ijiraq, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ijiraqDescriptor);
+    }, ijiraqDescriptor.properties.worldFrame),
+  object("suttungr", "Suttungr", "satellite", "#a0a0a0", 9.58,
+    "Explore Suttungr, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(suttungrDescriptor);
+    }, suttungrDescriptor.properties.worldFrame),
+  object("mundilfari", "Mundilfari", "satellite", "#a0a0a0", 9.58,
+    "Explore Mundilfari, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mundilfariDescriptor);
+    }, mundilfariDescriptor.properties.worldFrame),
+  object("skathi", "Skathi", "satellite", "#a0a0a0", 9.58,
+    "Explore Skathi, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(skathiDescriptor);
+    }, skathiDescriptor.properties.worldFrame),
+  object("erriapus", "Erriapus", "satellite", "#a0a0a0", 9.58,
+    "Explore Erriapus, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(erriapusDescriptor);
+    }, erriapusDescriptor.properties.worldFrame),
+  object("thrymr", "Thrymr", "satellite", "#a0a0a0", 9.58,
+    "Explore Thrymr, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(thrymrDescriptor);
+    }, thrymrDescriptor.properties.worldFrame),
+  object("bebhionn", "Bebhionn", "satellite", "#a0a0a0", 9.58,
+    "Explore Bebhionn, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bebhionnDescriptor);
+    }, bebhionnDescriptor.properties.worldFrame),
+  object("bergelmir", "Bergelmir", "satellite", "#a0a0a0", 9.58,
+    "Explore Bergelmir, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bergelmirDescriptor);
+    }, bergelmirDescriptor.properties.worldFrame),
+  object("bestla", "Bestla", "satellite", "#a0a0a0", 9.58,
+    "Explore Bestla, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bestlaDescriptor);
+    }, bestlaDescriptor.properties.worldFrame),
+  object("fornjot", "Fornjot", "satellite", "#a0a0a0", 9.58,
+    "Explore Fornjot, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(fornjotDescriptor);
+    }, fornjotDescriptor.properties.worldFrame),
+  object("hati", "Hati", "satellite", "#a0a0a0", 9.58,
+    "Explore Hati, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hatiDescriptor);
+    }, hatiDescriptor.properties.worldFrame),
+  object("hyrrokkin", "Hyrrokkin", "satellite", "#a0a0a0", 9.58,
+    "Explore Hyrrokkin, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hyrrokkinDescriptor);
+    }, hyrrokkinDescriptor.properties.worldFrame),
+  object("loge", "Loge", "satellite", "#a0a0a0", 9.58,
+    "Explore Loge, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(logeDescriptor);
+    }, logeDescriptor.properties.worldFrame),
+  object("skoll", "Skoll", "satellite", "#a0a0a0", 9.58,
+    "Explore Skoll, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(skollDescriptor);
+    }, skollDescriptor.properties.worldFrame),
+  object("greip", "Greip", "satellite", "#a0a0a0", 9.58,
+    "Explore Greip, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(greipDescriptor);
+    }, greipDescriptor.properties.worldFrame),
+  object("tarqeq", "Tarqeq", "satellite", "#a0a0a0", 9.58,
+    "Explore Tarqeq, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tarqeqDescriptor);
+    }, tarqeqDescriptor.properties.worldFrame),
+
   object("albiorix", "Albiorix", "satellite", "#a0a0a0", 9.58,
     "Explore Albiorix, a moon of Saturn, through its lightcurve-constrained shape approximation.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

@@ -12,7 +12,10 @@ overwrite them with the upstream single-file layout.
 The generators still acquire scientific sources and emit the same numerical
 records. Horizons fixtures are separated into planetary and moon/small-body
 sections; satellite elements are separated by parent system. Their writer
-enforces the 600-line limit before emitting source.
+enforces the 600-line limit before emitting source. Asteroid fixtures use bounded
+record sections behind the same `ASTEROID_FIXTURES` export. Run
+`node tools/generate-asteroids.mjs --format-only` from this package to repartition
+the retained records without downloading or changing their source values.
 
 `node tools/sync-upstream.mjs` from the root refreshes mirrored astronomy files
 and scientific catalogues. It does not replace the locally maintained catalog

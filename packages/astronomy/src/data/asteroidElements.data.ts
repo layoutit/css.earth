@@ -557,5 +557,25 @@ export const ASTEROID_ELEMENTS = {
   "asteroid-1999-fr33": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2780000%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 445291441.3718939, "eccentricity": 0.08327552386420739, "inclinationRad": 0.24391930069427661, "ascendingNodeRad": 0.14901115556846806, "argumentOfPeriapsisRad": 5.60582781964941, "meanAnomalyAtEpochRad": 6.137792130324953, "meanMotionRadPerDay": 0.003349677820516016 }
+  },
+  "patroclus": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27920000617%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 778830941.4907451, "eccentricity": 0.1389112589266669, "inclinationRad": 0.732645209429436, "ascendingNodeRad": 0.403596824707011, "argumentOfPeriapsisRad": 5.820005685036567, "meanAnomalyAtEpochRad": 1.1480684298769326, "meanMotionRadPerDay": 0.0014481207088576716 }
+  },
+  "polymele": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2715094%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 776708375.6720318, "eccentricity": 0.09580588075090198, "inclinationRad": 0.5789582782166572, "ascendingNodeRad": 0.32141970802197833, "argumentOfPeriapsisRad": 0.6962365935781343, "meanAnomalyAtEpochRad": 2.628400525724908, "meanMotionRadPerDay": 0.0014540608350549365 }
+  },
+  "leucus": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2711351%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 794773581.1030773, "eccentricity": 0.06485323673339742, "inclinationRad": 0.39046438523598354, "ascendingNodeRad": 5.762656136766476, "argumentOfPeriapsisRad": 1.4142767581827398, "meanAnomalyAtEpochRad": 2.5503321781818262, "meanMotionRadPerDay": 0.0014047674188597259 }
+  },
+  "orus": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2721900%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 766415774.9849339, "eccentricity": 0.03662798378620979, "inclinationRad": 0.40498746803202923, "ascendingNodeRad": 5.9081237152035015, "argumentOfPeriapsisRad": 1.7630986548668455, "meanAnomalyAtEpochRad": 1.8209930120547655, "meanMotionRadPerDay": 0.0014834499791783345 }
+  },
+  "eurybates": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273548%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 780576680.2734487, "eccentricity": 0.09048603488605228, "inclinationRad": 0.5194999037647426, "ascendingNodeRad": 0.19565453438100677, "argumentOfPeriapsisRad": 1.0861497879454636, "meanAnomalyAtEpochRad": 2.3186523448507237, "meanMotionRadPerDay": 0.0014432654014682044 }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

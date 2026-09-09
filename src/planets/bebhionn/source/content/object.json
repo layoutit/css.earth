@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "bebhionn",
+  "displayName": "Bebhionn",
+  "panel": {
+    "introduction": "Bebhionn’s two-peaked light curve constrains a minimum equatorial ratio of 1.41:1. This ellipsoid illustrates that elongation with assumed depth and orientation. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Diameter estimate",
+        "value": "6 (+1.5/−1) km"
+      },
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Saturn"
+      },
+      {
+        "id": "shape",
+        "label": "Minimum equatorial ratio",
+        "value": "1.41:1 · uniform-reflectivity model"
+      },
+      {
+        "id": "rotation",
+        "label": "Observed rotation period",
+        "value": "16.33 ± 0.03 h"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "2004"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "scale-assumption",
+        "label": "Size assumption",
+        "value": "Geometric albedo 0.06; brightness-based estimate"
+      },
+      {
+        "id": "orientation-limit",
+        "label": "Orientation",
+        "value": "Unknown physical pole and phase; illustrative display"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.41:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+        "title": "Approximate ellipsoid adopting minimum equatorial ratio 1.41:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/bebhionn/bebhionn-model-thumbnail.webp",
+        "surface": "bebhionn-model-surface@2x.webp",
+        "poles": "bebhionn-model-poles@2x.webp",
+        "source": {
+          "id": "lightcurve-approximation",
+          "path": "../manifest.json",
+          "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Denk et al. (2018)",
+      "role": "surface",
+      "description": "Lightcurve shape constraints",
+      "href": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
+    },
+    {
+      "label": "Tilmann Denk",
+      "role": "facts",
+      "description": "Physical estimates and Cassini observations",
+      "href": "https://tilmanndenk.de/outersaturnianmoons/bebhionn/"
+    },
+    {
+      "label": "NASA PDS",
+      "role": "observations",
+      "description": "Cassini ISS archive",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://tilmanndenk.de/outersaturnianmoons/bebhionn/",
+      "credit": "Tilmann Denk"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Denk et al. (2018); Denk and Mottola (2019)"
+    }
+  }
+}

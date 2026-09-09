@@ -1,0 +1,212 @@
+[
+  {
+    "ok": true,
+    "reports": [
+      {
+        "id": "bennu",
+        "case": "initial-shell",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "case": "desktop",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "case": "mobile",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "case": "pre-ready-hidden-motion-off",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "case": "pre-ready-visible-motion-off",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "case": "pre-ready-hidden-motion-on",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "case": "pre-ready-visible-motion-on",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "case": "dpr-1",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "case": "dpr-2",
+        "skipped": true
+      },
+      {
+        "id": "bennu",
+        "viewport": "lens-race",
+        "lens": "normal",
+        "slowDecodeCount": 1
+      },
+      {
+        "id": "bennu",
+        "viewport": "lens-reacquire",
+        "lens": "spectral"
+      },
+      {
+        "id": "bennu",
+        "viewport": "lens-rejection-retry",
+        "lens": "spectral"
+      },
+      {
+        "id": "bennu",
+        "viewport": "lens-destroy"
+      }
+    ]
+  },
+  {
+    "ok": true,
+    "reports": [
+      {
+        "id": "eros",
+        "case": "initial-shell",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "case": "desktop",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "case": "mobile",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "case": "pre-ready-hidden-motion-off",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "case": "pre-ready-visible-motion-off",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "case": "pre-ready-hidden-motion-on",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "case": "pre-ready-visible-motion-on",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "case": "dpr-1",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "case": "dpr-2",
+        "skipped": true
+      },
+      {
+        "id": "eros",
+        "viewport": "lens-race",
+        "lens": "normal",
+        "slowDecodeCount": 1
+      },
+      {
+        "id": "eros",
+        "viewport": "lens-reacquire",
+        "lens": "infrared"
+      },
+      {
+        "id": "eros",
+        "viewport": "lens-rejection-retry",
+        "lens": "infrared"
+      },
+      {
+        "id": "eros",
+        "viewport": "lens-destroy"
+      }
+    ]
+  },
+  {
+    "ok": true,
+    "reports": [
+      {
+        "id": "vesta",
+        "case": "initial-shell",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "case": "desktop",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "case": "mobile",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "case": "pre-ready-hidden-motion-off",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "case": "pre-ready-visible-motion-off",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "case": "pre-ready-hidden-motion-on",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "case": "pre-ready-visible-motion-on",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "case": "dpr-1",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "case": "dpr-2",
+        "skipped": true
+      },
+      {
+        "id": "vesta",
+        "viewport": "lens-race",
+        "lens": "normal",
+        "slowDecodeCount": 1
+      },
+      {
+        "id": "vesta",
+        "viewport": "lens-reacquire",
+        "lens": "ratios"
+      },
+      {
+        "id": "vesta",
+        "viewport": "lens-rejection-retry",
+        "lens": "ratios"
+      },
+      {
+        "id": "vesta",
+        "viewport": "lens-destroy"
+      }
+    ]
+  }
+]

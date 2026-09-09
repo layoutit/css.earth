@@ -1,6 +1,8 @@
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mjs';
+import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable,parsePdsRadiusTable} from './obj-shape.mjs';
+import {parsePdsRadialTable} from './pds-radial-table.mjs';
+import {readFitsPrimary} from '../static-surface/fits-map.mjs';
 
 const rad = Math.PI / 180;
 const dot = (a,b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
@@ -15,6 +17,11 @@ const vector = (latitude, westLongitude) => [Math.cos(latitude*rad)*Math.cos(-we
  * Raw BYTE detector DN is opt-in and normalized to 0..1 for display only;
  * that path does not imply radiometric calibration. */
 export function decodeCalibratedCamera(bytes, encoding = 'calibrated') {
+  if(encoding==='fits-ssi-iof'){
+    const fits=readFitsPrimary(bytes);
+    if(fits.bitpix!==-32||fits.width!==800||fits.height!==800||fits.scale!==1||fits.zero!==0||fits.nextOffset!==bytes.length)throw new Error('Unsupported calibrated SSI FITS layout.');
+    return {data:fits.values,width:fits.width,height:fits.height,offset:fits.dataOffset,encoding,allowZero:true};
+  }
   const text = bytes.subarray(0,4096).toString('ascii');
   const field = name => text.match(new RegExp(`(?:^|\\s)${name}=(?:'([^']*)'|([^\\s]+))`))?.slice(1).find(v=>v!==undefined);
   const n = name => Number(field(name));
@@ -46,7 +53,10 @@ export function controlledShapeCamera(frame) {
   const east=[Math.sin(frame.observerWestLongitude*rad),Math.cos(frame.observerWestLongitude*rad),0];
   const north=cross(observer,east),a=frame.northAzimuthDegrees*rad,focal=1/Math.tan(frame.pixelAngleMicroradians*1e-6);
   const position=observer.map(v=>v*frame.rangeKm*1000);
-  return {observer,sun,position,project(point){
+  return {observer,sun,position,ray(x,y){
+    const dx=(x-frame.center[0])/focal,dy=(y-frame.center[1])/focal;
+    return unit(observer.map((v,k)=>-v+east[k]*(dx*Math.cos(a)+dy*Math.sin(a))+north[k]*(dx*Math.sin(a)-dy*Math.cos(a))));
+  },project(point){
     const depth=frame.rangeKm*1000-dot(point,observer);
     if(depth<=0)return null;
     const x=dot(point,east),y=dot(point,north);
@@ -55,13 +65,32 @@ export function controlledShapeCamera(frame) {
   }};
 }
 
+/** Thomas releases camera controls alongside each shape and mosaic. Read that
+ * body frame directly, avoiding the earlier frame in individual image labels.
+ * SSI's pinned instrument kernel owns focal length and physical pixel pitch. */
+export async function resolveCatalogCamera(sourceDirectory,frame){
+  if(!frame.cameraCatalog)return frame;
+  const c=frame.cameraCatalog;
+  if(!['east','west'].includes(c.longitudeDirection)||c.pixelOrigin!=='one-based')throw new Error('Unsupported camera catalog coordinates.');
+  const rows=(await readFile(resolve(sourceDirectory,c.path),'utf8')).trim().split(/\r?\n/).map(line=>line.trim().split(/\s+/).map(Number));
+  const matches=rows.filter(row=>row[0]===c.imageNumber);
+  if(matches.length!==1||matches[0].length!==9||!matches[0].every(Number.isFinite))throw new Error('Camera catalog observation is missing or ambiguous.');
+  const [,lat,lon,slat,slon,range,az,x,y]=matches[0],sign=c.longitudeDirection==='east'?-1:1;
+  const kernel=await readFile(resolve(sourceDirectory,c.instrumentPath),'utf8');
+  const number=name=>Number(kernel.match(new RegExp('^\\s*INS-77036_'+name+'\\s*=\\s*\\(\\s*([0-9.dDeE+-]+)\\s*\\)','m'))?.[1].replace(/[dD]/,'e'));
+  const focal=number('FOCAL_LENGTH'),pitch=number('PIXEL_SIZE');
+  if(!(focal>0)||!(pitch>0)||!(pitch/focal<.001))throw new Error('SSI instrument focal scale is unavailable.');
+  return {...frame,observerLatitude:lat,observerWestLongitude:sign*lon,sunLatitude:slat,sunWestLongitude:sign*slon,
+    rangeKm:range,northAzimuthDegrees:az,center:[x-1,y-1],pixelAngleMicroradians:Math.atan(pitch/focal)*1e6};
+}
+
 // Only edge-connected low-signal sky is withheld. Isolated dark crater floors
 // remain observed, even when their intensity is below this authored threshold.
 function maskBackground(image,threshold){
   if(threshold===undefined)return;
   if(!Number.isFinite(threshold)||threshold<0)throw new Error('Invalid source background threshold.');
-  const mask=new Uint8Array(image.data.length),queue=new Int32Array(mask.length);let end=0;
-  const add=i=>{if(!mask[i]&&(!Number.isFinite(image.data[i])||image.data[i]<=threshold)){mask[i]=1;queue[end++]=i;}};
+  const mask=image.missing??new Uint8Array(image.data.length),seen=new Uint8Array(mask.length),queue=new Int32Array(mask.length);let end=0;
+  const add=i=>{if(!seen[i]&&(mask[i]||!Number.isFinite(image.data[i])||image.data[i]<=threshold)){seen[i]=1;mask[i]=1;queue[end++]=i;}};
   for(let x=0;x<image.width;x++){add(x);add((image.height-1)*image.width+x);}
   for(let y=0;y<image.height;y++){add(y*image.width);add(y*image.width+image.width-1);}
   for(let j=0;j<end;j++){const i=queue[j],x=i%image.width;
@@ -89,7 +118,7 @@ function bilinear(image,x,y){
   const ix=Math.floor(x),iy=Math.floor(y),u=x-ix,v=y-iy,i=iy*image.width+ix;
   if(image.missing && [i,i+1,i+image.width,i+image.width+1].some(j=>image.missing[j]))return null;
   const p=[image.data[i],image.data[i+1],image.data[i+image.width],image.data[i+image.width+1]];
-  if(p.some(n=>!Number.isFinite(n)||n<=0||n>1e10))return null;
+  if(p.some(n=>!Number.isFinite(n)||n<0||(!image.allowZero&&n===0)||n>1e10))return null;
   return (p[0]*(1-u)+p[1]*u)*(1-v)+(p[2]*(1-u)+p[3]*u)*v;
 }
 
@@ -109,19 +138,84 @@ function smoothNormals(mesh){
   };
 }
 
+/** The latitude-first Thomas tables use the same released regular-grid
+ * connectivity as the existing radius-table mesh reader. Validate the source
+ * grid before changing column order; this does not change the display mesh. */
+export async function loadCameraShape(sourceDirectory,shape){
+  if(shape.format==='pds-radial-table'){
+    const text=await readFile(resolve(sourceDirectory,shape.path),'utf8'),grid=parsePdsRadialTable(text,shape.grid);
+    const step=shape.grid.latitudeStepDegrees,columns=shape.grid.columns??['latitude','longitude','radius'];
+    if(step!==shape.grid.longitudeStepDegrees)throw new Error('Camera source mesh requires equal angular steps.');
+    const reordered=text.trim().split(/\r?\n/).map(line=>{const row=line.trim().split(/\s+/);return ['longitude','latitude','radius'].map(name=>row[columns.indexOf(name)]).join(' ');}).join('\n');
+    return parsePdsRadiusTable(reordered,{stepDegrees:step,longitudeDirection:shape.grid.longitudeDirection+'-positive',metersPerUnit:shape.grid.metersPerUnit,
+      expectedVertices:(grid.width-1)*(grid.height-2)+2,expectedFaces:2*(grid.width-1)*(grid.height-2)});
+  }
+  const load=shape.format==='stl'?loadStlShape:shape.format==='pds-radius-table'?loadPdsRadiusTable:shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
+  return load(resolve(sourceDirectory,shape.path),shape.grid);
+}
+
+/** The SBN bad-data tables preserve the original SSI telemetry quality blocks.
+ * Their one-based inclusive line/sample ranges refer to the unchanged detector
+ * pixels, also retained by the calibrated FITS products. All five bad-data codes
+ * are withheld; raw 255 saturation and ISIS special values are withheld too. */
+export function applySsiQuality(image,rawBytes,badData,profile){
+  const raw=readFitsPrimary(rawBytes);
+  if(raw.bitpix!==8||raw.width!==image.width||raw.height!==image.height||raw.scale!==1||raw.zero!==0||raw.nextOffset!==rawBytes.length||
+      !/^[a-z]\d{4}$/.test(profile.imageId))throw new Error('SSI quality is not bound to a supported detector layout.');
+  const missing=new Uint8Array(image.data.length);let records=0;
+  for(const row of badData.trim().split(/\r?\n/)){
+    const [id,...fields]=row.trim().split(/\s+/),[code,y0,y1,x0,x1]=fields.map(Number);
+    if(fields.length!==5||![code,y0,y1,x0,x1].every(Number.isInteger)||code<3||code>7||x0<1||y0<1||x1<x0||y1<y0||x1>800||y1>800)throw new Error('Unsupported SSI bad-data record.');
+    if(id!==profile.imageId)continue;
+    records++;
+    for(let y=y0-1;y<y1;y++)missing.fill(1,y*800+x0-1,y*800+x1);
+  }
+  if(!records)throw new Error('No archived quality records for this SSI observation.');
+  const badBlockPixels=missing.reduce((a,b)=>a+b,0);let saturatedPixels=0,specialPixels=0;
+  for(let i=0;i<missing.length;i++){
+    if(raw.values[i]===255){missing[i]=1;saturatedPixels++;}
+    if(!Number.isFinite(image.data[i])||image.data[i]<0||image.data[i]>1e10){missing[i]=1;specialPixels++;}
+  }
+  image.missing=missing;
+  image.quality={records,badBlockPixels,saturatedPixels,specialPixels,withheldPixels:missing.reduce((a,b)=>a+b,0)};
+}
+
+export async function loadShapeCameraImage(sourceDirectory,frame){
+  const image=decodeCalibratedCamera(await readFile(resolve(sourceDirectory,frame.path)),frame.encoding);
+  if(frame.encoding==='fits-ssi-iof'){
+    const q=frame.quality;
+    if(!q)throw new Error('Calibrated SSI requires its archived detector-quality companions.');
+    const rawLabel=await readFile(resolve(sourceDirectory,q.rawLabelPath),'utf8'),label=await readFile(resolve(sourceDirectory,frame.labelPath),'utf8');
+    const field=name=>rawLabel.match(new RegExp('^'+name+'\\s*=\\s*"?([^"\\r\\n]+)','m'))?.[1].trim();
+    if(field('TARGET_NAME')!==q.target||field('START_TIME')!==q.startTime||field('FILTER_NAME')!==q.filter||
+        !label.includes('>'+q.startTime+'<')||!label.includes('>'+q.filter+'<')||
+        !rawLabel.includes('"'+q.imageId.toUpperCase()+'.FIT"')||
+        Number(field('SPACECRAFT_CLOCK_START_COUNT')?.replace('.',''))!==Number(frame.path.match(/(\d+)rcal_/i)?.[1]))throw new Error('SSI quality companions identify a different observation.');
+    applySsiQuality(image,await readFile(resolve(sourceDirectory,q.rawPath)),await readFile(resolve(sourceDirectory,q.badDataPath),'utf8'),q);
+  }
+  if(frame.backgroundOffset!==undefined){
+    if(!Number.isFinite(frame.backgroundOffset))throw new Error('Invalid measured camera background offset.');
+    for(let i=0;i<image.data.length;i++)image.data[i]-=frame.backgroundOffset;
+  }
+  return image;
+}
+
 /** Project source observations using their source mesh and camera solution.
  * All ray intersections, illumination normalization and level matching happen
  * here at preparation time. Unobserved/unstable pixels remain explicit gaps. */
 export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,width,height,shape){
   const p=recipe.photometry;
+  const observed=p?.model==='observed';
   if(!recipe.frames?.length||!shape||!(p?.weight>=0&&p.weight<=1)||!(p.maximumGain>=1)||
       !(p.displayMaximum>0)||!(p.gamma>0)||!(p.minimumLevel>0&&p.minimumLevel<=1&&p.maximumLevel>=1)||
       ![p.maximumIncidenceDegrees,p.maximumEmissionDegrees].every(v=>v>0&&v<90))throw new Error('Invalid shape-camera mosaic profile.');
   const paths=new Set(entries.map(e=>e.path));
-  for(const f of recipe.frames)if(!paths.has(f.path)||!paths.has(f.labelPath))throw new Error(`Unpinned camera input: ${f.id}`);
-  if(paths.size!==new Set(recipe.frames.flatMap(f=>[f.path,f.labelPath])).size)throw new Error('Unconsumed camera input.');
-  const load=shape.format==='stl'?loadStlShape:shape.format==='pds-radius-table'?loadPdsRadiusTable:shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
-  const mesh=await load(resolve(sourceDirectory,shape.path),shape.grid),normalAt=smoothNormals(mesh);
+  const framePaths=f=>[f.path,f.labelPath,...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
+  for(const f of recipe.frames)if(framePaths(f).some(path=>!paths.has(path)))throw new Error(`Unpinned camera input: ${f.id}`);
+  if(paths.size!==new Set(recipe.frames.flatMap(framePaths)).size)throw new Error('Unconsumed camera input.');
+  const frames=await Promise.all(recipe.frames.map(frame=>resolveCatalogCamera(sourceDirectory,frame)));
+  if(p.model!==undefined&&(!observed||p.maximumGain!==1||p.minimumLevel!==1||p.maximumLevel!==1))throw new Error('Observed camera brightness must not be photometrically normalized.');
+  const mesh=await loadCameraShape(sourceDirectory,shape),normalAt=smoothNormals(mesh);
   const points=new Float64Array(width*height*3),normals=new Float32Array(points.length),valid=new Uint8Array(width*height);
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){
     const lon=(x+.5)/width*360,lat=90-(y+.5)/height*180,h=mesh.hit(lon,lat);if(!h)continue;
@@ -131,12 +225,8 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
   const values=new Float32Array(width*height),missing=new Uint8Array(values.length).fill(1),statistics=[];
   const minI=Math.cos(p.maximumIncidenceDegrees*rad),minE=Math.cos(p.maximumEmissionDegrees*rad),epsilon=.01;
   // Coarse coverage first; finer images replace only their reliable interior.
-  for(const frame of [...recipe.frames].sort((a,b)=>b.rangeKm-a.rangeKm)){
-    const image=decodeCalibratedCamera(await readFile(resolve(sourceDirectory,frame.path)),frame.encoding),camera=controlledShapeCamera(frame);
-    if(frame.backgroundOffset!==undefined){
-      if(!Number.isFinite(frame.backgroundOffset))throw new Error('Invalid measured camera background offset.');
-      for(let i=0;i<image.data.length;i++)image.data[i]-=frame.backgroundOffset;
-    }
+  for(const frame of frames.sort((a,b)=>b.rangeKm-a.rangeKm)){
+    const image=await loadShapeCameraImage(sourceDirectory,frame),camera=controlledShapeCamera(frame);
     maskBackground(image,frame.backgroundMaximum??p.backgroundMaximum);
     insetCoverage(image,frame.coverageInsetPixels);
     const entry=entries.find(e=>e.path===frame.path);
@@ -147,7 +237,7 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
       const point=points.subarray(i*3,i*3+3),n=normals.subarray(i*3,i*3+3),direction=unit(sub(camera.position,point));
       const mu=dot(n,direction),mu0=dot(n,camera.sun);if(mu<minE||mu0<minI)continue;
       const xy=camera.project(point),source=xy&&bilinear(image,...xy);if(source===null||source===undefined)continue;
-      const gain=1/(2*p.weight*mu0/(mu0+mu)+(1-p.weight)*mu0);if(gain>p.maximumGain)continue;
+      const gain=observed?1:1/(2*p.weight*mu0/(mu0+mu)+(1-p.weight)*mu0);if(gain>p.maximumGain)continue;
       const origin=point.map((v,k)=>v+n[k]*epsilon);
       // Camera occlusion and terrain shadows cannot be inverted into imagery.
       if(mesh.intersect(origin,direction,Math.hypot(...sub(camera.position,point)))||mesh.intersect(origin,camera.sun))continue;
@@ -161,7 +251,7 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
     for(let j=0;j<samples.length;j+=3){const [i,value,weight]=samples.slice(j,j+3);
       values[i]=missing[i]?value*level:values[i]*(1-weight)+value*level*weight;missing[i]=0;}
     statistics.push({id:frame.id,sourceWidth:image.width,sourceHeight:image.height,rasterOffset:image.offset,
-      encoding:image.encoding,resolutionMeters:frame.rangeKm*frame.pixelAngleMicroradians*.001,correctedPixels:samples.length/3,level,overlapSamples:ratios.length});
+      encoding:image.encoding,...(image.quality?{quality:image.quality}:{}),resolutionMeters:frame.rangeKm*frame.pixelAngleMicroradians*.001,correctedPixels:samples.length/3,level,overlapSamples:ratios.length});
   }
   const rgb=Buffer.alloc(values.length*3);
   for(let i=0;i<values.length;i++){const v=Math.round(255*Math.min(1,values[i]/p.displayMaximum)**(1/p.gamma));rgb.fill(v,i*3,i*3+3);}

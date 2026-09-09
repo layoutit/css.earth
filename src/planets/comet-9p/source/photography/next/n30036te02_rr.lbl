@@ -1,0 +1,219 @@
+PDS_VERSION_ID       = PDS3                                                   
+/*** FILE FORMAT ***/                                                         
+RECORD_TYPE          = FIXED_LENGTH                                           
+RECORD_BYTES         = 2880                                                   
+FILE_RECORDS         = 4745                                                   
+/*** POINTERS TO OBJECTS IN FILE ***/                                         
+^HEADER               = ( "N30036TE02_RR.FIT",      1)                        
+^IMAGE                = ( "N30036TE02_RR.FIT",      7)                        
+^QULMAP_HEADER        = ( "N30036TE02_RR.FIT",   1464)                        
+^QULMAP_IMAGE         = ( "N30036TE02_RR.FIT",   1465)                        
+^UNCMAP_HEADER        = ( "N30036TE02_RR.FIT",   1830)                        
+^UNCMAP_IMAGE         = ( "N30036TE02_RR.FIT",   1831)                        
+^SNRMAP_HEADER        = ( "N30036TE02_RR.FIT",   3288)                        
+^SNRMAP_IMAGE         = ( "N30036TE02_RR.FIT",   3289)                        
+/*** GENERAL DATA DESCRIPTION PARAMETERS ***/                                 
+DATA_SET_ID          = "SDU-C/CAL-NAVCAM-3-NEXT-TEMPEL1-V1.0"                 
+MISSION_NAME         = "NEXT"                                                 
+INSTRUMENT_HOST_NAME = "STARDUST"                                             
+INSTRUMENT_NAME      = "NAVIGATION CAMERA"                                    
+INSTRUMENT_ID        = "NAVCAM"                                               
+PRODUCT_ID           = "N30036TE02.IMG"                                       
+PRODUCT_TYPE         = "RDR"                                                  
+MISSION_PHASE_NAME   = "TEMPEL 1 ENCOUNTER"                                   
+TARGET_NAME          = "9P/TEMPEL 1 (1867 G1)"                                
+FRAME_SEQUENCE_NUMBER = 30036                                                 
+/*** TIME PARAMETERS ***/                                                     
+PRODUCT_CREATION_TIME = 2012-01-10T03:33:55                                   
+START_TIME           = 2011-02-15T04:39:02.906                                
+STOP_TIME            = 2011-02-15T04:39:02.911                                
+SPACECRAFT_CLOCK_START_COUNT = "0982212356:016"                               
+SPACECRAFT_CLOCK_STOP_COUNT = "0982212356:017"                                
+TIME_FROM_CLOSEST_APPROACH =   "-0.00011 <DAYS>"                              
+/*** CAMERA RELATED PARAMETERS ***/                                           
+INSTRUMENT_MODE_ID   = "ENCOUNTER"                                            
+EXPOSURE_DURATION    =  5.00 <MILLISECOND>                                    
+LIGHT_FLOOD_STATE_FLAG = "OFF"                                                
+FILTER_NUMBER        = "0"                                                    
+FILTER_NAME          = "OPNAV"                                                
+CENTER_FILTER_WAVELENGTH =  698.8 <NANOMETER>                                 
+/*** SCAN MIRROR ANGLE AND RATE ***/                                          
+SCAN_MIRROR_ANGLE    = 60.43945 <DEGREE>                                      
+SCAN_MIRROR_RATE     = 0.00000 <DEGREE PER SECOND>                            
+/*** TEMPERATURE PARAMETERS IN <K> ***/                                       
+FOCAL_PLANE_TEMPERATURE = 246.89 <K>                                          
+SCAN_MIRROR_TEMPERATURE = 279.04 <K>                                          
+NOTE = "                                                                      
+     Earth Mean Equator and Vernal Equinox of J2000 is the inertial           
+     reference system used to specify observational geometry. Geometric       
+     parameters are based on best available data at time of product           
+     creation. Refer to the SPICE archive for the most current                
+     observational geometry data."                                            
+/*** LINE-OF-SITE ON CELESTIAL SPHERE: ANGLES IN <DEGREE> ***/                
+RIGHT_ASCENSION      =          264.3074 <DEGREE>                             
+DECLINATION          =           -2.1556 <DEGREE>                             
+TWIST_ANGLE          =          193.3445 <DEGREE>                             
+/*** EMEJ2000 Frame to S/C Frame Quaternion, QA,QX,QY,QZ ***/                 
+/*** - see /DOCUMENT/QUATERNION_DESC.ASC for more detail ***/                 
+QUATERNION           = (     0.38371,   -0.10538,   -0.55028,   -0.73407 )    
+QUATERNION_DESC      = "QUATERNION_DESC.ASC"                                  
+/*** SMEAR MAGNITUDE AND DIRECTION ***/                                       
+SMEAR_MAGNITUDE      =          0.009 <PIXEL>                                 
+SMEAR_AZIMUTH        =          332.235 <DEGREE>                              
+/*** TARGET AND SUN POSITIONS <KM> AND VELOCITIES <KM/S> ***/                 
+SC_TARGET_POSITION_VECTOR = ( -22.2, -208.2, -7.5 )                           
+SC_TARGET_VELOCITY_VECTOR = ( 7.456765, 4.874603, -6.308984 )                 
+TARGET_CENTER_DISTANCE = 209.514510237358                                     
+SC_SUN_POSITION_VECTOR = (  2953903.7, 206047699, 105614448.7 )               
+SC_SUN_VELOCITY_VECTOR = (  -21.188889, 6.288532, -0.008035 )                 
+/*** PIXEL SCALES ***/                                                        
+HORIZONTAL_PIXEL_SCALE = 12.5 <METERS PER PIXEL>                              
+VERTICAL_PIXEL_SCALE   = 12.5 <METERS PER PIXEL>                              
+/*** VIEWING AND LIGHTING GEOMETRY (SUN ON TARGET) ***/                       
+PHASE_ANGLE            = 25.591 <DEGREE>                                      
+/*** DESCRIPTION OF OBJECTS CONTAINED IN THE FILE ***/                        
+OBJECT                   = HEADER                                             
+  BYTES                    = 17280                                            
+  HEADER_TYPE              = "FITS"                                           
+  INTERCHANGE_FORMAT       = "BINARY"                                         
+  RECORDS                  = 6                                                
+  DESCRIPTION              = "FITS header for OBJECT                          
+      IMAGE                                                                   
+    FITS format defined in NASA/Science Office Standards Technology 100-1.0"  
+END_OBJECT               = HEADER                                             
+OBJECT                   = IMAGE                                              
+  LINES                    = 1024                                             
+  LINE_SAMPLES             = 1024                                             
+  AXIS_ORDER_TYPE          = "FIRST_INDEX_FASTEST"                            
+  SAMPLE_DISPLAY_DIRECTION = "RIGHT"                                          
+  LINE_DISPLAY_DIRECTION   = "UP"                                             
+  SAMPLE_TYPE              = IEEE_REAL                                        
+  SAMPLE_BITS              = 32                                               
+  DESCRIPTION              = "                                                
+    The IMAGE size reflects the size of the detector, however in some         
+    cases data from only certain sections of the detector were                
+    downlinked. In  these cases the pixels in the image corresponding         
+    to the areas for which data had not been downlinked are filled with       
+    zeroes. WINDOW objects define the areas containing downlinked data.       
+    N.B. If some WINDOW OBJECTs were mistakenly sequenced with a zero size,   
+         the corresponding WINDOW OBJECTs in this file have been left in      
+         this file but disabled by being commented out.                       
+    The raw data were compressed from 12- to 8-bits using                     
+    a lookup table onboard the spacecraft before being stored and             
+    telemetered to the ground."                                               
+END_OBJECT               = IMAGE                                              
+OBJECT                   = QULMAP_HEADER                                      
+  BYTES                    = 2880                                             
+  HEADER_TYPE              = "FITS"                                           
+  INTERCHANGE_FORMAT       = "BINARY"                                         
+  RECORDS                  = 1                                                
+  DESCRIPTION              = "FITS header for OBJECT                          
+      QULMAP_IMAGE                                                            
+    FITS format defined in NASA/Science Office Standards Technology 100-1.0"  
+END_OBJECT               = QULMAP_HEADER                                      
+OBJECT                   = QULMAP_IMAGE                                       
+  LINES                    = 1024                                             
+  LINE_SAMPLES             = 1024                                             
+  AXIS_ORDER_TYPE          = "FIRST_INDEX_FASTEST"                            
+  SAMPLE_DISPLAY_DIRECTION = "RIGHT"                                          
+  LINE_DISPLAY_DIRECTION   = "UP"                                             
+  SAMPLE_TYPE              = MSB_INTEGER                                      
+  SAMPLE_BITS              = 8                                                
+  OFFSET                   = 0                                                
+  SCALING_FACTOR           = 1                                                
+  DESCRIPTION              = "                                                
+     This IMAGE extension is a Quality map; each quality map pixel            
+     corresponds to the image pixel in the same position in the Primary HDU   
+     image.  The normal value for a quality map pixel is zero, indicating     
+     the corresponding pixel in the HDU image could be properly calibrated;   
+     a non-zero value indicates the HDU image pixel was not calibrated.       
+     Each pixel comprises several bits.  A set bit (non-zero) indicates       
+     either why calibration for the corresponding pixel was not performed     
+     (e.g. pixel is missing), and/or any alternate processing performed on    
+     the pixel (e.g. despiking).                                              
+     The following table lists the meaning of each bit                        
+       Hex   Dec  Description                                                 
+       0x01    1  Missing (outside any window(s))                             
+       0x02    2  Known bad pixel (in a window)                               
+       0x04    4  Missing (=Zero and in window and not Bad)                   
+       0x08    8  Saturated                                                   
+       0x10   16  Adjacent to saturated pixel                                 
+       0x20   32  Bad or Missing pixel value interpolated                     
+       0x40   64  Bad or Missing pixel value despiked                         
+    "                                                                         
+END_OBJECT               = QULMAP_IMAGE                                       
+OBJECT                   = UNCMAP_HEADER                                      
+  BYTES                    = 2880                                             
+  HEADER_TYPE              = "FITS"                                           
+  INTERCHANGE_FORMAT       = "BINARY"                                         
+  RECORDS                  = 1                                                
+  DESCRIPTION              = "FITS header for OBJECT                          
+      UNCMAP_IMAGE                                                            
+    FITS format defined in NASA/Science Office Standards Technology 100-1.0"  
+END_OBJECT               = UNCMAP_HEADER                                      
+OBJECT                   = UNCMAP_IMAGE                                       
+  LINES                    = 1024                                             
+  LINE_SAMPLES             = 1024                                             
+  AXIS_ORDER_TYPE          = "FIRST_INDEX_FASTEST"                            
+  SAMPLE_DISPLAY_DIRECTION = "RIGHT"                                          
+  LINE_DISPLAY_DIRECTION   = "UP"                                             
+  SAMPLE_TYPE              = IEEE_REAL                                        
+  SAMPLE_BITS              = 32                                               
+  OFFSET                   = 0                                                
+  SCALING_FACTOR           = 1                                                
+  DESCRIPTION              = "                                                
+     This IMAGE extension is an uncertainty map; each uncertainty             
+     map pixel corresponds to the image pixel in the same position in         
+     the Primary HDU image.  The Uncertainty map is calculated as the         
+     RSS of the uncertainties from these decalibration steps:                 
+DARKUNCR=    0.960805154666652 / [DN] Uncertainty from DARK step              
+RATEMAXU=    2.123512379460819 / [PERCENT] Max uncertainty from RATE step     
+BIASUNCR=                  0.0 / [DN] Uncertainty from BIAS step              
+ABSCUNCR=                  0.0 / [PERCENT] Uncertainty from ABSC step         
+     ***N.B. When the uncertainty is a Max uncertainty (keyword *MAXU),       
+             then the uncertainty from that step is an image map; when        
+             it is an Uncertainty (keyword *UNCR), then the uncertainty       
+             from that step is a single value for the entire image.           
+     ***N.B. The quality map extension (EXTNAME=QUALITY_MAP) applies to       
+             this extension as it does to the image in the PDU                
+     For more information about decalibration steps, see the Primary          
+     Data Unit header and the calibration documentation for these data."      
+END_OBJECT               = UNCMAP_IMAGE                                       
+OBJECT                   = SNRMAP_HEADER                                      
+  BYTES                    = 2880                                             
+  HEADER_TYPE              = "FITS"                                           
+  INTERCHANGE_FORMAT       = "BINARY"                                         
+  RECORDS                  = 1                                                
+  DESCRIPTION              = "FITS header for OBJECT                          
+      SNRMAP_IMAGE                                                            
+    FITS format defined in NASA/Science Office Standards Technology 100-1.0"  
+END_OBJECT               = SNRMAP_HEADER                                      
+OBJECT                   = SNRMAP_IMAGE                                       
+  LINES                    = 1024                                             
+  LINE_SAMPLES             = 1024                                             
+  AXIS_ORDER_TYPE          = "FIRST_INDEX_FASTEST"                            
+  SAMPLE_DISPLAY_DIRECTION = "RIGHT"                                          
+  LINE_DISPLAY_DIRECTION   = "UP"                                             
+  SAMPLE_TYPE              = IEEE_REAL                                        
+  SAMPLE_BITS              = 32                                               
+  OFFSET                   = 0                                                
+  SCALING_FACTOR           = 1                                                
+  DESCRIPTION              = "                                                
+     This IMAGE extension is a Signal to Noise Ratio (SNR) map; each SNR      
+     map pixel corresponds to the image pixel in the same position in         
+     the Primary HDU image.  The SNR Map is calculated via the following      
+     steps:                                                                   
+       1) QNOISE = Quantization noise, the greater of                         
+       1.1) (Quant^2)/12; Quant from above, and                               
+       1.2) Bin size (DN) map from decompression, squared and divided by 12   
+       2) RNOISE = (Read noise)^2 = 10.24                                     
+       3) SNOISE = Shot noise map, bias-subtracted DNs over the gain          
+            SNOISE = (RawDNs - BiasDN) / GAIN                                 
+       4) TOTALNOISE = the square root of the sum of items 1, 2 and 3:        
+            TOTALNOISE = SQRT(QNOISE + RNOISE + SNOISE)                       
+       5) SNRMap = (Bias- and Dark-subtracted DNs) / TOTALNOISE               
+     ***N.B. The quality map extension (EXTNAME=QUALITY_MAP) applies to       
+             this extension as it does to the image in the PDU                
+    "                                                                         
+END_OBJECT               = SNRMAP_IMAGE                                       
+END                                                                           

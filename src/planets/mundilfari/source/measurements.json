@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "mundilfari",
+  "targetNaif": "625",
+  "parentNaif": "699",
+  "source": {
+    "url": "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
+    "paper": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+    "table": "Denk et al. (2018), Table 3; author Table 1C notes 1,2,4,9",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "minimumEquatorialAxisRatio": 1.43,
+    "condition": "Uniform-reflectivity reference ellipsoid from published lightcurve amplitude; minimum a/b, not an exact recovered outline.",
+    "adoptedReferenceRadiusKm": 3.5,
+    "diameterEstimate": "7 (+2/−1.25) km",
+    "sizeInterpretation": "Brightness-based size assuming geometric albedo 0.06; uncertainty is source sensitivity, not measured axes.",
+    "observedRotationPeriod": "6.74 ± 0.08 h"
+  },
+  "approximation": {
+    "adoptedEquatorialAxisRatio": 1.43,
+    "semiAxesKm": [
+      4.442479195657919,
+      3.106628808152391,
+      3.106628808152391
+    ],
+    "formula": "b=c=R/cbrt(q); a=q*b; r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+    "assumptions": [
+      "Select published lower-limit equatorial ratio, not a full recovered shape.",
+      "Equal short axes (b=c).",
+      "Reference radius treated as equal-volume display scale only.",
+      "Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
+    ],
+    "qualification": "Single roughly nine-hour Cassini sequence at 36-degree phase; model confidence must remain bounded."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "photometryCheck": {
+    "minimumAmplitudeMagnitude": 0.38834009366265454,
+    "interpretation": "Algebraic consistency only; not a fit to observed Cassini lightcurves or a measured volume."
+  }
+}

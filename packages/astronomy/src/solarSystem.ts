@@ -1,3 +1,5 @@
+import { isSceneSatellite, sceneSatelliteStateKm } from './sceneSatellites.js'
+import { SCENE_SATELLITE_STATES } from './data/sceneSatelliteStates.data.js'
 import {
   BODIES,
   PLANET_IDS,
@@ -161,11 +163,13 @@ export const planetOffsetFromSystemBarycentreKm = (planet: PlanetId, epochJdTt: 
 
 /** Position of a moon relative to its planet's centre, km, ICRF. */
 export const moonPositionRelativeToPlanetKm = (moon: BodyId, epochJdTt: number): Vec3 =>
-  moon === 'moon' ? moonGeocentricKm(epochJdTt) : satellitePositionKm(moon as SatelliteId, epochJdTt)
+  moon === 'moon' ? moonGeocentricKm(epochJdTt) : isSceneSatellite(moon)
+    ? sceneSatelliteStateKm(moon, epochJdTt).positionKm : satellitePositionKm(moon as SatelliteId, epochJdTt)
 
 /** Bound on `|moonPositionRelativeToPlanetKm|`, km. Exact for the Kepler moons; declared for the Moon. */
 export const moonApoapsisKm = (moon: BodyId): number =>
-  moon === 'moon' ? MOON_MAX_GEOCENTRIC_KM : satelliteApoapsisKm(moon as SatelliteId)
+  moon === 'moon' ? MOON_MAX_GEOCENTRIC_KM : isSceneSatellite(moon)
+    ? Math.hypot(...SCENE_SATELLITE_STATES[moon].positionKm) : satelliteApoapsisKm(moon as SatelliteId)
 
 /** Bound on `|planetOffsetFromSystemBarycentreKm|`, km, by the triangle inequality. */
 export const planetOffsetBoundKm = (planet: PlanetId): number => {

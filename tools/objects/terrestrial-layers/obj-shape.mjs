@@ -219,6 +219,7 @@ export function parsePdsVertexFacetShape(text, profile) {
 export async function loadShapeScalarGrid(root, lens, sourceMesh) {
   const load = lens.format === 'stl' ? loadStlShape : lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
   const mesh = sourceMesh ?? await load(resolve(root, lens.path), lens.grid);
+  const field = lens.facetField ? await (await import('./fits-facet-field.mjs')).loadFitsFacetField(root, mesh, lens) : null;
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');
   let validity;
@@ -234,9 +235,10 @@ export async function loadShapeScalarGrid(root, lens, sourceMesh) {
     // a center ray. Withhold ambiguous preview cells; the triangle atlas below
     // samples the actual source surface instead of painting this map on it.
     const h=mesh.hit(x/(width-1)*360,90-y/(height-1)*180, !!lens.surfaceSampling);
-    if(h && (!validity || validity[h.faceId])) data[y*width+x]=h.radius;
+    if(h && (!validity || validity[h.faceId])) data[y*width+x]=field ? field.values[h.faceId] : h.radius;
   }
-  return { ...(lens.surfaceSampling ? createShapeSurfaceSampler(mesh, lens, validity) : {}), sample(longitude,latitude){
+  return { ...(field ? { fieldReport: field.report } : {}),
+    ...(lens.surfaceSampling ? createShapeSurfaceSampler(mesh, lens, validity, field?.values) : {}), sample(longitude,latitude){
     if(!Number.isFinite(longitude)||!Number.isFinite(latitude)||Math.abs(latitude)>90)return null;
     const x=((longitude%360+360)%360)/360*(width-1),y=(90-latitude)/180*(height-1);
     const x0=Math.floor(x),x1=Math.min(width-1,x0+1),y0=Math.floor(y),y1=Math.min(height-1,y0+1);
@@ -250,7 +252,7 @@ export async function loadShapeScalarGrid(root, lens, sourceMesh) {
 
 /** Radius belongs to the full source surface point, not its longitude/latitude
  * ray. The distance bound is authored in metres alongside simplification. */
-export function createShapeSurfaceSampler(mesh, lens, validity) {
+export function createShapeSurfaceSampler(mesh, lens, validity, values) {
   const policy = lens.surfaceSampling;
   if (policy?.method !== 'closest-source-point' || !(policy.maximumDistanceMeters > 0) ||
       !Number.isFinite(policy.maximumDistanceMeters) || typeof mesh.closestPoint !== 'function') {
@@ -258,8 +260,8 @@ export function createShapeSurfaceSampler(mesh, lens, validity) {
   }
   return { samplePoint(point) {
     const hit = mesh.closestPoint(point, policy.maximumDistanceMeters);
-    if (!hit || (validity && !validity[hit.faceId])) return null;
-    return { ...hit, value: hit.radius * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0) };
+    if (!hit || (validity && !validity[hit.faceId]) || (values && !Number.isFinite(values[hit.faceId]))) return null;
+    return { ...hit, value: (values ? values[hit.faceId] : hit.radius) * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0) };
   } };
 }
 

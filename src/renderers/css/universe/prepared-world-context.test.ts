@@ -710,10 +710,10 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   venus.dispatchEvent(new Event('click')); expect(selections).toEqual([]);
   layer.selectObject('venus'); publish(); expect(shown()).toEqual(['Venus']);
   find(root, 'contextBody', 'mercury').dataset.objectHovered = 'true';
-  publish(); expect(shown()).toEqual(['Mercury']);
+  publish(); expect(shown()).toEqual(['Venus']); // The selected label keeps priority over hover.
   delete find(root, 'contextBody', 'mercury').dataset.objectHovered;
   layer.selectObject('sun');
-  publish(9200); expect(shown()).toEqual(['Mercury']);
+  publish(9200); expect(shown()).toEqual(['Venus']); // Keep the previously visible label until there is clearance.
   publish(10000); expect(shown()).toEqual(['Mercury', 'Venus']);
   publish(9200); expect(shown()).toEqual(['Mercury', 'Venus']);
   publish(8800); expect(shown()).toEqual(['Mercury']);
@@ -1183,4 +1183,56 @@ test('flight overlays fade independently while retained body images keep followi
   expect(mercury.orbit.map(node => ({ ...node.style }))).not.toEqual(orbit);
   expect(all(root)).toEqual(nodes);
   layer.destroy();
+});
+
+test('selection emphasis previews immediately without changing the detailed occluder', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const sun = find(root, 'contextGroup', 'sun'), mercury = find(root, 'contextGroup', 'mercury');
+  layer.previewSelection('mercury');
+  expect(mercury.dataset.contextSelected).toBe('true');
+  expect(sun.dataset.contextSelected).toBe('false');
+  layer.previewSelection(null);
+  expect(mercury.dataset.contextSelected).toBe('overview');
+  expect(sun.dataset.contextSelected).toBe('overview');
+  layer.previewSelection();
+  expect(sun.dataset.contextSelected).toBe('true');
+  expect(mercury.dataset.contextSelected).toBe('false');
+  layer.destroy();
+});
+
+test('transports a non-rendered parent coordinate without creating a body or marker', () => {
+  const source = structuredClone(plan(1));
+  const center = { positionM: [50, 0, 0], centerBodyId: 'sun' };
+  const bodies = source.bodies.map((body, index) => index === 0 ? { ...body,
+    orbit: { ...body.orbit!, centerBodyId: 'patroclus', centerPositionM: center.positionM } } : body);
+  const parsed = parsePreparedWorldContext({ ...source, bodies, orbitCenters: { patroclus: center } });
+  expect(parsed.bodies.map(body => body.id)).toEqual(['mercury', 'venus']);
+  expect(parsed.orbitCenters?.patroclus).toEqual(center);
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: parsed, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+  expect(all(layer.root as unknown as FakeElement).some(node => Object.values(node.dataset).includes('patroclus'))).toBe(false);
+  layer.destroy();
+});
+
+test('rejects malformed, detached, duplicate or cyclic non-rendered orbit centres', () => {
+  const source = structuredClone(plan(1));
+  const center = { positionM: [50, 0, 0], centerBodyId: 'sun' };
+  const bodies = source.bodies.map((body, index) => index === 0 ? { ...body,
+    orbit: { ...body.orbit!, centerBodyId: 'patroclus', centerPositionM: center.positionM } } : body);
+  const parse = (orbitCenters: unknown) => parsePreparedWorldContext({ ...source, bodies, orbitCenters });
+  for (const orbitCenters of [
+    {}, { patroclus: { ...center, positionM: [NaN, 0, 0] } },
+    { patroclus: { ...center, positionM: [50, 0] } },
+    { patroclus: { ...center, positionM: [51, 0, 0] } },
+    { patroclus: center, sun: center }, { patroclus: center, mercury: center },
+    { patroclus: { ...center, centerBodyId: 'missing' } },
+    { patroclus: { ...center, centerBodyId: 'mercury' } },
+    { patroclus: { ...center, centerBodyId: 'second' }, second: { ...center, centerBodyId: 'patroclus' } },
+    { patroclus: { ...center, radiusM: 1 } },
+  ]) expect(() => parse(orbitCenters)).toThrow();
 });

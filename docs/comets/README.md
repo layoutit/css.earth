@@ -35,3 +35,7 @@ The [original trial](67P-OSIRIS-TRIAL.md) preserves its separate camera comparis
 
 [67P OSIRIS coverage](67P-OSIRIS-COVERAGE.md) records the four-observation mosaic,
 the MiARD candidate disposition and source-selection evidence.
+
+[67P VIRTIS scientific views](67P-VIRTIS.md) documents the four MTP006 datasets, numerical units, source-to-shape transfer, concise lens factsheets and validation evidence.
+
+[Wild 2, Tempel 1 and Hartley 2 encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the five optional photographic views, selected spacecraft products, camera checks and coverage limits.

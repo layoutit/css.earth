@@ -1,0 +1,54 @@
+PDS_VERSION_ID                     = PDS3                                     
+                                                                              
+RECORD_TYPE                        = "FIXED_LENGTH"                           
+RECORD_BYTES                       = 2880                                     
+FILE_RECORDS                       = 1458                                     
+                                                                              
+^HEADER                            = "flat_v.fit"                             
+^IMAGE                             = ("flat_v.fit", 2)                        
+                                                                              
+DATA_SET_ID                        = "HAY-A-AMICA-3-HAYAMICA-V1.0"            
+PRODUCT_NAME                       = "AMICA V FLAT"                           
+PRODUCT_ID                         = "PREFLIGHT_FLAT_V_FIT"                   
+INSTRUMENT_HOST_ID                 = "HAY"                                    
+INSTRUMENT_HOST_NAME               = "HAYABUSA"                               
+INSTRUMENT_ID                      = "AMICA"                                  
+INSTRUMENT_NAME                    = "ASTEROID MULTI-BAND IMAGING CAMERA"     
+TARGET_NAME                        = "FLAT FIELD"                             
+TARGET_TYPE                        = "CALIBRATION"                            
+START_TIME                         = "UNK"                                    
+STOP_TIME                          = "UNK"                                    
+PRODUCT_CREATION_TIME              = 2010-02-10  /* File uploaded to OLAF */  
+FILTER_NAME                        = "V"                                      
+CENTER_FILTER_WAVELENGTH           = 553 <NANOMETER>                          
+EXPOSURE_DURATION                  = 8.4 <SECOND>                             
+                                                                              
+OBJECT                             = HEADER                                   
+ BYTES                             = 2880                                     
+ HEADER_TYPE                       = "FITS"                                   
+ INTERCHANGE_FORMAT                = "BINARY"                                 
+ RECORDS                           = 1                                        
+ DESCRIPTION                       = "FITS Standard NOST 100-2.0"             
+END_OBJECT                         = HEADER                                   
+                                                                              
+                                                                              
+OBJECT                             = IMAGE                                    
+  LINES                            = 1024                                     
+  LINE_SAMPLES                     = 1024                                     
+  SAMPLE_BITS                      = 32                                       
+  SAMPLE_TYPE                      = "IEEE_REAL"                              
+  OFFSET                           = 0.0                                      
+  SCALING_FACTOR                   = 1.0                                      
+  DERIVED_MINIMUM                  = 0.0                                      
+  DERIVED_MAXIMUM                  = 1.0571628                                
+  AXIS_ORDER_TYPE                  = "FIRST_INDEX_FASTEST"                    
+  LINE_DISPLAY_DIRECTION           = "UP"                                     
+  SAMPLE_DISPLAY_DIRECTION         = "RIGHT"                                  
+  UNIT                             = "COUNTS"                                 
+  HORIZONTAL_PIXEL_FOV             = 20.49 <ARCSECOND>                        
+  VERTICAL_PIXEL_FOV               = 20.49 <ARCSECOND>                        
+  DESCRIPTION                      = "Hayabusa AMICA pre-flight flat field, v 
+        filter"                                                               
+END_OBJECT                         = IMAGE                                    
+                                                                              
+END                                                                           

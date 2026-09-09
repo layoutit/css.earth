@@ -1,3 +1,4 @@
+import { validateScalarMapProfile } from './pds-scalar-map.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mjs';
@@ -17,6 +18,7 @@ import { prepareAffineLayers } from './affine-preparation.mjs';
 import { validateRadialTableProfile } from './pds-radial-table.mjs';
 import { validateFitsObservationPolicy } from './observed-fits.mjs';
 import { validateGeoSurfaceRecipe } from './observed-geo-surface.mjs';
+import { validateFacetFieldRecipe } from './fits-facet-field.mjs';
 
 export function parseTerrestrialProfile(value) {
   if (value?.schema === 'cssearth-terrestrial-preparation@1' && value.kind === 'affine-photographic-atmosphere') {
@@ -71,7 +73,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -91,7 +93,12 @@ export function parseTerrestrialProfile(value) {
         (lens.coverage && [lens.coverage.path,lens.coverage.member].some(p => typeof p !== 'string' || p.startsWith('/') || p.split('/').includes('..'))))) {
       throw new TypeError('Invalid sourced mesh grid.');
     }
-    if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
+    if (lens.facetField !== undefined) {
+      validateFacetFieldRecipe(lens.facetField);
+      if (!meshGrid || !lens.surfaceSampling) throw new TypeError('Facet fields require source-surface sampling.');
+    }
+    if (lens.format === 'pds3-scalar-map') validateScalarMapProfile(lens, value.geometry.radialTerrain);
+    else if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
         !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||
         lens.path !== value.geometry.radialTerrain?.path ||
         lens.format !== value.geometry.radialTerrain?.format ||
@@ -106,10 +113,25 @@ export function parseTerrestrialProfile(value) {
     const policy = observation.validity;
     if (!/^[a-z][a-z0-9-]*$/.test(observation.id) || observationIds.has(observation.id) ||
         (observation.monochromeBase && !observationIds.has(observation.monochromeBase)) ||
-        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome', 'pds3-byte-monochrome', 'fits-byte-monochrome'].includes(policy?.kind)) {
+        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'geotiff-rgb-bands', 'pds3-rgb-zip', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome', 'pds3-byte-monochrome', 'fits-byte-monochrome'].includes(policy?.kind)) {
       throw new TypeError('Invalid observation identity, validity policy, or fallback ordering.');
     }
     const byteImage = ['image-monochrome-no-data', 'image-rgb-no-data'].includes(policy.kind);
+    if (['pds3-rgb-zip', 'geotiff-rgb-bands'].includes(policy.kind) &&
+        (policy.noData !== 0 || !Number.isFinite(policy.centerLongitude) || policy.centerLongitude < 0 || policy.centerLongitude > 360 ||
+         !(policy.grid?.pixelsPerDegree > 0) || ![policy.grid.sampleOffset, policy.grid.lineOffset].every(Number.isFinite))) {
+      throw new TypeError('Mapped RGB observations require an explicit source grid and fill code.');
+    }
+    if (policy.kind === 'pds3-rgb-zip' &&
+        (typeof policy.member !== 'string' || !/^[A-Za-z0-9_./-]+$/.test(policy.member) || policy.member.startsWith('-') ||
+         typeof policy.targetName !== 'string' || !policy.targetName.trim())) throw new TypeError('Invalid PDS RGB member or target.');
+    if (policy.kind === 'geotiff-rgb-bands' &&
+        (!Array.isArray(policy.samples) || policy.samples.length !== 3 || ![1, 2].includes(policy.sampleBytes) ||
+         new Set([...policy.samples, policy.alphaBand]).size !== 4 ||
+         [...policy.samples, policy.alphaBand].some(b => !Number.isInteger(b) || b < 0 || b > 3) ||
+         !(policy.resolutionMeters > 0) || !Array.isArray(policy.origin) || policy.origin.length !== 2 || !policy.origin.every(Number.isFinite))) {
+      throw new TypeError('Invalid source-owned RGB band order or storage.');
+    }
     if (policy.kind === 'fits-byte-monochrome') validateFitsObservationPolicy(policy);
     if ((policy.kind.startsWith('geotiff-') || byteImage) && (!(byteImage && policy.noData === null) && !Number.isFinite(policy.noData) ||
         !Number.isFinite(policy.centerLongitude) || policy.centerLongitude < 0 || policy.centerLongitude > 360)) {

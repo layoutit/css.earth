@@ -1,0 +1,826 @@
+{
+  "root": "fresh temporary directory",
+  "installed": 117,
+  "reused": 0,
+  "assets": [
+    {
+      "id": "bennu",
+      "filename": "bennu-directional-sun.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/bennu-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-directional-sun@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/bennu-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-elevation-legend.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9/bennu-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-elevation-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c0b16c11da9476cd158fb9487577e905283b2eed113ad8bf4c438f73e5e0d2a5/bennu-elevation-shadow@2x.webp",
+      "bytes": 2489034,
+      "sha256": "c0b16c11da9476cd158fb9487577e905283b2eed113ad8bf4c438f73e5e0d2a5"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-elevation-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f9c0122c83a6bda3f7d35f86dbe6e1c3f029e9625bf557ee42835d545639de36/bennu-elevation-surface@2x.webp",
+      "bytes": 2846108,
+      "sha256": "f9c0122c83a6bda3f7d35f86dbe6e1c3f029e9625bf557ee42835d545639de36"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-elevation-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b5645f84329eabb9394de28aa23e38dfa73f32784a0bbd20261bf502548354a7/bennu-elevation-thumbnail.webp",
+      "bytes": 7640,
+      "sha256": "b5645f84329eabb9394de28aa23e38dfa73f32784a0bbd20261bf502548354a7"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-lighting.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76/bennu-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-normal-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d34b9ff477a407c7d59845a72b174436529e6f9736393202605150acf9d24754/bennu-normal-shadow@2x.webp",
+      "bytes": 2419602,
+      "sha256": "d34b9ff477a407c7d59845a72b174436529e6f9736393202605150acf9d24754"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-normal-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f48e56950870b2f67ea5a0f21fefbf9e28a9f3529e1c5536a7d60518ee1e8e1c/bennu-normal-surface@2x.webp",
+      "bytes": 4836700,
+      "sha256": "f48e56950870b2f67ea5a0f21fefbf9e28a9f3529e1c5536a7d60518ee1e8e1c"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-normal-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d109e039408b99c5100b7d51c3d1359df84a6d4239b3bf8028879873965f152d/bennu-normal-thumbnail.webp",
+      "bytes": 3050,
+      "sha256": "d109e039408b99c5100b7d51c3d1359df84a6d4239b3bf8028879873965f152d"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-spectral-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5c5df54f74d3b91b2cb74df98e4298d0c67ccd00984697826202ca120962e207/bennu-spectral-shadow@2x.webp",
+      "bytes": 2605010,
+      "sha256": "5c5df54f74d3b91b2cb74df98e4298d0c67ccd00984697826202ca120962e207"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-spectral-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/70792870462b06dc89af0e468f1dabd0b0487e282f2c1c4ad0225827d0d05d8b/bennu-spectral-surface@2x.webp",
+      "bytes": 5680926,
+      "sha256": "70792870462b06dc89af0e468f1dabd0b0487e282f2c1c4ad0225827d0d05d8b"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-spectral-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d99a8add79833c48f8490e193df1a142ebc4d1456c68f8d0df4241233316858d/bennu-spectral-thumbnail.webp",
+      "bytes": 7048,
+      "sha256": "d99a8add79833c48f8490e193df1a142ebc4d1456c68f8d0df4241233316858d"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-back-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9/bennu-starfield-back-standard.webp",
+      "bytes": 53856,
+      "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-back-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0/bennu-starfield-back-standard@2x.webp",
+      "bytes": 171294,
+      "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-back.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7/bennu-starfield-back.webp",
+      "bytes": 210188,
+      "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-back@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf/bennu-starfield-back@2x.webp",
+      "bytes": 598648,
+      "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-bottom-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90/bennu-starfield-bottom-standard.webp",
+      "bytes": 63946,
+      "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-bottom-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687/bennu-starfield-bottom-standard@2x.webp",
+      "bytes": 200212,
+      "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-bottom.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8/bennu-starfield-bottom.webp",
+      "bytes": 232844,
+      "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-bottom@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a/bennu-starfield-bottom@2x.webp",
+      "bytes": 690706,
+      "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-front-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d/bennu-starfield-front-standard.webp",
+      "bytes": 67226,
+      "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-front-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d/bennu-starfield-front-standard@2x.webp",
+      "bytes": 208208,
+      "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-front.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28/bennu-starfield-front.webp",
+      "bytes": 251588,
+      "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-front@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d/bennu-starfield-front@2x.webp",
+      "bytes": 687190,
+      "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-left-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828/bennu-starfield-left-standard.webp",
+      "bytes": 31200,
+      "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-left-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa/bennu-starfield-left-standard@2x.webp",
+      "bytes": 112118,
+      "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-left.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650/bennu-starfield-left.webp",
+      "bytes": 142736,
+      "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-left@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9/bennu-starfield-left@2x.webp",
+      "bytes": 413462,
+      "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-right-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8/bennu-starfield-right-standard.webp",
+      "bytes": 23676,
+      "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-right-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79/bennu-starfield-right-standard@2x.webp",
+      "bytes": 83896,
+      "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-right.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa/bennu-starfield-right.webp",
+      "bytes": 116010,
+      "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-right@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85/bennu-starfield-right@2x.webp",
+      "bytes": 312496,
+      "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-top-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738/bennu-starfield-top-standard.webp",
+      "bytes": 64674,
+      "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-top-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3/bennu-starfield-top-standard@2x.webp",
+      "bytes": 202204,
+      "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-top.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310/bennu-starfield-top.webp",
+      "bytes": 235140,
+      "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-starfield-top@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4/bennu-starfield-top@2x.webp",
+      "bytes": 682934,
+      "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-surface-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e546fee7f7960e5a2b15cd1110fddfe81c9cadc51ccdad74aa9f9346ba4f9bf1/bennu-surface-shadow@2x.webp",
+      "bytes": 4272874,
+      "sha256": "e546fee7f7960e5a2b15cd1110fddfe81c9cadc51ccdad74aa9f9346ba4f9bf1"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-surface-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e22c354a68e7e15677967a7c1fbd1287b66d503e12e2180f45a251dbf88f71f8/bennu-surface-surface@2x.webp",
+      "bytes": 7419092,
+      "sha256": "e22c354a68e7e15677967a7c1fbd1287b66d503e12e2180f45a251dbf88f71f8"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-surface-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e/bennu-surface-thumbnail.webp",
+      "bytes": 3486,
+      "sha256": "db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e"
+    },
+    {
+      "id": "bennu",
+      "filename": "bennu-system-point.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659/bennu-system-point.webp",
+      "bytes": 96,
+      "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-directional-sun.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/eros-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-directional-sun@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/eros-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-elevation-legend.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9/eros-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-elevation-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d98dc9d31158e7c994fe294cc24f818d0e42a4f0be03cd5379ebc3f550b68b20/eros-elevation-shadow@2x.webp",
+      "bytes": 992762,
+      "sha256": "d98dc9d31158e7c994fe294cc24f818d0e42a4f0be03cd5379ebc3f550b68b20"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-elevation-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/deb0f2ed973f54fc0aaf840e703a65d4e6e5e0fee0e62400adcc8d8a9009e329/eros-elevation-surface@2x.webp",
+      "bytes": 922744,
+      "sha256": "deb0f2ed973f54fc0aaf840e703a65d4e6e5e0fee0e62400adcc8d8a9009e329"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-elevation-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c539675bb3866856c490255573e9e4c46533f3080a8b533686f53f7f75caf57b/eros-elevation-thumbnail.webp",
+      "bytes": 5950,
+      "sha256": "c539675bb3866856c490255573e9e4c46533f3080a8b533686f53f7f75caf57b"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-infrared-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5d3889d97a909603ca48ff78eab204d2ad61dd229311c327a0823baf8409bbc1/eros-infrared-shadow@2x.webp",
+      "bytes": 1759454,
+      "sha256": "5d3889d97a909603ca48ff78eab204d2ad61dd229311c327a0823baf8409bbc1"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-infrared-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/81a72e39736dd03315608e461010a856e9e69d1fcc684fa22bb0efe6a523be0a/eros-infrared-surface@2x.webp",
+      "bytes": 4196638,
+      "sha256": "81a72e39736dd03315608e461010a856e9e69d1fcc684fa22bb0efe6a523be0a"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-infrared-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ff552f2688e6ed2444b8c3d0f11971cd6c4b08b8f29ccc0b979468474c8c1bbd/eros-infrared-thumbnail.webp",
+      "bytes": 3388,
+      "sha256": "ff552f2688e6ed2444b8c3d0f11971cd6c4b08b8f29ccc0b979468474c8c1bbd"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-lighting.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76/eros-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-normal-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f0b630e876632344e2754edbe4a10e883d4685de56130c74bf218bbe5bec5f51/eros-normal-shadow@2x.webp",
+      "bytes": 1045950,
+      "sha256": "f0b630e876632344e2754edbe4a10e883d4685de56130c74bf218bbe5bec5f51"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-normal-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62a13d42ba65f6d9058d3b907c62a2aaade7fcb202963c6789412448c1bc25f1/eros-normal-surface@2x.webp",
+      "bytes": 2693140,
+      "sha256": "62a13d42ba65f6d9058d3b907c62a2aaade7fcb202963c6789412448c1bc25f1"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-normal-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/77accf9615eaf183f69f407eb84a1a7f49732eceda53e953d1655b05898408d6/eros-normal-thumbnail.webp",
+      "bytes": 3270,
+      "sha256": "77accf9615eaf183f69f407eb84a1a7f49732eceda53e953d1655b05898408d6"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-back-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9/eros-starfield-back-standard.webp",
+      "bytes": 53856,
+      "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-back-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0/eros-starfield-back-standard@2x.webp",
+      "bytes": 171294,
+      "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-back.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7/eros-starfield-back.webp",
+      "bytes": 210188,
+      "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-back@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf/eros-starfield-back@2x.webp",
+      "bytes": 598648,
+      "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-bottom-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90/eros-starfield-bottom-standard.webp",
+      "bytes": 63946,
+      "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-bottom-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687/eros-starfield-bottom-standard@2x.webp",
+      "bytes": 200212,
+      "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-bottom.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8/eros-starfield-bottom.webp",
+      "bytes": 232844,
+      "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-bottom@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a/eros-starfield-bottom@2x.webp",
+      "bytes": 690706,
+      "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-front-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d/eros-starfield-front-standard.webp",
+      "bytes": 67226,
+      "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-front-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d/eros-starfield-front-standard@2x.webp",
+      "bytes": 208208,
+      "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-front.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28/eros-starfield-front.webp",
+      "bytes": 251588,
+      "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-front@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d/eros-starfield-front@2x.webp",
+      "bytes": 687190,
+      "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-left-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828/eros-starfield-left-standard.webp",
+      "bytes": 31200,
+      "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-left-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa/eros-starfield-left-standard@2x.webp",
+      "bytes": 112118,
+      "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-left.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650/eros-starfield-left.webp",
+      "bytes": 142736,
+      "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-left@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9/eros-starfield-left@2x.webp",
+      "bytes": 413462,
+      "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-right-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8/eros-starfield-right-standard.webp",
+      "bytes": 23676,
+      "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-right-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79/eros-starfield-right-standard@2x.webp",
+      "bytes": 83896,
+      "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-right.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa/eros-starfield-right.webp",
+      "bytes": 116010,
+      "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-right@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85/eros-starfield-right@2x.webp",
+      "bytes": 312496,
+      "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-top-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738/eros-starfield-top-standard.webp",
+      "bytes": 64674,
+      "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-top-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3/eros-starfield-top-standard@2x.webp",
+      "bytes": 202204,
+      "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-top.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310/eros-starfield-top.webp",
+      "bytes": 235140,
+      "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-starfield-top@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4/eros-starfield-top@2x.webp",
+      "bytes": 682934,
+      "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+    },
+    {
+      "id": "eros",
+      "filename": "eros-system-point.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659/eros-system-point.webp",
+      "bytes": 96,
+      "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-directional-sun.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/vesta-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-directional-sun@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/vesta-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-elevation-legend.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9/vesta-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-elevation-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/6f075fac8c08cacc76de3f671ce815dca04967ca98e6a5dd4c85cccad34cbf63/vesta-elevation-shadow@2x.webp",
+      "bytes": 619048,
+      "sha256": "6f075fac8c08cacc76de3f671ce815dca04967ca98e6a5dd4c85cccad34cbf63"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-elevation-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/8141ca24ec36d809d035f1e34e709a917e1dbfc5b724cafd39d3a5b0e8bf7d85/vesta-elevation-surface@2x.webp",
+      "bytes": 1819878,
+      "sha256": "8141ca24ec36d809d035f1e34e709a917e1dbfc5b724cafd39d3a5b0e8bf7d85"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-elevation-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d3493ac79ef0c7d57e7f8b63ed47e8aeddcc04584af550f3d8d299d6489e9132/vesta-elevation-thumbnail.webp",
+      "bytes": 7354,
+      "sha256": "d3493ac79ef0c7d57e7f8b63ed47e8aeddcc04584af550f3d8d299d6489e9132"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-lighting.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76/vesta-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-normal-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3a9ef601f070dfc2031583b2f528e6e8dbfb356746993d9a897ce8140a78d180/vesta-normal-shadow@2x.webp",
+      "bytes": 685992,
+      "sha256": "3a9ef601f070dfc2031583b2f528e6e8dbfb356746993d9a897ce8140a78d180"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-normal-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0ed66aec44e88697a15410b37affcbae9a7fb7641cb2d528d82b09f6e9a7d5a6/vesta-normal-surface@2x.webp",
+      "bytes": 2401754,
+      "sha256": "0ed66aec44e88697a15410b37affcbae9a7fb7641cb2d528d82b09f6e9a7d5a6"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-normal-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/47f63a5a4d91ac1b76bc054bea22d6e3803356b5cf56ac702540ce1041faee5b/vesta-normal-thumbnail.webp",
+      "bytes": 6002,
+      "sha256": "47f63a5a4d91ac1b76bc054bea22d6e3803356b5cf56ac702540ce1041faee5b"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-ratios-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0e4f6915e5ee2050e4834a562b8cc0769ac0c20b7d2a13c5b3d2d2f07153b995/vesta-ratios-shadow@2x.webp",
+      "bytes": 1051034,
+      "sha256": "0e4f6915e5ee2050e4834a562b8cc0769ac0c20b7d2a13c5b3d2d2f07153b995"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-ratios-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/59252fe1b12ba4917bad014b5f7d3978fd901eb127db19f618a3daed3ec8e07a/vesta-ratios-surface@2x.webp",
+      "bytes": 3378534,
+      "sha256": "59252fe1b12ba4917bad014b5f7d3978fd901eb127db19f618a3daed3ec8e07a"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-ratios-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/aa4ac057660924f899099dc645ce72e9bf68209ddebb99749fc01cfba5371746/vesta-ratios-thumbnail.webp",
+      "bytes": 8258,
+      "sha256": "aa4ac057660924f899099dc645ce72e9bf68209ddebb99749fc01cfba5371746"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-back-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9/vesta-starfield-back-standard.webp",
+      "bytes": 53856,
+      "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-back-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0/vesta-starfield-back-standard@2x.webp",
+      "bytes": 171294,
+      "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-back.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7/vesta-starfield-back.webp",
+      "bytes": 210188,
+      "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-back@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf/vesta-starfield-back@2x.webp",
+      "bytes": 598648,
+      "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-bottom-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90/vesta-starfield-bottom-standard.webp",
+      "bytes": 63946,
+      "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-bottom-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687/vesta-starfield-bottom-standard@2x.webp",
+      "bytes": 200212,
+      "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-bottom.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8/vesta-starfield-bottom.webp",
+      "bytes": 232844,
+      "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-bottom@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a/vesta-starfield-bottom@2x.webp",
+      "bytes": 690706,
+      "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-front-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d/vesta-starfield-front-standard.webp",
+      "bytes": 67226,
+      "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-front-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d/vesta-starfield-front-standard@2x.webp",
+      "bytes": 208208,
+      "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-front.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28/vesta-starfield-front.webp",
+      "bytes": 251588,
+      "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-front@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d/vesta-starfield-front@2x.webp",
+      "bytes": 687190,
+      "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-left-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828/vesta-starfield-left-standard.webp",
+      "bytes": 31200,
+      "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-left-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa/vesta-starfield-left-standard@2x.webp",
+      "bytes": 112118,
+      "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-left.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650/vesta-starfield-left.webp",
+      "bytes": 142736,
+      "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-left@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9/vesta-starfield-left@2x.webp",
+      "bytes": 413462,
+      "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-right-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8/vesta-starfield-right-standard.webp",
+      "bytes": 23676,
+      "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-right-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79/vesta-starfield-right-standard@2x.webp",
+      "bytes": 83896,
+      "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-right.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa/vesta-starfield-right.webp",
+      "bytes": 116010,
+      "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-right@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85/vesta-starfield-right@2x.webp",
+      "bytes": 312496,
+      "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-top-standard.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738/vesta-starfield-top-standard.webp",
+      "bytes": 64674,
+      "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-top-standard@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3/vesta-starfield-top-standard@2x.webp",
+      "bytes": 202204,
+      "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-top.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310/vesta-starfield-top.webp",
+      "bytes": 235140,
+      "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-starfield-top@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4/vesta-starfield-top@2x.webp",
+      "bytes": 682934,
+      "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+    },
+    {
+      "id": "vesta",
+      "filename": "vesta-system-point.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659/vesta-system-point.webp",
+      "bytes": 96,
+      "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659"
+    }
+  ]
+}

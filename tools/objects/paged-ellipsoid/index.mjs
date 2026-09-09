@@ -43,28 +43,34 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const sun = await preparePlanetDirectionalSun({ objectId: descriptor.id, publicRoot: publicDirectory, ensureDirectories, ...celestialConfig.directionalSun, writeModule: false });
   const sky = await preparePlanetCubicSky({ objectId: descriptor.id, sourceRoot: sourceDirectory, publicRoot: publicDirectory, ensureDirectories, validateSourceGroup: async () => undefined, includeSun: celestialConfig.includeSun, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, pointSourceContract: CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD, writeModule: false });
   const atmosphere = createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun }), atmosphereModel = await atmosphere.readAtmosphereModel(), raster = createPagedSurfaceRaster(config);
-  const citySource = await json(resolve(sourceDirectory, config.cityPath));
+  const paging = descriptor.recipe.paging, destinations = descriptor.recipe.destinations;
+  if (Boolean(paging) !== Boolean(destinations)) throw new TypeError('Geographic paging and destinations must be declared together.');
+  const citySource = paging ? await json(resolve(sourceDirectory, config.cityPath)) : null;
   // The scene needs the declared retained pool capacity, not a previously prepared overlay.
-  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource: await json(resolve(sourceDirectory, config.interiorPath)), citySource, noise: { poolSize: config.geographic.noise.poolSize }, atmosphereModel, atmosphere, raster });
+  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource: await json(resolve(sourceDirectory, config.interiorPath)), citySource, noise: paging ? { poolSize: config.geographic.noise.poolSize } : null, atmosphereModel, atmosphere, raster });
   const rasterAssets = await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster });
   const context = { sourceDirectory, publicDirectory, config, scene };
-  const noise = await prepareVectorOverlay(context), catalog = await preparePlaces(context);
-  const { plan: city, report } = await preparePinnedGlobalWmts({ sourceRoot: sourceDirectory, packDirectory, scene, namespace: descriptor.id, displayName: config.displayName, assetPath: config.publicBase, pages: config.geographic.pages });
-  const paging = descriptor.recipe.paging, destinations = descriptor.recipe.destinations;
-  if (!paging || paging.surface !== 'body' || paging.maxResidentPages !== city.poolSize ||
-      paging.maxResidentBytes !== city.maximumDecodedBytes || paging.maxConcurrentLoads !== city.maximumConcurrentLoads)
-    throw new TypeError('Authored page residency differs from the prepared hierarchy.');
-  if (!destinations || catalog.count > destinations.maxEntries)
-    throw new TypeError('Prepared places exceed the authored destination capability.');
+  let noise, catalog, city, report;
+  // Geographic preparation is an authored capability, not a requirement of a globe.
+  if (paging) {
+    noise = await prepareVectorOverlay(context);
+    catalog = await preparePlaces(context);
+    ({ plan: city, report } = await preparePinnedGlobalWmts({ sourceRoot: sourceDirectory, packDirectory, scene, namespace: descriptor.id, displayName: config.displayName, assetPath: config.publicBase, pages: config.geographic.pages }));
+    if (paging.surface !== 'body' || paging.maxResidentPages !== city.poolSize ||
+        paging.maxResidentBytes !== city.maximumDecodedBytes || paging.maxConcurrentLoads !== city.maximumConcurrentLoads)
+      throw new TypeError('Authored page residency differs from the prepared hierarchy.');
+    if (catalog.count > destinations.maxEntries)
+      throw new TypeError('Prepared places exceed the authored destination capability.');
+  }
   const lenses = { ...bindingSource, controls: bindingSource.controls.map(({ surfacePagePrefix, cityZoom, overlayId, ...lens }) => ({ ...lens,
     ...(surfacePagePrefix ? { surfaceUrls: raster.surfacePageUrls(surfacePagePrefix, surfaceRasterPlan.pages.length) } : {}),
     ...(cityZoom ? { maximumZoom: citySource.presentation.maximumZoom } : {}),
     ...(overlayId === 'noise' ? { camera: noise.camera, legend: noise.legend, qualification: noise.qualification } : {}),
   })) };
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
-  const content = { ...preparedContent.content, destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } };
+  const content = { ...preparedContent.content, ...(catalog ? { destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } } : {}) };
   const definition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, city, noise, controls: preparedContent.controls });
-  for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, noise, places: catalog, pages: city, 'page-preparation': report, lenses, content, runtime: definition })) await write(outputDirectory, name, value);
-  await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: descriptor.recipe.sources, lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, geographicPages: true } });
+  for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(paging ? { noise, places: catalog, pages: city, 'page-preparation': report } : {}), lenses, content, runtime: definition })) await write(outputDirectory, name, value);
+  await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: descriptor.recipe.sources, lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, geographicPages: Boolean(paging) } });
   return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content };
 }

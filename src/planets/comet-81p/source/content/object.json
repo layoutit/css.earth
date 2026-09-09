@@ -4,55 +4,40 @@
   "id": "comet-81p",
   "displayName": "Wild 2",
   "panel": {
-    "introduction": "81P/Wild 2 was visited by Stardust in 2004. This completed NASA PDS model combines measured terrain on about half the nucleus with a fitted ellipsoid on the unseen side. The gray grid marks the estimated surface and its joins.",
+    "introduction": "Stardust flew past Wild 2 in 2004 and returned samples of its dust to Earth. Its photographs reveal deep depressions, steep walls and ridges across the sunlit part of the nucleus.",
     "facts": [
+      {
+        "id": "scale",
+        "label": "Fitted ellipsoid",
+        "value": "5.2 \u00d7 4.0 \u00d7 2.7 km"
+      },
       {
         "id": "mission",
         "label": "Explored by",
         "value": "Stardust"
       },
       {
-        "id": "source-epoch",
-        "label": "Shape observations",
+        "id": "flyby",
+        "label": "Flyby",
         "value": "2 January 2004"
-      },
-      {
-        "id": "coverage",
-        "label": "Terrain coverage",
-        "value": "About half observed; gray grid marks the estimated completion"
-      },
-      {
-        "id": "resolution",
-        "label": "Source precision",
-        "value": "Observed source terrain: about 50 m horizontal resolution and 6 m vertical precision"
       }
     ],
-    "moreFacts": [
-      {
-        "id": "rendering",
-        "label": "Presentation",
-        "value": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
-      },
-      {
-        "id": "scale",
-        "label": "Reference scale",
-        "value": "1.917 km equivalent radius of the published fitted ellipsoid (1.350 × 2.002 × 2.607 km semi-axes); an approximate navigation scale."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",
     "defaultLens": "model",
     "labels": {
-      "model": "Completed shape model"
+      "model": "Completed shape model",
+      "navcam": "Stardust photographs"
     },
     "controls": [
       {
         "id": "model",
         "label": "Completed shape model",
-        "description": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
-        "title": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
-        "detail": "Grid = estimated",
+        "description": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
+        "title": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
+        "detail": "PDS",
         "thumbnail": "/scenes/comet-81p/comet-81p-model-thumbnail.webp",
         "surface": "comet-81p-model-surface@2x.webp",
         "poles": "comet-81p-model-poles@2x.webp",
@@ -60,7 +45,46 @@
           "id": "pds-shape",
           "path": "../manifest.json",
           "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab"
-        }
+        },
+        "facts": [
+          {
+            "id": "coverage",
+            "label": "Measured terrain",
+            "value": "About half the nucleus"
+          },
+          {
+            "id": "completion",
+            "label": "Unseen side",
+            "value": "Fitted ellipsoid"
+          }
+        ]
+      },
+      {
+        "id": "navcam",
+        "label": "Stardust photographs",
+        "description": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
+        "title": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
+        "detail": "NAVCAM",
+        "thumbnail": "/scenes/comet-81p/comet-81p-navcam-thumbnail.webp",
+        "surface": "comet-81p-navcam-surface@2x.webp",
+        "poles": "comet-81p-navcam-poles@2x.webp",
+        "source": {
+          "id": "n2073we02-rr-path",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+        },
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "2 Jan 2004"
+          },
+          {
+            "id": "scale",
+            "label": "Image scale",
+            "value": "14\u201319 m/pixel"
+          }
+        ]
       }
     ]
   },
@@ -88,6 +112,12 @@
       "role": "surface",
       "description": "Farnham, Duxbury and Li (2005), Wild 2 full plate model with estimated unseen surface",
       "href": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+    },
+    {
+      "label": "NAVCAM",
+      "role": "surface",
+      "description": "Stardust photographs archived encounter images",
+      "href": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
     },
     {
       "label": "ESO",

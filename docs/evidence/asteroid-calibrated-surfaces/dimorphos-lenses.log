@@ -1,0 +1,80 @@
+(node:1524) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START dimorphos/lens-race
+[conformance] PASS dimorphos/lens-race (3518ms)
+[conformance] START dimorphos/lens-reacquire
+[conformance] PASS dimorphos/lens-reacquire (3400ms)
+[conformance] START dimorphos/lens-rejection
+[conformance] PASS dimorphos/lens-rejection (3600ms)
+[conformance] START dimorphos/lens-destroy
+[conformance] PASS dimorphos/lens-destroy (3436ms)
+{
+  "ok": true,
+  "reports": [
+    {
+      "id": "dimorphos",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "case": "mobile",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "case": "dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "dimorphos",
+      "viewport": "lens-race",
+      "lens": "shape",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "dimorphos",
+      "viewport": "lens-reacquire",
+      "lens": "albedo"
+    },
+    {
+      "id": "dimorphos",
+      "viewport": "lens-rejection-retry",
+      "lens": "albedo"
+    },
+    {
+      "id": "dimorphos",
+      "viewport": "lens-destroy"
+    }
+  ]
+}

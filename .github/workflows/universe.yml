@@ -41,10 +41,13 @@ jobs:
           node --test tools/objects/material-composition/coplanar-raster.test.mjs
       - name: Test shared scientific source credits
         run: node --test site/test/scene-sources.test.mjs
-      - name: Test prepared minimap point ownership and range queries
-        run: node --test site/test/minimap-point-range.test.mjs
-      - name: Test search ownership during flight
-        run: node --test site/test/shell-lifetime.test.mjs
+      - name: Test prepared minimap point ownership, range and coverage
+        run: node --test site/test/minimap-point-range.test.mjs site/test/minimap-point-coverage.test.mjs
+      - name: Test shared shell and search ownership
+        run: >-
+          node --test site/test/shell-lifetime.test.mjs
+          site/test/navigation-router.test.mjs site/test/planet-shell.test.mjs
+          site/test/router-runtime.test.mjs
       - name: Enforce activation preparation for every registered object
         run: node --test tools/prepared-activation-groups.test.mjs tools/prepared-activation-registry.test.mjs
       - name: Test shared environment rendering and camera

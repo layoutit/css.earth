@@ -10,16 +10,17 @@ export function readFitsPrimary(bytes) {
   if (endCard < 0) throw new Error('FITS header has no END card.');
   const bitpix = Number(header.BITPIX), width = Number(header.NAXIS1), height = Number(header.NAXIS2);
   const dataOffset = Math.ceil(endCard / 2880) * 2880, bytesPerValue = Math.abs(bitpix) / 8;
-  if (![8, -32, -64].includes(bitpix) || !Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1 || dataOffset + width * height * bytesPerValue > bytes.length) throw new Error('Unsupported or truncated FITS image.');
+  if (![8, 16, -32, -64].includes(bitpix) || Number(header.NAXIS) !== 2 || !Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1 || dataOffset + width * height * bytesPerValue > bytes.length) throw new Error('Unsupported or truncated FITS image.');
   const scale = Number(header.BSCALE ?? 1), zero = Number(header.BZERO ?? 0);
   if (!Number.isFinite(scale) || !Number.isFinite(zero)) throw new Error('Invalid FITS value scaling.');
   const values = new Float64Array(width * height);
   for (let index = 0; index < values.length; index++) {
-    const value = bitpix === 8 ? bytes[dataOffset + index] : bitpix === -32
+    const value = bitpix === 8 ? bytes[dataOffset + index] : bitpix === 16 ? bytes.readInt16BE(dataOffset + index * 2) : bitpix === -32
       ? bytes.readFloatBE(dataOffset + index * bytesPerValue) : bytes.readDoubleBE(dataOffset + index * bytesPerValue);
     values[index] = value * scale + zero;
   }
-  return { bitpix, width, height, values, scale, zero };
+  return { bitpix, width, height, values, scale, zero, header, dataOffset,
+    nextOffset: Math.ceil((dataOffset + width * height * bytesPerValue) / 2880) * 2880 };
 }
 
 export function prepareFitsMap(bytes, width, height, recipe) {

@@ -12,15 +12,16 @@ export const browserProfile=createObjectBrowserProfile({id:'ida',controls,audit:
   ],
   "lensRace": {
     "defaultId": "normal",
-    "slowId": "elevation",
+    "slowId": "calibrated",
     "winnerId": "normal",
-    "slowAsset": "/scenes/ida/ida-elevation-surface@2x.webp",
+    "slowAsset": "/scenes/ida/ida-calibrated-surface@2x.webp",
     "preReadyDisabled": true
   },
   "retained": {
     "lensIds": [
       "normal",
-      "elevation"
+      "elevation",
+      "calibrated"
     ],
     "speedClicks": 5,
     "allowedMountSelectors": []

@@ -1,0 +1,619 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "titan",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "f5f1693cd8c552f2eee36be71b61ca91324b3d361bc94a3fc4c56ae6fab270b5"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "df0ff235ffbc4836bcdb60d3931f7bc34bb29284b206d9b14c7236bf727d5b0c",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "titan",
+        "displayName": "Titan",
+        "publicBase": "/scenes/titan/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 8192,
+          "height": 4096,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 1024,
+          "surfaceQuality": 90,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "image-monochrome-no-data",
+                "noData": 0,
+                "centerLongitude": 180
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [
+            {
+              "id": "radar",
+              "consumer": "radar",
+              "format": "pds3-byte-equirectangular",
+              "metadata": {
+                "label": "Radar",
+                "falseColor": false,
+                "coverage": "Observed SAR and HiSAR swaths only; gray grid marks exact source no-data.",
+                "projection": {
+                  "type": "Equirectangular",
+                  "longitudeDirection": "east",
+                  "latitudeType": "planetocentric",
+                  "referenceRadiusMeters": 2575000
+                },
+                "interpretation": "Incidence-normalized Ku-band backscatter. Brightness reflects roughness, slopes and material properties; globe lighting is approximate."
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 2575.5,
+          "camera": {
+            "initialScenePitchDegrees": 40,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/titan/titan-normal-surface@2x.webp",
+          "polesUrl": "/scenes/titan/titan-normal-poles@2x.webp"
+        },
+        "celestial": {
+          "sunSource": "JPL Titan orbit and VSOP87 Saturn position, with IAU/WGCCRE rotation"
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            190,
+            160,
+            101
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "8f11c4b5c7c85dacc001b6730f4b3c06ce3d9bcae5385f9a271433fd4f1d4827",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "titan",
+        "displayName": "Titan",
+        "title": {
+          "label": "Titan",
+          "viewBox": "0 0 61.7909 35",
+          "width": 61.7909,
+          "height": 35,
+          "path": "M0 11.29L0 8.63L15.97 8.63L15.97 11.29L9.53 11.29L9.53 29L6.47 29L6.47 11.29ZM18.36 29L18.36 14.37L21.28 14.37L21.28 29ZM19.84 11.91Q19.06 11.91 18.53 11.4Q17.99 10.9 17.99 10.16Q17.99 9.39 18.53 8.88Q19.06 8.37 19.83 8.37Q20.61 8.37 21.14 8.88Q21.67 9.39 21.67 10.16Q21.67 10.9 21.14 11.4Q20.61 11.91 19.84 11.91ZM31.66 14.37L31.66 16.78L23.32 16.78L23.32 14.37ZM25.8 10.5L28.71 10.5L28.71 25.1Q28.71 25.94 29.06 26.28Q29.41 26.62 30.27 26.62Q30.57 26.62 30.97 26.61Q31.36 26.59 31.65 26.58L31.76 28.97Q31.39 29.01 30.88 29.03Q30.36 29.05 29.89 29.05Q27.85 29.05 26.82 28.15Q25.8 27.25 25.8 25.47ZM38.71 29.26Q37.27 29.26 36.12 28.75Q34.98 28.25 34.31 27.26Q33.65 26.28 33.65 24.83Q33.65 23.59 34.13 22.78Q34.61 21.97 35.43 21.51Q36.25 21.04 37.28 20.8Q38.31 20.56 39.41 20.44Q40.76 20.26 41.57 20.16Q42.37 20.06 42.72 19.83Q43.07 19.59 43.07 19.07L43.07 18.96Q43.07 18.21 42.73 17.67Q42.39 17.13 41.74 16.81Q41.09 16.49 40.14 16.49Q39.21 16.49 38.5 16.8Q37.79 17.11 37.38 17.63Q36.97 18.14 36.86 18.76L34.02 18.6Q34.21 17.23 35.02 16.22Q35.82 15.22 37.15 14.67Q38.48 14.11 40.16 14.11Q41.42 14.11 42.47 14.42Q43.53 14.73 44.31 15.36Q45.09 15.98 45.52 16.9Q45.95 17.82 45.95 19.05L45.95 29L43.1 29L43.1 26.95L43.03 26.95Q42.73 27.52 42.19 28.06Q41.65 28.59 40.8 28.92Q39.95 29.26 38.71 29.26ZM39.32 26.91Q40.58 26.91 41.42 26.45Q42.26 25.99 42.67 25.23Q43.08 24.46 43.08 23.57L43.08 21.82Q42.93 21.96 42.56 22.06Q42.19 22.16 41.69 22.26Q41.18 22.36 40.64 22.44Q40.09 22.53 39.57 22.6Q38.76 22.71 38.07 22.96Q37.38 23.22 36.97 23.67Q36.55 24.13 36.55 24.88Q36.55 25.53 36.89 25.98Q37.23 26.43 37.85 26.67Q38.48 26.91 39.32 26.91ZM52.19 20.52L52.19 29L49.28 29L49.28 14.37L52.14 14.37L52.14 18.01L51.54 18.01Q52.25 16.04 53.51 15.08Q54.78 14.11 56.58 14.11Q58.07 14.11 59.25 14.76Q60.42 15.41 61.11 16.68Q61.79 17.95 61.79 19.85L61.79 29L58.88 29L58.88 20.21Q58.88 18.49 58.04 17.6Q57.21 16.71 55.69 16.71Q54.72 16.71 53.92 17.12Q53.12 17.53 52.66 18.37Q52.19 19.21 52.19 20.52Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Saturn’s largest moon hides beneath thick haze. Methane rain feeds its rivers and lakes, while dark dunes cover the equator.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "2,574.76 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "9.537 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "15.95 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "15.95 days · synchronous"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 1,222,000 km"
+            },
+            {
+              "id": "atmosphere-composition",
+              "label": "Atmosphere",
+              "value": "Dense nitrogen atmosphere with methane and organic haze"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.8814 ± 0.0001 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Near-infrared",
+              "description": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
+              "title": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
+              "thumbnail": "/scenes/titan/titan-normal-thumbnail.webp",
+              "surface": "titan-normal-surface@2x.webp",
+              "poles": "titan-normal-poles@2x.webp",
+              "source": {
+                "id": "usgs-cassini-iss-2026-938nm",
+                "path": "../manifest.json"
+              },
+              "summary": "Infrared images show Titan's surface through haze. Clouds, seams and uneven detail remain; gray grid: no observations."
+            },
+            {
+              "id": "radar",
+              "label": "Radar",
+              "description": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
+              "title": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
+              "thumbnail": "/scenes/titan/titan-radar-thumbnail.webp",
+              "surface": "titan-radar-surface@2x.webp",
+              "poles": "titan-radar-poles@2x.webp",
+              "source": {
+                "id": "cassini-radar-midr",
+                "path": "../manifest.json"
+              },
+              "summary": "Cassini radar mosaic through flyby T126. Brightness shows radar backscatter, not elevation; gray grid: no measurements."
+            }
+          ],
+          "labels": {
+            "normal": "Near infrared",
+            "radar": "Radar"
+          }
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Titan facts",
+            "href": "https://science.nasa.gov/saturn/moons/titan/facts/"
+          },
+          {
+            "label": "USGS",
+            "role": "surface",
+            "description": "Cassini ISS controlled global mosaic (2026)",
+            "href": "https://www.usgs.gov/data/geodetically-improved-images-and-mosaics-titan-rigorous-photogrammetric-control-cassini"
+          },
+          {
+            "label": "Cassini RADAR",
+            "role": "surface",
+            "description": "Mission-end SAR and HiSAR mosaic",
+            "href": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/saturn/moons/titan/facts/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "usgs-cassini-iss-2026-938nm",
+      "path": "observations/titan-iss-2026.png",
+      "origin": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f",
+      "credit": "NASA/JPL-Caltech/Space Science Institute/USGS; Weller et al. (2026)",
+      "license": "CC0 1.0 Universal",
+      "licenseEvidence": [
+        "https://www.usgs.gov/data/geodetically-improved-images-and-mosaics-titan-rigorous-photogrammetric-control-cassini",
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "acquisition": "Download the published lossless USGS PNG display export and verify its exact bytes.",
+      "redistribution": "CC0 prepared derivatives retain scientific credits; original is reacquired separately.",
+      "lensId": "normal",
+      "label": "Near-infrared",
+      "falseColor": false,
+      "width": 23048,
+      "height": 11524,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2575000,
+        "pixelResolutionMeters": 702,
+        "centerLongitude": 180,
+        "upperLeftMeters": [
+          -8089848,
+          4044924
+        ]
+      },
+      "coverage": "USGS ISIS display export: exact zero indicates Null and is masked; valid values starting at one remain, including dark lakes and dunes. A small southern gap receives a gray grid. Grid edges extend by less than half a source pixel beyond the poles/meridian.",
+      "photometry": "Published weighted, high-pass-sharpened ISS mosaic at 938 nm. Haze and cloud residuals, variable native resolution and image boundaries remain. This is a display-stretched infrared observation, not visible color or calibrated albedo.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
+      },
+      "sha256": "5b17af4c230f5f2434497d77621dbe6503458ac15d54557a946c1e1ca9562cb2",
+      "bytes": 73480116,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/titan-iss-2026.png",
+        "url": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "cassini-radar-midr-090",
+      "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
+      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
+      "license": "Public NASA mission data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/citation/policy.shtml"
+      ],
+      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
+      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
+      "width": 5760,
+      "height": 5760,
+      "projection": {
+        "type": "Equirectangular",
+        "referenceRadiusMeters": 2575000,
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+      },
+      "sha256": "23adb939bf8076fae0fcdf98a7c910fcebe36ffd066cfb3c48cdb0324a8bd770",
+      "bytes": 21088532,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "cassini-radar-midr-270",
+      "path": "radar/MIBEF00N270_T126S00_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
+      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
+      "license": "Public NASA mission data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/citation/policy.shtml"
+      ],
+      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
+      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
+      "width": 5760,
+      "height": 5760,
+      "projection": {
+        "type": "Equirectangular",
+        "referenceRadiusMeters": 2575000,
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
+      },
+      "sha256": "d10b9a8b48a7a7c9045b54986412caf03d84319649a436aaefb46c71f8ca2cc6",
+      "bytes": 21369517,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "radar/MIBEF00N270_T126S00_V01.IMG.gz",
+        "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored preparation, shared source licensing or editorial content.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored preparation, shared source licensing or editorial content.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "d24bbb16dd98c8baac6f94f865b28dce95547ee882026e93e1f2db4f0a82a77e",
+      "bytes": 8031,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Near infrared",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "usgs-cassini-iss-2026-938nm"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-normal-thumbnail.webp",
+          "bytes": 3350,
+          "sha256": "b5ca1c63585418f45d7c2885cf8403bb378af9f1a957f8e325cbca06d4670a4d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-normal-surface@2x.webp",
+          "bytes": 3697816,
+          "sha256": "48ee934a5939311625fb8c6823d2ca0a51968a3f32fcceaa0570b5cac7f9a8e7",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-normal-poles@2x.webp",
+          "bytes": 131418,
+          "sha256": "58bde3bf90508c1101990cc7a01316c6b4eedb63faf75e7d776fefd7c8bcaf39",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "radar",
+      "label": "Radar",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "parents": [],
+      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization."
+      ],
+      "lensIds": [
+        "radar"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "mosaics"
+      },
+      "inputs": [
+        "cassini-radar-midr-090",
+        "cassini-radar-midr-270"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titan/titan-radar-thumbnail.webp",
+          "bytes": 4840,
+          "sha256": "1724a27e59d4503297fb48fc081d249518d1bffdc93c3c1c84e993be15b48f0f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-radar-surface@2x.webp",
+          "bytes": 12715084,
+          "sha256": "4f3c472ed60fb71a7da3e28ebf59b694ca32a9966d3198cb8ae266d20b45ef4d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/titan/titan-radar-poles@2x.webp",
+          "bytes": 533952,
+          "sha256": "2a2b28c423272d1436f49d445e0e0c39209fbd4c31f925f3da6bb8809ddbb5f3",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4797,
+          "sha256": "261cd7f940935f1bede0d0dd64c390d8b43e28b292809940ef067dbe5d31be7a",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Near infrared preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 35326,
+          "sha256": "2d838521ea96a13218193f17cbf4d81cdeb35e68b75c5f899709d6733eb0c17d",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:radar",
+      "label": "Radar preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "radar"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/radar.webp",
+          "bytes": 63060,
+          "sha256": "8c7f1e5df34515bca7f5f8008ed1bed0890ce5190d20091e58e15e8f707af5a8",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

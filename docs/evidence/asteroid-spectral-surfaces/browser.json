@@ -1,0 +1,358 @@
+{
+  "browser": "152.0.7977.76",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "headless": true,
+  "server": "http://127.0.0.1:4278",
+  "reports": [
+    {
+      "id": "eros",
+      "density": 1,
+      "leaves": 796,
+      "selectedDensity": 2,
+      "shadowsDefault": false,
+      "camera": {
+        "controlPitch": 54.769230769230774,
+        "controlYaw": 0,
+        "zoom": 0.991721739130435
+      },
+      "retained": {
+        "initialNodeCount": 72569,
+        "stableNodeCount": 72569
+      },
+      "assets": [
+        "http://127.0.0.1:4278/scenes/eros/eros-elevation-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-infrared-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-normal-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-directional-sun@2x.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-normal-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-lighting.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-system-point.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-elevation-legend.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-infrared-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-infrared-shadow@2x.webp"
+      ],
+      "errors": [],
+      "provenance": [
+        {
+          "path": "object.json",
+          "sha256": "83560d34a69e457e023a5aa596c98be549f44f4da16da57559f3415d2fe5f9a6"
+        },
+        {
+          "path": "prepared/object.json",
+          "sha256": "0c4f69006ead15c747185228eedc61fdea49dd8f9cffe0bf35080d8e12cf6335"
+        },
+        {
+          "path": "prepared/runtime.json",
+          "sha256": "1c550024ba5ae9aa1c07342243783c9cf0c5e298efceef3f47c1676d322c7eea"
+        },
+        {
+          "path": "runtime-assets.json",
+          "sha256": "12f6a22c7ccd5e0b41c53c983a1478be8cab03b6fb7cabd7246f8115662c5cab"
+        },
+        {
+          "path": "prepared/provenance.json",
+          "sha256": "fd43455b30e036f8d83f6397436a8ef06a1629b1c5d867defae76a4b614d9301"
+        }
+      ]
+    },
+    {
+      "id": "eros",
+      "density": 2,
+      "leaves": 796,
+      "selectedDensity": 2,
+      "shadowsDefault": false,
+      "camera": {
+        "controlPitch": 54.769230769230774,
+        "controlYaw": 0,
+        "zoom": 0.991721739130435
+      },
+      "retained": {
+        "initialNodeCount": 72569,
+        "stableNodeCount": 72569
+      },
+      "assets": [
+        "http://127.0.0.1:4278/scenes/eros/eros-directional-sun@2x.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-normal-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-elevation-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-infrared-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-lighting.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-system-point.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-normal-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-elevation-legend.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-infrared-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/eros/eros-infrared-shadow@2x.webp"
+      ],
+      "errors": [],
+      "provenance": [
+        {
+          "path": "object.json",
+          "sha256": "83560d34a69e457e023a5aa596c98be549f44f4da16da57559f3415d2fe5f9a6"
+        },
+        {
+          "path": "prepared/object.json",
+          "sha256": "0c4f69006ead15c747185228eedc61fdea49dd8f9cffe0bf35080d8e12cf6335"
+        },
+        {
+          "path": "prepared/runtime.json",
+          "sha256": "1c550024ba5ae9aa1c07342243783c9cf0c5e298efceef3f47c1676d322c7eea"
+        },
+        {
+          "path": "runtime-assets.json",
+          "sha256": "12f6a22c7ccd5e0b41c53c983a1478be8cab03b6fb7cabd7246f8115662c5cab"
+        },
+        {
+          "path": "prepared/provenance.json",
+          "sha256": "fd43455b30e036f8d83f6397436a8ef06a1629b1c5d867defae76a4b614d9301"
+        }
+      ]
+    },
+    {
+      "id": "vesta",
+      "density": 1,
+      "leaves": 800,
+      "selectedDensity": 2,
+      "shadowsDefault": false,
+      "camera": {
+        "controlPitch": 34.230769230769226,
+        "controlYaw": 0,
+        "zoom": 0.991721739130435
+      },
+      "retained": {
+        "initialNodeCount": 72577,
+        "stableNodeCount": 72577
+      },
+      "assets": [
+        "http://127.0.0.1:4278/scenes/vesta/vesta-directional-sun@2x.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-elevation-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-ratios-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-normal-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-normal-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-system-point.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-lighting.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-elevation-legend.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-ratios-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-ratios-shadow@2x.webp"
+      ],
+      "errors": [],
+      "provenance": [
+        {
+          "path": "object.json",
+          "sha256": "c3de3b38a8d30aa7a9a4404f95a91dd4f6b5f0dc6c689d2f7753820e2dc35b6e"
+        },
+        {
+          "path": "prepared/object.json",
+          "sha256": "47c83260531c8ed979193cbf63278e05c87b674816ea4cecf5ce6e7bfb1bf3ca"
+        },
+        {
+          "path": "prepared/runtime.json",
+          "sha256": "e91a342bbd568dbf832a22e512e876762e15957b01bd31f72424f3af5de2ba5a"
+        },
+        {
+          "path": "runtime-assets.json",
+          "sha256": "59b36f03a28504777e83997276319540a829fce2b49c89da8539357c9d8744d9"
+        },
+        {
+          "path": "prepared/provenance.json",
+          "sha256": "e5ff3345a1abc3b08575b8ee3a7aca2c2fec901ec124981a69cdb78c0d9511fd"
+        }
+      ]
+    },
+    {
+      "id": "bennu",
+      "density": 1,
+      "leaves": 800,
+      "selectedDensity": 2,
+      "shadowsDefault": false,
+      "camera": {
+        "controlPitch": 54.769230769230774,
+        "controlYaw": 0,
+        "zoom": 0.991721739130435
+      },
+      "retained": {
+        "initialNodeCount": 72573,
+        "stableNodeCount": 72573
+      },
+      "assets": [
+        "http://127.0.0.1:4278/scenes/bennu/bennu-directional-sun@2x.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-elevation-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-normal-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-spectral-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-surface-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-lighting.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-normal-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-system-point.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-elevation-legend.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-spectral-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-spectral-shadow@2x.webp"
+      ],
+      "errors": [],
+      "provenance": [
+        {
+          "path": "object.json",
+          "sha256": "1f39e50a40dac5946f9dad87ec21ef0c3f1fbd4172757021b53feb18cacae430"
+        },
+        {
+          "path": "prepared/object.json",
+          "sha256": "2fd95259ebdb63f61e7c7b0bcbbc4d1b271dd02879a8900c502dda1b7e3ac385"
+        },
+        {
+          "path": "prepared/runtime.json",
+          "sha256": "05ca42a0e887d6ab457a2f95ad4fdaed4948d9a01cd281b043b7ded13d9c08c7"
+        },
+        {
+          "path": "runtime-assets.json",
+          "sha256": "d9132f47dcfb1fb70d6a6854d2e2c165f0cb6226922752c7ea99ef0f92199afc"
+        },
+        {
+          "path": "prepared/provenance.json",
+          "sha256": "a25c2ae4edd0ceff6d6271ab8f6635a58f2fd4b6f4a17c281dc54eb82ef440af"
+        }
+      ]
+    },
+    {
+      "id": "vesta",
+      "density": 2,
+      "leaves": 800,
+      "selectedDensity": 2,
+      "shadowsDefault": false,
+      "camera": {
+        "controlPitch": 34.230769230769226,
+        "controlYaw": 0,
+        "zoom": 0.991721739130435
+      },
+      "retained": {
+        "initialNodeCount": 72577,
+        "stableNodeCount": 72577
+      },
+      "assets": [
+        "http://127.0.0.1:4278/scenes/vesta/vesta-directional-sun@2x.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-elevation-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-ratios-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-normal-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-lighting.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-system-point.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-normal-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-elevation-legend.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-ratios-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/vesta/vesta-ratios-shadow@2x.webp"
+      ],
+      "errors": [],
+      "provenance": [
+        {
+          "path": "object.json",
+          "sha256": "c3de3b38a8d30aa7a9a4404f95a91dd4f6b5f0dc6c689d2f7753820e2dc35b6e"
+        },
+        {
+          "path": "prepared/object.json",
+          "sha256": "47c83260531c8ed979193cbf63278e05c87b674816ea4cecf5ce6e7bfb1bf3ca"
+        },
+        {
+          "path": "prepared/runtime.json",
+          "sha256": "e91a342bbd568dbf832a22e512e876762e15957b01bd31f72424f3af5de2ba5a"
+        },
+        {
+          "path": "runtime-assets.json",
+          "sha256": "59b36f03a28504777e83997276319540a829fce2b49c89da8539357c9d8744d9"
+        },
+        {
+          "path": "prepared/provenance.json",
+          "sha256": "e5ff3345a1abc3b08575b8ee3a7aca2c2fec901ec124981a69cdb78c0d9511fd"
+        }
+      ]
+    },
+    {
+      "id": "bennu",
+      "density": 2,
+      "leaves": 800,
+      "selectedDensity": 2,
+      "shadowsDefault": false,
+      "camera": {
+        "controlPitch": 54.769230769230774,
+        "controlYaw": 0,
+        "zoom": 0.991721739130435
+      },
+      "retained": {
+        "initialNodeCount": 72573,
+        "stableNodeCount": 72573
+      },
+      "assets": [
+        "http://127.0.0.1:4278/scenes/bennu/bennu-directional-sun@2x.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-normal-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-elevation-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-spectral-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-surface-thumbnail.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-lighting.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-normal-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-elevation-legend.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-system-point.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-spectral-surface@2x.webp",
+        "http://127.0.0.1:4278/scenes/bennu/bennu-spectral-shadow@2x.webp"
+      ],
+      "errors": [],
+      "provenance": [
+        {
+          "path": "object.json",
+          "sha256": "1f39e50a40dac5946f9dad87ec21ef0c3f1fbd4172757021b53feb18cacae430"
+        },
+        {
+          "path": "prepared/object.json",
+          "sha256": "2fd95259ebdb63f61e7c7b0bcbbc4d1b271dd02879a8900c502dda1b7e3ac385"
+        },
+        {
+          "path": "prepared/runtime.json",
+          "sha256": "05ca42a0e887d6ab457a2f95ad4fdaed4948d9a01cd281b043b7ded13d9c08c7"
+        },
+        {
+          "path": "runtime-assets.json",
+          "sha256": "d9132f47dcfb1fb70d6a6854d2e2c165f0cb6226922752c7ea99ef0f92199afc"
+        },
+        {
+          "path": "prepared/provenance.json",
+          "sha256": "a25c2ae4edd0ceff6d6271ab8f6635a58f2fd4b6f4a17c281dc54eb82ef440af"
+        }
+      ]
+    }
+  ],
+  "integratedMain": "e23a357b86d97b0400f5ab53f8eaf9faf2acd6ec",
+  "dragChecks": [
+    {
+      "id": "bennu",
+      "density": 1,
+      "totalDomNodes": 72574,
+      "retainedInteraction": true
+    },
+    {
+      "id": "bennu",
+      "density": 2,
+      "totalDomNodes": 72574,
+      "retainedInteraction": true
+    },
+    {
+      "id": "eros",
+      "density": 1,
+      "totalDomNodes": 72570,
+      "retainedInteraction": true
+    },
+    {
+      "id": "eros",
+      "density": 2,
+      "totalDomNodes": 72570,
+      "retainedInteraction": true
+    },
+    {
+      "id": "vesta",
+      "density": 1,
+      "totalDomNodes": 72578,
+      "retainedInteraction": true
+    },
+    {
+      "id": "vesta",
+      "density": 2,
+      "totalDomNodes": 72578,
+      "retainedInteraction": true
+    }
+  ]
+}

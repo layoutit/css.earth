@@ -36,7 +36,15 @@
         "referenceRadiusMeters": 1821460,
         "centerLongitudeDegrees": 0
       },
-      "coverage": "GDAL_NODATA=0; additionally withhold |latitude| >= 85 degrees because USGS documents interpolated polar color within approximately 5 degrees of either pole. Retain observed monochrome there."
+      "coverage": "GDAL_NODATA=0; additionally withhold |latitude| >= 85 degrees because USGS documents interpolated polar color within approximately 5 degrees of either pole. Retain observed monochrome there.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif"
+      }
     },
     {
       "id": "usgs-normal-global-1km",
@@ -74,7 +82,15 @@
         "referenceRadiusMeters": 1821460,
         "centerLongitudeDegrees": 0
       },
-      "coverage": "GeoTIFF GDAL_NODATA=0. Preserve valid dark pixels; withhold resampled no-data boundaries."
+      "coverage": "GeoTIFF GDAL_NODATA=0. Preserve valid dark pixels; withhold resampled no-data boundaries.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif"
+      }
     },
     {
       "id": "eso-milky-way-panorama",

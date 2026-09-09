@@ -84,7 +84,8 @@
           "id": "n1828124037_1",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/"
-        }
+        },
+        "summary": "Cassini images mapped onto the shape with adjusted brightness. Gray grid: gaps and withheld shadows."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/epimetheus/epimetheus-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to a 58.2 km sphere, from the Cassini shape model. Small craters are unresolved."
       }
     ]
   },

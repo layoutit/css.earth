@@ -42,6 +42,7 @@ export function createSceneRouter({
   let destroyed = false;
   let nextGeneration = 0;
   let shellOwner = null, pending = null, historyOwner = null, unbindLinks = null;
+  let centeredObjectId = null;
   let overview = new URL(windowTarget.location?.href ?? 'https://example.test').searchParams.get('overview') === 'solar-system';
   const worldContextOwner = persistentWorldContext;
   let worldContextMount = null;
@@ -57,7 +58,7 @@ export function createSceneRouter({
   if (navigation && windowTarget.location?.href) {
     historyOwner = createNavigationHistory({ windowTarget, objects, capture: captureUrl, navigate, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
-      supports: id => navigation.supports(objectId, id), navigate, onError: report });
+      supports: id => navigation.supports(objectId, id), navigate, deselect, onError: report });
   }
   mountTask = mountApplication();
 
@@ -65,7 +66,7 @@ export function createSceneRouter({
     get settled() { return mountTask; },
     state: readSceneState,
     playback: readPlayback,
-    navigate,
+    navigate, deselect,
     destroy() {
       if (destroyed) return;
       destroyed = true;
@@ -220,11 +221,25 @@ export function createSceneRouter({
     return url.pathname + url.search + url.hash;
   }
 
+  function deselect() {
+    const sun = solarSystemFocus(objects);
+    if (!sun || !hasPresented) return Promise.resolve(false);
+    return navigate(sun.id, { overview: true, recenter: true });
+  }
+
   function navigate(id, options = {}) {
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
-    const cancelledFlight = pending !== null;
+    const centerTarget = options.recenter
+      ? navigation.centerTarget?.({ objectId: id, fromId: objectId, mount: active?.mount, force: true })
+      : options.sceneSelection && id !== centeredObjectId && !pending && sceneState === 'ready'
+        ? navigation.centerTarget?.({ objectId: id, mount: active?.mount }) : null;
+    // Centering changes the selected scene/card as well as the camera. Keep the
+    // explicit wide selection until the user chooses another object or zooms in.
+    centeredObjectId = centerTarget && !options.overview ? id : null;
+    if (centerTarget) options = { ...options, targetWorldCamera: centerTarget, centerSelection: true };
+    const cancelledFlight = pending !== null && !pending.options.centerSelection && !options.centerSelection;
     if (pending) {
       const previous = pending;
       pending = null; previous.controller.abort(); previous.lifetime.destroy();
@@ -244,7 +259,14 @@ export function createSceneRouter({
       url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) };
     request.controller.signal.addEventListener('abort', () => request.timing.mark('cancelled'), { once: true });
     pending = request;
-    if (object.id !== objectId && !options.overview) {
+    worldContextMount?.previewSelection?.(options.overview ? null : id);
+    request.lifetime.onDispose(() => {
+      if (!pending || pending === request) worldContextMount?.previewSelection?.();
+    });
+    if (options.recenter && options.overview) {
+      const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.();
+      if (restoreSelection) request.lifetime.onDispose(restoreSelection);
+    } else if (object.id !== objectId && !options.overview) {
       const restoreSelection = shellOwner?.shell?.beginObjectSelection?.(object);
       if (restoreSelection) request.lifetime.onDispose(restoreSelection);
     } else if (object.id === objectId && !options.overview) shellOwner?.shell?.setOverview?.(false);
@@ -265,7 +287,7 @@ export function createSceneRouter({
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
             mount: source.mount, signal: request.controller.signal, reducedMotion: reducedMotionActive,
-            targetWorldCamera: request.options.targetWorldCamera, timing: request.timing }));
+            targetWorldCamera: request.options.targetWorldCamera, centerSelection: request.options.centerSelection, timing: request.timing }));
           if (focused.cancelled || pending !== request) return false;
         }
         if (!restore) {
@@ -296,6 +318,7 @@ export function createSceneRouter({
         signal: request.controller.signal, history: request.options.history, url: request.url,
         motionRequested: motionEnabled, reducedMotion: reducedMotionActive,
         targetWorldCamera: request.options.targetWorldCamera,
+        centerSelection: request.options.centerSelection,
         preserveView: request.options.preserveView,
         cameraViewport: worldContextMount?.viewport,
         timing: request.timing,
@@ -395,7 +418,7 @@ export function createSceneRouter({
   }
 
   function publishSceneState() {
-    worldContextMount?.setNavigationIndicatorsVisible?.(!pending || pending.options.preserveView === true);
+    worldContextMount?.setNavigationIndicatorsVisible?.(!pending || pending.options.preserveView === true || pending.options.centerSelection === true);
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
@@ -513,7 +536,7 @@ export function createSceneRouter({
     if (!owner || !navigation || !sun?.worldFrame) return;
     session.lifetime.onDispose(watchOverviewSelection({ navigation: owner, objects, objectId,
       getOverview: () => overview,
-      isAvailable: () => active === session && sceneState === 'ready' && !pending,
+      isAvailable: () => active === session && sceneState === 'ready' && !pending && centeredObjectId !== objectId,
       windowTarget,
       onChange(next) {
         if (!next.overview) {
@@ -546,6 +569,7 @@ export function createSceneRouter({
     report(error);
   }
   function destroyActiveScene() {
+    centeredObjectId = null;
     destroyWorldContext();
     hasPresented = false;
     if (pending) { const request = pending; pending = null; request.controller.abort(); request.lifetime.destroy(); }

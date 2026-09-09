@@ -63,7 +63,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DART encounter shape"
+        "detail": "DART encounter shape",
+        "summary": "Shape from DART and LICIACube encounter images, including modeled terrain. It is not a post-impact map."
       },
       {
         "id": "elevation",
@@ -91,7 +92,36 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.xml",
           "image": "/scenes/dimorphos/dimorphos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Encounter-model height relative to a 75 m sphere. It shows the overall shape, not impact-induced changes."
+      },
+      {
+        "id": "albedo",
+        "label": "Relative albedo",
+        "detail": "DART surface brightness",
+        "description": "Grayscale shows relative surface brightness from the DART v004 stereophotoclinometry model of the encounter-facing surface before impact. Values are modeled relative albedo, not absolute geometric albedo or a photograph. Facets with positive multi-image uncertainty cover about 31% of the source model area; the ordinary grid marks withheld coverage. Linear display scale: 0.45–1.30.",
+        "title": "Grayscale shows relative surface brightness from the DART v004 stereophotoclinometry model of the encounter-facing surface before impact. Values are modeled relative albedo, not absolute geometric albedo or a photograph. Facets with positive multi-image uncertainty cover about 31% of the source model area; the ordinary grid marks withheld coverage. Linear display scale: 0.45–1.30.",
+        "thumbnail": "/scenes/dimorphos/dimorphos-albedo-thumbnail.webp",
+        "surface": "dimorphos-albedo-surface@2x.webp",
+        "poles": "dimorphos-albedo-surface@2x.webp",
+        "source": {
+          "id": "dimorphos-relative-albedo",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Relative albedo",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.45",
+            "0.875",
+            "1.30"
+          ],
+          "meta": "unitless · SPC relative brightness",
+          "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+          "image": "/scenes/dimorphos/dimorphos-albedo-legend.webp"
+        }
       }
     ]
   },
@@ -102,7 +132,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",
@@ -137,6 +167,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "Albedo data",
+      "role": "albedo",
+      "description": "DART v004 relative surface brightness",
+      "href": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml"
     }
   ],
   "provenance": {

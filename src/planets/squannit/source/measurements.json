@@ -1,0 +1,93 @@
+{
+  "schema": "cssearth-source-model@1",
+  "id": "squannit",
+  "targetNaif": null,
+  "parentNaif": null,
+  "source": {
+    "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+    "papers": [
+      "https://sbn.psi.edu/pds/resource/jplradarshape.html",
+      "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast.jpl.radar.shape_models_V1_0/data/",
+      "https://arxiv.org/pdf/1912.06456v2"
+    ],
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "wavefront-obj",
+    "semiAxesKm": null,
+    "fullAxesKm": null,
+    "referenceRadiusKm": 0.22550434622701193,
+    "axisConvention": "a,b,c are semiaxes; full axes = 2a,2b,2c",
+    "scale": "Native mesh scale cross-checked against published full extents0.57×0.46×0.35km.",
+    "qualification": "Measured radar inverse model, not visible-light terrain; source resolution is finite.",
+    "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+    "bytes": 67298,
+    "sha256": "3d65690a33c5bb2ef1a7b2f40c0a6faf26f40bd87b0f6bc27a7f801d4ec50256",
+    "metersPerUnit": 1000,
+    "unitEvidence": "Original author page describes same1148vertex2292facet model; numerical extents agree with published km values.",
+    "expectedVertices": 1148,
+    "expectedFaces": 2292,
+    "minimumKm": [
+      -0.288296,
+      -0.236032,
+      -0.177676
+    ],
+    "maximumKm": [
+      0.282834,
+      0.227007,
+      0.171233
+    ],
+    "fullExtentsKm": [
+      0.57113,
+      0.463039,
+      0.348909
+    ],
+    "signedVolumeKm3": 0.048034509370524,
+    "laterPhotometricSize": {
+      "linearScaleRelativeToOriginalRadar": 1.3,
+      "volumeEquivalentDiameterKm": 0.59,
+      "formalSigmaKm": 0.04,
+      "uncertainty": "Formal 1-sigma error; paper warns actual uncertainty may be higher.",
+      "source": {
+        "url": "https://arxiv.org/pdf/1912.06456v2",
+        "retrieved": "2026-09-08",
+        "bytes": 23170114,
+        "sha256": "ebdc8ffac56d7a1707b29ee9a1e9c363eb03edd58ac8fc399f24469db11cb3f3",
+        "locator": "Table 4, PDF page 13; interpretation on PDF pages 14–15",
+        "title": "Scheirich et al. (2021), accepted 4 January 2021",
+        "selection": "System visible geometric albedo 0.162 ± 0.034 (1 sigma). This is not radar albedo or Bond albedo."
+      },
+      "selection": "Original source mesh remains at 100% scale. Later 130% fit is disclosed, not silently imposed on the original OBJ."
+    }
+  },
+  "approximation": {
+    "semiAxesKm": null,
+    "assumptions": [
+      "Retain the native source connectivity and original 2006 scale; later photometry favors a 130% linear size, disclosed separately.",
+      "No color, craters or albedo texture."
+    ],
+    "qualification": "Measured radar inverse model, not visible-light terrain; source resolution is finite."
+  },
+  "sampling": {
+    "format": "wavefront-obj",
+    "metersPerUnit": 1000
+  },
+  "spin": {
+    "periodHours": null,
+    "poleIcrfRaDecDegrees": [
+      0,
+      90
+    ],
+    "meridianDegrees": 0,
+    "meaning": "Illustrative display attitude until source spin/libration convention is qualified."
+  },
+  "unresolved": [
+    "PDS model XML and beta spin CSV return HTTP403 in this environment; exact epoch/Euler conventions remain unresolved.",
+    "Reconcile original author OBJ with PDS repackagedOBJ before claiming byte equivalence."
+  ],
+  "orbit": {
+    "source": "source/validation/epoch-state.json",
+    "qualification": "The fixed-epoch orbit is evaluated from Scheirich et al. (2021), Table 4 and section 2.2, with the phase-bearing source parameters retained in source/orbit/published-parameters.json. The 2026 scene extrapolates the 2000–2019 photometric fit. Summed individual phase sensitivities are about 55 degrees at this epoch; this is not a formal confidence interval, and no independent 2026 position product was acquired. The older radar pole checks the orbital plane but does not verify the extrapolated current phase. Geometry retains the original 2006 OBJ scale independently of the later photometric size preference. No current attitude or libration is predicted.",
+    "runtimeExtrapolation": false
+  }
+}

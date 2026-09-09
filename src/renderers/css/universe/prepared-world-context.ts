@@ -1,3 +1,5 @@
+import { parsePreparedOrbitCenters } from './prepared-orbit-centers.js';
+import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
 import { createRetainedLeafPool } from '../rendering/retained-leaf-pool.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
@@ -120,6 +122,7 @@ export interface PreparedWorldContext {
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
+  readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -200,7 +203,7 @@ function parsePresentation(value: unknown): PreparedContextCameraPresentation {
     orbitLineFade: Object.freeze({ visibleBelowDiscHeightShare, hiddenAboveDiscHeightShare }), drag: Object.freeze({ model: drag.model }) });
 }
 export function parsePreparedWorldContext(value: unknown): PreparedWorldContext {
-  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'camera', 'volume', 'stars', 'system', 'sky']);
+  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'camera', 'volume', 'stars', 'system', 'sky']);
   if (input.schema !== 'cssearth-world-context@1') throw new TypeError('Unsupported prepared world context.');
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
@@ -240,19 +243,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
-  const parents = new Map<string, PreparedContextBody>(bodies.map(body => [body.id, body]));
-  for (const body of bodies) {
-    if (!body.orbit) continue;
-    const parent = body.orbit.centerBodyId === focus.id ? focus : parents.get(body.orbit.centerBodyId);
-    if (!parent || parent.id === body.id || !equalPosition(parent.positionM, body.orbit.centerPositionM)) {
-      throw new TypeError('Context orbit centre must match a prepared parent body.');
-    }
-    const ancestors = new Set([body.id]);
-    for (let id: string | undefined = body.orbit.centerBodyId; id !== undefined && id !== focus.id; id = parents.get(id)?.orbit?.centerBodyId) {
-      if (ancestors.has(id) || !parents.has(id)) throw new TypeError('Context orbit parent hierarchy must terminate at a prepared point.');
-      ancestors.add(id);
-    }
-  }
+  const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
   const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
@@ -278,6 +269,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   const objectId = text(volume.objectId, 'volume identity');
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   return Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
+    ...(input.orbitCenters === undefined ? {} : { orbitCenters }),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
     volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
@@ -356,7 +348,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     const indicatorNavigation = bindObjectNavigationTarget(indicator, host);
     const labelNavigation = bindObjectNavigationTarget(label, host);
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host) : null;
-    return { body, group, sprite, marker, indicator, label, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId)! : null, pieces, piecePool, navigation, indicatorNavigation, labelNavigation, orbitNavigation,
+    return { body, group, sprite, marker, indicator, label, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, indicatorNavigation, labelNavigation, orbitNavigation,
       closedOrbit: orbit?.trail.every(weight => weight === 1) === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       orbitPick: null as ScreenPickTarget | null,
@@ -430,6 +422,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let depthOrder = bodies;
   let pickRanks = new Map<(typeof bodies)[number], number>();
   let overview = false;
+  let selectionPreview: string | null | undefined;
   let navigationIndicatorsVisible = true;
   let latest: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
   const invalidateLabelSizes = () => { for (const entry of bodies) entry.labelSize.width = 0; };
@@ -471,6 +464,11 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         annotationResumeDeadline = windowTarget.performance.now() + FLIGHT_FADE_MS;
         if (latest) this.publish(latest.world, latest.viewport);
       }
+    },
+    previewSelection(id?: string | null) {
+      if (destroyed) return;
+      selectionPreview = id;
+      if (latest) this.publish(latest.world, latest.viewport);
     },
     setOverview(enabled: boolean) {
       if (overview === enabled || destroyed) return;
@@ -554,6 +552,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       }
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
+      const emphasizedId = selectionPreview === undefined ? (overview ? null : selectedId) : selectionPreview;
       const [ox, oy] = viewport.principalOffsetPixels;
       const focal = viewport.focalPixels;
       // Publication shares the camera owner's resize snapshot. Reading layout
@@ -590,6 +589,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const [x, y] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isSelected = body.id === selectedId;
+        entry.group.dataset.contextSelected = emphasizedId === null ? "overview" : String(body.id === emphasizedId);
         const isAnchor = body.id === plan.focus.id;
         const inFrame = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2;
         const visible = inFrame && !hidden(eye, body.id) && !parentHidden(eye);
@@ -627,8 +627,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const indicatorOpacity = isAnchor && overview ? 1 :
           bodyLod.markerOpacity * (isAnchor ? 1 : entry.orbitHidden ? opacity : entry.closedOrbit
             ? orbitVisibility : opacity * (isSelected ? 1 : appearance.markerOpacity));
-        const primary = entry.parent === null || entry.parent.id === plan.focus.id;
-        const priority = (isAnchor ? 4e6 : 0) + (hovered ? 2e6 : 0) + (isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
+        const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
+        const priority = (isAnchor ? 4e6 : 0) + (hovered ? 2e6 : 0) + (body.id === emphasizedId ? 6e6 : isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
         if (navigationIndicatorsVisible && annotationVisible && indicatorOpacity > 0) {
           const radius = BODY_INDICATOR_DIAMETER / 2, padding = entry.indicatorShown ? 0 : 2;
           indicators.add({ owner: 0, id: body.id, priority: priority + (entry.indicatorShown ? 100 : 0),
@@ -663,8 +663,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
         const labelOpacity = entry.orbitHidden ? opacity * (body.id === selectedId ? lod.billboardOpacity : 1) : markerOpacity;
-        if ((entry.labelHidden && !hovered) || !annotationVisible || labelOpacity <= 0.5 || size.width === 0 ||
-            (!resolvedDisc && body.id !== selectedId &&
+        if ((entry.labelHidden && !hovered && body.id !== emphasizedId) || !annotationVisible || labelOpacity <= 0.5 || size.width === 0 ||
+            (!resolvedDisc && body.id !== emphasizedId &&
               ((satellite && parentDiameter < plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels) ||
                (entry.orbit && !entry.orbitHidden && !hovered && orbitVisibility <= 0.5))) ||
             (indicatorOpacity > 0 && !entry.indicatorShown)) continue;
@@ -688,7 +688,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
               const nearestX = Math.max(lx, Math.min(lx + size.width, other.x));
               const nearestY = Math.max(ly, Math.min(ly + size.height, other.y));
               return Math.hypot(nearestX - other.x, nearestY - other.y) < BODY_INDICATOR_DIAMETER / 2 + 4;
-            }) && (hovered || entry.closedOrbit || satellite || body.id === plan.focus.id ||
+            }) && (hovered || body.id === emphasizedId || entry.closedOrbit || satellite || body.id === plan.focus.id ||
               !orbitOverlapsLabel(projectedBodies, lx, ly, size.width, size.height));
         });
         if (placement === undefined) continue;
@@ -715,7 +715,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         // Retain culled proxies without publishing transforms they cannot draw.
         // The current camera supplies their complete state on the reveal frame.
         if (markerShown) {
-          marker.style.opacity = String(markerOpacity);
+          marker.style.opacity = String(markerOpacity * (emphasizedId !== null && body.id !== emphasizedId && entry.group.dataset.objectHovered !== "true" ? .75 : 1));
           marker.style.transform = `translate(${x}px,${y}px) scale(${Math.max(2.4, diameter) / entry.sprite.size})`;
         }
         if (!navigationIndicatorsVisible) continue;

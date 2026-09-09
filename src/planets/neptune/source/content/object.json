@@ -148,7 +148,8 @@
           "id": "normal",
           "url": "https://science.nasa.gov/neptune/"
         },
-        "detail": "Visible light"
+        "detail": "Visible light",
+        "summary": "Hubble's 2025 color composite. Coverage north of about 30° N is filled with an illustrative, unobserved cap."
       },
       {
         "id": "methane",
@@ -193,7 +194,8 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
         },
-        "detail": "619 nm"
+        "detail": "619 nm",
+        "summary": "Hubble's 2025 map at 619 nm, shown in false color. The cap north of about 30° N is filled from its boundary, not measured."
       },
       {
         "id": "near-infrared",
@@ -238,7 +240,8 @@
           "id": "near-infrared",
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
         },
-        "detail": "845 nm"
+        "detail": "845 nm",
+        "summary": "Hubble's 2025 map at 845 nm, shown in false color. The cap north of about 30° N is filled from its boundary, not measured."
       }
     ]
   },

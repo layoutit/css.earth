@@ -1,7 +1,4 @@
 {
-  "schema": "cssearth-object@1",
-  "id": "comet-81p",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -23,12 +20,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "1d686044de538323756d0a67e05153eaac3b44c0dd398a9bac011b3d1cba37f8"
+          "sha256": "84d4bcbc7b331e095f982b385743b14d02c60af4b6809b4648a7d8e5b6af17df"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a658489cfcea9ceea93a61b9b6827b58c98c0876d99fad3e9338a621d6882798"
+          "sha256": "f80e3fbb9cc8d39f8c42e74bb9a0f60329e84f78db1a56af0f75895edf9d61e9"
         },
         {
           "id": "title",
@@ -43,7 +40,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "152eef487effe0314da841df362766c332ad705dd019a6457486fc8ae36c4b49"
+          "sha256": "debd09a94d205af00c766a2f54b2ccf1a971efe8cb401def01d7ed0ef1521d93"
         },
         {
           "id": "rotation",
@@ -63,6 +60,11 @@
           "lenses": [
             {
               "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "navcam",
               "source": "content",
               "material": "lighting"
             }
@@ -105,9 +107,12 @@
       "bodyRadiusM": 1917.1067262613963
     }
   },
+  "schema": "cssearth-object@1",
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c548f7138d8f5535e4840105544ff40544961027e79a1901dc911062f4fb88ed"
-  }
+    "sha256": "6c2b12015c26ed184ca74e884762295475eefa6cc126473bdb3932cf910b9a02"
+  },
+  "type": "layered-body",
+  "id": "comet-81p"
 }

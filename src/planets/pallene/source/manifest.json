@@ -87,7 +87,13 @@
       },
       "lensId": "normal",
       "label": "Monochrome",
-      "falseColor": false
+      "falseColor": false,
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.IMG"
+      }
     },
     {
       "id": "cassini-n1496910582-label",
@@ -110,6 +116,12 @@
         "type": "camera-perspective",
         "coordinates": "survey/n1496910582-camera.json",
         "referenceRadiusMeters": 2230
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.LBL"
       }
     }
   ],

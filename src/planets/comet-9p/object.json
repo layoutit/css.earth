@@ -1,7 +1,4 @@
 {
-  "schema": "cssearth-object@1",
-  "id": "comet-9p",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -23,12 +20,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "22220e8df3b1bd565b853c9e3c21a4daa38259308ffd9b3cdf5aeff8349eed46"
+          "sha256": "b3b5f820b986805ec4301c1f859e03c844dd5840d36e3da86c1bf41e1f351c6f"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8599bdaf5632fd9ccc6aa0d61ef3c2e5b7c664bb2e41096221f687395079a90b"
+          "sha256": "126422b7b4646f10825d8b990933dba165195050841575441b943de1ae1b549b"
         },
         {
           "id": "title",
@@ -43,7 +40,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "513ceb65e401f32b408149aa3f568dd18627826b5387c4fd990547ff158de110"
+          "sha256": "fb29057ea1736d98c525c89c506b33ccc618583ba500b851af50df5b96bf808d"
         },
         {
           "id": "rotation",
@@ -68,6 +65,16 @@
             },
             {
               "id": "constraints",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "deep-impact",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "next",
               "source": "content",
               "material": "lighting"
             }
@@ -110,9 +117,12 @@
       "bodyRadiusM": 2830
     }
   },
+  "schema": "cssearth-object@1",
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a6928d112bcdc679487efe1b2e2570b54c4e6a024ea2550c9f24944dca8871b3"
-  }
+    "sha256": "2a8cd5dac4c1cb18f17e543bab124e6396ceb93088798d51f394bfbe8f9fc1cf"
+  },
+  "type": "layered-body",
+  "id": "comet-9p"
 }

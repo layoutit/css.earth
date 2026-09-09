@@ -63,7 +63,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "A VLT/SPHERE shape model showing two lobes and a narrow neck. Gray grid: no surface imagery, not composition."
       }
     ]
   },
@@ -74,7 +75,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",

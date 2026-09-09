@@ -1,0 +1,35 @@
+[
+  {
+    "name": "dart-sis.pdf",
+    "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/document/dart_shapemodel_sis.pdf",
+    "bytes": 1197607,
+    "sha256": "618cbcead6ec54925d2db3a44449b8357cc354d539a2712fe77efe4b79f97bd8",
+    "status": 200
+  },
+  {
+    "name": "dart-v004-index.html",
+    "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/",
+    "bytes": 39085,
+    "sha256": "8b7bd87b0b5061d591bebe0ce820b9ec2390cf75ab41165b98715d506b250fec",
+    "status": 200
+  },
+  {
+    "name": "diviner-gdr3.xml",
+    "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/collection_data_derived_gdr_level3.xml",
+    "bytes": 7513,
+    "sha256": "3b78aadd3077081d8ad63c7d7307779ff2a2e107ac61042db0ced2ecdb10d97d",
+    "status": 200
+  },
+  {
+    "name": "sbmt-index.html",
+    "url": "https://sbmt.jhuapl.edu/shared-files/",
+    "bytes": 17826,
+    "sha256": "fb51d1fae5b77f268df895bfce265a40d1c611f417fcbd85b53d4f5c8cca5e52",
+    "status": 200
+  },
+  {
+    "name": "deimos-exi-2026.html",
+    "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2025GL117346",
+    "error": "HTTP Error 403: Forbidden"
+  }
+]

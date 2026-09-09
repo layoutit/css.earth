@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "squannit",
+  "displayName": "Squannit",
+  "panel": {
+    "introduction": "Squannit is Moshup’s companion, formerly 1999 KW4 Beta. This is the original JPL radar-derived shape model. Radar constrains its broad figure, while visible-light terrain and current rotational phase remain unmapped. The grid marks unmapped terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions. Its orbit is approximate context from a published model extrapolated beyond the 2000–2019 observations.",
+    "facts": [
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Moshup"
+      },
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Radar-derived mesh"
+      },
+      {
+        "id": "dimensions",
+        "label": "Mesh extents",
+        "value": "0.571 × 0.463 × 0.349 km"
+      },
+      {
+        "id": "scale",
+        "label": "Size evidence",
+        "value": "Original radar model · dimensions in kilometres"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "later-size",
+        "label": "Later size estimate",
+        "value": "2021 photometry favors a larger body · original radar scale shown"
+      },
+      {
+        "id": "orbital-position",
+        "label": "Orbital position",
+        "value": "Published orbit extrapolated beyond observations · current phase approximate"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions.",
+        "title": "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions.",
+        "detail": "Radar shape",
+        "thumbnail": "/scenes/squannit/squannit-model-thumbnail.webp",
+        "surface": "squannit-model-surface@2x.webp",
+        "poles": "squannit-model-poles@2x.webp",
+        "source": {
+          "id": "radar-shape",
+          "path": "../manifest.json",
+          "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Scheirich et al. (2021): mutual-event model",
+      "role": "facts",
+      "description": "Later photometry and original radar size tension",
+      "href": "https://arxiv.org/pdf/1912.06456v2"
+    },
+    {
+      "label": "PDS JPL radar shape model collection",
+      "role": "surface",
+      "description": "Source measurements and model interpretation",
+      "href": "https://sbn.psi.edu/pds/resource/jplradarshape.html"
+    },
+    {
+      "label": "PDS JPL radar shape data directory",
+      "role": "facts",
+      "description": "Source measurements and model interpretation",
+      "href": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast.jpl.radar.shape_models_V1_0/data/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+      "credit": "Ostro et al.(2006), JPL radar team; original1999 KW4 Beta model"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Ostro et al.(2006), JPL radar team; original1999 KW4 Beta model"
+    }
+  }
+}
