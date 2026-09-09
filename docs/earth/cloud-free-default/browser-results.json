@@ -1,0 +1,361 @@
+{
+  "browserVersion": "153.0.8010.12",
+  "reports": [
+    {
+      "spec": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1
+      },
+      "opening": {
+        "zoom": 1.2396521739130437,
+        "selected": "normal",
+        "overlays": 0
+      },
+      "checks": [
+        {
+          "requested": "normal",
+          "delta": 100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": 100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "normal",
+          "zoom": 0.670293275156777,
+          "events": 1,
+          "stable": true
+        },
+        {
+          "requested": "normal",
+          "delta": -100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": -100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "normal",
+          "zoom": 1.239652173913044,
+          "events": 2,
+          "stable": true
+        },
+        {
+          "requested": "clouds",
+          "delta": 100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": 100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "clouds",
+          "zoom": 0.6702932751567772,
+          "events": 3,
+          "stable": true
+        },
+        {
+          "requested": "clouds",
+          "delta": -100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": -100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "clouds",
+          "zoom": 1.2396521739130444,
+          "events": 4,
+          "stable": true
+        },
+        {
+          "requested": "enso",
+          "delta": 100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": 100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "enso",
+          "zoom": 0.6702932751567772,
+          "events": 5,
+          "stable": true
+        },
+        {
+          "requested": "enso",
+          "delta": -100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": -100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "enso",
+          "zoom": 1.2396521739130446,
+          "events": 6,
+          "stable": true
+        }
+      ],
+      "errors": [],
+      "loads": 1
+    },
+    {
+      "spec": {
+        "name": "desktop-2x",
+        "width": 1440,
+        "height": 1000,
+        "dpr": 2
+      },
+      "opening": {
+        "zoom": 1.2396521739130437,
+        "selected": "normal",
+        "overlays": 0
+      },
+      "checks": [
+        {
+          "requested": "normal",
+          "delta": 100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": 100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "normal",
+          "zoom": 0.670293275156777,
+          "events": 1,
+          "stable": true
+        },
+        {
+          "requested": "normal",
+          "delta": -100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": -100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "normal",
+          "zoom": 1.239652173913044,
+          "events": 2,
+          "stable": true
+        },
+        {
+          "requested": "clouds",
+          "delta": 100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": 100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "clouds",
+          "zoom": 0.6702932751567772,
+          "events": 3,
+          "stable": true
+        },
+        {
+          "requested": "clouds",
+          "delta": -100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": -100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "clouds",
+          "zoom": 1.2396521739130444,
+          "events": 4,
+          "stable": true
+        },
+        {
+          "requested": "enso",
+          "delta": 100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": 100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "enso",
+          "zoom": 0.6702932751567772,
+          "events": 5,
+          "stable": true
+        },
+        {
+          "requested": "enso",
+          "delta": -100,
+          "method": "native-wheel",
+          "receipt": {
+            "deltaY": -100,
+            "deltaMode": 0,
+            "target": "planet-input-surface"
+          },
+          "selected": "enso",
+          "zoom": 1.2396521739130446,
+          "events": 6,
+          "stable": true
+        }
+      ],
+      "errors": [],
+      "loads": 1
+    },
+    {
+      "spec": {
+        "name": "mobile",
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "opening": {
+        "zoom": 0.33573913043478265,
+        "selected": "normal",
+        "overlays": 0
+      },
+      "checks": [
+        {
+          "requested": "normal",
+          "delta": 100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "normal",
+          "zoom": 0.18129913043478266,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "normal",
+          "delta": -100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "normal",
+          "zoom": 0.33573913043478265,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "clouds",
+          "delta": 100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "clouds",
+          "zoom": 0.18129913043478266,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "clouds",
+          "delta": -100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "clouds",
+          "zoom": 0.33573913043478265,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "enso",
+          "delta": 100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "enso",
+          "zoom": 0.18129913043478266,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "enso",
+          "delta": -100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "enso",
+          "zoom": 0.33573913043478265,
+          "events": 0,
+          "stable": true
+        }
+      ],
+      "errors": [],
+      "loads": 1
+    },
+    {
+      "spec": {
+        "name": "mobile-2x",
+        "width": 390,
+        "height": 844,
+        "dpr": 2
+      },
+      "opening": {
+        "zoom": 0.33573913043478265,
+        "selected": "normal",
+        "overlays": 0
+      },
+      "checks": [
+        {
+          "requested": "normal",
+          "delta": 100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "normal",
+          "zoom": 0.18129913043478266,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "normal",
+          "delta": -100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "normal",
+          "zoom": 0.33573913043478265,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "clouds",
+          "delta": 100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "clouds",
+          "zoom": 0.18129913043478266,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "clouds",
+          "delta": -100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "clouds",
+          "zoom": 0.33573913043478265,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "enso",
+          "delta": 100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "enso",
+          "zoom": 0.18129913043478266,
+          "events": 0,
+          "stable": true
+        },
+        {
+          "requested": "enso",
+          "delta": -100,
+          "method": "camera-state-mobile-wheel-disabled",
+          "receipt": null,
+          "selected": "enso",
+          "zoom": 0.33573913043478265,
+          "events": 0,
+          "stable": true
+        }
+      ],
+      "errors": [],
+      "loads": 1
+    }
+  ]
+}
