@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-coordinate-tiff-intake@1",
+  "input": "diviner_CF_space_weathering_corrected.tiff",
+  "latitude": "diviner_MI_latitude.tiff",
+  "longitude": "diviner_MI_longitude.tiff",
+  "pins": {
+    "diviner_CF_space_weathering_corrected.tiff": "350f6e1b9c3a12b18606182a0764985da4586875d99aa390ee2daf73b9097f52",
+    "diviner_MI_latitude.tiff": "f9fb1361f24f5d0d5b19e0a7a28fab8f5899bdc3123d8eae6daae568c081b276",
+    "diviner_MI_longitude.tiff": "eea24b573fca596791acfe6e5c74dee9eb39514ea00e585f47e0048609030229"
+  },
+  "sourceShape": [
+    11520,
+    4480
+  ],
+  "coordinateBounds": [
+    -180,
+    180,
+    70,
+    -70
+  ],
+  "width": 2048,
+  "height": 1024,
+  "radiusMeters": 1737400,
+  "output": "diviner-cf-2021-georeferenced.tif",
+  "receipt": "diviner-cf-2021-georeferenced.json"
+}

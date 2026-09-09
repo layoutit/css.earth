@@ -22,3 +22,7 @@
 
 No observed texture is claimed for missing coverage. Globe lighting is an
 approximation and does not recover terrain hidden by photographed shadows.
+
+## B6 sources
+
+The added views derive from credited public USGS/NASA scientific products. Preserve the source authors, PDS citation and processing qualifications recorded in SOURCE.md and the source manifest. No endorsement is implied.

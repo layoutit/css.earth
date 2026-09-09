@@ -200,3 +200,29 @@ camera navigation. The X/Y swap in solid PolyCSS leaf coordinates is included;
 no source interpretation occurs in runtime. The Yelland trial and its broken
 quality products are retained only for the intake audit. Useful regional framing,
 source-versus-display visuals, and Chrome conformance remain separate B2 gates.
+
+## B6 mapped science
+
+The geology view preserves the ten source map units and no-data regions from
+[Leonard, Patthoff and Senske (2024), SIM 3513](https://pubs.usgs.gov/publication/sim3513),
+scale 1:15 million. Colors use the released ArcGIS CMYK symbols converted to RGB;
+sub-pixel vector detail is not invented. Slight source extent overshoot is
+clipped to the globe; `nd` remains missing.
+
+The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sz4-5024),
+observations 17ENGLOBAL01A and 17ENGLOBAL02A, Minnaert-corrected CIOF products.
+Following the archive guide, RGB selects same-parity bands near 1.50, 1.35 and
+0.74 µm; exact wavelengths and band numbers are pinned in `source/nims/prepare-composite.json`.
+The blue channels differ slightly (0.732919 and 0.740634 µm); this is a spectral
+color display, not a uniform quantitative abundance map. Fixed I/F ranges are
+R 0–0.6, G 0–1.2, B 0–1.5. Endpoint clipping retains calibrated noise and outliers.
+The first observation has priority in overlap. The USGS 2010 registration grid
+matches this body's global visible mosaic; it is not the newer 2021 control grid.
+
+Exact bytes, coordinates and validity rules are in the intake plans and receipts.
+Reproduction: `tools/objects/acquisition/MAPPED-SCIENCE.md`.
+
+The official USGS archive browser maps Individual Investigations to its working
+CloudFront endpoint in [main.js](https://pdsimage2.wr.usgs.gov/index-style/js/main.js).
+The original guides prescribe registered GeoTIFF geometry rather than COC
+backplanes. Unobserved cells remain the shared gray grid; no gap fill is used.

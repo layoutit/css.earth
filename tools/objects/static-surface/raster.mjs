@@ -27,7 +27,10 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
     if (plan.elevation || plan.scientific) {
       const width = 256, height = 16, data = Buffer.alloc(width * height * 3);
       for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-        data.set(plan.scientific ? colorForValue(plan.scientific.minimum + x / (width - 1) * (plan.scientific.maximum - plan.scientific.minimum), plan.scientific) : elevationColor((2 * x / (width - 1) - 1) * plan.elevation.rangeMetres, plan.elevation), (y * width + x) * 3);
+        const value = plan.scientific?.categories
+          ? Math.min(plan.scientific.categories.length - 1, Math.floor(x * plan.scientific.categories.length / width))
+          : plan.scientific && plan.scientific.minimum + x / (width - 1) * (plan.scientific.maximum - plan.scientific.minimum);
+        data.set(plan.scientific ? colorForValue(value, plan.scientific) : elevationColor((2 * x / (width - 1) - 1) * plan.elevation.rangeMetres, plan.elevation), (y * width + x) * 3);
       }
       await sharp(data, { raw: { width, height, channels: 3 } }).webp({ lossless: true })
         .toFile(resolve(publicDirectory, `${plan.output}-legend.webp`));

@@ -149,3 +149,21 @@ function sourceManifest(files, overrides = {}) {
 function digest(bytes) {
   return createHash("sha256").update(bytes).digest("hex");
 }
+
+test("streamed verification detects late corruption and truncation across file chunks", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "cssearth-source-chunks-"));
+  t.after(() => rm(root, { force: true, recursive: true }));
+  await mkdir(join(root, "input"));
+  const bytes = Buffer.alloc(200003, 73);
+  bytes[131079] = 29;
+  const manifest = sourceManifest({ "input/source.txt": bytes });
+  manifest.generatedIntermediates = []; manifest.documents = [];
+  const verify = () => verifySourceManifest({ manifest, planetName: "Fixture", sourceRoot: root });
+  await writeFile(join(root, "input/source.txt"), bytes);
+  await verify();
+  const corrupt = Buffer.from(bytes); corrupt[199999] ^= 1;
+  await writeFile(join(root, "input/source.txt"), corrupt);
+  await assert.rejects(verify(), /hash drifted/);
+  await writeFile(join(root, "input/source.txt"), bytes.subarray(0, -1));
+  await assert.rejects(verify(), /size drifted/);
+});

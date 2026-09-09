@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "moon",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f206fb4a3c1392e77867ab8d8f9fcd90c5f039260db794a0aa9fe70689117b8"
+    "sha256": "c780efe9cf831a058dde36dd6fe8a06e2a16e3929894774ac030e1cd73139e50"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "7f2bc1e031212dbf5abf739fe10e29c008615162f1f4b9a0a6f2e5b2715e7c46"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "b0ec475cd7d21c58e606b7eea3e0a893c25e3d6d64628816a2b59b27ff242b24",
+      "sha256": "ccb8c30e7840c19bc3d6e6958b40bea14e5fbf2049306b19cce02438c9af8bde",
       "parameters": {
         "schema": "cssearth-static-surface-raster@1",
         "kind": "observation-lenses",
@@ -169,6 +169,326 @@
               "outputLongitudeOrigin": -180,
               "displaySampling": "nearest"
             }
+          },
+          {
+            "id": "silicate-signature",
+            "label": "Silicate signature",
+            "input": "science/diviner-cf-2021-georeferenced.tif",
+            "output": "moon-silicate-signature",
+            "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude",
+            "scientific": {
+              "minimum": 8,
+              "maximum": 8.5,
+              "colors": [
+                "#3b4b9b",
+                "#4ea8ae",
+                "#e3e6b3",
+                "#d49950",
+                "#873640"
+              ],
+              "units": "µm",
+              "outputLongitudeOrigin": -180,
+              "displaySampling": "nearest",
+              "format": "geotiff",
+              "path": "diviner-cf-2021-georeferenced.tif",
+              "sampling": "nearest",
+              "grid": {
+                "width": 2048,
+                "height": 1024,
+                "noData": -9999,
+                "origin": [
+                  -5458203.076346907,
+                  2729101.5381734534
+                ],
+                "referenceRadiusMeters": 1737400,
+                "resolutionMeters": 5330.276441745026,
+                "centerLongitude": 0,
+                "wrapLongitude": true
+              }
+            }
+          },
+          {
+            "id": "geology",
+            "label": "Geology",
+            "input": "geology/moon-geologic-units.tif",
+            "output": "moon-geology",
+            "qualification": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale.",
+            "scientific": {
+              "id": "geology",
+              "label": "Geology",
+              "format": "geotiff",
+              "path": "moon-geologic-units.tif",
+              "consumer": "geology",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "categories": [
+                {
+                  "value": "Cc",
+                  "label": "Cc · Copernican crater",
+                  "color": "#b84040"
+                },
+                {
+                  "value": "Ccc",
+                  "label": "Ccc · Copernican crater cluster",
+                  "color": "#7b99e0"
+                },
+                {
+                  "value": "Csc",
+                  "label": "Csc · Copernican secondary crater",
+                  "color": "#a4e04f"
+                },
+                {
+                  "value": "EIp",
+                  "label": "EIp · Eratosthenian-Imbrian plateau",
+                  "color": "#b865ad"
+                },
+                {
+                  "value": "Ec",
+                  "label": "Ec · Eratosthenian crater",
+                  "color": "#4fe0c8"
+                },
+                {
+                  "value": "Ecc",
+                  "label": "Ecc · Eratosthenian crater cluster",
+                  "color": "#e0b27b"
+                },
+                {
+                  "value": "Em",
+                  "label": "Em · Eratosthenian mare",
+                  "color": "#5e40b8"
+                },
+                {
+                  "value": "Esc",
+                  "label": "Esc · Eratosthenian secondary crater",
+                  "color": "#80e07b"
+                },
+                {
+                  "value": "INp",
+                  "label": "INp · Imbrian-Nectarian plains",
+                  "color": "#e04f7f"
+                },
+                {
+                  "value": "INt",
+                  "label": "INt · Imbrian-Nectarian terra",
+                  "color": "#6599b8"
+                },
+                {
+                  "value": "Ib",
+                  "label": "Ib · Imbrian basin undivided",
+                  "color": "#d4e04f"
+                },
+                {
+                  "value": "Ibm",
+                  "label": "Ibm · Imbrian basin massif",
+                  "color": "#cb7be0"
+                },
+                {
+                  "value": "Ic",
+                  "label": "Ic · Imbrian crater undivided",
+                  "color": "#40b87c"
+                },
+                {
+                  "value": "Ic1",
+                  "label": "Ic1 · Imbrian lower crater",
+                  "color": "#e0907b"
+                },
+                {
+                  "value": "Ic2",
+                  "label": "Ic2 · Imbrian upper crater",
+                  "color": "#4f5be0"
+                },
+                {
+                  "value": "Icc",
+                  "label": "Icc · Imbrian crater cluster",
+                  "color": "#84b865"
+                },
+                {
+                  "value": "Icf",
+                  "label": "Icf · Imbrian crater fracture floor",
+                  "color": "#e04fb0"
+                },
+                {
+                  "value": "Id",
+                  "label": "Id · Imbrian dark mantling",
+                  "color": "#7bdce0"
+                },
+                {
+                  "value": "Ig",
+                  "label": "Ig · Imbrian grooved terrain",
+                  "color": "#b89940"
+                },
+                {
+                  "value": "Iia",
+                  "label": "Iia · Imbrian imbrium alpes formation",
+                  "color": "#a97be0"
+                },
+                {
+                  "value": "Iiap",
+                  "label": "Iiap · Imbrian imbrium apenninus formation",
+                  "color": "#4fe066"
+                },
+                {
+                  "value": "Iic",
+                  "label": "Iic · Imbrian imbrium crater",
+                  "color": "#b86570"
+                },
+                {
+                  "value": "Iif",
+                  "label": "Iif · Imbrian imbrium fra mauro formation",
+                  "color": "#4f8ce0"
+                },
+                {
+                  "value": "Im1",
+                  "label": "Im1 · Imbrian lower mare",
+                  "color": "#c3e07b"
+                },
+                {
+                  "value": "Im2",
+                  "label": "Im2 · Imbrian upper mare",
+                  "color": "#b740b8"
+                },
+                {
+                  "value": "Imd",
+                  "label": "Imd · Imbrian mare dome",
+                  "color": "#7be0c3"
+                },
+                {
+                  "value": "Iohi",
+                  "label": "Iohi · Imbrian orientale hevelius formation, inner facies",
+                  "color": "#e08b4f"
+                },
+                {
+                  "value": "Ioho",
+                  "label": "Ioho · Imbrian orientale hevelius formation, inner facies",
+                  "color": "#6f65b8"
+                },
+                {
+                  "value": "Iohs",
+                  "label": "Iohs · Imbrian orientale hevelius formation, secondary crater facies",
+                  "color": "#67e04f"
+                },
+                {
+                  "value": "Iom",
+                  "label": "Iom · Imbrian orientale maunder formation",
+                  "color": "#e07baa"
+                },
+                {
+                  "value": "Iork",
+                  "label": "Iork · Imbrian orientale montes rook formation, knobby facies",
+                  "color": "#409ab8"
+                },
+                {
+                  "value": "Iorm",
+                  "label": "Iorm · Imbrian orientale montes rook formation, massif facies",
+                  "color": "#e0dc7b"
+                },
+                {
+                  "value": "Ip",
+                  "label": "Ip · Imbrian plains",
+                  "color": "#af4fe0"
+                },
+                {
+                  "value": "Isc",
+                  "label": "Isc · Imbrian secondary crater",
+                  "color": "#65b884"
+                },
+                {
+                  "value": "It",
+                  "label": "It · Imbrian terra",
+                  "color": "#e05a4f"
+                },
+                {
+                  "value": "Itd",
+                  "label": "Itd · Imbrian terra dome",
+                  "color": "#7b91e0"
+                },
+                {
+                  "value": "Nb",
+                  "label": "Nb · Nectarian basin undivided",
+                  "color": "#7cb840"
+                },
+                {
+                  "value": "Nbl",
+                  "label": "Nbl · Nectarian basin lineated",
+                  "color": "#e07bcc"
+                },
+                {
+                  "value": "Nbm",
+                  "label": "Nbm · Nectarian basin massif",
+                  "color": "#4fe0d4"
+                },
+                {
+                  "value": "Nbsc",
+                  "label": "Nbsc · Nectarian basin secondary crater",
+                  "color": "#b89865"
+                },
+                {
+                  "value": "Nc",
+                  "label": "Nc · Nectarian crater",
+                  "color": "#7e4fe0"
+                },
+                {
+                  "value": "Nnj",
+                  "label": "Nnj · Nectarian nectaris janssen formation",
+                  "color": "#7be07f"
+                },
+                {
+                  "value": "Np",
+                  "label": "Np · Nectarian plains",
+                  "color": "#b8405f"
+                },
+                {
+                  "value": "Nt",
+                  "label": "Nt · Nectarian terra",
+                  "color": "#7bb3e0"
+                },
+                {
+                  "value": "Ntp",
+                  "label": "Ntp · Nectarian plains and mantling, terra",
+                  "color": "#c9e04f"
+                },
+                {
+                  "value": "pNb",
+                  "label": "pNb · Pre-Nectarian basin undivided",
+                  "color": "#ad65b8"
+                },
+                {
+                  "value": "pNbm",
+                  "label": "pNbm · Pre-Nectarian basin massif",
+                  "color": "#4fe0a3"
+                },
+                {
+                  "value": "pNc",
+                  "label": "pNc · Pre-Nectarian crater",
+                  "color": "#e0987b"
+                },
+                {
+                  "value": "pNt",
+                  "label": "pNt · Pre-Nectarian terra",
+                  "color": "#4041b8"
+                }
+              ],
+              "description": "Interpreted geologic units",
+              "title": "USGS unified global geology (2020 v2)",
+              "sourceUrl": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
+              "grid": {
+                "width": 2048,
+                "height": 1024,
+                "centerLongitude": 0,
+                "referenceRadiusMeters": 1737400,
+                "noData": -32768,
+                "origin": [
+                  -5458203.076346907,
+                  2729101.5381734534
+                ],
+                "resolution": [
+                  5330.276441745026,
+                  -5330.276441745026
+                ],
+                "wrapLongitude": true
+              },
+              "outputLongitudeOrigin": -180
+            }
           }
         ]
       }
@@ -176,7 +496,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "90d43458850500f299ecb4b928a5325de1dd3d3cf62eb119f81a9b76b13dcc8f",
+      "sha256": "8013c65f1a2d60fb0a28458e3e8175b5fa02372bb4d550cb0895c78c2e78c9a2",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "moon",
@@ -398,6 +718,288 @@
                   "meta": "%",
                   "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml"
                 }
+              },
+              {
+                "id": "silicate-signature",
+                "label": "Silicate signature",
+                "thumbnailUrl": "/scenes/moon/moon-silicate-signature-thumbnail.webp",
+                "description": "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0–8.5 µm; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50° latitude. Gray grid marks missing observations and latitudes beyond ±70°.",
+                "title": "Diviner Christiansen feature, 2009–2016",
+                "detail": "Composition proxy",
+                "legend": {
+                  "kind": "scale",
+                  "title": "Christiansen-feature wavelength",
+                  "src": "/scenes/moon/moon-silicate-signature-legend.webp",
+                  "width": 256,
+                  "height": 16,
+                  "labels": [
+                    "≤8.0",
+                    "8.25",
+                    "≥8.5"
+                  ],
+                  "meta": "µm",
+                  "sourceUrl": "https://zenodo.org/records/4558194"
+                }
+              },
+              {
+                "id": "geology",
+                "label": "Geology",
+                "thumbnailUrl": "/scenes/moon/moon-geology-thumbnail.webp",
+                "title": "USGS unified global geology (2020 v2)",
+                "description": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale.",
+                "detail": "Mapped units",
+                "legend": {
+                  "kind": "categories",
+                  "title": "Geologic units",
+                  "items": [
+                    {
+                      "label": "Cc",
+                      "color": "#b84040",
+                      "description": "Copernican crater"
+                    },
+                    {
+                      "label": "Ccc",
+                      "color": "#7b99e0",
+                      "description": "Copernican crater cluster"
+                    },
+                    {
+                      "label": "Csc",
+                      "color": "#a4e04f",
+                      "description": "Copernican secondary crater"
+                    },
+                    {
+                      "label": "EIp",
+                      "color": "#b865ad",
+                      "description": "Eratosthenian-Imbrian plateau"
+                    },
+                    {
+                      "label": "Ec",
+                      "color": "#4fe0c8",
+                      "description": "Eratosthenian crater"
+                    },
+                    {
+                      "label": "Ecc",
+                      "color": "#e0b27b",
+                      "description": "Eratosthenian crater cluster"
+                    },
+                    {
+                      "label": "Em",
+                      "color": "#5e40b8",
+                      "description": "Eratosthenian mare"
+                    },
+                    {
+                      "label": "Esc",
+                      "color": "#80e07b",
+                      "description": "Eratosthenian secondary crater"
+                    },
+                    {
+                      "label": "INp",
+                      "color": "#e04f7f",
+                      "description": "Imbrian-Nectarian plains"
+                    },
+                    {
+                      "label": "INt",
+                      "color": "#6599b8",
+                      "description": "Imbrian-Nectarian terra"
+                    },
+                    {
+                      "label": "Ib",
+                      "color": "#d4e04f",
+                      "description": "Imbrian basin undivided"
+                    },
+                    {
+                      "label": "Ibm",
+                      "color": "#cb7be0",
+                      "description": "Imbrian basin massif"
+                    },
+                    {
+                      "label": "Ic",
+                      "color": "#40b87c",
+                      "description": "Imbrian crater undivided"
+                    },
+                    {
+                      "label": "Ic1",
+                      "color": "#e0907b",
+                      "description": "Imbrian lower crater"
+                    },
+                    {
+                      "label": "Ic2",
+                      "color": "#4f5be0",
+                      "description": "Imbrian upper crater"
+                    },
+                    {
+                      "label": "Icc",
+                      "color": "#84b865",
+                      "description": "Imbrian crater cluster"
+                    },
+                    {
+                      "label": "Icf",
+                      "color": "#e04fb0",
+                      "description": "Imbrian crater fracture floor"
+                    },
+                    {
+                      "label": "Id",
+                      "color": "#7bdce0",
+                      "description": "Imbrian dark mantling"
+                    },
+                    {
+                      "label": "Ig",
+                      "color": "#b89940",
+                      "description": "Imbrian grooved terrain"
+                    },
+                    {
+                      "label": "Iia",
+                      "color": "#a97be0",
+                      "description": "Imbrian imbrium alpes formation"
+                    },
+                    {
+                      "label": "Iiap",
+                      "color": "#4fe066",
+                      "description": "Imbrian imbrium apenninus formation"
+                    },
+                    {
+                      "label": "Iic",
+                      "color": "#b86570",
+                      "description": "Imbrian imbrium crater"
+                    },
+                    {
+                      "label": "Iif",
+                      "color": "#4f8ce0",
+                      "description": "Imbrian imbrium fra mauro formation"
+                    },
+                    {
+                      "label": "Im1",
+                      "color": "#c3e07b",
+                      "description": "Imbrian lower mare"
+                    },
+                    {
+                      "label": "Im2",
+                      "color": "#b740b8",
+                      "description": "Imbrian upper mare"
+                    },
+                    {
+                      "label": "Imd",
+                      "color": "#7be0c3",
+                      "description": "Imbrian mare dome"
+                    },
+                    {
+                      "label": "Iohi",
+                      "color": "#e08b4f",
+                      "description": "Imbrian orientale hevelius formation, inner facies"
+                    },
+                    {
+                      "label": "Ioho",
+                      "color": "#6f65b8",
+                      "description": "Imbrian orientale hevelius formation, inner facies"
+                    },
+                    {
+                      "label": "Iohs",
+                      "color": "#67e04f",
+                      "description": "Imbrian orientale hevelius formation, secondary crater facies"
+                    },
+                    {
+                      "label": "Iom",
+                      "color": "#e07baa",
+                      "description": "Imbrian orientale maunder formation"
+                    },
+                    {
+                      "label": "Iork",
+                      "color": "#409ab8",
+                      "description": "Imbrian orientale montes rook formation, knobby facies"
+                    },
+                    {
+                      "label": "Iorm",
+                      "color": "#e0dc7b",
+                      "description": "Imbrian orientale montes rook formation, massif facies"
+                    },
+                    {
+                      "label": "Ip",
+                      "color": "#af4fe0",
+                      "description": "Imbrian plains"
+                    },
+                    {
+                      "label": "Isc",
+                      "color": "#65b884",
+                      "description": "Imbrian secondary crater"
+                    },
+                    {
+                      "label": "It",
+                      "color": "#e05a4f",
+                      "description": "Imbrian terra"
+                    },
+                    {
+                      "label": "Itd",
+                      "color": "#7b91e0",
+                      "description": "Imbrian terra dome"
+                    },
+                    {
+                      "label": "Nb",
+                      "color": "#7cb840",
+                      "description": "Nectarian basin undivided"
+                    },
+                    {
+                      "label": "Nbl",
+                      "color": "#e07bcc",
+                      "description": "Nectarian basin lineated"
+                    },
+                    {
+                      "label": "Nbm",
+                      "color": "#4fe0d4",
+                      "description": "Nectarian basin massif"
+                    },
+                    {
+                      "label": "Nbsc",
+                      "color": "#b89865",
+                      "description": "Nectarian basin secondary crater"
+                    },
+                    {
+                      "label": "Nc",
+                      "color": "#7e4fe0",
+                      "description": "Nectarian crater"
+                    },
+                    {
+                      "label": "Nnj",
+                      "color": "#7be07f",
+                      "description": "Nectarian nectaris janssen formation"
+                    },
+                    {
+                      "label": "Np",
+                      "color": "#b8405f",
+                      "description": "Nectarian plains"
+                    },
+                    {
+                      "label": "Nt",
+                      "color": "#7bb3e0",
+                      "description": "Nectarian terra"
+                    },
+                    {
+                      "label": "Ntp",
+                      "color": "#c9e04f",
+                      "description": "Nectarian plains and mantling, terra"
+                    },
+                    {
+                      "label": "pNb",
+                      "color": "#ad65b8",
+                      "description": "Pre-Nectarian basin undivided"
+                    },
+                    {
+                      "label": "pNbm",
+                      "color": "#4fe0a3",
+                      "description": "Pre-Nectarian basin massif"
+                    },
+                    {
+                      "label": "pNc",
+                      "color": "#e0987b",
+                      "description": "Pre-Nectarian crater"
+                    },
+                    {
+                      "label": "pNt",
+                      "color": "#4041b8",
+                      "description": "Pre-Nectarian terra"
+                    }
+                  ],
+                  "sourceUrl": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
+                }
               }
             ]
           },
@@ -481,6 +1083,28 @@
               "poles2xUrl": "/scenes/moon/moon-rock-abundance-poles@2x.webp",
               "qualification": "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south",
               "detail": "Modeled area fraction"
+            },
+            {
+              "id": "silicate-signature",
+              "label": "Silicate signature",
+              "thumbnailUrl": "/scenes/moon/moon-silicate-signature-thumbnail.webp",
+              "surfaceUrl": "/scenes/moon/moon-silicate-signature.webp",
+              "surface2xUrl": "/scenes/moon/moon-silicate-signature@2x.webp",
+              "polesUrl": "/scenes/moon/moon-silicate-signature-poles.webp",
+              "poles2xUrl": "/scenes/moon/moon-silicate-signature-poles@2x.webp",
+              "qualification": "LRO Diviner normalized Christiansen-feature wavelength; mineral-related proxy, not mineral abundance",
+              "detail": "Composition proxy"
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "thumbnailUrl": "/scenes/moon/moon-geology-thumbnail.webp",
+              "surfaceUrl": "/scenes/moon/moon-geology.webp",
+              "surface2xUrl": "/scenes/moon/moon-geology@2x.webp",
+              "polesUrl": "/scenes/moon/moon-geology-poles.webp",
+              "poles2xUrl": "/scenes/moon/moon-geology-poles@2x.webp",
+              "qualification": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale.",
+              "detail": "Mapped units"
             }
           ],
           "material": {
@@ -498,7 +1122,9 @@
             "surface": "NASA SVS CGI Moon Kit; LRO/LROC and LOLA",
             "topography": "David E. Smith and LRO LOLA team; NASA PDS Geosciences Node; LDEM_16 V3.1",
             "crust": "NASA GSFC SVS; Gravity Recovery and Interior Laboratory",
-            "rock-abundance": "Joshua Bandfield and LRO Diviner team, UCLA; NASA PDS Geosciences Node; DGDR_RA_AVG_CYL_032_IMG V4.0"
+            "rock-abundance": "Joshua Bandfield and LRO Diviner team, UCLA; NASA PDS Geosciences Node; DGDR_RA_AVG_CYL_032_IMG V4.0",
+            "silicate-signature": "Benjamin Greenhagen and UCLA LRO Diviner team; NASA PDS; DGDR_NEN_CF_CLC_CYL_032_IMG V1.0",
+            "geology": "Fortezzo, Spudis and Harrel (2020), USGS Unified Geologic Map of the Moon, version 2"
           }
         },
         "resources": [
@@ -548,7 +1174,8 @@
         "provenance": {
           "sourceRecord": "../SOURCE.md",
           "editorial": "source/orbit/moon.json",
-          "qualification": "LROC visible-color presentation, numeric LOLA elevation, modeled Diviner rock area and the retained GRAIL crust interpretation each preserve their own source epoch and limits."
+          "qualification": "LROC visible-color presentation, numeric LOLA elevation, modeled Diviner rock area and the retained GRAIL crust interpretation each preserve their own source epoch and limits.",
+          "silicate-signature": "Lucey et al. (2021), corrected Diviner Christiansen-feature map; DOI 10.5281/zenodo.4558194; CC-BY-4.0"
         }
       }
     }
@@ -576,7 +1203,7 @@
       "sha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
       "bytes": 457942,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -609,7 +1236,7 @@
       "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
       "bytes": 33177600,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -642,7 +1269,7 @@
       "sha256": "d791cb16b0e6ee74bda94ca5bc1577fc9589a9e7d70cdade255ad199f83a5e95",
       "bytes": 300978,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -669,7 +1296,7 @@
       "sha256": "ee0ff6ddfcc9cb4bb2fe83992f3951471c468a169804f1fdb582dc2df99540e1",
       "bytes": 88473600,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -678,6 +1305,64 @@
         "path": "science/dgdr_ra_avg_cyl_032_img.img",
         "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.img"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lro-diviner-christiansen-feature",
+      "path": "science/diviner-cf-2021-georeferenced.tif",
+      "origin": "https://zenodo.org/records/4558194",
+      "credit": "Lucey, Greenhagen, Donaldson Hanna, Bowles, Flom and Paige (2021)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/4558194",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Checked-in compact numeric grid. Reproduce using tools/objects/acquisition/coordinate-tiff-grid.py and science/prepare-cf-map.json from the three pinned original TIFFs.",
+      "redistribution": "Adapted under CC-BY-4.0; coordinate sampling and authored palette identified.",
+      "width": 2048,
+      "height": 1024,
+      "sha256": "adc63e4654a70093f5c060069f6394311aec52d6bdffd3eec1165173734f6632",
+      "bytes": 3801047,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-moon-geologic-units-grid",
+      "path": "geology/moon-geologic-units.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
+      "credit": "USGS; Fortezzo, Spudis and Harrel (2020)",
+      "license": "USGS public-domain scientific mapping; preserve author citation",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
+      ],
+      "acquisition": "Checked-in compact lossless unit grid, reproduced by tools/objects/acquisition/geology-grid.py from the pinned source shapefile using geology/prepare-grid.json.",
+      "redistribution": "Retain authors, scale and interpretation; palette colors are not observations.",
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1737400
+      },
+      "coverage": "Pixel-center categorical grid; unmapped, unknown and conflicting units withheld.",
+      "sha256": "16be1f099526cb91493e6004fa330b850b26f8ed72cd3a40dadcc5c427480bc5",
+      "bytes": 430857,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -690,10 +1375,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "90d43458850500f299ecb4b928a5325de1dd3d3cf62eb119f81a9b76b13dcc8f",
-      "bytes": 14678,
+      "sha256": "8013c65f1a2d60fb0a28458e3e8175b5fa02372bb4d550cb0895c78c2e78c9a2",
+      "bytes": 26173,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -707,8 +1392,7 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "NASA LRO/LROC visible-colour global surface mosaic",
-        "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display."
+        "NASA LRO/LROC visible-colour global surface mosaic"
       ],
       "lensIds": [
         "surface"
@@ -727,31 +1411,31 @@
           "url": "/scenes/moon/moon-surface-thumbnail.webp",
           "bytes": 2752,
           "sha256": "d781200e2456b17193e6c8f97bacf2fc8b21c095351b524f814cd029c06734b7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-surface.webp",
           "bytes": 139914,
           "sha256": "ba3e8fc8df0eb68c3e35354eceeef55edf09a04bdfd2b0a0341b965b5693ac58",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-surface@2x.webp",
           "bytes": 468882,
           "sha256": "46ca2b9b271f4a0bc628a899f710ac065b5c4fdbd01af38570b090f7c53be7cb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-surface-poles.webp",
           "bytes": 5624,
           "sha256": "048cf0d10edddc0ed7babcf4364f03b9c18eaa98858999b3e769c3c80f8190d8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-surface-poles@2x.webp",
           "bytes": 14032,
           "sha256": "7a3729490730deab48820f38c4dfd413d33857defb0310775e7308bfaa555c11",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -764,8 +1448,7 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
-        "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
+        "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere"
       ],
       "lensIds": [
         "topography"
@@ -784,31 +1467,31 @@
           "url": "/scenes/moon/moon-topography-thumbnail.webp",
           "bytes": 8168,
           "sha256": "c0f707fe1ccaddcd07cb6aec66dcbdc25811c20e5f9d3dccbd63d86a4a45c1e6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-topography.webp",
           "bytes": 529956,
           "sha256": "5662a74d505859d319028aed84d58142f6e14552b39f71d47f4031c3f5b5e644",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-topography@2x.webp",
           "bytes": 1763150,
           "sha256": "dd10f4675f70a899a5562feba522886acf6bf9323ca0729a39bdc7f2dc81ffdf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-topography-poles.webp",
           "bytes": 47866,
           "sha256": "f460a6375079dec50f7d7d7f5c465c619bc6a6958cd20e7a854ffb88d2f01f32",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-topography-poles@2x.webp",
           "bytes": 149512,
           "sha256": "e9f3a061b32a7e394dfed366fc39a4af0366fc1d301863f7fc85e6b6429df1d2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -821,8 +1504,7 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "NASA GRAIL crustal-thickness map with shaded relief",
-        "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust."
+        "NASA GRAIL crustal-thickness map with shaded relief"
       ],
       "lensIds": [
         "crust"
@@ -841,31 +1523,31 @@
           "url": "/scenes/moon/moon-crustal-thickness-thumbnail.webp",
           "bytes": 4676,
           "sha256": "42dd84a4036d4d996c1c98cbb685f25219bfd212dc01cee5c5f408adc172fb3b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness.webp",
           "bytes": 213074,
           "sha256": "c751f7d4915fca9c2e6f68841318acc39dc9b5794d379519c6373378e9db17ac",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness@2x.webp",
           "bytes": 476264,
           "sha256": "5c2b146fe3c147075fed83797cee3ae2e0e4197ee40229572c7e71de7731abee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness-poles.webp",
           "bytes": 13380,
           "sha256": "fd4ba671d89e385a596b6459a988262d91a6db407870e0f8925afee0c85a2652",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness-poles@2x.webp",
           "bytes": 35532,
           "sha256": "cd0d657288278f16ce42254b7526f7dacba27a4e45c3b22b862665eed0ff60be",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -878,8 +1560,7 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south",
-        "Surface area covered by rocks, inferred from nighttime Diviner thermal measurements in 2009–2010. Color spans 0–2%; values above 2% share the brightest color. Patterned areas are outside ±60° coverage, missing, or physically invalid. This is a thermal model, not a photograph or a count of individual boulders."
+        "LRO Diviner modeled surface rock-area fraction; source coverage within 60° north and south"
       ],
       "lensIds": [
         "rock-abundance"
@@ -898,31 +1579,143 @@
           "url": "/scenes/moon/moon-rock-abundance-thumbnail.webp",
           "bytes": 3018,
           "sha256": "4c08682c9073d2d80ddaf46a7c5c567e22512c25cc9d4edea799196829039917",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance.webp",
           "bytes": 148488,
           "sha256": "ae9cab0075a3b97e9542f00ecde380189165a37b2f72adc701005318d8ab1587",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance@2x.webp",
           "bytes": 558446,
           "sha256": "3d736ad2b78f81d01fcaf54574fe8004d4d2f8d2bebbd816df150873c18d37b2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance-poles.webp",
           "bytes": 2550,
           "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance-poles@2x.webp",
           "bytes": 5948,
           "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "silicate-signature",
+      "label": "Silicate signature",
+      "recipe": "raster",
+      "selector": "/lenses/4",
+      "parents": [],
+      "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
+      "limitations": [
+        "LRO Diviner normalized Christiansen-feature wavelength; mineral-related proxy, not mineral abundance"
+      ],
+      "lensIds": [
+        "silicate-signature"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude"
+      },
+      "inputs": [
+        "lro-diviner-christiansen-feature"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/moon/moon-silicate-signature-thumbnail.webp",
+          "bytes": 9240,
+          "sha256": "3c9445af0e519012bcb4bda61ed392fd9d9b88eea3f7c43894babca8635a6b44",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-silicate-signature.webp",
+          "bytes": 625606,
+          "sha256": "f737bd286589ebce877ee049a87ca6865557b3df0d1f0c61e1d2199e2fdb353c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-silicate-signature@2x.webp",
+          "bytes": 2414732,
+          "sha256": "8114bfa66e4e13a889fc3019963b3f37309c33d2277b1d74600cb5a1848d4974",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-silicate-signature-poles.webp",
+          "bytes": 2550,
+          "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-silicate-signature-poles@2x.webp",
+          "bytes": 5948,
+          "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "raster",
+      "selector": "/lenses/5",
+      "parents": [],
+      "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
+      "limitations": [
+        "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "qualification": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale."
+      },
+      "inputs": [
+        "usgs-moon-geologic-units-grid"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/moon/moon-geology-thumbnail.webp",
+          "bytes": 3722,
+          "sha256": "5ac01ef77302f05ff028fe41b80d6efdb73986cb2345a4cd298816e054973654",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-geology.webp",
+          "bytes": 77392,
+          "sha256": "08b5df80ad85bc4ea682e75587f0010ee9c6f8f34de344d82a89cd11ef78620c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-geology@2x.webp",
+          "bytes": 180188,
+          "sha256": "ff32836a3e303e91139c7669fa119e2e7ba72e85ac0cad8845399dee200c82d9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-geology-poles.webp",
+          "bytes": 6168,
+          "sha256": "40bbc3148d161ffb760894708caffd6386c156a9b5a18414d8265376bbbac85d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/moon/moon-geology-poles@2x.webp",
+          "bytes": 13278,
+          "sha256": "fd0d6ebbbe045efc6c2ff3b547d3682a0f30eb8993c48453c8677dde6518cd6e",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -945,8 +1738,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5550,
-          "sha256": "c04164d449ab2e4ab651a425e062753c91a804bc75913906f0128e95bb59af69",
+          "bytes": 5676,
+          "sha256": "f247532c6e02682b016382246744c49b3cd1dc0ac8f49e943446d0f8f1498389",
           "verification": "bytes-verified"
         }
       ],
@@ -1044,6 +1837,54 @@
           "url": "object:prepared/minimaps/rock-abundance.webp",
           "bytes": 58134,
           "sha256": "6b29eff642dc784d2764a3ca87839bfe0e091e485f3171d018a6379460b92565",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:silicate-signature",
+      "label": "Silicate signature preview",
+      "recipe": "raster",
+      "selector": "/lenses/4",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "silicate-signature"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/silicate-signature.webp",
+          "bytes": 249986,
+          "sha256": "c52ff3465734125abb22a2441ec5144afa2f396f5dfaf5cd817e9624bd9383dc",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:geology",
+      "label": "Geology preview",
+      "recipe": "raster",
+      "selector": "/lenses/5",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "geology"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/geology.webp",
+          "bytes": 41424,
+          "sha256": "21b4b8557143ab8e038a83556fb97c091c35df438d830ab3d3a3a5e74f868693",
           "verification": "bytes-verified"
         }
       ]

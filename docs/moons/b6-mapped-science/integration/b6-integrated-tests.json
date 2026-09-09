@@ -1,0 +1,226 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "tests/objects/unit/moon/preparation.test.mjs",
+    "tests/objects/unit/moon/runtime-contract.test.mjs",
+    "tests/objects/unit/moon/scientific.test.mjs",
+    "tests/objects/unit/europa/runtime-contract.test.mjs",
+    "tests/objects/unit/europa/surface.test.mjs",
+    "tests/objects/unit/callisto/color-atlas.test.mjs",
+    "tests/objects/unit/callisto/color-source.test.mjs",
+    "tests/objects/unit/callisto/runtime-contract.test.mjs",
+    "tests/objects/unit/callisto/surface.test.mjs",
+    "tests/objects/unit/charon/color.test.mjs",
+    "tests/objects/unit/charon/surface.test.mjs",
+    "tools/objects/static-surface/scientific-display.test.mjs",
+    "tools/objects/terrestrial-layers/lens-texture-scale.test.mjs",
+    "tools/objects/terrestrial-layers/categorical-solid-raster.test.mjs",
+    "tools/objects/terrestrial-layers/georeferenced-observation.test.mjs",
+    "tools/objects/terrestrial-layers/scientific-raster.test.mjs",
+    "src/platform/source-manifest.test.mjs",
+    "src/platform/runtime-asset-closure.test.mjs",
+    "site/test/router-runtime.test.mjs",
+    "site/test/navigation-router.test.mjs"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 898547712,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 393216,
+      "freePercent": 80
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 162938880,
+      "freePercent": 80
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 283033600,
+      "freePercent": 80
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 60407808,
+      "freePercent": 80
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 308871168,
+      "freePercent": 80
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 315932672,
+      "freePercent": 80
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 269025280,
+      "freePercent": 80
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 257753088,
+      "freePercent": 80
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 474923008,
+      "freePercent": 80
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 146194432,
+      "freePercent": 80
+    },
+    {
+      "seconds": 2.8,
+      "rssBytes": 134627328,
+      "freePercent": 80
+    },
+    {
+      "seconds": 3.0,
+      "rssBytes": 359743488,
+      "freePercent": 80
+    },
+    {
+      "seconds": 3.3,
+      "rssBytes": 477315072,
+      "freePercent": 80
+    },
+    {
+      "seconds": 3.6,
+      "rssBytes": 506658816,
+      "freePercent": 80
+    },
+    {
+      "seconds": 3.9,
+      "rssBytes": 535904256,
+      "freePercent": 80
+    },
+    {
+      "seconds": 4.1,
+      "rssBytes": 577142784,
+      "freePercent": 80
+    },
+    {
+      "seconds": 4.4,
+      "rssBytes": 696909824,
+      "freePercent": 80
+    },
+    {
+      "seconds": 4.7,
+      "rssBytes": 749453312,
+      "freePercent": 80
+    },
+    {
+      "seconds": 5.0,
+      "rssBytes": 799899648,
+      "freePercent": 80
+    },
+    {
+      "seconds": 5.2,
+      "rssBytes": 850165760,
+      "freePercent": 80
+    },
+    {
+      "seconds": 5.5,
+      "rssBytes": 297025536,
+      "freePercent": 80
+    },
+    {
+      "seconds": 5.8,
+      "rssBytes": 114262016,
+      "freePercent": 80
+    },
+    {
+      "seconds": 6.0,
+      "rssBytes": 276135936,
+      "freePercent": 80
+    },
+    {
+      "seconds": 6.3,
+      "rssBytes": 589676544,
+      "freePercent": 80
+    },
+    {
+      "seconds": 6.6,
+      "rssBytes": 257294336,
+      "freePercent": 80
+    },
+    {
+      "seconds": 6.9,
+      "rssBytes": 306003968,
+      "freePercent": 80
+    },
+    {
+      "seconds": 7.2,
+      "rssBytes": 387317760,
+      "freePercent": 80
+    },
+    {
+      "seconds": 7.4,
+      "rssBytes": 508444672,
+      "freePercent": 80
+    },
+    {
+      "seconds": 7.7,
+      "rssBytes": 636928000,
+      "freePercent": 80
+    },
+    {
+      "seconds": 8.0,
+      "rssBytes": 666615808,
+      "freePercent": 80
+    },
+    {
+      "seconds": 8.2,
+      "rssBytes": 712785920,
+      "freePercent": 80
+    },
+    {
+      "seconds": 8.5,
+      "rssBytes": 774455296,
+      "freePercent": 80
+    },
+    {
+      "seconds": 8.8,
+      "rssBytes": 898547712,
+      "freePercent": 79
+    },
+    {
+      "seconds": 9.1,
+      "rssBytes": 131956736,
+      "freePercent": 79
+    },
+    {
+      "seconds": 9.3,
+      "rssBytes": 268943360,
+      "freePercent": 79
+    },
+    {
+      "seconds": 9.6,
+      "rssBytes": 116850688,
+      "freePercent": 79
+    },
+    {
+      "seconds": 9.9,
+      "rssBytes": 176046080,
+      "freePercent": 79
+    },
+    {
+      "seconds": 10.2,
+      "rssBytes": 130203648,
+      "freePercent": 79
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 10.4
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-pds4-byte-geotiff-intake@1",
+  "label": "nh_charon_bond.lblx",
+  "input": "nh_charon_bond.img",
+  "lidvid": "urn:nasa:pds:nh_derived:plutosystem_geophysics:nh_charon_bond::1.0",
+  "shape": [
+    700,
+    1518
+  ],
+  "scale": 0.00392156862745,
+  "fields": {
+    "file_name": "nh_charon_bond.img",
+    "data_type": "UnsignedByte",
+    "axis_index_order": "Last Index Fastest",
+    "axes": "2",
+    "offset": {
+      "value": 0,
+      "unit": "byte"
+    },
+    "missing_constant": "0",
+    "map_projection_name": "Equirectangular",
+    "latitude_type": "Planetocentric",
+    "longitude_direction": "Positive East",
+    "latitude_of_projection_origin": {
+      "value": 0,
+      "unit": "deg"
+    },
+    "standard_parallel_1": {
+      "value": 0,
+      "unit": "deg"
+    },
+    "longitude_of_central_meridian": {
+      "value": 0,
+      "unit": "deg"
+    },
+    "horizontal_display_axis": "Sample",
+    "horizontal_display_direction": "Left to Right",
+    "vertical_display_axis": "Line",
+    "vertical_display_direction": "Top to Bottom",
+    "a_axis_radius": {
+      "value": 606000,
+      "unit": "m"
+    },
+    "b_axis_radius": {
+      "value": 606000,
+      "unit": "m"
+    },
+    "c_axis_radius": {
+      "value": 606000,
+      "unit": "m"
+    },
+    "pixel_resolution_x": {
+      "value": 2508.307177965,
+      "unit": "m/pixel"
+    },
+    "pixel_resolution_y": {
+      "value": 2508.307177965,
+      "unit": "m/pixel"
+    },
+    "upperleft_corner_x": {
+      "value": -1903805.1,
+      "unit": "m"
+    },
+    "upperleft_corner_y": {
+      "value": 951902.6,
+      "unit": "m"
+    }
+  },
+  "pins": {
+    "nh_charon_bond.lblx": "daa71e1c658e8c497203177290dc105c3ecad1c0280943affffaaa8ceddab867",
+    "nh_charon_bond.img": "7e58c10961d1721bc2912e7cd48254f54abf22f1e09351aa5cdc80845f1fab11"
+  },
+  "output": "nh-charon-bond-georeferenced.tif",
+  "receipt": "nh-charon-bond-georeferenced.json"
+}
