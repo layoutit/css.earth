@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { unpackSurfacePreview, assertSurfacePreviewCoverage } from './surface-preview-rasters.mjs';
+import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mjs';
 import { preparePagedSurfaceMap } from './objects/paged-ellipsoid/assets.mjs';
 
 // Two reversed bands with conspicuous padding: the preview must recover
@@ -26,6 +26,20 @@ test('preview restores reversed, out-of-order bands and preserves missing caps',
 test('preview rejects a changed prepared image layout', () => {
   assert.throws(() => unpackSurfacePreview({ data: Buffer.alloc(32), info: { width: 4,height: 2,channels: 4 } },
     { width: 2,height: 2,bandCount: 1,gutter: 1 }), /packing does not match/);
+});
+
+test('irregular surfaces do not require an ellipsoid or unpack triangle atlases', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-irregular-preview-'));
+  try {
+    await mkdir(join(directory, 'source/preparation'), { recursive: true });
+    await writeFile(join(directory, 'source/preparation/terrestrial.json'), JSON.stringify({
+      schema: 'cssearth-terrestrial-preparation@1', geometry: { radialTerrain: { path: 'shape.txt' } },
+    }));
+    const images = [];
+    for await (const image of recipeSurfacePreviews({ objectDirectory: directory,
+      publicDirectory: directory, outputDirectory: directory })) images.push(image);
+    assert.deepEqual(images, []);
+  } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
 test('paged previews keep the shared cloud composition and raw scientific maps distinct', async () => {

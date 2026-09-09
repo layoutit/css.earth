@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1839",
+  "modelId": 1839,
+  "modelVersion": "2017-09-21",
+  "diameterKm": 133,
+  "diameterInterpretation": "Nonconvex model constrained by resolved imaging, 133 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 133,
+    "uncertaintyKm": 7,
+    "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1839",
+    "reference": "DAMIT model 1839, version 2017-09-21",
+    "sourceLabel": "DAMIT model 1839",
+    "scaleKmPerSourceUnit": 0.9981250862555802,
+    "metersPerSourceUnit": 998.1250862555802,
+    "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The original ADAM study used only one AO observation for this body, limiting the shape constraints.",
+    "visibleDescription": "Nonconvex model constrained by resolved imaging, 133 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 15.70785,
+  "poleEclipticJ2000Degrees": [
+    98,
+    -10
+  ],
+  "modelLimitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The original ADAM study used only one AO observation for this body, limiting the shape constraints.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/957/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 998.1250862555802,
+    "firstVertexKm": [
+      3.4892077477789796,
+      -2.8223394170248146,
+      68.57955471960592
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      144.9256664616291,
+      139.7398077634796,
+      135.98017000108072
+    ],
+    "volumeCubicKm": 1231837.8526272564,
+    "volumeEquivalentRadiusKm": 66.5,
+    "radialRangeKm": [
+      55.868256080734234,
+      79.78869661245754
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1330,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1231837852627257.2
+    }
+  }
+}

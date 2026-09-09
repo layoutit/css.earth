@@ -1,0 +1,194 @@
+{
+  "number": 91,
+  "name": "Aegina",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/3372",
+  "modelId": 5831,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5831",
+  "catalog": "View model 40 32 6.02819 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "5831",
+    "Asteroid": "(91) Aegina",
+    "λ": "40",
+    "β": "32",
+    "P": "6.02819",
+    "YORP": "",
+    "t0": "2457228",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.83",
+    "p3": "0.18",
+    "p4": "-0.71",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:13:55",
+    "Modified": "2020-10-05 13:13:55",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/62201/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/62202/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/62203/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2020)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/658",
+      "file": "reference-658.html",
+      "links": [
+        {
+          "label": "2020a&a...643a..59d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2020a&a...643a..59d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D",
+          "url": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D"
+        }
+      ]
+    }
+  ],
+  "id": "aegina",
+  "displayName": "Aegina",
+  "lambda": 40.0,
+  "beta": 32.0,
+  "periodHours": 6.02819,
+  "version": "2019-10-23",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 100.17,
+  "uncertaintyKm": 1.23,
+  "akari": {
+    "number": 91,
+    "name": "Aegina",
+    "diameterKm": 100.17,
+    "uncertaintyKm": 1.23,
+    "detections": 9,
+    "originalRow": "91     Aegina                         8.84  0.15  9  100.17  1.23 0.051 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/62203/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/62201/IAUspin",
+  "shapeSha256": "8f40507e4c1c4fcf4858c89d9490e22ed2cbbea81363305f993f8f5a9cf7a5de",
+  "shapeBytes": 46095,
+  "vertices": 570,
+  "faces": 1136,
+  "signedVolume": 0.9999998666300286,
+  "independentSignedVolume": 0.9999998666300286,
+  "originalVolumeEquivalentDiameter": 1.2407009266413795,
+  "firstVertex": [
+    0.261335,
+    0.330729,
+    0.546019
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5500896597919288,
+    0.7602151275126009
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.664537,
+      0.608819
+    ],
+    [
+      -0.671942,
+      0.727366
+    ],
+    [
+      -0.59168,
+      0.562836
+    ]
+  ],
+  "scaleKmPerSourceUnit": 80.7366206061953,
+  "alternatives": [
+    {
+      "modelId": 5832,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5832",
+      "pole": [
+        "218",
+        "36"
+      ],
+      "version": "2019-10-23"
+    }
+  ],
+  "distanceAu": 2.5889074402927057,
+  "orbitalPeriodYears": 4.165652016287942,
+  "sourceFields": {
+    "ID": "5831",
+    "Asteroid": "(91) Aegina",
+    "λ": "40",
+    "β": "32",
+    "P": "6.02819",
+    "YORP": "",
+    "t0": "2457228",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.83",
+    "p3": "0.18",
+    "p4": "-0.71",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:13:55",
+    "Modified": "2020-10-05 13:13:55",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates"
+}

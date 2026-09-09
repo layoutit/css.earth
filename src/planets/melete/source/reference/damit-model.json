@@ -1,0 +1,217 @@
+{
+  "number": 56,
+  "name": "Melete",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/666",
+  "modelId": 1851,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1851",
+  "catalog": "View model 103 -28 18.14817 AO.png | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1851",
+    "Asteroid": "(56) Melete",
+    "λ": "103",
+    "β": "-28",
+    "P": "18.14817",
+    "YORP": "",
+    "t0": "2443659",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "116",
+    "σD": "5",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-09-21",
+    "Comment": "",
+    "Created": "2017-09-21 14:26:25",
+    "Modified": "2017-09-21 14:34:59",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.png": "https://damit.cuni.cz/projects/damit/stored_files/open/4058/AO.png",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4059/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/4060/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/4061/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Viikinkoski et al. (2017)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/171",
+      "file": "reference-171.html",
+      "links": [
+        {
+          "label": "2017a&a...607a.117v",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2017a&a...607a.117v"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2017A%26A...607A.117V",
+          "url": "http://adsabs.harvard.edu/abs/2017A%26A...607A.117V\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1708.05191",
+          "url": "https://arxiv.org/abs/1708.05191"
+        }
+      ]
+    }
+  ],
+  "id": "melete",
+  "displayName": "Melete",
+  "lambda": 103.0,
+  "beta": -28.0,
+  "periodHours": 18.14817,
+  "version": "2017-09-21",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 116.0,
+  "uncertaintyKm": 5.0,
+  "akari": {
+    "number": 56,
+    "name": "Melete",
+    "diameterKm": 105.22,
+    "uncertaintyKm": 1.16,
+    "detections": 10,
+    "originalRow": "56     Melete                         8.31  0.15 10  105.22  1.16 0.076 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4061/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4059/IAUspin.txt",
+  "shapeSha256": "45131587f308d1c0ec3565e7bd74c6bb7b0875bca028d847bc2a57c8a338648e",
+  "shapeBytes": 32486,
+  "vertices": 402,
+  "faces": 800,
+  "signedVolume": 824677.6902846862,
+  "independentSignedVolume": 824677.6902846862,
+  "originalVolumeEquivalentDiameter": 116.34879092318576,
+  "firstVertex": [
+    -3.256883,
+    -2.481648,
+    45.163754
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    45.34898608617517,
+    71.90114601853931
+  ],
+  "extentsSourceUnits": [
+    [
+      -61.303483,
+      65.684917
+    ],
+    [
+      -68.649348,
+      67.472852
+    ],
+    [
+      -50.684946,
+      48.013454
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9970021955499646,
+  "alternatives": [
+    {
+      "modelId": 1105,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1105",
+      "pole": [
+        "103",
+        "-27"
+      ],
+      "version": "2016-01-04"
+    },
+    {
+      "modelId": 1106,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1106",
+      "pole": [
+        "282",
+        "-5"
+      ],
+      "version": "2016-01-04"
+    },
+    {
+      "modelId": 1852,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1852",
+      "pole": [
+        "283",
+        "-1"
+      ],
+      "version": "2017-09-21"
+    }
+  ],
+  "distanceAu": 2.5988578205374266,
+  "orbitalPeriodYears": 4.18969089645172,
+  "sourceFields": {
+    "ID": "1851",
+    "Asteroid": "(56) Melete",
+    "λ": "103",
+    "β": "-28",
+    "P": "18.14817",
+    "YORP": "",
+    "t0": "2443659",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "116",
+    "σD": "5",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-09-21",
+    "Comment": "",
+    "Created": "2017-09-21 14:26:25",
+    "Modified": "2017-09-21 14:34:59",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}
