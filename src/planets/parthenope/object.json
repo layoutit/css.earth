@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 323.9130434782609,
       "bodyRadiusM": 74500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/parthenope-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c3e97aea784eb89348f9d0b8e28131f62e5a6c776549d04354611b838d29dbfd"
+      }
     }
   },
   "schema": "cssearth-object@1",

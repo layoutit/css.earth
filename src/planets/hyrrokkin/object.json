@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 16.52173913043478,
       "bodyRadiusM": 3800
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hyrrokkin-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7326c71577cd1b87b4285a30381d14a796d8015d5b30dcfcd5712658f8a530a1"
+      }
     }
   },
   "prepared": {

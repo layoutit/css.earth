@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 363.04347826086956,
       "bodyRadiusM": 83500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/io-85-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d1aa3b23b60c5e55c2e6e44a320a210daf850f9e1cb109f6a323bc111ea01462"
+      }
     }
   },
   "schema": "cssearth-object@1",

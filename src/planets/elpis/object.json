@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 339.5217391304348,
       "bodyRadiusM": 78090
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/elpis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ebf536a5940b0845468f7996fc98292cb9999e3e9333ff34aeeb1d15bdeabd10"
+      }
     }
   },
   "schema": "cssearth-object@1",

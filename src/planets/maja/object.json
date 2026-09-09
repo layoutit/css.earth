@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 156.06521739130434,
       "bodyRadiusM": 35895
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/maja-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3077c98a449719b93a5ca2182d3da92ec9be65f54f9221d77985661cd3dad551"
+      }
     }
   },
   "schema": "cssearth-object@1",

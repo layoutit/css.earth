@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 138.93478260869566,
       "bodyRadiusM": 31955
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hedda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b4346be8fc71dbbdb79d0e738945d7b12c02aa40bc15c4c9549c760056f5b164"
+      }
     }
   },
   "schema": "cssearth-object@1",

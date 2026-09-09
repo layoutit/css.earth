@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 289.1304347826087,
       "bodyRadiusM": 66500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bellona-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "54bb96360704e4a93ecb7e57a9a1b76c47d38076186c673d79c20c7dd2290d1f"
+      }
     }
   },
   "schema": "cssearth-object@1",

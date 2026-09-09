@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 163.04347826086956,
       "bodyRadiusM": 37500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nysa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "eb665f4bc5a348b333d19b835bc2db1a6cd250e7d1f4fb0cedb123980748401b"
+      }
     }
   },
   "schema": "cssearth-object@1",

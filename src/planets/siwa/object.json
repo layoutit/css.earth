@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 240.45652173913044,
       "bodyRadiusM": 55305
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/siwa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2a7382548acea91ca22d4a0d9716765feb4e07582eff7de167c732b93e07016a"
+      }
     }
   },
   "schema": "cssearth-object@1",

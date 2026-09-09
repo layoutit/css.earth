@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 2.1739130434782608,
       "bodyRadiusM": 500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-1998-ml14-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8993c0ac275e968741d100c150959b28901e9940d2ed8bb201e6ef476cdf0a8c"
+      }
     }
   },
   "schema": "cssearth-object@1",

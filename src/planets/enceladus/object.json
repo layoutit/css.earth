@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "b85caab6ca861268f7309094e5e5dd4dcf07402e6ab3f1350645347e748949ac"
+          "sha256": "b88628b2b19d84eb9920adbaaee9c47c6839359682daab4a13fbb765d17c0e1a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8939ed6177dc04a3bcb418c0e0c0a9d935f7624559f5ce49c119596497325bd5"
+          "sha256": "7427b79e3ae0f58d3c9b158cb5887655be993ef72299a48193a85bfe91632a6f"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "9df1c1eaa7cc703dd976bbeab82eb0e722ed2dbe7073c5a3614436754410c6c5"
+          "sha256": "e9cecdb23b82d24073b8a26f21ed9ca957b5b78c98571c474004d19e09ebad2a"
         }
       ],
       "shape": {
@@ -68,6 +68,16 @@
             },
             {
               "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ice-absorption",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "infrared-ratio",
               "source": "content",
               "material": "lighting"
             }
@@ -108,11 +118,20 @@
       ],
       "metersPerUnit": 1096.9565217391305,
       "bodyRadiusM": 252300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/enceladus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c6bbe29ec991a6afb811af65ecf57f99d779f204b96f3ea6ac859b795a6bfa1c"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6dd3b3a19d869b238bb21dd51fd59996543798ce66511be7ba971792a4ad7f43"
+    "sha256": "f491f6981d68c13f2c94e4948f07e0e7290666e34d54345ec95d12979b675efc"
   }
 }

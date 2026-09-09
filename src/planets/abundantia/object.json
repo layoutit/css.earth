@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 91.69565217391305,
       "bodyRadiusM": 21090
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/abundantia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ec2274e1dda0e5b3e24600bd477696e31721975f1f11f5f67af6e9eaecba6179"
+      }
     }
   },
   "schema": "cssearth-object@1",

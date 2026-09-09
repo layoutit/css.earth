@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 293.4782608695652,
       "bodyRadiusM": 67500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aemilia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b13ab98ee808ef7c604c0a9e9bc7790ce86d007c80df029d210495fa29ff8616"
+      }
     }
   },
   "schema": "cssearth-object@1",

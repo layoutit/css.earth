@@ -98,6 +98,15 @@
       ],
       "metersPerUnit": 126.08695652173913,
       "bodyRadiusM": 29000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/naiad-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fb21b2b76fd4c9a63a481a5bef32c28e3157a4f7f1c73a23c1635183c82284d3"
+      }
     }
   },
   "prepared": {

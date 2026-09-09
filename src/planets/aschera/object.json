@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 56.67391304347826,
       "bodyRadiusM": 13035
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aschera-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6a23782a93df415ff65a26c55f17bc4b30290606680030ef997468c4fb565844"
+      }
     }
   },
   "schema": "cssearth-object@1",

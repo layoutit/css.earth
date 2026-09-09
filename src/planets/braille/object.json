@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 2.783867749972814,
       "bodyRadiusM": 640.2895824937472
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/braille-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "53a83500e6e6617a035c72ee12b710e366d1079bbd9f603d86540b1fa43a9414"
+      }
     }
   },
   "prepared": {

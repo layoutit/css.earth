@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 295.618633675742,
       "bodyRadiusM": 67992.28574542065
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bienor-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "de9c7fabcbb321c2874b069f10cca4eea1d7f5978eacdaae7c0f737ce35891d3"
+      }
     }
   },
   "prepared": {

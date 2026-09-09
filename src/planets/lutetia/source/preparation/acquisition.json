@@ -99,6 +99,18 @@
       ],
       "path": "reference/osiris-photometry.pdf",
       "url": "https://arxiv.org/pdf/1710.01356"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/n20100710t154135529id4df22.img",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154135529id4df22.img",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
     }
   ]
 }

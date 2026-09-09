@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 180.8913043478261,
       "bodyRadiusM": 41605
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/phocaea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "282787597b560f3c9db1694fc3a38ba0cb9f5febe39e9328f88a09ee5ece82b7"
+      }
     }
   },
   "schema": "cssearth-object@1",

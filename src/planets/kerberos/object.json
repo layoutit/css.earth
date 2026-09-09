@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 20.652173913043477,
       "bodyRadiusM": 4750
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kerberos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "157f93655b6475b946081e0422419a2bad93d444e7ea20968f5a4f79f58af093"
+      }
     }
   },
   "prepared": {

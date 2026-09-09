@@ -1,10 +1,34 @@
 import { expect, test } from 'vitest';
-import { createPreparedRingProjector, createSphereChordTest, orbitBoundsMayContribute } from './prepared-ring-projection.js';
+import { createPreparedRingProjector, createRetainedRingProjection, createSphereChordTest, orbitBoundsMayContribute } from './prepared-ring-projection.js';
 import { rayHitsSphereBefore } from './heliocentric-geometry.js';
 import type { Vector3 } from './types.js';
 
 const project = ([x, y, z]: Vector3) => [130 + 800 * x / -z, -40 + 800 * y / -z];
 const limits = { toEye: (point: Vector3) => point, project, near: .1, clipX: 1000, clipY: 600 };
+
+test('a retained projection preserves clipped snapshots while reusing bounded slots through retirement and re-entry', () => {
+  const vertices: Vector3[] = Array.from({ length: 128 }, (_, i) => [
+    100 * Math.cos(i * Math.PI / 64), 80 * Math.sin(i * Math.PI / 64), -200]);
+  const trail = vertices.map(() => 1), retained = createRetainedRingProjection(vertices.length * 2);
+  let offset = 0;
+  const projector = createPreparedRingProjector({ ...limits,
+    toEye: p => [p[0] + offset, p[1], p[2]],
+    hidden: p => rayHitsSphereBefore(p, [0, 0, -100], 10),
+    mayOcclude: createSphereChordTest([0, 0, -100], 10, project) });
+  const first = projector(vertices, trail, undefined, false, retained);
+  const slots = [...first], snapshot = projector(vertices, trail);
+  for (offset of [150, 1000, -500, 0]) {
+    const expected = projector(vertices, trail);
+    const actual = projector(vertices, trail, undefined, false, retained);
+    expect(actual).toBe(first);
+    expect(actual).toEqual(expected);
+    for (let i = 0; i < Math.min(slots.length, actual.length); i++) expect(actual[i]).toBe(slots[i]);
+  }
+  expect(snapshot).toEqual(first);
+  expect(Object.isFrozen(snapshot)).toBe(true);
+  expect(Object.isFrozen(snapshot[0])).toBe(true);
+  expect(() => projector(vertices, trail, undefined, false, createRetainedRingProjection(1))).toThrow(/capacity/);
+});
 
 test('prepared orbit bounds reject only offscreen or fully faded chords across camera and physical scales', () => {
   let seed = 23751, rejected = 0, retained = 0;
@@ -95,5 +119,76 @@ test('broad phase preserves detailed clipping at limbs, eye plane, near-plane cr
         expect(optimized(vertices, [1, 0])).toEqual(reference(vertices, [1, 0]));
       }
     }
+  }
+});
+
+test('measurement demand preserves the clipped extent up to its existing saturation at every physical scale', () => {
+  let seed = 928571;
+  const random = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 2 ** 32);
+  for (const scale of [1, 1e8, 1e16]) for (let view = 0; view < 80; view++) {
+    const distance = (random() - .2) * 500 * scale, radius = 10 ** (random() * 3) * scale;
+    const vertices: Vector3[] = Array.from({ length: 128 }, (_, index) => {
+      const angle = index * Math.PI / 64;
+      return [radius * Math.cos(angle), radius * .7 * Math.sin(angle), distance + radius * .4 * Math.sin(angle)];
+    });
+    const trail = vertices.map((_, index) => view % 3 === 0 && index < 93 ? 0 : (index + 1) / 128);
+    const active = trail.flatMap((weight, index) => weight > 0 ? [index] : []);
+    // Extent is independent of traversal order, including near-plane and
+    // occlusion splits. Drawing continues to consume the authored order.
+    const scattered = [...active].sort((a, b) => (a * 73) % 128 - (b * 73) % 128);
+    const occluder: Vector3 = [30 * scale, -15 * scale, -100 * scale];
+    const projector = createPreparedRingProjector({ ...limits, near: .1 * scale,
+      hidden: point => rayHitsSphereBefore(point, occluder, 12 * scale),
+      mayOcclude: createSphereChordTest(occluder, 12 * scale, project) });
+    const segments = projector(vertices, trail, active);
+    const xs = segments.flatMap(s => [s[0], s[2]]), ys = segments.flatMap(s => [s[1], s[3]]);
+    const extent = Math.max(1, Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+    for (const saturation of [48, 128]) {
+      expect(projector.measureExtent(vertices, trail, saturation, active)).toBe(Math.min(extent, saturation));
+      expect(projector.measureExtent(vertices, trail, saturation, scattered)).toBe(Math.min(extent, saturation));
+    }
+  }
+});
+
+test('a saturated hidden orbit stops transforming chords while its visible path still projects completely', () => {
+  const vertices: Vector3[] = Array.from({ length: 128 }, (_, index) => [100 * Math.cos(index * Math.PI / 64), 80 * Math.sin(index * Math.PI / 64), -200]);
+  const trail = vertices.map(() => 1); let transforms = 0;
+  const projector = createPreparedRingProjector({ ...limits, toEye: p => { transforms++; return p; }, hidden: () => false, mayOcclude: () => false });
+  expect(projector.measureExtent(vertices, trail, 128)).toBe(128);
+  expect(transforms).toBeLessThan(20);
+  const sequentialTransforms = transforms;
+  transforms = 0;
+  const separated = [0, 64, ...vertices.flatMap((_, index) => index === 0 || index === 64 ? [] : [index])];
+  expect(projector.measureExtent(vertices, trail, 128, separated)).toBe(128);
+  expect(transforms).toBeLessThan(sequentialTransforms);
+  transforms = 0;
+  expect(projector(vertices, trail)).toHaveLength(128);
+  expect(transforms).toBe(128);
+  for (const invalid of [0, NaN, Infinity]) expect(() => projector.measureExtent(vertices, trail, invalid)).toThrow();
+});
+
+
+test('interior prepared chords share one camera projection per endpoint without reusing a stale view', () => {
+  const vertices: Vector3[] = Array.from({ length: 128 }, (_, index) => [
+    100 * Math.cos(index * Math.PI / 64), 80 * Math.sin(index * Math.PI / 64), -200]);
+  const trail = vertices.map(() => 1);
+  let projections = 0, offset = 0;
+  const projector = createPreparedRingProjector({ ...limits, hidden: () => { throw new Error('Unoccluded chord reached ray splitting'); },
+    mayOcclude: () => false, project: p => { projections++; return [offset + 800 * p[0] / -p[2], 800 * p[1] / -p[2]]; } });
+  const first = projector(vertices, trail);
+  expect(first).toHaveLength(128);
+  // Previously every chord projected both endpoints before and after clipping:
+  // 512 calls. A handful of endpoint rounding corrections may need a reproject.
+  expect(projections).toBeLessThan(150);
+  offset = 100; projections = 0;
+  const second = projector(vertices, trail);
+  expect(second).toHaveLength(128);
+  expect(projections).toBeLessThan(150);
+  for (let i = 0; i < first.length; i++) {
+    expect(second[i]![0]).toBeCloseTo(first[i]![0] + 100, 10);
+    expect(second[i]![2]).toBeCloseTo(first[i]![2] + 100, 10);
+    expect(second[i]![1]).toBe(first[i]![1]);
+    expect(second[i]![3]).toBe(first[i]![3]);
+    expect(second[i]![4]).toBe(first[i]![4]);
   }
 });

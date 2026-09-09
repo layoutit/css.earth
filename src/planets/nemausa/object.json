@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 326.0869565217391,
       "bodyRadiusM": 75000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nemausa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "274e10772da07b432aa272c293b3bb9c35d905cdae29eced04887cfe55c50533"
+      }
     }
   },
   "schema": "cssearth-object@1",

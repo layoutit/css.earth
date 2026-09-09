@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 42.555939962218154,
       "bodyRadiusM": 9787.866191310175
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/romulus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "645a10742db0e9725226c95c44afc408fa8163a8ac0381c84b5f6a2604d3f4d4"
+      }
     }
   },
   "prepared": {

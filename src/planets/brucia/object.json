@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 81.06521739130434,
       "bodyRadiusM": 18645
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/brucia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "553290cab1685b1fd616ed25ddaac3b216be30490cda0b3ed43fb777f8be0e1a"
+      }
     }
   },
   "schema": "cssearth-object@1",

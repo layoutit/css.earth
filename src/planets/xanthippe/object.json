@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 251.06521739130434,
       "bodyRadiusM": 57745
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/xanthippe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5c7ca1844cc0f046e31d97b69365c0eee1c8f1ae4d13e53b6b62347f52643660"
+      }
     }
   },
   "schema": "cssearth-object@1",

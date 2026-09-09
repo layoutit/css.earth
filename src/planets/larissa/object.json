@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 417.39130434782606,
       "bodyRadiusM": 96000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/larissa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "35b2b953b0765a8743946372ba2c1e497865ff7382f2bc8bdf22a8e16a9e9e5d"
+      }
     }
   },
   "prepared": {

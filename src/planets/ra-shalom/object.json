@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 5,
       "bodyRadiusM": 1150
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ra-shalom-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "17fe7346665080f82bc8ede56918791b68e4cd9d92d0a57cfab8d61d2422dba4"
+      }
     }
   },
   "schema": "cssearth-object@1",

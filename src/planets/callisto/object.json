@@ -111,6 +111,15 @@
           "sha256": "da96933fb20410aa403d21ab545a19f7e15dac62637763285beb95508ea4c8a8"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/callisto-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3ada9531452820b68d1ace536fe312ca84535c65d50bbefca7d07b98acbd04eb"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -207,6 +207,15 @@
       ],
       "metersPerUnit": 102330.57851239669,
       "bodyRadiusM": 24764000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/neptune-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "09d1924aa2a7afd432b554b3fd1c0b40a4ec05a196cd215c8528d774cad69320"
+      }
     }
   },
   "schema": "cssearth-object@1",

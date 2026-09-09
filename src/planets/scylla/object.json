@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 85.23913043478261,
       "bodyRadiusM": 19605
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/scylla-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f482115a9efd6d606777299c1513c85bce29caff6e226c3e9b137b3c466bc6c6"
+      }
     }
   },
   "schema": "cssearth-object@1",

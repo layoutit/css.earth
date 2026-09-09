@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 334.17391304347825,
       "bodyRadiusM": 76860
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/medea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1ce2ab29dc9433139356eacc3d07ff9a936f8065038197ab0da2c6808cdc215a"
+      }
     }
   },
   "schema": "cssearth-object@1",

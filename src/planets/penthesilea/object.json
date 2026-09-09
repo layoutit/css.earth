@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 139.1304347826087,
       "bodyRadiusM": 32000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/penthesilea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "89452673c277b22843cf49d8f04cf8b4fb7e1d8d034bbb187159363d550208df"
+      }
     }
   },
   "schema": "cssearth-object@1",

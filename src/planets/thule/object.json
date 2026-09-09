@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 252.17391304347825,
       "bodyRadiusM": 58000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thule-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8071a04c473540bab4fb3e8411b97c30e8e2811caab05ade224be3ccfecad517"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 363.04347826086956,
       "bodyRadiusM": 83500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/amalthea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "11323193b368601bfd40481cfba9a3d02801532a10f127711e783b4b19ffc3dd"
+      }
     }
   },
   "prepared": {

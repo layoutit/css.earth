@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 156.82608695652175,
       "bodyRadiusM": 36070
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/erigone-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2a6b73563e7299d096b07816043051a90e6e2f0bf18f4a5898a52ee9175bbba1"
+      }
     }
   },
   "schema": "cssearth-object@1",

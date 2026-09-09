@@ -13,6 +13,7 @@ export interface ObjectSceneLifecycle {
   readonly sharedView: ObjectSharedView;
   readonly destinations?: PreparedDestinationRuntime;
   readonly navigation?: ObjectWorldNavigation;
+  refineTextures?(): void;
   pause(): void;
   resume(): void;
   destroy(): void;
@@ -49,6 +50,7 @@ export function createDeferredObjectMount<T, Stage, Options extends DeferredMoun
       ready, sharedView,
       get destinations() { return lifetime.disposed ? undefined : mounted?.destinations; },
       get navigation() { return published && !lifetime.disposed ? mounted?.navigation : undefined; },
+      refineTextures() { forward(() => mounted?.refineTextures?.()); },
       pause() { allowed = false; forward(() => mounted?.pause()); },
       resume() { allowed = true; forward(() => mounted?.resume()); },
       destroy() {

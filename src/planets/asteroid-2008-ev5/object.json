@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 0.8695652173913043,
       "bodyRadiusM": 200
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-2008-ev5-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "96e248d31083783c7a01335fb34c01696aebf81beb15f67b1f37e4f238494ced"
+      }
     }
   },
   "schema": "cssearth-object@1",

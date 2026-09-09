@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 197.82608695652175,
       "bodyRadiusM": 45500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lydia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "053ff624243b7eaacc47ba90e4e61e582bdb98028034d092a28fcc72198b3568"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 93.47826086956522,
       "bodyRadiusM": 21500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/clarissa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4500f4576a731e85b4405458d7af6ea2ab659511e45cc19cb666fec5f0f9eafe"
+      }
     }
   },
   "schema": "cssearth-object@1",

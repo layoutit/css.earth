@@ -1,0 +1,649 @@
+{
+  "interpretation": "Same browser, encoded camera, viewport, geometry and lighting. The previous atlas is served through the current renderer to isolate material changes; this is not source-photograph pixel parity.",
+  "results": [
+    {
+      "body": "ida",
+      "lens": "calibrated",
+      "pose": "front",
+      "crop": {
+        "left": 350,
+        "top": 150,
+        "width": 930,
+        "height": 730
+      },
+      "before": {
+        "body": "ida",
+        "lens": "calibrated",
+        "pose": "front",
+        "stage": "before",
+        "url": "http://127.0.0.1:53136/ida/",
+        "transportUrl": "http://127.0.0.1:53136/objects/ida/2180e4e15956fb66b6499ecc1ad37c8282d4cdc59a05e7f22dbda7b6f557feeb.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/ida/ida-calibrated-surface@2x.webp",
+              "bytes": 284372,
+              "sha256": "9bc061bf723f77cc0fb80f12c60a3f295c5fa8bdf0c11a3dc9874e21b1f26fb6"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0181262, 0.00845236, 0, 0, -0.00845236, 0.0181262, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "calibrated"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/before-ida-front.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "after": {
+        "body": "ida",
+        "lens": "calibrated",
+        "pose": "front",
+        "stage": "after",
+        "url": "http://127.0.0.1:53136/ida/",
+        "transportUrl": "http://127.0.0.1:53136/objects/ida/2180e4e15956fb66b6499ecc1ad37c8282d4cdc59a05e7f22dbda7b6f557feeb.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/ida/ida-calibrated-surface@2x.webp",
+              "bytes": 284728,
+              "sha256": "57da5425aca952a853ecd56d2a8cb47d59052f20c2192876f3dfa8a1531404f5"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0181262, 0.00845236, 0, 0, -0.00845236, 0.0181262, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "calibrated"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/after-ida-front.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "comparison": {
+        "file": "docs/asteroids/evidence/spacecraft-mosaics/ida-comparison.png",
+        "bytes": 426572,
+        "sha256": "7256e3abd339ef094a5cf0247e857ef496dd7eb541a755ed1e0f067f4cf69ead",
+        "panels": [
+          "Previous atlas on current renderer",
+          "Current atlas",
+          "Absolute RGB difference"
+        ]
+      },
+      "changedPixels": 35168,
+      "meanAbsoluteChannelDifference": 0.3555457357490057,
+      "reviewScreenshot": "docs/asteroids/evidence/spacecraft-mosaics/ida-browser.png"
+    },
+    {
+      "body": "ida",
+      "lens": "calibrated",
+      "pose": "turned",
+      "crop": {
+        "left": 350,
+        "top": 150,
+        "width": 930,
+        "height": 730
+      },
+      "before": {
+        "body": "ida",
+        "lens": "calibrated",
+        "pose": "turned",
+        "stage": "before",
+        "url": "http://127.0.0.1:53136/ida/?v=MMZAU6gHECS9XkFCxzNAAAAAP8IOiWZl2UE_03ujiQ4UJb-xRu5-ORs1AAA",
+        "transportUrl": "http://127.0.0.1:53136/objects/ida/2180e4e15956fb66b6499ecc1ad37c8282d4cdc59a05e7f22dbda7b6f557feeb.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/ida/ida-calibrated-surface@2x.webp",
+              "bytes": 284372,
+              "sha256": "9bc061bf723f77cc0fb80f12c60a3f295c5fa8bdf0c11a3dc9874e21b1f26fb6"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.0161109, -0.000818754, -0.0118223, 0, 0.0042543, 0.0190218, 0.0044802, 0, 0.0110607, -0.00612379, 0.0154971, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "calibrated"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/before-ida-turned.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "after": {
+        "body": "ida",
+        "lens": "calibrated",
+        "pose": "turned",
+        "stage": "after",
+        "url": "http://127.0.0.1:53136/ida/?v=MMZAU6gHECS9XkFCxzNAAAAAP8IOiWZl2UE_03ujiQ4UJb-xRu5-ORs1AAA",
+        "transportUrl": "http://127.0.0.1:53136/objects/ida/2180e4e15956fb66b6499ecc1ad37c8282d4cdc59a05e7f22dbda7b6f557feeb.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/ida/ida-calibrated-surface@2x.webp",
+              "bytes": 284728,
+              "sha256": "57da5425aca952a853ecd56d2a8cb47d59052f20c2192876f3dfa8a1531404f5"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.0161109, -0.000818754, -0.0118223, 0, 0.0042543, 0.0190218, 0.0044802, 0, 0.0110607, -0.00612379, 0.0154971, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "calibrated"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/after-ida-turned.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "changedPixels": 48314,
+      "meanAbsoluteChannelDifference": 0.7972460352531056
+    },
+    {
+      "body": "gaspra",
+      "lens": "calibrated",
+      "pose": "front",
+      "crop": {
+        "left": 350,
+        "top": 150,
+        "width": 930,
+        "height": 730
+      },
+      "before": {
+        "body": "gaspra",
+        "lens": "calibrated",
+        "pose": "front",
+        "stage": "before",
+        "url": "http://127.0.0.1:53136/gaspra/",
+        "transportUrl": "http://127.0.0.1:53136/objects/gaspra/bcff6affded7574e7632481e7c6ce789f243a16fce49f377bc60e8d25e18b348.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
+              "bytes": 232952,
+              "sha256": "990891f426c778cdeb3e288fbd15cb9bff5e32d3515aebe06968145d796dc79c"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0173205, 0.01, 0, 0, -0.01, 0.0173205, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "calibrated"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/before-gaspra-front.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "after": {
+        "body": "gaspra",
+        "lens": "calibrated",
+        "pose": "front",
+        "stage": "after",
+        "url": "http://127.0.0.1:53136/gaspra/",
+        "transportUrl": "http://127.0.0.1:53136/objects/gaspra/bcff6affded7574e7632481e7c6ce789f243a16fce49f377bc60e8d25e18b348.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
+              "bytes": 242376,
+              "sha256": "e935327a81bab8a8eed2cff9ca57657a6fe85819a7c93ce08110378b3fc07ff1"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0173205, 0.01, 0, 0, -0.01, 0.0173205, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "calibrated"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/after-gaspra-front.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "comparison": {
+        "file": "docs/asteroids/evidence/spacecraft-mosaics/gaspra-comparison.png",
+        "bytes": 379489,
+        "sha256": "4ca869af611df78a1a014036ca10f75e88d488a5a977226a2d16a48dd8761895",
+        "panels": [
+          "Previous atlas on current renderer",
+          "Current atlas",
+          "Absolute RGB difference"
+        ]
+      },
+      "changedPixels": 16541,
+      "meanAbsoluteChannelDifference": 0.5329169735356214,
+      "reviewScreenshot": "docs/asteroids/evidence/spacecraft-mosaics/gaspra-browser.png"
+    },
+    {
+      "body": "gaspra",
+      "lens": "calibrated",
+      "pose": "turned",
+      "crop": {
+        "left": 350,
+        "top": 150,
+        "width": 930,
+        "height": 730
+      },
+      "before": {
+        "body": "gaspra",
+        "lens": "calibrated",
+        "pose": "turned",
+        "stage": "before",
+        "url": "http://127.0.0.1:53136/gaspra/?v=MMZAPfnXkjgHLkFCxzNAAAAAP8dJJRNd2jE_00apCOvHBL-0qPP1QajtAAA",
+        "transportUrl": "http://127.0.0.1:53136/objects/gaspra/bcff6affded7574e7632481e7c6ce789f243a16fce49f377bc60e8d25e18b348.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
+              "bytes": 232952,
+              "sha256": "990891f426c778cdeb3e288fbd15cb9bff5e32d3515aebe06968145d796dc79c"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.0161109, -0.000818754, -0.0118223, 0, 0.00520211, 0.0184157, 0.00581381, 0, 0.0106478, -0.00775835, 0.0150476, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "calibrated"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/before-gaspra-turned.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "after": {
+        "body": "gaspra",
+        "lens": "calibrated",
+        "pose": "turned",
+        "stage": "after",
+        "url": "http://127.0.0.1:53136/gaspra/?v=MMZAPfnXkjgHLkFCxzNAAAAAP8dJJRNd2jE_00apCOvHBL-0qPP1QajtAAA",
+        "transportUrl": "http://127.0.0.1:53136/objects/gaspra/bcff6affded7574e7632481e7c6ce789f243a16fce49f377bc60e8d25e18b348.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
+              "bytes": 242376,
+              "sha256": "e935327a81bab8a8eed2cff9ca57657a6fe85819a7c93ce08110378b3fc07ff1"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.0161109, -0.000818754, -0.0118223, 0, 0.00520211, 0.0184157, 0.00581381, 0, 0.0106478, -0.00775835, 0.0150476, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "calibrated"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/after-gaspra-turned.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "changedPixels": 26995,
+      "meanAbsoluteChannelDifference": 0.7388643393725144
+    },
+    {
+      "body": "steins",
+      "lens": "osiris",
+      "pose": "front",
+      "crop": {
+        "left": 350,
+        "top": 150,
+        "width": 930,
+        "height": 730
+      },
+      "before": {
+        "body": "steins",
+        "lens": "osiris",
+        "pose": "front",
+        "stage": "before",
+        "url": "http://127.0.0.1:53136/steins/",
+        "transportUrl": "http://127.0.0.1:53136/objects/steins/bb2281a1ff88d364d3a9bcd3b203caa2db0d5cf05e5d1df9b5eba593341ffe41.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/steins/steins-osiris-surface@2x.webp",
+              "bytes": 248846,
+              "sha256": "28b91e1c0905e4cc7a920d1f4d9c1ed66227821ac8eca419dd5af693a6640418"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(-0.02, 0, 0, 0, 0, 0.0196962, 0.00347296, 0, 0, 0.00347296, -0.0196962, 0, -1e-06, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "osiris"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/before-steins-front.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "after": {
+        "body": "steins",
+        "lens": "osiris",
+        "pose": "front",
+        "stage": "after",
+        "url": "http://127.0.0.1:53136/steins/",
+        "transportUrl": "http://127.0.0.1:53136/objects/steins/bb2281a1ff88d364d3a9bcd3b203caa2db0d5cf05e5d1df9b5eba593341ffe41.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/steins/steins-osiris-surface@2x.webp",
+              "bytes": 283696,
+              "sha256": "833b6747495c825d89c7696be2581bae9fd7594d90b870e444c63a8806425c8b"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(-0.02, 0, 0, 0, 0, 0.0196962, 0.00347296, 0, 0, 0.00347296, -0.0196962, 0, -1e-06, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "osiris"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/after-steins-front.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "comparison": {
+        "file": "docs/asteroids/evidence/spacecraft-mosaics/steins-comparison.png",
+        "bytes": 494321,
+        "sha256": "6688368944442da2c559cb788572edd498f0b4e04222982510b03ac90345ee8d",
+        "panels": [
+          "Previous atlas on current renderer",
+          "Current atlas",
+          "Absolute RGB difference"
+        ]
+      },
+      "changedPixels": 137674,
+      "meanAbsoluteChannelDifference": 4.660521431727795,
+      "reviewScreenshot": "docs/asteroids/evidence/spacecraft-mosaics/steins-browser.png"
+    },
+    {
+      "body": "steins",
+      "lens": "osiris",
+      "pose": "turned",
+      "crop": {
+        "left": 350,
+        "top": 150,
+        "width": 930,
+        "height": 730
+      },
+      "before": {
+        "body": "steins",
+        "lens": "osiris",
+        "pose": "turned",
+        "stage": "before",
+        "url": "http://127.0.0.1:53136/steins/?v=MEZAKVtQypXLU0FCxzNAAAAAP5vUF1yvyjE_kaGBV0Xgpb_T4UvFYgZuAAA",
+        "transportUrl": "http://127.0.0.1:53136/objects/steins/bb2281a1ff88d364d3a9bcd3b203caa2db0d5cf05e5d1df9b5eba593341ffe41.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/steins/steins-osiris-surface@2x.webp",
+              "bytes": 248846,
+              "sha256": "28b91e1c0905e4cc7a920d1f4d9c1ed66227821ac8eca419dd5af693a6640418"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(-0.0161109, 0.000818754, 0.0118223, 0, 0.00124661, 0.0199586, 0.000316596, 0, -0.0117849, 0.000991928, -0.0161286, 0, 0, -1e-06, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "osiris"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/before-steins-turned.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "after": {
+        "body": "steins",
+        "lens": "osiris",
+        "pose": "turned",
+        "stage": "after",
+        "url": "http://127.0.0.1:53136/steins/?v=MEZAKVtQypXLU0FCxzNAAAAAP5vUF1yvyjE_kaGBV0Xgpb_T4UvFYgZuAAA",
+        "transportUrl": "http://127.0.0.1:53136/objects/steins/bb2281a1ff88d364d3a9bcd3b203caa2db0d5cf05e5d1df9b5eba593341ffe41.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/steins/steins-osiris-surface@2x.webp",
+              "bytes": 283696,
+              "sha256": "833b6747495c825d89c7696be2581bae9fd7594d90b870e444c63a8806425c8b"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(-0.0161109, 0.000818754, 0.0118223, 0, 0.00124661, 0.0199586, 0.000316596, 0, -0.0117849, 0.000991928, -0.0161286, 0, 0, -1e-06, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "osiris"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/after-steins-turned.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "changedPixels": 185750,
+      "meanAbsoluteChannelDifference": 4.252421564295183
+    },
+    {
+      "body": "lutetia",
+      "lens": "osiris",
+      "pose": "front",
+      "crop": {
+        "left": 350,
+        "top": 150,
+        "width": 930,
+        "height": 730
+      },
+      "before": {
+        "body": "lutetia",
+        "lens": "osiris",
+        "pose": "front",
+        "stage": "before",
+        "url": "http://127.0.0.1:53136/lutetia/",
+        "transportUrl": "http://127.0.0.1:53136/objects/lutetia/e862f939cbd3b17448f03cc08ed3ad848de7cbad3085993f9af1524bc279c92f.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+              "bytes": 768322,
+              "sha256": "c0423065ce889f96a2ef76c1d0e7cbf8809f0ea3aa94b12499e21d4d7766bc59"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0181262, 0.00845236, 0, 0, -0.00845236, 0.0181262, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "osiris"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/before-lutetia-front.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "after": {
+        "body": "lutetia",
+        "lens": "osiris",
+        "pose": "front",
+        "stage": "after",
+        "url": "http://127.0.0.1:53136/lutetia/",
+        "transportUrl": "http://127.0.0.1:53136/objects/lutetia/e862f939cbd3b17448f03cc08ed3ad848de7cbad3085993f9af1524bc279c92f.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+              "bytes": 838004,
+              "sha256": "c9a1287c2b3fd59416e0e156442b3fc9cbac8629a59e8f277f1659b4be37fe97"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0181262, 0.00845236, 0, 0, -0.00845236, 0.0181262, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "osiris"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/after-lutetia-front.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "comparison": {
+        "file": "docs/asteroids/evidence/spacecraft-mosaics/lutetia-comparison.png",
+        "bytes": 801334,
+        "sha256": "5d122aba7c237603f08b7a6c432bfc56978289adb29a804a7b59a3b15fbe119a",
+        "panels": [
+          "Previous atlas on current renderer",
+          "Current atlas",
+          "Absolute RGB difference"
+        ]
+      },
+      "changedPixels": 113528,
+      "meanAbsoluteChannelDifference": 0.63571512741199,
+      "reviewScreenshot": "docs/asteroids/evidence/spacecraft-mosaics/lutetia-browser.png"
+    },
+    {
+      "body": "lutetia",
+      "lens": "osiris",
+      "pose": "turned",
+      "crop": {
+        "left": 350,
+        "top": 150,
+        "width": 930,
+        "height": 730
+      },
+      "before": {
+        "body": "lutetia",
+        "lens": "osiris",
+        "pose": "turned",
+        "stage": "before",
+        "url": "http://127.0.0.1:53136/lutetia/?v=MMZAbhlK0LhB90FCxzNAAAAAP8IOiWZcXng_03ujiR7TjL-xRu5-R_1cAAA",
+        "transportUrl": "http://127.0.0.1:53136/objects/lutetia/e862f939cbd3b17448f03cc08ed3ad848de7cbad3085993f9af1524bc279c92f.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+              "bytes": 768322,
+              "sha256": "c0423065ce889f96a2ef76c1d0e7cbf8809f0ea3aa94b12499e21d4d7766bc59"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.0161109, -0.000818754, -0.0118223, 0, 0.0042543, 0.0190218, 0.0044802, 0, 0.0110607, -0.00612379, 0.0154971, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "osiris"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/before-lutetia-turned.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "after": {
+        "body": "lutetia",
+        "lens": "osiris",
+        "pose": "turned",
+        "stage": "after",
+        "url": "http://127.0.0.1:53136/lutetia/?v=MMZAbhlK0LhB90FCxzNAAAAAP8IOiWZcXng_03ujiR7TjL-xRu5-R_1cAAA",
+        "transportUrl": "http://127.0.0.1:53136/objects/lutetia/e862f939cbd3b17448f03cc08ed3ad848de7cbad3085993f9af1524bc279c92f.json",
+        "readback": {
+          "assets": [
+            {
+              "url": "http://127.0.0.1:53136/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+              "bytes": 838004,
+              "sha256": "c9a1287c2b3fd59416e0e156442b3fc9cbac8629a59e8f277f1659b4be37fe97"
+            }
+          ],
+          "leaves": 800,
+          "sceneTransform": "matrix3d(0.0161109, -0.000818754, -0.0118223, 0, 0.0042543, 0.0190218, 0.0044802, 0, 0.0110607, -0.00612379, 0.0154971, 0, 0, 0, 116.839, 1)",
+          "bodyTransform": "none",
+          "shadows": false,
+          "selectedLens": "osiris"
+        },
+        "screenshot": "output/asteroid-spacecraft-mosaics/browser/after-lutetia-turned.png",
+        "errors": [],
+        "failures": [],
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "dpr": 1,
+        "browser": "153.0.8010.12"
+      },
+      "changedPixels": 169814,
+      "meanAbsoluteChannelDifference": 1.4786306279766288
+    }
+  ]
+}

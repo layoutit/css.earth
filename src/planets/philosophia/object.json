@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 219.56521739130434,
       "bodyRadiusM": 50500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/philosophia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6be9018c7bcd1e429e0440895b4aab9d2d73343ade72fc5ab9c9cfcab4078af0"
+      }
     }
   },
   "schema": "cssearth-object@1",

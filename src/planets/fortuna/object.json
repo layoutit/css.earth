@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 458.69565217391306,
       "bodyRadiusM": 105500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/fortuna-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "192bc1f47155a2ba1e8b51630fc5fcd5379d585205f18d2231ade76bc54b0763"
+      }
     }
   },
   "schema": "cssearth-object@1",

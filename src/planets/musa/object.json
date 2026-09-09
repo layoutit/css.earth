@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 54.59782608695652,
       "bodyRadiusM": 12557.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/musa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e5197f3212225f898290719a889f5788324ddba606867b08f2aaf5bd0d7106ff"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -47,7 +47,10 @@ node docs/centaur-population/refresh-presentations.mjs
 node docs/centaur-population/refresh-transports.mjs
 node docs/centaur-population/integrate-context.mjs
 node tools/prepare-object-json.mjs sun
+node site/minimap/prepare.mjs
 node docs/centaur-population/verify.mjs
 ```
 
 Astronomy uses the existing JPL Horizons generator at the repository's fixed scene epoch. It does not claim current surface attitude or a real-time orbit solution. Delivery, focused source checks and remaining browser/build boundaries are recorded in [VALIDATION.md](VALIDATION.md).
+
+Main `3badfb535` replaces individual body page wrappers with shared object and navigation routes. Both Centaur packages declare their stylesheet through the existing page contract. Transport refresh writes the corresponding prepared page metadata, and minimap preparation includes both bodies in the spatial point index. Source closure, six shape/ring checks and the focused page/router/minimap contracts pass after integration. Shape, ring and scene asset bytes are unchanged; the previously recorded browser evidence predates this main update.

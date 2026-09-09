@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 91.30434782608695,
       "bodyRadiusM": 21000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/caliban-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "742e5811415b247103664ff291821e1a3249a3a1d4fedff1439dc23c2eba24f0"
+      }
     }
   },
   "prepared": {

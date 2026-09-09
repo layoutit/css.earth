@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f92c304b8129d80605ff7eea4c8d20f63269ca05d313e0ea2a6386bdbaa20e4e"
+    "sha256": "117ebcad82240385bd25f6dd4fac53dab7282bf2c97b00ba7e2667b9b8aa6206"
   },
   "id": "gaspra",
   "properties": {
@@ -61,7 +61,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "89c83775345cfa476912fc143949d5142b3a6d9373adba9d99e3521ce660dcc1"
+          "sha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed"
         },
         {
           "id": "rotation",
@@ -71,7 +71,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0acd7b3427ae7a18673bc9b8f97694380e838427738d27a2b81c368e68ec765e"
+          "sha256": "f5037d4c08c36da7e12cae23aecd3b8e8899fb1044332cc6840b61f7e3772dd8"
         },
         {
           "id": "title",
@@ -86,7 +86,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "277bbe5aa57971e338aae03c84b67b93c387c4edab48f80908cdb72f35e16d6e"
+          "sha256": "3b35f53dddc60859ca20725d764026dae2a0130e8249da14a2c3639ba2faba90"
         }
       ]
     },
@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 26.52173913043478,
       "bodyRadiusM": 6100
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/gaspra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e671c1aa16ce249e40b360d3c98d267c61f1f0bc82a3cd9f115fb2cfb05c346e"
+      }
     }
   },
   "schema": "cssearth-object@1",

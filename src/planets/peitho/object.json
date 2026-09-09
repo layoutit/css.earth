@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 95.6304347826087,
       "bodyRadiusM": 21995
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/peitho-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ee43fb22be557ac69714dd574ee0ac6857b2fee741e75983d7f72a92031e9ec4"
+      }
     }
   },
   "schema": "cssearth-object@1",

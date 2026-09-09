@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 47.43478260869565,
       "bodyRadiusM": 10910
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/susi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d22b107d94f9cd382f19801cf2d45a926ac5338d21ecdecab0be6cd8c0a0e43d"
+      }
     }
   },
   "schema": "cssearth-object@1",

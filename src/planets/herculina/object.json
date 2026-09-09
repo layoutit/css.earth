@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 410.8695652173913,
       "bodyRadiusM": 94500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/herculina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e843baf6f2adc197991825ba602fe60de722a14803fc7fc641cea9738676b566"
+      }
     }
   },
   "schema": "cssearth-object@1",

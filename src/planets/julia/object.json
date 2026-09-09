@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 304.3478260869565,
       "bodyRadiusM": 70000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/julia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c55dd595105fceeed68a689a4eeb48125248f6339137e52af3893ce177ee0669"
+      }
     }
   },
   "schema": "cssearth-object@1",

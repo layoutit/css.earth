@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 0.24521739130434783,
       "bodyRadiusM": 56.4
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/yorp-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7f661c2ec39b3168da7954bf8443c31bdde9a4ecd951a41431f617484d96672e"
+      }
     }
   },
   "schema": "cssearth-object@1",

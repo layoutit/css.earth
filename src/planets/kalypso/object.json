@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 221.52173913043478,
       "bodyRadiusM": 50950
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kalypso-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "35c9b82569e3ab46ed7e7808ac4fe57d0b1c1e1123d3b0fea00819a03c62e3f6"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 226.08695652173913,
       "bodyRadiusM": 52000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/isis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "97ab974d1113e9d7cdff94a60d26476ae3079d1246dc6f1fc4cdaf588ba14879"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -101,6 +101,15 @@
       ],
       "metersPerUnit": 5.321739130434783,
       "bodyRadiusM": 1224
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/toutatis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "811bae05cc8426901b766125b085feaf162422141b6ab34ddb12fd7f42acedb0"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 0.9021739130434783,
       "bodyRadiusM": 207.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-1998-wt24-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ec0c545dbd51b221bdb20db8fc7246deb0d159d2d4786448a4aab20385ddd86b"
+      }
     }
   },
   "schema": "cssearth-object@1",

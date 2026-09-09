@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 12.173913043478262,
       "bodyRadiusM": 2800
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bebhionn-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e7cbb5c722ff8ddf5fe432c70beb635d97b12f8acb9079c7ebc6927b8a2efe60"
+      }
     }
   },
   "prepared": {

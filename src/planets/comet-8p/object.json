@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 11.84460688626794,
       "bodyRadiusM": 2724.259583841626
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-8p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4c8159e424db4d87ea4058f687fc8f576fe4a94499931a06b237a0f0ef58211d"
+      }
     }
   },
   "prepared": {

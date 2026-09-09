@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 1.4222027435602564,
       "bodyRadiusM": 327.106631018859
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aegaeon-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d1ed1f97bed73e46b26e3b23761aabb9ec12f5c360b978bc95bffbbf9d0dd6e0"
+      }
     }
   },
   "prepared": {

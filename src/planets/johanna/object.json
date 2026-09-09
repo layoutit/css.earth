@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 248.2391304347826,
       "bodyRadiusM": 57095
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/johanna-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ac8093969f106c6c6195c1f094de5ce239d02b3ef6aa52bc4de4b9e4f0e06e83"
+      }
     }
   },
   "schema": "cssearth-object@1",

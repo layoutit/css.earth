@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 17.565217391304348,
       "bodyRadiusM": 4040
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-137p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e57e10ce9ba40c95a64cb62c09147153584103958a94e6055e5818c4b3954afd"
+      }
     }
   },
   "prepared": {

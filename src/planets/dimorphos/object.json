@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 0.32608695652173914,
       "bodyRadiusM": 75
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dimorphos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7a3a1450c2d631e627f80021c238963fb3cfe33f73407c479614747ec5e3f43b"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 41.88478260869565,
       "bodyRadiusM": 9633.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hopi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "50bc7b0ae7cbbc8a0601727f1d840e3d262cf96ea347126942878d0c6d3ee598"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 1136.4565217391305,
       "bodyRadiusM": 261385
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/vesta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6de210c4d5c07b4e0bfe4153c15c0651ca5e5e45489046c9b3ee6075c8beb049"
+      }
     }
   },
   "schema": "cssearth-object@1",

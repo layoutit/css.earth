@@ -113,6 +113,15 @@
       ],
       "metersPerUnit": 48.17391304347826,
       "bodyRadiusM": 11080
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/phobos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5a0fa506abb4ecea4f8c7bcd9ab4a13ac13dd8446a614d7d00549ed587607add"
+      }
     }
   },
   "prepared": {

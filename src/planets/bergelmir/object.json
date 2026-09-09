@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 10.869565217391305,
       "bodyRadiusM": 2500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bergelmir-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1a50d76d6a3837226a2f45f6db4fc89901e7b88a7d6859a86062a86471051f24"
+      }
     }
   },
   "prepared": {

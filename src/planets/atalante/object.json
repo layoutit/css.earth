@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 240.30434782608697,
       "bodyRadiusM": 55270
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/atalante-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4415d475229682f68cfee9d6bba0687c6a8b88b8defc0c57705c122420c5756f"
+      }
     }
   },
   "schema": "cssearth-object@1",

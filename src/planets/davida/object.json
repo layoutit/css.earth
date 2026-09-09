@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 647.8260869565217,
       "bodyRadiusM": 149000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/davida-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3272b44f6fdaa401337040a3c25d6538e21042da6fee34accb5138b8826c886e"
+      }
     }
   },
   "schema": "cssearth-object@1",

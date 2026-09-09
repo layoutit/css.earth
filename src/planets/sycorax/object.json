@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 341.30434782608694,
       "bodyRadiusM": 78500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/sycorax-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9ec076574ac73bc13c89e5fc37b7f6533750caed72b1cd02f69b0b896da6490b"
+      }
     }
   },
   "prepared": {

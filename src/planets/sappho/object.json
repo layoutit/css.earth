@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 132.6086956521739,
       "bodyRadiusM": 30500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/sappho-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0f8eb4529699ce6c03e17e7bd87d1c2343ca9a46e52e8e9f06fcdfb4fbfc9dcb"
+      }
     }
   },
   "schema": "cssearth-object@1",

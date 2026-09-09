@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 48.84782608695652,
       "bodyRadiusM": 11235
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dejanira-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "23e2b14ab1fcd32fc408b305ac2a9f67c9a1522964c5b804665311176398e13d"
+      }
     }
   },
   "schema": "cssearth-object@1",

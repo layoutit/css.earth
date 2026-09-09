@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 80.5,
       "bodyRadiusM": 18515
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ilse-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8ed08a6efd0a10b1e90eee8cf2ced95a32c9f73701f4f094fedaedf2716a5434"
+      }
     }
   },
   "schema": "cssearth-object@1",

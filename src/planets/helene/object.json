@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 78.26086956521739,
       "bodyRadiusM": 18000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/helene-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4af80bb40dddd6dde18a021407aa3ca576d0f5e203ddf86ea443740326e569c3"
+      }
     }
   },
   "prepared": {

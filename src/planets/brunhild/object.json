@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 104.82608695652173,
       "bodyRadiusM": 24110
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/brunhild-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d10b075d8418d0dc26738d1125b794b994368dce2248a69ea121d903c56a472d"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 408.69565217391306,
       "bodyRadiusM": 94000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eugenia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "51c98c7191780e39c6375336568fa75d8ef5f6a41ce0d61b5a82ac389d4bb9bb"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 0.7391304347826086,
       "bodyRadiusM": 170
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/apophis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0fc176f66709224fbb6ba96669d22537860d504469fb5103224ca801cd780816"
+      }
     }
   },
   "schema": "cssearth-object@1",

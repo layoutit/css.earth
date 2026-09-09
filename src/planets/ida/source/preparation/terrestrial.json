@@ -102,6 +102,31 @@
               "filter": "GREEN"
             },
             "coverageInsetPixels": 5
+          },
+          {
+            "id": "202560500",
+            "path": "observations/0202560500rcal_gre.fit",
+            "labelPath": "observations/0202560500rcal_gre.xml",
+            "encoding": "fits-ssi-iof",
+            "cameraCatalog": {
+              "path": "reference/243idaimg.tab",
+              "labelPath": "reference/243idaimg.xml",
+              "imageNumber": 202560500,
+              "longitudeDirection": "east",
+              "pixelOrigin": "one-based",
+              "instrumentPath": "reference/gll36001.ti"
+            },
+            "quality": {
+              "rawPath": "observations/i0500.fit",
+              "rawLabelPath": "observations/i0500.lbl",
+              "badDataPath": "observations/idabad.tab",
+              "badDataLabelPath": "observations/idabad.lbl",
+              "imageId": "i0500",
+              "target": "IDA",
+              "startTime": "1993-08-28T16:29:48.324Z",
+              "filter": "GREEN"
+            },
+            "coverageInsetPixels": 5
           }
         ],
         "photometry": {
@@ -116,8 +141,8 @@
           "maximumLevel": 1
         },
         "metadata": {
-          "label": "Calibrated image",
-          "coverage": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid."
+          "label": "SSI reflectance",
+          "coverage": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
         }
       }
     ]

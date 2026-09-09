@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 586.9565217391304,
       "bodyRadiusM": 135000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hyperion-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8368cddfcd435623a4bb47e02f3c473c2371608cbfb3775ad4e0c295320d38ff"
+      }
     }
   },
   "prepared": {

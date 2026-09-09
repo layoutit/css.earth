@@ -16,6 +16,8 @@ export function mountPlanetShell({
   windowTarget = window,
   motionEnabled = false,
   onMotionChange = () => {},
+  highContrastSky = false,
+  onSkyContrastChange = () => {},
   heliosphereEnabled = false,
   onHeliosphereChange = () => {},
   asteroidOrbitsEnabled = false,
@@ -62,7 +64,7 @@ export function mountPlanetShell({
     }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => selectionPreview?.restore());
-    mountContent(objectId, motionEnabled, false);
+    mountContent(objectId, motionEnabled, highContrastSky);
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
     if (cleanupErrors.length) {
@@ -122,15 +124,20 @@ export function mountPlanetShell({
       // Detail controls wait for their renderer; navigation anchors stay usable
       // so another breadcrumb or moon can replace an in-progress selection.
       const pendingControls = [...information.querySelectorAll('.planet-card-tabs, [data-information-panel], .planet-destination-intro')]
+        .filter(node => node.dataset.informationGroup !== 'overview')
         .map(node => [node, node.inert]);
       for (const [node] of pendingControls) node.inert = true;
+      const previewLifetime = createSceneLifetime();
+      createInformationTabsController(drawer, previewLifetime, 'overview');
       information.ariaBusy = 'true';
       const preview = { id: object.id, frame: object.worldFrame, commit() {
+        previewLifetime.destroy();
         selectionPreview = null;
         information.ariaBusy = previousBusy;
         for (const [node, inert] of pendingControls) node.inert = inert;
       }, restore() {
         if (selectionPreview !== preview) return;
+        previewLifetime.destroy();
         selectionPreview = null;
         information.replaceChildren(...previous);
         information.ariaBusy = previousBusy;
@@ -199,7 +206,7 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
         onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
@@ -213,31 +220,36 @@ export function mountPlanetShell({
   }
 }
 
-function createInformationTabsController(drawer, lifetime) {
+function createInformationTabsController(drawer, lifetime, requestedGroup) {
   const card = drawer.querySelector('.planet-information-panel');
-  const tabs = [...(card?.querySelectorAll('[data-information-tab]:not([hidden])') ?? [])];
+  const group = item => item.dataset.informationGroup ?? 'detail';
+  const tabs = [...(card?.querySelectorAll('[data-information-tab]:not([hidden])') ?? [])]
+    .filter(tab => requestedGroup === undefined || group(tab) === requestedGroup);
   const panels = [...(card?.querySelectorAll('[data-information-panel]') ?? [])];
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   const select = (tab, focus = false) => {
-    for (const item of tabs) {
+    for (const item of tabs.filter(item => group(item) === group(tab))) {
       const active = item === tab;
       item.setAttribute('aria-selected', String(active));
       item.tabIndex = active ? 0 : -1;
     }
-    for (const panel of panels) panel.hidden = panel.dataset.informationPanel !== tab.dataset.informationTab;
+    for (const panel of panels.filter(panel => group(panel) === group(tab))) {
+      panel.hidden = panel.dataset.informationPanel !== tab.dataset.informationTab;
+    }
     if (focus) tab.focus();
   };
   for (const tab of tabs) {
     tab.addEventListener('click', () => select(tab), { signal: events.signal });
     tab.addEventListener('keydown', event => {
-      const index = tabs.indexOf(tab);
-      const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
-        : event.key === 'ArrowRight' ? (index + 1) % tabs.length
-        : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length : null;
+      const siblings = tabs.filter(item => group(item) === group(tab));
+      const index = siblings.indexOf(tab);
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? siblings.length - 1
+        : event.key === 'ArrowRight' ? (index + 1) % siblings.length
+        : event.key === 'ArrowLeft' ? (index - 1 + siblings.length) % siblings.length : null;
       if (next === null) return;
       event.preventDefault();
-      select(tabs[next], true);
+      select(siblings[next], true);
     }, { signal: events.signal });
   }
   return { destroy() { events.abort(); } };
@@ -323,7 +335,7 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
 function createSettingsController(
   documentTarget,
   windowTarget,
-  { motionEnabled, onMotionChange, highContrastSky = false, heliosphereEnabled, onHeliosphereChange,
+  { motionEnabled, onMotionChange, highContrastSky = false, onSkyContrastChange, heliosphereEnabled, onHeliosphereChange,
     asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange },
   lifetime,
 ) {
@@ -370,6 +382,7 @@ function createSettingsController(
   skyContrast.addEventListener("change", () => {
     highContrastSky = skyContrast.checked;
     renderSkyContrast();
+    onSkyContrastChange(highContrastSky);
   }, { signal: events.signal });
   heliosphere.checked = heliosphereEnabled === true;
   heliosphere.addEventListener("change", () => onHeliosphereChange(heliosphere.checked), { signal: events.signal });
@@ -424,6 +437,11 @@ function createSettingsController(
 }
 
 function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
+  const setPanelHidden = (panel, hidden) => {
+    if (panel.hidden !== hidden) panel.hidden = hidden;
+    const inert = hidden || panel.ariaBusy === 'true';
+    if (panel.inert !== inert) panel.inert = inert;
+  };
   const search = documentTarget.querySelector(".planet-sidebar-search");
   const searchCard = documentTarget.querySelector(".planet-sidebar-search-card");
   const trigger = documentTarget.querySelector(".planet-sidebar-view-all");
@@ -447,17 +465,44 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   }
   const tabs = [...browser.querySelectorAll('[data-object-tab]')];
   const resultsPanel = browser.querySelector('#object-category-results');
-  const resultsList = resultsPanel.querySelector('.planet-object-list');
+  const chunks = [...browser.querySelectorAll('.planet-object-chunk')]
+    .map(node => ({ node, items: [...node.querySelectorAll('.planet-object-item')] }));
+  const refreshChunks = () => {
+    for (const { node, items: rows } of chunks) {
+      const count = rows.filter(item => !item.hidden).length;
+      if (node.hidden !== (count === 0)) node.hidden = count === 0;
+      const height = `${Math.max(0, count * 28 - 8)}px`;
+      if (node.style.containIntrinsicBlockSize !== height) node.style.containIntrinsicBlockSize = height;
+    }
+  };
+  if (chunks.length && typeof windowTarget.IntersectionObserver === 'function') {
+    const observer = new windowTarget.IntersectionObserver(changes => {
+      for (const { target, isIntersecting } of changes) target.toggleAttribute('data-in-view', isIntersecting);
+    }, { root: resultsPanel, rootMargin: '100px 0px' });
+    for (const { node } of chunks) observer.observe(node);
+    resultsPanel.dataset.groupedVisibility = '';
+    lifetime.onDispose(() => observer.disconnect());
+  }
+  browser.dataset.retained = '';
+  information.dataset.retained = '';
   const distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceAu) - Number(b.dataset.objectDistanceAu));
   const planetOrder = [
     ...distanceOrder.filter(item => item.dataset.objectClassification === 'planet'),
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
   ];
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
-  const selectTab = (classification, { focus = false } = {}) => {
+  // Reset the outgoing layout before changing result visibility. Hidden panels
+  // were reset when closed, so opening one needs no synchronous layout readback.
+  const resetResultsScroll = () => { if (!browser.hidden) resultsPanel.scrollTop = 0; };
+  const selectTab = (classification, { focus = false, resetScroll = true } = {}) => {
+    if (resetScroll) resetResultsScroll();
     if (classification !== activeCategory) {
-      // Move the retained rows; All keeps distance order, Planets leads with major planets.
-      resultsList?.append(...(classification === 'planet' ? planetOrder : distanceOrder));
+      // Reorder the retained rows inside their existing layout groups.
+      const order = classification === 'planet' ? planetOrder : distanceOrder;
+      for (const [index, chunk] of chunks.entries()) {
+        chunk.items = order.slice(index * 16, (index + 1) * 16);
+        chunk.node.querySelector('.planet-object-chunk-list').append(...chunk.items);
+      }
     }
     activeCategory = classification;
     for (const tab of tabs) {
@@ -471,9 +516,9 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     }
     for (const item of items) item.hidden = item.dataset.objectMatch !== 'true'
       || !matchesObjectCategory(item.dataset.objectClassification, classification);
+    refreshChunks();
     visibleObjects = items.filter(item => !item.hidden).length;
     empty.hidden = visibleObjects > 0;
-    resultsPanel.scrollTop = 0;
   };
 
   const events = new AbortController();
@@ -498,19 +543,20 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       button.ariaPressed = String(button.dataset.searchClassification === classification);
     }
   };
-  const filter = () => {
+  const filter = (resetScroll = true) => {
+    if (resetScroll) resetResultsScroll();
     markCategory();
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") : "")
       || (overview ? overviewName().toLocaleLowerCase("en") : "");
-    information.hidden = query.length > 0;
+    setPanelHidden(information, query.length > 0);
     destinations?.setOpen(query.length > 0);
     const galactic = query === 'milky way';
-    if (galaxy) galaxy.hidden = !galactic;
-    if (system) system.hidden = galactic;
+    if (galaxy) setPanelHidden(galaxy, !galactic);
+    if (system) setPanelHidden(system, galactic);
     browser.ariaLabel = galactic ? 'Milky Way' : 'Solar System objects';
     if (galactic) {
-      browser.hidden = false; empty.hidden = true; visibleObjects = 1;
+      setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
       void destinations?.search('');
       return;
     }
@@ -527,10 +573,10 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
-      browser.hidden = true;
+      setPanelHidden(browser, true);
       return;
     }
-    browser.hidden = false;
+    setPanelHidden(browser, false);
     for (const item of items) {
       const match = classification === "dwarf-planet" || classification === "star" ? item.dataset.objectClassification === classification
         : showAll || classification || (systemName
@@ -546,18 +592,19 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     const nextCategory = classification ? objectCategory(classification)
       : showAll ? 'all' : matches.some(item => matchesObjectCategory(item.dataset.objectClassification, activeCategory))
         ? activeCategory : objectCategory(matches[0]?.dataset.objectClassification) ?? activeCategory;
-    selectTab(nextCategory);
+    selectTab(nextCategory, { resetScroll: false });
     empty.hidden = visibleObjects !== 0 || Boolean(destinations && !classification && !showAll);
   };
   const render = (next, { resetQuery = false } = {}) => {
+    resetResultsScroll();
     if (!next) browsing = false;
     if (overview && !next) next = true;
     open = next;
     if (next && resetQuery) search.value = "";
     destinations?.setOpen(next);
-    information.hidden = next;
-    browser.hidden = !next;
-    if (next) filter();
+    setPanelHidden(information, next);
+    setPanelHidden(browser, !next);
+    if (next) filter(false);
     else markCategory();
   };
 
@@ -598,7 +645,10 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     if (!open) render(true);
     else if (open) filter();
   }, { signal: events.signal });
-  const visibleControl = element => !element.disabled && !element.closest('[hidden], .planet-breadcrumbs') && element.getClientRects().length > 0;
+  // Source result rows have explicit visibility. Reading every row's geometry
+  // here would synchronously lay out all skipped groups on each arrow key.
+  const visibleControl = element => !element.disabled && !element.closest('[hidden], .planet-breadcrumbs')
+    && (element.classList.contains('planet-object-link') || element.getClientRects().length > 0);
   search.addEventListener("keydown", (event) => {
     if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
       const first = [...browser.querySelectorAll("a, button")].find(visibleControl);

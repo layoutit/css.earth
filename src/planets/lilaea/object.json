@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 165.8913043478261,
       "bodyRadiusM": 38155
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lilaea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b4f053dc26d015974ee76949bf054d9d3ac5fd7b5f6115bb0744ecf5e9c78e16"
+      }
     }
   },
   "schema": "cssearth-object@1",

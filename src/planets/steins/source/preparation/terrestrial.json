@@ -77,9 +77,6 @@
         "id": "osiris",
         "format": "osiris-camera",
         "consumer": "osiris-observation",
-        "path": "observations/w20080905t183606461id4df17.img",
-        "cameraPath": "observations/osiris-camera.json",
-        "startTime": "2008-09-05T18:36:22.008",
         "filter": "Empty_OI",
         "allowLossy": true,
         "transfer": {
@@ -89,23 +86,42 @@
           "visibilityToleranceMeters": 0.5
         },
         "photometry": {
-          "model": "minnaert",
+          "model": "retained-observation",
           "referenceIncidenceDegrees": 0,
           "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 70,
           "maximumEmissionDegrees": 70,
-          "maximumGain": 2.5,
-          "coefficient": 0.54,
-          "phaseCoefficientPerDegree": 0
+          "maximumGain": 1
         },
         "displayPercentiles": [
           1,
           99
         ],
         "metadata": {
-          "label": "OSIRIS reflectance",
-          "coverage": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+          "label": "OSIRIS",
+          "coverage": "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map.",
           "falseColor": false
+        },
+        "frames": [
+          {
+            "id": "approach",
+            "path": "observations/w20080905t183606461id4df17.img",
+            "cameraPath": "observations/osiris-camera.json",
+            "startTime": "2008-09-05T18:36:22.008"
+          },
+          {
+            "id": "image-w20080905t183630497id4df17",
+            "path": "observations/w20080905t183630497id4df17.img",
+            "cameraPath": "observations/w20080905t183630497id4df17-camera.json",
+            "startTime": "2008-09-05T18:36:46.044"
+          }
+        ],
+        "selection": "lowest-emission",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.25,
+          "maximumGain": 1.35
         }
       }
     ]

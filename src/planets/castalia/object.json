@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 2.3575565217391303,
       "bodyRadiusM": 542.2379999999999
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/castalia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "80ea339be12f60e8ef6ec990b80c9cf6388a1ca746324e212db429263cd21237"
+      }
     }
   },
   "schema": "cssearth-object@1",

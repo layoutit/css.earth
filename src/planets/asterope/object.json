@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 232.6086956521739,
       "bodyRadiusM": 53500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asterope-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "416dbde437cd24506c77a362b0792a1520cb8b9136a00a45d9f8b0bd2d40a9c3"
+      }
     }
   },
   "schema": "cssearth-object@1",

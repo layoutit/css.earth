@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 36.62608695652174,
       "bodyRadiusM": 8424
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/zachia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "567939f26f3d7f59fd972ea5ce54362542920f152b5a2dcdee02bf12a7e9315c"
+      }
     }
   },
   "schema": "cssearth-object@1",

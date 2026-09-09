@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 22.17391304347826,
       "bodyRadiusM": 5100
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/erriapus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c170a153400c0bf79b7e7d8ba62483ddda9b1dce03b860f93256714a8afff7ac"
+      }
     }
   },
   "prepared": {

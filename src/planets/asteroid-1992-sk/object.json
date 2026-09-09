@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 2.1739130434782608,
       "bodyRadiusM": 500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-1992-sk-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "35be9d5d2fd076505960c9c333ba3d6807e48fbf59c191ccc662637fb1f6ab38"
+      }
     }
   },
   "schema": "cssearth-object@1",

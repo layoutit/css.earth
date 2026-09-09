@@ -128,6 +128,15 @@
       ],
       "metersPerUnit": 2445.6521739130435,
       "bodyRadiusM": 562500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dione-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "00d919a3ed3a836cc6465fc7e47e059f4c2196ae8e1a843e5785414aa955e45d"
+      }
     }
   },
   "prepared": {

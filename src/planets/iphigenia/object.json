@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 154.47826086956522,
       "bodyRadiusM": 35530
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/iphigenia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "22c605631ce788eb9557920a74883c72d06358be220951e386079fdd2b55c6ea"
+      }
     }
   },
   "schema": "cssearth-object@1",

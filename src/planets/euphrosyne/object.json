@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 582.6086956521739,
       "bodyRadiusM": 134000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/euphrosyne-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "df67d227c37801889c9c586a42f4456803c366ba87de362a625f93bfd8854fa2"
+      }
     }
   },
   "schema": "cssearth-object@1",

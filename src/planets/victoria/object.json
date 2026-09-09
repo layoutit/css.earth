@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 252.17391304347825,
       "bodyRadiusM": 58000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/victoria-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f65a5300992db841b5f099948acfa3f470a7f3e8e0b6f67ac0201dc278183aee"
+      }
     }
   },
   "schema": "cssearth-object@1",

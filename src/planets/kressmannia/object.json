@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 33.541304347826085,
       "bodyRadiusM": 7714.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kressmannia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b6998ac8581f720231e0de335a06fadc22b99f80e8774e5101aed2184180f3d2"
+      }
     }
   },
   "schema": "cssearth-object@1",

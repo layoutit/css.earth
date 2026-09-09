@@ -5,7 +5,8 @@ import { createPreparedNodeTree } from "../../prepared-node-tree.mjs";
 import { prepareMaterialTracks } from "../../prepare-materials.mjs";
 import { surfaceBankInventory } from "./surface-banks.mjs";
 
-export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, city, noise, controls }) {
+export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, city, noise, textureLevels, controls }) {
+  if (Boolean(config.textureLevels) !== Boolean(textureLevels)) throw new TypeError('Prepared texture levels must match the authored recipe.');
  const cameraPlan=config.camera;
   const banks=surfaceBankInventory(plan,lenses,config.publicBase);
   const bankId=(lens,shadows=false)=>lens.view==="interior"&&shadows?`${lens.id}-lit`:lens.surfaceBankId??lens.id;
@@ -22,7 +23,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     return [lens.id,interiorUrls.map((url,i)=>({key:`interior:${lens.id}:${i}`,url:overrides[url]??url,pool:'mounted'}))];
   }));
   const celestial=preparedSunResources(sun,"mounted");
-  const entries=[...celestial,...banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"}))),
+  const entries=[...celestial,...(textureLevels?.entries??banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"})))),
     ...lenses.controls.flatMap(lens=>lens.view==="interior"?
       [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
         {key:`poles:${lens.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
@@ -51,24 +52,28 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       if(!carrier) {
         carrier=b.mesh(isPolar?`${className} ${polarClass}`:className,`${plan[config.sceneBodyKey].meshTransform};animation-duration:${band.visualRotationSeconds}s`);
         grouped.set(key,carrier);(isPolar?polar:surface).push(carrier);b.append(parent,carrier);
-        if(isPolar)carrier.style.setProperty(`--${config.namespace}-poles-texture`,`url("${poles}")`);else writePages(carrier,urls);
+        if(isPolar)carrier.style.setProperty(`--${config.namespace}-poles-texture`,poles?`url("${poles}")`:"none");else writePages(carrier,urls);
       }
       for(const leaf of band.leaves)b.append(carrier,b.leaf(leaf));
     }
     return {surface,polar};
   }
-  const body=bands(system,plan.body.bands,`${config.namespace}-body`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,plan.body.assets.surface.urls,canonicalPreparedAsset(plan.body.assets.poles));
+  const initialResource = key => textureLevels?.textureLevels.levels[0].resources[key] ?? key;
+  const initialUrls = pageKeys(lenses.controls.find(lens=>lens.id===lenses.defaultLens)).map(key=>entries.find(entry=>entry.key===initialResource(key)).url);
+  const body=bands(system,plan.body.bands,`${config.namespace}-body`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,initialUrls,canonicalPreparedAsset(plan.body.assets.poles));
   const cutaway=b.mesh(`${config.namespace}-cutaway`);
   b.append(system,cutaway);
-  const interior=bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],canonicalPreparedAsset(plan.interior.outerAssets.poles));
+  // Inactive datasets own no browser image references. Selection publishes
+  // their prepared URLs only after the complete resource demand is decoded.
+  const interior=bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],null);
   const interiorTextureNodes=[];
   for(const shell of plan.interior.shells) {
     const mesh=b.mesh(`${config.namespace}-interior-shell ${shell.className}`,plan[config.sceneBodyKey].meshTransform);b.append(cutaway,mesh);
-    for(const leaf of shell.leaves) {const node=b.leaf(leaf),url=canonicalPreparedAsset(leaf.asset);node.style.backgroundImage=`url("${url}")`;b.append(mesh,node);interiorTextureNodes.push({node,url});}
+    for(const leaf of shell.leaves) {const node=b.leaf(leaf),url=canonicalPreparedAsset(leaf.asset);node.style.backgroundImage="none";b.append(mesh,node);interiorTextureNodes.push({node,url});}
   }
   const sections=b.mesh(`${config.namespace}-interior-sections`,plan[config.sceneBodyKey].meshTransform);b.append(cutaway,sections);
   for(const leaf of plan.interior.sectionLeaves) {
-    const node=b.leaf(leaf);node.style.backgroundImage=`url("${canonicalPreparedAsset(leaf.asset)}")`;
+    const node=b.leaf(leaf);node.style.backgroundImage="none";
     if(leaf.backfaceVisible)node.style.backfaceVisibility="visible";b.append(sections,node);
     interiorTextureNodes.push({node,url:canonicalPreparedAsset(leaf.asset)});
   }
@@ -112,11 +117,13 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   })));
   const prepared = {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,
+    ...(textureLevels?{textureLevels:textureLevels.textureLevels}:{}),
     ...(catalog?{destinations:{catalog,defaultLens:"normal",statuses:config.destinations.statuses}}:{}),
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
-      preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2}),
+      preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2*(textureLevels?.textureLevels.levels.length??1),eviction:"capacity",
+        ...(textureLevels?{maximumDecodedBytes:textureLevels.maximumDecodedBytes}: {})}),
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
-      startup:[...celestial.map(entry=>entry.key),...pageKeys(lenses.controls.find(lens=>lens.id===lenses.defaultLens)),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
+      startup:[...celestial.map(entry=>entry.key),...pageKeys(lenses.controls.find(lens=>lens.id===lenses.defaultLens)).map(initialResource),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
     tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null}],animations:[],
     motionFrame:[index(system),index(body.surface[0])],

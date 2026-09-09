@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 310.8695652173913,
       "bodyRadiusM": 71500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/vibilia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "1f96a784a1b941d66df5b695381282e8a1f1107d3d6fbddd6d71c8eab3e7d177"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 55.95652173913044,
       "bodyRadiusM": 12870
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dresda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b09585bc06f70c96d722bee3b55749be77fd53a06866f656dae9f7e6ad4fa2c9"
+      }
     }
   },
   "schema": "cssearth-object@1",

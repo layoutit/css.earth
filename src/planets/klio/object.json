@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 170.2608695652174,
       "bodyRadiusM": 39160
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/klio-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9da690b56d4390405787e6b0b1e8ecad6ac95b47be87056d15a08628f9bf92bc"
+      }
     }
   },
   "schema": "cssearth-object@1",

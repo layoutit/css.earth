@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 175.80434782608697,
       "bodyRadiusM": 40435
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/gallia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4ff132620e5c2ce85409ce97f43697f95c1614c3b8bedc3b510a115cea56ebc4"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 22.61521739130435,
       "bodyRadiusM": 5201.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-2001-qw16-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "289b804cc13cbdc283f976378749e54be0089935a171c6ca03acfea6ceb9e579"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -98,6 +98,15 @@
       ],
       "metersPerUnit": 93.47826086956522,
       "bodyRadiusM": 21500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/metis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "99098834af86e5dbcacbd6c1ddb8f12265cd1ccd1fdbdecca13ae3d92b6686d4"
+      }
     }
   },
   "prepared": {

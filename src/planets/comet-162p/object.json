@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 30.565217391304348,
       "bodyRadiusM": 7030
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-162p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "63241a15ae293391105a84cc5f400a8e3bfa2eff0f464aa8377f28c36d66edee"
+      }
     }
   },
   "prepared": {

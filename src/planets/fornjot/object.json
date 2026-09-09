@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 12.608695652173912,
       "bodyRadiusM": 2900
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/fornjot-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c5eaf371fca3f2db4348823d1a4ac7fae6a3e122305960bd2e4d62a3fa9608e5"
+      }
     }
   },
   "prepared": {

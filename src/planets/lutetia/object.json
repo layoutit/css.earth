@@ -56,7 +56,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "f8fa382b781f86ec40f30e1f70c8c9b8f36ca5395bc6a44a006f3d822081e913"
+          "sha256": "0e289d02429797207c6067110d1ca4e4390b75cb29ebac48bee9c57ce0703425"
         },
         {
           "id": "rotation",
@@ -66,7 +66,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "99942f57c9f26d8d813aa2d121ce27ad94d752dc33bb5fc340afb83c199f38e8"
+          "sha256": "8e1e2637ce07eb7f672c0270b747831c3bd371ea786e32ef38ff40849fab7c89"
         },
         {
           "id": "title",
@@ -81,7 +81,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "69db1ad3e533ad0cc456d970ed03ca0dab9e119e8ef9750b98b2a3803ab0c277"
+          "sha256": "36dc0e5039804978b7f8356925ea78c011e96d6f60a60d2c3eea7abbea136d31"
         }
       ]
     },
@@ -111,6 +111,15 @@
       ],
       "metersPerUnit": 213.04347826086956,
       "bodyRadiusM": 49000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lutetia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b59649f89f62c2226436838de5b954e3e73cd78b288dce645d44f23ea0f15d9b"
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -118,6 +127,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "130bf09b0f1a842ffbf4735495bc9229458dd216169b74255c9d0985370a0cdf"
+    "sha256": "a467fbca8ed99569299ae3b49a63c56ce55e8c5544ede580d54dbf4e385dacea"
   }
 }

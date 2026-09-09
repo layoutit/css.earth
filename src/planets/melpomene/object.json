@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 306.5217391304348,
       "bodyRadiusM": 70500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/melpomene-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "89bcf51b3ca8f371cb0383607f3d95a131770c3c78179cc2aba57101d023e464"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 473.9130434782609,
       "bodyRadiusM": 109000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thisbe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5bfa8d51558f4cc271cdaf4913faa7895d0f2b667caf56d50b6532b38dd5a346"
+      }
     }
   },
   "schema": "cssearth-object@1",

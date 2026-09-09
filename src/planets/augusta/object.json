@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 26.456521739130434,
       "bodyRadiusM": 6085
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/augusta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3f7160102789d2422b2da0dda9dc9fb5857e83df49a2438a2b1062ac414b4a24"
+      }
     }
   },
   "schema": "cssearth-object@1",

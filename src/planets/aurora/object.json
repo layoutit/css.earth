@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 430.4347826086956,
       "bodyRadiusM": 99000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aurora-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9e706cdeff00f027bc27b3f8b0e66ce1a939492b242f5497dc74fd378ef9d3e9"
+      }
     }
   },
   "schema": "cssearth-object@1",

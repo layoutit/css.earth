@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 321.7826086956522,
       "bodyRadiusM": 74010
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pales-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6eded1fb95a94f2fdf0f667364e34121f190c2939f0c530f8f3f01a915c2d577"
+      }
     }
   },
   "schema": "cssearth-object@1",

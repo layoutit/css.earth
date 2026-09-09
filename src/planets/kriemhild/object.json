@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 98.1304347826087,
       "bodyRadiusM": 22570
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kriemhild-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b0e53a76d900d7ae64808f902d59ed9883f5c0a116d027526d4385498e86dfd6"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 12.508695652173913,
       "bodyRadiusM": 2877
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-1999-fr33-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "947854b7b910a8b3ead80c2f45797946ddf1fb2b4006d438ea481f381025c477"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 186.95652173913044,
       "bodyRadiusM": 43000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/iclea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "867523527d8ba2fb1fcb94e8ff86036a5d686ced8c9828777287f6ca0a88eb98"
+      }
     }
   },
   "schema": "cssearth-object@1",

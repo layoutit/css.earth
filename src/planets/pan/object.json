@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 60.869565217391305,
       "bodyRadiusM": 14000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pan-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c3c96e0eeb5546ff0d3d6ca3534129ccf42394c43196048ae814891f8054cb55"
+      }
     }
   },
   "prepared": {

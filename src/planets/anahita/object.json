@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 102.02173913043478,
       "bodyRadiusM": 23465
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/anahita-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6d51dbe632b8da03fc535608fb9ebeb0179143966c6e380ac38076795a108401"
+      }
     }
   },
   "schema": "cssearth-object@1",

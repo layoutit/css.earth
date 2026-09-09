@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 262.2173913043478,
       "bodyRadiusM": 60310
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hestia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "71461212541de9701427eeb961a42122d92c6366478763c203deca21ba013aef"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 595.6521739130435,
       "bodyRadiusM": 137000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/sylvia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "02dac3953769b231f20a1a633124799a5c587fe0fc4b938c0f1cce437d772202"
+      }
     }
   },
   "schema": "cssearth-object@1",

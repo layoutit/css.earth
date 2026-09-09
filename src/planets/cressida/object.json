@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 172.9786847411495,
       "bodyRadiusM": 39785.09749046438
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/cressida-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "aeff5367a11b49405288de7187d9d071298c18d94a4e9f8a3529dd95d56e53a5"
+      }
     }
   },
   "prepared": {

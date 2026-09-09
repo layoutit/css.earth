@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 214.34782608695653,
       "bodyRadiusM": 49300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thebe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "186e305c4de1d5ca02e06eab373de15053d411b335712526cb71019b44a4e481"
+      }
     }
   },
   "prepared": {

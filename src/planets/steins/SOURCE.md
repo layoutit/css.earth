@@ -37,7 +37,9 @@ Required raw inputs and source documents are either checked in or restored throu
 
 Focused source tests bind the released XYZ anchors/units, map orientation/coverage, rotation and reduced source fit. Browser and fresh-install qualification are performed by the parent integration workflow; source tests alone do not establish delivery or visual acceptance.
 
-## Near-opposition OSIRIS observation (2026-09-08)
+## Near-opposition OSIRIS observation (2026-09-08 source record)
+
+The two-image mosaic described below supersedes this original single-image presentation and its Minnaert correction.
 
 The default **OSIRIS reflectance** view uses original WAC image `W20080905T183606461ID4DF17.IMG`, UTC 2008-09-05T18:36:22.008, Empty/OI filter (about 632 nm). This corrected reflectance product retains co-registered sigma and quality arrays. It is a small 256×256 CCD subframe beginning at source line 809 and sample 897; the asteroid occupies only tens of original pixels. Its enlarged atlas does not add resolved detail. The existing Monochrome map and Elevation remain available.
 
@@ -50,3 +52,17 @@ The normal quality policy requires VALID bit 0, explicitly permits LOSSY bit 3, 
 ### Reproduction and source closure
 
 `source/preparation/camera.json` selects the exact image, original kernels and control evidence. `source/observations/*-camera.json` is a checked-in preparation input bound by image, mesh and provenance hashes. Reproduce it with `python tools/objects/terrestrial-layers/prepare-archived-camera.py src/planets/steins/source` (NumPy, SciPy, Astropy and SpiceyPy), then run the existing authored preparation command. No camera fitting, source mesh queries, photometric correction or atlas construction runs in the application. All atlases, coverage, thumbnails and surface minimaps consume the same qualified sampler. The camera/source tests use original-file samples, rejected quality cases and independent geometric anchors; the PR records separate browser and source-restoration results.
+
+## Spacecraft mosaic update (2026-09-09)
+
+The existing OSIRIS view now combines WAC OI-filter images **W20080905T183606461ID4DF17** and **W20080905T183630497ID4DF17**, acquired at 18:36:22.008 and 18:36:46.044 UTC on 5 September 2008. Their nominal scales are 129 and 113 m/pixel. The asteroid still spans only tens of detector pixels; enlarging the prepared atlas does not add measured detail. The processed Stooke Monochrome map remains because it has broader coverage.
+
+Both original resampled reflectance files retain their sigma and quality arrays, and each now has its own pinned camera profile and camera JSON. The released camera frame, optical scale and body orientation reproduce the added image’s independent archived RA/Dec to 0.000004 degrees. Neither image supplies a surface-intercept anchor. No image-to-shape fit is claimed. The source/model footprint diagnostic gives a symmetric 95th-percentile limb distance of 2.83 and 3.0 source pixels; this thresholded diagnostic includes optical blur and shape differences and is not a detector quality mask or absolute registration accuracy.
+
+The previous near-opposition-only Minnaert treatment is superseded for this mosaic. The paper’s k(0)=0.54 estimate is not extrapolated to later phases. Both images retain acquisition illumination, with one relative display gain of 1.29646 fitted from qualified overlaps. The existing 1.35 gain limit and all geometric/quality limits remain. Lowest emission selects the source, with deterministic source-order ties. Per-atlas-texel observation indices are retained in preparation, including bleed, outside runtime delivery.
+
+The source survey downloaded OI frames at 18:37:16, 18:37:56, 18:38:36 and 18:39:43. The 18:37:16 frame required a 1.56 gain relative to the opposition image, exceeding the existing limit; it is excluded. The later higher-phase views have progressively poorer source/model footprint agreement and are not included. There is no new dataset row or inferred global albedo map.
+
+This package retains its original 800-triangle geometry, the ordinary prepared grid for missing coverage, and Shadows off. Renderer and shared interaction code are unchanged. Current mosaics supersede the single-photograph descriptions above.
+
+Reproduce the added camera with `python tools/objects/terrestrial-layers/prepare-archived-camera.py src/planets/steins/source --profile preparation/w20080905t183630497id4df17-camera.json`, then run `node tools/objects/dist/prepare-authored.js steins --write`.

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 151.2608695652174,
       "bodyRadiusM": 34790
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/isabella-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8fbc8bbc0250bc8beb3bb7570790a20035dd931a8ff8d03c8c6bd6b630c16f1f"
+      }
     }
   },
   "schema": "cssearth-object@1",

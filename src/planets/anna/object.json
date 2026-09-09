@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 57.69565217391305,
       "bodyRadiusM": 13270
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/anna-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "24ef9f020fec5f26ff6dcbf440dd6e44dd9d29d4f85f313a5c9b8eabf240b70f"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 70.13043478260869,
       "bodyRadiusM": 16129.999999999998
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/weringia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8328582150824640de5faf0c42153880ce46483ec18fc506159185ca44dac684"
+      }
     }
   },
   "schema": "cssearth-object@1",

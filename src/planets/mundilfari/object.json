@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 15.217391304347826,
       "bodyRadiusM": 3500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mundilfari-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "07f197cc9a62e94023c0fbd74404066508ff967708a3078d2216a5a14258216d"
+      }
     }
   },
   "prepared": {

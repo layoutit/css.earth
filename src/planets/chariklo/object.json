@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 541.0140885211745,
       "bodyRadiusM": 124433.24035987012
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/chariklo-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3fe698c3571b525dfcffbf1761da4bbb1b7ecf4e2f5356acf081b45ca6c52e48"
+      }
     }
   },
   "prepared": {

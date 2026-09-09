@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 242.34782608695653,
       "bodyRadiusM": 55740
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/leukothea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "71c1c12323e5d043e41070d6f24f9a2ec99dd1337f862419fb49593ed6e8012f"
+      }
     }
   },
   "schema": "cssearth-object@1",
