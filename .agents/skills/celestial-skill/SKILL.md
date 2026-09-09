@@ -159,6 +159,11 @@ and remove the duplicate. Update affected method notes, credits and original tes
 in the same change. Keep common usage and commands in the shared repo guides. Save screenshots you cite in Git or agreed storage and
 link them; a local output path alone cannot be reviewed by someone else.
 
+Before committing documentation, edit the changed paragraphs using the
+[plain-language rules](../../../docs/provenance/CONTRACT.md#plain-language).
+Replace vague claims with the actual source, action and result. Remove generic
+praise and repeated explanations; preserve scientific terms and qualifications.
+
 Finish with the working location/URL, supported views, checked outcomes and
 remaining limitations, including useful unresolved dataset candidates. A working
 first lens does not establish that the body's useful datasets have been covered.

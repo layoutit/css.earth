@@ -40,23 +40,23 @@ rotating global surface.
 
 ### Mapping the observations to the display
 
-PolyCSS maps the prepared 1024 x 512 global texture onto 448 retained
-longitude-latitude leaves. Each pole adds 32 retained atlas-backed band leaves
-and one retained center cap, for 514 visible surface leaves in total. Camera
+PolyCSS maps the prepared 1,024 × 512 global texture onto 448 HTML surface
+elements arranged by longitude and latitude. Each pole adds 32 textured band
+elements and one center cap, for 514 visible surface elements in total. Camera
 pitch and yaw change the visible source texels, and the body animation rotates
 actual global longitudes around the prepared solar axis.
 Because all longitudes converge at a pole, preparation tapers each source
 sample to the same-latitude longitudinal mean near the cap centre, to reduce the visible seam. This is a display treatment, not another pole observation.
 
 Each lens also has one source-derived, antialiased 512-pixel limb asset. It
-covers only the outer retained-leaf rim to remove transform-raster faceting;
-its transparent center does not replace the globe material. DPR 1 and DPR 2
-surface, polar, limb, and off-limb assets use the canonical highest-density bank,
-selected once per mount independently of device DPR.
+covers only the outer edge to smooth the visible corners of the surface elements;
+its transparent center does not replace the globe material. At device DPR 1 and 2,
+the scene uses the same highest-resolution surface, polar, limb and off-limb
+images, selected once when the scene opens.
 
 The retained cubic starfield is prepared from ESO/S. Brunier's photographic
 `eso0932a` full-sky panorama at DPR 1 and DPR 2. The HYG v4.1 subset remains
-the coordinate-registration audit input. The star panorama is not tied to the solar maps’ observation epoch;
+the reference for checking sky coordinates. The star panorama is not tied to the solar maps’ observation epoch;
 its background omits the Sun itself.
 
 ## Evidence

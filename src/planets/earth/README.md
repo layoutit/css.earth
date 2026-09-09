@@ -46,7 +46,7 @@ The 20 pinned DAP2 latitude blocks contain 120 or 240 rows and together sample n
 
 The existing paged-ellipsoid preparation bilinearly samples heights onto the 8,192 × 4,096 globe raster before coloring. The authored palette spans −10,000 to +10,000 m, saturating deeper trenches. Local cartographic relief reuses the scientific-raster finite-difference helper with a 6,371,008.8 m reference sphere, latitude-adjusted east-west spacing, 4× slope exaggeration, northwest light at 45° elevation, and 60% ambient contribution. This changes image shading, not globe geometry. Shared flood and directional lighting remain supported. The numeric legend is unshaded and uses the identical palette; globe pages, poles, thumbnail and minimap share the same interpretation.
 
-Candidate disposition: GEBCO_2026 selected for the current global numeric model; NOAA ETOPO 2022 remains a documented older alternative; the previous Blue Marble base plus relief is excluded because its land colors do not encode elevation. Source acquisition, scientific anchors, mounted views and payload results are recorded with the PR evidence.
+We selected GEBCO_2026 for the global numeric model. NOAA ETOPO 2022 remains an older alternative; the previous Blue Marble base plus relief is excluded because its land colors do not encode elevation. The [elevation report](../../../docs/evidence/earth-elevation/README.md) records the source download, numerical checks, browser views and file sizes.
 
 ### Annual night lights
 
@@ -98,11 +98,10 @@ exponential tone mapping, and luminance-driven opacity. Earth irradiance,
 twilight width, limb concentration, colour, and density remain body-specific
 and are derived from the OpenSpace atmosphere values. The checked
 `source/atmosphere/google-earth-pro-presentation-response.json` records the
-linked-shader hashes and successful headless layer-isolation gates. It does not
+shader hashes and results from tests that render the atmosphere separately. It does not
 redistribute Google pixels or shader bytes. Google Earth Pro's blue Mars result
 is deliberately not treated as a body-colour authority.
-The browser mounts the canonical prepared DPR 2 bank, independent of device
-DPR; it performs no scattering, geometry, or raster work at runtime.
+The browser uses the same prepared high-resolution images on every device; it performs no scattering, geometry, or raster work at runtime.
 
 ### Atmosphere charts
 
@@ -242,7 +241,7 @@ visible attribution in the shell.
 and prepares camera controls against the accepted Earth face projection. It
 writes `earth-places.json` and a hash/size descriptor. Runtime fetches this local
 catalogue only when city search is used, verifies its identity, searches prepared
-labels, and transports the selected camera controls. No geocoder or geometry
+labels, and applies the prepared camera settings for the selected place. No geocoder or geometry
 derivation runs in the browser. The existing camera rounds control angles to
 hundredths of a degree; this is city navigation, not a precision survey marker.
 

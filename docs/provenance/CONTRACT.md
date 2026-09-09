@@ -196,9 +196,6 @@ the result, including relevant failures and partial runs. Do not remove historic
 evidence until its replacement is authorized and verified. This contract does
 not authorize uploads or moving stored evidence.
 
-Write plainly. Name the dataset, processing step, test and limitation. Prefer
-concrete statements over process jargon or repeated disclaimers.
-
 Extend the existing sections when adding a dataset. Add a shared rule only when
 it fills a demonstrated gap; cite its standard and
 section, or identify it as a cssEarth requirement. Do not repeat this standards
@@ -209,3 +206,32 @@ update their body notes and any shared instructions affected by their change;
 there is no extra approval step. A new preparation operation still needs to
 record its sources and outputs and have tests in the existing tools. Add new
 infrastructure only when a specific tool needs it.
+
+## Plain language
+
+Write for someone trying to understand the data. Each paragraph should explain
+a source, a decision, a method, a result or a limitation. Delete filler that could
+appear unchanged in any body's README.
+
+- Name the dataset and the action: what we downloaded, calculated, changed or
+  checked. Remove praise such as “rigorous,” “comprehensive” or “seamless.”
+- Replace vague claims with evidence. “Validated” needs a named check and result;
+  “reproduced” needs a comparison. If the result is unknown, say so. Never invent
+  a measurement to make a sentence sound concrete.
+- Keep scientific names, units, formulas and necessary technical terms. Explain
+  an unfamiliar term when it matters. Remove agent-process jargon and descriptions
+  of how carefully the work was carried out.
+- State each explanation once. Put a limitation beside the claim it qualifies;
+  avoid repeating a general disclaimer after every paragraph.
+
+Examples using the 67P records:
+
+| Replace | With |
+| --- | --- |
+| “A source-backed geometry pipeline preserves bounded fidelity.” | “We reduced the ESA shape model from 104,192 to 1,000 triangles.” |
+| “The integration was successfully validated.” | “All 60 comet browser cases passed. The renderer suite had nine failures.” |
+| “The imagery is not a pixel-parity oracle.” | “The photographs and browser views have different camera settings, so they cannot be compared pixel by pixel.” |
+
+Before committing, read the changed paragraphs as an explanation to another
+contributor. Rewrite sentences that sound impressive but do not say what happened.
+Use this edit pass in the existing review; it needs no separate report or score.
