@@ -763,3 +763,44 @@ overlays at about 24.8 million AU; the repeat has a 48.513 ms event there. These
 are correlated observations, not proof of GPU causality or a statistical speedup.
 `residuals.json` maps the stalls back to recorder time. Host load, native input
 delivery and simultaneous capture remain measurement limitations.
+
+
+### Retire parent depth publication with its drawing leaves
+
+Galaxy rotation exposed a retirement gap: the context published only the Sun
+locator's geometry, but still sorted and rewrote depth styles for all 227 body
+groups. Depth/rank calculation remains current for picking and selection; DOM
+publication now follows the same active-body scope as geometry. A scope change
+restores every current depth on re-entry, even without a new rotation or selection.
+
+A native drag records 9,155 changed z-index mutation records across 226 retired
+groups before the change and zero afterward. Both the galaxy view and the
+same-orientation system return are pixel-identical, and every restored depth
+matches. Tests cover hidden rotation, hidden selection changes and distance-only
+re-entry. All 62 affected tests, renderer typecheck and build pass. The existing
+24 DPR 1/2 views retain exact orbit geometry and visible styles, with screenshot
+difference at most two channel levels. Evidence:
+`output/playwright/retired-order-publication{,-visual}/`.
+
+Two final synchronized routes under `output/world-context-zoom/`:
+
+| Capture | Recorder | Planetary band >25 ms | Drag >25 ms | Whole route >25 ms | Whole max |
+| --- | --- | --- | --- | --- | --- |
+| `retired-order-publication-dpr2` | `a733ad06-ee4b-4faf-886f-e8ddcacb5336` | 4/761 | 0/243 | 7/3496 | 33.4 ms |
+| `retired-order-publication-repeat-dpr2` | `f40edbe9-9ce2-4438-854f-e2462db12c52` | 15/758 | 2/241 | 19/3489 | 116.7 ms |
+
+Every phase has p95 16.7–16.8 ms in both runs. Galaxy-drag style work totals
+344.4/339.4 ms, compared with 475.5 ms in the preceding visible-proxy repeat.
+Host load/input delivery vary, so this is repeated absolute evidence rather
+than a controlled statistical speedup. The second run's 116.7 ms return interval
+still overlaps a 151.961 ms GPU `ScheduleOverlays` event; isolated stalls remain.
+The adjacent video observations retain the scene and Sun locator.
+
+All 2,946/2,941 video observations are preserved, including two reordered arrivals
+per run. Clock drift is -18/34 microseconds and video PTS error is at most
+1.478/1.427 ms. Source hashes and world/input/document identities match. There
+are no application errors, HMR, trace loss or CSS opacity transitions. Each
+`qualification.json` records source reference and artifact hashes;
+`residuals.json` maps remaining stalls to recorder time and the profiler's source
+thread (not its delivery thread). The repeated p95 improvement is qualified;
+zero dropped frames and aggregate object readiness are not claimed.

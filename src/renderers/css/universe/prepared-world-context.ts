@@ -426,6 +426,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let systemRetired = false;
   let depthOrientation: readonly number[] | null = null;
   let depthSelection: string | null = null;
+  let depthPublicationBodies = bodies;
   let depthOrder = bodies;
   let pickRanks = new Map<(typeof bodies)[number], number>();
   let overview = false;
@@ -539,11 +540,14 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         pickRanks = new Map(depthOrder.map((entry, index) => [entry, index * 4]));
         depthSelection = null;
       }
-      if (depthSelection !== selectedId) {
+      if (depthSelection !== selectedId || depthPublicationBodies !== publishingBodies) {
         depthSelection = selectedId;
-        const selectedIndex = depthOrder.indexOf(selectedEntry);
-        for (const [index, entry] of depthOrder.entries()) {
-          const relativeDepth = index - selectedIndex;
+        depthPublicationBodies = publishingBodies;
+        const selectedRank = pickRanks.get(selectedEntry)!;
+        // Retired groups retain depth styles as well as their drawing leaves.
+        // Re-entry publishes the current order even without another rotation.
+        for (const entry of publishingBodies) {
+          const relativeDepth = (pickRanks.get(entry)! - selectedRank) / 4;
           const zIndex = String(relativeDepth > 0 ? relativeDepth + 3 : relativeDepth);
           if (entry.group.style.zIndex !== zIndex) entry.group.style.zIndex = zIndex;
         }

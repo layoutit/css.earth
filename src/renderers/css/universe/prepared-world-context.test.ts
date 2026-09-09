@@ -608,6 +608,35 @@ test('retired bodies stop receiving zoom writes and resume with current picking 
   layer.destroy();
 });
 
+test('retired depth groups defer rotation and selection writes until same-pose re-entry', () => {
+  const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
+  const publish = (z: number, orientationXyzw = [0, 0, 0, 1]) => layer.publish({
+    referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, z], orientationXyzw },
+  }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  publish(1e31); root.ownerDocument.defaultView.advance(200);
+  let writes = 0;
+  for (const id of ['mercury', 'venus']) {
+    const style = find(root, 'contextGroup', id).style;
+    let zIndex = style.zIndex;
+    Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
+  }
+  const halfTurn = [0, 1, 0, 0];
+  publish(-1e31, halfTurn);
+  layer.selectObject('venus'); publish(-2e31, halfTurn);
+  expect(writes).toBe(0);
+  const depth = (id: string) => Number(find(root, 'contextGroup', id).style.zIndex);
+  expect(depth('sun')).toBeLessThan(0);
+  // Distance alone resumes the system; the cached orientation/selection are
+  // unchanged, so re-entry itself must invalidate the depth publication scope.
+  publish(-1000, halfTurn);
+  expect(writes).toBeGreaterThan(0);
+  expect(depth('venus')).toBe(0);
+  expect(depth('mercury')).toBeGreaterThan(depth('sun'));
+  expect(depth('mercury')).toBeLessThan(0);
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
 test('dolly motion leaves depth styles untouched while selection and rotation still reorder retained groups', () => {
   const root = mount(1), layer = mounted.get(root)!;
   let writes = 0;
