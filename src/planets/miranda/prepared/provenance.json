@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "miranda",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f0bfd2759e2a4290414d65c4d0d40244e528016eb7675861c5205578ca349e5a"
+    "sha256": "4df570221b10b4d6a102e7afd287119e9f0ec4aab0d8cc689be845f1b7fc0a89"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8cc5a1cf0c7ebf7e742d52286c968805804dc842e636c868aae98b61f71fb43d",
+      "sha256": "957bfd5b0f4ccf1f91962816fbb70828bedcc6533112e9330a7d8f19c8d2c900",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -113,6 +113,133 @@
                 ],
                 "ambient": 0.25
               }
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "format": "geotiff",
+              "path": "science/geology-2026/categories.tif",
+              "consumer": "geology-surfaces",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": 0,
+              "maximum": 17,
+              "colors": [
+                "#343434",
+                "#ffff00"
+              ],
+              "categories": [
+                {
+                  "value": "craterswithdarkstreaks",
+                  "label": "Craters with dark streaks on walls",
+                  "color": "#343434"
+                },
+                {
+                  "value": "chaincraters",
+                  "label": "chain craters",
+                  "color": "#734c00"
+                },
+                {
+                  "value": "darkalbedocanyonslopeV2",
+                  "label": "dark albedo canyon slope",
+                  "color": "#c0d5fc"
+                },
+                {
+                  "value": "darkmaterial",
+                  "label": "dark material",
+                  "color": "#005ce6"
+                },
+                {
+                  "value": "flowmaterial",
+                  "label": "flow material",
+                  "color": "#e7c7fc"
+                },
+                {
+                  "value": "fracturedcanyonfloor",
+                  "label": "fractured canyon floor",
+                  "color": "#f5f57a"
+                },
+                {
+                  "value": "freshimpactcraters",
+                  "label": "fresh impact craters",
+                  "color": "#edfcca"
+                },
+                {
+                  "value": "heavilymantledcrateredterrain",
+                  "label": "heavily mantled cratered terrain",
+                  "color": "#cdaa66"
+                },
+                {
+                  "value": "hummockycanyonfloor",
+                  "label": "hummocky canyon floor",
+                  "color": "#895a44"
+                },
+                {
+                  "value": "lightalbedocanyon",
+                  "label": "light albedo canyon",
+                  "color": "#ffbebe"
+                },
+                {
+                  "value": "lightalbedomaterial",
+                  "label": "light albedo material",
+                  "color": "#89cd66"
+                },
+                {
+                  "value": "lightlymantledcrateredterrain",
+                  "label": "lightly mantled cratered terrain",
+                  "color": "#ffaa00"
+                },
+                {
+                  "value": "mediumalbedocanyon",
+                  "label": "medium albedo canyon",
+                  "color": "#730000"
+                },
+                {
+                  "value": "mediumalbedomaterialArden",
+                  "label": "medium albedo material",
+                  "color": "#cfd3fc"
+                },
+                {
+                  "value": "northernridgedplains",
+                  "label": "northern ridged plains",
+                  "color": "#4c0073"
+                },
+                {
+                  "value": "southernridgedplainsv2",
+                  "label": "southern ridged plains",
+                  "color": "#fcbbcf"
+                },
+                {
+                  "value": "verydarkalbedomaterial",
+                  "label": "very dark albedo material",
+                  "color": "#cffced"
+                },
+                {
+                  "value": "wisplikelightmaterial",
+                  "label": "wisp-like light material",
+                  "color": "#ffff00"
+                }
+              ],
+              "description": "Historical interpreted geology · reconstructed registration",
+              "title": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+              "sourceUrl": "https://zenodo.org/records/20817533",
+              "grid": {
+                "width": 1440,
+                "height": 720,
+                "projection": "equirectangular",
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 235700,
+                "noData": 65535,
+                "origin": [
+                  -740473.3884511142,
+                  370236.6942255571
+                ],
+                "resolutionMeters": 1028.4352617376585,
+                "latitudeRange": [
+                  -90,
+                  0
+                ]
+              }
             }
           ],
           "observedColors": []
@@ -155,7 +282,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "31bff645f9e541ae85fc3f0e8c92348dcafb1b4c939a1b82786213235ab310da",
+      "sha256": "b6f5bfd4e0684fa48e4666c421da219cb2893434f0172f160e12510618e5e5fd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -226,7 +353,8 @@
           "defaultLens": "normal",
           "labels": {
             "normal": "Monochrome",
-            "elevation": "Elevation"
+            "elevation": "Elevation",
+            "geology": "Geology"
           },
           "controls": [
             {
@@ -274,6 +402,138 @@
                 "image": "/scenes/miranda/miranda-elevation-legend.webp"
               },
               "summary": "Height from stereo images and shading, relative to the source ellipsoid. Detail varies; gray grid: no measurements."
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "detail": "Historical map",
+              "description": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+              "title": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+              "summary": "Historical interpreted units; degree-scale registration limits. Gray grid: unmapped or conflicting units.",
+              "thumbnail": "/scenes/miranda/miranda-geology-thumbnail.webp",
+              "surface": "miranda-geology-surface@2x.webp",
+              "poles": "miranda-geology-poles@2x.webp",
+              "falseColor": true,
+              "source": {
+                "id": "geology-2026-categories",
+                "path": "../manifest.json",
+                "url": "https://zenodo.org/records/20817533"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Historical geologic category"
+                },
+                {
+                  "id": "registration",
+                  "label": "Independent checks",
+                  "value": "Three crater centres · 1.3–3.3° residual"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Mapped coverage",
+                  "value": "About 44% of the reference sphere"
+                }
+              ],
+              "legend": {
+                "kind": "categories",
+                "title": "Historical geologic units",
+                "meta": "Source layer names and colors; reconstructed map registration.",
+                "sourceUrl": "https://zenodo.org/records/20817533",
+                "items": [
+                  {
+                    "label": "1",
+                    "description": "Craters with dark streaks on walls",
+                    "color": "#343434"
+                  },
+                  {
+                    "label": "2",
+                    "description": "chain craters",
+                    "color": "#734c00"
+                  },
+                  {
+                    "label": "3",
+                    "description": "dark albedo canyon slope",
+                    "color": "#c0d5fc"
+                  },
+                  {
+                    "label": "4",
+                    "description": "dark material",
+                    "color": "#005ce6"
+                  },
+                  {
+                    "label": "5",
+                    "description": "flow material",
+                    "color": "#e7c7fc"
+                  },
+                  {
+                    "label": "6",
+                    "description": "fractured canyon floor",
+                    "color": "#f5f57a"
+                  },
+                  {
+                    "label": "7",
+                    "description": "fresh impact craters",
+                    "color": "#edfcca"
+                  },
+                  {
+                    "label": "8",
+                    "description": "heavily mantled cratered terrain",
+                    "color": "#cdaa66"
+                  },
+                  {
+                    "label": "9",
+                    "description": "hummocky canyon floor",
+                    "color": "#895a44"
+                  },
+                  {
+                    "label": "10",
+                    "description": "light albedo canyon",
+                    "color": "#ffbebe"
+                  },
+                  {
+                    "label": "11",
+                    "description": "light albedo material",
+                    "color": "#89cd66"
+                  },
+                  {
+                    "label": "12",
+                    "description": "lightly mantled cratered terrain",
+                    "color": "#ffaa00"
+                  },
+                  {
+                    "label": "13",
+                    "description": "medium albedo canyon",
+                    "color": "#730000"
+                  },
+                  {
+                    "label": "14",
+                    "description": "medium albedo material",
+                    "color": "#cfd3fc"
+                  },
+                  {
+                    "label": "15",
+                    "description": "northern ridged plains",
+                    "color": "#4c0073"
+                  },
+                  {
+                    "label": "16",
+                    "description": "southern ridged plains",
+                    "color": "#fcbbcf"
+                  },
+                  {
+                    "label": "17",
+                    "description": "very dark albedo material",
+                    "color": "#cffced"
+                  },
+                  {
+                    "label": "18",
+                    "description": "wisp-like light material",
+                    "color": "#ffff00"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -395,7 +655,7 @@
       "sha256": "70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c",
       "bytes": 33170078,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -452,7 +712,7 @@
       "sha256": "45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570",
       "bytes": 31117604,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -461,6 +721,28 @@
         "path": "science/mudem-ZT-cyl.cub.gz",
         "url": "https://earth-assets.lowpoly.cc/source-assets/45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570/mudem-ZT-cyl.cub.gz"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "geology-2026-categories",
+      "path": "science/geology-2026/categories.tif",
+      "width": 1440,
+      "height": 720,
+      "origin": "https://zenodo.org/records/20817533",
+      "credit": "Bradley Thomson and Devon Baynham (2026), after Croft and Soderblom (1991); cssEarth reconstructed registration and categorical conversion",
+      "license": "CC BY 4.0; preserve source credit and identify transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ],
+      "redistribution": "CC BY 4.0 original release and identified derived registration/conversion.",
+      "acquisition": "Checked-in derived categorical grid. Reproduce with tools/objects/prepare-geologic-categories.py source/preparation/geology-conversion.json using the pinned original GIS and registration.",
+      "coverage": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+      "sha256": "29af000760d36c23883e88f4a5de39acbc45a9ed0c69a3e8747794b327a50fd8",
+      "bytes": 35464,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -473,10 +755,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "10ceda01821a91ce0387d89d45da178bba6b99f23f414126f7e39e7e427811f5",
-      "bytes": 10354,
+      "sha256": "b6f5bfd4e0684fa48e4666c421da219cb2893434f0172f160e12510618e5e5fd",
+      "bytes": 15421,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -533,19 +815,19 @@
           "url": "/scenes/miranda/miranda-normal-thumbnail.webp",
           "bytes": 2732,
           "sha256": "5ad3ad0c4f2633a4ea648e34a702be25e4782d3b97de558d2593e2d60d2b7c5d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-normal-surface@2x.webp",
           "bytes": 2683924,
           "sha256": "7d497d404ae0b876d14547f382681cfd6bdaf0898cb0168ef6a88ebfef0fc711",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-normal-poles@2x.webp",
           "bytes": 101248,
           "sha256": "aa0122ac2e363919a43ad59922c9fa7a46e072c79f58b2e5e71380e5111d5f2e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -578,25 +860,70 @@
           "url": "/scenes/miranda/miranda-elevation-thumbnail.webp",
           "bytes": 4690,
           "sha256": "8142242bde81c47cb0e0f841fc05b55d3fda3d1bbafa5251748deca610316dc9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-surface@2x.webp",
           "bytes": 3374940,
           "sha256": "c275fb7465b05d6e71767521d9d75b40e76eca4bc45cd724a02916e56d926ba4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/miranda/miranda-elevation-poles@2x.webp",
           "bytes": 268828,
           "sha256": "ceb1348181eeb52e2e2c3147a90212064ad429cce957d2498619662d6ffacf2b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown."
+      },
+      "inputs": [
+        "geology-2026-categories"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/miranda/miranda-geology-thumbnail.webp",
+          "bytes": 644,
+          "sha256": "34573f97bdd52456deafda8918e8dfafc8f51a526a565dad88df97528ebd3217",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/miranda/miranda-geology-surface@2x.webp",
+          "bytes": 84622,
+          "sha256": "8e7e97616ad5546a0b51238b78bde7e249242448be052e6df64c501586cd92dd",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/miranda/miranda-geology-poles@2x.webp",
+          "bytes": 29738,
+          "sha256": "214b12df33cf63e23940d096040be2e987c3bd3c87b73d74b892495463131227",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -670,6 +997,30 @@
           "url": "object:prepared/minimaps/elevation.webp",
           "bytes": 35470,
           "sha256": "76c2d481e2af4ab4be19fe634518a50367644be682bd54588357bf5f85c038e0",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:geology",
+      "label": "Geology preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "geology"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/geology.webp",
+          "bytes": 33740,
+          "sha256": "6627f9ffab8045b390c49f125a9d656940d015fb3596f01dfd6a50217c774512",
           "verification": "bytes-verified"
         }
       ]

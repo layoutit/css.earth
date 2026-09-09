@@ -1,0 +1,2541 @@
+{
+  "schema": "cssearth-b3-visual-capture@1",
+  "status": "CAPTURED_UNREVIEWED",
+  "startedAt": "2026-09-09T12:58:45.158Z",
+  "root": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "baseUrl": "http://127.0.0.1:4291",
+  "head": "4f9468c70b45cf14fb70a7607f4a8bd5d47ab4bb",
+  "script": {
+    "path": "docs/moons/b3-preparation/capture-b3-integrated.mjs",
+    "bytes": 33896,
+    "sha256": "4cc2a555cd2b31a1eb24b1cfff6508547fb332fe4c659366aa2d7b5bee07f730"
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "dprs": [
+    2
+  ],
+  "selectedIds": [
+    "proteus"
+  ],
+  "fullCohort": [
+    "titania",
+    "miranda",
+    "hyperion",
+    "proteus",
+    "callisto",
+    "phoebe"
+  ],
+  "plannedViews": {
+    "titania": [
+      "normal",
+      "elevation",
+      "geology"
+    ],
+    "miranda": [
+      "normal",
+      "elevation",
+      "geology"
+    ],
+    "hyperion": [
+      "normal",
+      "elevation"
+    ],
+    "proteus": [
+      "elevation"
+    ],
+    "callisto": [
+      "normal",
+      "enhanced"
+    ],
+    "phoebe": [
+      "normal",
+      "elevation",
+      "maplet-resolution",
+      "image-count"
+    ]
+  },
+  "outputBudgetBytes": 943718400,
+  "qualification": "Actual Chrome captures and runtime checks; visual review pending. No baseline/native parity or compositor-FPS claim.",
+  "cases": [
+    {
+      "id": "proteus",
+      "dpr": 2,
+      "status": "CAPTURED_UNREVIEWED",
+      "views": [
+        {
+          "lensId": "elevation",
+          "shadows": false,
+          "target": null,
+          "screenshots": [
+            {
+              "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/proteus-dpr2/elevation-shadows-false-scene.png",
+              "bytes": 1855592,
+              "sha256": "db065bd12b590fba0e5a511c7d4512deec07317b125c207f4a14b96f94e03fb7"
+            },
+            {
+              "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/proteus-dpr2/elevation-shadows-false-details-1.png",
+              "bytes": 1855592,
+              "sha256": "7c62fa48fd164094a92e5c447e6d81b70ffe88a9ed7e83432dd0b520df30fdff"
+            }
+          ],
+          "status": "CAPTURED_UNREVIEWED",
+          "beforeDrag": {
+            "at": 10957.20000000007,
+            "url": "http://127.0.0.1:4291/proteus/?v=MMZAj_ELejuzuEFCxzNAAAAAv7h31uDreTw_jU4Xu1NLb79Wg0y00e2EAAA",
+            "activeObjectId": "proteus",
+            "selectedObjectId": "proteus",
+            "ready": true,
+            "appError": null,
+            "ownerSame": true,
+            "camera": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(0.999586722777,-0.005470577583,-0.028221559644,0,0,0.981725684866,-0.190301549325,0,0.028746889359,0.190222902029,0.981319960001,0,0,0,0,1)",
+                "skybox": "matrix3d(0.997409005891,-0.013689957914,-0.070623614764,0,0.066001997582,0.56465388378,0.822684425437,0,0.028615352775,-0.825214178033,0.564094440064,0,0,0,0,1)",
+                "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+              },
+              "pitch": 104.02098566720083,
+              "controlPitch": 104.02098566720083,
+              "controlYaw": 1.6473023715265165,
+              "zoom": 1.2396521739130437,
+              "distance": 1130.2405719907333,
+              "distanceKilometers": 1022.130604235098,
+              "distanceRadii": 4.9140894434379705,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 518.3999999906325,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1247.08,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -720,
+                "right": 720,
+                "top": -500,
+                "bottom": 500
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 259.19999999531626
+            },
+            "lens": {
+              "desired": {
+                "lensId": "elevation",
+                "shadows": false,
+                "orbit": true
+              },
+              "committed": {
+                "lensId": "elevation",
+                "shadows": false,
+                "orbit": true
+              },
+              "plan": {
+                "required": [
+                  "surface:elevation",
+                  "poles:elevation",
+                  "lighting"
+                ],
+                "prewarm": [],
+                "materials": {},
+                "pressedLenses": [
+                  "elevation"
+                ]
+              },
+              "pending": false,
+              "loadingMaterial": false,
+              "ready": true,
+              "error": null,
+              "viewRevision": 3
+            },
+            "stats": {
+              "owner": "shared-retained-cubic-sky-orbit",
+              "inputMode": "event-driven-unbounded-matrix-drag-wheel-pinch",
+              "enabledAxes": "unbounded-pitch-and-yaw",
+              "cameraModel": "accumulated-matrix3d",
+              "pitchBounded": false,
+              "yawBounded": false,
+              "minimumPitchDegrees": 0,
+              "maximumPitchDegrees": 89,
+              "defaultControlPitchDegrees": 104.02098566720083,
+              "defaultControlYawDegrees": 1.6473023715265165,
+              "minimumZoom": 5.000492142022548e-16,
+              "maximumZoom": 4,
+              "defaultZoom": 1.1,
+              "responsiveFitModel": "continuous-aspect-smoothstep",
+              "responsiveWidthShare": 0.36000000000000004,
+              "responsiveBaseZoom": 1.2396521739130437,
+              "publications": 3,
+              "directionalSunBillboardCount": 1,
+              "interactionStarts": 0,
+              "interactionEnds": 0,
+              "dragInertia": {
+                "schema": "cssearth-google-earth-pro-trackball-throw@10",
+                "projection": "screen-space-sphere",
+                "historyStorage": "fixed-capacity-float64-ring",
+                "activeMode": "idle",
+                "activeMotionCount": 0,
+                "pendingPointer": false,
+                "active": false,
+                "starts": 0,
+                "frames": 0,
+                "cancels": 0,
+                "pointerCancels": 0,
+                "interruptions": {
+                  "drag": 0,
+                  "pointer": 0,
+                  "wheel": 0,
+                  "fly-to": 0,
+                  "programmatic": 0,
+                  "disabled": 0,
+                  "destroy": 0
+                },
+                "lastInterruption": null,
+                "surfaceFlyTo": {
+                  "schema": "cssearth-google-earth-pro-surface-fly-to@4",
+                  "qualification": "GOOGLE_EARTH_PRO_7.3.7.1327_NATIVE_TRAINING_FIT",
+                  "enabled": true,
+                  "active": false,
+                  "starts": 0,
+                  "frames": 0,
+                  "completions": 0,
+                  "cancels": 0
+                },
+                "destinationFlyTo": {
+                  "starts": 0,
+                  "frames": 0,
+                  "completions": 0,
+                  "cancels": 0,
+                  "active": false
+                },
+                "wheelZoom": {
+                  "active": false,
+                  "events": 0,
+                  "frames": 0,
+                  "inputKind": null,
+                  "model": "perspective-dolly"
+                }
+              },
+              "runtimeGeometryPreparation": false,
+              "projection": {
+                "model": "css-perspective-shared-with-sky",
+                "horizontalFovDegrees": 60,
+                "focalLengthOverViewportWidth": 0.8660254037844386,
+                "cssPerspective": "86.60254037844386cqw",
+                "eyeOnCameraRootAxis": true,
+                "nearPlaneClipping": "javascript-before-publication"
+              },
+              "dolly": {
+                "model": "multiplicative-wheel-distance",
+                "wheelStepPerDelta": 0.006,
+                "minimumDistanceRadii": 1.2,
+                "maximumDistanceOverOrbitExtent": 1,
+                "maximumDistanceOverSystemExtent": 3,
+                "zoomIsSilhouetteFraming": true,
+                "minimumDistance": 412.93176774014375,
+                "maximumDistance": 2743305980769231000,
+                "minimumDistanceKilometers": 373.433946478043,
+                "maximumDistanceKilometers": 2480902800000000000,
+                "maximumDistanceOverOrbitExtentEffective": 1,
+                "logDistanceRange": 36.43241306127679,
+                "wheelNotchesEndToEnd": 60.72068843546132,
+                "wheelDollies": 0
+              },
+              "levelOfDetail": {
+                "model": "silhouette-diameter-crossfade",
+                "billboardFadeStartDiscPixels": 20,
+                "billboardFullDiscPixels": 14,
+                "markerFadeStartDiscPixels": 8,
+                "markerFullDiscPixels": 4.5
+              },
+              "orbitLineFade": {
+                "visibleBelowDiscHeightShare": 0.12,
+                "hiddenAboveDiscHeightShare": 0.3
+              },
+              "drag": {
+                "model": "screen-axis-tumble"
+              },
+              "rotationBounds": "none",
+              "planetarySystem": null,
+              "sceneTransformWrites": 1,
+              "runtimeTransformStringWrites": 12,
+              "orbitPieceCount": 0,
+              "orbitPoolOverflows": 0,
+              "systemOrbitPieceCount": 0,
+              "systemPoolOverflows": 0
+            },
+            "surfacePaint": {
+              "leaves": 1100,
+              "textured": 1100,
+              "tags": [
+                "U"
+              ]
+            },
+            "shell": {
+              "drawerHidden": false,
+              "informationHidden": false,
+              "settingsHidden": true,
+              "sidebarCollapsed": null,
+              "informationTab": "dataset"
+            },
+            "shadows": false,
+            "preparedDensity": 2,
+            "retainedStable": true,
+            "loadedImages": [
+              {
+                "url": "/scenes/proteus/proteus-directional-sun@2x.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-lighting.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-system-point.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
+                "ready": true
+              }
+            ]
+          },
+          "legendContract": {
+            "kind": "scale",
+            "labels": [
+              "-35",
+              "0",
+              "+25 km"
+            ],
+            "meta": "km"
+          },
+          "visibleDescriptionAndLegend": {
+            "text": "-35\n0\n+25 km\n\nHeight relative to a 208 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain.",
+            "blocks": [
+              {
+                "index": 0,
+                "text": "",
+                "visible": true,
+                "rectangle": {
+                  "x": 32,
+                  "y": 581.6875,
+                  "width": 296,
+                  "height": 12
+                },
+                "screenshot": "elevation-shadows-false-details-1.png"
+              },
+              {
+                "index": 1,
+                "text": "-35\n0\n+25 km",
+                "visible": true,
+                "rectangle": {
+                  "x": 32,
+                  "y": 593.6875,
+                  "width": 296,
+                  "height": 16
+                },
+                "screenshot": "elevation-shadows-false-details-1.png"
+              },
+              {
+                "index": 2,
+                "text": "Height relative to a 208 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain.",
+                "visible": true,
+                "rectangle": {
+                  "x": 32,
+                  "y": 621.6875,
+                  "width": 300,
+                  "height": 60
+                },
+                "screenshot": "elevation-shadows-false-details-1.png"
+              }
+            ],
+            "screenshots": [
+              "elevation-shadows-false-details-1.png"
+            ]
+          },
+          "loadedResponseCount": 10
+        },
+        {
+          "lensId": "elevation",
+          "shadows": true,
+          "target": null,
+          "screenshots": [
+            {
+              "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/proteus-dpr2/elevation-shadows-true-scene.png",
+              "bytes": 1601959,
+              "sha256": "443b636f189e6b8ac3c36e0ce1dd32a0e28e734d3bf609e0bb768400fd561af4"
+            },
+            {
+              "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/proteus-dpr2/elevation-shadows-true-details-1.png",
+              "bytes": 1601964,
+              "sha256": "ca2545f2424979a5f59563ad2901ef8f5d5130f603c8939f94e921730fff4d7e"
+            },
+            {
+              "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/proteus-dpr2/elevation-shadows-true-drag.png",
+              "bytes": 1677637,
+              "sha256": "981cf0c11e2c134f7eeaa8945fa742e3fdadccbe7f73268905728855fcdcfc77"
+            }
+          ],
+          "status": "CAPTURED_UNREVIEWED",
+          "beforeDrag": {
+            "at": 12372.5,
+            "url": "http://127.0.0.1:4291/proteus/?v=MMZAj_ELejuzuEFCxzNAAAAAv7h31uDreTw_jU4Xu1NLb79Wg0y00e2EAAA",
+            "activeObjectId": "proteus",
+            "selectedObjectId": "proteus",
+            "ready": true,
+            "appError": null,
+            "ownerSame": true,
+            "camera": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(0.999586722777,-0.005470577583,-0.028221559644,0,0,0.981725684866,-0.190301549325,0,0.028746889359,0.190222902029,0.981319960001,0,0,0,0,1)",
+                "skybox": "matrix3d(0.997409005891,-0.013689957914,-0.070623614764,0,0.066001997582,0.56465388378,0.822684425437,0,0.028615352775,-0.825214178033,0.564094440064,0,0,0,0,1)",
+                "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+              },
+              "pitch": 104.02098566720083,
+              "controlPitch": 104.02098566720083,
+              "controlYaw": 1.6473023715265165,
+              "zoom": 1.2396521739130437,
+              "distance": 1130.2405719907333,
+              "distanceKilometers": 1022.130604235098,
+              "distanceRadii": 4.9140894434379705,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 518.3999999906325,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1247.08,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -720,
+                "right": 720,
+                "top": -500,
+                "bottom": 500
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 259.19999999531626
+            },
+            "lens": {
+              "desired": {
+                "lensId": "elevation",
+                "shadows": true,
+                "orbit": true
+              },
+              "committed": {
+                "lensId": "elevation",
+                "shadows": true,
+                "orbit": true
+              },
+              "plan": {
+                "required": [
+                  "shadow:elevation",
+                  "poles:elevation",
+                  "lighting"
+                ],
+                "prewarm": [],
+                "materials": {},
+                "pressedLenses": [
+                  "elevation"
+                ]
+              },
+              "pending": false,
+              "loadingMaterial": false,
+              "ready": true,
+              "error": null,
+              "viewRevision": 4
+            },
+            "stats": {
+              "owner": "shared-retained-cubic-sky-orbit",
+              "inputMode": "event-driven-unbounded-matrix-drag-wheel-pinch",
+              "enabledAxes": "unbounded-pitch-and-yaw",
+              "cameraModel": "accumulated-matrix3d",
+              "pitchBounded": false,
+              "yawBounded": false,
+              "minimumPitchDegrees": 0,
+              "maximumPitchDegrees": 89,
+              "defaultControlPitchDegrees": 104.02098566720083,
+              "defaultControlYawDegrees": 1.6473023715265165,
+              "minimumZoom": 5.000492142022548e-16,
+              "maximumZoom": 4,
+              "defaultZoom": 1.1,
+              "responsiveFitModel": "continuous-aspect-smoothstep",
+              "responsiveWidthShare": 0.36000000000000004,
+              "responsiveBaseZoom": 1.2396521739130437,
+              "publications": 4,
+              "directionalSunBillboardCount": 1,
+              "interactionStarts": 0,
+              "interactionEnds": 0,
+              "dragInertia": {
+                "schema": "cssearth-google-earth-pro-trackball-throw@10",
+                "projection": "screen-space-sphere",
+                "historyStorage": "fixed-capacity-float64-ring",
+                "activeMode": "idle",
+                "activeMotionCount": 0,
+                "pendingPointer": false,
+                "active": false,
+                "starts": 0,
+                "frames": 0,
+                "cancels": 0,
+                "pointerCancels": 0,
+                "interruptions": {
+                  "drag": 0,
+                  "pointer": 0,
+                  "wheel": 0,
+                  "fly-to": 0,
+                  "programmatic": 0,
+                  "disabled": 0,
+                  "destroy": 0
+                },
+                "lastInterruption": null,
+                "surfaceFlyTo": {
+                  "schema": "cssearth-google-earth-pro-surface-fly-to@4",
+                  "qualification": "GOOGLE_EARTH_PRO_7.3.7.1327_NATIVE_TRAINING_FIT",
+                  "enabled": true,
+                  "active": false,
+                  "starts": 0,
+                  "frames": 0,
+                  "completions": 0,
+                  "cancels": 0
+                },
+                "destinationFlyTo": {
+                  "starts": 0,
+                  "frames": 0,
+                  "completions": 0,
+                  "cancels": 0,
+                  "active": false
+                },
+                "wheelZoom": {
+                  "active": false,
+                  "events": 0,
+                  "frames": 0,
+                  "inputKind": null,
+                  "model": "perspective-dolly"
+                }
+              },
+              "runtimeGeometryPreparation": false,
+              "projection": {
+                "model": "css-perspective-shared-with-sky",
+                "horizontalFovDegrees": 60,
+                "focalLengthOverViewportWidth": 0.8660254037844386,
+                "cssPerspective": "86.60254037844386cqw",
+                "eyeOnCameraRootAxis": true,
+                "nearPlaneClipping": "javascript-before-publication"
+              },
+              "dolly": {
+                "model": "multiplicative-wheel-distance",
+                "wheelStepPerDelta": 0.006,
+                "minimumDistanceRadii": 1.2,
+                "maximumDistanceOverOrbitExtent": 1,
+                "maximumDistanceOverSystemExtent": 3,
+                "zoomIsSilhouetteFraming": true,
+                "minimumDistance": 412.93176774014375,
+                "maximumDistance": 2743305980769231000,
+                "minimumDistanceKilometers": 373.433946478043,
+                "maximumDistanceKilometers": 2480902800000000000,
+                "maximumDistanceOverOrbitExtentEffective": 1,
+                "logDistanceRange": 36.43241306127679,
+                "wheelNotchesEndToEnd": 60.72068843546132,
+                "wheelDollies": 0
+              },
+              "levelOfDetail": {
+                "model": "silhouette-diameter-crossfade",
+                "billboardFadeStartDiscPixels": 20,
+                "billboardFullDiscPixels": 14,
+                "markerFadeStartDiscPixels": 8,
+                "markerFullDiscPixels": 4.5
+              },
+              "orbitLineFade": {
+                "visibleBelowDiscHeightShare": 0.12,
+                "hiddenAboveDiscHeightShare": 0.3
+              },
+              "drag": {
+                "model": "screen-axis-tumble"
+              },
+              "rotationBounds": "none",
+              "planetarySystem": null,
+              "sceneTransformWrites": 1,
+              "runtimeTransformStringWrites": 16,
+              "orbitPieceCount": 0,
+              "orbitPoolOverflows": 0,
+              "systemOrbitPieceCount": 0,
+              "systemPoolOverflows": 0
+            },
+            "surfacePaint": {
+              "leaves": 1100,
+              "textured": 1100,
+              "tags": [
+                "U"
+              ]
+            },
+            "shell": {
+              "drawerHidden": false,
+              "informationHidden": false,
+              "settingsHidden": true,
+              "sidebarCollapsed": null,
+              "informationTab": "dataset"
+            },
+            "shadows": true,
+            "preparedDensity": 2,
+            "retainedStable": true,
+            "loadedImages": [
+              {
+                "url": "/scenes/proteus/proteus-directional-sun@2x.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-lighting.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-system-point.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-elevation-shadow@2x.webp",
+                "ready": true
+              }
+            ]
+          },
+          "legendContract": {
+            "kind": "scale",
+            "labels": [
+              "-35",
+              "0",
+              "+25 km"
+            ],
+            "meta": "km"
+          },
+          "visibleDescriptionAndLegend": {
+            "text": "-35\n0\n+25 km\n\nHeight relative to a 208 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain.",
+            "blocks": [
+              {
+                "index": 0,
+                "text": "",
+                "visible": true,
+                "rectangle": {
+                  "x": 32,
+                  "y": 581.6875,
+                  "width": 296,
+                  "height": 12
+                },
+                "screenshot": "elevation-shadows-true-details-1.png"
+              },
+              {
+                "index": 1,
+                "text": "-35\n0\n+25 km",
+                "visible": true,
+                "rectangle": {
+                  "x": 32,
+                  "y": 593.6875,
+                  "width": 296,
+                  "height": 16
+                },
+                "screenshot": "elevation-shadows-true-details-1.png"
+              },
+              {
+                "index": 2,
+                "text": "Height relative to a 208 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain.",
+                "visible": true,
+                "rectangle": {
+                  "x": 32,
+                  "y": 621.6875,
+                  "width": 300,
+                  "height": 60
+                },
+                "screenshot": "elevation-shadows-true-details-1.png"
+              }
+            ],
+            "screenshots": [
+              "elevation-shadows-true-details-1.png"
+            ]
+          },
+          "drag": {
+            "frames": [
+              {
+                "time": 13471.866,
+                "publications": 4
+              },
+              {
+                "time": 13488.5,
+                "publications": 4
+              },
+              {
+                "time": 13505.1,
+                "publications": 5
+              },
+              {
+                "time": 13521.8,
+                "publications": 5
+              },
+              {
+                "time": 13538.5,
+                "publications": 5
+              },
+              {
+                "time": 13555.1,
+                "publications": 6
+              },
+              {
+                "time": 13571.8,
+                "publications": 6
+              },
+              {
+                "time": 13605.2,
+                "publications": 7
+              },
+              {
+                "time": 13621.8,
+                "publications": 7
+              },
+              {
+                "time": 13638.5,
+                "publications": 8
+              },
+              {
+                "time": 13655.2,
+                "publications": 8
+              },
+              {
+                "time": 13671.8,
+                "publications": 9
+              },
+              {
+                "time": 13705.2,
+                "publications": 9
+              },
+              {
+                "time": 13721.8,
+                "publications": 10
+              },
+              {
+                "time": 13738.5,
+                "publications": 10
+              },
+              {
+                "time": 13755.1,
+                "publications": 11
+              },
+              {
+                "time": 13771.8,
+                "publications": 11
+              },
+              {
+                "time": 13805.1,
+                "publications": 12
+              },
+              {
+                "time": 13821.8,
+                "publications": 12
+              },
+              {
+                "time": 13838.4,
+                "publications": 13
+              },
+              {
+                "time": 13855.2,
+                "publications": 13
+              },
+              {
+                "time": 13871.8,
+                "publications": 14
+              },
+              {
+                "time": 13888.5,
+                "publications": 14
+              },
+              {
+                "time": 13905.2,
+                "publications": 14
+              },
+              {
+                "time": 13921.8,
+                "publications": 15
+              },
+              {
+                "time": 13938.5,
+                "publications": 15
+              },
+              {
+                "time": 13955.1,
+                "publications": 16
+              },
+              {
+                "time": 14005.1,
+                "publications": 16
+              },
+              {
+                "time": 14021.8,
+                "publications": 16
+              },
+              {
+                "time": 14038.5,
+                "publications": 16
+              },
+              {
+                "time": 14055.2,
+                "publications": 16
+              },
+              {
+                "time": 14071.8,
+                "publications": 16
+              },
+              {
+                "time": 14121.8,
+                "publications": 16
+              }
+            ],
+            "events": [
+              {
+                "type": "pointerdown",
+                "timeStamp": 13469.900000000023,
+                "observedAt": 13474.20000000007,
+                "x": 720,
+                "y": 500
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13476.300000000047,
+                "observedAt": 13489.800000000047,
+                "x": 725,
+                "y": 502
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13530.800000000047,
+                "observedAt": 13547.099999999977,
+                "x": 730,
+                "y": 504
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13584.900000000023,
+                "observedAt": 13586.599999999977,
+                "x": 735,
+                "y": 506
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13623.70000000007,
+                "observedAt": 13626,
+                "x": 740,
+                "y": 508
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13663.300000000047,
+                "observedAt": 13665.5,
+                "x": 745,
+                "y": 510
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13701,
+                "observedAt": 13705.400000000023,
+                "x": 750,
+                "y": 512
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13743.800000000047,
+                "observedAt": 13745.20000000007,
+                "x": 755,
+                "y": 514
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13781.800000000047,
+                "observedAt": 13785.099999999977,
+                "x": 760,
+                "y": 516
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13820.20000000007,
+                "observedAt": 13825.800000000047,
+                "x": 765,
+                "y": 518
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13861.599999999977,
+                "observedAt": 13867.099999999977,
+                "x": 770,
+                "y": 520
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13902.599999999977,
+                "observedAt": 13908.70000000007,
+                "x": 775,
+                "y": 522
+              },
+              {
+                "type": "pointermove",
+                "timeStamp": 13946.400000000023,
+                "observedAt": 13947.70000000007,
+                "x": 780,
+                "y": 524
+              },
+              {
+                "type": "pointerup",
+                "timeStamp": 14135.5,
+                "observedAt": 14135.900000000023,
+                "x": 780,
+                "y": 524
+              },
+              {
+                "type": "pointerup",
+                "timeStamp": 14137.599999999977,
+                "observedAt": 14137.70000000007,
+                "x": 780,
+                "y": 524
+              }
+            ],
+            "nodeCount": 83315,
+            "allNodesRetained": true,
+            "nodeCountAfter": 83315,
+            "ownerSame": true,
+            "stable": true,
+            "observedCadence": {
+              "pointerMoveIntervalsMs": {
+                "count": 11,
+                "minimum": 37.699999999953434,
+                "median": 41,
+                "p95": 54.5,
+                "maximum": 54.5
+              },
+              "observerRafIntervalsMs": {
+                "count": 32,
+                "minimum": 16.599999999998545,
+                "median": 16.69999999999891,
+                "p95": 50,
+                "maximum": 50
+              },
+              "cameraPublicationDelta": 12
+            },
+            "cadenceQualification": "Observed pointer receipt timestamps and RAF-sampled existing camera publication counters; not compositor frame rate or native/baseline comparison."
+          },
+          "afterDrag": {
+            "at": 14152.599999999977,
+            "url": "http://127.0.0.1:4291/proteus/?v=MMZAj_ELejuzuEFCxzNAAAAAv8FHCu125AI_vRztNGN-ZT9_N2zFa-hZAAA",
+            "activeObjectId": "proteus",
+            "selectedObjectId": "proteus",
+            "ready": true,
+            "appError": null,
+            "ownerSame": true,
+            "camera": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(0.974018158876,-0.015698003144,-0.225925206379,0,-0.045703372242,0.963444335969,-0.263981463848,0,0.221810342288,0.2674482832,0.937694826619,0,0,0,0,1)",
+                "skybox": "matrix3d(0.963517042953,-0.027246743089,-0.266256188419,0,0.223774595032,0.62776292276,0.745545826517,0,0.146832039131,-0.777927503491,0.610957418279,0,0,0,0,1)",
+                "sunView": "matrix3d(0.979991976725,-0.00800320931,0.198876027204,0,-0.00800320931,0.996798716276,0.079550410881,0,-0.198876027204,-0.079550410881,0.976790693,0,0,0,0,1)"
+              },
+              "pitch": 108.6144810431148,
+              "controlPitch": 108.6144810431148,
+              "controlYaw": 13.131040811311227,
+              "zoom": 1.2396521739130437,
+              "distance": 1130.2405719907333,
+              "distanceKilometers": 1022.130604235098,
+              "distanceRadii": 4.9140894434379705,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 518.4000000322733,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1247.08,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -720,
+                "right": 720,
+                "top": -500,
+                "bottom": 500
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 259.20000001613664
+            },
+            "lens": {
+              "desired": {
+                "lensId": "elevation",
+                "shadows": true,
+                "orbit": true
+              },
+              "committed": {
+                "lensId": "elevation",
+                "shadows": true,
+                "orbit": true
+              },
+              "plan": {
+                "required": [
+                  "shadow:elevation",
+                  "poles:elevation",
+                  "lighting"
+                ],
+                "prewarm": [],
+                "materials": {},
+                "pressedLenses": [
+                  "elevation"
+                ]
+              },
+              "pending": false,
+              "loadingMaterial": false,
+              "ready": true,
+              "error": null,
+              "viewRevision": 16
+            },
+            "stats": {
+              "owner": "shared-retained-cubic-sky-orbit",
+              "inputMode": "event-driven-unbounded-matrix-drag-wheel-pinch",
+              "enabledAxes": "unbounded-pitch-and-yaw",
+              "cameraModel": "accumulated-matrix3d",
+              "pitchBounded": false,
+              "yawBounded": false,
+              "minimumPitchDegrees": 0,
+              "maximumPitchDegrees": 89,
+              "defaultControlPitchDegrees": 104.02098566720083,
+              "defaultControlYawDegrees": 1.6473023715265165,
+              "minimumZoom": 5.000492142022548e-16,
+              "maximumZoom": 4,
+              "defaultZoom": 1.1,
+              "responsiveFitModel": "continuous-aspect-smoothstep",
+              "responsiveWidthShare": 0.36000000000000004,
+              "responsiveBaseZoom": 1.2396521739130437,
+              "publications": 16,
+              "directionalSunBillboardCount": 1,
+              "interactionStarts": 1,
+              "interactionEnds": 1,
+              "dragInertia": {
+                "schema": "cssearth-google-earth-pro-trackball-throw@10",
+                "projection": "screen-space-sphere",
+                "historyStorage": "fixed-capacity-float64-ring",
+                "activeMode": "idle",
+                "activeMotionCount": 0,
+                "pendingPointer": false,
+                "active": false,
+                "starts": 0,
+                "frames": 0,
+                "cancels": 0,
+                "pointerCancels": 0,
+                "interruptions": {
+                  "drag": 0,
+                  "pointer": 0,
+                  "wheel": 0,
+                  "fly-to": 0,
+                  "programmatic": 0,
+                  "disabled": 0,
+                  "destroy": 0
+                },
+                "lastInterruption": null,
+                "surfaceFlyTo": {
+                  "schema": "cssearth-google-earth-pro-surface-fly-to@4",
+                  "qualification": "GOOGLE_EARTH_PRO_7.3.7.1327_NATIVE_TRAINING_FIT",
+                  "enabled": true,
+                  "active": false,
+                  "starts": 0,
+                  "frames": 0,
+                  "completions": 0,
+                  "cancels": 0
+                },
+                "destinationFlyTo": {
+                  "starts": 0,
+                  "frames": 0,
+                  "completions": 0,
+                  "cancels": 0,
+                  "active": false
+                },
+                "wheelZoom": {
+                  "active": false,
+                  "events": 0,
+                  "frames": 0,
+                  "inputKind": null,
+                  "model": "perspective-dolly"
+                }
+              },
+              "runtimeGeometryPreparation": false,
+              "projection": {
+                "model": "css-perspective-shared-with-sky",
+                "horizontalFovDegrees": 60,
+                "focalLengthOverViewportWidth": 0.8660254037844386,
+                "cssPerspective": "86.60254037844386cqw",
+                "eyeOnCameraRootAxis": true,
+                "nearPlaneClipping": "javascript-before-publication"
+              },
+              "dolly": {
+                "model": "multiplicative-wheel-distance",
+                "wheelStepPerDelta": 0.006,
+                "minimumDistanceRadii": 1.2,
+                "maximumDistanceOverOrbitExtent": 1,
+                "maximumDistanceOverSystemExtent": 3,
+                "zoomIsSilhouetteFraming": true,
+                "minimumDistance": 412.93176774014375,
+                "maximumDistance": 2743305980769231000,
+                "minimumDistanceKilometers": 373.433946478043,
+                "maximumDistanceKilometers": 2480902800000000000,
+                "maximumDistanceOverOrbitExtentEffective": 1,
+                "logDistanceRange": 36.43241306127679,
+                "wheelNotchesEndToEnd": 60.72068843546132,
+                "wheelDollies": 0
+              },
+              "levelOfDetail": {
+                "model": "silhouette-diameter-crossfade",
+                "billboardFadeStartDiscPixels": 20,
+                "billboardFullDiscPixels": 14,
+                "markerFadeStartDiscPixels": 8,
+                "markerFullDiscPixels": 4.5
+              },
+              "orbitLineFade": {
+                "visibleBelowDiscHeightShare": 0.12,
+                "hiddenAboveDiscHeightShare": 0.3
+              },
+              "drag": {
+                "model": "screen-axis-tumble"
+              },
+              "rotationBounds": "none",
+              "planetarySystem": null,
+              "sceneTransformWrites": 13,
+              "runtimeTransformStringWrites": 64,
+              "orbitPieceCount": 0,
+              "orbitPoolOverflows": 0,
+              "systemOrbitPieceCount": 0,
+              "systemPoolOverflows": 0
+            },
+            "surfacePaint": {
+              "leaves": 1100,
+              "textured": 1100,
+              "tags": [
+                "U"
+              ]
+            },
+            "shell": {
+              "drawerHidden": false,
+              "informationHidden": false,
+              "settingsHidden": true,
+              "sidebarCollapsed": null,
+              "informationTab": "dataset"
+            },
+            "shadows": true,
+            "preparedDensity": 2,
+            "retainedStable": true,
+            "loadedImages": [
+              {
+                "url": "/scenes/proteus/proteus-directional-sun@2x.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-lighting.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-system-point.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
+                "ready": true
+              },
+              {
+                "url": "/scenes/proteus/proteus-elevation-shadow@2x.webp",
+                "ready": true
+              }
+            ]
+          },
+          "loadedResponseCount": 11
+        }
+      ],
+      "loadedResponses": [
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-directional-sun@2x.webp",
+          "observedAt": "2026-09-09T12:58:51.844Z",
+          "status": 200,
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-directional-sun@2x.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-filter-color-thumbnail.webp",
+          "observedAt": "2026-09-09T12:58:51.869Z",
+          "status": 200,
+          "bytes": 2584,
+          "sha256": "2053e1e0086f86217939322a359aadde5b42edaa76ed8df0f72a681480a2f22f",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-filter-color-thumbnail.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-elevation-thumbnail.webp",
+          "observedAt": "2026-09-09T12:58:51.871Z",
+          "status": 200,
+          "bytes": 7376,
+          "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-elevation-thumbnail.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-normal-thumbnail.webp",
+          "observedAt": "2026-09-09T12:58:51.871Z",
+          "status": 200,
+          "bytes": 3420,
+          "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-normal-thumbnail.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-lighting.webp",
+          "observedAt": "2026-09-09T12:58:51.887Z",
+          "status": 200,
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-lighting.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-system-point.webp",
+          "observedAt": "2026-09-09T12:58:51.887Z",
+          "status": 200,
+          "bytes": 96,
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-system-point.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-normal-surface@2x.webp",
+          "observedAt": "2026-09-09T12:58:51.890Z",
+          "status": 200,
+          "bytes": 426212,
+          "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-normal-surface@2x.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-elevation-legend.webp",
+          "observedAt": "2026-09-09T12:58:51.890Z",
+          "status": 200,
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-elevation-legend.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/src/planets/proteus/prepared/object.json",
+          "observedAt": "2026-09-09T12:58:54.532Z",
+          "status": 200,
+          "bytes": 6865777,
+          "sha256": "fa1211ff385035658ca5c9e82f8a87b95d2f7fc5798ab45272112d48e6c0d341",
+          "matchesPreparedObject": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-elevation-surface@2x.webp",
+          "observedAt": "2026-09-09T12:58:56.646Z",
+          "status": 200,
+          "bytes": 376918,
+          "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-elevation-surface@2x.webp",
+          "matchesLocal": true
+        },
+        {
+          "url": "http://127.0.0.1:4291/scenes/proteus/proteus-elevation-shadow@2x.webp",
+          "observedAt": "2026-09-09T12:58:58.232Z",
+          "status": 200,
+          "bytes": 176520,
+          "sha256": "75c7fb6f3aa0d89e894f24119864569523216e8b24e502e46fdb5f8623bf1d15",
+          "matchesPreparedObject": false,
+          "localPath": "public/scenes/proteus/proteus-elevation-shadow@2x.webp",
+          "matchesLocal": true
+        }
+      ],
+      "loadedStylesheetResponses": [
+        {
+          "url": "http://127.0.0.1:4291/site/planet-navigation-marker.css",
+          "status": 200,
+          "bytes": 1591,
+          "sha256": "bbde2d5e762171ab5442f1dfecc239013e6a90cdfa85779ae702f755c446148f"
+        },
+        {
+          "url": "http://127.0.0.1:4291/site/wordmark.css",
+          "status": 200,
+          "bytes": 1632,
+          "sha256": "2f068658feb657744210c5835bcd027278d2c425a68cf691d86bffbba2041f5f"
+        },
+        {
+          "url": "http://127.0.0.1:4291/site/planetary-scale.css",
+          "status": 200,
+          "bytes": 2665,
+          "sha256": "0b0e609383b508b1a6df322b8190452cea3399b279df4dbeb88dcaa2de952a6a"
+        },
+        {
+          "url": "http://127.0.0.1:4291/src/platform/cubic-sky.css",
+          "status": 200,
+          "bytes": 5068,
+          "sha256": "1708a7d8da8401725ca32f2f9a04c792ae5d1a95bd7dda5e670fdafad977a359"
+        },
+        {
+          "url": "http://127.0.0.1:4291/src/renderers/css/styles/volume.css",
+          "status": 200,
+          "bytes": 1603,
+          "sha256": "d09311eb0a49513100d4eb62fbfde5d6cdf682f9acd3fa9411dc20b2718ef824"
+        },
+        {
+          "url": "http://127.0.0.1:4291/src/renderers/css/styles/world-context.css",
+          "status": 200,
+          "bytes": 3199,
+          "sha256": "a0cee76755c61c100b2e17660d77358528030e9d63e2d27456fb188cdcb59153"
+        },
+        {
+          "url": "http://127.0.0.1:4291/src/platform/heliocentric-view.css",
+          "status": 200,
+          "bytes": 5213,
+          "sha256": "151756b3aa68bfb882a0610bb74abb8af831ed42898a4c7c496f88618690d77c"
+        },
+        {
+          "url": "http://127.0.0.1:4291/site/site.css",
+          "status": 200,
+          "bytes": 4200,
+          "sha256": "3bef75ae6c66276b44d20af4b3c9c1ad69947c265c2eb3a3300d8bb49fd65c7d"
+        },
+        {
+          "url": "http://127.0.0.1:4291/site/maps-shell.css",
+          "status": 200,
+          "bytes": 18834,
+          "sha256": "9d2b3f7a92a194849703deee07b3b6947b8e901753f29b7d4c86b3fecaf00e38"
+        },
+        {
+          "url": "http://127.0.0.1:4291/site/explorer-rail.css",
+          "status": 200,
+          "bytes": 7215,
+          "sha256": "d1a6d45964392b22b9a2f2d4e11b2f3f0b6a27268689dc5343370729e308a4d5"
+        },
+        {
+          "url": "http://127.0.0.1:4291/site/planet-shell.css",
+          "status": 200,
+          "bytes": 39575,
+          "sha256": "fd18c7844ae64620a3a74dab5079a5466818a3de93db9c6635946354a8f6b86d"
+        },
+        {
+          "url": "http://127.0.0.1:4291/site/minimap/minimap.css",
+          "status": 200,
+          "bytes": 2748,
+          "sha256": "e49db82d08018efa6b5ef7cb0b70e1a17292a769691067a8ffe2aeb5cad37fb3"
+        },
+        {
+          "url": "http://127.0.0.1:4291/site/shell-layout.css",
+          "status": 200,
+          "bytes": 14342,
+          "sha256": "c1de5ae24dbb79cbc041ac8581c69d3ac89086e8d2c7d15665bbe4911466a1fe"
+        },
+        {
+          "url": "http://127.0.0.1:4291/src/renderers/css/styles/proteus-surfaces.css",
+          "status": 200,
+          "bytes": 3167,
+          "sha256": "6ccc99fbb3e5d90bc71d6e020d37ee3fa9f6875e4f422c9701e757b7a45d0add"
+        }
+      ],
+      "cardNavigation": [
+        {
+          "name": "factsheet",
+          "text": "Mean distance from Neptune\nAbout 117,674 km\nMean radius\n208 km\nOrbit around Neptune\n26.94 hours\nRotation period\nSynchronous with its orbit\nSystem solar semimajor axis\n30.070 AU\nDiscovery\nVoyager 2 imaging team · 1989",
+          "links": [],
+          "screenshots": [
+            {
+              "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/proteus-dpr2/card-factsheet.png",
+              "bytes": 1572743,
+              "sha256": "83952f0d03338ff5c175739f90356d9ac6279cf59c497cebaf2280c437fef65d"
+            }
+          ]
+        },
+        {
+          "name": "sources",
+          "text": "Elevation\nPhilip Stooke; NASA Planetary Data System\nC1137317_GEOMED.IMG\nC1137317_GEOMED.LBL\nC1138920_GEOMED.IMG\nC1138920_GEOMED.LBL\nC1137350_GEOMED.IMG\nC1137350_GEOMED.LBL\nC1137339_GEOMED.IMG\nC1137339_GEOMED.LBL\nC1137328_GEOMED.IMG\nC1137328_GEOMED.LBL\nNASA/JPL; PDS Ring-Moon Systems Node",
+          "links": [
+            {
+              "label": "Elevation",
+              "href": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n8proteus.tab"
+            },
+            {
+              "label": "C1137317_GEOMED.IMG",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG"
+            },
+            {
+              "label": "C1137317_GEOMED.LBL",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL"
+            },
+            {
+              "label": "C1138920_GEOMED.IMG",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG"
+            },
+            {
+              "label": "C1138920_GEOMED.LBL",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL"
+            },
+            {
+              "label": "C1137350_GEOMED.IMG",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG"
+            },
+            {
+              "label": "C1137350_GEOMED.LBL",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL"
+            },
+            {
+              "label": "C1137339_GEOMED.IMG",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG"
+            },
+            {
+              "label": "C1137339_GEOMED.LBL",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL"
+            },
+            {
+              "label": "C1137328_GEOMED.IMG",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG"
+            },
+            {
+              "label": "C1137328_GEOMED.LBL",
+              "href": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL"
+            }
+          ],
+          "screenshots": [
+            {
+              "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/proteus-dpr2/card-sources.png",
+              "bytes": 1585334,
+              "sha256": "19c64979a9e3f819bcbf860c3e31981e49e3a4f02f404ce2671e9a6df4667407"
+            }
+          ]
+        },
+        {
+          "name": "dataset",
+          "text": "Monochrome\nVoyager 2\nFilter color\nG / B / V\nElevation\nRadial shape\n\nVoyager 2 images mapped onto the shape with adjusted brightness. Gray grid: missing or unreliable data.\n\nSource: NASA/JPL; PDS Ring-Moon Systems Node\n\nNASA\nVoyager 2\nLaunched\n1977\nStatus\nActive",
+          "links": [
+            {
+              "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+              "href": "https://pds-rings.seti.org/voyager/iss/"
+            },
+            {
+              "label": "",
+              "href": "https://commons.wikimedia.org/wiki/File:Voyager_-_mission_logo.png"
+            },
+            {
+              "label": "Voyager 2",
+              "href": "https://science.nasa.gov/mission/voyager/voyager-2/"
+            },
+            {
+              "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+              "href": "https://pds-rings.seti.org/voyager/iss/"
+            },
+            {
+              "label": "",
+              "href": "https://commons.wikimedia.org/wiki/File:Voyager_-_mission_logo.png"
+            },
+            {
+              "label": "Voyager 2",
+              "href": "https://science.nasa.gov/mission/voyager/voyager-2/"
+            }
+          ],
+          "screenshots": []
+        }
+      ],
+      "errors": [],
+      "mainFrameNavigations": [
+        "http://127.0.0.1:4291/proteus/",
+        "http://127.0.0.1:4291/proteus/",
+        "http://127.0.0.1:4291/proteus/?v=MMZAj_ELejuzuEFCxzNAAAAAv7h31uDreTw_jU4Xu1NLb79Wg0y00e2EAAA",
+        "http://127.0.0.1:4291/proteus/?v=MMZAj_ELejuzuEFCxzNAAAAAv8FHCu125AI_vRztNGN-ZT9_N2zFa-hZAAA"
+      ],
+      "responseCaptureLimits": {
+        "maxTotalBufferSize": 268435456,
+        "maxResourceBufferSize": 16777216
+      },
+      "httpCacheDisabled": true,
+      "expectedFullRouteLoads": 1,
+      "actualStylesheets": [
+        {
+          "index": 0,
+          "href": null,
+          "owner": null,
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/4c6355ed0add80de3bafa060bc46b24fe435efe8ac32bc49f91a2ab7090fb746.css",
+            "bytes": 60571,
+            "sha256": "4c6355ed0add80de3bafa060bc46b24fe435efe8ac32bc49f91a2ab7090fb746"
+          },
+          "sourcePin": null,
+          "qualification": "Browser CSSOM serialization retained; inline/bundled CSS source mapping is not inferred."
+        },
+        {
+          "index": 1,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/planet-navigation-marker.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/9531a0ffcc971f0527adf01258681b67d07ce7daab3807b17b013c07d52f5d97.css",
+            "bytes": 980,
+            "sha256": "9531a0ffcc971f0527adf01258681b67d07ce7daab3807b17b013c07d52f5d97"
+          },
+          "sourcePin": {
+            "path": "site/planet-navigation-marker.css",
+            "bytes": 1037,
+            "sha256": "ca5d7cb5db6f4f26c658470c969b0916fc5d63bcbdb2ccdf530715464eda0316"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 2,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/wordmark.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/4cc9dc9fed25473a26502713919191487a139af8e3c27400664359e0f9d332b9.css",
+            "bytes": 880,
+            "sha256": "4cc9dc9fed25473a26502713919191487a139af8e3c27400664359e0f9d332b9"
+          },
+          "sourcePin": {
+            "path": "site/wordmark.css",
+            "bytes": 1100,
+            "sha256": "dc4f0a887336c27c2f69e816fd2a3bae10b6a3d63042c1cdd410688554fc0261"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 3,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/planetary-scale.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/bc1a75e8299f8e78e22ed8103a96200536b59949a8ec53e1397481c338e64ea7.css",
+            "bytes": 1950,
+            "sha256": "bc1a75e8299f8e78e22ed8103a96200536b59949a8ec53e1397481c338e64ea7"
+          },
+          "sourcePin": {
+            "path": "site/planetary-scale.css",
+            "bytes": 2061,
+            "sha256": "33b7aae365bdec7ae56255a2d133fe21b5caf6238dfa609e91d533f7a8064c17"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 4,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/src/platform/cubic-sky.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/6468b8673fa7100397e71fa3619be833c0340a42e7081916f97070671c1c6368.css",
+            "bytes": 3506,
+            "sha256": "6468b8673fa7100397e71fa3619be833c0340a42e7081916f97070671c1c6368"
+          },
+          "sourcePin": {
+            "path": "src/platform/cubic-sky.css",
+            "bytes": 4419,
+            "sha256": "8f43234c6e52c4b444a8c15b4e796c265c04b8311ff5f224ff0897753390dcad"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 5,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/src/platform/heliocentric-view.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/a5cacc569e6b31d269df7a4f8dad4498e79981cdb938881817b60585ed5dbc1e.css",
+            "bytes": 2617,
+            "sha256": "a5cacc569e6b31d269df7a4f8dad4498e79981cdb938881817b60585ed5dbc1e"
+          },
+          "sourcePin": {
+            "path": "src/platform/heliocentric-view.css",
+            "bytes": 4532,
+            "sha256": "86e9f8729de8fd297f653c10c738411b9f57080365d5024f79e5bdd9f19f9241"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 6,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/styles/volume.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/0b1ef3c76da418263704c231276459ae8d1bbf621c95a632252142d089630e0f.css",
+            "bytes": 706,
+            "sha256": "0b1ef3c76da418263704c231276459ae8d1bbf621c95a632252142d089630e0f"
+          },
+          "sourcePin": {
+            "path": "src/renderers/css/styles/volume.css",
+            "bytes": 1047,
+            "sha256": "cb09de8ee75df62aeb3775d6d435a955586d04d34ce19e009c2a43c4758d58cd"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 7,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/styles/world-context.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/28aacd3f183945d3c08c9a1cc1680654dd7733b20f44f601a942e98f39e3cc16.css",
+            "bytes": 2075,
+            "sha256": "28aacd3f183945d3c08c9a1cc1680654dd7733b20f44f601a942e98f39e3cc16"
+          },
+          "sourcePin": {
+            "path": "src/renderers/css/styles/world-context.css",
+            "bytes": 2571,
+            "sha256": "06eef3ec33ee693087c6df22fb02532dc0bf9dbbc345a77c12dbb53a3f795b54"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 8,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/site.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/85f0eb8262d94d9138fd2c166474fb4e9a964578b670980c4f1c879849f2ad88.css",
+            "bytes": 3180,
+            "sha256": "85f0eb8262d94d9138fd2c166474fb4e9a964578b670980c4f1c879849f2ad88"
+          },
+          "sourcePin": {
+            "path": "site/site.css",
+            "bytes": 3554,
+            "sha256": "970c9c71b35c12d826800f5d8a5c370506d4398d58b7698854636e21d0047f2c"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 9,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/maps-shell.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/578b97a520d4e1d1e5cfe536be1852e6da8069214f7682e36dbaa77b3b3eef64.css",
+            "bytes": 17003,
+            "sha256": "578b97a520d4e1d1e5cfe536be1852e6da8069214f7682e36dbaa77b3b3eef64"
+          },
+          "sourcePin": {
+            "path": "site/maps-shell.css",
+            "bytes": 17844,
+            "sha256": "728cb7fafa196bc77fa8de27a5d6e686b6966d92afe864b957e103bb35a206f8"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 10,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/explorer-rail.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css",
+            "bytes": 6098,
+            "sha256": "df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15"
+          },
+          "sourcePin": {
+            "path": "site/explorer-rail.css",
+            "bytes": 6425,
+            "sha256": "a6d1f86ac33ca47dde4448874d4849976d8e457f6b74e7277977f963b8935898"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 11,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/shell-layout.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/27bb845f39dfbbe80eebb7e1e5afc126159bea832b6628ae63e1f6bd5e539cfb.css",
+            "bytes": 12158,
+            "sha256": "27bb845f39dfbbe80eebb7e1e5afc126159bea832b6628ae63e1f6bd5e539cfb"
+          },
+          "sourcePin": {
+            "path": "site/shell-layout.css",
+            "bytes": 13330,
+            "sha256": "de21d0e2d8927e61ab3320f9e735d82d349881d6e1b94541e60f27e8e9260675"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 12,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/minimap/minimap.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/58c9945c0b4bd6b3dc49b23e38065ed558aba7dc8c1d16dae817695bb50dd6bb.css",
+            "bytes": 2069,
+            "sha256": "58c9945c0b4bd6b3dc49b23e38065ed558aba7dc8c1d16dae817695bb50dd6bb"
+          },
+          "sourcePin": {
+            "path": "site/minimap/minimap.css",
+            "bytes": 2141,
+            "sha256": "48ed41a3e8e3625547c1d09ecd2c31939fc7fcfc61a9fe5fd2ef64aff21b187d"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 13,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css/styles/proteus-surfaces.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/6326bcbf3f209762c411ac2ca5f4f475a4017bb2a0ec4d69cb379d400bf5dbc2.css",
+            "bytes": 2473,
+            "sha256": "6326bcbf3f209762c411ac2ca5f4f475a4017bb2a0ec4d69cb379d400bf5dbc2"
+          },
+          "sourcePin": {
+            "path": "src/renderers/css/styles/proteus-surfaces.css",
+            "bytes": 2566,
+            "sha256": "cb52b61887c59c9dc8192b8c6262f1c1ab4cb3efda7499a993b528bea4aec681"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        },
+        {
+          "index": 14,
+          "href": null,
+          "owner": "/Users/ekrof/fed/cssEarth-pluto-small-moons/site/planet-shell.css",
+          "artifact": {
+            "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/1f5702883eb1bebf12da4286425de9d41a8239f411b44876a37ebdb3017eb8c2.css",
+            "bytes": 35382,
+            "sha256": "1f5702883eb1bebf12da4286425de9d41a8239f411b44876a37ebdb3017eb8c2"
+          },
+          "sourcePin": {
+            "path": "site/planet-shell.css",
+            "bytes": 37124,
+            "sha256": "0e1961692e3f133643cf239bf7206c33664801e61fadef24026340896f531fd8"
+          },
+          "qualification": "Browser CSSOM serialization retained beside its pinned source owner; transformations are not byte-equated."
+        }
+      ],
+      "contextClose": "COMPLETE"
+    }
+  ],
+  "frozenFiles": [
+    {
+      "path": "site/components/CodePenIcon.astro",
+      "bytes": 216,
+      "sha256": "b97702b16ff8dcfd89bfb2d7afce2bd2ec456a9f806a2854c9ff87b294fd3aea"
+    },
+    {
+      "path": "site/components/CssEarthWordmark.astro",
+      "bytes": 6153,
+      "sha256": "267effcb4e10e69927e41aac54c71a80bf402752ea004130a89321adcd988628"
+    },
+    {
+      "path": "site/components/DatasetLegend.astro",
+      "bytes": 1953,
+      "sha256": "7b4597186b52b1e73ddc10e3292a0d52e38a1ec0b7e33dd49622c9ce183888a5"
+    },
+    {
+      "path": "site/components/DatasetSpacecraft.astro",
+      "bytes": 1290,
+      "sha256": "56a7e5b0d2b429c5ff589847f5b55a131e81e1ee7c7d19da8d659601365a27c4"
+    },
+    {
+      "path": "site/components/ExplorerRail.astro",
+      "bytes": 483,
+      "sha256": "73a3de60cc5b2cbe205d7b98f10e916a9908aa4fd3e77a51341a47df468b1aac"
+    },
+    {
+      "path": "site/components/GitHubIcon.astro",
+      "bytes": 211,
+      "sha256": "0d4b01fcf490969a738e877efbabfdb78606b223326f57702e45b4f6e4ec4b56"
+    },
+    {
+      "path": "site/components/MaterialSymbol.astro",
+      "bytes": 444,
+      "sha256": "21cd77635078cbde556754e1ea6ddf11733eb75404c073f4bb80bf73fbd54814"
+    },
+    {
+      "path": "site/components/ObjectSwatchStyles.astro",
+      "bytes": 2168,
+      "sha256": "c6eb95debadc6a852145c64fda888b366e1dbe2501a898b99e8b309fa5f0b69a"
+    },
+    {
+      "path": "site/components/PlanetAccordion.astro",
+      "bytes": 417,
+      "sha256": "34965a4e138d1618d768c272c2ea1e7f62b7d54b1dcec319748f112b6b89aa73"
+    },
+    {
+      "path": "site/components/PlanetBreadcrumbs.astro",
+      "bytes": 1229,
+      "sha256": "0abc8b22a53b765ae9a270511f31b4de02ea4d190ac93d9535a0d3328d2fd647"
+    },
+    {
+      "path": "site/components/PlanetCard.astro",
+      "bytes": 145,
+      "sha256": "6c385297d3a03a19c64cc41d569371e7d368c6727edf09c0de74ae3d339afb62"
+    },
+    {
+      "path": "site/components/PlanetCardHeader.astro",
+      "bytes": 920,
+      "sha256": "ecb66a6ab67a14060edac02ac2bef99fc6cffe73aec169fc2b6dc9f4a938de16"
+    },
+    {
+      "path": "site/components/PlanetFactsheet.astro",
+      "bytes": 1529,
+      "sha256": "b075b7089d246ed84f889e3e3047d0c23ca266934b8cd4014dab8d4d7712cdd6"
+    },
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "bytes": 10688,
+      "sha256": "a440d10b874f0b64006a9ad72a4903b9e113dbbe4c9572b78bae39f08eb2d472"
+    },
+    {
+      "path": "site/components/PlanetNavigationMarker.astro",
+      "bytes": 556,
+      "sha256": "fca2f8a65a27f1f882211a7cdeb184a72e5dea50f61872d183717532e4919069"
+    },
+    {
+      "path": "site/components/PlanetObjectResult.astro",
+      "bytes": 1105,
+      "sha256": "3672c3b147ae3799031c2423aa5f6932933b50facc8e4daf984623815cbadb19"
+    },
+    {
+      "path": "site/components/PlanetObjectResults.astro",
+      "bytes": 1599,
+      "sha256": "0911bb652e7663c13ac6cd009ca853260e0c47788fbd67b62a6404b66200c16a"
+    },
+    {
+      "path": "site/components/PlanetShell.astro",
+      "bytes": 13392,
+      "sha256": "51f95c1e10645c370a9f9b1f56799c587842141cd5ef2418be540fb58888889f"
+    },
+    {
+      "path": "site/components/PlanetaryScale.astro",
+      "bytes": 1355,
+      "sha256": "9d9f0cf7621abfa6fa26268f2c10ed7f76cf8dc2eec61a743532f2cc55a38652"
+    },
+    {
+      "path": "site/components/PreparedObjectHead.astro",
+      "bytes": 626,
+      "sha256": "d1246e1af08fc97e0926200f70423e5c22bde332acf23f3cf2da05ff6572f0ec"
+    },
+    {
+      "path": "site/components/PreparedObjectPanel.astro",
+      "bytes": 2587,
+      "sha256": "c0426c2d1364917032a862aec2e4a9cec5b11060b1b2316f4ecd870b913d65fb"
+    },
+    {
+      "path": "site/components/PreparedSidebarCards.astro",
+      "bytes": 920,
+      "sha256": "4a65b331d0e0a517ed906228f3da366d66a428efc91f894fc4192da74fd35906"
+    },
+    {
+      "path": "site/components/SearchCategoryIcon.astro",
+      "bytes": 252,
+      "sha256": "62180523832f6ec75a992be1493a5d5d9be4de1cb393cbd9d85df17327c80783"
+    },
+    {
+      "path": "site/components/SearchIcon.astro",
+      "bytes": 157,
+      "sha256": "a803086274f76bf4376c8f45e51010be97a59991a3cfd83d7fb15fab792e5f5a"
+    },
+    {
+      "path": "site/dataset-spacecraft.mjs",
+      "bytes": 1303,
+      "sha256": "24959c97b38c8a59d3633a03240ceef6d1cd9bf597c3f74e000a30e7160e666a"
+    },
+    {
+      "path": "site/diagnostics-policy.mjs",
+      "bytes": 264,
+      "sha256": "55ffdd0ae4d9c16c0362e16de5be3def0c5da1e4a40ef8bb253bad4086c63886"
+    },
+    {
+      "path": "site/explorer-rail.css",
+      "bytes": 6425,
+      "sha256": "a6d1f86ac33ca47dde4448874d4849976d8e457f6b74e7277977f963b8935898"
+    },
+    {
+      "path": "site/layouts/PlanetLayout.astro",
+      "bytes": 4504,
+      "sha256": "2843df15de77a44c668a97a1e7ac6c447899a67ac8a7f351848d4389c401a76a"
+    },
+    {
+      "path": "site/maps-shell.css",
+      "bytes": 17844,
+      "sha256": "728cb7fafa196bc77fa8de27a5d6e686b6966d92afe864b957e103bb35a206f8"
+    },
+    {
+      "path": "site/minimap/minimap.css",
+      "bytes": 2141,
+      "sha256": "48ed41a3e8e3625547c1d09ecd2c31939fc7fcfc61a9fe5fd2ef64aff21b187d"
+    },
+    {
+      "path": "site/object-sources.mjs",
+      "bytes": 2121,
+      "sha256": "b565cc0edd7a8672c78d440d65c6d9688468626679274a3241db7eb40139c0b7"
+    },
+    {
+      "path": "site/planet-navigation-marker.css",
+      "bytes": 1037,
+      "sha256": "ca5d7cb5db6f4f26c658470c969b0916fc5d63bcbdb2ccdf530715464eda0316"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "bytes": 36190,
+      "sha256": "b8c32087ad78118550687dd2e4e9fafe0f86a93a2feee4ee2ddb58253c0e98ca"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "bytes": 37124,
+      "sha256": "0e1961692e3f133643cf239bf7206c33664801e61fadef24026340896f531fd8"
+    },
+    {
+      "path": "site/planetary-scale.css",
+      "bytes": 2061,
+      "sha256": "33b7aae365bdec7ae56255a2d133fe21b5caf6238dfa609e91d533f7a8064c17"
+    },
+    {
+      "path": "site/prepared-spacecraft.json",
+      "bytes": 32396,
+      "sha256": "9d37eeca8a29b22bfd318b00aad4b01b14abd7dd828e5357ffa32749e187d9d2"
+    },
+    {
+      "path": "site/runtime-policy.mjs",
+      "bytes": 4289,
+      "sha256": "9ec5e11780aebdb77c7a907ea4de19286086e831096bd85e0f6f663364c5e238"
+    },
+    {
+      "path": "site/scene-router.mjs",
+      "bytes": 28582,
+      "sha256": "292c7eaee530d5cb037ecee4c24a6d1060b9dff9da88153f3d0fbd68d02b11b1"
+    },
+    {
+      "path": "site/shell-layout.css",
+      "bytes": 13330,
+      "sha256": "de21d0e2d8927e61ab3320f9e735d82d349881d6e1b94541e60f27e8e9260675"
+    },
+    {
+      "path": "site/site.css",
+      "bytes": 3554,
+      "sha256": "970c9c71b35c12d826800f5d8a5c370506d4398d58b7698854636e21d0047f2c"
+    },
+    {
+      "path": "site/wordmark.css",
+      "bytes": 1100,
+      "sha256": "dc4f0a887336c27c2f69e816fd2a3bae10b6a3d63042c1cdd410688554fc0261"
+    },
+    {
+      "path": "src/platform/cubic-sky.css",
+      "bytes": 4419,
+      "sha256": "8f43234c6e52c4b444a8c15b4e796c265c04b8311ff5f224ff0897753390dcad"
+    },
+    {
+      "path": "src/platform/heliocentric-view.css",
+      "bytes": 4532,
+      "sha256": "86e9f8729de8fd297f653c10c738411b9f57080365d5024f79e5bdd9f19f9241"
+    },
+    {
+      "path": "src/renderers/css/styles/volume.css",
+      "bytes": 1047,
+      "sha256": "cb09de8ee75df62aeb3775d6d435a955586d04d34ce19e009c2a43c4758d58cd"
+    },
+    {
+      "path": "src/renderers/css/styles/world-context.css",
+      "bytes": 2571,
+      "sha256": "06eef3ec33ee693087c6df22fb02532dc0bf9dbbc345a77c12dbb53a3f795b54"
+    },
+    {
+      "path": "src/planets/proteus/object.json",
+      "bytes": 3142,
+      "sha256": "96d9a3ec2da6bb518f7859a766a615a679df8110ccf56da66aaea70d638f8740"
+    },
+    {
+      "path": "src/planets/proteus/source/manifest.json",
+      "bytes": 23421,
+      "sha256": "f5decb51973c2820303288e56672eeada39430b929ba1b878205f95770b0d277"
+    },
+    {
+      "path": "src/planets/proteus/prepared/object.json",
+      "bytes": 6865777,
+      "sha256": "fa1211ff385035658ca5c9e82f8a87b95d2f7fc5798ab45272112d48e6c0d341"
+    },
+    {
+      "path": "src/planets/proteus/prepared/runtime.json",
+      "bytes": 6865661,
+      "sha256": "b8057ed7b9ee93534fb1c93482ce00f773292a532063e960a1ddca172ed98242"
+    },
+    {
+      "path": "src/planets/proteus/prepared/controls.json",
+      "bytes": 3853,
+      "sha256": "6022c9a259debde84d9c036c44c73cc1437c3df7817783a2fbb2987b1fcccc72"
+    },
+    {
+      "path": "src/planets/proteus/prepared/scene.json",
+      "bytes": 6623246,
+      "sha256": "ea608268a507bc6ec906de0fe1ded761a9b2cd5652835b586df0775039b6c004"
+    },
+    {
+      "path": "src/planets/proteus/prepared/lenses.json",
+      "bytes": 4463,
+      "sha256": "e8740101ebeb0fd78c24137b29dcb769ad57f4aaf2a25cc8bb8de87d41723300"
+    },
+    {
+      "path": "src/planets/proteus/prepared/content.json",
+      "bytes": 5601,
+      "sha256": "123fd7af476268715795d93efe70d2c1568addd553bf2a51c9778e170a6b1e97"
+    },
+    {
+      "path": "src/planets/proteus/prepared/runtime-assets.json",
+      "bytes": 6629,
+      "sha256": "3295e67dda87d9e028470238ebc59878d5ace3592ee6ed2c4a0332f21c12f38d"
+    },
+    {
+      "path": "src/planets/proteus/prepared/provenance.json",
+      "bytes": 45817,
+      "sha256": "e798325046e58a778b78b5a0c03cc056954b9e5fef327d9cb22f3c431409ccb9"
+    },
+    {
+      "path": "src/renderers/css/styles/proteus-surfaces.css",
+      "bytes": 2566,
+      "sha256": "cb52b61887c59c9dc8192b8c6262f1c1ab4cb3efda7499a993b528bea4aec681"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-elevation-shadow@2x.webp",
+      "bytes": 176520,
+      "sha256": "75c7fb6f3aa0d89e894f24119864569523216e8b24e502e46fdb5f8623bf1d15"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-elevation-surface@2x.webp",
+      "bytes": 376918,
+      "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-elevation-thumbnail.webp",
+      "bytes": 7376,
+      "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-filter-color-shadow@2x.webp",
+      "bytes": 103604,
+      "sha256": "be0335700a5e3b9701e6ac1fc14f185bd06a1183b249454adf47e4630455c0b5"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-filter-color-surface@2x.webp",
+      "bytes": 185760,
+      "sha256": "8f7546054163722d68ed54f322bbaf48cf447c858c238da9d8ed460c0348cb00"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-filter-color-thumbnail.webp",
+      "bytes": 2584,
+      "sha256": "2053e1e0086f86217939322a359aadde5b42edaa76ed8df0f72a681480a2f22f"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-normal-shadow@2x.webp",
+      "bytes": 190622,
+      "sha256": "3c1c519d10ec7cc2386dd809534f291b8ddfcfc9acd11f1d57ec80f89b6179d7"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-normal-surface@2x.webp",
+      "bytes": 426212,
+      "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-normal-thumbnail.webp",
+      "bytes": 3420,
+      "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-back-standard.webp",
+      "bytes": 53856,
+      "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-back-standard@2x.webp",
+      "bytes": 171294,
+      "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-back.webp",
+      "bytes": 210188,
+      "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-back@2x.webp",
+      "bytes": 598648,
+      "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-bottom-standard.webp",
+      "bytes": 63946,
+      "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-bottom-standard@2x.webp",
+      "bytes": 200212,
+      "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-bottom.webp",
+      "bytes": 232844,
+      "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-bottom@2x.webp",
+      "bytes": 690706,
+      "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-front-standard.webp",
+      "bytes": 67226,
+      "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-front-standard@2x.webp",
+      "bytes": 208208,
+      "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-front.webp",
+      "bytes": 251588,
+      "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-front@2x.webp",
+      "bytes": 687190,
+      "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-left-standard.webp",
+      "bytes": 31200,
+      "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-left-standard@2x.webp",
+      "bytes": 112118,
+      "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-left.webp",
+      "bytes": 142736,
+      "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-left@2x.webp",
+      "bytes": 413462,
+      "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-right-standard.webp",
+      "bytes": 23676,
+      "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-right-standard@2x.webp",
+      "bytes": 83896,
+      "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-right.webp",
+      "bytes": 116010,
+      "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-right@2x.webp",
+      "bytes": 312496,
+      "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-top-standard.webp",
+      "bytes": 64674,
+      "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-top-standard@2x.webp",
+      "bytes": 202204,
+      "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-top.webp",
+      "bytes": 235140,
+      "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-starfield-top@2x.webp",
+      "bytes": 682934,
+      "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+    },
+    {
+      "path": "public/scenes/proteus/proteus-system-point.webp",
+      "bytes": 96,
+      "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6"
+    },
+    {
+      "path": "src/planets/proteus/source/preparation/terrestrial.json",
+      "bytes": 9373,
+      "sha256": "f9c7b352f33c4d4ee6613952d34732ea08c4393dc5494dedd2985648b65054ef"
+    },
+    {
+      "path": "src/planets/proteus/source/content/object.json",
+      "bytes": 6943,
+      "sha256": "e13b5cbfe39ee3c63615c6a1eb8ca5c9af6980fb3c2f8d0081249558b6aa0344"
+    },
+    {
+      "path": "src/planets/proteus/source/presentation/title-mark.json",
+      "bytes": 3829,
+      "sha256": "2250fdbf3fb69cc02158364b864a01a80e113d5842acd2a1697948010cb3df6c"
+    },
+    {
+      "path": "src/planets/proteus/source/preparation/navigation.json",
+      "bytes": 1255,
+      "sha256": "795a412edd657b6fb039fc48ac62b46b4d7a4149cc563fc2c85d95e973ae06a5"
+    },
+    {
+      "path": "src/planets/proteus/source/preparation/acquisition.json",
+      "bytes": 4156,
+      "sha256": "39f3c5ae68d597577d860871e61f989f24ad09750932991b6840f1f6dd582628"
+    }
+  ],
+  "sharedFiles": [
+    {
+      "path": "site/components/CodePenIcon.astro",
+      "bytes": 216,
+      "sha256": "b97702b16ff8dcfd89bfb2d7afce2bd2ec456a9f806a2854c9ff87b294fd3aea"
+    },
+    {
+      "path": "site/components/CssEarthWordmark.astro",
+      "bytes": 6153,
+      "sha256": "267effcb4e10e69927e41aac54c71a80bf402752ea004130a89321adcd988628"
+    },
+    {
+      "path": "site/components/DatasetLegend.astro",
+      "bytes": 1953,
+      "sha256": "7b4597186b52b1e73ddc10e3292a0d52e38a1ec0b7e33dd49622c9ce183888a5"
+    },
+    {
+      "path": "site/components/DatasetSpacecraft.astro",
+      "bytes": 1290,
+      "sha256": "56a7e5b0d2b429c5ff589847f5b55a131e81e1ee7c7d19da8d659601365a27c4"
+    },
+    {
+      "path": "site/components/ExplorerRail.astro",
+      "bytes": 483,
+      "sha256": "73a3de60cc5b2cbe205d7b98f10e916a9908aa4fd3e77a51341a47df468b1aac"
+    },
+    {
+      "path": "site/components/GitHubIcon.astro",
+      "bytes": 211,
+      "sha256": "0d4b01fcf490969a738e877efbabfdb78606b223326f57702e45b4f6e4ec4b56"
+    },
+    {
+      "path": "site/components/MaterialSymbol.astro",
+      "bytes": 444,
+      "sha256": "21cd77635078cbde556754e1ea6ddf11733eb75404c073f4bb80bf73fbd54814"
+    },
+    {
+      "path": "site/components/ObjectSwatchStyles.astro",
+      "bytes": 2168,
+      "sha256": "c6eb95debadc6a852145c64fda888b366e1dbe2501a898b99e8b309fa5f0b69a"
+    },
+    {
+      "path": "site/components/PlanetAccordion.astro",
+      "bytes": 417,
+      "sha256": "34965a4e138d1618d768c272c2ea1e7f62b7d54b1dcec319748f112b6b89aa73"
+    },
+    {
+      "path": "site/components/PlanetBreadcrumbs.astro",
+      "bytes": 1229,
+      "sha256": "0abc8b22a53b765ae9a270511f31b4de02ea4d190ac93d9535a0d3328d2fd647"
+    },
+    {
+      "path": "site/components/PlanetCard.astro",
+      "bytes": 145,
+      "sha256": "6c385297d3a03a19c64cc41d569371e7d368c6727edf09c0de74ae3d339afb62"
+    },
+    {
+      "path": "site/components/PlanetCardHeader.astro",
+      "bytes": 920,
+      "sha256": "ecb66a6ab67a14060edac02ac2bef99fc6cffe73aec169fc2b6dc9f4a938de16"
+    },
+    {
+      "path": "site/components/PlanetFactsheet.astro",
+      "bytes": 1529,
+      "sha256": "b075b7089d246ed84f889e3e3047d0c23ca266934b8cd4014dab8d4d7712cdd6"
+    },
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "bytes": 10688,
+      "sha256": "a440d10b874f0b64006a9ad72a4903b9e113dbbe4c9572b78bae39f08eb2d472"
+    },
+    {
+      "path": "site/components/PlanetNavigationMarker.astro",
+      "bytes": 556,
+      "sha256": "fca2f8a65a27f1f882211a7cdeb184a72e5dea50f61872d183717532e4919069"
+    },
+    {
+      "path": "site/components/PlanetObjectResult.astro",
+      "bytes": 1105,
+      "sha256": "3672c3b147ae3799031c2423aa5f6932933b50facc8e4daf984623815cbadb19"
+    },
+    {
+      "path": "site/components/PlanetObjectResults.astro",
+      "bytes": 1599,
+      "sha256": "0911bb652e7663c13ac6cd009ca853260e0c47788fbd67b62a6404b66200c16a"
+    },
+    {
+      "path": "site/components/PlanetShell.astro",
+      "bytes": 13392,
+      "sha256": "51f95c1e10645c370a9f9b1f56799c587842141cd5ef2418be540fb58888889f"
+    },
+    {
+      "path": "site/components/PlanetaryScale.astro",
+      "bytes": 1355,
+      "sha256": "9d9f0cf7621abfa6fa26268f2c10ed7f76cf8dc2eec61a743532f2cc55a38652"
+    },
+    {
+      "path": "site/components/PreparedObjectHead.astro",
+      "bytes": 626,
+      "sha256": "d1246e1af08fc97e0926200f70423e5c22bde332acf23f3cf2da05ff6572f0ec"
+    },
+    {
+      "path": "site/components/PreparedObjectPanel.astro",
+      "bytes": 2587,
+      "sha256": "c0426c2d1364917032a862aec2e4a9cec5b11060b1b2316f4ecd870b913d65fb"
+    },
+    {
+      "path": "site/components/PreparedSidebarCards.astro",
+      "bytes": 920,
+      "sha256": "4a65b331d0e0a517ed906228f3da366d66a428efc91f894fc4192da74fd35906"
+    },
+    {
+      "path": "site/components/SearchCategoryIcon.astro",
+      "bytes": 252,
+      "sha256": "62180523832f6ec75a992be1493a5d5d9be4de1cb393cbd9d85df17327c80783"
+    },
+    {
+      "path": "site/components/SearchIcon.astro",
+      "bytes": 157,
+      "sha256": "a803086274f76bf4376c8f45e51010be97a59991a3cfd83d7fb15fab792e5f5a"
+    },
+    {
+      "path": "site/dataset-spacecraft.mjs",
+      "bytes": 1303,
+      "sha256": "24959c97b38c8a59d3633a03240ceef6d1cd9bf597c3f74e000a30e7160e666a"
+    },
+    {
+      "path": "site/diagnostics-policy.mjs",
+      "bytes": 264,
+      "sha256": "55ffdd0ae4d9c16c0362e16de5be3def0c5da1e4a40ef8bb253bad4086c63886"
+    },
+    {
+      "path": "site/explorer-rail.css",
+      "bytes": 6425,
+      "sha256": "a6d1f86ac33ca47dde4448874d4849976d8e457f6b74e7277977f963b8935898"
+    },
+    {
+      "path": "site/layouts/PlanetLayout.astro",
+      "bytes": 4504,
+      "sha256": "2843df15de77a44c668a97a1e7ac6c447899a67ac8a7f351848d4389c401a76a"
+    },
+    {
+      "path": "site/maps-shell.css",
+      "bytes": 17844,
+      "sha256": "728cb7fafa196bc77fa8de27a5d6e686b6966d92afe864b957e103bb35a206f8"
+    },
+    {
+      "path": "site/minimap/minimap.css",
+      "bytes": 2141,
+      "sha256": "48ed41a3e8e3625547c1d09ecd2c31939fc7fcfc61a9fe5fd2ef64aff21b187d"
+    },
+    {
+      "path": "site/object-sources.mjs",
+      "bytes": 2121,
+      "sha256": "b565cc0edd7a8672c78d440d65c6d9688468626679274a3241db7eb40139c0b7"
+    },
+    {
+      "path": "site/planet-navigation-marker.css",
+      "bytes": 1037,
+      "sha256": "ca5d7cb5db6f4f26c658470c969b0916fc5d63bcbdb2ccdf530715464eda0316"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "bytes": 36190,
+      "sha256": "b8c32087ad78118550687dd2e4e9fafe0f86a93a2feee4ee2ddb58253c0e98ca"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "bytes": 37124,
+      "sha256": "0e1961692e3f133643cf239bf7206c33664801e61fadef24026340896f531fd8"
+    },
+    {
+      "path": "site/planetary-scale.css",
+      "bytes": 2061,
+      "sha256": "33b7aae365bdec7ae56255a2d133fe21b5caf6238dfa609e91d533f7a8064c17"
+    },
+    {
+      "path": "site/prepared-spacecraft.json",
+      "bytes": 32396,
+      "sha256": "9d37eeca8a29b22bfd318b00aad4b01b14abd7dd828e5357ffa32749e187d9d2"
+    },
+    {
+      "path": "site/runtime-policy.mjs",
+      "bytes": 4289,
+      "sha256": "9ec5e11780aebdb77c7a907ea4de19286086e831096bd85e0f6f663364c5e238"
+    },
+    {
+      "path": "site/scene-router.mjs",
+      "bytes": 28582,
+      "sha256": "292c7eaee530d5cb037ecee4c24a6d1060b9dff9da88153f3d0fbd68d02b11b1"
+    },
+    {
+      "path": "site/shell-layout.css",
+      "bytes": 13330,
+      "sha256": "de21d0e2d8927e61ab3320f9e735d82d349881d6e1b94541e60f27e8e9260675"
+    },
+    {
+      "path": "site/site.css",
+      "bytes": 3554,
+      "sha256": "970c9c71b35c12d826800f5d8a5c370506d4398d58b7698854636e21d0047f2c"
+    },
+    {
+      "path": "site/wordmark.css",
+      "bytes": 1100,
+      "sha256": "dc4f0a887336c27c2f69e816fd2a3bae10b6a3d63042c1cdd410688554fc0261"
+    },
+    {
+      "path": "src/platform/cubic-sky.css",
+      "bytes": 4419,
+      "sha256": "8f43234c6e52c4b444a8c15b4e796c265c04b8311ff5f224ff0897753390dcad"
+    },
+    {
+      "path": "src/platform/heliocentric-view.css",
+      "bytes": 4532,
+      "sha256": "86e9f8729de8fd297f653c10c738411b9f57080365d5024f79e5bdd9f19f9241"
+    },
+    {
+      "path": "src/renderers/css/styles/volume.css",
+      "bytes": 1047,
+      "sha256": "cb09de8ee75df62aeb3775d6d435a955586d04d34ce19e009c2a43c4758d58cd"
+    },
+    {
+      "path": "src/renderers/css/styles/world-context.css",
+      "bytes": 2571,
+      "sha256": "06eef3ec33ee693087c6df22fb02532dc0bf9dbbc345a77c12dbb53a3f795b54"
+    }
+  ],
+  "styleArtifacts": [
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/4c6355ed0add80de3bafa060bc46b24fe435efe8ac32bc49f91a2ab7090fb746.css",
+      "bytes": 60571,
+      "sha256": "4c6355ed0add80de3bafa060bc46b24fe435efe8ac32bc49f91a2ab7090fb746"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/9531a0ffcc971f0527adf01258681b67d07ce7daab3807b17b013c07d52f5d97.css",
+      "bytes": 980,
+      "sha256": "9531a0ffcc971f0527adf01258681b67d07ce7daab3807b17b013c07d52f5d97"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/4cc9dc9fed25473a26502713919191487a139af8e3c27400664359e0f9d332b9.css",
+      "bytes": 880,
+      "sha256": "4cc9dc9fed25473a26502713919191487a139af8e3c27400664359e0f9d332b9"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/bc1a75e8299f8e78e22ed8103a96200536b59949a8ec53e1397481c338e64ea7.css",
+      "bytes": 1950,
+      "sha256": "bc1a75e8299f8e78e22ed8103a96200536b59949a8ec53e1397481c338e64ea7"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/6468b8673fa7100397e71fa3619be833c0340a42e7081916f97070671c1c6368.css",
+      "bytes": 3506,
+      "sha256": "6468b8673fa7100397e71fa3619be833c0340a42e7081916f97070671c1c6368"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/a5cacc569e6b31d269df7a4f8dad4498e79981cdb938881817b60585ed5dbc1e.css",
+      "bytes": 2617,
+      "sha256": "a5cacc569e6b31d269df7a4f8dad4498e79981cdb938881817b60585ed5dbc1e"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/0b1ef3c76da418263704c231276459ae8d1bbf621c95a632252142d089630e0f.css",
+      "bytes": 706,
+      "sha256": "0b1ef3c76da418263704c231276459ae8d1bbf621c95a632252142d089630e0f"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/28aacd3f183945d3c08c9a1cc1680654dd7733b20f44f601a942e98f39e3cc16.css",
+      "bytes": 2075,
+      "sha256": "28aacd3f183945d3c08c9a1cc1680654dd7733b20f44f601a942e98f39e3cc16"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/85f0eb8262d94d9138fd2c166474fb4e9a964578b670980c4f1c879849f2ad88.css",
+      "bytes": 3180,
+      "sha256": "85f0eb8262d94d9138fd2c166474fb4e9a964578b670980c4f1c879849f2ad88"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/578b97a520d4e1d1e5cfe536be1852e6da8069214f7682e36dbaa77b3b3eef64.css",
+      "bytes": 17003,
+      "sha256": "578b97a520d4e1d1e5cfe536be1852e6da8069214f7682e36dbaa77b3b3eef64"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css",
+      "bytes": 6098,
+      "sha256": "df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/27bb845f39dfbbe80eebb7e1e5afc126159bea832b6628ae63e1f6bd5e539cfb.css",
+      "bytes": 12158,
+      "sha256": "27bb845f39dfbbe80eebb7e1e5afc126159bea832b6628ae63e1f6bd5e539cfb"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/58c9945c0b4bd6b3dc49b23e38065ed558aba7dc8c1d16dae817695bb50dd6bb.css",
+      "bytes": 2069,
+      "sha256": "58c9945c0b4bd6b3dc49b23e38065ed558aba7dc8c1d16dae817695bb50dd6bb"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/6326bcbf3f209762c411ac2ca5f4f475a4017bb2a0ec4d69cb379d400bf5dbc2.css",
+      "bytes": 2473,
+      "sha256": "6326bcbf3f209762c411ac2ca5f4f475a4017bb2a0ec4d69cb379d400bf5dbc2"
+    },
+    {
+      "path": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/styles/1f5702883eb1bebf12da4286425de9d41a8239f411b44876a37ebdb3017eb8c2.css",
+      "bytes": 35382,
+      "sha256": "1f5702883eb1bebf12da4286425de9d41a8239f411b44876a37ebdb3017eb8c2"
+    }
+  ],
+  "outputBytes": 11902469,
+  "shutdown": {
+    "browserClose": "COMPLETE"
+  },
+  "chromeLaunch": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/chrome-process-gGUHGm/launch-chrome.sh",
+    "wrapperSha256": "cebc82dfdf54773f8ec3bf6b8a2f83c4a51c8d86c6f074cbb4f6683a49b7e500",
+    "stdioLogPath": "output/playwright/b3-surfaces/integrated-2026-09-09T12-58-44.960Z/chrome-process-gGUHGm/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "browserVersion": "152.0.7977.84",
+  "captureFinishedAt": "2026-09-09T12:59:00.691Z",
+  "finishedAt": "2026-09-09T12:59:00.750Z"
+}

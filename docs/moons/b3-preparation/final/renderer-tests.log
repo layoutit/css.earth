@@ -1,0 +1,57 @@
+
+ RUN  v3.2.7 /Users/ekrof/fed/cssEarth-pluto-small-moons/src/renderers/css
+
+ ❯ validation/depth-partitions.test.ts (3 tests | 3 failed) 359ms
+   × the actual grouped surface keeps one object camera and validates before DOM construction 308ms
+     → actual value must be number or bigint, received "undefined"
+   × transport rejects missing or duplicated depth ownership and invalid separating planes 23ms
+     → Cannot read properties of undefined (reading 'groups')
+   × fixed visibility sequences cover the actual retained carriers 28ms
+     → Cannot read properties of undefined (reading 'groups')
+ ❯ validation/paged-presentation.test.ts (3 tests | 3 failed) 40ms
+   × the external runtime boundary preserves both actual Earth page plans and metadata stubs 34ms
+     → Expected values to be strictly equal:
+
+0 !== 2
+
+   × malformed page budgets, roots and matrices fail at the external runtime boundary 3ms
+     → Prepared presentation: test page layer must be a plain record.
+   × internal page lens overrides cannot silently disagree with the validated binding 3ms
+     → Prepared presentation: test page layer must be a plain record.
+ ❯ navigation/surface-target.test.ts (2 tests | 1 failed) 36ms
+   ✓ surface correction is a finite proper rotation toward the real physical eye at every bearing 3ms
+   × the actual prepared Buenos Aires destination reaches the physical content centre at city zoom 32ms
+     → expected 2482.5232722739242 to be greater than 30000
+ ❯ paging/capabilities.test.ts (2 tests | 2 failed) 7ms
+   × actual paged surface and noise plans retain every prepared field, including metadata stubs 6ms
+     → Expected values to be strictly equal:
+
+0 !== 2
+
+   × invalid page ownership, budgets, roots and matrix bindings fail before mount 0ms
+     → Cannot read properties of undefined (reading 'plan')
+ ✓ validation/prepared-object.test.ts (12 tests) 13666ms
+   ✓ external transport cannot silently omit prepared activation ownership  351ms
+   ✓ Tuttle transport preserves selection ranges and rejects incomplete or invalid picking banks  1376ms
+   ✓ actual prepared Mercury and Venus documents preserve every JSON value and reference  815ms
+   ✓ node parents, scene ancestry, property references and retained targets are validated  1553ms
+   ✓ undeclared and duplicate resource references fail before acquisition  1611ms
+   ✓ camera fields and crossfade bounds cannot carry malformed or missing values  1940ms
+   ✓ prepared material ordering, variant coverage and animation ownership remain enforced  1429ms
+   ✓ celestial direction, photometry samples and label identities are validated  1148ms
+   ✓ a body without lenses validates both fixed and toggle-selected presentations  1266ms
+   ✓ prepared destination roll is optional and rejects non-finite or nonnumeric values  924ms
+   ✓ prepared lens transitions require bounded duration and an explicit zoom policy  1218ms
+stdout | volume/loader.test.ts > loads the checked-in density artifact with its complete fixed asset bank
+Prepared image bank integrity: {"volume":{"images":544,"bytes":14960360,"decodedRgbaBytes":137418464},"sky":{"images":6,"bytes":318044,"decodedRgbaBytes":56623104}}
+
+ ✓ volume/loader.test.ts (2 tests) 1854ms
+   ✓ loads the checked-in density artifact with its complete fixed asset bank  1846ms
+ ✓ stars/validation.test.ts (2 tests) 1246ms
+   ✓ decodes the checked prepared point field and verifies its pinned transport once  426ms
+   ✓ rejects a malformed hierarchy partition, resource metadata, and pinned bytes  820ms
+ ✓ loader.test.ts (12 tests) 1183ms
+ ✓ sky/prepared-sky-runtime.test.ts (8 tests) 626ms
+stdout | stars/point-field-selection.integration.test.ts > selects the real 109389-star hierarchy at four observer distances
+{"elapsedMs":58.29,"views":[{"representatives":2048,"maxProjectedErrorPx":518.8894391008761,"budgetLimited":true},{"representatives":2048,"maxProjectedErrorPx":287.68944367690847,"budgetLimited":true},{"representatives":2048,"maxProjectedErrorPx":123.26065547435202,"budgetLimited":true},{"representatives":2048,"maxProjectedErrorPx":88.15350753182452,"budgetLimited":true}]}
+
