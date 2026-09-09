@@ -1,0 +1,122 @@
+PDS_VERSION_ID = PDS3                                                         
+                                                                              
+/* File Characteristics */                                                    
+                                                                              
+RECORD_TYPE  = FIXED_LENGTH                                                   
+RECORD_BYTES = 26                                                             
+FILE_RECORDS = 895                                                            
+PRODUCT_NAME = "SSI Ida Images, Bad Data Table"                               
+                                                                              
+/* Data Object Pointers */                                                    
+                                                                              
+^TABLE       = "IDABAD.TAB"                                                   
+                                                                              
+/* Identification Keywords */                                                 
+                                                                              
+DATA_SET_ID           = "GO-A-SSI-2-REDR-IDA/GASPRA-V1.0"                     
+PRODUCT_ID            = "IGSSI-IDABAD-199601"                                 
+PRODUCT_CREATION_TIME = 1996-01-09T12:00:00.000                               
+TARGET_NAME           = IDA                                                   
+INSTRUMENT_HOST_NAME  = "GALILEO ORBITER"                                     
+INSTRUMENT_NAME       = "SOLID STATE IMAGING SYSTEM"                          
+START_TIME            = "N/A"                                                 
+STOP_TIME             = "N/A"                                                 
+SPACECRAFT_CLOCK_START_COUNT = "N/A"                                          
+SPACECRAFT_CLOCK_STOP_COUNT  = "N/A"                                          
+RECORD_FORMAT         = "(A5,1X,I1,2X,4(1X,I3))"                              
+DESCRIPTION           = "This file contains an ASCII table listing the known  
+                         bad pixels within the SSI images of Ida included     
+                         in this collection.  This information has been       
+extracted from the binary headers of the original images and converted into   
+ASCII format for ease of reference."                                          
+                                                                              
+/* Data Object Descriptions */                                                
+                                                                              
+OBJECT        = TABLE                                                         
+  NAME        = "BAD DATA"                                                    
+  INTERCHANGE_FORMAT = ASCII                                                  
+  COLUMNS     =  6                                                            
+  ROW_BYTES   = 26                                                            
+  ROWS        = 895                                                           
+  DESCRIPTION = "This table lists blocks of bad data within the SSI images    
+                 Each line lists the coordinates of one segment of bad data   
+                 in a particular image.  There are multiple lines per image.  
+  Each record contains the file name, a code indicating the type of bad data  
+  identified, and ranges of lines and samples included in the bad data        
+  block.  The start and end values may be the same in a line or sample        
+  range (or both) if the bad data covers a single pixel in that direction.    
+  "                                                                           
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "IMAGE FILENAME"                                          
+    BYTES         = 5                                                         
+    DATA_TYPE     = CHARACTER                                                 
+    START_BYTE    = 1                                                         
+    FORMAT        = "A5"                                                      
+    DESCRIPTION   = "The file name of the image (i.e., without extension)."   
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "BAD DATA CODE"                                           
+    BYTES         = 1                                                         
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 7                                                         
+    FORMAT        = "I1"                                                      
+    MINIMUM       = 3                                                         
+    MAXIMUM       = 7                                                         
+    DESCRIPTION   = "A code number in the range 3-7 indicating the reason the 
+                   pixels are being flagged as bad.  The codes used are:      
+                                                                              
+                       3    Data drop-out                                     
+                       4    Saturated pixels                                  
+                       5    Low-full-well pixels                              
+                       6    Single-pixel spikes                               
+                       7    Reed-Solomon overflow                             
+                  "                                                           
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 3                                                         
+    NAME          = "START LINE"                                              
+    BYTES         = 3                                                         
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 10                                                        
+    FORMAT        = "I3"                                                      
+    DESCRIPTION   = "The first line of the range involved."                   
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 4                                                         
+    NAME          = "END LINE"                                                
+    BYTES         = 3                                                         
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 14                                                        
+    FORMAT        = "I3"                                                      
+    DESCRIPTION   = "The last line of the range involved."                    
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 5                                                         
+    NAME          = "START SAMPLE"                                            
+    BYTES         = 3                                                         
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 18                                                        
+    FORMAT        = "I3"                                                      
+    DESCRIPTION   = "The first sample on the line of the range involved."     
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 6                                                         
+    NAME          = "END SAMPLE"                                              
+    BYTES         = 3                                                         
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 22                                                        
+    FORMAT        = "I3"                                                      
+    DESCRIPTION   = "The last sample on the line of the range involved."      
+  END_OBJECT                                                                  
+                                                                              
+END_OBJECT    = TABLE                                                         
+                                                                              
+END                                                                           

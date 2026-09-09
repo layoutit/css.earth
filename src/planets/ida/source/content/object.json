@@ -78,6 +78,21 @@
         "detail": "Galileo SSI · processed image mosaic"
       },
       {
+        "id": "calibrated",
+        "label": "Calibrated image",
+        "description": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+        "title": "Galileo’s 1993 green-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+        "thumbnail": "/scenes/ida/ida-calibrated-thumbnail.webp",
+        "surface": "ida-calibrated-surface@2x.webp",
+        "poles": "ida-calibrated-surface@2x.webp",
+        "source": {
+          "id": "ida-0202561278rcal_gre-fit",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "detail": "Galileo SSI · I/F"
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
