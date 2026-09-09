@@ -60,6 +60,7 @@
       2
     ],
     "poleSource": "Groussin et al. 2019, not a unique pole measured in the 2010 radar paper",
-    "disposition": "Retained as an alternative in the comparison; not combined with the HST model."
+    "disposition": "Included as the separate Arecibo dataset. Uses the 2010 paper full dimensions, divided by two, without thermal scaling; displayed axes are aligned for comparison.",
+    "displayModel": "../shape/arecibo.json"
   }
 }

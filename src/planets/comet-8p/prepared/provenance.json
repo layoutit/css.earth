@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d419ba3ccc0a2363365b09e2449508d54f17f57b68e85b05002484a59d59b7bd"
+    "sha256": "f345cab3d85ffa542b6a194b96c675601f66c6a0167bcbf80450f51391786d2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3a9995a118f0351d70fda76d88b88d264f1b783a02ed21cdb542b8b8a0d26d5f",
+      "sha256": "1f8074a74c5d85afba3b718a07779ab0f48a5539d67b37ab6e0456660288211d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -40,9 +40,22 @@
                 "centerLongitude": 180
               },
               "metadata": {
-                "label": "Inferred shape",
+                "label": "Hubble · Spitzer",
                 "modeled": true,
                 "coverage": "Two touching lobes inferred from Hubble brightness changes and sized using Spitzer infrared measurements. The smooth gray surface represents the model. Its rotation phase is illustrative."
+              }
+            },
+            {
+              "id": "arecibo",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": null,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Arecibo",
+                "modeled": true,
+                "coverage": "Smooth inferred shape from limited radar aspect coverage. The orientation is illustrative and aligned with the default model; no measured surface detail or unique spin pole is claimed."
               }
             }
           ],
@@ -119,8 +132,75 @@
                   "weight": 0.24
                 }
               ]
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 90,
+              "latitudeDegrees": 15,
+              "ambient": 0.45,
+              "diffuse": 0.55
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "path": "shape/arecibo.json",
+              "format": "contact-ellipsoids",
+              "grid": {
+                "metersPerUnit": 1,
+                "expectedVertices": 2052,
+                "expectedFaces": 4096
+              },
+              "faceBudget": 1000,
+              "tileSize": 64,
+              "atlasColumns": 16,
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 1000,
+                "maximumErrorMeters": 75
+              },
+              "primitive": "u",
+              "sourceLighting": {
+                "maximumDistanceMeters": 100,
+                "rayOffsetMeters": 0.25,
+                "ambient": 0.16,
+                "diffuse": 0.84,
+                "floodLights": [
+                  {
+                    "direction": [
+                      0,
+                      0,
+                      1
+                    ],
+                    "weight": 0.36
+                  },
+                  {
+                    "direction": [
+                      0,
+                      1,
+                      0
+                    ],
+                    "weight": 0.24
+                  },
+                  {
+                    "direction": [
+                      1,
+                      0,
+                      0
+                    ],
+                    "weight": 0.24
+                  }
+                ]
+              },
+              "thumbnail": {
+                "size": 96,
+                "longitudeDegrees": 90,
+                "latitudeDegrees": 15,
+                "ambient": 0.45,
+                "diffuse": 0.55
+              },
+              "lensId": "arecibo"
+            }
+          ]
         },
         "celestial": {
           "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; HST model pole with arbitrary fixed phase.",
@@ -140,19 +220,19 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2b03d68c3bc3f5f211fab0e838614a87295feeefec380353f3594f2a7ec29913",
+      "sha256": "5a0d08921d30705d940aeda5cc1558aeb4a70f088cc92d34747a7f28b33a1cd9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-8p",
         "displayName": "Tuttle",
         "panel": {
-          "introduction": "Tuttle’s nucleus is thought to have two touching lobes. This model combines Hubble brightness measurements with Spitzer infrared observations.",
+          "introduction": "Tuttle’s nucleus is thought to have two touching lobes. Hubble, Spitzer and Arecibo observations give different estimates of their shape and size.",
           "facts": [
             {
-              "id": "size",
-              "label": "Lobe radii",
-              "value": "≈2.7 km · ≈1.1 km"
+              "id": "period",
+              "label": "Orbital period",
+              "value": "About 13.5 years"
             },
             {
               "id": "rotation",
@@ -166,15 +246,16 @@
           "titleKey": "lenses",
           "defaultLens": "model",
           "labels": {
-            "model": "Inferred shape"
+            "model": "Hubble · Spitzer",
+            "arecibo": "Arecibo"
           },
           "controls": [
             {
               "id": "model",
-              "label": "Inferred shape",
-              "description": "Two smooth spheres fitted to the observations. Surface detail is unknown, and the displayed rotation phase is illustrative.",
+              "label": "Hubble · Spitzer",
+              "description": "Two touching spheres fitted to Hubble and Spitzer observations. This shape fits the thermal measurements better. Surface detail is unknown; the rotation phase is illustrative.",
               "title": "Hubble-derived contact model scaled by Spitzer measurements.",
-              "detail": "Hubble · Spitzer",
+              "detail": "Inferred shape",
               "thumbnail": "/scenes/comet-8p/comet-8p-model-thumbnail.webp",
               "surface": "comet-8p-model-surface@2x.webp",
               "poles": "comet-8p-model-poles@2x.webp",
@@ -192,6 +273,33 @@
                 {
                   "id": "rotation",
                   "label": "Rotation period",
+                  "value": "About 11.4 hours"
+                }
+              ]
+            },
+            {
+              "id": "arecibo",
+              "label": "Arecibo",
+              "detail": "Radar model",
+              "title": "Alternative contact-body model fitted to Arecibo radar observations.",
+              "description": "Two elongated lobes fitted to radar echoes. Their axes are aligned with the other model for comparison. Surface detail is unknown; the orientation is illustrative.",
+              "thumbnail": "/scenes/comet-8p/comet-8p-arecibo-thumbnail.webp",
+              "surface": "comet-8p-arecibo-surface@2x.webp",
+              "poles": "comet-8p-arecibo-poles@2x.webp",
+              "source": {
+                "id": "arecibo-model",
+                "path": "../manifest.json",
+                "url": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf"
+              },
+              "facts": [
+                {
+                  "id": "length",
+                  "label": "Total length",
+                  "value": "10.0 ± 0.9 km"
+                },
+                {
+                  "id": "rotation",
+                  "label": "Observed rotation",
                   "value": "About 11.4 hours"
                 }
               ]
@@ -274,7 +382,7 @@
       "width": 64,
       "height": 32,
       "lensId": "model",
-      "label": "Inferred shape",
+      "label": "Hubble · Spitzer",
       "falseColor": false,
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
@@ -304,6 +412,56 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "arecibo-surface",
+      "path": "material/arecibo-neutral.png",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral model material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "coverage": "Smooth inferred shape from limited radar aspect coverage. The orientation is illustrative and aligned with the default model; no measured surface detail or unique spin pole is claimed.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2724.259583841626
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "arecibo",
+      "label": "Arecibo",
+      "falseColor": false,
+      "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
+      "bytes": 137,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "arecibo-model",
+      "path": "shape/arecibo.json",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
+      "credit": "Harmon et al. (2010); cssEarth tessellation",
+      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in published radar shape parameters; full lobe dimensions divided by two.",
+      "redistribution": "Preserve attribution and inferred-model qualification.",
+      "sha256": "1ce08f3c47306e7bd0fa70685e55e111cfdbd01ede582c167bb9eb2093bc2022",
+      "bytes": 1154,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Tuttle source evidence or authored preparation input.",
       "id": "authored-document:content/object.json",
@@ -313,8 +471,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2b03d68c3bc3f5f211fab0e838614a87295feeefec380353f3594f2a7ec29913",
-      "bytes": 2938,
+      "sha256": "5a0d08921d30705d940aeda5cc1558aeb4a70f088cc92d34747a7f28b33a1cd9",
+      "bytes": 4065,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -324,13 +482,13 @@
   "products": [
     {
       "id": "model",
-      "label": "Inferred shape",
+      "label": "Hubble · Spitzer",
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
       "limitations": [
-        "Two smooth spheres fitted to the observations. Surface detail is unknown, and the displayed rotation phase is illustrative."
+        "Two touching spheres fitted to Hubble and Spitzer observations. This shape fits the thermal measurements better. Surface detail is unknown; the rotation phase is illustrative."
       ],
       "lensIds": [
         "model"
@@ -352,14 +510,57 @@
       "outputs": [
         {
           "url": "/scenes/comet-8p/comet-8p-model-thumbnail.webp",
-          "bytes": 44,
-          "sha256": "72f6226f692921f3f9dd3a49250631234f64ef64995d7688732ee6b797b0e192",
+          "bytes": 1458,
+          "sha256": "01d5ce463e113416edbebb42a1cacc4bf75718c3debdd9297c6546de9d330dfd",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-8p/comet-8p-model-surface@2x.webp",
           "bytes": 105472,
           "sha256": "578704d0981e7648e4ed30581dedab06d2ff32e89f1f751a057dc3fa6b19c0a4",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "arecibo",
+      "label": "Arecibo",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Two elongated lobes fitted to radar echoes. Their axes are aligned with the other model for comparison. Surface detail is unknown; the orientation is illustrative."
+      ],
+      "lensIds": [
+        "arecibo"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "arecibo-surface",
+        "arecibo-model"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-8p/comet-8p-arecibo-thumbnail.webp",
+          "bytes": 1298,
+          "sha256": "40841a80d448e25210b873a102bf2c9ff11ca27e060cddd24a2a58af12022ef3",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-8p/comet-8p-arecibo-surface@2x.webp",
+          "bytes": 109186,
+          "sha256": "63f03008ebbfcd2d767e3ea6bc7779970897a084bcaa89388f493e2ac0bc2930",
           "verification": "bytes-verified"
         }
       ],
@@ -383,8 +584,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3434,
-          "sha256": "820c318831b98ff768b06be492f5f9f3664f9bda738632e8f7ca1cdb3d467555",
+          "bytes": 3438,
+          "sha256": "c7914c3ea48c3b7e1af30f19283f212e5cdd0ab075605699e1a0b148f671031b",
           "verification": "bytes-verified"
         }
       ],

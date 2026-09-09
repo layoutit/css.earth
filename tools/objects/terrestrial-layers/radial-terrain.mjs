@@ -262,7 +262,10 @@ export function createRadialScienceColorSampler(sourceSurface, lens, config) {
 /** Bake opaque triangle rasters, coordinates and fixed-epoch Sun illumination. The
  * renderer switches between these prepared banks through ordinary variants.
  */
-export async function prepareRadialMaterials({ radial, surfaces, config, source, publicDirectory, outputDirectory, sunDirection }) {
+export async function prepareRadialMaterials({ radial, surfaces, config, source, publicDirectory, outputDirectory, sunDirection,
+  artifactId = null, snapshotEntries = source.manifest.generatedIntermediates }) {
+  if (artifactId !== null && !/^[a-z][a-z0-9-]*$/.test(artifactId)) throw new TypeError('Invalid surface model artifact id.');
+  const suffix = artifactId ? `-${artifactId}` : '';
   const { width, height, tileSize } = radial;
   const lightingRecipe = config.geometry.radialTerrain.sourceLighting;
   const lighting = lightingRecipe ? createSourceMeshLighting(radial.grid, lightingRecipe,
@@ -372,6 +375,12 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
     surface.polesUrl = surface.surface.url;
     surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
+    if (config.geometry.radialTerrain.thumbnail) {
+      const snapshot = await renderRadialSnapshot({ ...config.geometry.radialTerrain.thumbnail, faces: radial.faces,
+        map: resolve(publicDirectory, surface.map.url.split('/').at(-1)) });
+      surface.thumbnail = await emit(`${config.namespace}-${surface.id}-thumbnail.webp`, sharp(snapshot).resize(48, 48)
+        .extend({ left: 24, right: 24, top: 0, bottom: 0, background: { r: 0, g: 0, b: 0, alpha: 0 } }));
+    }
     if (transfer) surface.surfaceSampling.transfer = transfer;
     if (scalarSources) {
       const bytes = Buffer.from(JSON.stringify({ schema: 'cssearth-atlas-scalar-index@1', width, height,
@@ -397,8 +406,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         width, height, includesAtlasBleed: true, codes };
     }
   }
-  if (lighting) await writeFile(resolve(outputDirectory, 'source-lighting.json'), JSON.stringify({ ...lighting.report, recipe: lightingRecipe }) + '\n');
-  for (const entry of source.manifest.generatedIntermediates.filter(entry =>
+  if (lighting) await writeFile(resolve(outputDirectory, `source-lighting${suffix}.json`), JSON.stringify({ ...lighting.report, recipe: lightingRecipe }) + '\n');
+  for (const entry of snapshotEntries.filter(entry =>
     entry.generator === 'tools/objects/terrestrial-layers/radial-snapshot.mjs')) {
     const surface = surfaces.find(surface => surface.id === entry.recipe?.lensId);
     if (!surface) throw new TypeError('Radial snapshot requires a prepared source lens.');
@@ -409,7 +418,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       map: resolve(publicDirectory, surface.map.url.split('/').at(-1)) });
     source.assertBytes(entry, png);
   }
-  await writeFile(resolve(outputDirectory, 'terrain.json'), JSON.stringify({ schema: 'cssearth-prepared-radial-terrain@1',
+  await writeFile(resolve(outputDirectory, `terrain${suffix}.json`), JSON.stringify({ schema: 'cssearth-prepared-radial-terrain@1',
     source: config.geometry.radialTerrain, faces: radial.faces, width, height,
     ...(radial.coverage ? { coverage: radial.coverage } : {}),
     ...(radial.simplification ? { simplification: radial.simplification } : {}) }) + '\n');

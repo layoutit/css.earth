@@ -8,6 +8,51 @@ const root = new URL('../../../../src/planets/comet-8p/source/', import.meta.url
 const json = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 const near = (actual, expected, tolerance) => assert.ok(Math.abs(actual - expected) < tolerance, `${actual} vs ${expected}`);
 
+test('each model product binds its own shape source without blending the alternative', async () => {
+  const {prepareObjectProvenance} = await import('../../../../tools/objects/provenance.mjs');
+  const {fileURLToPath} = await import('node:url');
+  const objectDirectory=fileURLToPath(new URL('../',root));
+  const document=await prepareObjectProvenance({objectDirectory,outputDirectory:objectDirectory+'prepared',
+    publicDirectory:fileURLToPath(new URL('../../../../public/scenes/comet-8p/',import.meta.url)),write:false});
+  assert.deepEqual(document.products.find(p=>p.id==='model').inputs,['model-surface','contact-model']);
+  assert.deepEqual(document.products.find(p=>p.id==='arecibo').inputs,['arecibo-surface','arecibo-model']);
+});
+
+test('Arecibo retains the published dimensions without Spitzer rescaling', async () => {
+  const model = await json('shape/arecibo.json'), mesh = contactEllipsoidMesh(model);
+  assert.deepEqual(mesh.axesMeters, [[2875,2055,2055],[2125,1635,1635]]);
+  near(2 * (mesh.axesMeters[0][0] + mesh.axesMeters[1][0]), 10000, 1e-9);
+  near(mesh.axesMeters[0][0] / mesh.axesMeters[1][0], 1.35, .01);
+  const recipe = await json('preparation/terrestrial.json');
+  const profile = recipe.geometry.radialTerrainAlternatives.find(model => model.lensId === 'arecibo');
+  const source = await loadContactEllipsoids(new URL('shape/arecibo.json', root), profile.grid);
+  const faces = await simplifyRadialShape(source, profile, 1);
+  assert.equal(faces.length, 1000);
+  assert.equal(faces.simplification.topology.eulerCharacteristic, 3);
+  assert.ok(faces.some(face => face.vertices.some(p => Math.hypot(p[0]-mesh.contactXMeters,p[1],p[2]) < 1e-5)));
+  for (const face of faces) {
+    for (const p of [...face.vertices, face.vertices[0].map((_,axis) => face.vertices.reduce((sum,v) => sum+v[axis],0)/3)]) {
+      const error = Math.min(...mesh.axesMeters.map((axes,i) => Math.abs(Math.hypot((p[0]-mesh.centersMeters[i])/axes[0],p[1]/axes[1],p[2]/axes[2])-1)*Math.max(...axes)));
+      assert.ok(error < 75, `Analytic ellipsoid residual ${error} m`);
+    }
+  }
+});
+
+test('both source meshes stay separate in one retained scene', async () => {
+  const { loadRadialModels, combineRadialModels } = await import('../../../../tools/objects/terrestrial-layers/radial-models.mjs');
+  const { createSourceManifest } = await import('../../../../src/platform/source-manifest.mjs');
+  const { fileURLToPath } = await import('node:url');
+  const sourceDirectory = fileURLToPath(root), config = await json('preparation/terrestrial.json');
+  const source = await createSourceManifest({ planetId:'comet-8p', planetName:'Tuttle', sourceRoot:sourceDirectory });
+  const models = await loadRadialModels({ config, sourceDirectory, source });
+  const scene = combineRadialModels(models, 'comet-8p');
+  assert.equal(scene.leaves.length,2000);
+  assert.deepEqual(scene.lensRanges,[{lensId:'model',start:0,count:1000},{lensId:'arecibo',start:1000,count:1000}]);
+  assert.deepEqual(scene.faces.slice(0,1000),Array.from(models[0].radial.faces));
+  assert.deepEqual(scene.faces.slice(1000),Array.from(models[1].radial.faces));
+  assert.ok(scene.leaves.slice(1000).every(leaf=>leaf.attributes['data-surface-model']==='arecibo'));
+});
+
 test('Spitzer area scaling preserves the published HST lobe proportions and volume origin', async () => {
   const model = await json('shape/model.json'), mesh = contactEllipsoidMesh(model);
   // Independent anchors: Table 3 radii, gamma from section 5.3. Gamma scales flux/area.

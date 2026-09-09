@@ -20,6 +20,23 @@ test('external transport cannot silently omit prepared activation ownership', ()
   assert.throws(() => parsePreparedObjectRuntime(missing), /activation groups must be prepared/);
 });
 
+test('Tuttle transport preserves selection ranges and rejects incomplete or invalid picking banks', async () => {
+  const original = JSON.parse(await readFile(new URL('../../../planets/comet-8p/prepared/object.json', import.meta.url), 'utf8')).data;
+  const parsed = parsePreparedObjectRuntime(original);
+  assert.deepEqual(parsed.surfaceHit?.lensRanges, [
+    {lensId: 'model', start: 0, count: 1000}, {lensId: 'arecibo', start: 1000, count: 1000},
+  ]);
+  for (const mutate of [
+    (ranges: {lensId: string; start: number; count: number}[]) => ranges.pop(),
+    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[1]!.lensId = 'model'; },
+    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[1]!.count = 1001; },
+    (ranges: {lensId: string; start: number; count: number}[]) => { ranges[0]!.start = -1; },
+  ]) {
+    const input = structuredClone(original); mutate(input.surfaceHit.lensRanges);
+    assert.throws(() => parsePreparedObjectRuntime(input), /surface|duplicate/);
+  }
+});
+
 test('actual prepared Mercury and Venus documents preserve every JSON value and reference', () => {
   for (const original of originals) {
     const parsed = parsePreparedObjectRuntime(original);

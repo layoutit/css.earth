@@ -54,9 +54,11 @@ try {
   const initial = await page.evaluate(id => {
     const root = document.querySelector('.planet-stage');
     window.__cometTraceNodes = [root, ...root.querySelectorAll('*')];
-    const atlasUrls = [...new Set([...document.querySelectorAll(`.${id}-body > u`)].map(node => getComputedStyle(node).backgroundImage))].sort();
+    const visibleLeaves = [...document.querySelectorAll(`.${id}-body > u`)].filter(node => getComputedStyle(node).display !== 'none');
+    const atlasUrls = [...new Set(visibleLeaves.map(node => getComputedStyle(node).backgroundImage))].sort();
     return { sceneTransform: getComputedStyle(document.querySelector('.polycss-scene')).transform,
       nodes: window.__cometTraceNodes.length, bodyLeaves: document.querySelectorAll(`.${id}-body > u`).length,
+      visibleBodyLeaves: visibleLeaves.length,
       atlasUrls, diagnosticsAvailable: !!window[`__${id}`] };
   }, id);
   assert.ok(initial.atlasUrls.length && initial.atlasUrls.every(url => /@2x\.webp/.test(url)));
@@ -93,7 +95,7 @@ try {
     const root = document.querySelector('.planet-stage'), nodes = [root, ...root.querySelectorAll('*')];
     return { sceneTransform: getComputedStyle(document.querySelector('.polycss-scene')).transform,
       nodes: nodes.length, retainedIdentity: nodes.length === window.__cometTraceNodes.length && nodes.every((node, i) => node === window.__cometTraceNodes[i]),
-      atlasUrls: [...new Set([...document.querySelectorAll(`.${id}-body > u`)].map(node => getComputedStyle(node).backgroundImage))].sort() };
+      atlasUrls: [...new Set([...document.querySelectorAll(`.${id}-body > u`)].filter(node => getComputedStyle(node).display !== 'none').map(node => getComputedStyle(node).backgroundImage))].sort() };
   }, id);
   await page.screenshot({ path: resolve(output, 'after.png') });
   const trace = JSON.parse(text), marks = new Map(trace.traceEvents.filter(e => e.name.startsWith('comet-trace-')).map(e => [e.name, e]));

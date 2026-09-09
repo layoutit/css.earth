@@ -1,12 +1,29 @@
 # Tuttle: source and interpretation
 
-The single **Inferred shape** view uses the Hubble contact-sphere model favored
+The default **Hubble · Spitzer** view uses the Hubble contact-sphere model favored
 by [Groussin et al. (2019), A&A 632, A104](https://arxiv.org/abs/1911.04897).
 Its lobe proportions come from optical brightness variations; Spitzer thermal
 measurements constrain the overall size. This is a smooth inferred nucleus,
 not resolved terrain or a photograph. No coma, tail or surface markings are
 invented. The selected numerical parameters and their uncertainties are checked
 in under `source/shape/model.json` and pinned in `source/manifest.json`.
+
+**Arecibo** is a second, separate inferred shape from
+[Harmon et al. (2010)](https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf),
+Section 3. Its prolate lobes have full dimensions 5.75 × 4.11 × 4.11 km and
+4.25 × 3.27 × 3.27 km. The checked-in semiaxes divide those numbers by two;
+no Spitzer flux scaling is applied. Their combined length is 10.0 ± 0.9 km.
+The 11.385 ± 0.004 h radar period is synodic. The images had 300 m range
+resolution and limited aspect coverage; neither the images nor the smooth fit
+provide resolved global terrain. This dataset uses the original 2010 dimensions,
+not the slightly rounded semiaxes in the 2019 comparison table.
+
+The Arecibo axes are aligned with the default model for comparing shapes. The
+2010 radar observations did not determine a unique spin pole, and this view does
+not apply the later candidate pole or reproduce an observed rotation phase.
+The visible dataset explanation identifies this illustrative alignment. Each
+model has its own equal-density volume origin, expressed in the same physical
+metre scale; the default model continues to supply the common reference radius.
 
 ## Size and coordinates
 
@@ -44,6 +61,13 @@ characteristic three: two closed lobes sharing one point. Independent checks
 compare retained vertices and triangle centroids with the analytic spheres,
 verify the exact contact and check finite normals.
 
+The Arecibo model independently follows the same source-mesh route with a 75 m
+error allowance and its own geometry, lighting banks and thumbnail. Both sets
+of 1,000 leaves are prepared and retained in one scene; only the selected set is
+displayed. Prepared triangle ranges make surface picking follow the committed
+dataset. A lens change does not generate geometry, mount another object or move
+the shared camera.
+
 A uniform #b8b6b2 material makes the geometry readable. It is an illustration,
 not a measured albedo. The existing preparation pipeline bakes source-mesh
 normals, directional shadows and flood lighting into fixed triangle atlases.
@@ -69,7 +93,7 @@ approximated as TT within 2 ms, following the shared astronomy convention.
 | Candidate | Disposition |
 | --- | --- |
 | [Groussin et al. (2019)](https://arxiv.org/abs/1911.04897), Table 3 and Section 5.3 | Included: HST contact-sphere proportions, Spitzer scale, pole and uncertainty. The thermal light curve favors this family. Numerical parameters are transcribed with attribution; the paper is not redistributed. |
-| [Harmon et al. (2010), Arecibo radar observations](https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf) | Credible alternative: two prolate spheroids with semiaxes (2.88, 2.06, 2.06) and (2.13, 1.64, 1.64) km. Retained separately in `reference/model-alternatives.json`; not blended into the selected HST model. The later candidate radar pole in Groussin et al. is not presented as a unique pole measured by the 2010 paper. |
+| [Harmon et al. (2010), Arecibo radar observations](https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf) | Included as Arecibo: two prolate lobes using the paper's full dimensions, with an explicit illustrative alignment. The later candidate radar pole in Groussin et al. is recorded separately and is not applied to this comparison view. |
 | [JPL radar shape-model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) | No downloadable Tuttle mesh was listed during intake. The published parametric families remain usable without inventing a measured terrain mesh. |
 | Spitzer MIPS/IRS images and spectra in Groussin et al.; referenced thermal/coma studies | Useful size, thermal and coma observations, but unresolved nucleus measurements do not supply a registered surface texture. No additional surface lens is qualified. |
 

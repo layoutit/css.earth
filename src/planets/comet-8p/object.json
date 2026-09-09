@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "3a9995a118f0351d70fda76d88b88d264f1b783a02ed21cdb542b8b8a0d26d5f"
+          "sha256": "1f8074a74c5d85afba3b718a07779ab0f48a5539d67b37ab6e0456660288211d"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2b03d68c3bc3f5f211fab0e838614a87295feeefec380353f3594f2a7ec29913"
+          "sha256": "5a0d08921d30705d940aeda5cc1558aeb4a70f088cc92d34747a7f28b33a1cd9"
         },
         {
           "id": "title",
@@ -63,6 +63,11 @@
           "lenses": [
             {
               "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "arecibo",
               "source": "content",
               "material": "lighting"
             }
@@ -108,6 +113,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+    "sha256": "eb0b0329936b90d41bc312954222c319c519941cc9dc01d21b415d9ba2664fde"
   }
 }

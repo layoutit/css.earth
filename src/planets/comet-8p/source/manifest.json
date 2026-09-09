@@ -44,7 +44,7 @@
       "width": 64,
       "height": 32,
       "lensId": "model",
-      "label": "Inferred shape",
+      "label": "Hubble · Spitzer",
       "falseColor": false
     },
     {
@@ -80,6 +80,52 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "arecibo-model",
+      "path": "shape/arecibo.json",
+      "expectedBytes": 1154,
+      "expectedSha256": "1ce08f3c47306e7bd0fa70685e55e111cfdbd01ede582c167bb9eb2093bc2022",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
+      "credit": "Harmon et al. (2010); cssEarth tessellation",
+      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in published radar shape parameters; full lobe dimensions divided by two.",
+      "redistribution": "Preserve attribution and inferred-model qualification.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "arecibo-surface",
+      "path": "material/arecibo-neutral.png",
+      "expectedBytes": 137,
+      "expectedSha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral model material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Smooth inferred shape from limited radar aspect coverage. The orientation is illustrative and aligned with the default model; no measured surface detail or unique spin pole is claimed.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2724.259583841626
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "arecibo",
+      "label": "Arecibo",
+      "falseColor": false
     }
   ],
   "generatedIntermediates": [
@@ -119,8 +165,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2938,
-      "expectedSha256": "2b03d68c3bc3f5f211fab0e838614a87295feeefec380353f3594f2a7ec29913",
+      "expectedBytes": 4065,
+      "expectedSha256": "5a0d08921d30705d940aeda5cc1558aeb4a70f088cc92d34747a7f28b33a1cd9",
       "purpose": "Tuttle source evidence or authored preparation input."
     },
     {
@@ -143,14 +189,14 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3142,
-      "expectedSha256": "3a9995a118f0351d70fda76d88b88d264f1b783a02ed21cdb542b8b8a0d26d5f",
+      "expectedBytes": 5186,
+      "expectedSha256": "1f8074a74c5d85afba3b718a07779ab0f48a5539d67b37ab6e0456660288211d",
       "purpose": "Tuttle source evidence or authored preparation input."
     },
     {
       "path": "presentation/minimap.json",
-      "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
+      "expectedBytes": 56,
+      "expectedSha256": "fd0259d6adfd494c9e376193813fc8d355cddcc8364eaa788abc06f359b5faa2",
       "purpose": "Tuttle source evidence or authored preparation input."
     },
     {
@@ -179,8 +225,8 @@
     },
     {
       "path": "reference/model-alternatives.json",
-      "expectedBytes": 1690,
-      "expectedSha256": "11cc7557019dc30e6f86c65532e26dfa8a5d50693b22a3ab4c818cb69d0e0943",
+      "expectedBytes": 1819,
+      "expectedSha256": "6fe0824166a0d9ee2f6d0601ca052935453a071c2c2c0f74e9758b39b6242c69",
       "purpose": "Tuttle source evidence or authored preparation input."
     },
     {

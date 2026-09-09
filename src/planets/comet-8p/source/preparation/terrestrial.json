@@ -22,9 +22,22 @@
           "centerLongitude": 180
         },
         "metadata": {
-          "label": "Inferred shape",
+          "label": "Hubble · Spitzer",
           "modeled": true,
           "coverage": "Two touching lobes inferred from Hubble brightness changes and sized using Spitzer infrared measurements. The smooth gray surface represents the model. Its rotation phase is illustrative."
+        }
+      },
+      {
+        "id": "arecibo",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Arecibo",
+          "modeled": true,
+          "coverage": "Smooth inferred shape from limited radar aspect coverage. The orientation is illustrative and aligned with the default model; no measured surface detail or unique spin pole is claimed."
         }
       }
     ],
@@ -101,8 +114,75 @@
             "weight": 0.24
           }
         ]
+      },
+      "thumbnail": {
+        "size": 96,
+        "longitudeDegrees": 90,
+        "latitudeDegrees": 15,
+        "ambient": 0.45,
+        "diffuse": 0.55
       }
-    }
+    },
+    "radialTerrainAlternatives": [
+      {
+        "path": "shape/arecibo.json",
+        "format": "contact-ellipsoids",
+        "grid": {
+          "metersPerUnit": 1,
+          "expectedVertices": 2052,
+          "expectedFaces": 4096
+        },
+        "faceBudget": 1000,
+        "tileSize": 64,
+        "atlasColumns": 16,
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 1000,
+          "maximumErrorMeters": 75
+        },
+        "primitive": "u",
+        "sourceLighting": {
+          "maximumDistanceMeters": 100,
+          "rayOffsetMeters": 0.25,
+          "ambient": 0.16,
+          "diffuse": 0.84,
+          "floodLights": [
+            {
+              "direction": [
+                0,
+                0,
+                1
+              ],
+              "weight": 0.36
+            },
+            {
+              "direction": [
+                0,
+                1,
+                0
+              ],
+              "weight": 0.24
+            },
+            {
+              "direction": [
+                1,
+                0,
+                0
+              ],
+              "weight": 0.24
+            }
+          ]
+        },
+        "thumbnail": {
+          "size": 96,
+          "longitudeDegrees": 90,
+          "latitudeDegrees": 15,
+          "ambient": 0.45,
+          "diffuse": 0.55
+        },
+        "lensId": "arecibo"
+      }
+    ]
   },
   "celestial": {
     "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; HST model pole with arbitrary fixed phase.",
