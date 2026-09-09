@@ -1070,3 +1070,53 @@ The next architectural work must reduce the minimap's per-point publication cost
 while preserving its current grid, symbolic marker sizes, colors, opacity, source
 order and continuous camera tracking. The failed batch is not a substitute for
 that requirement, and the overall performance target remains open.
+
+
+### Retain covered minimap markers without publishing them (`6b6de1207`)
+
+The minimap now projects its existing prepared candidates into retained records,
+then visits markers in reverse prepared DOM order. Only a later, completely
+opaque planet or star may cover another marker. A conservative pixel-diagonal
+clearance excludes edge contact and partial coverage; responsive scaling widens
+the guard. Fully covered nodes stay retained and receive their current transform
+and alpha as soon as they become visible again. Source positions, marker sizes,
+colors, logical neighborhood counts and the camera cadence are unchanged.
+
+Five range/coverage tests pass. The real-app comparison covers 62 views across
+physical scales, orientations, desktop/mobile sizes and DPR 1/2. Camera state,
+logical counts, all 2,381 retained descendants, and every drawn marker's complete
+inline style match the baseline. All but one comparison differ by at most 1/255.
+The desktop DPR 2, 1 AU case differs by up to 10/255 (135 channels above 2/255),
+with three markers drawn in both versions and none retired by coverage. The
+cause of that raster difference is unproven; the set is not pixel-identical.
+Reports and source snapshots are in `output/playwright/minimap-covered-product/`.
+
+A complete native Sun–Milky Way–Sun capture at clean `6b6de1207` uses the same
+route and trace categories as the preceding balanced-volume repeat:
+
+| Measurement | Balanced repeat | Covered-marker product |
+| --- | ---: | ---: |
+| Drag updates / browser draw passes | 120 / 831 | 120 / 831 |
+| Drag renderer BeginMainFrame elapsed | 1459.682 ms | 948.857 ms |
+| Drag UpdateLayoutTree elapsed | 402.532 ms | 213.016 ms |
+| Drag Layerize elapsed | 346.775 ms | 215.464 ms |
+| Drag draw-pass elapsed | 151.287 ms | 146.922 ms |
+| Drag rAF intervals >25 ms | 38/228 | 1/244 |
+| Whole-route intervals >25 ms | 108/3559 | 12/3495 |
+| Planetary-band intervals >25 ms | 53/765 | 10/762 |
+| Whole-route maximum | 66.7 ms | 50 ms |
+
+This reduces measured renderer work while preserving the drawing topology. It
+does not establish perfect smoothness: ten long intervals remain in the
+planetary band, and the route includes a 50 ms outlier. Whole-route rAF intervals
+are observations rather than a count of dropped display frames.
+
+Recorder `2933ed39-1ab2-4cd3-914e-f079e7972992`, trace gzip, video and source
+verification are retained in `output/world-context-zoom/minimap-covered-dpr2/`.
+All 26 source hashes match the captured commit, with 518 loaded receipts. All
+2,935 video observations are encoded, with -41 microseconds clock drift and
+1.441 ms maximum PTS error. No application/resource errors, HMR or trace data
+loss occurred; the world, input surface, document and single camera survive.
+The trace buffer is 512 MiB; its categories are unchanged. This result precedes
+the subsequent main integration and uses the earlier catalog, so it must not be
+presented as qualification of the newer catalog or UI.
