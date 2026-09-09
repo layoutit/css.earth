@@ -141,18 +141,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "blue-marble-topography.jpg",
-      "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x21600x10800.jpg",
-      "headers": {
-        "accept": "*/*",
-        "user-agent": "cssEarth Earth source acquisition"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "blue-marble-clouds.tif",
       "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif",
       "headers": {
@@ -442,6 +430,215 @@
         "recordApiUrl": "https://science.nasa.gov/wp-json/wp/v2/topic/48583",
         "blocksApiUrl": "https://science.nasa.gov/wp-json/vip-block-data-api/v1/posts/48583/blocks"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026.das",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.das"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-00.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4:10:2394][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-01.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[2404:10:4794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-02.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4804:10:7194][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-03.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[7204:10:9594][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-04.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[9604:10:11994][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-05.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[12004:10:14394][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-06.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[14404:10:16794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-07.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[16804:10:19194][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-08.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[19204:10:21594][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-09.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[21604:10:23994][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-10.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[24004:10:26394][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-11.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[26404:10:28794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-12.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[28804:10:31194][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-13.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[31204:10:33594][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/rows-3360.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[33604:10:34794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/rows-3480.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[34804:10:35994][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-15.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[36004:10:38394][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/latitude-16.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[38404:10:40794][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/rows-4080.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[40804:10:41994][4:10:86394]",
+      "encoding": "gzip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "elevation"
+      ],
+      "path": "science/gebco-2026/rows-4200.dods.gz",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[42004:10:43194][4:10:86394]",
+      "encoding": "gzip"
     }
   ]
 }

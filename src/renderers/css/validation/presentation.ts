@@ -117,11 +117,21 @@ export function requireFacing(value: unknown, tree: PreparedTree, partitionScene
 export function requireOptionalPresentation(plan: Record<string, unknown>, tree: PreparedTree, controls: ObjectControls): void {
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [];
   if (plan.surfaceHit !== undefined) {
-    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles', 'frontFace']);
+    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles', 'frontFace', 'lensRanges']);
     if (hit.frontFace !== undefined && !['clockwise','counter-clockwise'].includes(hit.frontFace as string)) fail('invalid surface front face');
     if (!ancestor(nodeReference(hit.target, tree), tree.scene, tree)) fail('surface hit target must belong to scene');
     const triangles = array(hit.triangles, 'surface hit triangles');
     if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
+    if (hit.lensRanges !== undefined) {
+      const ranges = array(hit.lensRanges, 'surface lens ranges');
+      if (ranges.length !== lensIds.length) fail('surface ranges must cover every lens');
+      unique(ranges.map(value => record(value, 'surface lens range').lensId), 'surface lens ranges');
+      for (const value of ranges) {
+        const range = record(value, 'surface lens range', ['lensId', 'start', 'count']);
+        if (!lensIds.includes(text(range.lensId, 'surface lens')) || !Number.isSafeInteger(range.start) || Number(range.start) < 0 ||
+            !Number.isSafeInteger(range.count) || Number(range.count) < 1 || Number(range.start) + Number(range.count) > triangles.length) fail('invalid surface lens range');
+      }
+    }
     for (const input of triangles) {
       const triangle = array(input, 'surface triangle');
       if (triangle.length !== 3) fail('surface triangle needs three points');

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "klytia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "29e49ef526e07ea7d04fbbe98ea1bf729f93daeb4be7385caf9a7727177ce525"
+    "sha256": "31472d4ed92e696cc2763f4e04d310acde92d471077b6d5186a5897c23fa37d4"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "32e8a509863ce93032e7d97e906d1b7413d1c5db35b9229bee8953d0a8af54f7",
       "bytes": 81574,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "33549c3dae1ff2a714d631eacb066411e0697be77242d998f4b13ba2913c7146",
       "bytes": 8956,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/klytia/klytia-elevation-thumbnail.webp",
           "bytes": 5078,
           "sha256": "896587789bd7edd365d02e722e6eb0464b86b04bcea49bca266f637c49551655",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klytia/klytia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klytia/klytia-elevation-surface@2x.webp",
           "bytes": 270842,
           "sha256": "79302591a5ee7f729df83f4b57d95b3665eaf55bc95d46330acc915bd4c5528b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/klytia/klytia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klytia/klytia-shape-surface@2x.webp",
           "bytes": 223734,
           "sha256": "bbed2fdc91eb568101876af235920e16b3d64fa5c39549b32dd0d10ee72deddd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

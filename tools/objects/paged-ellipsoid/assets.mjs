@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import sharp from "sharp";
 import { readCoraltempAnomaly } from "./sst-anomaly.mjs";
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mjs";
+import { prepareElevationMap, writeElevationLegend } from "./elevation.mjs";
 import { textureTintFactors } from "@layoutit/polycss";
 
 
@@ -27,6 +28,10 @@ if (mode !== 'materials') {
       if (map.scientific.kind === "coraltemp-anomaly") {
         const decoded = await readCoraltempAnomaly(input, map.scientific);
         input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
+      } else if (map.scientific.kind === "gebco-elevation") {
+        const decoded = await preparePagedSurfaceMap({ config, sourceDirectory, map });
+        input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
+        await writeElevationLegend(map.scientific, output(map.scientific.legend.image));
       } else if (map.scientific.kind === "gibs-mur-imagery") {
         input = await verifyPreparedMurImage(sourceDirectory, map.scientific);
         await writeMurLegend(sourceDirectory, output("earth-enso-legend.png"));
@@ -516,6 +521,8 @@ async function prepareInteriorOuterPoles() {
       width,
       height,
       channels: info.channels,
+      config,
+      sourceDirectory,
     });
     const data = prepareObjectLightingMap({
       data: clouded,
@@ -744,6 +751,7 @@ function clamp(value, minimum, maximum) {
 export async function preparePagedSurfaceMap({ config, sourceDirectory, map, kernel = map.scientific ? "nearest" : "lanczos3" }) {
   const width = config.surface.width;
   const height = config.surface.height;
+  if (map.scientific?.kind === "gebco-elevation") return prepareElevationMap({ sourceDirectory, map, width, height });
   const { data, info } = await sharp(Buffer.isBuffer(map.path) ? map.path : resolve(sourceDirectory, map.path))
     .resize(width, height, { fit: "fill", kernel })
     .removeAlpha()

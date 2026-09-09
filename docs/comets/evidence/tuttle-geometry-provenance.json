@@ -1,0 +1,16 @@
+{
+  "method": "Full parameter tessellation versus final reduced geometry; common orthographic CPU snapshot and analytic source vertex normals",
+  "recipe": {
+    "map": "src/planets/comet-8p/source/material/neutral.png",
+    "size": 384,
+    "longitudeDegrees": 90,
+    "latitudeDegrees": 15,
+    "ambient": 0.45,
+    "diffuse": 0.55,
+    "mapSha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba"
+  },
+  "sourceSha256": "5e77878847b22470f97526a424915efd34a6feef44d11482b2104b320c33d12e",
+  "terrainSha256": "9749a761dea21bca4bba864d6e969e8728aea1baff72a18429eb1cd0075e477d",
+  "framingRadiusUnits": 393.1105719166321,
+  "limitations": "This isolates preparation geometry and smooth-normal approximation. It is not a measured terrain, spacecraft photograph, or browser-pixel parity claim."
+}

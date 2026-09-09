@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -424,7 +424,7 @@
       "sha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
       "bytes": 518340175,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -453,7 +453,7 @@
       "sha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
       "bytes": 10207923,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "dsk-mesh",
         "groups": [
@@ -517,7 +517,7 @@
       "sha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
       "bytes": 129613723,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -541,7 +541,7 @@
       "sha256": "34932fc70bafc3534138d4847d5f6eee6e30abf5a7f1d9b6157cef6778ebcfa5",
       "bytes": 13021,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -589,13 +589,13 @@
           "url": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
           "bytes": 1850,
           "sha256": "b1f5ecdd4895028a00197aab2cf9583d37846f0daf3aa171e3f9cfa839c092b5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
           "bytes": 6337990,
           "sha256": "6c043a2fd0389034fb71739fce4d7a0726575b81b3111007e6bbea854a3ce1c2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -629,19 +629,19 @@
           "url": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
           "bytes": 8066,
           "sha256": "eef7b61cc108d1146a560fb5d5b7dded77dcda4e03e29df0342609a5fc431588",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
           "bytes": 10574576,
           "sha256": "90ec8ae36835ca0c5a83d0cf2a83f7182fddf281f4e9a387b73624f9617d1900",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -673,13 +673,13 @@
           "url": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
           "bytes": 460676,
           "sha256": "8cad6dfddbf10543a581ab03a6737292410e7e9821afd1db57ee2fedf339150f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

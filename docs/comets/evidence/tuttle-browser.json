@@ -1,0 +1,557 @@
+{
+  "browser": "152.0.7977.76",
+  "capturedAt": "2026-09-09T05:01:05.655Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "freshInstallation": {
+    "stage": "output/playwright/tuttle/final/fresh-assets-FWhtZR",
+    "installed": 31,
+    "reused": 0,
+    "bytes": 7119056
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "fresh": false,
+      "lightingAccess": "Existing input binding exercised programmatically; current shared shell hides Settings.",
+      "transportedPrepared": {
+        "url": "http://127.0.0.1:53135/_astro/object.BTYggsNC.json",
+        "sha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+      },
+      "surfaceFlight": true,
+      "mobileWheelPreserved": true,
+      "route": "http://127.0.0.1:53135/comet-8p/",
+      "initial": {
+        "leaves": 1000,
+        "atlas": [
+          "url(\"http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-shadow@2x.webp\")"
+        ],
+        "dimensions": [
+          "64px \u00d7 64px"
+        ]
+      },
+      "shadows": [
+        {
+          "filename": "comet-8p-model-shadow@2x.webp",
+          "bytes": 88828,
+          "sha256": "ffce124adaa53d99d05d028788c864b3de8fa1ea2ff77c43ebc66d742cb3ff60"
+        }
+      ],
+      "flood": [
+        {
+          "filename": "comet-8p-model-surface@2x.webp",
+          "bytes": 105472,
+          "sha256": "578704d0981e7648e4ed30581dedab06d2ff32e89f1f751a057dc3fa6b19c0a4"
+        }
+      ],
+      "retained": true,
+      "geometryRetained": true,
+      "scenes": 1,
+      "forbiddenElements": 0,
+      "forbiddenStyles": false,
+      "errors": [],
+      "interactionRequests": [],
+      "cold": {
+        "bodyBytes": 30510850,
+        "headerBytes": 184562,
+        "requests": 688,
+        "includes": "HTML, JavaScript, CSS, prepared JSON, workers, shared shell and scene images, as observed by BrowserContext response events.",
+        "responseCount": 688,
+        "loadedApplicationAndBody": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-directional-sun@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 648,
+            "responseBodySize": 12530,
+            "responseHeadersSize": 268
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-system-point.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 642,
+            "responseBodySize": 96,
+            "responseHeadersSize": 262
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-surface@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 646,
+            "responseBodySize": 105472,
+            "responseHeadersSize": 270
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-thumbnail.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 645,
+            "responseBodySize": 44,
+            "responseHeadersSize": 262
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-lighting.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 638,
+            "responseBodySize": 1050836,
+            "responseHeadersSize": 272
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.DH0aQ98e.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 637,
+            "responseBodySize": 1315871,
+            "responseHeadersSize": 357,
+            "decodedSha256": "8a34bcfb2c17f3e379c5912dfebb70b2731ca112d3079e97779d32caa8626da9"
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/packaged-object-runtime.CZ6KQmmD.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 670,
+            "responseBodySize": 72977,
+            "responseHeadersSize": 356,
+            "decodedSha256": "2e7952b5aab017db74f1937e87351908c734cc4363f35defa9d65a1042b72638"
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/point-field-selection-worker-CMrTEVt-.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 462,
+            "responseBodySize": 0,
+            "responseHeadersSize": 301,
+            "decodedSha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/object.BTYggsNC.json",
+            "status": 200,
+            "type": "fetch",
+            "requestBodySize": 0,
+            "requestHeadersSize": 563,
+            "responseBodySize": 2102861,
+            "responseHeadersSize": 305,
+            "decodedSha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/prepared-object-worker-ByRL5JC0.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 456,
+            "responseBodySize": 0,
+            "responseHeadersSize": 302,
+            "decodedSha256": "1f7431dcc8e7d51ca83cffcd2b995c84edeae0c998ba7ec2c602b003f490d96a"
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-shadow@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 645,
+            "responseBodySize": 88828,
+            "responseHeadersSize": 268
+          }
+        ]
+      },
+      "lightingToggle": {
+        "bodyBytes": 0,
+        "headerBytes": 0,
+        "responseCount": 0,
+        "loadedApplicationAndBody": []
+      },
+      "preparedSha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+    },
+    {
+      "dpr": 2,
+      "fresh": false,
+      "lightingAccess": "Existing input binding exercised programmatically; current shared shell hides Settings.",
+      "transportedPrepared": {
+        "url": "http://127.0.0.1:53135/_astro/object.BTYggsNC.json",
+        "sha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+      },
+      "surfaceFlight": true,
+      "mobileWheelPreserved": true,
+      "route": "http://127.0.0.1:53135/comet-8p/",
+      "initial": {
+        "leaves": 1000,
+        "atlas": [
+          "url(\"http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-shadow@2x.webp\")"
+        ],
+        "dimensions": [
+          "64px \u00d7 64px"
+        ]
+      },
+      "shadows": [
+        {
+          "filename": "comet-8p-model-shadow@2x.webp",
+          "bytes": 88828,
+          "sha256": "ffce124adaa53d99d05d028788c864b3de8fa1ea2ff77c43ebc66d742cb3ff60"
+        }
+      ],
+      "flood": [
+        {
+          "filename": "comet-8p-model-surface@2x.webp",
+          "bytes": 105472,
+          "sha256": "578704d0981e7648e4ed30581dedab06d2ff32e89f1f751a057dc3fa6b19c0a4"
+        }
+      ],
+      "retained": true,
+      "geometryRetained": true,
+      "scenes": 1,
+      "forbiddenElements": 0,
+      "forbiddenStyles": false,
+      "errors": [],
+      "interactionRequests": [],
+      "cold": {
+        "bodyBytes": 30510850,
+        "headerBytes": 184562,
+        "requests": 688,
+        "includes": "HTML, JavaScript, CSS, prepared JSON, workers, shared shell and scene images, as observed by BrowserContext response events.",
+        "responseCount": 688,
+        "loadedApplicationAndBody": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-directional-sun@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 648,
+            "responseBodySize": 12530,
+            "responseHeadersSize": 268
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-system-point.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 642,
+            "responseBodySize": 96,
+            "responseHeadersSize": 262
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-surface@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 646,
+            "responseBodySize": 105472,
+            "responseHeadersSize": 270
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-lighting.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 638,
+            "responseBodySize": 1050836,
+            "responseHeadersSize": 272
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-thumbnail.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 645,
+            "responseBodySize": 44,
+            "responseHeadersSize": 262
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.DH0aQ98e.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 637,
+            "responseBodySize": 1315871,
+            "responseHeadersSize": 357,
+            "decodedSha256": "8a34bcfb2c17f3e379c5912dfebb70b2731ca112d3079e97779d32caa8626da9"
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/point-field-selection-worker-CMrTEVt-.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 462,
+            "responseBodySize": 0,
+            "responseHeadersSize": 301,
+            "decodedSha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/packaged-object-runtime.CZ6KQmmD.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 670,
+            "responseBodySize": 72977,
+            "responseHeadersSize": 356,
+            "decodedSha256": "2e7952b5aab017db74f1937e87351908c734cc4363f35defa9d65a1042b72638"
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/object.BTYggsNC.json",
+            "status": 200,
+            "type": "fetch",
+            "requestBodySize": 0,
+            "requestHeadersSize": 563,
+            "responseBodySize": 2102861,
+            "responseHeadersSize": 305,
+            "decodedSha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+          },
+          {
+            "url": "http://127.0.0.1:53135/_astro/prepared-object-worker-ByRL5JC0.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 456,
+            "responseBodySize": 0,
+            "responseHeadersSize": 302,
+            "decodedSha256": "1f7431dcc8e7d51ca83cffcd2b995c84edeae0c998ba7ec2c602b003f490d96a"
+          },
+          {
+            "url": "http://127.0.0.1:53135/scenes/comet-8p/comet-8p-model-shadow@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 645,
+            "responseBodySize": 88828,
+            "responseHeadersSize": 268
+          }
+        ]
+      },
+      "lightingToggle": {
+        "bodyBytes": 0,
+        "headerBytes": 0,
+        "responseCount": 0,
+        "loadedApplicationAndBody": []
+      },
+      "preparedSha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+    },
+    {
+      "dpr": 1,
+      "fresh": true,
+      "lightingAccess": "Existing input binding exercised programmatically; current shared shell hides Settings.",
+      "transportedPrepared": {
+        "url": "http://127.0.0.1:53300/_astro/object.BTYggsNC.json",
+        "sha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+      },
+      "surfaceFlight": true,
+      "mobileWheelPreserved": true,
+      "route": "http://127.0.0.1:53300/comet-8p/",
+      "initial": {
+        "leaves": 1000,
+        "atlas": [
+          "url(\"http://127.0.0.1:53300/scenes/comet-8p/comet-8p-model-shadow@2x.webp\")"
+        ],
+        "dimensions": [
+          "64px \u00d7 64px"
+        ]
+      },
+      "shadows": [
+        {
+          "filename": "comet-8p-model-shadow@2x.webp",
+          "bytes": 88828,
+          "sha256": "ffce124adaa53d99d05d028788c864b3de8fa1ea2ff77c43ebc66d742cb3ff60"
+        }
+      ],
+      "flood": [
+        {
+          "filename": "comet-8p-model-surface@2x.webp",
+          "bytes": 105472,
+          "sha256": "578704d0981e7648e4ed30581dedab06d2ff32e89f1f751a057dc3fa6b19c0a4"
+        }
+      ],
+      "retained": true,
+      "geometryRetained": true,
+      "scenes": 1,
+      "forbiddenElements": 0,
+      "forbiddenStyles": false,
+      "errors": [],
+      "interactionRequests": [],
+      "cold": {
+        "bodyBytes": 62797744,
+        "headerBytes": 121710,
+        "requests": 688,
+        "includes": "HTML, JavaScript, CSS, prepared JSON, workers, shared shell and scene images, as observed by BrowserContext response events.",
+        "qualification": "Fixture proxy transport; production transfer is measured separately above.",
+        "responseCount": 688,
+        "loadedApplicationAndBody": [
+          {
+            "url": "http://127.0.0.1:53300/scenes/comet-8p/comet-8p-directional-sun@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 648,
+            "responseBodySize": 12530,
+            "responseHeadersSize": 177
+          },
+          {
+            "url": "http://127.0.0.1:53300/scenes/comet-8p/comet-8p-system-point.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 642,
+            "responseBodySize": 96,
+            "responseHeadersSize": 174
+          },
+          {
+            "url": "http://127.0.0.1:53300/scenes/comet-8p/comet-8p-model-surface@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 646,
+            "responseBodySize": 105472,
+            "responseHeadersSize": 178
+          },
+          {
+            "url": "http://127.0.0.1:53300/scenes/comet-8p/comet-8p-model-thumbnail.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 645,
+            "responseBodySize": 44,
+            "responseHeadersSize": 174
+          },
+          {
+            "url": "http://127.0.0.1:53300/scenes/comet-8p/comet-8p-lighting.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 638,
+            "responseBodySize": 1050836,
+            "responseHeadersSize": 179
+          },
+          {
+            "url": "http://127.0.0.1:53300/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.DH0aQ98e.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 637,
+            "responseBodySize": 3903776,
+            "responseHeadersSize": 184,
+            "decodedSha256": "8a34bcfb2c17f3e379c5912dfebb70b2731ca112d3079e97779d32caa8626da9"
+          },
+          {
+            "url": "http://127.0.0.1:53300/_astro/packaged-object-runtime.CZ6KQmmD.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 670,
+            "responseBodySize": 226493,
+            "responseHeadersSize": 183,
+            "decodedSha256": "2e7952b5aab017db74f1937e87351908c734cc4363f35defa9d65a1042b72638"
+          },
+          {
+            "url": "http://127.0.0.1:53300/_astro/point-field-selection-worker-CMrTEVt-.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 462,
+            "responseBodySize": 0,
+            "responseHeadersSize": 181,
+            "decodedSha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
+          },
+          {
+            "url": "http://127.0.0.1:53300/_astro/object.BTYggsNC.json",
+            "status": 200,
+            "type": "fetch",
+            "requestBodySize": 0,
+            "requestHeadersSize": 563,
+            "responseBodySize": 6796731,
+            "responseHeadersSize": 185,
+            "decodedSha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90"
+          },
+          {
+            "url": "http://127.0.0.1:53300/_astro/prepared-object-worker-ByRL5JC0.js",
+            "status": 200,
+            "type": "script",
+            "requestBodySize": 0,
+            "requestHeadersSize": 456,
+            "responseBodySize": 0,
+            "responseHeadersSize": 182,
+            "decodedSha256": "1f7431dcc8e7d51ca83cffcd2b995c84edeae0c998ba7ec2c602b003f490d96a"
+          },
+          {
+            "url": "http://127.0.0.1:53300/scenes/comet-8p/comet-8p-model-shadow@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 645,
+            "responseBodySize": 88828,
+            "responseHeadersSize": 177
+          }
+        ]
+      },
+      "lightingToggle": {
+        "bodyBytes": 105472,
+        "headerBytes": 178,
+        "responseCount": 1,
+        "loadedApplicationAndBody": [
+          {
+            "url": "http://127.0.0.1:53300/scenes/comet-8p/comet-8p-model-surface@2x.webp",
+            "status": 200,
+            "type": "image",
+            "requestBodySize": 0,
+            "requestHeadersSize": 646,
+            "responseBodySize": 105472,
+            "responseHeadersSize": 178
+          }
+        ]
+      },
+      "preparedSha256": "07ff92040b3cade072e288efb44b60dc1ebd2f8c81165f360dffb66102686b90",
+      "freshSourceDirectory": "output/playwright/tuttle/final/fresh-assets-FWhtZR",
+      "freshFilesServed": [
+        "comet-8p-directional-sun@2x.webp",
+        "comet-8p-lighting.webp",
+        "comet-8p-model-shadow@2x.webp",
+        "comet-8p-model-surface@2x.webp",
+        "comet-8p-model-thumbnail.webp",
+        "comet-8p-system-point.webp"
+      ]
+    }
+  ],
+  "schema": "cssearth-tuttle-browser-receipt@1",
+  "codeRevision": "18095d92b0be53f3873cff55f1b39e838f71c473",
+  "rawReport": {
+    "path": "output/playwright/tuttle/final/report.json",
+    "bytes": 636727,
+    "sha256": "bbc9796d19fd8b5fb6ef524ba31c52cf57c21838f09604ef406d239a849e85f7"
+  },
+  "qualification": "Production Chrome captures at DPR 1 and 2, plus DPR 1 with scene assets served from a verified empty-destination R2 restoration. This receipt retains transport totals and exact loaded application/prepared/scene hashes; the full response inventory remains in the hashed raw report.",
+  "screenshots": [
+    {
+      "filename": "tuttle-dpr-1-shadows.png",
+      "bytes": 316597,
+      "sha256": "3f03f2673898ebef9f5dd100c9fc160878c3659deb9ceecc3ef57bbe81fb633a"
+    },
+    {
+      "filename": "tuttle-dpr-2-shadows.png",
+      "bytes": 779132,
+      "sha256": "688385b7cc9d45db6faab6db4fdd5d3d2b195fdd5d8e92a8973e8fdb177fe974"
+    },
+    {
+      "filename": "tuttle-dpr-1-flood.png",
+      "bytes": 325557,
+      "sha256": "95e7a2690b220b7961572f8f6dc9ade807d4276fe851b65776f825326c55d4b6"
+    },
+    {
+      "filename": "tuttle-dpr-1-turned.png",
+      "bytes": 416011,
+      "sha256": "b9c2349b8ce01093d9da824061e3ced9d2ebc11bcbc8610716737edfc741a1d3"
+    },
+    {
+      "filename": "tuttle-dpr-1-mobile.png",
+      "bytes": 80995,
+      "sha256": "949e364954a9f286fad0dca85ed4164139d19a377cce8eee075ab93c2956ff6c"
+    }
+  ]
+}

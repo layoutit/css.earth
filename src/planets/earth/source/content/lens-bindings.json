@@ -23,7 +23,7 @@
       "surfaceUrl": "/scenes/earth/earth-topography.webp",
       "polesUrl": "/scenes/earth/earth-topography-poles.webp",
       "maximumZoom": 4,
-      "qualification": "NASA Blue Marble topography and bathymetry",
+      "qualification": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
       "surfacePagePrefix": "earth-topography"
     },
     {

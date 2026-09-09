@@ -1,0 +1,91 @@
+(node:76708) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START earth/initial-shell
+[conformance] PASS earth/initial-shell (3752ms)
+[conformance] START earth/mobile
+[conformance] PASS earth/mobile (9329ms)
+[conformance] START earth/lens-race
+[conformance] PASS earth/lens-race (11549ms)
+[conformance] START earth/lens-reacquire
+[conformance] PASS earth/lens-reacquire (16577ms)
+[conformance] START earth/lens-rejection
+[conformance] PASS earth/lens-rejection (15433ms)
+[conformance] START earth/lens-destroy
+[conformance] PASS earth/lens-destroy (7970ms)
+{
+  "ok": true,
+  "reports": [
+    {
+      "id": "earth",
+      "viewport": "initial-shell",
+      "speedDisabled": true
+    },
+    {
+      "id": "earth",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "earth",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 5,
+      "stageElements": 72766,
+      "stable": true
+    },
+    {
+      "id": "earth",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "earth",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "earth",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "earth",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "earth",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "earth",
+      "case": "dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "earth",
+      "viewport": "lens-race",
+      "lens": "night-lights",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "earth",
+      "viewport": "lens-reacquire",
+      "lens": "topography"
+    },
+    {
+      "id": "earth",
+      "viewport": "lens-rejection-retry",
+      "lens": "topography"
+    },
+    {
+      "id": "earth",
+      "viewport": "lens-destroy"
+    }
+  ]
+}
