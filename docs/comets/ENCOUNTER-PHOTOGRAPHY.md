@@ -1,5 +1,7 @@
 # Wild 2, Tempel 1 and Hartley 2 encounter photographs
 
+This is the initial release record. For the current expanded mosaics and combined Hartley EPOXI view, see [Surface imagery](SURFACE-IMAGERY.md). The product counts, coverage, captures and delivery receipts below describe that original release.
+
 Five optional datasets add spacecraft photography to the three existing nuclei. Tempel 1 keeps its 2005 and 2011 encounters separate; Hartley 2 offers MRI photographs and the mission team's restored HRI images. Shape geometry, defaults, navigation and the shared shell are unchanged. Dataset rows use instrument names. Each view has a short explanation and two or three facts.
 
 ## Selected observations

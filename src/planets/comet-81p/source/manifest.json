@@ -290,6 +290,57 @@
       "consumers": [
         "encounter-frame-reference"
       ]
+    },
+    {
+      "id": "n2079we02-rr-path",
+      "path": "photography/navcam/n2079we02_rr.fit",
+      "expectedBytes": 13668480,
+      "expectedSha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2079we02-rr-labelPath",
+      "path": "photography/navcam/n2079we02_rr.lbl",
+      "expectedBytes": 18720,
+      "expectedSha256": "74248fbcbc0ae603ea29c950cc8f93ea377084e53da95542da0593870292b984",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
+    },
+    {
+      "id": "n2079we02-rr-controlPath",
+      "path": "photography/navcam/n2079we02_rr.json",
+      "expectedBytes": 8964,
+      "expectedSha256": "803cbfb265ad3020894b642bef466fb3a1acd27bfe400c0ffbcbd984fa45c7cd",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-navcam"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -329,13 +380,13 @@
     {
       "path": "content/object.json",
       "expectedBytes": 4471,
-      "expectedSha256": "529751f9f86467699f64035f2e16e152bdeb756bd4d991e92ce130e3e361bad9",
+      "expectedSha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3058,
-      "expectedSha256": "debd09a94d205af00c766a2f54b2ccf1a971efe8cb401def01d7ed0ef1521d93",
+      "expectedBytes": 3584,
+      "expectedSha256": "b7e63348b416d11f18441036970ff197a6de7c0586b8a97dea9687c9a4b5536f",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -352,8 +403,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5163,
-      "expectedSha256": "84d4bcbc7b331e095f982b385743b14d02c60af4b6809b4648a7d8e5b6af17df",
+      "expectedBytes": 5405,
+      "expectedSha256": "2f790316c36dbf6d0ee62a91326f6dbb68ce9817d3dd96bfc734124ef69067e1",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -412,8 +463,8 @@
     },
     {
       "path": "reference/encounter-photography.md",
-      "expectedBytes": 6211,
-      "expectedSha256": "af3838d3b7fa651b6fd495135b41274ac2d639ddb788f0c42d7adbb2fb5e4c7f",
+      "expectedBytes": 6791,
+      "expectedSha256": "faf264476d6812d2ada22dd05b014cf1efea89c1271b4d3ea35384a679a96e6a",
       "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
     },
     {

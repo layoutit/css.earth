@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "comet-9p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a2faf48353faa81c932578ec3713ebbdbdbbedb03ad443349950828ea2bc3bf4"
+    "sha256": "b25d7e58fb9fe6e218a6b96cf45636f67ec081a5e53a0263e026867330fef6e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b3b5f820b986805ec4301c1f859e03c844dd5840d36e3da86c1bf41e1f351c6f",
+      "sha256": "bea0cfd4dfda09a4706f9e101fe59e47ab1122dcbbcedc28524b8b90273867fd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -85,6 +85,18 @@
                   "path": "photography/deep-impact/iv05070405_9000654_001_r.fit",
                   "labelPath": "photography/deep-impact/iv05070405_9000654_001_r.lbl",
                   "controlPath": "photography/deep-impact/iv05070405_9000654_001_r.json"
+                },
+                {
+                  "id": "iv05070405-9000644-001-r",
+                  "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
+                  "labelPath": "photography/deep-impact/iv05070405_9000644_001_r.lbl",
+                  "controlPath": "photography/deep-impact/iv05070405_9000644_001_r.json"
+                },
+                {
+                  "id": "iv05070405-9000673-001-r",
+                  "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+                  "labelPath": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
+                  "controlPath": "photography/deep-impact/iv05070405_9000673_001_r.json"
                 }
               ],
               "transfer": {
@@ -119,6 +131,12 @@
               "consumer": "photographs-next",
               "frames": [
                 {
+                  "id": "n30033te02-rr",
+                  "path": "photography/next/n30033te02_rr.fit",
+                  "labelPath": "photography/next/n30033te02_rr.lbl",
+                  "controlPath": "photography/next/n30033te02_rr.json"
+                },
+                {
                   "id": "n30039te02-rr",
                   "path": "photography/next/n30039te02_rr.fit",
                   "labelPath": "photography/next/n30039te02_rr.lbl",
@@ -135,6 +153,18 @@
                   "path": "photography/next/n30042te02_rr.fit",
                   "labelPath": "photography/next/n30042te02_rr.lbl",
                   "controlPath": "photography/next/n30042te02_rr.json"
+                },
+                {
+                  "id": "n30045te02-rr",
+                  "path": "photography/next/n30045te02_rr.fit",
+                  "labelPath": "photography/next/n30045te02_rr.lbl",
+                  "controlPath": "photography/next/n30045te02_rr.json"
+                },
+                {
+                  "id": "n30048te02-rr",
+                  "path": "photography/next/n30048te02_rr.fit",
+                  "labelPath": "photography/next/n30048te02_rr.lbl",
+                  "controlPath": "photography/next/n30048te02_rr.json"
                 }
               ],
               "transfer": {
@@ -254,7 +284,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d8ca043dd314ed5fdee08f8d08bf5c94a06a11148f401ae9d9ff1bfc83670e53",
+      "sha256": "371a9b1b35e34b3f31ff17034d78e8c2d1fd677c729567a8d3122a3c106d1c04",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -349,7 +379,7 @@
               "id": "deep-impact",
               "label": "Deep Impact · 2005",
               "description": "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape.",
-              "title": "MRI mosaic",
+              "title": "ITS mosaic",
               "detail": "ITS",
               "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
               "surface": "comet-9p-deep-impact-surface@2x.webp",
@@ -368,7 +398,7 @@
                 {
                   "id": "scale",
                   "label": "Image scale",
-                  "value": "13–34 m/pixel"
+                  "value": "11–34 m/pixel"
                 }
               ],
               "summary": "These views show the surface just before the 2005 impact, with original shadows. The grid marks gaps or uncertain shape."
@@ -396,7 +426,7 @@
                 {
                   "id": "scale",
                   "label": "Image scale",
-                  "value": "12–20 m/pixel"
+                  "value": "12–42 m/pixel"
                 }
               ],
               "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."
@@ -793,6 +823,219 @@
     },
     {
       "kind": "source-input",
+      "id": "iv05070405-9000644-001-r-path",
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "2f9aa28cc08a216e56884e950fc83fcb79f6480e695d0c4dc5e3f9933cfbd087",
+      "bytes": 662400,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405-9000644-001-r-labelPath",
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "454beb14950398f963f0b7db0595cbc259993420296ed81fee65bd79f80a60cb",
+      "bytes": 32880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000644_001_r.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405-9000644-001-r-controlPath",
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "696ffa2a70e8f1eb26b135d786af0789c6b7943f47f68bbaf1a111d63b8c8452",
+      "bytes": 17997,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405-9000673-001-r-path",
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026",
+      "bytes": 662400,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405-9000673-001-r-labelPath",
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "c07fa63ecc2bdb86466e5927419c94a966f5d2defaf79576d735db1b217b9d1c",
+      "bytes": 32880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "iv05070405-9000673-001-r-controlPath",
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1",
+      "bytes": 13379,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n30033te02-rr-path",
+      "path": "photography/next/n30033te02_rr.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "7b6b3ea7dc38f0c00430538caa172037ecfdb8a87aaf3bbd548c71102bd087bc",
+      "bytes": 13665600,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/next/n30033te02_rr.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n30033te02-rr-labelPath",
+      "path": "photography/next/n30033te02_rr.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "99e77ed612f4323d72076ddbf82fde723dd5093f779acd33183eb63c1f2bd97a",
+      "bytes": 17520,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/next/n30033te02_rr.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n30033te02-rr-controlPath",
+      "path": "photography/next/n30033te02_rr.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "ff0de3863638c44954eec125b8ecedf6228d13a127913e575ea11ebf269bbd15",
+      "bytes": 17740,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "n30039te02-rr-path",
       "path": "photography/next/n30039te02_rr.fit",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30039te02_rr.fit",
@@ -1005,6 +1248,148 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "n30045te02-rr-path",
+      "path": "photography/next/n30045te02_rr.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "40012e16420e8a54f1528b8281cc7547a80243ee7693b7ab0684261ff3bba2b4",
+      "bytes": 13665600,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/next/n30045te02_rr.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n30045te02-rr-labelPath",
+      "path": "photography/next/n30045te02_rr.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "73f982e326d08c0aa3b4c0921ad187ec5259187899eab514080534a5536ba408",
+      "bytes": 17520,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/next/n30045te02_rr.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n30045te02-rr-controlPath",
+      "path": "photography/next/n30045te02_rr.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "3c0ce1af03d4a374b68c6cde5ae4fba4f8f9e8182272e8f2baffdd95a88ec781",
+      "bytes": 17370,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n30048te02-rr-path",
+      "path": "photography/next/n30048te02_rr.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "fe0f92dd79880c4e39d646277e06e957844de800b15747e9b92a7685f7e03506",
+      "bytes": 13665600,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/next/n30048te02_rr.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n30048te02-rr-labelPath",
+      "path": "photography/next/n30048te02_rr.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "8bbcfa09263bf4109e3fcb9e44557451ca64a5c6ef4a419b0aca10f860c19aa2",
+      "bytes": 17520,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/next/n30048te02_rr.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n30048te02-rr-controlPath",
+      "path": "photography/next/n30048te02_rr.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "1c07ba7d6547cb8e51d959fb38c6ba9bb3a4b020eb1b8b6020ab4f2d6bac9904",
+      "bytes": 17360,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input.",
       "id": "authored-document:content/object.json",
@@ -1014,7 +1399,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d8ca043dd314ed5fdee08f8d08bf5c94a06a11148f401ae9d9ff1bfc83670e53",
+      "sha256": "371a9b1b35e34b3f31ff17034d78e8c2d1fd677c729567a8d3122a3c106d1c04",
       "bytes": 6943,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1138,19 +1523,25 @@
         "iv05070405-9000654-001-r-path",
         "iv05070405-9000654-001-r-labelPath",
         "iv05070405-9000654-001-r-controlPath",
+        "iv05070405-9000644-001-r-path",
+        "iv05070405-9000644-001-r-labelPath",
+        "iv05070405-9000644-001-r-controlPath",
+        "iv05070405-9000673-001-r-path",
+        "iv05070405-9000673-001-r-labelPath",
+        "iv05070405-9000673-001-r-controlPath",
         "pds-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
-          "bytes": 2082,
-          "sha256": "571737aeceefb34d901670338e6942531e86e7f13f9404092ed966415a2da265",
+          "bytes": 2060,
+          "sha256": "0280ee24095cab24d6c29f9d008a283c31ecbf2509d315d68de1fe7f9c59ec6a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-surface@2x.webp",
-          "bytes": 204092,
-          "sha256": "0e9547d2147e9167e3b3eb4adc9c9ec719330135d532c5e429a9830d5532a49e",
+          "bytes": 214818,
+          "sha256": "3ed43aaef482ff3291a74958f475ca722a23fedb459c4ea097b2314641c6046b",
           "verification": "bytes-verified"
         }
       ],
@@ -1176,6 +1567,9 @@
         "kind": "surfaceObservations"
       },
       "inputs": [
+        "n30033te02-rr-path",
+        "n30033te02-rr-labelPath",
+        "n30033te02-rr-controlPath",
         "n30039te02-rr-path",
         "n30039te02-rr-labelPath",
         "n30039te02-rr-controlPath",
@@ -1185,19 +1579,25 @@
         "n30042te02-rr-path",
         "n30042te02-rr-labelPath",
         "n30042te02-rr-controlPath",
+        "n30045te02-rr-path",
+        "n30045te02-rr-labelPath",
+        "n30045te02-rr-controlPath",
+        "n30048te02-rr-path",
+        "n30048te02-rr-labelPath",
+        "n30048te02-rr-controlPath",
         "pds-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
-          "bytes": 1868,
-          "sha256": "e155cc25157cc119909ea6a28530307d7144793d35671dc7c5021db97f656464",
+          "bytes": 1774,
+          "sha256": "e81c2984489f500ab115586c381085bdc0e434c40fb85f21e9270448b582240f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-9p/comet-9p-next-surface@2x.webp",
-          "bytes": 318852,
-          "sha256": "f3b511dde8b480e4cddcb709858cc0dd65e370c0c784f643b3de7f7e39796718",
+          "bytes": 327034,
+          "sha256": "60d00addee9e0a6182f0af07cb8704a31088271fea55454d031df8cb757b5d26",
           "verification": "bytes-verified"
         }
       ],
@@ -1270,8 +1670,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/deep-impact.webp",
-          "bytes": 11816,
-          "sha256": "d84c24805daf3b3adc32180320503cf1f17c9175b0eb0f044936a921bfbe9326",
+          "bytes": 12412,
+          "sha256": "b766f60813a8c39ba273ce85eabf3fcfa51ad8a8c81d58d68708c246319dc8e1",
           "verification": "bytes-verified"
         }
       ]
@@ -1294,8 +1694,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/next.webp",
-          "bytes": 19024,
-          "sha256": "7d6d54c63ffbc2625fc514a123b27d49c30151cf62235971c5e7b634561e72dd",
+          "bytes": 19554,
+          "sha256": "3081b480818487c3a15c58c12528ede23b170f4c874cc38063ffb180450741f3",
           "verification": "bytes-verified"
         }
       ]

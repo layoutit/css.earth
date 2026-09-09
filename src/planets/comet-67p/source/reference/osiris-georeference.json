@@ -8,7 +8,11 @@
     "osiris-20140806-0244-geo",
     "osiris-20140806-0244-quality",
     "osiris-20140806-0520-geo",
-    "osiris-20140806-0520-quality"
+    "osiris-20140806-0520-quality",
+    "n20140913-200612-path",
+    "n20140913-200612-qualityPath",
+    "n20140920-133916-path",
+    "n20140920-133916-qualityPath"
   ],
   "frame": "Corrected GEO XYZ are in the 67P body frame used by the SHAP7 product; projective camera fitted from their pixel correspondences, checked against held-out pixels and the RMOC shape.",
   "quality": {
@@ -44,7 +48,7 @@
     }
   ],
   "limits": [
-    "Four single-band observations within 9 hours 36 minutes; no color inference, extrapolation or backside fill.",
+    "Six orange-filter observations from August and September 2014; a visual composite across changing illumination, not simultaneous color or albedo. No extrapolation or backside fill.",
     "RMOC and SHAP7 are distinct models; all sample correspondences are explicitly bounded.",
     "Residual photographed cast shadows and scattering effects remain after disk normalization.",
     "Positive, zero and negative finite radiance are retained when validity/geometry/photometry permit."
@@ -68,6 +72,16 @@
     {
       "id": "aug06-0520",
       "startTime": "2014-08-06T05:20:22.894",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "n20140913-200612",
+      "startTime": "2014-09-13T20:07:21.805",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "n20140920-133916",
+      "startTime": "2014-09-20T13:40:25.993",
       "filter": "FFP-Vis_Orange"
     }
   ],

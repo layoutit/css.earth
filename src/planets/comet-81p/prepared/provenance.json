@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "49694334938f00c033b3bb64899d5917284297828194026c73f915df53adf1e7"
+    "sha256": "f88e4a49d5324c4750f0e53963f519acc0418e84626b6e0961b7073e89fac7ec"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "84d4bcbc7b331e095f982b385743b14d02c60af4b6809b4648a7d8e5b6af17df",
+      "sha256": "2f790316c36dbf6d0ee62a91326f6dbb68ce9817d3dd96bfc734124ef69067e1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,6 +72,12 @@
                   "path": "photography/navcam/n2077we02_rr.fit",
                   "labelPath": "photography/navcam/n2077we02_rr.lbl",
                   "controlPath": "photography/navcam/n2077we02_rr.json"
+                },
+                {
+                  "id": "n2079we02-rr",
+                  "path": "photography/navcam/n2079we02_rr.fit",
+                  "labelPath": "photography/navcam/n2079we02_rr.lbl",
+                  "controlPath": "photography/navcam/n2079we02_rr.json"
                 }
               ],
               "transfer": {
@@ -193,7 +199,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "529751f9f86467699f64035f2e16e152bdeb756bd4d991e92ce130e3e361bad9",
+      "sha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -278,7 +284,7 @@
                 {
                   "id": "scale",
                   "label": "Image scale",
-                  "value": "14–19 m/pixel"
+                  "value": "14–25 m/pixel"
                 }
               ],
               "summary": "Only the measured side is photographed. Original shadows and some seams remain; the gray grid marks gaps in the coverage."
@@ -617,6 +623,77 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "n2079we02-rr-path",
+      "path": "photography/navcam/n2079we02_rr.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34",
+      "bytes": 13668480,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/navcam/n2079we02_rr.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n2079we02-rr-labelPath",
+      "path": "photography/navcam/n2079we02_rr.lbl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "74248fbcbc0ae603ea29c950cc8f93ea377084e53da95542da0593870292b984",
+      "bytes": 18720,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "photography/navcam/n2079we02_rr.lbl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2079we02_rr.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n2079we02-rr-controlPath",
+      "path": "photography/navcam/n2079we02_rr.json",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "sha256": "803cbfb265ad3020894b642bef466fb3a1acd27bfe400c0ffbcbd984fa45c7cd",
+      "bytes": 8964,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Wild 2 source evidence or authored preparation input.",
       "id": "authored-document:content/object.json",
@@ -626,7 +703,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "529751f9f86467699f64035f2e16e152bdeb756bd4d991e92ce130e3e361bad9",
+      "sha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0",
       "bytes": 4471,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -707,19 +784,22 @@
         "n2077we02-rr-path",
         "n2077we02-rr-labelPath",
         "n2077we02-rr-controlPath",
+        "n2079we02-rr-path",
+        "n2079we02-rr-labelPath",
+        "n2079we02-rr-controlPath",
         "pds-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/comet-81p/comet-81p-navcam-thumbnail.webp",
-          "bytes": 2134,
-          "sha256": "df05f8efad4588a087f4ec1f77de0227ccb68db90550a52927476235a9a7c7fa",
+          "bytes": 2120,
+          "sha256": "64733abb289cee4aad02f6e27f17cbf15faafad8891bafc92843f6fdb4f35534",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-81p/comet-81p-navcam-surface@2x.webp",
-          "bytes": 300492,
-          "sha256": "9e1527bc59aaf53eb8d57fc60d525251ce70e8f034a1b30bade23ab74404117d",
+          "bytes": 298840,
+          "sha256": "a2165e55f26c2bbe2df7a6d9641191991b97014f5c95bcf7cdba4f0189d1bbe4",
           "verification": "bytes-verified"
         }
       ],
@@ -768,8 +848,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/navcam.webp",
-          "bytes": 13782,
-          "sha256": "8b03d0ae16418554c596ea0b74a12bc19e59d989e3f97e1ee92fb6cbf1d9505b",
+          "bytes": 13486,
+          "sha256": "3a69304cac05618b281eda9841cb29ecdb770682db23bde986a714a71f0a546f",
           "verification": "bytes-verified"
         }
       ]

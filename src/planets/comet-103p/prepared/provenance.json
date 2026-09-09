@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "comet-103p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e2d86b6227a77908de40b1c376428454f98930f5c6d39ed5e1fba3b3d4eb07ce"
+    "sha256": "aca0ba2de32e8c80e7847ad07121d54356a6f49d2dc4d024341c7884949a1e69"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bfd911ebda82fa674137698dd8e6d2bdf1a3063c8e0f339f5b1bdd3babae5a06",
+      "sha256": "269899c03e5c22546fc5940bf2ed5dbb201187997375b5e2563c185f51e0535e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -85,39 +85,7 @@
                   "path": "photography/mri/mv10110414_6000003_001_r.fit",
                   "labelPath": "photography/mri/mv10110414_6000003_001_r.lbl",
                   "controlPath": "photography/mri/mv10110414_6000003_001_r.json"
-                }
-              ],
-              "transfer": {
-                "maximumSourceDistanceMeters": 20,
-                "maximumSeparationMeters": 50,
-                "maximumEmissionDegrees": 75,
-                "visibilityToleranceMeters": 0.5
-              },
-              "photometry": {
-                "model": "observed",
-                "maximumGain": 1
-              },
-              "selection": "finest-resolution",
-              "levelMatching": {
-                "samplesPerTriangle": 32,
-                "minimumPairs": 64,
-                "maximumLogMad": 0.3,
-                "maximumGain": 1.5
-              },
-              "displayPercentiles": [
-                1,
-                99.5
-              ],
-              "metadata": {
-                "label": "EPOXI photographs",
-                "coverage": "Three EPOXI photographs show Hartley’s smooth waist and rougher lobes. They retain the original shadows. The gray grid marks areas without usable photographs or sufficiently constrained shape."
-              }
-            },
-            {
-              "id": "hri",
-              "format": "encounter-fits",
-              "consumer": "photographs-hri",
-              "frames": [
+                },
                 {
                   "id": "hv10110413-5004004-001-d050",
                   "path": "photography/hri/hv10110413_5004004_001_d050.fit",
@@ -153,8 +121,8 @@
                 99.5
               ],
               "metadata": {
-                "label": "Restored HRI photographs",
-                "coverage": "These earlier close-ups were restored by the mission team to reduce camera blur. Restoration can add grain and ringing around sharp edges. Original shadows remain; the gray grid marks gaps."
+                "label": "EPOXI photographs",
+                "coverage": "MRI and restored HRI photographs from the EPOXI flyby are combined on the nucleus. HRI supplies finer image sampling, with MRI extending the coverage. Original shadows remain; the gray grid marks gaps or poorly constrained shape."
               }
             }
           ]
@@ -248,7 +216,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "643a2d40fdcd6384ed77d1d113b63e32e954ec0068415c422e3dccdb369af818",
+      "sha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -281,8 +249,7 @@
           "labels": {
             "model": "Shape model",
             "constraints": "Source constraints",
-            "mri": "EPOXI photographs",
-            "hri": "Restored HRI photographs"
+            "mri": "EPOXI photographs"
           },
           "controls": [
             {
@@ -342,9 +309,9 @@
             {
               "id": "mri",
               "label": "EPOXI photographs",
-              "description": "EPOXI photographed Hartley 2 during its 2010 flyby. The smooth waist contrasts with the rough lobes. Original shadows remain; the gray grid marks gaps or poorly constrained shape.",
-              "title": "MRI mosaic",
-              "detail": "MRI",
+              "description": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
+              "title": "EPOXI mosaic",
+              "detail": "EPOXI",
               "thumbnail": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
               "surface": "comet-103p-mri-surface@2x.webp",
               "poles": "comet-103p-mri-poles@2x.webp",
@@ -361,44 +328,11 @@
                 },
                 {
                   "id": "scale",
-                  "label": "Image scale",
-                  "value": "7–8 m/pixel"
+                  "label": "Image sampling",
+                  "value": "3.9–8 m/pixel"
                 }
               ],
-              "summary": "A smooth waist separates two rough lobes in the 2010 flyby images. Shadows remain; the grid marks gaps or uncertain shape."
-            },
-            {
-              "id": "hri",
-              "label": "Restored HRI photographs",
-              "description": "The mission team restored these HRI images to reduce optical blur. Some grain and ringing remain. Original shadows are preserved; the gray grid marks gaps or poorly constrained shape.",
-              "title": "HRI restored images",
-              "detail": "HRI",
-              "thumbnail": "/scenes/comet-103p/comet-103p-hri-thumbnail.webp",
-              "surface": "comet-103p-hri-surface@2x.webp",
-              "poles": "comet-103p-hri-poles@2x.webp",
-              "source": {
-                "id": "hv10110413-5004004-001-d050-path",
-                "path": "../manifest.json",
-                "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
-              },
-              "facts": [
-                {
-                  "id": "observed",
-                  "label": "Observed",
-                  "value": "4 Nov 2010"
-                },
-                {
-                  "id": "scale",
-                  "label": "Image scale",
-                  "value": "3.9–4.5 m/pixel"
-                },
-                {
-                  "id": "restoration",
-                  "label": "Restoration",
-                  "value": "50 iterations"
-                }
-              ],
-              "summary": "Image restoration reduces optical blur but leaves grain and ringing. Shadows remain; the grid marks gaps or uncertain shape."
+              "summary": "MRI views and restored HRI close-ups show the smooth waist and rough lobes. The photographs retain their shadows; the grid marks gaps or uncertain shape."
             }
           ]
         },
@@ -942,8 +876,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "643a2d40fdcd6384ed77d1d113b63e32e954ec0068415c422e3dccdb369af818",
-      "bytes": 7073,
+      "sha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551",
+      "bytes": 5822,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1045,7 +979,7 @@
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "EPOXI photographed Hartley 2 during its 2010 flyby. The smooth waist contrasts with the rough lobes. Original shadows remain; the gray grid marks gaps or poorly constrained shape."
+        "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape."
       ],
       "lensIds": [
         "mri"
@@ -1066,44 +1000,6 @@
         "mv10110414-6000003-001-r-path",
         "mv10110414-6000003-001-r-labelPath",
         "mv10110414-6000003-001-r-controlPath",
-        "pds-shape"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
-          "bytes": 1052,
-          "sha256": "da9e15abaddc6c9200db297233875d681ae531f654a95281eca51df758ebe5b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/comet-103p/comet-103p-mri-surface@2x.webp",
-          "bytes": 240742,
-          "sha256": "101641273ee7bad10daed52e93ad679f56c44ae7d10dc730d2a7e26981bdce4b",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "hri",
-      "label": "Restored HRI photographs",
-      "recipe": "terrestrial",
-      "selector": "/raster/surfaceObservations/1",
-      "parents": [],
-      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The mission team restored these HRI images to reduce optical blur. Some grain and ringing remain. Original shadows are preserved; the gray grid marks gaps or poorly constrained shape."
-      ],
-      "lensIds": [
-        "hri"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "kind": "surfaceObservations"
-      },
-      "inputs": [
         "hv10110413-5004004-001-d050-path",
         "hv10110413-5004004-001-d050-labelPath",
         "hv10110413-5004004-001-d050-controlPath",
@@ -1114,15 +1010,15 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/comet-103p/comet-103p-hri-thumbnail.webp",
-          "bytes": 1124,
-          "sha256": "b25d8169953fc3d4dceef7194cf71fc60be8ae527fa88451df71723dce311001",
+          "url": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
+          "bytes": 1024,
+          "sha256": "43a91452476aec6954c268cb26ba3d17b2e2eae12e7175267be4225e3d917bed",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/comet-103p/comet-103p-hri-surface@2x.webp",
-          "bytes": 256838,
-          "sha256": "2790811b2232e55a48e6fb14131d55460cd8abfa7c4b3fd9c18a21fe3e921756",
+          "url": "/scenes/comet-103p/comet-103p-mri-surface@2x.webp",
+          "bytes": 292400,
+          "sha256": "274e35d4e697da3c1d5f794fb50ccda159dcbdaed91f02fbf77a392ffb589c59",
           "verification": "bytes-verified"
         }
       ],
@@ -1195,32 +1091,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/mri.webp",
-          "bytes": 13362,
-          "sha256": "31a4076520d46b16b721ca7815dc72c04101a5c034012a98baa9910290c9eb66",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:hri",
-      "label": "Restored HRI photographs preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/surfaceObservations/1",
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "inputs": [],
-      "parents": [
-        "hri"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/hri.webp",
-          "bytes": 13060,
-          "sha256": "8e536e9c170e9e079b1952f43790112dbd581c586e9839db067cd3c14a12ab52",
+          "bytes": 17430,
+          "sha256": "e624f688c1ae192cb218d452bc63443bc5a0c7d7eecf8851ee45f8315fab6b0d",
           "verification": "bytes-verified"
         }
       ]

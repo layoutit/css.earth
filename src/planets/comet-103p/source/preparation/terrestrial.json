@@ -67,39 +67,7 @@
             "path": "photography/mri/mv10110414_6000003_001_r.fit",
             "labelPath": "photography/mri/mv10110414_6000003_001_r.lbl",
             "controlPath": "photography/mri/mv10110414_6000003_001_r.json"
-          }
-        ],
-        "transfer": {
-          "maximumSourceDistanceMeters": 20,
-          "maximumSeparationMeters": 50,
-          "maximumEmissionDegrees": 75,
-          "visibilityToleranceMeters": 0.5
-        },
-        "photometry": {
-          "model": "observed",
-          "maximumGain": 1
-        },
-        "selection": "finest-resolution",
-        "levelMatching": {
-          "samplesPerTriangle": 32,
-          "minimumPairs": 64,
-          "maximumLogMad": 0.3,
-          "maximumGain": 1.5
-        },
-        "displayPercentiles": [
-          1,
-          99.5
-        ],
-        "metadata": {
-          "label": "EPOXI photographs",
-          "coverage": "Three EPOXI photographs show Hartley\u2019s smooth waist and rougher lobes. They retain the original shadows. The gray grid marks areas without usable photographs or sufficiently constrained shape."
-        }
-      },
-      {
-        "id": "hri",
-        "format": "encounter-fits",
-        "consumer": "photographs-hri",
-        "frames": [
+          },
           {
             "id": "hv10110413-5004004-001-d050",
             "path": "photography/hri/hv10110413_5004004_001_d050.fit",
@@ -135,8 +103,8 @@
           99.5
         ],
         "metadata": {
-          "label": "Restored HRI photographs",
-          "coverage": "These earlier close-ups were restored by the mission team to reduce camera blur. Restoration can add grain and ringing around sharp edges. Original shadows remain; the gray grid marks gaps."
+          "label": "EPOXI photographs",
+          "coverage": "MRI and restored HRI photographs from the EPOXI flyby are combined on the nucleus. HRI supplies finer image sampling, with MRI extending the coverage. Original shadows remain; the gray grid marks gaps or poorly constrained shape."
         }
       }
     ]
