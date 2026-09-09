@@ -10,7 +10,7 @@ Chariklo and Bienor use published global shape constraints. These smooth ellipso
 | Source/package closure | Chariklo verifies 17 source records; Bienor 16. Both prepared transport SHA-256 pins and asset inventories pass existing validators. Shadows and Orbit default off. |
 | Orbit context | Existing JPL Horizons generator and independent vector fixtures at the repository epoch and ±30 days. Maximum epoch error is 0.000002055 km; maximum endpoint error is 820.390 km. The latter qualifies a bounded two-body approximation, not an encounter ephemeris. |
 | Delivery | All 63 content-addressed image assets published, then independently downloaded through the standard setup implementation into an empty directory with one transfer at a time. Zero files reused; all 14,047,134 bytes match manifest sizes and SHA-256 hashes. |
-| Static build | Final shared-context integration builds 410 pages with the existing renderer. Both new body transports and the updated Sun transport match their descriptor SHA-256 pins in the built output. |
+| Static build | Main3bad integration builds 818 pages with performance diagnostics enabled. All408 body transports and their prepared preload lists match the descriptor/page pins in the built output. |
 | Browser | Headless Chrome, 1440×900 CSS pixels, DPR 1 and 2: both body routes pass native triangle, normal-grid, off-default, close-view, optional-shadow and fresh-asset checks. Both names appear in the 289-asteroid category and search; route handoffs keep exactly one scene and camera. |
 | Shared navigation | Both densities preserve visible pixels of all 406 previous markers. The existing marker binding and object serializer refresh 408 transports without presentation recompilation; all non-marker runtime fields are asserted unchanged. Both new records are also present in the Sun's authored world context, with matching manifest and recipe source pins. |
 
@@ -26,11 +26,11 @@ node docs/centaur-population/browser-check.mjs
 CSSEARTH_CHROME_LOG_STDIO=1 node docs/lucy-targets/drag-trace.mjs http://127.0.0.1:4278 2 output/playwright/centaur-population/chariklo-drag chariklo
 ```
 
-The fresh installer needs an empty destination. Browser checks use the coordinated production server at port 4278, one headless browser at a time. Preparation runs one body at a time with a 4 GiB Node heap limit and one image-processing worker.
+The fresh installer needs an empty destination. Browser checks use the coordinated production server at port 4278, one headless browser at a time. Preparation runs one body at a time with a 3 GiB Node heap limit and one image-processing worker.
 
 ## Drag and visual evidence
 
-Chariklo was measured at DPR 2 with Shadows off using the existing three-cycle, 60-step-per-leg Lucy/Saturn-derived drag. All 110,013 stage nodes retain identity, asset banks stay fixed, interaction requests are zero and browser errors are empty. The body has 480 `u` leaves; the rings add 16 image tiles. The shared stage node count has a different scope.
+The retained historical trace, recorded before main3bad, measured Chariklo at DPR 2 with Shadows off using the existing three-cycle, 60-step-per-leg Lucy/Saturn-derived drag. All 110,013 stage nodes retain identity, asset banks stay fixed, interaction requests are zero and browser errors are empty. The body has 480 `u` leaves; the rings add 16 image tiles. The shared stage node count has a different scope.
 
 | Metric | Result |
 | --- | --- |
@@ -47,3 +47,5 @@ This is one recorded local workload, not a physical-device or every-pose perform
 [Chariklo rotated toward edge-on](evidence/chariklo-rotated.png) · [Chariklo optional Shadows on](evidence/chariklo-shadows.png) · [Bienor close view](evidence/bienor-close.png)
 
 Main hides the Settings action. Optional shadows were exercised through its existing bound checkbox change event; a visible Settings-button workflow is not claimed. The prepared ring image has fixed schematic opacity; it does not calculate illumination, scattering or ring cast shadows. No source imagery or unresolved terrain is fabricated.
+
+The current main3bad browser pass rechecked both bodies at DPR1/2, default/close views, optional Shadows and shared category/search/handoff. The trace was not repeated because body geometry and image banks are unchanged; its performance numbers describe its recorded earlier build.
