@@ -8,6 +8,7 @@ import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.mj
 import { textureTintFactors } from "@layoutit/polycss";
 import { cutInteriorPoles } from "./interior-poles.mjs";
 import { readMantleTomography, tomographyLegend } from "./tomography.mjs";
+import { applyDisplayGamma } from "./display-tone.mjs";
 
 
 export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all' }) {
@@ -49,13 +50,13 @@ if (mode !== 'materials') {
       } else throw new TypeError("Unknown scientific surface source");
     }
     inputs.set(map.name, input);
-    if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,kernel:map.scientific?"nearest":undefined,webp:map.webp});
+    if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,kernel:map.scientific?"nearest":undefined,webp:map.webp});
   }
   if (mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
   else if (mode !== 'maps') await prepareInteriorAssets();
   for (const map of config.surface.maps) {
     let input = inputs.get(map.name);
-    if (map.compositeClouds) {
+    if (map.compositeClouds || map.displayGamma !== undefined) {
       const preview = await preparePagedSurfaceMap({ config: { ...config, surface: { ...config.surface, width: 2048, height: 1024 } }, sourceDirectory, map });
       input = await sharp(preview.data, { raw: preview.info }).png().toBuffer();
     }
@@ -65,10 +66,10 @@ if (mode !== 'materials') {
 if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps') await prepareMaterialBanks();
 return { assets: [...produced].sort() };
 async function prepareMap(input, name, {
-  compositeClouds = false, kernel = "lanczos3", webp = {},
+  compositeClouds = false, displayGamma, kernel = "lanczos3", webp = {},
 } = {}) {
   const { data: preparedData, info } = await preparePagedSurfaceMap({
-    config, sourceDirectory, map: { path: input, compositeClouds }, kernel,
+    config, sourceDirectory, map: { path: input, compositeClouds, displayGamma }, kernel,
   });
   const { width, height } = info;
   await writeSphereAssets({
@@ -549,6 +550,7 @@ async function prepareInteriorOuterPoles() {
       .removeAlpha()
       .raw()
       .toBuffer({ resolveWithObject: true });
+    applyDisplayGamma(base, config.surface.maps[0].displayGamma);
     const clouded = await prepareCloudComposite(base, {
       width,
       height,
@@ -775,6 +777,7 @@ export async function preparePagedSurfaceMap({ config, sourceDirectory, map, ker
     .removeAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
+  applyDisplayGamma(data, map.displayGamma);
   const preparedData = map.compositeClouds
     ? await prepareCloudComposite(data, {
       width,

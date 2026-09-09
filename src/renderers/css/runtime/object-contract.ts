@@ -1,5 +1,4 @@
 import { PLANET_SPEED_STATES } from '../rendering/planet-feature-controls.js';
-import type { ZoomLensSelection } from './zoom-lens-selection.js';
 
 export const OBJECT_RUNTIME_SCHEMA = 'cssearth-object-runtime@4';
 
@@ -18,7 +17,7 @@ export interface CycleControl {
 }
 export type SettingControl = ToggleControl | CycleControl;
 export interface ObjectControls {
-  readonly lenses: { readonly defaultLens: string; readonly controls: readonly LensControl[]; readonly zoomSelection?: ZoomLensSelection; readonly [key: string]: unknown } | null;
+  readonly lenses: { readonly defaultLens: string; readonly controls: readonly LensControl[]; readonly [key: string]: unknown } | null;
   readonly settings: { readonly controls: readonly SettingControl[]; readonly [key: string]: unknown } | null;
 }
 export type ObjectAction = { readonly kind: 'lens'; readonly id: string }

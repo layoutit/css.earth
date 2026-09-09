@@ -100,7 +100,8 @@
         "path": "blue-marble-july.jpg",
         "name": "earth-surface",
         "compositeClouds": false,
-        "thumbnail": "earth-lens-normal.webp"
+        "thumbnail": "earth-lens-normal.webp",
+        "displayGamma": 1.25
       },
       {
         "path": "blue-marble-july.jpg",
@@ -112,7 +113,8 @@
           "latitude": -40,
           "spanDegrees": 50
         },
-        "primarySource": "blue-marble-clouds.tif"
+        "primarySource": "blue-marble-clouds.tif",
+        "displayGamma": 1.25
       },
       {
         "path": "science/gebco-2026/latitude-00.dods.gz",
@@ -393,12 +395,7 @@
           "effort": 6
         }
       }
-    ],
-    "blendPair": {
-      "baseLens": "normal",
-      "overlayLens": "clouds",
-      "durationMilliseconds": 280
-    }
+    ]
   },
   "camera": {
     "cameraModel": "accumulated-matrix3d",

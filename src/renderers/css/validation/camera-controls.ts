@@ -12,12 +12,6 @@ export function requireControls(value: unknown): asserts value is ObjectControls
     });
     unique(ids, 'lenses');
     if (!ids.includes(text(lenses.defaultLens, 'default lens'))) fail('default lens must be declared');
-    if (lenses.zoomSelection !== undefined) {
-      const policy = record(lenses.zoomSelection, 'zoom lens selection', ['nearLens', 'farLens', 'farBelowRatio', 'nearAboveRatio']);
-      const near = text(policy.nearLens, 'near lens'), far = text(policy.farLens, 'far lens');
-      if (near === far || !ids.includes(near) || !ids.includes(far)) fail('zoom selection must name two declared lenses');
-      if (!(positive(policy.farBelowRatio, 'far zoom ratio') < positive(policy.nearAboveRatio, 'near zoom ratio'))) fail('zoom selection thresholds must have a gap');
-    }
   }
   if (controls.settings !== null) {
     const settings = record(controls.settings, 'settings'), names: string[] = [];

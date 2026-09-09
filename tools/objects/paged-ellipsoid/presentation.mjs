@@ -8,11 +8,6 @@ import { surfaceBankInventory } from "./surface-banks.mjs";
 export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, city, noise, controls }) {
  const cameraPlan=config.camera;
   const banks=surfaceBankInventory(plan,lenses,config.publicBase);
-  const blend=config.surface.blendPair;
-  const baseLens=blend&&lenses.controls.find(lens=>lens.id===blend.baseLens);
-  const overlayLens=blend&&lenses.controls.find(lens=>lens.id===blend.overlayLens);
-  if(blend&&(!baseLens||!overlayLens||baseLens===overlayLens||baseLens.view==='interior'||overlayLens.view==='interior'||
-    !Number.isFinite(blend.durationMilliseconds)||blend.durationMilliseconds<=0))throw new TypeError('Invalid prepared surface blend pair.');
   const bankId=(lens,shadows=false)=>lens.view==="interior"&&shadows?`${lens.id}-lit`:lens.surfaceBankId??lens.id;
   const pageKeys=(lens,shadows=false)=>banks.find(bank=>bank.id===bankId(lens,shadows)).urls.map((_,i)=>`page:${bankId(lens,shadows)}:${i}`);
   const interiorUrls=[...new Set([
@@ -27,7 +22,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     return [lens.id,interiorUrls.map((url,i)=>({key:`interior:${lens.id}:${i}`,url:overrides[url]??url,pool:'mounted'}))];
   }));
   const celestial=preparedSunResources(sun,"mounted");
-  const entries=[...celestial,...banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:blend&&bank.id===bankId(overlayLens)?"surface-blend":"pages"}))),
+  const entries=[...celestial,...banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"}))),
     ...lenses.controls.flatMap(lens=>lens.view==="interior"?
       [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
         {key:`poles:${lens.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
@@ -47,7 +42,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);
   const pages=plan.body.assets.surface.urls.length;
   const writePages=(node,urls)=>{for(let i=0;i<pages;i++)node.style.setProperty(`--${config.namespace}-surface-page-${i}`,urls.length?`url("${urls[i]}")`:"none");};
-  function bands(parent,records,className,polarClass,marker,urls,poles,overlay=false) {
+  function bands(parent,records,className,polarClass,marker,urls,poles) {
     const grouped=new Map(),surface=[],polar=[];
     for(const band of records) {
       if(!band.leaves.length)continue;
@@ -56,25 +51,13 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       if(!carrier) {
         carrier=b.mesh(isPolar?`${className} ${polarClass}`:className,`${plan[config.sceneBodyKey].meshTransform};animation-duration:${band.visualRotationSeconds}s`);
         grouped.set(key,carrier);(isPolar?polar:surface).push(carrier);b.append(parent,carrier);
-        if(isPolar)carrier.style.setProperty(`--${config.namespace}-poles-texture`,poles?`url("${poles}")`:"none");else writePages(carrier,urls);
+        if(isPolar)carrier.style.setProperty(`--${config.namespace}-poles-texture`,`url("${poles}")`);else writePages(carrier,urls);
       }
-      for(const leaf of band.leaves) {
-        const node=b.leaf(leaf);
-        if(overlay) {
-          node.style.transform+=' translateZ(0.01px)';
-          node.style.opacity='var(--surface-blend-opacity,0)';
-          node.style.transition='opacity var(--surface-blend-duration,0ms) ease-out';
-        }
-        b.append(carrier,node);
-      }
+      for(const leaf of band.leaves)b.append(carrier,b.leaf(leaf));
     }
     return {surface,polar};
   }
   const body=bands(system,plan.body.bands,`${config.namespace}-body`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,plan.body.assets.surface.urls,canonicalPreparedAsset(plan.body.assets.poles));
-  // Both layers are prepared once. Only leaf opacity changes; applying opacity
-  // to their 3D carrier would flatten the globe. The tiny prepared plane offset
-  // keeps the coincident textures in a stable paint order.
-  const overlay=blend?bands(system,plan.body.bands,`${config.namespace}-body polycss-dataset-overlay`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,[],"",true):null;
   const cutaway=b.mesh(`${config.namespace}-cutaway`);
   b.append(system,cutaway);
   const interior=bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],canonicalPreparedAsset(plan.interior.outerAssets.poles));
@@ -112,23 +95,13 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       frameAttribute:null,modeAttribute:null,quoted:true};
   });
   const variants=lenses.controls.flatMap(lens=>[false,true].flatMap(shadows=>[false,true].map(atmosphere=>{
-    const blended=blend&&lens.id===blend.overlayLens,inPair=blend&&(blended||lens.id===blend.baseLens);
-    const surfaceLens=blended?baseLens:lens;
-    const isInterior=lens.view==="interior",keys=pageKeys(surfaceLens,shadows),texture=(node,name,resource)=>({kind:"texture",target:index(node),name,resource,quoted:true});
+    const isInterior=lens.view==="interior",keys=pageKeys(lens,shadows),texture=(node,name,resource)=>({kind:"texture",target:index(node),name,resource,quoted:true});
     const interiorBank=interiorBanks.get(lens.id);
     const pageWrites=(carriers,active)=>carriers.flatMap(node=>Array.from({length:pages},(_,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,active?keys[i]:null)));
-    return {when:{lensId:lens.id,shadows,atmosphere},navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,`poles:${bankId(surfaceLens,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[]),...(blended?[...pageKeys(overlayLens),`poles:${bankId(overlayLens)}`]:[])],
+    return {when:{lensId:lens.id,shadows,atmosphere},navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,`poles:${bankId(lens,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
       writes:[...pageWrites(isInterior?interior.surface:body.surface,true),
-        ...(overlay?[
-          {kind:'style',target:-1,name:'--surface-blend-duration',value:inPair?`${blend.durationMilliseconds}ms`:'0ms'},
-          {kind:'style',target:-1,name:'--surface-blend-opacity',value:blended?'1':'0'},
-          ...(blended?[
-            ...overlay.surface.flatMap(node=>pageKeys(overlayLens).map((key,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,key))),
-            ...overlay.polar.map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(overlayLens)}`)),
-          ]:[]),
-        ]:[]),
         ...(isInterior?interiorTextureNodes.map(({node,url})=>texture(node,'background-image',interiorBank[interiorUrls.indexOf(url)].key)):[]),
-        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(surfaceLens,shadows)}`)),
+        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(lens,shadows)}`)),
         ...pageWrites(isInterior?body.surface:interior.surface,false),
         {kind:"attribute",target:-1,name:"data-view",value:isInterior?"interior":null},
         {kind:"attribute",target:-1,name:"data-lens",value:lens.id},
@@ -142,7 +115,6 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     ...(catalog?{destinations:{catalog,defaultLens:"normal",statuses:config.destinations.statuses}}:{}),
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2}),
-      ...(blend?[preparedResourcePool('surface-blend',entries,{retention:'mount',concurrency:2})]:[]),
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
       startup:[...celestial.map(entry=>entry.key),...pageKeys(lenses.controls.find(lens=>lens.id===lenses.defaultLens)),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},

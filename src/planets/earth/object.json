@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c6be025d08fa491440272742bf346b834506e98a4afd1a1c08e103bb52affe0c"
+    "sha256": "55f17dbe9de5ea08e626b0ccb195e2390398c679dd97331c8fa04c1027c5fe43"
   },
   "id": "earth",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "ad88e219d4768236310f30a545eaa15f3aeb268e44744fcddee25edb682fc3d4"
+          "sha256": "a40ce5743610ca243b4f70e9de7c4e86b2bc6832adea8bdb1fd898d6d9f2d5d0"
         },
         {
           "id": "celestial",
@@ -36,7 +36,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "417fcd80dd0884bce9d6a924da8922b0821303a83c490cb7958874c17b324baf"
+          "sha256": "5fff010f61535248c8795144eed23cb29d3eedb4b5e7844e2996f81fb88d0157"
         },
         {
           "id": "lens-bindings",

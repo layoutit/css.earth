@@ -21,9 +21,6 @@ export async function preparePresentationBindings(definition, root, { onDepthRes
     await page.route('**/*', route => route.abort());
     await page.setContent('<main class="planet-stage example-stage"></main>');
     await page.addStyleTag({ content: styles.join('\n') });
-    // Inspect each variant at its settled endpoint. Selection transitions stay
-    // in the prepared styles; they are not perpetual transform-motion tracks.
-    await page.addStyleTag({ content: '* { transition: none !important; }' });
     const prepared = await page.evaluate(definition => {
       const stage = document.querySelector('main');
       stage.dataset.objectId = definition.id;

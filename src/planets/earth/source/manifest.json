@@ -1113,8 +1113,8 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 13742,
-      "expectedSha256": "ad88e219d4768236310f30a545eaa15f3aeb268e44744fcddee25edb682fc3d4",
+      "expectedBytes": 13683,
+      "expectedSha256": "a40ce5743610ca243b4f70e9de7c4e86b2bc6832adea8bdb1fd898d6d9f2d5d0",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -1125,8 +1125,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 18108,
-      "expectedSha256": "417fcd80dd0884bce9d6a924da8922b0821303a83c490cb7958874c17b324baf",
+      "expectedBytes": 17864,
+      "expectedSha256": "5fff010f61535248c8795144eed23cb29d3eedb4b5e7844e2996f81fb88d0157",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {

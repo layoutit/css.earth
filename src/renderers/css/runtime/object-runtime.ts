@@ -25,7 +25,6 @@ import { mountPreparedPresentation } from "../rendering/prepared-presentation.js
 import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
-import { createZoomLensSelector } from './zoom-lens-selection.js';
 
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
   createPlayback: createPreparedPlayback, createSelection: createObjectSelectionRuntime, createControls: createObjectControlBinding, createOrbit: createRetainedCubicSkyOrbit,
@@ -60,8 +59,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
     let revision = 0, selection: ReturnType<typeof createObjectSelectionRuntime> | null = null, controls: ReturnType<typeof createObjectControlBinding> | null = null;
-    const zoomLens = definition.controls.lenses?.zoomSelection
-      ? createZoomLensSelector(definition.controls.lenses.zoomSelection) : null;
     const viewListeners = new Set<() => void>();
     const worldPublication = createWorldNavigationPublicationHub(fatal);
     let latestWorldPublication: OrbitPublication | null = null;
@@ -203,8 +200,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (!navigation) return;
       maximumZoom = navigation.maximumZoom;
       if (navigation.camera) { stopMotion(); alignMotionFrame(); }
-      // A dataset change within the camera limits must not stop an active dolly.
-      if (orbit.state().zoom > maximumZoom) orbit.setState({ zoom: maximumZoom });
+      orbit.setState({ zoom: Math.min(orbit.state().zoom, maximumZoom) });
       if (navigation.camera) orbit.flyToState(navigation.camera, { surfaceTarget: true });
     }
     function fatal(error: unknown) {
@@ -232,15 +228,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         publishWorldSnapshot(publication);
       }
       notifyView();
-      selectLensForZoom();
-    }
-    function selectLensForZoom() {
-      if (!readyPublished || lifetime.disposed || !zoomLens || !orbit || !selection || !currentView) return;
-      const id = zoomLens(currentView.zoom / orbit.currentResponsiveZoom(), selection.state().desired.lensId);
-      if (id !== null) selection.dispatch({ kind: 'lens', id }).catch(error => {
-        // The normal selection transaction retains the old dataset on decode failure.
-        if (!lifetime.disposed) console.error(error);
-      });
     }
     function publishWorldSnapshot(publication: OrbitPublication) {
       if (!worldFrame || orbit === null || publication.focal === undefined ||
@@ -353,7 +340,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls.setReady();
       readyPublished = true;
-      selectLensForZoom();
       if (diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, cubicSky, heliocentric, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, getCurrentView: () => currentView });
       settled = true;
       resolveReady();

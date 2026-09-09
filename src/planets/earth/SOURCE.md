@@ -12,6 +12,15 @@ Earth is prepared from checked, adapter-owned source snapshots. Runtime reads pr
 
 The OpenSpace Earth asset configuration at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516` is checked beside the image sources. It proves the upstream Earth interpretation; the Earth adapter does not fetch OpenSpace assets at runtime.
 
+The July mosaic uses a display-only midtone lift before atlas rasterization:
+each RGB code value becomes `round(255 * (value / 255) ** (1 / 1.25))`.
+Black and white endpoints are unchanged. This is a presentation adjustment,
+not radiometric calibration or recovered albedo. The same adjusted base feeds
+the clear surface, cloud composite, cutaway exterior, thumbnails and minimaps;
+the original source JPEG remains unchanged. Scientific dataset palettes and
+the prepared lighting/atmosphere banks are unaffected. Dataset selection is
+manual and remains selected while zooming.
+
 ## Annual night lights
 
 The [NASA VJ146A4.002 product](https://doi.org/10.5067/VIIRS/VJ146A4.002)

@@ -53,16 +53,6 @@ test('unsupported motion cannot silently become an unowned native animation', as
   await assert.rejects(preparePresentationBindings(definition, root), /linear transform keyframes/);
 }));
 
-test('selection opacity transitions preserve their styles while motion compilation reads settled variants', async () => fixture(async ({ root, definition }) => {
-  definition.tree.nodes[5].style = 'opacity:0;transition:opacity 280ms ease-out';
-  definition.variants.forEach((variant, i) => variant.writes.push({ kind: 'style', target: 5, name: 'opacity', value: String(i) }));
-  const prepared = await preparePresentationBindings(definition, root);
-  assert.equal(prepared.motion.length, 1);
-  assert.equal(prepared.motion[0].target, 2);
-  assert.equal(prepared.tree.nodes[5].style, definition.tree.nodes[5].style);
-  assert.deepEqual(prepared.facing, [{ target: 5, plane: [0, 0, 1, -4], tolerance: 2 ** -23 }]);
-}));
-
 test('repreparation starts from canonical topology and reproduces the final depth transport', async () => {
   const root = fileURLToPath(new URL('../', import.meta.url));
   const source = JSON.parse(await readFile(join(root, 'src/planets/deimos/prepared/runtime.json'), 'utf8'));

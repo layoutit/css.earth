@@ -107,7 +107,6 @@ export interface ObjectContentSource {
   lenses: {
     titleKey: "lenses";
     defaultLens: string;
-    zoomSelection?: import('../../../src/renderers/css/runtime/zoom-lens-selection.js').ZoomLensSelection;
     labels?: Record<string, string>;
     controls: LensRecipe[];
   };
@@ -148,7 +147,6 @@ export interface PreparedObjectContent {
   lenses: {
     title: { label: string; src: string; width: number; height: number };
     defaultLens: string;
-    zoomSelection?: import('../../../src/renderers/css/runtime/zoom-lens-selection.js').ZoomLensSelection;
     controls: Array<Record<string, unknown> & Pick<LensRecipe, "facts">>;
   };
   settings: {
