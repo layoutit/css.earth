@@ -60,8 +60,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "normal",
+    "defaultLens": "osiris",
     "controls": [
+      {
+        "id": "osiris",
+        "label": "OSIRIS reflectance",
+        "detail": "Spacecraft observation",
+        "description": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+        "title": "Rosetta OSIRIS near-opposition OI-filter observation from 5 September 2008, with the published Minnaert k=0.54 approximation. The original image resolves only tens of pixels across Steins; enlarged texels add no detail. This partial grayscale reflectance view is not natural color or a global albedo map. The ordinary grid marks unsupported coverage.",
+        "thumbnail": "/scenes/steins/steins-osiris-thumbnail.webp",
+        "surface": "steins-osiris-surface@2x.webp",
+        "poles": "steins-osiris-surface@2x.webp",
+        "source": {
+          "id": "steins-observations-w20080905t183606461id4df17-img",
+          "path": "../manifest.json"
+        }
+      },
       {
         "id": "normal",
         "label": "Monochrome",
@@ -126,6 +140,12 @@
   },
   "charts": [],
   "resources": [
+    {
+      "label": "Imagery",
+      "role": "surface",
+      "description": "OSIRIS reflectance original archive",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183606461id4df17.img"
+    },
     {
       "label": "Mission",
       "role": "facts",

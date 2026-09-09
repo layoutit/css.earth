@@ -65,8 +65,12 @@ export function writeRecordSections(destination, source, kind) {
     const name = `${symbol}_${group.replaceAll('-', '_').toUpperCase()}`;
     const file = `${base}.${group}.ts`;
     const header = source.slice(0, source.indexOf('import type'));
+    // Keep literal IDs while widening numeric payloads to their public interface.
+    // Large residual arrays otherwise exceed TypeScript's declaration serialization limit.
+    const keys = records.map(record => `'${/^  (\w+):/.exec(record)[1]}'`).join(' | ');
+    const annotation = kind === 'satellites' ? `: Readonly<Record<${keys}, ${type}>>` : '';
     const text = `${header}import type { ${type} } from './${base}.js'\n\n` +
-      `export const ${name} = {\n${records.join('\n')}\n} as const satisfies Record<string, ${type}>\n`;
+      `export const ${name}${annotation} = {\n${records.join('\n')}\n} as const satisfies Record<string, ${type}>\n`;
     if (text.trimEnd().split('\n').length > 600) throw new Error(`Generated section ${file} exceeds 600 lines`);
     writeFileSync(new URL(file, destination), text);
     imports.push(`import { ${name} } from './${file.replace(/\.ts$/, '.js')}'`);

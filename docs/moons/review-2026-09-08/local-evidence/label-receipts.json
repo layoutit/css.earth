@@ -1,0 +1,30 @@
+[
+  {
+    "file": "dimorphos-albedo.xml",
+    "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+    "bytes": 6781,
+    "sha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
+    "status": "read"
+  },
+  {
+    "file": "dimorphos-slope.xml",
+    "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+    "bytes": 7093,
+    "sha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
+    "status": "read"
+  },
+  {
+    "file": "phobos-148m.lbl",
+    "url": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.lbl",
+    "bytes": 932,
+    "sha256": "03e3bec05bcf4e10bb02c68c39773eeef9c7f4126faacf57e794acbf259e9925",
+    "status": "read"
+  },
+  {
+    "file": "deimos-83m.lbl",
+    "url": "https://sbmt.jhuapl.edu/shared-files/files/deimos_g_083m_spc_obj_0000n00000_v002.lbl",
+    "bytes": 1081,
+    "sha256": "472575bf00e8731739bd7aeb9cb0360363db1b427af32b08262089fedd7247a5",
+    "status": "read"
+  }
+]

@@ -320,3 +320,75 @@ requested stop date when the cadence does not divide the interval exactly.
 Use `node tools/generate-satellites.mjs --object=kiviuq,albiorix` from this
 package to regenerate selected records while preserving the other checked
 records. Omitting the selection still runs the complete generator.
+
+### B1: 22 irregular-moon fits and four supported scene states
+
+The 18 added Saturn irregulars and Caliban, Sycorax, Prospero and Setebos use
+five-day geometric ICRF Horizons vectors over JD 2458849.5–2463229.5, with the
+existing precessing ellipse and 128-term cosine residual per Cartesian axis.
+TDB is approximated as TT (difference below 2 ms). Six independent fixtures and
+37 additional epochs per moon are retained beside each body in
+`source/validation/orbit-checks.json`, including source queries and velocity
+residuals. The table reports sampled position residuals; it does not establish a
+continuous error bound, accurate endpoint velocity or extrapolation support.
+All 22 pass the existing 2% radial guard. Per-body position guards are derived
+from the six-fixture maxima with 15% margin, rounded upward.
+
+| Moon | Six-fixture maximum (km) | 37 additional epochs: maximum (km) | Maximum angle (degrees) | Maximum radial residual (%) |
+|---|---:|---:|---:|---:|
+| paaliaq | 14,686.77 | 52,916.80 | 0.25889 | 0.35637 |
+| tarvos | 14,289.47 | 57,180.15 | 0.12165 | 0.13333 |
+| ijiraq | 9,349.31 | 61,773.41 | 0.52502 | 0.19177 |
+| suttungr | 5,537.39 | 24,033.55 | 0.06710 | 0.07458 |
+| mundilfari | 10,946.30 | 50,311.51 | 0.02773 | 0.31897 |
+| skathi | 3,135.10 | 33,070.04 | 0.10459 | 0.00894 |
+| erriapus | 11,239.64 | 51,119.64 | 0.11175 | 0.28063 |
+| thrymr | 6,327.47 | 27,727.05 | 0.05006 | 0.05852 |
+| bebhionn | 35,180.27 | 159,023.06 | 0.25958 | 0.91862 |
+| bergelmir | 4,370.57 | 31,899.75 | 0.08586 | 0.06437 |
+| bestla | 13,244.79 | 64,232.45 | 0.15527 | 0.31731 |
+| fornjot | 9,860.75 | 43,840.12 | 0.08126 | 0.06188 |
+| hati | 10,819.14 | 48,479.58 | 0.10598 | 0.01159 |
+| hyrrokkin | 7,535.37 | 33,350.63 | 0.08212 | 0.02659 |
+| loge | 8,681.36 | 38,198.69 | 0.07713 | 0.06348 |
+| skoll | 7,169.26 | 47,849.22 | 0.11196 | 0.01217 |
+| greip | 9,025.01 | 39,841.08 | 0.09806 | 0.02821 |
+| tarqeq | 4,847.56 | 36,578.97 | 0.05821 | 0.15399 |
+| caliban | 191.01 | 1,303.96 | 0.00539 | 0.01589 |
+| sycorax | 748.30 | 3,898.11 | 0.01032 | 0.02538 |
+| prospero | 716.90 | 5,412.57 | 0.01279 | 0.01137 |
+| setebos | 2,497.94 | 11,280.02 | 0.01348 | 0.05431 |
+
+Hiʻiaka, Menoetius, Squannit and Romulus use `sceneSatelliteStateKm` at exactly
+JD 2461286.5 TT. A request at any other epoch throws. Their position accuracy is
+explicitly unknown (`estimateKm: null`); these snapshots do not extend the fitted
+satellite theory. Source hashes, target/center identities, gravity, frame and
+independent checks are validated by `tools/body-epoch-ephemeris.mjs` before the
+compact math table is generated. Detailed evidence remains in each body package. Generic `dwarfPlanetFrameSpecs()` excludes these scene-only moons, so its propagated time domain remains intact. The scene generator takes no arguments and replaces output only after validating all four bodies.
+
+- Hiʻiaka and Menoetius retain primary-relative JPL tnosat vectors, solution GM,
+  primary heliocentric vectors and independent satellite heliocentric composition.
+  Menoetius uses Patroclus primary 920000617, not binary barycenter 20000617.
+  Hiʻiaka uses the older JPL orbit solution, not a newer interacting model; its
+  quoted 900 km uncertainty belongs to 2025-01-01, not the prepared scene date.
+- Squannit uses the published phase, retrograde pole and quadratic longitude
+  drift. Summed published parameter sensitivities reach about 55 degrees at the
+  scene date; this is not a confidence interval or independent current position
+  validation. Its on-page orbital projection is explicitly approximate.
+- Romulus uses the full published EQJ2000 elements. Independent Miriade sky-plane
+  checks differ by 23–63 mas across six dates and 140.5 km at the prepared scene
+  epoch. The paper's 9.42 mas fit RMS is not the accuracy of this implementation.
+
+Source-specific primary position and velocity are canonical for every prepared
+observer at the scene epoch, including the matching parent conic. Haumea and
+Sylvia body frames are refreshed from those same states. Patroclus is transported
+as a coordinate-only orbit center, with no extra surface or marker. The generic
+propagated frame API retains its existing conics and excludes scene-only moons.
+The fixed-epoch frame bound is the retained snapshot distance, over its single
+supported instant. It is not an estimate of orbital apoapsis.
+
+Patroclus is an astronomy parent entry, with no fabricated standalone scene.
+Its JPL primary osculating conic has ±30-day vector residuals of 7,244.47 / 0 /
+6,180.29 km and an 8,332 km regression guard. This local conic is not a long-term
+binary ephemeris. Regenerate it with `node tools/generate-asteroids.mjs
+--object=patroclus`; selected generation preserves other checked records.

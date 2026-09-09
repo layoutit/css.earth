@@ -25,6 +25,9 @@ const unit = a => a.map(v => v / Math.hypot(...a));
 export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
+  if (profile.backfaceVisible !== undefined && typeof profile.backfaceVisible !== 'boolean') {
+    throw new TypeError('Radial backface visibility must be boolean.');
+  }
   await source.validatePath(profile.path);
   const loader = profile.format === 'pds-planetocentric-plate' ? loadPdsPlanetocentricShape
     : profile.format === 'stl' ? loadStlShape : profile.format === 'pds-radius-table' ? loadPdsRadiusTable
@@ -72,7 +75,7 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   });
   const leaves = plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
-    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }));
+    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
   return { grid, faces, plans, leaves, width, height, tileSize,
     ...(grid.coverage ? { coverage: grid.coverage } : {}),
     ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };

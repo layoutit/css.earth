@@ -1,0 +1,779 @@
+{
+  "schema": "cssearth-b1-representative-visual-review@1",
+  "stage": "post-integration",
+  "updatedUtc": "2026-09-08T22:51:43.267629+00:00",
+  "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "head": "133339e058fea24da729f187d8a6b17f99e61e54",
+  "scope": [
+    "paaliaq",
+    "bestla",
+    "sycorax",
+    "hiiaka",
+    "squannit",
+    "romulus"
+  ],
+  "ok": true,
+  "densityLaneSummaries": [
+    {
+      "path": "output/playwright/moons-b1-qualification/final-jupiter-summary.json",
+      "sha256": "8b30111895dd25598015045d47e8a917c3716d89ee3e74c7eaf9983349433abb",
+      "bytes": 28808
+    },
+    {
+      "path": "output/playwright/moons-b1-qualification/final-saturn-summary.json",
+      "sha256": "bf4caaf9b11407651fc2df1176fd57a4c211711ca296b64537b1d7af6712f84a",
+      "bytes": 27930
+    },
+    {
+      "path": "output/playwright/moons-b1-qualification/squannit-corrected-summary.json",
+      "sha256": "0d6605efcaf1a1653cfd4c557a9c7baaf3fc9674fd45ca75ee9900908020a4cb",
+      "bytes": 3894
+    }
+  ],
+  "frameExtraction": {
+    "tool": "/opt/homebrew/bin/ffmpeg",
+    "version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "argvTemplate": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-ss",
+      "<videoTimestampSeconds>",
+      "-i",
+      "<sourceVideo>",
+      "-frames:v",
+      "1",
+      "<outputPng>"
+    ],
+    "postProcessing": "None; the selected extracted PNG is copied byte-for-byte into the portable documentation path."
+  },
+  "method": "Human visual inspection of exact timestamped frames extracted from successful real-Chrome DPR 2 conformance videos. A selected unmodified extracted frame per body is retained in docs/moons/b1-preparation/visual. The videos are 1200x800 recordings of a DPR 2 browser context. Source/descriptor/prepared/runtime pins describe the frozen local package reviewed alongside the capture.",
+  "limits": [
+    "No native spacecraft or source-renderer pixel parity is claimed.",
+    "The conformance report records canonical requested URLs, not hashes of response bodies. File-to-manifest hashes below verify retained local assets; they are not retrospectively asserted as network-response hashes.",
+    "Source fidelity here means consistency with documented model, scale, attitude and missing-terrain qualifications, not an independent measurement of an unresolved moon."
+  ],
+  "bodies": [
+    {
+      "id": "paaliaq",
+      "reviewed": true,
+      "status": "reviewed-no-visible-blocker",
+      "browser": "152.0.7977.76",
+      "baseUrl": "http://127.0.0.1:4211",
+      "browserCapturedAt": "2026-09-08T22:05:51.698Z",
+      "report": {
+        "path": "output/playwright/moons-b1-final-paaliaq/attempt-2/report.json",
+        "sha256": "e994ae47c961010fce12df0850033a2b9bd2a3eb1513f6a79493132415eed968",
+        "bytes": 4364
+      },
+      "video": {
+        "path": "output/playwright/moons-b1-final-paaliaq/attempt-2/paaliaq-dpr-2.webm",
+        "sha256": "86c561347c1c392d2711acb36cc9a0d28b98b9c46275c0de278a21c5b0b7a757",
+        "bytes": 2154924
+      },
+      "frames": [
+        {
+          "path": "output/playwright/moons-b1-final-visual/paaliaq-86c561347c1c-dpr-2-t4.png",
+          "sha256": "f5ee65e7af0f2b83b9212e50e52c1feab9d3f5761a0783a9d3214c568822bd6f",
+          "bytes": 341933,
+          "videoTimestampSeconds": 4
+        },
+        {
+          "path": "output/playwright/moons-b1-final-visual/paaliaq-86c561347c1c-dpr-2-t18.png",
+          "sha256": "9fad74e9d4d2f6c935f3274c4c1857fb8dc3708d29fb670a27b573a6ad750f52",
+          "bytes": 320355,
+          "videoTimestampSeconds": 18
+        }
+      ],
+      "sourcePackage": [
+        {
+          "path": "src/planets/paaliaq/object.json",
+          "sha256": "b03260efa08ddf20adc7f0f1c9395ee1a456fb8908f890e9bfcd24d737fc688a",
+          "bytes": 3014
+        },
+        {
+          "path": "src/planets/paaliaq/source/manifest.json",
+          "sha256": "cc50a2c00eda7db16c5eb926aef5c64893d0535e81e46986f21005ad0ef88944",
+          "bytes": 8929
+        },
+        {
+          "path": "src/planets/paaliaq/source/measurements.json",
+          "sha256": "70e58c3906bb462bc1bb406d43b3058f21feab3c3dc239f0bcc0f4b7a2860ecd",
+          "bytes": 1980
+        },
+        {
+          "path": "src/planets/paaliaq/source/content/object.json",
+          "sha256": "cff3a289fd391c0529560ae00f4439e0c0fe9346ec704f9f96ae3d36116dfd1f",
+          "bytes": 3863
+        },
+        {
+          "path": "src/planets/paaliaq/prepared/object.json",
+          "sha256": "8c772ca03a5e295a65506dacd8b100e04c1cf7612be9be21d094075a7b669798",
+          "bytes": 6330121
+        },
+        {
+          "path": "src/planets/paaliaq/prepared/runtime-assets.json",
+          "sha256": "b751c9f63e8467b1a18fa265bb9f6c2b6681128162bff672776d3fc2ce95b3e5",
+          "bytes": 5411
+        }
+      ],
+      "canonicalAssets": [
+        {
+          "path": "public/scenes/paaliaq/paaliaq-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836,
+          "url": "/scenes/paaliaq/paaliaq-lighting.webp",
+          "matchesRuntimeManifest": true
+        },
+        {
+          "path": "public/scenes/paaliaq/paaliaq-model-surface@2x.webp",
+          "sha256": "2066e628416884e5ca26af642ea52473b80a408f9438fe4ccb95378421cdb630",
+          "bytes": 57662,
+          "url": "/scenes/paaliaq/paaliaq-model-surface@2x.webp",
+          "matchesRuntimeManifest": true
+        }
+      ],
+      "reviewedUtc": "2026-09-08T22:07:15.878274+00:00",
+      "reviewedVideoSha256": "86c561347c1c392d2711acb36cc9a0d28b98b9c46275c0de278a21c5b0b7a757",
+      "selectedTimestampSeconds": 4,
+      "assessment": "Both inspected frames preserve a nearly round ellipsoid with the small minimum equatorial ratio 1.05, an intact neutral grid and a mildly faceted retained-model limb. The integrated explorer visibly labels the shape approximate and states assumed depth, orientation and phase, the unmapped terrain, and the inability of this ellipsoid to explain the four-peaked light curve. No detached faces, holes, duplicated bodies, incorrect scientific label or text overlap was observed. The small wireframe is orbital context, not a second mounted body.",
+      "findings": [],
+      "portableFrame": {
+        "path": "docs/moons/b1-preparation/visual/paaliaq.png",
+        "sha256": "f5ee65e7af0f2b83b9212e50e52c1feab9d3f5761a0783a9d3214c568822bd6f",
+        "bytes": 341933,
+        "videoTimestampSeconds": 4,
+        "matchesUnmodifiedExtractedBytes": true
+      }
+    },
+    {
+      "id": "bestla",
+      "reviewed": true,
+      "status": "reviewed-no-visible-blocker",
+      "browser": "152.0.7977.76",
+      "baseUrl": "http://127.0.0.1:4211",
+      "browserCapturedAt": "2026-09-08T22:07:05.052Z",
+      "report": {
+        "path": "output/playwright/moons-b1-final-bestla/attempt-1/report.json",
+        "sha256": "5d4046eabb07f69d80c643a4a4a95dc2c3b20e48c872273de26334ae26c31398",
+        "bytes": 4350
+      },
+      "video": {
+        "path": "output/playwright/moons-b1-final-bestla/attempt-1/bestla-dpr-2.webm",
+        "sha256": "54879390424996cc23fcf604be48e6f4357354d57f709eeeb263420f41775a01",
+        "bytes": 2399457
+      },
+      "frames": [
+        {
+          "path": "output/playwright/moons-b1-final-visual/bestla-548793904249-dpr-2-t4.png",
+          "sha256": "d9b21b933851d4c295908e214f575e71268ac3044d7ea2ca71a9dc2bebb42b63",
+          "bytes": 310101,
+          "videoTimestampSeconds": 4
+        },
+        {
+          "path": "output/playwright/moons-b1-final-visual/bestla-548793904249-dpr-2-t18.png",
+          "sha256": "ab8bb7c19c3b8fbf9e8fa6a2bebee81a74553309abf4d87ba8b0ed640f69e01b",
+          "bytes": 320290,
+          "videoTimestampSeconds": 18
+        }
+      ],
+      "sourcePackage": [
+        {
+          "path": "src/planets/bestla/object.json",
+          "sha256": "dbd2dd6d27162734ed934825af859299d1a3d68dbcb403cc473827ffeaba9056",
+          "bytes": 3016
+        },
+        {
+          "path": "src/planets/bestla/source/manifest.json",
+          "sha256": "044d01db2c0c6ebaa9678aa47f3125cde3d0e60c36c2d8f9b0f29fe9dc4f0923",
+          "bytes": 9062
+        },
+        {
+          "path": "src/planets/bestla/source/measurements.json",
+          "sha256": "4310a2cf67fae219958db07186a4c612cd919a39b6d2f788d60f0982839d4e06",
+          "bytes": 2182
+        },
+        {
+          "path": "src/planets/bestla/source/content/object.json",
+          "sha256": "07f038144377e81a63960e73489f4543fbeb98835f22259ef0bca0044922a1cc",
+          "bytes": 4016
+        },
+        {
+          "path": "src/planets/bestla/prepared/object.json",
+          "sha256": "89df57a6133bfd2c5d94f93c1bf3bd2772abfc044682672b14974d588152b559",
+          "bytes": 6332694
+        },
+        {
+          "path": "src/planets/bestla/prepared/runtime-assets.json",
+          "sha256": "b29435f77dcfa2c477ee39b2e55128bf21d4b8641209a325e190db403a5752c3",
+          "bytes": 5379
+        }
+      ],
+      "canonicalAssets": [
+        {
+          "path": "public/scenes/bestla/bestla-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836,
+          "url": "/scenes/bestla/bestla-lighting.webp",
+          "matchesRuntimeManifest": true
+        },
+        {
+          "path": "public/scenes/bestla/bestla-model-surface@2x.webp",
+          "sha256": "502d6d13528fb67f4f07289dcfdec51b3e5f1679ce9c15c6b529afaf9f171f00",
+          "bytes": 56040,
+          "url": "/scenes/bestla/bestla-model-surface@2x.webp",
+          "matchesRuntimeManifest": true
+        }
+      ],
+      "reviewedUtc": "2026-09-08T22:07:59.965779+00:00",
+      "reviewedVideoSha256": "54879390424996cc23fcf604be48e6f4357354d57f709eeeb263420f41775a01",
+      "selectedTimestampSeconds": 4,
+      "assessment": "The full-body frame shows a clearly elongated approximation, distinct from Paaliaq, with continuous grid lines and an intact mildly faceted limb. The close frame changes the viewing direction without introducing extra geometry. The visible introduction preserves the partial south-ecliptic pole constraint, representative axis, arbitrary phase and assumed depth; the lens gives minimum equatorial ratio 1.47 and labels the model approximate. The screenshot cannot independently measure the inertial pole, so that constraint remains supported by the pinned source/preparation record. No visible geometry, scientific-copy or shell-layout blocker was observed.",
+      "findings": [],
+      "portableFrame": {
+        "path": "docs/moons/b1-preparation/visual/bestla.png",
+        "sha256": "d9b21b933851d4c295908e214f575e71268ac3044d7ea2ca71a9dc2bebb42b63",
+        "bytes": 310101,
+        "videoTimestampSeconds": 4,
+        "matchesUnmodifiedExtractedBytes": true
+      }
+    },
+    {
+      "id": "sycorax",
+      "reviewed": true,
+      "status": "reviewed-no-visible-blocker",
+      "browser": "152.0.7977.76",
+      "baseUrl": "http://127.0.0.1:4211",
+      "browserCapturedAt": "2026-09-08T22:07:47.484Z",
+      "report": {
+        "path": "output/playwright/moons-b1-final-sycorax/attempt-1/report.json",
+        "sha256": "336672f787c8d1b003b80752d3c739fa4a9dde05b99256e07d551e74a5393d04",
+        "bytes": 4364
+      },
+      "video": {
+        "path": "output/playwright/moons-b1-final-sycorax/attempt-1/sycorax-dpr-2.webm",
+        "sha256": "c97902af1ccbd0655156effe2cc0d8a4fd5f7c225d1bef6f542233c576241172",
+        "bytes": 2427825
+      },
+      "frames": [
+        {
+          "path": "output/playwright/moons-b1-final-visual/sycorax-c97902af1ccb-dpr-2-t4.png",
+          "sha256": "7bc9a28df0a45717dcbc7d32b50d491d6f91de4f1e6fa2f8c074c250c0ee5cbe",
+          "bytes": 316657,
+          "videoTimestampSeconds": 4
+        },
+        {
+          "path": "output/playwright/moons-b1-final-visual/sycorax-c97902af1ccb-dpr-2-t18.png",
+          "sha256": "7683108353e4e63f8e92c19f9e90440cdcb625292a9243d238b6fea26c44eb52",
+          "bytes": 334494,
+          "videoTimestampSeconds": 18
+        }
+      ],
+      "sourcePackage": [
+        {
+          "path": "src/planets/sycorax/object.json",
+          "sha256": "291a205d45a0a20e1b5f59a6765c976a1049b3ec685480947c86bf97b6f16d37",
+          "bytes": 3018
+        },
+        {
+          "path": "src/planets/sycorax/source/manifest.json",
+          "sha256": "6ecedaedd631fe071735efcf4e36a8d2a20df0441d6b4624c9ba7d417bca631b",
+          "bytes": 7914
+        },
+        {
+          "path": "src/planets/sycorax/source/measurements.json",
+          "sha256": "36ca46dff556301e89e71db1e0c4d530dd397c859b988bb313338a6ce1078d74",
+          "bytes": 2358
+        },
+        {
+          "path": "src/planets/sycorax/source/content/object.json",
+          "sha256": "ae057db89cbf9d1c15d6b60f814e51c4e12b1f8d0091196093174b9499a68c95",
+          "bytes": 3562
+        },
+        {
+          "path": "src/planets/sycorax/prepared/object.json",
+          "sha256": "3c613e3d01d67265e8dc9625878ad6d6289bbaf047ac23eaefa8cd720a8370c0",
+          "bytes": 6323897
+        },
+        {
+          "path": "src/planets/sycorax/prepared/runtime-assets.json",
+          "sha256": "c3d83e07dc688e9dfa25ce5c0e8eb5ec6c548e7aa559fbc54e041089b73a1e35",
+          "bytes": 5411
+        }
+      ],
+      "canonicalAssets": [
+        {
+          "path": "public/scenes/sycorax/sycorax-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836,
+          "url": "/scenes/sycorax/sycorax-lighting.webp",
+          "matchesRuntimeManifest": true
+        },
+        {
+          "path": "public/scenes/sycorax/sycorax-model-surface@2x.webp",
+          "sha256": "2b76092f42976541ccb5f59e2922cf0fa67ca8ff375c1e2bf744d581dd6604d9",
+          "bytes": 56556,
+          "url": "/scenes/sycorax/sycorax-model-surface@2x.webp",
+          "matchesRuntimeManifest": true
+        }
+      ],
+      "reviewedUtc": "2026-09-08T22:08:51.854933+00:00",
+      "reviewedVideoSha256": "c97902af1ccbd0655156effe2cc0d8a4fd5f7c225d1bef6f542233c576241172",
+      "selectedTimestampSeconds": 4,
+      "assessment": "The wider frame preserves a modestly elongated smooth approximation and the close frame shows continuous grid coverage including the pole. Its minimum photometric elongation is visibly less extreme than Bestla. The introduction and lens distinguish thermal-size/rotational constraints from assumed depth and display orientation, with the 157 (+23/−15) km thermophysical diameter and unmapped terrain clearly stated. No visible geometry gap, detached face, duplicated body, source-copy contradiction or shell-layout blocker was observed.",
+      "findings": [],
+      "portableFrame": {
+        "path": "docs/moons/b1-preparation/visual/sycorax.png",
+        "sha256": "7bc9a28df0a45717dcbc7d32b50d491d6f91de4f1e6fa2f8c074c250c0ee5cbe",
+        "bytes": 316657,
+        "videoTimestampSeconds": 4,
+        "matchesUnmodifiedExtractedBytes": true
+      }
+    },
+    {
+      "id": "hiiaka",
+      "reviewed": true,
+      "status": "reviewed-no-visible-blocker",
+      "browser": "152.0.7977.76",
+      "baseUrl": "http://127.0.0.1:4211",
+      "browserCapturedAt": "2026-09-08T22:08:29.000Z",
+      "report": {
+        "path": "output/playwright/moons-b1-final-hiiaka/attempt-1/report.json",
+        "sha256": "ddf43e6f32c192b2163852ac6dd70e9bf66377a3ec920208013d7bb63e0f6642",
+        "bytes": 4350
+      },
+      "video": {
+        "path": "output/playwright/moons-b1-final-hiiaka/attempt-1/hiiaka-dpr-2.webm",
+        "sha256": "5998343421a226e9ac5a20507329e444ca0e77019831b6605248249a7ffe7474",
+        "bytes": 2258668
+      },
+      "frames": [
+        {
+          "path": "output/playwright/moons-b1-final-visual/hiiaka-5998343421a2-dpr-2-t4.png",
+          "sha256": "ca8e4631ff76c30f3703f51392ccc0fbf0734ad44d029e6c54c813a1a7200ab2",
+          "bytes": 288774,
+          "videoTimestampSeconds": 4
+        },
+        {
+          "path": "output/playwright/moons-b1-final-visual/hiiaka-5998343421a2-dpr-2-t18.png",
+          "sha256": "9518081159c63327e3ad5a00bdbc6c850f062379c4d841039b797688a676cf11",
+          "bytes": 323374,
+          "videoTimestampSeconds": 18
+        }
+      ],
+      "sourcePackage": [
+        {
+          "path": "src/planets/hiiaka/object.json",
+          "sha256": "63d95ba59b222a73c2ea0aecc03c9c374178180137e055e4486716d142f82125",
+          "bytes": 3045
+        },
+        {
+          "path": "src/planets/hiiaka/source/manifest.json",
+          "sha256": "9486038379866f9c206b7492ad575f17d0907ec5eec50355b23e00f79ec1476b",
+          "bytes": 8736
+        },
+        {
+          "path": "src/planets/hiiaka/source/measurements.json",
+          "sha256": "f57b8e668cacb3678221db5de018d6b6b047534396fad0fa747a376b26134b6a",
+          "bytes": 2608
+        },
+        {
+          "path": "src/planets/hiiaka/source/content/object.json",
+          "sha256": "0a4523af6370766641bbcb7fdcd8f2566a94202348f302d2b0715fd3a2e04fd6",
+          "bytes": 3964
+        },
+        {
+          "path": "src/planets/hiiaka/prepared/object.json",
+          "sha256": "33994d011df73742df35784e7974f3d445a8e9f752e31b65cea18dc429c91e31",
+          "bytes": 6319899
+        },
+        {
+          "path": "src/planets/hiiaka/prepared/runtime-assets.json",
+          "sha256": "646b52bccd4aa8371c3588e9771e27161525bef6a5e8360fbd752ec8c8ae4312",
+          "bytes": 5379
+        }
+      ],
+      "canonicalAssets": [
+        {
+          "path": "public/scenes/hiiaka/hiiaka-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836,
+          "url": "/scenes/hiiaka/hiiaka-lighting.webp",
+          "matchesRuntimeManifest": true
+        },
+        {
+          "path": "public/scenes/hiiaka/hiiaka-model-surface@2x.webp",
+          "sha256": "56f2b3de723f746906e426735eafa3b49b9a5ca809ce01139d0fbd4a4f41c24a",
+          "bytes": 50996,
+          "url": "/scenes/hiiaka/hiiaka-model-surface@2x.webp",
+          "matchesRuntimeManifest": true
+        }
+      ],
+      "reviewedUtc": "2026-09-08T22:10:58.040285+00:00",
+      "reviewedVideoSha256": "5998343421a226e9ac5a20507329e444ca0e77019831b6605248249a7ffe7474",
+      "selectedTimestampSeconds": 4,
+      "assessment": "The polar and oblique views preserve a flattened triaxial figure, with an intact grid and a visible difference from the equal-short-axis photometric approximations. The visible source description explicitly labels 240±40, 180±30 and 143±7 km as semiaxes inferred under homogeneous surface brightness. The introduction states that the pole and meridian do not establish a measured current attitude. No gross topology, source-copy or shell-layout blocker was observed in the inspected frames.",
+      "findings": [],
+      "portableFrame": {
+        "path": "docs/moons/b1-preparation/visual/hiiaka.png",
+        "sha256": "ca8e4631ff76c30f3703f51392ccc0fbf0734ad44d029e6c54c813a1a7200ab2",
+        "bytes": 288774,
+        "videoTimestampSeconds": 4,
+        "matchesUnmodifiedExtractedBytes": true
+      }
+    },
+    {
+      "id": "squannit",
+      "reviewed": true,
+      "status": "reviewed-no-visible-blocker",
+      "browser": "152.0.7977.76",
+      "baseUrl": "http://127.0.0.1:4211",
+      "browserCapturedAt": "2026-09-08T22:47:15.908Z",
+      "report": {
+        "path": "output/playwright/moons-b1-corrected-squannit/attempt-1/report.json",
+        "sha256": "c7bda9bda9cea6832557b8f5251ee52b549a2aa443dc3a717e5fbeb784613a2c",
+        "bytes": 4386
+      },
+      "video": {
+        "path": "output/playwright/moons-b1-corrected-squannit/attempt-1/squannit-dpr-2.webm",
+        "sha256": "639a64a9b86e95159fdad7a5ad7448c6ed27780a49d6066613d0f49377122cb4",
+        "bytes": 2475097
+      },
+      "frames": [
+        {
+          "path": "output/playwright/moons-b1-final-visual/squannit-639a64a9b86e-dpr-2-t4.png",
+          "sha256": "126f42661087364174bdecfd42fd183dda170e89d23fb818a24b4d61015d3787",
+          "bytes": 337313,
+          "videoTimestampSeconds": 4
+        },
+        {
+          "path": "output/playwright/moons-b1-final-visual/squannit-639a64a9b86e-dpr-2-t18.png",
+          "sha256": "b843f0f3e714f8838891e29d96451cedca681b22787539ca4dbf6a9495b41cb1",
+          "bytes": 328189,
+          "videoTimestampSeconds": 18
+        }
+      ],
+      "sourcePackage": [
+        {
+          "path": "src/planets/squannit/object.json",
+          "sha256": "a715df65badf361c8bb00d1995621d954109ac45f6a8e2ce32e54e8acfc8b1a5",
+          "bytes": 3052
+        },
+        {
+          "path": "src/planets/squannit/source/manifest.json",
+          "sha256": "41831460cf95c6cab486467d721233a66eec8150ebe5af2b52d4e3b92727fcc8",
+          "bytes": 8745
+        },
+        {
+          "path": "src/planets/squannit/source/measurements.json",
+          "sha256": "ad81cd7d85cbcb64451b1f0e7423c5d337ea9b5ac50cf7ca63ee4bf21e6079a5",
+          "bytes": 4101
+        },
+        {
+          "path": "src/planets/squannit/source/content/object.json",
+          "sha256": "61e4005cacfba53d1656a62fe3c2c53fb5ea974e9e68c90eb175b1886e923a9c",
+          "bytes": 4609
+        },
+        {
+          "path": "src/planets/squannit/prepared/object.json",
+          "sha256": "11a145f90a85368744e623d642c8a604f149ab97710a19bfe745df6d8db4a4a4",
+          "bytes": 6902156
+        },
+        {
+          "path": "src/planets/squannit/prepared/runtime-assets.json",
+          "sha256": "d21627745c8f6f49b25e487679a0bdcea68da32b69654741c3a645f07d2898c0",
+          "bytes": 5443
+        }
+      ],
+      "canonicalAssets": [
+        {
+          "path": "public/scenes/squannit/squannit-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836,
+          "url": "/scenes/squannit/squannit-lighting.webp",
+          "matchesRuntimeManifest": true
+        },
+        {
+          "path": "public/scenes/squannit/squannit-model-surface@2x.webp",
+          "sha256": "5cec7c32fcb87b473ac61b0c133f630674b0bd6071c58fec85d26e03b9103a38",
+          "bytes": 68658,
+          "url": "/scenes/squannit/squannit-model-surface@2x.webp",
+          "matchesRuntimeManifest": true
+        }
+      ],
+      "reviewedVideoSha256": "639a64a9b86e95159fdad7a5ad7448c6ed27780a49d6066613d0f49377122cb4",
+      "reviewedAtUtc": "2026-09-08T22:51:11.197898+00:00",
+      "selectedTimestampSeconds": 4,
+      "assessment": "The corrected original-scale JPL radar figure has a continuous neutral grid and closed visible silhouette. No long dotted raster contour remains in final video frames at 4 and 18 seconds or direct lossless actual-package DPR2 views at yaw0,60,120. The visible text preserves the original2006 scale, later130% photometric discrepancy, unmapped terrain/current attitude, and approximate orbital phase.",
+      "findings": [],
+      "resolvedFindings": [
+        {
+          "id": "squannit-fine-raster-seams",
+          "status": "resolved",
+          "correction": "Explicit source-owned backfaceVisible:true prepares two-sided native-u leaves and omits hidden-facing bindings. Source vertices, 800 retained faces, estimated2.0272746086m error and all31 image assets are unchanged.",
+          "qualification": {
+            "path": "docs/moons/b1-preparation/qualification-squannit-seam.json",
+            "sha256": "0a4476a9c824d411a7263169aa25abf52de11d4e991f3efd7e54ba9b3196cc43",
+            "bytes": 29520
+          }
+        }
+      ],
+      "losslessActualPackage": {
+        "report": {
+          "path": "output/playwright/moons-b1-final-visual/squannit-corrected-lossless/report.json",
+          "sha256": "61d4f660ad6413db601dc37a44bce3aa672be8fb1f8af564486bc5c2038d43d6",
+          "bytes": 7527
+        },
+        "screenshots": [
+          {
+            "path": "output/playwright/moons-b1-final-visual/squannit-corrected-lossless/squannit-dpr2-yaw-0.png",
+            "sha256": "eab380c3426728714bf15759e976b505866b81b9e8f0418a25ba3b626df32877",
+            "bytes": 609751,
+            "capturedAt": "2026-09-08T22:47:40.700Z",
+            "cameraState": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(1,0,0,0,0,0.939692620786,0.342020143326,0,0,-0.342020143326,0.939692620786,0,0,0,0,1)",
+                "skybox": "matrix3d(-0.2955012,-0.326746310371,0.897728109635,0,-0.8765094,0.466515680786,-0.118718863516,0,-0.3800133,-0.821948786185,-0.424252178679,0,0,0,0,1)",
+                "sunView": "matrix3d(0.707106781187,0,0.707106781187,0,0,1,0,0,-0.707106781187,0,0.707106781187,0,0,0,0,1)"
+              },
+              "pitch": 61.61538461538461,
+              "controlPitch": 61.61538461538461,
+              "controlYaw": 0,
+              "zoom": 1.2100000000000002,
+              "distance": 972.3482663927697,
+              "distanceKilometers": 0.9533424352950869,
+              "distanceRadii": 4.227601158229433,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 506.00000170487306,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1039.23,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -600,
+                "right": 600,
+                "top": -391,
+                "bottom": 391
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 253.00000085243653
+            }
+          },
+          {
+            "path": "output/playwright/moons-b1-final-visual/squannit-corrected-lossless/squannit-dpr2-yaw-60.png",
+            "sha256": "6ee70d37324f3f297cf3f67fcddca18ee2f04362dce906de931eb0aee7b26753",
+            "bytes": 751915,
+            "capturedAt": "2026-09-08T22:47:41.055Z",
+            "cameraState": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(0.5,0.296198132726,-0.813797681349,0,0,0.939692620786,0.342020143326,0,0.866025403784,-0.171010071663,0.469846310393,0,0,0,0,1)",
+                "skybox": "matrix3d(0.67960010111,-0.250900058844,0.689342246213,0,-0.673048909398,0.16053149559,0.72196577602,0,-0.291802393652,-0.954609155515,-0.059770809487,0,0,0,0,1)",
+                "sunView": "matrix3d(-0.258819045103,0,0.965925826289,0,0,1,0,0,-0.965925826289,0,-0.258819045103,0,0,0,0,1)"
+              },
+              "pitch": 61.61538461538461,
+              "controlPitch": 61.61538461538461,
+              "controlYaw": 60,
+              "zoom": 1.2100000000000002,
+              "distance": 972.3482663927697,
+              "distanceKilometers": 0.9533424352950869,
+              "distanceRadii": 4.227601158229433,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 506.000001995682,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1039.23,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -600,
+                "right": 600,
+                "top": -391,
+                "bottom": 391
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 253.000000997841
+            }
+          },
+          {
+            "path": "output/playwright/moons-b1-final-visual/squannit-corrected-lossless/squannit-dpr2-yaw-120.png",
+            "sha256": "51499dfc2ac2e8086efd1de0a372cff910aeef53b9c248407f4b5e280efa0b9c",
+            "bytes": 632905,
+            "capturedAt": "2026-09-08T22:47:41.345Z",
+            "cameraState": {
+              "pose": {
+                "schema": "cssearth-camera-pose@1",
+                "scene": "matrix3d(-0.5,0.296198132726,-0.813797681349,0,0,0.939692620786,0.342020143326,0,0.866025403784,0.171010071663,-0.469846310393,0,0,0,0,1)",
+                "skybox": "matrix3d(0.97510130111,0.075846251527,-0.208385863421,0,0.203460490602,0.067804020392,0.976732420289,0,0.088210906348,-0.994811434434,0.050684044054,0,0,0,0,1)",
+                "sunView": "matrix3d(-0.965925826289,0,0.258819045103,0,0,1,0,0,-0.258819045103,0,-0.965925826289,0,0,0,0,1)"
+              },
+              "pitch": 61.61538461538461,
+              "controlPitch": 61.61538461538461,
+              "controlYaw": 120,
+              "zoom": 1.2100000000000002,
+              "distance": 972.3482663927697,
+              "distanceKilometers": 0.9533424352950869,
+              "distanceRadii": 4.227601158229433,
+              "levelOfDetail": {
+                "stage": "geometry",
+                "silhouetteDiameter": 505.99999360104925,
+                "billboardOpacity": 0,
+                "markerOpacity": 0
+              },
+              "focal": 1039.23,
+              "principalOffset": [
+                0,
+                0
+              ],
+              "visibleRect": {
+                "left": -600,
+                "right": 600,
+                "top": -391,
+                "bottom": 391
+              },
+              "offAxisDegrees": 0,
+              "silhouetteRadius": 252.99999680052463
+            }
+          }
+        ],
+        "all800LeavesTwoSided": {
+          "count": 800,
+          "allBackfacesVisible": true,
+          "hiddenLeaves": 0
+        },
+        "actualCanonicalResponses": [
+          {
+            "url": "http://127.0.0.1:4211/scenes/squannit/squannit-model-surface@2x.webp",
+            "status": 200,
+            "sha256": "5cec7c32fcb87b473ac61b0c133f630674b0bd6071c58fec85d26e03b9103a38",
+            "bytes": 68658,
+            "matchesLocalPreparedBytes": true
+          },
+          {
+            "url": "http://127.0.0.1:4211/scenes/squannit/squannit-lighting.webp",
+            "status": 200,
+            "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+            "bytes": 1050836,
+            "matchesLocalPreparedBytes": true
+          }
+        ]
+      },
+      "portableFrame": {
+        "path": "docs/moons/b1-preparation/visual/squannit.png",
+        "sha256": "126f42661087364174bdecfd42fd183dda170e89d23fb818a24b4d61015d3787",
+        "bytes": 337313,
+        "videoTimestampSeconds": 4,
+        "matchesUnmodifiedExtractedBytes": true
+      }
+    },
+    {
+      "id": "romulus",
+      "reviewed": true,
+      "status": "reviewed-no-visible-blocker",
+      "browser": "152.0.7977.76",
+      "baseUrl": "http://127.0.0.1:4211",
+      "browserCapturedAt": "2026-09-08T22:09:54.185Z",
+      "report": {
+        "path": "output/playwright/moons-b1-final-romulus/attempt-1/report.json",
+        "sha256": "a6705757e030c5045df7aa45b7357b2d483188c2516876931897cba4f684e776",
+        "bytes": 4366
+      },
+      "video": {
+        "path": "output/playwright/moons-b1-final-romulus/attempt-1/romulus-dpr-2.webm",
+        "sha256": "9212167502c6464cc648affb84bb92e9f6bab71cbf2ac2b293d3c314a4b665dd",
+        "bytes": 2349608
+      },
+      "frames": [
+        {
+          "path": "output/playwright/moons-b1-final-visual/romulus-9212167502c6-dpr-2-t4.png",
+          "sha256": "34544991367d0b083c81989a8e48b82d77ad99952093639cd52a96fbdf670d69",
+          "bytes": 292560,
+          "videoTimestampSeconds": 4
+        },
+        {
+          "path": "output/playwright/moons-b1-final-visual/romulus-9212167502c6-dpr-2-t18.png",
+          "sha256": "635cad2c2e1841615a75bf8d7cbd066fc6d1c7400459cc8ea13f9227437c7116",
+          "bytes": 368493,
+          "videoTimestampSeconds": 18
+        },
+        {
+          "path": "output/playwright/moons-b1-final-visual/romulus-9212167502c6-dpr-2-t10.png",
+          "sha256": "554cffbb00094a736d26b2298b9ce8fc486601f45a0491daebea5041e1a0ef20",
+          "bytes": 321519,
+          "videoTimestampSeconds": 10
+        }
+      ],
+      "sourcePackage": [
+        {
+          "path": "src/planets/romulus/object.json",
+          "sha256": "eafb9b44fd8d70cde04210811a78db09504b54b8c57b24e40d3d8292ef8f06d4",
+          "bytes": 3042
+        },
+        {
+          "path": "src/planets/romulus/source/manifest.json",
+          "sha256": "483303be61e3f53610a7bbab6f772f4f6de41c687844413af227c85e165b423c",
+          "bytes": 11490
+        },
+        {
+          "path": "src/planets/romulus/source/measurements.json",
+          "sha256": "a60fb3babea7a0ead408d248225f11234f02803e8c7fd55efc52097623cdbc3d",
+          "bytes": 3261
+        },
+        {
+          "path": "src/planets/romulus/source/content/object.json",
+          "sha256": "bc5852755eb9dc9c30af529867823a34c5f8548441f9c86631447f6663e1e5d7",
+          "bytes": 3945
+        },
+        {
+          "path": "src/planets/romulus/prepared/object.json",
+          "sha256": "18b69c3ee3ce7afd7aa1faf71d1ce4b77e298502d8b53fcd418f945e4fc6e7ad",
+          "bytes": 6722547
+        },
+        {
+          "path": "src/planets/romulus/prepared/runtime-assets.json",
+          "sha256": "66c44d77003fa9b7a84931e5a6ac6389ce20bbda7cde100a5464fdf69bb0acf8",
+          "bytes": 5411
+        }
+      ],
+      "canonicalAssets": [
+        {
+          "path": "public/scenes/romulus/romulus-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836,
+          "url": "/scenes/romulus/romulus-lighting.webp",
+          "matchesRuntimeManifest": true
+        },
+        {
+          "path": "public/scenes/romulus/romulus-model-surface@2x.webp",
+          "sha256": "8fe8f2d650ef4dc1ad40c39a22314aa82ed2d79ce9ff0e076c745bc23aed124d",
+          "bytes": 51692,
+          "url": "/scenes/romulus/romulus-model-surface@2x.webp",
+          "matchesRuntimeManifest": true
+        }
+      ],
+      "reviewedUtc": "2026-09-08T22:15:21.584249+00:00",
+      "reviewedVideoSha256": "9212167502c6464cc648affb84bb92e9f6bab71cbf2ac2b293d3c314a4b665dd",
+      "selectedTimestampSeconds": 10,
+      "assessment": "The wider frames preserve a closed, foreshortened limb; the oblique close view shows the selected strong elongation with continuous neutral grid coverage. The selected close frame is partly occluded by the inspector at its left edge, while the t4 and t7 frames retain the complete outline. The introduction explicitly identifies one admissible occultation-limb solution, assumed equal depth, alternative correlated solutions and approximate current orbital phase. The visible lens distinguishes the projected area-equivalent diameter from a unique measured 3D figure. No visible gross geometry or scientific-copy blocker was observed.",
+      "findings": [],
+      "portableFrame": {
+        "path": "docs/moons/b1-preparation/visual/romulus.png",
+        "sha256": "554cffbb00094a736d26b2298b9ce8fc486601f45a0491daebea5041e1a0ef20",
+        "bytes": 321519,
+        "videoTimestampSeconds": 10,
+        "matchesUnmodifiedExtractedBytes": true
+      }
+    }
+  ],
+  "reviewedCount": 6
+}

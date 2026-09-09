@@ -1,0 +1,126 @@
+[
+  {
+    "parent": "Earth",
+    "name": "Moon",
+    "iauNumber": "I",
+    "designation": "",
+    "sourceUrl": "https://science.nasa.gov/moon/facts/",
+    "id": "moon",
+    "status": "present",
+    "imagery": "imagery-lens",
+    "shapeBasis": "See package source",
+    "owner": "",
+    "workLink": "",
+    "nextAction": "Maintain; qualification not reassessed in this inventory",
+    "lenses": [
+      {
+        "id": "surface",
+        "label": "Surface",
+        "detail": "Global mosaic",
+        "description": ""
+      },
+      {
+        "id": "topography",
+        "label": "Topography",
+        "detail": "Shaded relief",
+        "description": ""
+      },
+      {
+        "id": "crust",
+        "label": "Crust",
+        "detail": "Thickness",
+        "description": ""
+      }
+    ],
+    "evidenceUrl": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/planets/moon/SOURCE.md",
+    "scope": "core",
+    "key": "Earth|I"
+  },
+  {
+    "parent": "Mars",
+    "name": "Phobos",
+    "iauNumber": "I",
+    "designation": "",
+    "sourceUrl": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+    "id": "phobos",
+    "status": "present",
+    "imagery": "imagery-lens",
+    "shapeBasis": "See package source",
+    "owner": "",
+    "workLink": "",
+    "nextAction": "Maintain; qualification not reassessed in this inventory",
+    "lenses": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "detail": "Multi-mission mosaic",
+        "description": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain."
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "detail": "Shaded relief",
+        "description": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m."
+      }
+    ],
+    "evidenceUrl": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/planets/phobos/SOURCE.md",
+    "scope": "core",
+    "key": "Mars|I"
+  },
+  {
+    "parent": "Mars",
+    "name": "Deimos",
+    "iauNumber": "II",
+    "designation": "",
+    "sourceUrl": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+    "id": "deimos",
+    "status": "present",
+    "imagery": "imagery-lens",
+    "shapeBasis": "See package source",
+    "owner": "",
+    "workLink": "",
+    "nextAction": "Maintain; qualification not reassessed in this inventory",
+    "lenses": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "detail": "Multi-mission mosaic",
+        "description": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask."
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "detail": "Shaded relief",
+        "description": "Radius above a 6.2 km reference sphere, sampled from the Ernst et al. (2023) shape model. Facets without a solved SPC albedo are conservatively withheld; the full shape includes less-constrained terrain."
+      }
+    ],
+    "evidenceUrl": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/planets/deimos/SOURCE.md",
+    "scope": "core",
+    "key": "Mars|II"
+  },
+  {
+    "parent": "Didymos",
+    "id": "dimorphos",
+    "name": "Dimorphos",
+    "status": "present",
+    "imagery": "no-mapped-imagery",
+    "shapeBasis": "Released encounter mesh; partly modeled",
+    "lenses": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "detail": "DART encounter shape",
+        "description": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown."
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "detail": "Shape-derived radial height",
+        "description": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments."
+      }
+    ],
+    "evidenceUrl": "https://github.com/layoutit/cssEarth/blob/554c9811314e363f1d68287586864d8540213145/src/planets/dimorphos/SOURCE.md",
+    "scope": "existing-extra",
+    "key": "Didymos|Dimorphos"
+  }
+]

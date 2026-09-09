@@ -1,7 +1,4 @@
 {
-  "schema": "cssearth-object@1",
-  "id": "comet-9p",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -120,9 +117,12 @@
       "bodyRadiusM": 2830
     }
   },
+  "schema": "cssearth-object@1",
   "prepared": {
-    "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "98e832077a9b2a01083784304cc4520c8b79eb17cce9b44d0f4d6689a9c6f81e"
-  }
+    "sha256": "98e832077a9b2a01083784304cc4520c8b79eb17cce9b44d0f4d6689a9c6f81e",
+    "format": "cssearth-css-object@4"
+  },
+  "type": "layered-body",
+  "id": "comet-9p"
 }

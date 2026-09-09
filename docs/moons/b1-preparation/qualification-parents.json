@@ -1,0 +1,434 @@
+{
+  "schema": "cssearth-b1-parent-browser-qualification@1",
+  "startedUtc": "2026-09-08T21:16:08.114643+00:00",
+  "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "baseUrl": "http://127.0.0.1:4211",
+  "head": "c6850e2839520e32c3e6526bc1fd8a95866a9eb2",
+  "nodeVersion": "v24.19.0",
+  "runner": {
+    "path": "site/test/planet-browser-conformance.mjs",
+    "sha256": "0ee1785902826a6844bd1c0a711f9051de9d1ae6596df014333f9cc09e31ce1c",
+    "bytes": 79621
+  },
+  "scope": "Existing real-Chrome density conformance for Haumea and Sylvia at DPR 1 and 2. Diagnostic-server execution; no native visual parity claim.",
+  "bodyCount": 2,
+  "bodies": [
+    {
+      "id": "haumea",
+      "argv": [
+        "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "site/test/planet-browser-conformance.mjs",
+        "http://127.0.0.1:4211",
+        "haumea"
+      ],
+      "environment": {
+        "CSSEARTH_DENSITY_ONLY": "1",
+        "CSSEARTH_CONFORMANCE_OUTPUT": "output/playwright/moons-b1-haumea"
+      },
+      "startedUtc": "2026-09-08T21:16:08.164327+00:00",
+      "descriptorBefore": {
+        "path": "src/planets/haumea/object.json",
+        "sha256": "f3b84ba23880b03e6753ca35d5d25a77e3c4f68723cd4461062960753d47656c",
+        "bytes": 3187
+      },
+      "exitCode": 0,
+      "durationSeconds": 129.276,
+      "completedUtc": "2026-09-08T21:18:17.441286+00:00",
+      "log": {
+        "path": "output/playwright/moons-b1-qualification/parents/haumea.log",
+        "sha256": "969990d05ccb2423fdbeaf7935a89a2f11bfeeea3537887dd65b340b0e09c461",
+        "bytes": 3979
+      },
+      "descriptorAfter": {
+        "path": "src/planets/haumea/object.json",
+        "sha256": "f3b84ba23880b03e6753ca35d5d25a77e3c4f68723cd4461062960753d47656c",
+        "bytes": 3187
+      },
+      "descriptorUnchanged": true,
+      "report": {
+        "path": "output/playwright/moons-b1-haumea/report.json",
+        "sha256": "a1aef405592d26531915c6f2eab009f8be43ce948ed540b977582bc6e93252b9",
+        "bytes": 3777
+      },
+      "browser": "152.0.7977.76",
+      "cases": [
+        {
+          "id": "haumea",
+          "viewport": "dpr-1",
+          "selectedDensity": 2,
+          "requestedCanonicalAssets": [
+            "/scenes/haumea/poles.webp",
+            "/scenes/haumea/ring.webp",
+            "/scenes/haumea/surface.webp"
+          ],
+          "skyboxPointerBoundary": [
+            {
+              "zoom": 0.5217391304347826,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            },
+            {
+              "zoom": 0.3391304347826087,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            }
+          ],
+          "interactionInterruptions": {
+            "wheelInterruptedInertia": true,
+            "wheelZoomRatio": 1.2908752413333333,
+            "wheelAnchorRotationApplied": true,
+            "pointerStoppedInertia": true,
+            "captureLossStoppedDrag": true,
+            "wheelCoexistedWithFlyTo": true,
+            "dragInterruptedFlyTo": true,
+            "repeatedDoubleClickRestartedFlyTo": true,
+            "flyToCompletedAndRested": true,
+            "activeMotionCount": 0
+          },
+          "wheelTakeover": {
+            "bodyPressStopsWheel": true,
+            "skyPressStopsWheel": true,
+            "resetStopsWheel": true,
+            "heldWheelCancelsGrab": true
+          },
+          "releasePosition": {
+            "nonLaunchingReleaseRetainsDragPose": true,
+            "pausedReleaseCannotRestartMotion": true
+          },
+          "video": "haumea-dpr-1.webm",
+          "browserProblemsOutsideDensityProof": []
+        },
+        {
+          "id": "haumea",
+          "viewport": "dpr-2",
+          "selectedDensity": 2,
+          "requestedCanonicalAssets": [
+            "/scenes/haumea/poles.webp",
+            "/scenes/haumea/ring.webp",
+            "/scenes/haumea/surface.webp"
+          ],
+          "skyboxPointerBoundary": [
+            {
+              "zoom": 0.5217391304347826,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            },
+            {
+              "zoom": 0.3391304347826087,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            }
+          ],
+          "interactionInterruptions": {
+            "wheelInterruptedInertia": true,
+            "wheelZoomRatio": 1.6839073053333333,
+            "wheelAnchorRotationApplied": true,
+            "pointerStoppedInertia": true,
+            "captureLossStoppedDrag": true,
+            "wheelCoexistedWithFlyTo": true,
+            "dragInterruptedFlyTo": true,
+            "repeatedDoubleClickRestartedFlyTo": true,
+            "flyToCompletedAndRested": true,
+            "activeMotionCount": 0
+          },
+          "wheelTakeover": {
+            "bodyPressStopsWheel": true,
+            "skyPressStopsWheel": true,
+            "resetStopsWheel": true,
+            "heldWheelCancelsGrab": true
+          },
+          "releasePosition": {
+            "nonLaunchingReleaseRetainsDragPose": true,
+            "pausedReleaseCannotRestartMotion": true
+          },
+          "video": "haumea-dpr-2.webm",
+          "browserProblemsOutsideDensityProof": []
+        }
+      ],
+      "videos": [
+        {
+          "path": "output/playwright/moons-b1-haumea/haumea-dpr-1.webm",
+          "sha256": "5c01ec11f40f9f04e8ca6e57e2f52c89fa8fa4fb207a84bbf2b0fca43e635aa7",
+          "bytes": 2516806
+        },
+        {
+          "path": "output/playwright/moons-b1-haumea/haumea-dpr-2.webm",
+          "sha256": "46c6617a268f171d0a2ff0d7b69960f974990e5a861d87204c19b077a98b868e",
+          "bytes": 2913276
+        }
+      ],
+      "ok": true,
+      "visualReview": {
+        "stage": "preintegration",
+        "reviewedUtc": "2026-09-08T21:20:51.815111+00:00",
+        "frames": [
+          {
+            "path": "output/playwright/moons-b1-qualification/visual/haumea-dpr-2-t18.png",
+            "videoTimestampSeconds": 18,
+            "sha256": "5b3e0eef01fa957780d4d19220f947790db63508f71abcefd3cfd985e349174d",
+            "bytes": 449150
+          }
+        ],
+        "findings": [],
+        "assessment": "The elongated parent body and ring remain visible, with the surface explicitly labeled NASA illustrative imagery. No visible holes, detached faces or duplicated bodies in the inspected close view."
+      }
+    },
+    {
+      "id": "sylvia",
+      "argv": [
+        "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "site/test/planet-browser-conformance.mjs",
+        "http://127.0.0.1:4211",
+        "sylvia"
+      ],
+      "environment": {
+        "CSSEARTH_DENSITY_ONLY": "1",
+        "CSSEARTH_CONFORMANCE_OUTPUT": "output/playwright/moons-b1-sylvia"
+      },
+      "startedUtc": "2026-09-08T21:18:17.449715+00:00",
+      "descriptorBefore": {
+        "path": "src/planets/sylvia/object.json",
+        "sha256": "db5aabbc7f39c23e8543a38f936b7f7c60ddc0910a936a4348cd51d9d5f2fd5c",
+        "bytes": 3195
+      },
+      "exitCode": 0,
+      "durationSeconds": 47.341,
+      "completedUtc": "2026-09-08T21:19:04.791786+00:00",
+      "log": {
+        "path": "output/playwright/moons-b1-qualification/parents/sylvia.log",
+        "sha256": "18d30ba12cc90ca1d2fc9984e8c9077b37bee36dc206c3b29c337f0dc122ef66",
+        "bytes": 3865
+      },
+      "descriptorAfter": {
+        "path": "src/planets/sylvia/object.json",
+        "sha256": "db5aabbc7f39c23e8543a38f936b7f7c60ddc0910a936a4348cd51d9d5f2fd5c",
+        "bytes": 3195
+      },
+      "descriptorUnchanged": true,
+      "report": {
+        "path": "output/playwright/moons-b1-sylvia/report.json",
+        "sha256": "950dcd254f84e16b9c64b1735a2437e69c4d2476fb02690cd9df5137583b8c9a",
+        "bytes": 3663
+      },
+      "browser": "152.0.7977.76",
+      "cases": [
+        {
+          "id": "sylvia",
+          "viewport": "dpr-1",
+          "selectedDensity": 2,
+          "requestedCanonicalAssets": [
+            "/scenes/sylvia/sylvia-shape-surface@2x.webp"
+          ],
+          "skyboxPointerBoundary": [
+            {
+              "zoom": 1.0330434782608697,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            },
+            {
+              "zoom": 0.6714782608695653,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            }
+          ],
+          "interactionInterruptions": {
+            "wheelInterruptedInertia": true,
+            "wheelZoomRatio": 1.2908752418181817,
+            "wheelAnchorRotationApplied": true,
+            "pointerStoppedInertia": true,
+            "captureLossStoppedDrag": true,
+            "wheelCoexistedWithFlyTo": true,
+            "dragInterruptedFlyTo": true,
+            "repeatedDoubleClickRestartedFlyTo": true,
+            "flyToCompletedAndRested": true,
+            "activeMotionCount": 0
+          },
+          "wheelTakeover": {
+            "bodyPressStopsWheel": true,
+            "skyPressStopsWheel": true,
+            "resetStopsWheel": true,
+            "heldWheelCancelsGrab": true
+          },
+          "releasePosition": {
+            "nonLaunchingReleaseRetainsDragPose": true,
+            "pausedReleaseCannotRestartMotion": true
+          },
+          "video": "sylvia-dpr-1.webm",
+          "browserProblemsOutsideDensityProof": []
+        },
+        {
+          "id": "sylvia",
+          "viewport": "dpr-2",
+          "selectedDensity": 2,
+          "requestedCanonicalAssets": [
+            "/scenes/sylvia/sylvia-shape-surface@2x.webp"
+          ],
+          "skyboxPointerBoundary": [
+            {
+              "zoom": 1.0330434782608697,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            },
+            {
+              "zoom": 0.6714782608695653,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            }
+          ],
+          "interactionInterruptions": {
+            "wheelInterruptedInertia": true,
+            "wheelZoomRatio": 1.6839073054545455,
+            "wheelAnchorRotationApplied": true,
+            "pointerStoppedInertia": true,
+            "captureLossStoppedDrag": true,
+            "wheelCoexistedWithFlyTo": true,
+            "dragInterruptedFlyTo": true,
+            "repeatedDoubleClickRestartedFlyTo": true,
+            "flyToCompletedAndRested": true,
+            "activeMotionCount": 0
+          },
+          "wheelTakeover": {
+            "bodyPressStopsWheel": true,
+            "skyPressStopsWheel": true,
+            "resetStopsWheel": true,
+            "heldWheelCancelsGrab": true
+          },
+          "releasePosition": {
+            "nonLaunchingReleaseRetainsDragPose": true,
+            "pausedReleaseCannotRestartMotion": true
+          },
+          "video": "sylvia-dpr-2.webm",
+          "browserProblemsOutsideDensityProof": []
+        }
+      ],
+      "videos": [
+        {
+          "path": "output/playwright/moons-b1-sylvia/sylvia-dpr-1.webm",
+          "sha256": "048d9ed572209424ff8480bc8c7b0e8428611acdf6e0da284267bb619288fa60",
+          "bytes": 2691883
+        },
+        {
+          "path": "output/playwright/moons-b1-sylvia/sylvia-dpr-2.webm",
+          "sha256": "ea848ad4a5e2ee32cd9043298310e4ce6dde2323b65f19f3d6142f6959ab789c",
+          "bytes": 2406605
+        }
+      ],
+      "ok": true,
+      "visualReview": {
+        "stage": "preintegration",
+        "reviewedUtc": "2026-09-08T21:20:51.816134+00:00",
+        "frames": [
+          {
+            "path": "output/playwright/moons-b1-qualification/visual/sylvia-dpr-2-t4.png",
+            "videoTimestampSeconds": 4,
+            "sha256": "ce330d2168e0deacf4af9df0082dde145cfab874317086208d35bbeef30a5b3f",
+            "bytes": 298568
+          },
+          {
+            "path": "output/playwright/moons-b1-qualification/visual/sylvia-dpr-2-t18.png",
+            "videoTimestampSeconds": 18,
+            "sha256": "f0cd26c5d7a1a1f301a17485967b43910c15a9410dc281726f4b9e57f15ccbcf",
+            "bytes": 388788
+          }
+        ],
+        "findings": [],
+        "assessment": "The irregular published shape and missing-imagery grid remain intact at wider and close zoom levels. The close view intentionally fills the viewport during fly-to. The source label distinguishes reconstruction from available surface imagery. No visible detached faces, duplicate bodies or texture gaps in the inspected views."
+      }
+    }
+  ],
+  "ok": true,
+  "completedUtc": "2026-09-08T21:19:04.802988+00:00",
+  "caseCount": 4,
+  "stage": "preintegration",
+  "finalHeadQualification": false,
+  "integrationTargetCommit": "c61d1bf9",
+  "integrationNote": "Evidence retained from the B1 branch before integration of the newer main application shell. The listed focused checks remain historical results; final merged-head browser and gate requalification is required."
+}

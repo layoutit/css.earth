@@ -38,6 +38,14 @@ test('source CSS compiles selection timing and only immutable single-sided leaf 
   assert.deepEqual((await preparePresentationBindings(definition, root)).facing, []);
 }));
 
+test('explicit two-sided source leaves retain browser coverage without a hidden-facing publisher', async () => fixture(async ({ root, definition }) => {
+  definition.tree.nodes[5].style = 'backface-visibility:visible';
+  const prepared = await preparePresentationBindings(definition, root);
+  assert.deepEqual(prepared.facing, []);
+  assert.equal(prepared.tree.nodes[5].style, 'backface-visibility:visible');
+  assert.equal(prepared.tree.nodes.length, definition.tree.nodes.length);
+}));
+
 test('unsupported motion cannot silently become an unowned native animation', async () => fixture(async ({ root, definition, css, setCss }) => {
   await setCss(css + ' [data-lens=slow] .moving { animation:none; }');
   await assert.rejects(preparePresentationBindings(definition, root), /motion membership/);

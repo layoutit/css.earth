@@ -3,6 +3,7 @@ import { DWARF_PLANET_ELEMENTS } from './data/dwarfPlanetElements.data.js'
 import type { Frame } from './frames.js'
 import { keplerApoapsisKm, keplerPositionKm, type KeplerianElements } from './kepler.js'
 import { chooseFrameUnitM, moonApoapsisKm, moonPositionRelativeToPlanetKm, SUN_FRAME_ID, type SolarSystemFrameSpec } from './solarSystem.js'
+import { isSceneSatellite } from './sceneSatellites.js'
 import { M_PER_AU, M_PER_KM } from './units.js'
 import type { Vec3 } from './vec3.js'
 
@@ -28,11 +29,14 @@ export const dwarfPlanetApoapsisKm = (id: DwarfPlanetId): number => keplerApoaps
 /** Dwarf-planet centre elements are heliocentric (not system barycentres).
  * Their satellites use parent-relative fitted ellipses, with frame units
  * derived from the same containment rule as every other satellite system.
+ * Scene-only satellites are excluded: they have neither a propagated state
+ * nor necessarily the same parent ephemeris as this time-domain frame tree.
+ * Their explicit scene-state API retains the matching primary state instead.
  */
 export const dwarfPlanetFrameSpecs = (): readonly SolarSystemFrameSpec[] =>
   DWARF_PLANET_IDS.flatMap((id) => {
     const radiusM = bodyData(id).meanRadiusKm * M_PER_KM
-    const moons = moonsOf(id)
+    const moons = moonsOf(id).filter(moon => !isSceneSatellite(moon))
     const childUnits = moons.map(moon => chooseFrameUnitM(bodyData(moon).meanRadiusKm * M_PER_KM, 0, []))
     const maxChildOffsetM = Math.max(0, ...moons.map(moon => moonApoapsisKm(moon) * M_PER_KM))
     const unitM = chooseFrameUnitM(radiusM, maxChildOffsetM, childUnits)

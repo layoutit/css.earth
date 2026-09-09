@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "bestla",
+  "targetNaif": "639",
+  "parentNaif": "699",
+  "source": {
+    "url": "https://tilmanndenk.de/outersaturnianmoons/bestla/",
+    "paper": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+    "table": "Denk et al. (2018), Table 3; author Table 1C notes 1,2,4,9",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "minimumEquatorialAxisRatio": 1.47,
+    "condition": "Uniform-reflectivity reference ellipsoid from published lightcurve amplitude; minimum a/b, not an exact recovered outline.",
+    "adoptedReferenceRadiusKm": 3.3,
+    "diameterEstimate": "7 (+2/−1.25) km",
+    "sizeInterpretation": "Brightness-based size assuming geometric albedo 0.06; uncertainty is source sensitivity, not measured axes.",
+    "observedRotationPeriod": "14.6238 ± 0.0001 h"
+  },
+  "approximation": {
+    "adoptedEquatorialAxisRatio": 1.47,
+    "semiAxesKm": [
+      4.266373073534495,
+      2.902294607846595,
+      2.902294607846595
+    ],
+    "formula": "b=c=R/cbrt(q); a=q*b; r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+    "assumptions": [
+      "Select published lower-limit equatorial ratio, not a full recovered shape.",
+      "Equal short axes (b=c).",
+      "Reference radius treated as equal-volume display scale only.",
+      "Partial observed south-ecliptic pole latitude and retrograde sense are preserved. Exact pole longitude and current phase remain unknown; ecliptic south is a representative display convention, not the full measured pole. Author body-page pole cells are blank; the primary paper supplies this partial constraint."
+    ],
+    "qualification": "Published south-ecliptic pole latitude approximately -85 ± 15 degrees and sidereal period are useful; do not invent a pole longitude or native convex mesh."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "photometryCheck": {
+    "minimumAmplitudeMagnitude": 0.41829333687044024,
+    "interpretation": "Algebraic consistency only; not a fit to observed Cassini lightcurves or a measured volume."
+  }
+}

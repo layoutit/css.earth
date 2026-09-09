@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "sycorax",
+  "displayName": "Sycorax",
+  "panel": {
+    "introduction": "Sycorax is an outer moon of Uranus with measured rotational variability and thermal-size constraints. This ellipsoid adopts the minimum elongation under uniform reflectivity; depth and display orientation remain assumptions. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Uranus"
+      },
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate model"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full model dimensions",
+        "value": "169 × 151 × 151 km"
+      },
+      {
+        "id": "scale",
+        "label": "Size evidence",
+        "value": "157 (+23/−15) km · thermophysical model"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation interpretation",
+        "value": "6.9162 ± 0.0013 h"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+        "title": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/sycorax/sycorax-model-thumbnail.webp",
+        "surface": "sycorax-model-surface@2x.webp",
+        "poles": "sycorax-model-poles@2x.webp",
+        "source": {
+          "id": "lightcurve-approximation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/pdf/1706.06837"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "role": "surface",
+      "description": "Source measurements and model interpretation",
+      "href": "https://arxiv.org/pdf/1706.06837"
+    },
+    {
+      "label": "Uranian irregular satellites physical summary and occultation prospects",
+      "role": "facts",
+      "description": "Source measurements and model interpretation",
+      "href": "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+    }
+  }
+}

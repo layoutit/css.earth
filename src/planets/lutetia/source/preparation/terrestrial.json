@@ -64,6 +64,43 @@
         "label": "Shape",
         "consumer": "shape"
       }
+    ],
+    "surfaceObservations": [
+      {
+        "id": "osiris",
+        "format": "osiris-camera",
+        "consumer": "osiris-observation",
+        "path": "observations/n20100710t154047674id4df22.img",
+        "cameraPath": "observations/osiris-camera.json",
+        "startTime": "2010-07-10T15:41:06.632",
+        "filter": "FFP-Vis_Orange",
+        "allowLossy": true,
+        "transfer": {
+          "maximumSourceDistanceMeters": 1200,
+          "maximumSeparationMeters": 600,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "minnaert",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 2.5,
+          "coefficient": 0.5505,
+          "phaseCoefficientPerDegree": 0.005
+        },
+        "displayPercentiles": [
+          1,
+          99
+        ],
+        "metadata": {
+          "label": "OSIRIS reflectance",
+          "coverage": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+          "falseColor": false
+        }
+      }
     ]
   },
   "lighting": {
@@ -84,8 +121,8 @@
       "initialScenePitchDegrees": 25,
       "defaultControlYawDegrees": 0
     },
-    "mapUrl": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
-    "polesUrl": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
+    "mapUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+    "polesUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
     "radialTerrain": {
       "path": "shape/lutetia_025k_cart.wrl",
       "format": "vrml-mesh",
@@ -112,7 +149,7 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the Jorda–Vincent rotation model released with the PDS Lutetia shape"
   },
   "presentation": {
-    "defaultLens": "shape",
+    "defaultLens": "osiris",
     "pointColor": [
       170,
       170,
