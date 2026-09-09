@@ -2192,6 +2192,18 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.29720432344063685,
     0.3035153637999213,
   ]),
+  // subsolar latitude -13.796°, longitude 138.378°
+  annefrank: Object.freeze([
+    -0.7259732794628156,
+    0.6450533259446818,
+    -0.23847222939727955,
+  ]),
+  // subsolar latitude -18.790°, longitude 155.382°
+  braille: Object.freeze([
+    -0.8606590706901138,
+    0.3943597618100994,
+    -0.3220967902726001,
+  ]),
   // subsolar latitude 38.224°, longitude -143.035°
   dike: Object.freeze([
     -0.6276942749533061,
@@ -4612,6 +4624,18 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     -0.06354128994370732,
     0.8166838899680435,
     -0.5735764363526054,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 4.013°
+  annefrank: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 2.684°
+  braille: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
   ]),
   // pole tilt to the ecliptic 40.000°, Sun ecliptic latitude 4.055°
   dike: Object.freeze([
@@ -7035,6 +7059,18 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.12581676329614067,
     0.8700319672049988,
     -0.4766702404336598,
+  ]),
+  // orbital inclination to the ecliptic 4.247°, obliquity to the orbit 21.575°
+  annefrank: Object.freeze([
+    -0.3621446169605208,
+    -0.06378253250043904,
+    0.9299371295707836,
+  ]),
+  // orbital inclination to the ecliptic 29.020°, obliquity to the orbit 26.724°
+  braille: Object.freeze([
+    -0.13819011173278295,
+    0.42792830336778187,
+    0.8931857926523757,
   ]),
   // orbital inclination to the ecliptic 13.865°, obliquity to the orbit 39.221°
   dike: Object.freeze([
@@ -9460,6 +9496,18 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.38139665653649457,
     0.8125050028907809,
   ]),
+  // flight-path angle -3.531°
+  annefrank: Object.freeze([
+    0.5388295035309915,
+    0.7997514355591725,
+    0.2646892658299311,
+  ]),
+  // flight-path angle -7.094°
+  braille: Object.freeze([
+    0.3800361512149788,
+    0.8557141182780277,
+    -0.3511778346498588,
+  ]),
   // flight-path angle 7.279°
   dike: Object.freeze([
     -0.5900477305763794,
@@ -11883,6 +11931,18 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     -0.9871589728072883, 0.03296936340580096, 0.15630157863142588,
     0.15974092276576962, 0.20374242461027559, 0.9659046857779844,
     0, 0.978469235842672, -0.20639271912898866,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  annefrank: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  braille: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
   ]),
   // pole RA -116.505°, Dec 29.910°, prime meridian W 0.000°
   dike: Object.freeze([
@@ -17246,6 +17306,36 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 7.278312127165429,
     perihelionAu: 1.9990977816327256,
     aphelionAu: 2.716459262976657,
+  }),
+  // a 2.2123 AU, e 0.063225, perihelion 2.0725 AU, aphelion 2.3522 AU
+  annefrank: Object.freeze({
+    semiMajorAxisAu: 2.2123334934407595,
+    eccentricity: 0.06322452320182406,
+    heliocentricDistanceAu: 2.180630669233579,
+    perihelionDirection: Object.freeze([
+      0.6969260639043096,
+      0.6439783035877444,
+      0.3155725050746617,
+    ]),
+    trueAnomalyDegrees: 279.54398038105086,
+    inclinationDegrees: 4.247443325913912,
+    perihelionAu: 2.0724597631545416,
+    aphelionAu: 2.3522072237269773,
+  }),
+  // a 2.3396 AU, e 0.43404, perihelion 1.3241 AU, aphelion 3.3550 AU
+  braille: Object.freeze({
+    semiMajorAxisAu: 2.3395517864444546,
+    eccentricity: 0.4340369448601326,
+    heliocentricDistanceAu: 3.3205448777816158,
+    perihelionDirection: Object.freeze([
+      -0.7686647331521804,
+      0.5223556652244761,
+      -0.3691870623626758,
+    ]),
+    trueAnomalyDegrees: 189.43636615057497,
+    inclinationDegrees: 29.019954044162514,
+    perihelionAu: 1.324099876714038,
+    aphelionAu: 3.355003696174871,
   }),
   // a 2.6627 AU, e 0.19785, perihelion 2.1359 AU, aphelion 3.1895 AU
   dike: Object.freeze({
