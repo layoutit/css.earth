@@ -1,4 +1,5 @@
 import {loadPdsFloatMap} from './pds-float-map.mjs';
+import { loadImageDemScience } from './image-dem-science.mjs';
 import {loadPdsImage} from './pds-image.mjs';
 import {loadFacetScalarSurface} from './facet-scalars.mjs';
 import {loadGeologySurface, categoryColorForValue} from './categorical-geology.mjs';
@@ -91,6 +92,7 @@ export function validateScienceQualityMasks(lens) {
 }
 
 export async function loadScienceSurface(root, lens, sourceMesh) {
+  if (lens.format === 'image-plane-dem') return loadImageDemScience(root, lens, sourceMesh);
   if(lens.qualityMasks!==undefined){
     validateScienceQualityMasks(lens);
     const source=await loadScienceSurface(root,{...lens,qualityMasks:undefined},sourceMesh);

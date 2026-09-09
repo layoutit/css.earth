@@ -8,6 +8,7 @@ import { resolve } from 'node:path';
 import { OBJECTS } from '../../../../site/objects.mjs';
 import { loadObjShape, loadPdsPlanetocentricShape, loadPdsPlateShape, loadPdsRadiusTable, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
 import { surfaceDistanceIndex } from './surface-distance.mjs';
+import { loadImageDem } from '../../../../tools/objects/terrestrial-layers/image-dem.mjs';
 import { loadContactEllipsoids } from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mjs';
 
 const output = resolve(process.argv[2] ?? 'output/comet-source-fit');
@@ -25,13 +26,15 @@ for (const { id } of selected) {
   if (lensId && lensId !== config.presentation.defaultLens) assert.ok(alternative, 'Select a declared surface model.');
   const profile = alternative ?? config.geometry.radialTerrain;
   const sourcePath = resolve(root, 'source', profile.path);
-  const loader = { 'contact-ellipsoids': loadContactEllipsoids, 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
+  const loader = { 'image-plane-dem': loadImageDem, 'contact-ellipsoids': loadContactEllipsoids, 'wavefront-obj': loadObjShape, 'pds-planetocentric-plate': loadPdsPlanetocentricShape,
     'pds-plate-model': loadPdsPlateShape, 'pds-radius-table': loadPdsRadiusTable }[profile.format];
   assert.ok(loader, 'Source comparison requires a supported source mesh.');
   const source = await loader(sourcePath, profile.grid);
   const preparedPath = `prepared/terrain${alternative ? `-${lensId}` : ''}.json`;
   const preparedBytes = await readFile(resolve(root, preparedPath));
   const terrain = JSON.parse(preparedBytes);
+  const estimatedFaces = terrain.faces.filter(face => face.estimated).length;
+  terrain.faces = terrain.faces.filter(face => !face.estimated);
   const meters = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const points = terrain.faces.flatMap(face => face.vertices.map(point => point.map(v => v * meters)));
   const obj = points.map(point => `v ${point.join(' ')}`).join('\n') + '\n' +
@@ -83,7 +86,7 @@ for (const { id } of selected) {
   }
   assert.ok(errors.length > 0);
   const report = { id, ...(lensId ? { lensId } : {}), source: { path: profile.path, sha256: hash(await readFile(sourcePath)), vertices: source.vertices, faces: source.faces },
-    prepared: { path: preparedPath, sha256: hash(preparedBytes), faces: terrain.faces.length },
+    prepared: { path: preparedPath, sha256: hash(preparedBytes), faces: terrain.faces.length, estimatedFacesExcluded: estimatedFaces },
     method: 'Six orthographic +/-XYZ views; first surface intersection from outside the source bounding box; pixel-centered regular grids',
     gridPerView: [grid, grid], boundingBoxPadding: padding, totalRays: grid * grid * 6,
     interpretation: 'Sampled line-of-sight range differences in meters, conditional on both meshes being hit. Silhouette disagreements are reported separately. These are not exhaustive geometric error bounds or observational uncertainties.',

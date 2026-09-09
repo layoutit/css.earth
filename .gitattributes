@@ -41,3 +41,7 @@ src/planets/proteus/source/observations/PROCESSING.TXT -text -whitespace
 docs/moons/b3-preparation/callisto-color-tests-initial.log -whitespace
 docs/moons/b3-preparation/final/renderer-tests.log -whitespace
 docs/moons/b3-preparation/final/browser/*.json linguist-generated=true
+src/planets/comet-19p/source/reference/*.cat -text -whitespace
+src/planets/comet-19p/source/reference/*.lbl -text -whitespace
+src/planets/comet-19p/source/reference/*.txt -text -whitespace
+src/planets/comet-19p/source/reference/*.htm -text -whitespace

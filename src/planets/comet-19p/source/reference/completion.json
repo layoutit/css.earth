@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-image-dem-completion-evidence@1",
+  "source": "https://pubs.usgs.gov/publication/70024562",
+  "publishedConstraint": "Buratti et al. (2002) report an 8.0 by 3.15 km nucleus. These are not three measured axes.",
+  "assumedMaximumDepthMeters": 3150,
+  "method": "Keep every reduced observed plate and outer boundary. Triangulate internal gaps with estimated plates. Build a rear height field below the completed front: zRear = zFront - 3150 * sqrt(distanceToOuterOutline / maximumDistanceToOuterOutline). The published width supplies an explicitly assumed depth scale, not a measured hidden surface. Rear interior chords are subdivided to avoid touching the observed sheet.",
+  "limitations": [
+    "The hidden geometry is illustrative, not a released closed nucleus model.",
+    "The depth envelope inherits the observed height field and its noise; no additional geology or photometry is inferred.",
+    "Gap interpolation and every rear face are forced to the shared missing-data grid in all five datasets.",
+    "Independent USGS and DLR footprints produce different estimated closures. Measured-surface comparison excludes the estimated faces."
+  ],
+  "reduction": "The USGS envelope and front are reduced together to at most 1000 native triangles. Opposite zero-volume face pairs are removed. A face involving any inferred rear vertex is always grid; all photographic and scientific texels must also lie inside the original source footprint. The resulting source-post surface is checked against the original DEM with a 100 m sampled limit. DLR uses an 800-triangle source reduction checked within 110 m, retains every original boundary and gap, and adds its unreduced estimated closure. Material transfer still requires a source correspondence within 85 m."
+}

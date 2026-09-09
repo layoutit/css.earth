@@ -1,0 +1,249 @@
+[
+  {
+    "phase": 0,
+    "fitPosts": 290,
+    "holdoutPosts": 3475,
+    "holdoutOverlap": 3367,
+    "parameters": [
+      56.46455718484364,
+      -0.005162698361039769,
+      -509.6302295445958,
+      -394.55551433055655,
+      -37.47995481199628
+    ],
+    "holdoutMeanMeters": -11.891204377119903,
+    "holdoutRmsMeters": 201.0072629926159,
+    "holdoutStdMeters": 200.65522428844014,
+    "holdoutP95Meters": 376.2262850584291,
+    "holdoutMaxMeters": 933.8330254810821,
+    "deltaFromReferenceXYMaxMeters": 0.0005825578661971283
+  },
+  {
+    "phase": 1,
+    "fitPosts": 290,
+    "holdoutPosts": 3475,
+    "holdoutOverlap": 3371,
+    "parameters": [
+      55.19266946060665,
+      0.011148576215367495,
+      -588.3741302877744,
+      -405.96206162793413,
+      -68.28899456174464
+    ],
+    "holdoutMeanMeters": -16.86987003774898,
+    "holdoutRmsMeters": 205.66280743745668,
+    "holdoutStdMeters": 204.96974861663332,
+    "holdoutP95Meters": 390.44019812107,
+    "holdoutMaxMeters": 946.5709018642428,
+    "deltaFromReferenceXYMaxMeters": 186.60538348024838
+  },
+  {
+    "phase": 2,
+    "fitPosts": 290,
+    "holdoutPosts": 3475,
+    "holdoutOverlap": 3384,
+    "parameters": [
+      55.49525295208377,
+      0.006662910985410905,
+      -555.6076865594459,
+      -399.95565070160814,
+      -56.80455778966469
+    ],
+    "holdoutMeanMeters": -12.049645646861263,
+    "holdoutRmsMeters": 204.35534991806244,
+    "holdoutStdMeters": 203.99979186243996,
+    "holdoutP95Meters": 385.3385861228291,
+    "holdoutMaxMeters": 940.5342172635065,
+    "deltaFromReferenceXYMaxMeters": 126.40186604143615
+  },
+  {
+    "phase": 3,
+    "fitPosts": 290,
+    "holdoutPosts": 3475,
+    "holdoutOverlap": 3387,
+    "parameters": [
+      55.634019677809476,
+      -0.0000046335082080335915,
+      -535.9290313763355,
+      -412.0870500590073,
+      -36.286040582897165
+    ],
+    "holdoutMeanMeters": -12.610801947257523,
+    "holdoutRmsMeters": 203.55009340298045,
+    "holdoutStdMeters": 203.15907116988186,
+    "holdoutP95Meters": 374.6466064638184,
+    "holdoutMaxMeters": 929.7274959888166,
+    "deltaFromReferenceXYMaxMeters": 92.32276432685671
+  },
+  {
+    "phase": 4,
+    "fitPosts": 290,
+    "holdoutPosts": 3475,
+    "holdoutOverlap": 3366,
+    "parameters": [
+      56.2696123355741,
+      -0.005740207261695332,
+      -520.8691074465909,
+      -404.05321111139887,
+      -40.02631803896081
+    ],
+    "holdoutMeanMeters": -9.160365533254678,
+    "holdoutRmsMeters": 201.29755689186143,
+    "holdoutStdMeters": 201.08902037140007,
+    "holdoutP95Meters": 374.96127988800896,
+    "holdoutMaxMeters": 929.292345201446,
+    "deltaFromReferenceXYMaxMeters": 27.72752895911442
+  },
+  {
+    "phase": 5,
+    "fitPosts": 290,
+    "holdoutPosts": 3475,
+    "holdoutOverlap": 3384,
+    "parameters": [
+      56.323897991924504,
+      -0.008988159355282327,
+      -489.3617678440351,
+      -399.89211103017243,
+      -30.616356750966535
+    ],
+    "holdoutMeanMeters": -2.744995066822556,
+    "holdoutRmsMeters": 203.81121752933015,
+    "holdoutStdMeters": 203.79273145250065,
+    "holdoutP95Meters": 374.4398209696367,
+    "holdoutMaxMeters": 920.3645983548652,
+    "deltaFromReferenceXYMaxMeters": 35.06225168499845
+  },
+  {
+    "phase": 6,
+    "fitPosts": 290,
+    "holdoutPosts": 3475,
+    "holdoutOverlap": 3356,
+    "parameters": [
+      56.61426325053392,
+      -0.005769095748069332,
+      -520.561909223138,
+      -418.6911098529962,
+      -29.916624567268713
+    ],
+    "holdoutMeanMeters": -11.117025933166653,
+    "holdoutRmsMeters": 199.5512032704749,
+    "holdoutStdMeters": 199.24129707742745,
+    "holdoutP95Meters": 370.11295797780525,
+    "holdoutMaxMeters": 894.6887992694193,
+    "deltaFromReferenceXYMaxMeters": 36.404346291567485
+  },
+  {
+    "phase": 7,
+    "fitPosts": 290,
+    "holdoutPosts": 3475,
+    "holdoutOverlap": 3378,
+    "parameters": [
+      56.65941186791452,
+      -0.0074839984332021985,
+      -488.95416274532903,
+      -405.0177619295375,
+      -23.289540396393896
+    ],
+    "holdoutMeanMeters": -8.419848475865043,
+    "holdoutRmsMeters": 201.74315357036264,
+    "holdoutStdMeters": 201.56737375914383,
+    "holdoutP95Meters": 370.7958876637127,
+    "holdoutMaxMeters": 904.9156829543158,
+    "deltaFromReferenceXYMaxMeters": 36.190813410539825
+  },
+  {
+    "phase": 8,
+    "fitPosts": 289,
+    "holdoutPosts": 3476,
+    "holdoutOverlap": 3374,
+    "parameters": [
+      57.0095854546431,
+      -0.005855901114612006,
+      -473.97622918404545,
+      -397.52822183434756,
+      -20.857225895856203
+    ],
+    "holdoutMeanMeters": -7.898558816702331,
+    "holdoutRmsMeters": 201.77017606335104,
+    "holdoutStdMeters": 201.61551705475145,
+    "holdoutP95Meters": 378.1598876633156,
+    "holdoutMaxMeters": 895.322103731621,
+    "deltaFromReferenceXYMaxMeters": 65.16012182748851
+  },
+  {
+    "phase": 9,
+    "fitPosts": 289,
+    "holdoutPosts": 3476,
+    "holdoutOverlap": 3378,
+    "parameters": [
+      57.06610619152084,
+      -0.006643744425551377,
+      -468.9332552028049,
+      -399.79313079335463,
+      -11.746522150889104
+    ],
+    "holdoutMeanMeters": -13.092387365434272,
+    "holdoutRmsMeters": 201.70568478096178,
+    "holdoutStdMeters": 201.28033353020393,
+    "holdoutP95Meters": 382.48560238442644,
+    "holdoutMaxMeters": 894.8375105168417,
+    "deltaFromReferenceXYMaxMeters": 73.96769389798058
+  },
+  {
+    "phase": 10,
+    "fitPosts": 289,
+    "holdoutPosts": 3476,
+    "holdoutOverlap": 3348,
+    "parameters": [
+      57.75616090963645,
+      -0.01388292701612659,
+      -455.4840253724919,
+      -404.6407754050113,
+      -7.700564857578482
+    ],
+    "holdoutMeanMeters": -10.669181042173875,
+    "holdoutRmsMeters": 200.38291345345772,
+    "holdoutStdMeters": 200.09867710703446,
+    "holdoutP95Meters": 382.38506165284036,
+    "holdoutMaxMeters": 876.9392808807318,
+    "deltaFromReferenceXYMaxMeters": 140.48284437224908
+  },
+  {
+    "phase": 11,
+    "fitPosts": 289,
+    "holdoutPosts": 3476,
+    "holdoutOverlap": 3341,
+    "parameters": [
+      58.30479729340861,
+      -0.013472259996919924,
+      -418.9265573293817,
+      -380.6936478978859,
+      -7.994587107353097
+    ],
+    "holdoutMeanMeters": -7.4118885657074625,
+    "holdoutRmsMeters": 203.75762044159504,
+    "holdoutStdMeters": 203.62276836324233,
+    "holdoutP95Meters": 393.18151261898873,
+    "holdoutMaxMeters": 733.3585458878505,
+    "deltaFromReferenceXYMaxMeters": 214.88314680973915
+  },
+  {
+    "phase": 12,
+    "fitPosts": 289,
+    "holdoutPosts": 3476,
+    "holdoutOverlap": 3383,
+    "parameters": [
+      56.256159896566594,
+      -0.00026588519455763996,
+      -509.9612258417227,
+      -388.67535597164743,
+      -43.1267188587863
+    ],
+    "holdoutMeanMeters": -8.79581050389047,
+    "holdoutRmsMeters": 202.58436726166113,
+    "holdoutStdMeters": 202.39332888311128,
+    "holdoutP95Meters": 380.0424088593424,
+    "holdoutMaxMeters": 928.801950731661,
+    "deltaFromReferenceXYMaxMeters": 24.702607453766518
+  }
+]

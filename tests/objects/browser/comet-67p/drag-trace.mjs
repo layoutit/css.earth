@@ -47,6 +47,11 @@ try {
     await page.locator(`button[name="lens"][value="${lensId}"]`).click();
     await page.waitForFunction(lens => document.querySelector(`button[name="lens"][value="${lens}"]`)?.getAttribute('aria-pressed') === 'true', lensId);
   }
+  if (!await page.locator('input[name="shadows"]').isChecked()) {
+    await page.getByRole('button', { name: 'Settings', exact: true }).click();
+    await page.locator('label').filter({ hasText: 'Shadows' }).click();
+    await page.keyboard.press('Escape');
+  }
   assert.equal(await page.locator('input[name="shadows"]').isChecked(), true);
   await page.waitForLoadState('networkidle');
   await Promise.all(responseTasks);
