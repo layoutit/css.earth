@@ -162,6 +162,54 @@
       "headers": {
         "User-Agent": "curl/8.7.1"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/0202560500rcal_gre.fit",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.fit",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/0202560500rcal_gre.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.xml",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/i0500.fit",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.fit",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/i0500.lbl",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.lbl",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
     }
   ]
 }

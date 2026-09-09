@@ -1,0 +1,157 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "body": "ida",
+      "lens": "calibrated",
+      "dpr": 1,
+      "readback": {
+        "leaves": 800,
+        "shadows": false,
+        "assets": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/ida/ida-calibrated-surface@2x.webp",
+            "bytes": 284728,
+            "sha256": "57da5425aca952a853ecd56d2a8cb47d59052f20c2192876f3dfa8a1531404f5"
+          }
+        ]
+      },
+      "screenshot": "output/asteroid-spacecraft-mosaics/browser/production-ida-dpr-1.png",
+      "errors": [],
+      "browser": "153.0.8010.12"
+    },
+    {
+      "body": "gaspra",
+      "lens": "calibrated",
+      "dpr": 1,
+      "readback": {
+        "leaves": 800,
+        "shadows": false,
+        "assets": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
+            "bytes": 242376,
+            "sha256": "e935327a81bab8a8eed2cff9ca57657a6fe85819a7c93ce08110378b3fc07ff1"
+          }
+        ]
+      },
+      "screenshot": "output/asteroid-spacecraft-mosaics/browser/production-gaspra-dpr-1.png",
+      "errors": [],
+      "browser": "153.0.8010.12"
+    },
+    {
+      "body": "steins",
+      "lens": "osiris",
+      "dpr": 1,
+      "readback": {
+        "leaves": 800,
+        "shadows": false,
+        "assets": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/steins/steins-osiris-surface@2x.webp",
+            "bytes": 283696,
+            "sha256": "833b6747495c825d89c7696be2581bae9fd7594d90b870e444c63a8806425c8b"
+          }
+        ]
+      },
+      "screenshot": "output/asteroid-spacecraft-mosaics/browser/production-steins-dpr-1.png",
+      "errors": [],
+      "browser": "153.0.8010.12"
+    },
+    {
+      "body": "lutetia",
+      "lens": "osiris",
+      "dpr": 1,
+      "readback": {
+        "leaves": 800,
+        "shadows": false,
+        "assets": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+            "bytes": 838004,
+            "sha256": "c9a1287c2b3fd59416e0e156442b3fc9cbac8629a59e8f277f1659b4be37fe97"
+          }
+        ]
+      },
+      "screenshot": "output/asteroid-spacecraft-mosaics/browser/production-lutetia-dpr-1.png",
+      "errors": [],
+      "browser": "153.0.8010.12"
+    },
+    {
+      "body": "ida",
+      "lens": "calibrated",
+      "dpr": 2,
+      "readback": {
+        "leaves": 800,
+        "shadows": false,
+        "assets": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/ida/ida-calibrated-surface@2x.webp",
+            "bytes": 284728,
+            "sha256": "57da5425aca952a853ecd56d2a8cb47d59052f20c2192876f3dfa8a1531404f5"
+          }
+        ]
+      },
+      "screenshot": "output/asteroid-spacecraft-mosaics/browser/production-ida-dpr-2.png",
+      "errors": [],
+      "browser": "153.0.8010.12"
+    },
+    {
+      "body": "gaspra",
+      "lens": "calibrated",
+      "dpr": 2,
+      "readback": {
+        "leaves": 800,
+        "shadows": false,
+        "assets": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
+            "bytes": 242376,
+            "sha256": "e935327a81bab8a8eed2cff9ca57657a6fe85819a7c93ce08110378b3fc07ff1"
+          }
+        ]
+      },
+      "screenshot": "output/asteroid-spacecraft-mosaics/browser/production-gaspra-dpr-2.png",
+      "errors": [],
+      "browser": "153.0.8010.12"
+    },
+    {
+      "body": "steins",
+      "lens": "osiris",
+      "dpr": 2,
+      "readback": {
+        "leaves": 800,
+        "shadows": false,
+        "assets": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/steins/steins-osiris-surface@2x.webp",
+            "bytes": 283696,
+            "sha256": "833b6747495c825d89c7696be2581bae9fd7594d90b870e444c63a8806425c8b"
+          }
+        ]
+      },
+      "screenshot": "output/asteroid-spacecraft-mosaics/browser/production-steins-dpr-2.png",
+      "errors": [],
+      "browser": "153.0.8010.12"
+    },
+    {
+      "body": "lutetia",
+      "lens": "osiris",
+      "dpr": 2,
+      "readback": {
+        "leaves": 800,
+        "shadows": false,
+        "assets": [
+          {
+            "url": "http://127.0.0.1:53135/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+            "bytes": 838004,
+            "sha256": "c9a1287c2b3fd59416e0e156442b3fc9cbac8629a59e8f277f1659b4be37fe97"
+          }
+        ]
+      },
+      "screenshot": "output/asteroid-spacecraft-mosaics/browser/production-lutetia-dpr-2.png",
+      "errors": [],
+      "browser": "153.0.8010.12"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "browser": "152.0.7977.84",
+  "chromeLaunch": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/dom-cleanliness/chrome-process-8oR6Ch/launch-chrome.sh",
+    "wrapperSha256": "2b23c0fd2a0db0fa6fa30e6a16cfcb17afd295289dd83ad8e564b68fb43f7448",
+    "stdioLogPath": "output/dom-cleanliness/chrome-process-8oR6Ch/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "reports": [
+    {
+      "object": "ida",
+      "density": 1,
+      "initial": {
+        "nodes": 109816,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ida",
+      "density": 2,
+      "initial": {
+        "nodes": 109816,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    }
+  ],
+  "navigation": [],
+  "problems": []
+}

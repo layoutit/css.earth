@@ -1,0 +1,432 @@
+{
+  "status": "SELECTED_BODY_REVIEW_COMPLETE_DRAFT_WITH_AGGREGATE_GAPS",
+  "base": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
+  "capturedImplementation": "b0df1a8ef46ad93a5c4893140a58772a79a80a11",
+  "checks": [
+    {
+      "check": "b8-numeric-tests",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 0.3,
+      "peakRSSBytes": 163840,
+      "minimumObservedFreePercent": 71,
+      "receipt": "checks/b8-numeric-tests.json",
+      "log": "checks/b8-numeric-tests.log"
+    },
+    {
+      "check": "b8-source-reproduction",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 31.2,
+      "peakRSSBytes": 261685248,
+      "minimumObservedFreePercent": 71,
+      "receipt": "checks/b8-source-reproduction.json",
+      "log": "checks/b8-source-reproduction.log"
+    },
+    {
+      "check": "b8-muse-visible-copy-audit",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 0.8,
+      "peakRSSBytes": 91619328,
+      "minimumObservedFreePercent": 63,
+      "receipt": "checks/b8-muse-visible-copy-audit.json",
+      "log": "checks/b8-muse-visible-copy-audit.log"
+    },
+    {
+      "check": "b8-enceladus-independent-fresh",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 0.5,
+      "peakRSSBytes": 131629056,
+      "minimumObservedFreePercent": 72,
+      "receipt": "checks/b8-enceladus-independent-fresh.json",
+      "log": "checks/b8-enceladus-independent-fresh.log"
+    },
+    {
+      "check": "b8-scientific-preparation-complete",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 1.1,
+      "peakRSSBytes": 152616960,
+      "minimumObservedFreePercent": 65,
+      "receipt": "checks/b8-scientific-preparation-complete.json",
+      "log": "checks/b8-scientific-preparation-complete.log"
+    },
+    {
+      "check": "b8-final-moon-tests",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 9.9,
+      "peakRSSBytes": 1576599552,
+      "minimumObservedFreePercent": 43,
+      "receipt": "checks/b8-final-moon-tests.json",
+      "log": "checks/b8-final-moon-tests.log"
+    },
+    {
+      "check": "b8-final-package-closure",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 5.8,
+      "peakRSSBytes": 1368358912,
+      "minimumObservedFreePercent": 61,
+      "receipt": "checks/b8-final-package-closure.json",
+      "log": "checks/b8-final-package-closure.log"
+    },
+    {
+      "check": "b8-integrated-package-build",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 3.8,
+      "peakRSSBytes": 697335808,
+      "minimumObservedFreePercent": 64,
+      "receipt": "checks/b8-integrated-package-build.json",
+      "log": "checks/b8-integrated-package-build.log"
+    },
+    {
+      "check": "b8-current-renderer-build",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 5.2,
+      "peakRSSBytes": 1362313216,
+      "minimumObservedFreePercent": 65,
+      "receipt": "checks/b8-current-renderer-build.json",
+      "log": "checks/b8-current-renderer-build.log"
+    },
+    {
+      "check": "b8-current-preparation-build",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 0.8,
+      "peakRSSBytes": 388841472,
+      "minimumObservedFreePercent": 64,
+      "receipt": "checks/b8-current-preparation-build.json",
+      "log": "checks/b8-current-preparation-build.log"
+    },
+    {
+      "check": "b8-test-packages",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 15.1,
+      "peakRSSBytes": 692125696,
+      "minimumObservedFreePercent": 55,
+      "receipt": "checks/b8-test-packages.json",
+      "log": "checks/b8-test-packages.log"
+    },
+    {
+      "check": "b8-test-renderer",
+      "status": "FAIL",
+      "exitCode": 1,
+      "seconds": 18.8,
+      "peakRSSBytes": 2601828352,
+      "minimumObservedFreePercent": 57,
+      "receipt": "checks/b8-test-renderer.json",
+      "log": "checks/b8-test-renderer.log"
+    },
+    {
+      "check": "b8-test-platform",
+      "status": "FAIL",
+      "exitCode": 1,
+      "seconds": 96.2,
+      "peakRSSBytes": 1847246848,
+      "minimumObservedFreePercent": 57,
+      "receipt": "checks/b8-test-platform.json",
+      "log": "checks/b8-test-platform.log"
+    },
+    {
+      "check": "b8-test-shell",
+      "status": "FAIL",
+      "exitCode": 1,
+      "seconds": 9.9,
+      "peakRSSBytes": 1168801792,
+      "minimumObservedFreePercent": 63,
+      "receipt": "checks/b8-test-shell.json",
+      "log": "checks/b8-test-shell.log"
+    },
+    {
+      "check": "b8-acquire-verify",
+      "status": "FAIL",
+      "exitCode": 1,
+      "seconds": 0.3,
+      "peakRSSBytes": 458752,
+      "minimumObservedFreePercent": 64,
+      "receipt": "checks/b8-acquire-verify.json",
+      "log": "checks/b8-acquire-verify.log"
+    },
+    {
+      "check": "b8-production-render",
+      "status": "FAIL",
+      "exitCode": 1,
+      "seconds": 5.8,
+      "peakRSSBytes": 1814724608,
+      "minimumObservedFreePercent": 64,
+      "receipt": "checks/b8-production-render.json",
+      "log": "checks/b8-production-render.log"
+    },
+    {
+      "check": "b8-publish-and-fresh-install",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 109.1,
+      "peakRSSBytes": 750469120,
+      "minimumObservedFreePercent": 69,
+      "receipt": "checks/b8-publish-and-fresh-install.json",
+      "log": "checks/b8-publish-and-fresh-install.log"
+    },
+    {
+      "check": "b8-io-replay-atlas",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 3.3,
+      "peakRSSBytes": 657719296,
+      "minimumObservedFreePercent": 52,
+      "receipt": "checks/b8-io-replay-atlas.json",
+      "log": "checks/b8-io-replay-atlas.log"
+    },
+    {
+      "check": "b8-io-replay-transport",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 2.8,
+      "peakRSSBytes": 1045184512,
+      "minimumObservedFreePercent": 53,
+      "receipt": "checks/b8-io-replay-transport.json",
+      "log": "checks/b8-io-replay-transport.log"
+    },
+    {
+      "check": "b8-io-qualified-dpr1",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 40.2,
+      "peakRSSBytes": 5347311616,
+      "minimumObservedFreePercent": 43,
+      "receipt": "checks/b8-io-qualified-dpr1.json",
+      "log": "checks/b8-io-qualified-dpr1.log"
+    },
+    {
+      "check": "b8-io-qualified-dpr2",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 39.7,
+      "peakRSSBytes": 5575311360,
+      "minimumObservedFreePercent": 57,
+      "receipt": "checks/b8-io-qualified-dpr2.json",
+      "log": "checks/b8-io-qualified-dpr2.log"
+    },
+    {
+      "check": "b8-io-qualified-dom",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 16.1,
+      "peakRSSBytes": 4984029184,
+      "minimumObservedFreePercent": 59,
+      "receipt": "checks/b8-io-qualified-dom.json",
+      "log": "checks/b8-io-qualified-dom.log"
+    },
+    {
+      "check": "b8-io-qualified-conformance",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 54.7,
+      "peakRSSBytes": 4913561600,
+      "minimumObservedFreePercent": 41,
+      "receipt": "checks/b8-io-qualified-conformance.json",
+      "log": "checks/b8-io-qualified-conformance.log"
+    },
+    {
+      "check": "b8-ganymede-replay-atlas",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 3.0,
+      "peakRSSBytes": 701759488,
+      "minimumObservedFreePercent": 55,
+      "receipt": "checks/b8-ganymede-replay-atlas.json",
+      "log": "checks/b8-ganymede-replay-atlas.log"
+    },
+    {
+      "check": "b8-ganymede-replay-transport",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 2.5,
+      "peakRSSBytes": 1021739008,
+      "minimumObservedFreePercent": 59,
+      "receipt": "checks/b8-ganymede-replay-transport.json",
+      "log": "checks/b8-ganymede-replay-transport.log"
+    },
+    {
+      "check": "b8-ganymede-qualified-dpr1",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 28.3,
+      "peakRSSBytes": 5666013184,
+      "minimumObservedFreePercent": 59,
+      "receipt": "checks/b8-ganymede-qualified-dpr1.json",
+      "log": "checks/b8-ganymede-qualified-dpr1.log"
+    },
+    {
+      "check": "b8-ganymede-qualified-dpr2",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 29.7,
+      "peakRSSBytes": 5010767872,
+      "minimumObservedFreePercent": 53,
+      "receipt": "checks/b8-ganymede-qualified-dpr2.json",
+      "log": "checks/b8-ganymede-qualified-dpr2.log"
+    },
+    {
+      "check": "b8-ganymede-qualified-dom",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 20.1,
+      "peakRSSBytes": 5232836608,
+      "minimumObservedFreePercent": 58,
+      "receipt": "checks/b8-ganymede-qualified-dom.json",
+      "log": "checks/b8-ganymede-qualified-dom.log"
+    },
+    {
+      "check": "b8-ganymede-qualified-conformance",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 55.4,
+      "peakRSSBytes": 5440765952,
+      "minimumObservedFreePercent": 48,
+      "receipt": "checks/b8-ganymede-qualified-conformance.json",
+      "log": "checks/b8-ganymede-qualified-conformance.log"
+    },
+    {
+      "check": "b8-enceladus-replay-atlas",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 4.7,
+      "peakRSSBytes": 838828032,
+      "minimumObservedFreePercent": 59,
+      "receipt": "checks/b8-enceladus-replay-atlas.json",
+      "log": "checks/b8-enceladus-replay-atlas.log"
+    },
+    {
+      "check": "b8-enceladus-replay-transport",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 2.5,
+      "peakRSSBytes": 925941760,
+      "minimumObservedFreePercent": 58,
+      "receipt": "checks/b8-enceladus-replay-transport.json",
+      "log": "checks/b8-enceladus-replay-transport.log"
+    },
+    {
+      "check": "b8-enceladus-qualified-dpr1",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 56.9,
+      "peakRSSBytes": 4295671808,
+      "minimumObservedFreePercent": 38,
+      "receipt": "checks/b8-enceladus-qualified-dpr1.json",
+      "log": "checks/b8-enceladus-qualified-dpr1.log"
+    },
+    {
+      "check": "b8-enceladus-qualified-dpr2",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 54.9,
+      "peakRSSBytes": 5000953856,
+      "minimumObservedFreePercent": 43,
+      "receipt": "checks/b8-enceladus-qualified-dpr2.json",
+      "log": "checks/b8-enceladus-qualified-dpr2.log"
+    },
+    {
+      "check": "b8-enceladus-qualified-dom",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 24.0,
+      "peakRSSBytes": 4012261376,
+      "minimumObservedFreePercent": 56,
+      "receipt": "checks/b8-enceladus-qualified-dom.json",
+      "log": "checks/b8-enceladus-qualified-dom.log"
+    },
+    {
+      "check": "b8-enceladus-qualified-conformance",
+      "status": "PASS",
+      "exitCode": 0,
+      "seconds": 92.4,
+      "peakRSSBytes": 4863852544,
+      "minimumObservedFreePercent": 54,
+      "receipt": "checks/b8-enceladus-qualified-conformance.json",
+      "log": "checks/b8-enceladus-qualified-conformance.log"
+    },
+    {
+      "check": "b8-qualified-all-object-browser",
+      "status": "FAIL",
+      "exitCode": 1,
+      "seconds": 18.0,
+      "peakRSSBytes": 2705211392,
+      "minimumObservedFreePercent": 63,
+      "receipt": "checks/b8-qualified-all-object-browser.json",
+      "log": "checks/b8-qualified-all-object-browser.log"
+    }
+  ],
+  "testCounts": {
+    "sourcePython": 15,
+    "moonUnits": 11,
+    "scientificPreparation": 23,
+    "packages": 762,
+    "renderer": {
+      "passed": 305,
+      "failed": 17,
+      "failedFiles": 16
+    },
+    "platform": {
+      "passed": 422,
+      "failed": 1265
+    },
+    "shell": {
+      "passed": 240,
+      "failed": 34
+    }
+  },
+  "browser": {
+    "bodies": 3,
+    "dprs": [
+      1,
+      2
+    ],
+    "viewLightingCases": 32,
+    "newViews": 5,
+    "status": "PASS",
+    "visualAcceptance": "visual-acceptance.json",
+    "selectedSharedConformanceCases": 21,
+    "sharedDomCleanlinessCases": 6,
+    "publicSettingsAccess": "BLOCKED_HIDDEN_ON_BASELINE"
+  },
+  "runtimeOwnership": {
+    "status": "PASS",
+    "sharedViolations": [],
+    "sceneBytesAndRetainedTreesUnchanged": true,
+    "report": "packages.json"
+  },
+  "delivery": {
+    "status": "PASS",
+    "newImages": 20,
+    "newBytes": 585804,
+    "installed": 134,
+    "reused": 0,
+    "installedBytes": 61593890,
+    "receipt": "delivery.json"
+  },
+  "aggregateLimits": [
+    "All-object source verification and browser cleanliness stop at missing Polymele inputs/transports.",
+    "Production static rendering stops at missing Abundantia prepared/object.json. Full build/assembly and deployment are unqualified.",
+    "Renderer/platform/shell aggregate tests fail with missing non-cohort fixtures/dependencies plus unclassified other-body transport/upstream-manifest/chart-count assertions. These failures are not called passing or exhaustively baseline-proven."
+  ],
+  "captureProvenance": "Unchanged report/screenshot bytes and exact loaded object/image/style pins are retained. Final documentation commit changes Git-count branding only.",
+  "preparedReplay": "prepared-replay.json",
+  "integratedBuildIdentity": "build-identity.json",
+  "newerMainIntegration": {
+    "main": "f7b7e856e144f93decee45580f07120428036c05",
+    "scope": "Shared overview and moon orbit navigation changes after the final captures",
+    "mergeTreeStatus": "CONFLICT_FREE",
+    "mergeTree": "4c5ac9174c8890a7bf17727d168e48a7031eaaa7",
+    "mergedIntoBranch": false,
+    "combinedBehavior": "UNQUALIFIED",
+    "requiredBeforeReadiness": true
+  }
+}

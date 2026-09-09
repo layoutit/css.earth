@@ -102,6 +102,31 @@
               "filter": "CLEAR"
             },
             "coverageInsetPixels": 5
+          },
+          {
+            "id": "107318313",
+            "path": "observations/107318313rcal_clr.fit",
+            "labelPath": "observations/107318313rcal_clr.xml",
+            "encoding": "fits-ssi-iof",
+            "cameraCatalog": {
+              "path": "reference/951gaspimg.tab",
+              "labelPath": "reference/951gaspimg.xml",
+              "imageNumber": 107318313,
+              "longitudeDirection": "west",
+              "pixelOrigin": "one-based",
+              "instrumentPath": "reference/gll36001.ti"
+            },
+            "quality": {
+              "rawPath": "observations/e8313.fit",
+              "rawLabelPath": "observations/e8313.lbl",
+              "badDataPath": "observations/gaspbad.tab",
+              "badDataLabelPath": "observations/gaspbad.lbl",
+              "imageId": "e8313",
+              "target": "GASPRA",
+              "startTime": "1991-10-29T22:26:06.482Z",
+              "filter": "CLEAR"
+            },
+            "coverageInsetPixels": 5
           }
         ],
         "photometry": {
@@ -116,8 +141,8 @@
           "maximumLevel": 1
         },
         "metadata": {
-          "label": "Calibrated image",
-          "coverage": "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid."
+          "label": "SSI reflectance",
+          "coverage": "Two complementary Galileo clear-filter close-ups cover both ends of Gaspra. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
         }
       }
     ]
