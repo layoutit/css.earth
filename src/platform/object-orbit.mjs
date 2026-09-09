@@ -442,16 +442,17 @@ export function createRetainedCubicSkyOrbit({
       try { orientation.rebaseScene(change); publish(); }
       catch (error) { retireFailure(error); throw error; }
     },
-    flyToState({ controlPitch, controlYaw, zoom }) {
+    flyToState({ controlPitch, controlYaw, controlRoll = 0, zoom, transition }) {
       if (lifetime.disposed) return Promise.resolve({ completed: false });
       try {
-      if (![controlPitch, controlYaw, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
+      if (![controlPitch, controlYaw, controlRoll, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
       controls.stop();
       const start = { ...safeCamera.state };
-      const targetZoom = clamp(zoom, minimumZoom(), maximumZoom());
-      const flight = orientation.prepareFlight({ controlPitch, controlYaw });
+      const targetZoom = transition?.preserveZoom ? start.zoom : clamp(zoom, minimumZoom(), maximumZoom());
+      const flight = orientation.prepareFlight({ controlPitch, controlYaw, controlRoll });
       const sample = progress => {
-        const frame = sampleDestinationFlight({ startZoom: start.zoom, targetZoom,
+        const ease = progress * progress * (3 - 2 * progress);
+        const frame = transition ? { rotation: ease, zoom: start.zoom * (targetZoom / start.zoom) ** ease } : sampleDestinationFlight({ startZoom: start.zoom, targetZoom,
           overviewZoom: cameraPlan.defaultZoom, angularDistance: flight.angularDistance }, progress);
         safeCamera.update({ rotX: start.rotX + (controlPitch - start.rotX) * frame.rotation,
           rotY: start.rotY + (controlYaw - start.rotY) * frame.rotation, zoom: frame.zoom });
@@ -462,7 +463,7 @@ export function createRetainedCubicSkyOrbit({
         sample(1);
         return Promise.resolve({ completed: true });
       }
-      return controls.flyTo({ sample });
+      return controls.flyTo({ sample, durationMilliseconds: transition?.durationMilliseconds });
       } catch (error) { retireFailure(error); throw error; }
     },
     // Native cache notifications report failures through the same fatal owner.

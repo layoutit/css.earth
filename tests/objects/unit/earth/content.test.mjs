@@ -15,7 +15,7 @@ test("publishes evidence-backed Earth shell content", async () => {
     assert.equal(facts.get(id).source.checked, review.checked);
   }
   assert.deepEqual(PREPARED_EARTH_LENSES.controls.map(({ id }) => id), [
-    "normal", "topography", "night-lights", "cross-section",
+    "normal", "topography", "night-lights", "enso", "cross-section",
   ]);
   const snapshot = JSON.parse(await readFile(new URL("../../../../data/planets/earth.json", import.meta.url), "utf8"));
   assert.equal(snapshot.sourceId, 48583);

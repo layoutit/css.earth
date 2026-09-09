@@ -15,10 +15,13 @@ test('Earth uses the same globe camera limits and drag as Mercury and Saturn in 
   assert.equal(runtimeDefinition.camera.sceneScale,(await read('src/planets/mercury/prepared/runtime.json')).camera.sceneScale);
   for(const variant of runtimeDefinition.variants) {
     assert.equal(variant.navigation.maximumZoom,4);
-    assert.equal(variant.navigation.camera,null);
+    if (variant.when.lensId === 'enso') {
+      assert.ok(Number.isFinite(variant.navigation.camera.controlYaw));
+      assert.equal(variant.navigation.camera.zoom,1.1);
+    } else assert.equal(variant.navigation.camera,null);
   }
 });
-test('Earth mount and delivery contain only the four globe views, without geographic residency',async()=>{
+test('Earth mount and delivery contain the authored globe views, without geographic residency',async()=>{
   const descriptor=await read('src/planets/earth/object.json');
   const content=await read('src/planets/earth/prepared/content.json');
   assert.equal(descriptor.properties.recipe.paging,undefined);
@@ -28,7 +31,7 @@ test('Earth mount and delivery contain only the four globe views, without geogra
   assert.deepEqual(runtimeDefinition.pageLayers,[]);
   assert.equal(PREPARED_EARTH_SCENE.counts.cityPageLeafCount,0);
   assert.equal(PREPARED_EARTH_SCENE.counts.noisePageLeafCount,0);
-  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens=>lens.id),['normal','topography','night-lights','cross-section']);
+  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens=>lens.id),['normal','topography','night-lights','enso','cross-section']);
   assert.doesNotMatch(JSON.stringify(content),/WorldCover|GeoNames|Buenos Aires/);
   const assets=await read('src/planets/earth/runtime-assets.json');
   assert.equal(assets.assets.some(asset=>/noise|places|city|wmts/.test(asset.filename)),false);
