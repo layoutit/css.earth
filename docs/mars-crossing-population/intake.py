@@ -2,6 +2,7 @@ from pathlib import Path
 import json,gzip,re,subprocess,math,hashlib
 import numpy as np
 ROOT=Path(__file__).parent; CACHE=Path('output/population-prs/mars-crossers/research')
+CACHE.mkdir(parents=True,exist_ok=True)
 rows=json.loads((ROOT/'models.json').read_text()); selected={'Aethra':161,'Lyyli':2012,'Hela':454,'Kemi':1202,'Taurinensis':490}
 akari={}
 for line in gzip.decompress(Path('src/planets/proserpina/source/reference/AcuA_V1.txt.gz').read_bytes()).decode().splitlines():
@@ -13,6 +14,7 @@ def fetch(url,name):
 results=[]
 for r in rows:
  if selected.get(r['name'])!=r['modelId']:continue
+ fetch(r['modelUrl'],f'model-{r["modelId"]}.html')
  f=r['fields'];mid=r['modelId'];num=int(re.search(r'\((\d+)\)',f['Asteroid'])[1]);assert f['Asteroid']==f'({num}) {r["name"]}'
  raw=fetch(r['files']['shape.txt'],f'shape-{mid}.txt');lines=[l.split() for l in raw.decode().splitlines() if l.strip()];nv,nf=map(int,lines[0]);v=np.array(lines[1:nv+1],float);faces=np.array(lines[nv+1:],int);tri=v[faces-1];vol=float(np.einsum('ij,ij->i',tri[:,0],np.cross(tri[:,1],tri[:,2])).sum()/6);vol2=float(np.einsum('ij,ij->i',tri.mean(axis=1),np.cross(tri[:,1]-tri[:,0],tri[:,2]-tri[:,0])).sum()/6)
  assert vol>0 and abs(vol-vol2)<vol*1e-10 and faces.shape==(nf,3)

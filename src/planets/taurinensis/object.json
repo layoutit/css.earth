@@ -51,41 +51,77 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "ff82cb7312a1bafe92e96344356fc5c878cf77818a36d69d140134a27732f968"
+          "sha256": "c3ff27ae14cd4c4ca06aab0cbdcde06061ca4e04eaeddd3b0d7935b8a481e19a"
         },
         {
           "id": "rotation",
           "path": "source/preparation/rotation.json",
-          "sha256": "0f84d78e2bc4ef81cd00aae0a600c2b78fce71bd452ec66a0bccd8f01bf46f5f"
+          "sha256": "07715ffbf3e1cf5afd4aa4133736fd83885842c32ed9a26d833a24d251bef58d"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "63faf33f4fe6414f2bd658c9e5912279529af49c5b562407954837123c6963b3"
+          "sha256": "6840157bd46d6f6b945e033eeb443be09226599abcc824aa5545495e1314e189"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "9cadacb16fd9a3beceab55f9e95a43af217dd7f05467ac8e49cb0728a73f5451"
+          "sha256": "ba1bee12a3c4f7c11672219c402fc23a8cae84a88ba50f30b55a7ae051118753"
         },
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "dbb24fb3c934186a643309f3fcb04906965504900157de99348814a3ae3648f7"
+          "sha256": "61a83b89bbd4273aa67c5dff9322673a6fe67f6df3da0252eb340750b4326af5"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "954ce08f509f36dbecae01f06d916ac82ac0b04efe89464fab1ccdbc58ef891e"
+          "sha256": "f87d8f04d8873e6c1befb1a85bc353c87dc7eb868473c51ce8c8e49a390b997d"
         }
       ]
     },
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/taurinensis-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "cf1edff11efd957b1d779d10266831f758b8ca335873a5e84c78e81ac6aa802f"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        51987724831.3298,
+        -262334742012.8895,
+        -108165355248.55943
+      ],
+      "presentationToReference": [
+        0.18023948926594022,
+        -5.551115123125783e-17,
+        0.9836227561972898,
+        -0.9024562346540616,
+        0.39777715593191376,
+        0.16536649827801098,
+        -0.3912626624700682,
+        -0.9174820620691817,
+        0.07169515142682639
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 45.369565217391305,
+      "bodyRadiusM": 10435
     }
   },
   "schema": "cssearth-object@1",
-  "type": "layered-body"
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "84aab3e013a0de7395bff33e753dab2c6c549f54cdfa293df4c3e0e6016a0cb8"
+  }
 }

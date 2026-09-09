@@ -30,6 +30,7 @@ for(const b of bodies){
  const title=createPlanetTitleSource(b.displayName,font);await write(resolve(s,'presentation/title-mark.json'),{schema:'cssearth-title-source@1',...title});
  const content=await json(resolve(s,'content/object.json'));content.title=title;await write(resolve(s,'content/object.json'),content);await seal(root);
 }
+if(args.includes('--seal-only'))process.exit(0);
 for(const b of bodies){
  const root=resolve('src/planets',b.id),s=resolve(root,'source'),m=await json(resolve(s,'manifest.json'));
  if(m.generatedIntermediates.length&&!args.includes('--refresh-context')){console.log(b.id,'already sealed');continue;}

@@ -62,5 +62,29 @@
   "elevation": [
     -7,
     7
-  ]
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1140,
+    "sourceVertices": 572,
+    "weldedVertices": 572,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 271.2,
+    "estimatedErrorMeters": 35.6572151184082,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 10442359104989.602
+    }
+  }
 }

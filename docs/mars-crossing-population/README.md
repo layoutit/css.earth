@@ -28,4 +28,13 @@ python3 docs/mars-crossing-population/register-objects.py
 node docs/mars-crossing-population/integrate-context.mjs --source-only
 ```
 
-Current state: source authoring only. Title/context finalization, serial bakes, delivery and browser qualification are pending. The live Centaur preview is preserved while this branch is authored.
+After all five bakes, refresh the navigation bindings and generic page metadata using `refresh-transports.mjs`, compile the resealed Sun world context, then regenerate the shared minimap point index before the production build:
+
+```sh
+node site/minimap/prepare.mjs
+node --test site/test/minimap-point-range.test.mjs site/test/minimap-point-coverage.test.mjs
+```
+
+`publish.mjs` uses the existing content-addressed runtime publisher, restricted to these five bodies and one upload at a time. `fresh-install.mjs` independently downloads the published inventories with concurrency one and validates every byte count and hash.
+
+Current state: serial source contexts and bakes are in progress. Final integration, delivery, numerical qualification and actual-browser images remain pending.

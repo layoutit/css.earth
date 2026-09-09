@@ -51,41 +51,77 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "ff82cb7312a1bafe92e96344356fc5c878cf77818a36d69d140134a27732f968"
+          "sha256": "30f2152e3d13d258a93ec98caa53015bc16db5cf93dcaf4220fcc6da78ad1e66"
         },
         {
           "id": "rotation",
           "path": "source/preparation/rotation.json",
-          "sha256": "0f84d78e2bc4ef81cd00aae0a600c2b78fce71bd452ec66a0bccd8f01bf46f5f"
+          "sha256": "5afbd5fead6b354f2a15c3b95d8392c948e2650614f0c3f4ad23142a951a7833"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "63faf33f4fe6414f2bd658c9e5912279529af49c5b562407954837123c6963b3"
+          "sha256": "581d2b740810991eb06e547c11122795ed937fe4ee70b26fe264c45cbebe84d5"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "9cadacb16fd9a3beceab55f9e95a43af217dd7f05467ac8e49cb0728a73f5451"
+          "sha256": "a07a902a4148802269e8f3cedeed34e18ee193dd8ea08bccc3a2c3d8c1790008"
         },
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "dbb24fb3c934186a643309f3fcb04906965504900157de99348814a3ae3648f7"
+          "sha256": "ec7b0e4b89654d90a570aa1410eb47d951d7059b71c19b8a59b8b3818e791c8f"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "954ce08f509f36dbecae01f06d916ac82ac0b04efe89464fab1ccdbc58ef891e"
+          "sha256": "a4235b316538013d0e11f577111f7d5e600be9d17865d4be5dc17c2684d3a2a0"
         }
       ]
     },
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/hela-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "eb5a630600e7b75487a963d79cffaf4eab8b26b601aa696c9293ad3d25408094"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -377490956090.6639,
+        379991046177.50024,
+        16300520144.593157
+      ],
+      "presentationToReference": [
+        -0.7283604635857936,
+        -5.551115123125783e-17,
+        -0.6851941586770045,
+        0.6286533496207362,
+        0.39777715593191365,
+        -0.6682576600603592,
+        0.2725545836996992,
+        -0.9174820620691817,
+        -0.2897251536984072
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.39777715593191365,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 29.108695652173914,
+      "bodyRadiusM": 6695
     }
   },
   "schema": "cssearth-object@1",
-  "type": "layered-body"
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "a4611c1b2ce7ff1ea06a7e92fc8e08bd194572ea850f3744ec734f8adf523bf0"
+  }
 }

@@ -38,7 +38,7 @@
         "latitudeType": "planetocentric",
         "units": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
         "metersPerUnit": 21858.612161651778,
-        "referenceRadiusMeters": 13560.0
+        "referenceRadiusMeters": 13560
       },
       "coverage": "Convex lightcurve reconstruction at approximate thermal scale: 27.12 km effective diameter (catalog ±1.31 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes. AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
       "expectedBytes": 46257,
@@ -62,19 +62,51 @@
       "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
     }
   ],
-  "generatedIntermediates": [],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/6562/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2018); model 2012, version 2018-07-18.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 63890,
+      "expectedSha256": "5af44deb8311091cc539cebc1eaf69869cb03b4bd430113f2e5200676bdd9bf5",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "lyyli-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
   "documents": [
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 5850,
-      "expectedSha256": "e8a63c744cbc02c6eb3b19ca752d56d7fbee5fc2b9149bb8873e55454c19c9f5"
+      "expectedBytes": 7598,
+      "expectedSha256": "4fe90667dfc141afbe1ad01b19926c97ef28bd7bc7e0813ae6a59e0661408faa"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 2583,
       "expectedSha256": "5a71df427f1c50d83d3e1e73190ab8d8df57472740527d36822a89d4fdb40617"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 1249,
+      "expectedSha256": "738834a85314d31671974794fe90105fab42e7a8d767bc9a7611b054558b5029"
     },
     {
       "path": "preparation/rotation.json",
@@ -85,14 +117,20 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 3156,
-      "expectedSha256": "233f7c0034e6c3b28024711d0915b97d4930e8351cb05826da22669bafb5b523"
+      "expectedBytes": 3198,
+      "expectedSha256": "6b020b1e9c40d4bf9c92650ea29ddac335fe8bc9bf3e51472acce4f7176eb64b"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 4370,
       "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "expectedBytes": 1743,
+      "expectedSha256": "05348c9e3c990befc2a26fde2065ef6332cfbba8be8ae9ba918e7eff90ab14a7"
     },
     {
       "path": "reference/2012-IAUspin.txt",
@@ -157,8 +195,8 @@
     {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 2958,
-      "expectedSha256": "46e765f9cc872bc4885dd61df05dca70943cbab32bc33a8bb46a0974a906409d"
+      "expectedBytes": 3548,
+      "expectedSha256": "1f5145966ed110ff9a26de190c3a73554bec13b52a73740456f04293ace9c9ae"
     },
     {
       "path": "reference/reference-175.html",
