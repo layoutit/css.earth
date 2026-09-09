@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a26a7daa57ac2de8c399b93d58c90826b4f68fcb035955a5e3f1f544dcb988fc"
+    "sha256": "8d740a3f36a102e674f09660af23caf8d6e2b7f26eda5c900467db23c88e6dd5"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e5cc1bd2694630d5f5ee62fe56a12535665ad153e4b3dedb9314330b5854a756",
+      "sha256": "f754139ceafa0bd90a66f1188645659ee2af40e36b75baed2b1f980de00b2485",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -179,7 +179,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
-              "title": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
+              "title": "Monochrome mosaic",
               "detail": "Corrected mosaic",
               "thumbnail": "/scenes/umbriel/umbriel-normal-thumbnail.webp",
               "surface": "umbriel-normal-surface@2x.webp",
@@ -189,7 +189,7 @@
                 "path": "../manifest.json",
                 "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
               },
-              "summary": "Voyager 2 monochrome images with corrected illumination. Shadows and seams remain; gray grid: no observations."
+              "summary": "Illumination is corrected, but photographed terrain shadows and seams remain. The gray grid marks missing observations."
             }
           ]
         },
@@ -332,8 +332,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0d87da58cca302b3d25a4685742d231d5b632c54c6a2b51500a42923d2de20f3",
-      "bytes": 7651,
+      "sha256": "f754139ceafa0bd90a66f1188645659ee2af40e36b75baed2b1f980de00b2485",
+      "bytes": 7594,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -76,7 +76,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model.",
-        "title": "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model.",
+        "title": "Monochrome mosaic",
         "thumbnail": "/scenes/mimas/mimas-normal-thumbnail.webp",
         "surface": "mimas-normal-surface@2x.webp",
         "poles": "mimas-normal-poles@2x.webp",
@@ -84,13 +84,13 @@
           "id": "cassini-iss-2017-mimas",
           "path": "../manifest.json"
         },
-        "summary": "Cassini's 2017 mosaic at 216 m/pixel. Shadows remain; the displayed shape is a simplified source model."
+        "summary": "Source pixels span 216 m in the 2017 mosaic. Photographed shadows remain; the displayed shape is a simplified model."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model.",
-        "title": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model.",
+        "title": "Enhanced-color composite",
         "thumbnail": "/scenes/mimas/mimas-enhanced-thumbnail.webp",
         "surface": "mimas-enhanced-surface@2x.webp",
         "poles": "mimas-enhanced-poles@2x.webp",
@@ -98,13 +98,13 @@
           "id": "cassini-iss-2014-mimas-color",
           "path": "../manifest.json"
         },
-        "summary": "Cassini infrared, green and ultraviolet images in enhanced color. Detail varies; image shading and source seams remain."
+        "summary": "Infrared, green and ultraviolet bands reveal colors beyond human vision. Detail varies; photographed shading and seams remain."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model.",
-        "title": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model.",
+        "title": "SPC terrain model",
         "thumbnail": "/scenes/mimas/mimas-elevation-thumbnail.webp",
         "surface": "mimas-elevation-surface@2x.webp",
         "poles": "mimas-elevation-poles@2x.webp",

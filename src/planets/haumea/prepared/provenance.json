@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "680ae91bcf1594b4f5cbc2fa0dd2d94d36cc3f33bf3dd0fbdb94bf8098b4fb0d"
+    "sha256": "46a44ca3e50705cb9a676c9c20542d5eca794c575c64ea6723d5c24e52892631"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -49,7 +49,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "57171e43e06898e88804b238cdf1fe0e7c9fed69b777dbe70f769efca1aace58",
+      "sha256": "a3e1fd7c30b7e985569744f05db8fd6bf355817f972965023a1aa4ec9468a1af",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -124,7 +124,7 @@
               "id": "illustration",
               "label": "Illustrative model",
               "description": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-              "title": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "title": "Surface illustration",
               "qualification": "Illustration; not an observed surface map.",
               "thumbnail": "illustration-thumbnail.webp",
               "surface": "surface.webp",
@@ -134,7 +134,7 @@
                 "path": "../manifest.json",
                 "url": "https://science.nasa.gov/resource/haumea-3d-model/"
               },
-              "summary": "NASA's illustration of Haumea. Its surface is unresolved; the terrain and coordinates are illustrative."
+              "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
             }
           ]
         },
@@ -219,8 +219,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aadc2d17344c41f070f493cfa3ea650774c408f7f0c58fe3a196cf6debb11e59",
-      "bytes": 3741,
+      "sha256": "a3e1fd7c30b7e985569744f05db8fd6bf355817f972965023a1aa4ec9468a1af",
+      "bytes": 3798,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

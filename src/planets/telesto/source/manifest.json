@@ -380,8 +380,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5256,
-      "expectedSha256": "6c9fea9e47518c5f066705072ded879b54c8024f427d600a38bce246d29c3000",
+      "expectedBytes": 5043,
+      "expectedSha256": "a2d1e5759ad2eb0f4629fdde665b63806648abd8d2f9fed457eae4091d85c7cd",
       "purpose": "Authored source interpretation or preparation metadata."
     },
     {

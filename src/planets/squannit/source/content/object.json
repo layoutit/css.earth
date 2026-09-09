@@ -51,7 +51,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions.",
-        "title": "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions.",
+        "title": "Radar shape model",
         "detail": "Radar shape",
         "thumbnail": "/scenes/squannit/squannit-model-thumbnail.webp",
         "surface": "squannit-model-surface@2x.webp",

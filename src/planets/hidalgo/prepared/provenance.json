@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7dd814f9d2a8efcde69401b73effbff60fb3f93d495e45323102d3dd0fdfcc04"
+    "sha256": "50732c7104320fe8e6db6d7ab6afefa3b85a55a8d99ae97e164511e31f75b030"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f30c7a641723b33c5d7b9f14c451d70ee8b357a909bd640ec704b302918f703a",
+      "sha256": "e0f8f558951f236d6805c56530f5e2d4969dbbf8206f7911c8ea6fd048b7b171",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 61.4 ± 12.7 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Thermal diameter 61.4 ± 12.7 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/hidalgo/hidalgo-shape-thumbnail.webp",
               "surface": "hidalgo-shape-surface@2x.webp",
               "poles": "hidalgo-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 30.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 30.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/hidalgo/hidalgo-elevation-thumbnail.webp",
               "surface": "hidalgo-elevation-surface@2x.webp",
               "poles": "hidalgo-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "f30c7a641723b33c5d7b9f14c451d70ee8b357a909bd640ec704b302918f703a",
+      "sha256": "e0f8f558951f236d6805c56530f5e2d4969dbbf8206f7911c8ea6fd048b7b171",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 9309,
+      "bytes": 9003,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

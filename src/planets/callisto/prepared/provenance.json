@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7f8cb09d0001b9475259d914d5e59676addd5ece961c797099ad6da811915eb"
+    "sha256": "bbf40765ab5d85b718b06b86d16516ed40a9d96bc5fbd8c34f33eec3442d59b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -120,7 +120,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5cfa9f5a75e3c76285d682507176acdda8a1291dafab3d3417d8ce61d8011c9c",
+      "sha256": "a8d5661aef22baa3f3a9b0ddc1f17d74b34c64c655f5fd32d86766f5b1b4cc02",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -211,7 +211,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
-              "title": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
+              "title": "Global image mosaic",
               "thumbnail": "/scenes/callisto/callisto-normal-thumbnail.webp",
               "surface": "callisto-normal-surface@2x.webp",
               "poles": "callisto-normal-poles@2x.webp",
@@ -220,7 +220,7 @@
                 "path": "../manifest.json"
               },
               "detail": "Global mosaic",
-              "summary": "USGS images with detail ranging from 400 m to 60 km per pixel. Shadows and seams remain; gray grid: no data."
+              "summary": "Source detail ranges from 400 m to 60 km per pixel. Photographed shadows and seams remain; the gray grid marks missing data."
             }
           ]
         },
@@ -343,8 +343,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a6285857a2d973a976faa33aff4538e4a21416702fb69de48f8ed22b6a0107c7",
-      "bytes": 8535,
+      "sha256": "a8d5661aef22baa3f3a9b0ddc1f17d74b34c64c655f5fd32d86766f5b1b4cc02",
+      "bytes": 8384,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

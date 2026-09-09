@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5b82fc500211c551dbe014020dc157974ec681e44c0a6331a242e89f0c6fb2d1"
+    "sha256": "9f444e33dc12aaa0bc7d1f2d7dbcfca1ff9b634f0539928ca4dd78ec8d5a9277"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ba7f9b013cb8438b6ded35cd5b3e0092f37995bca16eef9c92f6fd0684ee6687",
+      "sha256": "6b1e91afe3a792eda78ec69e4399a38b8a8cd57ff154d98fe0dc80ec9632c8e2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -201,20 +201,21 @@
               "label": "L’LORRI observation",
               "detail": "Spacecraft observation",
               "description": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
-              "title": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+              "title": "L’LORRI encounter image",
               "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
               "surface": "donaldjohanson-llorri-surface@2x.webp",
               "poles": "donaldjohanson-llorri-surface@2x.webp",
               "source": {
                 "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
                 "path": "../manifest.json"
-              }
+              },
+              "summary": "Only part of the encounter-facing surface is imaged. Brightness retains original lighting; the grid marks rejected or unseen areas."
             },
             {
               "id": "shape",
               "label": "Shape",
               "description": "Published Lucy shape model",
-              "title": "Original stereophotogrammetric reconstruction archived by NASA PDS/NAIF, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. Lucy stereo images constrain about 40% of the surface. The source authors completed the unseen part using a two-ellipsoid fit and symmetry; it is not all observed terrain. The body tumbles, and the preliminary frame is accurate only near the 2025 encounter. This display uses a fixed illustrative orientation and does not propagate that attitude. No registered optical surface map is supplied. Lighting is illustrative in a fixed model frame.",
+              "title": "Encounter shape model",
               "thumbnail": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
               "surface": "donaldjohanson-shape-surface@2x.webp",
               "poles": "donaldjohanson-shape-surface@2x.webp",
@@ -369,8 +370,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e0a5c596673c540c150a9593916184623d17bbf4edef8bde5b83d112bf511a29",
-      "bytes": 14193,
+      "sha256": "6b1e91afe3a792eda78ec69e4399a38b8a8cd57ff154d98fe0dc80ec9632c8e2",
+      "bytes": 13437,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

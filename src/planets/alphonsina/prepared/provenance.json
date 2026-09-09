@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e61763734d2035dd92c9e8a8cd183d49f750e83b452ffaee4dd17828724a07ea"
+    "sha256": "27e4e52b864873117423c4b6e6f20fd88b9921be3dfc575826dcada721567a4b"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c78264620d07aa721d5f7aed8f91366ded9fa8a3ec9bc8dfd910953039ac91cf",
+      "sha256": "d74d5a374508b8930a738c82c37d12eb5e41b088eb5ea082ddb4721a4d493469",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 301, version 2011-02-18, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 301",
               "thumbnail": "/scenes/alphonsina/alphonsina-shape-thumbnail.webp",
               "surface": "alphonsina-shape-surface@2x.webp",
               "poles": "alphonsina-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 29 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/alphonsina/alphonsina-elevation-thumbnail.webp",
               "surface": "alphonsina-elevation-surface@2x.webp",
               "poles": "alphonsina-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d76586eff04e17edfee1a734b4abca0a8eb7a49a5f588543c9209c5532b4321c",
-      "bytes": 9926,
+      "sha256": "d74d5a374508b8930a738c82c37d12eb5e41b088eb5ea082ddb4721a4d493469",
+      "bytes": 9517,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

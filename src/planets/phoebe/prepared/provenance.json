@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8e063e4c3f2afcc0a69f6bb8c8cfa4a3369048d29ac2cd584d0f2f85d7d95a2d"
+    "sha256": "213385c077e4e0826c1ee92bdbc3d8508d8ab47ebc7d00d06bcb1627da47c34d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2d77f21d0d9caef089cbe207a2969a2cf5711632eabfdd6cb5f192066987ed3f",
+      "sha256": "a0ee7f192414bfc49e6c4cc2c206b6254b06d70ccff3e006c78b6ca50aaed684",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -216,7 +216,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
-              "title": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+              "title": "ISS monochrome mosaic",
               "detail": "Cassini mosaic",
               "thumbnail": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
               "surface": "phoebe-normal-surface@2x.webp",
@@ -226,13 +226,13 @@
                 "path": "../manifest.json",
                 "url": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
               },
-              "summary": "Cassini monochrome mosaic with varying detail. Shadows remain; the unobserved northern region is marked."
+              "summary": "Photographed shadows remain and detail varies across the surface. The unobserved northern region is marked as missing data."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
-              "title": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
+              "title": "Shape-derived radial height",
               "detail": "Shaded relief",
               "thumbnail": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
               "surface": "phoebe-elevation-surface@2x.webp",
@@ -414,8 +414,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9f53a299a1ee6106b2a55e852c429676e33cbab5d82270968894ea7dd84a3f2e",
-      "bytes": 5375,
+      "sha256": "a0ee7f192414bfc49e6c4cc2c206b6254b06d70ccff3e006c78b6ca50aaed684",
+      "bytes": 5389,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

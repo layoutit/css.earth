@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "702246b2c705c19441e9ef9d6664f4d840d8c7107b82d152ec7dceb72b8c8269"
+    "sha256": "9ca2ab995afcc2410510b62318d448741f26a6bdea9ec38d13a61ab5066be065"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -193,7 +193,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f80e3fbb9cc8d39f8c42e74bb9a0f60329e84f78db1a56af0f75895edf9d61e9",
+      "sha256": "02007217747b2a1e1af5deee000945cb4189afa427cc2141cc75f8143df57f3c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -232,7 +232,7 @@
               "id": "model",
               "label": "Completed shape model",
               "description": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
-              "title": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
+              "title": "Nucleus shape reconstruction",
               "detail": "PDS",
               "thumbnail": "/scenes/comet-81p/comet-81p-model-thumbnail.webp",
               "surface": "comet-81p-model-surface@2x.webp",
@@ -259,7 +259,7 @@
               "id": "navcam",
               "label": "Stardust photographs",
               "description": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
-              "title": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
+              "title": "NavCam mosaic",
               "detail": "NAVCAM",
               "thumbnail": "/scenes/comet-81p/comet-81p-navcam-thumbnail.webp",
               "surface": "comet-81p-navcam-surface@2x.webp",
@@ -280,7 +280,8 @@
                   "label": "Image scale",
                   "value": "14–19 m/pixel"
                 }
-              ]
+              ],
+              "summary": "Only the measured side is photographed. Original shadows and some seams remain; the gray grid marks gaps in the coverage."
             }
           ]
         },
@@ -625,8 +626,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f80e3fbb9cc8d39f8c42e74bb9a0f60329e84f78db1a56af0f75895edf9d61e9",
-      "bytes": 4601,
+      "sha256": "02007217747b2a1e1af5deee000945cb4189afa427cc2141cc75f8143df57f3c",
+      "bytes": 4470,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

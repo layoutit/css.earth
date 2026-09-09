@@ -72,7 +72,7 @@
         "id": "illustration",
         "label": "Illustrative model",
         "description": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-        "title": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+        "title": "Surface illustration",
         "qualification": "Illustration; not an observed surface map.",
         "thumbnail": "illustration-thumbnail.webp",
         "surface": "surface.webp",
@@ -82,7 +82,7 @@
           "path": "../manifest.json",
           "url": "https://science.nasa.gov/resource/haumea-3d-model/"
         },
-        "summary": "NASA's illustration of Haumea. Its surface is unresolved; the terrain and coordinates are illustrative."
+        "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
       }
     ]
   },

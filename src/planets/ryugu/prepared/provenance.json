@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ef402092d2f9636264cca2bc115f26871ee98fec6d9b9b3684b3169c1c6db75"
+    "sha256": "ec2ddddead390e5f700eb7d3e5989ecc2005e5f560e1f291c774ba93c836fd2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -169,7 +169,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2ceb86f0812b996dae9d8b1145b7146bb9b2db76e18a12c6d5f494302c413ccd",
+      "sha256": "876031d92196120e35c87565e50d927027c02960840bad06681bc7a6ccfa1ce1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -238,7 +238,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
-              "title": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
+              "title": "ONC 548.9 nm reflectance map",
               "thumbnail": "/scenes/ryugu/ryugu-normal-thumbnail.webp",
               "surface": "ryugu-normal-surface@2x.webp",
               "poles": "ryugu-normal-surface@2x.webp",
@@ -248,13 +248,13 @@
               },
               "falseColor": false,
               "detail": "ONC v-band · corrected reflectance",
-              "summary": "Hayabusa2's corrected 548.9 nm reflectance from July 2018. Display brightness is stretched; poles stay empty."
+              "summary": "Corrected reflectance at 548.9 nm is stretched for display. The July 2018 observations leave the poles unobserved."
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
               "description": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
-              "title": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
+              "title": "ONC false-color composite",
               "thumbnail": "/scenes/ryugu/ryugu-enhanced-thumbnail.webp",
               "surface": "ryugu-enhanced-surface@2x.webp",
               "poles": "ryugu-enhanced-surface@2x.webp",
@@ -264,13 +264,13 @@
               },
               "falseColor": true,
               "detail": "Controlled ONC color mosaic",
-              "summary": "Hayabusa2 false color. Brightness was matched across images, so mosaic values are not measured reflectance."
+              "summary": "False colors show differences between images. Brightness matching changes the mosaic values; they are not measured reflectance."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
-              "title": "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/ryugu/ryugu-elevation-thumbnail.webp",
               "surface": "ryugu-elevation-surface@2x.webp",
               "poles": "ryugu-elevation-surface@2x.webp",
@@ -486,8 +486,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "32b7078c4904f0cdd43f6ded7b2052a9d7e7e2f1819611327b30590d7d1feb9c",
-      "bytes": 9963,
+      "sha256": "876031d92196120e35c87565e50d927027c02960840bad06681bc7a6ccfa1ce1",
+      "bytes": 9289,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bb63f34b064e4e38caa2e1eb25e4f18dfe6244e1767e5b6b98e20591d63f69b3"
+    "sha256": "f3aa35f1b00dc132839b0dda4b9f1a805fdf3c326fa039d50b9e11bad610eb0a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0f5b4fc1466f4db977bca2b0ece858bb026e7ddeb19334dc6c3ec04de3a615cf",
+      "sha256": "167441bbc17f93dbfb13d9e48dfe75ec213ef70fae7a11784222d6fc903b3966",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Published radar shape model",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. This view uses the published 2007 retrograde reconstruction. The 2014 Yarkovsky analysis rules out the prograde alternative. About 30% of the retrograde model surface was unseen or seen at incidence angles above 75 degrees in the original observations, so that region depends on the model assumptions. No optical surface map is supplied. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-thumbnail.webp",
               "surface": "asteroid-1950-da-shape-surface@2x.webp",
               "poles": "asteroid-1950-da-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows original model radius minus a 0.65 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-thumbnail.webp",
               "surface": "asteroid-1950-da-elevation-surface@2x.webp",
               "poles": "asteroid-1950-da-elevation-surface@2x.webp",
@@ -347,8 +347,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9eb89c91ff973617069e0c62b62b4b3343a3d816416e3cc2f8a37f77d731d7eb",
-      "bytes": 8813,
+      "sha256": "167441bbc17f93dbfb13d9e48dfe75ec213ef70fae7a11784222d6fc903b3966",
+      "bytes": 8206,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

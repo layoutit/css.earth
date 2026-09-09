@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "597576e2e1608f79e44992820b1f81f1e09ee14998a7772a19f9d51a91a28d4e"
+    "sha256": "eb363b79a67dee6359a2bb4f98a2ab16ccdebff8ab5a0c6756574d61c659a4c6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fdd3dd4633e99a3ecfe011bc5fc2bd9eddc5ea1b4e199b9bb70e3a738efb2b6e",
+      "sha256": "6e178f020ca1c177fb61d2d464c8ea5acd58e460b576f8bc2efc70878b1f1ec3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable surface imagery on this radar model. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-thumbnail.webp",
               "surface": "asteroid-2008-ev5-shape-surface@2x.webp",
               "poles": "asteroid-2008-ev5-shape-surface@2x.webp",
@@ -219,7 +219,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "False color shows radius at the nearest source-surface point minus a 0.2 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 5 m is withheld. The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
-              "title": "Color shows original model radius minus a 0.2 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-elevation-thumbnail.webp",
               "surface": "asteroid-2008-ev5-elevation-surface@2x.webp",
               "poles": "asteroid-2008-ev5-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fdd3dd4633e99a3ecfe011bc5fc2bd9eddc5ea1b4e199b9bb70e3a738efb2b6e",
-      "bytes": 10483,
+      "sha256": "6e178f020ca1c177fb61d2d464c8ea5acd58e460b576f8bc2efc70878b1f1ec3",
+      "bytes": 9688,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

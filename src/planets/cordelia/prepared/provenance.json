@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "03f2fc5be8e4c94c37fe857f6369a1c631fba64a96a9bcaebf072f6d71239eff"
+    "sha256": "8aa32a5ea6c787160a8c8e8937fad3b8ad8418e5f211f81a2cb28fd9be450e96"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7fc794e12cc26a2a687cfb4e6157e33ee4d15e7232a7d6e96ff0977496cf2bbf",
+      "sha256": "9a1ef38b4428287b35cb0cc763d1934f57dfbdce8cc0a62627b9f72a487884d2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -172,7 +172,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
-              "title": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+              "title": "Shape approximation",
               "detail": "Measured shape",
               "thumbnail": "/scenes/cordelia/cordelia-model-thumbnail.webp",
               "surface": "cordelia-model-surface@2x.webp",
@@ -312,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4fb9582d873c4b27c745a72dfaecc393ad5372bc852e53f437e9c25c78aec07a",
-      "bytes": 4016,
+      "sha256": "9a1ef38b4428287b35cb0cc763d1934f57dfbdce8cc0a62627b9f72a487884d2",
+      "bytes": 3862,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

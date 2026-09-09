@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
-        "title": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+        "title": "Approximate shape model",
         "detail": "Measured axes",
         "thumbnail": "/scenes/naiad/naiad-model-thumbnail.webp",
         "surface": "naiad-model-surface@2x.webp",

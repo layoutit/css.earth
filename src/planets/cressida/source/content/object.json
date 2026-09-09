@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Published 92 × 74 × 74 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-        "title": "Published 92 × 74 × 74 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+        "title": "Approximate shape model",
         "detail": "Measured shape",
         "thumbnail": "/scenes/cressida/cressida-model-thumbnail.webp",
         "surface": "cressida-model-surface@2x.webp",

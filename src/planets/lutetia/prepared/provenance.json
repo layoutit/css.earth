@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5d25a788f5d825b447f01acb0b0593a74902d99a08429480ac5c9f6e30752acc"
+    "sha256": "b9eea973c96a1f73f049c049bf8d964aa2e9eba291c42b7f47441c8d84e40abe"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -180,7 +180,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b6977f6f8fa831295b4973f3df53974adcebce61f169714edcbfa12398212066",
+      "sha256": "99942f57c9f26d8d813aa2d121ce27ad94d752dc33bb5fc340afb83c199f38e8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -250,20 +250,21 @@
               "label": "OSIRIS reflectance",
               "detail": "Spacecraft observation",
               "description": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
-              "title": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+              "title": "OSIRIS orange-filter reflectance",
               "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
               "surface": "lutetia-osiris-surface@2x.webp",
               "poles": "lutetia-osiris-surface@2x.webp",
               "source": {
                 "id": "lutetia-observations-n20100710t154047674id4df22-img",
                 "path": "../manifest.json"
-              }
+              },
+              "summary": "Orange-filter reflectance is corrected approximately for lighting. Shadows remain; the grid marks gaps and rejected coverage."
             },
             {
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
-              "title": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
+              "title": "OSIRIS shape reconstruction",
               "thumbnail": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
               "surface": "lutetia-shape-surface@2x.webp",
               "poles": "lutetia-shape-surface@2x.webp",
@@ -279,7 +280,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
-              "title": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
               "surface": "lutetia-elevation-surface@2x.webp",
               "poles": "lutetia-elevation-surface@2x.webp",
@@ -462,8 +463,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5eb092317540fdd65b8e87ed2a8e49edfb1d64d050cb2a7bcd9cacf387ef296f",
-      "bytes": 10795,
+      "sha256": "99942f57c9f26d8d813aa2d121ce27ad94d752dc33bb5fc340afb83c199f38e8",
+      "bytes": 10231,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

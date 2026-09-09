@@ -56,7 +56,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.18:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
-        "title": "Approximate ellipsoid adopting minimum equatorial ratio 1.18:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+        "title": "Light-curve shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/suttungr/suttungr-model-thumbnail.webp",
         "surface": "suttungr-model-surface@2x.webp",

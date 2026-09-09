@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "470f7ea53821bd0222237a4f19db7e82fc4b912e4740f1de5ab898c2f1558c4c"
+    "sha256": "4eeba31cbafd557837cc02a53d81a2f03763489873a3fa94d061582ce1e6efde"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0a79aa9797ec21530b94575e65d3d9acef9ab9959bb4ea98907ab3cbcf88343e",
+      "sha256": "1bd83333676afe2915505fd366c88dcb7be3d93c33c9662f72107976f2757ed7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/pallas/pallas-shape-thumbnail.webp",
               "surface": "pallas-shape-surface@2x.webp",
               "poles": "pallas-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 255.5 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/pallas/pallas-elevation-thumbnail.webp",
               "surface": "pallas-elevation-surface@2x.webp",
               "poles": "pallas-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b7c9f151129deb9846726d686ff6f05990e4365d96f197fb4c8217cfb20a19bb",
-      "bytes": 8347,
+      "sha256": "1bd83333676afe2915505fd366c88dcb7be3d93c33c9662f72107976f2757ed7",
+      "bytes": 7949,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

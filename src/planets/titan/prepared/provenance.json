@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c027b47b87029aed1011a732a7c9a46ac694cabb961d77ded0165d1ef02b423b"
+    "sha256": "dcb4d808a6adc658c833859d64191a01f5cb0f01f41f4360a20e177d55364cd1"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -312,7 +312,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e8782016d20253b69fc2badb860b0ecad10678eeb2f707421c05d25612904561",
+      "sha256": "4008373e705f57c221071bbf14b2b5ff86ff82b98e37b86cfdb032f25785138e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -403,7 +403,7 @@
               "id": "normal",
               "label": "Near-infrared",
               "description": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
-              "title": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
+              "title": "Controlled infrared mosaic",
               "thumbnail": "/scenes/titan/titan-normal-thumbnail.webp",
               "surface": "titan-normal-surface@2x.webp",
               "poles": "titan-normal-poles@2x.webp",
@@ -411,13 +411,13 @@
                 "id": "usgs-cassini-iss-2026-938nm",
                 "path": "../manifest.json"
               },
-              "summary": "Infrared images show Titan's surface through haze. Clouds, seams and uneven detail remain; gray grid: no observations."
+              "summary": "Surface features show through the haze, along with clouds and seams. Detail varies; the gray grid marks missing observations."
             },
             {
               "id": "radar",
               "label": "Radar",
               "description": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
-              "title": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
+              "title": "RADAR global mosaic through T126",
               "thumbnail": "/scenes/titan/titan-radar-thumbnail.webp",
               "surface": "titan-radar-surface@2x.webp",
               "poles": "titan-radar-poles@2x.webp",
@@ -425,13 +425,13 @@
                 "id": "cassini-radar-midr",
                 "path": "../manifest.json"
               },
-              "summary": "Cassini radar mosaic through flyby T126. Brightness shows radar backscatter, not elevation; gray grid: no measurements."
+              "summary": "Brightness shows radar backscatter rather than elevation or visible color. The gray grid marks areas without measurements."
             },
             {
               "id": "topography",
               "label": "Measured height",
               "description": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
-              "title": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+              "title": "GTDR measured heights",
               "thumbnail": "/scenes/titan/titan-topography-thumbnail.webp",
               "surface": "titan-topography-surface@2x.webp",
               "poles": "titan-topography-poles@2x.webp",
@@ -458,7 +458,7 @@
               "id": "interpolated",
               "label": "Interpolated height",
               "description": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
-              "title": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+              "title": "GTDR interpolated topography",
               "thumbnail": "/scenes/titan/titan-interpolated-thumbnail.webp",
               "surface": "titan-interpolated-surface@2x.webp",
               "poles": "titan-interpolated-poles@2x.webp",
@@ -485,7 +485,7 @@
               "id": "coverage-distance",
               "label": "Distance to data",
               "description": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
-              "title": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+              "title": "GTDR distance to measurements",
               "thumbnail": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
               "surface": "titan-coverage-distance-surface@2x.webp",
               "poles": "titan-coverage-distance-poles@2x.webp",
@@ -995,8 +995,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e8782016d20253b69fc2badb860b0ecad10678eeb2f707421c05d25612904561",
-      "bytes": 13127,
+      "sha256": "4008373e705f57c221071bbf14b2b5ff86ff82b98e37b86cfdb032f25785138e",
+      "bytes": 11752,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

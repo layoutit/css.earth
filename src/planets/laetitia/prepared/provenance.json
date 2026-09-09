@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d2bca07a99cbba87401469e74105ede0fa11e1844015bf92ce6e3e968fcdaca4"
+    "sha256": "ee73a8e5eb3c821672be208343be047b6826cc0c97b30adab06043726e35f062"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "364df7b6cad1b06c24036a9190a78b74d7bf1007af3a88433ae531d172f84455",
+      "sha256": "d95ae7072f24c3b20e221d9fc94e4ee9a76f7c29f1cffb0b4e7e4a11f8aa02a7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex model constrained by resolved imaging, 164 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex model constrained by resolved imaging, 164 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/laetitia/laetitia-shape-thumbnail.webp",
               "surface": "laetitia-shape-surface@2x.webp",
               "poles": "laetitia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 82 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 82 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/laetitia/laetitia-elevation-thumbnail.webp",
               "surface": "laetitia-elevation-surface@2x.webp",
               "poles": "laetitia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "364df7b6cad1b06c24036a9190a78b74d7bf1007af3a88433ae531d172f84455",
-      "bytes": 10427,
+      "sha256": "d95ae7072f24c3b20e221d9fc94e4ee9a76f7c29f1cffb0b4e7e4a11f8aa02a7",
+      "bytes": 10112,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

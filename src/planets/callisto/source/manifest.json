@@ -143,8 +143,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 8535,
-      "expectedSha256": "a6285857a2d973a976faa33aff4538e4a21416702fb69de48f8ed22b6a0107c7",
+      "expectedBytes": 8384,
+      "expectedSha256": "a8d5661aef22baa3f3a9b0ddc1f17d74b34c64c655f5fd32d86766f5b1b4cc02",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {

@@ -75,7 +75,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
-        "title": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+        "title": "ISS monochrome mosaic",
         "detail": "Cassini mosaic",
         "thumbnail": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
         "surface": "phoebe-normal-surface@2x.webp",
@@ -85,13 +85,13 @@
           "path": "../manifest.json",
           "url": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
         },
-        "summary": "Cassini monochrome mosaic with varying detail. Shadows remain; the unobserved northern region is marked."
+        "summary": "Photographed shadows remain and detail varies across the surface. The unobserved northern region is marked as missing data."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
-        "title": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
+        "title": "Shape-derived radial height",
         "detail": "Shaded relief",
         "thumbnail": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
         "surface": "phoebe-elevation-surface@2x.webp",

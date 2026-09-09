@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ffd2e3c013a82242ccae22c5c075b02cb0865be41bad41f81f30f6181a3fc27"
+    "sha256": "759e7335d66426cd9cdf17d9020771f4767c5227ec710ca8578240abf0f810d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b47b124fb97d27fa251b305e145748125a12ad816fd2c427aec7e3f46fe765e8",
+      "sha256": "7c2b3b7523728a8c4fe2e9ad3d7d0b60978a3a5bfa42a679d438bbfa25085d3d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -153,7 +153,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
-              "title": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+              "title": "Convex-model ellipsoid approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/leucus/leucus-model-thumbnail.webp",
               "surface": "leucus-model-surface@2x.webp",
@@ -292,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b47b124fb97d27fa251b305e145748125a12ad816fd2c427aec7e3f46fe765e8",
-      "bytes": 4114,
+      "sha256": "7c2b3b7523728a8c4fe2e9ad3d7d0b60978a3a5bfa42a679d438bbfa25085d3d",
+      "bytes": 3734,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

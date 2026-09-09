@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "23da38f3ef49392cf0a6b2d9174c9456d5fcec468c99c8717300a4fa7f64a3cc"
+    "sha256": "d3137f8c26faedafe2b9ba74a6f1a627a6a11d83cdcbbdd8daad4027dac05991"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cbeca69a5fffdef409ae4c893469fb366c79e5200e561e06ed2689b35937fe75",
+      "sha256": "c53ed1c3051e7c77ae169c1f06b96d4942da4ad058ac0029aa51274989179001",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 1849, version 2017-09-21, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 1849",
               "thumbnail": "/scenes/ganymed/ganymed-shape-thumbnail.webp",
               "surface": "ganymed-shape-surface@2x.webp",
               "poles": "ganymed-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 19.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/ganymed/ganymed-elevation-thumbnail.webp",
               "surface": "ganymed-elevation-surface@2x.webp",
               "poles": "ganymed-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8e83338873fb5a6cba5075593a5fb33bbfb325a7ebebcf67cd73c67839d4fc28",
-      "bytes": 9672,
+      "sha256": "c53ed1c3051e7c77ae169c1f06b96d4942da4ad058ac0029aa51274989179001",
+      "bytes": 9319,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

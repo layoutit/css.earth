@@ -88,7 +88,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
-        "title": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
+        "title": "Global image mosaic",
         "thumbnail": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
         "surface": "ganymede-normal-surface@2x.webp",
         "poles": "ganymede-normal-poles@2x.webp",
@@ -97,13 +97,13 @@
           "path": "../manifest.json"
         },
         "detail": "Global mosaic",
-        "summary": "Voyager and Galileo images with detail from 400 m to 20 km per pixel. Shadows remain; gray grid: no imagery."
+        "summary": "Source detail ranges from 400 m to 20 km per pixel. Photographed shadows remain; the gray grid marks missing imagery."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
-        "title": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
+        "title": "Color mosaic",
         "thumbnail": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
         "surface": "ganymede-enhanced-surface@2x.webp",
         "poles": "ganymede-enhanced-poles@2x.webp",
@@ -112,14 +112,14 @@
           "path": "../manifest.json"
         },
         "detail": "Infrared color",
-        "summary": "Infrared, green and violet with monochrome detail. Missing or synthesized color stays monochrome."
+        "summary": "Infrared, green and violet bands add color to monochrome detail. Missing or synthesized color is left monochrome."
       },
       {
         "id": "geology",
         "label": "Geology",
         "detail": "Interpreted units",
         "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
-        "title": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+        "title": "Global geologic map",
         "thumbnail": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
         "surface": "ganymede-geology-surface@2x.webp",
         "poles": "ganymede-geology-poles@2x.webp",

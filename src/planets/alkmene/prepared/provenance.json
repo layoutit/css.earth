@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7692d2c1dea0c92db7603f6a5ca8c53fe433ab4fca38479ddd1fe4f7ac8b8074"
+    "sha256": "e5a6754f6e4cb38afa3774dc2bd0099daed0837250506d2ee07c333e5fc4dc01"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5cc905c61085e92dba8fc0b798d309ff503e83b08a3f48700a88c49df6c16feb",
+      "sha256": "1d9a6498ff0e81974c6bd5ae267287ca9d864164df4c3b2cca5aab0ea8cdf1b6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve shape with thermophysical volume-equivalent diameter 58.6 ± 1.2 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative.",
-              "title": "Convex light-curve shape with thermophysical volume-equivalent diameter 58.6 ± 1.2 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/alkmene/alkmene-shape-thumbnail.webp",
               "surface": "alkmene-shape-surface@2x.webp",
               "poles": "alkmene-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 29.3 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 29.3 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/alkmene/alkmene-elevation-thumbnail.webp",
               "surface": "alkmene-elevation-surface@2x.webp",
               "poles": "alkmene-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5cc905c61085e92dba8fc0b798d309ff503e83b08a3f48700a88c49df6c16feb",
-      "bytes": 9528,
+      "sha256": "1d9a6498ff0e81974c6bd5ae267287ca9d864164df4c3b2cca5aab0ea8cdf1b6",
+      "bytes": 9153,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

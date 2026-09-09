@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f6abba56e5d56a14a1a387c6e22a65b61a5e64ac61283ae2db9cfb7276745ebc"
+    "sha256": "e55c8afa68da943e6ae4cf2051437392ec7692f3738a5effffe66b84b01e9da2"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -108,7 +108,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "901164afa7098745df5706591529def20fe304af1b8daa5853dd7d1347d26d8c",
+      "sha256": "4d6704435d3b8091105fa75c411328e2eb442f4540d702ad8cdad7c788295bf7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -161,7 +161,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Porter’s New Horizons shape fit. LORRI and MVIC constrain the broad shape, but the public mesh omits its fitted image registration. Gray grid marks unavailable registered surface imagery; it does not recreate Nix’s photographed reddish crater region.",
-              "title": "Porter’s New Horizons shape fit. LORRI and MVIC constrain the broad shape, but the public mesh omits its fitted image registration. Gray grid marks unavailable registered surface imagery; it does not recreate Nix’s photographed reddish crater region.",
+              "title": "Porter shape reconstruction",
               "detail": "New Horizons shape fit",
               "thumbnail": "/scenes/nix/nix-model-thumbnail.webp",
               "surface": "nix-model-surface@2x.webp",
@@ -323,8 +323,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "60542d6a0babf65316bc0f0d6e415227ccf8d911836a12a0d1d6aa1151bf6c11",
-      "bytes": 3934,
+      "sha256": "4d6704435d3b8091105fa75c411328e2eb442f4540d702ad8cdad7c788295bf7",
+      "bytes": 3829,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

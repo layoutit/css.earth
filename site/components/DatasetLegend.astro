@@ -10,9 +10,9 @@ const scaleLabel = `${legend?.title ?? ''}${legend?.meta ? ` (${legend.meta})` :
 const labels = categories?.map(item => ({ text: item.label, detail: item.description }))
   ?? legend?.labels?.map((text, index) => ({
     text: `${text}${index === legend.labels.length - 1 && legend.meta ? ` ${legend.meta}` : ''}`,
-  })) ?? [{ text: 'No legend supplied' }];
+  })) ?? [];
 ---
-<section id={`${objectId}-${lens.id}-legend`} class="planet-lens-legend-panel"
+{legend && <section id={`${objectId}-${lens.id}-legend`} class="planet-lens-legend-panel"
   data-lens-legend={lens.id} aria-label={`${lens.label} legend`}>
   <div class="planet-lens-legend-scale-row">
     {legend?.src
@@ -32,4 +32,4 @@ const labels = categories?.map(item => ({ text: item.label, detail: item.descrip
   </ul> : <div class="planet-lens-legend-labels" style={`--legend-label-count: ${labels.length}`}>
     {labels.map(label => <span>{label.text}</span>)}
   </div>}
-</section>
+</section>}

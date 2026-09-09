@@ -72,7 +72,7 @@ export async function prepareFactsheet(objectDirectory, { check = false, editori
       return controls.map(lens => {
         const text = labeled.controls.find(l => l.id === lens.id);
         const next = { ...lens };
-        for (const key of ['label', 'description', 'title', 'detail']) {
+        for (const key of ['label', 'description', 'summary', 'title', 'detail']) {
           if (text[key] !== undefined) next[key] = text[key]; else delete next[key];
         }
         if ('qualification' in lens) next.qualification = text.qualification;

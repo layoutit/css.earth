@@ -45,7 +45,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Approximate ellipsoid from brightness variability, using an assumed-albedo 50 km size. Equal short axes and orientation are assumed; the doubled period is one interpretation of an ambiguous light curve. The grid marks unmapped terrain.",
-        "title": "Approximate ellipsoid from brightness variability, using an assumed-albedo 50 km size. Equal short axes and orientation are assumed; the doubled period is one interpretation of an ambiguous light curve. The grid marks unmapped terrain.",
+        "title": "Light-curve shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/prospero/prospero-model-thumbnail.webp",
         "surface": "prospero-model-surface@2x.webp",

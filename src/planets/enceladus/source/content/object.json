@@ -76,7 +76,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
-        "title": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
+        "title": "Schenk–McKinnon mosaic",
         "thumbnail": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
         "surface": "enceladus-normal-surface@2x.webp",
         "poles": "enceladus-normal-poles@2x.webp",
@@ -84,13 +84,13 @@
           "id": "cassini-schenk-2024-normal",
           "path": "../manifest.json"
         },
-        "summary": "A controlled Cassini mosaic with varying image detail. Shadows remain; gray grid: no source data."
+        "summary": "Images are aligned to a common surface model, but source detail varies. Photographed shadows remain; the grid marks gaps."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
-        "title": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
+        "title": "Stereo and shading terrain model",
         "thumbnail": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
         "surface": "enceladus-elevation-surface@2x.webp",
         "poles": "enceladus-elevation-poles@2x.webp",
@@ -118,7 +118,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
-        "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Corrected JPL v2 SPC model; the original v1 solution is excluded.",
+        "title": "JPL v2 SPC shape model",
         "thumbnail": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
         "surface": "enceladus-shape-surface@2x.webp",
         "poles": "enceladus-shape-poles@2x.webp",

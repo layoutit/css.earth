@@ -107,8 +107,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored preparation input.",
-      "expectedBytes": 10653,
-      "expectedSha256": "0bf4bec27c3d232fad97b695718c051d6f63d5cfb0c3d9d19076af2fe0d9fa0a"
+      "expectedBytes": 10256,
+      "expectedSha256": "b9f36d1b01ad844f7e3190476f02a46b29b9338cfaa4d031c0b5a73988bf707d"
     },
     {
       "path": "preparation/acquisition.json",

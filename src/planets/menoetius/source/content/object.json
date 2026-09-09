@@ -45,7 +45,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Published approximate ellipsoid with full dimensions 117×108×90 km, inferred from occultation and photometry. Orbital-pole alignment is a synchronous approximation; the display meridian is arbitrary. The grid marks unmapped terrain.",
-        "title": "Published approximate ellipsoid with full dimensions 117×108×90 km, inferred from occultation and photometry. Orbital-pole alignment is a synchronous approximation; the display meridian is arbitrary. The grid marks unmapped terrain.",
+        "title": "Occultation shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/menoetius/menoetius-model-thumbnail.webp",
         "surface": "menoetius-model-surface@2x.webp",

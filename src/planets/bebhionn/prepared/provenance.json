@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d092a9a2fcd7cef29aa5b9a5d7bbd8a19ea0d7ef1a26f9c0bb56598d95227ab9"
+    "sha256": "da024c7cb9f6fe784b8b3d9406ddfcb4df64b736dbabf8e947d3eb21db65a6d9"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "393d0a592d9b314307047970894528142329c7b6e612cbdb8dc087b2691fbdea",
+      "sha256": "2b5f277c0705fa6a023b154bd19c85ae27d3b63de4fa2c734a80d1af995fcff7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.41:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
-              "title": "Approximate ellipsoid adopting minimum equatorial ratio 1.41:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+              "title": "Light-curve shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/bebhionn/bebhionn-model-thumbnail.webp",
               "surface": "bebhionn-model-surface@2x.webp",
@@ -310,8 +310,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "393d0a592d9b314307047970894528142329c7b6e612cbdb8dc087b2691fbdea",
-      "bytes": 3832,
+      "sha256": "2b5f277c0705fa6a023b154bd19c85ae27d3b63de4fa2c734a80d1af995fcff7",
+      "bytes": 3651,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

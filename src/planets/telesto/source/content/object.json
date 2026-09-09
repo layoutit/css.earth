@@ -57,7 +57,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-        "title": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "title": "ISS mosaic",
         "detail": "Cassini · corrected mosaic",
         "thumbnail": "/scenes/telesto/telesto-normal-thumbnail.webp",
         "surface": "telesto-normal-surface@2x.webp",
@@ -67,13 +67,13 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
         },
-        "summary": "Cassini images mapped onto the shape with adjusted brightness. Gray grid: gaps and withheld shadows."
+        "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radial height above a 12.35 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-        "title": "Radial height above a 12.35 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+        "title": "Shape-derived radial height",
         "detail": "Cassini shape · radial height",
         "thumbnail": "/scenes/telesto/telesto-elevation-thumbnail.webp",
         "surface": "telesto-elevation-surface@2x.webp",

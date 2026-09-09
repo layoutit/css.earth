@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fbd51c5908170b7153dab645190b13f8238935ef61d5735a646f08338b475c45"
+    "sha256": "a89aaf1ed0d108fcc7e468b58616ae9fac80192120657ae90fed9eff94e09086"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1bd6b75e56e4a1847aefcc2489f53b94e0134f4246708cc450978307ed346f75",
+      "sha256": "bfd254ec577322c80530a4b6c93be03899825f9340f176db9e433d79d5c5e38a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 120.62 km effective diameter (catalog ±1.53 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 120.62 km effective diameter (catalog ±1.53 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/hestia/hestia-shape-thumbnail.webp",
               "surface": "hestia-shape-surface@2x.webp",
               "poles": "hestia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 60.31 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 60.31 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/hestia/hestia-elevation-thumbnail.webp",
               "surface": "hestia-elevation-surface@2x.webp",
               "poles": "hestia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1bd6b75e56e4a1847aefcc2489f53b94e0134f4246708cc450978307ed346f75",
-      "bytes": 10065,
+      "sha256": "bfd254ec577322c80530a4b6c93be03899825f9340f176db9e433d79d5c5e38a",
+      "bytes": 9627,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

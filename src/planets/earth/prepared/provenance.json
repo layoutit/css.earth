@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ae384e0e5f6e02fe130b656a71408c0cec090f9517019953299f2ca96bf76b0f"
+    "sha256": "d13b73e5f54b33d15147e6f4a75679a18a3de2352ac95919704058c6e8818e51"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -444,7 +444,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "31774f43fac34265b7908087788a4c3bd82bc66fc1b9d04d9c695867109be0e7",
+      "sha256": "5e4859a9b3d82cefd412f0540ecda9ea8866fc7c66eac212478d7fc9dd980098",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -584,7 +584,7 @@
               "id": "normal",
               "label": "Visible color",
               "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
-              "title": "Visible color: NASA Blue Marble Next Generation with archival clouds",
+              "title": "Blue Marble Next Generation",
               "thumbnail": "/scenes/earth/earth-lens-normal.webp",
               "source": {
                 "id": "surface-observation"
@@ -596,7 +596,7 @@
               "id": "topography",
               "label": "Elevation",
               "description": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
-              "title": "Elevation: GEBCO_2026 land and seafloor heights",
+              "title": "GEBCO land and seafloor heights",
               "thumbnail": "/scenes/earth/earth-lens-topography.webp",
               "source": {
                 "id": "gebco-2026-elevation",
@@ -624,13 +624,13 @@
               "id": "night-lights",
               "label": "Night lights",
               "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
-              "title": "Night lights: NASA Black Marble 2016 global composite",
+              "title": "Black Marble night-light composite",
               "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
               "source": {
                 "id": "surface-observation"
               },
               "detail": "Nighttime",
-              "summary": "NASA Black Marble's 2016 night-light composite. It combines dates and does not show current lighting."
+              "summary": "Artificial lighting is combined from observations taken in 2016. The composite does not show present-day lighting."
             },
             {
               "id": "enso",
@@ -680,7 +680,7 @@
               "id": "cross-section",
               "label": "Cross section",
               "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
-              "title": "Cross section: Schematic NASA Science source-backed interior",
+              "title": "Interior structure model",
               "thumbnail": "/scenes/earth/earth-view-interior.webp",
               "legend": {
                 "kind": "categories",
@@ -714,7 +714,7 @@
                 "id": "surface-observation"
               },
               "detail": "Structure",
-              "summary": "Earth's interior based on NASA models. Colors mark layers; the boundaries are inferred, not photographed."
+              "summary": "Colored layers distinguish the crust, mantle and core. Their boundaries follow a structural model, not interior photographs."
             }
           ]
         },
@@ -961,7 +961,7 @@
       "sha256": "b0ffc9d12205689aeaec66116bbae2c4c263fcd98a0cbadba8d5488567b53278",
       "bytes": 23931114,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -991,7 +991,7 @@
       "sha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
       "bytes": 35870468,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1021,7 +1021,7 @@
       "sha256": "ce96440870f7e94a0506dac9c0e7decf160e133831432caee60f0cbefc5028d2",
       "bytes": 2045075,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1049,7 +1049,7 @@
       "sha256": "5aa6408d05f1c5847058b91a2f71ac6f654d12bca07bbefb3c513ef69a3ac174",
       "bytes": 4880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1076,7 +1076,7 @@
       "sha256": "af6343bfe558feade9782bf84d93c8e7ed8bc911ef2fe28a7ea2d9cc6dc1433c",
       "bytes": 3291078,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1104,7 +1104,7 @@
       "sha256": "b340d57f622fa36f59c88178e75b1dc62762d5c6c91073775afdbd6ad1bd3735",
       "bytes": 3635991,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1132,7 +1132,7 @@
       "sha256": "7ec4e202995fa4f7517c92cfaa1d4f1fd24a202d812c46138b07a0b77c240f71",
       "bytes": 3761066,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1160,7 +1160,7 @@
       "sha256": "7439d8d3702937040f8975d9df00815de66bb916f2f02e696bedea401ae10633",
       "bytes": 3875732,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1188,7 +1188,7 @@
       "sha256": "22f159007cfcf694b88a7069b0ba52d0f8993a6076b6d4b2358aa1539868db30",
       "bytes": 3959519,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1216,7 +1216,7 @@
       "sha256": "adf191d03ff1979207e8be77c994ba2df7c5e4f2b5278143ca0c625fc2c0adb1",
       "bytes": 4098728,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1244,7 +1244,7 @@
       "sha256": "38a9ab5b65a6d7f0b1a2228cb6a6a3ba1d573049009b20240f84cb118ab15ae9",
       "bytes": 4118826,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1272,7 +1272,7 @@
       "sha256": "a83f8a67b524c5fc5302ed7fb4a7d008b410c7dc9fc8d0c86438faefd8abdaef",
       "bytes": 4021765,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1300,7 +1300,7 @@
       "sha256": "3f62c2aaeab8ee15b66f2014f44ccbfdc67a5adb06b71dee91e936c5376f9c40",
       "bytes": 3983376,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1328,7 +1328,7 @@
       "sha256": "426544acdd9797e1b51c2cc0764a75b8b162908befb93c6da77cadf15b648015",
       "bytes": 4037856,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1356,7 +1356,7 @@
       "sha256": "f422cce8de12d254175b3a6ce8433a0d21a0a85591b06f0460a397b7e9508441",
       "bytes": 4050768,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1384,7 +1384,7 @@
       "sha256": "0da9842f6463cd0f5cf7e7bc82cff279c155e46190302ed9b906f768968eb81f",
       "bytes": 4237876,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1412,7 +1412,7 @@
       "sha256": "74bce9b863f2fa88b06f25adcca51bf192d89b940f2973349e8f73294f958948",
       "bytes": 4033216,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1440,7 +1440,7 @@
       "sha256": "389e187690513bfa6286c222e392f4c7d053ef9fc4ea7d6fb68cce63a5c976e0",
       "bytes": 1932517,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1468,7 +1468,7 @@
       "sha256": "75ee477526af4ee4073fa687924756d3158dc119e09b0ea7ae8ec0abe6edae8b",
       "bytes": 1805120,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1496,7 +1496,7 @@
       "sha256": "e7feed36ae4b67e8ef797df29d473690c9ce69fb426097cd2e6f4795e9023e4f",
       "bytes": 3543843,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1524,7 +1524,7 @@
       "sha256": "ef93bb9cc2287914f05516da163ea7a505124628d2358cee50fed4a73501bdc9",
       "bytes": 3281192,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1552,7 +1552,7 @@
       "sha256": "d63d360e180427ce132e8df74f3373ec45f20a9ac9e89da1c1e6f23af8ae18b7",
       "bytes": 1710509,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1580,7 +1580,7 @@
       "sha256": "7138d3b113a94a2eb77ba0c9f53eb9bc3eddf9b7669e389e38304ce4f80f16e4",
       "bytes": 1312150,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1614,7 +1614,7 @@
       "sha256": "230aac448ae68c358be433dd518888cccb3a85ccf66f7b44326441c324ad6725",
       "bytes": 8106233,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1643,7 +1643,7 @@
       "sha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0",
       "bytes": 22564700,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1660,7 +1660,7 @@
       "sha256": "c0578b8e31058dd4949fff1f9d6ab8017a03a1d3a78ce976674a40661a57a81a",
       "bytes": 731,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1674,10 +1674,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "31774f43fac34265b7908087788a4c3bd82bc66fc1b9d04d9c695867109be0e7",
-      "bytes": 14302,
+      "sha256": "5e4859a9b3d82cefd412f0540ecda9ea8866fc7c66eac212478d7fc9dd980098",
+      "bytes": 14222,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1693,7 +1693,7 @@
       "sha256": "f658cc3471595caddbe04ae5fbfde6523f3ef160ec0bd5ba3074635f3561834e",
       "bytes": 27346,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -1740,7 +1740,7 @@
       "dependencies": [
         "nasa-psg-earth-configuration"
       ],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "request-download",
         "groups": [
@@ -1780,13 +1780,13 @@
   "products": [
     {
       "id": "normal",
-      "label": "Normal",
+      "label": "Visible color",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/0",
       "parents": [],
       "process": "Prepare the global reference map and its declared cloud composite.",
       "limitations": [
-        "NASA Blue Marble Next Generation December 2004 with a prepared archival cloud composite"
+        "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery."
       ],
       "lensIds": [
         "normal"
@@ -1803,62 +1803,62 @@
           "url": "/scenes/earth/earth-lens-normal.webp",
           "bytes": 1856,
           "sha256": "cdb6847ab318076644561f2a15bb1c1fdc26afa3b56d2ae79f2d88658d52c690",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface.webp",
           "bytes": 347334,
           "sha256": "680ee28468760eea2d4d026542ff2d444651be73822f2d593c05afdc0172bd01",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-poles.webp",
           "bytes": 80780,
           "sha256": "49449e5d8d44d69472b120afbc5074e367d897a1a226affa35ef5272dd8eb713",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-1.webp",
           "bytes": 747098,
           "sha256": "1c6db53f52188c6c43a6803a80217e3418f90b3f4e5fefb398ee3706645b928e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-2.webp",
           "bytes": 1661344,
           "sha256": "57e6d57d51deb753408c3ac16db46ad2927a917686e2b8b018eefab7ad9c5091",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-3.webp",
           "bytes": 1743912,
           "sha256": "d46555363a8c94636e4b96859bccb0801c36d97692228ebfe0cffd0e1dc041a9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-4.webp",
           "bytes": 1366738,
           "sha256": "6949f4e16ed94432f6ef5f40e146d73996260e7cce5fd88dcda5a5176cad7cc8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-5.webp",
           "bytes": 528104,
           "sha256": "dd2d87a692a19ef2fed496b3a18be37110c0e4719f0055dc6a6caa470edc7153",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-6.webp",
           "bytes": 81570,
           "sha256": "0364529f6aedebd6e772e413881bf2176cacb2a673ef77f5838304fc9c470464",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
       "id": "topography",
-      "label": "Topography",
+      "label": "Elevation",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/1",
       "parents": [],
@@ -1980,55 +1980,55 @@
           "url": "/scenes/earth/earth-lens-topography.webp",
           "bytes": 2818,
           "sha256": "304695ff0dede0d2fe5f4916bb67b50e5b2d71ad3538fcd45de0ec95a52de61d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-topography.webp",
           "bytes": 167768,
           "sha256": "640f30496491fd0fccb23e1167e6d3d6d57477c7ee98a11b321dbce5332f1ae2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-topography-poles.webp",
           "bytes": 43138,
           "sha256": "90cbe1e58001cb8ca23f06e5221de6c9590cd1c03ac78f9aa1a74a16dbc26734",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-topography-page-1.webp",
           "bytes": 302048,
           "sha256": "ca09f9accba30e928e5a37e5b01f29621c1ea7d0534f48a36649994265d29856",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-topography-page-2.webp",
           "bytes": 543574,
           "sha256": "e6f70903bfa6863b793b4f9e0ec767b28d96eda71f6ad078a1d68fb9bec0153d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-topography-page-3.webp",
           "bytes": 680668,
           "sha256": "d0331556d5df01d0f3d67db3d1d86ef24c73c502bd4a85129b695d3a37cbb5c7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-topography-page-4.webp",
           "bytes": 442992,
           "sha256": "0e3cb36a67754a860592717e1921fa1ec36c305e7f496eb2f1020654cb2f8aa3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-topography-page-5.webp",
           "bytes": 291264,
           "sha256": "b9b8b0006bb10e04b6ecb9990de54c11b5c87da32c9299e11383ee893154a2a5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-topography-page-6.webp",
           "bytes": 34268,
           "sha256": "2f0088b9f88190fea9d76cbad1dcef2b4589aa1a959445927ab6828d5b3785dc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2041,7 +2041,7 @@
       "parents": [],
       "process": "Prepare the global reference map and its declared cloud composite.",
       "limitations": [
-        "NASA Black Marble 2016 global composite"
+        "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting."
       ],
       "lensIds": [
         "night-lights"
@@ -2057,55 +2057,55 @@
           "url": "/scenes/earth/earth-lens-night-lights.webp",
           "bytes": 818,
           "sha256": "4d255f6e8aab4fc9570fdfbaceec6f41b7ea7c8ede313988382d350726b7cb4c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-night-lights.webp",
           "bytes": 85926,
           "sha256": "c41ffa75726dba49d7f91dba8566179b8cb92be4bf821e9e52bfb44b2ee6c3d7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-night-lights-poles.webp",
           "bytes": 18704,
           "sha256": "ebb37d6ac2830151950ecb9e2aac353a21ceb7e3428b9f0da0eb48821695e89f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-1.webp",
           "bytes": 81902,
           "sha256": "51942d1ebfff17fa55de5581e94946b0f3c15e86279b3d31410fe37610ebcd9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-2.webp",
           "bytes": 180998,
           "sha256": "c9f6c4e97c9bd7f1a8f87eef37545c1fe00d663a8354e683435c6f92659cd10e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-3.webp",
           "bytes": 565910,
           "sha256": "d794a1e695e6460a5057eb3fd8728b1b630ea9c0bc7117ec8890fea593ed2c45",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-4.webp",
           "bytes": 466980,
           "sha256": "5174666e03e728a89eb05801b4cc7a93d9a74809f8a0f0c6d63910fe09afda08",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-5.webp",
           "bytes": 237338,
           "sha256": "6fde9f2f66d5c336bfae57d29ae80cafae67da9ff3df34bd51fb608e68a4031a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-6.webp",
           "bytes": 40258,
           "sha256": "092ff1f715f9df369410ef5749e56e4f847f33c22d9e71d680d404383efb9621",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2134,55 +2134,55 @@
           "url": "/scenes/earth/earth-lens-enso.webp",
           "bytes": 4414,
           "sha256": "354f1bf436b4791fb792020a931a79d2d504e33e982c2ddb9fa820bc70afa8de",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-enso.webp",
           "bytes": 40376,
           "sha256": "bb7b6f6f3ea628e00c87a130674881b0bf1e527e531ac9ef362b6babfdf4e725",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-enso-poles.webp",
           "bytes": 24716,
           "sha256": "3b53c8ba2e3abe4cf07905acc4731c71073120b06691104c58d7b214bc6e92f6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-enso-page-1.webp",
           "bytes": 379154,
           "sha256": "220cfbcdf0677be0bbc81cccac11944ba98bc26abd9409acda3be37381e35eed",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-enso-page-2.webp",
           "bytes": 1161284,
           "sha256": "29e0278606eb9433ecca0f5ac6f30482480d65c56fe6ac4f0459799741a89045",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-enso-page-3.webp",
           "bytes": 1150010,
           "sha256": "8d55ce81ee52c407de6bc6914e9d617c119ecf03a286c33ca683ef51494eac0c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-enso-page-4.webp",
           "bytes": 598496,
           "sha256": "4465a38042a9883f1558388429157e9a2029195bd29a8f8b3b03837e464c5c4d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-enso-page-5.webp",
           "bytes": 347406,
           "sha256": "d770c0d989e034fca8412d8dcf434d47c73d1ff839f25eb800af1c5204647913",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-enso-page-6.webp",
           "bytes": 60254,
           "sha256": "de645f8970fe365e3c8fb2aed8f2f90006416dabf3126ddb41ee4afd3f0aadd3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2195,7 +2195,7 @@
       "parents": [],
       "process": "Prepare the source-defined schematic interior.",
       "limitations": [
-        "Schematic NASA Science source-backed interior"
+        "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging."
       ],
       "lensIds": [
         "cross-section"
@@ -2214,7 +2214,7 @@
           "url": "/scenes/earth/earth-view-interior.webp",
           "bytes": 1302,
           "sha256": "4e8ee2c852e0799d4dd36fdfdf0c29eaa52e89e7c5033a5777d5147ba39db8a4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2267,7 +2267,7 @@
           "url": "/scenes/earth/earth-atmosphere-spectrum.svg",
           "bytes": 4019,
           "sha256": "618392880a079fe55e93904b4f6648d1c15f737e79b3d4b7aa46ce44994d6a80",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2295,7 +2295,7 @@
           "url": "/scenes/earth/earth-temperature-pressure-profile.svg",
           "bytes": 2530,
           "sha256": "24b5c28e0c8ae1a9c82787d345ad27d391e2a3b0289263388fdaf583b73b829d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2322,14 +2322,14 @@
           "url": "/scenes/earth/earth-photometric-phase-curve.svg",
           "bytes": 4360,
           "sha256": "f2c02091dcfe4343299fff3bd96b6fd8d542fc2ef4d6aeb1fbe7acef77ff2b98",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "authored-recipe"
     },
     {
       "id": "preview:normal",
-      "label": "Normal preview",
+      "label": "Visible color preview",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/0",
       "recipeDependencies": [
@@ -2353,7 +2353,7 @@
     },
     {
       "id": "preview:topography",
-      "label": "Topography preview",
+      "label": "Elevation preview",
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/1",
       "recipeDependencies": [

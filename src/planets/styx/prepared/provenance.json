@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf07372b971b140cf4b2b0b307e2578998d5b6c9f6f594534d5f3edff133d5a0"
+    "sha256": "ed29aefd54d64e205ed3f1c95172fac1738a923c702350396483d12561dd8959"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "04781eb39abddd6f3e2fb43862f5d52f4cc72d5dcf5b476fb744e5813b0e8c28",
+      "sha256": "972b8c5ca1a43dae92cf3fef1ec7531591c3171e965c1db9583985ced320def4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
-              "title": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
+              "title": "Approximate shape model",
               "detail": "Measured axes",
               "thumbnail": "/scenes/styx/styx-model-thumbnail.webp",
               "surface": "styx-model-surface@2x.webp",
@@ -302,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0c469d8801ea21972c6842f7f855c73aa787622f17e80e8c7f2e84bc6cd110cd",
-      "bytes": 3829,
+      "sha256": "972b8c5ca1a43dae92cf3fef1ec7531591c3171e965c1db9583985ced320def4",
+      "bytes": 3711,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

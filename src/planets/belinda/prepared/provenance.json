@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f472e501bc358b40cabf990f0a2aaa43e5345625a13e7288c2477cd873a14ad5"
+    "sha256": "acfc972ae75f153810a22b007daf24a539a1c02b5b81633b4e88be41844c4d70"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "064c03fc16c8c5b0d8e1560dbebb25d21cdcedabf552f3b8a83531a9439cb3e3",
+      "sha256": "3907c8c5b61134e66686ab988fd8e6f4753c1714eb65e42ff91047727f41f58d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape.",
-              "title": "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape.",
+              "title": "Approximate shape model",
               "detail": "Measured shape",
               "thumbnail": "/scenes/belinda/belinda-model-thumbnail.webp",
               "surface": "belinda-model-surface@2x.webp",
@@ -310,8 +310,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6eef1e3ee447ee09297543a1c856060d5a3a414e4c0c84aefefb68baf6434e64",
-      "bytes": 3932,
+      "sha256": "3907c8c5b61134e66686ab988fd8e6f4753c1714eb65e42ff91047727f41f58d",
+      "bytes": 3821,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

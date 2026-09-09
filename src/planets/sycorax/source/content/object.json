@@ -45,7 +45,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
-        "title": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+        "title": "Light-curve shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/sycorax/sycorax-model-thumbnail.webp",
         "surface": "sycorax-model-surface@2x.webp",

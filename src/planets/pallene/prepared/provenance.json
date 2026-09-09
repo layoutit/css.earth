@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "030099d9392fd9540cea3bed67cb9c6304edf2042ea5e3b19fa955b7f918e2ad"
+    "sha256": "911df0aebb8f8e48fb8a1f560037bc5474d29b0a4de1314e796204968e5fd431"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -134,7 +134,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c8b7d24f6974a4fb1611362e9a509204d67efdb58a30471701c76126dae39206",
+      "sha256": "82b2c84a6d17e4fe3bfd2b2bc681c2da27a952f079a4305b63c78ce4e0688c75",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -182,7 +182,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
-              "title": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
+              "title": "ISS clear-filter image",
               "detail": "Cassini ISS",
               "thumbnail": "/scenes/pallene/pallene-normal-thumbnail.webp",
               "surface": "pallene-normal-surface@2x.webp",
@@ -192,7 +192,7 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582"
               },
-              "summary": "Cassini's 2005 image, only about 8 × 12 pixels across. Brightness shows coarse detail; gray grid: no coverage."
+              "summary": "Only about 8 × 12 source pixels resolve the moon. Brightness shows coarse detail; the gray grid marks unobserved surface."
             }
           ]
         },
@@ -382,8 +382,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c6107419d3942e49df0dd279643d1e51c3884116a7fdfe8e8cf6e4062782abbc",
-      "bytes": 3951,
+      "sha256": "82b2c84a6d17e4fe3bfd2b2bc681c2da27a952f079a4305b63c78ce4e0688c75",
+      "bytes": 3753,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

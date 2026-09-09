@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd68e1b7428bb11e3cb49d1193e3c4f7056a1a4799060adcf1cc6420236cb06f"
+    "sha256": "3638f19222258a8b451d4cf731b898f1ae64bf399669b6c08f10c58b8a1b7f62"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fe8a80a8105bc1ab53ce06ea3994b7ccb940443f2cbe6d04a7d5b15fa59aabb1",
+      "sha256": "7d104d6076bbecf5b345ae5ef6fc899d5b04209e050efaa72a63c861ace31175",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 11 ± 0.295 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Thermal diameter 11 ± 0.295 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/united-nations/united-nations-shape-thumbnail.webp",
               "surface": "united-nations-shape-surface@2x.webp",
               "poles": "united-nations-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 5.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 5.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/united-nations/united-nations-elevation-thumbnail.webp",
               "surface": "united-nations-elevation-surface@2x.webp",
               "poles": "united-nations-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "fe8a80a8105bc1ab53ce06ea3994b7ccb940443f2cbe6d04a7d5b15fa59aabb1",
+      "sha256": "7d104d6076bbecf5b345ae5ef6fc899d5b04209e050efaa72a63c861ace31175",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 12433,
+      "bytes": 12121,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

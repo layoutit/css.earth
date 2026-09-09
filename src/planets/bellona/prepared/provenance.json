@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "42da8f3b5175f355114ba22bdea0f22a444d0c35ef8bf03976ca67427b09053f"
+    "sha256": "596d157e604bb6d9528c6b1e92db123b03a9804a0321d623d020764ad54c864e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bf7342a0e2392fbb1860965ec0c389f1d4539ac211a54e171368864dad08259c",
+      "sha256": "5cf49ce52e300fed01ad1007394f7f26726302c45a38207aad0e569303992844",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex model constrained by resolved imaging, 133 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex model constrained by resolved imaging, 133 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/bellona/bellona-shape-thumbnail.webp",
               "surface": "bellona-shape-surface@2x.webp",
               "poles": "bellona-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 66.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 66.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/bellona/bellona-elevation-thumbnail.webp",
               "surface": "bellona-elevation-surface@2x.webp",
               "poles": "bellona-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bf7342a0e2392fbb1860965ec0c389f1d4539ac211a54e171368864dad08259c",
-      "bytes": 9931,
+      "sha256": "5cf49ce52e300fed01ad1007394f7f26726302c45a38207aad0e569303992844",
+      "bytes": 9614,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

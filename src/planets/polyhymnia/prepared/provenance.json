@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "170a637847aa2310c12350722467c22bd1b319eb463772dd6276d1c1461dbf15"
+    "sha256": "659c0f804b3210da355b9b2ab500338e85738c2c5f4e957d5b0949f9c2d2caec"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5b2629c5b34635ea0564d0cdeba57a468fe218fb5d6d06332aaa163f118f3000",
+      "sha256": "8e105c314d579ffbfe936c7dae8e2928e38cdea3dd0dbeddac427262468eca59",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 53.98 ± 0.91 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Thermal diameter 53.98 ± 0.91 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/polyhymnia/polyhymnia-shape-thumbnail.webp",
               "surface": "polyhymnia-shape-surface@2x.webp",
               "poles": "polyhymnia-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 26.99 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 26.99 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/polyhymnia/polyhymnia-elevation-thumbnail.webp",
               "surface": "polyhymnia-elevation-surface@2x.webp",
               "poles": "polyhymnia-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "5b2629c5b34635ea0564d0cdeba57a468fe218fb5d6d06332aaa163f118f3000",
+      "sha256": "8e105c314d579ffbfe936c7dae8e2928e38cdea3dd0dbeddac427262468eca59",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 10453,
+      "bytes": 10145,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f947df85049cf7621c442c0b71d443585ab81085d131a01d36db3a39cb07836d"
+    "sha256": "d27cbdc2ce70e2abf52608ca937c17c380bb9c3a2d1a4e72dc5f7dfff8d0d243"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -262,7 +262,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5b8cbbb1d7005e5a5973bd93e12aa63d4c3eb86486328c599e7125215c90dd74",
+      "sha256": "cfa2dd3c1b764ac2553963e7a0c9936cb6b180e67dc56fb244120fc971f0bed7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -340,7 +340,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
-              "title": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+              "title": "SSI mosaic",
               "detail": "Galileo",
               "thumbnail": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
               "surface": "amalthea-normal-surface@2x.webp",
@@ -350,13 +350,13 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/galileo/ssi/"
               },
-              "summary": "Galileo images mapped onto the moon's shape. Brightness has been adjusted; gray grid: missing or unreliable imagery."
+              "summary": "Surface brightness is adjusted to reduce photographed shading. Detail varies; the gray grid marks missing or unreliable images."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
-              "title": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+              "title": "Shape-derived radial height",
               "detail": "Radial shape",
               "thumbnail": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
               "surface": "amalthea-elevation-surface@2x.webp",
@@ -849,8 +849,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d5c45238bcca8e17eef2246c24e7875dbc33b21b91266de41c7eef357d56af15",
-      "bytes": 5911,
+      "sha256": "cfa2dd3c1b764ac2553963e7a0c9936cb6b180e67dc56fb244120fc971f0bed7",
+      "bytes": 5644,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

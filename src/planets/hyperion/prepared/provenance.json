@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e420352f1be9ea1e71ad5267c4743ca3f57553e6384035ede8cd400596de357d"
+    "sha256": "a32c1b855ce1a1a203a3161103a471d6f20de282409fb885788c638f977c1a99"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -353,7 +353,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "727b8eff0c46190cac4ccfb233f27ee6b70d1fa0bcd4d3e29ffdff62ccea4c21",
+      "sha256": "9a7aacbc9ee63d91ad14cf7e15028f85a269dd7d7970e83bf19111b8a8b015d7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -431,7 +431,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
-              "title": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
+              "title": "ISS mosaic",
               "detail": "Cassini clear-filter mosaic",
               "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
               "surface": "hyperion-normal-surface@2x.webp",
@@ -441,13 +441,13 @@
                 "path": "../manifest.json",
                 "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
               },
-              "summary": "Cassini images mapped onto the irregular shape. Crater shadows remain; coverage varies and gaps are marked."
+              "summary": "Photographs follow the irregular shape and retain crater shadows. Resolution varies across the surface; gaps are marked."
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
-              "title": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
+              "title": "Shape-derived radial height",
               "detail": "Shape-derived radial height",
               "thumbnail": "/scenes/hyperion/hyperion-elevation-thumbnail.webp",
               "surface": "hyperion-elevation-surface@2x.webp",
@@ -1374,8 +1374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "20b36fea683f5ff8a15f0d37a3a081f1584197edbbaf54325094c34de19dd07e",
-      "bytes": 5943,
+      "sha256": "9a7aacbc9ee63d91ad14cf7e15028f85a269dd7d7970e83bf19111b8a8b015d7",
+      "bytes": 5812,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
