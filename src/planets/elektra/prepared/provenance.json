@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8069f2f558092cf77b1e543f8805a890a2789214e4e3406dae361c87fb8aa17e"
+    "sha256": "8040e4775f149052a075fe7411f0911433746523e9605c172772de7180ec7419"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d20cf34763683b71dff06b9f71c8e1a7e792c2b15ad4ee5b415f33dd3b77553d",
+      "sha256": "5516fe8ba3daa7a233ba16614a973891526493c86e46de5d75069e6573c3c930",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/elektra/elektra-shape-thumbnail.webp",
               "surface": "elektra-shape-surface@2x.webp",
               "poles": "elektra-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 99.5 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/elektra/elektra-elevation-thumbnail.webp",
               "surface": "elektra-elevation-surface@2x.webp",
               "poles": "elektra-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c5bf1e4b3e4b91422d22daa902974ee8829bdb5b97947c4f911ceabb10ca7f37",
-      "bytes": 7820,
+      "sha256": "5516fe8ba3daa7a233ba16614a973891526493c86e46de5d75069e6573c3c930",
+      "bytes": 7423,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

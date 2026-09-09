@@ -137,7 +137,7 @@
         "id": "normal",
         "label": "Visible color",
         "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
-        "title": "Visible color: NASA Blue Marble Next Generation with archival clouds",
+        "title": "Blue Marble Next Generation",
         "thumbnail": "/scenes/earth/earth-lens-normal.webp",
         "source": {
           "id": "surface-observation"
@@ -149,7 +149,7 @@
         "id": "topography",
         "label": "Elevation",
         "description": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
-        "title": "Elevation: GEBCO_2026 land and seafloor heights",
+        "title": "GEBCO land and seafloor heights",
         "thumbnail": "/scenes/earth/earth-lens-topography.webp",
         "source": {
           "id": "gebco-2026-elevation",
@@ -176,14 +176,29 @@
       {
         "id": "night-lights",
         "label": "Night lights",
-        "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
-        "title": "Night lights: NASA Black Marble 2016 global composite",
+        "description": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting.",
+        "title": "Black Marble annual night lights · 2025",
         "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
         "source": {
-          "id": "surface-observation"
+          "id": "nasa-black-marble-2025-public-radiance",
+          "url": "https://www.lightpollutionmap.info/help.html"
         },
-        "detail": "Nighttime",
-        "summary": "NASA Black Marble's 2016 night-light composite. It combines dates and does not show current lighting."
+        "detail": "NASA · 2025",
+        "summary": "2025 annual snow-free satellite radiance. Warm false color; logarithmic scale. Gray: missing data or outside 75°N–65°S. Aurora can remain at high latitudes. NASA Black Marble / Jurij Stare, lightpollutionmap.info.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Annual radiance · nW/cm²/sr",
+          "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+          "image": "earth-night-lights-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "0",
+            "≥ 100 nW/cm²/sr"
+          ]
+        },
+        "legendNote": "Logarithmic color scale, capped at 100 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness."
       },
       {
         "id": "enso",
@@ -233,7 +248,7 @@
         "id": "cross-section",
         "label": "Cross section",
         "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
-        "title": "Cross section: Schematic NASA Science source-backed interior",
+        "title": "Interior structure model",
         "thumbnail": "/scenes/earth/earth-view-interior.webp",
         "legend": {
           "kind": "categories",
@@ -241,22 +256,22 @@
           "items": [
             {
               "label": "Crust",
-              "description": "6,348 km inner radius",
+              "description": "Thin outer rock",
               "color": "#8b795e"
             },
             {
               "label": "Mantle",
-              "description": "3,478 km inner radius",
+              "description": "Solid rock",
               "color": "#cf5d35"
             },
             {
               "label": "Outer core",
-              "description": "1,221 km inner radius",
+              "description": "Liquid iron alloy",
               "color": "#ef9c3b"
             },
             {
               "label": "Inner core",
-              "description": "to the center",
+              "description": "Solid iron alloy",
               "color": "#f5d580"
             }
           ],
@@ -264,10 +279,56 @@
           "sourceUrl": "https://science.nasa.gov/earth/facts/"
         },
         "source": {
-          "id": "surface-observation"
+          "id": "surface-observation",
+          "url": "https://science.nasa.gov/earth/facts/"
         },
         "detail": "Structure",
-        "summary": "Earth's interior based on NASA models. Colors mark layers; the boundaries are inferred, not photographed."
+        "summary": "A cut through Earth’s crust, rocky mantle, liquid outer core and solid inner core. Layer sizes follow the NASA Science model; colors are schematic."
+      },
+      {
+        "id": "mantle-tomography",
+        "label": "Mantle tomography",
+        "description": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
+        "title": "GLAD-M35 mantle tomography",
+        "thumbnail": "/scenes/earth/earth-view-tomography.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Mantle Vsv · % from depth mean",
+          "sourceUrl": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35",
+          "image": "earth-tomography-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "≤ −3%",
+            "0",
+            "≥ +3%"
+          ]
+        },
+        "source": {
+          "id": "glad-m35-vsv",
+          "url": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35"
+        },
+        "detail": "GLAD-M35 · 2024",
+        "summary": "Red and blue map slower and faster mantle waves relative to the mean at each depth. This is not temperature. Crust and core colors are schematic; gray marks depths outside the model.",
+        "falseColor": true,
+        "legendNote": "GLAD-M35 r0.1 · 10–2,890 km depth · 1° / 10 km sample grid. Gray: outside model depth coverage. Grid spacing is not resolving power.",
+        "facts": [
+          {
+            "id": "mapped-depth",
+            "label": "Mapped depth",
+            "value": "10–2,890 km"
+          },
+          {
+            "id": "outer-core",
+            "label": "Outer core",
+            "value": "Liquid iron alloy"
+          },
+          {
+            "id": "inner-core",
+            "label": "Inner core",
+            "value": "Solid iron alloy"
+          }
+        ]
       }
     ]
   },

@@ -1,0 +1,187 @@
+{
+  "schema": "cssearth-b3-independent-callisto-code-review@1",
+  "reviewedAt": "2026-09-09T12:05:08.554585+00:00",
+  "baseHead": "ef07fac2d3208e201dafc626374b30ed4644f561",
+  "workingTree": "Uncommitted B3 implementation; exact reviewed file pins below.",
+  "scope": "Read-only independent source conversion, camera registration, source tests and actual recipe consumer review. Reviewer did not develop Callisto changes. No new fit, source decoding, bake, browser or test run was performed in this review.",
+  "disposition": "No blocking conversion or coordinate defect found in the bounded scope. Registration evidence remains qualified as described below.",
+  "findings": [],
+  "filePins": [
+    {
+      "path": "src/planets/callisto/source/preparation/prepare-galileo-color.py",
+      "bytes": 7090,
+      "sha256": "9b16349842530308f75826ae398f2f6f721d17ee40d98cead6eb41d67bd6f8ea"
+    },
+    {
+      "path": "src/planets/callisto/source/preparation/galileo-color-conversion.json",
+      "bytes": 808,
+      "sha256": "a1a33f61bc88425dee17e5da37917a69ca68828f3e9ee533ed372918599e3cb7"
+    },
+    {
+      "path": "src/planets/callisto/source/preparation/terrestrial.json",
+      "bytes": 2588,
+      "sha256": "8756e5b7371fa3533f55691b2267c89eb20472a2761280bd31b2693e5b21812a"
+    },
+    {
+      "path": "src/planets/callisto/source/preparation/acquisition.json",
+      "bytes": 1264,
+      "sha256": "a53d8515ad38074df1e8b91b4ecd5239d9e3de3817cf802dff2c22d77bef8bec"
+    },
+    {
+      "path": "src/planets/callisto/source/validation/galileo-color-registration.json",
+      "bytes": 8943,
+      "sha256": "0cb2e52bb4bd1ab5680be022e80a9b7e14e72fa01da56f665bb5a7b869bcbaf9"
+    },
+    {
+      "path": "src/planets/callisto/source/validation/galileo-color-conversion-proof.json",
+      "bytes": 1349,
+      "sha256": "47f83e9f581273ee11e94b59936109fdc5fb43e366bafdca6db19d6535f2bbc5"
+    },
+    {
+      "path": "src/planets/callisto/source/validation/registration-fit-original.py",
+      "bytes": 3651,
+      "sha256": "b2c70a8271062ef45f6094eacccd3a9510754ebeea38294f44717fe8b2d9f78e"
+    },
+    {
+      "path": "src/planets/callisto/source/validation/registration-independent-original.py",
+      "bytes": 6254,
+      "sha256": "df4d626dbdd028f0dde8b3c658ee654c350974fc33e35267287554c90204cc1a"
+    },
+    {
+      "path": "src/planets/callisto/source/validation/registration-independent-review.json",
+      "bytes": 9690,
+      "sha256": "c886e039ff30aeb81992e76748ab37f92db3ea8c810507da8be11e59647754ba"
+    },
+    {
+      "path": "src/planets/callisto/source/validation/registration-independent-review.md",
+      "bytes": 2878,
+      "sha256": "e8f63a05f816f327fedccadec25b08c084aaa03c3169870d5bdf2000c5e2d3ab"
+    },
+    {
+      "path": "src/planets/callisto/source/observations/PIA03456-release.json",
+      "bytes": 1891,
+      "sha256": "067f6622f450eba67f98fb134ad443ebc37b1eb21bcb605ec5d80790e0486110"
+    },
+    {
+      "path": "src/planets/callisto/source/observations/PIA03456-usgs.png",
+      "bytes": 821031,
+      "sha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638"
+    },
+    {
+      "path": "src/planets/callisto/source/observations/PIA03456-registered-rgba.tif",
+      "bytes": 771611,
+      "sha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32"
+    },
+    {
+      "path": "src/planets/callisto/source/manifest.json",
+      "bytes": 16386,
+      "sha256": "b7059f087a11b2457d4e9f029e9c7b9c6b5d27aac895d7599c32aee926302957"
+    },
+    {
+      "path": "src/planets/callisto/source/content/object.json",
+      "bytes": 11502,
+      "sha256": "a18e1803468b2ab02cc46fd9fe5a3787d84a7f073e03e0ced8fb073159e40117"
+    },
+    {
+      "path": "src/planets/callisto/SOURCE.md",
+      "bytes": 8455,
+      "sha256": "e16d2bdb8e7c4f57d4799cf027dcff68084167c7e45e4e3e856897df516d3421"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/observed-geotiff.mjs",
+      "bytes": 14431,
+      "sha256": "0355cc200ca3b3ca6ca288e8d7fe58aae2ee857d71fe3d3898f367a2b3440635"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/solid-raster.mjs",
+      "bytes": 23439,
+      "sha256": "14b93b42ee7947ca850b761409ae6e463231e21e695091c7064fbee0605867b7"
+    },
+    {
+      "path": "tests/objects/unit/callisto/color-source.test.mjs",
+      "bytes": 7181,
+      "sha256": "af2b713cdb9ed5cc3f02bcf7f18932a72555a1e21dd9cbbe1a52dfd04c00e936"
+    },
+    {
+      "path": "tests/objects/unit/callisto/color-atlas.test.mjs",
+      "bytes": 3495,
+      "sha256": "8cbfc751625148f6a0e9d1aa4f22f9deddfb4ddff964f5a27fb9ebf5278a3cc0"
+    }
+  ],
+  "checkedInvariants": [
+    {
+      "path": "src/planets/callisto/source/preparation/prepare-galileo-color.py",
+      "lines": [
+        52,
+        96
+      ],
+      "result": "The converter samples the original published RGBA plate only, requires alpha 255 for every nonzero bilinear contributor, retains signed-independent uint8 display values, and never derives a brightness-based terrain mask. Supported output is alpha 255; every unsupported output remains all-zero RGBA. A valid all-zero RGB collision fails explicitly rather than silently becoming missing."
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/observed-geotiff.mjs",
+      "lines": [
+        83,
+        165
+      ],
+      "result": "Callisto explicitly selects all-channels zero validity and source-georeferenced bilinear resampling. Although the generic reader removes source alpha, this pinned derivative makes RGB all-zero equivalent to missing; the converter rejects the sole valid-black collision. The native-contributor loop withholds any missing contributor and retains one-channel zero/dark pixels."
+    },
+    {
+      "path": "src/planets/callisto/source/preparation/prepare-galileo-color.py",
+      "lines": [
+        100,
+        116
+      ],
+      "result": "The 1440 \u00d7 720 PixelIsArea grid uses east-positive longitude, north-to-south rows, central meridian 180\u00b0 and physical radius 2410300 m. This remains distinct from the controlled reference map radius. The spherical coverage count is cosine-latitude weighted; 28.735% does not claim whole-globe coverage."
+    },
+    {
+      "path": "src/planets/callisto/source/validation/registration-independent-original.py",
+      "lines": [
+        14,
+        36
+      ],
+      "result": "The fixed-camera review samples the original unblurred controlled map by its actual affine transform and native reference radius. Named Gazetteer coordinates are separate identifiers, with training-region versus withheld-region membership explicitly distinguished. Diagnostic offsets do not alter the camera."
+    },
+    {
+      "path": "tests/objects/unit/callisto/color-source.test.mjs",
+      "lines": [
+        47,
+        105
+      ],
+      "result": "Tests check source/generator/derivative pins, all output texels using a separately expanded scalar camera equation, opaque contributors, half-byte quantization, exact geographic grid, weighted coverage and an independently calculated coarse sampling footprint. The landmark projection test preserves the fixed camera; the independent image-matching evidence is in the archived review, not created by that assertion."
+    },
+    {
+      "path": "src/planets/callisto/SOURCE.md",
+      "lines": [
+        29,
+        79
+      ],
+      "result": "The source and visible content correctly identify processed photographic display color, approximate source resolution, partial coverage and approximate added lighting. They do not claim I/F, measured albedo, calibrated ratios, new resolution, global registration accuracy or reconstructed unseen color."
+    }
+  ],
+  "evidenceLimits": [
+    {
+      "path": "src/planets/callisto/source/validation/registration-fit-original.py",
+      "lines": [
+        16,
+        18
+      ],
+      "qualification": "The whole reference and photo are Gaussian-filtered before quadrant selection. Held-out centers occupy disjoint quadrants, but the filters have finite support crossing the split; these are spatial alignment checks, not statistically independent observations or perfectly disjoint raw-pixel support. The subsequent unblurred fixed-camera review and named-feature inspection are separate checks. No covariance or absolute accuracy follows from local 0\u20131 pixel diagnostic peaks."
+    },
+    {
+      "path": "src/planets/callisto/source/validation/galileo-color-registration.json",
+      "qualification": "The independent review initially recommended a 60\u00b0 emission limit; the adopted delivery is explicitly 65\u00b0. The difference is disclosed in delivery.explanation. This code review verifies the implemented footprint, not additional limb accuracy in the 60\u201365\u00b0 ring."
+    },
+    {
+      "path": "src/planets/callisto/source/preparation/prepare-galileo-color.py",
+      "qualification": "Exact TIFF codec bytes depend on recorded GDAL/rasterio versions; raw RGBA/grid identity is the portable reproduction check. Historical registration scripts retain their original temporary paths and are not the supported conversion entry point."
+    }
+  ],
+  "existingTests": {
+    "command": "node --test tests/objects/unit/callisto/color-source.test.mjs",
+    "reportedBy": "root",
+    "reportedPassed": 4,
+    "rerunByThisReviewer": false,
+    "claim": "Root reported the four source tests passed. This review inspected their code and does not manufacture an independent execution receipt."
+  },
+  "qualificationBoundary": "No final source acquisition, full tests, full build, prepared atlas acceptance, Chrome DPR 1/2, visual or whole-body readiness claim is made by this code review."
+}

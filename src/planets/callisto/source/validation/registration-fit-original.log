@@ -1,0 +1,3 @@
+coarse [(0.20726855116279042, 356), (0.2799869292443964, 354), (0.4321579339996292, 358), (0.4873390942988398, 352), (0.5839224673130675, 0)]
+fit [-0.14956761378453695, 145.20094678888793, 355.3222696772947, 323.2245440873881, 325.9541756735663, 319.874174604298] 0.8374308769465191 True
+[{'region': 'upper-right', 'samples': 5524, 'unshiftedCorrelation': 0.8322815354799907, 'bestDiagnosticCorrelation': 0.8322815354799907, 'diagnosticOffsetPixels': [0, 0], 'searchBoundary': False}, {'region': 'lower-left', 'samples': 5464, 'unshiftedCorrelation': 0.6830660611628557, 'bestDiagnosticCorrelation': 0.6830660611628557, 'diagnosticOffsetPixels': [0, 0], 'searchBoundary': False}]

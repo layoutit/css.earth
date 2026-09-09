@@ -7,9 +7,10 @@ const state = { eyeM: [0, 0, 3e6], radiusM: 1e6, rotation: identity,
   view: { left: -.5, right: .5, top: -.5, bottom: .5 }, focalPixels: 1000,
   axes: { prime: [0, 0, 1], east: [1, 0, 0], north: [0, 1, 0] } };
 
-test('scene date follows the numeric TT epoch across calendar days', () => {
-  assert.equal(formatViewDate(2461286.5), 'Thursday, 3 September 2026');
-  assert.equal(formatViewDate(2461287.5), 'Friday, 4 September 2026');
+test('scene date includes the calendar time and TT scale across calendar days', () => {
+  assert.equal(formatViewDate(2461286.5), '2026-09-03 00:00 TT');
+  assert.equal(formatViewDate(2461286.75), '2026-09-03 06:00 TT');
+  assert.equal(formatViewDate(2461287.5), '2026-09-04 00:00 TT');
   assert.equal(formatViewDate(null), '—');
 });
 

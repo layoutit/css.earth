@@ -63,7 +63,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
-        "title": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+        "title": "Clear-filter mosaic",
         "detail": "Voyager 2",
         "thumbnail": "/scenes/larissa/larissa-normal-thumbnail.webp",
         "surface": "larissa-normal-surface@2x.webp",
@@ -73,13 +73,13 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/voyager/iss/"
         },
-        "summary": "Voyager 2 images mapped onto the shape. Gray grid: withheld shadows, the unseen side and unreliable samples."
+        "summary": "Brightness is corrected for illumination. The gray grid marks the unseen side, withheld shadows and unreliable samples."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
-        "title": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+        "title": "Shape-derived radial height",
         "detail": "Radial shape",
         "thumbnail": "/scenes/larissa/larissa-elevation-thumbnail.webp",
         "surface": "larissa-elevation-surface@2x.webp",

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "21b06fdd4a868786ae0caff986206e59b0f9b05242dfdf07630327f74b8a40ad"
+    "sha256": "6ae53b94eec1a7f773718cc6d75b67e084ba6506256a43bfa30fa3b46340ef04"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "466e07b0f31a8bca88a1fde9e03e1c451a144349f1764c6b2d9fcc774e29bb1d",
+      "sha256": "aaeca74e5b794990896d1bec200516a800cd1c56cba89eff180cc6a2b0d9ae8e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 117.32 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 117.32 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/semele/semele-shape-thumbnail.webp",
               "surface": "semele-shape-surface@2x.webp",
               "poles": "semele-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 58.66 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 58.66 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/semele/semele-elevation-thumbnail.webp",
               "surface": "semele-elevation-surface@2x.webp",
               "poles": "semele-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "466e07b0f31a8bca88a1fde9e03e1c451a144349f1764c6b2d9fcc774e29bb1d",
-      "bytes": 10547,
+      "sha256": "aaeca74e5b794990896d1bec200516a800cd1c56cba89eff180cc6a2b0d9ae8e",
+      "bytes": 10109,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

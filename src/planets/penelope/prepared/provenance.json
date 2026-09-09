@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "947908844d222bbb1a394be43f22e4a744f8bac638c943661f003ef618ae4ad5"
+    "sha256": "bc660c51af9726a8d1b6a04a1ceaef4177db4e85e00739f6f91900e13b3c3210"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "692b5402c1bf8d1a1927da65940376a96cd49c25bb9aaca7d4a088afa9a6e87b",
+      "sha256": "c3cf06338dd02e5524db412fc126a86292ce57daf1c64e34a04dd276f7b05600",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 180, version 2007-02-27, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 180",
               "thumbnail": "/scenes/penelope/penelope-shape-thumbnail.webp",
               "surface": "penelope-shape-surface@2x.webp",
               "poles": "penelope-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 42.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/penelope/penelope-elevation-thumbnail.webp",
               "surface": "penelope-elevation-surface@2x.webp",
               "poles": "penelope-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cb09c309000964e9a243fc0f5f58a86addefb67b3d3d2da8b6f96d6e551d98c1",
-      "bytes": 9332,
+      "sha256": "c3cf06338dd02e5524db412fc126a86292ce57daf1c64e34a04dd276f7b05600",
+      "bytes": 8921,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

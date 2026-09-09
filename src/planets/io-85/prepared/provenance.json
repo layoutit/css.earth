@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "db58b9d7fb8cdbf00584c9f7ba42fafeb6af260b6c345971c57f10ba2e6bdddd"
+    "sha256": "6a14ad2bf0c78940dad1c3e5fe8eddc71e480d7c40ba38387cdbe55e08447724"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "14c2a94df38b73ba3b4495d79b3966075c1a872a53d6058a9e285fdd134d2131",
+      "sha256": "11f8f887c8d5ee229444aa24fa0659faa904330460160ad06df633f902b53127",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex model constrained by resolved imaging, 167 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex model constrained by resolved imaging, 167 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/io-85/io-85-shape-thumbnail.webp",
               "surface": "io-85-shape-surface@2x.webp",
               "poles": "io-85-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 83.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 83.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/io-85/io-85-elevation-thumbnail.webp",
               "surface": "io-85-elevation-surface@2x.webp",
               "poles": "io-85-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "14c2a94df38b73ba3b4495d79b3966075c1a872a53d6058a9e285fdd134d2131",
-      "bytes": 8922,
+      "sha256": "11f8f887c8d5ee229444aa24fa0659faa904330460160ad06df633f902b53127",
+      "bytes": 8605,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

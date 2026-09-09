@@ -13,7 +13,7 @@ import { prepareByteObservation } from './observed-image.mjs';
 import { preparePds4Observation } from './observed-pds4.mjs';
 import { prepareFitsObservation } from './observed-fits.mjs';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mjs';
-import { prepareShapeCameraMosaic } from './shape-camera-mosaic.mjs';
+import { prepareShapeCameraMosaic, prepareShapeCameraColor } from './shape-camera-mosaic.mjs';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mjs';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mjs';
 import { loadGeoObservationSurface } from './observed-geo-surface.mjs';
@@ -145,7 +145,9 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   for (const recipe of config.raster.mosaics ?? []) {
     const tiles = await source.validateGroup(recipe.consumer);
     if (recipe.photometry?.consumer) await source.validateGroup(recipe.photometry.consumer);
-    const { rgb, missing, grid } = recipe.format === 'controlled-shape-camera'
+    const { rgb, missing, grid } = recipe.format === 'controlled-shape-color'
+      ? await prepareShapeCameraColor(sourceDirectory, tiles, recipe, width, height, config.geometry.radialTerrain)
+      : recipe.format === 'controlled-shape-camera'
       ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry.radialTerrain)
       : recipe.format === 'controlled-orthographic'
       ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, recipe, width, height)
@@ -170,6 +172,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   for (const lens of config.raster.scientific ?? []) {
     await source.validateGroup(lens.consumer);
+    for(const mask of lens.qualityMasks??[])if(!source.manifest.inputs.some(input=>input.path===mask.path&&input.consumers.includes(lens.consumer)))
+      throw new Error(`Scientific quality mask ${mask.path} lacks a pinned source in ${lens.consumer}.`);
     const sourcePath = lens.facetField?.path ?? lens.path;
     const entry = source.manifest.inputs.find(input => input.path === sourcePath && input.consumers.includes(lens.consumer));
     if (!entry) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
@@ -180,7 +184,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
       return {id: input.id, sha256: input.expectedSha256, width: input.width, height: input.height};
     });
-    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && (lens.format === 'facet-scalars' ? lens.meshPath : lens.path) !== config.geometry.radialTerrain.path))) {
+    const renderedMeshPath = lens.format === 'vtk-cell-categories' ? lens.surfaceSampling.renderedMeshPath : lens.format === 'facet-scalars' ? lens.meshPath : lens.path;
+    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && renderedMeshPath !== config.geometry.radialTerrain.path))) {
       throw new Error('Source-surface science requires the actual rendered source mesh.');
     }
     if (lens.format === 'pds3-scalar-map') {
@@ -189,10 +194,13 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       }
     }
     const dependencies = lens.format === 'facet-scalars' ? [lens.meshPath, lens.table.labelPath].filter(Boolean)
+      : lens.format === 'vtk-cell-categories' ? [lens.surfaceSampling.renderedMeshPath, lens.symbols?.paths, lens.symbols?.locations].filter(Boolean)
+      : lens.format === 'image-plane-dem' ? [lens.comparison?.path].filter(Boolean)
       : lens.format === 'geologic-shapefile' ? [lens.grid.attributePath, lens.grid.projectionPath]
       : lens.format === 'pds-image' ? [lens.labelPath] : [];
     for (const path of dependencies) {
       if (![...source.manifest.inputs, ...source.manifest.documents].some(input => input.path === path)) throw new Error(`Unpinned scientific dependency: ${path}`);
+      if (lens.format === 'image-plane-dem') await source.validatePath(path);
     }
     // Reuse the already loaded geometry BVH, especially for large OLA meshes.
     const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling ? radial.grid : undefined);

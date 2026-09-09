@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "66846fff726f4cd397aab505f02a2d1d4de9b46a8ba0ce353c2c06e593af038f"
+    "sha256": "aa8997ef941b96f936870e997d60f1c882d78e0670a83f65b1c09f51033f298f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4214cb5e434a47041c5c068dc28c42d3eda98bf6d24425488d78e680f9e92bf8",
+      "sha256": "433ba9f924012b7f210d2be6b2232f6d04f8804a1e87e6b2081b16c0f96a8900",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermal diameter 87.45 ± 0.95 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Thermal diameter 87.45 ± 0.95 km; quoted error excludes unquantified shape, viewing and thermal-model effects. The convex model shows broad shape; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/proserpina/proserpina-shape-thumbnail.webp",
               "surface": "proserpina-shape-surface@2x.webp",
               "poles": "proserpina-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 43.725 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 43.725 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/proserpina/proserpina-elevation-thumbnail.webp",
               "surface": "proserpina-elevation-surface@2x.webp",
               "poles": "proserpina-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "4214cb5e434a47041c5c068dc28c42d3eda98bf6d24425488d78e680f9e92bf8",
+      "sha256": "433ba9f924012b7f210d2be6b2232f6d04f8804a1e87e6b2081b16c0f96a8900",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11212,
+      "bytes": 10903,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

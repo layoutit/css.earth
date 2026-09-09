@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c5f21a66986aca84353112d874aa89feba5578a1af8bc10242331dc3dd9cbb4d"
+    "sha256": "3790f74ce7e0ce1aa29902fd67c71180db01cd0be8c70e1c9c67d7c4f9ab6347"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0f913a7ebfa195f166d3ad4a38da88384da39e6c6d57d46d0895a49dc8f20265",
+      "sha256": "20154a03836d82b659602bf6145095cd47c4bd35ee59cf657cd61f5209172335",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,7 +163,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
-              "title": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+              "title": "Approximate shape model",
               "detail": "Measured shape",
               "thumbnail": "/scenes/aegaeon/aegaeon-model-thumbnail.webp",
               "surface": "aegaeon-model-surface@2x.webp",
@@ -303,8 +303,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "faf44ec4faa881c6e9bf12f14bf47dab55661d5f16d003c49113a7f9860c783a",
-      "bytes": 3495,
+      "sha256": "20154a03836d82b659602bf6145095cd47c4bd35ee59cf657cd61f5209172335",
+      "bytes": 3477,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

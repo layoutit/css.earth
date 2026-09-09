@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8979abc7b88d6e5b5521508e886b5216040652540feca58b3c420c4c34d3d012"
+    "sha256": "1d4c5d3626810c37867d81bed926c139ce22e64709ffc808d03bca28868f4964"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -93,7 +93,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "13a421f7940cb465ab461e2a0fb541e4eeb78ccc07c6cb56f14632273d783d02",
+      "sha256": "40c45d5876be92934c3e6e31286c21866ce3dd47d8aa619a94ea4c2a1ec8fe85",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -188,7 +188,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
-              "title": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
+              "title": "Multi-mission image mosaic",
               "thumbnail": "/scenes/iapetus/iapetus-normal-thumbnail.webp",
               "surface": "iapetus-normal-surface@2x.webp",
               "poles": "iapetus-normal-poles@2x.webp",
@@ -196,13 +196,13 @@
                 "id": "cassini-voyager-2008-iapetus",
                 "path": "../manifest.json"
               },
-              "summary": "Cassini and Voyager mosaic with coarse poles. Shadows and seams remain; the gray grid marks gaps."
+              "summary": "Polar detail is coarse compared with the rest of the surface. Photographed shadows and seams remain; the grid marks gaps."
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
               "description": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere.",
-              "title": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere.",
+              "title": "Enhanced-color composite",
               "thumbnail": "/scenes/iapetus/iapetus-enhanced-thumbnail.webp",
               "surface": "iapetus-enhanced-surface@2x.webp",
               "poles": "iapetus-enhanced-poles@2x.webp",
@@ -210,7 +210,7 @@
                 "id": "cassini-iss-2014-iapetus-color",
                 "path": "../manifest.json"
               },
-              "summary": "Enhanced Cassini infrared and ultraviolet color. The dark hemisphere is real terrain, not missing imagery."
+              "summary": "Colors extend into infrared and ultraviolet. The dark leading hemisphere is real surface material, not missing imagery."
             }
           ]
         },
@@ -378,8 +378,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "234898f125979cee8bf8a3ac4b05c5ca02495699416c14ad21b9d7cc70580c5f",
-      "bytes": 10223,
+      "sha256": "40c45d5876be92934c3e6e31286c21866ce3dd47d8aa619a94ea4c2a1ec8fe85",
+      "bytes": 9747,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

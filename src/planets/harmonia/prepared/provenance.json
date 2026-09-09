@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a32ac904da762035e313e76cc7dea85e7b8b99993c17dc8ed7549c8195fce4e1"
+    "sha256": "71c1c85249c33d6b46007f9aca78655d993def21de88542bfb5397a498ba3c50"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd7381a2d47400efd8aa9d1f39a864541fc63b1d645360159eaa8c7779684c3d",
+      "sha256": "1fdb7627857ce21cc620ef279fb0522bf9d38e3599c69192301156a040bf1821",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 1855, version 2017-09-21, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+              "title": "DAMIT model 1855",
               "thumbnail": "/scenes/harmonia/harmonia-shape-thumbnail.webp",
               "surface": "harmonia-shape-surface@2x.webp",
               "poles": "harmonia-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 55.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/harmonia/harmonia-elevation-thumbnail.webp",
               "surface": "harmonia-elevation-surface@2x.webp",
               "poles": "harmonia-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c59bd37ca1ec8503fd51722d35724904e3273a2a9c599633f1b2acda8159e5e0",
-      "bytes": 9569,
+      "sha256": "1fdb7627857ce21cc620ef279fb0522bf9d38e3599c69192301156a040bf1821",
+      "bytes": 9216,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

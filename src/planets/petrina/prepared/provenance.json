@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b19bf56b49e9da67a59fae784322d67717dd872b3a6ae37b51204f35e1b8e06"
+    "sha256": "d0be1a6aab0d6fcdadce1f405001088d4850180980bccb74d1cd8582cbecfbde"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ca739112a2fdcdc5af04c468d2b60040879a202a990d628937035a9948096cf6",
+      "sha256": "ffc4e6a2999be71351fb91ce9b6d0c2ad4c14f9a09c872c82b41c27bd375ca3b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -218,7 +218,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Thermophysical volume-equivalent diameter 44.2 ± 1 km. The displayed pole differs by 1° from the fitted model family; rotational phase is illustrative.",
-              "title": "Thermophysical volume-equivalent diameter 44.2 ± 1 km. The displayed pole differs by 1° from the fitted model family; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
               "thumbnail": "/scenes/petrina/petrina-shape-thumbnail.webp",
               "surface": "petrina-shape-surface@2x.webp",
               "poles": "petrina-shape-surface@2x.webp",
@@ -233,7 +233,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 22.1 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 22.1 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/petrina/petrina-elevation-thumbnail.webp",
               "surface": "petrina-elevation-surface@2x.webp",
               "poles": "petrina-elevation-surface@2x.webp",
@@ -357,7 +357,7 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "ca739112a2fdcdc5af04c468d2b60040879a202a990d628937035a9948096cf6",
+      "sha256": "ffc4e6a2999be71351fb91ce9b6d0c2ad4c14f9a09c872c82b41c27bd375ca3b",
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
@@ -365,7 +365,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8941,
+      "bytes": 8662,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

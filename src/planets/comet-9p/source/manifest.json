@@ -34,7 +34,7 @@
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -86,7 +86,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2830
       },
-      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
       "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
       "recipe": {
         "width": 512,
@@ -479,8 +479,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7046,
-      "expectedSha256": "126422b7b4646f10825d8b990933dba165195050841575441b943de1ae1b549b",
+      "expectedBytes": 6943,
+      "expectedSha256": "d8ca043dd314ed5fdee08f8d08bf5c94a06a11148f401ae9d9ff1bfc83670e53",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {

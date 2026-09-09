@@ -43,3 +43,24 @@ sheet. [OSIRIS provenance](source/reference/osiris-georeference.json) records th
 manual hashes, quality-bit interpretation and correction limits. The
 [initial photographic trial](../../../docs/comets/67P-OSIRIS-TRIAL.md) retains its
 original unnormalized camera comparison and distinct scope.
+
+## Regions and geological features
+
+Regions uses Thomas et al. (2018), SHAP7 categorical region cells, version 1,
+DOI [10.17632/2845znt54k.1](https://doi.org/10.17632/2845znt54k.1), CC BY 4.0.
+The 124,938 source triangles carry 26 region IDs; they are sampled onto the
+existing 1,000-triangle RMOC display without changing its geometry.
+
+Geology uses European Space Agency (2021), ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0,
+DOI [10.5270/esa-kokoti7](https://doi.org/10.5270/esa-kokoti7), and Leon-Dasi,
+Besse, Grieger and Küppers (2021), A&A 652 A52,
+[10.1051/0004-6361/202140497](https://doi.org/10.1051/0004-6361/202140497).
+The Product User Guide §2.1 requests those acknowledgments. The archive's 843
+paths and 2,265 feature centres are map symbols in 17 studied regions, mostly
+north; their display widths are not measured feature sizes. Missing or unreliable
+surface correspondence remains gridded.
+
+The original source files, SHA-256 pins, download operations and interpretations
+are retained under `source/geology/`, `source/manifest.json` and
+`source/preparation/`. See `docs/comets/67P-GEOLOGY.md` for the source survey,
+projection checks, symbol rules and qualification evidence.

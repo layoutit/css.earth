@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "64655cf0b6c643dd2f6d9ec9a44f201b99bb90111acaf676c1dd6d7b7bf09d10"
+    "sha256": "6932091b2cf4c459ce0486a6f9e5cc2ed933d9ac7ada06b41811a8d1de11c6fd"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f6905ce929d38e73c1757c0f54a2a33034245cef50b886762ac562cb1f762a13",
+      "sha256": "0195ab1a332e8ac6116725195a0b18a175d392f736999844cb905894c305af29",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.11:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
-              "title": "Approximate ellipsoid adopting minimum equatorial ratio 1.11:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+              "title": "Light-curve shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/fornjot/fornjot-model-thumbnail.webp",
               "surface": "fornjot-model-surface@2x.webp",
@@ -310,8 +310,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f6905ce929d38e73c1757c0f54a2a33034245cef50b886762ac562cb1f762a13",
-      "bytes": 3851,
+      "sha256": "0195ab1a332e8ac6116725195a0b18a175d392f736999844cb905894c305af29",
+      "bytes": 3670,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

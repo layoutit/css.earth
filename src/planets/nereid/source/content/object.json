@@ -51,7 +51,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
-        "title": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
+        "title": "Light-curve shape approximation",
         "detail": "Approximate ellipsoid",
         "thumbnail": "/scenes/nereid/nereid-model-thumbnail.webp",
         "surface": "nereid-model-surface@2x.webp",

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "61d38b3626a18c33be21587262d7a67519483770e864ffcc534b29f89fdd64c5"
+    "sha256": "36d66fd3620654b5f4e027a3c633c7ae66cadd1eae96bf76babaf6f649febdf9"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "95ef66865b450ce58765ad6c3b1a23a8771c45b46d0f4e4106dba708a013bb61",
+      "sha256": "d4b205db7f4b556807bca36dd5ade98c954a75161f96b434df2bc77e92c58319",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 104.24 km effective diameter (catalog ±1.29 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 104.24 km effective diameter (catalog ±1.29 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/ianthe/ianthe-shape-thumbnail.webp",
               "surface": "ianthe-shape-surface@2x.webp",
               "poles": "ianthe-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 52.12 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 52.12 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/ianthe/ianthe-elevation-thumbnail.webp",
               "surface": "ianthe-elevation-surface@2x.webp",
               "poles": "ianthe-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "95ef66865b450ce58765ad6c3b1a23a8771c45b46d0f4e4106dba708a013bb61",
-      "bytes": 9588,
+      "sha256": "d4b205db7f4b556807bca36dd5ade98c954a75161f96b434df2bc77e92c58319",
+      "bytes": 9203,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

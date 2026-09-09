@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3e117eb2b23461425c7d545762109c35fa5b617afda9059a16ad67ed0b46551e"
+    "sha256": "82c541908a9d6b871625f9bf050d7ed9e087d3ef38ebbf59202acab40e04d233"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d2156e5cc9d1cab8a404c9c61f81bfb30bb68f1c33358e90d3b6d5f864aea0a8",
+      "sha256": "26a1b3e085c5905d38fdf1955242e3cbfbf2c51bc0c3a02bec7ffbb085530b28",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published nonconvex DAMIT model 1830, version 2017-06-13, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase. The source admits an alternative pole and shape solution; this view uses model 1830.",
+              "title": "DAMIT model 1830",
               "thumbnail": "/scenes/aurora/aurora-shape-thumbnail.webp",
               "surface": "aurora-shape-surface@2x.webp",
               "poles": "aurora-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 99 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/aurora/aurora-elevation-thumbnail.webp",
               "surface": "aurora-elevation-surface@2x.webp",
               "poles": "aurora-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "59fa02820de915b224697b1a098cc05c6165f9ee9dc8369b00cf9a551917681b",
-      "bytes": 8093,
+      "sha256": "26a1b3e085c5905d38fdf1955242e3cbfbf2c51bc0c3a02bec7ffbb085530b28",
+      "bytes": 7657,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

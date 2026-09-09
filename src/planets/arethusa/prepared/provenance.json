@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ffde0b63dd2e8f841f1f720f6b987442dad687437f9112520121d955d3b069a1"
+    "sha256": "bcc1e7531b2618919582b4509e3329f0af5560031bee1c93ffb60bd84db7a436"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "280e7f208d91966a2f008b1fa96d7ae4f029d5e58a1db5207719ecb2537c68b9",
+      "sha256": "db9800fcf05477362ad5e1413a7de2b12cfa9a674dd0d797be24db33a49d3c41",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction, 147 ± 32 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction, 147 ± 32 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT shape model",
               "thumbnail": "/scenes/arethusa/arethusa-shape-thumbnail.webp",
               "surface": "arethusa-shape-surface@2x.webp",
               "poles": "arethusa-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/arethusa/arethusa-elevation-thumbnail.webp",
               "surface": "arethusa-elevation-surface@2x.webp",
               "poles": "arethusa-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "280e7f208d91966a2f008b1fa96d7ae4f029d5e58a1db5207719ecb2537c68b9",
-      "bytes": 10556,
+      "sha256": "db9800fcf05477362ad5e1413a7de2b12cfa9a674dd0d797be24db33a49d3c41",
+      "bytes": 10252,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

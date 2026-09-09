@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dbf846a2e3d6fe9bc789d955d1d3e0c2c7e4bb73d7d34552a99f9b750e168170"
+    "sha256": "0dc3801c14e0cc1d922126a1f0d9911919677223e45e87535727a5092eecef52"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4041b8083aeeff38be4165cf3a0f9f74176e0a2da0611b192dfe64f26dd496d0",
+      "sha256": "3a50b3c8d37da24915f6a03ea993cd1ac8409d6542a6bb0ca5297e08a196baa8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,7 +204,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable surface imagery on this radar model. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-              "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the selected pole and an arbitrary display phase.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-thumbnail.webp",
               "surface": "asteroid-1996-hw1-shape-surface@2x.webp",
               "poles": "asteroid-1996-hw1-shape-surface@2x.webp",
@@ -219,7 +219,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "False color shows radius at the nearest source-surface point minus a 1.01 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 26 m is withheld. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied.",
-              "title": "Color shows original model radius minus a 1.01 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-thumbnail.webp",
               "surface": "asteroid-1996-hw1-elevation-surface@2x.webp",
               "poles": "asteroid-1996-hw1-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4041b8083aeeff38be4165cf3a0f9f74176e0a2da0611b192dfe64f26dd496d0",
-      "bytes": 10341,
+      "sha256": "3a50b3c8d37da24915f6a03ea993cd1ac8409d6542a6bb0ca5297e08a196baa8",
+      "bytes": 9550,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

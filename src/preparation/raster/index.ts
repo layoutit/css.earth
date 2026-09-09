@@ -40,7 +40,7 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
             for (const template of [config.atmosphere.materialOutput, config.atmosphere.observationOutput, config.atmosphere.lightingOutput])
                 files.add(outputName(template, density));
         if (config.interior)
-            for (const template of [config.interior.outerOutput, config.interior.outerPolesOutput, config.interior.coreOutput, config.interior.corePolesOutput, config.interior.sectionOutput])
+            for (const template of [config.interior.outerOutput, config.interior.outerPolesOutput, config.interior.outerUnlitOutput, config.interior.outerUnlitPolesOutput, config.interior.coreOutput, config.interior.corePolesOutput, config.interior.sectionOutput])
                 files.add(outputName(template, density));
     }
     if (config.interior)

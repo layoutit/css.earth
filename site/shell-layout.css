@@ -5,16 +5,17 @@ body[data-object-shell] {
   --explorer-panel-left: 12px;
   --explorer-panel-width: 340px;
   --explorer-logo-size: 36px;
-  --explorer-wordmark-size: 36px;
+  --explorer-wordmark-size: 38px;
   --explorer-content-inset: 20px;
   --explorer-categories-sidebar-gap: 12px;
   --explorer-panel-padding: 0px;
   --explorer-status-height: 18px;
+  --explorer-readout-top: 0px;
   --explorer-header-top: 8px;
   --explorer-panel-block-padding: 0px;
   --explorer-search-height: 44px;
   --explorer-header-width: var(--explorer-panel-width);
-  --explorer-header-row-gap: 4px;
+  --explorer-header-row-gap: 7px;
   --explorer-header-height: calc(2 * var(--explorer-search-height) + var(--explorer-header-row-gap));
   --explorer-github-width: 100px;
   --explorer-report-issue-width: 112px;
@@ -27,7 +28,8 @@ body[data-object-shell] {
   --explorer-surface-background: var(--shell-surface);
   --explorer-rail-background: var(--explorer-surface-background);
   --explorer-panel-background: var(--explorer-surface-background);
-  --explorer-divider: var(--shell-divider);
+  --explorer-divider: #000;
+  --explorer-divider-width: 2px;
   --explorer-control-border: var(--shell-border);
   --explorer-control-text: var(--shell-text-secondary);
 }
@@ -54,15 +56,16 @@ body[data-object-shell] {
   font: 14px/1.4 var(--shell-ui-font);
 }
 
-.planet-card:has(> .planet-selected-panel > .planet-title-row > .planet-breadcrumbs) {
+.planet-card:has(> .planet-selected-panel > .planet-breadcrumbs) {
   padding-block-start: 16px;
 }
 
 .planet-card > .planet-selected-panel:has(+ :is(.planet-card-tabs, .planet-object-tabs))::after {
   content: "";
   display: block;
-  margin-top: 8px;
-  border-top: 1px solid var(--shell-divider);
+  margin-top: 12px;
+  margin-inline: calc(-1 * var(--explorer-card-padding-inline-start)) calc(-1 * var(--explorer-card-padding-inline-end));
+  border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
 
 .planet-ui-layer,
@@ -85,13 +88,9 @@ body[data-object-shell] {
 
 body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
-body[data-object-shell] .planet-attribution-footer {
-  display: none;
-}
-
 .explorer-shell-header {
   --explorer-header-control-gap: 4px;
-  --explorer-wordmark-size: 36px;
+  --explorer-wordmark-size: 38px;
   position: fixed;
   z-index: 220;
   inset: var(--explorer-header-top) auto auto var(--explorer-panel-left);
@@ -113,7 +112,8 @@ body[data-object-shell] .planet-attribution-footer {
   box-sizing: border-box;
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 8px;
   height: var(--explorer-search-height);
   padding-top: calc((var(--explorer-search-height) - 16.27 * var(--explorer-wordmark-size) / 22) / 2 - 1px);
 }
@@ -147,7 +147,7 @@ body[data-object-shell] .planet-attribution-footer {
 
 .explorer-shell-header .planet-sidebar-search {
   padding-block: 12px;
-  padding-inline: 16px 40px;
+  padding-inline: var(--explorer-content-inset) 40px;
   line-height: 20px;
   font-weight: 400;
   border: 0;
@@ -309,9 +309,12 @@ body[data-object-shell] .planet-attribution-footer {
 }
 .planet-github-link {
   align-items: baseline;
+  transform: translateY(-1px);
   width: auto;
   height: auto;
-  padding-inline: 12px 15px;
+  padding: 0;
+  color: var(--shell-text-muted);
+  font: 400 13px/18px var(--shell-ui-font);
 }
 .planet-report-issue-link { width: var(--explorer-report-issue-width); }
 
@@ -352,6 +355,10 @@ body[data-object-shell] .planet-attribution-footer {
 .planet-sidebar::-webkit-scrollbar { display: none; }
 
 @media (min-width: 821px) and (orientation: landscape) {
+  body[data-object-shell] {
+    --explorer-readout-top: var(--explorer-header-top);
+  }
+
   .planet-ui-layer {
     position: fixed;
     z-index: 160;
@@ -414,9 +421,8 @@ body[data-object-shell] .planet-attribution-footer {
     inset: 0;
   }
 
-  body[data-object-shell] .planet-view-readout,
-  body[data-object-shell] .planet-attribution-footer {
-    left: 0;
+  body[data-object-shell] .planet-view-readout {
+    left: calc(var(--explorer-dock-width) + 12px);
   }
 }
 

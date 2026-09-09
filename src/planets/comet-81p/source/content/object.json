@@ -9,7 +9,7 @@
       {
         "id": "scale",
         "label": "Fitted ellipsoid",
-        "value": "5.2 \u00d7 4.0 \u00d7 2.7 km"
+        "value": "5.2 × 4.0 × 2.7 km"
       },
       {
         "id": "mission",
@@ -36,7 +36,7 @@
         "id": "model",
         "label": "Completed shape model",
         "description": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
-        "title": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
+        "title": "Nucleus shape reconstruction",
         "detail": "PDS",
         "thumbnail": "/scenes/comet-81p/comet-81p-model-thumbnail.webp",
         "surface": "comet-81p-model-surface@2x.webp",
@@ -63,7 +63,7 @@
         "id": "navcam",
         "label": "Stardust photographs",
         "description": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
-        "title": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
+        "title": "NavCam mosaic",
         "detail": "NAVCAM",
         "thumbnail": "/scenes/comet-81p/comet-81p-navcam-thumbnail.webp",
         "surface": "comet-81p-navcam-surface@2x.webp",
@@ -82,9 +82,10 @@
           {
             "id": "scale",
             "label": "Image scale",
-            "value": "14\u201319 m/pixel"
+            "value": "14–19 m/pixel"
           }
-        ]
+        ],
+        "summary": "Only the measured side is photographed. Original shadows and some seams remain; the gray grid marks gaps in the coverage."
       }
     ]
   },
@@ -95,7 +96,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",

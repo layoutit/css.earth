@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3633081a7bbb0759b1422aba9b35dd0fc271415378cf9de5cc6eed1e2ea769c5"
+    "sha256": "aa8afbbf4c61099fe65222f829206459afbb6e800bd31c2e37193450f6dda0ef"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "36845366f7cba1bc806ea77240011de39ffd2bca19752e57d61158d9f251be12",
+      "sha256": "b4a4a0948362a674ead4d8c02262fb705f78badd3374e76d3bd989d49f25b7a1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -158,7 +158,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Published approximate ellipsoid with full dimensions 117×108×90 km, inferred from occultation and photometry. Orbital-pole alignment is a synchronous approximation; the display meridian is arbitrary. The grid marks unmapped terrain.",
-              "title": "Published approximate ellipsoid with full dimensions 117×108×90 km, inferred from occultation and photometry. Orbital-pole alignment is a synchronous approximation; the display meridian is arbitrary. The grid marks unmapped terrain.",
+              "title": "Occultation shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/menoetius/menoetius-model-thumbnail.webp",
               "surface": "menoetius-model-surface@2x.webp",
@@ -285,8 +285,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "36845366f7cba1bc806ea77240011de39ffd2bca19752e57d61158d9f251be12",
-      "bytes": 3304,
+      "sha256": "b4a4a0948362a674ead4d8c02262fb705f78badd3374e76d3bd989d49f25b7a1",
+      "bytes": 3101,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

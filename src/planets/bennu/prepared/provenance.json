@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "364efe8206b6536318f13cbd396bcbed080bf328e140b3c5d7d042f09d664fb4"
+    "sha256": "20f0cb58cbee8f776801373cd9a6300bf57d5778fd943a13ea14a8555045b9da"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -201,7 +201,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b19e51a75cabad3ad44f22e260d48d24603518f0d70a39bba44c17626fc8dbc3",
+      "sha256": "1f05f0f7dab37f7fa2398956477c053103a3c395ba4c975b13230bf6b726da96",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -270,7 +270,7 @@
               "id": "normal",
               "label": "Albedo",
               "description": "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps.",
-              "title": "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps.",
+              "title": "PolyCam reflectance mosaic",
               "thumbnail": "/scenes/bennu/bennu-normal-thumbnail.webp",
               "surface": "bennu-normal-surface@2x.webp",
               "poles": "bennu-normal-surface@2x.webp",
@@ -280,13 +280,13 @@
               },
               "falseColor": false,
               "detail": "PolyCam · albedo",
-              "summary": "Corrected PolyCam reflectance between about 55° north and south. The gray grid marks polar gaps."
+              "summary": "Corrected reflectance covers roughly 55° north to 55° south. The gray grid marks the unobserved polar regions."
             },
             {
               "id": "surface",
               "label": "Monochrome",
               "description": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles.",
-              "title": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles.",
+              "title": "PolyCam 5 cm image basemap",
               "thumbnail": "/scenes/bennu/bennu-surface-thumbnail.webp",
               "surface": "bennu-surface-surface@2x.webp",
               "poles": "bennu-surface-surface@2x.webp",
@@ -296,13 +296,13 @@
               },
               "falseColor": false,
               "detail": "PolyCam",
-              "summary": "A 5 cm image basemap with shadows. Its control shape differs from the display mesh; small offsets remain."
+              "summary": "The 5 cm basemap retains photographed shadows. Its control shape differs from the display mesh, so small offsets remain."
             },
             {
               "id": "spectral",
               "label": "Spectral color",
               "description": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
-              "title": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
+              "title": "MapCam spectral composite",
               "thumbnail": "/scenes/bennu/bennu-spectral-thumbnail.webp",
               "surface": "bennu-spectral-surface@2x.webp",
               "poles": "bennu-spectral-surface@2x.webp",
@@ -318,7 +318,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows radius minus a 241 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
-              "title": "Color shows radius minus a 241 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/bennu/bennu-elevation-thumbnail.webp",
               "surface": "bennu-elevation-surface@2x.webp",
               "poles": "bennu-elevation-surface@2x.webp",
@@ -587,8 +587,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b19e51a75cabad3ad44f22e260d48d24603518f0d70a39bba44c17626fc8dbc3",
-      "bytes": 11958,
+      "sha256": "1f05f0f7dab37f7fa2398956477c053103a3c395ba4c975b13230bf6b726da96",
+      "bytes": 10463,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

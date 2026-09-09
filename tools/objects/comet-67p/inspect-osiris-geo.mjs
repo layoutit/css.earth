@@ -29,7 +29,7 @@ async function main() {
   const tileSize = Number(args.find(a => a.startsWith('--tile-size='))?.slice(12) ?? 64);
   if (![32, 64].includes(tileSize)) throw new Error('Bounded trial requires 32 or 64 pixel tiles.');
   const sourceDirectory = resolve(root, 'src/planets/comet-67p/source');
-  const manifestBytes = await readFile(resolve(sourceDirectory, '../candidates/osiris-geo.json'));
+  const manifestBytes = await readFile(resolve(sourceDirectory, 'reference/osiris-trial.json'));
   const manifest = JSON.parse(manifestBytes), policy = manifest.transfer;
   const sourceBytes = await readFile(resolve(sourceDirectory, manifest.shape.path));
   if (sha256(sourceBytes) !== manifest.shape.sha256) throw new Error('RMOC source pin mismatch.');

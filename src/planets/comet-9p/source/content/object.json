@@ -9,12 +9,12 @@
       {
         "id": "diameter",
         "label": "Equivalent diameter",
-        "value": "5.66 \u00b1 0.20 km"
+        "value": "5.66 ± 0.20 km"
       },
       {
         "id": "mission",
         "label": "Explored by",
-        "value": "Deep Impact \u00b7 Stardust-NExT"
+        "value": "Deep Impact · Stardust-NExT"
       },
       {
         "id": "source-epoch",
@@ -30,15 +30,15 @@
     "labels": {
       "model": "Shape model",
       "constraints": "Source constraints",
-      "deep-impact": "Deep Impact \u00b7 2005",
-      "next": "Stardust-NExT \u00b7 2011"
+      "deep-impact": "Deep Impact · 2005",
+      "next": "Stardust-NExT · 2011"
     },
     "controls": [
       {
         "id": "constraints",
         "label": "Source constraints",
         "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-        "title": "Shape measurements and their coverage.",
+        "title": "Shape-constraint map",
         "detail": "PDS",
         "thumbnail": "/scenes/comet-9p/comet-9p-constraints-thumbnail.webp",
         "surface": "comet-9p-constraints-surface@2x.webp",
@@ -65,7 +65,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-        "title": "Published nucleus shape; gray is a model material.",
+        "title": "Nucleus shape reconstruction",
         "detail": "PDS",
         "thumbnail": "/scenes/comet-9p/comet-9p-model-thumbnail.webp",
         "surface": "comet-9p-model-surface@2x.webp",
@@ -79,7 +79,7 @@
           {
             "id": "diameter",
             "label": "Equivalent diameter",
-            "value": "5.66 \u00b1 0.20 km"
+            "value": "5.66 ± 0.20 km"
           },
           {
             "id": "source-epoch",
@@ -90,9 +90,9 @@
       },
       {
         "id": "deep-impact",
-        "label": "Deep Impact \u00b7 2005",
+        "label": "Deep Impact · 2005",
         "description": "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape.",
-        "title": "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape.",
+        "title": "MRI mosaic",
         "detail": "ITS",
         "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
         "surface": "comet-9p-deep-impact-surface@2x.webp",
@@ -111,15 +111,16 @@
           {
             "id": "scale",
             "label": "Image scale",
-            "value": "13\u201334 m/pixel"
+            "value": "13–34 m/pixel"
           }
-        ]
+        ],
+        "summary": "These views show the surface just before the 2005 impact, with original shadows. The grid marks gaps or uncertain shape."
       },
       {
         "id": "next",
-        "label": "Stardust-NExT \u00b7 2011",
+        "label": "Stardust-NExT · 2011",
         "description": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
-        "title": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
+        "title": "Encounter image mosaic",
         "detail": "NAVCAM",
         "thumbnail": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
         "surface": "comet-9p-next-surface@2x.webp",
@@ -138,9 +139,10 @@
           {
             "id": "scale",
             "label": "Image scale",
-            "value": "12\u201320 m/pixel"
+            "value": "12–20 m/pixel"
           }
-        ]
+        ],
+        "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."
       }
     ]
   },
@@ -151,7 +153,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",
@@ -172,13 +174,13 @@
     {
       "label": "NAVCAM",
       "role": "surface",
-      "description": "Stardust-NExT \u00b7 2011 archived encounter images",
+      "description": "Stardust-NExT · 2011 archived encounter images",
       "href": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
     },
     {
       "label": "ITS",
       "role": "surface",
-      "description": "Deep Impact \u00b7 2005 archived encounter images",
+      "description": "Deep Impact · 2005 archived encounter images",
       "href": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
     },
     {

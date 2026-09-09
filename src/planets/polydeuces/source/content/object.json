@@ -50,7 +50,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
-        "title": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
+        "title": "ISS CL1/IR1 image",
         "detail": "Near infrared · coarse coverage",
         "thumbnail": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
         "surface": "polydeuces-normal-surface@2x.webp",
@@ -60,7 +60,7 @@
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/1912.09192"
         },
-        "summary": "A Cassini near-infrared image, only about 9 × 7 pixels across. Brightness is approximate; gray grid: no coverage."
+        "summary": "Only about 9 × 7 source pixels resolve the moon. Brightness is approximate; the gray grid marks unobserved surface."
       }
     ]
   },

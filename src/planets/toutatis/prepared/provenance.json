@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3217045d7013b0ff67928a8a5522deaa7a61fa454419f84c8d11a84d47a7ff36"
+    "sha256": "f38fd6bff978d4d28b6b7d255c8d4be312bb7883bfd8af1fdc3c37eb1894f5ef"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -102,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c378e11e35d316bdd74d54a022f470b8f5031620c383bb77aa5a6735c54b5665",
+      "sha256": "4f719cf2484fb9bdc6086035cd31f55546cfa573cc36162f189ea8d0342eca8e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable surface imagery over the Hudson–Ostro–Scheeres shape reconstructed from 1992 and 1996 radar observations. This is a simplified model, not a photographic texture or measured albedo. Later radar and Chang’e-2 images reveal differences from this model. The long axis is displayed in a fixed arbitrary orientation; the light does not reproduce a specific observation.",
-              "title": "The shared grid marks unavailable surface imagery over the Hudson–Ostro–Scheeres shape reconstructed from 1992 and 1996 radar observations. This is a simplified model, not a photographic texture or measured albedo. Later radar and Chang’e-2 images reveal differences from this model. The long axis is displayed in a fixed arbitrary orientation; the light does not reproduce a specific observation.",
+              "title": "Radar shape model",
               "thumbnail": "/scenes/toutatis/toutatis-shape-thumbnail.webp",
               "surface": "toutatis-shape-surface@2x.webp",
               "poles": "toutatis-shape-surface@2x.webp",
@@ -295,8 +295,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "deb85912a5546b939cc58fa564587334239f17be68dcfa659c28592edd95664d",
-      "bytes": 8606,
+      "sha256": "4f719cf2484fb9bdc6086035cd31f55546cfa573cc36162f189ea8d0342eca8e",
+      "bytes": 8347,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

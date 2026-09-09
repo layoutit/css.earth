@@ -1,0 +1,111 @@
+{
+  "schema": "cssearth-nighttime-radiance-source@1",
+  "checked": "2026-09-09",
+  "product": "VJ146A4.002",
+  "platform": "NOAA-20 / JPSS-1 VIIRS",
+  "year": 2025,
+  "band": "AllAngle_Composite_Snow_Free",
+  "units": "nW/cm2/sr",
+  "productUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+  "publisher": "NASA Black Marble science team",
+  "mirror": {
+    "publisher": "Jurij Stare, www.lightpollutionmap.info",
+    "documentation": "https://www.lightpollutionmap.info/help.html",
+    "url": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip",
+    "httpLastModified": "Sun, 29 Mar 2026 22:55:59 GMT",
+    "bytes": 973526576,
+    "sha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480"
+  },
+  "member": {
+    "filename": "viirs_2025_raw.tif",
+    "bytes": 1034233344,
+    "sha256": "1d085195298ddb12c30d2f13e5799cf02f34845719cf14ff3807bca7b05102c3",
+    "width": 86400,
+    "height": 33600,
+    "bands": 1,
+    "sampleFormat": "Float32",
+    "crs": "EPSG:4326",
+    "rasterType": "PixelIsArea",
+    "bounds": [
+      -180,
+      -65,
+      180,
+      75
+    ],
+    "cellDegrees": 0.004166666666666667,
+    "noData": -999.9000244140625,
+    "scaleFactor": 1,
+    "addOffset": 0
+  },
+  "anchors": [
+    {
+      "name": "Manhattan",
+      "longitude": -73.9857,
+      "latitude": 40.7484,
+      "column": 25443,
+      "row": 8220,
+      "radiance": 212.74862670898438
+    },
+    {
+      "name": "Tokyo",
+      "longitude": 139.7671,
+      "latitude": 35.6812,
+      "column": 76744,
+      "row": 9436,
+      "radiance": 153.54086303710938
+    },
+    {
+      "name": "Paris",
+      "longitude": 2.3522,
+      "latitude": 48.8566,
+      "column": 43764,
+      "row": 6274,
+      "radiance": 73.14937591552734
+    },
+    {
+      "name": "Buenos Aires",
+      "longitude": -58.3816,
+      "latitude": -34.6037,
+      "column": 29188,
+      "row": 26304,
+      "radiance": 188.12364196777344
+    },
+    {
+      "name": "Sahara",
+      "longitude": 15,
+      "latitude": 25,
+      "column": 46800,
+      "row": 12000,
+      "radiance": 0
+    },
+    {
+      "name": "Pacific",
+      "longitude": -130,
+      "latitude": 0,
+      "column": 12000,
+      "row": 18000,
+      "radiance": 0
+    },
+    {
+      "name": "Antarctic limit",
+      "longitude": 0,
+      "latitude": -64.99,
+      "column": 43200,
+      "row": 33597,
+      "radiance": 0
+    }
+  ],
+  "interpretation": {
+    "aggregation": "Native-pixel overlaps weighted by spherical area; numeric mean before false color.",
+    "minimumValidAreaFraction": 0.5,
+    "missing": "Gray; native missing value and uncovered polar regions.",
+    "zero": "Valid thresholded source background; never treated as missing.",
+    "display": "Warm false color. log1p(radiance/0.25) / log1p(100/0.25), saturated at 100 nW/cm2/sr.",
+    "quality": "The public mosaic contains no QA or observation-count bands. Aurora and transient lights remain, especially at high latitudes.",
+    "notMeasured": [
+      "live lighting",
+      "visual sky brightness",
+      "light-source color"
+    ]
+  }
+}

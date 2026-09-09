@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d6c4f8d5d97b4b4f220187c66e73580975dac641c17599006102d7f32ea2816b"
+    "sha256": "29b2dd3b78be9acfd62a6ed3af9df35abbc854957f37777875b78be86271cea3"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7e9b5e3336f3d854dfeaad0681c47c633dc8df2ed811d2380d65fb449063a5d4",
+      "sha256": "d87880682f5f24f9cc35afa9e5bee3b43a56cd5ddee61564abd530ac118110fe",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -153,7 +153,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Authored ellipsoid approximation constrained to the published convex model's maximum extents. These are not independently measured ellipsoid axes; the irregular convex outline and model volume are not reproduced. Full approximation dimensions: 77.5 × 71.3 × 61.8 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
-              "title": "Authored ellipsoid approximation constrained to the published convex model's maximum extents. These are not independently measured ellipsoid axes; the irregular convex outline and model volume are not reproduced. Full approximation dimensions: 77.5 × 71.3 × 61.8 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+              "title": "Convex-model ellipsoid approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/eurybates/eurybates-model-thumbnail.webp",
               "surface": "eurybates-model-surface@2x.webp",
@@ -292,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7e9b5e3336f3d854dfeaad0681c47c633dc8df2ed811d2380d65fb449063a5d4",
-      "bytes": 4102,
+      "sha256": "d87880682f5f24f9cc35afa9e5bee3b43a56cd5ddee61564abd530ac118110fe",
+      "bytes": 3712,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

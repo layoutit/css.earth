@@ -38,7 +38,6 @@
     "CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES": 89,
     "CAMERA_DEFAULT_CONTROL_PITCH_DEGREES": 34.230769230769226,
     "CAMERA_MILLISECONDS_PER_CONTROL_DEGREE": 1000,
-    "INTERIOR_REFERENCE_CONTROL_YAW_DEGREES": 45,
     "INTERIOR_LATITUDE_SEGMENTS": 8,
     "INTERIOR_LONGITUDE_SEGMENTS": 16,
     "interiorCutaway": {
@@ -298,12 +297,69 @@
         "webp": {
           "quality": 75,
           "effort": 6
+        },
+        "thumbnailRegion": {
+          "longitude": -72,
+          "latitude": -20,
+          "spanDegrees": 40
         }
       },
       {
-        "path": "black-marble-2016.jpg",
+        "path": "science/night-lights-2025/radiance.zip",
         "name": "earth-night-lights",
-        "thumbnail": "earth-lens-night-lights.webp"
+        "thumbnail": "earth-lens-night-lights.webp",
+        "webp": {
+          "quality": 90,
+          "effort": 6
+        },
+        "scientific": {
+          "kind": "black-marble-radiance",
+          "year": 2025,
+          "product": "VJ146A4.002",
+          "band": "AllAngle_Composite_Snow_Free",
+          "units": "nW/cm2/sr",
+          "member": "viirs_2025_raw.tif",
+          "archiveSha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480",
+          "archiveBytes": 973526576,
+          "grid": {
+            "width": 86400,
+            "height": 33600,
+            "cellDegrees": 0.004166666666666667,
+            "bounds": [
+              -180,
+              -65,
+              180,
+              75
+            ]
+          },
+          "display": {
+            "maximum": 100,
+            "softening": 0.25,
+            "missing": [
+              38,
+              42,
+              49
+            ]
+          },
+          "legend": {
+            "kind": "scale",
+            "title": "Annual radiance · nW/cm²/sr",
+            "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+            "image": "earth-night-lights-legend.png",
+            "width": 620,
+            "height": 16,
+            "labels": [
+              "0",
+              "≥ 100 nW/cm²/sr"
+            ]
+          },
+          "provenancePath": "science/night-lights-2025/provenance.json"
+        },
+        "thumbnailRegion": {
+          "longitude": -74,
+          "latitude": 40.7,
+          "spanDegrees": 3
+        }
       },
       {
         "path": "science/mur-gibs.png",

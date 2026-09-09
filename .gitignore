@@ -76,3 +76,5 @@ src/planets/*/source/**/*.bpc
 
 # New reference-paper originals are reacquired from their manifest-pinned URLs.
 /src/planets/*/source/reference/*.pdf
+# Pinned Borrelly orthophoto and coordinate cubes, restored from PDS.
+/src/planets/comet-19p/source/micas/*.cub

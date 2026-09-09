@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "71f54f78f1c492c1dce968f0ee7e30e031fa5ecb4ecdccb2324fbb2d7a510999"
+    "sha256": "a3ed950a7120a79941779aa56b100cba59ef810d650b96066eb895d0aa7bbe8f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9eac67bcc746784ea9c2b5ed8f555d58bee09588ca5401b03606c734a85af547",
+      "sha256": "04fc7efa6e46e4b84975bf86630172c64a973443d2106b2cc9dcd0c087d7959d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/eunomia/eunomia-shape-thumbnail.webp",
               "surface": "eunomia-shape-surface@2x.webp",
               "poles": "eunomia-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 135 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/eunomia/eunomia-elevation-thumbnail.webp",
               "surface": "eunomia-elevation-surface@2x.webp",
               "poles": "eunomia-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "af1f432c594cc70ac97f10324c20d5f2c20f3c0bd9f52ebd757d90877f6aff92",
-      "bytes": 8556,
+      "sha256": "04fc7efa6e46e4b84975bf86630172c64a973443d2106b2cc9dcd0c087d7959d",
+      "bytes": 8160,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -1,0 +1,256 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "bbox": [
+        -180.0,
+        -90.0,
+        180.0,
+        90.0
+      ],
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180.0,
+              -90.0
+            ],
+            [
+              180.0,
+              -90.0
+            ],
+            [
+              180.0,
+              90.0
+            ],
+            [
+              -180.0,
+              90.0
+            ],
+            [
+              -180.0,
+              -90.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "model": "GLAD-M35",
+        "title": "GLAD-M35: A joint P and S global tomographic model with uncertainty quantification",
+        "summary": "GLAD-M35 is an elastic model with radial anisotropy confined to the upper mantle, similar to its predecessors GLAD-M15 and GLAD-M25. The 1-D reference model is STW105. The standard deviation of Vp and Vs are estimated by the BFGS update history.",
+        "reference": "Congyue Cui et al. (2024)",
+        "reference_pid": "doi:10.1093/gji/ggae270",
+        "repository_doi": "doi:10.17611/dp/emc.2024.gladm35.1",
+        "year": "2024",
+        "data_revision": "r0.1",
+        "version": "v0.0",
+        "model_type": "3-D Tomography Earth Model",
+        "model_subtype": "Joint P and S velocity, Uncertainty, Anisotropic (in the uppermost mantle)",
+        "filename": "GLAD-M35.r0.1-n4c.nc",
+        "size_mb": 327.84,
+        "format": "NETCDF4_CLASSIC",
+        "grid_ref": "latitude_longitude",
+        "projection_type": "geographic_wgs84",
+        "projection_notes": "Unprojected geographic coordinates, WGS 84 datum",
+        "grid_dim": "3D",
+        "geospatial_lat_min": -90.0,
+        "geospatial_lat_max": 90.0,
+        "geospatial_lat_resolution": 1.0,
+        "geospatial_lon_min": -180.0,
+        "geospatial_lon_max": 180.0,
+        "geospatial_lon_resolution": 1.0,
+        "geospatial_vertical_min": 10.0,
+        "geospatial_vertical_max": 2890.0,
+        "geospatial_vertical_units": "km",
+        "longitude_domain": "-180_to_180",
+        "coverage": "global",
+        "variables": {
+          "vpv": "Vertically Polarized P-wave Velocity",
+          "vph": "Horizontally Polarized P-wave Velocity",
+          "vsv": "Vertically Polarized S-wave Velocity",
+          "vsh": "Horizontally Polarized S-wave Velocity",
+          "eta": "Dimensionless Parameter eta",
+          "std_vp": "Standard deviation of P-wave velocity",
+          "std_vs": "Standard deviation of S-wave velocity"
+        },
+        "variable_stats": {
+          "vpv": {
+            "long_name": "Vertically Polarized P-wave Velocity",
+            "units": "km/s",
+            "dtype": "float32",
+            "dims": [
+              "depth",
+              "latitude",
+              "longitude"
+            ],
+            "shape": [
+              289,
+              181,
+              361
+            ],
+            "valid_range_attr": null,
+            "fill_value": "None",
+            "min": 4.324,
+            "max": 13.9241,
+            "nan_count": 0,
+            "nan_fraction": 0.0
+          },
+          "vph": {
+            "long_name": "Horizontally Polarized P-wave Velocity",
+            "units": "km/s",
+            "dtype": "float32",
+            "dims": [
+              "depth",
+              "latitude",
+              "longitude"
+            ],
+            "shape": [
+              289,
+              181,
+              361
+            ],
+            "valid_range_attr": null,
+            "fill_value": "None",
+            "min": 4.32221,
+            "max": 13.9241,
+            "nan_count": 0,
+            "nan_fraction": 0.0
+          },
+          "vsv": {
+            "long_name": "Vertically Polarized S-wave Velocity",
+            "units": "km/s",
+            "dtype": "float32",
+            "dims": [
+              "depth",
+              "latitude",
+              "longitude"
+            ],
+            "shape": [
+              289,
+              181,
+              361
+            ],
+            "valid_range_attr": null,
+            "fill_value": "None",
+            "min": 2.32306,
+            "max": 7.52271,
+            "nan_count": 0,
+            "nan_fraction": 0.0
+          },
+          "vsh": {
+            "long_name": "Horizontally Polarized S-wave Velocity",
+            "units": "km/s",
+            "dtype": "float32",
+            "dims": [
+              "depth",
+              "latitude",
+              "longitude"
+            ],
+            "shape": [
+              289,
+              181,
+              361
+            ],
+            "valid_range_attr": null,
+            "fill_value": "None",
+            "min": 2.32613,
+            "max": 7.52271,
+            "nan_count": 0,
+            "nan_fraction": 0.0
+          },
+          "eta": {
+            "long_name": "Dimensionless Parameter eta",
+            "units": "",
+            "dtype": "float32",
+            "dims": [
+              "depth",
+              "latitude",
+              "longitude"
+            ],
+            "shape": [
+              289,
+              181,
+              361
+            ],
+            "valid_range_attr": null,
+            "fill_value": "None",
+            "min": 0.877457,
+            "max": 1.032,
+            "nan_count": 0,
+            "nan_fraction": 0.0
+          },
+          "std_vp": {
+            "long_name": "Standard deviation of P-wave velocity",
+            "units": "km/s",
+            "dtype": "float32",
+            "dims": [
+              "depth",
+              "latitude",
+              "longitude"
+            ],
+            "shape": [
+              289,
+              181,
+              361
+            ],
+            "valid_range_attr": null,
+            "fill_value": "None",
+            "min": 0.0,
+            "max": 0.119684,
+            "nan_count": 0,
+            "nan_fraction": 0.0
+          },
+          "std_vs": {
+            "long_name": "Standard deviation of S-wave velocity",
+            "units": "km/s",
+            "dtype": "float32",
+            "dims": [
+              "depth",
+              "latitude",
+              "longitude"
+            ],
+            "shape": [
+              289,
+              181,
+              361
+            ],
+            "valid_range_attr": null,
+            "fill_value": "None",
+            "min": 6.53442e-05,
+            "max": 0.0742163,
+            "nan_count": 0,
+            "nan_fraction": 0.0
+          }
+        },
+        "coord_stats": {
+          "lat": {
+            "name": "latitude",
+            "min": -90.0,
+            "max": 90.0,
+            "step": 1.0,
+            "units": "degrees_north",
+            "size": 181
+          },
+          "lon": {
+            "name": "longitude",
+            "min": -180.0,
+            "max": 180.0,
+            "step": 1.0,
+            "units": "degrees_east",
+            "size": 361
+          },
+          "vertical": {
+            "name": "depth",
+            "min": 10.0,
+            "max": 2890.0,
+            "step": 10.0,
+            "units": "km",
+            "size": 289
+          }
+        }
+      }
+    }
+  ]
+}

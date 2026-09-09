@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "5e86c9b34ab60d330e317a7cfb97b6f14514e99366f5f8c9cd86085b3d71d88c"
+          "sha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2d77f21d0d9caef089cbe207a2969a2cf5711632eabfdd6cb5f192066987ed3f"
+          "sha256": "e48d48ce5f724909c52934209145e077d677172db951b5b89312bcdf8d361938"
         },
         {
           "id": "title",
@@ -38,17 +38,17 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "dd8eb3b09ef8197239465791b8893c429a2da91bee168bf1d69e227d6afbe521"
+          "sha256": "3078fdf7c44cf8ee205193606d98a114bc9f7a70de92af89e385b699599a4923"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e1ceb5ea8c2b6a1ac9f1fda2462a87edc546b31ca9bf25e338dd504862eb29f7"
+          "sha256": "bb9c243ce9a33fb04fe6475d3cd82d4a26c4025aa279ded13590e067884ee47d"
         },
         {
           "id": "rotation",
           "path": "source/preparation/rotation.json",
-          "sha256": "74eeab739921e8b14e05943ab35548a07d6cfc9e04dc283c8b23824296b5d3ad"
+          "sha256": "5dba43a0956e9dd4b84819ea83d253431569afb4b5126661ef5a9c28c2a39713"
         }
       ],
       "shape": {
@@ -68,6 +68,16 @@
             },
             {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "maplet-resolution",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "image-count",
               "source": "content",
               "material": "lighting"
             }
@@ -113,6 +123,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "aa617649a42130086678d6415d04b2f237a1b4cef60d46c1c7ff8ac384cd32a3"
+    "sha256": "8f30d142033cb4105d524c1817315f7d6a3f471ef34079cddd18a9319fa13a25"
   }
 }

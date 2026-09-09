@@ -38,10 +38,10 @@ test('67P numeric units and orientation agree with independent published control
   assert.equal(data.filter(Number.isFinite).length, 162839);
 });
 
-test('67P scientific atlases retain exact numeric colours and a hash-bound original-row index outside runtime', async () => {
+test('67P VIRTIS atlases retain exact numeric colours and a hash-bound original-row index outside runtime', async () => {
   const { surfaces } = await json('prepared/surfaces.json'), runtime = await readFile(new URL('prepared/object.json', body), 'utf8');
   const assets = await json('runtime-assets.json');
-  for (const lens of config.raster.scientific) {
+  for (const lens of config.raster.scientific.filter(lens => lens.format === 'pds3-scalar-map')) {
     const surface = surfaces.find(s => s.id === lens.id), ref = surface.scalarMap.sampleSources;
     const bytes = await readFile(new URL('prepared/' + ref.file, body)), index = JSON.parse(bytes);
     assert.equal(bytes.length, ref.bytes); assert.equal(createHash('sha256').update(bytes).digest('hex'), ref.sha256);

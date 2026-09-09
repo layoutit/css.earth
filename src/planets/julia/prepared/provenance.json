@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "19b172f142bfeae4183efe2c477a553ea825ac691917d47d67a0b54755be9605"
+    "sha256": "92d20b1b03f8ed15269df80eaed2844123859faec67cd6882babb332b06a9979"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cbae897a1a7625f5864d4ca74036d4a515b5318673e0f23eaea3ded3330c638b",
+      "sha256": "a13327d2fac6c271ab24b9ba7867e57feda5358ff3837cbeb3fa556a0489ad17",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/julia/julia-shape-thumbnail.webp",
               "surface": "julia-shape-surface@2x.webp",
               "poles": "julia-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 70 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/julia/julia-elevation-thumbnail.webp",
               "surface": "julia-elevation-surface@2x.webp",
               "poles": "julia-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c2b83835e3b30853b1daadbef4fcddd4123de805920eddc96b1694bfdd97c0ee",
-      "bytes": 7063,
+      "sha256": "a13327d2fac6c271ab24b9ba7867e57feda5358ff3837cbeb3fa556a0489ad17",
+      "bytes": 6668,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

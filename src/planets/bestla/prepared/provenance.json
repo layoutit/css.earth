@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "044d01db2c0c6ebaa9678aa47f3125cde3d0e60c36c2d8f9b0f29fe9dc4f0923"
+    "sha256": "89325af9b1c60ea72f9c5be7a632e44fdd57dd692e7e3966349e4e6442dceea0"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -110,7 +110,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "07f038144377e81a63960e73489f4543fbeb98835f22259ef0bca0044922a1cc",
+      "sha256": "80087e4cee737ba39d13a7cc4c28c290c9890c7bde07dee53f4a18c42b421fcf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain.",
-              "title": "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain.",
+              "title": "Light-curve shape approximation",
               "detail": "Approximate shape",
               "thumbnail": "/scenes/bestla/bestla-model-thumbnail.webp",
               "surface": "bestla-model-surface@2x.webp",
@@ -310,8 +310,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "07f038144377e81a63960e73489f4543fbeb98835f22259ef0bca0044922a1cc",
-      "bytes": 4016,
+      "sha256": "80087e4cee737ba39d13a7cc4c28c290c9890c7bde07dee53f4a18c42b421fcf",
+      "bytes": 3766,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

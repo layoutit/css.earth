@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9ccd89108053def9396ba939be2cb7ece5e19f33e921a7a888f03df5e0badb2c"
+    "sha256": "f0bd27e001874c48dcccea72f1a15d529996452fa8b6bcbfb65a44cdbfd23b4c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "202502028e0c3db9be9ff15e453ee1b5b78c965ea283bf8970ec000174d77df0",
+      "sha256": "9473a039446562e8936c5e190cd923351f94c9b99d4f189fc40d428d9827f9b8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 6171, version 2023-10-03, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase. Two pole solutions remain; this view uses model 6171.",
+              "title": "DAMIT model 6171",
               "thumbnail": "/scenes/panopaea/panopaea-shape-thumbnail.webp",
               "surface": "panopaea-shape-surface@2x.webp",
               "poles": "panopaea-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 64 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/panopaea/panopaea-elevation-thumbnail.webp",
               "surface": "panopaea-elevation-surface@2x.webp",
               "poles": "panopaea-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e7e75faf6e0ab8259e71865b7ff095fc301af0437733ce0e1189b38966f065a8",
-      "bytes": 11188,
+      "sha256": "9473a039446562e8936c5e190cd923351f94c9b99d4f189fc40d428d9827f9b8",
+      "bytes": 10725,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

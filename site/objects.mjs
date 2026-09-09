@@ -400,6 +400,7 @@ import comet103pDescriptor from "../src/planets/comet-103p/object.json" with { t
 import comet9pDescriptor from "../src/planets/comet-9p/object.json" with { type: "json" };
 import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { type: "json" };
 import comet8pDescriptor from "../src/planets/comet-8p/object.json" with { type: "json" };
+import comet19pDescriptor from "../src/planets/comet-19p/object.json" with { type: "json" };
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
@@ -571,6 +572,11 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(kiviuqDescriptor);
     }, kiviuqDescriptor.properties.worldFrame),
+  object("comet-19p", "Borrelly", "comet", "#b8b6b2", 3.608969333559339,
+    "Explore Borrelly's MICAS photograph and independent USGS and DLR terrain reconstructions.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet19pDescriptor);
+    }, comet19pDescriptor.properties.worldFrame),
   object("comet-8p", "Tuttle", "comet", "#b8b6b2", 5.706764532787596,
     "Explore Tuttle's inferred contact-body model from Hubble and Spitzer observations.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

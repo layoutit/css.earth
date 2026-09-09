@@ -1,4 +1,7 @@
 import { validateFacetScalarProfile } from './facet-scalars.mjs';
+import {validateVtkCategories} from './vtk-categories.mjs';
+import { validateImageDemScience } from './image-dem-science.mjs';
+import { validateScienceQualityMasks } from './scientific-raster.mjs';
 import { validateGeologyProfile } from './categorical-geology.mjs';
 import { validatePds4ObservationPolicy } from './observed-pds4.mjs';
 import { validateScalarMapProfile } from './pds-scalar-map.mjs';
@@ -65,11 +68,22 @@ export function parseTerrestrialProfile(value) {
         !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
   }
   for (const lens of value.raster.scientific ?? []) {
+    validateScienceQualityMasks(lens);
     scientificPreviewGrid(lens, value.raster);
     if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
     if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
+    if (lens.format === 'vtk-cell-categories') {validateVtkCategories(lens, value.geometry.radialTerrain); continue;}
+    if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
+        lens.relief || lens.valueTransform || !Array.isArray(lens.categories) || lens.categories.length < 2 ||
+        lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||
+        lens.categories.some(category => typeof category.value !== 'string' || !category.value ||
+          typeof category.label !== 'string' || !category.label || !/^#[0-9a-f]{6}$/i.test(category.color)) ||
+        new Set(lens.categories.map(category => category.value)).size !== lens.categories.length ||
+        !Number.isFinite(lens.grid?.noData) || lens.grid.noData >= 0 && lens.grid.noData < lens.categories.length)) {
+      throw new TypeError('Categorical scientific grids require discrete units, nearest sampling and separate missing data.');
+    }
     const facetTable = lens.format === 'facet-scalars';
-    const meshGrid = ['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
+    const meshGrid = ['image-plane-dem', 'stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
@@ -81,7 +95,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && !facetTable && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -95,6 +109,7 @@ export function parseTerrestrialProfile(value) {
       throw new TypeError('Invalid scientific surface grid or relief profile.');
     }
     if (tableGrid) validateRadialTableProfile(lens.grid);
+    if (lens.format === 'image-plane-dem') validateImageDemScience(lens);
     if (meshGrid && ((lens.format === 'wavefront-obj-zip' && (typeof lens.grid.member !== 'string' || lens.grid.member.includes('..') || lens.grid.member.startsWith('/'))) ||
         !(lens.grid.metersPerUnit > 0) || !Number.isSafeInteger(lens.grid.expectedVertices) || lens.grid.expectedVertices < 4 ||
         !Number.isSafeInteger(lens.grid.expectedFaces) || lens.grid.expectedFaces < 4 ||
@@ -189,7 +204,7 @@ export function parseTerrestrialProfile(value) {
     observationIds.add(observation.id);
   }
   for (const mosaic of value.raster.mosaics ?? []) {
-    if (!['pds3-byte-equirectangular', 'controlled-orthographic', 'controlled-shape-camera'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
+    if (!['pds3-byte-equirectangular', 'controlled-orthographic', 'controlled-shape-camera', 'controlled-shape-color'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
         observationIds.has(mosaic.id) || !/^[a-z][a-z0-9-]*$/.test(mosaic.consumer)) {
       throw new TypeError('Invalid PDS byte mosaic identity or format.');
     }

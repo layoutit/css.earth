@@ -9,7 +9,7 @@
       {
         "id": "diameter",
         "label": "Equivalent diameter",
-        "value": "1.16 \u00b1 0.036 km"
+        "value": "1.16 ± 0.036 km"
       },
       {
         "id": "mission",
@@ -38,7 +38,7 @@
         "id": "constraints",
         "label": "Source constraints",
         "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-        "title": "Shape measurements and their coverage.",
+        "title": "Shape-constraint map",
         "detail": "PDS",
         "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
         "surface": "comet-103p-constraints-surface@2x.webp",
@@ -65,7 +65,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-        "title": "Published nucleus shape; gray is a model material.",
+        "title": "Nucleus shape reconstruction",
         "detail": "PDS",
         "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
         "surface": "comet-103p-model-surface@2x.webp",
@@ -79,7 +79,7 @@
           {
             "id": "diameter",
             "label": "Equivalent diameter",
-            "value": "1.16 \u00b1 0.036 km"
+            "value": "1.16 ± 0.036 km"
           },
           {
             "id": "source-epoch",
@@ -92,7 +92,7 @@
         "id": "mri",
         "label": "EPOXI photographs",
         "description": "EPOXI photographed Hartley 2 during its 2010 flyby. The smooth waist contrasts with the rough lobes. Original shadows remain; the gray grid marks gaps or poorly constrained shape.",
-        "title": "EPOXI photographed Hartley 2 during its 2010 flyby. The smooth waist contrasts with the rough lobes. Original shadows remain; the gray grid marks gaps or poorly constrained shape.",
+        "title": "MRI mosaic",
         "detail": "MRI",
         "thumbnail": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
         "surface": "comet-103p-mri-surface@2x.webp",
@@ -111,15 +111,16 @@
           {
             "id": "scale",
             "label": "Image scale",
-            "value": "7\u20138 m/pixel"
+            "value": "7–8 m/pixel"
           }
-        ]
+        ],
+        "summary": "A smooth waist separates two rough lobes in the 2010 flyby images. Shadows remain; the grid marks gaps or uncertain shape."
       },
       {
         "id": "hri",
         "label": "Restored HRI photographs",
         "description": "The mission team restored these HRI images to reduce optical blur. Some grain and ringing remain. Original shadows are preserved; the gray grid marks gaps or poorly constrained shape.",
-        "title": "The mission team restored these HRI images to reduce optical blur. Some grain and ringing remain. Original shadows are preserved; the gray grid marks gaps or poorly constrained shape.",
+        "title": "HRI restored images",
         "detail": "HRI",
         "thumbnail": "/scenes/comet-103p/comet-103p-hri-thumbnail.webp",
         "surface": "comet-103p-hri-surface@2x.webp",
@@ -138,14 +139,15 @@
           {
             "id": "scale",
             "label": "Image scale",
-            "value": "3.9\u20134.5 m/pixel"
+            "value": "3.9–4.5 m/pixel"
           },
           {
             "id": "restoration",
             "label": "Restoration",
             "value": "50 iterations"
           }
-        ]
+        ],
+        "summary": "Image restoration reduces optical blur but leaves grain and ringing. Shadows remain; the grid marks gaps or uncertain shape."
       }
     ]
   },
@@ -156,7 +158,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",

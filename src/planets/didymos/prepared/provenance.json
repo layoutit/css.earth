@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e4bf7c2a467f5cae88d4d462ab6e5deebefbb7fe993f7f084b86a37c8609dd22"
+    "sha256": "fda7705b2f17cd31e4488ec4a636bf1631319a1be91ffbd331bdc1d011238fef"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -180,7 +180,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "320d751d9297790bcc7db53f9042fe129ecbb25b039706fc7107567b3e757212",
+      "sha256": "fa54f4213898bfbaaa4c3d83235897b5c4170eb9fc5e8893138acee69cc2a132",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -220,7 +220,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map.",
-              "title": "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map.",
+              "title": "SPC shape model v003",
               "thumbnail": "/scenes/didymos/didymos-shape-thumbnail.webp",
               "surface": "didymos-shape-surface@2x.webp",
               "poles": "didymos-shape-surface@2x.webp",
@@ -236,7 +236,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows radius in the published Didymos shape minus a 365 m reference sphere. It includes the equatorial ridge and overall flattened shape; it is not height above a gravitational equipotential. Smooth regions are less constrained by images. Cartographic relief and optional Sun lighting are display treatments.",
-              "title": "Color shows radius in the published Didymos shape minus a 365 m reference sphere. It includes the equatorial ridge and overall flattened shape; it is not height above a gravitational equipotential. Smooth regions are less constrained by images. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/didymos/didymos-elevation-thumbnail.webp",
               "surface": "didymos-elevation-surface@2x.webp",
               "poles": "didymos-elevation-surface@2x.webp",
@@ -266,7 +266,7 @@
               "label": "Relative albedo",
               "detail": "DART surface brightness",
               "description": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
-              "title": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
+              "title": "Relative-albedo model",
               "thumbnail": "/scenes/didymos/didymos-albedo-thumbnail.webp",
               "surface": "didymos-albedo-surface@2x.webp",
               "poles": "didymos-albedo-surface@2x.webp",
@@ -287,7 +287,8 @@
                 "meta": "unitless · SPC relative brightness",
                 "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
                 "image": "/scenes/didymos/didymos-albedo-legend.webp"
-              }
+              },
+              "summary": "Grayscale shows modeled brightness, not absolute albedo. Accepted facets cover about 58% of the shape; the grid marks the rest."
             }
           ]
         },
@@ -473,8 +474,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d435be10cf0ff0d24c5babb8649e155e94e9758237cb4f47ace5ae55e0f0c3d1",
-      "bytes": 11728,
+      "sha256": "fa54f4213898bfbaaa4c3d83235897b5c4170eb9fc5e8893138acee69cc2a132",
+      "bytes": 11172,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -92,7 +92,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
-        "title": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
+        "title": "Multi-mission image mosaic",
         "thumbnail": "/scenes/iapetus/iapetus-normal-thumbnail.webp",
         "surface": "iapetus-normal-surface@2x.webp",
         "poles": "iapetus-normal-poles@2x.webp",
@@ -100,13 +100,13 @@
           "id": "cassini-voyager-2008-iapetus",
           "path": "../manifest.json"
         },
-        "summary": "Cassini and Voyager mosaic with coarse poles. Shadows and seams remain; the gray grid marks gaps."
+        "summary": "Polar detail is coarse compared with the rest of the surface. Photographed shadows and seams remain; the grid marks gaps."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere.",
-        "title": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere.",
+        "title": "Enhanced-color composite",
         "thumbnail": "/scenes/iapetus/iapetus-enhanced-thumbnail.webp",
         "surface": "iapetus-enhanced-surface@2x.webp",
         "poles": "iapetus-enhanced-poles@2x.webp",
@@ -114,7 +114,7 @@
           "id": "cassini-iss-2014-iapetus-color",
           "path": "../manifest.json"
         },
-        "summary": "Enhanced Cassini infrared and ultraviolet color. The dark hemisphere is real terrain, not missing imagery."
+        "summary": "Colors extend into infrared and ultraviolet. The dark leading hemisphere is real surface material, not missing imagery."
       }
     ]
   },

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d91e882f027fc83c93b8631f2450c92ede5befcc16947eb95dd22accf93e2af0"
+    "sha256": "67d4a2eefdea529a973168a2f3790fa3fdb1ee5b3845163b35881de8463393b6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -41,7 +41,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "132da74e3c0be63b3996050f6cb594d0e3cb1db8cd7fd78f7167d783df545157",
+      "sha256": "641eee8ead357712179e462aa1f6efe05b7ae5ff9ca2cf97b03459a64e630d0b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -110,7 +110,7 @@
               "id": "illustration",
               "label": "Illustrative model",
               "description": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-              "title": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "title": "Surface illustration",
               "qualification": "Illustration; not an observed surface map.",
               "thumbnail": "illustration-thumbnail.webp",
               "surface": "surface.webp",
@@ -120,7 +120,7 @@
                 "path": "../manifest.json",
                 "url": "https://science.nasa.gov/resource/eris-3d-model/"
               },
-              "summary": "NASA's illustration of Eris. Its surface is unresolved; the terrain and coordinates are illustrative."
+              "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
             }
           ]
         },
@@ -211,8 +211,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "38fb6ca520c05085af323fbaf7ab386324e161a8828d199c770ba179ad2ba1b3",
-      "bytes": 3751,
+      "sha256": "641eee8ead357712179e462aa1f6efe05b7ae5ff9ca2cf97b03459a64e630d0b",
+      "bytes": 3810,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

@@ -45,7 +45,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Approximate ellipsoid from brightness variability, using an assumed-albedo 47 km size. Equal short axes and orientation are assumed; the rotation period adopts a doubled shape interpretation. The grid marks unmapped terrain.",
-        "title": "Approximate ellipsoid from brightness variability, using an assumed-albedo 47 km size. Equal short axes and orientation are assumed; the rotation period adopts a doubled shape interpretation. The grid marks unmapped terrain.",
+        "title": "Light-curve shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/setebos/setebos-model-thumbnail.webp",
         "surface": "setebos-model-surface@2x.webp",

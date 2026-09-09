@@ -1,0 +1,437 @@
+{
+  "createdAt": "2026-09-09T14:32:34.939559+00:00",
+  "mainIntegrated": "ef2d27b2da3e774b2410f216b0e6024b972ee39a",
+  "scope": "Final two-dataset working tree; hashes include ignored object envelopes restored from their pinned prepared parts.",
+  "fingerprints": [
+    {
+      "path": "astro.config.mjs",
+      "bytes": 844,
+      "sha256": "dce8665686d1b7eb14bc1346eda2d1d8346d21020fac6500b82f98e031d399e2"
+    },
+    {
+      "path": "package.json",
+      "bytes": 7975,
+      "sha256": "7cac0500b90f951434c2007a355024daeae3f31b80b49c85a3d1bea0a5325cab"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 224130,
+      "sha256": "d12264d67361b8975cbd0065ae4babc7ac4141b6c0c89eb1e9a9fe2f2a4981ef"
+    },
+    {
+      "path": "site/test/planet-browser-conformance.mjs",
+      "bytes": 84399,
+      "sha256": "5d47e6d7e092860726791c612a5b454714591733c94751d80dd0e8bf6b4c654f"
+    },
+    {
+      "path": "src/planets/earth/NOTICE.md",
+      "bytes": 4232,
+      "sha256": "1810eb8fa70430f0f80165b3dcad5b6d18c46d05cf04f8fdc8bea8c7b6ded43d"
+    },
+    {
+      "path": "src/planets/earth/SOURCE.md",
+      "bytes": 21451,
+      "sha256": "2b63211ea35d3157f8e0eb59530aeabd7c59629337d1fabc77138ca70acfa06a"
+    },
+    {
+      "path": "src/planets/earth/object.json",
+      "bytes": 4700,
+      "sha256": "166d1737f03aafc6ec15034815e682542b5712c7f95e06ef5bbea746626ac5f5"
+    },
+    {
+      "path": "src/planets/earth/prepared/authored-preparation.json",
+      "bytes": 1427,
+      "sha256": "196b14b3eb1ba9ed118ec18bf0dd9fe8a390666c39de2eb000b8eb11ba042442"
+    },
+    {
+      "path": "src/planets/earth/prepared/controls.json",
+      "bytes": 5893,
+      "sha256": "7e303c9287a339d11feb24736a910234a4809d9c5acf26dc37ad6d33ee8c6eae"
+    },
+    {
+      "path": "src/planets/earth/prepared/lenses.json",
+      "bytes": 4829,
+      "sha256": "65f6473d21b2be4b868eb5655d15401b9bac4a3e9c38dd2ef85d316d583cca82"
+    },
+    {
+      "path": "src/planets/earth/prepared/object.json",
+      "bytes": 1192090,
+      "sha256": "77896fc6c94e2ae46e4e336ba08559d2f919490d02fd7d85dc60d8ced6a5dbef"
+    },
+    {
+      "path": "src/planets/earth/prepared/provenance.json",
+      "bytes": 119516,
+      "sha256": "174bce3b2ff0cb7797b03ee3f34672e00e96c864fee38000c6a0504f35ea9a96"
+    },
+    {
+      "path": "src/planets/earth/prepared/raster-assets.json",
+      "bytes": 10480,
+      "sha256": "546ede1a145b397e9728d4750a67cb054e972313e77cd6909d9ceb7e6b6f78a6"
+    },
+    {
+      "path": "src/planets/earth/prepared/runtime.json",
+      "bytes": 1191976,
+      "sha256": "fd3d724f818112f354f71a8acbf12f10dbd590e0f057fda475a5b451bab9d962"
+    },
+    {
+      "path": "src/planets/earth/prepared/scene.json",
+      "bytes": 1336990,
+      "sha256": "a026506882903851f91b6730ffb047e48b2d7aa51055c0f1c7a0c074ba505948"
+    },
+    {
+      "path": "src/planets/earth/prepared/world-navigation.json",
+      "bytes": 2259,
+      "sha256": "fe67b7be651fee760f0c4f3eb3d7568594d6410ee93467c644eab361c1fe32b6"
+    },
+    {
+      "path": "src/planets/earth/runtime-assets.json",
+      "bytes": 28195,
+      "sha256": "b532ed68b27d3b56c0aa2a6fcdde882cd5992f054f9ad3ceb56ce66d0b99c2df"
+    },
+    {
+      "path": "src/planets/earth/source/content/lens-bindings.json",
+      "bytes": 4442,
+      "sha256": "07e2f455bad6f5f5b1ba67548d1abf694a36081b9bd21b311469089a5860af74"
+    },
+    {
+      "path": "src/planets/earth/source/content/object.json",
+      "bytes": 15751,
+      "sha256": "0ab3cf97c8098bb98b3b6130aabb9579a21dd6ca5655c23d65aa6cf6eafa1614"
+    },
+    {
+      "path": "src/planets/earth/source/interior/earth-interior.json",
+      "bytes": 1016,
+      "sha256": "9f0fd57020b5601fbca3594f74623ff3d25786f36e0ec4adc2f5bbdf8bcbdef7"
+    },
+    {
+      "path": "src/planets/earth/source/interior/glad-m35-catalog.json",
+      "bytes": 8464,
+      "sha256": "f996e2ca9eee380309ccd1f9fec00f7a35d66505088fb67b6102040e52c5cb4e"
+    },
+    {
+      "path": "src/planets/earth/source/interior/glad-m35-metadata.geojson",
+      "bytes": 7181,
+      "sha256": "adc1aa1c4641459c035d9c7f738d13df11a693ecab38d7ad9ed3cbf8ab484581"
+    },
+    {
+      "path": "src/planets/earth/source/interior/glad-m35-vsv-subset.f32.gz",
+      "bytes": 520307,
+      "sha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb"
+    },
+    {
+      "path": "src/planets/earth/source/interior/tomography.json",
+      "bytes": 2116,
+      "sha256": "0eb504244bf70f2e96fcd619a225587c7e6383510991f7e2249c12f19af74903"
+    },
+    {
+      "path": "src/planets/earth/source/manifest.json",
+      "bytes": 60244,
+      "sha256": "8d5507909566734c3989b35b20e54d867ae75be05eaef3b20dcb2d7e2b6bb8e4"
+    },
+    {
+      "path": "src/planets/earth/source/preparation/paged-ellipsoid.json",
+      "bytes": 11653,
+      "sha256": "0f7a222edb670316ba156b94c33470255baecde253a00afffc3e7d91e4ecf140"
+    },
+    {
+      "path": "src/planets/jupiter/object.json",
+      "bytes": 6465,
+      "sha256": "0fb567e6cccbebf65ee42c373e26e2abd6b77ffb290e0c834a343dd05e59ad95"
+    },
+    {
+      "path": "src/planets/jupiter/prepared/object.json",
+      "bytes": 605425,
+      "sha256": "f16aa312f4eafcfec43c2c544e5b23e8d4ac1a1e2dbb85c9b4683192ace4190a"
+    },
+    {
+      "path": "src/planets/jupiter/runtime-assets.json",
+      "bytes": 16501,
+      "sha256": "5a0ce9e68d643a35e108e3726c0c7e8eee8ccd140b3ce3eab5eb9257b41ecba1"
+    },
+    {
+      "path": "src/planets/mars/object.json",
+      "bytes": 4235,
+      "sha256": "4f9b5d88960b5863ecc36e1635e525251207837773d7ee75043b7019e62740a8"
+    },
+    {
+      "path": "src/planets/mars/prepared/object.json",
+      "bytes": 545902,
+      "sha256": "ee222a24804f1b090f283dba12e395f1ae54a5e7a0bda2f433e0a24eac6a0175"
+    },
+    {
+      "path": "src/planets/mars/runtime-assets.json",
+      "bytes": 193883,
+      "sha256": "2ed1cc1421ccc440a40255cdd6367087cb38275d426f59eb753160456684f620"
+    },
+    {
+      "path": "src/planets/mercury/SOURCE.md",
+      "bytes": 6953,
+      "sha256": "2b4cecbb0b806f6869cf4affc9e615496533797f5723bdcc2c808e66b9c0dc00"
+    },
+    {
+      "path": "src/planets/mercury/object.json",
+      "bytes": 4471,
+      "sha256": "63a684200745baf9111aec05c2686eee34217da4b460f1789b4b85161d9b07ba"
+    },
+    {
+      "path": "src/planets/mercury/prepared/assets.json",
+      "bytes": 191094,
+      "sha256": "8abc43c307319e0d6922b18c83318456c557ed861cd23b1c9159cbb984e4b49f"
+    },
+    {
+      "path": "src/planets/mercury/prepared/authored-preparation.json",
+      "bytes": 1534,
+      "sha256": "ae2ec9ab6db78651134059b1e77827070323653ac6ed64dfde9ae898e9a50693"
+    },
+    {
+      "path": "src/planets/mercury/prepared/controls.json",
+      "bytes": 3768,
+      "sha256": "76f1c93075dfa6d31cb222fd255a05688f422c0113d3d09968da10c5750ef6db"
+    },
+    {
+      "path": "src/planets/mercury/prepared/lenses.json",
+      "bytes": 5118,
+      "sha256": "dc48c138715e7b9c80d36ad489d8c3e41dcb130df5a1e522e4b5361b873dc4f3"
+    },
+    {
+      "path": "src/planets/mercury/prepared/object.json",
+      "bytes": 6197697,
+      "sha256": "33526278acacbda6e1be508022733cda170c664c5e8433fdf8669e7c5d993054"
+    },
+    {
+      "path": "src/planets/mercury/prepared/provenance.json",
+      "bytes": 70168,
+      "sha256": "4e56fd312df4c99dd9534b05be03a89065e06c36b9207ea3ecb159653f8cd56b"
+    },
+    {
+      "path": "src/planets/mercury/prepared/runtime.json",
+      "bytes": 6197581,
+      "sha256": "26dff9b29b84e98977d4cdb37a1e30b3e22494509c2bd1ebd4bf710b2ff77a12"
+    },
+    {
+      "path": "src/planets/mercury/prepared/scene.json",
+      "bytes": 6051044,
+      "sha256": "30b41f84b3e8d910ed9a0a48e5db1f8e3690844d7b62fcc78dbc99820a18863a"
+    },
+    {
+      "path": "src/planets/mercury/prepared/sky.json",
+      "bytes": 686726,
+      "sha256": "46280e9f3993b2ef925055af345a449f48fa543fd59f22604c1fdc5b1d0bd1a8"
+    },
+    {
+      "path": "src/planets/mercury/prepared/sun.json",
+      "bytes": 3442,
+      "sha256": "3349d56a8d434990b3b30341f5b564781af8949890581c9e515d869646c9fee7"
+    },
+    {
+      "path": "src/planets/mercury/prepared/world-navigation.json",
+      "bytes": 2406,
+      "sha256": "4b1d917c95dbdda3eaa74c18dd40b04f0bab8e504bb5c1e6dc98fe151c80ec2e"
+    },
+    {
+      "path": "src/planets/mercury/runtime-assets.json",
+      "bytes": 21204,
+      "sha256": "277ba7758f7f0a6a500337cb50c493492f37710c7a0cd02ac75cc03998fdaf48"
+    },
+    {
+      "path": "src/planets/mercury/source/manifest.json",
+      "bytes": 29394,
+      "sha256": "c4ed04b75948ffd8bc1445d8b50bf8905f6cff3cf8cfa71ac76659d03ce2ec33"
+    },
+    {
+      "path": "src/planets/mercury/source/preparation/raster.json",
+      "bytes": 4265,
+      "sha256": "d4deecc2acfe395857d22f00ec2354b5d5591efcf1f39f89d78ddfb53eeb36f3"
+    },
+    {
+      "path": "src/planets/neptune/object.json",
+      "bytes": 6715,
+      "sha256": "d0c4378fc9985501c4987a7622831756d6a336dae11f60cf7617546b3829d2f5"
+    },
+    {
+      "path": "src/planets/neptune/prepared/object.json",
+      "bytes": 711499,
+      "sha256": "3d8ba475cbbe912a718070f252ce058e1ed609be7ca1eb36aca9bea2a1d991a4"
+    },
+    {
+      "path": "src/planets/neptune/runtime-assets.json",
+      "bytes": 17376,
+      "sha256": "c203bef79e287b68b328afea137b06cd650256f163f2684247fa1ef15687a0b9"
+    },
+    {
+      "path": "src/planets/saturn/object.json",
+      "bytes": 5152,
+      "sha256": "c59e7e926962a844b86ea0e8c5f73ca3a35f2702534202851a9d1cbaadeebd88"
+    },
+    {
+      "path": "src/planets/saturn/prepared/object.json",
+      "bytes": 1736055,
+      "sha256": "f277fabbb13089194a0eeaa6bdc49487c6e6837f467fe3777ba3945ebcece43f"
+    },
+    {
+      "path": "src/planets/saturn/runtime-assets.json",
+      "bytes": 71726,
+      "sha256": "019f71f6aeb042f39f64d87eadfb267ea5ebad399196b218aa47dcd29566d75b"
+    },
+    {
+      "path": "src/planets/uranus/object.json",
+      "bytes": 6495,
+      "sha256": "1ba83d4b60c4e35c2338bb3f197076adf1da14182eb4e779ada71aaba5de913c"
+    },
+    {
+      "path": "src/planets/uranus/prepared/object.json",
+      "bytes": 1007173,
+      "sha256": "f40a849c512d169c0ad21f7f9d67f8fe0f9aa4efa9a5d1b230089c26125d532a"
+    },
+    {
+      "path": "src/planets/uranus/runtime-assets.json",
+      "bytes": 19267,
+      "sha256": "68acfc15ae4f8a202830f2d0fd7ccdfa6510b3d4337c67b8e2fb013c98399e90"
+    },
+    {
+      "path": "src/planets/venus/object.json",
+      "bytes": 4294,
+      "sha256": "52e7c7fbde6e6ceb1061a3a909fee4e6c129560a29d44a757688a0bfd270fbc1"
+    },
+    {
+      "path": "src/planets/venus/prepared/object.json",
+      "bytes": 5850617,
+      "sha256": "27403d8d14e3ced51c5f5e02e43bf3a8b49c21d82b4ee891a98fa4473aa0ddee"
+    },
+    {
+      "path": "src/planets/venus/runtime-assets.json",
+      "bytes": 9448,
+      "sha256": "0a6b59a42530efdb077e85605a90fd3d9a3843a1dfbe8c8fd6705c0e4b313b64"
+    },
+    {
+      "path": "src/preparation/raster/config.ts",
+      "bytes": 3147,
+      "sha256": "06ac9eca47274aed40b6c39a32d11a38cc3e7a9e69b3cc061a926912771482ca"
+    },
+    {
+      "path": "src/preparation/raster/index.ts",
+      "bytes": 4221,
+      "sha256": "549fef2e004572b2fd06ba79382e0695f4c69626512863bbddab3a88e93aa817"
+    },
+    {
+      "path": "src/preparation/raster/interior.ts",
+      "bytes": 6396,
+      "sha256": "2fda1f47063912c78cc745de2ae6aac7f5511d3447cf489a48d6be60f43951c0"
+    },
+    {
+      "path": "src/preparation/raster/validation.ts",
+      "bytes": 7338,
+      "sha256": "87203aef369869aaaa02efa0845bedda909261a5e4fc78f3cb7d9cd4b18a6d3e"
+    },
+    {
+      "path": "src/renderers/css/preparation/presentation/row-bank-cutaway.ts",
+      "bytes": 13154,
+      "sha256": "092662e14ef998154956b89d3923de05e22d42f96872e99ef96858321fd8f7b7"
+    },
+    {
+      "path": "tests/objects/browser/earth/audit/saturn-standard.mjs",
+      "bytes": 29861,
+      "sha256": "eef4b12813294aa9227ef0cd0ca69438dddc4dc1e38f83bbf0a883ea02f0e240"
+    },
+    {
+      "path": "tests/objects/browser/earth/browser-profile.mjs",
+      "bytes": 1149,
+      "sha256": "a2e515b6936194f829605b2e976cc6b330a61a99e0b094575e10db39ea859f52"
+    },
+    {
+      "path": "tests/objects/preparation-parity.test.mjs",
+      "bytes": 3165,
+      "sha256": "26d4831a3a7ecf1a4b85e1614a24cb397cd31add73dd11091eabe33a03efbb0c"
+    },
+    {
+      "path": "tests/objects/unit/earth/content.test.mjs",
+      "bytes": 2782,
+      "sha256": "5124df41bc8f314f0e52e012c5d5f0798c18fdb99729959a135bc1a1b503496b"
+    },
+    {
+      "path": "tests/objects/unit/earth/globe-mvp.test.mjs",
+      "bytes": 2779,
+      "sha256": "369aa40f886f188e59edde5177597719737acc252e3fa6f8ad1a54e8ff5a77b5"
+    },
+    {
+      "path": "tests/objects/unit/earth/interior.test.mjs",
+      "bytes": 4011,
+      "sha256": "c86cee557096fbf3794020956773c6abd41bd9c7e330e69c10641454c6631444"
+    },
+    {
+      "path": "tests/objects/unit/earth/preparation.test.mjs",
+      "bytes": 15708,
+      "sha256": "1d12a07cb0901e84b49b0ffb3fcd8166f3cb9a829b0b8b67abb18a0b6fca894c"
+    },
+    {
+      "path": "tests/objects/unit/earth/tomography.test.mjs",
+      "bytes": 4997,
+      "sha256": "630094e3c1566fb8f06612b996d19bc9ed737e813ad2b5f3af0008cb247747d7"
+    },
+    {
+      "path": "tests/objects/unit/mercury/lens-image-groups.test.mjs",
+      "bytes": 5830,
+      "sha256": "778479ad1ce81a1f103a54b2ff632da29f7658933c2c0e9031fe1ad16e73d51a"
+    },
+    {
+      "path": "tools/object-provenance.test.mjs",
+      "bytes": 12213,
+      "sha256": "48468bff297d6367a18de865106febb507b7dc20377c4c484f9d21c16d8ed382"
+    },
+    {
+      "path": "tools/objects/content/lenses.ts",
+      "bytes": 4656,
+      "sha256": "59cb2a90f5cab879aa8e4efe2282d2c5f27537aeef471415c19bcdaf67457045"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/assets.mjs",
+      "bytes": 30906,
+      "sha256": "d4d6dc688f056a4fdb38f0b05a45accd260ee9ab8b97e74c2a178bf717055e73"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/extract-tomography.py",
+      "bytes": 3375,
+      "sha256": "ae7dc3013d8e5dd4f0f1933116875af185cb9f88234e3fe7a2d45ec936e1c8ed"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/index.mjs",
+      "bytes": 8996,
+      "sha256": "e97d6422545e106286b1d03e49898db4bafb4395b5a3fb7de227b4aca46aeba7"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/interior-poles.mjs",
+      "bytes": 659,
+      "sha256": "6859a82597b76b5f28f7c048b7732233ce9511008aa6e93e6538715d2b070b15"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/presentation.mjs",
+      "bytes": 12277,
+      "sha256": "ead63f0441906956a8a9eec772edb48d722d8bb3ed3bef0a2bd30b1264f78f7d"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/scene.mjs",
+      "bytes": 36796,
+      "sha256": "c9273c892c512fedf394b82a3dcd7d7f1ab9f1050518aaff3e94c31aa72821db"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/surface-banks.mjs",
+      "bytes": 2269,
+      "sha256": "f5b803b7355223a9e8c872d6571bceafe98886ab50bb014d50b94682d999f3a0"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/tomography.mjs",
+      "bytes": 5197,
+      "sha256": "d1264dca5c6d418a976ce38c44915b979c8d81acc4dad8dd9a5988880a125a37"
+    },
+    {
+      "path": "tools/objects/provenance-recipes.mjs",
+      "bytes": 15042,
+      "sha256": "7f2bc1e031212dbf5abf739fe10e29c008615162f1f4b9a0a6f2e5b2715e7c46"
+    },
+    {
+      "path": "tools/objects/provenance.mjs",
+      "bytes": 11600,
+      "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f"
+    }
+  ]
+}

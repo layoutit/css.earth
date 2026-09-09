@@ -45,7 +45,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Approximate ellipsoid adopting the published minimum equatorial ratio 2.32:1 under uniform reflectivity. Equal short axes, volume scaling and orientation are assumed. The grid marks unmapped terrain.",
-        "title": "Approximate ellipsoid adopting the published minimum equatorial ratio 2.32:1 under uniform reflectivity. Equal short axes, volume scaling and orientation are assumed. The grid marks unmapped terrain.",
+        "title": "Light-curve shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/kiviuq/kiviuq-model-thumbnail.webp",
         "surface": "kiviuq-model-surface@2x.webp",

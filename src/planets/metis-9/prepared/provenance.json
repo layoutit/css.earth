@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "00896a7f6cc50a358fa8206569cf2067ec9386bd99ecb110193bcf77ce755912"
+    "sha256": "7766ecc23a564313e01f6a902278db650bf94034302ed18906bea63ac6b1dde2"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "58403af6a815722da8d76d56894d3c4d191a2c8a7a3a7f6413aa80cc2a3b27f1",
+      "sha256": "6ea21e4f46252bb47f1ad5d130573954838b28f890e5750bc8def3c86579c685",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/metis-9/metis-9-shape-thumbnail.webp",
               "surface": "metis-9-shape-surface@2x.webp",
               "poles": "metis-9-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 86.5 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/metis-9/metis-9-elevation-thumbnail.webp",
               "surface": "metis-9-elevation-surface@2x.webp",
               "poles": "metis-9-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "457a1a621cfbb45fb95407c94d0306a94d15d5536affc87f8b613b7123d61ec8",
-      "bytes": 8724,
+      "sha256": "6ea21e4f46252bb47f1ad5d130573954838b28f890e5750bc8def3c86579c685",
+      "bytes": 8327,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

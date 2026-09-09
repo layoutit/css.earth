@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
-        "title": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+        "title": "Approximate shape model",
         "detail": "Measured shape",
         "thumbnail": "/scenes/aegaeon/aegaeon-model-thumbnail.webp",
         "surface": "aegaeon-model-surface@2x.webp",

@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-phoebe-shared-mask-source-check@1",
+  "ok": true,
+  "sourceGridCells": 64800,
+  "accepted": 57328,
+  "independentFixtureCount": 6,
+  "node": "v24.19.0",
+  "resources": {
+    "userCPUTime": 138632,
+    "systemCPUTime": 32951,
+    "maxRSS": 118992,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 9567,
+    "majorPageFault": 219,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 0,
+    "ipcSent": 0,
+    "ipcReceived": 0,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 102,
+    "involuntaryContextSwitches": 740
+  }
+}

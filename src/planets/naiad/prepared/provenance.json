@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "269c9e71a881be7ba64ee5a9c5b12cd77f63c473aa5091bf757296419b33f1a0"
+    "sha256": "b9bd40f315aca2f248ec7e1384527a73e87c3c1204d2a83262f2f79734b0d341"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -109,7 +109,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8eb26c3b43623a77623e3672056223f97614e5ef52d2d6cf51e59086e3bc6a00",
+      "sha256": "e736f26dd6bbd0217edb7a7462624e374b16e48699373092b0446efaa877db4c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,7 @@
               "id": "model",
               "label": "Shape model",
               "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
-              "title": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+              "title": "Approximate shape model",
               "detail": "Measured axes",
               "thumbnail": "/scenes/naiad/naiad-model-thumbnail.webp",
               "surface": "naiad-model-surface@2x.webp",
@@ -302,8 +302,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1dc0e3702c155f203609ee57ca5ac383be87d437617bd9ff2d3de53d0d3cc7c2",
-      "bytes": 3662,
+      "sha256": "e736f26dd6bbd0217edb7a7462624e374b16e48699373092b0446efaa877db4c",
+      "bytes": 3533,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

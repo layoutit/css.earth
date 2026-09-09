@@ -31,5 +31,10 @@ export function surfaceBankInventory(plan,lenses,assetPath) {
     }
     return Object.freeze({ id: lens.id, urls });
   });
+  for (const lens of lenses.controls.filter(lens => lens.view === "interior")) {
+    const urls = requireSurfacePages(plan.interior.outerAssets.litSurface.urls, "Lit interior surface", assetPath);
+    if (urls.length !== bodyPages.length) throw new TypeError("Lit interior surface page count differs.");
+    banks.push(Object.freeze({ id: `${lens.id}-lit`, urls }));
+  }
   return Object.freeze(banks);
 }

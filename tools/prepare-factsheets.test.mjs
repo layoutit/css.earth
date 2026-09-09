@@ -17,7 +17,7 @@ test('fact-only preparation preserves other content and rejects source drift bef
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-facts-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(resolve(root, 'source')); await mkdir(resolve(root, 'prepared'));
-  const source = JSON.stringify({ panel: { introduction: 'Body description', facts: [{ id: 'radius', label: 'Mean radius', value: '10 km' }] }, lenses: { controls: [{ id: 'normal', label: 'Observed', description: 'Measured area with explicit gaps', title: 'Instrument mosaic' }] } });
+  const source = JSON.stringify({ panel: { introduction: 'Body description', facts: [{ id: 'radius', label: 'Mean radius', value: '10 km' }] }, lenses: { controls: [{ id: 'normal', label: 'Observed', description: 'Measured area with explicit gaps', summary: 'Measured terrain with gaps.', title: 'Instrument mosaic' }] } });
   const digest = createHash('sha256').update(source).digest('hex');
   const put = (path, value) => writeFile(resolve(root, path), JSON.stringify(value));
   await put('object.json', { id: 'body', properties: { recipe: { sources: [{ id: 'content', path: 'source/content.json', sha256: digest }] } } });
@@ -43,11 +43,13 @@ test('fact-only preparation preserves other content and rejects source drift bef
   await prepareFactsheet(root, { editorial: true });
   const updated = JSON.parse(await readFile(resolve(root, 'prepared/lenses.json'), 'utf8'));
   assert.equal(updated.controls[0].description, 'Measured area with explicit gaps');
+  assert.equal(updated.controls[0].summary, 'Measured terrain with gaps.');
   assert.equal(updated.controls[0].surfaceUrl, '/accepted.webp');
   assert.deepEqual(updated.controls[0].legend, lens.legend);
   assert.deepEqual(JSON.parse(await readFile(resolve(root, 'prepared/controls.json'), 'utf8')).settings, { accepted: true });
   const runtime = JSON.parse(await readFile(resolve(root, 'prepared/runtime.json'), 'utf8'));
   assert.equal(runtime.controls.lenses.controls[0].description, updated.controls[0].description);
+  assert.equal(runtime.controls.lenses.controls[0].summary, updated.controls[0].summary);
   assert.deepEqual(runtime.tree, { accepted: true });
   assert.deepEqual(runtime.assets, ['accepted']);
   await writeFile(resolve(root, 'source/content.json'), source.replace('10 km', '20 km'));

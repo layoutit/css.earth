@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5541d9528e2a6cb9bbd7a471aa0955fed74622b02f76b6b881c5e4a5b2b5501d"
+    "sha256": "0c09f13d820a46801b9f7504439ec29001938f261f4eb036cd568569cc78464b"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "42c4b67e5e21a33a0d05ff57b304c0299f317542c461473fbbab6a2e02b5dc15",
+      "sha256": "11efdd9fb5dc3aff8b78c6bd16deaeb7f67fc95e6b5315ae160a140e0625e8ae",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -202,7 +202,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Calibrated DAMIT shape",
-              "title": "Published convex DAMIT model 298, version 2011-02-18, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase. Two published pole solutions remain; this view uses model 298 at its own calibrated scale.",
+              "title": "DAMIT model 298",
               "thumbnail": "/scenes/palma/palma-shape-thumbnail.webp",
               "surface": "palma-shape-surface@2x.webp",
               "poles": "palma-shape-surface@2x.webp",
@@ -218,7 +218,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows the original model radius minus a 93.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/palma/palma-elevation-thumbnail.webp",
               "surface": "palma-elevation-surface@2x.webp",
               "poles": "palma-elevation-surface@2x.webp",
@@ -349,8 +349,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "14a83d5426d900ca3dc690ce94961194f4cf6c9021a7f3fbbafa312b00b02de2",
-      "bytes": 8444,
+      "sha256": "11efdd9fb5dc3aff8b78c6bd16deaeb7f67fc95e6b5315ae160a140e0625e8ae",
+      "bytes": 7942,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

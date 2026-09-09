@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e7fb5eb13f5e3f94513a9411c2d9bdb4985465a8ff311e212f4cad9119c597d9"
+    "sha256": "0a866bdca7212f1ac61db2dae055b74004e57034e58ebeb79ca5a94e44339458"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0bdd01c9fddffb8d7912de5c75692d15492ec25a89ded23503e29c73e83293a2",
+      "sha256": "3370b2569357cd84432d5493c65ff94862039a56fc288b2a4c31ba2b85d61a17",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +200,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "VLT/SPHERE shape model",
-              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/davida/davida-shape-thumbnail.webp",
               "surface": "davida-shape-surface@2x.webp",
               "poles": "davida-shape-surface@2x.webp",
@@ -216,7 +216,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Source shape · radial height",
-              "title": "Color shows source radius minus a 149 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/davida/davida-elevation-thumbnail.webp",
               "surface": "davida-elevation-surface@2x.webp",
               "poles": "davida-elevation-surface@2x.webp",
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d1a629b53b3f47c8d948c9b4929b1b045025a8daf6d73bb44cade82f0bbcd3c6",
-      "bytes": 8686,
+      "sha256": "3370b2569357cd84432d5493c65ff94862039a56fc288b2a4c31ba2b85d61a17",
+      "bytes": 8290,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,

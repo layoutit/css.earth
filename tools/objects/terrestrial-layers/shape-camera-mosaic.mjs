@@ -39,7 +39,7 @@ export function decodeCalibratedCamera(bytes, encoding = 'calibrated') {
   const data=new Float32Array(width*height), little=half?field('INTFMT')==='LOW':field('REALFMT')==='RIEEE';
   for(let i=0;i<data.length;i++)data[i]=(raw?bytes[offset+Math.floor(i/width)*record+prefix+i%width]:half?(little?bytes.readInt16LE(offset+2*i):bytes.readInt16BE(offset+2*i)):
     (little?bytes.readFloatLE(offset+4*i):bytes.readFloatBE(offset+4*i)))*scale;
-  return {data,width,height,offset,encoding};
+  return {data,width,height,offset,encoding,sampleFormat:field('FORMAT')};
 }
 
 /** Camera is centred on the controlled body origin. North azimuth is clockwise
@@ -118,7 +118,7 @@ function bilinear(image,x,y){
   const ix=Math.floor(x),iy=Math.floor(y),u=x-ix,v=y-iy,i=iy*image.width+ix;
   if(image.missing && [i,i+1,i+image.width,i+image.width+1].some(j=>image.missing[j]))return null;
   const p=[image.data[i],image.data[i+1],image.data[i+image.width],image.data[i+image.width+1]];
-  if(p.some(n=>!Number.isFinite(n)||n<0||(!image.allowZero&&n===0)||n>1e10))return null;
+  if(p.some(n=>!Number.isFinite(n)||(!image.allowFiniteSigned&&(n<0||(!image.allowZero&&n===0)))||Math.abs(n)>1e10))return null;
   return (p[0]*(1-u)+p[1]*u)*(1-v)+(p[2]*(1-u)+p[3]*u)*v;
 }
 
@@ -182,6 +182,14 @@ export function applySsiQuality(image,rawBytes,badData,profile){
 
 export async function loadShapeCameraImage(sourceDirectory,frame){
   const image=decodeCalibratedCamera(await readFile(resolve(sourceDirectory,frame.path)),frame.encoding);
+  // FICOR77 HALF values are signed calibrated I/F, not unsigned detector DN.
+  // Accept them only for an explicitly bounded, sky-masked source footprint.
+  if(frame.allowFiniteSigned!==undefined){
+    if(frame.allowFiniteSigned!==true||image.sampleFormat!=='HALF'||frame.encoding==='vicar-byte-dn'||
+        !Number.isFinite(frame.backgroundMaximum)||frame.backgroundMaximum<0||!(frame.coverageInsetPixels>0))
+      throw new Error('Signed camera samples require calibrated HALF data and an explicit bounded sky mask.');
+    image.allowFiniteSigned=true;
+  }
   if(frame.encoding==='fits-ssi-iof'){
     const q=frame.quality;
     if(!q)throw new Error('Calibrated SSI requires its archived detector-quality companions.');
@@ -200,6 +208,45 @@ export async function loadShapeCameraImage(sourceDirectory,frame){
   return image;
 }
 
+const framePaths=f=>[f.path,f.labelPath,...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
+
+function sampleStatistics(values,missing){
+  let count=0,minimum=Infinity,maximum=-Infinity,sum=0,negative=0,zero=0;
+  for(let i=0;i<values.length;i++)if(!missing?.[i]&&Number.isFinite(values[i])){
+    const value=values[i];count++;minimum=Math.min(minimum,value);maximum=Math.max(maximum,value);sum+=value;
+    if(value<0)negative++;if(value===0)zero++;
+  }
+  return {count,minimum:count?minimum:null,maximum:count?maximum:null,mean:count?sum/count:null,negative,zero};
+}
+
+/** Independently project each calibrated filter; display only their common
+ * footprint. A common transfer function preserves band ratios. No invented
+ * luminance detail, per-channel gain matching, or missing-band fill is used. */
+export async function prepareShapeCameraColor(sourceDirectory,entries,recipe,width,height,shape){
+  if(recipe.channels?.length!==3||recipe.photometry?.minimumLevel!==1||recipe.photometry?.maximumLevel!==1||
+      recipe.frames!==undefined||recipe.metadata?.falseColor!==true||
+      new Set(recipe.channels.map(c=>c.filter)).size!==3||
+      ['red','green','blue'].some((name,i)=>recipe.channels[i]?.channel!==name||
+        typeof recipe.channels[i].filter!=='string'||!recipe.channels[i].filter||recipe.channels[i].frames?.length!==1))
+    throw new Error('Filter color requires three distinct ordered filters, one camera per channel, and a common fixed display scale.');
+  const paths=new Set(recipe.channels.flatMap(c=>c.frames.flatMap(framePaths)));
+  if(entries.length!==paths.size||entries.some(e=>!paths.has(e.path)))throw new Error('Unconsumed color camera input.');
+  const channels=[];
+  for(const channel of recipe.channels){
+    const paths=new Set(channel.frames.flatMap(framePaths));
+    const map=await prepareShapeCameraMosaic(sourceDirectory,entries.filter(e=>paths.has(e.path)),
+      {frames:channel.frames,photometry:recipe.photometry},width,height,shape);
+    channels.push({channel:channel.channel,filter:channel.filter,...map});
+  }
+  const rgb=Buffer.alloc(width*height*3),missing=new Uint8Array(width*height).fill(1);
+  for(let i=0;i<missing.length;i++)if(channels.every(c=>!c.missing[i])){
+    missing[i]=0;for(let c=0;c<3;c++)rgb[i*3+c]=channels[c].rgb[i*3];
+  }
+  return {rgb,missing,grid:{model:'controlled-shape-color',photometry:recipe.photometry,
+    channels:channels.map(({channel,filter,grid})=>({channel,filter,...grid})),
+    coveragePixels:missing.reduce((sum,v)=>sum+1-v,0),totalPixels:missing.length}};
+}
+
 /** Project source observations using their source mesh and camera solution.
  * All ray intersections, illumination normalization and level matching happen
  * here at preparation time. Unobserved/unstable pixels remain explicit gaps. */
@@ -210,7 +257,6 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
       !(p.displayMaximum>0)||!(p.gamma>0)||!(p.minimumLevel>0&&p.minimumLevel<=1&&p.maximumLevel>=1)||
       ![p.maximumIncidenceDegrees,p.maximumEmissionDegrees].every(v=>v>0&&v<90))throw new Error('Invalid shape-camera mosaic profile.');
   const paths=new Set(entries.map(e=>e.path));
-  const framePaths=f=>[f.path,f.labelPath,...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
   for(const f of recipe.frames)if(framePaths(f).some(path=>!paths.has(path)))throw new Error(`Unpinned camera input: ${f.id}`);
   if(paths.size!==new Set(recipe.frames.flatMap(framePaths)).size)throw new Error('Unconsumed camera input.');
   const frames=await Promise.all(recipe.frames.map(frame=>resolveCatalogCamera(sourceDirectory,frame)));
@@ -251,10 +297,12 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
     for(let j=0;j<samples.length;j+=3){const [i,value,weight]=samples.slice(j,j+3);
       values[i]=missing[i]?value*level:values[i]*(1-weight)+value*level*weight;missing[i]=0;}
     statistics.push({id:frame.id,sourceWidth:image.width,sourceHeight:image.height,rasterOffset:image.offset,
+      ...(image.allowFiniteSigned?{allowFiniteSigned:true,maskedSourceSamples:sampleStatistics(image.data,image.missing)}:{}),
       encoding:image.encoding,...(image.quality?{quality:image.quality}:{}),resolutionMeters:frame.rangeKm*frame.pixelAngleMicroradians*.001,correctedPixels:samples.length/3,level,overlapSamples:ratios.length});
   }
   const rgb=Buffer.alloc(values.length*3);
-  for(let i=0;i<values.length;i++){const v=Math.round(255*Math.min(1,values[i]/p.displayMaximum)**(1/p.gamma));rgb.fill(v,i*3,i*3+3);}
+  for(let i=0;i<values.length;i++){const v=Math.round(255*Math.max(0,Math.min(1,values[i]/p.displayMaximum))**(1/p.gamma));rgb.fill(v,i*3,i*3+3);}
   return {rgb,missing,grid:{model:'controlled-shape-camera',photometry:p,frames:statistics,
+    ...(frames.some(f=>f.allowFiniteSigned)?{beforeDisplay:sampleStatistics(values,missing)}:{}),
     coveragePixels:missing.reduce((sum,v)=>sum+1-v,0),totalPixels:values.length}};
 }

@@ -20,3 +20,31 @@ src/planets/kleopatra/source/reference/** -whitespace
 src/planets/toutatis/source/reference/** -whitespace
 src/planets/toutatis/source/shape/4179toutatis2.tab -whitespace
 src/planets/comet-67p/source/reference/osiris-2014080[56]-*.lbl -text -whitespace
+
+# Preserve the exact B3 spacecraft archive labels and release documentation.
+src/planets/callisto/source/observations/C0605271600R.LBL -text -whitespace
+src/planets/hyperion/source/observations/N1506391424_2_CALIB.LBL -text -whitespace
+src/planets/phoebe/source/science/2023/phoebe_albedo_c.xml -text -whitespace
+src/planets/phoebe/source/science/2023/phoebe_bestmap_c.xml -text -whitespace
+src/planets/phoebe/source/science/2023/phoebe_numimg_c.xml -text -whitespace
+src/planets/phoebe/source/science/2023/phoebe_radius_c.xml -text -whitespace
+src/planets/phoebe/source/science/2023/phoebeimglist.txt -text -whitespace
+src/planets/phoebe/source/science/2023/phoebekernellist.txt -text -whitespace
+src/planets/phoebe/source/science/2023/productdescription.txt -text -whitespace
+src/planets/phoebe/source/shape/2023/phoebe_128_o.xml -text -whitespace
+src/planets/proteus/source/observations/C1137328_GEOMED.LBL -text -whitespace
+src/planets/proteus/source/observations/C1137339_GEOMED.LBL -text -whitespace
+src/planets/proteus/source/observations/C1137350_GEOMED.LBL -text -whitespace
+src/planets/proteus/source/observations/PROCESSING.TXT -text -whitespace
+
+# Preserve raw execution transcripts; collapse generated capture records in reviews.
+docs/moons/b3-preparation/callisto-color-tests-initial.log -whitespace
+docs/moons/b3-preparation/final/renderer-tests.log -whitespace
+docs/moons/b3-preparation/final/browser/*.json linguist-generated=true
+src/planets/comet-19p/source/reference/*.cat -text -whitespace
+src/planets/comet-19p/source/reference/*.lbl -text -whitespace
+src/planets/comet-19p/source/reference/*.txt -text -whitespace
+src/planets/comet-19p/source/reference/*.htm -text -whitespace
+
+# Original 67P categorical geometry and SBMT archive records are hash-pinned.
+src/planets/comet-67p/source/geology/** -text -whitespace

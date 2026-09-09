@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9131e955dbbe872848dcd6bfff977adb131da2bb7c36cc33a872a40324c6d6e1"
+    "sha256": "116a6103f62e803924228220a30268e287bb846e171a80cae50c09c7c7e4b053"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
+    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
   },
   "recipes": [
     {
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dace7466ee55b5a494fa1d88730e525d15ccd9875af3e7ec34509c7d1a3f95bf",
+      "sha256": "fb3b4056001a0384a0c9077ac8b64e05d86f85a6ba65a9c43da83a91f60c2a2c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -260,7 +260,7 @@
               "id": "normal",
               "label": "Monochrome",
               "description": "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
-              "title": "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
+              "title": "Clear-filter mosaic",
               "thumbnail": "/scenes/triton/triton-normal-thumbnail.webp",
               "surface": "triton-normal-surface@2x.webp",
               "poles": "triton-normal-poles@2x.webp",
@@ -270,13 +270,13 @@
                 "url": "https://doi.org/10.5066/P9MGH7FB"
               },
               "detail": "Corrected Voyager mosaic",
-              "summary": "Voyager images corrected using their capture geometry. Missing coverage and unreliable views stay empty."
+              "summary": "Each image is corrected using its capture geometry before joining the mosaic. Missing coverage and unreliable views stay empty."
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
               "description": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
-              "title": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
+              "title": "Enhanced-color map",
               "thumbnail": "/scenes/triton/triton-enhanced-thumbnail.webp",
               "surface": "triton-enhanced-surface@2x.webp",
               "poles": "triton-enhanced-poles@2x.webp",
@@ -286,7 +286,7 @@
                 "url": "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
               },
               "detail": "Corrected O/G/B color",
-              "summary": "Voyager orange, green and blue images in enhanced color. Detail varies; the unlit north stays unavailable."
+              "summary": "Orange, green and blue bands form an enhanced-color view. Detail varies; the unlit northern region stays unavailable."
             }
           ]
         },
@@ -487,8 +487,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7a2cf1f2dcc340ad18e9372cef9f032d1249b7844d55d37d3fd7b7c7e5e32881",
-      "bytes": 7626,
+      "sha256": "fb3b4056001a0384a0c9077ac8b64e05d86f85a6ba65a9c43da83a91f60c2a2c",
+      "bytes": 7586,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
