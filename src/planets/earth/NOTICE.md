@@ -1,5 +1,17 @@
 # Earth source notices
 
+## 2025 annual night lights
+
+NASA's Black Marble nighttime lights product, VJ146A4 Collection 2,
+`AllAngle_Composite_Snow_Free`, annual 2025.
+[Product DOI](https://doi.org/10.5067/VIIRS/VJ146A4.002).
+Public raw GeoTIFF mosaic: **Jurij Stare, www.lightpollutionmap.info**.
+[Publisher source and reuse guidance](https://www.lightpollutionmap.info/help.html).
+The publisher identifies the underlying NASA data as CC0 and requests these
+credits when the data are used or displayed. cssEarth averages the radiance
+offline and creates its own logarithmic false-color textures; it does not copy
+the publisher's rendered map or sky-brightness model. No endorsement is implied.
+
 NASA and JPL material is credited to the named missions and institutions. NASA imagery is used under NASA's media usage guidelines; no NASA endorsement is implied. JPL data is factual United States government information, with Caltech/JPL attribution retained.
 
 OpenSpace configuration files are redistributed under the OpenSpace MIT licence in `LICENSE.OPENSPACE-MIT`.

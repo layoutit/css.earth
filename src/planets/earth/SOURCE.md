@@ -7,10 +7,46 @@ Earth is prepared from checked, adapter-owned source snapshots. Runtime reads pr
 - Normal colour: NASA Earth Observatory, Blue Marble Next Generation, December 2004. The checked 21,600 × 10,800 JPEG is `source/blue-marble-december.jpg`.
 - Elevation: GEBCO_2026 numeric land/ice-surface and seafloor height model. See the GEBCO preparation record below; the former Blue Marble shaded-color topography image is retired.
 - Clouds: NASA Visible Earth, Blue Marble Clouds. The checked 8,192 × 4,096 TIFF is `source/blue-marble-clouds.tif`.
-- Night lights: NASA Earth Observatory, Black Marble 2016. The checked global 3 km, 13,500 × 6,750 JPEG is `source/black-marble-2016.jpg`.
+- Night lights: NASA Black Marble VJ146A4 Collection 2, 2025 annual snow-free radiance. The public GeoTIFF mosaic by Jurij Stare is pinned in `source/science/night-lights-2025/radiance.zip`; see the interpretation below. The 2016 JPEG is retained only as an archival comparison input.
 - Navigation marker: NASA image-library Earth globe `GSFC_20171208_Archive_e001016`, checked as `source/earth-navigation.jpg`.
 
 The OpenSpace Earth asset configuration at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516` is checked beside the image sources. It proves the upstream Earth interpretation; the Earth adapter does not fetch OpenSpace assets at runtime.
+
+## Annual night lights
+
+The [NASA VJ146A4.002 product](https://doi.org/10.5067/VIIRS/VJ146A4.002)
+contains NOAA-20 VIIRS yearly, moonlight- and atmosphere-corrected radiance.
+The [public mirror](https://www.lightpollutionmap.info/help.html), by Jurij
+Stare, identifies its 2025 raster as the `AllAngle_Composite_Snow_Free` band.
+We use the raw data, not the site's rendered map or sky-brightness model.
+The actual downloaded TIFF is one Float32 band, 86,400 × 33,600 pixel-area
+cells in EPSG:4326, spanning 180°W–180°E and 75°N–65°S. Pixel spacing is
+15 arc-seconds (about 500 m at the equator). Its declared missing value is
+Float32 −999.9; zero is valid, thresholded background, not a missing pixel.
+The archive identity and numerical samples are recorded in
+`source/science/night-lights-2025/provenance.json`.
+
+Preparation averages numeric radiance over the 8,192 × 4,096 display cells,
+weighting overlaps by spherical area. It excludes missing samples and marks a
+display cell missing if less than half its area has observations. It then
+applies an authored warm logarithmic color transfer, with 0.25 nW/cm²/sr
+softening and saturation at 100 nW/cm²/sr. These are display parameters,
+not calibration factors. No glow, invented lights, background geography or
+sky-brightness conversion is added. The globe, poles, thumbnail, minimap and
+legend all use this interpretation. Missing coverage is gray.
+
+This mirror contains no observation-count or quality bands. We cannot perform
+an additional quality selection: aurora and transient lighting remain in the
+source, especially at high latitudes. This is a 2025 annual snow-free
+observation, not a live map, a complete census of artificial lighting or a
+measurement of how dark the sky looks from the ground.
+
+Source survey checked 2026-09-09: direct NASA 2025 annual granules require
+Earthdata authentication; NASA GIBS annual display mosaics still offer only
+2012/2016; the EOG VNL v2.2 download directory returns HTTP 401. OpenGeoHub's
+public 2024 derivative is older and rescales the numeric values. The selected
+public NASA-derived 2025 raw mosaic retains the original float radiance units
+and has verifiable grid metadata and explicit attribution.
 
 ## Prepared visual atmosphere
 

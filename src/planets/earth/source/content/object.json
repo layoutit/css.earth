@@ -176,14 +176,29 @@
       {
         "id": "night-lights",
         "label": "Night lights",
-        "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
-        "title": "Black Marble night-light composite",
+        "description": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting.",
+        "title": "Black Marble annual night lights · 2025",
         "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
         "source": {
-          "id": "surface-observation"
+          "id": "nasa-black-marble-2025-public-radiance",
+          "url": "https://www.lightpollutionmap.info/help.html"
         },
-        "detail": "Nighttime",
-        "summary": "Artificial lighting is combined from observations taken in 2016. The composite does not show present-day lighting."
+        "detail": "NASA · 2025",
+        "summary": "2025 annual snow-free satellite radiance. Warm false color; logarithmic scale. Gray: missing data or outside 75°N–65°S. Aurora can remain at high latitudes. NASA Black Marble / Jurij Stare, lightpollutionmap.info.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Annual radiance · nW/cm²/sr",
+          "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+          "image": "earth-night-lights-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "0",
+            "≥ 100 nW/cm²/sr"
+          ]
+        },
+        "legendNote": "Logarithmic color scale, capped at 100 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness."
       },
       {
         "id": "enso",
