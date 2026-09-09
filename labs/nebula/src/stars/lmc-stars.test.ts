@@ -116,12 +116,16 @@ test('published magnitude drives a visible diameter and light hierarchy in the p
   function assertHierarchy(points: typeof stars) {
     const sorted = [...points].sort((a, b) => a.magnitude - b.magnitude);
     assert.ok(sorted[0].sizePx / sorted.at(-1)!.sizePx > 3, 'Bright and faint stars need distinct diameters');
-    for (let i = 1; i < sorted.length; i++) {
-      assert.ok(sorted[i-1].sizePx >= sorted[i].sizePx);
-      assert.ok(sorted[i-1].opacity >= sorted[i].opacity);
+    const light = (s: typeof stars[number]) => {
+      const c = s.colorCss.slice(1).match(/../g)!.map(value => parseInt(value,16)/255);
+      return s.sizePx ** 2 * s.opacity * (.2126*c[0]+.7152*c[1]+.0722*c[2]);
+    };
+    for (const point of sorted) {
+      const expected = 10 ** (.4 * (point.magnitude - sorted[0].magnitude));
+      close(light(sorted[0]) / light(point), expected, 1e-9);
     }
-    const light = (s: typeof stars[number]) => s.sizePx ** 2 * s.opacity;
-    assert.ok(light(sorted[0]) / light(sorted.at(-1)!) > 20, 'Bright stars need visibly more integrated light');
+    assert.ok(sorted.at(-1)!.opacity < .1, 'Faint stars must not receive an opacity floor.');
+    assert.ok(light(sorted[0]) / light(sorted.at(-1)!) > 200, 'Measured flux range must survive the display mapping.');
   }
   assertHierarchy(stars);
   assert.throws(() => assertHierarchy(stars.map(s => ({ ...s, sizePx: 2 }))), /distinct diameters/);

@@ -188,7 +188,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
             placement:referenceOverlay.initialPlacement??defaultOverlayPlacement()},
           provenancePin:{path:subject.density!.overlays!,sha256:hash(await pinned(root,subject.density!.overlays!))}}}:{})};
       const pins = Object.fromEntries(await Promise.all(['reconstruction/reconstruction-worker.ts', 'reconstruction/reconstruction-geometry.ts', 'reconstruction/filled-components.ts',
-        'reconstruction/cloud-material.ts', 'reconstruction/density-projection.ts', 'reconstruction/registered-image.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'alignment/overlay-wcs.ts', 'cli/prepare-lmc-stars.ts'].map(async name =>
+        'reconstruction/cloud-material.ts', 'reconstruction/density-projection.ts', 'reconstruction/registered-image.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'alignment/overlay-wcs.ts', 'cli/prepare-lmc-stars.ts', 'stars/star-photometry.ts'].map(async name =>
         [name, hash(await pinned(root, `labs/nebula/src/${name}`))])));
       const identity = { version: 4, request, stars, cloud, sourceSha256: image.sha256, frame, stellarPrior: densityRecipe,
         overlay: { widthPx: overlay.widthPx, heightPx: overlay.heightPx, transform: overlay.style.transform, pivotCssPx: overlay.pivotCssPx }, pins };

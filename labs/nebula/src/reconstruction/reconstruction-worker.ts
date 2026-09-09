@@ -20,7 +20,7 @@ type Progress = { type:'progress'; stage:string; current:number; total:number; m
 export const RECONSTRUCTION_SETTINGS = { analysisWidth:1024,originalWidth:2048,quality:92 };
 const implementationFiles=['reconstruction-worker.ts','reconstruction-geometry.ts','registered-image.ts','cloud-material.ts',
   'reconstruction-stars.ts','filled-products.ts','density-projection.ts'].map(name=>'labs/nebula/src/reconstruction/'+name)
-  .concat(['labs/nebula/src/cli/prepare-lmc-stars.ts','labs/nebula/src/alignment/overlay-wcs.ts','labs/nebula/src/alignment/overlay-geometry.ts','src/preparation/volume/raster.ts','src/renderers/css/preparation/volume.ts']);
+  .concat(['labs/nebula/src/stars/star-photometry.ts','labs/nebula/src/cli/prepare-lmc-stars.ts','labs/nebula/src/alignment/overlay-wcs.ts','labs/nebula/src/alignment/overlay-geometry.ts','src/preparation/volume/raster.ts','src/renderers/css/preparation/volume.ts']);
 const json=async(path:string,value:unknown)=>{const bytes=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,bytes);return sha256(bytes);};
 async function pinned(root:string,pin:{path:string;sha256:string}) {
   if(isAbsolute(pin.path)||!/^[a-f0-9]{64}$/.test(pin.sha256))throw new TypeError('Inputs require repository-relative paths and SHA256 pins.');

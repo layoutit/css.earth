@@ -4,6 +4,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { basename } from 'node:path';
 import type { DensityVolumeFrame } from '@cssearth/objects';
+import { prepareStarPhotometry, STAR_PHOTOMETRY } from '../stars/star-photometry.js';
 import { catalogueColor } from '../../../../src/preparation/stars/color.js';
 import { createObservationMapping, type ObservationMapping } from '../density/observation-prior.js';
 import { sampleEncoded } from '../../../../src/preparation/volume/source.js';
@@ -69,12 +70,10 @@ export function prepareCatalogue(table: string, frame: DensityVolumeFrame, wcs: 
       throw new Error(`Selected star has no prepared visible cloud support: ${name}`);
     const colorIndexBv = Number.isFinite(b) ? b - magnitude : null;
     const rgb = catalogueColor(NaN, colorIndexBv ?? NaN);
-    // Authored point exposure/size, not physical stellar diameter or calibrated radiance.
-    const relativeFlux = 10 ** (-.4 * (magnitude - 10));
+    const colorCss = '#' + rgb.map(v => v.toString(16).padStart(2, '0')).join('');
     stars.push({ id: `Bonanos2009:${name}`, raDeg, decDeg, magnitude, colorIndexBv,
       spectralType: line.slice(273, 305).trim(), positionUnits, cloudSignal, cloudPartIds,
-      sizePx: Math.min(4, Math.max(.65, 4 * relativeFlux ** .25)),
-      colorCss: '#' + rgb.map(v => v.toString(16).padStart(2, '0')).join(''), opacity: .35 + .65 * Math.min(1, relativeFlux ** .2) });
+      colorCss, ...prepareStarPhotometry(magnitude, colorCss) });
   }
   return stars.sort((a, b) => a.magnitude - b.magnitude || a.id.localeCompare(b.id));
 }
@@ -98,14 +97,14 @@ export async function prepareLmcStars() {
     magnitudeBand: 'V', sourceUrl: 'https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003',
     credit: 'Bonanos et al. (2009), AJ 138, 1003; CDS/VizieR J/AJ/138/1003',
     depthAssumption: 'Published J2000 angular positions held fixed; individual depths unmeasured. Depths sample the joint reconstructed-cloud emission and simulation stellar density along each measured sightline. This cloud-contained display realization is not measured stellar distance or evidence of physical cloud membership.',
-    provenance: { sources, depthModel: { ...model.provenance,
+    provenance: { sources, photometry: STAR_PHOTOMETRY, depthModel: { ...model.provenance,
       method: 'Conditional depth PDF proportional to actual coherent extended cloud RGB emission maximum times decoded stellar density times (1+z/D)^2. 1536 intervals span cloud support; a fixed SHA-256 source-ID quantile inverts its piecewise-linear CDF. Chosen points must have strictly positive true joint support. No plane, added thickness, jitter or zero-support fallback.',
       coordinates: '(x,y,z)=(x0*(1+z/D),y0*(1+z/D),z); measured Earth rays are unchanged.',
       limitation: 'Cloud-conditioned display placement, not measured distances. The reconstructed emission and population-agnostic, clipped/quantized simulation mass density are model assumptions. No bright-star selection function or physical cloud membership is inferred.' }, paperUrl: 'https://arxiv.org/abs/0905.1328', doi: '10.1088/0004-6256/138/4/1003',
       selection: 'Table 3 published massive LMC stars with finite Johnson V <= 16, inside the full native SMASH WCS footprint. No foreground catalogue added; this is an incomplete massive-star sample, not all LMC stars.',
       inputRows: table.trimEnd().split('\n').length, selectedRows: stars.length,
       frame: recipe.frame, footprint: { recipe: 'labs/nebula/models/lmc/clouds.json', sha256: sha256(recipeBytes), wcs: recipe.wcs },
-      color: 'Published B-V mapped through the existing catalogue display-color approximation; white when B absent. No dereddening. Sizes and opacity are authored magnitude-dependent display values, not measured diameters or calibrated light.' } };
+      color: 'Published B-V mapped through the existing catalogue display-color approximation; white when B absent. No dereddening. Point area and opacity preserve magnitude-derived relative display light with color compensation. Finite display sizes are not measured stellar diameters; the screen is not a radiometric instrument.' } };
   await mkdir(`${directory}/prepared`, { recursive: true });
   await writeFile(`${directory}/prepared/stars.json`, JSON.stringify(payload, null, 2) + '\n');
   console.log(JSON.stringify({ prepared: `${directory}/prepared/stars.json`, count: stars.length,

@@ -24,7 +24,7 @@ LMC's VISTA, WISE and Horálek images have verified source-registration evidence
 
 Changing an Alignment placement requires Process again. An older saved reconstruction records its original fit; it cannot silently track a later edit to the image. Source switching preserves the camera and loads completed variants without reprocessing.
 
-Brightness, cutoff and the star toggle remain available. See [validation and remaining limits](slice-stability.md).
+Cloud brightness, cutoff and the star toggle remain available. Star **Exposure** scales the shared prepared magnitude-based light; **Size** scales point diameters. Point size and opacity are prepared together so faint stars recede without becoming uniformly bright dots. Their brightness stays the same when switching image material. See [validation and remaining limits](slice-stability.md).
 
 ## Saved state
 

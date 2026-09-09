@@ -40,8 +40,8 @@ export function createCloudStarControls({ host, onChange }: {
       <label className="cloud-density-removed" htmlFor="cloud-stars-enabled"><input id="cloud-stars-enabled" type="checkbox"
         checked={state.options.enabled} onChange={event => { options = { ...options, enabled: event.currentTarget.checked }; publish(); }} /> Show catalog stars</label>
       {(['brightness', 'size'] as const).map(key => <div className="cloud-brightness-control" key={key}>
-        <label htmlFor={`cloud-stars-${key}`}>{key === 'brightness' ? 'Brightness' : 'Size'}</label>
-        <input type="range" id={`cloud-stars-${key}`} min={key === 'size' ? 50 : 0} max={key === 'size' ? 300 : 100} step={key === 'size' ? 5 : 1}
+        <label htmlFor={`cloud-stars-${key}`}>{key === 'brightness' ? 'Exposure' : 'Size'}</label>
+        <input type="range" title={key === 'brightness' ? 'Scale the prepared star light together, preserving relative brightness.' : 'Scale all point diameters together.'} id={`cloud-stars-${key}`} min={key === 'size' ? 50 : 0} max={key === 'size' ? 300 : 100} step={key === 'size' ? 5 : 1}
           value={Math.round(state.options[key] * 100)} onInput={event => { options = { ...options, [key]: Number(event.currentTarget.value) / 100 }; publish(); }} />
         <output htmlFor={`cloud-stars-${key}`}>{Math.round(state.options[key] * 100)}%</output>
       </div>)}
