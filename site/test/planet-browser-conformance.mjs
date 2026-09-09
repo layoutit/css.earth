@@ -738,10 +738,12 @@ async function surfaceFlyCoordinates(page) {
     // space. Use the same prepared-triangle picker as native input.
     coordinates.surface = await page.evaluate(async ({ id, hit, preferred, moduleUrl }) => {
       const { bindPreparedSurfaceHit } = await import(moduleUrl);
-      const camera = document.querySelector('.polycss-camera');
-      const scene = document.querySelector('.polycss-scene');
-      if (scene.querySelectorAll(`.${id}-body`).length !== 1 || document.querySelectorAll('.polycss-scene').length !== 1) {
-        throw new Error('Surface qualification requires one retained body and scene');
+      const camera = document.querySelector('.planet-stage > .polycss-camera');
+      const scene = camera?.querySelector('.polycss-scene');
+      // Prepared depth groups repeat transform wrappers beneath one camera.
+      // Surface picking uses the first, retained reference body transform.
+      if (!scene || scene.querySelectorAll(`.${id}-body`).length !== 1 || document.querySelectorAll('.planet-stage > .polycss-camera').length !== 1) {
+        throw new Error('Surface qualification requires one retained camera and reference body');
       }
       const pick = bindPreparedSurfaceHit(hit, scene.querySelector(`.${id}-body`), scene, camera,
         () => document.querySelector('.planet-stage').dataset.lens);

@@ -20,4 +20,27 @@ The shared parameter loader subdivides an octahedron and scales it to the author
 
 Numerical checks use the published ratios, independent Horizons vectors and analytic ellipsoid surfaces. The sampled distance bounds use projected analytic surface points, covering every retained vertex, edge midpoint and face centre. They bound nearest-surface distance for those samples; they are neither exhaustive bounds nor observational accuracy. The fixed pole conversion is independently inverted to recover the published coordinates. Existing Tuttle geometry checks cover the extracted common tessellation.
 
-Delivery, browser results and gate receipts are recorded with the final reviewed assets below.
+## Delivery and browser evidence
+
+The [review receipt](evidence/lightcurve-review.json) pins the compiled payloads, source manifests and all 93 runtime assets. A fresh installer downloaded all 93 files and verified their hashes. Production browser responses matched those bytes at DPR 1 and 2. Each nucleus retained 800 native `u` leaves with 64 × 64 pixel raster cells. Each material atlas is 1,024 × 3,200 pixels: 13,107,200 decoded RGBA bytes per bank. This is pixel storage, not measured GPU residency.
+
+The three packages passed 33 shared browser-conformance cases. After integrating the latest navigation changes, the desktop cases passed again for all three and for Tuttle. Production checks covered the actual grid pixels, both lighting settings, drag, wheel, compact layouts and stable DOM identity. Search navigation visited all three while retaining the shared sidebar and one object camera. All ten comets passed the default-off and opt-in Shadows checks across 29 datasets.
+
+The generic browser tests now account for prepared depth groups repeating transform wrappers under one camera. Camera setter limits are checked and restored in one task: deliberately holding the furthest dolly distance enters the solar-system overview, so it cannot be held during the following tests of a retained detailed object.
+
+Other completed checks:
+
+- 668 astronomy tests, including independent Horizons vectors for the three additions.
+- 12 focused geometry and lighting tests; 30 source and runtime-asset closure checks across all ten comets.
+- 73 shared shell, router, overview and framing checks after integration of main `6c8169e95`.
+- Clean source restoration with 17 byte-verified entries per new package; package, renderer and preparation typechecks.
+- All 304 pinned JSON transports reproduced; the 305-route production build and complete runtime-asset assembly passed.
+- A semantic audit against main preserved the geometry, materials and camera fields of all 301 existing packages. Their descriptor/runtime changes are shared marker bindings and payload hashes; the Sun also receives the three world-context source entries.
+
+Repository-wide checks are not all green. Nine renderer failures involving Earth paging and Deimos depth fixtures were independently reproduced from main `3eeb7a414`. Broader platform/shell runs also encountered existing fixture/profile errors and default-heap exits; the shell run was stopped after those exits. The new objects' missing unit-test directories found by that run were fixed, and the discovery check then passed. These aggregate runs are not claimed as passing gates.
+
+![137P with an unshaded grid](evidence/lightcurve-comet-137p.webp)
+
+![143P with an unshaded grid](evidence/lightcurve-comet-143p.webp)
+
+![162P with an unshaded grid](evidence/lightcurve-comet-162p.webp)
