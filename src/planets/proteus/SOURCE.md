@@ -3,6 +3,7 @@
 ## Selected views and limits
 
 - **Monochrome:** clear-filter frames C1137317 and C1138920. The close frame provides about 1.14 km per geometrically corrected pixel; the other hemisphere is about 6.81 km/pixel. Native detector scale is respectively 1.35 and 8.03 km/pixel. The close image has strong dark-current background and low signal-to-noise; grain and differing resolution are source limitations. It is not an HD terrain survey.
+- **Filter color:** original green C1137350, blue C1137339 and violet C1137328 shown as red, green and blue, with one independently registered camera per band. This is a coarse filter-color observation, not true color or a calibrated albedo map. Only the common reliable interior is mapped; roughly 40 km or coarser near the image centre is a conservative interpretation scale.
 - **Elevation:** Stooke `n8proteus.tab`, radial height relative to 208 km, displayed from −35 to +25 km. The displayed shape uses 1,100 triangles with a 2 km simplification-error ceiling, below the 2,000-leaf budget.
 
 ## Candidate survey
@@ -10,7 +11,7 @@
 | Candidate | Decision |
 | --- | --- |
 | [Original Voyager ISS archive](https://pds-rings.seti.org/voyager/iss/), clear frames C1137317 / C1138920 | Included: complementary coverage and the closest available observation. |
-| Violet C1137328, blue C1137339, green C1137350 | Inspected original calibrated frames. Excluded from this PR: the roughly 50–60-pixel disc and long-exposure blur do not yield a reliable useful mapped colour layer at the close frame's detail. This does not mean colour observations do not exist. |
+| Violet C1137328, blue C1137339, green C1137350 | Included as a separate coarse filter-color lens after per-frame source-geometry and limb-registration checks. The roughly 60-pixel discs and long exposures cannot supply the close clear frame's detail; no clear-frame sharpening is transferred into color. |
 | [Ted Stryk colour composite](https://www.planetary.org/space-images/proteus_stryk) | Excluded as a texture: published under CC BY-NC-ND; no permission to reproject or redistribute derivatives is provided. |
 | Stooke global radius grid and shaded-relief drawings | Radius grid included as shape/Elevation; interpretive drawings excluded as photographic imagery. |
 | USGS/PDS map and terrain products; Stooke 1994 linked research | No separately registered colour, altimetric DEM or composition product was qualified. The paper download was unavailable; any linked data not present in the PDS release remain unresolved, not claimed absent. |
@@ -25,11 +26,21 @@ A measured constant sky median is subtracted before the existing bounded lunar-L
 
 Elevation is radius relative to the stated reference sphere, coloured with the shared elevation palette and prepared relief. It communicates broad shape, not a geoid, altimetry, or a high-resolution terrain survey. The minimap, surface, native triangle atlases and navigation portrait use the same interpretation. Navigation keeps the complete model silhouette while marking photographic gaps.
 
+## Coarse filter-color registration
+
+Each color frame is the original 1,000×1,000 signed HALF GEOMED product. FICOR77 dark-current subtraction and its explicit multiplier give I/F = DN × 0.0001. The archive [PROCESSING.TXT](https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DOCUMENT/PROCESSING.TXT) describes signed calibration, reseau/blemish repair and interpolation across missing raw strips. These standard processed products retain blur, noise and possible repair artifacts; they are not raw detector coverage masks. No special missing constant is declared for GEOMED. Exterior zero padding and connected low-signal sky are masked before signed finite interior contributors are interpolated. Negative values are not automatically missing; only final display values are clamped.
+
+`source/geometry/color-registration.json` records a translation fit to the full 5,040-triangle source outline, with OPUS observer/Sun directions and range and SEDR CK/PCK roll fixed. Alternating 45-degree sunlit sectors fit the centre; the intervening sectors are withheld. Nominal held-out RMS errors are violet 1.18, blue 1.34 and green 1.64 corrected pixels. Four additional ±2-pixel initializations change the fitted centres by less than 0.35 pixel; the largest held-out discrepancy across those runs is 4.6 pixels. The authored six-pixel envelope is conservative working uncertainty, not a confidence interval or absolute ground truth. A nine-pixel Manhattan inset guarantees at least 6.36 pixels of Euclidean separation from known invalid boundaries. No new fit is adopted for the noisy closest clear frame.
+
+Independent sky samples are retained in `source/geometry/color-background.json`: medians −0.0017, −0.0011 and −0.0037 I/F for violet, blue and green, respectively. Subtract each measured offset, use its own three-MAD-sigma sky threshold, and require all three band masks and complete bilinear contributors to be valid. A common display ceiling of 0.10 I/F and gamma 1 follows bounded lunar-Lambert normalization (weight 0.5, gain at most 2.5, incidence/emission at most 60°). Channel gains remain exactly 1; this does not white-balance, histogram-match or pan-sharpen the observations. The applied illumination model is a display normalization, not an albedo inversion.
+
+The reproducible source check is `python source/preparation/register-voyager-color.py source` from this package with numpy, spiceypy and Node available. It verifies source hashes and compares the retained registration receipt without changing images. `--write` regenerates only that receipt; the source manifest must then be repinned deliberately. The focused object tests independently check signed DN/I/F samples in all three bands and exercise the real three-camera intersection, including complete loss of coverage when one band is absent.
+
 ## Sources and restoration
 
 - [Stooke PDS release](https://sbn.psi.edu/pds/resource/stkshape.html), Stooke (2025), DOI **10.26033/yt84-5y91**; underlying research: Stooke (1994), DOI 10.1007/BF00572198.
 - [PDS Voyager processing](https://pds-rings.seti.org/voyager/iss/calib_images.html) and [ISS pointing kernels](https://pds-rings.seti.org/voyager/ck/).
-- Geometry files preserve the original OPUS responses, PDS CK and NAIF clock/frame/leap-second kernels. `source/shape/pck00011.tpc` owns pole/spin conventions. Display ephemerides use the vendored astronomy package; Larissa's fitted precessing orbit has a measured maximum position residual of 472 km over the checked 1900–2100 Horizons fixture epochs. Do not claim navigation ephemeris precision beyond the recorded model budget.
+- Geometry files preserve the original OPUS responses, PDS CK and NAIF clock/frame/leap-second kernels. `source/shape/pck00011.tpc` owns pole/spin conventions. The displayed ephemeris and IAU/WGCCRE spin use the vendored astronomy package and are separate from the 1989 image-registration inputs.
 - `source/manifest.json` pins the original inputs and authored documents; `source/preparation/acquisition.json` restores missing image, radius-table, font and starfield inputs. Required small geometry documents and the pinned navigation portrait are checked in, so a fresh source restore does not depend on an ignored generated image.
 
 Runtime install: `pnpm setup:assets --object=proteus`.

@@ -7,6 +7,6 @@ export const browserProfile = createObjectBrowserProfile({ id: "miranda", contro
     canonicalPreparedAssets: ["/scenes/miranda/miranda-normal-surface@2x.webp", "/scenes/miranda/miranda-normal-poles@2x.webp", "/scenes/miranda/miranda-lighting.webp"],
     lensRace: { defaultId: "normal", slowId: "elevation", winnerId: "normal",
       slowAsset: "/scenes/miranda/miranda-elevation-surface@2x.webp", preReadyDisabled: true },
-    retained: { lensIds: ["normal", "elevation"], allowedMountSelectors: [] },
+    retained: { lensIds: objectControls.lenses.controls.map(lens => lens.id), allowedMountSelectors: [] },
   },
 });

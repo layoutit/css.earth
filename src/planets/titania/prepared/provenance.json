@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "titania",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea76808960d4041dfb460a3e43c1000ba7168dbaaad58dbb79dbb5e92c65f32e"
+    "sha256": "8682d5cde7e1d1bf7f9c125f3bacd812808de5612ef5387042b49fdd45e0b1db"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1ebfe0a4bf61ef7791f2365b91a561dcf4f79664592406fff6c854e1310081ad",
+      "sha256": "66af3b3720282972302367646b5d22f5f84790c4319c8d7a2da3a112788f5c6f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -113,6 +113,93 @@
                 ],
                 "ambient": 0.25
               }
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "format": "geotiff",
+              "path": "science/geology-2026/categories.tif",
+              "consumer": "geology-surfaces",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": 0,
+              "maximum": 9,
+              "colors": [
+                "#000000",
+                "#730000"
+              ],
+              "categories": [
+                {
+                  "value": "darkalbedopatches",
+                  "label": "Dark Albedo Patches",
+                  "color": "#000000"
+                },
+                {
+                  "value": "CrCraterslinew_FeatureToPoly1",
+                  "label": "Crater rim massifs",
+                  "color": "#73b2ff"
+                },
+                {
+                  "value": "CrCraterslinew_FeatureToPoly",
+                  "label": "Elongate Craters",
+                  "color": "#0070ff"
+                },
+                {
+                  "value": "c1cratersshp",
+                  "label": "Moderately degraded craters",
+                  "color": "#e69800"
+                },
+                {
+                  "value": "c2cratersshp",
+                  "label": "Fresh appearing, no rays",
+                  "color": "#cdaa66"
+                },
+                {
+                  "value": "C3Craterslinew_FeatureToPoly",
+                  "label": "Rayed/bright deposit craters",
+                  "color": "#d7c29e"
+                },
+                {
+                  "value": "PhLinework_FeatureToPolygon",
+                  "label": "Heavily cratered plains",
+                  "color": "#895a44"
+                },
+                {
+                  "value": "Pm",
+                  "label": "Moderately cratered Plains",
+                  "color": "#704489"
+                },
+                {
+                  "value": "Ps",
+                  "label": "Smooth Plains",
+                  "color": "#267300"
+                },
+                {
+                  "value": "Pb",
+                  "label": "Bright Slope Material",
+                  "color": "#730000"
+                }
+              ],
+              "description": "Historical interpreted geology · reconstructed registration",
+              "title": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+              "sourceUrl": "https://zenodo.org/records/20819132",
+              "grid": {
+                "width": 1440,
+                "height": 720,
+                "projection": "equirectangular",
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 788900,
+                "noData": 65535,
+                "origin": [
+                  -2478402.4444169877,
+                  1239201.2222084939
+                ],
+                "resolutionMeters": 3442.2256172458165,
+                "latitudeRange": [
+                  -90,
+                  0
+                ]
+              }
             }
           ],
           "observedColors": []
@@ -155,7 +242,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4ef2cc6d8f39cdd03a054e27c3ddf2da650ee247f7809e135cd606c4d31fe4f7",
+      "sha256": "458a227ac06134254e4e4bf51a5c557f4f8a49b4e4efbe6936eef2c8d39d4149",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -226,7 +313,8 @@
           "defaultLens": "normal",
           "labels": {
             "normal": "Monochrome",
-            "elevation": "Elevation"
+            "elevation": "Elevation",
+            "geology": "Geology"
           },
           "controls": [
             {
@@ -274,6 +362,98 @@
                 "image": "/scenes/titania/titania-elevation-legend.webp"
               },
               "summary": "Voyager stereo and limb heights relative to the source ellipsoid. Detail varies; gray grid: no data."
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "detail": "Historical map",
+              "description": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+              "title": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+              "summary": "Historical interpreted units; reconstructed registration. Gray grid: unmapped or conflicting units.",
+              "thumbnail": "/scenes/titania/titania-geology-thumbnail.webp",
+              "surface": "titania-geology-surface@2x.webp",
+              "poles": "titania-geology-poles@2x.webp",
+              "falseColor": true,
+              "source": {
+                "id": "geology-2026-categories",
+                "path": "../manifest.json",
+                "url": "https://zenodo.org/records/20819132"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Historical geologic category"
+                },
+                {
+                  "id": "registration",
+                  "label": "Independent checks",
+                  "value": "Four crater centres · 0.33–0.83° residual"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Mapped coverage",
+                  "value": "About 35% of the reference sphere"
+                }
+              ],
+              "legend": {
+                "kind": "categories",
+                "title": "Historical geologic units",
+                "meta": "Source layer names and colors; reconstructed map registration.",
+                "sourceUrl": "https://zenodo.org/records/20819132",
+                "items": [
+                  {
+                    "label": "1",
+                    "description": "Dark Albedo Patches",
+                    "color": "#000000"
+                  },
+                  {
+                    "label": "2",
+                    "description": "Crater rim massifs",
+                    "color": "#73b2ff"
+                  },
+                  {
+                    "label": "3",
+                    "description": "Elongate Craters",
+                    "color": "#0070ff"
+                  },
+                  {
+                    "label": "4",
+                    "description": "Moderately degraded craters",
+                    "color": "#e69800"
+                  },
+                  {
+                    "label": "5",
+                    "description": "Fresh appearing, no rays",
+                    "color": "#cdaa66"
+                  },
+                  {
+                    "label": "6",
+                    "description": "Rayed/bright deposit craters",
+                    "color": "#d7c29e"
+                  },
+                  {
+                    "label": "7",
+                    "description": "Heavily cratered plains",
+                    "color": "#895a44"
+                  },
+                  {
+                    "label": "8",
+                    "description": "Moderately cratered Plains",
+                    "color": "#704489"
+                  },
+                  {
+                    "label": "9",
+                    "description": "Smooth Plains",
+                    "color": "#267300"
+                  },
+                  {
+                    "label": "10",
+                    "description": "Bright Slope Material",
+                    "color": "#730000"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -395,7 +575,7 @@
       "sha256": "9bafb22e1b0be35212c078d77e9f1364e3ff6b6873d0e98c4073055f29ed91ae",
       "bytes": 2336639,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -452,7 +632,7 @@
       "sha256": "3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d",
       "bytes": 1807867,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -461,6 +641,28 @@
         "path": "science/tudem-ZL-180180.cub.gz",
         "url": "https://earth-assets.lowpoly.cc/source-assets/3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d/tudem-ZL-180180.cub.gz"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "geology-2026-categories",
+      "path": "science/geology-2026/categories.tif",
+      "width": 1440,
+      "height": 720,
+      "origin": "https://zenodo.org/records/20819132",
+      "credit": "Bradley Thomson and Devon Baynham (2026), after Croft and Soderblom (1991); cssEarth reconstructed registration and categorical conversion",
+      "license": "CC BY 4.0; preserve source credit and identify transformations.",
+      "acquisition": "Checked-in derived categorical grid. Reproduce with tools/objects/prepare-geologic-categories.py source/preparation/geology-conversion.json using the pinned original GIS and registration.",
+      "coverage": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+      "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
+      "licenseEvidence": [
+        "science/geology-2026/release-metadata.json"
+      ],
+      "sha256": "fae52df10d453d09be1c98f7d000ff12ae56d0ffa3304190cb45f4fb838f038e",
+      "bytes": 25962,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -473,10 +675,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ea57a3457746e91294f7634767b33d4f6fcdfaa5206303e71b65942a7c52e0ee",
-      "bytes": 9517,
+      "sha256": "458a227ac06134254e4e4bf51a5c557f4f8a49b4e4efbe6936eef2c8d39d4149",
+      "bytes": 13358,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -533,19 +735,19 @@
           "url": "/scenes/titania/titania-normal-thumbnail.webp",
           "bytes": 2376,
           "sha256": "559168c5b6896b45a38cf97216e0f0c1ab347bc86efcf7d3b7cf778426357b74",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-normal-surface@2x.webp",
           "bytes": 1169534,
           "sha256": "07e110844224ceca891ba1f43e7bf63abc9b900e56f1252669c81d007d244847",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-normal-poles@2x.webp",
           "bytes": 46004,
           "sha256": "07bcdbb611b2c20a11b59ee0e1ddf4e2d71ebbfb5e96e09a3f7b9589f24a379e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -578,25 +780,70 @@
           "url": "/scenes/titania/titania-elevation-thumbnail.webp",
           "bytes": 4100,
           "sha256": "051bec112da850ce605c1ebcda492a30de73f44e634a2a03e37e3924df3d45c4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-elevation-surface@2x.webp",
           "bytes": 1215966,
           "sha256": "d0f73e0dfe9f4e3fd7737d9e0d3525a7a1effd8b251ee77917050bd04a0e6d9c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/titania/titania-elevation-poles@2x.webp",
           "bytes": 81140,
           "sha256": "1caa22c354d3dec55797ba078838ce6befb383eea52135727af6babfa1baca07",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown."
+      },
+      "inputs": [
+        "geology-2026-categories"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/titania/titania-geology-thumbnail.webp",
+          "bytes": 488,
+          "sha256": "e1a4882282da1ebf63a240429b18bcda7ba02adf1ef481e4016f4872ae58ea30",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titania/titania-geology-surface@2x.webp",
+          "bytes": 67924,
+          "sha256": "e50a126ba67b82708f3788bfe35fbe1dd42f258bc7304135933d232c177eb1a0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/titania/titania-geology-poles@2x.webp",
+          "bytes": 25898,
+          "sha256": "8ca1ffeb055a5e396fcff33d74e57fc2fbf33e8d7ba4a06ddad836efd71b3724",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -670,6 +917,30 @@
           "url": "object:prepared/minimaps/elevation.webp",
           "bytes": 21556,
           "sha256": "744efa3ad44aabb1ee550d907ad5f54cef4a4157eb462977e5096bdc856ba08e",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:geology",
+      "label": "Geology preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "geology"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/geology.webp",
+          "bytes": 13906,
+          "sha256": "caa31fcf74928ab32d87e4479b158d067b029964fa44698fe2fed6c2d5124b55",
           "verification": "bytes-verified"
         }
       ]

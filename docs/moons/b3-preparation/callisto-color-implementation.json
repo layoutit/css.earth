@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-b3-callisto-color-implementation@1",
+  "status": "source implementation and four focused source tests passed; body bake and runtime/browser qualification pending",
+  "bodyId": "callisto",
+  "lensId": "enhanced",
+  "label": "Galileo color",
+  "newCapability": "Registered partial processed-color surface from Galileo PIA03456. No change to the native monochrome source, physical shape or orbital epoch.",
+  "source": {
+    "path": "src/planets/callisto/source/observations/PIA03456-usgs.png",
+    "bytes": 821031,
+    "sha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638"
+  },
+  "registered": {
+    "path": "src/planets/callisto/source/observations/PIA03456-registered-rgba.tif",
+    "bytes": 771611,
+    "sha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32"
+  },
+  "registration": {
+    "path": "src/planets/callisto/source/validation/galileo-color-registration.json",
+    "bytes": 8943,
+    "sha256": "679e4ded797e5cb43854a52249c3e784ae5835aeb6b2255c141d7a19b32f5eba"
+  },
+  "converter": {
+    "path": "src/planets/callisto/source/preparation/prepare-galileo-color.py",
+    "bytes": 7090,
+    "sha256": "9b16349842530308f75826ae398f2f6f721d17ee40d98cead6eb41d67bd6f8ea"
+  },
+  "recipe": {
+    "path": "src/planets/callisto/source/preparation/galileo-color-conversion.json",
+    "bytes": 808,
+    "sha256": "1b1f567714604ca209ec742fc5ecc18ed6d059f9f95e7cf405262d6f12349e7e"
+  },
+  "proof": {
+    "path": "src/planets/callisto/source/validation/galileo-color-conversion-proof.json",
+    "bytes": 1349,
+    "sha256": "5efaaf14b6df66b1adb3059ddef7d57da4cc7da3f204352c2b33938e404054d4"
+  },
+  "limits": [
+    "Published display colors, not calibrated I/F or measured albedo; no new radiometric correction.",
+    "65-degree maximum emission with all native contributing source alphas exactly255. 28.7352486568% spherical coverage; all other surface remains missing.",
+    "Approximately8km-class center detail; coarser foreshortened coverage toward the edge. Derived0.25-degree grid/8192pixel runtime atlas do not increase source resolution.",
+    "Physical camera radius2410300m differs from controlled reference-map radius2409300.0488m.",
+    "Local0-1pixel registration checks are comparison diagnostics, not absolute geodetic accuracy or a camera covariance.",
+    "The controlled reference supplied registration evidence only; no reference color/texture enters the derivative."
+  ],
+  "registrationChecks": {
+    "trainNcc": 0.8374308769465191,
+    "heldoutLowpassNcc": [
+      0.8322815354799907,
+      0.6830660611628557
+    ],
+    "heldoutUnblurredNativeNcc": [
+      0.7131736795216416,
+      0.5727420903175885
+    ],
+    "namedLandmarks": 8,
+    "holdoutDiagnosticShiftsApplied": false
+  },
+  "sourceTests": {
+    "command": "node --test tests/objects/unit/callisto/color-source.test.mjs",
+    "passed": 4,
+    "failed": 0,
+    "coverage": "Exact source/recipe/generator/derivative pins; eight independent landmarks; every1,036,800RGBAtexel versus original plate and65-degree mask; actual shared GeoTIFF decoder footprint and pixels on360x180target."
+  },
+  "sourceReproduction": {
+    "schema": "cssearth-callisto-source-reproduction-check@1",
+    "equalCompressedTiffSha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32",
+    "originalPinRejection": {
+      "exitCode": 1,
+      "error": "Source pin differs: observations/PIA03456-usgs.png",
+      "derivativeWritten": false
+    },
+    "originalInputUnchanged": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638"
+  },
+  "pending": [
+    "Normal authored body preparation; actual retained-atlas and two-lens runtime tests.",
+    "Root-owned integrated metadata, browser profile, DPR1/2 real-Chrome qualification and aggregate gates."
+  ]
+}

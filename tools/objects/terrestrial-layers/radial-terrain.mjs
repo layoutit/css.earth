@@ -86,7 +86,7 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
 export async function simplifyRadialShape(mesh, profile, scale) {
   const { targetFaces, maximumErrorMeters } = profile.simplification;
   if (!mesh.positions || !mesh.indices || !Number.isInteger(targetFaces) || targetFaces < 4 ||
-      !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 2000 ||
+      !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 4000 ||
       !(maximumErrorMeters > 0) || !Number.isFinite(maximumErrorMeters) || !(scale > 0) ||
       ['regularize', 'prune'].some(key => profile.simplification[key] !== undefined && typeof profile.simplification[key] !== 'boolean')) throw new TypeError('Invalid source mesh simplification.');
   await MeshoptSimplifier.ready;
@@ -253,6 +253,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
     const flood = Buffer.alloc(width * height * 4), shadow = Buffer.alloc(width * height * 4);
+    const nearest = surface.displaySampling === 'nearest';
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
     const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
@@ -345,10 +346,12 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const lat = Math.atan2(point[2], Math.hypot(point[0], point[1]));
         const sx = lon * info.width - .5, sy = Math.max(0, Math.min(info.height - 1, (.5 - lat / Math.PI) * info.height - .5));
         const x0 = (Math.floor(sx) + info.width) % info.width, x1 = (x0 + 1) % info.width, y0 = Math.floor(sy), y1 = Math.min(info.height - 1, y0 + 1), tx = sx - Math.floor(sx), ty = sy - y0;
+        const nearestX = Math.floor(lon * info.width) % info.width;
+        const nearestY = Math.max(0, Math.min(info.height - 1, Math.floor((.5 - lat / Math.PI) * info.height)));
         for (let channel = 0; channel < 3; channel++) {
           const top = map[(y0 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y0 * info.width + x1) * 4 + channel] * tx;
           const bottom = map[(y1 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y1 * info.width + x1) * 4 + channel] * tx;
-          const color = top * (1 - ty) + bottom * ty;
+          const color = nearest ? map[(nearestY * info.width + nearestX) * 4 + channel] : top * (1 - ty) + bottom * ty;
           flood[offset + channel] = Math.round(color * (light?.flood ?? 1));
           shadow[offset + channel] = Math.round((light ? color : Math.round(color)) * illumination);
         }
@@ -356,7 +359,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       }
     }
     // Scientific colours retain exact palette values; the numeric source index is preparation-only.
-    const encoding = scalarSources ? { lossless: true, effort: 4 } : { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
+    const encoding = scalarSources || nearest ? { lossless: true, effort: 4 } : { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
     surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw: { width, height, channels: 4 } }), encoding);
     surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
     surface.polesUrl = surface.surface.url;

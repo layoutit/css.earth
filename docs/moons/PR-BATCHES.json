@@ -1,5 +1,5 @@
 {
-  "checkedOn": "2026-09-08",
+  "checkedOn": "2026-09-09",
   "preference": "Substantial end-to-end PR batches with named cohorts and measurable outcomes.",
   "firstBatch": "B1",
   "batches": [
@@ -114,7 +114,7 @@
         "Saturn|VI",
         "Pluto|I"
       ],
-      "state": "draft-pr",
+      "state": "merged",
       "owner": "Moons",
       "branch": "feat/moons-scientific-surfaces",
       "baseCommit": "55bda12f012e77e2206d41661a886c84fb01362d",
@@ -186,7 +186,9 @@
         "carriedTo": "B3"
       },
       "pullRequest": "https://github.com/layoutit/cssEarth/pull/62",
-      "draft": true
+      "draft": false,
+      "mergedAt": "2026-09-09T10:35:37Z",
+      "mergeCommit": "ef07fac2d3208e201dafc626374b30ed4644f561"
     },
     {
       "id": "B3",
@@ -207,7 +209,7 @@
         "Miranda"
       ],
       "outcome": "Two prospective new imaged moons, eight existing observation/registration improvements, and the Titania/Miranda geologic maps carried forward from B2.",
-      "scope": "Dactyl/Selam source reconstruction; Nix/Hydra mesh-camera registration; source-specific observation, color or mapping work for the other six existing bodies.; Titania and Miranda digitized geologic maps, pending release access and registration.",
+      "scope": "Dactyl/Selam source reconstruction; Nix/Hydra mesh-camera registration; source-specific observation, color or mapping work for the other six existing bodies; Titania and Miranda digitized geologic maps, pending release access and registration.",
       "delivery": "Deliver the observed views and all required camera/attitude, photometric, visibility and coverage preparation. Include source-frame comparisons and holdout registration evidence across the cohort. Any necessary shared registration improvements ship with these complete uses.",
       "closure": "This batch carries substantial research risk: several fitted attitudes, original calibrated frames or numeric mapping releases remain unresolved. Resolve the target-specific blocker in the review before opening the implementation PR. A new full-disk photograph may support a dated observation view without becoming a global texture. Titania and Miranda require the exact identified GIS releases; archive-access failures remain unresolved.",
       "acceptance": "Two new scene claims require qualified geometry as well as real images. Each existing body gains a defensible observation improvement; photographed lighting, unseen terrain, source sampling and temporal differences remain clear. The full cohort is the planning target, with any scope change recorded explicitly.",
@@ -225,8 +227,34 @@
         "Uranus|III",
         "Uranus|V"
       ],
-      "state": "planned",
-      "owner": "Moons"
+      "state": "implementation",
+      "owner": "Moons",
+      "branch": "feat/moons-spacecraft-mapping",
+      "baseCommit": "ef07fac2d3208e201dafc626374b30ed4644f561",
+      "report": "B3-SPACECRAFT-MAPPING.md",
+      "progress": {
+        "sourceReviewedBodies": 12,
+        "preparedBodies": [
+          "Titania",
+          "Miranda",
+          "Hyperion",
+          "Proteus"
+        ],
+        "implementationBodies": [
+          "Callisto",
+          "Phoebe"
+        ],
+        "qualifiedBodies": 0,
+        "report": "B3-SPACECRAFT-MAPPING.md",
+        "sourceOnlyBodies": [
+          "Dactyl",
+          "Selam",
+          "Thebe",
+          "Aegaeon",
+          "Nix",
+          "Hydra"
+        ]
+      }
     },
     {
       "id": "B4",

@@ -1,0 +1,365 @@
+{
+  "schema": "cssearth-controlled-camera-registration@1",
+  "body": "hyperion",
+  "observation": "N1506391424_2_CALIB",
+  "checkedOn": "2026-09-09",
+  "sourceFrame": "Thomas September 2005 Hyperion controlled body frame, west-positive input; east-positive mesh XYZ",
+  "publishedCamera": {
+    "id": "n1506391424",
+    "observerLatitude": 10.62,
+    "observerWestLongitude": 204.06,
+    "sunLatitude": 11.11,
+    "sunWestLongitude": 255.22,
+    "rangeKm": 16782.2,
+    "northAzimuthDegrees": 328.6,
+    "center": [
+      73,
+      388.2
+    ],
+    "pixelAngleMicroradians": 5.9896977199
+  },
+  "acceptedCamera": {
+    "id": "n1506391424",
+    "observerLatitude": 10.62,
+    "observerWestLongitude": 204.06,
+    "sunLatitude": 11.11,
+    "sunWestLongitude": 255.22,
+    "rangeKm": 16782.2,
+    "northAzimuthDegrees": 329.3949554495464,
+    "center": [
+      72.10596576651524,
+      374.01763246187295
+    ],
+    "pixelAngleMicroradians": 5.9896977199
+  },
+  "cameraChange": {
+    "northAzimuthDeltaDegrees": 0.7949554495463644,
+    "centerDeltaPixels": [
+      -0.89403423348476,
+      -14.182367538127039
+    ],
+    "pixelAngleUnchanged": true,
+    "rangeAndSubobserverSolarGeometryUnchanged": true
+  },
+  "fit": {
+    "tag": "1024",
+    "method": "Two preselected disjoint fit quadrants determine a rigid detector-plane rotation and translation only; two other quadrants held out. Pixel scale fixed. Difference-of-Gaussian 3/32 pixels for correlation, unchanged source I/F retained.",
+    "patches": [
+      {
+        "role": "fit",
+        "window": [
+          192,
+          192,
+          384,
+          384
+        ],
+        "centre": [
+          288.0,
+          288.0
+        ],
+        "offset": [
+          0.377492219209671,
+          -11.290508061647415
+        ],
+        "ncc": 0.9803884029388428,
+        "peakAtSearchBoundary": false,
+        "rigidPredictedOffset": [
+          0.4754612060946215,
+          -11.189782086719049
+        ],
+        "residualPixels": 0.14051207925489345
+      },
+      {
+        "role": "holdout",
+        "window": [
+          656,
+          192,
+          848,
+          384
+        ],
+        "centre": [
+          752.0,
+          288.0
+        ],
+        "offset": [
+          1.2026250809431076,
+          -3.654606908559799
+        ],
+        "ncc": 0.9837673306465149,
+        "peakAtSearchBoundary": false,
+        "rigidPredictedOffset": [
+          0.4308009370754462,
+          -4.752178875102402
+        ],
+        "residualPixels": 1.3417811784330724
+      },
+      {
+        "role": "holdout",
+        "window": [
+          192,
+          656,
+          384,
+          848
+        ],
+        "centre": [
+          288.0,
+          752.0
+        ],
+        "offset": [
+          -2.4845826625823975,
+          -15.833368942141533
+        ],
+        "ncc": 0.9828969836235046,
+        "peakAtSearchBoundary": false,
+        "rigidPredictedOffset": [
+          -5.962142005522026,
+          -11.234442355738338
+        ],
+        "residualPixels": 5.765721527336613
+      },
+      {
+        "role": "fit",
+        "window": [
+          656,
+          656,
+          848,
+          848
+        ],
+        "centre": [
+          752.0,
+          752.0
+        ],
+        "offset": [
+          -5.908833287656307,
+          -4.696113169193268
+        ],
+        "ncc": 0.9860177040100098,
+        "peakAtSearchBoundary": false,
+        "rigidPredictedOffset": [
+          -6.0068022745413145,
+          -4.796839144121577
+        ],
+        "residualPixels": 0.14051207925489234
+      }
+    ],
+    "rotationDeltaDegrees": 0.7949554495463735,
+    "cameraCorrection": {
+      "northAzimuthDegrees": 329.3949554495464,
+      "center": [
+        72.10596576651524,
+        374.01763246187295
+      ]
+    },
+    "unusedTwoPointScaleDiagnostic": 1.0004282631210335,
+    "maxHoldoutResidualPixels": 5.765721527336613,
+    "fitPixels": 73728,
+    "holdoutPixels": 73728
+  },
+  "validation": {
+    "method": "Fresh full 1024x1024 source-mesh ray projection after applying only the accepted camera correction; no second correction applied.",
+    "patches": [
+      {
+        "role": "fit",
+        "window": [
+          192,
+          192,
+          384,
+          384
+        ],
+        "centre": [
+          288.0,
+          288.0
+        ],
+        "offset": [
+          -0.16440686583518982,
+          -0.5708359479904175
+        ],
+        "ncc": 0.9709078669548035,
+        "peakAtSearchBoundary": false
+      },
+      {
+        "role": "holdout",
+        "window": [
+          656,
+          192,
+          848,
+          384
+        ],
+        "centre": [
+          752.0,
+          288.0
+        ],
+        "offset": [
+          0.9847937803715467,
+          1.2851728796958923
+        ],
+        "ncc": 0.991693913936615,
+        "peakAtSearchBoundary": false
+      },
+      {
+        "role": "holdout",
+        "window": [
+          192,
+          656,
+          384,
+          848
+        ],
+        "centre": [
+          288.0,
+          752.0
+        ],
+        "offset": [
+          3.10289416462183,
+          -4.779789417982101
+        ],
+        "ncc": 0.9927640557289124,
+        "peakAtSearchBoundary": false
+      },
+      {
+        "role": "fit",
+        "window": [
+          656,
+          656,
+          848,
+          848
+        ],
+        "centre": [
+          752.0,
+          752.0
+        ],
+        "offset": [
+          0.11996334791183472,
+          0.013640408404171467
+        ],
+        "ncc": 0.9943429231643677,
+        "peakAtSearchBoundary": false
+      }
+    ],
+    "maximumHeldoutResidualPixels": 5.698626069246681,
+    "referenceCoveragePixels": 1032514,
+    "totalCandidatePixels": 1048576,
+    "maximumAcceptedHeldoutResidualPixels": 8,
+    "acceptanceReason": "Eight detector pixels is about 0.80 km at nominal centre sampling, below the published sub-kilometre relative uncertainty for the best encounter region; this is relative source-registration evidence, not a new absolute accuracy estimate."
+  },
+  "referenceFrames": [
+    {
+      "id": "n1506388174",
+      "path": "observations/N1506388174_2_CALIB.IMG",
+      "labelPath": "observations/N1506388174_2_CALIB.LBL",
+      "observerLatitude": 11.11,
+      "observerWestLongitude": 200.35,
+      "sunLatitude": 11.11,
+      "sunWestLongitude": 252.51,
+      "rangeKm": 35121.2,
+      "northAzimuthDegrees": 329.49,
+      "center": [
+        304.2,
+        704.6
+      ],
+      "pixelAngleMicroradians": 5.9896977199
+    },
+    {
+      "id": "n1506388518",
+      "path": "observations/N1506388518_2_CALIB.IMG",
+      "labelPath": "observations/N1506388518_2_CALIB.LBL",
+      "observerLatitude": 11.08,
+      "observerWestLongitude": 200.69,
+      "sunLatitude": 11.11,
+      "sunWestLongitude": 252.8,
+      "rangeKm": 33179.5,
+      "northAzimuthDegrees": 329.53,
+      "center": [
+        794.8,
+        693.6
+      ],
+      "pixelAngleMicroradians": 5.9896977199
+    },
+    {
+      "id": "n1506388840",
+      "path": "observations/N1506388840_2_CALIB.IMG",
+      "labelPath": "observations/N1506388840_2_CALIB.LBL",
+      "observerLatitude": 11.06,
+      "observerWestLongitude": 201.02,
+      "sunLatitude": 11.11,
+      "sunWestLongitude": 253.07,
+      "rangeKm": 31362.1,
+      "northAzimuthDegrees": 329.53,
+      "center": [
+        954.7,
+        356.1
+      ],
+      "pixelAngleMicroradians": 5.9896977199
+    },
+    {
+      "id": "n1506389178",
+      "path": "observations/N1506389178_2_CALIB.IMG",
+      "labelPath": "observations/N1506389178_2_CALIB.LBL",
+      "observerLatitude": 11.02,
+      "observerWestLongitude": 201.36,
+      "sunLatitude": 11.11,
+      "sunWestLongitude": 253.35,
+      "rangeKm": 29454.5,
+      "northAzimuthDegrees": 329.66,
+      "center": [
+        792.4,
+        -144.5
+      ],
+      "pixelAngleMicroradians": 5.9896977199
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "observations/N1506391424_2_CALIB.IMG",
+      "bytes": 4202496,
+      "sha256": "b212dac15ff2cec9213da76d2f0a540a1d6dfb10646e727bc472db0a99e25669"
+    },
+    {
+      "path": "observations/N1506391424_2_CALIB.LBL",
+      "bytes": 3825,
+      "sha256": "0b98753adc1818c17392dc8590f90f6526ee576373589ffa4f871d3ade8b726c"
+    },
+    {
+      "path": "shape/hyperion_30k_plt.tab",
+      "bytes": 2195250,
+      "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002"
+    },
+    {
+      "path": "shape/hyperion_document.pdf",
+      "bytes": 79311,
+      "sha256": "8d1a549688360a8bee5971b2b4bfe11660a010d2225d910070a3c94be9477942"
+    },
+    {
+      "path": "observations/cas_iss_v10.ti",
+      "bytes": 31060,
+      "sha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68"
+    },
+    {
+      "path": "observations/N1506388174_2_CALIB.IMG",
+      "bytes": 4202496,
+      "sha256": "b255f7921c6a03784e0de245bca7b36477058ad6d4b57f3e82ff5c7121c83002"
+    },
+    {
+      "path": "observations/N1506388518_2_CALIB.IMG",
+      "bytes": 4202496,
+      "sha256": "049a41fa5fa30efa56bd3e5d929e60bccc2f8b3359f9a14329f8897f75461d80"
+    },
+    {
+      "path": "observations/N1506388840_2_CALIB.IMG",
+      "bytes": 4202496,
+      "sha256": "7fd3bb4d4c4fd1b8b26dfa6cf35c48a1f7711bfe5da307762720cb801a43f85e"
+    },
+    {
+      "path": "observations/N1506389178_2_CALIB.IMG",
+      "bytes": 4202496,
+      "sha256": "29ff6539441b348e70fe0d5327d5666275ace1a337f287afe2a93b92dd828854"
+    }
+  ],
+  "limits": [
+    "The camera correction was derived from two disjoint image regions and checked in two other regions. No fit used held-out patch displacements.",
+    "Camera roll and sample/line centre changed; focal scale, range, observer/sun directions and raw calibrated I/F remain unchanged.",
+    "The nominal camera sampling is 100.5203 m/pixel; 4096x2048 display raster and source-model errors limit represented detail. This is a regional addition, not global 100m coverage.",
+    "Model uncertainties reach 6 km on other portions of Hyperion. Chaotic present-day rotation remains unmodeled.",
+    "Photographed crater shadows remain; bounded Lunar-Lambert correction and overlap gain do not imply measured geometric albedo.",
+    "Sixteen detector pixels are withheld around the source boundary; source-mesh occlusion, terrain shadow and incidence/emission rejection remain in the shared preparer."
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-phoebe-2023-shape-trial@1",
+  "source": {
+    "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
+    "bytes": 17787240,
+    "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+    "units": "km",
+    "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
+    "boundsMeters": [
+      [
+        -108553.543091,
+        -111886.520386,
+        -104769.020081
+      ],
+      [
+        117222.267151,
+        116179.023743,
+        107886.817932
+      ]
+    ],
+    "axisRayRadiiMeters": [
+      {
+        "longitudeEastDegrees": 0,
+        "latitudeDegrees": 0,
+        "radiusMeters": 114881.85011256102
+      },
+      {
+        "longitudeEastDegrees": 90,
+        "latitudeDegrees": 0,
+        "radiusMeters": 112780.11626379035
+      },
+      {
+        "longitudeEastDegrees": 180,
+        "latitudeDegrees": 0,
+        "radiusMeters": 106964.39946010047
+      },
+      {
+        "longitudeEastDegrees": 270,
+        "latitudeDegrees": 0,
+        "radiusMeters": 109293.8587616883
+      },
+      {
+        "longitudeEastDegrees": 0,
+        "latitudeDegrees": 90,
+        "radiusMeters": 107272.46128023363
+      },
+      {
+        "longitudeEastDegrees": 0,
+        "latitudeDegrees": -90,
+        "radiusMeters": 101239.43042137215
+      }
+    ]
+  },
+  "trials": [
+    {
+      "method": "source-meshoptimizer",
+      "targetFaces": 2000,
+      "maximumErrorMeters": 1500,
+      "regularize": true,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute",
+          "RegularizeLight"
+        ],
+        "sourceFaces": 196608,
+        "sourceVertices": 99846,
+        "weldedVertices": 98306,
+        "targetFaces": 2000,
+        "outputFaces": 2000,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 1500,
+        "estimatedErrorMeters": 1250.8203125,
+        "topology": {
+          "vertices": 1002,
+          "edges": 3000,
+          "faces": 2000,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 5078488770213794
+        }
+      },
+      "independentSamples": {
+        "method": "Four barycentric points per retained face, closest point against the complete source triangle BVH; one-way sampled approximation, not source uncertainty or a full Hausdorff bound.",
+        "count": 8000,
+        "maximumMeters": 1734.5214818322954,
+        "p95Meters": 698.5745720631567,
+        "rmsMeters": 355.5685739790211,
+        "worst": {
+          "face": 1580,
+          "weights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "pointMeters": [
+            42842.82302833333,
+            80410.58858233332,
+            58688.55285666666
+          ],
+          "sourceFace": 155161,
+          "distanceMeters": 1734.5214818322954
+        }
+      },
+      "facesSha256": "e74a0fb8bf93417e2b0705c9627face315b3132e789450fb9b0f58e593c415e1",
+      "ok": false
+    }
+  ],
+  "node": "v24.19.0",
+  "toolchain": [
+    {
+      "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
+      "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+      "sha256": "c1235063c390c69e9a20765e9d560e8381ff813ca59cda7847861e615205715b"
+    }
+  ],
+  "elapsedMs": 1330,
+  "resources": {
+    "userCPUTime": 1705489,
+    "systemCPUTime": 131223,
+    "maxRSS": 470432,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 34396,
+    "majorPageFault": 331,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 0,
+    "ipcSent": 0,
+    "ipcReceived": 0,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 287,
+    "involuntaryContextSwitches": 7433
+  },
+  "processMemory": {
+    "rss": 477429760,
+    "heapTotal": 318980096,
+    "heapUsed": 205188288,
+    "external": 52077203,
+    "arrayBuffers": 24725287
+  },
+  "qualification": "Only a source geometry candidate until prepared visual review. 1500m is the solver allowance including its regularization penalty; actual sampled geometric acceptance remains 1195m (one published Q128 source cell), separate from the published 1.195km Q128 GSD and its spatially varying scientific uncertainty."
+}

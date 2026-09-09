@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "callisto",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7f8cb09d0001b9475259d914d5e59676addd5ece961c797099ad6da811915eb"
+    "sha256": "b7059f087a11b2457d4e9f029e9c7b9c6b5d27aac895d7599c32aee926302957"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d437635e5b0f16f5c8f10458f89becb380616a97805a1e7c1ba0b088b408983e",
+      "sha256": "8756e5b7371fa3533f55691b2267c89eb20472a2761280bd31b2693e5b21812a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -37,6 +37,22 @@
                 "kind": "geotiff-monochrome-alpha",
                 "noData": 0,
                 "centerLongitude": 180
+              }
+            },
+            {
+              "id": "enhanced",
+              "focus": {
+                "longitudeDegrees": 145.2,
+                "latitudeDegrees": -0.15,
+                "zoom": 1.1
+              },
+              "validity": {
+                "kind": "geotiff-rgb-alpha",
+                "noData": 0,
+                "centerLongitude": 180,
+                "channels": "rgb",
+                "zeroValidity": "all-channels",
+                "resampling": "source-georeferenced-bilinear"
               }
             }
           ],
@@ -120,7 +136,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5cfa9f5a75e3c76285d682507176acdda8a1291dafab3d3417d8ce61d8011c9c",
+      "sha256": "a18e1803468b2ab02cc46fd9fe5a3787d84a7f073e03e0ced8fb073159e40117",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -221,6 +237,56 @@
               },
               "detail": "Global mosaic",
               "summary": "USGS images with detail ranging from 400 m to 60 km per pixel. Shadows and seams remain; gray grid: no data."
+            },
+            {
+              "id": "enhanced",
+              "label": "Galileo color",
+              "description": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
+              "title": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
+              "thumbnail": "/scenes/callisto/callisto-enhanced-thumbnail.webp",
+              "surface": "callisto-enhanced-surface@2x.webp",
+              "poles": "callisto-enhanced-poles@2x.webp",
+              "source": {
+                "id": "galileo-pia03456-registered-color",
+                "path": "../manifest.json"
+              },
+              "detail": "Partial processed color",
+              "summary": "May 2001 Galileo color over about 29% of the globe. Gray grid: unseen or withheld. Processed display colors, not albedo.",
+              "falseColor": true,
+              "legend": {
+                "kind": "categories",
+                "title": "Coverage",
+                "items": [
+                  {
+                    "label": "Color",
+                    "description": "Variable published RGB across observed terrain; this swatch is only a visual key.",
+                    "color": "#8e6450"
+                  },
+                  {
+                    "label": "Gray grid",
+                    "description": "Unseen or withheld surface; no reconstructed colors.",
+                    "color": "#777777"
+                  }
+                ]
+              },
+              "legendNote": "Photographic colors have no numeric scale; they are the publisher’s processed display colors.",
+              "facts": [
+                {
+                  "id": "release",
+                  "label": "Observation",
+                  "value": "Galileo · May 2001"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Retained footprint",
+                  "value": "28.74% of the globe · emission ≤65°"
+                },
+                {
+                  "id": "resolution",
+                  "label": "Source detail",
+                  "value": "About 8 km per pixel near the disk center"
+                }
+              ]
             }
           ]
         },
@@ -254,6 +320,12 @@
             "role": "surface",
             "description": "Voyager/Galileo global mosaic",
             "href": "https://astrogeology.usgs.gov/search/map/callisto_galileo_voyager_global_mosaic_1km"
+          },
+          {
+            "label": "NASA/JPL/DLR",
+            "role": "surface",
+            "description": "PIA03456 processed Galileo color, May 2001",
+            "href": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
           },
           {
             "label": "ESO",
@@ -322,7 +394,7 @@
       "sha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
       "bytes": 114640717,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -331,6 +403,56 @@
         "path": "callisto-global-1km.tif",
         "url": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "origin": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
+      "credit": "NASA/JPL/DLR",
+      "license": "Public domain as marked by USGS; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/media/images/callisto-galileo-ssi-color-mosaic"
+      ],
+      "redistribution": "Original public-domain published image retained with complete credit; geometric derivative identified separately.",
+      "id": "galileo-pia03456-registered-color",
+      "path": "observations/PIA03456-registered-rgba.tif",
+      "lensId": "enhanced",
+      "label": "Galileo color",
+      "falseColor": true,
+      "width": 1440,
+      "height": 720,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2410300
+      },
+      "acquisition": "Checked-in derived RGBA GeoTIFF. Reproduce with python3 src/planets/callisto/source/preparation/prepare-galileo-color.py from the pinned original and fixed camera; no controlled-map texture is sampled.",
+      "generator": "source/preparation/prepare-galileo-color.py",
+      "recipe": "preparation/galileo-color-conversion.json",
+      "derivedFrom": [
+        "galileo-pia03456-original"
+      ],
+      "coverage": "28.735% spherical coverage: fixed perspective projection, emission <=65 degrees and fully opaque original contributors. Gray grid elsewhere; no globally filled color. GDAL_NODATA=0 is reserved for all-zero RGBA, with explicit all-channels RGB validity.",
+      "photometry": "Published processed display colors, not calibrated I/F or albedo. Source photographed shading and color fringing remain. No new radiometric correction.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
+      },
+      "sha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32",
+      "bytes": 771611,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -343,10 +465,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a6285857a2d973a976faa33aff4538e4a21416702fb69de48f8ed22b6a0107c7",
-      "bytes": 8535,
+      "sha256": "a18e1803468b2ab02cc46fd9fe5a3787d84a7f073e03e0ced8fb073159e40117",
+      "bytes": 11502,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -383,19 +505,70 @@
           "url": "/scenes/callisto/callisto-normal-thumbnail.webp",
           "bytes": 3134,
           "sha256": "61e32f4d6d753f30b3bbb3ed561f52133f1d0d32ef99c5d3ee47f0d4428342c4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/callisto/callisto-normal-surface@2x.webp",
           "bytes": 6169044,
           "sha256": "a3426f1dae912070335ede461e32150bf082c6f6203e0db50a158ad143fef367",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/callisto/callisto-normal-poles@2x.webp",
-          "bytes": 164402,
-          "sha256": "46304eeebdcd150e56e64b96c3159df81a109a7b95b1cbc63d487efdbf618fd6",
-          "verification": "asset-manifest-pin"
+          "bytes": 163564,
+          "sha256": "6781b161a0af4b85676bfba78f75ab0698893c9dfebef5a5514ba6c646a92eba",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "enhanced",
+      "label": "Galileo color",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate."
+      ],
+      "lensIds": [
+        "enhanced"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        }
+      },
+      "inputs": [
+        "galileo-pia03456-registered-color"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/callisto/callisto-enhanced-thumbnail.webp",
+          "bytes": 3584,
+          "sha256": "64cd37bb4a98fcd073a999a8ca38b4a3eef03f1849b233367d6d3aa01f36cf60",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/callisto/callisto-enhanced-surface@2x.webp",
+          "bytes": 993738,
+          "sha256": "1ae112da832085a9c7849db3c9bf2d8cd18f925b2b9f6039f0fe73d79871d40d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/callisto/callisto-enhanced-poles@2x.webp",
+          "bytes": 22082,
+          "sha256": "946ad57e6dcf0390cdffad9713b8ff1c36f00686b45a17d14026146fbcb94313",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -418,8 +591,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6243,
-          "sha256": "d098ddacf654eb9eec8935b39f1e9d8751cde7cbcaf4c15dc39b6b96f2963642",
+          "bytes": 6417,
+          "sha256": "d301af7cc76b0c534ec1d9fd236e7faf7ac6385b62195fd895888355fd7584c5",
           "verification": "bytes-verified"
         }
       ],
@@ -445,6 +618,30 @@
           "url": "object:prepared/minimaps/normal.webp",
           "bytes": 39704,
           "sha256": "b4d1f8cb490d969fe076fc186e81d9ca54f3643e2ca6298da769caf5baa5b967",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:enhanced",
+      "label": "Galileo color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "enhanced"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/enhanced.webp",
+          "bytes": 22524,
+          "sha256": "fc1ea3a3e9a2434cfc810986b7495c29f647368a1d5e6db4fded931d9f7f756c",
           "verification": "bytes-verified"
         }
       ]

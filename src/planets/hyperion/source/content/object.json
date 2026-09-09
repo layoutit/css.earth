@@ -4,7 +4,7 @@
   "id": "hyperion",
   "displayName": "Hyperion",
   "panel": {
-    "introduction": "Hyperion is Saturn’s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls. The displayed orientation and lighting are illustrative; its chaotic tumbling is not simulated.",
+    "introduction": "Hyperion is Saturn\u2019s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls. The displayed orientation and lighting are illustrative; its chaotic tumbling is not simulated.",
     "facts": [
       {
         "id": "radius",
@@ -46,14 +46,14 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "William Lassell and William and George Bond · 1848"
+        "value": "William Lassell and William and George Bond \u00b7 1848"
       }
     ],
     "moreFacts": [
       {
         "id": "density",
         "label": "Mean density",
-        "value": "0.54 ± 0.05 g/cm³",
+        "value": "0.54 \u00b1 0.05 g/cm\u00b3",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -74,8 +74,8 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
-        "title": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
+        "description": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
+        "title": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
         "detail": "Cassini clear-filter mosaic",
         "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
         "surface": "hyperion-normal-surface@2x.webp",
@@ -85,7 +85,7 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
         },
-        "summary": "Cassini images mapped onto the irregular shape. Crater shadows remain; coverage varies and gaps are marked."
+        "summary": "Twelve Cassini frames, including a regional ~100 m/pixel close view. Shape and registration limit detail; shadows and marked gaps remain."
       },
       {
         "id": "elevation",
@@ -107,7 +107,7 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "−50",
+            "\u221250",
             "0",
             "60"
           ],

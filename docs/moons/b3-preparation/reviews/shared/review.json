@@ -1,0 +1,229 @@
+{
+  "schema": "cssearth-b3-shared-independent-review@1",
+  "reviewedAt": "2026-09-09T11:58:13.654690+00:00",
+  "baseHead": "ef07fac2d3208e201dafc626374b30ed4644f561",
+  "workingTree": "feat/moons-spacecraft-mapping; uncommitted B3 changes, exact file pins below",
+  "scope": [
+    "tools/objects/terrestrial-layers/index.mjs",
+    "tools/objects/terrestrial-layers/scientific-raster.mjs",
+    "tools/objects/terrestrial-layers/isis3-raster.mjs",
+    "tools/objects/terrestrial-layers/shape-camera-mosaic.mjs",
+    "tools/objects/terrestrial-layers/solid-raster.mjs",
+    "tools/objects/terrestrial-layers/solid-scene.mjs",
+    "tools/objects/terrestrial-layers/radial-terrain.mjs",
+    "src/planets/titania/source/preparation/terrestrial.json",
+    "src/planets/miranda/source/preparation/terrestrial.json",
+    "src/planets/proteus/source/preparation/terrestrial.json",
+    "src/planets/phoebe/source/preparation/terrestrial.json"
+  ],
+  "sourcePins": [
+    {
+      "path": "tools/objects/terrestrial-layers/index.mjs",
+      "bytes": 24787,
+      "sha256": "dd306e6de1b9aca37458b86764487433585c4dd7be4b521419fb8423dff3520a"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/scientific-raster.mjs",
+      "bytes": 18185,
+      "sha256": "7ee96e9f07c72be9334fb048d6536d16fb98b0faa1c0048e498e03d888db3e38"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/isis3-raster.mjs",
+      "bytes": 4988,
+      "sha256": "880d364790373117d44f0b28cf102071d8edf9e8c41f60eb00d308d57d91a61f"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mjs",
+      "bytes": 22667,
+      "sha256": "9d6464108ec161e754d35bfb3d03afbe95a618932c4e998a8b531194f6b7aad8"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/solid-raster.mjs",
+      "bytes": 23439,
+      "sha256": "14b93b42ee7947ca850b761409ae6e463231e21e695091c7064fbee0605867b7"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/solid-scene.mjs",
+      "bytes": 15509,
+      "sha256": "2bbedd684458398009b0bf9eb6a812901a829173c292e7ac131c72c34ac0b504"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+      "bytes": 29197,
+      "sha256": "fea59e3a5590dcb7a569c605e6300a2aaab1faffc0d3f19f9911ef3002a62c34"
+    },
+    {
+      "path": "src/planets/titania/source/preparation/terrestrial.json",
+      "bytes": 6435,
+      "sha256": "66af3b3720282972302367646b5d22f5f84790c4319c8d7a2da3a112788f5c6f"
+    },
+    {
+      "path": "src/planets/miranda/source/preparation/terrestrial.json",
+      "bytes": 7628,
+      "sha256": "957bfd5b0f4ccf1f91962816fbb70828bedcc6533112e9330a7d8f19c8d2c900"
+    },
+    {
+      "path": "src/planets/proteus/source/preparation/terrestrial.json",
+      "bytes": 9373,
+      "sha256": "f9c7b352f33c4d4ee6613952d34732ea08c4393dc5494dedd2985648b65054ef"
+    },
+    {
+      "path": "src/planets/phoebe/source/preparation/terrestrial.json",
+      "bytes": 9433,
+      "sha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c"
+    }
+  ],
+  "testPins": [
+    {
+      "path": "tools/objects/terrestrial-layers/radial-scientific-raster.test.mjs",
+      "bytes": 3130,
+      "sha256": "95b14c48495d5d38e97f465e8f08f2433b656a3240fd3427bf5784022222ebe8"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/scientific-quality.test.mjs",
+      "bytes": 3121,
+      "sha256": "3011e479d9b2bdb7e667b890c26401aeabe602590dbb5e046541cebf2d2c70da"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/isis3-missing-longitude.test.mjs",
+      "bytes": 3364,
+      "sha256": "d38e32b686dd47526dd5a2200f69c49755fc2a52a163f6c6a7457dc6e8c1df0c"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/isis3-raster.test.mjs",
+      "bytes": 2506,
+      "sha256": "122aa2614db5c4b512fc03cd76ae99deb460c64e442e8cc7776337f15a608d45"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/scientific-raster.test.mjs",
+      "bytes": 10574,
+      "sha256": "2d5151e2895b623e5944529777c69a9664638ab18304770e1085f72a055bd3d5"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.test.mjs",
+      "bytes": 4526,
+      "sha256": "33eff0a965755a3be51f51df9b7d7602197485e84124032c6c06373bec6eef46"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/categorical-solid-raster.test.mjs",
+      "bytes": 8982,
+      "sha256": "3598ed40de47e9777b640389906a51650ec01499b4cb33ba8d8415e1476e3b1a"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/scientific-focus.test.mjs",
+      "bytes": 1477,
+      "sha256": "d9eeef8197befbbe62688d4731f589a39b85a785fb75334ee2e3232feb82b093"
+    },
+    {
+      "path": "tests/objects/unit/titania/geology.test.mjs",
+      "bytes": 2579,
+      "sha256": "553e2e16a861dc114bd1840684229605ce4ffadc83787fe18d2abf2fd4876733"
+    },
+    {
+      "path": "tests/objects/unit/miranda/geology.test.mjs",
+      "bytes": 1518,
+      "sha256": "ce603f39a11744f05a1589cbdb9b0c71eef17d27b746d6be1213ca86ebda31cb"
+    },
+    {
+      "path": "tests/objects/unit/proteus/color.test.mjs",
+      "bytes": 3512,
+      "sha256": "1a5d8b531fc2e5be6382e425b4717f687ec48adf3c89484409ae12911d97d186"
+    }
+  ],
+  "tests": {
+    "command": "PATH=/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH node --test --test-concurrency=1 tools/objects/terrestrial-layers/radial-scientific-raster.test.mjs tools/objects/terrestrial-layers/scientific-quality.test.mjs tools/objects/terrestrial-layers/isis3-missing-longitude.test.mjs tools/objects/terrestrial-layers/isis3-raster.test.mjs tools/objects/terrestrial-layers/scientific-raster.test.mjs tools/objects/terrestrial-layers/shape-camera-mosaic.test.mjs tools/objects/terrestrial-layers/categorical-solid-raster.test.mjs tools/objects/terrestrial-layers/scientific-focus.test.mjs tests/objects/unit/titania/geology.test.mjs tests/objects/unit/miranda/geology.test.mjs tests/objects/unit/proteus/color.test.mjs",
+    "exitCode": 0,
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0,
+    "durationMilliseconds": 3407.376292,
+    "log": "focused-tests.log",
+    "logBytes": 3512,
+    "logSha256": "b7ee1b9ba6a054d841e2c512a2e18eedff30a516960eb04bf71a080e22118f13"
+  },
+  "findings": [
+    {
+      "id": "B3-RADIAL-MASK-01",
+      "priority": 1,
+      "status": "corrected-by-root-and-focused-fixture-passed",
+      "file": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+      "line": 346,
+      "trigger": "New Phoebe nearest scientific ISIS rasters are sampled through the native-OBJ fallback; their source masks and diagnostic scalar cells were bilinearly blended and lossy encoded.",
+      "fix": "Honor surface.displaySampling nearest at fallback lookup and flood/shadow WebP encoding. solid-raster already propagates the metadata.",
+      "proof": "New radial-scientific-raster.test.mjs encodes/decodes two actual native face atlases across0E with valid red and explicit unknown gray cells. Both flood/shadow preserve exact source pixels at full incidence; omitted photographic policy remains continuous.",
+      "limit": "This proves the corrected routine. Phoebe must be rebaked and visually checked; no scene-asset qualification is inferred."
+    },
+    {
+      "id": "B3-PHOEBE-ATLAS-02",
+      "priority": 1,
+      "status": "recipe-corrected-bake-pending",
+      "file": "src/planets/phoebe/source/preparation/terrestrial.json",
+      "line": 314,
+      "trigger": "3500 faces,128px tiles,16columns yield2048\u00d728032 atlas; WebP cannot encode this height.",
+      "proof": {
+        "command": "node --input-type=module -e \"import sharp from 'sharp'; await sharp({create:{width:2,height:28032,channels:3,background:'#888888'}}).webp({lossless:true}).toBuffer();\"",
+        "observedError": "Processed image is too large for the WebP format",
+        "actualProbeCaughtError": true,
+        "probeExitCode": 0
+      },
+      "proposedFix": "Use 32 atlas columns, giving 4096 \u00d7 14080 at unchanged 128 px tile resolution.",
+      "correction": {
+        "observedAt": "2026-09-09T12:05:08.554585+00:00",
+        "recipe": {
+          "path": "src/planets/phoebe/source/preparation/terrestrial.json",
+          "bytes": 9433,
+          "sha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c"
+        },
+        "tileSize": 128,
+        "columns": 32,
+        "targetFaces": 3500,
+        "maximumAtlasDimensions": [
+          4096,
+          14080
+        ],
+        "bakeStatus": "Running as reported by root and Saturn lane; no successful bake receipt claimed here."
+      }
+    }
+  ],
+  "checkedInvariants": [
+    "Titania/Miranda categorical GeoTIFFs use nearest source sampling, separate65535 no-data and explicit unknown overlaps; valid black category0 is preserved. Their spherical surfaces use the existing nearest/lossless surface/pole route.",
+    "Quality masks are pinned in the same source consumer, use independent geographic grid transforms, intersect with source validity, retain valid science zero and do not bilinearly mix coarse support cells.",
+    "ISIS missing-longitude opt-in requires both source bounds absent and a demonstrated0..360 native footprint within one-pixel padding; present or incompatible bounds still fail.",
+    "Proteus G/B/V\u2192RGB ordering is source-owned; one actual frame/channel, fixed common display scale and unity gains. Finite signed HALF opt-in requires source background masking/inset. All-three intersection rejects an absent violet image.",
+    "Observation focus reuses existing prepared navigation destinations. No runtime source derivation or new rendering primitive was introduced.",
+    "Increased source-mesh face budget leaves topology/error checks in place. The Phoebe recipe now uses 32 columns; actual image assets remain pending the bake receipt."
+  ],
+  "qualificationBoundary": "Scoped shared-code/source review and focused tiny tests only. Root owns remaining source acquisition, body rebakes, full build/test/browser and visual qualification. The original12-body B3 cohort remains in scope.",
+  "postReviewChecks": {
+    "observedAt": "2026-09-09T12:05:08.554585+00:00",
+    "pins": [
+      {
+        "path": "src/planets/phoebe/source/preparation/terrestrial.json",
+        "bytes": 9433,
+        "sha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c"
+      },
+      {
+        "path": "tools/objects/prepare-authored.ts",
+        "bytes": 18880,
+        "sha256": "4fec0ef77d39ab25366e11e299a26c3c2f2a4e16e1798fb22a8ae7044c506f52"
+      },
+      {
+        "path": "tools/objects/terrestrial-layers/index.mjs",
+        "bytes": 24787,
+        "sha256": "dd306e6de1b9aca37458b86764487433585c4dd7be4b521419fb8423dff3520a"
+      },
+      {
+        "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+        "bytes": 29197,
+        "sha256": "fea59e3a5590dcb7a569c605e6300a2aaab1faffc0d3f19f9911ef3002a62c34"
+      },
+      {
+        "path": "tools/objects/terrestrial-layers/solid-raster.mjs",
+        "bytes": 23439,
+        "sha256": "14b93b42ee7947ca850b761409ae6e463231e21e695091c7064fbee0605867b7"
+      }
+    ],
+    "atlasDimensionTransport": "prepare-authored passes the terrestrial recipe directly. loadRadialTerrain uses width = columns \u00d7 tileSize and height = ceil(actualFaceCount / columns) \u00d7 tileSize. prepareRadialMaterials passes these dimensions as sharp raw metadata; createRasterEmitter encodes without resizing and records decoded WebP metadata. No generic DPR or density multiplier is applied in this route.",
+    "qualification": "The original test receipt and original sourcePins remain the tested snapshot. These later read-only recipe/pipeline checks do not silently rebind the 34-test run."
+  }
+}

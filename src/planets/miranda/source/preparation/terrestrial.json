@@ -31,7 +31,10 @@
             ],
             "resolutionMeters": 240,
             "specialValueMagnitude": 1e+30,
-            "longitudeRange": [-180, 180]
+            "longitudeRange": [
+              -180,
+              180
+            ]
           },
           "displayRange": [
             0,
@@ -77,7 +80,10 @@
           ],
           "resolutionMeters": 240,
           "specialValueMagnitude": 1e+30,
-          "longitudeRange": [0, 360]
+          "longitudeRange": [
+            0,
+            360
+          ]
         },
         "relief": {
           "referenceRadiusMeters": 240400,
@@ -88,6 +94,133 @@
             0.7071067811865476
           ],
           "ambient": 0.25
+        }
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "format": "geotiff",
+        "path": "science/geology-2026/categories.tif",
+        "consumer": "geology-surfaces",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 0,
+        "maximum": 17,
+        "colors": [
+          "#343434",
+          "#ffff00"
+        ],
+        "categories": [
+          {
+            "value": "craterswithdarkstreaks",
+            "label": "Craters with dark streaks on walls",
+            "color": "#343434"
+          },
+          {
+            "value": "chaincraters",
+            "label": "chain craters",
+            "color": "#734c00"
+          },
+          {
+            "value": "darkalbedocanyonslopeV2",
+            "label": "dark albedo canyon slope",
+            "color": "#c0d5fc"
+          },
+          {
+            "value": "darkmaterial",
+            "label": "dark material",
+            "color": "#005ce6"
+          },
+          {
+            "value": "flowmaterial",
+            "label": "flow material",
+            "color": "#e7c7fc"
+          },
+          {
+            "value": "fracturedcanyonfloor",
+            "label": "fractured canyon floor",
+            "color": "#f5f57a"
+          },
+          {
+            "value": "freshimpactcraters",
+            "label": "fresh impact craters",
+            "color": "#edfcca"
+          },
+          {
+            "value": "heavilymantledcrateredterrain",
+            "label": "heavily mantled cratered terrain",
+            "color": "#cdaa66"
+          },
+          {
+            "value": "hummockycanyonfloor",
+            "label": "hummocky canyon floor",
+            "color": "#895a44"
+          },
+          {
+            "value": "lightalbedocanyon",
+            "label": "light albedo canyon",
+            "color": "#ffbebe"
+          },
+          {
+            "value": "lightalbedomaterial",
+            "label": "light albedo material",
+            "color": "#89cd66"
+          },
+          {
+            "value": "lightlymantledcrateredterrain",
+            "label": "lightly mantled cratered terrain",
+            "color": "#ffaa00"
+          },
+          {
+            "value": "mediumalbedocanyon",
+            "label": "medium albedo canyon",
+            "color": "#730000"
+          },
+          {
+            "value": "mediumalbedomaterialArden",
+            "label": "medium albedo material",
+            "color": "#cfd3fc"
+          },
+          {
+            "value": "northernridgedplains",
+            "label": "northern ridged plains",
+            "color": "#4c0073"
+          },
+          {
+            "value": "southernridgedplainsv2",
+            "label": "southern ridged plains",
+            "color": "#fcbbcf"
+          },
+          {
+            "value": "verydarkalbedomaterial",
+            "label": "very dark albedo material",
+            "color": "#cffced"
+          },
+          {
+            "value": "wisplikelightmaterial",
+            "label": "wisp-like light material",
+            "color": "#ffff00"
+          }
+        ],
+        "description": "Historical interpreted geology · reconstructed registration",
+        "title": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+        "sourceUrl": "https://zenodo.org/records/20817533",
+        "grid": {
+          "width": 1440,
+          "height": 720,
+          "projection": "equirectangular",
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 235700,
+          "noData": 65535,
+          "origin": [
+            -740473.3884511142,
+            370236.6942255571
+          ],
+          "resolutionMeters": 1028.4352617376585,
+          "latitudeRange": [
+            -90,
+            0
+          ]
         }
       }
     ],

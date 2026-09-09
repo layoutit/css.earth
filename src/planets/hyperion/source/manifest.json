@@ -662,6 +662,60 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "cassini-n1506391424",
+      "path": "observations/N1506391424_2_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "b212dac15ff2cec9213da76d2f0a540a1d6dfb10646e727bc472db0a99e25669",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506391424",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Regional FULL calibrated clear-filter close observation; Thomas camera corrected by disjoint image registration, as documented in validation/n1506391424-registration.json.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG"
+      }
+    },
+    {
+      "id": "cassini-n1506391424-label",
+      "path": "observations/N1506391424_2_CALIB.LBL",
+      "expectedBytes": 3825,
+      "expectedSha256": "0b98753adc1818c17392dc8590f90f6526ee576373589ffa4f871d3ade8b726c",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506391424",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Regional FULL calibrated clear-filter close observation; Thomas camera corrected by disjoint image registration, as documented in validation/n1506391424-registration.json.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.LBL"
+      }
     }
   ],
   "generatedIntermediates": [
@@ -688,7 +742,8 @@
           "cassini-n1530201013",
           "cassini-n1692997492",
           "cassini-n1694888328",
-          "cassini-n1811772616"
+          "cassini-n1811772616",
+          "cassini-n1506391424"
         ],
         "size": 512,
         "longitudeDegrees": 160,
@@ -698,15 +753,15 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 168394,
-      "expectedSha256": "97376a7f617f026109c67fed4816e0955b8a1a52362a09fb31b4963aa86a860f"
+      "expectedBytes": 168939,
+      "expectedSha256": "5ce12c03b1f3aae7b8897ddbc4186cedbf79a229968ef2dbff90e34b4084a6de"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5943,
-      "expectedSha256": "20b36fea683f5ff8a15f0d37a3a081f1584197edbbaf54325094c34de19dd07e",
+      "expectedBytes": 6280,
+      "expectedSha256": "99883f02f97ddedb7bb0d19bc745d10b257ebfa7244710909dc8758ec6621fce",
       "purpose": "Source documentation, controlled camera metadata or authored preparation."
     },
     {
@@ -717,14 +772,14 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 6848,
-      "expectedSha256": "a016e0e6652a623421765531c5d507f768c5975e8f027da39c26c9aa6e5360e3",
+      "expectedBytes": 7404,
+      "expectedSha256": "afd401f45af495c77008a72c65f95c06b7d9ab0a4bcf102969d080c7f875d0e2",
       "purpose": "Source documentation, controlled camera metadata or authored preparation."
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1625,
-      "expectedSha256": "26271a96ee6c3b7378dd17736505a4374d048dee4cce31f998a641005b1f17a3",
+      "expectedBytes": 1656,
+      "expectedSha256": "bf4c90df3751f7c04e6a5ebf22a0893d2a6dc3aac14f884df65efafc77b9d924",
       "purpose": "Source documentation, controlled camera metadata or authored preparation."
     },
     {
@@ -735,8 +790,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 10456,
-      "expectedSha256": "b2a0d47f36a2e7f2cfda842d8405c6155c304416f864cb08ad62f4af898a08a8",
+      "expectedBytes": 11157,
+      "expectedSha256": "53d1c8bbe2de7591f5ab025f349a06f017dca02f27aef88a2807e5f401ce1b3c",
       "purpose": "Source documentation, controlled camera metadata or authored preparation."
     },
     {
@@ -787,6 +842,12 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1089,
       "expectedSha256": "1e080d1bb25bb379560684a3bdb79a47c59797bfa8ca41ff0545138700e5a9c5"
+    },
+    {
+      "path": "validation/n1506391424-registration.json",
+      "purpose": "Published camera, bounded correction, source pins and disjoint independent image registration checks.",
+      "expectedBytes": 10299,
+      "expectedSha256": "41f066f90d72f352756ea3a2933ea46b317d91e72a391cc9952b1583dcc8ef45"
     }
   ]
 }

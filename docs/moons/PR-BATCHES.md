@@ -4,7 +4,7 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**B1 is merged; B2 is [draft PR #62](https://github.com/layoutit/cssEarth/pull/62).** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B2–B4 counts remain planning targets until their selected sources and implementations qualify.
+**B1 and [B2 PR #62](https://github.com/layoutit/cssEarth/pull/62) are merged; B3 is in implementation after all 12 source reviews.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B3–B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
@@ -37,7 +37,7 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 ## B2 — Add scientific surfaces and terrain to 13 moons
 
-**State:** implementation; all 13 body preparations complete; browser and aggregate qualification in progress · **Owner:** Moons
+**State:** [merged PR #62](https://github.com/layoutit/cssEarth/pull/62), 2026-09-09 · **Owner:** Moons
 
 The user approved the 13-body delivery, carrying Titania and Miranda into B3.
 
@@ -59,7 +59,9 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 Titania and Miranda moved here from B2 by explicit user approval. Their exact GIS releases remain inaccessible; release access and georeferencing must close before implementation.
 
-**State:** planned · **Owner:** Moons
+**State:** implementation on `feat/moons-spacecraft-mapping` · **Owner:** Moons
+
+See [B3 implementation and qualification](B3-SPACECRAFT-MAPPING.md).
 
 **Bodies:** Dactyl, Selam, Callisto, Thebe, Hyperion, Phoebe, Aegaeon, Proteus, Nix, Hydra, Titania, Miranda.
 

@@ -1,0 +1,114 @@
+[
+  {
+    "a": "C3Craterslinew_FeatureToPoly",
+    "b": "c2cratersshp",
+    "overlapSamples": 902,
+    "aColorSamples": 54,
+    "bColorSamples": 468,
+    "winner": null
+  },
+  {
+    "a": "PhLinework_FeatureToPolygon",
+    "b": "darkalbedopatches",
+    "overlapSamples": 507,
+    "aColorSamples": 0,
+    "bColorSamples": 469,
+    "winner": "darkalbedopatches"
+  },
+  {
+    "a": "PhLinework_FeatureToPolygon",
+    "b": "CrCraterslinew_FeatureToPoly1",
+    "overlapSamples": 120,
+    "aColorSamples": 0,
+    "bColorSamples": 90,
+    "winner": "CrCraterslinew_FeatureToPoly1"
+  },
+  {
+    "a": "PhLinework_FeatureToPolygon",
+    "b": "CrCraterslinew_FeatureToPoly",
+    "overlapSamples": 452,
+    "aColorSamples": 2,
+    "bColorSamples": 221,
+    "winner": "CrCraterslinew_FeatureToPoly"
+  },
+  {
+    "a": "PhLinework_FeatureToPolygon",
+    "b": "c1cratersshp",
+    "overlapSamples": 2649,
+    "aColorSamples": 5,
+    "bColorSamples": 1212,
+    "winner": "c1cratersshp"
+  },
+  {
+    "a": "PhLinework_FeatureToPolygon",
+    "b": "c2cratersshp",
+    "overlapSamples": 30686,
+    "aColorSamples": 4,
+    "bColorSamples": 21202,
+    "winner": "c2cratersshp"
+  },
+  {
+    "a": "PhLinework_FeatureToPolygon",
+    "b": "C3Craterslinew_FeatureToPoly",
+    "overlapSamples": 26498,
+    "aColorSamples": 0,
+    "bColorSamples": 20095,
+    "winner": "C3Craterslinew_FeatureToPoly"
+  },
+  {
+    "a": "Pm",
+    "b": "CrCraterslinew_FeatureToPoly1",
+    "overlapSamples": 1450,
+    "aColorSamples": 1265,
+    "bColorSamples": 0,
+    "winner": "Pm"
+  },
+  {
+    "a": "Pm",
+    "b": "CrCraterslinew_FeatureToPoly",
+    "overlapSamples": 26,
+    "aColorSamples": 26,
+    "bColorSamples": 0,
+    "winner": "Pm"
+  },
+  {
+    "a": "Pm",
+    "b": "c2cratersshp",
+    "overlapSamples": 1592,
+    "aColorSamples": 806,
+    "bColorSamples": 0,
+    "winner": "Pm"
+  },
+  {
+    "a": "Ps",
+    "b": "PhLinework_FeatureToPolygon",
+    "overlapSamples": 1564,
+    "aColorSamples": 1296,
+    "bColorSamples": 0,
+    "winner": "Ps"
+  },
+  {
+    "a": "Pb",
+    "b": "c2cratersshp",
+    "overlapSamples": 120,
+    "aColorSamples": 0,
+    "bColorSamples": 0,
+    "winner": null
+  },
+  {
+    "a": "Pb",
+    "b": "PhLinework_FeatureToPolygon",
+    "overlapSamples": 3463,
+    "aColorSamples": 976,
+    "bColorSamples": 0,
+    "winner": "Pb"
+  },
+  {
+    "a": "Pb",
+    "b": "Pm",
+    "overlapSamples": 228,
+    "aColorSamples": 0,
+    "bColorSamples": 46,
+    "winner": "Pm"
+  }
+]
