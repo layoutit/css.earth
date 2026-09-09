@@ -83,7 +83,8 @@
         "source": {
           "id": "cassini-iss-2017-mimas",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini's 2017 mosaic at 216 m/pixel. Shadows remain; the displayed shape is a simplified source model."
       },
       {
         "id": "enhanced",
@@ -96,7 +97,8 @@
         "source": {
           "id": "cassini-iss-2014-mimas-color",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini infrared, green and ultraviolet images in enhanced color. Detail varies; image shading and source seams remain."
       },
       {
         "id": "elevation",
@@ -123,7 +125,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
           "image": "/scenes/mimas/mimas-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to a 198.2 km sphere, from Cassini's shape model. It includes Mimas's oval shape; gray grid: no data."
       }
     ]
   },

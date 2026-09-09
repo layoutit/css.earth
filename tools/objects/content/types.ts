@@ -49,6 +49,7 @@ export interface LensRecipe {
   detail?: string;
   shortLabel?: string;
   description: string;
+  summary?: string;
   title: string;
   filter?: string;
   qualification?: string;

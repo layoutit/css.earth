@@ -116,9 +116,9 @@
   text-decoration: none;
 }
 .planet-sidebar .maps-object-results .planet-navigation-marker { justify-self: center; }
-.planet-sidebar .maps-object-results .planet-object-name { overflow: hidden; font: 400 0.9375rem/20px var(--shell-ui-font); text-overflow: ellipsis; white-space: nowrap; }
+.planet-sidebar .maps-object-results .planet-object-name { overflow: hidden; font: 400 15px/20px var(--shell-ui-font); text-overflow: ellipsis; white-space: nowrap; }
 .planet-sidebar .maps-object-results .planet-object-distance { color: var(--shell-text-muted); font: 400 13px/20px var(--shell-ui-font); white-space: nowrap; }
-.planet-sidebar .maps-object-results .planet-object-distance-unit { font-size: 12px; }
+.planet-sidebar .maps-object-results .planet-object-distance-unit { font-size: 13px; }
 .planet-sidebar .maps-object-results .planet-object-link[aria-disabled="true"] {
   opacity: 0.5;
   cursor: default;
@@ -126,18 +126,6 @@
 .planet-sidebar .maps-object-results .planet-object-link[aria-disabled="true"] .planet-navigation-marker > i {
   background: currentColor;
 }
-.planet-sidebar .maps-object-results .planet-object-item > .planet-object-link {
-  grid-template-columns: 11px minmax(0, 1fr);
-  margin-right: 0;
-}
-.planet-object-text {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  min-width: 0;
-}
-.planet-object-text > .planet-object-distance { flex: 0 0 auto; }
-.planet-object-text > .planet-object-context { margin-inline-start: auto; }
 .planet-sidebar .maps-object-results .planet-object-summary {
   display: grid;
   grid-template-columns: 11px minmax(0, 1fr) max-content 10px;
@@ -366,3 +354,125 @@
   .maps-explorer-sidebar { inset: 8px 8px auto 8px; width: auto; max-height: calc(100dvh - 16px); }
   .maps-empty-stage { inset: 0; }
 }
+
+/* A retained catalogue with one scrolling list beneath its category tabs. */
+.planet-sidebar .planet-card[data-solar-system-results] {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+  max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-status-height) - var(--explorer-panel-bottom-gap));
+}
+[data-solar-system-results] > .planet-selected-panel,
+:is(.planet-object-tabs, .planet-card-tabs) { flex: 0 0 auto; }
+.planet-card[data-solar-system-results] > .planet-selected-panel { padding-bottom: 8px; }
+:is(.planet-object-tabs, .planet-card-tabs) {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 16px;
+  row-gap: 2px;
+  padding: 0 var(--explorer-card-padding-inline-end) 8px var(--explorer-card-padding-inline-start);
+}
+:is(.planet-object-tabs, .planet-card-tabs) > [role="tab"] {
+  display: inline-flex;
+  justify-self: start;
+  align-items: baseline;
+  gap: 5px;
+  padding: 5px 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  color: var(--shell-text-muted);
+  background: transparent;
+  font: 400 15px/20px var(--shell-ui-font);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.planet-object-tab-count { display: none; font-size: 13px; font-variant-numeric: tabular-nums; }
+:is(.planet-object-tabs, .planet-card-tabs) > [aria-selected="true"] .planet-object-tab-count { display: inline; }
+:is(.planet-object-tabs, .planet-card-tabs) > [role="tab"]:hover { color: var(--shell-text); border-bottom-color: var(--shell-text-muted); }
+:is(.planet-object-tabs, .planet-card-tabs) > [aria-selected="true"] { color: var(--shell-text); border-bottom: 1px solid currentColor; }
+:is(.planet-object-tabs, .planet-card-tabs) > [role="tab"]:focus-visible {
+  color: var(--shell-focus);
+  border-bottom-color: currentColor;
+  outline: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.planet-object-results-scroll {
+  box-sizing: border-box;
+  max-height: 300px;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 30%) transparent;
+  padding: 0 var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
+}
+.planet-object-results-scroll:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
+.planet-sidebar .maps-object-results .planet-object-link:focus-visible .planet-object-name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Object tabs share the overview tabs without moving the card heading. */
+.planet-card.planet-information-panel > .planet-selected-panel { padding-bottom: 8px; }
+.planet-card-tabs { padding-bottom: 0; }
+/* Keep the Dataset count visible without moving the tab labels. */
+.planet-card-tabs .planet-object-tab-count { display: inline; }
+.planet-card-tabpanel {
+  padding: 12px var(--explorer-card-padding-inline-end) 20px var(--explorer-card-padding-inline-start);
+}
+.planet-card-tabpanel :is(.planet-facts, .planet-resources-links) { margin-top: 0; }
+.planet-card-tabpanel :is(.planet-observation-control, .planet-lens-label, .planet-lens-detail, .planet-facts, .planet-resources-links, .planet-lens-details-copy) {
+  font: 400 15px/20px var(--shell-ui-font);
+}
+.planet-card-tabpanel :is(.planet-lens-source, .planet-lens-legend-labels, .planet-lens-legend-categories) {
+  font: 400 13px/16px var(--shell-ui-font);
+}
+.planet-card-tabpanel > .planet-factsheet-section,
+.planet-card-tabpanel > .planet-lenses {
+  margin-top: 0;
+  padding-top: 0;
+}
+/* Dataset sections are no longer accordions; own their spacing explicitly. */
+.planet-information-panel .planet-card-tabpanel > .planet-lenses { padding-bottom: 0; }
+.planet-card-tabpanel .planet-observation-controls { padding-bottom: 0; }
+.planet-information-panel .planet-card-tabpanel > .planet-lens-details {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--shell-divider);
+}
+.planet-card-tabpanel :is(.planet-surface-minimap, .planet-lens-legend-panel) + .planet-lens-details-copy { margin-top: 12px; }
+.planet-card-tabpanel .planet-lens-legend-panel { width: calc(100% - 4px); height: 28px; }
+.planet-card-tabpanel .planet-lens-legend-labels {
+  display: grid;
+  grid-template-columns: repeat(var(--legend-label-count), minmax(0, 1fr));
+  height: 16px;
+  white-space: nowrap;
+}
+.planet-card-tabpanel .planet-lens-legend-labels > span { overflow: hidden; text-overflow: ellipsis; text-align: center; }
+.planet-card-tabpanel .planet-lens-legend-labels > span:first-child { text-align: left; }
+.planet-card-tabpanel .planet-lens-legend-labels > span:last-child:not(:first-child) { text-align: right; }
+.planet-card-tabpanel .planet-lens-legend-panel:first-child { margin-top: 0; }
+.planet-card-tabpanel .planet-lens-details-copy {
+  min-height: 60px;
+  text-wrap: wrap;
+}
+.planet-card-tabpanel .planet-lens-search-field { flex-basis: 100%; margin: 0; }
+.planet-card-tabpanel .planet-lens-search { text-align: left; }
+.planet-card-tabpanel:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
+
+.planet-dataset-spacecraft { margin-top: 16px; border-top: 1px solid var(--shell-divider); padding-top: 16px; }
+.planet-spacecraft { display: grid; grid-template-columns: minmax(0, 1fr) 72px; align-items: center; gap: 16px; margin: 0; }
+.planet-spacecraft + .planet-spacecraft { margin-top: 20px; }
+.planet-spacecraft-image-link { display: block; grid-column: 2; grid-row: 1; width: 72px; height: 72px; }
+.planet-spacecraft > figcaption { grid-column: 1; grid-row: 1; }
+.planet-spacecraft-image { display: block; width: 100%; height: 100%; object-fit: contain; }
+.planet-spacecraft-facts a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.planet-spacecraft-facts { display: grid; gap: 6px; margin: 0; font: 400 15px/20px var(--shell-ui-font); }
+.planet-spacecraft-facts > div { display: flex; justify-content: space-between; gap: 8px; }
+.planet-spacecraft-facts dt { color: var(--shell-text-muted); }
+.planet-spacecraft-facts dd { margin: 0; color: var(--shell-text-secondary); text-align: right; overflow-wrap: anywhere; }
+.planet-spacecraft a:hover { color: var(--shell-text-primary); }
+.planet-spacecraft a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }

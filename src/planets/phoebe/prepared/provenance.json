@@ -1,0 +1,591 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "phoebe",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "8e063e4c3f2afcc0a69f6bb8c8cfa4a3369048d29ac2cd584d0f2f85d7d95a2d"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "5e86c9b34ab60d330e317a7cfb97b6f14514e99366f5f8c9cd86085b3d71d88c",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "phoebe",
+        "displayName": "Phoebe",
+        "publicBase": "/scenes/phoebe/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 2880,
+          "height": 1440,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "surfaceQuality": 95,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "pds3-byte-monochrome",
+                "noData": 0,
+                "connectedEdge": "north"
+              }
+            }
+          ],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "scientific-surfaces",
+              "path": "shape/phoebe_ver128q.tab",
+              "format": "pds-vertex-facet",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 99846,
+                "expectedFaces": 196608
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -106.8
+              },
+              "minimum": -12,
+              "maximum": 12,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 106800,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.45
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 106.5,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 45
+          },
+          "mapUrl": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
+          "polesUrl": "/scenes/phoebe/phoebe-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/phoebe_ver128q.tab",
+            "format": "pds-vertex-facet",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 99846,
+              "expectedFaces": 196608
+            },
+            "latitudeSegments": 20,
+            "longitudeSegments": 32,
+            "faceBudget": 2000,
+            "tileSize": 128,
+            "atlasColumns": 16
+          }
+        },
+        "celestial": {
+          "sunSource": "Vendored JPL Horizons Saturn satellite elements and the Gaskell model’s documented body-fixed orientation at the shared epoch."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            155,
+            151,
+            146
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "2d77f21d0d9caef089cbe207a2969a2cf5711632eabfdd6cb5f192066987ed3f",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "phoebe",
+        "displayName": "Phoebe",
+        "panel": {
+          "introduction": "Phoebe is a dark, cratered moon on a distant, retrograde orbit around Saturn. Cassini’s 2004 flyby revealed an irregular, ice-bearing surface. It may be a captured object from the outer solar system.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "106.5 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "9.537 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 550 days (retrograde)"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 9 hours 16 minutes"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 12.95 million km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "William Henry Pickering · 1899"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.64 ± 0.03 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "elevation": "Elevation"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+              "title": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+              "detail": "Cassini mosaic",
+              "thumbnail": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
+              "surface": "phoebe-normal-surface@2x.webp",
+              "poles": "phoebe-normal-poles@2x.webp",
+              "source": {
+                "id": "cassini-mosaic",
+                "path": "../manifest.json",
+                "url": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
+              },
+              "summary": "Cassini monochrome mosaic with varying detail. Shadows remain; the unobserved northern region is marked."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
+              "title": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
+              "detail": "Shaded relief",
+              "thumbnail": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
+              "surface": "phoebe-elevation-surface@2x.webp",
+              "poles": "phoebe-elevation-poles@2x.webp",
+              "source": {
+                "id": "gaskell-2012-shape",
+                "path": "../manifest.json",
+                "url": "https://sbn.psi.edu/pds/resource/phoebeshape.html"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−12",
+                  "0",
+                  "12"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
+                "image": "/scenes/phoebe/phoebe-elevation-legend.webp"
+              },
+              "summary": "Gaskell-model height relative to a 106.8 km sphere. Terrain outside Cassini coverage is less certain."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Phoebe overview",
+            "href": "https://science.nasa.gov/saturn/moons/phoebe/"
+          },
+          {
+            "label": "NASA/JPL/SSI; DLR",
+            "role": "surface",
+            "description": "Cassini surface mosaic",
+            "href": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/saturn/moons/phoebe/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "cassini-mosaic",
+      "path": "observations/SP_1M_0_0_SIMP.IMG",
+      "origin": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG",
+      "catalog": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
+      "credit": "NASA/JPL/Space Science Institute; DLR",
+      "license": "Public NASA mission data, archived in PDS. Retain mission and cartography credits.",
+      "licenseEvidence": [
+        "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
+        "observations/datainfo.txt"
+      ],
+      "acquisition": "Download the pinned original PDS3 byte mosaic.",
+      "redistribution": "Retain the NASA/JPL/SSI and DLR attribution.",
+      "width": 2880,
+      "height": 1440,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 106800
+      },
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG"
+      },
+      "sha256": "e2a26482052ef9d67dd5c82df096daedc9cec0c0345c94e07f9b4461622aa69a",
+      "bytes": 4158720,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/SP_1M_0_0_SIMP.IMG",
+        "url": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "gaskell-2012-shape",
+      "path": "shape/phoebe_ver128q.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
+      "credit": "Robert Gaskell; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; cite Gaskell and the PDS archive.",
+      "licenseEvidence": [
+        "shape/README.txt",
+        "https://sbn.psi.edu/pds/resource/phoebeshape.html"
+      ],
+      "acquisition": "Download the original PDS4 vertex-facet table.",
+      "redistribution": "Retain the model author and archive credit.",
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-fixed-mesh",
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
+      "sha256": "92550ba0625255a2f91cd5d9a7b52e020fc4ba76c7ef3fd76a9728a66df697c2",
+      "bytes": 16897992,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/phoebe_ver128q.tab",
+        "url": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored content, source documentation or preparation metadata.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored content, source documentation or preparation metadata.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "9f53a299a1ee6106b2a55e852c429676e33cbab5d82270968894ea7dd84a3f2e",
+      "bytes": 5375,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "pds3-byte-monochrome",
+          "noData": 0,
+          "connectedEdge": "north"
+        }
+      },
+      "inputs": [
+        "cassini-mosaic",
+        "gaskell-2012-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
+          "bytes": 4006,
+          "sha256": "7d0d026b93b966d9171b48104fa3a83b8cd4689e9d5c32471044d40d89e8f6ec",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
+          "bytes": 1538972,
+          "sha256": "eb17ce85d6fbe825ea1ffd60ce5ea416efedbe8fe36419810424e0b4b5112aa5",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "gaskell-2012-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
+          "bytes": 8604,
+          "sha256": "02c4d6086793030278e83129aaa948acc0e83f9060bd7f8c02b834b8d0d2dc23",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-elevation-surface@2x.webp",
+          "bytes": 1130030,
+          "sha256": "a7d655af0c01a0fae4888c2d8e1ed7bf60e0e29efebefc3cfb330122dd1bc5ca",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5963,
+          "sha256": "4220e4426d2343e229ca702b742117ad18a82a8314ea10a85c22f67e4292eb8e",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 36636,
+          "sha256": "bf470910b5dbe5a3f388e4a9798ed1fb7cb7ecdca2e7522bbed06328755cdaef",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 24418,
+          "sha256": "0ea0fa20951f41bf7bb1f0e0336e5a7b8a9cba232098fdb49621158f5ce5a596",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

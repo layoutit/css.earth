@@ -75,7 +75,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Rosetta OSIRIS · 2008 flyby"
+        "detail": "Rosetta OSIRIS · 2008 flyby",
+        "summary": "Rosetta mosaic by Phil Stooke. Shadows, seams and processing edits remain; gray grid: published map gaps."
       },
       {
         "id": "elevation",
@@ -103,7 +104,8 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/data/steins_cart.lbl",
           "image": "/scenes/steins/steins-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Height relative to a 2.58 km sphere. The far side is modeled; a source seam joins it to image-based terrain."
       }
     ]
   },

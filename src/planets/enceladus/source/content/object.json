@@ -82,7 +82,8 @@
         "source": {
           "id": "cassini-schenk-2024-normal",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "A controlled Cassini mosaic with varying image detail. Shadows remain; gray grid: no source data."
       },
       {
         "id": "elevation",
@@ -109,7 +110,8 @@
           "meta": "km",
           "sourceUrl": "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
           "image": "/scenes/enceladus/enceladus-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to the source ellipsoid, clipped at ±1 km. Gray grid: missing stereo and shading data."
       }
     ]
   },

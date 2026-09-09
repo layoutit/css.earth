@@ -75,7 +75,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Galileo SSI · 1991 flyby"
+        "detail": "Galileo SSI · 1991 flyby",
+        "summary": "Galileo images mapped onto the shape. Shadows and seams remain; the gray grid marks poor or missing data."
       },
       {
         "id": "elevation",
@@ -103,7 +104,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab",
           "image": "/scenes/gaspra/gaspra-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Height relative to a 6.1 km sphere, including Gaspra's broad shape. The unseen side is less certain."
       }
     ]
   },

@@ -59,6 +59,12 @@
         "metersPerUnit": 1000,
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 18114.55731342771
+      },
+      "capture": {
+        "spacecraftIds": [
+          "new-horizons"
+        ],
+        "evidence": "https://ndownloader.figshare.com/files/24176603"
       }
     },
     {

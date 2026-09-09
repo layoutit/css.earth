@@ -1,0 +1,1200 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "prometheus",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "456b02db1be46a34ba5acef8d7dab140b4b509d138b2912b7fe7ad411e9356d7"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "faacf8dce63eab68eb1931c88d7ec362257b2fe5d8fc3e0d87febf314e83400f",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "prometheus",
+        "displayName": "Prometheus",
+        "publicBase": "/scenes/prometheus/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 2048,
+          "height": 1024,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "scientific-surfaces",
+              "path": "shape/prometheus_30k_plt.tab",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 14183,
+                "expectedFaces": 28362,
+                "indexBase": 0
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -43.1
+              },
+              "minimum": -18,
+              "maximum": 30,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 43100,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.35
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "mosaics": [
+            {
+              "id": "normal",
+              "format": "controlled-shape-camera",
+              "consumer": "cassini-frames",
+              "frames": [
+                {
+                  "id": "n1640497752_1",
+                  "path": "observations/N1640497752_1_CALIB.IMG",
+                  "labelPath": "observations/N1640497752_1_CALIB.LBL",
+                  "observerLatitude": 1.67,
+                  "observerWestLongitude": 100.28,
+                  "sunLatitude": 2.1,
+                  "sunWestLongitude": 67.39,
+                  "rangeKm": 56538.7,
+                  "northAzimuthDegrees": 47.05,
+                  "center": [
+                    560.7,
+                    611.9
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199
+                },
+                {
+                  "id": "n1640499244_1",
+                  "path": "observations/N1640499244_1_CALIB.IMG",
+                  "labelPath": "observations/N1640499244_1_CALIB.LBL",
+                  "observerLatitude": 4.17,
+                  "observerWestLongitude": 96.11,
+                  "sunLatitude": 2.1,
+                  "sunWestLongitude": 77.53,
+                  "rangeKm": 58544,
+                  "northAzimuthDegrees": 44.82,
+                  "center": [
+                    546,
+                    595.6
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199
+                },
+                {
+                  "id": "n1640500544_1",
+                  "path": "observations/N1640500544_1_CALIB.IMG",
+                  "labelPath": "observations/N1640500544_1_CALIB.LBL",
+                  "observerLatitude": 5.98,
+                  "observerWestLongitude": 94.52,
+                  "sunLatitude": 2.11,
+                  "sunWestLongitude": 86.36,
+                  "rangeKm": 61951,
+                  "northAzimuthDegrees": 41.62,
+                  "center": [
+                    625.5,
+                    581.9
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199
+                },
+                {
+                  "id": "n1640506032_1",
+                  "path": "observations/N1640506032_1_CALIB.IMG",
+                  "labelPath": "observations/N1640506032_1_CALIB.LBL",
+                  "observerLatitude": 10.37,
+                  "observerWestLongitude": 108.03,
+                  "sunLatitude": 2.1,
+                  "sunWestLongitude": 123.66,
+                  "rangeKm": 79202.4,
+                  "northAzimuthDegrees": 11.79,
+                  "center": [
+                    538.1,
+                    569.7
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199
+                },
+                {
+                  "id": "n1643261394_1",
+                  "path": "observations/N1643261394_1_CALIB.IMG",
+                  "labelPath": "observations/N1643261394_1_CALIB.LBL",
+                  "observerLatitude": 18.54,
+                  "observerWestLongitude": 237.6,
+                  "sunLatitude": 2.59,
+                  "sunWestLongitude": 131.54,
+                  "rangeKm": 32824.1,
+                  "northAzimuthDegrees": 183.62,
+                  "center": [
+                    615,
+                    474.1
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199
+                },
+                {
+                  "id": "n1643262934_1",
+                  "path": "observations/N1643262934_1_CALIB.IMG",
+                  "labelPath": "observations/N1643262934_1_CALIB.LBL",
+                  "observerLatitude": 20.15,
+                  "observerWestLongitude": 227.57,
+                  "sunLatitude": 2.59,
+                  "sunWestLongitude": 142.01,
+                  "rangeKm": 36338.9,
+                  "northAzimuthDegrees": 178.91,
+                  "center": [
+                    588.5,
+                    474.2
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199
+                },
+                {
+                  "id": "n1828134597_1",
+                  "path": "observations/N1828134597_1_CALIB.IMG",
+                  "labelPath": "observations/N1828134597_1_CALIB.LBL",
+                  "observerLatitude": -4.43,
+                  "observerWestLongitude": 207.59,
+                  "sunLatitude": 25.6,
+                  "sunWestLongitude": 291.5,
+                  "rangeKm": 36731.6,
+                  "northAzimuthDegrees": 179.91,
+                  "center": [
+                    450.3,
+                    515.3
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199
+                }
+              ],
+              "photometry": {
+                "weight": 0.5,
+                "maximumGain": 2.5,
+                "maximumIncidenceDegrees": 80,
+                "maximumEmissionDegrees": 78,
+                "displayMaximum": 1,
+                "gamma": 1,
+                "minimumLevel": 0.7,
+                "maximumLevel": 1.4,
+                "backgroundMaximum": 0.003
+              },
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+                "attribution": {
+                  "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/cassini/iss/"
+                }
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 43.1,
+          "camera": {
+            "initialScenePitchDegrees": -1.1307603412295912,
+            "defaultControlYawDegrees": 38.77647803521582
+          },
+          "mapUrl": "/scenes/prometheus/prometheus-normal-surface@2x.webp",
+          "polesUrl": "/scenes/prometheus/prometheus-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/prometheus_30k_plt.tab",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 14183,
+              "expectedFaces": 28362,
+              "indexBase": 0
+            },
+            "faceBudget": 2000,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 720,
+              "maximumErrorMeters": 1000
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Vendored JPL Saturn satellite orbit and the Archinal rotation frame documented with the PDS shape model."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            155,
+            151,
+            146
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "1ec682eb116a9f3b35cd60daaf5d63e76b627e9ffae3202e498fcd1c9e27dbf5",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "prometheus",
+        "displayName": "Prometheus",
+        "panel": {
+          "introduction": "Prometheus is an elongated icy moon moving just inside Saturn’s F ring. Its gravity draws channels and streamers out of the ring. Cassini revealed craters and a soft-looking surface on this small, porous body.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "43.1 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "9.537 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 14.7 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 139,400 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Voyager 1 science team · 1980"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "0.48 ± 0.04 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "elevation": "Elevation"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "title": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "detail": "Cassini · corrected mosaic",
+              "thumbnail": "/scenes/prometheus/prometheus-normal-thumbnail.webp",
+              "surface": "prometheus-normal-surface@2x.webp",
+              "poles": "prometheus-normal-surface@2x.webp",
+              "source": {
+                "id": "n1640497752_1",
+                "path": "../manifest.json",
+                "url": "https://pds-rings.seti.org/cassini/iss/"
+              },
+              "summary": "Cassini images mapped onto the shape with adjusted brightness. Gray grid: gaps and withheld shadows."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+              "title": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+              "detail": "Cassini shape · radial height",
+              "thumbnail": "/scenes/prometheus/prometheus-elevation-thumbnail.webp",
+              "surface": "prometheus-elevation-surface@2x.webp",
+              "poles": "prometheus-elevation-surface@2x.webp",
+              "source": {
+                "id": "thomas-2018-shape",
+                "path": "../manifest.json",
+                "url": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-18",
+                  "0",
+                  "+30"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+                "image": "/scenes/prometheus/prometheus-elevation-legend.webp"
+              },
+              "summary": "Height relative to a 43.1 km sphere, from the Cassini shape model. Small craters are unresolved."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Prometheus overview",
+            "href": "https://science.nasa.gov/saturn/moons/prometheus/"
+          },
+          {
+            "label": "NASA/JPL/SSI; PDS",
+            "role": "surface",
+            "description": "Cassini calibrated observations and measured shape",
+            "href": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/saturn/moons/prometheus/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "thomas-2018-shape",
+      "path": "shape/prometheus_30k_plt.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/prometheus_30k_plt.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+      "credit": "Peter Thomas, Joseph and Ansty; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; cite Thomas, Joseph and Ansty (2018), DOI 10.26033/ewy3-jy61.",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+        "shape/prometheus_document.pdf"
+      ],
+      "acquisition": "Download the original PDS plate table.",
+      "redistribution": "Retain source author and PDS archive attribution.",
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-fixed-mesh",
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/prometheus_30k_plt.tab"
+      },
+      "sha256": "78d1d11346d554f969d4c0f0df3969e5c7f50c715274f69a57ad31ec3be5425c",
+      "bytes": 2127300,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/prometheus_30k_plt.tab",
+        "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/prometheus_30k_plt.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1640497752_1",
+      "path": "observations/N1640497752_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497752_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1640497752",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/prometheus_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497752_1_CALIB.IMG"
+      },
+      "sha256": "c708ab94d8e4d5d21c00aac71529ea488b034cedf564f90fef912c7b51b1c5c0",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1640497752_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497752_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1640497752_1-label",
+      "path": "observations/N1640497752_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497752_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1640497752",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497752_1_CALIB.LBL"
+      },
+      "sha256": "3076336c90a7306f1a8cf44bcf6a1928fd52948552e4fa5e266e45e47a102175",
+      "bytes": 3833,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1640497752_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497752_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1640499244_1",
+      "path": "observations/N1640499244_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640499244_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1640499244",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/prometheus_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640499244_1_CALIB.IMG"
+      },
+      "sha256": "64564789e65fb4db82027efe2313aeb3d330e2827d35f8a672ca36604bb9696b",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1640499244_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640499244_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1640499244_1-label",
+      "path": "observations/N1640499244_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640499244_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1640499244",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640499244_1_CALIB.LBL"
+      },
+      "sha256": "3fe12dc629aebce48a573c025e44903a0c08e32b2a728560d20118a01e371a5c",
+      "bytes": 3833,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1640499244_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640499244_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1640500544_1",
+      "path": "observations/N1640500544_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640500544_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1640500544",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/prometheus_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640500544_1_CALIB.IMG"
+      },
+      "sha256": "0831100f87641c8f4d3fee52ffda3788d008eaba573e7259997103e127301423",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1640500544_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640500544_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1640500544_1-label",
+      "path": "observations/N1640500544_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640500544_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1640500544",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640500544_1_CALIB.LBL"
+      },
+      "sha256": "7aea1e433297038bbf201bfa37b09481a82eb03fed1facde020b4f198fd8dfb7",
+      "bytes": 3834,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1640500544_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640500544_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1640506032_1",
+      "path": "observations/N1640506032_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640506032_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1640506032",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/prometheus_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640506032_1_CALIB.IMG"
+      },
+      "sha256": "8ef11d8daed7ba894a5b920f911a1280243b6b214050b5e5a09dbf4d270db41d",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1640506032_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640506032_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1640506032_1-label",
+      "path": "observations/N1640506032_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640506032_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1640506032",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640506032_1_CALIB.LBL"
+      },
+      "sha256": "0a7ca22f5ba6b82d8104d9a65684725d2960f090fd8eeea8e09b364f9e7766d0",
+      "bytes": 3833,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1640506032_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640506032_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1643261394_1",
+      "path": "observations/N1643261394_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643261394_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1643261394",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/prometheus_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643261394_1_CALIB.IMG"
+      },
+      "sha256": "b0c917e3aa3ac243dd313996e062008f2bba8782d2f8bd8cd114dac616cc2bce",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1643261394_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643261394_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1643261394_1-label",
+      "path": "observations/N1643261394_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643261394_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1643261394",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643261394_1_CALIB.LBL"
+      },
+      "sha256": "03e267cd24360bf642cdbbd1b547f07541cec08ba905a9fcdf8c0d1bc3659e06",
+      "bytes": 3834,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1643261394_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643261394_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1643262934_1",
+      "path": "observations/N1643262934_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643262934_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1643262934",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/prometheus_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643262934_1_CALIB.IMG"
+      },
+      "sha256": "c34c8b4c50cf20fbc1ea72bc7aa65c1a906d6989399e86571ea0df80a97d10f2",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1643262934_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643262934_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1643262934_1-label",
+      "path": "observations/N1643262934_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643262934_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1643262934",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643262934_1_CALIB.LBL"
+      },
+      "sha256": "e7a7158ae6f7ec3da25d63428cc752ee2b0c703111fb9eab4d18917531f2af7b",
+      "bytes": 3835,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1643262934_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1643188892_1643282464/N1643262934_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1828134597_1",
+      "path": "observations/N1828134597_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828134597_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1828134597",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/prometheus_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828134597_1_CALIB.IMG"
+      },
+      "sha256": "ad7f60c89fb06fa72c2ec4a0cd5f07a07dbcc1f8d2b088a7b27a27df248c24c7",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1828134597_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828134597_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1828134597_1-label",
+      "path": "observations/N1828134597_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828134597_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1828134597",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated product.",
+      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828134597_1_CALIB.LBL"
+      },
+      "sha256": "6a1b657feb7bd69504487959ba08536c1ab8b17d13e909130a78bf07698701ff",
+      "bytes": 3840,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1828134597_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828134597_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored source interpretation or preparation metadata.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored source interpretation or preparation metadata.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "a8011268ea52654501fde69bc747e8a303d25b1061e6bcffa3e9ee2a27821358",
+      "bytes": 5883,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "thomas-2018-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/prometheus/prometheus-elevation-thumbnail.webp",
+          "bytes": 5504,
+          "sha256": "11750d7eea48541ecfcf349e217480c6243f3780d876c2d5bcfc7e4058e912f6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/prometheus/prometheus-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/prometheus/prometheus-elevation-surface@2x.webp",
+          "bytes": 492240,
+          "sha256": "6bc3484181a0b5013fc2d4be3cf9126d332bbe6ee0d1f91178a8d9057fc47e58",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "parents": [],
+      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "mosaics"
+      },
+      "inputs": [
+        "n1640497752_1",
+        "n1640497752_1-label",
+        "n1640499244_1",
+        "n1640499244_1-label",
+        "n1640500544_1",
+        "n1640500544_1-label",
+        "n1640506032_1",
+        "n1640506032_1-label",
+        "n1643261394_1",
+        "n1643261394_1-label",
+        "n1643262934_1",
+        "n1643262934_1-label",
+        "n1828134597_1",
+        "n1828134597_1-label",
+        "thomas-2018-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/prometheus/prometheus-normal-thumbnail.webp",
+          "bytes": 3450,
+          "sha256": "e8c2110e96089f087d976b4ec6f4c3acc5ae666a7b501c0cfb844b40fff99f7e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/prometheus/prometheus-normal-surface@2x.webp",
+          "bytes": 475502,
+          "sha256": "2d8c06486e474b10e3040e63c810c51b06dd9e8a0e3e79949a6867c812686af6",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 7747,
+          "sha256": "1c6d72ffdae86f72088dd83ec692906ca4ee00ea136b7c1efb67c45e20b38bb6",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 15052,
+          "sha256": "65a18a2ccd30636499c24f2d5acefa228410e288b194a5f0220df6369b5c4086",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10752,
+          "sha256": "bc3e76423884c8436a5f4e0e678ce61c5eb93cf07420c32589bab625dc647bbb",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -1,33 +1,32 @@
 ---
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
-import preparedWorld from "../../src/planets/sun/prepared/world-context.json";
 import PlanetObjectResult from "./PlanetObjectResult.astro";
-import PlanetAccordion from './PlanetAccordion.astro';
+import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount } from "../object-categories.mjs";
 
-interface Props {
-  activeObjectId?: string;
-}
-
+interface Props { activeObjectId?: string; }
 const { activeObjectId } = Astro.props;
-// Group registered destinations once at build time. Prepared parents describe
-// moons without duplicating them inside the planet rows.
-const parents = new Map(preparedWorld.bodies.map(body => [body.id, body.orbit?.centerBodyId]));
-const names = new Map(PLANET_SEARCH_OBJECTS.map(object => [object.id, object.name]));
-const types = new Map([
-  ['planet', 'Planets'], ['satellite', 'Moons'], ['dwarf-planet', 'Dwarf planets'],
-  ['star', 'Stars'], ['asteroid', 'Asteroids'],
-]);
-for (const object of PLANET_SEARCH_OBJECTS) if (!types.has(object.classification)) {
+const types = new Map(OBJECT_CATEGORIES);
+for (const object of PLANET_SEARCH_OBJECTS) if (!types.has(objectCategory(object.classification))) {
   types.set(object.classification, object.classification.replaceAll('-', ' ') + 's');
 }
+const classifications = PLANET_SEARCH_OBJECTS.map(object => object.classification);
 const groups = [...types].map(([type, label]) => ({ type, label,
-  objects: PLANET_SEARCH_OBJECTS.filter(object => object.classification === type),
-})).filter(group => group.objects.length > 0);
+  count: objectCategoryCount(classifications, type),
+}));
 ---
 
-{groups.map(group => <PlanetAccordion name="solar-system-object-types" title={group.label} count={group.objects.length} data-object-type-group={group.type} open={group.type === 'planet'}>
+<div class="planet-object-tabs" role="tablist" aria-label="Object categories">
+  {groups.map((group, index) => <button type="button" role="tab"
+    id={`object-tab-${group.type}`} data-object-tab={group.type}
+    aria-controls="object-category-results" aria-selected={index === 0 ? 'true' : 'false'}
+    tabindex={index === 0 ? 0 : -1}>
+    <span>{group.label}</span>{" "}<span class="planet-object-tab-count">({group.count})</span>
+  </button>)}
+</div>
+<div id="object-category-results" class="planet-object-results-scroll" role="tabpanel"
+  aria-labelledby="object-tab-all" tabindex="0">
   <ul class="planet-object-list">
-    {group.objects.map(object => <PlanetObjectResult object={object} activeObjectId={activeObjectId}
-      detail={object.classification === 'satellite' ? names.get(parents.get(object.id)) : undefined} />)}
+    {PLANET_SEARCH_OBJECTS.map(object => <PlanetObjectResult object={object} activeObjectId={activeObjectId} />)}
   </ul>
-</PlanetAccordion>)}
+  <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
+</div>

@@ -42,7 +42,13 @@
       },
       "coverage": "Released 2-degree stereogrammetry and limb-fit radial model; source resolution and confidence vary.",
       "expectedBytes": 527072,
-      "expectedSha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df"
+      "expectedSha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
+      }
     },
     {
       "id": "ida-normal",
@@ -69,7 +75,13 @@
       },
       "coverage": "High-pass Galileo montage on a low-pass coarse-image background. 7 pixels per degree; best contributing images approximately 25 m/pixel. Exact zero marks unprojectable surface.",
       "expectedBytes": 3179520,
-      "expectedSha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7"
+      "expectedSha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
+      }
     },
     {
       "id": "inter-title-font",

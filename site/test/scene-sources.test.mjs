@@ -72,21 +72,19 @@ test('merges duplicate source links without dropping full credits or changing th
   assert.deepEqual(sceneSources(sources), sources);
 });
 
-test('footer and directly cached information panels use the same source projection', async () => {
+test('app credits and prepared body provenance have separate consumers on direct and cached routes', async () => {
   const read = name => readFile(new URL(`../components/${name}.astro`, import.meta.url), 'utf8');
   const [shell, information, object, cards] = await Promise.all([
     read('PlanetShell'), read('PlanetInformationPanel'), read('PreparedObjectPanel'), read('PreparedSidebarCards'),
   ]);
-  for (const component of [shell, information]) {
-    assert.match(component, /import \{ sceneSources \} from "\.\.\/scene-sources\.mjs"/u);
-    assert.match(component, /const sources = sceneSources\(resources\)/u);
-    assert.equal((component.match(/sources\.map\(\(resource/gu) ?? []).length, 1);
-    assert.doesNotMatch(component, /resources\.map\(\(resource/u);
-  }
-  assert.match(shell, /<PlanetInformationPanel \{\.\.\.Astro\.props\} \/>/u);
-  // Cached navigation bypasses PlanetShell: its direct information-only path
-  // must reach the same projection, not depend on shell-preprocessed props.
+  assert.match(shell, /const sources = sceneSources\(resources\)/u);
+  assert.doesNotMatch(information, /sceneSources/u);
+  assert.match(information, /const sources = objectSources\(provenance\)/u);
+  assert.match(object, /prepared\/provenance\.json/u);
+  assert.doesNotMatch(object, /sourceManifests|sourceCharts|sourceLenses/u);
+  assert.match(object, /resources=\{content.resources\}/u);
+  assert.match(object, /provenance=\{provenance\}/u);
   assert.match(cards, /<PreparedObjectPanel informationOnly/u);
   assert.match(object, /const Panel = informationOnly \? PlanetInformationPanel : PlanetShell/u);
-  assert.match(object, /resources=\{content\.resources\}/u);
+  assert.match(shell, /<PlanetInformationPanel \{\.\.\.Astro\.props\} \/>/u);
 });

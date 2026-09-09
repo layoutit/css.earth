@@ -46,7 +46,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "An image-based shape model. Smooth regions lack image coverage; no surface photograph is mapped."
       },
       {
         "id": "elevation",
@@ -74,7 +75,8 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_obj_0000n00000_v003.xml",
           "image": "/scenes/didymos/didymos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Height relative to a 365 m sphere, including the ridge. Smooth regions have weaker image constraints."
       }
     ]
   },

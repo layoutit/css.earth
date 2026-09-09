@@ -68,7 +68,13 @@
       },
       "coverage": "Visual-only Stooke mosaic controlled by Leyrat2010, with revised south-pole interpretation and photographed illumination. A north-edge connected0..2sRGB display-code heuristic identifies exterior gaps before resampling; isolated dark terrain is retained. This is not calibrated albedo.",
       "expectedBytes": 725269,
-      "expectedSha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9"
+      "expectedSha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9",
+      "capture": {
+        "spacecraftIds": [
+          "rosetta"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg"
+      }
     }
   ],
   "generatedIntermediates": [

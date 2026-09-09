@@ -76,7 +76,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
           "image": "/scenes/itokawa/itokawa-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Height relative to a 165 m sphere, from the shape model. Colors include the broad form; the outline is simplified."
       }
     ]
   },

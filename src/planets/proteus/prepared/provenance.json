@@ -1,0 +1,734 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "proteus",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "d4159e19605dbca95ca671a9da0aaba6de531b1bd762a36bb6678a090439a6f2"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "1babd88327cbad72a5b08ae076cded690d419b1b728f0925f32aea76c2747674",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "proteus",
+        "displayName": "Proteus",
+        "publicBase": "/scenes/proteus/",
+        "distanceAu": 30.07,
+        "raster": {
+          "width": 2048,
+          "height": 1024,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 256,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "scientific-surfaces",
+              "path": "shape/n8proteus.tab",
+              "format": "pds-radius-table",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 2522,
+                "expectedFaces": 5040,
+                "stepDegrees": 5,
+                "longitudeDirection": "west-positive"
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -208
+              },
+              "minimum": -35,
+              "maximum": 25,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 208000,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.45
+              },
+              "sampleGrid": {
+                "width": 361,
+                "height": 181
+              }
+            }
+          ],
+          "observedColors": [],
+          "mosaics": [
+            {
+              "id": "normal",
+              "format": "controlled-shape-camera",
+              "consumer": "voyager-clear-frames",
+              "frames": [
+                {
+                  "id": "c1137317",
+                  "path": "observations/C1137317_GEOMED.IMG",
+                  "labelPath": "observations/C1137317_GEOMED.LBL",
+                  "observerLatitude": -26.863,
+                  "observerWestLongitude": 93.582,
+                  "sunLatitude": -23.66,
+                  "sunWestLongitude": 116.998,
+                  "rangeKm": 868236.818,
+                  "northAzimuthDegrees": 13.455091520022258,
+                  "center": [
+                    480.502,
+                    804.866
+                  ],
+                  "pixelAngleMicroradians": 7.841764329210524,
+                  "backgroundOffset": 0.0002,
+                  "backgroundMaximum": 0.0017791
+                },
+                {
+                  "id": "c1138920",
+                  "path": "observations/C1138920_GEOMED.IMG",
+                  "labelPath": "observations/C1138920_GEOMED.LBL",
+                  "observerLatitude": 3.482,
+                  "observerWestLongitude": 333.923,
+                  "sunLatitude": -23.659,
+                  "sunWestLongitude": 288.621,
+                  "rangeKm": 145964.65,
+                  "northAzimuthDegrees": 137.38487394947322,
+                  "center": [
+                    411.728,
+                    680
+                  ],
+                  "pixelAngleMicroradians": 7.841764329210524,
+                  "backgroundOffset": 0.0532,
+                  "backgroundMaximum": 0.0051891
+                }
+              ],
+              "photometry": {
+                "weight": 0.5,
+                "maximumGain": 2.5,
+                "maximumIncidenceDegrees": 75,
+                "maximumEmissionDegrees": 75,
+                "displayMaximum": 0.05,
+                "gamma": 1,
+                "minimumLevel": 0.7,
+                "maximumLevel": 1.4,
+                "backgroundMaximum": 0.001
+              },
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/voyager/iss/"
+                }
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 208,
+          "camera": {
+            "initialScenePitchDegrees": -10.970382790652298,
+            "defaultControlYawDegrees": 1.6473023715265165
+          },
+          "mapUrl": "/scenes/proteus/proteus-normal-surface@2x.webp",
+          "polesUrl": "/scenes/proteus/proteus-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/n8proteus.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "west-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 1100,
+              "maximumErrorMeters": 2000,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; the Stooke source origin and west-positive longitude are preserved."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            155,
+            151,
+            146
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "4516ef4c44689c0ba530d5c083166a18f53647dca03da9e340ad52619adc4937",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "proteus",
+        "displayName": "Proteus",
+        "panel": {
+          "introduction": "Proteus is Neptune’s largest inner moon. Voyager 2 revealed an angular, cratered world, dominated on one side by the enormous impact basin Pharos.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "208 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "30.070 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Neptune",
+              "value": "26.94 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Neptune",
+              "value": "About 117,674 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Voyager 2 imaging team · 1989"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "elevation": "Elevation"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain.",
+              "title": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+              "detail": "Voyager 2",
+              "thumbnail": "/scenes/proteus/proteus-normal-thumbnail.webp",
+              "surface": "proteus-normal-surface@2x.webp",
+              "poles": "proteus-normal-surface@2x.webp",
+              "source": {
+                "id": "c1137317",
+                "path": "../manifest.json",
+                "url": "https://pds-rings.seti.org/voyager/iss/"
+              },
+              "summary": "Voyager 2 images mapped onto the shape with adjusted brightness. Gray grid: missing or unreliable data."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+              "title": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+              "detail": "Radial shape",
+              "thumbnail": "/scenes/proteus/proteus-elevation-thumbnail.webp",
+              "surface": "proteus-elevation-surface@2x.webp",
+              "poles": "proteus-elevation-surface@2x.webp",
+              "source": {
+                "id": "stooke-shape",
+                "path": "../manifest.json",
+                "url": "https://sbn.psi.edu/pds/resource/stkshape.html"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-35",
+                  "0",
+                  "+25"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
+                "image": "/scenes/proteus/proteus-elevation-legend.webp"
+              },
+              "summary": "Height relative to a 208 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Proteus overview",
+            "href": "https://science.nasa.gov/neptune/moons/proteus/"
+          },
+          {
+            "label": "NASA/JPL; PDS",
+            "role": "surface",
+            "description": "Voyager imagery and Stooke shape model",
+            "href": "https://sbn.psi.edu/pds/resource/stkshape.html"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/neptune/moons/proteus/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "stooke-shape",
+      "path": "shape/n8proteus.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n8proteus.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "credit": "Philip Stooke; NASA Planetary Data System",
+      "license": "Public PDS scientific data release; cite Stooke (2025), DOI 10.26033/yt84-5y91.",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "acquisition": "Download the released longitude/latitude/radius table.",
+      "redistribution": "Retain Stooke and PDS attribution.",
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-centered-radius-grid",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+      "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
+      "bytes": 70226,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/n8proteus.tab",
+        "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n8proteus.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1137317",
+      "path": "observations/C1137317_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137317",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG"
+      },
+      "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
+      "bytes": 2002000,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1137317_GEOMED.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1137317-label",
+      "path": "observations/C1137317_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137317",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL"
+      },
+      "sha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2",
+      "bytes": 3310,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1137317_GEOMED.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1138920",
+      "path": "observations/C1138920_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1138920",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG"
+      },
+      "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
+      "bytes": 2002000,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1138920_GEOMED.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c1138920-label",
+      "path": "observations/C1138920_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1138920",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL"
+      },
+      "sha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257",
+      "bytes": 3337,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C1138920_GEOMED.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored source interpretation or preparation metadata.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored source interpretation or preparation metadata.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "b7df3e6f593276fcf4a07ff90347efe5f72a47075ad3d9d189aa779fa6ed83ce",
+      "bytes": 5551,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "stooke-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/proteus/proteus-elevation-thumbnail.webp",
+          "bytes": 7376,
+          "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/proteus/proteus-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
+          "bytes": 376918,
+          "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "parents": [],
+      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "mosaics"
+      },
+      "inputs": [
+        "c1137317",
+        "c1137317-label",
+        "c1138920",
+        "c1138920-label",
+        "stooke-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
+          "bytes": 3420,
+          "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
+          "bytes": 426212,
+          "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5601,
+          "sha256": "123fd7af476268715795d93efe70d2c1568addd553bf2a51c9778e170a6b1e97",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 22918,
+          "sha256": "bdedc167a33d261e3c4bf62daad7d4ef33051e885b356eba76423a73111f0db5",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 18448,
+          "sha256": "cc9136fdf0390b5bdd8a3b25b9068171343f4846c3b757843dc910e661aeefe6",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -11,7 +11,7 @@ export function createExplorerRailController(documentTarget, windowTarget, { onO
   const settings = documentTarget.querySelector(".planet-settings-action");
   const settingsPanel = documentTarget.querySelector(".planet-settings-panel");
   const aside = documentTarget.querySelector(".planet-sidebar");
-  if (![explore, about, settings].every((node) =>
+  if (![explore, settings, ...(about ? [about] : [])].every((node) =>
     node instanceof windowTarget.HTMLButtonElement) ||
       ![panel, settingsPanel, drawer, searchCard, aside].every((node) =>
         node instanceof windowTarget.HTMLElement) ||
@@ -28,7 +28,7 @@ export function createExplorerRailController(documentTarget, windowTarget, { onO
     drawer.hidden = next !== "explore";
     searchCard.hidden = false;
     explore.ariaPressed = String(next === "explore");
-    about.ariaPressed = String(next === "about");
+    if (about) about.ariaPressed = String(next === "about");
     settings.ariaPressed = String(next === "settings");
     aside.ariaLabel = next === "about" ? "About cssEarth"
       : next === "settings" ? "Settings"
@@ -46,7 +46,7 @@ export function createExplorerRailController(documentTarget, windowTarget, { onO
     show("explore");
     onOpenSolarSystem();
   }, { signal: events.signal });
-  about.addEventListener("click", () => show("about"), { signal: events.signal });
+  about?.addEventListener("click", () => show("about"), { signal: events.signal });
   settings.addEventListener("click", () => show("settings"), { signal: events.signal });
   const showSearch = () => { if (activePanel !== "explore") show("explore"); };
   search.addEventListener("input", showSearch, { signal: events.signal });
@@ -59,7 +59,7 @@ export function createExplorerRailController(documentTarget, windowTarget, { onO
     event.preventDefault();
     const action = activePanel === "settings" ? settings : about;
     show("explore");
-    action.focus();
+    action?.focus();
   }, { signal: events.signal });
   render("explore");
 

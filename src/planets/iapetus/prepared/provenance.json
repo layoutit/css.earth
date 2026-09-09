@@ -1,0 +1,567 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "iapetus",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "8979abc7b88d6e5b5521508e886b5216040652540feca58b3c420c4c34d3d012"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "97a253269119c064bf6a8b950f5a7c18dc683aa4bb7348b9417cdbe540091e05",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "iapetus",
+        "displayName": "Iapetus",
+        "publicBase": "/scenes/iapetus/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 8192,
+          "height": 4096,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 1024,
+          "surfaceQuality": 90,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "geotiff-rgb-alpha",
+                "channels": "monochrome",
+                "zeroValidity": "all-channels",
+                "noData": 0,
+                "centerLongitude": 0,
+                "resolutionMeters": 802.85145591739
+              }
+            },
+            {
+              "id": "enhanced",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": null,
+                "centerLongitude": 180
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 734.5,
+          "camera": {
+            "initialScenePitchDegrees": 40,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/iapetus/iapetus-normal-surface@2x.webp",
+          "polesUrl": "/scenes/iapetus/iapetus-normal-poles@2x.webp"
+        },
+        "celestial": {
+          "sunSource": "JPL Iapetus orbit plus VSOP87 Saturn position and IAU/WGCCRE Iapetus rotation"
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            154,
+            143,
+            122
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "13a421f7940cb465ab461e2a0fb541e4eeb78ccc07c6cb56f14632273d783d02",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "iapetus",
+        "displayName": "Iapetus",
+        "title": {
+          "label": "Iapetus",
+          "viewBox": "0 0 89.6354 35",
+          "width": 89.6354,
+          "height": 35,
+          "path": "M3.05 8.63L3.05 29L0 29L0 8.63ZM11.01 29.26Q9.57 29.26 8.42 28.75Q7.27 28.25 6.61 27.26Q5.95 26.28 5.95 24.83Q5.95 23.59 6.43 22.78Q6.9 21.97 7.72 21.51Q8.54 21.04 9.58 20.8Q10.61 20.56 11.7 20.44Q13.06 20.26 13.86 20.16Q14.67 20.06 15.02 19.83Q15.37 19.59 15.37 19.07L15.37 18.96Q15.37 18.21 15.02 17.67Q14.68 17.13 14.03 16.81Q13.38 16.49 12.44 16.49Q11.51 16.49 10.8 16.8Q10.09 17.11 9.68 17.63Q9.27 18.14 9.16 18.76L6.32 18.6Q6.51 17.23 7.31 16.22Q8.12 15.22 9.45 14.67Q10.77 14.11 12.45 14.11Q13.71 14.11 14.77 14.42Q15.83 14.73 16.61 15.36Q17.39 15.98 17.82 16.9Q18.25 17.82 18.25 19.05L18.25 29L15.39 29L15.39 26.95L15.33 26.95Q15.02 27.52 14.48 28.06Q13.94 28.59 13.1 28.92Q12.25 29.26 11.01 29.26ZM11.62 26.91Q12.88 26.91 13.72 26.45Q14.56 25.99 14.97 25.23Q15.38 24.46 15.38 23.57L15.38 21.82Q15.23 21.96 14.86 22.06Q14.49 22.16 13.99 22.26Q13.48 22.36 12.93 22.44Q12.39 22.53 11.87 22.6Q11.06 22.71 10.37 22.96Q9.68 23.22 9.26 23.67Q8.85 24.13 8.85 24.88Q8.85 25.53 9.19 25.98Q9.53 26.43 10.15 26.67Q10.77 26.91 11.62 26.91ZM21.58 34.71L21.58 14.37L24.44 14.37L24.44 16.53L24.52 16.53Q24.94 15.82 25.58 15.27Q26.23 14.73 27.08 14.42Q27.94 14.11 28.99 14.11Q30.83 14.11 32.26 15.05Q33.68 16 34.46 17.71Q35.25 19.42 35.25 21.7Q35.25 23.97 34.46 25.68Q33.68 27.39 32.26 28.34Q30.85 29.29 28.97 29.29Q27.94 29.29 27.1 28.97Q26.27 28.66 25.63 28.09Q25 27.52 24.56 26.77L24.49 26.77L24.49 34.71ZM28.37 26.79Q29.58 26.79 30.46 26.18Q31.34 25.57 31.82 24.43Q32.3 23.3 32.3 21.69Q32.3 20.07 31.81 18.94Q31.33 17.8 30.45 17.2Q29.58 16.6 28.37 16.6Q27.13 16.6 26.21 17.23Q25.3 17.86 24.81 19Q24.33 20.14 24.33 21.69Q24.33 23.2 24.82 24.36Q25.31 25.51 26.22 26.15Q27.13 26.79 28.37 26.79ZM44.15 29.33Q41.97 29.33 40.41 28.36Q38.84 27.4 38 25.68Q37.16 23.97 37.16 21.74Q37.16 19.5 38.03 17.77Q38.9 16.04 40.43 15.05Q41.96 14.07 43.97 14.07Q45.45 14.07 46.68 14.6Q47.91 15.12 48.82 16.11Q49.73 17.09 50.22 18.49Q50.71 19.88 50.71 21.66L50.71 22.51L38.56 22.51L38.56 20.3L49.21 20.3L47.89 20.99Q47.89 19.62 47.42 18.61Q46.95 17.6 46.08 17.05Q45.2 16.5 43.98 16.5Q42.77 16.5 41.89 17.06Q41 17.61 40.52 18.6Q40.05 19.59 40.05 20.91L40.05 22.23Q40.05 23.64 40.55 24.69Q41.04 25.75 41.96 26.32Q42.88 26.89 44.18 26.89Q45.11 26.89 45.82 26.62Q46.54 26.35 47.02 25.83Q47.5 25.31 47.72 24.63L50.51 24.78Q50.22 26.12 49.32 27.14Q48.43 28.17 47.1 28.75Q45.77 29.33 44.15 29.33ZM60.15 14.37L60.15 16.78L51.81 16.78L51.81 14.37ZM54.28 10.5L57.2 10.5L57.2 25.1Q57.2 25.94 57.54 26.28Q57.89 26.62 58.75 26.62Q59.06 26.62 59.45 26.61Q59.85 26.59 60.14 26.58L60.24 28.97Q59.88 29.01 59.36 29.03Q58.85 29.05 58.37 29.05Q56.33 29.05 55.31 28.15Q54.28 27.25 54.28 25.47ZM67.72 29.27Q66.23 29.27 65.05 28.62Q63.86 27.97 63.18 26.69Q62.5 25.4 62.5 23.52L62.5 14.37L65.41 14.37L65.41 23.18Q65.41 24.88 66.26 25.77Q67.1 26.66 68.59 26.66Q69.59 26.66 70.38 26.26Q71.16 25.86 71.63 25Q72.09 24.15 72.09 22.85L72.09 14.37L75.01 14.37L75.01 29L72.16 29L72.16 25.38L72.74 25.38Q72.05 27.35 70.78 28.31Q69.51 29.27 67.72 29.27ZM83.72 29.33Q82.06 29.33 80.74 28.82Q79.42 28.3 78.61 27.27Q77.8 26.24 77.65 24.72L80.5 24.6Q80.65 25.76 81.47 26.38Q82.29 27 83.67 27Q85.07 27 85.87 26.44Q86.67 25.87 86.67 25.01Q86.67 24.27 86.12 23.81Q85.57 23.35 84.59 23.15L82.17 22.62Q80.11 22.15 79.05 21.1Q77.99 20.06 77.99 18.46Q77.99 17.16 78.7 16.17Q79.42 15.18 80.68 14.62Q81.94 14.07 83.62 14.07Q85.25 14.07 86.49 14.62Q87.73 15.18 88.47 16.2Q89.21 17.21 89.31 18.61L86.56 18.73Q86.48 17.73 85.72 17.06Q84.96 16.39 83.65 16.39Q82.43 16.39 81.68 16.97Q80.93 17.54 80.93 18.36Q80.93 19.12 81.47 19.57Q82.02 20.03 83.06 20.26L85.53 20.81Q87.64 21.28 88.64 22.26Q89.64 23.24 89.64 24.83Q89.64 26.2 88.87 27.22Q88.1 28.23 86.77 28.78Q85.44 29.33 83.72 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Saturn’s two-toned moon, with a dark leading hemisphere, bright icy terrain and a mountain ridge along its equator.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "734.3 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "9.537 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 79 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 79 days (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Saturn",
+              "value": "About 3,561,000 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Giovanni Cassini · 1671"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.09 ± 0.01 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "enhanced": "Enhanced color"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
+              "title": "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette.",
+              "thumbnail": "/scenes/iapetus/iapetus-normal-thumbnail.webp",
+              "surface": "iapetus-normal-surface@2x.webp",
+              "poles": "iapetus-normal-poles@2x.webp",
+              "source": {
+                "id": "cassini-voyager-2008-iapetus",
+                "path": "../manifest.json"
+              },
+              "summary": "Cassini and Voyager mosaic with coarse poles. Shadows and seams remain; the gray grid marks gaps."
+            },
+            {
+              "id": "enhanced",
+              "label": "Enhanced color",
+              "description": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere.",
+              "title": "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere.",
+              "thumbnail": "/scenes/iapetus/iapetus-enhanced-thumbnail.webp",
+              "surface": "iapetus-enhanced-surface@2x.webp",
+              "poles": "iapetus-enhanced-poles@2x.webp",
+              "source": {
+                "id": "cassini-iss-2014-iapetus-color",
+                "path": "../manifest.json"
+              },
+              "summary": "Enhanced Cassini infrared and ultraviolet color. The dark hemisphere is real terrain, not missing imagery."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Iapetus facts",
+            "href": "https://science.nasa.gov/saturn/moons/iapetus/"
+          },
+          {
+            "label": "USGS",
+            "role": "surface",
+            "description": "Cassini/Voyager monochrome map",
+            "href": "https://astrogeology.usgs.gov/search/map/iapetus_cassini_voyager_global_mosaic_803m"
+          },
+          {
+            "label": "JPL",
+            "role": "color",
+            "description": "Cassini 2014 enhanced-color map",
+            "href": "https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/saturn/moons/iapetus/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "credit": "NASA/JPL/Space Science Institute",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-voyager-2008-iapetus",
+      "path": "observations/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/iapetus_cassini_voyager_global_mosaic_803m",
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 5760,
+      "height": 2880,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 736000,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "USGS May 2008 Cassini/Voyager mosaic. Exactly zero is GeoTIFF no-data; preserve all other values, including dark terrain. Voyager covers poles and some areas were acquired in Saturnshine. Photographed shading and resolution vary.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
+      },
+      "sha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
+      "bytes": 16612487,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+        "url": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-iss-2014-iapetus-color",
+      "path": "observations/PIA18436.jpg",
+      "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
+      "catalog": "https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/",
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 11741,
+      "height": 5871,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Published global rectangular mosaic without a separate validity mask. Preserve every supplied pixel: the dark leading hemisphere is real surface albedo. Coarse polar coverage, patch seams and residual photographed shading remain.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg"
+      },
+      "sha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b",
+      "bytes": 4989080,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/PIA18436.jpg",
+        "url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source metadata, license evidence, or authored preparation and content.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "234898f125979cee8bf8a3ac4b05c5ca02495699416c14ad21b9d7cc70580c5f",
+      "bytes": 10223,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "USGS May 2008 Cassini/Voyager mosaic at 803 m per source pixel (5760 × 2880), resampled into the shared texture layout. No additional detail is created. Coarse polar coverage, source seams and photographed shading remain; gray grid marks explicit no-data. Shared Shadows adds approximate globe lighting. Mean-radius sphere: the real equatorial ridge does not change the silhouette."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "channels": "monochrome",
+          "zeroValidity": "all-channels",
+          "noData": 0,
+          "centerLongitude": 0,
+          "resolutionMeters": 802.85145591739
+        }
+      },
+      "inputs": [
+        "cassini-voyager-2008-iapetus"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/iapetus/iapetus-normal-thumbnail.webp",
+          "bytes": 3272,
+          "sha256": "08a31039ae1c61ae8ec62e23af063c3b714401dd5e011fec73d50032094ff125",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-normal-surface@2x.webp",
+          "bytes": 5599434,
+          "sha256": "cac49dcf9c062fc702a97a3d5dbcaae88da67c7d2be0fc799f02c6d7ea92c14b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-normal-poles@2x.webp",
+          "bytes": 66522,
+          "sha256": "5fb1afe9c68fe35c7cc9b198e45df62d95782c6bcd98ec4490b3d28697e14df0",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "enhanced",
+      "label": "Enhanced color",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Published 2014 enhanced-color Cassini composite, photometrically corrected by Paul Schenk, with nominal 400 m source pixels. Colors extend into ultraviolet and infrared. The dark leading hemisphere is real surface albedo, not a shadow or missing imagery. All supplied pixels are preserved; coarse patches and residual photographed shading remain. Shared Shadows and globe lighting remain active; shape is approximated by a sphere."
+      ],
+      "lensIds": [
+        "enhanced"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "cassini-iss-2014-iapetus-color"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/iapetus/iapetus-enhanced-thumbnail.webp",
+          "bytes": 5528,
+          "sha256": "8ae7c9f2f827c49ba2ef2d9b6e019803a55d21dfd42d61ebfe031968ebc8c061",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-enhanced-surface@2x.webp",
+          "bytes": 5088356,
+          "sha256": "5a16eeba8ee8148781d8fbf256e4071d182819010b1311bf5784b46de20cd163",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/iapetus/iapetus-enhanced-poles@2x.webp",
+          "bytes": 78254,
+          "sha256": "23ab4d0e5828186d448bde797f6b00348be8a7e7e23a6a3a3db4f1a3b219f223",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6433,
+          "sha256": "7c84ebcf933336224931953b90e10ca7a977b7ca1b752b5f1b8dce1f2ced82b2",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 77220,
+          "sha256": "6633047734f3ca589f78b411ef665ecbfc535c8df0c4887137f21d5b53ef4f9d",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:enhanced",
+      "label": "Enhanced color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "enhanced"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/enhanced.webp",
+          "bytes": 56214,
+          "sha256": "82a6e8b92532d14a8911fd584b37d6ebc6eafb88ca2d860f821dd615efddc0cf",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

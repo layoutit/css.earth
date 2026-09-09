@@ -90,7 +90,8 @@
           "id": "usgs-dawn-fc-global-140m",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic"
+        "detail": "Global mosaic",
+        "summary": "Dawn visible-light images with shadows. The gray grid marks known gaps; some dark edges remain uncertain."
       },
       {
         "id": "enhanced",
@@ -104,7 +105,8 @@
           "id": "nasa-dawn-fc-pia19977",
           "path": "../manifest.json"
         },
-        "detail": "False color"
+        "detail": "False color",
+        "summary": "Dawn images at 920, 750 and 440 nm in false color. Shadows remain; the gray grid marks known gaps."
       },
       {
         "id": "elevation",
@@ -132,7 +134,8 @@
           "id": "dawn-elevation",
           "path": "../manifest.json"
         },
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "summary": "Height relative to a 470 km sphere. Interpolated polar terrain beyond 60° is withheld from this view."
       }
     ]
   },

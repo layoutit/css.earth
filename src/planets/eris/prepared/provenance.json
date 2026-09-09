@@ -1,0 +1,323 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "eris",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "d91e882f027fc83c93b8631f2450c92ede5befcc16947eb95dd22accf93e2af0"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+  },
+  "recipes": [
+    {
+      "id": "shape-model",
+      "path": "source/preparation/shape-model.json",
+      "sha256": "abc023870658f0d1d49f23131ada3573ecc8acb8d50a4624eec9b619ed397723",
+      "parameters": {
+        "schema": "cssearth-shape-model@1",
+        "displayName": "Eris",
+        "displayRadius": 230,
+        "distanceAu": 67.78,
+        "quadBudget": 2000,
+        "mesh": {
+          "latitudeSegments": 16,
+          "longitudeSegments": 32,
+          "width": 2048,
+          "height": 1024,
+          "poleSize": 256,
+          "seamOverlap": 0.025
+        },
+        "camera": {
+          "initialScenePitchDegrees": 20,
+          "defaultControlYawDegrees": -35,
+          "maximumHeightShare": 0.7
+        },
+        "surfaceModel": "nasa-eris.glb"
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "132da74e3c0be63b3996050f6cb594d0e3cb1db8cd7fd78f7167d783df545157",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "eris",
+        "displayName": "Eris",
+        "title": {
+          "label": "Eris"
+        },
+        "panel": {
+          "introduction": "Eris is a bright, icy dwarf planet in the distant outer Solar System. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Diameter",
+              "value": "2,326 ± 12 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 15.8 days"
+            },
+            {
+              "id": "moon-count",
+              "label": "Moons",
+              "value": "1 — Dysnomia"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "About 557 years"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "value": "Consistent with a sphere from a stellar occultation"
+            },
+            {
+              "id": "surface",
+              "label": "Surface coverage",
+              "value": "Unresolved; no terrain map"
+            },
+            {
+              "id": "appearance",
+              "label": "Surface representation",
+              "value": "NASA VTAD illustration; terrain details are not observations"
+            },
+            {
+              "id": "orientation",
+              "label": "Orientation",
+              "value": "Arbitrary display pole and meridian"
+            },
+            {
+              "id": "ring-system",
+              "label": "Rings",
+              "value": "None known"
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "illustration",
+          "controls": [
+            {
+              "id": "illustration",
+              "label": "Illustrative model",
+              "description": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "title": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "qualification": "Illustration; not an observed surface map.",
+              "thumbnail": "illustration-thumbnail.webp",
+              "surface": "surface.webp",
+              "poles": "poles.webp",
+              "source": {
+                "id": "nasa-vtad-eris-model",
+                "path": "../manifest.json",
+                "url": "https://science.nasa.gov/resource/eris-3d-model/"
+              },
+              "summary": "NASA's illustration of Eris. Its surface is unresolved; the terrain and coordinates are illustrative."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Eris overview",
+            "href": "https://science.nasa.gov/dwarf-planets/eris/"
+          },
+          {
+            "label": "NASA VTAD",
+            "role": "illustration",
+            "description": "Eris model and illustrative surface texture",
+            "href": "https://science.nasa.gov/resource/eris-3d-model/"
+          },
+          {
+            "label": "Sicardy et al.",
+            "role": "shape",
+            "description": "2010 occultation radius and spherical shape",
+            "href": "https://doi.org/10.1038/nature10550"
+          },
+          {
+            "label": "Bernstein et al.",
+            "role": "rotation",
+            "description": "2023 photometry showing synchronous rotation",
+            "href": "https://arxiv.org/abs/2303.13445"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Sicardy et al. (2011); Bernstein et al. (2023); JPL orbital elements"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/dwarf-planets/eris/",
+            "credit": "NASA Science; newer rotation result from Bernstein et al. (2023)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "path": "nasa-eris.glb",
+      "id": "nasa-vtad-eris-model",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Eris_1_2326.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
+      "acquisition": "Original GLB downloaded from NASA Science",
+      "redistribution": "NASA media; illustrative terrain, not spacecraft mapping",
+      "sha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
+      "bytes": 4398964,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "nasa-eris.glb",
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Eris_1_2326.glb"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Object-owned preparation, content or attribution",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Object-owned preparation, content or attribution",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "38fb6ca520c05085af323fbaf7ab386324e161a8828d199c770ba179ad2ba1b3",
+      "bytes": 3751,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "illustration",
+      "label": "Illustrative model",
+      "recipe": "shape-model",
+      "selector": "",
+      "parents": [],
+      "process": "Extract the source model base color and project it onto the authored shape.",
+      "limitations": [
+        "Illustration; not an observed surface map.",
+        "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+      ],
+      "lensIds": [
+        "illustration"
+      ],
+      "recipeDependencies": [
+        "shape-model"
+      ],
+      "interpretation": {
+        "kind": "illustrative-model",
+        "resolvedSurfaceObservation": false
+      },
+      "inputs": [
+        "nasa-vtad-eris-model"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/eris/illustration-thumbnail.webp",
+          "bytes": 2774,
+          "sha256": "690d89c43950f653138d4836619252bd7ae0d39a18d68e1fb54427f94ecc92a0",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/eris/surface.webp",
+          "bytes": 1980854,
+          "sha256": "018b117099d3fa9442b7511413970afc4a1f3b289a6b5a1a964c80c6aafc21f8",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/eris/poles.webp",
+          "bytes": 63748,
+          "sha256": "42251e11cfc2cef403b60cfd41e95523d48a76c569746c9dfb2284e29168c53c",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 3998,
+          "sha256": "e58b4cc55603bdc49087e464fd698d0920333c8bd8d1421c75b6d6284b35c4a1",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:illustration",
+      "label": "Illustrative model preview",
+      "recipe": "shape-model",
+      "selector": "",
+      "recipeDependencies": [
+        "shape-model"
+      ],
+      "inputs": [],
+      "parents": [
+        "illustration"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/illustration.webp",
+          "bytes": 66522,
+          "sha256": "ae20b8b98bb0e2d13e20a1b38c50fcd6119b622ac398edf0cdd195fa92e9de81",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

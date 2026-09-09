@@ -1,0 +1,331 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "haumea",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "680ae91bcf1594b4f5cbc2fa0dd2d94d36cc3f33bf3dd0fbdb94bf8098b4fb0d"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+  },
+  "recipes": [
+    {
+      "id": "shape-model",
+      "path": "source/preparation/shape-model.json",
+      "sha256": "60f82227a1f198e5c6639e1021cc6a4eb6e677c62d08d7780fca515561138630",
+      "parameters": {
+        "schema": "cssearth-shape-model@1",
+        "displayName": "Haumea",
+        "displayRadius": 230,
+        "distanceAu": 43.1,
+        "quadBudget": 2000,
+        "mesh": {
+          "latitudeSegments": 32,
+          "longitudeSegments": 48,
+          "width": 3072,
+          "height": 1536,
+          "poleSize": 256,
+          "seamOverlap": 0.025
+        },
+        "ring": {
+          "innerRadiusKm": 2252,
+          "outerRadiusKm": 2322,
+          "segments": 128,
+          "displayValue": 130,
+          "displayOpacity": 0.5,
+          "qualification": "Ring dimensions from the 2017 occultation. Gray appearance and constant display opacity are schematic; the measured 0.5 occultation opacity is not a view-independent optical model."
+        },
+        "camera": {
+          "initialScenePitchDegrees": 40,
+          "defaultControlYawDegrees": -50,
+          "maximumHeightShare": 0.4
+        },
+        "surfaceModel": "nasa-haumea.glb"
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "57171e43e06898e88804b238cdf1fe0e7c9fed69b777dbe70f769efca1aace58",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "haumea",
+        "displayName": "Haumea",
+        "title": {
+          "label": "Haumea"
+        },
+        "panel": {
+          "introduction": "Haumea is a rapidly rotating, elongated dwarf planet with a narrow ring. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Model dimensions",
+              "value": "2,322 × 1,704 × 1,026 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "3.915 hours"
+            },
+            {
+              "id": "ring-width",
+              "label": "Ring width",
+              "value": "About 70 km"
+            },
+            {
+              "id": "moon-count",
+              "label": "Moons",
+              "value": "2 — Hiʻiaka and Namaka"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "ring-radius",
+              "label": "Ring radius",
+              "value": "About 2,287 km"
+            },
+            {
+              "id": "surface",
+              "label": "Surface coverage",
+              "value": "Unresolved; no terrain map"
+            },
+            {
+              "id": "phase",
+              "label": "Rotational phase",
+              "value": "Arbitrary display orientation"
+            },
+            {
+              "id": "appearance",
+              "label": "Surface representation",
+              "value": "NASA VTAD illustration; terrain details are not observations"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "About 285 years",
+              "source": {
+                "url": "https://science.nasa.gov/dwarf-planets/haumea/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "illustration",
+          "controls": [
+            {
+              "id": "illustration",
+              "label": "Illustrative model",
+              "description": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "title": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "qualification": "Illustration; not an observed surface map.",
+              "thumbnail": "illustration-thumbnail.webp",
+              "surface": "surface.webp",
+              "poles": "poles.webp",
+              "source": {
+                "id": "nasa-vtad-haumea-model",
+                "path": "../manifest.json",
+                "url": "https://science.nasa.gov/resource/haumea-3d-model/"
+              },
+              "summary": "NASA's illustration of Haumea. Its surface is unresolved; the terrain and coordinates are illustrative."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Haumea overview",
+            "href": "https://science.nasa.gov/dwarf-planets/haumea/"
+          },
+          {
+            "label": "NASA VTAD",
+            "role": "illustration",
+            "description": "Haumea model and illustrative surface texture",
+            "href": "https://science.nasa.gov/resource/haumea-3d-model/"
+          },
+          {
+            "label": "Ortiz et al.",
+            "role": "shape",
+            "description": "2017 occultation shape and ring measurements",
+            "href": "https://doi.org/10.1038/nature24051"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Ortiz et al. (2017); JPL orbital elements"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/dwarf-planets/haumea/",
+            "credit": "NASA Science"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "nasa-vtad-haumea-model",
+      "path": "nasa-haumea.glb",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
+      "acquisition": "Original downloadable GLB from NASA Science",
+      "redistribution": "NASA media; not photographed terrain or a measured normal map",
+      "sha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8",
+      "bytes": 11335060,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "nasa-haumea.glb",
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Object preparation, content, or attribution",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Object preparation, content, or attribution",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "aadc2d17344c41f070f493cfa3ea650774c408f7f0c58fe3a196cf6debb11e59",
+      "bytes": 3741,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "illustration",
+      "label": "Illustrative model",
+      "recipe": "shape-model",
+      "selector": "",
+      "parents": [],
+      "process": "Extract the source model base color and project it onto the authored shape.",
+      "limitations": [
+        "Illustration; not an observed surface map.",
+        "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+      ],
+      "lensIds": [
+        "illustration"
+      ],
+      "recipeDependencies": [
+        "shape-model"
+      ],
+      "interpretation": {
+        "kind": "illustrative-model",
+        "resolvedSurfaceObservation": false
+      },
+      "inputs": [
+        "nasa-vtad-haumea-model"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/haumea/illustration-thumbnail.webp",
+          "bytes": 2420,
+          "sha256": "c9f82de3c313e4610d82aed7e14cbf363a92491624902a5ca5662a35baa4c9ab",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/haumea/surface.webp",
+          "bytes": 3525294,
+          "sha256": "c69a552407aa144d2c47741928cfac6bfdc798a25503c29941d2639b96f60742",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/haumea/poles.webp",
+          "bytes": 75844,
+          "sha256": "ceb4de7e2d997b2b0cda4ef9fc932e5bd8edd1cc0052dd85c3fc716c3ec9d8b1",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6426,
+          "sha256": "3144b8bd8233aaa4be590bef0f6660694ca4ffafaf56babb5188775565f98d6f",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:illustration",
+      "label": "Illustrative model preview",
+      "recipe": "shape-model",
+      "selector": "",
+      "recipeDependencies": [
+        "shape-model"
+      ],
+      "inputs": [],
+      "parents": [
+        "illustration"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/illustration.webp",
+          "bytes": 48410,
+          "sha256": "b036d6681f490495d995f9c39b68d8f343f93bc525e8fa8aabb70bfef9ecc64b",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

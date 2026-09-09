@@ -3,6 +3,7 @@ import { loadPresentationAdapters } from './adapters.js';
 import { prepareRowBankCutaway } from './row-bank-cutaway.js';
 import { prepareComposite } from './composite.js';
 import type { PresentationInputs } from './types.js';
+import { prepareActivationGroups } from '../../../../../tools/prepared-activation-groups.mjs';
 export type { PresentationInputs } from './types.js';
 
 export interface PresentationProfile {
@@ -25,7 +26,8 @@ export async function prepareCssPresentation(input: PresentationInputs) {
   const compile = input.mode === 'row-bank-cutaway' ? prepareRowBankCutaway : input.mode === 'composite' ? prepareComposite : null;
   if (!compile) throw new TypeError('Unsupported material composition.');
   const draft = await compile(input, adapters);
-  const presentation = { ...draft, materials: adapters.prepareMaterialTracks(draft) };
+  const presentation = { ...draft, materials: adapters.prepareMaterialTracks(draft),
+    tree: { ...draft.tree, activationGroups: prepareActivationGroups(draft) } };
   adapters.requirePreparedPresentation(presentation, { controls: input.controls });
   return parsePreparedObjectRuntime({ ...presentation, schema: 'cssearth-object-runtime@4',
     id: input.solarSource.bodyId, controls: input.controls });

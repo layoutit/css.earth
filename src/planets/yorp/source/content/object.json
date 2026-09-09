@@ -63,7 +63,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Radar shape with stronger coverage in the north. Rotation uses a fixed rate, not a current attitude model."
       },
       {
         "id": "elevation",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj",
           "image": "/scenes/yorp/yorp-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Radar height relative to a 56.4 m sphere. A quarter had poor or no coverage; the polar shape is uncertain."
       }
     ]
   },

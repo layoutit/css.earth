@@ -63,7 +63,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DART encounter shape"
+        "detail": "DART encounter shape",
+        "summary": "Shape from DART and LICIACube encounter images, including modeled terrain. It is not a post-impact map."
       },
       {
         "id": "elevation",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.xml",
           "image": "/scenes/dimorphos/dimorphos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Encounter-model height relative to a 75 m sphere. It shows the overall shape, not impact-induced changes."
       }
     ]
   },

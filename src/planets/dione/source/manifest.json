@@ -31,7 +31,15 @@
       },
       "coverage": "USGS 2010 Cassini/Voyager mosaic. Preserve all nonzero source values; exactly zero is GeoTIFF no-data. Photographed shading and native resolution vary.",
       "expectedBytes": 265490551,
-      "expectedSha256": "5c5d796c02e3c99fde5dd034e01dd1f25905699a4885843aed445ded955e08b5"
+      "expectedSha256": "5c5d796c02e3c99fde5dd034e01dd1f25905699a4885843aed445ded955e08b5",
+      "capture": {
+        "spacecraftIds": [
+          "cassini",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
+      }
     },
     {
       "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
@@ -61,7 +69,13 @@
       },
       "coverage": "Published global rectangular display mosaic without a separate validity mask. Preserve all supplied pixels, including dark terrain, residual photographed shadows and coarse inserts.",
       "expectedBytes": 10255303,
-      "expectedSha256": "5e885d0e3bac1e1ee36934063d5c9cdf609dc10ad44677cba31bc9e703b674ff"
+      "expectedSha256": "5e885d0e3bac1e1ee36934063d5c9cdf609dc10ad44677cba31bc9e703b674ff",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18434.jpg"
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -93,7 +107,13 @@
       "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
       "expectedBytes": 6044025,
-      "expectedSha256": "08a2a6141d0095531da511468d4176577dd3ac8ce45c0d154ba5a655a9711617"
+      "expectedSha256": "08a2a6141d0095531da511468d4176577dd3ac8ce45c0d154ba5a655a9711617",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif"
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -123,7 +143,13 @@
       "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
       "expectedBytes": 790785,
-      "expectedSha256": "f2a0bf4a4eba63ddfd566231fc02fc7f1f8aeaba0687e437d8669d8844f436ee"
+      "expectedSha256": "f2a0bf4a4eba63ddfd566231fc02fc7f1f8aeaba0687e437d8669d8844f436ee",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npradius_g.tif"
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -153,7 +179,13 @@
       "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
       "expectedBytes": 790785,
-      "expectedSha256": "416107461ff452d07944f5391d3e9e5bdda8c6d7544379444778e6ec52c72970"
+      "expectedSha256": "416107461ff452d07944f5391d3e9e5bdda8c6d7544379444778e6ec52c72970",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spradius_g.tif"
+      }
     },
     {
       "id": "eso-milky-way-panorama",

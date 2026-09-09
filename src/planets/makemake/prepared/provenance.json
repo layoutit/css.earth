@@ -1,0 +1,312 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "makemake",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "569da50593415df02eac72d44e81c4103639264a4fce1eff49823d2992e84a2e"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+  },
+  "recipes": [
+    {
+      "id": "shape-model",
+      "path": "source/preparation/shape-model.json",
+      "sha256": "5adc6f1688a27cb18b51373e8c6451ad9f0fac4b8aaab0ea2651728e787f50d1",
+      "parameters": {
+        "schema": "cssearth-shape-model@1",
+        "displayName": "Makemake",
+        "displayRadius": 230,
+        "distanceAu": 45.8,
+        "quadBudget": 2000,
+        "mesh": {
+          "latitudeSegments": 16,
+          "longitudeSegments": 32,
+          "width": 2048,
+          "height": 1024,
+          "poleSize": 256,
+          "seamOverlap": 0.025
+        },
+        "camera": {
+          "initialScenePitchDegrees": 20,
+          "defaultControlYawDegrees": -50,
+          "maximumHeightShare": 0.8
+        },
+        "surfaceModel": "nasa-makemake.glb"
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "ee4337c2d161dc5aa417e862a7c00501f631a89a610e0d76f5b60e2c864f99b3",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "makemake",
+        "displayName": "Makemake",
+        "title": {
+          "label": "Makemake"
+        },
+        "panel": {
+          "introduction": "Makemake is a distant, reddish dwarf planet with one known moon. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Approximate radius",
+              "value": "715 km"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 22.5 hours"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "About 305 years"
+            },
+            {
+              "id": "moon-count",
+              "label": "Moons",
+              "value": "1 — nicknamed MK 2"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "45.8 AU"
+            },
+            {
+              "id": "surface",
+              "label": "Surface coverage",
+              "value": "Unresolved; no terrain map"
+            },
+            {
+              "id": "shape",
+              "label": "Display shape",
+              "value": "Spherical approximation"
+            },
+            {
+              "id": "appearance",
+              "label": "Surface representation",
+              "value": "NASA VTAD illustration; terrain details are not observations"
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "illustration",
+          "controls": [
+            {
+              "id": "illustration",
+              "label": "Illustrative model",
+              "description": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "title": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+              "qualification": "Illustration; not an observed surface map.",
+              "thumbnail": "illustration-thumbnail.webp",
+              "surface": "surface.webp",
+              "poles": "poles.webp",
+              "source": {
+                "id": "nasa-vtad-makemake-model",
+                "path": "../manifest.json",
+                "url": "https://science.nasa.gov/resource/makemake-3d-model/"
+              },
+              "summary": "NASA's illustration of Makemake. Its surface is unresolved; the terrain and coordinates are illustrative."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Makemake overview",
+            "href": "https://science.nasa.gov/dwarf-planets/makemake/"
+          },
+          {
+            "label": "NASA VTAD",
+            "role": "illustration",
+            "description": "Makemake model and illustrative surface texture",
+            "href": "https://science.nasa.gov/resource/makemake-3d-model/"
+          },
+          {
+            "label": "Ortiz et al.",
+            "role": "shape",
+            "description": "2011 occultation projected size and atmospheric constraints",
+            "href": "https://doi.org/10.1038/nature11597"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "NASA Science; Ortiz et al. (2012); JPL orbital elements"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+            "credit": "NASA Science"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "nasa-vtad-makemake-model",
+      "path": "nasa-makemake.glb",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/m/Makemake_1_1430.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
+      "acquisition": "Original downloadable GLB from NASA Science",
+      "redistribution": "NASA media; not photographed terrain or a measured normal map",
+      "sha256": "e7d5fa27f50afae10f0e7290cdf7a14ca856c0b9e99b2db02f25b75441fbdbef",
+      "bytes": 4441844,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "nasa-makemake.glb",
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/m/Makemake_1_1430.glb"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Object preparation, content, or attribution",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Object preparation, content, or attribution",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "2f9e6196f89d07dc2b2d6471e008ec7951e7eb84b1d4d3db3ef85aa231f03c01",
+      "bytes": 3423,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "illustration",
+      "label": "Illustrative model",
+      "recipe": "shape-model",
+      "selector": "",
+      "parents": [],
+      "process": "Extract the source model base color and project it onto the authored shape.",
+      "limitations": [
+        "Illustration; not an observed surface map.",
+        "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+      ],
+      "lensIds": [
+        "illustration"
+      ],
+      "recipeDependencies": [
+        "shape-model"
+      ],
+      "interpretation": {
+        "kind": "illustrative-model",
+        "resolvedSurfaceObservation": false
+      },
+      "inputs": [
+        "nasa-vtad-makemake-model"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/makemake/illustration-thumbnail.webp",
+          "bytes": 3362,
+          "sha256": "2dcf4fa4060b880a5a280a06c6faf747e67c2a2e903689be122c16a640e1a1b6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/makemake/surface.webp",
+          "bytes": 2451194,
+          "sha256": "d063a3a9e3c50e5c18496ea8281a55a58879a89314c74ddb87c02691176ddb5c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/makemake/poles.webp",
+          "bytes": 103396,
+          "sha256": "3743047c4034761442e293485e3f1369b29d6d7b4675c91a6cf5467a6761aac9",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 7558,
+          "sha256": "9e90b2050c960ee534a0e19b61bf4b87038e41580c446e95a05ec40a8d84f37b",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:illustration",
+      "label": "Illustrative model preview",
+      "recipe": "shape-model",
+      "selector": "",
+      "recipeDependencies": [
+        "shape-model"
+      ],
+      "inputs": [],
+      "parents": [
+        "illustration"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/illustration.webp",
+          "bytes": 80850,
+          "sha256": "3aa806bec5df0e3e6baf256fd112aebe7d6d6454a34a58d8e1082fbadd3ae52e",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -75,7 +75,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Galileo SSI · processed image mosaic"
+        "detail": "Galileo SSI · processed image mosaic",
+        "summary": "Galileo mosaic with uneven detail and shadows. It is not calibrated reflectance; gray grid: map gaps."
       },
       {
         "id": "elevation",
@@ -103,7 +104,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab",
           "image": "/scenes/ida/ida-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Height relative to a 16 km sphere, from the shape model. Colors include Ida's broad form; the outline is simplified."
       }
     ]
   },

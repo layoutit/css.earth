@@ -1,0 +1,522 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "euphrosyne",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "4811d48026b6756ba8828aaf3418d7c51d4f419e1573d083b899a061f2d73685"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "7ae5b20652f00e8088081fe063d17e75387b1ca4eec6e86af10bb5f09597960a"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "475b9a986777f02170c93a774254b53b85ddd7cb2db0e7869d27879c4544b472",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "euphrosyne",
+        "displayName": "Euphrosyne",
+        "publicBase": "/scenes/euphrosyne/",
+        "distanceAu": 3.162046843719569,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/31_Euphrosyne_mpcd.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 3202,
+                "expectedFaces": 6400
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -134
+              },
+              "minimum": -20,
+              "maximum": 20,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 134000,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 134,
+          "camera": {
+            "initialScenePitchDegrees": -44.5505617977528,
+            "defaultControlYawDegrees": 180
+          },
+          "mapUrl": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
+          "polesUrl": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/31_Euphrosyne_mpcd.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 3202,
+              "expectedFaces": 6400
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 2400,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "62c35277e375c94a04a87f332c77a12a3ed5a0ecd18ebc0e098e895273671d88",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "euphrosyne",
+        "displayName": "Euphrosyne",
+        "title": {
+          "label": "Euphrosyne",
+          "viewBox": "0 0 146.6638 35",
+          "width": 146.6638,
+          "height": 35,
+          "path": "M0 29L0 8.63L13.52 8.63L13.52 11.29L3.05 11.29L3.05 17.32L12.74 17.32L12.74 19.95L3.05 19.95L3.05 26.33L13.54 26.33L13.54 29ZM21.47 29.27Q19.98 29.27 18.8 28.62Q17.61 27.97 16.93 26.69Q16.25 25.4 16.25 23.52L16.25 14.37L19.16 14.37L19.16 23.18Q19.16 24.88 20.01 25.77Q20.86 26.66 22.35 26.66Q23.34 26.66 24.13 26.26Q24.92 25.86 25.38 25Q25.85 24.15 25.85 22.85L25.85 14.37L28.76 14.37L28.76 29L25.91 29L25.91 25.38L26.49 25.38Q25.8 27.35 24.53 28.31Q23.26 29.27 21.47 29.27ZM32.08 34.71L32.08 14.37L34.94 14.37L34.94 16.53L35.02 16.53Q35.44 15.82 36.09 15.27Q36.73 14.73 37.58 14.42Q38.44 14.11 39.49 14.11Q41.34 14.11 42.76 15.05Q44.18 16 44.97 17.71Q45.75 19.42 45.75 21.7Q45.75 23.97 44.97 25.68Q44.18 27.39 42.77 28.34Q41.35 29.29 39.48 29.29Q38.44 29.29 37.6 28.97Q36.77 28.66 36.13 28.09Q35.5 27.52 35.06 26.77L34.99 26.77L34.99 34.71ZM38.88 26.79Q40.08 26.79 40.96 26.18Q41.84 25.57 42.32 24.43Q42.8 23.3 42.8 21.69Q42.8 20.07 42.31 18.94Q41.83 17.8 40.95 17.2Q40.08 16.6 38.88 16.6Q37.63 16.6 36.72 17.23Q35.8 17.86 35.31 19Q34.83 20.14 34.83 21.69Q34.83 23.2 35.32 24.36Q35.81 25.51 36.72 26.15Q37.63 26.79 38.88 26.79ZM51.29 20.52L51.29 29L48.38 29L48.38 8.63L51.29 8.63L51.29 18.01L50.63 18.01Q51.34 16.04 52.61 15.08Q53.87 14.11 55.68 14.11Q57.17 14.11 58.34 14.76Q59.52 15.41 60.2 16.68Q60.89 17.95 60.89 19.85L60.89 29L57.97 29L57.97 20.21Q57.97 18.49 57.14 17.6Q56.31 16.71 54.79 16.71Q53.82 16.71 53.02 17.12Q52.22 17.53 51.75 18.37Q51.29 19.21 51.29 20.52ZM64.21 29L64.21 14.37L67.03 14.37L67.03 16.75L67.09 16.75Q67.49 15.53 68.39 14.86Q69.29 14.18 70.68 14.18Q70.99 14.18 71.28 14.21Q71.56 14.23 71.77 14.26L71.77 17Q71.59 16.94 71.16 16.89Q70.73 16.85 70.24 16.85Q69.38 16.85 68.67 17.23Q67.96 17.61 67.54 18.38Q67.12 19.16 67.12 20.3L67.12 29ZM79.86 29.33Q77.79 29.33 76.22 28.36Q74.65 27.4 73.77 25.68Q72.9 23.97 72.9 21.71Q72.9 19.46 73.77 17.73Q74.65 16.01 76.22 15.04Q77.79 14.07 79.86 14.07Q81.96 14.07 83.52 15.04Q85.08 16.01 85.95 17.73Q86.83 19.46 86.83 21.71Q86.83 23.97 85.95 25.68Q85.08 27.4 83.52 28.36Q81.96 29.33 79.86 29.33ZM79.86 26.81Q81.14 26.81 82.04 26.17Q82.93 25.53 83.41 24.38Q83.89 23.23 83.89 21.73Q83.89 20.18 83.41 19.03Q82.93 17.88 82.04 17.24Q81.14 16.59 79.86 16.59Q78.6 16.59 77.7 17.23Q76.81 17.87 76.33 19.03Q75.86 20.18 75.86 21.73Q75.86 23.24 76.33 24.39Q76.81 25.53 77.71 26.17Q78.61 26.81 79.86 26.81ZM94.83 29.33Q93.18 29.33 91.86 28.82Q90.54 28.3 89.73 27.27Q88.92 26.24 88.76 24.72L91.62 24.6Q91.77 25.76 92.59 26.38Q93.41 27 94.79 27Q96.19 27 96.99 26.44Q97.79 25.87 97.79 25.01Q97.79 24.27 97.24 23.81Q96.69 23.35 95.71 23.15L93.29 22.62Q91.23 22.15 90.17 21.1Q89.11 20.06 89.11 18.46Q89.11 17.16 89.82 16.17Q90.54 15.18 91.8 14.62Q93.06 14.07 94.74 14.07Q96.37 14.07 97.61 14.62Q98.85 15.18 99.59 16.2Q100.33 17.21 100.43 18.61L97.68 18.73Q97.6 17.73 96.84 17.06Q96.08 16.39 94.77 16.39Q93.55 16.39 92.8 16.97Q92.05 17.54 92.05 18.36Q92.05 19.12 92.59 19.57Q93.14 20.03 94.18 20.26L96.65 20.81Q98.76 21.28 99.76 22.26Q100.75 23.24 100.75 24.83Q100.75 26.2 99.99 27.22Q99.22 28.23 97.89 28.78Q96.56 29.33 94.83 29.33ZM103.16 34.66L103.34 32.24L104.64 32.25Q105.17 32.29 105.56 32.14Q105.95 31.98 106.26 31.59Q106.57 31.2 106.8 30.53L107.37 28.93L101.74 14.37L104.87 14.37L107.78 22.45Q108.21 23.65 108.57 24.84Q108.94 26.03 109.31 27.22L108.48 27.22Q108.83 26.03 109.21 24.84Q109.59 23.64 110.01 22.45L112.91 14.37L116 14.37L109.42 31.43Q108.98 32.54 108.37 33.27Q107.75 33.99 106.93 34.37Q106.1 34.74 105.07 34.74Q104.57 34.74 104.08 34.72Q103.58 34.7 103.16 34.66ZM120.91 20.52L120.91 29L117.99 29L117.99 14.37L120.85 14.37L120.85 18.01L120.25 18.01Q120.96 16.04 122.23 15.08Q123.49 14.11 125.3 14.11Q126.79 14.11 127.96 14.76Q129.14 15.41 129.82 16.68Q130.5 17.95 130.5 19.85L130.5 29L127.59 29L127.59 20.21Q127.59 18.49 126.76 17.6Q125.92 16.71 124.41 16.71Q123.44 16.71 122.64 17.12Q121.84 17.53 121.37 18.37Q120.91 19.21 120.91 20.52ZM140.1 29.33Q137.93 29.33 136.36 28.36Q134.8 27.4 133.96 25.68Q133.11 23.97 133.11 21.74Q133.11 19.5 133.98 17.77Q134.85 16.04 136.38 15.05Q137.91 14.07 139.92 14.07Q141.4 14.07 142.63 14.6Q143.86 15.12 144.77 16.11Q145.68 17.09 146.17 18.49Q146.66 19.88 146.66 21.66L146.66 22.51L134.51 22.51L134.51 20.3L145.16 20.3L143.85 20.99Q143.85 19.62 143.38 18.61Q142.9 17.6 142.03 17.05Q141.15 16.5 139.94 16.5Q138.72 16.5 137.84 17.06Q136.96 17.61 136.48 18.6Q136 19.59 136 20.91L136 22.23Q136 23.64 136.5 24.69Q137 25.75 137.91 26.32Q138.83 26.89 140.13 26.89Q141.06 26.89 141.78 26.62Q142.49 26.35 142.97 25.83Q143.45 25.31 143.67 24.63L146.46 24.78Q146.17 26.12 145.28 27.14Q144.38 28.17 143.05 28.75Q141.73 29.33 140.1 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Euphrosyne is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Volume-equivalent radius",
+              "value": "134 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Distance from Sun",
+              "value": "3.162 AU (mean)"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "5.62 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.529595 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "VLT/SPHERE shape model",
+              "title": "The shared grid marks unavailable surface imagery over the published MPCD shape, reconstructed from VLT/SPHERE images with an ADAM shape as its starting point. This is ground-based reconstructed geometry with uneven observational constraints, not a photographic surface texture or an albedo map. Lighting uses the observed pole and an arbitrary display phase.",
+              "thumbnail": "/scenes/euphrosyne/euphrosyne-shape-thumbnail.webp",
+              "surface": "euphrosyne-shape-surface@2x.webp",
+              "poles": "euphrosyne-shape-surface@2x.webp",
+              "source": {
+                "id": "euphrosyne-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape",
+              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Source shape · radial height",
+              "title": "Color shows source radius minus a 134 km reference sphere. It includes the overall irregular shape and is not height above a gravitational equipotential. The original ground-based shape constrains these heights; display pixels do not increase the observational resolution. Cartographic relief and optional Sun lighting are display treatments.",
+              "thumbnail": "/scenes/euphrosyne/euphrosyne-elevation-thumbnail.webp",
+              "surface": "euphrosyne-elevation-surface@2x.webp",
+              "poles": "euphrosyne-elevation-surface@2x.webp",
+              "source": {
+                "id": "euphrosyne-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "0",
+                  "20"
+                ],
+                "meta": "km · 134 km reference sphere",
+                "sourceUrl": "https://observations.lam.fr/astero/3Dshape/31_Euphrosyne_mpcd.obj",
+                "image": "/scenes/euphrosyne/euphrosyne-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height",
+              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": true
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "VLT/SPHERE survey and physical properties",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Released MPCD shape model",
+            "href": "https://observations.lam.fr/astero/3Dshape/31_Euphrosyne_mpcd.obj"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Observed pole and period; arbitrary display phase",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1051/0004-6361/202141781",
+            "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "euphrosyne-shape",
+      "path": "shape/31_Euphrosyne_mpcd.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/31_Euphrosyne_mpcd.obj",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+      "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 134000
+      },
+      "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sha256": "7c99a8af18219166e1b4046dbbb879d83f289d8288e98b41d226c566f3a6a0d3",
+      "bytes": 384379,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/31_Euphrosyne_mpcd.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/31_Euphrosyne_mpcd.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "d9cb7c2d2fef68152f36d2d1aabaa09a24510f512499b0fc213b075f58d758e2",
+      "bytes": 9891,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Source shape · radial height"
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "euphrosyne-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/euphrosyne/euphrosyne-elevation-thumbnail.webp",
+          "bytes": 5366,
+          "sha256": "03889a0a928e0dc5064ac5b101dc22e0fd10f877f3376c3ef3d7efc974b79ce8",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/euphrosyne/euphrosyne-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/euphrosyne/euphrosyne-elevation-surface@2x.webp",
+          "bytes": 290612,
+          "sha256": "998f072bbbe74e71652b68969a4af0d9ad68e7780cdeffc1c01f9c2eda52be1f",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "VLT/SPHERE shape model"
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "euphrosyne-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/euphrosyne/euphrosyne-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
+          "bytes": 226420,
+          "sha256": "e7f7e7fbd35220e6b2006d57879203960aeae4094a4b8cd8610f6abb11f1955f",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6851,
+          "sha256": "62427d3751809ebc81dff758b6f6e2b3d8cc6e0e80ae0f5e59215b441dcf6271",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10818,
+          "sha256": "3a11fbafa715c4925a0b43f11bed9bd2d8bf969c379a201f5c086d82e4e657c8",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

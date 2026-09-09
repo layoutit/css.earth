@@ -2,7 +2,9 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
+import { orientLatitudeBands } from './objects/static-surface/projection.mjs';
 import { observationRaster } from './objects/static-surface/raster.mjs';
+import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.mjs';
 import { OBJECTS } from '../site/objects.mjs';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
@@ -25,10 +27,18 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   if (raster?.kind === 'observation-lenses') {
     for (const plan of raster.lenses) {
       const density = Math.max(...raster.densities);
-      const { data, info } = await observationRaster({
-        input: resolve(objectDirectory, 'source', plan.input), plan,
-        width: raster.width * density, height: raster.height * density,
-      });
+      let data, info;
+      if (raster.surfaceProjection === 'oriented-bands') {
+        ({ data, info } = await sharp(resolve(publicDirectory, `${plan.output}${density === 2 ? '@2x' : ''}.webp`))
+          .raw().toBuffer({ resolveWithObject: true }));
+        if (info.width !== raster.width * density || info.height !== raster.height * density) throw new Error('Observation preview dimensions drifted.');
+        data = orientLatitudeBands(data, { ...info, bandCount: raster.latitudeSegments });
+      } else {
+        ({ data, info } = await observationRaster({
+          input: resolve(objectDirectory, 'source', plan.input), plan,
+          width: raster.width * density, height: raster.height * density,
+        }));
+      }
       const path = `minimaps/${plan.id}.webp`;
       await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
       const result = await sharp(data, { raw: info }).resize({ width: 640, withoutEnlargement: true })
@@ -61,6 +71,23 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     images.push({ id: surface.id, path, width: result.width, height: result.height,
       ...(surface.attribution ? { attribution: surface.attribution } : {}) });
   }
+  for await (const preview of recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory })) {
+    if (images.some(image => image.id === preview.id)) continue;
+    const path = `minimaps/${preview.id}.webp`;
+    await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
+    const result = await sharp(preview.raster.data, { raw: preview.raster.info })
+      .resize({ width: 640, withoutEnlargement: true })
+      .webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true })
+      .toFile(resolve(outputDirectory, path));
+    images.push({ id: preview.id, path, width: result.width, height: result.height });
+  }
+  const [controls, lenses, bindings] = await Promise.all([
+    optionalJson(resolve(outputDirectory, 'controls.json')),
+    optionalJson(resolve(outputDirectory, 'lenses.json')),
+    optionalJson(resolve(objectDirectory, 'source/content/lens-bindings.json')),
+  ]);
+  assertSurfacePreviewCoverage(controls?.lenses?.controls ?? [], images,
+    [...(lenses?.controls ?? []), ...(bindings?.controls ?? [])]);
   await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
   return images;
 }
